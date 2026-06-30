@@ -100,8 +100,12 @@ function filenameTitle(relativePath: string): string {
 }
 
 function firstParagraph(body: string): string | undefined {
-  const withoutHeading = body.replace(/^#\s+.+$/m, '').trim()
-  const paragraph = withoutHeading
+  const withoutHeadings = body
+    .split(/\r?\n/)
+    .filter((line) => !line.trimStart().startsWith('#'))
+    .join('\n')
+    .trim()
+  const paragraph = withoutHeadings
     .split(/\n\s*\n/)
     .map((part) => part.trim())
     .find(Boolean)

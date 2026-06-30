@@ -107,4 +107,18 @@ Body text.`)
 
     expect(completed.date).toBe('2026-06-30')
   })
+
+  it('uses the first prose paragraph as summary instead of a heading', () => {
+    const completed = completeArticleData(
+      {},
+      {},
+      {
+        body: '# 概念：Boost\n\n## 1. 它是什么\n\n升压变换器是一种开关电源电路。\n\n## 2. 为什么需要',
+        relativePath: 'content/power/boost.md',
+        modifiedDate: '2026-06-30'
+      }
+    )
+
+    expect(completed.summary).toBe('升压变换器是一种开关电源电路。')
+  })
 })

@@ -42,4 +42,18 @@ describe('article scanning', () => {
     expect(record.data.navTitle).toBeUndefined()
     expect(record.data.order).toBeUndefined()
   })
+
+  it('normalizes existing YAML date objects when writing completed frontmatter', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-date-fix-'))
+    const content = path.join(root, 'content')
+    const article = path.join(content, 'blog', 'note.md')
+    await fs.mkdir(path.dirname(article), { recursive: true })
+    await fs.writeFile(article, '---\ntitle: Note\ndate: 2026-06-30\n---\n\n# Note\n\nBody.')
+
+    await writeCompletedFrontmatter({ contentRoot: content })
+    const raw = await fs.readFile(article, 'utf8')
+
+    expect(raw).toContain('date: 2026-06-30')
+    expect(raw).not.toContain('T00:00:00.000Z')
+  })
 })

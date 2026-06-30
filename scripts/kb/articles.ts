@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import { loadInheritedCategoryDefaults } from './category'
-import { completeArticleData, parseMarkdown, serializeMarkdown } from './frontmatter'
+import { completeArticleData, normalizeDate, parseMarkdown, serializeMarkdown } from './frontmatter'
 import { contentRoot as defaultContentRoot, stripMarkdownExtension, toPosixPath } from './paths'
 import type { ArticleFrontmatter, ArticleRecord } from './types'
 
@@ -103,14 +103,24 @@ export async function writeCompletedFrontmatter(options: ScanOptions = {}): Prom
   const changed: string[] = []
 
   for (const record of records) {
-    const missing = pickMissing(record.data, record.completed)
-    if (Object.keys(missing).length === 0) continue
-    const next = serializeMarkdown({ ...record.data, ...missing }, record.body)
+    const normalizedExisting = normalizeWritableFields(record.data)
+    const missing = pickMissing(normalizedExisting, record.completed)
+    const nextData = { ...normalizedExisting, ...missing }
+    if (JSON.stringify(nextData) === JSON.stringify(record.data)) continue
+    const next = serializeMarkdown(nextData, record.body)
     await fs.writeFile(record.absolutePath, next, 'utf8')
     changed.push(record.relativePath)
   }
 
   return changed
+}
+
+function normalizeWritableFields(data: ArticleFrontmatter): ArticleFrontmatter {
+  return {
+    ...data,
+    date: normalizeDate(data.date) || data.date,
+    updated: normalizeDate(data.updated) || data.updated
+  }
 }
 
 function pickMissing(existing: ArticleFrontmatter, completed: ArticleFrontmatter): ArticleFrontmatter {
