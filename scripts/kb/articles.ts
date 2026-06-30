@@ -77,7 +77,7 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       continue
     }
 
-    const url = '/content/' + stripMarkdownExtension(toPosixPath(path.relative(root, record.absolutePath)))
+    const url = '/content/' + stripMarkdownExtension(toPosixPath(path.relative(root, record.absolutePath))) + '/'
     articles.push({
       title: String(record.completed.title),
       date: String(record.completed.date),
