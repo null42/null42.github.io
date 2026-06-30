@@ -5,7 +5,7 @@ export const generatedSidebar = [
     "items": [
       {
         "text": "电机控制入口",
-        "link": "/motor/getting-started"
+        "link": "/content/motor/getting-started"
       }
     ]
   },
@@ -15,7 +15,7 @@ export const generatedSidebar = [
     "items": [
       {
         "text": "电源控制入口",
-        "link": "/power/getting-started"
+        "link": "/content/power/getting-started"
       }
     ]
   },
@@ -25,7 +25,7 @@ export const generatedSidebar = [
     "items": [
       {
         "text": "第一篇记录",
-        "link": "/blog/hello"
+        "link": "/content/blog/hello"
       }
     ]
   }
