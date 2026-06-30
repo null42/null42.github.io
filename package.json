@@ -1,0 +1,30 @@
+{
+  "name": "null42.github.io",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run kb:generate && vitepress dev .",
+    "build": "npm run kb:check && npm run kb:generate && vitepress build .",
+    "preview": "vitepress preview .",
+    "test": "vitest run",
+    "kb:check": "tsx scripts/kb/check.ts",
+    "kb:fix": "tsx scripts/kb/fix.ts",
+    "kb:generate": "tsx scripts/kb/generate.ts",
+    "kb:migrate": "tsx scripts/kb/migrate.ts",
+    "kb:publish": "tsx scripts/kb/publish.ts"
+  },
+  "dependencies": {
+    "@giscus/vue": "^3.1.1",
+    "vitepress": "^1.6.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.20.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.0",
+    "yaml": "^2.5.0"
+  }
+}

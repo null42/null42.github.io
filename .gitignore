@@ -1,0 +1,8 @@
+node_modules/
+.vitepress/cache/
+.vitepress/dist/
+.vitepress/generated/*.json
+.vitepress/generated/sidebar.ts
+*.log
+.env
+.env.local
