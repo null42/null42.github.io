@@ -62,7 +62,7 @@ export function completeArticleData(
     ...directoryDefaults,
     ...fileData,
     title,
-    date: fileData.date || context.modifiedDate,
+    date: normalizeDate(fileData.date) || context.modifiedDate,
     category,
     tags: tags.length > 0 ? tags : defaultTags,
     source,
@@ -70,6 +70,19 @@ export function completeArticleData(
     visibility: fileData.visibility || directoryDefaults.visibility || 'public',
     summary
   }
+}
+
+export function normalizeDate(value: unknown): string | undefined {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10)
+  }
+  if (typeof value === 'string') {
+    const trimmed = value.trim()
+    if (!trimmed) return undefined
+    const match = trimmed.match(/^(\d{4}-\d{2}-\d{2})/)
+    return match?.[1] || trimmed
+  }
+  return undefined
 }
 
 export function serializeMarkdown(data: ArticleFrontmatter, body: string): string {

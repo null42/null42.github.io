@@ -1,0 +1,32 @@
+export const generatedSidebar = [
+  {
+    "text": "电机控制",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "电机控制入口",
+        "link": "/motor/getting-started"
+      }
+    ]
+  },
+  {
+    "text": "电源控制",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "电源控制入口",
+        "link": "/power/getting-started"
+      }
+    ]
+  },
+  {
+    "text": "随笔",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "第一篇记录",
+        "link": "/blog/hello"
+      }
+    ]
+  }
+]

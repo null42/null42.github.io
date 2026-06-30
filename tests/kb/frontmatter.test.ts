@@ -90,4 +90,21 @@ Body text.`)
     expect(output).toContain('category: 电源控制')
     expect(output.endsWith('# Buck\n')).toBe(true)
   })
+
+  it('normalizes Date values to YYYY-MM-DD strings', () => {
+    const completed = completeArticleData(
+      {
+        title: 'Date Note',
+        date: new Date('2026-06-30T00:00:00.000Z') as unknown as string
+      },
+      {},
+      {
+        body: '# Date Note',
+        relativePath: 'content/blog/date.md',
+        modifiedDate: '2026-07-01'
+      }
+    )
+
+    expect(completed.date).toBe('2026-06-30')
+  })
 })

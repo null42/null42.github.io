@@ -114,9 +114,10 @@ export async function writeCompletedFrontmatter(options: ScanOptions = {}): Prom
 }
 
 function pickMissing(existing: ArticleFrontmatter, completed: ArticleFrontmatter): ArticleFrontmatter {
+  const writableFields = new Set(['title', 'date', 'updated', 'category', 'tags', 'source', 'status', 'visibility', 'summary', 'comments'])
   const missing: ArticleFrontmatter = {}
   for (const [key, value] of Object.entries(completed)) {
-    if (existing[key] === undefined) missing[key] = value
+    if (writableFields.has(key) && existing[key] === undefined) missing[key] = value
   }
   return missing
 }
