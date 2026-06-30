@@ -19,7 +19,7 @@ describe('article scanning', () => {
     expect(result.articles).toHaveLength(1)
     expect(result.articles[0].title).toBe('Public Note')
     expect(result.articles[0].category).toBe('电源控制')
-    expect(result.articles[0].url).toBe('/content/power/public/')
+    expect(result.articles[0].url).toBe('/content/power/public.html')
     expect(result.warnings.some((warning) => warning.includes('private.md'))).toBe(true)
   })
 

@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: 浏览文章库
-      link: /archive
+      link: /archive.html
     - theme: alt
       text: 关于 lx
-      link: /about
+      link: /about.html
 features:
   - title: 电源控制
     details: UPS、PFC、LLC、三电平、采样与保护等电源控制主题。
