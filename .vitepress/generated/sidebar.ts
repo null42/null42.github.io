@@ -4,6 +4,26 @@ export const generatedSidebar = [
     "collapsed": true,
     "items": [
       {
+        "text": "启动定位与预定位仿真 -- 电感饱和法 / 预定位 / 高频注入法对比",
+        "link": "/content/motor/simulations/InitialPositionSim.html"
+      },
+      {
+        "text": "死区补偿仿真 -- 电压误差分析与补偿策略对比",
+        "link": "/content/motor/simulations/DeadtimeCompSim.html"
+      },
+      {
+        "text": "Bode 图交互仿真",
+        "link": "/content/motor/simulations/BodePlotSim.html"
+      },
+      {
+        "text": "Clarke & Park 坐标变换仿真 — abc → αβ → dq",
+        "link": "/content/motor/simulations/ClarkeParkSim.html"
+      },
+      {
+        "text": "PI 电流调节器仿真 -- dq 电流环阶跃响应与带宽参数化",
+        "link": "/content/motor/simulations/CurrentLoopSim.html"
+      },
+      {
         "text": "电机控制入口",
         "link": "/content/motor/getting-started.html"
       }
@@ -13,6 +33,26 @@ export const generatedSidebar = [
     "text": "电源控制",
     "collapsed": true,
     "items": [
+      {
+        "text": "教程 0001：Boost 升压变换器（Boost Converter）",
+        "link": "/content/power/lessons/0001-boost-converter.html"
+      },
+      {
+        "text": "教程 0002：连续导通模式（continuous conduction mode / CCM）与断续导通模式（discontinuous conduction mode / DCM）",
+        "link": "/content/power/lessons/0002-ccm-dcm.html"
+      },
+      {
+        "text": "教程 0003：脉宽调制（pulse-width modulation / PWM）与模数转换器采样（analog-to-digital converter / ADC sampling）",
+        "link": "/content/power/lessons/0003-pwm-sampling.html"
+      },
+      {
+        "text": "教程 0004：离散比例积分控制器（discrete proportional-integral controller / discrete PI）最小闭环",
+        "link": "/content/power/lessons/0004-discrete-pi-boost.html"
+      },
+      {
+        "text": "教程 0005：Boost 控制中断服务程序（control interrupt service routine / control ISR）软件骨架",
+        "link": "/content/power/lessons/0005-boost-firmware-skeleton.html"
+      },
       {
         "text": "电源控制入口",
         "link": "/content/power/getting-started.html"
