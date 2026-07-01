@@ -82,9 +82,18 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       title: String(record.completed.title),
       date: String(record.completed.date),
       updated: record.completed.updated ? String(record.completed.updated) : undefined,
+      section: optionalString(record.completed.section),
+      chapter: optionalString(record.completed.chapter),
+      chapterTitle: optionalString(record.completed.chapterTitle),
+      chapterOrder: optionalNumber(record.completed.chapterOrder),
+      order: optionalNumber(record.completed.order),
       category: String(record.completed.category || '未分类'),
       tags: Array.isArray(record.completed.tags) ? record.completed.tags.map(String) : [],
       source: String(record.completed.source || 'manual'),
+      sourcePath: optionalString(record.completed.sourcePath),
+      type: optionalString(record.completed.type),
+      difficulty: optionalString(record.completed.difficulty),
+      suggestedTags: Array.isArray(record.completed.suggestedTags) ? record.completed.suggestedTags.map(String) : undefined,
       status: String(record.completed.status || 'learning'),
       visibility: String(record.completed.visibility || 'public'),
       summary: String(record.completed.summary || record.completed.title),
@@ -100,6 +109,19 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
 
   articles.sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title))
   return { articles, warnings }
+}
+
+function optionalString(value: unknown): string | undefined {
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined
+}
+
+function optionalNumber(value: unknown): number | undefined {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value)
+    if (Number.isFinite(parsed)) return parsed
+  }
+  return undefined
 }
 
 export async function writeCompletedFrontmatter(options: ScanOptions = {}): Promise<string[]> {
@@ -128,7 +150,26 @@ function normalizeWritableFields(data: ArticleFrontmatter): ArticleFrontmatter {
 }
 
 function pickMissing(existing: ArticleFrontmatter, completed: ArticleFrontmatter): ArticleFrontmatter {
-  const writableFields = new Set(['title', 'date', 'updated', 'category', 'tags', 'source', 'status', 'visibility', 'summary', 'comments'])
+  const writableFields = new Set([
+    'title',
+    'date',
+    'updated',
+    'section',
+    'chapter',
+    'chapterTitle',
+    'chapterOrder',
+    'category',
+    'tags',
+    'source',
+    'sourcePath',
+    'type',
+    'difficulty',
+    'suggestedTags',
+    'status',
+    'visibility',
+    'summary',
+    'comments'
+  ])
   const missing: ArticleFrontmatter = {}
   for (const [key, value] of Object.entries(completed)) {
     if (writableFields.has(key) && existing[key] === undefined) missing[key] = value

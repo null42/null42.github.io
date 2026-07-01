@@ -133,8 +133,9 @@ function withFrontmatter(title: string, body: string, sourceName: string, source
   const source = sourceName === 'motor' ? 'motor' : 'power'
   const section = source === 'motor' ? '电机控制' : '电源控制'
   const chapter = source === 'motor' ? '02-Simulations' : '01-Lessons'
+  const chapterTitle = source === 'motor' ? '仿真专题' : '电源课程'
   const normalizedSourcePath = sourcePath.replace(/\\/g, '/')
-  return `---\ntitle: ${title}\ndate: ${new Date().toISOString().slice(0, 10)}\nsection: ${section}\nchapter: ${chapter}\ncategory: ${section}\ntags:\n  - imported\nsource: ${source}\nsourcePath: ${normalizedSourcePath}\nstatus: learning\nvisibility: public\nsummary: Imported from ${normalizedSourcePath}\n---\n\n${body.trim()}\n`
+  return `---\ntitle: ${title}\ndate: ${new Date().toISOString().slice(0, 10)}\nsection: ${section}\nchapter: ${chapter}\nchapterTitle: ${chapterTitle}\ncategory: ${section}\ntags:\n  - imported\nsource: ${source}\nsourcePath: ${normalizedSourcePath}\nstatus: learning\nvisibility: public\nsummary: Imported from ${normalizedSourcePath}\n---\n\n${body.trim()}\n`
 }
 
 function conversionLabel(file: string): string {

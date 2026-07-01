@@ -56,4 +56,21 @@ describe('article scanning', () => {
     expect(raw).toContain('date: 2026-06-30')
     expect(raw).not.toContain('T00:00:00.000Z')
   })
+
+  it('inherits section and chapter metadata from category files', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-section-chapter-'))
+    const content = path.join(root, 'content')
+    const chapter = path.join(content, 'power', '02-pfc')
+    await fs.mkdir(chapter, { recursive: true })
+    await fs.writeFile(path.join(content, 'power', '.category.yml'), 'section: Power\ncategory: Power\nsource: power\n')
+    await fs.writeFile(path.join(chapter, '.category.yml'), 'chapter: 02-PFC\nchapterTitle: Power Factor Correction\nchapterOrder: 20\n')
+    await fs.writeFile(path.join(chapter, 'current-loop.md'), '# Current Loop\n\nBody.')
+
+    const result = await scanArticles({ contentRoot: content })
+
+    expect(result.articles[0].section).toBe('Power')
+    expect(result.articles[0].chapter).toBe('02-PFC')
+    expect(result.articles[0].chapterTitle).toBe('Power Factor Correction')
+    expect(result.articles[0].chapterOrder).toBe(20)
+  })
 })

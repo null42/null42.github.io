@@ -57,12 +57,22 @@ export function completeArticleData(
   const category = fileData.category || directoryDefaults.category || '未分类'
   const source = fileData.source || directoryDefaults.source || sourceFromPath(context.relativePath)
   const summary = fileData.summary || firstParagraph(context.body) || title
+  const section = fileData.section || stringDefault(directoryDefaults.section)
+  const chapter = fileData.chapter || stringDefault(directoryDefaults.chapter)
+  const chapterTitle = fileData.chapterTitle || stringDefault(directoryDefaults.chapterTitle)
+  const chapterOrder = numberDefault(fileData.chapterOrder ?? directoryDefaults.chapterOrder)
+  const order = numberDefault(fileData.order)
 
   return {
     ...directoryDefaults,
     ...fileData,
     title,
     date: normalizeDate(fileData.date) || context.modifiedDate,
+    ...(section ? { section } : {}),
+    ...(chapter ? { chapter } : {}),
+    ...(chapterTitle ? { chapterTitle } : {}),
+    ...(chapterOrder !== undefined ? { chapterOrder } : {}),
+    ...(order !== undefined ? { order } : {}),
     category,
     tags: tags.length > 0 ? tags : defaultTags,
     source,
@@ -70,6 +80,19 @@ export function completeArticleData(
     visibility: fileData.visibility || directoryDefaults.visibility || 'public',
     summary
   }
+}
+
+function stringDefault(value: unknown): string | undefined {
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined
+}
+
+function numberDefault(value: unknown): number | undefined {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value)
+    if (Number.isFinite(parsed)) return parsed
+  }
+  return undefined
 }
 
 export function normalizeDate(value: unknown): string | undefined {
