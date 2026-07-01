@@ -92,6 +92,10 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       url,
       body: record.body
     })
+
+    if (/<script\b/i.test(record.body)) {
+      warnings.push(`${record.relativePath}: raw <script> tags are not allowed`)
+    }
   }
 
   articles.sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title))

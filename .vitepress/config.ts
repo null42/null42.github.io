@@ -7,6 +7,20 @@ export default defineConfig({
   description: '电源控制、电机控制、仿真和工程学习记录',
   cleanUrls: false,
   lastUpdated: true,
+  markdown: {
+    config(md) {
+      const defaultFence = md.renderer.rules.fence
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const info = token.info.trim()
+        if (info === 'mermaid') {
+          const encoded = encodeURIComponent(token.content)
+          return `<MermaidDiagram code="${encoded}" />`
+        }
+        return defaultFence ? defaultFence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
+      }
+    }
+  },
   themeConfig: {
     logo: '/favicon.svg',
     nav: [

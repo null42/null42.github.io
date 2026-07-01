@@ -1,4 +1,4 @@
-# Personal Knowledge Base Upgrade Implementation Plan
+﻿# Personal Knowledge Base Upgrade Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -69,6 +69,9 @@ Deliverables:
 - HTML inventory report.
 - HTML-to-Markdown conversion for common pages.
 - Asset copy/rewrite for images/SVG.
+- Power knowledge base sync from `E:\gitee_CodeStorage\瀛︿範\鐢垫簮` into `content/power`.
+- Motor knowledge base sync from `E:\gitee_CodeStorage\瀛︿範\MotorControl-main\motor-learning-web` into `content/motor`.
+- A published first batch for both power and motor content, not just importer scripts.
 - Fallback strategy for pages that cannot be safely converted.
 - Dry-run and apply modes with conversion quality reports.
 
@@ -227,8 +230,8 @@ describe('source encoding', () => {
   it('does not contain common mojibake markers in user-visible source text', () => {
     for (const file of utf8Files) {
       const text = fs.readFileSync(file, 'utf8')
-      expect(text, file).not.toMatch(/[鐢垫簮|鍏ㄩ儴|鏂囩珷|鎼滅储|绡囨枃]/)
-      expect(text, file).toContain('知识库')
+      expect(text, file).not.toMatch(/[閻㈠灚绨畖閸忋劑鍎磡閺傚洨鐝穦閹兼粎鍌▅缁″洦鏋僝/)
+      expect(text, file).toContain('鐭ヨ瘑搴?)
     }
   })
 })
@@ -249,25 +252,25 @@ Expected before fixing: FAIL if files really contain mojibake; PASS if the issue
 In `.vitepress/config.ts`, user-visible strings should be:
 
 ```ts
-title: 'lx的个人知识库',
-description: '电源控制、电机控制、仿真和工程学习记录',
+title: 'lx鐨勪釜浜虹煡璇嗗簱',
+description: '鐢垫簮鎺у埗銆佺數鏈烘帶鍒躲€佷豢鐪熷拰宸ョ▼瀛︿範璁板綍',
 nav: [
-  { text: '首页', link: '/' },
-  { text: '电源控制', link: '/content/power/getting-started.html' },
-  { text: '电机控制', link: '/content/motor/getting-started.html' },
-  { text: '文章库', link: '/archive.html' },
-  { text: '关于我', link: '/about.html' }
+  { text: '棣栭〉', link: '/' },
+  { text: '鐢垫簮鎺у埗', link: '/content/power/getting-started.html' },
+  { text: '鐢垫満鎺у埗', link: '/content/motor/getting-started.html' },
+  { text: '鏂囩珷搴?, link: '/archive.html' },
+  { text: '鍏充簬鎴?, link: '/about.html' }
 ],
 outline: {
   level: [2, 3],
-  label: '目录'
+  label: '鐩綍'
 }
 ```
 
 In `ArchivePage.vue`, use:
 
 ```ts
-const ALL = '全部'
+const ALL = '鍏ㄩ儴'
 const query = ref('')
 const category = ref(ALL)
 const month = ref(ALL)
@@ -276,10 +279,10 @@ const month = ref(ALL)
 And template labels:
 
 ```vue
-<input v-model="query" class="kb-search-input" aria-label="关键词搜索" title="搜索 Buck / FOC / SVPWM / 采样时序" />
-<select v-model="category" class="kb-select" aria-label="分类">
-<select v-model="month" class="kb-select" aria-label="时间">
-<div class="kb-result-count">{{ filtered.length }} 篇文章</div>
+<input v-model="query" class="kb-search-input" aria-label="鍏抽敭璇嶆悳绱? title="鎼滅储 Buck / FOC / SVPWM / 閲囨牱鏃跺簭" />
+<select v-model="category" class="kb-select" aria-label="鍒嗙被">
+<select v-model="month" class="kb-select" aria-label="鏃堕棿">
+<div class="kb-result-count">{{ filtered.length }} 绡囨枃绔?/div>
 ```
 
 - [ ] **Step 4: Re-run tests**
@@ -313,7 +316,7 @@ Create `content/playground/.category.yml`:
 
 ```yaml
 section: Playground
-category: 渲染验证
+category: 娓叉煋楠岃瘉
 source: manual
 visibility: public
 ```
@@ -322,11 +325,11 @@ Create `content/playground/rendering-fixture.md`:
 
 ````md
 ---
-title: Markdown 渲染验证
+title: Markdown 娓叉煋楠岃瘉
 date: 2026-07-01
 section: Playground
 chapter: 00-Fixtures
-category: 渲染验证
+category: 娓叉煋楠岃瘉
 tags:
   - markdown
   - mermaid
@@ -335,28 +338,26 @@ source: manual
 status: reference
 visibility: public
 comments: false
-summary: 用于验证 Markdown、Mermaid、SVG、表格、代码块和 callout 的测试页面。
----
+summary: 鐢ㄤ簬楠岃瘉 Markdown銆丮ermaid銆丼VG銆佽〃鏍笺€佷唬鐮佸潡鍜?callout 鐨勬祴璇曢〉闈€?---
 
-# Markdown 渲染验证
+# Markdown 娓叉煋楠岃瘉
 
-## 表格
+## 琛ㄦ牸
 
-| 项目 | 说明 |
+| 椤圭洰 | 璇存槑 |
 | --- | --- |
-| PFC | 功率因数校正 |
-| FOC | 磁场定向控制 |
+| PFC | 鍔熺巼鍥犳暟鏍℃ |
+| FOC | 纾佸満瀹氬悜鎺у埗 |
 
-## 任务列表
+## 浠诲姟鍒楄〃
 
-- [x] 支持 Markdown 基础语法
-- [ ] 支持 Mermaid
+- [x] 鏀寔 Markdown 鍩虹璇硶
+- [ ] 鏀寔 Mermaid
 
 ## Callout
 
 ::: tip
-这是 VitePress 容器语法。
-:::
+杩欐槸 VitePress 瀹瑰櫒璇硶銆?:::
 
 ## Mermaid
 
@@ -368,9 +369,9 @@ flowchart LR
 
 ## SVG
 
-![控制延迟示意](../../control-delay-timing.svg)
+![鎺у埗寤惰繜绀烘剰](../../control-delay-timing.svg)
 
-## 代码
+## 浠ｇ爜
 
 ```ts
 const duty = vin / vout
@@ -389,8 +390,8 @@ describe('rendering fixture', () => {
   it('contains markdown, mermaid, svg, table, and code examples', () => {
     const text = fs.readFileSync('content/playground/rendering-fixture.md', 'utf8')
     expect(text).toContain('```mermaid')
-    expect(text).toContain('| 项目 | 说明 |')
-    expect(text).toContain('![控制延迟示意]')
+    expect(text).toContain('| 椤圭洰 | 璇存槑 |')
+    expect(text).toContain('![鎺у埗寤惰繜绀烘剰]')
     expect(text).toContain('::: tip')
     expect(text).toContain('```ts')
   })
@@ -756,7 +757,7 @@ import { isImageAsset, toMarkdownImage } from '../../scripts/kb/import/assets'
 it('recognizes SVG and image assets', () => {
   expect(isImageAsset('control-delay-timing.svg')).toBe(true)
   expect(isImageAsset('notes.md')).toBe(false)
-  expect(toMarkdownImage('图', 'assets\\a.svg')).toBe('![图](assets/a.svg)')
+  expect(toMarkdownImage('鍥?, 'assets\\a.svg')).toBe('![鍥綸(assets/a.svg)')
 })
 ```
 
@@ -789,8 +790,8 @@ import path from 'node:path'
 import fg from 'fast-glob'
 
 const roots = [
-  { name: 'power', root: 'E:\\gitee_CodeStorage\\学习\\电源' },
-  { name: 'motor', root: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-learning-web' }
+  { name: 'power', root: 'E:\\gitee_CodeStorage\\瀛︿範\\鐢垫簮' },
+  { name: 'motor', root: 'E:\\gitee_CodeStorage\\瀛︿範\\MotorControl-main\\motor-learning-web' }
 ]
 
 const patterns = ['**/*.md', '**/*.html', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.webp']
@@ -856,12 +857,12 @@ Create `tests/fixtures/html/simple-lesson.html`:
 ```html
 <!doctype html>
 <html>
-  <head><title>概念：Boost Converter</title></head>
+  <head><title>姒傚康锛欱oost Converter</title></head>
   <body>
-    <h1>概念：Boost Converter</h1>
-    <p>Boost converter 用电感储能实现升压。</p>
-    <h2>控制框图</h2>
-    <img src="../assets/boost.svg" alt="Boost 控制框图">
+    <h1>姒傚康锛欱oost Converter</h1>
+    <p>Boost converter 鐢ㄧ數鎰熷偍鑳藉疄鐜板崌鍘嬨€?/p>
+    <h2>鎺у埗妗嗗浘</h2>
+    <img src="../assets/boost.svg" alt="Boost 鎺у埗妗嗗浘">
     <pre><code>Vout = Vin / (1 - D)</code></pre>
   </body>
 </html>
@@ -938,10 +939,10 @@ describe('HTML import', () => {
     const html = fs.readFileSync('tests/fixtures/html/simple-lesson.html', 'utf8')
     const result = convertHtml(html, 'tests/fixtures/html')
 
-    expect(result.title).toBe('概念：Boost Converter')
-    expect(result.markdown).toContain('# 概念：Boost Converter')
-    expect(result.markdown).toContain('Boost converter 用电感储能实现升压。')
-    expect(result.markdown).toContain('![Boost 控制框图]')
+    expect(result.title).toBe('姒傚康锛欱oost Converter')
+    expect(result.markdown).toContain('# 姒傚康锛欱oost Converter')
+    expect(result.markdown).toContain('Boost converter 鐢ㄧ數鎰熷偍鑳藉疄鐜板崌鍘嬨€?)
+    expect(result.markdown).toContain('![Boost 鎺у埗妗嗗浘]')
     expect(result.markdown).toContain('```text')
     expect(result.assets.some((asset) => asset.endsWith('assets\\boost.svg') || asset.endsWith('assets/boost.svg'))).toBe(true)
   })
@@ -972,15 +973,16 @@ Create `docs/kb/import-sources.md`:
 
 ## Power
 
-- Source root: `E:\gitee_CodeStorage\学习\电源`
+- Source root: `E:\gitee_CodeStorage\瀛︿範\鐢垫簮`
 - Markdown concepts: `concepts/power-electronics/**/*.md`
 - HTML lessons: `lessons/**/*.html`
 - Images/SVG: copied beside converted pages when referenced.
 
 ## Motor
 
-- Source root: `E:\gitee_CodeStorage\学习\MotorControl-main\motor-learning-web`
+- Source root: `E:\gitee_CodeStorage\瀛︿範\MotorControl-main\motor-learning-web`
 - Chapter structure should be inferred from existing data/frontend folders first, then refined manually.
+- First synchronized batch must publish real motor-control knowledge pages, not only the existing `getting-started.md` placeholder.
 
 ## Import Rules
 
@@ -989,6 +991,7 @@ Create `docs/kb/import-sources.md`:
 - Existing user-written frontmatter is not overwritten.
 - HTML pages get `sourcePath`.
 - Conversion reports include warnings for skipped scripts, missing images, empty headings, and low text length.
+- Round 2 is not complete until both `content/power` and `content/motor` contain synchronized source-derived pages and those pages appear in the generated archive/sidebar/search data.
 ```
 
 - [ ] **Step 2: Extend migrate source registry**
@@ -998,7 +1001,7 @@ In `scripts/kb/migrate.ts`, add sources:
 ```ts
 {
   name: 'power-lessons-html',
-  root: 'E:\\gitee_CodeStorage\\学习\\电源\\lessons',
+  root: 'E:\\gitee_CodeStorage\\瀛︿範\\鐢垫簮\\lessons',
   target: path.join(contentRoot, 'power', 'lessons'),
   patterns: ['**/*.html']
 }
@@ -1087,7 +1090,7 @@ export interface ArticleFrontmatter {
 In `completeArticleData`, infer:
 
 ```ts
-section: fileData.section || directoryDefaults.section || fileData.category || directoryDefaults.category || '未分类',
+section: fileData.section || directoryDefaults.section || fileData.category || directoryDefaults.category || '鏈垎绫?,
 chapter: fileData.chapter || directoryDefaults.chapter,
 chapterTitle: fileData.chapterTitle || directoryDefaults.chapterTitle || fileData.chapter,
 chapterOrder: fileData.chapterOrder || directoryDefaults.chapterOrder,
@@ -1099,7 +1102,7 @@ order: fileData.order || directoryDefaults.order
 In `scanArticles`, include:
 
 ```ts
-section: String(record.completed.section || record.completed.category || '未分类'),
+section: String(record.completed.section || record.completed.category || '鏈垎绫?),
 chapter: record.completed.chapter ? String(record.completed.chapter) : undefined,
 chapterTitle: record.completed.chapterTitle ? String(record.completed.chapterTitle) : undefined,
 chapterOrder: Number(record.completed.chapterOrder || 999),
@@ -1116,14 +1119,14 @@ it('inherits section and chapter metadata from category files', async () => {
   const content = path.join(root, 'content')
   const chapter = path.join(content, 'power', '02-pfc')
   await fs.mkdir(chapter, { recursive: true })
-  await fs.writeFile(path.join(content, 'power', '.category.yml'), 'section: 电源控制\ncategory: 电源控制\n')
-  await fs.writeFile(path.join(chapter, '.category.yml'), 'chapter: 02-PFC\nchapterTitle: 功率因数校正\nchapterOrder: 20\n')
-  await fs.writeFile(path.join(chapter, 'current-loop.md'), '# 电流环\n\n正文。')
+  await fs.writeFile(path.join(content, 'power', '.category.yml'), 'section: 鐢垫簮鎺у埗\ncategory: 鐢垫簮鎺у埗\n')
+  await fs.writeFile(path.join(chapter, '.category.yml'), 'chapter: 02-PFC\nchapterTitle: 鍔熺巼鍥犳暟鏍℃\nchapterOrder: 20\n')
+  await fs.writeFile(path.join(chapter, 'current-loop.md'), '# 鐢垫祦鐜痋n\n姝ｆ枃銆?)
 
   const result = await scanArticles({ contentRoot: content })
-  expect(result.articles[0].section).toBe('电源控制')
+  expect(result.articles[0].section).toBe('鐢垫簮鎺у埗')
   expect(result.articles[0].chapter).toBe('02-PFC')
-  expect(result.articles[0].chapterTitle).toBe('功率因数校正')
+  expect(result.articles[0].chapterTitle).toBe('鍔熺巼鍥犳暟鏍℃')
 })
 ```
 
@@ -1153,14 +1156,14 @@ import { buildSidebar } from '../../scripts/kb/generate'
 describe('chaptered sidebar', () => {
   it('groups articles by section and chapter', () => {
     const articles = [
-      { title: '电流环', url: '/a.html', section: '电源控制', chapter: '02-PFC', chapterTitle: '功率因数校正', chapterOrder: 20, order: 2, date: '2026-07-01', category: '控制', tags: [], source: 'test', status: 'learning', visibility: 'public', summary: '', path: 'a.md', body: '' },
-      { title: '基础', url: '/b.html', section: '电源控制', chapter: '01-基础', chapterTitle: '基础概念', chapterOrder: 10, order: 1, date: '2026-07-01', category: '控制', tags: [], source: 'test', status: 'learning', visibility: 'public', summary: '', path: 'b.md', body: '' }
+      { title: '鐢垫祦鐜?, url: '/a.html', section: '鐢垫簮鎺у埗', chapter: '02-PFC', chapterTitle: '鍔熺巼鍥犳暟鏍℃', chapterOrder: 20, order: 2, date: '2026-07-01', category: '鎺у埗', tags: [], source: 'test', status: 'learning', visibility: 'public', summary: '', path: 'a.md', body: '' },
+      { title: '鍩虹', url: '/b.html', section: '鐢垫簮鎺у埗', chapter: '01-鍩虹', chapterTitle: '鍩虹姒傚康', chapterOrder: 10, order: 1, date: '2026-07-01', category: '鎺у埗', tags: [], source: 'test', status: 'learning', visibility: 'public', summary: '', path: 'b.md', body: '' }
     ] as ArticleRecord[]
 
     const sidebar = buildSidebar(articles)
-    expect(sidebar).toContain('电源控制')
-    expect(sidebar).toContain('基础概念')
-    expect(sidebar).toContain('功率因数校正')
+    expect(sidebar).toContain('鐢垫簮鎺у埗')
+    expect(sidebar).toContain('鍩虹姒傚康')
+    expect(sidebar).toContain('鍔熺巼鍥犳暟鏍℃')
   })
 })
 ```
@@ -1173,7 +1176,7 @@ Modify `scripts/kb/generate.ts`:
 export function buildSidebar(articles: ArticleRecord[]): string {
   const bySection = new Map<string, ArticleRecord[]>()
   for (const article of articles) {
-    const section = article.section || article.category || '未分类'
+    const section = article.section || article.category || '鏈垎绫?
     const list = bySection.get(section) || []
     list.push(article)
     bySection.set(section, list)
@@ -1253,7 +1256,7 @@ git commit -m "feat: generate chaptered sidebar"
 Create `scripts/kb/search/tokenize.ts`:
 
 ```ts
-const stopWords = new Set(['一个', '可以', '进行', '使用', '系统', '通过', '这里', '这个', '以及', '如果', 'the', 'and', 'for', 'with'])
+const stopWords = new Set(['涓€涓?, '鍙互', '杩涜', '浣跨敤', '绯荤粺', '閫氳繃', '杩欓噷', '杩欎釜', '浠ュ強', '濡傛灉', 'the', 'and', 'for', 'with'])
 
 export function tokenize(input: string): string[] {
   const lower = input.toLowerCase()
@@ -1342,22 +1345,22 @@ import { buildSearchIndex } from '../../scripts/kb/search/build-index'
 
 describe('search index', () => {
   it('extracts English and Chinese technical tokens', () => {
-    expect(tokenize('PFC 电流环 current-loop PWM 采样时序')).toContain('pfc')
-    expect(tokenize('PFC 电流环 current-loop PWM 采样时序')).toContain('电流环')
-    expect(tokenize('PFC 电流环 current-loop PWM 采样时序')).toContain('current-loop')
+    expect(tokenize('PFC 鐢垫祦鐜?current-loop PWM 閲囨牱鏃跺簭')).toContain('pfc')
+    expect(tokenize('PFC 鐢垫祦鐜?current-loop PWM 閲囨牱鏃跺簭')).toContain('鐢垫祦鐜?)
+    expect(tokenize('PFC 鐢垫祦鐜?current-loop PWM 閲囨牱鏃跺簭')).toContain('current-loop')
   })
 
   it('builds snippets around body matches', () => {
-    expect(buildSnippet('前面很多文字，电流环用于跟踪参考电流，后面很多文字', '电流环')).toContain('电流环')
+    expect(buildSnippet('鍓嶉潰寰堝鏂囧瓧锛岀數娴佺幆鐢ㄤ簬璺熻釜鍙傝€冪數娴侊紝鍚庨潰寰堝鏂囧瓧', '鐢垫祦鐜?)).toContain('鐢垫祦鐜?)
   })
 
   it('indexes body text for public articles only', () => {
     const index = buildSearchIndex([
-      { title: 'A', url: '/a.html', section: '电源', category: '控制', tags: [], date: '2026-07-01', summary: '', body: '正文包含电流环', visibility: 'public', source: 'test', status: 'learning', path: 'a.md' },
-      { title: 'B', url: '/b.html', section: '电源', category: '控制', tags: [], date: '2026-07-01', summary: '', body: '私密内容', visibility: 'private', source: 'test', status: 'learning', path: 'b.md' }
+      { title: 'A', url: '/a.html', section: '鐢垫簮', category: '鎺у埗', tags: [], date: '2026-07-01', summary: '', body: '姝ｆ枃鍖呭惈鐢垫祦鐜?, visibility: 'public', source: 'test', status: 'learning', path: 'a.md' },
+      { title: 'B', url: '/b.html', section: '鐢垫簮', category: '鎺у埗', tags: [], date: '2026-07-01', summary: '', body: '绉佸瘑鍐呭', visibility: 'private', source: 'test', status: 'learning', path: 'b.md' }
     ] as any)
     expect(index).toHaveLength(1)
-    expect(index[0].tokens).toContain('电流环')
+    expect(index[0].tokens).toContain('鐢垫祦鐜?)
   })
 })
 ```
@@ -1388,12 +1391,12 @@ Create `content/search.md`:
 
 ```md
 ---
-title: 搜索
+title: 鎼滅储
 layout: page
 comments: false
 ---
 
-# 搜索
+# 鎼滅储
 
 <SearchPage />
 ```
@@ -1420,15 +1423,15 @@ interface SearchRecord {
 }
 
 const query = ref('')
-const section = ref('全部')
+const section = ref('鍏ㄩ儴')
 const records = searchIndex as SearchRecord[]
 
-const sections = computed(() => ['全部', ...Array.from(new Set(records.map((item) => item.section || item.category))).sort()])
+const sections = computed(() => ['鍏ㄩ儴', ...Array.from(new Set(records.map((item) => item.section || item.category))).sort()])
 
 const results = computed(() => {
   const needle = query.value.trim().toLowerCase()
   return records
-    .filter((item) => section.value === '全部' || item.section === section.value || item.category === section.value)
+    .filter((item) => section.value === '鍏ㄩ儴' || item.section === section.value || item.category === section.value)
     .map((item) => ({ item, score: scoreRecord(item, needle), snippet: makeSnippet(item, needle) }))
     .filter((entry) => !needle || entry.score > 0)
     .sort((a, b) => b.score - a.score || b.item.date.localeCompare(a.item.date))
@@ -1458,17 +1461,17 @@ function makeSnippet(item: SearchRecord, needle: string): string {
 <template>
   <section class="kb-search-page">
     <div class="kb-filterbar">
-      <input v-model="query" class="kb-search-input" aria-label="全文搜索" placeholder="搜索标题、正文、标签，例如 PFC / 电流环 / SVPWM" />
-      <select v-model="section" class="kb-select" aria-label="栏目">
+      <input v-model="query" class="kb-search-input" aria-label="鍏ㄦ枃鎼滅储" placeholder="鎼滅储鏍囬銆佹鏂囥€佹爣绛撅紝渚嬪 PFC / 鐢垫祦鐜?/ SVPWM" />
+      <select v-model="section" class="kb-select" aria-label="鏍忕洰">
         <option v-for="item in sections" :key="item" :value="item">{{ item }}</option>
       </select>
     </div>
 
-    <div class="kb-result-count">{{ results.length }} 条结果</div>
+    <div class="kb-result-count">{{ results.length }} 鏉＄粨鏋?/div>
 
     <div class="kb-article-list">
       <a v-for="{ item, snippet } in results" :key="item.url" class="kb-article-card" :href="item.url">
-        <span class="kb-article-date">{{ item.date }} · {{ item.section || item.category }}<template v-if="item.chapter"> / {{ item.chapter }}</template></span>
+        <span class="kb-article-date">{{ item.date }} 路 {{ item.section || item.category }}<template v-if="item.chapter"> / {{ item.chapter }}</template></span>
         <strong>{{ item.title }}</strong>
         <span class="kb-article-summary">{{ snippet }}</span>
         <span class="kb-tags">
@@ -1492,7 +1495,7 @@ app.component('SearchPage', SearchPage)
 In `.vitepress/config.ts`, add nav entry:
 
 ```ts
-{ text: '搜索', link: '/content/search.html' }
+{ text: '鎼滅储', link: '/content/search.html' }
 ```
 
 - [ ] **Step 4: Verify and commit**
@@ -1521,7 +1524,7 @@ git commit -m "feat: add knowledge search page"
 
 Modify `.gitignore`:
 
-```gitignore
+```text
 content/private/**
 !content/private/.gitkeep
 ```
@@ -1578,8 +1581,8 @@ import { encryptMarkdown } from '../../scripts/kb/encrypt/encrypt'
 
 describe('encrypted articles', () => {
   it('does not store plaintext in generated payload', async () => {
-    const payload = await encryptMarkdown('秘密正文：电源项目记录', 'passphrase')
-    expect(JSON.stringify(payload)).not.toContain('秘密正文')
+    const payload = await encryptMarkdown('绉樺瘑姝ｆ枃锛氱數婧愰」鐩褰?, 'passphrase')
+    expect(JSON.stringify(payload)).not.toContain('绉樺瘑姝ｆ枃')
     expect(payload.algorithm).toBe('AES-GCM')
   })
 })
@@ -1637,7 +1640,7 @@ async function decrypt() {
     const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv, tagLength: 128 }, key, concat(ciphertext, tag))
     content.value = new TextDecoder().decode(plaintext)
   } catch {
-    error.value = '密码不正确，或加密内容损坏。'
+    error.value = '瀵嗙爜涓嶆纭紝鎴栧姞瀵嗗唴瀹规崯鍧忋€?
   }
 }
 
@@ -1655,8 +1658,8 @@ function concat(a: Uint8Array, b: Uint8Array): Uint8Array {
 
 <template>
   <section class="kb-encrypted">
-    <input v-model="password" class="kb-search-input" type="password" aria-label="文章密码" placeholder="输入文章密码" />
-    <button class="kb-button" type="button" @click="decrypt">解锁</button>
+    <input v-model="password" class="kb-search-input" type="password" aria-label="鏂囩珷瀵嗙爜" placeholder="杈撳叆鏂囩珷瀵嗙爜" />
+    <button class="kb-button" type="button" @click="decrypt">瑙ｉ攣</button>
     <p v-if="error" class="kb-error">{{ error }}</p>
     <pre v-if="content" class="kb-decrypted"><code>{{ content }}</code></pre>
   </section>
@@ -1935,11 +1938,11 @@ import { tokenize } from '../../scripts/kb/search/tokenize'
 
 describe('metadata suggestions', () => {
   it('keeps technical terms and removes common words', () => {
-    const tokens = tokenize('这个系统可以使用 PFC current-loop 电流环 PWM 采样')
+    const tokens = tokenize('杩欎釜绯荤粺鍙互浣跨敤 PFC current-loop 鐢垫祦鐜?PWM 閲囨牱')
     expect(tokens).toContain('pfc')
     expect(tokens).toContain('current-loop')
-    expect(tokens).toContain('电流环')
-    expect(tokens).not.toContain('这个')
+    expect(tokens).toContain('鐢垫祦鐜?)
+    expect(tokens).not.toContain('杩欎釜')
   })
 })
 ```
@@ -1969,6 +1972,8 @@ Round 1:
 Round 2:
 - `npm run kb:inspect` reports `.html` and `.md` source counts.
 - At least five real power HTML lessons convert into useful Markdown with title, body, images/SVG, and code blocks.
+- At least one representative motor knowledge batch syncs into `content/motor` with chapter metadata.
+- The generated site includes both synchronized power and motor pages in archive/sidebar/search data.
 - Converted pages build and are visible locally.
 
 Round 3:

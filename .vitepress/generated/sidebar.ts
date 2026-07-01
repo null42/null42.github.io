@@ -96,5 +96,15 @@ export const generatedSidebar = [
         "link": "/content/blog/knowledge-base-first-pass.html"
       }
     ]
+  },
+  {
+    "text": "渲染验证",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Markdown 渲染验证",
+        "link": "/content/playground/rendering-fixture.html"
+      }
+    ]
   }
 ]

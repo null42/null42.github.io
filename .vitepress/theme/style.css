@@ -101,6 +101,55 @@
   font-size: 12px;
 }
 
+.kb-mermaid {
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.kb-mermaid-svg {
+  min-width: 320px;
+}
+
+.kb-mermaid-svg svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.kb-mermaid-error,
+.kb-mermaid-loading {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--kb-surface);
+  color: var(--vp-c-text-2);
+}
+
+.kb-mermaid-error {
+  border-color: var(--vp-c-danger-2);
+  color: var(--vp-c-danger-1);
+  background: var(--vp-c-danger-soft);
+}
+
+.kb-figure {
+  margin: 24px 0;
+}
+
+.kb-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--kb-surface);
+}
+
+.kb-figure figcaption {
+  margin-top: 8px;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  text-align: center;
+}
+
 .kb-comments {
   margin-top: 48px;
   border-top: 1px solid var(--vp-c-divider);
