@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { generatedRoot } from './paths'
 import { scanArticles } from './articles'
+import { buildSearchIndex } from './search/build-index'
 import type { ArticleRecord } from './types'
 
 if (isMainModule()) {
@@ -18,11 +19,13 @@ export async function generateIndexes(): Promise<void> {
   const tags = groupCounts(articles.flatMap((article) => article.tags))
   const archive = buildArchive(articles)
   const sidebar = buildSidebar(articles)
+  const searchIndex = buildSearchIndex(articles)
 
   await fs.writeFile(path.join(generatedRoot, 'articles.json'), JSON.stringify(articles, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'categories.json'), JSON.stringify(categories, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'tags.json'), JSON.stringify(tags, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'archive.json'), JSON.stringify(archive, null, 2), 'utf8')
+  await fs.writeFile(path.join(generatedRoot, 'search-index.json'), JSON.stringify(searchIndex, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'sidebar.ts'), sidebar, 'utf8')
 
   console.log(`generated indexes for ${articles.length} public articles`)

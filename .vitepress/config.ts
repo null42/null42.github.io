@@ -28,6 +28,7 @@ export default defineConfig({
       { text: '电源控制', link: '/content/power/getting-started.html' },
       { text: '电机控制', link: '/content/motor/getting-started.html' },
       { text: '文章库', link: '/archive.html' },
+      { text: '搜索', link: '/search.html' },
       { text: '关于我', link: '/about.html' }
     ],
     sidebar: generatedSidebar,

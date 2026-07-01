@@ -44,6 +44,10 @@
   gap: 10px;
 }
 
+.kb-filterbar-wide {
+  grid-template-columns: minmax(240px, 1fr) repeat(4, minmax(116px, 150px));
+}
+
 .kb-search-input,
 .kb-select {
   width: 100%;
@@ -84,6 +88,13 @@
 .kb-article-summary {
   color: var(--vp-c-text-2);
   font-size: 14px;
+}
+
+.kb-article-summary mark {
+  border-radius: 4px;
+  padding: 0 2px;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-yellow-soft);
 }
 
 .kb-tags {
