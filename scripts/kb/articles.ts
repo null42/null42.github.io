@@ -72,6 +72,10 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       warnings.push(`${record.relativePath}: skipped because visibility is private`)
       continue
     }
+    if (record.completed.visibility === 'encrypted') {
+      warnings.push(`${record.relativePath}: skipped because visibility is encrypted`)
+      continue
+    }
     if (record.completed.visibility === 'hidden' && !options.includeHidden) {
       warnings.push(`${record.relativePath}: skipped because visibility is hidden`)
       continue

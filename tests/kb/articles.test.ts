@@ -73,4 +73,19 @@ describe('article scanning', () => {
     expect(result.articles[0].chapterTitle).toBe('Power Factor Correction')
     expect(result.articles[0].chapterOrder).toBe(20)
   })
+
+  it('excludes encrypted wrappers from public article records', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-encrypted-scan-'))
+    const content = path.join(root, 'content')
+    await fs.mkdir(path.join(content, 'encrypted'), { recursive: true })
+    await fs.writeFile(
+      path.join(content, 'encrypted', 'note.md'),
+      '---\ntitle: Encrypted Note\nvisibility: encrypted\n---\n\n<EncryptedArticle payload-url="/encrypted/note.json" />'
+    )
+
+    const result = await scanArticles({ contentRoot: content })
+
+    expect(result.articles).toHaveLength(0)
+    expect(result.warnings.some((warning) => warning.includes('visibility is encrypted'))).toBe(true)
+  })
 })

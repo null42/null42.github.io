@@ -172,6 +172,29 @@
   font-size: 14px;
 }
 
+.kb-encrypted {
+  display: grid;
+  gap: 12px;
+  max-width: 640px;
+}
+
+.kb-button {
+  width: fit-content;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #fff;
+  background: var(--vp-c-brand-1);
+}
+
+.kb-error {
+  color: var(--vp-c-danger-1);
+}
+
+.kb-decrypted {
+  white-space: pre-wrap;
+}
+
 @media (max-width: 720px) {
   .kb-filterbar {
     grid-template-columns: 1fr;

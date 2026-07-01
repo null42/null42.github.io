@@ -10,10 +10,7 @@ const { frontmatter, page } = useData()
 <template>
   <Layout>
     <template #doc-after>
-      <GiscusComments
-        v-if="frontmatter.comments !== false && page.relativePath.startsWith('content/')"
-        :term="page.relativePath"
-      />
+      <GiscusComments v-if="frontmatter.comments !== false && frontmatter.visibility !== 'encrypted' && page.relativePath.startsWith('content/')" :term="page.relativePath" />
     </template>
   </Layout>
 </template>

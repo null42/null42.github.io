@@ -11,7 +11,8 @@
     "kb:fix": "tsx scripts/kb/fix.ts",
     "kb:generate": "tsx scripts/kb/generate.ts",
     "kb:migrate": "tsx scripts/kb/migrate.ts",
-    "kb:publish": "tsx scripts/kb/publish.ts"
+    "kb:publish": "tsx scripts/kb/publish.ts",
+    "kb:encrypt": "tsx scripts/kb/encrypt/encrypt.ts"
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",
