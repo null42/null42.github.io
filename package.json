@@ -12,7 +12,10 @@
     "kb:generate": "tsx scripts/kb/generate.ts",
     "kb:migrate": "tsx scripts/kb/migrate.ts",
     "kb:publish": "tsx scripts/kb/publish.ts",
-    "kb:encrypt": "tsx scripts/kb/encrypt/encrypt.ts"
+    "kb:encrypt": "tsx scripts/kb/encrypt/encrypt.ts",
+    "kb:sync": "tsx scripts/kb/sync-dist.ts",
+    "kb:all": "npm run kb:fix && npm run kb:check && npm run kb:generate && npm test && npm run build && npm run kb:sync",
+    "kb:deploy": "npm run kb:all && git status --short"
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",
