@@ -75,7 +75,7 @@ export function searchRecords(records: SearchRecord[], query: string, filters: S
     .sort((a, b) => b.score - a.score || b.record.date.localeCompare(a.record.date) || a.record.title.localeCompare(b.record.title))
 }
 
-export function assertSearchIndexWithinBudget(records: SearchRecord[], maxBytes = 1_500_000): void {
+export function assertSearchIndexWithinBudget(records: SearchRecord[], maxBytes = 12_000_000): void {
   const bytes = Buffer.byteLength(JSON.stringify(records), 'utf8')
   if (bytes > maxBytes) {
     throw new Error(`search index is too large: ${bytes} bytes exceeds ${maxBytes} bytes`)

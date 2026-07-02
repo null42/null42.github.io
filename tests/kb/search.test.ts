@@ -78,6 +78,19 @@ describe('knowledge search', () => {
     expect(() => assertSearchIndexWithinBudget(records, 50)).toThrow(/search index is too large/)
     expect(() => assertSearchIndexWithinBudget(records, 10_000)).not.toThrow()
   })
+
+  it('allows a full personal knowledge base index by default', () => {
+    const records = buildSearchIndex(
+      Array.from({ length: 260 }, (_, index) =>
+        article({
+          title: `Knowledge ${index}`,
+          body: `Boost PFC SVPWM ${'content '.repeat(3600)}`
+        })
+      )
+    )
+
+    expect(() => assertSearchIndexWithinBudget(records)).not.toThrow()
+  })
 })
 
 function article(overrides: Partial<ArticleRecord>): ArticleRecord {

@@ -1,0 +1,32 @@
+---
+title: 位置 & 速度观测器仿真 -- SMO / Luenberger / PLL 对比
+date: 2026-07-02
+section: 电机控制
+chapter: 02-Simulations
+chapterTitle: 仿真专题
+category: 电机控制
+tags:
+  - imported
+source: motor
+sourcePath: frontend/src/components/simulations/ObserverSim.vue
+status: learning
+visibility: public
+summary: Imported from frontend/src/components/simulations/ObserverSim.vue
+chapterOrder: 20
+---
+
+# 位置 & 速度观测器仿真 -- SMO / Luenberger / PLL 对比
+
+#### 位置 & 速度观测器仿真 -- SMO / Luenberger / PLL 对比
+
+## SMO / Luenberger / PLL 观测器原理对比
+
+**SMO (滑模观测器)：**以电机电压方程为基础，用滑模面逼近电流误差，再从等效控制量中提取反电动势 eα/eβ。反电动势与磁链关系为 **e = ωe · ψf**，因此速度越低信号越弱，零速附近仅靠反电动势不可观。
+
+**Luenberger 观测器：**基于 αβ 电压模型或电流模型配置观测器极点。它输出的是磁链/反电动势状态估计，极点越靠左收敛越快，但模型参数 R、L、ψf 不准会直接形成角度偏差。
+
+**PLL (锁相环)：**通常不是独立“造角度”的魔法，而是把 SMO/Luenberger 得到的反电动势或磁链矢量送入鉴相器，经过 PI 环路滤波后积分得到 θ̂。PLL 带宽高会跟噪声，带宽低会带来相位延迟。
+
+**dq 解耦影响：**Park 角度误差 Δθ 会造成 d/q 轴互相泄漏，近似比例为 sin(Δθ)。误差大时，Id 会混入 Iq，表现为转矩脉动、弱磁偏差和电流环解耦失效。
+
+**常见误区：**高增益不等于高精度；低速反电动势信噪比不足时，应考虑编码器、开环启动、高频注入或混合观测，而不是盲目提高 SMO/PLL 增益。

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import { loadInheritedCategoryDefaults } from './category'
+import { nonPublicContentPatterns, shouldExcludeContentPath } from './content-exclusions'
 import { completeArticleData, normalizeDate, parseMarkdown, serializeMarkdown } from './frontmatter'
 import { contentRoot as defaultContentRoot, stripMarkdownExtension, toPosixPath } from './paths'
 import type { ArticleFrontmatter, ArticleRecord } from './types'
@@ -30,7 +31,7 @@ export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<Mark
   const files = await fg('**/*.md', {
     cwd: root,
     absolute: true,
-    ignore: ['**/node_modules/**']
+    ignore: ['**/node_modules/**', ...nonPublicContentPatterns.map((pattern) => pattern.replace(/^content\//, ''))]
   })
 
   const records: MarkdownFileRecord[] = []
@@ -46,6 +47,8 @@ export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<Mark
       relativePath,
       modifiedDate
     })
+
+    if (shouldExcludeContentPath(relativePath)) continue
 
     records.push({
       absolutePath,

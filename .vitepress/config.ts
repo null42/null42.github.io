@@ -1,11 +1,13 @@
 import { defineConfig } from 'vitepress'
 import { generatedSidebar } from './generated/sidebar'
+import { nonPublicContentPatterns } from '../scripts/kb/content-exclusions'
 
 export default defineConfig({
   lang: 'zh-CN',
   title: 'lx的个人知识库',
   description: '电源控制、电机控制、仿真和工程学习记录',
   cleanUrls: false,
+  srcExclude: nonPublicContentPatterns,
   lastUpdated: true,
   markdown: {
     config(md) {

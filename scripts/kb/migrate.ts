@@ -41,6 +41,7 @@ const sources: MigrationSource[] = [
 ]
 
 const apply = process.argv.includes('--apply')
+const overwrite = process.argv.includes('--overwrite')
 const sourceFilter = readArg('--source')
 const limit = Number(readArg('--limit') || '0')
 const includePatterns = ['**/*.md', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif']
@@ -78,13 +79,17 @@ for (const source of selectedSources) {
       console.log(`[${file.endsWith('.html') ? 'convert-html' : 'dry-run'}] ${from} -> ${to}`)
       continue
     }
+    if (!(await shouldWriteTarget(to))) {
+      console.log(`[skip-existing] ${to}`)
+      continue
+    }
     await migrateFile(from, to, source, file)
     console.log(`[${conversionLabel(file)}] ${from} -> ${to}`)
   }
 }
 
 if (!apply) {
-  console.log('dry-run only; rerun with npm run kb:migrate -- --apply to copy files')
+  console.log('dry-run only; rerun with npm run kb:migrate -- --apply to copy files; add --overwrite to replace existing targets')
 }
 
 function sanitizePath(value: string): string {
@@ -127,6 +132,16 @@ async function migrateFile(from: string, to: string, source: MigrationSource, re
     return
   }
   await fs.copyFile(from, to)
+}
+
+async function shouldWriteTarget(to: string): Promise<boolean> {
+  if (overwrite) return true
+  try {
+    await fs.access(to)
+    return false
+  } catch {
+    return true
+  }
 }
 
 function withFrontmatter(title: string, body: string, sourceName: string, sourcePath: string): string {

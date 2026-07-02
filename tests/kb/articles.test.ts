@@ -88,4 +88,18 @@ describe('article scanning', () => {
     expect(result.articles).toHaveLength(0)
     expect(result.warnings.some((warning) => warning.includes('visibility is encrypted'))).toBe(true)
   })
+
+  it('skips local templates and internal planning docs during public scanning', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-scan-excluded-'))
+    const content = path.join(root, 'content')
+    await fs.mkdir(path.join(content, 'power', 'debug-records'), { recursive: true })
+    await fs.mkdir(path.join(content, 'power', 'docs', 'superpowers', 'plans'), { recursive: true })
+    await fs.writeFile(path.join(content, 'power', 'debug-records', 'template.md'), '# Debug Record: <topic>\n')
+    await fs.writeFile(path.join(content, 'power', 'docs', 'superpowers', 'plans', 'plan.md'), '# Internal Plan\n')
+    await fs.writeFile(path.join(content, 'power', 'lesson.md'), '# Lesson\n\nVisible body.')
+
+    const result = await scanArticles({ contentRoot: content })
+
+    expect(result.articles.map((article) => article.path)).toEqual(['content/power/lesson.md'])
+  })
 })
