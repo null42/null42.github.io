@@ -8,6 +8,8 @@ describe('knowledge base pipeline', () => {
     expect(pkg.scripts['kb:all']).toContain('kb:check')
     expect(pkg.scripts['kb:all']).toContain('npm test')
     expect(pkg.scripts['kb:sync']).toContain('sync-dist')
+    expect(pkg.scripts['kb:inspect']).toContain('inspect-source')
+    expect(pkg.scripts['kb:analyze']).toContain('suggest-tags')
   })
 
   it('documents Giscus setup for comments', () => {
