@@ -3,7 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { generatedRoot } from './paths'
 import { scanArticles } from './articles'
-import { buildSearchIndex } from './search/build-index'
+import { assertSearchIndexWithinBudget, buildSearchIndex } from './search/build-index'
 import type { ArticleRecord } from './types'
 
 if (isMainModule()) {
@@ -20,6 +20,7 @@ export async function generateIndexes(): Promise<void> {
   const archive = buildArchive(articles)
   const sidebar = buildSidebar(articles)
   const searchIndex = buildSearchIndex(articles)
+  assertSearchIndexWithinBudget(searchIndex)
 
   await fs.writeFile(path.join(generatedRoot, 'articles.json'), JSON.stringify(articles, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'categories.json'), JSON.stringify(categories, null, 2), 'utf8')

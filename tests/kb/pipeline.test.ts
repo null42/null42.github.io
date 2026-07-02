@@ -10,6 +10,7 @@ describe('knowledge base pipeline', () => {
     expect(pkg.scripts['kb:sync']).toContain('sync-dist')
     expect(pkg.scripts['kb:inspect']).toContain('inspect-source')
     expect(pkg.scripts['kb:analyze']).toContain('suggest-tags')
+    expect(pkg.scripts['kb:deploy']).toContain('deploy')
   })
 
   it('documents Giscus setup for comments', () => {
@@ -18,5 +19,14 @@ describe('knowledge base pipeline', () => {
     expect(text).toContain('VITE_GISCUS_REPO')
     expect(text).toContain('Discussions')
     expect(text).toContain('comments: true')
+  })
+
+  it('documents frontmatter and folder conventions', () => {
+    const text = fs.readFileSync('docs/kb/content-model.md', 'utf8')
+
+    expect(text).toContain('chapterTitle')
+    expect(text).toContain('suggestedTags')
+    expect(text).toContain('content/private')
+    expect(text).toContain('只补缺失字段')
   })
 })

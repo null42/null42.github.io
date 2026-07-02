@@ -48,6 +48,10 @@
   grid-template-columns: minmax(240px, 1fr) repeat(4, minmax(116px, 150px));
 }
 
+.kb-filterbar-archive {
+  grid-template-columns: minmax(220px, 1fr) repeat(6, minmax(104px, 140px));
+}
+
 .kb-search-input,
 .kb-select {
   width: 100%;

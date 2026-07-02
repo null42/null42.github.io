@@ -14,6 +14,7 @@ export interface SearchRecord {
   tags: string[]
   source: string
   status: string
+  type?: string
   summary: string
   body: string
   tokens: string[]
@@ -24,6 +25,8 @@ export interface SearchFilters {
   chapter?: string
   tag?: string
   month?: string
+  status?: string
+  type?: string
 }
 
 export interface SearchResult {
@@ -51,6 +54,7 @@ export function buildSearchIndex(articles: ArticleRecord[]): SearchRecord[] {
         tags: article.tags,
         source: article.source,
         status: article.status,
+        type: article.type,
         summary,
         body,
         tokens: tokenize(text)
@@ -71,6 +75,13 @@ export function searchRecords(records: SearchRecord[], query: string, filters: S
     .sort((a, b) => b.score - a.score || b.record.date.localeCompare(a.record.date) || a.record.title.localeCompare(b.record.title))
 }
 
+export function assertSearchIndexWithinBudget(records: SearchRecord[], maxBytes = 1_500_000): void {
+  const bytes = Buffer.byteLength(JSON.stringify(records), 'utf8')
+  if (bytes > maxBytes) {
+    throw new Error(`search index is too large: ${bytes} bytes exceeds ${maxBytes} bytes`)
+  }
+}
+
 function scoreRecord(record: SearchRecord, query: string): number {
   if (!query) return 1
   const lower = query.toLowerCase()
@@ -89,6 +100,8 @@ function matchesFilters(record: SearchRecord, filters: SearchFilters): boolean {
   if (filters.chapter && record.chapter !== filters.chapter && record.chapterTitle !== filters.chapter) return false
   if (filters.tag && !record.tags.includes(filters.tag)) return false
   if (filters.month && record.month !== filters.month) return false
+  if (filters.status && record.status !== filters.status) return false
+  if (filters.type && record.type !== filters.type) return false
   return true
 }
 

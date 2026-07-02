@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildSearchIndex, searchRecords } from '../../scripts/kb/search/build-index'
+import { assertSearchIndexWithinBudget, buildSearchIndex, searchRecords } from '../../scripts/kb/search/build-index'
 import { makeSnippet } from '../../scripts/kb/search/snippets'
 import { tokenize } from '../../scripts/kb/search/tokenize'
 import type { ArticleRecord } from '../../scripts/kb/types'
@@ -70,6 +70,13 @@ describe('knowledge search', () => {
     expect(tokens).toContain('pwm')
     expect(tokens).toContain('电流环')
     expect(tokens).toContain('采样')
+  })
+
+  it('enforces a configurable search index size guardrail', () => {
+    const records = buildSearchIndex([article({ title: 'Large', body: 'x'.repeat(200) })])
+
+    expect(() => assertSearchIndexWithinBudget(records, 50)).toThrow(/search index is too large/)
+    expect(() => assertSearchIndexWithinBudget(records, 10_000)).not.toThrow()
   })
 })
 
