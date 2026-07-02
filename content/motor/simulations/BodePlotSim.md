@@ -11,6 +11,8 @@ sourcePath: frontend/src/components/simulations/BodePlotSim.vue
 status: learning
 visibility: public
 summary: Imported from frontend/src/components/simulations/BodePlotSim.vue
+chapterTitle: 仿真专题
+chapterOrder: 20
 ---
 
 # Bode 图交互仿真

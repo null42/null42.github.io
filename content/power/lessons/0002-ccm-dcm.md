@@ -11,6 +11,8 @@ sourcePath: 0002-ccm-dcm.html
 status: learning
 visibility: public
 summary: Imported from 0002-ccm-dcm.html
+chapterTitle: 电源课程
+chapterOrder: 10
 ---
 
 # 教程 0002：连续导通模式（continuous conduction mode / CCM）与断续导通模式（discontinuous conduction mode / DCM）

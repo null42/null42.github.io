@@ -11,6 +11,8 @@ sourcePath: frontend/src/components/simulations/DeadtimeCompSim.vue
 status: learning
 visibility: public
 summary: Imported from frontend/src/components/simulations/DeadtimeCompSim.vue
+chapterTitle: 仿真专题
+chapterOrder: 20
 ---
 
 # 死区补偿仿真 -- 电压误差分析与补偿策略对比

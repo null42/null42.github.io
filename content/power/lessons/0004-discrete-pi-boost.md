@@ -11,6 +11,8 @@ sourcePath: 0004-discrete-pi-boost.html
 status: learning
 visibility: public
 summary: Imported from 0004-discrete-pi-boost.html
+chapterTitle: 电源课程
+chapterOrder: 10
 ---
 
 # 教程 0004：离散比例积分控制器（discrete proportional-integral controller / discrete PI）最小闭环

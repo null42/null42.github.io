@@ -11,6 +11,8 @@ sourcePath: frontend/src/components/simulations/CurrentLoopSim.vue
 status: learning
 visibility: public
 summary: Imported from frontend/src/components/simulations/CurrentLoopSim.vue
+chapterTitle: 仿真专题
+chapterOrder: 20
 ---
 
 # PI 电流调节器仿真 -- dq 电流环阶跃响应与带宽参数化

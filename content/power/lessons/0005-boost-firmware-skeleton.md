@@ -11,6 +11,8 @@ sourcePath: 0005-boost-firmware-skeleton.html
 status: learning
 visibility: public
 summary: Imported from 0005-boost-firmware-skeleton.html
+chapterTitle: 电源课程
+chapterOrder: 10
 ---
 
 # 教程 0005：Boost 控制中断服务程序（control interrupt service routine / control ISR）软件骨架

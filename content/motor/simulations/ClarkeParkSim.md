@@ -11,6 +11,8 @@ sourcePath: frontend/src/components/simulations/ClarkeParkSim.vue
 status: learning
 visibility: public
 summary: Imported from frontend/src/components/simulations/ClarkeParkSim.vue
+chapterTitle: 仿真专题
+chapterOrder: 20
 ---
 
 # Clarke & Park 坐标变换仿真 — abc → αβ → dq

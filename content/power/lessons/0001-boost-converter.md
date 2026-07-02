@@ -11,6 +11,8 @@ sourcePath: 0001-boost-converter.html
 status: learning
 visibility: public
 summary: Imported from 0001-boost-converter.html
+chapterTitle: 电源课程
+chapterOrder: 10
 ---
 
 # 教程 0001：Boost 升压变换器（Boost Converter）

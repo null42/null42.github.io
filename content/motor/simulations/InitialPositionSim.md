@@ -11,6 +11,8 @@ sourcePath: frontend/src/components/simulations/InitialPositionSim.vue
 status: learning
 visibility: public
 summary: Imported from frontend/src/components/simulations/InitialPositionSim.vue
+chapterTitle: 仿真专题
+chapterOrder: 20
 ---
 
 # 启动定位与预定位仿真 -- 电感饱和法 / 预定位 / 高频注入法对比

@@ -11,6 +11,8 @@ sourcePath: 0003-pwm-sampling.html
 status: learning
 visibility: public
 summary: Imported from 0003-pwm-sampling.html
+chapterTitle: 电源课程
+chapterOrder: 10
 ---
 
 # 教程 0003：脉宽调制（pulse-width modulation / PWM）与模数转换器采样（analog-to-digital converter / ADC sampling）
