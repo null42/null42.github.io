@@ -1,6 +1,6 @@
 ---
 date: 2026-06-26
-category: 电源控制
+category: 路线图
 source: power
 visibility: public
 title: MATLAB/Simulink 电力电子仿真快速路线
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: 生成日期：2026-06-26
+section: 电源控制
+chapter: roadmap
+chapterTitle: 路线图
+chapterOrder: 10
 ---
 
 # MATLAB/Simulink 电力电子仿真快速路线

@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-
-declare global {
-  interface Window {
-    mermaid?: {
-      initialize: (options: Record<string, unknown>) => void
-      render: (id: string, code: string) => Promise<{ svg: string }>
-    }
-  }
-}
+import type mermaid from 'mermaid'
 
 const props = defineProps<{
   code: string
@@ -20,10 +12,8 @@ const source = computed(() => decodeURIComponent(props.code))
 const elementId = `mermaid-${Math.random().toString(36).slice(2)}`
 
 async function loadMermaid() {
-  if (window.mermaid) return window.mermaid
-  await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
-  if (!window.mermaid) throw new Error('Mermaid failed to load')
-  return window.mermaid
+  const module = await import('mermaid')
+  return module.default as typeof mermaid
 }
 
 async function renderDiagram() {

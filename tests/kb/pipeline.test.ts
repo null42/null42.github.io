@@ -1,4 +1,6 @@
 import fs from 'node:fs'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 describe('knowledge base pipeline', () => {
@@ -7,6 +9,8 @@ describe('knowledge base pipeline', () => {
     const pipeline = fs.readFileSync('scripts/kb/pipeline.ts', 'utf8')
 
     expect(pkg.scripts['kb:all']).toContain('pipeline')
+    expect(pkg.scripts.build).toContain('kb:clean')
+    expect(pkg.scripts['kb:clean']).toContain('clean-dist')
     expect(pipeline).toContain('scripts/kb/migrate.ts')
     expect(pipeline).toContain('--apply')
     expect(pkg.scripts['kb:sync']).toContain('sync-dist')
@@ -23,12 +27,16 @@ describe('knowledge base pipeline', () => {
     expect(migrate).toContain('--overwrite')
   })
 
-  it('documents Giscus setup for comments', () => {
+  it('documents and exposes article feedback comments', () => {
     const text = fs.readFileSync('docs/kb/comments.md', 'utf8')
+    const component = fs.readFileSync('.vitepress/theme/components/GiscusComments.vue', 'utf8')
 
     expect(text).toContain('VITE_GISCUS_REPO')
     expect(text).toContain('Discussions')
     expect(text).toContain('comments: true')
+    expect(component).toContain('const fallbackIssueUrl = computed(')
+    expect(component).toContain('encodeURIComponent(term)')
+    expect(component).toContain('留言')
   })
 
   it('documents frontmatter and folder conventions', () => {
@@ -38,5 +46,12 @@ describe('knowledge base pipeline', () => {
     expect(text).toContain('suggestedTags')
     expect(text).toContain('content/private')
     expect(text).toContain('只补缺失字段')
+  })
+
+  it('runs sync-dist when invoked through tsx on Windows paths', async () => {
+    const syncModule = await import('../../scripts/kb/sync-dist')
+    const scriptPath = path.resolve('scripts/kb/sync-dist.ts')
+
+    expect(syncModule.isMainModule(pathToFileURL(scriptPath).href, scriptPath)).toBe(true)
   })
 })

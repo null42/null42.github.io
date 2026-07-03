@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 项目实践
 source: power
 visibility: public
 title: 项目 02：Boost C 固件骨架（Boost C Firmware Skeleton）
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: 把 `simulations/python/boost_firmware_skeleton.py` 里的控制数据流迁移成一个可编译的简化 C 工程，帮助你阅读完整工程代码时先抓住模块边界。
+section: 电源控制
+chapter: projects
+chapterTitle: 项目实践
+chapterOrder: 40
 ---
 
 # 项目 02：Boost C 固件骨架（Boost C Firmware Skeleton）

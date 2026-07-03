@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 项目实践
 source: power
 visibility: public
 title: 项目 01：Boost 基础（Boost Basics）
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: 理解升压变换器（Boost converter）如何转移能量，以及为什么占空比（duty cycle / D）会影响输出电压。
+section: 电源控制
+chapter: projects
+chapterTitle: 项目实践
+chapterOrder: 40
 ---
 
 # 项目 01：Boost 基础（Boost Basics）

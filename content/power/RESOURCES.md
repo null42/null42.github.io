@@ -8,6 +8,7 @@ tags:
   - power-electronics
 status: learning
 summary: "| 书名 | 作者 | 说明 | 优先级 | |------|------|------|--------| | 《电力电子技术》（第6版） | 王兆安、刘进军 | 国内电力电子经典教材，覆盖整流、逆变、斩波、变频四大变换 | 必读 | | 《Power Electronics: Converters, Applica"
+section: 电源控制
 ---
 
 # UPS电源软件开发 — 学习资源列表

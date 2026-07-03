@@ -1,6 +1,6 @@
 ---
 date: 2026-06-14
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0002：电力电子基础——开关器件与基本拓扑"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-13 **课程**：第2课 — 电力电子基础——开关器件与基本拓扑 **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0002：电力电子基础——开关器件与基本拓扑

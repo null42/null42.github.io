@@ -1,10 +1,13 @@
 export type Visibility = 'public' | 'hidden' | 'private' | string
+export type ArticleQuality = 'curated' | 'draft' | 'imported' | 'needsRewrite' | string
 
 export interface CategoryDefaults {
   section?: string
   chapter?: string
   chapterTitle?: string
   chapterOrder?: number
+  navGroup?: string
+  navGroupOrder?: number
   category?: string
   source?: string
   defaultTags?: string[]
@@ -12,6 +15,7 @@ export interface CategoryDefaults {
   title?: string
   navTitle?: string
   visibility?: Visibility
+  quality?: ArticleQuality
   order?: number
   slug?: string
   description?: string
@@ -28,6 +32,8 @@ export interface ArticleFrontmatter {
   chapter?: string
   chapterTitle?: string
   chapterOrder?: number
+  navGroup?: string
+  navGroupOrder?: number
   order?: number
   category?: string
   tags?: string[]
@@ -38,6 +44,7 @@ export interface ArticleFrontmatter {
   suggestedTags?: string[]
   status?: string
   visibility?: Visibility
+  quality?: ArticleQuality
   summary?: string
   comments?: boolean
   [key: string]: unknown
@@ -51,6 +58,8 @@ export interface ArticleRecord {
   chapter?: string
   chapterTitle?: string
   chapterOrder?: number
+  navGroup?: string
+  navGroupOrder?: number
   order?: number
   category: string
   tags: string[]
@@ -61,6 +70,7 @@ export interface ArticleRecord {
   suggestedTags?: string[]
   status: string
   visibility: Visibility
+  quality?: ArticleQuality
   summary: string
   path: string
   url: string

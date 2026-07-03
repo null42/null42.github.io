@@ -3,39 +3,47 @@ import path from 'node:path'
 import fg from 'fast-glob'
 import { contentRoot } from './paths'
 import { convertHtmlFile } from './import/html-to-markdown'
-import { convertVueSimulation } from './import/vue-simulation-to-markdown'
 
 interface MigrationSource {
   name: string
   root: string
   target: string
   patterns?: string[]
+  extraCopies?: Array<{ from: string; to: string }>
 }
 
 const sources: MigrationSource[] = [
   {
     name: 'power',
     root: 'E:\\gitee_CodeStorage\\学习\\电源',
-    target: path.join(contentRoot, 'power')
-  },
-  {
-    name: 'power-concepts',
-    root: 'E:\\gitee_CodeStorage\\学习\\电源\\concepts\\power-electronics',
-    target: path.join(contentRoot, 'power', 'concepts'),
-    patterns: ['**/*.md']
-  },
-  {
-    name: 'power-lessons-html',
-    root: 'E:\\gitee_CodeStorage\\学习\\电源\\lessons',
-    target: path.join(contentRoot, 'power', 'lessons'),
-    patterns: ['**/*.html']
+    target: path.join(contentRoot, 'power'),
+    patterns: [
+      'archive/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'debug-records/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'docs/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'fz/**/*.{png,jpg,jpeg,gif,svg}',
+      'projects/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'reference/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'roadmap/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'simulations/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'weekly-reviews/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+      'MISSION.md',
+      'NOTES.md',
+      'RESOURCES.md',
+      'USAGE.md',
+      'control-delay-timing.svg'
+    ]
   },
   {
     name: 'motor',
-    root: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-learning-web',
+    root: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-control-knowledge-base',
     target: path.join(contentRoot, 'motor'),
-    patterns: [
-      'frontend/src/components/simulations/*Sim.vue'
+    patterns: ['**/*.{md,html,png,jpg,jpeg,gif,svg,yaml,yml,json,c,h,hpp,cpp,rst}'],
+    extraCopies: [
+      {
+        from: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\Controllers-from-PID-to-QP_MPC-main\\assets\\servo-motor-controllers-slides',
+        to: path.join(contentRoot, 'motor', 'controllers-evolution', 'assets', 'servo-motor-controllers-slides')
+      }
     ]
   }
 ]
@@ -44,7 +52,7 @@ const apply = process.argv.includes('--apply')
 const overwrite = process.argv.includes('--overwrite')
 const sourceFilter = readArg('--source')
 const limit = Number(readArg('--limit') || '0')
-const includePatterns = ['**/*.md', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif']
+const includePatterns = ['**/*.{md,html,png,jpg,jpeg,gif,svg,yaml,yml,json,c,h,hpp,cpp,rst}']
 const ignorePatterns = [
   '**/.git/**',
   '**/node_modules/**',
@@ -53,9 +61,20 @@ const ignorePatterns = [
   '**/dist/**',
   '**/build/**',
   '**/static/assets/**',
-  '**/*.slxc',
-  '**/*.exe',
-  '**/*.zip'
+  '**/_annotations/**',
+      '**/_proofs/**',
+      '**/datasets/**',
+      '**/reports/**',
+      '**/schemas/**',
+      '**/CONTRIBUTING.md',
+      '**/HANDOVER.md',
+      '**/TEMPLATE-*.md',
+      '**/verification-checklist.md',
+      '**/workflow-closed-loop.md',
+      '**/*release-checklist.md',
+      '**/*.slxc',
+      '**/*.exe',
+      '**/*.zip'
 ]
 
 const selectedSources = sourceFilter ? sources.filter((source) => source.name === sourceFilter) : sources
@@ -86,6 +105,15 @@ for (const source of selectedSources) {
     await migrateFile(from, to, source, file)
     console.log(`[${conversionLabel(file)}] ${from} -> ${to}`)
   }
+
+  for (const extraCopy of source.extraCopies || []) {
+    if (!apply) {
+      console.log(`[dry-run-extra] ${extraCopy.from} -> ${extraCopy.to}`)
+      continue
+    }
+    await copyDirectory(extraCopy.from, extraCopy.to)
+    console.log(`[copied-extra] ${extraCopy.from} -> ${extraCopy.to}`)
+  }
 }
 
 if (!apply) {
@@ -110,9 +138,6 @@ function targetPath(source: MigrationSource, file: string): string {
   if (file.endsWith('.html')) {
     return path.join(source.target, sanitized.replace(/\.html$/i, '.md'))
   }
-  if (source.name === 'motor' && file.endsWith('.vue')) {
-    return path.join(source.target, 'simulations', sanitized.replace(/^frontend[\\/]src[\\/]components[\\/]simulations[\\/]/, '').replace(/\.vue$/i, '.md'))
-  }
   return path.join(source.target, sanitized)
 }
 
@@ -121,14 +146,6 @@ async function migrateFile(from: string, to: string, source: MigrationSource, re
   if (from.endsWith('.html')) {
     const converted = await convertHtmlFile(from)
     await fs.writeFile(to, withFrontmatter(converted.title, converted.markdown, source.name, relativeFile), 'utf8')
-    return
-  }
-  if (from.endsWith('.vue')) {
-    const raw = await fs.readFile(from, 'utf8')
-    const converted = convertVueSimulation(raw, from)
-    const title = converted.title
-    const body = converted.markdown
-    await fs.writeFile(to, withFrontmatter(title, body, source.name, relativeFile), 'utf8')
     return
   }
   await fs.copyFile(from, to)
@@ -144,17 +161,68 @@ async function shouldWriteTarget(to: string): Promise<boolean> {
   }
 }
 
+async function copyDirectory(from: string, to: string): Promise<void> {
+  const files = await fg('**/*', { cwd: from, absolute: false, onlyFiles: true })
+  for (const file of files) {
+    const target = path.join(to, sanitizePath(file))
+    if (!(await shouldWriteTarget(target))) continue
+    await fs.mkdir(path.dirname(target), { recursive: true })
+    await fs.copyFile(path.join(from, file), target)
+  }
+}
+
 function withFrontmatter(title: string, body: string, sourceName: string, sourcePath: string): string {
   const source = sourceName === 'motor' ? 'motor' : 'power'
   const section = source === 'motor' ? '电机控制' : '电源控制'
-  const chapter = source === 'motor' ? '02-Simulations' : '01-Lessons'
-  const chapterTitle = source === 'motor' ? '仿真专题' : '电源课程'
+  const chapter = inferChapter(sourcePath)
+  const chapterTitle = chapterTitleFromPath(source, sourcePath)
+  const chapterBlock = chapter ? `chapter: ${chapter}\nchapterTitle: ${chapterTitle}\n` : ''
   const normalizedSourcePath = sourcePath.replace(/\\/g, '/')
-  return `---\ntitle: ${title}\ndate: ${new Date().toISOString().slice(0, 10)}\nsection: ${section}\nchapter: ${chapter}\nchapterTitle: ${chapterTitle}\ncategory: ${section}\ntags:\n  - imported\nsource: ${source}\nsourcePath: ${normalizedSourcePath}\nstatus: learning\nvisibility: public\nsummary: Imported from ${normalizedSourcePath}\n---\n\n${body.trim()}\n`
+  return `---\ntitle: ${title}\ndate: ${new Date().toISOString().slice(0, 10)}\nsection: ${section}\n${chapterBlock}category: ${section}\ntags:\n  - imported\nsource: ${source}\nsourcePath: ${normalizedSourcePath}\nstatus: learning\nvisibility: public\nsummary: Imported from ${normalizedSourcePath}\n---\n\n${body.trim()}\n`
 }
 
 function conversionLabel(file: string): string {
   if (file.endsWith('.html')) return 'converted'
-  if (file.endsWith('.vue')) return 'converted-vue'
   return 'copied'
+}
+
+function inferChapter(sourcePath: string): string | undefined {
+  const normalized = sourcePath.replace(/\\/g, '/')
+  const first = normalized.split('/')[0]
+  return first && !first.includes('.') ? first : undefined
+}
+
+function chapterTitleFromPath(source: string, sourcePath: string): string {
+  const chapter = inferChapter(sourcePath)
+  if (!chapter) return source === 'motor' ? '电机控制' : '电源控制'
+  const titles: Record<string, string> = {
+    advanced: '进阶专题',
+    algorithm: '控制算法',
+    communication: '通信与协议',
+    COMPARISON: '方案对比',
+    'control-theory': '控制理论',
+    'controllers-evolution': '控制器演进',
+    'cross-reference': '交叉索引',
+    'electronics-basics': '电力电子基础',
+    hardware: '硬件与驱动',
+    'learning-workspace': '学习工作区',
+    mechanical: '机械与编码器',
+    'motion-control': '运动控制',
+    ODrive: 'ODrive',
+    'pfc-motor-integration': 'PFC 与电机系统',
+    'power-path': '功率链路',
+    practice: '工程实践',
+    simulation: '仿真与调试',
+    VESC: 'VESC',
+    archive: '历史记录',
+    'debug-records': '调试记录',
+    docs: '文档',
+    fz: '辅助资料',
+    projects: '项目实践',
+    reference: '参考资料',
+    roadmap: '路线图',
+    simulations: '仿真结果',
+    'weekly-reviews': '周复盘'
+  }
+  return titles[chapter] || chapter.replace(/[-_]+/g, ' ')
 }

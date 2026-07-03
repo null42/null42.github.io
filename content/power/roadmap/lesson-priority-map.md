@@ -1,6 +1,6 @@
 ---
 date: 2026-06-22
-category: 电源控制
+category: 路线图
 source: power
 visibility: public
 title: New Module Priority Map
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: The old HTML lesson numbers are not the learning path. This map defines the new modules.
+section: 电源控制
+chapter: roadmap
+chapterTitle: 路线图
+chapterOrder: 10
 ---
 
 # New Module Priority Map

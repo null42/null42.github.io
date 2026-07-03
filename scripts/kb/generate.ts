@@ -66,15 +66,46 @@ export function buildSidebar(articles: ArticleRecord[]): string {
 }
 
 function buildSection(text: string, articles: ArticleRecord[]) {
+  const withGroups = articles.filter((article) => article.navGroup)
+  const withoutGroups = articles.filter((article) => !article.navGroup)
+
+  if (withGroups.length > 0) {
+    const byGroup = new Map<string, ArticleRecord[]>()
+    for (const article of withGroups) {
+      const key = article.navGroup || '未分组'
+      const list = byGroup.get(key) || []
+      list.push(article)
+      byGroup.set(key, list)
+    }
+
+    const groups = [...byGroup.entries()]
+      .sort(([, aItems], [, bItems]) => compareNavGroup(aItems, bItems))
+      .map(([groupText, groupItems]) => ({
+        text: groupText,
+        collapsed: true,
+        items: buildChapterItems(groupItems)
+      }))
+
+    return {
+      text,
+      collapsed: true,
+      items: [...sortArticles(withoutGroups).map(articleLink), ...groups]
+    }
+  }
+
+  return {
+    text,
+    collapsed: true,
+    items: buildChapterItems(articles)
+  }
+}
+
+function buildChapterItems(articles: ArticleRecord[]) {
   const withChapter = articles.filter((article) => article.chapter || article.chapterTitle)
   const withoutChapter = articles.filter((article) => !article.chapter && !article.chapterTitle)
 
   if (withChapter.length === 0) {
-    return {
-      text,
-      collapsed: true,
-      items: sortArticles(withoutChapter).map(articleLink)
-    }
+    return sortArticles(withoutChapter).map(articleLink)
   }
 
   const byChapter = new Map<string, ArticleRecord[]>()
@@ -93,11 +124,13 @@ function buildSection(text: string, articles: ArticleRecord[]) {
       items: sortArticles(chapterItems).map(articleLink)
     }))
 
-  return {
-    text,
-    collapsed: true,
-    items: [...chapters, ...sortArticles(withoutChapter).map(articleLink)]
-  }
+  return [...sortArticles(withoutChapter).map(articleLink), ...chapters]
+}
+
+function compareNavGroup(aItems: ArticleRecord[], bItems: ArticleRecord[]): number {
+  const a = aItems[0]
+  const b = bItems[0]
+  return compareNumbers(a.navGroupOrder, b.navGroupOrder) || String(a.navGroup).localeCompare(String(b.navGroup))
 }
 
 function compareChapter(aItems: ArticleRecord[], bItems: ArticleRecord[]): number {

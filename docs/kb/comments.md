@@ -18,3 +18,6 @@ Comment rules:
 - Public articles can opt in with `comments: true`.
 - Articles with `comments: false` do not show comments.
 - Encrypted pages do not show comments by default.
+- Before Giscus is configured, article pages show a GitHub Issue feedback link.
+  The link pre-fills the article path, so it can still be used as a lightweight
+ 留言入口 for recording corrections and follow-up work.

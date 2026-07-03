@@ -1,6 +1,6 @@
 ---
 date: 2026-06-21
-category: 电源控制
+category: 路线图
 source: power
 visibility: public
 title: UPS 持续提高路线（Continuous Learning Path）
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: 这份路线用于承接 `roadmap/30-day-plan.md` 之后的长期训练。30 天计划只负责打基础，不代表课程到第 30 天结束。后续仍然按“一个概念讲清楚 + 一个仿真任务 + 复盘问题 + 导师问题”的节奏推进。
+section: 电源控制
+chapter: roadmap
+chapterTitle: 路线图
+chapterOrder: 10
 ---
 
 # UPS 持续提高路线（Continuous Learning Path）

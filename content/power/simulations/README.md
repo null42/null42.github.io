@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 仿真结果
 source: power
 visibility: public
 title: Simulations
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: Simulations are used to make concepts visible.
+section: 电源控制
+chapter: simulations
+chapterTitle: 仿真结果
+chapterOrder: 50
 ---
 
 # Simulations

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "status": "pending_user_test",
+  "hardware_verified_release": false,
+  "reason": "The original project does not include calibrated hardware trace data. The repository ships reviewed knowledge, simulation, tooling, and a reference synthetic dataset; users must collect hardware traces on their own bench before promoting modules to verified.",
+  "deferred_release_items": [
+    "verified_hardware_dataset",
+    "verified_proof_promotion"
+  ],
+  "measurement_guide": "motor-control-knowledge-base/hardware-user-test-protocol.md",
+  "legacy_validation_guide": "motor-control-knowledge-base/hardware-validation-guide.md",
+  "dataset_template": "motor-control-knowledge-base/datasets/HARDWARE-TEMPLATE.md",
+  "required_commands": [
+    "python scripts\\scaffold-hardware-dataset.py --experiment-id ALG03-current-step-hw-001 --doc-id algorithm/ALG-03-PI-Current-Regulator --platform \"LV PMSM bench\"",
+    "python scripts\\convert-raw-trace.py --input <raw.csv> --mapping <trace-mapping.json> --output <dataset>\\lxfoc_trace.csv",
+    "python scripts\\generate-dataset-reports.py --dataset <dataset>",
+    "python scripts\\check-datasets.py",
+    "python scripts\\attach-verified-dataset-to-proof.py --proof <module-proof.yaml> --dataset <dataset-id> --promote",
+    "python scripts\\check-verified-evidence.py"
+  ]
+}

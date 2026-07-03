@@ -44,7 +44,7 @@ export async function inspectSourceRoot(root: string): Promise<SourceInspectionR
 export async function inspectConfiguredSources(): Promise<SourceInspectionReport[]> {
   const roots = [
     'E:\\gitee_CodeStorage\\学习\\电源',
-    'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-learning-web'
+    'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-control-knowledge-base'
   ]
   const reports: SourceInspectionReport[] = []
   for (const root of roots) {

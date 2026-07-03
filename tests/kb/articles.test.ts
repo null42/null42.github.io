@@ -89,6 +89,33 @@ describe('article scanning', () => {
     expect(result.warnings.some((warning) => warning.includes('visibility is encrypted'))).toBe(true)
   })
 
+  it('replaces imported summaries with Chinese pending summaries and quality metadata', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-imported-summary-'))
+    const content = path.join(root, 'content')
+    await fs.mkdir(path.join(content, 'motor'), { recursive: true })
+    await fs.writeFile(
+      path.join(content, 'motor', 'note.md'),
+      [
+        '---',
+        'title: Current Loop',
+        'source: motor',
+        'sourcePath: control/current-loop.md',
+        'summary: Imported from control/current-loop.md',
+        '---',
+        '',
+        '# Current Loop',
+        '',
+        'Body.'
+      ].join('\n')
+    )
+
+    const result = await scanArticles({ contentRoot: content })
+
+    expect(result.articles[0].summary).not.toContain('Imported from')
+    expect(result.articles[0].summary).toContain('待整理')
+    expect(result.articles[0].quality).toBe('needsRewrite')
+  })
+
   it('skips local templates and internal planning docs during public scanning', async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-scan-excluded-'))
     const content = path.join(root, 'content')

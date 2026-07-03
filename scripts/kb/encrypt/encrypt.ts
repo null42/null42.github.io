@@ -1,6 +1,7 @@
 import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { serializeMarkdown } from '../frontmatter'
 
@@ -19,6 +20,7 @@ export interface RenderEncryptedArticleOptions {
   payloadFile: string
   payload: EncryptedPayload
   date: string
+  passwordHint?: string
 }
 
 const iterations = 210_000
@@ -66,7 +68,7 @@ export function renderEncryptedArticle(options: RenderEncryptedArticleOptions): 
       comments: false,
       summary: '这是一篇加密文章，需要输入密码后阅读。'
     },
-    `<EncryptedArticle payload-url="/encrypted/${options.payloadFile}" />\n`
+    `${options.passwordHint ? `> ${options.passwordHint}\n\n` : ''}<EncryptedArticle payload-url="/content/encrypted/${options.payloadFile}" />\n`
   )
 }
 
@@ -83,11 +85,12 @@ export async function encryptPrivateDirectory(password: string, privateDir = 'co
     const parsed = matter(raw)
     const title = typeof parsed.data.title === 'string' ? parsed.data.title : slug.replace(/[-_]+/g, ' ')
     const date = normalizeDate(parsed.data.date) || new Date().toISOString().slice(0, 10)
+    const passwordHint = typeof parsed.data.passwordHint === 'string' ? parsed.data.passwordHint : undefined
     const payload = await encryptMarkdown(raw, password)
     const payloadFile = `${slug}.json`
 
     await fs.writeFile(path.join(outputDir, payloadFile), JSON.stringify(payload, null, 2), 'utf8')
-    await fs.writeFile(path.join(outputDir, `${slug}.md`), renderEncryptedArticle({ title, slug, payloadFile, payload, date }), 'utf8')
+    await fs.writeFile(path.join(outputDir, `${slug}.md`), renderEncryptedArticle({ title, slug, payloadFile, payload, date, passwordHint }), 'utf8')
     written.push(path.join(outputDir, `${slug}.md`), path.join(outputDir, payloadFile))
   }
 
@@ -100,11 +103,22 @@ function normalizeDate(value: unknown): string | undefined {
   return undefined
 }
 
-if (import.meta.url === `file://${process.argv[1]?.replace(/\\/g, '/')}`) {
+function isCliEntrypoint(): boolean {
+  return process.argv[1] ? path.resolve(process.argv[1]) === fileURLToPath(import.meta.url) : false
+}
+
+async function main(): Promise<void> {
   const password = process.env.KB_ENCRYPT_PASSWORD
   if (!password) {
     throw new Error('KB_ENCRYPT_PASSWORD is required')
   }
   const written = await encryptPrivateDirectory(password)
   console.log(`encrypted ${written.length} files`)
+}
+
+if (isCliEntrypoint()) {
+  main().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
 }

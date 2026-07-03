@@ -1,0 +1,28 @@
+---
+title: ODrive 源码分析
+date: 2026-07-02
+section: 电机控制
+chapter: learning-workspace
+chapterTitle: 学习工作区
+category: 学习工作区
+tags:
+  - imported
+source: motor
+sourcePath: learning-workspace/lessons/0006-odrive-analysis.html
+status: learning
+visibility: public
+summary: Imported from learning-workspace/lessons/0006-odrive-analysis.html
+chapterOrder: 5
+navGroup: 入门与索引
+navGroupOrder: 10
+---
+
+知识库门户
+ODrive 源码分析
+0%
+
+&#9889;
+
+# ODrive 源码分析
+
+深入剖析ODrive开源电机控制器的系统架构、FOC算法、控制策略与编码器/无感方案，4个模块系统掌握ODrive设计精髓。

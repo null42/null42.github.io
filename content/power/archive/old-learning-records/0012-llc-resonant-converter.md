@@ -1,6 +1,6 @@
 ---
 date: 2026-06-14
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0012：LLC谐振变换器原理与控制——UPS的DC-DC级"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-13 **课程**：第12课 — LLC谐振变换器（Phase 2核心拓扑） **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0012：LLC谐振变换器原理与控制——UPS的DC-DC级

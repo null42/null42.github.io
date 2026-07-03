@@ -45,6 +45,35 @@ describe('knowledge search', () => {
     expect(makeSnippet(records[0], 'SVPWM')).toContain('<mark>SVPWM</mark>')
   })
 
+  it('returns heading anchors and match reasons for body matches', () => {
+    const records = buildSearchIndex([
+      article({
+        title: 'FOC Notes',
+        body: '# FOC Notes\n\nIntro.\n\n## 电流环 PI 整定\n\n这里讨论电流环带宽和采样延迟。\n\n## 速度环\n\n速度外环。'
+      })
+    ])
+
+    const [result] = searchRecords(records, '电流环')
+
+    expect(result.url).toBe('/content/article.html#电流环-pi-整定')
+    expect(result.anchor).toBe('电流环-pi-整定')
+    expect(result.matchReason).toContain('章节')
+  })
+
+  it('uses the matching title heading as the anchor for title matches', () => {
+    const records = buildSearchIndex([
+      article({
+        title: '电流环 PI 参数整定计算器',
+        body: '# 电流环 PI 参数整定计算器\n\n参数计算正文。'
+      })
+    ])
+
+    const [result] = searchRecords(records, '电流环')
+
+    expect(result.url).toBe('/content/article.html#电流环-pi-参数整定计算器')
+    expect(result.anchor).toBe('电流环-pi-参数整定计算器')
+  })
+
   it('filters by section, chapter, tag, and month', () => {
     const records = buildSearchIndex([
       article({ title: 'Power ADC', section: 'Power', chapter: '01-Lessons', tags: ['ADC'], date: '2026-07-01' }),
@@ -81,15 +110,31 @@ describe('knowledge search', () => {
 
   it('allows a full personal knowledge base index by default', () => {
     const records = buildSearchIndex(
-      Array.from({ length: 260 }, (_, index) =>
+      Array.from({ length: 380 }, (_, index) =>
         article({
           title: `Knowledge ${index}`,
-          body: `Boost PFC SVPWM ${'content '.repeat(3600)}`
+          body: `Boost PFC SVPWM ${'content '.repeat(3600)} rare-tail-${index}`
         })
       )
     )
 
     expect(() => assertSearchIndexWithinBudget(records)).not.toThrow()
+    expect(searchRecords(records, 'rare-tail-88')[0].record.title).toBe('Knowledge 88')
+    expect(records[0].body.length).toBeLessThan(5000)
+  })
+
+  it('keeps imported summaries out of public search records and marks quality', () => {
+    const records = buildSearchIndex([
+      article({
+        title: 'Imported Power Note',
+        source: 'power',
+        sourcePath: 'roadmap/lesson.md',
+        summary: 'Imported from roadmap/lesson.md'
+      })
+    ])
+
+    expect(records[0].summary).not.toContain('Imported from')
+    expect(records[0].quality).toBe('needsRewrite')
   })
 })
 

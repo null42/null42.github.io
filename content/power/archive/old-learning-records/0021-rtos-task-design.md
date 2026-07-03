@@ -1,6 +1,6 @@
 ---
 date: 2026-06-14
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0021：RTOS任务设计与实时性保证——让每个任务准时执行"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-13 **课程**：第21课 — RTOS任务设计与实时性保证（Phase 4架构设计与对比） **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0021：RTOS任务设计与实时性保证——让每个任务准时执行

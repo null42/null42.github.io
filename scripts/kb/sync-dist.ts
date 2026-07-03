@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const root = process.cwd()
 const dist = path.join(root, '.vitepress', 'dist')
@@ -68,7 +69,11 @@ async function* walk(dir: string): AsyncGenerator<string> {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]?.replace(/\\/g, '/')}`) {
+export function isMainModule(metaUrl: string, argvPath = process.argv[1]): boolean {
+  return argvPath ? fileURLToPath(metaUrl) === path.resolve(argvPath) : false
+}
+
+if (isMainModule(import.meta.url)) {
   await syncDistToRoot()
   console.log('synced .vitepress/dist to repository root')
 }

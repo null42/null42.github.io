@@ -1,6 +1,6 @@
 ---
 date: 2026-06-14
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0023：面试实战——UPS电源软件开发高频面试题精讲"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-13 **课程**：第23课 — 面试实战（Phase 4架构设计与对比） **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0023：面试实战——UPS电源软件开发高频面试题精讲

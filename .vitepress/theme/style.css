@@ -33,9 +33,141 @@
   border-radius: 8px !important;
 }
 
+.kb-map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 18px 0 28px;
+}
+
+.kb-home-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 30px;
+}
+
+.kb-map-card {
+  display: grid;
+  gap: 8px;
+  min-height: 150px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--kb-surface);
+  color: inherit;
+  text-decoration: none;
+}
+
+.kb-map-card:hover {
+  border-color: var(--vp-c-brand-2);
+  background: var(--kb-surface-soft);
+}
+
+.kb-map-card strong {
+  color: var(--vp-c-text-1);
+  line-height: 1.35;
+}
+
+.kb-map-card span:last-child {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.kb-map-kicker {
+  color: var(--vp-c-brand-1);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kb-map-card-primary {
+  min-height: 180px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.08)), var(--kb-surface);
+}
+
+.kb-route-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 28px;
+}
+
+.kb-route-list a {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid var(--vp-c-brand-1);
+  padding: 10px 12px;
+  background: var(--kb-surface-soft);
+  color: inherit;
+  text-decoration: none;
+}
+
+.kb-route-list span {
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+
 .kb-archive {
   display: grid;
   gap: 18px;
+}
+
+.kb-search-page {
+  display: grid;
+  gap: 18px;
+}
+
+.kb-search-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.kb-search-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.kb-learning-paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.kb-path-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: var(--kb-surface);
+  color: var(--vp-c-text-2);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.kb-path-chip:hover,
+.kb-path-chip.active {
+  border-color: var(--vp-c-brand-2);
+  color: var(--vp-c-brand-1);
+  background: var(--kb-surface-soft);
+}
+
+.kb-path-chip span {
+  color: var(--vp-c-text-2);
+}
+
+.kb-path-chip strong {
+  border-radius: 999px;
+  padding: 1px 6px;
+  background: var(--kb-tag-bg);
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .kb-filterbar {
@@ -48,8 +180,24 @@
   grid-template-columns: minmax(240px, 1fr) repeat(4, minmax(116px, 150px));
 }
 
+.kb-filterbar-search {
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+}
+
 .kb-filterbar-archive {
   grid-template-columns: minmax(220px, 1fr) repeat(6, minmax(104px, 140px));
+}
+
+.kb-filter-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.kb-filter-label {
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  line-height: 1.2;
 }
 
 .kb-search-input,
@@ -116,6 +264,32 @@
   font-size: 12px;
 }
 
+.kb-match-reason {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: var(--vp-c-green-soft);
+  color: var(--vp-c-green-1);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.vp-doc div[class*="language-"] {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.vp-doc div[class*="language-"] pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.vp-doc table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .kb-mermaid {
   margin: 24px 0;
   overflow-x: auto;
@@ -171,9 +345,31 @@
   padding-top: 24px;
 }
 
+.kb-comments-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
 .kb-comments-note {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
   font-size: 14px;
+}
+
+.kb-comments-note p {
+  margin: 0;
+}
+
+.kb-comments-note a {
+  width: fit-content;
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
 }
 
 .kb-encrypted {
@@ -200,6 +396,32 @@
 }
 
 @media (max-width: 720px) {
+  .VPDoc .container,
+  .vp-doc {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .kb-learning-paths {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .kb-home-map {
+    grid-template-columns: 1fr;
+  }
+
+  .kb-search-map {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .kb-path-chip {
+    justify-content: space-between;
+    border-radius: 8px;
+    white-space: normal;
+  }
+
   .kb-filterbar {
     grid-template-columns: 1fr;
   }

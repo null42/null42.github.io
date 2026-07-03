@@ -1,6 +1,6 @@
 ---
 date: 2026-06-15
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0026：三电平P/O/N工作状态判别"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-15 **课程**：第30课 — 三电平P/O/N工作状态判别（Phase 2核心概念深化） **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0026：三电平P/O/N工作状态判别

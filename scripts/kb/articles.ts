@@ -4,6 +4,7 @@ import fg from 'fast-glob'
 import { loadInheritedCategoryDefaults } from './category'
 import { nonPublicContentPatterns, shouldExcludeContentPath } from './content-exclusions'
 import { completeArticleData, normalizeDate, parseMarkdown, serializeMarkdown } from './frontmatter'
+import { inferPathDefaults } from './path-defaults'
 import { contentRoot as defaultContentRoot, stripMarkdownExtension, toPosixPath } from './paths'
 import type { ArticleFrontmatter, ArticleRecord } from './types'
 
@@ -28,6 +29,7 @@ export interface MarkdownFileRecord {
 
 export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<MarkdownFileRecord[]> {
   const root = options.contentRoot || defaultContentRoot
+  const shouldInferPathDefaults = path.resolve(root) === path.resolve(defaultContentRoot)
   const files = await fg('**/*.md', {
     cwd: root,
     absolute: true,
@@ -41,7 +43,15 @@ export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<Mark
     const parsed = parseMarkdown(raw)
     const stats = await fs.stat(absolutePath)
     const modifiedDate = stats.mtime.toISOString().slice(0, 10)
-    const defaults = await loadInheritedCategoryDefaults(absolutePath, root)
+    const directoryDefaults = await loadInheritedCategoryDefaults(absolutePath, root)
+    const pathDefaults = shouldInferPathDefaults ? inferPathDefaults(relativePath) : {}
+    const defaults = {
+      ...directoryDefaults,
+      ...pathDefaults,
+      defaultTags: directoryDefaults.defaultTags || pathDefaults.defaultTags,
+      tags: directoryDefaults.tags || pathDefaults.tags,
+      visibility: directoryDefaults.visibility || pathDefaults.visibility
+    }
     const completed = completeArticleData(parsed.data, defaults, {
       body: parsed.body,
       relativePath,
@@ -93,6 +103,8 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       chapter: optionalString(record.completed.chapter),
       chapterTitle: optionalString(record.completed.chapterTitle),
       chapterOrder: optionalNumber(record.completed.chapterOrder),
+      navGroup: optionalString(record.completed.navGroup),
+      navGroupOrder: optionalNumber(record.completed.navGroupOrder),
       order: optionalNumber(record.completed.order),
       category: String(record.completed.category || '未分类'),
       tags: Array.isArray(record.completed.tags) ? record.completed.tags.map(String) : [],
@@ -103,7 +115,8 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
       suggestedTags: Array.isArray(record.completed.suggestedTags) ? record.completed.suggestedTags.map(String) : undefined,
       status: String(record.completed.status || 'learning'),
       visibility: String(record.completed.visibility || 'public'),
-      summary: String(record.completed.summary || record.completed.title),
+      quality: inferArticleQuality(record.completed),
+      summary: normalizePublicSummary(record.completed),
       path: record.relativePath,
       url,
       body: record.body
@@ -165,6 +178,8 @@ function pickMissing(existing: ArticleFrontmatter, completed: ArticleFrontmatter
     'chapter',
     'chapterTitle',
     'chapterOrder',
+    'navGroup',
+    'navGroupOrder',
     'category',
     'tags',
     'source',
@@ -174,6 +189,7 @@ function pickMissing(existing: ArticleFrontmatter, completed: ArticleFrontmatter
     'suggestedTags',
     'status',
     'visibility',
+    'quality',
     'summary',
     'comments'
   ])
@@ -191,4 +207,32 @@ function validateArticle(relativePath: string, article: ArticleFrontmatter): str
   if (!article.summary) warnings.push(`${relativePath}: missing summary`)
   if (!article.category || article.category === '未分类') warnings.push(`${relativePath}: categorized as 未分类`)
   return warnings
+}
+
+function normalizePublicSummary(article: ArticleFrontmatter): string {
+  const summary = String(article.summary || '').trim()
+  if (isImportedSummary(summary)) {
+    const title = String(article.title || '这篇文章').trim()
+    return `整理自「${title}」的知识库文章，待整理为个人总结。`
+  }
+  return summary || String(article.title || '').trim()
+}
+
+function inferArticleQuality(article: ArticleFrontmatter): string {
+  const explicit = optionalString(article.quality)
+  if (explicit) return explicit
+
+  const summary = String(article.summary || '')
+  const status = String(article.status || '').toLowerCase()
+  const source = String(article.source || '').toLowerCase()
+  const tags = Array.isArray(article.tags) ? article.tags.map((tag) => String(tag).toLowerCase()) : []
+
+  if (isImportedSummary(summary)) return 'needsRewrite'
+  if (status === 'draft') return 'draft'
+  if (tags.includes('imported') || article.sourcePath || (source && source !== 'manual')) return 'imported'
+  return 'curated'
+}
+
+function isImportedSummary(summary: string): boolean {
+  return /^Imported from\b/i.test(summary.trim())
 }

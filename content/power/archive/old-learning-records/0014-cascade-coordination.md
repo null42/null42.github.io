@@ -1,6 +1,6 @@
 ---
 date: 2026-06-14
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: "学习记录 #0014：多级联调——PFC+DC-DC+逆变器协同"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: "**日期**：2026-06-13 **课程**：第14课 — 多级联调（Phase 2核心拓扑·最后一课） **状态**：进行中"
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # 学习记录 #0014：多级联调——PFC+DC-DC+逆变器协同

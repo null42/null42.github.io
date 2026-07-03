@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "npm run kb:generate && vitepress dev .",
-    "build": "npm run kb:check && npm run kb:generate && vitepress build .",
+    "build": "npm run kb:check && npm run kb:generate && npm run kb:clean && vitepress build .",
     "preview": "vitepress preview .",
     "test": "vitest run",
     "kb:check": "tsx scripts/kb/check.ts",
+    "kb:clean": "tsx scripts/kb/clean-dist.ts",
     "kb:inspect": "tsx scripts/kb/import/inspect-source.ts",
     "kb:analyze": "tsx scripts/kb/metadata/suggest-tags.ts",
     "kb:fix": "tsx scripts/kb/fix.ts",
@@ -21,6 +22,11 @@
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",
+    "@noble/ciphers": "^2.2.0",
+    "@noble/hashes": "^2.2.0",
+    "katex": "^0.17.0",
+    "markdown-it-katex": "^2.0.3",
+    "mermaid": "^11.4.1",
     "vitepress": "^1.6.0",
     "vue": "^3.5.0"
   },

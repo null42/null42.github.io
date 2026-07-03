@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 周复盘
 source: power
 visibility: public
 title: "Week 01 Day 01: Boost Converter First Pass"
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: Boost converter.
+section: 电源控制
+chapter: weekly-reviews
+chapterTitle: 周复盘
+chapterOrder: 60
 ---
 
 # Week 01 Day 01: Boost Converter First Pass

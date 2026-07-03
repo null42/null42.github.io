@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 历史记录
 source: power
 visibility: public
 title: Archive
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: This directory contains the previous interview-oriented generated course material.
+section: 电源控制
+chapter: archive
+chapterTitle: 历史记录
+chapterOrder: 20
 ---
 
 # Archive

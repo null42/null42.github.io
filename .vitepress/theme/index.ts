@@ -6,6 +6,7 @@ import EncryptedArticle from './components/EncryptedArticle.vue'
 import MermaidDiagram from './components/MermaidDiagram.vue'
 import SearchPage from './components/SearchPage.vue'
 import SvgFigure from './components/SvgFigure.vue'
+import 'katex/dist/katex.min.css'
 import './style.css'
 
 export default {

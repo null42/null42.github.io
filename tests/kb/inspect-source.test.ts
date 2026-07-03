@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { inspectSourceRoot } from '../../scripts/kb/import/inspect-source'
+import { inspectConfiguredSources, inspectSourceRoot } from '../../scripts/kb/import/inspect-source'
 
 describe('source inspection', () => {
   it('counts source files by extension while ignoring build and dependency folders', async () => {
@@ -21,5 +21,13 @@ describe('source inspection', () => {
 
     expect(report.totalFiles).toBe(4)
     expect(report.byExtension).toEqual({ '.html': 1, '.md': 1, '.svg': 1, '.vue': 1 })
+  })
+
+  it('inspects the real motor knowledge base instead of the old web simulation source', async () => {
+    const reports = await inspectConfiguredSources()
+    const roots = reports.map((report) => report.root)
+
+    expect(roots.some((root) => root.includes('motor-control-knowledge-base'))).toBe(true)
+    expect(roots.some((root) => root.includes('motor-learning-web'))).toBe(false)
   })
 })

@@ -8,6 +8,7 @@ tags:
   - power-electronics
 status: learning
 summary: "- 由简到繁：先后备式再在线式 - 硬软结合：每个拓扑先理解硬件原理再写控制代码 - 任务驱动：每课一个可验证的技能点 - 面试导向：关键知识点对标面试高频问题"
+section: 电源控制
 ---
 
 # UPS电源软件开发 — 课程体系大纲

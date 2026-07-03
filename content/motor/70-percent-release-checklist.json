@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0.0",
+  "release_target": "70-percent",
+  "items": [
+    {
+      "id": "proof_gate",
+      "title": "Proof records are valid",
+      "category": "knowledge_correctness",
+      "required": true,
+      "source_gate": "proof_gate",
+      "metric": "valid",
+      "operator": "equals",
+      "expected": true,
+      "acceptance": "All module-proof records pass schema and semantic checks."
+    },
+    {
+      "id": "core_control_proofs",
+      "title": "Core motor-control proofs exist",
+      "category": "knowledge_correctness",
+      "required": true,
+      "source_gate": "proof_gate",
+      "metric": "module_ids",
+      "operator": "contains_all",
+      "expected": [
+        "algorithm/ALG-01-FOC-Theory",
+        "algorithm/ALG-02-Current-Sampling-Timing",
+        "algorithm/ALG-03-PI-Current-Regulator",
+        "algorithm/ALG-04-Deadtime-Compensation",
+        "algorithm/ALG-17-VF-Control"
+      ],
+      "acceptance": "ALG-01 to ALG-04 and ALG-17 are covered by traceable proof records."
+    },
+    {
+      "id": "power_module_proofs",
+      "title": "Immediate power-electronics modules exist",
+      "category": "power_electronics",
+      "required": true,
+      "source_gate": "proof_gate",
+      "metric": "module_ids",
+      "operator": "contains_all",
+      "expected": [
+        "power-path/PP-03-LLC-Resonant-Converter",
+        "power-path/PP-08-Three-Level-Topology",
+        "power-path/PP-09-Three-Level-SVPWM",
+        "power-path/PP-10-Vienna-Rectifier",
+        "power-path/PP-11-Boost-PFC-Bus-Dynamics",
+        "advanced/system-methodology/SYS-07-Power-Control-Closed-Loop"
+      ],
+      "acceptance": "LLC deepening, three-level topology/SVPWM, Vienna, Boost PFC bus dynamics, and system design are in the proof chain."
+    },
+    {
+      "id": "schema_gate",
+      "title": "Workflow schemas are valid",
+      "category": "closed_loop_interface",
+      "required": true,
+      "source_gate": "schema_gate",
+      "metric": "valid",
+      "operator": "equals",
+      "expected": true,
+      "acceptance": "Config, trace, and proof schemas are parseable and repository examples conform."
+    },
+    {
+      "id": "workflow_export_import",
+      "title": "Knowledge-to-lxfoc export and trace import are executable",
+      "category": "closed_loop_interface",
+      "required": true,
+      "source_gate": "workflow_capabilities",
+      "metric": "available",
+      "operator": "contains_all",
+      "expected": [
+        "config_export_package",
+        "trace_analysis",
+        "report_metrics"
+      ],
+      "acceptance": "The backend can generate json/h/c/manifest/README and analyze standard trace metrics."
+    },
+    {
+      "id": "dataset_gate",
+      "title": "Datasets are reproducible",
+      "category": "feedback_loop",
+      "required": true,
+      "source_gate": "dataset_gate",
+      "metric": "valid",
+      "operator": "equals",
+      "expected": true,
+      "acceptance": "Archived trace reports can be recomputed and match stored reports."
+    },
+    {
+      "id": "simulation_hardware_comparison",
+      "title": "Simulation-to-measurement comparison is archived",
+      "category": "feedback_loop",
+      "required": true,
+      "source_gate": "dataset_gate",
+      "metric": "comparison_count",
+      "operator": "greater_equal",
+      "expected": 1,
+      "acceptance": "At least one dataset includes simulation_trace.csv and a recomputable comparison_report.json."
+    },
+    {
+      "id": "verified_hardware_dataset",
+      "title": "At least one verified low-voltage PMSM hardware dataset exists",
+      "category": "feedback_loop",
+      "required": true,
+      "source_gate": "dataset_gate",
+      "metric": "verified_count",
+      "operator": "greater_equal",
+      "expected": 1,
+      "acceptance": "A calibrated hardware trace is marked verified and passes dataset validation."
+    },
+    {
+      "id": "verified_proof_promotion",
+      "title": "At least one proof can be promoted to verified",
+      "category": "feedback_loop",
+      "required": true,
+      "source_gate": "verified_evidence_gate",
+      "metric": "promotable_count",
+      "operator": "greater_equal",
+      "expected": 1,
+      "acceptance": "A reviewed proof references verified hardware evidence with raw capture, calibration, report, and comparison artifacts."
+    },
+    {
+      "id": "benchmark_gate",
+      "title": "lxfoc benchmark matrix is valid",
+      "category": "algorithm_validation",
+      "required": true,
+      "source_gate": "benchmark_gate",
+      "metric": "valid",
+      "operator": "equals",
+      "expected": true,
+      "acceptance": "Each benchmark record references existing lxfoc modules and valid trace fields."
+    },
+    {
+      "id": "p0_benchmark_coverage",
+      "title": "P0 algorithms are at least partially benchmarked",
+      "category": "algorithm_validation",
+      "required": true,
+      "source_gate": "benchmark_gate",
+      "metric": "p0_without_selftest",
+      "operator": "equals",
+      "expected": 0,
+      "acceptance": "Every P0 algorithm has covered or partial selftest/bench evidence."
+    },
+    {
+      "id": "release_report",
+      "title": "Release report is generated",
+      "category": "maintenance",
+      "required": true,
+      "source_gate": "release_artifacts",
+      "metric": "available",
+      "operator": "contains_all",
+      "expected": [
+        "70-percent-release-report.md",
+        "70-percent-release-report.json"
+      ],
+      "acceptance": "Human-readable and machine-readable release reports are present."
+    },
+    {
+      "id": "ecosystem_docs",
+      "title": "Contribution and verification docs exist",
+      "category": "maintenance",
+      "required": true,
+      "source_gate": "release_artifacts",
+      "metric": "available",
+      "operator": "contains_all",
+      "expected": [
+        "CONTRIBUTING.md",
+        "verification-checklist.md",
+        "hardware-validation-guide.md",
+        "hardware-user-test-protocol.md",
+        "hardware-evidence-status.json",
+        "workflow-closed-loop.md",
+        "30-percent-roadmap.md"
+      ],
+      "acceptance": "Long-term contribution, correctness review, hardware validation, pending user hardware-test marker, closed-loop workflow, and 30% roadmap docs are present."
+    }
+  ]
+}

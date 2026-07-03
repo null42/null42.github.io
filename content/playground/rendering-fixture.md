@@ -43,6 +43,24 @@ flowchart LR
   B --> C[GitHub Pages]
 ```
 
+## Math
+
+Inline math: $i_d = 0$.
+
+$$
+u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e \psi_f
+$$
+
+\[
+T_e = \frac{3}{2} p \psi_f i_q
+\]
+
+## Unknown Fence
+
+```unknown-diagram
+current-loop -> speed-loop -> position-loop
+```
+
 ## SVG
 
 ![控制延迟示意](/control-delay-timing.svg)

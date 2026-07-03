@@ -1,6 +1,6 @@
 ---
 date: 2026-06-20
-category: 电源控制
+category: 路线图
 source: power
 visibility: public
 title: UPS 30 天训练计划（30-Day Training Plan）
@@ -8,6 +8,10 @@ tags:
   - power-electronics
 status: learning
 summary: 每天至少产出下面四类内容中的一种，不能只“看资料”：
+section: 电源控制
+chapter: roadmap
+chapterTitle: 路线图
+chapterOrder: 10
 ---
 
 # UPS 30 天训练计划（30-Day Training Plan）
