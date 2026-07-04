@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { isImageAsset, toMarkdownImage } from '../../scripts/kb/import/assets'
+import { normalizeMathDelimiters } from '../../scripts/kb/markdown-rendering'
 
 describe('rendering fixture', () => {
   it('contains markdown, mermaid, svg, table, callout, and code examples', () => {
@@ -30,6 +31,21 @@ describe('rendering fixture', () => {
     expect(config).toContain('MermaidDiagram')
   })
 
+  it('wraps markdown tables without turning the table element into a scroll box', () => {
+    const config = fs.readFileSync('.vitepress/config.ts', 'utf8')
+
+    expect(config).toContain('kb-table-scroll')
+    expect(config).toContain('table_open')
+    expect(config).toContain('table_close')
+  })
+
+  it('normalizes imported Mermaid state aliases before rendering', () => {
+    const mermaidComponent = fs.readFileSync('.vitepress/theme/components/MermaidDiagram.vue', 'utf8')
+
+    expect(mermaidComponent).toContain('normalizeMermaidSource')
+    expect(mermaidComponent).toContain('state "$3" as $2')
+  })
+
   it('loads math and mermaid from local packages', () => {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
     const config = fs.readFileSync('.vitepress/config.ts', 'utf8')
@@ -43,6 +59,34 @@ describe('rendering fixture', () => {
     expect(theme).toContain('katex/dist/katex.min.css')
     expect(mermaidComponent).toContain("import('mermaid')")
     expect(mermaidComponent).not.toContain('cdn.jsdelivr.net')
+  })
+
+  it('normalizes bracket math delimiters without changing fenced code', () => {
+    const markdown = [
+      'Inline: \\(i_q = 1\\).',
+      '',
+      '\\[',
+      'T_e = k_t i_q',
+      '\\]',
+      '',
+      '```text',
+      '\\(keep as code\\)',
+      '\\[keep as code\\]',
+      '```'
+    ].join('\n')
+
+    expect(normalizeMathDelimiters(markdown)).toBe([
+      'Inline: $i_q = 1$.',
+      '',
+      '$$',
+      'T_e = k_t i_q',
+      '$$',
+      '',
+      '```text',
+      '\\(keep as code\\)',
+      '\\[keep as code\\]',
+      '```'
+    ].join('\n'))
   })
 
   it('normalizes unknown fence languages to text before highlighting', () => {

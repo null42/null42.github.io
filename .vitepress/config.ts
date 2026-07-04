@@ -3,6 +3,7 @@ import markdownItKatex from 'markdown-it-katex'
 import { generatedSidebar } from './generated/sidebar'
 import { nonPublicContentPatterns } from '../scripts/kb/content-exclusions'
 import { copyEncryptedPayloadsToDist } from '../scripts/kb/encrypt/publish-payloads'
+import { normalizeMathDelimiters } from '../scripts/kb/markdown-rendering'
 
 const knownFenceLanguages = new Set([
   'bash',
@@ -62,10 +63,19 @@ export default defineConfig({
   lastUpdated: true,
   markdown: {
     config(md) {
+      md.core.ruler.before('normalize', 'kb_math_delimiters', (state) => {
+        state.src = normalizeMathDelimiters(state.src)
+      })
       md.use(markdownItKatex, {
         throwOnError: false,
         strict: false
       })
+      md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
+        return `<div class="kb-table-scroll">${self.renderToken(tokens, idx, options)}`
+      }
+      md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
+        return `${self.renderToken(tokens, idx, options)}</div>`
+      }
       const defaultFence = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens, idx, options, env, self) => {
         const token = tokens[idx]

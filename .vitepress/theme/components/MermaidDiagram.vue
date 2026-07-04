@@ -8,7 +8,8 @@ const props = defineProps<{
 
 const rendered = ref('')
 const error = ref('')
-const source = computed(() => decodeURIComponent(props.code))
+const rawSource = computed(() => decodeURIComponent(props.code))
+const source = computed(() => normalizeMermaidSource(rawSource.value))
 const elementId = `mermaid-${Math.random().toString(36).slice(2)}`
 
 async function loadMermaid() {
@@ -35,6 +36,10 @@ async function renderDiagram() {
   }
 }
 
+function normalizeMermaidSource(value: string): string {
+  return value.replace(/^(\s*)state\s+([A-Za-z_][\w-]*)\s+as\s+"([^"\n]+)"\s*$/gm, '$1state "$3" as $2')
+}
+
 onMounted(renderDiagram)
 watch(source, renderDiagram)
 </script>
@@ -43,6 +48,6 @@ watch(source, renderDiagram)
   <figure class="kb-mermaid">
     <div v-if="rendered" class="kb-mermaid-svg" v-html="rendered" />
     <pre v-else-if="error" class="kb-mermaid-error"><code>{{ error }}</code></pre>
-    <pre v-else class="kb-mermaid-loading"><code>{{ source }}</code></pre>
+    <pre v-else class="kb-mermaid-loading"><code>{{ rawSource }}</code></pre>
   </figure>
 </template>

@@ -284,10 +284,32 @@
   overflow-x: auto;
 }
 
+.vp-doc .kb-table-scroll {
+  max-width: 100%;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
 .vp-doc table {
-  display: block;
+  display: table;
+}
+
+.vp-doc .kb-table-scroll table {
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.vp-doc .katex-display {
   max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+.vp-doc .katex-display > .katex {
+  max-width: 100%;
 }
 
 .kb-mermaid {
@@ -396,10 +418,8 @@
 }
 
 @media (max-width: 720px) {
-  .VPDoc .container,
-  .vp-doc {
+  .VPDoc .container {
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   .kb-learning-paths {
