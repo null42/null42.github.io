@@ -20,5 +20,7 @@ describe('search page experience', () => {
 
     expect(text).toContain("new URLSearchParams(window.location.search).get('q')")
     expect(text).toContain('onMounted')
+    expect(text.indexOf("new URLSearchParams(window.location.search).get('q')")).toBeLessThan(text.indexOf("import('../../generated/search-index.json')"))
+    expect(text).toContain('loading')
   })
 })

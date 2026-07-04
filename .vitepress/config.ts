@@ -101,9 +101,6 @@ export default defineConfig({
       level: [2, 3],
       label: '目录'
     },
-    search: {
-      provider: 'local'
-    },
     socialLinks: [{ icon: 'github', link: 'https://github.com/null42' }],
     footer: {
       message: 'Powered by VitePress. Written offline, published with care.',

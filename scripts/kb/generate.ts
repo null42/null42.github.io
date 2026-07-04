@@ -22,7 +22,7 @@ export async function generateIndexes(): Promise<void> {
   const searchIndex = buildSearchIndex(articles)
   assertSearchIndexWithinBudget(searchIndex)
 
-  await fs.writeFile(path.join(generatedRoot, 'articles.json'), JSON.stringify(articles, null, 2), 'utf8')
+  await fs.writeFile(path.join(generatedRoot, 'articles.json'), JSON.stringify(articles.map(toPublicArticleRecord), null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'categories.json'), JSON.stringify(categories, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'tags.json'), JSON.stringify(tags, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'archive.json'), JSON.stringify(archive, null, 2), 'utf8')
@@ -152,6 +152,11 @@ function compareNumbers(a: number | undefined, b: number | undefined): number {
 
 function articleLink(article: ArticleRecord): { text: string; link: string } {
   return { text: article.title, link: article.url }
+}
+
+function toPublicArticleRecord(article: ArticleRecord): Omit<ArticleRecord, 'body'> {
+  const { body: _body, ...publicRecord } = article
+  return publicRecord
 }
 
 function isMainModule(): boolean {

@@ -79,6 +79,21 @@ describe('rendering fixture', () => {
     expect(mermaidComponent).not.toContain('cdn.jsdelivr.net')
   })
 
+  it('keeps published client chunks small enough for reliable GitHub Pages serving', () => {
+    const chunkDir = 'assets/chunks'
+    const chunkLimit = 8 * 1024 * 1024
+    const chunks = fs.readdirSync(chunkDir)
+      .filter((name) => name.endsWith('.js'))
+      .map((name) => ({
+        name,
+        size: fs.statSync(`${chunkDir}/${name}`).size
+      }))
+
+    const oversized = chunks.filter((chunk) => chunk.size > chunkLimit)
+
+    expect(oversized).toEqual([])
+  })
+
   it('renders math with the project KaTeX version used by the loaded CSS', () => {
     const inline = renderMathToHtml('T_{open}(s)=C(s)G(s)', false)
     const display = renderMathToHtml('\\frac{C(s)G(s)}{1+C(s)G(s)}', true)

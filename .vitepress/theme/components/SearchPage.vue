@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import searchIndex from '../../generated/search-index.json'
 import { searchRecords, type SearchRecord } from '../../../scripts/kb/search/build-index'
 
 const ALL = '全部'
@@ -10,22 +9,28 @@ const section = ref(ALL)
 const navGroup = ref(ALL)
 const chapter = ref(ALL)
 const tag = ref(ALL)
+const loading = ref(true)
 
-const records = searchIndex as SearchRecord[]
+const records = ref<SearchRecord[]>([])
 
-onMounted(() => {
+onMounted(async () => {
   const initialQuery = new URLSearchParams(window.location.search).get('q')
   if (initialQuery) {
     query.value = initialQuery
   }
+  try {
+    records.value = (await import('../../generated/search-index.json')).default as SearchRecord[]
+  } finally {
+    loading.value = false
+  }
 })
 
-const sections = computed(() => [ALL, ...Array.from(new Set(records.map((record) => record.section || record.category))).sort()])
+const sections = computed(() => [ALL, ...Array.from(new Set(records.value.map((record) => record.section || record.category))).sort()])
 const navGroups = computed(() => [
   ALL,
   ...Array.from(
     new Set(
-      records
+      records.value
         .filter((record) => section.value === ALL || record.section === section.value || record.category === section.value)
         .map((record) => record.navGroup)
         .filter(Boolean)
@@ -36,7 +41,7 @@ const chapters = computed(() => [
   ALL,
   ...Array.from(
     new Set(
-      records
+      records.value
         .filter((record) => section.value === ALL || record.section === section.value || record.category === section.value)
         .filter((record) => navGroup.value === ALL || record.navGroup === navGroup.value)
         .map((record) => record.chapterTitle || record.chapter)
@@ -44,11 +49,11 @@ const chapters = computed(() => [
     )
   ).sort()
 ])
-const tags = computed(() => [ALL, ...Array.from(new Set(records.flatMap((record) => record.tags))).sort()])
+const tags = computed(() => [ALL, ...Array.from(new Set(records.value.flatMap((record) => record.tags))).sort()])
 
 const learningPaths = computed(() => {
   const groups = new Map<string, { section: string; navGroup: string; count: number; order: number }>()
-  for (const record of records) {
+  for (const record of records.value) {
     if (!record.navGroup) continue
     const recordSection = record.section || record.category
     const key = `${recordSection}::${record.navGroup}`
@@ -71,7 +76,7 @@ const learningPaths = computed(() => {
 })
 
 const results = computed(() =>
-  searchRecords(records, query.value, {
+  searchRecords(records.value, query.value, {
     section: section.value === ALL ? undefined : section.value,
     navGroup: navGroup.value === ALL ? undefined : navGroup.value,
     chapter: chapter.value === ALL ? undefined : chapter.value,
@@ -141,7 +146,7 @@ function selectLearningPath(item?: { section: string; navGroup: string }) {
       </div>
     </div>
 
-    <div class="kb-result-count">{{ results.length }} 条结果</div>
+    <div class="kb-result-count">{{ loading ? '正在加载索引' : `${results.length} 条结果` }}</div>
 
     <div class="kb-article-list">
       <a v-for="result in results" :key="`${result.record.url}-${result.anchor || 'top'}`" class="kb-article-card" :href="result.url">

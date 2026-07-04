@@ -17,7 +17,7 @@ const COMMON_WORDS = new Set([
   '需要'
 ])
 
-const MAX_TOKENS = 900
+const MAX_TOKENS = 500
 const MAX_CHINESE_NGRAMS_PER_PHRASE = 80
 
 export function tokenize(text: string): string[] {

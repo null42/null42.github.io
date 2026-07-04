@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import articles from '../../generated/articles.json'
+import { computed, onMounted, ref } from 'vue'
 
 interface Article {
   title: string
@@ -16,7 +15,7 @@ interface Article {
   type?: string
   summary: string
   url: string
-  body: string
+  body?: string
 }
 
 const ALL = '全部'
@@ -30,13 +29,18 @@ const month = ref(ALL)
 const status = ref(ALL)
 const type = ref(ALL)
 
-const typedArticles = articles as Article[]
-const sections = computed(() => [ALL, ...Array.from(new Set(typedArticles.map((article) => article.section || article.category))).sort()])
+const typedArticles = ref<Article[]>([])
+
+onMounted(async () => {
+  typedArticles.value = (await import('../../generated/articles.json')).default as Article[]
+})
+
+const sections = computed(() => [ALL, ...Array.from(new Set(typedArticles.value.map((article) => article.section || article.category))).sort()])
 const navGroups = computed(() => [
   ALL,
   ...Array.from(
     new Set(
-      typedArticles
+      typedArticles.value
         .filter((article) => section.value === ALL || article.section === section.value || article.category === section.value)
         .map((article) => article.navGroup)
         .filter(Boolean)
@@ -47,7 +51,7 @@ const chapters = computed(() => [
   ALL,
   ...Array.from(
     new Set(
-      typedArticles
+      typedArticles.value
         .filter((article) => section.value === ALL || article.section === section.value || article.category === section.value)
         .filter((article) => navGroup.value === ALL || article.navGroup === navGroup.value)
         .map((article) => article.chapterTitle || article.chapter)
@@ -55,13 +59,13 @@ const chapters = computed(() => [
     )
   ).sort()
 ])
-const tags = computed(() => [ALL, ...Array.from(new Set(typedArticles.flatMap((article) => article.tags))).sort()])
-const months = computed(() => [ALL, ...Array.from(new Set(typedArticles.map((article) => article.date.slice(0, 7)))).sort().reverse()])
-const statuses = computed(() => [ALL, ...Array.from(new Set(typedArticles.map((article) => article.status))).sort()])
-const types = computed(() => [ALL, ...Array.from(new Set(typedArticles.map((article) => article.type).filter(Boolean))).sort()])
+const tags = computed(() => [ALL, ...Array.from(new Set(typedArticles.value.flatMap((article) => article.tags))).sort()])
+const months = computed(() => [ALL, ...Array.from(new Set(typedArticles.value.map((article) => article.date.slice(0, 7)))).sort().reverse()])
+const statuses = computed(() => [ALL, ...Array.from(new Set(typedArticles.value.map((article) => article.status))).sort()])
+const types = computed(() => [ALL, ...Array.from(new Set(typedArticles.value.map((article) => article.type).filter(Boolean))).sort()])
 const learningPaths = computed(() => {
   const groups = new Map<string, { section: string; navGroup: string; count: number; order: number }>()
-  for (const article of typedArticles) {
+  for (const article of typedArticles.value) {
     if (!article.navGroup) continue
     const articleSection = article.section || article.category
     const key = `${articleSection}::${article.navGroup}`
@@ -85,7 +89,7 @@ const learningPaths = computed(() => {
 
 const filtered = computed(() => {
   const needle = query.value.trim().toLowerCase()
-  return typedArticles.filter((article) => {
+  return typedArticles.value.filter((article) => {
     const matchesSection = section.value === ALL || article.section === section.value || article.category === section.value
     const matchesNavGroup = navGroup.value === ALL || article.navGroup === navGroup.value
     const articleChapter = article.chapterTitle || article.chapter
@@ -94,7 +98,7 @@ const filtered = computed(() => {
     const matchesMonth = month.value === ALL || article.date.startsWith(month.value)
     const matchesStatus = status.value === ALL || article.status === status.value
     const matchesType = type.value === ALL || article.type === type.value
-    const haystack = [article.title, article.summary, article.section, article.navGroup, article.category, articleChapter, article.status, article.type, ...article.tags, article.body]
+    const haystack = [article.title, article.summary, article.section, article.navGroup, article.category, articleChapter, article.status, article.type, ...article.tags]
       .filter(Boolean)
       .join(' ')
       .toLowerCase()
