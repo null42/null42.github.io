@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title: 🔗 交叉引用：HPM MC代码↔知识库映射
+title:  交叉引用：HPM MC代码↔知识库映射
 tags:
   - motor-control
 status: learning
@@ -16,13 +16,13 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-# 🔗 交叉引用：HPM MC代码↔知识库映射
+#  交叉引用：HPM MC代码↔知识库映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
 ---
 
-## 🔗 hpm_MC 代码 → 知识库文档 映射表
+##  hpm_MC 代码 → 知识库文档 映射表
 
 | hpm_MC 源码路径 | 关联知识库文档 |
 |---------------|--------------|
@@ -55,7 +55,7 @@ navGroupOrder: 10
 
 ---
 
-## 🔗 知识库文档 → hpm_MC 代码 映射表
+##  知识库文档 → hpm_MC 代码 映射表
 
 | 知识库文档 | 关联 hpm_MC 源码 |
 |----------|-----------------|
@@ -114,7 +114,7 @@ navGroupOrder: 10
 
 ---
 
-## 🔗 HPM 官方知识库文章 → 知识库文档
+##  HPM 官方知识库文章 → 知识库文档
 
 | 官方文章 | URL | 关联文档 |
 |---------|-----|---------|

@@ -11,7 +11,7 @@ title: CT-13 最优控制（LQR/LQG） - 知识检验
 tags:
   - motor-control
 status: learning
-summary: "**模块：** CT-13 最优控制（LQR/LQG） **题目数量：** 10道 **难度分布：** ★★★★☆ 进阶题 3道 | ★★★★★ 专业题 7道"
+summary: "**模块：** CT-13 最优控制（LQR/LQG） **题目数量：** 10道 **难度分布：**  进阶题 3道 |  专业题 7道"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
@@ -20,11 +20,11 @@ navGroupOrder: 30
 
 **模块：** CT-13 最优控制（LQR/LQG）
 **题目数量：** 10道
-**难度分布：** ★★★★☆ 进阶题 3道 | ★★★★★ 专业题 7道
+**难度分布：**  进阶题 3道 |  专业题 7道
 
 ---
 
-## 一、概念计算题（★★★★☆）
+## 一、概念计算题（）
 
 ### 题目1：一阶LQR的解析解
 **问题：** 一阶电流环：A=-500, B=1000, Q=[100], R=[0.01]。
@@ -103,7 +103,7 @@ navGroupOrder: 30
 
 ---
 
-## 二、分析设计题（★★★★★）
+## 二、分析设计题（）
 
 ### 题目4：LQR的相位裕度保证
 **问题：** LQR理论上保证至少60°相位裕度和无穷大幅值裕度（在输入端）。
@@ -150,7 +150,7 @@ navGroupOrder: 30
 2. 闭环系统：
    $$\begin{bmatrix} \dot{\mathbf{x}} \\ \dot{\mathbf{e}} \end{bmatrix} = \begin{bmatrix} \mathbf{A-BK} & \mathbf{BK} \\ \mathbf{0} & \mathbf{A-LC} \end{bmatrix} \begin{bmatrix} \mathbf{x} \\ \mathbf{e} \end{bmatrix} + \begin{bmatrix} \mathbf{w} \\ \mathbf{w-Lv} \end{bmatrix}$$
    
-   特征值：det(sI-(A-BK))·det(sI-(A-LC))=0 → 极点=并集。✓
+   特征值：det(sI-(A-BK))·det(sI-(A-LC))=0 → 极点=并集。
 
 3. 成立条件：
    - 系统线性（PMSM是线性的吗？→在工作点线性化后近似成立）
@@ -194,7 +194,7 @@ navGroupOrder: 30
 
 ---
 
-## 三、综合编程题（★★★★★）
+## 三、综合编程题（）
 
 ### 题目7：DARE的迭代求解
 **问题：** 离散ARE（DARE）没有像连续ARE那样的闭式解。在DSP上需要数值迭代求解。

@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握FOC双环控制，希望拓展至PFC领域或同时开发PFC+电机控制的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、ADV-ALG-01 控制环带宽设计、ADV-ALG-13 PID结构选择与深度整定
-**难度等级：** ★★★★☆
+**难度等级：** 
 
 ---
 
@@ -1560,7 +1560,7 @@ void FOC_Loop(UnifiedCtrl_t *ctrl)
 > - ADV-HW-01 PWM与电流采样（采样同步技术）
 > - ALG-01 FOC理论基础（双环控制基础）
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **hpm_mcl_v2 架构方法论**:
 - 分层设计: 应用层→Core层→驱动层→硬件加速层→HAL层（五层架构）
@@ -1571,4 +1571,4 @@ void FOC_Loop(UnifiedCtrl_t *ctrl)
 
 参考: `SDK-01-HPM-MC-Architecture.md` — 完整架构分析
 
-> 📝 检验你的理解：[SYS-03 检验题目](./SYS-03-assessment.md)
+>  检验你的理解：[SYS-03 检验题目](./SYS-03-assessment.md)

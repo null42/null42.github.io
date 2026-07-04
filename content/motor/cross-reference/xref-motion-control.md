@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title: 🔗 轨迹规划与运动控制 交叉引用映射表
+title:  轨迹规划与运动控制 交叉引用映射表
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-# 🔗 轨迹规划与运动控制 交叉引用映射表
+#  轨迹规划与运动控制 交叉引用映射表
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -147,17 +147,17 @@ navGroupOrder: 10
 
 | 模块 | 关联数量 | 达标(≥2) |
 |------|---------|----------|
-| MC-TP-01 | 3 (CT-01, CT-02, ALG-12) | ✅ |
-| MC-TP-02 | 3 (CT-14, CE-16, MC-MC-02) | ✅ |
-| MC-TP-03 | 2 (CT-10, CE-16) | ✅ |
-| MC-TP-04 | 2 (CE-16, MC-MC-06) | ✅ |
-| MC-TP-05 | 2 (CT-13, CE-15) | ✅ |
-| MC-TP-06 | 2 (MC-MC-06, ALG-05) | ✅ |
-| MC-MC-01 | 3 (CT-14, ALG-12, CE-06) | ✅ |
-| MC-MC-02 | 3 (CT-06, CE-16, MC-TP-02) | ✅ |
-| MC-MC-03 | 3 (CT-03, CT-09, ADV-ALG-01) | ✅ |
-| MC-MC-04 | 2 (CT-06, ALG-18) | ✅ |
-| MC-MC-05 | 2 (MC-MC-01, ALG-05) | ✅ |
-| MC-MC-06 | 3 (MC-TP-06, MC-MC-05, CE-17) | ✅ |
+| MC-TP-01 | 3 (CT-01, CT-02, ALG-12) |  |
+| MC-TP-02 | 3 (CT-14, CE-16, MC-MC-02) |  |
+| MC-TP-03 | 2 (CT-10, CE-16) |  |
+| MC-TP-04 | 2 (CE-16, MC-MC-06) |  |
+| MC-TP-05 | 2 (CT-13, CE-15) |  |
+| MC-TP-06 | 2 (MC-MC-06, ALG-05) |  |
+| MC-MC-01 | 3 (CT-14, ALG-12, CE-06) |  |
+| MC-MC-02 | 3 (CT-06, CE-16, MC-TP-02) |  |
+| MC-MC-03 | 3 (CT-03, CT-09, ADV-ALG-01) |  |
+| MC-MC-04 | 2 (CT-06, ALG-18) |  |
+| MC-MC-05 | 2 (MC-MC-01, ALG-05) |  |
+| MC-MC-06 | 3 (MC-TP-06, MC-MC-05, CE-17) |  |
 
 **所有轨迹规划与运动控制模块均满足交叉引用要求（≥2关联）。**

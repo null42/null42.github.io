@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 🚀 C 语言仿真 — 快速上手指南
+title:  C 语言仿真 — 快速上手指南
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 🚀 C 语言仿真 — 快速上手指南
+#  C 语言仿真 — 快速上手指南
 
 **版本：** v1.0
 **日期：** 2026-05
@@ -582,7 +582,7 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 ---
 
-> 💡 **如何使用本页**：跑了某个模式的仿真后，对照本页的描述检查波形。如果不符预期，根据「异常现象与排查」表格逐条排查。
+>  **如何使用本页**：跑了某个模式的仿真后，对照本页的描述检查波形。如果不符预期，根据「异常现象与排查」表格逐条排查。
 
 ---
 
@@ -618,7 +618,7 @@ gcc main.o pmsm_comm.o ... -o main.exe
 | gmake | `E:\new_things\make.exe` | TI CCS 的编译工具 |
 | 启动脚本自身 | `E:\new_things\emy-start.bat` | 自毁 |
 
-**⚠️ 重要警告：**
+** 重要警告：**
 
 1. 脚本执行前会要求**手动输入 Y 确认**，不会静默删除
 2. 清理是不可逆的——所有仿真结果（`dat\` 目录下的 `.dat` 文件）也会被删除

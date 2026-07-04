@@ -138,43 +138,43 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "🔗 轨迹规划与运动控制 交叉引用映射表",
+                "text": "轨迹规划与运动控制 交叉引用映射表",
                 "link": "/content/motor/cross-reference/xref-motion-control.html"
               },
               {
-                "text": "🔗 交叉引用映射表（索引）",
+                "text": "交叉引用映射表（索引）",
                 "link": "/content/motor/cross-reference/cross-reference-map.html"
               },
               {
-                "text": "🔗 交叉引用：lxfoc代码 ↔ KB理论一致性验证",
+                "text": "交叉引用：lxfoc代码 ↔ KB理论一致性验证",
                 "link": "/content/motor/cross-reference/xref-lxfoc-verification.html"
               },
               {
-                "text": "🔗 交叉引用：高级篇↔基础篇映射",
+                "text": "交叉引用：高级篇↔基础篇映射",
                 "link": "/content/motor/cross-reference/xref-adv-base.html"
               },
               {
-                "text": "🔗 交叉引用：新增模块映射",
+                "text": "交叉引用：新增模块映射",
                 "link": "/content/motor/cross-reference/xref-new-modules.html"
               },
               {
-                "text": "🔗 交叉引用：硬件↔算法映射",
+                "text": "交叉引用：硬件↔算法映射",
                 "link": "/content/motor/cross-reference/xref-hw-alg.html"
               },
               {
-                "text": "🔗 实践路径交叉引用映射",
+                "text": "实践路径交叉引用映射",
                 "link": "/content/motor/cross-reference/xref-practice.html"
               },
               {
-                "text": "🔗 交叉引用：控制理论↔算法映射",
+                "text": "交叉引用：控制理论↔算法映射",
                 "link": "/content/motor/cross-reference/xref-ct-alg.html"
               },
               {
-                "text": "🔗 交叉引用：硬件基础↔电控映射",
+                "text": "交叉引用：硬件基础↔电控映射",
                 "link": "/content/motor/cross-reference/xref-ee-hw.html"
               },
               {
-                "text": "🔗 交叉引用：HPM MC代码↔知识库映射",
+                "text": "交叉引用：HPM MC代码↔知识库映射",
                 "link": "/content/motor/cross-reference/xref-hpm.html"
               }
             ]
@@ -292,7 +292,7 @@ export const generatedSidebar = [
                 "link": "/content/motor/hardware/HW-07-assessment.html"
               },
               {
-                "text": "🔧 电控硬件学习路径",
+                "text": "电控硬件学习路径",
                 "link": "/content/motor/hardware/README.html"
               },
               {
@@ -472,7 +472,7 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "📊 控制理论基础",
+                "text": "控制理论基础",
                 "link": "/content/motor/control-theory/README.html"
               },
               {
@@ -630,12 +630,12 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "⚡ 零极点对消动画演示",
-                "link": "/content/motor/algorithm/ALG-00-Pole-Zero-Animation.html"
-              },
-              {
                 "text": "电流环 PI 参数整定计算器",
                 "link": "/content/motor/algorithm/ALG-00-PI-Calculator.html"
+              },
+              {
+                "text": "零极点对消动画演示",
+                "link": "/content/motor/algorithm/ALG-00-Pole-Zero-Animation.html"
               },
               {
                 "text": "ALG-00 电流环PI整定的物理直觉",
@@ -714,7 +714,7 @@ export const generatedSidebar = [
                 "link": "/content/motor/algorithm/ALG-21-Parameter-Identification.html"
               },
               {
-                "text": "HPM_MC电机控制库 - 架构总览 ★★★★☆ 🔰📚🔧",
+                "text": "HPM_MC电机控制库 - 架构总览",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture.html"
               },
               {
@@ -746,27 +746,27 @@ export const generatedSidebar = [
                 "link": "/content/motor/algorithm/MC-LIB/MC-LIB-Architecture.html"
               },
               {
-                "text": "HPM MCL v2 — 离线参数检测模块详解 ★★★★☆ 🔰📚🔧",
+                "text": "HPM MCL v2 — 离线参数检测模块详解",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect.html"
               },
               {
-                "text": "HPM-MC 示例应用指南 ★★★☆☆ 🔰📚🔧",
+                "text": "HPM-MC 示例应用指南",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-06-HPM-MC-Sample-Apps.html"
               },
               {
-                "text": "HPM-MC v2 核心控制循环深度解析 ★★★★★ 🔰📚🔧",
+                "text": "HPM-MC v2 核心控制循环深度解析",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.html"
               },
               {
-                "text": "HPM-MC v2 力位混合控制模块深度解析 ★★★★☆ 🔰📚🔧",
+                "text": "HPM-MC v2 力位混合控制模块深度解析",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl.html"
               },
               {
-                "text": "HPM-MC v2 路径规划模块深度解析 ★★★★☆ 🔰📚🔧",
+                "text": "HPM-MC v2 路径规划模块深度解析",
                 "link": "/content/motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan.html"
               },
               {
-                "text": "🧮 算法学习路径",
+                "text": "算法学习路径",
                 "link": "/content/motor/algorithm/README.html"
               },
               {
@@ -856,7 +856,7 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "🎯 轨迹规划与运动控制路径",
+                "text": "轨迹规划与运动控制路径",
                 "link": "/content/motor/motion-control/README.html"
               },
               {
@@ -990,20 +990,12 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "💻 仿真代码 ↔ 知识库概念映射",
+                "text": "仿真代码 ↔ 知识库概念映射",
                 "link": "/content/motor/simulation/SIM-02-C-Simulation-Code-Map.html"
               },
               {
-                "text": "📊 仿真绘图系统详解",
+                "text": "仿真绘图系统详解",
                 "link": "/content/motor/simulation/SIM-03-C-Simulation-Plotting.html"
-              },
-              {
-                "text": "📖 emachinery 仿真系统 — 完整使用教程",
-                "link": "/content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html"
-              },
-              {
-                "text": "🚀 C 语言仿真 — 快速上手指南",
-                "link": "/content/motor/simulation/SIM-01-C-Simulation-QuickStart.html"
               },
               {
                 "text": "示例 2：自定义速度/负载曲线",
@@ -1018,20 +1010,24 @@ export const generatedSidebar = [
                 "link": "/content/motor/simulation/code-examples/05-commissioning-debug/README.html"
               },
               {
+                "text": "C 语言仿真 — 快速上手指南",
+                "link": "/content/motor/simulation/SIM-01-C-Simulation-QuickStart.html"
+              },
+              {
+                "text": "emachinery 仿真系统 — 完整使用教程",
+                "link": "/content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html"
+              },
+              {
                 "text": "SIM-05 数字孪生：让仿真无限逼近真实",
                 "link": "/content/motor/simulation/SIM-05-Digital-Twin.html"
               },
               {
-                "text": "🧪 C 语言仿真验证 — 总索引",
+                "text": "C 语言仿真验证 — 总索引",
                 "link": "/content/motor/simulation/SIM-00-C-Simulation-Overview.html"
               },
               {
                 "text": "SIM-05 数字孪生 - 知识检验",
                 "link": "/content/motor/simulation/SIM-05-assessment.html"
-              },
-              {
-                "text": "🔧 C 仿真代码修改示例",
-                "link": "/content/motor/simulation/code-examples/README.html"
               },
               {
                 "text": "示例 1：PI 参数调节基础",
@@ -1040,6 +1036,10 @@ export const generatedSidebar = [
               {
                 "text": "示例 4：添加自定义观测信号",
                 "link": "/content/motor/simulation/code-examples/04-add-observer-signal/README.html"
+              },
+              {
+                "text": "C 仿真代码修改示例",
+                "link": "/content/motor/simulation/code-examples/README.html"
               }
             ]
           },
@@ -1268,7 +1268,7 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "📡 工业通信协议学习路径",
+                "text": "工业通信协议学习路径",
                 "link": "/content/motor/communication/README.html"
               },
               {
@@ -1314,7 +1314,7 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "🎯 控制器演化路径：从PID到QP-MPC",
+                "text": "控制器演化路径：从PID到QP-MPC",
                 "link": "/content/motor/controllers-evolution/README.html"
               },
               {

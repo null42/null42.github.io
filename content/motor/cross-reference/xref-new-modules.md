@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title: 🔗 交叉引用：新增模块映射
+title:  交叉引用：新增模块映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-# 🔗 交叉引用：新增模块映射
+#  交叉引用：新增模块映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -109,15 +109,15 @@ navGroupOrder: 10
 
 | 模块 | 关联数量 | 达标(≥2) |
 |------|---------|----------|
-| HW-02B | 3 | ✅ |
-| ALG-17 | 3 | ✅ |
-| ALG-18 | 4 | ✅ |
-| ALG-19 | 3 | ✅ |
-| CT-19 | 3 | ✅ |
-| PMI-01 | 1+2(PMI-02/03) | ✅ |
-| PMI-02 | 2 | ✅ |
-| PMI-03 | 2 | ✅ |
-| COM-08 | 3 | ✅ |
-| COM-09 | 3 | ✅ |
-| ALG-20 | 3 | ✅ |
-| ALG-21 | 5 | ✅ |
+| HW-02B | 3 |  |
+| ALG-17 | 3 |  |
+| ALG-18 | 4 |  |
+| ALG-19 | 3 |  |
+| CT-19 | 3 |  |
+| PMI-01 | 1+2(PMI-02/03) |  |
+| PMI-02 | 2 |  |
+| PMI-03 | 2 |  |
+| COM-08 | 3 |  |
+| COM-09 | 3 |  |
+| ALG-20 | 3 |  |
+| ALG-21 | 5 |  |

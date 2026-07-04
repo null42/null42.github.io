@@ -11,14 +11,14 @@ title: MC_LIB - 控制环模块详解
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md)"
+summary: ">  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # MC_LIB - 控制环模块详解
 
-> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md)
+>  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-04-26  
@@ -96,11 +96,11 @@ MCFOC_LOOP_F模块实现了FOC控制的完整控制环：
 ┌─────────────────────────────────────────────────────────────┐
 │                   MCFOC_LOOP_F模块特点                       │
 ├─────────────────────────────────────────────────────────────┤
-│  ✓ 完整控制链：定位→IF启动→闭环运行→弱磁控制                │
-│  ✓ 抗积分饱和：条件积分和积分限幅                            │
-│  ✓ 电流限幅：圆限制和六边形限制                              │
-│  ✓ 电压限幅：调制深度限制                                    │
-│  ✓ 参数自适应：速度相关增益调整                              │
+│   完整控制链：定位→IF启动→闭环运行→弱磁控制                │
+│   抗积分饱和：条件积分和积分限幅                            │
+│   电流限幅：圆限制和六边形限制                              │
+│   电压限幅：调制深度限制                                    │
+│   参数自适应：速度相关增益调整                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -666,7 +666,7 @@ void MCFOC_ALIGN_CurrentLoop_F(ST_ALIGN_CONTROL_F* pALIGNCtrl,
 
 ---
 
-## 🆚 与 hpm_MC 控制环对比
+##  与 hpm_MC 控制环对比
 
 | 维度 | MC_LIB | hpm_MCL v2 |
 |------|--------|-----------|

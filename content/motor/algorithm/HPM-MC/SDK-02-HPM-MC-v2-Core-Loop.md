@@ -7,18 +7,18 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: HPM-MC v2 核心控制循环深度解析 ★★★★★ 🔰📚🔧
+title: HPM-MC v2 核心控制循环深度解析  
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | "
+summary: ">  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | "
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# HPM-MC v2 核心控制循环深度解析 ★★★★★ 🔰📚🔧
+# HPM-MC v2 核心控制循环深度解析  
 
-> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [CT-04 PID控制](../../control-theory/CT-04-PID-Control-Principles.md)
+>  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [CT-04 PID控制](../../control-theory/CT-04-PID-Control-Principles.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-05-23  
@@ -101,14 +101,14 @@ navGroupOrder: 30
 ┌─────────────────────────────────────────────────────────────────┐
 │                    MCL V2 Core Loop 特点                         │
 ├─────────────────────────────────────────────────────────────────┤
-│  ✓ 回调驱动的插件架构：硬件操作通过回调注册，中间件与平台解耦    │
-│  ✓ 函数指针表机制 (mcl_control_method_t)：所有算法可替换         │
-│  ✓ 多级控制环：电流环→速度环→位置环，可独立使能/禁用            │
-│  ✓ 硬件加速分层：soft-FOC → hybrid-FOC → hardware-FOC          │
-│  ✓ 可编译裁剪：DQ解耦/死区补偿/SMC通过 MCL_CFG 宏条件编译       │
-│  ✓ 离线参数自整定：Rs/Ld/Lq/Ls/Flux 自动检测                    │
-│  ✓ 三阶段电机对齐：粗对齐→精对齐→稳定化                          │
-│  ✓ API版本演进：v1.10.0引入 hw_loop 参数，宏重载实现向后兼容     │
+│   回调驱动的插件架构：硬件操作通过回调注册，中间件与平台解耦    │
+│   函数指针表机制 (mcl_control_method_t)：所有算法可替换         │
+│   多级控制环：电流环→速度环→位置环，可独立使能/禁用            │
+│   硬件加速分层：soft-FOC → hybrid-FOC → hardware-FOC          │
+│   可编译裁剪：DQ解耦/死区补偿/SMC通过 MCL_CFG 宏条件编译       │
+│   离线参数自整定：Rs/Ld/Lq/Ls/Flux 自动检测                    │
+│   三阶段电机对齐：粗对齐→精对齐→稳定化                          │
+│   API版本演进：v1.10.0引入 hw_loop 参数，宏重载实现向后兼容     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

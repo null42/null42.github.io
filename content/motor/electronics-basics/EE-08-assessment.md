@@ -11,7 +11,7 @@ title: EE-08 整流与逆变拓扑 - 知识检验
 tags:
   - motor-control
 status: learning
-summary: "**模块：** EE-08 整流与逆变拓扑 **题目数量：** 10道 **难度分布：** ★★★☆☆ 3道 | ★★★★☆ 4道 | ★★★★★ 3道"
+summary: "**模块：** EE-08 整流与逆变拓扑 **题目数量：** 10道 **难度分布：**  3道 |  4道 |  3道"
 navGroup: 基础与硬件
 navGroupOrder: 20
 ---
@@ -20,11 +20,11 @@ navGroupOrder: 20
 
 **模块：** EE-08 整流与逆变拓扑
 **题目数量：** 10道
-**难度分布：** ★★★☆☆ 3道 | ★★★★☆ 4道 | ★★★★★ 3道
+**难度分布：**  3道 |  4道 |  3道
 
 ---
 
-## 一、参数计算题（★★★☆☆）
+## 一、参数计算题（）
 
 ### 题目1：三相整流母线电压与电容计算
 
@@ -86,7 +86,7 @@ navGroupOrder: 20
    $R_{total}=0.5+0.02=0.52\Omega$
    $I_{inrush\_peak}=537/0.52\approx 1033A$→整流桥IFSM至少需1500A！
 
-2. $I_{inrush}=537/33\approx 16.3A$ ✅
+2. $I_{inrush}=537/33\approx 16.3A$ 
    $\tau=33\times 20000\mu F=0.66s$
    $t_{charge\_99\%}=5\tau=3.3s$
 
@@ -98,7 +98,7 @@ navGroupOrder: 20
 
 ---
 
-## 二、概念辨析题（★★★☆☆）
+## 二、概念辨析题（）
 
 ### 题目4：SVPWM扇区与开关序列
 
@@ -124,7 +124,7 @@ navGroupOrder: 20
 
 ---
 
-## 三、设计应用题（★★★★☆）
+## 三、设计应用题（）
 
 ### 题目5：7.5kW伺服完整功率链路设计
 
@@ -149,7 +149,7 @@ navGroupOrder: 20
 
 3. **母线电容：**
    - $C=7500\times 2.5\mu F/W\approx 18750\mu F$→选$2\times 10000\mu F/450V$并联
-   - 每电容纹波电流额定：$\ge 8A$@120Hz/85°C→两个16A>需求12A✅
+   - 每电容纹波电流额定：$\ge 8A$@120Hz/85°C→两个16A>需求12A
    - 并联 $2.2\mu F/630V$薄膜电容
    - 推荐：Nichicon LGU2W102MELC（10000μF/450V）×2
 
@@ -185,7 +185,7 @@ navGroupOrder: 20
 
 ---
 
-## 四、故障诊断题（★★★★★）
+## 四、故障诊断题（）
 
 ### 题目7：母线电压异常波动根因分析
 
@@ -257,7 +257,7 @@ navGroupOrder: 20
 
 ---
 
-## 五、综合案例题（★★★★★）
+## 五、综合案例题（）
 
 ### 题目9：SPWM→SVPWM迁移的完整分析
 
@@ -328,7 +328,7 @@ navGroupOrder: 20
 3. 正弦滤波器：
    $f_c<f_{sw}/10=800Hz$→取$f_c=400Hz$
    LCL Topology：$L_{inv}=200\mu H, C_f=20\mu F, L_{motor}=100\mu H$
-   $f_{res}=1/(2\pi\sqrt{(L_{inv}+L_{motor})\times C_f})\approx 375Hz<400Hz$ ✅
+   $f_{res}=1/(2\pi\sqrt{(L_{inv}+L_{motor})\times C_f})\approx 375Hz<400Hz$ 
    对8kHz载波衰减 $\approx 60dB$
 
 4. 对比：

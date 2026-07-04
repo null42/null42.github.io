@@ -11,16 +11,16 @@ title: COM-03 STM32 FDCAN实现
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-03"
+summary: "> 路径： 工业通信协议 > COM-03"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-03 STM32 FDCAN实现
 
-> 路径：📡 工业通信协议 > COM-03
+> 路径： 工业通信协议 > COM-03
 
-**难度：** ★★★★☆
+**难度：** 
 
 ## 概述
 

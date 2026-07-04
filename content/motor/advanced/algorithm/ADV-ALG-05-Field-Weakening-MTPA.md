@@ -24,7 +24,7 @@ navGroupOrder: 40
 **适用对象：** 已掌握FOC基本原理、PI控制、带宽设计的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、ALG-13 保护与优化、ADV-ALG-01 控制环带宽设计
 **基础概念参考：** [ALG-11 MTPA与弱磁控制](../../algorithm/ALG-11-MTPA-Flux-Weakening.md) — 提供 MTPA 与弱磁的概念概述、转矩方程速查、运行区域划分。建议先阅读 ALG-11 建立整体认知，再深入本文档的数学推导与工程实现。
-**难度等级：** ★★★★★
+**难度等级：** 
 
 ---
 
@@ -1938,7 +1938,7 @@ float demag_protection(float Id_ref, float Id_demag, float temp_coeff)
 - ALG-11 MTPA与弱磁控制：弱磁和MTPA的基础概念介绍
 - SYS-04 仿真到实现——连续域到离散域：弱磁控制器的离散化设计
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **弱磁策略**:
 - hpm_mcl_v2 弱磁集成在路径规划中：超越基速时 `acc_max × (基速/speed)` 自动降额
@@ -1946,7 +1946,7 @@ float demag_protection(float Id_ref, float Id_demag, float temp_coeff)
 
 参考: `SDK-05-HPM-MC-v2-Path-Plan.md` 第6节「弱磁控制关联」+ `ALG-11-MTPA-Flux-Weakening.md`
 
-> 📝 检验你的理解：[ADV-ALG-05 检验题目](./ADV-ALG-05-assessment.md)
+>  检验你的理解：[ADV-ALG-05 检验题目](./ADV-ALG-05-assessment.md)
 
 ## 延伸实践
-- 📂 [路径12-6: MTPA专题](../../practice/PRACTICE-12-PMSM-Simulation.md#站6) — MTPA原理推导与仿真验证
+-  [路径12-6: MTPA专题](../../practice/PRACTICE-12-PMSM-Simulation.md#站6) — MTPA原理推导与仿真验证

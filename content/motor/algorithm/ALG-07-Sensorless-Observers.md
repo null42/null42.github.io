@@ -26,9 +26,9 @@ navGroupOrder: 30
 
 ---
 
-## 1. 🎯 核心摘要 ★★★☆☆ 🎯
+## 1.  核心摘要  
 
-> **📌 文档定位：** 本文是 **[ALG-06 位置与速度观测器](./ALG-06-Position-Speed-Observer.md)** 的**深化篇**。在 ALG-06 建立的观测器基本概念（SMO/Luenberger/PLL 概览）基础上，系统深入地讲解无传感器场景下各类观测器的完整数学推导、工程代码实现、参数整定方法及硬件约束分析。如果你是第一次接触观测器，建议先阅读 ALG-06 建立整体认知。
+> ** 文档定位：** 本文是 **[ALG-06 位置与速度观测器](./ALG-06-Position-Speed-Observer.md)** 的**深化篇**。在 ALG-06 建立的观测器基本概念（SMO/Luenberger/PLL 概览）基础上，系统深入地讲解无传感器场景下各类观测器的完整数学推导、工程代码实现、参数整定方法及硬件约束分析。如果你是第一次接触观测器，建议先阅读 ALG-06 建立整体认知。
 
 **一句话：** 无感FOC通过观测器算法从电压电流中估算转子位置和速度，消除对物理传感器的依赖，在成本、可靠性、体积上具有显著优势，但低速性能和参数鲁棒性是核心挑战。
 
@@ -94,7 +94,7 @@ flowchart TD
 
 ---
 
-## 2. ?? 原理推导 ★★★★☆ ??
+## 2. ?? 原理推导  ??
 
 ### 2.1 反电动势观测器原理
 
@@ -401,7 +401,7 @@ $$
 
 ---
 
-## 3. ?? 数学建模 ★★★★★ ??
+## 3. ?? 数学建模  ??
 
 ### 3.1 反电动势观测器数学模型
 
@@ -604,7 +604,7 @@ $$
 
 ---
 
-## 4. ?? 代码实现 ★★★★★ ??
+## 4. ?? 代码实现  ??
 
 ### 4.1 反电动势观测器实现
 
@@ -1099,7 +1099,7 @@ HPM MCL 的过零检测不直接测量中性点电压，而是用导通两相电
 
 ---
 
-## 5. ?? 参数整定 ★★★★★ ??
+## 5. ?? 参数整定  ??
 
 ### 5.1 反电动势观测器参数整定
 
@@ -1176,7 +1176,7 @@ HPM MCL 的过零检测不直接测量中性点电压，而是用导通两相电
 
 ---
 
-## 6. 🔌 硬件约束 ★★★★☆
+## 6.  硬件约束 
 
 ### 6.1 观测器精度→电流采样精度
 
@@ -1217,7 +1217,7 @@ HPM MCL 的过零检测不直接测量中性点电压，而是用导通两相电
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★★
+## 7.  前沿拓展 
 
 ### 7.1 高频注入（HFI）零速启动
 
@@ -1304,15 +1304,15 @@ $$
 | 全速域切换 | $\theta = (1-K)\theta_{HFI} + K\theta_{SMO}$ | 线性加权 |
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP_SENSORLESS (41)，关键操作：切换观测器类型，观察低速和高速下的角度误差、反转时的跟踪性能
 
-> 📝 检验你的理解：[ALG-07 检验题目](./ALG-07-assessment.md)
+>  检验你的理解：[ALG-07 检验题目](./ALG-07-assessment.md)
 
 ## 延伸实践
-- 📂 [路径13-1: MRAS模型参考自适应](../practice/PRACTICE-13-Sensorless-Control.md#站1) — MRAS无感控制仿真
-- 📂 [路径13-2: SMO滑模观测器](../practice/PRACTICE-13-Sensorless-Control.md#站2) — SMO仿真+12篇参考论文
-- 📂 [路径13-4: 主动磁链观测器](../practice/PRACTICE-13-Sensorless-Control.md#站4) — 主动磁链Simulink+嵌入式C代码
-- 📂 [路径13-5: SR-CKF无位置传感器](../practice/PRACTICE-13-Sensorless-Control.md#站5) — 680行完整MATLAB脚本
-- 📂 [HW-01B: 电机学物理本质深入](../hardware/HW-01B-Motor-Physics-Deep-Dive.md) — 饱和与交叉耦合对无感观测器的影响
+-  [路径13-1: MRAS模型参考自适应](../practice/PRACTICE-13-Sensorless-Control.md#站1) — MRAS无感控制仿真
+-  [路径13-2: SMO滑模观测器](../practice/PRACTICE-13-Sensorless-Control.md#站2) — SMO仿真+12篇参考论文
+-  [路径13-4: 主动磁链观测器](../practice/PRACTICE-13-Sensorless-Control.md#站4) — 主动磁链Simulink+嵌入式C代码
+-  [路径13-5: SR-CKF无位置传感器](../practice/PRACTICE-13-Sensorless-Control.md#站5) — 680行完整MATLAB脚本
+-  [HW-01B: 电机学物理本质深入](../hardware/HW-01B-Motor-Physics-Deep-Dive.md) — 饱和与交叉耦合对无感观测器的影响

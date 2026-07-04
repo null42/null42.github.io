@@ -17,7 +17,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-&#9776;
+
     &larr; 返回门户
 
       CT 控制理论

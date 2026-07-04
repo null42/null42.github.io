@@ -11,7 +11,7 @@ title: "CE-19: 观测器设计——从状态反馈到输出反馈的桥梁"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：Observer Design: Bridging State Feedback to Output Feedback** **难度：** ★★★★★ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-12（LQR与状态空间方法）"
+summary: "**副标题：Observer Design: Bridging State Feedback to Output Feedback** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-12（LQR与状态空间方法）"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-19: 观测器设计——从状态反馈到输出反馈的桥梁
 
 **副标题：Observer Design: Bridging State Feedback to Output Feedback**
-**难度：** ★★★★★
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-12（LQR与状态空间方法）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 LQR给你 $u = -Kx$，但你永远无法测量 $x$。你只能通过有噪声、有延迟、不完整的传感器测量 $y = Cx$。观测器（Observer）不是附加组件——它是控制器的一半。本文从开环仿真的失败出发，详解Luenberger观测器的校正机制、极点配置原则、卡尔曼滤波器的统计最优性、控制与估计的对偶性、分离原理及其失效条件，以及实际工程中的传感器偏置、测量丢失和观测器饱和等关键问题。
 

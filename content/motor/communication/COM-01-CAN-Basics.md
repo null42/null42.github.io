@@ -11,16 +11,16 @@ title: COM-01 CAN总线基础
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-01"
+summary: "> 路径： 工业通信协议 > COM-01"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-01 CAN总线基础
 
-> 路径：📡 工业通信协议 > COM-01
+> 路径： 工业通信协议 > COM-01
 
-**难度：** ★★★☆☆
+**难度：** 
 
 ## 概述
 
@@ -169,7 +169,7 @@ sequenceDiagram
     B->>Bus: ID位 0 0 0 1 0 0 0 0 0 0 1
     Note over Bus: ID0位: A发0(显性), B发1(隐性)<br/>总线为0, B检测到不匹配
     B--xBus: 仲裁失败，自动退出
-    A->>Bus: 继续发送完整帧 ✅ 仲裁胜出
+    A->>Bus: 继续发送完整帧  仲裁胜出
     Note over B: 转为接收模式，等待总线空闲后重试
 ```
 
@@ -194,7 +194,7 @@ sequenceDiagram
     Ext->>Bus: SRR=1(隐性)
     Note over Bus: 标准帧RTR=0(显性)覆盖扩展帧SRR=1(隐性)<br/>标准帧仲裁胜出！
     Ext--xBus: 仲裁失败
-    Std->>Bus: 继续发送完整帧 ✅
+    Std->>Bus: 继续发送完整帧 
 ```
 
 > **工程经验**：在电机控制系统中，**强烈建议统一使用标准帧或统一使用扩展帧**，避免混合使用导致的优先级混乱。如果必须混合，需要仔细分析仲裁场第12位（SRR/RTR）的影响。

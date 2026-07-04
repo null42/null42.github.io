@@ -695,27 +695,27 @@ motor_thermistor:  OffboardThermistorCurrentLimiter (电机绕组温度)
 
 | 功能 | 支持 | 实现文件 | 说明 |
 |------|:---:|------|------|
-| 电机校准 (R+L) | ✅ | `motor.cpp` | 相电阻 + 相电感自动测量 |
-| 编码器校准 | ✅ | `encoder.cpp` | 增量/绝对/Hall 编码器偏置校准 |
-| Anti-cogging | ✅ | `controller.cpp` | 3600点齿槽转矩补偿表 |
-| 梯形轨迹 | ✅ | trapTraj.hpp | 加速度/匀速/减速三段式速度规划 |
-| Step/Dir 输入 | ✅ | `axis.cpp` | 脉冲+方向接口 |
-| 机械刹车 | ✅ | `mechanical_brake.cpp` | 电机上电/断电自动释放/抱闸 |
-| 限位开关 | ✅ | `endstop.cpp` | min/max 双端限位 |
-| 回零 (Homing) | ✅ | `axis.cpp` | 驱动至限位→设零点 |
-| Lockin Spin | ✅ | `axis.cpp` | 开环电流注入, 强制旋转 |
-| 弱磁控制 | ❌ | - | 未实现 |
-| 示波器 (Oscilloscope) | ✅ | `oscilloscope.cpp` | 高速数据采集, 触发模式 |
-| 无传感器控制 | ✅ | `sensorless_estimator.cpp` | 非线性磁链观测器 + PLL |
-| ACIM 支持 | ✅ | `acim_estimator.cpp` | 感应电机磁通估算器 |
-| ASCII 协议 | ✅ | `ascii_protocol.cpp` | 人类可读的命令/响应协议 |
-| CAN 总线 | ✅ | `odrive_can.cpp` | CANopen-like 协议 |
-| I2C 通信 | ✅ | `interface_i2c.cpp` | 从机模式 |
-| USB CDC | ✅ | `interface_usb.cpp` | 虚拟串口 |
-| UART 通信 | ✅ | `interface_uart.cpp` | 最多3路串口 |
-| FreeRTOS 栈溢出保护 | ✅ | `main.cpp` | vApplicationStackOverflowHook |
-| DFU 模式 | ✅ | `main.cpp` | 固件升级 |
-| Spinout 检测 | ✅ | `controller.cpp` | 机械/电气功率异常检测 |
+| 电机校准 (R+L) |  | `motor.cpp` | 相电阻 + 相电感自动测量 |
+| 编码器校准 |  | `encoder.cpp` | 增量/绝对/Hall 编码器偏置校准 |
+| Anti-cogging |  | `controller.cpp` | 3600点齿槽转矩补偿表 |
+| 梯形轨迹 |  | trapTraj.hpp | 加速度/匀速/减速三段式速度规划 |
+| Step/Dir 输入 |  | `axis.cpp` | 脉冲+方向接口 |
+| 机械刹车 |  | `mechanical_brake.cpp` | 电机上电/断电自动释放/抱闸 |
+| 限位开关 |  | `endstop.cpp` | min/max 双端限位 |
+| 回零 (Homing) |  | `axis.cpp` | 驱动至限位→设零点 |
+| Lockin Spin |  | `axis.cpp` | 开环电流注入, 强制旋转 |
+| 弱磁控制 |  | - | 未实现 |
+| 示波器 (Oscilloscope) |  | `oscilloscope.cpp` | 高速数据采集, 触发模式 |
+| 无传感器控制 |  | `sensorless_estimator.cpp` | 非线性磁链观测器 + PLL |
+| ACIM 支持 |  | `acim_estimator.cpp` | 感应电机磁通估算器 |
+| ASCII 协议 |  | `ascii_protocol.cpp` | 人类可读的命令/响应协议 |
+| CAN 总线 |  | `odrive_can.cpp` | CANopen-like 协议 |
+| I2C 通信 |  | `interface_i2c.cpp` | 从机模式 |
+| USB CDC |  | `interface_usb.cpp` | 虚拟串口 |
+| UART 通信 |  | `interface_uart.cpp` | 最多3路串口 |
+| FreeRTOS 栈溢出保护 |  | `main.cpp` | vApplicationStackOverflowHook |
+| DFU 模式 |  | `main.cpp` | 固件升级 |
+| Spinout 检测 |  | `controller.cpp` | 机械/电气功率异常检测 |
 
 ---
 

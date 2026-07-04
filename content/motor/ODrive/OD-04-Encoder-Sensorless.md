@@ -66,14 +66,14 @@ flowchart TD
 
 | 模式 | 常量 | 接口 | 精度 | 绝对值 |
 |------|------|------|------|:---:|
-| MODE_INCREMENTAL | 0 | TIM 编码器模式 (ABI) | CPR×4 (如2048×4=8192) | ❌ |
-| MODE_HALL | 1 | 3× GPIO (Hall A/B/C) | 6 步/电周期 | ❌ |
-| MODE_SINCOS | 2 | 2× GPIO ADC (Sin/Cos) | ADC 分辨率 12bit | ❌ |
-| MODE_SPI_ABS_CUI | 0x100 | SPI (CUI协议) | 取决于传感器 | ✅ |
-| MODE_SPI_ABS_AMS | 0x101 | SPI (AMS协议, AS5047) | 14bit | ✅ |
-| MODE_SPI_ABS_AEAT | 0x102 | SPI (AEAT协议) | 取决于传感器 | ✅ |
-| MODE_SPI_ABS_RLS | 0x103 | SPI (RLS协议) | 取决于传感器 | ✅ |
-| MODE_SPI_ABS_MA732 | 0x104 | SPI (MA732协议) | 取决于传感器 | ✅ |
+| MODE_INCREMENTAL | 0 | TIM 编码器模式 (ABI) | CPR×4 (如2048×4=8192) |  |
+| MODE_HALL | 1 | 3× GPIO (Hall A/B/C) | 6 步/电周期 |  |
+| MODE_SINCOS | 2 | 2× GPIO ADC (Sin/Cos) | ADC 分辨率 12bit |  |
+| MODE_SPI_ABS_CUI | 0x100 | SPI (CUI协议) | 取决于传感器 |  |
+| MODE_SPI_ABS_AMS | 0x101 | SPI (AMS协议, AS5047) | 14bit |  |
+| MODE_SPI_ABS_AEAT | 0x102 | SPI (AEAT协议) | 取决于传感器 |  |
+| MODE_SPI_ABS_RLS | 0x103 | SPI (RLS协议) | 取决于传感器 |  |
+| MODE_SPI_ABS_MA732 | 0x104 | SPI (MA732协议) | 取决于传感器 |  |
 
 `MODE_FLAG_ABS = 0x100` 位区分增量式与绝对式编码器。
 

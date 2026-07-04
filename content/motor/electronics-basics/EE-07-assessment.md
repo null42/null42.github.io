@@ -11,7 +11,7 @@ title: EE-07 运算放大器 - 知识检验
 tags:
   - motor-control
 status: learning
-summary: "**模块：** EE-07 运算放大器 **题目数量：** 10道 **难度分布：** ★★★☆☆ 3道 | ★★★★☆ 5道 | ★★★★★ 2道"
+summary: "**模块：** EE-07 运算放大器 **题目数量：** 10道 **难度分布：**  3道 |  5道 |  2道"
 navGroup: 基础与硬件
 navGroupOrder: 20
 ---
@@ -20,11 +20,11 @@ navGroupOrder: 20
 
 **模块：** EE-07 运算放大器
 **题目数量：** 10道
-**难度分布：** ★★★☆☆ 3道 | ★★★★☆ 5道 | ★★★★★ 2道
+**难度分布：**  3道 |  5道 |  2道
 
 ---
 
-## 一、参数计算题（★★★☆☆）
+## 一、参数计算题（）
 
 ### 题目1：四电阻差分放大器CMRR计算
 
@@ -66,7 +66,7 @@ navGroupOrder: 20
 
 ---
 
-## 二、概念辨析题（★★★☆☆）
+## 二、概念辨析题（）
 
 ### 题目3：虚短虚断的工程边界
 
@@ -79,11 +79,11 @@ navGroupOrder: 20
 5. CMOS运放的输入偏置电流 $I_{bias}$ 远小于BJT运放，因此虚断条件更"真"
 
 **参考答案：**
-1. ❌ 错误。饱和时运放输出不能再通过负反馈调整 $V_-$，$V_+\neq V_-$，虚短打破
-2. ❌ 错误。JFET栅极仍有pn结反向漏电流（$\sim pA$级），且有过压保护二极管的漏电流，极端高温下pA级也会增大为nA级
-3. ✅ 正确。虚短是运放通过负反馈主动调节的结果：$V_+-V_-=V_{out}/A_{OL}\rightarrow 0$，不是物理短接
-4. ✅ 正确。开环无负反馈，输出饱和到电源轨，$V_+$和$V_-$可以有任意差值
-5. ✅ 正确。CMOS运放 $I_{bias}\approx 1pA$，BJT运放 $I_{bias}\approx 100nA$，差5个数量级
+1.  错误。饱和时运放输出不能再通过负反馈调整 $V_-$，$V_+\neq V_-$，虚短打破
+2.  错误。JFET栅极仍有pn结反向漏电流（$\sim pA$级），且有过压保护二极管的漏电流，极端高温下pA级也会增大为nA级
+3.  正确。虚短是运放通过负反馈主动调节的结果：$V_+-V_-=V_{out}/A_{OL}\rightarrow 0$，不是物理短接
+4.  正确。开环无负反馈，输出饱和到电源轨，$V_+$和$V_-$可以有任意差值
+5.  正确。CMOS运放 $I_{bias}\approx 1pA$，BJT运放 $I_{bias}\approx 100nA$，差5个数量级
 
 ---
 
@@ -108,7 +108,7 @@ navGroupOrder: 20
 
 ---
 
-## 三、设计应用题（★★★★☆）
+## 三、设计应用题（）
 
 ### 题目5：三相电流采样完整信号链设计
 
@@ -126,7 +126,7 @@ navGroupOrder: 20
 **参考答案：**
 1. $V_{sense\_peak}=30A\times 5m\Omega=150mV$
    过载裕量20%：$V_{sense\_max}=150\times 1.2=180mV$
-   增益 $G=3.3V/180mV=18.33\rightarrow$选 $G=18$（$V_{out\_max}=180\times 18=3.24V<3.3V$ ✅）
+   增益 $G=3.3V/180mV=18.33\rightarrow$选 $G=18$（$V_{out\_max}=180\times 18=3.24V<3.3V$ ）
 
 2. 选**OPA2333**（双通道零漂移）：
    - $V_{os}=10\mu V$ → 输出offset $=10\mu V\times 18=0.18mV$（0.06%满量程）
@@ -144,7 +144,7 @@ navGroupOrder: 20
 
 4. ADC分辨率 $=3.3V/4096=0.806mV/LSB$
    折算电流分辨率 $=0.806mV/18/5m\Omega=8.95mA/LSB$
-   考虑 $V_{os}$ 和噪声：实际分辨率 $\approx 15mA$（约 $0.1\%$ 额定电流）✅
+   考虑 $V_{os}$ 和噪声：实际分辨率 $\approx 15mA$（约 $0.1\%$ 额定电流）
 
 ---
 
@@ -169,7 +169,7 @@ navGroupOrder: 20
    - 比较器传播延迟 $t_{pd}=4.5ns$
    - 输出上升时间 $t_r\approx 2ns$
    - MCU TZ输入到PWM关断 $t_{TZ}\approx 25ns$
-   - 总延迟 $\approx 4.5+2+25\approx 32ns$ ← 极快！✅✅
+   - 总延迟 $\approx 4.5+2+25\approx 32ns$ ← 极快！
    （对比DSP软件过流：ADC+中断+FOC任务+PWM更新 $\approx 5-10\mu s$）
 
 3. 迟滞设计：
@@ -179,11 +179,11 @@ navGroupOrder: 20
    迟滞 $=20mV$
    反馈电阻网络：$R_1=10k\Omega$（输出到同相端），$R_2=100k\Omega$（同相端到Vref）
    迟滞 $\approx V_{OH}\times R_2/(R_1+R_2)=3.3V\times 100k/110k\approx 3V$→太大！
-   改用：$R_1=1M\Omega, R_2=10k\Omega$→迟滞 $\approx 3.3V\times 10k/1010k\approx 33mV$ ✅
+   改用：$R_1=1M\Omega, R_2=10k\Omega$→迟滞 $\approx 3.3V\times 10k/1010k\approx 33mV$ 
 
 ---
 
-## 四、故障诊断题（★★★★☆）
+## 四、故障诊断题（）
 
 ### 题目7：电流采样异常噪声诊断
 
@@ -244,7 +244,7 @@ navGroupOrder: 20
 
 ---
 
-## 五、综合案例题（★★★★★）
+## 五、综合案例题（）
 
 ### 题目9：从噪声分析到系统级优化
 
@@ -280,7 +280,7 @@ navGroupOrder: 20
    ADC热噪声主导！
    折算电流噪声：$I_{noise\_RMS}=1332\mu V/16/10m\Omega=8.33A_{RMS}$ ← 太大！
 
-   ★ 但这是宽带噪声！经过数字滤波后：
+    但这是宽带噪声！经过数字滤波后：
    电流环带宽500Hz→数字LPF降低带宽→噪声 $\propto\sqrt{BW}$：
    $I_{noise\_500Hz}=8.33\times\sqrt{500/8880}=8.33\times 0.237=1.97A_{RMS}$
    在满量程20A中占比约10%→仍然偏高！
@@ -324,11 +324,11 @@ navGroupOrder: 20
 
 4. **恢复时间验证：**
    - 共模滤波后剩余共模 $\approx 20V/12.5=1.6V$（估算）
-   - INA240 CMRR=120dB→$10^6$衰减→$1.6V/10^6=1.6\mu V$→可忽略✅
+   - INA240 CMRR=120dB→$10^6$衰减→$1.6V/10^6=1.6\mu V$→可忽略
    - 关键路径：前级RC滤波器建立时间 $\approx 5\times R_{diff}\times C_{diff}=5\times 100\times 1nF=500ns$
-   - 超过200ns要求！→改为 $R_{diff}=39\Omega, C_{diff}=1nF$→建立时间 $\approx 195ns$✅
+   - 超过200ns要求！→改为 $R_{diff}=39\Omega, C_{diff}=1nF$→建立时间 $\approx 195ns$
    - 运放overload recovery：INA240<100ns→满足200ns
-   - 总恢复时间 $\approx 195+100=295ns$，略超但接近200ns→接受✅
+   - 总恢复时间 $\approx 195+100=295ns$，略超但接近200ns→接受
 
 ---
 

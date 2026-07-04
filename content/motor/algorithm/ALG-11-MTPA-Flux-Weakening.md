@@ -11,7 +11,7 @@ title: ALG-11 MTPA 与弱磁控制
 tags:
   - motor-control
 status: learning
-summary: "**模块编号：** ALG-11 **模块名称：** MTPA 与弱磁控制（MTPA & Flux Weakening） **难度等级：** ★★★☆☆ **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现"
+summary: "**模块编号：** ALG-11 **模块名称：** MTPA 与弱磁控制（MTPA & Flux Weakening） **难度等级：**  **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
@@ -20,7 +20,7 @@ navGroupOrder: 30
 
 **模块编号：** ALG-11
 **模块名称：** MTPA 与弱磁控制（MTPA & Flux Weakening）
-**难度等级：** ★★★☆☆
+**难度等级：** 
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现
 
 ---
@@ -47,7 +47,7 @@ navGroupOrder: 30
 | MTPA   | 提升效率——相同转矩下最小化电流，减少铜损         |
 | 弱磁   | 扩展转速范围——突破基速壁垒，实现恒功率运行       |
 
-### 🎮 交互式仿真
+###  交互式仿真
 
 下面嵌入的仿真组件可以帮助你直观理解本节内容：
 
@@ -108,7 +108,7 @@ flowchart LR
 
 ---
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **弱磁控制**（无独立 MTPA 模块）:
 - hpm_mcl_v2 不包含显式的 MTPA 前馈计算模块
@@ -123,9 +123,9 @@ flowchart LR
 - MC_LIB: 内置 `MCFOC_MTPA_F()` 函数，支持凸极电机 MTPA 前馈
 - hpm_MCL: 无内置 MTPA，需应用层自行实现 Id 弱磁分量
 
-> 📝 检验你的理解：[ALG-11 检验题目](./ALG-11-assessment.md)
+>  检验你的理解：[ALG-11 检验题目](./ALG-11-assessment.md)
 
 ## 延伸实践
-- 📂 [路径12-6: MTPA专题](../practice/PRACTICE-12-PMSM-Simulation.md#站6) — MTPA原理推导与仿真验证
-- 📂 [路径12-7: MTPA+弱磁综合策略](../practice/PRACTICE-12-PMSM-Simulation.md#站7) — MTPA+弱磁+模糊PI综合仿真
-- 📂 [HW-01B: 电机学物理本质深入](../hardware/HW-01B-Motor-Physics-Deep-Dive.md) — 凸极效应的物理根源、饱和对MTPA的影响
+-  [路径12-6: MTPA专题](../practice/PRACTICE-12-PMSM-Simulation.md#站6) — MTPA原理推导与仿真验证
+-  [路径12-7: MTPA+弱磁综合策略](../practice/PRACTICE-12-PMSM-Simulation.md#站7) — MTPA+弱磁+模糊PI综合仿真
+-  [HW-01B: 电机学物理本质深入](../hardware/HW-01B-Motor-Physics-Deep-Dive.md) — 凸极效应的物理根源、饱和对MTPA的影响

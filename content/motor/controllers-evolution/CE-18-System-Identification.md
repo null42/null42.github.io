@@ -11,7 +11,7 @@ title: "CE-18: 系统辨识——模型从何而来"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：System Identification: Where Models Come From** **难度：** ★★★★☆ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（传递函数与状态空间基础）"
+summary: "**副标题：System Identification: Where Models Come From** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（传递函数与状态空间基础）"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-18: 系统辨识——模型从何而来
 
 **副标题：System Identification: Where Models Come From**
-**难度：** ★★★★☆
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-03（传递函数与状态空间基础）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 每个控制器都需要模型。LQR需要A、B、C、D矩阵；PID需要被控对象来整定参数；MPC需要预测模型。这些模型都不是从第一性原理推导出来的——它们来自数据。系统辨识（System Identification）是控制理论中缺失的第一章：给定一堆输入输出数据 $\{u[k], y[k]\}_{k=1}^N$，如何恢复产生这些数据的系统？本文从数据出发，详解ARX/ARMAX/OE三大模型族、最小二乘估计引擎、PRBS激励信号设计、模型阶次选择与验证方法，最终回答一个根本问题——模型从何而来，模型错了会怎样。
 

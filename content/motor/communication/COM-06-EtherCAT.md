@@ -11,16 +11,16 @@ title: COM-06 EtherCAT协议
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-06"
+summary: "> 路径： 工业通信协议 > COM-06"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-06 EtherCAT协议
 
-> 路径：📡 工业通信协议 > COM-06
+> 路径： 工业通信协议 > COM-06
 
-**难度：** ★★★★★
+**难度：** 
 
 ## 概述
 

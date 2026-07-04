@@ -11,7 +11,7 @@ title: "CE-21: 增益调度——处理非线性的实用方法，真正能出�
 tags:
   - motor-control
 status: learning
-summary: "**副标题：Gain Scheduling: The Practical Way to Handle Nonlinearity That Actually Ships** **难度：** ★★★★☆ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-06（PID控制）、CE-12（LQR与状"
+summary: "**副标题：Gain Scheduling: The Practical Way to Handle Nonlinearity That Actually Ships** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-06（PID控制）、CE-12（LQR与状"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-21: 增益调度——处理非线性的实用方法，真正能出货的方法
 
 **副标题：Gain Scheduling: The Practical Way to Handle Nonlinearity That Actually Ships**
-**难度：** ★★★★☆
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-06（PID控制）、CE-12（LQR与状态空间方法）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 你有一个非线性对象。你知道如何设计线性控制器。教科书告诉你这是一个难题——Lyapunov函数、非线性观测器、反步法，全套理论。但工业界几十年来一直在出货增益调度（Gain Scheduling）控制器，想法极其简单：在多个工作点设计线性控制器，然后插值。增益调度一般没有稳定性保证。它可能以丑陋的方式失败。但它飞飞机、控反应器、导导弹——因为当调度变量变化足够慢时，它工作得很漂亮。本文详解增益调度的方法、何时有效、何时失败、隐藏耦合问题、LPV控制的理论升级、无扰切换技术，以及与MPC/NMPC的对比。
 

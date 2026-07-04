@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 📊 仿真绘图系统详解
+title:  仿真绘图系统详解
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 📊 仿真绘图系统详解
+#  仿真绘图系统详解
 
 **版本：** v1.0
 **日期：** 2026-05
@@ -601,7 +601,7 @@ flowchart TD
 
 ## 10. 注意事项与常见错误
 
-### ❌ 错误 1：YAML 中添加了信号但忘了在 C 代码中记录
+###  错误 1：YAML 中添加了信号但忘了在 C 代码中记录
 
 **现象：**
 ```text
@@ -612,7 +612,7 @@ Warning: there is no signal "OFSR.esoaf.xTL" in .dat file!
 
 **解决：** 点击「Save to C and compile」，让 `super_config.py` 自动在 `DATA_LABELS` 和 `DATA_DETAILS` 中包含新信号。
 
-### ❌ 错误 2：C 表达式语法错误（括号不匹配）
+###  错误 2：C 表达式语法错误（括号不匹配）
 
 **现象：** 编译错误，gcc 报出语法错误。
 
@@ -624,7 +624,7 @@ Warning: there is no signal "OFSR.esoaf.xTL" in .dat file!
 
 **解决：** 检查 C 表达式语法，确保括号匹配、箭头运算符 `->` 正确、数组索引正确。
 
-### ❌ 错误 3：手动修改 `super_config.h/c` 后内容被覆盖
+###  错误 3：手动修改 `super_config.h/c` 后内容被覆盖
 
 **现象：** 直接编辑了 `super_config.h`，下次点击「Save to C and compile」后修改丢失。
 
@@ -632,7 +632,7 @@ Warning: there is no signal "OFSR.esoaf.xTL" in .dat file!
 
 **解决：** 永远通过修改 YAML 配置来间接修改 `super_config.h/c`，不要直接编辑这两个自动生成的文件。
 
-### ❌ 错误 4：`y_data` 字符串与 `DATA_LABELS` 不完全一致
+###  错误 4：`y_data` 字符串与 `DATA_LABELS` 不完全一致
 
 **现象：**
 ```text
@@ -645,7 +645,7 @@ Warning: there is no signal "ACM.varOmega*MECH_RAD_PER_SEC_2_RPM" in .dat file!
 
 **解决：** 确保 `y_data` 字符串与 `signal_library` 中的字符串**字符级完全一致**（包括空格、括号、大小写）。
 
-### ✅ 正确的工作流总结
+###  正确的工作流总结
 
 ```mermaid
 flowchart TD

@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握FOC基本原理，需要将浮点算法移植到资源受限MCU的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、ALG-15 前沿研究（浮点算法实现）
-**难度等级：** ★★★☆☆
+**难度等级：** 
 
 ---
 
@@ -1552,7 +1552,7 @@ Vofa_Output_Float(
 | SYS-04 | 仿真到离散——连续域到离散域的定点化 |
 | ALG-15 | 前沿研究——浮点算法的原始实现 |
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **定点数运算** (`hpm_mcl_v2/hpm_mcl_math.h`):
 - `hpm_mcl_type_t` 编译时选择 float 或 int32_t（Q格式），支持标幺值运算
@@ -1561,4 +1561,4 @@ Vofa_Output_Float(
 
 参考: `SDK-01-HPM-MC-Architecture.md` 第6节「数学库与硬件加速」
 
-> 📝 检验你的理解：[ADV-ALG-09 检验题目](./ADV-ALG-09-assessment.md)
+>  检验你的理解：[ADV-ALG-09 检验题目](./ADV-ALG-09-assessment.md)

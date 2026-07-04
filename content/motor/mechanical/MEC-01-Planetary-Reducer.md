@@ -11,16 +11,16 @@ title: MEC-01 行星减速器
 tags:
   - motor-control
 status: learning
-summary: "> 路径：⚙️ 传动与编码器 > MEC-01"
+summary: "> 路径： 传动与编码器 > MEC-01"
 navGroup: 基础与硬件
 navGroupOrder: 20
 ---
 
 # MEC-01 行星减速器
 
-> 路径：⚙️ 传动与编码器 > MEC-01
+> 路径： 传动与编码器 > MEC-01
 
-**难度：** ★★★☆☆
+**难度：** 
 
 ## 概述
 
@@ -301,7 +301,7 @@ $$K_i \propto \frac{K_t}{J_{ref}}$$
 - 采用前馈补偿减小换向冲击
 - 在减速器输出端加装编码器（双环控制）
 
-> 📎 **交叉引用**：减速比对惯量折算、电流环/速度环 PI 参数整定的定量影响 → [ALG-05 有感 FOC](../algorithm/ALG-05-Sensored-FOC.md#5-参数整定)
+>  **交叉引用**：减速比对惯量折算、电流环/速度环 PI 参数整定的定量影响 → [ALG-05 有感 FOC](../algorithm/ALG-05-Sensored-FOC.md#5-参数整定)
 
 ## 小结
 

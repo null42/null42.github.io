@@ -7,7 +7,7 @@ chapterOrder: 20
 category: 硬件与驱动
 source: motor
 visibility: public
-title: 🔧 电控硬件学习路径
+title:  电控硬件学习路径
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 基础与硬件
 navGroupOrder: 20
 ---
 
-# 🔧 电控硬件学习路径
+#  电控硬件学习路径
 
 > **核心理念**：从硬件底层理解电控系统，建立"硬件决定算法边界"的认知
 
@@ -41,14 +41,14 @@ navGroupOrder: 20
 
 | 站号 | 模块 | 核心问题 | 难度 | 关联算法 |
 |------|------|---------|------|---------|
-| 1 | [电机本体基础](./HW-01-Motor-Basics.md) | 电机为什么能转？参数如何影响控制？ | ★★☆☆☆ | ALG-1, ALG-2 |
-| 2 | [电流采样电路](./HW-02-Current-Sensing.md) | 如何精确获取电机电流？ | ★★★☆☆ | ALG-2, ALG-3 |
-| 第2.5站 | [HW-02B 电流采样拓扑详解](./HW-02B-Current-Sensing-Topologies.md) | 单/双/三电阻、低侧/高侧/在线采样、放大倍数计算 | ★★★★☆ | 5-6小时 |
-| 3 | [位置传感器接口](./HW-03-Position-Sensor.md) | 如何获取转子位置？ | ★★★☆☆ | ALG-2, ALG-4 |
-| 4 | [MCU外设与通信](./HW-04-MCU-Peripherals.md) | MCU如何控制电机？ | ★★★★☆ | ALG-2, ALG-5 |
-| 5 | [功率器件与栅极驱动](./HW-05-Power-Devices-Gate-Drivers.md) | 如何驱动大电流开关？ | ★★★★★ | ALG-3, ALG-5 |
-| 6 | [电源管理与保护](./HW-06-Power-Management-Protection.md) | 如何保证系统安全？ | ★★★★☆ | ALG-5 |
-| 7 | [热设计与EMC](./HW-07-Thermal-EMC-Design.md) | 如何保证长期可靠运行？ | ★★★★★ | ALG-5 |
+| 1 | [电机本体基础](./HW-01-Motor-Basics.md) | 电机为什么能转？参数如何影响控制？ |  | ALG-1, ALG-2 |
+| 2 | [电流采样电路](./HW-02-Current-Sensing.md) | 如何精确获取电机电流？ |  | ALG-2, ALG-3 |
+| 第2.5站 | [HW-02B 电流采样拓扑详解](./HW-02B-Current-Sensing-Topologies.md) | 单/双/三电阻、低侧/高侧/在线采样、放大倍数计算 |  | 5-6小时 |
+| 3 | [位置传感器接口](./HW-03-Position-Sensor.md) | 如何获取转子位置？ |  | ALG-2, ALG-4 |
+| 4 | [MCU外设与通信](./HW-04-MCU-Peripherals.md) | MCU如何控制电机？ |  | ALG-2, ALG-5 |
+| 5 | [功率器件与栅极驱动](./HW-05-Power-Devices-Gate-Drivers.md) | 如何驱动大电流开关？ |  | ALG-3, ALG-5 |
+| 6 | [电源管理与保护](./HW-06-Power-Management-Protection.md) | 如何保证系统安全？ |  | ALG-5 |
+| 7 | [热设计与EMC](./HW-07-Thermal-EMC-Design.md) | 如何保证长期可靠运行？ |  | ALG-5 |
 
 ---
 

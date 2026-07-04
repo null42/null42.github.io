@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title: 🔗 实践路径交叉引用映射
+title:  实践路径交叉引用映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-# 🔗 实践路径交叉引用映射
+#  实践路径交叉引用映射
 
 > 实践路径(11-14)与知识库现有模块的双向映射
 

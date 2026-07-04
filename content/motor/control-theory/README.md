@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 控制理论
 source: motor
 visibility: public
-title: 📊 控制理论基础
+title:  控制理论基础
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# 📊 控制理论基础
+#  控制理论基础
 
 > **核心理念**：从控制理论理解电机控制——从经典控制的频域/时域分析到现代控制的状态空间/观测器，再到前沿的自抗扰控制(ADRC/LADRC)
 
@@ -77,55 +77,55 @@ flowchart TD
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-01 | [开环与闭环控制](CT-01-Open-Loop-Closed-Loop.md) | 为什么闭环控制能抑制扰动？ | ★★☆☆☆ |
-| CT-02 | [时域分析](CT-02-Time-Domain-Analysis.md) | 如何从阶跃响应判断系统性能？ | ★★☆☆☆ |
-| CT-03 | [频域分析与Bode图](CT-03-Frequency-Response-Bode.md) | 如何从Bode图判断稳定性？ | ★★★☆☆ |
-| CT-07 | [Nyquist稳定判据](CT-07-Nyquist-Stability.md) | Nyquist与Bode的判据有何关系？ | ★★★★☆ |
+| CT-01 | [开环与闭环控制](CT-01-Open-Loop-Closed-Loop.md) | 为什么闭环控制能抑制扰动？ |  |
+| CT-02 | [时域分析](CT-02-Time-Domain-Analysis.md) | 如何从阶跃响应判断系统性能？ |  |
+| CT-03 | [频域分析与Bode图](CT-03-Frequency-Response-Bode.md) | 如何从Bode图判断稳定性？ |  |
+| CT-07 | [Nyquist稳定判据](CT-07-Nyquist-Stability.md) | Nyquist与Bode的判据有何关系？ |  |
 
 ### PID控制
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-04 | [PID控制原理](CT-04-PID-Control-Principles.md) | 为什么FOC电流环只用PI？ | ★★★☆☆ |
-| CT-05 | [PID整定与工程实现](CT-05-PID-Tuning-Implementation.md) | 如何在真实电机上调好PI参数？ | ★★★★☆ |
-| CT-06 | [前馈控制](CT-06-Feedforward-Control.md) | 前馈如何在不影响稳定性下提升性能？ | ★★★☆☆ |
+| CT-04 | [PID控制原理](CT-04-PID-Control-Principles.md) | 为什么FOC电流环只用PI？ |  |
+| CT-05 | [PID整定与工程实现](CT-05-PID-Tuning-Implementation.md) | 如何在真实电机上调好PI参数？ |  |
+| CT-06 | [前馈控制](CT-06-Feedforward-Control.md) | 前馈如何在不影响稳定性下提升性能？ |  |
 
 ### 经典控制进阶
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-08 | [根轨迹法](CT-08-Root-Locus.md) | 如何通过根轨迹设计控制器？ | ★★★★☆ |
-| CT-09 | [补偿器设计](CT-09-Compensator-Design.md) | 超前/滞后补偿器怎么设计？ | ★★★★☆ |
+| CT-08 | [根轨迹法](CT-08-Root-Locus.md) | 如何通过根轨迹设计控制器？ |  |
+| CT-09 | [补偿器设计](CT-09-Compensator-Design.md) | 超前/滞后补偿器怎么设计？ |  |
 
 ### 现代控制理论
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-10 | [状态空间方法](CT-10-State-Space.md) | 如何用状态方程描述电机系统？ | ★★★★☆ |
-| CT-11 | [状态观测器设计](CT-11-Observer-Design.md) | 如何估计不可测的状态？ | ★★★★★ |
-| CT-12 | [状态反馈控制](CT-12-State-Feedback.md) | 极点配置与LQR如何设计？ | ★★★★☆ |
-| CT-13 | [LQR/LQG最优控制](CT-13-LQR-LQG.md) | 如何权衡控制性能与控制代价？ | ★★★★★ |
+| CT-10 | [状态空间方法](CT-10-State-Space.md) | 如何用状态方程描述电机系统？ |  |
+| CT-11 | [状态观测器设计](CT-11-Observer-Design.md) | 如何估计不可测的状态？ |  |
+| CT-12 | [状态反馈控制](CT-12-State-Feedback.md) | 极点配置与LQR如何设计？ |  |
+| CT-13 | [LQR/LQG最优控制](CT-13-LQR-LQG.md) | 如何权衡控制性能与控制代价？ |  |
 
 ### 三环级联与PID优化
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-14 | [三环级联PID控制](CT-14-Cascaded-PID-Control.md) | 电流环→速度环→位置环如何协同？10:3:1带宽法则如何推导？ | ★★★★☆ |
-| CT-15 | [PID优化策略](CT-15-PID-Optimization-Strategies.md) | 如何通过anti-windup、微分滤波、自适应PID提升工程鲁棒性？ | ★★★★☆ |
+| CT-14 | [三环级联PID控制](CT-14-Cascaded-PID-Control.md) | 电流环→速度环→位置环如何协同？10:3:1带宽法则如何推导？ |  |
+| CT-15 | [PID优化策略](CT-15-PID-Optimization-Strategies.md) | 如何通过anti-windup、微分滤波、自适应PID提升工程鲁棒性？ |  |
 
 ### 自抗扰控制(ADRC/LADRC)
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-16 | [ADRC自抗扰控制理论](CT-16-ADRC-Theory.md) | 如何通过TD+ESO+NLSEF实现"不依赖模型"的控制？ | ★★★★★ |
-| CT-17 | [LADRC线性自抗扰控制](CT-17-LADRC-Linear-ADRC.md) | 如何用带宽参数化将ADRC简化为可工程实现的LADRC？ | ★★★★★ |
-| CT-18 | [ADRC/LADRC工程实现](CT-18-ADRC-LADRC-Implementation.md) | LADRC电流环/速度环/位置环的完整C代码如何实现？ | ★★★★☆ |
+| CT-16 | [ADRC自抗扰控制理论](CT-16-ADRC-Theory.md) | 如何通过TD+ESO+NLSEF实现"不依赖模型"的控制？ |  |
+| CT-17 | [LADRC线性自抗扰控制](CT-17-LADRC-Linear-ADRC.md) | 如何用带宽参数化将ADRC简化为可工程实现的LADRC？ |  |
+| CT-18 | [ADRC/LADRC工程实现](CT-18-ADRC-LADRC-Implementation.md) | LADRC电流环/速度环/位置环的完整C代码如何实现？ |  |
 
 ### 模型预测控制(MPC)
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| CT-19 | [模型预测控制MPC](CT-19-Model-Predictive-Control.md) | FCS-MPC/MPC-CC/MPC-TC，与PI/ADRC对比 | ★★★★★ |
+| CT-19 | [模型预测控制MPC](CT-19-Model-Predictive-Control.md) | FCS-MPC/MPC-CC/MPC-TC，与PI/ADRC对比 |  |
 
 ---
 

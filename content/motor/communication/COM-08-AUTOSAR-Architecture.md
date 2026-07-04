@@ -11,16 +11,16 @@ title: COM-08 AUTOSAR架构与电机控制
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-08"
+summary: "> 路径： 工业通信协议 > COM-08"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-08 AUTOSAR架构与电机控制
 
-> 路径：📡 工业通信协议 > COM-08
+> 路径： 工业通信协议 > COM-08
 
-**难度：** ★★★★☆
+**难度：** 
 
 ## 核心摘要
 
@@ -620,7 +620,7 @@ FOC_CurrentCtrl Runnable
 
 ### 9. 实践练习
 
-#### 练习1：SWC端口设计（★☆☆☆☆）
+#### 练习1：SWC端口设计（）
 
 为一个简单的电机速度控制SWC设计端口接口，要求：
 - 接收速度指令（float32, RPM）
@@ -630,7 +630,7 @@ FOC_CurrentCtrl Runnable
 
 请画出SWC端口图，标注每个端口的类型（Sender-Receiver / Client-Server）和数据类型。
 
-#### 练习2：OS任务调度设计（★★★☆☆）
+#### 练习2：OS任务调度设计（）
 
 给定以下Runnable及其执行时间：
 
@@ -648,7 +648,7 @@ FOC_CurrentCtrl Runnable
 
 提示：CPU利用率公式 $U = \sum_{i=1}^{n} \frac{C_i}{T_i}$，可调度条件 $U \leq n(2^{1/n} - 1)$。
 
-#### 练习3：安全机制设计（★★★★☆）
+#### 练习3：安全机制设计（）
 
 某ASIL-D电机控制器需要设计过流保护机制，要求FTTI $\leq 10ms$。已知：
 - FOC任务周期100μs
@@ -661,7 +661,7 @@ FOC_CurrentCtrl Runnable
 2. 如果Debounce计数改为5次，是否仍满足？
 3. 如何优化使故障响应时间最小化？
 
-#### 练习4：AUTOSAR COM栈配置（★★★★☆）
+#### 练习4：AUTOSAR COM栈配置（）
 
 为电机控制器设计CAN通信矩阵，要求：
 - 支持CAN FD（数据相5Mbps）

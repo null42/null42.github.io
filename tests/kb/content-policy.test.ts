@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest'
 import { scanArticles } from '../../scripts/kb/articles'
 import { nonPublicContentPatterns, shouldExcludeContentPath } from '../../scripts/kb/content-exclusions'
 
+const emojiPattern = /(?:[\u{1F000}-\u{1FAFF}]|[\u2600-\u27BF]\uFE0F?|\uFE0F|\u200D)/gu
+const numericEntityPattern = /&#(x[0-9a-f]+|\d+);/giu
+
 describe('content publishing policy', () => {
   it('excludes rough power imports from public indexes', () => {
     expect(shouldExcludeContentPath('content/power/fundamentals-work/chunks/001-preface.md')).toBe(true)
@@ -79,4 +82,33 @@ describe('content publishing policy', () => {
     expect(nonPublicContentPatterns).toContain('docs/handoff-*.md')
     expect(nonPublicContentPatterns).toContain('docs/superpowers/**')
   })
+
+  it('keeps public article markdown free of emoji', async () => {
+    const { articles } = await scanArticles()
+    const offenders = articles.flatMap((article) => {
+      const text = fs.readFileSync(article.path, 'utf8')
+      const matches = [...new Set(text.match(emojiPattern) || [])]
+      const entityMatches = findEmojiEntities(text)
+      const allMatches = [...matches, ...entityMatches]
+      return allMatches.length ? [`${article.path}: ${allMatches.join(' ')}`] : []
+    })
+
+    expect(offenders).toEqual([])
+  })
 })
+
+function findEmojiEntities(text: string): string[] {
+  const matches = new Set<string>()
+  for (const match of text.matchAll(numericEntityPattern)) {
+    const raw = match[1]
+    const codePoint = raw.toLowerCase().startsWith('x')
+      ? Number.parseInt(raw.slice(1), 16)
+      : Number.parseInt(raw, 10)
+    if (isEmojiCodePoint(codePoint)) matches.add(match[0])
+  }
+  return [...matches]
+}
+
+function isEmojiCodePoint(codePoint: number): boolean {
+  return (codePoint >= 0x1f000 && codePoint <= 0x1faff) || (codePoint >= 0x2600 && codePoint <= 0x27bf)
+}

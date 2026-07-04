@@ -11,16 +11,16 @@ title: MEC-03 多圈编码器
 tags:
   - motor-control
 status: learning
-summary: "> 路径：⚙️ 传动与编码器 > MEC-03"
+summary: "> 路径： 传动与编码器 > MEC-03"
 navGroup: 基础与硬件
 navGroupOrder: 20
 ---
 
 # MEC-03 多圈编码器
 
-> 路径：⚙️ 传动与编码器 > MEC-03
+> 路径： 传动与编码器 > MEC-03
 
-**难度：** ★★★★☆
+**难度：** 
 
 ## 概述
 
@@ -536,7 +536,7 @@ $$\omega = \frac{f_{clock}}{n \times N_{ppr}} \times 60 \text{ (rpm)}$$
 
 高分辨率编码器（20 bit+）可在极低转速下仍提供足够的速度分辨率，实现平滑的低速运行。
 
-> 📎 **交叉引用**：编码器接口（ABZ/旋变/霍尔）的硬件设计、角度校准、测速 M/T 法实现 → [HW-03 位置传感器接口](../hardware/HW-03-Position-Sensor.md) | 寻相与位置环反馈的 FOC 实现 → [ALG-05 有感 FOC](../algorithm/ALG-05-Sensored-FOC.md)
+>  **交叉引用**：编码器接口（ABZ/旋变/霍尔）的硬件设计、角度校准、测速 M/T 法实现 → [HW-03 位置传感器接口](../hardware/HW-03-Position-Sensor.md) | 寻相与位置环反馈的 FOC 实现 → [ALG-05 有感 FOC](../algorithm/ALG-05-Sensored-FOC.md)
 
 ## 小结
 

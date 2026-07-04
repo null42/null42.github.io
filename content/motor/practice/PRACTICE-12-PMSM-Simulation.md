@@ -11,14 +11,14 @@ title: "路径12: PMSM控制策略仿真"
 tags:
   - motor-control
 status: learning
-summary: "> 来源：手把手电机控制仿真 Part 1-6 + DTC | 前置：路径11站1-5 | 难度：★★★~★★★★★"
+summary: "> 来源：手把手电机控制仿真 Part 1-6 + DTC | 前置：路径11站1-5 | 难度：~"
 navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
 # 路径12: PMSM控制策略仿真
 
-> 来源：手把手电机控制仿真 Part 1-6 + DTC | 前置：路径11站1-5 | 难度：★★★~★★★★★
+> 来源：手把手电机控制仿真 Part 1-6 + DTC | 前置：路径11站1-5 | 难度：~
 
 ## 1. 路径概述
 
@@ -45,13 +45,13 @@ graph LR
 
 | 站号 | 主题 | 资源引用 | 交叉引用KB模块 | 难度 | 预计学习时间 |
 |------|------|---------|--------------|------|------------|
-| 站1 | 双闭环FOC控制系统 | 📂 `第1部分.zip`.zip) 🔑解压密码:chenshamotor | ALG-05(有感FOC) | ★★★☆☆ | 4-5小时 |
-| 站2 | 电流环参数设计 | 📂 `B站电流环.zip` 🔑chenshamotor | ALG-03(PI调节器) | ★★★☆☆ | 3-4小时 |
-| 站3 | 转速环参数设计 | 📂 `B站转速环.zip` 🔑chenshamotor | ALG-12(速度环) | ★★★☆☆ | 3-4小时 |
-| 站4 | 模糊PI双闭环控制 | 📂 `第2部分.zip` 🔑chenshamotor | CT-15(PID优化策略) | ★★★★☆ | 4-5小时 |
-| 站5 | 三闭环位置控制 | 📂 `第3部分.zip`.zip) 🔑chenshamotor | CT-14(三环级联PID), ALG-12(速度环) | ★★★★☆ | 4-5小时 |
-| 站6 | MTPA专题 | 📂 `第4部分.zip`.zip) 🔑chenshamotor | ALG-11(MTPA), ADV-ALG-05(弱磁MTPA深度) | ★★★★☆ | 5-6小时 |
-| 站7 | MTPA+弱磁综合策略 | 📂 `第5部分.zip`.zip) + 📂 `第6部分.zip` 🔑chenshamotor | ALG-11(MTPA与弱磁) | ★★★★★ | 6-8小时 |
+| 站1 | 双闭环FOC控制系统 |  `第1部分.zip`.zip) 解压密码:chenshamotor | ALG-05(有感FOC) |  | 4-5小时 |
+| 站2 | 电流环参数设计 |  `B站电流环.zip` chenshamotor | ALG-03(PI调节器) |  | 3-4小时 |
+| 站3 | 转速环参数设计 |  `B站转速环.zip` chenshamotor | ALG-12(速度环) |  | 3-4小时 |
+| 站4 | 模糊PI双闭环控制 |  `第2部分.zip` chenshamotor | CT-15(PID优化策略) |  | 4-5小时 |
+| 站5 | 三闭环位置控制 |  `第3部分.zip`.zip) chenshamotor | CT-14(三环级联PID), ALG-12(速度环) |  | 4-5小时 |
+| 站6 | MTPA专题 |  `第4部分.zip`.zip) chenshamotor | ALG-11(MTPA), ADV-ALG-05(弱磁MTPA深度) |  | 5-6小时 |
+| 站7 | MTPA+弱磁综合策略 |  `第5部分.zip`.zip) +  `第6部分.zip` chenshamotor | ALG-11(MTPA与弱磁) |  | 6-8小时 |
 
 ## 4. 各站详细说明
 
@@ -101,10 +101,10 @@ graph LR
 
 ## 6. 补充资源
 
-- 📂 `PMSM_DTC.slx` — DTC直接转矩控制（与站1的FOC控制形成对比）
-- 📂 `Parameters_DTC.m` — DTC参数配置脚本
-- 📂 `教材1: 袁雷《现代永磁同步电机控制原理》`
-- 📂 `教材2: 袁登科《永磁同步电动机变频调速系统及其控制》`
+-  `PMSM_DTC.slx` — DTC直接转矩控制（与站1的FOC控制形成对比）
+-  `Parameters_DTC.m` — DTC参数配置脚本
+-  `教材1: 袁雷《现代永磁同步电机控制原理》`
+-  `教材2: 袁登科《永磁同步电动机变频调速系统及其控制》`
 
 ## 7. 常见问题
 
@@ -120,4 +120,4 @@ A: 可使用知识库[路径9: C仿真验证](../simulation/SIM-00-C-Simulation-
 **Q: 教材如何使用？**
 A: 袁雷的书偏重控制原理推导，袁登科的书偏重系统实现，建议根据需要选读对应章节，不必通读。
 
-⚠️ **注意事项：** 所有zip压缩包解压密码为 `chenshamotor`。资源为中文。资源位置可能变化，请以实际路径为准。
+ **注意事项：** 所有zip压缩包解压密码为 `chenshamotor`。资源为中文。资源位置可能变化，请以实际路径为准。

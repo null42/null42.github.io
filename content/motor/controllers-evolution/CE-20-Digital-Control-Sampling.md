@@ -11,7 +11,7 @@ title: "CE-20: 数字控制与采样——从s域到z域发生了什么"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：Digital Control and Sampling: What Changes When You Go from s to z** **难度：** ★★★★☆ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（传递函数基础）、CE-13（离散时间系统）"
+summary: "**副标题：Digital Control and Sampling: What Changes When You Go from s to z** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（传递函数基础）、CE-13（离散时间系统）"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-20: 数字控制与采样——从s域到z域发生了什么
 
 **副标题：Digital Control and Sampling: What Changes When You Go from s to z**
-**难度：** ★★★★☆
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-03（传递函数基础）、CE-13（离散时间系统）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 你设计了一个漂亮的连续时间控制器——超前-滞后、LQR、H∞，什么都好。现在你需要它在微控制器上运行，每毫秒读一次传感器，每毫秒更新一次执行器。在连续时间下完美工作的控制器，离散化后可能振荡、过冲甚至不稳定。为什么？因为采样改变了规则。本文详解采样导致的信息丢失与混叠、零阶保持的相位滞后、z变换与频率扭曲、四种离散化方法（前向/后向Euler、Tustin、ZOH等价）的权衡、$w'$变换的连续时间直觉恢复，以及从传递函数到可运行代码的完整实现路径。
 

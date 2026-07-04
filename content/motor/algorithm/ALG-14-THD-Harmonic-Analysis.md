@@ -26,7 +26,7 @@ navGroupOrder: 30
 
 ---
 
-## 1. 📌 核心摘要 ★★★☆☆ 🔰📚
+## 1.  核心摘要  
 
 总谐波失真（THD, Total Harmonic Distortion）是衡量逆变器输出电压/电流"纯净度"的核心指标。在电机驱动中，THD 的高低直接影响铁损、转矩脉动和 EMI 噪声。本模块的核心认知锚点：**电压 THD 和电流 THD 是两个不同概念**——电机绕组电感对高频谐波有自然衰减，因此评测调制策略时应优先使用 WTHD（Weighted THD）而非原始电压 THD。理解 SVPWM 相比 SPWM 在谐波性能上的优势，需要从"谐波能量频移"的角度切入。
 
@@ -55,7 +55,7 @@ navGroupOrder: 30
 
 ---
 
-## 2. 📐 原理推导 ★★★☆☆ 📚
+## 2.  原理推导  
 
 ### 2.1 什么是THD？
 
@@ -110,7 +110,7 @@ SVPWM通过零序注入将基波附近（3次、9次等3的倍数次）的低频
 
 ---
 
-## 3. 🔢 数学建模 ★★★☆☆ 📚
+## 3.  数学建模  
 
 ### 3.1 FFT 频谱分析基础
 
@@ -161,7 +161,7 @@ $$V_{rms} = V_{1,rms} \cdot \sqrt{1 + \left(\frac{\text{THD}}{100}\right)^2} \qu
 
 ---
 
-## 4. 💻 代码实现 ★★★☆☆ 🔧
+## 4.  代码实现  
 
 ### 4.1 嵌入式 FFT 实现（实数输入，基-2 DIT）
 
@@ -331,7 +331,7 @@ thd_result_t calculate_thd(complex_t *fft_out, uint16_t n,
 
 ---
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **谐波抑制措施**:
 - **死区补偿** (`hpm_mcl_v2/hpm_mcl_cfg.h`): 编译宏 `HPM_MCL_ENABLE_DEAD_AREA_COMPENSATION` 使能
@@ -344,7 +344,7 @@ thd_result_t calculate_thd(complex_t *fft_out, uint16_t n,
 
 ---
 
-## 5. 🔧 参数整定 ★★★☆☆ 🔧
+## 5.  参数整定  
 
 ### 5.1 FFT 测量参数设置
 
@@ -393,7 +393,7 @@ $$H_{\max} = \left\lfloor \frac{f_s}{2f_e} \right\rfloor$$
 
 ---
 
-## 6. 🔗 硬件约束 ★★★☆☆ ⚠️
+## 6.  硬件约束  
 
 ### 6.1 电流传感器带宽
 
@@ -438,7 +438,7 @@ PWM 的 $dv/dt$ 通过 PCB 走线间的寄生电容耦合到电流采样电路�
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★★ 💡
+## 7.  前沿拓展  
 
 ### 7.1 在线 THD 实时监测
 
@@ -488,4 +488,4 @@ PWM 的 $dv/dt$ 通过 PCB 走线间的寄生电容耦合到电流采样电路�
 
 :::sim thd
 
-> 📝 检验你的理解：[ALG-14 检验题目](./ALG-14-assessment.md)
+>  检验你的理解：[ALG-14 检验题目](./ALG-14-assessment.md)

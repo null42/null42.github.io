@@ -210,7 +210,7 @@ $$P[k] = \frac{1}{\lambda}\left(P[k-1] - K[k]\varphi^T[k]P[k-1]\right)$$
 
 :::sim speed-loop
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **路径规划中的前馈力矩** (`hpm_mcl_v2/core/control/hpm_mcl_path_plan.h`):
 - 梯形速度曲线输出的加速度可转化为前馈力矩：τ_ff = J × acc + B × speed
@@ -225,13 +225,13 @@ $$P[k] = \frac{1}{\lambda}\left(P[k-1] - K[k]\varphi^T[k]P[k-1]\right)$$
 - `SDK-04-HPM-MC-v2-Hybrid-Ctrl.md` — 混合控制
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP_USING_ESO (47)，关键操作：施加未知负载阶跃，观察 ESO 估计的转矩 OFSR.esoaf.xTL 是否跟踪真实负载 ACM.TLoad
 
-> 📝 检验你的理解：[ALG-12 检验题目](./ALG-12-assessment.md)
+>  检验你的理解：[ALG-12 检验题目](./ALG-12-assessment.md)
 
 ## 延伸实践
-- 📂 [路径11-6: PLL角度观测器与速度环](../practice/PRACTICE-11-FOC-Engineering.md#站6) — TI风格速度环整定仿真
-- 📂 [路径12-3: 转速环参数设计](../practice/PRACTICE-12-PMSM-Simulation.md#站3) — B站配套转速环整定仿真
-- 📂 [路径12-5: 三闭环位置控制](../practice/PRACTICE-12-PMSM-Simulation.md#站5) — 位置环+速度环+电流环三环仿真
+-  [路径11-6: PLL角度观测器与速度环](../practice/PRACTICE-11-FOC-Engineering.md#站6) — TI风格速度环整定仿真
+-  [路径12-3: 转速环参数设计](../practice/PRACTICE-12-PMSM-Simulation.md#站3) — B站配套转速环整定仿真
+-  [路径12-5: 三闭环位置控制](../practice/PRACTICE-12-PMSM-Simulation.md#站5) — 位置环+速度环+电流环三环仿真

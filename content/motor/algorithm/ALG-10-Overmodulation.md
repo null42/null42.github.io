@@ -26,7 +26,7 @@ navGroupOrder: 30
 
 ---
 
-## 1. 📌 核心摘要 ★★★★☆ 🔰📚
+## 1.  核心摘要  
 
 过调制（Overmodulation）是 SVPWM 在线性调制区之外进一步提升电压利用率的必要手段。当调制比 $m$ 超过 1.0（内切圆极限）后，参考电压矢量 $V_{ref}$ 的圆形轨迹被逆变器六边形电压边界截断——我们被迫在"电压失真"和"电压幅值"之间做权衡。本模块的核心认知锚点：**过调制不是故障，而是一个受控的非线性工作区域**，理解它需要掌握从"圆形→截断圆→六边形顶点→六阶梯波"的完整演变路径。
 
@@ -53,7 +53,7 @@ navGroupOrder: 30
 
 ---
 
-## 2. 📐 原理推导 ★★★★☆ 📚
+## 2.  原理推导  
 
 ### 2.1 调制区域划分
 
@@ -104,7 +104,7 @@ Vref超出六边形的弧段被限幅到六边形边界：
 
 ---
 
-## 3. 🔢 数学建模 ★★★★☆ 📚
+## 3.  数学建模  
 
 ### 3.1 调制比与电压极限
 
@@ -134,7 +134,7 @@ $$V_1(m) = \frac{2}{\pi}V_{dc} \cdot f(m), \quad f(m) = \begin{cases} m & m \leq
 
 其中 $f(m)$ 为过调制增益函数，无量纲。
 
-> ⚠️ **注意调制比定义区分**：上式中的 $m$ 是以六阶梯波基波 $2V_{dc}/\pi$ 为基准归一化的调制深度（$m = V_1 / (2V_{dc}/\pi)$），与前文 SVPWM 线性区使用的 $m = V_{ref}/(V_{dc}/\sqrt{3})$ **定义不同**。两者在线性区的换算关系为：$m_{\text{SVPWM}} = (2/\pi\sqrt{3}) \cdot m_{\text{gain}}$。读者在交叉引用时务必区分上下文，避免混淆。
+>  **注意调制比定义区分**：上式中的 $m$ 是以六阶梯波基波 $2V_{dc}/\pi$ 为基准归一化的调制深度（$m = V_1 / (2V_{dc}/\pi)$），与前文 SVPWM 线性区使用的 $m = V_{ref}/(V_{dc}/\sqrt{3})$ **定义不同**。两者在线性区的换算关系为：$m_{\text{SVPWM}} = (2/\pi\sqrt{3}) \cdot m_{\text{gain}}$。读者在交叉引用时务必区分上下文，避免混淆。
 
 ### 3.3 谐波分析
 
@@ -152,7 +152,7 @@ $$\text{THD}_{\text{six-step}} = \frac{\sqrt{\sum_{n=5,7,11,\cdots}^{\infty} (1/
 
 ---
 
-## 4. 💻 代码实现 ★★★☆☆ 🔧
+## 4.  代码实现  
 
 ### 4.1 过调制限幅算法
 
@@ -281,7 +281,7 @@ overmod_state_t overmod_state_update(float valpha, float vbeta, float vdc)
 
 ---
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **v1 SVPWM 实现** (`hpm_mcl/inc/hpm_foc.h`):
 - `hpm_foc_svpwm()` 标准七段式 SVPWM（0/7分段）
@@ -301,7 +301,7 @@ overmod_state_t overmod_state_update(float valpha, float vbeta, float vdc)
 
 ---
 
-## 5. 🔧 参数整定 ★★★☆☆ 🔧
+## 5.  参数整定  
 
 ### 5.1 过调制使能时机
 
@@ -341,7 +341,7 @@ elif (m < m_exit && overmod_active):
 
 ---
 
-## 6. 🔗 硬件约束 ★★★★☆ ⚠️
+## 6.  硬件约束  
 
 ### 6.1 直流母线电压跌落
 
@@ -381,7 +381,7 @@ elif (m < m_exit && overmod_active):
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★★ 💡
+## 7.  前沿拓展  
 
 ### 7.1 单模式过调制（Single-Mode Overmodulation）
 
@@ -426,4 +426,4 @@ MPC（Model Predictive Control）天然支持过调制——它直接将逆变�
 
 :::sim overmodulation
 
-> 📝 检验你的理解：[ALG-10 检验题目](./ALG-10-assessment.md)
+>  检验你的理解：[ALG-10 检验题目](./ALG-10-assessment.md)

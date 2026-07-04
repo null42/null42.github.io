@@ -11,16 +11,16 @@ title: COM-04 CAN通信仿真
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-04"
+summary: "> 路径： 工业通信协议 > COM-04"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-04 CAN通信仿真
 
-> 路径：📡 工业通信协议 > COM-04
+> 路径： 工业通信协议 > COM-04
 
-**难度：** ★★★☆☆
+**难度：** 
 
 ## 概述
 

@@ -11,7 +11,7 @@ title: "CE-12: 从Bellman原理到Riccati方程"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：动态规划如何导出LQR的核心——以及Riccati方程为何不是凭空而来的** **难度：** ★★★★☆ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（状态空间法）、CE-08（最优控制基础）"
+summary: "**副标题：动态规划如何导出LQR的核心——以及Riccati方程为何不是凭空而来的** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-03（状态空间法）、CE-08（最优控制基础）"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-12: 从Bellman原理到Riccati方程
 
 **副标题：动态规划如何导出LQR的核心——以及Riccati方程为何不是凭空而来的**
-**难度：** ★★★★☆
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-03（状态空间法）、CE-08（最优控制基础）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 本文从Bellman最优性原理出发，逐步推导出线性二次调节器（Linear Quadratic Regulator, LQR）的核心——Riccati方程。我们首先建立动态规划（Dynamic Programming, DP）的一般框架，然后通过一个一维手算例子感受Riccati增益的递推过程，最后证明在线性动力学+二次代价的条件下，值函数（Value Function）始终保持二次型，从而导出离散Riccati递推和连续Riccati方程（CARE）。Bellman原理将多步联合优化分解为单步递推，二次假设使递推闭式可解——两者结合，就是LQR的全部数学基础。
 

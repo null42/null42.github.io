@@ -7,18 +7,18 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: HPM_MC电机控制库 - 架构总览 ★★★★☆ 🔰📚🔧
+title: HPM_MC电机控制库 - 架构总览  
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design"
+summary: ">  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# HPM_MC电机控制库 - 架构总览 ★★★★☆ 🔰📚🔧
+# HPM_MC电机控制库 - 架构总览  
 
-> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design.md)
+>  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-05-23  
@@ -157,25 +157,25 @@ hpm_mcl_v2/
 
 | 功能 | hpm_mcl v1 | hpm_mcl_v2 |
 |------|:----------:|:----------:|
-| FOC有感（编码器） | ✓ | ✓ |
-| FOC无感（SMO滑模） | ✓ | ✓ |
-| 高频注入（HFI） | ✓ | ✓ (已整合至control) |
-| 六步换相（方波） | ✓ | ✓ |
-| 过零检测（无感BLDC） | ✓ | ✓ (统一调度) |
-| 步进电机FOC | ✗ | ✓ |
-| 离线参数辨识 | ✗ | ✓ (Rs/Ld/Lq/Ls/Flux) |
-| 硬件FOC（VSC/CLC/QEO） | ✗ | ✓ |
-| 硬件混合环路FOC | ✗ | ✓ |
-| 力位混合控制 | ✗ | ✓ |
-| 路径规划（梯形曲线） | ✗ | ✓ |
-| 死区补偿 | ✗ | ✓ |
-| DQ轴解耦 | ✗ | ✓ |
-| 角度预测 | ✗ | ✓ |
-| 故障检测 | ✗ | ✓ |
-| 编码器抽象（T/M/MT/PLL） | ✗ | ✓ |
-| 模拟采样抽象（10通道） | ✗ | ✓ |
-| 电机角度对中（多算法） | ✗ | ✓ |
-| 统一调度 | ✗ | ✓ (6种模式) |
+| FOC有感（编码器） |  |  |
+| FOC无感（SMO滑模） |  |  |
+| 高频注入（HFI） |  |  (已整合至control) |
+| 六步换相（方波） |  |  |
+| 过零检测（无感BLDC） |  |  (统一调度) |
+| 步进电机FOC |  |  |
+| 离线参数辨识 |  |  (Rs/Ld/Lq/Ls/Flux) |
+| 硬件FOC（VSC/CLC/QEO） |  |  |
+| 硬件混合环路FOC |  |  |
+| 力位混合控制 |  |  |
+| 路径规划（梯形曲线） |  |  |
+| 死区补偿 |  |  |
+| DQ轴解耦 |  |  |
+| 角度预测 |  |  |
+| 故障检测 |  |  |
+| 编码器抽象（T/M/MT/PLL） |  |  |
+| 模拟采样抽象（10通道） |  |  |
+| 电机角度对中（多算法） |  |  |
+| 统一调度 |  |  (6种模式) |
 
 ---
 
@@ -912,11 +912,11 @@ MC_LIB 模块划分（FOC为例）:            hpm_mcl_v2 模块划分（FOC为�
 
 | 加速器 | 功能 | hpm_mcl_v2 | MC_LIB |
 |--------|------|:----------:|:------:|
-| **VSC** | Clarke/Park硬件加速 | ✓ 专用硬件 | ✗ 纯软件 |
-| **CLC** | 电流环PID硬件加速 | ✓ 专用硬件 | ✗ 纯软件 |
-| **QEO** | 逆Park/SVPWM硬件加速 | ✓ 专用硬件 | ✗ 纯软件 |
-| DSP指令集 | Cortex-M4 DSP | ✓ (HPM也有) | ✓ |
-| FPU | 硬件浮点 | ✓ 浮点模式 | ✓ `_F`版本 |
+| **VSC** | Clarke/Park硬件加速 |  专用硬件 |  纯软件 |
+| **CLC** | 电流环PID硬件加速 |  专用硬件 |  纯软件 |
+| **QEO** | 逆Park/SVPWM硬件加速 |  专用硬件 |  纯软件 |
+| DSP指令集 | Cortex-M4 DSP |  (HPM也有) |  |
+| FPU | 硬件浮点 |  浮点模式 |  `_F`版本 |
 
 HPM MCU 的 VSC/CLC/QEO 硬件加速器可将整个 FOC 电流环完全由硬件执行，CPU 仅需处理速度环和通信任务，这是 MC_LIB 所不具备的。
 
@@ -924,22 +924,22 @@ HPM MCU 的 VSC/CLC/QEO 硬件加速器可将整个 FOC 电流环完全由硬件
 
 | 算法/功能 | MC_LIB | hpm_mcl v1 | hpm_mcl_v2 |
 |-----------|:------:|:----------:|:----------:|
-| FOC有感 | ✓ | ✓ | ✓ |
-| FOC无感 SMO | ✓ | ✓ | ✓ |
-| FOC无感 HFI | ✗ | ✓ | ✓ |
-| 硬件全加速FOC | ✗ | ✗ | ✓ |
-| 硬件混合FOC | ✗ | ✗ | ✓ |
-| 六步换相 | ✓ | ✓ | ✓ |
-| 过零检测 | ✓ | ✓ | ✓ |
-| 步进电机FOC | ✗ | ✗ | ✓ |
-| 离线参数辨识 | ✗ | ✗ | ✓ |
-| 力位混合控制 | ✗ | ✗ | ✓ |
-| 路径规划 | ✗ | ✗ | ✓ |
-| 死区补偿 | ✓ | ✗ | ✓ |
-| DQ解耦 | ✗ | ✗ | ✓ |
-| 角度预测 | ✗ | ✗ | ✓ |
-| 故障检测 | ✓ (MC_ERR) | ✗ | ✓ (mcl_detect) |
-| 多平台支持 | ✓ (STM32/RX/Z20) | ✗ (仅HPM) | ✗ (仅HPM) |
+| FOC有感 |  |  |  |
+| FOC无感 SMO |  |  |  |
+| FOC无感 HFI |  |  |  |
+| 硬件全加速FOC |  |  |  |
+| 硬件混合FOC |  |  |  |
+| 六步换相 |  |  |  |
+| 过零检测 |  |  |  |
+| 步进电机FOC |  |  |  |
+| 离线参数辨识 |  |  |  |
+| 力位混合控制 |  |  |  |
+| 路径规划 |  |  |  |
+| 死区补偿 |  |  |  |
+| DQ解耦 |  |  |  |
+| 角度预测 |  |  |  |
+| 故障检测 |  (MC_ERR) |  |  (mcl_detect) |
+| 多平台支持 |  (STM32/RX/Z20) |  (仅HPM) |  (仅HPM) |
 
 ### 5.5 开发体验对比
 
@@ -1404,8 +1404,8 @@ void hpm_mcl_bldc_foc_svpwm(BLDC_CONTROL_PWM_PARA *par)
 
 ```c
 if (tuon < 0) tuon = 0;
-if (tuon < 0) tvon = 0;   // ⚠ 代码缺陷：应为 tvon < 0
-if (tuon < 0) twon = 0;   // ⚠ 代码缺陷：应为 twon < 0
+if (tuon < 0) tvon = 0;   //  代码缺陷：应为 tvon < 0
+if (tuon < 0) twon = 0;   //  代码缺陷：应为 twon < 0
 ```
 
 **工程要点：**
@@ -2112,4 +2112,4 @@ float hpm_mcl_over_zero_cal_speed(hpm_mcl_over_zero_cfg_t *cfg)
 *文档更新时间: 2026-05-26*
 
 ## 延伸实践
-- 📂 [路径14-1: DSP FOC代码实现](../../practice/PRACTICE-14-Engineering-Practice.md#站1) — TMS320F28335 FOC代码，与HPM-MC(RISC-V)形成多平台对比
+-  [路径14-1: DSP FOC代码实现](../../practice/PRACTICE-14-Engineering-Practice.md#站1) — TMS320F28335 FOC代码，与HPM-MC(RISC-V)形成多平台对比

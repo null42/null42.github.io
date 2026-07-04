@@ -11,14 +11,14 @@ title: MC_LIB - SVPWM模块详解
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)"
+summary: ">  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # MC_LIB - SVPWM模块详解
 
-> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)
+>  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-04-26  
@@ -60,11 +60,11 @@ MCFOC_SVPWM_F模块实现了SVPWM（空间矢量脉宽调制）功能：
 ┌─────────────────────────────────────────────────────────────┐
 │                   MCFOC_SVPWM_F模块特点                      │
 ├─────────────────────────────────────────────────────────────┤
-│  ✓ 双采样模式：支持三电阻和单电阻采样                        │
-│  ✓ 五段式调制：低速时降低开关损耗                            │
-│  ✓ 死区补偿：根据电流方向补偿死区效应                        │
-│  ✓ 电流重构：利用三相平衡条件重构电流                        │
-│  ✓ ADC触发优化：单电阻采样时优化ADC触发时刻                  │
+│   双采样模式：支持三电阻和单电阻采样                        │
+│   五段式调制：低速时降低开关损耗                            │
+│   死区补偿：根据电流方向补偿死区效应                        │
+│   电流重构：利用三相平衡条件重构电流                        │
+│   ADC触发优化：单电阻采样时优化ADC触发时刻                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -761,7 +761,7 @@ void MCFOC_DeadTime_COMP_F(ST_SVPWM_CONTROL_F* pSVPWM,
 
 ---
 
-## 🆚 与 hpm_MC SVPWM 对比
+##  与 hpm_MC SVPWM 对比
 
 | 维度 | MC_LIB | hpm_MCL |
 |------|--------|---------|

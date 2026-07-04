@@ -26,7 +26,7 @@ navGroupOrder: 30
 
 ---
 
-## 1. ?? 核心摘要 ★★☆☆☆ ??
+## 1. ?? 核心摘要  ??
 
 **一句话：** 有感FOC通过编码器获取精确转子位置，结合双闭环PI控制（电流环+速度环）和SVPWM调制，实现高性能的电机速度/位置伺服控制。
 
@@ -82,7 +82,7 @@ flowchart TD
 
 ---
 
-## 2. ?? 原理推导 ★★★☆☆ ??
+## 2. ?? 原理推导  ??
 
 ### 2.1 编码器接口与角度获取
 
@@ -295,7 +295,7 @@ $$
 
 ---
 
-## 3. ?? 数学建模 ★★★★☆ ??
+## 3. ?? 数学建模  ??
 
 ### 3.1 电流环传递函数
 
@@ -408,7 +408,7 @@ $$
 
 ---
 
-## 4. 💻 代码实现 ★★★★☆
+## 4.  代码实现 
 
 ### 4.1 控制模式定义
 
@@ -1127,7 +1127,7 @@ typedef struct
 
 ---
 
-## 5. ?? 参数整定 ★★★★☆ ??
+## 5. ?? 参数整定  ??
 
 ### 5.1 电流环PI参数整定
 
@@ -1207,7 +1207,7 @@ pid_limit_init(&spd_pi, 5.0f, -5.0f, 5.0f, -5.0f);     // 速度环
 
 ---
 
-## 6. ?? 硬件约束 ★★★★☆ ??
+## 6. ?? 硬件约束  ??
 
 ### 6.1 PI参数→电感电阻
 
@@ -1252,7 +1252,7 @@ SVPWM输出电压矢量的精度受硬件约束：
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★☆
+## 7.  前沿拓展 
 
 ### 7.1 自抗扰控制（ADRC）
 
@@ -1302,12 +1302,12 @@ SVPWM输出电压矢量的精度受硬件约束：
 | 速度差分 | $\omega = \Delta\theta / T_s$ | 角度差分法 |
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：修改 pmsm_comm.c 的 _user_commands() 中转速指令序列和负载阶跃，观察 Speed/Torque 子图
 
-> 📝 检验你的理解：[ALG-05 检验题目](./ALG-05-assessment.md)
+>  检验你的理解：[ALG-05 检验题目](./ALG-05-assessment.md)
 
 ## 延伸实践
-- 📂 [路径11-5: FOC系统整合与SVPWM](../practice/PRACTICE-11-FOC-Engineering.md#站5) — 完整FOC链路Simulink仿真+固件实现
-- 📂 [路径12-1: 双闭环FOC控制系统](../practice/PRACTICE-12-PMSM-Simulation.md#站1) — PMSM双闭环FOC仿真验证
+-  [路径11-5: FOC系统整合与SVPWM](../practice/PRACTICE-11-FOC-Engineering.md#站5) — 完整FOC链路Simulink仿真+固件实现
+-  [路径12-1: 双闭环FOC控制系统](../practice/PRACTICE-12-PMSM-Simulation.md#站1) — PMSM双闭环FOC仿真验证

@@ -26,7 +26,7 @@ navGroupOrder: 30
 
 ---
 
-## 1. 📌 核心摘要 ★★★★☆ 🔰
+## 1.  核心摘要  
 
 **一句话总结：** 死区补偿是避免逆变器上下桥臂直通短路的前提下，消除输出电压畸变和电流过零钳位效应的关键技术，补偿精度直接影响低速转矩平稳性和噪音水平。
 
@@ -55,7 +55,7 @@ navGroupOrder: 30
 
 ---
 
-## 2. 📐 原理推导 ★★★★☆ 📚
+## 2.  原理推导  
 
 ### 2.1 死区效应
 
@@ -93,7 +93,7 @@ $$\Delta V = V_{dc} \cdot \frac{T_{dead}}{T_{PWM}}$$
 
 ---
 
-## 3. 🔢 数学建模 ★★★★☆ 📚
+## 3.  数学建模  
 
 ### 3.1 平均电压误差模型
 
@@ -132,7 +132,7 @@ $$\frac{d\hat{d}}{dt} = \gamma \cdot (i - \hat{i})$$
 
 ---
 
-## 4. 💻 代码实现 ★★★☆☆ 🔧
+## 4.  代码实现  
 
 ### 4.1 补偿方法一：平均电压前馈
 
@@ -218,16 +218,16 @@ float dob_update(disturbance_observer_t *obs, float v_cmd, float i_meas)
 
 ---
 
-## 5. 🔧 参数整定 ★★★★☆ 🔧
+## 5.  参数整定  
 
 ### 5.1 四种策略对比
 
 | 方法 | 实现难度 | 过零区表现 | 转矩脉动改善 |
 |------|---------|-----------|-------------|
 | 无补偿 | — | 六拍畸变 | 基准 |
-| 平均电压前馈 | ★ | 可能过补偿 | ~70% |
-| PWM 占空比修正 | ★★ | 滞环边界抖动 | ~80% |
-| 观测器估计 | ★★★★ | 平滑过渡 | ~95% |
+| 平均电压前馈 |  | 可能过补偿 | ~70% |
+| PWM 占空比修正 |  | 滞环边界抖动 | ~80% |
+| 观测器估计 |  | 平滑过渡 | ~95% |
 
 ### 5.2 工程实践要点
 
@@ -248,7 +248,7 @@ float dob_update(disturbance_observer_t *obs, float v_cmd, float i_meas)
 
 ---
 
-## 6. 🔗 硬件约束 ★★★★☆ ⚠️
+## 6.  硬件约束  
 
 ### 6.1 功率器件开关速度与死区关系
 
@@ -284,7 +284,7 @@ IGBT 的拖尾电流（tail current）使得关断过程远慢于开通，因此
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★★ 💡
+## 7.  前沿拓展  
 
 ### 7.1 自适应死区调节
 
@@ -326,7 +326,7 @@ $$\Delta V = V_{dc} \cdot \frac{100ns}{50\mu s} = 0.2\% \cdot V_{dc}$$
 
 :::sim deadtime-comp
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **死区补偿配置** (`hpm_mcl_v2/hpm_mcl_cfg.h`):
 - 编译宏 `HPM_MCL_ENABLE_DEAD_AREA_COMPENSATION` 控制死区补偿使能
@@ -345,8 +345,8 @@ $$\Delta V = V_{dc} \cdot \frac{100ns}{50\mu s} = 0.2\% \cdot V_{dc}$$
 - hpm_MCL: 编译宏控制使能，补偿量集成在控制链中
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS (49)，关键操作：在 ACMSim.h 中改 `__INVERTER_NONLINEARITY` 宏（0=理想, 1=Sul1996, 2=Sigmoid, 3=LUT），对比电流波形畸变程度
 
-> 📝 检验你的理解：[ALG-04 检验题目](./ALG-04-assessment.md)
+>  检验你的理解：[ALG-04 检验题目](./ALG-04-assessment.md)

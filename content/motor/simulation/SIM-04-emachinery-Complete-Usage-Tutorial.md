@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 📖 emachinery 仿真系统 — 完整使用教程
+title:  emachinery 仿真系统 — 完整使用教程
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 📖 emachinery 仿真系统 — 完整使用教程
+#  emachinery 仿真系统 — 完整使用教程
 
 **版本：** v1.0
 **日期：** 2026-06
@@ -255,7 +255,7 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 ### 3.3 Step 2: 选择电机
 
-**位置：** sidebar 中的「🔌电机选择:」下拉菜单
+**位置：** sidebar 中的「电机选择:」下拉菜单
 
 **操作：** 从下拉列表中选择电机型号（如 `SEW100W`、`SEW200W` 等）
 

@@ -11,7 +11,7 @@ title: "CT-05: PID 整定与工程实现"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：从Ziegler-Nichols到频域法，从anti-windup到bumpless transfer——在真实电机上把PID调好调稳的完整工具箱** **难度：** ★★★★☆ 专业级 **适用对象：** 伺服驱动调试工程师、电机控制系统开发者 **前置知识：** PID原理（CT-04）、伯德图（CT-"
+summary: "**副标题：从Ziegler-Nichols到频域法，从anti-windup到bumpless transfer——在真实电机上把PID调好调稳的完整工具箱** **难度：**  专业级 **适用对象：** 伺服驱动调试工程师、电机控制系统开发者 **前置知识：** PID原理（CT-04）、伯德图（CT-"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
@@ -19,26 +19,26 @@ navGroupOrder: 30
 # CT-05: PID 整定与工程实现
 
 **副标题：从Ziegler-Nichols到频域法，从anti-windup到bumpless transfer——在真实电机上把PID调好调稳的完整工具箱**
-**难度：** ★★★★☆ 专业级
+**难度：**  专业级
 **适用对象：** 伺服驱动调试工程师、电机控制系统开发者
 **前置知识：** PID原理（CT-04）、伯德图（CT-03）、时域响应分析（CT-02）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 **一句话讲清楚**：PID参数整定是「从数学公式到真实电机」的最后一步——Ziegler-Nichols提供粗调起点，频域法提供精确优化，而anti-windup、微分滤波、bumpless transfer等工程技巧确保PID在饱和、切换、噪声等真实工况下仍能正常工作。
 
 **认知挂钩**：很多工程师看了教科书，Kp=Ls×ωc一套公式算出来，烧到DSP里却发现：「怎么还是震荡？」「启动时过流了！」「速度环和电流环切换时有冲击！」——**理论公式只给你起点，工程技巧（anti-windup、bumpless transfer、滤波）才是让PID在真实硬件上不翻车的保障。**
 
 **与FOC算法的关联**：
-- 🔗 **电流环PI整定完整流程**：从电机参数→ωc选择→Kp/Ki计算→离散化→anti-windup→示波器验证
-- 🔗 **速度环自整定**：自动注入阶跃信号，分析响应，在线优化PI参数
-- 🔗 **启动饱和保护**：anti-windup防止电流环积分在启动瞬间爆炸
+-  **电流环PI整定完整流程**：从电机参数→ωc选择→Kp/Ki计算→离散化→anti-windup→示波器验证
+-  **速度环自整定**：自动注入阶跃信号，分析响应，在线优化PI参数
+-  **启动饱和保护**：anti-windup防止电流环积分在启动瞬间爆炸
 
 ---
 
-## 2. 🤔 问题引入
+## 2.  问题引入
 
 ### 工程师的真实困惑
 
@@ -79,13 +79,13 @@ navGroupOrder: 30
 ### 学习目标
 
 读完本模块，你将能够：
-✅ **在多种PI整定方法中做出正确选择**——什么场景用什么方法
-✅ **在DSP上实现完整的工程PI**——anti-windup、bumpless transfer、微分滤波
-✅ **调试真实的电流环和速度环**——知道每一步看什么信号、怎么判断好坏
+ **在多种PI整定方法中做出正确选择**——什么场景用什么方法
+ **在DSP上实现完整的工程PI**——anti-windup、bumpless transfer、微分滤波
+ **调试真实的电流环和速度环**——知道每一步看什么信号、怎么判断好坏
 
 ---
 
-## 3. 💡 直观理解
+## 3.  直观理解
 
 ### 类比1：Z-N法 = 用力关门，频域法 = 精确调节
 
@@ -101,7 +101,7 @@ navGroupOrder: 30
 
 ---
 
-## 4. 🔬 技术原理
+## 4.  技术原理
 
 ### 4.1 PI整定方法对比
 
@@ -115,7 +115,7 @@ navGroupOrder: 30
 | PI | 0.9/(RL) | 3L | — |
 | PID | 1.2/(RL) | 2L | 0.5L |
 
-**FOC电流环适用性**：❌ 不推荐！电机RL模型响应太快（ms级），S形曲线不明显，且Z-N为振荡-衰减设计（ζ≈0.25），不适合要求Mp<5%的电流环。
+**FOC电流环适用性**： 不推荐！电机RL模型响应太快（ms级），S形曲线不明显，且Z-N为振荡-衰减设计（ζ≈0.25），不适合要求Mp<5%的电流环。
 
 #### 4.1.2 Ziegler-Nichols终极增益法
 
@@ -125,7 +125,7 @@ navGroupOrder: 30
 |--------|-----|----|----|
 | PI | 0.45Ku | Tu/1.2 | — |
 
-**FOC电流环适用性**：⚠️ 慎用！找到Ku的过程本身就是危险的（让电流环震荡可能损坏硬件）。
+**FOC电流环适用性**： 慎用！找到Ku的过程本身就是危险的（让电流环震荡可能损坏硬件）。
 
 #### 4.1.3 频域法——最适合FOC
 
@@ -234,7 +234,7 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 
 ---
 
-## 5. 🔗 交叉视角
+## 5.  交叉视角
 
 ### 5.1 电流环整定→速度环的设计输入
 
@@ -270,7 +270,7 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 
 ---
 
-## 6. 🎯 工程案例
+## 6.  工程案例
 
 ### 案例1：完整电流环PI调优过程
 
@@ -280,17 +280,17 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 **调试记录**：
 ```text
 第1轮（公式法）：ωc=1500→Kp=2.7, Ki=330
-  小信号Iq 0→1A：tr=1.6ms, Mp=0 ✅
-  大信号Iq 0→12A：启动瞬间Vq冲到50V>48V→饱和→Iq过冲到16A→过流保护⚠️
+  小信号Iq 0→1A：tr=1.6ms, Mp=0 
+  大信号Iq 0→12A：启动瞬间Vq冲到50V>48V→饱和→Iq过冲到16A→过流保护
 
 第2轮（降低ωc）：ωc=1000→Kp=1.8, Ki=220
   大信号：Vq峰值38V<48V→无饱和→
-  Iq过冲至13.5A(Mp≈12.5%)⚠️ 还是偏高
+  Iq过冲至13.5A(Mp≈12.5%) 还是偏高
 
 第3轮（增强anti-windup+减小启动给定斜率）：
   Iq_ref从0斜坡到12A（斜率5A/ms）+
   Kp=1.8, Ki=220 + anti-windup(back-calculation, Tt=Ti)
-  → Iq平滑跟踪，Mp<3% ✅✅
+  → Iq平滑跟踪，Mp<3% 
 ```
 
 **经验总结**：
@@ -302,13 +302,13 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 
 **背景**：AGV驱动，速度环需求Mp<5%, ts<200ms。
 
-**初始试凑**：$K_p^{spd}=1.5, K_i^{spd}=30$ → Mp≈18%, ts≈350ms ❌
+**初始试凑**：$K_p^{spd}=1.5, K_i^{spd}=30$ → Mp≈18%, ts≈350ms 
 
 **频域法修正**：
 - 电流环ωc=1200→速度环设计ωc_spd=150 rad/s
 - $K_p^{spd} = J\omega_c^{spd}/K_t = 0.005\times150/0.6 = 1.25$
 - $K_i^{spd} = K_p^{spd}\omega_c^{spd}/4 = 1.25\times150/4 = 46.9$
-- 结果：Mp≈6%, ts≈180ms ✅
+- 结果：Mp≈6%, ts≈180ms 
 
 ### 案例3：Bumpless Transfer 避免模式切换冲击
 
@@ -332,7 +332,7 @@ void SwitchToPositionMode() {
 
 ---
 
-## 7. 📝 实践练习
+## 7.  实践练习
 
 ### 练习1：Z-N vs 频域法对比
 
@@ -362,7 +362,7 @@ FOC电流环，Vdc=48V, Imax=20A, Ls=1.5mH, Rs=0.25Ω
 
 ---
 
-## 8. 🚀 前沿拓展
+## 8.  前沿拓展
 
 ### 8.1 基于强化学习的PID自整定
 
@@ -381,8 +381,8 @@ FOC电流环，Vdc=48V, Imax=20A, Ls=1.5mH, Rs=0.25Ω
 - 算法关联：电流环完整调优流程、anti-windup（back-calculation）、bumpless transfer
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：改 FOC.delta（速度/电流带宽比 5~25），观察 Speed 子图响应速度变化
 
-> 📝 检验你的理解：[CT-05 检验题目](./CT-05-assessment.md)
+>  检验你的理解：[CT-05 检验题目](./CT-05-assessment.md)

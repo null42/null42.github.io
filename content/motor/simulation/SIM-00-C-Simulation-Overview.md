@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 🧪 C 语言仿真验证 — 总索引
+title:  C 语言仿真验证 — 总索引
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 🧪 C 语言仿真验证 — 总索引
+#  C 语言仿真验证 — 总索引
 
 **版本：** v1.0
 **日期：** 2026-05
@@ -33,7 +33,7 @@ navGroupOrder: 40
 
 ---
 
-## 🚀 启动 emachinery 仿真
+##  启动 emachinery 仿真
 
 emachinery 是一个独立的 Streamlit 应用，需要**先在 Windows 中启动**才能使用：
 
@@ -46,7 +46,7 @@ emachinery 是一个独立的 Streamlit 应用，需要**先在 Windows 中启�
 **备用方式：仅编译运行 C 代码（无需浏览器）**
 双击 `E:\new_things\emy-c-build.bat` → 编译成功后手动运行 `main.exe` → 输出 `.dat` 数据文件
 
-> ⚠️ 首次使用请确保已安装 TDM-GCC-64 和 Python 虚拟环境（`E:\new_things\emy-env`）。详见 [SIM-01 环境准备](./SIM-01-C-Simulation-QuickStart.md#1-环境准备)。
+>  首次使用请确保已安装 TDM-GCC-64 和 Python 虚拟环境（`E:\new_things\emy-env`）。详见 [SIM-01 环境准备](./SIM-01-C-Simulation-QuickStart.md#1-环境准备)。
 
 ---
 
@@ -66,14 +66,14 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 **涵盖仿真模式：** 24 种（从 PWM 直接控制到 Nyquist 图绘制）
 
 **与纯理论推导的不同：**
-- ✅ 可以看到真实的电流/转速/转矩波形
-- ✅ 可以观察阶跃响应、参数失配影响
-- ✅ 可以扫频获取实测 Bode 图和 Nyquist 图
+-  可以看到真实的电流/转速/转矩波形
+-  可以观察阶跃响应、参数失配影响
+-  可以扫频获取实测 Bode 图和 Nyquist 图
 
 **与 DSP 实验代码的不同：**
-- ✅ 没有硬件限制，可以自由修改参数和算法
-- ✅ 编译运行在 PC 端，秒级完成仿真
-- ✅ 支持任意精度的浮点运算（`REAL` = `double`）
+-  没有硬件限制，可以自由修改参数和算法
+-  编译运行在 PC 端，秒级完成仿真
+-  支持任意精度的浮点运算（`REAL` = `double`）
 
 ---
 
@@ -260,10 +260,10 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | 你的情况 | 建议路径 |
 |---------|---------|
-| 🚀 第一次使用仿真？ | → [SIM-01 快速上手指南](./SIM-01-C-Simulation-QuickStart.md) |
-| 🔍 学完某节理论想验证？ | → 在本页 **第 2 节对应表** 查找 → 打开 Streamlit → 选择对应 Mode → 按"关键操作"列执行 |
-| 💻 想深入理解 C 代码实现？ | → [SIM-02 代码概念映射](./SIM-02-C-Simulation-Code-Map.md) |
-| 📊 想看某个信号的波形？ | → 查本页 **第 4 节可观测信号速查表** 找变量名 |
+|  第一次使用仿真？ | → [SIM-01 快速上手指南](./SIM-01-C-Simulation-QuickStart.md) |
+|  学完某节理论想验证？ | → 在本页 **第 2 节对应表** 查找 → 打开 Streamlit → 选择对应 Mode → 按"关键操作"列执行 |
+|  想深入理解 C 代码实现？ | → [SIM-02 代码概念映射](./SIM-02-C-Simulation-Code-Map.md) |
+|  想看某个信号的波形？ | → 查本页 **第 4 节可观测信号速查表** 找变量名 |
 
 ---
 
@@ -430,5 +430,5 @@ emachinery 支持多用户并行开发，每个用户可以创建独立的算法
 6. **电机参数准确性**：仿真中使用的电机参数来自 `motor_library.json`，辨识实验中如果辨识结果与真实值偏差较大，检查 YAML 中的激励信号幅值是否合适（太小信噪比低，太大可能饱和）。
 
 ## 延伸实践
-- 📂 [路径13: 无位置传感器控制](../practice/PRACTICE-13-Sensorless-Control.md) — 无MATLAB许可证时，可用C仿真平台验证SMO/MRAS等无感算法
-- 📂 [SIM-05: 数字孪生与真实电机模型](./SIM-05-Digital-Twin.md) — 参数辨识、模型验证、在线自适应、仿真置信度评估
+-  [路径13: 无位置传感器控制](../practice/PRACTICE-13-Sensorless-Control.md) — 无MATLAB许可证时，可用C仿真平台验证SMO/MRAS等无感算法
+-  [SIM-05: 数字孪生与真实电机模型](./SIM-05-Digital-Twin.md) — 参数辨识、模型验证、在线自适应、仿真置信度评估

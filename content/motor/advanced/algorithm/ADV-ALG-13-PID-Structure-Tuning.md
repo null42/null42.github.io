@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握FOC基本原理和PI控制，需要深入理解PID结构差异与整定方法的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、ADV-ALG-01 控制环带宽设计、自动控制原理
-**难度等级：** ★★★★★
+**难度等级：** 
 
 ---
 
@@ -1763,7 +1763,7 @@ flowchart TD
 - **ALG-01 FOC理论基础**：dq坐标系下的电机模型，PI控制的物理本质
 - **ALG-05 有感FOC实现**：三环控制的工程实现，调试顺序
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **PID 配置实践** (`hpm_mcl_v2/core/control/hpm_mcl_control.h`):
 - 示例 `bldc_foc.c` 中的默认 PI 参数和经验公式
@@ -1773,4 +1773,4 @@ flowchart TD
 
 参考: `SDK-02-HPM-MC-v2-Core-Loop.md` 第3节 + `ALG-03-PI-Current-Regulator.md`
 
-> 📝 检验你的理解：[ADV-ALG-13 检验题目](./ADV-ALG-13-assessment.md)
+>  检验你的理解：[ADV-ALG-13 检验题目](./ADV-ALG-13-assessment.md)

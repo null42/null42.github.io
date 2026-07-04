@@ -21,7 +21,7 @@ navGroupOrder: 10
 ODrive vs VESC 全面对比
 0%
 
-&#9878;
+
 
 # ODrive vs VESC 全面对比
 

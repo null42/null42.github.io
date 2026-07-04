@@ -7,18 +7,18 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: HPM-MC v2 力位混合控制模块深度解析 ★★★★☆ 🔰📚🔧
+title: HPM-MC v2 力位混合控制模块深度解析  
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../a"
+summary: ">  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../a"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# HPM-MC v2 力位混合控制模块深度解析 ★★★★☆ 🔰📚🔧
+# HPM-MC v2 力位混合控制模块深度解析  
 
-> 🔗 关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)
+>  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)
 
 **文档版本：** v1.0
 **生成日期：** 2026-05-23
@@ -86,13 +86,13 @@ V2 新增特性：
 ┌─────────────────────────────────────────────────────────────────┐
 │                   MCL V2 混合控制 v2 独有特性                     │
 ├─────────────────────────────────────────────────────────────────┤
-│  ✓ 新增 mcl_mode_hybrid_foc (6) 运行模式                         │
-│  ✓ 独立模块 hpm_mcl_hybrid_ctrl.{h,c} 实现 PD+前馈控制律         │
-│  ✓ 速度低通滤波 + 死区处理消除抖动                               │
-│  ✓ 力矩限幅保护电机和驱动器                                     │
-│  ✓ 支持硬件 CLC 加速电流内环 (可选 MCL_HARDWARE_HYBRID_LOOP)     │
-│  ✓ hpm_mcl_loop_init() 支持 hw_loop 参数传递                     │
-│  ✓ 与编码器/路径规划/传感器观测器无缝集成                        │
+│   新增 mcl_mode_hybrid_foc (6) 运行模式                         │
+│   独立模块 hpm_mcl_hybrid_ctrl.{h,c} 实现 PD+前馈控制律         │
+│   速度低通滤波 + 死区处理消除抖动                               │
+│   力矩限幅保护电机和驱动器                                     │
+│   支持硬件 CLC 加速电流内环 (可选 MCL_HARDWARE_HYBRID_LOOP)     │
+│   hpm_mcl_loop_init() 支持 hw_loop 参数传递                     │
+│   与编码器/路径规划/传感器观测器无缝集成                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

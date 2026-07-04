@@ -11,14 +11,14 @@ title: "路径11: FOC从仿真到固件"
 tags:
   - motor-control
 status: learning
-summary: "> 来源：foc_controller-master | 前置：路径4(算法)站0-3 | 难度：★★★~★★★★"
+summary: "> 来源：foc_controller-master | 前置：路径4(算法)站0-3 | 难度：~"
 navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
 # 路径11: FOC从仿真到固件
 
-> 来源：foc_controller-master | 前置：路径4(算法)站0-3 | 难度：★★★~★★★★
+> 来源：foc_controller-master | 前置：路径4(算法)站0-3 | 难度：~
 
 ## 1. 路径概述
 
@@ -43,12 +43,12 @@ graph LR
 
 | 站号 | 主题 | 资源引用 | 交叉引用KB模块 | 难度 | 预计学习时间 |
 |------|------|---------|--------------|------|------------|
-| 站1 | FOC课程概述 | 📂 `FOC_CourseDescription.pptx`FOC_CourseDescription.pptx) | ALG-01(FOC理论) | ★★★☆☆ | 1-2小时 |
-| 站2 | 电机原理与硬件平台 | 📂 `FOC_Motor&Hw.pptx`FOC_Motor%26Hw.pptx) + 📂 `HW补充.pptx`HW补充.pptx) | HW-01(电机本体), HW-03(位置传感器), HW-05(功率器件) | ★★★☆☆ | 2-3小时 |
-| 站3 | 电流环PI设计与仿真 | 📂 `FOC_ClassicControl.pptx`FOC_ClassicControl.pptx) + 📂 `current_pi.m` + 📂 `pi_current.slx` + 📂 `current_pi_with_delay.m` | ALG-03(PI调节器), ALG-01(FOC理论) | ★★★☆☆ | 4-5小时 |
-| 站4 | 低通滤波器设计 | 📂 `FOC_LowPassFilter.pptx`FOC_LowPassFilter.pptx) + 📂 `lpf2.m` + 📂 `lpf.slx` | ADV-ALG-01(带宽与滤波器) | ★★★☆☆ | 2-3小时 |
-| 站5 | FOC系统整合与SVPWM | 📂 `FOC_Description.pptx`FOC_Description.pptx) + 📂 `FOC_SVPWM.pptx`FOC_SVPWM.pptx) + 📂 `motor_foc.slx` + 📂 `svpwm.slx` | ALG-05(有感FOC) | ★★★★☆ | 4-5小时 |
-| 站6 | PLL角度观测器与速度环 | 📂 `pll.m` + 📂 `pll_angle.slx` + 📂 `speed_TI.m` + 📂 `mc_speed_TI.slx` + 📂 `pll.h` + 📂 `foc.c` | ALG-06(位置速度观测器), ALG-12(速度环) | ★★★★☆ | 4-5小时 |
+| 站1 | FOC课程概述 |  `FOC_CourseDescription.pptx`FOC_CourseDescription.pptx) | ALG-01(FOC理论) |  | 1-2小时 |
+| 站2 | 电机原理与硬件平台 |  `FOC_Motor&Hw.pptx`FOC_Motor%26Hw.pptx) +  `HW补充.pptx`HW补充.pptx) | HW-01(电机本体), HW-03(位置传感器), HW-05(功率器件) |  | 2-3小时 |
+| 站3 | 电流环PI设计与仿真 |  `FOC_ClassicControl.pptx`FOC_ClassicControl.pptx) +  `current_pi.m` +  `pi_current.slx` +  `current_pi_with_delay.m` | ALG-03(PI调节器), ALG-01(FOC理论) |  | 4-5小时 |
+| 站4 | 低通滤波器设计 |  `FOC_LowPassFilter.pptx`FOC_LowPassFilter.pptx) +  `lpf2.m` +  `lpf.slx` | ADV-ALG-01(带宽与滤波器) |  | 2-3小时 |
+| 站5 | FOC系统整合与SVPWM |  `FOC_Description.pptx`FOC_Description.pptx) +  `FOC_SVPWM.pptx`FOC_SVPWM.pptx) +  `motor_foc.slx` +  `svpwm.slx` | ALG-05(有感FOC) |  | 4-5小时 |
+| 站6 | PLL角度观测器与速度环 |  `pll.m` +  `pll_angle.slx` +  `speed_TI.m` +  `mc_speed_TI.slx` +  `pll.h` +  `foc.c` | ALG-06(位置速度观测器), ALG-12(速度环) |  | 4-5小时 |
 
 ## 4. 各站详细说明
 
@@ -93,10 +93,10 @@ graph LR
 
 ## 6. 补充资源
 
-- 📂 `固件controller目录` — foc.c / pi.h / svpwm.c / pll.h 完整FOC算法实现
-- 📂 `Papers目录` — 4篇参考论文（TI InstaSPIN、Microchip AN1078、霍尔安装误差、电流环延迟分析）
-- 📂 `config.h` — 硬件参数配置（PWM频率、死区时间、引脚映射）
-- 📂 `Keil工程` — odrive_mks.uvprojx
+-  `固件controller目录` — foc.c / pi.h / svpwm.c / pll.h 完整FOC算法实现
+-  `Papers目录` — 4篇参考论文（TI InstaSPIN、Microchip AN1078、霍尔安装误差、电流环延迟分析）
+-  `config.h` — 硬件参数配置（PWM频率、死区时间、引脚映射）
+-  `Keil工程` — odrive_mks.uvprojx
 
 ## 7. 常见问题
 
@@ -112,4 +112,4 @@ A: 使用Keil uVision打开Projects目录下的odrive_mks.uvprojx工程文件，
 **Q: 硬件平台与知识库HW模块的对应关系？**
 A: ODrive v3.6使用STM32F404(HW-04 MCU外设) + DRV8301(HW-05 功率器件) + AS5047P(HW-03 位置传感器) + 下桥电流采样(HW-02 电流采样)。
 
-⚠️ **注意事项：** 资源位置可能变化，请以实际路径为准。所有PPT和代码资源为中文。
+ **注意事项：** 资源位置可能变化，请以实际路径为准。所有PPT和代码资源为中文。

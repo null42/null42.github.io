@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 💻 仿真代码 ↔ 知识库概念映射
+title:  仿真代码 ↔ 知识库概念映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 💻 仿真代码 ↔ 知识库概念映射
+#  仿真代码 ↔ 知识库概念映射
 
 **版本：** v1.0
 **日期：** 2026-05
@@ -136,7 +136,7 @@ flowchart LR
 | `ACM.KE` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 反电势系数 | **永磁体磁链（反电势系数）**。单位 V·s/rad（或等效于 N·m/A = Wb）。KE 决定了给定转速下的反电动势幅值（`BackEMF = KE × ωe`），也决定了电流到转矩的转换系数 |
 | `ACM.Js` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 转动惯量 | **转动惯量**。决定机械时间常数 τm = Js/Bm（Bm 为摩擦系数）。惯量越大，转速变化越慢。在速度环 PI 整定中，Js 直接用于计算前馈增益 `K = npp × KE / Js` |
 | `ACM.npp` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 极对数 | **极对数**。将机械量转换为电气量的乘数因子：`ωe = npp × ωm`，`θe = npp × θm`。极对数越多，相同机械转速下电气频率越高，对控制器时序要求越严格 |
-| `ACM.Rreq` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 有效转子电阻 | **转子有效电阻**，用于感应电机（IM）转子磁链计算。对于 PMSM：Rreq = 0（永磁体励磁，无需计算转子磁链动态）；对于 IM：Rreq > 0（感应电机，转子磁链由滑差产生）；Rreq < 0 为非法值。`⚠️` 错误设值会导致电机模型行为异常 |
+| `ACM.Rreq` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 有效转子电阻 | **转子有效电阻**，用于感应电机（IM）转子磁链计算。对于 PMSM：Rreq = 0（永磁体励磁，无需计算转子磁链动态）；对于 IM：Rreq > 0（感应电机，转子磁链由滑差产生）；Rreq < 0 为非法值。`` 错误设值会导致电机模型行为异常 |
 
 #### 2.1.4 电机状态方程（DYNAMICS_MACHINE）
 
@@ -398,7 +398,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 | C 代码段 | 对应 KB 概念 | 详细说明 |
 |---------|-------------|---------|
 | `struct ST_D_SIM` | YAML 参数映射 | **仿真参数结构体类型定义**。由 `super_config.py`（Python）自动生成。结构体中每个成员变量对应 `user_config.yaml` 中的一个配置项。例如：`d_sim.init.CLBW_HZ`（电流环目标带宽，Hz）、`d_sim.init.delta`（速度/电流带宽比）、`d_sim.init.CLTS`（电流环控制周期，s）、`d_sim.sim.NUMBER_OF_STEPS`（仿真总步数）、`d_sim.motor.R`（电机电阻，Ω）等 |
-| `init_d_sim()` | YAML → C 赋值 | **结构体初始化函数**。由 `super_config.py` 自动生成。将 YAML 中配置的参数值赋给 `ST_D_SIM` 结构体的各成员变量。在 `main()` 的初始化阶段调用，是整个仿真参数从 Python 层传递到 C 层的桥梁。`⚠️` 此文件由 Python 自动生成，手动修改会在下次点击「Save to C and compile」时被覆盖 |
+| `init_d_sim()` | YAML → C 赋值 | **结构体初始化函数**。由 `super_config.py` 自动生成。将 YAML 中配置的参数值赋给 `ST_D_SIM` 结构体的各成员变量。在 `main()` 的初始化阶段调用，是整个仿真参数从 Python 层传递到 C 层的桥梁。`` 此文件由 Python 自动生成，手动修改会在下次点击「Save to C and compile」时被覆盖 |
 
 ---
 
@@ -434,7 +434,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 ## 4. C 代码修改安全提示
 
-> ⚠️ 以下提示来自长期使用经验积累，忽视任意一条都可能让你浪费数小时 debug。请务必读完。
+>  以下提示来自长期使用经验积累，忽视任意一条都可能让你浪费数小时 debug。请务必读完。
 
 ### 4.1 super_config.h / super_config.c 不可手动修改
 
@@ -502,13 +502,13 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | 你的目标 | 推荐阅读顺序 |
 |---------|-----------|
-| 🏁 **理解 FOC 控制算法** | `ACMSim.h`（数据结构） → `pmsm_comm.c` 的 `_onlyFOC()`（FOC 链路） → `pi_math.h`（PI 宏） → `main_switch.c` 的 `init_CTRL()`（PI 参数计算） |
-| 🔬 **理解电机物理模型** | `ACMSim.h`（`MachineSimulated` 结构体） → `main.c` 的 `DYNAMICS_MACHINE()`（状态方程） → `main.c` 的 `RK4()`（数值积分） → `main.c` 的 `machine_simulation()`（单步流程） |
-| 🎛️ **理解仿真架构** | `main.c` 的 `main()`（主循环） → `main_switch.c` 的 `main_switch()`（模式调度） → `utility.c`（数据记录） → `super_config.h/c`（参数流） |
-| 🔧 **自定义仿真实验** | `pmsm_comm.c` 的 `_user_commands()`（指令序列） → `main_switch.c`（添加新模式） → `user_config.yaml`（参数配置） |
-| 🧪 **参数自整定** | `pmsm_comm.c` 的 `StepByStepCommissioning_NEW_WB()`（状态机） → `COMM_resistanceId()` / `COMM_inductanceId_ver3()` / `COMM_PMFluxId()` / `COMM_inertiaId()`（各辨识步骤） → `COMM_PI_tuning()`（整定公式） |
-| 🚀 **无传感器控制** | `pmsm_observer.c` 的 `pmsm_observers()`（入口） → `Main_esoaf_chen2021()`（ESO） → `eso_one_parameter_tuning()`（观测器增益） |
-| 🎓 **逆变器非线性补偿** | `main.c` 的 `inverter_model()`（5 种模型入口） → `ALG-04` 死区补偿（理论背景） |
+|  **理解 FOC 控制算法** | `ACMSim.h`（数据结构） → `pmsm_comm.c` 的 `_onlyFOC()`（FOC 链路） → `pi_math.h`（PI 宏） → `main_switch.c` 的 `init_CTRL()`（PI 参数计算） |
+|  **理解电机物理模型** | `ACMSim.h`（`MachineSimulated` 结构体） → `main.c` 的 `DYNAMICS_MACHINE()`（状态方程） → `main.c` 的 `RK4()`（数值积分） → `main.c` 的 `machine_simulation()`（单步流程） |
+|  **理解仿真架构** | `main.c` 的 `main()`（主循环） → `main_switch.c` 的 `main_switch()`（模式调度） → `utility.c`（数据记录） → `super_config.h/c`（参数流） |
+|  **自定义仿真实验** | `pmsm_comm.c` 的 `_user_commands()`（指令序列） → `main_switch.c`（添加新模式） → `user_config.yaml`（参数配置） |
+|  **参数自整定** | `pmsm_comm.c` 的 `StepByStepCommissioning_NEW_WB()`（状态机） → `COMM_resistanceId()` / `COMM_inductanceId_ver3()` / `COMM_PMFluxId()` / `COMM_inertiaId()`（各辨识步骤） → `COMM_PI_tuning()`（整定公式） |
+|  **无传感器控制** | `pmsm_observer.c` 的 `pmsm_observers()`（入口） → `Main_esoaf_chen2021()`（ESO） → `eso_one_parameter_tuning()`（观测器增益） |
+|  **逆变器非线性补偿** | `main.c` 的 `inverter_model()`（5 种模型入口） → `ALG-04` 死区补偿（理论背景） |
 
 ### 5.2 代码阅读最佳实践
 
@@ -641,8 +641,8 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 ---
 
-> 📖 **相关文档：**
+>  **相关文档：**
 > - [SIM-00 仿真总索引](./SIM-00-C-Simulation-Overview.md) — 按学习主题查找对应仿真模式
 > - [SIM-01 快速上手指南](./SIM-01-C-Simulation-QuickStart.md) — 首次使用仿真的环境搭建和第一个例子
 >
-> 📬 **文档反馈：** 如果在阅读过程中发现任何代码位置不准确、概念映射有误或缺少重要对应关系，请在知识库 GitHub Issues 中提交反馈。
+>  **文档反馈：** 如果在阅读过程中发现任何代码位置不准确、概念映射有误或缺少重要对应关系，请在知识库 GitHub Issues 中提交反馈。

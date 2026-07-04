@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title: 🔗 交叉引用：高级篇↔基础篇映射
+title:  交叉引用：高级篇↔基础篇映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-# 🔗 交叉引用：高级篇↔基础篇映射
+#  交叉引用：高级篇↔基础篇映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -127,19 +127,19 @@ navGroupOrder: 10
 
 | 模块 | 基础篇关联数 | 高级篇内部关联数 | 达标(≥2) |
 |------|-----------|--------------|----------|
-| ADV-HW-01 | 6 | 2 (→ADV-HW-02, →ADV-ALG-05) | ✅ |
-| ADV-HW-02 | 5 | 2 (→ADV-HW-01, →ADV-ALG-09) | ✅ |
-| ADV-HW-03 | 6 | 1 (→ADV-ALG-15) | ✅ |
-| ADV-ALG-01 | 4 | 3 (→ADV-ALG-05, →ADV-ALG-07, →ADV-ALG-13) | ✅ |
-| ADV-ALG-05 | 5 | 2 (→ADV-ALG-01, →ADV-HW-01) | ✅ |
-| ADV-ALG-07 | 4 | 2 (→ADV-ALG-13, →ADV-ALG-01) | ✅ |
-| ADV-ALG-09 | 4 | 2 (→ADV-ALG-13, →SYS-04) | ✅ |
-| ADV-ALG-13 | 4 | 3 (→ADV-ALG-01, →ADV-ALG-07, →ADV-ALG-09) | ✅ |
-| ADV-ALG-15 | 5 | 3 (→ADV-HW-01, →ADV-HW-02, →ADV-HW-03) | ✅ |
-| SYS-01 | 1 | 0 | ✅(系统方法论类) |
-| SYS-02 | 1 | 1 (→SYS-03) | ✅ |
-| SYS-03 | 1 | 1 (→SYS-02) | ✅ |
-| SYS-04 | 1 | 1 (→ADV-ALG-09) | ✅ |
+| ADV-HW-01 | 6 | 2 (→ADV-HW-02, →ADV-ALG-05) |  |
+| ADV-HW-02 | 5 | 2 (→ADV-HW-01, →ADV-ALG-09) |  |
+| ADV-HW-03 | 6 | 1 (→ADV-ALG-15) |  |
+| ADV-ALG-01 | 4 | 3 (→ADV-ALG-05, →ADV-ALG-07, →ADV-ALG-13) |  |
+| ADV-ALG-05 | 5 | 2 (→ADV-ALG-01, →ADV-HW-01) |  |
+| ADV-ALG-07 | 4 | 2 (→ADV-ALG-13, →ADV-ALG-01) |  |
+| ADV-ALG-09 | 4 | 2 (→ADV-ALG-13, →SYS-04) |  |
+| ADV-ALG-13 | 4 | 3 (→ADV-ALG-01, →ADV-ALG-07, →ADV-ALG-09) |  |
+| ADV-ALG-15 | 5 | 3 (→ADV-HW-01, →ADV-HW-02, →ADV-HW-03) |  |
+| SYS-01 | 1 | 0 | (系统方法论类) |
+| SYS-02 | 1 | 1 (→SYS-03) |  |
+| SYS-03 | 1 | 1 (→SYS-02) |  |
+| SYS-04 | 1 | 1 (→ADV-ALG-09) |  |
 
 **所有高级篇模块均满足交叉引用要求（系统方法论类模块因其跨领域性质，基础篇关联数要求放宽）。**
 

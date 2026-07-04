@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { isImageAsset, toMarkdownImage } from '../../scripts/kb/import/assets'
-import { normalizeMathDelimiters } from '../../scripts/kb/markdown-rendering'
+import { normalizeMathDelimiters, normalizeMermaidSource, renderMathToHtml } from '../../scripts/kb/markdown-rendering'
 
 describe('rendering fixture', () => {
   it('contains markdown, mermaid, svg, table, callout, and code examples', () => {
@@ -41,24 +41,52 @@ describe('rendering fixture', () => {
 
   it('normalizes imported Mermaid state aliases before rendering', () => {
     const mermaidComponent = fs.readFileSync('.vitepress/theme/components/MermaidDiagram.vue', 'utf8')
+    const source = 'state Motor_Run as "电机运行"'
 
     expect(mermaidComponent).toContain('normalizeMermaidSource')
-    expect(mermaidComponent).toContain('state "$3" as $2')
+    expect(normalizeMermaidSource(source)).toBe('state "电机运行" as Motor_Run')
   })
 
-  it('loads math and mermaid from local packages', () => {
+  it('normalizes Mermaid labels that trigger markdown list parsing errors', () => {
+    const source = [
+      'flowchart LR',
+      '    R["R(s)"] --> SUM["⊕"]',
+      '    Y -->|"反馈 H(s)=1"| FB',
+      '    FB -->|"- "| SUM'
+    ].join('\n')
+
+    const normalized = normalizeMermaidSource(source)
+
+    expect(normalized).toContain('FB -->|"负反馈"| SUM')
+    expect(normalized).not.toContain('|"- "|')
+  })
+
+  it('loads math and mermaid from local packages without the stale markdown-it-katex renderer', () => {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
     const config = fs.readFileSync('.vitepress/config.ts', 'utf8')
     const theme = fs.readFileSync('.vitepress/theme/index.ts', 'utf8')
     const mermaidComponent = fs.readFileSync('.vitepress/theme/components/MermaidDiagram.vue', 'utf8')
 
     expect(packageJson.dependencies).toHaveProperty('katex')
-    expect(packageJson.dependencies).toHaveProperty('markdown-it-katex')
     expect(packageJson.dependencies).toHaveProperty('mermaid')
-    expect(config).toContain('markdownItKatex')
+    expect(packageJson.dependencies).not.toHaveProperty('markdown-it-katex')
+    expect(config).not.toContain('markdownItKatex')
+    expect(config).toContain('markdownItCurrentKatex')
     expect(theme).toContain('katex/dist/katex.min.css')
     expect(mermaidComponent).toContain("import('mermaid')")
+    expect(mermaidComponent).toContain("securityLevel: 'loose'")
+    expect(mermaidComponent).toContain('markdownAutoWrap: false')
     expect(mermaidComponent).not.toContain('cdn.jsdelivr.net')
+  })
+
+  it('renders math with the project KaTeX version used by the loaded CSS', () => {
+    const inline = renderMathToHtml('T_{open}(s)=C(s)G(s)', false)
+    const display = renderMathToHtml('\\frac{C(s)G(s)}{1+C(s)G(s)}', true)
+
+    expect(inline).toContain('class="katex"')
+    expect(inline).toContain('<msub>')
+    expect(display).toContain('class="katex-display"')
+    expect(display).toContain('<mfrac>')
   })
 
   it('normalizes bracket math delimiters without changing fenced code', () => {

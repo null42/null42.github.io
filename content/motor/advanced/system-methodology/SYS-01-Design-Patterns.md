@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 具备C语言和电机控制基础的嵌入式工程师
 **前置知识：** ALG-05 有感FOC实现、C语言函数指针、基本面向对象思想
-**难度等级：** ★★★☆☆
+**难度等级：** 
 
 ---
 
@@ -2437,7 +2437,7 @@ MC_LIB的分层架构天然体现了这些设计模式的思想，虽然它使�
 4. [ADV-ALG-13 PID结构选择与深度整定](../algorithm/ADV-ALG-13-PID-Structure-Tuning.md) - PID参数与策略模式的关系
 5. [MC-LIB-Architecture](../../algorithm/MC-LIB/MC-LIB-Architecture.md) - MC_LIB分层架构详解
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **hpm_mcl_v2 架构方法论**:
 - 分层设计: 应用层→Core层→驱动层→硬件加速层→HAL层（五层架构）
@@ -2448,7 +2448,7 @@ MC_LIB的分层架构天然体现了这些设计模式的思想，虽然它使�
 
 参考: `SDK-01-HPM-MC-Architecture.md` — 完整架构分析
 
-> 📝 检验你的理解：[SYS-01 检验题目](./SYS-01-assessment.md)
+>  检验你的理解：[SYS-01 检验题目](./SYS-01-assessment.md)
 
 ## 延伸实践
-- 📂 [路径14-4: 固件架构与调试](../../practice/PRACTICE-14-Engineering-Practice.md#站4) — 分层架构(app/bsp/controller/drivers)实战参考
+-  [路径14-4: 固件架构与调试](../../practice/PRACTICE-14-Engineering-Practice.md#站4) — 分层架构(app/bsp/controller/drivers)实战参考

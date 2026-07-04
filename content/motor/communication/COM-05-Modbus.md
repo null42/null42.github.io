@@ -11,16 +11,16 @@ title: COM-05 Modbus协议
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-05"
+summary: "> 路径： 工业通信协议 > COM-05"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-05 Modbus协议
 
-> 路径：📡 工业通信协议 > COM-05
+> 路径： 工业通信协议 > COM-05
 
-**难度：** ★★★☆☆
+**难度：** 
 
 ## 概述
 

@@ -11,14 +11,14 @@ title: MC_LIB - FOC核心模块详解
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md)"
+summary: ">  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # MC_LIB - FOC核心模块详解
 
-> 🔗 关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md)
+>  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-04-26  
@@ -58,10 +58,10 @@ MCFOC_PMSM_F模块实现了FOC控制的核心坐标变换功能：
 ┌─────────────────────────────────────────────────────────────┐
 │                    MCFOC_PMSM_F模块特点                      │
 ├─────────────────────────────────────────────────────────────┤
-│  ✓ 角度补偿：支持采样延迟和滤波延迟补偿                      │
-│  ✓ 参数自适应：根据运行状态调整电机参数                      │
-│  ✓ 滤波器集成：内置平均值滤波器用于状态监测                  │
-│  ✓ PWM频率自适应：低速时降低PWM频率减少损耗                  │
+│   角度补偿：支持采样延迟和滤波延迟补偿                      │
+│   参数自适应：根据运行状态调整电机参数                      │
+│   滤波器集成：内置平均值滤波器用于状态监测                  │
+│   PWM频率自适应：低速时降低PWM频率减少损耗                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -359,8 +359,8 @@ void MCFOC_Park_F(ST_PMSM_ELEC_F* pPMSMe)
 
 | 特性 | MC_LIB实现 | AxDr实现 |
 |------|-----------|---------|
-| 角度补偿 | ✓ 支持 | ✗ 不支持 |
-| 三角函数预计算 | ✓ 结构体存储 | ✓ 结构体存储 |
+| 角度补偿 |  支持 |  不支持 |
+| 三角函数预计算 |  结构体存储 |  结构体存储 |
 | 计算量 | 8乘+4加 | 4乘+2加 |
 
 **MC_LIB的角度补偿是关键改进，可提高控制精度。**
@@ -647,16 +647,16 @@ void MCFOC_Iclark_F(ST_PMSM_ELEC_F* pPMSMe);
 
 | 特性 | MC_LIB | AxDr |
 |------|--------|------|
-| 角度补偿 | ✓ 支持 | ✗ 不支持 |
-| 参数自适应 | ✓ 支持 | ✗ 不支持 |
-| PWM频率自适应 | ✓ 支持 | ✗ 不支持 |
-| 电感饱和补偿 | ✓ 支持 | ✗ 不支持 |
+| 角度补偿 |  支持 |  不支持 |
+| 参数自适应 |  支持 |  不支持 |
+| PWM频率自适应 |  支持 |  不支持 |
+| 电感饱和补偿 |  支持 |  不支持 |
 
 ---
 
 > 坐标变换的理论推导与数学原理详见 [ALG-01-FOC-Theory](../ALG-01-FOC-Theory.md)
 
-## 🆚 与 hpm_MC FOC 实现对比
+##  与 hpm_MC FOC 实现对比
 
 | 维度 | MC_LIB FOC | hpm_MCL v2 FOC |
 |------|-----------|---------------|

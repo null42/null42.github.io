@@ -11,16 +11,16 @@ title: MEC-02 摆线减速器
 tags:
   - motor-control
 status: learning
-summary: "> 路径：⚙️ 传动与编码器 > MEC-02"
+summary: "> 路径： 传动与编码器 > MEC-02"
 navGroup: 基础与硬件
 navGroupOrder: 20
 ---
 
 # MEC-02 摆线减速器
 
-> 路径：⚙️ 传动与编码器 > MEC-02
+> 路径： 传动与编码器 > MEC-02
 
-**难度：** ★★★★☆
+**难度：** 
 
 ## 概述
 

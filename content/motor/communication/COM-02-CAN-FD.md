@@ -11,16 +11,16 @@ title: COM-02 CAN FD扩展
 tags:
   - motor-control
 status: learning
-summary: "> 路径：📡 工业通信协议 > COM-02"
+summary: "> 路径： 工业通信协议 > COM-02"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
 # COM-02 CAN FD扩展
 
-> 路径：📡 工业通信协议 > COM-02
+> 路径： 工业通信协议 > COM-02
 
-**难度：** ★★★★☆
+**难度：** 
 
 ## 概述
 

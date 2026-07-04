@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握基础FOC理论的嵌入式工程师
 **前置知识：** HW-03 位置传感器接口、ALG-05 有感FOC实现
-**难度等级：** ★★★★★
+**难度等级：** 
 
 ---
 
@@ -309,13 +309,13 @@ $$\theta_{\text{elec}} = p \times \theta_{\text{total}} - \theta_{\text{offset}}
 
 > **正转过零**：角度从 359° → 0°，turn_count += 1
 >
-> - 359.9° → 0.1°  ✓ 正确检测
-> - 359.9° → 0.1°  ✓ turn_count: 5 → 6
+> - 359.9° → 0.1°   正确检测
+> - 359.9° → 0.1°   turn_count: 5 → 6
 >
 > **反转过零**：角度从 0° → 359°，turn_count -= 1
 >
-> - 0.1° → 359.9°  ✓ 正确检测
-> - 0.1° → 359.9°  ✓ turn_count: 6 → 5
+> - 0.1° → 359.9°   正确检测
+> - 0.1° → 359.9°   turn_count: 6 → 5
 >
 > **误判场景（需避免）**：
 >
@@ -581,9 +581,9 @@ $$f_{\text{encoder\_max}} = \frac{f_{\text{TIM\_CLK}}}{4 \times \text{滤波系�
 > 编码器信号频率 = 2500 × 6000 / 60 = 250 kHz
 > - 4倍频后最大计数频率 = 250 kHz × 4 = 1 MHz
 >
-> - 无滤波时：f_max = 170 MHz / 4 = 42.5 MHz ✓ 远大于1 MHz
-> - ICxF = 6 (f_DTS/4, N=6)：f_max = 170 MHz / (4 × 4 × 6) = 1.77 MHz ✓ 勉强够
-> - ICxF = 10 (f_DTS/16, N=5)：f_max = 170 MHz / (4 × 16 × 5) = 531 kHz ✗ 不够！
+> - 无滤波时：f_max = 170 MHz / 4 = 42.5 MHz  远大于1 MHz
+> - ICxF = 6 (f_DTS/4, N=6)：f_max = 170 MHz / (4 × 4 × 6) = 1.77 MHz  勉强够
+> - ICxF = 10 (f_DTS/16, N=5)：f_max = 170 MHz / (4 × 16 × 5) = 531 kHz  不够！
 >
 > **结论**：高速应用中滤波参数不能设太大
 
@@ -2511,7 +2511,7 @@ static inline float angle_blend(float angle1, float angle2, float alpha)
 | $V_{\sin} = K \sin(\theta) \sin(\omega t)$ | 旋变sin输出 |
 | $V_{\cos} = K \cos(\theta) \sin(\omega t)$ | 旋变cos输出 |
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **编码器测速实现** (`hpm_mcl_v2/core/sensor/hpm_mcl_encoder.h`, `hpm_mcl_v2/encoder/hpm_mcl_abz.h`):
 - 四种速度计算方法：T法/M法/M-T法/PLL法（算法自动选择或用户指定）
@@ -2521,4 +2521,4 @@ static inline float angle_blend(float angle1, float angle2, float alpha)
 
 参考: `SDK-02-HPM-MC-v2-Core-Loop.md` 第5节「传感器处理」+ `ALG-06-Position-Speed-Observer.md`
 
-> 📝 检验你的理解：[ADV-HW-03 检验题目](./ADV-HW-03-assessment.md)
+>  检验你的理解：[ADV-HW-03 检验题目](./ADV-HW-03-assessment.md)

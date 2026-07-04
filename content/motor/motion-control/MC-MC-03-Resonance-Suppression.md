@@ -11,7 +11,7 @@ title: "MC-MC-03: 机械谐振抑制"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：电机和负载之间不是刚体连接——双惯量模型揭示的反谐振-谐振对，是伺服带宽的隐形天花板，而陷波滤波器是打破这层天花板的手术刀** **难度：** ★★★★★ 专家级 **适用对象：** 伺服驱动高级调试工程师、运动控制算法架构师 **前置知识：** 频率响应与伯德图（CT-03）、补偿器设计（CT-09）、级"
+summary: "**副标题：电机和负载之间不是刚体连接——双惯量模型揭示的反谐振-谐振对，是伺服带宽的隐形天花板，而陷波滤波器是打破这层天花板的手术刀** **难度：**  专家级 **适用对象：** 伺服驱动高级调试工程师、运动控制算法架构师 **前置知识：** 频率响应与伯德图（CT-03）、补偿器设计（CT-09）、级"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
@@ -19,19 +19,19 @@ navGroupOrder: 30
 # MC-MC-03: 机械谐振抑制
 
 **副标题：电机和负载之间不是刚体连接——双惯量模型揭示的反谐振-谐振对，是伺服带宽的隐形天花板，而陷波滤波器是打破这层天花板的手术刀**
-**难度：** ★★★★★ 专家级
+**难度：**  专家级
 **适用对象：** 伺服驱动高级调试工程师、运动控制算法架构师
 **前置知识：** 频率响应与伯德图（CT-03）、补偿器设计（CT-09）、级联控制（CT-14）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 实际伺服系统中，电机与负载之间通过联轴器、丝杠、减速机等弹性元件连接，构成双惯量弹簧-阻尼系统。该系统在频域上呈现反谐振-谐振对（anti-resonance/resonance pair）：低频段反谐振点处增益下凹，高频段谐振点处增益突起。速度环在穿越频率附近遇到谐振峰时，相位急剧下降，导致增益裕度不足甚至失稳。谐振比 $R = J_l / J_m$ 越大，谐振峰越尖锐，问题越严重。抑制谐振的工程方法主要有三种：陷波滤波器（notch filter）针对已知固定频率谐振，低通滤波器（LPF）抑制宽带噪声但牺牲带宽，自适应陷波器处理频率漂移的谐振。核心原则是：**先识别谐振频率，再选择合适的滤波器，最后在保证稳定性的前提下恢复带宽**。
 
 ---
 
-## 2. 🤔 问题引入
+## 2.  问题引入
 
 ### 工程师的真实困惑
 
@@ -81,7 +81,7 @@ navGroupOrder: 30
 
 ---
 
-## 3. 💡 原理推导
+## 3.  原理推导
 
 ### 3.1 双惯量模型
 
@@ -211,7 +211,7 @@ $$\omega_n(k+1) = \omega_n(k) + \mu \cdot \text{sign}(\text{resonance\_direction
 
 ---
 
-## 4. 🔧 工程实现
+## 4.  工程实现
 
 ### 4.1 双二阶（Biquad）陷波滤波器
 
@@ -433,7 +433,7 @@ float DetectResonanceFrequency(float *speed_buffer, int buffer_len,
 
 ---
 
-## 5. 🎛️ 参数整定与调试指南
+## 5.  参数整定与调试指南
 
 ### 5.1 谐振频率识别方法
 
@@ -511,7 +511,7 @@ float DetectResonanceFrequency(float *speed_buffer, int buffer_len,
 
 ---
 
-## 6. ⚡ 硬件约束
+## 6.  硬件约束
 
 ### 6.1 联轴器刚度与谐振频率的关系
 
@@ -549,7 +549,7 @@ $$\Delta f_{notch} \approx \frac{f_s}{2N}$$
 
 ---
 
-## 7. 🔗 交叉引用
+## 7.  交叉引用
 
 | 模块 | 关联说明 |
 |------|---------|
@@ -562,7 +562,7 @@ $$\Delta f_{notch} \approx \frac{f_s}{2N}$$
 
 ---
 
-## 8. 📚 参考文献
+## 8.  参考文献
 
 1. Ellis, G. *Control System Design Guide*, 4th Edition, Elsevier, 2012. — 第7章机械谐振，双惯量模型完整推导
 2. Szabat, K. & Orlowska-Kowalska, T. "Vibration Suppression in a Two-Mass Drive System Using PI Speed Controller and Additional Feedbacks—Comparative Study", *IEEE Trans. Ind. Electron.*, 2007.
@@ -573,7 +573,7 @@ $$\Delta f_{notch} \approx \frac{f_s}{2N}$$
 
 ---
 
-## 📝 版本信息
+##  版本信息
 
 - 模块编号：MC-MC-03
 - 所属路径：轨迹规划与运动控制 / 运动控制

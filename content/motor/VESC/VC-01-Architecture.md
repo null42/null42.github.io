@@ -704,26 +704,26 @@ typedef struct {
 
 | 功能 | BLDC 模式 | DC 模式 | FOC 模式 | 说明 |
 |------|----------|---------|---------|------|
-| 开环占空比控制 | ✅ | ✅ | ✅ | `CONTROL_MODE_DUTY` |
-| 速度闭环 | ✅ | - | ✅ | `CONTROL_MODE_SPEED` + PID |
-| 电流闭环 | ✅ | - | ✅ | `CONTROL_MODE_CURRENT` + PI |
-| 再生制动 | ✅ | - | ✅ | `CONTROL_MODE_CURRENT_BRAKE` |
-| 位置闭环 | - | - | ✅ | `CONTROL_MODE_POS` + PID |
-| 驻车制动 | - | - | ✅ | `CONTROL_MODE_HANDBRAKE` |
-| 无感运行 | ✅ (BEMF) | - | ✅ (观测器/HFI) | 无位置传感器 |
-| 有感运行 | ✅ (霍尔) | - | ✅ (编码器/霍尔) | 有位置传感器 |
-| 高频注入启动 | - | - | ✅ | HFI start→run 过渡 |
-| 弱磁控制 | - | - | ✅ | `foc_run_fw()` |
-| MTPA | - | - | ✅ | 三种模式 |
-| 温度降额 | ✅ | ✅ | ✅ | MOSFET + 电机 |
-| 电池保护 | ✅ | ✅ | ✅ | 低压截止 + 再生过压 |
-| CAN 总线 | ✅ | ✅ | ✅ | VESC/UAVCAN 协议 |
-| USB 通信 | ✅ | ✅ | ✅ | USB VCP |
-| OTA 固件升级 | ✅ | ✅ | ✅ | Bootloader + CAN |
-| 音频输出 | - | - | ✅ | 电机调制发声 |
-| 双电机 | ✅ | - | ✅ | `HW_HAS_DUAL_MOTORS` |
-| 编码器校正表 | - | - | ✅ | 360点非线性校正 |
-| BMS 集成 | ✅ | ✅ | ✅ | BMS FWD CAN 模式 |
+| 开环占空比控制 |  |  |  | `CONTROL_MODE_DUTY` |
+| 速度闭环 |  | - |  | `CONTROL_MODE_SPEED` + PID |
+| 电流闭环 |  | - |  | `CONTROL_MODE_CURRENT` + PI |
+| 再生制动 |  | - |  | `CONTROL_MODE_CURRENT_BRAKE` |
+| 位置闭环 | - | - |  | `CONTROL_MODE_POS` + PID |
+| 驻车制动 | - | - |  | `CONTROL_MODE_HANDBRAKE` |
+| 无感运行 |  (BEMF) | - |  (观测器/HFI) | 无位置传感器 |
+| 有感运行 |  (霍尔) | - |  (编码器/霍尔) | 有位置传感器 |
+| 高频注入启动 | - | - |  | HFI start→run 过渡 |
+| 弱磁控制 | - | - |  | `foc_run_fw()` |
+| MTPA | - | - |  | 三种模式 |
+| 温度降额 |  |  |  | MOSFET + 电机 |
+| 电池保护 |  |  |  | 低压截止 + 再生过压 |
+| CAN 总线 |  |  |  | VESC/UAVCAN 协议 |
+| USB 通信 |  |  |  | USB VCP |
+| OTA 固件升级 |  |  |  | Bootloader + CAN |
+| 音频输出 | - | - |  | 电机调制发声 |
+| 双电机 |  | - |  | `HW_HAS_DUAL_MOTORS` |
+| 编码器校正表 | - | - |  | 360点非线性校正 |
+| BMS 集成 |  |  |  | BMS FWD CAN 模式 |
 
 ---
 

@@ -44,9 +44,9 @@ navGroupOrder: 40
 
 | 编号 | 模块 | 难度 | 核心问题 |
 |------|------|------|---------|
-| ADV-HW-01 | [PWM深度配置与电流采样时序联动](hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md) | ★★★★☆ | PWM为什么必须中心对齐？模式0和1怎么选？单电阻采样移相从哪个时刻开始？死区补偿加在哪里？ |
-| ADV-HW-02 | [ADC深度配置与DMA数据搬运](hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md) | ★★★★☆ | ADC注入组还是规则组？PWM怎么触发ADC？DMA半传输中断怎么用？数据怎么对齐？ |
-| ADV-HW-03 | [编码器深度处理与测速方法](hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed.md) | ★★★★★ | 多圈编码器怎么处理？各种编码器数据怎么校准对齐？测速用M/T法还是PLL？霍尔角度怎么平滑？ |
+| ADV-HW-01 | [PWM深度配置与电流采样时序联动](hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md) |  | PWM为什么必须中心对齐？模式0和1怎么选？单电阻采样移相从哪个时刻开始？死区补偿加在哪里？ |
+| ADV-HW-02 | [ADC深度配置与DMA数据搬运](hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md) |  | ADC注入组还是规则组？PWM怎么触发ADC？DMA半传输中断怎么用？数据怎么对齐？ |
+| ADV-HW-03 | [编码器深度处理与测速方法](hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed.md) |  | 多圈编码器怎么处理？各种编码器数据怎么校准对齐？测速用M/T法还是PLL？霍尔角度怎么平滑？ |
 
 ### 路径二：高级算法（algorithm/）
 
@@ -54,12 +54,12 @@ navGroupOrder: 40
 
 | 编号 | 模块 | 难度 | 核心问题 |
 |------|------|------|---------|
-| ADV-ALG-01 | [控制环带宽设计与滤波器工程](algorithm/ADV-ALG-01-Bandwidth-Filter.md) | ★★★★☆ | 电流环带宽怎么定？速度环带宽是电流环的几分之一？滤波器怎么设计不影响相位裕度？ |
-| ADV-ALG-05 | [弱磁控制与MTPA深度](algorithm/ADV-ALG-05-Field-Weakening-MTPA.md) | ★★★★★ | 弱磁区域怎么划分？MTPA轨迹怎么推导？弱磁和MTPA怎么协调？深度弱磁怎么处理？ |
-| ADV-ALG-07 | [前馈解耦与扰动补偿](algorithm/ADV-ALG-07-Feedforward-Decoupling.md) | ★★★★☆ | dq交叉耦合怎么解耦？反电动势前馈加在哪里？速度前馈和重力补偿怎么实现？ |
-| ADV-ALG-09 | [标幺值系统与定点数运算](algorithm/ADV-ALG-09-Per-Unit-Fixed-Point.md) | ★★★☆☆ | 标幺值基值怎么选？Q15/Q31怎么用？什么时候必须用定点数？CORDIC怎么加速？ |
-| ADV-ALG-13 | [PID结构选择与深度整定](algorithm/ADV-ALG-13-PID-Structure-Tuning.md) | ★★★★☆ | 串联PID和并联PID有什么区别？增量式还是位置式？抗积分饱和用哪种方法？ |
-| ADV-ALG-15 | [问题定位与调试方法论](algorithm/ADV-ALG-15-Debug-Methodology.md) | ★★★★★ | 电流振荡怎么定位？角度跳变怎么排查？系统性调试流程是什么？ |
+| ADV-ALG-01 | [控制环带宽设计与滤波器工程](algorithm/ADV-ALG-01-Bandwidth-Filter.md) |  | 电流环带宽怎么定？速度环带宽是电流环的几分之一？滤波器怎么设计不影响相位裕度？ |
+| ADV-ALG-05 | [弱磁控制与MTPA深度](algorithm/ADV-ALG-05-Field-Weakening-MTPA.md) |  | 弱磁区域怎么划分？MTPA轨迹怎么推导？弱磁和MTPA怎么协调？深度弱磁怎么处理？ |
+| ADV-ALG-07 | [前馈解耦与扰动补偿](algorithm/ADV-ALG-07-Feedforward-Decoupling.md) |  | dq交叉耦合怎么解耦？反电动势前馈加在哪里？速度前馈和重力补偿怎么实现？ |
+| ADV-ALG-09 | [标幺值系统与定点数运算](algorithm/ADV-ALG-09-Per-Unit-Fixed-Point.md) |  | 标幺值基值怎么选？Q15/Q31怎么用？什么时候必须用定点数？CORDIC怎么加速？ |
+| ADV-ALG-13 | [PID结构选择与深度整定](algorithm/ADV-ALG-13-PID-Structure-Tuning.md) |  | 串联PID和并联PID有什么区别？增量式还是位置式？抗积分饱和用哪种方法？ |
+| ADV-ALG-15 | [问题定位与调试方法论](algorithm/ADV-ALG-15-Debug-Methodology.md) |  | 电流振荡怎么定位？角度跳变怎么排查？系统性调试流程是什么？ |
 
 ### 路径三：系统与方法论（system-methodology/）
 
@@ -67,10 +67,10 @@ navGroupOrder: 40
 
 | 编号 | 模块 | 难度 | 核心问题 |
 |------|------|------|---------|
-| SYS-01 | [设计模式在电机控制中的应用](system-methodology/SYS-01-Design-Patterns.md) | ★★★☆☆ | 状态模式怎么用在电机状态机？策略模式怎么切换控制算法？ |
-| SYS-02 | [变频器开发与电控开发异同](system-methodology/SYS-02-Inverter-vs-Motor-Control.md) | ★★★★☆ | 变频器和伺服驱动器本质区别是什么？V/F和FOC怎么选？ |
-| SYS-03 | [PFC开发与电控开发异同](system-methodology/SYS-03-PFC-vs-Motor-Control.md) | ★★★★☆ | PFC的双环结构和FOC有什么相似性？从电控转PFC需要学什么？ |
-| SYS-04 | [仿真到实现——连续域到离散域](system-methodology/SYS-04-Simulation-to-Discrete.md) | ★★★★★ | 新算法怎么在Simulink中验证？Tustin变换和ZOH有什么区别？连续域调好了离散域为什么不行？ |
+| SYS-01 | [设计模式在电机控制中的应用](system-methodology/SYS-01-Design-Patterns.md) |  | 状态模式怎么用在电机状态机？策略模式怎么切换控制算法？ |
+| SYS-02 | [变频器开发与电控开发异同](system-methodology/SYS-02-Inverter-vs-Motor-Control.md) |  | 变频器和伺服驱动器本质区别是什么？V/F和FOC怎么选？ |
+| SYS-03 | [PFC开发与电控开发异同](system-methodology/SYS-03-PFC-vs-Motor-Control.md) |  | PFC的双环结构和FOC有什么相似性？从电控转PFC需要学什么？ |
+| SYS-04 | [仿真到实现——连续域到离散域](system-methodology/SYS-04-Simulation-to-Discrete.md) |  | 新算法怎么在Simulink中验证？Tustin变换和ZOH有什么区别？连续域调好了离散域为什么不行？ |
 
 ---
 

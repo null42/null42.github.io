@@ -7,7 +7,7 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: 🧮 算法学习路径
+title:  算法学习路径
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# 🧮 算法学习路径
+#  算法学习路径
 
 > **核心理念**：从控制算法理解电控系统，建立"算法受硬件约束"的认知
 
@@ -77,28 +77,28 @@ flowchart TD
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| 0 | [电流环PI整定的物理直觉](./ALG-00-Current-Loop-Intuition.md) | 为什么要这样设Kp和Ki？带宽是什么？ | ★☆☆☆☆ |
-| 1 | [FOC理论基础](./ALG-01-FOC-Theory.md) | FOC为什么能实现高性能控制？ | ★★☆☆☆ |
-| 2 | [ADC电流采样时序](./ALG-02-Current-Sampling-Timing.md) | 如何正确采样相电流？ | ★★★☆☆ |
-| 3 | [PI电流调节器设计](./ALG-03-PI-Current-Regulator.md) | 电流环PI参数怎么设计？ | ★★★☆☆ |
-| 4 | [死区补偿策略](./ALG-04-Deadtime-Compensation.md) | 如何消除逆变器非线性？ | ★★★★☆ |
-| 5 | [有感FOC实现](./ALG-05-Sensored-FOC.md) | 如何从理论到工程实现？ | ★★★☆☆ |
-| 6 | [位置与速度观测器](./ALG-06-Position-Speed-Observer.md) | 如何从电流估算位置速度？ | ★★★★☆ |
-| 7 | [无感FOC观测器](./ALG-07-Sensorless-Observers.md) | 不用传感器如何获取位置？ | ★★★★☆ |
-| 8 | [启动定位与预定位](./ALG-08-Initial-Position-Detection.md) | 无感启动前如何找到转子？ | ★★★★☆ |
-| 9 | [高频注入法](./ALG-09-High-Frequency-Injection.md) | 零速/低速如何无感运行？ | ★★★★☆ |
-| 10 | [过调制与六阶梯波](./ALG-10-Overmodulation.md) | 如何提升电压利用率？ | ★★★☆☆ |
-| 11 | [MTPA与弱磁控制](./ALG-11-MTPA-Flux-Weakening.md) | 如何最大化转矩输出？ | ★★★★☆ |
-| 12 | [速度环与转矩观测器](./ALG-12-Speed-Loop-Torque-Observer.md) | 外环如何设计？ | ★★★★☆ |
-| 13 | [保护与优化](./ALG-13-Protection-Optimization.md) | 如何保证安全并提升性能？ | ★★★☆☆ |
-| 14 | [THD谐波分析](./ALG-14-THD-Harmonic-Analysis.md) | 如何量化电流质量？ | ★★★☆☆ |
-| 15 | [前沿研究](./ALG-15-Advanced-Research.md) | 低载波比下如何保证稳定？ | ★★★★★ |
-| 16 | [非线性磁链观测器](./ALG-16-Nonlinear-Flux-Observer.md) | 如何设计非线性磁链观测器？ | ★★★★★ |
-| 17 | [V/F控制与开环启动](./ALG-17-VF-Control.md) | V/F恒压频比、开环启动、vs FOC选型 | ★★★☆☆ |
-| 18 | [补偿算法专题](./ALG-18-Compensation-Algorithms.md) | 死区深化、抗齿槽、转速纹波、角度延迟补偿 | ★★★★☆ |
-| 19 | [无差拍电流预测控制](./ALG-19-Deadbeat-Current-Prediction.md) | 一拍到位的电流控制、参数敏感性 | ★★★★★ |
-| 20 | [控制视角下的dq方程与功率方程](./ALG-20-Equations-From-Control-Perspective.md) | 电压方程/转矩方程/功率方程在控制代码中干什么用？ | ★★★☆☆ |
-| 21 | [电机参数辨识](./ALG-21-Parameter-Identification.md) | 离线辨识方法、在线辨识难点（激励不足/逆变器非线性/参数耦合） | ★★★★☆ |
+| 0 | [电流环PI整定的物理直觉](./ALG-00-Current-Loop-Intuition.md) | 为什么要这样设Kp和Ki？带宽是什么？ |  |
+| 1 | [FOC理论基础](./ALG-01-FOC-Theory.md) | FOC为什么能实现高性能控制？ |  |
+| 2 | [ADC电流采样时序](./ALG-02-Current-Sampling-Timing.md) | 如何正确采样相电流？ |  |
+| 3 | [PI电流调节器设计](./ALG-03-PI-Current-Regulator.md) | 电流环PI参数怎么设计？ |  |
+| 4 | [死区补偿策略](./ALG-04-Deadtime-Compensation.md) | 如何消除逆变器非线性？ |  |
+| 5 | [有感FOC实现](./ALG-05-Sensored-FOC.md) | 如何从理论到工程实现？ |  |
+| 6 | [位置与速度观测器](./ALG-06-Position-Speed-Observer.md) | 如何从电流估算位置速度？ |  |
+| 7 | [无感FOC观测器](./ALG-07-Sensorless-Observers.md) | 不用传感器如何获取位置？ |  |
+| 8 | [启动定位与预定位](./ALG-08-Initial-Position-Detection.md) | 无感启动前如何找到转子？ |  |
+| 9 | [高频注入法](./ALG-09-High-Frequency-Injection.md) | 零速/低速如何无感运行？ |  |
+| 10 | [过调制与六阶梯波](./ALG-10-Overmodulation.md) | 如何提升电压利用率？ |  |
+| 11 | [MTPA与弱磁控制](./ALG-11-MTPA-Flux-Weakening.md) | 如何最大化转矩输出？ |  |
+| 12 | [速度环与转矩观测器](./ALG-12-Speed-Loop-Torque-Observer.md) | 外环如何设计？ |  |
+| 13 | [保护与优化](./ALG-13-Protection-Optimization.md) | 如何保证安全并提升性能？ |  |
+| 14 | [THD谐波分析](./ALG-14-THD-Harmonic-Analysis.md) | 如何量化电流质量？ |  |
+| 15 | [前沿研究](./ALG-15-Advanced-Research.md) | 低载波比下如何保证稳定？ |  |
+| 16 | [非线性磁链观测器](./ALG-16-Nonlinear-Flux-Observer.md) | 如何设计非线性磁链观测器？ |  |
+| 17 | [V/F控制与开环启动](./ALG-17-VF-Control.md) | V/F恒压频比、开环启动、vs FOC选型 |  |
+| 18 | [补偿算法专题](./ALG-18-Compensation-Algorithms.md) | 死区深化、抗齿槽、转速纹波、角度延迟补偿 |  |
+| 19 | [无差拍电流预测控制](./ALG-19-Deadbeat-Current-Prediction.md) | 一拍到位的电流控制、参数敏感性 |  |
+| 20 | [控制视角下的dq方程与功率方程](./ALG-20-Equations-From-Control-Perspective.md) | 电压方程/转矩方程/功率方程在控制代码中干什么用？ |  |
+| 21 | [电机参数辨识](./ALG-21-Parameter-Identification.md) | 离线辨识方法、在线辨识难点（激励不足/逆变器非线性/参数耦合） |  |
 
 ---
 
@@ -121,7 +121,7 @@ flowchart TD
 ## 学习建议
 
 ### 零算法基础入门路线
-1. **先学ALG-00（电流环物理直觉），建立"为什么这样设计PI参数"的直观理解** ← 🆕 新增第一步
+1. **先学ALG-00（电流环物理直觉），建立"为什么这样设计PI参数"的直观理解** ←  新增第一步
 2. 再学ALG-01（FOC理论），理解坐标变换和控制原理
 3. 然后学ALG-03（PI设计），掌握完整的数学推导和工程方法
 4. 接着学ALG-02（电流采样）和ALG-05（有感FOC），掌握FOC基础组件与实现

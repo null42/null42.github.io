@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握FOC基本原理和多环控制，需要系统化掌握调试方法论的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、ADV-ALG-01 控制环带宽设计、ADV-ALG-13 PID结构选择与深度整定
-**难度等级：** ★★★★★
+**难度等级：** 
 
 ---
 
@@ -1826,7 +1826,7 @@ flowchart TD
         S6_1 ~~~ S6_2
     end
 
-    Step6 -->|通过| Done(["✅ 完成"])
+    Step6 -->|通过| Done([" 完成"])
 ```
 
 ### 11.2 第一步：硬件检查
@@ -2310,7 +2310,7 @@ void Test_CurrentStepResponse(float step_current, uint32_t duration)
 
 *文档结束。本模块建立了电机控制系统从硬件检查到保护验证的完整调试方法论，核心思想是"分层排查、逐步闭环、每次只变一个变量"。*
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **调试工具** (`hpm_mcl_v2/core/control/`):
 - `hpm_mcl_debug.h` 支持 FIFO trace 数据输出（高速不丢帧）
@@ -2318,7 +2318,7 @@ void Test_CurrentStepResponse(float step_current, uint32_t duration)
 - LittleVGL GUI 示例 (`bldc_littlevgl_foc`) 实时显示速度/位置曲线
 - 故障检测模块独立监控四子系统状态
 
-> 📝 检验你的理解：[ADV-ALG-15 检验题目](./ADV-ALG-15-assessment.md)
+>  检验你的理解：[ADV-ALG-15 检验题目](./ADV-ALG-15-assessment.md)
 
 ## 延伸实践
-- 📂 [路径14-4: 固件架构与调试](../../practice/PRACTICE-14-Engineering-Practice.md#站4) — STM32 FOC固件调试实战
+-  [路径14-4: 固件架构与调试](../../practice/PRACTICE-14-Engineering-Practice.md#站4) — STM32 FOC固件调试实战

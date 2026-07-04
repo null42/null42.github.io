@@ -11,7 +11,7 @@ title: "CE-22: H∞鲁棒控制——当你知道模型是错的"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：H-Infinity Robust Control: When You Know Your Model Is Wrong** **难度：** ★★★★★ **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-09（频域分析）、CE-14（LQR与最优控制）"
+summary: "**副标题：H-Infinity Robust Control: When You Know Your Model Is Wrong** **难度：**  **适用对象：** 控制理论学习者、电机控制工程师 **前置知识：** CE-09（频域分析）、CE-14（LQR与最优控制）"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-22: H∞鲁棒控制——当你知道模型是错的
 
 **副标题：H-Infinity Robust Control: When You Know Your Model Is Wrong**
-**难度：** ★★★★★
+**难度：** 
 **适用对象：** 控制理论学习者、电机控制工程师
 **前置知识：** CE-09（频域分析）、CE-14（LQR与最优控制）
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 LQR给你告诉它的对象的最优控制器。H∞给你能保证对你实际拥有的对象有效的最好控制器——而那永远不完全是模型中的那个。如果LQR是精密工程，H∞是带误差余量的工程。在控制中，余量是纸面设计和现场可用设计之间的区别。本文从LQR的根本局限出发，详解H∞的最坏情况设计思维、不确定性描述（加性/乘性/互质因子）、混合灵敏度问题与加权函数设计、DGKF双Riccati解、控制器降阶、Youla参数化视角下的H∞本质，以及何时用/何时不用H∞。
 

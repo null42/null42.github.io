@@ -7,18 +7,18 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: HPM-MC 示例应用指南 ★★★☆☆ 🔰📚🔧
+title: HPM-MC 示例应用指南  
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](../ALG-09-High-Frequency-Injection.md)"
+summary: ">  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](../ALG-09-High-Frequency-Injection.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# HPM-MC 示例应用指南 ★★★☆☆ 🔰📚🔧
+# HPM-MC 示例应用指南  
 
-> 🔗 关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](../ALG-09-High-Frequency-Injection.md)
+>  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](../ALG-09-High-Frequency-Injection.md)
 
 **文档版本：** v1.0
 **生成日期：** 2026-05-23
@@ -541,41 +541,41 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 
 | 示例 | loop_mode | encoder | analog | drivers | control | detect | path_plan | abz | uvw |
 |------|-----------|---------|--------|---------|---------|--------|-----------|-----|-----|
-| **bldc_block** | block | ✓ | — | ✓ | ✓ | ✓ | — | — | ✓ |
-| **bldc_foc** | foc/hw_foc/hybrid | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ | — |
-| **bldc_offline_param_detection** | offline_detect | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ | — |
-| **step_motor_foc** | step_foc | — | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
-| **step_motor_closed_loop** | foc | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ | — |
+| **bldc_block** | block |  | — |  |  |  | — | — |  |
+| **bldc_foc** | foc/hw_foc/hybrid |  |  |  |  |  | — |  | — |
+| **bldc_offline_param_detection** | offline_detect |  |  |  |  |  | — |  | — |
+| **step_motor_foc** | step_foc | — |  |  |  |  |  | — | — |
+| **step_motor_closed_loop** | foc |  |  |  |  |  | — |  | — |
 
 ### 3.2 v1 API 示例模块使用矩阵
 
 | 示例 | hpm_foc | hpm_smc | hpm_hfi | hpm_block | hpm_over_zero |
 |------|---------|---------|---------|-----------|---------------|
-| **bldc_hfi** | ✓ | — | ✓ | — | — |
-| **bldc_smc** | ✓ | ✓ | — | — | — |
-| **bldc_over_zero** | — | — | — | ✓ | ✓ |
-| **bldc_littlevgl_foc** | ✓ | ✓ | — | — | — |
+| **bldc_hfi** |  | — |  | — | — |
+| **bldc_smc** |  |  | — | — | — |
+| **bldc_over_zero** | — | — | — |  |  |
+| **bldc_littlevgl_foc** |  |  | — | — | — |
 
 ### 3.3 硬件加速模块使用矩阵
 
 | 示例 | VSC | CLC | QEOv2 | TRGM | SYNT |
 |------|-----|-----|-------|------|------|
-| **bldc_foc (hw_foc)** | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **bldc_foc (hybrid)** | — | ✓ | — | — | ✓ |
+| **bldc_foc (hw_foc)** |  |  |  |  |  |
+| **bldc_foc (hybrid)** | — |  | — | — |  |
 
 ### 3.4 传感器方案矩阵
 
 | 示例 | Hall | QEI/ABZ | QEIV2-UVW | 无感 |
 |------|------|---------|-----------|------|
-| **bldc_block** | ✓ | — | ✓ | — |
-| **bldc_foc** | — | ✓ | — | — |
+| **bldc_block** |  | — |  | — |
+| **bldc_foc** | — |  | — | — |
 | **bldc_hfi** | — | — | — | HFI |
 | **bldc_smc** | — | — | — | SMO |
 | **bldc_over_zero** | — | — | — | BEMF过零 |
-| **bldc_offline_param_detection** | — | ✓ | — | — |
-| **bldc_littlevgl_foc** | — | ✓ | — | — |
+| **bldc_offline_param_detection** | — |  | — | — |
+| **bldc_littlevgl_foc** | — |  | — | — |
 | **step_motor_foc** | — | — | — | 开环 |
-| **step_motor_closed_loop** | — | ✓ | — | — |
+| **step_motor_closed_loop** | — |  | — | — |
 
 ---
 

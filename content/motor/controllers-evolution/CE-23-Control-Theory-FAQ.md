@@ -11,7 +11,7 @@ title: "CE-23: 控制理论常见问题FAQ"
 tags:
   - motor-control
 status: learning
-summary: "**副标题：Control Theory Frequently Asked Questions** **难度：** ★★☆☆☆ **适用对象：** 控制理论初学者、电机控制工程师 **前置知识：** 无"
+summary: "**副标题：Control Theory Frequently Asked Questions** **难度：**  **适用对象：** 控制理论初学者、电机控制工程师 **前置知识：** 无"
 navGroup: 工程与生态
 navGroupOrder: 50
 ---
@@ -19,13 +19,13 @@ navGroupOrder: 50
 # CE-23: 控制理论常见问题FAQ
 
 **副标题：Control Theory Frequently Asked Questions**
-**难度：** ★★☆☆☆
+**难度：** 
 **适用对象：** 控制理论初学者、电机控制工程师
 **前置知识：** 无
 
 ---
 
-## 1. 📌 核心摘要
+## 1.  核心摘要
 
 本模块收集了控制理论学习中最常见的三个基础问题，涉及二阶系统加P控制器的振荡机理、D作用的抑制与过度增加的反弹效应、以及I作用下的极点迁移规律。这些问题看似简单，却触及了控制理论的核心——极点位置决定系统行为。
 

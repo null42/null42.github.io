@@ -11,14 +11,14 @@ title: MC_LIB - 移植使用指南
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[HW-04 MCU外设](../../hardware/HW-04-MCU-Peripherals.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)"
+summary: ">  关联模块：[HW-04 MCU外设](../../hardware/HW-04-MCU-Peripherals.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # MC_LIB - 移植使用指南
 
-> 🔗 关联模块：[HW-04 MCU外设](../../hardware/HW-04-MCU-Peripherals.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)
+>  关联模块：[HW-04 MCU外设](../../hardware/HW-04-MCU-Peripherals.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-04-26  
@@ -928,7 +928,7 @@ void Motor_Stop_F(void)
 
 ---
 
-## 🆚 hpm_MC 平台移植要点
+##  hpm_MC 平台移植要点
 
 hpm_MCL 是 HPM 平台专用 SDK，与 MC_LIB 的多平台策略不同：
 

@@ -26,7 +26,7 @@ navGroupOrder: 30
 
 ---
 
-## 1. 📌 核心摘要 ★★★★☆ 🔰
+## 1.  核心摘要  
 
 **一句话总结：** PI 电流调节器是 FOC 级联控制的最内环核心，通过带宽参数化法将零极点对消，实现一阶闭环响应——带宽直接决定了系统的动态跟踪能力和抗负载扰动能力。
 
@@ -65,7 +65,7 @@ flowchart LR
 
 ---
 
-## 2. 📐 原理推导 ★★★★☆ 📚
+## 2.  原理推导  
 
 ### 2.1 dq 轴电流环结构
 
@@ -103,7 +103,7 @@ $$v_q^* = PI_q(e_{iq}) + \omega_e (L_d i_d + \psi_f)$$
 
 ---
 
-## 3. 🔢 数学建模 ★★★★☆ 📚
+## 3.  数学建模  
 
 ### 3.1 带宽参数化法整定
 
@@ -145,7 +145,7 @@ $$\omega_{bw} \leq \frac{1}{3 \sim 5 \cdot T_{delay}}$$
 
 ---
 
-## 4. 💻 代码实现 ★★★☆☆ 🔧
+## 4.  代码实现  
 
 ### 4.1 增量式 PI 实现（后向欧拉离散化）
 
@@ -229,7 +229,7 @@ float pi_update_antiwindup(pi_current_ctrl_t *pi, float setpoint, float feedback
 
 ---
 
-## 5. 🔧 参数整定 ★★★★☆ 🔧
+## 5.  参数整定  
 
 ### 5.1 带宽参数化法
 
@@ -277,7 +277,7 @@ $$\frac{I(s)}{I^*(s)} = \frac{\omega_{bw}}{s + \omega_{bw}}$$
 
 ---
 
-## 6. 🔗 硬件约束 ★★★★☆ ⚠️
+## 6.  硬件约束  
 
 ### 6.1 PWM 更新延迟
 
@@ -305,7 +305,7 @@ ADC 转换 + DMA 传输完成时间构成反馈链路的测延迟。若 ADC 转�
 
 ---
 
-## 7. 🚀 前沿拓展 ★★★★★ 💡
+## 7.  前沿拓展  
 
 ### 7.1 自适应 PI 控制
 
@@ -343,7 +343,7 @@ HPM6xxx 系列内置 CLC（Current Loop Controller）硬件加速单元，可在
 
 :::sim current-loop
 
-### 🔗 hpm_MC 代码实现参考
+###  hpm_MC 代码实现参考
 
 **v2 PID 实现** (`hpm_mcl_v2/core/control/hpm_mcl_control.h`):
 - `mcl_control_pid_cfg_t`: kp/ki/kd + integral_limit + output_limit
@@ -361,11 +361,11 @@ HPM6xxx 系列内置 CLC（Current Loop Controller）硬件加速单元，可在
 - 参考: `SDK-02-HPM-MC-v2-Core-Loop.md` 第3节「控制链核心」
 
 
-## 🧪 仿真验证
+##  仿真验证
 > 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_ID_SWEEPING (33) / MODE_SELECT_IQ_SWEEPING (34)，关键操作：启用扫频模式，测量电流环实际 -3dB 带宽与理论值 CLBW_HZ 的对比
 
 ## 延伸实践
-- 📂 [路径11-3: 电流环PI设计与仿真](../practice/PRACTICE-11-FOC-Engineering.md#站3) — PI参数计算+延迟分析+Simulink验证
-- 📂 [路径12-2: 电流环参数设计](../practice/PRACTICE-12-PMSM-Simulation.md#站2) — B站配套电流环整定仿真
-- 📂 [路径14-2: 参数自整定方法](../practice/PRACTICE-14-Engineering-Practice.md#站2) — 855行MATLAB参数自整定脚本
+-  [路径11-3: 电流环PI设计与仿真](../practice/PRACTICE-11-FOC-Engineering.md#站3) — PI参数计算+延迟分析+Simulink验证
+-  [路径12-2: 电流环参数设计](../practice/PRACTICE-12-PMSM-Simulation.md#站2) — B站配套电流环整定仿真
+-  [路径14-2: 参数自整定方法](../practice/PRACTICE-14-Engineering-Practice.md#站2) — 855行MATLAB参数自整定脚本

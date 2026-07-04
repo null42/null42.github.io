@@ -7,18 +7,18 @@ chapterOrder: 20
 category: 控制算法
 source: motor
 visibility: public
-title: HPM-MC v2 路径规划模块深度解析 ★★★★☆ 🔰📚🔧
+title: HPM-MC v2 路径规划模块深度解析  
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-11 MTPA弱磁](../ALG-11-MTPA-Flux-Weakening.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md) | [ADV-ALG-05 弱磁深度](../../advanced/algorithm"
+summary: ">  关联模块：[ALG-11 MTPA弱磁](../ALG-11-MTPA-Flux-Weakening.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md) | [ADV-ALG-05 弱磁深度](../../advanced/algorithm"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
-# HPM-MC v2 路径规划模块深度解析 ★★★★☆ 🔰📚🔧
+# HPM-MC v2 路径规划模块深度解析  
 
-> 🔗 关联模块：[ALG-11 MTPA弱磁](../ALG-11-MTPA-Flux-Weakening.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md) | [ADV-ALG-05 弱磁深度](../../advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA.md)
+>  关联模块：[ALG-11 MTPA弱磁](../ALG-11-MTPA-Flux-Weakening.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md) | [ADV-ALG-05 弱磁深度](../../advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA.md)
 
 **文档版本：** v1.0
 **生成日期：** 2026-05-23

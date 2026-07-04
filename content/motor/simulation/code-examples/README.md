@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title: 🔧 C 仿真代码修改示例
+title:  C 仿真代码修改示例
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-# 🔧 C 仿真代码修改示例
+#  C 仿真代码修改示例
 
 本目录提供安全、可复制的仿真代码修改示例。所有修改基于 `E:\new_things\emachinery\` 中的原文件，但**存放在此处，不覆盖原文件**。
 
@@ -26,7 +26,7 @@ navGroupOrder: 40
 2. 将本目录中的修改内容**手动合并**到 emachinery 原文件中（不要直接覆盖）
 3. 重新启动仿真
 
-## ⚠️ 安全警告
+##  安全警告
 
 - **不要手动修改** `super_config.h` 和 `super_config.c`——它们由 Python 自动生成
 - 仿真和实验共用 `pmsm_comm.c` 和 `main_switch.c`，修改时注意 `#if PC_SIMULATION` 条件编译
@@ -36,8 +36,8 @@ navGroupOrder: 40
 
 | 编号 | 示例 | 目标 | 涉及文件 | 难度 |
 |------|------|------|---------|------|
-| 01 | PI 参数调节基础 | 理解带宽和阻尼对响应的影响 | user_config.yaml | ★☆☆☆☆ |
-| 02 | 自定义速度/负载曲线 | 设计自己的仿真场景 | pmsm_comm.c | ★★☆☆☆ |
-| 03 | 启用逆变器非线性 | 观察死区效应和电流畸变 | ACMSim.h | ★★☆☆☆ |
-| 04 | 添加自定义观测信号 | 在 .dat 中记录新信号 | utility.c + YAML | ★★★☆☆ |
-| 05 | 参数辨识流程观察 | 理解分步辨识过程 | user_config.yaml | ★★☆☆☆ |
+| 01 | PI 参数调节基础 | 理解带宽和阻尼对响应的影响 | user_config.yaml |  |
+| 02 | 自定义速度/负载曲线 | 设计自己的仿真场景 | pmsm_comm.c |  |
+| 03 | 启用逆变器非线性 | 观察死区效应和电流畸变 | ACMSim.h |  |
+| 04 | 添加自定义观测信号 | 在 .dat 中记录新信号 | utility.c + YAML |  |
+| 05 | 参数辨识流程观察 | 理解分步辨识过程 | user_config.yaml |  |

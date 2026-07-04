@@ -25,7 +25,7 @@ navGroupOrder: 40
 **前置知识：** HW-04 MCU外设与通信、ALG-05 有感FOC实现、MC-LIB-SVPWM
 **关联模块：** ADV-HW-02 ADC深度配置与DMA数据搬运
 **副标题：** 从寄存器到控制环，理解PWM与电流采样的精确协同
-**难度等级：** ★★★★☆
+**难度等级：** 
 
 ---
 
@@ -1684,7 +1684,7 @@ void ADC1_2_IRQHandler(void)
 
 *文档版本：v1.0 | 创建日期：2026-05-01 | 基于STM32G474和MC_LIB工程实践*
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **PWM 驱动** (`hpm_mcl_v2/core/drivers/hpm_mcl_drivers.h`):
 - `mcl_drivers_channel_t` 统一通道抽象：update_duty / update_frequency / update_phase_offset
@@ -1693,4 +1693,4 @@ void ADC1_2_IRQHandler(void)
 
 参考: `hpm_MC/samples/motor_ctrl/bldc_foc/` 示例代码
 
-> 📝 检验你的理解：[ADV-HW-01 检验题目](./ADV-HW-01-assessment.md)
+>  检验你的理解：[ADV-HW-01 检验题目](./ADV-HW-01-assessment.md)

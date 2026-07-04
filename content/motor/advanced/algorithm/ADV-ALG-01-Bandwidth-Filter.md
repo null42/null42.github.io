@@ -23,7 +23,7 @@ navGroupOrder: 40
 **文档版本：** v2.0
 **适用对象：** 已掌握FOC基本原理和PI控制的嵌入式工程师
 **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现、自动控制原理（传递函数、Bode图）
-**难度等级：** ★★★★☆
+**难度等级：** 
 
 ---
 
@@ -1405,7 +1405,7 @@ $$
 - ADV-HW-01 PWM深度配置与电流采样时序联动：采样延迟对带宽的硬约束
 - SYS-04 仿真到实现——连续域到离散域：离散化方法对带宽的影响
 
-### 🔗 hpm_MC 工程关联
+###  hpm_MC 工程关联
 
 **控制参数配置** (`hpm_mcl_v2/core/control/hpm_mcl_control.h`):
 - `mcl_control_pid_cfg_t` 定义电流环/速度环带宽参数 (kp/ki/kd + integral_limit + output_limit)
@@ -1415,7 +1415,7 @@ $$
 
 参考: `SDK-02-HPM-MC-v2-Core-Loop.md` 第3节「控制链核心」
 
-> 📝 检验你的理解：[ADV-ALG-01 检验题目](./ADV-ALG-01-assessment.md)
+>  检验你的理解：[ADV-ALG-01 检验题目](./ADV-ALG-01-assessment.md)
 
 ## 延伸实践
-- 📂 [路径11-4: 低通滤波器设计](../../practice/PRACTICE-11-FOC-Engineering.md#站4) — 一阶LPF参数设计+Simulink验证
+-  [路径11-4: 低通滤波器设计](../../practice/PRACTICE-11-FOC-Engineering.md#站4) — 一阶LPF参数设计+Simulink验证

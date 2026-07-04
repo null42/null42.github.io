@@ -11,14 +11,14 @@ title: MC_LIB - 观测器模块详解
 tags:
   - motor-control
 status: learning
-summary: "> 🔗 关联模块：[ALG-06 位置速度观测器](../ALG-06-Position-Speed-Observer.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md)"
+summary: ">  关联模块：[ALG-06 位置速度观测器](../ALG-06-Position-Speed-Observer.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md)"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # MC_LIB - 观测器模块详解
 
-> 🔗 关联模块：[ALG-06 位置速度观测器](../ALG-06-Position-Speed-Observer.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md)
+>  关联模块：[ALG-06 位置速度观测器](../ALG-06-Position-Speed-Observer.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md)
 
 **文档版本：** v1.0  
 **生成日期：** 2026-04-26  
@@ -68,11 +68,11 @@ MCFOC_EST_F模块实现了多种无感观测器算法：
 ┌─────────────────────────────────────────────────────────────┐
 │                   MCFOC_EST_F模块特点                        │
 ├─────────────────────────────────────────────────────────────┤
-│  ✓ 多观测器支持：SMO、FLUX、EMF三种观测器                    │
-│  ✓ PLL角度跟踪：平滑的角度和速度估计                         │
-│  ✓ 角度补偿：根据频率和电流自适应补偿延迟                    │
-│  ✓ 参数自适应：根据运行状态调整观测器增益                    │
-│  ✓ 平滑切换：观测器输出平滑过渡                              │
+│   多观测器支持：SMO、FLUX、EMF三种观测器                    │
+│   PLL角度跟踪：平滑的角度和速度估计                         │
+│   角度补偿：根据频率和电流自适应补偿延迟                    │
+│   参数自适应：根据运行状态调整观测器增益                    │
+│   平滑切换：观测器输出平滑过渡                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -710,7 +710,7 @@ void MCFOC_EST_SMO_Adapt_F(ST_SMO_CONTROL_F* pSMO,
 
 ---
 
-## 🆚 与 hpm_MC 观测器对比
+##  与 hpm_MC 观测器对比
 
 | 维度 | MC_LIB | hpm_MCL |
 |------|--------|---------|

@@ -7,7 +7,7 @@ chapterOrder: 40
 category: 通信与协议
 source: motor
 visibility: public
-title: 📡 工业通信协议学习路径
+title:  工业通信协议学习路径
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# 📡 工业通信协议学习路径
+#  工业通信协议学习路径
 
 > **核心理念**：从通信协议理解电控系统的信息交互，建立"协议选型决定系统架构"的认知
 
@@ -43,15 +43,15 @@ flowchart TD
 
 | 编号 | 模块 | 核心问题 | 难度 |
 |------|------|---------|------|
-| COM-01 | [CAN总线基础](./COM-01-CAN-Basics.md) | CAN为什么能成为电机控制的通信标配？ | ★★★☆☆ |
-| COM-02 | [CAN FD扩展](./COM-02-CAN-FD.md) | CAN FD如何突破8字节和波特率瓶颈？ | ★★★★☆ |
-| COM-03 | [STM32 FDCAN实现](./COM-03-CAN-STM32.md) | STM32 FDCAN外设如何配置和使用？ | ★★★★☆ |
-| COM-04 | [CAN通信仿真](./COM-04-CAN-Simulation.md) | 如何直观理解CAN底层机制？ | ★★★☆☆ |
-| COM-05 | [Modbus协议](./COM-05-Modbus.md) | Modbus如何实现电机驱动器参数配置？ | ★★★☆☆ |
-| COM-06 | [EtherCAT协议](./COM-06-EtherCAT.md) | EtherCAT如何实现μs级实时通信？ | ★★★★★ |
-| COM-07 | [协议选型对比](./COM-07-Protocol-Compare.md) | 如何根据应用场景选择通信协议？ | ★★★☆☆ |
-| COM-08 | [AUTOSAR架构与电机控制](./COM-08-AUTOSAR-Architecture.md) | AUTOSAR如何将电机控制软件标准化分层？ | ★★★★☆ |
-| COM-09 | [工业通信物理层PHY](./COM-09-Industrial-PHY.md) | 通信可靠性的物理根基——隔离、防护、信号完整性 | ★★★★☆ |
+| COM-01 | [CAN总线基础](./COM-01-CAN-Basics.md) | CAN为什么能成为电机控制的通信标配？ |  |
+| COM-02 | [CAN FD扩展](./COM-02-CAN-FD.md) | CAN FD如何突破8字节和波特率瓶颈？ |  |
+| COM-03 | [STM32 FDCAN实现](./COM-03-CAN-STM32.md) | STM32 FDCAN外设如何配置和使用？ |  |
+| COM-04 | [CAN通信仿真](./COM-04-CAN-Simulation.md) | 如何直观理解CAN底层机制？ |  |
+| COM-05 | [Modbus协议](./COM-05-Modbus.md) | Modbus如何实现电机驱动器参数配置？ |  |
+| COM-06 | [EtherCAT协议](./COM-06-EtherCAT.md) | EtherCAT如何实现μs级实时通信？ |  |
+| COM-07 | [协议选型对比](./COM-07-Protocol-Compare.md) | 如何根据应用场景选择通信协议？ |  |
+| COM-08 | [AUTOSAR架构与电机控制](./COM-08-AUTOSAR-Architecture.md) | AUTOSAR如何将电机控制软件标准化分层？ |  |
+| COM-09 | [工业通信物理层PHY](./COM-09-Industrial-PHY.md) | 通信可靠性的物理根基——隔离、防护、信号完整性 |  |
 
 ---
 

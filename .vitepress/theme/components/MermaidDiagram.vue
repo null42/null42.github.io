@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import type mermaid from 'mermaid'
+import { normalizeMermaidSource } from '../../../scripts/kb/markdown-rendering'
 
 const props = defineProps<{
   code: string
@@ -26,7 +27,11 @@ async function renderDiagram() {
     const mermaid = await loadMermaid()
     mermaid.initialize({
       startOnLoad: false,
-      securityLevel: 'strict',
+      securityLevel: 'loose',
+      flowchart: {
+        htmlLabels: false,
+        markdownAutoWrap: false
+      },
       theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default'
     })
     const result = await mermaid.render(elementId, source.value)
@@ -34,10 +39,6 @@ async function renderDiagram() {
   } catch (err) {
     error.value = err instanceof Error ? err.message : String(err)
   }
-}
-
-function normalizeMermaidSource(value: string): string {
-  return value.replace(/^(\s*)state\s+([A-Za-z_][\w-]*)\s+as\s+"([^"\n]+)"\s*$/gm, '$1state "$3" as $2')
 }
 
 onMounted(renderDiagram)
