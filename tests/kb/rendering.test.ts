@@ -61,6 +61,42 @@ describe('rendering fixture', () => {
     expect(normalized).not.toContain('|"- "|')
   })
 
+  it('normalizes Mermaid source before the fence content reaches the component', () => {
+    const config = fs.readFileSync('.vitepress/config.ts', 'utf8')
+
+    expect(config).toContain('normalizeMermaidSource(token.content)')
+  })
+
+  it('normalizes Mermaid list-like edge labels even when the quote spacing changes', () => {
+    const source = [
+      'flowchart LR',
+      '    A -->| - | B',
+      '    B -->|"- "| C',
+      "    C -->|'- '| D"
+    ].join('\n')
+
+    const normalized = normalizeMermaidSource(source)
+
+    expect(normalized.match(/"负反馈"/g)?.length).toBe(3)
+    expect(normalized).not.toContain('| - |')
+  })
+
+  it('normalizes CT-01 feedback edges that Mermaid would parse as markdown lists', () => {
+    const source = [
+      'flowchart LR',
+      '    R["R(s)"] --> SUM["⊕"] --> C["C(s)"]',
+      '    Y -->|"反馈 H(s)=1"| FB',
+      '    FB -->|"-"| SUM',
+      '    FB -->|"- "| SUM'
+    ].join('\n')
+
+    const normalized = normalizeMermaidSource(source)
+
+    expect(normalized.match(/"负反馈"/g)?.length).toBe(2)
+    expect(normalized).not.toContain('|"-"|')
+    expect(normalized).not.toContain('|"- "|')
+  })
+
   it('loads math and mermaid from local packages without the stale markdown-it-katex renderer', () => {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
     const config = fs.readFileSync('.vitepress/config.ts', 'utf8')
@@ -130,6 +166,63 @@ describe('rendering fixture', () => {
       '\\[keep as code\\]',
       '```'
     ].join('\n'))
+  })
+
+  it('protects math absolute-value pipes inside markdown table rows', () => {
+    const markdown = [
+      '| 条件 | 含义 |',
+      '| --- | --- |',
+      '| $|z| < |p|$ | 超前补偿 |'
+    ].join('\n')
+
+    const normalized = normalizeMathDelimiters(markdown)
+
+    expect(normalized).toContain('$\\lvert z \\rvert < \\lvert p \\rvert$')
+  })
+
+  it('does not corrupt escaped norm delimiters while protecting table pipes', () => {
+    const markdown = '$$\\left\\| \\begin{matrix} W_1 S \\\\ W_2 KS \\end{matrix} \\right\\|_\\infty$$'
+
+    const normalized = normalizeMathDelimiters(markdown)
+
+    expect(normalized).toContain('\\left\\lVert')
+    expect(normalized).toContain('\\right\\rVert')
+    expect(normalized).not.toContain('\\left\\\\lvert')
+  })
+
+  it('normalizes same-line display delimiters inside prose to inline math', () => {
+    const markdown = '工程说明：$$V_{out}=D \\cdot V_{in}$$，这里不是独立公式块。'
+
+    expect(normalizeMathDelimiters(markdown)).toBe('工程说明：$V_{out}=D \\cdot V_{in}$，这里不是独立公式块。')
+  })
+
+  it('splits formula definition lines into display math to avoid cramped inline layout', () => {
+    const markdown = '传递函数：$T_{open}(s) = C(s)G(s)$'
+
+    expect(normalizeMathDelimiters(markdown)).toBe('传递函数：\n\n$$T_{open}(s) = C(s)G(s)$$')
+  })
+
+  it('keeps standalone display math but preserves trailing prose on the next line', () => {
+    const markdown = '$$G(s)=\\frac{1}{Ls+R}$$电机电气模型。'
+
+    expect(normalizeMathDelimiters(markdown)).toBe('$$G(s)=\\frac{1}{Ls+R}$$\n\n电机电气模型。')
+  })
+
+  it('wraps bare TeX lines that start with absolute-value notation as display math', () => {
+    const markdown = '|z| = \\left| \\frac{1 + T_s(\\sigma + j\\omega)/2}{1 - T_s(\\sigma + j\\omega)/2} \\right|'
+
+    expect(normalizeMathDelimiters(markdown)).toBe(`$$${markdown}$$`)
+  })
+
+  it('does not turn headings or numbered implementation steps into display math', () => {
+    const markdown = [
+      '### 7.4 simuser_*.c/h 自定义算法',
+      '1. 在 `ACMConfig.h` 中定义用户 ID 宏：`#define USER_YOURNAME 123456`',
+      '2. 创建 `simuser_yourname.c` 和 `simuser_yourname.h`',
+      '3. 在 `main_switch.c` 中添加 `#if WHO_IS_USER == USER_YOURNAME`'
+    ].join('\n')
+
+    expect(normalizeMathDelimiters(markdown)).toBe(markdown)
   })
 
   it('normalizes unknown fence languages to text before highlighting', () => {

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: ODrive
 source: motor
 visibility: public
-title: "⭐ OD-02: FOC 核心算法"
+title: " OD-02: FOC 核心算法"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ OD-02: FOC 核心算法
+#  OD-02: FOC 核心算法
 
 ---
 
@@ -150,7 +150,7 @@ $$V_d^{int}[k] = V_d^{int}[k-1] + K_i \cdot T_s \cdot (I_d^{ref}[k] - I_d[k])$$
 
 $$V_q^{int}[k] = V_q^{int}[k-1] + K_i \cdot T_s \cdot (I_q^{ref}[k] - I_q[k])$$
 
-其中 $T_s = \text{current_meas_period}$ 是电流采样周期。
+其中 $T_s = \text{current\_meas\_period}$ 是电流采样周期。
 
 ### 3.3 PI 增益计算
 
@@ -597,12 +597,12 @@ ODrive 固件支持灵活的 PWM 频率配置。
   PWM 周期 (41.7μs @ 24kHz)
   ├────────────────────────────────────┤
   │                                    │
-  │   电流采样 ───▶ 控制计算 ───▶ PWM更新
+  │   电流采样 ─── 控制计算 ─── PWM更新
   │   ↑ 上溢中断     ↑ 下溢中断         │
   │                                    │
   ├────────────────────────────────────┤
   │                                    │
-  │   电流采样 ───▶ 控制计算 ───▶ PWM更新
+  │   电流采样 ─── 控制计算 ─── PWM更新
   │                                    │
 ```
 

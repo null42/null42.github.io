@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 仿真与调试
 source: motor
 visibility: public
-title:  仿真代码 ↔ 知识库概念映射
+title:  仿真代码  知识库概念映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
-#  仿真代码 ↔ 知识库概念映射
+#  仿真代码  知识库概念映射
 
 **版本：** v1.0
 **日期：** 2026-05

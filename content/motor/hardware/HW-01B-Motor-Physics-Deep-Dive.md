@@ -602,8 +602,8 @@ Vq = Rs·Iq + Lq·dIq/dt + ωe·Ld·Id + ωe·ψf  ← 注意 +ωe·Ld·Id + ωe
 ---
 
 **模块导航**：
-- ⬆ 上一模块：[HW-01 电机本体基础](HW-01-Motor-Basics.md)
-- ⬇ 下一模块：[HW-02 电流采样](HW-02-Current-Sensing.md)
+-  上一模块：[HW-01 电机本体基础](HW-01-Motor-Basics.md)
+-  下一模块：[HW-02 电流采样](HW-02-Current-Sensing.md)
 -  相关算法：[ALG-03 PI电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md)
 -  相关算法：[ALG-11 MTPA与弱磁](../algorithm/ALG-11-MTPA-Flux-Weakening.md)
 -  高级专题：[ADV-ALG-07 前馈解耦](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)

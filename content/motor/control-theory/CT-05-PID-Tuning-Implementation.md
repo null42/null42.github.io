@@ -312,7 +312,7 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 
 ### 案例3：Bumpless Transfer 避免模式切换冲击
 
-**背景**：伺服系统在「速度模式↔位置模式」间切换。未处理bumpless transfer→切换时积分器状态突变→Vq跳变→电机抖动。
+**背景**：伺服系统在「速度模式位置模式」间切换。未处理bumpless transfer→切换时积分器状态突变→Vq跳变→电机抖动。
 
 **解决**：
 ```c

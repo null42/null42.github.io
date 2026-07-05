@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title:  交叉引用：控制理论↔算法映射
+title:  交叉引用：控制理论算法映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-#  交叉引用：控制理论↔算法映射
+#  交叉引用：控制理论算法映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 

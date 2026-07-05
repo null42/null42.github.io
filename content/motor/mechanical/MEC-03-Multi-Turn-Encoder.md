@@ -90,7 +90,7 @@ Wiegand传感器由一段经过特殊处理的铁磁合金丝（Wiegand丝）和
 - 计数器需极低功耗设计（nA级静态电流）
 - 振动环境下可能产生误计数（需软件滤波）
 
-**代表产品：** Renishaw RESOLUTE™、SICK DBS60E、Baumer EIL580。
+**代表产品：** Renishaw RESOLUTE、SICK DBS60E、Baumer EIL580。
 
 #### 2.2 齿轮计数机构方案
 
@@ -351,7 +351,7 @@ DATA ──────┐ ┌─┐ ┌─┐       ┌─┐ ┌─┐ ┌─�
 | 成本 | 低 | 中 | 高 |
 
 **其他协议：**
-- **HIPERFACE DSL®**（SICK/Stegmann）：单电缆方案（供电+通信共用一对线），节省布线
+- **HIPERFACE DSL**（SICK/Stegmann）：单电缆方案（供电+通信共用一对线），节省布线
 - **Tamagawa SmartAbs**：安川/松下等日系驱动器常用
 - **Nikon S-Format**：尼康专有协议
 - **SPI**：简单直接，适合嵌入式系统内部通信

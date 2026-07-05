@@ -29,11 +29,11 @@ navGroupOrder: 40
 
 **题目：** Boost PFC的电压外环+电流内环与FOC的速度外环+电流内环在结构上高度相似。以下对应关系正确的是？
 
-A. PFC电压环 ↔ FOC电流环；PFC电流环 ↔ FOC速度环
+A. PFC电压环  FOC电流环；PFC电流环  FOC速度环
 
-B. PFC电压环 ↔ FOC速度环；PFC电流环 ↔ FOC电流环；PFC输出电容C ↔ 电机惯量J
+B. PFC电压环  FOC速度环；PFC电流环  FOC电流环；PFC输出电容C  电机惯量J
 
-C. PFC电压环 ↔ FOC位置环；PFC电流环 ↔ FOC速度环
+C. PFC电压环  FOC位置环；PFC电流环  FOC速度环
 
 D. 两者结构完全不同，无法建立类比
 

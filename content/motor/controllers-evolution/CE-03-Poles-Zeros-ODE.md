@@ -45,7 +45,7 @@ $$G(s) = \frac{Y(s)}{U(s)} = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n
 
 $$(s^2 + 2\zeta\omega_n s + \omega_n^2) Y(s) = \omega_n^2 U(s)$$
 
-算子 $s$ 是拉普拉斯域中对微分算子 $d/dt$ 的别名。因此 $sY(s)$ ↔ $\dot{y}(t)$，$s^2Y(s)$ ↔ $\ddot{y}(t)$。逆拉普拉斯变换得到ODE：
+算子 $s$ 是拉普拉斯域中对微分算子 $d/dt$ 的别名。因此 $sY(s)$  $\dot{y}(t)$，$s^2Y(s)$  $\ddot{y}(t)$。逆拉普拉斯变换得到ODE：
 
 $$\boxed{\ddot{y}(t) + 2\zeta\omega_n\,\dot{y}(t) + \omega_n^2\,y(t) = \omega_n^2\,u(t)}$$
 

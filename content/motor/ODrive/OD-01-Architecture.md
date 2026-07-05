@@ -7,7 +7,7 @@ chapterOrder: 10
 category: ODrive
 source: motor
 visibility: public
-title: "⭐ OD-01: ODrive 系统架构"
+title: " OD-01: ODrive 系统架构"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ OD-01: ODrive 系统架构
+#  OD-01: ODrive 系统架构
 
 ---
 
@@ -280,7 +280,7 @@ ODrive 采用自定义的数据流通信模式，定义于 `component.hpp`。
 ┌─────────────┐          ┌────────────┐          ┌─────────────┐
 │  Component A │          │  Data Flow │          │  Component B │
 │             │          │            │          │             │
-│ OutputPort  │────connect_to()───────│───▶ InputPort          │
+│ OutputPort  │────connect_to()───────│─── InputPort          │
 │  <float>    │          │            │          │             │
 │ pos_estimate│          │  .present()│          │ pos_estimate│
 │             │          │  .any()    │          │ _linear_src_│

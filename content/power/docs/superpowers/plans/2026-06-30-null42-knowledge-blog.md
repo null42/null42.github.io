@@ -1264,7 +1264,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Powered by VitePress. Written offline, published with care.',
-      copyright: 'Copyright © 2026 lx'
+      copyright: 'Copyright  2026 lx'
     }
   }
 })

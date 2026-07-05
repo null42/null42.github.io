@@ -63,6 +63,8 @@ describe('chaptered sidebar', () => {
     expect(home).toContain('/content/encrypted/demo.html')
     expect(tools).toContain('/content/encrypted/demo.html')
     expect(config).toContain("link: '/tools.html'")
+    expect(config).not.toContain('location.replace(path.toLowerCase()')
+    expect(config).toContain("'content/**/*.html'")
     expect(motorEntry).toContain('## 电机学习地图')
     expect(motorEntry).toContain('/content/motor/electronics-basics/')
     expect(motorEntry).toContain('/content/motor/algorithm/')

@@ -271,7 +271,7 @@ $$
 小角度近似：
 
 $$
-\varepsilon \approx \frac{U_h \xi}{\omega_h L_{avg}} \theta_{err} \quad (|\theta_{err}| < 15°)
+\varepsilon \approx \frac{U_h \xi}{\omega_h L_{avg}} \theta_{err} \quad (|\theta_{err}| \lt 15°)
 $$
 
 ### 3.2 方波注入完整数学模型

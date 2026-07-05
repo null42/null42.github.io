@@ -28,14 +28,14 @@ navGroupOrder: 10
 
 | 子文件 | 内容概述 |
 |--------|---------|
-| [xref-hw-alg.md](./xref-hw-alg.md) | 硬件↔算法双向映射（HW-01~07、ALG-01/05/07/09/13/15） |
-| [xref-ee-hw.md](./xref-ee-hw.md) | 硬件基础↔电控映射（EE-01~09）及功率变换↔电控关联（PP-04/07） |
-| [xref-ct-alg.md](./xref-ct-alg.md) | 控制理论↔算法映射（CT-03~18） |
-| [xref-adv-base.md](./xref-adv-base.md) | 高级篇↔基础篇映射（ADV-HW-01~03、ADV-ALG-01/05/07/09/13/15、SYS-01~04） |
-| [xref-hpm.md](./xref-hpm.md) | HPM MC代码↔知识库文档双向映射及官方知识库文章关联 |
+| [xref-hw-alg.md](./xref-hw-alg.md) | 硬件算法双向映射（HW-01~07、ALG-01/05/07/09/13/15） |
+| [xref-ee-hw.md](./xref-ee-hw.md) | 硬件基础电控映射（EE-01~09）及功率变换电控关联（PP-04/07） |
+| [xref-ct-alg.md](./xref-ct-alg.md) | 控制理论算法映射（CT-03~18） |
+| [xref-adv-base.md](./xref-adv-base.md) | 高级篇基础篇映射（ADV-HW-01~03、ADV-ALG-01/05/07/09/13/15、SYS-01~04） |
+| [xref-hpm.md](./xref-hpm.md) | HPM MC代码知识库文档双向映射及官方知识库文章关联 |
 | [xref-new-modules.md](./xref-new-modules.md) | 新增模块映射（HW-02B、ALG-17/18/19、CT-19、PMI-01~03、COM-08/09） |
-| [xref-practice.md](./xref-practice.md) | 实践路径↔KB模块映射（路径11-14与ALG/HW/CT/ADV/SYS/MC-LIB/HPM-MC/SIM双向映射） |
-| [xref-lxfoc-verification.md](./xref-lxfoc-verification.md) | lxfoc 25个核心算法模块↔KB理论一致性验证（控制环/观测器/高级控制/参数辨识/自整定/数学变换） |
+| [xref-practice.md](./xref-practice.md) | 实践路径KB模块映射（路径11-14与ALG/HW/CT/ADV/SYS/MC-LIB/HPM-MC/SIM双向映射） |
+| [xref-lxfoc-verification.md](./xref-lxfoc-verification.md) | lxfoc 25个核心算法模块KB理论一致性验证（控制环/观测器/高级控制/参数辨识/自整定/数学变换） |
 | [xref-motion-control.md](./xref-motion-control.md) | 轨迹规划与运动控制映射（MC-TP-01~06、MC-MC-01~06）及已有模块反向映射 |
 
 ---
@@ -137,7 +137,7 @@ navGroupOrder: 10
 | MC-MC-05 | 2 (MC-MC-01, ALG-05) |  |
 | MC-MC-06 | 3 (MC-TP-06, MC-MC-05, CE-17) |  |
 
-### lxfoc代码↔KB一致性验证
+### lxfoc代码KB一致性验证
 
 | 验证分组 | 模块数 |  |  |  | 关键发现 |
 |---------|--------|-----|-----|-----|---------|

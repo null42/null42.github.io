@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { scanArticles } from '../../scripts/kb/articles'
 import { nonPublicContentPatterns, shouldExcludeContentPath } from '../../scripts/kb/content-exclusions'
 
-const emojiPattern = /(?:[\u{1F000}-\u{1FAFF}]|[\u2600-\u27BF]\uFE0F?|\uFE0F|\u200D)/gu
+const emojiPattern = /(?:\p{Extended_Pictographic}|[\u{1F000}-\u{1FAFF}]|[\u2600-\u27BF]\uFE0F?|\uFE0F|\u200D)/gu
 const numericEntityPattern = /&#(x[0-9a-f]+|\d+);/giu
 
 describe('content publishing policy', () => {
@@ -110,5 +110,7 @@ function findEmojiEntities(text: string): string[] {
 }
 
 function isEmojiCodePoint(codePoint: number): boolean {
-  return (codePoint >= 0x1f000 && codePoint <= 0x1faff) || (codePoint >= 0x2600 && codePoint <= 0x27bf)
+  return /\p{Extended_Pictographic}/u.test(String.fromCodePoint(codePoint))
+    || (codePoint >= 0x1f000 && codePoint <= 0x1faff)
+    || (codePoint >= 0x2600 && codePoint <= 0x27bf)
 }

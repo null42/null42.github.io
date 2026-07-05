@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title:  交叉引用：硬件↔算法映射
+title:  交叉引用：硬件算法映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-#  交叉引用：硬件↔算法映射
+#  交叉引用：硬件算法映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -167,7 +167,7 @@ navGroupOrder: 10
 
 **所有基础篇HW/ALG模块均满足"至少2个交叉引用"的要求。**
 
-### HW-01B 电机学物理本质深入 ↔ 算法模块
+### HW-01B 电机学物理本质深入  算法模块
 
 | HW-01B 章节 | 关联算法模块 | 关联内容 |
 |------------|------------|---------|

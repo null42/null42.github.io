@@ -105,7 +105,7 @@ MC_LIB/3_MC/30_SQ/
        │
        ▼
 ┌─────────────┐     ┌──────────────┐
-│ MCSQ_BLDC.h │────▶│ MATH_PID_T.h │
+│ MCSQ_BLDC.h │────│ MATH_PID_T.h │
 └──────┬──────┘     │ MATH_LPF_T.h │
        │            │ MATH_RAMP_T.h│
        │            └──────────────┘
@@ -539,7 +539,7 @@ void MotorTask_Current_Flow(ST_MOTOR_TASK* pMotor)
               │         │ 定位成功
               │         ▼
               │    ┌─────────┐
-              └───▶│  RUN    │ 运行：闭环换相
+              └───│  RUN    │ 运行：闭环换相
                    └────┬────┘
                         │ 停止命令
                         ▼

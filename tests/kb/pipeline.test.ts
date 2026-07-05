@@ -51,7 +51,10 @@ describe('knowledge base pipeline', () => {
   it('runs sync-dist when invoked through tsx on Windows paths', async () => {
     const syncModule = await import('../../scripts/kb/sync-dist')
     const scriptPath = path.resolve('scripts/kb/sync-dist.ts')
+    const syncSource = fs.readFileSync('scripts/kb/sync-dist.ts', 'utf8')
 
     expect(syncModule.isMainModule(pathToFileURL(scriptPath).href, scriptPath)).toBe(true)
+    expect(syncSource).toContain('syncHtmlFiles')
+    expect(syncSource).not.toContain('createLowercaseHtmlAliases')
   })
 })

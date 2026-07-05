@@ -7,7 +7,7 @@ chapterOrder: 20
 category: VESC
 source: motor
 visibility: public
-title: "⭐ VC-02: VESC FOC 核心算法链"
+title: " VC-02: VESC FOC 核心算法链"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ VC-02: VESC FOC 核心算法链
+#  VC-02: VESC FOC 核心算法链
 
 ---
 
@@ -236,7 +236,7 @@ VESC 采用带积分分离和输出限幅的 PI 控制器：
 
 ```text
                   ┌─────────────────────────────────┐
-  id_set ────┬───▶│  e_d = id_set - id              │
+  id_set ────┬───│  e_d = id_set - id              │
              │    │                                  │
              │    │  vd_int += Ki × e_d × dt        │
              │    │  vd_int = clamp(vd_int, ±limit)  │
@@ -246,7 +246,7 @@ VESC 采用带积分分离和输出限幅的 PI 控制器：
              │    └──────────────┬──────────────────┘
              │                   │ vd
              │                   ▼
-  iq_set ────┼─────────────▶ 同 d 轴结构
+  iq_set ────┼───────────── 同 d 轴结构
              │                   │ vq
              │                   ▼
              │              逆 Park → SVPWM

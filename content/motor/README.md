@@ -356,7 +356,7 @@ flowchart TB
 
 - ** 算法关联**：硬件模块中标注"该硬件特性如何影响算法设计"
 - ** 硬件约束**：算法模块中标注"该算法决策受什么硬件约束"
-- ** 基础↔应用关联**：硬件基础/控制理论模块中标注"该基础知识如何应用于电控实践"
+- ** 基础应用关联**：硬件基础/控制理论模块中标注"该基础知识如何应用于电控实践"
 
 详见 [交叉引用映射表](./cross-reference/cross-reference-map.md)
 
@@ -369,7 +369,7 @@ flowchart TB
 2.  问题引入（工程师真实困惑+学习目标）
 3.  直观理解（生活类比+图示）
 4.  技术原理（物理机制+数学推导）
-5.  交叉视角（硬件↔算法关联）
+5.  交叉视角（硬件算法关联）
 6.  工程案例（3-5个真实案例）
 7.  实践练习（计算题+设计题+诊断题）
 
@@ -396,7 +396,7 @@ flowchart TB
  入门内容 - 适合零基础
  基础内容 - 必须掌握
  实践内容 - 动手操作
- 交叉视角 - 硬件↔算法关联
+ 交叉视角 - 硬件算法关联
  注意事项 - 常见错误
  工程案例 - 真实项目
 ```
@@ -553,13 +553,13 @@ motor-control-knowledge-base/
 │   └── SIM-05-Digital-Twin.md       # 数字孪生与真实电机模型
 ├── cross-reference/                   # 交叉引用
 │   ├── cross-reference-map.md         # 交叉引用映射表
-│   ├── xref-hw-alg.md                 # 硬件↔算法映射
-│   ├── xref-ee-hw.md                  # 硬件基础↔电控映射
-│   ├── xref-ct-alg.md                 # 控制理论↔算法映射
-│   ├── xref-adv-base.md               # 高级篇↔基础篇映射
-│   ├── xref-hpm.md                    # HPM MC代码↔知识库文档映射
+│   ├── xref-hw-alg.md                 # 硬件算法映射
+│   ├── xref-ee-hw.md                  # 硬件基础电控映射
+│   ├── xref-ct-alg.md                 # 控制理论算法映射
+│   ├── xref-adv-base.md               # 高级篇基础篇映射
+│   ├── xref-hpm.md                    # HPM MC代码知识库文档映射
 │   ├── xref-new-modules.md            # 新增模块映射
-│   └── xref-practice.md               # 实践路径↔KB模块映射
+│   └── xref-practice.md               # 实践路径KB模块映射
 ├── ODrive/                            #  ODrive代码分析
 │   ├── OD-01-Architecture.md          # 系统架构与FreeRTOS线程模型
 │   ├── OD-02-FOC-Core.md              # FOC核心算法链（Clarke/Park/SVM/PI）

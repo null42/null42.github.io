@@ -378,7 +378,7 @@ emachinery 支持多用户并行开发，每个用户可以创建独立的算法
 
 | 插件名 | 功能 |
 |--------|------|
-| `plugin_Sweeping` | 扫频分析 ↔ Bode 图自动生成 |
+| `plugin_Sweeping` | 扫频分析  Bode 图自动生成 |
 | `plugin_MOO` | 多目标优化（如带宽 vs 稳定裕度权衡） |
 | `plugin_Performance_calc` | 性能计算 / 带宽计算 / 上升时间等指标 |
 | `plugin_Lissajous` | 李沙育图绘制（αβ 轴电流/电压轨迹） |

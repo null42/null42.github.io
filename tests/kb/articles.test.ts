@@ -23,6 +23,18 @@ describe('article scanning', () => {
     expect(result.warnings.some((warning) => warning.includes('private.md'))).toBe(true)
   })
 
+  it('preserves article URL casing so VitePress client chunks can hydrate', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-route-case-'))
+    const content = path.join(root, 'content')
+    await fs.mkdir(path.join(content, 'motor', 'Control-Theory'), { recursive: true })
+    await fs.writeFile(path.join(content, 'motor', 'Control-Theory', 'CT-01-Open-Loop.md'), '# CT-01\n\nBody.')
+
+    const result = await scanArticles({ contentRoot: content })
+
+    expect(result.articles[0].url).toBe('/content/motor/Control-Theory/CT-01-Open-Loop.html')
+  })
+
+
   it('writes only article frontmatter fields during safe completion', async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-fix-'))
     const content = path.join(root, 'content')

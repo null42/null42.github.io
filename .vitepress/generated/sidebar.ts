@@ -146,11 +146,11 @@ export const generatedSidebar = [
                 "link": "/content/motor/cross-reference/cross-reference-map.html"
               },
               {
-                "text": "交叉引用：lxfoc代码 ↔ KB理论一致性验证",
+                "text": "交叉引用：lxfoc代码  KB理论一致性验证",
                 "link": "/content/motor/cross-reference/xref-lxfoc-verification.html"
               },
               {
-                "text": "交叉引用：高级篇↔基础篇映射",
+                "text": "交叉引用：高级篇基础篇映射",
                 "link": "/content/motor/cross-reference/xref-adv-base.html"
               },
               {
@@ -158,7 +158,7 @@ export const generatedSidebar = [
                 "link": "/content/motor/cross-reference/xref-new-modules.html"
               },
               {
-                "text": "交叉引用：硬件↔算法映射",
+                "text": "交叉引用：硬件算法映射",
                 "link": "/content/motor/cross-reference/xref-hw-alg.html"
               },
               {
@@ -166,15 +166,15 @@ export const generatedSidebar = [
                 "link": "/content/motor/cross-reference/xref-practice.html"
               },
               {
-                "text": "交叉引用：控制理论↔算法映射",
+                "text": "交叉引用：控制理论算法映射",
                 "link": "/content/motor/cross-reference/xref-ct-alg.html"
               },
               {
-                "text": "交叉引用：硬件基础↔电控映射",
+                "text": "交叉引用：硬件基础电控映射",
                 "link": "/content/motor/cross-reference/xref-ee-hw.html"
               },
               {
-                "text": "交叉引用：HPM MC代码↔知识库映射",
+                "text": "交叉引用：HPM MC代码知识库映射",
                 "link": "/content/motor/cross-reference/xref-hpm.html"
               }
             ]
@@ -990,7 +990,7 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "仿真代码 ↔ 知识库概念映射",
+                "text": "仿真代码  知识库概念映射",
                 "link": "/content/motor/simulation/SIM-02-C-Simulation-Code-Map.html"
               },
               {
@@ -1214,19 +1214,19 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "⭐ OD-01: ODrive 系统架构",
+                "text": " OD-01: ODrive 系统架构",
                 "link": "/content/motor/ODrive/OD-01-Architecture.html"
               },
               {
-                "text": "⭐ OD-02: FOC 核心算法",
+                "text": " OD-02: FOC 核心算法",
                 "link": "/content/motor/ODrive/OD-02-FOC-Core.html"
               },
               {
-                "text": "⭐ OD-03: 控制策略",
+                "text": " OD-03: 控制策略",
                 "link": "/content/motor/ODrive/OD-03-Control-Strategy.html"
               },
               {
-                "text": "⭐ OD-04: 编码器与无传感器估算",
+                "text": " OD-04: 编码器与无传感器估算",
                 "link": "/content/motor/ODrive/OD-04-Encoder-Sensorless.html"
               }
             ]
@@ -1236,19 +1236,19 @@ export const generatedSidebar = [
             "collapsed": true,
             "items": [
               {
-                "text": "⭐ VC-01: VESC 固件系统架构",
+                "text": " VC-01: VESC 固件系统架构",
                 "link": "/content/motor/VESC/VC-01-Architecture.html"
               },
               {
-                "text": "⭐ VC-02: VESC FOC 核心算法链",
+                "text": " VC-02: VESC FOC 核心算法链",
                 "link": "/content/motor/VESC/VC-02-FOC-Core.html"
               },
               {
-                "text": "⭐ VC-03: VESC 磁链观测器与无感算法",
+                "text": " VC-03: VESC 磁链观测器与无感算法",
                 "link": "/content/motor/VESC/VC-03-Observer-Sensorless.html"
               },
               {
-                "text": "⭐ VC-04: VESC 系统保护机制",
+                "text": " VC-04: VESC 系统保护机制",
                 "link": "/content/motor/VESC/VC-04-System-Protection.html"
               }
             ]

@@ -124,7 +124,7 @@ $$V_{1,\max}^{\text{linear}} = \frac{V_{dc}}{\sqrt{3}} \approx 0.577V_{dc} \quad
 $$V_{1,\max}^{\text{six-step}} = \frac{2}{\pi}V_{dc} \approx 0.637V_{dc} \quad [\text{V}]$$
 
 电压利用率提升比：
-$$\eta_{boost} = \frac{0.637}{0.577} \approx 1.103 \quad (\text{相对于SVPWM线性区提升 10.3%})$$
+$$\eta_{boost} = \frac{0.637}{0.577} \approx 1.103 \quad (\text{相对于SVPWM线性区提升 10.3\%})$$
 
 ### 3.2 过调制I区电压增益特性
 

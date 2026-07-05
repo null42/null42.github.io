@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { generatedSidebar } from './generated/sidebar'
 import { nonPublicContentPatterns } from '../scripts/kb/content-exclusions'
 import { copyEncryptedPayloadsToDist } from '../scripts/kb/encrypt/publish-payloads'
-import { markdownItCurrentKatex, normalizeMathDelimiters } from '../scripts/kb/markdown-rendering'
+import { markdownItCurrentKatex, normalizeMathDelimiters, normalizeMermaidSource } from '../scripts/kb/markdown-rendering'
 
 const knownFenceLanguages = new Set([
   'bash',
@@ -47,7 +47,7 @@ export default defineConfig({
   ignoreDeadLinks: [
     (link) => shouldIgnoreMigratedKnowledgeLink(link)
   ],
-  srcExclude: nonPublicContentPatterns,
+  srcExclude: [...nonPublicContentPatterns, 'content/**/*.html'],
   vite: {
     plugins: [
       {
@@ -78,7 +78,7 @@ export default defineConfig({
         const info = normalizeFenceInfo(token.info)
         token.info = info
         if (info === 'mermaid') {
-          const encoded = encodeURIComponent(token.content)
+          const encoded = encodeURIComponent(normalizeMermaidSource(token.content))
           return `<MermaidDiagram code="${encoded}" />`
         }
         return defaultFence ? defaultFence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
@@ -91,6 +91,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '电源控制', link: '/content/power/getting-started.html' },
       { text: '电机控制', link: '/content/motor/getting-started.html' },
+      { text: '世界塑造', link: '/content/encrypted/worldbuilding.html' },
       { text: '文章库', link: '/archive.html' },
       { text: '搜索', link: '/search.html' },
       { text: '工具', link: '/tools.html' },

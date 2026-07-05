@@ -62,12 +62,23 @@ describe('encrypted articles', () => {
 
     expect(component).toContain('等待输入密码')
     expect(component).toContain('解密成功')
-    expect(component).toContain('密码不正确')
+    expect(component).toContain('密码错误')
+    expect(component).toContain('const isBusy = ref(false)')
+    expect(component).toContain(':disabled="isBusy"')
     expect(component).toContain('window.crypto.subtle')
     expect(component).toContain('XMLHttpRequest')
     expect(component).not.toContain('window.fetch')
     expect(component).not.toContain('window.atob')
     expect(component).toContain('@noble/ciphers/aes.js')
     expect(component).toContain('@noble/hashes/pbkdf2.js')
+  })
+
+  it('renders decrypted markdown as a readable document view', () => {
+    const component = fs.readFileSync('.vitepress/theme/components/EncryptedArticle.vue', 'utf8')
+
+    expect(component).toContain('renderMarkdown')
+    expect(component).toContain('kb-decrypted-doc')
+    expect(component).toContain('v-html="renderedContent"')
+    expect(component).not.toContain('<pre v-if="content"')
   })
 })

@@ -812,7 +812,7 @@ void Fault_Handler(Fault_Code fault) {
 
 ## 5.  交叉视角  
 
-### 5.1 硬件↔算法关联总览
+### 5.1 硬件算法关联总览
 
 ```plain
 电源/保护参数        影响路径                  算法侧影响

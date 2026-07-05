@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title:  交叉引用：硬件基础↔电控映射
+title:  交叉引用：硬件基础电控映射
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-#  交叉引用：硬件基础↔电控映射
+#  交叉引用：硬件基础电控映射
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -29,7 +29,7 @@ navGroupOrder: 10
 | 硬件基础知识点 | 影响的电控模块 | 影响机制 | 引用链接 |
 |-----------|-------------|---------|---------|
 | MOS结构/沟道形成 | HW-05 功率器件 | 理解功率MOSFET的阈值电压、导通电阻物理来源 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#MOSFET选型) |
-| 输出特性（截止/线性/饱和） | HW-05 功率器件 | 功率MOSFET工作在开关状态（截止↔线性），线性区导通电阻决定损耗 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#开关损耗) |
+| 输出特性（截止/线性/饱和） | HW-05 功率器件 | 功率MOSFET工作在开关状态（截止线性），线性区导通电阻决定损耗 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#开关损耗) |
 | 寄生电容Cgs/Cgd/Cds | HW-05 功率器件 | 米勒效应成因——Cgd充放电导致开关延迟 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#米勒效应) |
 | 阈值电压Vth | HW-05 功率器件 | 栅极驱动电压必须远大于Vth才能完全导通 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#栅极驱动设计) |
 

@@ -396,7 +396,7 @@ AFE（Active Front End）是双向PFC，可以将制动能量回馈电网：
 
 ```text
   电网 ──► AFE(双向PFC) ──► 母线电容 ──► 逆变器 ──► 电机
-         (AC↔DC双向)      (C_bus)    (DC→AC)
+         (ACDC双向)      (C_bus)    (DC→AC)
 
   电动模式：电网 → AFE → 母线 → 逆变器 → 电机（消耗能量）
   制动模式：电机 → 逆变器 → 母线 → AFE → 电网（回馈能量）

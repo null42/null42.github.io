@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 交叉索引
 source: motor
 visibility: public
-title:  交叉引用：lxfoc代码 ↔ KB理论一致性验证
+title:  交叉引用：lxfoc代码  KB理论一致性验证
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 入门与索引
 navGroupOrder: 10
 ---
 
-#  交叉引用：lxfoc代码 ↔ KB理论一致性验证
+#  交叉引用：lxfoc代码  KB理论一致性验证
 
 > 来源：[交叉引用映射表](./cross-reference-map.md)
 
@@ -813,7 +813,7 @@ navGroupOrder: 10
 
 | # | 差异描述 | 严重程度 | 改进建议 |
 |---|---------|---------|---------|
-| 1 | 未在base层实现全速域线性加权切换 |  | 可在base层增加角度混合函数，支持HFI↔SMO平滑过渡 |
+| 1 | 未在base层实现全速域线性加权切换 |  | 可在base层增加角度混合函数，支持HFISMO平滑过渡 |
 | 2 | 未实现观测器收敛判断 |  | 可在base层增加收敛状态标志，由具体观测器更新 |
 | 3 | 使用void* impl指针，缺乏类型安全 |  | C语言多态的固有局限，可用联合体替代但增加耦合 |
 

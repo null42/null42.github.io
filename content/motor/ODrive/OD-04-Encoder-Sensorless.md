@@ -7,7 +7,7 @@ chapterOrder: 10
 category: ODrive
 source: motor
 visibility: public
-title: "⭐ OD-04: 编码器与无传感器估算"
+title: " OD-04: 编码器与无传感器估算"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ OD-04: 编码器与无传感器估算
+#  OD-04: 编码器与无传感器估算
 
 ---
 

@@ -259,7 +259,7 @@ $K_i = 2\pi \times 2000 \times 0.5 = 6283.2$
 
 **电机参数回顾：**Rs=0.5&Omega;, Ld=5mH, &psi;f=0.1Wb, pn=4, J=0.001kg&middot;m&sup2;
 
-**转矩常数：**$K_t = 1.5 \times p_n \times \psi_f = 1.5 \times 4 \times 0.1 = 0.6\text{N&middot;m/A}$
+**转矩常数：**$K_t = 1.5 \times p_n \times \psi_f = 1.5 \times 4 \times 0.1 = 0.6\text{N}\cdot\text{m/A}$
 
 **带宽校验：**电流环带宽2kHz，速度环500Hz = 电流环的1/4，满足1/3~1/5原则 
 
@@ -537,11 +537,11 @@ MTPA条件：$i_d = \frac{0.1}{2(0.005-0.003)} - \sqrt{\frac{0.1^2}{4(0.002)^2}+
 
 联立求解（数值法）：设$i_q = 7\text{A}$，则$i_d = 25 - \sqrt{625+49} = 25 - 25.97 = -0.97\text{A}$
 
-验证转矩：$0.6\times7 - 0.012\times(-0.97)\times7 = 4.2 + 0.082 = 4.28\text{N&middot;m}$（不够）
+验证转矩：$0.6\times7 - 0.012\times(-0.97)\times7 = 4.2 + 0.082 = 4.28\text{N}\cdot\text{m}$（不够）
 
 调整：$i_q = 8\text{A}$，$i_d = 25 - \sqrt{625+64} = 25 - 26.25 = -1.25\text{A}$
 
-转矩：$0.6\times8 - 0.012\times(-1.25)\times8 = 4.8 + 0.12 = 4.92\text{N&middot;m}$（接近）
+转矩：$0.6\times8 - 0.012\times(-1.25)\times8 = 4.8 + 0.12 = 4.92\text{N}\cdot\text{m}$（接近）
 
 精确解：$i_q \approx 8.05\text{A}$，$i_d \approx -1.28\text{A}$，$i_s = \sqrt{1.28^2+8.05^2} = 8.15\text{A}$
 

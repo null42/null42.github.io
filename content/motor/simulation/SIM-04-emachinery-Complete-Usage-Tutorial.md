@@ -824,10 +824,10 @@ emachinery 提供了 4 种用户扩展方式，从简单到复杂：
 
 | 扩展方式 | 修改文件 | 难度 | 适用场景 |
 |---------|---------|------|---------|
-| 修改 YAML 参数 | `user_config.yaml` / sidebar | ⭐ | 调整仿真参数、PI 参数 |
-| 添加用户配置 | `user_config_*.yaml` | ⭐⭐ | 自定义可调参数列表、信号库、绘图配置 |
-| Python 前后处理 | `user_script_main.py` | ⭐⭐⭐ | 仿真前参数计算、仿真后数据处理 |
-| C 算法扩展 | `simuser_*.c/h` | ⭐⭐⭐⭐ | 自定义控制算法、观测器 |
+| 修改 YAML 参数 | `user_config.yaml` / sidebar |  | 调整仿真参数、PI 参数 |
+| 添加用户配置 | `user_config_*.yaml` |  | 自定义可调参数列表、信号库、绘图配置 |
+| Python 前后处理 | `user_script_main.py` |  | 仿真前参数计算、仿真后数据处理 |
+| C 算法扩展 | `simuser_*.c/h` |  | 自定义控制算法、观测器 |
 
 ### 7.2 user_script_main.py 扩展点
 
@@ -945,7 +945,7 @@ cplot:
 | USER_CURY (201314) | `simuser_cury.c/h` | 自定义算法 |
 
 **添加新用户算法的步骤：**
-1. 在 `ACMConfig.h` 中定义用户 ID 宏：`#define USER_YOURNAME 123456`
+1. 在 `ACMConfig.h` 中定义用户 ID 宏：`#define USER_YOURNAME <USER_ID>`
 2. 创建 `simuser_yourname.c` 和 `simuser_yourname.h`
 3. 在 `main_switch.c` 的 `main_switch()` 函数中添加 `#if WHO_IS_USER == USER_YOURNAME` 条件编译块
 4. 在 `makefile` 中添加新的 `.c` 文件

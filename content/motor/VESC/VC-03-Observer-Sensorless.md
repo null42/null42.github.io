@@ -7,7 +7,7 @@ chapterOrder: 20
 category: VESC
 source: motor
 visibility: public
-title: "⭐ VC-03: VESC 磁链观测器与无感算法"
+title: " VC-03: VESC 磁链观测器与无感算法"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ VC-03: VESC 磁链观测器与无感算法
+#  VC-03: VESC 磁链观测器与无感算法
 
 ---
 

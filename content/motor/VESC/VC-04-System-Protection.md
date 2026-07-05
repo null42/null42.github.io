@@ -7,7 +7,7 @@ chapterOrder: 20
 category: VESC
 source: motor
 visibility: public
-title: "⭐ VC-04: VESC 系统保护机制"
+title: " VC-04: VESC 系统保护机制"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ VC-04: VESC 系统保护机制
+#  VC-04: VESC 系统保护机制
 
 ---
 

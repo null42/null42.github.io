@@ -20,10 +20,95 @@ export function normalizeMathDelimiters(markdown: string): string {
   const chunks = splitFencedCode(markdown)
   return chunks.map((chunk) => {
     if (chunk.fenced) return chunk.text
-    return chunk.text
+    const withMathDelimiters = chunk.text
       .replace(/\\\[([\s\S]*?)\\\]/g, (_, body: string) => `$$${trimDisplayMath(body)}$$`)
       .replace(/\\\(([\s\S]*?)\\\)/g, (_, body: string) => `$${body}$`)
+    return normalizeMarkdownText(withMathDelimiters)
   }).join('')
+}
+
+function normalizeMarkdownText(text: string): string {
+  const lines = text.split(/\r?\n/)
+  let inDisplayMath = false
+  return lines.map((line) => {
+    const trimmed = line.trim()
+    if (trimmed.startsWith('$$')) {
+      const closeIndex = trimmed.indexOf('$$', 2)
+      if (closeIndex >= 0) return normalizeMarkdownLine(line)
+      inDisplayMath = !inDisplayMath
+      return line
+    }
+    if (inDisplayMath) return line
+    return normalizeMarkdownLine(line)
+  }).join('\n')
+}
+
+function normalizeMarkdownLine(line: string): string {
+  let normalized = normalizeSameLineDisplayMath(line)
+  normalized = normalizeFormulaDefinitionLine(normalized)
+  normalized = normalizeTableMathPipes(normalized)
+  normalized = normalizeBareMathLine(normalized)
+  return normalized
+}
+
+function normalizeSameLineDisplayMath(line: string): string {
+  if (!line.includes('$$')) return line
+
+  const trimmed = line.trim()
+  const singleDisplayMatch = trimmed.match(/^\$\$([\s\S]*?)\$\$(.*)$/)
+  if (singleDisplayMatch) {
+    const trailingText = singleDisplayMatch[2].trim()
+    if (!trailingText) return line
+
+    const indent = line.slice(0, line.length - line.trimStart().length)
+    return `${indent}$$${singleDisplayMatch[1]}$$\n\n${indent}${trailingText}`
+  }
+
+  return line.replace(/\$\$([^$\n]+?)\$\$/g, (_, body: string) => `$${body}$`)
+}
+
+function normalizeFormulaDefinitionLine(line: string): string {
+  const match = line.match(/^(\s*)([^$\n]{0,40}[:：])\s*\$([^$\n]*(?:\\frac|\\sum|\\int|\\prod|\\sqrt|\\begin|_[A-Za-z{])[^$\n]*)\$\s*$/)
+  if (!match) return line
+  const [, indent, label, tex] = match
+  return `${indent}${label}\n\n${indent}$$${tex.trim()}$$`
+}
+
+function normalizeTableMathPipes(line: string): string {
+  if (!line.includes('|') || !line.includes('$')) return line
+  return line.replace(/\$([^$\n]+)\$/g, (match, body: string) => {
+    const safeBody = body
+      .replace(/\\left\\\|/g, '\\left\\lVert')
+      .replace(/\\right\\\|/g, '\\right\\rVert')
+      .replace(/\\\|/g, '\\lVert')
+    if (!/(?<!\\)\|/.test(safeBody)) return `$${safeBody}$`
+    return `$${safeBody.replace(/(?<!\\)\|([^|\n]+?)(?<!\\)\|/g, (_, value: string) => `\\lvert ${value.trim()} \\rvert`)}$`
+  })
+}
+
+function normalizeBareMathLine(line: string): string {
+  const trimmed = line.trim()
+  if (!trimmed || isMarkdownTableLine(trimmed)) return line
+  if (trimmed.startsWith('$$') || trimmed.startsWith('$') || trimmed.startsWith('```')) return line
+  if (!looksLikeBareTexLine(trimmed)) return line
+  return `${line.slice(0, line.length - line.trimStart().length)}$$${trimmed}$$`
+}
+
+function isMarkdownTableLine(line: string): boolean {
+  if (line.includes('$')) return true
+  if (/^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(line)) return true
+  if (!line.startsWith('|')) return false
+  if (/\\(left|right|frac|sqrt|sum|int|cdot|times|omega|alpha|beta|theta|lambda|psi)/.test(line)) return false
+  return line.split('|').length >= 3
+}
+
+function looksLikeBareTexLine(line: string): boolean {
+  if (line.includes('：') || line.includes(':')) return false
+  if (/^(#{1,6}\s|\d+\.\s|[-*+]\s|>\s)/.test(line)) return false
+  if (line.includes('`') || /[\u4e00-\u9fff]/.test(line)) return false
+  if (!line.includes('=')) return false
+  return /^\|/.test(line)
+    && /\\(frac|left|right|sqrt|sum|int|cdot|times|omega|alpha|beta|theta|lambda|psi|begin|end)/.test(line)
 }
 
 function trimDisplayMath(body: string): string {
@@ -54,8 +139,17 @@ export function markdownItCurrentKatex(md: MarkdownItLike): void {
 export function normalizeMermaidSource(value: string): string {
   return value
     .replace(/^(\s*)state\s+([A-Za-z_][\w-]*)\s+as\s+"([^"\n]+)"\s*$/gm, '$1state "$3" as $2')
-    .replace(/\|"-\s*"\|/g, '|"负反馈"|')
-    .replace(/\|'\-\s*'\|/g, '|"负反馈"|')
+    .replace(/\|\s*["']?\s*[-−－]\s*["']?\s*\|/g, '|"负反馈"|')
+    .replace(/\|([^|\n]*)\|/g, (_, label: string) => `|${normalizeMermaidEdgeLabel(label)}|`)
+}
+
+function normalizeMermaidEdgeLabel(label: string): string {
+  const trimmed = label.trim()
+  if (!trimmed) return label
+  const unquoted = trimmed.replace(/^["'](.*)["']$/, '$1').trim()
+  if (/^[-−－]\s*$/.test(unquoted)) return '"负反馈"'
+  if (/^[-*+]\s+/.test(unquoted)) return `"${unquoted.replace(/^[-*+]\s+/, '')}"`
+  return trimmed
 }
 
 function mathInline(state: any, silent: boolean): boolean {

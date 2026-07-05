@@ -7,7 +7,7 @@ chapterOrder: 10
 category: ODrive
 source: motor
 visibility: public
-title: "⭐ OD-03: 控制策略"
+title: " OD-03: 控制策略"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ OD-03: 控制策略
+#  OD-03: 控制策略
 
 ---
 
@@ -177,7 +177,7 @@ $$K_{ki} = 2 \cdot \omega_n$$
 
 $$K_{kp} = 0.25 \cdot K_{ki}^2$$
 
-截止频率 $\omega_n = \min(\text{input_filter_bandwidth}, 0.25 \cdot f_{ctrl})$。
+截止频率 $\omega_n = \min(\text{input\_filter\_bandwidth}, 0.25 \cdot f_{ctrl})$。
 
 ### 3.2 梯形速度轨迹
 
@@ -191,7 +191,7 @@ $$K_{kp} = 0.25 \cdot K_{ki}^2$$
   │   ╱             ╲
   │  ╱               ╲
   │ ╱                 ╲
-  └─┴──────────────────┴──▶ time
+  └─┴──────────────────┴── time
    ↑  ↑         ↑       ↑
    t0 t1       t2      t3
   加速段      匀速段   减速段
@@ -472,7 +472,7 @@ if (config_.spinout_electrical_power_threshold > 0.0f &&
   0.5 ┤                 ╱
       │                ╱
       │               ╱
-    0 ┤──────────────┴───────────▶ |pos_err|
+    0 ┤──────────────┴─────────── |pos_err|
       0            W              2W
 ```
 
@@ -548,7 +548,7 @@ if (config_.circular_setpoints) {
 
 ### 6.3 控制频率
 
-Controller 运行在 `current_meas_hz` 频率下（与电流采样频率相同，通常 8kHz（可配置范围 1k~24kHz，由 PWM 频率和控制周期分频比决定））。控制周期 $T_s = 1 / \text{current_meas_hz}$。
+Controller 运行在 `current_meas_hz` 频率下（与电流采样频率相同，通常 8kHz（可配置范围 1k~24kHz，由 PWM 频率和控制周期分频比决定））。控制周期 $T_s = 1 / \text{current\_meas\_hz}$。
 
 ---
 

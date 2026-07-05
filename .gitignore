@@ -3,6 +3,10 @@ node_modules/
 .vitepress/dist/
 .vitepress/generated/*.json
 .vitepress/generated/sidebar.ts
+.vitepress/chrome-*/
+.vitepress/qa-*.png
+.vitepress/*-dom.html
+.vitepress/tmp-*-render.html
 *.log
 .env
 .env.local

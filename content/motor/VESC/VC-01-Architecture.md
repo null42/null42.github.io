@@ -7,7 +7,7 @@ chapterOrder: 20
 category: VESC
 source: motor
 visibility: public
-title: "⭐ VC-01: VESC 固件系统架构"
+title: " VC-01: VESC 固件系统架构"
 tags:
   - motor-control
 status: learning
@@ -16,7 +16,7 @@ navGroup: 工程与生态
 navGroupOrder: 50
 ---
 
-# ⭐ VC-01: VESC 固件系统架构
+#  VC-01: VESC 固件系统架构
 
 ---
 
