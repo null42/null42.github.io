@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="660" viewBox="0 0 760 660" role="img" aria-labelledby="title desc">
+  <title id="title">SVPWM 六扇区空间矢量图</title>
+  <desc id="desc">六个有效矢量围成六边形，参考矢量落在哪个扇区就由相邻两个矢量合成。</desc>
+  <style>
+    text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
+    .hex{fill:#eff6ff;stroke:#2563eb;stroke-width:3}
+    .axis{stroke:#475569;stroke-width:2}
+    .vec{stroke:#0f766e;stroke-width:4;marker-end:url(#arrow)}
+    .ref{stroke:#ef4444;stroke-width:5;marker-end:url(#arrowRed)}
+    .sector{fill:#2563eb;font-size:22px;font-weight:700}
+    .label{font-size:18px}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/></marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#ef4444"/></marker>
+  </defs>
+  <polygon points="580,330 480,503 280,503 180,330 280,157 480,157" class="hex"/>
+  <line x1="120" y1="330" x2="640" y2="330" class="axis"/>
+  <line x1="380" y1="90" x2="380" y2="570" class="axis"/>
+  <line x1="380" y1="330" x2="580" y2="330" class="vec"/>
+  <line x1="380" y1="330" x2="480" y2="157" class="vec"/>
+  <line x1="380" y1="330" x2="280" y2="157" class="vec"/>
+  <line x1="380" y1="330" x2="180" y2="330" class="vec"/>
+  <line x1="380" y1="330" x2="280" y2="503" class="vec"/>
+  <line x1="380" y1="330" x2="480" y2="503" class="vec"/>
+  <line x1="380" y1="330" x2="510" y2="245" class="ref"/>
+  <text x="602" y="335" class="label">V1 100</text>
+  <text x="488" y="145" class="label">V2 110</text>
+  <text x="225" y="145" class="label">V3 010</text>
+  <text x="95" y="335" class="label">V4 011</text>
+  <text x="220" y="545" class="label">V5 001</text>
+  <text x="490" y="545" class="label">V6 101</text>
+  <text x="484" y="292" class="sector">扇区 I</text>
+  <text x="420" y="238" class="label">Vref</text>
+</svg>

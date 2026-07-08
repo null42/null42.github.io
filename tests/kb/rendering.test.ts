@@ -139,7 +139,8 @@ describe('rendering fixture', () => {
     expect(config).not.toContain('markdownItKatex')
     expect(config).toContain('markdownItCurrentKatex')
     expect(theme).toContain('katex/dist/katex.min.css')
-    expect(mermaidComponent).toContain("import('mermaid')")
+    expect(mermaidComponent).toContain("import mermaid from 'mermaid'")
+    expect(mermaidComponent).not.toContain("import('mermaid')")
     expect(mermaidComponent).toContain("securityLevel: 'loose'")
     expect(mermaidComponent).toContain('markdownAutoWrap: false')
     expect(mermaidComponent).not.toContain('cdn.jsdelivr.net')
@@ -230,6 +231,43 @@ describe('rendering fixture', () => {
     const markdown = '传递函数：$T_{open}(s) = C(s)G(s)$'
 
     expect(normalizeMathDelimiters(markdown)).toBe('传递函数：\n\n$$T_{open}(s) = C(s)G(s)$$')
+  })
+
+  it('keeps complex formula definitions readable inside list items', () => {
+    const markdown = '- PI控制器：$C(s) = K_p + \\frac{K_i}{s} = K_p \\frac{s + K_i/K_p}{s}$'
+
+    expect(normalizeMathDelimiters(markdown)).toBe([
+      '- PI控制器：',
+      '',
+      '  $$C(s) = K_p + \\frac{K_i}{s} = K_p \\frac{s + K_i/K_p}{s}$$'
+    ].join('\n'))
+  })
+
+  it('keeps quoted display math inside the quote block', () => {
+    const markdown = '> $$T_i = \\frac{K_p}{K_i}$$'
+
+    expect(normalizeMathDelimiters(markdown)).toBe([
+      '>',
+      '> $$T_i = \\frac{K_p}{K_i}$$'
+    ].join('\n'))
+  })
+
+  it('normalizes the real CT-01 formulas and feedback Mermaid label before rendering', () => {
+    const markdown = fs.readFileSync('content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.md', 'utf8')
+    const normalizedMath = normalizeMathDelimiters(markdown)
+    const mermaidBlocks = [...markdown.matchAll(/```mermaid\s*\n([\s\S]*?)\n```/g)].map((match) => match[1])
+    const closedLoopDiagram = mermaidBlocks.find((block) => block.includes('FB -->|"- "| SUM')) || ''
+
+    expect(normalizedMath).toContain('传递函数：\n\n$$T_{open}(s) = C(s)G(s)$$')
+    expect(normalizedMath).toContain('- PI控制器：\n\n  $$C(s) = K_p + \\frac{K_i}{s} = K_p \\frac{s + (K_i/K_p)}{s}$$')
+    expect(normalizeMermaidSource(closedLoopDiagram)).toContain('FB -->|"负反馈"| SUM')
+  })
+
+  it('rechecks table columns after math pipe normalization in real imported articles', () => {
+    const markdown = fs.readFileSync('content/motor/controllers-evolution/CE-10-Lead-Lag-Compensator.md', 'utf8')
+    const normalized = normalizeMathDelimiters(markdown)
+
+    expect(normalized).toContain('| 超前：$K\\frac{s+z}{s+p}$，$\\lvert z \\rvert<\\lvert p \\rvert$ | $K_p + K_d s$（PD） | 超前有一个极点滚降高频增益——PD无限放大噪声 |  |')
   })
 
   it('keeps standalone display math but preserves trailing prose on the next line', () => {

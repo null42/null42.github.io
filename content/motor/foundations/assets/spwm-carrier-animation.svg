@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="360" viewBox="0 0 920 360" role="img" aria-labelledby="title desc">
+  <title id="title">SPWM 正弦调制与三角载波</title>
+  <desc id="desc">正弦参考与三角载波比较，得到 PWM 脉冲宽度。</desc>
+  <style>
+    text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
+    .axis{stroke:#475569;stroke-width:2}
+    .carrier{fill:none;stroke:#b45309;stroke-width:3}
+    .sine{fill:none;stroke:#2563eb;stroke-width:4}
+    .pulse{fill:#0f766e}
+    .cursor{stroke:#ef4444;stroke-width:3}
+    .label{font-size:20px;font-weight:700}
+  </style>
+  <line x1="50" y1="170" x2="870" y2="170" class="axis"/>
+  <line x1="50" y1="40" x2="50" y2="300" class="axis"/>
+  <path class="sine" d="M50 170 C130 55 210 55 290 170 S450 285 530 170 S690 55 770 170 S850 285 870 230"/>
+  <path class="carrier" d="M50 285 L90 55 L130 285 L170 55 L210 285 L250 55 L290 285 L330 55 L370 285 L410 55 L450 285 L490 55 L530 285 L570 55 L610 285 L650 55 L690 285 L730 55 L770 285 L810 55 L850 285 L870 170"/>
+  <g opacity="0.85">
+    <rect x="60" y="305" width="32" height="28" class="pulse"/>
+    <rect x="140" y="305" width="54" height="28" class="pulse"/>
+    <rect x="220" y="305" width="70" height="28" class="pulse"/>
+    <rect x="300" y="305" width="44" height="28" class="pulse"/>
+    <rect x="380" y="305" width="20" height="28" class="pulse"/>
+    <rect x="460" y="305" width="24" height="28" class="pulse"/>
+    <rect x="540" y="305" width="50" height="28" class="pulse"/>
+    <rect x="620" y="305" width="72" height="28" class="pulse"/>
+    <rect x="700" y="305" width="56" height="28" class="pulse"/>
+    <rect x="780" y="305" width="30" height="28" class="pulse"/>
+  </g>
+  <line x1="90" y1="40" x2="90" y2="334" class="cursor">
+    <animate attributeName="x1" values="90;850;90" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="90;850;90" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <text x="70" y="32" class="label">蓝色: 正弦参考</text>
+  <text x="320" y="32" class="label">橙色: 三角载波</text>
+  <text x="560" y="334" class="label">下方: 比较器输出 PWM</text>
+</svg>

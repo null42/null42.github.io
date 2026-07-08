@@ -26,6 +26,7 @@
     { "id": "mechanical", "title": "机械与编码器", "order": 30, "routeId": "hardware", "pathPrefix": "content/motor/mechanical" },
     { "id": "power-path", "title": "功率链路", "order": 40, "routeId": "hardware", "pathPrefix": "content/motor/power-path" },
     { "id": "control-theory", "title": "控制理论", "order": 10, "routeId": "control", "pathPrefix": "content/motor/control-theory" },
+    { "id": "foundations", "title": "基础算法底座", "order": 15, "routeId": "control", "pathPrefix": "content/motor/foundations", "tags": ["per-unit", "fixed-point", "SPWM", "SVPWM"] },
     { "id": "algorithm", "title": "控制算法", "order": 20, "routeId": "control", "pathPrefix": "content/motor/algorithm", "tags": ["FOC", "SVPWM"] },
     { "id": "motion-control", "title": "运动控制", "order": 30, "routeId": "control", "pathPrefix": "content/motor/motion-control" },
     { "id": "pfc-motor-integration", "title": "PFC 与电机系统", "order": 40, "routeId": "control", "pathPrefix": "content/motor/pfc-motor-integration" },

@@ -474,6 +474,32 @@ export const generatedSidebar = [
         "collapsed": true,
         "items": [
           {
+            "text": "基础算法底座",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "FOUND-01 标幺值系统：把不同电机变成同一套算法",
+                "link": "/content/motor/foundations/FOUND-01-Per-Unit-System.html"
+              },
+              {
+                "text": "FOUND-02 定点数与Q格式：让没有FPU的DSP稳定跑FOC",
+                "link": "/content/motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP.html"
+              },
+              {
+                "text": "FOUND-03 SPWM原理与DSP实现：从正弦参考到定时器比较值",
+                "link": "/content/motor/foundations/FOUND-03-SPWM-Principle-DSP.html"
+              },
+              {
+                "text": "FOUND-04 SVPWM原理与DSP实现：用相邻矢量合成参考电压",
+                "link": "/content/motor/foundations/FOUND-04-SVPWM-Principle-DSP.html"
+              },
+              {
+                "text": "FOUND-05 三电平SVPWM原理与DSP实现：多一个中点，多一层约束",
+                "link": "/content/motor/foundations/FOUND-05-Three-Level-SVPWM-DSP.html"
+              }
+            ]
+          },
+          {
             "text": "控制理论",
             "collapsed": true,
             "items": [

@@ -6,7 +6,7 @@ import { stdin as input, stdout as output } from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { scanArticles } from './articles'
 import { buildColumnFilterOptions, loadColumnRegistry, validateColumnRegistry } from './columns'
-import { normalizeMarkdownTables } from './markdown-rendering'
+import { normalizeMathDelimiters } from './markdown-rendering'
 import { buildPublishManifest, validatePublishManifest } from './publish-manifest'
 import { analyzeMarkdownRendering, type RenderHealthIssue } from './render-health'
 import { repoRoot } from './paths'
@@ -134,7 +134,7 @@ function collectRenderIssues(articles: Awaited<ReturnType<typeof scanArticles>>[
   for (const article of articles.filter((item) => item.visibility === 'public')) {
     if (!fs.existsSync(path.join(repoRoot, article.path))) continue
     const markdown = fs.readFileSync(path.join(repoRoot, article.path), 'utf8')
-    const report = analyzeMarkdownRendering(normalizeMarkdownTables(markdown), article.path)
+    const report = analyzeMarkdownRendering(normalizeMathDelimiters(markdown), article.path)
     issues.push(...report.issues.map((issue) => ({ path: article.path, issue })))
   }
   return issues

@@ -18,13 +18,14 @@ type MarkdownItLike = {
 
 export function normalizeMathDelimiters(markdown: string): string {
   const chunks = splitFencedCode(markdown)
-  return chunks.map((chunk) => {
+  const normalized = chunks.map((chunk) => {
     if (chunk.fenced) return chunk.text
     const withMathDelimiters = chunk.text
       .replace(/\\\[([\s\S]*?)\\\]/g, (_, body: string) => `$$${trimDisplayMath(body)}$$`)
       .replace(/\\\(([\s\S]*?)\\\)/g, (_, body: string) => `$${body}$`)
     return normalizeMarkdownTables(normalizeMarkdownText(withMathDelimiters))
   }).join('')
+  return normalizeMarkdownTables(normalized)
 }
 
 export function normalizeMarkdownTables(markdown: string): string {
@@ -51,11 +52,29 @@ function normalizeMarkdownText(text: string): string {
 }
 
 function normalizeMarkdownLine(line: string): string {
-  let normalized = normalizeSameLineDisplayMath(line)
+  let normalized = normalizeBlockContextMath(line)
+  if (normalized !== line) return normalized
+  normalized = normalizeSameLineDisplayMath(line)
   normalized = normalizeFormulaDefinitionLine(normalized)
   normalized = normalizeTableMathPipes(normalized)
   normalized = normalizeBareMathLine(normalized)
   return normalized
+}
+
+function normalizeBlockContextMath(line: string): string {
+  const quotedDisplay = line.match(/^(\s*> ?)\$\$([^$\n]+?)\$\$\s*$/)
+  if (quotedDisplay) {
+    const [, quote, tex] = quotedDisplay
+    return `${quote.trimEnd()}\n${quote}$$${tex.trim()}$$`
+  }
+
+  const listFormula = line.match(/^(\s*)([-*+]\s+)([^$\n]{0,80}[:：])\s*\$([^$\n]*(?:\\frac|\\sum|\\int|\\prod|\\sqrt|\\begin|_[A-Za-z{])[^$\n]*)\$\s*$/)
+  if (listFormula) {
+    const [, indent, bullet, label, tex] = listFormula
+    return `${indent}${bullet}${label}\n\n${indent}  $$${tex.trim()}$$`
+  }
+
+  return line
 }
 
 function normalizeMarkdownTablesInText(text: string): string {

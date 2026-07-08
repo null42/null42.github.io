@@ -1,6 +1,6 @@
 import { scanArticles } from './articles'
 import { loadColumnRegistry, validateColumnRegistry } from './columns'
-import { normalizeMarkdownTables } from './markdown-rendering'
+import { normalizeMathDelimiters } from './markdown-rendering'
 import { buildPublishManifest, validatePublishManifest } from './publish-manifest'
 import { analyzeMarkdownRendering } from './render-health'
 import fs from 'node:fs'
@@ -21,7 +21,7 @@ const renderIssues = result.articles
   .flatMap((article) => {
     const absolutePath = path.join(repoRoot, article.path)
     if (!fs.existsSync(absolutePath)) return []
-    const report = analyzeMarkdownRendering(normalizeMarkdownTables(fs.readFileSync(absolutePath, 'utf8')), article.path)
+    const report = analyzeMarkdownRendering(normalizeMathDelimiters(fs.readFileSync(absolutePath, 'utf8')), article.path)
     return report.issues.map((issue) => `${article.path}:${issue.line} ${issue.code}`)
   })
 

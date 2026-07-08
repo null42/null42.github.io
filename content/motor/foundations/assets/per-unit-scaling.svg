@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="360" viewBox="0 0 920 360" role="img" aria-labelledby="title desc">
+  <title id="title">标幺值归一化示意</title>
+  <desc id="desc">电压、电流、转速先除以各自基值，再进入同一套控制算法。</desc>
+  <style>
+    text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
+    .box{fill:#f7fbff;stroke:#2563eb;stroke-width:2;rx:10}
+    .base{fill:#fff7ed;stroke:#b45309;stroke-width:2;rx:10}
+    .algo{fill:#eefcf8;stroke:#0f766e;stroke-width:2;rx:10}
+    .arrow{stroke:#334155;stroke-width:2.4;marker-end:url(#arrow)}
+    .small{font-size:17px}
+    .label{font-size:22px;font-weight:700}
+    .formula{font-size:20px}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect x="40" y="40" width="170" height="70" class="box"/>
+  <text x="125" y="73" text-anchor="middle" class="label">实际量</text>
+  <text x="125" y="98" text-anchor="middle" class="small">V, I, omega, T</text>
+  <line x1="210" y1="75" x2="300" y2="75" class="arrow"/>
+  <rect x="300" y="30" width="230" height="90" class="base"/>
+  <text x="415" y="63" text-anchor="middle" class="label">除以基值</text>
+  <text x="415" y="95" text-anchor="middle" class="formula">x_pu = x / x_base</text>
+  <line x1="530" y1="75" x2="620" y2="75" class="arrow"/>
+  <rect x="620" y="40" width="240" height="70" class="algo"/>
+  <text x="740" y="73" text-anchor="middle" class="label">统一算法</text>
+  <text x="740" y="98" text-anchor="middle" class="small">限幅、PI、SVPWM、保护</text>
+  <rect x="95" y="180" width="150" height="90" class="box"/>
+  <text x="170" y="214" text-anchor="middle" class="label">24 V 电机</text>
+  <text x="170" y="243" text-anchor="middle" class="formula">12 V = 0.5 pu</text>
+  <rect x="385" y="180" width="150" height="90" class="box"/>
+  <text x="460" y="214" text-anchor="middle" class="label">400 V 电机</text>
+  <text x="460" y="243" text-anchor="middle" class="formula">200 V = 0.5 pu</text>
+  <rect x="675" y="180" width="150" height="90" class="algo"/>
+  <text x="750" y="214" text-anchor="middle" class="label">同一代码</text>
+  <text x="750" y="243" text-anchor="middle" class="formula">v_cmd = 0.5</text>
+  <line x1="245" y1="225" x2="385" y2="225" class="arrow"/>
+  <line x1="535" y1="225" x2="675" y2="225" class="arrow"/>
+</svg>

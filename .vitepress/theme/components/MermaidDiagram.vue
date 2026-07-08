@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import type mermaid from 'mermaid'
+import mermaid from 'mermaid'
 import { normalizeMermaidSource } from '../../../scripts/kb/markdown-rendering'
 
 const props = defineProps<{
@@ -11,12 +11,7 @@ const rendered = ref('')
 const error = ref('')
 const rawSource = computed(() => decodeURIComponent(props.code))
 const source = computed(() => normalizeMermaidSource(rawSource.value))
-const elementId = `mermaid-${Math.random().toString(36).slice(2)}`
-
-async function loadMermaid() {
-  const module = await import('mermaid')
-  return module.default as typeof mermaid
-}
+let diagramId = 0
 
 async function renderDiagram() {
   error.value = ''
@@ -24,7 +19,6 @@ async function renderDiagram() {
   await nextTick()
 
   try {
-    const mermaid = await loadMermaid()
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: 'loose',
@@ -34,6 +28,7 @@ async function renderDiagram() {
       },
       theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default'
     })
+    const elementId = `mermaid-${Date.now().toString(36)}-${diagramId += 1}`
     const result = await mermaid.render(elementId, source.value)
     rendered.value = result.svg
   } catch (err) {
