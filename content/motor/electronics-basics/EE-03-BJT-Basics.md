@@ -83,7 +83,7 @@ navGroupOrder: 20
 主管道水流  (Ic)       集电极电流 (大)
 阀门开度              电流增益 hFE
 
-BJT核心方程：`$I_c = h_{FE} \times I_b$`
+BJT核心方程：$I_c = h_{FE} \times I_b$
   
 水龙头轻轻一拧(小Ib) → 大量水流过(Ic)
 BJT基极小电流 → 集电极大电流
@@ -144,7 +144,7 @@ $$
 I_b > \frac{I_c}{h_{FE}}
 $$
 
-饱和深度 = `$I_{b\_actual} / (I_c/h_{FE})$`，通常取3~5倍确保深度饱和。
+饱和深度 = $I_{b\_actual} / (I_c/h_{FE})$，通常取3~5倍确保深度饱和。
 
 #### 4.1.3 电流-电压关系（Ebers-Moll模型）
 
@@ -296,7 +296,7 @@ Ipeak = Ciss×dV/dt = 4200pF×10V/20ns = 2.1A
 → BJT进入饱和 → Vce上升 → 栅极电压不足 → MOSFET不完全导通 → 烧毁!
 ```
 
-**选型准则**：图腾柱BJT的 `$I_{c\_max} > C_{iss} \times dV/dt_{desired}$`
+**选型准则**：图腾柱BJT的 $I_{c\_max} > C_{iss} \times dV/dt_{desired}$
 
 ### 案例3：BJT存储时间导致上下管共通
 

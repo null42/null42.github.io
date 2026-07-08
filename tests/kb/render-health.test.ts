@@ -29,6 +29,15 @@ describe('markdown rendering health', () => {
     expect(report.issues.map((issue) => issue.code)).toContain('mermaid-failed-wording')
   })
 
+  it('detects math formulas wrapped in inline code spans', () => {
+    const report = analyzeMarkdownRendering(
+      ['# Bad math', '', '- 控制参数：`$K_p = L \\times \\omega_c$`'].join('\n'),
+      'content/example.md'
+    )
+
+    expect(report.issues.map((issue) => issue.code)).toContain('math-code-span')
+  })
+
   it('keeps public source Markdown clean without relying on runtime repair', async () => {
     const { articles } = await scanArticles()
     const reports = articles

@@ -650,17 +650,17 @@ H桥制动时：
 ```
 
 **参考答案**：
-`$Q_{total} = Q_g + I_{qbs} \times T_{on\_max} = 150nC + 120\mu A \times 50ms = 150nC + 6000nC = 6150nC$`
-`$C_{boot\_min} = 6150nC / 0.5V = 12300nF = 12.3\mu F$`
-→选 `$22\mu F/25V$` 陶瓷电容（MLCC X7R）
+$Q_{total} = Q_g + I_{qbs} \times T_{on\_max} = 150nC + 120\mu A \times 50ms = 150nC + 6000nC = 6150nC$
+$C_{boot\_min} = 6150nC / 0.5V = 12300nF = 12.3\mu F$
+→选 $22\mu F/25V$ 陶瓷电容（MLCC X7R）
 
 实际核查：20kHz下每次开关消耗150nC→50ms内开关1000次→总消耗150μC
-加上IC 50ms静态6μC→总计156μC→`$22\mu F$`电容电压跌落=`$156\mu C / 22\mu F = 7.1V$`→不够！
+加上IC 50ms静态6μC→总计156μC→$22\mu F$电容电压跌落=$156\mu C / 22\mu F = 7.1V$→不够！
 
 修正：实际需要在50ms内开关1000次，Qg消耗是主要的！
-`$C_{boot\_min} = 150\mu C / 0.5V = 300\mu F$`→这太大了！
+$C_{boot\_min} = 150\mu C / 0.5V = 300\mu F$→这太大了！
 →说明50ms不刷新不现实→改为10ms刷新（100Hz最低刷新率）
-→`$C_{boot\_min} = 150nC \times 200 + 6\mu C / 0.5V = 36\mu C / 0.5V = 72\mu F$`→选`$100\mu F$`
+→$C_{boot\_min} = 150nC \times 200 + 6\mu C / 0.5V = 36\mu C / 0.5V = 72\mu F$→选$100\mu F$
 
 **最终结论：低频运行时必须保证自举电容周期性刷新，大电容方案不经济→考虑电荷泵辅助或隔离电源。**
 

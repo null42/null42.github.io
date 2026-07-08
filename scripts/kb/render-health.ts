@@ -2,6 +2,7 @@ export interface RenderHealthIssue {
   code:
     | 'table-column-mismatch'
     | 'mermaid-failed-wording'
+    | 'math-code-span'
     | 'raw-script'
     | 'unclosed-display-math'
     | 'unclosed-fence'
@@ -33,6 +34,7 @@ export function analyzeMarkdownRendering(markdown: string, path: string): Render
   }
 
   checkTables(lines, issues)
+  checkMathCodeSpans(lines, issues)
   checkDisplayMath(lines, issues)
   checkFences(lines, issues)
 
@@ -74,6 +76,44 @@ function checkTables(lines: string[], issues: RenderHealthIssue[]): void {
       }
     }
   }
+}
+
+function checkMathCodeSpans(lines: string[], issues: RenderHealthIssue[]): void {
+  let inFence = false
+  let fenceMarker = ''
+  lines.forEach((line, index) => {
+    const fenceMatch = line.match(/^(`{3,}|~{3,})/)
+    if (fenceMatch) {
+      if (!inFence) {
+        inFence = true
+        fenceMarker = fenceMatch[1][0]
+      } else if (fenceMatch[1][0] === fenceMarker) {
+        inFence = false
+        fenceMarker = ''
+      }
+      return
+    }
+    if (inFence) return
+    if (hasMathCodeSpan(line)) {
+      issues.push({
+        code: 'math-code-span',
+        message: 'Math delimiters are wrapped in inline code, so KaTeX cannot render them.',
+        line: index + 1
+      })
+    }
+  })
+}
+
+function hasMathCodeSpan(line: string): boolean {
+  const codeSpanPattern = /(`+)([\s\S]*?)\1/g
+  let match: RegExpExecArray | null
+  while ((match = codeSpanPattern.exec(line))) {
+    const value = match[2].trim()
+    if (/^\$[^$\n].*[^$\n]\$$/.test(value)) return true
+    if (/^\\\([^]*\\\)$/.test(value)) return true
+    if (/^\\\[[^]*\\\]$/.test(value)) return true
+  }
+  return false
 }
 
 function checkDisplayMath(lines: string[], issues: RenderHealthIssue[]): void {

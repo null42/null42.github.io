@@ -29,9 +29,9 @@ navGroupOrder: 20
 **认知挂钩**：很多软件工程师以为"RLC就是三个数学符号"，**这是致命的工程误解！** 实际上，RLC不只是电路课本里的概念——电机绕组本身就是R-L串联负载，直流母线电容直接决定逆变器的电压纹波和瞬态响应能力，电阻分压网络是电流采样精度的第一道关口。
 
 **与电机控制的关联**：
--  **电机绕组(Rs + Ld/Lq)**：决定电流环PI参数 → `$K_p = L \times \omega_c, K_i = R \times \omega_c$`
--  **直流母线电容(Cdc)**：决定母线电压纹波 → `$\Delta V = I_{load} / (2 \times f_{PWM} \times C_{dc})$`
--  **采样电阻(Rshunt)**：决定电流测量精度 → `$V_{shunt} = I_{phase} \times R_{shunt}$`
+-  **电机绕组(Rs + Ld/Lq)**：决定电流环PI参数 → $K_p = L \times \omega_c, K_i = R \times \omega_c$
+-  **直流母线电容(Cdc)**：决定母线电压纹波 → $\Delta V = I_{load} / (2 \times f_{PWM} \times C_{dc})$
+-  **采样电阻(Rshunt)**：决定电流测量精度 → $V_{shunt} = I_{phase} \times R_{shunt}$
 -  **LC谐振($\omega = 1/\sqrt{LC}$)**：EMI滤波器设计、变压器设计
 
 ---
@@ -81,9 +81,9 @@ navGroupOrder: 20
 读完本模块，你将能够：
 
  **理解欧姆定律的工程意义** - 不仅是V=IR，更是功率计算、分压网络、电流检测
- **掌握RC时间常数** - `$\tau = RC$`，滤波截止频率 `$f_c = 1/(2\pi RC)$`
- **掌握LR时间常数** - `$\tau = L/R$`，电机绕组电流上升速率
- **掌握LC谐振** - `$\omega = 1/\sqrt{LC}$`，EMI滤波器自谐振频率
+ **掌握RC时间常数** - $\tau = RC$，滤波截止频率 $f_c = 1/(2\pi RC)$
+ **掌握LR时间常数** - $\tau = L/R$，电机绕组电流上升速率
+ **掌握LC谐振** - $\omega = 1/\sqrt{LC}$，EMI滤波器自谐振频率
  **理解寄生参数** - 真实元件的ESR、ESL、泄漏电感
  **计算电机驱动中的实际参数** - 母线电容选型、滤波网络设计
 
@@ -105,8 +105,8 @@ navGroupOrder: 20
 ```
 
 **电机中的应用**：
-- 定子绕组电阻Rs → 铜损 `$P_{cu} = 3 \times I^2 \times R_s$`
-- 电流采样电阻 → `$V_{shunt} = I_{phase} \times R_{shunt}$`（0.1~10mΩ典型值）
+- 定子绕组电阻Rs → 铜损 $P_{cu} = 3 \times I^2 \times R_s$
+- 电流采样电阻 → $V_{shunt} = I_{phase} \times R_{shunt}$（0.1~10mΩ典型值）
 
 ### 类比2：电容就像"水库"
 
@@ -250,7 +250,7 @@ $$
 V_{spike} = L_e \times \frac{di}{dt}
 $$
 
-示例：`$L_e = 5nH, di/dt = 100A/\mu s \rightarrow V_{spike} = 5nH \times 100A/\mu s = 0.5V$`
+示例：$L_e = 5nH, di/dt = 100A/\mu s \rightarrow V_{spike} = 5nH \times 100A/\mu s = 0.5V$
 ——叠加在真实采样信号上，造成ADC读数误差！
 
 ---
@@ -279,8 +279,8 @@ $$
 Z_C(j\omega) = \frac{1}{j\omega C}
 $$
 
-- 低频($\omega \to 0$)：`$Z_C \to \infty$`，电容相当于开路
-- 高频($\omega \to \infty$)：`$Z_C \to 0$`，电容相当于短路
+- 低频($\omega \to 0$)：$Z_C \to \infty$，电容相当于开路
+- 高频($\omega \to \infty$)：$Z_C \to 0$，电容相当于短路
 
 #### 4.2.2 RC时间常数
 
@@ -390,8 +390,8 @@ $$
 Z_L(j\omega) = j\omega L
 $$
 
-- 低频($\omega \to 0$)：`$Z_L \to 0$`，电感相当于短路
-- 高频($\omega \to \infty$)：`$Z_L \to \infty$`，电感相当于开路
+- 低频($\omega \to 0$)：$Z_L \to 0$，电感相当于短路
+- 高频($\omega \to \infty$)：$Z_L \to \infty$，电感相当于开路
 
 **串联与并联**：
 $$
@@ -458,9 +458,9 @@ f_0 = \frac{1}{2\pi\sqrt{LC}}
 $$
 
 **谐振时的特征**：
-- 感抗 = 容抗：`$\omega_0 L = 1/(\omega_0 C)$`
+- 感抗 = 容抗：$\omega_0 L = 1/(\omega_0 C)$
 - 总阻抗 = 0（串联谐振）或 $\infty$（并联谐振）
-- 能量在L和C之间振荡，振荡周期 `$T_0 = 2\pi\sqrt{LC}$`
+- 能量在L和C之间振荡，振荡周期 $T_0 = 2\pi\sqrt{LC}$
 
 #### 4.4.2 实际RLC的谐振
 
@@ -491,8 +491,8 @@ Q值含义：
 ** 硬件-算法关联**：
 ```text
 采样电阻Rshunt的选择：
-  [电流→电压]  `$V_{shunt} = I_{phase} \times R_{shunt}$`
-  [电压→数字]  `$ADC_{code} = V_{shunt} \times 4096 / 3.3$` (12位ADC)
+  [电流→电压]  $V_{shunt} = I_{phase} \times R_{shunt}$
+  [电压→数字]  $ADC_{code} = V_{shunt} \times 4096 / 3.3$ (12位ADC)
   
   Rshunt = 10mΩ, Iphase = 10A:
     Vshunt = 0.1V → ADC = 0.1 × 4096 / 3.3 = 124 counts
@@ -505,7 +505,7 @@ Q值含义：
   但Rshunt=10mΩ → 损耗 = I²R = 100 × 0.01 = 1W ← 发热严重!
 ```
 
-**经验法则**：采样电阻选型四步——(1) 最大电流×Rshunt 不超过运放输入范围；(2) 最小电流×Rshunt > ADC噪声；(3) `$I^2 R$` 损耗 < 0.5W（避免自热误差）；(4) 选用4端子Kelvin连接电阻，消除引线电阻影响。
+**经验法则**：采样电阻选型四步——(1) 最大电流×Rshunt 不超过运放输入范围；(2) 最小电流×Rshunt > ADC噪声；(3) $I^2 R$ 损耗 < 0.5W（避免自热误差）；(4) 选用4端子Kelvin连接电阻，消除引线电阻影响。
 
 ### 5.2 电容 → 母线电压稳定性
 
@@ -577,7 +577,7 @@ $$
   在PWM周期中点采样(远离开关瞬态)
 
 方案C:增加RC滤波 
-  R = 10Ω, C = 1nF, `$f_c = 1/(2\pi \times 10 \times 1e-9) = 15.9MHz$`
+  R = 10Ω, C = 1nF, $f_c = 1/(2\pi \times 10 \times 1e-9) = 15.9MHz$
   > 注意:fc不能太低,否则电流环延迟增大!
 ```
 
