@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import { loadInheritedCategoryDefaults } from './category'
+import { columnDefaultsForPath, loadColumnRegistry } from './columns'
 import { nonPublicContentPatterns, shouldExcludeContentPath } from './content-exclusions'
 import { completeArticleData, normalizeDate, parseMarkdown, serializeMarkdown } from './frontmatter'
 import { inferPathDefaults } from './path-defaults'
@@ -30,6 +31,7 @@ export interface MarkdownFileRecord {
 export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<MarkdownFileRecord[]> {
   const root = options.contentRoot || defaultContentRoot
   const shouldInferPathDefaults = path.resolve(root) === path.resolve(defaultContentRoot)
+  const columnRegistry = shouldInferPathDefaults ? await loadColumnRegistry({ contentRoot: root }) : { contentRoot: root, columns: [] }
   const files = await fg('**/*.md', {
     cwd: root,
     absolute: true,
@@ -45,12 +47,14 @@ export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<Mark
     const modifiedDate = stats.mtime.toISOString().slice(0, 10)
     const directoryDefaults = await loadInheritedCategoryDefaults(absolutePath, root)
     const pathDefaults = shouldInferPathDefaults ? inferPathDefaults(relativePath) : {}
+    const columnDefaults = shouldInferPathDefaults ? columnDefaultsForPath(columnRegistry, relativePath) : {}
     const defaults = {
-      ...directoryDefaults,
       ...pathDefaults,
-      defaultTags: directoryDefaults.defaultTags || pathDefaults.defaultTags,
-      tags: directoryDefaults.tags || pathDefaults.tags,
-      visibility: directoryDefaults.visibility || pathDefaults.visibility
+      ...directoryDefaults,
+      ...columnDefaults,
+      defaultTags: columnDefaults.defaultTags || directoryDefaults.defaultTags || pathDefaults.defaultTags,
+      tags: columnDefaults.tags || directoryDefaults.tags || pathDefaults.tags,
+      visibility: columnDefaults.visibility || directoryDefaults.visibility || pathDefaults.visibility
     }
     const completed = completeArticleData(parsed.data, defaults, {
       body: parsed.body,

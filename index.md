@@ -36,11 +36,11 @@ comments: false
     <strong>电控入门线</strong>
     <span>电力电子基础 -> 控制理论 -> FOC 算法 -> 仿真与调试</span>
   </a>
-  <a href="/content/motor/learning-workspace/lessons/0004-alg-foc-algorithms.html">
+  <a href="/search.html?q=FOC">
     <strong>FOC 算法线</strong>
     <span>坐标变换 -> 电流环 -> SVPWM -> 弱磁与工程保护</span>
   </a>
-  <a href="/content/power/roadmap/30-day-plan.html">
+  <a href="/search.html?q=PFC">
     <strong>电源工程线</strong>
     <span>路线图 -> PFC/UPS 项目 -> 调试记录 -> 周复盘</span>
   </a>

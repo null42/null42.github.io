@@ -120,7 +120,7 @@ export function assertSearchIndexWithinBudget(records: SearchRecord[], maxBytes 
 }
 
 function scoreRecord(record: SearchRecord, query: string): number {
-  if (!query) return 1
+  if (!query) return 1 + qualityScore(record.quality)
   const lower = query.toLowerCase()
   let score = 0
   if (record.title.toLowerCase().includes(lower)) score += 120

@@ -1,0 +1,21 @@
+{
+  "id": "encrypted",
+  "title": "加密内容",
+  "section": "加密内容",
+  "source": "manual",
+  "order": 80,
+  "visibility": "encrypted",
+  "layout": "map",
+  "searchable": false,
+  "allowFlat": false,
+  "description": "只发布加密 wrapper 和 payload，不进入公开全文搜索。",
+  "defaultTags": ["encrypted"],
+  "routes": [
+    { "id": "demo", "title": "加密演示", "order": 10 },
+    { "id": "worldbuilding", "title": "世界塑造", "order": 20 }
+  ],
+  "stages": [
+    { "id": "demo", "title": "密码演示", "order": 10, "routeId": "demo", "pathPrefix": "content/encrypted/demo" },
+    { "id": "worldbuilding", "title": "世界塑造索引", "order": 10, "routeId": "worldbuilding", "pathPrefix": "content/encrypted/worldbuilding" }
+  ]
+}

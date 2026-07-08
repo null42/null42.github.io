@@ -10,6 +10,7 @@ tags:
 source: motor
 status: learning
 visibility: public
+quality: curated
 summary: 电机控制知识库入口，整理控制理论、FOC 算法、硬件驱动、功率链路、运动控制和工程实践内容。
 ---
 

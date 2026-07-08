@@ -4,10 +4,11 @@
   --vp-c-brand-3: #60a5fa;
   --kb-surface: #ffffff;
   --kb-surface-soft: #f5f8fc;
+  --kb-accent: #0f766e;
+  --kb-warm: #b45309;
+  --kb-radius: 8px;
   --kb-tag-bg: rgba(37, 99, 235, 0.1);
-  --kb-home-bg:
-    radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.16), transparent 28%),
-    linear-gradient(135deg, #f8fbff 0%, #fffdf8 100%);
+  --kb-home-bg: #f6f8fb;
   --vp-font-family-base: "Inter", "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
   --vp-font-family-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
 }
@@ -16,9 +17,7 @@
   --kb-surface: #161b22;
   --kb-surface-soft: #0f141b;
   --kb-tag-bg: rgba(96, 165, 250, 0.18);
-  --kb-home-bg:
-    radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.14), transparent 28%),
-    linear-gradient(135deg, #0f172a 0%, #111827 54%, #18181b 100%);
+  --kb-home-bg: #0f141b;
 }
 
 .VPHome {
@@ -29,8 +28,12 @@
   background: var(--kb-home-bg);
 }
 
+.kb-theme-shell {
+  min-width: 0;
+}
+
 .VPFeature {
-  border-radius: 8px !important;
+  border-radius: var(--kb-radius) !important;
 }
 
 .kb-map-grid {
@@ -52,7 +55,7 @@
   gap: 8px;
   min-height: 150px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  border-radius: var(--kb-radius);
   padding: 16px;
   background: var(--kb-surface);
   color: inherit;
@@ -76,14 +79,15 @@
 }
 
 .kb-map-kicker {
-  color: var(--vp-c-brand-1);
+  color: var(--kb-accent);
   font-size: 13px;
   font-weight: 700;
 }
 
 .kb-map-card-primary {
   min-height: 180px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.08)), var(--kb-surface);
+  border-top: 3px solid var(--kb-accent);
+  background: var(--kb-surface);
 }
 
 .kb-route-list {
@@ -105,6 +109,32 @@
 .kb-route-list span {
   color: var(--vp-c-text-2);
   font-size: 14px;
+}
+
+.kb-library-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 12px;
+}
+
+.kb-library-head h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.kb-library-head p {
+  margin: 0 0 4px;
+}
+
+.kb-inline-link {
+  color: var(--vp-c-brand-1);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .kb-archive {
@@ -185,7 +215,7 @@
 }
 
 .kb-filterbar-archive {
-  grid-template-columns: minmax(220px, 1fr) repeat(6, minmax(104px, 140px));
+  grid-template-columns: minmax(220px, 1fr) repeat(4, minmax(104px, 150px));
 }
 
 .kb-filter-field {

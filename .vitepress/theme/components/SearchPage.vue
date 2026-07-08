@@ -2,7 +2,23 @@
 import { computed, onMounted, ref } from 'vue'
 import { searchRecords, type SearchRecord } from '../../../scripts/kb/search/build-index'
 
+interface FilterOption {
+  id: string
+  label: string
+  count: number
+  columnId?: string
+  routeId?: string
+}
+
+interface FilterOptions {
+  sections: FilterOption[]
+  routes: FilterOption[]
+  stages: FilterOption[]
+  tags: FilterOption[]
+}
+
 const ALL = '全部'
+const emptyOptions: FilterOptions = { sections: [], routes: [], stages: [], tags: [] }
 
 const query = ref('')
 const section = ref(ALL)
@@ -12,68 +28,58 @@ const tag = ref(ALL)
 const loading = ref(true)
 
 const records = ref<SearchRecord[]>([])
+const filterOptions = ref<FilterOptions>(emptyOptions)
 
 onMounted(async () => {
   const initialQuery = new URLSearchParams(window.location.search).get('q')
-  if (initialQuery) {
-    query.value = initialQuery
-  }
+  if (initialQuery) query.value = initialQuery
   try {
-    records.value = (await import('../../generated/search-index.json')).default as SearchRecord[]
+    const [searchModule, columnsModule] = await Promise.all([
+      import('../../generated/search-index.json'),
+      import('../../generated/columns.json')
+    ])
+    records.value = searchModule.default as SearchRecord[]
+    filterOptions.value = columnsModule.default as FilterOptions
   } finally {
     loading.value = false
   }
 })
 
-const sections = computed(() => [ALL, ...Array.from(new Set(records.value.map((record) => record.section || record.category))).sort()])
+const selectedColumnId = computed(() => {
+  if (section.value === ALL) return undefined
+  return filterOptions.value.sections.find((item) => item.label === section.value)?.columnId
+})
+
+const selectedRouteId = computed(() => {
+  if (navGroup.value === ALL) return undefined
+  return filterOptions.value.routes.find((item) => item.label === navGroup.value && (!selectedColumnId.value || item.columnId === selectedColumnId.value))?.routeId
+})
+
+const sections = computed(() => [ALL, ...filterOptions.value.sections.map((item) => item.label)])
 const navGroups = computed(() => [
   ALL,
-  ...Array.from(
-    new Set(
-      records.value
-        .filter((record) => section.value === ALL || record.section === section.value || record.category === section.value)
-        .map((record) => record.navGroup)
-        .filter(Boolean)
-    )
-  ).sort()
+  ...filterOptions.value.routes
+    .filter((item) => !selectedColumnId.value || item.columnId === selectedColumnId.value)
+    .map((item) => item.label)
 ])
 const chapters = computed(() => [
   ALL,
-  ...Array.from(
-    new Set(
-      records.value
-        .filter((record) => section.value === ALL || record.section === section.value || record.category === section.value)
-        .filter((record) => navGroup.value === ALL || record.navGroup === navGroup.value)
-        .map((record) => record.chapterTitle || record.chapter)
-        .filter(Boolean)
-    )
-  ).sort()
+  ...filterOptions.value.stages
+    .filter((item) => !selectedColumnId.value || item.columnId === selectedColumnId.value)
+    .filter((item) => !selectedRouteId.value || item.routeId === selectedRouteId.value)
+    .map((item) => item.label)
 ])
-const tags = computed(() => [ALL, ...Array.from(new Set(records.value.flatMap((record) => record.tags))).sort()])
+const tags = computed(() => [ALL, ...filterOptions.value.tags.map((item) => item.label)])
 
-const learningPaths = computed(() => {
-  const groups = new Map<string, { section: string; navGroup: string; count: number; order: number }>()
-  for (const record of records.value) {
-    if (!record.navGroup) continue
-    const recordSection = record.section || record.category
-    const key = `${recordSection}::${record.navGroup}`
-    const current = groups.get(key)
-    if (current) {
-      current.count += 1
-      current.order = Math.min(current.order, record.navGroupOrder || 999)
-    } else {
-      groups.set(key, {
-        section: recordSection,
-        navGroup: record.navGroup,
-        count: 1,
-        order: record.navGroupOrder || 999
-      })
-    }
-  }
-  return Array.from(groups.values())
-    .sort((a, b) => a.section.localeCompare(b.section, 'zh-CN') || a.order - b.order || a.navGroup.localeCompare(b.navGroup, 'zh-CN'))
+const learningPaths = computed(() =>
+  filterOptions.value.routes
+    .map((route) => ({
+      ...route,
+      section: filterOptions.value.sections.find((item) => item.columnId === route.columnId)?.label || ''
+    }))
+    .filter((route) => route.count > 0)
     .slice(0, 8)
-})
+)
 
 const results = computed(() =>
   searchRecords(records.value, query.value, {
@@ -84,16 +90,16 @@ const results = computed(() =>
   })
 )
 
-function selectLearningPath(item?: { section: string; navGroup: string }) {
+function selectLearningPath(item?: { section: string; label: string }) {
   section.value = item?.section || ALL
-  navGroup.value = item?.navGroup || ALL
+  navGroup.value = item?.label || ALL
   chapter.value = ALL
 }
 </script>
 
 <template>
   <section class="kb-search-page">
-    <div class="kb-search-map">
+    <div class="kb-search-map" aria-label="学习地图快捷入口">
       <button
         class="kb-path-chip"
         :class="{ active: section === ALL && navGroup === ALL }"
@@ -104,14 +110,14 @@ function selectLearningPath(item?: { section: string; navGroup: string }) {
       </button>
       <button
         v-for="item in learningPaths"
-        :key="`${item.section}-${item.navGroup}`"
+        :key="item.id"
         class="kb-path-chip"
-        :class="{ active: section === item.section && navGroup === item.navGroup }"
+        :class="{ active: section === item.section && navGroup === item.label }"
         type="button"
         @click="selectLearningPath(item)"
       >
         <span>{{ item.section }}</span>
-        {{ item.navGroup }}
+        {{ item.label }}
         <strong>{{ item.count }}</strong>
       </button>
     </div>

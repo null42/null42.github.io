@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { isImageAsset, toMarkdownImage } from '../../scripts/kb/import/assets'
-import { normalizeMathDelimiters, normalizeMermaidSource, renderMathToHtml } from '../../scripts/kb/markdown-rendering'
+import { normalizeMarkdownTables, normalizeMathDelimiters, normalizeMermaidSource, renderMathToHtml } from '../../scripts/kb/markdown-rendering'
 
 describe('rendering fixture', () => {
   it('contains markdown, mermaid, svg, table, callout, and code examples', () => {
@@ -37,6 +37,36 @@ describe('rendering fixture', () => {
     expect(config).toContain('kb-table-scroll')
     expect(config).toContain('table_open')
     expect(config).toContain('table_close')
+  })
+
+  it('normalizes imported table rows to the header column count before rendering', () => {
+    const markdown = [
+      '| 步骤 | 概念 | 说明 |',
+      '| --- | --- | --- |',
+      '| ① Clarke | FOC | ALG-01 | 多出来的说明列 |',
+      '| ② Park | FOC |',
+      '',
+      '正文'
+    ].join('\n')
+
+    expect(normalizeMarkdownTables(markdown)).toBe([
+      '| 步骤 | 概念 | 说明 |',
+      '| --- | --- | --- |',
+      '| ① Clarke | FOC | ALG-01；多出来的说明列 |',
+      '| ② Park | FOC |  |',
+      '',
+      '正文'
+    ].join('\n'))
+  })
+
+  it('does not treat currency values in tables as math delimiters', () => {
+    const markdown = [
+      '| 区域 | 范围 | 成本 |',
+      '| --- | --- | --- |',
+      '| 恒转矩区 | $0 \\sim \\omega_{base}$ | $0.70 |'
+    ].join('\n')
+
+    expect(normalizeMarkdownTables(markdown)).toBe(markdown)
   })
 
   it('normalizes imported Mermaid state aliases before rendering', () => {

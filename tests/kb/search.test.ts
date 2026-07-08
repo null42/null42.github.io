@@ -136,6 +136,16 @@ describe('knowledge search', () => {
     expect(records[0].summary).not.toContain('Imported from')
     expect(records[0].quality).toBe('needsRewrite')
   })
+
+  it('prioritizes curated records for default search results', () => {
+    const records = buildSearchIndex([
+      article({ title: 'Imported New', date: '2026-07-03', quality: 'imported' }),
+      article({ title: 'Curated Old', date: '2026-06-30', quality: 'curated' }),
+      article({ title: 'Needs Rewrite', date: '2026-07-04', quality: 'needsRewrite' })
+    ])
+
+    expect(searchRecords(records, '').map((entry) => entry.record.title)).toEqual(['Curated Old', 'Imported New', 'Needs Rewrite'])
+  })
 })
 
 function article(overrides: Partial<ArticleRecord>): ArticleRecord {

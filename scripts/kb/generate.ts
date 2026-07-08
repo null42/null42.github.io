@@ -3,6 +3,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { generatedRoot } from './paths'
 import { scanArticles } from './articles'
+import { buildColumnFilterOptions, loadColumnRegistry } from './columns'
+import { buildPublishManifest, writePublishManifest } from './publish-manifest'
 import { assertSearchIndexWithinBudget, buildSearchIndex } from './search/build-index'
 import type { ArticleRecord } from './types'
 
@@ -12,6 +14,7 @@ if (isMainModule()) {
 
 export async function generateIndexes(): Promise<void> {
   const result = await scanArticles()
+  const columnRegistry = await loadColumnRegistry()
   await fs.mkdir(generatedRoot, { recursive: true })
 
   const articles = result.articles.filter((article) => article.visibility === 'public')
@@ -20,14 +23,18 @@ export async function generateIndexes(): Promise<void> {
   const archive = buildArchive(articles)
   const sidebar = buildSidebar(articles)
   const searchIndex = buildSearchIndex(articles)
+  const columnOptions = buildColumnFilterOptions(columnRegistry, articles)
+  const publishManifest = await buildPublishManifest(articles)
   assertSearchIndexWithinBudget(searchIndex)
 
   await fs.writeFile(path.join(generatedRoot, 'articles.json'), JSON.stringify(articles.map(toPublicArticleRecord), null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'categories.json'), JSON.stringify(categories, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'tags.json'), JSON.stringify(tags, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'archive.json'), JSON.stringify(archive, null, 2), 'utf8')
+  await fs.writeFile(path.join(generatedRoot, 'columns.json'), JSON.stringify(columnOptions, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'search-index.json'), JSON.stringify(searchIndex, null, 2), 'utf8')
   await fs.writeFile(path.join(generatedRoot, 'sidebar.ts'), sidebar, 'utf8')
+  await writePublishManifest(publishManifest, path.join(generatedRoot, 'publish-manifest.json'))
 
   console.log(`generated indexes for ${articles.length} public articles`)
 }

@@ -95,6 +95,21 @@ describe('content publishing policy', () => {
 
     expect(offenders).toEqual([])
   })
+
+  it('keeps homepage learning-map article links curated', async () => {
+    const home = fs.readFileSync('index.md', 'utf8')
+    const { articles } = await scanArticles()
+    const byUrl = new Map(articles.map((article) => [article.url, article]))
+    const publicHomeLinks = [...home.matchAll(/href="([^"]+)"/g)]
+      .map((match) => match[1])
+      .filter((url) => url.startsWith('/content/') && !url.startsWith('/content/encrypted/'))
+    const offenders = publicHomeLinks
+      .map((url) => byUrl.get(url))
+      .filter((article) => article && article.quality !== 'curated')
+      .map((article) => `${article?.url}: ${article?.quality}`)
+
+    expect(offenders).toEqual([])
+  })
 })
 
 function findEmojiEntities(text: string): string[] {

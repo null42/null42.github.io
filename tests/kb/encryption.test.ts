@@ -4,6 +4,7 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { decryptMarkdownForTest, encryptMarkdown, renderEncryptedArticle } from '../../scripts/kb/encrypt/encrypt'
 import { copyEncryptedPayloadsToDist } from '../../scripts/kb/encrypt/publish-payloads'
+import { renderDecryptedMarkdown, stripFrontmatter } from '../../.vitepress/theme/encrypted-markdown'
 
 describe('encrypted articles', () => {
   it('encrypts markdown without storing plaintext in the payload', async () => {
@@ -80,5 +81,29 @@ describe('encrypted articles', () => {
     expect(component).toContain('kb-decrypted-doc')
     expect(component).toContain('v-html="renderedContent"')
     expect(component).not.toContain('<pre v-if="content"')
+  })
+
+  it('strips private frontmatter before rendering decrypted markdown', () => {
+    const markdown = [
+      '---',
+      'title: 加密演示文章',
+      'passwordHint: 演示密码：demo-knowledge',
+      '---',
+      '',
+      '# 加密演示文章',
+      '',
+      '- 搜索索引不收录加密文章正文。'
+    ].join('\n')
+
+    expect(stripFrontmatter(markdown)).not.toContain('passwordHint')
+    expect(renderDecryptedMarkdown(markdown)).toContain('<h1>加密演示文章</h1>')
+    expect(renderDecryptedMarkdown(markdown)).not.toContain('passwordHint')
+  })
+
+  it('distinguishes empty password from wrong password', () => {
+    const component = fs.readFileSync('.vitepress/theme/components/EncryptedArticle.vue', 'utf8')
+
+    expect(component).toContain('请输入文章密码。')
+    expect(component).toContain('password.value.trim()')
   })
 })

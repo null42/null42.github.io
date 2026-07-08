@@ -1,0 +1,15 @@
+{
+  "id": "playground",
+  "title": "渲染验证",
+  "section": "Playground",
+  "source": "manual",
+  "order": 900,
+  "visibility": "public",
+  "layout": "flat",
+  "searchable": false,
+  "allowFlat": true,
+  "description": "构建和浏览器验收使用的渲染 fixture，不进入默认搜索筛选。",
+  "defaultTags": ["markdown"],
+  "routes": [],
+  "stages": []
+}

@@ -23,7 +23,14 @@ export function normalizeMathDelimiters(markdown: string): string {
     const withMathDelimiters = chunk.text
       .replace(/\\\[([\s\S]*?)\\\]/g, (_, body: string) => `$$${trimDisplayMath(body)}$$`)
       .replace(/\\\(([\s\S]*?)\\\)/g, (_, body: string) => `$${body}$`)
-    return normalizeMarkdownText(withMathDelimiters)
+    return normalizeMarkdownTables(normalizeMarkdownText(withMathDelimiters))
+  }).join('')
+}
+
+export function normalizeMarkdownTables(markdown: string): string {
+  return splitFencedCode(markdown).map((chunk) => {
+    if (chunk.fenced) return chunk.text
+    return normalizeMarkdownTablesInText(chunk.text)
   }).join('')
 }
 
@@ -49,6 +56,100 @@ function normalizeMarkdownLine(line: string): string {
   normalized = normalizeTableMathPipes(normalized)
   normalized = normalizeBareMathLine(normalized)
   return normalized
+}
+
+function normalizeMarkdownTablesInText(text: string): string {
+  const lines = text.split(/\r?\n/)
+  for (let index = 0; index < lines.length - 1; index += 1) {
+    if (!isLikelyTableRow(lines[index]) || !isMarkdownTableSeparator(lines[index + 1])) continue
+    const expected = splitTableCells(lines[index]).length
+    lines[index] = renderTableRow(normalizeTableCells(splitTableCells(lines[index]), expected))
+    lines[index + 1] = renderTableSeparator(expected)
+
+    let cursor = index + 2
+    while (cursor < lines.length && isLikelyTableRow(lines[cursor])) {
+      lines[cursor] = renderTableRow(normalizeTableCells(splitTableCells(lines[cursor]), expected))
+      cursor += 1
+    }
+    index = cursor
+  }
+  return lines.join('\n')
+}
+
+function isLikelyTableRow(line: string): boolean {
+  const trimmed = line.trim()
+  if (!trimmed.includes('|')) return false
+  if (/^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(trimmed)) return true
+  return splitTableCells(trimmed).length >= 2 && (trimmed.startsWith('|') || trimmed.endsWith('|'))
+}
+
+function isMarkdownTableSeparator(line: string): boolean {
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/.test(line)
+}
+
+function splitTableCells(line: string): string[] {
+  const trimmed = line.trim().replace(/^\|/, '').replace(/\|$/, '')
+  const cells: string[] = []
+  let buffer = ''
+  let escaped = false
+  let inInlineMath = false
+  for (let index = 0; index < trimmed.length; index += 1) {
+    const char = trimmed[index]
+    if (escaped) {
+      buffer += char
+      escaped = false
+      continue
+    }
+    if (char === '\\') {
+      buffer += char
+      escaped = true
+      continue
+    }
+    if (char === '$') {
+      if (inInlineMath) inInlineMath = false
+      else if (hasClosingDollarBeforePipe(trimmed, index + 1)) inInlineMath = true
+    }
+    if (char === '|' && !inInlineMath) {
+      cells.push(buffer.trim())
+      buffer = ''
+      continue
+    }
+    buffer += char
+  }
+  cells.push(buffer.trim())
+  return cells
+}
+
+function hasClosingDollarBeforePipe(value: string, start: number): boolean {
+  let escaped = false
+  for (let index = start; index < value.length; index += 1) {
+    const char = value[index]
+    if (escaped) {
+      escaped = false
+      continue
+    }
+    if (char === '\\') {
+      escaped = true
+      continue
+    }
+    if (char === '|') return false
+    if (char === '$') return true
+  }
+  return false
+}
+
+function normalizeTableCells(cells: string[], expected: number): string[] {
+  if (cells.length === expected) return cells
+  if (cells.length < expected) return [...cells, ...Array.from({ length: expected - cells.length }, () => '')]
+  return [...cells.slice(0, expected - 1), cells.slice(expected - 1).join('；')]
+}
+
+function renderTableRow(cells: string[]): string {
+  return `| ${cells.join(' | ')} |`
+}
+
+function renderTableSeparator(count: number): string {
+  return `| ${Array.from({ length: count }, () => '---').join(' | ')} |`
 }
 
 function normalizeSameLineDisplayMath(line: string): string {

@@ -10,6 +10,7 @@ tags:
 source: power
 status: learning
 visibility: public
+quality: curated
 summary: 电源控制知识库入口，保留已整理的学习记录、项目实践、路线图和调试资料。
 ---
 

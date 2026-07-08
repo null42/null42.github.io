@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "kb": "tsx scripts/kb/cli.ts",
     "dev": "npm run kb:generate && vitepress dev .",
     "build": "npm run kb:check && npm run kb:generate && npm run kb:clean && vitepress build .",
     "preview": "vitepress preview .",

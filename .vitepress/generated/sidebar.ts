@@ -4,29 +4,35 @@ export const generatedSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "电机控制入口",
-        "link": "/content/motor/getting-started.html"
-      },
-      {
-        "text": "电控知识库",
-        "link": "/content/motor/README.html"
-      },
-      {
-        "text": "硬件验证指南",
-        "link": "/content/motor/hardware-validation-guide.html"
-      },
-      {
-        "text": "Hardware User Test Protocol",
-        "link": "/content/motor/hardware-user-test-protocol.html"
-      },
-      {
-        "text": "Remaining 30% Roadmap",
-        "link": "/content/motor/30-percent-roadmap.html"
-      },
-      {
         "text": "入门与索引",
         "collapsed": true,
         "items": [
+          {
+            "text": "总览",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "电机控制入口",
+                "link": "/content/motor/getting-started.html"
+              },
+              {
+                "text": "电控知识库",
+                "link": "/content/motor/README.html"
+              },
+              {
+                "text": "硬件验证指南",
+                "link": "/content/motor/hardware-validation-guide.html"
+              },
+              {
+                "text": "Hardware User Test Protocol",
+                "link": "/content/motor/hardware-user-test-protocol.html"
+              },
+              {
+                "text": "Remaining 30% Roadmap",
+                "link": "/content/motor/30-percent-roadmap.html"
+              }
+            ]
+          },
           {
             "text": "学习工作区",
             "collapsed": true,
@@ -1420,158 +1426,56 @@ export const generatedSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "电源控制入口",
-        "link": "/content/power/getting-started.html"
-      },
-      {
-        "text": "UPS电源软件开发 — 学习资源列表",
-        "link": "/content/power/RESOURCES.html"
-      },
-      {
-        "text": "UPS 电源控制入职训练体系使用说明",
-        "link": "/content/power/USAGE.html"
-      },
-      {
-        "text": "Mission: UPS 控制方向入职训练",
-        "link": "/content/power/MISSION.html"
-      },
-      {
-        "text": "UPS电源软件开发 — 课程体系大纲",
-        "link": "/content/power/NOTES.html"
-      },
-      {
-        "text": "路线图",
+        "text": "路线与索引",
         "collapsed": true,
         "items": [
           {
-            "text": "MATLAB/Simulink 电力电子仿真快速路线",
-            "link": "/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html"
+            "text": "电源入口",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "电源控制入口",
+                "link": "/content/power/getting-started.html"
+              },
+              {
+                "text": "UPS电源软件开发 — 学习资源列表",
+                "link": "/content/power/RESOURCES.html"
+              },
+              {
+                "text": "UPS 电源控制入职训练体系使用说明",
+                "link": "/content/power/USAGE.html"
+              },
+              {
+                "text": "Mission: UPS 控制方向入职训练",
+                "link": "/content/power/MISSION.html"
+              },
+              {
+                "text": "UPS电源软件开发 — 课程体系大纲",
+                "link": "/content/power/NOTES.html"
+              }
+            ]
           },
           {
-            "text": "New Module Priority Map",
-            "link": "/content/power/roadmap/lesson-priority-map.html"
-          },
-          {
-            "text": "UPS 持续提高路线（Continuous Learning Path）",
-            "link": "/content/power/roadmap/continuous-learning-path.html"
-          },
-          {
-            "text": "UPS 30 天训练计划（30-Day Training Plan）",
-            "link": "/content/power/roadmap/30-day-plan.html"
-          }
-        ]
-      },
-      {
-        "text": "历史记录",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "Archive",
-            "link": "/content/power/archive/README.html"
-          },
-          {
-            "text": "学习记录 #0026：三电平P/O/N工作状态判别",
-            "link": "/content/power/archive/old-learning-records/0026-three-level-pon-states.html"
-          },
-          {
-            "text": "学习记录 #0001：UPS电源系统全景认知",
-            "link": "/content/power/archive/old-learning-records/0001-ups-system-overview.html"
-          },
-          {
-            "text": "学习记录 #0002：电力电子基础——开关器件与基本拓扑",
-            "link": "/content/power/archive/old-learning-records/0002-switching-devices-and-basic-topologies.html"
-          },
-          {
-            "text": "学习记录 #0003：PWM调制技术——从SPWM到SVPWM",
-            "link": "/content/power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm.html"
-          },
-          {
-            "text": "学习记录 #0004：数字控制基础——从连续到离散",
-            "link": "/content/power/archive/old-learning-records/0004-digital-control-basics.html"
-          },
-          {
-            "text": "学习记录 #0005：锁相环（PLL）技术——电网同步的核心",
-            "link": "/content/power/archive/old-learning-records/0005-phase-locked-loop.html"
-          },
-          {
-            "text": "学习记录 #0006：ADC采样技术——从传感器到数字量",
-            "link": "/content/power/archive/old-learning-records/0006-adc-sampling-techniques.html"
-          },
-          {
-            "text": "学习记录 #0007：单相PFC整流器——从整流到功率因数校正",
-            "link": "/content/power/archive/old-learning-records/0007-single-phase-pfc.html"
-          },
-          {
-            "text": "学习记录 #0008：维也纳整流器——三相三电平PFC之王",
-            "link": "/content/power/archive/old-learning-records/0008-vienna-rectifier.html"
-          },
-          {
-            "text": "学习记录 #0009：三电平SVPWM深入——从理论到代码实现",
-            "link": "/content/power/archive/old-learning-records/0009-three-level-svpwm-deep.html"
-          },
-          {
-            "text": "学习记录 #0010：单相逆变器控制——UPS的输出级",
-            "link": "/content/power/archive/old-learning-records/0010-single-phase-inverter.html"
-          },
-          {
-            "text": "学习记录 #0011：三相逆变器控制——UPS输出级的高性能方案",
-            "link": "/content/power/archive/old-learning-records/0011-three-phase-inverter.html"
-          },
-          {
-            "text": "学习记录 #0012：LLC谐振变换器原理与控制——UPS的DC-DC级",
-            "link": "/content/power/archive/old-learning-records/0012-llc-resonant-converter.html"
-          },
-          {
-            "text": "学习记录 #0013：双向DC-DC与电池管理——UPS的能量枢纽",
-            "link": "/content/power/archive/old-learning-records/0013-bidirectional-dcdc-battery.html"
-          },
-          {
-            "text": "学习记录 #0014：多级联调——PFC+DC-DC+逆变器协同",
-            "link": "/content/power/archive/old-learning-records/0014-cascade-coordination.html"
-          },
-          {
-            "text": "学习记录 #0015：后备式UPS完整软件设计——从零到一的固件实战",
-            "link": "/content/power/archive/old-learning-records/0015-backup-ups-software.html"
-          },
-          {
-            "text": "学习记录 #0016：在线式UPS完整软件设计——双变换架构的软件实现",
-            "link": "/content/power/archive/old-learning-records/0016-online-ups-software.html"
-          },
-          {
-            "text": "学习记录 #0017：并机与冗余设计——高可用UPS系统的基石",
-            "link": "/content/power/archive/old-learning-records/0017-parallel-redundancy.html"
-          },
-          {
-            "text": "学习记录 #0018：保护机制设计——UPS安全的最后防线",
-            "link": "/content/power/archive/old-learning-records/0018-protection-mechanism.html"
-          },
-          {
-            "text": "学习记录 #0019：通信协议与远程监控——UPS的\"神经系统\"",
-            "link": "/content/power/archive/old-learning-records/0019-communication-protocol.html"
-          },
-          {
-            "text": "学习记录 #0020：固件分层架构设计——从裸机到RTOS的工程实践",
-            "link": "/content/power/archive/old-learning-records/0020-firmware-architecture.html"
-          },
-          {
-            "text": "学习记录 #0021：RTOS任务设计与实时性保证——让每个任务准时执行",
-            "link": "/content/power/archive/old-learning-records/0021-rtos-task-design.html"
-          },
-          {
-            "text": "学习记录 #0022：OTA升级与安全启动——固件安全的全链路保障",
-            "link": "/content/power/archive/old-learning-records/0022-ota-upgrade.html"
-          },
-          {
-            "text": "学习记录 #0023：面试实战——UPS电源软件开发高频面试题精讲",
-            "link": "/content/power/archive/old-learning-records/0023-interview-practice.html"
-          },
-          {
-            "text": "学习记录 #0024：电源控制 vs 电机控制——跨界对比与知识迁移",
-            "link": "/content/power/archive/old-learning-records/0024-power-vs-motor.html"
-          },
-          {
-            "text": "学习记录 #0025：Buck/Boost工作模式深度分析——CCM/DCM/BCM的工程意义",
-            "link": "/content/power/archive/old-learning-records/0025-buck-boost-ccm-dcm.html"
+            "text": "路线图",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MATLAB/Simulink 电力电子仿真快速路线",
+                "link": "/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html"
+              },
+              {
+                "text": "New Module Priority Map",
+                "link": "/content/power/roadmap/lesson-priority-map.html"
+              },
+              {
+                "text": "UPS 持续提高路线（Continuous Learning Path）",
+                "link": "/content/power/roadmap/continuous-learning-path.html"
+              },
+              {
+                "text": "UPS 30 天训练计划（30-Day Training Plan）",
+                "link": "/content/power/roadmap/30-day-plan.html"
+              }
+            ]
           }
         ]
       },
@@ -1580,36 +1484,162 @@ export const generatedSidebar = [
         "collapsed": true,
         "items": [
           {
-            "text": "项目 03：UPS C 固件骨架（UPS C Firmware Skeleton）",
-            "link": "/content/power/projects/03-ups-c-firmware-skeleton/README.html"
+            "text": "项目实践",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "项目 03：UPS C 固件骨架（UPS C Firmware Skeleton）",
+                "link": "/content/power/projects/03-ups-c-firmware-skeleton/README.html"
+              },
+              {
+                "text": "项目 01：Boost 基础（Boost Basics）",
+                "link": "/content/power/projects/01-boost-basics/README.html"
+              },
+              {
+                "text": "项目 02：Boost C 固件骨架（Boost C Firmware Skeleton）",
+                "link": "/content/power/projects/02-boost-c-firmware-skeleton/README.html"
+              }
+            ]
           },
           {
-            "text": "项目 01：Boost 基础（Boost Basics）",
-            "link": "/content/power/projects/01-boost-basics/README.html"
-          },
-          {
-            "text": "项目 02：Boost C 固件骨架（Boost C Firmware Skeleton）",
-            "link": "/content/power/projects/02-boost-c-firmware-skeleton/README.html"
+            "text": "仿真结果",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "Simulations",
+                "link": "/content/power/simulations/README.html"
+              }
+            ]
           }
         ]
       },
       {
-        "text": "仿真结果",
+        "text": "调试与复盘",
         "collapsed": true,
         "items": [
           {
-            "text": "Simulations",
-            "link": "/content/power/simulations/README.html"
-          }
-        ]
-      },
-      {
-        "text": "周复盘",
-        "collapsed": true,
-        "items": [
+            "text": "历史记录",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "Archive",
+                "link": "/content/power/archive/README.html"
+              },
+              {
+                "text": "学习记录 #0026：三电平P/O/N工作状态判别",
+                "link": "/content/power/archive/old-learning-records/0026-three-level-pon-states.html"
+              },
+              {
+                "text": "学习记录 #0001：UPS电源系统全景认知",
+                "link": "/content/power/archive/old-learning-records/0001-ups-system-overview.html"
+              },
+              {
+                "text": "学习记录 #0002：电力电子基础——开关器件与基本拓扑",
+                "link": "/content/power/archive/old-learning-records/0002-switching-devices-and-basic-topologies.html"
+              },
+              {
+                "text": "学习记录 #0003：PWM调制技术——从SPWM到SVPWM",
+                "link": "/content/power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm.html"
+              },
+              {
+                "text": "学习记录 #0004：数字控制基础——从连续到离散",
+                "link": "/content/power/archive/old-learning-records/0004-digital-control-basics.html"
+              },
+              {
+                "text": "学习记录 #0005：锁相环（PLL）技术——电网同步的核心",
+                "link": "/content/power/archive/old-learning-records/0005-phase-locked-loop.html"
+              },
+              {
+                "text": "学习记录 #0006：ADC采样技术——从传感器到数字量",
+                "link": "/content/power/archive/old-learning-records/0006-adc-sampling-techniques.html"
+              },
+              {
+                "text": "学习记录 #0007：单相PFC整流器——从整流到功率因数校正",
+                "link": "/content/power/archive/old-learning-records/0007-single-phase-pfc.html"
+              },
+              {
+                "text": "学习记录 #0008：维也纳整流器——三相三电平PFC之王",
+                "link": "/content/power/archive/old-learning-records/0008-vienna-rectifier.html"
+              },
+              {
+                "text": "学习记录 #0009：三电平SVPWM深入——从理论到代码实现",
+                "link": "/content/power/archive/old-learning-records/0009-three-level-svpwm-deep.html"
+              },
+              {
+                "text": "学习记录 #0010：单相逆变器控制——UPS的输出级",
+                "link": "/content/power/archive/old-learning-records/0010-single-phase-inverter.html"
+              },
+              {
+                "text": "学习记录 #0011：三相逆变器控制——UPS输出级的高性能方案",
+                "link": "/content/power/archive/old-learning-records/0011-three-phase-inverter.html"
+              },
+              {
+                "text": "学习记录 #0012：LLC谐振变换器原理与控制——UPS的DC-DC级",
+                "link": "/content/power/archive/old-learning-records/0012-llc-resonant-converter.html"
+              },
+              {
+                "text": "学习记录 #0013：双向DC-DC与电池管理——UPS的能量枢纽",
+                "link": "/content/power/archive/old-learning-records/0013-bidirectional-dcdc-battery.html"
+              },
+              {
+                "text": "学习记录 #0014：多级联调——PFC+DC-DC+逆变器协同",
+                "link": "/content/power/archive/old-learning-records/0014-cascade-coordination.html"
+              },
+              {
+                "text": "学习记录 #0015：后备式UPS完整软件设计——从零到一的固件实战",
+                "link": "/content/power/archive/old-learning-records/0015-backup-ups-software.html"
+              },
+              {
+                "text": "学习记录 #0016：在线式UPS完整软件设计——双变换架构的软件实现",
+                "link": "/content/power/archive/old-learning-records/0016-online-ups-software.html"
+              },
+              {
+                "text": "学习记录 #0017：并机与冗余设计——高可用UPS系统的基石",
+                "link": "/content/power/archive/old-learning-records/0017-parallel-redundancy.html"
+              },
+              {
+                "text": "学习记录 #0018：保护机制设计——UPS安全的最后防线",
+                "link": "/content/power/archive/old-learning-records/0018-protection-mechanism.html"
+              },
+              {
+                "text": "学习记录 #0019：通信协议与远程监控——UPS的\"神经系统\"",
+                "link": "/content/power/archive/old-learning-records/0019-communication-protocol.html"
+              },
+              {
+                "text": "学习记录 #0020：固件分层架构设计——从裸机到RTOS的工程实践",
+                "link": "/content/power/archive/old-learning-records/0020-firmware-architecture.html"
+              },
+              {
+                "text": "学习记录 #0021：RTOS任务设计与实时性保证——让每个任务准时执行",
+                "link": "/content/power/archive/old-learning-records/0021-rtos-task-design.html"
+              },
+              {
+                "text": "学习记录 #0022：OTA升级与安全启动——固件安全的全链路保障",
+                "link": "/content/power/archive/old-learning-records/0022-ota-upgrade.html"
+              },
+              {
+                "text": "学习记录 #0023：面试实战——UPS电源软件开发高频面试题精讲",
+                "link": "/content/power/archive/old-learning-records/0023-interview-practice.html"
+              },
+              {
+                "text": "学习记录 #0024：电源控制 vs 电机控制——跨界对比与知识迁移",
+                "link": "/content/power/archive/old-learning-records/0024-power-vs-motor.html"
+              },
+              {
+                "text": "学习记录 #0025：Buck/Boost工作模式深度分析——CCM/DCM/BCM的工程意义",
+                "link": "/content/power/archive/old-learning-records/0025-buck-boost-ccm-dcm.html"
+              }
+            ]
+          },
           {
-            "text": "Week 01 Day 01: Boost Converter First Pass",
-            "link": "/content/power/weekly-reviews/week-01-day-01.html"
+            "text": "周复盘",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "Week 01 Day 01: Boost Converter First Pass",
+                "link": "/content/power/weekly-reviews/week-01-day-01.html"
+              }
+            ]
           }
         ]
       }

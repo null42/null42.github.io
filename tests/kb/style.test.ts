@@ -24,4 +24,15 @@ describe('theme style', () => {
     expect(css).toContain('.vp-doc .katex-display')
     expect(css).toMatch(/\.vp-doc\s+\.katex-display\s*\{[^}]*overflow-x:\s*auto/s)
   })
+
+  it('uses a reusable theme config and avoids decorative orb backgrounds', () => {
+    const themeConfig = fs.readFileSync('.vitepress/theme/kb-theme.ts', 'utf8')
+    const layout = fs.readFileSync('.vitepress/theme/Layout.vue', 'utf8')
+
+    expect(themeConfig).toContain('kbThemeConfig')
+    expect(themeConfig).toContain('radius: 8')
+    expect(layout).toContain('kbThemeConfig')
+    expect(css).not.toContain('radial-gradient')
+    expect(css).toContain('.kb-library-head')
+  })
 })
