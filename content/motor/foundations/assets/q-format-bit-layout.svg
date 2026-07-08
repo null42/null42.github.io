@@ -1,43 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="320" viewBox="0 0 920 320" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
   <title id="title">Q15 定点数位布局</title>
-  <desc id="desc">Q15 使用一个符号位和十五个小数位，乘法后得到 Q30，需要右移十五位并做饱和。</desc>
+  <desc id="desc">一个有符号 16 位整数被解释成 1 个符号位和 15 个小数位，整数 16384 表示 0.5。</desc>
   <style>
     text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
-    .bit{fill:#eff6ff;stroke:#2563eb;stroke-width:1.5}
-    .sign{fill:#fee2e2;stroke:#b91c1c;stroke-width:1.5}
-    .frac{fill:#ecfdf5;stroke:#0f766e;stroke-width:1.5}
-    .arrow{stroke:#334155;stroke-width:2.2;marker-end:url(#arrow)}
-    .title{font-size:24px;font-weight:700}
-    .label{font-size:18px}
-    .mono{font-family:"Cascadia Code",Consolas,monospace;font-size:17px}
+    .bit{fill:#eef2ff;stroke:#4f46e5;stroke-width:2}
+    .sign{fill:#fee2e2;stroke:#dc2626;stroke-width:2}
+    .frac{fill:#dcfce7;stroke:#16a34a;stroke-width:2}
+    .arrow{stroke:#2563eb;stroke-width:3;marker-end:url(#arrow)}
+    .label{font-size:22px;font-weight:700}
+    .small{font-size:18px}
+    .num{font-size:16px}
   </style>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
-    </marker>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
   </defs>
-  <text x="40" y="42" class="title">Q15: int16 表示 [-1, 1)</text>
-  <rect x="50" y="85" width="50" height="58" class="sign"/>
-  <text x="75" y="120" text-anchor="middle" class="mono">S</text>
-  <text x="75" y="166" text-anchor="middle" class="label">符号</text>
-  <g>
-    <rect x="100" y="85" width="48" height="58" class="frac"/><text x="124" y="120" text-anchor="middle" class="mono">14</text>
-    <rect x="148" y="85" width="48" height="58" class="frac"/><text x="172" y="120" text-anchor="middle" class="mono">13</text>
-    <rect x="196" y="85" width="48" height="58" class="frac"/><text x="220" y="120" text-anchor="middle" class="mono">12</text>
-    <rect x="244" y="85" width="48" height="58" class="frac"/><text x="268" y="120" text-anchor="middle" class="mono">11</text>
-    <rect x="292" y="85" width="48" height="58" class="frac"/><text x="316" y="120" text-anchor="middle" class="mono">10</text>
-    <rect x="340" y="85" width="48" height="58" class="frac"/><text x="364" y="120" text-anchor="middle" class="mono">...</text>
-    <rect x="388" y="85" width="48" height="58" class="frac"/><text x="412" y="120" text-anchor="middle" class="mono">2</text>
-    <rect x="436" y="85" width="48" height="58" class="frac"/><text x="460" y="120" text-anchor="middle" class="mono">1</text>
-    <rect x="484" y="85" width="48" height="58" class="frac"/><text x="508" y="120" text-anchor="middle" class="mono">0</text>
+  <text x="40" y="48" class="label">Q15：整数存储，小数解释</text>
+  <g transform="translate(60,90)">
+    <rect x="0" y="0" width="50" height="70" class="sign"/>
+    <text x="15" y="42" class="num">S</text>
+    <text x="8" y="96" class="small">符号</text>
+    <g transform="translate(60,0)">
+      <rect x="0" y="0" width="50" height="70" class="frac"/><text x="13" y="42" class="num">2⁻¹</text>
+      <rect x="50" y="0" width="50" height="70" class="frac"/><text x="63" y="42" class="num">2⁻²</text>
+      <rect x="100" y="0" width="50" height="70" class="frac"/><text x="111" y="42" class="num">2⁻³</text>
+      <rect x="150" y="0" width="50" height="70" class="frac"/><text x="168" y="42" class="num">...</text>
+      <rect x="200" y="0" width="50" height="70" class="frac"/><text x="207" y="42" class="num">2⁻¹⁵</text>
+      <text x="35" y="96" class="small">15 个小数位</text>
+    </g>
   </g>
-  <text x="316" y="166" text-anchor="middle" class="label">15 个小数位</text>
-  <text x="585" y="110" class="label">数值换算</text>
-  <text x="585" y="140" class="mono">q15 = round(x * 32768)</text>
-  <text x="585" y="170" class="mono">x = q15 / 32768.0</text>
-  <line x1="250" y1="220" x2="410" y2="220" class="arrow"/>
-  <line x1="520" y1="220" x2="680" y2="220" class="arrow"/>
-  <text x="80" y="226" class="mono">Q15 * Q15</text>
-  <text x="430" y="226" class="mono">Q30</text>
-  <text x="700" y="226" class="mono">sat(q30 >> 15)</text>
+  <line x1="400" y1="130" x2="540" y2="130" class="arrow"/>
+  <text x="420" y="105" class="small">约定缩放</text>
+  <rect x="570" y="80" width="320" height="140" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="600" y="125" class="small">real = q15 / 32768</text>
+  <text x="600" y="165" class="small">q15 = round(real × 32768)</text>
+  <text x="600" y="205" class="small">16384 对应 0.5</text>
+  <text x="70" y="295" class="small">乘法后临时结果是 Q30，回到 Q15 前必须右移 15 位并做饱和。</text>
 </svg>

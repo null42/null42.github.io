@@ -27,7 +27,7 @@ navGroupOrder: 50
 
 ## 1.  核心摘要
 
-超前补偿器（Lead Compensator）和滞后补偿器（Lag Compensator）看似两种不同的东西，实则共享同一个传递函数形式：$C(s) = K \cdot \frac{s + z}{s + p}$。区别仅在于零点和极点的相对位置：$|z| < |p|$ 为超前（买到了相位提升），$|p| < |z|$ 为滞后（买到了DC增益提升）。超前-滞后级联则同时获得两者。理解这一点，补偿器设计就从记忆公式变成了在s平面上放置极零点的几何操作。
+超前补偿器（Lead Compensator）和滞后补偿器（Lag Compensator）看似两种不同的东西，实则共享同一个传递函数形式：$C(s) = K \cdot \frac{s + z}{s + p}$。区别仅在于零点和极点的相对位置：$\lvert z \rvert < \lvert p \rvert$ 为超前（买到了相位提升），$\lvert p \rvert < \lvert z \rvert$ 为滞后（买到了DC增益提升）。超前-滞后级联则同时获得两者。理解这一点，补偿器设计就从记忆公式变成了在s平面上放置极零点的几何操作。
 
 **认知挂钩：** 超前补偿 ≈ 微分作用（PD），滞后补偿 ≈ 积分作用（PI），超前-滞后级联 ≈ PID。区别在于补偿器的极零点形式让你精确控制每个作用在哪个频率范围生效，而PID的三个增益隐式地决定了这些频率范围。
 
@@ -42,15 +42,15 @@ $$C(s) = K \cdot \frac{s + z}{s + p}$$
 看 $z$ 和 $p$ 在负实轴上的相对位置：
 
 | 条件 | 名称 | 作用 |
-|------|------|------|
-| $|z| < |p|$ | **超前（Lead）** | 零点更靠近原点。相位在一段频率范围内升到基线以上——你买到了**相位提升** |
-| $|p| < |z|$ | **滞后（Lag）** | 极点更靠近原点。低频增益超过高频增益——你买到了**DC增益提升** |
+| --- | --- | --- |
+| $\lvert z \rvert < \lvert p \rvert$ | **超前（Lead）** | 零点更靠近原点。相位在一段频率范围内升到基线以上——你买到了**相位提升** |
+| $\lvert p \rvert < \lvert z \rvert$ | **滞后（Lag）** | 极点更靠近原点。低频增益超过高频增益——你买到了**DC增益提升** |
 | $z = p$ | 平凡 | 极零点对消。$C(s) = K$，纯增益 |
-| 超前 × 滞后级联 | **超前-滞后（Lead-lag）** | 两级串联：一级 $|z_1| < |p_1|$，一级 $|p_2| < |z_2|$。相位提升 *加* DC增益提升 |
+| 超前 × 滞后级联 | **超前-滞后（Lead-lag）** | 两级串联：一级 $\lvert z_1 \rvert < \lvert p_1 \rvert$，一级 $\lvert p_2 \rvert < \lvert z_2 \rvert$。相位提升 *加* DC增益提升 |
 
 其他所有表示——$K_c\frac{Ts+1}{\alpha Ts+1}$、$K_c\frac{\beta Ts+1}{Ts+1}$、各种归一化的 $\frac{s+z}{s+p}$——都是同一个传递函数穿了不同的衣服。$z,p$ 参数化最直接：你放一个零点和一个极点，自然告诉你它是超前还是滞后。
 
-### 2.1 几何直觉——为什么 $|z| < |p|$ 意味着超前
+### 2.1 几何直觉——为什么 $\lvert z \rvert < \lvert p \rvert$ 意味着超前
 
 看超前和滞后最干净的方式不是通过Bode公式，而是通过s平面上的向量。在虚轴上的频率 $\omega$ 处求值补偿器，重写为*差值*之比：
 
@@ -58,19 +58,19 @@ $$C(j\omega) = K \cdot \frac{j\omega + z}{j\omega + p} = K \cdot \frac{j\omega -
 
 每一项 $j\omega - s_0$ 是从 $s_0$ 到求值点 $j\omega$ 的向量。$-z$ 处的零点给你从 $-z$ 到 $j\omega$ 的向量；$-p$ 处的极点给你从 $-p$ 到 $j\omega$ 的向量。$C(j\omega)$ 的幅值和相位为：
 
-$$|C(j\omega)| = K \cdot \frac{\text{零点向量长度}}{\text{极点向量长度}}, \qquad \angle C(j\omega) = \angle(\text{零点向量}) - \angle(\text{极点向量})$$
+$$\lvert C(j\omega) \rvert = K \cdot \frac{\text{零点向量长度}}{\text{极点向量长度}}, \qquad \angle C(j\omega) = \angle(\text{零点向量}) - \angle(\text{极点向量})$$
 
 相位就是**零点向量与水平线的夹角，减去极点向量与水平线的夹角。** 两个角度都从正实轴量起，都在 $0^\circ$ 到 $90^\circ$ 之间，因为向量从负实轴指向正虚轴。
 
 想象 $-z$ 和 $-p$ 都在负实轴上，选一个介于两者之间的频率。在脑海中追踪两个向量。
 
-**超前——零点更靠近原点。** 零点在 $-z$，极点在 $-p$，$|z| < |p|$。从 $j\omega$ 向下向左看：到 $-z$ 的向量必须下降更多、角度更陡，因为 $-z$ 更近，到 $j\omega$ 的垂直距离相对于短水平距离比例更大。零点向量因此比极点向量更接近垂直——它与水平线的夹角更大。因为 $C(j\omega)$ 的相位是零点角度减去极点角度，而零点角度更大，结果为正。这个正相位就是**超前。** 在 $|z|$ 和 $|p|$ 之间，每个频率都享有这个几何优势：更近的零点总在角度竞赛中胜出。
+**超前——零点更靠近原点。** 零点在 $-z$，极点在 $-p$，$\lvert z \rvert < \lvert p \rvert$。从 $j\omega$ 向下向左看：到 $-z$ 的向量必须下降更多、角度更陡，因为 $-z$ 更近，到 $j\omega$ 的垂直距离相对于短水平距离比例更大。零点向量因此比极点向量更接近垂直——它与水平线的夹角更大。因为 $C(j\omega)$ 的相位是零点角度减去极点角度，而零点角度更大，结果为正。这个正相位就是**超前。** 在 $\lvert z \rvert$ 和 $\lvert p \rvert$ 之间，每个频率都享有这个几何优势：更近的零点总在角度竞赛中胜出。
 
 **滞后——极点更靠近原点。** 现在交换位置。$-p$ 处的极点更靠近原点，$-z$ 处的零点更远。在两个转折点之间的任何频率，极点向量——从更近的点出发——更陡。它的角度更大。从零点角度减去它，得到负数。这个负相位就是**滞后。** 补偿器在该频率范围内把相位*往下拉*。
 
 **极限情况。** 当 $\omega$ 远低于两个转折点时，求值点紧贴原点。两个向量都接近水平，角度接近零。补偿器近似为实增益：$C \approx K \cdot z/p$。当 $\omega$ 远高于两个转折点时，求值点爬到虚轴高处。两个向量都几乎直指 $90^\circ$。角度相消：$C \approx K$。所有有趣的事——相位提升、幅值斜率变化——都发生在两个转折点之间的频带，那里一个向量已经开始向上倾斜而另一个还很平缓。那就是一个角度主导另一个的地方。
 
-Bode幅值讲同样的故事。如果 $|z| < |p|$，零点先起作用，把幅值斜率提升 +20 dB/decade，然后极点到来把它压平——幅值和相位同时出现凸起。如果 $|p| < |z|$，极点先到，把斜率拉下来，然后零点恢复——幅值在两个转折点之间下降，相位变负。
+Bode幅值讲同样的故事。如果 $\lvert z \rvert < \lvert p \rvert$，零点先起作用，把幅值斜率提升 +20 dB/decade，然后极点到来把它压平——幅值和相位同时出现凸起。如果 $\lvert p \rvert < \lvert z \rvert$，极点先到，把斜率拉下来，然后零点恢复——幅值在两个转折点之间下降，相位变负。
 
 ---
 
@@ -87,15 +87,17 @@ $$G(s) = \frac{1}{s(s+2)}$$
 
 频率响应为：
 
-$$|G(j\omega)| = \frac{1}{\omega\sqrt{\omega^2 + 4}}, \qquad \angle G(j\omega) = -90^\circ - \arctan\!\left(\frac{\omega}{2}\right)$$
+$$\lvert G(j\omega) \rvert = \frac{1}{\omega\sqrt{\omega^2 + 4}}, \qquad \angle G(j\omega) = -90^\circ - \arctan\!\left(\frac{\omega}{2}\right)$$
 
 **裸对象分析：**
 
-0 dB穿越频率求解 $|G(j\omega_{cp})| = 1$：
+0 dB穿越频率求解 $\lvert G(j\omega_{cp}) \rvert = 1$：
 
 $$\omega_{cp}^4 + 4\omega_{cp}^2 - 1 = 0 \;\Longrightarrow\; \omega_{cp} = \sqrt{\sqrt{5} - 2} \approx 0.486 \text{ rad/s}$$
 
-穿越处相位：$\angle G(j\omega_{cp}) = -90^\circ - \arctan(0.486/2) \approx -103.7^\circ$
+穿越处相位：
+
+$$\angle G(j\omega_{cp}) = -90^\circ - \arctan(0.486/2) \approx -103.7^\circ$$
 
 **相位裕度：** $180^\circ - 103.7^\circ = 76.3^\circ$——宽裕。**增益裕度：** 无穷（相位在任何有限频率都不达到 $-180^\circ$）。
 
@@ -112,11 +114,11 @@ $$\omega_{cp}^4 + 4\omega_{cp}^2 - 1 = 0 \;\Longrightarrow\; \omega_{cp} = \sqrt
 
 ### 4.1 机制
 
-在统一形式中，超前意味着 $|z| < |p|$——零点更靠近原点：
+在统一形式中，超前意味着 $\lvert z \rvert < \lvert p \rvert$——零点更靠近原点：
 
-$$C_{\text{lead}}(s) = K \cdot \frac{s + z}{s + p}, \qquad |z| < |p|$$
+$$C_{\text{lead}}(s) = K \cdot \frac{s + z}{s + p}, \qquad \lvert z \rvert < \lvert p \rvert$$
 
-零点从 $\omega = |z|$ 附近开始拉相位上升；极点从 $\omega = |p|$ 附近把相位拉回来。在两者之间，净相位为正——"相位提升"。
+零点从 $\omega = \lvert z \rvert$ 附近开始拉相位上升；极点从 $\omega = \lvert p \rvert$ 附近把相位拉回来。在两者之间，净相位为正——"相位提升"。
 
 **为什么需要它：** 被控对象中每个实极点都添加相位滞后。当你推高穿越频率（为了速度），被控对象在新穿越处的相位更负。你需要额外相位来维持稳定性。超前网络正好在你放置提升的频率提供这些相位。
 
@@ -133,7 +135,7 @@ $$\phi_{\max} = \arcsin\!\left(\frac{p - z}{p + z}\right) = \arcsin\!\left(\frac
 比值 $r = p/z$ 控制一切：
 
 | $r = p/z$ | $\phi_{\max}$ | 特征 |
-|-----------|---------------|------|
+| --- | --- | --- |
 | 2 | 19.5° | 温和超前——轻微提升 |
 | 5 | 41.8° | 中等超前——显著阻尼 |
 | 10 | 54.9° | 强超前——激进相位推进 |
@@ -160,9 +162,9 @@ $$z = \frac{\omega_{\max}}{\sqrt{r}} \approx \frac{0.486}{\sqrt{7.55}} \approx 0
 
 **步骤4——计算 $K$ 使穿越频率处增益为1。** 超前网络在 $\omega_{\max}$ 处添加增益。补偿：
 
-$$K = \left|\frac{j\omega_{\max} + p}{j\omega_{\max} + z}\right| = \frac{\sqrt{\omega_{\max}^2 + p^2}}{\sqrt{\omega_{\max}^2 + z^2}} \approx \frac{\sqrt{0.236 + 1.80}}{\sqrt{0.236 + 0.0313}} \approx 2.75$$
+$$K = \left\lvert \frac{j\omega_{\max} + p}{j\omega_{\max} + z}\right \rvert = \frac{\sqrt{\omega_{\max}^2 + p^2}}{\sqrt{\omega_{\max}^2 + z^2}} \approx \frac{\sqrt{0.236 + 1.80}}{\sqrt{0.236 + 0.0313}} \approx 2.75$$
 
-**结果：** $C_{\text{lead}}(s) = 2.75 \cdot \dfrac{s + 0.177}{s + 1.34}$，$|z| = 0.177 < |p| = 1.34$——超前，如预期。
+**结果：** $C_{\text{lead}}(s) = 2.75 \cdot \dfrac{s + 0.177}{s + 1.34}$，$\lvert z \rvert = 0.177 < \lvert p \rvert = 1.34$——超前，如预期。
 
 **步骤5——验证。** 环路传递函数 $L(s) = C_{\text{lead}}(s) \cdot G(s)$ 在偏移后的穿越频率处有改善的相位裕度。阶跃响应显示更快的上升时间和更少超调（或在更高穿越频率下相同超调）。
 
@@ -180,11 +182,11 @@ $$K = \left|\frac{j\omega_{\max} + p}{j\omega_{\max} + z}\right| = \frac{\sqrt{\
 
 ### 5.1 机制
 
-在统一形式中，滞后意味着 $|p| < |z|$——极点更靠近原点：
+在统一形式中，滞后意味着 $\lvert p \rvert < \lvert z \rvert$——极点更靠近原点：
 
-$$C_{\text{lag}}(s) = K \cdot \frac{s + z}{s + p}, \qquad |p| < |z|$$
+$$C_{\text{lag}}(s) = K \cdot \frac{s + z}{s + p}, \qquad \lvert p \rvert < \lvert z \rvert$$
 
-极点先把增益拉下来（在 $\omega = |p|$），然后零点恢复（在 $\omega = |z|$）。DC增益（$s = 0$ 处）为 $K \cdot z/p > K$，而高频增益趋近 $K$。你获得了**低频提升**而不影响高频行为——**前提是**极点和零点都远低于穿越频率。
+极点先把增益拉下来（在 $\omega = \lvert p \rvert$），然后零点恢复（在 $\omega = \lvert z \rvert$）。DC增益（$s = 0$ 处）为 $K \cdot z/p > K$，而高频增益趋近 $K$。你获得了**低频提升**而不影响高频行为——**前提是**极点和零点都远低于穿越频率。
 
 ### 5.2 技巧：别挡穿越的路
 
@@ -204,9 +206,9 @@ $$p = \frac{\omega_{cp}}{10} \approx 0.0486, \qquad z = \beta \cdot p \approx 0.
 
 **步骤3——计算 $K$ 使穿越频率处增益为1。** 这保持穿越频率和相位裕度基本不变：
 
-$$K = \left|\frac{j\omega_{cp} + p}{j\omega_{cp} + z}\right| = \frac{\sqrt{\omega_{cp}^2 + p^2}}{\sqrt{\omega_{cp}^2 + z^2}} \approx \frac{\sqrt{0.236 + 0.00236}}{\sqrt{0.236 + 0.236}} \approx 0.71$$
+$$K = \left\lvert \frac{j\omega_{cp} + p}{j\omega_{cp} + z}\right \rvert = \frac{\sqrt{\omega_{cp}^2 + p^2}}{\sqrt{\omega_{cp}^2 + z^2}} \approx \frac{\sqrt{0.236 + 0.00236}}{\sqrt{0.236 + 0.236}} \approx 0.71$$
 
-**结果：** $C_{\text{lag}}(s) = 0.71 \cdot \dfrac{s + 0.486}{s + 0.0486}$，$|p| = 0.0486 < |z| = 0.486$——滞后，如预期。
+**结果：** $C_{\text{lag}}(s) = 0.71 \cdot \dfrac{s + 0.486}{s + 0.0486}$，$\lvert p \rvert = 0.0486 < \lvert z \rvert = 0.486$——滞后，如预期。
 
 **DC环路增益提升：** 补偿器的DC增益为 $0.71 \cdot 0.486/0.0486 \approx 7.1$。整体环路获得 $7.1\times$ 低频增益，斜坡误差从 $200\%$ 降至约 $200\% / 7.1 \approx 28\%$。进一步改善需要更大的 $\beta$（把极点推得更靠近零）。
 
@@ -227,7 +229,7 @@ $$K = \left|\frac{j\omega_{cp} + p}{j\omega_{cp} + z}\right| = \frac{\sqrt{\omeg
 
 $$C_{\text{lead-lag}}(s) = C_{\text{lead}}(s) \cdot C_{\text{lag}}(s) = K_1 \cdot \frac{s + z_1}{s + p_1} \cdot K_2 \cdot \frac{s + z_2}{s + p_2}$$
 
-其中 $|z_1| < |p_1|$（超前）和 $|p_2| < |z_2|$（滞后）。合并增益：$K = K_1 \cdot K_2$。
+其中 $\lvert z_1 \rvert < \lvert p_1 \rvert$（超前）和 $\lvert p_2 \rvert < \lvert z_2 \rvert$（滞后）。合并增益：$K = K_1 \cdot K_2$。
 
 超前部分在穿越附近添加相位裕度（速度 + 阻尼）。滞后部分提升DC增益（精度）。它们在不同频率范围操作，几乎不互相干扰，因为滞后的极点和零点比 $\omega_{\max}$ 低一个十倍频程以上。
 
@@ -281,7 +283,7 @@ $$= 1.95 \cdot \frac{(s + 0.177)(s + 0.486)}{(s + 1.34)(s + 0.0486)}$$
 $G(s) = 1/(s(s+2))$ 的所有配置比较：
 
 | 配置 | PM | ω_cp [rad/s] | 斜坡误差 |
-|------|----|----|------|
+| --- | --- | --- | --- |
 | 裸对象 | 76.3° | 0.49 | 200% |
 | 仅超前 | ~126° | ~0.49 | ~200%（不变） |
 | 仅滞后 | ~76.3° | ~0.49 | ~28%（改善7倍） |
@@ -296,10 +298,10 @@ $G(s) = 1/(s(s+2))$ 的所有配置比较：
 统一形式使补偿器到PID的映射透明：
 
 | 补偿器 | 形式 | PID类比 | 关键区别 |
-|--------|------|---------|---------|
-| 超前：$K\frac{s+z}{s+p}$，$|z|<|p|$ | $K_p + K_d s$（PD） | 超前有一个极点滚降高频增益——PD无限放大噪声 |
-| 滞后：$K\frac{s+z}{s+p}$，$|p|<|z|$ | $K_p + K_i/s$（PI） | 滞后有有限DC增益——PI有无穷DC增益（极点恰好在 $s=0$） |
-| 超前-滞后级联 | $K_p + K_i/s + K_d s$（PID） | 超前-滞后用两个一阶环节；PID是一个二阶环节带一个原点极点 |
+| --- | --- | --- | --- |
+| 超前：$K\frac{s+z}{s+p}$，$\lvert z \rvert<\lvert p \rvert$ | $K_p + K_d s$（PD） | 超前有一个极点滚降高频增益——PD无限放大噪声 |  |
+| 滞后：$K\frac{s+z}{s+p}$，$\lvert p \rvert<\lvert z \rvert$ | $K_p + K_i/s$（PI） | 滞后有有限DC增益——PI有无穷DC增益（极点恰好在 $s=0$） |  |
+| 超前-滞后级联 | $K_p + K_i/s + K_d s$（PID） | 超前-滞后用两个一阶环节；PID是一个二阶环节带一个原点极点 |  |
 
 映射在极限下精确：让超前极点 $p \to \infty$ 就恢复PD；让滞后极点 $p \to 0$ 就恢复PI。实践中，超前极点有限（噪声滤波），滞后极点接近零（有限DC增益，更少相位代价）。
 
@@ -333,14 +335,14 @@ $$C(z) = K \cdot \frac{(2 + z T_s) + (z T_s - 2)z^{-1}}{(2 + p T_s) + (p T_s - 2
 ## 10. 与本项目的联系
 
 | 文档 | 联系 |
-|------|------|
+| --- | --- |
 | `pid_explorer.html` | PD ≈ 超前（添加相位，阻尼）。PI ≈ 滞后（提升低频增益）。PID ≈ 超前-滞后。PID探索器展示直接调增益时发生什么；补偿器方法给出从频域规格系统选择增益的方法 |
 | `lqr_explorer.html` | LQR在状态空间上优化二次代价——时域设计。补偿器设计优化相位裕度和带宽——频域设计。两者都产生稳定控制器；当规格以频域术语给出时（PM、带宽、扰动抑制 vs 频率），补偿器设计更直接 |
 | `servo_qp_mpc.html` | MPC显式处理约束（饱和、变化率限制）。补偿器设计完全不处理。如果你的被控对象会饱和，需要在补偿器之上加抗饱和、参考调节器或MPC |
 | `core_problems_controller_design.md` | 问题#2（惯性/延迟）和#4（模型不确定性）正是补偿器设计要解决的：被控对象动力学的相位滞后（超前补偿），以及对被控对象变化的鲁棒性（通过频域增益/相位裕度处理） |
 | `ip_controller.md` | IP控制器重塑设定值路径以权衡超调和上升时间。补偿器设计重塑*环路传递函数*。两者都是频域思维：IP修改闭环零点位置；补偿器设计修改开环形状 |
-| `lead_lag_explorer.html` | 交互式Bode图 + 阶跃响应；滑动 $z$、$p$ 和 $K$ 观察补偿器实时重塑环路。超前（$|z|<|p|$）和滞后（$|p|<|z|$）仅由滑块相对位置区分 |
-| `lead_lag_compensator_demo.py` | 完整设计工作流的Python实现：被控对象分析 → 超前设计（$|z|<|p|$）→ 滞后设计（$|p|<|z|$）→ 超前-滞后级联 → Tustin离散化 → 并排比较 |
+| `lead_lag_explorer.html` | 交互式Bode图 + 阶跃响应；滑动 $z$、$p$ 和 $K$ 观察补偿器实时重塑环路。超前（$\lvert z \rvert<\lvert p \rvert$）和滞后（$\lvert p \rvert<\lvert z \rvert$）仅由滑块相对位置区分 |
+| `lead_lag_compensator_demo.py` | 完整设计工作流的Python实现：被控对象分析 → 超前设计（$\lvert z \rvert<\lvert p \rvert$）→ 滞后设计（$\lvert p \rvert<\lvert z \rvert$）→ 超前-滞后级联 → Tustin离散化 → 并排比较 |
 
 ---
 

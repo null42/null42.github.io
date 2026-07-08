@@ -45,6 +45,22 @@ describe('knowledge search', () => {
     expect(makeSnippet(records[0], 'SVPWM')).toContain('<mark>SVPWM</mark>')
   })
 
+  it('cleans markdown math delimiters from search snippets', () => {
+    const records = buildSearchIndex([
+      article({
+        title: 'Math Note',
+        summary: 'Summary',
+        body: '# Math Note\n\n$$K_p=\\omega_c L_s$$\n\n电流环参数来自 $K_i=\\omega_c R_s$。'
+      })
+    ])
+
+    const snippet = makeSnippet(records[0], '电流环')
+
+    expect(snippet).toContain('<mark>电流环</mark>')
+    expect(snippet).not.toContain('$$')
+    expect(snippet).not.toContain('$K_i')
+  })
+
   it('returns heading anchors and match reasons for body matches', () => {
     const records = buildSearchIndex([
       article({

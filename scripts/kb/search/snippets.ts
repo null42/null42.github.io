@@ -2,13 +2,14 @@ import type { SearchRecord } from './build-index'
 
 export function makeSnippet(record: SearchRecord, query: string, radius = 64): string {
   const needle = query.trim()
-  const source = record.body || record.summary || record.title
-  if (!needle) return escapeHtml(record.summary || source.slice(0, radius * 2))
+  const source = cleanSnippetSource(record.body || record.summary || record.title)
+  const summary = cleanSnippetSource(record.summary)
+  if (!needle) return escapeHtml(summary || source.slice(0, radius * 2))
 
   const lowerSource = source.toLowerCase()
   const lowerNeedle = needle.toLowerCase()
   const index = lowerSource.indexOf(lowerNeedle)
-  if (index < 0) return escapeHtml(record.summary || source.slice(0, radius * 2))
+  if (index < 0) return escapeHtml(summary || source.slice(0, radius * 2))
 
   const start = Math.max(0, index - radius)
   const end = Math.min(source.length, index + needle.length + radius)
@@ -17,6 +18,18 @@ export function makeSnippet(record: SearchRecord, query: string, radius = 64): s
   const excerpt = source.slice(start, end)
 
   return `${prefix}${highlight(escapeHtml(excerpt), escapeHtml(needle))}${suffix}`
+}
+
+function cleanSnippetSource(value: string): string {
+  return value
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\$\$([\s\S]*?)\$\$/g, '$1')
+    .replace(/\\\[([\s\S]*?)\\\]/g, '$1')
+    .replace(/\\\(([\s\S]*?)\\\)/g, '$1')
+    .replace(/\$([^$\n]+)\$/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function highlight(html: string, needle: string): string {

@@ -126,8 +126,12 @@ $$\tau_s s^3 + s^2 + K_p s + K_i = 0$$
 
 由Routh判据，稳定条件为 $K_i < K_p / \tau_s$。即使满足稳定条件，II型系统的相位裕度也显著低于I型系统：
 
-- I型系统在穿越频率处的相位：$\phi = -90° - \arctan(\omega_c \tau_s)$
-- II型系统在穿越频率处的相位：$\phi = -180° - \arctan(\omega_c \tau_s)$
+- I型系统在穿越频率处的相位：
+
+  $$\phi = -90° - \arctan(\omega_c \tau_s)$$
+- II型系统在穿越频率处的相位：
+
+  $$\phi = -180° - \arctan(\omega_c \tau_s)$$
 
 **II型系统天然少了90°相位裕度**，这意味着更小的增益裕度、更大的超调、更差的鲁棒性。
 
@@ -158,8 +162,12 @@ $$G_{pos\_cl}(s) = \frac{K_p \cdot P(s)}{1 + K_p \cdot P(s)} = \frac{K_p}{s(\tau
 $$G_{pos\_cl}(s) = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}$$
 
 其中：
-- 自然频率：$\omega_n = \sqrt{K_p / \tau_s}$
-- 阻尼比：$\zeta = \frac{1}{2\sqrt{K_p \cdot \tau_s}}$
+- 自然频率：
+
+  $$\omega_n = \sqrt{K_p / \tau_s}$$
+- 阻尼比：
+
+  $$\zeta = \frac{1}{2\sqrt{K_p \cdot \tau_s}}$$
 
 **带宽分离法则**：为保证位置环有足够的相位裕度，要求位置环带宽 $\omega_{pos}$ 远小于速度环带宽 $\omega_{speed}$：
 
@@ -171,7 +179,9 @@ $$K_p \leq \frac{\omega_{speed}}{3}$$
 
 ### 3.6 跟踪误差分析
 
-**斜坡输入**（恒速运动）：$\theta^*(s) = v_{ref} / s^2$
+**斜坡输入**（恒速运动）：
+
+$$\theta^*(s) = v_{ref} / s^2$$
 
 $$e_{ss} = \lim_{s \to 0} s \cdot \frac{v_{ref}/s^2}{1 + K_p \cdot \frac{1}{s(\tau_s s + 1)}} = \frac{v_{ref}}{K_p}$$
 
@@ -181,7 +191,7 @@ $$e_{ss} = \lim_{s \to 0} s \cdot \frac{v_{ref}/s^2}{1 + K_p \cdot \frac{1}{s(\t
 
 跟踪误差幅值近似为：
 
-$$|e(\omega)| \approx \frac{A\omega}{K_p} \cdot \frac{1}{\sqrt{1 + (\omega/\omega_n)^2}}$$
+$$\lvert e(\omega) \rvert \approx \frac{A\omega}{K_p} \cdot \frac{1}{\sqrt{1 + (\omega/\omega_n)^2}}$$
 
 在低频段（$\omega \ll \omega_n$），误差近似为 $A\omega/K_p$；在高频段，误差进一步增大。
 
@@ -373,10 +383,10 @@ $$e_{limit} = \frac{314}{50} = 6.28 \text{ rad} \approx 360°$$
 ### 5.3 跟踪误差评估
 
 | 运动类型 | 跟踪误差 | 公式 |
-|---------|---------|------|
+| --- | --- | --- |
 | 阶跃定位 | 0（稳态） | $e_{ss} = 0$（I型系统） |
 | 恒速运动 | 常值 | $e_{ss} = v_{ref} / K_p$ |
-| 正弦运动 | 与频率相关 | $|e| \approx A\omega / K_p$ |
+| 正弦运动 | 与频率相关 | $\lvert e \rvert \approx A\omega / K_p$ |
 | 加速运动 | 线性增长 | $e(t) = a \cdot t / K_p$ |
 
 **CNC加工实例**：
@@ -395,7 +405,7 @@ Kp = 50 rad/s
 ### 5.4 常见调试问题与对策
 
 | 现象 | 可能原因 | 对策 |
-|------|---------|------|
+| --- | --- | --- |
 | 位置阶跃超调大 | Kp过大或速度环带宽不足 | 减小Kp或先优化速度环 |
 | 位置震荡 | 位置环带宽>速度环1/3 | 减小Kp |
 | 到位后微小震荡 | 编码器分辨率不足或机械间隙 | 提高分辨率或加死区 |
@@ -415,7 +425,7 @@ $$\Delta\theta_{min} = \frac{2\pi}{N_{ppr} \times 4}$$
 其中 $N_{ppr}$ 为编码器每转脉冲数，4倍频后的有效分辨率。
 
 | 编码器类型 | 分辨率 | 最小可分辨角度 | 适用场景 |
-|-----------|--------|--------------|---------|
+| --- | --- | --- | --- |
 | 2500线增量式 | 10000 counts/rev | 0.036° | 通用伺服 |
 | 17位绝对值 | 131072 counts/rev | 0.0027° | 高精度伺服 |
 | 23位绝对值 | 8388608 counts/rev | 0.000043° | 直驱/精密 |
@@ -458,7 +468,7 @@ $$R_J = \frac{J_{load}}{J_{motor}}$$
 ## 7.  交叉引用
 
 | 模块 | 关联说明 |
-|------|---------|
+| --- | --- |
 | [CT-14 三环级联PID](../control-theory/CT-14-Cascaded-PID-Control.md) | 位置环是三环级联的最外层，带宽分离法则的完整推导 |
 | [ALG-12 速度环与转矩观测器](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) | 速度环是位置环的直接内环，速度环带宽决定位置环Kp上限 |
 | [CE-06 级联控制](../controllers-evolution/CE-06-Cascaded-Control.md) | 级联控制的理论基础与历史演化 |

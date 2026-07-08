@@ -138,7 +138,7 @@ flowchart TB
 ### 三种MPC的类比
 
 | 类型 | 类比 | 核心特征 |
-|------|------|----------|
+| --- | --- | --- |
 | FCS-MPC | 下棋——每步从有限着法中选最优 | 候选集=8个开关状态，离散选择 |
 | MPC-CC | 油门——连续调节到最优开度 | 候选集=连续电压矢量，需调制器 |
 | MPC-TC | 方向盘——直接控制方向和速度 | 直接优化转矩+磁链，无需电流环 |
@@ -171,7 +171,7 @@ $$\mathbf{x}(k+1) = \mathbf{A}_d\mathbf{x}(k) + \mathbf{B}_d\mathbf{u}(k) + \mat
 
 在每个控制周期，MPC求解有限时域优化问题：
 
-$$\min_{\mathbf{u}(k),\ldots,\mathbf{u}(k+N-1)} J = \sum_{j=1}^{N}\left[\|\mathbf{x}(k+j)-\mathbf{x}_{ref}\|_{\mathbf{Q}}^2 + \|\Delta\mathbf{u}(k+j-1)\|_{\mathbf{R}}^2\right]$$
+$$\min_{\mathbf{u}(k),\ldots,\mathbf{u}(k+N-1)} J = \sum_{j=1}^{N}\left[\lVert\mathbf{x}(k+j)-\mathbf{x}_{ref}\lVert_{\mathbf{Q}}^2 + \lVert\Delta\mathbf{u}(k+j-1)\lVert_{\mathbf{R}}^2\right]$$
 
 约束条件：
 $$\mathbf{x}(k+j) \in \mathcal{X}, \quad \mathbf{u}(k+j) \in \mathcal{U}$$
@@ -192,11 +192,11 @@ MPC最独特的优势——**约束是优化问题的天然组成部分**，而�
 电机控制中的典型约束：
 
 | 约束类型 | 数学表达 | 物理含义 |
-|----------|----------|----------|
+| --- | --- | --- |
 | 电流限幅 | $\sqrt{i_d^2+i_q^2} \leq I_{max}$ | 保护逆变器/电机 |
 | 电压限幅 | $\sqrt{v_d^2+v_q^2} \leq V_{max}$ | SVPWM线性调制区 |
 | 开关频率 | $f_{sw} \leq f_{sw,max}$ | 限制开关损耗 |
-| $di/dt$ 限制 | $|i(k+1)-i(k)| \leq \Delta i_{max}$ | 限制电流变化率 |
+| $di/dt$ 限制 | $\lvert i(k+1)-i(k) \rvert \leq \Delta i_{max}$ | 限制电流变化率 |
 
 **PI的约束处理**：输出限幅→饱和→anti-windup→仍是事后补救，无法预判约束边界。
 
@@ -205,7 +205,7 @@ MPC最独特的优势——**约束是优化问题的天然组成部分**，而�
 ### 4.2 MPC与PI/ADRC的本质区别
 
 | 维度 | PI | ADRC | MPC |
-|------|-----|------|-----|
+| --- | --- | --- | --- |
 | 控制范式 | 反馈+校正 | 估计+补偿 | 预测+优化 |
 | 信息利用 | 当前误差 | 当前误差+扰动估计 | 未来预测轨迹 |
 | 约束处理 | 事后限幅 | 事后限幅 | 优化内嵌 |
@@ -246,7 +246,7 @@ $$\mathcal{U} = \{S_0, S_1, S_2, S_3, S_4, S_5, S_6, S_7\}$$
 
 FCS-MPC的流程：
 1. 测量当前电流 $i_d(k), i_q(k)$
-2. 对8个开关状态分别预测 $i_d(k+1|j), i_q(k+1|j)$
+2. 对8个开关状态分别预测 $i_d(k+1\lvert j), i_q(k+1 \rvertj)$
 3. 对8个预测结果分别计算代价函数 $g_j$
 4. 选择 $j^* = \arg\min_j g_j$
 5. 直接施加开关状态 $S_{j^*}$（无需PWM调制器）
@@ -255,22 +255,22 @@ FCS-MPC的流程：
 
 **基本电流跟踪代价函数**：
 
-$$g_j = \left[i_d^{ref} - i_d(k+1|j)\right]^2 + \left[i_q^{ref} - i_q(k+1|j)\right]^2$$
+$$g_j = \left[i_d^{ref} - i_d(k+1\lvert j)\right]^2 + \left[i_q^{ref} - i_q(k+1 \rvertj)\right]^2$$
 
 **加入开关频率惩罚**（减少开关损耗）：
 
-$$g_j = \lambda_i\left\{\left[i_d^{ref} - i_d(k+1|j)\right]^2 + \left[i_q^{ref} - i_q(k+1|j)\right]^2\right\} + \lambda_{sw}|S(k) - S_j|$$
+$$g_j = \lambda_i\left\{\left[i_d^{ref} - i_d(k+1\lvert j)\right]^2 + \left[i_q^{ref} - i_q(k+1 \rvertj)\right]^2\right\} + \lambda_{sw}\lvert S(k) - S_j \rvert$$
 
-其中 $|S(k)-S_j|$ 表示开关状态变化的相数（0~3），$\lambda_i$ 和 $\lambda_{sw}$ 为权重系数。
+其中 $\lvert S(k)-S_j \rvert$ 表示开关状态变化的相数（0~3），$\lambda_i$ 和 $\lambda_{sw}$ 为权重系数。
 
 **加入磁链幅值约束**（抑制弱磁区磁链偏差）：
 
-$$g_j = \lambda_i\left(\Delta i_d^2 + \Delta i_q^2\right) + \lambda_{sw}\Delta S + \lambda_\psi\left(|\psi_s^{ref}| - |\psi_s(k+1|j)|\right)^2$$
+$$g_j = \lambda_i\left(\Delta i_d^2 + \Delta i_q^2\right) + \lambda_{sw}\Delta S + \lambda_\psi\left(\lvert \psi_s^{ref} \rvert - \lvert \psi_s(k+1 \rvertj)|\right)^2$$
 
 **权重系数整定经验**：
 
 | 权重 | 作用 | 典型值 | 调大效果 |
-|------|------|--------|----------|
+| --- | --- | --- | --- |
 | $\lambda_i$ | 电流跟踪精度 | 1.0（基准） | 电流跟踪更好，开关频率升高 |
 | $\lambda_{sw}$ | 开关频率限制 | 0.01~0.5 | 开关频率降低，电流纹波增大 |
 | $\lambda_\psi$ | 磁链幅值约束 | 0~0.1 | 磁链更稳定，电流跟踪略差 |
@@ -287,7 +287,7 @@ $$g_j = \lambda_i\left(\Delta i_d^2 + \Delta i_q^2\right) + \lambda_{sw}\Delta S
 **解决方案**：
 
 | 方案 | 原理 | 优点 | 缺点 |
-|------|------|------|------|
+| --- | --- | --- | --- |
 | 权重惩罚 | 代价函数加 $\lambda_{sw}$ 项 | 简单 | 开关频率仍不固定 |
 | 滞环约束 | 开关频率超限时增大 $\lambda_{sw}$ | 频率可控 | 引入非线性 |
 | 调制MPC | 改用MPC-CC（见4.4节） | 固定开关频率 | 需要调制器 |
@@ -383,7 +383,7 @@ $$\mathbf{U}^* = \left(\mathbf{\Gamma}^T\mathbf{Q}\mathbf{\Gamma}+\mathbf{R}\rig
 **计算量分析**：
 
 | 预测步数 $N$ | 矩阵维度 | 乘法次数 | 100MHz DSP耗时 |
-|-------------|----------|----------|---------------|
+| --- | --- | --- | --- |
 | 1 | $2\times2$ | ~20 | <1μs |
 | 2 | $4\times4$ | ~200 | ~5μs |
 | 3 | $6\times6$ | ~800 | ~20μs |
@@ -394,7 +394,7 @@ $$\mathbf{U}^* = \left(\mathbf{\Gamma}^T\mathbf{Q}\mathbf{\Gamma}+\mathbf{R}\rig
 #### 4.4.4 MPC-CC vs PI电流环
 
 | 对比维度 | PI电流环 | MPC-CC（$N=1$） | MPC-CC（$N=2$） |
-|----------|----------|-----------------|-----------------|
+| --- | --- | --- | --- |
 | 带宽 | $\omega_c \approx f_s/10$ | $\omega_c \approx f_s/3$ | $\omega_c \approx f_s/2$ |
 | 抗扰动 | 依赖I项累积 | 一步预测补偿 | 两步预测补偿 |
 | 参数敏感性 | 零极点对消偏差→性能降级 | 模型偏差→预测不准→性能降级 | 同左，但多步可部分补偿 |
@@ -412,11 +412,11 @@ MPC-TC（Model Predictive Torque Control）直接控制转矩和定子磁链，�
 
 代价函数：
 
-$$g_j = \lambda_T\left(T_e^{ref} - T_e(k+1|j)\right)^2 + \lambda_\psi\left(|\psi_s^{ref}| - |\psi_s(k+1|j)|\right)^2 + \lambda_{sw}\Delta S_j$$
+$$g_j = \lambda_T\left(T_e^{ref} - T_e(k+1\lvert j)\right)^2 + \lambda_\psi\left( \rvert\psi_s^{ref}\lvert - \rvert\psi_s(k+1\lvert j) \rvert\right)^2 + \lambda_{sw}\Delta S_j$$
 
 转矩预测：
 
-$$T_e(k+1|j) = \frac{3}{2}p_n\left[\psi_f i_q(k+1|j) + (L_d-L_q)i_d(k+1|j)i_q(k+1|j)\right]$$
+$$T_e(k+1\lvert j) = \frac{3}{2}p_n\left[\psi_f i_q(k+1 \rvertj) + (L_d-L_q)i_d(k+1\lvert j)i_q(k+1 \rvertj)\right]$$
 
 磁链预测：
 
@@ -425,7 +425,7 @@ $$\psi_s(k+1|j) = \psi_s(k) + T_s\mathbf{v}_j - R_s T_s \mathbf{i}(k)$$
 #### 4.5.2 MPC-TC vs DTC
 
 | 对比维度 | DTC | MPC-TC |
-|----------|-----|--------|
+| --- | --- | --- |
 | 矢量选择 | 滞环比较器+开关表 | 代价函数全局优化 |
 | 稳态转矩纹波 | 大（±5~15%） | 小（±1~3%） |
 | 开关频率 | 不固定 | 通过 $\lambda_{sw}$ 可控 |
@@ -467,7 +467,7 @@ $$\hat{\mathbf{x}}(k+1) = \mathbf{A}_d\mathbf{x}(k) + \mathbf{B}_d\mathbf{u}(k-1
 **参数偏差对MPC-CC的影响**：
 
 | 参数 | 变化原因 | 偏差+20%时的影响 |
-|------|----------|-----------------|
+| --- | --- | --- |
 | $R_s$ | 温度（+50%从冷态到热态） | 电流稳态偏差~5%，动态略差 |
 | $L_d$ | 磁饱和（弱磁区-30%） | $i_d$ 预测偏差→弱磁精度下降 |
 | $L_q$ | 磁饱和（负载增大-20%） | $i_q$ 预测偏差→转矩精度下降 |
@@ -480,7 +480,7 @@ $$\hat{\mathbf{x}}(k+1) = \mathbf{A}_d\mathbf{x}(k) + \mathbf{B}_d\mathbf{u}(k-1
 **缓解策略**：
 
 | 策略 | 原理 | 实现复杂度 |
-|------|------|-----------|
+| --- | --- | --- |
 | 在线参数辨识 | 实时辨识 $R_s$、$L_s$ 并更新模型 | 中 |
 | 扰动观测器 | ESO估计模型失配引起的等效扰动并补偿 | 中 |
 | 鲁棒MPC | 在优化中考虑模型不确定性 | 高 |
@@ -510,7 +510,7 @@ $$g_j = \frac{\Delta i_d^2 + \Delta i_q^2}{I_{rated}^2} + \lambda_{sw}\frac{\Del
 ## 6.  MPC vs PI vs ADRC 对比表
 
 | 对比维度 | PI | ADRC/LADRC | FCS-MPC | MPC-CC | MPC-TC |
-|----------|-----|-----------|---------|--------|--------|
+| --- | --- | --- | --- | --- | --- |
 | **控制范式** | 反馈+校正 | 估计+补偿 | 预测+优化 | 预测+优化 | 预测+优化 |
 | **电流环带宽** | $f_s/10$ | $f_s/5$ | $f_s/3$ | $f_s/2$ | N/A |
 | **转矩动态** | 中 | 中快 | 极快 | 快 | 极快 |
@@ -587,7 +587,7 @@ FCS-MPC: λi=1.0, λsw=0.05, 采样10kHz
 **测试结果**：
 
 | 指标 | PI | FCS-MPC |
-|------|-----|---------|
+| --- | --- | --- |
 | 上升时间 | 1.2ms | 0.3ms |
 | 超调 | 0%（一阶响应） | 5%（1拍延迟引起） |
 | 稳态纹波 | ±0.2A | ±0.5A |
@@ -672,7 +672,7 @@ FCS-MPC采样频率20kHz（Ts=50μs），ADC+计算延迟Td=40μs
 **思路**：用神经网络离线学习MPC的最优控制策略，在线推理替代实时优化。
 
 | 方法 | 原理 | 优势 | 挑战 |
-|------|------|------|------|
+| --- | --- | --- | --- |
 | 神经网络拟合 | 训练NN映射状态→控制量 | 推理速度快（μs级） | 泛化性、安全性验证 |
 | 强化学习MPC | RL学习代价函数权重 | 自适应整定 | 训练不稳定、安全约束 |
 | PINN+MPC | 物理信息神经网络替代模型 | 鲁棒性更好 | 训练数据需求 |

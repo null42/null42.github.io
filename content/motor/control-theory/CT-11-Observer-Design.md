@@ -41,7 +41,7 @@ flowchart TD
 
 **三种主流观测器对比：**
 | 观测器 | 原理 | 优势 | 劣势 | 电机应用 |
-|--------|------|------|------|---------|
+| --- | --- | --- | --- | --- |
 | Luenberger | 极点配置-误差反馈 | 简单、确定性 | 需要线性模型 | 中高速反电动势法 |
 | SMO | 滑模-开关切换 | 鲁棒性强、参数不敏感 | 抖振 | 宽速域无传感器 |
 | EKF | 概率-预测校正 | 处理噪声最优 | 计算量大、需调Q/R | 全速域最优估计 |
@@ -350,7 +350,7 @@ void ekf_pmsm_update(float x[4], float P[16], float y[2]) {
 #### 4.4.4 EKF调参（Q和R矩阵）
 
 | 参数 | 含义 | 增大效果 | 电机典型值 |
-|------|------|---------|-----------|
+| --- | --- | --- | --- |
 | Q₁₁ | id模型噪声 | 更相信测量 | ~0.01 |
 | Q₃₃ | ωm模型噪声 | 转速估计更快响应 | ~10 |
 | Q₄₄ | θe模型噪声 | 角度更灵活 | ~0.1 |
@@ -487,13 +487,13 @@ EKF线性化引入截断误差（忽略高阶项）。UKF通过sigma点采样传
 ## 关键公式速查表
 
 | 名称 | 公式 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | Luenberger观测器 | $\dot{\hat{\mathbf{x}}} = \mathbf{A}\hat{\mathbf{x}} + \mathbf{B}\mathbf{u} + \mathbf{L}(\mathbf{y} - \mathbf{C}\hat{\mathbf{x}})$ | 极点配置设计L |
 | 误差动力学 | $\dot{\mathbf{e}} = (\mathbf{A} - \mathbf{L}\mathbf{C})\mathbf{e}$ | L使A-LC稳定 |
 | SMO（电流） | $\dot{\hat{i}} = ... -\frac{k}{L}\text{sign}(\hat{i}-i)$ | 滑模切换项 |
-| EKF预测 | $\hat{\mathbf{x}}_{k|k-1} = \mathbf{f}(\hat{\mathbf{x}}_{k-1}, \mathbf{u}_{k-1})$ | 非线性预测 |
-| EKF协方差预测 | $\mathbf{P}_{k|k-1} = \mathbf{F}_k\mathbf{P}_{k-1}\mathbf{F}_k^T + \mathbf{Q}$ | Jacobian F |
-| Kalman增益 | $\mathbf{K}_k = \mathbf{P}_{k|k-1}\mathbf{H}^T(\mathbf{H}\mathbf{P}_{k|k-1}\mathbf{H}^T+\mathbf{R})^{-1}$ | 最优加权 |
+| EKF预测 | $\hat{\mathbf{x}}_{k | k-1} = \mathbf{f}(\hat{\mathbf{x}}_{k-1}, \mathbf{u}_{k-1})$；非线性预测 |
+| EKF协方差预测 | $\mathbf{P}_{k | k-1} = \mathbf{F}_k\mathbf{P}_{k-1}\mathbf{F}_k^T + \mathbf{Q}$；Jacobian F |
+| Kalman增益 | $\mathbf{K}_k = \mathbf{P}_{k\lvert k-1}\mathbf{H}^T(\mathbf{H}\mathbf{P}_{k \rvertk-1}\mathbf{H}^T+\mathbf{R})^{-1}$ | 最优加权 |
 | 角度提取(反电动势) | $\hat{\theta}_e = \arctan2(-\hat{e}_\alpha, \hat{e}_\beta)$ | 从SMO/Luenberger |
 
 >  检验你的理解：[CT-11 检验题目](./CT-11-assessment.md)

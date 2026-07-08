@@ -75,7 +75,7 @@ flowchart TD
 仿真使用**双时间尺度**架构——这是理解仿真代码的关键：
 
 | 概念 | 步长 | 含义 |
-|------|------|------|
+| --- | --- | --- |
 | **仿真步长 hs** | 很小（通常 ~10⁻⁶ s） | 电机模型的数值积分步长，需满足 RK4 稳定条件 |
 | **控制周期 CL_TS** | 较大（通常 ~10⁻⁴ s） | 控制器（FOC + 速度环）的执行周期，对应实际 DSP PWM 周期 |
 | **降频比 dfe_counter** | = CL_TS / hs | 控制器每 dfe_counter 个仿真步才执行一次 |
@@ -114,7 +114,7 @@ flowchart LR
 #### 2.1.1 全局变量与数据结构
 
 | C 代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|----------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `struct MachineSimulated ACM;` | 文件顶部，全局声明 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **全局电机仿真对象**。`ACM`（AC Machine）是整个仿真中最重要的全局变量。它包含 5 阶状态变量 `x[0..4]`（机械角度 θm、机械转速 ωm、有功磁链 KA、d 轴电流 id、q 轴电流 iq）、状态导数 `x_dot[0..4]`、输入（uAB、TLoad）、输出（varOmega、theta_d、iAB、iDQ、Tem、KA）等 30+ 个成员变量。所有仿真代码都通过这个结构体与电机模型交互 |
 | `struct ControllerForExperiment *CTRL;` | 文件顶部 | [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC | **控制器输入/输出全局指针**。指向控制器结构体，包含电机参数（motor）、传感器输入（i: iAB/theta_d/varOmega/Vdc）、状态（s: cosT/sinT/PID 指针/观测器状态）、输出（o: cmd_uAB/cmd_uDQ/cmd_iAB）、逆变器（inv）、捕获外设（cap）和全局标志（g） |
 | `#if PC_SIMULATION` 条件编译块 | 散布在文件中 | 仿真与实验共用 | **条件编译标识**。仿真专用代码放在 `#if PC_SIMULATION ... #endif` 块内，DSP 实验代码放在 `#else ... #endif` 块内。通过 `ACMConfig.h` 中的 `PC_SIMULATION` 宏（模拟为 1，实验为 0）控制编译路径 |
@@ -122,7 +122,7 @@ flowchart LR
 #### 2.1.2 仿真主循环
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `main()` | 大致第 5-43 行 | [CT-01](../control-theory/CT-01-Open-Loop-Closed-Loop.md) 开闭环结构、[SYS-04](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **仿真主循环入口**。结构：① 初始化（`init_Machine()`, `init_debug()`, `init_CTRL()`, `init_experiment()`）→ ② 写文件头（`write_header_to_file()`）→ ③ 主循环 `for k=0..NUMBER_OF_STEPS-1`：调用 `_user_time_varying_parameters()` → `machine_simulation()` → `measurement()` → `write_data_to_file(k)` → `main_switch(mode_select)` → ④ 写文件尾。每个 `k` 代表一个 hs 步长。控制器通过 `dfe_counter` 计数器降频执行 |
 | `dfe_counter` 变量 | main() 循环内 | 离散控制理论 | **降频计数器**。每步 `dfe_counter++`，当 `dfe_counter % (CL_TS/hs) == 0` 时执行控制器代码。模拟 DSP 的 PWM ISR 周期中断：电机模型用小步长积分，控制器用大步长执行 |
 | `static int k` 仿真步计数器 | main() 第一行 | 仿真基础设施 | **仿真步索引**。从 0 到 `NUMBER_OF_STEPS-1`。`k` 的值用于 `write_data_to_file(k)` 写入数据行索引，以及判断仿真是否结束 |
@@ -130,7 +130,7 @@ flowchart LR
 #### 2.1.3 电机初始化
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `init_Machine()` | 大致第 47-106 行 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机参数加载与状态初始化**。从 `d_sim.init.*` 结构体（由 `super_config.c` 初始化）加载电机参数到 `ACM` 结构体：① 电气参数：定子电阻 R、d 轴电感 Ld、q 轴电感 Lq、永磁体磁链 KE、有效转子电阻 Rreq（PMSM 为 0，IM 为 >0）；② 机械参数：转动惯量 Js、极对数 npp、摩擦系数 Bm；③ 将全部 5 个状态变量 `x[0..4]` 初始化为零（电机从静止状态开始）；④ 计算派生参数如 KL[0..3]（dq 轴电感矩阵元素） |
 | `ACM.R` / `ACM.Ld` / `ACM.Lq` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机参数 | **定子电阻与交直轴电感**。R 影响电流环稳态精度和低速性能（电阻压降在低速时占主导），Ld 和 Lq 决定电流环的动态响应速度。凸极比 (Lq-Ld)/Ld 影响磁阻转矩大小和 MTPA 轨迹形状。仿真中这些参数都来自 `motor_library.json` 的电机参数数据库 |
 | `ACM.KE` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 反电势系数 | **永磁体磁链（反电势系数）**。单位 V·s/rad（或等效于 N·m/A = Wb）。KE 决定了给定转速下的反电动势幅值（`BackEMF = KE × ωe`），也决定了电流到转矩的转换系数 |
@@ -141,7 +141,7 @@ flowchart LR
 #### 2.1.4 电机状态方程（DYNAMICS_MACHINE）
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `DYNAMICS_MACHINE(t, x, fx)` | 大致第 108-152 行 | [HW-01](../hardware/HW-01-Motor-Basics.md) PMSM 状态方程 | **PMSM dq 轴非线性状态方程 C 实现**。这是整个仿真物理核心——定义了电机的 5 个微分方程，每次 RK4 计算斜率时调用此函数。输入：当前时间 t、5 维状态向量 x[0..4]、控制器施加的 dq 轴电压 uDQ[0..1] 和负载转矩 TLoad。输出：5 维状态导数 fx[0..4]。5 个微分方程如下： |
 | `fx[0] = x[1] + ...` | 第 1 个微分方程 | HW-01 位置方程 | **机械角位置微分方程**：`dθm/dt = ωm + ω_slip / npp`。对于 PMSM 滑差 ω_slip 为零，即 `dθm/dt = ωm`（角位置的变化率等于角速度）；对于感应电机，加上滑差项以正确追踪转子位置 |
 | `fx[1] = (Tem - TLoad - Bm*x[1]) / Js` | 第 2 个微分方程 | HW-01 转速方程 | **机械转速微分方程（运动方程）**：`dωm/dt = (Tem - TLoad - Bm×ωm) / Js`。输入：电磁转矩 Tem、负载转矩 TLoad、摩擦转矩 Bm×ωm。输出：角加速度。这是牛顿第二定律在旋转运动中的体现——净转矩除以转动惯量等于角加速度 |
@@ -155,7 +155,7 @@ flowchart LR
 #### 2.1.5 四阶龙格库塔积分器（RK4）
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `RK4(t, x, hs)` | 大致第 154-187 行 | 数值积分方法、[SYS-04](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **四阶 Runge-Kutta 法求解常微分方程组**。这是将连续电机状态方程离散化的核心数值算法。输入：当前时间 t、状态向量 x[0..4]、仿真步长 hs。输出：更新后的状态向量 x[0..4]。算法分 4 步： |
 | `k1 = hs * DYNAMICS_MACHINE(t_n, x_n)` | RK4 第 1 阶段 | 数值积分 | **第 1 斜率**：从当前点 (t_n, x_n) 出发，用当前状态的导数计算第一个试探斜率。这是欧拉法（一阶 RK）的斜率 |
 | `k2 = hs * DYNAMICS_MACHINE(t_n+hs/2, x_n+k1/2)` | RK4 第 2 阶段 | 数值积分 | **第 2 斜率**：用 k1 推进半步，在新点计算第二个斜率。这个"中点试探"显著提高了精度 |
@@ -166,7 +166,7 @@ flowchart LR
 #### 2.1.6 机器仿真步（machine_simulation）
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `machine_simulation()` | 大致第 189-248 行 | 电机仿真步 | **单步电机仿真**。每步执行以下操作：① `inverter_model()`：将控制器输出的电压指令转换为实际施加到电机的 αβ 电压（考虑逆变器非线性）；② `Park 变换`：将 αβ 电压变换为 dq 电压，作为状态方程输入；③ `RK4()` 调用：数值积分推进状态；④ 更新电机接口变量：从 5 个状态变量 x[0..4] 计算出 `ACM.varOmega`（转速）、`ACM.theta_d`（电角度）、`ACM.iAB`（αβ 电流，通过反 Park 变换得到）、`ACM.iDQ`（dq 电流）、`ACM.Tem`（电磁转矩）、`ACM.KA`（磁链幅值）、`ACM.uDQ`（dq 电压）、`ACM.BackEMF[0..1]`（反电动势 dq 分量） |
 | 电气角速度 `ωe = npp * ωm` | machine_simulation() 中 | HW-01 电机基础 | **机械转速→电气角速度转换**。`ωe = npp × ωm`。用于 Park 变换所需的电角度积分，以及反电动势计算 `BackEMF = ωe × KA` |
 | 反 Park 变换 `iAB = Park⁻¹(iDQ, θe)` | machine_simulation() 中 | ALG-01 FOC 理论 | **dq→αβ 反变换**。将 dq 轴电流变换回 αβ 轴电流，用于 Clarke 逆变换（如果需要三相电流）或直接用于输出。这是控制器中 InvPark 变换的逆过程——控制器用反 Park 将电压从 dq 变回 αβ，仿真的电机模型则用正 Park 将电压从 αβ 变到 dq |
@@ -174,7 +174,7 @@ flowchart LR
 #### 2.1.7 逆变器模型
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `inverter_model()` | 大致第 316-456 行 | [ALG-04](../algorithm/ALG-04-Deadtime-Compensation.md) 死区补偿、[HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md) 功率器件与门极驱动、[EE-08](../electronics-basics/EE-08-Rectifier-Inverter.md) 逆变器原理 | **逆变器非线性建模**。控制器的电压指令是理想值，但实际逆变器因死区时间、管压降、开关延迟等因素存在非线性。此函数根据 `__INVERTER_NONLINEARITY` 宏选择不同模型，模拟这些非线性效应 |
 | `__INVERTER_NONLINEARITY = 0` | 宏定义在 `ACMSim.h` | 理想逆变器 | **Mode 0：理想逆变器**。`u_out = u_cmd`（输出电压等于指令电压）。仿真默认值，适合验证控制器算法本身的正确性，不考虑逆变器非理想效应 |
 | `__INVERTER_NONLINEARITY = 1` | 宏定义在 `ACMSim.h` | Sul1996 数学模型 | **Mode 1：Sul1996 数学模型**。基于死区时间 Td、管压降 Vce、直流母线电压 Vdc 的解析模型：`ΔV = Td/Ts × Vdc × sign(i) + Vce × sign(i)`。误差电压的幅值固定，符号随电流方向翻转，导致零电流附近出现电压畸变（"零电流钳位"效应）。这是最经典也最常用的逆变器非线性模型 |
@@ -185,7 +185,7 @@ flowchart LR
 #### 2.1.8 传感器建模
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
-|--------------|----------|-------------|---------|
+| --- | --- | --- | --- |
 | `measurement()` | 大致第 250-290 行 | [ALG-02](../algorithm/ALG-02-Current-Sampling-Timing.md) 电流采样时序、[HW-02](../hardware/HW-02-Current-Sensing.md) 电流采样电路 | **模拟 DSP 的 ADC 采样过程**。将电机实际物理量"拷贝"到控制器的输入结构体中，模拟传感器采集过程。核心操作：① `(*CTRL).i->iAB[0] = ACM.iAB[0] + CURRENT_OFFSET_A`：α 轴电流加偏移误差；② `(*CTRL).i->iAB[1] = ACM.iAB[1] + CURRENT_OFFSET_B`：β 轴电流加偏移误差；③ `(*CTRL).i->varOmega = ACM.varOmega`：转速赋值；④ `(*CTRL).i->theta_d = ACM.theta_d`：电角度赋值。偏移误差可以模拟 ADC 零漂/运放失调电压的影响 |
 | `CURRENT_OFFSET_A` / `CURRENT_OFFSET_B` | measurement() 内 | ADV-HW-01 PWM 与电流采样 | **电流采样偏移量**。模拟 ADC 的零偏误差（来自运放失调电压、ADC 参考电压误差等）。非零的偏移量会导致电流环出现基频波动（在 dq 坐标系中表现为电气频率的纹波）。设置非零值可以研究偏移对控制系统的影响，这对于无传感器控制（依赖于电流信息估计位置）尤为重要 |
 | `ENABLE_ENCODER_NOISE` | measurement() 条件编译 | HW-03 位置传感器 | **编码器噪声模拟开关**。当启用时，给角度和转速信号叠加随机噪声，模拟编码器量化误差或电磁干扰。用于评估观测器和控制系统对测量噪声的鲁棒性 |
@@ -199,20 +199,20 @@ flowchart LR
 #### 2.2.1 FOC 核心链路
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `_onlyFOC(theta_d_elec, iAB, varOmega)` | [ALG-01](../algorithm/ALG-01-FOC-Theory.md) FOC 理论、[ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) PI 电流调节器 | **FOC 核心链路（有传感器版本）**。这是整个仿真中最重要的控制函数——完整实现了从电流采样到 PWM 电压指令输出的全链路。执行顺序（这就是 FOC 的标准计算流程）： |
-| ① `Clarke 变换`：iα,iβ ← iA,iB,iC | FOC 链路第 1 步 | ALG-01 Clarke 变换 | **Clarke 变换（三相→两相静止）**。将三相电流 ia、ib、ic 变换为 αβ 轴电流：`iα = ia`（恒幅值变换下的简化），`iβ = (ia + 2×ib) / √3`。恒幅值变换保持电流幅值不变。注意：仿真中用两相电流计算（iA、iB），隐式假设 `ic = -ia - ib`（无零序分量） |
-| ② `Park 变换`：id,iq ← iα,iβ, θe | FOC 链路第 2 步 | ALG-01 Park 变换 | **Park 变换（静止→旋转坐标系）**。将 αβ 轴电流旋转到 dq 旋转坐标系：`id = iα×cos(θe) + iβ×sin(θe)`，`iq = -iα×sin(θe) + iβ×cos(θe)`。使用电角度 θe。结果：id 对应励磁分量，iq 对应转矩分量，在稳态时两者都为直流量，便于 PI 控制 |
-| ③ `tustin_PI()` 或 `incremental_PI()`：id 电流 PI 调节 | FOC 链路第 3 步 | CT-05 PID 整定与实现 | **D 轴电流 PI 调节**。iq 电流 PI 调节同步进行。PI 控制器计算使 id/iq 跟踪指令值所需的 dq 轴电压。参见 2.2.3 节 PI 实现详解 |
-| ④ `dq 轴解耦前馈`（可选） | FOC 链路第 4 步 | [ADV-ALG-07](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) 前馈解耦 | **解耦前馈补偿**。在 PI 输出的基础上叠加解耦项：`ud_final = ud_pi_output - ωe×Lq×iq`，`uq_final = uq_pi_output + ωe×(Ld×id + KA)`。目的是抵消 dq 轴之间的交叉耦合（反电动势项），使 PI 只需处理误差信号本身。解耦效果在高速时尤为明显——不解耦时高速下 id 和 iq 稳态误差增大。通过 `bool_apply_decoupling_voltages_to_current_regulation` 控制是否启用 |
-| ⑤ 电压限幅 (`LIMIT_DC_BUS_UTILIZATION`) | FOC 链路第 5 步 | ALG-10 过调制 | **dq 轴电压限幅**。将 PI 输出限幅在 `Vdc × LIMIT_DC_BUS_UTILIZATION / √3` 内（对六拍运行而言理论最大值 = Vdc/√3 ≈ 0.577×Vdc；SVPWM 可达 Vdc/√3 = 0.577×Vdc；过调制可进一步提高到 0.637×Vdc）。限幅保证了电压在逆变器可实现范围内，防止积分饱和 |
-| ⑥ `反 Park 变换 (InvPark)`：uα,uβ ← ud,uq, θe | FOC 链路第 6 步 | ALG-01 反 Park 变换 | **反 Park 变换（旋转→静止坐标系）**。将 dq 轴电压变换回 αβ 轴电压：`uα = ud×cos(θe) - uq×sin(θe)`，`uβ = ud×sin(θe) + uq×cos(θe)`。这是控制器输出的 αβ 轴电压指令，经逆变器施加到电机 |
-| `(*CTRL).o->cmd_uAB[0..1] = uα, uβ` | FOC 链路最后 | 输出 | **将 αβ 电压指令写入控制器输出结构体**。这是控制器最终输出。在真实 DSP 实验中，这些电压值用于 SVPWM 计算和 PWM 占空比更新；在仿真中，通过 `inverter_model()` 转换为实际电机电压 |
+| ① `Clarke 变换`：iα,iβ ← iA,iB,iC | FOC 链路第 1 步 | ALG-01 Clarke 变换；**Clarke 变换（三相→两相静止）**。将三相电流 ia、ib、ic 变换为 αβ 轴电流：`iα = ia`（恒幅值变换下的简化），`iβ = (ia + 2×ib) / √3`。恒幅值变换保持电流幅值不变。注意：仿真中用两相电流计算（iA、iB），隐式假设 `ic = -ia - ib`（无零序分量） |
+| ② `Park 变换`：id,iq ← iα,iβ, θe | FOC 链路第 2 步 | ALG-01 Park 变换；**Park 变换（静止→旋转坐标系）**。将 αβ 轴电流旋转到 dq 旋转坐标系：`id = iα×cos(θe) + iβ×sin(θe)`，`iq = -iα×sin(θe) + iβ×cos(θe)`。使用电角度 θe。结果：id 对应励磁分量，iq 对应转矩分量，在稳态时两者都为直流量，便于 PI 控制 |
+| ③ `tustin_PI()` 或 `incremental_PI()`：id 电流 PI 调节 | FOC 链路第 3 步 | CT-05 PID 整定与实现；**D 轴电流 PI 调节**。iq 电流 PI 调节同步进行。PI 控制器计算使 id/iq 跟踪指令值所需的 dq 轴电压。参见 2.2.3 节 PI 实现详解 |
+| ④ `dq 轴解耦前馈`（可选） | FOC 链路第 4 步 | [ADV-ALG-07](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) 前馈解耦；**解耦前馈补偿**。在 PI 输出的基础上叠加解耦项：`ud_final = ud_pi_output - ωe×Lq×iq`，`uq_final = uq_pi_output + ωe×(Ld×id + KA)`。目的是抵消 dq 轴之间的交叉耦合（反电动势项），使 PI 只需处理误差信号本身。解耦效果在高速时尤为明显——不解耦时高速下 id 和 iq 稳态误差增大。通过 `bool_apply_decoupling_voltages_to_current_regulation` 控制是否启用 |
+| ⑤ 电压限幅 (`LIMIT_DC_BUS_UTILIZATION`) | FOC 链路第 5 步 | ALG-10 过调制；**dq 轴电压限幅**。将 PI 输出限幅在 `Vdc × LIMIT_DC_BUS_UTILIZATION / √3` 内（对六拍运行而言理论最大值 = Vdc/√3 ≈ 0.577×Vdc；SVPWM 可达 Vdc/√3 = 0.577×Vdc；过调制可进一步提高到 0.637×Vdc）。限幅保证了电压在逆变器可实现范围内，防止积分饱和 |
+| ⑥ `反 Park 变换 (InvPark)`：uα,uβ ← ud,uq, θe | FOC 链路第 6 步 | ALG-01 反 Park 变换；**反 Park 变换（旋转→静止坐标系）**。将 dq 轴电压变换回 αβ 轴电压：`uα = ud×cos(θe) - uq×sin(θe)`，`uβ = ud×sin(θe) + uq×cos(θe)`。这是控制器输出的 αβ 轴电压指令，经逆变器施加到电机 |
+| `(*CTRL).o->cmd_uAB[0..1] = uα, uβ` | FOC 链路最后 | 输出；**将 αβ 电压指令写入控制器输出结构体**。这是控制器最终输出。在真实 DSP 实验中，这些电压值用于 SVPWM 计算和 PWM 占空比更新；在仿真中，通过 `inverter_model()` 转换为实际电机电压 |
 
 #### 2.2.2 速度环控制器
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `_velocityController(cmd_varOmega, varOmega)` | [CT-14](../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID、[ALG-12](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) 速度环与转矩观测器 | **速度环降频执行**。速度环以远低于电流环的频率执行（典型降频比 VL_EXE_PER_CL_EXE = 1~10）。函数内部使用计数器 `the_vc_count`，当其达到 `VL_EXE_PER_CL_EXE` 时执行一次速度 PI 计算并复位计数器。支持多种 PI 实现：普通 PI、Bezier 自适应 PI（根据误差动态调整增益）、WB 自定义速度环（支持扫频和 HitWall 分析） |
 | `FOC_with_velocity_control(theta_d_elec, varOmega, cmd_varOmega, cmd_iDQ, iAB)` | [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[CT-14](../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID | **速度环 + 电流环级联控制**。完整的三环（位置/速度/电流）中使用了速度环外环+电流环内环。执行流程：① 设置 d 轴电流指令 `cmd_iDQ[0] = cmd_iD`（通常为 0，MTPA 下为负值）；② 调用 `_velocityController(cmd_varOmega, varOmega)` 得到 q 轴电流指令 `cmd_iDQ[1]`；③ 调用 `_onlyFOC(theta_d_elec, iAB, varOmega)` 执行 FOC 电流环。速度环输出限幅值 = 电机额定电流或最大允许电流。如果速度命令阶跃过大，速度环输出饱和，iq 指令被限幅在最大值，此时电流环以最大电流加速，直到速度跟踪上后 iq 退出饱和 |
 | `VELOCITY_LOOP_DOWN_SAMPLING_RATIO` (VL_EXE_PER_CL_EXE) | CT-14 级联 PID | **速度环降频比**。速度环每 VL_EXE_PER_CL_EXE 个电流环周期执行一次。典型值：1（与电流环同频）到 10（降频 10 倍）。降频的理由：速度环带宽远低于电流环（通常为 1/10~1/5），无需每个电流周期都执行。增大降频比降低 CPU 负载但可能导致速度环控制品质下降 |
@@ -221,7 +221,7 @@ flowchart LR
 #### 2.2.3 PI 控制器实现
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `tustin_PI(r)` | [CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **双线性变换（Tustin 方法）离散化 PI 控制器**。Tustin 变换（梯形积分法）将连续域 s 映射到离散域 z：`s ≈ (2/Ts) × (z-1)/(z+1)`。得到的离散 PI 差分方程为：`u(k) = u(k-1) + Kp×(e(k)-e(k-1)) + (Ki×Ts/2)×(e(k)+e(k-1))`。核心特性：**动态抗积分饱和（Dynamic Clamping）**——I_Term 被限幅在 `OutLimit - P_Term`（而非固定限幅），确保输出始终在合法范围内。输出 = P_Term + I_Term。相比增量式 PI，Tustin PI 对积分项有更平滑的处理 |
 | `incremental_PI(r)` | [CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **增量式 PI**：`Out = OutPrev + Kp×(Err-ErrPrev) + Ki×Err`。输出的是"变化量"，当前输出 = 上次输出 + 增量。优点：① 天然抗积分饱和（只需限幅最终输出即可，无需单独的积分限幅逻辑）；② 输出平滑过渡（增量式不易出现大的跳变）；③ 无积分存储（不需要保存积分累加值）；④ 适合嵌入式定点运算（不需要大的积分值范围）。缺点：① 需要保存上一步状态（OutPrev 和 ErrPrev）；② 从零初始状态下首次响应比位置式 PI 慢一个周期 |
 | `PI_MACRO(v)` (TI 官方) | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **TI C2000 系列 DSP 官方增量式 PI 宏**。执行流程：① 比例项 `up = Kp × (Ref - Fbk)`；② 积分项 `ui = ui + Ki × up`（注意 TI 的实现中用 Ki 乘的是比例项 up 而非误差 e——这是 TI 的独特实现）；③ 条件积分：仅当输出未达到饱和极限时才更新积分项（抗积分饱和）；④ 输出 `Out = up + ui`；⑤ 限幅到 `[Umin, Umax]`。条件积分（Anti-windup via conditional integration）是工业级 PI 实现的关键特性 |
@@ -238,7 +238,7 @@ Ki_q = Lq × BW_current × (R / Lq) × Ts  = Kp_q × (R/Lq) × Ts
 ```
 
 | 参数 | 符号 | 物理含义 |
-|------|------|----------|
+| --- | --- | --- |
 | BW_current | `2π × CLBW_HZ` | 电流环目标带宽（闭环带宽，rad/s） |
 | Ts | `CL_TS` | 电流环控制周期（采样时间） |
 | Ld/Lq | 电机参数 | d/q 轴电感 |
@@ -259,7 +259,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 #### 2.2.4 参数自整定（Commissioning）
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `StepByStepCommissioning_NEW_WB()` | [ALG-13](../algorithm/ALG-13-Protection-Optimization.md) 参数自整定与保护优化 | **分步参数辨识状态机**。整个辨识流程由 `bool_comm_status` 驱动的状态机控制，按顺序执行 0→1→2→3→4→5→6： |
 | `bool_comm_status = 0`：初始化 | 辨识初始化 | **初始化阶段**：设置初始电压/电流激励参数、初始化 PI 控制器为零输出、建立基本的角度和电流测量通路。确保电机处于安全锁定状态 |
 | `bool_comm_status = 1`：`COMM_resistanceId(id_fb, iq_fb)` | 电阻辨识 | **定子电阻辨识（I-V 法）**：对 d 轴或 β 轴施加阶梯变化的电流指令（如 0→0.5A→1.0A→1.5A→2.0A），在每个阶梯采集稳态电流和电压数据点，用**最小二乘法线性回归**（`linreg` 函数）拟合 R = ΔV/ΔI。原理：直流条件下 `V = R × I`（无电感影响和反电动势），多点测量提高拟合精度。精确的电阻值对低速下无传感器控制和电流环性能至关重要（低速时电阻压降主导） |
@@ -272,7 +272,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 #### 2.2.5 用户自定义指令序列
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `_user_commands()` | 仿真场景设计 | **用户自定义转速/电流指令序列**。这是设计仿真实验场景的入口函数。在该函数中定义：① 什么时候改变转速命令 `cmd_varOmega`（支持阶跃、斜坡、正弦等）；② 什么时候施加/移除负载 `ACM.TLoad`；③ 什么时候改变 d 轴电流命令（MTPA/弱磁测试）；④ 什么时候切换控制模式。通过修改此函数可以设计各种仿真场景：启动测试、正反转测试、负载突变测试、弱磁测试等。函数在控制器每次执行时被调用（不是每个仿真步），因此指令更新频率 = 控制周期频率 |
 | 时间控制方式 | 仿真场景 | **基于仿真步 `k` 的时序控制**。典型用法：`if (k >= 1000 && k < 2000) cmd_varOmega = 1000;` 表示在仿真步 1000~2000 期间转速指令为 1000 rpm。步数转换为物理时间：`time_in_seconds = k × hs` |
 | 负载转矩设置 `ACM.TLoad` | HW-01 负载扰动 | **负载转矩注入**。直接修改 `ACM.TLoad` 变量。正值表示阻性负载（与运动方向相反），负值表示驱动转矩（与运动方向相同，如发电机模式）。负载阶跃是测试速度环抗扰动性能的标准方法 |
@@ -282,7 +282,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.3 main_switch.c — 仿真模式调度器
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `main_switch(mode_select)` | 全部控制算法入口 | **核心调度器**。根据 `mode_select` 枚举值（对应 `MODE_SELECT_*` 宏）分发到 24 种不同的控制算法。使用 `switch-case` 结构，每个 case 对应一种仿真模式。模式初始化时调用对应的 `init_*` 函数，模式切换时 `mode_initialized` 标志重置为 0，确保新模式的初始化函数被调用 |
 | `init_debug()` | 参数配置 | **加载用户配置到 debug 结构体**。从 `d_sim`（由 `super_config.py` 从 YAML 生成）加载所有用户配置：模式选择 `mode_select`、电流/速度/位置命令值、电流环/速度环带宽参数 `CLBW_HZ`/`delta`、扫频参数（频率范围、扫频步数）、Nyquist 图参数、用户自定义调试变量等 |
 | `init_CTRL()` | 参数 → PID 计算 | **初始化控制器结构体**：① 电机参数赋值（R、Ld、Lq、KE、Js、npp、Vdc 等从 `d_sim.motor` 复制到 `(*CTRL).motor->*`）；② PI 参数计算——调用 `COMM_PI_tuning()` 根据 `CLBW_HZ` 和 `delta` 自动计算电流环/速度环 Kp、Ki；③ 设置 PI 限幅——电流环输出电压限幅基于 `Vdc × 0.577`（相电压最大值），速度环输出 iq 限幅基于电机额定电流；④ 初始化捕获外设（CAP）用于编码器信号处理 |
@@ -295,7 +295,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.4 pmsm_observer.c — 无感观测器
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `pmsm_observers()` | [ALG-07](../algorithm/ALG-07-Sensorless-Observers.md) 无感观测器、[CT-11](../control-theory/CT-11-Observer-Design.md) 观测器设计 | **多种观测器统一调度入口**。根据用户配置选择反 EMF/SMO（滑模）/磁链/EKF（扩展卡尔曼滤波）/MRAS 等不同原理的观测器。每种观测器估计电角度 θe 和电角速度 ωe，用于无传感器 FOC 闭环 |
 | `Main_esoaf_chen2021()` | [CT-16](../control-theory/CT-16-ADRC-Theory.md) ADRC 理论、[CT-17](../control-theory/CT-17-LADRC-Linear-ADRC.md) LADRC、[CT-18](../control-theory/CT-18-ADRC-LADRC-Implementation.md) ADRC 实现 | **扩张状态观测器（ESO）主函数**。用 4 阶 RK4 求解 ESO 状态方程。ESO 是 ADRC（自抗扰控制）的核心——它将外部扰动和内部不确定性扩张为一个新的状态变量进行估计： |
 | ESO 状态变量 x[0] | CT-16 扩张状态 | **xPos**：估计机械位置（角度）。与编码器测量值对比得到角度误差，作为 ESO 的输入修正项 |
@@ -320,7 +320,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.5 pi_math.h — PID 控制器宏定义
 
 | C 宏/结构体 | 对应 KB 概念 | 详细说明 |
-|------------|-------------|---------|
+| --- | --- | --- |
 | `PI_CONTROLLER` 结构体 | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **PI 控制器数据结构（TI 格式）**。成员变量完整列表： |
 | `PI_CONTROLLER.Ref` | 给定值 | **Reference（给定/指令值）**。如 d 轴电流指令 id_cmd。在 PI 计算前由调用者设置 |
 | `PI_CONTROLLER.Fbk` | 反馈值 | **Feedback（反馈/测量值）**。如 d 轴电流实际值 id_fb。在 PI 计算前由调用者设置（从 ADC 采样获得） |
@@ -337,7 +337,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 | 第 2 步：条件积分（Anti-windup） | PI_MACRO 内部 | `if (v.Out >= v.Umax && v.up > 0) { /* 正向饱和，不积分 */ }` 和 `if (v.Out <= v.Umin && v.up < 0) { /* 反向饱和，不积分 */ }`。条件积分逻辑：仅当输出未饱和时，才将当前的比例项累积到积分项中：`v.ui = v.ui + v.Ki × v.up`。这防止了积分饱和——当控制器输出已经达到物理极限时，继续积分只会让恢复过程更慢 |
 | 第 3 步：合成输出 | PI_MACRO 内部 | `v.v1 = v.up + v.ui`——预限幅输出 = 比例项 + 积分项 |
 | 第 4 步：输出限幅 | PI_MACRO 内部 | `v.Out = CLAMP(v.v1, v.Umin, v.Umax)`——将输出限制在 [Umin, Umax] 范围内 |
-| 第 5 步：饱和标记 | PI_MACRO 内部 | `v.w1 = (v.Out == v.Umax || v.Out == v.Umin) ? 1 : 0`——记录是否饱和 |
+| 第 5 步：饱和标记 | PI_MACRO 内部 | `v.w1 = (v.Out == v.Umax；；v.Out == v.Umin) ? 1 : 0`——记录是否饱和 |
 | `PI_POS_MACRO(v)` | 位置环 PI | **位置环专用 PI 宏**。与 `PI_MACRO` 的区别仅在于误差处理方式：首先将角度误差做 **wrap-around** 处理——将误差限制在 -0.5~+0.5 圈（-π~+π 弧度）范围内。例如：给定位置 350°，反馈位置 10°，真实误差应该是 -20°（−0.056 圈，最短路径），而不是 340°（+0.944 圈）。然后对这个 wrap 后的误差应用 PI 算法。如果没有 wrap-around，位置环会在角度过零时输出异常大的值导致系统振荡或飞车 |
 
 ---
@@ -345,7 +345,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.6 ACMSim.h — 核心数据结构
 
 | C 结构体/宏 | 对应 KB 概念 | 详细说明 |
-|------------|-------------|---------|
+| --- | --- | --- |
 | `struct MachineSimulated` | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机仿真对象的完整定义**（30+ 成员变量）。这个结构体是理解仿真中电机状态的核心： |
 | `x[0]` = `varTheta` | 机械角度 | **状态变量 0：机械角位置（rad）**。这是转子的实际机械角度。经过 `θe = npp × θm` 转换为电角度用于坐标变换 |
 | `x[1]` = `varOmega` | 机械转速 | **状态变量 1：机械角速度（rad/s）**。乘以 `60/(2π)` 可转换为 rpm。乘以 `npp` 得到电气角速度 |
@@ -383,7 +383,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.7 utility.c — 工具函数
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
-|--------------|-------------|---------|
+| --- | --- | --- |
 | `write_header_to_file()` | 数据记录 | **写 .dat 文件的列头**。在第一行写入各信号名称（逗号分隔），格式如 `k,ACM.varOmega,ACM.iDQ[0],ACM.iDQ[1],...`。这个列头定义了后续 `cplot.py` 中可用信号的名字 |
 | `write_data_to_file(k)` | 数据记录 | **写当前仿真步的数据行**。将当前步所有已注册的信号值以逗号分隔的格式写入 .dat 文件。数据格式在文件顶部通过 `DATA_FORMAT` 宏或字符串定义。写文件操作可能影响仿真速度——如果仿真跑得很慢，可以降低数据记录频率 |
 | `DATA_FORMAT` 宏/字符串 | 数据记录 | **数据格式定义**。定义了 `write_data_to_file()` 中写入哪些信号及其顺序。修改此宏可以增减记录的信号（增加信号方便调试但增大 .dat 文件；减少信号可以加快仿真速度） |
@@ -396,7 +396,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 2.8 super_config.h / super_config.c — 自动生成文件
 
 | C 代码段 | 对应 KB 概念 | 详细说明 |
-|---------|-------------|---------|
+| --- | --- | --- |
 | `struct ST_D_SIM` | YAML 参数映射 | **仿真参数结构体类型定义**。由 `super_config.py`（Python）自动生成。结构体中每个成员变量对应 `user_config.yaml` 中的一个配置项。例如：`d_sim.init.CLBW_HZ`（电流环目标带宽，Hz）、`d_sim.init.delta`（速度/电流带宽比）、`d_sim.init.CLTS`（电流环控制周期，s）、`d_sim.sim.NUMBER_OF_STEPS`（仿真总步数）、`d_sim.motor.R`（电机电阻，Ω）等 |
 | `init_d_sim()` | YAML → C 赋值 | **结构体初始化函数**。由 `super_config.py` 自动生成。将 YAML 中配置的参数值赋给 `ST_D_SIM` 结构体的各成员变量。在 `main()` 的初始化阶段调用，是整个仿真参数从 Python 层传递到 C 层的桥梁。`` 此文件由 Python 自动生成，手动修改会在下次点击「Save to C and compile」时被覆盖 |
 
@@ -407,7 +407,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 下表按"我想做什么"列出精确的定位信息。在 IDE（如 VS Code）中按 `Ctrl+Shift+F` 搜索关键字即可快速跳转。
 
 | 我想做什么 | 去哪个文件 | 搜索什么 | 其他提示 |
-|-----------|----------|---------|---------|
+| --- | --- | --- | --- |
 | 改电流环 PI 参数（Kp/Ki） | `main_switch.c` 的 `init_CTRL()` | `PID_iD->Kp`, `PID_iQ->Kp`, `COMM_PI_tuning` | PI 参数由 `COMM_PI_tuning()` 根据带宽和电机参数自动计算。想手动设置 Kp/Ki 的话，在 `init_CTRL()` 中找到 `COMM_PI_tuning()` 调用后直接覆盖 `PID_iD->Kp = xxx; PID_iD->Ki = yyy;` |
 | 改速度环 PI 参数 | `main_switch.c` 的 `init_CTRL()` | `PID_Speed->Kp`, `PID_Speed->Ki_CODE` | 速度环 Kp/Ki 也由 `COMM_PI_tuning()` 计算。修改 `d_sim.init.CLBW_HZ`（电流环带宽）和 `d_sim.init.delta`（带宽比）间接调整速度环增益，或在 init_CTRL() 中手动覆盖 |
 | 改仿真电机参数（R, Ld, Lq, KE, Js） | `main.c` 的 `init_Machine()` 或 `super_config.c` 的 `init_d_sim()` | `ACM.R`, `ACM.Ld`, `ACM.Lq`, `ACM.KE`, `ACM.Js` | 推荐在 Streamlit UI 中选择不同电机来修改参数，或直接编辑 `user_config.yaml` 然后点击「Save to C and compile」自动重新生成 `super_config.c` |
@@ -439,14 +439,14 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.1 super_config.h / super_config.c 不可手动修改
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **会被覆盖** | `super_config.h` 和 `super_config.c` 由 Streamlit UI 中的 `super_config.py` 自动生成。每次在 Streamlit 侧栏点击「Save to C and compile」按钮时，这两个文件会被重新生成并覆盖你手动做的任何修改 |
 | **正确做法** | 要修改仿真参数（如电流环带宽、电机参数、仿真步长等），在 Streamlit 侧栏的可调参数面板中修改，或直接编辑 `user_config.yaml` 然后点击「Save to C and compile」重新生成 |
 
 ### 4.2 仿真和实验共用代码
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **代码共享** | `main_switch.c`、`pmsm_comm.c`、`pmsm_observer.c`、`main.c`、`utility.c` 等核心文件同时用于 PC 仿真和 DSP 实验。同一套代码通过 `#if PC_SIMULATION` 条件编译在两种环境中切换 |
 | **条件编译** | 仅仿真相关的代码必须放在 `#if PC_SIMULATION ... #endif` 块内，否则 DSP 编译时会报错（如无法识别的 PC 端头文件、不存在的函数调用等）。典型的 PC_SIMULATION 专属代码：`_user_time_varying_parameters()` 调用、仿真专用的 `printf` 调试输出、文件 I/O 操作 |
 | **DSP 专用代码** | 同样，涉及 DSP 硬件寄存器的代码（如 `#pragma DATA_SECTION`、`EALLOW`/`EDIS` 宏、外设寄存器地址访问等）必须放在 `#else ... #endif` 或 `#if !PC_SIMULATION` 块内 |
@@ -455,7 +455,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.3 逆变器模型默认为理想
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **默认值** | 仿真模式下 `__INVERTER_NONLINEARITY` 在 `ACMSim.h` 中默认为 `0`（理想逆变器）。这意味着控制器的电压指令直接等于施加到电机的电压 |
 | **实际差异** | 真实硬件中的逆变器非线性（死区时间、管压降）会导致：① 低速时电流波形畸变（零电流钳位效应）；② 电压基波幅值损失（有效电压低于指令值）；③ 无传感器控制的角度估计误差增大 |
 | **如何启用** | 如需研究逆变器非线性对控制性能的影响，将 `__INVERTER_NONLINEARITY` 改为 1~4 中的一个值。建议使用 Mode 3（LUT 插值查表法）获得最接近真实硬件的逆变器模型 |
@@ -463,7 +463,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.4 电机模型 Rreq 参数
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **含义** | `Rreq` 是有效转子电阻，仅对感应电机（IM）有意义 |
 | **正确取值** | `Rreq = 0`：PMSM（永磁同步电机），永磁体励磁，磁链恒定不变。`Rreq > 0`：感应电机，转子磁链通过转差产生和变化。`Rreq < 0`：非法值，会导致磁链微分方程发散 |
 | **错误影响** | PMSM 仿真中如果错误地将 Rreq 设为正值（如误用了 IM 的电机参数），dKA/dt 将不再为零：`dKA/dt = Rreq × (iD - KA/(Ld-Lq))`。这会导致磁链随时间漂移，电机行为异常（转矩计算错误、转速波动等） |
@@ -471,7 +471,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.5 Clarke 变换系数差异
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **恒幅值 vs 恒功率** | 控制器代码（`pmsm_comm.c`）使用**恒幅值变换**（电流幅值在三相和 αβ 坐标系中一致，系数为 1）。电机模型内部（`main.c`）使用**恒功率变换**（功率在两个坐标系中守恒，系数为 √(3/2)） |
 | **影响** | 如果不理解这个差异，会发现仿真中的转矩计算值和控制器中基于恒幅值变换的预期值相差 √(3/2) ≈ 1.225 倍 |
 | **统一方式** | 代码中通过 `CLARKE_TRANS_TORQUE_GAIN` 宏和 `CLARKE_TRANS_L_GAIN` 宏在必要处统一两种变换的系数。不要人为修改这些宏，除非你完全理解 Clarke 变换的两种规范 |
@@ -479,7 +479,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.6 仿真步长 hs 选择
 
 | 风险 | 说明 |
-|------|------|
+| --- | --- |
 | **过大的步长** | RK4 是条件稳定的数值方法，步长过大（特别是电气时间常数 τL = L/R 远小于 hs 时）会导致积分发散，出现 NaN 错误。经验准则：`hs < min(Ld/R, Lq/R) / 10`（步长应小于电气时间常数的 1/10）。典型 hs 值：1e-6 ~ 1e-5 秒 |
 | **过小的步长** | 不是"越小越好"——步长太小导致仿真时间线性增长，同时 .dat 文件急剧增大（Number_of_Steps × 信号数 × 8 字节/信号）。经验准则：`hs = CL_TS / 10` 是一个合理的折中 |
 | **rk4 步长和控制周期关系** | `CL_TS` 必须是 `hs` 的整数倍（否则控制器的执行时刻无法对齐仿真步的边界）。`dfe_counter = CL_TS / hs` 必须为整数 |
@@ -487,7 +487,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 4.7 防止误修改的安全建议
 
 | 场景 | 建议 |
-|------|------|
+| --- | --- |
 | **测试新想法前** | 用 `git stash` 或复制一份当前能跑通的代码到备份目录。修改后如果无法跑通，快速回退 |
 | **修改共享代码前后** | 在 `pmsm_comm.c` 或 `main_switch.c` 中做修改后，在 Streamlit 中跑至少两个模式（如 MODE_SELECT_FOC 和 MODE_SELECT_VELOCITY_LOOP）确认修改没有破坏现有功能 |
 | **修改数值参数** | 先用小变化（如 PI 增益改动不超过 2 倍）测试，确认方向正确后再做大幅修改。电机控制系统对参数变化敏感，大幅跳跃式修改难以判断是改对了还是改错了 |
@@ -501,14 +501,14 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 5.1 按学习目标推荐阅读顺序
 
 | 你的目标 | 推荐阅读顺序 |
-|---------|-----------|
-|  **理解 FOC 控制算法** | `ACMSim.h`（数据结构） → `pmsm_comm.c` 的 `_onlyFOC()`（FOC 链路） → `pi_math.h`（PI 宏） → `main_switch.c` 的 `init_CTRL()`（PI 参数计算） |
-|  **理解电机物理模型** | `ACMSim.h`（`MachineSimulated` 结构体） → `main.c` 的 `DYNAMICS_MACHINE()`（状态方程） → `main.c` 的 `RK4()`（数值积分） → `main.c` 的 `machine_simulation()`（单步流程） |
-|  **理解仿真架构** | `main.c` 的 `main()`（主循环） → `main_switch.c` 的 `main_switch()`（模式调度） → `utility.c`（数据记录） → `super_config.h/c`（参数流） |
-|  **自定义仿真实验** | `pmsm_comm.c` 的 `_user_commands()`（指令序列） → `main_switch.c`（添加新模式） → `user_config.yaml`（参数配置） |
-|  **参数自整定** | `pmsm_comm.c` 的 `StepByStepCommissioning_NEW_WB()`（状态机） → `COMM_resistanceId()` / `COMM_inductanceId_ver3()` / `COMM_PMFluxId()` / `COMM_inertiaId()`（各辨识步骤） → `COMM_PI_tuning()`（整定公式） |
-|  **无传感器控制** | `pmsm_observer.c` 的 `pmsm_observers()`（入口） → `Main_esoaf_chen2021()`（ESO） → `eso_one_parameter_tuning()`（观测器增益） |
-|  **逆变器非线性补偿** | `main.c` 的 `inverter_model()`（5 种模型入口） → `ALG-04` 死区补偿（理论背景） |
+| --- | --- |
+| **理解 FOC 控制算法** | `ACMSim.h`（数据结构） → `pmsm_comm.c` 的 `_onlyFOC()`（FOC 链路） → `pi_math.h`（PI 宏） → `main_switch.c` 的 `init_CTRL()`（PI 参数计算） |
+| **理解电机物理模型** | `ACMSim.h`（`MachineSimulated` 结构体） → `main.c` 的 `DYNAMICS_MACHINE()`（状态方程） → `main.c` 的 `RK4()`（数值积分） → `main.c` 的 `machine_simulation()`（单步流程） |
+| **理解仿真架构** | `main.c` 的 `main()`（主循环） → `main_switch.c` 的 `main_switch()`（模式调度） → `utility.c`（数据记录） → `super_config.h/c`（参数流） |
+| **自定义仿真实验** | `pmsm_comm.c` 的 `_user_commands()`（指令序列） → `main_switch.c`（添加新模式） → `user_config.yaml`（参数配置） |
+| **参数自整定** | `pmsm_comm.c` 的 `StepByStepCommissioning_NEW_WB()`（状态机） → `COMM_resistanceId()` / `COMM_inductanceId_ver3()` / `COMM_PMFluxId()` / `COMM_inertiaId()`（各辨识步骤） → `COMM_PI_tuning()`（整定公式） |
+| **无传感器控制** | `pmsm_observer.c` 的 `pmsm_observers()`（入口） → `Main_esoaf_chen2021()`（ESO） → `eso_one_parameter_tuning()`（观测器增益） |
+| **逆变器非线性补偿** | `main.c` 的 `inverter_model()`（5 种模型入口） → `ALG-04` 死区补偿（理论背景） |
 
 ### 5.2 代码阅读最佳实践
 
@@ -529,7 +529,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.1 电机状态变量
 
 | 变量表达式 | C 类型 | 物理含义 | 单位 | 对应知识库模块 |
-|-----------|--------|---------|------|-------------|
+| --- | --- | --- | --- | --- |
 | `ACM.varTheta` | `REAL` | 机械角位置 | rad | HW-01 电机基础 |
 | `ACM.varOmega` | `REAL` | 机械角速度 | rad/s | HW-01 电机基础 |
 | `ACM.KA` | `REAL` | 有功磁链幅值 | Wb (V·s) | HW-01 电机基础 |
@@ -541,7 +541,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.2 控制器输入/输出变量
 
 | 变量表达式 | C 类型 | 物理含义 | 单位 | 对应知识库模块 |
-|-----------|--------|---------|------|-------------|
+| --- | --- | --- | --- | --- |
 | `(*CTRL).i->iAB[0]` | `REAL` | 控制器 α 轴电流输入 | A | ALG-02 电流采样 |
 | `(*CTRL).i->iAB[1]` | `REAL` | 控制器 β 轴电流输入 | A | ALG-02 电流采样 |
 | `(*CTRL).i->iDQ[0]` | `REAL` | 控制器 d 轴电流测量值 | A | ALG-05 有感 FOC |
@@ -561,7 +561,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.3 PI 控制器内部变量
 
 | 变量表达式 | C 类型 | 物理含义 | 单位 | 对应知识库模块 |
-|-----------|--------|---------|------|-------------|
+| --- | --- | --- | --- | --- |
 | `(*CTRL).s->PID_iD->Ref` | `REAL` | d 轴电流 PI 给定 | A | CT-04 PID 控制原理 |
 | `(*CTRL).s->PID_iD->Fbk` | `REAL` | d 轴电流 PI 反馈 | A | CT-04 PID 控制原理 |
 | `(*CTRL).s->PID_iD->Out` | `REAL` | d 轴电流 PI 输出 | V | CT-04 PID 控制原理 |
@@ -574,7 +574,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.4 观测器变量
 
 | 变量表达式 | C 类型 | 物理含义 | 单位 | 对应知识库模块 |
-|-----------|--------|---------|------|-------------|
+| --- | --- | --- | --- | --- |
 | `OBSV.theta_d` | `REAL` | 观测器估计电角度 | rad | ALG-07 无感观测器 |
 | `OBSV.varOmega` | `REAL` | 观测器估计转速 | rad/s | ALG-07 无感观测器 |
 | `OFSR.esoaf.xPos` | `REAL` | ESO 估计位置 | rad | CT-16 ADRC 理论 |
@@ -585,7 +585,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.5 仿真控制变量
 
 | 变量表达式 | C 类型 | 物理含义 | 单位 | 对应知识库模块 |
-|-----------|--------|---------|------|-------------|
+| --- | --- | --- | --- | --- |
 | `k` | `int` | 当前仿真步索引 | - | 仿真基础设施 |
 | `hs` | `REAL` | 仿真步长 | s | 仿真基础设施 |
 | `CL_TS` | `REAL` | 控制周期（= d_sim.init.CLTS） | s | SYS-04 数值仿真 |
@@ -595,7 +595,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 ### 6.6 常用单位转换
 
 | 转换 | 公式 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | 机械转速 rad/s → rpm | `rpm = varOmega × 60 / (2π)` | 使用宏 `MECH_RAD_PER_SEC_2_RPM` |
 | 电气转速 rad/s → rpm | `rpm = omega_e × 60 / (2π) / npp` | 电气转速 = 机械转速 × npp |
 | 弧度 → 角度 | `deg = rad × 180 / π` | 使用宏 `RAD_TO_DEG` |
@@ -608,7 +608,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 本文档中引用的知识库模块完整列表：
 
 | KB 编号 | 模块名称 | 路径 |
-|--------|---------|------|
+| --- | --- | --- |
 | HW-01 | 电机本体基础与数学模型 | [../hardware/HW-01-Motor-Basics.md](../hardware/HW-01-Motor-Basics.md) |
 | HW-02 | 电流采样电路 | [../hardware/HW-02-Current-Sensing.md](../hardware/HW-02-Current-Sensing.md) |
 | HW-03 | 位置传感器 | [../hardware/HW-03-Position-Sensor.md](../hardware/HW-03-Position-Sensor.md) |

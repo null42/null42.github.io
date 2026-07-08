@@ -60,17 +60,17 @@ H∞方法直接：定义一个"事情能有多糟"的度量——从扰动到�
 
 $$ \text{找到 } K \text{ 最小化 } \max_{\omega} \bar{\sigma}\big(T_{zw}(j\omega)\big) $$
 
-这里 $\bar{\sigma}$ 是最大奇异值（对MIMO）——它是频率 $\omega$ 处的最坏情况放大。符号 $\|\cdot\|_\infty$（读作"H无穷范数"）恰好就是这个：所有频率上的峰值幅度。最小化 $\|T_{zw}\|_\infty$ 意味着最小化可能发生的最坏事情。
+这里 $\bar{\sigma}$ 是最大奇异值（对MIMO）——它是频率 $\omega$ 处的最坏情况放大。符号 $\lVert\cdot\lVert_\infty$（读作"H无穷范数"）恰好就是这个：所有频率上的峰值幅度。最小化 $\lVertT_{zw}\lVert_\infty$ 意味着最小化可能发生的最坏事情。
 
 与LQR的对比鲜明：
 
-| | LQR（H₂） | H∞ |
-|---|---|---|
+|  | LQR（H₂） | H∞ |
+| --- | --- | --- |
 | **优化** | 平均（RMS）能量 | 峰值（最坏情况）幅度 |
 | **对象假设** | 精确标称模型 | 标称模型 + 不确定性界 |
 | **结果** | 最佳标称性能 | 保证鲁棒性 |
 | **保证** | 模型错则无 | 对所有 $G \in \mathcal{G}$ 的稳定性 + 性能 |
-| **代价** | 牺牲标称性能换取鲁棒性 |
+| **代价** | 牺牲标称性能换取鲁棒性 |  |
 
 H∞天生保守。这不是缺陷——这是你付费的功能。
 
@@ -86,7 +86,7 @@ H∞天生保守。这不是缺陷——这是你付费的功能。
 
 $$G(s) = G_0(s) + \Delta(s) \cdot W_a(s)$$
 
-其中 $\Delta(s)$ 是任何满足 $\|\Delta\|_\infty \leq 1$ 的稳定传递函数，$W_a(s)$ 是频率权重，告诉你每个频率处不确定性可以有多大。$W_a(s)$ 在你非常不确定的频率处大；在你信任模型的频率处小。
+其中 $\Delta(s)$ 是任何满足 $\lVert\Delta\lVert_\infty \leq 1$ 的稳定传递函数，$W_a(s)$ 是频率权重，告诉你每个频率处不确定性可以有多大。$W_a(s)$ 在你非常不确定的频率处大；在你信任模型的频率处小。
 
 **何时使用：** 不确定性不随对象增益缩放。额外的振动模态、传感器谐振、你没建模的柔性体动态。
 
@@ -116,7 +116,7 @@ $$G = (M + \Delta_M)^{-1}(N + \Delta_N)$$
 
 $$W_m(s) = \frac{0.1 s + 1}{0.05 s + 1}$$
 
-在直流（$\omega = 0$）：$|W_m(0)| = 1$——100%不确定性。你知道稳态增益可能变化很大（摩擦、负载）。在高频：$|W_m(j\infty)| = 2$——200%不确定性。你确信那里有未建模动态。$|W_m| = 1$ 的交叉点（在此例约10 rad/s）是"基本有信心"和"基本在猜"之间的边界。
+在直流（$\omega = 0$）：$\lvert W_m(0) \rvert = 1$——100%不确定性。你知道稳态增益可能变化很大（摩擦、负载）。在高频：$\lvert W_m(j\infty) \rvert = 2$——200%不确定性。你确信那里有未建模动态。$\lvert W_m \rvert = 1$ 的交叉点（在此例约10 rad/s）是"基本有信心"和"基本在猜"之间的边界。
 
 选择 $W(s)$ 不是自动的。它需要对象知识。但H∞框架将困难部分（你有多不确定？）与计算（什么控制器最优地处理那个不确定性？）分开。你提供不确定性描述；算法提供控制器。
 
@@ -130,9 +130,9 @@ H∞设计围绕三个关键闭环传递函数组织。每个衡量控制器在�
 
 $$S(s) = \frac{1}{1 + G(s)K(s)}$$
 
-$S$ 是从参考 $r$ 到误差 $e = r - y$ 的传递函数。也是从输出扰动 $d$ 到输出 $y$ 的传递函数。如果你想要输出跟踪参考——并抑制扰动——你需要 $|S(j\omega)|$ 小。
+$S$ 是从参考 $r$ 到误差 $e = r - y$ 的传递函数。也是从输出扰动 $d$ 到输出 $y$ 的传递函数。如果你想要输出跟踪参考——并抑制扰动——你需要 $\lvert S(j\omega) \rvert$ 小。
 
-但 $S$ 不能处处小。Bode积分公式说：不稳定对象的 $\log|S(j\omega)|$ 下面积是固定的。在某些频率使 $S$ 小迫使它在其他频率大。这就是**水床效应（Waterbed Effect）**——你可以在一个频段压低灵敏度，但它会在别处弹起来。H∞设计自动尊重这个权衡。
+但 $S$ 不能处处小。Bode积分公式说：不稳定对象的 $\log\lvert S(j\omega) \rvert$ 下面积是固定的。在某些频率使 $S$ 小迫使它在其他频率大。这就是**水床效应（Waterbed Effect）**——你可以在一个频段压低灵敏度，但它会在别处弹起来。H∞设计自动尊重这个权衡。
 
 ### 5.2 补灵敏度 $T(s)$
 
@@ -140,9 +140,9 @@ $$T(s) = \frac{G(s)K(s)}{1 + G(s)K(s)} = 1 - S(s)$$
 
 $T$ 是从参考 $r$ 到输出 $y$ 的传递函数（跟踪时），以及从传感器噪声 $n$ 到输出 $y$ 的传递函数（抑制噪声时）。$T$ 衡量输出多忠实地跟随参考——以及多少传感器噪声通过。
 
-鲁棒稳定性由 $T$ 决定：如果乘性不确定性被 $|W_m(j\omega)|$ 界定，闭环保持稳定只要：
+鲁棒稳定性由 $T$ 决定：如果乘性不确定性被 $\lvert W_m(j\omega) \rvert$ 界定，闭环保持稳定只要：
 
-$$|T(j\omega)| < \frac{1}{|W_m(j\omega)|} \quad \forall \omega$$
+$$\lvert T(j\omega) \rvert < \frac{1}{\lvert W_m(j\omega) \rvert} \quad \forall \omega$$
 
 这就是**小增益定理（Small-Gain Theorem）**在行动。$T$ 必须在不确定性变得显著之前滚降——这就是为什么每个实用控制器的带宽有限。
 
@@ -150,20 +150,20 @@ $$|T(j\omega)| < \frac{1}{|W_m(j\omega)|} \quad \forall \omega$$
 
 $$KS(s) = \frac{K(s)}{1 + G(s)K(s)}$$
 
-$KS$ 是从参考 $r$ 到控制努力 $u$ 的传递函数。它衡量控制器工作多努力。如果 $|KS(j\omega)|$ 大，小误差产生大控制信号——控制器"激进"。激进控制可能饱和执行器、激发未建模谐振、浪费能量。
+$KS$ 是从参考 $r$ 到控制努力 $u$ 的传递函数。它衡量控制器工作多努力。如果 $\lvert KS(j\omega) \rvert$ 大，小误差产生大控制信号——控制器"激进"。激进控制可能饱和执行器、激发未建模谐振、浪费能量。
 
 ### 5.4 混合灵敏度表述
 
 将这些与频率权重放在一起，设计问题变为：
 
-$$\left\| \begin{bmatrix} W_1(s) S(s) \\ W_2(s) KS(s) \\ W_3(s) T(s) \end{bmatrix} \right\|_\infty < 1$$
+$$\left\lVert \begin{bmatrix} W_1(s) S(s) \\ W_2(s) KS(s) \\ W_3(s) T(s) \end{bmatrix} \right\rVert_\infty < 1$$
 
 权重的含义：
 - $W_1(s)$ 塑造 $S$——性能（跟踪、扰动抑制）
 - $W_2(s)$ 塑造 $KS$——控制努力（执行器限制、能量）
 - $W_3(s)$ 塑造 $T$——鲁棒性（噪声抑制、不确定性下稳定）
 
-目标：找到 $K(s)$ 使得堆叠传递函数的每一行在每个频率的幅度都小于1。如果 $\|W_1 S\|_\infty < 1$，则 $|S(j\omega)| < 1/|W_1(j\omega)|$——灵敏度被权重的逆所塑造。
+目标：找到 $K(s)$ 使得堆叠传递函数的每一行在每个频率的幅度都小于1。如果 $\lVertW_1 S\lVert_\infty < 1$，则 $\lvert S(j\omega) \rvert < 1/\lvert W_1(j\omega) \rvert$——灵敏度被权重的逆所塑造。
 
 ---
 
@@ -175,7 +175,7 @@ H∞设计的艺术是选择 $W_1$、$W_2$、$W_3$。以下如何将工程规格
 
 **指标：** "恒定参考的稳态跟踪误差必须小于0.1%。100 rad/s以上，我们不关心跟踪。"
 
-翻译：在直流（$s = 0$），$|S(0)| < 0.001$，所以 $|W_1(0)| > 1000$。权重必须在低频大、高频小——积分器类形状：
+翻译：在直流（$s = 0$），$\lvert S(0) \rvert < 0.001$，所以 $\lvert W_1(0) \rvert > 1000$。权重必须在低频大、高频小——积分器类形状：
 
 $$W_1(s) = \frac{s/M_s + \omega_B}{s + \omega_B \cdot A}$$
 
@@ -184,7 +184,7 @@ $$W_1(s) = \frac{s/M_s + \omega_B}{s + \omega_B \cdot A}$$
 - $M_s = 2$ 是允许的峰值灵敏度（防止水床效应过度放大）
 - $\omega_B = 100$ rad/s 是带宽要求
 
-低频：$|W_1| \approx 1/A$，大——迫使 $S$ 小。高频：$|W_1| \approx 1/M_s$，小——允许 $S$ 大。$\omega_B$ 处的交叉是跟踪不再重要的地方。
+低频：$\lvert W_1 \rvert \approx 1/A$，大——迫使 $S$ 小。高频：$\lvert W_1 \rvert \approx 1/M_s$，小——允许 $S$ 大。$\omega_B$ 处的交叉是跟踪不再重要的地方。
 
 ### 6.2 控制权重 $W_2(s)$
 
@@ -204,7 +204,7 @@ $$W_3(s) = \frac{s + \omega_0 \cdot r_0}{r_\infty \cdot s + \omega_0 / r_\infty}
 
 其中 $r_0 = 0.1$（直流10%不确定性——参数不确定性），$r_\infty = 10$（高频1000%——未建模动态主导），$\omega_0 = 300$ rad/s（不确定性从"小"过渡到"大"的交叉点）。
 
-高频：$|W_3| \to r_\infty = 10$，所以 $1/|W_3| \to 0.1$——迫使 $|T| < 0.1$，300 rad/s以上20 dB滚降。
+高频：$\lvert W_3 \rvert \to r_\infty = 10$，所以 $1/\lvert W_3 \rvert \to 0.1$——迫使 $\lvert T \rvert < 0.1$，300 rad/s以上20 dB滚降。
 
 ### 6.4 加权矩阵
 
@@ -212,7 +212,7 @@ $$W_3(s) = \frac{s + \omega_0 \cdot r_0}{r_\infty \cdot s + \omega_0 / r_\infty}
 
 $$\begin{bmatrix} z_1 \\ z_2 \\ z_3 \end{bmatrix} = \begin{bmatrix} W_1 S \\ W_2 KS \\ W_3 T \end{bmatrix} \cdot w$$
 
-H∞问题：找到 $K$ 使 $\|T_{zw}\|_\infty < 1$。如果你能做到，三个指标同时满足。
+H∞问题：找到 $K$ 使 $\lVertT_{zw}\lVert_\infty < 1$。如果你能做到，三个指标同时满足。
 
 ---
 
@@ -254,11 +254,11 @@ $$T_{zw} = \mathcal{F}_\ell(P, K) = P_{11} + P_{12} K (I - P_{22} K)^{-1} P_{21}
 
 ### 7.2 H∞最优控制问题
 
-$$\text{找到稳定化 } K(s) \text{ 使 } \|\mathcal{F}_\ell(P, K)\|_\infty \text{ 最小。}$$
+$$\text{找到稳定化 } K(s) \text{ 使 } \lVert\mathcal{F}_\ell(P, K)\lVert_\infty \text{ 最小。}$$
 
 或更常见的**次优**问题：
 
-$$\text{找到稳定化 } K(s) \text{ 使 } \|\mathcal{F}_\ell(P, K)\|_\infty < \gamma.$$
+$$\text{找到稳定化 } K(s) \text{ 使 } \lVert\mathcal{F}_\ell(P, K)\lVert_\infty < \gamma.$$
 
 对递减的 $\gamma$（二分法）求解直到无解。最小可达 $\gamma$ 是最优H∞范数。
 
@@ -268,7 +268,7 @@ $$\text{找到稳定化 } K(s) \text{ 使 } \|\mathcal{F}_\ell(P, K)\|_\infty < 
 
 ## 8. DGKF解：两个Riccati方程，一个控制器
 
-"找到 $K$ 使 $\|T_{zw}\|_\infty < \gamma$"这个问题听起来难以处理。1989年，Doyle、Glover、Khargonekar和Francis证明它归结为检查两个代数Riccati方程。这就是MATLAB `hinfsyn` 计算的。以下是它做的。
+"找到 $K$ 使 $\lVertT_{zw}\lVert_\infty < \gamma$"这个问题听起来难以处理。1989年，Doyle、Glover、Khargonekar和Francis证明它归结为检查两个代数Riccati方程。这就是MATLAB `hinfsyn` 计算的。以下是它做的。
 
 ### 8.1 状态空间数据
 
@@ -294,7 +294,7 @@ $$A Y_\infty + Y_\infty A^T + B_1 B_1^T + Y_\infty (\gamma^{-2} C_1^T C_1 - C_2^
 
 ### 8.3 控制器
 
-如果两个Riccati解 $X_\infty$ 和 $Y_\infty$ 都是半正定的，且谱半径 $\rho(X_\infty Y_\infty) < \gamma^2$，则存在达到 $\|T_{zw}\|_\infty < \gamma$ 的控制器：
+如果两个Riccati解 $X_\infty$ 和 $Y_\infty$ 都是半正定的，且谱半径 $\rho(X_\infty Y_\infty) < \gamma^2$，则存在达到 $\lVertT_{zw}\lVert_\infty < \gamma$ 的控制器：
 
 $$\dot{\hat{x}} = A \hat{x} + B_2 u + Z_\infty L_\infty (y - C_2 \hat{x})$$
 $$u = F_\infty \hat{x}$$
@@ -346,7 +346,7 @@ $$\text{order}(P) = \text{order}(G) + \text{order}(W_1) + \text{order}(W_2) + \t
 
 误差界：如果你保留 $n$ 个中的 $r$ 个状态，近似误差的H∞范数为：
 
-$$\|K - K_r\|_\infty \leq 2 \sum_{i=r+1}^n \sigma_i$$
+$$\lVertK - K_r\lVert_\infty \leq 2 \sum_{i=r+1}^n \sigma_i$$
 
 这个界是紧的。你确切知道你损失了多少。
 
@@ -376,7 +376,7 @@ $$T_{zw}(Q) = T_0 + T_1 \cdot Q \cdot T_2$$
 
 H∞问题变为：
 
-$$\text{找到稳定 } Q(s) \text{ 最小化 } \|T_0 + T_1 Q T_2\|_\infty$$
+$$\text{找到稳定 } Q(s) \text{ 最小化 } \lVertT_0 + T_1 Q T_2\lVert_\infty$$
 
 这是凸集（所有稳定 $Q$）上的**凸优化问题**。没有局部极小值。没有启发式。DGKF解只是求解这个凸问题的一种方式——它是函数空间中的*内点法*，通过Riccati方程产生精确解。
 
@@ -384,7 +384,7 @@ $$\text{找到稳定 } Q(s) \text{ 最小化 } \|T_0 + T_1 Q T_2\|_\infty$$
 
 1. **为什么H∞有效。** 问题是凸的，因为每个稳定化控制器都在由 $Q$ 参数化的凸集中。Zames在1981年意识到这一点。没有Youla（1976），H∞是非凸的混乱。有了Youla，它是凸优化。
 
-2. **Riccati解产生了什么。** 它找到最小化 $\|T_{zw}(Q)\|_\infty$ 的 $Q$——$Q$ 空间中（在H∞范数下）最接近理想闭环映射的点。结果控制器 $K$ 是那个最优 $Q$ 在Youla公式下的像。
+2. **Riccati解产生了什么。** 它找到最小化 $\lVertT_{zw}(Q)\lVert_\infty$ 的 $Q$——$Q$ 空间中（在H∞范数下）最接近理想闭环映射的点。结果控制器 $K$ 是那个最优 $Q$ 在Youla公式下的像。
 
 3. **为什么控制器阶数爆炸。** 最优 $Q$ 与问题要求一样复杂。由于闭环映射关于 $Q$ 仿射，权重增加动态，最优 $Q$ 吸收了所有复杂性。Youla保证解存在；不保证它低阶。
 
@@ -424,14 +424,14 @@ $$\text{找到稳定 } Q(s) \text{ 最小化 } \|T_0 + T_1 Q T_2\|_\infty$$
 ## 12. 与本项目的联系
 
 | 文档 | H∞联系 |
-|-----|-------------------|
+| --- | --- |
 | `youla_parameterization.md` | Youla使稳定化控制器集凸。H∞在这个凸集上最小化凸目标（H∞范数）。没有Youla，H∞非凸且不可处理。有了Youla，它由Riccati方程求解。本文第10节详细解释。 |
 | `core_problems_controller_design.md` | 问题#4（模型不确定性）正是H∞解决的。问题#9（多目标权衡）——速度vs鲁棒性、跟踪vs噪声——正是混合灵敏度权重形式化的。 |
 | `care_vs_dare.md` | 第8节的DGKF解使用两个耦合Riccati方程。当 $\gamma \to \infty$，它们解耦为标准LQG的CARE方程。H∞是带最坏情况增益约束的LQG。 |
 | `lead_lag_compensator_design.md` | 超前-滞后设计手动塑造开环Bode图。H∞给定加权函数自动做同样的事。权重 $W_1, W_3$ 编码与超前（加相位、增带宽）和滞后（提升直流增益）相同的意图。 |
 | `lqr_explorer.html` | LQR在Youla集上优化H₂范数（RMS能量）。H∞在相同集上优化H∞范数（峰值幅度）。探索器展示Q/R如何影响闭环极点；H∞设计展示权重如何直接影响频率响应。 |
 | `pid_explorer.html` | PID增益是完整 $Q$ 空间的3参数限制。H∞可以设计全阶控制器，然后投影到PID子空间。结果是H∞最优增益的PID——系统整定，非手动调整。 |
-| `waterbed_effect.md` | Bode积分约束：在某些频率使 $S$ 小迫使它在其他频率大。H∞加权函数尊重这个基本限制——$W_1$ 不能要求违反积分的性能。$\|W_1 S\|_\infty < 1$ 约束自动执行水床权衡。 |
+| `waterbed_effect.md` | Bode积分约束：在某些频率使 $S$ 小迫使它在其他频率大。H∞加权函数尊重这个基本限制——$W_1$ 不能要求违反积分的性能。$\lVertW_1 S\lVert_\infty < 1$ 约束自动执行水床权衡。 |
 
 ---
 

@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="360" viewBox="0 0 920 360" role="img" aria-labelledby="title desc">
-  <title id="title">SPWM 正弦调制与三角载波</title>
-  <desc id="desc">正弦参考与三角载波比较，得到 PWM 脉冲宽度。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">SPWM 正弦参考与三角载波比较</title>
+  <desc id="desc">蓝色正弦参考与橙色三角载波比较，参考高于载波时输出高电平，形成宽度随正弦变化的 PWM 脉冲。</desc>
   <style>
     text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
     .axis{stroke:#475569;stroke-width:2}
@@ -9,28 +9,30 @@
     .pulse{fill:#0f766e}
     .cursor{stroke:#ef4444;stroke-width:3}
     .label{font-size:20px;font-weight:700}
+    .small{font-size:16px}
   </style>
-  <line x1="50" y1="170" x2="870" y2="170" class="axis"/>
-  <line x1="50" y1="40" x2="50" y2="300" class="axis"/>
-  <path class="sine" d="M50 170 C130 55 210 55 290 170 S450 285 530 170 S690 55 770 170 S850 285 870 230"/>
-  <path class="carrier" d="M50 285 L90 55 L130 285 L170 55 L210 285 L250 55 L290 285 L330 55 L370 285 L410 55 L450 285 L490 55 L530 285 L570 55 L610 285 L650 55 L690 285 L730 55 L770 285 L810 55 L850 285 L870 170"/>
+  <line x1="60" y1="180" x2="900" y2="180" class="axis"/>
+  <line x1="60" y1="45" x2="60" y2="320" class="axis"/>
+  <path class="sine" d="M60 180 C140 60 220 60 300 180 S460 300 540 180 S700 60 780 180 S880 300 900 235"/>
+  <path class="carrier" d="M60 300 L100 60 L140 300 L180 60 L220 300 L260 60 L300 300 L340 60 L380 300 L420 60 L460 300 L500 60 L540 300 L580 60 L620 300 L660 60 L700 300 L740 60 L780 300 L820 60 L860 300 L900 180"/>
   <g opacity="0.85">
-    <rect x="60" y="305" width="32" height="28" class="pulse"/>
-    <rect x="140" y="305" width="54" height="28" class="pulse"/>
-    <rect x="220" y="305" width="70" height="28" class="pulse"/>
-    <rect x="300" y="305" width="44" height="28" class="pulse"/>
-    <rect x="380" y="305" width="20" height="28" class="pulse"/>
-    <rect x="460" y="305" width="24" height="28" class="pulse"/>
-    <rect x="540" y="305" width="50" height="28" class="pulse"/>
-    <rect x="620" y="305" width="72" height="28" class="pulse"/>
-    <rect x="700" y="305" width="56" height="28" class="pulse"/>
-    <rect x="780" y="305" width="30" height="28" class="pulse"/>
+    <rect x="70" y="340" width="30" height="28" class="pulse"/>
+    <rect x="145" y="340" width="58" height="28" class="pulse"/>
+    <rect x="225" y="340" width="72" height="28" class="pulse"/>
+    <rect x="305" y="340" width="42" height="28" class="pulse"/>
+    <rect x="385" y="340" width="18" height="28" class="pulse"/>
+    <rect x="465" y="340" width="24" height="28" class="pulse"/>
+    <rect x="545" y="340" width="52" height="28" class="pulse"/>
+    <rect x="625" y="340" width="74" height="28" class="pulse"/>
+    <rect x="705" y="340" width="55" height="28" class="pulse"/>
+    <rect x="785" y="340" width="32" height="28" class="pulse"/>
   </g>
-  <line x1="90" y1="40" x2="90" y2="334" class="cursor">
-    <animate attributeName="x1" values="90;850;90" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="x2" values="90;850;90" dur="4s" repeatCount="indefinite"/>
+  <line x1="100" y1="42" x2="100" y2="370" class="cursor">
+    <animate attributeName="x1" values="100;860;100" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="100;860;100" dur="4s" repeatCount="indefinite"/>
   </line>
-  <text x="70" y="32" class="label">蓝色: 正弦参考</text>
-  <text x="320" y="32" class="label">橙色: 三角载波</text>
-  <text x="560" y="334" class="label">下方: 比较器输出 PWM</text>
+  <text x="80" y="32" class="label">蓝色：三相正弦参考中的 A 相</text>
+  <text x="390" y="32" class="label">橙色：三角载波</text>
+  <text x="610" y="392" class="label">下方：比较器输出 PWM</text>
+  <text x="80" y="392" class="small">参考越高，脉冲越宽；参考越低，脉冲越窄。</text>
 </svg>

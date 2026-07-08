@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420" role="img" aria-labelledby="title desc">
-  <title id="title">三电平 NPC 相电压状态</title>
-  <desc id="desc">三电平逆变器每相有 P、O、N 三种状态，对应正母线、中点、负母线。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="450" viewBox="0 0 960 450" role="img" aria-labelledby="title desc">
+  <title id="title">三电平 NPC 单相 P O N 状态</title>
+  <desc id="desc">单相桥臂可以连接正母线、中点或负母线，对应 P、O、N 三种相电压状态。</desc>
   <style>
     text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172033}
     .rail{stroke:#334155;stroke-width:4}
     .leg{stroke:#64748b;stroke-width:3}
-    .node{fill:#ffffff;stroke:#2563eb;stroke-width:3}
     .on{fill:#dcfce7;stroke:#0f766e;stroke-width:3}
     .off{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
     .arrow{stroke:#ef4444;stroke-width:3;marker-end:url(#arrow)}
@@ -16,32 +15,36 @@
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#ef4444"/></marker>
   </defs>
-  <text x="40" y="44" class="title">三电平单相桥臂: P / O / N</text>
-  <line x1="70" y1="90" x2="850" y2="90" class="rail"/>
-  <line x1="70" y1="210" x2="850" y2="210" class="rail"/>
-  <line x1="70" y1="330" x2="850" y2="330" class="rail"/>
-  <text x="28" y="97" class="label">+Vdc/2</text>
-  <text x="45" y="217" class="label">O</text>
-  <text x="32" y="337" class="label">-Vdc/2</text>
-  <g transform="translate(130,0)">
-    <line x1="80" y1="90" x2="80" y2="330" class="leg"/>
-    <circle cx="80" cy="90" r="24" class="on"/><circle cx="80" cy="210" r="24" class="off"/><circle cx="80" cy="330" r="24" class="off"/>
-    <line x1="80" y1="90" x2="150" y2="150" class="arrow"/>
-    <text x="70" y="385" class="state">P</text>
-    <text x="118" y="154" class="label">输出 +Vdc/2</text>
+  <text x="40" y="44" class="title">三电平单相桥臂：P / O / N</text>
+  <line x1="70" y1="95" x2="880" y2="95" class="rail"/>
+  <line x1="70" y1="220" x2="880" y2="220" class="rail"/>
+  <line x1="70" y1="345" x2="880" y2="345" class="rail"/>
+  <text x="22" y="102" class="label">+Vdc/2</text>
+  <text x="50" y="226" class="label">O</text>
+  <text x="25" y="352" class="label">-Vdc/2</text>
+  <g transform="translate(140,0)">
+    <line x1="80" y1="95" x2="80" y2="345" class="leg"/>
+    <circle cx="80" cy="95" r="24" class="on"/><circle cx="80" cy="220" r="24" class="off"/><circle cx="80" cy="345" r="24" class="off"/>
+    <line x1="80" y1="95" x2="155" y2="160" class="arrow"/>
+    <text x="70" y="410" class="state">P</text>
+    <text x="118" y="164" class="label">输出 +Vdc/2</text>
   </g>
-  <g transform="translate(395,0)">
-    <line x1="80" y1="90" x2="80" y2="330" class="leg"/>
-    <circle cx="80" cy="90" r="24" class="off"/><circle cx="80" cy="210" r="24" class="on"/><circle cx="80" cy="330" r="24" class="off"/>
-    <line x1="80" y1="210" x2="150" y2="210" class="arrow"/>
-    <text x="68" y="385" class="state">O</text>
-    <text x="118" y="205" class="label">输出 0</text>
+  <g transform="translate(415,0)">
+    <line x1="80" y1="95" x2="80" y2="345" class="leg"/>
+    <circle cx="80" cy="95" r="24" class="off"/><circle cx="80" cy="220" r="24" class="on"/><circle cx="80" cy="345" r="24" class="off"/>
+    <line x1="80" y1="220" x2="155" y2="220" class="arrow"/>
+    <text x="68" y="410" class="state">O</text>
+    <text x="118" y="214" class="label">输出 0</text>
   </g>
-  <g transform="translate(660,0)">
-    <line x1="80" y1="90" x2="80" y2="330" class="leg"/>
-    <circle cx="80" cy="90" r="24" class="off"/><circle cx="80" cy="210" r="24" class="off"/><circle cx="80" cy="330" r="24" class="on"/>
-    <line x1="80" y1="330" x2="150" y2="270" class="arrow"/>
-    <text x="69" y="385" class="state">N</text>
-    <text x="118" y="274" class="label">输出 -Vdc/2</text>
+  <g transform="translate(690,0)">
+    <line x1="80" y1="95" x2="80" y2="345" class="leg"/>
+    <circle cx="80" cy="95" r="24" class="off"/><circle cx="80" cy="220" r="24" class="off"/><circle cx="80" cy="345" r="24" class="on"/>
+    <line x1="80" y1="345" x2="155" y2="280" class="arrow"/>
+    <text x="69" y="410" class="state">N</text>
+    <text x="118" y="285" class="label">输出 -Vdc/2</text>
   </g>
+  <circle cx="495" cy="220" r="10" fill="#2563eb">
+    <animate attributeName="r" values="7;13;7" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="360" y="72" class="label">中点电压需要主动平衡</text>
 </svg>

@@ -22,7 +22,7 @@ order: 8
 
 # FOUND-04 SVPWM原理与DSP实现：用相邻矢量合成参考电压
 
-SVPWM 不再把三相看成三条独立正弦，而是把逆变器的开关状态看成空间矢量。参考电压落在哪个扇区，就用该扇区相邻的两个有效矢量和零矢量在一个PWM周期内加权合成。
+SVPWM 不再把三相看成三条独立正弦，而是把逆变器的开关状态看成空间矢量。参考电压落在哪个扇区，就用该扇区相邻的两个有效矢量和零矢量在一个 PWM 周期内加权合成。
 
 ![SVPWM 六扇区空间矢量图](assets/svpwm-sector-map.svg)
 
@@ -39,25 +39,46 @@ SVPWM 不再把三相看成三条独立正弦，而是把逆变器的开关状�
 | V5 | 001 | 240 度 |
 | V6 | 101 | 300 度 |
 
+```mermaid
+flowchart LR
+    A["v_alpha, v_beta"] --> B["判断扇区"]
+    B --> C["计算 T1, T2, T0"]
+    C --> D["选择 7 段或 5 段序列"]
+    D --> E["换算三相 duty"]
+    E --> F["写 PWM 比较寄存器"]
+```
+
 ## 2. 作用时间
 
 在某个扇区内，参考矢量由相邻两个有效矢量合成：
 
 $$
-\vec{V}_{ref} T_s = \vec{V}_x T_1 + \vec{V}_y T_2 + \vec{V}_0 T_0
+\vec{V}_{ref}T_s=\vec{V}_xT_1+\vec{V}_yT_2+\vec{V}_0T_0
 $$
 
 并且：
 
 $$
-T_0 = T_s - T_1 - T_2
+T_0=T_s-T_1-T_2
 $$
 
-若 $T_1+T_2>T_s$，说明进入过调制或电压请求过大，需要限幅。
+如果 $T_1+T_2>T_s$，说明参考电压超过线性调制能力，需要限幅或进入过调制。
 
-## 3. 常用DSP实现：先算三相等效时间
+## 3. 零序注入等效算法
 
-工程代码常用 Clarke 坐标下的 $v_\alpha,v_\beta$ 先判断扇区，再计算占空比。下面是便于理解的骨架，实际工程会把除法和三角函数替换成查表或定点运算。
+工程代码常用零序注入形式，避免显式计算每个扇区的 $T_1,T_2$。先由 $\alpha\beta$ 反变换得到三相相电压，再减去最大值和最小值的平均数。
+
+$$
+v_{zero}=-\frac{v_{max}+v_{min}}{2}
+$$
+
+$$
+d_a=0.5+v_a+v_{zero}
+$$
+
+这种写法和空间矢量作用时间法本质一致。
+
+## 4. DSP 实现骨架
 
 ```c
 typedef struct {
@@ -80,6 +101,13 @@ static int svpwm_sector(float alpha, float beta)
     return map[n];
 }
 
+static float clamp01(float x)
+{
+    if (x < 0.0f) return 0.0f;
+    if (x > 1.0f) return 1.0f;
+    return x;
+}
+
 svpwm_out_t svpwm_step(float alpha, float beta)
 {
     float va = alpha;
@@ -96,26 +124,31 @@ svpwm_out_t svpwm_step(float alpha, float beta)
     float vzero = -0.5f * (vmax + vmin);
 
     svpwm_out_t out;
-    out.duty_a = 0.5f + va + vzero;
-    out.duty_b = 0.5f + vb + vzero;
-    out.duty_c = 0.5f + vc + vzero;
+    out.duty_a = clamp01(0.5f + va + vzero);
+    out.duty_b = clamp01(0.5f + vb + vzero);
+    out.duty_c = clamp01(0.5f + vc + vzero);
     out.sector = svpwm_sector(alpha, beta);
     return out;
 }
 ```
 
-这段使用的是零序注入等价形式。它和扇区作用时间法本质一致，但代码更短，适合先验证概念。
-
-## 4. 与SPWM的区别
+## 5. 与 SPWM 的区别
 
 | 维度 | SPWM | SVPWM |
 | --- | --- | --- |
 | 思考方式 | 三相分别比较载波 | 空间矢量合成 |
 | 母线利用率 | 较低 | 更高 |
-| 与FOC接口 | 需要从dq变回abc | 直接接收alpha-beta |
+| 与 FOC 接口 | 需要从 dq 变回 abc | 自然接收 $\alpha\beta$ 电压 |
 | 工程复杂度 | 低 | 中 |
-| 常见用途 | 入门、低成本控制 | FOC主流方案 |
+| 常见用途 | 入门和低成本控制 | FOC 主流方案 |
 
-## 5. 调试顺序
+## 6. 调试顺序
 
-先让 $v_\alpha,v_\beta$ 画圆，确认扇区顺序是 1 到 6 循环。再检查三相占空比是否都在 0 到 1 内。最后上电低压测试，观察相电流是否平滑。如果扇区跳变顺序错，通常是 Clarke/Park 符号约定或相序接反。
+先让 $v_\alpha,v_\beta$ 画圆，确认扇区按 1 到 6 循环。再检查三相 duty 是否都在 0 到 1 内。最后低压上电，看相电流是否平滑。
+
+| 现象 | 可能原因 |
+| --- | --- |
+| 扇区跳变顺序错 | Clarke/Park 符号约定或相序接反 |
+| duty 超过边界 | 电压矢量未限幅 |
+| 三相 duty 总体偏移 | 零序注入公式符号错 |
+| 电机抖动但不转 | 电角度方向和相序不一致 |

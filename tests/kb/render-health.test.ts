@@ -1,5 +1,7 @@
 import fs from 'node:fs'
+import path from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { scanArticles } from '../../scripts/kb/articles'
 import { analyzeMarkdownRendering } from '../../scripts/kb/render-health'
 
 describe('markdown rendering health', () => {
@@ -25,5 +27,17 @@ describe('markdown rendering health', () => {
 
     expect(report.issues.map((issue) => issue.code)).toContain('table-column-mismatch')
     expect(report.issues.map((issue) => issue.code)).toContain('mermaid-failed-wording')
+  })
+
+  it('keeps public source Markdown clean without relying on runtime repair', async () => {
+    const { articles } = await scanArticles()
+    const reports = articles
+      .map((article) => {
+        const markdown = fs.readFileSync(path.join(process.cwd(), article.path), 'utf8')
+        return analyzeMarkdownRendering(markdown, article.path)
+      })
+      .filter((report) => report.issues.length > 0)
+
+    expect(reports).toEqual([])
   })
 })
