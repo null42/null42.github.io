@@ -50,6 +50,96 @@ describe('chaptered sidebar', () => {
     expect(sidebar.indexOf('"text": "控制算法"')).toBeGreaterThan(sidebar.indexOf('"text": "控制与算法"'))
   })
 
+  it('keeps numbered chapter articles in path order when imported records share the same order', () => {
+    const articles = [
+      article({
+        title: 'Power Path Overview',
+        url: '/power-path.html',
+        path: 'content/motor/power-path/README.md',
+        section: '电机控制',
+        navGroup: '基础与硬件',
+        navGroupOrder: 20,
+        chapter: 'power-path',
+        chapterTitle: '功率链路',
+        chapterOrder: 40,
+        order: 20,
+        date: '2026-07-02'
+      }),
+      article({
+        title: 'PP-03: LLC',
+        url: '/pp-03.html',
+        path: 'content/motor/power-path/PP-03-LLC-Resonant-Converter.md',
+        section: '电机控制',
+        navGroup: '基础与硬件',
+        navGroupOrder: 20,
+        chapter: 'power-path',
+        chapterTitle: '功率链路',
+        chapterOrder: 40,
+        order: 20,
+        date: '2026-07-09'
+      }),
+      article({
+        title: 'PP-01: Buck',
+        url: '/pp-01.html',
+        path: 'content/motor/power-path/PP-01-DCDC-Fundamental-Topologies.md',
+        section: '电机控制',
+        navGroup: '基础与硬件',
+        navGroupOrder: 20,
+        chapter: 'power-path',
+        chapterTitle: '功率链路',
+        chapterOrder: 40,
+        order: 20,
+        date: '2026-07-01'
+      }),
+      article({
+        title: 'PP-01 知识检查',
+        url: '/pp-01-check.html',
+        path: 'content/motor/power-path/PP-01-assessment.md',
+        section: '电机控制',
+        navGroup: '基础与硬件',
+        navGroupOrder: 20,
+        chapter: 'power-path',
+        chapterTitle: '功率链路',
+        chapterOrder: 40,
+        order: 20,
+        date: '2026-07-10'
+      }),
+      article({
+        title: 'PP-02: Flyback',
+        url: '/pp-02.html',
+        path: 'content/motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull.md',
+        section: '电机控制',
+        navGroup: '基础与硬件',
+        navGroupOrder: 20,
+        chapter: 'power-path',
+        chapterTitle: '功率链路',
+        chapterOrder: 40,
+        order: 20,
+        date: '2026-07-03'
+      })
+    ]
+
+    const sidebar = buildSidebar(articles)
+
+    expect(sidebar.indexOf('/power-path.html')).toBeLessThan(sidebar.indexOf('/pp-01.html'))
+    expect(sidebar.indexOf('/pp-01.html')).toBeLessThan(sidebar.indexOf('/pp-01-check.html'))
+    expect(sidebar.indexOf('/pp-01-check.html')).toBeLessThan(sidebar.indexOf('/pp-02.html'))
+    expect(sidebar.indexOf('/pp-02.html')).toBeLessThan(sidebar.indexOf('/pp-03.html'))
+  })
+
+  it('keeps numbered learning workspace routes in file order', () => {
+    const articles = [
+      article({ title: '0003', url: '/0003.html', path: 'content/motor/learning-workspace/lessons/0003-hw.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-09' }),
+      article({ title: '0001', url: '/0001.html', path: 'content/motor/learning-workspace/lessons/0001-ee.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-01' }),
+      article({ title: '0002', url: '/0002.html', path: 'content/motor/learning-workspace/lessons/0002-ct.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-08' })
+    ]
+
+    const sidebar = buildSidebar(articles)
+
+    expect(sidebar.indexOf('/0001.html')).toBeLessThan(sidebar.indexOf('/0002.html'))
+    expect(sidebar.indexOf('/0002.html')).toBeLessThan(sidebar.indexOf('/0003.html'))
+  })
+
   it('exposes learning-map routes on the home and motor entry pages', () => {
     const home = fs.readFileSync('index.md', 'utf8')
     const motorEntry = fs.readFileSync('content/motor/getting-started.md', 'utf8')

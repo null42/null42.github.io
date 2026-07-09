@@ -147,7 +147,12 @@ function compareChapter(aItems: ArticleRecord[], bItems: ArticleRecord[]): numbe
 }
 
 function sortArticles(articles: ArticleRecord[]): ArticleRecord[] {
-  return [...articles].sort((a, b) => compareNumbers(a.order, b.order) || b.date.localeCompare(a.date) || a.title.localeCompare(b.title))
+  return [...articles].sort((a, b) =>
+    compareNumbers(a.order, b.order)
+    || comparePathSequence(a, b)
+    || b.date.localeCompare(a.date)
+    || a.title.localeCompare(b.title, 'zh-CN')
+  )
 }
 
 function compareNumbers(a: number | undefined, b: number | undefined): number {
@@ -155,6 +160,30 @@ function compareNumbers(a: number | undefined, b: number | undefined): number {
   if (a === undefined) return 1
   if (b === undefined) return -1
   return a - b
+}
+
+function comparePathSequence(a: ArticleRecord, b: ArticleRecord): number {
+  const aKey = sequenceKey(a)
+  const bKey = sequenceKey(b)
+  if (!aKey && !bKey) return 0
+  if (!aKey) return 1
+  if (!bKey) return -1
+  return compareNumbers(aKey.major, bKey.major)
+    || compareNumbers(aKey.minor, bKey.minor)
+    || aKey.kind - bKey.kind
+    || a.path.localeCompare(b.path, 'zh-CN', { numeric: true, sensitivity: 'base' })
+}
+
+function sequenceKey(article: ArticleRecord): { major: number; minor: number; kind: number } | undefined {
+  const filename = article.path.replace(/\\/g, '/').split('/').pop() || article.path
+  if (/^(README|index)\.md$/i.test(filename)) return { major: -1, minor: 0, kind: 0 }
+  const numbered = filename.match(/^(?:[A-Z]+(?:-[A-Z]+)?-)?(\d+)(?:[-_](\d+))?/i)
+  if (!numbered) return undefined
+  return {
+    major: Number(numbered[1]),
+    minor: numbered[2] ? Number(numbered[2]) : 0,
+    kind: /(?:^|[-_])assessment(?:\.md)?$/i.test(filename) || /知识(?:检查|检验)/.test(article.title) ? 1 : 0
+  }
 }
 
 function articleLink(article: ArticleRecord): { text: string; link: string } {
