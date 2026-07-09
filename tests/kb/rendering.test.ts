@@ -146,6 +146,29 @@ describe('rendering fixture', () => {
     expect(mermaidComponent).not.toContain('cdn.jsdelivr.net')
   })
 
+  it('does not mutate Mermaid component DOM from a global fallback renderer', () => {
+    const theme = fs.readFileSync('.vitepress/theme/index.ts', 'utf8')
+
+    expect(theme).not.toContain('renderPendingMermaid')
+    expect(theme).not.toContain('block.innerHTML')
+  })
+
+  it('guards Mermaid async rendering when routes change before render completes', () => {
+    const mermaidComponent = fs.readFileSync('.vitepress/theme/components/MermaidDiagram.vue', 'utf8')
+
+    expect(mermaidComponent).toContain('onBeforeUnmount')
+    expect(mermaidComponent).toContain('isMounted')
+    expect(mermaidComponent).toContain('renderRun')
+  })
+
+  it('keeps Mermaid component DOM stable while switching from source to rendered SVG', () => {
+    const mermaidComponent = fs.readFileSync('.vitepress/theme/components/MermaidDiagram.vue', 'utf8')
+
+    expect(mermaidComponent).toContain('v-show="rendered"')
+    expect(mermaidComponent).not.toContain('v-if="rendered"')
+    expect(mermaidComponent).not.toContain('v-else-if')
+  })
+
   it('keeps published client chunks small enough for reliable GitHub Pages serving', () => {
     const chunkDir = 'assets/chunks'
     const chunkLimit = 8 * 1024 * 1024

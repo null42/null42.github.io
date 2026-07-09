@@ -150,6 +150,7 @@ describe('chaptered sidebar', () => {
     expect(home).toContain('## 推荐路线')
     expect(home).toContain('/content/motor/getting-started.html')
     expect(home).toContain('/content/power/getting-started.html')
+    expect(home).toContain('/content/matlab-simulink/README.html')
     expect(home).toContain('/content/encrypted/demo.html')
     expect(tools).toContain('/content/encrypted/demo.html')
     expect(config).toContain("link: '/tools.html'")

@@ -1686,6 +1686,112 @@ export const generatedSidebar = [
     ]
   },
   {
+    "text": "Matlab/Simulink 仿真",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "仿真基础",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "总览与学习路线",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "Matlab/Simulink 仿真全教程",
+                "link": "/content/matlab-simulink/README.html"
+              }
+            ]
+          },
+          {
+            "text": "环境与最小模型",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-00 环境与最小离散控制模型",
+                "link": "/content/matlab-simulink/foundation/MS-00-Simulation-Setup.html"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "Matlab 离散控制仿真",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Matlab 离散控制系统",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-01 Matlab 仿真离散控制系统",
+                "link": "/content/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control.html"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "Simulink 离散控制仿真",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Simulink 离散控制系统",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-02 Simulink 仿真离散控制系统",
+                "link": "/content/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control.html"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "自定义模块",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Matlab Function 使用",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-03 Matlab Function 使用",
+                "link": "/content/matlab-simulink/custom-blocks/MS-03-Matlab-Function.html"
+              }
+            ]
+          },
+          {
+            "text": "S-Function 使用",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-04 S-Function 使用",
+                "link": "/content/matlab-simulink/custom-blocks/MS-04-S-Function.html"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "整定与验证",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "参数自整定",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "MS-05 参数自整定与仿真验证",
+                "link": "/content/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning.html"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "text": "Playground",
     "collapsed": true,
     "items": [

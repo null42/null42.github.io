@@ -17,6 +17,11 @@ comments: false
     <strong>路线图 -> 项目实践 -> 调试记录 -> 周复盘</strong>
     <span>只展示已经整理到公开口径的内容；未完成翻译和早期概念课不进入公开入口。</span>
   </a>
+  <a class="kb-map-card" href="/content/matlab-simulink/README.html">
+    <span class="kb-map-kicker">Matlab/Simulink 仿真</span>
+    <strong>最小模型 -> 离散控制 -> 自定义模块 -> 参数整定</strong>
+    <span>面向新手的仿真全教程，先跑通脚本，再迁移到 Simulink，并逐步学会封装和验证。</span>
+  </a>
   <a class="kb-map-card" href="/search.html">
     <span class="kb-map-kicker">全文搜索</span>
     <strong>按栏目、学习路线、阶段和标签定位</strong>
@@ -43,6 +48,10 @@ comments: false
   <a href="/search.html?q=PFC">
     <strong>电源工程线</strong>
     <span>路线图 -> PFC/UPS 项目 -> 调试记录 -> 周复盘</span>
+  </a>
+  <a href="/content/matlab-simulink/README.html">
+    <strong>Matlab/Simulink 仿真线</strong>
+    <span>环境准备 -> Matlab 离散仿真 -> Simulink 框图 -> Matlab Function -> S-Function -> 自整定</span>
   </a>
   <a href="/content/encrypted/demo.html">
     <strong>加密演示</strong>
