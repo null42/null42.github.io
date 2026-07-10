@@ -552,3 +552,415 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== 视觉模式：模式切换按钮 ===== */
+.kb-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: var(--kb-surface);
+  color: var(--vp-c-text-2);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.kb-mode-toggle:hover {
+  border-color: var(--vp-c-brand-2);
+  color: var(--vp-c-brand-1);
+}
+
+.kb-mode-toggle[data-active="true"] {
+  border-color: var(--kb-accent);
+  color: var(--kb-accent);
+  background: var(--kb-surface-soft);
+}
+
+.kb-mode-toggle-icon {
+  flex-shrink: 0;
+}
+
+.kb-mode-toggle-label {
+  white-space: nowrap;
+}
+
+.kb-mode-toggle-screen {
+  padding: 8px 0;
+}
+
+/* ===== 视觉模式：首页 Hero ===== */
+[data-visual-mode="visual"][data-page="home"] .vp-doc > h1:first-child {
+  display: none;
+}
+
+.kb-theme-shell[data-visual-mode="visual"] {
+  overflow-x: clip;
+}
+
+.kb-home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #0f172a;
+  overflow: hidden;
+}
+
+.kb-home-hero.is-loading {
+  background-color: #1a1a2e;
+}
+
+.kb-home-hero.is-failed {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f766e 100%);
+}
+
+.kb-home-hero-media {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(15, 23, 42, 0.82) 0%,
+    rgba(15, 23, 42, 0.55) 50%,
+    rgba(15, 23, 42, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+.kb-home-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.kb-home-hero-title {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.kb-home-hero-subtitle {
+  margin: 0 0 28px;
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  max-width: 520px;
+}
+
+.kb-home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.kb-home-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.kb-home-hero-btn-primary {
+  background: var(--vp-c-brand-1);
+  border: 1px solid var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.kb-home-hero-btn-primary:hover {
+  background: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+}
+
+.kb-home-hero-btn-ghost {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.kb-home-hero-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.kb-hero-next {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.5);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.kb-hero-next:hover {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 快速入口 ===== */
+.kb-quick-entry {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 16px 0 28px;
+}
+
+.kb-quick-card {
+  display: grid;
+  gap: 6px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: var(--kb-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.kb-quick-card:hover {
+  border-color: var(--vp-c-brand-2);
+  background: var(--kb-surface-soft);
+}
+
+.kb-quick-card strong {
+  color: var(--vp-c-text-1);
+  font-size: 15px;
+}
+
+/* ===== 音乐播放器 ===== */
+.kb-music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--kb-surface);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.dark .kb-music-player {
+  background: rgba(22, 27, 34, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.kb-music-player.is-collapsed {
+  width: auto;
+}
+
+.kb-music-player-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.kb-music-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background: var(--vp-c-brand-1);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.kb-music-btn:hover {
+  background: var(--vp-c-brand-2);
+}
+
+.kb-music-btn-sm {
+  width: 28px;
+  height: 28px;
+  background: var(--kb-surface-soft);
+  color: var(--vp-c-text-2);
+}
+
+.kb-music-btn-sm:hover {
+  background: var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+}
+
+.kb-music-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kb-music-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kb-music-artist {
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+}
+
+.kb-music-player-body {
+  padding: 0 12px 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.kb-music-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kb-music-time {
+  font-size: 11px;
+  color: var(--vp-c-text-2);
+  white-space: nowrap;
+  min-width: 32px;
+}
+
+.kb-music-seek,
+.kb-music-volume-seek {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--vp-c-divider);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.kb-music-seek::-webkit-slider-thumb,
+.kb-music-volume-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+  cursor: pointer;
+}
+
+.kb-music-seek::-moz-range-thumb,
+.kb-music-volume-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--vp-c-brand-1);
+  cursor: pointer;
+}
+
+.kb-music-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vp-c-text-2);
+}
+
+.kb-music-error {
+  margin: 0;
+  font-size: 12px;
+  color: var(--vp-c-danger-1);
+}
+
+/* ===== 美化模式全局微调 ===== */
+[data-visual-mode="visual"] .VPHome,
+[data-visual-mode="visual"][data-page="home"] .vp-doc {
+  background: transparent;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .kb-home-hero {
+    min-height: 50vh;
+  }
+
+  .kb-home-hero-content {
+    padding: 48px 20px;
+  }
+
+  .kb-home-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kb-home-hero-btn {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .kb-music-player {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+    max-width: 360px;
+  }
+
+  .kb-music-player.is-collapsed {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .kb-music-player-body {
+    display: none;
+  }
+
+  .kb-music-player:not(.is-collapsed) .kb-music-player-body {
+    display: grid;
+  }
+}
+
+/* ===== 无障碍：减少动画 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .kb-mode-toggle,
+  .kb-home-hero-btn,
+  .kb-hero-next,
+  .kb-music-btn,
+  .kb-quick-card {
+    transition: none;
+  }
+}

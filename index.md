@@ -25,7 +25,7 @@ comments: false
   <a class="kb-map-card" href="/search.html">
     <span class="kb-map-kicker">全文搜索</span>
     <strong>按栏目、学习路线、阶段和标签定位</strong>
-    <span>适合查“电流环、SVPWM、采样、PFC”等关键词，结果会尽量跳到命中的章节。</span>
+    <span>适合查"电流环、SVPWM、采样、PFC"等关键词，结果会尽量跳到命中的章节。</span>
   </a>
   <a class="kb-map-card" href="/archive.html">
     <span class="kb-map-kicker">文章库</span>
@@ -53,8 +53,21 @@ comments: false
     <strong>Matlab/Simulink 仿真线</strong>
     <span>环境准备 -> Matlab 离散仿真 -> Simulink 框图 -> Matlab Function -> S-Function -> 自整定</span>
   </a>
-  <a href="/content/encrypted/demo.html">
-    <strong>加密演示</strong>
-    <span>验证私密文章入口、密码状态和公开搜索隔离。</span>
+</div>
+
+## 快速入口
+
+<div class="kb-quick-entry">
+  <a class="kb-quick-card" href="/tools.html">
+    <span class="kb-map-kicker">工具箱</span>
+    <strong>在线计算与转换工具</strong>
+  </a>
+  <a class="kb-quick-card" href="/content/encrypted/demo.html">
+    <span class="kb-map-kicker">加密演示</span>
+    <strong>验证私密文章入口与密码隔离</strong>
+  </a>
+  <a class="kb-quick-card" href="/about.html">
+    <span class="kb-map-kicker">关于我</span>
+    <strong>站点定位与联系方式</strong>
   </a>
 </div>
