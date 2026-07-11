@@ -1,4 +1,13 @@
 node_modules/
+env/
+dist/
+.astro/
+src/content/posts/
+reports/astro-content-export.json
+reports/old-url-manifest.json
+# Astro 内容导出生成的兼容页与复制资产（保留手工维护的 images/audio）
+/public/*.html
+/public/content/
 .vitepress/cache/
 .vitepress/dist/
 .vitepress/generated/*.json

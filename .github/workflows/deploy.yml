@@ -1,4 +1,4 @@
-name: Deploy VitePress site to Pages
+name: Deploy Astro site to Pages
 
 on:
   push:
@@ -21,17 +21,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: npm
+          node-version: 24
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Validate metadata and build
-        run: npm run build
+      - name: Validate and build
+        run: pnpm build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: dist
 
   deploy:
     environment:

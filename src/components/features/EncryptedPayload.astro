@@ -1,0 +1,52 @@
+---
+interface Props {
+	payloadUrl: string;
+}
+
+const { payloadUrl } = Astro.props;
+---
+
+<div class="encrypted-payload card-base p-6" data-pagefind-ignore="all" data-payload-url={payloadUrl}>
+	<h2 class="text-lg font-bold">加密文章</h2>
+	<p class="text-sm opacity-70">请输入密码以读取加密内容。</p>
+	<form class="encrypted-payload-form mt-4 space-y-2">
+		<input class="w-full rounded-lg border p-2" type="password" autocomplete="current-password" placeholder="文章密码" />
+		<button class="rounded-lg bg-(--primary) px-4 py-2 text-white" type="submit">解密</button>
+	</form>
+	<p class="encrypted-payload-error mt-2 hidden text-sm text-red-500" role="alert">密码错误或载荷无效。</p>
+	<div class="encrypted-payload-content markdown-content mt-4 hidden"></div>
+</div>
+
+<script is:inline>
+(function () {
+	const root = document.currentScript?.previousElementSibling;
+	if (!(root instanceof HTMLElement)) return;
+	const form = root.querySelector('.encrypted-payload-form');
+	const input = root.querySelector('input');
+	const error = root.querySelector('.encrypted-payload-error');
+	const output = root.querySelector('.encrypted-payload-content');
+	const payloadUrl = root.dataset.payloadUrl;
+	if (!(form instanceof HTMLFormElement) || !(input instanceof HTMLInputElement) || !(output instanceof HTMLElement) || !payloadUrl) return;
+
+	const fromBase64 = (value) => Uint8Array.from(atob(value), (char) => char.charCodeAt(0));
+	form.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		if (!input.value) return;
+		error?.classList.add('hidden');
+		try {
+			const payload = await fetch(payloadUrl, { credentials: 'same-origin' }).then((response) => {
+				if (!response.ok) throw new Error('payload unavailable');
+				return response.json();
+			});
+			const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(input.value), 'PBKDF2', false, ['deriveKey']);
+			const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: fromBase64(payload.salt), iterations: payload.iterations, hash: 'SHA-256' }, keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+			const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromBase64(payload.iv) }, key, fromBase64(payload.ciphertext));
+			output.innerHTML = new TextDecoder().decode(plaintext);
+			output.classList.remove('hidden');
+			form.classList.add('hidden');
+		} catch {
+			error?.classList.remove('hidden');
+		}
+	});
+})();
+</script>
