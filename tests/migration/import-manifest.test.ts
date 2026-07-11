@@ -26,6 +26,34 @@ describe('Firefly mod import manifest', () => {
     }
   })
 
+  it('proves each extracted source tree is byte-identical to its pinned archive', async () => {
+    const proofs = await verifySourceProofs(manifest)
+    for (const proof of proofs) {
+      expect(proof).toMatchObject({
+        archiveFileCount: expect.any(Number),
+        extractedFileCount: expect.any(Number),
+        treeDigest: expect.stringMatching(/^[a-f0-9]{64}$/)
+      })
+      expect(proof.archiveFileCount).toBeGreaterThan(0)
+      expect(proof.extractedFileCount).toBe(proof.archiveFileCount)
+    }
+  })
+
+  for (const mutation of ['changed', 'added', 'deleted'] as const) {
+    it(`rejects a locally ${mutation} file`, async () => {
+      const source = structuredClone(manifest.sources[0])
+      const root = await fs.promises.mkdtemp(path.join(process.env.TEMP!, 'import-proof-'))
+      const copiedSource = path.join(root, 'source')
+      await fs.promises.cp(path.resolve(source.localPath), copiedSource, { recursive: true })
+      source.localPath = copiedSource
+      if (mutation === 'changed') await fs.promises.appendFile(path.join(copiedSource, source.license.path), 'tampered')
+      if (mutation === 'added') await fs.promises.writeFile(path.join(copiedSource, 'unexpected.txt'), 'unexpected')
+      if (mutation === 'deleted') await fs.promises.rm(path.join(copiedSource, source.license.path))
+
+      await expect(verifySourceProofs({ sources: [source] })).rejects.toThrow(/extracted tree mismatch/)
+    }, 30_000)
+  }
+
   it('enumerates and classifies every file exactly once with reachable ordered rules', async () => {
     expect(Object.keys(manifest.dispositions).sort()).toEqual(['exclude', 'import', 'merge', 'preserve', 'replace-personal'])
     expect(manifest.classificationRules.at(-1)).toMatchObject({ match: '**/*', disposition: 'exclude', fallback: true })

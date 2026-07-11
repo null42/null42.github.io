@@ -2,23 +2,38 @@ import { createHash } from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { inflateRawSync } from 'node:zlib'
 import { glob } from 'glob'
 
 const sha256 = async (file: string) => createHash('sha256').update(await fs.readFile(file)).digest('hex')
 
-function zipTopLevels(buffer: Buffer) {
-  const names = new Set<string>()
+function zipFiles(buffer: Buffer) {
+  const files = new Map<string, string>()
+  const topLevels = new Set<string>()
   for (let offset = 0; offset <= buffer.length - 46; offset++) {
     if (buffer.readUInt32LE(offset) !== 0x02014b50) continue
+    const method = buffer.readUInt16LE(offset + 10)
+    const compressedSize = buffer.readUInt32LE(offset + 20)
     const nameLength = buffer.readUInt16LE(offset + 28)
     const extraLength = buffer.readUInt16LE(offset + 30)
     const commentLength = buffer.readUInt16LE(offset + 32)
+    const localOffset = buffer.readUInt32LE(offset + 42)
     const name = buffer.subarray(offset + 46, offset + 46 + nameLength).toString('utf8')
-    if (name) names.add(name.split('/')[0])
+    if (name) topLevels.add(name.split('/')[0])
+    if (name && !name.endsWith('/')) {
+      const localNameLength = buffer.readUInt16LE(localOffset + 26)
+      const localExtraLength = buffer.readUInt16LE(localOffset + 28)
+      const start = localOffset + 30 + localNameLength + localExtraLength
+      const compressed = buffer.subarray(start, start + compressedSize)
+      const content = method === 0 ? compressed : method === 8 ? inflateRawSync(compressed) : (() => { throw new Error(`unsupported ZIP compression method ${method}`) })()
+      files.set(name.split('/').slice(1).join('/'), createHash('sha256').update(content).digest('hex'))
+    }
     offset += 45 + nameLength + extraLength + commentLength
   }
-  return [...names].sort()
+  return { files, topLevels: [...topLevels].sort() }
 }
+
+const treeDigest = (files: Map<string, string>) => createHash('sha256').update([...files].sort(([a], [b]) => a.localeCompare(b)).map(([name, digest]) => `${name}\0${digest}\n`).join('')).digest('hex')
 
 export async function verifySourceProofs(manifest: any, rootDir = process.cwd()) {
   return Promise.all(manifest.sources.map(async (source: any) => {
@@ -26,15 +41,20 @@ export async function verifySourceProofs(manifest: any, rootDir = process.cwd())
     const archivePath = path.resolve(rootDir, proof.archivePath)
     const referencePath = path.resolve(rootDir, source.localPath)
     const actualArchiveSha256 = await sha256(archivePath)
-    const actualLicenseSha256 = await sha256(path.join(referencePath, source.license.path))
-    const topLevels = zipTopLevels(await fs.readFile(archivePath))
+    const archive = zipFiles(await fs.readFile(archivePath))
+    const localNames = (await glob('**/*', { cwd: referencePath, nodir: true, dot: true })).map(name => name.replaceAll('\\', '/')).sort()
+    const extractedFiles = new Map(await Promise.all(localNames.map(async name => [name, await sha256(path.join(referencePath, name))] as const)))
+    const actualLicenseSha256 = extractedFiles.get(source.license.path)
+    const topLevels = archive.topLevels
+    const mismatches = new Set([...archive.files.keys(), ...extractedFiles.keys()].filter(name => archive.files.get(name) !== extractedFiles.get(name)))
+    if (mismatches.size) throw new Error(`${source.repository}: extracted tree mismatch (${[...mismatches].sort().join(', ')})`)
     if (proof.expectedCommit !== source.commit) throw new Error(`${source.repository}: expected commit mismatch`)
     if (proof.archiveUrl !== `https://github.com/${source.repository}/archive/${source.commit}.zip`) throw new Error(`${source.repository}: archive URL mismatch`)
     if (actualArchiveSha256 !== proof.archiveSha256) throw new Error(`${source.repository}: archive SHA-256 mismatch`)
     if (actualLicenseSha256 !== proof.licenseSha256) throw new Error(`${source.repository}: LICENSE SHA-256 mismatch`)
     if (topLevels.length !== 1 || topLevels[0] !== proof.topLevelDirectory) throw new Error(`${source.repository}: archive top-level directory mismatch`)
     await fs.access(path.join(referencePath, source.license.path))
-    return { archiveUrl: proof.archiveUrl, expectedCommit: proof.expectedCommit, archiveSha256: actualArchiveSha256, topLevelDirectory: topLevels[0], licenseSha256: actualLicenseSha256 }
+    return { archiveUrl: proof.archiveUrl, expectedCommit: proof.expectedCommit, archiveSha256: actualArchiveSha256, topLevelDirectory: topLevels[0], licenseSha256: actualLicenseSha256, archiveFileCount: archive.files.size, extractedFileCount: extractedFiles.size, treeDigest: treeDigest(archive.files) }
   }))
 }
 
