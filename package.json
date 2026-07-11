@@ -11,6 +11,8 @@
     "check": "astro check",
     "test": "vitest run",
     "content:generate": "tsx scripts/astro/export-content.ts",
+    "migration:baseline": "tsx scripts/migration/generate-baseline.ts",
+    "migration:baseline:check": "tsx scripts/migration/generate-baseline.ts --check",
     "kb": "tsx scripts/kb/cli.ts",
     "kb:check": "tsx scripts/kb/check.ts",
     "kb:clean": "tsx scripts/kb/clean-dist.ts",

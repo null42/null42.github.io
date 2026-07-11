@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Phase 1 audit boundary; no reference source is copied by this manifest.",
+  "sources": [
+    {
+      "role": "primary",
+      "repository": "MmzMing/my-blog",
+      "url": "https://github.com/MmzMing/my-blog",
+      "commit": "2fe55d6718839807c5c4cae20c33eae00390cd12",
+      "localPath": "env/firefly-mod-reference",
+      "acquisition": "GitHub commit archive after git clone timed out",
+      "license": { "spdx": "MIT", "path": "LICENSE", "copyright": ["2024 saicaca", "2025 CuteLeaf"] }
+    },
+    {
+      "role": "auxiliary",
+      "repository": "fqzlr/my-blog",
+      "url": "https://github.com/fqzlr/my-blog",
+      "commit": "65d6daf637e3e3dda460e012b4ef4ff418796dfc",
+      "localPath": "env/fqzlr-blog-reference",
+      "acquisition": "GitHub commit archive",
+      "license": { "spdx": "MIT", "path": "LICENSE", "copyright": ["2024 saicaca", "2025 CuteLeaf"] }
+    }
+  ],
+  "dispositions": {
+    "import": [
+      "src/pages/index.astro",
+      "src/pages/list.astro",
+      "src/components/layout/**",
+      "src/components/controls/**",
+      "src/styles/**",
+      "src/utils/home-*.js",
+      "src/utils/virtual-list-window.js"
+    ],
+    "merge": [
+      "astro.config.mjs",
+      "package.json",
+      "src/content.config.ts",
+      "src/layouts/**",
+      "scripts/generate-icons.js",
+      "scripts/generate-lqips.ts",
+      "scripts/subset-fonts.ts"
+    ],
+    "preserve": [
+      "content/**",
+      "scripts/kb/**",
+      "scripts/astro/**",
+      "tests/**",
+      ".github/workflows/deploy.yml",
+      "encrypted content and payload format"
+    ],
+    "exclude": [
+      "wrangler.toml",
+      "wrangler.jsonc",
+      "src/worker.js",
+      "src/workers/**",
+      "src/pages/api/**",
+      "Cloudflare Worker bindings",
+      "RAG services and routes",
+      "KV bindings",
+      "Vectorize indexes and scripts",
+      "Workers AI bindings",
+      "src/content/posts/**",
+      "src/content/spec/**",
+      "dynamic guestbook backends"
+    ],
+    "replace-personal": [
+      "src/config/profileConfig.ts",
+      "src/config/siteConfig.ts",
+      "src/config/navBarConfig.ts",
+      "src/config/socialConfig.ts",
+      "src/config/analyticsConfig.ts",
+      "src/assets/images/**",
+      "public/**/*.{png,jpg,jpeg,webp,avif,mp3,mp4}",
+      "author copy, email, social links, statistics and portfolio data"
+    ]
+  },
+  "classificationRules": [
+    { "match": "wrangler.{toml,jsonc}|src/worker.js|src/workers/**|src/pages/api/**|**/*{rag,vectorize,worker,workers-ai,kv}*", "disposition": "exclude" },
+    { "match": "src/content/posts/**|src/content/spec/**", "disposition": "exclude" },
+    { "match": "src/config/*{profile,site,navBar,social,analytics}*|src/assets/images/**|public/**/*.{png,jpg,jpeg,webp,avif,mp3,mp4}", "disposition": "replace-personal" },
+    { "match": "astro.config.mjs|package.json|src/content.config.ts|src/layouts/**|scripts/{generate-icons.js,generate-lqips.ts,subset-fonts.ts}", "disposition": "merge" },
+    { "match": "src/pages/{index,list}.astro|src/components/layout/**|src/components/controls/**|src/styles/**|src/utils/{home-*.js,virtual-list-window.js}", "disposition": "import" },
+    { "match": "LICENSE", "disposition": "preserve" },
+    { "match": "**/*", "disposition": "exclude" }
+  ],
+  "licenseTraceability": "Any imported or merged substantial portion must retain the upstream MIT notice from the corresponding pinned source."
+}
