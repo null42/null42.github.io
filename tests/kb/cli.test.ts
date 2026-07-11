@@ -15,4 +15,15 @@ describe('knowledge base CLI', () => {
     await expect(runCliCommand(['validate', '--ci'])).resolves.toMatchObject({ code: 0 })
     await expect(runCliCommand(['publish', '--dry-run'])).resolves.toMatchObject({ code: 0, dryRun: true })
   })
+
+  it('publishes with Astro without committing or pushing', () => {
+    const cli = fs.readFileSync('scripts/kb/cli.ts', 'utf8')
+    const publish = fs.readFileSync('scripts/kb/publish.ts', 'utf8')
+
+    expect(cli).not.toContain('vitepress')
+    expect(cli).not.toContain('syncDistToRoot')
+    expect(publish).toContain("run('pnpm', ['build'])")
+    expect(publish).toContain("commandOutput('git', ['status', '--short'])")
+    expect(publish).not.toMatch(/git['"], \[['"](?:add|commit|push)/)
+  })
 })

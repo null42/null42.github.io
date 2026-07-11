@@ -1,19 +1,15 @@
 import { spawnSync } from 'node:child_process'
 
-run('npm', ['run', 'kb:check'])
-run('npm', ['run', 'kb:generate'])
-run('npm', ['run', 'build'])
+run('pnpm', ['build'])
 
 const status = commandOutput('git', ['status', '--short'])
-if (!status.trim()) {
-  console.log('nothing to publish')
-  process.exit(0)
+if (status.trim()) {
+  console.log(status)
+} else {
+  console.log('工作区没有待提交变更。')
 }
 
-console.log(status)
-run('git', ['add', '.'])
-run('git', ['commit', '-m', `publish: update knowledge blog ${new Date().toISOString().slice(0, 10)}`])
-run('git', ['push'])
+console.log('Astro 生产构建完成。请检查 dist 和以上 Git 状态，确认后手动提交并推送。')
 
 function run(command: string, args: string[]): void {
   const result = spawnSync(command, args, {

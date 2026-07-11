@@ -113,20 +113,17 @@ async function publishCommand(dryRun: boolean): Promise<CliResult> {
     return {
       code: 0,
       dryRun: true,
-      messages: ['dry-run：将执行 clean -> generate -> build -> sync，当前校验未发现阻断项。']
+      messages: ['dry-run：将执行 Astro 生产构建，当前校验未发现阻断项。']
     }
   }
 
-  const [{ cleanDist }, { generateIndexes }, { syncDistToRoot }] = await Promise.all([
-    import('./clean-dist'),
-    import('./generate'),
-    import('./sync-dist')
-  ])
-  await cleanDist()
-  await generateIndexes()
-  execFileSync('cmd.exe', ['/c', 'node_modules\\.bin\\vitepress.cmd', 'build', '.'], { stdio: 'inherit' })
-  await syncDistToRoot()
-  return { code: 0, dryRun: false, messages: ['发布链路执行完成。'] }
+  const command = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm'
+  execFileSync(command, ['build'], { cwd: repoRoot, stdio: 'inherit' })
+  return {
+    code: 0,
+    dryRun: false,
+    messages: ['Astro 生产构建完成。请检查 dist 和 git status，确认后手动提交并推送。']
+  }
 }
 
 function collectRenderIssues(articles: Awaited<ReturnType<typeof scanArticles>>['articles']): Array<{ path: string; issue: RenderHealthIssue }> {
