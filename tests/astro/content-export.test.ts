@@ -73,11 +73,14 @@ describe('Astro content export', () => {
   it('generates root compatibility redirects and static pages', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-redirect-'))
     fs.mkdirSync(path.join(root, 'content'), { recursive: true })
+    fs.mkdirSync(path.join(root, 'public'), { recursive: true })
+    fs.writeFileSync(path.join(root, 'public/index.html'), 'stale redirect', 'utf8')
 
     const report = await exportAstroContent({ rootDir: root })
 
     expect(report.redirects['/index.html']).toBe('/')
     expect(report.redirects['/archive.html']).toBe('/archive/')
+    expect(fs.existsSync(path.join(root, 'public/index.html'))).toBe(false)
     expect(fs.readFileSync(path.join(root, 'public/archive.html'), 'utf8')).toContain('url=/archive/')
     expect(fs.existsSync(path.join(root, 'reports/astro-content-export.json'))).toBe(true)
   })

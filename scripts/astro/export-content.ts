@@ -58,6 +58,7 @@ export async function exportAstroContent(options: ExportOptions = {}): Promise<E
     redirects: { ...rootRedirects }
   }
   fs.rmSync(outputDir, { recursive: true, force: true })
+  fs.rmSync(path.join(publicDir, 'index.html'), { force: true })
   fs.mkdirSync(outputDir, { recursive: true })
   fs.mkdirSync(publicDir, { recursive: true })
 
@@ -118,6 +119,8 @@ export async function exportAstroContent(options: ExportOptions = {}): Promise<E
   }
 
   for (const [oldUrl, newUrl] of Object.entries(report.redirects)) {
+    // public/index.html 会覆盖 Astro 生成的首页，根路径本身无需兼容重定向页。
+    if (oldUrl === '/index.html') continue
     const destination = path.join(publicDir, oldUrl.replace(/^\//, ''))
     fs.mkdirSync(path.dirname(destination), { recursive: true })
     fs.writeFileSync(destination, redirectPage(newUrl), 'utf8')
