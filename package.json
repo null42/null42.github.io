@@ -84,12 +84,14 @@
     "stylus": "^0.64.0",
     "svelte": "^5.56.4",
     "tailwindcss": "^4.3.2",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "yauzl": "^3.4.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.10",
     "@types/node": "^22.0.0",
     "@types/sanitize-html": "^2.16.0",
+    "@types/yauzl": "^3.4.0",
     "ci-info": "^4.3.1",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",

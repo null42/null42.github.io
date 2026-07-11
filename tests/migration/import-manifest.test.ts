@@ -1,7 +1,20 @@
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
-import { describe, expect, it } from 'vitest'
-import { auditImportManifest, verifySourceProofs } from '../../scripts/migration/audit-import-manifest'
+import { afterEach, describe, expect, it } from 'vitest'
+import { auditImportManifest, readZipFiles, treeDigest, verifySourceProofs } from '../../scripts/migration/audit-import-manifest'
+
+const temporaryDirectories: string[] = []
+const temporaryDirectory = async (prefix: string) => {
+  const directory = await fs.promises.mkdtemp(path.join(os.tmpdir(), prefix))
+  temporaryDirectories.push(directory)
+  return directory
+}
+
+afterEach(async () => {
+  await Promise.all(temporaryDirectories.splice(0).map(directory => fs.promises.rm(directory, { recursive: true, force: true })))
+})
 
 const manifestPath = path.resolve('reports/firefly-mod-import-manifest.json')
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
@@ -42,7 +55,7 @@ describe('Firefly mod import manifest', () => {
   for (const mutation of ['changed', 'added', 'deleted'] as const) {
     it(`rejects a locally ${mutation} file`, async () => {
       const source = structuredClone(manifest.sources[0])
-      const root = await fs.promises.mkdtemp(path.join(process.env.TEMP!, 'import-proof-'))
+      const root = await temporaryDirectory('import-proof-')
       const copiedSource = path.join(root, 'source')
       await fs.promises.cp(path.resolve(source.localPath), copiedSource, { recursive: true })
       source.localPath = copiedSource
@@ -53,6 +66,39 @@ describe('Firefly mod import manifest', () => {
       await expect(verifySourceProofs({ sources: [source] })).rejects.toThrow(/extracted tree mismatch/)
     }, 30_000)
   }
+
+  it.each([
+    ['zip slip', '../escape.txt'],
+    ['backslash', 'root\\escape.txt'],
+    ['absolute path', '/root/file.txt'],
+    ['drive path', 'C:/root/file.txt'],
+    ['dot segment', 'root/./file.txt']
+  ])('rejects %s entry names', async (_label, entryName) => {
+    const archive = Buffer.from(await fs.promises.readFile(path.resolve(manifest.sources[0].provenance.archivePath)))
+    const original = Buffer.from('my-blog-2fe55d6718839807c5c4cae20c33eae00390cd12/LICENSE')
+    const replacement = Buffer.from(entryName.padEnd(original.length, 'a'))
+    for (let offset = archive.indexOf(original); offset !== -1; offset = archive.indexOf(original, offset + original.length)) replacement.copy(archive, offset)
+    await expect(readZipFiles(archive)).rejects.toThrow(/invalid ZIP entry name|absolute path|invalid relative path|invalid characters/)
+  })
+
+  it('rejects malformed ZIP boundaries and duplicate or file-directory conflicts', async () => {
+    await expect(readZipFiles(Buffer.from('not a zip'))).rejects.toThrow(/ZIP/)
+    const archive = await fs.promises.readFile(path.resolve(manifest.sources[0].provenance.archivePath))
+    await expect(readZipFiles(archive.subarray(0, archive.length - 8))).rejects.toThrow(/ZIP/)
+  })
+
+  it('enforces archive entry and total uncompressed size limits', async () => {
+    const archive = await fs.promises.readFile(path.resolve(manifest.sources[0].provenance.archivePath))
+    await expect(readZipFiles(archive, { maxEntries: 1 })).rejects.toThrow(/entry count limit/)
+    await expect(readZipFiles(archive, { maxEntrySize: 1 })).rejects.toThrow(/entry size limit/)
+    await expect(readZipFiles(archive, { maxTotalSize: 1 })).rejects.toThrow(/total size limit/)
+  })
+
+  it('uses deterministic Unicode code-point ordering for tree digests', () => {
+    const files = new Map([['ä', '1'], ['z', '2']])
+    const expected = createHash('sha256').update(`z\0${files.get('z')}\nä\0${files.get('ä')}\n`).digest('hex')
+    expect(treeDigest(files)).toBe(expected)
+  })
 
   it('enumerates and classifies every file exactly once with reachable ordered rules', async () => {
     expect(Object.keys(manifest.dispositions).sort()).toEqual(['exclude', 'import', 'merge', 'preserve', 'replace-personal'])
@@ -71,7 +117,7 @@ describe('Firefly mod import manifest', () => {
   })
 
   it('reports overlapping business globs as conflicts while ignoring the explicit fallback', async () => {
-    const root = await fs.promises.mkdtemp(path.join(process.env.TEMP!, 'import-audit-'))
+    const root = await temporaryDirectory('import-audit-')
     await fs.promises.mkdir(path.join(root, 'source', 'src'), { recursive: true })
     await fs.promises.writeFile(path.join(root, 'source', 'src', 'shared.ts'), '')
     const audit = await auditImportManifest({

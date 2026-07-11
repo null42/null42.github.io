@@ -2,38 +2,65 @@ import { createHash } from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { inflateRawSync } from 'node:zlib'
 import { glob } from 'glob'
+import yauzl from 'yauzl'
 
 const sha256 = async (file: string) => createHash('sha256').update(await fs.readFile(file)).digest('hex')
 
-function zipFiles(buffer: Buffer) {
+type ZipLimits = { maxEntries?: number, maxEntrySize?: number, maxTotalSize?: number }
+
+const compareCodePoints = (left: string, right: string) => left < right ? -1 : left > right ? 1 : 0
+
+export async function readZipFiles(buffer: Buffer, limits: ZipLimits = {}) {
+  const { maxEntries = 10_000, maxEntrySize = 64 * 1024 * 1024, maxTotalSize = 256 * 1024 * 1024 } = limits
+  const zip = await new Promise<yauzl.ZipFile>((resolve, reject) => yauzl.fromBuffer(buffer, { lazyEntries: true, decodeStrings: true, validateEntrySizes: true, strictFileNames: true }, (error, file) => error ? reject(new Error(`invalid ZIP: ${error.message}`)) : resolve(file)))
   const files = new Map<string, string>()
+  const paths = new Map<string, 'file' | 'directory'>()
   const topLevels = new Set<string>()
-  for (let offset = 0; offset <= buffer.length - 46; offset++) {
-    if (buffer.readUInt32LE(offset) !== 0x02014b50) continue
-    const method = buffer.readUInt16LE(offset + 10)
-    const compressedSize = buffer.readUInt32LE(offset + 20)
-    const nameLength = buffer.readUInt16LE(offset + 28)
-    const extraLength = buffer.readUInt16LE(offset + 30)
-    const commentLength = buffer.readUInt16LE(offset + 32)
-    const localOffset = buffer.readUInt32LE(offset + 42)
-    const name = buffer.subarray(offset + 46, offset + 46 + nameLength).toString('utf8')
-    if (name) topLevels.add(name.split('/')[0])
-    if (name && !name.endsWith('/')) {
-      const localNameLength = buffer.readUInt16LE(localOffset + 26)
-      const localExtraLength = buffer.readUInt16LE(localOffset + 28)
-      const start = localOffset + 30 + localNameLength + localExtraLength
-      const compressed = buffer.subarray(start, start + compressedSize)
-      const content = method === 0 ? compressed : method === 8 ? inflateRawSync(compressed) : (() => { throw new Error(`unsupported ZIP compression method ${method}`) })()
-      files.set(name.split('/').slice(1).join('/'), createHash('sha256').update(content).digest('hex'))
-    }
-    offset += 45 + nameLength + extraLength + commentLength
-  }
-  return { files, topLevels: [...topLevels].sort() }
+  let entries = 0
+  let totalSize = 0
+
+  return new Promise<{ files: Map<string, string>, topLevels: string[] }>((resolve, reject) => {
+    const fail = (error: unknown) => { zip.close(); reject(error) }
+    zip.on('error', fail)
+    zip.on('end', () => resolve({ files, topLevels: [...topLevels].sort(compareCodePoints) }))
+    zip.on('entry', (entry: yauzl.Entry) => {
+      try {
+        entries++
+        if (entries > maxEntries) throw new Error('ZIP entry count limit exceeded')
+        const name = entry.fileName
+        const directory = name.endsWith('/')
+        if (!name || name.includes('\0') || name.includes('\\') || name.startsWith('/') || /^[A-Za-z]:/.test(name)) throw new Error(`invalid ZIP entry name: ${JSON.stringify(name)}`)
+        const segments = name.split('/').filter((_, index, all) => !(directory && index === all.length - 1))
+        if (!segments.length || segments.some(segment => !segment || segment === '.' || segment === '..')) throw new Error(`invalid ZIP entry name: ${JSON.stringify(name)}`)
+        const normalized = segments.join('/')
+        const kind = directory ? 'directory' : 'file'
+        if (paths.has(normalized)) throw new Error(`duplicate ZIP entry name: ${JSON.stringify(name)}`)
+        for (let index = 1; index < segments.length; index++) if (paths.get(segments.slice(0, index).join('/')) === 'file') throw new Error(`ZIP file/directory conflict: ${JSON.stringify(name)}`)
+        if (kind === 'file' && [...paths].some(([existing]) => existing.startsWith(`${normalized}/`))) throw new Error(`ZIP file/directory conflict: ${JSON.stringify(name)}`)
+        paths.set(normalized, kind)
+        topLevels.add(segments[0])
+        if (entry.uncompressedSize > maxEntrySize) throw new Error(`ZIP entry size limit exceeded: ${JSON.stringify(name)}`)
+        totalSize += entry.uncompressedSize
+        if (totalSize > maxTotalSize) throw new Error('ZIP total size limit exceeded')
+        if (directory) { zip.readEntry(); return }
+        zip.openReadStream(entry, (error, stream) => {
+          if (error || !stream) { fail(error ?? new Error(`cannot read ZIP entry: ${name}`)); return }
+          const hash = createHash('sha256')
+          stream.on('data', chunk => hash.update(chunk))
+          stream.on('error', fail)
+          stream.on('end', () => {
+            files.set(segments.slice(1).join('/'), hash.digest('hex'))
+            zip.readEntry()
+          })
+        })
+      } catch (error) { fail(error) }
+    })
+    zip.readEntry()
+  })
 }
 
-const treeDigest = (files: Map<string, string>) => createHash('sha256').update([...files].sort(([a], [b]) => a.localeCompare(b)).map(([name, digest]) => `${name}\0${digest}\n`).join('')).digest('hex')
+export const treeDigest = (files: Map<string, string>) => createHash('sha256').update([...files].sort(([a], [b]) => compareCodePoints(a, b)).map(([name, digest]) => `${name}\0${digest}\n`).join('')).digest('hex')
 
 export async function verifySourceProofs(manifest: any, rootDir = process.cwd()) {
   return Promise.all(manifest.sources.map(async (source: any) => {
@@ -41,7 +68,7 @@ export async function verifySourceProofs(manifest: any, rootDir = process.cwd())
     const archivePath = path.resolve(rootDir, proof.archivePath)
     const referencePath = path.resolve(rootDir, source.localPath)
     const actualArchiveSha256 = await sha256(archivePath)
-    const archive = zipFiles(await fs.readFile(archivePath))
+    const archive = await readZipFiles(await fs.readFile(archivePath))
     const localNames = (await glob('**/*', { cwd: referencePath, nodir: true, dot: true })).map(name => name.replaceAll('\\', '/')).sort()
     const extractedFiles = new Map(await Promise.all(localNames.map(async name => [name, await sha256(path.join(referencePath, name))] as const)))
     const actualLicenseSha256 = extractedFiles.get(source.license.path)
