@@ -48,6 +48,7 @@ if (process.env.NODE_ENV === "development") {
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.site_url,
+	output: "static",
 
 	base: "/",
 	trailingSlash: "always",
