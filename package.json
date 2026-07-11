@@ -13,6 +13,8 @@
     "content:generate": "tsx scripts/astro/export-content.ts",
     "migration:baseline": "tsx scripts/migration/generate-baseline.ts",
     "migration:baseline:check": "tsx scripts/migration/generate-baseline.ts --check",
+    "migration:import:audit": "tsx scripts/migration/audit-import-manifest.ts",
+    "migration:import:audit:check": "tsx scripts/migration/audit-import-manifest.ts --check",
     "kb": "tsx scripts/kb/cli.ts",
     "kb:check": "tsx scripts/kb/check.ts",
     "kb:clean": "tsx scripts/kb/clean-dist.ts",

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "archiveUrl": "https://github.com/MmzMing/my-blog/archive/2fe55d6718839807c5c4cae20c33eae00390cd12.zip",
+      "expectedCommit": "2fe55d6718839807c5c4cae20c33eae00390cd12",
+      "archiveSha256": "960a6c35fec79526cae77005223e2f51c91278fb61cb3f68eaa0e6e220d839c3",
+      "topLevelDirectory": "my-blog-2fe55d6718839807c5c4cae20c33eae00390cd12",
+      "licenseSha256": "d403e8d1dc09f7088b029a65b37895cce1a5802c086321c2df3a28ba779399f6"
+    },
+    {
+      "archiveUrl": "https://github.com/fqzlr/my-blog/archive/65d6daf637e3e3dda460e012b4ef4ff418796dfc.zip",
+      "expectedCommit": "65d6daf637e3e3dda460e012b4ef4ff418796dfc",
+      "archiveSha256": "7850889de1307d7d22da16ab664fea29cca47733b955af922ae4fea4ac959b29",
+      "topLevelDirectory": "my-blog-65d6daf637e3e3dda460e012b4ef4ff418796dfc",
+      "licenseSha256": "d403e8d1dc09f7088b029a65b37895cce1a5802c086321c2df3a28ba779399f6"
+    }
+  ],
+  "classification": {
+    "totalFiles": 1744,
+    "coveredFiles": 1744,
+    "counts": {
+      "import": 185,
+      "merge": 12,
+      "preserve": 2,
+      "exclude": 1026,
+      "replace-personal": 519
+    },
+    "fallbackExclude": {
+      "count": 918,
+      "samples": [
+        "MmzMing/my-blog:.env.example",
+        "MmzMing/my-blog:.gitattributes",
+        "MmzMing/my-blog:.github/FUNDING.yml",
+        "MmzMing/my-blog:.github/ISSUE_TEMPLATE/01-bug_report.yml",
+        "MmzMing/my-blog:.github/ISSUE_TEMPLATE/02-feature_request.yml",
+        "MmzMing/my-blog:.github/ISSUE_TEMPLATE/03-custom_issue.yml",
+        "MmzMing/my-blog:.github/ISSUE_TEMPLATE/friend-link.yml",
+        "MmzMing/my-blog:.github/pull_request_template.md",
+        "MmzMing/my-blog:.github/scripts/process-friend-request.cjs",
+        "MmzMing/my-blog:.github/workflows/ci.yml"
+      ]
+    },
+    "unclassified": [],
+    "conflicts": [],
+    "unreachableRules": [],
+    "invalidPatterns": []
+  }
+}
