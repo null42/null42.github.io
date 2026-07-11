@@ -14,6 +14,7 @@ interface BaselineArticle {
 export interface MigrationBaseline {
   schemaVersion: 1; stableCommit: string; generatedBy: string
   counts: { articles: number; attachments: number; urls: number }
+  protected: { private: { count: number; placeholder: string }; encrypted: { count: number; placeholder: string } }
   articles: BaselineArticle[]
 }
 
@@ -25,10 +26,15 @@ export async function buildMigrationBaseline(options: BaselineOptions): Promise<
   const contentRoot = path.join(rootDir, 'content')
   const records = await scanMarkdownFiles({ contentRoot })
   const articles: BaselineArticle[] = []
+  const protectedCounts = { private: 0, encrypted: 0 }
   for (const record of records) {
     const relative = path.relative(contentRoot, record.absolutePath).replace(/\\/g, '/')
     const slug = text(record.completed.slug) ?? relative.replace(/\.md$/i, '')
     const visibility = text(record.completed.visibility) ?? 'public'
+    if (visibility === 'private' || visibility === 'encrypted' || relative.startsWith('encrypted/')) {
+      protectedCounts[visibility === 'private' ? 'private' : 'encrypted']++
+      continue
+    }
     const attachments: Attachment[] = []
     for (const match of record.body.matchAll(/!\[[^\]]*\]\(([^\s)#]+)(?:#[^)]*)?(?:\s+[^)]*)?\)/g)) {
       const target = match[1]
@@ -39,7 +45,7 @@ export async function buildMigrationBaseline(options: BaselineOptions): Promise<
         attachments.push({ path: path.relative(rootDir, absolute).replace(/\\/g, '/'), sha256: sha256(data) })
       } catch { /* missing attachments are reported by existing scanners */ }
     }
-    attachments.sort((a, b) => a.path.localeCompare(b.path))
+    attachments.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0)
     articles.push({
       sourcePath: `content/${relative}`,
       contentSha256: sha256(await fs.readFile(record.absolutePath)),
@@ -55,9 +61,19 @@ export async function buildMigrationBaseline(options: BaselineOptions): Promise<
       attachments
     })
   }
-  articles.sort((a, b) => a.sourcePath.localeCompare(b.sourcePath))
+  articles.sort((a, b) => a.sourcePath < b.sourcePath ? -1 : a.sourcePath > b.sourcePath ? 1 : 0)
   const attachmentCount = articles.reduce((count, article) => count + article.attachments.length, 0)
-  return { schemaVersion: 1, stableCommit: options.stableCommit, generatedBy: 'corepack pnpm migration:baseline', counts: { articles: articles.length, attachments: attachmentCount, urls: articles.length * 2 }, articles }
+  return {
+    schemaVersion: 1,
+    stableCommit: options.stableCommit,
+    generatedBy: 'corepack pnpm migration:baseline',
+    counts: { articles: articles.length, attachments: attachmentCount, urls: articles.length * 2 },
+    protected: {
+      private: { count: protectedCounts.private, placeholder: 'protected:private:v1' },
+      encrypted: { count: protectedCounts.encrypted, placeholder: 'protected:encrypted:v1' }
+    },
+    articles
+  }
 }
 
 export function serializeBaseline(baseline: MigrationBaseline): string {

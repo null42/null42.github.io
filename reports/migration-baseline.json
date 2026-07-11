@@ -3,9 +3,19 @@
   "stableCommit": "61c1c29f3460e7d158a0c9daf1176ea95a5b8675",
   "generatedBy": "corepack pnpm migration:baseline",
   "counts": {
-    "articles": 376,
+    "articles": 374,
     "attachments": 14,
-    "urls": 752
+    "urls": 748
+  },
+  "protected": {
+    "private": {
+      "count": 0,
+      "placeholder": "protected:private:v1"
+    },
+    "encrypted": {
+      "count": 2,
+      "placeholder": "protected:encrypted:v1"
+    }
   },
   "articles": [
     {
@@ -33,31 +43,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/encrypted/demo.md",
-      "contentSha256": "c235bb5d292972d1055253062129e688a42932d2626e4a989e104fda97a23e97",
-      "slug": "encrypted/demo",
-      "oldUrl": "/content/encrypted/demo.html",
-      "targetUrl": "/posts/encrypted/demo/",
-      "visibility": "encrypted",
-      "encrypted": true,
-      "sectionId": "加密内容",
-      "routeId": "加密演示",
-      "stageId": "demo",
-      "articleId": "encrypted/demo",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/encrypted/worldbuilding.md",
-      "contentSha256": "2bf8454cd9db59b5eb617875a5a931e26c88cbc13a6d130ebd644785dae5947d",
-      "slug": "encrypted/worldbuilding",
-      "oldUrl": "/content/encrypted/worldbuilding.html",
-      "targetUrl": "/posts/encrypted/worldbuilding/",
-      "visibility": "encrypted",
-      "encrypted": true,
-      "sectionId": "加密内容",
-      "routeId": "世界塑造",
-      "stageId": "worldbuilding",
-      "articleId": "encrypted/worldbuilding",
+      "sourcePath": "content/matlab-simulink/README.md",
+      "contentSha256": "05aad7d40de8143d60e36f3a94fe86e4f51e2b4a295fb6ae5693f3534f8b0130",
+      "slug": "matlab-simulink/README",
+      "oldUrl": "/content/matlab-simulink/README.html",
+      "targetUrl": "/posts/matlab-simulink/README/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "Matlab/Simulink 仿真",
+      "routeId": "仿真基础",
+      "stageId": "overview",
+      "articleId": "matlab-simulink/README",
       "attachments": []
     },
     {
@@ -117,20 +113,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/matlab-simulink/README.md",
-      "contentSha256": "05aad7d40de8143d60e36f3a94fe86e4f51e2b4a295fb6ae5693f3534f8b0130",
-      "slug": "matlab-simulink/README",
-      "oldUrl": "/content/matlab-simulink/README.html",
-      "targetUrl": "/posts/matlab-simulink/README/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "Matlab/Simulink 仿真",
-      "routeId": "仿真基础",
-      "stageId": "overview",
-      "articleId": "matlab-simulink/README",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control.md",
       "contentSha256": "b52c9d5d4fd8ebd9f7f259e02ee90ec92b05b85c3b082f2fe7b8b4ab3ee3c6b2",
       "slug": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
@@ -173,17 +155,157 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-01-assessment.md",
-      "contentSha256": "4c79a8fb92d5116fb01a11e09bdc508913b0f6b786ba6af7bce6090a2329b8a4",
-      "slug": "motor/advanced/algorithm/ADV-ALG-01-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-01-assessment/",
+      "sourcePath": "content/motor/COMPARISON/COMP-01-ODrive-vs-VESC.md",
+      "contentSha256": "b589b9fbdca4b920c9eeb7fafc668942425008744147c0b3cdc944a535d0b454",
+      "slug": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+      "oldUrl": "/content/motor/COMPARISON/COMP-01-ODrive-vs-VESC.html",
+      "targetUrl": "/posts/motor/COMPARISON/COMP-01-ODrive-vs-VESC/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "COMPARISON",
+      "articleId": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/ODrive/OD-01-Architecture.md",
+      "contentSha256": "16be3117708c40af3f05a3f62ee6bd1007f6d93b0c350a7b49288cec12d36d3a",
+      "slug": "motor/ODrive/OD-01-Architecture",
+      "oldUrl": "/content/motor/ODrive/OD-01-Architecture.html",
+      "targetUrl": "/posts/motor/ODrive/OD-01-Architecture/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "ODrive",
+      "articleId": "motor/ODrive/OD-01-Architecture",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/ODrive/OD-02-FOC-Core.md",
+      "contentSha256": "d7fcd93a69e0adfb1acbc6662ac9a6e4592cd3ab61bbb457c77bfa76640e546f",
+      "slug": "motor/ODrive/OD-02-FOC-Core",
+      "oldUrl": "/content/motor/ODrive/OD-02-FOC-Core.html",
+      "targetUrl": "/posts/motor/ODrive/OD-02-FOC-Core/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "ODrive",
+      "articleId": "motor/ODrive/OD-02-FOC-Core",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/ODrive/OD-03-Control-Strategy.md",
+      "contentSha256": "86e2c12cb063912f193128b7d171dfb5f97da4c75673a88764a26aaecb6dbd6c",
+      "slug": "motor/ODrive/OD-03-Control-Strategy",
+      "oldUrl": "/content/motor/ODrive/OD-03-Control-Strategy.html",
+      "targetUrl": "/posts/motor/ODrive/OD-03-Control-Strategy/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "ODrive",
+      "articleId": "motor/ODrive/OD-03-Control-Strategy",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/ODrive/OD-04-Encoder-Sensorless.md",
+      "contentSha256": "4145b1cfa2627c02d06c934a11689480645d15cfffd347d79e41dff7d809953f",
+      "slug": "motor/ODrive/OD-04-Encoder-Sensorless",
+      "oldUrl": "/content/motor/ODrive/OD-04-Encoder-Sensorless.html",
+      "targetUrl": "/posts/motor/ODrive/OD-04-Encoder-Sensorless/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "ODrive",
+      "articleId": "motor/ODrive/OD-04-Encoder-Sensorless",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/README.md",
+      "contentSha256": "0cb6b753eda4273c795d64342b0386baac3f925b4d875e72f7de811ec4decf57",
+      "slug": "motor/README",
+      "oldUrl": "/content/motor/README.html",
+      "targetUrl": "/posts/motor/README/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "入门与索引",
+      "stageId": "overview",
+      "articleId": "motor/README",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/VESC/VC-01-Architecture.md",
+      "contentSha256": "08f226d09fdece94566a604a843ef5e9bdae2d64d0015e78da5055c7d6484509",
+      "slug": "motor/VESC/VC-01-Architecture",
+      "oldUrl": "/content/motor/VESC/VC-01-Architecture.html",
+      "targetUrl": "/posts/motor/VESC/VC-01-Architecture/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "VESC",
+      "articleId": "motor/VESC/VC-01-Architecture",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/VESC/VC-02-FOC-Core.md",
+      "contentSha256": "2be269e2f39093585205a1b050305530c5dff98c430b03e484e6a05b9fe270b7",
+      "slug": "motor/VESC/VC-02-FOC-Core",
+      "oldUrl": "/content/motor/VESC/VC-02-FOC-Core.html",
+      "targetUrl": "/posts/motor/VESC/VC-02-FOC-Core/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "VESC",
+      "articleId": "motor/VESC/VC-02-FOC-Core",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/VESC/VC-03-Observer-Sensorless.md",
+      "contentSha256": "4efdbf2e5f178ccaa64aaefd944c39fc3406eb988adafdbd88a919ef5365bcca",
+      "slug": "motor/VESC/VC-03-Observer-Sensorless",
+      "oldUrl": "/content/motor/VESC/VC-03-Observer-Sensorless.html",
+      "targetUrl": "/posts/motor/VESC/VC-03-Observer-Sensorless/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "VESC",
+      "articleId": "motor/VESC/VC-03-Observer-Sensorless",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/VESC/VC-04-System-Protection.md",
+      "contentSha256": "bd93c585369cb6a9b797b37fe22ae9de99ce0ac8d64fae069afe3ed042183574",
+      "slug": "motor/VESC/VC-04-System-Protection",
+      "oldUrl": "/content/motor/VESC/VC-04-System-Protection.html",
+      "targetUrl": "/posts/motor/VESC/VC-04-System-Protection/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "工程与生态",
+      "stageId": "VESC",
+      "articleId": "motor/VESC/VC-04-System-Protection",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/advanced/README.md",
+      "contentSha256": "b6b92e2fd72f4d8d1beefd512c6d93d1f39076dcb6d6f0046fb228e83006a1af",
+      "slug": "motor/advanced/README",
+      "oldUrl": "/content/motor/advanced/README.html",
+      "targetUrl": "/posts/motor/advanced/README/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-01-assessment",
+      "articleId": "motor/advanced/README",
       "attachments": []
     },
     {
@@ -201,17 +323,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-05-assessment.md",
-      "contentSha256": "207a9b59a99953d149d17a9ae2f5193024439603fdafffed6483dedfda3d9639",
-      "slug": "motor/advanced/algorithm/ADV-ALG-05-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-05-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-05-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-01-assessment.md",
+      "contentSha256": "4c79a8fb92d5116fb01a11e09bdc508913b0f6b786ba6af7bce6090a2329b8a4",
+      "slug": "motor/advanced/algorithm/ADV-ALG-01-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-01-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-05-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-01-assessment",
       "attachments": []
     },
     {
@@ -229,17 +351,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-07-assessment.md",
-      "contentSha256": "612e1655bb21db1b4f3c001f2a1a4afe6eb2c236602858633e698f2a11a4371d",
-      "slug": "motor/advanced/algorithm/ADV-ALG-07-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-07-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-07-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-05-assessment.md",
+      "contentSha256": "207a9b59a99953d149d17a9ae2f5193024439603fdafffed6483dedfda3d9639",
+      "slug": "motor/advanced/algorithm/ADV-ALG-05-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-05-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-07-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-05-assessment",
       "attachments": []
     },
     {
@@ -257,17 +379,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-09-assessment.md",
-      "contentSha256": "d0b9ced1a8c14bc61cdc88144d87a3ca09b1754172ee125b446e5f795594b4ac",
-      "slug": "motor/advanced/algorithm/ADV-ALG-09-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-09-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-09-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-07-assessment.md",
+      "contentSha256": "612e1655bb21db1b4f3c001f2a1a4afe6eb2c236602858633e698f2a11a4371d",
+      "slug": "motor/advanced/algorithm/ADV-ALG-07-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-07-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-07-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-09-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-07-assessment",
       "attachments": []
     },
     {
@@ -285,17 +407,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-13-assessment.md",
-      "contentSha256": "779e47e26f9267c9a5cd7d5e6fd6c0c9f3c3f41cc46135e5106c65b6e669f761",
-      "slug": "motor/advanced/algorithm/ADV-ALG-13-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-13-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-13-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-09-assessment.md",
+      "contentSha256": "d0b9ced1a8c14bc61cdc88144d87a3ca09b1754172ee125b446e5f795594b4ac",
+      "slug": "motor/advanced/algorithm/ADV-ALG-09-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-09-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-09-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-13-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-09-assessment",
       "attachments": []
     },
     {
@@ -313,17 +435,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-15-assessment.md",
-      "contentSha256": "97407a3118317bef3299cace12365cc5f70c4d11cb15baa405960466f407fa50",
-      "slug": "motor/advanced/algorithm/ADV-ALG-15-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-15-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-15-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-13-assessment.md",
+      "contentSha256": "779e47e26f9267c9a5cd7d5e6fd6c0c9f3c3f41cc46135e5106c65b6e669f761",
+      "slug": "motor/advanced/algorithm/ADV-ALG-13-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-13-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-13-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-15-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-13-assessment",
       "attachments": []
     },
     {
@@ -341,17 +463,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.md",
-      "contentSha256": "0d6bb1c7c51541552c2bd4f9161b4d3420009b197ef0ace3ad239f808a02c58c",
-      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
-      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment/",
+      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-15-assessment.md",
+      "contentSha256": "97407a3118317bef3299cace12365cc5f70c4d11cb15baa405960466f407fa50",
+      "slug": "motor/advanced/algorithm/ADV-ALG-15-assessment",
+      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-15-assessment.html",
+      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-15-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+      "articleId": "motor/advanced/algorithm/ADV-ALG-15-assessment",
       "attachments": []
     },
     {
@@ -366,6 +488,20 @@
       "routeId": "实践与验证",
       "stageId": "advanced",
       "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.md",
+      "contentSha256": "0d6bb1c7c51541552c2bd4f9161b4d3420009b197ef0ace3ad239f808a02c58c",
+      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.html",
+      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "advanced",
+      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
       "attachments": []
     },
     {
@@ -397,20 +533,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.md",
-      "contentSha256": "7e620b116a3a563540f471dc97a61b81c4cc20477e97d63d2c294a066e5fc537",
-      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
-      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.html",
-      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed.md",
       "contentSha256": "0801ee4a10bd2d11e230c568eb52847e1d9d8d0ed5565e3f0306fb9b9c8624e4",
       "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
@@ -425,31 +547,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/README.md",
-      "contentSha256": "b6b92e2fd72f4d8d1beefd512c6d93d1f39076dcb6d6f0046fb228e83006a1af",
-      "slug": "motor/advanced/README",
-      "oldUrl": "/content/motor/advanced/README.html",
-      "targetUrl": "/posts/motor/advanced/README/",
+      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.md",
+      "contentSha256": "7e620b116a3a563540f471dc97a61b81c4cc20477e97d63d2c294a066e5fc537",
+      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
+      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.html",
+      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/README",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-01-assessment.md",
-      "contentSha256": "da563c1698925e8c124b20b80aa1f1aef6981d9793c06848b4ceb872eb69d3e1",
-      "slug": "motor/advanced/system-methodology/SYS-01-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-01-assessment",
+      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
       "attachments": []
     },
     {
@@ -467,17 +575,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-02-assessment.md",
-      "contentSha256": "003ed098afcc00c5b95d25705a3c8f63a6a357a84359613cd86610bfcb82a8ca",
-      "slug": "motor/advanced/system-methodology/SYS-02-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-02-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-02-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-01-assessment.md",
+      "contentSha256": "da563c1698925e8c124b20b80aa1f1aef6981d9793c06848b4ceb872eb69d3e1",
+      "slug": "motor/advanced/system-methodology/SYS-01-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-01-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-02-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-01-assessment",
       "attachments": []
     },
     {
@@ -495,17 +603,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-03-assessment.md",
-      "contentSha256": "04272af2e03ee8e9130a58938928f4c3e93c05bed573220ca3751d154dc4e05d",
-      "slug": "motor/advanced/system-methodology/SYS-03-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-03-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-03-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-02-assessment.md",
+      "contentSha256": "003ed098afcc00c5b95d25705a3c8f63a6a357a84359613cd86610bfcb82a8ca",
+      "slug": "motor/advanced/system-methodology/SYS-02-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-02-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-02-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-03-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-02-assessment",
       "attachments": []
     },
     {
@@ -523,17 +631,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-04-assessment.md",
-      "contentSha256": "e2a6a38bbbf2ac25176ae09cf74b607e3d9c98fb0ca0c3eb9d015c49fc77d071",
-      "slug": "motor/advanced/system-methodology/SYS-04-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-04-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-04-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-03-assessment.md",
+      "contentSha256": "04272af2e03ee8e9130a58938928f4c3e93c05bed573220ca3751d154dc4e05d",
+      "slug": "motor/advanced/system-methodology/SYS-03-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-03-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-04-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-03-assessment",
       "attachments": []
     },
     {
@@ -551,17 +659,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-05-assessment.md",
-      "contentSha256": "7738603df39f1d3e83c932caa6b9c2a24a020ae690b0f63df14116fa9d830802",
-      "slug": "motor/advanced/system-methodology/SYS-05-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-05-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-05-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-04-assessment.md",
+      "contentSha256": "e2a6a38bbbf2ac25176ae09cf74b607e3d9c98fb0ca0c3eb9d015c49fc77d071",
+      "slug": "motor/advanced/system-methodology/SYS-04-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-04-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-05-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-04-assessment",
       "attachments": []
     },
     {
@@ -579,17 +687,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-06-assessment.md",
-      "contentSha256": "04278994dea3e3449ef99ba21f16466f17c4127dde6ffe2fc63a4fe7f7f5d936",
-      "slug": "motor/advanced/system-methodology/SYS-06-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-06-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-06-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-05-assessment.md",
+      "contentSha256": "7738603df39f1d3e83c932caa6b9c2a24a020ae690b0f63df14116fa9d830802",
+      "slug": "motor/advanced/system-methodology/SYS-05-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-05-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-06-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-05-assessment",
       "attachments": []
     },
     {
@@ -607,17 +715,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-07-assessment.md",
-      "contentSha256": "e2c044979b804c042341373d18e5cfaf0c6cd6d2234d25d42b1c0544cdde0bed",
-      "slug": "motor/advanced/system-methodology/SYS-07-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-07-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-07-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-06-assessment.md",
+      "contentSha256": "04278994dea3e3449ef99ba21f16466f17c4127dde6ffe2fc63a4fe7f7f5d936",
+      "slug": "motor/advanced/system-methodology/SYS-06-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-06-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-06-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "实践与验证",
       "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-07-assessment",
+      "articleId": "motor/advanced/system-methodology/SYS-06-assessment",
       "attachments": []
     },
     {
@@ -635,17 +743,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-00-assessment.md",
-      "contentSha256": "e34fdee6a0626e8d923fe84c86a00d4b3aeab80eff6c434d51e1a59e217fb1aa",
-      "slug": "motor/algorithm/ALG-00-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-00-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-00-assessment/",
+      "sourcePath": "content/motor/advanced/system-methodology/SYS-07-assessment.md",
+      "contentSha256": "e2c044979b804c042341373d18e5cfaf0c6cd6d2234d25d42b1c0544cdde0bed",
+      "slug": "motor/advanced/system-methodology/SYS-07-assessment",
+      "oldUrl": "/content/motor/advanced/system-methodology/SYS-07-assessment.html",
+      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-07-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-00-assessment",
+      "routeId": "实践与验证",
+      "stageId": "advanced",
+      "articleId": "motor/advanced/system-methodology/SYS-07-assessment",
       "attachments": []
     },
     {
@@ -691,17 +799,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-01-assessment.md",
-      "contentSha256": "39ca9b31f24a0e4570f31ce3ab6d9d4d334098ed7e44c80870a1e4e700f98fce",
-      "slug": "motor/algorithm/ALG-01-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-01-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-01-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-00-assessment.md",
+      "contentSha256": "e34fdee6a0626e8d923fe84c86a00d4b3aeab80eff6c434d51e1a59e217fb1aa",
+      "slug": "motor/algorithm/ALG-00-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-00-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-00-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-01-assessment",
+      "articleId": "motor/algorithm/ALG-00-assessment",
       "attachments": []
     },
     {
@@ -719,17 +827,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-02-assessment.md",
-      "contentSha256": "29583c4d59b059ed451e03029c3a47d4b003b251b037963dfe45d0a782637910",
-      "slug": "motor/algorithm/ALG-02-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-02-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-02-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-01-assessment.md",
+      "contentSha256": "39ca9b31f24a0e4570f31ce3ab6d9d4d334098ed7e44c80870a1e4e700f98fce",
+      "slug": "motor/algorithm/ALG-01-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-01-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-02-assessment",
+      "articleId": "motor/algorithm/ALG-01-assessment",
       "attachments": []
     },
     {
@@ -747,6 +855,20 @@
       "attachments": []
     },
     {
+      "sourcePath": "content/motor/algorithm/ALG-02-assessment.md",
+      "contentSha256": "29583c4d59b059ed451e03029c3a47d4b003b251b037963dfe45d0a782637910",
+      "slug": "motor/algorithm/ALG-02-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-02-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-02-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/ALG-02-assessment",
+      "attachments": []
+    },
+    {
       "sourcePath": "content/motor/algorithm/ALG-03-PI-Current-Regulator.md",
       "contentSha256": "2487eadcb5c7d2e8390d2ba116dd40df63cdc54a37d69b79fd877b483bb95c2a",
       "slug": "motor/algorithm/ALG-03-PI-Current-Regulator",
@@ -758,20 +880,6 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-03-PI-Current-Regulator",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-04-assessment.md",
-      "contentSha256": "24b9572247028220fc83be0c386e9d83908e4e9affb820fa02d7c7ecfbc09e22",
-      "slug": "motor/algorithm/ALG-04-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-04-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-04-assessment",
       "attachments": []
     },
     {
@@ -789,17 +897,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-05-assessment.md",
-      "contentSha256": "58c0f5f42aeb843547acfea6be9e73b18a422afca34b45e37e0961a54dc77651",
-      "slug": "motor/algorithm/ALG-05-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-05-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-05-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-04-assessment.md",
+      "contentSha256": "24b9572247028220fc83be0c386e9d83908e4e9affb820fa02d7c7ecfbc09e22",
+      "slug": "motor/algorithm/ALG-04-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-04-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-05-assessment",
+      "articleId": "motor/algorithm/ALG-04-assessment",
       "attachments": []
     },
     {
@@ -817,6 +925,20 @@
       "attachments": []
     },
     {
+      "sourcePath": "content/motor/algorithm/ALG-05-assessment.md",
+      "contentSha256": "58c0f5f42aeb843547acfea6be9e73b18a422afca34b45e37e0961a54dc77651",
+      "slug": "motor/algorithm/ALG-05-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-05-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-05-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/ALG-05-assessment",
+      "attachments": []
+    },
+    {
       "sourcePath": "content/motor/algorithm/ALG-06-Position-Speed-Observer.md",
       "contentSha256": "3e38e1a05b24aeb0dc53246cab377eb1cc965d9962e76bfa0d2f35a95c30a928",
       "slug": "motor/algorithm/ALG-06-Position-Speed-Observer",
@@ -828,20 +950,6 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-06-Position-Speed-Observer",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-07-assessment.md",
-      "contentSha256": "9f3af8e0040d0eda3d662f4a75120d7348610d8883a83196705cbfc74422d943",
-      "slug": "motor/algorithm/ALG-07-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-07-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-07-assessment",
       "attachments": []
     },
     {
@@ -859,17 +967,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-08-assessment.md",
-      "contentSha256": "49fb9cd44ef14b9637bb88b614014c1fec503157e3ff012b531a37c62616f6de",
-      "slug": "motor/algorithm/ALG-08-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-08-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-08-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-07-assessment.md",
+      "contentSha256": "9f3af8e0040d0eda3d662f4a75120d7348610d8883a83196705cbfc74422d943",
+      "slug": "motor/algorithm/ALG-07-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-07-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-07-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-08-assessment",
+      "articleId": "motor/algorithm/ALG-07-assessment",
       "attachments": []
     },
     {
@@ -887,17 +995,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-09-assessment.md",
-      "contentSha256": "471eaf7d8661a8c45ad482964f0939622495389414d4771a28e43fc548de7123",
-      "slug": "motor/algorithm/ALG-09-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-09-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-09-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-08-assessment.md",
+      "contentSha256": "49fb9cd44ef14b9637bb88b614014c1fec503157e3ff012b531a37c62616f6de",
+      "slug": "motor/algorithm/ALG-08-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-08-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-08-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-09-assessment",
+      "articleId": "motor/algorithm/ALG-08-assessment",
       "attachments": []
     },
     {
@@ -915,17 +1023,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-10-assessment.md",
-      "contentSha256": "6b3e5951d6a426214491465c641cd6dc5ed0547bbd7d2f3b88e7ea8376a32e23",
-      "slug": "motor/algorithm/ALG-10-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-10-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-10-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-09-assessment.md",
+      "contentSha256": "471eaf7d8661a8c45ad482964f0939622495389414d4771a28e43fc548de7123",
+      "slug": "motor/algorithm/ALG-09-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-09-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-09-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-10-assessment",
+      "articleId": "motor/algorithm/ALG-09-assessment",
       "attachments": []
     },
     {
@@ -943,17 +1051,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-11-assessment.md",
-      "contentSha256": "9fefe77fa3d5563dbe2d8ffc9d56ca70adf953e72d9d7b467e0d00df9491097f",
-      "slug": "motor/algorithm/ALG-11-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-11-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-11-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-10-assessment.md",
+      "contentSha256": "6b3e5951d6a426214491465c641cd6dc5ed0547bbd7d2f3b88e7ea8376a32e23",
+      "slug": "motor/algorithm/ALG-10-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-10-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-10-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-11-assessment",
+      "articleId": "motor/algorithm/ALG-10-assessment",
       "attachments": []
     },
     {
@@ -971,17 +1079,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-12-assessment.md",
-      "contentSha256": "a9cfd8dceaf97b4871873a86a9eec019fe1556b13efc0513dd97ae47ce6640a3",
-      "slug": "motor/algorithm/ALG-12-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-12-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-12-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-11-assessment.md",
+      "contentSha256": "9fefe77fa3d5563dbe2d8ffc9d56ca70adf953e72d9d7b467e0d00df9491097f",
+      "slug": "motor/algorithm/ALG-11-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-11-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-11-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-12-assessment",
+      "articleId": "motor/algorithm/ALG-11-assessment",
       "attachments": []
     },
     {
@@ -999,17 +1107,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-13-assessment.md",
-      "contentSha256": "b0144db101d7a44fd7940022bead8293e05d6c9365e7d242aa70fcda49f3e58d",
-      "slug": "motor/algorithm/ALG-13-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-13-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-13-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-12-assessment.md",
+      "contentSha256": "a9cfd8dceaf97b4871873a86a9eec019fe1556b13efc0513dd97ae47ce6640a3",
+      "slug": "motor/algorithm/ALG-12-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-12-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-12-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-13-assessment",
+      "articleId": "motor/algorithm/ALG-12-assessment",
       "attachments": []
     },
     {
@@ -1027,17 +1135,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-14-assessment.md",
-      "contentSha256": "02e24346ddb873d725e128f88780d2d2335fc980f79eabc40dc53bf36a7a98dc",
-      "slug": "motor/algorithm/ALG-14-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-14-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-14-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-13-assessment.md",
+      "contentSha256": "b0144db101d7a44fd7940022bead8293e05d6c9365e7d242aa70fcda49f3e58d",
+      "slug": "motor/algorithm/ALG-13-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-13-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-13-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-14-assessment",
+      "articleId": "motor/algorithm/ALG-13-assessment",
       "attachments": []
     },
     {
@@ -1052,6 +1160,20 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/algorithm/ALG-14-assessment.md",
+      "contentSha256": "02e24346ddb873d725e128f88780d2d2335fc980f79eabc40dc53bf36a7a98dc",
+      "slug": "motor/algorithm/ALG-14-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-14-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-14-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/ALG-14-assessment",
       "attachments": []
     },
     {
@@ -1083,20 +1205,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-16-assessment.md",
-      "contentSha256": "906a5cd308e6409d82f18c520593d3e4bfae89222baff6c4418a2fcfab152e11",
-      "slug": "motor/algorithm/ALG-16-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-16-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-16-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-16-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-16-Nonlinear-Flux-Observer.md",
       "contentSha256": "171a0f2eccaa99d813ba46e3b07d9ef746b6cf9e660002999ff633e715a483f2",
       "slug": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
@@ -1108,6 +1216,20 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/algorithm/ALG-16-assessment.md",
+      "contentSha256": "906a5cd308e6409d82f18c520593d3e4bfae89222baff6c4418a2fcfab152e11",
+      "slug": "motor/algorithm/ALG-16-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-16-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-16-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/ALG-16-assessment",
       "attachments": []
     },
     {
@@ -1125,20 +1247,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-18-assessment.md",
-      "contentSha256": "772ea75d0db2a1053b1659949c8cd35f3b035463c51d2f065476729ce8a8fbcb",
-      "slug": "motor/algorithm/ALG-18-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-18-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-18-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-18-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-18-Compensation-Algorithms.md",
       "contentSha256": "7532c3a0ede6764a7fdb1676224e52cd5c6a25d2d38b03d59c01861cb3923d87",
       "slug": "motor/algorithm/ALG-18-Compensation-Algorithms",
@@ -1153,17 +1261,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-19-assessment.md",
-      "contentSha256": "46553562ecf81f0fec1b93dacf43a18846d49d5e187346988ef5e9e80aa9190a",
-      "slug": "motor/algorithm/ALG-19-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-19-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-19-assessment/",
+      "sourcePath": "content/motor/algorithm/ALG-18-assessment.md",
+      "contentSha256": "772ea75d0db2a1053b1659949c8cd35f3b035463c51d2f065476729ce8a8fbcb",
+      "slug": "motor/algorithm/ALG-18-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-18-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-18-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-19-assessment",
+      "articleId": "motor/algorithm/ALG-18-assessment",
       "attachments": []
     },
     {
@@ -1178,6 +1286,20 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/algorithm/ALG-19-assessment.md",
+      "contentSha256": "46553562ecf81f0fec1b93dacf43a18846d49d5e187346988ef5e9e80aa9190a",
+      "slug": "motor/algorithm/ALG-19-assessment",
+      "oldUrl": "/content/motor/algorithm/ALG-19-assessment.html",
+      "targetUrl": "/posts/motor/algorithm/ALG-19-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/ALG-19-assessment",
       "attachments": []
     },
     {
@@ -1363,20 +1485,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/MC-LIB/MC-LIB-Six-Step.md",
-      "contentSha256": "9caa499527e46a6ec0a2fa47a3a12de2c5b8a2f41096434287f6fa7947c0a04d",
-      "slug": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
-      "oldUrl": "/content/motor/algorithm/MC-LIB/MC-LIB-Six-Step.html",
-      "targetUrl": "/posts/motor/algorithm/MC-LIB/MC-LIB-Six-Step/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/MC-LIB/MC-LIB-SVPWM.md",
       "contentSha256": "29ca2da11c748c9fd835a545398340bcf883e86f2bfff2e8ebcce10861c075ed",
       "slug": "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
@@ -1388,6 +1496,20 @@
       "routeId": "控制与算法",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/algorithm/MC-LIB/MC-LIB-Six-Step.md",
+      "contentSha256": "9caa499527e46a6ec0a2fa47a3a12de2c5b8a2f41096434287f6fa7947c0a04d",
+      "slug": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
+      "oldUrl": "/content/motor/algorithm/MC-LIB/MC-LIB-Six-Step.html",
+      "targetUrl": "/posts/motor/algorithm/MC-LIB/MC-LIB-Six-Step/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "algorithm",
+      "articleId": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
       "attachments": []
     },
     {
@@ -1545,17 +1667,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/COMPARISON/COMP-01-ODrive-vs-VESC.md",
-      "contentSha256": "b589b9fbdca4b920c9eeb7fafc668942425008744147c0b3cdc944a535d0b454",
-      "slug": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
-      "oldUrl": "/content/motor/COMPARISON/COMP-01-ODrive-vs-VESC.html",
-      "targetUrl": "/posts/motor/COMPARISON/COMP-01-ODrive-vs-VESC/",
+      "sourcePath": "content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.md",
+      "contentSha256": "77b1c83fd926a83f562a3c50dc43c59571836c948d2deb3c5363ae62d933d9b2",
+      "slug": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+      "oldUrl": "/content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.html",
+      "targetUrl": "/posts/motor/control-theory/CT-01-Open-Loop-Closed-Loop/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "COMPARISON",
-      "articleId": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+      "routeId": "控制与算法",
+      "stageId": "control-theory",
+      "articleId": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
       "attachments": []
     },
     {
@@ -1573,17 +1695,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.md",
-      "contentSha256": "77b1c83fd926a83f562a3c50dc43c59571836c948d2deb3c5363ae62d933d9b2",
-      "slug": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
-      "oldUrl": "/content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.html",
-      "targetUrl": "/posts/motor/control-theory/CT-01-Open-Loop-Closed-Loop/",
+      "sourcePath": "content/motor/control-theory/CT-02-Time-Domain-Analysis.md",
+      "contentSha256": "1e39a1ba542dbb8fb02a5e6d51360bdd3abe7c00a8f265f0791d797d9438cf7b",
+      "slug": "motor/control-theory/CT-02-Time-Domain-Analysis",
+      "oldUrl": "/content/motor/control-theory/CT-02-Time-Domain-Analysis.html",
+      "targetUrl": "/posts/motor/control-theory/CT-02-Time-Domain-Analysis/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+      "articleId": "motor/control-theory/CT-02-Time-Domain-Analysis",
       "attachments": []
     },
     {
@@ -1601,17 +1723,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-02-Time-Domain-Analysis.md",
-      "contentSha256": "1e39a1ba542dbb8fb02a5e6d51360bdd3abe7c00a8f265f0791d797d9438cf7b",
-      "slug": "motor/control-theory/CT-02-Time-Domain-Analysis",
-      "oldUrl": "/content/motor/control-theory/CT-02-Time-Domain-Analysis.html",
-      "targetUrl": "/posts/motor/control-theory/CT-02-Time-Domain-Analysis/",
+      "sourcePath": "content/motor/control-theory/CT-03-Frequency-Response-Bode.md",
+      "contentSha256": "8fb8d1acfc9c9cd26bbbda4dcb6d6716edc122882b2c6106d2ff01d661c76a1e",
+      "slug": "motor/control-theory/CT-03-Frequency-Response-Bode",
+      "oldUrl": "/content/motor/control-theory/CT-03-Frequency-Response-Bode.html",
+      "targetUrl": "/posts/motor/control-theory/CT-03-Frequency-Response-Bode/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-02-Time-Domain-Analysis",
+      "articleId": "motor/control-theory/CT-03-Frequency-Response-Bode",
       "attachments": []
     },
     {
@@ -1629,17 +1751,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-03-Frequency-Response-Bode.md",
-      "contentSha256": "8fb8d1acfc9c9cd26bbbda4dcb6d6716edc122882b2c6106d2ff01d661c76a1e",
-      "slug": "motor/control-theory/CT-03-Frequency-Response-Bode",
-      "oldUrl": "/content/motor/control-theory/CT-03-Frequency-Response-Bode.html",
-      "targetUrl": "/posts/motor/control-theory/CT-03-Frequency-Response-Bode/",
+      "sourcePath": "content/motor/control-theory/CT-04-PID-Control-Principles.md",
+      "contentSha256": "791d7160a2931803deb4c2c0e5493f68fc253ce7346cc535462b3acfeaf53b2b",
+      "slug": "motor/control-theory/CT-04-PID-Control-Principles",
+      "oldUrl": "/content/motor/control-theory/CT-04-PID-Control-Principles.html",
+      "targetUrl": "/posts/motor/control-theory/CT-04-PID-Control-Principles/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-03-Frequency-Response-Bode",
+      "articleId": "motor/control-theory/CT-04-PID-Control-Principles",
       "attachments": []
     },
     {
@@ -1657,17 +1779,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-04-PID-Control-Principles.md",
-      "contentSha256": "791d7160a2931803deb4c2c0e5493f68fc253ce7346cc535462b3acfeaf53b2b",
-      "slug": "motor/control-theory/CT-04-PID-Control-Principles",
-      "oldUrl": "/content/motor/control-theory/CT-04-PID-Control-Principles.html",
-      "targetUrl": "/posts/motor/control-theory/CT-04-PID-Control-Principles/",
+      "sourcePath": "content/motor/control-theory/CT-05-PID-Tuning-Implementation.md",
+      "contentSha256": "821b8c9790d38c6de62bcd41c949e07634bd514f26b8bc98b23ad3e99c1ca3a2",
+      "slug": "motor/control-theory/CT-05-PID-Tuning-Implementation",
+      "oldUrl": "/content/motor/control-theory/CT-05-PID-Tuning-Implementation.html",
+      "targetUrl": "/posts/motor/control-theory/CT-05-PID-Tuning-Implementation/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-04-PID-Control-Principles",
+      "articleId": "motor/control-theory/CT-05-PID-Tuning-Implementation",
       "attachments": []
     },
     {
@@ -1685,17 +1807,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-05-PID-Tuning-Implementation.md",
-      "contentSha256": "821b8c9790d38c6de62bcd41c949e07634bd514f26b8bc98b23ad3e99c1ca3a2",
-      "slug": "motor/control-theory/CT-05-PID-Tuning-Implementation",
-      "oldUrl": "/content/motor/control-theory/CT-05-PID-Tuning-Implementation.html",
-      "targetUrl": "/posts/motor/control-theory/CT-05-PID-Tuning-Implementation/",
+      "sourcePath": "content/motor/control-theory/CT-06-Feedforward-Control.md",
+      "contentSha256": "768a4cd2572052a09a7113be13444cc0e10abc353b20feaa42d0534be578f6ca",
+      "slug": "motor/control-theory/CT-06-Feedforward-Control",
+      "oldUrl": "/content/motor/control-theory/CT-06-Feedforward-Control.html",
+      "targetUrl": "/posts/motor/control-theory/CT-06-Feedforward-Control/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-05-PID-Tuning-Implementation",
+      "articleId": "motor/control-theory/CT-06-Feedforward-Control",
       "attachments": []
     },
     {
@@ -1713,17 +1835,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-06-Feedforward-Control.md",
-      "contentSha256": "768a4cd2572052a09a7113be13444cc0e10abc353b20feaa42d0534be578f6ca",
-      "slug": "motor/control-theory/CT-06-Feedforward-Control",
-      "oldUrl": "/content/motor/control-theory/CT-06-Feedforward-Control.html",
-      "targetUrl": "/posts/motor/control-theory/CT-06-Feedforward-Control/",
+      "sourcePath": "content/motor/control-theory/CT-07-Nyquist-Stability.md",
+      "contentSha256": "d1001a85371d19f929e9f830be249d17495865d103100515e2db03896233fc53",
+      "slug": "motor/control-theory/CT-07-Nyquist-Stability",
+      "oldUrl": "/content/motor/control-theory/CT-07-Nyquist-Stability.html",
+      "targetUrl": "/posts/motor/control-theory/CT-07-Nyquist-Stability/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-06-Feedforward-Control",
+      "articleId": "motor/control-theory/CT-07-Nyquist-Stability",
       "attachments": []
     },
     {
@@ -1741,17 +1863,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-07-Nyquist-Stability.md",
-      "contentSha256": "d1001a85371d19f929e9f830be249d17495865d103100515e2db03896233fc53",
-      "slug": "motor/control-theory/CT-07-Nyquist-Stability",
-      "oldUrl": "/content/motor/control-theory/CT-07-Nyquist-Stability.html",
-      "targetUrl": "/posts/motor/control-theory/CT-07-Nyquist-Stability/",
+      "sourcePath": "content/motor/control-theory/CT-08-Root-Locus.md",
+      "contentSha256": "6ef39cf6018e38dd250d17db2f299a56aec69e5f5e3fe37e490d4cca00e5e665",
+      "slug": "motor/control-theory/CT-08-Root-Locus",
+      "oldUrl": "/content/motor/control-theory/CT-08-Root-Locus.html",
+      "targetUrl": "/posts/motor/control-theory/CT-08-Root-Locus/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-07-Nyquist-Stability",
+      "articleId": "motor/control-theory/CT-08-Root-Locus",
       "attachments": []
     },
     {
@@ -1769,17 +1891,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-08-Root-Locus.md",
-      "contentSha256": "6ef39cf6018e38dd250d17db2f299a56aec69e5f5e3fe37e490d4cca00e5e665",
-      "slug": "motor/control-theory/CT-08-Root-Locus",
-      "oldUrl": "/content/motor/control-theory/CT-08-Root-Locus.html",
-      "targetUrl": "/posts/motor/control-theory/CT-08-Root-Locus/",
+      "sourcePath": "content/motor/control-theory/CT-09-Compensator-Design.md",
+      "contentSha256": "7824a2fdc6e9a30b79272d94d4ea92eb396d09888d700c66e26602502fb01c84",
+      "slug": "motor/control-theory/CT-09-Compensator-Design",
+      "oldUrl": "/content/motor/control-theory/CT-09-Compensator-Design.html",
+      "targetUrl": "/posts/motor/control-theory/CT-09-Compensator-Design/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-08-Root-Locus",
+      "articleId": "motor/control-theory/CT-09-Compensator-Design",
       "attachments": []
     },
     {
@@ -1797,17 +1919,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-09-Compensator-Design.md",
-      "contentSha256": "7824a2fdc6e9a30b79272d94d4ea92eb396d09888d700c66e26602502fb01c84",
-      "slug": "motor/control-theory/CT-09-Compensator-Design",
-      "oldUrl": "/content/motor/control-theory/CT-09-Compensator-Design.html",
-      "targetUrl": "/posts/motor/control-theory/CT-09-Compensator-Design/",
+      "sourcePath": "content/motor/control-theory/CT-10-State-Space.md",
+      "contentSha256": "796888242d77f30c048e6be4a8d36afac4aa8c41e738c4550eb533d007feb755",
+      "slug": "motor/control-theory/CT-10-State-Space",
+      "oldUrl": "/content/motor/control-theory/CT-10-State-Space.html",
+      "targetUrl": "/posts/motor/control-theory/CT-10-State-Space/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-09-Compensator-Design",
+      "articleId": "motor/control-theory/CT-10-State-Space",
       "attachments": []
     },
     {
@@ -1825,17 +1947,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-10-State-Space.md",
-      "contentSha256": "796888242d77f30c048e6be4a8d36afac4aa8c41e738c4550eb533d007feb755",
-      "slug": "motor/control-theory/CT-10-State-Space",
-      "oldUrl": "/content/motor/control-theory/CT-10-State-Space.html",
-      "targetUrl": "/posts/motor/control-theory/CT-10-State-Space/",
+      "sourcePath": "content/motor/control-theory/CT-11-Observer-Design.md",
+      "contentSha256": "c12283e54ef9bdd351982b6fd2fb65bbe92ae2ebfc351b0de057bf3b925a60fa",
+      "slug": "motor/control-theory/CT-11-Observer-Design",
+      "oldUrl": "/content/motor/control-theory/CT-11-Observer-Design.html",
+      "targetUrl": "/posts/motor/control-theory/CT-11-Observer-Design/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-10-State-Space",
+      "articleId": "motor/control-theory/CT-11-Observer-Design",
       "attachments": []
     },
     {
@@ -1853,17 +1975,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-11-Observer-Design.md",
-      "contentSha256": "c12283e54ef9bdd351982b6fd2fb65bbe92ae2ebfc351b0de057bf3b925a60fa",
-      "slug": "motor/control-theory/CT-11-Observer-Design",
-      "oldUrl": "/content/motor/control-theory/CT-11-Observer-Design.html",
-      "targetUrl": "/posts/motor/control-theory/CT-11-Observer-Design/",
+      "sourcePath": "content/motor/control-theory/CT-12-State-Feedback.md",
+      "contentSha256": "8eca27c9a5cf4d6989388da945f53dd31712e9e7c15f53790f289c9eb8a4b5c9",
+      "slug": "motor/control-theory/CT-12-State-Feedback",
+      "oldUrl": "/content/motor/control-theory/CT-12-State-Feedback.html",
+      "targetUrl": "/posts/motor/control-theory/CT-12-State-Feedback/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-11-Observer-Design",
+      "articleId": "motor/control-theory/CT-12-State-Feedback",
       "attachments": []
     },
     {
@@ -1881,17 +2003,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-12-State-Feedback.md",
-      "contentSha256": "8eca27c9a5cf4d6989388da945f53dd31712e9e7c15f53790f289c9eb8a4b5c9",
-      "slug": "motor/control-theory/CT-12-State-Feedback",
-      "oldUrl": "/content/motor/control-theory/CT-12-State-Feedback.html",
-      "targetUrl": "/posts/motor/control-theory/CT-12-State-Feedback/",
+      "sourcePath": "content/motor/control-theory/CT-13-LQR-LQG.md",
+      "contentSha256": "62b638a6028c5d1e03e4fe352673eb400ca2a5ff11d5d6d62cf328c8c4de2d86",
+      "slug": "motor/control-theory/CT-13-LQR-LQG",
+      "oldUrl": "/content/motor/control-theory/CT-13-LQR-LQG.html",
+      "targetUrl": "/posts/motor/control-theory/CT-13-LQR-LQG/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-12-State-Feedback",
+      "articleId": "motor/control-theory/CT-13-LQR-LQG",
       "attachments": []
     },
     {
@@ -1909,17 +2031,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-13-LQR-LQG.md",
-      "contentSha256": "62b638a6028c5d1e03e4fe352673eb400ca2a5ff11d5d6d62cf328c8c4de2d86",
-      "slug": "motor/control-theory/CT-13-LQR-LQG",
-      "oldUrl": "/content/motor/control-theory/CT-13-LQR-LQG.html",
-      "targetUrl": "/posts/motor/control-theory/CT-13-LQR-LQG/",
+      "sourcePath": "content/motor/control-theory/CT-14-Cascaded-PID-Control.md",
+      "contentSha256": "7205a1e7504d9304083fcd20acd34720ba3ca271f4fc0bb8fe230b365784f7da",
+      "slug": "motor/control-theory/CT-14-Cascaded-PID-Control",
+      "oldUrl": "/content/motor/control-theory/CT-14-Cascaded-PID-Control.html",
+      "targetUrl": "/posts/motor/control-theory/CT-14-Cascaded-PID-Control/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-13-LQR-LQG",
+      "articleId": "motor/control-theory/CT-14-Cascaded-PID-Control",
       "attachments": []
     },
     {
@@ -1937,17 +2059,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-14-Cascaded-PID-Control.md",
-      "contentSha256": "7205a1e7504d9304083fcd20acd34720ba3ca271f4fc0bb8fe230b365784f7da",
-      "slug": "motor/control-theory/CT-14-Cascaded-PID-Control",
-      "oldUrl": "/content/motor/control-theory/CT-14-Cascaded-PID-Control.html",
-      "targetUrl": "/posts/motor/control-theory/CT-14-Cascaded-PID-Control/",
+      "sourcePath": "content/motor/control-theory/CT-15-PID-Optimization-Strategies.md",
+      "contentSha256": "dcb84718630418340932f874e68639339f4d2b5f3a021cb0d11745620cf5704a",
+      "slug": "motor/control-theory/CT-15-PID-Optimization-Strategies",
+      "oldUrl": "/content/motor/control-theory/CT-15-PID-Optimization-Strategies.html",
+      "targetUrl": "/posts/motor/control-theory/CT-15-PID-Optimization-Strategies/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-14-Cascaded-PID-Control",
+      "articleId": "motor/control-theory/CT-15-PID-Optimization-Strategies",
       "attachments": []
     },
     {
@@ -1962,20 +2084,6 @@
       "routeId": "控制与算法",
       "stageId": "control-theory",
       "articleId": "motor/control-theory/CT-15-assessment",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/control-theory/CT-15-PID-Optimization-Strategies.md",
-      "contentSha256": "dcb84718630418340932f874e68639339f4d2b5f3a021cb0d11745620cf5704a",
-      "slug": "motor/control-theory/CT-15-PID-Optimization-Strategies",
-      "oldUrl": "/content/motor/control-theory/CT-15-PID-Optimization-Strategies.html",
-      "targetUrl": "/posts/motor/control-theory/CT-15-PID-Optimization-Strategies/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-15-PID-Optimization-Strategies",
       "attachments": []
     },
     {
@@ -2007,20 +2115,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/control-theory/CT-17-assessment.md",
-      "contentSha256": "9d3cda7a507b12ec9769053da925fb799795931407b85c5ad851601cfbd8f40f",
-      "slug": "motor/control-theory/CT-17-assessment",
-      "oldUrl": "/content/motor/control-theory/CT-17-assessment.html",
-      "targetUrl": "/posts/motor/control-theory/CT-17-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "control-theory",
-      "articleId": "motor/control-theory/CT-17-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/control-theory/CT-17-LADRC-Linear-ADRC.md",
       "contentSha256": "401df2ed49fef50742fb9f13fc91caa06ff91d42149a5347e31abf3d5376b82c",
       "slug": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
@@ -2032,6 +2126,20 @@
       "routeId": "控制与算法",
       "stageId": "control-theory",
       "articleId": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/control-theory/CT-17-assessment.md",
+      "contentSha256": "9d3cda7a507b12ec9769053da925fb799795931407b85c5ad851601cfbd8f40f",
+      "slug": "motor/control-theory/CT-17-assessment",
+      "oldUrl": "/content/motor/control-theory/CT-17-assessment.html",
+      "targetUrl": "/posts/motor/control-theory/CT-17-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "control-theory",
+      "articleId": "motor/control-theory/CT-17-assessment",
       "attachments": []
     },
     {
@@ -2604,20 +2712,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-01-assessment.md",
-      "contentSha256": "ecffa4396b511216f6799f5017f805efcd57949b6d2efec29347b2155e39baf2",
-      "slug": "motor/electronics-basics/EE-01-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-01-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "基础与硬件",
-      "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.md",
       "contentSha256": "bfec5e304760645e91d858f413e06b539f624ad8fa4813ed64a18c46e9792931",
       "slug": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
@@ -2632,17 +2726,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-02-assessment.md",
-      "contentSha256": "10bf2ed7cadca0aa6e005b9e11048b0fd1e789a9a388d073b588e2d5c3f803b2",
-      "slug": "motor/electronics-basics/EE-02-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-02-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-02-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-01-assessment.md",
+      "contentSha256": "ecffa4396b511216f6799f5017f805efcd57949b6d2efec29347b2155e39baf2",
+      "slug": "motor/electronics-basics/EE-01-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-01-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-02-assessment",
+      "articleId": "motor/electronics-basics/EE-01-assessment",
       "attachments": []
     },
     {
@@ -2660,17 +2754,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-03-assessment.md",
-      "contentSha256": "fa07f296162ff2dc9c0e9ea43548f4a813b40a78b7b2ed8acb848e41bca71c10",
-      "slug": "motor/electronics-basics/EE-03-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-03-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-03-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-02-assessment.md",
+      "contentSha256": "10bf2ed7cadca0aa6e005b9e11048b0fd1e789a9a388d073b588e2d5c3f803b2",
+      "slug": "motor/electronics-basics/EE-02-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-02-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-02-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-03-assessment",
+      "articleId": "motor/electronics-basics/EE-02-assessment",
       "attachments": []
     },
     {
@@ -2688,17 +2782,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-04-assessment.md",
-      "contentSha256": "20da1adf31c6c444b4b87c2701901be819ccfce6aa4401dcd3d87d18998dbd89",
-      "slug": "motor/electronics-basics/EE-04-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-04-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-04-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-03-assessment.md",
+      "contentSha256": "fa07f296162ff2dc9c0e9ea43548f4a813b40a78b7b2ed8acb848e41bca71c10",
+      "slug": "motor/electronics-basics/EE-03-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-03-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-04-assessment",
+      "articleId": "motor/electronics-basics/EE-03-assessment",
       "attachments": []
     },
     {
@@ -2716,17 +2810,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-05-assessment.md",
-      "contentSha256": "58c2a37e42fc250a3e8eba525cdbfed595427115c58174a0455ab2eed6fcef03",
-      "slug": "motor/electronics-basics/EE-05-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-05-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-05-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-04-assessment.md",
+      "contentSha256": "20da1adf31c6c444b4b87c2701901be819ccfce6aa4401dcd3d87d18998dbd89",
+      "slug": "motor/electronics-basics/EE-04-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-04-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-05-assessment",
+      "articleId": "motor/electronics-basics/EE-04-assessment",
       "attachments": []
     },
     {
@@ -2744,17 +2838,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-06-assessment.md",
-      "contentSha256": "d16f2044c7b5ffd4715dedc1d776ff34f95b8ecba3aed112818a8c8a0c550b95",
-      "slug": "motor/electronics-basics/EE-06-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-06-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-06-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-05-assessment.md",
+      "contentSha256": "58c2a37e42fc250a3e8eba525cdbfed595427115c58174a0455ab2eed6fcef03",
+      "slug": "motor/electronics-basics/EE-05-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-05-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-06-assessment",
+      "articleId": "motor/electronics-basics/EE-05-assessment",
       "attachments": []
     },
     {
@@ -2772,17 +2866,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-07-assessment.md",
-      "contentSha256": "b5aa0aacd483fb9f1ec8e3c35d9aeea359b181889abb5485bb16f49b6d90b736",
-      "slug": "motor/electronics-basics/EE-07-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-07-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-07-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-06-assessment.md",
+      "contentSha256": "d16f2044c7b5ffd4715dedc1d776ff34f95b8ecba3aed112818a8c8a0c550b95",
+      "slug": "motor/electronics-basics/EE-06-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-06-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-06-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-07-assessment",
+      "articleId": "motor/electronics-basics/EE-06-assessment",
       "attachments": []
     },
     {
@@ -2800,17 +2894,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-08-assessment.md",
-      "contentSha256": "4f1b238de383563fc2b02e48b66377a6d8333bb45b6ef936cdee1d7e09370648",
-      "slug": "motor/electronics-basics/EE-08-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-08-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-08-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-07-assessment.md",
+      "contentSha256": "b5aa0aacd483fb9f1ec8e3c35d9aeea359b181889abb5485bb16f49b6d90b736",
+      "slug": "motor/electronics-basics/EE-07-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-07-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-07-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-08-assessment",
+      "articleId": "motor/electronics-basics/EE-07-assessment",
       "attachments": []
     },
     {
@@ -2828,17 +2922,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/electronics-basics/EE-09-assessment.md",
-      "contentSha256": "db7e18187828300af6b3dbd13ad1b48638967f3d777da6dbb85a309a477fa500",
-      "slug": "motor/electronics-basics/EE-09-assessment",
-      "oldUrl": "/content/motor/electronics-basics/EE-09-assessment.html",
-      "targetUrl": "/posts/motor/electronics-basics/EE-09-assessment/",
+      "sourcePath": "content/motor/electronics-basics/EE-08-assessment.md",
+      "contentSha256": "4f1b238de383563fc2b02e48b66377a6d8333bb45b6ef936cdee1d7e09370648",
+      "slug": "motor/electronics-basics/EE-08-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-08-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-08-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
-      "articleId": "motor/electronics-basics/EE-09-assessment",
+      "articleId": "motor/electronics-basics/EE-08-assessment",
       "attachments": []
     },
     {
@@ -2853,6 +2947,20 @@
       "routeId": "基础与硬件",
       "stageId": "electronics-basics",
       "articleId": "motor/electronics-basics/EE-09-H-Bridge",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/electronics-basics/EE-09-assessment.md",
+      "contentSha256": "db7e18187828300af6b3dbd13ad1b48638967f3d777da6dbb85a309a477fa500",
+      "slug": "motor/electronics-basics/EE-09-assessment",
+      "oldUrl": "/content/motor/electronics-basics/EE-09-assessment.html",
+      "targetUrl": "/posts/motor/electronics-basics/EE-09-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "基础与硬件",
+      "stageId": "electronics-basics",
+      "articleId": "motor/electronics-basics/EE-09-assessment",
       "attachments": []
     },
     {
@@ -3007,20 +3115,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-01-assessment.md",
-      "contentSha256": "8ef68c0aa10c8c46995ab46cef4285d675d78370204ff984096b9cffc4c10dc7",
-      "slug": "motor/hardware/HW-01-assessment",
-      "oldUrl": "/content/motor/hardware/HW-01-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "基础与硬件",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-01-Motor-Basics.md",
       "contentSha256": "bb87a963424f67cbe1f970733890a3929f718ffb37142d6170ce31f3bc3af6ed",
       "slug": "motor/hardware/HW-01-Motor-Basics",
@@ -3035,17 +3129,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-01B-assessment.md",
-      "contentSha256": "bfbb0554a0bfe21948024a696ac0643d94e13c6f63a1c0f995774e7fc99502db",
-      "slug": "motor/hardware/HW-01B-assessment",
-      "oldUrl": "/content/motor/hardware/HW-01B-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-01B-assessment/",
+      "sourcePath": "content/motor/hardware/HW-01-assessment.md",
+      "contentSha256": "8ef68c0aa10c8c46995ab46cef4285d675d78370204ff984096b9cffc4c10dc7",
+      "slug": "motor/hardware/HW-01-assessment",
+      "oldUrl": "/content/motor/hardware/HW-01-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-01B-assessment",
+      "articleId": "motor/hardware/HW-01-assessment",
       "attachments": []
     },
     {
@@ -3063,17 +3157,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-02-assessment.md",
-      "contentSha256": "7582c2fe85eb085b894acf2018363b14d213a9d09712ed7b6311a59f81d4bd1a",
-      "slug": "motor/hardware/HW-02-assessment",
-      "oldUrl": "/content/motor/hardware/HW-02-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-02-assessment/",
+      "sourcePath": "content/motor/hardware/HW-01B-assessment.md",
+      "contentSha256": "bfbb0554a0bfe21948024a696ac0643d94e13c6f63a1c0f995774e7fc99502db",
+      "slug": "motor/hardware/HW-01B-assessment",
+      "oldUrl": "/content/motor/hardware/HW-01B-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-01B-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-02-assessment",
+      "articleId": "motor/hardware/HW-01B-assessment",
       "attachments": []
     },
     {
@@ -3091,6 +3185,20 @@
       "attachments": []
     },
     {
+      "sourcePath": "content/motor/hardware/HW-02-assessment.md",
+      "contentSha256": "7582c2fe85eb085b894acf2018363b14d213a9d09712ed7b6311a59f81d4bd1a",
+      "slug": "motor/hardware/HW-02-assessment",
+      "oldUrl": "/content/motor/hardware/HW-02-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-02-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "基础与硬件",
+      "stageId": "hardware",
+      "articleId": "motor/hardware/HW-02-assessment",
+      "attachments": []
+    },
+    {
       "sourcePath": "content/motor/hardware/HW-02B-Current-Sensing-Topologies.md",
       "contentSha256": "9d103d96dc2935d50bad8a7006c89deb6a9dc01a13defe7403616f859cef22ef",
       "slug": "motor/hardware/HW-02B-Current-Sensing-Topologies",
@@ -3102,20 +3210,6 @@
       "routeId": "基础与硬件",
       "stageId": "hardware",
       "articleId": "motor/hardware/HW-02B-Current-Sensing-Topologies",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/hardware/HW-03-assessment.md",
-      "contentSha256": "d55d9404bb29482566bbade41fb005e2a8333b577f0cba98ad10354cc328980e",
-      "slug": "motor/hardware/HW-03-assessment",
-      "oldUrl": "/content/motor/hardware/HW-03-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "基础与硬件",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-03-assessment",
       "attachments": []
     },
     {
@@ -3133,17 +3227,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-04-assessment.md",
-      "contentSha256": "3275b8fd1413db788a7b40cdaf6e0544a6ecae43468c7568c26c588f66926654",
-      "slug": "motor/hardware/HW-04-assessment",
-      "oldUrl": "/content/motor/hardware/HW-04-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-04-assessment/",
+      "sourcePath": "content/motor/hardware/HW-03-assessment.md",
+      "contentSha256": "d55d9404bb29482566bbade41fb005e2a8333b577f0cba98ad10354cc328980e",
+      "slug": "motor/hardware/HW-03-assessment",
+      "oldUrl": "/content/motor/hardware/HW-03-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-04-assessment",
+      "articleId": "motor/hardware/HW-03-assessment",
       "attachments": []
     },
     {
@@ -3161,17 +3255,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-05-assessment.md",
-      "contentSha256": "a7ec64555480867a39ca2b31c1063e45f5bdb497a49b8b8f2a292fadb53e19f3",
-      "slug": "motor/hardware/HW-05-assessment",
-      "oldUrl": "/content/motor/hardware/HW-05-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-05-assessment/",
+      "sourcePath": "content/motor/hardware/HW-04-assessment.md",
+      "contentSha256": "3275b8fd1413db788a7b40cdaf6e0544a6ecae43468c7568c26c588f66926654",
+      "slug": "motor/hardware/HW-04-assessment",
+      "oldUrl": "/content/motor/hardware/HW-04-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-05-assessment",
+      "articleId": "motor/hardware/HW-04-assessment",
       "attachments": []
     },
     {
@@ -3189,17 +3283,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-06-assessment.md",
-      "contentSha256": "97ea528a9dcb2d80cb7eda24b7025c14a817ab4d1d071b6714d2e64e518b0842",
-      "slug": "motor/hardware/HW-06-assessment",
-      "oldUrl": "/content/motor/hardware/HW-06-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-06-assessment/",
+      "sourcePath": "content/motor/hardware/HW-05-assessment.md",
+      "contentSha256": "a7ec64555480867a39ca2b31c1063e45f5bdb497a49b8b8f2a292fadb53e19f3",
+      "slug": "motor/hardware/HW-05-assessment",
+      "oldUrl": "/content/motor/hardware/HW-05-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-06-assessment",
+      "articleId": "motor/hardware/HW-05-assessment",
       "attachments": []
     },
     {
@@ -3217,17 +3311,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-07-assessment.md",
-      "contentSha256": "a782b5751494f60e727a109d17b8c8bb02d4b8cffb247a3ca475a22ca3f954ba",
-      "slug": "motor/hardware/HW-07-assessment",
-      "oldUrl": "/content/motor/hardware/HW-07-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-07-assessment/",
+      "sourcePath": "content/motor/hardware/HW-06-assessment.md",
+      "contentSha256": "97ea528a9dcb2d80cb7eda24b7025c14a817ab4d1d071b6714d2e64e518b0842",
+      "slug": "motor/hardware/HW-06-assessment",
+      "oldUrl": "/content/motor/hardware/HW-06-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-06-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "hardware",
-      "articleId": "motor/hardware/HW-07-assessment",
+      "articleId": "motor/hardware/HW-06-assessment",
       "attachments": []
     },
     {
@@ -3245,6 +3339,20 @@
       "attachments": []
     },
     {
+      "sourcePath": "content/motor/hardware/HW-07-assessment.md",
+      "contentSha256": "a782b5751494f60e727a109d17b8c8bb02d4b8cffb247a3ca475a22ca3f954ba",
+      "slug": "motor/hardware/HW-07-assessment",
+      "oldUrl": "/content/motor/hardware/HW-07-assessment.html",
+      "targetUrl": "/posts/motor/hardware/HW-07-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "基础与硬件",
+      "stageId": "hardware",
+      "articleId": "motor/hardware/HW-07-assessment",
+      "attachments": []
+    },
+    {
       "sourcePath": "content/motor/hardware/README.md",
       "contentSha256": "6cbde8efcb491bc9b130a8b9667e3f4e0dfe8ae2321b073b8b7ff28817760f90",
       "slug": "motor/hardware/README",
@@ -3256,6 +3364,48 @@
       "routeId": "基础与硬件",
       "stageId": "hardware",
       "articleId": "motor/hardware/README",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/learning-workspace/MISSION.md",
+      "contentSha256": "fdb4d94bb4276ea3fa57246eae9cbdaf07eb57e61d3e3e343a42cec4509f7f14",
+      "slug": "motor/learning-workspace/MISSION",
+      "oldUrl": "/content/motor/learning-workspace/MISSION.html",
+      "targetUrl": "/posts/motor/learning-workspace/MISSION/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "入门与索引",
+      "stageId": "learning-workspace",
+      "articleId": "motor/learning-workspace/MISSION",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/learning-workspace/NOTES.md",
+      "contentSha256": "afd97f46b16186c39b5b2c66e15c8c5d5a6e5ef128be6bbc1bcbfd6d949f5a4f",
+      "slug": "motor/learning-workspace/NOTES",
+      "oldUrl": "/content/motor/learning-workspace/NOTES.html",
+      "targetUrl": "/posts/motor/learning-workspace/NOTES/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "入门与索引",
+      "stageId": "learning-workspace",
+      "articleId": "motor/learning-workspace/NOTES",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/learning-workspace/RESOURCES.md",
+      "contentSha256": "8ce81f682305fd45d8072cc67dff46801c90f32c62f30f595b8ded90493a0a3f",
+      "slug": "motor/learning-workspace/RESOURCES",
+      "oldUrl": "/content/motor/learning-workspace/RESOURCES.html",
+      "targetUrl": "/posts/motor/learning-workspace/RESOURCES/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "入门与索引",
+      "stageId": "learning-workspace",
+      "articleId": "motor/learning-workspace/RESOURCES",
       "attachments": []
     },
     {
@@ -3539,34 +3689,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/learning-workspace/MISSION.md",
-      "contentSha256": "fdb4d94bb4276ea3fa57246eae9cbdaf07eb57e61d3e3e343a42cec4509f7f14",
-      "slug": "motor/learning-workspace/MISSION",
-      "oldUrl": "/content/motor/learning-workspace/MISSION.html",
-      "targetUrl": "/posts/motor/learning-workspace/MISSION/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "入门与索引",
-      "stageId": "learning-workspace",
-      "articleId": "motor/learning-workspace/MISSION",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/learning-workspace/NOTES.md",
-      "contentSha256": "afd97f46b16186c39b5b2c66e15c8c5d5a6e5ef128be6bbc1bcbfd6d949f5a4f",
-      "slug": "motor/learning-workspace/NOTES",
-      "oldUrl": "/content/motor/learning-workspace/NOTES.html",
-      "targetUrl": "/posts/motor/learning-workspace/NOTES/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "入门与索引",
-      "stageId": "learning-workspace",
-      "articleId": "motor/learning-workspace/NOTES",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/learning-workspace/reference/formula-quick-ref.md",
       "contentSha256": "0fc5a97dff59cf25132e6d25742538a4a05cbdeea52288521f4873659a4bec0c",
       "slug": "motor/learning-workspace/reference/formula-quick-ref",
@@ -3592,20 +3714,6 @@
       "routeId": "入门与索引",
       "stageId": "learning-workspace",
       "articleId": "motor/learning-workspace/reference/glossary",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/learning-workspace/RESOURCES.md",
-      "contentSha256": "8ce81f682305fd45d8072cc67dff46801c90f32c62f30f595b8ded90493a0a3f",
-      "slug": "motor/learning-workspace/RESOURCES",
-      "oldUrl": "/content/motor/learning-workspace/RESOURCES.html",
-      "targetUrl": "/posts/motor/learning-workspace/RESOURCES/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "入门与索引",
-      "stageId": "learning-workspace",
-      "articleId": "motor/learning-workspace/RESOURCES",
       "attachments": []
     },
     {
@@ -3651,20 +3759,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-01-assessment.md",
-      "contentSha256": "e16e1544bb101fe342a11bfa0954edfc0695a83fc25d4d84998dc72ffc2dfce2",
-      "slug": "motor/motion-control/MC-MC-01-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-01-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "控制与算法",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-MC-01-Position-Loop.md",
       "contentSha256": "8b6e13a424cab694435fca60eff587419139751bbf3cf0ece13b8a3e05e8a686",
       "slug": "motor/motion-control/MC-MC-01-Position-Loop",
@@ -3679,17 +3773,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-02-assessment.md",
-      "contentSha256": "357475fb2210cb4742aae846e1acb67b44b9f115a415d0d92c2e7ab5f95b196c",
-      "slug": "motor/motion-control/MC-MC-02-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-02-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-02-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-01-assessment.md",
+      "contentSha256": "e16e1544bb101fe342a11bfa0954edfc0695a83fc25d4d84998dc72ffc2dfce2",
+      "slug": "motor/motion-control/MC-MC-01-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-01-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-02-assessment",
+      "articleId": "motor/motion-control/MC-MC-01-assessment",
       "attachments": []
     },
     {
@@ -3707,17 +3801,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-03-assessment.md",
-      "contentSha256": "e5f782d726f2d3df55f53caedc08638a7f0390c7bd7c85508a2be0941f3b97e8",
-      "slug": "motor/motion-control/MC-MC-03-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-03-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-03-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-02-assessment.md",
+      "contentSha256": "357475fb2210cb4742aae846e1acb67b44b9f115a415d0d92c2e7ab5f95b196c",
+      "slug": "motor/motion-control/MC-MC-02-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-02-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-02-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-03-assessment",
+      "articleId": "motor/motion-control/MC-MC-02-assessment",
       "attachments": []
     },
     {
@@ -3735,17 +3829,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-04-assessment.md",
-      "contentSha256": "f9cd6707028bcf2e63652b5274b24df349649d72aadbef910a4ce73aebaa75a0",
-      "slug": "motor/motion-control/MC-MC-04-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-04-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-04-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-03-assessment.md",
+      "contentSha256": "e5f782d726f2d3df55f53caedc08638a7f0390c7bd7c85508a2be0941f3b97e8",
+      "slug": "motor/motion-control/MC-MC-03-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-03-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-04-assessment",
+      "articleId": "motor/motion-control/MC-MC-03-assessment",
       "attachments": []
     },
     {
@@ -3763,17 +3857,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-05-assessment.md",
-      "contentSha256": "9389b0f7bf0595af664da218090b91539e234248ef556b7a94a7a37878763c26",
-      "slug": "motor/motion-control/MC-MC-05-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-05-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-05-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-04-assessment.md",
+      "contentSha256": "f9cd6707028bcf2e63652b5274b24df349649d72aadbef910a4ce73aebaa75a0",
+      "slug": "motor/motion-control/MC-MC-04-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-04-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-05-assessment",
+      "articleId": "motor/motion-control/MC-MC-04-assessment",
       "attachments": []
     },
     {
@@ -3791,17 +3885,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-06-assessment.md",
-      "contentSha256": "5aaddde002a7324e99a9f2d3df089337f8eb72ef5b5a8cf07261c6ac84240928",
-      "slug": "motor/motion-control/MC-MC-06-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-06-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-06-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-05-assessment.md",
+      "contentSha256": "9389b0f7bf0595af664da218090b91539e234248ef556b7a94a7a37878763c26",
+      "slug": "motor/motion-control/MC-MC-05-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-05-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-06-assessment",
+      "articleId": "motor/motion-control/MC-MC-05-assessment",
       "attachments": []
     },
     {
@@ -3819,17 +3913,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-01-assessment.md",
-      "contentSha256": "88865685a5a698c247575cab0dd6d79accec618a17776aa78b14d11d6de70f4d",
-      "slug": "motor/motion-control/MC-TP-01-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-01-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-01-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-MC-06-assessment.md",
+      "contentSha256": "5aaddde002a7324e99a9f2d3df089337f8eb72ef5b5a8cf07261c6ac84240928",
+      "slug": "motor/motion-control/MC-MC-06-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-MC-06-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-MC-06-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-01-assessment",
+      "articleId": "motor/motion-control/MC-MC-06-assessment",
       "attachments": []
     },
     {
@@ -3847,17 +3941,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-02-assessment.md",
-      "contentSha256": "06f27688b0597a9a38500f783784497191cdd3507bde671dfa74633e185e4a5d",
-      "slug": "motor/motion-control/MC-TP-02-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-02-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-02-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-TP-01-assessment.md",
+      "contentSha256": "88865685a5a698c247575cab0dd6d79accec618a17776aa78b14d11d6de70f4d",
+      "slug": "motor/motion-control/MC-TP-01-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-01-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-02-assessment",
+      "articleId": "motor/motion-control/MC-TP-01-assessment",
       "attachments": []
     },
     {
@@ -3875,17 +3969,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-03-assessment.md",
-      "contentSha256": "a9c8a3e865d682e9f1cc3ddd065fb68189fa536bcd21730616a162bbe96d05a7",
-      "slug": "motor/motion-control/MC-TP-03-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-03-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-03-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-TP-02-assessment.md",
+      "contentSha256": "06f27688b0597a9a38500f783784497191cdd3507bde671dfa74633e185e4a5d",
+      "slug": "motor/motion-control/MC-TP-02-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-02-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-02-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-03-assessment",
+      "articleId": "motor/motion-control/MC-TP-02-assessment",
       "attachments": []
     },
     {
@@ -3903,17 +3997,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-04-assessment.md",
-      "contentSha256": "0fab2f5f6517d1d69b5b2f9e93a7a58a721ec9cedef7ef217acbb6cc68b8a7f0",
-      "slug": "motor/motion-control/MC-TP-04-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-04-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-04-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-TP-03-assessment.md",
+      "contentSha256": "a9c8a3e865d682e9f1cc3ddd065fb68189fa536bcd21730616a162bbe96d05a7",
+      "slug": "motor/motion-control/MC-TP-03-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-03-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-04-assessment",
+      "articleId": "motor/motion-control/MC-TP-03-assessment",
       "attachments": []
     },
     {
@@ -3931,17 +4025,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-05-assessment.md",
-      "contentSha256": "7b389cd12132d36ccb0293da8a6d0b09f8417cded46e38bf6423fc0c82655b41",
-      "slug": "motor/motion-control/MC-TP-05-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-05-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-05-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-TP-04-assessment.md",
+      "contentSha256": "0fab2f5f6517d1d69b5b2f9e93a7a58a721ec9cedef7ef217acbb6cc68b8a7f0",
+      "slug": "motor/motion-control/MC-TP-04-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-04-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-05-assessment",
+      "articleId": "motor/motion-control/MC-TP-04-assessment",
       "attachments": []
     },
     {
@@ -3959,17 +4053,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-06-assessment.md",
-      "contentSha256": "3bb82fa59ac58d38cde118baeaf1f689a808ad1fdc7d18f82cf92efdeb894075",
-      "slug": "motor/motion-control/MC-TP-06-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-06-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-06-assessment/",
+      "sourcePath": "content/motor/motion-control/MC-TP-05-assessment.md",
+      "contentSha256": "7b389cd12132d36ccb0293da8a6d0b09f8417cded46e38bf6423fc0c82655b41",
+      "slug": "motor/motion-control/MC-TP-05-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-05-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "控制与算法",
       "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-06-assessment",
+      "articleId": "motor/motion-control/MC-TP-05-assessment",
       "attachments": []
     },
     {
@@ -3987,6 +4081,20 @@
       "attachments": []
     },
     {
+      "sourcePath": "content/motor/motion-control/MC-TP-06-assessment.md",
+      "contentSha256": "3bb82fa59ac58d38cde118baeaf1f689a808ad1fdc7d18f82cf92efdeb894075",
+      "slug": "motor/motion-control/MC-TP-06-assessment",
+      "oldUrl": "/content/motor/motion-control/MC-TP-06-assessment.html",
+      "targetUrl": "/posts/motor/motion-control/MC-TP-06-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "控制与算法",
+      "stageId": "motion-control",
+      "articleId": "motor/motion-control/MC-TP-06-assessment",
+      "attachments": []
+    },
+    {
       "sourcePath": "content/motor/motion-control/README.md",
       "contentSha256": "754797fd2dc44fe6926823dfede565d1846efa1b975547870e72a6fd25abc11d",
       "slug": "motor/motion-control/README",
@@ -3998,62 +4106,6 @@
       "routeId": "控制与算法",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/README",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/ODrive/OD-01-Architecture.md",
-      "contentSha256": "16be3117708c40af3f05a3f62ee6bd1007f6d93b0c350a7b49288cec12d36d3a",
-      "slug": "motor/ODrive/OD-01-Architecture",
-      "oldUrl": "/content/motor/ODrive/OD-01-Architecture.html",
-      "targetUrl": "/posts/motor/ODrive/OD-01-Architecture/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "ODrive",
-      "articleId": "motor/ODrive/OD-01-Architecture",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/ODrive/OD-02-FOC-Core.md",
-      "contentSha256": "d7fcd93a69e0adfb1acbc6662ac9a6e4592cd3ab61bbb457c77bfa76640e546f",
-      "slug": "motor/ODrive/OD-02-FOC-Core",
-      "oldUrl": "/content/motor/ODrive/OD-02-FOC-Core.html",
-      "targetUrl": "/posts/motor/ODrive/OD-02-FOC-Core/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "ODrive",
-      "articleId": "motor/ODrive/OD-02-FOC-Core",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/ODrive/OD-03-Control-Strategy.md",
-      "contentSha256": "86e2c12cb063912f193128b7d171dfb5f97da4c75673a88764a26aaecb6dbd6c",
-      "slug": "motor/ODrive/OD-03-Control-Strategy",
-      "oldUrl": "/content/motor/ODrive/OD-03-Control-Strategy.html",
-      "targetUrl": "/posts/motor/ODrive/OD-03-Control-Strategy/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "ODrive",
-      "articleId": "motor/ODrive/OD-03-Control-Strategy",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/ODrive/OD-04-Encoder-Sensorless.md",
-      "contentSha256": "4145b1cfa2627c02d06c934a11689480645d15cfffd347d79e41dff7d809953f",
-      "slug": "motor/ODrive/OD-04-Encoder-Sensorless",
-      "oldUrl": "/content/motor/ODrive/OD-04-Encoder-Sensorless.html",
-      "targetUrl": "/posts/motor/ODrive/OD-04-Encoder-Sensorless/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "ODrive",
-      "articleId": "motor/ODrive/OD-04-Encoder-Sensorless",
       "attachments": []
     },
     {
@@ -4113,20 +4165,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-01-assessment.md",
-      "contentSha256": "2e98aaa006291723869c5a427a5b59cc3264d2455ff9dddbf20e987994631bd3",
-      "slug": "motor/power-path/PP-01-assessment",
-      "oldUrl": "/content/motor/power-path/PP-01-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "基础与硬件",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-01-DCDC-Fundamental-Topologies.md",
       "contentSha256": "411bb8c871510fc59c51ab6dab89a7ad40584902a22ea0dbb648932e4db04391",
       "slug": "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
@@ -4141,17 +4179,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-02-assessment.md",
-      "contentSha256": "9dc1ae1c7113f05e381e54fe4cc95b70759b39fba02e35e1f7d592e208a99dc4",
-      "slug": "motor/power-path/PP-02-assessment",
-      "oldUrl": "/content/motor/power-path/PP-02-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-02-assessment/",
+      "sourcePath": "content/motor/power-path/PP-01-assessment.md",
+      "contentSha256": "2e98aaa006291723869c5a427a5b59cc3264d2455ff9dddbf20e987994631bd3",
+      "slug": "motor/power-path/PP-01-assessment",
+      "oldUrl": "/content/motor/power-path/PP-01-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-01-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-02-assessment",
+      "articleId": "motor/power-path/PP-01-assessment",
       "attachments": []
     },
     {
@@ -4169,17 +4207,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-03-assessment.md",
-      "contentSha256": "3d513e97697e2c63f60131826e1b84f52e40707813fc31f1ff6390f6973c90f5",
-      "slug": "motor/power-path/PP-03-assessment",
-      "oldUrl": "/content/motor/power-path/PP-03-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-03-assessment/",
+      "sourcePath": "content/motor/power-path/PP-02-assessment.md",
+      "contentSha256": "9dc1ae1c7113f05e381e54fe4cc95b70759b39fba02e35e1f7d592e208a99dc4",
+      "slug": "motor/power-path/PP-02-assessment",
+      "oldUrl": "/content/motor/power-path/PP-02-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-02-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-03-assessment",
+      "articleId": "motor/power-path/PP-02-assessment",
       "attachments": []
     },
     {
@@ -4197,17 +4235,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-04-assessment.md",
-      "contentSha256": "10b037ed2162104a9b6eca9656853bd58aceae847a0407a5e2806df638212b2a",
-      "slug": "motor/power-path/PP-04-assessment",
-      "oldUrl": "/content/motor/power-path/PP-04-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-04-assessment/",
+      "sourcePath": "content/motor/power-path/PP-03-assessment.md",
+      "contentSha256": "3d513e97697e2c63f60131826e1b84f52e40707813fc31f1ff6390f6973c90f5",
+      "slug": "motor/power-path/PP-03-assessment",
+      "oldUrl": "/content/motor/power-path/PP-03-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-03-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-04-assessment",
+      "articleId": "motor/power-path/PP-03-assessment",
       "attachments": []
     },
     {
@@ -4225,17 +4263,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-05-assessment.md",
-      "contentSha256": "1450d0fbf886e731289ae8d7aca87e57cc70fe3cc8c466a5c741c71a5a594dc1",
-      "slug": "motor/power-path/PP-05-assessment",
-      "oldUrl": "/content/motor/power-path/PP-05-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-05-assessment/",
+      "sourcePath": "content/motor/power-path/PP-04-assessment.md",
+      "contentSha256": "10b037ed2162104a9b6eca9656853bd58aceae847a0407a5e2806df638212b2a",
+      "slug": "motor/power-path/PP-04-assessment",
+      "oldUrl": "/content/motor/power-path/PP-04-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-04-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-05-assessment",
+      "articleId": "motor/power-path/PP-04-assessment",
       "attachments": []
     },
     {
@@ -4253,17 +4291,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-06-assessment.md",
-      "contentSha256": "e90b8ee40b39381d488bc363315feaf6ce1e7e95d3991e86d7e593cd2cbf0698",
-      "slug": "motor/power-path/PP-06-assessment",
-      "oldUrl": "/content/motor/power-path/PP-06-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-06-assessment/",
+      "sourcePath": "content/motor/power-path/PP-05-assessment.md",
+      "contentSha256": "1450d0fbf886e731289ae8d7aca87e57cc70fe3cc8c466a5c741c71a5a594dc1",
+      "slug": "motor/power-path/PP-05-assessment",
+      "oldUrl": "/content/motor/power-path/PP-05-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-05-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-06-assessment",
+      "articleId": "motor/power-path/PP-05-assessment",
       "attachments": []
     },
     {
@@ -4281,17 +4319,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-07-assessment.md",
-      "contentSha256": "c187c2877bbc37f77a57634493167f275336e99ba37dcddd677b949f33e71a54",
-      "slug": "motor/power-path/PP-07-assessment",
-      "oldUrl": "/content/motor/power-path/PP-07-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-07-assessment/",
+      "sourcePath": "content/motor/power-path/PP-06-assessment.md",
+      "contentSha256": "e90b8ee40b39381d488bc363315feaf6ce1e7e95d3991e86d7e593cd2cbf0698",
+      "slug": "motor/power-path/PP-06-assessment",
+      "oldUrl": "/content/motor/power-path/PP-06-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-06-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-07-assessment",
+      "articleId": "motor/power-path/PP-06-assessment",
       "attachments": []
     },
     {
@@ -4309,17 +4347,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-08-assessment.md",
-      "contentSha256": "5c3743f2df5f622fd7a2e538d5d9b978704bddeb3ead19147484950265cb8a1c",
-      "slug": "motor/power-path/PP-08-assessment",
-      "oldUrl": "/content/motor/power-path/PP-08-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-08-assessment/",
+      "sourcePath": "content/motor/power-path/PP-07-assessment.md",
+      "contentSha256": "c187c2877bbc37f77a57634493167f275336e99ba37dcddd677b949f33e71a54",
+      "slug": "motor/power-path/PP-07-assessment",
+      "oldUrl": "/content/motor/power-path/PP-07-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-07-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-08-assessment",
+      "articleId": "motor/power-path/PP-07-assessment",
       "attachments": []
     },
     {
@@ -4337,17 +4375,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-09-assessment.md",
-      "contentSha256": "93e641249c8821a82e5ce5543ec5dc5effa913a1cb76bfe84807b8365b42b1c0",
-      "slug": "motor/power-path/PP-09-assessment",
-      "oldUrl": "/content/motor/power-path/PP-09-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-09-assessment/",
+      "sourcePath": "content/motor/power-path/PP-08-assessment.md",
+      "contentSha256": "5c3743f2df5f622fd7a2e538d5d9b978704bddeb3ead19147484950265cb8a1c",
+      "slug": "motor/power-path/PP-08-assessment",
+      "oldUrl": "/content/motor/power-path/PP-08-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-08-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-09-assessment",
+      "articleId": "motor/power-path/PP-08-assessment",
       "attachments": []
     },
     {
@@ -4365,17 +4403,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-10-assessment.md",
-      "contentSha256": "d78d5c9e800846249717ba06d97c03682b62580cda329df32aabb1c107fc25e9",
-      "slug": "motor/power-path/PP-10-assessment",
-      "oldUrl": "/content/motor/power-path/PP-10-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-10-assessment/",
+      "sourcePath": "content/motor/power-path/PP-09-assessment.md",
+      "contentSha256": "93e641249c8821a82e5ce5543ec5dc5effa913a1cb76bfe84807b8365b42b1c0",
+      "slug": "motor/power-path/PP-09-assessment",
+      "oldUrl": "/content/motor/power-path/PP-09-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-09-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-10-assessment",
+      "articleId": "motor/power-path/PP-09-assessment",
       "attachments": []
     },
     {
@@ -4393,17 +4431,17 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-11-assessment.md",
-      "contentSha256": "9ab322584040e4c14d19e09cc4c503f2605da248ad6e6e2a3d59ac64fc8f9b26",
-      "slug": "motor/power-path/PP-11-assessment",
-      "oldUrl": "/content/motor/power-path/PP-11-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-11-assessment/",
+      "sourcePath": "content/motor/power-path/PP-10-assessment.md",
+      "contentSha256": "d78d5c9e800846249717ba06d97c03682b62580cda329df32aabb1c107fc25e9",
+      "slug": "motor/power-path/PP-10-assessment",
+      "oldUrl": "/content/motor/power-path/PP-10-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-10-assessment/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
       "routeId": "基础与硬件",
       "stageId": "power-path",
-      "articleId": "motor/power-path/PP-11-assessment",
+      "articleId": "motor/power-path/PP-10-assessment",
       "attachments": []
     },
     {
@@ -4418,6 +4456,20 @@
       "routeId": "基础与硬件",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/power-path/PP-11-assessment.md",
+      "contentSha256": "9ab322584040e4c14d19e09cc4c503f2605da248ad6e6e2a3d59ac64fc8f9b26",
+      "slug": "motor/power-path/PP-11-assessment",
+      "oldUrl": "/content/motor/power-path/PP-11-assessment.html",
+      "targetUrl": "/posts/motor/power-path/PP-11-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "基础与硬件",
+      "stageId": "power-path",
+      "articleId": "motor/power-path/PP-11-assessment",
       "attachments": []
     },
     {
@@ -4491,17 +4543,101 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/README.md",
-      "contentSha256": "0cb6b753eda4273c795d64342b0386baac3f925b4d875e72f7de811ec4decf57",
-      "slug": "motor/README",
-      "oldUrl": "/content/motor/README.html",
-      "targetUrl": "/posts/motor/README/",
+      "sourcePath": "content/motor/simulation/SIM-00-C-Simulation-Overview.md",
+      "contentSha256": "8a0ff8127485723046825c91ea64c928a6d80ec9420c215f85a8a9a75e4a765f",
+      "slug": "motor/simulation/SIM-00-C-Simulation-Overview",
+      "oldUrl": "/content/motor/simulation/SIM-00-C-Simulation-Overview.html",
+      "targetUrl": "/posts/motor/simulation/SIM-00-C-Simulation-Overview/",
       "visibility": "public",
       "encrypted": false,
       "sectionId": "电机控制",
-      "routeId": "入门与索引",
-      "stageId": "overview",
-      "articleId": "motor/README",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-00-C-Simulation-Overview",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-01-C-Simulation-QuickStart.md",
+      "contentSha256": "52bce059257b8b8722e2b2ecedfde0d7bd381865eb1fb4206ed80a98a44476a9",
+      "slug": "motor/simulation/SIM-01-C-Simulation-QuickStart",
+      "oldUrl": "/content/motor/simulation/SIM-01-C-Simulation-QuickStart.html",
+      "targetUrl": "/posts/motor/simulation/SIM-01-C-Simulation-QuickStart/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-01-C-Simulation-QuickStart",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-02-C-Simulation-Code-Map.md",
+      "contentSha256": "ebc32401c51cf8eff0cedeac2e0830ef967df2703e771351cb48b3e17de3e1c7",
+      "slug": "motor/simulation/SIM-02-C-Simulation-Code-Map",
+      "oldUrl": "/content/motor/simulation/SIM-02-C-Simulation-Code-Map.html",
+      "targetUrl": "/posts/motor/simulation/SIM-02-C-Simulation-Code-Map/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-02-C-Simulation-Code-Map",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-03-C-Simulation-Plotting.md",
+      "contentSha256": "33925831a6362049d3cbba17602cc3ac1e43f0ee2a70d9a36dd5f01c6d5313b9",
+      "slug": "motor/simulation/SIM-03-C-Simulation-Plotting",
+      "oldUrl": "/content/motor/simulation/SIM-03-C-Simulation-Plotting.html",
+      "targetUrl": "/posts/motor/simulation/SIM-03-C-Simulation-Plotting/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-03-C-Simulation-Plotting",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.md",
+      "contentSha256": "3990f3d34bb154d3c63aa2210329b060051d532560aea773bd4b068a0702ac27",
+      "slug": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+      "oldUrl": "/content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html",
+      "targetUrl": "/posts/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-05-Digital-Twin.md",
+      "contentSha256": "94dc909451bc962bafffb6577bc8a88b72c6cfe99234103b63d956e7232c2468",
+      "slug": "motor/simulation/SIM-05-Digital-Twin",
+      "oldUrl": "/content/motor/simulation/SIM-05-Digital-Twin.html",
+      "targetUrl": "/posts/motor/simulation/SIM-05-Digital-Twin/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-05-Digital-Twin",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/motor/simulation/SIM-05-assessment.md",
+      "contentSha256": "acf4a6096d6cd9a76119451b7756354e63d2996cd17004a2c9d06edbb1a9105f",
+      "slug": "motor/simulation/SIM-05-assessment",
+      "oldUrl": "/content/motor/simulation/SIM-05-assessment.html",
+      "targetUrl": "/posts/motor/simulation/SIM-05-assessment/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电机控制",
+      "routeId": "实践与验证",
+      "stageId": "simulation",
+      "articleId": "motor/simulation/SIM-05-assessment",
       "attachments": []
     },
     {
@@ -4589,160 +4725,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/simulation/SIM-00-C-Simulation-Overview.md",
-      "contentSha256": "8a0ff8127485723046825c91ea64c928a6d80ec9420c215f85a8a9a75e4a765f",
-      "slug": "motor/simulation/SIM-00-C-Simulation-Overview",
-      "oldUrl": "/content/motor/simulation/SIM-00-C-Simulation-Overview.html",
-      "targetUrl": "/posts/motor/simulation/SIM-00-C-Simulation-Overview/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-00-C-Simulation-Overview",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-01-C-Simulation-QuickStart.md",
-      "contentSha256": "52bce059257b8b8722e2b2ecedfde0d7bd381865eb1fb4206ed80a98a44476a9",
-      "slug": "motor/simulation/SIM-01-C-Simulation-QuickStart",
-      "oldUrl": "/content/motor/simulation/SIM-01-C-Simulation-QuickStart.html",
-      "targetUrl": "/posts/motor/simulation/SIM-01-C-Simulation-QuickStart/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-01-C-Simulation-QuickStart",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-02-C-Simulation-Code-Map.md",
-      "contentSha256": "ebc32401c51cf8eff0cedeac2e0830ef967df2703e771351cb48b3e17de3e1c7",
-      "slug": "motor/simulation/SIM-02-C-Simulation-Code-Map",
-      "oldUrl": "/content/motor/simulation/SIM-02-C-Simulation-Code-Map.html",
-      "targetUrl": "/posts/motor/simulation/SIM-02-C-Simulation-Code-Map/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-02-C-Simulation-Code-Map",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-03-C-Simulation-Plotting.md",
-      "contentSha256": "33925831a6362049d3cbba17602cc3ac1e43f0ee2a70d9a36dd5f01c6d5313b9",
-      "slug": "motor/simulation/SIM-03-C-Simulation-Plotting",
-      "oldUrl": "/content/motor/simulation/SIM-03-C-Simulation-Plotting.html",
-      "targetUrl": "/posts/motor/simulation/SIM-03-C-Simulation-Plotting/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-03-C-Simulation-Plotting",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.md",
-      "contentSha256": "3990f3d34bb154d3c63aa2210329b060051d532560aea773bd4b068a0702ac27",
-      "slug": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-      "oldUrl": "/content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html",
-      "targetUrl": "/posts/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-05-assessment.md",
-      "contentSha256": "acf4a6096d6cd9a76119451b7756354e63d2996cd17004a2c9d06edbb1a9105f",
-      "slug": "motor/simulation/SIM-05-assessment",
-      "oldUrl": "/content/motor/simulation/SIM-05-assessment.html",
-      "targetUrl": "/posts/motor/simulation/SIM-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-05-assessment",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/simulation/SIM-05-Digital-Twin.md",
-      "contentSha256": "94dc909451bc962bafffb6577bc8a88b72c6cfe99234103b63d956e7232c2468",
-      "slug": "motor/simulation/SIM-05-Digital-Twin",
-      "oldUrl": "/content/motor/simulation/SIM-05-Digital-Twin.html",
-      "targetUrl": "/posts/motor/simulation/SIM-05-Digital-Twin/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "实践与验证",
-      "stageId": "simulation",
-      "articleId": "motor/simulation/SIM-05-Digital-Twin",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/VESC/VC-01-Architecture.md",
-      "contentSha256": "08f226d09fdece94566a604a843ef5e9bdae2d64d0015e78da5055c7d6484509",
-      "slug": "motor/VESC/VC-01-Architecture",
-      "oldUrl": "/content/motor/VESC/VC-01-Architecture.html",
-      "targetUrl": "/posts/motor/VESC/VC-01-Architecture/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "VESC",
-      "articleId": "motor/VESC/VC-01-Architecture",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/VESC/VC-02-FOC-Core.md",
-      "contentSha256": "2be269e2f39093585205a1b050305530c5dff98c430b03e484e6a05b9fe270b7",
-      "slug": "motor/VESC/VC-02-FOC-Core",
-      "oldUrl": "/content/motor/VESC/VC-02-FOC-Core.html",
-      "targetUrl": "/posts/motor/VESC/VC-02-FOC-Core/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "VESC",
-      "articleId": "motor/VESC/VC-02-FOC-Core",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/VESC/VC-03-Observer-Sensorless.md",
-      "contentSha256": "4efdbf2e5f178ccaa64aaefd944c39fc3406eb988adafdbd88a919ef5365bcca",
-      "slug": "motor/VESC/VC-03-Observer-Sensorless",
-      "oldUrl": "/content/motor/VESC/VC-03-Observer-Sensorless.html",
-      "targetUrl": "/posts/motor/VESC/VC-03-Observer-Sensorless/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "VESC",
-      "articleId": "motor/VESC/VC-03-Observer-Sensorless",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/VESC/VC-04-System-Protection.md",
-      "contentSha256": "bd93c585369cb6a9b797b37fe22ae9de99ce0ac8d64fae069afe3ed042183574",
-      "slug": "motor/VESC/VC-04-System-Protection",
-      "oldUrl": "/content/motor/VESC/VC-04-System-Protection.html",
-      "targetUrl": "/posts/motor/VESC/VC-04-System-Protection/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电机控制",
-      "routeId": "工程与生态",
-      "stageId": "VESC",
-      "articleId": "motor/VESC/VC-04-System-Protection",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/playground/rendering-fixture.md",
       "contentSha256": "f8f79fde658c3a29382e7f801d75687ebf149007b8c0f84e7d1a3cd4afc42177",
       "slug": "playground/rendering-fixture",
@@ -4753,6 +4735,76 @@
       "sectionId": "Playground",
       "stageId": "00-Fixtures",
       "articleId": "playground/rendering-fixture",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/power/MISSION.md",
+      "contentSha256": "9844b27515a86fd75aefee2a0f58271bcd30377e23dc4433417f966d232e76af",
+      "slug": "power/MISSION",
+      "oldUrl": "/content/power/MISSION.html",
+      "targetUrl": "/posts/power/MISSION/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电源控制",
+      "routeId": "路线与索引",
+      "stageId": "overview",
+      "articleId": "power/MISSION",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/power/NOTES.md",
+      "contentSha256": "3da213b1c30c88e191c5f2a44f14dd414fb3f3837cde55debf59d313b881391c",
+      "slug": "power/NOTES",
+      "oldUrl": "/content/power/NOTES.html",
+      "targetUrl": "/posts/power/NOTES/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电源控制",
+      "routeId": "路线与索引",
+      "stageId": "overview",
+      "articleId": "power/NOTES",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/power/RESOURCES.md",
+      "contentSha256": "87d4398a926e87ab578c4f18897bc3f8409d1842d583825678639734cd86d227",
+      "slug": "power/RESOURCES",
+      "oldUrl": "/content/power/RESOURCES.html",
+      "targetUrl": "/posts/power/RESOURCES/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电源控制",
+      "routeId": "路线与索引",
+      "stageId": "overview",
+      "articleId": "power/RESOURCES",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/power/USAGE.md",
+      "contentSha256": "ff518e20c27ef367c70db130d665fd84f5c671fe490caf940b9d003bb452b9ef",
+      "slug": "power/USAGE",
+      "oldUrl": "/content/power/USAGE.html",
+      "targetUrl": "/posts/power/USAGE/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电源控制",
+      "routeId": "路线与索引",
+      "stageId": "overview",
+      "articleId": "power/USAGE",
+      "attachments": []
+    },
+    {
+      "sourcePath": "content/power/archive/README.md",
+      "contentSha256": "fb35731b7cbbf936098ad68a04f5a956d6f37a84c84078326ed91f1185fda378",
+      "slug": "power/archive/README",
+      "oldUrl": "/content/power/archive/README.html",
+      "targetUrl": "/posts/power/archive/README/",
+      "visibility": "public",
+      "encrypted": false,
+      "sectionId": "电源控制",
+      "routeId": "调试与复盘",
+      "stageId": "archive",
+      "articleId": "power/archive/README",
       "attachments": []
     },
     {
@@ -5120,20 +5172,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/power/archive/README.md",
-      "contentSha256": "fb35731b7cbbf936098ad68a04f5a956d6f37a84c84078326ed91f1185fda378",
-      "slug": "power/archive/README",
-      "oldUrl": "/content/power/archive/README.html",
-      "targetUrl": "/posts/power/archive/README/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电源控制",
-      "routeId": "调试与复盘",
-      "stageId": "archive",
-      "articleId": "power/archive/README",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/power/getting-started.md",
       "contentSha256": "7fa1093eb02087abbb2d20dd489e08b4317379700e92ee46a463a07a1a6eb0f8",
       "slug": "power/getting-started",
@@ -5145,34 +5183,6 @@
       "routeId": "路线与索引",
       "stageId": "overview",
       "articleId": "power/getting-started",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/power/MISSION.md",
-      "contentSha256": "9844b27515a86fd75aefee2a0f58271bcd30377e23dc4433417f966d232e76af",
-      "slug": "power/MISSION",
-      "oldUrl": "/content/power/MISSION.html",
-      "targetUrl": "/posts/power/MISSION/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电源控制",
-      "routeId": "路线与索引",
-      "stageId": "overview",
-      "articleId": "power/MISSION",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/power/NOTES.md",
-      "contentSha256": "3da213b1c30c88e191c5f2a44f14dd414fb3f3837cde55debf59d313b881391c",
-      "slug": "power/NOTES",
-      "oldUrl": "/content/power/NOTES.html",
-      "targetUrl": "/posts/power/NOTES/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电源控制",
-      "routeId": "路线与索引",
-      "stageId": "overview",
-      "articleId": "power/NOTES",
       "attachments": []
     },
     {
@@ -5215,20 +5225,6 @@
       "routeId": "项目实践",
       "stageId": "projects",
       "articleId": "power/projects/03-ups-c-firmware-skeleton/README",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/power/RESOURCES.md",
-      "contentSha256": "87d4398a926e87ab578c4f18897bc3f8409d1842d583825678639734cd86d227",
-      "slug": "power/RESOURCES",
-      "oldUrl": "/content/power/RESOURCES.html",
-      "targetUrl": "/posts/power/RESOURCES/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电源控制",
-      "routeId": "路线与索引",
-      "stageId": "overview",
-      "articleId": "power/RESOURCES",
       "attachments": []
     },
     {
@@ -5299,20 +5295,6 @@
       "routeId": "项目实践",
       "stageId": "simulations",
       "articleId": "power/simulations/README",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/power/USAGE.md",
-      "contentSha256": "ff518e20c27ef367c70db130d665fd84f5c671fe490caf940b9d003bb452b9ef",
-      "slug": "power/USAGE",
-      "oldUrl": "/content/power/USAGE.html",
-      "targetUrl": "/posts/power/USAGE/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "电源控制",
-      "routeId": "路线与索引",
-      "stageId": "overview",
-      "articleId": "power/USAGE",
       "attachments": []
     },
     {

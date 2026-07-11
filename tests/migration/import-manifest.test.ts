@@ -28,7 +28,7 @@ describe('Firefly mod import manifest', () => {
 
   it('enumerates and classifies every file exactly once with reachable ordered rules', async () => {
     expect(Object.keys(manifest.dispositions).sort()).toEqual(['exclude', 'import', 'merge', 'preserve', 'replace-personal'])
-    expect(manifest.classificationRules.at(-1)).toMatchObject({ match: '**/*', disposition: 'exclude' })
+    expect(manifest.classificationRules.at(-1)).toMatchObject({ match: '**/*', disposition: 'exclude', fallback: true })
 
     const audit = await auditImportManifest(manifest)
     expect(audit.totalFiles).toBeGreaterThan(0)
@@ -40,6 +40,30 @@ describe('Firefly mod import manifest', () => {
     expect(Object.values(audit.counts).reduce((sum, count) => sum + count, 0)).toBe(audit.totalFiles)
     expect(audit.fallbackExclude.count).toBeGreaterThan(0)
     expect(audit.fallbackExclude.samples.length).toBeGreaterThan(0)
+  })
+
+  it('reports overlapping business globs as conflicts while ignoring the explicit fallback', async () => {
+    const root = await fs.promises.mkdtemp(path.join(process.env.TEMP!, 'import-audit-'))
+    await fs.promises.mkdir(path.join(root, 'source', 'src'), { recursive: true })
+    await fs.promises.writeFile(path.join(root, 'source', 'src', 'shared.ts'), '')
+    const audit = await auditImportManifest({
+      dispositions: { import: [], merge: [], exclude: [] },
+      sources: [{ repository: 'example/source', localPath: 'source' }],
+      classificationRules: [
+        { match: 'src/**', disposition: 'import' },
+        { match: '**/*.ts', disposition: 'merge' },
+        { match: '**/*', disposition: 'exclude', fallback: true }
+      ]
+    }, root)
+
+    expect(audit.conflicts).toEqual([{ file: 'example/source:src/shared.ts', rules: [0, 1] }])
+  })
+
+  it('versions one unique classification record for every source file', async () => {
+    const audit = await auditImportManifest(manifest)
+    expect(audit.files).toHaveLength(audit.totalFiles)
+    expect(new Set(audit.files.map((entry: any) => `${entry.source}:${entry.file}`)).size).toBe(audit.totalFiles)
+    expect(audit.files[0]).toMatchObject({ source: expect.any(String), file: expect.any(String), disposition: expect.any(String), winningRule: expect.any(Number) })
   })
 
   it('explicitly excludes Cloudflare, Worker, RAG, KV and Vectorize capabilities', () => {

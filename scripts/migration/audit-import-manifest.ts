@@ -75,27 +75,33 @@ export async function auditImportManifest(manifest: any, rootDir = process.cwd()
   const conflicts: Array<{ file: string, rules: number[] }> = []
   const winningRules = new Set<number>()
   const fallbackSamples: string[] = []
+  const files: Array<{ source: string, file: string, disposition: string, winningRule: number }> = []
   let fallbackCount = 0
-  const fallbackIndex = manifest.classificationRules.length - 1
+  const fallbackIndices = manifest.classificationRules.flatMap((rule: any, index: number) => rule.fallback === true ? [index] : [])
+  if (fallbackIndices.length !== 1) invalidPatterns.push({ rule: -1, pattern: '', error: 'exactly one explicit fallback rule is required' })
 
-  for (const file of allFiles.sort()) {
-    const matches = ruleMatches.flatMap((files, index) => files.has(file) ? [index] : [])
-    if (!matches.length) { unclassified.push(file); continue }
-    const winner = matches[0]
+  for (const qualifiedFile of allFiles.sort()) {
+    const matches = ruleMatches.flatMap((matchedFiles, index) => matchedFiles.has(qualifiedFile) ? [index] : [])
+    const businessMatches = matches.filter(index => !manifest.classificationRules[index].fallback)
+    if (businessMatches.length > 1) conflicts.push({ file: qualifiedFile, rules: businessMatches })
+    const winner = businessMatches[0] ?? matches.find(index => manifest.classificationRules[index].fallback)
+    if (winner === undefined) { unclassified.push(qualifiedFile); continue }
     winningRules.add(winner)
-    counts[manifest.classificationRules[winner].disposition]++
-    if (winner === fallbackIndex) {
+    const disposition = manifest.classificationRules[winner].disposition
+    counts[disposition]++
+    const separator = qualifiedFile.indexOf(':')
+    files.push({ source: qualifiedFile.slice(0, separator), file: qualifiedFile.slice(separator + 1), disposition, winningRule: winner })
+    if (manifest.classificationRules[winner].fallback) {
       fallbackCount++
-      if (fallbackSamples.length < 10) fallbackSamples.push(file)
+      if (fallbackSamples.length < 10) fallbackSamples.push(qualifiedFile)
     }
-    const samePattern = matches.filter(index => manifest.classificationRules[index].match === manifest.classificationRules[winner].match)
-    if (samePattern.length > 1) conflicts.push({ file, rules: samePattern })
   }
 
   return {
     totalFiles: allFiles.length,
     coveredFiles: allFiles.length - unclassified.length,
     counts,
+    files,
     fallbackExclude: { count: fallbackCount, samples: fallbackSamples },
     unclassified,
     conflicts,
