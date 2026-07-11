@@ -7,6 +7,15 @@ import YAML from 'yaml'
 const read = (file: string) => fs.readFileSync(path.resolve(file), 'utf8')
 const normalizePath = (file: string) => file.replaceAll('\\', '/')
 
+const cloudflareDeploymentFilePattern = /^(?:wrangler\.(?:toml|jsonc?)|\.dev\.vars|worker(?:\.[^/]+)?|\.env\.(?:cloudflare|worker|workers)\.example)$/
+
+const findCloudflareDeploymentFiles = (root: string, trackedFiles: string[]) => [
+  ...new Set([
+    ...trackedFiles.map(normalizePath),
+    ...fs.readdirSync(root, { withFileTypes: true }).filter((entry) => entry.isFile()).map((entry) => entry.name),
+  ]),
+].filter((file) => cloudflareDeploymentFilePattern.test(file))
+
 const packageJson = JSON.parse(read('package.json'))
 const astroConfig = read('astro.config.mjs')
 const workflowSource = read('.github/workflows/deploy.yml')
@@ -80,14 +89,47 @@ const serverAdapterFiles = trackedContractFiles.filter((file) =>
   /(?:^|\/)(?:adapter|server|worker|wrangler)(?:[./-]|$)/i.test(file),
 )
 
+const cloudflareDeploymentFiles = findCloudflareDeploymentFiles(process.cwd(), trackedContractFiles)
+
 describe('static deployment contract', () => {
+  it.each([
+    'wrangler.toml',
+    'wrangler.json',
+    'wrangler.jsonc',
+    '.dev.vars',
+    'worker.ts',
+    '.env.cloudflare.example',
+  ])('detects an existing untracked Cloudflare deployment file: %s', (file) => {
+    const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
+    fs.writeFileSync(path.join(fixtureRoot, file), '')
+
+    try {
+      expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toContain(file)
+    }
+    finally {
+      fs.rmSync(fixtureRoot, { recursive: true, force: true })
+    }
+  })
+
+  it('allows a project without Cloudflare deployment files', () => {
+    const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
+
+    try {
+      expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toEqual([])
+    }
+    finally {
+      fs.rmSync(fixtureRoot, { recursive: true, force: true })
+    }
+  })
+
   it('configures Astro for static output without a server adapter or API routes', () => {
     expect(astroConfig).toMatch(/output:\s*["']static["']/)
     expect(serverAdapterFiles).toEqual([])
     expect(apiRouteFiles).toEqual([])
   })
 
-  it('has no Cloudflare runtime, routing, bindings or environment variables in tracked source and config', () => {
+  it('has no Cloudflare runtime, routing, bindings or environment variables in source and config', () => {
+    expect(cloudflareDeploymentFiles).toEqual([])
     expect(unexpectedCloudflareMatches).toEqual([])
     expect(Object.keys(packageJson.scripts)).not.toEqual(expect.arrayContaining(['build-index', 'worker', 'deploy:worker']))
   })
