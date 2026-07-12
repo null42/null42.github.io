@@ -7,7 +7,7 @@ import YAML from 'yaml'
 const read = (file: string) => fs.readFileSync(path.resolve(file), 'utf8')
 const normalizePath = (file: string) => file.replaceAll('\\', '/')
 
-const cloudflareDeploymentFilePattern = /^(?:wrangler\.(?:toml|jsonc?)|\.dev\.vars|worker(?:\.[^/]+)?|\.env\.(?:cloudflare|worker|workers)\.example)$/
+const cloudflareDeploymentFilePattern = /^(?:wrangler\.(?:toml|jsonc?)|\.dev\.vars|worker(?:\.[^/]+)?|_(?:worker\.js|routes\.json)|\.env\.(?:cloudflare|worker|workers)\.example)$/
 
 const findCloudflareDeploymentFiles = (root: string, trackedFiles: string[]) => [
   ...new Set([
@@ -98,6 +98,8 @@ describe('static deployment contract', () => {
     'wrangler.jsonc',
     '.dev.vars',
     'worker.ts',
+    '_worker.js',
+    '_routes.json',
     '.env.cloudflare.example',
   ])('detects an existing untracked Cloudflare deployment file: %s', (file) => {
     const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
@@ -105,6 +107,21 @@ describe('static deployment contract', () => {
 
     try {
       expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toContain(file)
+    }
+    finally {
+      fs.rmSync(fixtureRoot, { recursive: true, force: true })
+    }
+  })
+
+  it.each([
+    '_headers',
+    '_redirects',
+  ])('does not treat a common static host file as Cloudflare-specific: %s', (file) => {
+    const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
+    fs.writeFileSync(path.join(fixtureRoot, file), '')
+
+    try {
+      expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toEqual([])
     }
     finally {
       fs.rmSync(fixtureRoot, { recursive: true, force: true })
