@@ -1,0 +1,82 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getSortedPosts } from "@/utils/content-utils";
+import { isPublicArticle } from "@/utils/article-index";
+import { getPostUrlBySlug } from "@/utils/url-utils";
+
+const title = "文章列表";
+const posts = (await getSortedPosts()).filter(({ data }) => isPublicArticle(data));
+const formatter = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" });
+---
+
+<MainGridLayout title={title} description="浏览全部公开文章">
+	<section class="article-index" data-article-index data-default-view="list" data-batch-size="48" aria-labelledby="article-index-title">
+		<header class="article-index__header">
+			<div id="article-index-title">
+				<p class="article-index__eyebrow">Article Index</p>
+				<h2>{title}</h2>
+			</div>
+			<div class="article-index__tools">
+				<div class="article-index__tabs" role="tablist" aria-label="文章视图">
+					<button type="button" role="tab" aria-selected="true" aria-controls="article-results" data-article-view="list">列表</button>
+					<button type="button" role="tab" aria-selected="false" aria-controls="article-results" tabindex="-1" data-article-view="grid">网格</button>
+				</div>
+				<p aria-live="polite">共 <strong>{posts.length}</strong> 篇公开文章</p>
+			</div>
+		</header>
+
+		{posts.length === 0 ? (
+			<p class="article-index__empty" role="status">暂无公开文章</p>
+		) : (
+			<ol id="article-results" class="article-index__results" data-article-results data-view="list">
+				{posts.map((post) => (
+					<li data-article-item>
+						<article class="article-index__card">
+							<a href={getPostUrlBySlug(post.id)}>
+								<div>
+									<h2>{post.data.title}</h2>
+									<p>{post.data.description || "阅读文章详情"}</p>
+								</div>
+								<footer>
+									<time datetime={post.data.published.toISOString()}>{formatter.format(post.data.published)}</time>
+									{post.data.category && <span>{post.data.category}</span>}
+									{post.data.tags.slice(0, 3).map((tag) => <span>#{tag}</span>)}
+								</footer>
+							</a>
+						</article>
+					</li>
+				))}
+			</ol>
+		)}
+		<div class="article-index__sentinel" data-article-sentinel aria-hidden="true">继续加载</div>
+	</section>
+</MainGridLayout>
+
+<script>
+	import { initArticleIndex } from "@/utils/article-index-controller";
+	let controller = initArticleIndex();
+	document.addEventListener("astro:before-swap", () => controller?.dispose(), { once: true });
+	document.addEventListener("astro:page-load", () => { controller?.dispose(); controller = initArticleIndex(); });
+</script>
+
+<style>
+	.article-index { display: grid; gap: 1rem; }
+	.article-index__header, .article-index__tools { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+	.article-index__tabs { display: inline-flex; padding: .25rem; border-radius: 999px; background: var(--card-bg); box-shadow: var(--shadow-sm); }
+	.article-index__tabs button { min-width: 4.5rem; padding: .55rem 1rem; border-radius: 999px; cursor: pointer; }
+	.article-index__tabs button[aria-selected="true"] { color: white; background: var(--primary); }
+	.article-index__tabs button:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+	.article-index__results { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+	.article-index__results[data-view="grid"] { grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+	.article-index__card { height: 100%; border-radius: var(--radius-large); background: var(--card-bg); box-shadow: var(--shadow-sm); transition: transform .2s ease, box-shadow .2s ease; }
+	.article-index__card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+	.article-index__card a { display: flex; height: 100%; min-height: 8rem; padding: 1.15rem; color: inherit; text-decoration: none; flex-direction: column; justify-content: space-between; gap: 1rem; }
+	.article-index__card h2 { margin: 0 0 .45rem; font-size: 1.1rem; }
+	.article-index__card p { display: -webkit-box; margin: 0; overflow: hidden; color: var(--meta-color); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+	.article-index__card footer { display: flex; gap: .65rem; flex-wrap: wrap; color: var(--meta-color); font-size: .82rem; }
+	.article-index__results[data-view="list"] .article-index__card a { min-height: auto; }
+	.article-index__empty { padding: 3rem 1rem; text-align: center; border-radius: var(--radius-large); background: var(--card-bg); }
+	.article-index__sentinel { min-height: 1px; text-align: center; color: transparent; }
+	.article-index:not([data-enhanced]) .article-index__tabs { display: none; }
+	@media (prefers-reduced-motion: reduce) { .article-index__card { transition: none; } .article-index__card:hover { transform: none; } }
+</style>
