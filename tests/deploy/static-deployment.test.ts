@@ -173,4 +173,20 @@ describe('static deployment contract', () => {
     expect(workflow.jobs.deploy.if).toBe("github.ref == 'refs/heads/main'")
     expect(workflow.jobs.deploy.environment.name).toBe('github-pages')
   })
+
+  it('blocks production deployment until Chromium-backed home contracts pass', () => {
+    const buildSteps = workflow.jobs.build.steps as Array<{ name?: string; run?: string; uses?: string; with?: Record<string, string> }>
+    const browserCache = buildSteps.find(step => step.name === 'Cache Playwright Chromium')
+    const installBrowser = buildSteps.find(step => step.name === 'Install Playwright Chromium')
+    const homeE2e = buildSteps.find(step => step.name === 'Run home production contracts')
+    const uploadReport = buildSteps.find(step => step.name === 'Upload Playwright report')
+
+    expect(browserCache?.uses).toBe('actions/cache@v4')
+    expect(browserCache?.with?.path).toBe('~/.cache/ms-playwright')
+    expect(installBrowser?.run).toBe('pnpm exec playwright install --with-deps chromium')
+    expect(homeE2e?.run).toBe('pnpm test:e2e:home')
+    expect(uploadReport?.uses).toBe('actions/upload-artifact@v4')
+    expect(uploadReport?.with?.path).toBe('env/playwright-report')
+    expect(workflow.jobs.deploy.needs).toBe('build')
+  })
 })

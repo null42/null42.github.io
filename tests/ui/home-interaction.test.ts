@@ -50,6 +50,24 @@ describe('home experience lifecycle', () => {
     expect(window.homeExperienceController).toBeUndefined()
   })
 
+  it('survives repeated home-to-page-to-home lifecycle rounds without leaked listeners', () => {
+    const addListener = vi.spyOn(window, 'addEventListener')
+    const removeListener = vi.spyOn(window, 'removeEventListener')
+
+    for (let round = 0; round < 3; round += 1) {
+      document.body.innerHTML = '<main data-home-page></main>'
+      expect(syncHomeExperience()).toBeDefined()
+      document.body.innerHTML = '<main>文章页</main>'
+      expect(syncHomeExperience()).toBeUndefined()
+    }
+
+    const resizeAdds = addListener.mock.calls.filter(([type]) => type === 'resize')
+    const resizeRemovals = removeListener.mock.calls.filter(([type]) => type === 'resize')
+    expect(resizeAdds).toHaveLength(3)
+    expect(resizeRemovals).toHaveLength(3)
+    expect(window.homeExperienceController).toBeUndefined()
+  })
+
   it('does nothing outside the home page and never blocks static links', () => {
     document.body.innerHTML = '<main><a id="entry" href="/list/">文章入口</a></main>'
     expect(syncHomeExperience()).toBeUndefined()

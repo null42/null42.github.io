@@ -39,6 +39,26 @@ jobs:
       - name: Validate and build
         run: pnpm build
 
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run home production contracts
+        run: pnpm test:e2e:home
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-home-report-${{ github.sha }}
+          path: env/playwright-report
+          retention-days: 7
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
