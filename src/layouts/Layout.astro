@@ -722,6 +722,7 @@ const siteLang = lang.replace("_", "-");
 
 <script>
   import { pathsEqual, url } from "@/utils/url-utils";
+  import { syncHomeExperience } from "@/utils/home-experience-controller";
   import {
     BANNER_HEIGHT,
     BANNER_HEIGHT_HOME,
@@ -1365,6 +1366,20 @@ function disableAnimation() {
     document.addEventListener("swup:enable", setup);
   }
 
+  // 全局托管首页增强：首次加载及 Swup 内容替换后统一同步，离开首页时释放监听器。
+  const syncHome = () => {
+    try {
+      syncHomeExperience();
+    } catch (error) {
+      console.warn("Home enhancement unavailable", error);
+    }
+  };
+  syncHome();
+  if (window?.swup?.hooks) {
+    window.swup.hooks.on("content:replace", syncHome);
+  } else {
+    document.addEventListener("swup:enable", () => window.swup?.hooks?.on("content:replace", syncHome), { once: true });
+  }
   document.addEventListener("astro:page-load", scheduleContentOverflowEnhancements);
   document.addEventListener("password:decrypted", () => {
     setTimeout(scheduleContentOverflowEnhancements, 200);

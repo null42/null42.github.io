@@ -4,8 +4,8 @@ import { homeConfig } from "@/config/homeConfig";
 
 <section class="home-data" data-home-section="data" aria-labelledby="home-data-title">
 	<div class="home-section-heading">
-		<p class="home-eyebrow">DATA / PRACTICE / TRACEABILITY</p>
-		<h2 id="home-data-title">用可检查的数据描述知识库</h2>
+		<p class="home-eyebrow">{homeConfig.labels.dataKicker}</p>
+		<h2 id="home-data-title">{homeConfig.labels.dataTitle}</h2>
 	</div>
 	<div class="home-data__layout">
 		<div class="home-data__metrics">
@@ -18,6 +18,6 @@ import { homeConfig } from "@/config/homeConfig";
 				</article>
 			))}
 		</div>
-		<img src={homeConfig.media.data} alt="知识层级与工程数据视觉图" loading="lazy" decoding="async" />
+		<img src={homeConfig.media.data.src} alt={homeConfig.media.data.alt} width={homeConfig.media.data.width} height={homeConfig.media.data.height} loading="lazy" decoding="async" />
 	</div>
 </section>

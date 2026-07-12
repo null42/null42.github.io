@@ -3,7 +3,7 @@ import { homeConfig } from "@/config/homeConfig";
 const tickerItems = [...homeConfig.ticker, ...homeConfig.ticker];
 ---
 
-<section class="home-ticker" data-home-section="ticker" aria-label="知识库原则">
+<section class="home-ticker" data-home-section="ticker" aria-label={homeConfig.labels.ticker}>
 	<div class="home-ticker__track">
 		{tickerItems.map((item, index) => <span aria-hidden={index >= homeConfig.ticker.length}>{item}<b>✦</b></span>)}
 	</div>

@@ -89,6 +89,7 @@
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.10",
+    "@playwright/test": "1.55.0",
     "@types/node": "^22.0.0",
     "@types/sanitize-html": "^2.16.0",
     "@types/yauzl": "^3.4.0",

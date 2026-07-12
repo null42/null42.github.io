@@ -3,7 +3,7 @@ import { homeConfig } from "@/config/homeConfig";
 ---
 
 <section class="home-hero" data-home-section="hero" aria-labelledby="home-hero-title">
-	<img class="home-hero__media" src={homeConfig.media.hero} alt="" loading="eager" fetchpriority="high" />
+	<img class="home-hero__media" src={homeConfig.media.hero.src} alt={homeConfig.media.hero.alt} width={homeConfig.media.hero.width} height={homeConfig.media.hero.height} loading="eager" fetchpriority="high" decoding="async" />
 	<div class="home-hero__grid" aria-hidden="true"></div>
 	<div class="home-rain" aria-hidden="true"></div>
 	<div class="home-hero__content">
@@ -11,7 +11,7 @@ import { homeConfig } from "@/config/homeConfig";
 		<p class="home-hero__brand">{homeConfig.brand}</p>
 		<h1 id="home-hero-title">{homeConfig.title}</h1>
 		<p class="home-hero__description">{homeConfig.description}</p>
-		<nav class="home-hero__actions" aria-label="首页主要入口">
+		<nav class="home-hero__actions" aria-label={homeConfig.labels.heroActions}>
 			{homeConfig.links.map((link, index) => (
 				<a class:list={["home-action", index === 0 && "home-action--primary"]} href={link.href}>
 					<span>{link.label}</span><small>{link.description}</small>
@@ -19,5 +19,5 @@ import { homeConfig } from "@/config/homeConfig";
 			))}
 		</nav>
 	</div>
-	<p class="home-hero__index" aria-hidden="true">00 — 01</p>
+	<p class="home-hero__index" aria-hidden="true">{homeConfig.labels.heroIndex}</p>
 </section>

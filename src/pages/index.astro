@@ -15,14 +15,3 @@ import "@/styles/home.css";
 		<HomeDisplayLayer />
 	</div>
 </MainGridLayout>
-
-<script>
-	import { initHomeExperience } from "@/utils/home-experience-controller";
-
-	// Swup 会执行新页面脚本；控制器自身负责幂等初始化和旧实例释放。
-	try {
-		initHomeExperience();
-	} catch (error) {
-		console.warn("Home enhancement unavailable", error);
-	}
-</script>

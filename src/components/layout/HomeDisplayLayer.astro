@@ -9,7 +9,7 @@ import { homeConfig } from "@/config/homeConfig";
 		<p>{homeConfig.display.description}</p>
 	</div>
 	<div class="home-display__stage">
-		<img src={homeConfig.media.display} alt="null42 系统化学习路线视觉图" loading="lazy" decoding="async" />
+		<img src={homeConfig.media.display.src} alt={homeConfig.media.display.alt} width={homeConfig.media.display.width} height={homeConfig.media.display.height} loading="lazy" decoding="async" />
 		<div class="home-shutter" aria-hidden="true"></div>
 		<video class="home-background-video" muted playsinline preload="none" aria-hidden="true"></video>
 	</div>
