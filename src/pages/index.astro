@@ -1,0 +1,28 @@
+---
+import HomeDataLayer from "@components/layout/HomeDataLayer.astro";
+import HomeDisplayLayer from "@components/layout/HomeDisplayLayer.astro";
+import HomeHero from "@components/layout/HomeHero.astro";
+import HomeTicker from "@components/layout/HomeTicker.astro";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import "@/styles/home.css";
+---
+
+<MainGridLayout>
+	<div class="home-page" data-home-page>
+		<HomeHero />
+		<HomeTicker />
+		<HomeDataLayer />
+		<HomeDisplayLayer />
+	</div>
+</MainGridLayout>
+
+<script>
+	import { initHomeExperience } from "@/utils/home-experience-controller";
+
+	// Swup 会执行新页面脚本；控制器自身负责幂等初始化和旧实例释放。
+	try {
+		initHomeExperience();
+	} catch (error) {
+		console.warn("Home enhancement unavailable", error);
+	}
+</script>

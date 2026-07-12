@@ -1,0 +1,23 @@
+---
+import { homeConfig } from "@/config/homeConfig";
+---
+
+<section class="home-hero" data-home-section="hero" aria-labelledby="home-hero-title">
+	<img class="home-hero__media" src={homeConfig.media.hero} alt="" loading="eager" fetchpriority="high" />
+	<div class="home-hero__grid" aria-hidden="true"></div>
+	<div class="home-rain" aria-hidden="true"></div>
+	<div class="home-hero__content">
+		<p class="home-eyebrow">{homeConfig.eyebrow}</p>
+		<p class="home-hero__brand">{homeConfig.brand}</p>
+		<h1 id="home-hero-title">{homeConfig.title}</h1>
+		<p class="home-hero__description">{homeConfig.description}</p>
+		<nav class="home-hero__actions" aria-label="首页主要入口">
+			{homeConfig.links.map((link, index) => (
+				<a class:list={["home-action", index === 0 && "home-action--primary"]} href={link.href}>
+					<span>{link.label}</span><small>{link.description}</small>
+				</a>
+			))}
+		</nav>
+	</div>
+	<p class="home-hero__index" aria-hidden="true">00 — 01</p>
+</section>

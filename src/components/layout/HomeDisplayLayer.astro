@@ -1,0 +1,23 @@
+---
+import { homeConfig } from "@/config/homeConfig";
+---
+
+<section class="home-display" data-home-section="display" aria-labelledby="home-display-title">
+	<div class="home-display__intro">
+		<p class="home-eyebrow">{homeConfig.display.kicker}</p>
+		<h2 id="home-display-title">{homeConfig.display.title}</h2>
+		<p>{homeConfig.display.description}</p>
+	</div>
+	<div class="home-display__stage">
+		<img src={homeConfig.media.display} alt="null42 系统化学习路线视觉图" loading="lazy" decoding="async" />
+		<div class="home-shutter" aria-hidden="true"></div>
+		<video class="home-background-video" muted playsinline preload="none" aria-hidden="true"></video>
+	</div>
+	<div class="home-display__cards">
+		{homeConfig.display.cards.map((card) => (
+			<a href={card.href} class="home-display-card">
+				<span>{card.code}</span><h3>{card.title}</h3><p>{card.text}</p><b aria-hidden="true">↗</b>
+			</a>
+		))}
+	</div>
+</section>

@@ -1,0 +1,23 @@
+---
+import { homeConfig } from "@/config/homeConfig";
+---
+
+<section class="home-data" data-home-section="data" aria-labelledby="home-data-title">
+	<div class="home-section-heading">
+		<p class="home-eyebrow">DATA / PRACTICE / TRACEABILITY</p>
+		<h2 id="home-data-title">用可检查的数据描述知识库</h2>
+	</div>
+	<div class="home-data__layout">
+		<div class="home-data__metrics">
+			{homeConfig.metrics.map((metric, index) => (
+				<article class="home-metric">
+					<p class="home-metric__number">{String(index + 1).padStart(2, "0")}</p>
+					<strong>{metric.value}</strong>
+					<h3>{metric.label}</h3>
+					<p>{metric.detail}</p>
+				</article>
+			))}
+		</div>
+		<img src={homeConfig.media.data} alt="知识层级与工程数据视觉图" loading="lazy" decoding="async" />
+	</div>
+</section>
