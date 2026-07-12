@@ -2,11 +2,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-const sourceTextExtensions = new Set(['.css', '.styl', '.astro', '.svelte', '.ts', '.tsx', '.js', '.mjs', '.json', '.md', '.mdx'])
 const privateReferenceResource = /(?:https?:)?\/\/[^\s"')]*(?:fqzlr|mmzming|20447289|co\.tsh520\.cn)/i
+const excludedDirectories = new Set(['env', 'dist', 'build', '.astro', '.vite', 'node_modules', 'vendor'])
 
 function isTextFile(file: string): boolean {
-  return !fs.readFileSync(file).subarray(0, 8192).includes(0)
+  const sample = fs.readFileSync(file).subarray(0, 8192)
+  if (sample.includes(0)) return false
+  const suspiciousBytes = sample.filter(byte => byte < 7 || (byte > 13 && byte < 32)).length
+  return sample.length === 0 || suspiciousBytes / sample.length < 0.05
 }
 
 function collectPrivateResourceSources(root: string): Array<{ file: string; content: string }> {
@@ -17,14 +20,14 @@ function collectPrivateResourceSources(root: string): Array<{ file: string; cont
       if (entry.isDirectory()) {
         const relativeDirectory = path.relative(root, file).replaceAll('\\', '/')
         if (
-          ['env', 'dist', 'node_modules', 'vendor'].includes(entry.name)
+          excludedDirectories.has(entry.name)
           || relativeDirectory === 'src/content/posts'
           || relativeDirectory === 'public/content'
-          || relativeDirectory.includes('/encrypted')
+          || relativeDirectory.split('/').some(segment => segment.startsWith('encrypted'))
         ) return []
         return scanRoot(file, publicFiles)
       }
-      if ((!publicFiles && !sourceTextExtensions.has(path.extname(entry.name))) || !isTextFile(file)) return []
+      if (!isTextFile(file)) return []
       const content = fs.readFileSync(file, 'utf8')
       return privateReferenceResource.test(content) ? [{ file, content }] : []
     })
@@ -84,15 +87,24 @@ function reducedMotionViolations(css: string): string[] {
   if (!/animation-delay\s*:\s*0(?:ms|s)?\s*!important\s*;/.test(body) && !/animation\s*:\s*none\s*!important\s*;/.test(body)) {
     violations.push('onload animation delay is not disabled')
   }
-  const swupRules = rules.filter(rule => rule.selectors.some(selector => selector.includes('html.is-animating')))
-  if (swupRules.some((rule) => {
+  const requiredSwupSelectors = [
+    'html.is-animating .transition-main',
+    'html.is-animating .transition-swup-fade',
+    'html.is-animating.is-leaving .transition-leaving',
+  ]
+  for (const selector of requiredSwupSelectors) {
+    const rule = rules.find(candidate => candidate.selectors.includes(selector))
+    if (!rule) {
+      violations.push(`missing Swup reduced-motion selector: ${selector}`)
+      continue
+    }
     const hasMotionDowngrade = /transition\s*:\s*none\s*!important\s*;/.test(rule.body)
       || /transition-duration\s*:\s*0(?:ms|s)?\s*!important\s*;/.test(rule.body)
-    return !/opacity\s*:\s*1\s*!important\s*;/.test(rule.body)
+    if (!/opacity\s*:\s*1\s*!important\s*;/.test(rule.body)
       || !/transform\s*:\s*none\s*!important\s*;/.test(rule.body)
-      || !hasMotionDowngrade
-  })) {
-    violations.push('Swup motion is not reset in every rule')
+      || !hasMotionDowngrade) {
+      violations.push('Swup motion is not reset in every rule')
+    }
   }
   return violations
 }
@@ -158,6 +170,10 @@ describe('layout contract regression fixtures', () => {
       'src/data.json',
       'src/guide.md',
       'src/page.mdx',
+      'src/template.html',
+      'src/icon.svg',
+      'src/notes.txt',
+      'src/LICENSE',
       'public/robots.txt',
     ]
     for (const file of files) {
@@ -195,6 +211,16 @@ describe('layout contract regression fixtures', () => {
   it('rejects a Swup target rule without a transition downgrade', () => {
     const fixture = '@media (prefers-reduced-motion: reduce) { html.is-animating .transition-main { opacity: 1 !important; transform: none !important; } .onload-animation { animation: none !important; opacity: 1; transform: none; } }'
     expect(reducedMotionViolations(fixture)).toContain('Swup motion is not reset in every rule')
+  })
+
+  it('rejects an empty Swup target set', () => {
+    const fixture = '@media (prefers-reduced-motion: reduce) { .onload-animation { animation: none !important; opacity: 1; transform: none; } }'
+    expect(reducedMotionViolations(fixture)).toContain('missing Swup reduced-motion selector: html.is-animating .transition-main')
+  })
+
+  it('rejects a misspelled required Swup target selector', () => {
+    const fixture = '@media (prefers-reduced-motion: reduce) { html.is-animating .transition-mian, html.is-animating .transition-swup-fade, html.is-animating.is-leaving .transition-leaving { opacity: 1 !important; transform: none !important; transition: none !important; } .onload-animation { animation: none !important; opacity: 1; transform: none; } }'
+    expect(reducedMotionViolations(fixture)).toContain('missing Swup reduced-motion selector: html.is-animating .transition-main')
   })
 
   it.each([
