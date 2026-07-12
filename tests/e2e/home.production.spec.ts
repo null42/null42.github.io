@@ -1,43 +1,97 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 
-const localOrigin = 'http://127.0.0.1:4321'
+type HomeMetrics = {
+  create: number
+  dispose: number
+  sync: number
+  resizeAdd: number
+  resizeRemove: number
+}
+
+const installObservability = async (page: Page) => {
+  await page.addInitScript(() => {
+    window.__homeExperienceInstrument = { create: 0, dispose: 0, sync: 0, resizeAdd: 0, resizeRemove: 0 }
+    window.__layoutShifts = []
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        const shift = entry as PerformanceEntry & { hadRecentInput: boolean; value: number }
+        if (!shift.hadRecentInput) window.__layoutShifts.push(shift.value)
+      }
+    }).observe({ type: 'layout-shift', buffered: true })
+  })
+}
+
+const collectImageFailures = (page: Page) => {
+  const failures: string[] = []
+  page.on('requestfailed', (request) => {
+    if (request.resourceType() === 'image') failures.push(`requestfailed ${request.url()}`)
+  })
+  page.on('response', (response) => {
+    if (response.request().resourceType() === 'image' && (response.status() < 200 || response.status() >= 300)) {
+      failures.push(`HTTP ${response.status()} ${response.url()}`)
+    }
+  })
+  return failures
+}
+
+declare global {
+  interface Window {
+    __homeExperienceInstrument?: HomeMetrics
+    __layoutShifts: number[]
+  }
+}
 
 test.describe('home production contracts', () => {
-  test('loads responsive images without failed requests or layout shift', async ({ page }) => {
-    const failedRequests: string[] = []
-    page.on('requestfailed', request => {
-      if (request.resourceType() === 'image') failedRequests.push(request.url())
-    })
-
-    await page.goto('/')
-    const hero = page.locator('[data-home-section="hero"]')
-    const heroImage = hero.locator('img')
-    await expect(hero).toBeVisible()
-    await expect(heroImage).toHaveAttribute('width', '1000')
-    await expect(heroImage).toHaveAttribute('height', '750')
-    await expect(heroImage).toHaveAttribute('loading', 'eager')
-    await expect(heroImage).toHaveAttribute('fetchpriority', 'high')
-    await expect(heroImage).toHaveJSProperty('complete', true)
-    await page.waitForLoadState('networkidle')
-
-    const first = await hero.boundingBox()
-    await page.waitForTimeout(250)
-    const second = await hero.boundingBox()
-    expect(failedRequests.filter(url => url.startsWith(localOrigin))).toEqual([])
-    expect(Math.abs((second?.height ?? 0) - (first?.height ?? 0))).toBeLessThanOrEqual(1)
-    expect(Math.abs((second?.width ?? 0) - (first?.width ?? 0))).toBeLessThanOrEqual(1)
+  test.beforeEach(async ({ page }) => {
+    await installObservability(page)
   })
 
-  test('keeps one controller through repeated navigation lifecycle rounds', async ({ page }) => {
+  test('loads measurable responsive images without HTTP failures or excessive CLS', async ({ page }) => {
+    const imageFailures = collectImageFailures(page)
     await page.goto('/')
-    for (let round = 0; round < 3; round += 1) {
-      await expect(page.locator('html')).toHaveAttribute('data-home-experience', 'ready')
-      await page.goto('/list/')
-      await expect(page).toHaveURL(/\/list\/$/)
-      await expect(page.locator('html')).not.toHaveAttribute('data-home-experience', 'ready')
-      await page.goto('/')
+    await page.waitForLoadState('networkidle')
+
+    const hero = page.locator('[data-home-section="hero"]')
+    await expect(hero).toBeVisible()
+    expect(await hero.boundingBox()).not.toBeNull()
+
+    const images = page.locator('[data-home-page] img')
+    expect(await images.count()).toBeGreaterThan(0)
+    for (let index = 0; index < await images.count(); index += 1) {
+      const image = images.nth(index)
+      expect(await image.boundingBox()).not.toBeNull()
+      const dimensions = await image.evaluate((element: HTMLImageElement) => ({
+        width: element.getAttribute('width'),
+        height: element.getAttribute('height'),
+        naturalWidth: element.naturalWidth,
+      }))
+      expect(Number.isInteger(Number(dimensions.width)) && Number(dimensions.width) > 0).toBe(true)
+      expect(Number.isInteger(Number(dimensions.height)) && Number(dimensions.height) > 0).toBe(true)
+      expect(dimensions.naturalWidth).toBeGreaterThan(0)
     }
+
+    const cls = await page.evaluate(() => window.__layoutShifts.reduce((sum, value) => sum + value, 0))
+    expect(cls).toBeLessThanOrEqual(0.1)
+    expect(imageFailures).toEqual([])
+  })
+
+  test('balances controller hooks and resize listeners through three real Swup rounds', async ({ page }) => {
+    await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('data-home-experience', 'ready')
+    await expect.poll(() => page.evaluate(() => typeof window.swup?.navigate)).toBe('function')
+
+    for (let round = 0; round < 3; round += 1) {
+      await page.evaluate(() => window.swup.navigate('/about/'))
+      await expect(page).toHaveURL(/\/about\/$/)
+      await expect(page.locator('html')).not.toHaveAttribute('data-home-experience', 'ready')
+      await page.evaluate(() => window.swup.navigate('/'))
+      await expect(page).toHaveURL(/\/$/)
+      await expect(page.locator('html')).toHaveAttribute('data-home-experience', 'ready')
+    }
+
+    const metrics = await page.evaluate(() => window.__homeExperienceInstrument)
+    expect(metrics).toEqual({ create: 4, dispose: 3, sync: 7, resizeAdd: 4, resizeRemove: 3 })
+    expect(metrics!.resizeAdd - metrics!.resizeRemove).toBe(1)
   })
 
   test('honors reduced motion without hiding primary content', async ({ page }) => {

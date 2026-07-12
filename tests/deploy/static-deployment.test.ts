@@ -91,6 +91,8 @@ const serverAdapterFiles = trackedContractFiles.filter((file) =>
 
 const cloudflareDeploymentFiles = findCloudflareDeploymentFiles(process.cwd(), trackedContractFiles)
 
+const jobPermissions = (jobName: string) => ({ ...workflow.permissions, ...workflow.jobs[jobName]?.permissions })
+
 describe('static deployment contract', () => {
   it.each([
     'wrangler.toml',
@@ -113,13 +115,9 @@ describe('static deployment contract', () => {
     }
   })
 
-  it.each([
-    '_headers',
-    '_redirects',
-  ])('does not treat a common static host file as Cloudflare-specific: %s', (file) => {
+  it.each(['_headers', '_redirects'])('does not treat a common static host file as Cloudflare-specific: %s', (file) => {
     const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
     fs.writeFileSync(path.join(fixtureRoot, file), '')
-
     try {
       expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toEqual([])
     }
@@ -130,7 +128,6 @@ describe('static deployment contract', () => {
 
   it('allows a project without Cloudflare deployment files', () => {
     const fixtureRoot = fs.mkdtempSync(path.join(process.cwd(), 'env', 'cloudflare-contract-'))
-
     try {
       expect(findCloudflareDeploymentFiles(fixtureRoot, [])).toEqual([])
     }
@@ -152,10 +149,7 @@ describe('static deployment contract', () => {
   })
 
   it('does not declare unused Firefly direct dependencies before their components import them', () => {
-    const directDependencies = {
-      ...packageJson.dependencies,
-      ...packageJson.devDependencies,
-    }
+    const directDependencies = { ...packageJson.dependencies, ...packageJson.devDependencies }
     expect(Object.keys(directDependencies)).not.toEqual(expect.arrayContaining(forbiddenDirectDependencies))
   })
 
@@ -166,27 +160,34 @@ describe('static deployment contract', () => {
     expect(pnpmConfig).toMatch(/state-dir=env\/pnpm-state/)
   })
 
-  it('allows manual reruns but gates production build and deploy jobs to main', () => {
-    expect(workflow.on.push.branches).toEqual(['main'])
-    expect(workflow.on).toHaveProperty('workflow_dispatch')
+  it('runs quality for pull requests and migration branch pushes while production stays on main', () => {
+    expect(workflow.on.pull_request).toBeDefined()
+    expect(workflow.on.push.branches).toEqual(['main', 'codex/firefly-mod-knowledge-migration'])
+    expect(workflow.jobs.quality.if).toBeUndefined()
     expect(workflow.jobs.build.if).toBe("github.ref == 'refs/heads/main'")
     expect(workflow.jobs.deploy.if).toBe("github.ref == 'refs/heads/main'")
     expect(workflow.jobs.deploy.environment.name).toBe('github-pages')
   })
 
-  it('blocks production deployment until Chromium-backed home contracts pass', () => {
-    const buildSteps = workflow.jobs.build.steps as Array<{ name?: string; run?: string; uses?: string; with?: Record<string, string> }>
-    const browserCache = buildSteps.find(step => step.name === 'Cache Playwright Chromium')
-    const installBrowser = buildSteps.find(step => step.name === 'Install Playwright Chromium')
-    const homeE2e = buildSteps.find(step => step.name === 'Run home production contracts')
-    const uploadReport = buildSteps.find(step => step.name === 'Upload Playwright report')
+  it('grants Pages and OIDC write permissions only to deploy', () => {
+    expect(workflow.permissions).toEqual({ contents: 'read' })
+    expect(jobPermissions('quality')).toEqual({ contents: 'read' })
+    expect(jobPermissions('build')).toEqual({ contents: 'read' })
+    expect(jobPermissions('deploy')).toEqual({ contents: 'read', pages: 'write', 'id-token': 'write' })
+  })
 
-    expect(browserCache?.uses).toBe('actions/cache@v4')
-    expect(browserCache?.with?.path).toBe('~/.cache/ms-playwright')
-    expect(installBrowser?.run).toBe('pnpm exec playwright install --with-deps chromium')
-    expect(homeE2e?.run).toBe('pnpm test:e2e:home')
-    expect(uploadReport?.uses).toBe('actions/upload-artifact@v4')
-    expect(uploadReport?.with?.path).toBe('env/playwright-report')
-    expect(workflow.jobs.deploy.needs).toBe('build')
+  it('runs build and complete Chromium E2E in quality with cached browser and one retry maximum', () => {
+    const steps = workflow.jobs.quality.steps as Array<{ name?: string; run?: string; uses?: string; with?: Record<string, string> }>
+    expect(steps.find(step => step.name === 'Build')?.run).toBe('pnpm build')
+    expect(steps.find(step => step.name === 'Cache Playwright Chromium')?.uses).toBe('actions/cache@v4')
+    expect(steps.find(step => step.name === 'Install Playwright Chromium')?.run).toBe('pnpm exec playwright install --with-deps chromium')
+    expect(steps.find(step => step.name === 'Run complete E2E')?.run).toBe('pnpm test:e2e')
+    expect(steps.find(step => step.name === 'Upload Playwright report')?.uses).toBe('actions/upload-artifact@v4')
+    expect(packageJson.scripts['test:e2e']).toBe('playwright test')
+    expect(read('playwright.config.ts')).toMatch(/retries:\s*process\.env\.CI\s*\?\s*1\s*:\s*0/)
+  })
+
+  it('blocks production deployment until both quality and build succeed', () => {
+    expect(workflow.jobs.deploy.needs).toEqual(expect.arrayContaining(['quality', 'build']))
   })
 })

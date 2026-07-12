@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   reporter: [['line'], ['html', { outputFolder: 'env/playwright-report', open: 'never' }]],
   outputDir: 'env/playwright-results',
   use: {
