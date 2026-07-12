@@ -145,9 +145,16 @@ html.is-animating .transition-swup-fade {
         transition-duration: 0.01ms !important;
     }
 
+    .onload-animation {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+
     html.is-animating .transition-main,
     html.is-animating .transition-swup-fade,
     html.is-animating.is-leaving .transition-leaving {
-        transform: none;
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
