@@ -19,6 +19,62 @@
 
 @reference "tailwindcss";
 
+.mobile-dock {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobile-dock {
+        position: fixed;
+        z-index: 90;
+        right: 1rem;
+        bottom: max(1rem, env(safe-area-inset-bottom));
+        left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0.5rem;
+        border: 1px solid color-mix(in srgb, var(--primary) 16%, transparent);
+        border-radius: 1.25rem;
+        background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+        box-shadow: var(--shadow-navbar);
+        backdrop-filter: blur(18px);
+    }
+
+    .mobile-dock__item {
+        display: flex;
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.125rem;
+        border: 0;
+        background: transparent;
+        color: var(--deep-text);
+        font: inherit;
+        font-size: 0.6875rem;
+        cursor: pointer;
+    }
+
+    .mobile-dock__item svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .mobile-dock__item:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+        border-radius: 0.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-dock {
+        display: none;
+    }
+}
+
 @utility navbar-surface-transition {
   transition:
     background-color 0.36s cubic-bezier(0.22, 1, 0.36, 1),

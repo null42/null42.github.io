@@ -191,7 +191,12 @@ if (isLocalSrcLogo) {
 </div>
 
 <script>
+let navbarButtonController: AbortController | undefined;
+
 function loadButtonScript() {
+    navbarButtonController?.abort();
+    navbarButtonController = new AbortController();
+    const signal = navbarButtonController.signal;
     let settingBtn = document.getElementById("display-settings-switch");
     if (settingBtn) {
         settingBtn.onclick = function () {
@@ -290,7 +295,7 @@ function loadButtonScript() {
                 }
             }
         });
-    });
+    }, { signal });
 }
 
 loadButtonScript();
