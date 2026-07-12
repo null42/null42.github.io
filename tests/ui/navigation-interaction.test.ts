@@ -5,7 +5,7 @@ import { initNavigationMenu } from '../../src/utils/navigation-menu-controller'
 
 function mountNavigation() {
   document.body.innerHTML = `
-    <main id="main-content" tabindex="-1">Content</main>
+    <main id="swup-container" tabindex="-1">Content</main>
     <button id="nav-menu-switch" aria-controls="nav-menu-panel" aria-expanded="false">Top</button>
     <button id="mobile-dock-menu" aria-controls="nav-menu-panel" aria-expanded="false">Dock</button>
     <div id="nav-menu-panel" class="float-panel float-panel-closed" aria-hidden="true" inert hidden>
@@ -106,12 +106,37 @@ describe('navigation menu interactions', () => {
     expect(document.activeElement).toBe(top)
   })
 
-  it('moves focus to a stable page target for a Swup replacement close', () => {
+  it('moves focus to the production Swup target for a replacement close', () => {
     const controller = initNavigationMenu()!
     document.querySelector<HTMLButtonElement>('#mobile-dock-menu')!.click()
     document.querySelector<HTMLAnchorElement>('#panel-link')!.focus()
     controller.close({ reason: 'swup-replace' })
-    expect(document.activeElement).toBe(document.querySelector('#main-content'))
+    expect(document.activeElement).toBe(document.querySelector('#swup-container'))
+    expect(document.querySelector<HTMLElement>('#nav-menu-panel')!.contains(document.activeElement)).toBe(false)
+  })
+
+  it('falls back to the connected trigger when the Swup target rejects focus', () => {
+    const controller = initNavigationMenu()!
+    const trigger = document.querySelector<HTMLButtonElement>('#mobile-dock-menu')!
+    const target = document.querySelector<HTMLElement>('#swup-container')!
+    trigger.click()
+    document.querySelector<HTMLAnchorElement>('#panel-link')!.focus()
+    vi.spyOn(target, 'focus').mockImplementation(() => {})
+    controller.close({ reason: 'swup-replace' })
+    expect(document.activeElement).toBe(trigger)
+    expect(document.querySelector<HTMLElement>('#nav-menu-panel')!.contains(document.activeElement)).toBe(false)
+  })
+
+  it('blurs safely when neither the Swup target nor its trigger can receive focus', () => {
+    const controller = initNavigationMenu()!
+    const trigger = document.querySelector<HTMLButtonElement>('#mobile-dock-menu')!
+    const target = document.querySelector<HTMLElement>('#swup-container')!
+    trigger.click()
+    document.querySelector<HTMLAnchorElement>('#panel-link')!.focus()
+    vi.spyOn(target, 'focus').mockImplementation(() => {})
+    trigger.remove()
+    controller.close({ reason: 'swup-replace' })
+    expect(document.activeElement).toBe(document.body)
     expect(document.querySelector<HTMLElement>('#nav-menu-panel')!.contains(document.activeElement)).toBe(false)
   })
 

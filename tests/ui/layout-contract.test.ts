@@ -118,7 +118,7 @@ const privateResourceSources = collectPrivateResourceSources(process.cwd())
 describe('Firefly visual foundation layout contract', () => {
   it('keeps the page shell main content, both sidebar containers, and Swup container', () => {
     expect(layout).toContain('<main')
-    expect(layout).toContain('id="swup-container"')
+    expect(layout).toMatch(/<main\s+[\s\S]*?id="swup-container"[\s\S]*?tabindex="-1"/)
     expect(layout).toContain('id="content-wrapper"')
     expect(layout).toContain('id="left-sidebar-dynamic"')
     expect(layout).toContain('id="right-sidebar-dynamic"')

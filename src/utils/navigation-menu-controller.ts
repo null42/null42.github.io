@@ -37,19 +37,19 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
   const finishHiding = (generation: number) => {
     if (!disposed && generation === closeGeneration && !isOpen()) panel.hidden = true
   }
+  const tryFocus = (target: HTMLElement | undefined | null) => {
+    if (!target?.isConnected) return false
+    target.focus()
+    return document.activeElement === target
+  }
   const focusBeforeInert = (reason: NavigationCloseReason, restoreFocus: boolean) => {
     if (!panel.contains(document.activeElement)) return
     if (reason === 'swup-replace') {
-      const stableTarget = document.querySelector<HTMLElement>('#main-content, main, [role="main"]')
-      if (stableTarget?.isConnected) stableTarget.focus()
-      else (document.activeElement as HTMLElement | null)?.blur()
-      return
+      const stableTarget = document.querySelector<HTMLElement>('#swup-container')
+      if (tryFocus(stableTarget)) return
     }
-    if ((restoreFocus || activeTrigger) && activeTrigger?.isConnected && !activeTrigger.disabled) {
-      activeTrigger.focus()
-    } else {
-      (document.activeElement as HTMLElement | null)?.blur()
-    }
+    if ((restoreFocus || activeTrigger) && activeTrigger && !activeTrigger.disabled && tryFocus(activeTrigger)) return
+    ;(document.activeElement as HTMLElement | null)?.blur()
   }
   const close = ({ restoreFocus = false, reason = 'default' }: { restoreFocus?: boolean; reason?: NavigationCloseReason } = {}) => {
     if (!isOpen()) return
