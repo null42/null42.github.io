@@ -156,5 +156,6 @@ html.is-animating .transition-swup-fade {
     html.is-animating.is-leaving .transition-leaving {
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
     }
 }
