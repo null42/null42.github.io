@@ -34,6 +34,7 @@ const Tag = href ? "a" : "button";
 <Tag 
 	href={href}
 	target={target}
+	rel={target === "_blank" ? "noopener noreferrer" : undefined}
 	class={allClasses}
 	onclick={onclick}
 >

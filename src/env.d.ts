@@ -30,6 +30,7 @@ declare global {
 		// __fireflyMusic type is defined in global.d.ts
 		semifullScrollHandler?: (() => void) | undefined;
 		initSemifullScrollDetection?: () => void;
+		navigationMenuController?: import("@/utils/navigation-menu-controller").NavigationMenuController;
 	}
 }
 

@@ -5,6 +5,7 @@ const navConfig = fs.readFileSync('src/config/navBarConfig.ts', 'utf8')
 const navbar = fs.readFileSync('src/components/layout/Navbar.astro', 'utf8')
 const dropdown = fs.readFileSync('src/components/layout/DropdownMenu.astro', 'utf8')
 const mobileDock = fs.readFileSync('src/components/layout/MobileDock.astro', 'utf8')
+const menuController = fs.readFileSync('src/utils/navigation-menu-controller.ts', 'utf8')
 const layout = fs.readFileSync('src/layouts/MainGridLayout.astro', 'utf8')
 const styles = fs.readFileSync('src/styles/navbar.css', 'utf8')
 
@@ -24,13 +25,13 @@ describe('navigation contract', () => {
     expect(layout).toContain('<MobileDock />')
     expect(mobileDock).toContain('aria-label="移动导航"')
     expect(mobileDock).toContain('aria-expanded=')
-    expect(mobileDock).toContain('e.key === "Escape"')
+    expect(menuController).toContain("event.key === 'Escape'")
     expect(styles).toMatch(/@media \(max-width: 767px\)[\s\S]*\.mobile-dock[\s\S]*display:\s*flex/)
     expect(styles).toMatch(/@media \(min-width: 768px\)[\s\S]*\.mobile-dock[\s\S]*display:\s*none/)
   })
 
   it('uses replaceable handlers so Swup lifecycle initialization is idempotent', () => {
     expect(navbar).toContain('AbortController')
-    expect(mobileDock).toContain('AbortController')
+    expect(menuController).toContain('AbortController')
   })
 })

@@ -10,32 +10,3 @@ import { url } from "@/utils/url-utils";
 	<a href={url('/list/')} class="mobile-dock__item" aria-label="文章列表"><Icon is:inline name="material-symbols:list-alt-rounded" /><span>文章</span></a>
 	<button class="mobile-dock__item" id="mobile-dock-menu" type="button" aria-label="打开导航菜单" aria-controls="nav-menu-panel" aria-expanded="false"><Icon is:inline name="material-symbols:menu-rounded" /><span>菜单</span></button>
 </nav>
-
-<script>
-	let mobileDockController: AbortController | undefined;
-
-	function initMobileDock() {
-		mobileDockController?.abort();
-		mobileDockController = new AbortController();
-		const signal = mobileDockController.signal;
-		const button = document.getElementById("mobile-dock-menu");
-		const panel = document.getElementById("nav-menu-panel");
-		if (!button || !panel) return;
-
-		const sync = () => button.setAttribute("aria-expanded", String(!panel.classList.contains("float-panel-closed")));
-		button.addEventListener("click", () => {
-			document.getElementById("nav-menu-switch")?.click();
-			sync();
-		}, { signal });
-		document.addEventListener("keydown", (e) => {
-			if (e.key === "Escape" && !panel.classList.contains("float-panel-closed")) {
-				panel.classList.add("float-panel-closed");
-				sync();
-				button.focus();
-			}
-		}, { signal });
-	}
-
-	initMobileDock();
-	document.addEventListener("astro:page-load", initMobileDock);
-</script>
