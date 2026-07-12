@@ -1,10 +1,14 @@
+export type NavigationCloseReason = 'default' | 'swup-replace'
+
 export interface NavigationMenuController {
   dispose: () => void
-  close: (options?: { restoreFocus?: boolean }) => void
+  close: (options?: { restoreFocus?: boolean; reason?: NavigationCloseReason }) => void
 }
 
 const PANEL_ID = 'nav-menu-panel'
 const TRIGGER_IDS = ['nav-menu-switch', 'mobile-dock-menu']
+const HIDE_DELAY_MS = 300
+const HIDE_TRANSITION_PROPERTIES = new Set(['opacity', 'transform'])
 
 export function initNavigationMenu(): NavigationMenuController | undefined {
   window.navigationMenuController?.dispose()
@@ -19,25 +23,48 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
   const { signal } = abortController
   let activeTrigger: HTMLButtonElement | undefined
   let hideTimer: ReturnType<typeof setTimeout> | undefined
+  let closeGeneration = 0
+  let disposed = false
 
   const isOpen = () => !panel.classList.contains('float-panel-closed')
   const syncTriggers = (open: boolean) => {
     triggers.forEach(trigger => trigger.setAttribute('aria-expanded', String(open)))
   }
-  const finishHiding = () => {
-    if (!isOpen()) panel.hidden = true
+  const clearHideTimer = () => {
+    if (hideTimer) clearTimeout(hideTimer)
+    hideTimer = undefined
   }
-  const close = ({ restoreFocus = false } = {}) => {
+  const finishHiding = (generation: number) => {
+    if (!disposed && generation === closeGeneration && !isOpen()) panel.hidden = true
+  }
+  const focusBeforeInert = (reason: NavigationCloseReason, restoreFocus: boolean) => {
+    if (!panel.contains(document.activeElement)) return
+    if (reason === 'swup-replace') {
+      const stableTarget = document.querySelector<HTMLElement>('#main-content, main, [role="main"]')
+      if (stableTarget?.isConnected) stableTarget.focus()
+      else (document.activeElement as HTMLElement | null)?.blur()
+      return
+    }
+    if ((restoreFocus || activeTrigger) && activeTrigger?.isConnected && !activeTrigger.disabled) {
+      activeTrigger.focus()
+    } else {
+      (document.activeElement as HTMLElement | null)?.blur()
+    }
+  }
+  const close = ({ restoreFocus = false, reason = 'default' }: { restoreFocus?: boolean; reason?: NavigationCloseReason } = {}) => {
     if (!isOpen()) return
+    clearHideTimer()
+    const generation = ++closeGeneration
+    focusBeforeInert(reason, restoreFocus)
     panel.classList.add('float-panel-closed')
     panel.setAttribute('aria-hidden', 'true')
     panel.setAttribute('inert', '')
     syncTriggers(false)
-    hideTimer = setTimeout(finishHiding, 300)
-    if (restoreFocus) activeTrigger?.focus()
+    hideTimer = setTimeout(() => finishHiding(generation), HIDE_DELAY_MS)
   }
   const open = (trigger: HTMLButtonElement) => {
-    if (hideTimer) clearTimeout(hideTimer)
+    clearHideTimer()
+    closeGeneration++
     activeTrigger = trigger
     panel.hidden = false
     panel.removeAttribute('inert')
@@ -45,8 +72,20 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
     panel.classList.remove('float-panel-closed')
     syncTriggers(true)
   }
+  const setSubmenuExpanded = (dropdown: Element, expanded: boolean) => {
+    const trigger = dropdown.querySelector<HTMLElement>('[data-mobile-dropdown-trigger]')
+    const submenu = dropdown.querySelector<HTMLElement>('[data-mobile-submenu]')
+    dropdown.setAttribute('data-expanded', String(expanded))
+    trigger?.setAttribute('aria-expanded', String(expanded))
+    submenu?.setAttribute('aria-hidden', String(!expanded))
+    submenu?.toggleAttribute('inert', !expanded)
+  }
 
-  panel.addEventListener('transitionend', finishHiding, { signal })
+  panel.addEventListener('transitionend', event => {
+    if (event.target !== panel || !HIDE_TRANSITION_PROPERTIES.has(event.propertyName)) return
+    clearHideTimer()
+    finishHiding(closeGeneration)
+  }, { signal })
   triggers.forEach(trigger => {
     trigger.addEventListener('click', event => {
       event.stopPropagation()
@@ -60,6 +99,16 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
     if (event.key === 'Escape' && isOpen()) close({ restoreFocus: true })
   }, { signal })
 
+  const dropdowns = [...panel.querySelectorAll('[data-mobile-dropdown]')]
+  dropdowns.forEach(dropdown => {
+    setSubmenuExpanded(dropdown, false)
+    dropdown.querySelector('[data-mobile-dropdown-trigger]')?.addEventListener('click', event => {
+      event.preventDefault()
+      const expand = dropdown.getAttribute('data-expanded') !== 'true'
+      dropdowns.forEach(other => setSubmenuExpanded(other, other === dropdown && expand))
+    }, { signal })
+  })
+
   panel.classList.add('float-panel-closed')
   panel.setAttribute('aria-hidden', 'true')
   panel.setAttribute('inert', '')
@@ -69,8 +118,10 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
   const controller = {
     close,
     dispose: () => {
+      disposed = true
+      closeGeneration++
       abortController.abort()
-      if (hideTimer) clearTimeout(hideTimer)
+      clearHideTimer()
       if (window.navigationMenuController === controller) delete window.navigationMenuController
     },
   }

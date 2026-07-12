@@ -253,7 +253,7 @@ function loadButtonScript() {
     const registerSwupHook = () => {
         swupContentReplaceUnsubscribe?.();
         swupContentReplaceUnsubscribe = window.swup?.hooks?.on("content:replace", () => {
-            window.navigationMenuController?.close();
+            window.navigationMenuController?.close({ reason: "swup-replace" });
         });
     };
     if (window.swup?.hooks) registerSwupHook();
