@@ -272,8 +272,8 @@ The local publish script should stop before pushing if validation or build fails
 
 Initial sources:
 
-- `E:\gitee_CodeStorage\学习\电源`
-- `E:\gitee_CodeStorage\学习\MotorControl-main\motor-learning-web`
+- `<power-source-root>`
+- `<legacy-motor-source-root>`
 
 Migration should be selective.
 

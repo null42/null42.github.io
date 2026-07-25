@@ -10,6 +10,7 @@ declare global {
 		swup: any;
 		spineModelInitialized?: boolean;
 		floatingTOCListenersInitialized?: boolean;
+		sidebarTOCListenersInitialized?: boolean;
 		// biome-ignore lint/suspicious/noExplicitAny: External library
 		spinePlayerInstance?: any;
 		pagefind: {
@@ -63,6 +64,7 @@ declare global {
 			playTrackByIndex: (index: number) => void;
 			loadTrack: (index: number, autoPlay: boolean) => void;
 		};
+		pageLoaderLifecycle?: import("@/utils/page-loader-controller").PageLoaderLifecycle;
 	}
 
 	interface MediaQueryList {

@@ -7,13 +7,13 @@ title: UPS 电源控制入职训练体系使用说明
 tags:
   - power-electronics
 status: learning
-summary: 本说明用于在 `E:\gitee_CodeStorage\学习\电源` 工作区继续学习和维护这套 UPS 电源控制入职训练体系。当前体系以中文主讲，关键术语保留中英对照，目标是从 Boost 基础逐步过渡到 UPS 拓扑、控制、采样、嵌入式、保护、通信和系统工程。
+summary: 本说明用于在 `<power-source-root>` 工作区继续学习和维护这套 UPS 电源控制入职训练体系。当前体系以中文主讲，关键术语保留中英对照，目标是从 Boost 基础逐步过渡到 UPS 拓扑、控制、采样、嵌入式、保护、通信和系统工程。
 section: 电源控制
 ---
 
 # UPS 电源控制入职训练体系使用说明
 
-本说明用于在 `E:\gitee_CodeStorage\学习\电源` 工作区继续学习和维护这套 UPS 电源控制入职训练体系。当前体系以中文主讲，关键术语保留中英对照，目标是从 Boost 基础逐步过渡到 UPS 拓扑、控制、采样、嵌入式、保护、通信和系统工程。
+本说明用于在 `<power-source-root>` 工作区继续学习和维护这套 UPS 电源控制入职训练体系。当前体系以中文主讲，关键术语保留中英对照，目标是从 Boost 基础逐步过渡到 UPS 拓扑、控制、采样、嵌入式、保护、通信和系统工程。
 
 ## 1. 学习入口
 
@@ -53,7 +53,7 @@ HTML 是正式学习入口，放在 `lessons/` 目录，可以直接用浏览器
 在 PowerShell 中从工作区根目录运行：
 
 ```powershell
-cd E:\gitee_CodeStorage\学习\电源
+cd <power-source-root>
 ```
 
 Boost 开环仿真：

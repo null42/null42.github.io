@@ -425,6 +425,7 @@
 		closeAllOverlays();
 		initAll();
 	});
+	document.addEventListener("password:decrypted", initAll);
 
 	// 初次加载
 	if (document.readyState === "loading") {

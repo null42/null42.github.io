@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-@import './layout-styles.css';
+@import './layout/grid.css';
 @import './navbar.css';
-@import './banner-title.css';
-@import './waves.css';
+@import './components/article-catalog.css';
 @import './transition.css';
 @import './custom-scrollbar.css';
 @import './gallery.css';
@@ -52,23 +51,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* 页面顶部渐变高光效果 */
-.top-gradient-highlight {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 180px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.05) 80%, transparent 100%);
-    pointer-events: none;
-    z-index: 20;
-    transition: all var(--duration-medium) var(--ease-standard);
-}
-
-/* 暗色主题下的渐变高光效果 */
-:root.dark .top-gradient-highlight {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%);
-}
+.top-gradient-highlight { display: none; }
 
 @layer components {
     /* View Transitions API 主题切换动画 */
@@ -356,7 +339,7 @@ html {
         @apply text-black/75 dark:text-white/75
     }
     .text-50 {
-        @apply text-black/50 dark:text-white/50
+        @apply text-black/60 dark:text-white/65
     }
     .text-30 {
         @apply text-black/30 dark:text-white/30
@@ -586,4 +569,3 @@ html {
 .pagination-info {
   @apply text-sm text-(--text-secondary) text-center mb-2;
 }
-

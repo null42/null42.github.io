@@ -5,6 +5,7 @@ dist/
 src/content/posts/
 reports/astro-content-export.json
 reports/old-url-manifest.json
+reports/production-quality.json
 # Astro 内容导出生成的兼容页与复制资产（保留手工维护的 images/audio）
 /public/*.html
 /public/content/

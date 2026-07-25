@@ -47,7 +47,7 @@ export default defineConfig({
   ignoreDeadLinks: [
     (link) => shouldIgnoreMigratedKnowledgeLink(link)
   ],
-  srcExclude: [...nonPublicContentPatterns, 'content/**/*.html'],
+  srcExclude: [...nonPublicContentPatterns, 'content/**/*.html', 'env/**', 'src/**'],
   vite: {
     plugins: [
       {
@@ -111,6 +111,7 @@ export default defineConfig({
 })
 
 function shouldIgnoreMigratedKnowledgeLink(link: string): boolean {
+  if (link.startsWith('/posts/')) return true
   if (link.startsWith('/sims/')) return true
   if (!link.startsWith('./') && !link.startsWith('../')) return false
 

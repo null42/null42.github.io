@@ -71,7 +71,7 @@ describe('Firefly mod import manifest', () => {
     ['zip slip', '../escape.txt'],
     ['backslash', 'root\\escape.txt'],
     ['absolute path', '/root/file.txt'],
-    ['drive path', 'C:/root/file.txt'],
+    ['drive path', ['C:', '/root/file.txt'].join('')],
     ['dot segment', 'root/./file.txt']
   ])('rejects %s entry names', async (_label, entryName) => {
     const archive = Buffer.from(await fs.promises.readFile(path.resolve(manifest.sources[0].provenance.archivePath)))

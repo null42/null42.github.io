@@ -1,0 +1,47 @@
+---
+import navigation from "@/generated/knowledge-navigation.json";
+import "./knowledge-tree.css";
+
+interface Props {
+	currentSectionId?: string;
+	currentRouteId?: string;
+	currentStageId?: string;
+	currentArticleId?: string;
+	storageNamespace?: string;
+	instanceId?: string;
+}
+
+const { currentSectionId, currentRouteId, currentStageId, currentArticleId, storageNamespace = "site", instanceId = "knowledge-tree" } = Astro.props;
+---
+
+<nav class="knowledge-tree" aria-label="知识导航" data-knowledge-tree data-storage-key={`knowledgeTree:${storageNamespace}`} data-current-section={currentSectionId} data-current-route={currentRouteId} data-current-stage={currentStageId} data-current-article={currentArticleId}>
+	<ul>
+		{navigation.map((section) => (
+			<li data-tree-node={`section:${section.id}`}>
+				<button type="button" data-tree-toggle aria-expanded={section.id === currentSectionId ? "true" : "false"} aria-controls={`${instanceId}-section-${section.id}`}>{section.title}</button>
+				<ul id={`${instanceId}-section-${section.id}`} hidden={section.id !== currentSectionId}>
+					{section.routes.map((route) => (
+						<li data-tree-node={`route:${section.id}:${route.id}`}>
+							<button type="button" data-tree-toggle aria-expanded={section.id === currentSectionId && route.id === currentRouteId ? "true" : "false"} aria-controls={`${instanceId}-route-${section.id}-${route.id}`}>{route.title}</button>
+							<ul id={`${instanceId}-route-${section.id}-${route.id}`} hidden={section.id !== currentSectionId || route.id !== currentRouteId}>
+								{route.stages.map((stage) => (
+									<li data-tree-node={`stage:${section.id}:${route.id}:${stage.id}`}>
+										<button type="button" data-tree-toggle aria-expanded={section.id === currentSectionId && route.id === currentRouteId && stage.id === currentStageId ? "true" : "false"} aria-controls={`${instanceId}-stage-${section.id}-${route.id}-${stage.id}`}>{stage.title}</button>
+										<ul id={`${instanceId}-stage-${section.id}-${route.id}-${stage.id}`} hidden={section.id !== currentSectionId || route.id !== currentRouteId || stage.id !== currentStageId}>
+											{stage.articles.map((article) => <li>{article.slug ? <a data-tree-article={article.articleId} href={`/posts/${article.slug}/`}>{article.title}</a> : <span data-tree-article-placeholder={article.articleId}>{article.title}</span>}</li>)}
+										</ul>
+									</li>
+								))}
+							</ul>
+						</li>
+					))}
+				</ul>
+			</li>
+		))}
+	</ul>
+</nav>
+
+<script>
+	import { installKnowledgeTreeLifecycle } from "@/utils/knowledge-tree-controller";
+	installKnowledgeTreeLifecycle(window.swup);
+</script>

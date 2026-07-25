@@ -2,8 +2,10 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import { loadInheritedCategoryDefaults } from './category'
-import { columnDefaultsForPath, loadColumnRegistry } from './columns'
-import { nonPublicContentPatterns, shouldExcludeContentPath } from './content-exclusions'
+import { columnDefaultsForPath, columnIdFromPath, loadColumnRegistry } from './columns'
+import type { ColumnConfig } from './columns'
+import { normalizeArticle } from './domain/normalize-article'
+import { shouldExcludeContentPath } from './content-exclusions'
 import { completeArticleData, normalizeDate, parseMarkdown, serializeMarkdown } from './frontmatter'
 import { inferPathDefaults } from './path-defaults'
 import { contentRoot as defaultContentRoot, stripMarkdownExtension, toPosixPath } from './paths'
@@ -26,25 +28,40 @@ export interface MarkdownFileRecord {
   completed: ArticleFrontmatter
   body: string
   warnings: string[]
+  column?: ColumnConfig
 }
 
 export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<MarkdownFileRecord[]> {
+  return (await scanMarkdownSourceFiles(options)).filter((record) => !shouldExcludeContentPath(record.relativePath))
+}
+
+export async function scanMarkdownSourceFiles(options: ScanOptions = {}): Promise<MarkdownFileRecord[]> {
   const root = options.contentRoot || defaultContentRoot
+  const resolvedRoot = path.resolve(root)
+  if ((await fs.lstat(resolvedRoot)).isSymbolicLink()) throw new Error(`Content root must not be a symbolic link: ${resolvedRoot}`)
+  const realRoot = await fs.realpath(resolvedRoot)
   const shouldInferPathDefaults = path.resolve(root) === path.resolve(defaultContentRoot)
-  const columnRegistry = shouldInferPathDefaults ? await loadColumnRegistry({ contentRoot: root }) : { contentRoot: root, columns: [] }
+  const columnRegistry = await loadColumnRegistry({ contentRoot: root })
   const files = await fg('**/*.md', {
     cwd: root,
     absolute: true,
-    ignore: ['**/node_modules/**', ...nonPublicContentPatterns.map((pattern) => pattern.replace(/^content\//, ''))]
+    followSymbolicLinks: false,
+    ignore: ['**/node_modules/**']
   })
 
   const records: MarkdownFileRecord[] = []
   for (const absolutePath of files.sort()) {
+    const sourceStats = await fs.lstat(absolutePath)
+    if (sourceStats.isSymbolicLink()) throw new Error(`Markdown source must not be a symbolic link: ${absolutePath}`)
+    const realSource = await fs.realpath(absolutePath)
+    const relativeRealSource = path.relative(realRoot, realSource)
+    if (relativeRealSource === '..' || relativeRealSource.startsWith(`..${path.sep}`) || path.isAbsolute(relativeRealSource)) {
+      throw new Error(`Markdown source escaped content root: ${absolutePath}`)
+    }
     const relativePath = toPosixPath(path.relative(path.dirname(root), absolutePath))
     const raw = await fs.readFile(absolutePath, 'utf8')
     const parsed = parseMarkdown(raw)
-    const stats = await fs.stat(absolutePath)
-    const modifiedDate = stats.mtime.toISOString().slice(0, 10)
+    const modifiedDate = sourceStats.mtime.toISOString().slice(0, 10)
     const directoryDefaults = await loadInheritedCategoryDefaults(absolutePath, root)
     const pathDefaults = shouldInferPathDefaults ? inferPathDefaults(relativePath) : {}
     const columnDefaults = shouldInferPathDefaults ? columnDefaultsForPath(columnRegistry, relativePath) : {}
@@ -62,15 +79,14 @@ export async function scanMarkdownFiles(options: ScanOptions = {}): Promise<Mark
       modifiedDate
     })
 
-    if (shouldExcludeContentPath(relativePath)) continue
-
     records.push({
       absolutePath,
       relativePath,
       data: parsed.data,
       completed,
       body: parsed.body,
-      warnings: validateArticle(relativePath, completed)
+      warnings: validateArticle(relativePath, completed),
+      column: columnRegistry.columns.find((column) => column.id === columnIdFromPath(relativePath))
     })
   }
 
@@ -99,26 +115,33 @@ export async function scanArticles(options: ScanOptions = {}): Promise<ScanResul
     }
 
     const url = '/content/' + stripMarkdownExtension(toPosixPath(path.relative(root, record.absolutePath))) + '.html'
+    const slug = stripMarkdownExtension(toPosixPath(path.relative(root, record.absolutePath)))
+    let canonical
+    try {
+      canonical = normalizeArticle(record.completed, {
+        sourcePath: record.relativePath,
+        slug,
+        column: record.column,
+        orderWasExplicit: finiteNumber(record.data.order) !== undefined,
+      })
+    } catch (error) {
+      throw new Error(record.relativePath + ': ' + (error as Error).message)
+    }
     articles.push({
+      ...canonical,
       title: String(record.completed.title),
       date: String(record.completed.date),
       updated: record.completed.updated ? String(record.completed.updated) : undefined,
-      section: optionalString(record.completed.section),
-      chapter: optionalString(record.completed.chapter),
-      chapterTitle: optionalString(record.completed.chapterTitle),
-      chapterOrder: optionalNumber(record.completed.chapterOrder),
-      navGroup: optionalString(record.completed.navGroup),
-      navGroupOrder: optionalNumber(record.completed.navGroupOrder),
-      order: optionalNumber(record.completed.order),
+      order: canonical.order,
       category: String(record.completed.category || '未分类'),
       tags: Array.isArray(record.completed.tags) ? record.completed.tags.map(String) : [],
       source: String(record.completed.source || 'manual'),
-      sourcePath: optionalString(record.completed.sourcePath),
+      sourcePath: canonical.sourcePath,
       type: optionalString(record.completed.type),
       difficulty: optionalString(record.completed.difficulty),
       suggestedTags: Array.isArray(record.completed.suggestedTags) ? record.completed.suggestedTags.map(String) : undefined,
       status: String(record.completed.status || 'learning'),
-      visibility: String(record.completed.visibility || 'public'),
+      visibility: canonical.visibility,
       quality: inferArticleQuality(record.completed),
       summary: normalizePublicSummary(record.completed),
       path: record.relativePath,
@@ -145,6 +168,12 @@ function optionalNumber(value: unknown): number | undefined {
     const parsed = Number(value)
     if (Number.isFinite(parsed)) return parsed
   }
+  return undefined
+}
+
+function finiteNumber(value: unknown): number | undefined {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value === 'string' && value.trim() && Number.isFinite(Number(value))) return Number(value)
   return undefined
 }
 

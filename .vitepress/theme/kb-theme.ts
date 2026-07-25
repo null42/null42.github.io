@@ -47,12 +47,6 @@ export const kbThemeConfig = {
     dailySeedKey: 'kb-home-image-offset',
     gallery: [
       {
-        src: '/images/home/home-01.webp',
-        alt: '宝多六花 - 沉浸式首页背景',
-        position: 'center top',
-        theme: 'dark'
-      },
-      {
         src: '/images/home/home-02.svg',
         alt: '深夜学习空间渐变背景',
         position: 'center',

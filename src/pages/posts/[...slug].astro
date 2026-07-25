@@ -10,7 +10,7 @@ import License from "@components/misc/License.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getRelatedPosts, getSortedPosts } from "@utils/content-utils";
+import { getCatalogGroups, getRelatedPosts, getRoutablePosts } from "@utils/content-utils";
 import {
 	getFileDirFromPath,
 	getPostUrlBySlug,
@@ -20,6 +20,10 @@ import { Icon } from "astro-icon/components";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import CoverImage from "@/components/common/CoverImage.astro";
+import KnowledgeBreadcrumbs from "@/components/knowledge/KnowledgeBreadcrumbs.astro";
+import KnowledgeDrawer from "@/components/knowledge/KnowledgeDrawer.astro";
+import KnowledgeTree from "@/components/knowledge/KnowledgeTree.astro";
+import StagePostNavigation from "@/components/knowledge/StagePostNavigation.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
 import RecommendedPost from "@/components/misc/RecommendedPost.astro";
 import SharePoster from "@/components/misc/SharePoster.svelte";
@@ -31,10 +35,13 @@ import { sponsorConfig } from "@/config/sponsorConfig";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { getApiUrlList, processCoverImageSync } from "@/utils/image-utils";
 import { url } from "@/utils/url-utils";
+import navigation from "@/generated/knowledge-navigation.json";
+import { getStagePostNavigation } from "@/utils/knowledge-navigation";
+import { decideVisibility } from "../../../scripts/kb/domain/normalize-article";
 
 export async function getStaticPaths() {
-	const blogEntries = await getSortedPosts();
-	return blogEntries.map((entry) => {
+	const blogEntries = await getRoutablePosts();
+	return blogEntries.filter((entry) => decideVisibility(entry.data.visibility).html).map((entry) => {
 		// 将 id 转换为 slug（移除扩展名）以匹配路由参数
 		const slug = removeFileExtension(entry.id);
 		return {
@@ -46,6 +53,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+const visibilityDecision = decideVisibility(entry.data.visibility);
+const pagefindExcluded = !visibilityDecision.pagefind;
 
 const { remarkPluginFrontmatter } = await render(entry);
 
@@ -130,6 +139,9 @@ const jsonLd = {
 };
 
 const relatedPosts = await getRelatedPosts(entry, 5);
+const catalogGroups = await getCatalogGroups(entry.id);
+const isKnowledgeArticle = Boolean(entry.data.sectionId && entry.data.routeId && entry.data.stageId && entry.data.articleId);
+const stageNavigation = isKnowledgeArticle ? getStagePostNavigation(navigation, entry.data.sectionId!, entry.data.routeId!, entry.data.stageId!, entry.data.articleId) : { previous: undefined, next: undefined };
 ---
 
 <MainGridLayout
@@ -137,23 +149,31 @@ const relatedPosts = await getRelatedPosts(entry, 5);
   title={entry.data.title}
   description={entry.data.description}
   lang={entry.data.lang}
-  setOGTypeArticle={true}
+  setOGTypeArticle={!pagefindExcluded}
   postSlug={entry.id}
+  noindex={pagefindExcluded}
   postCategory={entry.data.category || undefined}
+  catalogGroups={catalogGroups}
   headings={headings}
-  bannerPostMeta={bannerPostMeta}
+  bannerPostMeta={visibilityDecision.publicSurface === "placeholder" ? undefined : bannerPostMeta}
+  knowledgeSidebar={isKnowledgeArticle}
 >
+	{isKnowledgeArticle && <KnowledgeTree slot="knowledge-sidebar" currentSectionId={entry.data.sectionId} currentRouteId={entry.data.routeId} currentStageId={entry.data.stageId} currentArticleId={entry.data.articleId} storageNamespace="post" instanceId="knowledge-tree-sidebar" />}
+	{isKnowledgeArticle && <KnowledgeDrawer currentSectionId={entry.data.sectionId} currentRouteId={entry.data.routeId} currentStageId={entry.data.stageId} currentArticleId={entry.data.articleId} />}
   <!-- KaTeX 按需加载 - 仅在文章页面 -->
   <KatexManager slot="head" />
   
-  <script
-    is:inline
-    slot="head"
-    type="application/ld+json"
-    set:html={JSON.stringify(jsonLd)}
-  />
+  {visibilityDecision.jsonLd && (
+    <script
+      is:inline
+      slot="head"
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    />
+  )}
   <div
     class="flex w-full rounded-(--radius-large) overflow-hidden relative mb-4"
+    data-pagefind-ignore={pagefindExcluded ? "all" : undefined}
   >
     <div
       id="post-container"
@@ -162,9 +182,10 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         {},
       ]}
     >
+	  {isKnowledgeArticle && <KnowledgeBreadcrumbs sectionTitle={entry.data.sectionTitle} routeTitle={entry.data.routeTitle} stageTitle={entry.data.stageTitle} articleTitle={entry.data.title} />}
       <!-- word count and reading time -->
-      <div
-        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+      {visibilityDecision.publicSurface !== "placeholder" && <div
+        class="flex flex-row text-black/60 dark:text-white/70 gap-5 mb-3 transition onload-animation"
       >
         <div class="flex flex-row items-center">
           <div
@@ -207,14 +228,14 @@ const relatedPosts = await getRelatedPosts(entry, 5);
             </div>
           </div>
         )}
-      </div>
+      </div>}
 
       <!-- title -->
       <div class="relative onload-animation">
         <div
-          data-pagefind-body
-          data-pagefind-weight="10"
-          data-pagefind-meta="title"
+          data-pagefind-body={pagefindExcluded ? undefined : true}
+          data-pagefind-weight={pagefindExcluded ? undefined : "10"}
+          data-pagefind-meta={pagefindExcluded ? undefined : "title"}
           class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
                     text-black/90 dark:text-white/90
@@ -226,7 +247,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
       </div>
 
       <!-- metadata -->
-      <div class="onload-animation">
+      {visibilityDecision.publicSurface !== "placeholder" && <div class="onload-animation">
         <PostMetadata
           className="mb-5"
           published={entry.data.published}
@@ -240,7 +261,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
             <div class="border-(--line-divider) border-dashed border-b mt-3 mb-5" />
           )
         }
-      </div>
+      </div>}
 
       <!-- always show cover as long as it has one -->
 
@@ -263,7 +284,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         <EncryptedPayload payloadUrl={entry.data.encryptedPayload} />
       ) : entry.data.password ? (
         <EncryptedPost password={entry.data.password} slug={entry.id} hint={entry.data.passwordHint}>
-          <Markdown class="mb-6 markdown-content onload-animation">
+          <Markdown class="mb-6 markdown-content onload-animation" pagefindBody={!pagefindExcluded}>
             <Content />
           </Markdown>
 
@@ -284,13 +305,13 @@ const relatedPosts = await getRelatedPosts(entry, 5);
                         />
                       </div>
                       <div>
-                        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
+                        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
                           {
                             sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
                               ? i18n(I18nKey.sponsorButton)
                               : i18n(I18nKey.shareOnSocial)
                           }
-                        </h3>
+                        </h2>
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">
                           {
                             sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
@@ -351,7 +372,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         </EncryptedPost>
       ) : (
         <>
-          <Markdown class="mb-6 markdown-content onload-animation">
+          <Markdown class="mb-6 markdown-content onload-animation" pagefindBody={!pagefindExcluded}>
             <Content />
           </Markdown>
 
@@ -372,13 +393,13 @@ const relatedPosts = await getRelatedPosts(entry, 5);
                         />
                       </div>
                       <div>
-                        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
+                        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
                           {
                             sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
                               ? i18n(I18nKey.sponsorButton)
                               : i18n(I18nKey.shareOnSocial)
                           }
-                        </h3>
+                        </h2>
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">
                           {
                             sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
@@ -443,7 +464,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
 
   <!-- 上次编辑时间 -->
   {
-    siteConfig.post.showLastModified && (() => {
+    siteConfig.post.showLastModified && visibilityDecision.publicSurface !== "placeholder" && (() => {
       const lastModified = dayjs(entry.data.updated || entry.data.published);
       const dateStr = lastModified.format("YYYY-MM-DD");
       const outdatedThreshold = siteConfig.post.outdatedThreshold ?? 1;
@@ -509,7 +530,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
     }
   </script>
 
-  <div
+  {isKnowledgeArticle ? <StagePostNavigation previous={stageNavigation.previous} next={stageNavigation.next} /> : <div
     class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"
   >
     <a
@@ -541,7 +562,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         />
       </div>
     </a>
-  </div>
+  </div>}
 
   <RecommendedPost relatedPosts={relatedPosts} currentPostId={entry.id} />
 

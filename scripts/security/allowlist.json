@@ -1,0 +1,15 @@
+[
+  { "path": "dist/content/encrypted/*.json", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "public/content/encrypted/*.json", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "dist/posts/markdown-plantuml/index.html", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "dist/rss.xml", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "dist/_astro/Live2DWidget*.js", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "dist/_astro/KatexManager*.css", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "dist/pio/static/spine-player.min.js", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "public/pio/static/spine-player.min.js", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "src/plugins/plantuml-encoder.js", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "pnpm-lock.yaml", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "assets/*", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "content/encrypted/*.json", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "content/motor/foundations/*.html", "rule": "high-entropy", "fingerprint": "*" }
+]

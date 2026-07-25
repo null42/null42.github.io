@@ -29,7 +29,8 @@ const publicCount = result.articles.filter((article) => article.visibility === '
 console.log(`checked ${result.articles.length} indexed articles (${publicCount} public)`)
 console.log(`checked ${registry.columns.length} column configs`)
 
-const reviewWarnings = result.warnings.filter((warning) => warning.includes('E:\\') || warning.includes('visibility is private'))
+const windowsAbsolutePath = /[a-z]:[\\/]/i
+const reviewWarnings = result.warnings.filter((warning) => windowsAbsolutePath.test(warning) || warning.includes('visibility is private'))
 if (reviewWarnings.length > 0) {
   console.warn(`review recommended for ${reviewWarnings.length} warnings`)
 }

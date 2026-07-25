@@ -1,6 +1,11 @@
+import { readFileSync } from "node:fs";
 import { h } from "hastscript";
 import { visit } from "unist-util-visit";
-import mermaidRenderScript from "./mermaid-render-script.js?raw";
+
+const mermaidRenderScript = readFileSync(
+	new URL("./mermaid-render-script.js", import.meta.url),
+	"utf8",
+);
 
 /**
  * 递归提取 HAST 节点树中的所有文本内容

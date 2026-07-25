@@ -2,8 +2,105 @@ import fs from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { isImageAsset, toMarkdownImage } from '../../scripts/kb/import/assets'
 import { normalizeMarkdownTables, normalizeMathDelimiters, normalizeMermaidSource, renderMathToHtml } from '../../scripts/kb/markdown-rendering'
+import { renderEncryptedMarkdown } from '../../scripts/kb/encrypt/render-markdown'
+import { normalizeVitePressContainers } from '../../scripts/kb/markdown-compat'
 
 describe('rendering fixture', () => {
+  it('does not close a VitePress container on markers inside fenced code', () => {
+    const markdown = [
+      '::: tip Fence safety',
+      'Before code.',
+      '```text',
+      ':::',
+      '```',
+      'After code.',
+      ':::',
+    ].join('\n')
+
+    const normalized = normalizeVitePressContainers(markdown)
+
+    expect(normalized).toContain('> [!NOTE] Fence safety')
+    expect(normalized).toContain('> ```text\n> :::\n> ```')
+    expect(normalized).toContain('> After code.')
+    expect(normalized.trimEnd().endsWith(':::')).toBe(false)
+  })
+
+  it('does not close a VitePress container on markers inside indented code', () => {
+    const markdown = [
+      '::: tip Indented safety',
+      'Before code.',
+      '    :::',
+      'After code.',
+      ':::',
+    ].join('\n')
+
+    const normalized = normalizeVitePressContainers(markdown)
+
+    expect(normalized).toContain('>     :::')
+    expect(normalized).toContain('> After code.')
+    expect(normalized.trimEnd().endsWith(':::')).toBe(false)
+  })
+
+  it('normalizes nested VitePress containers using matching fence lengths', () => {
+    const markdown = [
+      ':::: details Outer details',
+      'Outer body.',
+      '::: warning Inner warning',
+      'Inner body.',
+      ':::',
+      '::::',
+    ].join('\n')
+
+    const normalized = normalizeVitePressContainers(markdown)
+
+    expect(normalized).toContain('> [!NOTE] Outer details')
+    expect(normalized).toContain('> > [!WARNING] Inner warning')
+    expect(normalized).toContain('> > Inner body.')
+    expect(normalized).not.toMatch(/^:{3,}/m)
+  })
+
+  it('renders the full migration Markdown feature sample through the shared site pipeline', async () => {
+    const html = await renderEncryptedMarkdown([
+      '# Migration rendering contract',
+      '',
+      '::: tip',
+      'Callout body',
+      ':::',
+      '',
+      '| Item | Value |',
+      '| --- | --- |',
+      '| FOC | Ready |',
+      '',
+      'Inline math: $i_d = 0$.',
+      '',
+      '~~~ts',
+      'const duty = vin / vout',
+      '~~~',
+      '',
+      '~~~mermaid',
+      'flowchart LR; A-->B',
+      '~~~',
+      '',
+      '~~~plantuml',
+      '@startuml',
+      'Alice -> Bob',
+      '@enduml',
+      '~~~',
+      '',
+      '![Control delay](/control-delay-timing.svg)',
+    ].join('\n'))
+
+    expect(html).toContain('class="callout"')
+    expect(html).toContain('<div class="callout-content"><p>Callout body</p>')
+    expect(html).toContain('<table>')
+    expect(html).toContain('class="katex"')
+    expect(html).toContain('data-language="ts"')
+    expect(html).toContain('vin')
+    expect(html).toContain('mermaid-diagram-container')
+    expect(html).toContain('plantuml-diagram-container')
+    expect(html).toContain('src="/control-delay-timing.svg"')
+  })
+
   it('contains markdown, mermaid, svg, table, callout, and code examples', () => {
     const text = fs.readFileSync('content/playground/rendering-fixture.md', 'utf8')
 
@@ -170,7 +267,7 @@ describe('rendering fixture', () => {
   })
 
   it('keeps published client chunks small enough for reliable GitHub Pages serving', () => {
-    const chunkDir = 'assets/chunks'
+    const chunkDir = 'dist/_astro'
     const chunkLimit = 8 * 1024 * 1024
     const chunks = fs.readdirSync(chunkDir)
       .filter((name) => name.endsWith('.js'))

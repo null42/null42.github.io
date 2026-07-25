@@ -1,5 +1,11 @@
 ---
 import { homeConfig } from "@/config/homeConfig";
+
+interface Props {
+	metrics: readonly { value: string; label: string; detail: string }[];
+}
+
+const { metrics } = Astro.props;
 ---
 
 <section class="home-data" data-home-section="data" aria-labelledby="home-data-title">
@@ -9,13 +15,18 @@ import { homeConfig } from "@/config/homeConfig";
 	</div>
 	<div class="home-data__layout">
 		<div class="home-data__metrics">
-			{homeConfig.metrics.map((metric, index) => (
+			{metrics.map((metric, index) => (
 				<article class="home-metric">
 					<p class="home-metric__number">{String(index + 1).padStart(2, "0")}</p>
 					<strong>{metric.value}</strong>
 					<h3>{metric.label}</h3>
 					<p>{metric.detail}</p>
 				</article>
+			))}
+		</div>
+		<div class="home-data__matrix" aria-label="知识库数据矩阵">
+			{metrics.map((metric, index) => (
+				<div><span>{String(index + 1).padStart(2, "0")}</span><b>{metric.label}</b><em>{metric.value}</em></div>
 			))}
 		</div>
 		<img src={homeConfig.media.data.src} alt={homeConfig.media.data.alt} width={homeConfig.media.data.width} height={homeConfig.media.data.height} loading="lazy" decoding="async" />

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-07-23",
+  "purpose": "User-approved V2.2.2 high-fidelity visual reuse",
+  "source": {
+    "repository": "fqzlr/my-blog",
+    "commit": "65d6daf637e3e3dda460e012b4ef4ff418796dfc",
+    "archiveSha256": "7850889de1307d7d22da16ab664fea29cca47733b955af922ae4fea4ac959b29",
+    "license": "MIT",
+    "licenseNotice": "THIRD_PARTY_LICENSES.txt",
+    "licenseNoticeReference": "Firefly Mod V2.2.2 visual reference"
+  },
+  "authorization": {
+    "kind": "explicit-user-approval",
+    "scope": "Directly copy the selected reference visual assets for the current migration; generated replacements may be evaluated later."
+  },
+  "assets": [
+    {
+      "sourcePath": "public/assets/images/home/home.webp",
+      "targetPath": "public/assets/images/firefly-v22/home-hero.webp",
+      "sourceSha256": "28465a30fc81c51fb9f6483fef391b1738e6bc302827832f5056e5555af35f01",
+      "sha256": "28465a30fc81c51fb9f6483fef391b1738e6bc302827832f5056e5555af35f01",
+      "role": "home-hero"
+    },
+    {
+      "sourcePath": "public/assets/images/loading/feibi-loading.webp",
+      "targetPath": "public/assets/images/firefly-v22/feibi-loading.webp",
+      "sourceSha256": "8ff6273237309b45598fa8d53d3d4776df1c4d530f4efc47d0ea4f308560655d",
+      "sha256": "f3b6f29ec702fb6a43faf1d15e2010e10ae46d9d72b1bf29236b0f94b901ae58",
+      "role": "initial-page-loader",
+      "transformation": "Locally resized to 640x360 and frame-decimated to reduce startup transfer cost while preserving animation."
+    }
+  ]
+}

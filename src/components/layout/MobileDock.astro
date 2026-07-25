@@ -4,9 +4,231 @@ import { url } from "@/utils/url-utils";
 ---
 
 <nav class="mobile-dock" id="mobile-dock" aria-label="移动导航">
-	<a href={url('/')} class="mobile-dock__item" aria-label="首页"><Icon is:inline name="material-symbols:home-rounded" /><span>首页</span></a>
-	<a href={url('/knowledge/')} class="mobile-dock__item" aria-label="知识地图"><Icon is:inline name="material-symbols:account-tree-rounded" /><span>知识</span></a>
-	<a href={url('/search/')} class="mobile-dock__item" aria-label="搜索"><Icon is:inline name="material-symbols:search-rounded" /><span>搜索</span></a>
-	<a href={url('/list/')} class="mobile-dock__item" aria-label="文章列表"><Icon is:inline name="material-symbols:list-alt-rounded" /><span>文章</span></a>
-	<button class="mobile-dock__item" id="mobile-dock-menu" type="button" aria-label="打开导航菜单" aria-controls="nav-menu-panel" aria-expanded="false"><Icon is:inline name="material-symbols:menu-rounded" /><span>菜单</span></button>
+	<button class="mobile-dock__btn" id="mobile-dock-home-btn" aria-label="首页" type="button">
+		<span class="mobile-dock__icon"><Icon name="material-symbols:home-outline-rounded" is:inline /></span>
+		<span class="mobile-dock__label">首页</span>
+	</button>
+	<button class="mobile-dock__btn" id="mobile-dock-theme-btn" aria-label="切换主题" aria-pressed="false" type="button">
+		<span class="mobile-dock__icon"><Icon name="material-symbols:wb-sunny-outline-rounded" is:inline /></span>
+		<span class="mobile-dock__label">主题</span>
+	</button>
+	<button class="mobile-dock__btn mobile-dock__btn--center" id="mobile-dock-search-btn" aria-label="搜索" type="button">
+		<span class="mobile-dock__icon"><Icon name="material-symbols:search-rounded" is:inline /></span>
+	</button>
+	<button class="mobile-dock__btn" id="mobile-dock-tools-btn" aria-label="工具栏" aria-controls="mobile-dock-sheet" aria-expanded="false" type="button">
+		<span class="mobile-dock__icon"><Icon name="material-symbols:more-horiz" is:inline /></span>
+		<span class="mobile-dock__label">工具</span>
+	</button>
+	<button class="mobile-dock__btn" id="mobile-dock-menu" aria-label="菜单" aria-controls="nav-menu-panel" aria-expanded="false" type="button">
+		<span class="mobile-dock__icon"><Icon name="material-symbols:menu-rounded" is:inline /></span>
+		<span class="mobile-dock__label">菜单</span>
+	</button>
 </nav>
+
+<div class="mobile-dock__overlay" id="mobile-dock-overlay" aria-hidden="true"></div>
+<section class="mobile-dock__sheet" id="mobile-dock-sheet" aria-label="工具栏" aria-hidden="true" hidden>
+	<div class="mobile-dock__sheet-title">工具</div>
+	<div class="mobile-dock__sheet-grid">
+		<button class="mobile-dock__sheet-item" id="mobile-dock-top-btn" type="button"><Icon name="material-symbols:vertical-align-top-rounded" is:inline /><span>顶部</span></button>
+		<button class="mobile-dock__sheet-item" id="mobile-dock-toc-btn" type="button" aria-disabled="true" disabled><Icon name="material-symbols:format-list-bulleted" is:inline /><span>目录</span></button>
+		<button class="mobile-dock__sheet-item" id="mobile-dock-comment-btn" type="button" aria-disabled="true" disabled><Icon name="mingcute:comment-line" is:inline /><span>评论</span></button>
+		<a class="mobile-dock__sheet-item" href={url('/knowledge/')}><Icon name="material-symbols:account-tree-rounded" is:inline /><span>知识</span></a>
+		<a class="mobile-dock__sheet-item" href={url('/list/')}><Icon name="material-symbols:list-alt-rounded" is:inline /><span>文章</span></a>
+		<a class="mobile-dock__sheet-item" href={url('/search/')}><Icon name="material-symbols:search-rounded" is:inline /><span>搜索页</span></a>
+	</div>
+</section>
+
+<script>
+	import { DARK_MODE, LIGHT_MODE } from "@/constants/constants";
+	import { getStoredTheme, setTheme } from "@/utils/setting-utils";
+	import { initNavigationMenu } from "@/utils/navigation-menu-controller";
+	import { navigateToPage } from "@/utils/navigation-utils";
+
+	type SwupLike = { hooks?: { on: (name: "content:replace", callback: () => void) => (() => void) | void } };
+	type MobileDockWindow = typeof window & {
+		__initMobileDock?: () => void;
+		__mobileDockAbortController?: AbortController;
+		__mobileDockSwupUnsubscribe?: () => void;
+		swup?: SwupLike;
+	};
+	const mobileDockWindow = window as MobileDockWindow;
+
+	const initMobileDock = () => {
+		mobileDockWindow.__mobileDockAbortController?.abort();
+		mobileDockWindow.__mobileDockSwupUnsubscribe?.();
+		mobileDockWindow.__mobileDockSwupUnsubscribe = undefined;
+		const controller = new AbortController();
+		mobileDockWindow.__mobileDockAbortController = controller;
+		const { signal } = controller;
+		const pendingMobileDockFrames = new Set<number>();
+		const scheduleMobileDockFrame = (callback: () => void) => {
+			if (signal.aborted) return;
+			const frame = window.requestAnimationFrame(() => {
+				pendingMobileDockFrames.delete(frame);
+				if (!signal.aborted) callback();
+			});
+			pendingMobileDockFrames.add(frame);
+		};
+		const getSheetFocusables = () => sheet
+			? Array.from(sheet.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+				.filter((element) => !element.hasAttribute('hidden') && element.getAttribute('aria-hidden') !== 'true')
+			: [];
+
+		const sheet = document.getElementById("mobile-dock-sheet");
+		const overlay = document.getElementById("mobile-dock-overlay");
+		const tools = document.getElementById("mobile-dock-tools-btn") as HTMLButtonElement | null;
+		const homeButton = document.getElementById("mobile-dock-home-btn") as HTMLButtonElement | null;
+		const themeButton = document.getElementById("mobile-dock-theme-btn") as HTMLButtonElement | null;
+		const searchButton = document.getElementById("mobile-dock-search-btn") as HTMLButtonElement | null;
+		const topButton = document.getElementById("mobile-dock-top-btn") as HTMLButtonElement | null;
+		const tocButton = document.getElementById("mobile-dock-toc-btn") as HTMLButtonElement | null;
+		const commentButton = document.getElementById("mobile-dock-comment-btn") as HTMLButtonElement | null;
+		const inertedBackground = new Set<HTMLElement>();
+		const setBackgroundInert = (inert: boolean) => {
+			if (!inert) {
+				for (const element of inertedBackground) element.removeAttribute("inert");
+				inertedBackground.clear();
+				return;
+			}
+			if (!sheet || !overlay) return;
+			const protectedBranches = new Set<HTMLElement>();
+			for (const element of [sheet, overlay]) {
+				let current: HTMLElement | null = element;
+				while (current && current !== document.body) {
+					protectedBranches.add(current);
+					current = current.parentElement;
+				}
+			}
+			for (const parent of protectedBranches) {
+				if (parent === sheet || parent === overlay) continue;
+				for (const child of Array.from(parent.children)) {
+					if (!(child instanceof HTMLElement) || protectedBranches.has(child) || child.hasAttribute("inert")) continue;
+					child.setAttribute("inert", "");
+					inertedBackground.add(child);
+				}
+			}
+			for (const child of Array.from(document.body.children)) {
+				if (!(child instanceof HTMLElement) || protectedBranches.has(child) || child.hasAttribute("inert")) continue;
+				child.setAttribute("inert", "");
+				inertedBackground.add(child);
+			}
+		};
+
+		const setSheet = (open: boolean) => {
+			if (!sheet || !overlay || !tools) return;
+			sheet.hidden = !open;
+			sheet.classList.toggle("is-open", open);
+			sheet.setAttribute("aria-hidden", String(!open));
+			overlay.classList.toggle("is-open", open);
+			overlay.setAttribute("aria-hidden", String(!open));
+			tools.setAttribute("aria-expanded", String(open));
+			setBackgroundInert(open);
+		};
+		const desktopDockMedia = window.matchMedia("(min-width: 768px)");
+		const handleDesktopBreakpoint = (event: MediaQueryListEvent) => {
+			if (event.matches) setSheet(false);
+		};
+		const setButtonAvailability = (button: HTMLButtonElement | null, available: boolean) => {
+			if (!button) return;
+			button.disabled = !available;
+			button.setAttribute("aria-disabled", String(!available));
+		};
+		const syncThemeButton = () => {
+			if (!themeButton) return;
+			const isDark = document.documentElement.classList.contains("dark");
+			themeButton.setAttribute("aria-pressed", String(isDark));
+			themeButton.setAttribute("aria-label", isDark ? "切换到浅色主题" : "切换到深色主题");
+		};
+		const syncActionAvailability = () => {
+			setButtonAvailability(searchButton, Boolean(document.getElementById("search-switch")));
+			setButtonAvailability(
+				tocButton,
+				Boolean(document.getElementById("post-container") && document.getElementById("floating-toc-btn")),
+			);
+			setButtonAvailability(
+				commentButton,
+				Boolean(document.getElementById("post-comments") && document.getElementById("back-to-comment-btn")),
+			);
+		};
+		const handleThemeClick = () => {
+			const storedTheme = getStoredTheme();
+			const isDark = storedTheme === DARK_MODE || document.documentElement.classList.contains("dark");
+			setTheme(isDark ? LIGHT_MODE : DARK_MODE);
+			window.dispatchEvent(new CustomEvent("theme-change"));
+			syncThemeButton();
+		};
+		const handleDocumentKeydown = (event: KeyboardEvent) => {
+			if (!sheet?.classList.contains('is-open')) return;
+			if (event.key === 'Escape') {
+				event.preventDefault();
+				setSheet(false);
+				scheduleMobileDockFrame(() => tools?.focus());
+				return;
+			}
+			if (event.key !== 'Tab') return;
+			const focusables = getSheetFocusables();
+			if (focusables.length === 0) return;
+			const first = focusables[0];
+			const last = focusables[focusables.length - 1];
+			if (event.shiftKey && document.activeElement === first) {
+				event.preventDefault();
+				last.focus();
+			} else if (!event.shiftKey && document.activeElement === last) {
+				event.preventDefault();
+				first.focus();
+			}
+		};
+		const refreshPageActions = () => {
+			setSheet(false);
+			scheduleMobileDockFrame(syncActionAvailability);
+		};
+		const registerSwupHook = () => {
+			const unsubscribe = mobileDockWindow.swup?.hooks?.on("content:replace", refreshPageActions);
+			mobileDockWindow.__mobileDockSwupUnsubscribe = typeof unsubscribe === "function" ? unsubscribe : undefined;
+		};
+
+		initNavigationMenu();
+		sheet?.setAttribute('role', 'dialog');
+		sheet?.setAttribute('aria-modal', 'true');
+		tools?.addEventListener('click', () => {
+			const open = !sheet?.classList.contains('is-open');
+			setSheet(open);
+			if (open) scheduleMobileDockFrame(() => getSheetFocusables()[0]?.focus());
+		}, { signal });
+		document.addEventListener('keydown', handleDocumentKeydown, { signal });
+		desktopDockMedia.addEventListener('change', handleDesktopBreakpoint, { signal });
+		signal.addEventListener("abort", () => {
+			for (const frame of pendingMobileDockFrames) window.cancelAnimationFrame(frame);
+			pendingMobileDockFrames.clear();
+			setSheet(false);
+		}, { once: true });
+		sheet?.addEventListener("click", (event) => {
+			if (event.target instanceof Element && event.target.closest("a[href]")) setSheet(false);
+		}, { signal });
+		overlay?.addEventListener("click", () => {
+			setSheet(false);
+			scheduleMobileDockFrame(() => tools?.focus());
+		}, { signal });
+		searchButton?.addEventListener("click", () => document.getElementById("search-switch")?.click(), { signal });
+		homeButton?.addEventListener("click", () => navigateToPage("/"), { signal });
+		themeButton?.addEventListener("click", handleThemeClick, { signal });
+		topButton?.addEventListener("click", () => { setSheet(false); window.scrollTo({ top: 0, behavior: "smooth" }); }, { signal });
+		tocButton?.addEventListener("click", () => {
+			setSheet(false);
+			document.getElementById("floating-toc-btn")?.click();
+		}, { signal });
+		commentButton?.addEventListener("click", () => {
+			setSheet(false);
+			document.getElementById("back-to-comment-btn")?.click();
+		}, { signal });
+		window.addEventListener("theme-change", syncThemeButton, { signal });
+		if (mobileDockWindow.swup?.hooks) registerSwupHook();
+		else document.addEventListener("swup:enable", registerSwupHook, { signal, once: true });
+		syncThemeButton();
+		syncActionAvailability();
+		scheduleMobileDockFrame(syncActionAvailability);
+	};
+
+	mobileDockWindow.__initMobileDock = initMobileDock;
+	initMobileDock();
+</script>

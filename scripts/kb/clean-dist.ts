@@ -3,8 +3,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { repoRoot } from './paths'
 
-export async function cleanDist(): Promise<void> {
-  await fs.rm(path.join(repoRoot, '.vitepress', 'dist'), { recursive: true, force: true })
+export async function cleanDist(root = repoRoot): Promise<void> {
+  await Promise.all([
+    fs.rm(path.join(root, '.vitepress', 'dist'), { recursive: true, force: true }),
+    fs.rm(path.join(root, 'dist'), { recursive: true, force: true }),
+  ])
 }
 
 export function isMainModule(metaUrl: string, argvPath = process.argv[1]): boolean {
@@ -13,5 +16,5 @@ export function isMainModule(metaUrl: string, argvPath = process.argv[1]): boole
 
 if (isMainModule(import.meta.url)) {
   await cleanDist()
-  console.log('cleaned .vitepress/dist')
+  console.log('cleaned .vitepress/dist and dist')
 }

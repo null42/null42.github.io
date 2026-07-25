@@ -1,7 +1,7 @@
 # 个人知识库博客交接文档
 
 日期：2026-07-03  
-仓库：`E:\gitee_CodeStorage\学习\null42.github.io`  
+仓库：`<repo>`
 用户：`null42` / 昵称 `lx`  
 当前状态：已从“能跑的博客雏形”推进到“知识库内容和发布链路基本可验证”，但还没有完成最终体验打磨，尤其是知识库导航和留言正式启用。
 
@@ -23,7 +23,7 @@
 - 分节太生硬。
 - 电机控制知识库不全。
 - 不要搬旧的几个仿真页面。
-- 真正电机知识库路径是 `E:\gitee_CodeStorage\学习\MotorControl-main\motor-control-knowledge-base`。
+- 真正电机知识库路径是 `<motor-source-root>`。
 - 留言区没有真正启用。
 - 电源里误放了未完成的英文书翻译，内容杂乱。
 - 第一次上传的概念类内容不要公开展示。
@@ -50,13 +50,13 @@
 当前迁移源已经改为：
 
 ```text
-E:\gitee_CodeStorage\学习\MotorControl-main\motor-control-knowledge-base
+<motor-source-root>
 ```
 
 不再使用旧的：
 
 ```text
-E:\gitee_CodeStorage\学习\MotorControl-main\motor-learning-web
+<legacy-motor-source-root>
 ```
 
 已验证事实：
@@ -166,7 +166,7 @@ npm.cmd run build
 同步时曾遇到：
 
 ```text
-C:\ 可用空间 0 GB
+%SYSTEMDRIVE% 可用空间 0 GB
 npm run kb:sync 因 npm 写 cache/log 失败
 ```
 
@@ -388,12 +388,12 @@ node_modules\.bin\tsx.cmd scripts\kb\sync-dist.ts
 请把下面整段复制给下一位 AI：
 
 ```text
-你接手的是 `E:\gitee_CodeStorage\学习\null42.github.io` 个人知识库博客，不要从零开始。
+你接手的是 `<repo>` 个人知识库博客，不要从零开始。
 
 用户怀疑前一轮已经跑偏，所以你的第一任务不是继续加功能，而是按 `docs/handoff-2026-07-03-knowledge-blog.md` 做状态审计和收口。
 
 核心目标：
-1. 电机控制内容必须来自 `E:\gitee_CodeStorage\学习\MotorControl-main\motor-control-knowledge-base`，不要使用旧 `motor-learning-web`，也不要搬旧 `content/motor/simulations` 的网页仿真。
+1. 电机控制内容必须来自 `<motor-source-root>`，不要使用旧 `motor-learning-web`，也不要搬旧 `content/motor/simulations` 的网页仿真。
 2. 电源内容不要公开未完成英文书翻译和第一次上传的概念课程：`content/power/fundamentals-work/**`、`content/power/concepts/**`、`content/power/lessons/**` 必须从索引和发布资产中排除。
 3. 分节体验还不够好，要继续做成更像知识库学习地图，而不是生硬文件夹列表。
 4. 留言区已接入 Giscus 组件，但正式 Giscus 需要 GitHub Discussions/App 和环境变量；当前 fallback 是带文章路径的 GitHub Issue 链接。
@@ -420,4 +420,3 @@ node_modules\.bin\tsx.cmd scripts\kb\sync-dist.ts
 
 不要宣称最终完成，除非验收标准全部通过，且浏览器实际看过首页、文章库、电机入口、文章页留言区。
 ```
-

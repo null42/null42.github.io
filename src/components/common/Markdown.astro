@@ -1,9 +1,10 @@
 ---
 interface Props {
 	class: string;
+	pagefindBody?: boolean;
 }
-const className = Astro.props.class;
+const { class: className, pagefindBody = true } = Astro.props;
 ---
-<div data-pagefind-body class={`prose dark:prose-invert prose-base max-w-none! custom-md ${className}`}>
+<div data-pagefind-body={pagefindBody ? true : undefined} class={`prose dark:prose-invert prose-base max-w-none! custom-md ${className}`}>
     <slot/>
 </div>

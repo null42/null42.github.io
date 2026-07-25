@@ -1,6 +1,11 @@
+import { readFileSync } from "node:fs";
 import { h } from "hastscript";
 import { visit } from "unist-util-visit";
-import plantumlRenderScript from "./plantuml-render-script.js?raw";
+
+const plantumlRenderScript = readFileSync(
+	new URL("./plantuml-render-script.js", import.meta.url),
+	"utf8",
+);
 
 /**
  * 从 HAST 节点递归提取所有文本内容，作为 `<img>` 的 alt 回退文案。

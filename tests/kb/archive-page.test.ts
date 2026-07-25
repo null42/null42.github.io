@@ -16,13 +16,17 @@ describe('archive page filters', () => {
 
   it('surfaces learning-map shortcuts before the detailed filters', () => {
     const text = fs.readFileSync('.vitepress/theme/components/ArchivePage.vue', 'utf8')
-    const generated = JSON.parse(fs.readFileSync('.vitepress/generated/articles.json', 'utf8')) as Array<{ navGroup?: string }>
+    const generated = JSON.parse(fs.readFileSync('.vitepress/generated/articles.json', 'utf8')) as Array<{ routeTitle?: string }>
 
     expect(text).toContain('aria-label="学习地图快捷入口"')
     expect(text).toContain('const learningPaths = computed(')
     expect(text).toContain('selectLearningPath(item)')
     expect(text).toContain('全部路线')
-    expect(generated.some((article) => article.navGroup === '控制与算法')).toBe(true)
+    expect(generated.some((article) => article.routeTitle === '控制与算法')).toBe(true)
+    expect(text).toContain(':value="item.columnId || item.id"')
+    expect(text).toContain(':value="item.routeId || item.id"')
+    expect(text).toContain(':value="item.stageId || item.id"')
+    expect(text).toContain(':key="article.articleId"')
   })
 
   it('orders default article lists by curated quality before imported notes', () => {

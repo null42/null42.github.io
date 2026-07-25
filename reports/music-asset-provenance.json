@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-07-25",
+  "manifestType": "user-provided-media-asset",
+  "asset": {
+    "title": "Omg it's ビビデバ",
+    "artistLabel": "匕匕亏八（小桃不会系列）",
+    "sourcePath": "548-Omg it's ビビデバ-匕匕亏八（小桃不会系列）.mp3",
+    "sourceLocation": "User-provided local file outside the repository; the absolute workstation path is intentionally omitted from tracked reports.",
+    "sourceBytes": 4886183,
+    "sourceSha256": "70da73c54a58f462c2edca8af277f1c92f07567359dd09315bc4a81073a22501",
+    "sourceContainerFinding": "The source used an .mp3 extension but contained an AAC/MP4 stream that Chromium could not demux as MP3.",
+    "targetPath": "public/assets/music/omg-its-vivideva.mp3",
+    "targetBytes": 4752208,
+    "targetSha256": "eb6b48c901dd72a2111c6e4f8aec26f88edb73a64539ed59f6310d7cc8b2738c",
+    "transformation": "Transcoded locally with FFmpeg n5.0.1 and libmp3lame to a standard 192 kbps MP3 audio stream; no network service was used.",
+    "authorization": "The project owner explicitly authorized use of this exact local source file for the null42 knowledge blog in the Codex thread on 2026-07-25.",
+    "rightsStatus": "User-provided asset. No independent third-party redistribution license or ownership evidence was supplied; this provenance record does not assert copyright ownership.",
+    "licenseNoticeReference": "THIRD_PARTY_LICENSES.txt"
+  }
+}

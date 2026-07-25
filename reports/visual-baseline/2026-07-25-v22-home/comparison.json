@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-07-25",
+  "source": {
+    "repository": "fqzlr/my-blog",
+    "commit": "65d6daf637e3e3dda460e012b4ef4ff418796dfc",
+    "archiveSha256": "7850889de1307d7d22da16ab664fea29cca47733b955af922ae4fea4ac959b29",
+    "referenceCaptureOrigin": "Screenshots stored at the root of the pinned V2.2.2 source archive"
+  },
+  "method": "Qualitative visual review across desktop, tablet, and mobile. The pinned V2.2.2 archive only provides 300px-wide source captures, so the same fixed composition reference is used for each viewport class and is never presented as a pixel-diff or native desktop/tablet capture.",
+  "pairs": [
+    {
+      "viewportClass": "desktop",
+      "reference": "reports/visual-baseline/2026-07-25-v22-home/reference-v22-mobile-300x381.png",
+      "referenceSha256": "6bd0d19f7ed4d456976b2a37fa394fc885d1b1661d1b34f0ee92d4fdfd4b4cd5",
+      "current": "reports/visual-baseline/2026-07-25-v22-home/desktop-1440x900.png",
+      "scope": "desktop initial viewport composition",
+      "aligned": [
+        "lightweight top navigation",
+        "visual-first opening stage",
+        "content controls remain subordinate to the primary artwork"
+      ],
+      "intentionalDifferences": [
+        "the pinned source has no native desktop screenshot",
+        "the current desktop layout expands the approved scroll narrative without exposing unimplemented features"
+      ]
+    },
+    {
+      "viewportClass": "tablet",
+      "reference": "reports/visual-baseline/2026-07-25-v22-home/reference-v22-mobile-full-300x1926.png",
+      "referenceSha256": "afcd9c838351f1874ad68f2d972d111f42901c61af0b72f2ebf6a953bd1b5510",
+      "current": "reports/visual-baseline/2026-07-25-v22-home/full-tablet-768x1024.png",
+      "scope": "tablet full-page narrative",
+      "aligned": [
+        "vertical visual-led reading flow",
+        "compact navigation hierarchy",
+        "progressive content sections below the opening stage"
+      ],
+      "intentionalDifferences": [
+        "the pinned source has no native tablet screenshot",
+        "the current tablet capture uses the approved 768x1024 production viewport"
+      ]
+    },
+    {
+      "viewportClass": "mobile",
+      "reference": "reports/visual-baseline/2026-07-25-v22-home/reference-v22-mobile-300x381.png",
+      "referenceSha256": "6bd0d19f7ed4d456976b2a37fa394fc885d1b1661d1b34f0ee92d4fdfd4b4cd5",
+      "current": "reports/visual-baseline/2026-07-25-v22-home/mobile-390x844.png",
+      "scope": "mobile initial viewport",
+      "aligned": [
+        "lightweight top navigation",
+        "full-bleed primary visual",
+        "compact mobile controls"
+      ],
+      "intentionalDifferences": [
+        "site identity and navigation labels use null42 content",
+        "current capture uses the approved 390x844 production viewport"
+      ]
+    },
+    {
+      "viewportClass": "mobile",
+      "reference": "reports/visual-baseline/2026-07-25-v22-home/reference-v22-mobile-full-300x1926.png",
+      "referenceSha256": "afcd9c838351f1874ad68f2d972d111f42901c61af0b72f2ebf6a953bd1b5510",
+      "current": "reports/visual-baseline/2026-07-25-v22-home/full-mobile-390x844.png",
+      "scope": "mobile full-page flow",
+      "aligned": [
+        "vertical single-column reading flow",
+        "visual-first opening section"
+      ],
+      "intentionalDifferences": [
+        "current homepage contains the user-approved V2.2.2-inspired scroll narrative",
+        "unimplemented reference features are omitted instead of exposed"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { scanArticles } from '../../scripts/kb/articles'
 import { buildColumnFilterOptions, loadColumnRegistry, validateColumnRegistry } from '../../scripts/kb/columns'
+import type { ArticleRecord } from '../../scripts/kb/types'
 
 describe('column registry', () => {
   it('requires explicit configuration for every public column', async () => {
@@ -39,5 +40,20 @@ describe('column registry', () => {
     expect(options.stages.some((item) => item.id === 'matlab-simulink:s-function')).toBe(true)
     expect(options.routes.every((item) => item.count > 0)).toBe(true)
     expect(options.stages.every((item) => item.count > 0)).toBe(true)
+  })
+
+  it('counts canonical hierarchy fields without relying on source paths', async () => {
+    const registry = await loadColumnRegistry()
+    const article = {
+      title: 'Canonical', date: '2026-07-19', articleId: 'motor/demo', sectionId: 'motor', sectionTitle: '电机控制',
+      routeId: 'control', routeTitle: '控制与算法', stageId: 'algorithm', stageTitle: '控制算法', category: '控制算法',
+      tags: [], source: 'test', sourcePath: 'virtual.md', status: 'learning', visibility: 'public', summary: '', path: 'virtual.md',
+      url: '/content/virtual.html', body: '', slug: 'motor/demo', publicSurface: 'full', order: Number.MAX_SAFE_INTEGER, explicitOrder: false,
+    } satisfies ArticleRecord
+
+    const options = buildColumnFilterOptions(registry, [article])
+    expect(options.sections.find((item) => item.id === 'motor')?.count).toBe(1)
+    expect(options.routes.find((item) => item.id === 'motor:control')?.count).toBe(1)
+    expect(options.stages.find((item) => item.id === 'motor:algorithm')?.count).toBe(1)
   })
 })

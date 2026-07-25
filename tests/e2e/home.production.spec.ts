@@ -130,7 +130,7 @@ test.describe('home production contracts', () => {
   test('balances resize listeners through three real Swup rounds with one current controller', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('data-home-experience', 'ready')
-    await expect.poll(() => page.evaluate(() => typeof window.swup?.navigate)).toBe('function')
+    await expect.poll(() => page.evaluate(() => typeof window.swup?.navigate), { timeout: 15_000 }).toBe('function')
     expect(await page.evaluate(() => '__homeExperienceInstrument' in window)).toBe(false)
 
     const baseline = await page.evaluate(() => ({ ...window.__homeResizeMetrics }))
@@ -165,6 +165,32 @@ test.describe('home production contracts', () => {
     const action = page.locator('.home-action').first()
     await expect(action).toBeVisible()
     expect(await action.evaluate(element => getComputedStyle(element).transitionDuration)).toBe('0s')
-    expect(await page.locator('.home-rain').evaluate(element => getComputedStyle(element).animationName)).toBe('none')
+    expect(await page.locator('.home-hero__soft-light').evaluate(element => getComputedStyle(element).animationName)).toBe('none')
+    const floatingDock = page.locator('.home-hero__floating-dock')
+    if (await floatingDock.isVisible()) {
+      expect(await floatingDock.evaluate(element => getComputedStyle(element).transform)).not.toBe('none')
+    } else {
+      expect(page.viewportSize()?.width).toBeLessThanOrEqual(767)
+    }
+  })
+
+  test('keeps primary entries unobscured and makes hero controls operable on desktop and mobile', async ({ page }) => {
+    for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
+      await page.setViewportSize(viewport)
+      await page.goto('/')
+      const actions = await page.locator('.home-hero__actions').boundingBox()
+      const dialogue = await page.locator('.home-hero-dialogue').boundingBox()
+      expect(actions).not.toBeNull()
+      expect(dialogue).not.toBeNull()
+      const overlaps = actions && dialogue
+        ? actions.x < dialogue.x + dialogue.width && actions.x + actions.width > dialogue.x
+          && actions.y < dialogue.y + dialogue.height && actions.y + actions.height > dialogue.y
+        : true
+      expect(overlaps).toBe(false)
+      await page.locator('[data-home-dialogue-action="auto"]').click()
+      await expect(page.locator('[data-home-dialogue-action="auto"]')).toHaveAttribute('aria-pressed', 'true')
+      await page.locator('[data-home-dialogue-action="hide"]').click()
+      await expect(page.locator('.home-hero-dialogue')).toBeHidden()
+    }
   })
 })

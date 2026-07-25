@@ -1,0 +1,2875 @@
+{
+  "counts": {
+    "sections": 3,
+    "routes": 14,
+    "stages": 36,
+    "articles": 371
+  },
+  "relationships": {
+    "sections": [
+      {
+        "id": "power"
+      },
+      {
+        "id": "motor"
+      },
+      {
+        "id": "matlab-simulink"
+      }
+    ],
+    "routes": [
+      {
+        "id": "roadmap",
+        "sectionId": "power"
+      },
+      {
+        "id": "project",
+        "sectionId": "power"
+      },
+      {
+        "id": "debug",
+        "sectionId": "power"
+      },
+      {
+        "id": "reference",
+        "sectionId": "power"
+      },
+      {
+        "id": "intro",
+        "sectionId": "motor"
+      },
+      {
+        "id": "hardware",
+        "sectionId": "motor"
+      },
+      {
+        "id": "control",
+        "sectionId": "motor"
+      },
+      {
+        "id": "practice",
+        "sectionId": "motor"
+      },
+      {
+        "id": "ecosystem",
+        "sectionId": "motor"
+      },
+      {
+        "id": "foundation",
+        "sectionId": "matlab-simulink"
+      },
+      {
+        "id": "matlab-discrete",
+        "sectionId": "matlab-simulink"
+      },
+      {
+        "id": "simulink-discrete",
+        "sectionId": "matlab-simulink"
+      },
+      {
+        "id": "custom-blocks",
+        "sectionId": "matlab-simulink"
+      },
+      {
+        "id": "tuning-validation",
+        "sectionId": "matlab-simulink"
+      }
+    ],
+    "stages": [
+      {
+        "id": "power-overview",
+        "sectionId": "power",
+        "routeId": "roadmap"
+      },
+      {
+        "id": "roadmap",
+        "sectionId": "power",
+        "routeId": "roadmap"
+      },
+      {
+        "id": "projects",
+        "sectionId": "power",
+        "routeId": "project"
+      },
+      {
+        "id": "simulations",
+        "sectionId": "power",
+        "routeId": "project"
+      },
+      {
+        "id": "debug-records",
+        "sectionId": "power",
+        "routeId": "debug"
+      },
+      {
+        "id": "weekly-reviews",
+        "sectionId": "power",
+        "routeId": "debug"
+      },
+      {
+        "id": "archive",
+        "sectionId": "power",
+        "routeId": "debug"
+      },
+      {
+        "id": "docs",
+        "sectionId": "power",
+        "routeId": "reference"
+      },
+      {
+        "id": "reference",
+        "sectionId": "power",
+        "routeId": "reference"
+      },
+      {
+        "id": "motor-overview",
+        "sectionId": "motor",
+        "routeId": "intro"
+      },
+      {
+        "id": "learning-workspace",
+        "sectionId": "motor",
+        "routeId": "intro"
+      },
+      {
+        "id": "cross-reference",
+        "sectionId": "motor",
+        "routeId": "intro"
+      },
+      {
+        "id": "electronics-basics",
+        "sectionId": "motor",
+        "routeId": "hardware"
+      },
+      {
+        "id": "hardware",
+        "sectionId": "motor",
+        "routeId": "hardware"
+      },
+      {
+        "id": "mechanical",
+        "sectionId": "motor",
+        "routeId": "hardware"
+      },
+      {
+        "id": "power-path",
+        "sectionId": "motor",
+        "routeId": "hardware"
+      },
+      {
+        "id": "control-theory",
+        "sectionId": "motor",
+        "routeId": "control"
+      },
+      {
+        "id": "foundations",
+        "sectionId": "motor",
+        "routeId": "control"
+      },
+      {
+        "id": "algorithm",
+        "sectionId": "motor",
+        "routeId": "control"
+      },
+      {
+        "id": "motion-control",
+        "sectionId": "motor",
+        "routeId": "control"
+      },
+      {
+        "id": "pfc-motor-integration",
+        "sectionId": "motor",
+        "routeId": "control"
+      },
+      {
+        "id": "simulation",
+        "sectionId": "motor",
+        "routeId": "practice"
+      },
+      {
+        "id": "practice",
+        "sectionId": "motor",
+        "routeId": "practice"
+      },
+      {
+        "id": "advanced",
+        "sectionId": "motor",
+        "routeId": "practice"
+      },
+      {
+        "id": "ODrive",
+        "sectionId": "motor",
+        "routeId": "ecosystem"
+      },
+      {
+        "id": "VESC",
+        "sectionId": "motor",
+        "routeId": "ecosystem"
+      },
+      {
+        "id": "COMPARISON",
+        "sectionId": "motor",
+        "routeId": "ecosystem"
+      },
+      {
+        "id": "communication",
+        "sectionId": "motor",
+        "routeId": "ecosystem"
+      },
+      {
+        "id": "controllers-evolution",
+        "sectionId": "motor",
+        "routeId": "ecosystem"
+      },
+      {
+        "id": "matlab-simulink-overview",
+        "sectionId": "matlab-simulink",
+        "routeId": "foundation"
+      },
+      {
+        "id": "setup",
+        "sectionId": "matlab-simulink",
+        "routeId": "foundation"
+      },
+      {
+        "id": "matlab-discrete-control",
+        "sectionId": "matlab-simulink",
+        "routeId": "matlab-discrete"
+      },
+      {
+        "id": "simulink-discrete-control",
+        "sectionId": "matlab-simulink",
+        "routeId": "simulink-discrete"
+      },
+      {
+        "id": "matlab-function",
+        "sectionId": "matlab-simulink",
+        "routeId": "custom-blocks"
+      },
+      {
+        "id": "s-function",
+        "sectionId": "matlab-simulink",
+        "routeId": "custom-blocks"
+      },
+      {
+        "id": "parameter-auto-tuning",
+        "sectionId": "matlab-simulink",
+        "routeId": "tuning-validation"
+      }
+    ],
+    "articles": [
+      {
+        "id": "power/MISSION",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "power-overview"
+      },
+      {
+        "id": "power/USAGE",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "power-overview"
+      },
+      {
+        "id": "power/RESOURCES",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "power-overview"
+      },
+      {
+        "id": "power/NOTES",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "power-overview"
+      },
+      {
+        "id": "power/getting-started",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "power-overview"
+      },
+      {
+        "id": "power/roadmap/30-day-plan",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "roadmap"
+      },
+      {
+        "id": "power/roadmap/matlab-simulink-power-electronics-fast-track",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "roadmap"
+      },
+      {
+        "id": "power/roadmap/lesson-priority-map",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "roadmap"
+      },
+      {
+        "id": "power/roadmap/continuous-learning-path",
+        "sectionId": "power",
+        "routeId": "roadmap",
+        "stageId": "roadmap"
+      },
+      {
+        "id": "power/projects/01-boost-basics/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "projects"
+      },
+      {
+        "id": "power/projects/02-boost-c-firmware-skeleton/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "projects"
+      },
+      {
+        "id": "power/projects/03-ups-c-firmware-skeleton/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "projects"
+      },
+      {
+        "id": "power/simulations/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "simulations"
+      },
+      {
+        "id": "power/weekly-reviews/week-01-day-01",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "weekly-reviews"
+      },
+      {
+        "id": "power/archive/old-learning-records/0001-ups-system-overview",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0002-switching-devices-and-basic-topologies",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0004-digital-control-basics",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0005-phase-locked-loop",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0006-adc-sampling-techniques",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0007-single-phase-pfc",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0008-vienna-rectifier",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0009-three-level-svpwm-deep",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0010-single-phase-inverter",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0011-three-phase-inverter",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0012-llc-resonant-converter",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0013-bidirectional-dcdc-battery",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0014-cascade-coordination",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0015-backup-ups-software",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0016-online-ups-software",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0017-parallel-redundancy",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0018-protection-mechanism",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0019-communication-protocol",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0020-firmware-architecture",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0021-rtos-task-design",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0022-ota-upgrade",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0023-interview-practice",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0024-power-vs-motor",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0025-buck-boost-ccm-dcm",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/old-learning-records/0026-three-level-pon-states",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "power/archive/README",
+        "sectionId": "power",
+        "routeId": "debug",
+        "stageId": "archive"
+      },
+      {
+        "id": "motor/30-percent-roadmap",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "motor-overview"
+      },
+      {
+        "id": "motor/hardware-user-test-protocol",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "motor-overview"
+      },
+      {
+        "id": "motor/README",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "motor-overview"
+      },
+      {
+        "id": "motor/getting-started",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "motor-overview"
+      },
+      {
+        "id": "motor/hardware-validation-guide",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "motor-overview"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0001-ee-hardware-basics",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0002-ct-control-theory",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0003-hw-motor-control-hardware",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0004-alg-foc-algorithms",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0005-hpm-mc-sdk",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0006-odrive-analysis",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0007-vesc-analysis",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0008-odrive-vs-vesc",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0009-c-simulation",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0010-pfc-motor-integration",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0011-functional-safety",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0012-communication-protocols",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0013-power-conversion",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0014-foc-engineering",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0015-pmsm-simulation",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0016-sensorless-control",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0017-engineering-practice",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0018-controller-evolution",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/lessons/0019-motion-control",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/MISSION",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/NOTES",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/RESOURCES",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/index",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/reference/formula-quick-ref",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/learning-workspace/reference/glossary",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "learning-workspace"
+      },
+      {
+        "id": "motor/cross-reference/cross-reference-map",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-hpm",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-lxfoc-verification",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-ct-alg",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-new-modules",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-ee-hw",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-hw-alg",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-adv-base",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-practice",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/cross-reference/xref-motion-control",
+        "sectionId": "motor",
+        "routeId": "intro",
+        "stageId": "cross-reference"
+      },
+      {
+        "id": "motor/electronics-basics/EE-01-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-02-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-03-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-03-BJT-Basics",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-04-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-04-MOSFET-Principles",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-05-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-06-IGBT-Principles",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-06-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-07-OpAmp",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-07-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-08-Rectifier-Inverter",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-08-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-09-H-Bridge",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/EE-09-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/electronics-basics/README",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "electronics-basics"
+      },
+      {
+        "id": "motor/hardware/HW-01-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-01-Motor-Basics",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-01B-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-02-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-02-Current-Sensing",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-02B-Current-Sensing-Topologies",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-03-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-03-Position-Sensor",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-04-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-04-MCU-Peripherals",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-05-Power-Devices-Gate-Drivers",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-05-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-06-Power-Management-Protection",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-06-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-07-Thermal-EMC-Design",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/HW-07-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/hardware/README",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "hardware"
+      },
+      {
+        "id": "motor/mechanical/MEC-01-Planetary-Reducer",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "mechanical"
+      },
+      {
+        "id": "motor/mechanical/MEC-02-Cycloidal-Reducer",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "mechanical"
+      },
+      {
+        "id": "motor/mechanical/MEC-03-Multi-Turn-Encoder",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "mechanical"
+      },
+      {
+        "id": "motor/power-path/PP-01-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-02-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-03-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-03-LLC-Resonant-Converter",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-04-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-04-PFC-Power-Factor-Correction",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-05-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-05-Magnetic-Design",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-06-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-06-Loop-Compensation",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-07-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-07-Power-Conversion-Motor-Drive",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-08-Three-Level-Topology",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-08-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-09-Three-Level-SVPWM",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-09-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-10-Vienna-Rectifier",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-10-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/PP-11-assessment",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/power-path/README",
+        "sectionId": "motor",
+        "routeId": "hardware",
+        "stageId": "power-path"
+      },
+      {
+        "id": "motor/control-theory/CT-01-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-02-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-02-Time-Domain-Analysis",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-03-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-03-Frequency-Response-Bode",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-04-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-04-PID-Control-Principles",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-05-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-05-PID-Tuning-Implementation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-06-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-06-Feedforward-Control",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-07-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-07-Nyquist-Stability",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-08-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-08-Root-Locus",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-09-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-09-Compensator-Design",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-10-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-10-State-Space",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-11-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-11-Observer-Design",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-12-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-12-State-Feedback",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-13-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-13-LQR-LQG",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-14-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-14-Cascaded-PID-Control",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-15-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-15-PID-Optimization-Strategies",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-16-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-16-ADRC-Theory",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-17-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-18-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/CT-19-Model-Predictive-Control",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/control-theory/README",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "motor/foundations/FOUND-01-Per-Unit-System",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "foundations"
+      },
+      {
+        "id": "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "foundations"
+      },
+      {
+        "id": "motor/foundations/FOUND-03-SPWM-Principle-DSP",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "foundations"
+      },
+      {
+        "id": "motor/foundations/FOUND-04-SVPWM-Principle-DSP",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "foundations"
+      },
+      {
+        "id": "motor/foundations/FOUND-05-Three-Level-SVPWM-DSP",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "foundations"
+      },
+      {
+        "id": "motor/algorithm/ALG-00-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-00-Current-Loop-Intuition",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-01-FOC-Theory",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-01-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-02-Current-Sampling-Timing",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-02-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-03-PI-Current-Regulator",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-04-Deadtime-Compensation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-04-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-05-Sensored-FOC",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-05-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-06-Position-Speed-Observer",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-07-Sensorless-Observers",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-07-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-08-Initial-Position-Detection",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-08-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-09-High-Frequency-Injection",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-09-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-10-Overmodulation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-10-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-11-MTPA-Flux-Weakening",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-11-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-12-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-13-Protection-Optimization",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-13-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-14-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-15-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-15-Advanced-Research",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-16-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-17-VF-Control",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-18-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-18-Compensation-Algorithms",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-19-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-21-Parameter-Identification",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-06-HPM-MC-Sample-Apps",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-FOC-Core",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-Control-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-Porting-Guide",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-Observer",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/MC-LIB/MC-LIB-Architecture",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-00-PI-Calculator",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/README",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-00-Pole-Zero-Animation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-01-Position-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-02-Feedforward",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-03-Resonance-Suppression",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-04-Friction-Gravity",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-05-Electronic-Gearing",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-06-Multi-Axis",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-01-Kinematics-Constraints",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-02-Trapezoidal-S-Curve",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-04-Multi-Segment-Blend",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-05-Time-Optimal",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-06-Interpolation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-01-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-04-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-06-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-03-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-06-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-04-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-05-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-03-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-02-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-05-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/README",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-TP-01-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-MC-02-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/pfc-motor-integration/README",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "pfc-motor-integration"
+      },
+      {
+        "id": "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "pfc-motor-integration"
+      },
+      {
+        "id": "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "pfc-motor-integration"
+      },
+      {
+        "id": "motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "pfc-motor-integration"
+      },
+      {
+        "id": "motor/simulation/code-examples/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-01-C-Simulation-QuickStart",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-00-C-Simulation-Overview",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-05-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-05-Digital-Twin",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-02-C-Simulation-Code-Map",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/SIM-03-C-Simulation-Plotting",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/code-examples/01-pi-tuning-basic/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/code-examples/02-custom-speed-profile/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/code-examples/04-add-observer-signal/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/simulation/code-examples/05-commissioning-debug/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "simulation"
+      },
+      {
+        "id": "motor/practice/PRACTICE-11-FOC-Engineering",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "practice"
+      },
+      {
+        "id": "motor/practice/PRACTICE-12-PMSM-Simulation",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "practice"
+      },
+      {
+        "id": "motor/practice/PRACTICE-13-Sensorless-Control",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "practice"
+      },
+      {
+        "id": "motor/practice/PRACTICE-14-Engineering-Practice",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "practice"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-01-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-05-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-07-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-09-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-13-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/algorithm/ADV-ALG-15-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-01-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-02-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-03-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-04-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-05-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-06-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-07-assessment",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/advanced/README",
+        "sectionId": "motor",
+        "routeId": "practice",
+        "stageId": "advanced"
+      },
+      {
+        "id": "motor/ODrive/OD-01-Architecture",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "ODrive"
+      },
+      {
+        "id": "motor/ODrive/OD-02-FOC-Core",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "ODrive"
+      },
+      {
+        "id": "motor/ODrive/OD-03-Control-Strategy",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "ODrive"
+      },
+      {
+        "id": "motor/ODrive/OD-04-Encoder-Sensorless",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "ODrive"
+      },
+      {
+        "id": "motor/VESC/VC-01-Architecture",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "VESC"
+      },
+      {
+        "id": "motor/VESC/VC-02-FOC-Core",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "VESC"
+      },
+      {
+        "id": "motor/VESC/VC-03-Observer-Sensorless",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "VESC"
+      },
+      {
+        "id": "motor/VESC/VC-04-System-Protection",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "VESC"
+      },
+      {
+        "id": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "COMPARISON"
+      },
+      {
+        "id": "motor/communication/COM-01-CAN-Basics",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-02-CAN-FD",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-03-CAN-STM32",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-04-CAN-Simulation",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-05-Modbus",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-06-EtherCAT",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-07-Protocol-Compare",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-08-AUTOSAR-Architecture",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/COM-09-Industrial-PHY",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/communication/README",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "communication"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-01-Century-of-Feedback",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-02-Servo-Controllers-Evolution",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-03-Poles-Zeros-ODE",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-04-Pure-PD-Unimplementable",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-05-IP-Controller",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-06-Cascaded-Control",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-07-Anti-Windup",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-08-Core-Problems",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-09-Bode-Waterbed",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-10-Lead-Lag-Compensator",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-11-Audio-Feedback-Analogy",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-12-Bellman-to-LQR",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-13-CARE-vs-DARE",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-14-Youla-Parameterization",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-15-LP-QP-LQR",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-16-Trajectory-Tracking",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-17-Nonlinear-MPC",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-18-System-Identification",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-19-Observer-Design",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-20-Digital-Control-Sampling",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-21-Gain-Scheduling",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-22-H-Infinity-Robust-Control",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/CE-23-Control-Theory-FAQ",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "motor/controllers-evolution/README",
+        "sectionId": "motor",
+        "routeId": "ecosystem",
+        "stageId": "controllers-evolution"
+      },
+      {
+        "id": "matlab-simulink/README",
+        "sectionId": "matlab-simulink",
+        "routeId": "foundation",
+        "stageId": "matlab-simulink-overview"
+      },
+      {
+        "id": "matlab-simulink/foundation/MS-00-Simulation-Setup",
+        "sectionId": "matlab-simulink",
+        "routeId": "foundation",
+        "stageId": "setup"
+      },
+      {
+        "id": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+        "sectionId": "matlab-simulink",
+        "routeId": "matlab-discrete",
+        "stageId": "matlab-discrete-control"
+      },
+      {
+        "id": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+        "sectionId": "matlab-simulink",
+        "routeId": "simulink-discrete",
+        "stageId": "simulink-discrete-control"
+      },
+      {
+        "id": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+        "sectionId": "matlab-simulink",
+        "routeId": "custom-blocks",
+        "stageId": "matlab-function"
+      },
+      {
+        "id": "matlab-simulink/custom-blocks/MS-04-S-Function",
+        "sectionId": "matlab-simulink",
+        "routeId": "custom-blocks",
+        "stageId": "s-function"
+      },
+      {
+        "id": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+        "sectionId": "matlab-simulink",
+        "routeId": "tuning-validation",
+        "stageId": "parameter-auto-tuning"
+      }
+    ]
+  },
+  "mappedArticleIds": [
+    "power/MISSION",
+    "power/USAGE",
+    "power/RESOURCES",
+    "power/NOTES",
+    "power/getting-started",
+    "power/roadmap/30-day-plan",
+    "power/roadmap/matlab-simulink-power-electronics-fast-track",
+    "power/roadmap/lesson-priority-map",
+    "power/roadmap/continuous-learning-path",
+    "power/projects/01-boost-basics/README",
+    "power/projects/02-boost-c-firmware-skeleton/README",
+    "power/projects/03-ups-c-firmware-skeleton/README",
+    "power/simulations/README",
+    "power/weekly-reviews/week-01-day-01",
+    "power/archive/old-learning-records/0001-ups-system-overview",
+    "power/archive/old-learning-records/0002-switching-devices-and-basic-topologies",
+    "power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm",
+    "power/archive/old-learning-records/0004-digital-control-basics",
+    "power/archive/old-learning-records/0005-phase-locked-loop",
+    "power/archive/old-learning-records/0006-adc-sampling-techniques",
+    "power/archive/old-learning-records/0007-single-phase-pfc",
+    "power/archive/old-learning-records/0008-vienna-rectifier",
+    "power/archive/old-learning-records/0009-three-level-svpwm-deep",
+    "power/archive/old-learning-records/0010-single-phase-inverter",
+    "power/archive/old-learning-records/0011-three-phase-inverter",
+    "power/archive/old-learning-records/0012-llc-resonant-converter",
+    "power/archive/old-learning-records/0013-bidirectional-dcdc-battery",
+    "power/archive/old-learning-records/0014-cascade-coordination",
+    "power/archive/old-learning-records/0015-backup-ups-software",
+    "power/archive/old-learning-records/0016-online-ups-software",
+    "power/archive/old-learning-records/0017-parallel-redundancy",
+    "power/archive/old-learning-records/0018-protection-mechanism",
+    "power/archive/old-learning-records/0019-communication-protocol",
+    "power/archive/old-learning-records/0020-firmware-architecture",
+    "power/archive/old-learning-records/0021-rtos-task-design",
+    "power/archive/old-learning-records/0022-ota-upgrade",
+    "power/archive/old-learning-records/0023-interview-practice",
+    "power/archive/old-learning-records/0024-power-vs-motor",
+    "power/archive/old-learning-records/0025-buck-boost-ccm-dcm",
+    "power/archive/old-learning-records/0026-three-level-pon-states",
+    "power/archive/README",
+    "motor/30-percent-roadmap",
+    "motor/hardware-user-test-protocol",
+    "motor/README",
+    "motor/getting-started",
+    "motor/hardware-validation-guide",
+    "motor/learning-workspace/lessons/0001-ee-hardware-basics",
+    "motor/learning-workspace/lessons/0002-ct-control-theory",
+    "motor/learning-workspace/lessons/0003-hw-motor-control-hardware",
+    "motor/learning-workspace/lessons/0004-alg-foc-algorithms",
+    "motor/learning-workspace/lessons/0005-hpm-mc-sdk",
+    "motor/learning-workspace/lessons/0006-odrive-analysis",
+    "motor/learning-workspace/lessons/0007-vesc-analysis",
+    "motor/learning-workspace/lessons/0008-odrive-vs-vesc",
+    "motor/learning-workspace/lessons/0009-c-simulation",
+    "motor/learning-workspace/lessons/0010-pfc-motor-integration",
+    "motor/learning-workspace/lessons/0011-functional-safety",
+    "motor/learning-workspace/lessons/0012-communication-protocols",
+    "motor/learning-workspace/lessons/0013-power-conversion",
+    "motor/learning-workspace/lessons/0014-foc-engineering",
+    "motor/learning-workspace/lessons/0015-pmsm-simulation",
+    "motor/learning-workspace/lessons/0016-sensorless-control",
+    "motor/learning-workspace/lessons/0017-engineering-practice",
+    "motor/learning-workspace/lessons/0018-controller-evolution",
+    "motor/learning-workspace/lessons/0019-motion-control",
+    "motor/learning-workspace/MISSION",
+    "motor/learning-workspace/NOTES",
+    "motor/learning-workspace/RESOURCES",
+    "motor/learning-workspace/index",
+    "motor/learning-workspace/reference/formula-quick-ref",
+    "motor/learning-workspace/reference/glossary",
+    "motor/cross-reference/cross-reference-map",
+    "motor/cross-reference/xref-hpm",
+    "motor/cross-reference/xref-lxfoc-verification",
+    "motor/cross-reference/xref-ct-alg",
+    "motor/cross-reference/xref-new-modules",
+    "motor/cross-reference/xref-ee-hw",
+    "motor/cross-reference/xref-hw-alg",
+    "motor/cross-reference/xref-adv-base",
+    "motor/cross-reference/xref-practice",
+    "motor/cross-reference/xref-motion-control",
+    "motor/electronics-basics/EE-01-assessment",
+    "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+    "motor/electronics-basics/EE-02-assessment",
+    "motor/electronics-basics/EE-02-Diodes-And-Rectification",
+    "motor/electronics-basics/EE-03-assessment",
+    "motor/electronics-basics/EE-03-BJT-Basics",
+    "motor/electronics-basics/EE-04-assessment",
+    "motor/electronics-basics/EE-04-MOSFET-Principles",
+    "motor/electronics-basics/EE-05-assessment",
+    "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
+    "motor/electronics-basics/EE-06-IGBT-Principles",
+    "motor/electronics-basics/EE-06-assessment",
+    "motor/electronics-basics/EE-07-OpAmp",
+    "motor/electronics-basics/EE-07-assessment",
+    "motor/electronics-basics/EE-08-Rectifier-Inverter",
+    "motor/electronics-basics/EE-08-assessment",
+    "motor/electronics-basics/EE-09-H-Bridge",
+    "motor/electronics-basics/EE-09-assessment",
+    "motor/electronics-basics/README",
+    "motor/hardware/HW-01-assessment",
+    "motor/hardware/HW-01-Motor-Basics",
+    "motor/hardware/HW-01B-assessment",
+    "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
+    "motor/hardware/HW-02-assessment",
+    "motor/hardware/HW-02-Current-Sensing",
+    "motor/hardware/HW-02B-Current-Sensing-Topologies",
+    "motor/hardware/HW-03-assessment",
+    "motor/hardware/HW-03-Position-Sensor",
+    "motor/hardware/HW-04-assessment",
+    "motor/hardware/HW-04-MCU-Peripherals",
+    "motor/hardware/HW-05-Power-Devices-Gate-Drivers",
+    "motor/hardware/HW-05-assessment",
+    "motor/hardware/HW-06-Power-Management-Protection",
+    "motor/hardware/HW-06-assessment",
+    "motor/hardware/HW-07-Thermal-EMC-Design",
+    "motor/hardware/HW-07-assessment",
+    "motor/hardware/README",
+    "motor/mechanical/MEC-01-Planetary-Reducer",
+    "motor/mechanical/MEC-02-Cycloidal-Reducer",
+    "motor/mechanical/MEC-03-Multi-Turn-Encoder",
+    "motor/power-path/PP-01-assessment",
+    "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
+    "motor/power-path/PP-02-assessment",
+    "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
+    "motor/power-path/PP-03-assessment",
+    "motor/power-path/PP-03-LLC-Resonant-Converter",
+    "motor/power-path/PP-04-assessment",
+    "motor/power-path/PP-04-PFC-Power-Factor-Correction",
+    "motor/power-path/PP-05-assessment",
+    "motor/power-path/PP-05-Magnetic-Design",
+    "motor/power-path/PP-06-assessment",
+    "motor/power-path/PP-06-Loop-Compensation",
+    "motor/power-path/PP-07-assessment",
+    "motor/power-path/PP-07-Power-Conversion-Motor-Drive",
+    "motor/power-path/PP-08-Three-Level-Topology",
+    "motor/power-path/PP-08-assessment",
+    "motor/power-path/PP-09-Three-Level-SVPWM",
+    "motor/power-path/PP-09-assessment",
+    "motor/power-path/PP-10-Vienna-Rectifier",
+    "motor/power-path/PP-10-assessment",
+    "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
+    "motor/power-path/PP-11-assessment",
+    "motor/power-path/README",
+    "motor/control-theory/CT-01-assessment",
+    "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+    "motor/control-theory/CT-02-assessment",
+    "motor/control-theory/CT-02-Time-Domain-Analysis",
+    "motor/control-theory/CT-03-assessment",
+    "motor/control-theory/CT-03-Frequency-Response-Bode",
+    "motor/control-theory/CT-04-assessment",
+    "motor/control-theory/CT-04-PID-Control-Principles",
+    "motor/control-theory/CT-05-assessment",
+    "motor/control-theory/CT-05-PID-Tuning-Implementation",
+    "motor/control-theory/CT-06-assessment",
+    "motor/control-theory/CT-06-Feedforward-Control",
+    "motor/control-theory/CT-07-assessment",
+    "motor/control-theory/CT-07-Nyquist-Stability",
+    "motor/control-theory/CT-08-assessment",
+    "motor/control-theory/CT-08-Root-Locus",
+    "motor/control-theory/CT-09-assessment",
+    "motor/control-theory/CT-09-Compensator-Design",
+    "motor/control-theory/CT-10-assessment",
+    "motor/control-theory/CT-10-State-Space",
+    "motor/control-theory/CT-11-assessment",
+    "motor/control-theory/CT-11-Observer-Design",
+    "motor/control-theory/CT-12-assessment",
+    "motor/control-theory/CT-12-State-Feedback",
+    "motor/control-theory/CT-13-assessment",
+    "motor/control-theory/CT-13-LQR-LQG",
+    "motor/control-theory/CT-14-assessment",
+    "motor/control-theory/CT-14-Cascaded-PID-Control",
+    "motor/control-theory/CT-15-assessment",
+    "motor/control-theory/CT-15-PID-Optimization-Strategies",
+    "motor/control-theory/CT-16-assessment",
+    "motor/control-theory/CT-16-ADRC-Theory",
+    "motor/control-theory/CT-17-assessment",
+    "motor/control-theory/CT-17-LADRC-Linear-ADRC",
+    "motor/control-theory/CT-18-assessment",
+    "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
+    "motor/control-theory/CT-19-Model-Predictive-Control",
+    "motor/control-theory/README",
+    "motor/foundations/FOUND-01-Per-Unit-System",
+    "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
+    "motor/foundations/FOUND-03-SPWM-Principle-DSP",
+    "motor/foundations/FOUND-04-SVPWM-Principle-DSP",
+    "motor/foundations/FOUND-05-Three-Level-SVPWM-DSP",
+    "motor/algorithm/ALG-00-assessment",
+    "motor/algorithm/ALG-00-Current-Loop-Intuition",
+    "motor/algorithm/ALG-01-FOC-Theory",
+    "motor/algorithm/ALG-01-assessment",
+    "motor/algorithm/ALG-02-Current-Sampling-Timing",
+    "motor/algorithm/ALG-02-assessment",
+    "motor/algorithm/ALG-03-PI-Current-Regulator",
+    "motor/algorithm/ALG-04-Deadtime-Compensation",
+    "motor/algorithm/ALG-04-assessment",
+    "motor/algorithm/ALG-05-Sensored-FOC",
+    "motor/algorithm/ALG-05-assessment",
+    "motor/algorithm/ALG-06-Position-Speed-Observer",
+    "motor/algorithm/ALG-07-Sensorless-Observers",
+    "motor/algorithm/ALG-07-assessment",
+    "motor/algorithm/ALG-08-Initial-Position-Detection",
+    "motor/algorithm/ALG-08-assessment",
+    "motor/algorithm/ALG-09-High-Frequency-Injection",
+    "motor/algorithm/ALG-09-assessment",
+    "motor/algorithm/ALG-10-Overmodulation",
+    "motor/algorithm/ALG-10-assessment",
+    "motor/algorithm/ALG-11-MTPA-Flux-Weakening",
+    "motor/algorithm/ALG-11-assessment",
+    "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
+    "motor/algorithm/ALG-12-assessment",
+    "motor/algorithm/ALG-13-Protection-Optimization",
+    "motor/algorithm/ALG-13-assessment",
+    "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
+    "motor/algorithm/ALG-14-assessment",
+    "motor/algorithm/ALG-15-assessment",
+    "motor/algorithm/ALG-15-Advanced-Research",
+    "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
+    "motor/algorithm/ALG-16-assessment",
+    "motor/algorithm/ALG-17-VF-Control",
+    "motor/algorithm/ALG-18-assessment",
+    "motor/algorithm/ALG-18-Compensation-Algorithms",
+    "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
+    "motor/algorithm/ALG-19-assessment",
+    "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
+    "motor/algorithm/ALG-21-Parameter-Identification",
+    "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
+    "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
+    "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
+    "motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan",
+    "motor/algorithm/HPM-MC/SDK-06-HPM-MC-Sample-Apps",
+    "motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture",
+    "motor/algorithm/MC-LIB/MC-LIB-FOC-Core",
+    "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
+    "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
+    "motor/algorithm/MC-LIB/MC-LIB-Control-Loop",
+    "motor/algorithm/MC-LIB/MC-LIB-Porting-Guide",
+    "motor/algorithm/MC-LIB/MC-LIB-Observer",
+    "motor/algorithm/MC-LIB/MC-LIB-Architecture",
+    "motor/algorithm/ALG-00-PI-Calculator",
+    "motor/algorithm/README",
+    "motor/algorithm/ALG-00-Pole-Zero-Animation",
+    "motor/motion-control/MC-MC-01-Position-Loop",
+    "motor/motion-control/MC-MC-02-Feedforward",
+    "motor/motion-control/MC-MC-03-Resonance-Suppression",
+    "motor/motion-control/MC-MC-04-Friction-Gravity",
+    "motor/motion-control/MC-MC-05-Electronic-Gearing",
+    "motor/motion-control/MC-MC-06-Multi-Axis",
+    "motor/motion-control/MC-TP-01-Kinematics-Constraints",
+    "motor/motion-control/MC-TP-02-Trapezoidal-S-Curve",
+    "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
+    "motor/motion-control/MC-TP-04-Multi-Segment-Blend",
+    "motor/motion-control/MC-TP-05-Time-Optimal",
+    "motor/motion-control/MC-TP-06-Interpolation",
+    "motor/motion-control/MC-MC-01-assessment",
+    "motor/motion-control/MC-TP-04-assessment",
+    "motor/motion-control/MC-MC-06-assessment",
+    "motor/motion-control/MC-TP-03-assessment",
+    "motor/motion-control/MC-TP-06-assessment",
+    "motor/motion-control/MC-MC-04-assessment",
+    "motor/motion-control/MC-TP-05-assessment",
+    "motor/motion-control/MC-MC-03-assessment",
+    "motor/motion-control/MC-TP-02-assessment",
+    "motor/motion-control/MC-MC-05-assessment",
+    "motor/motion-control/README",
+    "motor/motion-control/MC-TP-01-assessment",
+    "motor/motion-control/MC-MC-02-assessment",
+    "motor/pfc-motor-integration/README",
+    "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
+    "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
+    "motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency",
+    "motor/simulation/code-examples/README",
+    "motor/simulation/SIM-01-C-Simulation-QuickStart",
+    "motor/simulation/SIM-00-C-Simulation-Overview",
+    "motor/simulation/SIM-05-assessment",
+    "motor/simulation/SIM-05-Digital-Twin",
+    "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+    "motor/simulation/SIM-02-C-Simulation-Code-Map",
+    "motor/simulation/SIM-03-C-Simulation-Plotting",
+    "motor/simulation/code-examples/01-pi-tuning-basic/README",
+    "motor/simulation/code-examples/02-custom-speed-profile/README",
+    "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
+    "motor/simulation/code-examples/04-add-observer-signal/README",
+    "motor/simulation/code-examples/05-commissioning-debug/README",
+    "motor/practice/PRACTICE-11-FOC-Engineering",
+    "motor/practice/PRACTICE-12-PMSM-Simulation",
+    "motor/practice/PRACTICE-13-Sensorless-Control",
+    "motor/practice/PRACTICE-14-Engineering-Practice",
+    "motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter",
+    "motor/advanced/algorithm/ADV-ALG-01-assessment",
+    "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
+    "motor/advanced/algorithm/ADV-ALG-05-assessment",
+    "motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling",
+    "motor/advanced/algorithm/ADV-ALG-07-assessment",
+    "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
+    "motor/advanced/algorithm/ADV-ALG-09-assessment",
+    "motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning",
+    "motor/advanced/algorithm/ADV-ALG-13-assessment",
+    "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
+    "motor/advanced/algorithm/ADV-ALG-15-assessment",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
+    "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
+    "motor/advanced/system-methodology/SYS-01-Design-Patterns",
+    "motor/advanced/system-methodology/SYS-01-assessment",
+    "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
+    "motor/advanced/system-methodology/SYS-02-assessment",
+    "motor/advanced/system-methodology/SYS-03-assessment",
+    "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
+    "motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete",
+    "motor/advanced/system-methodology/SYS-04-assessment",
+    "motor/advanced/system-methodology/SYS-05-Functional-Safety",
+    "motor/advanced/system-methodology/SYS-05-assessment",
+    "motor/advanced/system-methodology/SYS-06-assessment",
+    "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
+    "motor/advanced/system-methodology/SYS-07-assessment",
+    "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
+    "motor/advanced/README",
+    "motor/ODrive/OD-01-Architecture",
+    "motor/ODrive/OD-02-FOC-Core",
+    "motor/ODrive/OD-03-Control-Strategy",
+    "motor/ODrive/OD-04-Encoder-Sensorless",
+    "motor/VESC/VC-01-Architecture",
+    "motor/VESC/VC-02-FOC-Core",
+    "motor/VESC/VC-03-Observer-Sensorless",
+    "motor/VESC/VC-04-System-Protection",
+    "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+    "motor/communication/COM-01-CAN-Basics",
+    "motor/communication/COM-02-CAN-FD",
+    "motor/communication/COM-03-CAN-STM32",
+    "motor/communication/COM-04-CAN-Simulation",
+    "motor/communication/COM-05-Modbus",
+    "motor/communication/COM-06-EtherCAT",
+    "motor/communication/COM-07-Protocol-Compare",
+    "motor/communication/COM-08-AUTOSAR-Architecture",
+    "motor/communication/COM-09-Industrial-PHY",
+    "motor/communication/README",
+    "motor/controllers-evolution/CE-01-Century-of-Feedback",
+    "motor/controllers-evolution/CE-02-Servo-Controllers-Evolution",
+    "motor/controllers-evolution/CE-03-Poles-Zeros-ODE",
+    "motor/controllers-evolution/CE-04-Pure-PD-Unimplementable",
+    "motor/controllers-evolution/CE-05-IP-Controller",
+    "motor/controllers-evolution/CE-06-Cascaded-Control",
+    "motor/controllers-evolution/CE-07-Anti-Windup",
+    "motor/controllers-evolution/CE-08-Core-Problems",
+    "motor/controllers-evolution/CE-09-Bode-Waterbed",
+    "motor/controllers-evolution/CE-10-Lead-Lag-Compensator",
+    "motor/controllers-evolution/CE-11-Audio-Feedback-Analogy",
+    "motor/controllers-evolution/CE-12-Bellman-to-LQR",
+    "motor/controllers-evolution/CE-13-CARE-vs-DARE",
+    "motor/controllers-evolution/CE-14-Youla-Parameterization",
+    "motor/controllers-evolution/CE-15-LP-QP-LQR",
+    "motor/controllers-evolution/CE-16-Trajectory-Tracking",
+    "motor/controllers-evolution/CE-17-Nonlinear-MPC",
+    "motor/controllers-evolution/CE-18-System-Identification",
+    "motor/controllers-evolution/CE-19-Observer-Design",
+    "motor/controllers-evolution/CE-20-Digital-Control-Sampling",
+    "motor/controllers-evolution/CE-21-Gain-Scheduling",
+    "motor/controllers-evolution/CE-22-H-Infinity-Robust-Control",
+    "motor/controllers-evolution/CE-23-Control-Theory-FAQ",
+    "motor/controllers-evolution/README",
+    "matlab-simulink/README",
+    "matlab-simulink/foundation/MS-00-Simulation-Setup",
+    "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+    "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+    "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+    "matlab-simulink/custom-blocks/MS-04-S-Function",
+    "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning"
+  ],
+  "baseline": {
+    "expected": 371,
+    "mapped": 371,
+    "missing": [],
+    "unexpected": []
+  },
+  "issues": {
+    "orphan": [],
+    "duplicate": [],
+    "unknown": [],
+    "crossParent": [],
+    "empty": []
+  }
+}

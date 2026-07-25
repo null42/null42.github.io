@@ -7,14 +7,14 @@ title: Technical Translation Stack Design
 tags:
   - power-electronics
 status: learning
-summary: Build a reusable local production pipeline for English-to-Chinese technical document translation. The first validation source is `E:\文档\Fundamentals of Power El
+summary: Build a reusable local production pipeline for English-to-Chinese technical document translation. The first validation source is `<source-document-root>\Fundamentals of Power El
 ---
 
 # Technical Translation Stack Design
 
 ## Goal
 
-Build a reusable local production pipeline for English-to-Chinese technical document translation. The first validation source is `E:\文档\Fundamentals of Power Electronics 3rd Edition.pdf`, but the design must generalize to other technical books, papers, data sheets, and long PDFs.
+Build a reusable local production pipeline for English-to-Chinese technical document translation. The first validation source is `<source-document-root>\Fundamentals of Power Electronics 3rd Edition.pdf`, but the design must generalize to other technical books, papers, data sheets, and long PDFs.
 
 The pipeline must produce two complementary outputs:
 
@@ -35,7 +35,7 @@ The existing `translating-technical-literature` Codex skill must absorb improvem
 Root:
 
 ```text
-E:\software\technical-translation-stack
+%TRANSLATION_STACK_ROOT%
 ```
 
 Structure:
@@ -77,7 +77,7 @@ technical-translation-stack/
     translate_book.py
 ```
 
-`E:\software` owns tools, environments, project state, logs, and outputs. The Codex skill owns workflow knowledge, invocation rules, and quality gates.
+`<tooling-root>` owns tools, environments, project state, logs, and outputs. The Codex skill owns workflow knowledge, invocation rules, and quality gates.
 
 ## Architecture
 
@@ -250,7 +250,7 @@ Traceability:
 
 Update `translating-technical-literature` so it:
 
-- Detects or documents `E:\software\technical-translation-stack`.
+- Detects or documents `%TRANSLATION_STACK_ROOT%`.
 - Uses the local API/CLI as the preferred execution path.
 - Keeps manual extraction scripts as fallback tools.
 - Captures lessons from sample runs into references, prompts, or workflow checks.
@@ -266,7 +266,7 @@ Phase 1 is the sample-chapter closed loop, not full-book completion.
 Expected project path:
 
 ```text
-E:\software\technical-translation-stack\projects\fundamentals-power-electronics-3e
+%TRANSLATION_STACK_ROOT%\projects\fundamentals-power-electronics-3e
 ```
 
 Deliverables:

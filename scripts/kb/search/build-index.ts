@@ -3,15 +3,17 @@ import { makeSnippet } from './snippets'
 import { tokenize } from './tokenize'
 
 export interface SearchRecord {
+  articleId: string
   title: string
   url: string
   date: string
   month: string
-  section?: string
-  navGroup?: string
-  navGroupOrder?: number
-  chapter?: string
-  chapterTitle?: string
+  sectionId?: string
+  sectionTitle?: string
+  routeId?: string
+  routeTitle?: string
+  stageId?: string
+  stageTitle?: string
   category: string
   tags: string[]
   source: string
@@ -31,9 +33,9 @@ export interface SearchHeading {
 }
 
 export interface SearchFilters {
-  section?: string
-  navGroup?: string
-  chapter?: string
+  sectionId?: string
+  routeId?: string
+  stageId?: string
   tag?: string
   month?: string
   status?: string
@@ -60,9 +62,12 @@ export function buildSearchIndex(articles: ArticleRecord[]): SearchRecord[] {
       const headings = extractHeadings(article.body)
       const text = [
         article.title,
-        article.section,
-        article.chapter,
-        article.chapterTitle,
+        article.sectionId,
+        article.sectionTitle,
+        article.routeId,
+        article.routeTitle,
+        article.stageId,
+        article.stageTitle,
         article.category,
         ...article.tags,
         summary,
@@ -70,15 +75,17 @@ export function buildSearchIndex(articles: ArticleRecord[]): SearchRecord[] {
         fullBody
       ].join(' ')
       return {
+        articleId: article.articleId,
         title: article.title,
         url: article.url,
         date: article.date,
         month: article.date.slice(0, 7),
-        section: article.section,
-        navGroup: article.navGroup,
-        navGroupOrder: article.navGroupOrder,
-        chapter: article.chapter,
-        chapterTitle: article.chapterTitle,
+        sectionId: article.sectionId,
+        sectionTitle: article.sectionTitle,
+        routeId: article.routeId,
+        routeTitle: article.routeTitle,
+        stageId: article.stageId,
+        stageTitle: article.stageTitle,
         category: article.category,
         tags: article.tags,
         source: article.source,
@@ -125,7 +132,7 @@ function scoreRecord(record: SearchRecord, query: string): number {
   let score = 0
   if (record.title.toLowerCase().includes(lower)) score += 120
   if (record.tags.some((tag) => tag.toLowerCase().includes(lower))) score += 80
-  if ((record.section || '').toLowerCase().includes(lower) || (record.chapterTitle || record.chapter || '').toLowerCase().includes(lower)) score += 50
+  if ([record.sectionId, record.sectionTitle, record.routeId, record.routeTitle, record.stageId, record.stageTitle].some((value) => (value || '').toLowerCase().includes(lower))) score += 50
   if (record.headings.some((heading) => heading.text.toLowerCase().includes(lower))) score += 45
   if (record.summary.toLowerCase().includes(lower)) score += 35
   if (record.body.toLowerCase().includes(lower)) score += 10
@@ -134,9 +141,9 @@ function scoreRecord(record: SearchRecord, query: string): number {
 }
 
 function matchesFilters(record: SearchRecord, filters: SearchFilters): boolean {
-  if (filters.section && record.section !== filters.section) return false
-  if (filters.navGroup && record.navGroup !== filters.navGroup) return false
-  if (filters.chapter && record.chapter !== filters.chapter && record.chapterTitle !== filters.chapter) return false
+  if (filters.sectionId && record.sectionId !== filters.sectionId) return false
+  if (filters.routeId && record.routeId !== filters.routeId) return false
+  if (filters.stageId && record.stageId !== filters.stageId) return false
   if (filters.tag && !record.tags.includes(filters.tag)) return false
   if (filters.month && record.month !== filters.month) return false
   if (filters.status && record.status !== filters.status) return false

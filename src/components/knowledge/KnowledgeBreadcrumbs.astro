@@ -1,0 +1,7 @@
+---
+interface Props { sectionTitle?: string; routeTitle?: string; stageTitle?: string; articleTitle: string }
+const { sectionTitle, routeTitle, stageTitle, articleTitle } = Astro.props;
+const parts = [sectionTitle, routeTitle, stageTitle, articleTitle].filter(Boolean);
+---
+<nav class="knowledge-breadcrumbs" aria-label="知识文章路径"><ol>{parts.map((part, index) => <li aria-current={index === parts.length - 1 ? "page" : undefined}>{part}</li>)}</ol></nav>
+<style>.knowledge-breadcrumbs ol { display: flex; gap: .4rem; margin: 0 0 1rem; padding: 0; list-style: none; color: var(--meta-color); font-size: .85rem; flex-wrap: wrap; }.knowledge-breadcrumbs li:not(:last-child)::after { margin-inline-start: .4rem; content: "/"; }</style>

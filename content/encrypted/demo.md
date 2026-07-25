@@ -11,6 +11,4 @@ comments: false
 summary: 这是一篇加密文章，需要输入密码后阅读。
 ---
 
-> 演示密码：demo-knowledge
-
 <EncryptedArticle payload-url="/content/encrypted/demo.json" />

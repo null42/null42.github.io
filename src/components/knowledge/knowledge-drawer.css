@@ -1,0 +1,10 @@
+.knowledge-drawer { display: none; }
+@media (max-width: 84.999rem) {
+	.knowledge-drawer { display: block; }
+	.knowledge-drawer__trigger { position: fixed; left: 1rem; right: auto; bottom: calc(5rem + env(safe-area-inset-bottom)); z-index: 35; padding: .7rem 1rem; border-radius: 999px; color: white; background: var(--primary); box-shadow: var(--shadow-md); }
+	.knowledge-drawer__backdrop { position: fixed; inset: 0; z-index: 48; background: rgb(0 0 0 / .45); }
+	.knowledge-drawer__panel { position: fixed; inset: auto 0 0 0; z-index: 49; max-height: 82vh; padding: 1rem; overflow: auto; border-radius: 1.25rem 1.25rem 0 0; background: var(--page-bg); box-shadow: var(--shadow-lg); animation: knowledge-drawer-in .2s ease-out; }
+	.knowledge-drawer__panel header { display: flex; align-items: center; justify-content: space-between; margin-block-end: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) { .knowledge-drawer__panel { animation: none; } }
+@keyframes knowledge-drawer-in { from { transform: translateY(100%); } }

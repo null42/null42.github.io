@@ -35,7 +35,7 @@
 
 1. 截图 1：简洁博客布局参考。
 
-   来源：`C:/Users/30504/AppData/Local/Temp/codex-clipboard-3e89894a-8e2a-4276-acec-6a2ed72041f3.png`。
+   来源：本地临时截图（已匿名化）。
 
    提取的设计点：
 
@@ -51,7 +51,7 @@
 
 2. 截图 2：沉浸式博客首屏参考。
 
-   来源：`C:/Users/30504/AppData/Local/Temp/codex-clipboard-6c142762-9510-40c0-ab4f-503d81d8fac2.png`。
+   来源：本地临时截图（已匿名化）。
 
    提取的设计点：
 
@@ -67,7 +67,7 @@
 
 3. 截图 3：全屏氛围图与中心文案参考。
 
-   来源：`C:/Users/30504/AppData/Local/Temp/codex-clipboard-39c39194-3d36-4bcc-8849-142dd49d2f20.png`。
+   来源：本地临时截图（已匿名化）。
 
    提取的设计点：
 

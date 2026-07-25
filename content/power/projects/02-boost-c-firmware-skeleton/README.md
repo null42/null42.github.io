@@ -46,7 +46,7 @@ src/main.c             运行 5 个控制周期并打印结果
 在 PowerShell 中：
 
 ```powershell
-cd E:\gitee_CodeStorage\学习\电源
+cd <power-source-root>
 gcc -std=c99 -Wall -Wextra -Werror -I projects\02-boost-c-firmware-skeleton\src projects\02-boost-c-firmware-skeleton\src\*.c -o projects\02-boost-c-firmware-skeleton\boost_c_firmware_skeleton.exe
 projects\02-boost-c-firmware-skeleton\boost_c_firmware_skeleton.exe
 ```

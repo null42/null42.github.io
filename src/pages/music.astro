@@ -1,0 +1,23 @@
+---
+import MusicPlayer from "@/components/features/MusicPlayer.astro";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title="本地音乐" description="仅使用站点本地音频资源的持久播放器">
+	<div class="music-page card-base">
+		<header>
+			<p>LOCAL AUDIO</p>
+			<h1>本地音乐播放器</h1>
+			<span>播放状态会在站内页面切换时持续保留；首次播放必须由你主动点击。</span>
+		</header>
+		<MusicPlayer full />
+	</div>
+</MainGridLayout>
+
+<style>
+	.music-page{display:grid;gap:1.5rem;padding:clamp(1rem,3vw,2rem);border-radius:var(--radius-large)}
+	.music-page header{display:grid;gap:.35rem}
+	.music-page header p{margin:0;color:var(--primary);font-size:.72rem;font-weight:800;letter-spacing:.18em}
+	.music-page h1{margin:0;font-size:clamp(1.6rem,4vw,2.6rem)}
+	.music-page header span{color:var(--meta-divider)}
+</style>

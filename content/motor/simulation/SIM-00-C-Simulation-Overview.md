@@ -38,15 +38,15 @@ navGroupOrder: 40
 emachinery 是一个独立的 Streamlit 应用，需要**先在 Windows 中启动**才能使用：
 
 **第一步：启动仿真服务器**
-双击 `E:\new_things\emy-start.bat`（约 10 秒启动，会弹出命令行窗口和一个浏览器标签页）
+双击 `%EMACHINERY_START_SCRIPT%`（约 10 秒启动，会弹出命令行窗口和一个浏览器标签页）
 
 **第二步：在浏览器中操作仿真**
 启动后默认打开 `http://localhost:8501/`，在 Streamlit 界面中选择电机、选择仿真模式、调参数、点击「Save to C and compile」运行仿真
 
 **备用方式：仅编译运行 C 代码（无需浏览器）**
-双击 `E:\new_things\emy-c-build.bat` → 编译成功后手动运行 `main.exe` → 输出 `.dat` 数据文件
+双击 `%EMACHINERY_BUILD_SCRIPT%` → 编译成功后手动运行 `main.exe` → 输出 `.dat` 数据文件
 
->  首次使用请确保已安装 TDM-GCC-64 和 Python 虚拟环境（`E:\new_things\emy-env`）。详见 [SIM-01 环境准备](./SIM-01-C-Simulation-QuickStart.md#1-环境准备)。
+>  首次使用请确保已安装 TDM-GCC-64 和 Python 虚拟环境（`%EMACHINERY_VENV%`）。详见 [SIM-01 环境准备](./SIM-01-C-Simulation-QuickStart.md#1-环境准备)。
 
 ---
 

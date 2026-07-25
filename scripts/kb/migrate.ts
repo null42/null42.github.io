@@ -1,57 +1,19 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import { contentRoot } from './paths'
 import { convertHtmlFile } from './import/html-to-markdown'
 
-interface MigrationSource {
+export interface MigrationSource {
   name: string
+  label: string
   root: string
   target: string
   patterns?: string[]
   extraCopies?: Array<{ from: string; to: string }>
 }
 
-const sources: MigrationSource[] = [
-  {
-    name: 'power',
-    root: 'E:\\gitee_CodeStorage\\学习\\电源',
-    target: path.join(contentRoot, 'power'),
-    patterns: [
-      'archive/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'debug-records/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'docs/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'fz/**/*.{png,jpg,jpeg,gif,svg}',
-      'projects/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'reference/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'roadmap/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'simulations/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'weekly-reviews/**/*.{md,html,png,jpg,jpeg,gif,svg}',
-      'MISSION.md',
-      'NOTES.md',
-      'RESOURCES.md',
-      'USAGE.md',
-      'control-delay-timing.svg'
-    ]
-  },
-  {
-    name: 'motor',
-    root: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-control-knowledge-base',
-    target: path.join(contentRoot, 'motor'),
-    patterns: ['**/*.{md,html,png,jpg,jpeg,gif,svg,yaml,yml,json,c,h,hpp,cpp,rst}'],
-    extraCopies: [
-      {
-        from: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\Controllers-from-PID-to-QP_MPC-main\\assets\\servo-motor-controllers-slides',
-        to: path.join(contentRoot, 'motor', 'controllers-evolution', 'assets', 'servo-motor-controllers-slides')
-      }
-    ]
-  }
-]
-
-const apply = process.argv.includes('--apply')
-const overwrite = process.argv.includes('--overwrite')
-const sourceFilter = readArg('--source')
-const limit = Number(readArg('--limit') || '0')
 const includePatterns = ['**/*.{md,html,png,jpg,jpeg,gif,svg,yaml,yml,json,c,h,hpp,cpp,rst}']
 const ignorePatterns = [
   '**/.git/**',
@@ -77,47 +39,115 @@ const ignorePatterns = [
       '**/*.zip'
 ]
 
-const selectedSources = sourceFilter ? sources.filter((source) => source.name === sourceFilter) : sources
-if (selectedSources.length === 0) {
-  throw new Error(`Unknown migration source: ${sourceFilter}`)
-}
+export function resolveMigrationSources(
+  argv: string[] = process.argv.slice(2),
+  env: Record<string, string | undefined> = process.env
+): MigrationSource[] {
+  const powerRoot = readOption(argv, '--power-root') || env.KB_POWER_SOURCE_ROOT
+  const motorRoot = readOption(argv, '--motor-root') || env.KB_MOTOR_SOURCE_ROOT
+  const motorSlidesRoot = readOption(argv, '--motor-slides-root') || env.KB_MOTOR_SLIDES_ROOT
+  const sources: MigrationSource[] = []
 
-for (const source of selectedSources) {
-  const files = (await fg(source.patterns || includePatterns, {
-    cwd: source.root,
-    absolute: false,
-    onlyFiles: true,
-    ignore: ignorePatterns
-  })).slice(0, limit > 0 ? limit : undefined)
-
-  console.log(`${apply ? 'migrating' : 'dry-run'} ${files.length} files from ${source.name}`)
-  for (const file of files) {
-    const from = path.join(source.root, file)
-    const to = targetPath(source, file)
-    if (!apply) {
-      console.log(`[${file.endsWith('.html') ? 'convert-html' : 'dry-run'}] ${from} -> ${to}`)
-      continue
-    }
-    if (!(await shouldWriteTarget(to))) {
-      console.log(`[skip-existing] ${to}`)
-      continue
-    }
-    await migrateFile(from, to, source, file)
-    console.log(`[${conversionLabel(file)}] ${from} -> ${to}`)
+  if (powerRoot) {
+    sources.push({
+      name: 'power',
+      label: 'power',
+      root: powerRoot,
+      target: path.join(contentRoot, 'power'),
+      patterns: [
+        'archive/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'debug-records/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'docs/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'fz/**/*.{png,jpg,jpeg,gif,svg}',
+        'projects/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'reference/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'roadmap/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'simulations/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'weekly-reviews/**/*.{md,html,png,jpg,jpeg,gif,svg}',
+        'MISSION.md',
+        'NOTES.md',
+        'RESOURCES.md',
+        'USAGE.md',
+        'control-delay-timing.svg'
+      ]
+    })
   }
 
-  for (const extraCopy of source.extraCopies || []) {
-    if (!apply) {
-      console.log(`[dry-run-extra] ${extraCopy.from} -> ${extraCopy.to}`)
-      continue
-    }
-    await copyDirectory(extraCopy.from, extraCopy.to)
-    console.log(`[copied-extra] ${extraCopy.from} -> ${extraCopy.to}`)
+  if (motorRoot) {
+    sources.push({
+      name: 'motor',
+      label: 'motor-control-knowledge-base',
+      root: motorRoot,
+      target: path.join(contentRoot, 'motor'),
+      patterns: includePatterns,
+      extraCopies: motorSlidesRoot
+        ? [{
+            from: motorSlidesRoot,
+            to: path.join(contentRoot, 'motor', 'controllers-evolution', 'assets', 'servo-motor-controllers-slides')
+          }]
+        : undefined
+    })
   }
+
+  return sources
 }
 
-if (!apply) {
-  console.log('dry-run only; rerun with npm run kb:migrate -- --apply to copy files; add --overwrite to replace existing targets')
+async function main(argv: string[] = process.argv.slice(2), env = process.env): Promise<void> {
+  const apply = argv.includes('--apply')
+  const overwrite = argv.includes('--overwrite')
+  const sourceFilter = readOption(argv, '--source')
+  const limit = Number(readOption(argv, '--limit') || '0')
+  const sources = resolveMigrationSources(argv, env)
+  const selectedSources = sourceFilter ? sources.filter((source) => source.name === sourceFilter) : sources
+
+  if (sourceFilter && !['power', 'motor'].includes(sourceFilter)) {
+    throw new Error(`Unknown migration source: ${sourceFilter}`)
+  }
+  if (sourceFilter && selectedSources.length === 0) {
+    throw new Error(`Migration source ${sourceFilter} is not configured`)
+  }
+  if (selectedSources.length === 0) {
+    console.warn('no migration sources configured; set source root CLI options or KB_*_SOURCE_ROOT environment variables')
+    return
+  }
+
+  for (const source of selectedSources) {
+    const files = (await fg(source.patterns || includePatterns, {
+      cwd: source.root,
+      absolute: false,
+      onlyFiles: true,
+      ignore: ignorePatterns
+    })).slice(0, limit > 0 ? limit : undefined)
+
+    console.log(`${apply ? 'migrating' : 'dry-run'} ${files.length} files from ${source.label}`)
+    for (const file of files) {
+      const from = path.join(source.root, file)
+      const to = targetPath(source, file)
+      if (!apply) {
+        console.log(`[${file.endsWith('.html') ? 'convert-html' : 'dry-run'}] ${file} -> ${path.relative(contentRoot, to)}`)
+        continue
+      }
+      if (!(await shouldWriteTarget(to, overwrite))) {
+        console.log(`[skip-existing] ${path.relative(contentRoot, to)}`)
+        continue
+      }
+      await migrateFile(from, to, source, file)
+      console.log(`[${conversionLabel(file)}] ${file} -> ${path.relative(contentRoot, to)}`)
+    }
+
+    for (const extraCopy of source.extraCopies || []) {
+      if (!apply) {
+        console.log(`[dry-run-extra] ${source.name}:servo-motor-controllers-slides`)
+        continue
+      }
+      await copyDirectory(extraCopy.from, extraCopy.to, overwrite)
+      console.log(`[copied-extra] ${source.name}:servo-motor-controllers-slides`)
+    }
+  }
+
+  if (!apply) {
+    console.log('dry-run only; rerun with npm run kb:migrate -- --apply to copy files; add --overwrite to replace existing targets')
+  }
 }
 
 function sanitizePath(value: string): string {
@@ -128,9 +158,13 @@ function sanitizePath(value: string): string {
     .join(path.sep)
 }
 
-function readArg(name: string): string | undefined {
-  const index = process.argv.indexOf(name)
-  return index >= 0 ? process.argv[index + 1] : undefined
+function readOption(argv: string[], name: string): string | undefined {
+  const index = argv.indexOf(name)
+  return index >= 0 ? argv[index + 1] : undefined
+}
+
+export function isMainModule(metaUrl: string, argvPath = process.argv[1]): boolean {
+  return argvPath ? fileURLToPath(metaUrl) === path.resolve(argvPath) : false
 }
 
 function targetPath(source: MigrationSource, file: string): string {
@@ -151,7 +185,7 @@ async function migrateFile(from: string, to: string, source: MigrationSource, re
   await fs.copyFile(from, to)
 }
 
-async function shouldWriteTarget(to: string): Promise<boolean> {
+async function shouldWriteTarget(to: string, overwrite: boolean): Promise<boolean> {
   if (overwrite) return true
   try {
     await fs.access(to)
@@ -161,11 +195,11 @@ async function shouldWriteTarget(to: string): Promise<boolean> {
   }
 }
 
-async function copyDirectory(from: string, to: string): Promise<void> {
+async function copyDirectory(from: string, to: string, overwrite: boolean): Promise<void> {
   const files = await fg('**/*', { cwd: from, absolute: false, onlyFiles: true })
   for (const file of files) {
     const target = path.join(to, sanitizePath(file))
-    if (!(await shouldWriteTarget(target))) continue
+    if (!(await shouldWriteTarget(target, overwrite))) continue
     await fs.mkdir(path.dirname(target), { recursive: true })
     await fs.copyFile(path.join(from, file), target)
   }
@@ -225,4 +259,8 @@ function chapterTitleFromPath(source: string, sourcePath: string): string {
     'weekly-reviews': '周复盘'
   }
   return titles[chapter] || chapter.replace(/[-_]+/g, ' ')
+}
+
+if (isMainModule(import.meta.url)) {
+  await main()
 }

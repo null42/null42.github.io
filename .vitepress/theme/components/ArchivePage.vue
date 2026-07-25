@@ -3,12 +3,15 @@ import { computed, onMounted, ref } from 'vue'
 import { sortArticlesForLearning } from '../article-ranking'
 
 interface Article {
+  articleId: string
   title: string
   date: string
-  section?: string
-  navGroup?: string
-  chapter?: string
-  chapterTitle?: string
+  sectionId?: string
+  sectionTitle?: string
+  routeId?: string
+  routeTitle?: string
+  stageId?: string
+  stageTitle?: string
   category: string
   tags: string[]
   status: string
@@ -37,9 +40,9 @@ const ALL = '全部'
 const emptyOptions: FilterOptions = { sections: [], routes: [], stages: [], tags: [] }
 
 const query = ref('')
-const section = ref(ALL)
-const navGroup = ref(ALL)
-const chapter = ref(ALL)
+const sectionId = ref(ALL)
+const routeId = ref(ALL)
+const stageId = ref(ALL)
 const tag = ref(ALL)
 
 const typedArticles = ref<Article[]>([])
@@ -55,29 +58,23 @@ onMounted(async () => {
 })
 
 const selectedColumnId = computed(() => {
-  if (section.value === ALL) return undefined
-  return filterOptions.value.sections.find((item) => item.label === section.value)?.columnId
+  return sectionId.value === ALL ? undefined : sectionId.value
 })
 
 const selectedRouteId = computed(() => {
-  if (navGroup.value === ALL) return undefined
-  return filterOptions.value.routes.find((item) => item.label === navGroup.value && (!selectedColumnId.value || item.columnId === selectedColumnId.value))?.routeId
+  return routeId.value === ALL ? undefined : routeId.value
 })
 
-const sections = computed(() => [ALL, ...filterOptions.value.sections.map((item) => item.label)])
-const navGroups = computed(() => [
-  ALL,
-  ...filterOptions.value.routes
+const sections = computed(() => filterOptions.value.sections)
+const navGroups = computed(() =>
+  filterOptions.value.routes
     .filter((item) => !selectedColumnId.value || item.columnId === selectedColumnId.value)
-    .map((item) => item.label)
-])
-const chapters = computed(() => [
-  ALL,
-  ...filterOptions.value.stages
+)
+const chapters = computed(() =>
+  filterOptions.value.stages
     .filter((item) => !selectedColumnId.value || item.columnId === selectedColumnId.value)
     .filter((item) => !selectedRouteId.value || item.routeId === selectedRouteId.value)
-    .map((item) => item.label)
-])
+)
 const tags = computed(() => [ALL, ...filterOptions.value.tags.map((item) => item.label)])
 
 const learningPaths = computed(() =>
@@ -92,12 +89,11 @@ const learningPaths = computed(() =>
 const filtered = computed(() => {
   const needle = query.value.trim().toLowerCase()
   const matches = typedArticles.value.filter((article) => {
-    const articleChapter = article.chapterTitle || article.chapter
-    const matchesSection = section.value === ALL || article.section === section.value || article.category === section.value
-    const matchesNavGroup = navGroup.value === ALL || article.navGroup === navGroup.value
-    const matchesChapter = chapter.value === ALL || articleChapter === chapter.value || article.chapter === chapter.value
+    const matchesSection = sectionId.value === ALL || article.sectionId === sectionId.value
+    const matchesNavGroup = routeId.value === ALL || article.routeId === routeId.value
+    const matchesChapter = stageId.value === ALL || article.stageId === stageId.value
     const matchesTag = tag.value === ALL || article.tags.includes(tag.value)
-    const haystack = [article.title, article.summary, article.section, article.navGroup, article.category, articleChapter, article.status, article.type, article.quality, ...article.tags]
+    const haystack = [article.title, article.summary, article.sectionId, article.sectionTitle, article.routeId, article.routeTitle, article.stageId, article.stageTitle, article.category, article.status, article.type, article.quality, ...article.tags]
       .filter(Boolean)
       .join(' ')
       .toLowerCase()
@@ -106,10 +102,10 @@ const filtered = computed(() => {
   return sortArticlesForLearning(matches)
 })
 
-function selectLearningPath(item?: { section: string; label: string }) {
-  section.value = item?.section || ALL
-  navGroup.value = item?.label || ALL
-  chapter.value = ALL
+function selectLearningPath(item?: { columnId?: string; routeId?: string }) {
+  sectionId.value = item?.columnId || ALL
+  routeId.value = item?.routeId || ALL
+  stageId.value = ALL
 }
 </script>
 
@@ -126,7 +122,7 @@ function selectLearningPath(item?: { section: string; label: string }) {
     <div class="kb-learning-paths" aria-label="学习地图快捷入口">
       <button
         class="kb-path-chip"
-        :class="{ active: section === ALL && navGroup === ALL }"
+        :class="{ active: sectionId === ALL && routeId === ALL }"
         type="button"
         @click="selectLearningPath()"
       >
@@ -136,7 +132,7 @@ function selectLearningPath(item?: { section: string; label: string }) {
         v-for="item in learningPaths"
         :key="item.id"
         class="kb-path-chip"
-        :class="{ active: section === item.section && navGroup === item.label }"
+        :class="{ active: sectionId === item.columnId && routeId === item.routeId }"
         type="button"
         @click="selectLearningPath(item)"
       >
@@ -148,14 +144,17 @@ function selectLearningPath(item?: { section: string; label: string }) {
 
     <div class="kb-filterbar kb-filterbar-archive">
       <input v-model="query" class="kb-search-input" aria-label="关键词搜索" title="搜索 Buck / FOC / SVPWM / 采样时序" />
-      <select v-model="section" class="kb-select" aria-label="栏目">
-        <option v-for="item in sections" :key="item" :value="item">{{ item }}</option>
+      <select v-model="sectionId" class="kb-select" aria-label="栏目">
+        <option :value="ALL">{{ ALL }}</option>
+        <option v-for="item in sections" :key="item.id" :value="item.columnId || item.id">{{ item.label }}</option>
       </select>
-      <select v-model="navGroup" class="kb-select" aria-label="学习路线">
-        <option v-for="item in navGroups" :key="item" :value="item">{{ item }}</option>
+      <select v-model="routeId" class="kb-select" aria-label="学习路线">
+        <option :value="ALL">{{ ALL }}</option>
+        <option v-for="item in navGroups" :key="item.id" :value="item.routeId || item.id">{{ item.label }}</option>
       </select>
-      <select v-model="chapter" class="kb-select" aria-label="阶段">
-        <option v-for="item in chapters" :key="item" :value="item">{{ item }}</option>
+      <select v-model="stageId" class="kb-select" aria-label="阶段">
+        <option :value="ALL">{{ ALL }}</option>
+        <option v-for="item in chapters" :key="item.id" :value="item.stageId || item.id">{{ item.label }}</option>
       </select>
       <select v-model="tag" class="kb-select" aria-label="标签">
         <option v-for="item in tags" :key="item" :value="item">{{ item }}</option>
@@ -165,9 +164,9 @@ function selectLearningPath(item?: { section: string; label: string }) {
     <div class="kb-result-count">{{ filtered.length }} 篇文章</div>
 
     <div class="kb-article-list">
-      <a v-for="article in filtered" :key="article.url" class="kb-article-card" :href="article.url">
+      <a v-for="article in filtered" :key="article.articleId" class="kb-article-card" :href="article.url">
         <span class="kb-article-date">
-          {{ article.date }} / {{ article.section || article.category }}<template v-if="article.navGroup"> / {{ article.navGroup }}</template><template v-if="article.chapterTitle || article.chapter"> / {{ article.chapterTitle || article.chapter }}</template>
+          {{ article.date }} / {{ article.sectionTitle || article.sectionId || article.category }}<template v-if="article.routeTitle || article.routeId"> / {{ article.routeTitle || article.routeId }}</template><template v-if="article.stageTitle || article.stageId"> / {{ article.stageTitle || article.stageId }}</template>
         </span>
         <strong>{{ article.title }}</strong>
         <span class="kb-article-summary">{{ article.summary }}</span>

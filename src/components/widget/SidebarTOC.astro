@@ -81,39 +81,33 @@ const showTitle = widgetConfig?.showTitle !== false;
     }
   }
 
-  // 初始化
-  // 确保 DOM 准备好后再执行
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSidebarTOC);
+  if (!window.sidebarTOCListenersInitialized) {
+    window.sidebarTOCListenersInitialized = true;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initSidebarTOC, { once: true });
+    } else {
+      initSidebarTOC();
+    }
+
+    document.addEventListener("swup:contentReplaced", () => {
+      setTimeout(initSidebarTOC, 100);
+    });
+    document.addEventListener("astro:page-load", () => {
+      setTimeout(initSidebarTOC, 100);
+    });
+    window.addEventListener("popstate", () => {
+      setTimeout(initSidebarTOC, 200);
+    });
+    window.addEventListener("hashchange", () => {
+      if (!window.tocInternalNavigation) {
+        setTimeout(initSidebarTOC, 100);
+      }
+      window.tocInternalNavigation = false;
+    });
+    document.addEventListener("password:decrypted", () => {
+      setTimeout(initSidebarTOC, 200);
+    });
   } else {
     initSidebarTOC();
   }
-
-  // 页面切换时重新初始化
-  document.addEventListener("swup:contentReplaced", () => {
-    setTimeout(initSidebarTOC, 100);
-  });
-  
-  // Astro 页面切换事件
-  document.addEventListener("astro:page-load", () => {
-    setTimeout(initSidebarTOC, 100);
-  });
-  
-  // 浏览器导航事件
-  window.addEventListener("popstate", () => {
-    setTimeout(initSidebarTOC, 200);
-  });
-  
-  // 监听 hashchange（但排除 TOC 内部导航）
-  window.addEventListener("hashchange", () => {
-    if (!window.tocInternalNavigation) {
-      setTimeout(initSidebarTOC, 100);
-    }
-    window.tocInternalNavigation = false;
-  });
-
-  // 密码解密后重新初始化 TOC
-  document.addEventListener("password:decrypted", () => {
-    setTimeout(initSidebarTOC, 200);
-  });
 </script>

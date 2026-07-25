@@ -11,14 +11,14 @@ title:  C 仿真代码修改示例
 tags:
   - motor-control
 status: learning
-summary: 本目录提供安全、可复制的仿真代码修改示例。所有修改基于 `E:\new_things\emachinery\` 中的原文件，但**存放在此处，不覆盖原文件**。
+summary: 本目录提供安全、可复制的仿真代码修改示例。所有修改基于 `%EMACHINERY_ROOT%\` 中的原文件，但**存放在此处，不覆盖原文件**。
 navGroup: 实践与验证
 navGroupOrder: 40
 ---
 
 #  C 仿真代码修改示例
 
-本目录提供安全、可复制的仿真代码修改示例。所有修改基于 `E:\new_things\emachinery\` 中的原文件，但**存放在此处，不覆盖原文件**。
+本目录提供安全、可复制的仿真代码修改示例。所有修改基于 `%EMACHINERY_ROOT%\` 中的原文件，但**存放在此处，不覆盖原文件**。
 
 ## 使用方式
 

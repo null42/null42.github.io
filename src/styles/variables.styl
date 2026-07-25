@@ -1,6 +1,6 @@
 /* ===== 基础变量定义 ===== */
 :root
-  --radius-large: 1rem
+  --radius-large: 0.75rem
   --content-delay: 150ms
 
 /* ===== 主题相关变量 ===== */
@@ -297,6 +297,41 @@
   --z-navbar: 20
   --z-banner: 10
   --z-content: 30
+
+/* Firefly Mod reference shell: neutral, transparent surfaces. */
+:root
+  --primary: oklch(0.30 0 0)
+  --page-bg: oklch(0.985 0 0)
+  --card-bg: transparent
+  --card-bg-transparent: transparent
+  --deep-text: oklch(0.12 0 0)
+  --btn-content: oklch(0.24 0 0)
+  --btn-regular-bg: transparent
+  --btn-regular-bg-hover: oklch(0.94 0 0)
+  --btn-regular-bg-active: oklch(0.9 0 0)
+  --btn-plain-bg-hover: oklch(0.94 0 0)
+  --btn-plain-bg-active: oklch(0.9 0 0)
+  --line-divider: oklch(0.86 0 0)
+  --line-color: oklch(0.86 0 0)
+  --float-panel-bg: oklch(1 0 0)
+  --shadow-md: none
+  --shadow-navbar: none
+
+:root.dark
+  --primary: oklch(0.86 0 0)
+  --page-bg: oklch(0.075 0 0)
+  --card-bg: transparent
+  --card-bg-transparent: transparent
+  --deep-text: oklch(0.9 0 0)
+  --btn-content: oklch(0.86 0 0)
+  --btn-regular-bg: transparent
+  --btn-regular-bg-hover: oklch(0.18 0 0)
+  --btn-regular-bg-active: oklch(0.22 0 0)
+  --btn-plain-bg-hover: oklch(0.18 0 0)
+  --btn-plain-bg-active: oklch(0.22 0 0)
+  --line-divider: oklch(0.25 0 0)
+  --line-color: oklch(0.25 0 0)
+  --float-panel-bg: oklch(0.1 0 0)
 
 /* ===== 性能优化变量 ===== */
 :root

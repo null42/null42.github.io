@@ -1,0 +1,37 @@
+---
+import { homeConfig } from '@/config/homeConfig'
+---
+
+<section class="home-portfolio" data-home-section="shutter" aria-labelledby="home-shutter-title">
+  <header class="home-portfolio__header">
+    <p>{homeConfig.shutter.eyebrow}</p>
+    <h2 id="home-shutter-title">{homeConfig.shutter.title}</h2>
+    <span>{homeConfig.shutter.description}</span>
+  </header>
+  <div class="home-portfolio-shutter">
+    {homeConfig.shutter.items.map((item, index) => (
+      <a href={item.href} style={`--shutter-image:url('${item.image}')`} aria-label={item.label}>
+        <i aria-hidden="true"></i><b>{String(index + 1).padStart(2, '0')}</b><strong>{item.label}</strong>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .home-portfolio{min-height:var(--home-viewport-height,100dvh);padding:clamp(5rem,9vw,8rem) clamp(1rem,5vw,5rem);color:#32343d;background:linear-gradient(155deg,#f8f2f5,#eef8f5)}
+  .home-portfolio__header{display:grid;grid-template-columns:minmax(0,1fr) minmax(16rem,.72fr);gap:1rem 4rem;max-width:92rem;margin:0 auto 2.5rem}
+  .home-portfolio__header p{grid-column:1/-1;margin:0;color:#4a9e8d;font-size:.72rem;letter-spacing:.18em}
+  .home-portfolio__header h2{margin:0;font-size:clamp(2rem,5vw,4.75rem);line-height:1.05;max-width:15ch}
+  .home-portfolio__header span{align-self:end;color:#6d717a;line-height:1.8}
+  .home-portfolio-shutter{display:flex;gap:.75rem;max-width:92rem;height:min(54vw,38rem);min-height:28rem;margin:auto}
+  .home-portfolio-shutter a{position:relative;flex:1;min-width:0;overflow:hidden;border-radius:1.5rem;color:#fff;background:#6a8e88;box-shadow:0 1.25rem 3.5rem #617b7828;transition:flex .55s cubic-bezier(.2,.75,.25,1),transform .35s ease}
+  .home-portfolio-shutter a::before{content:"";position:absolute;inset:0;background-image:linear-gradient(180deg,#18252312,#182523a8),var(--shutter-image);background-size:cover;background-position:center;transition:transform .65s ease}
+  .home-portfolio-shutter a:hover,.home-portfolio-shutter a:focus-visible{flex:2.4;transform:translateY(-.35rem)}
+  .home-portfolio-shutter a:hover::before,.home-portfolio-shutter a:focus-visible::before{transform:scale(1.045)}
+  .home-portfolio-shutter i{position:absolute;inset:1rem;border:1px solid #ffffff66;border-radius:1rem}
+  .home-portfolio-shutter b,.home-portfolio-shutter strong{position:absolute;z-index:1;left:1.5rem}
+  .home-portfolio-shutter b{top:1.5rem;font-size:.7rem;letter-spacing:.14em}
+  .home-portfolio-shutter strong{bottom:1.5rem;font-size:clamp(1rem,2vw,1.5rem);writing-mode:vertical-rl;letter-spacing:.15em}
+  @media(max-width:767px){.home-portfolio{min-height:auto;padding-block:4.5rem}.home-portfolio__header{display:block}.home-portfolio__header h2{margin:.7rem 0 1rem}.home-portfolio-shutter{display:grid;height:auto;min-height:0}.home-portfolio-shutter a{min-height:9rem}.home-portfolio-shutter a:hover,.home-portfolio-shutter a:focus-visible{transform:none}.home-portfolio-shutter strong{writing-mode:horizontal-tb}}
+  @media(prefers-reduced-motion:reduce){.home-portfolio-shutter a,.home-portfolio-shutter a::before{transition:none}.home-portfolio-shutter a:hover,.home-portfolio-shutter a:focus-visible{transform:none}}
+</style>

@@ -6,6 +6,16 @@ import { scanArticles } from '../../scripts/kb/articles'
 import { scanMarkdownFiles, writeCompletedFrontmatter } from '../../scripts/kb/articles'
 
 describe('article scanning', () => {
+  it('rejects a content root that is itself a symbolic link', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-content-root-link-'))
+    const externalRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-content-root-external-'))
+    await fs.writeFile(path.join(externalRoot, 'outside.md'), '# Outside')
+    const linkedRoot = path.join(root, 'content')
+    await fs.symlink(externalRoot, linkedRoot, process.platform === 'win32' ? 'junction' : 'dir')
+
+    await expect(scanMarkdownFiles({ contentRoot: linkedRoot })).rejects.toThrow(/content root must not be a symbolic link/i)
+  })
+
   it('scans markdown files, completes missing metadata, and excludes private articles from public records', async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-articles-'))
     const content = path.join(root, 'content')
@@ -69,7 +79,7 @@ describe('article scanning', () => {
     expect(raw).not.toContain('T00:00:00.000Z')
   })
 
-  it('inherits section and chapter metadata from category files', async () => {
+  it('normalizes inherited section and chapter metadata from category files', async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kb-section-chapter-'))
     const content = path.join(root, 'content')
     const chapter = path.join(content, 'power', '02-pfc')
@@ -80,10 +90,14 @@ describe('article scanning', () => {
 
     const result = await scanArticles({ contentRoot: content })
 
-    expect(result.articles[0].section).toBe('Power')
-    expect(result.articles[0].chapter).toBe('02-PFC')
-    expect(result.articles[0].chapterTitle).toBe('Power Factor Correction')
-    expect(result.articles[0].chapterOrder).toBe(20)
+    expect(result.articles[0]).toMatchObject({
+      sectionId: 'Power',
+      sectionTitle: 'Power',
+      stageId: '02-PFC',
+      stageTitle: 'Power Factor Correction',
+    })
+    expect(result.articles[0]).not.toHaveProperty('section')
+    expect(result.articles[0]).not.toHaveProperty('chapter')
   })
 
   it('excludes encrypted wrappers from public article records', async () => {

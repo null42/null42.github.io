@@ -137,7 +137,30 @@ const archiveUrl = url("/archive/");
 </style>
 
 <script>
+  type CategoryBarLifecycle = { dispose: () => void };
+  const categoryBarWindow = window as typeof window & {
+    __categoryBarLifecycle?: CategoryBarLifecycle;
+  };
+  categoryBarWindow.__categoryBarLifecycle?.dispose();
+
+  const lifecycleAbortController = new AbortController();
+  const { signal } = lifecycleAbortController;
+  const boundCategoryBars = new WeakSet<HTMLElement>();
+  const boundCategoryScrolls = new WeakSet<HTMLElement>();
+  const pendingCategoryBarFrames = new Set<number>();
   let delayedCategoryBarScrollTimer: number | undefined;
+  let swupVisitStartUnsubscribe: (() => void) | undefined;
+  let disposed = false;
+
+  function scheduleCategoryBarFrame(callback: () => void) {
+    if (disposed) return;
+    const frame = window.requestAnimationFrame(() => {
+      pendingCategoryBarFrames.delete(frame);
+      if (disposed) return;
+      callback();
+    });
+    pendingCategoryBarFrames.add(frame);
+  }
 
   function getCategoryBarState(bar: HTMLElement, currentUrl: URL) {
     const pathname = currentUrl.pathname.replace(/\/$/, "");
@@ -248,8 +271,9 @@ const archiveUrl = url("/archive/");
     if (deferScroll) {
       // 等主内容上移完成后再定位分类，避免出现“先横向滚动后上移”的卡顿观感。
       delayedCategoryBarScrollTimer = window.setTimeout(() => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
+        if (disposed) return;
+        scheduleCategoryBarFrame(() => {
+          scheduleCategoryBarFrame(() => {
             scrollActiveCategoryIntoView(bar, scrollBehavior);
             updateScrollHint();
           });
@@ -264,9 +288,9 @@ const archiveUrl = url("/archive/");
 
   function initCategoryBarInteractions() {
     const bar = document.getElementById("category-bar");
-    if (!bar || bar.dataset.clickBound === "true") return;
+    if (!bar || boundCategoryBars.has(bar)) return;
 
-    bar.dataset.clickBound = "true";
+    boundCategoryBars.add(bar);
     bar.addEventListener("click", (event) => {
       if (!(event.target instanceof Element)) return;
 
@@ -291,7 +315,7 @@ const archiveUrl = url("/archive/");
 
       setActiveCategory(bar, targetUrl);
       scrollActiveCategoryIntoView(bar, "auto");
-    });
+    }, { signal });
   }
 
   function initScrollFeatures() {
@@ -301,22 +325,21 @@ const archiveUrl = url("/archive/");
     const scroll = bar.querySelector<HTMLElement>(".category-scroll");
     if (!scroll) return;
 
-    if (scroll.dataset.featuresBound === "true") {
+    if (boundCategoryScrolls.has(scroll)) {
       updateScrollHint();
       return;
     }
-    scroll.dataset.featuresBound = "true";
+    boundCategoryScrolls.add(scroll);
 
     // 鼠标滚轮横向滚动
     scroll.addEventListener("wheel", (e) => {
       if (scroll.scrollWidth <= scroll.clientWidth) return;
       e.preventDefault();
       scroll.scrollLeft += e.deltaY;
-    }, { passive: false });
+    }, { passive: false, signal });
 
     // 监听滚动更新提示图标
-    scroll.addEventListener("scroll", updateScrollHint);
-    window.addEventListener("resize", updateScrollHint);
+    scroll.addEventListener("scroll", updateScrollHint, { signal });
     updateScrollHint();
   }
 
@@ -355,34 +378,65 @@ const archiveUrl = url("/archive/");
     }
   }
 
+  const categoryBarResizeListener = updateScrollHint as typeof updateScrollHint & {
+    __categoryBarResizeListener?: boolean;
+  };
+  categoryBarResizeListener.__categoryBarResizeListener = true;
+  window.addEventListener("resize", categoryBarResizeListener, { signal });
+
   updateCategoryBar();
   initCategoryBarInteractions();
   initScrollFeatures();
   document.addEventListener("astro:page-load", () => {
     updateCategoryBar();
+    initCategoryBarInteractions();
     initScrollFeatures();
-  });
+  }, { signal });
   document.addEventListener("swup:contentReplaced", () => {
     updateCategoryBar();
+    initCategoryBarInteractions();
+    initScrollFeatures();
     // 某些 swup 生命周期下 URL/DOM 状态同步稍晚，下一帧再校正一次避免状态残留
-    requestAnimationFrame(() => {
+    scheduleCategoryBarFrame(() => {
       updateCategoryBar();
     });
-  });
+  }, { signal });
 
   // 在 Swup 导航时提前更新状态，避免切换期间激活态闪烁
   function setupSwupEarlyUpdate() {
     if (!window.swup?.hooks) return;
-    window.swup.hooks.on("visit:start", (visit: any) => {
+    swupVisitStartUnsubscribe?.();
+    const unsubscribe = window.swup.hooks.on("visit:start", (visit: any) => {
       const bar = document.getElementById("category-bar");
       if (!bar) return;
       const targetUrl = new URL(visit.to.url, window.location.href);
       setActiveCategory(bar, targetUrl);
     });
+    swupVisitStartUnsubscribe = typeof unsubscribe === "function" ? unsubscribe : undefined;
   }
   if (window.swup?.hooks) {
     setupSwupEarlyUpdate();
   } else {
-    document.addEventListener("swup:enable", setupSwupEarlyUpdate);
+    document.addEventListener("swup:enable", setupSwupEarlyUpdate, { signal, once: true });
   }
+
+  const lifecycle: CategoryBarLifecycle = {
+    dispose: () => {
+      if (disposed) return;
+      disposed = true;
+      lifecycleAbortController.abort();
+      swupVisitStartUnsubscribe?.();
+      swupVisitStartUnsubscribe = undefined;
+      if (delayedCategoryBarScrollTimer) {
+        window.clearTimeout(delayedCategoryBarScrollTimer);
+        delayedCategoryBarScrollTimer = undefined;
+      }
+      for (const frame of pendingCategoryBarFrames) window.cancelAnimationFrame(frame);
+      pendingCategoryBarFrames.clear();
+      if (categoryBarWindow.__categoryBarLifecycle === lifecycle) {
+        delete categoryBarWindow.__categoryBarLifecycle;
+      }
+    },
+  };
+  categoryBarWindow.__categoryBarLifecycle = lifecycle;
 </script>

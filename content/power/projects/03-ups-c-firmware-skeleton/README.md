@@ -65,7 +65,7 @@ src/main.c                  运行 9 个 tick 并打印证据
 在 PowerShell 中：
 
 ```powershell
-cd E:\gitee_CodeStorage\学习\电源
+cd <power-source-root>
 gcc -std=c99 -Wall -Wextra -Werror -I projects\03-ups-c-firmware-skeleton\src projects\03-ups-c-firmware-skeleton\src\*.c -o projects\03-ups-c-firmware-skeleton\ups_c_firmware_skeleton.exe
 projects\03-ups-c-firmware-skeleton\ups_c_firmware_skeleton.exe
 ```

@@ -1,0 +1,18 @@
+---
+import KnowledgeTree from "./KnowledgeTree.astro";
+import "./knowledge-drawer.css";
+interface Props { currentSectionId?: string; currentRouteId?: string; currentStageId?: string; currentArticleId?: string }
+const props = Astro.props;
+---
+<div class="knowledge-drawer" data-knowledge-drawer>
+	<button class="knowledge-drawer__trigger" type="button" data-drawer-open aria-expanded="false" aria-controls="knowledge-drawer-panel">知识目录</button>
+	<div class="knowledge-drawer__backdrop" data-drawer-backdrop hidden></div>
+	<dialog class="knowledge-drawer__panel" id="knowledge-drawer-panel" data-drawer-panel hidden aria-hidden="true" aria-modal="true" aria-label="移动知识目录">
+		<header><strong>知识目录</strong><button type="button" data-drawer-close aria-label="关闭知识目录">关闭</button></header>
+		<KnowledgeTree {...props} storageNamespace="drawer" instanceId="knowledge-tree-drawer" />
+	</dialog>
+</div>
+<script>
+	import { installKnowledgeDrawerLifecycle } from "@/utils/knowledge-drawer-controller";
+	installKnowledgeDrawerLifecycle(window.swup);
+</script>

@@ -1,13 +1,22 @@
-export type Visibility = 'public' | 'hidden' | 'private' | string
+export type Visibility = 'public' | 'hidden' | 'private' | 'encrypted'
 export type ArticleQuality = 'curated' | 'draft' | 'imported' | 'needsRewrite' | string
 
 export interface CategoryDefaults {
   section?: string
+  sectionId?: string
+  sectionTitle?: string
   chapter?: string
   chapterTitle?: string
   chapterOrder?: number
   navGroup?: string
+  routeId?: string
+  routeTitle?: string
+  routeOrder?: number
   navGroupOrder?: number
+  stage?: string
+  stageId?: string
+  stageTitle?: string
+  stageOrder?: number
   category?: string
   source?: string
   defaultTags?: string[]
@@ -17,6 +26,7 @@ export interface CategoryDefaults {
   visibility?: Visibility
   quality?: ArticleQuality
   order?: number
+  explicitOrder?: boolean
   slug?: string
   description?: string
   aliases?: string[]
@@ -29,10 +39,19 @@ export interface ArticleFrontmatter {
   date?: string
   updated?: string
   section?: string
+  sectionId?: string
+  sectionTitle?: string
   chapter?: string
+  stage?: string
+  stageId?: string
+  stageTitle?: string
+  articleId?: string
   chapterTitle?: string
   chapterOrder?: number
   navGroup?: string
+  routeId?: string
+  routeTitle?: string
+  routeOrder?: number
   navGroupOrder?: number
   order?: number
   category?: string
@@ -54,17 +73,21 @@ export interface ArticleRecord {
   title: string
   date: string
   updated?: string
-  section?: string
-  chapter?: string
-  chapterTitle?: string
-  chapterOrder?: number
-  navGroup?: string
-  navGroupOrder?: number
-  order?: number
+  sectionId?: string
+  sectionTitle?: string
+  stageId?: string
+  stageTitle?: string
+  stageOrder?: number
+  articleId: string
+  routeId?: string
+  routeTitle?: string
+  routeOrder?: number
+  order: number
+  explicitOrder: boolean
   category: string
   tags: string[]
   source: string
-  sourcePath?: string
+  sourcePath: string
   type?: string
   difficulty?: string
   suggestedTags?: string[]
@@ -75,6 +98,8 @@ export interface ArticleRecord {
   path: string
   url: string
   body: string
+  slug: string
+  publicSurface: 'full' | 'placeholder' | 'excluded'
 }
 
 export interface CompletionContext {

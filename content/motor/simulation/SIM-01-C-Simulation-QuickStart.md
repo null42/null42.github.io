@@ -28,13 +28,13 @@ navGroupOrder: 40
 
 ## 1. 环境准备
 
-仿真运行需要以下环境组件，均在 `E:\new_things\` 目录下预装完毕。如果你是首次使用本机，请逐项确认每个组件都能正常工作。
+仿真运行需要以下环境组件，均在 `%SIMULATION_TOOLS_ROOT%\` 目录下预装完毕。如果你是首次使用本机，请逐项确认每个组件都能正常工作。
 
 ### 1.1 TDM-GCC-64 编译器
 
 | 属性 | 值 |
 |------|-----|
-| **路径** | `C:\TDM-GCC-64\bin` |
+| **路径** | `%TDM_GCC_ROOT%\bin` |
 | **用途** | 编译 C 仿真代码（`gcc` / `gmake`） |
 
 **验证方法：** 打开命令行，输入 `gcc --version`，应能看到版本信息。
@@ -43,20 +43,20 @@ navGroupOrder: 40
 gcc (tdm64-1) 10.3.0
 ```
 
-如果提示 "不是内部或外部命令"，说明 `C:\TDM-GCC-64\bin` 未被添加到系统 PATH 中。启动脚本已自动处理此问题，无需手动添加。
+如果提示 "不是内部或外部命令"，说明 `%TDM_GCC_ROOT%\bin` 未被添加到系统 PATH 中。启动脚本已自动处理此问题，无需手动添加。
 
 ### 1.2 Python 虚拟环境
 
 | 属性 | 值 |
 |------|-----|
-| **路径** | `E:\new_things\emy-env` |
+| **路径** | `%EMACHINERY_VENV%` |
 | **Python 版本** | 3.12 |
 | **已安装的关键包** | `streamlit`（GUI）、`numpy`（数值计算）、`pandas`（数据处理）、`matplotlib`（绘图）、`control`（控制系统分析）、`sympy`（符号计算）、`numba`（JIT 加速） |
 
 **验证方法：**
 
 ```bash
-E:\new_things\emy-env\Scripts\activate.bat
+%EMACHINERY_VENV%\Scripts\activate.bat
 python --version
 ```
 
@@ -66,7 +66,7 @@ python --version
 
 | 属性 | 值 |
 |------|-----|
-| **路径** | `E:\new_things\make.exe` |
+| **路径** | `%SIMULATION_TOOLS_ROOT%\make.exe` |
 | **来源** | TI CCS（Code Composer Studio）的 gmake 工具 |
 | **用途** | 执行 Makefile，编译 C 仿真工程 |
 
@@ -76,7 +76,7 @@ python --version
 
 | 属性 | 值 |
 |------|-----|
-| **路径** | `E:\new_things\miktex\miktex\bin\x64` |
+| **路径** | `%MIKTEX_BIN%` |
 | **用途** | LaTeX 渲染引擎，用于绘图中的数学公式标注（如 $i_d$、$\omega_m$） |
 
 如果 MiKTeX 未安装或路径不正确，数学公式将以纯文本形式显示，不影响仿真运行。
@@ -85,14 +85,14 @@ python --version
 
 | 属性 | 值 |
 |------|-----|
-| **路径** | `E:\new_things\emachinery` |
+| **路径** | `%EMACHINERY_ROOT%` |
 | **包含内容** | `emachinery/main.py`（Streamlit GUI 入口）、`emachinery/frameworkCodes/c/`（C 仿真源代码）、`emachinery/frameworkCodes/python/`（Python 桥梁层与后处理层） |
 
 完整目录结构：
 
 ```mermaid
 flowchart LR
-    A["E:\\new_things\\emachinery\\"] --> B["emachinery/"]
+    A["%EMACHINERY_ROOT%\\"] --> B["emachinery/"]
     B --> C1["main.py<br/>Streamlit 主入口"]
     B --> C2["st_main.py<br/>GUI 主逻辑"]
     B --> C3["st_interact.py<br/>UI 交互"]
@@ -119,7 +119,7 @@ flowchart LR
 
 ### 方式一（推荐）：Streamlit 图形界面
 
-**操作：** 双击 `E:\new_things\emy-start.bat`
+**操作：** 双击 `%EMACHINERY_START_SCRIPT%`
 
 **脚本内容：**
 
@@ -127,9 +127,9 @@ flowchart LR
 @echo off
 chcp 65001 >nul
 title emy-c Motor Simulation (Source)
-set PATH=E:\new_things\miktex\miktex\bin\x64;E:\new_things\emachinery\emachinery\frameworkCodes\c;C:\TDM-GCC-64\bin;%PATH%
-call E:\new_things\emy-env\Scripts\activate.bat
-cd /d E:\new_things\emachinery
+set PATH=%MIKTEX_BIN%;%EMACHINERY_ROOT%\emachinery\frameworkCodes\c;%TDM_GCC_ROOT%\bin;%PATH%
+call %EMACHINERY_VENV%\Scripts\activate.bat
+cd /d %EMACHINERY_ROOT%
 python -m emachinery.main
 ```
 
@@ -147,7 +147,7 @@ python -m emachinery.main
 
 ### 方式二：命令行直接编译
 
-**操作：** 双击 `E:\new_things\emy-c-build.bat`
+**操作：** 双击 `%EMACHINERY_BUILD_SCRIPT%`
 
 **脚本内容：**
 
@@ -155,8 +155,8 @@ python -m emachinery.main
 @echo off
 chcp 65001 >nul
 title emy-c C Simulation Build
-set PATH=E:\new_things\miktex\miktex\bin\x64;C:\TDM-GCC-64\bin;E:\new_things\emachinery\emachinery\frameworkCodes\c;%PATH%
-cd /d E:\new_things\emachinery\emachinery\frameworkCodes\c
+set PATH=%MIKTEX_BIN%;%TDM_GCC_ROOT%\bin;%EMACHINERY_ROOT%\emachinery\frameworkCodes\c;%PATH%
+cd /d %EMACHINERY_ROOT%\emachinery\frameworkCodes\c
 gmake.exe
 ```
 
@@ -170,11 +170,11 @@ gmake.exe
 编译成功后，`frameworkCodes\c` 目录下会生成 `main.exe`。可手动运行：
 
 ```bash
-cd E:\new_things\emachinery\emachinery\frameworkCodes\c
+cd %EMACHINERY_ROOT%\emachinery\frameworkCodes\c
 main.exe
 ```
 
-运行后，仿真数据会输出到 `E:\new_things\emachinery\dat\电机名.dat` 文件。
+运行后，仿真数据会输出到 `%EMACHINERY_ROOT%\dat\电机名.dat` 文件。
 
 **适合：** 只改了 C 代码需要快速编译验证、不想启动 Streamlit 的情况下快速确认编译是否通过
 
@@ -182,14 +182,14 @@ main.exe
 
 ```bash
 conda activate emy
-cd E:\new_things\emachinery
+cd %EMACHINERY_ROOT%
 python -m emachinery.main
 ```
 
 或者在已激活虚拟环境的终端中：
 
 ```bash
-cd /d E:\new_things\emachinery
+cd /d %EMACHINERY_ROOT%
 python -m emachinery.main
 ```
 
@@ -208,7 +208,7 @@ python -m emachinery.main
 **操作：** 在下拉列表中选择电机型号（如 `SEW100W`、`SEW200W` 等）
 
 **底层机制：**
-- 电机列表从 `E:\new_things\emachinery\input_motorLibrary\motor_library.json` 读取
+- 电机列表从 `%EMACHINERY_ROOT%\input_motorLibrary\motor_library.json` 读取
 - 选中电机后，其额定参数（额定转矩、额定转速、额定电流、极对数、Rs、Ld、Lq、KE、Js 等）自动加载到仿真引擎
 - 不同电机的参数差异会影响 PI 参数的适用范围——换电机后可能需要重新调整控制参数
 
@@ -299,7 +299,7 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 编译运行成功后，Streamlit 页面会自动切换到绘图视图。
 
-**底层机制：** 页面调用 `cplot.py` 读取 `E:\new_things\emachinery\dat\电机名.dat` 文件，解析为 pandas DataFrame，然后用 matplotlib 绘制 7 个默认子图。
+**底层机制：** 页面调用 `cplot.py` 读取 `%EMACHINERY_ROOT%\dat\电机名.dat` 文件，解析为 pandas DataFrame，然后用 matplotlib 绘制 7 个默认子图。
 
 **7 个默认子图的含义** 参见第 5 节详细解读。
 
@@ -590,15 +590,15 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 | 问题 | 现象 | 解决方案 |
 |------|------|---------|
-| **GNU Make 启动失败** | `process_begin: CreateProcess(NULL, gcc ...) failed. make (e=2)` | **方法一：** 重启电脑使 PATH 生效。**方法二：** 确认 TDM-GCC-64 的 `gcc.exe` 在 `C:\TDM-GCC-64\bin` 目录下存在。**方法三：** 先安装 MinGW，再安装 TI CCS 的 gmake，确保 gmake 能调用 gcc。启动脚本已经将 `C:\TDM-GCC-64\bin` 放在了 PATH 最前面，如果仍然失败，尝试在命令行手动执行 `set PATH=C:\TDM-GCC-64\bin;%PATH%` 后直接运行 `gmake` |
+| **GNU Make 启动失败** | `process_begin: CreateProcess(NULL, gcc ...) failed. make (e=2)` | **方法一：** 重启电脑使 PATH 生效。**方法二：** 确认 TDM-GCC-64 的 `gcc.exe` 在 `%TDM_GCC_ROOT%\bin` 目录下存在。**方法三：** 先安装 MinGW，再安装 TI CCS 的 gmake，确保 gmake 能调用 gcc。启动脚本已经将 `%TDM_GCC_ROOT%\bin` 放在了 PATH 最前面，如果仍然失败，尝试在命令行手动执行 `set PATH=%TDM_GCC_ROOT%\bin;%PATH%` 后直接运行 `gmake` |
 | **YAML 编码错误** | `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd3` | 用记事本打开 `user_config.yaml`，**另存为 UTF-8 编码（不带 BOM）**。Windows 记事本默认保存的是 UTF-8 with BOM，会导致 YAML 解析器在文件头读到非法字符 `\ufeff`。更推荐使用 VS Code 打开并点击右下角编码区域，选择「Save with Encoding → UTF-8」 |
-| **.dat 文件不存在** | `[cplot.py] Data file ... does not exist` | 先点击「Save to C and compile」按钮，确保编译和运行均成功。检查 `E:\new_things\emachinery\dat\` 目录是否存在且有写入权限。如果编译成功但运行失败（如程序崩溃），控制台会打印错误信息 |
+| **.dat 文件不存在** | `[cplot.py] Data file ... does not exist` | 先点击「Save to C and compile」按钮，确保编译和运行均成功。检查 `%EMACHINERY_ROOT%\dat\` 目录是否存在且有写入权限。如果编译成功但运行失败（如程序崩溃），控制台会打印错误信息 |
 | **仿真崩溃（NaN）** | 曲线出现空白或断点，控制台显示 `ACM.varOmega is nan` | PI 参数过大导致数值发散。**操作：** ① 减小 `FOC.CLBW_HZ`（如从 500 降到 100）；② 增大 `FOC.delta`（如从 5 改为 20）；③ 如果是在极高速下崩溃，检查 `LIMIT_DC_BUS_UTILIZATION` 是否设置过高 |
 | **电流环不跟踪** | iD/iQ 子图中反馈不跟随给定指令，二者有明显差距 | ① 检查电机参数是否正确（特别是 Ld、Lq、Rs——这些参数会影响 PI 增益计算）；② 检查 PI 限幅值是否太小（被限幅后电流无法达到指令值）；③ 确认当前运行模式是否包含电流闭环（Mode 1 和 11 是开环模式） |
 | **转速不响应** | Speed 子图中实际转速一直为 0，不发生变化 | ① 检查 `user.mode_select_synchronous_motor` 是否为 4（速度闭环模式）；② 检查 `VL_EXE_PER_CL_EXE` 是否被设得过大（如 >100），导致速度环几乎不执行；③ 确认负载转矩 `TLoad` 是否设置得过大导致堵转 |
-| **Streamlit 页面空白** | 浏览器显示空白页面或一直转圈加载 | ① 检查虚拟环境是否正确激活（确认终端提示符前面有 `(emy-env)` 字样）；② 检查 Streamlit 版本是否为 1.32.2（`pip show streamlit` 查看）；③ 查看终端中的错误输出（Streamlit 的错误会在命令行中打印）；④ 尝试 `streamlit run E:\new_things\emachinery\emachinery\main.py` 直接启动 |
+| **Streamlit 页面空白** | 浏览器显示空白页面或一直转圈加载 | ① 检查虚拟环境是否正确激活（确认终端提示符前面有 `(emy-env)` 字样）；② 检查 Streamlit 版本是否为 1.32.2（`pip show streamlit` 查看）；③ 查看终端中的错误输出（Streamlit 的错误会在命令行中打印）；④ 尝试 `streamlit run %EMACHINERY_ROOT%\emachinery\main.py` 直接启动 |
 | **编译报"undefined reference"** | `undefined reference to 'xxx'` | ① 检查是否缺少某个 C 源文件（`.c` 文件被误删）；② 检查 makefile 是否包含了所有必要的 `.c` 文件；③ 如果是自己新增了函数调用，确保对应的 `.c` 文件已加入 makefile 的编译列表 |
-| **gmake 找不到** | `'gmake' is not recognized as an internal or external command` | `E:\new_things\make.exe` 可能被误删或移动。启动脚本中已添加 `E:\new_things\emachinery\emachinery\frameworkCodes\c` 到 PATH（该目录下应有 `gmake.exe`）。如果没有，需要从 TI CCS 安装目录复制一份 gmake 到该位置 |
+| **gmake 找不到** | `'gmake' is not recognized as an internal or external command` | `%SIMULATION_TOOLS_ROOT%\make.exe` 可能被误删或移动。启动脚本中已添加 `%EMACHINERY_ROOT%\emachinery\frameworkCodes\c` 到 PATH（该目录下应有 `gmake.exe`）。如果没有，需要从 TI CCS 安装目录复制一份 gmake 到该位置 |
 
 ---
 
@@ -606,17 +606,17 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 如需完全清理当前环境（例如：更换电脑、重新部署、解决顽固的环境问题），可使用清理脚本。
 
-**操作：** 双击 `E:\new_things\emy-cleanup.bat`
+**操作：** 双击 `%SIMULATION_TOOLS_ROOT%\emy-cleanup.bat`
 
 **清理内容：**
 
 | 删除项 | 路径 | 说明 |
 |--------|------|------|
-| Python 虚拟环境 | `E:\new_things\emy-env\` | 包含 Python 3.12 及所有 pip 包 |
-| 源代码 | `E:\new_things\emachinery\` | 整个仿真工程 |
-| MiKTeX | `E:\new_things\miktex\` | LaTeX 引擎 |
-| gmake | `E:\new_things\make.exe` | TI CCS 的编译工具 |
-| 启动脚本自身 | `E:\new_things\emy-start.bat` | 自毁 |
+| Python 虚拟环境 | `%EMACHINERY_VENV%\` | 包含 Python 3.12 及所有 pip 包 |
+| 源代码 | `%EMACHINERY_ROOT%\` | 整个仿真工程 |
+| MiKTeX | `%SIMULATION_TOOLS_ROOT%\miktex\` | LaTeX 引擎 |
+| gmake | `%SIMULATION_TOOLS_ROOT%\make.exe` | TI CCS 的编译工具 |
+| 启动脚本自身 | `%EMACHINERY_START_SCRIPT%` | 自毁 |
 
 ** 重要警告：**
 
@@ -627,13 +627,13 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 **清理后重新安装的步骤概览：**
 
-1. 安装 TDM-GCC-64 → `C:\TDM-GCC-64\`
-2. 创建 Python 虚拟环境 → `E:\new_things\emy-env\`
+1. 安装 TDM-GCC-64 → `%TDM_GCC_ROOT%\`
+2. 创建 Python 虚拟环境 → `%EMACHINERY_VENV%\`
 3. 
 `pip install streamlit numpy pandas matplotlib control sympy numba`
-4. 安装 MiKTeX → `E:\new_things\miktex\`
-5. 复制 `make.exe` → `E:\new_things\make.exe`
-6. 克隆/解压 emachinery 源代码 → `E:\new_things\emachinery\`
+4. 安装 MiKTeX → `%SIMULATION_TOOLS_ROOT%\miktex\`
+5. 复制 `make.exe` → `%SIMULATION_TOOLS_ROOT%\make.exe`
+6. 克隆/解压 emachinery 源代码 → `%EMACHINERY_ROOT%\`
 7. 将 `make.exe` 重命名为 `gmake.exe` 并放入 `frameworkCodes\c\` 目录
 8. 创建 `dat\` 目录
 
@@ -643,11 +643,11 @@ gcc main.o pmsm_comm.o ... -o main.exe
 
 如果你是第一次使用 emachinery 仿真框架，按以下清单逐项确认，确保万无一失：
 
-- [ ] **环境确认：** `C:\TDM-GCC-64\bin\gcc.exe` 存在
-- [ ] **环境确认：** `E:\new_things\emy-env\Scripts\python.exe` 存在
-- [ ] **环境确认：** `E:\new_things\make.exe` 存在
-- [ ] **环境确认：** `E:\new_things\emachinery\emachinery\main.py` 存在
-- [ ] **启动：** 双击 `E:\new_things\emy-start.bat`，浏览器打开 Streamlit 页面
+- [ ] **环境确认：** `%TDM_GCC_ROOT%\bin\gcc.exe` 存在
+- [ ] **环境确认：** `%EMACHINERY_VENV%\Scripts\python.exe` 存在
+- [ ] **环境确认：** `%SIMULATION_TOOLS_ROOT%\make.exe` 存在
+- [ ] **环境确认：** `%EMACHINERY_ROOT%\emachinery\main.py` 存在
+- [ ] **启动：** 双击 `%EMACHINERY_START_SCRIPT%`，浏览器打开 Streamlit 页面
 - [ ] **选电机：** 保持默认 `SEW100W`
 - [ ] **选模式：** 选择「C 仿真」，模式编号保持 4
 - [ ] **不改参数：** 跳过参数修改，直接点击「Save to C and compile」

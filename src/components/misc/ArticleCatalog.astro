@@ -1,0 +1,76 @@
+---
+import type { CatalogGroup } from "@/utils/content-utils";
+import { getPostUrlBySlug } from "@/utils/url-utils";
+
+interface Props {
+	groups: CatalogGroup[];
+	currentPostId: string;
+}
+
+const { groups, currentPostId } = Astro.props;
+---
+
+<aside id="article-catalog-wrapper" class="article-catalog-wrapper" aria-label="全部文章">
+	<div class="article-rail-panel">
+		<header class="article-rail-header">全部文章</header>
+		<nav id="article-catalog-content" class="article-catalog-content">
+			{groups.map((group) => (
+				<section class:list={["catalog-group", { "is-expanded": group.isCurrent }]}>
+					<button class="catalog-group__header" type="button" aria-expanded={group.isCurrent ? "true" : "false"}>
+						<span class="catalog-group__name">{group.name}</span>
+						<span class="catalog-group__count">{group.count}</span>
+						<span class="catalog-group__chevron" aria-hidden="true">›</span>
+					</button>
+					<div class="catalog-group__list">
+						<ul>
+							{group.posts.map((post) => (
+								<li>
+									<a
+										class:list={["catalog-item", { "is-active": post.id === currentPostId }]}
+										href={getPostUrlBySlug(post.id)}
+										aria-current={post.id === currentPostId ? "page" : undefined}
+									>
+										<span>{post.data.title}</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</section>
+			))}
+		</nav>
+	</div>
+</aside>
+
+<script>
+	type CatalogLifecycle = { dispose: () => void };
+	const lifecycleWindow = window as typeof window & { __articleCatalogLifecycle?: CatalogLifecycle };
+	lifecycleWindow.__articleCatalogLifecycle?.dispose();
+
+	const content = document.getElementById("article-catalog-content");
+	const controller = new AbortController();
+	const dispose = () => {
+		controller.abort();
+		if (lifecycleWindow.__articleCatalogLifecycle?.dispose === dispose) {
+			delete lifecycleWindow.__articleCatalogLifecycle;
+		}
+	};
+	if (content) {
+		content.addEventListener("click", (event) => {
+			const target = event.target as Element | null;
+			const button = target?.closest<HTMLButtonElement>(".catalog-group__header");
+			if (!button) return;
+			const group = button.closest<HTMLElement>(".catalog-group");
+			if (!group) return;
+			const expanded = group.classList.toggle("is-expanded");
+			button.setAttribute("aria-expanded", String(expanded));
+		}, { signal: controller.signal });
+
+		content.querySelector<HTMLElement>(".catalog-item.is-active")?.scrollIntoView({ block: "nearest" });
+	}
+
+	document.addEventListener("swup:content:replace", dispose, { once: true, signal: controller.signal });
+	lifecycleWindow.__articleCatalogLifecycle = {
+		dispose,
+	};
+</script>

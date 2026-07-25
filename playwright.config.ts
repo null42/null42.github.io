@@ -10,16 +10,24 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4321',
     browserName: 'chromium',
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
+      : undefined,
     trace: 'retain-on-failure',
   },
   projects: [
     { name: 'desktop-1440', use: { viewport: { width: 1440, height: 900 } } },
+    { name: 'desktop-1024', use: { viewport: { width: 1024, height: 768 } } },
     { name: 'tablet-768', use: { viewport: { width: 768, height: 1024 } } },
     { name: 'mobile-390', use: { ...devices['iPhone 13'], viewport: { width: 390, height: 844 } } },
   ],
-  webServer: {
-    command: 'corepack pnpm preview --host 127.0.0.1',
-    url: 'http://127.0.0.1:4321',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: process.env.PLAYWRIGHT_SKIP_WEBSERVER
+    ? undefined
+    : {
+        command: process.platform === 'win32'
+          ? 'npm.cmd run preview -- --host 127.0.0.1'
+          : 'corepack pnpm preview --host 127.0.0.1',
+        url: 'http://127.0.0.1:4321',
+        reuseExistingServer: false,
+      },
 })

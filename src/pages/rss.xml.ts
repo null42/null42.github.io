@@ -12,6 +12,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import sanitizeHtml from "sanitize-html";
 import { siteConfig } from "@/config";
 import pkg from "../../package.json";
+import { decideVisibility } from "../../scripts/kb/domain/normalize-article";
 
 function stripInvalidXmlChars(str: string): string {
 	return str.replace(
@@ -22,7 +23,7 @@ function stripInvalidXmlChars(str: string): string {
 }
 
 export async function GET(context: APIContext) {
-	const blog = await getSortedPosts();
+	const blog = (await getSortedPosts()).filter((post) => decideVisibility(post.data.visibility).publicSurface === "full");
 	const renderers = await loadRenderers([getMDXRenderer()]);
 	const container = await AstroContainer.create({ renderers });
 	const feedItems: RSSFeedItem[] = [];

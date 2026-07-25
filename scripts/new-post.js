@@ -28,8 +28,12 @@ if (!fileExtensionRegex.test(fileName)) {
   fileName += ".md"
 }
 
-const targetDir = "./src/content/posts/"
-const fullPath = path.join(targetDir, fileName)
+const targetDir = path.resolve("content/blog")
+const fullPath = path.resolve(targetDir, fileName)
+if (!fullPath.startsWith(targetDir + path.sep)) {
+  console.error("Error: Filename must stay within content/blog")
+  process.exit(1)
+}
 
 if (fs.existsSync(fullPath)) {
   console.error(`Error: File ${fullPath} already exists `)
@@ -54,6 +58,6 @@ lang: ''
 ---
 `
 
-fs.writeFileSync(path.join(targetDir, fileName), content)
+fs.writeFileSync(fullPath, content)
 
 console.log(`Post ${fullPath} created`)

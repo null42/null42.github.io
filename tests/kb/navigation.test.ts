@@ -4,11 +4,29 @@ import { buildSidebar } from '../../scripts/kb/generate'
 import type { ArticleRecord } from '../../scripts/kb/types'
 
 describe('chaptered sidebar', () => {
+  it('groups canonical hierarchy records without legacy aliases', () => {
+    const sidebar = buildSidebar([
+      article({ sectionId: 'power', sectionTitle: 'Power', routeId: 'project', routeTitle: 'Projects', routeOrder: 20, stageId: 'build', stageTitle: 'Build', stageOrder: 10 }),
+    ])
+
+    expect(sidebar).toContain('"text": "Power"')
+    expect(sidebar).toContain('"text": "Projects"')
+    expect(sidebar).toContain('"text": "Build"')
+  })
+  it('keeps duplicate hierarchy titles separate by canonical IDs', () => {
+    const source = buildSidebar([
+      article({ sectionId: 'power-a', sectionTitle: 'Power', articleId: 'a' }),
+      article({ sectionId: 'power-b', sectionTitle: 'Power', articleId: 'b' }),
+    ])
+    const sidebar = JSON.parse(source.replace(/^export const generatedSidebar = /, '')) as Array<{ text: string }>
+    expect(sidebar).toHaveLength(2)
+    expect(sidebar.map((item) => item.text)).toEqual(['Power', 'Power'])
+  })
   it('groups articles by section and chapter order', () => {
     const articles = [
-      article({ title: 'Current Loop', url: '/current.html', section: 'Power', chapter: '02-PFC', chapterTitle: 'PFC', chapterOrder: 20, order: 2 }),
-      article({ title: 'Basics', url: '/basics.html', section: 'Power', chapter: '01-Basics', chapterTitle: 'Basics', chapterOrder: 10, order: 1 }),
-      article({ title: 'FOC', url: '/foc.html', section: 'Motor', chapter: '01-FOC', chapterTitle: 'FOC', chapterOrder: 10, order: 1 })
+      article({ title: 'Current Loop', url: '/current.html', sectionId: 'power', sectionTitle: 'Power', stageId: '02-PFC', stageTitle: 'PFC', stageOrder: 20, order: 2 }),
+      article({ title: 'Basics', url: '/basics.html', sectionId: 'power', sectionTitle: 'Power', stageId: '01-Basics', stageTitle: 'Basics', stageOrder: 10, order: 1 }),
+      article({ title: 'FOC', url: '/foc.html', sectionId: 'motor', sectionTitle: 'Motor', stageId: '01-FOC', stageTitle: 'FOC', stageOrder: 10, order: 1 })
     ]
 
     const sidebar = buildSidebar(articles)
@@ -24,22 +42,22 @@ describe('chaptered sidebar', () => {
       article({
         title: 'FOC',
         url: '/foc.html',
-        section: '电机控制',
-        navGroup: '控制与算法',
-        navGroupOrder: 30,
-        chapter: 'algorithm',
-        chapterTitle: '控制算法',
-        chapterOrder: 20
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'control', routeTitle: '控制与算法',
+        routeOrder: 30,
+        stageId: 'algorithm',
+        stageTitle: '控制算法',
+        stageOrder: 20
       }),
       article({
         title: 'Electronics',
         url: '/ee.html',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'electronics-basics',
-        chapterTitle: '电力电子基础',
-        chapterOrder: 5
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'electronics-basics',
+        stageTitle: '电力电子基础',
+        stageOrder: 5
       })
     ]
 
@@ -56,12 +74,12 @@ describe('chaptered sidebar', () => {
         title: 'Power Path Overview',
         url: '/power-path.html',
         path: 'content/motor/power-path/README.md',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'power-path',
-        chapterTitle: '功率链路',
-        chapterOrder: 40,
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'power-path',
+        stageTitle: '功率链路',
+        stageOrder: 40,
         order: 20,
         date: '2026-07-02'
       }),
@@ -69,12 +87,12 @@ describe('chaptered sidebar', () => {
         title: 'PP-03: LLC',
         url: '/pp-03.html',
         path: 'content/motor/power-path/PP-03-LLC-Resonant-Converter.md',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'power-path',
-        chapterTitle: '功率链路',
-        chapterOrder: 40,
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'power-path',
+        stageTitle: '功率链路',
+        stageOrder: 40,
         order: 20,
         date: '2026-07-09'
       }),
@@ -82,12 +100,12 @@ describe('chaptered sidebar', () => {
         title: 'PP-01: Buck',
         url: '/pp-01.html',
         path: 'content/motor/power-path/PP-01-DCDC-Fundamental-Topologies.md',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'power-path',
-        chapterTitle: '功率链路',
-        chapterOrder: 40,
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'power-path',
+        stageTitle: '功率链路',
+        stageOrder: 40,
         order: 20,
         date: '2026-07-01'
       }),
@@ -95,12 +113,12 @@ describe('chaptered sidebar', () => {
         title: 'PP-01 知识检查',
         url: '/pp-01-check.html',
         path: 'content/motor/power-path/PP-01-assessment.md',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'power-path',
-        chapterTitle: '功率链路',
-        chapterOrder: 40,
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'power-path',
+        stageTitle: '功率链路',
+        stageOrder: 40,
         order: 20,
         date: '2026-07-10'
       }),
@@ -108,12 +126,12 @@ describe('chaptered sidebar', () => {
         title: 'PP-02: Flyback',
         url: '/pp-02.html',
         path: 'content/motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull.md',
-        section: '电机控制',
-        navGroup: '基础与硬件',
-        navGroupOrder: 20,
-        chapter: 'power-path',
-        chapterTitle: '功率链路',
-        chapterOrder: 40,
+        sectionId: 'motor', sectionTitle: '电机控制',
+        routeId: 'hardware', routeTitle: '基础与硬件',
+        routeOrder: 20,
+        stageId: 'power-path',
+        stageTitle: '功率链路',
+        stageOrder: 40,
         order: 20,
         date: '2026-07-03'
       })
@@ -129,9 +147,9 @@ describe('chaptered sidebar', () => {
 
   it('keeps numbered learning workspace routes in file order', () => {
     const articles = [
-      article({ title: '0003', url: '/0003.html', path: 'content/motor/learning-workspace/lessons/0003-hw.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-09' }),
-      article({ title: '0001', url: '/0001.html', path: 'content/motor/learning-workspace/lessons/0001-ee.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-01' }),
-      article({ title: '0002', url: '/0002.html', path: 'content/motor/learning-workspace/lessons/0002-ct.md', section: '电机控制', chapter: 'learning-workspace', chapterTitle: '学习工作区', order: 20, date: '2026-07-08' })
+      article({ title: '0003', url: '/0003.html', path: 'content/motor/learning-workspace/lessons/0003-hw.md', sectionId: 'motor', sectionTitle: '电机控制', stageId: 'learning-workspace', stageTitle: '学习工作区', order: 20, date: '2026-07-09' }),
+      article({ title: '0001', url: '/0001.html', path: 'content/motor/learning-workspace/lessons/0001-ee.md', sectionId: 'motor', sectionTitle: '电机控制', stageId: 'learning-workspace', stageTitle: '学习工作区', order: 20, date: '2026-07-01' }),
+      article({ title: '0002', url: '/0002.html', path: 'content/motor/learning-workspace/lessons/0002-ct.md', sectionId: 'motor', sectionTitle: '电机控制', stageId: 'learning-workspace', stageTitle: '学习工作区', order: 20, date: '2026-07-08' })
     ]
 
     const sidebar = buildSidebar(articles)
@@ -165,18 +183,27 @@ describe('chaptered sidebar', () => {
 })
 
 function article(overrides: Partial<ArticleRecord>): ArticleRecord {
-  return {
+  const record = {
     title: 'Article',
     date: '2026-07-01',
     category: 'General',
     tags: [],
     source: 'test',
     status: 'learning',
-    visibility: 'public',
+    visibility: 'public' as const,
     summary: '',
     path: 'article.md',
     url: '/article.html',
     body: '',
     ...overrides
+  }
+  return {
+    ...record,
+    articleId: record.articleId || 'article',
+    sourcePath: record.sourcePath || 'content/article.md',
+    slug: record.slug || 'article',
+    order: record.order ?? Number.MAX_SAFE_INTEGER,
+    explicitOrder: record.explicitOrder ?? false,
+    publicSurface: record.publicSurface || 'full'
   }
 }

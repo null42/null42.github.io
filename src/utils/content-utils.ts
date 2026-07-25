@@ -22,6 +22,10 @@ async function getRawSortedPosts() {
 	return sorted;
 }
 
+export async function getRoutablePosts() {
+	return getCollection("posts");
+}
+
 export async function getSortedPosts() {
 	const sorted = await getRawSortedPosts();
 
@@ -40,6 +44,42 @@ export type PostForList = {
 	id: string;
 	data: CollectionEntry<"posts">["data"];
 };
+
+export type CatalogGroup = {
+	name: string;
+	count: number;
+	posts: PostForList[];
+	isCurrent: boolean;
+};
+
+export async function getCatalogGroups(currentPostId: string): Promise<CatalogGroup[]> {
+	const sorted = (await getRawSortedPosts()).filter(
+		(post) => post.data.visibility === "public" && !post.data.encryptedPayload,
+	);
+	const currentPost = sorted.find((post) => post.id === currentPostId);
+	const currentCategory = currentPost?.data.category?.trim() || i18n(I18nKey.uncategorized);
+	const grouped = new Map<string, PostForList[]>();
+
+	for (const post of sorted) {
+		const category = post.data.category?.trim() || i18n(I18nKey.uncategorized);
+		const posts = grouped.get(category) ?? [];
+		posts.push({ id: post.id, data: post.data });
+		grouped.set(category, posts);
+	}
+
+	return [...grouped.entries()]
+		.map(([name, posts]) => ({
+			name,
+			count: posts.length,
+			posts,
+			isCurrent: name === currentCategory,
+		}))
+		.sort((left, right) => {
+			const leftTime = new Date(left.posts[0]?.data.published ?? 0).getTime();
+			const rightTime = new Date(right.posts[0]?.data.published ?? 0).getTime();
+			return rightTime - leftTime;
+		});
+}
 export async function getSortedPostsList(): Promise<PostForList[]> {
 	const sortedFullPosts = await getRawSortedPosts();
 
@@ -166,7 +206,7 @@ export async function getRelatedPosts(
 
 	// 排除自身和加密文章
 	const candidates = allPosts.filter(
-		(p) => p.id !== currentPost.id && !p.data.password,
+		(p) => p.id !== currentPost.id && !p.data.password && !p.data.encryptedPayload && p.data.visibility === "public",
 	);
 
 	const currentTags = new Set(currentPost.data.tags || []);

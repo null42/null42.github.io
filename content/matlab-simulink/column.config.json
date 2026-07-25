@@ -18,7 +18,7 @@
     { "id": "tuning-validation", "title": "整定与验证", "order": 50, "description": "用参数扫描、自整定和日志对比闭环结果。" }
   ],
   "stages": [
-    { "id": "overview", "title": "总览与学习路线", "order": 1, "routeId": "foundation", "pathPrefix": "content/matlab-simulink", "tags": ["roadmap", "beginner"] },
+    { "id": "matlab-simulink-overview", "title": "总览与学习路线", "order": 1, "routeId": "foundation", "pathPrefix": "content/matlab-simulink", "tags": ["roadmap", "beginner"] },
     { "id": "setup", "title": "环境与最小模型", "order": 10, "routeId": "foundation", "pathPrefix": "content/matlab-simulink/foundation", "tags": ["setup", "discrete-control"] },
     { "id": "matlab-discrete-control", "title": "Matlab 离散控制系统", "order": 10, "routeId": "matlab-discrete", "pathPrefix": "content/matlab-simulink/matlab-discrete-control", "tags": ["matlab", "pid", "state-space"] },
     { "id": "simulink-discrete-control", "title": "Simulink 离散控制系统", "order": 10, "routeId": "simulink-discrete", "pathPrefix": "content/matlab-simulink/simulink-discrete-control", "tags": ["simulink", "sample-time", "solver"] },

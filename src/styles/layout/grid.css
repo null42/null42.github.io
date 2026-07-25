@@ -1,0 +1,164 @@
+[data-firefly-mod-shell] {
+	min-height: 100vh;
+	background: var(--page-bg);
+	color: var(--deep-text);
+}
+
+[data-firefly-mod-shell] #top-row {
+	position: sticky;
+	top: 0;
+	z-index: 80;
+	padding: 0.625rem 1rem 0;
+	pointer-events: none;
+}
+
+[data-firefly-mod-shell] #navbar-wrapper {
+	width: min(100%, 88rem);
+	margin: 0 auto;
+	pointer-events: auto;
+}
+
+#main-grid-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+#main-grid {
+	position: relative;
+	width: min(100%, 64rem);
+	margin: 0 auto;
+	padding: 1.5rem 1rem 0;
+}
+
+#swup-container {
+	min-height: 60vh;
+}
+
+#content-wrapper {
+	position: relative;
+	z-index: 1;
+}
+
+.knowledge-sidebar-rail,
+.article-catalog-wrapper,
+.article-toc-wrapper {
+	position: absolute;
+	top: 1.5rem;
+	width: 15rem;
+	height: calc(100% - 1.5rem);
+	display: none;
+}
+
+.knowledge-sidebar-rail,
+.article-catalog-wrapper {
+	right: calc(100% + 1.25rem);
+}
+
+.article-toc-wrapper {
+	left: calc(100% + 1.25rem);
+}
+
+.article-rail-panel,
+.article-toc-container,
+.knowledge-sidebar-rail > * {
+	position: sticky;
+	top: 5.5rem;
+	max-height: calc(100vh - 7rem);
+	overflow: auto;
+	border: 1px solid var(--line-divider);
+	border-radius: 0.75rem;
+	background: color-mix(in oklab, var(--page-bg) 88%, transparent);
+	backdrop-filter: blur(18px);
+}
+
+.article-rail-header,
+.article-toc-header {
+	padding: 0.8rem 0.9rem;
+	border-bottom: 1px solid var(--line-divider);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.article-toc-body {
+	padding: 0.6rem;
+}
+
+@media (min-width: 64rem) {
+	#main-grid[data-sidebar-position="article"],
+	#main-grid[data-sidebar-position="knowledge"] {
+		width: min(100%, 36rem);
+	}
+
+	.article-catalog-wrapper,
+	.article-toc-wrapper,
+	.knowledge-sidebar-rail {
+		display: block;
+		width: 11rem;
+	}
+
+	.knowledge-sidebar-rail,
+	.article-catalog-wrapper { right: calc(100% + 0.75rem); }
+	.article-toc-wrapper { left: calc(100% + 0.75rem); }
+}
+
+@media (min-width: 75rem) {
+	#main-grid[data-sidebar-position="article"],
+	#main-grid[data-sidebar-position="knowledge"] { width: min(100%, 46rem); }
+	.article-catalog-wrapper,
+	.article-toc-wrapper,
+	.knowledge-sidebar-rail { width: 13rem; }
+	.knowledge-sidebar-rail,
+	.article-catalog-wrapper { right: calc(100% + 1rem); }
+	.article-toc-wrapper { left: calc(100% + 1rem); }
+}
+
+.article-reading-progress { padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--line-divider); }
+.article-reading-progress__label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font: 700 0.68rem/1 ui-monospace, monospace; letter-spacing: 0.12em; }
+.article-reading-progress__label strong { color: var(--primary); font-size: 0.78rem; }
+.article-reading-progress__track { height: 0.2rem; margin-top: 0.65rem; overflow: hidden; border-radius: 999px; background: color-mix(in oklab, var(--deep-text) 12%, transparent); }
+.article-reading-progress__track i { display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--primary); transition: transform 120ms linear; }
+
+/* Compatibility hooks retained for the display settings controller. */
+.banner-home-text-overlay {
+	position: relative;
+	z-index: 2;
+	transition: opacity 200ms ease, transform 200ms ease;
+}
+.banner-home-text-overlay.user-hidden { opacity: 0; pointer-events: none; }
+html[data-banner-title-enabled="false"] .banner-home-text-overlay { display: none; }
+.banner-title {
+	font-family: var(--font-banner-title, inherit);
+	font-size: min(var(--banner-title-size, 3rem), 10vw);
+	line-height: 1.1;
+	text-shadow: 0 4px 24px rgb(0 0 0 / 60%);
+	overflow-wrap: break-word;
+}
+.mobile-main-no-banner { width: 100%; }
+html[data-waves-enabled="false"] #header-waves,
+html[data-gradient-enabled="false"] #wallpaper-gradient { display: none !important; }
+html[data-waves-enabled="true"] #header-waves,
+html[data-gradient-enabled="true"] #wallpaper-gradient { display: block; }
+#header-waves { contain: layout style; isolation: isolate; }
+#wallpaper-gradient { pointer-events: none; }
+
+@media (max-width: 767px) {
+	#main-grid {
+		padding: 1rem 0.75rem 0;
+		padding-bottom: var(--mobile-dock-clearance, calc(6.5rem + env(safe-area-inset-bottom)));
+	}
+	.banner-title { font-size: min(var(--banner-title-size, 2rem), 10vw); }
+	.mobile-main-no-banner #main-grid { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-firefly-mod-shell] *,
+	[data-firefly-mod-shell] *::before,
+	[data-firefly-mod-shell] *::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0s !important;
+	}
+	.article-reading-progress__track i { transition: none; }
+}

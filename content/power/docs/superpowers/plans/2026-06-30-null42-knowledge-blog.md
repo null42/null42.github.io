@@ -16,7 +16,7 @@ summary: "> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagen
 
 **Goal:** Build `null42.github.io` as a VitePress-based personal knowledge blog with offline Markdown writing, metadata validation, generated archive indexes, giscus comments, and GitHub Pages deployment.
 
-**Architecture:** Create a new standalone repository at `E:\gitee_CodeStorage\学习\null42.github.io`. Keep content in `content/`, generate normalized indexes under `.vitepress/generated/`, and keep source knowledge bases read-only during migration. Use small focused TypeScript scripts for metadata parsing, validation, generation, migration, and publishing.
+**Architecture:** Create a new standalone repository at `<repo>`. Keep content in `content/`, generate normalized indexes under `.vitepress/generated/`, and keep source knowledge bases read-only during migration. Use small focused TypeScript scripts for metadata parsing, validation, generation, migration, and publishing.
 
 **Tech Stack:** VitePress, Vue 3, TypeScript, Node.js scripts, gray-matter, fast-glob, yaml, Vitest, GitHub Actions, GitHub Pages, giscus.
 
@@ -35,20 +35,20 @@ summary: "> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagen
 Create all product code in:
 
 ```text
-E:\gitee_CodeStorage\学习\null42.github.io
+<repo>
 ```
 
 Keep the planning/spec files in:
 
 ```text
-E:\gitee_CodeStorage\学习\电源\docs\superpowers\
+<power-source-root>\docs\superpowers\
 ```
 
 Do not edit these source knowledge bases during implementation:
 
 ```text
-E:\gitee_CodeStorage\学习\电源
-E:\gitee_CodeStorage\学习\MotorControl-main\motor-learning-web
+<power-source-root>
+<legacy-motor-source-root>
 ```
 
 ## Planned File Structure
@@ -121,26 +121,26 @@ Responsibilities:
 ### Task 1: Create the VitePress Project Skeleton
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.gitignore`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\package.json`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\tsconfig.json`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\index.md`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\archive.md`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\about.md`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\public\favicon.svg`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\generated\.gitkeep`
+- Create: `<repo>\.gitignore`
+- Create: `<repo>\package.json`
+- Create: `<repo>\tsconfig.json`
+- Create: `<repo>\index.md`
+- Create: `<repo>\archive.md`
+- Create: `<repo>\about.md`
+- Create: `<repo>\public\favicon.svg`
+- Create: `<repo>\.vitepress\generated\.gitkeep`
 
 - [ ] **Step 1: Create the repository directory**
 
 Run:
 
 ```powershell
-New-Item -ItemType Directory -Force -Path 'E:\gitee_CodeStorage\学习\null42.github.io'
-Set-Location 'E:\gitee_CodeStorage\学习\null42.github.io'
+New-Item -ItemType Directory -Force -Path '<repo>'
+Set-Location '<repo>'
 git init
 ```
 
-Expected: Git initializes an empty repository in `E:\gitee_CodeStorage\学习\null42.github.io`.
+Expected: Git initializes an empty repository in `<repo>`.
 
 - [ ] **Step 2: Add base package files**
 
@@ -307,16 +307,16 @@ Expected: Commit succeeds.
 ### Task 2: Add Default Content Directories and Category Metadata
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\power\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\motor\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\blog\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\projects\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\simulations\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\notes\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\uncategorized\.category.yml`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\power\getting-started.md`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\motor\getting-started.md`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\content\blog\hello.md`
+- Create: `<repo>\content\power\.category.yml`
+- Create: `<repo>\content\motor\.category.yml`
+- Create: `<repo>\content\blog\.category.yml`
+- Create: `<repo>\content\projects\.category.yml`
+- Create: `<repo>\content\simulations\.category.yml`
+- Create: `<repo>\content\notes\.category.yml`
+- Create: `<repo>\content\uncategorized\.category.yml`
+- Create: `<repo>\content\power\getting-started.md`
+- Create: `<repo>\content\motor\getting-started.md`
+- Create: `<repo>\content\blog\hello.md`
 
 - [ ] **Step 1: Create category metadata files**
 
@@ -498,10 +498,10 @@ Expected: Commit succeeds.
 ### Task 3: Implement Metadata Parsing and Completion
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\types.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\paths.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\frontmatter.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\tests\kb\frontmatter.test.ts`
+- Create: `<repo>\scripts\kb\types.ts`
+- Create: `<repo>\scripts\kb\paths.ts`
+- Create: `<repo>\scripts\kb\frontmatter.ts`
+- Create: `<repo>\tests\kb\frontmatter.test.ts`
 
 - [ ] **Step 1: Write failing tests for frontmatter behavior**
 
@@ -808,10 +808,10 @@ Expected: Commit succeeds.
 ### Task 4: Implement Directory Metadata and Article Scanning
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\category.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\articles.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\tests\kb\category.test.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\tests\kb\articles.test.ts`
+- Create: `<repo>\scripts\kb\category.ts`
+- Create: `<repo>\scripts\kb\articles.ts`
+- Create: `<repo>\tests\kb\category.test.ts`
+- Create: `<repo>\tests\kb\articles.test.ts`
 
 - [ ] **Step 1: Write failing tests for inherited category metadata**
 
@@ -1082,9 +1082,9 @@ Expected: Commit succeeds.
 ### Task 5: Add Validation, Fix, and Generated Index Scripts
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\check.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\fix.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\generate.ts`
+- Create: `<repo>\scripts\kb\check.ts`
+- Create: `<repo>\scripts\kb\fix.ts`
+- Create: `<repo>\scripts\kb\generate.ts`
 
 - [ ] **Step 1: Implement non-mutating validation**
 
@@ -1101,7 +1101,7 @@ for (const warning of result.warnings) {
 const publicCount = result.articles.filter((article) => article.visibility === 'public').length
 console.log(`checked ${result.articles.length} indexed articles (${publicCount} public)`)
 
-const hardFailures = result.warnings.filter((warning) => warning.includes('E:\\') || warning.includes('visibility is private'))
+const hardFailures = result.warnings.filter((warning) => warning.includes('absolute path') || warning.includes('visibility is private'))
 if (hardFailures.length > 0) {
   console.warn(`review recommended for ${hardFailures.length} warnings`)
 }
@@ -1221,12 +1221,12 @@ Expected: Commit succeeds. JSON generated files remain ignored; `sidebar.ts` is 
 ### Task 6: Configure VitePress Theme, Search, Archive, and Comments
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\config.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\theme\index.ts`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\theme\style.css`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\theme\Layout.vue`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\theme\components\ArchivePage.vue`
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.vitepress\theme\components\GiscusComments.vue`
+- Create: `<repo>\.vitepress\config.ts`
+- Create: `<repo>\.vitepress\theme\index.ts`
+- Create: `<repo>\.vitepress\theme\style.css`
+- Create: `<repo>\.vitepress\theme\Layout.vue`
+- Create: `<repo>\.vitepress\theme\components\ArchivePage.vue`
+- Create: `<repo>\.vitepress\theme\components\GiscusComments.vue`
 
 - [ ] **Step 1: Create VitePress config**
 
@@ -1570,7 +1570,7 @@ Expected: Commit succeeds.
 ### Task 7: Add GitHub Pages Deployment Workflow
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\.github\workflows\deploy.yml`
+- Create: `<repo>\.github\workflows\deploy.yml`
 
 - [ ] **Step 1: Add GitHub Actions workflow**
 
@@ -1658,7 +1658,7 @@ Expected: Commit succeeds.
 ### Task 8: Add Migration Script for Existing Knowledge Bases
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\migrate.ts`
+- Create: `<repo>\scripts\kb\migrate.ts`
 
 - [ ] **Step 1: Implement dry-run migration script**
 
@@ -1679,12 +1679,12 @@ interface MigrationSource {
 const sources: MigrationSource[] = [
   {
     name: 'power',
-    root: 'E:\\gitee_CodeStorage\\学习\\电源',
+    root: '<power-source-root>',
     target: path.join(contentRoot, 'power')
   },
   {
     name: 'motor',
-    root: 'E:\\gitee_CodeStorage\\学习\\MotorControl-main\\motor-learning-web',
+    root: '<legacy-motor-source-root>',
     target: path.join(contentRoot, 'motor')
   }
 ]
@@ -1783,7 +1783,7 @@ Expected: Commit succeeds. Do not commit bulk migrated content until it has been
 ### Task 9: Add Publish Script
 
 **Files:**
-- Create: `E:\gitee_CodeStorage\学习\null42.github.io\scripts\kb\publish.ts`
+- Create: `<repo>\scripts\kb\publish.ts`
 
 - [ ] **Step 1: Implement guarded publish flow**
 
@@ -1857,7 +1857,7 @@ Expected: Commit succeeds.
 ### Task 10: Connect to GitHub Repository and Configure giscus
 
 **Files:**
-- Modify: `E:\gitee_CodeStorage\学习\null42.github.io\.env.example`
+- Modify: `<repo>\.env.example`
 - Modify: GitHub repository settings, not local files.
 
 - [ ] **Step 1: Create `.env.example`**

@@ -1,0 +1,10 @@
+.knowledge-tree { max-height: calc(100vh - 8rem); overflow: auto; color: var(--text-color); }
+.knowledge-tree ul { display: grid; gap: .2rem; margin: 0; padding: 0; list-style: none; }
+.knowledge-tree ul ul { margin-inline-start: .65rem; padding-inline-start: .65rem; border-inline-start: 1px solid var(--line-color); }
+.knowledge-tree button, .knowledge-tree a { display: block; width: 100%; padding: .42rem .55rem; border-radius: var(--radius-small); color: inherit; text-align: start; text-decoration: none; }
+.knowledge-tree button { cursor: pointer; }
+.knowledge-tree button::before { display: inline-block; width: 1rem; content: "›"; transition: transform .15s ease; }
+.knowledge-tree button[aria-expanded="true"]::before { transform: rotate(90deg); }
+.knowledge-tree a[aria-current="page"] { color: white; background: var(--primary); }
+.knowledge-tree button:focus-visible, .knowledge-tree a:focus-visible { outline: 3px solid var(--primary); outline-offset: 1px; }
+@media (prefers-reduced-motion: reduce) { .knowledge-tree button::before { transition: none; } }

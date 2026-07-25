@@ -1,0 +1,9 @@
+---
+import KnowledgeMap from "@/components/knowledge/KnowledgeMap.astro";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+---
+<MainGridLayout title="知识地图" description="按栏目、路线和阶段浏览公开知识文章">
+	<header class="knowledge-map-hero"><p>Knowledge Map</p><h1>知识地图</h1><p>从栏目进入路线，再沿阶段阅读完整知识链路。</p></header>
+	<KnowledgeMap />
+</MainGridLayout>
+<style>.knowledge-map-hero { margin-block-end: 1.25rem; padding: 1.5rem; border-radius: var(--radius-large); background: var(--card-bg); box-shadow: var(--shadow-sm); }.knowledge-map-hero h1 { margin: .2rem 0; }</style>

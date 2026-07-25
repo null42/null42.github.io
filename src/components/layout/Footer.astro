@@ -37,7 +37,7 @@ if (footerConfig.enable) {
 <div
   class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"
 >
-  <div class="transition text-50 text-sm text-center wrap">
+  <div class="transition text-black/65 dark:text-white/70 text-sm text-center wrap flex flex-col items-center gap-2">
     <div class="mb-2">
       {customFooterHtml && <div set:html={customFooterHtml} />}
     </div>
@@ -46,13 +46,13 @@ if (footerConfig.enable) {
       {profileConfig.name}. All Rights Reserved.
       <span aria-hidden="true">/</span>
       <a
-        class="transition link text-(--primary) font-medium"
+        class="transition link text-(--primary) font-medium inline-flex min-h-8 items-center px-2"
         target="_blank"
         href={url("rss.xml")}>RSS</a
       >
       <span aria-hidden="true">/</span>
       <a
-        class="transition link text-(--primary) font-medium"
+        class="transition link text-(--primary) font-medium inline-flex min-h-8 items-center px-2"
         target="_blank"
         href={url("sitemap-index.xml")}>Sitemap</a
       >
@@ -60,13 +60,13 @@ if (footerConfig.enable) {
     <div class="m-0.5 flex gap-2 justify-center flex-wrap">
       <span>Powered by</span>
       <a
-        class="transition link text-(--primary) font-medium"
+        class="transition link text-(--primary) font-medium inline-flex min-h-8 items-center px-2"
         target="_blank"
         href="https://astro.build">Astro</a
       >
       <span aria-hidden="true">&</span>
       <a
-        class="transition link text-(--primary) font-medium"
+        class="transition link text-(--primary) font-medium inline-flex min-h-8 items-center px-2"
         target="_blank"
         href="https://github.com/CuteLeaf/Firefly">Firefly</a
       >

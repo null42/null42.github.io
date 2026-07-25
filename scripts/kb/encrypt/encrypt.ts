@@ -4,10 +4,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { serializeMarkdown } from '../frontmatter'
+import { renderEncryptedMarkdown } from './render-markdown'
 
 export interface EncryptedPayload {
   algorithm: 'AES-GCM'
   kdf: 'PBKDF2-SHA256'
+  contentType: 'text/html'
   iterations: number
   salt: string
   iv: string
@@ -26,16 +28,18 @@ export interface RenderEncryptedArticleOptions {
 const iterations = 210_000
 
 export async function encryptMarkdown(markdown: string, password: string): Promise<EncryptedPayload> {
+  const renderedHtml = await renderEncryptedMarkdown(markdown)
   const salt = crypto.randomBytes(16)
   const iv = crypto.randomBytes(12)
   const key = crypto.pbkdf2Sync(password, salt, iterations, 32, 'sha256')
   const cipher = crypto.createCipheriv('aes-256-gcm', key, iv)
-  const encrypted = Buffer.concat([cipher.update(markdown, 'utf8'), cipher.final()])
+  const encrypted = Buffer.concat([cipher.update(renderedHtml, 'utf8'), cipher.final()])
   const tag = cipher.getAuthTag()
 
   return {
     algorithm: 'AES-GCM',
     kdf: 'PBKDF2-SHA256',
+    contentType: 'text/html',
     iterations,
     salt: salt.toString('base64'),
     iv: iv.toString('base64'),

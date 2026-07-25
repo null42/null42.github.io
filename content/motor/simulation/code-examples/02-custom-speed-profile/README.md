@@ -22,7 +22,7 @@ navGroupOrder: 40
 学会修改 `pmsm_comm.c` 的 `_user_commands()` 函数来设计自己的仿真场景。
 
 ## 要修改的文件
-`E:\new_things\emachinery\emachinery\frameworkCodes\c\pmsm_comm.c`
+`%EMACHINERY_ROOT%\emachinery\frameworkCodes\c\pmsm_comm.c`
 
 ## 修改方案
 

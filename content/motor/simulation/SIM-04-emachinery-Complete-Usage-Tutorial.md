@@ -155,32 +155,32 @@ emachinery 提供 24 种仿真模式，按功能可分为 7 大类：
 
 ### 2.1 四大环境组件
 
-仿真运行需要以下 4 个组件，均在 `E:\new_things\` 目录下预装：
+仿真运行需要以下 4 个组件，均在 `%SIMULATION_TOOLS_ROOT%\` 目录下预装：
 
 | 组件 | 路径 | 用途 | 验证方法 |
 |------|------|------|---------|
-| **TDM-GCC-64** | `C:\TDM-GCC-64\bin` | 编译 C 仿真代码（gcc/gmake） | 命令行输入 `gcc --version`，应显示 `gcc (tdm64-1) 10.3.0` |
-| **Python 虚拟环境** | `E:\new_things\emy-env` | Python 3.12 + streamlit/numpy/pandas/matplotlib/control/sympy/numba | `E:\new_things\emy-env\Scripts\activate.bat` → `python --version` |
-| **make.exe** | `E:\new_things\emachinery\emachinery\frameworkCodes\c\gmake.exe` | 执行 Makefile 编译 C 工程 | 确认文件存在即可 |
-| **MiKTeX** | `E:\new_things\miktex\miktex\bin\x64` | LaTeX 渲染引擎，用于绘图中的数学公式 | 可选，缺失时公式以纯文本显示 |
+| **TDM-GCC-64** | `%TDM_GCC_ROOT%\bin` | 编译 C 仿真代码（gcc/gmake） | 命令行输入 `gcc --version`，应显示 `gcc (tdm64-1) 10.3.0` |
+| **Python 虚拟环境** | `%EMACHINERY_VENV%` | Python 3.12 + streamlit/numpy/pandas/matplotlib/control/sympy/numba | `%EMACHINERY_VENV%\Scripts\activate.bat` → `python --version` |
+| **make.exe** | `%EMACHINERY_ROOT%\emachinery\frameworkCodes\c\gmake.exe` | 执行 Makefile 编译 C 工程 | 确认文件存在即可 |
+| **MiKTeX** | `%MIKTEX_BIN%` | LaTeX 渲染引擎，用于绘图中的数学公式 | 可选，缺失时公式以纯文本显示 |
 
 ### 2.2 三种启动方式
 
 #### 方式一（推荐）：Streamlit 图形界面
 
-**操作：** 双击 `E:\new_things\emy-start.bat`
+**操作：** 双击 `%EMACHINERY_START_SCRIPT%`
 
 **脚本内容解析：**
 ```batch
 @echo off
 chcp 65001 >nul                          # 设置控制台编码为 UTF-8，防止中文乱码
 title emy-c Motor Simulation (Source)
-set PATH=E:\new_things\miktex\miktex\bin\x64;    # MiKTeX 路径
-       E:\new_things\emachinery\emachinery\frameworkCodes\c;  # gmake 路径
-       C:\TDM-GCC-64\bin;                          # GCC 路径
+set PATH=%MIKTEX_BIN%;    # MiKTeX 路径
+       %EMACHINERY_ROOT%\emachinery\frameworkCodes\c;  # gmake 路径
+       %TDM_GCC_ROOT%\bin;                          # GCC 路径
        %PATH%
-call E:\new_things\emy-env\Scripts\activate.bat    # 激活 Python 虚拟环境
-cd /d E:\new_things\emachinery                     # 切换到源码根目录
+call %EMACHINERY_VENV%\Scripts\activate.bat    # 激活 Python 虚拟环境
+cd /d %EMACHINERY_ROOT%                     # 切换到源码根目录
 python -m emachinery.main                          # 启动 Streamlit GUI
 ```
 
@@ -190,25 +190,25 @@ python -m emachinery.main                          # 启动 Streamlit GUI
 
 #### 方式二：命令行直接编译
 
-**操作：** 双击 `E:\new_things\emy-c-build.bat`
+**操作：** 双击 `%EMACHINERY_BUILD_SCRIPT%`
 
 **脚本做的事：** 设置 PATH → 切换到 C 源码目录 → 执行 `gmake.exe`
 
 编译成功后，`frameworkCodes\c` 目录下生成 `main.exe`。手动运行：
 ```bash
-cd E:\new_things\emachinery\emachinery\frameworkCodes\c
+cd %EMACHINERY_ROOT%\emachinery\frameworkCodes\c
 main.exe
 ```
 
-仿真数据输出到 `E:\new_things\emachinery\dat\电机名.dat`。
+仿真数据输出到 `%EMACHINERY_ROOT%\dat\电机名.dat`。
 
 **适合：** 只改了 C 代码需要快速编译验证、不想启动 Streamlit
 
 #### 方式三：手动命令
 
 ```bash
-E:\new_things\emy-env\Scripts\activate.bat
-cd /d E:\new_things\emachinery
+%EMACHINERY_VENV%\Scripts\activate.bat
+cd /d %EMACHINERY_ROOT%
 python -m emachinery.main
 ```
 
@@ -1101,7 +1101,7 @@ config:
 
 | 错误信息 | 原因 | 解决方案 |
 |---------|------|---------|
-| `process_begin: CreateProcess(NULL, gcc ...) failed. make (e=2)` | gmake 找不到 gcc | ① 重启电脑使 PATH 生效 ② 确认 `C:\TDM-GCC-64\bin\gcc.exe` 存在 ③ 手动执行 `set PATH=C:\TDM-GCC-64\bin;%PATH%` 后再运行 gmake |
+| `process_begin: CreateProcess(NULL, gcc ...) failed. make (e=2)` | gmake 找不到 gcc | ① 重启电脑使 PATH 生效 ② 确认 `%TDM_GCC_ROOT%\bin\gcc.exe` 存在 ③ 手动执行 `set PATH=%TDM_GCC_ROOT%\bin;%PATH%` 后再运行 gmake |
 | `undefined reference to 'xxx'` | 缺少 C 源文件或函数未实现 | ① 检查是否缺少 `.c` 文件 ② 检查 makefile 是否包含所有 `.c` 文件 ③ 确保新增函数的声明在头文件中 |
 | `'gmake' is not recognized` | gmake 不在 PATH 中 | 确认 `frameworkCodes\c\gmake.exe` 存在，启动脚本已添加该目录到 PATH |
 | `super_config.h: No such file` | Python 代码生成失败 | 先在 Streamlit 中点击「Save to C and compile」让 Python 生成该文件 |
@@ -1230,7 +1230,7 @@ emachinery 仿真系统与知识库的理论模块紧密关联，建议按以下
 
 ```mermaid
 flowchart LR
-    ROOT["E:\\new_things\\emachinery\\"] --> E["emachinery\\"]
+    ROOT["%EMACHINERY_ROOT%\\"] --> E["emachinery\\"]
     ROOT --> DAT["dat\\<br/>仿真输出数据目录（备用）"]
     ROOT --> UTIL["MyUtils\\<br/>辅助工具"]
 
@@ -1318,11 +1318,11 @@ flowchart LR
 
 如果你是第一次使用 emachinery 仿真框架，按以下清单逐项确认：
 
-- [ ] **环境确认：** `C:\TDM-GCC-64\bin\gcc.exe` 存在
-- [ ] **环境确认：** `E:\new_things\emy-env\Scripts\python.exe` 存在
-- [ ] **环境确认：** `E:\new_things\emachinery\emachinery\frameworkCodes\c\gmake.exe` 存在
-- [ ] **环境确认：** `E:\new_things\emachinery\emachinery\main.py` 存在
-- [ ] **启动：** 双击 `E:\new_things\emy-start.bat`，浏览器打开 Streamlit 页面
+- [ ] **环境确认：** `%TDM_GCC_ROOT%\bin\gcc.exe` 存在
+- [ ] **环境确认：** `%EMACHINERY_VENV%\Scripts\python.exe` 存在
+- [ ] **环境确认：** `%EMACHINERY_ROOT%\emachinery\frameworkCodes\c\gmake.exe` 存在
+- [ ] **环境确认：** `%EMACHINERY_ROOT%\emachinery\main.py` 存在
+- [ ] **启动：** 双击 `%EMACHINERY_START_SCRIPT%`，浏览器打开 Streamlit 页面
 - [ ] **选模式：** 保持默认「C」
 - [ ] **选电机：** 保持默认 `SEW100W`
 - [ ] **选用户：** 保持默认

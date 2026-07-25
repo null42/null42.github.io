@@ -160,6 +160,12 @@
 				setTimeout(() => renderMermaidDiagrams(), 200);
 			}
 		});
+
+		// 解密内容注入后重新扫描新出现的 Mermaid 容器
+		document.addEventListener("password:decrypted", () => {
+			retryCount = 0;
+			setTimeout(() => renderMermaidDiagrams(), 100);
+		});
 	}
 
 	async function initializeMermaid() {

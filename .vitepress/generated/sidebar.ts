@@ -474,32 +474,6 @@ export const generatedSidebar = [
         "collapsed": true,
         "items": [
           {
-            "text": "基础算法底座",
-            "collapsed": true,
-            "items": [
-              {
-                "text": "FOUND-01 标幺值系统：把不同电机变成同一套算法",
-                "link": "/content/motor/foundations/FOUND-01-Per-Unit-System.html"
-              },
-              {
-                "text": "FOUND-02 定点数与Q格式：让没有FPU的DSP稳定跑FOC",
-                "link": "/content/motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP.html"
-              },
-              {
-                "text": "FOUND-03 SPWM原理与DSP实现：从正弦参考到定时器比较值",
-                "link": "/content/motor/foundations/FOUND-03-SPWM-Principle-DSP.html"
-              },
-              {
-                "text": "FOUND-04 SVPWM原理与DSP实现：用相邻矢量合成参考电压",
-                "link": "/content/motor/foundations/FOUND-04-SVPWM-Principle-DSP.html"
-              },
-              {
-                "text": "FOUND-05 三电平SVPWM原理与DSP实现：多一个中点，多一层约束",
-                "link": "/content/motor/foundations/FOUND-05-Three-Level-SVPWM-DSP.html"
-              }
-            ]
-          },
-          {
             "text": "控制理论",
             "collapsed": true,
             "items": [
@@ -654,6 +628,32 @@ export const generatedSidebar = [
               {
                 "text": "CT-19: 模型预测控制",
                 "link": "/content/motor/control-theory/CT-19-Model-Predictive-Control.html"
+              }
+            ]
+          },
+          {
+            "text": "基础算法底座",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "FOUND-01 标幺值系统：把不同电机变成同一套算法",
+                "link": "/content/motor/foundations/FOUND-01-Per-Unit-System.html"
+              },
+              {
+                "text": "FOUND-02 定点数与Q格式：让没有FPU的DSP稳定跑FOC",
+                "link": "/content/motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP.html"
+              },
+              {
+                "text": "FOUND-03 SPWM原理与DSP实现：从正弦参考到定时器比较值",
+                "link": "/content/motor/foundations/FOUND-03-SPWM-Principle-DSP.html"
+              },
+              {
+                "text": "FOUND-04 SVPWM原理与DSP实现：用相邻矢量合成参考电压",
+                "link": "/content/motor/foundations/FOUND-04-SVPWM-Principle-DSP.html"
+              },
+              {
+                "text": "FOUND-05 三电平SVPWM原理与DSP实现：多一个中点，多一层约束",
+                "link": "/content/motor/foundations/FOUND-05-Three-Level-SVPWM-DSP.html"
               }
             ]
           },
@@ -1544,6 +1544,16 @@ export const generatedSidebar = [
         "collapsed": true,
         "items": [
           {
+            "text": "周复盘",
+            "collapsed": true,
+            "items": [
+              {
+                "text": "Week 01 Day 01: Boost Converter First Pass",
+                "link": "/content/power/weekly-reviews/week-01-day-01.html"
+              }
+            ]
+          },
+          {
             "text": "历史记录",
             "collapsed": true,
             "items": [
@@ -1654,16 +1664,6 @@ export const generatedSidebar = [
               {
                 "text": "学习记录 #0026：三电平P/O/N工作状态判别",
                 "link": "/content/power/archive/old-learning-records/0026-three-level-pon-states.html"
-              }
-            ]
-          },
-          {
-            "text": "周复盘",
-            "collapsed": true,
-            "items": [
-              {
-                "text": "Week 01 Day 01: Boost Converter First Pass",
-                "link": "/content/power/weekly-reviews/week-01-day-01.html"
               }
             ]
           }

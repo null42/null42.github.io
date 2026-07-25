@@ -1,0 +1,42 @@
+<div id="page-loader" class="page-loader page-loader--visible" role="status" aria-live="polite" aria-label="页面加载中">
+  <div class="page-loader__halo" aria-hidden="true"></div>
+  <div class="page-loader__scene" aria-hidden="true">
+    <img src="/assets/images/firefly-v22/feibi-loading.webp" alt="" width="640" height="360" loading="eager" fetchpriority="low" decoding="async" />
+  </div>
+  <div class="page-loader__copy">
+    <span>NULL42 KNOWLEDGE</span>
+    <strong>正在整理知识轨迹</strong>
+    <small>NULL42 · ENGINEERING ARCHIVE</small>
+  </div>
+  <div class="page-loader__line" aria-hidden="true"><i></i></div>
+</div>
+<noscript><style>#page-loader{display:none!important}</style></noscript>
+
+<script>
+  import { initPageLoaderLifecycle } from '@/utils/page-loader-controller'
+  initPageLoaderLifecycle()
+</script>
+
+<style>
+  .page-loader{position:fixed;inset:0;z-index:var(--z-loader,1000);display:grid;place-content:center;justify-items:center;gap:1.35rem;overflow:hidden;color:#30333d;background:radial-gradient(circle at 50% 42%,#fff 0,#f9f3f5 48%,#eaf4f3 100%);transition:opacity .42s ease,visibility .42s ease}
+  .page-loader::before,.page-loader::after{content:"";position:absolute;border-radius:999px;filter:blur(4px);opacity:.7}
+  .page-loader::before{width:34rem;height:34rem;left:-12rem;top:-15rem;background:#f6dce5}
+  .page-loader::after{width:28rem;height:28rem;right:-9rem;bottom:-13rem;background:#ccebe5}
+  .page-loader__halo{position:absolute;width:min(70vw,38rem);aspect-ratio:1;border:1px solid #6eb8aa55;border-radius:50%;box-shadow:0 0 0 4rem #fff4,0 0 0 8rem #8fcfc31a;animation:loader-breathe 2.4s ease-in-out infinite}
+  .page-loader__scene{position:relative;z-index:1;width:min(30rem,82vw);height:7.5rem;overflow:hidden;border-radius:2rem;background:#fff;box-shadow:0 1.5rem 4rem #658b8b2b}
+  .page-loader__scene::after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(transparent,#fff 78%);pointer-events:none}
+  .page-loader__scene img{width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.08)}
+  .page-loader__copy{position:relative;z-index:1;display:grid;justify-items:center;gap:.25rem;text-align:center;letter-spacing:.08em}
+  .page-loader__copy span{font-size:.72rem;color:#4b9d8d}
+  .page-loader__copy strong{font-size:clamp(1.15rem,3vw,1.75rem);font-weight:700;letter-spacing:.03em}
+  .page-loader__copy small{font-size:.62rem;color:#7e858d}
+  .page-loader__line{position:relative;z-index:1;width:min(15rem,56vw);height:2px;overflow:hidden;border-radius:999px;background:#7aaea42b}
+  .page-loader__line i{display:block;width:45%;height:100%;border-radius:inherit;background:linear-gradient(90deg,transparent,#55a995,transparent);animation:loader-line 1.25s ease-in-out infinite}
+  .page-loader--hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .page-loader--visible{opacity:1;visibility:visible;pointer-events:auto}
+  :global(html.is-page-loading){overflow:hidden}
+  @keyframes loader-breathe{50%{transform:scale(1.045);opacity:.65}}
+  @keyframes loader-line{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+  @media(max-width:30rem){.page-loader__halo{width:90vw}.page-loader__scene{height:6.5rem;border-radius:1.4rem}}
+  @media(prefers-reduced-motion:reduce){.page-loader,.page-loader__halo,.page-loader__line i{transition:none;animation:none}.page-loader__line i{width:100%;background:#55a995}}
+</style>

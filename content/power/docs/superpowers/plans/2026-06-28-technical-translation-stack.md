@@ -16,7 +16,7 @@ summary: "> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagen
 
 **Goal:** Build the phase-1 local technical translation stack described in `docs/superpowers/specs/2026-06-28-technical-translation-stack-design.md`.
 
-**Architecture:** Use `E:\software\technical-translation-stack` as the runtime root. Keep the CLI/API pipeline separate from upstream repositories, invoke PDFMathTranslate-next/BabelDOC as layout-preserved backends, and use OpenAI-compatible providers for direct LLM translation and review.
+**Architecture:** Use `%TRANSLATION_STACK_ROOT%` as the runtime root. Keep the CLI/API pipeline separate from upstream repositories, invoke PDFMathTranslate-next/BabelDOC as layout-preserved backends, and use OpenAI-compatible providers for direct LLM translation and review.
 
 **Tech Stack:** Python 3, Typer/FastAPI when available, pypdf/python-docx/PyMuPDF-style PDF helpers when available, PDFMathTranslate-next/BabelDOC, OpenAI-compatible HTTP APIs, Markdown/HTML/PDF rendering.
 
@@ -25,19 +25,19 @@ summary: "> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagen
 ### Task 1: Runtime Root and Config Skeleton
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\configs\providers.example.yaml`
-- Create: `E:\software\technical-translation-stack\configs\profiles\power-electronics.yaml`
-- Create: `E:\software\technical-translation-stack\configs\prompts\extract-glossary.v1.md`
-- Create: `E:\software\technical-translation-stack\configs\prompts\translate-chunk.v1.md`
-- Create: `E:\software\technical-translation-stack\configs\prompts\review-translation.v1.md`
-- Create: `E:\software\technical-translation-stack\.gitignore`
+- Create: `%TRANSLATION_STACK_ROOT%\configs\providers.example.yaml`
+- Create: `%TRANSLATION_STACK_ROOT%\configs\profiles\power-electronics.yaml`
+- Create: `%TRANSLATION_STACK_ROOT%\configs\prompts\extract-glossary.v1.md`
+- Create: `%TRANSLATION_STACK_ROOT%\configs\prompts\translate-chunk.v1.md`
+- Create: `%TRANSLATION_STACK_ROOT%\configs\prompts\review-translation.v1.md`
+- Create: `%TRANSLATION_STACK_ROOT%\.gitignore`
 
 - [ ] **Step 1: Create runtime directories**
 
 Run PowerShell:
 
 ```powershell
-$root = 'E:\software\technical-translation-stack'
+$root = '%TRANSLATION_STACK_ROOT%'
 New-Item -ItemType Directory -Force -Path `
   "$root\repos", "$root\envs", "$root\configs\profiles", "$root\configs\prompts", `
   "$root\projects", "$root\service", "$root\cli", "$root\logs" | Out-Null
@@ -115,7 +115,7 @@ projects/*/logs/
 Run:
 
 ```powershell
-Get-ChildItem -LiteralPath 'E:\software\technical-translation-stack' -Force
+Get-ChildItem -LiteralPath '%TRANSLATION_STACK_ROOT%' -Force
 ```
 
 Expected: root directories and config skeleton exist.
@@ -123,12 +123,12 @@ Expected: root directories and config skeleton exist.
 ### Task 2: Pipeline CLI Skeleton
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\cli\translate_book.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\__init__.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\project.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\outline.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\review.py`
-- Create: `E:\software\technical-translation-stack\cli\tests\test_project.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\translate_book.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\__init__.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\project.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\outline.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\review.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\tests\test_project.py`
 
 - [ ] **Step 1: Write failing project tests**
 
@@ -157,7 +157,7 @@ def test_init_project_records_source_and_creates_directories(tmp_path):
 Run:
 
 ```powershell
-cd E:\software\technical-translation-stack\cli
+cd %TRANSLATION_STACK_ROOT%\cli
 python -m pytest tests\test_project.py -q
 ```
 
@@ -186,9 +186,9 @@ Run tests and smoke command against a tiny temp PDF.
 ### Task 3: Outline and Sample Chapter Preparation
 
 **Files:**
-- Modify: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\outline.py`
-- Modify: `E:\software\technical-translation-stack\cli\translate_book.py`
-- Create: `E:\software\technical-translation-stack\cli\tests\test_outline.py`
+- Modify: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\outline.py`
+- Modify: `%TRANSLATION_STACK_ROOT%\cli\translate_book.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\tests\test_outline.py`
 
 - [ ] **Step 1: Write outline tests**
 
@@ -230,8 +230,8 @@ For `--chapters 2,8`, write:
 Run:
 
 ```powershell
-python translate_book.py init 'E:\文档\Fundamentals of Power Electronics 3rd Edition.pdf' --project 'E:\software\technical-translation-stack\projects\fundamentals-power-electronics-3e' --title 'Fundamentals of Power Electronics 3rd Edition'
-python translate_book.py prepare 'E:\software\technical-translation-stack\projects\fundamentals-power-electronics-3e' --chapters 2,8
+python translate_book.py init '<source-document-root>\Fundamentals of Power Electronics 3rd Edition.pdf' --project '%TRANSLATION_STACK_ROOT%\projects\fundamentals-power-electronics-3e' --title 'Fundamentals of Power Electronics 3rd Edition'
+python translate_book.py prepare '%TRANSLATION_STACK_ROOT%\projects\fundamentals-power-electronics-3e' --chapters 2,8
 ```
 
 Expected: chapter 2 and 8 chunks exist, with page ranges matching outline evidence.
@@ -239,9 +239,9 @@ Expected: chapter 2 and 8 chunks exist, with page ranges matching outline eviden
 ### Task 4: Provider Abstraction and Translation Cache
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\providers.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\cache.py`
-- Create: `E:\software\technical-translation-stack\cli\tests\test_provider_cache.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\providers.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\cache.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\tests\test_provider_cache.py`
 
 - [ ] **Step 1: Write cache tests**
 
@@ -266,10 +266,10 @@ Run provider/cache tests and dry-run translation for chapter 2.
 ### Task 5: Glossary Confirmation and Direct LLM Translation
 
 **Files:**
-- Modify: `E:\software\technical-translation-stack\cli\translate_book.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\glossary.py`
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\translate.py`
-- Create: `E:\software\technical-translation-stack\cli\tests\test_glossary.py`
+- Modify: `%TRANSLATION_STACK_ROOT%\cli\translate_book.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\glossary.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\translate.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\tests\test_glossary.py`
 
 - [ ] **Step 1: Write glossary tests**
 
@@ -299,9 +299,9 @@ Run dry-run translation, then verify metadata and warning labels exist.
 ### Task 6: Rendering and Review Reports
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\render.py`
-- Modify: `E:\software\technical-translation-stack\cli\technical_translation_pipeline\review.py`
-- Create: `E:\software\technical-translation-stack\cli\tests\test_review.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\render.py`
+- Modify: `%TRANSLATION_STACK_ROOT%\cli\technical_translation_pipeline\review.py`
+- Create: `%TRANSLATION_STACK_ROOT%\cli\tests\test_review.py`
 
 - [ ] **Step 1: Write review tests**
 
@@ -333,8 +333,8 @@ Expected: report exists and explicitly says dry-run translations are not final i
 ### Task 7: PDFMathTranslate-next/BabelDOC Installation Probe
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\repos\...`
-- Create: `E:\software\technical-translation-stack\logs\install-report.md`
+- Create: `%TRANSLATION_STACK_ROOT%\repos\...`
+- Create: `%TRANSLATION_STACK_ROOT%\logs\install-report.md`
 
 - [ ] **Step 1: Clone or install upstream tools**
 
@@ -355,8 +355,8 @@ Add a pipeline command or documented adapter that invokes the upstream backend f
 ### Task 8: Local API Thin Wrapper
 
 **Files:**
-- Create: `E:\software\technical-translation-stack\service\technical_translation_api\app.py`
-- Create: `E:\software\technical-translation-stack\service\technical_translation_api\tests\test_api.py`
+- Create: `%TRANSLATION_STACK_ROOT%\service\technical_translation_api\app.py`
+- Create: `%TRANSLATION_STACK_ROOT%\service\technical_translation_api\tests\test_api.py`
 
 - [ ] **Step 1: Write API tests**
 
@@ -373,14 +373,14 @@ Run local API tests and optionally start localhost service.
 ### Task 9: Skill Integration
 
 **Files:**
-- Modify: `C:\Users\30504\.codex\skills\translating-technical-literature\SKILL.md`
-- Modify/Create: `C:\Users\30504\.codex\skills\translating-technical-literature\references\translation-stack.md`
-- Modify/Create: `C:\Users\30504\.codex\skills\translating-technical-literature\scripts\...`
+- Modify: %USERPROFILE%\.codex\skills\translating-technical-literature\SKILL.md
+- Modify/Create: %USERPROFILE%\.codex\skills\translating-technical-literature\references\translation-stack.md
+- Modify/Create: %USERPROFILE%\.codex\skills\translating-technical-literature\scripts\...
 - Modify tests under the same skill directory.
 
 - [ ] **Step 1: Add failing skill/tool tests**
 
-Add tests that verify the skill helper can discover `E:\software\technical-translation-stack`, identify CLI availability, and fall back to manual extraction when missing.
+Add tests that verify the skill helper can discover `%TRANSLATION_STACK_ROOT%`, identify CLI availability, and fall back to manual extraction when missing.
 
 - [ ] **Step 2: Update skill instructions**
 
@@ -393,7 +393,7 @@ Run the skill tests and `quick_validate.py`.
 ### Task 10: Phase-1 Evidence Package
 
 **Files:**
-- Create/Update: `E:\software\technical-translation-stack\projects\fundamentals-power-electronics-3e\reports\phase-1-evidence.md`
+- Create/Update: `%TRANSLATION_STACK_ROOT%\projects\fundamentals-power-electronics-3e\reports\phase-1-evidence.md`
 
 - [ ] **Step 1: Collect evidence**
 

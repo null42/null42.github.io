@@ -1,7 +1,9 @@
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { describe, expect, it } from 'vitest'
+import { cleanDist } from '../../scripts/kb/clean-dist'
 
 describe('knowledge base pipeline', () => {
   it('defines one-command validation and sync scripts', () => {
@@ -17,6 +19,19 @@ describe('knowledge base pipeline', () => {
     expect(pkg.scripts['kb:inspect']).toContain('inspect-source')
     expect(pkg.scripts['kb:analyze']).toContain('suggest-tags')
     expect(pkg.scripts['kb:deploy']).toContain('deploy')
+  })
+
+  it('removes both legacy and Astro production outputs before a build', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'kb-clean-dist-'))
+    fs.mkdirSync(path.join(root, '.vitepress', 'dist'), { recursive: true })
+    fs.mkdirSync(path.join(root, 'dist', 'images', 'home'), { recursive: true })
+    fs.writeFileSync(path.join(root, '.vitepress', 'dist', 'index.html'), 'legacy')
+    fs.writeFileSync(path.join(root, 'dist', 'images', 'home', 'home-01.webp'), 'stale')
+
+    await cleanDist(root)
+
+    expect(fs.existsSync(path.join(root, '.vitepress', 'dist'))).toBe(false)
+    expect(fs.existsSync(path.join(root, 'dist'))).toBe(false)
   })
 
   it('does not overwrite migrated articles during one-command sync', () => {

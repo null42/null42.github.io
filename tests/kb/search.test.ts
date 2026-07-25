@@ -5,12 +5,21 @@ import { tokenize } from '../../scripts/kb/search/tokenize'
 import type { ArticleRecord } from '../../scripts/kb/types'
 
 describe('knowledge search', () => {
+  it('indexes and filters canonical hierarchy identifiers', () => {
+    const records = buildSearchIndex([
+      article({ title: 'Canonical', sectionId: 'power', sectionTitle: 'Power', routeId: 'project', routeTitle: 'Projects', stageId: 'build', stageTitle: 'Build' }),
+    ])
+
+    expect(records[0]).toMatchObject({ articleId: 'article', sectionId: 'power', routeId: 'project', stageId: 'build' })
+    expect(searchRecords(records, 'Canonical', { sectionId: 'power', routeId: 'project', stageId: 'build' })).toHaveLength(1)
+  })
   it('indexes public article body text and excludes non-public content', () => {
     const records = buildSearchIndex([
       article({
         title: 'PFC Current Loop',
-        section: 'Power',
-        chapter: '02-PFC',
+        sectionId: 'power',
+        sectionTitle: 'Power',
+        stageId: '02-PFC',
         tags: ['PFC'],
         body: '# PFC Current Loop\n\nThe body mentions inner current tracking and ADC sampling.'
       }),
@@ -90,15 +99,15 @@ describe('knowledge search', () => {
     expect(result.anchor).toBe('电流环-pi-参数整定计算器')
   })
 
-  it('filters by section, chapter, tag, and month', () => {
+  it('filters by section, stage, tag, and month', () => {
     const records = buildSearchIndex([
-      article({ title: 'Power ADC', section: 'Power', chapter: '01-Lessons', tags: ['ADC'], date: '2026-07-01' }),
-      article({ title: 'Motor ADC', section: 'Motor', chapter: '02-Simulations', tags: ['ADC'], date: '2026-06-01' })
+      article({ title: 'Power ADC', sectionId: 'power', stageId: 'lessons', tags: ['ADC'], date: '2026-07-01' }),
+      article({ title: 'Motor ADC', sectionId: 'motor', stageId: 'simulations', tags: ['ADC'], date: '2026-06-01' })
     ])
 
     const results = searchRecords(records, 'ADC', {
-      section: 'Power',
-      chapter: '01-Lessons',
+      sectionId: 'power',
+      stageId: 'lessons',
       tag: 'ADC',
       month: '2026-07'
     })
@@ -177,6 +186,12 @@ function article(overrides: Partial<ArticleRecord>): ArticleRecord {
     path: 'content/article.md',
     url: '/content/article.html',
     body: 'Body',
+    articleId: 'article',
+    sourcePath: 'content/article.md',
+    slug: 'article',
+    publicSurface: 'full',
+    order: Number.MAX_SAFE_INTEGER,
+    explicitOrder: false,
     ...overrides
   }
 }

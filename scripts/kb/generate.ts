@@ -59,7 +59,7 @@ export function buildArchive(articles: ArticleRecord[]): Array<{ month: string; 
 export function buildSidebar(articles: ArticleRecord[]): string {
   const bySection = new Map<string, ArticleRecord[]>()
   for (const article of articles) {
-    const key = article.section || article.category
+    const key = article.sectionId ? `section:${article.sectionId}` : `category:${article.category}`
     const list = bySection.get(key) || []
     list.push(article)
     bySection.set(key, list)
@@ -67,19 +67,20 @@ export function buildSidebar(articles: ArticleRecord[]): string {
 
   const sections = [...bySection.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([text, items]) => buildSection(text, items))
+    .map(([, items]) => buildSection(items))
 
   return `export const generatedSidebar = ${JSON.stringify(sections, null, 2)}\n`
 }
 
-function buildSection(text: string, articles: ArticleRecord[]) {
-  const withGroups = articles.filter((article) => article.navGroup)
-  const withoutGroups = articles.filter((article) => !article.navGroup)
+function buildSection(articles: ArticleRecord[]) {
+  const text = articles[0]?.sectionTitle || articles[0]?.sectionId || articles[0]?.category || '未分类'
+  const withGroups = articles.filter((article) => article.routeId || article.routeTitle)
+  const withoutGroups = articles.filter((article) => !article.routeId && !article.routeTitle)
 
   if (withGroups.length > 0) {
     const byGroup = new Map<string, ArticleRecord[]>()
     for (const article of withGroups) {
-      const key = article.navGroup || '未分组'
+      const key = article.routeId || '未分组'
       const list = byGroup.get(key) || []
       list.push(article)
       byGroup.set(key, list)
@@ -87,8 +88,8 @@ function buildSection(text: string, articles: ArticleRecord[]) {
 
     const groups = [...byGroup.entries()]
       .sort(([, aItems], [, bItems]) => compareNavGroup(aItems, bItems))
-      .map(([groupText, groupItems]) => ({
-        text: groupText,
+      .map(([, groupItems]) => ({
+        text: groupItems[0]?.routeTitle || groupItems[0]?.routeId || '未分组',
         collapsed: true,
         items: buildChapterItems(groupItems)
       }))
@@ -108,8 +109,8 @@ function buildSection(text: string, articles: ArticleRecord[]) {
 }
 
 function buildChapterItems(articles: ArticleRecord[]) {
-  const withChapter = articles.filter((article) => article.chapter || article.chapterTitle)
-  const withoutChapter = articles.filter((article) => !article.chapter && !article.chapterTitle)
+  const withChapter = articles.filter((article) => article.stageId || article.stageTitle)
+  const withoutChapter = articles.filter((article) => !article.stageId && !article.stageTitle)
 
   if (withChapter.length === 0) {
     return sortArticles(withoutChapter).map(articleLink)
@@ -117,7 +118,7 @@ function buildChapterItems(articles: ArticleRecord[]) {
 
   const byChapter = new Map<string, ArticleRecord[]>()
   for (const article of withChapter) {
-    const key = article.chapterTitle || article.chapter || '未分章'
+    const key = article.stageId || '未分章'
     const list = byChapter.get(key) || []
     list.push(article)
     byChapter.set(key, list)
@@ -125,8 +126,8 @@ function buildChapterItems(articles: ArticleRecord[]) {
 
   const chapters = [...byChapter.entries()]
     .sort(([, aItems], [, bItems]) => compareChapter(aItems, bItems))
-    .map(([chapterText, chapterItems]) => ({
-      text: chapterText,
+    .map(([, chapterItems]) => ({
+      text: chapterItems[0]?.stageTitle || chapterItems[0]?.stageId || '未分章',
       collapsed: true,
       items: sortArticles(chapterItems).map(articleLink)
     }))
@@ -137,13 +138,13 @@ function buildChapterItems(articles: ArticleRecord[]) {
 function compareNavGroup(aItems: ArticleRecord[], bItems: ArticleRecord[]): number {
   const a = aItems[0]
   const b = bItems[0]
-  return compareNumbers(a.navGroupOrder, b.navGroupOrder) || String(a.navGroup).localeCompare(String(b.navGroup))
+  return compareNumbers(a.routeOrder, b.routeOrder) || String(a.routeId || a.routeTitle).localeCompare(String(b.routeId || b.routeTitle))
 }
 
 function compareChapter(aItems: ArticleRecord[], bItems: ArticleRecord[]): number {
   const a = aItems[0]
   const b = bItems[0]
-  return compareNumbers(a.chapterOrder, b.chapterOrder) || String(a.chapter || a.chapterTitle).localeCompare(String(b.chapter || b.chapterTitle))
+  return compareNumbers(a.stageOrder, b.stageOrder) || String(a.stageId || a.stageTitle).localeCompare(String(b.stageId || b.stageTitle))
 }
 
 function sortArticles(articles: ArticleRecord[]): ArticleRecord[] {

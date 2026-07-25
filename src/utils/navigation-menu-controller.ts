@@ -16,7 +16,7 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
   const panel = document.getElementById(PANEL_ID)
   const triggers = TRIGGER_IDS
     .map(id => document.getElementById(id))
-    .filter((element): element is HTMLButtonElement => element instanceof HTMLButtonElement)
+    .filter((element): element is HTMLButtonElement => element?.tagName === 'BUTTON')
   if (!panel || triggers.length === 0) return undefined
 
   const abortController = new AbortController()
@@ -71,6 +71,7 @@ export function initNavigationMenu(): NavigationMenuController | undefined {
     panel.setAttribute('aria-hidden', 'false')
     panel.classList.remove('float-panel-closed')
     syncTriggers(true)
+    panel.querySelector<HTMLElement>('a[href], button:not([disabled])')?.focus()
   }
   const setSubmenuExpanded = (dropdown: Element, expanded: boolean) => {
     const trigger = dropdown.querySelector<HTMLElement>('[data-mobile-dropdown-trigger]')

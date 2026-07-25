@@ -3,14 +3,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { encryptMarkdown, renderEncryptedArticle } from './encrypt'
 
-const defaultSourceDir = 'E:/gitee_CodeStorage/学习/旷世巨作的世界塑造'
 const outputDir = 'content/encrypted'
 const outputSlug = 'worldbuilding'
-const defaultPassword = '123456'
 
 const emojiPattern = /(?:[\u{1F000}-\u{1FAFF}]|[\u2600-\u27BF]\uFE0F?|\uFE0F|\u200D)/gu
 
-export async function buildWorldbuildingMarkdown(sourceDir = defaultSourceDir): Promise<string> {
+export async function buildWorldbuildingMarkdown(sourceDir: string): Promise<string> {
   const files = await listMarkdownFiles(sourceDir)
   const sections: string[] = [
     '# 世界塑造文档',
@@ -37,8 +35,10 @@ export async function buildWorldbuildingMarkdown(sourceDir = defaultSourceDir): 
 }
 
 export async function encryptWorldbuildingColumn(options: { sourceDir?: string; password?: string; date?: string } = {}): Promise<string[]> {
-  const sourceDir = options.sourceDir || process.env.KB_WORLDBUILDING_SOURCE || defaultSourceDir
-  const password = options.password || process.env.KB_WORLDBUILDING_PASSWORD || defaultPassword
+  const sourceDir = options.sourceDir || process.env.KB_WORLDBUILDING_SOURCE
+  if (!sourceDir) throw new Error('KB_WORLDBUILDING_SOURCE is required')
+  const password = options.password || process.env.KB_WORLDBUILDING_PASSWORD
+  if (!password) throw new Error('KB_WORLDBUILDING_PASSWORD is required')
   const date = options.date || new Date().toISOString().slice(0, 10)
   const markdown = await buildWorldbuildingMarkdown(sourceDir)
   const payload = await encryptMarkdown(markdown, password)

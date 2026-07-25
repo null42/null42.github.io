@@ -6,18 +6,20 @@ import type { ArticleRecord, CategoryDefaults, Visibility } from './types'
 export interface ColumnRoute {
   id: string
   title: string
-  order: number
+  order?: number
   description?: string
+  allowEmpty?: boolean
 }
 
 export interface ColumnStage {
   id: string
   title: string
-  order: number
+  order?: number
   routeId: string
   pathPrefix?: string
   chapter?: string
   tags?: string[]
+  allowEmpty?: boolean
 }
 
 export interface ColumnConfig {
@@ -25,7 +27,7 @@ export interface ColumnConfig {
   title: string
   section?: string
   source?: string
-  order: number
+  order?: number
   visibility: Visibility
   layout: 'map' | 'flat'
   searchable?: boolean
@@ -54,6 +56,7 @@ export interface ColumnFilterOption {
   count: number
   columnId?: string
   routeId?: string
+  stageId?: string
 }
 
 export interface ColumnFilterOptions {
@@ -88,7 +91,7 @@ export async function loadColumnRegistry(options: { contentRoot?: string } = {})
     }
   }
 
-  columns.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title, 'zh-CN'))
+  columns.sort(compareOrderId)
   return { contentRoot: root, columns }
 }
 
@@ -111,9 +114,16 @@ export function columnDefaultsForPath(registry: ColumnRegistry, relativePath: st
   const route = column.routes.find((item) => item.id === stage.routeId)
   return {
     ...defaults,
+    sectionId: column.id,
+    sectionTitle: column.section || column.title,
     navGroup: route?.title,
+    routeId: route?.id,
+    routeTitle: route?.title,
     navGroupOrder: route?.order,
     chapter: stage.chapter || stage.id,
+    stage: stage.id,
+    stageId: stage.id,
+    stageTitle: stage.title,
     chapterTitle: stage.title,
     chapterOrder: stage.order,
     category: stage.title,
@@ -126,7 +136,7 @@ export function validateColumnRegistry(registry: ColumnRegistry, articles: Artic
   const columnIds = new Set(registry.columns.map((column) => column.id))
 
   for (const article of articles.filter((item) => item.visibility === 'public')) {
-    const columnId = columnIdFromPath(article.path)
+    const columnId = article.sectionId || columnIdFromPath(article.path)
     if (!columnId || columnIds.has(columnId)) continue
     issues.push({
       code: 'missing-column-config',
@@ -152,7 +162,7 @@ export function buildColumnFilterOptions(registry: ColumnRegistry, articles: Art
   const searchableColumns = registry.columns.filter((column) => column.visibility === 'public' && column.searchable !== false)
   const articlesByColumn = new Map<string, ArticleRecord[]>()
   for (const article of articles.filter((item) => item.visibility === 'public')) {
-    const columnId = columnIdFromPath(article.path)
+    const columnId = article.sectionId || columnIdFromPath(article.path)
     if (!columnId || !searchableColumns.some((column) => column.id === columnId)) continue
     const list = articlesByColumn.get(columnId) || []
     list.push(article)
@@ -178,8 +188,7 @@ export function buildColumnFilterOptions(registry: ColumnRegistry, articles: Art
     for (const route of column.routes) {
       const routeStages = column.stages.filter((stage) => stage.routeId === route.id)
       const count = columnArticles.filter((article) => {
-        const stage = findStageForArticle(column, article)
-        return stage ? stage.routeId === route.id : article.navGroup === route.title
+        return article.routeId === route.id || findStageForArticle(column, article)?.routeId === route.id
       }).length
       if (count > 0) {
         routes.push({ id: `${column.id}:${route.id}`, label: route.title, count, columnId: column.id, routeId: route.id })
@@ -194,7 +203,8 @@ export function buildColumnFilterOptions(registry: ColumnRegistry, articles: Art
           label: stage.title,
           count,
           columnId: column.id,
-          routeId: stage.routeId
+          routeId: stage.routeId,
+          stageId: stage.id
         })
       }
     }
@@ -217,15 +227,15 @@ export function columnIdFromPath(relativePath: string): string | undefined {
 function normalizeColumnConfig(raw: Partial<ColumnConfig>, folderName: string): ColumnConfig {
   const id = stringValue(raw.id) || folderName
   const title = stringValue(raw.title) || id
-  const routes = Array.isArray(raw.routes) ? raw.routes.map(normalizeRoute).sort(compareOrderTitle) : []
-  const stages = Array.isArray(raw.stages) ? raw.stages.map(normalizeStage).sort(compareOrderTitle) : []
+  const routes = Array.isArray(raw.routes) ? raw.routes.map(normalizeRoute).sort(compareOrderId) : []
+  const stages = Array.isArray(raw.stages) ? raw.stages.map(normalizeStage).sort(compareOrderId) : []
   return {
     id,
     title,
     section: stringValue(raw.section) || title,
     source: stringValue(raw.source) || id,
-    order: numberValue(raw.order) ?? 999,
-    visibility: stringValue(raw.visibility) || 'public',
+    order: numberValue(raw.order),
+    visibility: visibilityValue(raw.visibility),
     layout: raw.layout === 'flat' ? 'flat' : 'map',
     searchable: raw.searchable !== false,
     allowFlat: raw.allowFlat === true,
@@ -240,8 +250,9 @@ function normalizeRoute(raw: Partial<ColumnRoute>): ColumnRoute {
   return {
     id: stringValue(raw.id) || stringValue(raw.title) || 'route',
     title: stringValue(raw.title) || stringValue(raw.id) || '路线',
-    order: numberValue(raw.order) ?? 999,
-    description: stringValue(raw.description)
+    order: numberValue(raw.order),
+    description: stringValue(raw.description),
+    allowEmpty: raw.allowEmpty === true
   }
 }
 
@@ -249,18 +260,18 @@ function normalizeStage(raw: Partial<ColumnStage>): ColumnStage {
   return {
     id: stringValue(raw.id) || stringValue(raw.chapter) || stringValue(raw.title) || 'stage',
     title: stringValue(raw.title) || stringValue(raw.id) || '阶段',
-    order: numberValue(raw.order) ?? 999,
+    order: numberValue(raw.order),
     routeId: stringValue(raw.routeId) || 'default',
     pathPrefix: normalizePrefix(raw.pathPrefix),
     chapter: stringValue(raw.chapter),
-    tags: Array.isArray(raw.tags) ? raw.tags.map(String) : undefined
+    tags: Array.isArray(raw.tags) ? raw.tags.map(String) : undefined,
+    allowEmpty: raw.allowEmpty === true
   }
 }
 
 function findStageForArticle(column: ColumnConfig, article: ArticleRecord): ColumnStage | undefined {
-  return findStageForPath(column, article.path)
-    || column.stages.find((stage) => stage.chapter && (stage.chapter === article.chapter || stage.chapter === article.chapterTitle))
-    || column.stages.find((stage) => stage.title === article.chapterTitle)
+  return column.stages.find((stage) => stage.id === article.stageId)
+    || findStageForPath(column, article.path)
 }
 
 function findStageForPath(column: ColumnConfig, relativePath: string): ColumnStage | undefined {
@@ -302,6 +313,14 @@ function numberValue(value: unknown): number | undefined {
   return undefined
 }
 
-function compareOrderTitle<T extends { order: number; title: string }>(a: T, b: T): number {
-  return a.order - b.order || a.title.localeCompare(b.title, 'zh-CN')
+function compareOrderId<T extends { order?: number; id: string }>(a: T, b: T): number {
+  const leftOrder = typeof a.order === 'number' && Number.isFinite(a.order) ? a.order : Number.POSITIVE_INFINITY
+  const rightOrder = typeof b.order === 'number' && Number.isFinite(b.order) ? b.order : Number.POSITIVE_INFINITY
+  return leftOrder - rightOrder || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
+}
+
+function visibilityValue(value: unknown): Visibility {
+  const visibility = stringValue(value) || 'public'
+  if (visibility === 'public' || visibility === 'hidden' || visibility === 'private' || visibility === 'encrypted') return visibility
+  throw new Error('unknown column visibility: ' + visibility)
 }

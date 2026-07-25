@@ -64,7 +64,7 @@ flowchart TD
 ### 2.1 文件位置与命名
 
 ```text
-E:\new_things\emachinery\frameworkCodes\dat\电机名.dat
+%EMACHINERY_ROOT%\frameworkCodes\dat\电机名.dat
 ```
 
 文件名与 Streamlit 中选择的电机名称对应，例如选择 `SEW100W` 则生成 `SEW100W.dat`。
@@ -562,7 +562,7 @@ signal_library:
 
 ### Step 3: 验证信号出现在 `.dat` 文件中
 
-打开生成的 `.dat` 文件（如 `E:\new_things\emachinery\frameworkCodes\dat\SEW100W.dat`），检查第 1 行是否包含 `OFSR.esoaf.xTL`：
+打开生成的 `.dat` 文件（如 `%EMACHINERY_ROOT%\frameworkCodes\dat\SEW100W.dat`），检查第 1 行是否包含 `OFSR.esoaf.xTL`：
 
 ```text
 k,ACM.varOmega * MECH_RAD_PER_SEC_2_RPM,...,OFSR.esoaf.xTL,(*CTRL).timebase

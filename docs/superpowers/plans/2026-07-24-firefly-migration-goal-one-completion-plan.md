@@ -4,7 +4,7 @@
 
 **Goal:** Close the remaining V2.2.2-primary migration work and release the Firefly Mod knowledge blog through same-SHA preview, manual approval, GitHub Pages deployment, and online verification.
 
-**Architecture:** Keep the existing migration and high-fidelity plans as the implementation source of truth. This plan is a remaining-work index: it closes Task 7 without reopening completed phases, executes canonical Tasks 8–12, then adds the approval-bound release sequence required by the approved goal split.
+**Architecture:** Keep the existing migration and high-fidelity plans as implementation references, with the approved goal split overriding their scope. This plan closes Task 7 without reopening completed phases, executes the real player and migration quality tasks, omits unavailable feature shells, then adds the approval-bound release sequence.
 
 **Tech Stack:** Astro, TypeScript, Vitest, Playwright, Swup, Pagefind, GitHub Actions, GitHub Pages.
 
@@ -26,21 +26,21 @@
 - Modify: `tests/e2e/home.production.spec.ts`
 - Modify: `src/styles/home.css`
 
-- [ ] **Step 1: Write the failing contract test**
+- [x] **Step 1: Write the failing contract test**
 
 Assert that the reduced-motion block disables animation names and durations only on animated selectors and does not apply `transform: none !important` to all descendants of `.home-page`.
 
-- [ ] **Step 2: Run RED**
+- [x] **Step 2: Run RED**
 
 Run: `npm.cmd test -- tests/ui/home-contract.test.ts`
 
 Expected: FAIL because the current global reduced-motion rule removes layout transforms.
 
-- [ ] **Step 3: Implement the minimal selector-scoped rule**
+- [x] **Step 3: Implement the minimal selector-scoped rule**
 
 Remove the global descendant transform reset. Preserve positioning transforms such as `.home-hero__floating-dock { transform: translateY(-50%); }`, while disabling animation-driven transforms on the animated hero, decorative, shutter, and reveal elements.
 
-- [ ] **Step 4: Run GREEN and production verification**
+- [x] **Step 4: Run GREEN and production verification**
 
 Run: `npm.cmd test -- tests/ui/home-contract.test.ts`
 
@@ -55,21 +55,21 @@ Expected: all home contract and reduced-motion viewport cases pass.
 - Modify: `src/components/features/PageLoader.astro`
 - Modify: `src/utils/page-loader-controller.ts`
 
-- [ ] **Step 1: Write failing mode tests**
+- [x] **Step 1: Write failing mode tests**
 
 Assert that the initial load waits for critical readiness within the maximum timeout, while a Swup transition uses a shorter minimum display and does not wait for the full initial-load readiness path.
 
-- [ ] **Step 2: Run RED**
+- [x] **Step 2: Run RED**
 
 Run: `npm.cmd test -- tests/ui/page-loader.test.ts`
 
 Expected: FAIL until initial and transition timing are observably different.
 
-- [ ] **Step 3: Implement explicit initial and transition paths**
+- [x] **Step 3: Implement explicit initial and transition paths**
 
 Keep one controller instance, token-cancel stale async work, use the project's existing Swup hooks, and expose mode-specific CSS variables or data attributes without adding a second loader lifecycle.
 
-- [ ] **Step 4: Run GREEN**
+- [x] **Step 4: Run GREEN**
 
 Run: `npm.cmd test -- tests/ui/page-loader.test.ts`
 
@@ -84,23 +84,23 @@ Expected: all loader lifecycle, timeout, and Swup mode tests pass.
 - Add: `reports/visual-baseline/2026-07-24-v22-home/*.png`
 - Remove: `env/capture-v22-home.mjs`
 
-- [ ] **Step 1: Add failing provenance checks**
+- [x] **Step 1: Add failing provenance checks**
 
 Assert that every reused target asset exists, matches the recorded SHA-256, names its pinned source commit, records its license traceability, and records transformations for optimized derivatives.
 
-- [ ] **Step 2: Run RED**
+- [x] **Step 2: Run RED**
 
 Run: `npm.cmd test -- tests/ui/home-contract.test.ts`
 
-- [ ] **Step 3: Clean stale HUD CSS and complete provenance**
+- [x] **Step 3: Clean stale HUD CSS and complete provenance**
 
 Delete unused viewfinder, camera-parameter, focus-frame, rain, and duplicate shutter rules. Do not alter current layout behavior. Update provenance only for audited V2.2.2-primary and V2.5.0-secondary assets.
 
-- [ ] **Step 4: Capture complete scroll evidence**
+- [x] **Step 4: Capture complete scroll evidence**
 
 Stop any stale process on port 4321, run the production preview, and capture desktop, tablet, and mobile images for loader, hero, data layer, display layer, portfolio shutter, feature entry, and latest-content states.
 
-- [ ] **Step 5: Run Task 7 gates**
+- [x] **Step 5: Run Task 7 gates**
 
 Run: `npm.cmd test -- tests/ui/home-contract.test.ts tests/ui/home-interaction.test.ts tests/ui/page-loader.test.ts`
 
@@ -112,32 +112,32 @@ Run: `npm.cmd run test:e2e:home -- --workers=4 --reporter=line`
 
 Run: `git diff --check`
 
-- [ ] **Step 6: Review Task 7**
+- [x] **Step 6: Review Task 7**
 
 Run a specification review and a code-quality review. Continue fixing with RED→GREEN until both report `Critical = 0` and `Important = 0`.
 
-### Task 4: Execute Canonical Tasks 8–12
+### Task 4: Execute Real Features and Final Migration Tasks
 
 **Files:**
 - Follow exactly: `docs/superpowers/plans/2026-07-19-firefly-mod-v22-high-fidelity-implementation-plan.md:206`
 
-- [ ] **Step 1: Implement Task 8 real local player**
+- [x] **Step 1: Implement Task 8 real local player**
 
 Use the canonical Task 8 file list and RED→GREEN sequence. Require local-only media, one persistent audio store, page/mini-player synchronization, and Swup-safe subscriptions.
 
-- [ ] **Step 2: Implement Task 9 static feature pages**
+- [x] **Step 2: Skip unavailable feature shells**
 
-Use the canonical Task 9 file list and RED→GREEN sequence. Preserve real local static features and mark unavailable service-backed operations as “功能暂未开放”.
+Do not implement canonical Task 9. Keep unimplemented or disabled gallery, calendar, friends, guestbook, sponsor, AI, anime, and bangumi entries out of the homepage, navigation, and public route entry surfaces.
 
-- [ ] **Step 3: Implement Task 10 encrypted Markdown parity**
+- [x] **Step 3: Implement Task 10 encrypted Markdown parity**
 
 Use the canonical Task 10 file list and RED→GREEN sequence. Reuse the normal article Markdown capability while keeping decrypted content local and sanitized.
 
-- [ ] **Step 4: Implement Task 11 final regressions**
+- [x] **Step 4: Implement Task 11 final regressions**
 
 Use the canonical Task 11 file list and RED→GREEN sequence for URLs, Pagefind, Sitemap, attachments, route manifests, and generated-output leakage.
 
-- [ ] **Step 5: Execute Task 12 pre-release gates**
+- [x] **Step 5: Execute Task 12 pre-release gates**
 
 Run the canonical full quality, E2E, Lighthouse, visual, security, specification-review, and code-quality gates. Require `Critical = 0` and `Important = 0`.
 
@@ -148,7 +148,7 @@ Run the canonical full quality, E2E, Lighthouse, visual, security, specification
 - Modify: `docs/superpowers/2026-07-12-firefly-mod-knowledge-migration-handoff.md`
 - Add: `reports/visual-baseline/2026-07-24-release/*.png`
 
-- [ ] **Step 1: Create focused migration commits**
+- [x] **Step 1: Create focused migration commits**
 
 Commit completed work on `codex/firefly-mod-knowledge-migration` without force-pushing and without updating `main`.
 
@@ -202,6 +202,6 @@ Record release SHA, deployment URL, workflow run, rollback target, verification 
 
 ## Self-Review
 
-- Spec coverage: Task 7 closure, player, feature shells, encrypted parity, final regressions, same-SHA preview, manual approval, rollback, `main`, Pages, and online verification are mapped.
+- Spec coverage: Task 7 closure, player, removal of unavailable feature entries, encrypted parity, final regressions, same-SHA preview, manual approval, rollback, `main`, Pages, and online verification are mapped.
 - Placeholder scan: no unresolved placeholder, deferred implementation, or unspecified approval action remains.
 - Type consistency: all content and generated artifacts continue to use `sectionId → routeId → stageId → articleId`; this plan adds no alternate content model.

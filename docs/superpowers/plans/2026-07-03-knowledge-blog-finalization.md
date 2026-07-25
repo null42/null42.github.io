@@ -13,7 +13,7 @@
 ## Current Evidence Snapshot
 
 - Repository state was re-audited with `git status --short` and `git diff --stat` on 2026-07-03. The worktree is intentionally large and dirty, with generated assets, migrated motor content, root HTML, and pipeline changes mixed together. Do not stage with `git add .`.
-- `scripts/kb/migrate.ts` currently points motor migration at `E:\gitee_CodeStorage\学习\MotorControl-main\motor-control-knowledge-base`.
+- `scripts/kb/migrate.ts` currently points motor migration at `<motor-source-root>`.
 - `scripts/kb/migrate.ts` does not point at `motor-learning-web`.
 - `scripts/kb/content-exclusions.ts` excludes `content/power/fundamentals-work/**`, `content/power/concepts/**`, `content/power/lessons/**`, `docs/handoff-*.md`, and `docs/superpowers/**`.
 - `scripts/kb/path-defaults.ts` maps real motor chapters into learning groups and keeps `content/motor/simulation/**` as the real C simulation chapter.

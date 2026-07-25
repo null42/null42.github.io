@@ -13,6 +13,15 @@ describe('search page experience', () => {
     expect(text).toContain(':href="result.url"')
     expect(text).toContain('result.matchReason')
     expect(text).toContain('kb-search-map')
+    expect(text).toContain('sectionId: selectedColumnId.value')
+    expect(text).toContain('routeId: selectedRouteId.value')
+    expect(text).toContain('result.record.stageTitle')
+    expect(text).not.toMatch(/result\.record\.(?:section|navGroup|chapter)\b/)
+    expect(text).toContain(':value="item.columnId || item.id"')
+    expect(text).toContain(':value="item.routeId || item.id"')
+    expect(text).toContain(':value="item.stageId || item.id"')
+    expect(text).toContain('result.record.articleId')
+    expect(text).not.toContain('result.record.url}-${result.anchor')
   })
 
   it('supports opening the page with an initial query from the URL', () => {

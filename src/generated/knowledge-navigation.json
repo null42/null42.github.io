@@ -1,0 +1,4284 @@
+[
+  {
+    "id": "power",
+    "title": "电源控制",
+    "order": 10,
+    "routes": [
+      {
+        "id": "roadmap",
+        "title": "路线与索引",
+        "order": 10,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "power-overview",
+            "title": "电源入口",
+            "order": 1,
+            "routeId": "roadmap",
+            "pathPrefix": "content/power",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/MISSION",
+                "title": "Mission: UPS 控制方向入职训练",
+                "placeholder": false,
+                "slug": "power/MISSION",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/USAGE",
+                "title": "UPS 电源控制入职训练体系使用说明",
+                "placeholder": false,
+                "slug": "power/USAGE",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/RESOURCES",
+                "title": "UPS电源软件开发 — 学习资源列表",
+                "placeholder": false,
+                "slug": "power/RESOURCES",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/NOTES",
+                "title": "UPS电源软件开发 — 课程体系大纲",
+                "placeholder": false,
+                "slug": "power/NOTES",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/getting-started",
+                "title": "电源控制入口",
+                "placeholder": false,
+                "slug": "power/getting-started",
+                "tags": [
+                  "UPS",
+                  "PFC",
+                  "LLC"
+                ],
+                "quality": "curated"
+              }
+            ]
+          },
+          {
+            "id": "roadmap",
+            "title": "路线图",
+            "order": 10,
+            "routeId": "roadmap",
+            "pathPrefix": "content/power/roadmap",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/roadmap/30-day-plan",
+                "title": "UPS 30 天训练计划（30-Day Training Plan）",
+                "placeholder": false,
+                "slug": "power/roadmap/30-day-plan",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/roadmap/matlab-simulink-power-electronics-fast-track",
+                "title": "MATLAB/Simulink 电力电子仿真快速路线",
+                "placeholder": false,
+                "slug": "power/roadmap/matlab-simulink-power-electronics-fast-track",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/roadmap/lesson-priority-map",
+                "title": "New Module Priority Map",
+                "placeholder": false,
+                "slug": "power/roadmap/lesson-priority-map",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/roadmap/continuous-learning-path",
+                "title": "UPS 持续提高路线（Continuous Learning Path）",
+                "placeholder": false,
+                "slug": "power/roadmap/continuous-learning-path",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "project",
+        "title": "项目实践",
+        "order": 20,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "projects",
+            "title": "项目实践",
+            "order": 20,
+            "routeId": "project",
+            "pathPrefix": "content/power/projects",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/projects/01-boost-basics/README",
+                "title": "项目 01：Boost 基础（Boost Basics）",
+                "placeholder": false,
+                "slug": "power/projects/01-boost-basics/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/projects/02-boost-c-firmware-skeleton/README",
+                "title": "项目 02：Boost C 固件骨架（Boost C Firmware Skeleton）",
+                "placeholder": false,
+                "slug": "power/projects/02-boost-c-firmware-skeleton/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/projects/03-ups-c-firmware-skeleton/README",
+                "title": "项目 03：UPS C 固件骨架（UPS C Firmware Skeleton）",
+                "placeholder": false,
+                "slug": "power/projects/03-ups-c-firmware-skeleton/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "simulations",
+            "title": "仿真结果",
+            "order": 30,
+            "routeId": "project",
+            "pathPrefix": "content/power/simulations",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/simulations/README",
+                "title": "Simulations",
+                "placeholder": false,
+                "slug": "power/simulations/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "debug",
+        "title": "调试与复盘",
+        "order": 30,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "debug-records",
+            "title": "调试记录",
+            "order": 10,
+            "routeId": "debug",
+            "pathPrefix": "content/power/debug-records",
+            "allowEmpty": true,
+            "articles": []
+          },
+          {
+            "id": "weekly-reviews",
+            "title": "周复盘",
+            "order": 20,
+            "routeId": "debug",
+            "pathPrefix": "content/power/weekly-reviews",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/weekly-reviews/week-01-day-01",
+                "title": "Week 01 Day 01: Boost Converter First Pass",
+                "placeholder": false,
+                "slug": "power/weekly-reviews/week-01-day-01",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "archive",
+            "title": "历史记录",
+            "order": 30,
+            "routeId": "debug",
+            "pathPrefix": "content/power/archive",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/archive/old-learning-records/0001-ups-system-overview",
+                "title": "学习记录 #0001：UPS电源系统全景认知",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0001-ups-system-overview",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0002-switching-devices-and-basic-topologies",
+                "title": "学习记录 #0002：电力电子基础——开关器件与基本拓扑",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0002-switching-devices-and-basic-topologies",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm",
+                "title": "学习记录 #0003：PWM调制技术——从SPWM到SVPWM",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0003-pwm-techniques-spwm-svpwm",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0004-digital-control-basics",
+                "title": "学习记录 #0004：数字控制基础——从连续到离散",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0004-digital-control-basics",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0005-phase-locked-loop",
+                "title": "学习记录 #0005：锁相环（PLL）技术——电网同步的核心",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0005-phase-locked-loop",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0006-adc-sampling-techniques",
+                "title": "学习记录 #0006：ADC采样技术——从传感器到数字量",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0006-adc-sampling-techniques",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0007-single-phase-pfc",
+                "title": "学习记录 #0007：单相PFC整流器——从整流到功率因数校正",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0007-single-phase-pfc",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0008-vienna-rectifier",
+                "title": "学习记录 #0008：维也纳整流器——三相三电平PFC之王",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0008-vienna-rectifier",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0009-three-level-svpwm-deep",
+                "title": "学习记录 #0009：三电平SVPWM深入——从理论到代码实现",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0009-three-level-svpwm-deep",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0010-single-phase-inverter",
+                "title": "学习记录 #0010：单相逆变器控制——UPS的输出级",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0010-single-phase-inverter",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0011-three-phase-inverter",
+                "title": "学习记录 #0011：三相逆变器控制——UPS输出级的高性能方案",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0011-three-phase-inverter",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0012-llc-resonant-converter",
+                "title": "学习记录 #0012：LLC谐振变换器原理与控制——UPS的DC-DC级",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0012-llc-resonant-converter",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0013-bidirectional-dcdc-battery",
+                "title": "学习记录 #0013：双向DC-DC与电池管理——UPS的能量枢纽",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0013-bidirectional-dcdc-battery",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0014-cascade-coordination",
+                "title": "学习记录 #0014：多级联调——PFC+DC-DC+逆变器协同",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0014-cascade-coordination",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0015-backup-ups-software",
+                "title": "学习记录 #0015：后备式UPS完整软件设计——从零到一的固件实战",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0015-backup-ups-software",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0016-online-ups-software",
+                "title": "学习记录 #0016：在线式UPS完整软件设计——双变换架构的软件实现",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0016-online-ups-software",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0017-parallel-redundancy",
+                "title": "学习记录 #0017：并机与冗余设计——高可用UPS系统的基石",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0017-parallel-redundancy",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0018-protection-mechanism",
+                "title": "学习记录 #0018：保护机制设计——UPS安全的最后防线",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0018-protection-mechanism",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0019-communication-protocol",
+                "title": "学习记录 #0019：通信协议与远程监控——UPS的\"神经系统\"",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0019-communication-protocol",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0020-firmware-architecture",
+                "title": "学习记录 #0020：固件分层架构设计——从裸机到RTOS的工程实践",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0020-firmware-architecture",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0021-rtos-task-design",
+                "title": "学习记录 #0021：RTOS任务设计与实时性保证——让每个任务准时执行",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0021-rtos-task-design",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0022-ota-upgrade",
+                "title": "学习记录 #0022：OTA升级与安全启动——固件安全的全链路保障",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0022-ota-upgrade",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0023-interview-practice",
+                "title": "学习记录 #0023：面试实战——UPS电源软件开发高频面试题精讲",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0023-interview-practice",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0024-power-vs-motor",
+                "title": "学习记录 #0024：电源控制 vs 电机控制——跨界对比与知识迁移",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0024-power-vs-motor",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0025-buck-boost-ccm-dcm",
+                "title": "学习记录 #0025：Buck/Boost工作模式深度分析——CCM/DCM/BCM的工程意义",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0025-buck-boost-ccm-dcm",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/old-learning-records/0026-three-level-pon-states",
+                "title": "学习记录 #0026：三电平P/O/N工作状态判别",
+                "placeholder": false,
+                "slug": "power/archive/old-learning-records/0026-three-level-pon-states",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/archive/README",
+                "title": "Archive",
+                "placeholder": false,
+                "slug": "power/archive/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "reference",
+        "title": "参考资料",
+        "order": 40,
+        "allowEmpty": true,
+        "stages": [
+          {
+            "id": "docs",
+            "title": "文档",
+            "order": 10,
+            "routeId": "reference",
+            "pathPrefix": "content/power/docs",
+            "allowEmpty": true,
+            "articles": []
+          },
+          {
+            "id": "reference",
+            "title": "参考资料",
+            "order": 20,
+            "routeId": "reference",
+            "pathPrefix": "content/power/reference",
+            "allowEmpty": true,
+            "articles": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "motor",
+    "title": "电机控制",
+    "order": 20,
+    "routes": [
+      {
+        "id": "intro",
+        "title": "入门与索引",
+        "order": 10,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "motor-overview",
+            "title": "总览",
+            "order": 1,
+            "routeId": "intro",
+            "pathPrefix": "content/motor",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/30-percent-roadmap",
+                "title": "Remaining 30% Roadmap",
+                "placeholder": false,
+                "slug": "motor/30-percent-roadmap",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware-user-test-protocol",
+                "title": "Hardware User Test Protocol",
+                "placeholder": false,
+                "slug": "motor/hardware-user-test-protocol",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/README",
+                "title": "电控知识库",
+                "placeholder": false,
+                "slug": "motor/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/getting-started",
+                "title": "电机控制入口",
+                "placeholder": false,
+                "slug": "motor/getting-started",
+                "tags": [
+                  "FOC",
+                  "SVPWM",
+                  "Observer"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "motor/hardware-validation-guide",
+                "title": "硬件验证指南",
+                "placeholder": false,
+                "slug": "motor/hardware-validation-guide",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "learning-workspace",
+            "title": "学习工作区",
+            "order": 5,
+            "routeId": "intro",
+            "pathPrefix": "content/motor/learning-workspace",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/learning-workspace/lessons/0001-ee-hardware-basics",
+                "title": "硬件基础 EE-01 ~ EE-09",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0001-ee-hardware-basics",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0002-ct-control-theory",
+                "title": "控制理论学习路径",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0002-ct-control-theory",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0003-hw-motor-control-hardware",
+                "title": "电控硬件 - 交互式学习",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0003-hw-motor-control-hardware",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0004-alg-foc-algorithms",
+                "title": "FOC 算法核心",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0004-alg-foc-algorithms",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0005-hpm-mc-sdk",
+                "title": "HPM-MC SDK 架构分析",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0005-hpm-mc-sdk",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0006-odrive-analysis",
+                "title": "ODrive 源码分析",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0006-odrive-analysis",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0007-vesc-analysis",
+                "title": "VESC 源码分析",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0007-vesc-analysis",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0008-odrive-vs-vesc",
+                "title": "ODrive vs VESC 全面对比",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0008-odrive-vs-vesc",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0009-c-simulation",
+                "title": "仿真系统 SIM-00 ~ SIM-05",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0009-c-simulation",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0010-pfc-motor-integration",
+                "title": "PFC与电机控制集成 PMI-01 ~ PMI-03",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0010-pfc-motor-integration",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0011-functional-safety",
+                "title": "功能安全与系统验证 SYS-05/06 + SIM-05",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0011-functional-safety",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0012-communication-protocols",
+                "title": "通信协议 COM-01 ~ COM-09",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0012-communication-protocols",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0013-power-conversion",
+                "title": "功率变换 PP-01 ~ PP-11",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0013-power-conversion",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0014-foc-engineering",
+                "title": "FOC实战课程 PRACTICE-11",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0014-foc-engineering",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0015-pmsm-simulation",
+                "title": "PMSM仿真实践 PRACTICE-12",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0015-pmsm-simulation",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0016-sensorless-control",
+                "title": "PRACTICE-13 无位置传感器控制 | 电机控制知识库",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0016-sensorless-control",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0017-engineering-practice",
+                "title": "PRACTICE-14 工程实践 | 电机控制知识库",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0017-engineering-practice",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0018-controller-evolution",
+                "title": "CE-01~23 控制器演化 | 电机控制知识库",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0018-controller-evolution",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/lessons/0019-motion-control",
+                "title": "MC-TP-01~06 & MC-MC-01~06 轨迹规划与运动控制 | 电机控制知识库",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/lessons/0019-motion-control",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/MISSION",
+                "title": "Mission: 电机控制全栈知识体系交互式学习",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/MISSION",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/learning-workspace/NOTES",
+                "title": "学习笔记与偏好",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/NOTES",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/learning-workspace/RESOURCES",
+                "title": "学习资源清单",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/RESOURCES",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/learning-workspace/index",
+                "title": "电控知识库 - 交互式学习平台",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/index",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/reference/formula-quick-ref",
+                "title": "电机控制公式速查卡",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/reference/formula-quick-ref",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/learning-workspace/reference/glossary",
+                "title": "电机控制术语速查表",
+                "placeholder": false,
+                "slug": "motor/learning-workspace/reference/glossary",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              }
+            ]
+          },
+          {
+            "id": "cross-reference",
+            "title": "交叉索引",
+            "order": 10,
+            "routeId": "intro",
+            "pathPrefix": "content/motor/cross-reference",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/cross-reference/cross-reference-map",
+                "title": "交叉引用映射表（索引）",
+                "placeholder": false,
+                "slug": "motor/cross-reference/cross-reference-map",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-hpm",
+                "title": "交叉引用：HPM MC代码知识库映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-hpm",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-lxfoc-verification",
+                "title": "交叉引用：lxfoc代码  KB理论一致性验证",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-lxfoc-verification",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-ct-alg",
+                "title": "交叉引用：控制理论算法映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-ct-alg",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-new-modules",
+                "title": "交叉引用：新增模块映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-new-modules",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-ee-hw",
+                "title": "交叉引用：硬件基础电控映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-ee-hw",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-hw-alg",
+                "title": "交叉引用：硬件算法映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-hw-alg",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-adv-base",
+                "title": "交叉引用：高级篇基础篇映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-adv-base",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-practice",
+                "title": "实践路径交叉引用映射",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-practice",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/cross-reference/xref-motion-control",
+                "title": "轨迹规划与运动控制 交叉引用映射表",
+                "placeholder": false,
+                "slug": "motor/cross-reference/xref-motion-control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hardware",
+        "title": "基础与硬件",
+        "order": 20,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "electronics-basics",
+            "title": "电力电子基础",
+            "order": 10,
+            "routeId": "hardware",
+            "pathPrefix": "content/motor/electronics-basics",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/electronics-basics/EE-01-assessment",
+                "title": "EE-01 电阻、电容、电感基础 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+                "title": "EE-01: 电阻、电容、电感基础",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-02-assessment",
+                "title": "EE-02 二极管与整流电路 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
+                "title": "EE-02: 二极管与整流电路",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-03-assessment",
+                "title": "EE-03 三极管（BJT）基础 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-03-BJT-Basics",
+                "title": "EE-03: 三极管（BJT）基础",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-03-BJT-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-04-assessment",
+                "title": "EE-04 MOSFET 原理与特性 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-04-MOSFET-Principles",
+                "title": "EE-04: MOSFET 原理与特性",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-04-MOSFET-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-05-assessment",
+                "title": "EE-05 MOSFET 驱动与保护 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
+                "title": "EE-05: MOSFET 驱动与保护",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-06-IGBT-Principles",
+                "title": "EE-06 IGBT 原理与选型",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-06-IGBT-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-06-assessment",
+                "title": "EE-06 IGBT原理与选型 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-07-OpAmp",
+                "title": "EE-07 运算放大器",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-07-OpAmp",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-07-assessment",
+                "title": "EE-07 运算放大器 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-08-Rectifier-Inverter",
+                "title": "EE-08 整流与逆变拓扑",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-08-Rectifier-Inverter",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-08-assessment",
+                "title": "EE-08 整流与逆变拓扑 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-09-H-Bridge",
+                "title": "EE-09 H桥与电机驱动拓扑",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-09-H-Bridge",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/EE-09-assessment",
+                "title": "EE-09 H桥与电机驱动拓扑 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/EE-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/electronics-basics/README",
+                "title": "电子基础 (Electronics Basics)",
+                "placeholder": false,
+                "slug": "motor/electronics-basics/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "hardware",
+            "title": "硬件与驱动",
+            "order": 20,
+            "routeId": "hardware",
+            "pathPrefix": "content/motor/hardware",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/hardware/HW-01-assessment",
+                "title": "HW-01 电机本体基础 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-01-Motor-Basics",
+                "title": "HW-01 电机本体：电驱算法的物理基础",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-01-Motor-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-01B-assessment",
+                "title": "HW-01B 电机学物理本质深入 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-01B-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
+                "title": "HW-01B 电机学物理本质深入：从磁路到转矩的底层逻辑",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-02-assessment",
+                "title": "HW-02 电流采样电路 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-02-Current-Sensing",
+                "title": "HW-02 电流采样电路：FOC控制的感知之眼",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-02-Current-Sensing",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-02B-Current-Sensing-Topologies",
+                "title": "HW-02B 电流采样拓扑：低侧·高侧·在线的选型决策",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-02B-Current-Sensing-Topologies",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-03-assessment",
+                "title": "HW-03 位置传感器接口 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-03-Position-Sensor",
+                "title": "HW-03 位置传感器接口：FOC控制的方位之锚",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-03-Position-Sensor",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-04-assessment",
+                "title": "HW-04 MCU外设与通信 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-04-MCU-Peripherals",
+                "title": "HW-04 MCU外设与通信：电驱控制的神经中枢",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-04-MCU-Peripherals",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-05-Power-Devices-Gate-Drivers",
+                "title": "HW-05 功率器件与栅极驱动",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-05-Power-Devices-Gate-Drivers",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-05-assessment",
+                "title": "HW-05 功率器件与栅极驱动 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-06-Power-Management-Protection",
+                "title": "HW-06 电源管理与保护",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-06-Power-Management-Protection",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-06-assessment",
+                "title": "HW-06 电源管理与保护 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-07-Thermal-EMC-Design",
+                "title": "HW-07 热设计与EMC",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-07-Thermal-EMC-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/HW-07-assessment",
+                "title": "HW-07 热设计与EMC - 知识检验",
+                "placeholder": false,
+                "slug": "motor/hardware/HW-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/hardware/README",
+                "title": "电控硬件学习路径",
+                "placeholder": false,
+                "slug": "motor/hardware/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "mechanical",
+            "title": "机械与编码器",
+            "order": 30,
+            "routeId": "hardware",
+            "pathPrefix": "content/motor/mechanical",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/mechanical/MEC-01-Planetary-Reducer",
+                "title": "MEC-01 行星减速器",
+                "placeholder": false,
+                "slug": "motor/mechanical/MEC-01-Planetary-Reducer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/mechanical/MEC-02-Cycloidal-Reducer",
+                "title": "MEC-02 摆线减速器",
+                "placeholder": false,
+                "slug": "motor/mechanical/MEC-02-Cycloidal-Reducer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/mechanical/MEC-03-Multi-Turn-Encoder",
+                "title": "MEC-03 多圈编码器",
+                "placeholder": false,
+                "slug": "motor/mechanical/MEC-03-Multi-Turn-Encoder",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "power-path",
+            "title": "功率链路",
+            "order": 40,
+            "routeId": "hardware",
+            "pathPrefix": "content/motor/power-path",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/power-path/PP-01-assessment",
+                "title": "PP-01 DC-DC 基础拓扑（Buck/Boost/Buck-Boost） - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
+                "title": "PP-01: DC-DC 基础拓扑（Buck/Boost/Buck-Boost）",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-02-assessment",
+                "title": "PP-02 隔离型 DC-DC（Flyback/Forward/Push-Pull） - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
+                "title": "PP-02: 隔离型 DC-DC（Flyback/Forward/Push-Pull）",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-03-assessment",
+                "title": "PP-03 半桥与全桥 LLC 谐振变换器 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-03-LLC-Resonant-Converter",
+                "title": "PP-03: 半桥与全桥 LLC 谐振变换器",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-03-LLC-Resonant-Converter",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-04-assessment",
+                "title": "PP-04 功率因数校正（PFC） - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-04-PFC-Power-Factor-Correction",
+                "title": "PP-04: 功率因数校正（PFC）",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-04-PFC-Power-Factor-Correction",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-05-assessment",
+                "title": "PP-05 磁元件设计（电感/变压器） - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-05-Magnetic-Design",
+                "title": "PP-05: 磁元件设计（电感/变压器）",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-05-Magnetic-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-06-assessment",
+                "title": "PP-06 开关电源环路补偿 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-06-Loop-Compensation",
+                "title": "PP-06: 开关电源环路补偿",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-06-Loop-Compensation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-07-assessment",
+                "title": "PP-07 功率变换在电机驱动中的应用 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-07-Power-Conversion-Motor-Drive",
+                "title": "PP-07: 功率变换在电机驱动中的应用",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-07-Power-Conversion-Motor-Drive",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-08-Three-Level-Topology",
+                "title": "PP-08 三电平 NPC/T-type/ANPC 拓扑基础",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-08-Three-Level-Topology",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-08-assessment",
+                "title": "PP-08 三电平 NPC/T-type/ANPC 拓扑基础 - 知识检查",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-09-Three-Level-SVPWM",
+                "title": "PP-09 三电平 SVPWM",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-09-Three-Level-SVPWM",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-09-assessment",
+                "title": "PP-09 三电平 SVPWM - 知识检查",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-10-Vienna-Rectifier",
+                "title": "PP-10 维也纳整流器",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-10-Vienna-Rectifier",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-10-assessment",
+                "title": "PP-10 维也纳整流器 - 知识检查",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-10-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
+                "title": "PP-11 Boost PFC 与母线动态",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/PP-11-assessment",
+                "title": "PP-11 Boost PFC 与母线动态 - 知识检查",
+                "placeholder": false,
+                "slug": "motor/power-path/PP-11-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/power-path/README",
+                "title": "功率路径 (Power Path)",
+                "placeholder": false,
+                "slug": "motor/power-path/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "control",
+        "title": "控制与算法",
+        "order": 30,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "control-theory",
+            "title": "控制理论",
+            "order": 10,
+            "routeId": "control",
+            "pathPrefix": "content/motor/control-theory",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/control-theory/CT-01-assessment",
+                "title": "CT-01 开环与闭环控制系统 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+                "title": "CT-01: 开环与闭环控制系统",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-02-assessment",
+                "title": "CT-02 时域响应分析 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-02-Time-Domain-Analysis",
+                "title": "CT-02: 时域响应分析",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-02-Time-Domain-Analysis",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-03-assessment",
+                "title": "CT-03 频率响应与伯德图 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-03-Frequency-Response-Bode",
+                "title": "CT-03: 频率响应与伯德图",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-03-Frequency-Response-Bode",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-04-assessment",
+                "title": "CT-04 PID 控制原理 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-04-PID-Control-Principles",
+                "title": "CT-04: PID 控制原理",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-04-PID-Control-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-05-assessment",
+                "title": "CT-05 PID 整定与工程实现 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-05-PID-Tuning-Implementation",
+                "title": "CT-05: PID 整定与工程实现",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-05-PID-Tuning-Implementation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-06-assessment",
+                "title": "CT-06 前馈控制 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-06-Feedforward-Control",
+                "title": "CT-06: 前馈控制",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-06-Feedforward-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-07-assessment",
+                "title": "CT-07 奈奎斯特稳定判据 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-07-Nyquist-Stability",
+                "title": "CT-07: 奈奎斯特稳定判据",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-07-Nyquist-Stability",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-08-assessment",
+                "title": "CT-08 根轨迹分析 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-08-Root-Locus",
+                "title": "CT-08: 根轨迹分析",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-08-Root-Locus",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-09-assessment",
+                "title": "CT-09 系统校正设计 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-09-Compensator-Design",
+                "title": "CT-09: 系统校正设计",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-09-Compensator-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-10-assessment",
+                "title": "CT-10 状态空间方程 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-10-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-10-State-Space",
+                "title": "CT-10: 状态空间方程",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-10-State-Space",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-11-assessment",
+                "title": "CT-11 观测器设计 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-11-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-11-Observer-Design",
+                "title": "CT-11: 观测器设计",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-11-Observer-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-12-assessment",
+                "title": "CT-12 状态反馈与极点配置 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-12-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-12-State-Feedback",
+                "title": "CT-12: 状态反馈与极点配置",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-12-State-Feedback",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-13-assessment",
+                "title": "CT-13 最优控制（LQR/LQG） - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-13-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-13-LQR-LQG",
+                "title": "CT-13: 最优控制（LQR/LQG）",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-13-LQR-LQG",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-14-assessment",
+                "title": "CT-14 三环级联PID控制 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-14-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-14-Cascaded-PID-Control",
+                "title": "CT-14: 三环级联PID控制",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-14-Cascaded-PID-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-15-assessment",
+                "title": "CT-15 PID优化策略与工程增强 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-15-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-15-PID-Optimization-Strategies",
+                "title": "CT-15: PID 优化策略与工程增强",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-15-PID-Optimization-Strategies",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-16-assessment",
+                "title": "CT-16 ADRC自抗扰控制理论 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-16-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-16-ADRC-Theory",
+                "title": "CT-16: ADRC 自抗扰控制理论",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-16-ADRC-Theory",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-17-assessment",
+                "title": "CT-17 LADRC线性自抗扰控制 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-17-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
+                "title": "CT-17: LADRC 线性自抗扰控制",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-18-assessment",
+                "title": "CT-18 ADRC/LADRC工程实现 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-18-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
+                "title": "CT-18: ADRC/LADRC 在电机控制中的工程实现",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/CT-19-Model-Predictive-Control",
+                "title": "CT-19: 模型预测控制",
+                "placeholder": false,
+                "slug": "motor/control-theory/CT-19-Model-Predictive-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/control-theory/README",
+                "title": "控制理论基础",
+                "placeholder": false,
+                "slug": "motor/control-theory/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "foundations",
+            "title": "基础算法底座",
+            "order": 15,
+            "routeId": "control",
+            "pathPrefix": "content/motor/foundations",
+            "tags": [
+              "per-unit",
+              "fixed-point",
+              "SPWM",
+              "SVPWM"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/foundations/FOUND-01-Per-Unit-System",
+                "title": "FOUND-01 标幺值系统：把不同电机变成同一套算法",
+                "order": 5,
+                "placeholder": false,
+                "slug": "motor/foundations/FOUND-01-Per-Unit-System",
+                "tags": [
+                  "motor-control",
+                  "per-unit",
+                  "dsp"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
+                "title": "FOUND-02 定点数与Q格式：让没有FPU的DSP稳定跑FOC",
+                "order": 6,
+                "placeholder": false,
+                "slug": "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
+                "tags": [
+                  "motor-control",
+                  "fixed-point",
+                  "dsp"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "motor/foundations/FOUND-03-SPWM-Principle-DSP",
+                "title": "FOUND-03 SPWM原理与DSP实现：从正弦参考到定时器比较值",
+                "order": 7,
+                "placeholder": false,
+                "slug": "motor/foundations/FOUND-03-SPWM-Principle-DSP",
+                "tags": [
+                  "motor-control",
+                  "spwm",
+                  "zero-sequence",
+                  "dsp"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "motor/foundations/FOUND-04-SVPWM-Principle-DSP",
+                "title": "FOUND-04 SVPWM原理与DSP实现：用相邻矢量合成参考电压",
+                "order": 8,
+                "placeholder": false,
+                "slug": "motor/foundations/FOUND-04-SVPWM-Principle-DSP",
+                "tags": [
+                  "motor-control",
+                  "svpwm",
+                  "dsp"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "motor/foundations/FOUND-05-Three-Level-SVPWM-DSP",
+                "title": "FOUND-05 三电平SVPWM原理与DSP实现：多一个中点，多一层约束",
+                "order": 9,
+                "placeholder": false,
+                "slug": "motor/foundations/FOUND-05-Three-Level-SVPWM-DSP",
+                "tags": [
+                  "motor-control",
+                  "svpwm",
+                  "three-level",
+                  "dsp"
+                ],
+                "quality": "curated"
+              }
+            ]
+          },
+          {
+            "id": "algorithm",
+            "title": "控制算法",
+            "order": 20,
+            "routeId": "control",
+            "pathPrefix": "content/motor/algorithm",
+            "tags": [
+              "FOC",
+              "SVPWM"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/algorithm/ALG-00-assessment",
+                "title": "ALG-00 检验题目：电流环PI整定的物理直觉",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-00-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-00-Current-Loop-Intuition",
+                "title": "ALG-00 电流环PI整定的物理直觉",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-00-Current-Loop-Intuition",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-01-FOC-Theory",
+                "title": "ALG-01 FOC理论基础",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-01-FOC-Theory",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-01-assessment",
+                "title": "ALG-01 FOC理论基础 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-02-Current-Sampling-Timing",
+                "title": "ALG-02 ADC 电流采样时序",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-02-Current-Sampling-Timing",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-02-assessment",
+                "title": "ALG-02 ADC电流采样时序 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-03-PI-Current-Regulator",
+                "title": "ALG-03 PI 电流调节器设计",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-03-PI-Current-Regulator",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-04-Deadtime-Compensation",
+                "title": "ALG-04 死区补偿策略",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-04-Deadtime-Compensation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-04-assessment",
+                "title": "ALG-04 死区补偿策略 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-05-Sensored-FOC",
+                "title": "ALG-05 有感FOC实现",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-05-Sensored-FOC",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-05-assessment",
+                "title": "ALG-05 有感FOC实现 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-06-Position-Speed-Observer",
+                "title": "ALG-06 位置与速度观测器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-06-Position-Speed-Observer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-07-Sensorless-Observers",
+                "title": "ALG-07 无感FOC观测器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-07-Sensorless-Observers",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-07-assessment",
+                "title": "ALG-07 无感FOC观测器 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-08-Initial-Position-Detection",
+                "title": "ALG-08 启动定位与预定位",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-08-Initial-Position-Detection",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-08-assessment",
+                "title": "ALG-08 启动定位与预定位 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-09-High-Frequency-Injection",
+                "title": "ALG-09 高频注入法",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-09-High-Frequency-Injection",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-09-assessment",
+                "title": "ALG-09 高频注入法 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-10-Overmodulation",
+                "title": "ALG-10 过调制与六阶梯波",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-10-Overmodulation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-10-assessment",
+                "title": "ALG-10 过调制与六阶梯波 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-10-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-11-MTPA-Flux-Weakening",
+                "title": "ALG-11 MTPA 与弱磁控制",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-11-MTPA-Flux-Weakening",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-11-assessment",
+                "title": "ALG-11 MTPA与弱磁控制 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-11-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
+                "title": "ALG-12 速度环与负载转矩观测器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-12-assessment",
+                "title": "ALG-12 速度环与负载转矩观测器 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-12-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-13-Protection-Optimization",
+                "title": "ALG-13 保护与优化",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-13-Protection-Optimization",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-13-assessment",
+                "title": "ALG-13 保护与优化 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-13-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
+                "title": "ALG-14 THD 谐波分析",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-14-assessment",
+                "title": "ALG-14 THD谐波分析 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-14-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-15-assessment",
+                "title": "ALG-15 前沿研究 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-15-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-15-Advanced-Research",
+                "title": "ALG-15 前沿研究：离散时间非线性磁链观测器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-15-Advanced-Research",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
+                "title": "ALG-16 非线性磁链观测器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-16-assessment",
+                "title": "ALG-16 非线性磁链观测器 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-16-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-17-VF-Control",
+                "title": "ALG-17 V/F控制（恒压频比控制）",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-17-VF-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-18-assessment",
+                "title": "ALG-18 补偿算法专题 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-18-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-18-Compensation-Algorithms",
+                "title": "ALG-18 补偿算法综合",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-18-Compensation-Algorithms",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
+                "title": "ALG-19 无差拍电流预测控制",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-19-assessment",
+                "title": "ALG-19 无差拍电流预测控制 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-19-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
+                "title": "ALG-20 控制视角下的dq方程与功率方程：用途解读",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-21-Parameter-Identification",
+                "title": "ALG-21 电机参数辨识：离线辨识、在线辨识与工程难点",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-21-Parameter-Identification",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
+                "title": "HPM MCL v2 — 离线参数检测模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
+                "title": "HPM-MC v2 力位混合控制模块深度解析",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
+                "title": "HPM-MC v2 核心控制循环深度解析",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan",
+                "title": "HPM-MC v2 路径规划模块深度解析",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-06-HPM-MC-Sample-Apps",
+                "title": "HPM-MC 示例应用指南",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-06-HPM-MC-Sample-Apps",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture",
+                "title": "HPM_MC电机控制库 - 架构总览",
+                "placeholder": false,
+                "slug": "motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-FOC-Core",
+                "title": "MC_LIB - FOC核心模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-FOC-Core",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
+                "title": "MC_LIB - SVPWM模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-SVPWM",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
+                "title": "MC_LIB - 六步换相模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-Six-Step",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-Control-Loop",
+                "title": "MC_LIB - 控制环模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-Control-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-Porting-Guide",
+                "title": "MC_LIB - 移植使用指南",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-Porting-Guide",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-Observer",
+                "title": "MC_LIB - 观测器模块详解",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-Observer",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/MC-LIB/MC-LIB-Architecture",
+                "title": "MC_LIB电机控制库 - 架构总览",
+                "placeholder": false,
+                "slug": "motor/algorithm/MC-LIB/MC-LIB-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-00-PI-Calculator",
+                "title": "电流环 PI 参数整定计算器",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-00-PI-Calculator",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              },
+              {
+                "articleId": "motor/algorithm/README",
+                "title": "算法学习路径",
+                "placeholder": false,
+                "slug": "motor/algorithm/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-00-Pole-Zero-Animation",
+                "title": "零极点对消动画演示",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-00-Pole-Zero-Animation",
+                "tags": [
+                  "imported"
+                ],
+                "quality": "needsRewrite"
+              }
+            ]
+          },
+          {
+            "id": "motion-control",
+            "title": "运动控制",
+            "order": 30,
+            "routeId": "control",
+            "pathPrefix": "content/motor/motion-control",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/motion-control/MC-MC-01-Position-Loop",
+                "title": "MC-MC-01: 位置环设计与整定",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-01-Position-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-02-Feedforward",
+                "title": "MC-MC-02: 速度与加速度前馈",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-02-Feedforward",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-03-Resonance-Suppression",
+                "title": "MC-MC-03: 机械谐振抑制",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-03-Resonance-Suppression",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-04-Friction-Gravity",
+                "title": "MC-MC-04: 摩擦与重力补偿",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-04-Friction-Gravity",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-05-Electronic-Gearing",
+                "title": "MC-MC-05: 电子齿轮与凸轮",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-05-Electronic-Gearing",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-06-Multi-Axis",
+                "title": "MC-MC-06: 多轴协调运动",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-06-Multi-Axis",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-01-Kinematics-Constraints",
+                "title": "MC-TP-01: 运动学基础与约束",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-01-Kinematics-Constraints",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-02-Trapezoidal-S-Curve",
+                "title": "MC-TP-02: 梯形与S曲线速度规划",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-02-Trapezoidal-S-Curve",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
+                "title": "MC-TP-03: 多项式轨迹规划",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-04-Multi-Segment-Blend",
+                "title": "MC-TP-04: 多段轨迹拼接与Blend",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-04-Multi-Segment-Blend",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-05-Time-Optimal",
+                "title": "MC-TP-05: 时间最优轨迹规划",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-05-Time-Optimal",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-06-Interpolation",
+                "title": "MC-TP-06: 插补原理",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-06-Interpolation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-01-assessment",
+                "title": "位置环设计与整定测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-04-assessment",
+                "title": "多段轨迹拼接与Blend测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-06-assessment",
+                "title": "多轴协调运动测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-03-assessment",
+                "title": "多项式轨迹规划测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-06-assessment",
+                "title": "插补原理测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-04-assessment",
+                "title": "摩擦与重力补偿测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-05-assessment",
+                "title": "时间最优轨迹规划测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-03-assessment",
+                "title": "机械谐振抑制测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-02-assessment",
+                "title": "梯形与S曲线速度规划测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-05-assessment",
+                "title": "电子齿轮与凸轮测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/README",
+                "title": "轨迹规划与运动控制路径",
+                "placeholder": false,
+                "slug": "motor/motion-control/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-TP-01-assessment",
+                "title": "运动学基础与约束测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-TP-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-MC-02-assessment",
+                "title": "速度与加速度前馈测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-MC-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "pfc-motor-integration",
+            "title": "PFC 与电机系统",
+            "order": 40,
+            "routeId": "control",
+            "pathPrefix": "content/motor/pfc-motor-integration",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/pfc-motor-integration/README",
+                "title": "PFC与电机控制集成（PFC-Motor Integration）",
+                "placeholder": false,
+                "slug": "motor/pfc-motor-integration/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
+                "title": "PMI-01: PFC与电机控制系统架构",
+                "placeholder": false,
+                "slug": "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
+                "title": "PMI-02: PFC与电机控制协同",
+                "placeholder": false,
+                "slug": "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency",
+                "title": "PMI-03: 家电变频专题",
+                "placeholder": false,
+                "slug": "motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "practice",
+        "title": "实践与验证",
+        "order": 40,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "simulation",
+            "title": "仿真与调试",
+            "order": 10,
+            "routeId": "practice",
+            "pathPrefix": "content/motor/simulation",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/simulation/code-examples/README",
+                "title": "C 仿真代码修改示例",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-01-C-Simulation-QuickStart",
+                "title": "C 语言仿真 — 快速上手指南",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-01-C-Simulation-QuickStart",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-00-C-Simulation-Overview",
+                "title": "C 语言仿真验证 — 总索引",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-00-C-Simulation-Overview",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-05-assessment",
+                "title": "SIM-05 数字孪生 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-05-Digital-Twin",
+                "title": "SIM-05 数字孪生：让仿真无限逼近真实",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-05-Digital-Twin",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+                "title": "emachinery 仿真系统 — 完整使用教程",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-02-C-Simulation-Code-Map",
+                "title": "仿真代码  知识库概念映射",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-02-C-Simulation-Code-Map",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/SIM-03-C-Simulation-Plotting",
+                "title": "仿真绘图系统详解",
+                "placeholder": false,
+                "slug": "motor/simulation/SIM-03-C-Simulation-Plotting",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/code-examples/01-pi-tuning-basic/README",
+                "title": "示例 1：PI 参数调节基础",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/01-pi-tuning-basic/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/code-examples/02-custom-speed-profile/README",
+                "title": "示例 2：自定义速度/负载曲线",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/02-custom-speed-profile/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
+                "title": "示例 3：启用逆变器非线性建模",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/code-examples/04-add-observer-signal/README",
+                "title": "示例 4：添加自定义观测信号",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/04-add-observer-signal/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/simulation/code-examples/05-commissioning-debug/README",
+                "title": "示例 5：参数辨识流程观察",
+                "placeholder": false,
+                "slug": "motor/simulation/code-examples/05-commissioning-debug/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "practice",
+            "title": "工程实践",
+            "order": 20,
+            "routeId": "practice",
+            "pathPrefix": "content/motor/practice",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/practice/PRACTICE-11-FOC-Engineering",
+                "title": "路径11: FOC从仿真到固件",
+                "placeholder": false,
+                "slug": "motor/practice/PRACTICE-11-FOC-Engineering",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/practice/PRACTICE-12-PMSM-Simulation",
+                "title": "路径12: PMSM控制策略仿真",
+                "placeholder": false,
+                "slug": "motor/practice/PRACTICE-12-PMSM-Simulation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/practice/PRACTICE-13-Sensorless-Control",
+                "title": "路径13: 无位置传感器控制",
+                "placeholder": false,
+                "slug": "motor/practice/PRACTICE-13-Sensorless-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/practice/PRACTICE-14-Engineering-Practice",
+                "title": "路径14: 工程实现与调试",
+                "placeholder": false,
+                "slug": "motor/practice/PRACTICE-14-Engineering-Practice",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "advanced",
+            "title": "进阶专题",
+            "order": 30,
+            "routeId": "practice",
+            "pathPrefix": "content/motor/advanced",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter",
+                "title": "ADV-ALG-01 控制环带宽设计与滤波器工程",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-01-assessment",
+                "title": "ADV-ALG-01 控制环带宽设计与滤波器工程 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
+                "title": "ADV-ALG-05 弱磁控制与MTPA深度",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-05-assessment",
+                "title": "ADV-ALG-05 弱磁控制与MTPA深度 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling",
+                "title": "ADV-ALG-07 前馈解耦与扰动补偿",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-07-assessment",
+                "title": "ADV-ALG-07 前馈解耦与扰动补偿 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
+                "title": "ADV-ALG-09 标幺值系统与定点数运算",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-09-assessment",
+                "title": "ADV-ALG-09 标幺值系统与定点数运算 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning",
+                "title": "ADV-ALG-13 PID结构选择与深度整定",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-13-assessment",
+                "title": "ADV-ALG-13 PID结构选择与深度整定 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-13-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
+                "title": "ADV-ALG-15 电机控制系统问题诊断与调试方法论",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/algorithm/ADV-ALG-15-assessment",
+                "title": "ADV-ALG-15 问题定位与调试方法论 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/algorithm/ADV-ALG-15-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
+                "title": "ADV-HW-01 PWM深度配置与电流采样时序联动",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+                "title": "ADV-HW-01 PWM深度配置与电流采样时序联动 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
+                "title": "ADV-HW-02 ADC深度配置与DMA数据搬运 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
+                "title": "ADV-HW-02 ADC深度配置与DMA数据搬运：从寄存器到控制环的精密桥梁",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
+                "title": "ADV-HW-03 编码器深度处理与测速方法",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
+                "title": "ADV-HW-03 编码器深度处理与测速方法 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
+                "title": "SYS-01 设计模式在电机控制中的应用",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-01-assessment",
+                "title": "SYS-01 设计模式在电机控制中的应用 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
+                "title": "SYS-02 变频器开发与电控开发异同",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-02-assessment",
+                "title": "SYS-02 变频器开发与电控开发异同 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-03-assessment",
+                "title": "SYS-03 PFC开发与电控开发异同 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
+                "title": "SYS-03 PFC控制 vs 电机控制：跨领域方法论",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete",
+                "title": "SYS-04 从仿真到离散：连续域到离散域的完整转换工作流",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-04-assessment",
+                "title": "SYS-04 仿真到实现——连续域到离散域 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
+                "title": "SYS-05 功能安全：电控系统的生命线",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-05-assessment",
+                "title": "SYS-05 功能安全：电控系统的生命线 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-06-assessment",
+                "title": "SYS-06 系统测试与验证 - 检验题目",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
+                "title": "SYS-06 系统测试与验证：从仿真到产品的最后一道关",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-07-assessment",
+                "title": "SYS-07 电源-电控联合系统设计 - 知识检查",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
+                "title": "SYS-07 电源-电控联合闭环系统设计",
+                "placeholder": false,
+                "slug": "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/advanced/README",
+                "title": "电控知识库 - 高级篇",
+                "placeholder": false,
+                "slug": "motor/advanced/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecosystem",
+        "title": "工程与生态",
+        "order": 50,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "ODrive",
+            "title": "ODrive",
+            "order": 10,
+            "routeId": "ecosystem",
+            "pathPrefix": "content/motor/ODrive",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/ODrive/OD-01-Architecture",
+                "title": " OD-01: ODrive 系统架构",
+                "placeholder": false,
+                "slug": "motor/ODrive/OD-01-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/ODrive/OD-02-FOC-Core",
+                "title": " OD-02: FOC 核心算法",
+                "placeholder": false,
+                "slug": "motor/ODrive/OD-02-FOC-Core",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/ODrive/OD-03-Control-Strategy",
+                "title": " OD-03: 控制策略",
+                "placeholder": false,
+                "slug": "motor/ODrive/OD-03-Control-Strategy",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/ODrive/OD-04-Encoder-Sensorless",
+                "title": " OD-04: 编码器与无传感器估算",
+                "placeholder": false,
+                "slug": "motor/ODrive/OD-04-Encoder-Sensorless",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "VESC",
+            "title": "VESC",
+            "order": 20,
+            "routeId": "ecosystem",
+            "pathPrefix": "content/motor/VESC",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/VESC/VC-01-Architecture",
+                "title": " VC-01: VESC 固件系统架构",
+                "placeholder": false,
+                "slug": "motor/VESC/VC-01-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/VESC/VC-02-FOC-Core",
+                "title": " VC-02: VESC FOC 核心算法链",
+                "placeholder": false,
+                "slug": "motor/VESC/VC-02-FOC-Core",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/VESC/VC-03-Observer-Sensorless",
+                "title": " VC-03: VESC 磁链观测器与无感算法",
+                "placeholder": false,
+                "slug": "motor/VESC/VC-03-Observer-Sensorless",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/VESC/VC-04-System-Protection",
+                "title": " VC-04: VESC 系统保护机制",
+                "placeholder": false,
+                "slug": "motor/VESC/VC-04-System-Protection",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "COMPARISON",
+            "title": "方案对比",
+            "order": 30,
+            "routeId": "ecosystem",
+            "pathPrefix": "content/motor/COMPARISON",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+                "title": "COMP-01 ODrive vs VESC：开源电机驱动器深度对比分析",
+                "placeholder": false,
+                "slug": "motor/COMPARISON/COMP-01-ODrive-vs-VESC",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "communication",
+            "title": "通信与协议",
+            "order": 40,
+            "routeId": "ecosystem",
+            "pathPrefix": "content/motor/communication",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/communication/COM-01-CAN-Basics",
+                "title": "COM-01 CAN总线基础",
+                "placeholder": false,
+                "slug": "motor/communication/COM-01-CAN-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-02-CAN-FD",
+                "title": "COM-02 CAN FD扩展",
+                "placeholder": false,
+                "slug": "motor/communication/COM-02-CAN-FD",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-03-CAN-STM32",
+                "title": "COM-03 STM32 FDCAN实现",
+                "placeholder": false,
+                "slug": "motor/communication/COM-03-CAN-STM32",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-04-CAN-Simulation",
+                "title": "COM-04 CAN通信仿真",
+                "placeholder": false,
+                "slug": "motor/communication/COM-04-CAN-Simulation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-05-Modbus",
+                "title": "COM-05 Modbus协议",
+                "placeholder": false,
+                "slug": "motor/communication/COM-05-Modbus",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-06-EtherCAT",
+                "title": "COM-06 EtherCAT协议",
+                "placeholder": false,
+                "slug": "motor/communication/COM-06-EtherCAT",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-07-Protocol-Compare",
+                "title": "COM-07 协议选型对比",
+                "placeholder": false,
+                "slug": "motor/communication/COM-07-Protocol-Compare",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-08-AUTOSAR-Architecture",
+                "title": "COM-08 AUTOSAR架构与电机控制",
+                "placeholder": false,
+                "slug": "motor/communication/COM-08-AUTOSAR-Architecture",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/COM-09-Industrial-PHY",
+                "title": "COM-09 工业通信物理层（PHY）",
+                "placeholder": false,
+                "slug": "motor/communication/COM-09-Industrial-PHY",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/communication/README",
+                "title": "工业通信协议学习路径",
+                "placeholder": false,
+                "slug": "motor/communication/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "controllers-evolution",
+            "title": "控制器演进",
+            "order": 50,
+            "routeId": "ecosystem",
+            "pathPrefix": "content/motor/controllers-evolution",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "motor/controllers-evolution/CE-01-Century-of-Feedback",
+                "title": "CE-01: 反馈的世纪——控制理论250年演化史",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-01-Century-of-Feedback",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-02-Servo-Controllers-Evolution",
+                "title": "CE-02: 伺服电机控制器——从PID、LQR到QP-MPC",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-02-Servo-Controllers-Evolution",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-03-Poles-Zeros-ODE",
+                "title": "CE-03: 零极点与微分方程",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-03-Poles-Zeros-ODE",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-04-Pure-PD-Unimplementable",
+                "title": "CE-04: 纯PD控制的不可实现性",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-04-Pure-PD-Unimplementable",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-05-IP-Controller",
+                "title": "CE-05: IP控制器——消除超调的比例项移位",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-05-IP-Controller",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-06-Cascaded-Control",
+                "title": "CE-06: 级联控制回路",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-06-Cascaded-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-07-Anti-Windup",
+                "title": "CE-07: 抗积分饱和",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-07-Anti-Windup",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-08-Core-Problems",
+                "title": "CE-08: 控制器设计的九大核心问题",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-08-Core-Problems",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-09-Bode-Waterbed",
+                "title": "CE-09: Bode积分与水床效应",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-09-Bode-Waterbed",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-10-Lead-Lag-Compensator",
+                "title": "CE-10: 超前滞后补偿器设计",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-10-Lead-Lag-Compensator",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-11-Audio-Feedback-Analogy",
+                "title": "CE-11: 音频反馈与控制理论的类比",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-11-Audio-Feedback-Analogy",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-12-Bellman-to-LQR",
+                "title": "CE-12: 从Bellman原理到Riccati方程",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-12-Bellman-to-LQR",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-13-CARE-vs-DARE",
+                "title": "CE-13: CARE vs DARE——连续与离散Riccati方程",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-13-CARE-vs-DARE",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-14-Youla-Parameterization",
+                "title": "CE-14: Youla参数化——所有稳定控制器的凸空间",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-14-Youla-Parameterization",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-15-LP-QP-LQR",
+                "title": "CE-15: LP→QP→LQR——现代控制的优化引擎",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-15-LP-QP-LQR",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-16-Trajectory-Tracking",
+                "title": "CE-16: 轨迹跟踪——LQR与MPC如何跟踪运动目标",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-16-Trajectory-Tracking",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-17-Nonlinear-MPC",
+                "title": "CE-17: 非线性MPC——当动力学超越线性",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-17-Nonlinear-MPC",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-18-System-Identification",
+                "title": "CE-18: 系统辨识——模型从何而来",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-18-System-Identification",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-19-Observer-Design",
+                "title": "CE-19: 观测器设计——从状态反馈到输出反馈的桥梁",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-19-Observer-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-20-Digital-Control-Sampling",
+                "title": "CE-20: 数字控制与采样——从s域到z域发生了什么",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-20-Digital-Control-Sampling",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-21-Gain-Scheduling",
+                "title": "CE-21: 增益调度——处理非线性的实用方法，真正能出货的方法",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-21-Gain-Scheduling",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-22-H-Infinity-Robust-Control",
+                "title": "CE-22: H∞鲁棒控制——当你知道模型是错的",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-22-H-Infinity-Robust-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/CE-23-Control-Theory-FAQ",
+                "title": "CE-23: 控制理论常见问题FAQ",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/CE-23-Control-Theory-FAQ",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/controllers-evolution/README",
+                "title": "控制器演化路径：从PID到QP-MPC",
+                "placeholder": false,
+                "slug": "motor/controllers-evolution/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matlab-simulink",
+    "title": "Matlab/Simulink 仿真",
+    "order": 30,
+    "routes": [
+      {
+        "id": "foundation",
+        "title": "仿真基础",
+        "order": 10,
+        "description": "先建立最小模型、采样时间和离散化边界。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "matlab-simulink-overview",
+            "title": "总览与学习路线",
+            "order": 1,
+            "routeId": "foundation",
+            "pathPrefix": "content/matlab-simulink",
+            "tags": [
+              "roadmap",
+              "beginner"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/README",
+                "title": "Matlab/Simulink 仿真全教程",
+                "order": 1,
+                "placeholder": false,
+                "slug": "matlab-simulink/README",
+                "tags": [
+                  "roadmap",
+                  "beginner"
+                ],
+                "quality": "curated"
+              }
+            ]
+          },
+          {
+            "id": "setup",
+            "title": "环境与最小模型",
+            "order": 10,
+            "routeId": "foundation",
+            "pathPrefix": "content/matlab-simulink/foundation",
+            "tags": [
+              "setup",
+              "discrete-control"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/foundation/MS-00-Simulation-Setup",
+                "title": "MS-00 环境与最小离散控制模型",
+                "order": 10,
+                "placeholder": false,
+                "slug": "matlab-simulink/foundation/MS-00-Simulation-Setup",
+                "tags": [
+                  "setup",
+                  "discrete-control"
+                ],
+                "quality": "curated"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "matlab-discrete",
+        "title": "Matlab 离散控制仿真",
+        "order": 20,
+        "description": "用脚本把差分方程、PID 和状态空间跑清楚。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "matlab-discrete-control",
+            "title": "Matlab 离散控制系统",
+            "order": 10,
+            "routeId": "matlab-discrete",
+            "pathPrefix": "content/matlab-simulink/matlab-discrete-control",
+            "tags": [
+              "matlab",
+              "pid",
+              "state-space"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+                "title": "MS-01 Matlab 仿真离散控制系统",
+                "order": 20,
+                "placeholder": false,
+                "slug": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+                "tags": [
+                  "matlab",
+                  "pid",
+                  "state-space"
+                ],
+                "quality": "curated"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "simulink-discrete",
+        "title": "Simulink 离散控制仿真",
+        "order": 30,
+        "description": "把脚本模型拆成可观察、可调参的离散框图。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "simulink-discrete-control",
+            "title": "Simulink 离散控制系统",
+            "order": 10,
+            "routeId": "simulink-discrete",
+            "pathPrefix": "content/matlab-simulink/simulink-discrete-control",
+            "tags": [
+              "simulink",
+              "sample-time",
+              "solver"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+                "title": "MS-02 Simulink 仿真离散控制系统",
+                "order": 30,
+                "placeholder": false,
+                "slug": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+                "tags": [
+                  "simulink",
+                  "sample-time",
+                  "solver"
+                ],
+                "quality": "curated"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "custom-blocks",
+        "title": "自定义模块",
+        "order": 40,
+        "description": "掌握 Matlab Function 与 S-Function 的边界。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "matlab-function",
+            "title": "Matlab Function 使用",
+            "order": 10,
+            "routeId": "custom-blocks",
+            "pathPrefix": "content/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+            "tags": [
+              "matlab-function",
+              "code-generation"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+                "title": "MS-03 Matlab Function 使用",
+                "order": 40,
+                "placeholder": false,
+                "slug": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+                "tags": [
+                  "matlab-function",
+                  "code-generation"
+                ],
+                "quality": "curated"
+              }
+            ]
+          },
+          {
+            "id": "s-function",
+            "title": "S-Function 使用",
+            "order": 20,
+            "routeId": "custom-blocks",
+            "pathPrefix": "content/matlab-simulink/custom-blocks/MS-04-S-Function",
+            "tags": [
+              "s-function",
+              "custom-block"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/custom-blocks/MS-04-S-Function",
+                "title": "MS-04 S-Function 使用",
+                "order": 50,
+                "placeholder": false,
+                "slug": "matlab-simulink/custom-blocks/MS-04-S-Function",
+                "tags": [
+                  "s-function",
+                  "custom-block"
+                ],
+                "quality": "curated"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tuning-validation",
+        "title": "整定与验证",
+        "order": 50,
+        "description": "用参数扫描、自整定和日志对比闭环结果。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "parameter-auto-tuning",
+            "title": "参数自整定",
+            "order": 10,
+            "routeId": "tuning-validation",
+            "pathPrefix": "content/matlab-simulink/tuning-validation",
+            "tags": [
+              "auto-tuning",
+              "validation"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+                "title": "MS-05 参数自整定与仿真验证",
+                "order": 60,
+                "placeholder": false,
+                "slug": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+                "tags": [
+                  "auto-tuning",
+                  "validation"
+                ],
+                "quality": "curated"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -6,6 +6,7 @@ import UmamiAnalytics from "@components/analytics/UmamiAnalytics.astro";
 import FancyboxManager from "@components/features/FancyboxManager.astro";
 import FontSetup from "@components/features/FontSetup.astro";
 import MusicManager from "@components/features/MusicManager.astro";
+import PageLoader from "@components/features/PageLoader.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 
@@ -39,9 +40,10 @@ interface Props {
 	lang?: string;
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
+	noindex?: boolean;
 }
 
-let { title, description, lang, setOGTypeArticle, postSlug } = Astro.props;
+let { title, description, lang, setOGTypeArticle, postSlug, noindex = false } = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -91,6 +93,7 @@ const siteLang = lang.replace("_", "-");
 <html lang={siteLang} class="bg-(--page-bg) text-[14px] md:text-[16px]" data-wallpaper-mode={backgroundWallpaper.mode}>
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
     {analyticsConfig?.googleAnalyticsId && (
             <GoogleAnalytics analyticsId={analyticsConfig.googleAnalyticsId} />
     )}
@@ -129,6 +132,7 @@ const siteLang = lang.replace("_", "-");
       )
     }
     <meta name="author" content={profileConfig.name} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:site_name" content={siteConfig.title} />
     <meta property="og:url" content={Astro.url} />
@@ -567,6 +571,7 @@ const siteLang = lang.replace("_", "-");
 
     <div id="progress-bar"></div>
 
+    <PageLoader />
     <!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
     <ConfigCarrier />
@@ -722,7 +727,7 @@ const siteLang = lang.replace("_", "-");
 
 <script>
   import { pathsEqual, url } from "@/utils/url-utils";
-  import { syncHomeExperience } from "@/utils/home-experience-controller";
+  import { initHomeExperienceLifecycle } from "@/utils/home-experience-controller";
   import {
     BANNER_HEIGHT,
     BANNER_HEIGHT_HOME,
@@ -1366,20 +1371,7 @@ function disableAnimation() {
     document.addEventListener("swup:enable", setup);
   }
 
-  // 全局托管首页增强：首次加载及 Swup 内容替换后统一同步，离开首页时释放监听器。
-  const syncHome = () => {
-    try {
-      syncHomeExperience();
-    } catch (error) {
-      console.warn("Home enhancement unavailable", error);
-    }
-  };
-  syncHome();
-  if (window?.swup?.hooks) {
-    window.swup.hooks.on("content:replace", syncHome);
-  } else {
-    document.addEventListener("swup:enable", () => window.swup?.hooks?.on("content:replace", syncHome), { once: true });
-  }
+  initHomeExperienceLifecycle();
   document.addEventListener("astro:page-load", scheduleContentOverflowEnhancements);
   document.addEventListener("password:decrypted", () => {
     setTimeout(scheduleContentOverflowEnhancements, 200);

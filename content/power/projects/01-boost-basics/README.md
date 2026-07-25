@@ -55,7 +55,7 @@ chapterOrder: 40
 在 PowerShell 中进入学习目录：
 
 ```powershell
-cd E:\gitee_CodeStorage\学习\电源
+cd <power-source-root>
 ```
 
 运行默认仿真：

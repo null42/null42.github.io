@@ -12,7 +12,7 @@
 
 ## Current State
 
-Repository: `E:\gitee_CodeStorage\xuexi\null42.github.io` (actual local path uses the Chinese folder name for learning)
+Repository: `<blog-root>` (actual local path uses the Chinese folder name for learning)
 
 Current capabilities:
 - VitePress site publishes to `https://null42.github.io/`.
@@ -69,8 +69,8 @@ Deliverables:
 - HTML inventory report.
 - HTML-to-Markdown conversion for common pages.
 - Asset copy/rewrite for images/SVG.
-- Power knowledge base sync from `E:\gitee_CodeStorage\瀛︿範\鐢垫簮` into `content/power`.
-- Motor knowledge base sync from `E:\gitee_CodeStorage\瀛︿範\MotorControl-main\motor-learning-web` into `content/motor`.
+- Power knowledge base sync from `<power-source-root>` into `content/power`.
+- Motor knowledge base sync from `<legacy-motor-source-root>` into `content/motor`.
 - A published first batch for both power and motor content, not just importer scripts.
 - Fallback strategy for pages that cannot be safely converted.
 - Dry-run and apply modes with conversion quality reports.
@@ -790,8 +790,8 @@ import path from 'node:path'
 import fg from 'fast-glob'
 
 const roots = [
-  { name: 'power', root: 'E:\\gitee_CodeStorage\\瀛︿範\\鐢垫簮' },
-  { name: 'motor', root: 'E:\\gitee_CodeStorage\\瀛︿範\\MotorControl-main\\motor-learning-web' }
+  { name: 'power', root: '<power-source-root>' },
+  { name: 'motor', root: '<legacy-motor-source-root>' }
 ]
 
 const patterns = ['**/*.md', '**/*.html', '**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.webp']
@@ -973,14 +973,14 @@ Create `docs/kb/import-sources.md`:
 
 ## Power
 
-- Source root: `E:\gitee_CodeStorage\瀛︿範\鐢垫簮`
+- Source root: `<power-source-root>`
 - Markdown concepts: `concepts/power-electronics/**/*.md`
 - HTML lessons: `lessons/**/*.html`
 - Images/SVG: copied beside converted pages when referenced.
 
 ## Motor
 
-- Source root: `E:\gitee_CodeStorage\瀛︿範\MotorControl-main\motor-learning-web`
+- Source root: `<legacy-motor-source-root>`
 - Chapter structure should be inferred from existing data/frontend folders first, then refined manually.
 - First synchronized batch must publish real motor-control knowledge pages, not only the existing `getting-started.md` placeholder.
 
@@ -1001,7 +1001,7 @@ In `scripts/kb/migrate.ts`, add sources:
 ```ts
 {
   name: 'power-lessons-html',
-  root: 'E:\\gitee_CodeStorage\\瀛︿範\\鐢垫簮\\lessons',
+  root: '<power-source-root>\\lessons',
   target: path.join(contentRoot, 'power', 'lessons'),
   patterns: ['**/*.html']
 }

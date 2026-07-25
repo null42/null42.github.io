@@ -10,8 +10,9 @@ import { homeConfig } from "@/config/homeConfig";
 	</div>
 	<div class="home-display__stage">
 		<img src={homeConfig.media.display.src} alt={homeConfig.media.display.alt} width={homeConfig.media.display.width} height={homeConfig.media.display.height} loading="lazy" decoding="async" />
-		<div class="home-shutter" aria-hidden="true"></div>
-		<video class="home-background-video" muted playsinline preload="none" aria-hidden="true"></video>
+		<div class="home-display-shutter" aria-hidden="true">
+			{homeConfig.display.cards.map((card, index) => <i style={`--shutter-index:${index}`}>{card.code}</i>)}
+		</div>
 	</div>
 	<div class="home-display__cards">
 		{homeConfig.display.cards.map((card) => (

@@ -2,16 +2,43 @@
 import HomeDataLayer from "@components/layout/HomeDataLayer.astro";
 import HomeDisplayLayer from "@components/layout/HomeDisplayLayer.astro";
 import HomeHero from "@components/layout/HomeHero.astro";
+import HomeLatestLayer from "@components/layout/HomeLatestLayer.astro";
+import HomePortfolioShutterLayer from "@components/layout/HomePortfolioShutterLayer.astro";
 import HomeTicker from "@components/layout/HomeTicker.astro";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { isPublicArticle } from "@/utils/article-index";
+import { getSortedPosts } from "@/utils/content-utils";
+import { getPostUrlBySlug } from "@/utils/url-utils";
+import migrationBaseline from "../../reports/migration-baseline.json";
+import coverageReport from "../../reports/knowledge-navigation-coverage.json";
 import "@/styles/home.css";
+
+const formatter = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" });
+const publicPosts = (await getSortedPosts()).filter(({ data }) => isPublicArticle(data));
+const latestPosts = publicPosts.slice(0, 4).map((post) => ({
+	title: post.data.title,
+	href: getPostUrlBySlug(post.id),
+	date: formatter.format(post.data.published),
+	description: post.data.description || "阅读文章详情",
+}));
+const coveragePercent = coverageReport.baseline.expected === 0
+	? "0%"
+	: `${Math.round((coverageReport.baseline.mapped / coverageReport.baseline.expected) * 100)}%`;
+const homeMetrics = [
+	{ value: String(publicPosts.length), label: "公开文章", detail: "由 content/ 与公开性矩阵构建" },
+	{ value: String(coverageReport.counts.sections), label: "知识栏目", detail: `${coverageReport.counts.routes} 条路线 · ${coverageReport.counts.stages} 个阶段` },
+	{ value: coveragePercent, label: "四级覆盖", detail: `${coverageReport.baseline.mapped}/${coverageReport.baseline.expected} 篇规范文章` },
+	{ value: String(migrationBaseline.counts.attachments), label: "附件基线", detail: "迁移基线逐项哈希校验" },
+] as const;
 ---
 
 <MainGridLayout>
 	<div class="home-page" data-home-page>
 		<HomeHero />
 		<HomeTicker />
-		<HomeDataLayer />
+		<HomeDataLayer metrics={homeMetrics} />
 		<HomeDisplayLayer />
+		<HomePortfolioShutterLayer />
+		<HomeLatestLayer posts={latestPosts} />
 	</div>
 </MainGridLayout>

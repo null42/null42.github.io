@@ -9,22 +9,98 @@
   "searchable": true,
   "allowFlat": false,
   "description": "UPS、PFC、LLC、三电平逆变器、采样、保护和电源控制软件。",
-  "defaultTags": ["power-electronics"],
+  "defaultTags": [
+    "power-electronics"
+  ],
   "routes": [
-    { "id": "roadmap", "title": "路线与索引", "order": 10 },
-    { "id": "project", "title": "项目实践", "order": 20 },
-    { "id": "debug", "title": "调试与复盘", "order": 30 },
-    { "id": "reference", "title": "参考资料", "order": 40 }
+    {
+      "id": "roadmap",
+      "title": "路线与索引",
+      "order": 10
+    },
+    {
+      "id": "project",
+      "title": "项目实践",
+      "order": 20
+    },
+    {
+      "id": "debug",
+      "title": "调试与复盘",
+      "order": 30
+    },
+    {
+      "id": "reference",
+      "title": "参考资料",
+      "order": 40,
+      "allowEmpty": true
+    }
   ],
   "stages": [
-    { "id": "overview", "title": "电源入口", "order": 1, "routeId": "roadmap", "pathPrefix": "content/power" },
-    { "id": "roadmap", "title": "路线图", "order": 10, "routeId": "roadmap", "pathPrefix": "content/power/roadmap" },
-    { "id": "projects", "title": "项目实践", "order": 20, "routeId": "project", "pathPrefix": "content/power/projects" },
-    { "id": "simulations", "title": "仿真结果", "order": 30, "routeId": "project", "pathPrefix": "content/power/simulations" },
-    { "id": "debug-records", "title": "调试记录", "order": 10, "routeId": "debug", "pathPrefix": "content/power/debug-records" },
-    { "id": "weekly-reviews", "title": "周复盘", "order": 20, "routeId": "debug", "pathPrefix": "content/power/weekly-reviews" },
-    { "id": "archive", "title": "历史记录", "order": 30, "routeId": "debug", "pathPrefix": "content/power/archive" },
-    { "id": "docs", "title": "文档", "order": 10, "routeId": "reference", "pathPrefix": "content/power/docs" },
-    { "id": "reference", "title": "参考资料", "order": 20, "routeId": "reference", "pathPrefix": "content/power/reference" }
+    {
+      "id": "power-overview",
+      "title": "电源入口",
+      "order": 1,
+      "routeId": "roadmap",
+      "pathPrefix": "content/power"
+    },
+    {
+      "id": "roadmap",
+      "title": "路线图",
+      "order": 10,
+      "routeId": "roadmap",
+      "pathPrefix": "content/power/roadmap"
+    },
+    {
+      "id": "projects",
+      "title": "项目实践",
+      "order": 20,
+      "routeId": "project",
+      "pathPrefix": "content/power/projects"
+    },
+    {
+      "id": "simulations",
+      "title": "仿真结果",
+      "order": 30,
+      "routeId": "project",
+      "pathPrefix": "content/power/simulations"
+    },
+    {
+      "id": "debug-records",
+      "title": "调试记录",
+      "order": 10,
+      "routeId": "debug",
+      "pathPrefix": "content/power/debug-records",
+      "allowEmpty": true
+    },
+    {
+      "id": "weekly-reviews",
+      "title": "周复盘",
+      "order": 20,
+      "routeId": "debug",
+      "pathPrefix": "content/power/weekly-reviews"
+    },
+    {
+      "id": "archive",
+      "title": "历史记录",
+      "order": 30,
+      "routeId": "debug",
+      "pathPrefix": "content/power/archive"
+    },
+    {
+      "id": "docs",
+      "title": "文档",
+      "order": 10,
+      "routeId": "reference",
+      "pathPrefix": "content/power/docs",
+      "allowEmpty": true
+    },
+    {
+      "id": "reference",
+      "title": "参考资料",
+      "order": 20,
+      "routeId": "reference",
+      "pathPrefix": "content/power/reference",
+      "allowEmpty": true
+    }
   ]
 }

@@ -1,0 +1,21 @@
+---
+import { homeConfig } from '@/config/homeConfig'
+interface Props { posts: readonly { title: string; href: string; date: string; description: string }[] }
+const { posts } = Astro.props
+---
+
+<section class="home-latest" data-home-section="latest" aria-labelledby="home-latest-title">
+  <header><p>{homeConfig.latest.eyebrow}</p><h2 id="home-latest-title">{homeConfig.latest.title}</h2><span>{homeConfig.latest.description}</span></header>
+  <div class="home-latest__list">
+    {posts.map((post, index) => (
+      <a href={post.href}><b>{String(index + 1).padStart(2, '0')}</b><time>{post.date}</time><div><h3>{post.title}</h3><p>{post.description}</p></div><i aria-hidden="true">→</i></a>
+    ))}
+  </div>
+  <a class="home-latest__all" href="/list/">{homeConfig.latest.allLabel}</a>
+</section>
+
+<style>
+  .home-latest{padding:clamp(5rem,9vw,9rem) clamp(1rem,5vw,5rem);color:#f7f8f6;background:#293934}.home-latest>header,.home-latest__list,.home-latest__all{max-width:92rem;margin-inline:auto}.home-latest>header{display:grid;grid-template-columns:1fr minmax(16rem,.7fr);gap:.8rem 4rem;margin-bottom:2.5rem}.home-latest>header p{grid-column:1/-1;margin:0;color:#8bd1c1;font-size:.72rem;letter-spacing:.18em}.home-latest>header h2{margin:0;font-size:clamp(2rem,4vw,4rem)}.home-latest>header span{align-self:end;color:#bdc7c3;line-height:1.7}
+  .home-latest__list{border-top:1px solid #ffffff26}.home-latest__list a{display:grid;grid-template-columns:3rem 7rem minmax(0,1fr) 2rem;gap:1rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid #ffffff26;color:inherit}.home-latest__list b,.home-latest__list time{font-size:.72rem;color:#8bd1c1}.home-latest__list h3{margin:0 0 .35rem;font-size:1.2rem}.home-latest__list p{margin:0;color:#bdc7c3}.home-latest__list i{font-size:1.4rem}.home-latest__all{display:block;width:max-content;margin-top:2rem;padding:.75rem 1.15rem;border:1px solid #8bd1c166;border-radius:999px;color:#dff7f0}
+  @media(max-width:680px){.home-latest>header{display:block}.home-latest>header h2{margin:.7rem 0 1rem}.home-latest__list a{grid-template-columns:2.5rem minmax(0,1fr) 1.5rem}.home-latest__list time{display:none}.home-latest__list p{display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical}}
+</style>
