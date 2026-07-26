@@ -10,6 +10,8 @@
     "astro": "astro",
     "check": "astro check",
     "test": "vitest run --exclude \"tests/e2e/**\" --minWorkers=1 --maxWorkers=4 --test-timeout=60000",
+    "private-reader:encrypt": "tsx scripts/kb/private-reader/cli.ts encrypt",
+    "private-reader:clean": "tsx scripts/kb/private-reader/cli.ts clean",
     "test:e2e": "playwright test",
     "test:e2e:home": "playwright test tests/e2e/home.production.spec.ts",
     "test:e2e:quality": "playwright test tests/e2e/quality.production.spec.ts",
