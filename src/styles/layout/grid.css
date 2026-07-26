@@ -23,11 +23,26 @@
 	width: 100%;
 }
 
+/* sticky-navbar 模式下导航栏为 fixed，非首页内容需要顶部留白避免被遮挡 */
+body.sticky-navbar:not(.is-home) #main-grid-wrapper {
+	padding-top: 4.5rem;
+}
+
 #main-grid {
 	position: relative;
 	width: min(100%, 64rem);
 	margin: 0 auto;
 	padding: 1.5rem 1rem 0;
+}
+
+/* 首页采用全宽滚动叙事，不受 64rem 宽度限制和 padding 影响 */
+body.is-home #main-grid {
+	width: 100%;
+	padding: 0;
+}
+
+body.is-home #content-wrapper {
+	padding: 0;
 }
 
 #swup-container {
@@ -63,7 +78,7 @@
 .knowledge-sidebar-rail > * {
 	position: sticky;
 	top: 5.5rem;
-	max-height: calc(100vh - 7rem);
+	max-height: calc(100vh - 10rem);
 	overflow: auto;
 	border: 1px solid var(--line-divider);
 	border-radius: 0.75rem;

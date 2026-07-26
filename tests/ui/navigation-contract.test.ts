@@ -24,7 +24,9 @@ describe('navigation contract', () => {
 
   it('keeps disabled page presets out of rendered desktop and mobile navigation', () => {
     expect(navConfig).toContain('pageKey:')
-    expect(siteConfig).toMatch(/friends:\s*false/)
+    expect(siteConfig).toMatch(/bangumi:\s*false/)
+    expect(siteConfig).toMatch(/anime:\s*false/)
+    expect(siteConfig).toMatch(/friends:\s*true/)
     expect(linkFilter).toContain('filterEnabledNavLinks')
     expect(navbar).toContain('filterEnabledNavLinks(navBarConfig.links, siteConfig.pages)')
     expect(layout).toContain('filterEnabledNavLinks(navBarConfig.links, siteConfig.pages)')

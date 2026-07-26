@@ -1,0 +1,163 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+// 本地占位友链数据（非真实人物，仅用于演示卡片样式）
+const friends = [
+	{
+		name: "Aurora Labs",
+		bio: "聚焦前端工程化与设计系统的示例站点，分享组件库构建经验。",
+		site: "https://example.com/aurora",
+	},
+	{
+		name: "Beacon Notes",
+		bio: "记录嵌入式开发与电机控制学习笔记的技术博客。",
+		site: "https://example.com/beacon",
+	},
+	{
+		name: "Cipher Studio",
+		bio: "探索加密算法与密码学应用的小型独立工作室。",
+		site: "https://example.com/cipher",
+	},
+	{
+		name: "Daylight Log",
+		bio: "日常随想与摄影记录，慢节奏的生活方式博客。",
+		site: "https://example.com/daylight",
+	},
+];
+
+// 取首字母作为占位头像（避免依赖外部头像服务）
+const initialOf = (name: string) => name.slice(0, 1).toUpperCase();
+---
+
+<MainGridLayout title="友链" description="占位友链页面，展示站点互链卡片示例。">
+	<section class="friends-page">
+		<header class="friends-hero card-base">
+			<p class="friends-eyebrow">FRIENDS</p>
+			<h1>友链</h1>
+			<p class="friends-sub">
+				下方为占位友链数据，仅用于展示卡片样式与布局效果，不代表真实站点。如需启用真实友链，请编辑本页本地数据或接入 friendsConfig。
+			</p>
+		</header>
+
+		<ul class="friends-grid" role="list">
+			{friends.map((friend) => (
+				<li class="friend-card card-base">
+					<a
+						class="friend-link"
+						href={friend.site}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="friend-avatar" aria-hidden="true">{initialOf(friend.name)}</div>
+						<div class="friend-info">
+							<h2 class="friend-name">{friend.name}</h2>
+							<p class="friend-bio">{friend.bio}</p>
+							<span class="friend-site">{friend.site}</span>
+						</div>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+</MainGridLayout>
+
+<style>
+	.friends-page {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.friends-hero {
+		display: grid;
+		gap: 0.4rem;
+		padding: clamp(1.25rem, 3vw, 2rem);
+	}
+
+	.friends-eyebrow {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+	}
+
+	.friends-hero h1 {
+		margin: 0;
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+	}
+
+	.friends-sub {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.friends-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.friend-card {
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+		border: 1px solid var(--line-divider);
+	}
+
+	.friend-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.friend-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		padding: 1.2rem;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
+	}
+
+	.friend-avatar {
+		width: 3.25rem;
+		height: 3.25rem;
+		border-radius: var(--radius-large);
+		display: grid;
+		place-items: center;
+		background: var(--btn-regular-bg);
+		color: var(--primary);
+		font-weight: 800;
+		font-size: 1.25rem;
+		letter-spacing: 0.02em;
+	}
+
+	.friend-info {
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.friend-name {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+
+	.friend-bio {
+		margin: 0;
+		color: var(--content-meta);
+		font-size: 0.85rem;
+		line-height: 1.55;
+	}
+
+	.friend-site {
+		margin-top: 0.25rem;
+		color: var(--primary);
+		font-size: 0.78rem;
+		word-break: break-all;
+		opacity: 0.85;
+	}
+</style>

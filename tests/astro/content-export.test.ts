@@ -4,6 +4,24 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { exportAstroContent, normalizeMarkdown } from '../../scripts/astro/export-content'
 
+// Windows 普通用户默认无文件 symlink 权限（需开发者模式或管理员），
+// 检测一次后用于跳过依赖文件 symlink 的测试。
+const canCreateFileSymlink = (() => {
+  if (process.platform !== 'win32') return true
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'symlink-probe-'))
+  const target = path.join(tmpDir, 'target.txt')
+  const link = path.join(tmpDir, 'link.txt')
+  fs.writeFileSync(target, 'probe')
+  try {
+    fs.symlinkSync(target, link, 'file')
+    return true
+  } catch {
+    return false
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true, maxRetries: 3 })
+  }
+})()
+
 describe('Astro content export', () => {
   it('maps public frontmatter and redirects legacy source URLs to Astro lowercase routes', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-export-'))
@@ -354,7 +372,7 @@ describe('Astro content export', () => {
     expect(fs.existsSync(path.join(root, 'public/content/blog/assets/outside.png'))).toBe(false)
   })
 
-  it('rejects encrypted payload links that resolve outside content', async () => {
+  it.runIf(canCreateFileSymlink)('rejects encrypted payload links that resolve outside content', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-payload-link-'))
     const externalRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-payload-external-'))
     fs.mkdirSync(path.join(root, 'content/encrypted'), { recursive: true })

@@ -1,0 +1,153 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+// 仅使用站点已有的占位 SVG，重复铺满响应式网格以演示布局
+const basePhotos = [
+	{ src: "/images/home/home-02.svg", alt: "占位插图 01", caption: "Placeholder 01" },
+	{ src: "/images/home/home-03.svg", alt: "占位插图 02", caption: "Placeholder 02" },
+];
+
+const photos = [...basePhotos, ...basePhotos, ...basePhotos];
+---
+
+<MainGridLayout
+	title="相册"
+	description="占位相册页面，使用站点本地 SVG 演示响应式网格与悬停效果。"
+>
+	<section class="gallery-page">
+		<header class="gallery-hero card-base">
+			<p class="gallery-eyebrow">GALLERY</p>
+			<h1>相册</h1>
+			<p class="gallery-sub">
+				以下图片为站点内置占位资源（home-02.svg / home-03.svg），仅用于演示网格布局与悬停效果。
+			</p>
+		</header>
+
+		<div class="gallery-grid">
+			{photos.map((photo, index) => (
+				<figure class="gallery-item" key={index}>
+					<div class="gallery-media" tabindex={0} role="button" aria-label={photo.alt}>
+						<img
+							src={photo.src}
+							alt={photo.alt}
+							loading="lazy"
+							decoding="async"
+							draggable="false"
+						/>
+						<div class="gallery-overlay">
+							<span class="gallery-overlay-tag">PREVIEW</span>
+							<span class="gallery-overlay-caption">{photo.caption}</span>
+						</div>
+					</div>
+				</figure>
+			))}
+		</div>
+	</section>
+</MainGridLayout>
+
+<style>
+	.gallery-page {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.gallery-hero {
+		display: grid;
+		gap: 0.4rem;
+		padding: clamp(1.25rem, 3vw, 2rem);
+	}
+
+	.gallery-eyebrow {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+	}
+
+	.gallery-hero h1 {
+		margin: 0;
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+	}
+
+	.gallery-sub {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+		gap: 0.85rem;
+	}
+
+	.gallery-item {
+		margin: 0;
+	}
+
+	.gallery-media {
+		position: relative;
+		overflow: hidden;
+		border-radius: var(--radius-large);
+		background: var(--card-bg);
+		border: 1px solid var(--line-divider);
+		aspect-ratio: 16 / 9;
+		cursor: zoom-in;
+		outline: none;
+		transition: box-shadow 0.25s ease, border-color 0.25s ease;
+	}
+
+	.gallery-media:hover,
+	.gallery-media:focus-visible {
+		border-color: var(--primary);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.gallery-media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease, filter 0.4s ease;
+	}
+
+	.gallery-overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		gap: 0.25rem;
+		padding: 0.85rem;
+		color: #fff;
+		background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
+		opacity: 0;
+		transition: opacity 0.25s ease;
+		pointer-events: none;
+	}
+
+	.gallery-overlay-tag {
+		font-size: 0.6rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+		color: var(--primary);
+	}
+
+	.gallery-overlay-caption {
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+
+	.gallery-media:hover img,
+	.gallery-media:focus-visible img {
+		transform: scale(1.06);
+		filter: brightness(0.92);
+	}
+
+	.gallery-media:hover .gallery-overlay,
+	.gallery-media:focus-visible .gallery-overlay {
+		opacity: 1;
+	}
+</style>

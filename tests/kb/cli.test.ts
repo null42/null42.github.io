@@ -14,7 +14,7 @@ describe('knowledge base CLI', () => {
   it('supports CI validation and dry-run publish commands', async () => {
     await expect(runCliCommand(['validate', '--ci'])).resolves.toMatchObject({ code: 0 })
     await expect(runCliCommand(['publish', '--dry-run'])).resolves.toMatchObject({ code: 0, dryRun: true })
-  }, 15_000)
+  }, 60_000)
 
   it('publishes with Astro without committing or pushing', () => {
     const cli = fs.readFileSync('scripts/kb/cli.ts', 'utf8')

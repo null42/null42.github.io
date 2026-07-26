@@ -2906,6 +2906,24 @@
       "finalUrl": "/data/allPostMeta.json"
     },
     {
+      "path": "/friends/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/friends/"
+    },
+    {
+      "path": "/gallery/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/gallery/"
+    },
+    {
+      "path": "/guestbook/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/guestbook/"
+    },
+    {
       "path": "/index.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -5216,6 +5234,12 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/search/"
+    },
+    {
+      "path": "/sponsor/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/sponsor/"
     },
     {
       "path": "/tags/",

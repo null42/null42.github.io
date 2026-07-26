@@ -1,4 +1,4 @@
-.home-page { --home-ink: #f5f1e8; --home-accent: #d8ff45; --home-line: rgba(255,255,255,.16); margin: -5.5rem calc(50% - 50vw) 0; color: var(--home-ink); background: #0c0e0d; overflow: hidden; }
+.home-page { --home-ink: #f5f1e8; --home-accent: #d8ff45; --home-line: rgba(255,255,255,.16); margin: 0; color: var(--home-ink); background: #0c0e0d; overflow: hidden; }
 .home-page * { box-sizing: border-box; }
 .home-eyebrow { margin: 0 0 1rem; font: 700 .72rem/1.4 ui-monospace, monospace; letter-spacing: .18em; color: var(--home-accent); }
 .home-hero { position: relative; min-height: var(--home-viewport-height, 100dvh); display: grid; align-items: start; padding: clamp(7.5rem, 11vw, 9.5rem) max(5vw, calc((100vw - 1240px)/2)) 5rem; isolation: isolate; overflow: hidden; color: #26332d; background: #eef4e7; }
