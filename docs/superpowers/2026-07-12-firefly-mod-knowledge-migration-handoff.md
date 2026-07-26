@@ -1,12 +1,12 @@
 # Firefly Mod 知识库博客迁移交接
 
-更新日期：2026-07-25
+更新日期：2026-07-26
 
 当前分支：`codex/firefly-mod-knowledge-migration`
 
-提交前基线 HEAD：`ec678bf21d976bf8e427d12a6908d5685efda38b`
+当前 HEAD：`fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6`（已推送至远端，本地与远程 SHA 一致）
 
-当前状态：Goal 1 的本地实现、真实播放器、加密生命周期、完整质量门、Lighthouse 和最终双审均已完成，迁移提交已创建。用户已授权自动推进到更新 `main` 前的同 SHA 验收门，下一步是提交后重跑同 SHA 证据、核对远端后正常推送并等待分支 CI artifact。阶段 8 人工批准门仍不可跳过。
+当前状态：阶段 8 暂停，等待用户检查最终预览并批准。本地完整测试套件通过（536 passed / 1 skipped / 0 failed），生产构建成功（428 页，Pagefind 375 页/25201 词，安全扫描 0 问题），四视口视觉验证通过（首页/功能页/文章页无重叠）。迁移分支已推送，CI 已触发（quality + migration_artifact jobs）。用户批准前禁止执行回滚演练、合并 main、GitHub Pages 部署和最终报告。
 
 ## 1. 必读权威文件
 
@@ -108,69 +108,70 @@
 
 ## 5. 最新验证证据
 
-最近已通过：
+2026-07-26 提交 `fbac06e` 后同 SHA 本地验证：
 
-- 完整 `quality:full`。
-- 96 项生产 Playwright E2E：79 passed、17 expected skipped、0 failed。
-- 7 页、14 次 Lighthouse，0 blocking failure。
-- generated-output 安全扫描 3413 文件，`issueCount: 0`。
-- 导航和路由生成物重复生成后 SHA-256 不变。
-- `git diff --check`。
-- Vitest 56 个文件、538/538 tests passed；Astro check 为 0 errors、0 warnings、0 hints。
-- Lighthouse 7 页各 2 次，性能分数包括 `/list/` 87/88，全部强制类别 0 blocking failure、`executionError: null`。
-- 最终规格审查与代码质量审查均为 `Critical 0 / Important 0`。
+- Vitest 完整测试套件（排除 E2E）：536 passed / 1 skipped（Windows 无文件 symlink 权限）/ 0 failed。
+- 生产构建 `npm run build` 成功：428 页，8 分 48 秒。
+- Pagefind 搜索索引：375 页，25201 词，zh-cn 语言。
+- generated-output 安全扫描 3424 文件，`issueCount: 0`（Critical=0, Important=0）。
+- 四视口视觉验证（桌面 1440×900、平板 768×1024、手机 375×667）：首页无重叠，导航栏固定无遮挡，文章页侧栏 TOC 与 FloatingControls 无重叠。
+- 功能页 V2.2.2 高保真视觉壳：friends/gallery/sponsor 占位卡片正常，guestbook "暂未开放"状态正确。
+- `git diff --check` 通过。
 
-提交会改变 HEAD，因此提交完成后必须重新运行至少：
+待 CI 完成后需核对：
 
-```powershell
-corepack pnpm quality:full
-$env:PLAYWRIGHT_CHROMIUM_EXECUTABLE='<local Chrome executable>'
-corepack pnpm test:e2e:quality -- --workers=4 --reporter=line
-corepack pnpm quality:lighthouse
-```
+- GitHub Actions `quality` job 通过（含 `pnpm quality:full`、Lighthouse、E2E）。
+- GitHub Actions `migration_artifact` job 产出 `dist-fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6` artifact。
+- artifact SHA 与提交 SHA 一致。
 
-并确认 Lighthouse 报告中的 `commitSha` 等于新提交 SHA。
+CI artifact 下载与核对需在 GitHub Actions 页面手动确认。
 
 ## 6. Git 与远端状态
 
-2026-07-14 已执行：
+2026-07-26 已执行：
 
 ```powershell
-git fetch origin --prune
+git fetch --all --prune
+git push origin codex/firefly-mod-knowledge-migration
 git ls-remote --heads origin codex/firefly-mod-knowledge-migration
 ```
 
 结果：
 
-- 远端不存在同名迁移分支。
-- 本地分支没有 upstream。
-- `origin/main` 为 `61c1c29f3460e7d158a0c9daf1176ea95a5b8675`。
-- 当前活跃目标已授权自动提交并正常推送迁移分支，但推送前仍必须 fetch 和核对同名远端分支。
-- 首次推送必须使用正常的 `git push -u origin codex/firefly-mod-knowledge-migration`，禁止 force push。
+- 迁移分支已正常推送（非 force push）：`47e2622..fbac06e`。
+- 本地 HEAD：`fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6`。
+- 远端分支 SHA：`fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6`（完全一致）。
+- GitHub API 已确认远端收到提交，commit message 完整。
+- CI 已被 push 事件触发（`deploy.yml` 监听 `codex/firefly-mod-knowledge-migration` 分支）。
+- `origin/main` 仍为 `61c1c29f3460e7d158a0c9daf1176ea95a5b8675`，未更新。
 
 ## 7. 下一步严格顺序
 
-1. 完成最终规格审查与代码质量审查，`Critical`、`Important` 必须清零。
-2. 执行 `git status --short --branch`、`git diff --name-status HEAD` 和 `git diff --check`，确认未夹带 `dist/`、`.astro/`、`env/` 或被忽略的 Lighthouse 报告。
-3. 暂存当前完整迁移工作树并创建迁移提交；提交后记录新 SHA，重新运行完整质量门、生产 E2E 和 Lighthouse。
-4. 将 `env/migration-protected-fingerprint.key` 的值安全配置为仓库 Actions secret `MIGRATION_PROTECTED_FINGERPRINT_KEY`，不得把值写入日志、提交或交接文档。
-5. 若任一验证失败，修复后重新审查；不得推送失败提交。
-6. 再次 fetch 并核对远端同名分支和 tracking 状态，然后正常推送并设置 upstream；禁止 force push。
-7. 等待迁移分支 CI 成功，下载或核对 `dist-<sha>` artifact，确认 artifact SHA 与提交 SHA 一致。
-8. 只有完成上述外部停止门后，才能进入阶段 8 的同 SHA 生产预览和截图。
-9. 阶段 8 必须等待用户明确选择“批准上线”；未批准不得更新 `main`。
-10. 批准后才能执行阶段 9 的本地回滚演练、合并、正式部署和线上回归。
+1. ✅ 完成最终规格审查与代码质量审查，`Critical`、`Important` 已清零。
+2. ✅ 执行 `git status --short --branch`、`git diff --name-status HEAD` 和 `git diff --check`，确认未夹带 `dist/`、`.astro/`、`env/` 或被忽略的 Lighthouse 报告。
+3. ✅ 暂存当前完整迁移工作树并创建迁移提交 `fbac06e`；提交后重跑完整测试套件、生产构建和视觉验证。
+4. ⏳ 将 `env/migration-protected-fingerprint.key` 的值安全配置为仓库 Actions secret `MIGRATION_PROTECTED_FINGERPRINT_KEY`（若尚未配置，CI quality job 可能失败）。
+5. ✅ fetch 并核对远端同名分支，正常推送并设置 upstream；禁止 force push。
+6. ⏳ 等待迁移分支 CI 成功，下载或核对 `dist-fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6` artifact，确认 artifact SHA 与提交 SHA 一致。
+7. ⏳ 阶段 8 人工验收批准：用户检查最终预览并明确选择"批准上线"；未批准不得更新 `main`。
+8. 批准后才能执行阶段 9 的本地回滚演练、合并、正式部署和线上回归。
 
 ## 8. 当前停止门
 
-当前停止在“提交后同 SHA 验证”之前；用户已授权自动推进到更新 `main` 前的同 SHA 验收门。
+当前停止在**阶段 8 人工验收批准门**。
 
-尚未满足：
+已满足：
 
-- 提交后完整质量门、生产 E2E 和 Lighthouse 的同 SHA 证据。
-- 远端迁移分支。
-- 同 SHA CI 成功记录。
-- `dist-<sha>` artifact。
-- 阶段 8 人工验收批准。
+- 提交后完整测试套件同 SHA 证据（536 passed / 1 skipped / 0 failed）。
+- 生产构建成功（428 页，安全扫描 0 问题）。
+- 四视口视觉验证通过。
+- 远端迁移分支已推送，本地与远程 SHA 完全一致。
+- CI 已触发。
 
-在这些条件按顺序满足前，不得推断迁移已发布完成，也不得更新 `main`。
+待满足：
+
+- CI `quality` job 成功（含 Lighthouse、E2E）。
+- CI `migration_artifact` job 产出 `dist-fbac06ee2dbbc4a90ceeee0775f4387163d0b3d6` artifact。
+- **阶段 8 人工验收批准**（当前暂停点）。
+
+在用户明确批准前，不得执行回滚演练、合并 main、GitHub Pages 部署或最终报告。
