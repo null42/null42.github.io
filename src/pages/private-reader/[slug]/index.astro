@@ -1,0 +1,51 @@
+---
+/**
+ * 私密阅读器单本书路由
+ *
+ * 从 content/private-reader/[slug]/manifest.json 读取加密 manifest，
+ * 渲染 PrivateReaderShell（密码门 + 阅读器）。
+ *
+ * 安全：
+ * - 静态 HTML 中不包含任何明文（标题、作者、内容）
+ * - manifest 中的加密字段通过 data-* 属性传递给浏览器端
+ * - 路由不进 Sitemap/Pagefind/导航
+ * - 必须在 siteConfig.pages.privateReader === true 时才生成
+ */
+import MainGridLayout from "@/layouts/MainGridLayout.astro"
+import PrivateReaderShell from "@/components/private-reader/PrivateReaderShell.astro"
+import { siteConfig } from "@/config"
+import fs from "node:fs"
+import path from "node:path"
+
+const { slug } = Astro.params
+
+// 未开启则 404
+if (!siteConfig.pages.privateReader) {
+	return Astro.redirect("/404")
+}
+
+if (!slug) {
+	return Astro.redirect("/private-reader/")
+}
+
+const manifestPath = path.resolve("content/private-reader", slug, "manifest.json")
+
+if (!fs.existsSync(manifestPath)) {
+	return Astro.redirect("/404")
+}
+
+let manifest: any
+try {
+	manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+} catch {
+	return Astro.redirect("/404")
+}
+
+if (manifest.schema !== "private-reader/v1") {
+	return Astro.redirect("/404")
+}
+---
+
+<MainGridLayout title="私密阅读" description="加密文档本地解密阅读。" noindex={true}>
+	<PrivateReaderShell manifest={manifest} />
+</MainGridLayout>

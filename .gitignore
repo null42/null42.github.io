@@ -23,3 +23,7 @@ reports/production-quality.json
 .env.local
 content/private/**
 !content/private/.gitkeep
+
+# 私密阅读系统配置（包含真实文件路径，绝不提交）
+scripts/private-reader/.local-paths.json
+env/private-reader-stress/

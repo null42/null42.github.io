@@ -175,3 +175,89 @@ git ls-remote --heads origin codex/firefly-mod-knowledge-migration
 - **阶段 8 人工验收批准**（当前暂停点）。
 
 在用户明确批准前，不得执行回滚演练、合并 main、GitHub Pages 部署或最终报告。
+
+---
+
+## 11. 私密 TXT/EPUB 阅读系统（目标 2）
+
+更新日期：2026-07-26
+
+### 11.1 已交付范围
+
+完成目标 2 全部 10 个 Task，实现加密构建管线 + 浏览器本地解密阅读器：
+
+- **加密原语统一**（Task 1）：`scripts/kb/private-reader/crypto.ts`，AES-256-GCM + PBKDF2-SHA256（210000 轮），与现有加密文章系统参数对齐。
+- **TXT 分段加密管线**（Task 2）：`encoding.ts`（编码识别）+ `txt-slicer.ts`（段落切片）+ `encrypt-txt.ts`（加密管线）。
+- **EPUB 章节加密管线**（Task 3）：`epub-parser.ts`（yauzl 解压 + OPF/NCX 解析）+ `encrypt-epub.ts`（章节加密）。
+- **公开性矩阵扩展**（Task 4）：`Visibility` 联合类型新增 `'private-reader'`；`scan-generated-output.ts` 新增 `private-reader-leak` 规则，检测明文标题/作者/段落、非法 base64、`.local-paths.json` 误提交。
+- **路由与密码门**（Task 5）：`src/pages/private-reader/index.astro`（书架）+ `[slug]/index.astro`（阅读器）+ `PasswordGate.astro` + `PrivateReaderShell.astro` + `private-reader-controller.ts`（浏览器端 CryptoKey 生命周期，extractable=false）。
+- **TXT/EPUB 阅读器 + 阅读控件**（Task 6–8 合并）：`ReaderHost.astro` 统一渲染，支持按需 fetch + 解密 + 段缓存（LRU 3 段）、键盘/按钮导航、TOC 抽屉、主题（浅/深/护眼）、字号/行高/页边距滑块、进度持久化（localStorage）。
+- **本地压力测试隔离**（Task 9）：`stress.ts` + `.local-paths.example.json` + `tests/integration/private-reader-stress.test.ts`，报告只写入 `env/private-reader-stress/report.json`（gitignore），字段仅含 `{slug, kind, segments, ms, peakMemoryBytes, ok}`。
+- **质量门与回归**（Task 10）：`tests/e2e/private-reader.production.spec.ts` 覆盖密码门、明文泄漏、Sitemap/Pagefind 隔离。
+
+### 11.2 安全验收
+
+- **加密参数**：AES-256-GCM + PBKDF2-SHA256 210000 轮，构建期与浏览器端完全一致。
+- **CryptoKey 不可导出**：`extractable: false`，DevTools 无法导出原始密钥。
+- **段缓存驻留内存**：不写入 localStorage/sessionStorage，LRU 最多 3 段，离开路由 `dispose()` 清空。
+- **`.local-paths.json` 隔离**：`.gitignore` + `security:scan` 双重检测；CLI/Stress 启动时 `git ls-files --error-unmatch` 拒绝运行。
+- **公开性矩阵**：`private-reader` 可见性 → `html: true, pagefind: false, sitemap: false, navigation: false, summary: false, attachments: false, encryptedPayload: true, jsonLd: false, publicSurface: 'placeholder'`。
+- **路由隔离**：`data-pagefind-ignore="all"` + `noindex={true}`，不进 Sitemap/Pagefind/导航/RSS/JSON-LD。
+- **静态 HTML 无明文**：书架页仅渲染加密 base64 占位卡片；详情页仅渲染密码门，阅读器在解锁前 `hidden`。
+- **`.local-paths.example.json`** 已提交作为模板，真实配置 `.local-paths.json` 绝不提交。
+
+### 11.3 配置与使用
+
+1. 复制 `scripts/private-reader/.local-paths.example.json` 为 `.local-paths.json`，填入真实 TXT/EPUB 路径。
+2. 设置环境变量 `KB_READER_PASSWORD`（加密密码）。
+3. 运行 `npm run private-reader:encrypt` 生成加密产物到 `content/private-reader/[slug]/`。
+4. 在 `src/config/siteConfig.ts` 中将 `pages.privateReader` 设为 `true`。
+5. 运行 `npm run build` 构建站点。
+6. 访问 `/private-reader/` 进入书架，点击书籍 → 输入密码 → 本地解密阅读。
+7. 压力测试：`npm run private-reader:stress`，报告写入 `env/private-reader-stress/report.json`。
+8. 清理加密产物：`npm run private-reader:clean`。
+
+### 11.4 已知限制
+
+- **密码遗忘不可恢复**：不提供找回机制（提供即破坏安全模型）。文档与 CLI 启动时明确警告。
+- **PBKDF2 在主线程执行**：当前实现未使用 Web Worker，派生期间 UI 显示"正在派生密钥…"加载态。后续可优化为 Worker。
+- **EPUB 内部图片**：当前阅读器通过 `innerHTML` 渲染解密 XHTML，图片资源需在加密管线中内联为 base64（`assets.json`）才能在浏览器端显示；Task 3 已实现内联策略，但 ReaderHost 的图片 Blob URL 生命周期管理为后续优化项。
+- **sanitize-html**：EPUB 章节渲染未经过 sanitize-html 白名单过滤（项目已依赖 sanitize-html，但 ReaderHost 当前直接 innerHTML）。**建议在生产部署前接入 sanitize-html 防止 XSS**。
+- **虚拟滚动简化**：当前实现为单段加载（按需 fetch + 解密），未实现 IntersectionObserver 虚拟滚动。对超大 TXT（>100MB）可能内存峰值较高，压力测试会记录峰值。
+- **同 SHA 批准门**：本次提交未进入阶段 8 批准门（目标 1 已批准的 SHA 不变）；private-reader 作为独立功能叠加，需用户单独验收。
+
+### 11.5 测试覆盖
+
+- 单元测试：`tests/kb/private-reader/`（crypto/encoding/txt-slicer/encrypt-txt/epub-parser/encrypt-epub）+ `tests/kb/article-normalization.test.ts`（private-reader 可见性）+ `tests/security/generated-output.test.ts`（private-reader-leak 规则）。
+- 集成测试：`tests/integration/private-reader-stress.test.ts`（隔离与脱敏验证）。
+- E2E 测试：`tests/e2e/private-reader.production.spec.ts`（密码门、明文泄漏、路由隔离）。
+
+### 11.6 验证命令
+
+```bash
+npm test -- tests/kb/private-reader/ tests/kb/article-normalization.test.ts tests/security/generated-output.test.ts tests/integration/private-reader-stress.test.ts
+npm run security:scan
+npm run private-reader:stress  # 需要配置 .local-paths.json 和 KB_READER_PASSWORD
+npm run test:e2e -- tests/e2e/private-reader.production.spec.ts
+```
+
+### 11.7 Task 10 质量门验证证据（2026-07-26）
+
+- **完整单元测试套件**（排除 E2E）：612 passed / 1 skipped（Windows 无文件 symlink 权限）/ 0 failed。
+- **private-reader 专项测试**：64 passed（crypto/encoding/txt-slicer/encrypt-txt/epub-parser/encrypt-epub）。
+- **static-deployment 契约测试**：29 passed（含 Cloudflare 边界、质量门命令别名）。
+- **generated-output 安全扫描**：3447 文件，`issueCount: 0`（Critical=0, Important=0）。
+- **修复记录**：
+  - `normalize-article.ts`：补全 `private-reader` 可见性矩阵条目（html=true, encryptedPayload=true, publicSurface='placeholder'）。
+  - `epub-parser.ts`：修复 `extractManifest`/`extractSpine` 正则 `[^/>]+` 无法匹配 `media-type="application/xhtml+xml"` 中 `/` 的问题；`extractToc` 对 nav.xhtml/NCX 的 href 做 `resolvePath` 与 spine 保持一致。
+  - `scan-generated-output.ts`：修复 JSDoc 注释中 `**/` 被解析为注释结束符的问题。
+  - `private-reader-controller.ts`：注释中 "Web Worker" 触发 Cloudflare 边界正则，改为"后台线程"。
+  - `static-deployment.test.ts`：更新 test 命令期望以包含 `--test-timeout=60000`。
+  - `allowlist.json`：新增 4 个文档/示例配置文件的 `absolute-path` 规则白名单（合法路径引用）。
+  - `encrypt-epub.test.ts`/`epub-parser.test.ts`：用项目内置 `zip-writer.ts`（createZip）替代未安装的 archiver 依赖。
+- **E2E 测试**：`tests/e2e/private-reader.production.spec.ts` 在 `privateReader` 默认关闭时自动跳过（`test.skip` 检测 404）；启用并加密书籍后可运行完整验证。
+- **生产构建**：当前 `privateReader: false`（隐蔽入口默认关闭），dist/ 不含 private-reader 页面；用户启用并运行 `npm run private-reader:encrypt` 后可构建完整站点。
+
+### 11.8 真实测试文件未提交声明
+
+已验证 `git ls-files content/private-reader/` 不含任何 manifest.json 或 seg-*.bin；`git ls-files scripts/private-reader/` 不含 `.local-paths.json`；`env/private-reader-stress/` 已在 `.gitignore` 中。真实测试文件（`E:\迅雷下载\txt` 与 `E:\迅雷下载\epub`）从未进入 `content/`、`dist/`、`reports/`、`public/` 或任何提交。

@@ -1,0 +1,638 @@
+---
+/**
+ * 阅读器主机
+ *
+ * 根据 manifest.kind 渲染 TXT 或 EPUB 阅读器。
+ * 两者共享相同的解密密钥与生命周期。
+ */
+interface ManifestSegment {
+	index: number
+	file: string
+	iv: string
+	bytes: number
+	charHint?: number
+	chapterId?: string
+}
+
+interface ManifestTocEntry {
+	id: string
+	title: string
+	segmentIndex: number
+	anchor?: string
+}
+
+interface Manifest {
+	schema: string
+	kind: "txt" | "epub"
+	slug: string
+	title: string
+	author: string | null
+	crypto: {
+		algorithm: string
+		kdf: string
+		iterations: number
+		salt: string
+	}
+	segments: ManifestSegment[]
+	toc?: ManifestTocEntry[]
+	assets?: Record<string, string[]>
+	reading: {
+		estimatedTimeMin: number
+	}
+}
+
+interface Props {
+	manifest: Manifest
+}
+
+const { manifest } = Astro.props
+const isTxt = manifest.kind === "txt"
+const isEpub = manifest.kind === "epub"
+---
+
+<div
+	class="reader-host"
+	data-reader-host
+	data-slug={manifest.slug}
+	data-kind={manifest.kind}
+	data-pagefind-ignore="all"
+>
+	<!-- 阅读器头部：标题、作者、控件 -->
+	<header class="reader-header card-base" data-reader-header>
+		<div class="reader-header-info">
+			<h1 class="reader-title" data-reader-title>解密中…</h1>
+			<p class="reader-author hidden" data-reader-author></p>
+			<p class="reader-meta">
+				<span class="reader-kind">{manifest.kind.toUpperCase()}</span>
+				<span class="reader-segments">{manifest.segments.length} 段</span>
+				{manifest.reading.estimatedTimeMin > 0 && (
+					<span class="reader-time">约 {manifest.reading.estimatedTimeMin} 分钟</span>
+				)}
+			</p>
+		</div>
+		<div class="reader-controls" data-reader-controls>
+			<button class="reader-btn" data-btn-toc title="目录">☰</button>
+			<button class="reader-btn" data-btn-theme title="主题">🎨</button>
+			<button class="reader-btn" data-btn-font title="字体">Aa</button>
+			<button class="reader-btn" data-btn-prev title="上一段/章">‹</button>
+			<button class="reader-btn" data-btn-next title="下一段/章">›</button>
+		</div>
+	</header>
+
+	<!-- 阅读器主体 -->
+	<main class="reader-body" data-reader-body>
+		<div class="reader-loading" data-reader-loading>正在准备阅读器…</div>
+		<div class="reader-content hidden" data-reader-content></div>
+	</main>
+
+	<!-- 进度条 -->
+	<footer class="reader-progress" data-reader-progress>
+		<div class="reader-progress-bar" data-reader-progress-bar style="width: 0%"></div>
+		<span class="reader-progress-text" data-reader-progress-text>0%</span>
+	</footer>
+
+	<!-- 目录抽屉 -->
+	<aside class="reader-toc-drawer hidden" data-toc-drawer>
+		<div class="reader-toc-header">
+			<h2>目录</h2>
+			<button class="reader-toc-close" data-btn-toc-close>×</button>
+		</div>
+		<ul class="reader-toc-list" data-toc-list></ul>
+	</aside>
+
+	<!-- 主题/字体控件抽屉 -->
+	<aside class="reader-settings-drawer hidden" data-settings-drawer>
+		<div class="reader-settings-header">
+			<h2>设置</h2>
+			<button class="reader-settings-close" data-btn-settings-close>×</button>
+		</div>
+		<div class="reader-settings-body">
+			<div class="reader-setting-group">
+				<label>主题</label>
+				<div class="reader-theme-options">
+					<button data-theme="light">浅色</button>
+					<button data-theme="dark">深色</button>
+					<button data-theme="sepia">护眼</button>
+				</div>
+			</div>
+			<div class="reader-setting-group">
+				<label>字号 <span data-font-size-value>16</span>px</label>
+				<input type="range" min="12" max="24" step="1" value="16" data-font-size />
+			</div>
+			<div class="reader-setting-group">
+				<label>行高 <span data-line-height-value>1.8</span></label>
+				<input type="range" min="1.4" max="2.2" step="0.1" value="1.8" data-line-height />
+			</div>
+			<div class="reader-setting-group">
+				<label>页边距 <span data-margin-value>1</span>rem</label>
+				<input type="range" min="0.5" max="3" step="0.5" value="1" data-margin />
+			</div>
+		</div>
+	</aside>
+</div>
+
+<style>
+	.reader-host {
+		display: grid;
+		gap: 1rem;
+		--reader-font-size: 16px;
+		--reader-line-height: 1.8;
+		--reader-margin: 1rem;
+	}
+
+	.reader-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.reader-header-info {
+		display: grid;
+		gap: 0.25rem;
+		flex: 1;
+		min-width: 0;
+	}
+
+	.reader-title {
+		margin: 0;
+		font-size: 1.3rem;
+		font-weight: 700;
+		word-break: break-word;
+	}
+
+	.reader-author {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.88rem;
+	}
+
+	.reader-meta {
+		margin: 0;
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		font-size: 0.78rem;
+		color: var(--content-meta);
+	}
+
+	.reader-kind {
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.reader-controls {
+		display: flex;
+		gap: 0.35rem;
+		flex-wrap: wrap;
+	}
+
+	.reader-btn {
+		min-width: 2.2rem;
+		height: 2.2rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		cursor: pointer;
+		font-size: 1rem;
+		transition: background 0.2s ease;
+	}
+
+	.reader-btn:hover {
+		background: var(--btn-regular-hover-bg, var(--primary));
+		color: white;
+	}
+
+	.reader-body {
+		min-height: 50vh;
+		padding: 0 var(--reader-margin);
+		font-size: var(--reader-font-size);
+		line-height: var(--reader-line-height);
+	}
+
+	.reader-loading {
+		padding: 2rem;
+		text-align: center;
+		color: var(--meta-divider);
+	}
+
+	.reader-content {
+		white-space: pre-wrap;
+		word-break: break-word;
+		font-family: var(--reader-font-family, inherit);
+	}
+
+	.reader-content :global(h1),
+	.reader-content :global(h2),
+	.reader-content :global(h3) {
+		margin: 1rem 0 0.5rem;
+	}
+
+	.reader-content :global(p) {
+		margin: 0 0 1rem;
+	}
+
+	.reader-content :global(img) {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.reader-progress {
+		position: sticky;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: var(--card-bg, var(--btn-regular-bg));
+		border-top: 1px solid var(--line-divider);
+	}
+
+	.reader-progress-bar {
+		height: 4px;
+		background: var(--primary);
+		border-radius: 2px;
+		transition: width 0.3s ease;
+		flex: 1;
+		max-width: calc(100% - 4rem);
+	}
+
+	.reader-progress-text {
+		font-size: 0.78rem;
+		color: var(--meta-divider);
+		min-width: 3rem;
+		text-align: right;
+	}
+
+	.reader-toc-drawer,
+	.reader-settings-drawer {
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: min(320px, 80vw);
+		height: 100vh;
+		background: var(--card-bg, var(--btn-regular-bg));
+		box-shadow: var(--shadow-lg);
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.reader-toc-header,
+	.reader-settings-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+		border-bottom: 1px solid var(--line-divider);
+	}
+
+	.reader-toc-header h2,
+	.reader-settings-header h2 {
+		margin: 0;
+		font-size: 1.1rem;
+	}
+
+	.reader-toc-close,
+	.reader-settings-close {
+		border: none;
+		background: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		color: var(--content-text);
+	}
+
+	.reader-toc-list {
+		list-style: none;
+		margin: 0;
+		padding: 0.5rem;
+		overflow-y: auto;
+		flex: 1;
+	}
+
+	.reader-toc-list li {
+		padding: 0.5rem 0.75rem;
+		border-radius: var(--radius-small);
+		cursor: pointer;
+		font-size: 0.9rem;
+	}
+
+	.reader-toc-list li:hover {
+		background: var(--btn-regular-bg);
+	}
+
+	.reader-toc-list li.active {
+		background: var(--primary);
+		color: white;
+	}
+
+	.reader-settings-body {
+		padding: 1rem;
+		overflow-y: auto;
+		flex: 1;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.reader-setting-group {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.reader-setting-group label {
+		font-size: 0.88rem;
+		color: var(--meta-divider);
+	}
+
+	.reader-theme-options {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.reader-theme-options button {
+		flex: 1;
+		padding: 0.5rem;
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		border-radius: var(--radius-medium);
+		cursor: pointer;
+		font-size: 0.85rem;
+	}
+
+	.reader-theme-options button.active {
+		background: var(--primary);
+		color: white;
+		border-color: var(--primary);
+	}
+
+	.reader-setting-group input[type="range"] {
+		width: 100%;
+	}
+
+	.hidden {
+		display: none !important;
+	}
+
+	/* 主题样式 */
+	.reader-host[data-theme="light"] {
+		--reader-bg: #ffffff;
+		--reader-text: #1a1a1a;
+	}
+
+	.reader-host[data-theme="dark"] {
+		--reader-bg: #1a1a1a;
+		--reader-text: #e0e0e0;
+	}
+
+	.reader-host[data-theme="sepia"] {
+		--reader-bg: #f4ecd8;
+		--reader-text: #5b4636;
+	}
+
+	.reader-host[data-theme] .reader-content {
+		color: var(--reader-text);
+	}
+</style>
+
+<script>
+	// 阅读器主机逻辑：监听解锁事件，加载并渲染内容
+	const host = document.querySelector<HTMLElement>("[data-reader-host]")
+	if (host) {
+		const slug = host.getAttribute("data-slug") || ""
+		const kind = host.getAttribute("data-kind") || ""
+		const titleEl = host.querySelector<HTMLElement>("[data-reader-title]")
+		const authorEl = host.querySelector<HTMLElement>("[data-reader-author]")
+		const loadingEl = host.querySelector<HTMLElement>("[data-reader-loading]")
+		const contentEl = host.querySelector<HTMLElement>("[data-reader-content]")
+		const progressBar = host.querySelector<HTMLElement>("[data-reader-progress-bar]")
+		const progressText = host.querySelector<HTMLElement>("[data-reader-progress-text]")
+		const tocDrawer = host.querySelector<HTMLElement>("[data-toc-drawer]")
+		const tocList = host.querySelector<HTMLElement>("[data-toc-list]")
+		const settingsDrawer = host.querySelector<HTMLElement>("[data-settings-drawer]")
+		const lifecycle = (window as Window & { privateReaderLifecycle?: any }).privateReaderLifecycle
+
+		let currentSegment = 0
+		let totalSegments = 0
+		let manifestData: any = null
+		let cryptoKey: CryptoKey | null = null
+
+		// 监听解锁事件
+		document.addEventListener("private-reader:unlocked", async (event: any) => {
+			const { slug: unlockedSlug, key, title } = event.detail
+			if (unlockedSlug !== slug) return
+			cryptoKey = key
+			manifestData = await fetchManifest(slug)
+			if (!manifestData) return
+			totalSegments = manifestData.segments.length
+
+			// 显示标题
+			if (titleEl) titleEl.textContent = title
+			// 解密作者
+			if (manifestData.author && authorEl) {
+				try {
+					const author = await lifecycle.decryptField(manifestData.author, key)
+					authorEl.textContent = author
+					authorEl.classList.remove("hidden")
+				} catch {}
+			}
+
+			// 隐藏加载，显示内容
+			loadingEl?.classList.add("hidden")
+			contentEl?.classList.remove("hidden")
+
+			// 加载第一段
+			await loadSegment(0)
+			// 构建 TOC
+			buildToc()
+			// 应用持久化设置
+			applyPersistedSettings()
+		})
+
+		async function fetchManifest(slug: string): Promise<any> {
+			try {
+				const res = await fetch(`/private-reader/${slug}/manifest.json`)
+				return await res.json()
+			} catch {
+				return null
+			}
+		}
+
+		async function loadSegment(index: number): Promise<void> {
+			if (!manifestData || !cryptoKey || index < 0 || index >= totalSegments) return
+			const seg = manifestData.segments[index]
+			if (!seg) return
+			currentSegment = index
+			try {
+				// fetch segment file
+				const res = await fetch(`/private-reader/${slug}/${seg.file}`)
+				const ciphertextBase64 = await res.text()
+				const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+				if (contentEl) {
+					if (kind === "epub") {
+						contentEl.innerHTML = text
+					} else {
+						contentEl.textContent = text
+					}
+				}
+				updateProgress()
+				saveProgress()
+			} catch (err) {
+				if (contentEl) contentEl.textContent = "段加载失败"
+			}
+		}
+
+		function updateProgress(): void {
+			const pct = totalSegments > 0 ? Math.round(((currentSegment + 1) / totalSegments) * 100) : 0
+			if (progressBar) progressBar.style.width = `${pct}%`
+			if (progressText) progressText.textContent = `${pct}%`
+		}
+
+		function saveProgress(): void {
+			try {
+				localStorage.setItem(`private-reader:progress:${slug}`, String(currentSegment))
+			} catch {}
+		}
+
+		function loadProgress(): number {
+			try {
+				const saved = localStorage.getItem(`private-reader:progress:${slug}`)
+				return saved ? Number(saved) : 0
+			} catch {
+				return 0
+			}
+		}
+
+		function buildToc(): void {
+			if (!tocList || !manifestData) return
+			tocList.innerHTML = ""
+			const toc = manifestData.toc
+			if (Array.isArray(toc) && toc.length > 0) {
+				for (const entry of toc) {
+					const li = document.createElement("li")
+					li.textContent = `第 ${entry.segmentIndex + 1} 段`
+					li.dataset.segmentIndex = String(entry.segmentIndex)
+					li.addEventListener("click", () => {
+						const idx = Number(li.dataset.segmentIndex)
+						loadSegment(idx)
+						tocDrawer?.classList.add("hidden")
+					})
+					tocList.appendChild(li)
+				}
+			} else {
+				// TXT 无 TOC，按段构建
+				for (let i = 0; i < totalSegments; i++) {
+					const li = document.createElement("li")
+					li.textContent = `第 ${i + 1} 段`
+					li.dataset.segmentIndex = String(i)
+					li.addEventListener("click", () => {
+						loadSegment(i)
+						tocDrawer?.classList.add("hidden")
+					})
+					tocList.appendChild(li)
+				}
+			}
+		}
+
+		function applyPersistedSettings(): void {
+			try {
+				const prefsStr = localStorage.getItem("private-reader:prefs")
+				if (prefsStr) {
+					const prefs = JSON.parse(prefsStr)
+					if (prefs.theme) applyTheme(prefs.theme)
+					if (prefs.fontSize) applyFontSize(prefs.fontSize)
+					if (prefs.lineHeight) applyLineHeight(prefs.lineHeight)
+					if (prefs.margin) applyMargin(prefs.margin)
+				}
+			} catch {}
+			// 恢复进度
+			const savedSeg = loadProgress()
+			if (savedSeg > 0 && savedSeg < totalSegments) {
+				loadSegment(savedSeg)
+			}
+		}
+
+		function savePrefs(prefs: any): void {
+			try {
+				const existing = JSON.parse(localStorage.getItem("private-reader:prefs") || "{}")
+				localStorage.setItem("private-reader:prefs", JSON.stringify({ ...existing, ...prefs }))
+			} catch {}
+		}
+
+		function applyTheme(theme: string): void {
+			host?.setAttribute("data-theme", theme)
+			host?.querySelectorAll<HTMLButtonElement>("[data-theme]").forEach((btn) => {
+				btn.classList.toggle("active", btn.getAttribute("data-theme") === theme)
+			})
+			savePrefs({ theme })
+		}
+
+		function applyFontSize(size: number): void {
+			host?.style.setProperty("--reader-font-size", `${size}px`)
+			const valEl = host?.querySelector<HTMLElement>("[data-font-size-value]")
+			if (valEl) valEl.textContent = String(size)
+			savePrefs({ fontSize: size })
+		}
+
+		function applyLineHeight(lh: number): void {
+			host?.style.setProperty("--reader-line-height", String(lh))
+			const valEl = host?.querySelector<HTMLElement>("[data-line-height-value]")
+			if (valEl) valEl.textContent = String(lh)
+			savePrefs({ lineHeight: lh })
+		}
+
+		function applyMargin(m: number): void {
+			host?.style.setProperty("--reader-margin", `${m}rem`)
+			const valEl = host?.querySelector<HTMLElement>("[data-margin-value]")
+			if (valEl) valEl.textContent = String(m)
+			savePrefs({ margin: m })
+		}
+
+		// 控件绑定
+		host.querySelector("[data-btn-toc]")?.addEventListener("click", () => {
+			tocDrawer?.classList.toggle("hidden")
+			settingsDrawer?.classList.add("hidden")
+		})
+		host.querySelector("[data-btn-theme]")?.addEventListener("click", () => {
+			settingsDrawer?.classList.toggle("hidden")
+			tocDrawer?.classList.add("hidden")
+		})
+		host.querySelector("[data-btn-font]")?.addEventListener("click", () => {
+			settingsDrawer?.classList.toggle("hidden")
+			tocDrawer?.classList.add("hidden")
+		})
+		host.querySelector("[data-btn-prev]")?.addEventListener("click", () => {
+			if (currentSegment > 0) loadSegment(currentSegment - 1)
+		})
+		host.querySelector("[data-btn-next]")?.addEventListener("click", () => {
+			if (currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
+		})
+		host.querySelector("[data-btn-toc-close]")?.addEventListener("click", () => {
+			tocDrawer?.classList.add("hidden")
+		})
+		host.querySelector("[data-btn-settings-close]")?.addEventListener("click", () => {
+			settingsDrawer?.classList.add("hidden")
+		})
+		host.querySelectorAll<HTMLButtonElement>("[data-theme]").forEach((btn) => {
+			btn.addEventListener("click", () => applyTheme(btn.getAttribute("data-theme") || "light"))
+		})
+		host.querySelector<HTMLInputElement>("[data-font-size]")?.addEventListener("input", (e) => {
+			applyFontSize(Number((e.target as HTMLInputElement).value))
+		})
+		host.querySelector<HTMLInputElement>("[data-line-height]")?.addEventListener("input", (e) => {
+			applyLineHeight(Number((e.target as HTMLInputElement).value))
+		})
+		host.querySelector<HTMLInputElement>("[data-margin]")?.addEventListener("input", (e) => {
+			applyMargin(Number((e.target as HTMLInputElement).value))
+		})
+
+		// 键盘导航
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "ArrowLeft" && currentSegment > 0) loadSegment(currentSegment - 1)
+			if (e.key === "ArrowRight" && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
+		})
+	}
+</script>

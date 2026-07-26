@@ -1,4 +1,4 @@
-export type Visibility = 'public' | 'hidden' | 'private' | 'encrypted'
+export type Visibility = 'public' | 'hidden' | 'private' | 'encrypted' | 'private-reader'
 export type ArticleQuality = 'curated' | 'draft' | 'imported' | 'needsRewrite' | string
 
 export interface CategoryDefaults {

@@ -11,5 +11,9 @@
   { "path": "pnpm-lock.yaml", "rule": "high-entropy", "fingerprint": "*" },
   { "path": "assets/*", "rule": "high-entropy", "fingerprint": "*" },
   { "path": "content/encrypted/*.json", "rule": "high-entropy", "fingerprint": "*" },
-  { "path": "content/motor/foundations/*.html", "rule": "high-entropy", "fingerprint": "*" }
+  { "path": "content/motor/foundations/*.html", "rule": "high-entropy", "fingerprint": "*" },
+  { "path": "docs/superpowers/2026-07-12-firefly-mod-knowledge-migration-handoff.md", "rule": "absolute-path", "fingerprint": "*" },
+  { "path": "docs/superpowers/specs/2026-07-26-private-reading-system-design.md", "rule": "absolute-path", "fingerprint": "*" },
+  { "path": "docs/superpowers/plans/2026-07-26-private-reading-system-implementation-plan.md", "rule": "absolute-path", "fingerprint": "*" },
+  { "path": "scripts/private-reader/.local-paths.example.json", "rule": "absolute-path", "fingerprint": "*" }
 ]

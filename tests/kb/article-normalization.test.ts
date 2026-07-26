@@ -133,12 +133,33 @@ describe('article hierarchy normalization', () => {
     ['hidden', 'excluded'],
     ['encrypted', 'placeholder'],
     ['public', 'full'],
+    ['private-reader', 'placeholder'],
   ] as const)('applies the visibility matrix for %s articles', (visibility, publicSurface) => {
     expect(normalizeArticle({ title: 'Demo', visibility, section: '电源控制', navGroup: '项目实践', chapter: 'projects' }, context).publicSurface).toBe(publicSurface)
   })
 
   it('rejects unknown visibility values instead of publishing them', () => {
     expect(() => normalizeArticle({ title: 'Demo', visibility: 'publci' as never }, { sourcePath: 'content/blog/demo.md', slug: 'blog/demo' })).toThrow(/visibility/i)
+  })
+
+  it('isolates private-reader visibility from indexable surfaces', () => {
+    const decision = decideVisibility('private-reader')
+    expect(decision).toMatchObject({
+      html: true,
+      pagefind: false,
+      sitemap: false,
+      navigation: false,
+      summary: false,
+      attachments: false,
+      encryptedPayload: true,
+      jsonLd: false,
+      publicSurface: 'placeholder',
+    })
+    expect(Object.isFrozen(decision)).toBe(true)
+    // 确保现有可见性决策未被污染
+    expect(decideVisibility('public').publicSurface).toBe('full')
+    expect(decideVisibility('encrypted').publicSurface).toBe('placeholder')
+    expect(decideVisibility('private').publicSurface).toBe('excluded')
   })
 
   it('keeps the full ArticleRecord canonical contract required', () => {

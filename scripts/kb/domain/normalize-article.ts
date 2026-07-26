@@ -42,6 +42,11 @@ const visibilityDecisions: Readonly<Record<Visibility, Readonly<VisibilityDecisi
     summary: false, attachments: false, encryptedPayload: true, jsonLd: false,
     publicSurface: 'placeholder',
   }),
+  'private-reader': Object.freeze({
+    html: true, pagefind: false, sitemap: false, navigation: false,
+    summary: false, attachments: false, encryptedPayload: true, jsonLd: false,
+    publicSurface: 'placeholder',
+  }),
 })
 
 export function decideVisibility(visibility: Visibility): Readonly<VisibilityDecision> {
@@ -128,7 +133,7 @@ export function normalizeArticle(input: ArticleFrontmatter, context: ArticleNorm
 
 function normalizeVisibility(value: unknown): Visibility {
   const visibility = text(value) || 'public'
-  if (visibility === 'public' || visibility === 'hidden' || visibility === 'private' || visibility === 'encrypted') return visibility
+  if (visibility === 'public' || visibility === 'hidden' || visibility === 'private' || visibility === 'encrypted' || visibility === 'private-reader') return visibility
   throw new Error('unknown visibility: ' + visibility)
 }
 

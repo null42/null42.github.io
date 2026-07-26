@@ -281,7 +281,7 @@ describe('static deployment contract', () => {
   })
 
   it('exposes the stage seven quality-gate command aliases', () => {
-    expect(packageJson.scripts.test).toBe('vitest run --exclude "tests/e2e/**" --minWorkers=1 --maxWorkers=4')
+    expect(packageJson.scripts.test).toBe('vitest run --exclude "tests/e2e/**" --minWorkers=1 --maxWorkers=4 --test-timeout=60000')
     expect(packageJson.scripts['knowledge:coverage']).toBe('corepack pnpm kb:navigation:check')
     expect(packageJson.scripts['routes:verify']).toBe('corepack pnpm migration:verify-built')
     expect(packageJson.scripts['quality:full']).toContain('corepack pnpm test')

@@ -272,4 +272,134 @@ describe('generated output privacy scan', () => {
     expect(JSON.stringify(summary)).not.toContain('FIRST_SECRET')
     expect(JSON.stringify(summary)).not.toContain('SECOND_SECRET')
   })
+
+  it('flags private-reader manifest with plaintext title or author', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-'))
+    fs.mkdirSync(path.join(root, 'dist/private-reader/sample'), { recursive: true })
+    // 故意写入明文 title 和 author
+    const manifest = {
+      schema: 'private-reader/v1',
+      kind: 'txt',
+      slug: 'sample',
+      title: 'Plain Title Should Be Encrypted',
+      author: 'Plain Author Should Be Encrypted',
+      crypto: { algorithm: 'AES-GCM', kdf: 'PBKDF2-SHA256', iterations: 210000, salt: 'dGVzdA==' },
+      segments: [{ index: 0, file: 'seg-0000.bin', iv: 'aaaaaaaaaaaaaaaa', bytes: 100, charHint: 0 }],
+      reading: { estimatedTimeMin: 1 },
+    }
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/manifest.json'),
+      JSON.stringify(manifest, null, 2),
+      'utf8'
+    )
+
+    const result = await scanGeneratedOutput({
+      rootDir: root,
+      roots: ['dist'],
+      sensitiveTerms: [],
+      includeTrackedFiles: false,
+      protectedContent: [],
+    })
+
+    const privateReaderIssues = result.issues.filter((issue) => issue.rule === 'private-reader-leak')
+    // 至少检测出 title、author 两条
+    expect(privateReaderIssues.length).toBeGreaterThanOrEqual(2)
+    expect(JSON.stringify(result)).not.toContain('Plain Title Should Be Encrypted')
+    expect(JSON.stringify(result)).not.toContain('Plain Author Should Be Encrypted')
+  })
+
+  it('accepts private-reader manifest with encrypted base64 fields', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-ok-'))
+    fs.mkdirSync(path.join(root, 'dist/private-reader/sample'), { recursive: true })
+    // 构造合法的加密字段（base64编码，解码后长度 ≥ 29）
+    // iv(12) + ciphertext(16) + authTag(16) = 44 字节 → base64 长度 60
+    const validEncrypted = Buffer.alloc(44, 0x41).toString('base64')
+    const validIv = Buffer.alloc(12, 0x42).toString('base64')
+    const manifest = {
+      schema: 'private-reader/v1',
+      kind: 'txt',
+      slug: 'sample',
+      title: validEncrypted,
+      author: validEncrypted,
+      crypto: { algorithm: 'AES-GCM', kdf: 'PBKDF2-SHA256', iterations: 210000, salt: 'dGVzdA==' },
+      segments: [{ index: 0, file: 'seg-0000.bin', iv: validIv, bytes: 100, charHint: 0 }],
+      toc: [{ id: 'ch1', title: validEncrypted, segmentIndex: 0 }],
+      reading: { estimatedTimeMin: 1 },
+    }
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/manifest.json'),
+      JSON.stringify(manifest, null, 2),
+      'utf8'
+    )
+    // 写入合法 base64 的 .bin 文件
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/seg-0000.bin'),
+      Buffer.alloc(100, 0x41).toString('base64'),
+      'utf8'
+    )
+
+    const result = await scanGeneratedOutput({
+      rootDir: root,
+      roots: ['dist'],
+      sensitiveTerms: [],
+      includeTrackedFiles: false,
+      protectedContent: [],
+    })
+
+    const privateReaderIssues = result.issues.filter((issue) => issue.rule === 'private-reader-leak')
+    expect(privateReaderIssues).toEqual([])
+  })
+
+  it('rejects private-reader .bin files containing non-base64 content', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-bin-'))
+    fs.mkdirSync(path.join(root, 'dist/private-reader/sample'), { recursive: true })
+    // 写入非 base64 内容（明文泄漏）
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/seg-0000.bin'),
+      'This is plaintext leaking from a bin file!!!',
+      'utf8'
+    )
+
+    const result = await scanGeneratedOutput({
+      rootDir: root,
+      roots: ['dist'],
+      sensitiveTerms: [],
+      includeTrackedFiles: false,
+      protectedContent: [],
+    })
+
+    const privateReaderIssues = result.issues.filter((issue) => issue.rule === 'private-reader-leak')
+    expect(privateReaderIssues.length).toBeGreaterThanOrEqual(1)
+    expect(JSON.stringify(result)).not.toContain('This is plaintext leaking')
+  })
+
+  it('flags private-reader HTML shells leaking plaintext paragraphs', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-html-'))
+    fs.mkdirSync(path.join(root, 'dist/private-reader/sample'), { recursive: true })
+    // 模拟 HTML shell 中嵌入明文段落（应被检测）
+    const html = `
+<!DOCTYPE html>
+<html><body>
+  <div class="password-gate">Enter password</div>
+  <div class="content-leak">
+    The quick brown fox jumps over the lazy dog and this is a plaintext leak.
+  </div>
+</body></html>`
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/index.html'),
+      html,
+      'utf8'
+    )
+
+    const result = await scanGeneratedOutput({
+      rootDir: root,
+      roots: ['dist'],
+      sensitiveTerms: [],
+      includeTrackedFiles: false,
+      protectedContent: [],
+    })
+
+    const privateReaderIssues = result.issues.filter((issue) => issue.rule === 'private-reader-leak')
+    expect(privateReaderIssues.length).toBeGreaterThanOrEqual(1)
+  })
 })

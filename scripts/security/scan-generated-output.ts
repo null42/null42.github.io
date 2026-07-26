@@ -8,7 +8,7 @@ import { scanMarkdownSourceFiles } from '../kb/articles'
 import { decideVisibility, normalizeArticle } from '../kb/domain/normalize-article'
 import type { Visibility } from '../kb/types'
 
-export type ScanRule = 'sensitive-term' | 'protected-content' | 'token-format' | 'absolute-path' | 'high-entropy' | 'forbidden-path'
+export type ScanRule = 'sensitive-term' | 'protected-content' | 'token-format' | 'absolute-path' | 'high-entropy' | 'forbidden-path' | 'private-reader-leak'
 export interface ScanAllowlistEntry { path: string; rule: ScanRule; fingerprint: string }
 export interface ScanIssue { path: string; rule: ScanRule; fingerprint: string }
 export interface ProtectedContentRecord {
@@ -75,9 +75,137 @@ export async function scanGeneratedOutput(options: ScanOptions = {}) {
     addMatches(issues, relativePath, 'absolute-path', findAbsolutePaths(text, rootDir), allowlist)
     const entropyCandidates = (text.match(highEntropyPattern) || []).filter(isHighEntropyCandidate)
     addMatches(issues, relativePath, 'high-entropy', entropyCandidates, allowlist)
+    // 私密阅读器专属规则：明文泄漏、原文件名、配置误提交
+    addPrivateReaderLeakMatches(issues, relativePath, text, allowlist)
+  }
+
+  // 私密阅读器：检测 .local-paths.json 是否被 git 追踪
+  if (isPrivateReaderConfigTracked()) {
+    issues.push({
+      path: 'scripts/private-reader/.local-paths.json',
+      rule: 'private-reader-leak',
+      fingerprint: redactFingerprint('local-paths-tracked'),
+    })
   }
 
   return { scannedFiles: existingFiles.length, issueCount: issues.length, issues }
+}
+
+/**
+ * 私密阅读器专属泄漏检测。
+ *
+ * 规则：
+ * - dist/private-reader/ 下的 .bin 文件必须为合法 base64
+ * - dist/private-reader/ 下的 manifest.json 中的 title/author/toc[].title 必须为加密 base64
+ * - dist/private-reader/ 下不得出现原文件名、密码、明文段落
+ */
+function addPrivateReaderLeakMatches(
+  issues: ScanIssue[],
+  file: string,
+  text: string,
+  allowlist: ScanAllowlistEntry[]
+): void {
+  // 仅扫描 dist/private-reader/ 下的文件
+  if (!file.startsWith('dist/private-reader/')) return
+
+  // .bin 文件：必须是合法 base64
+  if (file.endsWith('.bin')) {
+    const stripped = text.replace(/\s+/g, '')
+    if (!/^[A-Za-z0-9+/]*={0,2}$/.test(stripped)) {
+      addMatches(issues, file, 'private-reader-leak', ['bin-not-base64'], allowlist)
+    }
+    return
+  }
+
+  // manifest.json：检查加密字段是否为合法 base64
+  if (file.endsWith('/manifest.json') || file.endsWith('manifest.json')) {
+    try {
+      const manifest = JSON.parse(text) as Record<string, unknown>
+      // schema 校验
+      if (manifest.schema !== 'private-reader/v1') {
+        addMatches(issues, file, 'private-reader-leak', ['manifest-schema'], allowlist)
+      }
+      // title/author 必须是 base64（或 author 为 null）
+      const title = manifest.title
+      if (typeof title === 'string' && !isValidEncryptedField(title)) {
+        addMatches(issues, file, 'private-reader-leak', ['plaintext-title'], allowlist)
+      }
+      const author = manifest.author
+      if (typeof author === 'string' && !isValidEncryptedField(author)) {
+        addMatches(issues, file, 'private-reader-leak', ['plaintext-author'], allowlist)
+      }
+      // toc[].title 必须是 base64
+      if (Array.isArray(manifest.toc)) {
+        for (const entry of manifest.toc) {
+          if (entry && typeof entry === 'object' && 'title' in entry) {
+            const t = (entry as Record<string, unknown>).title
+            if (typeof t === 'string' && !isValidEncryptedField(t)) {
+              addMatches(issues, file, 'private-reader-leak', ['plaintext-toc-title'], allowlist)
+            }
+          }
+        }
+      }
+      // segments[].iv 必须是 base64
+      if (Array.isArray(manifest.segments)) {
+        for (const seg of manifest.segments) {
+          if (seg && typeof seg === 'object' && 'iv' in seg) {
+            const iv = (seg as Record<string, unknown>).iv
+            if (typeof iv === 'string' && !/^[A-Za-z0-9+/]{16}={0,2}$/.test(iv)) {
+              addMatches(issues, file, 'private-reader-leak', ['iv-not-base64'], allowlist)
+            }
+          }
+        }
+      }
+      // crypto.iterations 必须为 210000
+      const cryptoField = manifest.crypto as Record<string, unknown> | undefined
+      if (cryptoField && cryptoField.iterations !== 210_000) {
+        addMatches(issues, file, 'private-reader-leak', ['iterations-mismatch'], allowlist)
+      }
+    } catch {
+      addMatches(issues, file, 'private-reader-leak', ['manifest-malformed'], allowlist)
+    }
+    return
+  }
+
+  // HTML shell：允许出现密码门 UI、加密 placeholder 卡片，但不得包含明文段落
+  // 检测常见的明文段落标记（连续的中文/英文字符超过 32 字符）
+  const plaintextParagraphMatch = text.match(/[\u4e00-\u9fff\w][\u4e00-\u9fff\w\s,.!?;:'"()\-—…]{31,}/g)
+  if (plaintextParagraphMatch) {
+    addMatches(issues, file, 'private-reader-leak', plaintextParagraphMatch.slice(0, 3), allowlist)
+  }
+}
+
+/**
+ * 判断一个字符串是否符合 encryptField 输出的格式（base64(iv||ciphertext||authTag)）。
+ *
+ * 严格判定：长度至少为 (IV_LEN + AUTH_TAG_LEN + 1) 的 base64 长度，且解码后长度 ≥ 29。
+ */
+function isValidEncryptedField(value: string): boolean {
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(value)) return false
+  try {
+    const buf = Buffer.from(value, 'base64')
+    // iv(12) + authTag(16) = 28 字节，密文至少 1 字节
+    return buf.length >= 29
+  } catch {
+    return false
+  }
+}
+
+/**
+ * 检测 scripts/private-reader/.local-paths.json 是否被 git 追踪。
+ *
+ * 该文件包含真实测试文件路径，绝不能被提交。
+ */
+function isPrivateReaderConfigTracked(): boolean {
+  try {
+    execFileSync('git', ['ls-files', '--error-unmatch', 'scripts/private-reader/.local-paths.json'], {
+      stdio: ['ignore', 'ignore', 'ignore'],
+      encoding: 'utf8',
+    })
+    return true
+  } catch {
+    return false
+  }
 }
 
 function isAllowedPlaceholderTitle(file: string, term: string, records: ProtectedContentRecord[]): boolean {

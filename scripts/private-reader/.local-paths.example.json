@@ -1,0 +1,21 @@
+{
+  "$schema": "private-reader/v1",
+  "$comment": "复制此文件为 .local-paths.json（gitignore），填入真实测试文件路径。.local-paths.json 绝不提交。",
+  "books": [
+    {
+      "slug": "sample-txt",
+      "kind": "txt",
+      "path": "E:/迅雷下载/txt/sample.txt",
+      "title": "示例 TXT",
+      "author": "匿名",
+      "encoding": "utf-8"
+    },
+    {
+      "slug": "sample-epub",
+      "kind": "epub",
+      "path": "E:/迅雷下载/epub/sample.epub",
+      "title": "示例 EPUB",
+      "author": "匿名"
+    }
+  ]
+}

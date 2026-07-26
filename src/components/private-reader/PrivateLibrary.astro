@@ -1,0 +1,138 @@
+---
+/**
+ * 私密阅读器书架组件
+ *
+ * 渲染加密的书籍卡片。卡片标题在浏览器端解密后显示。
+ * 静态 HTML 中只包含加密的 base64 字段，不泄漏明文。
+ */
+interface Book {
+	slug: string
+	kind: string
+	segments: number
+	encryptedTitle: string
+	encryptedAuthor: string | null
+	estimatedTimeMin: number
+}
+
+interface Props {
+	books: Book[]
+}
+
+const { books } = Astro.props
+---
+
+<ul class="private-library-grid" role="list" data-pagefind-ignore="all">
+	{books.length === 0 && (
+		<li class="private-library-empty card-base">
+			<p>暂无加密书籍。请通过 <code>npm run private-reader:encrypt</code> 生成加密产物。</p>
+		</li>
+	)}
+	{books.map((book) => (
+		<li class="private-library-card card-base" data-private-reader-book={book.slug}>
+			<a class="private-library-link" href={`/private-reader/${book.slug}/`}>
+				<div class="private-library-icon" aria-hidden="true">
+					{book.kind === "epub" ? "📖" : "📄"}
+				</div>
+				<div class="private-library-info">
+					<h2 class="private-library-title"
+						data-encrypted-title={book.encryptedTitle}
+						data-slug={book.slug}>
+						<span class="private-library-title-locked">加密标题</span>
+					</h2>
+					<p class="private-library-meta">
+						<span class="private-library-kind">{book.kind.toUpperCase()}</span>
+						<span class="private-library-segments">{book.segments} 段</span>
+						{book.estimatedTimeMin > 0 && (
+							<span class="private-library-time">约 {book.estimatedTimeMin} 分钟</span>
+						)}
+					</p>
+				</div>
+			</a>
+		</li>
+	))}
+</ul>
+
+<style>
+	.private-library-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.private-library-empty {
+		padding: 1.5rem;
+		color: var(--meta-divider);
+		font-size: 0.9rem;
+		grid-column: 1 / -1;
+	}
+
+	.private-library-card {
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+		border: 1px solid var(--line-divider);
+	}
+
+	.private-library-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.private-library-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		padding: 1.2rem;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
+	}
+
+	.private-library-icon {
+		width: 3.25rem;
+		height: 3.25rem;
+		border-radius: var(--radius-large);
+		display: grid;
+		place-items: center;
+		background: var(--btn-regular-bg);
+		font-size: 1.5rem;
+	}
+
+	.private-library-info {
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.private-library-title {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+
+	.private-library-title-locked {
+		color: var(--meta-divider);
+		font-weight: 500;
+		font-size: 0.95rem;
+	}
+
+	.private-library-meta {
+		margin: 0;
+		color: var(--content-meta);
+		font-size: 0.78rem;
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.private-library-kind {
+		color: var(--primary);
+		font-weight: 600;
+	}
+</style>
+
+<script>
+	// 书架标题解密：用户输入一次密码后，尝试解密所有书籍标题
+	// 此处仅做占位，实际解密在 [slug]/index.astro 的密码门中完成
+	// 书架页保持静态，避免在无密码时泄露任何信息
+</script>

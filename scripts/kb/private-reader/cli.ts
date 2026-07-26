@@ -21,6 +21,7 @@ import path from 'node:path'
 import { existsSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { encryptTxtFile } from './encrypt-txt'
+import { encryptEpubFile } from './encrypt-epub'
 
 interface BookEntry {
   slug: string
@@ -95,8 +96,10 @@ async function runEncrypt(): Promise<void> {
           encoding: book.encoding
         })
       } else if (book.kind === 'epub') {
-        // EPUB 支持在 Task 3 中实现
-        console.error(`Error: EPUB encryption not yet implemented for slug "${book.slug}"`)
+        await encryptEpubFile(book.path, book.slug, password, outputDir, {
+          title: book.title,
+          author: book.author
+        })
       } else {
         console.error(`Error: unknown kind "${book.kind}" for slug "${book.slug}"`)
       }

@@ -85,6 +85,7 @@ export type SiteConfig = {
 		bangumi: boolean;
 		gallery: boolean; // 相册页面开关
 		anime: boolean; // 追番页面开关
+		privateReader?: boolean; // 私密阅读器开关（隐蔽入口，仅本地解密）
 	};
 
 	// 分类导航栏开关

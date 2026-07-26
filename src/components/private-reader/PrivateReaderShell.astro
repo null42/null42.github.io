@@ -1,0 +1,179 @@
+---
+/**
+ * 私密阅读器壳
+ *
+ * 包含：
+ * - PasswordGate（密码门，未解锁时显示）
+ * - ReaderHost（阅读器主机，解锁后显示）
+ *
+ * 生命周期：
+ * - 页面加载时初始化 private-reader-controller
+ * - 用户输入密码 → 派生密钥 → 解密 title/author → 解锁阅读器
+ * - 离开路由时 dispose 清空密钥与缓存
+ */
+import PasswordGate from "./PasswordGate.astro"
+import ReaderHost from "./readers/ReaderHost.astro"
+
+interface ManifestSegment {
+	index: number
+	file: string
+	iv: string
+	bytes: number
+	charHint?: number
+	chapterId?: string
+}
+
+interface ManifestTocEntry {
+	id: string
+	title: string
+	segmentIndex: number
+	anchor?: string
+}
+
+interface Manifest {
+	schema: string
+	kind: "txt" | "epub"
+	slug: string
+	title: string
+	author: string | null
+	crypto: {
+		algorithm: string
+		kdf: string
+		iterations: number
+		salt: string
+	}
+	segments: ManifestSegment[]
+	toc?: ManifestTocEntry[]
+	assets?: Record<string, string[]>
+	reading: {
+		estimatedTimeMin: number
+	}
+}
+
+interface Props {
+	manifest: Manifest
+}
+
+const { manifest } = Astro.props
+const saltBase64 = manifest.crypto.salt
+---
+
+<div
+	class="private-reader-shell"
+	data-private-reader="shell"
+	data-slug={manifest.slug}
+	data-kind={manifest.kind}
+	data-pagefind-ignore="all"
+>
+	<!-- 密码门：解锁前显示 -->
+	<div class="private-reader-gate-wrapper" data-gate-wrapper>
+		<PasswordGate
+			slug={manifest.slug}
+			saltBase64={saltBase64}
+			encryptedTitle={manifest.title}
+			encryptedAuthor={manifest.author}
+		/>
+	</div>
+
+	<!-- 阅读器：解锁后显示 -->
+	<div class="private-reader-host-wrapper hidden" data-host-wrapper>
+		<ReaderHost manifest={manifest} />
+	</div>
+</div>
+
+<script>
+	// 私密阅读器壳逻辑：密码门 → 解锁 → 阅读器
+	// 使用浏览器端控制器 private-reader-controller
+	import { initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
+
+	const shell = document.querySelector<HTMLElement>("[data-private-reader='shell']")
+	if (shell) {
+		const slug = shell.getAttribute("data-slug") || ""
+		const gateWrapper = shell.querySelector<HTMLElement>("[data-gate-wrapper]")
+		const hostWrapper = shell.querySelector<HTMLElement>("[data-host-wrapper]")
+		const gate = shell.querySelector<HTMLElement>("[data-private-reader='gate']")
+		const form = gate?.querySelector<HTMLFormElement>("[data-password-form]")
+		const input = gate?.querySelector<HTMLInputElement>("[data-password-input]")
+		const submitBtn = gate?.querySelector<HTMLButtonElement>("[data-password-submit]")
+		const errorEl = gate?.querySelector<HTMLElement>("[data-password-error]")
+		const statusEl = gate?.querySelector<HTMLElement>("[data-password-status]")
+		const salt = gate?.getAttribute("data-salt") || ""
+		const encryptedTitle = gate?.getAttribute("data-encrypted-title") || ""
+		const encryptedAuthor = gate?.getAttribute("data-encrypted-author") || ""
+
+		const lifecycle = initPrivateReaderLifecycle()
+
+		const showStatus = (msg: string) => {
+			if (statusEl) {
+				statusEl.textContent = msg
+				statusEl.classList.remove("hidden")
+			}
+		}
+
+		const hideStatus = () => {
+			if (statusEl) statusEl.classList.add("hidden")
+		}
+
+		const showError = () => {
+			errorEl?.classList.remove("hidden")
+		}
+
+		const hideError = () => {
+			errorEl?.classList.add("hidden")
+		}
+
+		const unlock = async (password: string) => {
+			if (!password) return
+			hideError()
+			hideStatus()
+			if (submitBtn) submitBtn.disabled = true
+			showStatus("正在派生密钥…")
+			try {
+				const key = await lifecycle.deriveKey(slug, password, salt)
+				showStatus("正在解密标题…")
+				// 尝试解密 title 验证密码正确性
+				const title = await lifecycle.decryptField(encryptedTitle, key)
+				// 解密成功，切换到阅读器
+				if (input) input.value = "" // 清空密码
+				hideStatus()
+				if (gateWrapper) gateWrapper.classList.add("hidden")
+				if (hostWrapper) hostWrapper.classList.remove("hidden")
+				// 通知阅读器密钥已就绪
+				document.dispatchEvent(new CustomEvent("private-reader:unlocked", {
+					detail: { slug, key, title }
+				}))
+			} catch (err) {
+				hideStatus()
+				showError()
+			} finally {
+				if (submitBtn) submitBtn.disabled = false
+			}
+		}
+
+		form?.addEventListener("submit", (e) => {
+			e.preventDefault()
+			const pwd = input?.value?.trim()
+			if (pwd) unlock(pwd)
+		})
+
+		// 离开路由时 dispose
+		window.addEventListener("beforeunload", () => {
+			lifecycle.dispose()
+		})
+		// Swup 切换时也 dispose
+		window.addEventListener("swup:leave:page", () => {
+			lifecycle.dispose()
+		})
+	}
+</script>
+
+<style>
+	.private-reader-shell {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.hidden {
+		display: none;
+	}
+</style>

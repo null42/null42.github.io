@@ -1,0 +1,96 @@
+---
+/**
+ * 私密阅读器入口页（书架）
+ *
+ * 安全：
+ * - 不渲染明文标题，仅显示加密的卡片占位
+ * - 不进 Sitemap/Pagefind/导航/RSS
+ * - 必须在 siteConfig.pages.privateReader === true 时才生成
+ *
+ * 数据来源：content/private-reader/[slug]/manifest.json
+ */
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import PrivateLibrary from "@/components/private-reader/PrivateLibrary.astro";
+import { siteConfig } from "@/config";
+import fs from "node:fs";
+import path from "node:path";
+
+// 未开启则不生成此页（Astro 会因 fallback 404）
+if (!siteConfig.pages.privateReader) {
+	return Astro.redirect("/404");
+}
+
+// 枚举 content/private-reader/*/manifest.json
+const READER_ROOT = path.resolve("content/private-reader");
+const books: Array<{ slug: string; kind: string; segments: number; encryptedTitle: string; encryptedAuthor: string | null; estimatedTimeMin: number }> = [];
+
+if (fs.existsSync(READER_ROOT)) {
+	const entries = fs.readdirSync(READER_ROOT, { withFileTypes: true });
+	for (const entry of entries) {
+		if (!entry.isDirectory()) continue;
+		const manifestPath = path.join(READER_ROOT, entry.name, "manifest.json");
+		if (!fs.existsSync(manifestPath)) continue;
+		try {
+			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+			if (manifest.schema !== "private-reader/v1") continue;
+			books.push({
+				slug: manifest.slug || entry.name,
+				kind: manifest.kind || "unknown",
+				segments: Array.isArray(manifest.segments) ? manifest.segments.length : 0,
+				encryptedTitle: typeof manifest.title === "string" ? manifest.title : "",
+				encryptedAuthor: typeof manifest.author === "string" ? manifest.author : null,
+				estimatedTimeMin: manifest.reading?.estimatedTimeMin ?? 0,
+			});
+		} catch {
+			// 跳过损坏的 manifest
+		}
+	}
+}
+---
+
+<MainGridLayout title="私密阅读" description="加密文档本地解密阅读。" noindex={true}>
+	<section class="private-reader-page" data-pagefind-ignore="all" data-private-reader="library">
+		<header class="private-reader-hero card-base">
+			<p class="private-reader-eyebrow">PRIVATE READER</p>
+			<h1>私密阅读</h1>
+			<p class="private-reader-sub">
+				所有内容均经过 AES-256-GCM 加密，密钥不进入仓库与构建产物。请在浏览器本地输入密码完成解密；离开页面时密钥与解密缓存将自动清空。
+			</p>
+		</header>
+
+		<PrivateLibrary books={books} />
+	</section>
+</MainGridLayout>
+
+<style>
+	.private-reader-page {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.private-reader-hero {
+		display: grid;
+		gap: 0.4rem;
+		padding: clamp(1.25rem, 3vw, 2rem);
+	}
+
+	.private-reader-eyebrow {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+	}
+
+	.private-reader-hero h1 {
+		margin: 0;
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+	}
+
+	.private-reader-sub {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+</style>
