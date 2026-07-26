@@ -32,13 +32,8 @@ navGroupOrder: 30
 
 **核心矛盾：**
 
-$$
-\text{PFC电压环带宽} \uparrow \Rightarrow \text{母线动态响应好} \quad \text{但} \quad \text{输入电流THD恶化}
-$$
-
-$$
-\text{PFC电压环带宽} \downarrow \Rightarrow \text{输入电流THD好} \quad \text{但} \quad \text{母线动态响应差}
-$$
+- **PFC电压环带宽 ↑ ⇒ 母线动态响应好，但输入电流THD恶化**
+- **PFC电压环带宽 ↓ ⇒ 输入电流THD好，但母线动态响应差**
 
 **工程折中：** PFC电压环带宽取5~15Hz，同时用负载前馈补偿来加速动态响应。
 
