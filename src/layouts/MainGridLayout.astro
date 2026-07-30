@@ -149,10 +149,14 @@ const enabledNavLinks = filterEnabledNavLinks(navBarConfig.links, siteConfig.pag
 		const grid = document.getElementById("main-grid");
 		const content = document.getElementById("content-wrapper");
 		if (!grid || !content) return;
-		const offset = Math.max(24, content.getBoundingClientRect().top - grid.getBoundingClientRect().top);
+		const gridRect = grid.getBoundingClientRect();
+		const offset = Math.max(24, content.getBoundingClientRect().top - gridRect.top);
+		// 侧边栏高度限定在 content-wrapper 范围内（不含 footer），
+		// 避免 sticky 目录/目录卡片在滚动到底部时延伸到 footer 或与相关文章区域产生视觉重叠。
+		const railHeight = Math.max(0, content.getBoundingClientRect().bottom - gridRect.top - offset);
 		for (const rail of grid.querySelectorAll<HTMLElement>(".article-catalog-wrapper, .article-toc-wrapper, .knowledge-sidebar-rail")) {
 			rail.style.top = `${offset}px`;
-			rail.style.height = `${Math.max(0, grid.offsetHeight - offset)}px`;
+			rail.style.height = `${railHeight}px`;
 		}
 	}
 

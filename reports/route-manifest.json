@@ -262,6 +262,12 @@
       "finalUrl": "/archive/"
     },
     {
+      "path": "/bookshelf/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/bookshelf/"
+    },
+    {
       "path": "/categories/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -5203,6 +5209,12 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/power/weekly-reviews/week-01-day-01/"
+    },
+    {
+      "path": "/private-reader/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/private-reader/"
     },
     {
       "path": "/robots.txt",

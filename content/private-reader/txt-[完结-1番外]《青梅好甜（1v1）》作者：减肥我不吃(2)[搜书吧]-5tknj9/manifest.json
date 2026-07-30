@@ -1,0 +1,39 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[完结-1番外]《青梅好甜（1v1）》作者：减肥我不吃(2)[搜书吧]-5tknj9",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "XO9iuRJiZhRyP6IGkEBNMQ=="
+  },
+  "gate": {
+    "token": "b2eFiuyi4xWxZRdfGm0WC3zbYAwCJT7J1/v01hOJlmt5KB0KnCSsHMQMtWt+FfZiO4A="
+  },
+  "shelf": {
+    "title": "jruxY1xZsp4i8/iiQDYJ/e0A+WS6aEJC5288FPvzVQhNtI/RjyeLd4pP07RikBv51hnmJojbQCFS/25Knkvjyi5WFfGM1/6d5w==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "nakd/07BGprnzgmq",
+      "bytes": 261498,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "Ul0BxLqzuRTerpg9",
+      "bytes": 186112,
+      "charHint": 89628
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 384
+  }
+}

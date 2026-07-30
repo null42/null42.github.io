@@ -1,6 +1,11 @@
 ---
 /**
- * 私密阅读器入口页（书架）
+ * 私密阅读器入口页（书架）- v2 三层解密架构
+ *
+ * 流程：
+ * 1. Gate 密码门：验证进入书架的权限（gateKey 解密 gateToken）
+ * 2. Shelf 密码门：解密所有书名（shelfKey 解密 shelf.title）
+ * 3. 书架显示：TXT/EPUB 分架标签
  *
  * 安全：
  * - 不渲染明文标题，仅显示加密的卡片占位
@@ -10,19 +15,29 @@
  * 数据来源：content/private-reader/[slug]/manifest.json
  */
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
-import PrivateLibrary from "@/components/private-reader/PrivateLibrary.astro";
 import { siteConfig } from "@/config";
 import fs from "node:fs";
 import path from "node:path";
 
-// 未开启则不生成此页（Astro 会因 fallback 404）
+// 未开启则不生成此页
 if (!siteConfig.pages.privateReader) {
 	return Astro.redirect("/404");
 }
 
 // 枚举 content/private-reader/*/manifest.json
 const READER_ROOT = path.resolve("content/private-reader");
-const books: Array<{ slug: string; kind: string; segments: number; encryptedTitle: string; encryptedAuthor: string | null; estimatedTimeMin: number }> = [];
+interface BookEntry {
+	slug: string;
+	kind: string;
+	segments: number;
+	encryptedTitle: string;   // shelf.title（shelfKey 加密）
+	encryptedAuthor: string | null; // shelf.author
+	estimatedTimeMin: number;
+}
+const books: BookEntry[] = [];
+let sharedGateSalt = "";
+let sharedShelfSalt = "";
+let sharedGateToken = "";
 
 if (fs.existsSync(READER_ROOT)) {
 	const entries = fs.readdirSync(READER_ROOT, { withFileTypes: true });
@@ -32,13 +47,22 @@ if (fs.existsSync(READER_ROOT)) {
 		if (!fs.existsSync(manifestPath)) continue;
 		try {
 			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-			if (manifest.schema !== "private-reader/v1") continue;
+			// 支持 v2 schema
+			if (manifest.schema !== "private-reader/v2") continue;
+
+			// 从第一本书提取共享 salt 和 gateToken
+			if (!sharedGateSalt && manifest.crypto?.gateSalt) {
+				sharedGateSalt = manifest.crypto.gateSalt;
+				sharedShelfSalt = manifest.crypto.shelfSalt;
+				sharedGateToken = manifest.gate?.token || "";
+			}
+
 			books.push({
 				slug: manifest.slug || entry.name,
 				kind: manifest.kind || "unknown",
 				segments: Array.isArray(manifest.segments) ? manifest.segments.length : 0,
-				encryptedTitle: typeof manifest.title === "string" ? manifest.title : "",
-				encryptedAuthor: typeof manifest.author === "string" ? manifest.author : null,
+				encryptedTitle: manifest.shelf?.title || "",
+				encryptedAuthor: typeof manifest.shelf?.author === "string" ? manifest.shelf.author : null,
 				estimatedTimeMin: manifest.reading?.estimatedTimeMin ?? 0,
 			});
 		} catch {
@@ -46,6 +70,9 @@ if (fs.existsSync(READER_ROOT)) {
 		}
 	}
 }
+
+const epubCount = books.filter(b => b.kind === "epub").length;
+const txtCount = books.filter(b => b.kind === "txt").length;
 ---
 
 <MainGridLayout title="私密阅读" description="加密文档本地解密阅读。" noindex={true}>
@@ -58,7 +85,125 @@ if (fs.existsSync(READER_ROOT)) {
 			</p>
 		</header>
 
-		<PrivateLibrary books={books} />
+		{/* 三层解密数据载体（传递给前端脚本） */}
+		<div
+			class="private-reader-data-carrier"
+			data-gate-salt={sharedGateSalt}
+			data-shelf-salt={sharedShelfSalt}
+			data-gate-token={sharedGateToken}
+			data-total-books={books.length}
+			data-epub-count={epubCount}
+			data-txt-count={txtCount}
+			style="display:none;"
+		></div>
+
+		{/* 第 1 层：Gate 密码门 */}
+		<div class="gate-stage card-base" data-gate-stage>
+			<div class="gate-stage-card">
+				<div class="gate-stage-icon">🔒</div>
+				<h2 class="gate-stage-title">第一层 · 入口验证</h2>
+				<p class="gate-stage-desc">请输入入口密码以进入书架。密码不会上传服务器。</p>
+				<form class="gate-stage-form" data-gate-form>
+					<input
+						type="password"
+						class="gate-stage-input"
+						placeholder="入口密码"
+						autocomplete="off"
+						autocapitalize="off"
+						autocorrect="off"
+						spellcheck="false"
+						data-gate-input
+					/>
+					<button type="submit" class="gate-stage-submit" data-gate-submit>
+						进入书架
+					</button>
+				</form>
+				<p class="gate-stage-error hidden" data-gate-error>
+					密码错误，请重试。
+				</p>
+				<p class="gate-stage-status hidden" data-gate-status></p>
+			</div>
+		</div>
+
+		{/* 第 2 层：Shelf 密码门 */}
+		<div class="shelf-stage card-base hidden" data-shelf-stage>
+			<div class="shelf-stage-card">
+				<div class="shelf-stage-icon">📚</div>
+				<h2 class="shelf-stage-title">第二层 · 书名解密</h2>
+				<p class="shelf-stage-desc">书名已加密显示。请输入书架密码以解密所有书名。</p>
+				<form class="shelf-stage-form" data-shelf-form>
+					<input
+						type="password"
+						class="shelf-stage-input"
+						placeholder="书架密码"
+						autocomplete="off"
+						autocapitalize="off"
+						autocorrect="off"
+						spellcheck="false"
+						data-shelf-input
+					/>
+					<button type="submit" class="shelf-stage-submit" data-shelf-submit>
+						解密书名
+					</button>
+				</form>
+				<p class="shelf-stage-error hidden" data-shelf-error>
+					密码错误，请重试。
+				</p>
+				<p class="shelf-stage-status hidden" data-shelf-status></p>
+			</div>
+		</div>
+
+		{/* 第 3 层：书架（解密后显示） */}
+		<div class="library-stage hidden" data-library-stage>
+			{/* 分架标签 */}
+			<div class="library-tabs" data-library-tabs>
+				<button class="library-tab active" data-tab="all">
+					全部 <span class="library-tab-count">{books.length}</span>
+				</button>
+				<button class="library-tab" data-tab="epub">
+					EPUB <span class="library-tab-count">{epubCount}</span>
+				</button>
+				<button class="library-tab" data-tab="txt">
+					TXT <span class="library-tab-count">{txtCount}</span>
+				</button>
+			</div>
+
+			{/* 书架网格 */}
+			<ul class="private-library-grid" role="list" data-library-grid>
+				{books.length === 0 && (
+					<li class="private-library-empty card-base">
+						<p>暂无加密书籍。请通过 <code>npm run private-reader:encrypt</code> 生成加密产物。</p>
+					</li>
+				)}
+				{books.map((book) => (
+					<li
+						class="private-library-card card-base"
+						data-private-reader-book={book.slug}
+						data-book-kind={book.kind}
+						data-book-title={book.encryptedTitle}
+						data-book-author={book.encryptedAuthor ?? ""}
+					>
+						<a class="private-library-link" href={`/private-reader/${book.slug}/`}>
+							<div class="private-library-icon" aria-hidden="true">
+								{book.kind === "epub" ? "📖" : "📄"}
+							</div>
+							<div class="private-library-info">
+								<h2 class="private-library-title" data-slug={book.slug}>
+									<span class="private-library-title-locked">加密标题</span>
+								</h2>
+								<p class="private-library-meta">
+									<span class="private-library-kind">{book.kind.toUpperCase()}</span>
+									<span class="private-library-segments">{book.segments} 段</span>
+									{book.estimatedTimeMin > 0 && (
+										<span class="private-library-time">约 {book.estimatedTimeMin} 分钟</span>
+									)}
+								</p>
+							</div>
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
 	</section>
 </MainGridLayout>
 
@@ -93,4 +238,421 @@ if (fs.existsSync(READER_ROOT)) {
 		font-size: 0.92rem;
 		line-height: 1.6;
 	}
+
+	/* Gate / Shelf 密码门共享样式 */
+	.gate-stage,
+	.shelf-stage {
+		display: grid;
+		place-items: center;
+		padding: 2rem 1rem;
+		min-height: 40vh;
+	}
+
+	.gate-stage-card,
+	.shelf-stage-card {
+		display: grid;
+		gap: 0.75rem;
+		justify-items: center;
+		padding: clamp(1.5rem, 4vw, 2.5rem);
+		max-width: 24rem;
+		width: 100%;
+		text-align: center;
+	}
+
+	.gate-stage-icon,
+	.shelf-stage-icon {
+		font-size: 3rem;
+		line-height: 1;
+	}
+
+	.gate-stage-title,
+	.shelf-stage-title {
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+
+	.gate-stage-desc,
+	.shelf-stage-desc {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.88rem;
+		line-height: 1.6;
+	}
+
+	.gate-stage-form,
+	.shelf-stage-form {
+		display: grid;
+		gap: 0.6rem;
+		width: 100%;
+		margin-top: 0.5rem;
+	}
+
+	.gate-stage-input,
+	.shelf-stage-input {
+		width: 100%;
+		padding: 0.6rem 0.85rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.95rem;
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+
+	.gate-stage-input:focus,
+	.shelf-stage-input:focus {
+		border-color: var(--primary);
+	}
+
+	.gate-stage-submit,
+	.shelf-stage-submit {
+		width: 100%;
+		padding: 0.65rem;
+		border-radius: var(--radius-medium);
+		border: none;
+		background: var(--primary);
+		color: white;
+		font-size: 0.95rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: opacity 0.2s ease, transform 0.1s ease;
+	}
+
+	.gate-stage-submit:hover,
+	.shelf-stage-submit:hover {
+		opacity: 0.85;
+	}
+
+	.gate-stage-submit:active,
+	.shelf-stage-submit:active {
+		transform: scale(0.98);
+	}
+
+	.gate-stage-submit:disabled,
+	.shelf-stage-submit:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.gate-stage-error,
+	.shelf-stage-error {
+		margin: 0;
+		color: #ef4444;
+		font-size: 0.82rem;
+	}
+
+	.gate-stage-status,
+	.shelf-stage-status {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.82rem;
+	}
+
+	/* 书架样式 */
+	.library-stage {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.library-tabs {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		padding: 0.5rem 0;
+	}
+
+	.library-tab {
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.88rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.library-tab:hover {
+		border-color: var(--primary);
+	}
+
+	.library-tab.active {
+		background: var(--primary);
+		color: white;
+		border-color: var(--primary);
+	}
+
+	.library-tab-count {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 1.5rem;
+		height: 1.5rem;
+		padding: 0 0.4rem;
+		border-radius: 0.75rem;
+		background: rgba(255, 255, 255, 0.2);
+		font-size: 0.72rem;
+		font-weight: 600;
+	}
+
+	.library-tab:not(.active) .library-tab-count {
+		background: var(--btn-regular-bg-hover);
+	}
+
+	.private-library-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.private-library-empty {
+		padding: 1.5rem;
+		color: var(--meta-divider);
+		font-size: 0.9rem;
+		grid-column: 1 / -1;
+	}
+
+	.private-library-card {
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+		border: 1px solid var(--line-divider);
+	}
+
+	.private-library-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.private-library-card.hidden-by-tab {
+		display: none;
+	}
+
+	.private-library-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		padding: 1.2rem;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
+	}
+
+	.private-library-icon {
+		width: 3.25rem;
+		height: 3.25rem;
+		border-radius: var(--radius-large);
+		display: grid;
+		place-items: center;
+		background: var(--btn-regular-bg);
+		font-size: 1.5rem;
+	}
+
+	.private-library-info {
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.private-library-title {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+
+	.private-library-title-locked {
+		color: var(--meta-divider);
+		font-weight: 500;
+		font-size: 0.95rem;
+	}
+
+	.private-library-meta {
+		margin: 0;
+		color: var(--content-meta);
+		font-size: 0.78rem;
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.private-library-kind {
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.hidden {
+		display: none !important;
+	}
 </style>
+
+<script>
+	/**
+	 * 私密阅读器书架页前端逻辑（v2 三层解密）
+	 *
+	 * 流程：
+	 * 1. Gate 验证：用户输入 gate 密码 → 派生 gateKey → 解密 gateToken 验证
+	 * 2. Shelf 解密：用户输入 shelf 密码 → 派生 shelfKey → 解密所有书名
+	 * 3. 书架交互：TXT/EPUB 分架标签过滤
+	 */
+	import { initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
+
+	const page = document.querySelector<HTMLElement>("[data-private-reader='library']")
+	if (page) {
+		const carrier = page.querySelector<HTMLElement>(".private-reader-data-carrier")
+		const gateStage = page.querySelector<HTMLElement>("[data-gate-stage]")
+		const shelfStage = page.querySelector<HTMLElement>("[data-shelf-stage]")
+		const libraryStage = page.querySelector<HTMLElement>("[data-library-stage]")
+
+		const gateForm = page.querySelector<HTMLFormElement>("[data-gate-form]")
+		const gateInput = page.querySelector<HTMLInputElement>("[data-gate-input]")
+		const gateSubmit = page.querySelector<HTMLButtonElement>("[data-gate-submit]")
+		const gateError = page.querySelector<HTMLElement>("[data-gate-error]")
+		const gateStatus = page.querySelector<HTMLElement>("[data-gate-status]")
+
+		const shelfForm = page.querySelector<HTMLFormElement>("[data-shelf-form]")
+		const shelfInput = page.querySelector<HTMLInputElement>("[data-shelf-input]")
+		const shelfSubmit = page.querySelector<HTMLButtonElement>("[data-shelf-submit]")
+		const shelfError = page.querySelector<HTMLElement>("[data-shelf-error]")
+		const shelfStatus = page.querySelector<HTMLElement>("[data-shelf-status]")
+
+		const tabs = page.querySelectorAll<HTMLButtonElement>("[data-tab]")
+		const grid = page.querySelector<HTMLElement>("[data-library-grid]")
+
+		if (!carrier || !gateStage || !shelfStage || !libraryStage) {
+			console.error("private-reader: missing required elements")
+		} else {
+			const gateSalt = carrier.getAttribute("data-gate-salt") || ""
+			const shelfSalt = carrier.getAttribute("data-shelf-salt") || ""
+			const gateToken = carrier.getAttribute("data-gate-token") || ""
+
+			const lifecycle = initPrivateReaderLifecycle()
+			;(window as any).privateReaderLifecycle = lifecycle
+
+			const showStatus = (el: HTMLElement | null, msg: string) => {
+				if (el) { el.textContent = msg; el.classList.remove("hidden") }
+			}
+			const hideStatus = (el: HTMLElement | null) => {
+				if (el) el.classList.add("hidden")
+			}
+			const showError = (el: HTMLElement | null) => el?.classList.remove("hidden")
+			const hideError = (el: HTMLElement | null) => el?.classList.add("hidden")
+
+			// ---------- 第 1 层：Gate 验证 ----------
+			const handleGateSubmit = async (e: Event) => {
+				e.preventDefault()
+				const pwd = gateInput?.value?.trim()
+				if (!pwd) return
+
+				hideError(gateError); hideStatus(gateStatus)
+				if (gateSubmit) gateSubmit.disabled = true
+				showStatus(gateStatus, "正在验证入口密码…")
+
+				try {
+					const gateKey = await lifecycle.deriveGateKey(pwd, gateSalt)
+					const ok = await lifecycle.verifyGate(gateToken, gateKey)
+					if (!ok) {
+						hideStatus(gateStatus)
+						showError(gateError)
+						return
+					}
+					// Gate 验证成功，切换到 Shelf 层
+					if (gateInput) gateInput.value = ""
+					hideStatus(gateStatus)
+					gateStage.classList.add("hidden")
+					shelfStage.classList.remove("hidden")
+					shelfInput?.focus()
+				} catch {
+					hideStatus(gateStatus)
+					showError(gateError)
+				} finally {
+					if (gateSubmit) gateSubmit.disabled = false
+				}
+			}
+			gateForm?.addEventListener("submit", handleGateSubmit)
+
+			// ---------- 第 2 层：Shelf 解密 ----------
+			const handleShelfSubmit = async (e: Event) => {
+				e.preventDefault()
+				const pwd = shelfInput?.value?.trim()
+				if (!pwd) return
+
+				hideError(shelfError); hideStatus(shelfStatus)
+				if (shelfSubmit) shelfSubmit.disabled = true
+				showStatus(shelfStatus, "正在派生书架密钥…")
+
+				try {
+					const shelfKey = await lifecycle.deriveShelfKey(pwd, shelfSalt)
+					showStatus(shelfStatus, "正在解密书名…")
+
+					// 解密所有书的标题
+					const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
+					if (cards) {
+						let decrypted = 0
+						for (const card of cards) {
+							const encTitle = card.getAttribute("data-book-title") || ""
+							const titleEl = card.querySelector<HTMLElement>(".private-library-title")
+							if (encTitle && titleEl) {
+								try {
+									const title = await lifecycle.decryptShelfField(encTitle, shelfKey)
+									titleEl.textContent = title
+									decrypted++
+								} catch {
+									// 单本解密失败，保持加密占位
+								}
+							}
+						}
+						if (decrypted === 0) {
+							// 所有书都解密失败，说明 shelf 密码错误
+							hideStatus(shelfStatus)
+							showError(shelfError)
+							return
+						}
+					}
+
+					// Shelf 解密成功，切换到书架
+					if (shelfInput) shelfInput.value = ""
+					hideStatus(shelfStatus)
+					shelfStage.classList.add("hidden")
+					libraryStage.classList.remove("hidden")
+				} catch {
+					hideStatus(shelfStatus)
+					showError(shelfError)
+				} finally {
+					if (shelfSubmit) shelfSubmit.disabled = false
+				}
+			}
+			shelfForm?.addEventListener("submit", handleShelfSubmit)
+
+			// ---------- 分架标签 ----------
+			tabs.forEach(tab => {
+				tab.addEventListener("click", () => {
+					const filter = tab.getAttribute("data-tab")
+					tabs.forEach(t => t.classList.remove("active"))
+					tab.classList.add("active")
+
+					const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
+					if (cards) {
+						cards.forEach(card => {
+							const kind = card.getAttribute("data-book-kind")
+							if (filter === "all" || kind === filter) {
+								card.classList.remove("hidden-by-tab")
+							} else {
+								card.classList.add("hidden-by-tab")
+							}
+						})
+					}
+				})
+			})
+
+			// 离开路由时 dispose
+			window.addEventListener("beforeunload", () => lifecycle.dispose())
+			window.addEventListener("swup:leave:page", () => lifecycle.dispose())
+		}
+	}
+</script>

@@ -159,6 +159,46 @@ body:has(#wallpaper-wrapper) #navbar[data-transparent-mode="semifull"]:not(.scro
 }
 
 /* ============================================
+ * 非 Banner 模式适配（fullscreen/overlay/none）
+ * 适用: 桌面端(≥1024px) + 非 Banner 模式
+ * 说明: 原 CSS 仅 banner 模式有 transparentMode 样式，fullscreen/overlay 模式下
+ *       导航栏回退到 var(--card-bg) 但因壁纸模式透明而不可读。
+ *       此处为非 banner 模式补充 semi/semifull 样式，确保导航栏可读性。
+ * ============================================ */
+@media (min-width: 1024px) {
+    /* "semi" - 非 banner 模式：半透明 + 毛玻璃 */
+    body:not(:has(#wallpaper-wrapper)) #navbar[data-transparent-mode="semi"]>div {
+        backdrop-filter: blur(var(--navbar-glass-blur, 20px)) !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        border-radius: 0 0 0.75rem 0.75rem !important;
+        box-shadow: var(--shadow-navbar) !important;
+    }
+
+    /* "semifull" 未滚动 - 非 banner 模式：保持透明（与 banner 一致） */
+    body:not(:has(#wallpaper-wrapper)) #navbar[data-transparent-mode="semifull"]:not(.scrolled)>div {
+        backdrop-filter: blur(0) !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 0 0.75rem 0.75rem !important;
+        box-shadow: none !important;
+    }
+
+    /* "semifull" 已滚动 - 非 banner 模式：半透明 + 毛玻璃 */
+    body:not(:has(#wallpaper-wrapper)) #navbar[data-transparent-mode="semifull"].scrolled>div {
+        backdrop-filter: blur(var(--navbar-glass-blur, 20px)) !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        border-radius: 0 0 0.75rem 0.75rem !important;
+        box-shadow: var(--shadow-navbar) !important;
+    }
+
+    /* 暗色主题 - 非 banner 模式 */
+    :root.dark body:not(:has(#wallpaper-wrapper)) #navbar[data-transparent-mode="semi"]>div,
+    :root.dark body:not(:has(#wallpaper-wrapper)) #navbar[data-transparent-mode="semifull"].scrolled>div {
+        background: rgba(23, 23, 23, 0.85) !important;
+    }
+}
+
+/* ============================================
  * 移动端 - 亮色主题 - Banner模式
  * 适用: 移动端(≤1023px) + Banner模式 + 亮色主题 + 仅首页生效
  * ============================================ */

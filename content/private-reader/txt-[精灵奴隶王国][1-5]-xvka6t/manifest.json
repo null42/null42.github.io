@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[精灵奴隶王国][1-5]-xvka6t",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "UX5MXRbmx/C6/yCj9NojFw=="
+  },
+  "gate": {
+    "token": "PXPeCcClKHWJS9d+WzkWx+KVosrHQva5rhZYrRQv72GEheyOMaCzUZ9cQgSw485fS7M="
+  },
+  "shelf": {
+    "title": "qJ9olRDHS8rJJht6iaJ3ox4NAbyxt+Z6MhHM1uilOnaF6j78HzPDk+68usG4xRNtO1uE1Zi7YN2XSiTw",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "Jx5/gEdB3Z2dZPgu",
+      "bytes": 96571,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 82
+  }
+}

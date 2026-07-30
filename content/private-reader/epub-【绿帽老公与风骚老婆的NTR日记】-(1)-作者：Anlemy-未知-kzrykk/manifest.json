@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-【绿帽老公与风骚老婆的NTR日记】-(1)-作者：Anlemy-未知-kzrykk",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "YxcU0uPjFjDCZGtVdzTVRw=="
+  },
+  "gate": {
+    "token": "PGRYKn8qm2VXjdrqtuFElI49SfNy/aez9SndLh+geFzxeLXdRiCalMwRXqSQIYHTGPE="
+  },
+  "shelf": {
+    "title": "wXgCRYWQ6GOLvvk3iiKMsu7iK37551lpAp8EJlekM/8lrh412nm99k26xHR5mFYREKJAm/B7zEdLehCnebGNGihNqZbv67aCrBs/ssMi0LCgdK7vCrNOysq6hMdz",
+    "author": "o/ZM15XSTz/A1MKktSr84d7hTE2qoTNvZBHiDaNKaBZS9A=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "+P6g+Nup4VNEx+JFFlOz/cD3o8z0AO0MzFTet63gEzP1Jw==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "Giftu2O7gy9j4JHb",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "COYKpc3HNILopLRk",
+      "bytes": 69425,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "M9XpJq/tzbT8OeaM",
+      "mediaType": "image/jpeg",
+      "bytes": 94627
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 176
+  }
+}

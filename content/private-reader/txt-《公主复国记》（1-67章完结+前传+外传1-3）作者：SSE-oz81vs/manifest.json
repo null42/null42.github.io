@@ -1,0 +1,137 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《公主复国记》（1-67章完结+前传+外传1-3）作者：SSE-oz81vs",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "j46kUJOZfw5ZYS+XTsLQdA=="
+  },
+  "gate": {
+    "token": "LoDjCHXk2txv/QGivXFJUcbpCRIBh4h6LbiGA/rk2slPEywUql/xmZGVOwXz78ru6Zc="
+  },
+  "shelf": {
+    "title": "8qlGjZ4sSiyWKmM8RN8pWzCT6JTv2APTBW6AMWAQ7Il3/+RuNF8LgdTX4pBWP4Tod3+l8pSmlygYrLE/ssDpPKGA4ZHI7BeZzQV7Em0MbfCRvaa747hjJMG4aCY9mk8Ev2b+d8s9fONQcJgbCzRHsEcfPkTcO2/ke4EYAk2w",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "FkBBiQibWVtMInfo",
+      "bytes": 261841,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "4BueQqyLi94FFd/P",
+      "bytes": 262193,
+      "charHint": 87403
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "9zWJaQR1knDYVlQh",
+      "bytes": 262199,
+      "charHint": 174806
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "/gcVQBdsvYov+jSe",
+      "bytes": 262207,
+      "charHint": 262209
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "R9fw/YGZI7aMZRLY",
+      "bytes": 262213,
+      "charHint": 349612
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "N/oycU8rZxsC8kDr",
+      "bytes": 262209,
+      "charHint": 437015
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "KCQmw4G2A0zJP5J7",
+      "bytes": 262209,
+      "charHint": 524418
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "zRJJLQff2Bj9Ml+z",
+      "bytes": 262209,
+      "charHint": 611821
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "JZpJe19xn9M4mtoM",
+      "bytes": 262205,
+      "charHint": 699224
+    },
+    {
+      "index": 9,
+      "file": "seg-0009.bin",
+      "iv": "gt5/ABtpfKAyVQri",
+      "bytes": 262201,
+      "charHint": 786627
+    },
+    {
+      "index": 10,
+      "file": "seg-0010.bin",
+      "iv": "Xi3dfsnKHBIDttjG",
+      "bytes": 262161,
+      "charHint": 874030
+    },
+    {
+      "index": 11,
+      "file": "seg-0011.bin",
+      "iv": "4DRBqIRCOHsaB+jV",
+      "bytes": 262211,
+      "charHint": 961433
+    },
+    {
+      "index": 12,
+      "file": "seg-0012.bin",
+      "iv": "HTSWodxcXtO4osGP",
+      "bytes": 262059,
+      "charHint": 1048836
+    },
+    {
+      "index": 13,
+      "file": "seg-0013.bin",
+      "iv": "e2a+0uSIf24fvNd9",
+      "bytes": 262195,
+      "charHint": 1136239
+    },
+    {
+      "index": 14,
+      "file": "seg-0014.bin",
+      "iv": "XbCPUiAopIhsi/3H",
+      "bytes": 262202,
+      "charHint": 1223642
+    },
+    {
+      "index": 15,
+      "file": "seg-0015.bin",
+      "iv": "9u/hcbkKBTA+CaZJ",
+      "bytes": 158193,
+      "charHint": 1311045
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 3410
+  }
+}

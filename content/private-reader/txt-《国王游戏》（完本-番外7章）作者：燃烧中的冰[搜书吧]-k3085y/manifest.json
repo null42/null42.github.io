@@ -1,0 +1,74 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《国王游戏》（完本-番外7章）作者：燃烧中的冰[搜书吧]-k3085y",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "gUeGbjS8m1AV/+ESlGtyVw=="
+  },
+  "gate": {
+    "token": "ZJe8HIik3EjVuhG0bOKE1x5Cskm0Qeh7N34IQRpA38/BYRlkgoc4DKkRoj+tjZUqeEE="
+  },
+  "shelf": {
+    "title": "2QPIcwxbS+MifM23wpBVqYK1zd4Qq6d089UWYAaXux2wTaLjdW3hhUm3T7Xn93UwialAYI3cEzLjKDOnXYANeWkl8nN9kG9J4w==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "qd10HkJRen8fEvGN",
+      "bytes": 257001,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "ko1oFgPbU/rzgen8",
+      "bytes": 255019,
+      "charHint": 87073
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "9Pr3atW8j0DmxLLf",
+      "bytes": 255469,
+      "charHint": 173496
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "SWjaNtASz/rVl8Mv",
+      "bytes": 260296,
+      "charHint": 259793
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "e+PCARTl5UHNziXl",
+      "bytes": 254859,
+      "charHint": 347625
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "2yGYnKlRx7/UlsV0",
+      "bytes": 227619,
+      "charHint": 433600
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "XI41d0FdhMuot37a",
+      "bytes": 59267,
+      "charHint": 510191
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 1326
+  }
+}

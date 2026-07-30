@@ -132,6 +132,54 @@ export function decryptField(encryptedBase64: string, key: Buffer): string {
 }
 
 /**
+ * 加密一个二进制段（图片等）。
+ *
+ * 与 encryptSegment 类似，但输入为 Buffer 而非 UTF-8 字符串。
+ * 密文格式：ciphertext || authTag（拼接后返回）。
+ *
+ * @param plaintext 二进制明文
+ * @param key 32 字节 AES-256 密钥
+ * @returns { iv: 12字节Buffer, ciphertext: 密文+authTag Buffer }
+ */
+export function encryptBuffer(
+  plaintext: Buffer,
+  key: Buffer
+): { iv: Buffer; ciphertext: Buffer } {
+  const iv = crypto.randomBytes(IV_LEN)
+  const cipher = crypto.createCipheriv('aes-256-gcm', key, iv)
+  const encrypted = Buffer.concat([
+    cipher.update(plaintext),
+    cipher.final()
+  ])
+  const tag = cipher.getAuthTag()
+  return {
+    iv,
+    ciphertext: Buffer.concat([encrypted, tag])
+  }
+}
+
+/**
+ * 解密一个二进制段（图片等）。
+ *
+ * @param ciphertext 密文+authTag（与 encryptBuffer 输出格式一致）
+ * @param key 32 字节 AES-256 密钥
+ * @param iv 12 字节 IV
+ * @returns 二进制明文 Buffer
+ * @throws 如果密文被篡改或 key/iv 不正确
+ */
+export function decryptBuffer(
+  ciphertext: Buffer,
+  key: Buffer,
+  iv: Buffer
+): Buffer {
+  const encrypted = ciphertext.subarray(0, ciphertext.length - AUTH_TAG_LEN)
+  const tag = ciphertext.subarray(ciphertext.length - AUTH_TAG_LEN)
+  const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv)
+  decipher.setAuthTag(tag)
+  return Buffer.concat([decipher.update(encrypted), decipher.final()])
+}
+
+/**
  * 生成随机 salt。
  * @returns 16 字节随机 Buffer
  */

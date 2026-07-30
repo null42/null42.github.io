@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[奥鲁希斯旅行记][1-2]-qefm7p",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "iXehFndpiKXzze/4a4CUxw=="
+  },
+  "gate": {
+    "token": "eua8wmpi0wIn0AVT/c07HGztXSfycG/+uxp4TAFmY09431kAJjfuYT+hG+jK16rJuPo="
+  },
+  "shelf": {
+    "title": "70uCos4zfgXZNnIm4oziM8ho1xPy32ewyPFNQinZVD77fsilwWLtmHcHudk5FY3PK7xHpf6S",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "lYut6V4+IPSf8+ju",
+      "bytes": 35486,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 30
+  }
+}

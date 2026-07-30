@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-【空X宵宫】刺激的户外跳蛋之旅～两情相悦的情侣充满情趣的一天！（原神二创）-未知-ic57n7",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Jmt3PXqXK/DTclCxlOr0sg=="
+  },
+  "gate": {
+    "token": "45+JPxY8tpJh+34vxkcPN/u2a8oL50Qwt3Cjll+tJVYbw7v7/RnQ9Lb1U/4DmDuKbmE="
+  },
+  "shelf": {
+    "title": "O/1p0jDu5jaxGcTdaCCnyoE1jIN0+iVsUD7oTX1gTfVJC1xi/YL9wzMOVLKx7qjWaAsOIAKDkn2C/qFWL2dVq05DC2iryXvMFFewMgMCiw83HBXmFQqKKkrDyljOcGCBIEGlgLyFr5O28lQNcwE9AduhALUrUIj6mWTAT7zx0SwQu+DuQQQm/QE=",
+    "author": "/b8RGLhd1hB0hrOufbmsnDkvwAXH9kh1u6fYdppthI1r8A=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "9r3TtkaFOEC7CKpcEp+U4hzuLLPtxfF3hP7ab76L0Zhs0w==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "66E5ZWIAp54Qg5RA",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "0vE4xi3qpCNxWH+S",
+      "bytes": 35546,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "1AyY2dKNRyY5YOY7",
+      "mediaType": "image/jpeg",
+      "bytes": 151611
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 91
+  }
+}

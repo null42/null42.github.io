@@ -1,0 +1,39 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-(t大同世界观)黑白公主-14166840-prometheus-肉便器,虐待,-fslhz9",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "qAFDhdnYr1v0EryxN6V+bg=="
+  },
+  "gate": {
+    "token": "tBb/p/VqLj3eb/lQxQCw7SxCa6R/UvvI9siHFYQNycufURCmDuqnjys+Tdc9y03BWBU="
+  },
+  "shelf": {
+    "title": "LxAQDnyog5ERb7Oz9Cu/Qf5M80YNXS5rg/zP7a1sfXNepD0VObpsyg==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "ubnMcasoZnBVr5X2",
+      "bytes": 261988,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "t22FNH9FXoqnl53X",
+      "bytes": 136798,
+      "charHint": 90231
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 344
+  }
+}

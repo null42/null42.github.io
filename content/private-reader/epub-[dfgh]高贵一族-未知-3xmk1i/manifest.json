@@ -1,0 +1,129 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-[dfgh]高贵一族-未知-3xmk1i",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "UmvGy/FLCrVV1JqP+5Yujg=="
+  },
+  "gate": {
+    "token": "+dSIVq0iEDv/BsUlEzDGIZKLJU0abntA+Bp5JYK1kXRVuWx5QYEtmD2zPsD1NpObwMM="
+  },
+  "shelf": {
+    "title": "m6eXj8PvogO206JxX6UxnIkmh4WZ8E9Vtx1uK8XpvNQvGKTcdHvyapw9a26Rhg==",
+    "author": "zC+i9ofGR7TNZdZlEPZPM5QRt8U7uzCPwKGFvG1tHjki5A=="
+  },
+  "toc": [
+    {
+      "id": "nav-4",
+      "title": "xTj/yTLjuI0yNuuomVzv6+AhwnnS9ag+J3bpCabutIVH",
+      "segmentIndex": 0
+    },
+    {
+      "id": "nav-5",
+      "title": "nA8N9KM8U/RTUXuzrLEL7b4/cfCAPaWNXgmFvLfi04rfbcW2SAIwvNNtnHqL",
+      "segmentIndex": 3
+    },
+    {
+      "id": "nav-0",
+      "title": "vb/BNhUrOBk/umI5jfMsEKOmX22B7TEEZaHmTJLinY6og2iO+NeVG3VuV57IVlwAEx0DuQ0h/HFrgnSDthOBl7uq",
+      "segmentIndex": 4
+    },
+    {
+      "id": "nav-1",
+      "title": "Ly2hdxpt37uCcAGj4dx7v6P0kzjJcKMy165KQpGCAeK6QiVo63cne5rTwo5I558285S1HWU09O7XLf076nD81Bdpzw4t",
+      "segmentIndex": 5
+    },
+    {
+      "id": "nav-2",
+      "title": "USb1mRfJ30GLeC2BYTXSpPDBXRowdbxkxxi6RNPjJf/Fv04JOSbUzuluDq4a0l2pnE9Wpu2Pf/Y=",
+      "segmentIndex": 6
+    },
+    {
+      "id": "nav-3",
+      "title": "WOA/T3m4XjfdHQ+Ncl4igvuCH7WlNtUwQoEjfaoHv+P8Jj4Alapd75NxPwjhN66mDw==",
+      "segmentIndex": 7
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "7uPH/zOcIAyej8t6",
+      "bytes": 580,
+      "chapterId": "cover.xhtml",
+      "href": "OEBPS/cover.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "iQkBwcKwINziigBc",
+      "bytes": 351,
+      "chapterId": "info.xhtml",
+      "href": "OEBPS/info.xhtml"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "LYssiPD9cjB7GbDK",
+      "bytes": 865,
+      "chapterId": "message.xhtml",
+      "href": "OEBPS/message.xhtml"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "XJDkVoVbP4aFH2j2",
+      "bytes": 738,
+      "chapterId": "TOC.xhtml",
+      "href": "OEBPS/TOC.xhtml"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "+QVinhQMHyZAN/CJ",
+      "bytes": 136402,
+      "chapterId": "No00001Chapter.xhtml",
+      "href": "OEBPS/No00001Chapter.xhtml"
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "MYcZbTIXfq9CzBow",
+      "bytes": 26693,
+      "chapterId": "No00002Chapter.xhtml",
+      "href": "OEBPS/No00002Chapter.xhtml"
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "Gw1LXsU9hfkT6Lz3",
+      "bytes": 29048,
+      "chapterId": "No00003Chapter.xhtml",
+      "href": "OEBPS/No00003Chapter.xhtml"
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "3VZN3npqpyMrIkhE",
+      "bytes": 40584,
+      "chapterId": "No00004Chapter.xhtml",
+      "href": "OEBPS/No00004Chapter.xhtml"
+    }
+  ],
+  "assets": {
+    "OEBPS/cover-605189c379ffe983f4ceeab14acb218ccb2110f7.png": {
+      "file": "asset-0000.bin",
+      "iv": "dTsuWM3IQwRybpwg",
+      "mediaType": "image/png",
+      "bytes": 618643
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 588
+  }
+}

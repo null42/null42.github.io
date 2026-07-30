@@ -359,6 +359,7 @@ export function bindMusicPlayerView(root: HTMLElement, store: MusicPlayerStore):
     if (volume) volume.value = String(state.volume)
     toggle?.setAttribute('aria-pressed', String(state.playing))
     toggle?.setAttribute('aria-label', state.playing ? '暂停' : '播放')
+    if (toggle) toggle.textContent = state.playing ? '⏸' : '▶'
     mute?.setAttribute('aria-pressed', String(state.muted))
     root.querySelectorAll<HTMLElement>('[data-track-index]').forEach((item) => {
       item.toggleAttribute('data-active', Number(item.dataset.trackIndex) === state.currentIndex)

@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[Orusis-Archives]黑潮余孽15-23-racw88",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "5TFUxQhLRn9K3SQe6A/6mQ=="
+  },
+  "gate": {
+    "token": "P7IklSKClqLt21U91obsO/Bu+9sB+prrAuxqRCNlXmuZ9m64dJBk6d8JgHnSrPayghY="
+  },
+  "shelf": {
+    "title": "QGFYsXWYRMCxTUGWntF8fPUi4hEmGA2SGVwqiJlRpFw21fnrjCFEpommZQS394uSXpS0Zj3//qnKZs+FqQ==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "VY4pRut7r4cM62h+",
+      "bytes": 186835,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 161
+  }
+}

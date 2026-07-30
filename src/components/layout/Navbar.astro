@@ -22,22 +22,15 @@ import { filterEnabledNavLinks } from "@/utils/navigation-links";
 const className = Astro.props.class;
 
 // 获取导航栏透明模式配置
-const navbarTransparentMode =
-	backgroundWallpaper.mode === "banner"
-		? backgroundWallpaper.common?.navbar?.transparentMode || "semi"
-		: "semi";
+// 修复：原逻辑仅 banner 模式读取配置，fullscreen/overlay 模式被强制为 "semi" 且样式不生效，
+// 导致导航栏完全透明。现改为所有模式都读取配置，由 CSS 负责按模式适配样式。
+const navbarTransparentMode = backgroundWallpaper.common?.navbar?.transparentMode || "semi";
 
 // 获取导航栏毛玻璃效果配置
-const navbarEnableBlur =
-	backgroundWallpaper.mode === "banner"
-		? (backgroundWallpaper.common?.navbar?.enableBlur ?? true)
-		: false;
+const navbarEnableBlur = backgroundWallpaper.common?.navbar?.enableBlur ?? true;
 
 // 获取导航栏模糊度
-const navbarBlur =
-	backgroundWallpaper.mode === "banner"
-		? (backgroundWallpaper.common?.navbar?.blur ?? 20)
-		: 0;
+const navbarBlur = backgroundWallpaper.common?.navbar?.blur ?? 5;
 
 // 获取导航栏标题，如果没有设置则使用 siteConfig.title
 const navbarTitle = siteConfig.navbar.title || siteConfig.title;

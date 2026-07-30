@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《窥瘾》（完结）作者：谁好看谁知道-r68ujw",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "SbqJZ3s+E1d88b10hKAU7Q=="
+  },
+  "gate": {
+    "token": "GYNJ+4xJhSV5twn+GIldyFUnlEs2UNZzLi2mtLj/0y6gqYbuPklzAEfeKN7MgZstEtI="
+  },
+  "shelf": {
+    "title": "2+utfpP4/TYspcCF2ujh1qo/q2n83R+Y9PMOGB1UqM03swgUfAFwdUts2U5eO1JISrakmg3vziGaEPwCBI1QP4u3M1gnQUHg71kkYgr6WZv6xCXvDjEpgedPll9Mjq4KqYeNqgahdLxe4uDSH1pQ3sVCSyhig3WghHnjJL4D",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "TSvHyIGYr4ng8yjr",
+      "bytes": 212123,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 213
+  }
+}

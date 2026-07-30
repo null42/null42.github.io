@@ -1,0 +1,39 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[白浊的海盗船][1-10+同人×4]-63g6qo",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Ndp7BVcTgCaiWc1JZc7piQ=="
+  },
+  "gate": {
+    "token": "eHGswat54Z7FjQSR8FSwgIU6j5uyWDLhyJWpdE+CShy0CFzo7MKhYNytpdgvAEtm6NE="
+  },
+  "shelf": {
+    "title": "nATcTGZzfDzu2tv5yhBHJ4WILXZhQRvAPHSrg6a3vgVymqxHYsns/k+nbtbIaDpzVR3L",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "y0uH4oGDvqj4runK",
+      "bytes": 261764,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "YizCq4ULH0S+dQHx",
+      "bytes": 52431,
+      "charHint": 88864
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 267
+  }
+}

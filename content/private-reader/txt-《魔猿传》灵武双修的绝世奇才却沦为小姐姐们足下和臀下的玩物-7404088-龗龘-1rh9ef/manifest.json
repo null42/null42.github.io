@@ -1,0 +1,81 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《魔猿传》灵武双修的绝世奇才却沦为小姐姐们足下和臀下的玩物-7404088-龗龘-1rh9ef",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "J3J0IQO6J4fDDyPVN9m2tg=="
+  },
+  "gate": {
+    "token": "TkU0LMZrEknfoglsboxDet4dyZFhpEdFSsdzw4FLVjeM+iZIDZHgSSZN4f6qNkEu/N0="
+  },
+  "shelf": {
+    "title": "0h/26ANMjayac29ipfT0PfeelgYkJJXPQMomGun5DH2aYZPKccsdBVrO+oH3sKFTe062sWnnBMnqUDCy2c7V2UmGXYz3WsqE/K1eEG18kN89hOGVPdZjsc6W3pzpwPWPaDKGf3JtyJ3dYdv5Z7VfgDpkYg==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "1t34gbpOiRjyzEeu",
+      "bytes": 259286,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "FDSAF/skwGFHajx9",
+      "bytes": 259945,
+      "charHint": 90869
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "ej+m8le/wKo5Ia+T",
+      "bytes": 260788,
+      "charHint": 181672
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "q9j1Xuv42H2cybaC",
+      "bytes": 261485,
+      "charHint": 272534
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "yIR2PsV8MaIm1Sj1",
+      "bytes": 262778,
+      "charHint": 363293
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "3UgtxPIeLRv0bxCf",
+      "bytes": 262878,
+      "charHint": 454109
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "oQY0g1oPPU7vs8/D",
+      "bytes": 264227,
+      "charHint": 544925
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "esKjM9XSiEad/Ci+",
+      "bytes": 194110,
+      "charHint": 635698
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 1756
+  }
+}

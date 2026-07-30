@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-【路人女主也要做黄油】（完）作者：爱吃肉的鱼-未知-pnluhp",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "l6Cmft+M/k7lLiOGiP/bhQ=="
+  },
+  "gate": {
+    "token": "YeDhc4x3HKAkxLpm0PI5yppaiVnYs/t+0ZGta6O0oZQo8mJVUM63c0lYxJmg5T5FxHU="
+  },
+  "shelf": {
+    "title": "FcKBhOGq4+1+u8sFRFX1ZSLtsf3MH7JaMwSHXXbVn5F1ph57YxpbIe1rQt1jqtXXVm2HYZlvCAVpUNHtSj9db5rJebozNcENSq2V6TfIRj+T6NBD+9+4NhCKp7CiNw==",
+    "author": "9eGMkisZIzMXNzEN8zoPtPKk8cIRHGhpEjqxOpng26iNmg=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "I+2dP0JVbTpi+mIJ2xaDPDwJ3Wmu2KcKs7t4bnb8El1Wmw==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "BRpRWZW+pn3fhyw2",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "2WNxxMtP7lsrB99a",
+      "bytes": 169329,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "kplGqOjS1Ez9KKNv",
+      "mediaType": "image/jpeg",
+      "bytes": 108257
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 426
+  }
+}

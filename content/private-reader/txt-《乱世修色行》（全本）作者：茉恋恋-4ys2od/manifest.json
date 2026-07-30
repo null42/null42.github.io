@@ -1,0 +1,46 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《乱世修色行》（全本）作者：茉恋恋-4ys2od",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Dx6SEQcFuM11nGWcGtd69w=="
+  },
+  "gate": {
+    "token": "2Jttn6ecpTrWePJvVxSKCLYw97a72XaDi6adaAh0qqt7bVrhqTDZ2jdXwU2AiBSY/fQ="
+  },
+  "shelf": {
+    "title": "bBo+ke3y1t2nrNkV48asFsKac8hwlbm54NZABkvtIM17lDJQiOngXZHTYI92gGjCBCQ=",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "RoH9EtgA4iZ+zC90",
+      "bytes": 262146,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "M+aWw96OpaOkHYrG",
+      "bytes": 262037,
+      "charHint": 89843
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "BplVUsOFlzxjndPT",
+      "bytes": 154944,
+      "charHint": 179704
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 583
+  }
+}

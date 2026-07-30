@@ -12,6 +12,7 @@ interface ManifestSegment {
 	bytes: number
 	charHint?: number
 	chapterId?: string
+	href?: string
 }
 
 interface ManifestTocEntry {
@@ -19,6 +20,13 @@ interface ManifestTocEntry {
 	title: string
 	segmentIndex: number
 	anchor?: string
+}
+
+interface ManifestAsset {
+	file: string
+	iv: string
+	mediaType: string
+	bytes: number
 }
 
 interface Manifest {
@@ -35,7 +43,7 @@ interface Manifest {
 	}
 	segments: ManifestSegment[]
 	toc?: ManifestTocEntry[]
-	assets?: Record<string, string[]>
+	assets?: Record<string, ManifestAsset>
 	reading: {
 		estimatedTimeMin: number
 	}
@@ -82,13 +90,17 @@ const isEpub = manifest.kind === "epub"
 	<!-- 阅读器主体 -->
 	<main class="reader-body" data-reader-body>
 		<div class="reader-loading" data-reader-loading>正在准备阅读器…</div>
-		<div class="reader-content hidden" data-reader-content></div>
+		<div class="reader-content hidden" data-reader-content data-kind={manifest.kind}></div>
 	</main>
 
-	<!-- 进度条 -->
+	<!-- 进度条 + 底部章节切换 -->
 	<footer class="reader-progress" data-reader-progress>
-		<div class="reader-progress-bar" data-reader-progress-bar style="width: 0%"></div>
-		<span class="reader-progress-text" data-reader-progress-text>0%</span>
+		<button class="reader-btn reader-nav-btn" data-btn-prev-bottom title="上一段/章" disabled>‹ 上一章</button>
+		<div class="reader-progress-track">
+			<div class="reader-progress-bar" data-reader-progress-bar style="width: 0%"></div>
+			<span class="reader-progress-text" data-reader-progress-text>0%</span>
+		</div>
+		<button class="reader-btn reader-nav-btn" data-btn-next-bottom title="下一段/章">下一章 ›</button>
 	</footer>
 
 	<!-- 目录抽屉 -->
@@ -220,9 +232,18 @@ const isEpub = manifest.kind === "epub"
 	}
 
 	.reader-content {
-		white-space: pre-wrap;
 		word-break: break-word;
 		font-family: var(--reader-font-family, inherit);
+		transition: opacity 0.18s ease;
+	}
+
+	/* TXT 保留 pre-wrap 保留换行；EPUB 用 innerHTML 渲染 HTML 不需要 pre-wrap */
+	.reader-content[data-kind="txt"] {
+		white-space: pre-wrap;
+	}
+
+	.reader-content.fading {
+		opacity: 0;
 	}
 
 	.reader-content :global(h1),
@@ -240,6 +261,13 @@ const isEpub = manifest.kind === "epub"
 		height: auto;
 	}
 
+	/* 图片加载占位 */
+	.reader-content :global(img[data-loading="1"]) {
+		opacity: 0.3;
+		background: var(--btn-regular-bg);
+		min-height: 2rem;
+	}
+
 	.reader-progress {
 		position: sticky;
 		bottom: 0;
@@ -251,13 +279,20 @@ const isEpub = manifest.kind === "epub"
 		border-top: 1px solid var(--line-divider);
 	}
 
+	.reader-progress-track {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-width: 0;
+	}
+
 	.reader-progress-bar {
 		height: 4px;
 		background: var(--primary);
 		border-radius: 2px;
 		transition: width 0.3s ease;
 		flex: 1;
-		max-width: calc(100% - 4rem);
 	}
 
 	.reader-progress-text {
@@ -265,6 +300,17 @@ const isEpub = manifest.kind === "epub"
 		color: var(--meta-divider);
 		min-width: 3rem;
 		text-align: right;
+	}
+
+	.reader-nav-btn {
+		padding: 0 0.75rem;
+		font-size: 0.82rem;
+		white-space: nowrap;
+	}
+
+	.reader-nav-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
 	}
 
 	.reader-toc-drawer,
@@ -410,35 +456,54 @@ const isEpub = manifest.kind === "epub"
 		const contentEl = host.querySelector<HTMLElement>("[data-reader-content]")
 		const progressBar = host.querySelector<HTMLElement>("[data-reader-progress-bar]")
 		const progressText = host.querySelector<HTMLElement>("[data-reader-progress-text]")
+		const prevBtnBottom = host.querySelector<HTMLButtonElement>("[data-btn-prev-bottom]")
+		const nextBtnBottom = host.querySelector<HTMLButtonElement>("[data-btn-next-bottom]")
 		const tocDrawer = host.querySelector<HTMLElement>("[data-toc-drawer]")
 		const tocList = host.querySelector<HTMLElement>("[data-toc-list]")
 		const settingsDrawer = host.querySelector<HTMLElement>("[data-settings-drawer]")
-		const lifecycle = (window as Window & { privateReaderLifecycle?: any }).privateReaderLifecycle
+		// 时序修复：lifecycle 由 PrivateReaderShell 在脚本加载时挂载到 window，
+		// 但本脚本可能与 shell 脚本加载顺序不确定，故延迟至 unlocked 事件触发时再获取。
+		let lifecycle: any = null
 
 		let currentSegment = 0
 		let totalSegments = 0
 		let manifestData: any = null
 		let cryptoKey: CryptoKey | null = null
+		// 图片 blob URL 管理：章节切换时释放上一章的 blob URL，避免内存泄漏
+		let currentBlobUrls: string[] = []
+		// 加载锁：防止快速切换章节时并发加载导致内容错乱
+		let loadingSegmentIndex = -1
 
 		// 监听解锁事件
 		document.addEventListener("private-reader:unlocked", async (event: any) => {
 			const { slug: unlockedSlug, key, title } = event.detail
 			if (unlockedSlug !== slug) return
 			cryptoKey = key
+			lifecycle = (window as Window & { privateReaderLifecycle?: any }).privateReaderLifecycle
+			if (!lifecycle) {
+				loadingEl?.classList.add("hidden")
+				if (contentEl) {
+					contentEl.classList.remove("hidden")
+					contentEl.textContent = "阅读器初始化失败：lifecycle 未就绪"
+				}
+				return
+			}
 			manifestData = await fetchManifest(slug)
 			if (!manifestData) return
 			totalSegments = manifestData.segments.length
 
-			// 显示标题
-			if (titleEl) titleEl.textContent = title
-			// 解密作者
-			if (manifestData.author && authorEl) {
-				try {
-					const author = await lifecycle.decryptField(manifestData.author, key)
-					authorEl.textContent = author
-					authorEl.classList.remove("hidden")
-				} catch {}
-			}
+			// 显示标题（title 来自 unlocked 事件，已解密）
+		if (titleEl) titleEl.textContent = title
+		// 解密作者（v1: manifestData.author 用 bookKey 加密；v2: shelf.author 用 shelfKey 加密，此处无法解密）
+		const authorEncrypted = manifestData.author || manifestData.shelf?.author
+		const isV2 = manifestData.schema === "private-reader/v2"
+		if (authorEncrypted && authorEl && !isV2) {
+			try {
+				const author = await lifecycle.decryptBookField(authorEncrypted, key)
+				authorEl.textContent = author
+				authorEl.classList.remove("hidden")
+			} catch {}
+		}
 
 			// 隐藏加载，显示内容
 			loadingEl?.classList.add("hidden")
@@ -465,12 +530,39 @@ const isEpub = manifest.kind === "epub"
 			if (!manifestData || !cryptoKey || index < 0 || index >= totalSegments) return
 			const seg = manifestData.segments[index]
 			if (!seg) return
-			currentSegment = index
+			// 加载锁：如果用户快速切换，取消旧的加载（通过比较 index）
+			loadingSegmentIndex = index
+
+			// 1. 淡出旧内容（仅当内容已显示时）
+			if (contentEl && !contentEl.classList.contains("hidden")) {
+				contentEl.classList.add("fading")
+				// 等待淡出动画
+				await new Promise(r => setTimeout(r, 180))
+				// 如果期间用户又切换了，放弃本次加载
+				if (loadingSegmentIndex !== index) return
+			}
+
+			// 2. 释放上一章的图片 blob URL
+			revokeBlobUrls()
+
+			// 3. 显示 loading
+			if (contentEl) {
+				contentEl.classList.add("hidden")
+				contentEl.classList.remove("fading")
+			}
+			loadingEl?.classList.remove("hidden")
+			loadingEl!.textContent = "加载中…"
+
 			try {
-				// fetch segment file
+				// 4. fetch + 解密
 				const res = await fetch(`/private-reader/${slug}/${seg.file}`)
 				const ciphertextBase64 = await res.text()
+				// 期间用户又切换了，放弃渲染
+				if (loadingSegmentIndex !== index) return
 				const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+				if (loadingSegmentIndex !== index) return
+
+				// 5. 渲染内容
 				if (contentEl) {
 					if (kind === "epub") {
 						contentEl.innerHTML = text
@@ -478,10 +570,174 @@ const isEpub = manifest.kind === "epub"
 						contentEl.textContent = text
 					}
 				}
+
+				// 6. EPUB 图片 src 重写（异步，不阻塞渲染）
+				if (kind === "epub" && manifestData.assets) {
+					rewriteImageSrcs(seg.href)
+				}
+
+				// 7. 隐藏 loading，淡入新内容
+				loadingEl?.classList.add("hidden")
+				if (contentEl) {
+					contentEl.classList.remove("hidden")
+					// 触发淡入：先设为 fading（opacity:0），下一帧移除
+					contentEl.classList.add("fading")
+					requestAnimationFrame(() => {
+						requestAnimationFrame(() => {
+							contentEl.classList.remove("fading")
+						})
+					})
+				}
+
+				currentSegment = index
 				updateProgress()
 				saveProgress()
+				updateTocActive()
+
+				// 8. 滚动重置：回到阅读器主体顶部
+				scrollReaderToTop()
+
+				// 9. 预加载下一段（仅解密，利用 lifecycle 段缓存）
+				preloadSegment(index + 1)
 			} catch (err) {
-				if (contentEl) contentEl.textContent = "段加载失败"
+				if (loadingSegmentIndex !== index) return
+				loadingEl?.classList.add("hidden")
+				if (contentEl) {
+					contentEl.classList.remove("hidden", "fading")
+					contentEl.textContent = "段加载失败"
+				}
+			}
+		}
+
+		/**
+		 * 释放当前章节的所有图片 blob URL。
+		 * 章节切换或离开页面时调用，避免内存泄漏。
+		 */
+		function revokeBlobUrls(): void {
+			for (const url of currentBlobUrls) {
+				try { URL.revokeObjectURL(url) } catch {}
+			}
+			currentBlobUrls = []
+		}
+
+		/**
+		 * 滚动阅读器主体到顶部。
+		 * 优先滚动 reader-body，其次滚动 window。
+		 */
+		function scrollReaderToTop(): void {
+			try {
+				const body = host.querySelector<HTMLElement>("[data-reader-body]")
+				if (body) {
+					body.scrollTo({ top: 0, behavior: "auto" })
+				}
+				window.scrollTo({ top: 0, behavior: "auto" })
+			} catch {}
+		}
+
+		/**
+		 * 重写 EPUB 章节中的图片 src 为 blob URL。
+		 *
+		 * 流程：
+		 * 1. 查找 contentEl 中所有 img[src]
+		 * 2. 解析 src 相对于章节 XHTML 路径，得到 ZIP 内完整路径
+		 * 3. 查找 manifestData.assets[完整路径]
+		 * 4. fetch asset 文件 → decryptAsset → Blob → URL.createObjectURL
+		 * 5. 替换 img.src
+		 *
+		 * 异步执行：先设置 data-loading="1" 占位，解密完成后替换 src 并移除占位。
+		 *
+		 * @param chapterHref 当前章节 XHTML 在 ZIP 内的完整路径（如 "OEBPS/chapter1.xhtml"）
+		 */
+		function rewriteImageSrcs(chapterHref: string): void {
+			if (!contentEl) return
+			const imgs = contentEl.querySelectorAll<HTMLImageElement>("img[src]")
+			if (imgs.length === 0) return
+
+			const assets = manifestData?.assets as Record<string, { file: string; iv: string; mediaType: string }> | undefined
+			if (!assets) return
+
+			// 章节 XHTML 所在目录（用于解析相对路径）
+			const chapterDir = chapterHref.includes("/") ? chapterHref.slice(0, chapterHref.lastIndexOf("/") + 1) : ""
+
+			for (const img of imgs) {
+				const rawSrc = img.getAttribute("src") || ""
+				if (!rawSrc) continue
+				// 跳过绝对 URL（http/https/data/blob）和锚点
+				if (/^(https?:|data:|blob:|#)/i.test(rawSrc)) continue
+
+				// 解析相对路径，得到 ZIP 内完整路径
+				// 例如 chapterDir="OEBPS/", rawSrc="images/foo.jpg" → "OEBPS/images/foo.jpg"
+				// 例如 chapterDir="OEBPS/ch1/", rawSrc="../images/foo.jpg" → "OEBPS/images/foo.jpg"
+				const resolvedPath = resolveRelativePath(chapterDir, rawSrc)
+				const assetInfo = assets[resolvedPath]
+				if (!assetInfo) continue
+
+				// 标记为加载中
+				img.setAttribute("data-loading", "1")
+				// 异步加载图片
+				loadImageBlob(img, assetInfo)
+			}
+		}
+
+		/**
+		 * 解析 EPUB 内的相对路径，返回 ZIP 内完整路径。
+		 * 使用 URL API 处理 ../ 等相对路径分量。
+		 *
+		 * @param baseDir 章节 XHTML 所在目录（如 "OEBPS/" 或 "OEBPS/ch1/"，可为空串表示根目录）
+		 * @param relative 图片 src（如 "images/foo.jpg" 或 "../images/foo.jpg"）
+		 * @returns ZIP 内完整路径（如 "OEBPS/images/foo.jpg" 或 "cover.jpg"）
+		 */
+		function resolveRelativePath(baseDir: string, relative: string): string {
+			try {
+				// 规范化 baseDir：确保以 / 结尾，使 URL 解析把它当作目录
+				const normalizedBase = baseDir.endsWith('/') ? baseDir : baseDir + '/'
+				// 用 file:/// 作为根，避免引入额外的伪根目录段
+				const base = new URL(normalizedBase, "file:///")
+				const resolved = new URL(relative, base)
+				// pathname 形如 "/OEBPS/images/foo.jpg"，去掉开头的 "/"
+				return decodeURIComponent(resolved.pathname).replace(/^\//, "")
+			} catch {
+				// fallback：简单拼接
+				return baseDir + relative
+			}
+		}
+
+		/**
+		 * 加载单个图片资源：fetch → 解密 → Blob → URL.createObjectURL → 替换 img.src。
+		 */
+		async function loadImageBlob(img: HTMLImageElement, assetInfo: { file: string; iv: string; mediaType: string }): Promise<void> {
+			try {
+				const res = await fetch(`/private-reader/${slug}/${assetInfo.file}`)
+				if (!res.ok) throw new Error(`HTTP ${res.status}`)
+				const ciphertextBase64 = await res.text()
+				const plaintext = await lifecycle.decryptAsset(ciphertextBase64, assetInfo.iv, cryptoKey!)
+				const blob = new Blob([plaintext], { type: assetInfo.mediaType })
+				const url = URL.createObjectURL(blob)
+				currentBlobUrls.push(url)
+				img.src = url
+				img.removeAttribute("data-loading")
+			} catch {
+				// 加载失败：移除占位样式，保留原始 src（可能显示 broken image）
+				img.removeAttribute("data-loading")
+			}
+		}
+
+		/**
+		 * 预加载指定段（仅 fetch + 解密，利用 lifecycle 段缓存）。
+		 * 不渲染，不更新进度，后台静默执行。
+		 */
+		async function preloadSegment(index: number): Promise<void> {
+			if (!manifestData || !cryptoKey || index < 0 || index >= totalSegments) return
+			const seg = manifestData.segments[index]
+			if (!seg) return
+			try {
+				// 如果已缓存，lifecycle.decryptSegment 会直接返回缓存
+				// 这里通过 prefetch 触发缓存
+				const res = await fetch(`/private-reader/${slug}/${seg.file}`)
+				const ciphertextBase64 = await res.text()
+				await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+			} catch {
+				// 预加载失败静默忽略
 			}
 		}
 
@@ -489,6 +745,9 @@ const isEpub = manifest.kind === "epub"
 			const pct = totalSegments > 0 ? Math.round(((currentSegment + 1) / totalSegments) * 100) : 0
 			if (progressBar) progressBar.style.width = `${pct}%`
 			if (progressText) progressText.textContent = `${pct}%`
+			// 同步顶部和底部 prev/next 按钮的 disabled 状态
+			if (prevBtnBottom) prevBtnBottom.disabled = currentSegment <= 0
+			if (nextBtnBottom) nextBtnBottom.disabled = currentSegment >= totalSegments - 1
 		}
 
 		function saveProgress(): void {
@@ -513,6 +772,7 @@ const isEpub = manifest.kind === "epub"
 			if (Array.isArray(toc) && toc.length > 0) {
 				for (const entry of toc) {
 					const li = document.createElement("li")
+					// 先显示占位文本，异步解密后替换为真实章节标题
 					li.textContent = `第 ${entry.segmentIndex + 1} 段`
 					li.dataset.segmentIndex = String(entry.segmentIndex)
 					li.addEventListener("click", () => {
@@ -521,6 +781,12 @@ const isEpub = manifest.kind === "epub"
 						tocDrawer?.classList.add("hidden")
 					})
 					tocList.appendChild(li)
+					// EPUB：异步解密章节标题（用 bookKey）
+				if (kind === "epub" && entry.title && cryptoKey) {
+					lifecycle.decryptBookField(entry.title, cryptoKey).then((decrypted: string) => {
+						if (decrypted) li.textContent = decrypted
+					}).catch(() => {})
+				}
 				}
 			} else {
 				// TXT 无 TOC，按段构建
@@ -534,6 +800,24 @@ const isEpub = manifest.kind === "epub"
 					})
 					tocList.appendChild(li)
 				}
+			}
+		}
+
+		/**
+		 * 更新 TOC 中当前章节的高亮状态。
+		 * 在 loadSegment 完成后调用。
+		 */
+		function updateTocActive(): void {
+			if (!tocList) return
+			const items = tocList.querySelectorAll<HTMLLIElement>("li")
+			items.forEach(li => {
+				const idx = Number(li.dataset.segmentIndex)
+				li.classList.toggle("active", idx === currentSegment)
+			})
+			// 滚动当前项到可见区域
+			const activeItem = tocList.querySelector<HTMLLIElement>("li.active")
+			if (activeItem) {
+				try { activeItem.scrollIntoView({ block: "nearest", behavior: "smooth" }) } catch {}
 			}
 		}
 
@@ -610,6 +894,13 @@ const isEpub = manifest.kind === "epub"
 		host.querySelector("[data-btn-next]")?.addEventListener("click", () => {
 			if (currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
 		})
+		// 底部章节切换按钮（阅读到本章末尾时无需回到顶部即可切换）
+		prevBtnBottom?.addEventListener("click", () => {
+			if (currentSegment > 0) loadSegment(currentSegment - 1)
+		})
+		nextBtnBottom?.addEventListener("click", () => {
+			if (currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
+		})
 		host.querySelector("[data-btn-toc-close]")?.addEventListener("click", () => {
 			tocDrawer?.classList.add("hidden")
 		})
@@ -634,5 +925,14 @@ const isEpub = manifest.kind === "epub"
 			if (e.key === "ArrowLeft" && currentSegment > 0) loadSegment(currentSegment - 1)
 			if (e.key === "ArrowRight" && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
 		})
+
+		// 离开页面时释放所有图片 blob URL，避免内存泄漏
+		// 覆盖两种场景：SPA 导航（swup）和浏览器导航/关闭
+		window.addEventListener("swup:leave:page", () => {
+			revokeBlobUrls()
+		}, { once: true })
+		window.addEventListener("pagehide", () => {
+			revokeBlobUrls()
+		}, { once: true })
 	}
 </script>

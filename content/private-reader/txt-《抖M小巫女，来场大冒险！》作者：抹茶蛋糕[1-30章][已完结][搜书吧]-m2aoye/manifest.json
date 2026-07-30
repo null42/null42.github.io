@@ -1,0 +1,53 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《抖M小巫女，来场大冒险！》作者：抹茶蛋糕[1-30章][已完结][搜书吧]-m2aoye",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "2P9wHjPgEHFvQfEYFbMHTw=="
+  },
+  "gate": {
+    "token": "C6319DOZC2TvxwZ7UDx7t3yUotxD6IFEdyVLtkDaxq6k4cL1zAQJGi+GGCN+jP9UNdQ="
+  },
+  "shelf": {
+    "title": "qyJF8KIJGuFRx8BlQb6AHIGTG+Wo1JKtapUpm4E8LvWXuVhQbIag3yQcNS0tyMV3NQ==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "oUkOMrslo2rRIjcr",
+      "bytes": 261728,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "qSYSOYmebMCl3D5l",
+      "bytes": 261914,
+      "charHint": 89868
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "mT8zabTzsnf19wd7",
+      "bytes": 259598,
+      "charHint": 179120
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "IsOtyo698gfpjaWX",
+      "bytes": 80027,
+      "charHint": 268691
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 741
+  }
+}

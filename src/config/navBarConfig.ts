@@ -14,6 +14,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Gallery: { name: "相册", url: "/gallery/", icon: "material-symbols:photo-album-outline", pageKey: "gallery" },
 	Sponsor: { name: "打赏", url: "/sponsor/", icon: "material-symbols:favorite", pageKey: "sponsor" },
 	Guestbook: { name: "留言板", url: "/guestbook/", icon: "material-symbols:chat-outline", pageKey: "guestbook" },
+	Bookshelf: { name: "书架", url: "/bookshelf/", icon: "material-symbols:menu-book-outline" },
 };
 
 const articleMenu: NavBarLink = {
@@ -27,7 +28,7 @@ const moreMenu: NavBarLink = {
 	name: "更多",
 	url: "/friends/",
 	icon: "material-symbols:apps",
-	children: [LinkPresets.Friends, LinkPresets.Gallery, LinkPresets.Sponsor, LinkPresets.Guestbook],
+	children: [LinkPresets.Friends, LinkPresets.Gallery, LinkPresets.Bookshelf, LinkPresets.Sponsor, LinkPresets.Guestbook],
 };
 
 export const navBarConfig: NavBarConfig = {

@@ -7,11 +7,19 @@ export async function buildNonIndexablePostPaths(rootDir = process.cwd()): Promi
   const routes = new Set<string>()
   for (const record of await scanMarkdownFiles({ contentRoot })) {
     const normalizedPath = path.relative(contentRoot, record.absolutePath).replace(/\\/g, '/')
-    const canonical = normalizeArticle(record.completed, {
-      sourcePath: record.relativePath,
-      slug: normalizedPath.replace(/\.md$/i, ''),
-      column: record.column,
-    })
+    // 容错：部分 section 总览类文章（README/MISSION/NOTES 等）缺少 routeId，
+    // normalizeArticle 会抛错。跳过这些文章，避免阻塞整个配置加载。
+    // 这些文章 visibility 为 public，默认可被 sitemap 收录，不影响安全。
+    let canonical
+    try {
+      canonical = normalizeArticle(record.completed, {
+        sourcePath: record.relativePath,
+        slug: normalizedPath.replace(/\.md$/i, ''),
+        column: record.column,
+      })
+    } catch {
+      continue
+    }
     const decision = decideVisibility(canonical.visibility)
     if (decision.sitemap) continue
     const entryId = normalizedPath.replace(/\.md$/i, '').toLowerCase()

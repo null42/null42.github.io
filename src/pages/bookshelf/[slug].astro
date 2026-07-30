@@ -1,0 +1,203 @@
+---
+/**
+ * 公开书架 PDF 阅读详情页
+ *
+ * 路由：/bookshelf/[slug]/
+ * 数据源：public/pdfs/<slug>.pdf + 可选元数据 bookshelf-meta.json
+ *
+ * 实现：使用浏览器原生 PDF 渲染（iframe embed），不引入额外依赖，
+ *      避免构建失败风险。现代浏览器（Chrome/Edge/Firefox/Safari）
+ *      均原生支持 PDF 预览与下载。
+ *
+ * 安全：
+ * - 公开页面，进 Sitemap
+ * - PDF 文件直接从 public/pdfs/ 静态提供，无加密
+ */
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+import fs from "node:fs";
+import path from "node:path";
+
+interface PdfMeta {
+	title?: string;
+	description?: string;
+	category?: string;
+}
+
+// 静态生成所有 PDF 详情页路由
+export function getStaticPaths() {
+	const PDFS_DIR = path.resolve("public/pdfs");
+	const paths: Array<{ params: { slug: string }; props: { slug: string; file: string; sizeBytes: number; title: string; description?: string; category?: string } }> = [];
+
+	if (!fs.existsSync(PDFS_DIR)) return paths;
+
+	const META_PATH = path.resolve("public/pdfs/bookshelf-meta.json");
+	let meta: Record<string, PdfMeta> = {};
+	if (fs.existsSync(META_PATH)) {
+		try {
+			meta = JSON.parse(fs.readFileSync(META_PATH, "utf8"));
+		} catch {
+			// 忽略损坏的元数据
+		}
+	}
+
+	const entries = fs.readdirSync(PDFS_DIR, { withFileTypes: true });
+	for (const entry of entries) {
+		if (!entry.isFile() || !entry.name.toLowerCase().endsWith(".pdf")) continue;
+		const slug = entry.name.replace(/\.pdf$/i, "");
+		const filePath = path.join(PDFS_DIR, entry.name);
+		const stat = fs.statSync(filePath);
+		const m = meta[slug] || {};
+		paths.push({
+			params: { slug },
+			props: {
+				slug,
+				file: entry.name,
+				sizeBytes: stat.size,
+				title: m.title || slug,
+				description: m.description,
+				category: m.category,
+			},
+		});
+	}
+	return paths;
+}
+
+const { slug, file, sizeBytes, title, description, category } = Astro.props;
+const pdfUrl = `/pdfs/${file}`;
+---
+
+<MainGridLayout title={`书架 · ${title}`} description={description || `在线阅读 ${title}`}>
+	<article class="pdf-reader-page">
+		<header class="pdf-reader-header card-base">
+			<div class="pdf-reader-breadcrumb">
+				<a href="/bookshelf/" class="pdf-reader-back">
+					<Icon name="material-symbols:arrow-back-rounded" />
+					<span>返回书架</span>
+				</a>
+			</div>
+			<h1 class="pdf-reader-title">{title}</h1>
+			{description && <p class="pdf-reader-desc">{description}</p>}
+			<p class="pdf-reader-meta">
+				{category && <span class="pdf-reader-cat">{category}</span>}
+				<span class="pdf-reader-format">PDF</span>
+				<span class="pdf-reader-size">{(sizeBytes / 1024 / 1024).toFixed(2)} MB</span>
+				<a class="pdf-reader-download" href={pdfUrl} download={file}>
+					<Icon name="material-symbols:download-rounded" />
+					<span>下载</span>
+				</a>
+			</p>
+		</header>
+
+		<div class="pdf-reader-viewport card-base">
+			<iframe
+				class="pdf-reader-iframe"
+				src={pdfUrl}
+				title={title}
+				loading="lazy"
+			></iframe>
+		</div>
+	</article>
+</MainGridLayout>
+
+<style>
+	.pdf-reader-page {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.pdf-reader-header {
+		display: grid;
+		gap: 0.5rem;
+		padding: 1rem 1.25rem;
+	}
+
+	.pdf-reader-breadcrumb {
+		display: flex;
+		align-items: center;
+	}
+
+	.pdf-reader-back {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		color: var(--primary);
+		text-decoration: none;
+		font-size: 0.88rem;
+	}
+
+	.pdf-reader-back:hover {
+		text-decoration: underline;
+	}
+
+	.pdf-reader-title {
+		margin: 0;
+		font-size: clamp(1.3rem, 3vw, 1.8rem);
+		font-weight: 700;
+		line-height: 1.3;
+	}
+
+	.pdf-reader-desc {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.pdf-reader-meta {
+		margin: 0;
+		display: flex;
+		gap: 0.75rem;
+		align-items: center;
+		flex-wrap: wrap;
+		font-size: 0.82rem;
+		color: var(--content-meta);
+	}
+
+	.pdf-reader-cat,
+	.pdf-reader-format {
+		padding: 0.15rem 0.5rem;
+		border-radius: var(--radius-small);
+		background: var(--btn-regular-bg);
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.pdf-reader-download {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		margin-left: auto;
+		padding: 0.3rem 0.7rem;
+		border-radius: var(--radius-medium);
+		background: var(--primary);
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		transition: opacity 0.2s ease;
+	}
+
+	.pdf-reader-download:hover {
+		opacity: 0.85;
+	}
+
+	.pdf-reader-viewport {
+		padding: 0;
+		overflow: hidden;
+		min-height: 75vh;
+	}
+
+	.pdf-reader-iframe {
+		display: block;
+		width: 100%;
+		height: 80vh;
+		border: 0;
+		background: var(--btn-regular-bg);
+	}
+
+	@media (max-width: 768px) {
+		.pdf-reader-iframe {
+			height: 65vh;
+		}
+	}
+</style>

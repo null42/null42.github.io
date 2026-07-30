@@ -1,0 +1,88 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《那些年，我们共同凌辱过的校园女神》精校版MAX-l0r728",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "g6EJ/aiKAxHx97Zv2ZRDrA=="
+  },
+  "gate": {
+    "token": "0H38L3aTstsOxCgS3f7671IWjLMIwBpeYFDdl5mqR/zCCjG71hSFt64/8B/oizkoekU="
+  },
+  "shelf": {
+    "title": "6PLLiZoijl4Zrf8nOnqzprFKD6YE2DUBq886dYoqTVNC2bPqFZNkjfcTw4O9uw6uBuYjw46yeP7XILnOCKhUCG6UYBc+ujoUfnWEU+yYLY5nGS+91WZvu4nXAFa+Z9UI6ylOLJInZyAZXz5rTT4C6L/oGyNe11Ars3Z/XldU",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "JBhUowzCvd9duoFh",
+      "bytes": 260000,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "eidSWr4uCAsw6P8i",
+      "bytes": 261524,
+      "charHint": 89062
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "xNWiOaZHWifXHCu6",
+      "bytes": 261826,
+      "charHint": 178014
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "9ponWrDf/WWWYGsj",
+      "bytes": 261967,
+      "charHint": 267086
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "YwPmlQ6mqX8jw9X4",
+      "bytes": 261786,
+      "charHint": 356143
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "L0uudsREIZXWAOCG",
+      "bytes": 262476,
+      "charHint": 445201
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "8rwc43kTHMHZp+ep",
+      "bytes": 263004,
+      "charHint": 534221
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "+c7uNWN7Hk+it/Dl",
+      "bytes": 262863,
+      "charHint": 623303
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "bQV1IH14bhTyce+i",
+      "bytes": 262359,
+      "charHint": 712300
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 2003
+  }
+}

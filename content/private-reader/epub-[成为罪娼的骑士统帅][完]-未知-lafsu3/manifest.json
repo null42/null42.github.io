@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-[成为罪娼的骑士统帅][完]-未知-lafsu3",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Ij1PueQNBXOMUvmoW2gRHQ=="
+  },
+  "gate": {
+    "token": "eN06Dkfd08IT6WH6Ueqh2x/16u0xHaggvWQ87iUvD8KPC7AQNuDWCFl4EXvOBIBMXPg="
+  },
+  "shelf": {
+    "title": "UDVyyGbEVOfK9JAykPW++RNEC0h7rV+9SXnR8t1b5CK7Xb6GOSmCH6+EvmlqIDJ7BXewXSZUPGvO/wSiTxs=",
+    "author": "r3khYNo2EQK1F+vZ6EXXes11eEw5Sq4eodOUVZSY9c/9nA=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "qRmAkBlEsON7drX2IlK9cDsnW2rq93zIDrZydPPYnRPNgw==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "EQbtw+Y92waZ7m1z",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "5v1oxg/3Ac+aVhkz",
+      "bytes": 65872,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "djtk90A3khdul1yf",
+      "mediaType": "image/jpeg",
+      "bytes": 81954
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 167
+  }
+}

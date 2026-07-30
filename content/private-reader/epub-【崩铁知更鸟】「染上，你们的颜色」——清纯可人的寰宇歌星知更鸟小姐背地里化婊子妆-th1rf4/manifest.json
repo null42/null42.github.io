@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-【崩铁知更鸟】「染上，你们的颜色」——清纯可人的寰宇歌星知更鸟小姐背地里化婊子妆-th1rf4",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "R+5wJgVV/7G8Niie5oiebQ=="
+  },
+  "gate": {
+    "token": "smXefHPgJeIz60MboJMKWqea4OrGbsvzJqi3l5+66SabyQkmtTnBJEzCm1Qaf78Zccs="
+  },
+  "shelf": {
+    "title": "/FD6exxPEP8UHW/j9M7KKbme3a6k49cVzZ7Ew9J+8euDiKfCfnhj2wAOnqqh0Rx5vqR4zcI8mxH1j/nxAYqD2pheRmmw6AX/DMnrlC49CQoFfCOZ53eUeEHUsc17VJ89zA3YyoVhvtAEy7RNofJqdneCSKs2lKdh8JdWj1SiesCO+kusRaA53r7tYqblr4dkBk2uqqy0YLktmLOCTBZTnzTlrgGX+843TjYVSA==",
+    "author": "cwIFEKnepWHgtUyv6Do8dXBfl62Zn1YnWVjADShp6l2CJg=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "tcYufdbYCu+y5SZfl4Yov04aRcHa34qJY2v0gKmSCqsI+Q==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "MBtRT2WcELr8lmOA",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "2BJ8+b1JTKNUtuyT",
+      "bytes": 115590,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "lDmLjTQVvHqUTFIR",
+      "mediaType": "image/jpeg",
+      "bytes": 179849
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 291
+  }
+}

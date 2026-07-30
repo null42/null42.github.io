@@ -1,0 +1,185 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-[补档]精心准备的礼物被青梅扔掉后，被沉默寡言的同桌捡起来当作最珍贵的宝物-13-cap3ql",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "9SF3NyejmVaPHX7IiAh/5g=="
+  },
+  "gate": {
+    "token": "OTsS5WTjHob1LIDAg9yoRwglP/+jCu38rHgPBvwTlOmj+UPq3jy83BXQBpo2JPZyzK4="
+  },
+  "shelf": {
+    "title": "nlnArrjadTlUToXhVRkfYJ4+0hJgjZoQZr+2K8NpSkPjZIAfQI8wQ2IY9qx0ZRjp+EjDnotNhqZ59KrBfVfWUqlWc5da+SAJRG1FlAl7da6NH59JW2sD29DJgXUU7VI9uw9MQ4LP5Vf0PplXjlg6hoSdLX7m+yREb6kFj6Xb8ozRxg7K6lCD2d7/iswhgAIUtT3sS3vq9yLtdcqPoIFZJNKN6jZ351gGvfGgkCV253wt/nYr1yURdvQiFvekjyBoy7ui63dEK7bWsRNJVV4T+eOJB7d5I7Qc+chKuwMXOIRSKXKYleg=",
+    "author": "0Xc6YwEA44aGORxY5W+lDBcGrOj9QeokLmHOqMcPGD6Y3Q=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "2sneb7babrv4boxJLE7DVP0avud90FxuJRjf1TSGHhuks2M=",
+      "segmentIndex": 3
+    },
+    {
+      "id": "ncx-1",
+      "title": "Pnv6GsNUPP26yrcRtvrC/zAr+w8k9OvAvzp+zLyc7ujzsw8=",
+      "segmentIndex": 5
+    },
+    {
+      "id": "ncx-2",
+      "title": "IzIEOj2UtmSRhdInCh7YLe5jc8Q8S0LAlRBP7x39RH5oatY=",
+      "segmentIndex": 7
+    },
+    {
+      "id": "ncx-3",
+      "title": "gK8C6TrDcesVC24T5EXvzPdTeTJtiXH+cEJ2NDNDiB72p54=",
+      "segmentIndex": 9
+    },
+    {
+      "id": "ncx-4",
+      "title": "qLQISrDeGfnu4ihalxbIwhhnkIxgJJDfnxvd9XhUJp/yiuU=",
+      "segmentIndex": 11
+    },
+    {
+      "id": "ncx-5",
+      "title": "R+WYDSW2TcvQyWdiJo4fJTUL0YGkZRmVzyMnVO/qqqHtJyE=",
+      "segmentIndex": 13
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "hEQmTVLGOgP5P4jU",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "+aTAkwj66ZPmdYwD",
+      "bytes": 679,
+      "chapterId": "html14",
+      "href": "index_split_000.html"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "EvVEqibs0x79KIxH",
+      "bytes": 765,
+      "chapterId": "html13",
+      "href": "index_split_001.html"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "k5Pc4+OhAsQIt3ca",
+      "bytes": 691,
+      "chapterId": "html12",
+      "href": "index_split_002.html"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "ud+WCBAeD7Z9wRGF",
+      "bytes": 13806,
+      "chapterId": "html11",
+      "href": "index_split_003.html"
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "IVIM2Fx30Jol2ktL",
+      "bytes": 655,
+      "chapterId": "html10",
+      "href": "index_split_004.html"
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "QUB79Tdk6HRmIdYE",
+      "bytes": 19372,
+      "chapterId": "html9",
+      "href": "index_split_005.html"
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "D8vBtUcpFesb43EL",
+      "bytes": 658,
+      "chapterId": "html8",
+      "href": "index_split_006.html"
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "V8n1cBoToSFjLmQZ",
+      "bytes": 20495,
+      "chapterId": "html7",
+      "href": "index_split_007.html"
+    },
+    {
+      "index": 9,
+      "file": "seg-0009.bin",
+      "iv": "F4fl3XDJkooX2Scw",
+      "bytes": 676,
+      "chapterId": "html6",
+      "href": "index_split_008.html"
+    },
+    {
+      "index": 10,
+      "file": "seg-0010.bin",
+      "iv": "DfYZylOOPz1wRD1M",
+      "bytes": 23232,
+      "chapterId": "html5",
+      "href": "index_split_009.html"
+    },
+    {
+      "index": 11,
+      "file": "seg-0011.bin",
+      "iv": "A24/MoMcShNvvjmm",
+      "bytes": 691,
+      "chapterId": "html4",
+      "href": "index_split_010.html"
+    },
+    {
+      "index": 12,
+      "file": "seg-0012.bin",
+      "iv": "ok6AIJVbvMebjcRT",
+      "bytes": 25252,
+      "chapterId": "html3",
+      "href": "index_split_011.html"
+    },
+    {
+      "index": 13,
+      "file": "seg-0013.bin",
+      "iv": "m5rCblc4eAJAKags",
+      "bytes": 694,
+      "chapterId": "html2",
+      "href": "index_split_012.html"
+    },
+    {
+      "index": 14,
+      "file": "seg-0014.bin",
+      "iv": "SsrB45DjR5Wonlob",
+      "bytes": 20443,
+      "chapterId": "html1",
+      "href": "index_split_013.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "twKlk4sE2KtxzItD",
+      "mediaType": "image/jpeg",
+      "bytes": 192621
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 322
+  }
+}

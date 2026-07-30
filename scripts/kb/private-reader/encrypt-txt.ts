@@ -1,34 +1,52 @@
 /**
  * TXT 加密管线：编码识别 → 段落切片 → 分段 AES-GCM 加密
  *
+ * 三层解密架构（v2）：
+ * - gateKey：进入书架的密码（共享 gateSalt，验证 token）
+ * - shelfKey：解密书名/作者（共享 shelfSalt）
+ * - bookKey：解密章节内容（每本书独立 bookSalt）
+ *
  * 输出：
- * - manifest.json：加密的元数据、目录、段索引
+ * - manifest.json：加密的元数据、段索引
  * - seg-NNNN.bin：base64 编码的密文（ciphertext || authTag）
  *
  * 安全要点：
- * - 标题、作者加密存储（encryptField）
- * - 每段独立 IV，全书共享 salt 和 key
- * - 日志只输出 slug、kind、段数、耗时，不输出路径和明文
+ * - 标题、作者用 shelfKey 加密存储
+ * - 章节内容用 bookKey 加密
+ * - gateToken 用 gateKey 加密固定字符串，用于验证 gate 密码
+ * - 每段独立 IV
+ * - 日志只输出 slug、kind、段数、耗时
  */
 
-import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { deriveKey, encryptSegment, decryptSegment, encryptField, generateSalt, ITERATIONS, SALT_LEN } from './crypto'
+import { deriveKey, encryptSegment, decryptSegment, encryptField, generateSalt, ITERATIONS } from './crypto'
 import { decodeBuffer } from './encoding'
 import { sliceTxt, type TxtSegment } from './txt-slicer'
 
+/** Gate 验证 token 明文（固定字符串，用于验证 gate 密码） */
+export const GATE_VERIFY_TOKEN = 'PRIVATE_READER_GATE_V2'
+
 export interface TxtManifest {
-  schema: 'private-reader/v1'
+  schema: 'private-reader/v2'
   kind: 'txt'
   slug: string
-  title: string // 加密 base64
-  author: string | null // 加密 base64 或 null
   crypto: {
     algorithm: 'AES-GCM'
     kdf: 'PBKDF2-SHA256'
     iterations: number
-    salt: string // base64
+    gateSalt: string   // base64，所有书共享
+    shelfSalt: string  // base64，所有书共享
+    bookSalt: string   // base64，每本书独立
+  }
+  /** Gate 验证：gateKey 加密的固定 token */
+  gate: {
+    token: string // base64
+  }
+  /** Shelf 层：shelfKey 加密的标题和作者 */
+  shelf: {
+    title: string      // base64
+    author: string | null // base64 或 null
   }
   segments: Array<{
     index: number
@@ -46,14 +64,18 @@ export interface EncryptTxtOptions {
   title?: string
   author?: string
   encoding?: string // 强制编码
+  /** 共享的 gateSalt（Buffer）。若不提供则随机生成 */
+  gateSalt?: Buffer
+  /** 共享的 shelfSalt（Buffer）。若不提供则随机生成 */
+  shelfSalt?: Buffer
 }
 
 /**
- * 加密一个 TXT 文件。
+ * 加密一个 TXT 文件（三层密码架构）。
  *
  * @param inputPath 原始 TXT 文件路径
  * @param slug 书的 URL slug
- * @param password 加密密码
+ * @param passwords 三层密码 { gate, shelf, book }
  * @param outputDir 输出目录（content/private-reader/[slug]/）
  * @param options 可选参数
  * @returns manifest 对象
@@ -61,7 +83,7 @@ export interface EncryptTxtOptions {
 export async function encryptTxtFile(
   inputPath: string,
   slug: string,
-  password: string,
+  passwords: { gate: string; shelf: string; book: string },
   outputDir: string,
   options: EncryptTxtOptions = {}
 ): Promise<TxtManifest> {
@@ -75,24 +97,37 @@ export async function encryptTxtFile(
   const title = options.title ?? inferTitle(text) ?? slug
   const author = options.author ?? null
 
-  // 3. 派生密钥
-  const salt = generateSalt()
-  const key = deriveKey(password, salt)
+  // 3. 生成 / 复用 salt
+  const gateSalt = options.gateSalt ?? generateSalt()
+  const shelfSalt = options.shelfSalt ?? generateSalt()
+  const bookSalt = generateSalt()
 
-  // 4. 切片
+  // 4. 派生三层密钥
+  const gateKey = deriveKey(passwords.gate, gateSalt)
+  const shelfKey = deriveKey(passwords.shelf, shelfSalt)
+  const bookKey = deriveKey(passwords.book, bookSalt)
+
+  // 5. Gate 验证 token
+  const gateToken = encryptField(GATE_VERIFY_TOKEN, gateKey)
+
+  // 6. Shelf 层：加密标题和作者
+  const encryptedTitle = encryptField(title, shelfKey)
+  const encryptedAuthor = author ? encryptField(author, shelfKey) : null
+
+  // 7. Book 层：切片并加密
   const segments = sliceTxt(text)
 
-  // 5. 估算阅读时间（平均 400 字/分钟）
+  // 8. 估算阅读时间（平均 400 字/分钟）
   const charCount = text.length
   const estimatedTimeMin = Math.max(1, Math.ceil(charCount / 400))
 
-  // 6. 加密每段
+  // 9. 加密每段（用 bookKey）
   await fs.mkdir(outputDir, { recursive: true })
   const manifestSegments: TxtManifest['segments'] = []
 
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i]
-    const { iv, ciphertext } = encryptSegment(seg.text, key)
+    const { iv, ciphertext } = encryptSegment(seg.text, bookKey)
     const fileName = `seg-${String(i).padStart(4, '0')}.bin`
     const filePath = path.join(outputDir, fileName)
 
@@ -108,18 +143,25 @@ export async function encryptTxtFile(
     })
   }
 
-  // 7. 构建 manifest
+  // 10. 构建 manifest
   const manifest: TxtManifest = {
-    schema: 'private-reader/v1',
+    schema: 'private-reader/v2',
     kind: 'txt',
     slug,
-    title: encryptField(title, key),
-    author: author ? encryptField(author, key) : null,
     crypto: {
       algorithm: 'AES-GCM',
       kdf: 'PBKDF2-SHA256',
       iterations: ITERATIONS,
-      salt: salt.toString('base64')
+      gateSalt: gateSalt.toString('base64'),
+      shelfSalt: shelfSalt.toString('base64'),
+      bookSalt: bookSalt.toString('base64')
+    },
+    gate: {
+      token: gateToken
+    },
+    shelf: {
+      title: encryptedTitle,
+      author: encryptedAuthor
     },
     segments: manifestSegments,
     reading: {
@@ -127,7 +169,7 @@ export async function encryptTxtFile(
     }
   }
 
-  // 8. 写入 manifest.json
+  // 11. 写入 manifest.json
   await fs.writeFile(
     path.join(outputDir, 'manifest.json'),
     JSON.stringify(manifest, null, 2),

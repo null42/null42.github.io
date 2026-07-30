@@ -26,4 +26,29 @@ content/private/**
 
 # 私密阅读系统配置（包含真实文件路径，绝不提交）
 scripts/private-reader/.local-paths.json
+scripts/private-reader/.salts.json
+scripts/private-reader/test-sample.txt
 env/private-reader-stress/
+# 私密阅读系统全量加密归档（本地测试用，不提交）
+content/private-reader-archive/
+# 私密阅读系统加密产物（每类前50本推送GitHub，其余归档到 private-reader-archive）
+# 注意：content/private-reader/ 需要提交，否则GitHub Pages无法生成路由
+
+# 本地参考文档（不推送）
+USAGE-GUIDE.md
+image-assets-inventory.md
+build-test.log
+
+# 临时脚本（调试用，不推送）
+scripts/scan-image-assets.ps1
+scripts/scan-image-assets.mjs
+scripts/gen-test-pdfs.mjs
+scripts/check-private-reader.mjs
+scripts/diagnose-articles.ts
+scripts/simple-server.mjs
+scripts/verify-gif-crypto.mjs
+scripts/private-reader/build-gif-epub.ts
+scripts/private-reader/test-*.epub
+scripts/private-reader/test-*.gif
+scripts/private-reader/test-*.txt
+astro-dev.pid

@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-【嫁为人妻的千金校花被调教成堕落的欠肏肥臀母猪】（完）作者：yeqingxuan-rkq381",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Ux0puARc7aHZNzxbj2P6RA=="
+  },
+  "gate": {
+    "token": "deJbqm3V4wBENJXWM6ER7EiRz9Yc014ob4qECiEqRxKsVhxuVACHsQ6ipAVsHZGqWZg="
+  },
+  "shelf": {
+    "title": "ioUA/s/yttJgZrpCjb9ToxkWZ+AQ1XsZGo0cQJ70DWI9FEq89M2qH57TAVH2OnzignxPtB6BZr4IxPZ4n3TPpHQNXGDSn8UfV/p5ohxwkZclkWaD3Jj6TTRW3tliDWzVEV5AtQKiQ34NAxNEB7KJAPVJ+ooNf1HvoCryUDBE/uM=",
+    "author": "ScTlfEtKtPhovlonNXvdXF6NiFOH7eXJ5lJh6kAzYO0JWg=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "YY+49zIOd0PQ5T+afqtvYYGF5poo+CucZqPITUEmRvAecw==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "9393l5+rKiA9+ZUz",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "YaxcycK5qnzqxB5q",
+      "bytes": 63049,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "IEb2Qy4mLJVdwt5l",
+      "mediaType": "image/jpeg",
+      "bytes": 143887
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 160
+  }
+}

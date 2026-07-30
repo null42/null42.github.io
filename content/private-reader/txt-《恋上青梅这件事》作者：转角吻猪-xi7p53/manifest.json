@@ -1,0 +1,102 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《恋上青梅这件事》作者：转角吻猪-xi7p53",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "kUTe4EWQny85l76/TYlTNA=="
+  },
+  "gate": {
+    "token": "PhPMLKIFWtYDQz5c4JrkLmxqXYxPl167ECW5fSqE5NJwak0PQbtQcNxzuuUeaDqRprM="
+  },
+  "shelf": {
+    "title": "WhmTRTQ8n2MK/AyvQlF2gBeUMN7E1nzVgCmg+CorkwVfZ9vX2Whg783lUQYWEGfxkg==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "CfZb/R6XgUwcY7pz",
+      "bytes": 260955,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "sNDHo93M3iUdWFw4",
+      "bytes": 261610,
+      "charHint": 91166
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "LebBAyiO8ysqajvF",
+      "bytes": 262119,
+      "charHint": 182331
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "W488AgWnz8ERAYvY",
+      "bytes": 261833,
+      "charHint": 273492
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "76mua+h0OqPfxDUj",
+      "bytes": 261589,
+      "charHint": 364661
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "URAVCkr742o2D/bh",
+      "bytes": 261876,
+      "charHint": 455812
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "jRTxa4st+uOnfjKK",
+      "bytes": 262046,
+      "charHint": 546978
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "Mvcp8sWpE5hEiq9M",
+      "bytes": 262767,
+      "charHint": 638128
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "i7QMyGA9NfWESGcD",
+      "bytes": 263014,
+      "charHint": 729275
+    },
+    {
+      "index": 9,
+      "file": "seg-0009.bin",
+      "iv": "j0pEEdf1Dvv/4cXw",
+      "bytes": 262950,
+      "charHint": 820431
+    },
+    {
+      "index": 10,
+      "file": "seg-0010.bin",
+      "iv": "c2OZs54Js124PKUw",
+      "bytes": 125182,
+      "charHint": 911535
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 2388
+  }
+}

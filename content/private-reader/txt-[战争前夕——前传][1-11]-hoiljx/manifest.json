@@ -1,0 +1,39 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[战争前夕——前传][1-11]-hoiljx",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "aU246cVKtD94Zs2pPNLtuA=="
+  },
+  "gate": {
+    "token": "WgSkrwNH75HV88rtTB7Z6XoJyBYmt90FGQvJ/zT1MHb6NEeioTxqnDGvk1dExOYn+EY="
+  },
+  "shelf": {
+    "title": "rTBpMViTq8sSjSXtjV2K4H7l8O5qnIPVwJGoKGJlHNvNFIiPJnxGLFQRGLtVW4Qg",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "yYORJnIMS9NaVYC7",
+      "bytes": 261889,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "3yY6KdnQ/UEp/NTt",
+      "bytes": 28752,
+      "charHint": 88757
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 247
+  }
+}

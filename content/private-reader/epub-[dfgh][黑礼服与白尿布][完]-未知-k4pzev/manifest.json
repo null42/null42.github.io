@@ -1,0 +1,56 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "epub-[dfgh][黑礼服与白尿布][完]-未知-k4pzev",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "tOHKH/alKRhI9QePcy/NXA=="
+  },
+  "gate": {
+    "token": "0Ahh1/WwQRzFbpywX2zG3XBY5pLZg3kOpUSOD4uuFLxeSeX5Q56EtUWoUPyIQ95UXQY="
+  },
+  "shelf": {
+    "title": "OwwdXGMGROggujFY40pxKkc5ua34NlEreDogV/5r7CMB1LjE2t2S7XnaepL4e2IS/LtxVwJozO8Bxt68v+g=",
+    "author": "TFobgFzuA2ydmHJdMqx4GgZSKWdbiZuNoaqFz36XWQTc2g=="
+  },
+  "toc": [
+    {
+      "id": "ncx-0",
+      "title": "T+4QetwQgVxheTcFxab7/KJFqCYxKvqEzBqOqSo7wXyS6A==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "+dmiUGw0UrcM0Yu0",
+      "bytes": 824,
+      "chapterId": "titlepage",
+      "href": "titlepage.xhtml"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "puXgH/73BBHa3DEd",
+      "bytes": 65899,
+      "chapterId": "html",
+      "href": "index.html"
+    }
+  ],
+  "assets": {
+    "cover_image.jpg": {
+      "file": "asset-0000.bin",
+      "iv": "s8Eccz0eHrwPd9/Z",
+      "mediaType": "image/jpeg",
+      "bytes": 93859
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 167
+  }
+}

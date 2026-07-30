@@ -1,0 +1,53 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《肏她上瘾》【现言-甜宠H-先婚后爱】作者：黑暗森林-完结-番外[搜书吧]-sr40co",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "ItDcT97krVXEbC0uE/hNhQ=="
+  },
+  "gate": {
+    "token": "jUQEjdcT2ixllW2setjiJlgYPE84ly31oULTObTNIGkzIDWqCGjwBXdrSVc7VmeK09Y="
+  },
+  "shelf": {
+    "title": "54/dWSd5fjP9s2ZBaOl4VzcU3CL9GzqTu2cZQLjPe6O1JSFt/Hqy832WkKHfBQpH7gQfxk+8DzllE4XPchw46IXUorMbFhwtYGdXIaj8Hweiycs1AvCwc2Y2OIQ1u6RcH43IMT+WngWcfyjSLO2TwgAb",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "OJ6EduRlfX9VE2RZ",
+      "bytes": 263858,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "6TG0WogLAVLbyEu7",
+      "bytes": 259430,
+      "charHint": 92026
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "wLlXdwMnge9K3xiM",
+      "bytes": 263410,
+      "charHint": 184034
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "Sd27oc1GHRvKksi9",
+      "bytes": 158532,
+      "charHint": 276070
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 830
+  }
+}

@@ -1,0 +1,279 @@
+---
+/**
+ * 公开书架页面
+ *
+ * 展示 public/pdfs/ 目录下的 PDF 文件，点击后进入 PDF 阅读页。
+ * 支持通过 public/pdfs/bookshelf-meta.json 提供标题、描述、封面等元数据。
+ *
+ * 安全：
+ * - 公开页面，进 Sitemap/导航
+ * - 只展示 PDF，不涉及加密内容
+ */
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+import fs from "node:fs";
+import path from "node:path";
+
+interface PdfMeta {
+	slug: string;
+	file: string;       // 文件名（如 my-book.pdf）
+	title: string;      // 标题
+	description?: string; // 描述
+	category?: string;  // 分类
+	sizeBytes: number;
+}
+
+const PDFS_DIR = path.resolve("public/pdfs");
+const META_PATH = path.resolve("public/pdfs/bookshelf-meta.json");
+
+// 读取元数据（可选）
+let meta: Record<string, Partial<PdfMeta>> = {};
+if (fs.existsSync(META_PATH)) {
+	try {
+		meta = JSON.parse(fs.readFileSync(META_PATH, "utf8"));
+	} catch {
+		// 忽略损坏的元数据
+	}
+}
+
+// 扫描 PDF 文件
+const books: PdfMeta[] = [];
+if (fs.existsSync(PDFS_DIR)) {
+	const entries = fs.readdirSync(PDFS_DIR, { withFileTypes: true });
+	for (const entry of entries) {
+		if (!entry.isFile() || !entry.name.toLowerCase().endsWith(".pdf")) continue;
+		if (entry.name === "bookshelf-meta.json") continue;
+
+		const slug = entry.name.replace(/\.pdf$/i, "");
+		const filePath = path.join(PDFS_DIR, entry.name);
+		const stat = fs.statSync(filePath);
+		const m = meta[slug] || {};
+
+		books.push({
+			slug,
+			file: entry.name,
+			title: m.title || slug,
+			description: m.description,
+			category: m.category || "未分类",
+			sizeBytes: stat.size,
+		});
+	}
+}
+
+// 按分类分组
+const categories = [...new Set(books.map(b => b.category || "未分类"))].sort();
+const booksByCategory = categories.map(cat => ({
+	category: cat,
+	books: books.filter(b => (b.category || "未分类") === cat)
+}));
+---
+
+<MainGridLayout title="书架" description="在线 PDF 书架">
+	<section class="bookshelf-page">
+		<header class="bookshelf-hero card-base">
+			<p class="bookshelf-eyebrow">BOOKSHELF</p>
+			<h1>书架</h1>
+			<p class="bookshelf-sub">
+				收集的技术文档与电子书，支持浏览器在线阅读。共 {books.length} 本。
+			</p>
+		</header>
+
+		{books.length === 0 ? (
+			<div class="bookshelf-empty card-base">
+				<Icon name="material-symbols:menu-book-outline" class="bookshelf-empty-icon" />
+				<p>书架暂无书籍。</p>
+				<p class="bookshelf-empty-hint">
+					请将 PDF 文件放入 <code>public/pdfs/</code> 目录，可选创建 <code>public/pdfs/bookshelf-meta.json</code> 提供元数据。
+				</p>
+			</div>
+		) : (
+			<div class="bookshelf-content">
+				{booksByCategory.map(({ category, books: catBooks }) => (
+					<section class="bookshelf-category">
+						<h2 class="bookshelf-category-title">{category} <span class="bookshelf-category-count">({catBooks.length})</span></h2>
+						<ul class="bookshelf-grid" role="list">
+							{catBooks.map(book => (
+								<li class="bookshelf-card card-base">
+									<a class="bookshelf-link" href={`/bookshelf/${book.slug}/`}>
+										<div class="bookshelf-cover">
+											<Icon name="material-symbols:picture-as-pdf" class="bookshelf-cover-icon" />
+										</div>
+										<div class="bookshelf-info">
+											<h3 class="bookshelf-title">{book.title}</h3>
+											{book.description && (
+												<p class="bookshelf-desc">{book.description}</p>
+											)}
+											<p class="bookshelf-meta">
+												<span class="bookshelf-format">PDF</span>
+												<span class="bookshelf-size">{(book.sizeBytes / 1024 / 1024).toFixed(2)} MB</span>
+											</p>
+										</div>
+									</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				))}
+			</div>
+		)}
+	</section>
+</MainGridLayout>
+
+<style>
+	.bookshelf-page {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.bookshelf-hero {
+		display: grid;
+		gap: 0.4rem;
+		padding: clamp(1.25rem, 3vw, 2rem);
+	}
+
+	.bookshelf-eyebrow {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+	}
+
+	.bookshelf-hero h1 {
+		margin: 0;
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+	}
+
+	.bookshelf-sub {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.bookshelf-empty {
+		display: grid;
+		gap: 0.5rem;
+		justify-items: center;
+		padding: 3rem 1.5rem;
+		text-align: center;
+		color: var(--meta-divider);
+	}
+
+	.bookshelf-empty-icon {
+		font-size: 4rem;
+		color: var(--meta-divider);
+	}
+
+	.bookshelf-empty-hint {
+		font-size: 0.85rem;
+		color: var(--meta-divider);
+	}
+
+	.bookshelf-empty-hint code {
+		background: var(--btn-regular-bg);
+		padding: 0.1rem 0.3rem;
+		border-radius: 0.25rem;
+		font-size: 0.8rem;
+	}
+
+	.bookshelf-content {
+		display: grid;
+		gap: 2rem;
+	}
+
+	.bookshelf-category-title {
+		margin: 0 0 1rem;
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: var(--content-text);
+		border-bottom: 2px solid var(--line-divider);
+		padding-bottom: 0.5rem;
+	}
+
+	.bookshelf-category-count {
+		color: var(--meta-divider);
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.bookshelf-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.bookshelf-card {
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+		border: 1px solid var(--line-divider);
+	}
+
+	.bookshelf-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.bookshelf-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
+	}
+
+	.bookshelf-cover {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		border-radius: var(--radius-medium);
+		background: linear-gradient(135deg, var(--btn-regular-bg), var(--btn-regular-bg-hover));
+		display: grid;
+		place-items: center;
+	}
+
+	.bookshelf-cover-icon {
+		font-size: 3rem;
+		color: var(--primary);
+	}
+
+	.bookshelf-info {
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.bookshelf-title {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.4;
+	}
+
+	.bookshelf-desc {
+		margin: 0;
+		color: var(--meta-divider);
+		font-size: 0.82rem;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.bookshelf-meta {
+		margin: 0;
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		font-size: 0.75rem;
+		color: var(--content-meta);
+	}
+
+	.bookshelf-format {
+		color: var(--primary);
+		font-weight: 600;
+	}
+</style>

@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[nemesia][黑暗中的光明][1-2完]-lhb5m3",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "DsG6LudLqOFIOf9QKfRmPA=="
+  },
+  "gate": {
+    "token": "7ncHjDBIsQxl+i5KfdB+4FN9aJfRcoA9rIMzvvaqBg/ZMmkC0yaXNW36CteIX8MDij8="
+  },
+  "shelf": {
+    "title": "nAxwAU33/cYNJCdx5WYHzCXKOtdEnC2BUgWsqE3Fil/Eq7PA50s1hHMHnViu",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "S9BASUHorPVV5loh",
+      "bytes": 98634,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 84
+  }
+}

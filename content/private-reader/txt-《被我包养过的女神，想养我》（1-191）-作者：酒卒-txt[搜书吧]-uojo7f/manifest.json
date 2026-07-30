@@ -1,0 +1,60 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-《被我包养过的女神，想养我》（1-191）-作者：酒卒-txt[搜书吧]-uojo7f",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "a2iAXawAGKXaWnmESOyFbw=="
+  },
+  "gate": {
+    "token": "eN+S45yoAly+yxeSOecYKnK8MJ0moaaYhzsn0ra2Fv96L6e6azK58P1mxCvPb/BvA4k="
+  },
+  "shelf": {
+    "title": "K5e224HEc2PVJfHASr9aU2j9OxbHdyQSECG+GQxQYEqzAa9gZi88GtMSaqW3YR2DUwr7Ax4jl0f7TP7Cd5/V8g==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "TUX8e3OgIM5aPpOH",
+      "bytes": 261950,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "Lom0o0IikrrTwira",
+      "bytes": 262321,
+      "charHint": 91796
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "dtk2PcdtW8is8vIq",
+      "bytes": 262061,
+      "charHint": 183603
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "X9ZBQ/XGHnXOnNeX",
+      "bytes": 262280,
+      "charHint": 275380
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "R7XBDdxLSDZdiocT",
+      "bytes": 189222,
+      "charHint": 367188
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 1084
+  }
+}

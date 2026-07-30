@@ -1,9 +1,9 @@
 ---
 /**
- * 私密阅读器单本书路由
+ * 私密阅读器单本书路由（v2 三层解密架构）
  *
  * 从 content/private-reader/[slug]/manifest.json 读取加密 manifest，
- * 渲染 PrivateReaderShell（密码门 + 阅读器）。
+ * 渲染 PrivateReaderShell（Book 密码门 + 阅读器）。
  *
  * 安全：
  * - 静态 HTML 中不包含任何明文（标题、作者、内容）
@@ -17,7 +17,35 @@ import { siteConfig } from "@/config"
 import fs from "node:fs"
 import path from "node:path"
 
-const { slug } = Astro.params
+// 枚举 content/private-reader/ 下的所有书籍，为静态构建生成路由
+export function getStaticPaths() {
+	if (!siteConfig.pages.privateReader) return []
+
+	const baseDir = path.resolve("content/private-reader")
+	if (!fs.existsSync(baseDir)) return []
+
+	const entries = fs.readdirSync(baseDir, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory())
+		.map((dir) => dir.name)
+		.filter((slug) => {
+			const manifestPath = path.resolve(baseDir, slug, "manifest.json")
+			if (!fs.existsSync(manifestPath)) return false
+			try {
+				const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+				// 支持 v1 和 v2 schema
+				return manifest.schema === "private-reader/v1" || manifest.schema === "private-reader/v2"
+			} catch {
+				return false
+			}
+		})
+
+	return entries.map((slug) => ({
+		params: { slug },
+		props: { slug },
+	}))
+}
+
+const { slug } = Astro.props
 
 // 未开启则 404
 if (!siteConfig.pages.privateReader) {
@@ -41,7 +69,7 @@ try {
 	return Astro.redirect("/404")
 }
 
-if (manifest.schema !== "private-reader/v1") {
+if (manifest.schema !== "private-reader/v1" && manifest.schema !== "private-reader/v2") {
 	return Astro.redirect("/404")
 }
 ---

@@ -111,8 +111,8 @@ export const siteConfig: SiteConfig = {
 		// 追番页面开关
 		anime: false,
 		// 私密阅读器开关（隐蔽入口，仅本地解密；不进 Sitemap/Pagefind/导航/RSS）
-		// 默认关闭，仅在 content/private-reader/ 存在加密产物时手动开启
-		privateReader: false,
+		// 默认开启，路由存在但不在导航栏显示，通过直接访问 /private-reader/ URL 进入
+		privateReader: true,
 	},
 
 	// 分类导航栏开关，在首页和归档页顶部显示分类快捷导航

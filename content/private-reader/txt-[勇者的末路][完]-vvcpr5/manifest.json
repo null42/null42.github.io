@@ -1,0 +1,32 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[勇者的末路][完]-vvcpr5",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "QNZ50ijjsoJskvM19GzgKw=="
+  },
+  "gate": {
+    "token": "fNwLCw2spyORzl7O9OlZvqNXCRt+G860pC0ZEZwKBHTRAxU4+sbad1Y6+AQZU0IMXGY="
+  },
+  "shelf": {
+    "title": "ut8UegSG+gE+37tfRX70eHXuXD/PptTqaPNzdv54ttpv2x83V211ueNLK1OhLA==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "Ceyb0fNycWrzoQiB",
+      "bytes": 93551,
+      "charHint": 0
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 80
+  }
+}

@@ -40,6 +40,11 @@ export interface EpubAsset {
   mediaType: string
 }
 
+export interface EpubImageAsset {
+  buffer: Buffer
+  mediaType: string
+}
+
 export interface EpubStructure {
   opfPath: string
   metadata: {
@@ -52,6 +57,8 @@ export interface EpubStructure {
   assets: EpubAsset[]
   /** 所有文本条目的原始内容（XHTML, XML, NCX 等），供加密管线使用 */
   content: Map<string, Buffer>
+  /** 所有图片二进制资源（key 为 ZIP 内路径，value 为 {buffer, mediaType}） */
+  imageAssets: Map<string, EpubImageAsset>
 }
 
 export interface ParseEpubOptions {
@@ -61,6 +68,32 @@ export interface ParseEpubOptions {
 
 const DEFAULT_MAX_UNCOMPRESSED = 200 * 1024 * 1024 // 200 MB
 const DEFAULT_MAX_ENTRIES = 5000
+
+/** 图片扩展名 → MIME 类型映射 */
+const IMAGE_MEDIA_TYPES: Record<string, string> = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+  '.bmp': 'image/bmp',
+}
+
+/** 判断文件是否为图片资源（通过扩展名） */
+function isImageFile(fileName: string): boolean {
+  const lower = fileName.toLowerCase()
+  return Object.keys(IMAGE_MEDIA_TYPES).some(ext => lower.endsWith(ext))
+}
+
+/** 获取图片的 MIME 类型 */
+function getImageMediaType(fileName: string): string {
+  const lower = fileName.toLowerCase()
+  for (const [ext, mt] of Object.entries(IMAGE_MEDIA_TYPES)) {
+    if (lower.endsWith(ext)) return mt
+  }
+  return 'application/octet-stream'
+}
 
 /**
  * 解析 EPUB 文件结构。
@@ -84,6 +117,7 @@ export function parseEpub(
       }
 
       const entries: Map<string, Buffer> = new Map()
+      const imageAssets: Map<string, EpubImageAsset> = new Map()
       let totalUncompressed = 0
       let entryCount = 0
 
@@ -102,15 +136,17 @@ export function parseEpub(
           return
         }
 
-        // 只读取文本文件，跳过二进制（图片、字体等）
+        // 分类：文本文件 → entries，图片文件 → imageAssets，其他 → 跳过
         const isText = entry.fileName.endsWith('.xml') ||
                        entry.fileName.endsWith('.opf') ||
                        entry.fileName.endsWith('.ncx') ||
                        entry.fileName.endsWith('.xhtml') ||
                        entry.fileName.endsWith('.html') ||
-                       entry.fileName.endsWith('.htm')
+                       entry.fileName.endsWith('.htm') ||
+                       entry.fileName.endsWith('.css')
+        const isImage = isImageFile(entry.fileName)
 
-        if (!isText || entry.fileName.endsWith('.png') || entry.fileName.endsWith('.jpg')) {
+        if (!isText && !isImage) {
           zipfile.readEntry()
           return
         }
@@ -124,7 +160,15 @@ export function parseEpub(
           const chunks: Buffer[] = []
           stream.on('data', (chunk: Buffer) => chunks.push(chunk))
           stream.on('end', () => {
-            entries.set(entry.fileName, Buffer.concat(chunks))
+            const buf = Buffer.concat(chunks)
+            if (isImage) {
+              imageAssets.set(entry.fileName, {
+                buffer: buf,
+                mediaType: getImageMediaType(entry.fileName)
+              })
+            } else {
+              entries.set(entry.fileName, buf)
+            }
             zipfile.readEntry()
           })
           stream.on('error', (e: Error) => {
@@ -135,7 +179,7 @@ export function parseEpub(
 
       zipfile.on('end', () => {
         try {
-          const structure = buildStructure(entries)
+          const structure = buildStructure(entries, imageAssets)
           resolve(structure)
         } catch (e) {
           reject(e)
@@ -152,7 +196,7 @@ export function parseEpub(
 /**
  * 从读取到的条目构建 EPUB 结构。
  */
-function buildStructure(entries: Map<string, Buffer>): EpubStructure {
+function buildStructure(entries: Map<string, Buffer>, imageAssets: Map<string, EpubImageAsset>): EpubStructure {
   // 1. 解析 container.xml 找到 OPF 路径
   const containerXml = entries.get('META-INF/container.xml')
   if (!containerXml) {
@@ -192,7 +236,8 @@ function buildStructure(entries: Map<string, Buffer>): EpubStructure {
     spine,
     toc,
     assets,
-    content: entries
+    content: entries,
+    imageAssets
   }
 }
 

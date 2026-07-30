@@ -1,0 +1,53 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-[完结-番外32]双向暗恋的正确打开姿势【甜】作者：吃甜少女~补番[搜书吧]-73fumr",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "pPL/wW+p9VrJd3j92jkPIw=="
+  },
+  "gate": {
+    "token": "DryEj5hFkEOBYnw6DQabTRT8pruJ/5vEQicPfCDqXKWy8OXOk8OXhtPIn3wpfZ6Kl5c="
+  },
+  "shelf": {
+    "title": "829B2wip3dfGjKj1i/UEyqTDBKG4XIYVm+H9oLK2uhim2x/GPYeSQN1bByWekSec2/mF1fas0IUKe5YcQA13qsRSUBJBeDsmZw==",
+    "author": null
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "NkyZXXCqKFL741RF",
+      "bytes": 261104,
+      "charHint": 0
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "/Ln7zyD7/6hcVKjB",
+      "bytes": 262328,
+      "charHint": 88880
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "eoWAebqR0w4QWJvt",
+      "bytes": 262246,
+      "charHint": 177797
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "uh79I34utUjhJk7J",
+      "bytes": 225316,
+      "charHint": 266671
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 858
+  }
+}
