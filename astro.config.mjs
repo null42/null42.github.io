@@ -1,4 +1,6 @@
 import { setMaxListeners } from "node:events";
+import { cpSync, existsSync, readdirSync, statSync } from "node:fs";
+import path from "node:path";
 import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
@@ -200,6 +202,36 @@ export default defineConfig({
 			},
 		}),
 		mdx(),
+		// 私密阅读器加密资源复制：content/private-reader/ → dist/private-reader/
+		// 加密产物（manifest.json + seg-*.bin + asset-*.bin）不经过 Astro 内容管线，
+		// 必须在构建后显式复制到 dist，否则线上 fetch /private-reader/... 会 404
+		{
+			name: "copy-private-reader-assets",
+			hooks: {
+				"astro:build:done": async ({ logger }) => {
+					const src = path.resolve("content/private-reader");
+					const dest = path.resolve("dist/private-reader");
+					if (!existsSync(src)) {
+						logger.info("private-reader: content/private-reader 不存在，跳过复制");
+						return;
+					}
+					cpSync(src, dest, { recursive: true });
+					const size = (() => {
+						let total = 0;
+						const walk = (dir) => {
+							for (const entry of readdirSync(dir, { withFileTypes: true })) {
+								const full = path.join(dir, entry.name);
+								if (entry.isDirectory()) walk(full);
+								else total += statSync(full).size;
+							}
+						};
+						walk(dest);
+						return total;
+					})();
+					logger.info(`private-reader: 已复制加密资源到 dist/private-reader/ (${(size / 1024 / 1024).toFixed(1)} MB)`);
+				},
+			},
+		},
 	],
 	markdown: {
 		processor: unified(createSiteMarkdownProcessorOptions()),
