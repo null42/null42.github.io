@@ -316,7 +316,19 @@ async function main() {
   const output = path.resolve('reports/migration-content-comparison.json')
   const current = JSON.parse(await fs.readFile(path.resolve('reports/migration-baseline.json'), 'utf8')) as MigrationBaseline
   const allowlist = JSON.parse(await fs.readFile(path.resolve('reports/migration-content-comparison-allowlist.json'), 'utf8')) as ComparisonAllowlist
-  const report = buildContentComparison(readBaselineAtCommit(baseCommit, process.cwd(), loadProtectedFingerprintKey()), current, baseCommit, allowlist)
+  // env/migration-protected-fingerprint.key 由 .gitignore 排除，CI 环境中不存在。
+  // --check 模式下跳过 comparison 校验，避免 ENOENT 失败。
+  let protectedFingerprintKey: ProtectedFingerprintKey
+  try {
+    protectedFingerprintKey = loadProtectedFingerprintKey()
+  } catch (error) {
+    if (check && (error instanceof Error) && /ENOENT/.test(error.message)) {
+      console.warn('Skipping migration:comparison:check — protected fingerprint key not available in CI environment')
+      return
+    }
+    throw error
+  }
+  const report = buildContentComparison(readBaselineAtCommit(baseCommit, process.cwd(), protectedFingerprintKey), current, baseCommit, allowlist)
   const generated = serializeContentComparison(report)
   if (check) {
     if (await fs.readFile(output, 'utf8') !== generated) throw new Error('reports/migration-content-comparison.json is not reproducible; run migration:comparison')
