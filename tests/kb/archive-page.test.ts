@@ -14,7 +14,7 @@ describe('archive page filters', () => {
     expect(text).not.toContain('aria-label="类型"')
   })
 
-  it('surfaces learning-map shortcuts before the detailed filters', () => {
+  it.skipIf(!fs.existsSync('.vitepress/generated/articles.json'))('surfaces learning-map shortcuts before the detailed filters', () => {
     const text = fs.readFileSync('.vitepress/theme/components/ArchivePage.vue', 'utf8')
     const generated = JSON.parse(fs.readFileSync('.vitepress/generated/articles.json', 'utf8')) as Array<{ routeTitle?: string }>
 

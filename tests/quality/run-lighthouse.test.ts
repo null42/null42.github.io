@@ -66,10 +66,13 @@ describe('Lighthouse runner lifecycle', () => {
   })
 
   it('prefers GITHUB_SHA and falls back to git rev-parse HEAD', () => {
+    // GitHub Actions 上 GITHUB_SHA 被设置为 commit SHA，stub 为空字符串以测试 fallback 逻辑
+    vi.stubEnv('GITHUB_SHA', '')
     const resolveGitSha = vi.fn(() => 'local-head\n')
 
     expect(getCommitSha('ci-sha', resolveGitSha)).toBe('ci-sha')
     expect(resolveGitSha).not.toHaveBeenCalled()
     expect(getCommitSha(undefined, resolveGitSha)).toBe('local-head')
+    vi.unstubAllEnvs()
   })
 })
