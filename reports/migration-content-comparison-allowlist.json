@@ -52,6 +52,18 @@
     {
       "id": "258cd00e8b264dd8480b39fe07a8370978617a94c3db3cba7c53f35630e6aa36",
       "reason": "Approved encrypted payload rotation: re-encrypt protected content with the local migration password; plaintext remains excluded and the legacy password is rejected."
+    },
+    {
+      "id": "f6acaec23f9ae1cd839ec773f536e89a1b726f42205e810f05dcd242ae361ba5",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+    },
+    {
+      "id": "d10eeead6a8ca358aa0c9153e29ee00b9684a29dcc14405372e068e21d2ab355",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+    },
+    {
+      "id": "109434ca297f61801e6393636ee46a6128e2b43de8156a6e6e319695fda2fdc5",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
     }
   ]
 }

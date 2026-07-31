@@ -67,6 +67,9 @@ async function createTestEpub(): Promise<Buffer> {
   ])
 }
 
+// v2 三层密码测试常量
+const PASSWORDS = { gate: 'gate-pw', shelf: 'shelf-pw', book: 'book-pw' }
+
 describe('epub encrypt pipeline', () => {
   let epubBuffer: Buffer
   let tempDir: string
@@ -88,7 +91,7 @@ describe('epub encrypt pipeline', () => {
 
   it('writes manifest.json and seg-*.bin files', async () => {
     const outputDir = path.join(tempDir, 'output')
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', outputDir)
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, outputDir)
 
     const manifestPath = path.join(outputDir, 'manifest.json')
     expect((await fs.stat(manifestPath)).isFile()).toBe(true)
@@ -100,30 +103,30 @@ describe('epub encrypt pipeline', () => {
   })
 
   it('produces manifest with kind=epub and correct schema', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
-    expect(manifest.schema).toBe('private-reader/v1')
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
+    expect(manifest.schema).toBe('private-reader/v2')
     expect(manifest.kind).toBe('epub')
     expect(manifest.slug).toBe('test-book')
   })
 
   it('uses 210000 PBKDF2 iterations', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     expect(manifest.crypto.iterations).toBe(210_000)
   })
 
   it('creates one segment per spine chapter', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     expect(manifest.segments.length).toBe(2)
   })
 
   it('has distinct IVs for all segments', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     const ivs = manifest.segments.map((s) => s.iv)
     expect(new Set(ivs).size).toBe(ivs.length)
   })
 
   it('does not leak plaintext in manifest', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     const str = JSON.stringify(manifest)
     expect(str).not.toContain('Test Book')
     expect(str).not.toContain('Test Author')
@@ -134,49 +137,61 @@ describe('epub encrypt pipeline', () => {
   })
 
   it('round-trip decryption reproduces original chapter content', async () => {
-    const password = 'round-trip-pw'
+    const passwords = { gate: 'g', shelf: 's', book: 'round-trip-pw' }
     const outputDir = path.join(tempDir, 'round-trip')
-    const manifest = await encryptEpubFile(epubPath, 'test-book', password, outputDir)
+    const manifest = await encryptEpubFile(epubPath, 'test-book', passwords, outputDir)
 
-    const salt = Buffer.from(manifest.crypto.salt, 'base64')
-    const key = deriveKey(password, salt, manifest.crypto.iterations)
+    // 章节内容用 bookKey 解密
+    const bookSalt = Buffer.from(manifest.crypto.bookSalt, 'base64')
+    const bookKey = deriveKey(passwords.book, bookSalt, manifest.crypto.iterations)
 
     // 解密第一章
     const seg0Path = path.join(outputDir, manifest.segments[0].file)
     const seg0Base64 = await fs.readFile(seg0Path, 'utf-8')
-    const decrypted0 = decryptEpubChapter(seg0Base64, key, manifest.segments[0].iv)
+    const decrypted0 = decryptEpubChapter(seg0Base64, bookKey, manifest.segments[0].iv)
     expect(decrypted0).toContain('Hello, world!')
 
     // 解密第二章
     const seg1Path = path.join(outputDir, manifest.segments[1].file)
     const seg1Base64 = await fs.readFile(seg1Path, 'utf-8')
-    const decrypted1 = decryptEpubChapter(seg1Base64, key, manifest.segments[1].iv)
+    const decrypted1 = decryptEpubChapter(seg1Base64, bookKey, manifest.segments[1].iv)
     expect(decrypted1).toContain('Goodbye, world!')
   })
 
-  it('decrypts title and author fields', async () => {
-    const password = 'field-pw'
-    const manifest = await encryptEpubFile(epubPath, 'test-book', password, path.join(tempDir, 'out'))
+  it('decrypts title and author fields via shelfKey', async () => {
+    const passwords = { gate: 'g', shelf: 'shelf-pw', book: 'b' }
+    const manifest = await encryptEpubFile(epubPath, 'test-book', passwords, path.join(tempDir, 'out'))
 
-    const salt = Buffer.from(manifest.crypto.salt, 'base64')
-    const key = deriveKey(password, salt, manifest.crypto.iterations)
+    // shelf.title/author 用 shelfKey 解密
+    const shelfSalt = Buffer.from(manifest.crypto.shelfSalt, 'base64')
+    const shelfKey = deriveKey(passwords.shelf, shelfSalt, manifest.crypto.iterations)
 
-    expect(decryptField(manifest.title, key)).toBe('Test Book')
-    expect(decryptField(manifest.author!, key)).toBe('Test Author')
+    expect(decryptField(manifest.shelf.title, shelfKey)).toBe('Test Book')
+    expect(decryptField(manifest.shelf.author!, shelfKey)).toBe('Test Author')
   })
 
-  it('populates TOC from EPUB nav', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+  it('populates TOC from EPUB nav (toc title encrypted with bookKey)', async () => {
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     expect(manifest.toc.length).toBe(2)
 
-    const salt = Buffer.from(manifest.crypto.salt, 'base64')
-    const key = deriveKey('pw', salt, manifest.crypto.iterations)
-    expect(decryptField(manifest.toc[0].title, key)).toBe('Chapter 1')
-    expect(decryptField(manifest.toc[1].title, key)).toBe('Chapter 2')
+    // toc[].title 用 bookKey 解密
+    const bookSalt = Buffer.from(manifest.crypto.bookSalt, 'base64')
+    const bookKey = deriveKey(PASSWORDS.book, bookSalt, manifest.crypto.iterations)
+    expect(decryptField(manifest.toc[0].title, bookKey)).toBe('Chapter 1')
+    expect(decryptField(manifest.toc[1].title, bookKey)).toBe('Chapter 2')
   })
 
   it('estimates reading time', async () => {
-    const manifest = await encryptEpubFile(epubPath, 'test-book', 'pw', path.join(tempDir, 'out'))
+    const manifest = await encryptEpubFile(epubPath, 'test-book', PASSWORDS, path.join(tempDir, 'out'))
     expect(manifest.reading.estimatedTimeMin).toBeGreaterThan(0)
+  })
+
+  it('gate token can be verified with gateKey', async () => {
+    const manifest = await encryptEpubFile(epubPath, 'gate-test', PASSWORDS, path.join(tempDir, 'gate'))
+    // 用 gateSalt + gate 密码派生 gateKey
+    const gateSalt = Buffer.from(manifest.crypto.gateSalt, 'base64')
+    const gateKey = deriveKey(PASSWORDS.gate, gateSalt, manifest.crypto.iterations)
+    // gate.token 应该能解密为固定的验证字符串（不抛异常即说明密码正确）
+    expect(() => decryptField(manifest.gate.token, gateKey)).not.toThrow()
   })
 })

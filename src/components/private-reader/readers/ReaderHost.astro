@@ -33,13 +33,23 @@ interface Manifest {
 	schema: string
 	kind: "txt" | "epub"
 	slug: string
-	title: string
-	author: string | null
+	title?: string
+	author?: string | null
 	crypto: {
 		algorithm: string
 		kdf: string
 		iterations: number
-		salt: string
+		salt?: string
+		gateSalt?: string
+		shelfSalt?: string
+		bookSalt?: string
+	}
+	shelf?: {
+		title: string
+		author: string | null
+	}
+	gate?: {
+		token: string
 	}
 	segments: ManifestSegment[]
 	toc?: ManifestTocEntry[]
@@ -626,6 +636,7 @@ const isEpub = manifest.kind === "epub"
 		 */
 		function scrollReaderToTop(): void {
 			try {
+				if (!host) return
 				const body = host.querySelector<HTMLElement>("[data-reader-body]")
 				if (body) {
 					body.scrollTo({ top: 0, behavior: "auto" })

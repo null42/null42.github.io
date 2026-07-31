@@ -373,10 +373,10 @@ describe('generated output privacy scan', () => {
     expect(JSON.stringify(result)).not.toContain('This is plaintext leaking')
   })
 
-  it('flags private-reader HTML shells leaking plaintext paragraphs', async () => {
-    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-html-'))
+  it('flags private-reader manifest.json with plaintext title (HTML shells skipped to avoid false positives)', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-private-reader-manifest-'))
     fs.mkdirSync(path.join(root, 'dist/private-reader/sample'), { recursive: true })
-    // 模拟 HTML shell 中嵌入明文段落（应被检测）
+    // HTML shell 中的明文段落不会被检测（站点框架内容会导致误报，故跳过 HTML 明文检测）
     const html = `
 <!DOCTYPE html>
 <html><body>
@@ -388,6 +388,22 @@ describe('generated output privacy scan', () => {
     fs.writeFileSync(
       path.join(root, 'dist/private-reader/sample/index.html'),
       html,
+      'utf8'
+    )
+    // manifest.json 中的明文标题（非 base64 加密）会被检测为 plaintext-title
+    const manifest = {
+      schema: 'private-reader/v2',
+      kind: 'txt',
+      slug: 'sample',
+      crypto: { algorithm: 'AES-GCM', kdf: 'PBKDF2-SHA256', iterations: 210000, gateSalt: 'a', shelfSalt: 'b', bookSalt: 'c' },
+      gate: { token: 'd' },
+      shelf: { title: 'This is plaintext leaking', author: null },
+      segments: [],
+      reading: { estimatedTimeMin: 0 },
+    }
+    fs.writeFileSync(
+      path.join(root, 'dist/private-reader/sample/manifest.json'),
+      JSON.stringify(manifest),
       'utf8'
     )
 

@@ -25,7 +25,7 @@ const photos = [...basePhotos, ...basePhotos, ...basePhotos];
 
 		<div class="gallery-grid">
 			{photos.map((photo, index) => (
-				<figure class="gallery-item" key={index}>
+				<figure class="gallery-item">
 					<div class="gallery-media" tabindex={0} role="button" aria-label={photo.alt}>
 						<img
 							src={photo.src}

@@ -5,8 +5,8 @@
   "baseCommit": "e757f43ad36d758b0c26d4c2d64b875b46b543fa",
   "inputs": {
     "previousBaselineSha256": "60e0185e6865ba4dc409ab587a335c35658db655ad0bd41c6ae1903812c7b01a",
-    "currentBaselineSha256": "d06c57274ea459e2b91e29da7e82e6344dd9de07b44ead329b1153a7561d685a",
-    "allowlistSha256": "78a3df8439068e662a4d5851fbe4ec809a86a36fbf4d129e33d245833a8dff5c"
+    "currentBaselineSha256": "79b6ed7800b9882802455c120639c680e22edf08e86563e735a3521b9af114fc",
+    "allowlistSha256": "79c13c20c8daac3832d6e15282c380130499ed4e3bb97fec91cd452231f3bd4c"
   },
   "publicCollection": {
     "added": 0,
@@ -14,7 +14,7 @@
     "retainedPathCount": 374
   },
   "hashes": {
-    "contentChanged": 10,
+    "contentChanged": 13,
     "attachmentChanged": 0,
     "attachmentCount": 14
   },
@@ -37,6 +37,24 @@
     "added": [],
     "removed": [],
     "content": [
+      {
+        "id": "f6acaec23f9ae1cd839ec773f536e89a1b726f42205e810f05dcd242ae361ba5",
+        "sourcePath": "content/motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture.md",
+        "previous": "5459dc2d4938e1dc897fb37a9255be9109de37037944817ebc63059f10ca75bd",
+        "current": "9e63b4e4b20a06e5091a48d203bd5047732e52d23d04a04cf12bae05a23b1746"
+      },
+      {
+        "id": "d10eeead6a8ca358aa0c9153e29ee00b9684a29dcc14405372e068e21d2ab355",
+        "sourcePath": "content/motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination.md",
+        "previous": "11131efe74ef469777df5ab56a9755013ed58496ef66ab4045d8a809634cb7e5",
+        "current": "5e94387d79f7ca0f51950c32ad475e126a25c2285ddfbd5f324d5c1bc9bc1669"
+      },
+      {
+        "id": "109434ca297f61801e6393636ee46a6128e2b43de8156a6e6e319695fda2fdc5",
+        "sourcePath": "content/motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency.md",
+        "previous": "35adda7f6968542167221ef556752df02c0b6e6cb1d4013c2b2f1a20bade60dd",
+        "current": "964a248521da2dfe296e3a06916c3bd75f8c4b1d0242c56e86c16eaefdde19a4"
+      },
       {
         "id": "261e3b1a97ba2adaaa92b8ccd5c43046c507a37ab5ea3958d3913e3aaa684900",
         "sourcePath": "content/motor/simulation/SIM-00-C-Simulation-Overview.md",
@@ -5510,6 +5528,18 @@
     {
       "id": "258cd00e8b264dd8480b39fe07a8370978617a94c3db3cba7c53f35630e6aa36",
       "reason": "Approved encrypted payload rotation: re-encrypt protected content with the local migration password; plaintext remains excluded and the legacy password is rejected."
+    },
+    {
+      "id": "f6acaec23f9ae1cd839ec773f536e89a1b726f42205e810f05dcd242ae361ba5",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+    },
+    {
+      "id": "d10eeead6a8ca358aa0c9153e29ee00b9684a29dcc14405372e068e21d2ab355",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+    },
+    {
+      "id": "109434ca297f61801e6393636ee46a6128e2b43de8156a6e6e319695fda2fdc5",
+      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
     }
   ],
   "conclusion": "Public content, URLs, visibility, encryption state, protected fingerprints, and attachment bytes are preserved; differences are limited to expected canonical hierarchy identifiers or approved exceptions."

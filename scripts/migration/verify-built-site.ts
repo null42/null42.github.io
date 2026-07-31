@@ -88,7 +88,8 @@ export const verifyBuiltSite = async (rootDir = process.cwd()): Promise<BuiltSit
 		if (removedOutputs.has(htmlPath.toLowerCase())) continue;
 		const html = readFileSync(htmlPath, "utf8");
 		for (const match of html.matchAll(/(?:href|src)=["']([^"']+)["']/g)) {
-			const reference = match[1];
+			// 解码 HTML 实体（如 &amp; → &），避免含 & 的 slug 被误报为坏链接
+			const reference = match[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 			const output = resolveInternalAsset(distDir, htmlPath, reference);
 			if (output && !outputFiles.has(output.toLowerCase())) report.brokenInternalLinks.push(`${relative(distDir, htmlPath)} -> ${reference}`);
 		}
