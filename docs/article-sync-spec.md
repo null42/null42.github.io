@@ -1,11 +1,13 @@
 # 文章同步推送规范
 
-> 本文档定义从外部来源（`E:\gitee_CodeStorage\学习\电源` 与 `MotorControl-main`）到博客 `content/` 目录的同步规则。
+> 本文档定义从外部来源（`<SOURCE_ROOT>/电源` 与 `<SOURCE_ROOT>/MotorControl-main`）到博客 `content/` 目录的同步规则。
 > 最后更新：2026-07-31
 
 ## 1. 外部来源概览
 
-### 1.1 电源目录 `E:\gitee_CodeStorage\学习\电源`
+> 外部来源根目录：本地 `<SOURCE_ROOT>/`（电源与电机控制学习资料库）
+
+### 1.1 电源目录 `<SOURCE_ROOT>/电源`
 
 | 子目录 | 内容类型 | 文件格式 | 推送策略 |
 |--------|---------|---------|---------|
@@ -20,7 +22,7 @@
 | `courses/ups-control-foundation/concepts/` | 概念说明 | .md | ✅ 推送 |
 | `courses/125kva-ups-14-week/*.md` | 项目文档 | .md | ⚠️ 评估后推送（MISSION/README等） |
 
-### 1.2 MotorControl-main 目录 `E:\gitee_CodeStorage\学习\MotorControl-main`
+### 1.2 MotorControl-main 目录 `<SOURCE_ROOT>/MotorControl-main`
 
 | 子目录 | 内容类型 | 文件格式 | 推送策略 |
 |--------|---------|---------|---------|
@@ -137,7 +139,7 @@ chapterOrder: N            # 章节排序
 ## 5. 同步流程
 
 ```
-外部来源 (E:\gitee_CodeStorage\学习\)
+外部来源 (<SOURCE_ROOT>/)
     │
     ▼ ① 手动筛选 + 复制 .md 文件
 content/ (博客原始内容目录)
