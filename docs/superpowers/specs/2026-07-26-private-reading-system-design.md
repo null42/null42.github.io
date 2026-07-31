@@ -176,8 +176,8 @@ EPUB 本质是 ZIP，含 OPF（package document，含 spine 顺序）与 NCX/Toc
 
 | 路由 | 用途 | 公开性 |
 |------|------|--------|
-| `/private-reader/` | 书架（列出所有私密书的加密卡片） | `private-reader`：HTML 生成，但不在导航/Sitemap/Pagefind/RSS |
-| `/private-reader/[slug]/` | 阅读器壳（密码门 → 解密渲染） | 同上 |
+| `/private-reader/` | 书架（列出所有私密书的加密卡片，支持搜索+随机） | `private-reader`：HTML 生成，但不在导航/Sitemap/Pagefind/RSS |
+| `/private-reader/[slug]/` | 阅读器壳（密码门 → 解密渲染，含进度提示） | 同上 |
 
 路由不在任何导航组件、Sitemap、Pagefind 索引、RSS、JSON-LD 中出现；用户必须直接访问 URL 才能到达。隐蔽入口仅作为“降低被陌生人偶然发现的概率”，不构成安全层。
 

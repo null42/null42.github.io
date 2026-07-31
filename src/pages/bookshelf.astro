@@ -88,12 +88,31 @@ const booksByCategory = categories.map(cat => ({
 			</div>
 		) : (
 			<div class="bookshelf-content">
+				{/* 工具栏：搜索 + 随机 */}
+				<div class="bookshelf-toolbar">
+					<input
+						type="search"
+						class="bookshelf-search-input"
+						placeholder="搜索书名或描述…"
+						autocomplete="off"
+						data-bookshelf-search
+					/>
+					<button class="bookshelf-random-btn" type="button" data-bookshelf-random title="随机打开一本书">
+						🎲 随机阅读
+					</button>
+				</div>
+
 				{booksByCategory.map(({ category, books: catBooks }) => (
-					<section class="bookshelf-category">
+					<section class="bookshelf-category" data-bookshelf-category>
 						<h2 class="bookshelf-category-title">{category} <span class="bookshelf-category-count">({catBooks.length})</span></h2>
 						<ul class="bookshelf-grid" role="list">
 							{catBooks.map(book => (
-								<li class="bookshelf-card card-base">
+								<li
+									class="bookshelf-card card-base"
+									data-bookshelf-card
+									data-slug={book.slug}
+									data-search-text={`${book.title} ${book.description || ""}`.toLowerCase()}
+								>
 									<a class="bookshelf-link" href={`/bookshelf/${book.slug}/`}>
 										<div class="bookshelf-cover">
 											<Icon name="material-symbols:picture-as-pdf" class="bookshelf-cover-icon" />
@@ -180,6 +199,60 @@ const booksByCategory = categories.map(cat => ({
 	.bookshelf-content {
 		display: grid;
 		gap: 2rem;
+	}
+
+	.bookshelf-toolbar {
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.bookshelf-search-input {
+		flex: 1 1 240px;
+		min-width: 180px;
+		padding: 0.55rem 0.85rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.9rem;
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+
+	.bookshelf-search-input:focus {
+		border-color: var(--primary);
+	}
+
+	.bookshelf-random-btn {
+		padding: 0.55rem 1rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.85rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.bookshelf-random-btn:hover {
+		border-color: var(--primary);
+		color: var(--primary);
+	}
+
+	.bookshelf-random-btn:active {
+		transform: scale(0.98);
+	}
+
+	.bookshelf-card.hidden-by-search {
+		display: none;
+	}
+
+	.bookshelf-category.hidden-by-search {
+		display: none;
 	}
 
 	.bookshelf-category-title {
@@ -277,3 +350,39 @@ const booksByCategory = categories.map(cat => ({
 		font-weight: 600;
 	}
 </style>
+
+<script>
+	/**
+	 * 公开书架：搜索过滤 + 随机打开
+	 *
+	 * 搜索：匹配 data-search-text（标题+描述，已转小写）
+	 * 随机：从可见书中随机选一本跳转
+	 */
+	const searchInput = document.querySelector<HTMLInputElement>("[data-bookshelf-search]")
+	const randomBtn = document.querySelector<HTMLButtonElement>("[data-bookshelf-random]")
+	const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-bookshelf-card]"))
+	const categories = Array.from(document.querySelectorAll<HTMLElement>("[data-bookshelf-category]"))
+
+	const applySearch = () => {
+		const query = (searchInput?.value || "").trim().toLowerCase()
+		for (const card of cards) {
+			const text = card.getAttribute("data-search-text") || ""
+			card.classList.toggle("hidden-by-search", !!query && !text.includes(query))
+		}
+		// 隐藏没有可见卡片的分类
+		for (const cat of categories) {
+			const visible = cat.querySelectorAll<HTMLElement>("[data-bookshelf-card]:not(.hidden-by-search)")
+			cat.classList.toggle("hidden-by-search", visible.length === 0)
+		}
+	}
+
+	searchInput?.addEventListener("input", applySearch)
+
+	randomBtn?.addEventListener("click", () => {
+		const visible = cards.filter(c => !c.classList.contains("hidden-by-search"))
+		if (visible.length === 0) return
+		const pick = visible[Math.floor(Math.random() * visible.length)]
+		const slug = pick.getAttribute("data-slug")
+		if (slug) window.location.href = `/bookshelf/${slug}/`
+	})
+</script>

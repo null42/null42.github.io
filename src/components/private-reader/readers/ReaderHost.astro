@@ -498,9 +498,10 @@ const isEpub = manifest.kind === "epub"
 				}
 				return
 			}
-			manifestData = await fetchManifest(slug)
-			if (!manifestData) return
-			totalSegments = manifestData.segments.length
+			if (loadingEl) loadingEl.textContent = "正在加载书目信息…"
+		manifestData = await fetchManifest(slug)
+		if (!manifestData) return
+		totalSegments = manifestData.segments.length
 
 			// 显示标题（title 来自 unlocked 事件，已解密）
 		if (titleEl) titleEl.textContent = title
@@ -561,16 +562,18 @@ const isEpub = manifest.kind === "epub"
 				contentEl.classList.remove("fading")
 			}
 			loadingEl?.classList.remove("hidden")
-			loadingEl!.textContent = "加载中…"
+		const segTotal = totalSegments
+		if (loadingEl) loadingEl.textContent = `正在下载第 ${index + 1}/${segTotal} 段…`
 
-			try {
-				// 4. fetch + 解密
-				const res = await fetch(`/private-reader/${slug}/${seg.file}`)
-				const ciphertextBase64 = await res.text()
-				// 期间用户又切换了，放弃渲染
-				if (loadingSegmentIndex !== index) return
-				const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
-				if (loadingSegmentIndex !== index) return
+		try {
+			// 4. fetch + 解密
+			const res = await fetch(`/private-reader/${slug}/${seg.file}`)
+			const ciphertextBase64 = await res.text()
+			// 期间用户又切换了，放弃渲染
+			if (loadingSegmentIndex !== index) return
+			if (loadingEl) loadingEl.textContent = `正在解密第 ${index + 1}/${segTotal} 段…`
+			const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+			if (loadingSegmentIndex !== index) return
 
 				// 5. 渲染内容
 				if (contentEl) {

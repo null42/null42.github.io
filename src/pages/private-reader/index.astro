@@ -154,7 +154,21 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 		</div>
 
 		{/* 第 3 层：书架（解密后显示） */}
-		<div class="library-stage hidden" data-library-stage>
+	<div class="library-stage hidden" data-library-stage>
+			{/* 工具栏：搜索 + 随机 */}
+			<div class="library-toolbar">
+				<input
+					type="search"
+					class="library-search-input"
+					placeholder="搜索书名…"
+					autocomplete="off"
+					data-library-search
+				/>
+				<button class="library-random-btn" type="button" data-library-random title="随机打开一本书">
+					🎲 随机阅读
+				</button>
+			</div>
+
 			{/* 分架标签 */}
 			<div class="library-tabs" data-library-tabs>
 				<button class="library-tab active" data-tab="all">
@@ -356,6 +370,52 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 		gap: 1rem;
 	}
 
+	.library-toolbar {
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.library-search-input {
+		flex: 1 1 240px;
+		min-width: 180px;
+		padding: 0.55rem 0.85rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.9rem;
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+
+	.library-search-input:focus {
+		border-color: var(--primary);
+	}
+
+	.library-random-btn {
+		padding: 0.55rem 1rem;
+		border-radius: var(--radius-medium);
+		border: 1px solid var(--line-divider);
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-size: 0.85rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.library-random-btn:hover {
+		border-color: var(--primary);
+		color: var(--primary);
+	}
+
+	.library-random-btn:active {
+		transform: scale(0.98);
+	}
+
 	.library-tabs {
 		display: flex;
 		gap: 0.5rem;
@@ -431,7 +491,8 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 		box-shadow: var(--shadow-lg);
 	}
 
-	.private-library-card.hidden-by-tab {
+	.private-library-card.hidden-by-tab,
+	.private-library-card.hidden-by-search {
 		display: none;
 	}
 
@@ -630,27 +691,61 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 			shelfForm?.addEventListener("submit", handleShelfSubmit)
 
 			// ---------- 分架标签 ----------
-			tabs.forEach(tab => {
-				tab.addEventListener("click", () => {
-					const filter = tab.getAttribute("data-tab")
-					tabs.forEach(t => t.classList.remove("active"))
-					tab.classList.add("active")
+		tabs.forEach(tab => {
+			tab.addEventListener("click", () => {
+				const filter = tab.getAttribute("data-tab")
+				tabs.forEach(t => t.classList.remove("active"))
+				tab.classList.add("active")
 
-					const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
-					if (cards) {
-						cards.forEach(card => {
-							const kind = card.getAttribute("data-book-kind")
-							if (filter === "all" || kind === filter) {
-								card.classList.remove("hidden-by-tab")
-							} else {
-								card.classList.add("hidden-by-tab")
-							}
-						})
-					}
-				})
+				const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
+				if (cards) {
+					cards.forEach(card => {
+						const kind = card.getAttribute("data-book-kind")
+						if (filter === "all" || kind === filter) {
+							card.classList.remove("hidden-by-tab")
+						} else {
+							card.classList.add("hidden-by-tab")
+						}
+					})
+				}
 			})
+		})
 
-			// 离开路由时 dispose
+		// ---------- 搜索 + 随机 ----------
+		const searchInput = page.querySelector<HTMLInputElement>("[data-library-search]")
+		const randomBtn = page.querySelector<HTMLButtonElement>("[data-library-random]")
+
+		// 组合过滤：tab + search
+		const applyFilters = () => {
+			const query = (searchInput?.value || "").trim().toLowerCase()
+			const activeTab = page.querySelector<HTMLElement>(".library-tab.active")
+			const filter = activeTab?.getAttribute("data-tab") || "all"
+			const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
+			if (!cards) return
+			cards.forEach(card => {
+				const kind = card.getAttribute("data-book-kind") || ""
+				const titleEl = card.querySelector<HTMLElement>(".private-library-title")
+				const title = (titleEl?.textContent || "").toLowerCase()
+				const matchTab = filter === "all" || kind === filter
+				const matchSearch = !query || title.includes(query)
+				card.classList.toggle("hidden-by-tab", !matchTab)
+				card.classList.toggle("hidden-by-search", !matchSearch)
+			})
+		}
+
+		searchInput?.addEventListener("input", applyFilters)
+
+		randomBtn?.addEventListener("click", () => {
+			const cards = Array.from(grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]") || [])
+			// 只在当前可见的书里随机选
+			const visible = cards.filter(c => !c.classList.contains("hidden-by-tab") && !c.classList.contains("hidden-by-search"))
+			if (visible.length === 0) return
+			const pick = visible[Math.floor(Math.random() * visible.length)]
+			const slug = pick.getAttribute("data-private-reader-book")
+			if (slug) window.location.href = `/private-reader/${slug}/`
+		})
+
+		// 离开路由时 dispose
 			window.addEventListener("beforeunload", () => lifecycle.dispose())
 			window.addEventListener("swup:leave:page", () => lifecycle.dispose())
 		}

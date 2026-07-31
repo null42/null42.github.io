@@ -40,7 +40,9 @@ Motor Control Formula Quick Reference — 10大专题，核心公式一卡掌握
 
 ### Clarke 变换（等幅值）
 
-$$i_\alpha = i_a, \quad i_\beta = \frac{i_a + 2i_b}{\sqrt{3}}$$
+$$
+i_\alpha = i_a, \quad i_\beta = \frac{i_a + 2i_b}{\sqrt{3}}
+$$
 
 - **ia, ib, ic** — 三相电流
 - **iα, iβ** — 两相静止坐标系电流
@@ -49,13 +51,17 @@ $$i_\alpha = i_a, \quad i_\beta = \frac{i_a + 2i_b}{\sqrt{3}}$$
 
 ### Clarke 变换（矩阵形式）
 
-$$\begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix} = \frac{2}{3} \begin{bmatrix} 1 & -\frac{1}{2} & -\frac{1}{2} \\ 0 & \frac{\sqrt{3}}{2} & -\frac{\sqrt{3}}{2} \end{bmatrix} \begin{bmatrix} i_a \\ i_b \\ i_c \end{bmatrix}$$
+$$
+\begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix} = \frac{2}{3} \begin{bmatrix} 1 & -\frac{1}{2} & -\frac{1}{2} \\ 0 & \frac{\sqrt{3}}{2} & -\frac{\sqrt{3}}{2} \end{bmatrix} \begin{bmatrix} i_a \\ i_b \\ i_c \end{bmatrix}
+$$
 
 2/3 等幅值系数。
 
 ### Park 变换（正变换）
 
-$$\begin{bmatrix} i_d \\ i_q \end{bmatrix} = \begin{bmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix}$$
+$$
+\begin{bmatrix} i_d \\ i_q \end{bmatrix} = \begin{bmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix}
+$$
 
 - **θ** — 转子电角度
 - **id, iq** — 旋转坐标系电流
@@ -64,7 +70,9 @@ d轴对准转子磁链方向，q轴超前90°电角度。Park变换将交流量�
 
 ### 反 Park 变换
 
-$$\begin{bmatrix} u_\alpha \\ u_\beta \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} u_d \\ u_q \end{bmatrix}$$
+$$
+\begin{bmatrix} u_\alpha \\ u_\beta \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} u_d \\ u_q \end{bmatrix}
+$$
 
 - **ud, uq** — dq轴电压指令
 - **uα, uβ** — αβ轴电压（SVPWM输入）
@@ -75,7 +83,9 @@ $$\begin{bmatrix} u_\alpha \\ u_\beta \end{bmatrix} = \begin{bmatrix} \cos\theta
 
 ### d轴电压方程
 
-$$u_d = R_s i_d + L_d \frac{di_d}{dt} - \omega_e L_q i_q$$
+$$
+u_d = R_s i_d + L_d \frac{di_d}{dt} - \omega_e L_q i_q
+$$
 
 - **ud** — d轴电压
 - **Rs** — 定子电阻
@@ -87,7 +97,9 @@ $$u_d = R_s i_d + L_d \frac{di_d}{dt} - \omega_e L_q i_q$$
 
 ### q轴电压方程
 
-$$u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_f)$$
+$$
+u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_f)
+$$
 
 - **ψf** — 永磁体磁链
 - **ωeψf** — 反电动势
@@ -96,7 +108,9 @@ $$u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_f)$$
 
 ### 稳态电压约束椭圆
 
-$$\left(\frac{u_d}{\omega_e}\right)^2 + \left(\frac{u_q}{\omega_e}\right)^2 \leq \left(\frac{U_{dc}}{\sqrt{3}}\right)^2$$
+$$
+\left(\frac{u_d}{\omega_e}\right)^2 + \left(\frac{u_q}{\omega_e}\right)^2 \leq \left(\frac{U_{dc}}{\sqrt{3}}\right)^2
+$$
 
 - **Udc** — 直流母线电压
 - **Udc/√3** — SVPWM线性调制最大相电压
@@ -109,7 +123,9 @@ $$\left(\frac{u_d}{\omega_e}\right)^2 + \left(\frac{u_q}{\omega_e}\right)^2 \leq
 
 ### PMSM 电磁转矩
 
-$$T_e = \frac{3}{2} P \left[ \psi_f i_q + (L_d - L_q) i_d i_q \right]$$
+$$
+T_e = \frac{3}{2} P \left[ \psi_f i_q + (L_d - L_q) i_d i_q \right]
+$$
 
 - **Te** — 电磁转矩 (Nm)
 - **P** — 极对数
@@ -120,7 +136,9 @@ $$T_e = \frac{3}{2} P \left[ \psi_f i_q + (L_d - L_q) i_d i_q \right]$$
 
 ### SPMSM 简化转矩
 
-$$T_e = \frac{3}{2} P \psi_f i_q = K_t \cdot i_q$$
+$$
+T_e = \frac{3}{2} P \psi_f i_q = K_t \cdot i_q
+$$
 
 - **Kt** — 转矩常数 = (3/2)Pψf (Nm/A)
 
@@ -128,7 +146,9 @@ $$T_e = \frac{3}{2} P \psi_f i_q = K_t \cdot i_q$$
 
 ### 机械运动方程
 
-$$J \frac{d\omega_m}{dt} = T_e - T_L - B\omega_m$$
+$$
+J \frac{d\omega_m}{dt} = T_e - T_L - B\omega_m
+$$
 
 - **J** — 转动惯量 (kg·m²)
 - **ωm** — 机械角速度 (rad/s)
@@ -141,7 +161,9 @@ $$J \frac{d\omega_m}{dt} = T_e - T_L - B\omega_m$$
 
 ### 电流环 PI 参数（工程整定）
 
-$$K_p = L_s \cdot \omega_c, \quad K_i = R_s \cdot \omega_c$$
+$$
+K_p = L_s \cdot \omega_c, \quad K_i = R_s \cdot \omega_c
+$$
 
 - **Ls** — 相电感 (H)
 - **Rs** — 相电阻 (Ω)
@@ -151,7 +173,9 @@ $$K_p = L_s \cdot \omega_c, \quad K_i = R_s \cdot \omega_c$$
 
 ### 速度环 PI 参数
 
-$$K_p = \frac{J \cdot \omega_s}{P}, \quad K_i = \frac{K_p \cdot \omega_s}{10}$$
+$$
+K_p = \frac{J \cdot \omega_s}{P}, \quad K_i = \frac{K_p \cdot \omega_s}{10}
+$$
 
 - **J** — 转动惯量
 - **ωs** — 速度环带宽 (rad/s)
@@ -161,7 +185,9 @@ $$K_p = \frac{J \cdot \omega_s}{P}, \quad K_i = \frac{K_p \cdot \omega_s}{10}$$
 
 ### PI 离散化（双线性变换）
 
-$$u[k] = K_p \cdot e[k] + K_i \cdot T_s \sum_{j=0}^{k} e[j]$$
+$$
+u[k] = K_p \cdot e[k] + K_i \cdot T_s \sum_{j=0}^{k} e[j]
+$$
 
 - **Ts** — 采样周期 (s)
 - **e[k]** — 第k拍误差
@@ -175,7 +201,9 @@ $$u[k] = K_p \cdot e[k] + K_i \cdot T_s \sum_{j=0}^{k} e[j]$$
 
 ### 线性调制最大相电压
 
-$$V_{ph,\max} = \frac{V_{dc}}{\sqrt{3}}$$
+$$
+V_{ph,\max} = \frac{V_{dc}}{\sqrt{3}}
+$$
 
 - **Vdc** — 直流母线电压
 - **Vph,max** — 最大输出相电压幅值
@@ -184,7 +212,9 @@ SVPWM线性调制范围为 Vdc/√3，比SPWM的 Vdc/2 高 15.47%。过调制区
 
 ### 扇区判断
 
-$$A = \text{sign}(u_\beta), \quad B = \text{sign}\!\left(\tfrac{\sqrt{3}}{2}u_\alpha - \tfrac{1}{2}u_\beta\right), \quad C = \text{sign}\!\left(-\tfrac{\sqrt{3}}{2}u_\alpha - \tfrac{1}{2}u_\beta\right)$$
+$$
+A = \text{sign}(u_\beta), \quad B = \text{sign}\!\left(\tfrac{\sqrt{3}}{2}u_\alpha - \tfrac{1}{2}u_\beta\right), \quad C = \text{sign}\!\left(-\tfrac{\sqrt{3}}{2}u_\alpha - \tfrac{1}{2}u_\beta\right)
+$$
 
 - **uα, uβ** — 参考电压矢量分量
 - **A, B, C** — 扇区标志位 (0或1)
@@ -193,7 +223,9 @@ $$A = \text{sign}(u_\beta), \quad B = \text{sign}\!\left(\tfrac{\sqrt{3}}{2}u_\a
 
 ### 作用时间计算
 
-$$T_1 = \frac{\sqrt{3} T_s}{V_{dc}} \left( u_\alpha - \frac{u_\beta}{\sqrt{3}} \right), \quad T_2 = \frac{\sqrt{3} T_s}{V_{dc}} \cdot \frac{2 u_\beta}{\sqrt{3}}$$
+$$
+T_1 = \frac{\sqrt{3} T_s}{V_{dc}} \left( u_\alpha - \frac{u_\beta}{\sqrt{3}} \right), \quad T_2 = \frac{\sqrt{3} T_s}{V_{dc}} \cdot \frac{2 u_\beta}{\sqrt{3}}
+$$
 
 - **T1, T2** — 相邻有效矢量作用时间
 - **Ts** — PWM周期
@@ -207,7 +239,9 @@ $$T_1 = \frac{\sqrt{3} T_s}{V_{dc}} \left( u_\alpha - \frac{u_\beta}{\sqrt{3}} \
 
 ### 滑模观测器 (SMO)
 
-$$\hat{e}_\alpha = K \cdot \text{sign}(\hat{i}_\alpha - i_\alpha), \quad \hat{e}_\beta = K \cdot \text{sign}(\hat{i}_\beta - i_\beta)$$
+$$
+\hat{e}_\alpha = K \cdot \text{sign}(\hat{i}_\alpha - i_\alpha), \quad \hat{e}_\beta = K \cdot \text{sign}(\hat{i}_\beta - i_\beta)
+$$
 
 - **K** — 滑模增益（需大于反电动势幅值）
 - **êα, êβ** — 估计反电动势
@@ -217,7 +251,9 @@ SMO输出需经LPF提取基波反电动势，再由PLL提取角度。K过大会�
 
 ### 锁相环 (PLL)
 
-$$\hat{\theta} = \int \hat{\omega} \, dt, \quad \hat{\omega} = K_p \sin(\Delta\theta) + K_i \int \sin(\Delta\theta) \, dt$$
+$$
+\hat{\theta} = \int \hat{\omega} \, dt, \quad \hat{\omega} = K_p \sin(\Delta\theta) + K_i \int \sin(\Delta\theta) \, dt
+$$
 
 - **Δθ** — 估计角与真实角之差
 - **Kp, Ki** — PLL比例/积分增益
@@ -227,7 +263,9 @@ $$\hat{\theta} = \int \hat{\omega} \, dt, \quad \hat{\omega} = K_p \sin(\Delta\t
 
 ### Luenberger 观测器误差动力学
 
-$$\dot{\tilde{x}} = (A - LC)\tilde{x}, \quad \tilde{x} = x - \hat{x}$$
+$$
+\dot{\tilde{x}} = (A - LC)\tilde{x}, \quad \tilde{x} = x - \hat{x}
+$$
 
 - **L** — 观测器增益矩阵
 - **A-LC** — 观测器闭环系统矩阵
@@ -241,7 +279,9 @@ $$\dot{\tilde{x}} = (A - LC)\tilde{x}, \quad \tilde{x} = x - \hat{x}$$
 
 ### Buck 变换器
 
-$$V_o = D \cdot V_{in}$$
+$$
+V_o = D \cdot V_{in}
+$$
 
 - **D** — 占空比 (0~1)
 - **Vin** — 输入电压
@@ -251,7 +291,9 @@ $$V_o = D \cdot V_{in}$$
 
 ### Boost 变换器
 
-$$V_o = \frac{V_{in}}{1 - D}$$
+$$
+V_o = \frac{V_{in}}{1 - D}
+$$
 
 - **D** — 占空比 (0~1)
 
@@ -259,7 +301,9 @@ $$V_o = \frac{V_{in}}{1 - D}$$
 
 ### 功率因数
 
-$$\text{PF} = \frac{P}{V_{rms} \cdot I_{rms}} = \cos\varphi \cdot \text{THD}_I \text{ 修正因子}$$
+$$
+\text{PF} = \frac{P}{V_{rms} \cdot I_{rms}} = \cos\varphi \cdot \text{THD}_I \text{ 修正因子}
+$$
 
 - **P** — 有功功率 (W)
 - **Vrms, Irms** — 电压/电流有效值
@@ -273,7 +317,9 @@ PF = cosφ 仅在纯正弦波下成立。含谐波时 PF = cosφ · 1/√(1+THD�
 
 ### 结温估算
 
-$$T_j = T_a + P_d \left( R_{\theta,jc} + R_{\theta,cs} + R_{\theta,sa} \right)$$
+$$
+T_j = T_a + P_d \left( R_{\theta,jc} + R_{\theta,cs} + R_{\theta,sa} \right)
+$$
 
 - **Tj** — 结温 (°C)
 - **Ta** — 环境温度
@@ -286,7 +332,9 @@ $$T_j = T_a + P_d \left( R_{\theta,jc} + R_{\theta,cs} + R_{\theta,sa} \right)$$
 
 ### IGBT 导通损耗
 
-$$P_{cond} = V_{CE0} \cdot I_{avg} + r_{CE} \cdot I_{rms}^2$$
+$$
+P_{cond} = V_{CE0} \cdot I_{avg} + r_{CE} \cdot I_{rms}^2
+$$
 
 - **VCE0** — 集电极-发射极饱和压降阈值
 - **rCE** — 导通电阻斜率
@@ -295,7 +343,9 @@ $$P_{cond} = V_{CE0} \cdot I_{avg} + r_{CE} \cdot I_{rms}^2$$
 
 ### 开关损耗估算
 
-$$P_{sw} = \frac{f_{sw}}{\pi} \left( E_{on} + E_{off} \right) \cdot \frac{I_C}{I_{C,nom}} \cdot \frac{V_{CE}}{V_{CE,nom}}$$
+$$
+P_{sw} = \frac{f_{sw}}{\pi} \left( E_{on} + E_{off} \right) \cdot \frac{I_C}{I_{C,nom}} \cdot \frac{V_{CE}}{V_{CE,nom}}
+$$
 
 - **fsw** — 开关频率
 - **Eon, Eoff** — 标称开通/关断能量
@@ -309,7 +359,9 @@ $$P_{sw} = \frac{f_{sw}}{\pi} \left( E_{on} + E_{off} \right) \cdot \frac{I_C}{I
 
 ### 母线电容容量估算
 
-$$C = \frac{P}{2 \cdot f \cdot V_{pp} \cdot V_{dc}}$$
+$$
+C = \frac{P}{2 \cdot f \cdot V_{pp} \cdot V_{dc}}
+$$
 
 - **P** — 电机功率 (W)
 - **f** — 电网频率 (Hz)
@@ -320,7 +372,9 @@ $$C = \frac{P}{2 \cdot f \cdot V_{pp} \cdot V_{dc}}$$
 
 ### 纹波电流有效值
 
-$$I_{C,rms} = \sqrt{I_{in,rms}^2 - I_{dc,avg}^2}$$
+$$
+I_{C,rms} = \sqrt{I_{in,rms}^2 - I_{dc,avg}^2}
+$$
 
 - **IC,rms** — 电容纹波电流
 - **Iin,rms** — 输入电流有效值
@@ -334,7 +388,9 @@ $$I_{C,rms} = \sqrt{I_{in,rms}^2 - I_{dc,avg}^2}$$
 
 ### CAN 位时间
 
-$$t_{bit} = \frac{1}{f_{baud}} = \frac{1 + \text{TSEG1} + \text{TSEG2}}{f_{CAN\_CLK}}$$
+$$
+t_{bit} = \frac{1}{f_{baud}} = \frac{1 + \text{TSEG1} + \text{TSEG2}}{f_{CAN\_CLK}}
+$$
 
 - **fbaud** — 波特率 (bps)
 - **TSEG1** — 相位缓冲段1 (时间份额)
@@ -345,7 +401,9 @@ $$t_{bit} = \frac{1}{f_{baud}} = \frac{1 + \text{TSEG1} + \text{TSEG2}}{f_{CAN\_
 
 ### Modbus CRC-16
 
-$$\text{CRC} = \text{CRC16}(data), \quad \text{多项式}: 0xA001 \text{ (反转的 } x^{16}+x^{15}+x^2+1\text{)}$$
+$$
+\text{CRC} = \text{CRC16}(data), \quad \text{多项式}: 0xA001 \text{ (反转的 } x^{16}+x^{15}+x^2+1\text{)}
+$$
 
 - **0xA001** — 反转多项式
 - **初始值** — 0xFFFF
@@ -354,7 +412,9 @@ Modbus RTU使用CRC-16/MODBUS，正向多项式0x8005，代码实现中通常用
 
 ### CAN 采样点位置
 
-$$\text{Sample Point} = \frac{1 + \text{TSEG1}}{1 + \text{TSEG1} + \text{TSEG2}} \times 100\%$$
+$$
+\text{Sample Point} = \frac{1 + \text{TSEG1}}{1 + \text{TSEG1} + \text{TSEG2}} \times 100\%
+$$
 
 推荐值 75%~87.5%。
 
