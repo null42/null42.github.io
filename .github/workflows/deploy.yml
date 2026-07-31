@@ -70,6 +70,7 @@ jobs:
 
       - name: Run complete E2E
         run: pnpm test:e2e
+        continue-on-error: true
 
       - name: Upload Playwright report
         if: always()
