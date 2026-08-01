@@ -14,7 +14,7 @@ const mapNavigation = navigation as Array<{ id: string; title: string; routes: A
 				{route.stages.map((stage) => <section class="knowledge-map__stage">
 					<header><h4>{stage.title}</h4><span>{stage.articles.length} 篇</span></header>
 					<ul>{stage.articles.map((article) => <li>
-						{article.slug ? <a href={`/posts/${article.slug}/`}><strong>{article.title}</strong></a> : <strong data-knowledge-article-placeholder={article.articleId}>{article.title}</strong>}
+						{article.slug ? <a href={`/posts/${article.slug.toLowerCase()}/`}><strong>{article.title}</strong></a> : <strong data-knowledge-article-placeholder={article.articleId}>{article.title}</strong>}
 						<div class="knowledge-map__meta">{article.difficulty && <span>{article.difficulty}</span>}{article.quality && <span>{article.quality}</span>}{article.tags?.slice(0, 3).map((tag) => <span>#{tag}</span>)}</div>
 					</li>)}</ul>
 				</section>)}

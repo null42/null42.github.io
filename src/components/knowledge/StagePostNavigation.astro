@@ -4,7 +4,7 @@ interface Props { previous?: ArticleLink; next?: ArticleLink }
 const { previous, next } = Astro.props;
 ---
 {(previous || next) && <nav class="stage-post-navigation" aria-label="当前阶段文章导航">
-	{previous?.slug ? <a rel="prev" href={`/posts/${previous.slug}/`}><span>上一篇</span><strong>{previous.title}</strong></a> : <span />}
-	{next?.slug ? <a rel="next" href={`/posts/${next.slug}/`}><span>下一篇</span><strong>{next.title}</strong></a> : <span />}
+	{previous?.slug ? <a rel="prev" href={`/posts/${previous.slug.toLowerCase()}/`}><span>上一篇</span><strong>{previous.title}</strong></a> : <span />}
+	{next?.slug ? <a rel="next" href={`/posts/${next.slug.toLowerCase()}/`}><span>下一篇</span><strong>{next.title}</strong></a> : <span />}
 </nav>}
 <style>.stage-post-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-block: 1.5rem; }.stage-post-navigation a { display: grid; gap: .25rem; padding: 1rem; border-radius: var(--radius-large); color: inherit; text-decoration: none; background: var(--card-bg); box-shadow: var(--shadow-sm); }.stage-post-navigation a[rel="next"] { text-align: end; }.stage-post-navigation span { color: var(--meta-color); font-size: .8rem; }</style>

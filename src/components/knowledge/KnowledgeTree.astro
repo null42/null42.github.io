@@ -28,7 +28,7 @@ const { currentSectionId, currentRouteId, currentStageId, currentArticleId, stor
 									<li data-tree-node={`stage:${section.id}:${route.id}:${stage.id}`}>
 										<button type="button" data-tree-toggle aria-expanded={section.id === currentSectionId && route.id === currentRouteId && stage.id === currentStageId ? "true" : "false"} aria-controls={`${instanceId}-stage-${section.id}-${route.id}-${stage.id}`}>{stage.title}</button>
 										<ul id={`${instanceId}-stage-${section.id}-${route.id}-${stage.id}`} hidden={section.id !== currentSectionId || route.id !== currentRouteId || stage.id !== currentStageId}>
-											{stage.articles.map((article) => <li>{article.slug ? <a data-tree-article={article.articleId} href={`/posts/${article.slug}/`}>{article.title}</a> : <span data-tree-article-placeholder={article.articleId}>{article.title}</span>}</li>)}
+											{stage.articles.map((article) => <li>{article.slug ? <a data-tree-article={article.articleId} href={`/posts/${article.slug.toLowerCase()}/`}>{article.title}</a> : <span data-tree-article-placeholder={article.articleId}>{article.title}</span>}</li>)}
 										</ul>
 									</li>
 								))}
