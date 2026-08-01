@@ -92,7 +92,9 @@ function compareArticles(left: CanonicalArticleRecord, right: CanonicalArticleRe
 }
 function toNavigationArticle(record: CanonicalArticleRecord): NavigationArticle {
   const placeholder = record.publicSurface === 'placeholder' || record.visibility === 'encrypted'
-  return { articleId: record.articleId, title: record.title, ...(record.explicitOrder ? { order: record.order } : {}), placeholder, ...(placeholder ? {} : { slug: record.slug, difficulty: record.difficulty, tags: record.tags || [], quality: record.quality }) }
+  // Astro 对 index.md 生成目录路径 URL（不带 /index/），需要在 slug 中去掉 /index 后缀
+  const urlSlug = record.slug.replace(/\/index$/, '')
+  return { articleId: record.articleId, title: record.title, ...(record.explicitOrder ? { order: record.order } : {}), placeholder, ...(placeholder ? {} : { slug: urlSlug, difficulty: record.difficulty, tags: record.tags || [], quality: record.quality }) }
 }
 function assertUniqueExplicitArticleOrders(records: CanonicalArticleRecord[], label: string): void {
   const orders = new Set<number>()
