@@ -33,17 +33,13 @@ export interface PublishManifestIssue {
 }
 
 export const forbiddenContentPrefixes = [
-  'content/power/fundamentals-work/',
-  'content/power/concepts/',
   'content/power/lessons/',
   'content/motor/simulations/'
 ]
 
 export const forbiddenAssetPatterns = [
   'content_motor_simulations',
-  'content_power_concepts',
-  'content_power_lessons',
-  'content_power_fundamentals-work'
+  'content_power_lessons'
 ]
 
 export async function buildPublishManifest(articles: ArticleRecord[]): Promise<PublishManifest> {

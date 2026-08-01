@@ -194,10 +194,22 @@
       "finalUrl": "/38/"
     },
     {
+      "path": "/39/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/39/"
+    },
+    {
       "path": "/4/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/4/"
+    },
+    {
+      "path": "/40/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/40/"
     },
     {
       "path": "/404/",
@@ -206,10 +218,112 @@
       "finalUrl": "/404/"
     },
     {
+      "path": "/41/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/41/"
+    },
+    {
+      "path": "/42/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/42/"
+    },
+    {
+      "path": "/43/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/43/"
+    },
+    {
+      "path": "/44/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/44/"
+    },
+    {
+      "path": "/45/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/45/"
+    },
+    {
+      "path": "/46/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/46/"
+    },
+    {
+      "path": "/47/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/47/"
+    },
+    {
+      "path": "/48/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/48/"
+    },
+    {
+      "path": "/49/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/49/"
+    },
+    {
       "path": "/5/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/5/"
+    },
+    {
+      "path": "/50/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/50/"
+    },
+    {
+      "path": "/51/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/51/"
+    },
+    {
+      "path": "/52/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/52/"
+    },
+    {
+      "path": "/53/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/53/"
+    },
+    {
+      "path": "/54/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/54/"
+    },
+    {
+      "path": "/55/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/55/"
+    },
+    {
+      "path": "/56/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/56/"
+    },
+    {
+      "path": "/57/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/57/"
     },
     {
       "path": "/6/",
@@ -881,6 +995,20 @@
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-21-parameter-identification/",
       "target": "/posts/motor/algorithm/alg-21-parameter-identification/"
+    },
+    {
+      "path": "/content/motor/algorithm/ALG-22-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/algorithm/alg-22-assessment/",
+      "target": "/posts/motor/algorithm/alg-22-assessment/"
+    },
+    {
+      "path": "/content/motor/algorithm/ALG-22-BLDC-Six-Step-Commutation.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/algorithm/alg-22-bldc-six-step-commutation/",
+      "target": "/posts/motor/algorithm/alg-22-bldc-six-step-commutation/"
     },
     {
       "path": "/content/motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture.html",
@@ -2073,6 +2201,167 @@
       "target": "/posts/motor/mechanical/mec-03-multi-turn-encoder/"
     },
     {
+      "path": "/content/motor/motion-control/MC-00-Index.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-00-index/",
+      "target": "/posts/motor/motion-control/mc-00-index/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-01-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-01-assessment/",
+      "target": "/posts/motor/motion-control/mc-01-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-01-PMSM-Model.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-01-pmsm-model/",
+      "target": "/posts/motor/motion-control/mc-01-pmsm-model/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-02-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-02-assessment/",
+      "target": "/posts/motor/motion-control/mc-02-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-02-Clarke-Park.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-02-clarke-park/",
+      "target": "/posts/motor/motion-control/mc-02-clarke-park/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-03-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-03-assessment/",
+      "target": "/posts/motor/motion-control/mc-03-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-03-Space-Vector.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-03-space-vector/",
+      "target": "/posts/motor/motion-control/mc-03-space-vector/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-04-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-04-assessment/",
+      "target": "/posts/motor/motion-control/mc-04-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-04-FOC-Signal-Chain.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-04-foc-signal-chain/",
+      "target": "/posts/motor/motion-control/mc-04-foc-signal-chain/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-05-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-05-assessment/",
+      "target": "/posts/motor/motion-control/mc-05-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-05-SVPWM-2Level.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-05-svpwm-2level/",
+      "target": "/posts/motor/motion-control/mc-05-svpwm-2level/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-06-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-06-assessment/",
+      "target": "/posts/motor/motion-control/mc-06-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-06-Current-Loop.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-06-current-loop/",
+      "target": "/posts/motor/motion-control/mc-06-current-loop/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-07-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-07-assessment/",
+      "target": "/posts/motor/motion-control/mc-07-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-07-Speed-Position-Loop.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-07-speed-position-loop/",
+      "target": "/posts/motor/motion-control/mc-07-speed-position-loop/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-08-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-08-assessment/",
+      "target": "/posts/motor/motion-control/mc-08-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-08-Sensorless-Observers.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-08-sensorless-observers/",
+      "target": "/posts/motor/motion-control/mc-08-sensorless-observers/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-09-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-09-assessment/",
+      "target": "/posts/motor/motion-control/mc-09-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-09-IPMSM-vs-SPMSM.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/",
+      "target": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-10-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-10-assessment/",
+      "target": "/posts/motor/motion-control/mc-10-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-10-Parameter-Sensitivity.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-10-parameter-sensitivity/",
+      "target": "/posts/motor/motion-control/mc-10-parameter-sensitivity/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-11-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-11-assessment/",
+      "target": "/posts/motor/motion-control/mc-11-assessment/"
+    },
+    {
+      "path": "/content/motor/motion-control/MC-11-PWM-Sampling-Timing.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/",
+      "target": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/"
+    },
+    {
       "path": "/content/motor/motion-control/MC-MC-01-assessment.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -2815,6 +3104,1133 @@
       "target": "/posts/power/archive/readme/"
     },
     {
+      "path": "/content/power/concepts/control/single-phase-bypass-sync-transfer.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-bypass-sync-transfer/",
+      "target": "/posts/power/concepts/control/single-phase-bypass-sync-transfer/"
+    },
+    {
+      "path": "/content/power/concepts/control/single-phase-inverter-pr-control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-inverter-pr-control/",
+      "target": "/posts/power/concepts/control/single-phase-inverter-pr-control/"
+    },
+    {
+      "path": "/content/power/concepts/control/single-phase-pll-bandwidth.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-pll-bandwidth/",
+      "target": "/posts/power/concepts/control/single-phase-pll-bandwidth/"
+    },
+    {
+      "path": "/content/power/concepts/control/single-phase-pll-lock-detector.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-pll-lock-detector/",
+      "target": "/posts/power/concepts/control/single-phase-pll-lock-detector/"
+    },
+    {
+      "path": "/content/power/concepts/control/single-phase-srf-pll.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-srf-pll/",
+      "target": "/posts/power/concepts/control/single-phase-srf-pll/"
+    },
+    {
+      "path": "/content/power/concepts/control/three-phase-current-loop-decoupling.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/three-phase-current-loop-decoupling/",
+      "target": "/posts/power/concepts/control/three-phase-current-loop-decoupling/"
+    },
+    {
+      "path": "/content/power/concepts/control/three-phase-srf-pll.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/three-phase-srf-pll/",
+      "target": "/posts/power/concepts/control/three-phase-srf-pll/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/boost-c-firmware-skeleton.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-c-firmware-skeleton/",
+      "target": "/posts/power/concepts/embedded/boost-c-firmware-skeleton/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/boost-fault-state-machine.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-fault-state-machine/",
+      "target": "/posts/power/concepts/embedded/boost-fault-state-machine/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/boost-telemetry-fault-log.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-telemetry-fault-log/",
+      "target": "/posts/power/concepts/embedded/boost-telemetry-fault-log/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/single-phase-inverter-fault-state-machine.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/single-phase-inverter-fault-state-machine/",
+      "target": "/posts/power/concepts/embedded/single-phase-inverter-fault-state-machine/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/single-phase-inverter-rms-protection.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/single-phase-inverter-rms-protection/",
+      "target": "/posts/power/concepts/embedded/single-phase-inverter-rms-protection/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/tms320f28075-peripheral-bringup.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/tms320f28075-peripheral-bringup/",
+      "target": "/posts/power/concepts/embedded/tms320f28075-peripheral-bringup/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-c-firmware-skeleton.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-firmware-skeleton/",
+      "target": "/posts/power/concepts/embedded/ups-c-firmware-skeleton/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-c-parameter-table.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-parameter-table/",
+      "target": "/posts/power/concepts/embedded/ups-c-parameter-table/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-c-protection-flags.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-protection-flags/",
+      "target": "/posts/power/concepts/embedded/ups-c-protection-flags/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-command-parser.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-command-parser/",
+      "target": "/posts/power/concepts/embedded/ups-command-parser/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-command-response.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-command-response/",
+      "target": "/posts/power/concepts/embedded/ups-command-response/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-fault-code-logging.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-fault-code-logging/",
+      "target": "/posts/power/concepts/embedded/ups-fault-code-logging/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-fault-latch-debounce.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-fault-latch-debounce/",
+      "target": "/posts/power/concepts/embedded/ups-fault-latch-debounce/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-firmware-scheduler.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-firmware-scheduler/",
+      "target": "/posts/power/concepts/embedded/ups-firmware-scheduler/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-mode-state-machine.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-mode-state-machine/",
+      "target": "/posts/power/concepts/embedded/ups-mode-state-machine/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-parameter-access.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-access/",
+      "target": "/posts/power/concepts/embedded/ups-parameter-access/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-parameter-save-scheduler.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-save-scheduler/",
+      "target": "/posts/power/concepts/embedded/ups-parameter-save-scheduler/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-parameter-storage.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-storage/",
+      "target": "/posts/power/concepts/embedded/ups-parameter-storage/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-system-fault-closure.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-system-fault-closure/",
+      "target": "/posts/power/concepts/embedded/ups-system-fault-closure/"
+    },
+    {
+      "path": "/content/power/concepts/embedded/ups-telemetry-frame.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-telemetry-frame/",
+      "target": "/posts/power/concepts/embedded/ups-telemetry-frame/"
+    },
+    {
+      "path": "/content/power/concepts/pcs/grid-following-pq-control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/grid-following-pq-control/",
+      "target": "/posts/power/concepts/pcs/grid-following-pq-control/"
+    },
+    {
+      "path": "/content/power/concepts/pcs/grid-forming-vf-droop.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/grid-forming-vf-droop/",
+      "target": "/posts/power/concepts/pcs/grid-forming-vf-droop/"
+    },
+    {
+      "path": "/content/power/concepts/pcs/lcl-filter-active-damping.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/lcl-filter-active-damping/",
+      "target": "/posts/power/concepts/pcs/lcl-filter-active-damping/"
+    },
+    {
+      "path": "/content/power/concepts/pcs/storage-dcdc-mode-state-machine.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/storage-dcdc-mode-state-machine/",
+      "target": "/posts/power/concepts/pcs/storage-dcdc-mode-state-machine/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/boost-converter.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/boost-converter/",
+      "target": "/posts/power/concepts/power-electronics/boost-converter/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/boost-firmware-skeleton.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/boost-firmware-skeleton/",
+      "target": "/posts/power/concepts/power-electronics/boost-firmware-skeleton/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/ccm-dcm.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/ccm-dcm/",
+      "target": "/posts/power/concepts/power-electronics/ccm-dcm/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/discrete-pi-boost.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/discrete-pi-boost/",
+      "target": "/posts/power/concepts/power-electronics/discrete-pi-boost/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/pwm-sampling.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/pwm-sampling/",
+      "target": "/posts/power/concepts/power-electronics/pwm-sampling/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-inverter-lc-filter.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-inverter-lc-filter/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-inverter-lc-filter/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-average-controller.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-average-controller/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-average-controller/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-current-loop.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-current-loop/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-current-loop/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-current-reference.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-current-reference/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-current-reference/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-pwm-delay.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-pwm-delay/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-pwm-delay/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-voltage-feedforward.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-feedforward/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-feedforward/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/single-phase-pfc-voltage-loop.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-loop/",
+      "target": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-loop/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/three-level-npc-inverter.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/three-level-npc-inverter/",
+      "target": "/posts/power/concepts/power-electronics/three-level-npc-inverter/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/three-phase-power-dq-transform.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/three-phase-power-dq-transform/",
+      "target": "/posts/power/concepts/power-electronics/three-phase-power-dq-transform/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/two-level-svpwm.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/two-level-svpwm/",
+      "target": "/posts/power/concepts/power-electronics/two-level-svpwm/"
+    },
+    {
+      "path": "/content/power/concepts/power-electronics/vienna-pfc-neutral-point-balance.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/",
+      "target": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/",
+      "target": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/final/125kva-ups-final-report.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/",
+      "target": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/final/fault-injection-report.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/",
+      "target": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/final/model-consistency-report.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/",
+      "target": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/final/oral-defense-question-bank.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/",
+      "target": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/final/unconfirmed-product-items.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/",
+      "target": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/",
+      "target": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/MISSION.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/mission/",
+      "target": "/posts/power/courses/125kva-ups-14-week/mission/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/NOTES.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/notes/",
+      "target": "/posts/power/courses/125kva-ups-14-week/notes/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/",
+      "target": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/projects/f28075-control/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/QUALITY_STANDARD.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/quality_standard/",
+      "target": "/posts/power/courses/125kva-ups-14-week/quality_standard/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/REBUILD_STATUS.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/rebuild_status/",
+      "target": "/posts/power/courses/125kva-ups-14-week/rebuild_status/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/reference/figure-manifest.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/",
+      "target": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/reference/source/topology-confirmation.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/",
+      "target": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/RESOURCES.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/resources/",
+      "target": "/posts/power/courses/125kva-ups-14-week/resources/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/roadmap/master-plan.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/",
+      "target": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/balancer/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/common/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/ttype/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/vienna/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/",
+      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-01.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-02.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-03.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-04.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-05.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-06.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-07.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-08.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-09.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-10.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-11.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-12.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-13.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/"
+    },
+    {
+      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-14.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/",
+      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/001-preface.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/001-preface/",
+      "target": "/posts/power/fundamentals-work/chunks/001-preface/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/002-chapter-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/002-chapter-1/",
+      "target": "/posts/power/fundamentals-work/chunks/002-chapter-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/003-chapter-2-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/003-chapter-2-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/003-chapter-2-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/004-chapter-2-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/004-chapter-2-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/004-chapter-2-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/005-chapter-3-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/005-chapter-3-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/005-chapter-3-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/006-chapter-3-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/006-chapter-3-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/006-chapter-3-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/007-chapter-4-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/007-chapter-4-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/007-chapter-4-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/008-chapter-4-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/008-chapter-4-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/008-chapter-4-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/009-chapter-4-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/009-chapter-4-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/009-chapter-4-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/010-chapter-4-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/010-chapter-4-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/010-chapter-4-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/011-chapter-5-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/011-chapter-5-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/011-chapter-5-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/012-chapter-5-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/012-chapter-5-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/012-chapter-5-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/013-chapter-6-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/013-chapter-6-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/013-chapter-6-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/014-chapter-6-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/014-chapter-6-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/014-chapter-6-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/015-chapter-6-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/015-chapter-6-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/015-chapter-6-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/016-chapter-7-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/016-chapter-7-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/016-chapter-7-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/017-chapter-7-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/017-chapter-7-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/017-chapter-7-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/018-chapter-7-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/018-chapter-7-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/018-chapter-7-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/019-chapter-7-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/019-chapter-7-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/019-chapter-7-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/020-chapter-8-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/020-chapter-8-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/020-chapter-8-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/021-chapter-8-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/021-chapter-8-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/021-chapter-8-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/022-chapter-8-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/022-chapter-8-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/022-chapter-8-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/023-chapter-8-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/023-chapter-8-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/023-chapter-8-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/024-chapter-9-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/024-chapter-9-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/024-chapter-9-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/025-chapter-9-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/025-chapter-9-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/025-chapter-9-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/026-chapter-9-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/026-chapter-9-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/026-chapter-9-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/027-chapter-10-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/027-chapter-10-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/027-chapter-10-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/028-chapter-10-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/028-chapter-10-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/028-chapter-10-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/029-chapter-10-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/029-chapter-10-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/029-chapter-10-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/030-chapter-11-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/030-chapter-11-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/030-chapter-11-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/031-chapter-11-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/031-chapter-11-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/031-chapter-11-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/032-chapter-12-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/032-chapter-12-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/032-chapter-12-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/033-chapter-12-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/033-chapter-12-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/033-chapter-12-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/034-chapter-13-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/034-chapter-13-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/034-chapter-13-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/035-chapter-13-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/035-chapter-13-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/035-chapter-13-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/036-chapter-14-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/036-chapter-14-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/036-chapter-14-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/037-chapter-14-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/037-chapter-14-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/037-chapter-14-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/038-chapter-15-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/038-chapter-15-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/038-chapter-15-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/039-chapter-15-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/039-chapter-15-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/039-chapter-15-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/040-chapter-16-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/040-chapter-16-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/040-chapter-16-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/041-chapter-16-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/041-chapter-16-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/041-chapter-16-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/042-chapter-16-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/042-chapter-16-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/042-chapter-16-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/043-chapter-17-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/043-chapter-17-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/043-chapter-17-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/044-chapter-17-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/044-chapter-17-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/044-chapter-17-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/045-chapter-17-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/045-chapter-17-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/045-chapter-17-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/046-chapter-18-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/046-chapter-18-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/046-chapter-18-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/047-chapter-18-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/047-chapter-18-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/047-chapter-18-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/048-chapter-18-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/048-chapter-18-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/048-chapter-18-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/049-chapter-18-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/049-chapter-18-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/049-chapter-18-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/050-chapter-19-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/050-chapter-19-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/050-chapter-19-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/051-chapter-19-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/051-chapter-19-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/051-chapter-19-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/052-chapter-19-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/052-chapter-19-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/052-chapter-19-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/053-chapter-20.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/053-chapter-20/",
+      "target": "/posts/power/fundamentals-work/chunks/053-chapter-20/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/054-chapter-21-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/054-chapter-21-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/054-chapter-21-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/055-chapter-21-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/055-chapter-21-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/055-chapter-21-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/056-chapter-21-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/056-chapter-21-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/056-chapter-21-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/057-chapter-21-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/057-chapter-21-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/057-chapter-21-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/058-chapter-22-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/058-chapter-22-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/058-chapter-22-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/059-chapter-22-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/059-chapter-22-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/059-chapter-22-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/060-chapter-22-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/060-chapter-22-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/060-chapter-22-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/061-chapter-22-part-4.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/061-chapter-22-part-4/",
+      "target": "/posts/power/fundamentals-work/chunks/061-chapter-22-part-4/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/062-chapter-23-part-1.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/062-chapter-23-part-1/",
+      "target": "/posts/power/fundamentals-work/chunks/062-chapter-23-part-1/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/063-chapter-23-part-2.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/063-chapter-23-part-2/",
+      "target": "/posts/power/fundamentals-work/chunks/063-chapter-23-part-2/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/064-chapter-23-part-3.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/064-chapter-23-part-3/",
+      "target": "/posts/power/fundamentals-work/chunks/064-chapter-23-part-3/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/065-appendices.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/065-appendices/",
+      "target": "/posts/power/fundamentals-work/chunks/065-appendices/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/066-references.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/066-references/",
+      "target": "/posts/power/fundamentals-work/chunks/066-references/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/chunks/067-index.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/067-index/",
+      "target": "/posts/power/fundamentals-work/chunks/067-index/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/glossary-global.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/glossary-global/",
+      "target": "/posts/power/fundamentals-work/glossary-global/"
+    },
+    {
+      "path": "/content/power/fundamentals-work/manifest.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/manifest/",
+      "target": "/posts/power/fundamentals-work/manifest/"
+    },
+    {
       "path": "/content/power/getting-started.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -3482,6 +4898,18 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-21-parameter-identification/"
+    },
+    {
+      "path": "/posts/motor/algorithm/alg-22-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/algorithm/alg-22-assessment/"
+    },
+    {
+      "path": "/posts/motor/algorithm/alg-22-bldc-six-step-commutation/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/algorithm/alg-22-bldc-six-step-commutation/"
     },
     {
       "path": "/posts/motor/algorithm/hpm-mc/sdk-01-hpm-mc-architecture/",
@@ -4504,6 +5932,144 @@
       "finalUrl": "/posts/motor/mechanical/mec-03-multi-turn-encoder/"
     },
     {
+      "path": "/posts/motor/motion-control/mc-00-index/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-00-index/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-01-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-01-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-01-pmsm-model/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-01-pmsm-model/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-02-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-02-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-02-clarke-park/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-02-clarke-park/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-03-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-03-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-03-space-vector/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-03-space-vector/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-04-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-04-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-04-foc-signal-chain/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-04-foc-signal-chain/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-05-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-05-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-05-svpwm-2level/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-05-svpwm-2level/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-06-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-06-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-06-current-loop/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-06-current-loop/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-07-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-07-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-07-speed-position-loop/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-07-speed-position-loop/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-08-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-08-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-08-sensorless-observers/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-08-sensorless-observers/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-09-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-09-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-10-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-10-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-10-parameter-sensitivity/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-10-parameter-sensitivity/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-11-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-11-assessment/"
+    },
+    {
+      "path": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/"
+    },
+    {
       "path": "/posts/motor/motion-control/mc-mc-01-assessment/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -5138,6 +6704,972 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/power/archive/readme/"
+    },
+    {
+      "path": "/posts/power/concepts/control/single-phase-bypass-sync-transfer/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-bypass-sync-transfer/"
+    },
+    {
+      "path": "/posts/power/concepts/control/single-phase-inverter-pr-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-inverter-pr-control/"
+    },
+    {
+      "path": "/posts/power/concepts/control/single-phase-pll-bandwidth/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-pll-bandwidth/"
+    },
+    {
+      "path": "/posts/power/concepts/control/single-phase-pll-lock-detector/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-pll-lock-detector/"
+    },
+    {
+      "path": "/posts/power/concepts/control/single-phase-srf-pll/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/single-phase-srf-pll/"
+    },
+    {
+      "path": "/posts/power/concepts/control/three-phase-current-loop-decoupling/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/three-phase-current-loop-decoupling/"
+    },
+    {
+      "path": "/posts/power/concepts/control/three-phase-srf-pll/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/control/three-phase-srf-pll/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/boost-c-firmware-skeleton/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-c-firmware-skeleton/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/boost-fault-state-machine/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-fault-state-machine/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/boost-telemetry-fault-log/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/boost-telemetry-fault-log/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/single-phase-inverter-fault-state-machine/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/single-phase-inverter-fault-state-machine/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/single-phase-inverter-rms-protection/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/single-phase-inverter-rms-protection/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/tms320f28075-peripheral-bringup/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/tms320f28075-peripheral-bringup/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-c-firmware-skeleton/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-firmware-skeleton/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-c-parameter-table/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-parameter-table/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-c-protection-flags/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-c-protection-flags/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-command-parser/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-command-parser/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-command-response/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-command-response/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-fault-code-logging/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-fault-code-logging/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-fault-latch-debounce/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-fault-latch-debounce/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-firmware-scheduler/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-firmware-scheduler/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-mode-state-machine/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-mode-state-machine/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-parameter-access/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-access/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-parameter-save-scheduler/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-save-scheduler/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-parameter-storage/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-parameter-storage/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-system-fault-closure/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-system-fault-closure/"
+    },
+    {
+      "path": "/posts/power/concepts/embedded/ups-telemetry-frame/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/embedded/ups-telemetry-frame/"
+    },
+    {
+      "path": "/posts/power/concepts/pcs/grid-following-pq-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/grid-following-pq-control/"
+    },
+    {
+      "path": "/posts/power/concepts/pcs/grid-forming-vf-droop/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/grid-forming-vf-droop/"
+    },
+    {
+      "path": "/posts/power/concepts/pcs/lcl-filter-active-damping/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/lcl-filter-active-damping/"
+    },
+    {
+      "path": "/posts/power/concepts/pcs/storage-dcdc-mode-state-machine/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/pcs/storage-dcdc-mode-state-machine/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/boost-converter/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/boost-converter/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/boost-firmware-skeleton/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/boost-firmware-skeleton/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/ccm-dcm/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/ccm-dcm/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/discrete-pi-boost/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/discrete-pi-boost/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/pwm-sampling/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/pwm-sampling/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-inverter-lc-filter/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-inverter-lc-filter/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-average-controller/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-average-controller/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-current-loop/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-current-loop/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-current-reference/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-current-reference/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-pwm-delay/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-pwm-delay/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-feedforward/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-feedforward/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-loop/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/single-phase-pfc-voltage-loop/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/three-level-npc-inverter/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/three-level-npc-inverter/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/three-phase-power-dq-transform/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/three-phase-power-dq-transform/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/two-level-svpwm/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/two-level-svpwm/"
+    },
+    {
+      "path": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/mission/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/mission/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/notes/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/notes/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/quality_standard/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/quality_standard/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/rebuild_status/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/rebuild_status/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/resources/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/resources/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/"
+    },
+    {
+      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/001-preface/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/001-preface/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/002-chapter-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/002-chapter-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/003-chapter-2-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/003-chapter-2-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/004-chapter-2-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/004-chapter-2-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/005-chapter-3-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/005-chapter-3-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/006-chapter-3-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/006-chapter-3-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/007-chapter-4-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/007-chapter-4-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/008-chapter-4-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/008-chapter-4-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/009-chapter-4-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/009-chapter-4-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/010-chapter-4-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/010-chapter-4-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/011-chapter-5-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/011-chapter-5-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/012-chapter-5-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/012-chapter-5-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/013-chapter-6-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/013-chapter-6-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/014-chapter-6-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/014-chapter-6-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/015-chapter-6-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/015-chapter-6-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/016-chapter-7-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/016-chapter-7-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/017-chapter-7-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/017-chapter-7-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/018-chapter-7-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/018-chapter-7-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/019-chapter-7-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/019-chapter-7-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/020-chapter-8-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/020-chapter-8-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/021-chapter-8-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/021-chapter-8-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/022-chapter-8-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/022-chapter-8-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/023-chapter-8-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/023-chapter-8-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/024-chapter-9-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/024-chapter-9-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/025-chapter-9-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/025-chapter-9-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/026-chapter-9-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/026-chapter-9-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/027-chapter-10-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/027-chapter-10-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/028-chapter-10-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/028-chapter-10-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/029-chapter-10-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/029-chapter-10-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/030-chapter-11-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/030-chapter-11-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/031-chapter-11-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/031-chapter-11-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/032-chapter-12-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/032-chapter-12-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/033-chapter-12-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/033-chapter-12-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/034-chapter-13-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/034-chapter-13-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/035-chapter-13-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/035-chapter-13-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/036-chapter-14-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/036-chapter-14-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/037-chapter-14-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/037-chapter-14-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/038-chapter-15-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/038-chapter-15-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/039-chapter-15-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/039-chapter-15-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/040-chapter-16-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/040-chapter-16-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/041-chapter-16-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/041-chapter-16-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/042-chapter-16-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/042-chapter-16-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/043-chapter-17-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/043-chapter-17-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/044-chapter-17-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/044-chapter-17-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/045-chapter-17-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/045-chapter-17-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/046-chapter-18-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/046-chapter-18-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/047-chapter-18-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/047-chapter-18-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/048-chapter-18-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/048-chapter-18-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/049-chapter-18-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/049-chapter-18-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/050-chapter-19-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/050-chapter-19-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/051-chapter-19-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/051-chapter-19-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/052-chapter-19-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/052-chapter-19-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/053-chapter-20/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/053-chapter-20/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/054-chapter-21-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/054-chapter-21-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/055-chapter-21-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/055-chapter-21-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/056-chapter-21-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/056-chapter-21-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/057-chapter-21-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/057-chapter-21-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/058-chapter-22-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/058-chapter-22-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/059-chapter-22-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/059-chapter-22-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/060-chapter-22-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/060-chapter-22-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/061-chapter-22-part-4/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/061-chapter-22-part-4/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/062-chapter-23-part-1/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/062-chapter-23-part-1/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/063-chapter-23-part-2/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/063-chapter-23-part-2/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/064-chapter-23-part-3/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/064-chapter-23-part-3/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/065-appendices/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/065-appendices/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/066-references/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/066-references/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/chunks/067-index/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/chunks/067-index/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/glossary-global/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/glossary-global/"
+    },
+    {
+      "path": "/posts/power/fundamentals-work/manifest/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/fundamentals-work/manifest/"
     },
     {
       "path": "/posts/power/getting-started/",

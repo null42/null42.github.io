@@ -1,9 +1,9 @@
 {
   "counts": {
     "sections": 3,
-    "routes": 15,
-    "stages": 37,
-    "articles": 371
+    "routes": 17,
+    "stages": 43,
+    "articles": 557
   },
   "relationships": {
     "sections": [
@@ -23,7 +23,15 @@
         "sectionId": "power"
       },
       {
+        "id": "concepts",
+        "sectionId": "power"
+      },
+      {
         "id": "project",
+        "sectionId": "power"
+      },
+      {
+        "id": "textbook",
         "sectionId": "power"
       },
       {
@@ -91,6 +99,26 @@
         "routeId": "roadmap"
       },
       {
+        "id": "concepts-control",
+        "sectionId": "power",
+        "routeId": "concepts"
+      },
+      {
+        "id": "concepts-embedded",
+        "sectionId": "power",
+        "routeId": "concepts"
+      },
+      {
+        "id": "concepts-power",
+        "sectionId": "power",
+        "routeId": "concepts"
+      },
+      {
+        "id": "concepts-pcs",
+        "sectionId": "power",
+        "routeId": "concepts"
+      },
+      {
         "id": "projects",
         "sectionId": "power",
         "routeId": "project"
@@ -99,6 +127,16 @@
         "id": "simulations",
         "sectionId": "power",
         "routeId": "project"
+      },
+      {
+        "id": "courses",
+        "sectionId": "power",
+        "routeId": "project"
+      },
+      {
+        "id": "fundamentals",
+        "sectionId": "power",
+        "routeId": "textbook"
       },
       {
         "id": "debug-records",
@@ -316,6 +354,288 @@
         "stageId": "roadmap"
       },
       {
+        "id": "power/concepts/control/single-phase-pll-bandwidth",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/single-phase-pll-lock-detector",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/three-phase-srf-pll",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/three-phase-current-loop-decoupling",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/single-phase-srf-pll",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/single-phase-inverter-pr-control",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/control/single-phase-bypass-sync-transfer",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-control"
+      },
+      {
+        "id": "power/concepts/embedded/boost-c-firmware-skeleton",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/boost-telemetry-fault-log",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/boost-fault-state-machine",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/tms320f28075-peripheral-bringup",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-c-parameter-table",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-c-firmware-skeleton",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-c-protection-flags",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-parameter-storage",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-parameter-save-scheduler",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-parameter-access",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-command-response",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-command-parser",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-firmware-scheduler",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-mode-state-machine",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-telemetry-frame",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-fault-latch-debounce",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/single-phase-inverter-rms-protection",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/single-phase-inverter-fault-state-machine",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-fault-code-logging",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/embedded/ups-system-fault-closure",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-embedded"
+      },
+      {
+        "id": "power/concepts/power-electronics/boost-firmware-skeleton",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/vienna-pfc-neutral-point-balance",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/three-level-npc-inverter",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/three-phase-power-dq-transform",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/two-level-svpwm",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/boost-converter",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-current-loop",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-average-controller",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-voltage-loop",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-current-reference",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-pwm-delay",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-pfc-voltage-feedforward",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/single-phase-inverter-lc-filter",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/discrete-pi-boost",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/pwm-sampling",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/power-electronics/ccm-dcm",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-power"
+      },
+      {
+        "id": "power/concepts/pcs/lcl-filter-active-damping",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-pcs"
+      },
+      {
+        "id": "power/concepts/pcs/storage-dcdc-mode-state-machine",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-pcs"
+      },
+      {
+        "id": "power/concepts/pcs/grid-following-pq-control",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-pcs"
+      },
+      {
+        "id": "power/concepts/pcs/grid-forming-vf-droop",
+        "sectionId": "power",
+        "routeId": "concepts",
+        "stageId": "concepts-pcs"
+      },
+      {
         "id": "power/projects/01-boost-basics/README",
         "sectionId": "power",
         "routeId": "project",
@@ -338,6 +658,690 @@
         "sectionId": "power",
         "routeId": "project",
         "stageId": "simulations"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/roadmap/master-plan",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/projects/f28075-control/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/MISSION",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/final/fault-injection-report",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/NOTES",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/RESOURCES",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/final/model-consistency-report",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/reference/figure-manifest",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/REBUILD_STATUS",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
+        "sectionId": "power",
+        "routeId": "project",
+        "stageId": "courses"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/001-preface",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/002-chapter-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/003-chapter-2-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/004-chapter-2-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/005-chapter-3-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/006-chapter-3-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/007-chapter-4-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/008-chapter-4-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/009-chapter-4-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/010-chapter-4-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/011-chapter-5-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/012-chapter-5-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/013-chapter-6-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/014-chapter-6-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/015-chapter-6-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/016-chapter-7-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/017-chapter-7-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/018-chapter-7-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/019-chapter-7-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/020-chapter-8-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/021-chapter-8-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/022-chapter-8-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/023-chapter-8-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/024-chapter-9-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/025-chapter-9-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/026-chapter-9-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/027-chapter-10-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/028-chapter-10-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/029-chapter-10-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/030-chapter-11-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/031-chapter-11-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/032-chapter-12-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/033-chapter-12-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/034-chapter-13-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/035-chapter-13-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/036-chapter-14-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/037-chapter-14-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/038-chapter-15-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/039-chapter-15-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/040-chapter-16-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/041-chapter-16-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/042-chapter-16-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/043-chapter-17-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/044-chapter-17-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/045-chapter-17-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/046-chapter-18-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/047-chapter-18-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/048-chapter-18-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/049-chapter-18-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/050-chapter-19-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/051-chapter-19-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/052-chapter-19-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/053-chapter-20",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/054-chapter-21-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/055-chapter-21-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/056-chapter-21-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/057-chapter-21-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/058-chapter-22-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/059-chapter-22-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/060-chapter-22-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/061-chapter-22-part-4",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/062-chapter-23-part-1",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/063-chapter-23-part-2",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/064-chapter-23-part-3",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/065-appendices",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/066-references",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/chunks/067-index",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/manifest",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
+      },
+      {
+        "id": "power/fundamentals-work/glossary-global",
+        "sectionId": "power",
+        "routeId": "textbook",
+        "stageId": "fundamentals"
       },
       {
         "id": "power/weekly-reviews/week-01-day-01",
@@ -1618,6 +2622,18 @@
         "stageId": "algorithm"
       },
       {
+        "id": "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
+        "id": "motor/algorithm/ALG-22-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "algorithm"
+      },
+      {
         "id": "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
         "sectionId": "motor",
         "routeId": "control",
@@ -1712,6 +2728,144 @@
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
+      },
+      {
+        "id": "motor/motion-control/MC-00-Index",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-01-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-01-PMSM-Model",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-02-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-02-Clarke-Park",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-03-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-03-Space-Vector",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-04-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-04-FOC-Signal-Chain",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-05-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-05-SVPWM-2Level",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-06-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-06-Current-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-07-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-07-Speed-Position-Loop",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-08-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-08-Sensorless-Observers",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-09-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-10-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-10-Parameter-Sensitivity",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-11-assessment",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
+      },
+      {
+        "id": "motor/motion-control/MC-11-PWM-Sampling-Timing",
+        "sectionId": "motor",
+        "routeId": "control",
+        "stageId": "motion-control"
       },
       {
         "id": "motor/motion-control/MC-MC-01-Position-Loop",
@@ -2504,10 +3658,171 @@
     "power/roadmap/30-day-plan",
     "power/roadmap/lesson-priority-map",
     "power/roadmap/continuous-learning-path",
+    "power/concepts/control/single-phase-pll-bandwidth",
+    "power/concepts/control/single-phase-pll-lock-detector",
+    "power/concepts/control/three-phase-srf-pll",
+    "power/concepts/control/three-phase-current-loop-decoupling",
+    "power/concepts/control/single-phase-srf-pll",
+    "power/concepts/control/single-phase-inverter-pr-control",
+    "power/concepts/control/single-phase-bypass-sync-transfer",
+    "power/concepts/embedded/boost-c-firmware-skeleton",
+    "power/concepts/embedded/boost-telemetry-fault-log",
+    "power/concepts/embedded/boost-fault-state-machine",
+    "power/concepts/embedded/tms320f28075-peripheral-bringup",
+    "power/concepts/embedded/ups-c-parameter-table",
+    "power/concepts/embedded/ups-c-firmware-skeleton",
+    "power/concepts/embedded/ups-c-protection-flags",
+    "power/concepts/embedded/ups-parameter-storage",
+    "power/concepts/embedded/ups-parameter-save-scheduler",
+    "power/concepts/embedded/ups-parameter-access",
+    "power/concepts/embedded/ups-command-response",
+    "power/concepts/embedded/ups-command-parser",
+    "power/concepts/embedded/ups-firmware-scheduler",
+    "power/concepts/embedded/ups-mode-state-machine",
+    "power/concepts/embedded/ups-telemetry-frame",
+    "power/concepts/embedded/ups-fault-latch-debounce",
+    "power/concepts/embedded/single-phase-inverter-rms-protection",
+    "power/concepts/embedded/single-phase-inverter-fault-state-machine",
+    "power/concepts/embedded/ups-fault-code-logging",
+    "power/concepts/embedded/ups-system-fault-closure",
+    "power/concepts/power-electronics/boost-firmware-skeleton",
+    "power/concepts/power-electronics/vienna-pfc-neutral-point-balance",
+    "power/concepts/power-electronics/three-level-npc-inverter",
+    "power/concepts/power-electronics/three-phase-power-dq-transform",
+    "power/concepts/power-electronics/two-level-svpwm",
+    "power/concepts/power-electronics/boost-converter",
+    "power/concepts/power-electronics/single-phase-pfc-current-loop",
+    "power/concepts/power-electronics/single-phase-pfc-average-controller",
+    "power/concepts/power-electronics/single-phase-pfc-voltage-loop",
+    "power/concepts/power-electronics/single-phase-pfc-current-reference",
+    "power/concepts/power-electronics/single-phase-pfc-pwm-delay",
+    "power/concepts/power-electronics/single-phase-pfc-voltage-feedforward",
+    "power/concepts/power-electronics/single-phase-inverter-lc-filter",
+    "power/concepts/power-electronics/discrete-pi-boost",
+    "power/concepts/power-electronics/pwm-sampling",
+    "power/concepts/power-electronics/ccm-dcm",
+    "power/concepts/pcs/lcl-filter-active-damping",
+    "power/concepts/pcs/storage-dcdc-mode-state-machine",
+    "power/concepts/pcs/grid-following-pq-control",
+    "power/concepts/pcs/grid-forming-vf-droop",
     "power/projects/01-boost-basics/README",
     "power/projects/02-boost-c-firmware-skeleton/README",
     "power/projects/03-ups-c-firmware-skeleton/README",
     "power/simulations/README",
+    "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
+    "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
+    "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
+    "power/courses/125kva-ups-14-week/roadmap/master-plan",
+    "power/courses/125kva-ups-14-week/README",
+    "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
+    "power/courses/125kva-ups-14-week/projects/f28075-control/README",
+    "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
+    "power/courses/125kva-ups-14-week/MISSION",
+    "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
+    "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
+    "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
+    "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
+    "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
+    "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
+    "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
+    "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
+    "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
+    "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
+    "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
+    "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
+    "power/courses/125kva-ups-14-week/final/fault-injection-report",
+    "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
+    "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
+    "power/courses/125kva-ups-14-week/NOTES",
+    "power/courses/125kva-ups-14-week/RESOURCES",
+    "power/courses/125kva-ups-14-week/final/model-consistency-report",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
+    "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
+    "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
+    "power/courses/125kva-ups-14-week/reference/figure-manifest",
+    "power/courses/125kva-ups-14-week/REBUILD_STATUS",
+    "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
+    "power/fundamentals-work/chunks/001-preface",
+    "power/fundamentals-work/chunks/002-chapter-1",
+    "power/fundamentals-work/chunks/003-chapter-2-part-1",
+    "power/fundamentals-work/chunks/004-chapter-2-part-2",
+    "power/fundamentals-work/chunks/005-chapter-3-part-1",
+    "power/fundamentals-work/chunks/006-chapter-3-part-2",
+    "power/fundamentals-work/chunks/007-chapter-4-part-1",
+    "power/fundamentals-work/chunks/008-chapter-4-part-2",
+    "power/fundamentals-work/chunks/009-chapter-4-part-3",
+    "power/fundamentals-work/chunks/010-chapter-4-part-4",
+    "power/fundamentals-work/chunks/011-chapter-5-part-1",
+    "power/fundamentals-work/chunks/012-chapter-5-part-2",
+    "power/fundamentals-work/chunks/013-chapter-6-part-1",
+    "power/fundamentals-work/chunks/014-chapter-6-part-2",
+    "power/fundamentals-work/chunks/015-chapter-6-part-3",
+    "power/fundamentals-work/chunks/016-chapter-7-part-1",
+    "power/fundamentals-work/chunks/017-chapter-7-part-2",
+    "power/fundamentals-work/chunks/018-chapter-7-part-3",
+    "power/fundamentals-work/chunks/019-chapter-7-part-4",
+    "power/fundamentals-work/chunks/020-chapter-8-part-1",
+    "power/fundamentals-work/chunks/021-chapter-8-part-2",
+    "power/fundamentals-work/chunks/022-chapter-8-part-3",
+    "power/fundamentals-work/chunks/023-chapter-8-part-4",
+    "power/fundamentals-work/chunks/024-chapter-9-part-1",
+    "power/fundamentals-work/chunks/025-chapter-9-part-2",
+    "power/fundamentals-work/chunks/026-chapter-9-part-3",
+    "power/fundamentals-work/chunks/027-chapter-10-part-1",
+    "power/fundamentals-work/chunks/028-chapter-10-part-2",
+    "power/fundamentals-work/chunks/029-chapter-10-part-3",
+    "power/fundamentals-work/chunks/030-chapter-11-part-1",
+    "power/fundamentals-work/chunks/031-chapter-11-part-2",
+    "power/fundamentals-work/chunks/032-chapter-12-part-1",
+    "power/fundamentals-work/chunks/033-chapter-12-part-2",
+    "power/fundamentals-work/chunks/034-chapter-13-part-1",
+    "power/fundamentals-work/chunks/035-chapter-13-part-2",
+    "power/fundamentals-work/chunks/036-chapter-14-part-1",
+    "power/fundamentals-work/chunks/037-chapter-14-part-2",
+    "power/fundamentals-work/chunks/038-chapter-15-part-1",
+    "power/fundamentals-work/chunks/039-chapter-15-part-2",
+    "power/fundamentals-work/chunks/040-chapter-16-part-1",
+    "power/fundamentals-work/chunks/041-chapter-16-part-2",
+    "power/fundamentals-work/chunks/042-chapter-16-part-3",
+    "power/fundamentals-work/chunks/043-chapter-17-part-1",
+    "power/fundamentals-work/chunks/044-chapter-17-part-2",
+    "power/fundamentals-work/chunks/045-chapter-17-part-3",
+    "power/fundamentals-work/chunks/046-chapter-18-part-1",
+    "power/fundamentals-work/chunks/047-chapter-18-part-2",
+    "power/fundamentals-work/chunks/048-chapter-18-part-3",
+    "power/fundamentals-work/chunks/049-chapter-18-part-4",
+    "power/fundamentals-work/chunks/050-chapter-19-part-1",
+    "power/fundamentals-work/chunks/051-chapter-19-part-2",
+    "power/fundamentals-work/chunks/052-chapter-19-part-3",
+    "power/fundamentals-work/chunks/053-chapter-20",
+    "power/fundamentals-work/chunks/054-chapter-21-part-1",
+    "power/fundamentals-work/chunks/055-chapter-21-part-2",
+    "power/fundamentals-work/chunks/056-chapter-21-part-3",
+    "power/fundamentals-work/chunks/057-chapter-21-part-4",
+    "power/fundamentals-work/chunks/058-chapter-22-part-1",
+    "power/fundamentals-work/chunks/059-chapter-22-part-2",
+    "power/fundamentals-work/chunks/060-chapter-22-part-3",
+    "power/fundamentals-work/chunks/061-chapter-22-part-4",
+    "power/fundamentals-work/chunks/062-chapter-23-part-1",
+    "power/fundamentals-work/chunks/063-chapter-23-part-2",
+    "power/fundamentals-work/chunks/064-chapter-23-part-3",
+    "power/fundamentals-work/chunks/065-appendices",
+    "power/fundamentals-work/chunks/066-references",
+    "power/fundamentals-work/chunks/067-index",
+    "power/fundamentals-work/manifest",
+    "power/fundamentals-work/glossary-global",
     "power/weekly-reviews/week-01-day-01",
     "power/archive/old-learning-records/0001-ups-system-overview",
     "power/archive/old-learning-records/0002-switching-devices-and-basic-topologies",
@@ -2721,6 +4036,8 @@
     "motor/algorithm/ALG-19-assessment",
     "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
     "motor/algorithm/ALG-21-Parameter-Identification",
+    "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
+    "motor/algorithm/ALG-22-assessment",
     "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
     "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
     "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
@@ -2737,6 +4054,29 @@
     "motor/algorithm/ALG-00-PI-Calculator",
     "motor/algorithm/README",
     "motor/algorithm/ALG-00-Pole-Zero-Animation",
+    "motor/motion-control/MC-00-Index",
+    "motor/motion-control/MC-01-assessment",
+    "motor/motion-control/MC-01-PMSM-Model",
+    "motor/motion-control/MC-02-assessment",
+    "motor/motion-control/MC-02-Clarke-Park",
+    "motor/motion-control/MC-03-assessment",
+    "motor/motion-control/MC-03-Space-Vector",
+    "motor/motion-control/MC-04-assessment",
+    "motor/motion-control/MC-04-FOC-Signal-Chain",
+    "motor/motion-control/MC-05-assessment",
+    "motor/motion-control/MC-05-SVPWM-2Level",
+    "motor/motion-control/MC-06-assessment",
+    "motor/motion-control/MC-06-Current-Loop",
+    "motor/motion-control/MC-07-assessment",
+    "motor/motion-control/MC-07-Speed-Position-Loop",
+    "motor/motion-control/MC-08-assessment",
+    "motor/motion-control/MC-08-Sensorless-Observers",
+    "motor/motion-control/MC-09-assessment",
+    "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
+    "motor/motion-control/MC-10-assessment",
+    "motor/motion-control/MC-10-Parameter-Sensitivity",
+    "motor/motion-control/MC-11-assessment",
+    "motor/motion-control/MC-11-PWM-Sampling-Timing",
     "motor/motion-control/MC-MC-01-Position-Loop",
     "motor/motion-control/MC-MC-02-Feedforward",
     "motor/motion-control/MC-MC-03-Resonance-Suppression",
@@ -2869,8 +4209,8 @@
     "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track"
   ],
   "baseline": {
-    "expected": 371,
-    "mapped": 371,
+    "expected": 557,
+    "mapped": 557,
     "missing": [],
     "unexpected": []
   },

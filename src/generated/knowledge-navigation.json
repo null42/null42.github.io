@@ -115,6 +115,665 @@
         ]
       },
       {
+        "id": "concepts",
+        "title": "核心概念",
+        "order": 15,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "concepts-control",
+            "title": "控制理论",
+            "order": 10,
+            "routeId": "concepts",
+            "pathPrefix": "content/power/concepts/control",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/concepts/control/single-phase-pll-bandwidth",
+                "title": "概念：PLL 带宽取舍",
+                "placeholder": false,
+                "slug": "power/concepts/control/single-phase-pll-bandwidth",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/single-phase-pll-lock-detector",
+                "title": "概念：PLL 频率限幅与锁定检测",
+                "placeholder": false,
+                "slug": "power/concepts/control/single-phase-pll-lock-detector",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/three-phase-srf-pll",
+                "title": "概念：三相 SRF-PLL 锁相",
+                "placeholder": false,
+                "slug": "power/concepts/control/three-phase-srf-pll",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/three-phase-current-loop-decoupling",
+                "title": "概念：三相 dq 电流环解耦",
+                "placeholder": false,
+                "slug": "power/concepts/control/three-phase-current-loop-decoupling",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/single-phase-srf-pll",
+                "title": "概念：单相 SRF-PLL 入门",
+                "placeholder": false,
+                "slug": "power/concepts/control/single-phase-srf-pll",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/single-phase-inverter-pr-control",
+                "title": "概念：单相逆变器比例谐振电压控制",
+                "placeholder": false,
+                "slug": "power/concepts/control/single-phase-inverter-pr-control",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/control/single-phase-bypass-sync-transfer",
+                "title": "概念：旁路同步（bypass synchronization）与旁路切换（bypass transfer）",
+                "placeholder": false,
+                "slug": "power/concepts/control/single-phase-bypass-sync-transfer",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "控制",
+                  "PLL"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "concepts-embedded",
+            "title": "嵌入式固件",
+            "order": 20,
+            "routeId": "concepts",
+            "pathPrefix": "content/power/concepts/embedded",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/concepts/embedded/boost-c-firmware-skeleton",
+                "title": "概念：Boost C 固件骨架（Boost C Firmware Skeleton）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/boost-c-firmware-skeleton",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/boost-telemetry-fault-log",
+                "title": "概念：Boost 慢速任务、遥测与故障日志",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/boost-telemetry-fault-log",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/boost-fault-state-machine",
+                "title": "概念：Boost 故障锁存与复位状态机（Fault Latch And Reset State Machine）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/boost-fault-state-machine",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/tms320f28075-peripheral-bringup",
+                "title": "概念：F28075 外设从零配置",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/tms320f28075-peripheral-bringup",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-c-parameter-table",
+                "title": "概念：UPS C 参数表（UPS C parameter table）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-c-parameter-table",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-c-firmware-skeleton",
+                "title": "概念：UPS C 固件骨架（UPS C firmware skeleton）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-c-firmware-skeleton",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-c-protection-flags",
+                "title": "概念：UPS 保护标志（UPS protection flags）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-c-protection-flags",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-parameter-storage",
+                "title": "概念：UPS 参数保存与默认值恢复（parameter storage and default restore）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-parameter-storage",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-parameter-save-scheduler",
+                "title": "概念：UPS 参数保存触发策略（parameter save scheduler）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-parameter-save-scheduler",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-parameter-access",
+                "title": "概念：UPS 参数访问边界（parameter access boundary）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-parameter-access",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-command-response",
+                "title": "概念：UPS 命令响应与拒绝原因（command response and reject reason）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-command-response",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-command-parser",
+                "title": "概念：UPS 命令解析与安全门控（command parsing and safety gating）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-command-parser",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-firmware-scheduler",
+                "title": "概念：UPS 固件实时调度（real-time scheduling）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-firmware-scheduler",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-mode-state-machine",
+                "title": "概念：UPS 模式状态机（UPS mode state machine）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-mode-state-machine",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-telemetry-frame",
+                "title": "概念：UPS 遥测通信帧（telemetry communication frame）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-telemetry-frame",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-fault-latch-debounce",
+                "title": "概念：保护去抖与故障锁存（protection debounce and fault latch）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-fault-latch-debounce",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/single-phase-inverter-rms-protection",
+                "title": "概念：单相逆变器 RMS 估算与欠压保护",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/single-phase-inverter-rms-protection",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/single-phase-inverter-fault-state-machine",
+                "title": "概念：单相逆变器故障状态机",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/single-phase-inverter-fault-state-machine",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-fault-code-logging",
+                "title": "概念：故障码与故障日志（fault code and fault log）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-fault-code-logging",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/embedded/ups-system-fault-closure",
+                "title": "概念：系统故障闭环（system fault closure）",
+                "placeholder": false,
+                "slug": "power/concepts/embedded/ups-system-fault-closure",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "嵌入式",
+                  "固件"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "concepts-power",
+            "title": "电力电子拓扑",
+            "order": 30,
+            "routeId": "concepts",
+            "pathPrefix": "content/power/concepts/power-electronics",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/concepts/power-electronics/boost-firmware-skeleton",
+                "title": "概念：Boost 控制中断服务程序（control interrupt service routine / control ISR）软件骨架",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/boost-firmware-skeleton",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/vienna-pfc-neutral-point-balance",
+                "title": "概念：Vienna PFC 与中点电压平衡",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/vienna-pfc-neutral-point-balance",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/three-level-npc-inverter",
+                "title": "概念：三电平 NPC 逆变器",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/three-level-npc-inverter",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/three-phase-power-dq-transform",
+                "title": "概念：三相功率与 dq 坐标变换",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/three-phase-power-dq-transform",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/two-level-svpwm",
+                "title": "概念：两电平 SVPWM",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/two-level-svpwm",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/boost-converter",
+                "title": "概念：升压变换器（Boost Converter）",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/boost-converter",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-current-loop",
+                "title": "概念：单相 PFC 内层电流环",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-current-loop",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-average-controller",
+                "title": "概念：单相 PFC 平均控制链",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-average-controller",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-voltage-loop",
+                "title": "概念：单相 PFC 电压环如何生成电流幅值",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-voltage-loop",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-current-reference",
+                "title": "概念：单相 PFC 电流参考",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-current-reference",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-pwm-delay",
+                "title": "概念：单相 PFC 的 PWM/ADC 时序与控制延迟",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-pwm-delay",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-pfc-voltage-feedforward",
+                "title": "概念：单相 PFC 输入电压前馈",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-pfc-voltage-feedforward",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/single-phase-inverter-lc-filter",
+                "title": "概念：单相全桥逆变器 LC 输出滤波",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/single-phase-inverter-lc-filter",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/discrete-pi-boost",
+                "title": "概念：离散比例积分控制器（discrete proportional-integral controller / discrete PI）",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/discrete-pi-boost",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/pwm-sampling",
+                "title": "概念：脉宽调制（pulse-width modulation / PWM）与模数转换器采样（analog-to-digital converter / ADC sampling）",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/pwm-sampling",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/power-electronics/ccm-dcm",
+                "title": "概念：连续导通模式（continuous conduction mode / CCM）与断续导通模式（discontinuous conduction mode / DCM）",
+                "placeholder": false,
+                "slug": "power/concepts/power-electronics/ccm-dcm",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "拓扑",
+                  "PFC"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "concepts-pcs",
+            "title": "储能与并网",
+            "order": 40,
+            "routeId": "concepts",
+            "pathPrefix": "content/power/concepts/pcs",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/concepts/pcs/lcl-filter-active-damping",
+                "title": "概念：PCS LCL 滤波器与有源阻尼",
+                "placeholder": false,
+                "slug": "power/concepts/pcs/lcl-filter-active-damping",
+                "tags": [
+                  "power-electronics",
+                  "PCS",
+                  "并网",
+                  "储能"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/pcs/storage-dcdc-mode-state-machine",
+                "title": "概念：PCS 储能 DC-DC 与模式状态机",
+                "placeholder": false,
+                "slug": "power/concepts/pcs/storage-dcdc-mode-state-machine",
+                "tags": [
+                  "power-electronics",
+                  "PCS",
+                  "并网",
+                  "储能"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/pcs/grid-following-pq-control",
+                "title": "概念：PCS 并网跟随型 P/Q 控制",
+                "placeholder": false,
+                "slug": "power/concepts/pcs/grid-following-pq-control",
+                "tags": [
+                  "power-electronics",
+                  "PCS",
+                  "并网",
+                  "储能"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/concepts/pcs/grid-forming-vf-droop",
+                "title": "概念：PCS 构网型 V/f 与下垂控制",
+                "placeholder": false,
+                "slug": "power/concepts/pcs/grid-forming-vf-droop",
+                "tags": [
+                  "power-electronics",
+                  "PCS",
+                  "并网",
+                  "储能"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "id": "project",
         "title": "项目实践",
         "order": 20,
@@ -123,7 +782,7 @@
           {
             "id": "projects",
             "title": "项目实践",
-            "order": 20,
+            "order": 10,
             "routeId": "project",
             "pathPrefix": "content/power/projects",
             "allowEmpty": false,
@@ -163,7 +822,7 @@
           {
             "id": "simulations",
             "title": "仿真结果",
-            "order": 30,
+            "order": 20,
             "routeId": "project",
             "pathPrefix": "content/power/simulations",
             "allowEmpty": false,
@@ -175,6 +834,1447 @@
                 "slug": "power/simulations/README",
                 "tags": [
                   "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "courses",
+            "title": "课程项目",
+            "order": 30,
+            "routeId": "project",
+            "pathPrefix": "content/power/courses",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
+                "title": "学习基线记录",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
+                "title": "125 kVA三相四线制UPS独立课程最终报告",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
+                "title": "125 kVA UPS 目标拓扑确认记录",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/roadmap/master-plan",
+                "title": "125 kVA三电平UPS 14周逐日总表",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/roadmap/master-plan",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/README",
+                "title": "125 kVA三相四线制三电平UPS独立课程",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
+                "title": "F28075 ADC—ISR—PWM—Trip时序设计",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/projects/f28075-control/README",
+                "title": "F28075控制核心教学工程",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/projects/f28075-control/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
+                "title": "MATLAB通用脚本",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/MISSION",
+                "title": "Mission：125 kVA三相四线制三电平UPS独立课程",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/MISSION",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
+                "title": "PSIM逐状态与闭环验证矩阵",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
+                "title": "T型三电平开关模型搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
+                "title": "T型模型",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
+                "title": "Vienna开关模型搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
+                "title": "Vienna模型",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
+                "title": "三开关双电感直流支路安全筛查",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
+                "title": "三相四线制UPS系统模型",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
+                "title": "三相四线制UPS联合搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
+                "title": "两套并联T型搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
+                "title": "两套并联Vienna搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
+                "title": "中点平衡与直流支路",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
+                "title": "功率级与控制调试记录",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/final/fault-injection-report",
+                "title": "故障注入与根因诊断报告",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/final/fault-injection-report",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
+                "title": "有源中点平衡搭建规范",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
+                "title": "未确认产品信息清单",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/NOTES",
+                "title": "本课程执行约束",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/NOTES",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/RESOURCES",
+                "title": "本课程资料清单",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/RESOURCES",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/final/model-consistency-report",
+                "title": "理论—PSIM—Simulink—MATLAB/C一致性报告",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/final/model-consistency-report",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
+                "title": "第10周验收记录：并联T型逆变器总流、差流与环流",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
+                "title": "第11周验收记录：三相四线制、不平衡与零序控制",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
+                "title": "第12周验收记录：UPS整机能量流、模式与切换",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
+                "title": "第13周验收记录：125 kVA参数化设计与F28075保护",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
+                "title": "第14周验收记录：联合验收、故障注入与盲推答辩",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
+                "title": "第1周验收记录：参考方向、三相数学与DSP骨架",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
+                "title": "第2周验收记录：器件导通、PWM、采样与数字控制",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
+                "title": "第3周验收记录：标准三相Vienna逐状态分析",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
+                "title": "第4周验收记录：标准Vienna调制、控制与F28075映射",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
+                "title": "第5周验收记录：标准T型三电平逐状态分析",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
+                "title": "第6周验收记录：标准T型调制、输出控制与保护",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
+                "title": "第7周验收记录：并联Vienna总流、差流与交错候选",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
+                "title": "第8周验收记录：并联Vienna控制实现与诊断",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
+                "title": "第9周验收记录：有源中点平衡与三开关直流支路",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
+                "title": "第四版课程内容质量标准",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/reference/figure-manifest",
+                "title": "课程图源清单",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/reference/figure-manifest",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/REBUILD_STATUS",
+                "title": "课程第四版重建状态",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/REBUILD_STATUS",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
+                "title": "随机盲推答辩题库",
+                "placeholder": false,
+                "slug": "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "125kVA",
+                  "课程"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "textbook",
+        "title": "教材研读",
+        "order": 25,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "fundamentals",
+            "title": "电力电子基础教材",
+            "order": 10,
+            "routeId": "textbook",
+            "pathPrefix": "content/power/fundamentals-work",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "power/fundamentals-work/chunks/001-preface",
+                "title": "Preface",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/001-preface",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/002-chapter-1",
+                "title": "1 Introduction",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/002-chapter-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/003-chapter-2-part-1",
+                "title": "第2章part 1 - 2 Principles of Steady-State Converter Analysis",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/003-chapter-2-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/004-chapter-2-part-2",
+                "title": "第2章part 2 - 2 Principles of Steady-State Converter Analysis",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/004-chapter-2-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/005-chapter-3-part-1",
+                "title": "第3章part 1 - 3 Steady-State Equivalent Circuit Modeling, Losses, and Efficiency",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/005-chapter-3-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/006-chapter-3-part-2",
+                "title": "第3章part 2 - 3 Steady-State Equivalent Circuit Modeling, Losses, and Efficiency",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/006-chapter-3-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/007-chapter-4-part-1",
+                "title": "第4章part 1 - 4 Switch Realization",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/007-chapter-4-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/008-chapter-4-part-2",
+                "title": "第4章part 2 - 4 Switch Realization",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/008-chapter-4-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/009-chapter-4-part-3",
+                "title": "第4章part 3 - 4 Switch Realization",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/009-chapter-4-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/010-chapter-4-part-4",
+                "title": "第4章part 4 - 4 Switch Realization",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/010-chapter-4-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/011-chapter-5-part-1",
+                "title": "第5章part 1 - 5 The Discontinuous Conduction Mode",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/011-chapter-5-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/012-chapter-5-part-2",
+                "title": "第5章part 2 - 5 The Discontinuous Conduction Mode",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/012-chapter-5-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/013-chapter-6-part-1",
+                "title": "第6章part 1 - 6 Converter Circuits",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/013-chapter-6-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/014-chapter-6-part-2",
+                "title": "第6章part 2 - 6 Converter Circuits",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/014-chapter-6-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/015-chapter-6-part-3",
+                "title": "第6章part 3 - 6 Converter Circuits",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/015-chapter-6-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/016-chapter-7-part-1",
+                "title": "第7章part 1 - 7 AC Equivalent Circuit Modeling",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/016-chapter-7-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/017-chapter-7-part-2",
+                "title": "第7章part 2 - 7 AC Equivalent Circuit Modeling",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/017-chapter-7-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/018-chapter-7-part-3",
+                "title": "第7章part 3 - 7 AC Equivalent Circuit Modeling",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/018-chapter-7-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/019-chapter-7-part-4",
+                "title": "第7章part 4 - 7 AC Equivalent Circuit Modeling",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/019-chapter-7-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/020-chapter-8-part-1",
+                "title": "第8章part 1 - 8 Converter Transfer Functions",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/020-chapter-8-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/021-chapter-8-part-2",
+                "title": "第8章part 2 - 8 Converter Transfer Functions",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/021-chapter-8-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/022-chapter-8-part-3",
+                "title": "第8章part 3 - 8 Converter Transfer Functions",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/022-chapter-8-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/023-chapter-8-part-4",
+                "title": "第8章part 4 - 8 Converter Transfer Functions",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/023-chapter-8-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/024-chapter-9-part-1",
+                "title": "第9章part 1 - 9 Controller Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/024-chapter-9-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/025-chapter-9-part-2",
+                "title": "第9章part 2 - 9 Controller Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/025-chapter-9-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/026-chapter-9-part-3",
+                "title": "第9章part 3 - 9 Controller Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/026-chapter-9-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/027-chapter-10-part-1",
+                "title": "第10章part 1 - 10 Basic Magnetics Theory",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/027-chapter-10-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/028-chapter-10-part-2",
+                "title": "第10章part 2 - 10 Basic Magnetics Theory",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/028-chapter-10-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/029-chapter-10-part-3",
+                "title": "第10章part 3 - 10 Basic Magnetics Theory",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/029-chapter-10-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/030-chapter-11-part-1",
+                "title": "第11章part 1 - 11 Inductor Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/030-chapter-11-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/031-chapter-11-part-2",
+                "title": "第11章part 2 - 11 Inductor Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/031-chapter-11-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/032-chapter-12-part-1",
+                "title": "第12章part 1 - 12 Transformer Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/032-chapter-12-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/033-chapter-12-part-2",
+                "title": "第12章part 2 - 12 Transformer Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/033-chapter-12-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/034-chapter-13-part-1",
+                "title": "第13章part 1 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/034-chapter-13-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/035-chapter-13-part-2",
+                "title": "第13章part 2 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/035-chapter-13-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/036-chapter-14-part-1",
+                "title": "第14章part 1 - 14 Circuit Averaging, Averaged Switch Modeling, and Simulation",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/036-chapter-14-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/037-chapter-14-part-2",
+                "title": "第14章part 2 - 14 Circuit Averaging, Averaged Switch Modeling, and Simulation",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/037-chapter-14-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/038-chapter-15-part-1",
+                "title": "第15章part 1 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/038-chapter-15-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/039-chapter-15-part-2",
+                "title": "第15章part 2 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/039-chapter-15-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/040-chapter-16-part-1",
+                "title": "第16章part 1 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/040-chapter-16-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/041-chapter-16-part-2",
+                "title": "第16章part 2 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/041-chapter-16-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/042-chapter-16-part-3",
+                "title": "第16章part 3 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/042-chapter-16-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/043-chapter-17-part-1",
+                "title": "第17章part 1 - 17 Input Filter Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/043-chapter-17-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/044-chapter-17-part-2",
+                "title": "第17章part 2 - 17 Input Filter Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/044-chapter-17-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/045-chapter-17-part-3",
+                "title": "第17章part 3 - 17 Input Filter Design",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/045-chapter-17-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/046-chapter-18-part-1",
+                "title": "第18章part 1 - 18 Current-Programmed Control",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/046-chapter-18-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/047-chapter-18-part-2",
+                "title": "第18章part 2 - 18 Current-Programmed Control",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/047-chapter-18-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/048-chapter-18-part-3",
+                "title": "第18章part 3 - 18 Current-Programmed Control",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/048-chapter-18-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/049-chapter-18-part-4",
+                "title": "第18章part 4 - 18 Current-Programmed Control",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/049-chapter-18-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/050-chapter-19-part-1",
+                "title": "第19章part 1 - 19 Digital Control of Switched-Mode Power Converters",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/050-chapter-19-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/051-chapter-19-part-2",
+                "title": "第19章part 2 - 19 Digital Control of Switched-Mode Power Converters",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/051-chapter-19-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/052-chapter-19-part-3",
+                "title": "第19章part 3 - 19 Digital Control of Switched-Mode Power Converters",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/052-chapter-19-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/053-chapter-20",
+                "title": "20 Power and Harmonics in Nonsinusoidal Systems",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/053-chapter-20",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/054-chapter-21-part-1",
+                "title": "第21章part 1 - 21 Pulse-Width Modulated Rectifiers",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/054-chapter-21-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/055-chapter-21-part-2",
+                "title": "第21章part 2 - 21 Pulse-Width Modulated Rectifiers",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/055-chapter-21-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/056-chapter-21-part-3",
+                "title": "第21章part 3 - 21 Pulse-Width Modulated Rectifiers",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/056-chapter-21-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/057-chapter-21-part-4",
+                "title": "第21章part 4 - 21 Pulse-Width Modulated Rectifiers",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/057-chapter-21-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/058-chapter-22-part-1",
+                "title": "第22章part 1 - 22 Resonant Conversion",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/058-chapter-22-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/059-chapter-22-part-2",
+                "title": "第22章part 2 - 22 Resonant Conversion",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/059-chapter-22-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/060-chapter-22-part-3",
+                "title": "第22章part 3 - 22 Resonant Conversion",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/060-chapter-22-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/061-chapter-22-part-4",
+                "title": "第22章part 4 - 22 Resonant Conversion",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/061-chapter-22-part-4",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/062-chapter-23-part-1",
+                "title": "第23章part 1 - 23 Soft Switching",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/062-chapter-23-part-1",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/063-chapter-23-part-2",
+                "title": "第23章part 2 - 23 Soft Switching",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/063-chapter-23-part-2",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/064-chapter-23-part-3",
+                "title": "第23章part 3 - 23 Soft Switching",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/064-chapter-23-part-3",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/065-appendices",
+                "title": "Appendices",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/065-appendices",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/066-references",
+                "title": "References",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/066-references",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/chunks/067-index",
+                "title": "Index",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/chunks/067-index",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/manifest",
+                "title": "Translation Manifest",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/manifest",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/fundamentals-work/glossary-global",
+                "title": "全局术语表",
+                "placeholder": false,
+                "slug": "power/fundamentals-work/glossary-global",
+                "tags": [
+                  "power-electronics",
+                  "教材",
+                  "Fundamentals-of-Power-Electronics"
                 ],
                 "quality": "imported"
               }
@@ -2532,6 +4632,31 @@
                 "quality": "imported"
               },
               {
+                "articleId": "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
+                "title": "ALG-22 BLDC六步换相理论",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
+                "tags": [
+                  "motor-control",
+                  "BLDC",
+                  "六步换相",
+                  "方波控制"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/algorithm/ALG-22-assessment",
+                "title": "ALG-22 BLDC六步换相理论 - 知识检验",
+                "placeholder": false,
+                "slug": "motor/algorithm/ALG-22-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "BLDC"
+                ],
+                "quality": "imported"
+              },
+              {
                 "articleId": "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
                 "title": "HPM MCL v2 — 离线参数检测模块详解",
                 "placeholder": false,
@@ -2701,6 +4826,284 @@
             "pathPrefix": "content/motor/motion-control",
             "allowEmpty": false,
             "articles": [
+              {
+                "articleId": "motor/motion-control/MC-00-Index",
+                "title": "MC-00：FOC 理论基础索引",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-00-Index",
+                "tags": [
+                  "motor-control",
+                  "FOC",
+                  "索引"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-01-assessment",
+                "title": "MC-01 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-01-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "PMSM"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-01-PMSM-Model",
+                "title": "MC-01：PMSM 永磁同步电机数学模型",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-01-PMSM-Model",
+                "tags": [
+                  "motor-control",
+                  "PMSM",
+                  "建模"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-02-assessment",
+                "title": "MC-02 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-02-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "坐标变换"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-02-Clarke-Park",
+                "title": "MC-02：Clarke 与 Park 变换",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-02-Clarke-Park",
+                "tags": [
+                  "motor-control",
+                  "Clarke",
+                  "Park",
+                  "坐标变换"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-03-assessment",
+                "title": "MC-03 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-03-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "空间矢量"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-03-Space-Vector",
+                "title": "MC-03：空间矢量概念",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-03-Space-Vector",
+                "tags": [
+                  "motor-control",
+                  "空间矢量",
+                  "SVPWM"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-04-assessment",
+                "title": "MC-04 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-04-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "FOC"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-04-FOC-Signal-Chain",
+                "title": "MC-04：FOC 完整信号链路 —— 端到端走通一遍",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-04-FOC-Signal-Chain",
+                "tags": [
+                  "motor-control",
+                  "FOC",
+                  "信号链"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-05-assessment",
+                "title": "MC-05 模块测验 — 两电平SVPWM",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-05-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "SVPWM"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-05-SVPWM-2Level",
+                "title": "MC-05：两电平 SVPWM —— 从电压矢量到 PWM 占空比",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-05-SVPWM-2Level",
+                "tags": [
+                  "motor-control",
+                  "SVPWM",
+                  "两电平"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-06-assessment",
+                "title": "MC-06 模块测验 — 电流环设计",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-06-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "电流环"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-06-Current-Loop",
+                "title": "MC-06：电流环设计与离散化",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-06-Current-Loop",
+                "tags": [
+                  "motor-control",
+                  "电流环",
+                  "PI"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-07-assessment",
+                "title": "MC-07 模块测验 — 速度/位置环",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-07-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "速度环"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-07-Speed-Position-Loop",
+                "title": "MC-07：速度环与位置环设计",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-07-Speed-Position-Loop",
+                "tags": [
+                  "motor-control",
+                  "速度环",
+                  "位置环"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-08-assessment",
+                "title": "MC-08 模块测验 — 无感观测器",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-08-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "无感观测器"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-08-Sensorless-Observers",
+                "title": "MC-08：无感观测器理论",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-08-Sensorless-Observers",
+                "tags": [
+                  "motor-control",
+                  "无感观测器",
+                  "滑模"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-09-assessment",
+                "title": "MC-09 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-09-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "IPMSM"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
+                "title": "MC-09：IPMSM vs SPMSM",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
+                "tags": [
+                  "motor-control",
+                  "IPMSM",
+                  "SPMSM",
+                  "MTPA"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-10-assessment",
+                "title": "MC-10 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-10-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "参数敏感性"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-10-Parameter-Sensitivity",
+                "title": "MC-10：参数敏感性",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-10-Parameter-Sensitivity",
+                "tags": [
+                  "motor-control",
+                  "参数敏感性",
+                  "鲁棒性"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-11-assessment",
+                "title": "MC-11 模块测验",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-11-assessment",
+                "tags": [
+                  "motor-control",
+                  "测验",
+                  "PWM"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "motor/motion-control/MC-11-PWM-Sampling-Timing",
+                "title": "MC-11：PWM 与采样时序",
+                "placeholder": false,
+                "slug": "motor/motion-control/MC-11-PWM-Sampling-Timing",
+                "tags": [
+                  "motor-control",
+                  "PWM",
+                  "采样时序"
+                ],
+                "quality": "imported"
+              },
               {
                 "articleId": "motor/motion-control/MC-MC-01-Position-Loop",
                 "title": "MC-MC-01: 位置环设计与整定",

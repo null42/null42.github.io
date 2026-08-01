@@ -19,9 +19,19 @@
       "order": 10
     },
     {
+      "id": "concepts",
+      "title": "核心概念",
+      "order": 15
+    },
+    {
       "id": "project",
       "title": "项目实践",
       "order": 20
+    },
+    {
+      "id": "textbook",
+      "title": "教材研读",
+      "order": 25
     },
     {
       "id": "debug",
@@ -51,18 +61,60 @@
       "pathPrefix": "content/power/roadmap"
     },
     {
+      "id": "concepts-control",
+      "title": "控制理论",
+      "order": 10,
+      "routeId": "concepts",
+      "pathPrefix": "content/power/concepts/control"
+    },
+    {
+      "id": "concepts-embedded",
+      "title": "嵌入式固件",
+      "order": 20,
+      "routeId": "concepts",
+      "pathPrefix": "content/power/concepts/embedded"
+    },
+    {
+      "id": "concepts-power",
+      "title": "电力电子拓扑",
+      "order": 30,
+      "routeId": "concepts",
+      "pathPrefix": "content/power/concepts/power-electronics"
+    },
+    {
+      "id": "concepts-pcs",
+      "title": "储能与并网",
+      "order": 40,
+      "routeId": "concepts",
+      "pathPrefix": "content/power/concepts/pcs"
+    },
+    {
       "id": "projects",
       "title": "项目实践",
-      "order": 20,
+      "order": 10,
       "routeId": "project",
       "pathPrefix": "content/power/projects"
     },
     {
       "id": "simulations",
       "title": "仿真结果",
-      "order": 30,
+      "order": 20,
       "routeId": "project",
       "pathPrefix": "content/power/simulations"
+    },
+    {
+      "id": "courses",
+      "title": "课程项目",
+      "order": 30,
+      "routeId": "project",
+      "pathPrefix": "content/power/courses"
+    },
+    {
+      "id": "fundamentals",
+      "title": "电力电子基础教材",
+      "order": 10,
+      "routeId": "textbook",
+      "pathPrefix": "content/power/fundamentals-work"
     },
     {
       "id": "debug-records",
