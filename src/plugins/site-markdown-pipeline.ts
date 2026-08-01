@@ -20,6 +20,7 @@ import { remarkExcerpt } from "./remark-excerpt.js";
 import { remarkImageGrid } from "./remark-image-grid.js";
 import { remarkMermaid } from "./remark-mermaid.js";
 import { remarkPlantuml } from "./remark-plantuml.js";
+import { remarkPostLinks } from "./remark-post-links.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
 export function createSiteMarkdownProcessorOptions(): { remarkPlugins: any[]; rehypePlugins: any[] } {
@@ -37,6 +38,8 @@ export function createSiteMarkdownProcessorOptions(): { remarkPlugins: any[]; re
 			parseDirectiveNode,
 			remarkMermaid,
 			[remarkPlantuml, plantumlConfig],
+			// 修正文章正文里 .md 相对链接的大小写，避免 404（放在末尾，确保其他插件先处理）
+			remarkPostLinks,
 		],
 		rehypePlugins: [
 			[rehypeKatex, { katex }],

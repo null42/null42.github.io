@@ -40,7 +40,7 @@ export function normalizeMarkdown(body: string, sourcePath: string): { body: str
     const [targetPath, fragment] = target.split(/(?=#)/, 2)
     const resolved = path.posix.normalize(path.posix.join('/', sourceDir, targetPath))
     const publicTarget = resolved.endsWith('.md')
-      ? `${resolved.replace(/^\/content\//, '/posts/').replace(/\.md$/i, '/')}${fragment || ''}`
+      ? `${resolved.replace(/^\/content\//, '/posts/').replace(/\.md$/i, '/').toLowerCase()}${fragment || ''}`
       : `${resolved}${fragment || ''}`
     return `${prefix}${publicTarget}${suffix}`
   })
