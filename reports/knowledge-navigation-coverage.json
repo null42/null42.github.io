@@ -1,8 +1,8 @@
 {
   "counts": {
     "sections": 3,
-    "routes": 14,
-    "stages": 36,
+    "routes": 15,
+    "stages": 37,
     "articles": 371
   },
   "relationships": {
@@ -72,6 +72,10 @@
       },
       {
         "id": "tuning-validation",
+        "sectionId": "matlab-simulink"
+      },
+      {
+        "id": "applications",
         "sectionId": "matlab-simulink"
       }
     ],
@@ -255,6 +259,11 @@
         "id": "parameter-auto-tuning",
         "sectionId": "matlab-simulink",
         "routeId": "tuning-validation"
+      },
+      {
+        "id": "power-electronics-fast-track",
+        "sectionId": "matlab-simulink",
+        "routeId": "applications"
       }
     ],
     "articles": [
@@ -290,12 +299,6 @@
       },
       {
         "id": "power/roadmap/30-day-plan",
-        "sectionId": "power",
-        "routeId": "roadmap",
-        "stageId": "roadmap"
-      },
-      {
-        "id": "power/roadmap/matlab-simulink-power-electronics-fast-track",
         "sectionId": "power",
         "routeId": "roadmap",
         "stageId": "roadmap"
@@ -2483,6 +2486,12 @@
         "sectionId": "matlab-simulink",
         "routeId": "tuning-validation",
         "stageId": "parameter-auto-tuning"
+      },
+      {
+        "id": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+        "sectionId": "matlab-simulink",
+        "routeId": "applications",
+        "stageId": "power-electronics-fast-track"
       }
     ]
   },
@@ -2493,7 +2502,6 @@
     "power/NOTES",
     "power/getting-started",
     "power/roadmap/30-day-plan",
-    "power/roadmap/matlab-simulink-power-electronics-fast-track",
     "power/roadmap/lesson-priority-map",
     "power/roadmap/continuous-learning-path",
     "power/projects/01-boost-basics/README",
@@ -2857,7 +2865,8 @@
     "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
     "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
     "matlab-simulink/custom-blocks/MS-04-S-Function",
-    "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning"
+    "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+    "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track"
   ],
   "baseline": {
     "expected": 371,

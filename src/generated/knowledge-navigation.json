@@ -91,16 +91,6 @@
                 "quality": "imported"
               },
               {
-                "articleId": "power/roadmap/matlab-simulink-power-electronics-fast-track",
-                "title": "MATLAB/Simulink 电力电子仿真快速路线",
-                "placeholder": false,
-                "slug": "power/roadmap/matlab-simulink-power-electronics-fast-track",
-                "tags": [
-                  "power-electronics"
-                ],
-                "quality": "imported"
-              },
-              {
                 "articleId": "power/roadmap/lesson-priority-map",
                 "title": "New Module Priority Map",
                 "placeholder": false,
@@ -4274,6 +4264,42 @@
                   "validation"
                 ],
                 "quality": "curated"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "applications",
+        "title": "应用专题",
+        "order": 60,
+        "description": "Matlab/Simulink 在特定领域的应用路径与案例。",
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "power-electronics-fast-track",
+            "title": "电力电子仿真快速路线",
+            "order": 10,
+            "routeId": "applications",
+            "pathPrefix": "content/matlab-simulink/applications",
+            "tags": [
+              "power-electronics",
+              "fast-track"
+            ],
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+                "title": "MATLAB/Simulink 电力电子仿真快速路线",
+                "order": 10,
+                "placeholder": false,
+                "slug": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+                "tags": [
+                  "power-electronics",
+                  "matlab",
+                  "simulink"
+                ],
+                "quality": "imported"
               }
             ]
           }

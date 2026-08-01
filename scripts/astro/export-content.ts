@@ -23,7 +23,9 @@ const rootRedirects: Record<string, string> = {
   '/index.html': '/',
   '/archive.html': '/archive/',
   '/search.html': '/search/',
-  '/about.html': '/about/'
+  '/about.html': '/about/',
+  '/posts/power/roadmap/matlab-simulink-power-electronics-fast-track/': '/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/',
+  '/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html': '/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/'
 }
 
 export function normalizeMarkdown(body: string, sourcePath: string): { body: string; rewrittenLinks: number } {

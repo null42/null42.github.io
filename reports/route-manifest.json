@@ -302,6 +302,13 @@
       "target": "/posts/encrypted/worldbuilding/"
     },
     {
+      "path": "/content/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "target": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
+    },
+    {
       "path": "/content/matlab-simulink/custom-blocks/MS-03-Matlab-Function.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -2881,8 +2888,8 @@
       "path": "/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/roadmap/matlab-simulink-power-electronics-fast-track/",
-      "target": "/posts/power/roadmap/matlab-simulink-power-electronics-fast-track/"
+      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "target": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
     },
     {
       "path": "/content/power/simulations/README.html",
@@ -2977,6 +2984,12 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/encrypted/worldbuilding/"
+    },
+    {
+      "path": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
     },
     {
       "path": "/posts/matlab-simulink/custom-blocks/ms-03-matlab-function/",
@@ -5188,9 +5201,10 @@
     },
     {
       "path": "/posts/power/roadmap/matlab-simulink-power-electronics-fast-track/",
-      "kind": "astro",
+      "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/roadmap/matlab-simulink-power-electronics-fast-track/"
+      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "target": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
     },
     {
       "path": "/posts/power/simulations/readme/",
