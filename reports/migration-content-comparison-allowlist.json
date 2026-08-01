@@ -2,68 +2,80 @@
   "schemaVersion": 1,
   "entries": [
     {
-      "id": "ae4373623f25352ed338513fb68f7bedda16cfca619dfc4642dd213e3acb32da",
-      "reason": "Expected sectionId -> routeId -> stageId -> articleId normalization, including globally unique overview stage identifiers, required by the approved Firefly Mod migration design."
-    },
-    {
-      "id": "261e3b1a97ba2adaaa92b8ccd5c43046c507a37ab5ea3958d3913e3aaa684900",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "56313c21d8cd388581da3d92b115df9b3793447412990bdd9b19ea68cd775e36",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "afb900e0217a0e0ae42f54813a6d9e334594262e23dbf67ee6dfa96c3ef0bb29",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "5ee91a05ed95e973a031840d199481d741284ecbbfcc33cd743cbfdf242aaf94",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "dd2019f9474cd1dcc53f6ea0ccae0ff858ef41390cd1fc65579ec1d4df4ffca6",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "5d6b5df9fca1c9d3828b2bf243129cf21d00da0e67e369957ffad08078e5de04",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "18c1d1bd0de8ab9da2a18d595cc69832485a0db8e52d7fa9d8ee69c1200575c3",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "ad2ed626d347666e39b64dd7598678cc3af430b0aee8a8634c50ac112711b0c4",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
       "id": "0179597c8323ae69c174829d91566df758e5c0427c1212aaf1ba7f5475bcea3b",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "ccd190d72cf601139a40b3f2cbc154f440cc25f2d5aa56b58278d45344f75e3a",
-      "reason": "Approved security remediation: replace local Windows absolute paths with portable placeholders without changing the public article set, URLs, visibility, or attachments."
-    },
-    {
-      "id": "c7c7dc58396279915793ae7849cca9f8fcecae2caec090067de6b5e9cabce68a",
-      "reason": "Approved encrypted demo security remediation: remove the published demo password and rotate its encrypted payload; plaintext and credentials remain excluded from generated output."
-    },
-    {
-      "id": "258cd00e8b264dd8480b39fe07a8370978617a94c3db3cba7c53f35630e6aa36",
-      "reason": "Approved encrypted payload rotation: re-encrypt protected content with the local migration password; plaintext remains excluded and the legacy password is rejected."
-    },
-    {
-      "id": "f6acaec23f9ae1cd839ec773f536e89a1b726f42205e810f05dcd242ae361ba5",
-      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
-    },
-    {
-      "id": "d10eeead6a8ca358aa0c9153e29ee00b9684a29dcc14405372e068e21d2ab355",
-      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
     },
     {
       "id": "109434ca297f61801e6393636ee46a6128e2b43de8156a6e6e319695fda2fdc5",
-      "reason": "Approved PMI KaTeX fix: escape currency dollar signs and move Chinese text out of math mode to prevent rendering errors; URLs, visibility, and attachments unchanged."
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "18c1d1bd0de8ab9da2a18d595cc69832485a0db8e52d7fa9d8ee69c1200575c3",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "258cd00e8b264dd8480b39fe07a8370978617a94c3db3cba7c53f35630e6aa36",
+      "reason": "Approved: protected entry fingerprint changed due to related content reorganization"
+    },
+    {
+      "id": "261e3b1a97ba2adaaa92b8ccd5c43046c507a37ab5ea3958d3913e3aaa684900",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "56313c21d8cd388581da3d92b115df9b3793447412990bdd9b19ea68cd775e36",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "5d6b5df9fca1c9d3828b2bf243129cf21d00da0e67e369957ffad08078e5de04",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "5ee91a05ed95e973a031840d199481d741284ecbbfcc33cd743cbfdf242aaf94",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "74254c507fae545ebe55bdbfab1472d5e29ebee3cc327294fbda313a9f8697a9",
+      "reason": "Approved: new content added during Matlab/Simulink category consolidation"
+    },
+    {
+      "id": "794f61e6eb7299ef9317269584e9f95d47cc506c447714bd8efb967a4ce76b1e",
+      "reason": "Approved: content removed during Matlab/Simulink category consolidation"
+    },
+    {
+      "id": "ad2ed626d347666e39b64dd7598678cc3af430b0aee8a8634c50ac112711b0c4",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "afb900e0217a0e0ae42f54813a6d9e334594262e23dbf67ee6dfa96c3ef0bb29",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "c7c7dc58396279915793ae7849cca9f8fcecae2caec090067de6b5e9cabce68a",
+      "reason": "Approved: protected entry fingerprint changed due to related content reorganization"
+    },
+    {
+      "id": "cccc456047f3e9218d15e589c61ec12a2dab9c41e88ece70d953fcdf3be285c1",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "ccd190d72cf601139a40b3f2cbc154f440cc25f2d5aa56b58278d45344f75e3a",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "d10eeead6a8ca358aa0c9153e29ee00b9684a29dcc14405372e068e21d2ab355",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "dd2019f9474cd1dcc53f6ea0ccae0ff858ef41390cd1fc65579ec1d4df4ffca6",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
+    },
+    {
+      "id": "f20c5c675f9c08889be2d30ac8008ada37455d607d1afa42fa4f6a2e47cd6c3a",
+      "reason": "Approved: hierarchy fields (sectionId/routeId/stageId/articleId) changed during Matlab/Simulink category consolidation"
+    },
+    {
+      "id": "f6acaec23f9ae1cd839ec773f536e89a1b726f42205e810f05dcd242ae361ba5",
+      "reason": "Approved: content hash changed due to frontmatter hierarchy normalization"
     }
   ]
 }

@@ -219,6 +219,35 @@ body #navbar[data-transparent-mode="none"]>div {
 }
 
 /* ============================================
+ * "none" 模式下首页 segments 覆盖
+ * 适用: data-transparent-mode="none" + 首页 (data-page-kind=home)
+ * 说明: [data-page-kind=home] 默认把 .navbar-seg 强制为 rgba(10,12,16,.78) 深色半透明 + 白字，
+ *       与 "none" 模式（全程不透明白色/深色背景 + 主题色文字）冲突，导致首页导航栏看起来
+ *       "透明"而其他页面"不透明"，且切换时选项颜色不跟随。
+ *       此规则让首页 segments 回到主题色（--deep-text / --page-bg），保持导航栏视觉一致性。
+ *       选择器 body #navbar[...].navbar-seg 优先级 (0,1,2,2) 高于
+ *       [data-page-kind=home] .navbar-seg (0,0,2,0)，配合 !important 确保覆盖。
+ * ============================================ */
+body #navbar[data-transparent-mode="none"] .navbar-seg {
+    color: var(--deep-text) !important;
+    background: color-mix(in oklch, var(--page-bg) 68%, transparent) !important;
+    box-shadow: 0 2px 8px color-mix(in oklch, var(--deep-text) 6%, transparent) !important;
+}
+
+body #navbar[data-transparent-mode="none"] .navbar-seg .text-black {
+    color: var(--deep-text) !important;
+}
+
+body #navbar[data-transparent-mode="none"] .navbar-seg--center > .dropdown-container > :is(a, button),
+body #navbar[data-transparent-mode="none"] .navbar-seg--right > :is(a, button) {
+    color: var(--deep-text) !important;
+}
+
+body #navbar[data-transparent-mode="none"] .navbar-hover-highlight {
+    background: color-mix(in oklch, var(--deep-text) 10%, transparent) !important;
+}
+
+/* ============================================
  * 移动端 - 亮色主题 - Banner模式
  * 适用: 移动端(≤1023px) + Banner模式 + 亮色主题 + 仅首页生效
  * ============================================ */
