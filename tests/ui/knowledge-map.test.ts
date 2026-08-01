@@ -21,7 +21,7 @@ describe('knowledge map', () => {
     expect(component).toContain('article.tags')
     expect(component).toContain('article.quality')
     expect(component).toContain('/list/?scope=knowledge&section=')
-    expect(component).toContain('href={`/posts/${article.slug}/`}')
+    expect(component).toContain('href={`/posts/${article.slug.toLowerCase()}/`}')
   })
 
   it('contains only public knowledge articles and no encrypted payload metadata', () => {

@@ -126,6 +126,7 @@ describe('knowledge tree template contract', () => {
     expect(component).toContain('article.slug ?')
     expect(component).toContain('data-tree-article-placeholder={article.articleId}')
     expect(component).not.toContain('{stage.articles.map((article) => <li><a data-tree-article={article.articleId} href={`/posts/${article.slug}/`}>{article.title}</a></li>)}')
+    expect(component).toContain('article.slug.toLowerCase()')
   })
 
   it('renders all four canonical levels as static links and controls', () => {
@@ -136,7 +137,7 @@ describe('knowledge tree template contract', () => {
     expect(component).toContain('data-current-article')
     expect(component).toContain('data-tree-toggle')
     expect(component).toContain('data-tree-article={article.articleId}')
-    expect(component).toContain('href={`/posts/${article.slug}/`}')
+    expect(component).toContain('href={`/posts/${article.slug.toLowerCase()}/`}')
     expect(component).toContain('instanceId')
     expect(component).toContain('`${instanceId}-section-${section.id}`')
   })
