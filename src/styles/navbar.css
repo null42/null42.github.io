@@ -199,6 +199,26 @@ body:has(#wallpaper-wrapper) #navbar[data-transparent-mode="semifull"]:not(.scro
 }
 
 /* ============================================
+ * "none" 模式 - 完全不透明背景
+ * 适用: 所有壁纸模式（banner/fullscreen/overlay/none）+ 所有设备
+ * 说明: variables.styl 的 "Firefly Mod reference shell" 将 --card-bg 全局覆盖为
+ *       transparent，main.css 的 .wallpaper-transparent 规则也强制导航栏透明。
+ *       "none" 模式用具体不透明颜色值覆盖，确保导航栏可读。
+ *       选择器 body #navbar[...]>div 优先级 (0,1,1,2) 高于 main.css 的
+ *       .wallpaper-transparent #navbar>div (0,1,1,1)，配合 !important 确保覆盖。
+ * ============================================ */
+body #navbar[data-transparent-mode="none"]>div {
+    backdrop-filter: blur(0) !important;
+    background: rgb(255, 255, 255) !important;
+    border-radius: 0 0 0.75rem 0.75rem !important;
+    box-shadow: var(--shadow-navbar) !important;
+}
+
+:root.dark body #navbar[data-transparent-mode="none"]>div {
+    background: rgb(23, 23, 23) !important;
+}
+
+/* ============================================
  * 移动端 - 亮色主题 - Banner模式
  * 适用: 移动端(≤1023px) + Banner模式 + 亮色主题 + 仅首页生效
  * ============================================ */
