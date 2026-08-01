@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：单相逆变器故障状态机"
+title: 概念：单相逆变器故障状态机
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: 状态机（state machine）把 UPS 软件运行过程拆成明确状态。本节只看一个很小的逆变器保护状态机：
 navGroup: 核心概念
 navGroupOrder: 20
 ---

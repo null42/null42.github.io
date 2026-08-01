@@ -1,5 +1,915 @@
 [
   {
+    "id": "foundations",
+    "title": "共享基础",
+    "order": 5,
+    "routes": [
+      {
+        "id": "overview",
+        "title": "入口与索引",
+        "order": 1,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "foundations-overview",
+            "title": "共享基础入口",
+            "order": 1,
+            "routeId": "overview",
+            "pathPrefix": "content/foundations",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/README",
+                "title": "共享基础：控制理论、电力电子与仿真方法",
+                "placeholder": false,
+                "slug": "foundations/README",
+                "tags": [
+                  "foundations",
+                  "索引"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "control-theory",
+        "title": "控制理论",
+        "order": 10,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "control-theory",
+            "title": "控制理论",
+            "order": 10,
+            "routeId": "control-theory",
+            "pathPrefix": "content/foundations/control-theory",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/control-theory/CT-01-assessment",
+                "title": "CT-01 开环与闭环控制系统 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
+                "title": "CT-01: 开环与闭环控制系统",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-02-assessment",
+                "title": "CT-02 时域响应分析 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-02-Time-Domain-Analysis",
+                "title": "CT-02: 时域响应分析",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-02-Time-Domain-Analysis",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-03-assessment",
+                "title": "CT-03 频率响应与伯德图 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-03-Frequency-Response-Bode",
+                "title": "CT-03: 频率响应与伯德图",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-03-Frequency-Response-Bode",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-04-assessment",
+                "title": "CT-04 PID 控制原理 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-04-PID-Control-Principles",
+                "title": "CT-04: PID 控制原理",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-04-PID-Control-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-05-assessment",
+                "title": "CT-05 PID 整定与工程实现 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-05-PID-Tuning-Implementation",
+                "title": "CT-05: PID 整定与工程实现",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-05-PID-Tuning-Implementation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-06-assessment",
+                "title": "CT-06 前馈控制 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-06-Feedforward-Control",
+                "title": "CT-06: 前馈控制",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-06-Feedforward-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-07-assessment",
+                "title": "CT-07 奈奎斯特稳定判据 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-07-Nyquist-Stability",
+                "title": "CT-07: 奈奎斯特稳定判据",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-07-Nyquist-Stability",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-08-assessment",
+                "title": "CT-08 根轨迹分析 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-08-Root-Locus",
+                "title": "CT-08: 根轨迹分析",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-08-Root-Locus",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-09-assessment",
+                "title": "CT-09 系统校正设计 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-09-Compensator-Design",
+                "title": "CT-09: 系统校正设计",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-09-Compensator-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-10-assessment",
+                "title": "CT-10 状态空间方程 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-10-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-10-State-Space",
+                "title": "CT-10: 状态空间方程",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-10-State-Space",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-11-assessment",
+                "title": "CT-11 观测器设计 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-11-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-11-Observer-Design",
+                "title": "CT-11: 观测器设计",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-11-Observer-Design",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-12-assessment",
+                "title": "CT-12 状态反馈与极点配置 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-12-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-12-State-Feedback",
+                "title": "CT-12: 状态反馈与极点配置",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-12-State-Feedback",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-13-assessment",
+                "title": "CT-13 最优控制（LQR/LQG） - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-13-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-13-LQR-LQG",
+                "title": "CT-13: 最优控制（LQR/LQG）",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-13-LQR-LQG",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-14-assessment",
+                "title": "CT-14 三环级联PID控制 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-14-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-14-Cascaded-PID-Control",
+                "title": "CT-14: 三环级联PID控制",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-14-Cascaded-PID-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-15-assessment",
+                "title": "CT-15 PID优化策略与工程增强 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-15-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-15-PID-Optimization-Strategies",
+                "title": "CT-15: PID 优化策略与工程增强",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-15-PID-Optimization-Strategies",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-16-assessment",
+                "title": "CT-16 ADRC自抗扰控制理论 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-16-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-16-ADRC-Theory",
+                "title": "CT-16: ADRC 自抗扰控制理论",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-16-ADRC-Theory",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-17-assessment",
+                "title": "CT-17 LADRC线性自抗扰控制 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-17-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
+                "title": "CT-17: LADRC 线性自抗扰控制",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-18-assessment",
+                "title": "CT-18 ADRC/LADRC工程实现 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-18-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
+                "title": "CT-18: ADRC/LADRC 在电机控制中的工程实现",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/CT-19-Model-Predictive-Control",
+                "title": "CT-19: 模型预测控制",
+                "placeholder": false,
+                "slug": "foundations/control-theory/CT-19-Model-Predictive-Control",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/control-theory/README",
+                "title": "控制理论基础",
+                "placeholder": false,
+                "slug": "foundations/control-theory/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "power-electronics-basics",
+        "title": "电力电子基础",
+        "order": 20,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "power-electronics-basics",
+            "title": "电力电子基础",
+            "order": 10,
+            "routeId": "power-electronics-basics",
+            "pathPrefix": "content/foundations/power-electronics-basics",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/power-electronics-basics/EE-01-assessment",
+                "title": "EE-01 电阻、电容、电感基础 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-01-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+                "title": "EE-01: 电阻、电容、电感基础",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-02-assessment",
+                "title": "EE-02 二极管与整流电路 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-02-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
+                "title": "EE-02: 二极管与整流电路",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-03-assessment",
+                "title": "EE-03 三极管（BJT）基础 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-03-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-03-BJT-Basics",
+                "title": "EE-03: 三极管（BJT）基础",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-03-BJT-Basics",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-04-assessment",
+                "title": "EE-04 MOSFET 原理与特性 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-04-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
+                "title": "EE-04: MOSFET 原理与特性",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-05-assessment",
+                "title": "EE-05 MOSFET 驱动与保护 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive",
+                "title": "EE-05: MOSFET 驱动与保护",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-06-IGBT-Principles",
+                "title": "EE-06 IGBT 原理与选型",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-06-IGBT-Principles",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-06-assessment",
+                "title": "EE-06 IGBT原理与选型 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-06-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-07-OpAmp",
+                "title": "EE-07 运算放大器",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-07-OpAmp",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-07-assessment",
+                "title": "EE-07 运算放大器 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-07-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
+                "title": "EE-08 整流与逆变拓扑",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-08-assessment",
+                "title": "EE-08 整流与逆变拓扑 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-08-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-09-H-Bridge",
+                "title": "EE-09 H桥与电机驱动拓扑",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-09-H-Bridge",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/EE-09-assessment",
+                "title": "EE-09 H桥与电机驱动拓扑 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/EE-09-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/power-electronics-basics/README",
+                "title": "电子基础 (Electronics Basics)",
+                "placeholder": false,
+                "slug": "foundations/power-electronics-basics/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "simulation",
+        "title": "仿真方法",
+        "order": 30,
+        "allowEmpty": false,
+        "stages": [
+          {
+            "id": "simulation-c",
+            "title": "C 语言仿真",
+            "order": 10,
+            "routeId": "simulation",
+            "pathPrefix": "content/foundations/simulation/c-simulation",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/README",
+                "title": "C 仿真代码修改示例",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart",
+                "title": "C 语言仿真 — 快速上手指南",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
+                "title": "C 语言仿真验证 — 总索引",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-05-assessment",
+                "title": "SIM-05 数字孪生 - 知识检验",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-05-assessment",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-05-Digital-Twin",
+                "title": "SIM-05 数字孪生：让仿真无限逼近真实",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-05-Digital-Twin",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+                "title": "emachinery 仿真系统 — 完整使用教程",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map",
+                "title": "仿真代码  知识库概念映射",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/SIM-03-C-Simulation-Plotting",
+                "title": "仿真绘图系统详解",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/SIM-03-C-Simulation-Plotting",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README",
+                "title": "示例 1：PI 参数调节基础",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README",
+                "title": "示例 2：自定义速度/负载曲线",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/README",
+                "title": "示例 3：启用逆变器非线性建模",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/04-add-observer-signal/README",
+                "title": "示例 4：添加自定义观测信号",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/04-add-observer-signal/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "foundations/simulation/c-simulation/code-examples/05-commissioning-debug/README",
+                "title": "示例 5：参数辨识流程观察",
+                "placeholder": false,
+                "slug": "foundations/simulation/c-simulation/code-examples/05-commissioning-debug/README",
+                "tags": [
+                  "motor-control"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "simulation-matlab",
+            "title": "Matlab/Simulink",
+            "order": 20,
+            "routeId": "simulation",
+            "pathPrefix": "content/foundations/simulation/matlab-simulink",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/simulation/matlab-simulink/README",
+                "title": "Matlab/Simulink 仿真全教程",
+                "order": 1,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/README",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/foundation/MS-00-Simulation-Setup",
+                "title": "MS-00 环境与最小离散控制模型",
+                "order": 10,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/foundation/MS-00-Simulation-Setup",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+                "title": "MS-01 Matlab 仿真离散控制系统",
+                "order": 20,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+                "title": "MS-02 Simulink 仿真离散控制系统",
+                "order": 30,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+                "title": "MS-03 Matlab Function 使用",
+                "order": 40,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/custom-blocks/MS-04-S-Function",
+                "title": "MS-04 S-Function 使用",
+                "order": 50,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/custom-blocks/MS-04-S-Function",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+                "title": "MS-05 参数自整定与仿真验证",
+                "order": 60,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+                "tags": [
+                  "foundations"
+                ],
+                "quality": "curated"
+              },
+              {
+                "articleId": "foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+                "title": "MATLAB/Simulink 电力电子仿真快速路线",
+                "order": 70,
+                "placeholder": false,
+                "slug": "foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+                "tags": [
+                  "power-electronics",
+                  "matlab",
+                  "simulink"
+                ],
+                "quality": "imported"
+              }
+            ]
+          },
+          {
+            "id": "simulation-power",
+            "title": "电源仿真",
+            "order": 30,
+            "routeId": "simulation",
+            "pathPrefix": "content/foundations/simulation/power-simulations",
+            "allowEmpty": false,
+            "articles": [
+              {
+                "articleId": "foundations/simulation/power-simulations/README",
+                "title": "Simulations",
+                "placeholder": false,
+                "slug": "foundations/simulation/power-simulations/README",
+                "tags": [
+                  "power-electronics"
+                ],
+                "quality": "imported"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "power",
     "title": "电源控制",
     "order": 10,
@@ -812,26 +1722,6 @@
                 "title": "项目 03：UPS C 固件骨架（UPS C Firmware Skeleton）",
                 "placeholder": false,
                 "slug": "power/projects/03-ups-c-firmware-skeleton/README",
-                "tags": [
-                  "power-electronics"
-                ],
-                "quality": "imported"
-              }
-            ]
-          },
-          {
-            "id": "simulations",
-            "title": "仿真结果",
-            "order": 20,
-            "routeId": "project",
-            "pathPrefix": "content/power/simulations",
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "power/simulations/README",
-                "title": "Simulations",
-                "placeholder": false,
-                "slug": "power/simulations/README",
                 "tags": [
                   "power-electronics"
                 ],
@@ -3079,206 +3969,6 @@
         "allowEmpty": false,
         "stages": [
           {
-            "id": "electronics-basics",
-            "title": "电力电子基础",
-            "order": 10,
-            "routeId": "hardware",
-            "pathPrefix": "content/motor/electronics-basics",
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "motor/electronics-basics/EE-01-assessment",
-                "title": "EE-01 电阻、电容、电感基础 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-01-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-                "title": "EE-01: 电阻、电容、电感基础",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-02-assessment",
-                "title": "EE-02 二极管与整流电路 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-02-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
-                "title": "EE-02: 二极管与整流电路",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-03-assessment",
-                "title": "EE-03 三极管（BJT）基础 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-03-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-03-BJT-Basics",
-                "title": "EE-03: 三极管（BJT）基础",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-03-BJT-Basics",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-04-assessment",
-                "title": "EE-04 MOSFET 原理与特性 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-04-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-04-MOSFET-Principles",
-                "title": "EE-04: MOSFET 原理与特性",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-04-MOSFET-Principles",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-05-assessment",
-                "title": "EE-05 MOSFET 驱动与保护 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-05-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
-                "title": "EE-05: MOSFET 驱动与保护",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-06-IGBT-Principles",
-                "title": "EE-06 IGBT 原理与选型",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-06-IGBT-Principles",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-06-assessment",
-                "title": "EE-06 IGBT原理与选型 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-06-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-07-OpAmp",
-                "title": "EE-07 运算放大器",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-07-OpAmp",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-07-assessment",
-                "title": "EE-07 运算放大器 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-07-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-08-Rectifier-Inverter",
-                "title": "EE-08 整流与逆变拓扑",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-08-Rectifier-Inverter",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-08-assessment",
-                "title": "EE-08 整流与逆变拓扑 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-08-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-09-H-Bridge",
-                "title": "EE-09 H桥与电机驱动拓扑",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-09-H-Bridge",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/EE-09-assessment",
-                "title": "EE-09 H桥与电机驱动拓扑 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/EE-09-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/electronics-basics/README",
-                "title": "电子基础 (Electronics Basics)",
-                "placeholder": false,
-                "slug": "motor/electronics-basics/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              }
-            ]
-          },
-          {
             "id": "hardware",
             "title": "硬件与驱动",
             "order": 20,
@@ -3756,396 +4446,6 @@
         "order": 30,
         "allowEmpty": false,
         "stages": [
-          {
-            "id": "control-theory",
-            "title": "控制理论",
-            "order": 10,
-            "routeId": "control",
-            "pathPrefix": "content/motor/control-theory",
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "motor/control-theory/CT-01-assessment",
-                "title": "CT-01 开环与闭环控制系统 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-01-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
-                "title": "CT-01: 开环与闭环控制系统",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-02-assessment",
-                "title": "CT-02 时域响应分析 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-02-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-02-Time-Domain-Analysis",
-                "title": "CT-02: 时域响应分析",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-02-Time-Domain-Analysis",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-03-assessment",
-                "title": "CT-03 频率响应与伯德图 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-03-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-03-Frequency-Response-Bode",
-                "title": "CT-03: 频率响应与伯德图",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-03-Frequency-Response-Bode",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-04-assessment",
-                "title": "CT-04 PID 控制原理 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-04-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-04-PID-Control-Principles",
-                "title": "CT-04: PID 控制原理",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-04-PID-Control-Principles",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-05-assessment",
-                "title": "CT-05 PID 整定与工程实现 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-05-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-05-PID-Tuning-Implementation",
-                "title": "CT-05: PID 整定与工程实现",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-05-PID-Tuning-Implementation",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-06-assessment",
-                "title": "CT-06 前馈控制 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-06-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-06-Feedforward-Control",
-                "title": "CT-06: 前馈控制",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-06-Feedforward-Control",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-07-assessment",
-                "title": "CT-07 奈奎斯特稳定判据 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-07-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-07-Nyquist-Stability",
-                "title": "CT-07: 奈奎斯特稳定判据",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-07-Nyquist-Stability",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-08-assessment",
-                "title": "CT-08 根轨迹分析 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-08-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-08-Root-Locus",
-                "title": "CT-08: 根轨迹分析",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-08-Root-Locus",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-09-assessment",
-                "title": "CT-09 系统校正设计 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-09-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-09-Compensator-Design",
-                "title": "CT-09: 系统校正设计",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-09-Compensator-Design",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-10-assessment",
-                "title": "CT-10 状态空间方程 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-10-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-10-State-Space",
-                "title": "CT-10: 状态空间方程",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-10-State-Space",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-11-assessment",
-                "title": "CT-11 观测器设计 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-11-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-11-Observer-Design",
-                "title": "CT-11: 观测器设计",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-11-Observer-Design",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-12-assessment",
-                "title": "CT-12 状态反馈与极点配置 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-12-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-12-State-Feedback",
-                "title": "CT-12: 状态反馈与极点配置",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-12-State-Feedback",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-13-assessment",
-                "title": "CT-13 最优控制（LQR/LQG） - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-13-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-13-LQR-LQG",
-                "title": "CT-13: 最优控制（LQR/LQG）",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-13-LQR-LQG",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-14-assessment",
-                "title": "CT-14 三环级联PID控制 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-14-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-14-Cascaded-PID-Control",
-                "title": "CT-14: 三环级联PID控制",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-14-Cascaded-PID-Control",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-15-assessment",
-                "title": "CT-15 PID优化策略与工程增强 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-15-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-15-PID-Optimization-Strategies",
-                "title": "CT-15: PID 优化策略与工程增强",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-15-PID-Optimization-Strategies",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-16-assessment",
-                "title": "CT-16 ADRC自抗扰控制理论 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-16-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-16-ADRC-Theory",
-                "title": "CT-16: ADRC 自抗扰控制理论",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-16-ADRC-Theory",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-17-assessment",
-                "title": "CT-17 LADRC线性自抗扰控制 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-17-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
-                "title": "CT-17: LADRC 线性自抗扰控制",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-18-assessment",
-                "title": "CT-18 ADRC/LADRC工程实现 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-18-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
-                "title": "CT-18: ADRC/LADRC 在电机控制中的工程实现",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/CT-19-Model-Predictive-Control",
-                "title": "CT-19: 模型预测控制",
-                "placeholder": false,
-                "slug": "motor/control-theory/CT-19-Model-Predictive-Control",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/control-theory/README",
-                "title": "控制理论基础",
-                "placeholder": false,
-                "slug": "motor/control-theory/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              }
-            ]
-          },
           {
             "id": "foundations",
             "title": "基础算法底座",
@@ -5415,146 +5715,6 @@
         "allowEmpty": false,
         "stages": [
           {
-            "id": "simulation",
-            "title": "仿真与调试",
-            "order": 10,
-            "routeId": "practice",
-            "pathPrefix": "content/motor/simulation",
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "motor/simulation/code-examples/README",
-                "title": "C 仿真代码修改示例",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-01-C-Simulation-QuickStart",
-                "title": "C 语言仿真 — 快速上手指南",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-01-C-Simulation-QuickStart",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-00-C-Simulation-Overview",
-                "title": "C 语言仿真验证 — 总索引",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-00-C-Simulation-Overview",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-05-assessment",
-                "title": "SIM-05 数字孪生 - 知识检验",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-05-assessment",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-05-Digital-Twin",
-                "title": "SIM-05 数字孪生：让仿真无限逼近真实",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-05-Digital-Twin",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-                "title": "emachinery 仿真系统 — 完整使用教程",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-02-C-Simulation-Code-Map",
-                "title": "仿真代码  知识库概念映射",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-02-C-Simulation-Code-Map",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/SIM-03-C-Simulation-Plotting",
-                "title": "仿真绘图系统详解",
-                "placeholder": false,
-                "slug": "motor/simulation/SIM-03-C-Simulation-Plotting",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/code-examples/01-pi-tuning-basic/README",
-                "title": "示例 1：PI 参数调节基础",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/01-pi-tuning-basic/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/code-examples/02-custom-speed-profile/README",
-                "title": "示例 2：自定义速度/负载曲线",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/02-custom-speed-profile/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
-                "title": "示例 3：启用逆变器非线性建模",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/code-examples/04-add-observer-signal/README",
-                "title": "示例 4：添加自定义观测信号",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/04-add-observer-signal/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              },
-              {
-                "articleId": "motor/simulation/code-examples/05-commissioning-debug/README",
-                "title": "示例 5：参数辨识流程观察",
-                "placeholder": false,
-                "slug": "motor/simulation/code-examples/05-commissioning-debug/README",
-                "tags": [
-                  "motor-control"
-                ],
-                "quality": "imported"
-              }
-            ]
-          },
-          {
             "id": "practice",
             "title": "工程实践",
             "order": 20,
@@ -6427,280 +6587,6 @@
                 "slug": "motor/controllers-evolution/README",
                 "tags": [
                   "motor-control"
-                ],
-                "quality": "imported"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "matlab-simulink",
-    "title": "Matlab/Simulink 仿真",
-    "order": 30,
-    "routes": [
-      {
-        "id": "foundation",
-        "title": "仿真基础",
-        "order": 10,
-        "description": "先建立最小模型、采样时间和离散化边界。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "matlab-simulink-overview",
-            "title": "总览与学习路线",
-            "order": 1,
-            "routeId": "foundation",
-            "pathPrefix": "content/matlab-simulink",
-            "tags": [
-              "roadmap",
-              "beginner"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/README",
-                "title": "Matlab/Simulink 仿真全教程",
-                "order": 1,
-                "placeholder": false,
-                "slug": "matlab-simulink/README",
-                "tags": [
-                  "roadmap",
-                  "beginner"
-                ],
-                "quality": "curated"
-              }
-            ]
-          },
-          {
-            "id": "setup",
-            "title": "环境与最小模型",
-            "order": 10,
-            "routeId": "foundation",
-            "pathPrefix": "content/matlab-simulink/foundation",
-            "tags": [
-              "setup",
-              "discrete-control"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/foundation/MS-00-Simulation-Setup",
-                "title": "MS-00 环境与最小离散控制模型",
-                "order": 10,
-                "placeholder": false,
-                "slug": "matlab-simulink/foundation/MS-00-Simulation-Setup",
-                "tags": [
-                  "setup",
-                  "discrete-control"
-                ],
-                "quality": "curated"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "matlab-discrete",
-        "title": "Matlab 离散控制仿真",
-        "order": 20,
-        "description": "用脚本把差分方程、PID 和状态空间跑清楚。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "matlab-discrete-control",
-            "title": "Matlab 离散控制系统",
-            "order": 10,
-            "routeId": "matlab-discrete",
-            "pathPrefix": "content/matlab-simulink/matlab-discrete-control",
-            "tags": [
-              "matlab",
-              "pid",
-              "state-space"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
-                "title": "MS-01 Matlab 仿真离散控制系统",
-                "order": 20,
-                "placeholder": false,
-                "slug": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
-                "tags": [
-                  "matlab",
-                  "pid",
-                  "state-space"
-                ],
-                "quality": "curated"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "simulink-discrete",
-        "title": "Simulink 离散控制仿真",
-        "order": 30,
-        "description": "把脚本模型拆成可观察、可调参的离散框图。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "simulink-discrete-control",
-            "title": "Simulink 离散控制系统",
-            "order": 10,
-            "routeId": "simulink-discrete",
-            "pathPrefix": "content/matlab-simulink/simulink-discrete-control",
-            "tags": [
-              "simulink",
-              "sample-time",
-              "solver"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
-                "title": "MS-02 Simulink 仿真离散控制系统",
-                "order": 30,
-                "placeholder": false,
-                "slug": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
-                "tags": [
-                  "simulink",
-                  "sample-time",
-                  "solver"
-                ],
-                "quality": "curated"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "custom-blocks",
-        "title": "自定义模块",
-        "order": 40,
-        "description": "掌握 Matlab Function 与 S-Function 的边界。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "matlab-function",
-            "title": "Matlab Function 使用",
-            "order": 10,
-            "routeId": "custom-blocks",
-            "pathPrefix": "content/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
-            "tags": [
-              "matlab-function",
-              "code-generation"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
-                "title": "MS-03 Matlab Function 使用",
-                "order": 40,
-                "placeholder": false,
-                "slug": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
-                "tags": [
-                  "matlab-function",
-                  "code-generation"
-                ],
-                "quality": "curated"
-              }
-            ]
-          },
-          {
-            "id": "s-function",
-            "title": "S-Function 使用",
-            "order": 20,
-            "routeId": "custom-blocks",
-            "pathPrefix": "content/matlab-simulink/custom-blocks/MS-04-S-Function",
-            "tags": [
-              "s-function",
-              "custom-block"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/custom-blocks/MS-04-S-Function",
-                "title": "MS-04 S-Function 使用",
-                "order": 50,
-                "placeholder": false,
-                "slug": "matlab-simulink/custom-blocks/MS-04-S-Function",
-                "tags": [
-                  "s-function",
-                  "custom-block"
-                ],
-                "quality": "curated"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "tuning-validation",
-        "title": "整定与验证",
-        "order": 50,
-        "description": "用参数扫描、自整定和日志对比闭环结果。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "parameter-auto-tuning",
-            "title": "参数自整定",
-            "order": 10,
-            "routeId": "tuning-validation",
-            "pathPrefix": "content/matlab-simulink/tuning-validation",
-            "tags": [
-              "auto-tuning",
-              "validation"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
-                "title": "MS-05 参数自整定与仿真验证",
-                "order": 60,
-                "placeholder": false,
-                "slug": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
-                "tags": [
-                  "auto-tuning",
-                  "validation"
-                ],
-                "quality": "curated"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "applications",
-        "title": "应用专题",
-        "order": 60,
-        "description": "Matlab/Simulink 在特定领域的应用路径与案例。",
-        "allowEmpty": false,
-        "stages": [
-          {
-            "id": "power-electronics-fast-track",
-            "title": "电力电子仿真快速路线",
-            "order": 10,
-            "routeId": "applications",
-            "pathPrefix": "content/matlab-simulink/applications",
-            "tags": [
-              "power-electronics",
-              "fast-track"
-            ],
-            "allowEmpty": false,
-            "articles": [
-              {
-                "articleId": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
-                "title": "MATLAB/Simulink 电力电子仿真快速路线",
-                "order": 10,
-                "placeholder": false,
-                "slug": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
-                "tags": [
-                  "power-electronics",
-                  "matlab",
-                  "simulink"
                 ],
                 "quality": "imported"
               }

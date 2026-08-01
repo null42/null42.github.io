@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相全桥逆变器 LC 输出滤波"
+title: 概念：单相全桥逆变器 LC 输出滤波
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 单相全桥逆变器（single-phase full-bridge inverter）把直流母线（DC bus）的电压通过四个功率开关变成高频脉宽调制（pulse-width modulation / PWM）桥臂电压。LC 滤波器（inductor-capacitor filter / LC filter）再把高频开关分量压下去，让负载端看到接近 50...
 navGroup: 核心概念
 navGroupOrder: 20
 ---

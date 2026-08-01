@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 参数保存触发策略（parameter save scheduler）"
+title: 概念：UPS 参数保存触发策略（parameter save scheduler）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 参数保存触发策略（parameter save scheduler）决定“参数被改了以后，什么时候真正写入非易失存储（non-volatile memory / NVM）”。它连接上一节的参数保存（parameter storage）模块，但不等于保存格式本身。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

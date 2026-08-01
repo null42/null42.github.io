@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：三相 SRF-PLL 锁相"
+title: 概念：三相 SRF-PLL 锁相
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "它是什么"
+summary: 同步旋转坐标系锁相环（synchronous reference frame PLL / SRF-PLL）用三相电压的 q 轴误差调整估算频率和相位，使 q 轴电压收敛到 0。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

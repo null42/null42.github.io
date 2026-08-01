@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 固件实时调度（real-time scheduling）"
+title: 概念：UPS 固件实时调度（real-time scheduling）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: 控制中断服务程序（control interrupt service routine / control ISR）是按固定控制周期运行的实时路径。后台任务（background task）是低优先级、低频或可被打断的软件任务，例如遥测、通信、参数保存和日志整理。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：离散比例积分控制器（discrete proportional-integral controller / discrete PI）"
+title: 概念：离散比例积分控制器（discrete proportional-integral controller / discrete PI）
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 离散比例积分控制器（discrete proportional-integral controller / discrete PI）是在固定控制周期内，根据误差计算控制输出的最常见闭环控制器之一。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

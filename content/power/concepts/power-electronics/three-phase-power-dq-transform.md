@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：三相功率与 dq 坐标变换"
+title: 概念：三相功率与 dq 坐标变换
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "它是什么"
+summary: 三相系统（three-phase system）包含 A/B/C 三个相差 120 度的交流量。Clarke 变换（Clarke transform）把三相量变成 alpha/beta 两轴；Park 变换（Park transform）再把 alpha/beta 转到旋转 dq 坐标。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

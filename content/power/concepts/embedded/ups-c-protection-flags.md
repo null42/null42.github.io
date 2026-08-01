@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 保护标志（UPS protection flags）"
+title: 概念：UPS 保护标志（UPS protection flags）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: UPS 保护标志（UPS protection flags）是把不间断电源（uninterruptible power supply / UPS）的采样值（sampled measurement）和参数表比较后得到的一组布尔结果，例如欠压、过压、旁路不同步和是否需要停机。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

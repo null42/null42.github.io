@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：旁路同步（bypass synchronization）与旁路切换（bypass transfer）"
+title: 概念：旁路同步（bypass synchronization）与旁路切换（bypass transfer）
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "1. 它是什么"
+summary: 旁路同步（bypass synchronization）是判断 UPS 逆变输出与旁路电源是否足够接近。旁路切换（bypass transfer）是把负载从逆变器供电路径切到旁路路径，或从旁路切回逆变器路径。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

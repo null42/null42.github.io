@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：保护去抖与故障锁存（protection debounce and fault latch）"
+title: 概念：保护去抖与故障锁存（protection debounce and fault latch）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 保护去抖（protection debounce）是要求保护标志连续满足若干次后才确认故障。故障锁存（fault latch）是故障一旦确认，即使瞬时输入恢复正常，也保持故障状态，直到复位请求（reset request）和安全复位条件（safe-to-reset condition）同时满足。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

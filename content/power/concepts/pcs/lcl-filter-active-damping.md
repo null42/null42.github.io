@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-pcs
 chapterTitle: 储能与并网
@@ -7,14 +7,14 @@ chapterOrder: 40
 category: 储能与并网
 source: power
 visibility: public
-title: "概念：PCS LCL 滤波器与有源阻尼"
+title: 概念：PCS LCL 滤波器与有源阻尼
 tags:
   - power-electronics
   - PCS
   - 并网
   - 储能
 status: learning
-summary: "它是什么"
+summary: LCL 滤波器（LCL filter）由变流器侧电感、滤波电容和电网侧电感组成。有源阻尼（active damping）用反馈或数字滤波抑制 LCL 谐振。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

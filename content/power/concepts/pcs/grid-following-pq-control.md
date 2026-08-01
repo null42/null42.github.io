@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-pcs
 chapterTitle: 储能与并网
@@ -7,14 +7,14 @@ chapterOrder: 40
 category: 储能与并网
 source: power
 visibility: public
-title: "概念：PCS 并网跟随型 P/Q 控制"
+title: 概念：PCS 并网跟随型 P/Q 控制
 tags:
   - power-electronics
   - PCS
   - 并网
   - 储能
 status: learning
-summary: "它是什么"
+summary: 储能变流器（power conversion system / PCS）连接电池和电网。并网跟随型控制（grid-following control / GFL）用 PLL 跟随电网，有功无功控制（active and reactive power control / P/Q control）生成 id/iq 电流参考。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

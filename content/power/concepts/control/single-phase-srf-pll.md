@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：单相 SRF-PLL 入门"
+title: 概念：单相 SRF-PLL 入门
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "1. 它是什么"
+summary: 锁相环（phase-locked loop / PLL）是一个估算电网相位和频率的闭环。同步旋转坐标系（synchronous reference frame / SRF）PLL 的核心想法是：把输入电压投影到自己估计的旋转坐标系里，让 q 轴误差（q-axis error / vq）趋近于 0。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

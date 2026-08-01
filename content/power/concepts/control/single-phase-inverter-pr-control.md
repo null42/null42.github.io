@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：单相逆变器比例谐振电压控制"
+title: 概念：单相逆变器比例谐振电压控制
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "1. 它是什么"
+summary: 比例谐振控制（proportional resonant control / PR control）是一种适合正弦交流量的电压环（voltage loop）控制方法。比例项负责快速响应，谐振项专门在目标频率附近累积误差并给出校正量。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：三相 dq 电流环解耦"
+title: 概念：三相 dq 电流环解耦
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "它是什么"
+summary: dq 电流环解耦（dq current loop decoupling）用前馈项抵消旋转坐标系中的交叉耦合，让 id 和 iq 更接近两个独立控制对象。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

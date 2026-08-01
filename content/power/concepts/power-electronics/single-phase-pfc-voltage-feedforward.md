@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 输入电压前馈"
+title: 概念：单相 PFC 输入电压前馈
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）中的输入电压前馈（input-voltage feedforward）是把输入电压的均方根值（root mean square / RMS）提前放进功率命令到电流命令的换算里。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：脉宽调制（pulse-width modulation / PWM）与模数转换器采样（analog-to-digital converter / ADC sampling）"
+title: 概念：脉宽调制（pulse-width modulation / PWM）与模数转换器采样（analog-to-digital converter / ADC sampling）
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 脉宽调制（pulse-width modulation / PWM）是用固定开关频率下的导通时间比例来控制功率开关。这个比例叫占空比（duty cycle / D）。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

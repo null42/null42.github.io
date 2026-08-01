@@ -36,7 +36,7 @@ Start-Process .\courses\125kva-ups-14-week\index.html
 ```powershell
 python courses/125kva-ups-14-week/tools/validate_course.py
 pytest courses/125kva-ups-14-week/tests/test_course_assets.py -q
-matlab -batch "run('E:/gitee_CodeStorage/学习/电源/courses/125kva-ups-14-week/simulations/matlab/run_all_course_checks.m')"
+matlab -batch "run('courses/125kva-ups-14-week/simulations/matlab/run_all_course_checks.m')"
 ```
 
 ## 目录

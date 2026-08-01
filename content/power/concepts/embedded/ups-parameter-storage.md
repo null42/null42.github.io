@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 参数保存与默认值恢复（parameter storage and default restore）"
+title: 概念：UPS 参数保存与默认值恢复（parameter storage and default restore）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 非易失存储（non-volatile memory / NVM）是在断电后仍能保留数据的存储区域。参数保存是把参数表（parameter table）的当前值写入 NVM；默认值恢复（default restore）是在存储记录无效、版本不匹配或校验失败时回到安全的默认参数。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

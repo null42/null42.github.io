@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-pcs
 chapterTitle: 储能与并网
@@ -7,14 +7,14 @@ chapterOrder: 40
 category: 储能与并网
 source: power
 visibility: public
-title: "概念：PCS 构网型 V/f 与下垂控制"
+title: 概念：PCS 构网型 V/f 与下垂控制
 tags:
   - power-electronics
   - PCS
   - 并网
   - 储能
 status: learning
-summary: "它是什么"
+summary: 构网型控制（grid-forming control / GFM）自己建立电压和频率。电压频率控制（voltage-frequency control / V/f control）给出基本电压源参考，下垂控制（droop control）用于多机功率分担。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

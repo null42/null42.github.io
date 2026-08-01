@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：两电平 SVPWM"
+title: 概念：两电平 SVPWM
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "它是什么"
+summary: 空间矢量脉宽调制（space vector pulse-width modulation / SVPWM）用相邻有效矢量和零矢量在一个 PWM 周期内平均合成目标 alpha/beta 电压。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

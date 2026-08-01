@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 命令响应与拒绝原因（command response and reject reason）"
+title: 概念：UPS 命令响应与拒绝原因（command response and reject reason）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 命令响应（command response）是固件处理外部命令后返回给外部工具的结果说明。响应码（response code）说明命令处理结果，例如 OK、ACCEPTED、REJECTED。拒绝原因（reject reason）说明为什么命令没有被执行，例如 NOT_SAFE_TO_CLEAR。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

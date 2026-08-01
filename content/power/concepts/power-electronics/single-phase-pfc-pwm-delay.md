@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 的 PWM/ADC 时序与控制延迟"
+title: 概念：单相 PFC 的 PWM/ADC 时序与控制延迟
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）电流环不是“采样后立刻作用于功率级”。模数转换器（analog-to-digital converter / ADC）采样、控制计算、脉宽调制（pulse-width modulation / PWM）寄存器更新之间存在控制延迟（control delay）。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

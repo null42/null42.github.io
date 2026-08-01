@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：Boost C 固件骨架（Boost C Firmware Skeleton）"
+title: 概念：Boost C 固件骨架（Boost C Firmware Skeleton）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: Boost C 固件骨架是把前面 Python 里的控制中断服务程序（control interrupt service routine / control ISR）拆成接近工程阅读方式的 C 文件：
 navGroup: 核心概念
 navGroupOrder: 20
 ---

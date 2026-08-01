@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：升压变换器（Boost Converter）"
+title: 概念：升压变换器（Boost Converter）
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么（What It Is）"
+summary: 升压变换器（Boost converter）是一种开关电源电路，它通过“先把能量存进电感，再把电感能量送到输出”的方式，把较低的直流输入电压（DC input voltage）变成较高的直流输出电压（DC output voltage）。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

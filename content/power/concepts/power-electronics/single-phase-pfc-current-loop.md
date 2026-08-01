@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 内层电流环"
+title: 概念：单相 PFC 内层电流环
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）的电流环（current loop）是内层快速环。它的任务是让实际电感电流（inductor current / iL）跟踪电流参考 i_ref。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

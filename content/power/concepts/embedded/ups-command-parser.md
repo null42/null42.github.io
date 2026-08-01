@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 命令解析与安全门控（command parsing and safety gating）"
+title: 概念：UPS 命令解析与安全门控（command parsing and safety gating）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 命令解析（command parsing）是把外部通信收到的文本、字节或寄存器请求转换成固件内部动作意图的过程。安全门控（safety gating）是在动作真正生效前，再检查系统是否满足安全条件。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

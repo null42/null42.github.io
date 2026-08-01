@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 遥测通信帧（telemetry communication frame）"
+title: 概念：UPS 遥测通信帧（telemetry communication frame）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 遥测（telemetry）是设备把自己的运行状态、故障状态和关键测量量发给外部工具的过程。通信帧（communication frame）是一次上报的数据包。本课只讲一个概念：把 UPS 当前模式、故障码（fault code）、时间戳（timestamp）和输出使能状态组织成一条可检查的教学帧。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

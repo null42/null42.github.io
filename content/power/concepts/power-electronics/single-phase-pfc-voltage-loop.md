@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 电压环如何生成电流幅值"
+title: 概念：单相 PFC 电压环如何生成电流幅值
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）的电压环（voltage loop）是一个慢环。它根据直流母线电压误差，输出电流参考的幅值命令。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

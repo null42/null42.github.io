@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：PLL 频率限幅与锁定检测"
+title: 概念：PLL 频率限幅与锁定检测
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "1. 它是什么"
+summary: 锁相环（phase-locked loop / PLL）不能只输出一个估算角度就结束。工程固件通常还要做频率限幅（frequency limit）和锁定检测（lock detection）：
 navGroup: 核心概念
 navGroupOrder: 20
 ---

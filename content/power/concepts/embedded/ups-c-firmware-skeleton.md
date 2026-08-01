@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS C 固件骨架（UPS C firmware skeleton）"
+title: 概念：UPS C 固件骨架（UPS C firmware skeleton）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: UPS C 固件骨架（UPS C firmware skeleton）是把 0024 中的不间断电源（uninterruptible power supply / UPS）模式状态机（UPS mode state machine）拆成接近 C 工程阅读方式的小工程。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

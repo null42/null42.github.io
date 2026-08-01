@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS C 参数表（UPS C parameter table）"
+title: 概念：UPS C 参数表（UPS C parameter table）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: UPS C 参数表（UPS C parameter table）是把不间断电源（uninterruptible power supply / UPS）的保护阈值、同步保持时间、控制周期等工程参数集中放在一个结构体或配置模块里，而不是散落在状态机、保护函数和驱动代码中。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

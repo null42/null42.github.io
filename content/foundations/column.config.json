@@ -1,0 +1,27 @@
+{
+  "id": "foundations",
+  "title": "共享基础",
+  "section": "共享基础",
+  "source": "foundations",
+  "order": 5,
+  "visibility": "public",
+  "layout": "map",
+  "searchable": true,
+  "allowFlat": false,
+  "description": "电机控制与电源控制的共享基础：控制理论、电力电子基础、仿真方法。这些概念在两个领域通用，抽取到此处避免重复。",
+  "defaultTags": ["foundations"],
+  "routes": [
+    { "id": "overview", "title": "入口与索引", "order": 1 },
+    { "id": "control-theory", "title": "控制理论", "order": 10 },
+    { "id": "power-electronics-basics", "title": "电力电子基础", "order": 20 },
+    { "id": "simulation", "title": "仿真方法", "order": 30 }
+  ],
+  "stages": [
+    { "id": "foundations-overview", "title": "共享基础入口", "order": 1, "routeId": "overview", "pathPrefix": "content/foundations" },
+    { "id": "control-theory", "title": "控制理论", "order": 10, "routeId": "control-theory", "pathPrefix": "content/foundations/control-theory" },
+    { "id": "power-electronics-basics", "title": "电力电子基础", "order": 10, "routeId": "power-electronics-basics", "pathPrefix": "content/foundations/power-electronics-basics" },
+    { "id": "simulation-c", "title": "C 语言仿真", "order": 10, "routeId": "simulation", "pathPrefix": "content/foundations/simulation/c-simulation" },
+    { "id": "simulation-matlab", "title": "Matlab/Simulink", "order": 20, "routeId": "simulation", "pathPrefix": "content/foundations/simulation/matlab-simulink" },
+    { "id": "simulation-power", "title": "电源仿真", "order": 30, "routeId": "simulation", "pathPrefix": "content/foundations/simulation/power-simulations" }
+  ]
+}

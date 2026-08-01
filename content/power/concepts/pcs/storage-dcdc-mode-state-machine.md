@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-pcs
 chapterTitle: 储能与并网
@@ -7,14 +7,14 @@ chapterOrder: 40
 category: 储能与并网
 source: power
 visibility: public
-title: "概念：PCS 储能 DC-DC 与模式状态机"
+title: 概念：PCS 储能 DC-DC 与模式状态机
 tags:
   - power-electronics
   - PCS
   - 并网
   - 储能
 status: learning
-summary: "它是什么"
+summary: 双向 DC-DC 变换器（bidirectional DC-DC converter）连接电池和直流母线。PCS 模式状态机（PCS mode state machine）协调待机、预充、并网充电、并网放电、离网构网和故障停机。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

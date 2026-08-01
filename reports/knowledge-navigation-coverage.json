@@ -1,23 +1,39 @@
 {
   "counts": {
     "sections": 3,
-    "routes": 17,
-    "stages": 43,
-    "articles": 557
+    "routes": 15,
+    "stages": 37,
+    "articles": 558
   },
   "relationships": {
     "sections": [
+      {
+        "id": "foundations"
+      },
       {
         "id": "power"
       },
       {
         "id": "motor"
-      },
-      {
-        "id": "matlab-simulink"
       }
     ],
     "routes": [
+      {
+        "id": "overview",
+        "sectionId": "foundations"
+      },
+      {
+        "id": "control-theory",
+        "sectionId": "foundations"
+      },
+      {
+        "id": "power-electronics-basics",
+        "sectionId": "foundations"
+      },
+      {
+        "id": "simulation",
+        "sectionId": "foundations"
+      },
       {
         "id": "roadmap",
         "sectionId": "power"
@@ -61,33 +77,39 @@
       {
         "id": "ecosystem",
         "sectionId": "motor"
-      },
-      {
-        "id": "foundation",
-        "sectionId": "matlab-simulink"
-      },
-      {
-        "id": "matlab-discrete",
-        "sectionId": "matlab-simulink"
-      },
-      {
-        "id": "simulink-discrete",
-        "sectionId": "matlab-simulink"
-      },
-      {
-        "id": "custom-blocks",
-        "sectionId": "matlab-simulink"
-      },
-      {
-        "id": "tuning-validation",
-        "sectionId": "matlab-simulink"
-      },
-      {
-        "id": "applications",
-        "sectionId": "matlab-simulink"
       }
     ],
     "stages": [
+      {
+        "id": "foundations-overview",
+        "sectionId": "foundations",
+        "routeId": "overview"
+      },
+      {
+        "id": "control-theory",
+        "sectionId": "foundations",
+        "routeId": "control-theory"
+      },
+      {
+        "id": "power-electronics-basics",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics"
+      },
+      {
+        "id": "simulation-c",
+        "sectionId": "foundations",
+        "routeId": "simulation"
+      },
+      {
+        "id": "simulation-matlab",
+        "sectionId": "foundations",
+        "routeId": "simulation"
+      },
+      {
+        "id": "simulation-power",
+        "sectionId": "foundations",
+        "routeId": "simulation"
+      },
       {
         "id": "power-overview",
         "sectionId": "power",
@@ -120,11 +142,6 @@
       },
       {
         "id": "projects",
-        "sectionId": "power",
-        "routeId": "project"
-      },
-      {
-        "id": "simulations",
         "sectionId": "power",
         "routeId": "project"
       },
@@ -179,11 +196,6 @@
         "routeId": "intro"
       },
       {
-        "id": "electronics-basics",
-        "sectionId": "motor",
-        "routeId": "hardware"
-      },
-      {
         "id": "hardware",
         "sectionId": "motor",
         "routeId": "hardware"
@@ -197,11 +209,6 @@
         "id": "power-path",
         "sectionId": "motor",
         "routeId": "hardware"
-      },
-      {
-        "id": "control-theory",
-        "sectionId": "motor",
-        "routeId": "control"
       },
       {
         "id": "foundations",
@@ -222,11 +229,6 @@
         "id": "pfc-motor-integration",
         "sectionId": "motor",
         "routeId": "control"
-      },
-      {
-        "id": "simulation",
-        "sectionId": "motor",
-        "routeId": "practice"
       },
       {
         "id": "practice",
@@ -262,49 +264,489 @@
         "id": "controllers-evolution",
         "sectionId": "motor",
         "routeId": "ecosystem"
-      },
-      {
-        "id": "matlab-simulink-overview",
-        "sectionId": "matlab-simulink",
-        "routeId": "foundation"
-      },
-      {
-        "id": "setup",
-        "sectionId": "matlab-simulink",
-        "routeId": "foundation"
-      },
-      {
-        "id": "matlab-discrete-control",
-        "sectionId": "matlab-simulink",
-        "routeId": "matlab-discrete"
-      },
-      {
-        "id": "simulink-discrete-control",
-        "sectionId": "matlab-simulink",
-        "routeId": "simulink-discrete"
-      },
-      {
-        "id": "matlab-function",
-        "sectionId": "matlab-simulink",
-        "routeId": "custom-blocks"
-      },
-      {
-        "id": "s-function",
-        "sectionId": "matlab-simulink",
-        "routeId": "custom-blocks"
-      },
-      {
-        "id": "parameter-auto-tuning",
-        "sectionId": "matlab-simulink",
-        "routeId": "tuning-validation"
-      },
-      {
-        "id": "power-electronics-fast-track",
-        "sectionId": "matlab-simulink",
-        "routeId": "applications"
       }
     ],
     "articles": [
+      {
+        "id": "foundations/README",
+        "sectionId": "foundations",
+        "routeId": "overview",
+        "stageId": "foundations-overview"
+      },
+      {
+        "id": "foundations/control-theory/CT-01-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-02-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-02-Time-Domain-Analysis",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-03-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-03-Frequency-Response-Bode",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-04-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-04-PID-Control-Principles",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-05-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-05-PID-Tuning-Implementation",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-06-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-06-Feedforward-Control",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-07-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-07-Nyquist-Stability",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-08-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-08-Root-Locus",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-09-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-09-Compensator-Design",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-10-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-10-State-Space",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-11-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-11-Observer-Design",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-12-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-12-State-Feedback",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-13-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-13-LQR-LQG",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-14-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-14-Cascaded-PID-Control",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-15-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-15-PID-Optimization-Strategies",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-16-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-16-ADRC-Theory",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-17-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-18-assessment",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/CT-19-Model-Predictive-Control",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/control-theory/README",
+        "sectionId": "foundations",
+        "routeId": "control-theory",
+        "stageId": "control-theory"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-01-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-02-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-03-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-03-BJT-Basics",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-04-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-05-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-06-IGBT-Principles",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-06-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-07-OpAmp",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-07-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-08-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-09-H-Bridge",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/EE-09-assessment",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/power-electronics-basics/README",
+        "sectionId": "foundations",
+        "routeId": "power-electronics-basics",
+        "stageId": "power-electronics-basics"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-05-assessment",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-05-Digital-Twin",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/SIM-03-C-Simulation-Plotting",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/04-add-observer-signal/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/c-simulation/code-examples/05-commissioning-debug/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-c"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/foundation/MS-00-Simulation-Setup",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/custom-blocks/MS-04-S-Function",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-matlab"
+      },
+      {
+        "id": "foundations/simulation/power-simulations/README",
+        "sectionId": "foundations",
+        "routeId": "simulation",
+        "stageId": "simulation-power"
+      },
       {
         "id": "power/MISSION",
         "sectionId": "power",
@@ -652,12 +1094,6 @@
         "sectionId": "power",
         "routeId": "project",
         "stageId": "projects"
-      },
-      {
-        "id": "power/simulations/README",
-        "sectionId": "power",
-        "routeId": "project",
-        "stageId": "simulations"
       },
       {
         "id": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
@@ -1752,120 +2188,6 @@
         "stageId": "cross-reference"
       },
       {
-        "id": "motor/electronics-basics/EE-01-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-02-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-02-Diodes-And-Rectification",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-03-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-03-BJT-Basics",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-04-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-04-MOSFET-Principles",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-05-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-06-IGBT-Principles",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-06-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-07-OpAmp",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-07-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-08-Rectifier-Inverter",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-08-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-09-H-Bridge",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/EE-09-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
-        "id": "motor/electronics-basics/README",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "electronics-basics"
-      },
-      {
         "id": "motor/hardware/HW-01-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
@@ -2128,234 +2450,6 @@
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
-      },
-      {
-        "id": "motor/control-theory/CT-01-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-02-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-02-Time-Domain-Analysis",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-03-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-03-Frequency-Response-Bode",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-04-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-04-PID-Control-Principles",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-05-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-05-PID-Tuning-Implementation",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-06-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-06-Feedforward-Control",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-07-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-07-Nyquist-Stability",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-08-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-08-Root-Locus",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-09-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-09-Compensator-Design",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-10-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-10-State-Space",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-11-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-11-Observer-Design",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-12-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-12-State-Feedback",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-13-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-13-LQR-LQG",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-14-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-14-Cascaded-PID-Control",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-15-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-15-PID-Optimization-Strategies",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-16-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-16-ADRC-Theory",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-17-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-17-LADRC-Linear-ADRC",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-18-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/CT-19-Model-Predictive-Control",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "motor/control-theory/README",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "control-theory"
       },
       {
         "id": "motor/foundations/FOUND-01-Per-Unit-System",
@@ -3042,84 +3136,6 @@
         "stageId": "pfc-motor-integration"
       },
       {
-        "id": "motor/simulation/code-examples/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-01-C-Simulation-QuickStart",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-00-C-Simulation-Overview",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-05-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-05-Digital-Twin",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-02-C-Simulation-Code-Map",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/SIM-03-C-Simulation-Plotting",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/code-examples/01-pi-tuning-basic/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/code-examples/02-custom-speed-profile/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/code-examples/04-add-observer-signal/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
-        "id": "motor/simulation/code-examples/05-commissioning-debug/README",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "simulation"
-      },
-      {
         "id": "motor/practice/PRACTICE-11-FOC-Engineering",
         "sectionId": "motor",
         "routeId": "practice",
@@ -3598,58 +3614,90 @@
         "sectionId": "motor",
         "routeId": "ecosystem",
         "stageId": "controllers-evolution"
-      },
-      {
-        "id": "matlab-simulink/README",
-        "sectionId": "matlab-simulink",
-        "routeId": "foundation",
-        "stageId": "matlab-simulink-overview"
-      },
-      {
-        "id": "matlab-simulink/foundation/MS-00-Simulation-Setup",
-        "sectionId": "matlab-simulink",
-        "routeId": "foundation",
-        "stageId": "setup"
-      },
-      {
-        "id": "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
-        "sectionId": "matlab-simulink",
-        "routeId": "matlab-discrete",
-        "stageId": "matlab-discrete-control"
-      },
-      {
-        "id": "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
-        "sectionId": "matlab-simulink",
-        "routeId": "simulink-discrete",
-        "stageId": "simulink-discrete-control"
-      },
-      {
-        "id": "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
-        "sectionId": "matlab-simulink",
-        "routeId": "custom-blocks",
-        "stageId": "matlab-function"
-      },
-      {
-        "id": "matlab-simulink/custom-blocks/MS-04-S-Function",
-        "sectionId": "matlab-simulink",
-        "routeId": "custom-blocks",
-        "stageId": "s-function"
-      },
-      {
-        "id": "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
-        "sectionId": "matlab-simulink",
-        "routeId": "tuning-validation",
-        "stageId": "parameter-auto-tuning"
-      },
-      {
-        "id": "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
-        "sectionId": "matlab-simulink",
-        "routeId": "applications",
-        "stageId": "power-electronics-fast-track"
       }
     ]
   },
   "mappedArticleIds": [
+    "foundations/README",
+    "foundations/control-theory/CT-01-assessment",
+    "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
+    "foundations/control-theory/CT-02-assessment",
+    "foundations/control-theory/CT-02-Time-Domain-Analysis",
+    "foundations/control-theory/CT-03-assessment",
+    "foundations/control-theory/CT-03-Frequency-Response-Bode",
+    "foundations/control-theory/CT-04-assessment",
+    "foundations/control-theory/CT-04-PID-Control-Principles",
+    "foundations/control-theory/CT-05-assessment",
+    "foundations/control-theory/CT-05-PID-Tuning-Implementation",
+    "foundations/control-theory/CT-06-assessment",
+    "foundations/control-theory/CT-06-Feedforward-Control",
+    "foundations/control-theory/CT-07-assessment",
+    "foundations/control-theory/CT-07-Nyquist-Stability",
+    "foundations/control-theory/CT-08-assessment",
+    "foundations/control-theory/CT-08-Root-Locus",
+    "foundations/control-theory/CT-09-assessment",
+    "foundations/control-theory/CT-09-Compensator-Design",
+    "foundations/control-theory/CT-10-assessment",
+    "foundations/control-theory/CT-10-State-Space",
+    "foundations/control-theory/CT-11-assessment",
+    "foundations/control-theory/CT-11-Observer-Design",
+    "foundations/control-theory/CT-12-assessment",
+    "foundations/control-theory/CT-12-State-Feedback",
+    "foundations/control-theory/CT-13-assessment",
+    "foundations/control-theory/CT-13-LQR-LQG",
+    "foundations/control-theory/CT-14-assessment",
+    "foundations/control-theory/CT-14-Cascaded-PID-Control",
+    "foundations/control-theory/CT-15-assessment",
+    "foundations/control-theory/CT-15-PID-Optimization-Strategies",
+    "foundations/control-theory/CT-16-assessment",
+    "foundations/control-theory/CT-16-ADRC-Theory",
+    "foundations/control-theory/CT-17-assessment",
+    "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
+    "foundations/control-theory/CT-18-assessment",
+    "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
+    "foundations/control-theory/CT-19-Model-Predictive-Control",
+    "foundations/control-theory/README",
+    "foundations/power-electronics-basics/EE-01-assessment",
+    "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
+    "foundations/power-electronics-basics/EE-02-assessment",
+    "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
+    "foundations/power-electronics-basics/EE-03-assessment",
+    "foundations/power-electronics-basics/EE-03-BJT-Basics",
+    "foundations/power-electronics-basics/EE-04-assessment",
+    "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
+    "foundations/power-electronics-basics/EE-05-assessment",
+    "foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive",
+    "foundations/power-electronics-basics/EE-06-IGBT-Principles",
+    "foundations/power-electronics-basics/EE-06-assessment",
+    "foundations/power-electronics-basics/EE-07-OpAmp",
+    "foundations/power-electronics-basics/EE-07-assessment",
+    "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
+    "foundations/power-electronics-basics/EE-08-assessment",
+    "foundations/power-electronics-basics/EE-09-H-Bridge",
+    "foundations/power-electronics-basics/EE-09-assessment",
+    "foundations/power-electronics-basics/README",
+    "foundations/simulation/c-simulation/code-examples/README",
+    "foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart",
+    "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
+    "foundations/simulation/c-simulation/SIM-05-assessment",
+    "foundations/simulation/c-simulation/SIM-05-Digital-Twin",
+    "foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
+    "foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map",
+    "foundations/simulation/c-simulation/SIM-03-C-Simulation-Plotting",
+    "foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README",
+    "foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README",
+    "foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/README",
+    "foundations/simulation/c-simulation/code-examples/04-add-observer-signal/README",
+    "foundations/simulation/c-simulation/code-examples/05-commissioning-debug/README",
+    "foundations/simulation/matlab-simulink/README",
+    "foundations/simulation/matlab-simulink/foundation/MS-00-Simulation-Setup",
+    "foundations/simulation/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
+    "foundations/simulation/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
+    "foundations/simulation/matlab-simulink/custom-blocks/MS-03-Matlab-Function",
+    "foundations/simulation/matlab-simulink/custom-blocks/MS-04-S-Function",
+    "foundations/simulation/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
+    "foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track",
+    "foundations/simulation/power-simulations/README",
     "power/MISSION",
     "power/USAGE",
     "power/RESOURCES",
@@ -3708,7 +3756,6 @@
     "power/projects/01-boost-basics/README",
     "power/projects/02-boost-c-firmware-skeleton/README",
     "power/projects/03-ups-c-firmware-skeleton/README",
-    "power/simulations/README",
     "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
     "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
     "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
@@ -3891,25 +3938,6 @@
     "motor/cross-reference/xref-adv-base",
     "motor/cross-reference/xref-practice",
     "motor/cross-reference/xref-motion-control",
-    "motor/electronics-basics/EE-01-assessment",
-    "motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-    "motor/electronics-basics/EE-02-assessment",
-    "motor/electronics-basics/EE-02-Diodes-And-Rectification",
-    "motor/electronics-basics/EE-03-assessment",
-    "motor/electronics-basics/EE-03-BJT-Basics",
-    "motor/electronics-basics/EE-04-assessment",
-    "motor/electronics-basics/EE-04-MOSFET-Principles",
-    "motor/electronics-basics/EE-05-assessment",
-    "motor/electronics-basics/EE-05-MOSFET-Gate-Drive",
-    "motor/electronics-basics/EE-06-IGBT-Principles",
-    "motor/electronics-basics/EE-06-assessment",
-    "motor/electronics-basics/EE-07-OpAmp",
-    "motor/electronics-basics/EE-07-assessment",
-    "motor/electronics-basics/EE-08-Rectifier-Inverter",
-    "motor/electronics-basics/EE-08-assessment",
-    "motor/electronics-basics/EE-09-H-Bridge",
-    "motor/electronics-basics/EE-09-assessment",
-    "motor/electronics-basics/README",
     "motor/hardware/HW-01-assessment",
     "motor/hardware/HW-01-Motor-Basics",
     "motor/hardware/HW-01B-assessment",
@@ -3954,44 +3982,6 @@
     "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
     "motor/power-path/PP-11-assessment",
     "motor/power-path/README",
-    "motor/control-theory/CT-01-assessment",
-    "motor/control-theory/CT-01-Open-Loop-Closed-Loop",
-    "motor/control-theory/CT-02-assessment",
-    "motor/control-theory/CT-02-Time-Domain-Analysis",
-    "motor/control-theory/CT-03-assessment",
-    "motor/control-theory/CT-03-Frequency-Response-Bode",
-    "motor/control-theory/CT-04-assessment",
-    "motor/control-theory/CT-04-PID-Control-Principles",
-    "motor/control-theory/CT-05-assessment",
-    "motor/control-theory/CT-05-PID-Tuning-Implementation",
-    "motor/control-theory/CT-06-assessment",
-    "motor/control-theory/CT-06-Feedforward-Control",
-    "motor/control-theory/CT-07-assessment",
-    "motor/control-theory/CT-07-Nyquist-Stability",
-    "motor/control-theory/CT-08-assessment",
-    "motor/control-theory/CT-08-Root-Locus",
-    "motor/control-theory/CT-09-assessment",
-    "motor/control-theory/CT-09-Compensator-Design",
-    "motor/control-theory/CT-10-assessment",
-    "motor/control-theory/CT-10-State-Space",
-    "motor/control-theory/CT-11-assessment",
-    "motor/control-theory/CT-11-Observer-Design",
-    "motor/control-theory/CT-12-assessment",
-    "motor/control-theory/CT-12-State-Feedback",
-    "motor/control-theory/CT-13-assessment",
-    "motor/control-theory/CT-13-LQR-LQG",
-    "motor/control-theory/CT-14-assessment",
-    "motor/control-theory/CT-14-Cascaded-PID-Control",
-    "motor/control-theory/CT-15-assessment",
-    "motor/control-theory/CT-15-PID-Optimization-Strategies",
-    "motor/control-theory/CT-16-assessment",
-    "motor/control-theory/CT-16-ADRC-Theory",
-    "motor/control-theory/CT-17-assessment",
-    "motor/control-theory/CT-17-LADRC-Linear-ADRC",
-    "motor/control-theory/CT-18-assessment",
-    "motor/control-theory/CT-18-ADRC-LADRC-Implementation",
-    "motor/control-theory/CT-19-Model-Predictive-Control",
-    "motor/control-theory/README",
     "motor/foundations/FOUND-01-Per-Unit-System",
     "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
     "motor/foundations/FOUND-03-SPWM-Principle-DSP",
@@ -4106,19 +4096,6 @@
     "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
     "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
     "motor/pfc-motor-integration/PMI-03-Appliance-Variable-Frequency",
-    "motor/simulation/code-examples/README",
-    "motor/simulation/SIM-01-C-Simulation-QuickStart",
-    "motor/simulation/SIM-00-C-Simulation-Overview",
-    "motor/simulation/SIM-05-assessment",
-    "motor/simulation/SIM-05-Digital-Twin",
-    "motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
-    "motor/simulation/SIM-02-C-Simulation-Code-Map",
-    "motor/simulation/SIM-03-C-Simulation-Plotting",
-    "motor/simulation/code-examples/01-pi-tuning-basic/README",
-    "motor/simulation/code-examples/02-custom-speed-profile/README",
-    "motor/simulation/code-examples/03-enable-inverter-nonlinearity/README",
-    "motor/simulation/code-examples/04-add-observer-signal/README",
-    "motor/simulation/code-examples/05-commissioning-debug/README",
     "motor/practice/PRACTICE-11-FOC-Engineering",
     "motor/practice/PRACTICE-12-PMSM-Simulation",
     "motor/practice/PRACTICE-13-Sensorless-Control",
@@ -4198,19 +4175,11 @@
     "motor/controllers-evolution/CE-21-Gain-Scheduling",
     "motor/controllers-evolution/CE-22-H-Infinity-Robust-Control",
     "motor/controllers-evolution/CE-23-Control-Theory-FAQ",
-    "motor/controllers-evolution/README",
-    "matlab-simulink/README",
-    "matlab-simulink/foundation/MS-00-Simulation-Setup",
-    "matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control",
-    "matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control",
-    "matlab-simulink/custom-blocks/MS-03-Matlab-Function",
-    "matlab-simulink/custom-blocks/MS-04-S-Function",
-    "matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning",
-    "matlab-simulink/applications/matlab-simulink-power-electronics-fast-track"
+    "motor/controllers-evolution/README"
   ],
   "baseline": {
-    "expected": 557,
-    "mapped": 557,
+    "expected": 558,
+    "mapped": 558,
     "missing": [],
     "unexpected": []
   },

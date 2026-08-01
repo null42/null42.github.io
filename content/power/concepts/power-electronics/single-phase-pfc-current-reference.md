@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 电流参考"
+title: 概念：单相 PFC 电流参考
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）的第一步，是让输入电流尽量跟交流输入电压同相、同形。电流参考（current reference）就是控制器希望输入电流跟踪的目标波形。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：三电平 NPC 逆变器"
+title: 概念：三电平 NPC 逆变器
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "它是什么"
+summary: 三电平 NPC 逆变器（three-level neutral-point-clamped inverter / NPC inverter）让每相输出 +Vdc/2、0、-Vdc/2 三种电平，降低电压应力和输出谐波。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

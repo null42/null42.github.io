@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：Boost 控制中断服务程序（control interrupt service routine / control ISR）软件骨架"
+title: 概念：Boost 控制中断服务程序（control interrupt service routine / control ISR）软件骨架
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 控制中断服务程序（control interrupt service routine / control ISR）是电源控制软件里按固定周期运行的核心函数。它通常完成：
 navGroup: 核心概念
 navGroupOrder: 20
 ---

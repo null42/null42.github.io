@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：Vienna PFC 与中点电压平衡"
+title: 概念：Vienna PFC 与中点电压平衡
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "它是什么"
+summary: 维也纳整流器（Vienna rectifier）是三相三电平单向 PFC 整流拓扑。中点电压平衡（neutral-point voltage balance）要求上下母线电容电压接近相等。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

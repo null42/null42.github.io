@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：单相 PFC 平均控制链"
+title: 概念：单相 PFC 平均控制链
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 功率因数校正（power factor correction / PFC）的平均模型（averaged model）把“开关每个周期怎么翻转”暂时压缩掉，只保留控制链路中的慢变量：
 navGroup: 核心概念
 navGroupOrder: 20
 ---

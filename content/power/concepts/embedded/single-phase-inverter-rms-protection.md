@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：单相逆变器 RMS 估算与欠压保护"
+title: 概念：单相逆变器 RMS 估算与欠压保护
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: 均方根（root mean square / RMS）是交流电压有效值的常用表示。对正弦电压，峰值约等于 RMS 值乘以 sqrt(2)。欠压保护（undervoltage protection / UV protection）不是看某一个瞬时采样点是否很低，而是常常先估算一段窗口内的 RMS，再配合保持时间判断是否故障。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

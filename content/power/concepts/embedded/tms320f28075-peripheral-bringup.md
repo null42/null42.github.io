@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：F28075 外设从零配置"
+title: 概念：F28075 外设从零配置
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "官方资料"
+summary: F28075 外设从零配置，是把一个空工程逐步带到可运行 UPS/PCS 控制 ISR 的过程。关键外设包括 ePWM、ADC、Trip Zone、PIE、GPIO、SCI、CAN、SPI、I2C、eCAP、eQEP、CLA、DMA。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

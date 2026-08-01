@@ -20,7 +20,7 @@ navGroupOrder: 25
 
 # Translation Manifest
 
-- Source: `E:\文档\Fundamentals of Power Electronics 3rd Edition.pdf`
+- Source: `<SOURCE_ROOT>/Fundamentals-of-Power-Electronics-3rd-Edition.pdf`
 - Type: `pdf`
 - Pages: `1081` (file-pages)
 - Max pages per chunk: `20`

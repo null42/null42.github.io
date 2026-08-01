@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：系统故障闭环（system fault closure）"
+title: 概念：系统故障闭环（system fault closure）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 系统故障闭环（system fault closure）是把故障锁存（fault latch）、UPS 模式状态机（UPS mode state machine）和输出许可（output permission）连起来：故障锁存后，系统强制进入故障模式并关闭输出；安全复位条件满足后，再允许回到正常模式。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

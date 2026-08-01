@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-power
 chapterTitle: 电力电子拓扑
@@ -7,14 +7,14 @@ chapterOrder: 30
 category: 电力电子拓扑
 source: power
 visibility: public
-title: "概念：连续导通模式（continuous conduction mode / CCM）与断续导通模式（discontinuous conduction mode / DCM）"
+title: 概念：连续导通模式（continuous conduction mode / CCM）与断续导通模式（discontinuous conduction mode / DCM）
 tags:
   - power-electronics
   - UPS
   - 拓扑
   - PFC
 status: learning
-summary: "1. 它是什么"
+summary: 连续导通模式（continuous conduction mode / CCM）指电感电流（inductor current）在一个开关周期内始终大于 0。断续导通模式（discontinuous conduction mode / DCM）指电感电流在一个开关周期内会降到 0，并保持一段零电流时间。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

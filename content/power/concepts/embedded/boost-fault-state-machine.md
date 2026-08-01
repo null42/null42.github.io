@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：Boost 故障锁存与复位状态机（Fault Latch And Reset State Machine）"
+title: 概念：Boost 故障锁存与复位状态机（Fault Latch And Reset State Machine）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: 故障锁存（fault latch）是指：一旦检测到严重故障，软件把故障码保存下来，并禁止功率输出，不能因为下一次采样恢复正常就自动重新运行。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

@@ -28,7 +28,7 @@ navGroupOrder: 20
 原始系统图：
 
 ```text
-E:\电脑管家迁移文件\xwechat_files\wxid_nhg5nq9ysctu22_3a33\temp\RWTemp\2026-07\9e20f478899dc29eb19741386f9343c8\c0c6a83c75e070af7b2cc18f4f6f5335.jpg
+<SOURCE_ROOT>/reference/topology-original.jpg
 ```
 
 编号图：

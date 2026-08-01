@@ -416,60 +416,564 @@
       "target": "/posts/encrypted/worldbuilding/"
     },
     {
-      "path": "/content/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track.html",
+      "path": "/content/foundations/control-theory/CT-01-assessment.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
-      "target": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
+      "finalUrl": "/posts/foundations/control-theory/ct-01-assessment/",
+      "target": "/posts/foundations/control-theory/ct-01-assessment/"
     },
     {
-      "path": "/content/matlab-simulink/custom-blocks/MS-03-Matlab-Function.html",
+      "path": "/content/foundations/control-theory/CT-01-Open-Loop-Closed-Loop.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/custom-blocks/ms-03-matlab-function/",
-      "target": "/posts/matlab-simulink/custom-blocks/ms-03-matlab-function/"
+      "finalUrl": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/",
+      "target": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/"
     },
     {
-      "path": "/content/matlab-simulink/custom-blocks/MS-04-S-Function.html",
+      "path": "/content/foundations/control-theory/CT-02-assessment.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/custom-blocks/ms-04-s-function/",
-      "target": "/posts/matlab-simulink/custom-blocks/ms-04-s-function/"
+      "finalUrl": "/posts/foundations/control-theory/ct-02-assessment/",
+      "target": "/posts/foundations/control-theory/ct-02-assessment/"
     },
     {
-      "path": "/content/matlab-simulink/foundation/MS-00-Simulation-Setup.html",
+      "path": "/content/foundations/control-theory/CT-02-Time-Domain-Analysis.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/foundation/ms-00-simulation-setup/",
-      "target": "/posts/matlab-simulink/foundation/ms-00-simulation-setup/"
+      "finalUrl": "/posts/foundations/control-theory/ct-02-time-domain-analysis/",
+      "target": "/posts/foundations/control-theory/ct-02-time-domain-analysis/"
     },
     {
-      "path": "/content/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control.html",
+      "path": "/content/foundations/control-theory/CT-03-assessment.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/",
-      "target": "/posts/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/"
+      "finalUrl": "/posts/foundations/control-theory/ct-03-assessment/",
+      "target": "/posts/foundations/control-theory/ct-03-assessment/"
     },
     {
-      "path": "/content/matlab-simulink/README.html",
+      "path": "/content/foundations/control-theory/CT-03-Frequency-Response-Bode.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/readme/",
-      "target": "/posts/matlab-simulink/readme/"
+      "finalUrl": "/posts/foundations/control-theory/ct-03-frequency-response-bode/",
+      "target": "/posts/foundations/control-theory/ct-03-frequency-response-bode/"
     },
     {
-      "path": "/content/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control.html",
+      "path": "/content/foundations/control-theory/CT-04-assessment.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/",
-      "target": "/posts/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/"
+      "finalUrl": "/posts/foundations/control-theory/ct-04-assessment/",
+      "target": "/posts/foundations/control-theory/ct-04-assessment/"
     },
     {
-      "path": "/content/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning.html",
+      "path": "/content/foundations/control-theory/CT-04-PID-Control-Principles.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/",
-      "target": "/posts/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/"
+      "finalUrl": "/posts/foundations/control-theory/ct-04-pid-control-principles/",
+      "target": "/posts/foundations/control-theory/ct-04-pid-control-principles/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-05-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-05-assessment/",
+      "target": "/posts/foundations/control-theory/ct-05-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-05-PID-Tuning-Implementation.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/",
+      "target": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-06-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-06-assessment/",
+      "target": "/posts/foundations/control-theory/ct-06-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-06-Feedforward-Control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-06-feedforward-control/",
+      "target": "/posts/foundations/control-theory/ct-06-feedforward-control/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-07-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-07-assessment/",
+      "target": "/posts/foundations/control-theory/ct-07-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-07-Nyquist-Stability.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-07-nyquist-stability/",
+      "target": "/posts/foundations/control-theory/ct-07-nyquist-stability/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-08-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-08-assessment/",
+      "target": "/posts/foundations/control-theory/ct-08-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-08-Root-Locus.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-08-root-locus/",
+      "target": "/posts/foundations/control-theory/ct-08-root-locus/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-09-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-09-assessment/",
+      "target": "/posts/foundations/control-theory/ct-09-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-09-Compensator-Design.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-09-compensator-design/",
+      "target": "/posts/foundations/control-theory/ct-09-compensator-design/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-10-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-10-assessment/",
+      "target": "/posts/foundations/control-theory/ct-10-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-10-State-Space.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-10-state-space/",
+      "target": "/posts/foundations/control-theory/ct-10-state-space/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-11-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-11-assessment/",
+      "target": "/posts/foundations/control-theory/ct-11-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-11-Observer-Design.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-11-observer-design/",
+      "target": "/posts/foundations/control-theory/ct-11-observer-design/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-12-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-12-assessment/",
+      "target": "/posts/foundations/control-theory/ct-12-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-12-State-Feedback.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-12-state-feedback/",
+      "target": "/posts/foundations/control-theory/ct-12-state-feedback/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-13-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-13-assessment/",
+      "target": "/posts/foundations/control-theory/ct-13-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-13-LQR-LQG.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-13-lqr-lqg/",
+      "target": "/posts/foundations/control-theory/ct-13-lqr-lqg/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-14-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-14-assessment/",
+      "target": "/posts/foundations/control-theory/ct-14-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-14-Cascaded-PID-Control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/",
+      "target": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-15-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-15-assessment/",
+      "target": "/posts/foundations/control-theory/ct-15-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-15-PID-Optimization-Strategies.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-15-pid-optimization-strategies/",
+      "target": "/posts/foundations/control-theory/ct-15-pid-optimization-strategies/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-16-ADRC-Theory.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-16-adrc-theory/",
+      "target": "/posts/foundations/control-theory/ct-16-adrc-theory/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-16-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-16-assessment/",
+      "target": "/posts/foundations/control-theory/ct-16-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-17-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-17-assessment/",
+      "target": "/posts/foundations/control-theory/ct-17-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-17-LADRC-Linear-ADRC.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-17-ladrc-linear-adrc/",
+      "target": "/posts/foundations/control-theory/ct-17-ladrc-linear-adrc/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-18-ADRC-LADRC-Implementation.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/",
+      "target": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-18-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-18-assessment/",
+      "target": "/posts/foundations/control-theory/ct-18-assessment/"
+    },
+    {
+      "path": "/content/foundations/control-theory/CT-19-Model-Predictive-Control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-19-model-predictive-control/",
+      "target": "/posts/foundations/control-theory/ct-19-model-predictive-control/"
+    },
+    {
+      "path": "/content/foundations/control-theory/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/readme/",
+      "target": "/posts/foundations/control-theory/readme/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-01-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-01-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
+      "target": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-02-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-02-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-02-Diodes-And-Rectification.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/",
+      "target": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-03-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-03-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-03-BJT-Basics.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/",
+      "target": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-04-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-04-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-04-MOSFET-Principles.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/",
+      "target": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-05-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-05-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/",
+      "target": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-06-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-06-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-06-IGBT-Principles.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/",
+      "target": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-07-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-07-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-07-OpAmp.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-opamp/",
+      "target": "/posts/foundations/power-electronics-basics/ee-07-opamp/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-08-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-08-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-08-Rectifier-Inverter.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/",
+      "target": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-09-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-assessment/",
+      "target": "/posts/foundations/power-electronics-basics/ee-09-assessment/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/EE-09-H-Bridge.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-h-bridge/",
+      "target": "/posts/foundations/power-electronics-basics/ee-09-h-bridge/"
+    },
+    {
+      "path": "/content/foundations/power-electronics-basics/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/readme/",
+      "target": "/posts/foundations/power-electronics-basics/readme/"
+    },
+    {
+      "path": "/content/foundations/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/readme/",
+      "target": "/posts/foundations/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/04-add-observer-signal/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/04-add-observer-signal/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/04-add-observer-signal/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/05-commissioning-debug/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/05-commissioning-debug/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/05-commissioning-debug/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/code-examples/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/readme/",
+      "target": "/posts/foundations/simulation/c-simulation/code-examples/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-00-c-simulation-overview/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-00-c-simulation-overview/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-01-c-simulation-quickstart/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-01-c-simulation-quickstart/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-02-c-simulation-code-map/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-02-c-simulation-code-map/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-03-C-Simulation-Plotting.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-03-c-simulation-plotting/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-03-c-simulation-plotting/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-05-assessment.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-assessment/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-05-assessment/"
+    },
+    {
+      "path": "/content/foundations/simulation/c-simulation/SIM-05-Digital-Twin.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-digital-twin/",
+      "target": "/posts/foundations/simulation/c-simulation/sim-05-digital-twin/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "target": "/posts/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/custom-blocks/MS-03-Matlab-Function.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-03-matlab-function/",
+      "target": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-03-matlab-function/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/custom-blocks/MS-04-S-Function.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-04-s-function/",
+      "target": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-04-s-function/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/foundation/MS-00-Simulation-Setup.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/foundation/ms-00-simulation-setup/",
+      "target": "/posts/foundations/simulation/matlab-simulink/foundation/ms-00-simulation-setup/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/matlab-discrete-control/MS-01-Matlab-Discrete-Control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/",
+      "target": "/posts/foundations/simulation/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/readme/",
+      "target": "/posts/foundations/simulation/matlab-simulink/readme/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/simulink-discrete-control/MS-02-Simulink-Discrete-Control.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/",
+      "target": "/posts/foundations/simulation/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/"
+    },
+    {
+      "path": "/content/foundations/simulation/matlab-simulink/tuning-validation/MS-05-Parameter-Auto-Tuning.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/",
+      "target": "/posts/foundations/simulation/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/"
+    },
+    {
+      "path": "/content/foundations/simulation/power-simulations/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/power-simulations/readme/",
+      "target": "/posts/foundations/simulation/power-simulations/readme/"
     },
     {
       "path": "/content/motor/30-percent-roadmap.html",
@@ -1186,272 +1690,6 @@
       "target": "/posts/motor/comparison/comp-01-odrive-vs-vesc/"
     },
     {
-      "path": "/content/motor/control-theory/CT-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-01-assessment/",
-      "target": "/posts/motor/control-theory/ct-01-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-01-open-loop-closed-loop/",
-      "target": "/posts/motor/control-theory/ct-01-open-loop-closed-loop/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-02-assessment/",
-      "target": "/posts/motor/control-theory/ct-02-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-02-Time-Domain-Analysis.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-02-time-domain-analysis/",
-      "target": "/posts/motor/control-theory/ct-02-time-domain-analysis/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-03-assessment/",
-      "target": "/posts/motor/control-theory/ct-03-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-03-Frequency-Response-Bode.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-03-frequency-response-bode/",
-      "target": "/posts/motor/control-theory/ct-03-frequency-response-bode/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-04-assessment/",
-      "target": "/posts/motor/control-theory/ct-04-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-04-PID-Control-Principles.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-04-pid-control-principles/",
-      "target": "/posts/motor/control-theory/ct-04-pid-control-principles/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-05-assessment/",
-      "target": "/posts/motor/control-theory/ct-05-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-05-PID-Tuning-Implementation.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-05-pid-tuning-implementation/",
-      "target": "/posts/motor/control-theory/ct-05-pid-tuning-implementation/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-06-assessment/",
-      "target": "/posts/motor/control-theory/ct-06-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-06-Feedforward-Control.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-06-feedforward-control/",
-      "target": "/posts/motor/control-theory/ct-06-feedforward-control/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-07-assessment/",
-      "target": "/posts/motor/control-theory/ct-07-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-07-Nyquist-Stability.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-07-nyquist-stability/",
-      "target": "/posts/motor/control-theory/ct-07-nyquist-stability/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-08-assessment/",
-      "target": "/posts/motor/control-theory/ct-08-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-08-Root-Locus.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-08-root-locus/",
-      "target": "/posts/motor/control-theory/ct-08-root-locus/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-09-assessment/",
-      "target": "/posts/motor/control-theory/ct-09-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-09-Compensator-Design.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-09-compensator-design/",
-      "target": "/posts/motor/control-theory/ct-09-compensator-design/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-10-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-10-assessment/",
-      "target": "/posts/motor/control-theory/ct-10-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-10-State-Space.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-10-state-space/",
-      "target": "/posts/motor/control-theory/ct-10-state-space/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-11-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-11-assessment/",
-      "target": "/posts/motor/control-theory/ct-11-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-11-Observer-Design.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-11-observer-design/",
-      "target": "/posts/motor/control-theory/ct-11-observer-design/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-12-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-12-assessment/",
-      "target": "/posts/motor/control-theory/ct-12-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-12-State-Feedback.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-12-state-feedback/",
-      "target": "/posts/motor/control-theory/ct-12-state-feedback/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-13-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-13-assessment/",
-      "target": "/posts/motor/control-theory/ct-13-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-13-LQR-LQG.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-13-lqr-lqg/",
-      "target": "/posts/motor/control-theory/ct-13-lqr-lqg/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-14-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-14-assessment/",
-      "target": "/posts/motor/control-theory/ct-14-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-14-Cascaded-PID-Control.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-14-cascaded-pid-control/",
-      "target": "/posts/motor/control-theory/ct-14-cascaded-pid-control/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-15-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-15-assessment/",
-      "target": "/posts/motor/control-theory/ct-15-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-15-PID-Optimization-Strategies.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-15-pid-optimization-strategies/",
-      "target": "/posts/motor/control-theory/ct-15-pid-optimization-strategies/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-16-ADRC-Theory.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-16-adrc-theory/",
-      "target": "/posts/motor/control-theory/ct-16-adrc-theory/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-16-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-16-assessment/",
-      "target": "/posts/motor/control-theory/ct-16-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-17-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-17-assessment/",
-      "target": "/posts/motor/control-theory/ct-17-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-17-LADRC-Linear-ADRC.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-17-ladrc-linear-adrc/",
-      "target": "/posts/motor/control-theory/ct-17-ladrc-linear-adrc/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-18-ADRC-LADRC-Implementation.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-18-adrc-ladrc-implementation/",
-      "target": "/posts/motor/control-theory/ct-18-adrc-ladrc-implementation/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-18-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-18-assessment/",
-      "target": "/posts/motor/control-theory/ct-18-assessment/"
-    },
-    {
-      "path": "/content/motor/control-theory/CT-19-Model-Predictive-Control.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-19-model-predictive-control/",
-      "target": "/posts/motor/control-theory/ct-19-model-predictive-control/"
-    },
-    {
-      "path": "/content/motor/control-theory/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/readme/",
-      "target": "/posts/motor/control-theory/readme/"
-    },
-    {
       "path": "/content/motor/controllers-evolution/CE-01-Century-of-Feedback.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -1688,139 +1926,6 @@
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/cross-reference/xref-practice/",
       "target": "/posts/motor/cross-reference/xref-practice/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-01-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-01-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
-      "target": "/posts/motor/electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-02-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-02-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-02-Diodes-And-Rectification.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-02-diodes-and-rectification/",
-      "target": "/posts/motor/electronics-basics/ee-02-diodes-and-rectification/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-03-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-03-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-03-BJT-Basics.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-03-bjt-basics/",
-      "target": "/posts/motor/electronics-basics/ee-03-bjt-basics/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-04-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-04-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-04-MOSFET-Principles.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-04-mosfet-principles/",
-      "target": "/posts/motor/electronics-basics/ee-04-mosfet-principles/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-05-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-05-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-05-MOSFET-Gate-Drive.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-05-mosfet-gate-drive/",
-      "target": "/posts/motor/electronics-basics/ee-05-mosfet-gate-drive/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-06-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-06-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-06-IGBT-Principles.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-06-igbt-principles/",
-      "target": "/posts/motor/electronics-basics/ee-06-igbt-principles/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-07-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-07-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-07-OpAmp.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-07-opamp/",
-      "target": "/posts/motor/electronics-basics/ee-07-opamp/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-08-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-08-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-08-Rectifier-Inverter.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-08-rectifier-inverter/",
-      "target": "/posts/motor/electronics-basics/ee-08-rectifier-inverter/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-09-assessment/",
-      "target": "/posts/motor/electronics-basics/ee-09-assessment/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/EE-09-H-Bridge.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-09-h-bridge/",
-      "target": "/posts/motor/electronics-basics/ee-09-h-bridge/"
-    },
-    {
-      "path": "/content/motor/electronics-basics/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/readme/",
-      "target": "/posts/motor/electronics-basics/readme/"
     },
     {
       "path": "/content/motor/foundations/FOUND-01-Per-Unit-System.html",
@@ -2787,97 +2892,6 @@
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/readme/",
       "target": "/posts/motor/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/01-pi-tuning-basic/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/01-pi-tuning-basic/readme/",
-      "target": "/posts/motor/simulation/code-examples/01-pi-tuning-basic/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/02-custom-speed-profile/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/02-custom-speed-profile/readme/",
-      "target": "/posts/motor/simulation/code-examples/02-custom-speed-profile/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/03-enable-inverter-nonlinearity/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/03-enable-inverter-nonlinearity/readme/",
-      "target": "/posts/motor/simulation/code-examples/03-enable-inverter-nonlinearity/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/04-add-observer-signal/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/04-add-observer-signal/readme/",
-      "target": "/posts/motor/simulation/code-examples/04-add-observer-signal/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/05-commissioning-debug/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/05-commissioning-debug/readme/",
-      "target": "/posts/motor/simulation/code-examples/05-commissioning-debug/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/code-examples/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/readme/",
-      "target": "/posts/motor/simulation/code-examples/readme/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-00-C-Simulation-Overview.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-00-c-simulation-overview/",
-      "target": "/posts/motor/simulation/sim-00-c-simulation-overview/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-01-C-Simulation-QuickStart.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-01-c-simulation-quickstart/",
-      "target": "/posts/motor/simulation/sim-01-c-simulation-quickstart/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-02-C-Simulation-Code-Map.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-02-c-simulation-code-map/",
-      "target": "/posts/motor/simulation/sim-02-c-simulation-code-map/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-03-C-Simulation-Plotting.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-03-c-simulation-plotting/",
-      "target": "/posts/motor/simulation/sim-03-c-simulation-plotting/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-04-emachinery-Complete-Usage-Tutorial.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-04-emachinery-complete-usage-tutorial/",
-      "target": "/posts/motor/simulation/sim-04-emachinery-complete-usage-tutorial/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-05-assessment/",
-      "target": "/posts/motor/simulation/sim-05-assessment/"
-    },
-    {
-      "path": "/content/motor/simulation/SIM-05-Digital-Twin.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-05-digital-twin/",
-      "target": "/posts/motor/simulation/sim-05-digital-twin/"
     },
     {
       "path": "/content/motor/VESC/VC-01-Architecture.html",
@@ -4308,13 +4322,6 @@
       "target": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
     },
     {
-      "path": "/content/power/simulations/README.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/power/simulations/readme/",
-      "target": "/posts/power/simulations/readme/"
-    },
-    {
       "path": "/content/power/USAGE.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -4402,52 +4409,484 @@
       "finalUrl": "/posts/encrypted/worldbuilding/"
     },
     {
-      "path": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "path": "/posts/foundations/control-theory/ct-01-assessment/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
+      "finalUrl": "/posts/foundations/control-theory/ct-01-assessment/"
     },
     {
-      "path": "/posts/matlab-simulink/custom-blocks/ms-03-matlab-function/",
+      "path": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/custom-blocks/ms-03-matlab-function/"
+      "finalUrl": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/"
     },
     {
-      "path": "/posts/matlab-simulink/custom-blocks/ms-04-s-function/",
+      "path": "/posts/foundations/control-theory/ct-02-assessment/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/custom-blocks/ms-04-s-function/"
+      "finalUrl": "/posts/foundations/control-theory/ct-02-assessment/"
     },
     {
-      "path": "/posts/matlab-simulink/foundation/ms-00-simulation-setup/",
+      "path": "/posts/foundations/control-theory/ct-02-time-domain-analysis/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/foundation/ms-00-simulation-setup/"
+      "finalUrl": "/posts/foundations/control-theory/ct-02-time-domain-analysis/"
     },
     {
-      "path": "/posts/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/",
+      "path": "/posts/foundations/control-theory/ct-03-assessment/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/"
+      "finalUrl": "/posts/foundations/control-theory/ct-03-assessment/"
     },
     {
-      "path": "/posts/matlab-simulink/readme/",
+      "path": "/posts/foundations/control-theory/ct-03-frequency-response-bode/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/readme/"
+      "finalUrl": "/posts/foundations/control-theory/ct-03-frequency-response-bode/"
     },
     {
-      "path": "/posts/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/",
+      "path": "/posts/foundations/control-theory/ct-04-assessment/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/"
+      "finalUrl": "/posts/foundations/control-theory/ct-04-assessment/"
     },
     {
-      "path": "/posts/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/",
+      "path": "/posts/foundations/control-theory/ct-04-pid-control-principles/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/"
+      "finalUrl": "/posts/foundations/control-theory/ct-04-pid-control-principles/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-05-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-05-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-06-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-06-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-06-feedforward-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-06-feedforward-control/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-07-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-07-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-07-nyquist-stability/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-07-nyquist-stability/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-08-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-08-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-08-root-locus/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-08-root-locus/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-09-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-09-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-09-compensator-design/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-09-compensator-design/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-10-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-10-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-10-state-space/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-10-state-space/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-11-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-11-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-11-observer-design/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-11-observer-design/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-12-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-12-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-12-state-feedback/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-12-state-feedback/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-13-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-13-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-13-lqr-lqg/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-13-lqr-lqg/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-14-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-14-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-15-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-15-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-15-pid-optimization-strategies/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-15-pid-optimization-strategies/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-16-adrc-theory/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-16-adrc-theory/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-16-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-16-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-17-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-17-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-17-ladrc-linear-adrc/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-17-ladrc-linear-adrc/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-18-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-18-assessment/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/ct-19-model-predictive-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/ct-19-model-predictive-control/"
+    },
+    {
+      "path": "/posts/foundations/control-theory/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/control-theory/readme/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-01-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-02-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-03-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-04-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-05-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-06-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-07-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-07-opamp/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-opamp/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-08-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-09-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-assessment/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/ee-09-h-bridge/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-h-bridge/"
+    },
+    {
+      "path": "/posts/foundations/power-electronics-basics/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/power-electronics-basics/readme/"
+    },
+    {
+      "path": "/posts/foundations/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/03-enable-inverter-nonlinearity/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/04-add-observer-signal/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/04-add-observer-signal/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/05-commissioning-debug/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/05-commissioning-debug/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/code-examples/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/code-examples/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-00-c-simulation-overview/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-00-c-simulation-overview/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-01-c-simulation-quickstart/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-01-c-simulation-quickstart/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-02-c-simulation-code-map/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-02-c-simulation-code-map/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-03-c-simulation-plotting/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-03-c-simulation-plotting/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-05-assessment/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-assessment/"
+    },
+    {
+      "path": "/posts/foundations/simulation/c-simulation/sim-05-digital-twin/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-digital-twin/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-03-matlab-function/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-03-matlab-function/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-04-s-function/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/custom-blocks/ms-04-s-function/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/foundation/ms-00-simulation-setup/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/foundation/ms-00-simulation-setup/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/matlab-discrete-control/ms-01-matlab-discrete-control/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/readme/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/simulink-discrete-control/ms-02-simulink-discrete-control/"
+    },
+    {
+      "path": "/posts/foundations/simulation/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/matlab-simulink/tuning-validation/ms-05-parameter-auto-tuning/"
+    },
+    {
+      "path": "/posts/foundations/simulation/power-simulations/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/foundations/simulation/power-simulations/readme/"
     },
     {
       "path": "/posts/motor/30-percent-roadmap/",
@@ -5062,234 +5501,6 @@
       "finalUrl": "/posts/motor/comparison/comp-01-odrive-vs-vesc/"
     },
     {
-      "path": "/posts/motor/control-theory/ct-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-01-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-01-open-loop-closed-loop/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-01-open-loop-closed-loop/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-02-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-02-time-domain-analysis/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-02-time-domain-analysis/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-03-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-03-frequency-response-bode/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-03-frequency-response-bode/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-04-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-04-pid-control-principles/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-04-pid-control-principles/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-05-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-05-pid-tuning-implementation/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-05-pid-tuning-implementation/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-06-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-06-feedforward-control/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-06-feedforward-control/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-07-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-07-nyquist-stability/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-07-nyquist-stability/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-08-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-08-root-locus/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-08-root-locus/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-09-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-09-compensator-design/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-09-compensator-design/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-10-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-10-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-10-state-space/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-10-state-space/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-11-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-11-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-11-observer-design/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-11-observer-design/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-12-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-12-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-12-state-feedback/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-12-state-feedback/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-13-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-13-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-13-lqr-lqg/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-13-lqr-lqg/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-14-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-14-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-14-cascaded-pid-control/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-14-cascaded-pid-control/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-15-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-15-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-15-pid-optimization-strategies/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-15-pid-optimization-strategies/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-16-adrc-theory/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-16-adrc-theory/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-16-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-16-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-17-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-17-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-17-ladrc-linear-adrc/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-17-ladrc-linear-adrc/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-18-adrc-ladrc-implementation/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-18-adrc-ladrc-implementation/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-18-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-18-assessment/"
-    },
-    {
-      "path": "/posts/motor/control-theory/ct-19-model-predictive-control/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/ct-19-model-predictive-control/"
-    },
-    {
-      "path": "/posts/motor/control-theory/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/control-theory/readme/"
-    },
-    {
       "path": "/posts/motor/controllers-evolution/ce-01-century-of-feedback/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -5492,120 +5703,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/cross-reference/xref-practice/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-01-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-02-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-02-diodes-and-rectification/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-02-diodes-and-rectification/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-03-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-03-bjt-basics/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-03-bjt-basics/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-04-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-04-mosfet-principles/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-04-mosfet-principles/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-05-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-05-mosfet-gate-drive/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-05-mosfet-gate-drive/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-06-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-06-igbt-principles/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-06-igbt-principles/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-07-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-07-opamp/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-07-opamp/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-08-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-08-rectifier-inverter/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-08-rectifier-inverter/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-09-assessment/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/ee-09-h-bridge/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/ee-09-h-bridge/"
-    },
-    {
-      "path": "/posts/motor/electronics-basics/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/electronics-basics/readme/"
     },
     {
       "path": "/posts/motor/foundations/found-01-per-unit-system/",
@@ -6434,84 +6531,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/01-pi-tuning-basic/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/01-pi-tuning-basic/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/02-custom-speed-profile/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/02-custom-speed-profile/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/03-enable-inverter-nonlinearity/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/03-enable-inverter-nonlinearity/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/04-add-observer-signal/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/04-add-observer-signal/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/05-commissioning-debug/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/05-commissioning-debug/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/code-examples/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/code-examples/readme/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-00-c-simulation-overview/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-00-c-simulation-overview/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-01-c-simulation-quickstart/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-01-c-simulation-quickstart/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-02-c-simulation-code-map/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-02-c-simulation-code-map/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-03-c-simulation-plotting/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-03-c-simulation-plotting/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-04-emachinery-complete-usage-tutorial/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-04-emachinery-complete-usage-tutorial/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-05-assessment/"
-    },
-    {
-      "path": "/posts/motor/simulation/sim-05-digital-twin/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/simulation/sim-05-digital-twin/"
     },
     {
       "path": "/posts/motor/vesc/vc-01-architecture/",
@@ -7730,12 +7749,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/power/roadmap/lesson-priority-map/"
-    },
-    {
-      "path": "/posts/power/simulations/readme/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/power/simulations/readme/"
     },
     {
       "path": "/posts/power/usage/",

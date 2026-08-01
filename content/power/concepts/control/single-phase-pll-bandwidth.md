@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-control
 chapterTitle: 控制理论
@@ -7,14 +7,14 @@ chapterOrder: 10
 category: 控制理论
 source: power
 visibility: public
-title: "概念：PLL 带宽取舍"
+title: 概念：PLL 带宽取舍
 tags:
   - power-electronics
   - UPS
   - 控制
   - PLL
 status: learning
-summary: "1. 它是什么"
+summary: 锁相环（phase-locked loop / PLL）的带宽（bandwidth）描述它愿意多快相信相位误差信号。带宽高，PLL 对相位阶跃和频率变化反应快；带宽低，PLL 对噪声和谐波更不敏感，但跟踪会慢。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

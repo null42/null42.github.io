@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：故障码与故障日志（fault code and fault log）"
+title: 概念：故障码与故障日志（fault code and fault log）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 故障码（fault code）是给故障原因分配的可读编号或枚举。故障日志（fault log）是在故障发生时记录一条事件，通常包含时间戳（timestamp）、故障码、触发源（trigger source）、发生时模式和是否锁存。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

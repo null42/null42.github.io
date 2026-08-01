@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：Boost 慢速任务、遥测与故障日志"
+title: 概念：Boost 慢速任务、遥测与故障日志
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "1. 它是什么"
+summary: 慢速任务（slow task）是相对控制中断服务程序（control interrupt service routine / control ISR）而言的低频软件任务。它不直接决定每个开关周期的占空比，而是周期性整理运行数据。
 navGroup: 核心概念
 navGroupOrder: 20
 ---

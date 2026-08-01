@@ -1,5 +1,5 @@
 ---
-date: 2026-08-01
+date: "2026-08-01T00:00:00.000Z"
 section: 电源控制
 chapter: concepts-embedded
 chapterTitle: 嵌入式固件
@@ -7,14 +7,14 @@ chapterOrder: 20
 category: 嵌入式固件
 source: power
 visibility: public
-title: "概念：UPS 参数访问边界（parameter access boundary）"
+title: 概念：UPS 参数访问边界（parameter access boundary）
 tags:
   - power-electronics
   - UPS
   - 嵌入式
   - 固件
 status: learning
-summary: "它是什么"
+summary: 参数访问（parameter access）是通信模块或调试工具读取、写入固件参数的边界层。它决定某个参数是只读（read-only）、可读写（read-write），以及写入值是否通过范围校验（range check）。
 navGroup: 核心概念
 navGroupOrder: 20
 ---
