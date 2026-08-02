@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "Index"
+title: "索引"
 tags:
   - power-electronics
   - 教材
@@ -18,1333 +18,1466 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# Index
+# 索引
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 1068-1081  
-> Chunk ID: `index`
+> 说明：本索引按汉语拼音/字母分区组织，主词条译为中文并保留原书页码。以英文缩写或专有名命名的器件、拓扑、人名（如 MOSFET、SEPIC、Ćuk、Bode 图）保留原形。交叉引用中的"see"译为"见"。
 
-## 主干提取
+![源页 p.1068](../assets/page-snapshots/chapter-index/page-1068.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+## A
 
-## 术语表
+**Air gap（气隙）**
+- 在交流电感中，501
+- 在耦合电感中，448, 471, 473
+- 在反激变压器中，449, 478
+- 在电感中，416–418, 445, 459–462, 462, 464
+- 在变压器中，421
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+**AL（mH/1000 匝）**，465
 
-## 中文翻译
+**American wire gauge (AWG)（美国线规）**，见 美国线规
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+**Amorphous alloys（非晶合金）**，425
 
-## 英文原文
+**Amp-second balance（安秒平衡）**，见 电容电荷平衡
 
-```text
-Index
-A
-Air gap
-in ac inductor, 501
-in coupled inductor, 448, 471, 473
-in ﬂyback transformer, 449, 478
-in inductor, 416–418, 445, 459–462, 462, 464
-in transformer, 421
-AL (mH/1000 turns), 465
-American wire gauge (AWG)
-choice of, 465, 473, 491, 502
-data, 1049–1050
-design examples, 476, 479, 495, 499
-vs. skin depth, 428
-Amorphous alloys, 425
-Amp-second balance, see capacitor charge balance
-Ampere’s law,411, 414, 416, 431
-Analog-to-digital (A/D) conversion, 805, 807
-quantization eﬀects, 830–838
-realization of, 837
-sampling, 810
-Apparent power, 858
-Artiﬁcial ramp
-circuit, 741, 741–743
-eﬀect on CCM transfer functions, 754–755
-eﬀect on CPM boost low-harmonic rectiﬁer,
-886–889
-eﬀect on line-to-output transfer function of
-CCM buck, 758
-eﬀect on noise immunity of CPM controller
-circuits, 745
-eﬀect on small-signal CCM models, 746, 749
-eﬀect on small-signal DCM models, 780–786
-eﬀect on stability of CPM controllers, 742–745
-in simulation model, 764
-introduction into CPM controllers, 738–746
-Asymptotes, see Bode plots
-Audiosusceptibility Gvg(s), see Line-to-output
-transfer function
-Average current control
-boost design example, 791–797
-feedforward, 883–885
-in low-harmonic rectiﬁer systems, 881–886
-modeling of, 786–797
-transfer functions, 788–791
-Average power
-and Fourier series, 850–853
-in nonsinusoidal systems, 850–857
-modeled by power source element, 593–598,
-608–609
-power factor, 854–857
-predicted by averaged models, 59
-sinusoidal phasor diagram, 858–859
-Averaged switch modeling, 547–578
-buck, boost, and buck-boost forms, 558–565
-combined CCM/DCM simulation model,
-608–621
-derivation by circuit averaging, 548–558
-examples
-buck-boost transient simulation, 575–578
-CCM SEPIC, 549–558
-nonideal SEPIC, 572–574
-SEPIC with conduction loss, 569–571
-in discontinuous conduction mode,
-589–598
-of current-programmed CCM converters,
-733–738
-of ideal DCM switch networks, 595
-prediction of indirect power, 555–558
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4
-1071
+**Ampere's law（安培定律）**，411, 414, 416, 431
 
-1072 Index
-Averaged switch modeling (cont.)
-simulation of CCM, 568
-simulation with conduction loss, 571–572
-Averaging
-ac models of buck, boost, and buck–boost
-converters, 233
-ac models of buck, boost, and buck-boost
-converters, 234
-accuracy in prediction of conduction losses,
-60
-approximation, discussion of, 222–225
-approximation, discussion of , 218
-basic approach , 220–242
-capacitor charge balance, 24
-diode-induced switching loss in boost converter,
-94–98
-diode-induced switching loss in buck converter,
-90–93
-ﬂyback ac model, 234–242
-inductor volt-second balance, 23
-introduction to , 215–220
-modeling 3φconverters, 919–921
-modeling rectiﬁer output, 900–905
-of inductor current in CPM, 747
-of quasi-resonant converters, 1003–1025
-state-space, 251–271
-to ﬁnd dc component, 6, 16
-B
-Ballast, electronic, 933–934
-resonant inverter design, 957–973
-Battery charger, 8, 74
-B–H loop
-core loss, 423–424
-in a conventional transformer, 180, 447
-in a coupled inductor, 448
-in a ﬁlter inductor, 445
-in a ﬂyback transformer, 449, 479
-in an ac inductor, 446
-modeling of, 412–413
-Bidirectional dc–dc converters, 74
-Bipolar junction transistor (BJT)
-breakdown mechanisms in, 114–115
-construction and operation of, 111–115
-current focusing, 114
-idealized switch characteristics, 69–71
-on resistance, 56, 111–113
-quasi-saturation, 115
-storage time, 113
-stored minority charge in, 111–114
-switching waveforms, 112–115
-Bode plots
-asymptote analytical expressions, 293
-CCM buck-boost example, 309–314
-combinations, 290–293
-complex poles, 294–297
-deﬁnitions, 279–281
-frequency inversion, 289–290
-graphical construction of, 317–331
-addition of asymptotes, 318–322
-closed-loop transfer functions, 353
-division, 325–331
-parallel combination, 322–324
-parallel resonance, 323–324
-parallel resonant converter, 950
-reactance graph paper, 324
-series resonance, 320–322
-series resonant converter, 945
-real pole, 281–285
-real zero, 287
-right half-plane (RHP) zero, 288, 315, 317
-transfer functions of buck, boost, buck-boost
-converters, 315
-Body diode, see MOSFET
-Boost converter
-as inverted buck converter,164–165
-as low-harmonic rectiﬁer, 872–875
-averaged switch model, DCM, 598
-current-programmed
-small-signal ac model, CCM, 731
-DCM characteristics, 152
-equivalent circuit modeling of
-steady state, CCM, 49–54
-modeling switching loss in, 94–98
-nonideal analysis of, 46–49
-quasi-resonant zero-current switching, 1013
-semiconductor conduction losses in, 56–60
-small-signal ac model
-CCM, 233, 251
-DCM, 598–608
-steady-state analysis of
-CCM, 24–29
-DCM, 145–152
-transfer functions, CCM, 315
-with capacitor ESR, 264–271
-Bootstrap power supply, 107
-Bridge conﬁguration (dc–dc converters)
-boost-derived full bridge, 198–201
-buck-derived full bridge, 181–185
-buck-derived half bridge, 185–186
-full bridge transformer design example,
-496–499
+**Analog-to-digital (A/D) conversion（模数转换）**，805, 807
+- 量化效应，830–838
+- 实现，837
+- 采样，810
 
-Index 1073
-minimization of transformer copper loss in,
-468–470
-Bridge conﬁguration (inverters)
-single phase, 7, 170–173
-three phase, 74, 174, 174
-Buck 3φinverter, see V oltage source inverter
-Buck converter, 15
-analysis of closed-loop regulator via feedback
-theorem, 528–540
-as a high power factor rectiﬁer, 875
-current-programmed
-averaged switch model, CCM, 733–738
-DCM characteristics, 152
-employing synchronous rectiﬁer, 78–79
-equivalent circuit modeling of
-steady-state, CCM, 54–56
-multi-resonant realization, 1019–1020
-quasi-resonant realizations
-zero-current switching, 1003–1015
-zero-voltage switching, 1018
-quasi-square wave realization, 1020–1025
-small-signal ac model
-DCM, 604–605
-small-signal ac model, CCM, 251
-steady-state analysis of
-CCM, 15–24
-DCM, 140–145, 598
-switching loss in, 80–82, 90–93
-transfer functions, CCM, 315
-transfer functions, DCM, 605–606
-Buck-boost converter, see also Flyback converter
-as low-harmonic rectiﬁer, 878–880
-averaged switch model, DCM, 589–606
-current-programmed
-ac simple model, CCM, 729–733
-dc–3φac inverter, 76
-DCM characteristics, 152, 595–598
-ideal circuit and conversion ratio, 17
-simulation of, 575–578
-small-signal ac model, CCM, 251
-small-signal ac model, DCM, 604–605
-state-space averaging of, 259–264
-transfer functions, CCM, 315
-transfer functions, DCM, 606
-transformer isolation in, 194–198
-C
-Canonical circuit model, 245–251
-development of, 245–247
-manipulation into canonical form, 248–250
-results for basic converters, 250–251
-Capacitor charge balance
-boost converter example, 27
-´Cuk converter example, 32
-deﬁnition, 24
-in discontinuous conduction mode, 140, 143
-nonideal boost converter examples, 48, 58
-Capacitor equivalent series resistance (ESR), 264,
-862
-Capacitor voltage ripple
-boost converter example, 29
-buck converter example, 35–37
-´Cuk converter example, 35
-in converters containing two-pole ﬁlters, 35–37
-Charge balance, see Capacitor charge balance
-Circuit averaging, 548–554
-Compensators, see also Control system design
-design example, 383–392
-discrete-time, 812, 822–830
-introduction, 347
-lag, 380–382
-lead, 377–379
-lead-lag, 382–383
-PD, 377–379
-PI, 380–382
-PID, 382–383
-Complex power, 858
-Computer power supply, 8
-Conduction loss, see Copper loss, Semiconductor
-conduction loss
-Conductivity modulation, 79–80, 88, 101,
-111–113, 115
-Continuous time to discrete time mapping,
-817–821
-backward Euler approximation, 814
-bilinear (Tustin), 817
-forward Euler approximation, 814
-trapezoidal approximation, 813
-with prewarping, 819
-Control system design, see also Compensators,
-Negative feedback, 347–407
-closed-loop transfer functions, 350–358
-compensation, 376–392
-design example, 383–392
-digital control loop, 806–812, 822–827
-for low-harmonic rectiﬁers
-approaches, 880–894
-control of dc output, 895–905
-modeling average current control, 786–797
-phase margin
-Nyquist stability criterion, 364–369
-test, 359
+**Apparent power（视在功率）**，858
 
-1074 Index
-Control system design (cont.)
-vs. closed-loop peaking, 370–373
-vs. closed-loop transient response, 373–376
-stability, 358–375
-voltage regulator
-block diagram, 347–349
-design speciﬁcations, 376–377
-Control-to-output transfer function
-of current programmed converters, 736–737,
-752–760
-of DCM converters, 604–606, 621
-simulation of, 611–618
-Control-to-output transfer function Gvd(s)
-by graphical construction, 330
-input ﬁlter, eﬀect of, 677–685
-of CCM buck, boost, and buck-boost converters,
-315
-predicted by canonical model, 247
-Conversion ratio M, see also Switch conversion
-ratioμ
-by sinusoidal approximation, 938–944
-in low-harmonic rectiﬁers, 870–872
-modeling of, 44
-of ´Cuk converter, 33, 598
-of boost, 17, 151, 598
-of buck, 17, 145, 598
-of buck–boost, 17, 152
-of buck-boost, 598
-of loss-free resistor networks, 597
-of parallel resonant converter, 947–950,
-983–988
-of resonant switch converters, 1012
-of SEPIC, 598
-of series resonant converter, 944–947, 977–983
-Cooling system
-size vs. Q, 2
-Copper loss
-allocation of window area to minimize,465–470,
-487–488
-high frequency eﬀects
-proximity eﬀect, 442
-skin eﬀect, 426
-inductor design to meet speciﬁed, 459–465
-low frequency, 426
-modeling in converters, 46–54
-multiple winding design to meet speciﬁed,
-470–473
-Core loss, 423–425, 479–481
-Correction factor, see Extra element theorem
-Coupled inductors, 448
-design, 470–473
-in ´Cuk and SEPIC converters, 453–454
-in ﬂyback converter, 476–481
-in multiple-output buck-derived converters, 448,
-474–476
-Crossover frequency, 354, 355, 359, 364, 365, 372,
-377
-´Cuk converter
-as low-harmonic rectiﬁer, 875, 908
-conversion ratio M(D), 33, 598
-DCM averaged switch model of, 598
-derivation by cascade connection, 168
-derivation by rotation of three-terminal cell, 170
-steady-state analysis of, 30–35
-transformer design example, 492–496
-Current injection, 396–397
-Current mode, see Current programmed control
-Current programmed control, 725–799
-ac modeling of
-CCM more accurate model, 746–760
-CCM simple approximation, 728–738
-via averaged switch modeling, CCM, 733–738
-via averaged switch modeling, DCM, 779–786
-addition of input ﬁlter to, 760–763
-artiﬁcial ramp, 741–746
-average current control, 786–797
-controller circuit, 725
-controller small-signal block diagram, 746–752
-high-frequency dynamics, 772–779
-in full-bridge buck converters, 184, 726
-in half-bridge buck converters, 186, 727
-in low-harmonic rectiﬁers, 886–889
-in push-pull buck converters, 193
-oscillation for D> 0.5, 738–746
-simulation of, 763–769
-susceptibility to noise, 727
-with voltage feedback, 769–772
-Current ripple, see Inductor current ripple
-Current source inverter, 174
-Current-fed bridge, 176
-Current-programmed control
-controller circuit, 725
-Cycloconverter, 1, 76
-D
-Damping, see also Q factor, Input ﬁlters
-by two resistive elements, high-Q approxima-
-tion, 301–304
-of input ﬁlters, 678, 691–704
-Q factor, 295
-vs. load step response, 375–376
-vs. overshoot, 373–375
+**Artificial ramp（人工斜坡）**
+- 电路，741, 741–743
+- 对 CCM 传递函数的影响，754–755
+- 对 CPM 升压低谐波整流器的影响，886–889
+- 对 CCM 降压变换器输入-输出传递函数的影响，758
+- 对 CPM 控制器电路噪声免疫力的影响，745
+- 对小信号 CCM 模型的影响，746, 749
+- 对小信号 DCM 模型的影响，780–786
+- 对 CPM 控制器稳定性的影响，742–745
+- 在仿真模型中，764
+- 引入 CPM 控制器，738–746
 
-Index 1075
-vs. phase margin, 370–373
-DC conversion ratio, see Conversion ratio M
-DC transformer model
-derivation of, 43–46
-in a nonideal boost converter, 51
-in a nonideal buck converter, 55
-in canonical model, 245
-in small-signal ac model of boost with capacitor
-ESR, 271
-in small-signal ac models, 231, 233
-manipulation of circuits containing, 45
-Deadtime, 109
-Decibel (dB), 280
-Design-oriented analysis, techniques of
-analytical expressions for asymptotes, 279, 293
-analytical expressions for salient features, 310,
-315
-approximate factorization, 304–308
-closed-loop peaking vs. phase margin, 370–373
-damping the internal resonances of the SEPIC,
-644–648
-extra element theorem, 625–648
-feedback theorem, 510–540
-frequency inversion, 289–290, 293
-graphical construction
-of Bode plots, 317–331
-of closed-loop transfer functions, 353–358
-high-Q approximation, 301–304
-input ﬁlter design inequalities, 684–685, 689,
-692, 706
-introduction to, 277–279
-introduction to null double injection, 509–510
-low-Q approximation, 298–301
-n-extra element theorem, 648–668
-philosophy of, 277
-Digital control, 805
-compensator design, 822–827
-control loop, 806–812
-delay in the control loop, 811
-design example, 824–827
-design procedure, 823
-discrete-time systems, 812–821
-implementation, 827–838
-quantization eﬀects, 830–836
-Digital pulse-width modulation (DPWM), 805,
-807–812
-quantization eﬀects, 830–838
-realization of, 836–837
-sampling, 810
-Diode
-antiparallel, 72–73
-characteristics of, 89
-fast recovery, 88
-forward voltage drop, see also Semiconductor
-conduction losses, 56, 87–89
-freewheeling, 71
-parallel operation of, 89
-recovered charge Qr, 87, 92, 997, 998
-recovery mechanisms, 85–87
-Schottky, 88
-SiC, 89, 105
-snubbing of, 999
-soft recovery, 87
-switching loss, 90–98, 997, 998, 1000
-switching waveforms, 86, 90
-wide bandgap, 89
-zero-current switching of, 953
-zero-voltage switching of, 955
-Direct forward transmission through feedback path
-G0, 512
-Discontinuous conduction mode (DCM), 135–154,
-585–624
-boost converter analysis, 145, 152
-buck converter analysis, 140, 145
-current programmed control, 779–786
-equivalent circuit modeling of, 585–622
-high-frequency dynamics in, 618–621
-in low-harmonic rectiﬁers
-boost rectiﬁer, 873–875
-ﬂyback rectiﬁer, 878–880
-in parallel resonant converter, 984–988
-in series resonant converter, 979–983
-mode boundary
-in boost rectiﬁer, 875
-vs. load current and R
-e, 598
-vs. K, 135–140
-origin of, 135–140
-results for basic converters, 152
-simulation of, 608–618
-small-signal ac modeling of, 600–606
-to reset forward transformer, 190
-Displacement factor, 855, 858
-Distortion factor, 855–856, see also Total harmonic
-distortion
-of single phase rectiﬁer, 856–857
-Distributed power system, 8
-Duty ratio D
-complement of, 16
-deﬁnition of, 16
-eﬀect of switching times on, 90, 94
+**Asymptotes（渐近线）**，见 Bode 图
 
-1076 Index
-E
-Eddy currents
-in magnetic cores, 424–425
-in winding conductors, 426–430
-Eﬀective resistance Re
-in DCM averaged switch model, 592–598
-in loss-free resistor model, 592–598
-in resonant converter models
-with capacitive ﬁlter network, 942
-with inductive ﬁlter network, 949
-Eﬃciency, 1
-calculation via averaged model, 52, 59
-converter Q, 2
-of boost converter
-low-harmonic rectiﬁer, 910–917
-nonideal dc-dc, 52
-vs. switching frequency, 126
-Electric vehicle powertrain, 9
-Emulated resistance Re, 868
-Equilibrium, see Steady state
-Equivalent circuit modeling
-of CCM converters operating in steady state,
-43–61
-of converters having pulsating input currents,
-54–56
-of diode-induced switching loss, 90–98
-of ﬂyback converter, CCM, 197
-of ideal rectiﬁers, 868–870, 885, 896–900
-of switch networks
-DCM, 589–598
-small-signal ac models
-canonical, 250–251
-CCM, 230–234
-DCM, 600–606
-Equivalent series resistance (esr) of capacitor, see
-Capacitor equivalent series resistance (ESR)
-Experimental techniques
-measurement of impedances, 333–336
-grounding problems, 334
-measurement of loop gains
-by current injection, 396–397
-by voltage injection, 394–395
-of an unstable system, 397–398
-measurement of small-signal transfer functions,
-332–333
-Extra element theorem, 625–673
-applications of
-damping a two-section input ﬁlter, 700–704
-damping the internal resonances of the SEPIC,
-644–648
-input ﬁlter design, 679–691
-resonant inverter, load dependence of,
-961–965
-derivation of, 628–631
-impedance inequalities, 631–632
-reciprocity relationship, 967
-summary of, 626–627
-F
-Factorization, approximate
-approximate roots of arbitrary degree
-polynomial, 304–308
-graphical construction of Bode diagrams,
-317–331
-high Q approximation, 301–304
-low Q approximation, 298–301
-Faraday’s law,410–411
-Feedback theorem, 510–540
-buck regulator example , 528–540
-derivation of , 513–518
-gain G0, 512
-ideal forward gain G∞, 512
-loop gain T, 511
-null loop gain Tn, 512
-op amp PD compensator example , 519–528
-reciprocity relationship, 518
-summary of , 510–513
-Ferrite
-applications of, 446, 447, 474–481, 494–497
-core loss, 424, 425
-core tables, 1044–1048
-saturation ﬂux density, 413
-Fill factor, see Ku
-Filter inductor
-B–H loop of, 444
-design of
-derivation of procedure, 459–464
-Kg design procedure, 464–465
-FluxΦ, 410, 413, 415–417, 461
-Flux density B
-deﬁnition, 410
-saturation, 412–413, 415
-Flux-linkage balance, see Inductor volt-second
-balance
-Flyback converter, see also Buck-boost converter
-ac model of, 234–242
-derivation of, 194–195
-modeling losses in, 210
-multiple outputs, 198, 211
-steady-state analysis of, 195–197
-two transistor version, 205
-Flyback transformer, 195, 449
+**Audiosusceptibility Gvg(s)**，见 输入-输出传递函数
 
-Index 1077
-Forward converter, see also Buck converter,
-187–192
-steady-state analysis of, 187–191
-transformer reset mechanisms, 187–191
-transformer utilization in, 192
-two-transistor version, 191
-Four-quadrant switch, see Switch
-Freewheeling diode, 71
-G
-G∞(ideal closed-loop forward gain), 512
-G0 (open-loop disturbance transfer function, or
-direct forward transmission), 512
-GaN
-2D electron gas, 106
-FET, 105
-reverse conduction, 106
-Gate driver, 107–111
-bootstrap power supply, 107
-deadtimes, 108
-undervoltage lockout (UVLO), 108
-Gate turn-oﬀthyristor (GTO), 121
-Graphical construction of Bode plots, see Bode
-plots
-Gyrator characteristic of SRC, 980
-H
-H-bridge, 7, 181–185
-Half bridge
-gate drive considerations, 107–111
-transformer-isolated buck-derived, 185
-Harmonic correction, 922
-Harmonic loss factor FH , 442
-Harmonics in power systems
-average power vs. Fourier series, 850–853
-distortion factor, 855
-in three-phase systems, 859–861
-neutral currents, 859–861
-power factor, 854–857
-rectiﬁer harmonics, 856–857
-root-mean-square value of waveform, 853
-total harmonic distortion, 856
-HEMT, 106
-Hot spot formation, 89, 115, 121
-Hysteretic control, 889
-I
-Ideal rectiﬁer, see also Low harmonic rectiﬁers
-in converter systems, 895–905
-properties of, 868–870
-realization of, 870–880
-three-phase, 917
-Indirect power, 555–558
-Inductor copper loss, see Copper loss
-Inductor current ripple
-boost example, 29
-buck example, 20–22
-calculation of, 21
-´Cuk converter example, 35
-in a ﬁlter inductor, 444
-in an ac inductor, 446
-in converters containing two-pole ﬁlters, 37
-magnitude vs. DCM, 139
-Inductor design
-ac inductor design
-derivation, 500–501
-procedure, 501–502
-ﬁlter inductor design
-derivation, 459–464
-Kg design procedure, 464–465
-Inductor volt-second balance
-boost converter example, 27
-buck converter example, 24
-´Cuk converter example, 32
-deﬁnition, 23
-in discontinuous conduciton mode, 140
-Input ﬁlters, 675–723
-cascaded ﬁlter sections, 700–704
-conducted EMI, attenuation of, 675–676
-conducted susceptibility, 676
-damping of
-objectives, 689–692
-Rf −Cb parallel damping, 694–696
-Rf −Lb parallel damping, 696–698
-Rf −Lb series damping, 698
-eﬀect on control-to-output transfer function
-buck example, 676–679
-general result, 679–682, 684–685
-introduction of RHP zeroes, 690
-with current mode control, 760–763
-eﬀect on output impedance, 682
-impedance inequalities for design, 684–685,
-762–763
-negative incremental input resistance, 682–684
-stability criteria, 704–720
-Input port, converter
-ac equivalent circuit model, 231
-ac modeling of, 226–227
-boost static characteristics, 872–875, 887–888
-modeling via state-space averaging, 260
-steady-state modeling of, 54–56
-Inrush current, 897
+**Average current control（平均电流控制）**
+- 升压设计示例，791–797
+- 前馈，883–885
+- 在低谐波整流系统中，881–886
+- 建模，786–797
+- 传递函数，788–791
 
-1078 Index
-Insulated-gate bipolar transistor (IGBT)
-construction of, 115–119
-current tailing in, 116, 122
-equivalent circuit, 116
-forward voltage drop, modeling of, 119
-idealized switch characteristics, 70
-parallel operation of, 119
-switching loss in, 118
-Inverters, 1
-high frequency, 933–934, 958–973
-single phase, 7, 73, 170–173
-three phase, 74, 76, 174, 174
-Iron laminations, 413, 424
-K
-K, dimensionless parameter
-critical value Kcrit(D), 138–140, 144–147,
-151–152
-DCM boundary, 139–140, 146–147, 152
-steady-state DCM analysis, 144–145, 151–153,
-597
-Kg, core geometrical constant
-deﬁnition of, 463–464, 1043
-ferrite core tables of, 1044–1048
-ﬁlter inductor design using, 464–465
-multiple winding magnetics design using,
-470–473
-Kgfe , ac core geometrical constant
-ac inductor design using, 499–502
-deﬁnition of, 489, 1043
-ferrite core tables of, 1044–1048
-transformer design using
-derivation, 486–490
-examples, 492–499
-ﬁrst-pass procedure, 490–492
-Ku, window utilization factor, 462
-L
-LCC resonant converter, 933, 961, 964–967, 969
-Lenz’s law,411, 424, 426, 428
-Line-to-output transfer function Gvg(s)
-by graphical construction, 331
-closed-loop, 351, 355
-control system design of, 376, 389, 390
-in closed-loop block diagram, 386
-of CCM buck, boost, and buck-boost converters,
-315
-of DCM converters, 605
-predicted by canonical model, 247
-Linear ripple approximation, see Small ripple
-approximation
-Litz wire, 440
-LLC resonant converter, 933, 972–973
-Loop gain, see also Control system design,
-Negative feedback, Feedback theorem
-buck regulator example, 537
-compensator design, 376–392
-crossover frequency, 354
-deﬁnition based on block diagram, 351
-deﬁnition based on null double injection, 511
-eﬀect on closed-loop disturbance transfer
-functions, 351
-eﬀect on closed-loop reference-to-output
-transfer function, 353
-measurement of , 392–398
-null loop gain, 512
-op amp example, 522
-phase margin test, 359
-Loss-free resistor model
-averaged switch model of DCM, 592–598
-ideal rectiﬁer model
-single phase, 868–870
-three phase, 917
-Low harmonic rectiﬁers, see also Ideal rectiﬁers,
-see also Ideal rectiﬁers
-controller schemes
-average current control, 881–886
-critical conduction mode, 889–892
-current programmed control, 886–889
-hysteretic control, 889
-nonlinear carrier control, 892–894
-modeling of
-eﬃciency and losses, 910–917
-low-bandwidth control loop, 900–905
-rms calculations in, 905–910
-M
-Magnetic circuits, 415–418
-Magnetic ﬁeld H, 409, 412–413
-Magnetics, 409–451
-ac inductor design, 499–502
-basic relationships, 409–415
-copper loss, 426, 463, 487–488
-core loss, 423–425, 486–487
-coupled inductor design, 465–476
-ﬂyback transformer design, 476–481
-inductor design, 459–465
-magnetic circuits, 415–418
-magnetic devices, types of, 444–449
-optimizingΔB to minimize total loss, 485,
-488–490
+**Average power（平均功率）**
+- 与傅里叶级数，850–853
+- 在非正弦系统中，850–857
+- 由功率源元件建模，593–598, 608–609
+- 功率因数，854–857
+- 由平均模型预测，59
+- 正弦相量图，858–859
 
-Index 1079
-optimizing window allocation to minimize
-copper loss, 465–470
-proximity eﬀect, 426–442
-transformer basics, 178–181, 418–423
-transformer design, 485–499
-Magnetizing current, 180, 420
-Magnetomotive force (MMF)
-deﬁnition, 409
-eﬀect of interleaving on, 438–440
-in magnetic circuits, 415–417
-MMF diagrams, 431–432, 434
-Majority carrier devices, see also MOSFET,
-Schottky diode, 79
-Matrix converter, 76
-Mean length per turn (MLT )
-deﬁnition, 463
-ferrite core tables, 1044–1048
-Measurement of transfer functions and loop gains,
-see Experimental techniques
-Minority carrier devices, see also Bipolar Junction
-Transistor, Diode, Insulated Gate Bipolar
-Transistor, 79
-Modulation index, 921
-MOSFET
-as a current-bidirectional switch, 72
-as a synchronous rectiﬁer, 78
-body diode, 72, 101
-capacitances, 101
-characteristics, 101
-conduction loss, modeling of, 56–60
-construction, 99
-deadtime, 109
-gate drivers, 107–111
-idealized switch characteristics, 70
-parasitic BJT, 101
-SiC, 103–105
-snubber, 1001
-superjunction, 103
-switching loss induced by Cds , 123, 1000
-switching loss with clamped inductive load, 80
-zero-voltage and zero-current switching of,
-1002–1003
-Motor drive, 9
-Multiplying controller, see also Average current
-control, current programmed control,
-884–886
-Multiresonant switch, 1019–1020
-N
-n-extra element theorem, 648–668
-bridge-T ﬁlter example, 658–661
-damped input ﬁlter example, 662–668
-frequency inversion, 661–668
-introduction, 649–653
-procedure, 653–654
-two-section LC ﬁlter example, 654–658
-Negative feedback, see also Control system design
-eﬀect on bandwidth, 355
-eﬀects of, on network transfer functions,
-350–353
-objectives of, 215, 347–351
-reduction of disturbances by, 355–358
-reduction of sensitivity to variations in forward
-gain, 353
-Nonlinear carrier control, 892–894
-Nonminimum phase zero, see Right half-plane
-zero
-Null loop gain Tn, 512
-Nyquist stability criterion, 360–369
-encirclements of−1 point, 363
-input ﬁlter stability analysis, 718–720
-modiﬁcation of Nyquist contour for special
-cases, 367–369
-Nyquist contour, 362–363
-phase margin, 364
-principle of the argument, 360–362
-stability test, 363–364
-three crossover frequencies, 365–367
-O
-Op amp compensator circuit
-analysis via feedback theorem, 519–528
-Output characteristics
-of LLC, 973
-of parallel resonant converter, 986
-of resonant inverters, 958–960, 975
-of series resonant converter, 982–983
-Output impedance Zout(s)
-predicted by canonical model, 247
-Overshoot, 373–375
-P
-Parallel resonant converter
-analysis via sinusoidal approximation, 947–950
-dependence of transistor current on load, 961
-exact analysis, 983–988
-introduction to, 933
-Passthrough mode, 98
-Permeability
-deﬁnition, 412–413
-of free spaceμ0, 412
-relativeμr, 412
+**Averaged switch modeling（平均开关建模）**，547–578
+- 降压、升压和升降压形式，558–565
+- CCM/DCM 组合仿真模型，608–621
+- 由电路平均推导，548–558
+- 示例
+  - 升降压瞬态仿真，575–578
+  - CCM SEPIC，549–558
+  - 非理想 SEPIC，572–574
+  - 含导通损耗的 SEPIC，569–571
+- 在断续导通模式下，589–598
+- 电流编程 CCM 变换器的，733–738
+- 理想 DCM 开关网络的，595
+- 间接功率预测，555–558
 
-1080 Index
-Phase asymptotes
-complex poles, 296–297
-inverted forms, 289
-real pole, 284–285
-real zero, 287
-RHP zero, 288
-Phase margin, 359, 366, 369, 373
-in Nyquist stability criterion, 364–367
-input ﬁlter, undamped, eﬀect on, 691
-modiﬁcation of by input ﬁlter, 678, 706–710
-stability test, 359
-vs. closed-loop damping factor, 370–373
-Powdered iron, 413, 425
-Power factor, see also Total harmonic distortion,
-Displacement factor, Distortion factor
-deﬁnition of, 854
-single-phase rectiﬁer, 856–857
-with sinusoidal voltage, 855–857
-Power sink element
-deﬁnition of, 594
-input port characteristic of ideal switching
-regulator, 682
-Power source element
-deﬁnition of, 593–598
-in ac-to-dc power supply system, 897–898
-in averaged switch models
-current programmed mode, CCM, 734–735
-in DCM switch networks, 594
-in ideal rectiﬁer model, 869, 918
-in switched-mode regulators, 682–684
-linearization of, 603–604
-properties of, 596–598
-Proximity eﬀect, 426–442
-interleaving, eﬀect on, 438–440
-layer copper loss, 434–435
-Litz wire, eﬀect of, 440
-MMF diagrams, 436–440
-PWM waveform harmonics, 441–442
-simple explanation, 428–430
-transformer design procedure, accounting for,
-488
-winding loss, total, 436–438
-winding porosityη, 433
-Pulse-width modulation (PWM), 4–6
-digital, 805, 807–812, 836–837
-modeling of pulse-width modulator, 242–245
-operation of pulse-width modulator, 242–243
-spectrum of PWM waveform, 216
-Push-pull isolated converters
-based on boost converter, 201
-based on buck converter, 192–193
-based on Watkins-Johnson converter,201
-Q
-Q factor
-closed-loop vs. phase margin, 370–373
-converter quality factor, 2
-ﬁnding analytical expression for, 311
-graphical determination of, 321–324
-high Q approximation, 301–304
-load step response vs., 375–376
-low Q approximation, 298–301
-of complex poles, 295
-overshoot vs., 373–375
-predicted by canonical model, 315
-Quasi-resonant converters, see also Multiresonant
-converters, Quasi-square wave converters
-zero-current switching, 1003–1015
-full wave, 1014–1015
-half wave, 1005–1014
-zero-voltage switching, 1017–1018
-Quasi-square wave converters, 1020–1025
-Quasi-static approximation, 886
-Quiescent operating point, 218, 227, 233,
-244
-R
-Reactive power
-deﬁnition, 858
-Rectiﬁers, 1
-energy storage in single phase, 895–900
-high quality, 849
-ideal, 868–870
-ideal three phase, 917–922
-in resonant dc–dc converter, 934, 940
-in resonant dc-dc converter, 942,
-947–949
-line-commutated
-single-phase, 856–857
-Reluctance R, 416
-Resonance
-Bode plot of complex poles, 294–297
-damping of, 691–698
-graphical construction examples, 321–324
-parallel resonant circuit, 322–324
-series resonant circuit, 320–322
+![源页 p.1069](../assets/page-snapshots/chapter-index/page-1069.png)
 
-Index 1081
-Resonant converters, see also Quasi-resonant
-converters, Multi-resonant converters,
-Quasi-square wave converters, Zero-voltage
-transition converters, 933–988
-analysis by sinusoidal approximation, 938–944
-LCC, 960–971
-LLC, 972–973
-parallel resonant converter, 947–950, 983–988
-properties of, 957–973
-series resonant converter, 944–947, 977–983
-soft switching in, 951–955
-Resonant inverters, design of, 957–976
-dependence of transistor current on load,
-960–965
-LCC example, 967–971
-LLC example, 972–973
-output characteristic, 958–960
-results for basic tank networks, 973–976
-ZCS/ZVS boundary, 965–967
-Resonant link converters, 935
-Right half-plane zero
-Bode plot, 288
-caused by input ﬁlter, 690
-origins of, 316–317
-Ripple, switching, 18–22, 35–37, 135–139, 216,
-224
-Root mean square value
-comparison of ideal rectiﬁer topologies,
-908–910
-of commonly-observed converter waveforms,
-1037–1042
-of rectiﬁer waveforms, 905–910
-vs. Fourier series, 853
-S
-Sampling
-and delays in digital control loop, 810–812
-of A/Dc o n v e r t e r ,806
-of current-programmed controller, 773–779
-of pulse-width modulator, 244–245, 811
-Saturation
-of inductors, 415, 418
-of magnetic materials, 412–413
-of transformers, 180, 421
-Schottky diode, 88
-Semiconductor conduction loss
-boost converter example, 56–60
-inclusion in ac model, 234, 259
-with synchronous rectiﬁer, 79
-Semiconductor power devices, see also Bipolar
-junction transistor, Diode, Gate turn-oﬀ
-thyristor, Insulated gate bipolar transistor,
-Schottky diode, Silicon controlled rectiﬁer,
-67–128
-charge control of, 79, 85–87, 112–115
-conductivity modulation, 79, 112
-majority vs. minority carriers, 79
-realization of switches using, 67–79
-SEPIC, see Single-ended primary inductance
-converter
-Series pass regulator, 4
-Series resonant converter
-analysis via sinusoidal approximation, 938–947
-dependence of transistor current on load, 964
-exact characteristics
-continuous conduction mode, 977–979
-control plane characteristic, 980–982
-discontinuous conduction mode, 979–980
-output characteristic, 982–983
-introduction to, 933, 934
-subharmonic modes in, 946–947
-zero-current switching in, 951–954
-zero-voltage switching in, 954–955
-SiC MOSFET, 104
-Silicon controlled rectiﬁer (SCR), 119–122
-equivalent circuit, 120
-gate turn-oﬀthyristor, 121
-inverter grade, 121
-Simulation, 566–578, 608–618
-CCM model including conduction losses,
-571–572
-combined CCM-DCM switch model, 608–614
-combined CCM/DCM averaged switch
-simulation model, 608–621
-current programmed mode control model,
-763–764
-CCM model, 764–765
-combined CCM-DCM model, 765–766
-examples
-buck voltage regulator, 614–618
-buck with current programmed control,
-766–769
-SEPIC frequency response, 611–614
-objectives, 566–568
-of loop gain and closed-loop responses,614–618
-Single quadrant switch, 69–72
-deﬁnitions, 69
-origins of DCM, 135–140
-realization of, 69–72
-Single-ended primary inductance converter
-(SEPIC), 177
-analysis via extra element theorem, 640–644
+**Averaged switch modeling（续）**
+- CCM 仿真，568
+- 含导通损耗的仿真，571–572
 
-1082 Index
-Single-ended primary inductance converter
-(SEPIC) (cont.)
-as a low-harmonic rectiﬁer, 875, 878, 908
-average switch model of
-CCM derivation, 548–554
-combined CCM-DCM model, 611–614
-discontinuous conduction mode, 598
-losses and eﬃciency, 572–574
-conversion ratio M(D), 177
-damping the internal resonance, 644–648
-Gvd as eﬀective buck-boost plus glitch, 641
-indirect power in, 555–558
-inverse of, 177, 201
-transformer isolation in, 201
-Skin eﬀect, see also Proximity eﬀect, 426–428
-Small ripple approximation, see also Averaging
-and average power loss, prediction of, 59–60
-boost example, 26
-buck example, 19–20
-´Cuk example, 30–32
-deﬁnition, 19
-failure of in two-pole ﬁlters, 35
-in discontinuous conduction mode, 140–141
-Small-signal ac modeling, 218–220
-canonical model, 245–251
-equivalent circuit model, 230–234
-of low harmonic rectiﬁers, 902–905
-perturbation and linearization, 227–229,
-232–233
-via averaged switch modeling, 552–554,
-563–565
-Snubber networks, 115, 119, 999, 1001
-Soft switching, see also Zero-current switch-
-ing, Zero-voltage switching, see also
-Zero-current switching, Zero-voltage
-switching
-Spacecraft power system, 9
-SPICE, see Simulation
-State-space averaging, 251–271
-basic result, 255–259
-boost example with capacitor ESR, 264–271
-buck-boost example, 259–264
-writing the state equations of a network,
-252–254
-Steady state
-equilibrium point via state-space averaging, 255
-inductor current waveform, 22–23
-quiescent operating point, 218, 227
-Subharmonic
-modes of series resonant converter, 946–947,
-982
-numberξ, 977
-Switch, see also Averaged switch modeling
-averaged modeling of, 547–578
-current-bidirectional two-quadrant, 72–75
-four-quadrant, 76
-ideal SPDT in converters, 4, 67
-ideal SPST, 67
-passive vs. active, 69–70
-power dissipated by ideal, 6
-quasi-resonant, 1003–1025
-realization of, using semiconductor devices,
-67–79
-single-quadrant, 69–72
-synchronous rectiﬁer, 78–79
-synchronous switches, operation of, 107–111
-voltage-bidirectional two-quadrant, 75–76
-Switch conversion ratio
-boost converter example, 1013–1014
-combined CCM-DCM model, 610
-deﬁnition, 608–610, 1005, 1012
-of multiresonant switch, 1020
-of quasi-resonant switches
-full-wave ZCS, 1014
-full-wave ZVS, 1018
-half-wave ZCS, 1011
-half-wave ZVS, 1018
-of quasi-square wave switches, 1023
-Switched mode, 4–6
-Switching frequency
-converter eﬃciency vs., 93, 126
-deﬁnition of, 15
-transformer size vs., 495–496
-Switching harmonics, see also Ripple, switching, 6
-removal of via averaging, 216–218, 224–225
-Switching loss, see also Soft switching, Zero-
-current switching, Zero-voltage switching,
-122–126
-boost converter model, 94–98
-buck converter model, 90–93
-current tailing in IGBTs, 117–119, 1003
-device capacitances, 122–124, 1000
-diode-induced, 90–98, 124–126, 997
-eﬀect on converter eﬃciency, 126
-equivalent circuit modeling of, 90–98
-induced by diode reverse recovery,92
-leakage inductance, 124–126, 999
-ringing waveforms, 124, 998
-with clamped inductive load, 80–82
-Synchronous rectiﬁers, 78–79
-Synchronous switches, 78–79, 107–111
+**Averaging（平均）**
+- 降压、升压和升降压变换器的交流模型，233
+- 降压、升压和升降压变换器的交流模型，234
+- 导通损耗预测精度，60
+- 近似讨论，222–225
+- 近似讨论，218
+- 基本方法，220–242
+- 电容电荷平衡，24
+- 升压变换器中二极管引起的开关损耗，94–98
+- 降压变换器中二极管引起的开关损耗，90–93
+- 反激交流模型，234–242
+- 电感伏秒平衡，23
+- 引言，215–220
+- 三相变换器建模，919–921
+- 整流器输出建模，900–905
+- CPM 中电感电流的，747
+- 准谐振变换器的，1003–1025
+- 状态空间，251–271
+- 求直流分量，6, 16
 
-Index 1083
-T
-Temperature rise
-in a converter, 2
-in magnetics, 1043
-Thyristor, 119–122
-Tn (null loop gain), 512
-Topologies of converters, see also Boost, Bridge
-conﬁguration, Buck, Buck-boost, etc.
-cascade connections, 166–169
-converter synthesis, 174–177
-diﬀerential connection of load, 170–174
-inversion of source and load, 164–165
-low-harmonic rectiﬁers, 908–912
-resonant converters, 933–937
-resonant switch converters, 1016–1025
-rotation of three-terminal cell, 169–170
-transformer isolation, 178–202
-Total harmonic distortion
-deﬁnition, 856
-of current-programmed rectiﬁers, 888
-of peak detection rectiﬁer, 856
-vs. distortion factor, 856
-Transfer functions, see also Bode plots
-graphical construction of, 325–331
-input ﬁlter, eﬀect on, 679–691
-measurement of, 332–333
-of DCM converters, 600–608
-of low-harmonic rectiﬁers, 900–905
-of the buck, boost, and buck-boost converters,
-315
-predicted by canonical model, 245–247, 315
-simulation of, 608–618
-Transformer-isolated converters, 178–202
-boost-derived, 198–201
-´Cuk, 201–202
-ﬂyback, 194–198
-forward, 187–192
-full-bridge buck-derived, 181–185
-half-bridge buck-derived, 185–186
-multiple outputs and cross-regulation, 179
-push-pull buck-derived, 192–193
-SEPIC, 201
-transformer model, 179–181
-use of volt-second balance in, 181
-Transformers
-B–H loop in, 180, 421
-design of
-derivation, 486–490
-ﬁrst-pass procedure, 490–492
-ﬂyback transformer, 476–481
-winding area optimization, 465–470
-ﬂyback transformer, 195, 449
-in isolated converters, 178–202
-leakage inductance, 181, 421–423
-magnetizing inductance, 187, 420–421
-modeling of, 178–181, 418–423
-push-pull boost, 201
-SEPIC transformer, 201
-volt-second balance in, 179–181
-Triplen harmonics
-in three-phase four-wire networks, 860–861
-in three-phase inverter/rectiﬁer modulation
-schemes, 922
-in three-phase three-wire networks, 861
-Two-quadrant switch, see Switch
-U
-Undervoltage lockout (UVLO), 108
-Universal input rectiﬁers, 897
-V
-V olt-second balance,see Inductor volt-second
-balance
-V oltage conversion ratio,see Conversion ratio M
-V oltage injection,394–395
-V oltage-source inverter,74, 919
-W
-Watkins-Johnson converter,174
-inverse of, 176
-isolated push-pull, 201
-Wide bandgap devices, 80, 103–105
-GaN FETs, 103–106
-High electron mobility transistor (HEMT), 106
-SiC MOSFETs, 103–105
-SiC Schottky diode, 89
-Window area WA
-allocation of, to minimize total copper loss,
-465–470
-deﬁnition, 462
-ferrite core tables, 1044–1048
-Window utilization factor Ku, 462
-Wire area AW
-American wire gauge (AWG) table, 1049–1050
-inductor design, 462, 465
-Z
-Zero-current switching, 936
-eﬀect on diode-induced switching loss, 999
-in quasi-resonant converters, 997–999, 999
-in resonant converters, 951–954
-ZCS-ZVS mode boundary, 965, 967
+## B
 
-1084 Index
-Zero-voltage switching, 936
-in active-clamp snubber, 1029
-in auxiliary resonant commutated pole, 1033
-in multiresonant switch, 1019
-in quasi-resonant converters, 999
-in quasi-square wave converters, 1025
-in resonant converters, 954–955
-in zero-voltage transition converter, 1028
-of MOSFETs, 1003
-ZCS-ZVS mode boundary, 965–967
-Zero-voltage transition buck-derived converter,
-1025–1028
-```
+**Ballast, electronic（电子镇流器）**，933–934
+- 谐振逆变器设计，957–973
+
+**Battery charger（电池充电器）**，8, 74
+
+**B–H loop（B–H 回线）**
+- 铁损，423–424
+- 在传统变压器中，180, 447
+- 在耦合电感中，448
+- 在滤波电感中，445
+- 在反激变压器中，449, 479
+- 在交流电感中，446
+- 建模，412–413
+
+**Bidirectional dc–dc converters（双向直流-直流变换器）**，74
+
+**Bipolar junction transistor (BJT)（双极结型晶体管）**
+- 击穿机制，114–115
+- 结构与工作，111–115
+- 电流聚集，114
+- 理想开关特性，69–71
+- 导通电阻，56, 111–113
+- 准饱和，115
+- 存储时间，113
+- 存储少数载流子电荷，111–114
+- 开关波形，112–115
+
+**Bode plots（Bode 图）**
+- 渐近线解析表达式，293
+- CCM 升降压示例，309–314
+- 组合，290–293
+- 复极点，294–297
+- 定义，279–281
+- 频率反转，289–290
+- 图解构造，317–331
+  - 渐近线相加，318–322
+  - 闭环传递函数，353
+  - 除法，325–331
+  - 并联组合，322–324
+  - 并联谐振，323–324
+  - 并联谐振变换器，950
+  - 电抗图纸，324
+  - 串联谐振，320–322
+  - 串联谐振变换器，945
+- 实极点，281–285
+- 实零点，287
+- 右半平面（RHP）零点，288, 315, 317
+- 降压、升压、升降压变换器的传递函数，315
+
+**Body diode（体二极管）**，见 MOSFET
+
+**Boost converter（升压变换器）**
+- 作为反相降压变换器，164–165
+- 作为低谐波整流器，872–875
+- 平均开关模型，DCM，598
+- 电流编程
+  - 小信号交流模型，CCM，731
+  - DCM 特性，152
+- 等效电路建模
+  - 稳态，CCM，49–54
+- 开关损耗建模，94–98
+- 非理想分析，46–49
+- 准谐振零电流开关，1013
+- 半导体导通损耗，56–60
+- 小信号交流模型
+  - CCM，233, 251
+  - DCM，598–608
+- 稳态分析
+  - CCM，24–29
+  - DCM，145–152
+- 传递函数，CCM，315
+- 含电容 ESR 的，264–271
+
+**Bootstrap power supply（自举电源）**，107
+
+**Bridge configuration (dc–dc converters)（桥式结构，直流-直流变换器)**
+- 升压派生全桥，198–201
+- 降压派生全桥，181–185
+- 降压派生半桥，185–186
+- 全桥变压器设计示例，496–499
+
+![源页 p.1070](../assets/page-snapshots/chapter-index/page-1070.png)
+
+- 变压器铜损最小化，468–470
+
+**Bridge configuration (inverters)（桥式结构，逆变器)**
+- 单相，7, 170–173
+- 三相，74, 174, 174
+
+**Buck 3φ inverter（降压三相逆变器）**，见 电压源逆变器
+
+**Buck converter（降压变换器）**，15
+- 经反馈定理分析闭环稳压器，528–540
+- 作为高功率因数整流器，875
+- 电流编程
+  - 平均开关模型，CCM，733–738
+  - DCM 特性，152
+- 采用同步整流器，78–79
+- 等效电路建模
+  - 稳态，CCM，54–56
+- 多谐振实现，1019–1020
+- 准谐振实现
+  - 零电流开关，1003–1015
+  - 零电压开关，1018
+- 准方波实现，1020–1025
+- 小信号交流模型
+  - DCM，604–605
+  - CCM，251
+- 稳态分析
+  - CCM，15–24
+  - DCM，140–145, 598
+- 开关损耗，80–82, 90–93
+- 传递函数，CCM，315
+- 传递函数，DCM，605–606
+
+**Buck-boost converter（升降压变换器）**，见亦 反激变换器
+- 作为低谐波整流器，878–880
+- 平均开关模型，DCM，589–606
+- 电流编程
+  - 交流简单模型，CCM，729–733
+- 直流-三相交流逆变器，76
+- DCM 特性，152, 595–598
+- 理想电路与变换比，17
+- 仿真，575–578
+- 小信号交流模型，CCM，251
+- 小信号交流模型，DCM，604–605
+- 状态空间平均，259–264
+- 传递函数，CCM，315
+- 传递函数，DCM，606
+- 变压器隔离，194–198
+
+## C
+
+**Canonical circuit model（规范电路模型）**，245–251
+- 建立，245–247
+- 整理为规范形式，248–250
+- 基本变换器结果，250–251
+
+**Capacitor charge balance（电容电荷平衡）**
+- 升压变换器示例，27
+- Ćuk 变换器示例，32
+- 定义，24
+- 在断续导通模式下，140, 143
+- 非理想升压变换器示例，48, 58
+
+**Capacitor equivalent series resistance (ESR)（电容等效串联电阻）**，264, 862
+
+**Capacitor voltage ripple（电容电压纹波）**
+- 升压变换器示例，29
+- 降压变换器示例，35–37
+- Ćuk 变换器示例，35
+- 含双极点滤波器的变换器中，35–37
+
+**Charge balance（电荷平衡）**，见 电容电荷平衡
+
+**Circuit averaging（电路平均）**，548–554
+
+**Compensators（补偿器）**，见亦 控制系统设计
+- 设计示例，383–392
+- 离散时间，812, 822–830
+- 引言，347
+- 滞后，380–382
+- 超前，377–379
+- 超前-滞后，382–383
+- PD，377–379
+- PI，380–382
+- PID，382–383
+
+**Complex power（复功率）**，858
+
+**Computer power supply（计算机电源）**，8
+
+**Conduction loss（导通损耗）**，见 铜损、半导体导通损耗
+
+**Conductivity modulation（电导调制）**，79–80, 88, 101, 111–113, 115
+
+**Continuous time to discrete time mapping（连续时间到离散时间映射）**，817–821
+- 后向欧拉近似，814
+- 双线性（Tustin），817
+- 前向欧拉近似，814
+- 梯形近似，813
+- 预畸变，819
+
+**Control system design（控制系统设计）**，见亦 补偿器、负反馈，347–407
+- 闭环传递函数，350–358
+- 补偿，376–392
+- 设计示例，383–392
+- 数字控制环路，806–812, 822–827
+- 低谐波整流器的
+  - 方法，880–894
+  - 直流输出控制，895–905
+  - 平均电流控制建模，786–797
+- 相位裕度
+  - 奈奎斯特稳定性判据，364–369
+  - 测试，359
+
+![源页 p.1071](../assets/page-snapshots/chapter-index/page-1071.png)
+
+**Control system design（续）**
+- 与闭环峰值，370–373
+- 与闭环瞬态响应，373–376
+- 稳定性，358–375
+- 电压稳压器
+  - 方框图，347–349
+  - 设计指标，376–377
+
+**Control-to-output transfer function（控制-输出传递函数）**
+- 电流编程变换器的，736–737, 752–760
+- DCM 变换器的，604–606, 621
+- 仿真，611–618
+
+**Control-to-output transfer function Gvd(s)**
+- 图解构造，330
+- 输入滤波器影响，677–685
+- CCM 降压、升压和升降压变换器的，315
+- 规范模型预测，247
+
+**Conversion ratio M（变换比 M）**，见亦 开关变换比 μ
+- 正弦近似法，938–944
+- 低谐波整流器中，870–872
+- 建模，44
+- Ćuk 变换器的，33, 598
+- 升压的，17, 151, 598
+- 降压的，17, 145, 598
+- 升降压的，17, 152
+- 升降压的，598
+- 无损电阻网络的，597
+- 并联谐振变换器的，947–950, 983–988
+- 谐振开关变换器的，1012
+- SEPIC 的，598
+- 串联谐振变换器的，944–947, 977–983
+
+**Cooling system（冷却系统）**
+- 尺寸与 Q，2
+
+**Copper loss（铜损）**
+- 窗口面积分配以最小化，465–470, 487–488
+- 高频效应
+  - 邻近效应，442
+  - 趋肤效应，426
+- 满足给定铜损的电感设计，459–465
+- 低频，426
+- 变换器中的建模，46–54
+- 满足给定铜损的多绕组设计，470–473
+
+**Core loss（铁损）**，423–425, 479–481
+
+**Correction factor（校正因子）**，见 额外元件定理
+
+**Coupled inductors（耦合电感）**，448
+- 设计，470–473
+- 在 Ćuk 和 SEPIC 变换器中，453–454
+- 在反激变换器中，476–481
+- 在多路输出降压派生变换器中，448, 474–476
+
+**Crossover frequency（穿越频率）**，354, 355, 359, 364, 365, 372, 377
+
+**Ćuk converter（Ćuk 变换器）**
+- 作为低谐波整流器，875, 908
+- 变换比 M(D)，33, 598
+- DCM 平均开关模型，598
+- 由级联连接推导，168
+- 由三端元件旋转推导，170
+- 稳态分析，30–35
+- 变压器设计示例，492–496
+
+**Current injection（电流注入）**，396–397
+
+**Current mode（电流模式）**，见 电流编程控制
+
+**Current programmed control（电流编程控制）**，725–799
+- 交流建模
+  - CCM 更精确模型，746–760
+  - CCM 简单近似，728–738
+  - 经平均开关建模，CCM，733–738
+  - 经平均开关建模，DCM，779–786
+- 加入输入滤波器，760–763
+- 人工斜坡，741–746
+- 平均电流控制，786–797
+- 控制器电路，725
+- 控制器小信号方框图，746–752
+- 高频动态，772–779
+- 在全桥降压变换器中，184, 726
+- 在半桥降压变换器中，186, 727
+- 在低谐波整流器中，886–889
+- 在推挽降压变换器中，193
+- D>0.5 时的振荡，738–746
+- 仿真，763–769
+- 对噪声的敏感性，727
+- 带电压反馈，769–772
+
+**Current ripple（电流纹波）**，见 电感电流纹波
+
+**Current source inverter（电流源逆变器）**，174
+
+**Current-fed bridge（电流馈电桥）**，176
+
+**Current-programmed control（电流编程控制）**
+- 控制器电路，725
+
+**Cycloconverter（交-交变频器）**，1, 76
+
+## D
+
+**Damping（阻尼）**，见亦 Q 因子、输入滤波器
+- 双阻尼元件的高 Q 近似，301–304
+- 输入滤波器的，678, 691–704
+- Q 因子，295
+- 与负载阶跃响应，375–376
+- 与超调，373–375
+
+![源页 p.1072](../assets/page-snapshots/chapter-index/page-1072.png)
+
+- 与相位裕度，370–373
+
+**DC conversion ratio（直流变换比）**，见 变换比 M
+
+**DC transformer model（直流变压器模型）**
+- 推导，43–46
+- 在非理想升压变换器中，51
+- 在非理想降压变换器中，55
+- 在规范模型中，245
+- 在含电容 ESR 的升压小信号交流模型中，271
+- 在小信号交流模型中，231, 233
+- 含该模型的电路整理，45
+
+**Deadtime（死区时间）**，109
+
+**Decibel (dB)（分贝）**，280
+
+**Design-oriented analysis（面向设计的分析）**，技术
+- 渐近线解析表达式，279, 293
+- 显著特征解析表达式，310, 315
+- 近似因式分解，304–308
+- 闭环峰值与相位裕度，370–373
+- SEPIC 内部谐振的阻尼，644–648
+- 额外元件定理，625–648
+- 反馈定理，510–540
+- 频率反转，289–290, 293
+- 图解构造
+  - Bode 图，317–331
+  - 闭环传递函数，353–358
+- 高 Q 近似，301–304
+- 输入滤波器设计不等式，684–685, 689, 692, 706
+- 引言，277–279
+- 零双注入引言，509–510
+- 低 Q 近似，298–301
+- n 额外元件定理，648–668
+- 理念，277
+
+**Digital control（数字控制）**，805
+- 补偿器设计，822–827
+- 控制环路，806–812
+- 控制环路延迟，811
+- 设计示例，824–827
+- 设计流程，823
+- 离散时间系统，812–821
+- 实现，827–838
+- 量化效应，830–836
+
+**Digital pulse-width modulation (DPWM)（数字脉宽调制）**，805, 807–812
+- 量化效应，830–838
+- 实现，836–837
+- 采样，810
+
+**Diode（二极管）**
+- 反并联，72–73
+- 特性，89
+- 快恢复，88
+- 正向压降，见亦 半导体导通损耗，56, 87–89
+- 续流，71
+- 并联工作，89
+- 恢复电荷 Qr，87, 92, 997, 998
+- 恢复机制，85–87
+- 肖特基，88
+- SiC，89, 105
+- 缓冲，999
+- 软恢复，87
+- 开关损耗，90–98, 997, 998, 1000
+- 开关波形，86, 90
+- 宽禁带，89
+- 零电流开关，953
+- 零电压开关，955
+
+**Direct forward transmission through feedback path G0（经反馈路径的直接前向传输 G0）**，512
+
+**Discontinuous conduction mode (DCM)（断续导通模式）**，135–154, 585–624
+- 升压变换器分析，145, 152
+- 降压变换器分析，140, 145
+- 电流编程控制，779–786
+- 等效电路建模，585–622
+- 高频动态，618–621
+- 低谐波整流器中
+  - 升压整流器，873–875
+  - 反激整流器，878–880
+- 并联谐振变换器中，984–988
+- 串联谐振变换器中，979–983
+- 模式边界
+  - 升压整流器中，875
+  - 与负载电流和 Re，598
+  - 与 K，135–140
+  - 起源，135–140
+- 基本变换器结果，152
+- 仿真，608–618
+- 小信号交流建模，600–606
+- 正激变压器复位，190
+
+**Displacement factor（位移因子）**，855, 858
+
+**Distortion factor（畸变因子）**，855–856，见亦 总谐波畸变
+- 单相整流器的，856–857
+
+**Distributed power system（分布式电源系统）**，8
+
+**Duty ratio D（占空比 D）**
+- 补，16
+- 定义，16
+- 开关时间对的影响，90, 94
+
+![源页 p.1073](../assets/page-snapshots/chapter-index/page-1073.png)
+
+## E
+
+**Eddy currents（涡流）**
+- 磁芯中，424–425
+- 绕组导体中，426–430
+
+**Effective resistance Re（有效电阻 Re）**
+- DCM 平均开关模型中，592–598
+- 无损电阻模型中，592–598
+- 谐振变换器模型中
+  - 含容性滤波网络，942
+  - 含感性滤波网络，949
+
+**Efficiency（效率）**，1
+- 经平均模型计算，52, 59
+- 变换器 Q，2
+- 升压变换器的
+  - 低谐波整流器，910–917
+  - 非理想直流-直流，52
+- 与开关频率，126
+
+**Electric vehicle powertrain（电动汽车动力系统）**，9
+
+**Emulated resistance Re（仿真电阻 Re）**，868
+
+**Equilibrium（平衡点）**，见 稳态
+
+**Equivalent circuit modeling（等效电路建模）**
+- CCM 变换器稳态运行的，43–61
+- 脉动输入电流变换器的，54–56
+- 二极管引起开关损耗的，90–98
+- 反激变换器 CCM 的，197
+- 理想整流器的，868–870, 885, 896–900
+- 开关网络的
+  - DCM，589–598
+- 小信号交流模型
+  - 规范，250–251
+  - CCM，230–234
+  - DCM，600–606
+
+**Equivalent series resistance (esr) of capacitor（电容等效串联电阻）**，见 电容等效串联电阻
+
+**Experimental techniques（实验技术）**
+- 阻抗测量，333–336
+- 接地问题，334
+- 环路增益测量
+  - 电流注入，396–397
+  - 电压注入，394–395
+  - 不稳定系统的，397–398
+- 小信号传递函数测量，332–333
+
+**Extra element theorem（额外元件定理）**，625–673
+- 应用
+  - 双段输入滤波器阻尼，700–704
+  - SEPIC 内部谐振阻尼，644–648
+  - 输入滤波器设计，679–691
+  - 谐振逆变器负载依赖，961–965
+- 推导，628–631
+- 阻抗不等式，631–632
+- 互易关系，967
+- 小结，626–627
+
+## F
+
+**Factorization, approximate（近似因式分解）**
+- 任意阶多项式的近似根，304–308
+- Bode 图的图解构造，317–331
+- 高 Q 近似，301–304
+- 低 Q 近似，298–301
+
+**Faraday's law（法拉第定律）**，410–411
+
+**Feedback theorem（反馈定理）**，510–540
+- 降压稳压器示例，528–540
+- 推导，513–518
+- 增益 G0，512
+- 理想前向增益 G∞，512
+- 环路增益 T，511
+- 零环路增益 Tn，512
+- 运放 PD 补偿器示例，519–528
+- 互易关系，518
+- 小结，510–513
+
+**Ferrite（铁氧体）**
+- 应用，446, 447, 474–481, 494–497
+- 铁损，424, 425
+- 磁芯表，1044–1048
+- 饱和磁通密度，413
+
+**Fill factor（填充因子）**，见 Ku
+
+**Filter inductor（滤波电感）**
+- B–H 回线，444
+- 设计
+  - 流程推导，459–464
+  - Kg 设计流程，464–465
+
+**Flux Φ（磁通 Φ）**，410, 413, 415–417, 461
+
+**Flux density B（磁通密度 B）**
+- 定义，410
+- 饱和，412–413, 415
+
+**Flux-linkage balance（磁链平衡）**，见 电感伏秒平衡
+
+**Flyback converter（反激变换器）**，见亦 升降压变换器
+- 交流模型，234–242
+- 推导，194–195
+- 损耗建模，210
+- 多路输出，198, 211
+- 稳态分析，195–197
+- 双晶体管版本，205
+
+**Flyback transformer（反激变压器）**，195, 449
+
+![源页 p.1074](../assets/page-snapshots/chapter-index/page-1074.png)
+
+**Forward converter（正激变换器）**，见亦 降压变换器，187–192
+- 稳态分析，187–191
+- 变压器复位机制，187–191
+- 变压器利用率，192
+- 双晶体管版本，191
+
+**Four-quadrant switch（四象限开关）**，见 开关
+
+**Freewheeling diode（续流二极管）**，71
+
+## G
+
+**G∞（理想闭环前向增益）**，512
+
+**G0（开环扰动传递函数，或直接前向传输）**，512
+
+**GaN（氮化镓）**
+- 二维电子气，106
+- FET，105
+- 反向导通，106
+
+**Gate driver（栅驱动器）**，107–111
+- 自举电源，107
+- 死区时间，108
+- 欠压锁定（UVLO），108
+
+**Gate turn-off thyristor (GTO)（门极可关断晶闸管）**，121
+
+**Graphical construction of Bode plots（Bode 图的图解构造）**，见 Bode 图
+
+**Gyrator characteristic of SRC（串联谐振变换器的回转器特性）**，980
+
+## H
+
+**H-bridge（H 桥）**，7, 181–185
+
+**Half bridge（半桥）**
+- 栅驱动考虑，107–111
+- 变压器隔离降压派生，185
+
+**Harmonic correction（谐波校正）**，922
+
+**Harmonic loss factor FH（谐波损耗因子 FH）**，442
+
+**Harmonics in power systems（电力系统中的谐波）**
+- 平均功率与傅里叶级数，850–853
+- 畸变因子，855
+- 三相系统中，859–861
+- 中线电流，859–861
+- 功率因数，854–857
+- 整流器谐波，856–857
+- 波形的方均根值，853
+- 总谐波畸变，856
+
+**HEMT（高电子迁移率晶体管）**，106
+
+**Hot spot formation（热点形成）**，89, 115, 121
+
+**Hysteretic control（滞环控制）**，889
+
+## I
+
+**Ideal rectifier（理想整流器）**，见亦 低谐波整流器
+- 在变换器系统中，895–905
+- 性质，868–870
+- 实现，870–880
+- 三相，917
+
+**Indirect power（间接功率）**，555–558
+
+**Inductor copper loss（电感铜损）**，见 铜损
+
+**Inductor current ripple（电感电流纹波）**
+- 升压示例，29
+- 降压示例，20–22
+- 计算，21
+- Ćuk 变换器示例，35
+- 滤波电感中，444
+- 交流电感中，446
+- 含双极点滤波器的变换器中，37
+- 幅值与 DCM，139
+
+**Inductor design（电感设计）**
+- 交流电感设计
+  - 推导，500–501
+  - 流程，501–502
+- 滤波电感设计
+  - 推导，459–464
+  - Kg 设计流程，464–465
+
+**Inductor volt-second balance（电感伏秒平衡）**
+- 升压变换器示例，27
+- 降压变换器示例，24
+- Ćuk 变换器示例，32
+- 定义，23
+- 断续导通模式下，140
+
+**Input filters（输入滤波器）**，675–723
+- 级联滤波器段，700–704
+- 传导 EMI 衰减，675–676
+- 传导敏感性，676
+- 阻尼
+  - 目标，689–692
+  - Rf−Cb 并联阻尼，694–696
+  - Rf−Lb 并联阻尼，696–698
+  - Rf−Lb 串联阻尼，698
+- 对控制-输出传递函数的影响
+  - 降压示例，676–679
+  - 一般结果，679–682, 684–685
+  - 引入 RHP 零点，690
+  - 电流模式控制时，760–763
+- 对输出阻抗的影响，682
+- 设计阻抗不等式，684–685, 762–763
+- 负增量输入电阻，682–684
+- 稳定性判据，704–720
+
+**Input port, converter（输入端口，变换器）**
+- 交流等效电路模型，231
+- 交流建模，226–227
+- 升压静态特性，872–875, 887–888
+- 状态空间平均建模，260
+- 稳态建模，54–56
+
+**Inrush current（浪涌电流）**，897
+
+![源页 p.1075](../assets/page-snapshots/chapter-index/page-1075.png)
+
+**Insulated-gate bipolar transistor (IGBT)（绝缘栅双极型晶体管）**
+- 结构，115–119
+- 电流拖尾，116, 122
+- 等效电路，116
+- 正向压降建模，119
+- 理想开关特性，70
+- 并联工作，119
+- 开关损耗，118
+
+**Inverters（逆变器）**，1
+- 高频，933–934, 958–973
+- 单相，7, 73, 170–173
+- 三相，74, 76, 174, 174
+
+**Iron laminations（铁片叠层）**，413, 424
+
+## K
+
+**K，无量纲参数**
+- 临界值 Kcrit(D)，138–140, 144–147, 151–152
+- DCM 边界，139–140, 146–147, 152
+- 稳态 DCM 分析，144–145, 151–153, 597
+
+**Kg，磁芯几何常数**
+- 定义，463–464, 1043
+- 铁氧体磁芯表，1044–1048
+- 滤波电感设计，464–465
+- 多绕组磁性器件设计，470–473
+
+**Kgfe，交流磁芯几何常数**
+- 交流电感设计，499–502
+- 定义，489, 1043
+- 铁氧体磁芯表，1044–1048
+- 变压器设计
+  - 推导，486–490
+  - 示例，492–499
+  - 首轮流程，490–492
+
+**Ku，窗口利用系数**，462
+
+## L
+
+**LCC resonant converter（LCC 谐振变换器）**，933, 961, 964–967, 969
+
+**Lenz's law（楞次定律）**，411, 424, 426, 428
+
+**Line-to-output transfer function Gvg(s)（输入-输出传递函数）**
+- 图解构造，331
+- 闭环，351, 355
+- 控制系统设计，376, 389, 390
+- 闭环方框图中，386
+- CCM 降压、升压和升降压变换器的，315
+- DCM 变换器的，605
+- 规范模型预测，247
+
+**Linear ripple approximation（线性纹波近似）**，见 小纹波近似
+
+**Litz wire（李兹线）**，440
+
+**LLC resonant converter（LLC 谐振变换器）**，933, 972–973
+
+**Loop gain（环路增益）**，见亦 控制系统设计、负反馈、反馈定理
+- 降压稳压器示例，537
+- 补偿器设计，376–392
+- 穿越频率，354
+- 基于方框图定义，351
+- 基于零双注入定义，511
+- 对闭环扰动传递函数的影响，351
+- 对闭环参考-输出传递函数的影响，353
+- 测量，392–398
+- 零环路增益，512
+- 运放示例，522
+- 相位裕度测试，359
+
+**Loss-free resistor model（无损电阻模型）**
+- DCM 平均开关模型，592–598
+- 理想整流器模型
+  - 单相，868–870
+  - 三相，917
+
+**Low harmonic rectifiers（低谐波整流器）**，见亦 理想整流器
+- 控制器方案
+  - 平均电流控制，881–886
+  - 临界导通模式，889–892
+  - 电流编程控制，886–889
+  - 滞环控制，889
+  - 非线性载波控制，892–894
+- 建模
+  - 效率与损耗，910–917
+  - 低带宽控制环路，900–905
+  - 方均根计算，905–910
+
+## M
+
+**Magnetic circuits（磁路）**，415–418
+
+**Magnetic field H（磁场 H）**，409, 412–413
+
+**Magnetics（磁学）**，409–451
+- 交流电感设计，499–502
+- 基本关系，409–415
+- 铜损，426, 463, 487–488
+- 铁损，423–425, 486–487
+- 耦合电感设计，465–476
+- 反激变压器设计，476–481
+- 电感设计，459–465
+- 磁路，415–418
+- 磁性器件类型，444–449
+- 优化 ΔB 以最小化总损耗，485, 488–490
+
+![源页 p.1076](../assets/page-snapshots/chapter-index/page-1076.png)
+
+- 优化窗口分配以最小化铜损，465–470
+- 邻近效应，426–442
+- 变压器基础，178–181, 418–423
+- 变压器设计，485–499
+
+**Magnetizing current（磁化电流）**，180, 420
+
+**Magnetomotive force (MMF)（磁动势）**
+- 定义，409
+- 交错的影响，438–440
+- 磁路中，415–417
+- MMF 图，431–432, 434
+
+**Majority carrier devices（多数载流子器件）**，见亦 MOSFET、肖特基二极管，79
+
+**Matrix converter（矩阵变换器）**，76
+
+**Mean length per turn (MLT)（每匝平均长度）**
+- 定义，463
+- 铁氧体磁芯表，1044–1048
+
+**Measurement of transfer functions and loop gains（传递函数与环路增益测量）**，见 实验技术
+
+**Minority carrier devices（少数载流子器件）**，见亦 双极结型晶体管、二极管、绝缘栅双极型晶体管，79
+
+**Modulation index（调制指数）**，921
+
+**MOSFET**
+- 作为电流双向开关，72
+- 作为同步整流器，78
+- 体二极管，72, 101
+- 电容，101
+- 特性，101
+- 导通损耗建模，56–60
+- 结构，99
+- 死区时间，109
+- 栅驱动器，107–111
+- 理想开关特性，70
+- 寄生 BJT，101
+- SiC，103–105
+- 缓冲器，1001
+- 超结，103
+- Cds 引起的开关损耗，123, 1000
+- 箝位感性负载下的开关损耗，80
+- 零电压与零电流开关，1002–1003
+
+**Motor drive（电机驱动）**，9
+
+**Multiplying controller（乘法控制器）**，见亦 平均电流控制、电流编程控制，884–886
+
+**Multiresonant switch（多谐振开关）**，1019–1020
+
+## N
+
+**n-extra element theorem（n 额外元件定理）**，648–668
+- 桥-T 滤波器示例，658–661
+- 阻尼输入滤波器示例，662–668
+- 频率反转，661–668
+- 引言，649–653
+- 流程，653–654
+- 双段 LC 滤波器示例，654–658
+
+**Negative feedback（负反馈）**，见亦 控制系统设计
+- 对带宽的影响，355
+- 对网络传递函数的影响，350–353
+- 目标，215, 347–351
+- 扰动抑制，355–358
+- 前向增益灵敏度抑制，353
+
+**Nonlinear carrier control（非线性载波控制）**，892–894
+
+**Nonminimum phase zero（非最小相位零点）**，见 右半平面零点
+
+**Null loop gain Tn（零环路增益 Tn）**，512
+
+**Nyquist stability criterion（奈奎斯特稳定性判据）**，360–369
+- 对 −1 点的包围，363
+- 输入滤波器稳定性分析，718–720
+- 特殊情况奈奎斯特围线修改，367–369
+- 奈奎斯特围线，362–363
+- 相位裕度，364
+- 辐角原理，360–362
+- 稳定性测试，363–364
+- 三个穿越频率，365–367
+
+## O
+
+**Op amp compensator circuit（运放补偿器电路）**
+- 经反馈定理分析，519–528
+
+**Output characteristics（输出特性）**
+- LLC 的，973
+- 并联谐振变换器的，986
+- 谐振逆变器的，958–960, 975
+- 串联谐振变换器的，982–983
+
+**Output impedance Zout(s)（输出阻抗）**
+- 规范模型预测，247
+
+**Overshoot（超调）**，373–375
+
+## P
+
+**Parallel resonant converter（并联谐振变换器）**
+- 正弦近似分析，947–950
+- 晶体管电流对负载的依赖，961
+- 精确分析，983–988
+- 引言，933
+
+**Passthrough mode（直通模式）**，98
+
+**Permeability（磁导率）**
+- 定义，412–413
+- 真空 μ0，412
+- 相对 μr，412
+
+![源页 p.1077](../assets/page-snapshots/chapter-index/page-1077.png)
+
+**Phase asymptotes（相位渐近线）**
+- 复极点，296–297
+- 反转形式，289
+- 实极点，284–285
+- 实零点，287
+- RHP 零点，288
+
+**Phase margin（相位裕度）**，359, 366, 369, 373
+- 奈奎斯特稳定性判据中，364–367
+- 无阻尼输入滤波器的影响，691
+- 输入滤波器修改，678, 706–710
+- 稳定性测试，359
+- 与闭环阻尼因子，370–373
+
+**Powdered iron（粉末铁芯）**，413, 425
+
+**Power factor（功率因数）**，见亦 总谐波畸变、位移因子、畸变因子
+- 定义，854
+- 单相整流器，856–857
+- 正弦电压下，855–857
+
+**Power sink element（功率阱元件）**
+- 定义，594
+- 理想开关稳压器输入端口特性，682
+
+**Power source element（功率源元件）**
+- 定义，593–598
+- 交流-直流电源系统中，897–898
+- 平均开关模型中
+  - 电流编程模式，CCM，734–735
+- DCM 开关网络中，594
+- 理想整流器模型中，869, 918
+- 开关模式稳压器中，682–684
+- 线性化，603–604
+- 性质，596–598
+
+**Proximity effect（邻近效应）**，426–442
+- 交错影响，438–440
+- 层铜损，434–435
+- 李兹线影响，440
+- MMF 图，436–440
+- PWM 波形谐波，441–442
+- 简单解释，428–430
+- 变压器设计流程考虑，488
+- 绕组总损耗，436–438
+- 绕组孔隙率 η，433
+
+**Pulse-width modulation (PWM)（脉宽调制）**，4–6
+- 数字，805, 807–812, 836–837
+- 脉宽调制器建模，242–245
+- 脉宽调制器工作，242–243
+- PWM 波形频谱，216
+
+**Push-pull isolated converters（推挽隔离变换器）**
+- 基于升压变换器，201
+- 基于降压变换器，192–193
+- 基于 Watkins-Johnson 变换器，201
+
+## Q
+
+**Q factor（Q 因子）**
+- 闭环与相位裕度，370–373
+- 变换器品质因子，2
+- 解析表达式，311
+- 图解确定，321–324
+- 高 Q 近似，301–304
+- 负载阶跃响应与，375–376
+- 低 Q 近似，298–301
+- 复极点的，295
+- 超调与，373–375
+- 规范模型预测，315
+
+**Quasi-resonant converters（准谐振变换器）**，见亦 多谐振变换器、准方波变换器
+- 零电流开关，1003–1015
+  - 全波，1014–1015
+  - 半波，1005–1014
+- 零电压开关，1017–1018
+
+**Quasi-square wave converters（准方波变换器）**，1020–1025
+
+**Quasi-static approximation（准静态近似）**，886
+
+**Quiescent operating point（静态工作点）**，218, 227, 233, 244
+
+## R
+
+**Reactive power（无功功率）**
+- 定义，858
+
+**Rectifiers（整流器）**，1
+- 单相储能，895–900
+- 高品质，849
+- 理想，868–870
+- 理想三相，917–922
+- 谐振直流-直流变换器中，934, 940
+- 谐振直流-直流变换器中，942, 947–949
+- 线路换相
+  - 单相，856–857
+
+**Reluctance R（磁阻 R）**，416
+
+**Resonance（谐振）**
+- 复极点 Bode 图，294–297
+- 阻尼，691–698
+- 图解构造示例，321–324
+- 并联谐振电路，322–324
+- 串联谐振电路，320–322
+
+![源页 p.1078](../assets/page-snapshots/chapter-index/page-1078.png)
+
+**Resonant converters（谐振变换器）**，见亦 准谐振变换器、多谐振变换器、准方波变换器、零电压过渡变换器，933–988
+- 正弦近似分析，938–944
+- LCC，960–971
+- LLC，972–973
+- 并联谐振变换器，947–950, 983–988
+- 性质，957–973
+- 串联谐振变换器，944–947, 977–983
+- 软开关，951–955
+
+**Resonant inverters, design of（谐振逆变器设计）**，957–976
+- 晶体管电流对负载的依赖，960–965
+- LCC 示例，967–971
+- LLC 示例，972–973
+- 输出特性，958–960
+- 基本谐振槽网络结果，973–976
+- ZCS/ZVS 边界，965–967
+
+**Resonant link converters（谐振环节变换器）**，935
+
+**Right half-plane zero（右半平面零点）**
+- Bode 图，288
+- 输入滤波器引起，690
+- 起源，316–317
+
+**Ripple, switching（开关纹波）**，18–22, 35–37, 135–139, 216, 224
+
+**Root mean square value（方均根值）**
+- 理想整流器拓扑比较，908–910
+- 常见变换器波形的，1037–1042
+- 整流器波形的，905–910
+- 与傅里叶级数，853
+
+## S
+
+**Sampling（采样）**
+- 数字控制环路延迟，810–812
+- A/D 转换器，806
+- 电流编程控制器的，773–779
+- 脉宽调制器的，244–245, 811
+
+**Saturation（饱和）**
+- 电感的，415, 418
+- 磁性材料的，412–413
+- 变压器的，180, 421
+
+**Schottky diode（肖特基二极管）**，88
+
+**Semiconductor conduction loss（半导体导通损耗）**
+- 升压变换器示例，56–60
+- 纳入交流模型，234, 259
+- 同步整流器时，79
+
+**Semiconductor power devices（半导体功率器件）**，见亦 双极结型晶体管、二极管、门极可关断晶闸管、绝缘栅双极型晶体管、肖特基二极管、硅可控整流器，67–128
+- 电荷控制，79, 85–87, 112–115
+- 电导调制，79, 112
+- 多数与少数载流子，79
+- 用半导体实现开关，67–79
+
+**SEPIC**，见 单端初级电感变换器
+
+**Series pass regulator（串联调整型稳压器）**，4
+
+**Series resonant converter（串联谐振变换器）**
+- 正弦近似分析，938–947
+- 晶体管电流对负载的依赖，964
+- 精确特性
+  - 连续导通模式，977–979
+  - 控制平面特性，980–982
+  - 断续导通模式，979–980
+  - 输出特性，982–983
+- 引言，933, 934
+- 子谐波模式，946–947
+- 零电流开关，951–954
+- 零电压开关，954–955
+
+**SiC MOSFET（碳化硅 MOSFET）**，104
+
+**Silicon controlled rectifier (SCR)（硅可控整流器）**，119–122
+- 等效电路，120
+- 门极可关断晶闸管，121
+- 逆变器级，121
+
+**Simulation（仿真）**，566–578, 608–618
+- 含导通损耗的 CCM 模型，571–572
+- CCM-DCM 组合开关模型，608–614
+- CCM/DCM 组合平均开关仿真模型，608–621
+- 电流编程模式控制模型，763–764
+  - CCM 模型，764–765
+  - CCM-DCM 组合模型，765–766
+- 示例
+  - 降压电压稳压器，614–618
+  - 含电流编程控制的降压，766–769
+  - SEPIC 频率响应，611–614
+- 目标，566–568
+- 环路增益与闭环响应，614–618
+
+**Single quadrant switch（单象限开关）**，69–72
+- 定义，69
+- DCM 起源，135–140
+- 实现，69–72
+
+**Single-ended primary inductance converter (SEPIC)（单端初级电感变换器）**，177
+- 经额外元件定理分析，640–644
+
+![源页 p.1079](../assets/page-snapshots/chapter-index/page-1079.png)
+
+**Single-ended primary inductance converter (SEPIC)（续）**
+- 作为低谐波整流器，875, 878, 908
+- 平均开关模型
+  - CCM 推导，548–554
+  - CCM-DCM 组合模型，611–614
+  - 断续导通模式，598
+  - 损耗与效率，572–574
+- 变换比 M(D)，177
+- 内部谐振阻尼，644–648
+- Gvd 视为有效升降压加毛刺，641
+- 间接功率，555–558
+- 逆变换器，177, 201
+- 变压器隔离，201
+
+**Skin effect（趋肤效应）**，见亦 邻近效应，426–428
+
+**Small ripple approximation（小纹波近似）**，见亦 平均
+- 平均功率损耗预测，59–60
+- 升压示例，26
+- 降压示例，19–20
+- Ćuk 示例，30–32
+- 定义，19
+- 在双极点滤波器中失效，35
+- 断续导通模式下，140–141
+
+**Small-signal ac modeling（小信号交流建模）**，218–220
+- 规范模型，245–251
+- 等效电路模型，230–234
+- 低谐波整流器的，902–905
+- 扰动与线性化，227–229, 232–233
+- 经平均开关建模，552–554, 563–565
+
+**Snubber networks（缓冲网络）**，115, 119, 999, 1001
+
+**Soft switching（软开关）**，见亦 零电流开关、零电压开关
+
+**Spacecraft power system（航天器电源系统）**，9
+
+**SPICE**，见 仿真
+
+**State-space averaging（状态空间平均）**，251–271
+- 基本结果，255–259
+- 含电容 ESR 的升压示例，264–271
+- 升降压示例，259–264
+- 网络状态方程列写，252–254
+
+**Steady state（稳态）**
+- 状态空间平均的平衡点，255
+- 电感电流波形，22–23
+- 静态工作点，218, 227
+
+**Subharmonic（子谐波）**
+- 串联谐振变换器模式，946–947, 982
+- 数 ξ，977
+
+**Switch（开关）**，见亦 平均开关建模
+- 平均建模，547–578
+- 电流双向双象限，72–75
+- 四象限，76
+- 变换器中理想 SPDT，4, 67
+- 理想 SPST，67
+- 被动与主动，69–70
+- 理想器件功耗，6
+- 准谐振，1003–1025
+- 用半导体器件实现，67–79
+- 单象限，69–72
+- 同步整流器，78–79
+- 同步开关工作，107–111
+- 电压双向双象限，75–76
+
+**Switch conversion ratio（开关变换比）**
+- 升压变换器示例，1013–1014
+- CCM-DCM 组合模型，610
+- 定义，608–610, 1005, 1012
+- 多谐振开关的，1020
+- 准谐振开关的
+  - 全波 ZCS，1014
+  - 全波 ZVS，1018
+  - 半波 ZCS，1011
+  - 半波 ZVS，1018
+- 准方波开关的，1023
+
+**Switched mode（开关模式）**，4–6
+
+**Switching frequency（开关频率）**
+- 变换器效率与，93, 126
+- 定义，15
+- 变压器尺寸与，495–496
+
+**Switching harmonics（开关谐波）**，见亦 开关纹波，6
+- 经平均去除，216–218, 224–225
+
+**Switching loss（开关损耗）**，见亦 软开关、零电流开关、零电压开关，122–126
+- 升压变换器模型，94–98
+- 降压变换器模型，90–93
+- IGBT 电流拖尾，117–119, 1003
+- 器件电容，122–124, 1000
+- 二极管引起的，90–98, 124–126, 997
+- 对变换器效率的影响，126
+- 等效电路建模，90–98
+- 二极管反向恢复引起，92
+- 漏感，124–126, 999
+- 振铃波形，124, 998
+- 箝位感性负载下，80–82
+
+**Synchronous rectifiers（同步整流器）**，78–79
+
+**Synchronous switches（同步开关）**，78–79, 107–111
+
+![源页 p.1080](../assets/page-snapshots/chapter-index/page-1080.png)
+
+## T
+
+**Temperature rise（温升）**
+- 变换器中，2
+- 磁性器件中，1043
+
+**Thyristor（晶闸管）**，119–122
+
+**Tn（零环路增益）**，512
+
+**Topologies of converters（变换器拓扑）**，见亦 升压、桥式结构、降压、升降压等
+- 级联连接，166–169
+- 变换器综合，174–177
+- 负载差分连接，170–174
+- 源与负载反转，164–165
+- 低谐波整流器，908–912
+- 谐振变换器，933–937
+- 谐振开关变换器，1016–1025
+- 三端元件旋转，169–170
+- 变压器隔离，178–202
+
+**Total harmonic distortion（总谐波畸变）**
+- 定义，856
+- 电流编程整流器的，888
+- 峰值检测整流器的，856
+- 与畸变因子，856
+
+**Transfer functions（传递函数）**，见亦 Bode 图
+- 图解构造，325–331
+- 输入滤波器影响，679–691
+- 测量，332–333
+- DCM 变换器的，600–608
+- 低谐波整流器的，900–905
+- 降压、升压和升降压变换器的，315
+- 规范模型预测，245–247, 315
+- 仿真，608–618
+
+**Transformer-isolated converters（变压器隔离变换器）**，178–202
+- 升压派生，198–201
+- Ćuk，201–202
+- 反激，194–198
+- 正激，187–192
+- 全桥降压派生，181–185
+- 半桥降压派生，185–186
+- 多路输出与交叉调整，179
+- 推挽降压派生，192–193
+- SEPIC，201
+- 变压器模型，179–181
+- 伏秒平衡应用，181
+
+**Transformers（变压器）**
+- B–H 回线，180, 421
+- 设计
+  - 推导，486–490
+  - 首轮流程，490–492
+  - 反激变压器，476–481
+  - 绕组面积优化，465–470
+- 反激变压器，195, 449
+- 隔离变换器中，178–202
+- 漏感，181, 421–423
+- 磁化电感，187, 420–421
+- 建模，178–181, 418–423
+- 推挽升压，201
+- SEPIC 变压器，201
+- 伏秒平衡，179–181
+
+**Triplen harmonics（三倍次谐波）**
+- 三相四线网络中，860–861
+- 三相逆变器/整流器调制方案中，922
+- 三相三线网络中，861
+
+**Two-quadrant switch（双象限开关）**，见 开关
+
+## U
+
+**Undervoltage lockout (UVLO)（欠压锁定）**，108
+
+**Universal input rectifiers（通用输入整流器）**，897
+
+## V
+
+**Volt-second balance（伏秒平衡）**，见 电感伏秒平衡
+
+**Voltage conversion ratio（电压变换比）**，见 变换比 M
+
+**Voltage injection（电压注入）**，394–395
+
+**Voltage-source inverter（电压源逆变器）**，74, 919
+
+## W
+
+**Watkins-Johnson converter（Watkins-Johnson 变换器）**，174
+- 逆变换器，176
+- 隔离推挽，201
+
+**Wide bandgap devices（宽禁带器件）**，80, 103–105
+- GaN FET，103–106
+- 高电子迁移率晶体管（HEMT），106
+- SiC MOSFET，103–105
+- SiC 肖特基二极管，89
+
+**Window area WA（窗口面积 WA）**
+- 分配以最小化总铜损，465–470
+- 定义，462
+- 铁氧体磁芯表，1044–1048
+
+**Window utilization factor Ku（窗口利用系数 Ku）**，462
+
+**Wire area AWG（导线面积 AWG）**
+- 美国线规表，1049–1050
+- 电感设计，462, 465
+
+## Z
+
+**Zero-current switching（零电流开关）**，936
+- 对二极管引起开关损耗的影响，999
+- 准谐振变换器中，997–999, 999
+- 谐振变换器中，951–954
+
+**ZCS-ZVS mode boundary（ZCS-ZVS 模式边界）**，965, 967
+
+![源页 p.1081](../assets/page-snapshots/chapter-index/page-1081.png)
+
+**Zero-voltage switching（零电压开关）**，936
+- 有源箝位缓冲器中，1029
+- 辅助谐振换相极中，1033
+- 多谐振开关中，1019
+- 准谐振变换器中，999
+- 准方波变换器中，1025
+- 谐振变换器中，954–955
+- 零电压过渡变换器中，1028
+- MOSFET 的，1003
+
+**ZCS-ZVS mode boundary（ZCS-ZVS 模式边界）**，965–967
+
+**Zero-voltage transition buck-derived converter（零电压过渡降压派生变换器）**，1025–1028

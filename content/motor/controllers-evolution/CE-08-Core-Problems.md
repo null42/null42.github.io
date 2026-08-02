@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-08: 控制器设计的九大核心问题
 
 **副标题：从PID到非线性MPC，每一代控制器都是对同一组根本问题的回答**
-**难度：**  中等
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-03（频域分析基础）
+- **难度：**  中等
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-03（频域分析基础）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 剥去数学外衣，每个控制系统面对的都是同一组横亘在"完美跟踪"与"现实"之间的障碍：测量噪声与延迟、被控对象的惯性与滞后、执行器的物理约束、模型的不确定性、外部扰动、非线性特性、稳定性保证、实时计算限制，以及多目标之间的不可调和的权衡。这九大问题不是彼此独立的——它们相互叠加、彼此恶化。理解这些问题，就是理解控制理论为什么沿着从PID到LQR到MPC的路径演化。
 
-**认知挂钩：** 火箭着陆同时激活了全部九个问题——噪声超音速GPS、巨大助推器惯性、发动机节流阀限制、不确定气动特性、阵风、非线性阻力、安全关键稳定性、毫秒级控制截止期、燃料与精度的竞争目标。没有任何单一技术能同时解决所有问题——这就是为什么工程控制器总是组合多种方案。
+- **认知挂钩：** 火箭着陆同时激活了全部九个问题——噪声超音速GPS、巨大助推器惯性、发动机节流阀限制、不确定气动特性、阵风、非线性阻力、安全关键稳定性、毫秒级控制截止期、燃料与精度的竞争目标。没有任何单一技术能同时解决所有问题——这就是为什么工程控制器总是组合多种方案。
 
 ---
 
@@ -156,7 +156,7 @@ $$\min_u J(x, u) \quad \text{s.t.} \quad u_{\min} \leq u \leq u_{\max}$$
 
 约束进入优化，而不是后处理。求解器看到墙壁，规划绕过它。
 
-**代价：** LQR离线求解一次Riccati方程。MPC在线每个时间步求解一个QP。实时优化的历史——内点法、有效集法、算子分裂、热启动——就是让这足够快的历史。
+- **代价：** LQR离线求解一次Riccati方程。MPC在线每个时间步求解一个QP。实时优化的历史——内点法、有效集法、算子分裂、热启动——就是让这足够快的历史。
 
 ---
 
@@ -343,7 +343,7 @@ $$\hat{d} = G_{\text{model}}^{-1}(y) - u$$
 
 **H₂ / H∞权衡。** H₂优化标称性能（期望行为）。H∞优化最坏情况鲁棒性。混合H₂/H∞设计平衡两者——良好的标称性能加上对指定不确定性界的鲁棒性保证。
 
-**根本问题：** 没有控制器能超越被控对象物理施加的权衡。Bode积分公式说灵敏度函数的积分是守恒的——在一个频率上降低误差会在另一个频率上增加。水床效应是自然法则，不是工程限制。好的控制器设计不是消除权衡，而是让权衡可见并审慎选择。
+- **根本问题：** 没有控制器能超越被控对象物理施加的权衡。Bode积分公式说灵敏度函数的积分是守恒的——在一个频率上降低误差会在另一个频率上增加。水床效应是自然法则，不是工程限制。好的控制器设计不是消除权衡，而是让权衡可见并审慎选择。
 
 ---
 
@@ -396,33 +396,33 @@ $$\hat{d} = G_{\text{model}}^{-1}(y) - u$$
 
 ## 14. 延伸阅读
 
-**综合：**
+- **综合：**
 - Åström, K.J. & Murray, R.M. (2021). *Feedback Systems.* Princeton. — 覆盖全貌的最佳单卷入门。
 
-**测量：**
+- **测量：**
 - Simon, D. (2006). *Optimal State Estimation.* Wiley. — 卡尔曼滤波、EKF、UKF、粒子滤波。
 - Smith, O.J.M. (1957). "Closer control of loops with dead time." *Chemical Engineering Progress.*
 
-**模型不确定性：**
+- **模型不确定性：**
 - Zhou, K., Doyle, J.C., Glover, K. (1996). *Robust and Optimal Control.* Prentice-Hall. — H∞、μ综合，权威参考。
 - Åström, K.J. & Wittenmark, B. (2013). *Adaptive Control.* Dover. — MRAC、自校正调节器。
 
-**扰动：**
+- **扰动：**
 - Han, J. (2009). "From PID to Active Disturbance Rejection Control." *IEEE Trans. Industrial Electronics.*
 - Chen, W.H. et al. (2016). "Disturbance Observer-Based Control." *IEEE Trans. Industrial Electronics.*
 
-**非线性：**
+- **非线性：**
 - Khalil, H.K. (2015). *Nonlinear Control.* Pearson. — 李亚普诺夫、反馈线性化、滑模、反步法。
 - Slotine, J.J. & Li, W. (1991). *Applied Nonlinear Control.* Prentice-Hall.
 
-**约束：**
+- **约束：**
 - Rawlings, J.B., Mayne, D.Q., Diehl, M. (2017). *Model Predictive Control: Theory, Computation, and Design.* Nob Hill.
 
-**稳定性与安全：**
+- **稳定性与安全：**
 - Sontag, E.D. (1998). *Mathematical Control Theory.* Springer. — 李亚普诺夫理论、输入到状态稳定性。
 - Ames, A.D. et al. (2019). "Control Barrier Functions." *Annual Review of Control, Robotics, and Autonomous Systems.*
 
-**本项目（相关文档）：**
+- **本项目（相关文档）：**
 - `bellman_to_lqr.md` — 从动态规划到Riccati推导
 - `care_vs_dare.md` — 离散 vs 连续Riccati
 - `from_lp_to_qp_to_lqr.md` — MPC之下的优化引擎

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第21章part 3 - 21 Pulse-Width Modulated Rectifiers"
+title: "第21章 脉宽调制整流器（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1316 +18,497 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第21章part 3 - 21 Pulse-Width Modulated Rectifiers
+# 第21章 脉宽调制整流器（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 906-925  
-> Chunk ID: `chapter-21-part-3`
+## 21.5 整流器波形的方均根值（续）
 
-## 主干提取
+![源页 p.906](../assets/page-snapshots/chapter-21/page-906.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$$\langle i_Q^2 \rangle_{T_s} = \frac{V_M^2}{R_e^2}\left( 1 - \frac{V_M}{V} |\sin\omega t| \right) \sin^2(\omega t) \tag{21.118}$$
 
-## 术语表
+将此表达式代入式(21.112)：
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+$$I_{Q,rms} = \sqrt{\frac{1}{T_{ac}} \int_0^{T_{ac}} \langle i_Q^2 \rangle_{T_s}\, dt} = \sqrt{\frac{1}{T_{ac}} \int_0^{T_{ac}} \frac{V_M^2}{R_e^2}\left( 1 - \frac{V_M}{V} |\sin\omega t| \right) \sin^2(\omega t)\, dt} \tag{21.119}$$
 
-## 中文翻译
+可进一步化简为
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$I_{Q,rms} = \sqrt{\frac{2}{T_{ac}}\, \frac{V_M^2}{R_e^2} \int_0^{T_{ac}/2} \left( \sin^2(\omega t) - \frac{V_M}{V} \sin^3(\omega t) \right) dt} \tag{21.120}$$
 
-## 英文原文
+这涉及在完整半周期上对 $\sin(\omega t)$ 幂的积分。该积分可借助如下公式求值：
 
-```text
-21.5 RMS Values of Rectiﬁer Waveforms 907
-⟨i2
-Q⟩TS = V2
-M
-R2e
-⎦
-1−VM
-V | sinωt|
-)
-sin2(ωt) (21.118)
-One can now plug this expression into Eq. (21.112):
-IQrms=
-√
-1
-Tac
-∫ Tac
-0
-⟨i2
-Q⟩Ts dt
-=
-√
-1
-Tac
-∫ Tac
-0
-V2
-M
-R2e
-⎦
-1−VM
-V | sinωt|
-)
-sin2(ωt)dt (21.119)
-which can be further simpliﬁed to
-IQrms=
-√
-2
-Tac
-V2
-M
-R2e
-∫ Tac/2
-0
-⎦
-sin2(ωt)−VM
-V sin3(ωt)
-)
-dt (21.120)
-This involves integration of powers of sin(ωt) over a complete half-cycle. The integral can
-be evaluated with the help of the following formula:
-1
-π
-∫ π
-0
-sinn(θ)dθ=
-⎧⎪⎪⎪⎪⎪⎪⎪⎨⎪⎪⎪⎪⎪⎪⎪⎩
-2
-π
-2· 4· 6··· (n−1)
-1· 3· 5··· n if n is odd
-1· 3· 5··· (n−1)
-2· 4· 6··· n if n is even
-(21.121)
-This type of integral commonly arises in rms calculations involving PWM rectiﬁers. The values
-of the integral for several choices of n are listed in Table 21.2. Evaluation of the integral in
-Eq. (21.120)u s i n gE q .(21.121) leads to the following result:
-IQrms= VM
-√
-2Re
-√
-1−8
-3π
-VM
-V = Iac rms
-√
-1−8
-3π
-VM
-V (21.122)
-Table 21.2 Solution of the integral of Eq. (21.121), for several values of n
-n 1
-π
-∫ π
-0
-sinn(θ)dθ
-1 2
-π
-2 1
-2
-3 4
-3π
-4 3
-8
-5 16
-15π
-6 15
-48
+$$\frac{1}{\pi} \int_0^{\pi} \sin^n(\theta)\, d\theta = \begin{cases} \dfrac{2}{\pi}\, \dfrac{2 \cdot 4 \cdot 6 \cdots (n-1)}{1 \cdot 3 \cdot 5 \cdots n} & n \text{ 为奇数} \\[6pt] \dfrac{1 \cdot 3 \cdot 5 \cdots (n-1)}{2 \cdot 4 \cdot 6 \cdots n} & n \text{ 为偶数} \end{cases} \tag{21.121}$$
 
-908 21 Pulse-Width Modulated Rectiﬁers
-It can be seen that the rms transistor current is minimized by choosing the output voltage V to
-be as small as possible. The best that can be done is to choose V= VM, which leads to
-IQrms= 0.39Iac rms (21.123)
-Larger values of V lead to a larger rms transistor current.
-A similar analysis for the rms diode current leads to the following expression
-IDrms= Iac rms
-√
-8
-3π
-VM
-V (21.124)
-The choice V= VM maximizes the rms diode current, with the result
-IDrms= 0.92Iac rms (21.125)
-Larger values of V lead to smaller rms diode current.
-Average currents can be computed in a similar way. The results are
-IQav = Iac rms
-2
-√
-2
-π
-⎦
-1−π
-8
-VM
-V
-)
-(21.126)
-IDav= Iac rms
-VM
-2
-√
-2V
-Expressions for rms, average, and peak currents of the power stage components of the con-
-tinuous conduction mode boost converter are summarized in Table 21.3. Expressions are also
-tabulated for ﬂyback and SEPIC topologies, operating in the continuous conduction mode. In
-the case of the ﬂyback converter, an L1−C1 input ﬁlter is also included. In all cases, the eﬀects
-of switching ripple are neglected.
-21.5.2 Comparison of Single-Phase Rectiﬁer Topologies
-When isolation is not a rectiﬁer requirement, and when it is acceptable that the dc output voltage
-be marginally larger than the peak ac input voltage, then the boost converter is a very eﬀective
-approach. For example, consider the design of a 1 kW rectiﬁer operating from the 240 Vrms
-input line voltage. If the converter e ﬃciency and power factor are both approximately unity,
-then the rms input current is I
-rms = (1000W)/(240V)= 4.2 A. The dc output voltage is chosen
-to be 380 V , or slightly larger than the peak ac input voltage. By use of Eq. ( 21.122), the rms
-transistor current is found to be 2 A. This is quite a low value–less than half of the rms input
-current, which demonstrates how eﬀectively the converter utilizes the power switch. The rms
-diode current is 3.6 A, and the transistor and diode blocking voltages are 380 V . With a 120 A
-ac input voltage, the transistor and diode rms currents increase to 6.6 A and 5.1 A, respectively.
-The only real drawback of the boost converter is its inability to limit inrush currents. When
-the dc output voltage is less than the instantaneous input voltage, the control circuit of the boost
-rectiﬁer loses control of the inductor current waveform. A very large inrush current occurs when
-the dc output capacitor is initially charged. Additional circuitry must be employed to limit the
-magnitude of this current.
-Buck–boost, SEPIC, and ´Cuk topologies can be used to solve the inrush current problem.
-Since these converters have a d/(1−d) conversion ratio, their waveforms can be controlled
+此类积分常出现在涉及 PWM 整流器的方均根计算中。若干 $n$ 值的积分值列于表21.2。用式(21.121)求式(21.120)中的积分得：
 
-21.5 RMS Values of Rectiﬁer Waveforms 909
-Table 21.3 Summary of PWM rectiﬁer current stresses for several converter topologies
-rms Average Peak
-CCM boost
-Transistor Iac rms
-√
-1−8
-3π
-VM
-V Iac rms
-2
-√
-2
-π
-⎦
-1−π
-8
-VM
-V
-)
-Iac rms
-√
-2
-Diode Idc
-√
-16
-3π
-V
-VM
-Idc 2Idc
-V
-VM
-Inductor Iac rms Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-CCM ﬂyback, with n : 1 isolation transformer and input ﬁlter
-Transistor, xfmr primary Iac rms
-√
-1+ 8
-3π
-VM
-nV Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-⎦
-1+ VM
-nV
-)
-L1 Iac rms Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-C1 Iac rms
-√
-8
-3π
-VM
-nV 0 Iac rms
-√
-2m a x
-⎦
-1, VM
-nV
-)
-Diode, xfmr secondary Idc
-√
-3
-2+ 16
-3π
-nV
-VM
-Idc 2Idc
-⎦
-1+ nV
-VM
-)
-CCM SEPIC, nonisolated
-Transistor Iac rms
-√
-1+ 8
-3π
-VM
-V Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-⎦
-1+ VM
-V
-)
-L1 Iac rms Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-C1 Iac rms
-√
-8
-3π
-VM
-V 0 Iac rms
-√
-2m a x
-⎦
-1, VM
-V
-)
-L2 Iac rms
-VM
-V
-√
-3
-2
-Iac rms
-√
-2
-VM
-V Iac rms
-VM
-V
-√
-2
-Diode Idc
-√
-3
-2+ 16
-3π
-V
-VM
-Idc 2Idc
-⎦
-1+ V
-VM
-)
-CCM SEPIC, with n : 1 isolation transformer
-Transistor Iac rms
-√
-1+ 8
-3π
-VM
-nV Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-⎦
-1+ VM
-nV
-)
-L1 Iac rms Iac rms
-2
-√
-2
-π Iac rms
-√
-2
-C1, xfmr primary Iac rms
-√
-8
-3π
-VM
-nV 0 Iac rms
-√
-2m a x
-⎦
-1, VM
-nV
-)
-Diode, xfmr secondary Idc
-√
-3
-2+ 16
-3π
-nV
-VM
-Idc 2Idc
-⎦
-1+ nV
-VM
-)
-with, in all cases, Iac rms
-Idc
-=
-√
-2 V
-VM
-, ac input voltage= VM sin(ωt), dc output voltage= V.
+$$I_{Q,rms} = \frac{V_M}{\sqrt{2}\, R_e} \sqrt{1 - \frac{8}{3\pi}\, \frac{V_M}{V}} = I_{ac,rms} \sqrt{1 - \frac{8}{3\pi}\, \frac{V_M}{V}} \tag{21.122}$$
 
-910 21 Pulse-Width Modulated Rectiﬁers
-when the output voltage is any positive value, but the price paid for this capability is increased
-component stresses. For the same 1 kW rectiﬁer with 240 Vrms ac input and 380 V output, the
-transistor rms current and peak voltage of the nonisolated SEPIC are 5.5 A and 719 V . The rms
-diode current is 4.85 A. The semiconductor voltage stresses can be reduced by reducing the
-output voltage, at the expense of increased rms currents. With a 120 V ac input voltage, the
-transistor and diode rms currents increase to 9.8 A and 6.1 A, respectively.
-Isolation can also be obtained in the SEPIC and other topologies, as discussed in Chap. 6.
-The turns ratio of the isolation transformer can also be used to reduce the primary-side currents
-when the dc output voltage is low. But the transformer winding rms currents are higher than
-those of a dc–dc converter, because of the pulsating (twice-line frequency) power ﬂow. For
-the 1 kW, 240 V ac input SEPIC example, with a 42 V 23.8 A dc load, and a 4:1 transformer
-turns ratio, the rms transformer currents are 5.5 A (primary) and 36.4 A (secondary). The rms
-transistor current is 6.9 A. At 120 V ac input voltage, these currents increase to 7.7 A, 42.5 A,
-and 11.4 A, respectively.
-21.6 Modeling Losses and Eﬃciency in CCM High-Quality Rectiﬁers
-As in the case of dc–dc converters, we would like to model the converter loss elements so that we
-can correctly specify the power stage components. The equivalent circuit approach used in the
-dc–dc case can be generalized to include ac-dc low-harmonic rectiﬁers, although the resulting
-equations are more complicated because of the low-frequency ac modulation of the waveforms.
-A dc–dc boost converter and its steady-state equivalent circuit are illustrated in Fig. 21.36.
-When the converter operates in equilibrium, the model of Fig.21.36b can be solved to determine
-(a)
-+ Q1
-L
-CR
-+
-v(t)
-D1
-vg(t)
-ig(t) RL i(t)
-(b)
-+ R
-+
-v(t)vg(t)
-ig(t) RL
-i(t)
-DRon
-+
-D : 1
-VF
-Fig. 21.36 Dc–dc boost converter (a) and a steady-state equivalent circuit (b), which models the inductor
-resistance RL, MOSFET on-resistance Ron, and diode forward voltage drop VF
+表21.2 式(21.121)积分对若干 $n$ 值的解
 
-21.6 Modeling Losses and Eﬃciency in CCM High-Quality Rectiﬁers 911
-(a)
-Rvac(t)
-iac(t) +
-vg(t)
-ig(t)
-+
-v(t)
-id (t)
-Q1
-L
-C
-D1
-Controller
-i(t)
-RL
-(b)
-+ R
-+
-v(t) = Vvg(t)
-ig(t) RL
-i(t) = I
-d(t)Ron
-+
-d (t) : 1
-VF
-id (t)
-C
-(Large)
-Fig. 21.37 Ac–dc boost rectiﬁer ( a) and a low-frequency equivalent circuit ( b), that models converter
-losses and eﬃciency
-the converter losses and eﬃciency. In the ac-dc case, the input voltagevg(t) is a rectiﬁed sinusoid,
-and the controller varies the duty cycle d(t) to cause ig(t) to follow vg(t) according to
-ig(t)= vg(t)
-Re
-(21.127)
-The emulated resistance Re is chosen by the controller such that the desired dc output voltage
-is obtained. Ac variations in d(t), vg(t), and several other system waveforms are not small, and
-hence the small-signal approximation employed in Chaps. 7 to 18 is not justiﬁed. We can con-
-tinue to model the low-frequency components of the converter via averaging, but the resulting
-equivalent circuits are, in general, time-varying and nonlinear.
-For the purposes of determining the rectiﬁer eﬃciency, it is assumed that (1) the inductor is
-suﬃciently small, such that it has negligible inﬂuence on the ac-line frequency components of
-the system waveforms and (2) the capacitor is large, so that the output voltagev(t) is essentially
-equal to its equilibrium dc value, with negligible low- or high-frequency ac variations. So in the
-ac-dc case, the model becomes as shown in Fig. 21.37. Low-frequency components (≪ fs)o f
-the controller waveforms are sketched in Fig.21.38.
-To ﬁnd the rectiﬁer waveforms, losses, and eﬃciency, we must solve the circuit of Fig.21.37b,
-under the conditions that the controller varies the duty cycle d(t) such that Eq. (21.127)i ss a t -
-isﬁed. This leads to time-varying circuit elements d(t)Ron and the d′(t) : 1 transformer. The
-solution that follows involves the following steps: (1) solve for the d(t) waveform; (2) average
-id(t) to ﬁnd its dc component, equal to the load currentI; and (3) ﬁnd other quantities of interest
-such as the rectiﬁer eﬃciency.
+| $n$ | $\dfrac{1}{\pi}\int_0^{\pi} \sin^n(\theta)\, d\theta$ |
+|---|---|
+| 1 | $\dfrac{2}{\pi}$ |
+| 2 | $\dfrac{1}{2}$ |
+| 3 | $\dfrac{4}{3\pi}$ |
+| 4 | $\dfrac{3}{8}$ |
+| 5 | $\dfrac{16}{15\pi}$ |
+| 6 | $\dfrac{15}{48}$ |
 
-912 21 Pulse-Width Modulated Rectiﬁers
-0
-1
-2
-3
-4
-5
-6
-0
-2
-4
-6
-8
-10
-0
-100
-200
-300
-vg(t)
-vg(t)
-ig(t)
-ig(t)
-id (t)
-i(t) = I
-t
-0° 30° 60° 90° 120° 150° 180°
-0° 30° 60° 90° 120° 150° 180°
-d(t)
-0
-0.2
-0.4
-0.6
-0.8
-1
-0° 30° 60° 90° 120° 150° 180°
-Fig. 21.38 Typical low-frequency components of the boost rectiﬁer waveforms
-The simpliﬁed boost converter circuit model of Fig. 21.39, in which only the MOSFET
-conduction loss is accounted for, is solved here. However, the results can be generalized directly
-to the circuit of Fig. 21.37b; doing so is left as a homework problem. A similar procedure can
-also be followed to derive expressions for the losses and eﬃciencies of other rectiﬁer topologies.
+![源页 p.907](../assets/page-snapshots/chapter-21/page-907.png)
 
-21.6 Modeling Losses and Eﬃciency in CCM High-Quality Rectiﬁers 913
-21.6.1 Expression for Controller Duty Cycle d(t)
-The controller varies the duty cycle d(t) such that Eq. (21.127) is satisﬁed. By solving the input-
-side loop of Fig. 21.39, we obtain
-ig(t)d(t)Ron= vg(t)−d′(t)v (21.128)
-Substitute Eq. (21.127)i n t o(21.128) to eliminate ig(t):
-vg(t)
-Re
-d(t)Ron= vg(t)−d′(t)v (21.129)
-with vg(t)= VM| sinωt| (21.130)
-We can now solve for the duty cycled(t). The result is
-d(t)= v−vg(t)
-v−vg(t)Ron
-Re
-(21.131)
-This expression neglects the converter dynamics, an assumption that is justiﬁed when these
-dynamics are suﬃciently faster than the ac line voltage variation. The expression also neglects
-operation in the discontinuous conduction mode near the zero crossing of the ac line voltage
-waveform. This is justiﬁed when the rectiﬁer operates in the continuous conduction mode for
-most of the ac line cycle, because the power loss near the zero crossing is negligible.
-21.6.2 Expression for the DC Load Current
-By charge balance on output capacitor C, the dc load current I is equal to the dc component of
-the diode current id:
-I=⟨id⟩Tac (21.132)
-Solution of Fig. 21.39 for id(t) yields
-id(t)= d′(t)ig(t)= d′(t)vg(t)
-Re
-(21.133)
-From Eq. (21.131), d′(t)= 1−d(t)i sg i v e nb y
-+ R
-+
-v(t) = Vvg(t)
-ig(t) i(t) = I
-d(t)Ron
-d (t) : 1
-id (t)
-C
-(Large)
-Fig. 21.39 Simpliﬁed boost power stage low-frequency equivalent circuit, in which only the MOSFET
-on-resistance is modeled
+可见选输出电压 $V$ 尽可能小可使晶体管方均根电流最小。最好的选择是 $V = V_M$，得
 
-914 21 Pulse-Width Modulated Rectiﬁers
-d′(t)=
-vg(t)
-⎦
-1−Ron
-Re
-)
-v−vg(t)Ron
-Re
-(21.134)
-so
-id(t)=
-v2
-g(t)
-Re
-⎦
-1−Ron
-Re
-)
-v−vg(t)Ron
-Re
-(21.135)
-Now substitute vg(t)= VM sinωt, and integrate to ﬁnd⟨id(t)⟩Tac :
-I=⟨id⟩Tac = 2
-Tac
-∫ Tac/2
-0
-⎛⎜⎜⎜⎜⎝
-V2
-M
-Re
-⎞⎟⎟⎟⎟⎠
-⎦
-1−Ron
-Re
-)
-sin2(ωt)
-⎦
-v−VMRon
-Re
-sin(ωt)
-) dt (21.136)
-Again, Tac= 2π/ωis the ac line period. Equation (21.136) can be rewritten as
-I= 2
-Tac
-V2
-M
-VRe
-⎦
-1−Ron
-Re
-) ∫ Tac/2
-0
-sin2(ωt)
-1−a sin(ωt)dt (21.137)
-where a=
-⎦VM
-V
-) ⎦Ron
-Re
-)
-(21.138)
-By waveform symmetry, we need only integrate from 0 to Tac/4. Also, make the substitution
-θ= ωt:
-I= V2
-M
-VRe
-⎦
-1−Ron
-Re
-) 2
-π
-∫ π/2
-0
-sin2(θ)
-1−a sin(θ)dθ (21.139)
-Evaluation of this integral is tedious. It arises in not only the boost rectiﬁer, but in a number
-of other high-quality rectiﬁer topologies as well. The derivation is not given here, but involves
-the substitution z= tan(θ/2), performing a partial fraction expansion of the resulting rational
-function of z, and integration of the results. The solution is
-4
-π
-∫ π/2
-0
-sin2(θ)
-1−a sin(θ)dθ= F(a)= 2
-a2π
-⎦
-−2a−π+ 4s i n−1(a)+ 2 cos−1(a)√
-1−a2
-)
-(21.140)
-This equation is somewhat complicated, but it is in closed form, and can easily be evaluated by
-computer spreadsheet. The quantity a, which is a measure of the loss resistance Ron relative to
-the emulated resistance Re, is typically much smaller than 1. F(a) is plotted in Fig. 21.40.T h e
-function F(a) can be well-approximated as follows:
-F(a)≈1+ 0.862a+ 0.78a2 (21.141)
-For|a|≤0.15, the F(a) predicted by this approximate expression is within 0.1% of the exact
-value. If the a2 term is omitted, then the accuracy drops to ± 2% over the same range of a.
-The rectiﬁer eﬃciencyηcalculated in the next section depends directly on F(a), and hence the
-accuracy of F(a) coincides with the accuracy ofη.
+$$I_{Q,rms} = 0.39\, I_{ac,rms} \tag{21.123}$$
 
-21.6 Modeling Losses and Eﬃciency in CCM High-Quality Rectiﬁers 915
-F(a)
-a
-0.00 0.05 0.10 0.15
-0.85
-0.9
-0.95
-1
-1.05
-1.1
-1.15
-Fig. 21.40 Plot of the integral F(a)v s .a
-21.6.3 Solution for Converter Eﬃciency η
-Now that we have found the dc load current, we can calculate the converter e ﬃciency η.T h e
-average input power is
-Pin=⟨pin(t)⟩Tac = V2
-M
-2Re
-(21.142)
-The average load power is
-pout= VI= (V)
-⎛⎜⎜⎜⎜⎝
-V2
-M
-VRe
-⎦
-1−Ron
-Re
-) F(a)
-2
-⎞⎟⎟⎟⎟⎠ (21.143)
-where a=
-⎦VM
-V
-) ⎦Ron
-Re
-)
-(21.144)
-Here, we have substituted Eq. (21.139)f o rI.T h eeﬃciency is therefore
-η= Pout
-Pin
-=
-⎦
-1−Ron
-Re
-)
-F(a) (21.145)
-by substitution of Eqs. (21.142) and (21.143). If desired, the parabolic approximation for F(a),
-Eq. (21.141), can be employed. This leads to
-η≈
-⎦
-1−Ron
-Re
-) ⎛⎜⎜⎜⎜⎜⎝1+ 0.862VM
-V
-Ron
-Re
-+ 0.78
-⎦VM
-V
-Ron
-Re
-)2⎞⎟⎟⎟⎟⎟⎠ (21.146)
-Equations (21.145) and ( 21.146)s h o wh o wt h eeﬃciency varies with MOSFET on-resistance
-Ron and with ac peak voltage VM. Equation (21.145) is plotted in Fig. 21.41. It can be seen that
-high eﬃciency is obtained when the peak ac line voltage VM is close to the dc output voltage V.
-Eﬃciencies in the range 90% to 95% can then be obtained, even with MOSFET on-resistances
-as high as 0.2Re. Of course, Fig. 21.41 is optimistic because it neglects sources of loss other
-than the MOSFET conduction loss.
+$V$ 越大方均根晶体管电流越大。
 
-916 21 Pulse-Width Modulated Rectiﬁers
-0.0 0.2 0.4 0.6 0.8 1.0
-0.75
-0.8
-0.85
-0.9
-0.95
-1
-VM /V
-Ron/Re = 0.05
-Ron/Re = 0.1
-Ron
-/Re = 0.15
-Ron
-/Re = 0.2
-Fig. 21.41 Boost rectiﬁer eﬃciency, Eq. (21.145), accounting for MOSFET on-resistance
-21.6.4 Design Example
-Let us utilize Fig. 21.41 to design for a given eﬃciency. Consider the following speciﬁcations:
-Output voltage 390 V
-Output power 500 W
-rms input voltage 120 V
-Eﬃciency 95%
-Assume that losses other than the MOSFET conduction loss are negligible. The average input
-power is
-P
-in= Pout
-η= 500W
-0.95 = 526 W (21.147)
-The emulated resistance is therefore
-Re=
-V2
-g,rms
-Pin
-= (120V)2
-526W = 27.4Ω (21.148)
-Also,
-VM
-V = 120
-√
-2V
-390V = 0.435 (21.149)
-From Fig. 21.41, or by evaluation of the exact equation (21.145), 95% eﬃciency with VM/V=
-0.435 occurs with Ron/Re≈0.077. So we require a MOSFET having an on-resistance of
-Ron≤(0.077)Re= (0.077)(27.4Ω)= 2.11Ω (21.150)
-Of course, other converter losses have not been accounted for, which will reduce the eﬃciency.
-It is instructive to compare this result with that obtained using the expressions for rms cur-
-rent from Sect. 21.5. The rms transistor current of the ideal CCM boost converter is given by
+对方均根二极管电流的类似分析得
 
-21.7 Ideal Three-Phase Rectiﬁers 917
-Eq. (21.122). The rms input current will be equal to Pin/Vg,rms = (526W)/(120V)= 4.38 A.
-Hence, Eq. (21.122) predicts an rms transistor current of
-IQrms= Iac rms
-√
-1−8
-3π
-VM
-V
-= (4.38 A)
-√
-1−8
-3π
-(120 V)
-√
-2
-(390 V) (21.151)
-= 3.48 A
-Hence, the MOSFET on-resistance should be chosen according to
-Ron≤Pin−Pout
-I2
-Qrms
-= (526 W)−(500 W)
-(4.38 A)2 = 2.17Ω (21.152)
-This calculation is approximate because Eq. ( 21.122) was derived using the waveforms of the
-ideal (lossless) converter. Nonetheless, it gives an answer that is very close to the more exact
-result of Eq. (21.150). We would expect this approximate approach to exhibit good accuracy in
-this example, because of the high 95% eﬃciency.
-21.7 Ideal Three-Phase Rectiﬁers
-The single-phase ideal rectiﬁer concepts of the previous sections can be generalized to cover
-ideal three-phase rectiﬁers. Figure 21.42a illustrates the properties of an ideal three-phase rec-
-tiﬁer, which presents a balanced resistive load to the utility system. A three-phase converter
-system is controlled such that resistor emulation is obtained in each input phase. The rectiﬁer
-three-phase input port can then be modeled by per-phase eﬀective resistancesR
-e, as illustrated in
-Fig. 21.42a. The instantaneous powers apparently consumed by these resistors are transferred
-to the rectiﬁer dc output port. The rectiﬁer output port can therefore be modeled by power
-sources equal to the instantaneous powers ﬂowing into the eﬀective resistances Re.I ti si r r e l e -
-vant whether the three power sources are connected in series or in parallel; in either event, they
-can be combined into a single source equal to the total three-phase instantaneous input power
-as illustrated in Fig. 21.42b.
-If the three-phase ac input voltages are
-van(t)= VM sin(ωt)
-vbn(t)= VM sin(ωt−120◦) (21.153)
-vcn(t)= VM sin(ωt−240◦)
-then the instantaneous powers ﬂowing into the phase a, b, and c eﬀective resistances Re are
-pa(t)= v2
-an(t)
-Re
-= V2
-M
-2Re
-(1−cos(2ωt))
-pb(t)=
-v2
-bn(t)
-Re
-= V2
-M
-2Re
-(1−cos(2ωt−240◦)) (21.154)
-pc(t)= v2
-cn(t)
-Re
-= V2
-M
-2Re
-(1−cos (2ωt−120◦))
+$$I_{D,rms} = I_{ac,rms} \sqrt{\frac{8}{3\pi}\, \frac{V_M}{V}} \tag{21.124}$$
 
-918 21 Pulse-Width Modulated Rectiﬁers
-(a)
-a
-b
-c
-3
-input
-Re
-Re
-Re
-ia
-ib
-ic
-R
-+
-v
-dc output
-pa(t)
-pb(t)
-pc(t)
-(b)
-a
-b
-c
-3
-input
-Re
-Re
-Re
-ia
-ib
-ic
-R
-+
-v
-dc output
-pa + pb + pc
-ptot =
-Fig. 21.42 Development of the ideal three-phase rectiﬁer model: ( a) three ideal single-phase rectiﬁers,
-(b) combination of the three power sources into an equivalent single power source
-Each instantaneous phase power contains a dc term V2
-M/(2Re), and a second-harmonic term.
-The total instantaneous three-phase power is
-ptot(t)= pa(t)+ pb(t)+ pc(t)= 3
-2
-V2
-M
-Re
-(21.155)
-This is the instantaneous power which ﬂows out of the rectiﬁer dc output port. Note that the
-second harmonic terms add to zero, such that the rectiﬁer instantaneous output power is constant.
-This is a consequence of the fact that the instantaneous power ﬂow in any balanced three-phase
-ac system is constant. So, unlike the single-phase case, the ideal three-phase rectiﬁer can supply
-constant instantaneous power to a dc load, without the need for internal low-frequency energy
-storage.
-A variety of 3øac-dc PWM rectiﬁers are known; a few of the many references on this sub-
-ject are listed in the references [ 8, 22, 280–294]. The most well-known topology is the three-
-phase ac-dc boost rectiﬁer, illustrated in Fig. 21.43. This converter requires six SPST current-
-bidirectional two-quadrant switches. The inductors and capacitor ﬁlter the high-frequency
-switching harmonics, and have little inﬂuence on the low-frequency ac components of the wave-
+$V = V_M$ 使方均根二极管电流最大，结果为
 
-21.7 Ideal Three-Phase Rectiﬁers 919
-forms. The switches of each phase are controlled to obtain input resistor emulation, either with
-a multiplying controller scheme similar to Fig. 21.5, or with some other approach. To obtain
-undistorted line current waveforms, the dc output voltage V must be greater than or equal to
-the peak line-to-line ac input voltage VL,pk. In a typical realization, V is somewhat greater than
-VL,pk. This converter resembles the voltage-source inverter, discussed brieﬂy in Chap.4, except
-that the converter is operated as a rectiﬁer, and the converter input currents are controlled via
-high-frequency pulse-width modulation.
-The three-phase boost rectiﬁer of Fig. 21.43 has several attributes that make it the leading
-candidate for most 3øac-dc rectiﬁer applications. The ac input currents are nonpulsating, and
-hence very little additional input EMI ﬁltering is required. As in the case of the single-phase
-boost rectiﬁer, the rms transistor currents and also the conduction losses of the three-phase boost
-rectiﬁer are low relative to other 3øac-dc topologies such as the current source inverter. The
-converter is capable of bidirectional power ﬂow. A disadvantage is the requirement for six active
-devices: when compared with a dc–dc converter of similar ratings, the active semiconductor
-utilization (discussed in Chap. 6) is low. Also, since the rectiﬁer has a boost characteristic, it
-is not suitable for direct replacement of traditional buck-type phase-controlled rectiﬁers. The
-circuit of Fig. 21.43 coincides with the voltage-source inverter of Fig. 4.14; indeed, the current-
-bidirectional switches allow bidirectional current ﬂow and also power ﬂow in either direction.
-The literature contains a wide variety of schemes for controlling the switches of a six-switch
-three-phase bridge network, which are applicable for control of the switches of Fig. 21.43.T h e
-basic operation of the converter can be most easily understood by assuming that the switches are
-controlled via simple sinusoidal pulse-width modulation. TransistorQ
-1 is driven with duty cycle
-d1(t), while transistor Q4 is driven by the complement of d1(t), or d′
-1(t)= 1−d1(t). Transistors
-Q2 and Q5 are driven with duty cyclesd2(t) and d′
-2(t), respectively, and transistorsQ3 and Q6 are
-driven with duty cyclesd3(t) and d′
-3(t), respectively. The switch voltage waveforms of Fig.21.44
-are obtained. The average switch voltages are
-⟨v10(t)⟩Ts = d1(t)⟨v(t)⟩Ts
-⟨v20(t)⟩Ts = d2(t)⟨v(t)⟩Ts (21.156)
-⟨v30(t)⟩Ts = d3(t)⟨v(t)⟩Ts
-L
-C
-+
-v(t)
-dc output
-ia(t)
-ib(t)
-ic(t)
-Q1
-Q4
-Q2 Q3
-Q6
-D1 D3D2
-D4 D5 D6
-a
-b
-c
-3
-input
-Q5
-L
-L
-Load
-1
-3
-2
-0
-v10(t)
-+
-v20(t)
-+
-v12(t)
-+
-i1(t) i2(t) i3(t)
-Fig. 21.43 Boost-type three-phase ac–dc PWM rectiﬁer
+$$I_{D,rms} = 0.92\, I_{ac,rms} \tag{21.125}$$
 
-920 21 Pulse-Width Modulated Rectiﬁers
-v10(t)
-d1Ts0 tTs
-v
-0
-v10(t) Ts
- = d1 v(t) Ts
-v20(t)
-d2Ts0 tTs
-v
-0
-v20(t) Ts
- = d2 v(t) Ts
-v30(t)
-d3Ts0 tTs
-v
-0
-v30(t) Ts
- = d3 v(t) Ts
-Conducting
-devices: Q1 / D1 Q4 / D4
-Q2 / D2
-Q6 / D6
-Q5 / D5
-Q3 / D3
-Fig. 21.44 Switch waveforms, 3ϕac–dc boost rectiﬁer
-The averaged line-to-line switch voltages are therefore
-⟨v12(t)⟩Ts =⟨v10(t)⟩Ts −⟨v20(t)⟩TS = (d1(t)−d2(t))⟨v(t)⟩Ts
-⟨v23(t)⟩Ts =⟨v20(t)⟩TS −⟨v30(t)⟩Ts = (d2(t)−d3(t))⟨v(t)⟩Ts (21.157)
-⟨v31(t)⟩Ts =⟨v30(t)⟩Ts −⟨v10(t)⟩Ts = (d3(t)−d1(t))⟨v(t)⟩Ts
-In a similar manner, the average switch currents can be shown to be
-⟨i1(t)⟩TS = d1(t)⟨ia(t)⟩Ts
-⟨i2(t)⟩TS = d2(t)⟨ib(t)⟩Ts (21.158)
-⟨i3(t)⟩Ts = d3(t)⟨ic(t)⟩Ts
-Equations (21.157) and (21.158) lead to the circuit-averaged model of Fig. 21.45.
+$V$ 越大方均根二极管电流越小。
 
-21.7 Ideal Three-Phase Rectiﬁers 921
-With sinusoidal PWM, the duty cycles are varied sinusoidally in synchronism with the ac
-line, as follows:
-d1(t)= D0+ 1
-2 Dm sin(ωt−ϕ)
-d2(t)= D0+ 1
-2 Dm sin(ωt−ϕ−120◦) (21.159)
-d3(t)= D0+ 1
-2 Dm sin(ωt−ϕ−240◦)
-where ω is the ac line frequency. Since each instantaneous duty cycle must lie in the interval
-[0,1], the dc bias D0 is required. The factor Dm is called the modulation index;f o rD0= 0.5, Dm
-must be less than or equal to one. Other choices of D0 further restrict Dm. In general, the
-modulation index can be deﬁned as equal to the peak-to-peak amplitude of the fundamental
-component of the duty cycle variation.
-If the switching frequency is suﬃciently large, then ﬁlter inductors L can be small in value,
-such that they have negligible eﬀect on the low-frequency ac waveforms. The averaged switch
-voltage⟨v12(t)⟩Ts then becomes approximately equal to the ac line-line voltage vab(t):
-⟨v12(t)⟩Ts = (d1(t)−d2(t))⟨v(t)⟩TS ≈vab(t) (21.160)
-Substitution of Eqs. (21.153) and (21.159) leads to
-1
-2 Dm
-[sin(ωt−ϕ)−sin(ωt−ϕ−120◦)]⟨v(t)⟩Ts = VM
-[sin(ωt)−sin(ωt−120◦)] (21.161)
-For small L, the angleϕmust tend to zero, and hence the sinusoidal terms in Eq. (21.161) cancel
-out. In steady state, the dc output voltage is⟨v(t)⟩TS = V Eq. (21.161) then becomes
-1
-2 DmV= VM (21.162)
-Solution for the dc output voltage V leads to
-V= 2VM
-Dm
-(21.163)
-Equation (21.163) can be written in terms of the peak line-to-line voltage VL,pk,a s
-V= 2√
-3
-VL,pk
-Dm
-= 1.15VL,pk
-Dm
-(21.164)
-With Dm ≤1, the dc output voltage V must be greater than or equal to 1.15 times the peak
-line-to-line ac input voltage. Thus, the rectiﬁer has a boost characteristic.
-L ia Ts
-a
-b
-c
-L
-L
-+
-+
-+(d1 2) v Ts
-C
-+
-v Ts
-Load
-ib Ts
-ic Ts
-(d2 3) v Ts
-(d3 1) v Ts
-d1 ia Ts d3 ic Ts
-d2 ib Ts
-Fig. 21.45 Averaged model of the open-loop 3ϕac–dc boost rectiﬁer
+平均电流可用类似方法计算，结果为
 
-922 21 Pulse-Width Modulated Rectiﬁers
-d1(t) d2(t) d3(t)
-0 60 120 180 240 300 360
--1
--0.5
-0
-0.5
-1
-t
-v12(t) Ts
-/V
-Fig. 21.46 A modulation strategy that leads to a dc output voltage equal to the peak input line-line
-voltage
-The sinusoidal PWM approach of Eq. ( 21.159) is not the only way to vary the duty cycles
-to obtain sinusoidal ac voltages and currents. For example, triplen harmonics can be added to
-the duty-cycle expressions of Eq. (21.159). These triplen harmonics cancel out in Eq. (21.157),
-such that the average inverter input voltages ⟨v
-12(t)⟩Ts, ⟨v23(t)⟩Ts , and⟨v31(t)⟩Ts contain only
-fundamental. Figure 21.46 illustrates duty cycle variations that lead to a dc output voltage V
-equal to VL,pk.T h eeﬀective modulation index in this case is 1.15. The ac-side voltages and
-currents are again undistorted. Further increases in the modulation index can be attained only
-by introduction of distortion in the ac-side voltages and currents. Of course, in practice the duty-
-cycle modulations are usually generated by the feedback loops that control the input current
-waveforms to attain resistor emulation.
-Three-phase ac-to-dc rectiﬁers having buck, buck–boost, or other characteristics are possi-
-ble, but ﬁnd much less use than the boost topology. A 3øac-dc rectiﬁer system can also be con-
-structed simply using three separate single-phase rectiﬁers [ 273]; however, each single-phase
-rectiﬁer must then contain transformer isolation, leading to substantially increased switch stress
-and loss. Other unconventional approaches to three-phase low-harmonic rectiﬁcation have also
-been recently explored, such as the Vienna rectiﬁer [292, 294], single-switch approaches [285–
-291], and other circuits [281–284, 293].
-Yet another approach to solving the problem of three-phase rectiﬁer harmonics is the har-
-monic correction scheme illustrated in Fig. 21.47. An active six-switch three-phase bridge re-
-moves the harmonics generated by a nonlinear three-phase load such as an uncontrolled rectiﬁer.
-The harmonic corrector is controlled such that its ac line currents contain harmonics that are
-equal in magnitude but opposite in phase to the harmonics generated by the nonlinear load. No
-average power ﬂows into the harmonic corrector. The total kV A rating of the harmonic corrector
-semiconductor devices depends on the magnitudes of the harmonics produced by the nonlinear
-load. If the THD generated by the load is not too large, then the harmonic corrector scheme
-requires less total active silicon than the CCM boost-type rectiﬁer of Fig. 21.43. But if the un-
-controlled rectiﬁer contains small ac line inductances, such that it operates in the discontinuous
-conduction mode with large THD, then it is probably better to simply replace the uncontrolled
-rectiﬁer with the CCM boost-type rectiﬁer of Fig. 21.43.
+$$I_{Q,av} = \frac{I_{ac,rms}}{2} \sqrt{\frac{2}{\pi}\left( 1 - \frac{\pi}{8}\, \frac{V_M}{V} \right)} \tag{21.126}$$
 
-21.8 Summary of Key Points 923
-a
-b
-c
-3
-ac
-Harmonic corrector
-Nonlinear load
-Fig. 21.47 A harmonic corrector, based on the 3ϕac–dc boost converter of Fig.21.43
-21.8 Summary of Key Points
-1. The ideal rectiﬁer presents an eﬀective resistive load, the emulated resistance Re, to the ac
-power system. The power apparently “consumed” by Re is transferred to the dc output port.
-In a three-phase ideal rectiﬁer, input resistor emulation is obtained in each phase. In both the
-single-phase and three-phase cases, the output port follows a power source characteristic,
-dependent on the instantaneous ac input power. Ideal rectiﬁers can perform the function of
-low-harmonic rectiﬁcation, without need for low-frequency reactive elements.
-2. The dc–dc boost converter, as well as other converters capable of increasing the voltage
-according to Eq. (21.12), can be adapted to the ideal rectiﬁer application. A control system
-causes the input current to be proportional to the input voltage. The converter may operate
-in CCM, DCM, or in both modes. The mode boundary can be expressed as a function of
-R
-e, 2L/Ts, and the instantaneous voltage ratiovg(t)/V. A well-designed average current con-
-troller leads to resistor emulation regardless of the operating mode; however, other schemes
-may lead to distorted current waveforms when the mode boundary is crossed.
-3. In a single-phase system, the instantaneous ac input power is pulsating, while the dc load
-power is constant. Whenever the instantaneous input and output powers are not equal, the
-ideal rectiﬁer system must contain energy storage. A large capacitor is commonly em-
-ployed; the voltage of this capacitor must be allowed to vary independently, as necessary to
-store and release energy. A slow feedback loop regulates the dc component of the capacitor
-voltage, to ensure that the average ac input power and dc load power are balanced.
+$$I_{D,av} = \frac{I_{ac,rms}}{2}\, \frac{V_M}{\sqrt{2 V}}$$
 
-924 21 Pulse-Width Modulated Rectiﬁers
-4. RMS values of rectiﬁers waveforms can be computed by double integration. In the case of
-the boost converter, the rms transistor current can be as low as 39% of the rms ac input
-current, when the dc output voltage V is close in value to the peak ac input voltage VM.
-Other converter topologies such as the buck–boost, SEPIC, and ´Cuk converters exhibit
-signiﬁcantly higher rms transistor currents but are capable of limiting the converter inrush
-current.
-5. In the three-phase case, a boost-type rectiﬁer based on the PWM voltage-source inverter
-also exhibits low rms transistor currents. This approach requires six active switching ele-
-ments, and its dc output voltage must be greater than the peak input line-to-line voltage.
-Average current control can be used to obtain input resistor emulation. An equivalent cir-
-cuit can be derived by averaging the switch waveforms. The converter operation can be
-understood by assuming that the switch duty cycles vary sinusoidally; expressions for the
-average converter waveforms can then be derived.
-6. Converter losses and e ﬃciency can be modeled using the steady-state equivalent circuit
-models of Chap. 3, with a time-varying duty cycle. The output current is averaged over
-one ac line period, to determine its dc component. The converter losses and eﬃciency can
-then be computed. This approach is approximate, in that ( i) it assumes that the converter
-dynamics are much faster than the ac line frequency and ( ii) it neglects operation in the
-discontinuous conduction mode.
-7. Average current control involves direct regulation of the low-frequency components of the
-rectiﬁer input current to follow the input voltage. Feedforward can also be added, to cancel
-the inﬂuence of ac line voltage variations on the dc output voltage.
-8. Current-programmed control can also be adapted to attain input resistor emulation in rec-
-tiﬁers. The programmed current reference signal i
-c(t) is made proportional to the ac input
-voltage. The diﬀerence between ic(t) and the average inductor current leads to distortion,
-owing to the inductor current ripple and the need for a stabilizing artiﬁcial ramp. Several
-approaches are known for reducing the resulting harmonic distortion of the line current
-waveform.
-9. Hysteretic control, particularly with 100% current ripple, has a simple controller implemen-
-tation. The disadvantages are variable switching frequency, and increased peak currents.
-10. Nonlinear carrier control also leads to a simple controller implementation, and has the ad-
-vantage of CCM operation with small peak transistor current.
-11. The outer low-bandwidth control system, which regulates the dc output voltage to balance
-the rectiﬁer and load powers, can be modeled by averaging the rectiﬁer waveforms over
-one-half of the ac line period T2L. This causes the dc-side system equations to become
-time-invariant. A small-signal model is then obtained by perturbation and linearization.
-12. The inner high-bandwidth control system, which regulates the ac input current waveform
-to attain resistor emulation, is in general highly nonlinear. However, in the case of the boost
-rectiﬁer, a valid small-signal model can be derived. This approach is unsuccessful in the
-case of other converters; one must then resort to other approaches such as the quasi-static
-approximation or simulation.
+连续导通模式升压变换器功率级元件的方均根、平均和峰值电流表达式总结于表21.3。表中还列出了工作于连续导通模式的反激和 SEPIC 拓扑的表达式。反激变换器情形还含 $L_1$–$C_1$ 输入滤波器。所有情形均忽略开关纹波影响。
 
-21.8 Summary of Key Points 925
-Problems
-21.1 The boost converter of Fig. 21.5 is replaced by a buck–boost converter. Inductor energy
-storage has negligible inﬂuence on the low-frequency components of the converter wave-
-forms. The average load power is P
-load. The dc output voltage is V and the sinusoidal ac
-input voltage has peak amplitude VM.
-(a) Determine expressions for the duty cycle variationsd(t) and the inductor current vari-
-ation i(t), assuming that the converter operates in the continuous conduction mode.
-(b) Derive the conditions for operation in the continuous conduction mode. Manipu-
-late your result to show that the converter operates in CCM when Re is less than
-Re,crit(L, Ts, vg(t), V), and determine Re,crit.
-(c) For what values of Re does the converter always operate in CCM? in DCM?
-(d) The ac input voltage has rms amplitude in the range 108 V to 132 V . The maximum
-load power is 100 W, and the minimum load power is 10 W. The dc output voltage
-is 120 V . The switching frequency is 75 kHz. What value of L guarantees that the
-converter always operates in CCM? in DCM?
-21.2 Derive expressions for the input characteristics of the buck–boost converter, similar to
-Eqs. (21.25)t o( 21.33). Sketch the converter input characteristics, and label the CCM-
-DCM boundary.
-21.3 Derive expressions for the rms transistor and diode currents of rectiﬁers based on the
-single-phase CCM ´Cuk topology. Express your results in forms similar to those of Ta-
-ble 21.3.
-21.4 To obtain an isolated dc output, the boost converter in Fig. 21.5 is replaced by the full-
-bridge transformer-isolated CCM boost converter of Fig. 6.36. Derive an expression for
-the rms transistor current. Express your result as a function of I
-ac rms, n, V, and VM.
-21.5 Comparison of CCM boost and isolated SEPIC topologies as universal-input single-
-phase rectiﬁers. You are given that the dc output voltage isV= 400 V, the load power is
-P= 500 W, and the rms input voltage varies between 90 and 270 V , such that the peak
-ac input voltage VM varies between VM min = 127V and VM max = 382V. Deﬁne the tran-
-sistor stress S as the product of the worst-case peak transistor voltage and the worst-case
-rms transistor current. It is desired to minimize S .
-(a) Determine S for the boost converter in this application.
-(b) Brieﬂy discuss your result of part (a): if universal input operation was not required,
-and hence VM = 382 V always, what S would result?
-In the isolated SEPIC, the transformer turns ration : 1 can be chosen to optimize the
-design.
-(c) Express S for the SEPIC as a function of n, V, P, VM min, and VM max.
-(d) Choose n for the SEPIC such that S is minimized in this application. Compare with
-the results of parts (a) and (b).
-21.6 In the boost-type dc-3øac rectiﬁer of Fig. 21.43, the ac-side inductances L are not small:
-they exhibit line frequency impedances that should not be ignored. The three-phase ac
-voltages are given by Eq. (21.153), and the duty cycles are modulated as in Eq. (21.159).
-The converter operates in the continuous conduction mode.
-(a) Determine the magnitudes and phases of the line-to-neutral average voltages at the
-ac inputs to the switch network. Express your result in terms of Dm, V, and ϕ.
+### 21.5.2 单相整流器拓扑比较
 
-926 21 Pulse-Width Modulated Rectiﬁers
-(b) Determine the real power P and reactive power Q drawn from the 3øac source. Ex-
-press your results as functions of VM, V, Dm, ϕ, and ωL.
-(c) How mustϕbe chosen to obtain unity power factor?
-21.7 In the boost-type dc-3øac rectiﬁer of Fig. 21.43, the switch duty ratios are modulated
-as illustrated in Fig. 21.46. When the inductances L are suﬃciently small, a dc output
-voltage V equal to the peak line-to-line ac input voltage can be obtained, with undistorted
-ac line currents. As illustrated in Fig. 21.46, d1(t) is equal to 1 for 0◦≤ωt≤60◦, where
-ωt= 0◦when⟨v12(t)⟩Ts = V.
-(a) Derive expressions for d2(t) and d3(t), over the interval 0◦≤ωt≤60◦.
-(b) State how d1(t), d2(t), and d3(t) should vary over each 60◦interval.
-21.8 The buck-type 3øac-dc rectiﬁer of Fig.21.48 operates in the continuous conduction mode.
-Transistors Q1 to Q6 operate with duty cycles d1(t)t o d6(t), respectively.
-L
-C
-+
-v(t)
-dc output
-ia(t)
-ib(t)
-ic(t)
-Q1
-Q4
-Q2 Q3
-Q6
-D1 D3D2
-D4 D5 D6
-a
-b
-c
-3
-input
-Q5
-Input filter
-iL(t)
-Load
-Fig. 21.48 Buck-type 3ϕac–dc rectiﬁer, Problem 21.8
-(a) Determine the constraints on switch operation. Which transistors must not conduct
-simultaneously? Which duty cycles must total unity?
-(b) Average the 3ø bridge switch network, to determine expressions for the average ac-
-side switch currents⟨ia(t)⟩TS,⟨ib(t)⟩TS , and⟨ic(t)⟩TS .
-(c) Show that the average dc-side switch voltage can be expressed as
-⟨vd(t)⟩Ts = (d1(t)−d4(t))⟨van(t)⟩Ts + (d2(t)−d5(t))⟨vbn(t)⟩TS + (d3(t)−d6(t))⟨vcn(t)⟩Ts
-(d) The duty cycles are varied as follows:
-d1(t)= 1
-3+ 1
-2 Dm sin(ωt−ϕ)
-d2(t)= 1
-3+ 1
-2 Dm sin(ωt−ϕ−120◦)
-d3(t)= 1
-3+ 1
-2 Dm sin(ωt−ϕ−240◦)
-d4(t)= 1
-3−1
-2 Dm sin(ωt−ϕ)
-d5(t)= 1
-3−1
-2 Dm sin(ωt−ϕ−120◦)
-d6(t)= 1
-3−1
-2 Dm sin(ωt−ϕ−240◦)
-```
+若整流器不需隔离，且直流输出电压略大于交流输入电压峰值可接受，则升压变换器是非常有效的方案。例如，考虑工作于 240 Vrms 输入线路电压的 1 kW 整流器设计。若变换器效率和功率因数均近似为 1，则方均根输入电流 $I_{rms} = (1000\,\text{W})/(240\,\text{V}) = 4.2\,\text{A}$。直流输出电压选为 380 V，略大于交流输入电压峰值。由式(21.122)，方均根晶体管电流为 2 A。这是相当低的值——小于方均根输入电流的一半，说明变换器对功率开关的利用非常有效。方均根二极管电流为 3.6 A，晶体管和二极管阻断电压为 380 V。在 120 V 交流输入下，晶体管和二极管方均根电流分别增至 6.6 A 和 5.1 A。
+
+升压变换器的唯一真正缺点是无法限制浪涌电流。当直流输出电压低于瞬时输入电压时，升压整流器的控制电路失去对电感电流波形的控制。直流输出电容初始充电时出现很大浪涌电流。须采用附加电路限制此电流幅值。
+
+升降压、SEPIC 和 Ćuk 拓扑可解决浪涌电流问题。由于这些变换器具有 $d/(1-d)$ 变换比，其波形可控
+
+![源页 p.908](../assets/page-snapshots/chapter-21/page-908.png)
+
+表21.3 若干变换器拓扑的 PWM 整流器电流应力总结
+
+| | 方均根 | 平均 | 峰值 |
+|---|---|---|---|
+| **CCM 升压** | | | |
+| 晶体管 | $I_{ac,rms} \sqrt{1 - \dfrac{8}{3\pi}\, \dfrac{V_M}{V}}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}\left( 1 - \dfrac{\pi}{8}\, \dfrac{V_M}{V} \right)}$ | $I_{ac,rms} \sqrt{2}$ |
+| 二极管 | $I_{dc} \sqrt{\dfrac{16}{3\pi}\, \dfrac{V}{V_M}}$ | $I_{dc}$ | $2 I_{dc}\, \dfrac{V}{V_M}$ |
+| 电感 | $I_{ac,rms}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2}$ |
+| **CCM 反激（含 $n:1$ 隔离变压器和输入滤波器）** | | | |
+| 晶体管、变压器初级 | $I_{ac,rms} \sqrt{1 + \dfrac{8}{3\pi}\, \dfrac{V_M}{n V}}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2\left( 1 + \dfrac{V_M}{n V} \right)}$ |
+| $L_1$ | $I_{ac,rms}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2}$ |
+| $C_1$ | $I_{ac,rms} \sqrt{\dfrac{8}{3\pi}\, \dfrac{V_M}{n V}}$ | $0$ | $I_{ac,rms} \sqrt{2 \max\left( 1, \dfrac{V_M}{n V} \right)}$ |
+| 二极管、变压器次级 | $I_{dc} \sqrt{\dfrac{3}{2} + \dfrac{16}{3\pi}\, \dfrac{n V}{V_M}}$ | $I_{dc}$ | $2 I_{dc}\left( 1 + \dfrac{n V}{V_M} \right)$ |
+| **CCM SEPIC（非隔离）** | | | |
+| 晶体管 | $I_{ac,rms} \sqrt{1 + \dfrac{8}{3\pi}\, \dfrac{V_M}{V}}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2\left( 1 + \dfrac{V_M}{V} \right)}$ |
+| $L_1$ | $I_{ac,rms}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2}$ |
+| $C_1$ | $I_{ac,rms} \sqrt{\dfrac{8}{3\pi}\, \dfrac{V_M}{V}}$ | $0$ | $I_{ac,rms} \sqrt{2 \max\left( 1, \dfrac{V_M}{V} \right)}$ |
+| $L_2$ | $I_{ac,rms}\, \dfrac{V_M}{V} \sqrt{\dfrac{3}{2}}$ | $I_{ac,rms}\, \dfrac{V_M}{\sqrt{2} V}$ | $I_{ac,rms}\, \dfrac{V_M}{V} \sqrt{2}$ |
+| 二极管 | $I_{dc} \sqrt{\dfrac{3}{2} + \dfrac{16}{3\pi}\, \dfrac{V}{V_M}}$ | $I_{dc}$ | $2 I_{dc}\left( 1 + \dfrac{V}{V_M} \right)$ |
+| **CCM SEPIC（含 $n:1$ 隔离变压器）** | | | |
+| 晶体管 | $I_{ac,rms} \sqrt{1 + \dfrac{8}{3\pi}\, \dfrac{V_M}{n V}}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2\left( 1 + \dfrac{V_M}{n V} \right)}$ |
+| $L_1$ | $I_{ac,rms}$ | $\dfrac{I_{ac,rms}}{2} \sqrt{\dfrac{2}{\pi}}$ | $I_{ac,rms} \sqrt{2}$ |
+| $C_1$、变压器初级 | $I_{ac,rms} \sqrt{\dfrac{8}{3\pi}\, \dfrac{V_M}{n V}}$ | $0$ | $I_{ac,rms} \sqrt{2 \max\left( 1, \dfrac{V_M}{n V} \right)}$ |
+| 二极管、变压器次级 | $I_{dc} \sqrt{\dfrac{3}{2} + \dfrac{16}{3\pi}\, \dfrac{n V}{V_M}}$ | $I_{dc}$ | $2 I_{dc}\left( 1 + \dfrac{n V}{V_M} \right)$ |
+
+所有情形中 $\dfrac{I_{ac,rms}}{I_{dc}} = \sqrt{2}\, \dfrac{V}{V_M}$，交流输入电压 $= V_M \sin(\omega t)$，直流输出电压 $= V$。
+
+![源页 p.909](../assets/page-snapshots/chapter-21/page-909.png)
+
+当输出电压为任意正值时可控，但此能力的代价是元件应力增大。对相同的 1 kW、240 Vrms 交流输入、380 V 输出整流器，非隔离 SEPIC 的晶体管方均根电流和峰值电压为 5.5 A 和 719 V。方均根二极管电流为 4.85 A。降低输出电压可降低半导体电压应力，但以方均根电流增大为代价。在 120 V 交流输入下，晶体管和二极管方均根电流分别增至 9.8 A 和 6.1 A。
+
+SEPIC 等拓扑也可获得隔离，如第6章讨论。隔离变压器的匝比也可用于直流输出电压较低时降低初级侧电流。但变压器绕组方均根电流高于直流-直流变换器，因为功率流是脉动的（二倍线路频率）。对 1 kW、240 V 交流输入 SEPIC 示例，42 V 23.8 A 直流负载，4:1 变压器匝比，变压器方均根电流为 5.5 A（初级）和 36.4 A（次级）。方均根晶体管电流为 6.9 A。在 120 V 交流输入下，这些电流分别增至 7.7 A、42.5 A 和 11.4 A。
+
+## 21.6 CCM 高质量整流器的损耗与效率建模
+
+与直流-直流变换器一样，我们希望对变换器损耗元件建模以正确规定功率级元件。直流-直流情形的等效电路方法可推广以包含交流-直流低谐波整流器，但所得方程更复杂，因为波形有低频交流调制。
+
+图21.36给出了直流-直流升压变换器及其稳态等效电路。变换器平衡工作时，可求解图21.36(b)模型以确定
+
+图21.36 直流-直流升压变换器(a)和稳态等效电路(b)，建模电感电阻 $R_L$、MOSFET 导通电阻 $R_{on}$ 和二极管正向压降 $V_F$
+
+![源页 p.910](../assets/page-snapshots/chapter-21/page-910.png)
+
+图21.37 交流-直流升压整流器(a)和建模变换器损耗与效率的低频等效电路(b)
+
+变换器损耗和效率。交流-直流情形中，输入电压 $v_g(t)$ 是整流正弦，控制器改变占空比 $d(t)$ 使 $i_g(t)$ 按下式跟随 $v_g(t)$
+
+$$i_g(t) = \frac{v_g(t)}{R_e} \tag{21.127}$$
+
+仿真电阻 $R_e$ 由控制器选择以获得所需直流输出电压。$d(t)$、$v_g(t)$ 等若干系统波形的交流变化不小，故第7至18章采用的小信号近似不成立。我们仍可通过平均建模变换器波形的低频分量，但所得等效电路一般时变且非线性。
+
+为确定整流器效率，假设(1)电感足够小，使其对系统波形的交流线路频率分量影响可忽略；(2)电容足够大，使输出电压 $v(t)$ 本质上等于其平衡直流值，低频或高频交流变化可忽略。故交流-直流情形模型如图21.37所示。控制器波形的低频分量（$\ll f_s$）如图21.38。
+
+为求整流器波形、损耗和效率，须在控制器改变占空比 $d(t)$ 使式(21.127)满足的条件下求解图21.37(b)电路。这导致时变电路元件 $d(t) R_{on}$ 和 $d'(t):1$ 变压器。以下求解涉及步骤：(1)求 $d(t)$ 波形；(2)对 $i_d(t)$ 平均求其直流分量，等于负载电流 $I$；(3)求整流器效率等其他量。
+
+![源页 p.911](../assets/page-snapshots/chapter-21/page-911.png)
+
+图21.38 升压整流器波形的典型低频分量
+
+图21.39 仅建模 MOSFET 导通电阻的简化升压功率级低频等效电路
+
+图21.39的简化升压变换器电路模型仅计入 MOSFET 导通损耗，此处求解。但结果可直接推广到图21.37(b)电路；推广留作习题。类似流程也可导出其他整流器拓扑的损耗和效率表达式。
+
+### 21.6.1 控制器占空比 $d(t)$ 的表达式
+
+控制器改变占空比 $d(t)$ 使式(21.127)满足。求解图21.39的输入侧回路得
+
+$$i_g(t)\, d(t)\, R_{on} = v_g(t) - d'(t)\, v \tag{21.128}$$
+
+将式(21.127)代入式(21.128)消去 $i_g(t)$：
+
+$$\frac{v_g(t)}{R_e}\, d(t)\, R_{on} = v_g(t) - d'(t)\, v \tag{21.129}$$
+
+$$v_g(t) = V_M |\sin\omega t| \tag{21.130}$$
+
+现在可解占空比 $d(t)$，结果为
+
+$$d(t) = \frac{v - v_g(t)}{v - v_g(t)\, \dfrac{R_{on}}{R_e}} \tag{21.131}$$
+
+此式忽略变换器动态，当这些动态远快于交流线路电压变化时此假设成立。此式还忽略交流线路电压波形过零附近的断续导通模式运行。当整流器在交流线路周期大部分时间内工作于连续导通模式时此假设成立，因为过零附近的功率损耗可忽略。
+
+![源页 p.912](../assets/page-snapshots/chapter-21/page-912.png)
+
+### 21.6.2 直流负载电流表达式
+
+由输出电容 $C$ 的电荷平衡，直流负载电流 $I$ 等于二极管电流 $i_d$ 的直流分量：
+
+$$I = \langle i_d \rangle_{T_{ac}} \tag{21.132}$$
+
+对图21.39求解 $i_d(t)$ 得
+
+$$i_d(t) = d'(t)\, i_g(t) = d'(t)\, \frac{v_g(t)}{R_e} \tag{21.133}$$
+
+由式(21.131)，$d'(t) = 1 - d(t)$ 为
+
+$$d'(t) = \frac{v_g(t)\left( 1 - \dfrac{R_{on}}{R_e} \right)}{v - v_g(t)\, \dfrac{R_{on}}{R_e}} \tag{21.134}$$
+
+故
+
+$$i_d(t) = \frac{\dfrac{v_g^2(t)}{R_e}\left( 1 - \dfrac{R_{on}}{R_e} \right)}{v - v_g(t)\, \dfrac{R_{on}}{R_e}} \tag{21.135}$$
+
+代入 $v_g(t) = V_M \sin\omega t$ 并积分求 $\langle i_d(t) \rangle_{T_{ac}}$：
+
+$$I = \langle i_d \rangle_{T_{ac}} = \frac{2}{T_{ac}} \int_0^{T_{ac}/2} \frac{\dfrac{V_M}{R_e}\left( 1 - \dfrac{R_{on}}{R_e} \right) \sin^2(\omega t)}{v - \dfrac{V_M R_{on}}{R_e} \sin(\omega t)}\, dt \tag{21.136}$$
+
+$T_{ac} = 2\pi/\omega$ 是交流线路周期。式(21.136)可重写为
+
+$$I = \frac{2}{T_{ac}}\, \frac{V_M^2}{V R_e}\left( 1 - \frac{R_{on}}{R_e} \right) \int_0^{T_{ac}/2} \frac{\sin^2(\omega t)}{1 - a \sin(\omega t)}\, dt \tag{21.137}$$
+
+其中
+
+$$a = \left( \frac{V_M}{V} \right)\left( \frac{R_{on}}{R_e} \right) \tag{21.138}$$
+
+由波形对称，只需从 0 到 $T_{ac}/4$ 积分。作替换 $\theta = \omega t$：
+
+$$I = \frac{V_M^2}{V R_e}\left( 1 - \frac{R_{on}}{R_e} \right) \frac{2}{\pi} \int_0^{\pi/2} \frac{\sin^2(\theta)}{1 - a \sin(\theta)}\, d\theta \tag{21.139}$$
+
+![源页 p.913](../assets/page-snapshots/chapter-21/page-913.png)
+
+此积分求值繁琐。它不仅出现在升压整流器中，也出现在若干其他高质量整流器拓扑中。推导此处不给出，但涉及替换 $z = \tan(\theta/2)$、对所得 $z$ 的有理函数做部分分式展开、并积分。解为
+
+$$\frac{4}{\pi} \int_0^{\pi/2} \frac{\sin^2(\theta)}{1 - a \sin(\theta)}\, d\theta = F(a) = \frac{2}{a^2 \pi}\left( -2a - \pi + 4 \sin^{-1}(a) + 2 \cos^{-1}(a) \sqrt{1 - a^2} \right) \tag{21.140}$$
+
+此式较复杂，但为闭式，易于用计算机电子表格求值。量 $a$ 是损耗电阻 $R_{on}$ 相对于仿真电阻 $R_e$ 的度量，通常远小于 1。$F(a)$ 绘于图21.40。函数 $F(a)$ 可很好近似为
+
+$$F(a) \approx 1 + 0.862\, a + 0.78\, a^2 \tag{21.141}$$
+
+对 $|a| \le 0.15$，此近似表达式预测的 $F(a)$ 与精确值相差在 0.1% 以内。若省略 $a^2$ 项，则精度降至 $\pm 2\%$（相同 $a$ 范围）。下节计算的整流器效率 $\eta$ 直接依赖 $F(a)$，故 $F(a)$ 的精度与 $\eta$ 的精度一致。
+
+![源页 p.914](../assets/page-snapshots/chapter-21/page-914.png)
+
+图21.40 积分 $F(a)$ 对 $a$ 的图
+
+### 21.6.3 变换器效率 $\eta$ 的求解
+
+现在已求得直流负载电流，可计算变换器效率 $\eta$。平均输入功率为
+
+$$P_{in} = \langle p_{in}(t) \rangle_{T_{ac}} = \frac{V_M^2}{2 R_e} \tag{21.142}$$
+
+平均负载功率为
+
+$$p_{out} = V I = (V)\left( \frac{V_M^2}{V R_e}\left( 1 - \frac{R_{on}}{R_e} \right) \frac{F(a)}{2} \right) \tag{21.143}$$
+
+其中
+
+$$a = \left( \frac{V_M}{V} \right)\left( \frac{R_{on}}{R_e} \right) \tag{21.144}$$
+
+此处我们已用式(21.139)代入 $I$。因此效率为
+
+$$\eta = \frac{P_{out}}{P_{in}} = \left( 1 - \frac{R_{on}}{R_e} \right) F(a) \tag{21.145}$$
+
+若需要，可采用 $F(a)$ 的抛物线近似式(21.141)，得
+
+$$\eta \approx \left( 1 - \frac{R_{on}}{R_e} \right)\left( 1 + 0.862\, \frac{V_M}{V}\, \frac{R_{on}}{R_e} + 0.78\left( \frac{V_M}{V}\, \frac{R_{on}}{R_e} \right)^2 \right) \tag{21.146}$$
+
+式(21.145)和(21.146)表明效率如何随 MOSFET 导通电阻 $R_{on}$ 和交流峰值电压 $V_M$ 变化。式(21.145)绘于图21.41。可见峰值交流线路电压 $V_M$ 接近直流输出电压 $V$ 时效率高。即使 MOSFET 导通电阻高达 $0.2 R_e$，也可获得 90% 至 95% 范围的效率。当然，图21.41是乐观的，因为它忽略了 MOSFET 导通损耗以外的损耗源。
+
+![源页 p.915](../assets/page-snapshots/chapter-21/page-915.png)
+
+图21.41 升压整流器效率，式(21.145)，计入 MOSFET 导通电阻
+
+### 21.6.4 设计示例
+
+让我们用图21.41为给定效率设计。考虑如下指标：
+
+- 输出电压 390 V
+- 输出功率 500 W
+- 方均根输入电压 120 V
+- 效率 95%
+
+假设 MOSFET 导通损耗以外的损耗可忽略。平均输入功率为
+
+$$P_{in} = \frac{P_{out}}{\eta} = \frac{500\,\text{W}}{0.95} = 526\,\text{W} \tag{21.147}$$
+
+因此仿真电阻为
+
+$$R_e = \frac{V_{g,rms}^2}{P_{in}} = \frac{(120\,\text{V})^2}{526\,\text{W}} = 27.4\,\Omega \tag{21.148}$$
+
+且
+
+$$\frac{V_M}{V} = \frac{120\sqrt{2}\,\text{V}}{390\,\text{V}} = 0.435 \tag{21.149}$$
+
+由图21.41或精确方程式(21.145)求值，$V_M/V = 0.435$ 处 95% 效率对应 $R_{on}/R_e \approx 0.077$。故需要导通电阻为
+
+$$R_{on} \le (0.077)\, R_e = (0.077)(27.4\,\Omega) = 2.11\,\Omega \tag{21.150}$$
+
+当然，其他变换器损耗未计入，会降低效率。
+
+将此结果与21.5节方均根电流表达式所得结果比较是有教益的。理想 CCM 升压变换器的方均根晶体管电流由式(21.122)给出。方均根输入电流等于 $P_{in}/V_{g,rms} = (526\,\text{W})/(120\,\text{V}) = 4.38\,\text{A}$。故式(21.122)预测方均根晶体管电流为
+
+$$I_{Q,rms} = I_{ac,rms} \sqrt{1 - \frac{8}{3\pi}\, \frac{V_M}{V}} = (4.38\,\text{A}) \sqrt{1 - \frac{8}{3\pi}\, \frac{120\sqrt{2}\,\text{V}}{390\,\text{V}}} \tag{21.151}$$
+
+$$= 3.48\,\text{A}$$
+
+故 MOSFET 导通电阻应按
+
+$$R_{on} \le \frac{P_{in} - P_{out}}{I_{Q,rms}^2} = \frac{(526\,\text{W}) - (500\,\text{W})}{(4.38\,\text{A})^2} = 2.17\,\Omega \tag{21.152}$$
+
+选择。此计算是近似的，因为式(21.122)是用理想（无损耗）变换器波形导出的。但给出的答案与式(21.150)的更精确结果非常接近。由于 95% 效率很高，我们预期此近似方法在本例中精度良好。
+
+![源页 p.916](../assets/page-snapshots/chapter-21/page-916.png)
+
+## 21.7 理想三相整流器
+
+前几节的单相理想整流器概念可推广到理想三相整流器。图21.42(a)说明了理想三相整流器的性质，它对公用系统呈现平衡电阻负载。三相变换器系统被控制以在每个输入相获得电阻仿真。整流器三相输入端口可用每相有效电阻 $R_e$ 建模，如图21.42(a)所示。这些电阻表观消耗的瞬时功率传输到整流器直流输出端口。因此整流器输出端口可用等于流入有效电阻 $R_e$ 的瞬时功率的功率源建模。三个功率源串联还是并联无关紧要；无论哪种方式，都可合并为等于三相总瞬时输入功率的单个源，如图21.42(b)所示。
+
+若三相交流输入电压为
+
+$$v_{an}(t) = V_M \sin(\omega t)$$
+
+$$v_{bn}(t) = V_M \sin(\omega t - 120°) \tag{21.153}$$
+
+$$v_{cn}(t) = V_M \sin(\omega t - 240°)$$
+
+则流入 a、b、c 相有效电阻 $R_e$ 的瞬时功率为
+
+$$p_a(t) = \frac{v_{an}^2(t)}{R_e} = \frac{V_M^2}{2 R_e}\left( 1 - \cos(2\omega t) \right)$$
+
+$$p_b(t) = \frac{v_{bn}^2(t)}{R_e} = \frac{V_M^2}{2 R_e}\left( 1 - \cos(2\omega t - 240°) \right) \tag{21.154}$$
+
+$$p_c(t) = \frac{v_{cn}^2(t)}{R_e} = \frac{V_M^2}{2 R_e}\left( 1 - \cos(2\omega t - 120°) \right)$$
+
+![源页 p.917](../assets/page-snapshots/chapter-21/page-917.png)
+
+图21.42 理想三相整流器模型的建立：(a) 三个理想单相整流器，(b) 将三个功率源合并为等效单功率源
+
+每个瞬时相功率含直流项 $V_M^2/(2 R_e)$ 和二次谐波项。三相总瞬时功率为
+
+$$p_{tot}(t) = p_a(t) + p_b(t) + p_c(t) = \frac{3}{2}\, \frac{V_M^2}{R_e} \tag{21.155}$$
+
+这是从整流器直流输出端口流出的瞬时功率。注意二次谐波项相加为零，使整流器瞬时输出功率恒定。这是平衡三相交流系统中瞬时功率流恒定的结果。因此，与单相情形不同，理想三相整流器可向直流负载供给恒定瞬时功率，无需内部低频储能。
+
+已知多种 $3\phi$ 交流-直流 PWM 整流器；该主题的众多参考文献列于参考文献[8, 22, 280–294]。最知名的拓扑是三相交流-直流升压整流器，如图21.43所示。此变换器需要六个单刀单掷（SPST）电流双向两象限开关。电感和电容滤波高频开关谐波，对波形的低频交流分量影响很小。
+
+![源页 p.918](../assets/page-snapshots/chapter-21/page-918.png)
+
+图21.43 升压型三相交流-直流 PWM 整流器
+
+每相开关被控制以获得输入电阻仿真，采用类似图21.5的乘法控制器方案或其他方法。为获得无畸变线路电流波形，直流输出电压 $V$ 须大于或等于峰值线-线交流输入电压 $V_{L,pk}$。典型实现中 $V$ 略大于 $V_{L,pk}$。此变换器类似于第4章简要讨论的电压源逆变器，只是此处变换器作为整流器运行，变换器输入电流通过高频脉宽调制控制。
+
+图21.43的三相升压整流器有若干属性使其成为大多数 $3\phi$ 交流-直流整流器应用的首选。交流输入电流非脉动，故所需附加输入 EMI 滤波很少。与单相升压整流器一样，三相升压整流器的方均根晶体管电流和导通损耗相对于电流源逆变器等其他 $3\phi$ 交流-直流拓扑较低。变换器能双向功率流动。缺点是需要六个有源器件：与相似额定的直流-直流变换器相比，有源半导体利用率（第6章讨论）低。此外，由于整流器具有升压特性，不适合直接替代传统降压型相控整流器。图21.43电路与图4.14的电压源逆变器一致；实际上，电流双向开关允许双向电流流动和任一方向的功率流动。
+
+文献含控制六开关三相桥网络开关的多种方案，适用于图21.43开关的控制。假设开关以简单正弦脉宽调制控制可最容易理解变换器基本工作。晶体管 $Q_1$ 以占空比 $d_1(t)$ 驱动，而晶体管 $Q_4$ 以 $d_1(t)$ 的补即 $d'_1(t) = 1 - d_1(t)$ 驱动。晶体管 $Q_2$ 和 $Q_5$ 分别以占空比 $d_2(t)$ 和 $d'_2(t)$ 驱动，晶体管 $Q_3$ 和 $Q_6$ 分别以占空比 $d_3(t)$ 和 $d'_3(t)$ 驱动。得图21.44的开关电压波形。平均开关电压为
+
+$$\langle v_{10}(t) \rangle_{T_s} = d_1(t)\, \langle v(t) \rangle_{T_s}$$
+
+$$\langle v_{20}(t) \rangle_{T_s} = d_2(t)\, \langle v(t) \rangle_{T_s} \tag{21.156}$$
+
+$$\langle v_{30}(t) \rangle_{T_s} = d_3(t)\, \langle v(t) \rangle_{T_s}$$
+
+图21.44 $3\phi$ 交流-直流升压整流器的开关波形
+
+![源页 p.919](../assets/page-snapshots/chapter-21/page-919.png)
+
+因此平均线-线开关电压为
+
+$$\langle v_{12}(t) \rangle_{T_s} = \langle v_{10}(t) \rangle_{T_s} - \langle v_{20}(t) \rangle_{T_s} = (d_1(t) - d_2(t))\, \langle v(t) \rangle_{T_s}$$
+
+$$\langle v_{23}(t) \rangle_{T_s} = \langle v_{20}(t) \rangle_{T_s} - \langle v_{30}(t) \rangle_{T_s} = (d_2(t) - d_3(t))\, \langle v(t) \rangle_{T_s} \tag{21.157}$$
+
+$$\langle v_{31}(t) \rangle_{T_s} = \langle v_{30}(t) \rangle_{T_s} - \langle v_{10}(t) \rangle_{T_s} = (d_3(t) - d_1(t))\, \langle v(t) \rangle_{T_s}$$
+
+类似地，平均开关电流可表示为
+
+$$\langle i_1(t) \rangle_{T_s} = d_1(t)\, \langle i_a(t) \rangle_{T_s}$$
+
+$$\langle i_2(t) \rangle_{T_s} = d_2(t)\, \langle i_b(t) \rangle_{T_s} \tag{21.158}$$
+
+$$\langle i_3(t) \rangle_{T_s} = d_3(t)\, \langle i_c(t) \rangle_{T_s}$$
+
+式(21.157)和(21.158)导出图21.45的电路平均模型。
+
+图21.45 开环 $3\phi$ 交流-直流升压整流器的平均模型
+
+![源页 p.920](../assets/page-snapshots/chapter-21/page-920.png)
+
+正弦 PWM 下，占空比与交流线路同步地按正弦变化：
+
+$$d_1(t) = D_0 + \frac{1}{2}\, D_m \sin(\omega t - \phi)$$
+
+$$d_2(t) = D_0 + \frac{1}{2}\, D_m \sin(\omega t - \phi - 120°) \tag{21.159}$$
+
+$$d_3(t) = D_0 + \frac{1}{2}\, D_m \sin(\omega t - \phi - 240°)$$
+
+其中 $\omega$ 是交流线路频率。由于每个瞬时占空比须在 $[0,1]$ 区间内，需要直流偏置 $D_0$。因子 $D_m$ 称为调制指数；对 $D_0 = 0.5$，$D_m$ 须小于或等于 1。$D_0$ 的其他选择进一步限制 $D_m$。一般而言，调制指数可定义为占空比变化基波分量的峰-峰幅值。
+
+若开关频率足够大，滤波电感 $L$ 值可小，使其对低频交流波形影响可忽略。平均开关电压 $\langle v_{12}(t) \rangle_{T_s}$ 近似等于交流线-线电压 $v_{ab}(t)$：
+
+$$\langle v_{12}(t) \rangle_{T_s} = (d_1(t) - d_2(t))\, \langle v(t) \rangle_{T_s} \approx v_{ab}(t) \tag{21.160}$$
+
+代入式(21.153)和(21.159)得
+
+$$\frac{1}{2}\, D_m\, [\sin(\omega t - \phi) - \sin(\omega t - \phi - 120°)]\, \langle v(t) \rangle_{T_s} = V_M\, [\sin(\omega t) - \sin(\omega t - 120°)] \tag{21.161}$$
+
+$L$ 小时，角 $\phi$ 须趋于零，故式(21.161)中正弦项抵消。稳态下直流输出电压为 $\langle v(t) \rangle_{T_s} = V$。式(21.161)变为
+
+$$\frac{1}{2}\, D_m\, V = V_M \tag{21.162}$$
+
+解直流输出电压 $V$ 得
+
+$$V = \frac{2 V_M}{D_m} \tag{21.163}$$
+
+式(21.163)可用峰值线-线电压 $V_{L,pk}$ 写为
+
+$$V = \frac{2}{\sqrt{3}}\, \frac{V_{L,pk}}{D_m} = \frac{1.15\, V_{L,pk}}{D_m} \tag{21.164}$$
+
+$D_m \le 1$ 时，直流输出电压 $V$ 须大于或等于峰值线-线交流输入电压的 1.15 倍。因此整流器具有升压特性。
+
+![源页 p.921](../assets/page-snapshots/chapter-21/page-921.png)
+
+图21.46 使直流输出电压等于峰值输入线-线电压的调制策略
+
+式(21.159)的正弦 PWM 方法并非改变占空比以获得正弦交流电压和电流的唯一方式。例如，可在式(21.159)的占空比表达式中加入三倍次谐波。这些三倍次谐波在式(21.157)中抵消，使平均逆变器输入电压 $\langle v_{12}(t) \rangle_{T_s}$、$\langle v_{23}(t) \rangle_{T_s}$、$\langle v_{31}(t) \rangle_{T_s}$ 仅含基波。图21.46给出了使直流输出电压 $V$ 等于 $V_{L,pk}$ 的占空比变化。此情形有效调制指数为 1.15。交流侧电压和电流仍无畸变。调制指数的进一步增大只能通过引入交流侧电压和电流畸变实现。当然，实践中占空比调制通常由控制输入电流波形以实现电阻仿真的反馈环路生成。
+
+具有降压、升降压或其他特性的三相交流-直流整流器是可能的，但应用远少于升压拓扑。$3\phi$ 交流-直流整流器系统也可简单地用三个独立单相整流器构建[273]；但每个单相整流器须含变压器隔离，导致开关应力和损耗显著增大。其他非常规三相低谐波整流方法也最近被探索，如 Vienna 整流器[292, 294]、单开关方法[285–291]和其他电路[281–284, 293]。
+
+解决三相整流器谐波问题的又一方法是图21.47所示的谐波校正方案。一个有源六开关三相桥移除非线性三相负载（如不可控整流器）产生的谐波。谐波校正器被控制使其交流线路电流含与非线性负载产生的谐波幅值相等相位相反的谐波。无平均功率流入谐波校正器。谐波校正器半导体器件的总 kVA 额定值取决于非线性负载产生的谐波幅值。若负载产生的 THD 不太大，则谐波校正器方案比图21.43的 CCM 升压型整流器所需总活性硅少。但若不可控整流器含小交流线路电感，使其工作于 DCM 且 THD 大，则可能直接用图21.43的 CCM 升压型整流器替代不可控整流器更好。
+
+![源页 p.922](../assets/page-snapshots/chapter-21/page-922.png)
+
+图21.47 基于图21.43 $3\phi$ 交流-直流升压变换器的谐波校正器
+
+## 21.8 要点总结
+
+1. 理想整流器对交流电力系统呈现有效电阻负载即仿真电阻 $R_e$。$R_e$ 表观"消耗"的功率传输到直流输出端口。三相理想整流器中每相获得输入电阻仿真。单相和三相情形中，输出端口均服从取决于瞬时交流输入功率的功率源特性。理想整流器能执行低谐波整流功能，无需低频储能元件。
+
+2. 直流-直流升压变换器及其他能按式(21.12)升压的变换器可改造用于理想整流器应用。控制系统使输入电流与输入电压成正比。变换器可工作于 CCM、DCM 或两种模式。模式边界可表示为 $R_e$、$2L/T_s$ 和瞬时电压比 $v_g(t)/V$ 的函数。设计良好的平均电流控制器无论工作模式如何都导致电阻仿真；但其他方案在越过模式边界时可能导致电流波形失真。
+
+3. 单相系统中瞬时交流输入功率脉动，而直流负载功率恒定。瞬时输入和输出功率不等时，理想整流器系统须含储能。通常采用大电容；此电容电压须允许独立变化以按需储能和释放能量。慢反馈环路调节电容电压的直流分量以确保平均交流输入功率和直流负载功率平衡。
+
+![源页 p.923](../assets/page-snapshots/chapter-21/page-923.png)
+
+4. 整流器波形的方均根值可通过双重积分计算。升压变换器中，当直流输出电压 $V$ 接近峰值交流输入电压 $V_M$ 时，方均根晶体管电流可低至交流输入电流方均根值的 39%。升降压、SEPIC 和 Ćuk 变换器等其他拓扑的方均根晶体管电流显著更高，但能限制变换器浪涌电流。
+
+5. 三相情形中，基于 PWM 电压源逆变器的升压型整流器也表现出低方均根晶体管电流。此方案需要六个有源开关元件，直流输出电压须大于峰值输入线-线电压。平均电流控制可用于获得输入电阻仿真。可通过平均开关波形导出等效电路。假设开关占空比正弦变化可理解变换器工作；然后可导出平均变换器波形的表达式。
+
+6. 变换器损耗和效率可用第3章的稳态等效电路模型建模，采用时变占空比。输出电流在一个交流线路周期上平均以确定其直流分量。然后可计算变换器损耗和效率。此方法是近似的：(i) 假设变换器动态远快于交流线路频率；(ii) 忽略断续导通模式运行。
+
+7. 平均电流控制涉及直接调节整流器输入电流的低频分量以跟随输入电压。还可加入前馈以抵消交流线路电压变化对直流输出电压的影响。
+
+8. 电流编程控制也可改造以在整流器中实现输入电阻仿真。编程电流参考信号 $i_c(t)$ 与交流输入电压成正比。$i_c(t)$ 与平均电感电流的差异导致失真，源于电感电流纹波和稳定人工斜坡的需求。已知若干减小线路电流波形谐波失真的方法。
+
+9. 滞环控制（特别是 100% 电流纹波）控制器实现简单。缺点是开关频率可变和峰值电流增大。
+
+10. 非线性载波控制也导致简单的控制器实现，且具有 CCM 运行晶体管峰值电流小的优点。
+
+11. 调节直流输出电压以平衡整流器和负载功率的外环低带宽控制系统可通过在半个交流线路周期 $T_{2L}$ 上对整流器波形平均建模。这使直流侧系统方程变为时不变。然后通过扰动和线性化得到小信号模型。
+
+12. 调节交流输入电流波形以实现电阻仿真的内环高带宽控制系统一般高度非线性。但升压整流器情形可导出有效小信号模型。此方法在其他变换器情形不成功；须 resort 到准静态近似或仿真等其他方法。
+
+## 习题
+
+**21.1** 图21.5的升压变换器用升降压变换器替代。电感储能对变换器波形的低频分量影响可忽略。平均负载功率为 $P_{load}$。直流输出电压为 $V$，正弦交流输入电压峰值幅值为 $V_M$。
+
+(a) 假设变换器工作于连续导通模式，确定占空比变化 $d(t)$ 和电感电流变化 $i(t)$ 的表达式。
+
+(b) 推导连续导通模式运行条件。化简结果以证明当 $R_e$ 小于 $R_{e,crit}(L, T_s, v_g(t), V)$ 时变换器工作于 CCM，并确定 $R_{e,crit}$。
+
+(c) $R_e$ 为何值时变换器始终工作于 CCM？DCM？
+
+(d) 交流输入电压方均根幅值在 108 V 至 132 V 范围。最大负载功率 100 W，最小负载功率 10 W。直流输出电压 120 V。开关频率 75 kHz。$L$ 为何值时保证变换器始终工作于 CCM？DCM？
+
+**21.2** 推导升降压变换器输入特性的表达式，类似式(21.25)至(21.33)。画出变换器输入特性，标出 CCM-DCM 边界。
+
+**21.3** 推导基于单相 CCM Ćuk 拓扑的整流器方均根晶体管和二极管电流表达式。结果以类似表21.3的形式表达。
+
+**21.4** 为获得隔离直流输出，图21.5的升压变换器用图6.36的全桥变压器隔离 CCM 升压变换器替代。推导方均根晶体管电流的表达式。结果用 $I_{ac,rms}$、$n$、$V$ 和 $V_M$ 表示。
+
+**21.5** 比较作为通用输入单相整流器的 CCM 升压和隔离 SEPIC 拓扑。已知直流输出电压 $V = 400\,\text{V}$，负载功率 $P = 500\,\text{W}$，方均根输入电压在 90 至 270 V 之间变化，使峰值交流输入电压 $V_M$ 在 $V_{M,min} = 127\,\text{V}$ 和 $V_{M,max} = 382\,\text{V}$ 之间变化。定义晶体管应力 $S$ 为最坏情况峰值晶体管电压与最坏情况方均根晶体管电流之积。期望最小化 $S$。
+
+(a) 确定此应用中升压变换器的 $S$。
+
+(b) 简要讨论(a)结果：若不需要通用输入工作，故 $V_M = 382\,\text{V}$ 恒定，$S$ 为何值？
+
+隔离 SEPIC 中，变压器匝比 $n:1$ 可选择以优化设计。
+
+(c) 将 SEPIC 的 $S$ 表示为 $n$、$V$、$P$、$V_{M,min}$、$V_{M,max}$ 的函数。
+
+(d) 选择 SEPIC 的 $n$ 使此应用中 $S$ 最小。与(a)、(b)结果比较。
+
+![源页 p.924](../assets/page-snapshots/chapter-21/page-924.png)
+
+**21.6** 图21.43的升压型直流-$3\phi$交流整流器中，交流侧电感 $L$ 不小：其呈现的线路频率阻抗不应忽略。三相交流电压由式(21.153)给出，占空比按式(21.159)调制。变换器工作于连续导通模式。
+
+(a) 确定开关网络交流输入端处线-中点平均电压的幅值和相位。结果用 $D_m$、$V$ 和 $\phi$ 表示。
+
+![源页 p.925](../assets/page-snapshots/chapter-21/page-925.png)
+
+(b) 确定从 $3\phi$ 交流电源汲取的有功功率 $P$ 和无功功率 $Q$。结果用 $V_M$、$V$、$D_m$、$\phi$ 和 $\omega L$ 表示。
+
+(c) 为获得单位功率因数，$\phi$ 应如何选择？
+
+**21.7** 图21.43的升压型直流-$3\phi$交流整流器中，开关占空比按图21.46调制。当电感 $L$ 足够小时，可获得等于峰值线-线交流输入电压的直流输出电压 $V$，且交流线路电流无畸变。如图21.46所示，$d_1(t)$ 在 $0° \le \omega t \le 60°$ 时等于 1，其中 $\omega t = 0°$ 时 $\langle v_{12}(t) \rangle_{T_s} = V$。
+
+(a) 推导 $0° \le \omega t \le 60°$ 区间内 $d_2(t)$ 和 $d_3(t)$ 的表达式。
+
+(b) 说明 $d_1(t)$、$d_2(t)$、$d_3(t)$ 在每个 $60°$ 区间内应如何变化。
+
+**21.8** 图21.48的降压型 $3\phi$ 交流-直流整流器工作于连续导通模式。晶体管 $Q_1$ 至 $Q_6$ 分别以占空比 $d_1(t)$ 至 $d_6(t)$ 工作。
+
+图21.48 习题21.8的降压型 $3\phi$ 交流-直流整流器
+
+(a) 确定开关运行的约束。哪些晶体管不能同时导通？哪些占空比之和必须为 1？
+
+(b) 对 $3\phi$ 桥开关网络平均，确定平均交流侧开关电流 $\langle i_a(t) \rangle_{T_s}$、$\langle i_b(t) \rangle_{T_s}$、$\langle i_c(t) \rangle_{T_s}$ 的表达式。
+
+(c) 证明平均直流侧开关电压可表示为
+
+$$\langle v_d(t) \rangle_{T_s} = (d_1(t) - d_4(t))\, \langle v_{an}(t) \rangle_{T_s} + (d_2(t) - d_5(t))\, \langle v_{bn}(t) \rangle_{T_s} + (d_3(t) - d_6(t))\, \langle v_{cn}(t) \rangle_{T_s}$$
+
+(d) 占空比变化如下：
+
+$$d_1(t) = \frac{1}{3} + \frac{1}{2}\, D_m \sin(\omega t - \phi)$$
+
+$$d_2(t) = \frac{1}{3} + \frac{1}{2}\, D_m \sin(\omega t - \phi - 120°)$$
+
+$$d_3(t) = \frac{1}{3} + \frac{1}{2}\, D_m \sin(\omega t - \phi - 240°)$$
+
+$$d_4(t) = \frac{1}{3} - \frac{1}{2}\, D_m \sin(\omega t - \phi)$$
+
+$$d_5(t) = \frac{1}{3} - \frac{1}{2}\, D_m \sin(\omega t - \phi - 120°)$$
+
+$$d_6(t) = \frac{1}{3} - \frac{1}{2}\, D_m \sin(\omega t - \phi - 240°)$$

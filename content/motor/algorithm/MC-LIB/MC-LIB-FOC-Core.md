@@ -20,9 +20,9 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-04-26  
-**源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c/h`
+- **文档版本：** v1.0  
+- **生成日期：** 2026-04-26  
+- **源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c/h`
 
 ---
 
@@ -225,7 +225,7 @@ $$
 \begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix} = \frac{2}{3} \begin{bmatrix} 1 & -\frac{1}{2} & -\frac{1}{2} \\ 0 & \frac{\sqrt{3}}{2} & -\frac{\sqrt{3}}{2} \end{bmatrix} \begin{bmatrix} i_a \\ i_b \\ i_c \end{bmatrix}
 $$
 
-**简化形式（利用三相平衡条件 $i_a + i_b + i_c = 0$）：**
+- **简化形式（利用三相平衡条件 $i_a + i_b + i_c = 0$）：**
 
 $$
 \begin{cases}
@@ -250,13 +250,13 @@ void MCFOC_Clark_F(ST_PMSM_ELEC_F* pPMSMe)
 
 ### 3.3 代码分析
 
-**关键点：**
+- **关键点：**
 
 1. **利用三相平衡条件**：假设 $I_a + I_b + I_c = 0$，简化计算
 2. **预定义常数**：`MATH_ONE_OVER_SQRT_THREE_F = 0.57735026919f`
 3. **计算量**：1次减法 + 1次乘法
 
-**与AxDr实现的对比：**
+- **与AxDr实现的对比：**
 
 | 特性 | MC_LIB实现 | AxDr实现 |
 |------|-----------|---------|
@@ -339,7 +339,7 @@ void MCFOC_Park_F(ST_PMSM_ELEC_F* pPMSMe)
 
 ### 4.3 代码分析
 
-**关键点：**
+- **关键点：**
 
 1. **角度补偿机制**：
    - `TG_Triangle_Est`：估计角度（来自编码器或观测器）
@@ -535,7 +535,7 @@ void MCFOC_PMSM_Para_Adapt_F(ST_PMSM_FILTER_F* pPMSMf,
 }
 ```
 
-**Lq饱和系数表示例：**
+- **Lq饱和系数表示例：**
 
 | 电流(A) | 饱和系数 |
 |--------|---------|
@@ -581,12 +581,12 @@ Ramp_Cal_F(&pPMSMa->Ramp_PWM_FREQ);
 void MCFOC_PMSM_Para_Init_F(ST_PMSM_ELEC_F* pPMSMe);
 ```
 
-**功能：** 初始化PMSM电气量结构体
+- **功能：** 初始化PMSM电气量结构体
 
-**参数：**
+- **参数：**
 - `pPMSMe`：PMSM电气量结构体指针
 
-**初始化内容：**
+- **初始化内容：**
 ```c
 pPMSMe->TG_Triangle_Comp.F_Angle = 0.0f;
 pPMSMe->TG_Triangle_Comp.F_Cos = 1.0f;
@@ -602,14 +602,14 @@ void MCFOC_PMSM_Para_Adapt_F(ST_PMSM_FILTER_F* pPMSMf,
                               ST_PMSM_PARA_F* pPMSMa);
 ```
 
-**功能：** 根据运行状态自适应调整参数
+- **功能：** 根据运行状态自适应调整参数
 
-**参数：**
+- **参数：**
 - `pPMSMf`：滤波器结构体指针
 - `pPMSMe`：PMSM电气量结构体指针
 - `pPMSMa`：PMSM参数结构体指针
 
-**调用时机：** 在速度环周期调用（通常1ms）
+- **调用时机：** 在速度环周期调用（通常1ms）
 
 ### 8.3 坐标变换函数
 
@@ -620,9 +620,9 @@ void MCFOC_Ipark_F(ST_PMSM_ELEC_F* pPMSMe);
 void MCFOC_Iclark_F(ST_PMSM_ELEC_F* pPMSMe);
 ```
 
-**功能：** 执行坐标变换
+- **功能：** 执行坐标变换
 
-**调用时机：** 在电流环周期调用（通常100μs）
+- **调用时机：** 在电流环周期调用（通常100μs）
 
 ---
 

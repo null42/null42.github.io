@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-14: Youla参数化——所有稳定控制器的凸空间
 
 **副标题：为什么控制器设计可以是一个凸优化问题**
-**难度：** 
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-09（补偿器设计）、CE-12（从Bellman原理到Riccati方程）
+- **难度：** 
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-09（补偿器设计）、CE-12（从Bellman原理到Riccati方程）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 Youla参数化（Youla Parameterization, 1976）是线性控制理论中最重要的结构性结果。它回答了一个根本性问题：所有镇定给定被控对象 $G(s)$ 的控制器 $K(s)$ 构成什么集合？答案是：这个集合由一个自由传递函数 $Q(s)$ 参数化——只要 $Q(s)$ 稳定，对应的 $K(s)$ 就保证镇定 $G(s)$。这意味着稳定性不再是需要满足的约束，而是参数化表示本身的性质。更关键的是，所有闭环传递函数关于 $Q$ 都是仿射的，因此任何凸范数优化（H₂、H∞）在 $Q$ 空间中都是凸优化——没有局部极小值，可以找到全局最优。这个结果将控制器设计从"手艺"变成了"工程"。
 
-**认知挂钩：** 调PID像在雷区走路——增益调高一点可能就炸了。Youla参数化消除了雷区：你有一个旋钮 $Q(s)$，随便转，只要 $Q$ 稳定，闭环就稳定。这就是"所有镇定控制器的凸空间"的含义。
+- **认知挂钩：** 调PID像在雷区走路——增益调高一点可能就炸了。Youla参数化消除了雷区：你有一个旋钮 $Q(s)$，随便转，只要 $Q$ 稳定，闭环就稳定。这就是"所有镇定控制器的凸空间"的含义。
 
 ---
 
@@ -127,7 +127,7 @@ $$N(s) = \frac{b(s)}{d(s)}, \qquad M(s) = \frac{a(s)}{d(s)}$$
 
 其中 $G(s) = b(s)/a(s)$ 是原始被控对象。$N$ 和 $M$ 都是稳定的，因为它们共享同一个稳定分母 $d(s)$。
 
-**例子：** $G(s) = \frac{1}{s-1}$。分母多项式 $a(s) = s-1$ 有右半平面根。选 $d(s) = s+1$（稳定）。则：
+- **例子：** $G(s) = \frac{1}{s-1}$。分母多项式 $a(s) = s-1$ 有右半平面根。选 $d(s) = s+1$（稳定）。则：
 
 $$N(s) = \frac{1}{s+1}, \qquad M(s) = \frac{s-1}{s+1}$$
 
@@ -299,18 +299,18 @@ Youla参数化做了一件罕见的事：它**映射了整个设计空间**。�
 
 ## 10. 延伸阅读
 
-**从这里开始——最易读的：**
+- **从这里开始——最易读的：**
 - Doyle, J.C., Francis, B.A., Tannenbaum, A.R. (1992). *Feedback Control Theory.* Macmillan. 第5章。在线免费PDF。为本科生撰写；Youla及其与H∞联系的最清晰阐述。
 
-**应用参考：**
+- **应用参考：**
 - Skogestad, S. & Postlethwaite, I. (2005). *Multivariable Feedback Control*, 2nd ed. Wiley. 第4–5章。从IMC到Youla的递进，含设计示例和MATLAB代码。
 
-**完整数学论述：**
+- **完整数学论述：**
 - Zhou, K., Doyle, J.C., Glover, K. (1996). *Robust and Optimal Control.* Prentice-Hall. 第16–17章。一切——Youla、互质分解、H₂、H∞、模型降阶。
 
-**原始论文（历史兴趣）：**
+- **原始论文（历史兴趣）：**
 - Youla, D.C., Jabr, H.A., Bongiorno, J.J. (1976). "Modern Wiener-Hopf design of optimal controllers — Part II." *IEEE Trans. Automatic Control*, 21(3), 319–338.
 - Zames, G. (1981). "Feedback and optimal sensitivity." *IEEE Trans. Automatic Control*, 26(2), 301–320. —— 将Youla与H∞连接并开创鲁棒控制的论文。
 
-**IMC的起源：**
+- **IMC的起源：**
 - Garcia, C.E. & Morari, M. (1982). "Internal model control. 1. A unifying review and some new results." *Ind. Eng. Chem. Process Des. Dev.*, 21(2), 308–323.

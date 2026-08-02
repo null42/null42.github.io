@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第18章part 4 - 18 Current-Programmed Control"
+title: "第18章 电流编程控制（第4部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,895 +18,392 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第18章part 4 - 18 Current-Programmed Control
+# 第18章 电流编程控制（第4部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 787-806  
-> Chunk ID: `chapter-18-part-4`
+## 18.8 断续导通模式（续）
 
-## 主干提取
+![源页 p.787](../assets/page-snapshots/chapter-18/page-787.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+通过对图18.47和18.49的平均模型进行扰动和线性化，可导出 DCM CPM 变换器的小信号模型，结果如图18.50所示。小信号模型的参数列于表18.7和18.8。
 
-## 术语表
+图18.49 电流编程 DCM 变换器的平均模型：(a) 降压，(b) 升压
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+图18.50 所示的 CPM DCM 小信号模型与图15.19和15.21所示的 DCM 占空比控制变换器的小信号模型非常相似。唯一的差别在于表18.7和18.8中的参数表达式。传递函数可用类似方法确定。特别地，确定 CPM DCM 降压、升压和升降压变换器的低频小信号传递函数的一个简单近似方法是：令图18.50等效电路中的电感 $L$ 趋于零。对于足够低于变换器开关频率的频段，这一近似是合理的，因为在断续导通模式下 $L$ 取值较小，与 $L$ 相关的极点和任何右半平面零点出现在接近或高于开关频率处。对三种变换器，均得到图18.51所示的等效电路。
 
-## 中文翻译
+由图18.51可预测控制-输出传递函数 $G_{vc}(s)$ 为
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$G_{vc}(s) = \left. \frac{\hat{v}}{\hat{i}_c} \right|_{\hat{v}_g = 0} = G_{c0}\, \frac{1}{1 + \dfrac{s}{\omega_p}} \tag{18.196}$$
 
-## 英文原文
+其中
 
-```text
-18.8 Discontinuous Conduction Mode 785
-Small-signal models of DCM CPM converters can be derived by perturbation and lineariza-
-tion of the averaged models of Figs.18.47 and 18.49. The results are given in Fig.18.50. Param-
-eters of the small-signal models are listed in Tables18.7 and 18.8.
-Fig. 18.49 Averaged models of current-programmed DCM converters: (a) buck, (b) boost
-The CPM DCM small-signal models of Fig. 18.50 are quite similar to the respective small-
-signal models of DCM duty ratio controlled converters illustrated in Figs.15.19 and 15.21.T h e
-sole diﬀerences are the parameter expressions of Tables 18.7 and 18.8. Transfer functions can
-be determined in a similar manner. In particular, a simple approximate way to determine the
-low-frequency small-signal transfer functions of the CPM DCM buck, boost, and buck–boost
-converters is to simply let the inductance L tend to zero in the equivalent circuits of Fig. 18.50.
-This approximation is justiﬁed for frequencies su ﬃciently less than the converter switching
-frequency, because in the discontinuous conduction mode the value of L is small, and hence
-the pole and any RHP zero associated with L occur at frequencies near to or greater than the
-switching frequency. For all three converters, the equivalent circuit of Fig.18.51 is obtained.
-Figure 18.51 predicts that the control-to-output transfer function G
-vc(s)i s
-Gvc(s)= ˆv
-ˆic
-⏐⏐
-⏐⏐⏐
-⏐
-ˆv8=0
-= Gc0
-1+ s
-ωp
-(18.196)
-with
-Gc0= f2(R∥r2)
-ωp= 1
-(R∥r2)C
+$$G_{c0} = f_2 (R \parallel r_2)$$
 
-786 18 Current-Programmed Control
-Fig. 18.50 Small-signal models of DCM CPM converters, derived by perturbation and linearization of
-Figs. 18.47 and 18.49:( a) buck, (b) boost, (c) buck–boost
-The line-to-output transfer function is predicted to be
-Gvg(s)= ˆv
-ˆvg
-⏐⏐⏐
-⏐
-⏐⏐
-ˆic=0
-= Gg0
-1+ s
-ωp
-(18.197)
-with
-Gg0= g2(R∥r2)
-If desired, more accurate expressions which account for inductor dynamics can be derived by
-solution of the models of Fig. 18.50.
-18.9 Average Current-Mode Control
-Average current-mode (ACM) control is another popular current programming technique [177,
-178]. A block diagram of an average current-mode controlled converter is shown in Fig. 18.52.
-A sensed current signal Rf i is compared to a control signalvc= Rf ic, where Rf is the equivalent
+$$\omega_p = \frac{1}{(R \parallel r_2) C}$$
 
-18.9 Average Current-Mode Control 787
-Table 18.7 Current-programmed DCM small-signal equivalent circuit parameters: input port
-Converter g1 f1 r1
-Buck 1
-R
-⎦ M2
-1−M
-)
-⎦
-1−ma
-m1
-)
-⎦
-1+ ma
-m1
-) 2 It
-Ic
-−R
-⎦1−M
-M2
-)
-⎦
-1+ ma
-m1
-)
-⎦
-1−ma
-m1
-)
-Boost −1
-R
-⎦ M
-M−1
-)
-2 I
-Ic
-R
-M2
-⎛⎜⎜
-⎜
-⎜
-⎜⎜⎜
-⎜
-⎜
-⎜
-⎝
-2−M
-M−1+ 2ma/m1
-1+ ma
-m1
-⎞⎟⎟
-⎟
-⎟
-⎟⎟⎟
-⎟
-⎟
-⎟
-⎠
-Buck–boost 0 2 I
-1
-Ic
-−R
-M2
-⎦
-1+ ma
-m1
-)
-⎦
-1−ma
-m1
-)
-Table 18.8 Current-programmed DCM small-signal equivalent circuit parameters: output port
-Converter g2 f2 r2
-Buck 1
-R
-⎦ M
-1−M
-)
-⎦ma
-m1
-(2−M)−M
-)
-⎦
-1+ ma
-m1
-) 2 I
-Ic
-R
-(1−M)
-⎦
-1+ ma
-m1
-)
-⎦
-1−2M+ ma
-m1
-)
-Boost 1
-R
-⎦ M
-M−1
-)
-2 I2
-Ic
-R
-⎦M−1
-M
-)
-Buck–boost 2M
-R
-⎦ma
-m1
-)
-⎦
-1+ ma
-m1
-) 2 I2
-Ic
-R
-Fig. 18.51 Simpliﬁed small-signal model obtained by letting L become zero in Fig. 18.50a,b, or c
-current sensing resistance. The error signal is processed by a current loop compensator Gci(s),
-which generates the control input vm for a pulse-width modulator. In response, the PWM pro-
-duces a switch control signal c(t) with duty cycle d proportional to the PWM control input vm.
-One may note that the current control loop shown in Fig.18.52 follows the same basic approach
-discussed in Chap. 9, except that the control objective is to regulate a converter current instead
+![源页 p.788](../assets/page-snapshots/chapter-18/page-788.png)
 
-788 18 Current-Programmed Control
-+
-—
-+–
-i
-Current
-sensing
-Rf i
-vc = Rf ic
-Vg
-Gci(s)
-Current loop
-compensator
-PWM
-c(t)
-Converter power stage
-+
-v
-–
-v
-m
-Fig. 18.52 Average current-mode controlled converter
-of a converter voltage. Since current sensing and current loop compensator often incorporate
-low-pass ﬁltering functions, the current control loop e ﬀectively regulates the average current
-⟨i(t)⟩Ts . Ideally,
-⟨i(t)⟩Ts = 1
-Rf
-⟨vc(t)⟩Ts (18.198)
-Average current-mode control ﬁnds signiﬁcant application in PWM rectiﬁers and inverters; the
-rectiﬁer application is discussed further in Sect. 21.3.1.
-18.9.1 System Model and Transfer Functions
-To design the current loop compensator Gci(s), it is convenient to represent the system small-
-signal model in a block diagram form, as shown in Fig.18.53. The converter duty-cycle control
-transfer functions are based on the averaged converter models developed in Chap. 7.F o rt h e
-basic converters, these transfer functions are summarized in Tables 18.3, 18.4, 18.5. Applying
-the Feedback Theorem to the model in Fig. 18.53 yields an expression for the small-signal
-closed-loop response of the current ˆi,
-ˆi= 1
-Rf
-Ti
-1+ Ti
-ˆvc+ Gig
-1
-1+ Ti
-ˆvg (18.199)
-where the current loop gain Ti(s)i s
-Ti= Rf Gci
-1
-VM
-Gid (18.200)
-The closed-loop control-to-current transfer function is
-Gic(s)=
-ˆi
-ˆvc
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvg=0
-= 1
-Rf
-Ti
-1+ Ti
-= Gic∞
-Ti
-1+ Ti
-(18.201)
-where Gic∞= 1/Rf is the ideal closed-loop response of the average current control loop. One
-may note that the ideal closed-loop response of the average current control loop is identical
+图18.50 DCM CPM 变换器的小信号模型，通过对图18.47和18.49进行扰动和线性化得到：(a) 降压，(b) 升压，(c) 升降压
 
-18.9 Average Current-Mode Control 789
-Fig. 18.53 Block diagram that models the average current-mode control loop in Fig. 18.52
-to the response predicted by the simple model of the current-programmed control discussed
-in Sect. 18.1. Designing the current loop compensator Gci(s) amounts to shaping the current
-loop gain Ti to achieve a desired crossover frequency fci and stability margins, following the
-approaches discussed in Chap. 9.
-Compared to CPM control (peak current mode) discussed in Sects. 18.8–18.8, average
-current-mode control has several advantages. First, direct control over the average current is
-required in some applications such as battery chargers, drivers for light emitting diodes, low-
-harmonic rectiﬁers, and grid-tied inverters. Furthermore, low-pass ﬁltering associated with cur-
-rent sensing and G
-ci implies reduced sensitivity to noise and switching disturbances. Stable
-operation can be achieved at any duty ratio without the need for slope compensation by addi-
-tion of an artiﬁcial ramp. Limiting the current control signal vc provides a limitation on the
-average but not the peak current. As a result, just as in duty-cycle controlled converters, addi-
-tional circuitry is usually required to achieve cycle-by-cycle protection against excessive peak
-currents during transients or fault conditions in ACM controlled converters.
-In many applications, an outer voltage control loop is closed around an ACM controlled con-
-verter, as shown in Fig.18.54. In the outer voltage loop, a sensed output voltageHv is compared
-to a reference V
-re f . The error signal is processed by a voltage loop compensator Gcv to produce
-the control signal vc, which serves as the reference for the current control loop. A small-signal
-model of the system in Fig. 18.54 is shown in Fig. 18.55.
-Application of the Feedback Theorem to the inner current control loop yields the following
-expression for the small-signal output voltage as a function of perturbations in vc and vg,
-ˆv=
-⎦
-Gci
-1
-VM
-Gvd
-1
-1+ Ti
-)
-ˆvc+
-⎦
-Gvg(s)−Gig
-Gid
-Gvd
-Ti
-1+ Ti
-)
-ˆvg (18.202)
-With the inner current control loop closed, the control-to-output voltage transfer function
-Gvc(s)i sg i v e nb y
-Gvc(s)= ˆv
-ˆvc
-⏐⏐⏐⏐
-⏐
-ˆvg=0
-= Gci
-1
-VM
-Gvd
-1
-1+ Ti
-= 1
-Rf
-Gvd
-Gid
-Ti
-1+ Ti
-(18.203)
+线路-输出传递函数预测为
 
-790 18 Current-Programmed Control
-+
-—
-+–
-i
-Current
-sensing
-Rf i
-vc = Rf ic
-Vg
-Gci(s)
-Current loop
-compensator
-PWM
-c(t)
-Converter power stage
-+
-v
-–
-v
-m
-+–
-H
-VrefGcv(s)
-Voltage loop
-compensator
-Fig. 18.54 Output voltage control loop closed around an average current-mode controlled converter
-Fig. 18.55 Block diagram that models the average current-mode controlled converter with an outer volt-
-age control loop as shown in Fig. 18.54
-For the purposes of designing the voltage loop compensator, the system block diagram of
-Fig. 18.55 can now be simpliﬁed as shown in Fig. 18.56 The voltage loop compensator design
-amounts to shaping the voltage loop gain
-Tv= HGcvGvc (18.204)
-to achieve a desired crossover frequency and stability margins using the techniques discussed
-in Chap. 9.
-It should be noted that the design of the two-loop system of Fig.18.56 can be approached in
-a number of diﬀerent ways. In the approach described above the inner current loop is designed
+$$G_{vg}(s) = \left. \frac{\hat{v}}{\hat{v}_g} \right|_{\hat{i}_c = 0} = G_{g0}\, \frac{1}{1 + \dfrac{s}{\omega_p}} \tag{18.197}$$
 
-18.9 Average Current-Mode Control 791
-Fig. 18.56 Block diagram that models the outer voltage control loop around an average current-mode
-controlled converter
-ﬁrst, based on the current loop gain Ti. Next, with the inner current loop closed, the control to
-voltage transfer function Gvc(s) is found from Eq. (18.203), and the voltage loop compensator
-is designed based on the outer voltage loop gain Tv given by Eq. (18.204). This inner-loop ﬁrst,
-outer-loop second design approach is illustrated by an example in the next section.
-18.9.2 Design Example: ACM Controlled Boost Converter
-An average current-mode controlled boost converter is shown in Fig. 18.57. The current and
-voltage control loops follow the block diagram of Fig. 18.54: average inductor current is reg-
-ulated in the inner current control loop, and output voltage is regulated in the outer voltage
-control loop. The converter operates from Vg = 170 V , and deliversPout = 2 kW of power at
-V= 400 V . The switching frequency is fs = 100 kHz, the amplitude of the PWM saw-tooth
-ramp is VM = 4 V , and the equivalent current sensing resistance is Rf = 0.25Ω. The voltage
-reference is Vre f = 3 V , and the voltage sensing gain isH= Vre f/V= 0.0075. In this example,
-the objectives are to design a current loop compensator Gci to attain a crossover frequency of
-fci= 10 kHz, or one tenth of the switching frequency, and then to design a voltage loop compen-
-sator Gcv so that a crossover frequency of fcv = 1 kHz is obtained in the outer voltage control
-loop. Converter losses can be neglected.
-At the quiescent dc operating point,
-D= 1−Vg
-V = 0.575
-Ig= I= Pout
-Vg
-= 11.8A
-Vc= Rf I= 2.94 V
-A small-signal model of the ACM controlled boost converter is shown in Fig. 18.58.F r o m
-Eq. (18.200), the uncompensated current loop gain Tiu, with unity gain compensator Gci= 1, is
-Tiu= Rf
-VM
-Gid(s) (18.205)
+其中
 
-792 18 Current-Programmed Control
-+
-–
-+–
-+– Vref
-H
-CR
-Gcv(s)
-Gci(s) PWM
-c(t)
-Li
-vm
-vc = Rf ic
-Rf i
-Vg
-+
-v
-–
-Fig. 18.57 Average current-mode controlled boost converter
-Fig. 18.58 Small-signal model of the average current-mode controlled boost converter of Fig.18.57
-where the converter duty-cycle to inductor current transfer function Gid(s)i sg i v e nb y
-Gid(s)=
-ˆi
-ˆd
-⏐⏐⏐
-⏐
-⏐⏐
-ˆvg=0
-= Gid0
-1+ s
-ωzi
-1+ 1
-Q
-s
-ωo
-+
-⎦s
-ωo
-)2 (18.206)
+$$G_{g0} = g_2 (R \parallel r_2)$$
 
-18.9 Average Current-Mode Control 793
-Fig. 18.59 Uncompensated loop gain for the current-mode controlled boost converter of Fig.18.57
-Gid0 = 2V
-D′2R= 55.4A →34.9 dbA
-fzi= 1
-πRC= 121 Hz
-fo = D′
-2π
-√
-LC
-= 745 Hz
-Q= D′R
-√
-C
-L= 12.4→21.8d B
-The uncompensated current loop gain is sketched in Fig. 18.59. The low-frequency gain equals
-Tiu0= Rf
-VM
-Gid0= 3.46→10.8 dB (18.207)
-Around the target crossover frequency fci = 10 kHz, the magnitude of Tiu rolls oﬀat
-−20 dB/dec,
-||Tiu||→Tiu0
-ω2
-o
-ωziω= Rf
-Lω
-V
-VM
-(18.208)
-while the corresponding phase response asymptote equals −90◦. A simple gain (proportional
-(P) compensator) would therefore be suﬃcient to achieve the desired crossover frequency with
-adequate phase margin. As discussed in Sect. 9.5.2, a lag (PI) compensator o ﬀers a way to
-increase the low-frequency loop gain and to achieve perfect dc regulation of the average inductor
-current. Furthermore, a pole is typically added in the current loop compensator transfer function
-in order to attenuate high-frequency switching ripple, and low-pass ﬁlter the sensed current
-signal. A typical ACM current loop compensator transfer function is therefore given by
-G
-ci(s)= Gcm
-1+ ωz
-s
-1+ s
-ωp
-(18.209)
-and the compensator response is sketched in Fig. 18.60.
+如果需要，可通过求解图18.50的模型导出考虑电感动态的更精确表达式。
 
-794 18 Current-Programmed Control
-Fig. 18.60 Magnitude and phase responses of the current loop compensator
-The compensator zero is placed below the target crossover frequency ( fzi < fci), while the
-pole is placed above the crossover frequency (fp> fci). Using Eq. (18.208), gain Gcm is selected
-so that the loop gain magnitude equals 1 (0 dB) at the target crossover frequency fci,
-Gcm
-Rf
-Lωci
-V
-VM
-= 1 (18.210)
-Hence,
-Gcm= Lωci
-Rf
-VM
-V = 0.63 (18.211)
-The phase margin can be found by adding contributions of the pole at zero of the PI compensator
-(−90◦), the quadratic pole and zero inGid (approximately−90◦), as well as the compensator zero
-at fz and the pole at fp,
-ϕm= 180◦+∠Ti( jωci)= 180◦−90◦−90◦+ tan−1
-⎦fci
-fz
-)
-−tan−1
-⎦fci
-fp
-)
-(18.212)
-Al o w e rfz contributes to a higher phase margin at the expense of reduced loop gain magnitude
-at frequencies below fci. A higher fp contributes to a higher phase margin at the expense of
-reduced attenuation of the switching ripple by the compensator. Choosing, somewhat arbitrarily,
-fz= fci/2.5= 4 kHz and fp= 2.5 fci= 25 kHz, results in the phase margin of
-ϕm= 68◦−22◦= 46◦ (18.213)
-Magnitude and phase responses of the compensated current loop gain are shown in Fig. 18.61,
-conﬁrming that the compensator in Eq. (18.209) with Gcm= 0.63, fz= 4 kHz, and fp= 25 kHz
-meets the design objectives.
-The closed-loop control-to-current transfer function Gic found using Eq. (18.201) has mag-
-nitude and phase responses shown in Fig. 18.62. At low frequencies, the closed-loop response
-follows the ideal gain Gic∞= 1/Rf .G i v e nϕm = 46◦, the closed-loop transfer function exhibits
-a peaked response at frequencies near the crossover frequency fci, which is consistent with the
-discussion in Sect. 9.4.3.
+## 18.9 平均电流模式控制
 
-18.9 Average Current-Mode Control 795
-Fig. 18.61 Compensated loop gain for the average current-mode controlled boost converter of Fig.18.57
-10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
--40
--20
-0
-20 Magnitude [dB]
-10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
--180
--135
--90
--45
-0 Phase [deg]
-1/Rf
-||Gic||
-∠Gic
-Fig. 18.62 Closed-loop control-to-current response in the average current-mode controlled boost con-
-verter of Fig. 18.57
+平均电流模式（ACM）控制是另一种常用的电流编程技术[177, 178]。平均电流模式控制变换器的方框图如图18.52所示。检测到的电流信号 $R_f i$ 与控制信号 $v_c = R_f i_c$ 比较，其中 $R_f$ 是等效
 
-796 18 Current-Programmed Control
-Fig. 18.63 Closed-loop control-to-output voltage response in the average current-mode controlled boost
-converter of Fig.18.57
-Fig. 18.64 Loop gain in the voltage control loop around the average current-mode controlled boost con-
-verter of Fig. 18.57
-The next step is to design a voltage loop compensator Gcv to attain a crossover of fcv in the
-outer voltage control loop. The design is based on the block diagram of Fig.18.54, where Gvc is
-the closed-loop control-to-output voltage transfer function found from Eq. (18.203) and shown
-in Fig. 18.63. At frequencies well below the current loop crossoverfci, Gvc can be approximated
+![源页 p.789](../assets/page-snapshots/chapter-18/page-789.png)
 
-18.9 Average Current-Mode Control 797
-as
-Gvc≈1
-Rf
-Gvd
-Gid
-= D′R
-2Rf
-1− s
-ωz,RHP
-1+ s
-ωzi
-(18.214)
-fz,RHP = D′2R
-2πL = 9.2k H z
-fzi= 1
-πRC= 121 Hz
-The magnitude and phase responses of the completeGvc from Eq. (18.203) and the approximate
-Gvc from Eq. (18.214)a r es h o w ni nF i g .18.63. In cases when fcv << fci, i.e., when the voltage
-loop is designed conservatively, the design of the voltage loop compensator Gcv can be based
-on the approximate Gvc from Eq. (18.214). Since Gvc has a dominant pole at fzi and behaves
-as a single-pole transfer function around the target voltage loop crossover of fcv = 1k H z ,i ti s
-suﬃcient to consider a simple PI compensator
-Gcv(s)= Gvm
-⎦
-1+ ωzv
-s
-)
-(18.215)
-where Gvm can be found from Eq. (18.204) to attain the desired crossover frequency fcv,
-Gvm= 2πfcvCR f
-D′H = 16.4 (18.216)
-and fzv can be selected to achieve a tradeoﬀbetween phase margin and the magnitude of Tv at
-frequencies below fcv. Selecting
-fzv= fcv
-3 = 333 Hz (18.217)
-results in the voltage loop phase margin of
-ϕmv≈180◦−90◦−90◦+ tan−1 fcv
-fzv
-= 72◦ (18.218)
-The resulting voltage loop gain is shown in Fig.18.64.
-The two-step design process illustrated by the example above is relatively simple: the inner
-current loop is designed ﬁrst, followed by the voltage loop design. In both loops around ACM
-controlled converters, simple PI compensators are typically suﬃcient to achieve desired regula-
-tion bandwidths with adequate stability margins. In the ACM controlled boost design example,
-we followed a conservative approach where the outer voltage loop crossover frequency fcv is
-set to be well below the current loop crossover frequency fci. This approach, while commonly
-applied in practice, is not necessarily the only available option. Depending on application and
-regulation bandwidth requirements, other approaches can be pursued in two-loop systems.
+电流检测电阻。误差信号经电流环路补偿器 $G_{ci}(s)$ 处理，生成脉宽调制器的控制输入 $v_m$。PWM 随之产生开关控制信号 $c(t)$，其占空比 $d$ 与 PWM 控制输入 $v_m$ 成正比。可以注意到，图18.52所示的电流控制环路遵循第9章讨论的相同基本方法，只是控制目标是调节变换器电流而非
 
-798 18 Current-Programmed Control
-18.10 Summary of Key Points
-1. In current-programmed control, the peak switch current is(t) follows the control input ic(t).
-This widely used control scheme has the advantage of a simpler control-to-output transfer
-function. The line-to-output transfer functions of current-programmed buck converters are
-also reduced.
-2. The basic current-programmed controller is unstable when D> 0.5, regardless of the con-
-verter topology. The controller can be stabilized by addition of an artiﬁcial ramp having
-slope ma. When ma> 0.5m2, then the controller is stable for all duty cycles.
-3. The behavior of current-programmed converters can be modeled in a simple and intuitive
-manner by the ﬁrst-order approximation⟨iL(t)⟩TS ≈ic(t). The averaged terminal waveforms
-of the switch network can then be modeled simply by a current source of value ic, in con-
-junction with a power sink or power source element. Perturbation and linearization of these
-elements leads to the small-signal model. Alternatively, the small-signal converter equa-
-tions derived in Chap. 7 can be adapted to cover the current-programmed mode, using the
-simple approximation iL(t)≈ic(t).
-4. The simple model predicts that one pole is eliminated from the converter line-to-output
-and control-to-output transfer functions. Current programming does not alter the transfer
-function zeroes. The dc gains become load-dependent.
-5. The more accurate model of Sect. 18.3 correctly accounts for the diﬀerence between the av-
-erage inductor current⟨i
-L(t)⟩Ts and the control input ic(t). This model predicts the nonzero
-line-to-output transfer function Gvg(s) of the buck converter. The current-programmed con-
-troller behavior is modeled by a block diagram, which is appended to the small-signal
-converter models derived in Chap. 7. Analysis of the resulting multiloop feedback system
-Sect. 18.4 then leads to the relevant transfer functions derived.
-6. The more accurate model predicts that the inductor pole occurs at the crossover frequency
-fc of the eﬀective current feedback loop gainTi(s). The frequency fc typically occurs in the
-vicinity of the converter switching frequency fs. The more accurate model also predicts that
-the line-to-output transfer function Gvg(s) of the buck converter is nulled whenma= 0.5m2.
-7. The more accurate averaged CPM model of Sect. 18.3 can be implemented as a SPICE
-subcircuit, as shown in Sect. 18.5. The averaged CPM model can then be combined with
-averaged switch models of Chap.14 to construct averaged circuit models suitable for SPICE
-simulations.
-8. A converter system incorporating current-programmed control often includes an outer volt-
-age feedback loop, the purpose of which is to regulate the converter output voltage. Since
-current programming results in simpler control-to-output dynamics, wide-bandwidth out-
-put voltage control can usually be obtained without the use of compensator lead networks,
-as discussed in Sect. 18.6.
-9. Current-programmed converters operating in the discontinuous conduction mode are mod-
-eled in Sect. 18.8. The averaged transistor waveforms can be modeled by a power sink,
-while the averaged diode waveforms are modeled by a power source. The power is con-
-trolled by i
-c(t). Perturbation and linearization of these averaged models, as usual, leads to
-small-signal equivalent circuits.
-10. Neither the simple model of Sect. 18.1, which neglects inductor dynamics, nor the more
-accurate model of Sect. 18.3, which implies a single-pole response at high frequencies,
-predicts current-programmed instability or the need for the artiﬁcial ramp discussed in
+表18.7 电流编程 DCM 小信号等效电路参数：输入端口
 
-18.10 Summary of Key Points 799
-Sect. 18.2. Section 18.7 explains high-frequency dynamics of current-programmed con-
-verters using sampled-data modeling techniques. The sampled-data model shows how the
-control-to-current frequency response exhibits peaking around one half of the switching
-frequency if the artiﬁcial ramps slope ma is small, ultimately leading to instability for duty
-cycles greater than 0.5 if no artiﬁcial ramp is employed. Addition of artiﬁcial ramp leads
-to stable operation, reduced sensitivity to noise, and frequency responses that are well pre-
-dicted by the more accurate averaged model of Sect. 18.3.
-11. Average current-mode (ACM) control is another popular control technique where an aver-
-age current is sensed and controlled using a feedback loop around a duty-cycle controlled
-converter. ACM controllers have improved noise immunity, and exhibit stable operation
-over wide range of duty cycles as well as relatively simple dynamics. In addition to con-
-struction of inner current control loops, ACM controllers are often used in applications that
-require direct control over the converter average input or output current, such as battery
-chargers, drivers for light emitting diodes, as well as grid-tied rectiﬁers and inverters.
-Problems
-18.1 A nonideal buck converter operates in the continuous conduction mode, with the values
-Vg = 10 V, f2 = 100 kHz, L= 4 μH, C= 75 μF, and R= 0.25Ω. The desired full-load
-output is 5 V at 20 A. The power stage contains the following loss elements: MOSFET
-on-resistance R
-on = 0.1Ω, Schottky diode forward voltage drop VD = 0.5 V, inductor
-winding resistance RL= 0.03Ω.
-(a) Steady-state analysis: determine the converter steady-state duty cycleD, the inductor
-current ripple slopes m1 and m2, and the dimensionless parameter K= 2L/RTs.
-(b) Determine the small-signal equations for this converter, for duty-cycle control.
-A current-programmed controller is now implemented for this converter. An artiﬁcial
-ramp is used, having a ﬁxed slope Ma = 0.5M2, where M2 is the steady-state slope
-m2 obtained with an output of 5 V at 20 A.
-(c) Over what range of D is the current-programmed controller stable? Is it stable at
-rated output?
-Note that the nonidealities aﬀect the stability boundary.
-(d) Determine the control-to-output transfer function Gvc(s), using the simple approxi-
-mation⟨iL(t)⟩Ts ≈ic(t). Give analytical expressions for the corner frequency and dc
-gain. Sketch the Bode plot of Gvc(s).
-18.2 Use the averaged switch modeling approach to model the CCM boost converter with
-current-programmed control:
-(a) Deﬁne the switch network terminal quantities as in Fig.14.13a. With the assumption
-that⟨iL(t)⟩Ts ≈ic(t), determine expressions for the average values of the switch
-network terminal waveforms, and hence derive the equivalent circuit of Fig.18.9a.
-(b) Perturb and linearize your model of part (a), to obtain the equivalent circuit of
-Fig. 18.13.
-(c) Solve your model of part (b), to derive expressions for the control-to-output transfer
-function Gvc(s) and the line-to-output transfer function Gvg(s). Express your results
-in standard normalized form, and give analytical expressions for the corner frequen-
-cies and dc gains.
+| 变换器 | $g_1$ | $f_1$ | $r_1$ |
+|---|---|---|---|
+| 降压 | $\dfrac{1}{R}\left( \dfrac{M^2}{1-M} \right)\left( 1 - \dfrac{m_a}{m_1} \right)\left( 1 + \dfrac{m_a}{m_1} \right)^2$ | $\dfrac{I_t}{I_c}$ | $-R\left( 1 - \dfrac{M}{M^2} \right)\left( 1 + \dfrac{m_a}{m_1} \right)\left( 1 - \dfrac{m_a}{m_1} \right)$ |
+| 升压 | $-\dfrac{1}{R}\left( \dfrac{M}{M-1} \right)^2$ | $\dfrac{I}{I_c}$ | $R M^2 \dfrac{2 - M}{M - 1 + 2 m_a/m_1}\left( 1 + \dfrac{m_a}{m_1} \right)$ |
+| 升降压 | $0$ | $\dfrac{2 I_1}{I_c}$ | $-R\left( 1 + \dfrac{m_a}{m_1} \right)\left( 1 - \dfrac{m_a}{m_1} \right)$ |
 
-800 18 Current-Programmed Control
-18.3 Use the averaged switch modeling approach to model the CCM ´Cuk converter with
-current-programmed control. A ´Cuk converter is diagrammed in Fig.2.20.
-(a) It is desired to model the switch network with an ic current source and a dependent
-power source or sink, using the approach of Sect. 18.1.2. How should the switch
-network terminal voltages and currents be deﬁned?
-(b) Sketch the switch network terminal voltage and current waveforms. With the assump-
-tion that⟨i1(t)⟩Ts −⟨i2(t)⟩Ts ≈ic(t) (where i1 and i2 are the inductor currents deﬁned
-in Fig. 2.20), determine expressions for the average values of the switch network ter-
-minal waveforms, and hence derive an equivalent circuit similar to the equivalent
-circuits of Fig. 18.9.
-(c) Perturb and linearize your model of part (b), to obtain a small-signal equivalent cir-
-cuit similar to the model of Fig. 18.10. It is not necessary to solve your model.
-18.4 The full-bridge converter of Fig. 6.20a operates with V
-g = 320 V, and supplies 1000 W
-to a 42 V resistive load. Losses can be neglected, the duty cycle is 0.7, and the switch-
-ing period Ts deﬁned in Fig. 6.21 is 10 μsec. L= 50 μH and C = 100 μF. A current-
-programmed controller is employed, whose waveforms are referred to the secondary
-side of the transformer. In the following calculations, you may neglect the transformer
-magnetizing current.
-(a) What is the minimum artiﬁcial ramp slope m
-a that will stabilize the controller at the
-given operating point? Express your result in terms of m2.
-(b) An artiﬁcial ramp having the slope ma = m2 is employed. Sketch the Bode plot of
-the current loop gain Ti(s), and label numerical values of the corner frequencies and
-dc gains. It is not necessary to re-derive the analytical expression for Ti. Determine
-the crossover frequency fc.
-(c) For ma = m2, sketch the Bode plots of the control-to-output transfer function Gvc(s)
-and line-to-output transfer function Gvg(s), and label numerical values of the corner
-frequencies and dc gains. It is not necessary to re-derive analytical expressions for
-these transfer functions.
-18.5 In a CCM current-programmed buck converter, it is desired to minimize the line-to-
-output transfer function Gvg(s) via the choice ma = 0.5m2. However, because of com-
-ponent tolerances, the value of inductance L can vary by±10% from its nominal value
-of 100 μH. Hence, ma is ﬁxed in value while m2 varies, and ma= 0.5m2 is obtained only
-at the nominal value ofL. The switching frequency is 100 kHz, the output voltage is 15 V ,
-the load current varies over the range 2 to 4 A, and the input voltage varies over the range
-22 to 32 V . You may neglect losses. Determine the worst-case (maximum) value of the
-line-to-output dc gain G
-vg(0).
-18.6 The nonideal ﬂyback converter of Fig. 7.19 employs current-programmed control, with
-artiﬁcial ramp having slope ma. MOSFET Q1 exhibits on-resistance Ron. All current-
-programmed controller waveforms are referred to the transformer primary side.
-(a) Derive a block diagram which models the current-programmed controller, of form
-similar to Fig.18.24. Give analytical expressions for the gains in your block diagram.
-(b) Combine your result of part (a) with the converter small-signal model. Derive a new
-expression for the control-to-output transfer function Gvc(s).
-18.7 A buck converter operates with current-programmed control. The element values are
+表18.8 电流编程 DCM 小信号等效电路参数：输出端口
 
-18.10 Summary of Key Points 801
-Vg= 120 V D= 0.6
-R= 10Ω fs= 100 kHz
-L= 550 μH C= 100 μF
-An artiﬁcial ramp is employed, having slope 0.15 A/μsec.
-(a) Construct the magnitude and phase asymptotes of the control-to-output transfer
-function Gvd(s) for duty-cycle control. On the same plot, construct the magnitude
-and phase asymptotes of the control-to-output transfer function Gvc(s) for current-
-programmed control. Compare.
-(b) Construct the magnitude asymptotes of the line-to-output transfer functionGvg(s)f o r
-duty-cycle control. On the same plot, construct the magnitude asymptotes of the line-
-to-output transfer function Gvg−cpm (s) for current-programmed control. Compare.
-18.8 A buck–boost converter operates in the discontinuous conduction mode. Its current-
-programmed controller has no compensating artiﬁcial ramp: ma= 0.
-(a) Derive an expression for the control-to-output transfer function Gvc(s), using the
-approximation L≈O. Give analytical expressions for the corner frequency and dc
-gain.
-(b) Repeat part (a), with the inductor included. Show that, provided the inductor is suﬃ-
-ciently small, then the inductor merely adds a high-frequency pole and zero toGvc(s),
-and the low-frequency pole derived in part (a) is essentially unchanged.
-(c) At the CCM-DCM boundary, what is the minimum value of the RHP zero frequency?
-18.9 A current-programmed boost converter interfaces a 3 V battery to a small portable 5 V
-load. The converter operates in the discontinuous conduction mode, with constant tran-
-sistor on-time t
-on and variable oﬀ-time; the switching frequency can therefore vary and
-is used as the control variable. There is no artiﬁcial ramp, and the peak transistor current
-ic is equal to a ﬁxed value Ic; in practice, Ic is chosen to minimize the total loss.
-(a) Sketch the transistor and diode voltage and current waveforms. Determine expres-
-sions for the waveform average values, and hence derive a large-signal averaged
-equivalent circuit for this converter.
-(b) Perturb and linearize your model of part (a), to obtain a small-signal equivalent cir-
-cuit. Note that the switching frequency f
-s should be perturbed.
-(c) Solve your model of part (b), to derive an expression for the low-frequency control-
-to-output transfer function Gvf (s)= ˆv(s)/ ˆfs(s). Express your results in standard nor-
-malized form, and give analytical expressions for the corner frequencies and dc gains.
-You may assume that L is small.
-18.10 A current-programmed boost converter is employed in a low-harmonic rectiﬁer system,
-in which the input voltage is a rectiﬁed sinusoid: vg(t)= VM| sin(ωt)|. The dc output
-voltage is v(t) = V > VM. The capacitance C is large, such that the output voltage
-contains negligible ac variations. It is desired to control the converter such that the input
-current i
-g(t) is proportional to vg(t): ig(t)= vg(t)/Re, where Re is a constant, called the
-“emulated resistance.” The averaged boost converter model of Fig. 18.9a suggests that
-this can be accomplished by simply letting ic(t) be proportional to vg(t), according to
-ic(t)= vg(t)/Re. You may make the simplifying assumption that the converter always
-operates in the continuous conduction mode.
-(a) Solve the model of Fig. 18.9a, subject to the assumptions listed above, to determine
-the power⟨p(t)⟩Ts . Find the average value of⟨p(t)⟩Ts , averaged over one cycle of the
-ac input vg(t).
+| 变换器 | $g_2$ | $f_2$ | $r_2$ |
+|---|---|---|---|
+| 降压 | $\dfrac{1}{R}\left( \dfrac{M}{1-M} \right)\left( \dfrac{m_a}{m_1}\,(2-M) - M \right)\left( 1 + \dfrac{m_a}{m_1} \right)^2$ | $\dfrac{I}{I_c}$ | $R(1-M)\left( 1 + \dfrac{m_a}{m_1} \right)\left( 1 - 2M + \dfrac{m_a}{m_1} \right)$ |
+| 升压 | $\dfrac{1}{R}\left( \dfrac{M}{M-1} \right)^2$ | $\dfrac{2 I_2}{I_c}$ | $R\left( \dfrac{M-1}{M} \right)$ |
+| 升降压 | $\dfrac{2 M}{R}\left( \dfrac{m_a}{m_1} \right)\left( 1 + \dfrac{m_a}{m_1} \right)^2$ | $\dfrac{2 I_2}{I_c}$ | $R$ |
 
-802 18 Current-Programmed Control
-(b) An artiﬁcial ramp is necessary to stabilize the current-programmed controller at
-some operating points. What is the minimum value of ma that ensures stability at
-all operating points along the input rectiﬁed sinusoid? Express your result as a func-
-tion of V and L. Show your work.
-(c) The artiﬁcial ramp and inductor current ripple cause the average input current to
-diﬀer from ic(t). Derive an algebraic expression for ⟨ig(t)⟩Ts , as a function of ic(t)
-and other quantities such as ma, vg(t), V, L, and Ts. For this part, you may assume
-that the inductor dynamics are negligible. Show your work.
-(d) Substitute vg(t)= VM| sin(ωt)| and ic(t)= vg(t)/Re, into your result of part (c), to
-determine an expression for ig(t). How does ig(t)d iﬀer from a rectiﬁed sinusoid?
-18.11 Figure 18.65 shows a buck converter with a charge controller [ 179]. Operation of the
-charge controller is similar to operation of the current-programmed controller. At the
-beginning of each switching period, at time t= 0, a short clock pulse sets the SR latch.
-The logic high signal at the Q output of the latch turns the power MOSFET on. At the
-same time, the logic low signal at theQ output of the latch turns the switchS s oﬀ. Current
-Ksis proportional to the power MOSFET current charges the capacitor Cs.A t t= dTs,
-the capacitor voltage vq(t) reaches the control input voltage Rf ic, the comparator output
-goes high and resets the latch. The logic low signal at the Q output of the latch turns the
-power MOSFET oﬀ. At the same time, the logic high signal at the Q output of the latch
-turns the switch S s on, which quickly discharges the capacitor Cs to zero.
-Fig. 18.65 Buck converter with charge controller, Problem 18.11
+图18.51 在图18.50(a)、(b)或(c)中令 $L$ 为零所得的简化小信号模型
 
-18.10 Summary of Key Points 803
-In this problem, the converter and controller parameters are: Vg = 24 V, fs = 1/Ts =
-100 kHz, L= 60μH, C= 100 μF, R= 3Ω, KsTs/Cs = Rf = 1Ω. You can assume that
-the converter operates in continuous conduction mode.
-(a) Find expressions for the average values of the switch network terminal waveforms,
-and hence derive a large-signal averaged switch model of the buck switch network
-with charge control. The control input to the model is the control current ic.T h e
-averaged switch model should consist of a current source and a power source. The
-switch duty cycle d should not appear in the model.
-(b) Using the averaged switch model derived in part (a), ﬁnd an expression for the quies-
-cent output voltage V as a function of Vg, Ic, and R.G i v e nIc = 2 A, ﬁnd numerical
-values for V, I1, I2, and the duty cycle D. For this quiescent operating point, sketch
-the waveforms i1(t), i2(t), and vq(t) during one switching period.
-(c) Perturb and linearize the averaged switch model from part (a) to derive a small-
-signal averaged switch model for the buck switch network with charge control. Find
-analytical expressions for all parameter values in terms of the converter parameters
-and the quiescent operating conditions. Sketch the complete small-signal model of
-the buck converter with the charge controller.
-(d) Solve the model obtained in part (c) to ﬁnd the control-to-output transfer function
-G
-vc(s)= ˆv/ˆic. At the quiescent operating point found in part (b), construct the Bode
-plot for the magnitude ofGvc and label all salient features of the magnitude response.
-(e) Comment on advantages charge control may have compared to duty-cycle control or
-current-programmed control.
-18.12 Figure 18.66 shows a buck converter with a one-cycle controller [ 180]. Operation of
-the one-cycle controller is similar to operation of the current-programmed controller. At
-the beginning of each switching period, at time t= 0, a short clock pulse sets the SR
-latch. The logic high signal at the Q output of the latch turns the power MOSFET on. At
-the same time, the logic low signal at the Q output of the latch turns the switch S s oﬀ.
-Current Gsv2(t) proportional to the voltagev2(t) charges the capacitorCs.A t t= dTs,t h e
-capacitor voltage vs(t) reaches the control input voltage vc, the comparator output goes
-high and resets the latch. The logic low signal at theQ output of the latch turns the power
-MOSFET oﬀ. At the same time, the logic high signal at the Q output of the latch turns
-the switch S s on, which quickly discharges the capacitor Cs to zero.
-In this problem, the converter and controller parameters are: Vg = 24 V, fs = 1/Ts =
-100 kHz, L= 60 μH, C= 100 μF, R= 3Ω, GsTs/Cs = 1. You can assume that the
-converter operates in the continuous conduction mode.
-(a) Find expressions for the average values of the switch network terminal waveforms,
-and hence derive a large-signal averaged switch model of the buck switch network
-with one-cycle control. The control input to the model is the control voltage vc.T h e
-switch duty cycle d should not appear in the model.
-(b) Using the averaged switch model derived in part (a), ﬁnd an expression for the qui-
-escent output voltage V as a function of Vc.G i v e nVc = 10 V, ﬁnd the numerical
-values for V, I1, I2, and the duty cycle D. For this quiescent operating point, sketch
-the waveforms i1(t), i2(t), and vs(t) during one switching period.
+![源页 p.790](../assets/page-snapshots/chapter-18/page-790.png)
 
-804 18 Current-Programmed Control
-Fig. 18.66 Buck converter with one-cycle controller, Problem 18.12
-(c) Perturb and linearize the averaged switch model from part (a) to derive a small-signal
-averaged switch model for the buck switch network with one-cycle control. Find
-analytical expressions for all parameter values in terms of the converter parameters
-and the quiescent operating conditions. Sketch the complete small-signal model of
-the buck converter with the one-cycle controller.
-(d) Solve the model obtained in part (c) to ﬁnd the control-to-output transfer function
-G
-vc(s)= ˆv/ˆvc, and the line-to-output transfer function Gvg(s)= ˆv/ˆvg. For the qui-
-escent operating point found in part (b), sketch the magnitude Bode plots of these
-transfer functions, and label all salient features.
-(e) Comment on advantages one-cycle control may have compared to duty-cycle con-
-trol.
-```
+变换器电压。由于电流检测和电流环路补偿器通常包含低通滤波功能，电流控制环路实际上调节的是平均电流 $\langle i(t) \rangle_{T_s}$。理想情况下，
+
+$$\langle i(t) \rangle_{T_s} = \frac{1}{R_f}\, \langle v_c(t) \rangle_{T_s} \tag{18.198}$$
+
+平均电流模式控制在 PWM 整流器和逆变器中有重要应用；整流器应用在21.3.1节进一步讨论。
+
+图18.52 平均电流模式控制变换器
+
+### 18.9.1 系统模型与传递函数
+
+为设计电流环路补偿器 $G_{ci}(s)$，方便起见将系统小信号模型表示为方框图形式，如图18.53所示。变换器的占空比控制传递函数基于第7章导出的平均变换器模型。对基本变换器，这些传递函数总结于表18.3、18.4、18.5。对图18.53中的模型应用反馈定理，得到电流 $\hat{i}$ 的小信号闭环响应表达式，
+
+$$\hat{i} = \frac{1}{R_f}\, \frac{T_i}{1 + T_i}\, \hat{v}_c + G_{ig}\, \frac{1}{1 + T_i}\, \hat{v}_g \tag{18.199}$$
+
+其中电流环路增益 $T_i(s)$ 为
+
+$$T_i = R_f\, G_{ci}\, \frac{1}{V_M}\, G_{id} \tag{18.200}$$
+
+闭环控制-电流传递函数为
+
+$$G_{ic}(s) = \left. \frac{\hat{i}}{\hat{v}_c} \right|_{\hat{v}_g = 0} = \frac{1}{R_f}\, \frac{T_i}{1 + T_i} = G_{ic\infty}\, \frac{T_i}{1 + T_i} \tag{18.201}$$
+
+其中 $G_{ic\infty} = 1/R_f$ 是平均电流控制环路的理想闭环响应。可以注意到，平均电流控制环路的理想闭环响应与18.1节讨论的电流编程控制简单模型所预测的响应相同。设计电流环路补偿器 $G_{ci}(s)$ 即是整定电流环路增益 $T_i$ 以获得所需的穿超频率 $f_{ci}$ 和稳定裕度，遵循第9章讨论的方法。
+
+![源页 p.791](../assets/page-snapshots/chapter-18/page-791.png)
+
+图18.53 对图18.52中平均电流模式控制环路建模的方框图
+
+与18.1–18.8节讨论的 CPM 控制（峰值电流模式）相比，平均电流模式控制具有若干优点。首先，电池充电器、发光二极管驱动器、低谐波整流器和电网同步逆变器等应用要求直接控制平均电流。此外，与电流检测和 $G_{ci}$ 相关的低通滤波意味着对噪声和开关扰动灵敏度降低。无需斜率补偿（通过加入人工斜坡），即可在任意占空比下实现稳定运行。限制电流控制信号 $v_c$ 仅能限制平均电流而非峰值电流。因此，与占空比控制变换器一样，ACM 控制变换器通常需要附加电路来实现暂态或故障期间对峰值电流过大的逐周期保护。
+
+在许多应用中，在 ACM 控制变换器外闭合一个外电压控制环路，如图18.54所示。在外电压环路中，检测到的输出电压 $H v$ 与参考量 $V_{ref}$ 比较。误差信号经电压环路补偿器 $G_{cv}$ 处理，产生控制信号 $v_c$，作为电流控制环路的参考。图18.54系统的小信号模型如图18.55所示。
+
+对内部电流控制环路应用反馈定理，得到小信号输出电压作为 $v_c$ 和 $v_g$ 扰动函数的表达式，
+
+$$\hat{v} = \left( G_{ci}\, \frac{1}{V_M}\, \frac{G_{vd}}{1 + T_i} \right) \hat{v}_c + \left( G_{vg}(s) - \frac{G_{ig}}{G_{id}}\, G_{vd}\, \frac{T_i}{1 + T_i} \right) \hat{v}_g \tag{18.202}$$
+
+内部电流控制环路闭合后，控制-输出电压传递函数 $G_{vc}(s)$ 由下式给出
+
+$$G_{vc}(s) = \left. \frac{\hat{v}}{\hat{v}_c} \right|_{\hat{v}_g = 0} = G_{ci}\, \frac{1}{V_M}\, \frac{G_{vd}}{1 + T_i} = \frac{1}{R_f}\, \frac{G_{vd}}{G_{id}}\, \frac{T_i}{1 + T_i} \tag{18.203}$$
+
+![源页 p.792](../assets/page-snapshots/chapter-18/page-792.png)
+
+图18.54 在平均电流模式控制变换器外闭合的输出电压控制环路
+
+图18.55 对图18.54所示带外电压控制环路的平均电流模式控制变换器建模的方框图
+
+为设计电压环路补偿器，图18.55的系统方框图可简化为图18.56。电压环路补偿器设计就是整定电压环路增益
+
+$$T_v = H\, G_{cv}\, G_{vc} \tag{18.204}$$
+
+以利用第9章讨论的技术获得所需的穿超频率和稳定裕度。
+
+应当指出，图18.56的双环路系统设计可用多种不同方法。在上述方法中，先基于电流环路增益 $T_i$ 设计内部电流环路；然后在内部电流环路闭合后，由式(18.203)求得控制-电压传递函数 $G_{vc}(s)$，再基于式(18.204)给出的外电压环路增益 $T_v$ 设计电压环路补偿器。下一节的示例说明了这种"先内环、后外环"的设计方法。
+
+![源页 p.793](../assets/page-snapshots/chapter-18/page-793.png)
+
+图18.56 对平均电流模式控制变换器外电压控制环路建模的方框图
+
+### 18.9.2 设计示例：ACM 控制升压变换器
+
+一个平均电流模式控制的升压变换器如图18.57所示。电流和电压控制环路遵循图18.54的方框图：内部电流控制环路调节平均电感电流，外电压控制环路调节输出电压。变换器由 $V_g = 170\,\text{V}$ 供电，在 $V = 400\,\text{V}$ 下输出 $P_{out} = 2\,\text{kW}$。开关频率为 $f_s = 100\,\text{kHz}$，PWM 锯齿波幅度 $V_M = 4\,\text{V}$，等效电流检测电阻 $R_f = 0.25\,\Omega$。电压参考为 $V_{ref} = 3\,\text{V}$，电压检测增益 $H = V_{ref}/V = 0.0075$。本例的目标是设计电流环路补偿器 $G_{ci}$ 使穿超频率 $f_{ci} = 10\,\text{kHz}$（开关频率的十分之一），然后设计电压环路补偿器 $G_{cv}$ 使外电压控制环路穿超频率 $f_{cv} = 1\,\text{kHz}$。变换器损耗可忽略。
+
+在静态直流工作点处，
+
+$$D = 1 - \frac{V_g}{V} = 0.575$$
+
+$$I_g = I = \frac{P_{out}}{V_g} = 11.8\,\text{A}$$
+
+$$V_c = R_f I = 2.94\,\text{V}$$
+
+ACM 控制升压变换器的小信号模型如图18.58所示。由式(18.200)，在单位增益补偿器 $G_{ci} = 1$ 时的未补偿电流环路增益 $T_{iu}$ 为
+
+$$T_{iu} = \frac{R_f}{V_M}\, G_{id}(s) \tag{18.205}$$
+
+![源页 p.794](../assets/page-snapshots/chapter-18/page-794.png)
+
+图18.57 平均电流模式控制的升压变换器
+
+图18.58 图18.57所示平均电流模式控制升压变换器的小信号模型
+
+其中变换器占空比-电感电流传递函数 $G_{id}(s)$ 由下式给出
+
+$$G_{id}(s) = \left. \frac{\hat{i}}{\hat{d}} \right|_{\hat{v}_g = 0} = G_{id0}\, \frac{1 + \dfrac{s}{\omega_{zi}}}{1 + \dfrac{1}{Q}\, \dfrac{s}{\omega_o} + \left( \dfrac{s}{\omega_o} \right)^2} \tag{18.206}$$
+
+![源页 p.795](../assets/page-snapshots/chapter-18/page-795.png)
+
+图18.59 图18.57所示电流模式控制升压变换器的未补偿环路增益
+
+$$G_{id0} = \frac{2 V}{D'^2 R} = 55.4\,\text{A} \quad\rightarrow\quad 34.9\,\text{dBA}$$
+
+$$f_{zi} = \frac{1}{\pi R C} = 121\,\text{Hz}$$
+
+$$f_o = \frac{D'}{2\pi}\, \frac{1}{\sqrt{LC}} = 745\,\text{Hz}$$
+
+$$Q = D' R\sqrt{\frac{C}{L}} = 12.4 \quad\rightarrow\quad 21.8\,\text{dB}$$
+
+未补偿电流环路增益示意图如图18.59所示。低频增益为
+
+$$T_{iu0} = \frac{R_f}{V_M}\, G_{id0} = 3.46 \quad\rightarrow\quad 10.8\,\text{dB} \tag{18.207}$$
+
+在目标穿超频率 $f_{ci} = 10\,\text{kHz}$ 附近，$T_{iu}$ 的幅值以 $-20\,\text{dB/dec}$ 滚降，
+
+$$\|T_{iu}\| \to \frac{T_{iu0}\, \omega_o^2}{\omega_{zi}\, \omega} = \frac{R_f}{L\, \omega}\, \frac{V}{V_M} \tag{18.208}$$
+
+而对应的相位响应渐近值为 $-90°$。因此，简单的增益（比例 P 补偿器）即可在足够的相位裕度下实现所需穿超频率。如9.5.2节所述，滞后（PI）补偿器提供了增大低频环路增益、实现平均电感电流完美直流调节的途径。此外，通常在电流环路补偿器传递函数中加入一个极点，以衰减高频开关纹波并对检测电流信号进行低通滤波。因此，典型的 ACM 电流环路补偿器传递函数为
+
+$$G_{ci}(s) = G_{cm}\, \frac{1 + \dfrac{\omega_z}{s}}{1 + \dfrac{s}{\omega_p}} \tag{18.209}$$
+
+补偿器响应示意图如图18.60所示。
+
+![源页 p.796](../assets/page-snapshots/chapter-18/page-796.png)
+
+图18.60 电流环路补偿器的幅值和相位响应
+
+补偿器零点置于目标穿超频率以下（$f_z < f_{ci}$），而极点置于穿超频率以上（$f_p > f_{ci}$）。利用式(18.208)，选择增益 $G_{cm}$ 使环路增益幅值在目标穿超频率 $f_{ci}$ 处等于 1（0 dB），
+
+$$G_{cm}\, \frac{R_f}{L\, \omega_{ci}}\, \frac{V}{V_M} = 1 \tag{18.210}$$
+
+因此
+
+$$G_{cm} = \frac{L\, \omega_{ci}}{R_f}\, \frac{V_M}{V} = 0.63 \tag{18.211}$$
+
+相位裕度可由 PI 补偿器在零频率处的极点（$-90°$）、$G_{id}$ 中的二阶极点和零点（约 $-90°$），以及补偿器在 $f_z$ 处的零点和 $f_p$ 处的极点的贡献相加得到，
+
+$$\phi_m = 180° + \angle T_i(j\omega_{ci}) = 180° - 90° - 90° + \tan^{-1}\left( \frac{f_{ci}}{f_z} \right) - \tan^{-1}\left( \frac{f_{ci}}{f_p} \right) \tag{18.212}$$
+
+较低的 $f_z$ 以 $f_{ci}$ 以下频段环路增益幅值降低为代价换取更高的相位裕度。较高的 $f_p$ 以补偿器对开关纹波衰减降低为代价换取更高的相位裕度。取（略带任意性）$f_z = f_{ci}/2.5 = 4\,\text{kHz}$ 和 $f_p = 2.5 f_{ci} = 25\,\text{kHz}$，相位裕度为
+
+$$\phi_m = 68° - 22° = 46° \tag{18.213}$$
+
+补偿后电流环路增益的幅值和相位响应如图18.61所示，证实式(18.209)中 $G_{cm} = 0.63$、$f_z = 4\,\text{kHz}$、$f_p = 25\,\text{kHz}$ 的补偿器满足设计目标。
+
+由式(18.201)求得的闭环控制-电流传递函数 $G_{ic}$ 的幅值和相位响应如图18.62所示。在低频处，闭环响应跟随理想增益 $G_{ic\infty} = 1/R_f$。给定 $\phi_m = 46°$，闭环传递函数在穿超频率 $f_{ci}$ 附近呈现峰值响应，这与9.4.3节的讨论一致。
+
+![源页 p.797](../assets/page-snapshots/chapter-18/page-797.png)
+
+图18.61 图18.57所示平均电流模式控制升压变换器的补偿后环路增益
+
+图18.62 图18.57所示平均电流模式控制升压变换器的闭环控制-电流响应
+
+![源页 p.798](../assets/page-snapshots/chapter-18/page-798.png)
+
+图18.63 图18.57所示平均电流模式控制升压变换器的闭环控制-输出电压响应
+
+图18.64 图18.57所示平均电流模式控制升压变换器电压控制环路中的环路增益
+
+下一步是设计电压环路补偿器 $G_{cv}$，使外电压控制环路达到穿超 $f_{cv}$。设计基于图18.54的方框图，其中 $G_{vc}$ 是由式(18.203)求得并示于图18.63的闭环控制-输出电压传递函数。在远低于电流环路穿超频率 $f_{ci}$ 的频段，$G_{vc}$ 可近似为
+
+$$G_{vc} \approx \frac{1}{R_f}\, \frac{G_{vd}}{G_{id}} = \frac{D' R}{2 R_f}\, \frac{1 - \dfrac{s}{\omega_{z,\text{RHP}}}}{1 + \dfrac{s}{\omega_{zi}}} \tag{18.214}$$
+
+$$f_{z,\text{RHP}} = \frac{D'^2 R}{2\pi L} = 9.2\,\text{kHz}$$
+
+$$f_{zi} = \frac{1}{\pi R C} = 121\,\text{Hz}$$
+
+式(18.203)的完整 $G_{vc}$ 与式(18.214)的近似 $G_{vc}$ 的幅值和相位响应如图18.63所示。在 $f_{cv} \ll f_{ci}$ 即电压环路设计保守的情形下，电压环路补偿器 $G_{cv}$ 的设计可基于式(18.214)的近似 $G_{vc}$。由于 $G_{vc}$ 在 $f_{zi}$ 处有一个主极点，在目标电压环路穿超 $f_{cv} = 1\,\text{kHz}$ 附近表现为单极点传递函数，考虑简单的 PI 补偿器即可
+
+$$G_{cv}(s) = G_{vm}\, \left( 1 + \frac{\omega_{zv}}{s} \right) \tag{18.215}$$
+
+其中 $G_{vm}$ 可由式(18.204)求得以实现所需穿超频率 $f_{cv}$，
+
+$$G_{vm} = \frac{2\pi f_{cv}\, C\, R_f}{D'\, H} = 16.4 \tag{18.216}$$
+
+而 $f_{zv}$ 可选择以在相位裕度与 $f_{cv}$ 以下频段的 $T_v$ 幅值之间取得折中。选取
+
+$$f_{zv} = \frac{f_{cv}}{3} = 333\,\text{Hz} \tag{18.217}$$
+
+得到电压环路相位裕度
+
+$$\phi_{mv} \approx 180° - 90° - 90° + \tan^{-1}\frac{f_{cv}}{f_{zv}} = 72° \tag{18.218}$$
+
+所得电压环路增益如图18.64所示。
+
+![源页 p.799](../assets/page-snapshots/chapter-18/page-799.png)
+
+上述示例说明的两步设计过程相对简单：先设计内部电流环路，再设计电压环路。在 ACM 控制变换器的两个环路中，简单的 PI 补偿器通常足以在足够的稳定裕度下实现所需的调节带宽。在 ACM 控制升压变换器设计示例中，我们遵循了保守方法，将外电压环路穿超频率 $f_{cv}$ 设定在远低于电流环路穿超频率 $f_{ci}$ 的值。这种方法虽在实践中常用，但并非唯一可选方案。根据应用和调节带宽要求，双环路系统还可采用其他方法。
+
+## 18.10 要点总结
+
+1. 在电流编程控制中，峰值开关电流 $i_s(t)$ 跟随控制输入 $i_c(t)$。这种广泛使用的控制方案具有更简单的控制-输出传递函数的优点。电流编程降压变换器的线路-输出传递函数也得到减小。
+
+2. 基本 CPM 控制器在 $D > 0.5$ 时不稳定，无论变换器拓扑如何。通过加入斜率为 $m_a$ 的人工斜坡可使控制器稳定。当 $m_a > 0.5 m_2$ 时，控制器对所有占空比均稳定。
+
+3. 电流编程变换器的行为可用一阶近似 $\langle i_L(t) \rangle_{T_s} \approx i_c(t)$ 以简单直观的方式建模。于是开关网络的平均端子波形可简单地用一个值为 $i_c$ 的电流源连同功率汇或功率源元件来建模。对这些元件进行扰动和线性化即得小信号模型。另一种方法是，将第7章导出的小信号变换器方程借助简单近似 $i_L(t) \approx i_c(t)$ 改造以覆盖电流编程模式。
+
+4. 简单模型预测，变换器线路-输出和控制-输出传递函数中的一个极点被消除。电流编程不改变传递函数的零点。直流增益变为依赖负载。
+
+5. 18.3节的更精确模型正确考虑了平均电感电流 $\langle i_L(t) \rangle_{T_s}$ 与控制输入 $i_c(t)$ 之间的差异。该模型预测了降压变换器非零的线路-输出传递函数 $G_{vg}(s)$。电流编程控制器的行为用一个方框图建模，并附加到第7章导出的小信号变换器模型上。对所得多环路反馈系统（18.4节）进行分析即得到相关传递函数。
+
+6. 更精确模型预测电感极点出现在有效电流反馈环路增益 $T_i(s)$ 的穿超频率 $f_c$ 处。频率 $f_c$ 通常出现在变换器开关频率 $f_s$ 附近。更精确模型还预测，当 $m_a = 0.5 m_2$ 时降压变换器的线路-输出传递函数 $G_{vg}(s)$ 被置零。
+
+7. 18.3节的更精确平均 CPM 模型可实现为 SPICE 子电路，如18.5节所示。平均 CPM 模型可与第14章的平均开关模型结合，构建适合 SPICE 仿真的平均电路模型。
+
+8. 采用电流编程控制的变换器系统通常包含一个外电压反馈环路，其目的是调节变换器输出电压。由于电流编程使控制-输出动态更简单，通常无需补偿器超前网络即可获得宽带宽输出电压控制，如18.6节讨论。
+
+9. 18.8节对断续导通模式下工作的电流编程变换器建模。平均晶体管波形可用功率汇建模，而平均二极管波形用功率源建模。功率由 $i_c(t)$ 控制。对这些平均模型进行扰动和线性化即得到小信号等效电路。
+
+10. 18.1节忽略电感动态的简单模型和18.3节暗示高频单极点响应的更精确模型，均未预测到电流编程不稳定性或18.2节讨论的人工斜坡必要性。18.7节用采样数据建模技术解释电流编程变换器的高频动态特性。采样数据模型表明，当人工斜坡斜率 $m_a$ 较小时，控制-电流频率响应在开关频率的一半附近出现峰值；若不采用人工斜坡，对大于 0.5 的占空比最终导致不稳定。加入人工斜坡后可获得稳定运行、降低噪声灵敏度，且频率响应可由18.3节的更精确平均模型很好地预测。
+
+11. 平均电流模式（ACM）控制是另一种常用的控制技术，它通过在占空比控制变换器周围闭合反馈环路来检测和控制平均电流。ACM 控制器具有改进的噪声免疫性，在宽占空比范围内稳定运行，且动态特性相对简单。除构建内部电流控制环路外，ACM 控制器常用于要求直接控制变换器平均输入或输出电流的应用，如电池充电器、发光二极管驱动器以及电网同步整流器和逆变器。
+
+![源页 p.800](../assets/page-snapshots/chapter-18/page-800.png)
+
+## 习题
+
+**18.1** 一个非理想降压变换器工作于连续导通模式，参数为 $V_g = 10\,\text{V}$，$f_s = 100\,\text{kHz}$，$L = 4\,\mu\text{H}$，$C = 75\,\mu\text{F}$，$R = 0.25\,\Omega$。期望满载输出为 $5\,\text{V}$、$20\,\text{A}$。功率级含如下损耗元件：MOSFET 导通电阻 $R_{on} = 0.1\,\Omega$，肖特基二极管正向压降 $V_D = 0.5\,\text{V}$，电感绕线电阻 $R_L = 0.03\,\Omega$。
+
+(a) 稳态分析：确定变换器稳态占空比 $D$、电感电流纹波斜率 $m_1$ 和 $m_2$，以及无量纲参数 $K = 2L/RT_s$。
+
+(b) 确定该变换器在占空比控制下的小信号方程。
+
+现对该变换器实现电流编程控制器，采用固定斜率 $M_a = 0.5 M_2$ 的人工斜坡，其中 $M_2$ 是输出为 $5\,\text{V}$、$20\,\text{A}$ 时的稳态斜率 $m_2$。
+
+(c) 电流编程控制器在什么 $D$ 范围内稳定？在额定输出处是否稳定？注意非理想性影响稳定性边界。
+
+(d) 采用简单近似 $\langle i_L(t) \rangle_{T_s} \approx i_c(t)$ 确定控制-输出传递函数 $G_{vc}(s)$。给出转折频率和直流增益的解析表达式。绘制 $G_{vc}(s)$ 的波特图。
+
+**18.2** 用平均开关建模方法对带电流编程控制的 CCM 升压变换器建模：
+
+(a) 按图14.13(a)定义开关网络端子量。在 $\langle i_L(t) \rangle_{T_s} \approx i_c(t)$ 假设下，确定开关网络端子波形平均值的表达式，进而导出图18.9(a)的等效电路。
+
+(b) 对(a)的模型进行扰动和线性化，得到图18.13的等效电路。
+
+(c) 求解(b)的模型，导出控制-输出传递函数 $G_{vc}(s)$ 和线路-输出传递函数 $G_{vg}(s)$ 的表达式。以标准归一化形式表达结果，并给出转折频率和直流增益的解析表达式。
+
+![源页 p.801](../assets/page-snapshots/chapter-18/page-801.png)
+
+**18.3** 用平均开关建模方法对带电流编程控制的 CCM Ćuk 变换器建模。Ćuk 变换器电路图见图2.20。
+
+(a) 希望用 $i_c$ 电流源和一个受控功率源或功率汇按18.1.2节的方法对开关网络建模。应如何定义开关网络端子电压和电流？
+
+(b) 画出开关网络端子电压和电流波形。在 $\langle i_1(t) \rangle_{T_s} - \langle i_2(t) \rangle_{T_s} \approx i_c(t)$（其中 $i_1$ 和 $i_2$ 是图2.20中定义的电感电流）假设下，确定开关网络端子波形平均值的表达式，进而导出与图18.9等效电路类似的等效电路。
+
+(c) 对(b)的模型进行扰动和线性化，得到与图18.10模型类似的小信号等效电路。不需求解模型。
+
+**18.4** 图6.20(a)的全桥变换器工作于 $V_g = 320\,\text{V}$，向 $42\,\text{V}$ 电阻负载供电 $1000\,\text{W}$。损耗可忽略，占空比为 0.7，图6.21定义的开关周期 $T_s$ 为 $10\,\mu\text{s}$。$L = 50\,\mu\text{H}$，$C = 100\,\mu\text{F}$。采用电流编程控制器，其波形以变压器次级侧为参考。下列计算可忽略变压器励磁电流。
+
+(a) 在给定工作点处使控制器稳定所需的最小人工斜坡斜率 $m_a$ 是多少？以 $m_2$ 表示结果。
+
+(b) 采用斜率 $m_a = m_2$ 的人工斜坡。绘制电流环路增益 $T_i(s)$ 的波特图，标出转折频率和直流增益的数值。无需重新推导 $T_i$ 的解析表达式。确定穿超频率 $f_c$。
+
+(c) 对 $m_a = m_2$，绘制控制-输出传递函数 $G_{vc}(s)$ 和线路-输出传递函数 $G_{vg}(s)$ 的波特图，标出转折频率和直流增益的数值。无需重新推导这些传递函数的解析表达式。
+
+**18.5** 在一个 CCM 电流编程降压变换器中，希望通过选取 $m_a = 0.5 m_2$ 使线路-输出传递函数 $G_{vg}(s)$ 最小化。但由于元件容差，电感 $L$ 可在标称值 $100\,\mu\text{H}$ 附近变化 $\pm 10\%$。因此 $m_a$ 固定而 $m_2$ 变化，$m_a = 0.5 m_2$ 仅在 $L$ 的标称值处成立。开关频率为 $100\,\text{kHz}$，输出电压为 $15\,\text{V}$，负载电流在 $2$ 至 $4\,\text{A}$ 范围变化，输入电压在 $22$ 至 $32\,\text{V}$ 范围变化。可忽略损耗。确定线路-输出直流增益 $G_{vg}(0)$ 的最坏（最大）值。
+
+**18.6** 图7.19的非理想反激变换器采用电流编程控制，人工斜坡斜率为 $m_a$。MOSFET $Q_1$ 的导通电阻为 $R_{on}$。所有电流编程控制器波形以变压器初级侧为参考。
+
+(a) 推导一个建模电流编程控制器的方框图，形式与图18.24类似。给出方框图中各增益的解析表达式。
+
+(b) 将(a)的结果与变换器小信号模型结合。导出控制-输出传递函数 $G_{vc}(s)$ 的新表达式。
+
+**18.7** 一个降压变换器采用电流编程控制。元件值为
+
+![源页 p.802](../assets/page-snapshots/chapter-18/page-802.png)
+
+$V_g = 120\,\text{V}$，$D = 0.6$，$R = 10\,\Omega$，$f_s = 100\,\text{kHz}$，$L = 550\,\mu\text{H}$，$C = 100\,\mu\text{F}$。采用斜率为 $0.15\,\text{A}/\mu\text{s}$ 的人工斜坡。
+
+(a) 绘制占空比控制下控制-输出传递函数 $G_{vd}(s)$ 的幅值和相位渐近线。在同一图上绘制电流编程控制下控制-输出传递函数 $G_{vc}(s)$ 的幅值和相位渐近线。比较之。
+
+(b) 绘制占空比控制下线路-输出传递函数 $G_{vg}(s)$ 的幅值渐近线。在同一图上绘制电流编程控制下线路-输出传递函数 $G_{vg\text{-cpm}}(s)$ 的幅值渐近线。比较之。
+
+**18.8** 一个升降压变换器工作于断续导通模式。其电流编程控制器无补偿人工斜坡：$m_a = 0$。
+
+(a) 采用 $L \approx 0$ 近似导出控制-输出传递函数 $G_{vc}(s)$ 的表达式。给出转折频率和直流增益的解析表达式。
+
+(b) 含电感重做(a)。证明只要电感足够小，电感仅给 $G_{vc}(s)$ 增加一个高频极点和零点，而(a)中导出的低频极点基本不变。
+
+(c) 在 CCM-DCM 边界处，右半平面零点频率的最小值是多少？
+
+**18.9** 一个电流编程升压变换器将 $3\,\text{V}$ 电池接口到一个小型 $5\,\text{V}$ 便携负载。变换器工作于断续导通模式，晶体管导通时间 $t_{on}$ 恒定、关断时间可变；开关频率因此可变并用作控制变量。无人工斜坡，峰值晶体管电流 $i_c$ 等于固定值 $I_c$；实践中 $I_c$ 选以使总损耗最小。
+
+(a) 画出晶体管和二极管的电压、电流波形。确定波形平均值的表达式，进而导出该变换器的大信号平均等效电路。
+
+(b) 对(a)的模型进行扰动和线性化，得到小信号等效电路。注意开关频率 $f_s$ 应被扰动。
+
+(c) 求解(b)的模型，导出低频控制-输出传递函数 $G_{vf}(s) = \hat{v}(s)/\hat{f}_s(s)$ 的表达式。以标准归一化形式表达结果，并给出转折频率和直流增益的解析表达式。可假设 $L$ 较小。
+
+**18.10** 一个电流编程升压变换器用于低谐波整流器系统，输入电压为整流正弦：$v_g(t) = V_M |\sin(\omega t)|$。直流输出电压 $v(t) = V > V_M$。电容 $C$ 足够大，使输出电压含可忽略的交流分量。期望控制变换器使输入电流 $i_g(t)$ 与 $v_g(t)$ 成正比：$i_g(t) = v_g(t)/R_e$，其中 $R_e$ 是常数，称为"仿真电阻"。图18.9(a)的平均升压变换器模型表明，只需令 $i_c(t)$ 与 $v_g(t)$ 成正比即可实现：$i_c(t) = v_g(t)/R_e$。可做简化假设：变换器始终工作于连续导通模式。
+
+(a) 在上述假设下求解图18.9(a)的模型，确定 $\langle p(t) \rangle_{T_s}$。求 $\langle p(t) \rangle_{T_s}$ 在交流输入 $v_g(t)$ 的一个周期内的平均值。
+
+![源页 p.803](../assets/page-snapshots/chapter-18/page-803.png)
+
+(b) 在某些工作点处需要人工斜坡以使电流编程控制器稳定。在沿输入整流正弦的所有工作点处确保稳定所需的最小 $m_a$ 是多少？以 $V$ 和 $L$ 的函数表示结果。给出推导。
+
+(c) 人工斜坡和电感电流纹波使平均输入电流偏离 $i_c(t)$。导出 $\langle i_g(t) \rangle_{T_s}$ 作为 $i_c(t)$ 和 $m_a$、$v_g(t)$、$V$、$L$、$T_s$ 等量的函数的代数表达式。本部分可假设电感动态可忽略。给出推导。
+
+(d) 将 $v_g(t) = V_M |\sin(\omega t)|$ 和 $i_c(t) = v_g(t)/R_e$ 代入(c)的结果，确定 $i_g(t)$ 的表达式。$i_g(t)$ 与整流正弦有何不同？
+
+**18.11** 图18.65给出了一个带电荷控制[179]的降压变换器。电荷控制的工作方式与电流编程控制器类似。在每个开关周期开始时（$t = 0$），一个短时钟脉冲使 SR 锁存器置位。锁存器 Q 输出的逻辑高电平使功率 MOSFET 导通。同时 Q 输出的逻辑低电平使开关 $S$ 关断。与功率 MOSFET 电流成正比的电流 $K_s i_s$ 给电容 $C_s$ 充电。在 $t = d T_s$ 处，电容电压 $v_q(t)$ 达到控制输入电压 $R_f i_c$，比较器输出变为高电平并使锁存器复位。锁存器 Q 输出的逻辑低电平使功率 MOSFET 关断。同时 Q 输出的逻辑高电平使开关 $S$ 导通，将电容 $C_s$ 快速放电至零。
+
+图18.65 习题18.11的电荷控制降压变换器
+
+![源页 p.804](../assets/page-snapshots/chapter-18/page-804.png)
+
+本习题中，变换器和控制器参数为：$V_g = 24\,\text{V}$，$f_s = 1/T_s = 100\,\text{kHz}$，$L = 60\,\mu\text{H}$，$C = 100\,\mu\text{F}$，$R = 3\,\Omega$，$K_s T_s/C_s = R_f = 1\,\Omega$。可假设变换器工作于连续导通模式。
+
+(a) 求开关网络端子波形平均值的表达式，进而导出带电荷控制的降压开关网络的大信号平均开关模型。模型控制输入为控制电流 $i_c$。平均开关模型应由一个电流源和一个功率源组成。开关占空比 $d$ 不应出现在模型中。
+
+(b) 用(a)导出的平均开关模型，求静态输出电压 $V$ 作为 $V_g$、$I_c$ 和 $R$ 函数的表达式。给定 $I_c = 2\,\text{A}$，求 $V$、$I_1$、$I_2$ 和占空比 $D$ 的数值。对该静态工作点，绘制一个开关周期内 $i_1(t)$、$i_2(t)$ 和 $v_q(t)$ 的波形。
+
+(c) 对(a)的平均开关模型进行扰动和线性化，导出带电荷控制的降压开关网络的小信号平均开关模型。求所有参数用变换器参数和静态工作条件表示的解析表达式。绘制带电荷控制器的降压变换器的完整小信号模型。
+
+(d) 求解(c)所得模型，求控制-输出传递函数 $G_{vc}(s) = \hat{v}/\hat{i}_c$。在(b)求得的静态工作点处，绘制 $G_{vc}$ 幅值的波特图并标出所有显著特征。
+
+(e) 评论电荷控制相对于占空比控制或电流编程控制可能具有的优点。
+
+![源页 p.805](../assets/page-snapshots/chapter-18/page-805.png)
+
+**18.12** 图18.66给出了一个带单周期控制[180]的降压变换器。单周期控制的工作方式与电流编程控制器类似。在每个开关周期开始时（$t = 0$），一个短时钟脉冲使 SR 锁存器置位。锁存器 Q 输出的逻辑高电平使功率 MOSFET 导通。同时 Q 输出的逻辑低电平使开关 $S$ 关断。与电压 $v_2(t)$ 成正比的电流 $G_s v_2(t)$ 给电容 $C_s$ 充电。在 $t = d T_s$ 处，电容电压 $v_s(t)$ 达到控制输入电压 $v_c$，比较器输出变为高电平并使锁存器复位。锁存器 Q 输出的逻辑低电平使功率 MOSFET 关断。同时 Q 输出的逻辑高电平使开关 $S$ 导通，将电容 $C_s$ 快速放电至零。
+
+本习题中，变换器和控制器参数为：$V_g = 24\,\text{V}$，$f_s = 1/T_s = 100\,\text{kHz}$，$L = 60\,\mu\text{H}$，$C = 100\,\mu\text{F}$，$R = 3\,\Omega$，$G_s T_s/C_s = 1$。可假设变换器工作于连续导通模式。
+
+(a) 求开关网络端子波形平均值的表达式，进而导出带单周期控制的降压开关网络的大信号平均开关模型。模型控制输入为控制电压 $v_c$。开关占空比 $d$ 不应出现在模型中。
+
+(b) 用(a)导出的平均开关模型，求静态输出电压 $V$ 作为 $V_c$ 函数的表达式。给定 $V_c = 10\,\text{V}$，求 $V$、$I_1$、$I_2$ 和占空比 $D$ 的数值。对该静态工作点，绘制一个开关周期内 $i_1(t)$、$i_2(t)$ 和 $v_s(t)$ 的波形。
+
+![源页 p.806](../assets/page-snapshots/chapter-18/page-806.png)
+
+图18.66 习题18.12的单周期控制降压变换器
+
+(c) 对(a)的平均开关模型进行扰动和线性化，导出带单周期控制的降压开关网络的小信号平均开关模型。求所有参数用变换器参数和静态工作条件表示的解析表达式。绘制带单周期控制器的降压变换器的完整小信号模型。
+
+(d) 求解(c)所得模型，求控制-输出传递函数 $G_{vc}(s) = \hat{v}/\hat{v}_c$ 和线路-输出传递函数 $G_{vg}(s) = \hat{v}/\hat{v}_g$。在(b)求得的静态工作点处，绘制这些传递函数的幅值波特图并标出所有显著特征。
+
+(e) 评论单周期控制相对于占空比控制可能具有的优点。

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第18章part 1 - 18 Current-Programmed Control"
+title: "第18章 电流编程控制（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1087 +18,447 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第18章part 1 - 18 Current-Programmed Control
+# 第18章 电流编程控制（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 727-746  
-> Chunk ID: `chapter-18-part-1`
+> 源页：727–746
+> 本部分涵盖 18.1 简单一阶模型与 18.2 D > 0.5 时的振荡。
 
-## 主干提取
+## 第18章 电流编程控制
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.727](../assets/page-snapshots/chapter-18/page-727.png)
 
-## 术语表
+迄今为止，我们讨论了 PWM 变换器中的占空比控制，其中变换器输出通过直接选择占空比 $d(t)$ 来控制。我们因此导出了将变换器波形和输出电压与占空比相关联的表达式和小信号传递函数。这种直接占空比控制有时称为电压模式控制，因为在 CCM 下平衡输出电压近似正比于占空周期。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+另一种获得广泛应用的控制方案是电流编程控制 [67, 69, 107, 163–175]，其中变换器通过选择晶体管开关电流峰值（$i_s(t)$）来控制。控制输入信号为 $i_c(t)$，一个简单的控制网络使晶体管导通和关断，从而使晶体管峰值电流跟随 $i_c(t)$。晶体管占空周期 $d(t)$ 不直接受控，而是取决于 $i_c(t)$ 以及变换器电感电流、电容电压和电源输入电压。经电流编程控制的变换器称为工作于电流编程模式（CPM），也称为峰值电流模式（PCM）控制。
 
-## 中文翻译
+简单电流编程控制器的框图如图18.1所示。控制信号 $i_c(t)$ 和开关电流 $i_s(t)$ 波形如图18.2所示。锁存器 Set 输入端的时钟脉冲启动开关周期，使锁存器输出 Q 变高并导通晶体管开关。晶体管导通期间，其电流 $i_s(t)$ 等于电感电流 $i_L(t)$；该电流以某个正斜率 $m_1$ 增加，该斜率取决于电感量和变换器电压。在更复杂的变换器中，$i_s(t)$ 可能跟随若干电感电流之和。最终，开关电流 $i_s(t)$ 等于控制信号 $i_c(t)$。此时控制器使晶体管开关关断，电感电流在剩余开关周期内下降。控制器用某个电流检测电路测量开关电流 $i_s(t)$，并用模拟比较器将 $i_s(t)$ 与 $i_c(t)$ 比较。实际中比较的是与 $i_s(t)$ 和 $i_c(t)$ 成正比的电压，比例常数为 $R_f$。当 $i_s(t) \ge i_c(t)$ 时，比较器复位锁存器，使晶体管在剩余开关周期关断。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+![源页 p.728](../assets/page-snapshots/chapter-18/page-728.png)
 
-## 英文原文
+图18.1 降压变换器的电流编程控制。峰值晶体管电流取代占空周期作为控制输入
 
-```text
-18
-Current-Programmed Control
-So far, we have discussed duty ratio control of PWM converters, in which the converter output
-is controlled by direct choice of the duty ratio d(t). We have therefore developed expressions
-and small-signal transfer functions that relate the converter waveforms and output voltage to the
-duty ratio. This direct duty ratio control is sometimes called voltage mode control, because the
-equilibrium output voltage is approximately proportional to the duty cycle in CCM.
-Another control scheme which ﬁnds wide application is current programmed control [67, 69,
-107, 163–175], in which the converter is controlled by choice of the transistor switch current
-peak(is(t)). The control input signal is a current ic(t), and a simple control network switches the
-transistor on and oﬀsuch that the peak transistor current follows ic(t). The transistor duty cycle
-d(t) is not directly controlled, but depends on ic(t) as well as on the converter inductor currents,
-capacitor voltages, and power input voltage. Converters controlled via current programming
-are said to operate in the current-programmed mode (CPM), also known as peak current mode
-(PCM) control.
-The block diagram of a simple current-programmed controller is illustrated in Fig. 18.1.
-Control signal ic(t) and switch current is(t) waveforms are given in Fig. 18.2. A clock pulse at
-the Set input of a latch initiates the switching period, causing the latch output Q to be high
-and turning on the transistor switch. While the transistor conducts, its current is(t) is equal to
-the inductor current iL(t); this current increases with some positive slope m1 that depends on
-the value of inductance and the converter voltages. In more complicated converters, is(t)m a y
-follow the sum of several inductor currents. Eventually, the switch current is(t) becomes equal
-to the control signal ic(t). At this point, the controller turns the transistor switch oﬀ, and the in-
-ductor current decreases for the remainder of the switching period. The controller measures the
-switch current is(t) with some current sensor circuit, and compares is(t)t o ic(t) using an analog
-comparator. In practice, voltages proportional to is(t) and ic(t) are compared, with constant of
-proportionality Rf . When is(t)≥ic(t), the comparator resets the latch, turning the transistor oﬀ
-for the remainder of the switching period.
-As usual, a feedback loop can be constructed for regulation of the output voltage. The output
-voltage v(t) is compared to a reference voltagevre f , to generate an error signal. This error signal
-is applied to the input of a compensation network, and the output of the compensator drives the
-control signal ic(t)Rf . To design such a feedback system, we need to model how variations in
-the control signal ic(t) and in the line input voltage vg(t)aﬀect the output voltage v(t).
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_18
-725
+与往常一样，可构建反馈环路以调节输出电压。输出电压 $v(t)$ 与参考电压 $v_{ref}$ 比较，产生误差信号。此误差信号加到补偿网络输入端，补偿器的输出驱动控制信号 $i_c(t)R_f$。要设计这样的反馈系统，我们需要建模控制信号 $i_c(t)$ 和线路输入电压 $v_g(t)$ 的变化如何影响输出电压 $v(t)$。
 
-726 18 Current-Programmed Control
-+
-Buck converter
-Current-programmed controller
-Rvg(t)
-is(t)
-+
-v(t)
-iL(t)
-Q1
-L
-CD1
-+
-Analog
-comparator
-Latch
-Ts0
-S
-R
-Q
-Clock
-is(t)
-Rf
-Measure
-switch
-current
-is(t)Rf
-Control
-input
-ic(t)Rf
-+
-vref
-v(t)Compensator
-Conventional output voltage controller
-Fig. 18.1 Current-programmed control of a buck converter. The peak transistor current replaces the duty
-cycle as the control input
-An advantage of the current-programmed mode is its simpler dynamics. To ﬁrst order, the
-small-signal control-to-output transfer function ˆv(s)/ˆic(s) contains one less pole than ˆv(s)/ ˆd(s).
-Actually, the pole is moved to a high frequency, near the converter switching frequency.
-Nonetheless, simple robust wide-bandwidth output voltage control can usually be obtained,
-without the use of compensator lead networks. It is true that the current-programmed controller
-requires a circuit for measurement of the switch currentis(t); however, in practice such a circuit
-is also required in duty ratio controlled systems, for protection of the transistor against excessive
-currents during transients and fault conditions. Current-programmed control makes use of the
-available current sensor information during normal operation of the converter, to obtain simpler
-system dynamics. Transistor failures due to excessive switch current can then be prevented sim-
-ply by limiting the maximum value of the control signal i
-c(t). This ensures that the transistor
-will turn oﬀwhenever the switch current becomes too large, on a cycle-by-cycle basis.
-An added beneﬁt of current programming is the reduction or elimination of transformer
-saturation problems in full-bridge or push-pull isolated converters. In these converters, small
+电流编程模式的一个优点是动态更简单。一阶近似下，小信号控制-输出传递函数 $\hat{v}(s)/\hat{i}_c(s)$ 比 $\hat{v}(s)/\hat{d}(s)$ 少一个极点。实际上，该极点被移到接近变换器开关频率的高频处。尽管如此，通常无需补偿器超前网络即可获得简单、鲁棒、宽带宽的输出电压控制。电流编程控制器确实需要一个检测开关电流 $i_s(t)$ 的电路；然而实际中占空比控制系统中也需要这样的电路，用于在暂态和故障条件下保护晶体管免受过流。电流编程控制利用变换器正常运行时可用的电流传感信息，以获得更简单的系统动态。通过限制控制信号 $i_c(t)$ 的最大值即可防止因开关电流过大导致的晶体管失效。这确保每当开关电流过大时晶体管就会关断，而且是逐周期保护的。
 
-18 Current-Programmed Control 727
-Fig. 18.2 Switch current
-is(t) and control input
-ic(t) waveforms, for the
-current-programmed sys-
-tem of Fig. 18.1
-Switch
-current
-i
-s(t)
-Control signal
-ic(t)
-m1
-t0 dTs Ts
-on off
-Transistor
-status:
-Clock turns
-transistor on
-Comparator turns
-transistor off
-voltage imbalances induce a dc bias in the transformer magnetizing current; if suﬃciently large,
-this dc bias can saturate the transformer. The dc current bias increases or decreases the tran-
-sistor switch currents. In response, the current programmed controller alters the transistor duty
-cycles, such that transformer volt-second balance tends to be maintained. Current-programmed
-full-bridge isolated buck converters should be operated without a capacitor in series with the
-transformer primary winding; this capacitor tends to destabilize the system. For the same rea-
-son, current-programmed control of half-bridge isolated buck converters is generally avoided.
-Commercial integrated circuits that implement current-programmed control are widely avail-
-able, and operation of converters in the current-programmed mode is quite popular.
-A disadvantage of current-programmed control is its susceptibility to noise in the i
-s(t)o r
-ic(t) signals. This noise can prematurely reset the latch, disrupting operation of the controller. To
-remove the turn-on current spike caused by the diode stored charge, a small amount of ﬁltering
-of the sensed switch current waveform is usually applied. Furthermore, CPM controllers often
-include a short blanking interval at the beginning of a switching cycle. During the blanking
-interval, resetting of the latch is disabled, which prevents spurious transistor turn oﬀ. It should
-be noted, however, that the blanking interval imposes a lower limit on the attainable duty cycle.
-This chapter is devoted to analysis, modeling and design of converters operating in current-
-programmed mode. In Sect. 18.1, the system small-signal transfer functions are derived using
-a simple ﬁrst-order model. The averaged terminal waveforms of the switch network can be
-described by a simple current source, in conjunction with a power source element. Perturbation
-and linearization steps lead to a simple small-signal model.
-In Sect. 18.2, stability of the current-programmed controller and its inner switch-current-
-sensing loop is examined. It is found that this controller is unstable whenever converter steady-
-state duty cycle D is greater than 0.5. The current programmed controller can be stabilized
-by addition of an artiﬁcial ramp signal to the sensed switch current waveform. Furthermore,
-addition of the artiﬁcial ramp, also known as slope compensation, improves noise immunity of
-the controller.
-Although the ﬁrst-order model of Sect. 18.1 yields a great deal of insight into the control-to-
-output transfer function and converter output impedance, it does not accurately predict the line-
-to-output transfer function G
-vg(s) of current-programmed buck converters. Furthermore, the
-simple model does not take into account the eﬀects of the inductor current ripple or the artiﬁcial
-ramp. Hence, a more accurate averaged model is developed in Sect. 18.3, and CPM transfer
-functions are derived in Sect. 18.4. Based on the more accurate averaged model, simulation
-of current-programmed converters is addressed in Sect. 18.5. Design of the voltage feedback
+电流编程的另一个好处是减少或消除全桥或推挽隔离变换器中变压器饱和问题。这些变换器中，小的电压不平衡会在变压器磁化电流中引起直流偏置；如果该直流偏置足够大，可使变压器饱和。直流电流偏置使晶体管开关电流增大或减小。作为响应，电流编程控制器改变晶体管占空周期，使变压器伏秒平衡趋于维持。电流编程全桥隔离降压变换器应在变压器原边绕组串联处不接电容；该电容会使系统失稳。出于同样原因，一般避免对半桥隔离降压变换器使用电流编程控制。实现电流编程控制的商用集成电路已广泛提供，变换器在电流编程模式下运行相当普遍。
 
-728 18 Current-Programmed Control
-loop is discussed in Sect. 18.6. High-frequency responses of current-programmed converters in
-continuous conduction mode are further examined in Sect. 18.7 using sampled-data modeling
-techniques. Finally, Sect. 18.8 extends the modeling of current-programmed converters to the
-discontinuous conduction mode.
-Another approach to current programming, known asaverage current mode(ACM) control,
-consists of constructing a feedback loop for regulation of an average converter current. This
-approach is discussed in Sect. 18.9. An advantage of average current-mode control is that it
-enables direct control over the converter input or output current, which is required in some
-applications, including battery chargers, drivers for light emitting diodes, as well as ac grid-tied
-rectiﬁers and inverters. Furthermore, ACM controllers have improved noise immunity, and do
-not necessarily require slope compensation for stable operation over wide range of duty cycles.
-18.1 A Simple First-Order Model
-Once the current-programmed controller has been constructed, it is desired to design a feed-
-back loop for regulation of the output voltage. As usual, this voltage feedback loop must be
-designed to meet speciﬁcations regarding line disturbance rejection, transient response, output
-impedance, etc. A block diagram of a typical system is illustrated in Fig. 18.3, containing an
-inner current-programmed controller, with an outer voltage feedback loop.
-To design the outer voltage feedback loop, an ac equivalent circuit model of the switching
-converter operating in the current-programmed mode is needed. In Chap. 7, averaging was
-employed to develop small-signal ac equivalent circuit models for converters operating with
-duty ratio control. These models predict the circuit behavior in terms of variations ˆd in the duty
-cycle. If we could ﬁnd the relationship between the control signali
-c(t) and the duty cycled(t)f o r
-the current-programmed controller, then we could adapt the models of Chap. 7, to apply to the
-Compensator
-+
-+
-R
-+
-v(t)vg(t)
-Current
-programmed
-controller
-d(t) Converter
-voltages and
-currents
-Switching converter
-vref
-ic(t) v(t)
-Fig. 18.3 Block diagram of a converter system incorporating current-programmed control
+电流编程控制的缺点是它对 $i_s(t)$ 或 $i_c(t)$ 信号中的噪声敏感。该噪声会过早复位锁存器，扰乱控制器运行。为去除由二极管存储电荷引起的导通电流尖峰，通常对检测的开关电流波形施加少量滤波。此外，CPM 控制器常在开关周期开始时加入一个短暂消隐间隔。消隐间隔期间禁止锁存器复位，从而防止虚假的晶体管关断。但应注意，消隐间隔对可获得的占空周期施加了下限。
 
-18.1 A Simple First-Order Model 729
-current-programmed mode as well. In general, the duty cycle depends not only onic(t), but also
-on the converter voltages and currents; hence, the current-programmed controller incorporates
-multiple eﬀective feedback loops as indicated in Fig. 18.3.
-In this section, the averaging approach is extended, as described above, to treat current-
-programmed converters. A simple ﬁrst-order approximation is employed, in which it is assumed
-that the current programmed controller operates ideally, and hence causes the average inductor
-current⟨iL(t)⟩TS to be identical to the control ic(t). This approximation is justiﬁed whenever
-the inductor current ripple and artiﬁcial ramp (discussed in Sect. 18.2) have negligible magni-
-tudes. The inductor current then is no longer an independent state of the system, and no longer
-contributes a pole to the converter small-signal transfer functions.
-This ﬁrst-order model is derived in Sect. 18.1.1, using a simple algebraic approach. In
-Sect. 18.1.2, a simple physical interpretation is obtained via the averaged switch modeling tech-
-nique. A more accurate, but more complicated, model is described in Sect. 18.3.
-18.1.1 Simple Model via Algebraic Approach: Buck–Boost Example
-The power stage of a simple buck–boost converter operating in the continuous conduction mode
-is illustrated in Fig. 18.4a, and its inductor current waveform is given in Fig. 18.4b. The small-
-signal averaged equations for this converter, under duty-cycle control, were derived in Sect.7.2.
-The result, Eq. (7.44), is reproduced below:
-(a)
-+ LC R
-+
-v(t)vg(t)
-Q1 D1
-iL(t)
-(b) iL(t)
-ic
-t0 dTs Ts
-vg
-L
-v
-L
-Fig. 18.4 Buck–boost converter example: (a) power stage, (b) inductor current waveform
+本章专门讨论电流编程模式下变换器的分析、建模和设计。在18.1节，用简单一阶模型导出系统小信号传递函数。开关网络的平均端口波形可用一个简单电流源和功率源元件描述。扰动和线性化步骤导出简单的小信号模型。
 
-730 18 Current-Programmed Control
-LdˆiL(t)
-dt = Dˆvg(t)+ D′ ˆv(t)+ (Vg−V) ˆd(t)
-C dˆv(t)
-dt =−D′ˆiL−ˆv(t)
-R + IL ˆd(t) (18.1)
-ˆig(t)= DˆiL+ IL ˆd(t)
-The Laplace transforms of these equations, with initial conditions set to zero, are
-sLˆiL(s)= Dˆvg(s)+ D′ ˆv(s)+ (Vg−V) ˆd(s)
-sCˆv(s)=−D′ˆiL(s)−ˆv(s)
-R + IL ˆd(s) (18.2)
-ˆig(s)= DˆiL(s)+ lL ˆd(s)
-We now make the assumption that the inductor currentˆiL(s) is identical to the programmed con-
-trol current ˆic(s). This is valid to the extent that the controller is stable, and that the magnitudes
-of the inductor current ripple and artiﬁcial ramp waveform are suﬃciently small:
-ˆiL(s)≈ˆic(s) (18.3)
-This approximation, in conjunction with the inductor current equation of ( 18.2), can now be
-used to ﬁnd the relationship between the control currentˆic(s) and the duty cycle ˆd(s), as follows:
-sLˆic(s)≈Dˆvg(s)+ D′ ˆv(s)+ (Vg−V) ˆd(s) (18.4)
-Solution for ˆd(s) yields
-ˆd(s)= sLˆic(s)−Dˆvg(s)−D′ ˆv(s)
-(Vg−V) (18.5)
-This small-signal expression describes how the current-programmed controller varies the duty
-cycle, in response to a given control input variation ˆic(s). It can be seen that ˆd(s) depends
-not only on ˆic(s), but also on the converter output voltage and input voltage variations. Equa-
-tion (18.5) can now be substituted into the second and third lines of Eq. ( 18.2), thereby elimi-
-nating ˆd(s). One obtains
-sCˆv(s)=−D′ˆic(s)−ˆv(s)
-R + IL
-sLˆic(s)−Dˆvg(s)−D′ ˆv(s)
-(Vg−V)
-ˆig(s)= Dˆic(s)+ IL
-sLˆic(s)−Dˆvg(s)−D′ ˆv(s)
-(Vg−V) (18.6)
-These equations can be simpliﬁed by collecting terms, and by use of the steady-state relation-
-ships
-V=−D
-D′ Vg
-IL =−V
-D′R= D
-D′2RVg (18.7)
+在18.2节，考察电流编程控制器及其内部开关电流检测环路的稳定性。发现当变换器稳态占空周期 $D$ 大于 0.5 时该控制器不稳定。通过在检测的开关电流波形中加入人工斜坡信号可使电流编程控制器稳定。此外，加入人工斜坡（也称为斜率补偿）可改善控制器的噪声抗扰性。
 
-18.1 A Simple First-Order Model 731
-(a)
-D2
-D'R vg
-+ D'R
-D2 D 1+ sL
-D'R ic
-D
-R v
-ig
-vg
-(b)
-RD sLD
-D'2R ic
-D
-R v
-D2
-D'R vg
-R
-D
-sCv v
-R
-C
-Node
-Fig. 18.5 Construction of CPM CCM buck–boost converter equivalent circuit: ( a) input port model,
-corresponding to Eq. (18.9); (b) output port model, corresponding to Eq. (18.8)
-Equation (18.6) then becomes
-sCˆv(s)=
-⎦sLD
-D′R−D′
-)
-ˆic(s)−
-⎦D
-R+ 1
-R
-)
-ˆv(s)−
-⎦D2
-D′R
-)
-ˆvg(s) (18.8)
-ˆig(s)=
-⎦sLD
-D′R+ D
-)
-ˆic(s)−
-⎦D
-R
-)
-ˆv(s)−
-⎦D2
-D′R
-)
-ˆvg(s) (18.9)
-These are the basic ac small-signal equations for the simpliﬁed ﬁrst-order model of the current-
-programmed buck–boost converter. These equations can now be used to construct small-signal
-ac circuit models that represent the behavior of the converter input and output ports. In
-Eq. (18.8), the quantity sCˆv(s) is the output capacitor current. The ˆic(s) term is represented
-in Fig. 18.5b by an independent current source, while the ˆvg(s) term is represented by a depen-
-dent current source. ˆv(s)/R is the current through the load resistor, and ˆv(s)D/R is the current
-through an eﬀective ac resistor of value R/D.
-Equation (18.9) describes the current ˆig(s) drawn by the converter input port, out of the
-source ˆvg(s). The ˆic(s) term is again represented in Fig. 18.5a by an independent current source,
-and the ˆv(s) term is represented by a dependent current source. The quantity −ˆvg(s)D2/D′R is
-modeled by an eﬀective ac resistor having the negative value−D′R/D2.
-Figures 18.5a,b can now be combined into the small-signal two-port model of Fig.18.6.T h e
-current-programmed buck and boost converters can also be modeled by a two-port equivalent
-circuit, of the same form. Table 18.1 lists the model parameters for the basic buck, boost, and
-buck–boost converters.
+虽然18.1节的一阶模型对控制-输出传递函数和变换器输出阻抗提供了大量洞见，但它不能准确预测电流编程降压变换器的线路-输出传递函数 $G_{vg}(s)$。此外，简单模型未考虑电感电流纹波或人工斜坡的影响。因此在18.3节发展更准确的平均模型，并在18.4节导出 CPM 传递函数。基于更准确的平均模型，18.5节讨论电流编程变换器的仿真。18.6节讨论电压反馈环路的设计。
 
-732 18 Current-Programmed Control
-+
-ig
-vg RCr1 f1(s) ic g1 v g2 vg f2(s) ic r2 v
-+
-Fig. 18.6 Two-port small-signal equivalent circuit used to model the current-programmed CCM buck,
-boost, and buck–boost converters
-Table 18.1 Current-programmed mode small-signal equivalent circuit parameters, simple model
-Converter g1 f1 r1 g2 f2 r2
-Buck D
-R D
-⎦
-1+ sL
-R
-)
-−R
-D2 01 ∞
-Boost 0 1 ∞ 1
-D′R D′
-⎦
-1−sL
-D′2R
-)
-R
-Buck–boost −D
-R D
-⎦
-1+ sL
-D′R
-)
-−D′R
-D2 −D2
-D′R −D′
-⎦
-1−sDL
-D′2R
-) R
-D
-The two-port equivalent circuit can now be solved, to ﬁnd the converter transfer functions
-and output impedance. The control-to-output transfer function is found by setting ˆ vg to zero.
-Solution for the output voltage then leads to the transfer function Gvc(s):
-Gvc(s)= ˆv(s)
-ˆic(s)
-⏐⏐⏐⏐
-⏐
-⏐
-ˆvg=0
-= f2
-⎦
-r2∥R∥ 1
-sC
-)
-(18.10)
-Substitution of the model parameters for the buck–boost converter yields
-Gvc(s)=−R D′
-1+ D
-⎦
-1−s DL
-D′2
-R
-)
-⎦
-1+ s RC
-1+ D
-) (18.11)
-It can be seen that this transfer function contains only one pole; the pole due to the inductor
-has been lost. The dc gain is now directly dependent on the load resistance R. In addition, the
-transfer function contains a right half-plane zero whose corner frequency is unchanged from the
-duty-cycle-controlled case. In general, introduction of current programming alters the transfer
-function poles and dc gain, but not the zeroes.
-The line-to-output transfer function Gvg(s) is found by setting the control input ˆic to zero,
-and then solving for the output voltage. The result is
-Gvg(s)= ˆv(s)
-ˆvg(s)
-⏐⏐
-⏐
-⏐⏐⏐
-ˆic=0
-= g2
-⎦
-r2∥R∥ 1
-sC
-)
-(18.12)
-Substitution of the parameters for the buck–boost converter leads to
+![源页 p.729](../assets/page-snapshots/chapter-18/page-729.png)
 
-18.1 A Simple First-Order Model 733
-Gvg(s)=−D2
-1−D2
-1⎦
-1+ s RC
-1+ D
-) (18.13)
-Again, the inductor pole is lost. The output impedance is
-Zout(s)= r2∥R∥ 1
-sC (18.14)
-For the buck–boost converter, one obtains
-Zout(s)= R
-1+ D
-1⎦
-1+ s RC
-1+ D
-) (18.15)
-18.1.2 Averaged Switch Modeling
-Additional physical insight into the properties of current programmed converters can be ob-
-tained by use of the averaged switch modeling approach developed in Sect. 14.1. Consider the
-buck converter of Fig. 18.7. We can deﬁne the terminal voltages and currents of the switch
-network as shown. When the buck converter operates in the continuous conduction mode, the
-switch network average terminal waveforms are related as follows:
-⟨v
-2(t)⟩Ts = d(t)⟨v1(t)⟩TS
-⟨i1(t)⟩Ts = d(t)⟨i2(t)⟩Ts (18.16)
-We again invoke the approximation in which the inductor current exactly follows the control
-current. In terms of the switch network terminal current i2, we can therefore write
-⟨i2(t)⟩Ts ≈⟨ic(t)⟩Ts (18.17)
-The duty cycle d(t) can now be eliminated from Eq. (18.16), as follows:
-⟨i1(t)⟩Ts = d(t)⟨ic(t)⟩Ts =⟨v2(t)⟩Ts
-⟨v1(t)⟩TS
-⟨ic(t)⟩TS (18.18)
-+
-L
-CR
-+
-v(t)vg(t)
-iL(t)
-+
-v2(t)
-i1(t) i2(t)
-Switch network
-+
-v1(t)
-Fig. 18.7 Averaged switch modeling of a current-programmed converter: CCM buck example
+图18.2 图18.1电流编程系统中开关电流 $i_s(t)$ 和控制输入 $i_c(t)$ 波形
 
-734 18 Current-Programmed Control
-+
-L
-CR
-+
-v(t) Ts
-vg(t) Ts
-iL(t) Ts
-+
-v2(t) Ts
-i1(t) Ts
-i2(t) Ts
-Averaged switch network
-+
-v1(t) Ts
-ic(t) Ts
-p(t) Ts
-Fig. 18.8 Averaged switch model of CPM buck converter
-This equation can be written in the alternative form
-⟨i1(t)⟩Ts⟨v1(t)⟩Ts =⟨ic(t)⟩TS⟨v2(t)⟩Ts =⟨p(t)⟩Ts (18.19)
-Equations (18.17) and ( 18.19) are the desired result, which describes the average terminal re-
-lations of the CCM current-programmed buck switch network. Equation (18.17) states that the
-average terminal current⟨i2(t)⟩TS is equal to the control current⟨ic(t)⟩Ts . Equation (18.19) states
-that the input port of the switch network consumes average power ⟨p(t)⟩Ts equal to the aver-
-age power ﬂowing out of the switch output port. The averaged equivalent circuit of Fig. 18.8 is
-obtained.
-Figure 18.8 describes the behavior of the current programmed buck converter switch net-
-work, in a simple and straightforward manner. The switch network output port behaves as a
-current source of value ⟨ic(t)⟩TS . The input port follows a power sink characteristic, drawing
-power from the source vg equal to the power supplied by the ic current source. Properties of the
-power source and power sink elements are described in Chaps.15 and 21.
-Similar arguments lead to the averaged switch models of the current programmed boost
-and buck–boost converters, illustrated in Fig. 18.9. In both cases, the switch network averaged
-terminal waveforms can be represented by a current source of value ⟨ic(t)⟩Ts , in conjunction
-with a dependent power source or power sink.
-A small-signal ac model of the current-programmed buck converter can now be constructed
-by perturbation and linearization of the switch network averaged terminal waveforms. Let
-⟨v1(t)⟩Ts = V1+ ˆv1(t)
-⟨i1(t)⟩Ts = I1+ ˆi1(t)
-⟨v2(t)⟩Ts = V2+ ˆv2(t) (18.20)
-⟨i2(t)⟩Ts = I2+ ˆi2(t)
-⟨ic(t)⟩Ts = Ic+ ˆic(t)
-Perturbation and linearization of the⟨ic(t)⟩Ts current source of Fig.18.8 simply leads to a current
-source of value ˆic(t). Perturbation of the power source characteristic, Eq. (18.19), leads to
-(V1+ ˆv1(t))(I1+ ˆi1(t))= (Ic+ ˆic(t))(V2+ ˆv2(t)) (18.21)
-Upon equating the dc terms on both sides of this equation, we obtain
-V1I1= IcV2 ⇒ I1= DIc (18.22)
+18.7节用采样数据建模技术进一步考察连续导通模式下电流编程变换器的高频响应。最后，18.8节将电流编程变换器的建模扩展到断续导通模式。
 
-18.1 A Simple First-Order Model 735
-(a)
-+
-L
-CR
-+
-v(t) Ts
-vg(t) Ts
-iL(t) Ts
-Averaged switch network
-ic(t) Ts
-p(t) Ts
-(b)
-+
-L
-CR
-+
-v(t) Ts
-vg(t) Ts
-iL(t) Ts
-Averaged switch network
-ic(t) Ts
-p(t) Ts
-Fig. 18.9 Averaged models of CPM boost (a) and CPM buck–boost (b) converters, derived via averaged
-switch modeling
-The linear small-signal ac terms of Eq. (18.21)a r e
-ˆv1(t)I1+ V1ˆi1(t)= ˆic(t)V2+ Ic ˆv2(t) (18.23)
-Solution for the small-signal switch network input current ˆi1(t) yields
-ˆi1(t)= ˆic(t)V2
-V1
-+ ˆv2(t) Ic
-V1
-−ˆv1(t) I1
-V1
-(18.24)
-The small-signal ac model of Fig. 18.10 can now be constructed. The switch network output
-port is again a current source, of value ˆic(t). The switch network input port model is obtained
-by linearization of the power sink characteristic, as given by Eq. (18.24). The input port current
-ˆi1(t) is composed of three terms. Theˆic(t) term is modeled by an independent current source, the
-ˆv2(t) term is modeled by a dependent current source, and the ˆv1(t) term is modeled by an eﬀec-
-tive ac resistor having the negative value−V1/I1. As illustrated in Fig. 18.11, this incremental
-resistance is determined by the slope of the power sink input port characteristic, evaluated at the
-quiescent operating point. The power sink leads to a negative incremental resistance because an
-increase in⟨v
-1(t)⟩Ts causes a decrease in⟨i1(t)⟩Ts , such that constant⟨p(t)⟩Ts is maintained.
-The equivalent circuit of Fig. 18.10 can now be simpliﬁed by use of the dc relations V2 =
-DV1, I2= V2/R, I1= DI2, I2= Ic. Equation (18.24) then becomes
+另一种电流编程方法称为平均电流模式（ACM）控制，由构建调节平均变换器电流的反馈环路组成。该方法在18.9节讨论。平均电流模式控制的一个优点是它可直接控制变换器输入或输出电流，这在某些应用中是必需的，包括电池充电器、LED 驱动器以及交流并网整流器和逆变器。此外，ACM 控制器改善了噪声抗扰性，在宽占空周期范围内不必然需要斜率补偿即可稳定运行。
 
-736 18 Current-Programmed Control
-+
-L
-CR
-++
-Switch network small-signal ac model
-+
-vg
-V1
-I1
-i1 i2
-ic
-V2
-V1
-ic
-v1 v2
-Ic
-V1
-v2 v
-Fig. 18.10 Small-signal model of the CCM CPM buck converter, derived by perturbation and lineariza-
-tion of the switch network of Fig. 18.8
-Quiescent
-operating
-point
-Power source
-characteristic
-i1(t) Ts
-v1(t) Ts
-v1(t) Ts
-i1(t) Ts
- = p(t) Ts
-1r1
-I1
-V1
-V1
-I1
-Fig. 18.11 Origin of the input port negative incremental resistance r1: the slope of the power sink char-
-acteristic, evaluated at the quiescent operating point
-ˆi1(t)= Dˆic(t)+ D
-R ˆv2(t)−D2
-R ˆv1(t) (18.25)
-Finally, we can eliminate the quantities ˆv1 and ˆv2 in favor of the converter terminal voltages ˆvg
-and ˆv2 as follows. The quantity ˆv1 is simply equal to ˆvg. The quantity ˆv2 is equal to the output
-voltage ˆv plus the voltage across the inductor, sLˆic(s). Hence,
-ˆv2(s)= ˆv(s)+ sLˆic(s) (18.26)
-With these substitutions, Eq. (18.25) becomes
-ˆi1(s)= D
-⎦
-1+ s L
-R
-)
-ˆic(s)+ D
-R ˆv(s)−D2
-R ˆvg(s) (18.27)
-The equivalent circuit of Fig.18.12 is now obtained. It can be veriﬁed that this equivalent circuit
-coincides with the model of Fig. 18.6 and the buck converter parameters of Table18.1.
-The approximate small-signal properties of the current-programmed buck converter can now
-be explained. Since the inductor is in series with the current source ˆic, the inductor does not
-contribute to the control-to-output transfer function. The control-to-output transfer function is
-determined simply by the relation
+### 18.1 简单一阶模型
 
-18.1 A Simple First-Order Model 737
-Fig. 18.12 Simpliﬁcation of the CPM buck converter model of Fig.18.10, with dependent power source
-expressed in terms of the output voltage variations
-Gvc(s)= ˆv(s)
-ˆic(s)
-⏐⏐⏐
-⏐
-⏐⏐
-ˆvg=0
-=
-⎦
-R∥ 1
-sC
-)
-(18.28)
-So current programming transforms the output characteristic of the buck converter into a current
-source. The power sink input characteristic of the current-programmed buck converter leads to
-a negative incremental input resistance, as described above. Finally, Fig.18.12 predicts that the
-buck converter line-to-output transfer function is zero:
-Gvg(s)= ˆv(s)
-ˆvg(s)
-⏐⏐
-⏐⏐⏐
-⏐
-ˆic=0
-= 0 (18.29)
-Disturbances in vg do not inﬂuence the output voltage, since the inductor current depends only
-on ic. The current-programmed controller adjusts the duty cycle as necessary to maintain con-
-stant inductor current, regardless of variations in vg. The more accurate models of Sect. 18.3
-predict that Gvg(s) is not zero, but is nonetheless small in magnitude.
-Similar arguments lead to the boost converter small-signal equivalent circuit of Fig. 18.13.
-Derivation of this equivalent circuit is left as a homework problem. In the case of the boost
-converter, the switch network input port behaves as a current source, of value ic, while the
-output port is a dependent power source, equal to the power apparently consumed by the current
-source i
-c. In the small-signal model, the current source ˆic appears in series with the inductor L,
-and hence the converter transfer functions cannot contain poles arising from the inductor. The
-switch network power source output characteristic leads to an ac resistance of valuer2= R.T h e
-line-to-output transfer function Gvg(s) is nonzero in the boost converter, since the magnitude of
-+
-L
-CR
-+
-vg ic v
-iL
-Ric D sL
-D'2R
-vg
-D'R
-Fig. 18.13 Small-signal model of the CCM CPM boost converter, derived via averaged switch modeling
-and the approximation iL ≈ic
+![源页 p.730](../assets/page-snapshots/chapter-18/page-730.png)
 
-738 18 Current-Programmed Control
-the power source depends directly on the value of vg. The control-to-output transfer function
-Gvc(s) contains a right half-plane zero, identical to the right half-plane zero of the duty-cycle-
-controlled boost converter.
-18.2 Oscillation for D> 0.5
-The current-programmed controller of Fig.18.1 is unstable whenever the steady-state duty cycle
-is greater than 0.5. To avoid this stability problem, the controller is usually modiﬁed by addition
-of an artiﬁcial ramp to the sensed switch current waveform. In this section, the stability of the
-current programmed controller is analyzed. The e ﬀects of the addition of the artiﬁcial ramp
-are explained, using a simple ﬁrst-order discrete-time analysis. Eﬀects of the artiﬁcial ramp on
-controller noise susceptibility are also discussed.
-Figure 18.14 illustrates a generic inductor current waveform of a switching converter oper-
-ating in the continuous conduction mode. The inductor current changes with a slope m
-1 during
-the ﬁrst subinterval, and a slope −m2 during the second subinterval. For the basic nonisolated
-converters, the slopes m1 and−m2 are given by
-Buck converter
-m1= vg−v
-L −m2=−v
-L
-Boost converter
-m1= vg
-L −m2= vg−v
-L (18.30)
-Buck–boost converter
-m1= vg
-L −m2= v
-L
-With knowledge of the slopes m1 and−m2, we can determine the general relationships between
-iL(0), ic, iL(Ts), and dTs.
-During the ﬁrst subinterval, the inductor current iL(t) increases with slope m1, until iL(t)
-reaches the control signal ic. Hence,
-iL(dTs)= ic= iL(0)+ m1dTs (18.31)
-iL(t)
-ic
-m1
-t0 dTs Ts
-iL(0) iL(Ts)2
-Fig. 18.14 Inductor current waveform of a current-programmed converter operating in the continuous
-conduction mode
+一旦构建了电流编程控制器，就希望设计反馈环路以调节输出电压。与往常一样，该电压反馈环路必须设计为满足线路扰动抑制、暂态响应、输出阻抗等指标。典型系统的框图如图18.3所示，包含一个内部电流编程控制器和一个外部电压反馈环路。
 
-18.2 Oscillation for D> 0.5 739
-Solution for the duty cycle d leads to
-d= ic−iL(0)
-m1Ts
-(18.32)
-In a similar manner, for the second subinterval we can write
-iL(Ts)= iL(dTs)−m2d′Ts (18.33)
-= iL(0)+ m1dTs−m2d′Ts
-In steady-state, iL(0)= iL(Ts), d= D, m1= M1, and m2= M2. Insertion of these relationships
-into Eq. (18.33) yields
-0= M1DTs −M2D′Ts (18.34)
-Or,
-M2
-M1
-= D
-D′ (18.35)
-Steady-state Eq. (18.35) coincides with the requirement for steady-state volt-second balance on
-the inductor.
-Consider now a small perturbation in iL(0):
-iL(0)= IL0+ ˆiL(0) (18.36)
-IL0 is a steady-state value ofiL(0), which satisﬁes Eqs. (18.33) and (18.34), while ˆiL( 0 )i sas m a l l
-perturbation such that
-|ˆiL(0)|≪| IL0| (18.37)
-It is desired to assess the stability of the current-programmed controller, by determining whether
-this small perturbation eventually decays to zero. To do so, let us solve for the perturbation after
-n switching periods, ˆiL(nTs), and determine whether ˆiL(nTs) tends to zero for large n.
-iL(t)
-ic
-m1
-t0 DTs Ts
-IL0
-2
-2
-m1 Steady-state
-waveform
-Perturbed
-waveform
-IL0 + iL(0)
-dTs
-D + d Ts
-iL(0)
-iL(Ts)
-Fig. 18.15 Eﬀect of initial perturbation ˆiL(0) on inductor current waveform
-The steady-state and perturbed inductor current waveforms are illustrated in Fig.18.15.F o r
-clarity, the size of the inductor current perturbation ˆiL(0) is exaggerated. It is assumed that the
-converter operates near steady-state, such that the slopes m1 and m2 are essentially unchanged.
-Figure 18.15 is drawn for a positive ˆiL(0); the quantity ˆdTs is then negative. Since the slopes of
+要设计外部电压反馈环路，需要电流编程模式下开关变换器的交流等效电路模型。在第7章中，用平均法为占空比控制的变换器导出了小信号交流等效电路模型。这些模型以占空比变化 $\hat{d}$ 表征电路行为。若能找到电流编程控制器中控制信号 $i_c(t)$ 与占空周期 $d(t)$ 的关系，则可把第7章的模型适配到电流编程模式。一般情况下，占空周期不仅取决于 $i_c(t)$，还取决于变换器电压和电流；因此电流编程控制器包含如图18.3所示的多条有效反馈环路。
 
-740 18 Current-Programmed Control
-Fig. 18.16 Expanded view of the steady-state and perturbed inductor current waveforms, near the peak
-of iL(t)
-the steady-state and perturbed waveforms are essentially equal over the interval 0 < t< (D+
-ˆd)Ts, the diﬀerence between the waveforms is equal toˆiL(0) for this entire interval. Likewise, the
-diﬀerence between the two waveforms is a constantˆiL(Ts) over the interval DTs< t< Ts, since
-both waveforms then have the slope −m2. Note that ˆiL(Ts) is a negative quantity, as sketched
-in Fig. 18.15. Hence, we can solve for ˆiL(Ts) in terms of ˆiL(0), by considering only the interval
-(D+ ˆd)Ts< t< DTs as illustrated in Fig. 18.16.
-From Fig. 18.16, we can use the steady-state waveform to express ˆiL(0) as the slope m1,
-multiplied by the interval length−ˆdTs. Hence,
-ˆiL(0)=−m1 ˆdTs (18.38)
-Likewise, we can use the perturbed waveform to expressˆiL(Ts) as the slope−m2, multiplied by
-the interval length−ˆdTs:
-ˆiL(Ts)= m2 ˆdTs (18.39)
-Elimination of the intermediate variable ˆd from Eqs. (18.38) and (18.39) leads to
-ˆiL(Ts)= ˆiL(0)
-⎦
-−m2
-m1
-)
-(18.40)
-If the converter operating point is suﬃciently close to the quiescent operating point, thenm2/m1
-is given approximately by Eq. (18.35). Equation (18.40) then becomes
-ˆiL(Ts)= ˆiL(0)
-⎦
-−D
-D′
-)
-(18.41)
-A similar analysis can be performed during the next switching period, to show that
-ˆiL(2Ts)= ˆiL(Ts)
-⎦
-−D
-D′
-)
-= ˆiL(0)
-⎦
-−D
-D
-)2
-(18.42)
-After n switching periods, the perturbation becomes
-ˆiL(nTs)= ˆiL((n−1)Ts)
-⎦
-−D
-D′
-)
-= ˆiL(0)
-⎦
-−D
-D′
-)n
-(18.43)
-Note that, as n tends to inﬁnity, the perturbation ˆiL(nTs) tends to zero provided that the charac-
-teristic value−D/D′ has magnitude less than one. Conversely, the perturbationˆiL(nTs) becomes
-large in magnitude when the characteristic value α=−D/D′ has magnitude greater than one:
+![源页 p.730](../assets/page-snapshots/chapter-18/page-730.png)
 
-18.2 Oscillation for D> 0.5 741
-⏐⏐⏐ˆiL(nTs)
-⏐⏐⏐→
-⎧⎪⎪⎪⎪⎨⎪⎪⎪⎪⎩
-0 when
-⏐⏐
-⏐
-⏐⏐−D
-D′
-⏐⏐
-⏐
-⏐⏐< 1
-∞when
-⏐⏐
-⏐
-⏐⏐−D
-D′
-⏐⏐
-⏐
-⏐⏐> 1
-(18.44)
-Therefore, for stable operation of the current-programmed controller, we need|α|= D/D
-′ < 1,
-or
-D< 0.5 (18.45)
-As an example, consider the operation of the boost converter with the steady-state terminal
-voltages Vg= 20 V, V= 50 V. SinceV/Vg= 1/D′, the boost converter should operate withD=
-0.6. We therefore expect the current-programmed controller to be unstable. The characteristic
-value will be
-α=−D
-D′ =
-⎦
-−0.6
-0.4
-)
-=−1.5 (18.46)
-As given by Eq. (18.43), a perturbation in the inductor current will increase by a factor of – 1.5
-over every switching period. As illustrated in Fig. 18.17, the perturbation grows to −1.5 ˆiL(0)
-after one switching period, to +2.25 ˆiL(0) after two switching periods, and to −3.375 ˆiL(0) af-
-ter three switching periods. For the particular initial conditions illustrated in Fig. 18.17,t h i s
-growing oscillation saturates the Current-programmed controller after three switching periods.
-The transistor remains on for the entire duration of the fourth switching period. The inductor
-current and controller waveforms may eventually become oscillatory and periodic in nature,
-with period equal to an integral number of switching periods. Alternatively, the waveforms may
-become chaotic. In either event, the controller does not operate as intended.
-Figure 18.18 illustrates the inductor current waveforms when the output voltage is decreased
-to V = 30 V . The boost converter then operates with D= 1/3, and the characteristic value
-becomes
-α=−D
-D′ =
-⎦
-−1/3
-2/3
-)
-=−0.5 (18.47)
-Perturbations now decrease in magnitude by a factor of 0.5 over each switching period. A dis-
-turbance in the inductor current becomes small in magnitude after a few switching periods.
-The instability for D> 0.5 is a well-known problem of current programmed control, and
-is not dependent on the converter topology. The controller can be rendered stable for all duty
-cycles by addition of an artiﬁcial ramp to the sensed switch current waveform, as illustrated
-iL(t)
-ic
-t0 Ts
-IL0
-2Ts 3Ts 4Ts
-iL(0)
-iL(0)
-ˆ
-ˆ
-ˆ
-ˆ
-2.25iL(0)
-iL(0)
-Fig. 18.17 Unstable oscillation for D= 0.6
+图18.3 含电流编程控制的变换器系统框图
 
-742 18 Current-Programmed Control
-1
-8 iL(0)
-1
-4 iL(0)1
-2 iL(0)
-iL(t)
-ic
-t0 Ts
-IL0
-iL(0)
-2Ts 3Ts 4Ts
-1
-16 iL(0)
-Fig. 18.18 A stable transient with D= 1
-3
-in Fig. 18.19. This artiﬁcial ramp has the qualitative e ﬀect of reducing the gain of the inner
-switch-current-sensing discrete feedback loop. The artiﬁcial ramp has slope ma as shown. The
-controller now switches the transistor oﬀwhen
-ia(dTs)+ iL(dTs)= ic (18.48)
-where ia(t) is the artiﬁcial ramp waveform. Therefore, the transistor is switched o ﬀwhen the
-inductor current iL(t) is given by
-iL(dTs)= ic−ia(dTs) (18.49)
-Figure 18.20 illustrates the analog comparison of the inductor current waveform iL(t) with the
-quantity [ic−ia(t)].
-We can again determine the stability of the current-programmed controller by analyzing the
-change in a perturbation of the inductor current waveform over a complete switching period. Fig-
-ure 18.21 illustrates steady-state and perturbed inductor current waveforms, in the presence of
-the artiﬁcial ramp. Again, the magnitude of the perturbationˆi
-L(0) is exaggerated. The perturbed
-waveform is sketched for a positive value of ˆiL(0); this causes ˆd, and usually also ˆiL(Ts), to be
-negative. If the perturbed waveforms are suﬃciently close to the quiescent operating point, then
-the slopes m1 and m2 are essentially unchanged, and the relationship between ˆiL(0) and ˆiL(Ts)
-can be determined solely by consideration of the interval ( D+ ˆd)Ts < t< DTs. The pertur-
-bations ˆiL(0) and ˆiL(Ts) are expressed in terms of the slopes m1, m2, and ma, and the interval
-length−ˆdTs, as follows:
-ˆiL(0)=−ˆdTs(m1+ ma) (18.50)
-ˆiL(Ts)=−ˆdTs(ma−m2) (18.51)
-Elimination of ˆd yields
-ˆiL(Ts)= ˆiL(0)
-⎦
-−m2−ma
-m1+ ma
-)
-(18.52)
-A similar analysis can be applied to the nth switching period, leading to
-ˆiL(nTs)= ˆiL((n−1)Ts)
-⎦
-−m2−ma
-m1+ ma
-)
-= ˆiL(0)
-⎦
-−m2−ma
-m1+ ma
-)n
-= ˆiL(0)α n (18.53)
+在本节中，如上所述推广平均法以处理电流编程变换器。采用简单一阶近似，即假设电流编程控制器理想运行，从而使平均电感电流 $\langle i_L(t)\rangle_{T_s}$ 等于控制电流 $i_c(t)$。当电感电流纹波和人工斜坡（18.2节讨论）幅值可忽略时该近似合理。于是电感电流不再是系统的独立状态，不再为变换器小信号传递函数贡献极点。
 
-18.2 Oscillation for D> 0.5 743
-(a)
-+
-Buck converter
-Current-programmed controller
-Rvg(t)
-is(t)
-+
-v(t)
-iL(t)
-Q1
-L
-CD1
-+
-Analog
-comparator
-Latch
-ia(t)Rf Ts0
-S
-R
-Q
-ma
-Clock
-is(t)
-++
-Rf
-Measure
-switch
-current
-is(t)Rf
-Control
-input
-ic(t)Rf
-Artificial ramp
-(b) ia(t)
-ma
-t0 Ts 2Ts
-Fig. 18.19 Stabilization of the current-programmed controller by addition of an artiﬁcial ramp to the
-measured switch current waveform: (a) block diagram, (b) artiﬁcial ramp waveform
-iL(t)
-ic
-m1
-t0 dTs Ts
-IL0
- m2
- ma
-(ic ia(t))
-Fig. 18.20 Addition of artiﬁcial ramp: the transistor is now switched oﬀwhen iL(t)= ic−ia(t)
+该一阶模型在18.1.1节用简单代数方法导出。在18.1.2节，通过平均开关建模技术获得简单的物理诠释。更准确但更复杂的模型在18.3节描述。
 
-744 18 Current-Programmed Control
- maiL(Ts)
-i L(0)
-ic
-m1
-t0 DTs Ts
-IL0
- m2
- m2
-m1 Steady-state
-waveform
-Perturbed
-waveform
-IL0 + iL(0)
-dTs
-D + d Ts
-(ic ia(t))
-Fig. 18.21 Steady-state and perturbed inductor current waveforms, in the presence of an artiﬁcial ramp
-The evolution of inductor current perturbations is now determined by the characteristic value
-α=−m2−ma
-m1+ ma
-(18.54)
-For large n, the perturbation magnitude tends to
-| ˆiL(nTs)|→
-⎧⎪⎪⎨⎪⎪⎩
-0 when | α|< 1
-∞when| α|> 1 (18.55)
-Therefore, for stability of the current-programmed controller, we need to choose the slope of
-the artiﬁcial ramp ma such that the characteristic value α has magnitude less than one. The
-artiﬁcial ramp gives us an additional degree of freedom, which we can use to stabilize the system
-for duty cycles greater than 0.5. Note that increasing the value of ma causes the numerator of
-Eq. (18.54) to decrease, while the denominator increases. Therefore, the characteristic value α
-attains magnitude less than one for suﬃciently large ma.
-In the conventional voltage regulator application, the output voltagev(t) is well regulated by
-the converter control system, while the input voltage vg(t) is unknown. Equation ( 18.30) then
-predicts that the value of the slope m2 is constant and known with a high degree of accuracy,
-for the buck and buck–boost converters. Therefore, let us use Eq. (18.35) to eliminate the slope
-m1 from Eq. (18.54), and thereby express the characteristic value α as a function of the known
-slope m2 and the steady-state duty cycle D:
-α=−
-1−ma
-m2
-D′
-D+ ma
-m2
-(18.56)
-One common choice of artiﬁcial ramp slope is
-ma= 1
-2m2 (18.57)
-It can be veriﬁed, by substitution of Eq. (18.57)i n t o(18.56), that this choice leads to α=−1a t
-D= 1, and to|α|< 1f o r0≤D< 1. This is the minimum value of ma that leads to stability for
-all duty cycles. We will see in Sect. 18.3 that this choice of ma has the added beneﬁt of causing
-the ideal line-to-output transfer function Gvg(s) of the buck converter to become zero.
-```
+#### 18.1.1 代数法简单模型：升降压变换器示例
+
+![源页 p.731](../assets/page-snapshots/chapter-18/page-731.png)
+
+图18.4 升降压变换器示例：(a) 功率级，(b) 电感电流波形
+
+连续导通模式下简单升降压变换器功率级如图18.4a所示，其电感电流波形如图18.4b所示。该变换器在占空比控制下的小信号平均方程已在7.2节导出。结果即式(7.44)，重列如下：
+
+$$L\frac{d\hat{i}_L(t)}{dt} = D\hat{v}_g(t) + D'\hat{v}(t) + (V_g - V)\hat{d}(t)$$
+
+$$C\frac{d\hat{v}(t)}{dt} = -D'\hat{i}_L - \frac{\hat{v}(t)}{R} + I_L\hat{d}(t) \tag{18.1}$$
+
+$$\hat{i}_g(t) = D\hat{i}_L + I_L\hat{d}(t)$$
+
+这些方程在初始条件为零下的拉普拉斯变换为
+
+$$sL\hat{i}_L(s) = D\hat{v}_g(s) + D'\hat{v}(s) + (V_g - V)\hat{d}(s)$$
+
+$$sC\hat{v}(s) = -D'\hat{i}_L(s) - \frac{\hat{v}(s)}{R} + I_L\hat{d}(s) \tag{18.2}$$
+
+$$\hat{i}_g(s) = D\hat{i}_L(s) + I_L\hat{d}(s)$$
+
+![源页 p.732](../assets/page-snapshots/chapter-18/page-732.png)
+
+现假设电感电流 $\hat{i}_L(s)$ 等于编程控制电流 $\hat{i}_c(s)$。在控制器稳定且电感电流纹波和人工斜坡波形幅值足够小的前提下该假设成立：
+
+$$\hat{i}_L(s) \approx \hat{i}_c(s) \tag{18.3}$$
+
+该近似连同式(18.2)的电感电流方程，可用来求控制电流 $\hat{i}_c(s)$ 与占空周期 $\hat{d}(s)$ 的关系如下：
+
+$$sL\hat{i}_c(s) \approx D\hat{v}_g(s) + D'\hat{v}(s) + (V_g - V)\hat{d}(s) \tag{18.4}$$
+
+解出 $\hat{d}(s)$ 得
+
+$$\hat{d}(s) = \frac{sL\hat{i}_c(s) - D\hat{v}_g(s) - D'\hat{v}(s)}{(V_g - V)} \tag{18.5}$$
+
+此小信号表达式描述了电流编程控制器如何响应给定控制输入变化 $\hat{i}_c(s)$ 调整占空周期。可见 $\hat{d}(s)$ 不仅取决于 $\hat{i}_c(s)$，还取决于变换器输出电压和输入电压变化。将式(18.5)代入式(18.2)第二、三行，消去 $\hat{d}(s)$，得
+
+$$sC\hat{v}(s) = -D'\hat{i}_c(s) - \frac{\hat{v}(s)}{R} + I_L\frac{sL\hat{i}_c(s) - D\hat{v}_g(s) - D'\hat{v}(s)}{(V_g - V)}$$
+
+$$\hat{i}_g(s) = D\hat{i}_c(s) + I_L\frac{sL\hat{i}_c(s) - D\hat{v}_g(s) - D'\hat{v}(s)}{(V_g - V)} \tag{18.6}$$
+
+用稳态关系合并同类项简化这些方程
+
+$$V = -\frac{D}{D'}V_g$$
+
+$$I_L = -\frac{V}{D'R} = \frac{D}{D'^2 R}V_g \tag{18.7}$$
+
+![源页 p.733](../assets/page-snapshots/chapter-18/page-733.png)
+
+图18.5 CPM CCM 升降压变换器等效电路构造：(a) 对应式(18.9)的输入端口模型；(b) 对应式(18.8)的输出端口模型
+
+式(18.6)于是变为
+
+$$sC\hat{v}(s) = \left(\frac{sLD}{D'R} - D'\right)\hat{i}_c(s) - \left(\frac{D}{R} + \frac{1}{R}\right)\hat{v}(s) - \frac{D^2}{D'R}\hat{v}_g(s) \tag{18.8}$$
+
+$$\hat{i}_g(s) = \left(\frac{sLD}{D'R} + D\right)\hat{i}_c(s) - \frac{D}{R}\hat{v}(s) - \frac{D^2}{D'R}\hat{v}_g(s) \tag{18.9}$$
+
+这些是电流编程升降压变换器简化一阶模型的基本交流小信号方程。现在可用这些方程构造表征变换器输入和输出端口行为的小信号交流电路模型。式(18.8)中，量 $sC\hat{v}(s)$ 为输出电容电流。$\hat{i}_c(s)$ 项在图18.5b中由独立电流源表示，$\hat{v}_g(s)$ 项由受控电流源表示。$\hat{v}(s)/R$ 为负载电阻电流，$\hat{v}(s)D/R$ 为值为 $R/D$ 的有效交流电阻上电流。
+
+式(18.9)描述从源 $\hat{v}_g(s)$ 抽取的变换器输入端口电流 $\hat{i}_g(s)$。$\hat{i}_c(s)$ 项在图18.5a中再次由独立电流源表示，$\hat{v}(s)$ 项由受控电流源表示。量 $-\hat{v}_g(s)D^2/D'R$ 由值为 $-D'R/D^2$ 的有效交流电阻建模。
+
+![源页 p.734](../assets/page-snapshots/chapter-18/page-734.png)
+
+图18.5a、b 现可合并为图18.6的小信号双端口模型。电流编程降压和升压变换器也可用同样形式的双端口等效电路建模。表18.1列出了基本降压、升压和升降压变换器的模型参数。
+
+图18.6 用于建模电流编程 CCM 降压、升压和升降压变换器的双端口小信号等效电路
+
+表18.1 电流编程模式小信号等效电路参数，简单模型
+
+| 变换器 | $g_1$ | $f_1$ | $r_1$ | $g_2$ | $f_2$ | $r_2$ |
+|---|---|---|---|---|---|---|
+| 降压 | $\dfrac{D}{R}$ | $D\left(1 + \dfrac{sL}{R}\right)$ | $-\dfrac{R}{D^2}$ | $0$ | $1$ | $\infty$ |
+| 升压 | $0$ | $1$ | $\infty$ | $\dfrac{1}{D'R}$ | $D'\left(1 - \dfrac{sL}{D'^2 R}\right)$ | $R$ |
+| 升降压 | $-\dfrac{D}{R}$ | $D\left(1 + \dfrac{sL}{D'R}\right)$ | $-\dfrac{D'R}{D^2}$ | $-\dfrac{D^2}{D'R}$ | $-D'\left(1 - \dfrac{sDL}{D'^2 R}\right)$ | $\dfrac{R}{D}$ |
+
+现可求解双端口等效电路以求变换器传递函数和输出阻抗。控制-输出传递函数由令 $\hat{v}_g$ 为零求得。对输出电压求解得传递函数 $G_{vc}(s)$：
+
+$$G_{vc}(s) = \left.\frac{\hat{v}(s)}{\hat{i}_c(s)}\right|_{\hat{v}_g=0} = f_2\left(r_2 \parallel R \parallel \frac{1}{sC}\right) \tag{18.10}$$
+
+代入升降压变换器模型参数得
+
+$$G_{vc}(s) = -\frac{D'R}{1 + D}\cdot\frac{1 - \dfrac{sDL}{D'^2 R}}{1 + \dfrac{sRC}{1 + D}} \tag{18.11}$$
+
+可见该传递函数只含一个极点；电感产生的极点丢失了。直流增益直接取决于负载电阻 $R$。此外，传递函数含右半平面零点，其转折频率与占空比控制情形相同。一般地，引入电流编程改变传递函数极点和直流增益，但不改变零点。
+
+线路-输出传递函数 $G_{vg}(s)$ 由令控制输入 $\hat{i}_c$ 为零，然后求输出电压得到。结果为
+
+$$G_{vg}(s) = \left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{i}_c=0} = g_2\left(r_2 \parallel R \parallel \frac{1}{sC}\right) \tag{18.12}$$
+
+![源页 p.735](../assets/page-snapshots/chapter-18/page-735.png)
+
+代入升降压变换器参数得
+
+$$G_{vg}(s) = -\frac{D^2}{1 - D^2}\cdot\frac{1}{1 + \dfrac{sRC}{1 + D}} \tag{18.13}$$
+
+同样电感极点丢失。输出阻抗为
+
+$$Z_{out}(s) = r_2 \parallel R \parallel \frac{1}{sC} \tag{18.14}$$
+
+对升降压变换器得
+
+$$Z_{out}(s) = \frac{R}{1 + D}\cdot\frac{1}{1 + \dfrac{sRC}{1 + D}} \tag{18.15}$$
+
+#### 18.1.2 平均开关建模
+
+用14.1节发展的平均开关建模方法可获得电流编程变换器特性的额外物理洞见。考虑图18.7的降压变换器。可如图所示定义开关网络的端口电压和电流。当降压变换器工作于连续导通模式时，开关网络平均端口波形关系如下：
+
+$$\langle v_2(t)\rangle_{T_s} = d(t)\langle v_1(t)\rangle_{T_s}$$
+
+$$\langle i_1(t)\rangle_{T_s} = d(t)\langle i_2(t)\rangle_{T_s} \tag{18.16}$$
+
+再次引用电感电流精确跟随控制电流的近似。以开关网络端口电流 $i_2$ 表示可写
+
+$$\langle i_2(t)\rangle_{T_s} \approx \langle i_c(t)\rangle_{T_s} \tag{18.17}$$
+
+现可从式(18.16)消去占空周期 $d(t)$，如下：
+
+$$\langle i_1(t)\rangle_{T_s} = d(t)\langle i_c(t)\rangle_{T_s} = \frac{\langle v_2(t)\rangle_{T_s}}{\langle v_1(t)\rangle_{T_s}}\langle i_c(t)\rangle_{T_s} \tag{18.18}$$
+
+![源页 p.735](../assets/page-snapshots/chapter-18/page-735.png)
+
+图18.7 电流编程变换器的平均开关建模：CCM 降压示例
+
+该方程可写成另一种形式
+
+$$\langle i_1(t)\rangle_{T_s}\langle v_1(t)\rangle_{T_s} = \langle i_c(t)\rangle_{T_s}\langle v_2(t)\rangle_{T_s} = \langle p(t)\rangle_{T_s} \tag{18.19}$$
+
+式(18.17)和(18.19)即所求结果，描述了 CCM 电流编程降压开关网络的平均端口关系。式(18.17)表明平均端口电流 $\langle i_2(t)\rangle_{T_s}$ 等于控制电流 $\langle i_c(t)\rangle_{T_s}$。式(18.19)表明开关网络输入端口消耗的平均功率 $\langle p(t)\rangle_{T_s}$ 等于从开关输出端口流出的平均功率。由此得图18.8的平均等效电路。
+
+![源页 p.736](../assets/page-snapshots/chapter-18/page-736.png)
+
+图18.8 CPM 降压变换器的平均开关模型
+
+图18.8以简单直接的方式描述了电流编程降压变换器开关网络的行为。开关网络输出端口表现为值为 $\langle i_c(t)\rangle_{T_s}$ 的电流源。输入端口遵循功率汇特征，从源 $v_g$ 抽取功率等于 $i_c$ 电流源提供的功率。功率源和功率汇元件的特性在第15章和第21章描述。
+
+类似论证可得电流编程升压和升降压变换器的平均开关模型，如图18.9所示。两种情形下，开关网络平均端口波形都可用值为 $\langle i_c(t)\rangle_{T_s}$ 的电流源配合受控功率源或功率汇表示。
+
+![源页 p.737](../assets/page-snapshots/chapter-18/page-737.png)
+
+图18.9 经平均开关建模导出的 CPM 升压 (a) 和 CPM 升降压 (b) 变换器平均模型
+
+通过对开关网络平均端口波形作扰动和线性化，可构造电流编程降压变换器的小信号交流模型。令
+
+$$\langle v_1(t)\rangle_{T_s} = V_1 + \hat{v}_1(t)$$
+
+$$\langle i_1(t)\rangle_{T_s} = I_1 + \hat{i}_1(t)$$
+
+$$\langle v_2(t)\rangle_{T_s} = V_2 + \hat{v}_2(t) \tag{18.20}$$
+
+$$\langle i_2(t)\rangle_{T_s} = I_2 + \hat{i}_2(t)$$
+
+$$\langle i_c(t)\rangle_{T_s} = I_c + \hat{i}_c(t)$$
+
+对图18.8的 $\langle i_c(t)\rangle_{T_s}$ 电流源作扰动和线性化直接得到值为 $\hat{i}_c(t)$ 的电流源。对功率源特性式(18.19)作扰动得
+
+$$(V_1 + \hat{v}_1(t))(I_1 + \hat{i}_1(t)) = (I_c + \hat{i}_c(t))(V_2 + \hat{v}_2(t)) \tag{18.21}$$
+
+令方程两边直流项相等得
+
+$$V_1 I_1 = I_c V_2 \quad \Rightarrow \quad I_1 = DI_c \tag{18.22}$$
+
+![源页 p.737](../assets/page-snapshots/chapter-18/page-737.png)
+
+式(18.21)的线性小信号交流项为
+
+$$\hat{v}_1(t)I_1 + V_1\hat{i}_1(t) = \hat{i}_c(t)V_2 + I_c\hat{v}_2(t) \tag{18.23}$$
+
+解出小信号开关网络输入电流 $\hat{i}_1(t)$ 得
+
+$$\hat{i}_1(t) = \hat{i}_c(t)\frac{V_2}{V_1} + \hat{v}_2(t)\frac{I_c}{V_1} - \hat{v}_1(t)\frac{I_1}{V_1} \tag{18.24}$$
+
+现可构造图18.10的小信号交流模型。开关网络输出端口再次为值为 $\hat{i}_c(t)$ 的电流源。开关网络输入端口模型由功率汇特性线性化得到，如式(18.24)所给。输入端口电流 $\hat{i}_1(t)$ 由三项组成。$\hat{i}_c(t)$ 项由独立电流源建模，$\hat{v}_2(t)$ 项由受控电流源建模，$\hat{v}_1(t)$ 项由值为 $-V_1/I_1$ 的有效交流电阻建模。如图18.11所示，该增量电阻由在静态工作点处求值的功率汇输入端口特性斜率确定。功率汇导致负增量电阻，因为 $\langle v_1(t)\rangle_{T_s}$ 增加会引起 $\langle i_1(t)\rangle_{T_s}$ 减小，以维持 $\langle p(t)\rangle_{T_s}$ 恒定。
+
+![源页 p.738](../assets/page-snapshots/chapter-18/page-738.png)
+
+图18.10 由图18.8开关网络扰动和线性化导出的 CCM CPM 降压变换器小信号模型
+
+图18.11 输入端口负增量电阻 $r_1$ 的来源：在静态工作点处求值的功率汇特性斜率
+
+图18.10等效电路现可用直流关系 $V_2 = DV_1$、$I_2 = V_2/R$、$I_1 = DI_2$、$I_2 = I_c$ 简化。式(18.24)于是变为
+
+$$\hat{i}_1(t) = D\hat{i}_c(t) + \frac{D}{R}\hat{v}_2(t) - \frac{D^2}{R}\hat{v}_1(t) \tag{18.25}$$
+
+最后可用变换器端口电压 $\hat{v}_g$ 和 $\hat{v}_2$ 消去 $\hat{v}_1$ 和 $\hat{v}_2$。$\hat{v}_1$ 即等于 $\hat{v}_g$。$\hat{v}_2$ 等于输出电压 $\hat{v}$ 加电感电压 $sL\hat{i}_c(s)$。故
+
+$$\hat{v}_2(s) = \hat{v}(s) + sL\hat{i}_c(s) \tag{18.26}$$
+
+代入式(18.25)得
+
+$$\hat{i}_1(s) = D\left(1 + \frac{sL}{R}\right)\hat{i}_c(s) + \frac{D}{R}\hat{v}(s) - \frac{D^2}{R}\hat{v}_g(s) \tag{18.27}$$
+
+![源页 p.739](../assets/page-snapshots/chapter-18/page-739.png)
+
+图18.12 图18.10 CPM 降压变换器模型的简化，受控功率源用输出电压变化表示
+
+由此得图18.12等效电路。可验证该等效电路与图18.6模型及表18.1降压变换器参数一致。
+
+电流编程降压变换器的近似小信号特性现可解释。由于电感与电流源 $\hat{i}_c$ 串联，电感不参与控制-输出传递函数。控制-输出传递函数仅由下式决定
+
+$$G_{vc}(s) = \left.\frac{\hat{v}(s)}{\hat{i}_c(s)}\right|_{\hat{v}_g=0} = R \parallel \frac{1}{sC} \tag{18.28}$$
+
+故电流编程将降压变换器的输出特性变为电流源。如前所述，电流编程降压变换器的功率汇输入特性导致负增量输入电阻。最后，图18.12预测降压变换器线路-输出传递函数为零：
+
+$$G_{vg}(s) = \left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{i}_c=0} = 0 \tag{18.29}$$
+
+$v_g$ 中的扰动不影响输出电压，因为电感电流仅取决于 $i_c$。电流编程控制器按需调整占空周期以维持恒定电感电流，不论 $v_g$ 如何变化。18.3节更准确的模型预测 $G_{vg}(s)$ 不为零，但幅值仍很小。
+
+类似论证可得图18.13的升压变换器小信号等效电路。该等效电路的推导留作作业。升压变换器情形下，开关网络输入端口表现为值为 $i_c$ 的电流源，而输出端口为受控功率源，等于电流源 $i_c$ 表观消耗的功率。在小信号模型中，电流源 $\hat{i}_c$ 与电感 $L$ 串联，故变换器传递函数不可能含源于电感的极点。开关网络功率源输出特性导致值为 $r_2 = R$ 的交流电阻。升压变换器的线路-输出传递函数 $G_{vg}(s)$ 非零，因为功率源的幅值直接取决于 $v_g$ 的值。控制-输出传递函数 $G_{vc}(s)$ 含右半平面零点，与占空比控制升压变换器的右半平面零点相同。
+
+![源页 p.739](../assets/page-snapshots/chapter-18/page-739.png)
+
+图18.13 经平均开关建模及近似 $i_L \approx i_c$ 导出的 CCM CPM 升压变换器小信号模型
+
+### 18.2 D > 0.5 时的振荡
+
+![源页 p.740](../assets/page-snapshots/chapter-18/page-740.png)
+
+当稳态占空周期大于 0.5 时，图18.1的电流编程控制器不稳定。为避免该稳定性问题，通常通过在检测的开关电流波形中加入人工斜坡来修改控制器。本节分析电流编程控制器的稳定性。用简单的一阶离散时间分析解释加入人工斜坡的影响。还讨论人工斜坡对控制器噪声敏感性的影响。
+
+图18.14给出了连续导通模式下开关变换器的通用电感电流波形。第一子区间内电感电流以斜率 $m_1$ 变化，第二子区间以斜率 $-m_2$ 变化。对基本非隔离变换器，斜率 $m_1$ 和 $-m_2$ 为
+
+降压变换器
+
+$$m_1 = \frac{v_g - v}{L} \quad -m_2 = -\frac{v}{L}$$
+
+升压变换器
+
+$$m_1 = \frac{v_g}{L} \quad -m_2 = \frac{v_g - v}{L} \tag{18.30}$$
+
+升降压变换器
+
+$$m_1 = \frac{v_g}{L} \quad -m_2 = \frac{v}{L}$$
+
+已知斜率 $m_1$ 和 $-m_2$，可确定 $i_L(0)$、$i_c$、$i_L(T_s)$ 和 $d T_s$ 之间的一般关系。
+
+图18.14 连续导通模式下电流编程变换器的电感电流波形
+
+第一子区间内电感电流 $i_L(t)$ 以斜率 $m_1$ 上升，直到 $i_L(t)$ 达到控制信号 $i_c$。故
+
+$$i_L(dT_s) = i_c = i_L(0) + m_1 dT_s \tag{18.31}$$
+
+![源页 p.741](../assets/page-snapshots/chapter-18/page-741.png)
+
+解出占空周期 $d$ 得
+
+$$d = \frac{i_c - i_L(0)}{m_1 T_s} \tag{18.32}$$
+
+类似地，第二子区间可写
+
+$$i_L(T_s) = i_L(dT_s) - m_2 d'T_s \tag{18.33}$$
+
+$$= i_L(0) + m_1 dT_s - m_2 d'T_s$$
+
+稳态下 $i_L(0) = i_L(T_s)$、$d = D$、$m_1 = M_1$、$m_2 = M_2$。将这些关系代入式(18.33)得
+
+$$0 = M_1 D T_s - M_2 D' T_s \tag{18.34}$$
+
+或
+
+$$\frac{M_2}{M_1} = \frac{D}{D'} \tag{18.35}$$
+
+稳态式(18.35)与电感稳态伏秒平衡要求一致。
+
+考虑 $i_L(0)$ 的小扰动：
+
+$$i_L(0) = I_{L0} + \hat{i}_L(0) \tag{18.36}$$
+
+$I_{L0}$ 为 $i_L(0)$ 的稳态值，满足式(18.33)和(18.34)，而 $\hat{i}_L(0)$ 为小扰动，满足
+
+$$|\hat{i}_L(0)| \ll |I_{L0}| \tag{18.37}$$
+
+要通过确定该小扰动最终是否衰减为零来评估电流编程控制器的稳定性。为此，求解 $n$ 个开关周期后的扰动 $\hat{i}_L(nT_s)$，并判断 $n$ 很大时 $\hat{i}_L(nT_s)$ 是否趋于零。
+
+图18.15 初始扰动 $\hat{i}_L(0)$ 对电感电流波形的影响
+
+稳态和受扰电感电流波形如图18.15所示。为清晰起见，电感电流扰动 $\hat{i}_L(0)$ 的大小被夸大。假设变换器近稳态运行，故斜率 $m_1$ 和 $m_2$ 基本不变。图18.15按正 $\hat{i}_L(0)$ 绘制；此时 $\hat{d}T_s$ 为负。由于稳态和受扰波形在区间 $0 < t < (D + \hat{d})T_s$ 内斜率基本相等，整个区间内两波形之差等于 $\hat{i}_L(0)$。同理，区间 $DT_s < t < T_s$ 内两波形之差为常数 $\hat{i}_L(T_s)$，因为两波形此时均以斜率 $-m_2$ 变化。注意 $\hat{i}_L(T_s)$ 为负值，如图18.15所示。故可仅考虑 $(D + \hat{d})T_s < t < DT_s$ 区间（如图18.16所示）由 $\hat{i}_L(0)$ 求 $\hat{i}_L(T_s)$。
+
+![源页 p.742](../assets/page-snapshots/chapter-18/page-742.png)
+
+图18.16 稳态和受扰电感电流波形在 $i_L(t)$ 峰值附近的放大视图
+
+由图18.16，用稳态波形可将 $\hat{i}_L(0)$ 表示为斜率 $m_1$ 乘以区间长度 $-\hat{d}T_s$。故
+
+$$\hat{i}_L(0) = -m_1 \hat{d}T_s \tag{18.38}$$
+
+同理，用受扰波形可将 $\hat{i}_L(T_s)$ 表示为斜率 $-m_2$ 乘以区间长度 $-\hat{d}T_s$：
+
+$$\hat{i}_L(T_s) = m_2 \hat{d}T_s \tag{18.39}$$
+
+从式(18.38)和(18.39)消去中间变量 $\hat{d}$ 得
+
+$$\hat{i}_L(T_s) = \hat{i}_L(0)\left(-\frac{m_2}{m_1}\right) \tag{18.40}$$
+
+若变换器工作点足够接近静态工作点，则 $m_2/m_1$ 近似由式(18.35)给出。式(18.40)于是变为
+
+$$\hat{i}_L(T_s) = \hat{i}_L(0)\left(-\frac{D}{D'}\right) \tag{18.41}$$
+
+可在下一个开关周期做类似分析，证得
+
+$$\hat{i}_L(2T_s) = \hat{i}_L(T_s)\left(-\frac{D}{D'}\right) = \hat{i}_L(0)\left(-\frac{D}{D'}\right)^2 \tag{18.42}$$
+
+$n$ 个开关周期后扰动变为
+
+$$\hat{i}_L(nT_s) = \hat{i}_L((n-1)T_s)\left(-\frac{D}{D'}\right) = \hat{i}_L(0)\left(-\frac{D}{D'}\right)^n \tag{18.43}$$
+
+注意，当 $n$ 趋于无穷大时，只要特征值 $-D/D'$ 的幅值小于 1，扰动 $\hat{i}_L(nT_s)$ 就趋于零。反之，当特征值 $\alpha = -D/D'$ 的幅值大于 1 时扰动 $\hat{i}_L(nT_s)$ 幅值增大：
+
+![源页 p.743](../assets/page-snapshots/chapter-18/page-743.png)
+
+$$|\hat{i}_L(nT_s)| \to \begin{cases} 0 & \text{当 } \left|-\dfrac{D}{D'}\right| < 1 \\ \infty & \text{当 } \left|-\dfrac{D}{D'}\right| > 1 \end{cases} \tag{18.44}$$
+
+因此，为使电流编程控制器稳定运行，需 $|\alpha| = D/D' < 1$，即
+
+$$D < 0.5 \tag{18.45}$$
+
+举例，考虑升压变换器在稳态端口电压 $V_g = 20\text{ V}$、$V = 50\text{ V}$ 下的运行。因 $V/V_g = 1/D'$，该升压变换器应以 $D = 0.6$ 运行。故电流编程控制器会不稳定。特征值为
+
+$$\alpha = -\frac{D}{D'} = \left(-\frac{0.6}{0.4}\right) = -1.5 \tag{18.46}$$
+
+由式(18.43)，电感电流的扰动每经过一个开关周期增大 $-1.5$ 倍。如图18.17所示，扰动经一个开关周期增至 $-1.5\hat{i}_L(0)$，经两个开关周期增至 $+2.25\hat{i}_L(0)$，经三个开关周期增至 $-3.375\hat{i}_L(0)$。对图18.17所示特定初始条件，此增长振荡在三个开关周期后使电流编程控制器饱和。第四个开关周期内晶体管全程保持导通。电感电流和控制器波形最终可能变为振荡性且周期性的，周期为开关周期的整数倍；波形也可能变为混沌。无论哪种情况，控制器都不能按预期运行。
+
+图18.17 $D = 0.6$ 时的不稳定振荡
+
+![源页 p.744](../assets/page-snapshots/chapter-18/page-744.png)
+
+图18.18给出输出电压降到 $V = 30\text{ V}$ 时的电感电流波形。升压变换器于是以 $D = 1/3$ 运行，特征值变为
+
+$$\alpha = -\frac{D}{D'} = \left(-\frac{1/3}{2/3}\right) = -0.5 \tag{18.47}$$
+
+扰动现在每经过一个开关周期幅值减小为 0.5 倍。电感电流中的扰动经几个开关周期后幅值变小。
+
+图18.18 $D = 1/3$ 时的稳定暂态
+
+$D > 0.5$ 时的不稳定是电流编程控制的著名问题，不依赖变换器拓扑。在检测的开关电流波形中加入人工斜坡即可使控制器对所有占空周期稳定，如图18.19所示。该人工斜坡在定性上降低内部开关电流检测离散反馈环路的增益。人工斜坡斜率为 $m_a$，如图所示。控制器现在在以下条件满足时关断晶体管
+
+$$i_a(dT_s) + i_L(dT_s) = i_c \tag{18.48}$$
+
+其中 $i_a(t)$ 为人工斜坡波形。因此，晶体管在电感电流 $i_L(t)$ 满足下式时被关断
+
+$$i_L(dT_s) = i_c - i_a(dT_s) \tag{18.49}$$
+
+图18.20给出电感电流波形 $i_L(t)$ 与量 $[i_c - i_a(t)]$ 的模拟比较。
+
+![源页 p.745](../assets/page-snapshots/chapter-18/page-745.png)
+
+图18.19 在测量开关电流波形中加入人工斜坡以稳定电流编程控制器：(a) 框图，(b) 人工斜坡波形
+
+图18.20 加入人工斜坡：晶体管现于 $i_L(t) = i_c - i_a(t)$ 时关断
+
+可再次通过分析电感电流波形扰动在一个完整开关周期内的变化来确定电流编程控制器的稳定性。图18.21给出含人工斜坡时的稳态和受扰电感电流波形。同样扰动 $\hat{i}_L(0)$ 的幅值被夸大。受扰波形按正 $\hat{i}_L(0)$ 绘制；这使 $\hat{d}$ 且通常也使 $\hat{i}_L(T_s)$ 为负。若受扰波形足够接近静态工作点，则斜率 $m_1$ 和 $m_2$ 基本不变，$\hat{i}_L(0)$ 与 $\hat{i}_L(T_s)$ 的关系可仅通过考虑区间 $(D + \hat{d})T_s < t < DT_s$ 确定。扰动 $\hat{i}_L(0)$ 和 $\hat{i}_L(T_s)$ 用斜率 $m_1$、$m_2$、$m_a$ 及区间长度 $-\hat{d}T_s$ 表示如下：
+
+$$\hat{i}_L(0) = -\hat{d}T_s(m_1 + m_a) \tag{18.50}$$
+
+$$\hat{i}_L(T_s) = -\hat{d}T_s(m_a - m_2) \tag{18.51}$$
+
+消去 $\hat{d}$ 得
+
+$$\hat{i}_L(T_s) = \hat{i}_L(0)\left(-\frac{m_2 - m_a}{m_1 + m_a}\right) \tag{18.52}$$
+
+对第 $n$ 个开关周期做类似分析得
+
+$$\hat{i}_L(nT_s) = \hat{i}_L((n-1)T_s)\left(-\frac{m_2 - m_a}{m_1 + m_a}\right) = \hat{i}_L(0)\left(-\frac{m_2 - m_a}{m_1 + m_a}\right)^n = \hat{i}_L(0)\alpha^n \tag{18.53}$$
+
+![源页 p.746](../assets/page-snapshots/chapter-18/page-746.png)
+
+图18.21 含人工斜坡时的稳态和受扰电感电流波形
+
+电感电流扰动的演化现由特征值
+
+$$\alpha = -\frac{m_2 - m_a}{m_1 + m_a} \tag{18.54}$$
+
+决定。$n$ 很大时扰动幅值趋于
+
+$$|\hat{i}_L(nT_s)| \to \begin{cases} 0 & \text{当 } |\alpha| < 1 \\ \infty & \text{当 } |\alpha| > 1 \end{cases} \tag{18.55}$$
+
+因此，为使电流编程控制器稳定，需选择人工斜坡斜率 $m_a$ 使特征值 $\alpha$ 的幅值小于 1。人工斜坡提供额外自由度，可用于使占空周期大于 0.5 时系统稳定。注意增大 $m_a$ 使式(18.54)分子减小而分母增大。故 $m_a$ 足够大时特征值 $\alpha$ 的幅值小于 1。
+
+在常规电压稳压器应用中，输出电压 $v(t)$ 由变换器控制系统良好调节，而输入电压 $v_g(t)$ 未知。式(18.30)于是预测对降压和升降压变换器斜率 $m_2$ 的值为常数且高度准确已知。故用式(18.35)从式(18.54)消去斜率 $m_1$，从而将特征值 $\alpha$ 表示为已知斜率 $m_2$ 和稳态占空周期 $D$ 的函数：
+
+$$\alpha = -\frac{1 - \dfrac{m_a}{m_2}}{\dfrac{D'}{D} + \dfrac{m_a}{m_2}} \tag{18.56}$$
+
+人工斜坡斜率的一个常见选择为
+
+$$m_a = \frac{1}{2}m_2 \tag{18.57}$$
+
+可验证，将式(18.57)代入(18.56)，该选择导致 $D = 1$ 时 $\alpha = -1$，且 $0 \le D < 1$ 时 $|\alpha| < 1$。这是使所有占空周期都稳定所需的最小 $m_a$ 值。18.3节将看到该 $m_a$ 选择还有额外好处，即使降压变换器理想线路-输出传递函数 $G_{vg}(s)$ 变为零。

@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 **副标题：从理想模型到真实电机，构建仿真与实测的桥梁**
 
-**版本：** v1.0
-**日期：** 2026-06
-**适用对象：** 电机控制算法工程师、仿真工程师、嵌入式开发者
-**前置模块：** [SIM-00 C仿真总索引](./SIM-00-C-Simulation-Overview.md)、[ALG-03 PI电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md)
+- **版本：** v1.0
+- **日期：** 2026-06
+- **适用对象：** 电机控制算法工程师、仿真工程师、嵌入式开发者
+- **前置模块：** [SIM-00 C仿真总索引](./SIM-00-C-Simulation-Overview.md)、[ALG-03 PI电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md)
 
 ---
 

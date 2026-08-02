@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [CT-04 PID控制](../../control-theory/CT-04-PID-Control-Principles.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-05-23  
-**源码位置：** `hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.h`
-**中间件版本：** v1.10.0+
+- **文档版本：** v1.0  
+- **生成日期：** 2026-05-23  
+- **源码位置：** `hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.h`
+- **中间件版本：** v1.10.0+
 
 ---
 
@@ -257,7 +257,7 @@ typedef struct {
 
 > **完整定义：** [hpm_mcl_control.h:L214-L243](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L214-L243)
 
-**架构意义：** 对比 MC_LIB v1 的 `hpm_foc.h` 中全局函数式 API（如 `hpm_mcl_bldc_foc_clarke()`、`hpm_mcl_bldc_foc_park()`），V2 将所有算法组织在统一结构体中，实现**算法与调度分离**。换用不同的控制算法（如从PID切换到SMC）只需修改函数指针赋值。
+- **架构意义：** 对比 MC_LIB v1 的 `hpm_foc.h` 中全局函数式 API（如 `hpm_mcl_bldc_foc_clarke()`、`hpm_mcl_bldc_foc_park()`），V2 将所有算法组织在统一结构体中，实现**算法与调度分离**。换用不同的控制算法（如从PID切换到SMC）只需修改函数指针赋值。
 
 ### 3.2 PID 控制器
 
@@ -426,7 +426,7 @@ MCL V2 提供三种对齐算法（`mcl_motor_alignment_algorithm_t`）：
 | three_stage | 1 | 三阶段：大电流粗对齐(含q轴扰动) → 中电流精对齐 → 小电流稳定化 |
 | adaptive | 2 | 预留：自适应对齐算法 |
 
-**三阶段对齐配置：**
+- **三阶段对齐配置：**
 
 ```c
 mcl_motor_alignment_cfg_t alignment_cfg;
@@ -475,7 +475,7 @@ v1.10.0 新增 `mcl_hw_loop_t *hw_loop` 参数以支持混合硬件加速模式�
 
 > **枚举定义：** [hpm_mcl_encoder.h:L32-L38](../../../hpm_MC/middleware/hpm_mcl_v2/core/sensor/hpm_mcl_encoder.h#L32-L38)
 
-**M-T法切换阈值配置：** `speed_abs_switch_m_t` — 速度高于此值使用M法，低于此值使用T法。
+- **M-T法切换阈值配置：** `speed_abs_switch_m_t` — 速度高于此值使用M法，低于此值使用T法。
 
 #### 5.1.2 IIR 滤波器
 
@@ -743,7 +743,7 @@ MC_LIB 状态机:                     MCL V2 状态机:
                                          └── 每PWM周期一个 hpm_mcl_loop()
 ```
 
-**核心差异：** MC_LIB 内置完整状态转移逻辑（含IF启动和闭环切换判断），MCL V2 将状态转移权交给用户，只保证在选定模式下正确执行控制运算。这使得 MCL V2 对自定义启动策略更加灵活（如可以直接使用三阶段对齐后切入闭环）。
+- **核心差异：** MC_LIB 内置完整状态转移逻辑（含IF启动和闭环切换判断），MCL V2 将状态转移权交给用户，只保证在选定模式下正确执行控制运算。这使得 MCL V2 对自定义启动策略更加灵活（如可以直接使用三阶段对齐后切入闭环）。
 
 ---
 
@@ -984,7 +984,7 @@ if (loop->cfg->enable_position_loop) {
 }
 ```
 
-**降频执行原理：** 位置环和速度环的执行频率低于电流环。实现方式是**时间累加器**——每次电流环调用时累加 $T_s$，当累加值达到位置环周期 $T_{position}$ 时执行一次位置环 PID 并清零累加器。
+- **降频执行原理：** 位置环和速度环的执行频率低于电流环。实现方式是**时间累加器**——每次电流环调用时累加 $T_s$，当累加值达到位置环周期 $T_{position}$ 时执行一次位置环 PID 并清零累加器。
 
 $$\text{position\_ts} \mathrel{+}= T_s, \quad \text{当 } \text{position\_ts} \geq T_{position} \text{ 时执行位置环}$$
 
@@ -1232,7 +1232,7 @@ hpm_mcl_stat_t hpm_mcl_loop(mcl_loop_t *loop)
 
 #### 解析
 
-**模式分发机制：** `hpm_mcl_loop` 是一个纯分发函数，根据 `loop->cfg->mode` 枚举值将控制流路由到对应的循环实现：
+- **模式分发机制：** `hpm_mcl_loop` 是一个纯分发函数，根据 `loop->cfg->mode` 枚举值将控制流路由到对应的循环实现：
 
 | mode 枚举值 | 路由目标 | 说明 |
 |-------------|---------|------|
@@ -1241,7 +1241,7 @@ hpm_mcl_stat_t hpm_mcl_loop(mcl_loop_t *loop)
 | `mcl_mode_step_foc` | `hpm_mcl_step_foc_loop` | 步进电机 FOC 独立循环 |
 | `mcl_mode_offline_param_detection` | `hpm_mcl_detect_offline_para` | 离线参数检测独立循环 |
 
-**与 v1 的架构差异：**
+- **与 v1 的架构差异：**
 
 - **v1 (MC_LIB)：** 控制循环是单一的大函数（如 `MCFOC_CurrentLoop_F()`），内部通过全局状态机切换 ALIGN→IF_START→CLOSED_LOOP，模式间强耦合
 - **v2 (MCL V2)：** 模式间完全解耦，每种模式有独立的循环函数，由 `hpm_mcl_loop` 统一调度。模式切换只需修改 `loop->cfg->mode` 枚举值，无需管理复杂的状态转移
@@ -1301,14 +1301,14 @@ hpm_mcl_stat_t hpm_mcl_block_loop(mcl_loop_t *loop)
 
 #### 解析
 
-**控制流程：** 速度环 PID → 方向判断 → 占空比输出
+- **控制流程：** 速度环 PID → 方向判断 → 占空比输出
 
 1. **位置环禁用检查：** 方波控制不支持位置环，若误使能则直接报错 `mcl_invalid_argument`
 2. **速度环必须使能：** 方波控制必须开启速度环，否则报错——因为方波控制没有电流环，速度环是唯一的闭环
 3. **方向判断：** 速度环输出为负值时取绝对值作为占空比，同时设置电机方向 `motor_dir_forward`；正值时设为 `motor_dir_back`
 4. **三相等占空比：** `duty.a = duty.b = duty.c = speed_pi_out_fp`，三相输出相同占空比，具体哪相导通由 Hall 传感器扇区决定（通过 `hpm_mcl_loop_refresh_block` 在 Hall 中断中更新换相）
 
-**工程要点：** 方波控制的换相逻辑不在本函数中，而是由外部 Hall 中断调用 `hpm_mcl_loop_refresh_block` → `get_block_sector` → `hpm_mcl_drivers_block_update` 完成。本函数仅负责速度闭环和占空比计算。
+- **工程要点：** 方波控制的换相逻辑不在本函数中，而是由外部 Hall 中断调用 `hpm_mcl_loop_refresh_block` → `get_block_sector` → `hpm_mcl_drivers_block_update` 完成。本函数仅负责速度闭环和占空比计算。
 
 ---
 
@@ -1381,7 +1381,7 @@ hpm_mcl_stat_t hpm_mcl_step_foc_loop(mcl_loop_t *loop)
 
 #### 解析
 
-**开环/闭环两种模式的核心区别：**
+- **开环/闭环两种模式的核心区别：**
 
 | 维度 | 开环模式 (`enable_step_motor_closed_loop = false`) | 闭环模式 (`enable_step_motor_closed_loop = true`) |
 |------|---------------------------------------------------|---------------------------------------------------|
@@ -1390,7 +1390,7 @@ hpm_mcl_stat_t hpm_mcl_step_foc_loop(mcl_loop_t *loop)
 | q 轴参考 | 固定为 0 | 速度环输出 |
 | d 轴参考 | 用户设定 | 用户设定 |
 
-**步进电机特殊的电流采样转换：**
+- **步进电机特殊的电流采样转换：**
 
 ```c
 hpm_mcl_analog_step_convert(loop->analog, ia, analog_a_current, theta, &ia, loop->cfg->enable_step_motor_closed_loop);
@@ -1398,7 +1398,7 @@ hpm_mcl_analog_step_convert(loop->analog, ia, analog_a_current, theta, &ia, loop
 
 步进电机的两相绕组（A/B相）与三相 BLDC 的电流采样不同，需要根据当前电角度将采样值映射到正确的坐标系。闭环模式下还需要考虑角度偏移。
 
-**角度偏移 $\frac{\pi}{4}$ 的工程意义：**
+- **角度偏移 $\frac{\pi}{4}$ 的工程意义：**
 
 ```c
 theta = MCL_ANGLE_MOD_X(0, MCL_PI * 2, (theta - (0.25f * MCL_PI)));
@@ -1406,7 +1406,7 @@ theta = MCL_ANGLE_MOD_X(0, MCL_PI * 2, (theta - (0.25f * MCL_PI)));
 
 开环模式下，路径规划器输出的角度是 A 相电角度，而 Park 变换需要的是 d 轴对齐角度。步进电机两相绕组空间相差 90°，d 轴方向相对于 A 相偏移 45°（$\frac{\pi}{4}$），因此需要减去这个偏移量。
 
-**四通道 SVPWM 输出：**
+- **四通道 SVPWM 输出：**
 
 步进电机使用 `step_svpwm` 而非标准 `svpwm`，输出四路占空比（a0/a1/b0/b1），分别对应两相绕组的正反电流方向：
 
@@ -1494,7 +1494,7 @@ hpm_mcl_stat_t hpm_mcl_control_init(mcl_control_t *control, mcl_control_cfg_t *c
 
 #### 解析
 
-**两阶段挂载机制：**
+- **两阶段挂载机制：**
 
 1. **第一阶段：默认实现挂载** — 将所有函数指针指向中间件内置的默认实现（如 `hpm_mcl_control_clarke`、`hpm_mcl_control_pi` 等）
 2. **第二阶段：用户覆盖** — 通过 `MCL_FUNCTION_INIT_IF_NO_EMPTY` 宏，若用户在 `cfg->callback.method` 中提供了自定义实现，则覆盖默认函数指针
@@ -1504,7 +1504,7 @@ hpm_mcl_stat_t hpm_mcl_control_init(mcl_control_t *control, mcl_control_cfg_t *c
     if ((user_func) != NULL) { default_func = user_func; }
 ```
 
-**回调驱动架构的实现原理：**
+- **回调驱动架构的实现原理：**
 
 ```text
 用户层:  cfg->callback.method.clarke = my_custom_clarke;  // 用户自定义
@@ -1514,7 +1514,7 @@ hpm_mcl_stat_t hpm_mcl_control_init(mcl_control_t *control, mcl_control_cfg_t *c
 控制环:   loop->control->method.clarke(ia, ib, ic, &alpha, &beta);  // 执行用户实现
 ```
 
-**与 v1 直接函数调用的差异：**
+- **与 v1 直接函数调用的差异：**
 
 | 维度 | v1 (MC_LIB) | v2 (MCL V2) |
 |------|-------------|-------------|
@@ -1523,7 +1523,7 @@ hpm_mcl_stat_t hpm_mcl_control_init(mcl_control_t *control, mcl_control_cfg_t *c
 | 测试友好性 | 难以 mock 硬件依赖 | 可注入测试桩函数 |
 | 间接调用开销 | 无（直接跳转） | 极小（一次指针解引用，<1ns@600MHz） |
 
-**工程要点：** 默认实现中，所有 PID 控制器（电流d/q轴、速度、位置）均挂载 `hpm_mcl_control_pi`（位置式 PI），而非增量式 `hpm_mcl_delta_pid`。若需使用增量式 PID，需在 `callback.method` 中显式覆盖。
+- **工程要点：** 默认实现中，所有 PID 控制器（电流d/q轴、速度、位置）均挂载 `hpm_mcl_control_pi`（位置式 PI），而非增量式 `hpm_mcl_delta_pid`。若需使用增量式 PID，需在 `callback.method` 中显式覆盖。
 
 ---
 
@@ -1571,11 +1571,11 @@ float hpm_mcl_filter_iir_df1(mcl_filter_iir_df1_t *iir, float input)
 
 #### 逐行解析
 
-**差分方程：**
+- **差分方程：**
 
 $$y[n] = b_0 \cdot x[n] + b_1 \cdot x[n-1] + b_2 \cdot x[n-2] - a_1 \cdot y[n-1] - a_2 \cdot y[n-2]$$
 
-**状态变量含义与更新顺序：**
+- **状态变量含义与更新顺序：**
 
 | 变量 | 含义 | 更新方向 |
 |------|------|---------|
@@ -1585,9 +1585,9 @@ $$y[n] = b_0 \cdot x[n] + b_1 \cdot x[n-1] + b_2 \cdot x[n-2] - a_1 \cdot y[n-1]
 | `y1` | 上一次输出 $y[n-1]$ | `y1 ← y`（当前输出变为历史） |
 | `y2` | 上上次输出 $y[n-2]$ | `y2 ← y1`（最老的历史被覆盖） |
 
-**更新顺序至关重要：** 必须先更新 `x2 ← x1`，再 `x1 ← x0`；先 `y2 ← y1`，再 `y1 ← y`。代码中严格遵循此顺序，避免历史数据被提前覆盖。
+- **更新顺序至关重要：** 必须先更新 `x2 ← x1`，再 `x1 ← x0`；先 `y2 ← y1`，再 `y1 ← y`。代码中严格遵循此顺序，避免历史数据被提前覆盖。
 
-**级联机制：** 上一级输出 `y` 乘以缩放因子 `scale` 后，作为下一级的 `x0` 输入。bldc_foc 示例中使用 2 级级联（`section=2`），实现 4 阶 IIR 滤波器。
+- **级联机制：** 上一级输出 `y` 乘以缩放因子 `scale` 后，作为下一级的 `x0` 输入。bldc_foc 示例中使用 2 级级联（`section=2`），实现 4 阶 IIR 滤波器。
 
 ---
 
@@ -1638,30 +1638,30 @@ void hpm_mcl_filter_pll_type_i(mcl_filter_pll_type_i_t *pll, float sin_val, floa
 
 #### 逐行解析
 
-**① 相位检测（a0 计算）：**
+- **① 相位检测（a0 计算）：**
 
 $$a_0 = k_1 \cdot (\cos\hat\theta \cdot \sin\theta_{in} - \sin\hat\theta \cdot \cos\theta_{in}) = k_1 \cdot \sin(\theta_{in} - \hat\theta)$$
 
 当相位误差 $\Delta\theta = \theta_{in} - \hat\theta$ 很小时，$a_0 \approx k_1 \cdot \Delta\theta$，即相位误差的线性近似。
 
-**② PI 控制器：**
+- **② PI 控制器：**
 
 $$x_0 \mathrel{+}= k_i \cdot a_0 \quad \text{(积分项)}$$
 $$a_1 = x_0 + k_p \cdot a_0 \quad \text{(比例+积分)}$$
 
-**③ 低通滤波器：**
+- **③ 低通滤波器：**
 
 $$x_1 \mathrel{+}= k_{lp} \cdot (a_1 - x_1)$$
 
 一阶 IIR 低通滤波，滤除 PI 输出中的高频纹波，$x_1$ 即为估计速度。
 
-**④ 积分器（角度更新）：**
+- **④ 积分器（角度更新）：**
 
 $$x_2 \mathrel{+}= a_1 \cdot c$$
 
 $c$ 为积分增益，将频率估计值积分为角度。$x_2$ 即为估计角度。
 
-**⑤ 角度归一化 `MCL_ANGLE_MOD_X`：**
+- **⑤ 角度归一化 `MCL_ANGLE_MOD_X`：**
 
 ```c
 pll->x2 = MCL_ANGLE_MOD_X(0, MCL_2PI, pll->x2);
@@ -1722,27 +1722,27 @@ void hpm_mcl_filter_pll_type_ii(mcl_filter_pll_type_ii_t *pll, float sin_val, fl
 
 #### 逐行解析
 
-**① 相位检测：** 与 Type-I 相同，$a_0 = k_1 \cdot \sin(\theta_{in} - \hat\theta)$
+- **① 相位检测：** 与 Type-I 相同，$a_0 = k_1 \cdot \sin(\theta_{in} - \hat\theta)$
 
-**② 第一积分器：**
+- **② 第一积分器：**
 
 $$x_0 \mathrel{+}= a_0, \quad a_1 = x_0 \cdot c$$
 
 直接积分相位误差（无比例项），$c$ 为增益缩放。
 
-**③ 滤波器（零极点结构）：**
+- **③ 滤波器（零极点结构）：**
 
 $$a_2 = a_1 - x_1 \cdot a, \quad a_3 = a_2 \cdot b + a_2 = a_2 \cdot (1 + b)$$
 
 参数 $a$ 为零点系数，$b$ 为极点系数，构成一阶零极点滤波器。
 
-**④ 第二积分器：**
+- **④ 第二积分器：**
 
 $$x_2 \mathrel{+}= a_3, \quad a_4 = x_2 \cdot c$$
 
 将滤波后的频率估计积分为角度。
 
-**⑤ 状态更新：**
+- **⑤ 状态更新：**
 
 $$x_1 = a_2, \quad x_3 = \text{MOD}(a_4, 2\pi)$$
 
@@ -1893,14 +1893,14 @@ hpm_mcl_stat_t hpm_mcl_motor_angle_alignment_three_stage(mcl_loop_t *loop, mcl_m
 | Stage 2: 精对齐 | 中电流（如 5A） | 0 | 降低电流减少过冲，提高对齐精度 |
 | Stage 3: 稳定化 | 小电流（如 3A） | 0 | 最小电流维持位置，避免电流突变导致转子振荡 |
 
-**三阶段对齐的工程意义：**
+- **三阶段对齐的工程意义：**
 
 1. **克服静摩擦：** 电机从静止启动时静摩擦力矩大，单阶段小电流可能无法驱动转子。Stage 1 的大电流确保转子可靠转动
 2. **q 轴扰动打破卡点：** Stage 1 的 q 轴扰动电流产生切向力，帮助转子脱离可能卡住的齿槽位置
 3. **渐进式收敛：** 电流逐级降低，避免大电流突然撤除时转子因惯性过冲，导致对齐角度偏差
 4. **最终稳定延时：** `final_delay_ms` 确保在释放编码器强制之前转子已完全稳定
 
-**统一入口函数：**
+- **统一入口函数：**
 
 ```c
 hpm_mcl_stat_t hpm_mcl_motor_angle_alignment(mcl_loop_t *loop, mcl_motor_alignment_cfg_t *cfg)

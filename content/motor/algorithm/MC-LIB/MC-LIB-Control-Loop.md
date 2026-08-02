@@ -20,9 +20,9 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-04-26  
-**源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_LOOP_F.c/h`
+- **文档版本：** v1.0  
+- **生成日期：** 2026-04-26  
+- **源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_LOOP_F.c/h`
 
 ---
 
@@ -110,7 +110,7 @@ MCFOC_LOOP_F模块实现了FOC控制的完整控制环：
 
 ### 2.1 数学模型
 
-**PMSM电压方程（dq坐标系）：**
+- **PMSM电压方程（dq坐标系）：**
 
 $$
 \begin{cases}
@@ -119,7 +119,7 @@ u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_f)
 \end{cases}
 $$
 
-**电流环传递函数（忽略交叉耦合）：**
+- **电流环传递函数（忽略交叉耦合）：**
 
 $$
 G_i(s) = \frac{I(s)}{U(s)} = \frac{1}{R_s + L_s s} = \frac{1/R_s}{1 + \frac{L_s}{R_s} s}
@@ -127,7 +127,7 @@ $$
 
 ### 2.2 PI控制器设计
 
-**典型整定方法（模量最优）：**
+- **典型整定方法（模量最优）：**
 
 $$
 \begin{cases}
@@ -220,7 +220,7 @@ dq轴之间存在交叉耦合：
 - d轴电压受q轴电流影响：$-\omega_e L_q i_q$
 - q轴电压受d轴电流影响：$\omega_e L_d i_d$
 
-**解耦补偿效果：**
+- **解耦补偿效果：**
 
 | 指标 | 无解耦 | 有解耦 |
 |------|--------|--------|
@@ -234,13 +234,13 @@ dq轴之间存在交叉耦合：
 
 ### 3.1 数学模型
 
-**机械运动方程：**
+- **机械运动方程：**
 
 $$
 J \frac{d\omega_m}{dt} = T_e - T_L - B \omega_m
 $$
 
-**电磁转矩：**
+- **电磁转矩：**
 
 $$
 T_e = \frac{3}{2} p \psi_f i_q
@@ -248,7 +248,7 @@ $$
 
 ### 3.2 PI控制器设计
 
-**典型整定方法（对称最优）：**
+- **典型整定方法（对称最优）：**
 
 $$
 \begin{cases}
@@ -330,7 +330,7 @@ void MCFOC_SpeedLoop_F(ST_FREQ_CONTROL_F* pFreqCtrl,
 
 ### 3.5 参数自适应
 
-**速度相关增益调整：**
+- **速度相关增益调整：**
 
 | 速度(Hz) | Kp | Ki |
 |---------|-----|-----|
@@ -339,7 +339,7 @@ void MCFOC_SpeedLoop_F(ST_FREQ_CONTROL_F* pFreqCtrl,
 | 50~100 | 2.0 | 50 |
 | 100~200 | 3.0 | 100 |
 
-**原因：**
+- **原因：**
 - 低速时观测器精度低，需要较小的增益
 - 高速时观测器精度高，可以增大增益
 
@@ -506,13 +506,13 @@ void MCFOC_ALIGN_CurrentLoop_F(ST_ALIGN_CONTROL_F* pALIGNCtrl,
 
 当电机转速超过额定转速时，反电动势超过母线电压，需要弱磁控制。
 
-**弱磁方程：**
+- **弱磁方程：**
 
 $$
 u_s = \sqrt{u_d^2 + u_q^2} \leq \frac{u_{dc}}{\sqrt{3}}
 $$
 
-**弱磁电流：**
+- **弱磁电流：**
 
 $$
 i_d = -\frac{\psi_f}{L_d} + \frac{1}{L_d}\sqrt{\left(\frac{u_{dc}}{\omega_e}\right)^2 - (L_q i_q)^2}
@@ -562,7 +562,7 @@ void MCFOC_Flux_Weakening_F(ST_CURRENT_CONTROL_F* pCurrentCtrl,
 
 ### 7.1 电流环整定
 
-**步骤：**
+- **步骤：**
 
 1. **测量电机参数**：Rs, Ld, Lq
 2. **计算初始PI参数**：
@@ -578,7 +578,7 @@ void MCFOC_Flux_Weakening_F(ST_CURRENT_CONTROL_F* pCurrentCtrl,
 
 ### 7.2 速度环整定
 
-**步骤：**
+- **步骤：**
 
 1. **设置初始PI参数**：
    - $K_p = J / \tau_n$（$\tau_n$为速度环时间常数，通常10~50ms）

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第22章part 3 - 22 Resonant Conversion"
+title: "第22章 谐振变换器（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,985 +18,803 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第22章part 3 - 22 Resonant Conversion
+# 第22章 谐振变换器（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 971-990  
-> Chunk ID: `chapter-22-part-3`
+## 22.4 谐振变换器的负载依赖性质（续）
 
-## 主干提取
+![源页 p.971](../assets/page-snapshots/chapter-22/page-971.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+图22.41 LLC 逆变器示例的槽网络：(a) 负载短路，(b) 负载开路
 
-## 术语表
+其中
 
-| English term | 中文译名 | Notes |
+$$R_{o0} = \sqrt{\frac{L_s}{C}}$$
+
+$$n = \frac{L_p}{L_s}$$
+
+$$F = \frac{f_s}{f_\infty} \tag{22.80}$$
+
+对开关频率 $f_s > f_m$，槽电路表现出 desirable 性质：槽输入电流随负载电流减小而减小。此变换器在高频 $f_s > f_0$ 下工作结合了所有负载零电压开关和槽输入电流与负载电流单调比例的 desirable 性质。在此频率范围内，LLC 表现出小于 1 的变换比，类似于串联谐振电路。在 $f_\infty$ 附近，LLC 能够实现轻载时可变大的升压型变换比。
+
+图22.43 给出了 $f_m < f_s < f_0$ 示例的 LLC 输出特性。可见本例中 $R_{crit} < R_{o0}$；故变换器具有零电压开关区域包含匹配负载和开路条件的 desirable 性质。
+
+图22.44 给出了 LLC 变换器的典型控制面 $M$ 与 $F$ 特性，由式(22.85) 的 CCM 正弦近似结果预测。给出了不同负载电阻值的等高线，具体选择 $L_p = 5 L_s$。低 $Q$（大负载电阻）时，特性在 $f_\infty$ 附近表现出并联谐振（升压）特性。大 $Q$（低负载电阻）时，特性在 $f_0$ 附近表现出串联谐振（降压）特性。
+
+### 22.4.6 基本槽网络的结果
+
+图22.1 的槽网络可写成图22.39b 所示形式。串联和并联支路电抗列于表22.1。本节列出谐振变换器通解和关键方程，作为支路电抗 $X_s$ 和 $X_p$ 的函数。
+
+$R_e = 0$ 时槽网络输入阻抗为 $Z_{i0} = j X_s$，$R_e = \infty$ 时为 $Z_{i\infty} = j(X_s + X_p)$。空载槽传递函数为
+
+$$H_\infty(\omega) = \frac{X_p}{X_p + X_s} \tag{22.81}$$
+
+![源页 p.972](../assets/page-snapshots/chapter-22/page-972.png)
+
+匹配负载阻抗（输入短路时槽输出阻抗）为
+
+$$Z_{o0}(\omega) = \frac{j X_s X_p}{X_s + X_p} = j X_s H_\infty(\omega) \tag{22.82}$$
+
+匹配负载电阻发生在 $R_e = R_{o0}$ 处，其中 $R_{o0} = \|Z_{o0}\|$。
+
+图22.42 LLC 槽电路的槽输入阻抗 $\|Z_i\|$
+
+图22.43 LLC 逆变器的输出面特性
+
+![源页 p.973](../assets/page-snapshots/chapter-22/page-973.png)
+
+ZVS 与 ZCS 之间边界的临界负载电阻为
+
+$$R_{crit} = \|Z_{o0}\|\, \sqrt{\frac{-Z_{i\infty}}{Z_{i0}}} = |X_p|\, \sqrt{\frac{-X_s}{X_s + X_p}} \tag{22.83}$$
+
+可证 $\|Z_{i\infty}\| = \|Z_{i0}\|$ 处的频率 $f = f_m$ 发生在 $X_s = -X_p/2$ 处。
+
+若定义变换比 $M = V_{out}/V_{in}$、归一化负载电流 $J = I_{out} R_0 / V_{in}$、有效品质因数 $Q_e = R_0/R_e$，则椭圆输出特性可写为
+
+$$\left( \frac{M}{a} \right)^2 + \left( \frac{J}{b} \right)^2 = 1 \tag{22.84}$$
+
+控制特性可写为
+
+| 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 |
+|---|---|---|---|---|---|---|---|
+
+| 0 | 0.5 | 1 | 1.5 | 2 | 2.5 | 3 |
+|---|---|---|---|---|---|---|
+
+| $Q = 0$ | | | | | | | |
+| $Q = 0.25$ | $0.35$ | $0.5$ | $0.75$ | $1$ | $1.5$ | $2$ | $3$ | $5$ | $10$ | $25$ |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+
+| | $F$ | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| | $M$ | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+图22.44 LLC 逆变器由 CCM 正弦近似预测的典型控制面特性
+
+表22.1 基本槽网络的支路电抗
+
+| 槽网络 | 串联支路电抗 $X_s$ | 并联支路电抗 $X_p$ |
 |---|---|---|
-| TODO | TODO | TODO |
+| 串联 | $\omega L - \frac{1}{\omega C}$ | $\infty$ |
+| 并联 | $\omega L$ | $-\frac{1}{\omega C}$ |
+| LCC | $\omega L - \frac{1}{\omega C_s}$ | $-\frac{1}{\omega C_p}$ |
+| LLC | $\omega L_s - \frac{1}{\omega C}$ | $\omega L_p$ |
 
-## 中文翻译
+![源页 p.974](../assets/page-snapshots/chapter-22/page-974.png)
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$M = \frac{1}{\sqrt{1 + \frac{1}{a^2}\left( \frac{Q_e}{b} \right)^2}} \tag{22.85}$$
 
-## 英文原文
+其中参数 $a$ 和 $b$ 为
 
-```text
-22.4 Load-Dependent Properties of Resonant Converters 973
-(a) (b)
-Fig. 22.41 Tank network of the LLC inverter example: (a) with load shorted, (b) with load open-circuited
-with
-Ro0=
-√
-Ls
-C
-n= Lp
-Ls
-F= fs
-f∞
-(22.80)
-For switching frequencies fs > fm, the tank circuit exhibits the desirable property that the
-tank input current decreases as the load current decreases. Operation of this converter at high
-frequency f
-s > f0 combines the desirable properties of zero-voltage switching at all loads and
-of tank input current that scales monotonically with load current. Over this range of frequencies,
-the LLC exhibits a conversion ratio less than unity, similar to the series resonant circuit. In the
-vicinity of f∞,t h eLLC is capable of boost-type conversion ratios that can become large at light
-load.
-Figure 22.43 illustrates the output characteristic of theLLC, for the example fm< fs< f0.I t
-can be observed that, for this example,Rcrit < Ro0; therefore, the converter exhibits the desirable
-property that the zero-voltage switching region includes the matched-load conditions as well as
-open-circuit conditions.
-Figure 22.44 illustrates typical control plane M vs. F characteristics of the LLC converter,
-as predicted by the CCM sinusoidal approximation result of Eq. ( 22.85). Contours for various
-values of load resistance are shown, with the speciﬁc choice L
-p = 5Ls.F o rl o wQ (large load
-resistance), the characteristics exhibit a resonance near f∞with parallel resonant (boost) charac-
-teristics. For large Q (low load resistance), the characteristics exhibit a resonance near f0 with
-series resonant (buck) characteristics.
-22.4.6 Results for Basic Tank Networks
-The tank networks of Fig. 22.1 can be written in the form shown in Fig. 22.39b. The series and
-shunt branch reactances are listed in Table 22.1. In this section, the resonant converter general
-solution and key equations are listed, as functions of the branch reactances Xs and Xp.
-The tank network input impedance is Zi0 = jXsfor Re = 0, and is Zi∞= j(Xs+ Xp)f o r
-Re=∞. The unloaded tank transfer function is
-H∞(ω)= Xp
-Xp+ Xs
-(22.81)
+$$a = \|H_\infty(\omega)\| = \frac{|X_p|}{|X_p + X_s|}$$
 
-974 22 Resonant Conversion
-The matched-load impedance (tank output impedance when the input is shorted) is
-Zo0(ω)= jXsXp
-Xs+ Xp
-= jXsH∞(ω) (22.82)
-Matched-load resistance occurs at Re= Ro0, where Ro0=∥ Zo0∥.
-Fig. 22.42 Tank input impedance∥ Zi∥ for the LLC tank circuit
-Fig. 22.43 Output plane characteristic of the LLC inverter
+$$b = \frac{\|H_\infty(\omega)\|\, R_0}{\|Z_{o0}(\omega)\|} = \frac{R_0}{|X_s|} \tag{22.86}$$
 
-22.4 Load-Dependent Properties of Resonant Converters 975
-The critical load resistance at the boundary betweem ZVS and ZCS is
-Rcrit =∥ Zo0∥
-√
-−Zi∞
-Zi0
-=| Xp|
-√
-−Xs
-Xs+ Xp
-(22.83)
-The frequency f = fm, where∥ Zi∞∥=∥ Zi0∥, can be shown to occur at the frequency where
-Xs=−Xp/2.
-If we deﬁne the conversion ratio M= Vout/Vin, the normalized load current J= IoutR0/Vin,
-and the eﬀective quality factor as Qe = R0/Re, then the elliptical output characteristic can be
-written ⎦M
-a
-)2
-+
-⎦J
-b
-)2
-= 1 (22.84)
-and the control characteristic can be written
-0.5 1 1.5 2 2.5 3 3.5 4
-0
-0.5
-1
-1.5
-2
-2.5
-3
-Q = 0
-Q = 0.25
-0.35
-0.5
-0.75
-1
-1.52 3 5 10
-25
-F
-M
-Fig. 22.44 Typical control plane characteristic of the LLC inverter, as predicted by the CCM sinusoidal
-approximation
-Table 22.1 Branch reactances of basic tank networks
-Tank Series branch reactance Xs Shunt branch reactance Xp
-Series ωL−1
-ωC ∞
-Parallel ωL −1
-ωC
-LCC ωL−1
-ωCs
-−1
-ωCp
-LLC ωLs−1
-ωC ωLp
+上述方程基于正弦近似描述了图22.1 所有逆变器的解。串联槽情形 $a = 1$。
 
-976 22 Resonant Conversion
-M= 1√
-1
-a2 +
-⎦Qe
-b
-)2
-(22.85)
-where the parameters a and b are given by
-a=∥ H∞(ω)∥= | Xp|
-| Xp+ Xs|
-b=∥ H∞(ω)∥R0
-∥ Zo0(ω)∥ = R0
-| Xs|
-(22.86)
-The above equations describe the solutions of all of the inverters of Fig. 22.1, based on the
-sinusoidal approximation. For the series tank, a= 1.
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters
-The exact steady-state behavior of resonant converters can be determined via methods such as
-state plane analysis. A detailed analysis of resonant dc–dc converters is beyond the scope of
-this book. However, the exact steady-state characteristics of ideal series [ 272, 306–313] and
-parallel [299, 315–318] resonant dc–dc converters (Fig. 22.45) are summarized in this section.
-Small-signal ac modeling has also been described in the literature; several relevant papers are
-[320–323].
-(a) L
-+Vg
-CQ1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-1 : n
-R
-+
-V
-(b) L
-+Vg C
-Q1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-1 : n
-R
-+
-V
-D5
-D6
-D7
-D8
-Fig. 22.45 Transformer-isolated resonant dc–dc converters: ( a) series resonant converter, ( b) parallel
-resonant converter
+## 22.5 串联和并联谐振变换器的精确特性
 
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 977
-22.5.1 Series Resonant Converter
-At a given switching frequency, the series resonant dc–dc converter can operate in one continu-
-ous conduction mode, and possibly in several discontinuous conduction modes. The mode index
-k is deﬁned as the integer that satisﬁes
-f0
-k+ 1< fs< f0
-k or 1
-k+ 1< F< 1
-k (22.87)
-where F= fs/ f0 is the normalized switching frequency. The subharmonic numberξis deﬁned
-as
-ξ= k+ 1+ (−1)k
-2 (22.88)
-Values of k andξas functions of fs are summarized in Fig. 22.46a. The subharmonic numberξ
-denotes the dominant harmonic that excites the tank resonance. When the converter is heavily
-loaded, it operates in type k continuous conduction mode. As the load is reduced (i.e., as the
-load resistance R is increased), the converter enters the type k discontinuous conduction mode.
-Further reducing the load causes the converter to enter the type ( k−1) DCM, type ( k−2)
-DCM,... , type 1 DCM. There is no type 0 DCM, and hence when the converter operates above
-resonance, only the type 0 continuous conduction mode is possible.
-In the type k continuous conduction mode, the series resonant converter exhibits elliptical
-output characteristics, given by
-M
-2ξ2 sin2
-⎦γ
-2
-)
-+ 1
-ξ2
-⎦Jγ
-2 + (−1)k
-)2
-cos2
-⎦γ
-2
-)
-= 1 (22.89)
-For the transformer-isolated converters of Fig.22.45, M and J are related to the load voltage V
-and load current I according to
-M= V
-nVg
-J= InR0
-Vg
-(22.90)
-Again, R0 is the tank characteristic impedance, referred to the transformer primary side. The
-quantityγis the angular length of one-half of the switching period:
-γ=ω0Ts
-2 =π
-F (22.91)
-Equation (22.89) is valid only fork satisfying Eq. (22.87). It predicts that the voltage conversion
-ratio M is restricted to the range
-0≤M≤1
-ξ (22.92)
-This is consistent with Eq. (22.21).
-Typical CCM tank current waveforms are illustrated in Fig.22.46. When k is even, the tank
-inductor current is initially negative. In consequence, the switch network antiparallel diodes
-conduct ﬁrst, for a fraction of a half resonant cycle. If k is odd, then each half-switching period
-is initiated by conduction of the switch network transistors. In either case, this is followed by
-(ξ−1) complete tank half-cycles of ringing. The half-switching period is then concluded by
+谐振变换器的精确稳态行为可通过状态平面分析等方法确定。谐振直流-直流变换器的详细分析超出本书范围。但理想串联 [272, 306–313] 和并联 [299, 315–318] 谐振直流-直流变换器（图22.45）的精确稳态特性在本节总结。小信号交流建模也已在文献中描述；相关论文有 [320–323]。
 
-978 22 Resonant Conversion
+(a) $L$
+$+V_g$
+$C$
+$Q_1$
+$Q_2$
+$Q_3$
+$Q_4$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$1 : n$
+$R$
+$+$
+$V$
+
+(b) $L$
+$+V_g$
+$C$
+
+![源页 p.975](../assets/page-snapshots/chapter-22/page-975.png)
+
+$Q_1$
+$Q_2$
+$Q_3$
+$Q_4$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$1 : n$
+$R$
+$+$
+$V$
+$D_5$
+$D_6$
+$D_7$
+$D_8$
+
+图22.45 变压器隔离谐振直流-直流变换器：(a) 串联谐振变换器，(b) 并联谐振变换器
+
+### 22.5.1 串联谐振变换器
+
+给定开关频率下，串联谐振直流-直流变换器可在一种连续导通模式以及可能的几种断续导通模式下工作。模式指数 $k$ 定义为满足
+
+$$\frac{f_0}{k+1} < f_s < \frac{f_0}{k} \quad \text{或} \quad \frac{1}{k+1} < F < \frac{1}{k} \tag{22.87}$$
+
+的整数，其中 $F = f_s/f_0$ 是归一化开关频率。子谐波数 $\xi$ 定义为
+
+$$\xi = \frac{k + 1 + (-1)^k}{2} \tag{22.88}$$
+
+$k$ 和 $\xi$ 作为 $f_s$ 函数的值总结于图22.46a。子谐波数 $\xi$ 表示激励槽谐振的主导谐波。变换器重载时工作在 type $k$ 连续导通模式。负载减小（即负载电阻 $R$ 增大）时，变换器进入 type $k$ 断续导通模式。进一步减小负载使变换器进入 type $(k-1)$ DCM、type $(k-2)$ DCM、...、type 1 DCM。没有 type 0 DCM，故变换器高于谐振工作时只有 type 0 连续导通模式可能。
+
+type $k$ 连续导通模式下，串联谐振变换器表现出椭圆输出特性：
+
+$$\left( \frac{M}{2\xi \sin\left( \frac{\gamma}{2} \right)} \right)^2 + \frac{1}{\xi^2}\left( \frac{J\gamma}{2} + (-1)^k \right)^2 \cos^2\left( \frac{\gamma}{2} \right) = 1 \tag{22.89}$$
+
+对图22.45 的变压器隔离变换器，$M$ 和 $J$ 与负载电压 $V$ 和负载电流 $I$ 的关系为
+
+$$M = \frac{V}{n V_g}$$
+
+$$J = \frac{I n R_0}{V_g} \tag{22.90}$$
+
+再次，$R_0$ 是折算到变压器初级的槽特性阻抗。量 $\gamma$ 是开关周期一半的角长度：
+
+$$\gamma = \frac{\omega_0 T_s}{2} = \frac{\pi}{F} \tag{22.91}$$
+
+式(22.89) 仅对满足式(22.87) 的 $k$ 有效。它预测电压变换比 $M$ 限于范围
+
+$$0 \le M \le \frac{1}{\xi} \tag{22.92}$$
+
+这与式(22.21) 一致。
+
+典型 CCM 槽电流波形如图22.46。$k$ 为偶时，槽电感电流初值为负。结果开关网络反并联二极管先导通，持续半个谐振周期的一部分。$k$ 为奇时，每个半开关周期由开关网络晶体管导通开始。两种情形随后是 $(\xi - 1)$ 个完整槽半周期振铃。半开关周期随后由
+
+![源页 p.976](../assets/page-snapshots/chapter-22/page-976.png)
+
 (a)
-fs
-f0f0 /2f0 /3
-etc. k = 0k = 1k = 2k = 3
- = 1 = 3
-(b)
-iL(t)
-st
-Q1
-Q1
-D1
-D1
-(k
-vs(t) Vg
-g
-Q1
-Q2
-(c)
-iL(t)
-st
-Q1
-Q1
-D1
-D1
-D1
-k complete half-cycles
-vs(t) Vg
-g
-D2
-Q2
-Fig. 22.46 Continuous conduction modes of the series resonant converter: ( a) switching frequency
-ranges over which various mode indices k and subharmonic numbersξoccur; (b) tank inductor current
-waveform, type k CCM, for odd k;( c) tank inductor current waveform, type k CCM, for even k
-
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 979
-a subinterval shorter than one complete resonant half-cycle, in which the device that did not
-initially conduct is on. The next half- switching period then begins, and is symmetrical.
-The steady-state control plane characteristic can be found for a resistive load R obeying
-V= IR, by substitution of the normalized relationJ= MQ into Eq. (22.89), where Q= n2R0/R.
-Use of the quadratic formula and some algebraic manipulations allows solution for M,a sa
-function of load (via Q) and switching frequency (viaγ):
-M=
-⎦Qγ
-2
-)
-ξ4 tan2
-⎦γ
-2
-)
-+
-⎦Qγ
-2
-)2
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢
-⎢⎣
-(−1)
-k+1+
-√1+
-[
-ξ2−cos2
-⎦γ
-2
-)][
-ξ4 tan2
-⎦γ
-2
-)
-+
-⎦Qγ
-2
-)2]
-⎦Qγ
-2
-)2
-cos2
-⎦γ
-2
-)
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥
-⎥⎦
-(22.93)
-This is the closed-form relationship between the conversion ratioM and the switching frequency,
-for a resistive load. It is valid for any continuous conduction mode k.
-The type k discontinuous conduction modes, for k odd, occur over the frequency range
-f
-s< f0
-k (22.94)
-In these modes, the output voltage is independent of both load current and switching frequency,
-and is described by
-M= 1
-k (22.95)
-The type k discontinuous conduction mode, for odd k, occurs over the range of load currents
-given by
-2(k+ 1)
-γ> J> 2(k−1)
-γ (22.96)
-In the odd discontinuous conduction modes, the tank current rings for k complete resonant
-half-cycles. All four output bridge rectiﬁer diodes then become reverse-biased, and the tank
-current remains at zero until the next switching half-period begins, as illustrated in Fig. 22.51.
-Series resonant converters are not normally purposely designed to operate in odd discontinuous
-conduction modes, because the output voltage is not controllable. Nonetheless, when the load
-is removed with f
-s< f0, the series resonant converter operates in k= 1 DCM with M= 1.
-The type k discontinuous conduction mode, for k even, also occurs over the frequency range
-fs< f0
-k (22.97)
-Even discontinuous conduction modes exhibit current source characteristics, in which the load
-current is a function of switching frequency and input voltage, but not of the load voltage. The
-output relationship is
-J= 2k
-γ (22.98)
-Operation in this mode occurs for
-1
-k−1> M> 1
-k+ 1 (22.99)
-
-980 22 Resonant Conversion
-iL(t)
-st
-Q1
-D1
-k complete half-cycles
-vs(t) Vg
-g
-Q2
-X
-D1
-Fig. 22.47 Tank inductor current waveform, typek DCM, for even k
-g+
-Vg
-+
-V
-Ig = gV Ig = gVg
-g = 2k
-R0
-Fig. 22.48 Steady-state equivalent circuit model for an even discontinuous conduction mode: an eﬀective
-gyrator. The converter exhibits current source characteristics
-In the even discontinuous conduction modes, the tank current rings fork complete resonant half-
-cycles during each switching half-period. All four output bridge then become reverse-biased,
-and the tank current remains at zero until the next switching half-period is initiated. Tank current
-waveforms are illustrated in Fig.22.47 for even DCM.
-The series resonant converter possesses some unusual properties when operated in an even
-discontinuous conduction mode. A dc equivalent circuit is given in Fig. 22.48, consisting of a
-gyrator with gyration conductance g= 2k/gn2R0. The gyrator has the property of transforming
-circuits into their dual networks; in the typical dc–dc converter application, the input voltage
-source V
-g is eﬀectively transformed into its dual, an output current source of value gVg. Series
-resonant converters have been purposely designed to operate in thek= 2D C M ,a tp o w e rl e v e l s
-of several tens of kW.
-The complete control plane characteristics can now be plotted using Eqs. ( 22.87)–(22.99).
-The result is shown in Fig. 22.49, and the mode boundaries are explicitly diagrammed in
-Fig. 22.50. It can be seen that, for operation above resonance, the only possible operating mode
-is the k= 0 CCM, and that the output voltage decreases monotonically with increasing switch-
-
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 981
-0
-0.1
-0.2
-0.3
-0.4
-0.5
-0.6
-0.7
-0.8
-0.9
-1
-0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2
-M = V/Vg
-F = fs / f0
-Q = 20
-10
-5
-3.5
-2
-1.5
-1
-0.75
-0.5
-0.35
-Q = 0.2
-Q = 20
-10
-5
-3.5
-2
-1.5
-1
-0.75
-0.5
-0.35
-Q = 0.2
-Fig. 22.49 Complete control plane characteristics of the series resonant converter, for 0.2≤F≤2
-0
-0.1
-0.2
-0.3
-0.4
-0.5
-0.6
-0.7
-0.8
-0.9
-1
-0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2
-M
-F
-k = 0 CCMk = 1 CCMk = 2 DCM
-k = 2 CCM
-k = 3 CCM
-k = 4
-DCM
-k = 1 DCM
-k = 3 DCM
+$f_s$
+$f_0$
+$f_0/2$
+$f_0/3$
 etc.
-Fig. 22.50 Continuous and discontinuous conduction mode boundaries
+$k = 0$
+$k = 1$
+$k = 2$
+$k = 3$
+$\xi = 1$
+$\xi = 3$
 
-982 22 Resonant Conversion
-iL(t)
-st
-Q1
-Q1
-D1
-k complete half-cycles
-vs(t) Vg
-g
-Q2
-X
-Fig. 22.51 Tank inductor current waveform, type k DCM, for odd k
-ing frequency. Reduction in load current (or increase in load resistance, which decreases Q)
-causes the output voltage to increase. A number of successful designs that operate above reso-
-nance and utilize zero-voltage switching have been documented in the literature [300, 314].
-Operation below resonance is complicated by the presence of subharmonic and discontinu-
-ous conduction modes. The k= 1 CCM and k= 2 DCM are well behaved, in that the output
-voltage increases monotonically with increasing switching frequency. Increase of the load cur-
-rent again causes the output voltage to decrease. Successful designs that operate in these modes
-and employ zero-current switching are numerous. However, operation in the higher-order modes
-(k= 2 CCM, k= 4 DCM, etc.) is normally avoided.
-Given F and Q, the operating mode can be evaluated directly, using the following algorithm.
-First, the continuous conduction mode k corresponding to operation at frequency F with heavy
-loading is found:
-k= INT
-⎦1
-F
-)
-(22.100)
-where INT (x) denotes the integer part of x. Next, the quantity k1 is determined:
-k1= INT
-⎛⎜⎜⎜⎜⎜⎝
-1
-2+
-√
-1
-4+ Qπ
-2F
-⎞⎟⎟⎟⎟⎟⎠ (22.101)
-The converter operates in type k CCM provided that:
-k1> k (22.102)
-Otherwise, the converter operates in typek1 DCM. A simple algorithm can therefore be deﬁned,
-in which the conversion ratioM is computed for a givenF and Q.F i r s t ,E q s .(22.100)t o( 22.102)
-are evaluated, to determine the operating mode. Then, the appropriate equation (22.93), (22.95),
-or (22.98) is evaluated to ﬁnd M.
+(b)
+$i_L(t)$
+$s_t$
+$Q_1$
+$Q_1$
+$D_1$
+$D_1$
+$(k$
+$v_s(t)$
+$V_g$
+$g$
+$Q_1$
+$Q_2$
 
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 983
-F = 1.30
-F = 1.15
-F = 1.10
-F = 1.07
-F = 1.05 F = 1.01
-J
-0 0.2 0.4 0.6 0.8 1
-0
-1
-2
-3
-4
-5
-6
-M
-Fig. 22.52 Output characteristics, k= 0 CCM (above resonance)
-Output I−V plane characteristics for the k= 0 CCM, plotted using Eq. (22.89), are shown
-in Fig. 22.52. The constant-frequency curves are elliptical, and all pass through the point M=
-1, J= 0. For a given switching frequency, the operating point is given by the intersection of the
-elliptical converter output characteristic with the load I−V characteristic.
-Output plane characteristics that combine the k= 1 CCM, k= 1 DCM, and k= 2D C M
-are shown in Fig. 22.53. These were plotted using Eqs. ( 22.89), (22.95), and ( 22.98). These
-curves were plotted with the assumption that the transistors are allowed to conduct no longer
-than one tank half-cycle during each switching half-period; this eliminates subharmonic modes
-and causes the converter to operate in k= 2o r k= 1 DCM whenever f
-s< 0.5 f0. It can be seen
-that the constant-frequency curves are elliptical in the continuous conduction mode, vertical
-(voltage source characteristic) in the k= 1 DCM, and horizontal (current source characteristic)
-in the k= 2D C M .
-22.5.2 Parallel Resonant Converter
-For operation in the frequency range 0.5 f0 < fs <∞, the parallel resonant dc–dc converter ex-
-hibits one continuous conduction mode and one discontinuous conduction mode. Typical CCM
-switch voltage vs(t), tank inductor current iL(t), and tank capacitor voltage vC(t) waveforms are
-illustrated in Fig. 22.54. The CCM converter output characteristics are given by
+(c)
+$i_L(t)$
+$s_t$
+$Q_1$
+$Q_1$
+$D_1$
+$D_1$
+$D_1$
+$k$ complete half-cycles
+$v_s(t)$
+$V_g$
+$g$
+$D_2$
+$Q_2$
 
-984 22 Resonant Conversion
-M
-1.5
-2.5
-0.2 0.4 0.6 0.8
-2
-4
-F = .5
-F = .75
-F = .85
-F = .90
-F = .93
-F = .96
-F = 1.0
-F = .25
-F = .1
-k = 2 DCM
-k = 1 CCM
-k = 1 DCM
-J
-0
-1
-2
-3
-0 1
-Fig. 22.53 Output characteristics, k= 1 CCM, k= 1D C M ,a n dk= 2 DCM (below resonance)
-M=
-⎦2
-γ
-) ⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-ϕ−sin(ϕ)
-cos
-⎦γ
-2
-)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(22.103)
-ϕ=
-⎧⎪⎪⎪⎪⎨⎪⎪⎪⎪⎩
-−cos−1
-⎦
-cos
-⎦γ
-2
-)
-+ J sin
-⎦γ
-2
-))
-for 0<γ<π(above resonance)
-+ cos−1
-⎦
-cos
-⎦γ
-2
-)
-+ J sin
-⎦γ
-2
-))
-forπ<γ<2π(below resonance)
-(22.104)
-and where M, J, andγare again deﬁned as in Eqs. ( 22.90) and (22.91). Given the normalized
-load current J and the half-switching-period-angleγ, one can evaluate Eq. ( 22.104) to ﬁndϕ,
-and then evaluate Eq. (22.103) to ﬁnd the converter voltage conversion ratio M. In other words,
-the output voltage can be found for a given load current and switching frequency, without need
-for computer iteration.
-A discontinuous conduction mode mechanism occurs in the parallel resonant converter
-which is the dual of the discontinuous conduction mode mechanism of the series resonant con-
-verter. In this mode, a discontinuous subinterval occurs in which all four output bridge rectiﬁer
-diodes are forward-biased, and the tank capacitor voltage remains at zero. This mode occurs
-both above and below resonance when the converter is heavily loaded. Typical DCM tank ca-
-pacitor voltage and inductor current waveforms are illustrated in Fig. 22.55. The condition for
-operation in the discontinuous conduction mode is
-J> J
-crit(γ) for DCM (22.105)
-J< Jcrit(γ) for CCM
+图22.46 串联谐振变换器的连续导通模式：(a) 各种模式指数 $k$ 和子谐波数 $\xi$ 出现的开关频率范围；(b) $k$ 为奇时 type $k$ CCM 的槽电感电流波形；(c) $k$ 为偶时 type $k$ CCM 的槽电感电流波形
 
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 985
-V = vC(t)
-Ts
-vC(t)
-iL(t)
-vs(t)
-Vg
-g
-0t
-vC(t)
-Fig. 22.54 Typical waveforms of the parallel resonant converter, operating in the continuous conduction
-mode
-where
-Jcrit(γ)=−1
-2 sin(γ)+
-√
-sin2
-⎦γ
-2
-)
-+ 1
-4 sin2 (γ) (22.106)
-The discontinuous conduction mode is described by the following set of equations:
-MC0 = 1−cos(β)
-JL0 = J+ sin(β)
-cos(α+β)−2 cos(α)=−1
-−sin(α+β)+ 2s i n (α)+ (δ−α)= 2J (22.107)
-β+δ=γ
-M= 1+
-⎦2
-γ
-)
-(J−δ)
-Unfortunately, the solution to this set of equations is not known in closed form, because of
-the mixture of linear and trigonometric terms. In consequence, the equations must be solved
+![源页 p.977](../assets/page-snapshots/chapter-22/page-977.png)
 
-986 22 Resonant Conversion
-I
-vC(t)
-0t
-D5
-D6 D7
-D8
-D6 D7
-D5 D8 D5 D8 D5 D8
-D6 D7 D6 D7
-0t
-iL(t)
-Fig. 22.55 Typical waveforms of the parallel resonant converter, operating in the discontinuous conduc-
-tion mode
-iteratively. For a givenγand J, a computer is used to iteratively ﬁnd the angles α, β, and δ.
-M is then evaluated, and the output plane characteristics can be plotted. The result is given in
-Fig. 22.56. The dashed lines are the DCM solutions, and the solid lines are the valid CCM so-
-lutions. Figure 22.56 describes the complete dc behavior of the ideal parallel resonant converter
-for all switching frequencies above 0.5 f0. For given values of normalized switching frequency
-F= fs/ f0 =π/γ, the relationship between the normalized output current J and the normalized
-output voltage M is approximately elliptical. At resonance ( F = 1), the CCM ellipse degen-
-erates to the horizontal line J = 1, and the converter exhibits current source characteristics.
-Above resonance, the converter can both step-up the voltage (M> 1) and step-down the voltage
-(M< 1). The normalized load current is then restricted to J< 1, corresponding to I< Vg/nR0.
-For a given switching frequency greater than the resonant frequency, the actual limit on maxi-
-mum load current is even more restrictive than this limit. Below resonance, the converter can
-also step-up and step-down the voltage. Normalized load currentsJ greater than one are also ob-
-tainable, depending on M and F. However, no solutions occur whenM and J are simultaneously
-large.
+一个短于完整谐振半周期的子区间结束，此子区间中未初始导通的器件导通。下一个半开关周期随后开始且对称。
 
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters 987
-M
-J
-0.0
-0.5
-1.0
-1.5
-2.0
-2.5
-3.0
-0.0 0.5 1.0 1.5 2.0 2.5
-F = 0.51
-0.7
-0.9
-0.8
-1.0
-1.1
-1.2
-1.5
-F = 2
-1.3
-0.6
-Fig. 22.56 Exact output characteristics of the parallel resonant converter, for F > 0.5. Solid curves:
-CCM, dashed curves: DCM
-Q = 0.5
-0.5 1.0 1.5 2.0 2.5 3.0
-0.0
-0.5
-1.0
-1.5
-2.0
-2.5
-3.0
-fs /f0
-M = V/Vg
-Q = 1
-Q = 2
-Q = 5
-Q = 0.2
-Fig. 22.57 Exact control characteristics of the parallel resonant converter, with a resistive load. Both
-CCM and DCM operation is included, for 0.5≤F≤3
+稳态控制面特性可通过代入归一化关系 $J = M Q$ 到式(22.89) 求得，其中 $Q = n^2 R_0/R$，负载电阻 $R$ 满足 $V = IR$。用二次公式和代数运算可解出 $M$ 作为负载（通过 $Q$）和开关频率（通过 $\gamma$）的函数：
 
-988 22 Resonant Conversion
-In Fig. 22.57, the control plane characteristics are plotted for a resistive load. The parameter
-Q is deﬁned for the parallel resonant converter as Q= R/n2R0. The normalized load current is
-then given by J= M/Q.
-22.6 Summary of Key Points
-1. The sinusoidal approximation allows a great deal of insight to be gained into the operation
-of resonant inverters and dc–dc converters. The voltage conversion ratio of dc–dc resonant
-converters can be directly related to the tank network transfer function. Other important
-converter properties, such as the output characteristics, dependence (or lack thereof) of
-transistor current on load current, and zero-voltage- and zero-current-switching transitions,
-can also be understood using this approximation. The approximation is accurate provided
-that the eﬀective Q-factor is suﬃciently large, and provided that the switching frequency is
-suﬃciently close to resonance.
-2. Simple equivalent circuits are derived, which represent the fundamental components of the
-tank network waveforms, and the dc components of the dc terminal waveforms.
-3. Exact solutions of the ideal dc–dc series and parallel resonant converters are listed here as
-well. These solutions correctly predict the conversion ratios, for operation not only in the
-fundamental continuous conduction mode, but in discontinuous and subharmonic modes as
-well.
-4. Zero-voltage switching mitigates the switching loss caused by diode recovered charge and
-semiconductor device output capacitances. When the objective is to minimize switching
-loss and EMI, it is preferable to operate each MOSFET and diode with zero-voltage switch-
-ing.
-5. Zero-current switching leads to natural commutation of SCRs, and can also mitigate the
-switching loss due to current tailing in IGBTs.
-6. The input impedance magnitude ||Z
-i||, and hence also the transistor current magnitude, are
-monotonic functions of the load resistance R. The dependence of the transistor conduction
-loss on the load current can be easily understood by simply plotting ∥Zi|| in the limiting
-cases as R→∞and as R→0, or||Zi∞∥ and||Zi0∥.
-7. The ZVS/ZCS boundary is also a simple function of Zi∞and Zi0. If ZVS occurs at open-
-circuit and at short-circuit, then ZVS occurs for all loads. If ZVS occurs at short-circuit, and
-ZCS occurs at open-circuit, then ZVS is obtained at matched load provided that ||Zi∞||>
-||Zi0∥.
-8. The output characteristics of all resonant inverters considered here are elliptical, and are
-described completely by the open-circuit transfer function magnitude∥H∞∥, and the output
-impedance∥Zo0∥. These quantities can be chosen to match the output characteristics to the
-application requirements.
-Problems
-22.1 Analysis of a half-bridge dc–dc parallel resonant converter, operated above resonance .
-In Fig. 22.58, the elements Cb, LF , and CF are large in value, and have negligible switch-
-ing ripple. You may assume that all elements are ideal. You may use the sinusoidal ap-
-proximation as appropriate.
+$$M = \frac{\left( \dfrac{Q\gamma}{2} \right)\, \xi^4 \tan^2\left( \dfrac{\gamma}{2} \right) + \left( \dfrac{Q\gamma}{2} \right)^2}{(-1)^{k+1} + \sqrt{1 + \dfrac{\left[ \xi^2 - \cos^2\left( \dfrac{\gamma}{2} \right) \right]\left[ \xi^4 \tan^2\left( \dfrac{\gamma}{2} \right) + \left( \dfrac{Q\gamma}{2} \right)^2 \right]}{\left( \dfrac{Q\gamma}{2} \right)^2\, \cos^2\left( \dfrac{\gamma}{2} \right)}}} \tag{22.93}$$
 
-22.6 Summary of Key Points 989
+这是电阻负载下变换比 $M$ 与开关频率之间的闭式关系。对任何连续导通模式 $k$ 有效。
+
+$k$ 为奇时 type $k$ 断续导通模式发生在频率范围
+
+$$f_s < \frac{f_0}{k} \tag{22.94}$$
+
+这些模式中输出电压与负载电流和开关频率均无关，由
+
+$$M = \frac{1}{k} \tag{22.95}$$
+
+描述。
+
+$k$ 为奇时 type $k$ 断续导通模式发生在负载电流范围
+
+$$\frac{2(k+1)}{\gamma} > J > \frac{2(k-1)}{\gamma} \tag{22.96}$$
+
+奇断续导通模式中，槽电流振铃 $k$ 个完整谐振半周期。四个输出桥整流器二极管随后反偏，槽电流保持为零直到下一个半开关周期开始，如图22.51。
+
+串联谐振变换器通常不刻意设计工作在奇断续导通模式，因为输出电压不可控。但负载去除且 $f_s < f_0$ 时，串联谐振变换器工作在 $k = 1$ DCM 且 $M = 1$。
+
+$k$ 为偶时 type $k$ 断续导通模式也发生在频率范围
+
+$$f_s < \frac{f_0}{k} \tag{22.97}$$
+
+偶断续导通模式表现出电流源特性，负载电流是开关频率和输入电压的函数，但不是负载电压的函数。输出关系为
+
+$$J = \frac{2k}{\gamma} \tag{22.98}$$
+
+此模式的工作发生在
+
+$$\frac{1}{k-1} > M > \frac{1}{k+1} \tag{22.99}$$
+
+![源页 p.978](../assets/page-snapshots/chapter-22/page-978.png)
+
+$i_L(t)$
+$s_t$
+$Q_1$
+$D_1$
+$k$ complete half-cycles
+$v_s(t)$
+$V_g$
+$g$
+$Q_2$
+$X$
+$D_1$
+
+图22.47 $k$ 为偶时 type $k$ DCM 的槽电感电流波形
+
+$g$
+$+$
+$V_g$
+$+$
+$V$
+$I_g = g V$
+$I_g = g V_g$
+$g = \frac{2k}{\pi}\, \frac{1}{n^2 R_0}$
+
+图22.48 偶断续导通模式的稳态等效电路模型：有效回转器。变换器表现出电流源特性
+
+偶断续导通模式中，槽电流在每个半开关周期内振铃 $k$ 个完整谐振半周期。四个输出桥随后反偏，槽电流保持为零直到下一个半开关周期开始。槽电流波形如图22.47 所示（偶 DCM）。
+
+串联谐振变换器在偶断续导通模式工作时具有一些不寻常性质。直流等效电路如图22.48，由回转电导 $g = 2k/(\pi n^2 R_0)$ 的回转器组成。回转器具有将电路变换为其对偶网络的性质；在典型直流-直流变换器应用中，输入电压源 $V_g$ 有效变换为其对偶，值为 $g V_g$ 的输出电流源。串联谐振变换器曾被刻意设计工作在 $k = 2$ DCM，功率水平达数十千瓦。
+
+完整控制面特性现可用式(22.87)–(22.99) 绘制。结果如图22.49，模式边界在图22.50 中显式图示。可见高于谐振工作时唯一可能的工作模式是 $k = 0$ CCM，输出电压随开关
+
+![源页 p.979](../assets/page-snapshots/chapter-22/page-979.png)
+
+| 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 |
+|---|---|---|---|---|---|---|---|---|
+
+| 0.9 | | | | | | | | |
+| 1 | | | | | | | | |
+
+| | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | 1.2 | 1.4 | 1.6 | 1.8 | 2 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+| $M = V/V_g$ | | | | | | | | | | | | |
+
+| | $F = f_s/f_0$ | | | | | | | | | | | |
+
+| $Q = 20$ | $10$ | $5$ | $3.5$ | $2$ | $1.5$ | $1$ | $0.75$ | $0.5$ | $0.35$ | $Q = 0.2$ |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+| $Q = 20$ | $10$ | $5$ | $3.5$ | $2$ | $1.5$ | $1$ | $0.75$ | $0.5$ | $0.35$ | $Q = 0.2$ |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+图22.49 串联谐振变换器的完整控制面特性，$0.2 \le F \le 2$
+
+| 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 |
+|---|---|---|---|---|---|---|---|---|
+
+| 0.9 | | | | | | | | | |
+| 1 | | | | | | | | | |
+
+| | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | 1.2 | 1.4 | 1.6 | 1.8 | 2 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+| | $M$ | | | | | | | | | | | |
+
+| | $F$ | | | | | | | | | | | |
+
+| $k = 0$ CCM | $k = 1$ CCM | $k = 2$ DCM |
+|---|---|---|
+
+| $k = 2$ CCM | | | |
+|---|---|---|---|
+
+| $k = 3$ CCM | | | |
+|---|---|---|---|
+
+| $k = 4$ DCM | | | |
+|---|---|---|---|
+
+| $k = 1$ DCM | | | |
+|---|---|---|---|
+
+| $k = 3$ DCM | | | |
+|---|---|---|---|
+
+| etc. | | | |
+|---|---|---|---|
+
+图22.50 连续和断续导通模式边界
+
+![源页 p.980](../assets/page-snapshots/chapter-22/page-980.png)
+
+$i_L(t)$
+$s_t$
+$Q_1$
+$Q_1$
+$D_1$
+$k$ complete half-cycles
+$v_s(t)$
+$V_g$
+$g$
+$Q_2$
+$X$
+
+图22.51 $k$ 为奇时 type $k$ DCM 的槽电感电流波形
+
+频率升高而单调下降。负载电流减小（或负载电阻增大，使 $Q$ 减小）使输出电压升高。高于谐振工作并利用零电压开关的若干成功设计已在文献中记录 [300, 314]。
+
+低于谐振工作因存在子谐波和断续导通模式而复杂。$k = 1$ CCM 和 $k = 2$ DCM 表现良好，输出电压随开关频率升高单调增大。负载电流增大再次使输出电压下降。工作在这些模式并采用零电流开关的成功设计很多。但通常避免高阶模式（$k = 2$ CCM、$k = 4$ DCM 等）工作。
+
+给定 $F$ 和 $Q$，工作模式可用以下算法直接评估。首先找到与频率 $F$ 重载工作对应的连续导通模式 $k$：
+
+$$k = \text{INT}\left( \frac{1}{F} \right) \tag{22.100}$$
+
+其中 $\text{INT}(x)$ 表示 $x$ 的整数部分。然后确定量 $k_1$：
+
+$$k_1 = \text{INT}\left( \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{Q\pi}{2F}} \right) \tag{22.101}$$
+
+变换器在满足以下条件时工作在 type $k$ CCM：
+
+$$k_1 > k \tag{22.102}$$
+
+否则工作在 type $k_1$ DCM。故可定义简单算法，给定 $F$ 和 $Q$ 计算 $M$。首先评估式(22.100) 至(22.102) 确定工作模式。然后评估适当方程（式(22.93)、(22.95) 或(22.98)）求 $M$。
+
+![源页 p.981](../assets/page-snapshots/chapter-22/page-981.png)
+
+| $F = 1.30$ | | | | |
+|---|---|---|---|---|
+
+| $F = 1.15$ | | | | |
+|---|---|---|---|---|
+
+| $F = 1.10$ | | | | |
+|---|---|---|---|---|
+
+| $F = 1.07$ | | | | |
+|---|---|---|---|---|
+
+| $F = 1.05$ | | $F = 1.01$ | | |
+|---|---|---|---|---|
+
+| | $J$ | | | |
+
+| | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 |
+|---|---|---|---|---|---|---|
+
+| | 0 | | | | | |
+| 1 | | | | | | |
+| 2 | | | | | | |
+| 3 | | | | | | |
+| 4 | | | | | | |
+| 5 | | | | | | |
+| 6 | | | | | | |
+
+| | $M$ | | | | | |
+|---|---|---|---|---|---|---|
+
+图22.52 $k = 0$ CCM（高于谐振）的输出特性
+
+用式(22.89) 绘制的 $k = 0$ CCM 输出 $I$–$V$ 面特性如图22.52。定频曲线为椭圆形，全部通过 $M = 1$、$J = 0$ 点。给定开关频率下，工作点由椭圆变换器输出特性与负载 $I$–$V$ 特性的交点给出。
+
+结合 $k = 1$ CCM、$k = 1$ DCM 和 $k = 2$ DCM 的输出面特性如图22.53。这些用式(22.89)、(22.95) 和(22.98) 绘制。这些曲线在假设晶体管每个半开关周期内导通不超过一个槽半周期的情况下绘制；这消除了子谐波模式并使变换器在 $f_s < 0.5 f_0$ 时总工作在 $k = 2$ 或 $k = 1$ DCM。可见连续导通模式下定频曲线为椭圆形，$k = 1$ DCM 为垂直（电压源特性），$k = 2$ DCM 为水平（电流源特性）。
+
+### 22.5.2 并联谐振变换器
+
+在 $0.5 f_0 < f_s < \infty$ 频率范围内工作时，并联谐振直流-直流变换器表现出一种连续导通模式和一种断续导通模式。典型 CCM 开关电压 $v_s(t)$、槽电感电流 $i_L(t)$ 和槽电容电压 $v_C(t)$ 波形如图22.54。CCM 变换器输出特性为
+
+![源页 p.982](../assets/page-snapshots/chapter-22/page-982.png)
+
+| | $M$ | | | |
+|---|---|---|---|---|
+
+| $1.5$ | | | | |
+| $2.5$ | | | | |
+
+| | 0.2 | 0.4 | 0.6 | 0.8 | | 2 | | 4 |
+|---|---|---|---|---|---|---|---|---|
+
+| $F = .5$ | | | | |
+| $F = .75$ | | | | |
+| $F = .85$ | | | | |
+| $F = .90$ | | | | |
+| $F = .93$ | | | | |
+| $F = .96$ | | | | |
+| $F = 1.0$ | | | | |
+| $F = .25$ | | | | |
+| $F = .1$ | | | | |
+
+| $k = 2$ DCM | | | | |
+|---|---|---|---|---|
+
+| $k = 1$ CCM | | | | |
+|---|---|---|---|---|
+
+| $k = 1$ DCM | | | | |
+|---|---|---|---|---|
+
+| | $J$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| 0 | | | | | | |
+| 1 | | | | | | |
+| 2 | | | | | | |
+| 3 | | | | | | |
+
+| | 0 | | | | 1 | |
+|---|---|---|---|---|---|---|
+
+图22.53 $k = 1$ CCM、$k = 1$ DCM 和 $k = 2$ DCM（低于谐振）的输出特性
+
+$$M = \left( \frac{2}{\gamma} \right)\, \frac{\phi - \sin(\phi)}{\cos\left( \dfrac{\gamma}{2} \right)} \tag{22.103}$$
+
+$$\phi = \begin{cases} -\cos^{-1}\left( \cos\left( \dfrac{\gamma}{2} \right) + J\sin\left( \dfrac{\gamma}{2} \right) \right) & \text{对 } 0 < \gamma < \pi \text{（高于谐振）} \\ +\cos^{-1}\left( \cos\left( \dfrac{\gamma}{2} \right) + J\sin\left( \dfrac{\gamma}{2} \right) \right) & \text{对 } \pi < \gamma < 2\pi \text{（低于谐振）} \end{cases} \tag{22.104}$$
+
+其中 $M$、$J$、$\gamma$ 再次如式(22.90) 和(22.91) 定义。给定归一化负载电流 $J$ 和半开关周期角 $\gamma$，可评估式(22.104) 求 $\phi$，然后评估式(22.103) 求变换器电压变换比 $M$。换言之，可对给定负载电流和开关频率求输出电压，无需计算机迭代。
+
+并联谐振变换器中存在一个断续导通模式机制，是串联谐振变换器断续导通模式机制的对偶。此模式中，一个断续子区间出现，其中四个输出桥整流器二极管全部正偏，槽电容电压保持为零。此模式在变换器重载时高于和低于谐振均发生。典型 DCM 槽电容电压和电感电流波形如图22.55。断续导通模式的工作条件为
+
+$$J > J_{crit}(\gamma) \quad \text{对 DCM} \tag{22.105}$$
+
+$$J < J_{crit}(\gamma) \quad \text{对 CCM}$$
+
+![源页 p.983](../assets/page-snapshots/chapter-22/page-983.png)
+
+$V = v_C(t)$
+$T_s$
+$v_C(t)$
+$i_L(t)$
+$v_s(t)$
+$V_g$
+$g$
+$0$
+$t$
+$v_C(t)$
+
+图22.54 并联谐振变换器连续导通模式下的典型波形
+
+其中
+
+$$J_{crit}(\gamma) = -\frac{1}{2\sin(\gamma)} + \sqrt{\sin^2\left( \frac{\gamma}{2} \right) + \frac{1}{4}\sin^2(\gamma)} \tag{22.106}$$
+
+断续导通模式由以下方程组描述：
+
+$$M C_0 = 1 - \cos(\beta)$$
+
+$$J L_0 = J + \sin(\beta)$$
+
+$$\cos(\alpha + \beta) - 2\cos(\alpha) = -1$$
+
+$$-\sin(\alpha + \beta) + 2\sin(\alpha) + (\delta - \alpha) = 2J \tag{22.107}$$
+
+$$\beta + \delta = \gamma$$
+
+$$M = 1 + \left( \frac{2}{\gamma} \right)(J - \delta)$$
+
+不幸的是，由于
+
+![源页 p.984](../assets/page-snapshots/chapter-22/page-984.png)
+
+线性项和三角项的混合，此方程组无已知闭式解。结果方程须
+
+$I$
+$v_C(t)$
+$0$
+$t$
+$D_5$
+$D_6$ $D_7$
+$D_8$
+$D_6$ $D_7$
+$D_5$ $D_8$ $D_5$ $D_8$ $D_5$ $D_8$
+$D_6$ $D_7$ $D_6$ $D_7$
+$0$
+$t$
+$i_L(t)$
+
+图22.55 并联谐振变换器断续导通模式下的典型波形
+
+迭代求解。对给定 $\gamma$ 和 $J$，用计算机迭代求角度 $\alpha$、$\beta$、$\delta$。然后评估 $M$，可绘制输出面特性。结果如图22.56。虚线为 DCM 解，实线为有效 CCM 解。图22.56 描述了理想并联谐振变换器对 $0.5 f_0$ 以上所有开关频率的完整直流行为。对给定归一化开关频率 $F = f_s/f_0 = \pi/\gamma$，归一化输出电流 $J$ 与归一化输出电压 $M$ 的关系近似为椭圆。谐振处（$F = 1$），CCM 椭圆退化为水平线 $J = 1$，变换器表现出电流源特性。高于谐振时，变换器可升压（$M > 1$）也可降压（$M < 1$）。归一化负载电流限于 $J < 1$，对应 $I < V_g/(n R_0)$。给定开关频率高于谐振频率时，最大负载电流的实际限制比此限制更严格。低于谐振时，变换器也可升压和降压。归一化负载电流 $J$ 大于 1 也可获得，取决于 $M$ 和 $F$。但 $M$ 和 $J$ 同时大时不出现解。
+
+![源页 p.985](../assets/page-snapshots/chapter-22/page-985.png)
+
+| | $M$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| | $J$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| $0.0$ | | | | | | |
+| $0.5$ | | | | | | |
+| $1.0$ | | | | | | |
+| $1.5$ | | | | | | |
+| $2.0$ | | | | | | |
+| $2.5$ | | | | | | |
+| $3.0$ | | | | | | |
+
+| | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 |
+|---|---|---|---|---|---|---|
+
+| $F = 0.51$ | $0.7$ | $0.9$ | $0.8$ | $1.0$ | $1.1$ | $1.2$ | $1.5$ |
+|---|---|---|---|---|---|---|---|
+
+| $F = 2$ | | | | | | |
+|---|---|---|---|---|---|---|
+
+| $1.3$ | | | | | | |
+| $0.6$ | | | | | | |
+
+图22.56 并联谐振变换器 $F > 0.5$ 的精确输出特性。实线：CCM，虚线：DCM
+
+| | $Q = 0.5$ | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | | |
+
+| 0.0 | | | | | | | |
+| 0.5 | | | | | | | |
+| 1.0 | | | | | | | |
+| 1.5 | | | | | | | |
+| 2.0 | | | | | | | |
+| 2.5 | | | | | | | |
+| 3.0 | | | | | | | |
+
+| | $f_s/f_0$ | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| | $M = V/V_g$ | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| $Q = 1$ | | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| $Q = 2$ | | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| $Q = 5$ | | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+| $Q = 0.2$ | | | | | | | |
+|---|---|---|---|---|---|---|---|
+
+图22.57 并联谐振变换器电阻负载下的精确控制特性。包含 CCM 和 DCM 工作，$0.5 \le F \le 3$
+
+![源页 p.986](../assets/page-snapshots/chapter-22/page-986.png)
+
+图22.57 中给出了电阻负载的控制面特性。参数 $Q$ 对并联谐振变换器定义为 $Q = R/(n^2 R_0)$。归一化负载电流由 $J = M/Q$ 给出。
+
+## 22.6 关键点总结
+
+1. 正弦近似使人们对谐振逆变器和直流-直流变换器的工作获得大量洞察。直流-直流谐振变换器的电压变换比可直接与槽网络传递函数相关联。变换器的其他重要性质，如输出特性、晶体管电流对负载电流的依赖（或缺乏依赖）、零电压和零电流开关过渡，也可用此近似理解。在有效 $Q$ 因数足够大且开关频率足够接近谐振时近似准确。
+
+2. 推导了简单等效电路，表示槽网络波形的基波分量和直流端波形的直流分量。
+
+3. 理想直流-直流串联和并联谐振变换器的精确解也在此列出。这些解正确预测变换比，不仅适用于基本连续导通模式，也适用于断续和子谐波模式。
+
+4. 零电压开关减轻了二极管恢复电荷和半导体器件输出电容引起的开关损耗。当目标是最小化开关损耗和 EMI 时，优选使每个 MOSFET 和二极管零电压开关工作。
+
+5. 零电流开关导致 SCR 的自然换流，也可减轻 IGBT 中电流拖尾引起的开关损耗。
+
+6. 输入阻抗幅值 $\|Z_i\|$ 及因此晶体管电流幅值是负载电阻 $R$ 的单调函数。晶体管导通损耗对负载电流的依赖可通过简单绘制 $R \to \infty$ 和 $R \to 0$ 极限情形的 $\|Z_i\|$（即 $\|Z_{i\infty}\|$ 和 $\|Z_{i0}\|$）来理解。
+
+7. ZVS/ZCS 边界也是 $Z_{i\infty}$ 和 $Z_{i0}$ 的简单函数。若开路和短路处均发生 ZVS，则对所有负载发生 ZVS。若短路处发生 ZVS、开路处发生 ZCS，则只要 $\|Z_{i\infty}\| > \|Z_{i0}\|$，匹配负载处可获得 ZVS。
+
+8. 此处考虑的所有谐振逆变器的输出特性均为椭圆形，完全由开路传递函数幅值 $\|H_\infty\|$ 和输出阻抗 $\|Z_{o0}\|$ 描述。这些量可选以匹配输出特性与应用要求。
+
+## 习题
+
+**22.1 半桥直流-直流并联谐振变换器分析，高于谐振工作。**
+
+图22.58 中，$C_b$、$L_F$、$C_F$ 数值大，开关纹波可忽略。可假设所有元件理想。可适当使用正弦近似。
+
+![源页 p.987](../assets/page-snapshots/chapter-22/page-987.png)
+
 (a)
-+Vg
-160 V
-L
-10 μHCb
-C
-1.5 μF
-n : 1
-LF
-CF
-+
-V
-I
-+
- v
-s(t)
-ig(t)
-Q1
-Q2
-D1
-D2
-n = 20
-(b) vs(t)
-t
-Vg
-Ts
-0
-0 0.5 Ts
-fs = 1/Ts
-Fig. 22.58 Half-bridge parallel resonant converter of Problem 22.1:( a) schematic, ( b) switch voltage
-waveform
-(a) Sketch the waveform of the current ig(t).
-(b) Construct an equivalent circuit for this converter, similar to Fig. 22.22, which mod-
-els the fundamental components of the tank waveforms and the dc components of
-the converter input current and output voltage. Clearly label the values and/or give
-expressions for all elements in your model, as appropriate.
-(c) Solve your model to derive an expression for the conversion ratioV/Vg= M(F, Qe, n).
-At rated (maximum) load, this converter produces I= 20 A at V= 3.3V .
-(d) What is the converter switching frequency fs at rated load?
-(e) What is the magnitude of the peak transistor current at rated load?
-At minimum load, the converter produces I= 2Aa t V= 3.3V .
-(f) What is the converter switching frequency fs at minimum load?
-(g) What is the magnitude of the peak transistor current at minimum load? Compare
-with your answer from part (e)—what happens to the conduction loss and eﬃciency
-at minimum load?
-22.2 A dc–dc resonant converter contains an LCC tank network (Fig. 22.1d), with an output
-ﬁlter containing a ﬁlter inductor as in the parallel resonant dc–dc converter.
-(a) Sketch an equivalent circuit model for this converter, based on the approximate si-
-nusoidal analysis method of Sect. 22.1. Give expressions for all elements in your
-model.
-(b) Solve your model, to derive an expression for the conversion ratio M= V/Vg.E x -
-press M as a function of F = fs/ f∞, Qe = Re/R0, and n= Cs/Cp, where f∞is
-deﬁned as in Eq. (22.50) and R0 is
+$+V_g$
+$160\,\text{V}$
+$L$
+$10\,\mu\text{H}$
+$C_b$
+$C$
+$1.5\,\mu\text{F}$
+$n : 1$
+$L_F$
+$C_F$
+$+$
+$V$
+$I$
+$+$
+$v_s(t)$
+$i_g(t)$
+$Q_1$
+$Q_2$
+$D_1$
+$D_2$
+$n = 20$
 
-990 22 Resonant Conversion
-R0=
-√
-L(Cs+ Cp)
-CsCp
-(c)P l o tM vs. F,f o rn= 1 and Qe= 1, 2, and 5.
-(d)P l o tM vs. F,f o rn= 0.25 and Qe= 1, 2, and 5.
-22.3 Dual of the series resonant converter. In the converter illustrated in Fig.22.59, LF1, LF2,
-and CF are large ﬁlter elements, whose switching ripples are small. L and C are tank
-elements, whose waveforms iL(t) and vC(t) are nearly sinusoidal.
-+Vg
-LF1
-LF2
-CF
-C
-LiL(t)
-vC(t)
-Q1
-Q2
-D1
-D2
-D3
-D4
-Q3
-Q4
-Fig. 22.59 Dual of the series resonant converter, Problem 22.3
-(a) Using the sinusoidal approximation method, develop equivalent circuit models for
-the switch network, tank network, and rectiﬁer network.
-(b) Sketch a Bode diagram of the parallel LC parallel tank impedance.
-(c) Solve your model. Find an analytical solution for the converter voltage conversion
-ratio M = V/Vg, as a function of the e ﬀective Qe and the normalized switching
-frequency F= fs/ f0.S k e t c hM vs. F.
-(d) What can you say about the validity of the sinusoidal approximation for this con-
-verter? Which parts of your M vs. F plot of part (c) are valid and accurate?
-22.4 The converter of Problem22.3 operates below resonance.
-(a) Sketch the waveform vC(t). For each subinterval, label: (i) which of the diodes D1 to
-D4 and transistors Q1 to Q4 conduct current, and (ii) which devices block voltage.
-(b) Does the reverse recovery process of diodes D1 to D4 lead to switching loss? Do the
-output capacitances of transistors Q1 to Q4 lead to switching loss?
+(b)
+$v_s(t)$
+$t$
+$V_g$
+$T_s$
+$0$
+$0$ $0.5 T_s$
+$f_s = 1/T_s$
 
-22.6 Summary of Key Points 991
-(c) Repeat parts (a) and (b) for operation above resonance.
-22.5 A parallel resonant converter operates with a dc input voltage of Vg = 270 V . The con-
-verter supplies 5 V to a dc load. The dc load power varies over the range 20 W–200 W. It
-is desired to operate the power transistors with zero-voltage switching. The tank element
-values are L= 57 μH, Cp = 0.9 nF, referred to the transformer primary. The parallel
-resonant tank network contains an isolation transformer having a turns ratio of 52:1.
-(a) Deﬁne F as in Eq. (22.19). Derive an expression for F, as a function of M and Qe.
-(b) Determine the switching frequency, peak transistor current, and peak tank capacitor
-voltage at the maximum load power operating point.
-(c) Determine the switching frequency, peak transistor current, and peak tank capacitor
-voltage at the minimum load power operating point.
-22.6 In a certain resonant inverter application, the dc input voltage isVg= 320 V . The inverter
-must produce an approximately sinusoidal output voltage having a frequency of 200
-kHz. Under no load (output opencircuit) conditions, the inverter should produce a peak-
-to-peak output voltage of 1500 V . The nominal resistive operating point is 200 Vrms
-applied to 100Ω. A nonisolated LCC inverter is employed. It is desired that the inverter
-operate with zero-voltage switching, at least for load resistances less than 200Ω.
-(a) Derive expressions for the output open-circuit voltage V
-oc and short-circuit current
-Isc of the LCC inverter. Express your results as functions of F= fs/ f∞, Vg, R∞=
-L/Cs||Cp and n = Cs/Cp. The open-circuit resonant frequency f∞is deﬁned in
-Eq. (22.50).
-(b) To meet the given speciﬁcations, how should the short-circuit current Isc be chosen?
-(c) Specify tank element values that meet the speciﬁcations.
-(d) Under what conditions does your design operate with zero-voltage switching?
-(e) Compute the peak transistor current under no-load and short-circuit conditions.
-22.7 A series resonant dc–dc converter operates with a dc input voltage of Vg = 550 V . The
-converter supplies 30 kV to a load. The dc load power varies over the range 5 kW–25 kW.
-It is desired to operate the power transistors with zero-voltage switching. The maximum
-feasible switching frequency is 50 kHz. An isolation transformer having a 1:n turns ratio
-is connected in series with the tank network. The peak tank capacitor voltage should be
-no greater than 2000 V , referred to the primary.
-(a) Derive expressions for the peak tank capacitor voltage and peak tank inductor cur-
-rent.
-(b) Select values for the tank inductance, tank capacitance, and turns ratio, such that the
-given speciﬁcations are met. Attempt to minimize the peak tank inductor current,
-while maximizing the worst-case minimum switching frequency.
-22.8 Figure 22.60 illustrates a full-bridge resonant inverter containing an LLC tank network.
-(a) Sketch the Bode diagrams of the input impedance under short-circuit and open-
-circuit conditions:||Z
-i0( jω)|| and∥Zi∞( jω)||. Give analytical expressions for the reso-
-nant frequencies and asymptotes.
-(b) Describe the conditions on switching frequency and load resistance that lead to zero-
-voltage switching.
-(c) Derive an expression for the frequency fm, where∥Zi0||=∥Zi∞||.
-(d) Sketch the Bode plot of∥H∞( jω)||. Label the resonant frequency, and give analytical
-expressions for the asymptotes.
+图22.58 习题22.1 的半桥并联谐振变换器：(a) 电路图，(b) 开关电压波形
 
-992 22 Resonant Conversion
-+Vg
-Q1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-R
-+
-VLp
-LsC
-I
-Fig. 22.60 LLC inverter of Problem 22.8
-+Vg
-12 V
-Q1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-1 : n
-R
-+
-V
-Lp
-15 μH
-Ls
-2.5 μH
-C
-0.4 μF
-n = 7.5
-I
-Fig. 22.61 Transformer-isolated LLC inverter, Problem22.9
-22.9 You are given the LLC inverter circuit of Fig. 22.61. Under nominal conditions, this
-converter operates at switching frequency fs= 100 kHz. All elements are ideal.
-(a) Determine the numerical values of the open-circuit peak output voltage Voc and the
-short-circuit peak output current Isc.
-(b) Sketch the elliptical output characteristic. Over what portion of this ellipse does the
-converter operate with zero-voltage switching? Does it operate with zero-voltage
-switching at matched load?
-(c) Sketch the Bode plots of∥Zi∞∥ and∥Zi0∥, and label the numerical values of f0, f∞, fm,
-and fs.
-(d) What is the numerical value of the peak transistor current when R= 0? When R→
-∞?
-(e) The inverter operates with load resistances that can vary between 500 Ωand an
-open-circuit. What is the resulting range of output voltage? Does the inverter always
-operate with zero-voltage switching?
-22.10 It is desired to obtain a converter with current source characteristics. Hence, a series
-resonant converter is designed for operation in thek= 2 discontinuous conduction mode.
-The switching frequency is chosen to be f
-s = 0.225 f0, where f0 is the tank resonant
-```
+(a) 绘制电流 $i_g(t)$ 的波形。
+(b) 构造此变换器的等效电路，类似于图22.22，建模槽波形的基波分量和变换器输入电流、输出电压的直流分量。清晰标注模型中所有元件的值和/或给出表达式。
+(c) 解模型推导变换比 $V/V_g = M(F, Q_e, n)$ 的表达式。额定（最大）负载下，此变换器在 $V = 3.3\,\text{V}$ 下产生 $I = 20\,\text{A}$。
+(d) 额定负载下变换器开关频率 $f_s$ 为多少？
+(e) 额定负载下峰值晶体管电流幅值为多少？最小负载下变换器在 $V = 3.3\,\text{V}$ 下产生 $I = 2\,\text{A}$。
+(f) 最小负载下变换器开关频率 $f_s$ 为多少？
+(g) 最小负载下峰值晶体管电流幅值为多少？与部分(e) 的答案比较——最小负载下导通损耗和效率如何变化？
+
+**22.2** 某直流-直流谐振变换器含 LCC 槽网络（图22.1d），输出滤波器含滤波电感，如并联谐振直流-直流变换器。
+(a) 基于22.1 节的近似正弦分析法绘制此变换器的等效电路模型。给出模型中所有元件的表达式。
+(b) 解模型推导变换比 $M = V/V_g$ 的表达式。将 $M$ 表示为 $F = f_s/f_\infty$、$Q_e = R_e/R_0$、$n = C_s/C_p$ 的函数，其中 $f_\infty$ 如式(22.50) 定义，$R_0$ 为
+
+![源页 p.988](../assets/page-snapshots/chapter-22/page-988.png)
+
+$$R_0 = \sqrt{\frac{L(C_s + C_p)}{C_s C_p}}$$
+
+(c) 绘制 $n = 1$、$Q_e = 1, 2, 5$ 时 $M$ 与 $F$ 的关系。
+(d) 绘制 $n = 0.25$、$Q_e = 1, 2, 5$ 时 $M$ 与 $F$ 的关系。
+
+**22.3 串联谐振变换器的对偶。** 图22.59 所示变换器中，$L_{F1}$、$L_{F2}$、$C_F$ 为大滤波元件，开关纹波小。$L$ 和 $C$ 为槽元件，波形 $i_L(t)$ 和 $v_C(t)$ 近似正弦。
+
+$+V_g$
+$L_{F1}$
+$L_{F2}$
+$C_F$
+$C$
+$L$
+$i_L(t)$
+$v_C(t)$
+$Q_1$
+$Q_2$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$Q_3$
+$Q_4$
+
+图22.59 串联谐振变换器的对偶，习题22.3
+
+(a) 用正弦近似法推导开关网络、槽网络和整流器网络的等效电路模型。
+(b) 绘制并联 LC 并联槽阻抗的波特图。
+(c) 解模型。求变换器电压变换比 $M = V/V_g$ 作为有效 $Q_e$ 和归一化开关频率 $F = f_s/f_0$ 函数的解析解。绘制 $M$ 与 $F$ 的关系。
+(d) 对此变换器正弦近似有效性有何结论？部分(c) 的 $M$ 与 $F$ 图中哪些部分有效且准确？
+
+![源页 p.989](../assets/page-snapshots/chapter-22/page-989.png)
+
+**22.4** 习题22.3 的变换器低于谐振工作。
+(a) 绘制 $v_C(t)$ 波形。每个子区间标注：(i) 二极管 $D_1$ 至 $D_4$ 和晶体管 $Q_1$ 至 $Q_4$ 中哪些导通电流，(ii) 哪些器件阻断电压。
+(b) 二极管 $D_1$ 至 $D_4$ 的反向恢复过程是否导致开关损耗？晶体管 $Q_1$ 至 $Q_4$ 的输出电容是否导致开关损耗？
+(c) 高于谐振工作时重复部分(a) 和(b)。
+
+**22.5** 某并联谐振变换器工作在直流输入电压 $V_g = 270\,\text{V}$。变换器向直流负载供电 $5\,\text{V}$。直流负载功率在 $20\,\text{W}$–$200\,\text{W}$ 范围内变化。期望功率晶体管零电压开关工作。槽元件值为 $L = 57\,\mu\text{H}$、$C_p = 0.9\,\text{nF}$，折算到变压器初级。并联谐振槽网络含匝比 52:1 的隔离变压器。
+(a) 如式(22.19) 定义 $F$。推导 $F$ 作为 $M$ 和 $Q_e$ 函数的表达式。
+(b) 确定最大负载功率工作点的开关频率、峰值晶体管电流和峰值槽电容电压。
+(c) 确定最小负载功率工作点的开关频率、峰值晶体管电流和峰值槽电容电压。
+
+**22.6** 某谐振逆变器应用中，直流输入电压 $V_g = 320\,\text{V}$。逆变器须产生约 $200\,\text{kHz}$ 的近似正弦输出电压。空载（输出开路）条件下，逆变器应产生 $1500\,\text{V}$ 峰-峰输出电压。标称电阻工作点为 $200\,\text{V}_{rms}$ 加在 $100\,\Omega$ 上。采用非隔离 LCC 逆变器。期望逆变器至少对小于 $200\,\Omega$ 的负载电阻零电压开关工作。
+(a) 推导 LCC 逆变器输出开路电压 $V_{oc}$ 和短路电流 $I_{sc}$ 的表达式。将结果表示为 $F = f_s/f_\infty$、$V_g$、$R_\infty = \sqrt{L/(C_s \| C_p)}$、$n = C_s/C_p$ 的函数。开路谐振频率 $f_\infty$ 如式(22.50) 定义。
+(b) 为满足给定指标，短路电流 $I_{sc}$ 应如何选择？
+(c) 指定满足指标的槽元件值。
+(d) 设计在什么条件下零电压开关工作？
+(e) 计算空载和短路条件下的峰值晶体管电流。
+
+**22.7** 某串联谐振直流-直流变换器工作在直流输入电压 $V_g = 550\,\text{V}$。变换器向负载供电 $30\,\text{kV}$。直流负载功率在 $5\,\text{kW}$–$25\,\text{kW}$ 范围内变化。期望功率晶体管零电压开关工作。最大可行开关频率为 $50\,\text{kHz}$。匝比 $1:n$ 的隔离变压器
+
+![源页 p.990](../assets/page-snapshots/chapter-22/page-990.png)
+
+与槽网络串联连接。峰值槽电容电压应不大于 $2000\,\text{V}$，折算到初级。
+(a) 推导峰值槽电容电压和峰值槽电感电流的表达式。
+(b) 选择槽电感、槽电容和匝比的值，使给定指标满足。尝试最小化峰值槽电感电流，同时最大化最坏情况最小开关频率。
+
+**22.8** 图22.60 给出了含 LLC 槽网络的全桥谐振逆变器。
+(a) 绘制短路和开路条件下输入阻抗的波特图：$\|Z_{i0}(j\omega)\|$ 和 $\|Z_{i\infty}(j\omega)\|$。给出谐振频率和渐近线的解析表达式。
+(b) 描述导致零电压开关的开关频率和负载电阻条件。
+(c) 推导 $\|Z_{i0}\| = \|Z_{i\infty}\|$ 处频率 $f_m$ 的表达式。
+(d) 绘制 $\|H_\infty(j\omega)\|$ 的波特图。标注谐振频率，给出渐近线的解析表达式。
+
+$+V_g$
+$Q_1$
+$Q_2$
+$Q_3$
+$Q_4$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$R$
+$+$
+$V$
+$L_p$
+$L_s$
+$C$
+$I$
+
+图22.60 习题22.8 的 LLC 逆变器
+
+$+V_g$
+$12\,\text{V}$
+$Q_1$
+$Q_2$
+$Q_3$
+$Q_4$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$1 : n$
+$R$
+$+$
+$V$
+$L_p$
+$15\,\mu\text{H}$
+$L_s$
+$2.5\,\mu\text{H}$
+$C$
+$0.4\,\mu\text{F}$
+$n = 7.5$
+$I$
+
+图22.61 变压器隔离 LLC 逆变器，习题22.9
+
+**22.9** 给定图22.61 的 LLC 逆变器电路。标称条件下此变换器工作在开关频率 $f_s = 100\,\text{kHz}$。所有元件理想。
+(a) 确定开路峰值输出电压 $V_{oc}$ 和短路峰值输出电流 $I_{sc}$ 的数值。
+(b) 绘制椭圆输出特性。变换器在此椭圆的哪部分零电压开关工作？匹配负载下是否零电压开关工作？
+(c) 绘制 $\|Z_{i\infty}\|$ 和 $\|Z_{i0}\|$ 的波特图，标注 $f_0$、$f_\infty$、$f_m$、$f_s$ 的数值。
+(d) $R = 0$ 时峰值晶体管电流的数值为多少？$R \to \infty$ 时呢？
+(e) 逆变器工作在可在 $500\,\Omega$ 和开路之间变化的负载电阻下。输出电压范围是多少？逆变器是否总零电压开关工作？
+
+**22.10** 期望获得具有电流源特性的变换器。故设计串联谐振变换器工作在 $k = 2$ 断续导通模式。开关频率选为 $f_s = 0.225 f_0$，其中 $f_0$ 为槽谐振

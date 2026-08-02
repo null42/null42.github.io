@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第13章part 2 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem"
+title: "第13章 面向设计的分析技巧：反馈定理（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,760 +18,317 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第13章part 2 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
+# 第13章 面向设计的分析技巧：反馈定理（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 535-551  
-> Chunk ID: `chapter-13-part-2`
+> 源页：535–551
+> 本部分续接 13.4 闭环稳压器示例，并涵盖 13.5 关键要点小结和习题 13.1–13.9。
 
-## 主干提取
+## 13.4 示例：闭环稳压器（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.535](../assets/page-snapshots/chapter-13/page-535.png)
 
-## 术语表
+图13.18 反馈定理在降压稳压器示例中的应用
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+小信号模型中可用叠加将输出扰动 $\hat{v}$ 表示为输入扰动 $\hat{v}_{ref}$、$\hat{v}_g$、$\hat{i}_{load}$ 的函数：
 
-## 中文翻译
+$$\hat{v}(s) = G_r(s)\hat{v}_{ref}(s) + G_g(s)\hat{v}_g(s) - Z_o\hat{i}_{load} \tag{13.76}$$
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+闭环传递函数 $G_r$、$G_g$、$Z_o$ 各可通过应用反馈定理求得，可表示为式 (13.1) 的形式。具体地，可将式 (13.76) 表示为
 
-## 英文原文
+$$\hat{v}(s) = \left(G_{\infty r}\frac{T}{1+T} + G_{0r}\frac{1}{1+T}\right)\hat{v}_{ref}(s) + \left(G_{\infty g}\frac{T}{1+T} + G_{0g}\frac{1}{1+T}\right)\hat{v}_g(s) - \left(Z_{\infty o}\frac{T}{1+T} + Z_{0o}\frac{1}{1+T}\right)\hat{i}_{load} \tag{13.77}$$
 
-```text
-13.4 Example: Closed-Loop Regulator 529
-+
-+ 1 : M Le
-C R
-+
-v(s)vg(s)
-+
-+
-C2
-vref
-R1
-R2
-R3
-C3
-R4
-vz
-+
-vx(s)
-PWM
-d(s)
-vy(s)
-+
-1
-VM
-iload (s)
-e(s)d(s)
-j(s)d(s)
-Fig. 13.18 Application of feedback theorem to buck regulator example
-the small-signal model, we can employ superposition to express the output perturbation ˆv as a
-function of input perturbations ˆvre f ,ˆvg, and ˆiload:
-ˆv(s)= Gr(s)ˆvre f (s)+ Gg(s)ˆvg(s)−Zoˆiload (13.76)
-The closed-loop transfer functions Gr, Gg, and Zo can each be found through application of the
-feedback theorem, and can be expressed in the form of Eq. (13.1). Speciﬁcally, we can express
-Eq. (13.76)a s :
-ˆv(s)=
-⎦
-G∞r
-T
-1+ T+ G0r
-1
-1+ T
-)
-ˆvre f (s)+
-⎦
-G∞g
-T
-1+ T+ G0g
-1
-1+ T
-)
-ˆvg(s)
-−
-⎦
-Z∞o
-T
-1+ T+ Z0o
-1
-1+ T
-)
-ˆiload (13.77)
-The terms G∞r and G0r are found using the feedback theorem with ˆvg and ˆiload set to zero, and
-the terms G∞g and G0g are found using the feedback theorem with ˆvre f and ˆiload set to zero. The
-terms Z∞o and Z0o are found using the feedback theorem with ˆvg and ˆvre f set to zero. The loop
-gain T is found with ˆvg,ˆvre f , and ˆiload all set to zero. In the following analysis, the operational
-ampliﬁer is treated as ideal.
-The closed-loop reference-to-output ideal forward gain G∞r(s) is found with ˆvg and ˆiload set
-to zero and with ˆvy nulled:
-G∞r(s)= ˆv
-ˆvre f
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvg=0, ˆiload=0
-ˆvy→
-null
-0
-(13.78)
+$G_{\infty r}$ 和 $G_{0r}$ 项用 $\hat{v}_g$ 和 $\hat{i}_{load}$ 设为零的反馈定理求得，$G_{\infty g}$ 和 $G_{0g}$ 项用 $\hat{v}_{ref}$ 和 $\hat{i}_{load}$ 设为零的反馈定理求得。$Z_{\infty o}$ 和 $Z_{0o}$ 项用 $\hat{v}_g$ 和 $\hat{v}_{ref}$ 设为零的反馈定理求得。环路增益 $T$ 在 $\hat{v}_g$、$\hat{v}_{ref}$、$\hat{i}_{load}$ 均设为零时求得。以下分析中运算放大器视为理想。
 
-530 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-+
-C R
-+
-v(s)vg = 0
-+
-+
-C2
-vref
-R1
-R2
-R3
-C3
-R4
-vz
-PWM
-d(s)
-vy(s) o 0
-+
-1
-VM
-v = vref
-v
-Z1
-}Z3
-}
-Z2
-}
-1 : Me(s)d(s)
-j(s)d(s)
-Le
-Fig. 13.19 Determination of G∞r
-The small-signal model with these conditions is illustrated in Fig. 13.19. Nulling ˆvy in the pres-
-ence of ˆvre f causes the negative input of the ideal op amp ˆv−to be equal to ˆvre f .B u tˆv−and ˆv
-are related according to the voltage divider ratio of the feedback network:
-ˆv−= ˆv
-Z2
-Z3
-Z2
-Z3+ Z1
-= ˆvre f (13.79)
-where the error ampliﬁer impedances are
-Z1= R1+
-⎦
-R2
- 1
-sC2
-)
-(13.80)
-Z2= R4 (13.81)
-Z3= R3+ 1
-sC3
-(13.82)
-Therefore, G∞r is equal to:
-G∞r=
-Z2
-Z3+ Z1
-⎦
-Z2
-Z3
-) (13.83)
-At dc, this gain reduces to
-G∞r(0)= R4+ R1+ R2
-R4
-(13.84)
-In a dc regulator having constant vre f , the dynamics of Eq. (13.83) are irrelevant, and the ideal
-output voltage is equal to G∞r(0)Vre f . When the reference can vary, then the poles and zeroes
-of Eq. (13.83) may introduce signiﬁcant dynamics.
+闭环参考-输出理想前向增益 $G_{\infty r}(s)$ 在 $\hat{v}_g$ 和 $\hat{i}_{load}$ 设为零、$\hat{v}_y$ 置零时求得：
 
-13.4 Example: Closed-Loop Regulator 531
-+ 1 : M
-C R
-+
-v(s)vg = 0
-+
-+
-C2
-vref
-R1
-R2
-R3
-C3
-R4
-vz
-PWM
-d(s) = 0
-1
-VM +
-vx(s) o 0
-0
-0
-+
-0
-v = vref
-Zout
-e(s)d(s)
-j(s)d(s)
-Le
-Fig. 13.20 Determination of G0r
-The direct forward transmission through the feedback path G0r is
-G0r(s)= ˆv
-ˆvre f
-⏐⏐⏐⏐
-⏐⏐
-ˆvg=0, ˆiload=0
-ˆvx→
-null
-0
-(13.85)
-The small-signal model with these conditions is illustrated in Fig. 13.20. Nulling ˆvx causes no
-ampliﬁed error signal to reach the output ˆv via the forward path of the loop: nulling ˆvx also nulls
-ˆd, and hence the ˆd sources of the power stage model are also zero. As illustrated in Fig. 13.20,
-the secondary voltage of the ideal transformer model becomes zero.
-The ˆvre f signal can nonetheless have a small inﬂuence on the output ˆv. With the assumption
-that the op amp is ideal, its positive and negative input terminals are equal and hence ˆv−= ˆvre f .
-The output voltage ˆv is related to ˆv−= ˆvre f through the voltage divider ratio
-ˆv= ˆv− Zout
-Zout+ Z1
-(13.86)
-where the converter open-loop output impedance is
-Zout= R
-
- 1
-sC
-
-sL
-e (13.87)
-and the feedback network impedance Z1 is given by Eq. (13.80). Hence, G0r is
-G0r= Zout
-Zout+ Z1
-(13.88)
-Thus, the direct forward transmission of the reference signal through the feedback path is
-nonzero.
+$$G_{\infty r}(s) = \left.\frac{\hat{v}}{\hat{v}_{ref}}\right|_{\hat{v}_g=0,\,\hat{i}_{load}=0,\,\hat{v}_y \to \text{null} 0} \tag{13.78}$$
 
-532 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-(a)
-101 102 103 104
-Frequency, Hz
--140
--120
--100
--80
--60
--40
--20
-0
-20
-Magnitude, dB
-Gr
-G r
-G0r
-(b)
-101 102 103 104
-Frequency, Hz
--180
--90
-0
-90
-Phase, degrees
-Gr
-G r
-G0r
-Fig. 13.21 Magnitude and phase Bode plots of the transfer functions G∞r, G0r,a n d Gr for the buck
-regulator example. Dashed curves: ideal reference-to-output gain G∞r and direct forward transmission
-through feedback path G0r. Solid curves: reference-to-output transfer function Gr
-Figure 13.21 contains plots of the transfer functions G∞r, G0r, and Gr for the power stage
-element values of Sect. 9.5.4 and the compensator circuit values of Fig. 15.29. Speciﬁcally,
-the power stage parameters are L = 50μH, C = 500μF, R = 3Ω, Vg = 28 V, V = 15 V.
-The compensator and feedback circuit parameters are Vre f = 5V , VM = 4V , R1 = 11 kΩ,
-R2= 85 kΩ, R3= 120 kΩ, R4= 47 kΩ, C2= 1.1n F ,C3= 2.7 nF. It can be seen that the transfer
-function Gr(s) follows the ideal gainG∞r(s) from dc up to the 5 kHz bandwidth of the feedback
-loop, in accordance with the description of Sect. 9.2.2. The direct forward transmission term
-G0r is small and does not inﬂuence Gr(s) at frequencies below half of the switching frequency.
-The ideal forward gain from ˆvg to the output ˆv is
-G∞g(s)= ˆv
-ˆvg
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvre f=0, ˆiload=0
-ˆvy→
-null
-0
-(13.89)
+![源页 p.536](../assets/page-snapshots/chapter-13/page-536.png)
 
-13.4 Example: Closed-Loop Regulator 533
-Fig. 13.22 Determination of G∞g
-The small-signal model with these conditions is illustrated in Fig. 13.22. Nulling ˆvy in the pres-
-ence of ˆvre f = 0 causes ˆv−to be zero. Consequently the voltage across R4 and also across the
-R3 −C3 branches are zero, and so there is no current through those elements. This implies
-that there is no current through the R1−R2−C2 branch, and hence no voltage across it either.
-Therefore the output voltage ˆv must be zero. So
-G∞g= 0 (13.90)
-In the limit of inﬁnite loop gain, ˆvg variations do not inﬂuence the output ˆv.
-The gain G0g is the open-loop disturbance transfer function from ˆvg to ˆv, and is deﬁned as
-G0g(s)= ˆv
-ˆvg
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvre f=0, ˆiload=0
-ˆvx→
-null
-0
-(13.91)
-The small-signal model with these conditions is illustrated in Fig. 13.23. Nulling ˆvx causes ˆd to
-be zero. Consequently the voltage at the output of the dc transformer model is equal to Mˆvg.
-The output voltage is equal to this voltage multiplied by the ﬁlter transfer function He(s). So
-G0g= MHe(s) (13.92)
-The gain G0g coincides with the open-loop line-to-output transfer function Gvg(s).
+图13.19 $G_{\infty r}$ 的确定
 
-534 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Fig. 13.23 Determination of G0g
-Figure 13.24 contains plots of the transfer functions G0g and Gg, again for the power stage
-element values of Sect. 9.5.4 and the compensator circuit values of Fig. 15.29. The closed-loop
-line-to-output transfer function Gg(s) follows the open-loop disturbance transfer functionGvg=
-G0g above the crossover frequency of 5 kHz, as discussed in Sect. 9.2.1. Below the crossover
-frequency, Gg is reduced by the factor 1/(1+ T).
-The quantity Z∞o is the regulator output impedance under the conditions that the feedback
-loop operates ideally, with zero error. Z∞o is deﬁned as:
-Z∞o(s)=−ˆv
-ˆiload
-⏐⏐⏐
-⏐⏐⏐
-ˆvre f=0, ˆvg=0
-ˆvy→
-null
-0
-(13.93)
-Figure 13.25 illustrates the small-signal model under these conditions. With ˆvre f set to zero and
-with ˆvy nulled, ˆv−is also nulled. Then there is no voltage across the elements R4, R3,o r C3,
-and hence the currents through these elements are zero. Consequently the currents through the
-elements R1, R2, and C2 are zero, and hence the voltages across these elements are also nulled.
-Therefore ˆv= ˆv−= 0. So the regulator ideal output impedance is
-Z∞o(s)=−0
-ˆiload
-= 0 (13.94)
-When the regulator operates ideally, load current disturbances do not aﬀect the output voltage.
-The quantity Z0o is the regulator output impedance under open-loop conditions, with ˆvx set
-to zero. Z0o is deﬁned as:
-Z0o(s)=−ˆv
-ˆiload
-⏐⏐⏐
-⏐⏐⏐
-ˆvre f=0, ˆvg=0
-ˆvx=0
-(13.95)
+这些条件下的小信号模型如图13.19所示。$\hat{v}_{ref}$ 存在下置零 $\hat{v}_y$ 使理想运放负输入 $\hat{v}_-$ 等于 $\hat{v}_{ref}$。但 $\hat{v}_-$ 和 $\hat{v}$ 按反馈网络分压比相关：
 
-13.4 Example: Closed-Loop Regulator 535
-(a)
-101 102 103 104
-Frequency, Hz
--140
--120
--100
--80
--60
--40
--20
-0
-20
-Magnitude, dB
-Gg
-G0g
-(b)
-101 102 103 104
-Frequency, Hz
--180
--90
-0
-90
-Phase, degrees
-Gg
-G0g
-Fig. 13.24 Magnitude and phase Bode plots of the transfer functions G0g and Gg for the buck regulator
-example. Dashed curves: disturbance transfer functionG0g= Gvg. Solid curves: closed-loop line-to-output
-transfer function Gg
-Figure 13.26 illustrates the small-signal model under these conditions. With ˆvre f set to zero and
-with ˆvx set to zero, ˆd is zero and the transformer voltage is zero. Since ˆvre f is zero, ˆv−= 0. The
-output impedance is then
-Z0o(s)=−ˆv
-ˆiload
-= Zout
-
-Z
-1 (13.96)
-where Zout is the power stage output impedance given by Eq. ( 13.87) and Z1 is the feedback
-network impedance given by Eq. (13.80). In the usual case where Zout is much smaller than Z1,
-this expression reduces to Zout.
-Figure 13.27 contains plots of the transfer functions Z0o and Zo for the power stage element
-values of Sect. 9.5.4 and the compensator circuit values of Fig. 15.29. The closed-loop output
-impedance Zo(s) follows the open-loop output impedance Zout = Z0o above the crossover fre-
-quency of 5 kHz, as discussed in Sect. 9.2.1. Below the crossover frequency, Zo is reduced by
-the factor 1/(1+ T) relative to Zout.
+$$\hat{v}_- = \frac{\hat{v}}{Z_2\,\|\,Z_3}\frac{Z_2\,\|\,Z_3}{Z_2\,\|\,Z_3+Z_1} = \hat{v}_{ref} \tag{13.79}$$
 
-536 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Fig. 13.25 Determination of ideal output impedance Z∞o
-Fig. 13.26 Determination of open-loop output impedance Z0o
+其中误差放大器阻抗为
 
-13.4 Example: Closed-Loop Regulator 537
-(a)
-101 102 103 104
-Frequency, Hz
--140
--120
--100
--80
--60
--40
--20
-0
-20
-Magnitude, dB
-Zo
-Z0o
-(b)
-101 102 103 104
-Frequency, Hz
--90
-0
-90
-180Phase, degrees
-Zo
-Z0o
-Fig. 13.27 Magnitude and phase Bode plots of the transfer functions Z0o and Zo for the buck regulator
-example. Dashed curves: disturbance transfer functionZ0o= Zout. Solid curves: closed-loop line-to-output
-transfer function Zo
-The loop gain T(s)i s
-T(s)= ˆvy
-ˆvx
-⏐⏐⏐
-⏐
-⏐⏐
-ˆvre f=0, ˆiload=0
-ˆvg=0
-(13.97)
-The small-signal model with these conditions is illustrated in Fig.13.28. To ﬁnd T(s), we begin
-with the signal ˆvx, and ﬁnd how it propagates around the loop to the ˆ vy point. Under these
-conditions, the output voltage ˆv is equal to ˆvx multiplied by the PWM gain (1/VM) and by the
-converter control-to-output gain Gvd(s).
+$$Z_1 = R_1 + R_2\,\|\,\frac{1}{sC_2} \tag{13.80}$$
 
-538 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Fig. 13.28 Determination of loop gain T(s)
-ˆv= Gvd(s)
-⎦1
-VM
-)
-ˆvx (13.98)
-By solution of the model of Fig. 13.28, the power stage control-to-output transfer function is
-Gvd(s)= e(s)MHe(s) (13.99)
-with He(s) equal to the transfer function of the canonical model Le–C output ﬁlter.
-With ˆvre f set to zero, the ideal op amp causes ˆv−= 0, and hence there is no current through
-R4. The transfer function from ˆv to ˆvy is given by the inverting ampliﬁer formula:
-ˆvy
-ˆv = Z3
-Z1
-(13.100)
-where Z1 i sg i v e nb yE q .(13.80) and Z3 is given by Eq. (13.82). The loop gain is the product of
-Eqs. (13.98) and (13.100):
-T(s)= Gvd(s)
-⎦1
-VM
-)⎦Z3
-Z1
-)
-(13.101)
-Figure 13.29 contains plots of the loop gain T(s) for the power stage element values of
-Sect. 9.5.4 and the compensator circuit values of Fig. 15.29.
-In summary, the closed-loop transfer function from the reference ˆvre f to the output ˆv is
-Gr(s)=
-Z2
-Z3
-Z1+
-⎦
-Z2
-Z3
-) T
-1+ T+ Zout
-Z1+ Zout
-1
-1+ T (13.102)
+$$Z_2 = R_4 \tag{13.81}$$
 
-13.4 Example: Closed-Loop Regulator 539
-(a)
-101 102 103 104
-Frequency, Hz
--40
--20
-0
-20
-40
-60
-Magnitude, dB
-T
-(b)
-101 102 103 104
-Frequency, Hz
--270
--225
--180
--135
--90
--45
-0
-Phase, degrees
-T
-Fig. 13.29 Magnitude and phase Bode plots of the loop gain T(s) for the buck regulator example
-The closed-loop transfer function from input voltage disturbances ˆvg to the output ˆv is
-Gg(s)= MHe
-1+ T (13.103)
-The closed-loop output impedance is
-Zo=
-Zout
-
-Z
-1
-1+ T (13.104)
-with T given by Eq. (13.101). The canonical model parameters of Table 7.1 for the buck con-
-verter are substituted as appropriate into the above expressions.
-This closed-loop regulator example includes three independent sources: the reference ˆ vre f
-and disturbances ˆvg and ˆiload. Superposition is employed to apply the feedback theorem three
-times, once for each independent input, and we ﬁnd a G0 and G∞term associated with each
-source. The G∞r term has the physical interpretation of the ideal closed-loop gain from the
+$$Z_3 = R_3 + \frac{1}{sC_3} \tag{13.82}$$
 
-540 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-reference to the output, and corresponds to the 1/H term identiﬁed in Sect. 9.2.2.T h eG0r term
-has the physical interpretation of direct forward transmission from ˆ vre f through the feedback
-path to the output. The disturbance transfer functionG0g is the open-loop line-to-output transfer
-function, and coincides with Gvg(s) of the open-loop converter. In this example, G∞g is zero:
-when the feedback loop operates ideally, no ˆvg disturbances reach the output.
-The feedback theorem provides a general way to deﬁne and determine the loop gain T.
-Although we have found three closed-loop transfer functions from the three independent sources
-to the output, there is a single physical feedback loop in the system, and a single expression for
-the loop gain.
-13.5 Summary of Key Points
-1. The Feedback Theorem employs null double injection and linear superposition to determine
-closed-loop gains and other important transfer functions of a feedback circuit, without need
-to break the circuit into blocks that are noninteracting and unidirectional. An ideal injec-
-tion point is identiﬁed, and then certain “thought experiments” are performed that lead to
-derivation of analytical expressions for the important transfer functions of the closed-loop
-circuit.
-2. A given closed-loop gain G(s) is expressed in terms of an ideal gain G
-∞(the limiting
-transfer function with inﬁnite loop gain), a gain G0 (the limiting transfer function for zero
-loop gain), and the loop gain T. The Feedback Theorem provides a simpliﬁed framework
-for deriving these quantities.
-3. An operational ampliﬁer circuit intended for use as a PD compensator is analyzed using
-the Feedback Theorem. In this example, the G∞gain is found to be the transfer function
-when the op amp is ideal. The G0 gain arises from direct forward transmission of the input
-signal through the feedback path. The actual transfer function G is found to deviate signif-
-icantly from G∞at high frequencies where the op amp has insu ﬃcient internal gain; this
-can signiﬁcantly degrade the behavior of the PD compensator.
-4. A closed-loop buck converter with PID compensator circuit is analyzed via the Feedback
-Theorem, to derive the closed-loop transfer functions from the reference input and line input
-to the output, as well as the closed-loop output impedance. This example illustrates how
-the Feedback Theorem is useful for analyzing closed-loop disturbance transfer functions as
-well as the reference-to-output transfer function.
-Problems
-13.1 A feedback ampliﬁer is shown in Fig. 13.30 including voltage injection vz suitable for
-application of the Feedback Theorem. The objective in this problem is to solve for the
-ampliﬁer gain
-G= vo
-vi
-⏐⏐
-⏐⏐⏐
-vz=0
-using the Feedback Theorem. Derive expressions forG∞, T, G0, and Tn, and show that the
-reciprocity relationship holds. Your expressions should be in terms of the circuit parameter
-values R1, R2, C, Ro, Ao.
+故 $G_{\infty r}$ 等于
 
-13.5 Summary of Key Points 541
-Fig. 13.30 Feedback ampliﬁer of Problem 13.1
-13.2 A feedback ampliﬁer is shown in Fig. 13.31 including current injection iz suitable for
-application of the Feedback Theorem. The objective in this problem is to solve for the
-ampliﬁer gain
-G= vo
-vi
-⏐⏐⏐
-⏐
-⏐
-iz=0
-using the Feedback Theorem. Derive expressions forG∞, T, G0, and Tn, and show that the
-reciprocity relationship holds. Your expressions should be in terms of the circuit parameter
-values R1, C, and gm.
-Fig. 13.31 Feedback ampliﬁer of Problem 13.2
-13.3 Figure 13.32 shows a PI compensator circuit in the closed-loop switching voltage regu-
-lator of Problem 9.5. The PI compensator is constructed around an op amp provided in
-a standard PWM controller chip. The input to the compensator is the regulator output
-voltage v, and the output of the compensator is voltage vc. The reference voltage Vre f is
-constant. The purpose of this problem is to show how the Feedback Theorem can be used
-in the design of the PI compensator circuit. The closed-loop transfer function of interest is
-G(s)= ˆvc
-ˆv
-⏐⏐⏐
-⏐⏐⏐
-ˆvre f=0
+$$G_{\infty r} = \frac{Z_2\,\|\,Z_3+Z_1}{Z_2\,\|\,Z_3} \tag{13.83}$$
 
-542 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Fig. 13.32 PI compensator constructed around a transconductance ampliﬁer, Problem 13.3
-(a) Assuming the op amp in Fig. 13.32 is ideal, show that
-G∞(s)= ˆvc
-ˆv
-⏐⏐⏐⏐
-⏐⏐
-ideal op−amp
-= G∞∞
-⎦
-1+ ω1
-s
-)
-and derive expressions for the salient features of G∞(s) in terms of R1, R2, R3, C3.
-Compute the numerical values for G∞∞and f1. Note that the assumption that the op
-amp is ideal (in a negative-feedback circuit) is equivalent to the assumption that the
-error signal is nulled in the Feedback Theorem terms. Hence, the transfer function
-found in this part of the problem is equal to G
-∞of the Feedback Theorem.
-Assuming G(s)≈G∞(s), the closed-loop voltage regulator shown in Problem 9.5 should
-be stable with adequate phase margin. A designer made this assumption, built the circuit,
-and expected to obtain stable operation with well regulated output voltage. In lab experi-
-ments, however, the switched-mode voltage regulator is found to be unstable, producing
-oscillating voltages and currents. Knowing that you are familiar with the Feedback Theo-
-rem, the designer asks you for assistance.
-Looking through the PWM controller datasheet, you realize that the op amp provided
-is not really a standard op amp with a large voltage gain and a low output impedance
-but instead a transconductance ampliﬁer, which can be modeled as a controlled current
-source, as shown in Fig. 13.33.
-Fig. 13.33 Model of the transconductance ampliﬁer in Problem 13.3
+直流处此增益简化为
 
-13.5 Summary of Key Points 543
-Furthermore, you ﬁnd that the transconductance gm of the ampliﬁer can be as low as
-gmmin = 100μA/V and as high as gmmax = 1m A/V due to process and temperature
-variations. You realize that the problem is well suited for application of the Feedback
-Theorem and you proceed in several steps to address the stability problem encountered by
-the designer.
-(b) Using the current injection technique, ﬁnd analytical expressions for Go, T, and Tn
-in the PI compensator of Fig. 13.32, taking into account the ampliﬁer model shown
-in Fig. 13.33. Express the transfer functions in the standard factored pole-zero forms,
-and derive expressions for the salient features in terms ofR1, R2, R3, C3, and gm. Show
-that the reciprocity relationship holds.
-(c) Using the results of part (b), derive an expression for the closed-loop transfer function
-G(s), and show that G(s) can be written as
-G(s)= ˆvc
-ˆv
-⏐⏐
-⏐
-⏐⏐⏐
-ˆvre f=0
-= G′
-∞∞
-⎦
-1+ω′
-1
-s
-)
-Calculate and put in a table numerical values for G′
-∞∞and f′
-1 for the two extreme
-values of gm, gmmin and gmmax, and compare these values to G∞∞and f1 found in
-part (a). Explain why the switched-mode voltage regulator using the compensator of
-Fig. 13.32 may become unstable.
-(d) Suggest how to change the component values in the PI compensator in Fig. 13.32 so
-that G∞(s) remains the same as found in part (a), and so that the compensator gainG(s)
-closely approximates the ideal G∞(s) for all possible values of the transconductance
-gm.
-13.4 A model of an op amp is shown in Fig. 13.7b. In the model, Ro= 100Ω, and
-Gop (s)= Ao
-1⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω2
-)
-where Ao= 105→100 dB, f1= 10 Hz, and f2= 1M H z .
-a) The op amp is used to construct closed-loop ampliﬁers with three di ﬀerent ideal
-closed-loop gains: (i) G∞= 1, G∞=−1, and (iii) G∞= 10. Sketch circuit diagrams
-of these three closed-loop ampliﬁers and choose resistance values.
-b) For each of the closed-loop ampliﬁers considered in part (a), sketch the magnitude
-and phase responses of the loop gain T(s) and determine numerical values for the
-crossover frequency and the phase margin.
-c) For each of the closed-loop ampliﬁers considered in part (a), derive an expression
-for the closed-loop gain G(s) using the Feedback Theorem. Your expression should
-be in the standard normalized form. Sketch the magnitude and phase responses and
-annotate the plots with salient features of G(s).
-13.5 A point-of-load (POL) voltage regulator using a synchronous buck converter is shown in
-Fig. 13.34. Losses can be neglected except for the losses due to the inductor resistance RL
-and the capacitor equivalent series resistance Resr . The PID compensator is constructed
-around an op amp. In this problem, you may assume that the op amp has ideal charac-
-teristics. The pulse-width modulator has a very large input resistance, so that a voltage
-injection source ˆvz can be ideally inserted between the compensator and the PWM.
+$$G_{\infty r}(0) = \frac{R_4+R_1+R_2}{R_4} \tag{13.84}$$
 
-544 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Fig. 13.34 Synchronous buck voltage regulator with a PID compensator, Problems 13.5 and 13.6
-a) Derive an expression for the loop gain T(s). The expression should be in standard
-normalized form. Salient features of T(s) should be expressed in terms of the circuit
-parameters shown in Fig. 13.34. Plot the magnitude and phase responses of the loop
-gain, and determine numerical values for the crossover frequency fc and the phase
-marginϕm.
-b) In this part of the problem, the objective is to determine the closed-loop output
-impedance Zo(s)=−ˆv/ˆiload of the POL voltage regulator using the Feedback The-
-orem. Derive expressions for Z∞o, Z0o, and the null loop gain Tnz in standard normal-
-ized forms. Show that the reciprocity relationship holds. Plot the magnitude and phase
-responses of Zo(s).
-c) In this part of the problem, the objective is to determine the closed-loop line-to-output
-transfer function Gg(s)= ˆv/ˆvg using the Feedback Theorem. Derive expressions for
-G∞g, G0g, and the null loop gain Tng in standard normalized forms. Show that the
-reciprocity relationship holds. Plot the magnitude and phase responses of Gg(s).
-d) In this part of the problem, the objective is to determine the closed-loop reference-
-to-output response Gr(s)= ˆv/ˆvre f using the Feedback Theorem. Derive expressions
-for G∞r, G0r, and the null loop gain Tnr in standard normalized forms. Show that the
-reciprocity relationship holds. Plot the magnitude and phase responses of Gr(s).
-e) Modify the PID compensator circuit so that T(s) remains exactly the same as found
-in part (a), and so that the ideal reference-to-output response has unity gain at all
-frequencies, i.e., so that G∞r= 1.
-13.6 A model of the op amp used to construct the PID compensator in the voltage regulator of
-Fig. 13.34 is shown in Fig. 13.7b. In the model, Ro= 0, and
-Gop (s)= ωGBW
-s
+$v_{ref}$ 为常数的直流稳压器中式 (13.83) 的动态无关，理想输出电压等于 $G_{\infty r}(0)V_{ref}$。参考可变时式 (13.83) 的极点和零点可引入显著动态。
 
-13.5 Summary of Key Points 545
-where fGBW is the unity gain frequency, also referred to as the gain-bandwidth product
-of the op amp. The objective in this problem is to examine how ﬁnite fGBW of the op
-amp aﬀects closed-loop performance of the voltage regulator in Fig. 13.34. The transfer
-function of interest is the PID compensator gain
-Gc(s)=−ˆvc
-ˆv
-a) For the closed-loop ampliﬁer that implements the PID compensator, derive expres-
-sions for the loop gain Tc(s), the ideal forward gain Gc∞, and the direct forward
-transmission Gc0. The expressions should be in terms of the circuit parameters shown
-in Fig. 13.34 and ωGBW . Overlay Bode plots of the magnitude and phase of Gc for
-three diﬀerent values of fGBW :( i ) fGBW = 1 MHz, (ii) fGBW = 10 MHz, and (iii)
-fGBW = 25 MHz.
-b) Consider loop gain T(s) in the voltage regulator of Fig. 13.34, taking into account
-Gc(s) found in part (a). Overlay Bode plots of the magnitude and phase ofT(s)f o rt h e
-three diﬀerent values of fGBW considered in part (a). For each fGBW , calculate numeri-
-cal values of the crossover frequency fc and the phase marginϕm, and compare to the
-results obtained assuming an ideal op amp,i.e., assuming thatGc= Gc∞. Comment on
-how large the gain-bandwidth product of the op amp should be so that the impact on
-the closed-loop performance of the voltage regulator in Fig. 13.34 can be neglected.
-13.7 Do Problem 9.7. Verify the result for the closed-loop transfer function ˆig(s)/ˆvre f (s)u s i n g
-the Feedback Theorem. Then, using the Feedback Theorem, derive an expression for the
-closed-loop input admittance
-Y
-g=
-ˆig
-ˆvg
-Plot the magnitude and phase responses of Yg. In what range of frequencies is the magni-
-tude of Yg approximately equal to the ideal Yg∞.
-13.8 Do Problem 9.8. Then ﬁnd the closed-loop output impedance Zo using the Feedback
-Theorem and verify that the speciﬁcations are met: magnitude of the closed-loop output
-impedance should be less than 0.2Ωover the entire frequency range 0 to 20 kHz.
-13.9 Do Problem 9.9. Then, using the Feedback Theorem, derive an expression for the closed-
-loop reference-to-output response Gr = ˆv/ˆvre f . Plot the magnitude and phase responses
-of Gr. Over what range of frequencies is the magnitude of Gr approximately equal to the
-ideal Gr∞?
-```
+![源页 p.537](../assets/page-snapshots/chapter-13/page-537.png)
+
+图13.20 $G_{0r}$ 的确定
+
+经反馈路径的直接前向传输 $G_{0r}$ 为
+
+$$G_{0r}(s) = \left.\frac{\hat{v}}{\hat{v}_{ref}}\right|_{\hat{v}_g=0,\,\hat{i}_{load}=0,\,\hat{v}_x \to \text{null} 0} \tag{13.85}$$
+
+这些条件下的小信号模型如图13.20所示。置零 $\hat{v}_x$ 使无放大的误差信号经环路前向路径到达输出 $\hat{v}$：置零 $\hat{v}_x$ 也置零 $\hat{d}$，故功率级模型的 $\hat{d}$ 源也为零。如图13.20所示，理想变压器模型的二次电压变为零。
+
+但 $\hat{v}_{ref}$ 信号仍可对输出 $\hat{v}$ 有小影响。假定运放理想时其正负输入端相等故 $\hat{v}_- = \hat{v}_{ref}$。输出电压 $\hat{v}$ 通过分压比与 $\hat{v}_- = \hat{v}_{ref}$ 相关：
+
+$$\hat{v} = \hat{v}_-\frac{Z_{out}}{Z_{out}+Z_1} \tag{13.86}$$
+
+其中变换器开环输出阻抗为
+
+$$Z_{out} = R\,\|\,\frac{1}{sC}\,\|\,sL_e \tag{13.87}$$
+
+反馈网络阻抗 $Z_1$ 由式 (13.80) 给出。故 $G_{0r}$ 为
+
+$$G_{0r} = \frac{Z_{out}}{Z_{out}+Z_1} \tag{13.88}$$
+
+故参考信号经反馈路径的直接前向传输非零。
+
+![源页 p.538](../assets/page-snapshots/chapter-13/page-538.png)
+
+图13.21 降压稳压器示例传递函数 $G_{\infty r}$、$G_{0r}$、$G_r$ 的幅值和相位波特图。虚线：理想参考-输出增益 $G_{\infty r}$ 和经反馈路径的直接前向传输 $G_{0r}$。实线：参考-输出传递函数 $G_r$
+
+图13.21 含 9.5.4 节功率级元件值和图15.29 补偿器电路值的传递函数 $G_{\infty r}$、$G_{0r}$、$G_r$ 图。具体地，功率级参数为 $L = 50\,\mu\text{H}$，$C = 500\,\mu\text{F}$，$R = 3\,\Omega$，$V_g = 28\text{ V}$，$V = 15\text{ V}$。补偿器和反馈电路参数为 $V_{ref} = 5\text{ V}$，$V_M = 4\text{ V}$，$R_1 = 11\text{ k}\Omega$，$R_2 = 85\text{ k}\Omega$，$R_3 = 120\text{ k}\Omega$，$R_4 = 47\text{ k}\Omega$，$C_2 = 1.1\text{ nF}$，$C_3 = 2.7\text{ nF}$。可见传递函数 $G_r(s)$ 从直流到反馈环路 5 kHz 带宽跟随理想增益 $G_{\infty r}(s)$，符合 9.2.2 节描述。直接前向传输项 $G_{0r}$ 小，不影响开关频率一半以下频率处的 $G_r(s)$。
+
+从 $\hat{v}_g$ 到输出 $\hat{v}$ 的理想前向增益为
+
+$$G_{\infty g}(s) = \left.\frac{\hat{v}}{\hat{v}_g}\right|_{\hat{v}_{ref}=0,\,\hat{i}_{load}=0,\,\hat{v}_y \to \text{null} 0} \tag{13.89}$$
+
+![源页 p.539](../assets/page-snapshots/chapter-13/page-539.png)
+
+图13.22 $G_{\infty g}$ 的确定
+
+这些条件下的小信号模型如图13.22所示。$\hat{v}_{ref} = 0$ 存在下置零 $\hat{v}_y$ 使 $\hat{v}_-$ 为零。结果 $R_4$ 两端及 $R_3$-$C_3$ 支路两端电压为零，故无电流流过这些元件。这意味着 $R_1$-$R_2$-$C_2$ 支路无电流，故其两端也无电压。故输出电压 $\hat{v}$ 必为零。故
+
+$$G_{\infty g} = 0 \tag{13.90}$$
+
+无穷环路增益极限中 $\hat{v}_g$ 变化不影响输出 $\hat{v}$。
+
+增益 $G_{0g}$ 是从 $\hat{v}_g$ 到 $\hat{v}$ 的开环扰动传递函数，定义为
+
+$$G_{0g}(s) = \left.\frac{\hat{v}}{\hat{v}_g}\right|_{\hat{v}_{ref}=0,\,\hat{i}_{load}=0,\,\hat{v}_x \to \text{null} 0} \tag{13.91}$$
+
+![源页 p.540](../assets/page-snapshots/chapter-13/page-540.png)
+
+图13.23 $G_{0g}$ 的确定
+
+这些条件下的小信号模型如图13.23所示。置零 $\hat{v}_x$ 使 $\hat{d}$ 为零。故直流变压器模型输出电压等于 $M\hat{v}_g$。输出电压等于此电压乘滤波传递函数 $H_e(s)$。故
+
+$$G_{0g} = MH_e(s) \tag{13.92}$$
+
+增益 $G_{0g}$ 与开环输入-输出传递函数 $G_{vg}(s)$ 一致。
+
+![源页 p.541](../assets/page-snapshots/chapter-13/page-541.png)
+
+图13.24 降压稳压器示例传递函数 $G_{0g}$ 和 $G_g$ 的幅值和相位波特图。虚线：扰动传递函数 $G_{0g} = G_{vg}$。实线：闭环输入-输出传递函数 $G_g$
+
+图13.24 含传递函数 $G_{0g}$ 和 $G_g$ 的图，仍用 9.5.4 节功率级元件值和图15.29 补偿器电路值。闭环输入-输出传递函数 $G_g(s)$ 在 5 kHz 穿越频率以上跟随开环扰动传递函数 $G_{vg} = G_{0g}$，如 9.2.1 节所述。穿越频率以下 $G_g$ 减小因子 $1/(1+T)$。
+
+量 $Z_{\infty o}$ 是反馈环路理想工作（零误差）时的稳压器输出阻抗。$Z_{\infty o}$ 定义为
+
+$$Z_{\infty o}(s) = -\left.\frac{\hat{v}}{\hat{i}_{load}}\right|_{\hat{v}_{ref}=0,\,\hat{v}_g=0,\,\hat{v}_y \to \text{null} 0} \tag{13.93}$$
+
+![源页 p.542](../assets/page-snapshots/chapter-13/page-542.png)
+
+图13.25 理想输出阻抗 $Z_{\infty o}$ 的确定
+
+图13.25 给出这些条件下的小信号模型。$\hat{v}_{ref}$ 设为零且 $\hat{v}_y$ 置零时 $\hat{v}_-$ 也置零。然后 $R_4$、$R_3$、$C_3$ 元件两端无电压，故这些元件中电流为零。结果 $R_1$、$R_2$、$C_2$ 元件中电流为零，故这些元件两端电压也置零。故 $\hat{v} = \hat{v}_- = 0$。故稳压器理想输出阻抗为
+
+$$Z_{\infty o}(s) = -\frac{0}{\hat{i}_{load}} = 0 \tag{13.94}$$
+
+稳压器理想工作时负载电流扰动不影响输出电压。
+
+量 $Z_{0o}$ 是 $\hat{v}_x$ 设为零的开环条件下稳压器输出阻抗。$Z_{0o}$ 定义为
+
+$$Z_{0o}(s) = -\left.\frac{\hat{v}}{\hat{i}_{load}}\right|_{\hat{v}_{ref}=0,\,\hat{v}_g=0,\,\hat{v}_x=0} \tag{13.95}$$
+
+![源页 p.542](../assets/page-snapshots/chapter-13/page-542.png)
+
+图13.26 开环输出阻抗 $Z_{0o}$ 的确定
+
+图13.26 给出这些条件下的小信号模型。$\hat{v}_{ref}$ 设为零且 $\hat{v}_x$ 设为零时 $\hat{d}$ 为零且变压器电压为零。由于 $\hat{v}_{ref}$ 为零，$\hat{v}_- = 0$。输出阻抗随后为
+
+$$Z_{0o}(s) = -\frac{\hat{v}}{\hat{i}_{load}} = Z_{out}\,\|\,Z_1 \tag{13.96}$$
+
+其中 $Z_{out}$ 是式 (13.87) 给出的功率级输出阻抗，$Z_1$ 是式 (13.80) 给出的反馈网络阻抗。通常 $Z_{out}$ 远小于 $Z_1$ 时此表达式简化为 $Z_{out}$。
+
+![源页 p.543](../assets/page-snapshots/chapter-13/page-543.png)
+
+图13.27 降压稳压器示例传递函数 $Z_{0o}$ 和 $Z_o$ 的幅值和相位波特图。虚线：扰动传递函数 $Z_{0o} = Z_{out}$。实线：闭环输出阻抗 $Z_o$
+
+图13.27 含 9.5.4 节功率级元件值和图15.29 补偿器电路值的传递函数 $Z_{0o}$ 和 $Z_o$ 图。闭环输出阻抗 $Z_o(s)$ 在 5 kHz 穿越频率以上跟随开环输出阻抗 $Z_{out} = Z_{0o}$，如 9.2.1 节所述。穿越频率以下 $Z_o$ 相对 $Z_{out}$ 减小因子 $1/(1+T)$。
+
+环路增益 $T(s)$ 为
+
+$$T(s) = \left.\frac{\hat{v}_y}{\hat{v}_x}\right|_{\hat{v}_{ref}=0,\,\hat{i}_{load}=0,\,\hat{v}_g=0} \tag{13.97}$$
+
+![源页 p.544](../assets/page-snapshots/chapter-13/page-544.png)
+
+图13.28 环路增益 $T(s)$ 的确定
+
+这些条件下的小信号模型如图13.28所示。求 $T(s)$ 时从信号 $\hat{v}_x$ 开始，求其如何绕环路传播到 $\hat{v}_y$ 点。此条件下输出电压 $\hat{v}$ 等于 $\hat{v}_x$ 乘 PWM 增益 $(1/V_M)$ 和变换器控制-输出增益 $G_{vd}(s)$。
+
+$$\hat{v} = G_{vd}(s)\!\left(\frac{1}{V_M}\right)\!\hat{v}_x \tag{13.98}$$
+
+解图13.28 模型得功率级控制-输出传递函数
+
+$$G_{vd}(s) = e(s)MH_e(s) \tag{13.99}$$
+
+$H_e(s)$ 等于规范模型 $L_e$-$C$ 输出滤波器的传递函数。
+
+$\hat{v}_{ref}$ 设为零时理想运放使 $\hat{v}_- = 0$，故 $R_4$ 中无电流。从 $\hat{v}$ 到 $\hat{v}_y$ 的传递函数由反相放大器公式给出：
+
+$$\frac{\hat{v}_y}{\hat{v}} = \frac{Z_3}{Z_1} \tag{13.100}$$
+
+其中 $Z_1$ 由式 (13.80) 给出，$Z_3$ 由式 (13.82) 给出。环路增益为式 (13.98) 和 (13.100) 之积：
+
+$$T(s) = G_{vd}(s)\!\left(\frac{1}{V_M}\right)\!\left(\frac{Z_3}{Z_1}\right) \tag{13.101}$$
+
+图13.29 含 9.5.4 节功率级元件值和图15.29 补偿器电路值的环路增益 $T(s)$ 图。
+
+![源页 p.545](../assets/page-snapshots/chapter-13/page-545.png)
+
+图13.29 降压稳压器示例环路增益 $T(s)$ 的幅值和相位波特图
+
+总结：从参考 $\hat{v}_{ref}$ 到输出 $\hat{v}$ 的闭环传递函数为
+
+$$G_r(s) = \frac{Z_2\,\|\,Z_3}{Z_1+\left(Z_2\,\|\,Z_3\right)}\frac{T}{1+T} + \frac{Z_{out}}{Z_1+Z_{out}}\frac{1}{1+T} \tag{13.102}$$
+
+从输入电压扰动 $\hat{v}_g$ 到输出 $\hat{v}$ 的闭环传递函数为
+
+$$G_g(s) = \frac{MH_e}{1+T} \tag{13.103}$$
+
+闭环输出阻抗为
+
+$$Z_o = \frac{Z_{out}\,\|\,Z_1}{1+T} \tag{13.104}$$
+
+$T$ 由式 (13.101) 给出。降压变换器的表7.1 规范模型参数适当代入上述表达式。
+
+此闭环稳压器示例含三个独立源：参考 $\hat{v}_{ref}$ 和扰动 $\hat{v}_g$、$\hat{i}_{load}$。用叠加对每个独立输入应用反馈定理三次，找到每个源关联的 $G_0$ 和 $G_\infty$ 项。$G_{\infty r}$ 项的物理解释为从参考到输出的理想闭环增益，对应 9.2.2 节识别的 $1/H$ 项。$G_{0r}$ 项的物理解释为从 $\hat{v}_{ref}$ 经反馈路径到输出的直接前向传输。扰动传递函数 $G_{0g}$ 是开环输入-输出传递函数，与开环变换器的 $G_{vg}(s)$ 一致。此例中 $G_{\infty g}$ 为零：反馈环路理想工作时无 $\hat{v}_g$ 扰动到达输出。
+
+反馈定理提供定义和确定环路增益 $T$ 的通用方法。虽然我们从三个独立源到输出求得三个闭环传递函数，但系统中只有一个物理反馈环路和一个环路增益表达式。
+
+## 13.5 关键要点小结
+
+1. 反馈定理采用零双注入和线性叠加确定闭环增益和反馈电路其他重要传递函数，无需将电路分解为非互作用单向框。识别理想注入点，然后进行某些"思维实验"导出闭环电路重要传递函数的解析表达式。
+
+2. 给定闭环增益 $G(s)$ 用理想增益 $G_\infty$（无穷环路增益时的极限传递函数）、增益 $G_0$（零环路增益时的极限传递函数）和环路增益 $T$ 表示。反馈定理为导出这些量提供简化框架。
+
+3. 用反馈定理分析用作 PD 补偿器的运算放大器电路。此例中 $G_\infty$ 增益为运放理想时的传递函数。$G_0$ 增益来自输入信号经反馈路径的直接前向传输。实际传递函数 $G$ 在运放内部增益不足的高频处与 $G_\infty$ 显著不同；这可显著退化 PD 补偿器行为。
+
+4. 通过反馈定理分析含 PID 补偿器电路的闭环降压变换器，导出从参考输入和电网输入到输出的闭环传递函数及闭环输出阻抗。此例说明反馈定理对分析闭环扰动传递函数和参考-输出传递函数都有用。
+
+## 习题
+
+![源页 p.547](../assets/page-snapshots/chapter-13/page-547.png)
+
+图13.30 习题13.1 的反馈放大器
+
+**13.1** 图13.30 给出含适合应用反馈定理的电压注入 $v_z$ 的反馈放大器。此题目标是解放大器增益
+
+$$G = \left.\frac{v_o}{v_i}\right|_{v_z=0}$$
+
+用反馈定理。导出 $G_\infty$、$T$、$G_0$、$T_n$ 的表达式，并证明互易关系成立。表达式应以电路参数 $R_1$、$R_2$、$C$、$R_o$、$A_o$ 表示。
+
+![源页 p.547](../assets/page-snapshots/chapter-13/page-547.png)
+
+图13.31 习题13.2 的反馈放大器
+
+**13.2** 图13.31 给出含适合应用反馈定理的电流注入 $i_z$ 的反馈放大器。此题目标是解放大器增益
+
+$$G = \left.\frac{v_o}{v_i}\right|_{i_z=0}$$
+
+用反馈定理。导出 $G_\infty$、$T$、$G_0$、$T_n$ 的表达式，并证明互易关系成立。表达式应以电路参数 $R_1$、$C$、$g_m$ 表示。
+
+![源页 p.548](../assets/page-snapshots/chapter-13/page-548.png)
+
+图13.32 围绕跨导放大器构造的 PI 补偿器，习题13.3
+
+**13.3** 图13.32 给出习题9.5 闭环开关电压稳压器中的 PI 补偿器电路。PI 补偿器围绕标准 PWM 控制器芯片中的运放构造。补偿器输入为稳压器输出电压 $v$，补偿器输出为电压 $v_c$。参考电压 $V_{ref}$ 为常数。此题目的是展示反馈定理如何用于 PI 补偿器电路设计。感兴趣的闭环传递函数为
+
+$$G(s) = \left.\frac{\hat{v}_c}{\hat{v}}\right|_{\hat{v}_{ref}=0}$$
+
+(a) 假定图13.32 运放理想，证明
+
+$$G_\infty(s) = \left.\frac{\hat{v}_c}{\hat{v}}\right|_{\text{理想运放}} = G_{\infty\infty}\!\left(1+\frac{\omega_1}{s}\right)$$
+
+并用 $R_1$、$R_2$、$R_3$、$C_3$ 导出 $G_\infty(s)$ 显著特征的表达式。计算 $G_{\infty\infty}$ 和 $f_1$ 的数值。注意假定运放理想（负反馈电路中）等价于假定反馈定理中误差信号置零。故此部分求得的传递函数等于反馈定理的 $G_\infty$。
+
+假定 $G(s) \approx G_\infty(s)$，习题9.5 的闭环电压稳压器应稳定且有足够相位裕度。设计者做此假定，构造电路，预期获得稳定工作和良好调节的输出电压。但实验室实验中发现开关模式电压稳压器不稳定，产生振荡电压和电流。知道你熟悉反馈定理，设计者请求帮助。
+
+查看 PWM 控制器数据手册后发现所提供的运放并非真正的大电压增益低输出阻抗标准运放，而是跨导放大器，可建模为受控电流源，如图13.33所示。
+
+![源页 p.548](../assets/page-snapshots/chapter-13/page-548.png)
+
+图13.33 习题13.3 跨导放大器模型
+
+此外发现放大器跨导 $g_m$ 因工艺和温度变化可低至 $g_{m\text{min}} = 100\,\mu\text{A/V}$、高至 $g_{m\text{max}} = 1\text{ mA/V}$。意识到问题很适合应用反馈定理，分几步解决设计者遇到的稳定性问题。
+
+(b) 用电流注入技巧，计入图13.33 放大器模型，求图13.32 PI 补偿器中 $G_0$、$T$、$T_n$ 的解析表达式。将传递函数表示为标准因式分解极点-零点形式，用 $R_1$、$R_2$、$R_3$、$C_3$、$g_m$ 导出显著特征表达式。证明互易关系成立。
+
+(c) 用 (b) 结果，导出闭环传递函数 $G(s)$ 表达式，并证明 $G(s)$ 可写为
+
+$$G(s) = \left.\frac{\hat{v}_c}{\hat{v}}\right|_{\hat{v}_{ref}=0} = G'_{\infty\infty}\!\left(1+\frac{\omega'_1}{s}\right)$$
+
+计算并将 $g_m$ 两极值 $g_{m\text{min}}$ 和 $g_{m\text{max}}$ 的 $G'_{\infty\infty}$ 和 $f'_1$ 数值列表，与 (a) 求得的 $G_{\infty\infty}$ 和 $f_1$ 比较。解释为何用图13.32 补偿器的开关模式电压稳压器可能变得不稳定。
+
+(d) 建议如何改变图13.32 PI 补偿器元件值使 $G_\infty(s)$ 保持与 (a) 求得的相同，并使补偿器增益 $G(s)$ 对跨导 $g_m$ 的所有可能值紧密近似理想 $G_\infty(s)$。
+
+![源页 p.550](../assets/page-snapshots/chapter-13/page-550.png)
+
+图13.34 含 PID 补偿器的同步降压电压稳压器，习题13.5 和13.6
+
+**13.4** 运放模型如图13.7b所示。模型中 $R_o = 100\,\Omega$，
+
+$$G_{op}(s) = \frac{A_o}{\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{\omega_2}\right)}$$
+
+其中 $A_o = 10^5 \to 100\text{ dB}$，$f_1 = 10\text{ Hz}$，$f_2 = 1\text{ MHz}$。
+
+(a) 用运放构造三种不同理想闭环增益的闭环放大器：(i) $G_\infty = 1$，(ii) $G_\infty = -1$，(iii) $G_\infty = 10$。画出这三个闭环放大器电路图并选择电阻值。
+
+(b) 对 (a) 考虑的每个闭环放大器，画环路增益 $T(s)$ 的幅值和相位响应，确定穿越频率和相位裕度数值。
+
+(c) 对 (a) 考虑的每个闭环放大器，用反馈定理导出闭环增益 $G(s)$ 表达式。表达式应为标准归一化形式。画幅值和相位响应，用 $G(s)$ 显著特征标注图。
+
+**13.5** 含同步降压变换器的负载点（POL）电压稳压器如图13.34所示。除电感电阻 $R_L$ 和电容等效串联电阻 $R_{esr}$ 引起的损耗外可忽略损耗。PID 补偿器围绕运放构造。此题可假定运放有理想特性。脉宽调制器输入电阻很大，故可在补偿器和 PWM 之间理想插入电压注入源 $\hat{v}_z$。
+
+(a) 导出环路增益 $T(s)$ 表达式。表达式应为标准归一化形式。$T(s)$ 显著特征应用图13.34 电路参数表示。画环路增益幅值和相位响应，确定穿越频率 $f_c$ 和相位裕度 $\phi_m$ 数值。
+
+(b) 此部分目标是确定 POL 电压稳压器闭环输出阻抗 $Z_o(s) = -\hat{v}/\hat{i}_{load}$。导出 $Z_{\infty o}$、$Z_{0o}$ 和零环路增益 $T_{nz}$ 的标准归一化形式表达式。证明互易关系成立。画 $Z_o(s)$ 幅值和相位响应。
+
+(c) 此部分目标是确定闭环输入-输出传递函数 $G_g(s) = \hat{v}/\hat{v}_g$。导出 $G_{\infty g}$、$G_{0g}$ 和零环路增益 $T_{ng}$ 的标准归一化形式表达式。证明互易关系成立。画 $G_g(s)$ 幅值和相位响应。
+
+(d) 此部分目标是确定闭环参考-输出响应 $G_r(s) = \hat{v}/\hat{v}_{ref}$。导出 $G_{\infty r}$、$G_{0r}$ 和零环路增益 $T_{nr}$ 的标准归一化形式表达式。证明互易关系成立。画 $G_r(s)$ 幅值和相位响应。
+
+(e) 修改 PID 补偿器电路使 $T(s)$ 保持与 (a) 求得的完全相同，并使理想参考-输出响应在所有频率有单位增益，即 $G_{\infty r} = 1$。
+
+**13.6** 图13.34 电压稳压器中构造 PID 补偿器所用运放的模型如图13.7b所示。模型中 $R_o = 0$，
+
+$$G_{op}(s) = \frac{\omega_{GBW}}{s}$$
+
+其中 $f_{GBW}$ 是单位增益频率，也称运放的增益-带宽积。此题目标是考察运放有限 $f_{GBW}$ 如何影响图13.34 电压稳压器的闭环性能。感兴趣的传递函数是 PID 补偿器增益
+
+$$G_c(s) = -\frac{\hat{v}_c}{\hat{v}}$$
+
+(a) 对实现 PID 补偿器的闭环放大器，导出环路增益 $T_c(s)$、理想前向增益 $G_{c\infty}$ 和直接前向传输 $G_{c0}$ 的表达式。表达式应用图13.34 电路参数和 $\omega_{GBW}$ 表示。对三种 $f_{GBW}$ 值叠加 $G_c$ 幅值和相位波特图：(i) $f_{GBW} = 1\text{ MHz}$，(ii) $f_{GBW} = 10\text{ MHz}$，(iii) $f_{GBW} = 25\text{ MHz}$。
+
+(b) 考虑图13.34 电压稳压器中计入 (a) 求得 $G_c(s)$ 的环路增益 $T(s)$。对 (a) 考虑的三种 $f_{GBW}$ 值叠加 $T(s)$ 幅值和相位波特图。对每个 $f_{GBW}$ 计算穿越频率 $f_c$ 和相位裕度 $\phi_m$ 数值，与假定理想运放（即假定 $G_c = G_{c\infty}$）所得结果比较。评论运放增益-带宽积应多大才能忽略对图13.34 电压稳压器闭环性能的影响。
+
+**13.7** 做习题9.7。用反馈定理验证闭环传递函数 $\hat{i}_g(s)/\hat{v}_{ref}(s)$ 的结果。然后用反馈定理导出闭环输入导纳
+
+$$Y_g = \frac{\hat{i}_g}{\hat{v}_g}$$
+
+的表达式。画 $Y_g$ 幅值和相位响应。$Y_g$ 幅值在何频率范围近似等于理想 $Y_{g\infty}$。
+
+**13.8** 做习题9.8。然后用反馈定理求闭环输出阻抗 $Z_o$ 并验证满足技术指标：闭环输出阻抗幅值在 0 至 20 kHz 整个频率范围内应小于 0.2 Ω。
+
+**13.9** 做习题9.9。然后用反馈定理导出闭环参考-输出响应 $G_r = \hat{v}/\hat{v}_{ref}$ 的表达式。画 $G_r$ 幅值和相位响应。$G_r$ 幅值在何频率范围近似等于理想 $G_{r\infty}$？

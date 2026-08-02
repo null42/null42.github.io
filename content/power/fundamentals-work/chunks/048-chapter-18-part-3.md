@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第18章part 3 - 18 Current-Programmed Control"
+title: "第18章 电流编程控制（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,959 +18,426 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第18章part 3 - 18 Current-Programmed Control
+# 第18章 电流编程控制（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 767-786  
-> Chunk ID: `chapter-18-part-3`
+## 18.5 CPM 控制变换器的仿真（续）
 
-## 主干提取
+![源页 p.767](../assets/page-snapshots/chapter-18/page-767.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$$\langle i_L \rangle_{T_s} = i_c - \frac{m_a T_s - m_1 + m_2}{2}\, d d' T_s \tag{18.139}$$
 
-## 术语表
+接下来，通过求解式(18.139)得到开关占空比。开关占空比可以用其他量以多种不同方式表达；这些形式在数学上等价，但在仿真器的数值求解器中可能导致不同的收敛性能。一种方法是将 $d$ 表示为
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+$$d = \frac{i_c - \langle i_L(t) \rangle_{T_s}}{\dfrac{m_1 + m_2}{2}\, d' T_s + m_a T_s} \tag{18.140}$$
 
-## 中文翻译
+利用式(18.135)、(18.136)、(18.137)和(18.138)，式(18.140)可写成如下形式
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$d = \frac{2\left[ \langle v_c(t) \rangle_{T_s} - R_f \langle i_L(t) \rangle_{T_s} \right]}{\dfrac{R_f}{L f_s}\left[ \langle v_1(t) \rangle_{T_s} + \langle v_2(t) \rangle_{T_s} \right] d' + 2 V_a} \tag{18.141}$$
 
-## 英文原文
+这一隐式表达式（注意 $d$ 同时出现在等式两侧）适合作为名为 CPM-CCM 的 SPICE 子电路模型实现。仿真器中的数值求解器能够基于式(18.141)计算开关占空比 $d$。
 
-```text
-18.5 Simulation of CPM Controlled Converters 765
-⟨iL⟩Ts = ic−madTs−m1+ m2
-2 dd′Ts (18.139)
-Next, the switch duty cycle is found by solving Eq. (18.139). There are many diﬀerent ways the
-switch duty cycle can be expressed in terms of other quantities; although mathematically equiv-
-alent, these diﬀerent forms of solving for d may result in diﬀerent convergence performance of
-the numerical solver in the simulator. One approach is to express d as
-d= ic−⟨iL(t)⟩Ts
-m1+ m2
-2 d′Ts+ maTs
-(18.140)
-Using Eqs. (18.135), (18.136), (18.137), and (18.138), Eq. (18.140) can be written in the form
-d=
-2
-⎦
-⟨vc(t)⟩Ts −Rf⟨iL(t)⟩Ts
-)
-Rf
-Lf s
-⎦⟨v1(t)⟩Ts +⟨v2(t)⟩Ts
-) d′+ 2Va
-(18.141)
-This implicit expression (notice thatd is on both sides of the equation) is suitable for implemen-
-tation in a SPICE subcircuit model, which is named CPM-CCM. The numerical solver in the
-simulator is capable of computing the switch duty cycle d based on Eq. (18.141).
-18.5.2 Combined CCM/DCM Simulation Model
-Typical inductor current and voltage waveforms of CPM converters operating in discontinuous
-conduction mode are shown in Fig. 18.31. The length of the second subinterval is d2(t)Ts.I n
-CCM, the second subinterval lasts until the end of the switching cycle,
-d2= 1−d (18.142)
-t
-iL(t)
-0
-ipk
-vL(t)
-0
-v1(t) Ts
-v2(t) Ts
-ic
- ma
- m2m1
-t
-Ts
-dTs d2Ts
-Fig. 18.31 Current-programmed mode waveforms in discontinuous conduction mode
+### 18.5.2 CCM/DCM 组合仿真模型
 
-766 18 Current-Programmed Control
-In DCM, the current drops to zero before the end of the switching period. The length of the
-second subinterval can be computed from:
-d2= ipk
-m2Ts
-(18.143)
-If the converter operates in DCM, d2 computed from Eq. (18.143)i ss m a l l e rt h a n1−d.I ft h e
-converter operates in CCM, 1−d is smaller than d2 computed from Eq. (18.143). In general, the
-length of the second subinterval can be found as the smaller of the two values computed using
-Eqs. (18.142) and (18.143).
-In the subcircuit implementation, the length of the second subinterval can therefore be com-
-puted as the smaller of the values given by Eqs. (18.142) and (18.143):
-d2= min
-⎦
-1−d, iPk
-m2Ts
-)
-(18.144)
-By use of d2 from Eq. (18.144), Eq. (18.141) can be extended to allow for CCM or DCM opera-
-tion of a current-programmed converter as follows:
-d=
-2
-⎦
-⟨vc(t)⟩Ts (d+ d2)−Rf⟨iL(t)⟩Ts
-)
-Rf
-Lf s
-⎦⟨v1(t)⟩Ts +⟨v2(t)⟩Ts
-) d2(d+ d2)+ 2Va(d+ d2)
-(18.145)
-This relationship is valid for both CCM and DCM provided that the second subinterval length
-d2 is computed according to Eq. (18.144). Expression (18.145) is used in the implementation of
-the combined CCM/DCM subcircuit CPM.
-18.5.3 Simulation Example: Frequency Responses of a Buck Converter with
-Current-Programmed Control
-To illustrate an application of the CPM subcircuit, let us consider the example buck converter
-circuit model of Fig. 18.32. To construct this averaged circuit model in SPICE, the switches
-are replaced by the CCM-DCM1 averaged switch subcircuit. The control input to the CPM
-subcircuit is the independent voltage source vc. Three dependent voltage sources are used to
-generate other inputs to the CPM subcircuit. The controlled voltage sourceEi is proportional to
-the inductor current iL. The controlled voltage sourceE1 is equal to v(1)−v(3), which is equal to
-the voltage⟨v1(t)⟩Ts applied across the inductor during the ﬁrst subinterval when the transistor
-is on and the diode is oﬀ. The controlled voltage sourceE2 is equal to v(3), which is equal to the
-voltage⟨v2(t)⟩Ts applied across the inductor during the second subinterval when the transistor is
-oﬀand the diode is on.
-SPICE ac simulations are performed at the quiescent operating point obtained for the dc
-value of the control input equal to Vc= 1.4 V . At the quiescent operating point, the switch duty
-cycle is D= 0.676, the dc output voltage is V= 8.1 V, and the dc component of the inductor
-current is IL= 0.81 A. The converter operates in CCM.
-Magnitude and phase responses of the control-to-output transfer functions Gvc(s)= ˆv/ˆvc
-and Gvd(s) = ˆv/ ˆd are shown in Fig. 18.33. The duty-cycle to output voltage transfer func-
-tion Gvd(s) exhibits the familiar second-order high-Q response. Peaking in the magnitude re-
-sponse and a steep change in phase from 0 ◦to−180◦occur around the center frequency of
+电流编程变换器在断续导通模式下运行的典型电感电流和电压波形如图18.31所示。第二个子区间的长度为 $d_2(t) T_s$。在 CCM 下，第二个子区间持续到开关周期结束，
 
-18.5 Simulation of CPM Controlled Converters 767
-2
-1
-3
-4
-5
-CCM-DCM1
-+
-+
-35 ! H
-100 ! F
-Vg
-12 V
-L
-C R
-vc
-+
-v
-iLOAD
-CPM
-control current 1 2
-d
-+ + +
-iL RL12 3 4
-d
-Rf iL v(1) (3) v(3)
-0.05 
-10 
-Rf = 1 
-fs = 200 kHz
-L = 35 !
-Va = 0.6 V
-Xcpm
-Xswitch
-fs = 200 kHz
-L = 35 !
-Ei E1 E2
-Fig. 18.32 CPM buck converter example: averaged circuit model
-|| Gvd ||
-Gvd
-f
-0
-G
-0 dB
-20 dB
-40 dB
-zHk001zHk01zH001zH01 1 kHz
-|| G ||
-|| Gvc ||
-Gvc
-Fig. 18.33 Comparison of CPM control with duty-cycle control, for the control-to-output frequency
-response of the buck converter example
+$$d_2 = 1 - d \tag{18.142}$$
 
-768 18 Current-Programmed Control
-|| Gvg ||
-f
-0 dB
-20 dB
-zHk001zHk01zH001zH01 1 kHz
-Duty cycle control
-d(t) = constant
-Current programmed mode
-vc(t) = constant
-Fig. 18.34 Comparison of CPM control with duty-cycle control, for the line-to-output frequency re-
-sponse of the buck converter example
-the pair of complex-conjugate poles. In contrast, the CPM control-to-output response has a
-dominant low-frequency pole. The phase lag is around−90◦in a wide range of frequencies. A
-high-frequency pole contributes to additional phase lag at higher frequencies. The frequency re-
-sponses of Fig.18.33 illustrate an advantage of CPM control over duty-cycle control. Because of
-the control-to-output frequency response dominated by the single low-frequency pole, it can be
-much easier to close a wide-bandwidth outer voltage feedback loop around the CPM controlled
-power converter than around a converter where the duty cycle is the control input. Proportional-
-plus-integral (PI) controllers are commonly used in current-programmed regulators.
-Another advantage of CPM control is in rejection of input voltage disturbances. Line-to-
-output frequency responses for duty-cycle control and CPM control in the buck example are
-compared in Fig. 18.34. The line-to-output transfer function G
-vg(s) for duty-cycle control is
-characterized by a dc asymptote approximately equal to the duty cycle D = 0.676. Reso-
-nant poles occur at the corner frequency of the L-C ﬁlter. The line-to-output transfer function
-Gvg−cpm (s) with current-programmed control is signiﬁcantly reduced, and exhibits more than
-30 dB of additional attenuation over the frequencies of interest. It should again be noted that the
-transfer functionGvg−cpm (s)i nF i g .18.34 cannot be predicted by the simple models of Sect.18.1;
-the more accurate model of Sect. 18.3 must be employed.
-It is also interesting to compare the output impedance of the converter with duty-cycle con-
-trol versus CPM control. The results are shown in Fig. 18.35. The output impedance plotted
-in the ﬁgure includes the load resistance of 10 Ω. For duty-cycle control, the dc asymptote of
-the output impedance is dominated by the inductor winding resistance of 0.05Ω. The inductor
-becomes signiﬁcant in the vicinity of 200 Hz. At the resonant frequency of the output LC ﬁlter,
-signiﬁcant peaking in the output impedance of the duty-cycle controlled converter can be ob-
-served. At higher frequencies, the output impedance is dominated by the impedance of the ﬁlter
-capacitor, which decreases with frequency.
-In the current-programmed converter, the low-frequency impedance is high. It is equal to
-the parallel combination of the load resistance and the CPM output resistance. Because of the
-lossless damping introduced by CPM control, the series inductor does not a ﬀect the output
+图18.31 断续导通模式下电流编程模式的波形
 
-18.6 V oltage Feedback Loop Around a Current-Programmed Converter 769
-|| Zout ||
-f
-0 dB
-20 dB
-zHk001zHk01zH001zH01 1 kHz
-Duty cycle control
-d(t) = constant
-Current programmed mode
-vc(t) = constant
-Fig. 18.35 Comparison of CPM control with duty-cycle control, for the output impedance of the buck
-converter example
-impedance. The simple model of Sect. 18.1 predicts that the inductor branch of the circuit is
-driven by a current source; this e ﬀectively removes the inﬂuence of the inductor on the out-
-put impedance. The plot of Fig. 18.35 was generated using the more accurate; nonetheless, the
-output impedance is accurately predicted by the simple model. It can be seen that current pro-
-gramming substantially increases the converter output impedance at low frequencies. At high
-frequencies the output impedances of the duty-cycle and CPM controlled converters have the
-same asymptotes.
-18.6 Voltage Feedback Loop Around a Current-Programmed Converter
-As shown in Figs. 18.1 and 18.3 a converter system incorporating current-programmed control
-often includes an outer voltage feedback loop, the purpose of which is to regulate the converter
-output voltage. As discussed in Chap. 9, voltage is sensed and compared to a reference. The
-error signal is processed by a voltage loop compensator, which outputs a control signal. In duty-
-cycle controlled converters of Chap.9, the control signal is the input to a pulse-width modulator,
-which produces a switch control signal with duty ratio proportional to the PWM control input.
-In CPM controlled converters, the control signal generated by the voltage loop compensator is
-the control input v
-c= Rf ic for the CPM controller.
-18.6.1 System Model
-A complete system model, including the outer voltage loop, is shown in Fig. 18.36. The model
-is very similar to the system model in Fig. 9.2 except that the pulse-width modulator model is
-replaced by the CPM controller model. For the purpose of designing the voltage loop compen-
-sator Gcv(s), it is convenient to make use of the closed-loop transfer functionGvc(s)= ˆv/ˆic of the
-CPM controlled converter. A block diagram of the voltage feedback loop is shown in Fig.18.37.
+![源页 p.768](../assets/page-snapshots/chapter-18/page-768.png)
 
-770 18 Current-Programmed Control
-Fig. 18.36 Block diagram that models a CPM controlled converter with an outer voltage feedback loop
-Fig. 18.37 Model of the outer voltage feedback loop
-The design of Gcv(s) amounts to employing the techniques of Chap. 9 to shape the voltage loop
-gain
-Tv= HGcv(s) 1
-Rf
-Gvc(s) (18.146)
-so that target crossover frequency fcv stability margins are attained.
-With the voltage feedback loop closed around a current-programmed converter, the closed-
-loop input impedance Zi can be found using the results of Sect. 18.4.4 by application of the
-Feedback Theorem. As discussed in Sect. 17.5.2, the closed-loop input admittance Yi = 1/Zi
-can be found from:
-Yi= 1
-Zi
-= 1
-ZN−cpm
-Tv
-1+ Tv
-+ 1
-ZD−cpm
-1
-1+ Tv
-(18.147)
-where expressions for ZN−cpm and ZD−cpm are given in Sect. 18.4.4. Following the discussion in
-Sect. 17.5.2, the result for the closed-loop input impedance can be used to evaluate the system
-stability when the CPM converter with voltage feedback loop includes an input ﬁlter or, more
-generally, when it is supplied from a source with a nonzero output impedance.
-18.6.2 Design Example
-To illustrate an outer voltage feedback loop design, consider the CPM controlled buck converter
-shown in Fig.18.32, with the voltage loop added as shown in Fig.18.1. The system small-signal
-model is shown in Fig. 18.36. In this example, the reference voltage is V
-re f = 3 V , and the
+在 DCM 下，电流在开关周期结束前下降到零。第二个子区间的长度可由下式计算：
 
-18.6 V oltage Feedback Loop Around a Current-Programmed Converter 771
-voltage sensing gain is set to H= 0.375, so that the output dc voltage is ideally regulated at
-V= Vre f/H= 8 V . The quiescent operating point and the small-signal model parameters are
-approximately the same as in the CPM buck converter considered in Sect. 18.5.3: D= 0.67,
-IL= V/R= 0.8A , Ma/M2= 0.525, Fm= 3.2A−1, Fg= 0.016Ω−1, Fv= 0. Table18.3 includes
-an expression for the closed-loop control-to-output voltage transfer function Gvc(s) predicted
-by the more accurate CPM model,
-Gvc(s)= Gc0
-1
-1+ s
-Qcωc
-+
-⎦s
-ωc
-)2 ≈Gc0
-1⎦
-1+ s
-ωp1
-)⎦
-1+ s
-ωhf
-) (18.148)
-Gc0 = V
-D
-Fm
-⎦
-1+ FmV
-DR
-)= 7.92Ω→18 dBΩ
-fc= 1
-2π
-√
-LC
-√
-1+ FmV
-DR = 5.9k H z
-Qc = R
-√
-C
-L
-√
-1+ FmV
-DR⎦
-1+ RCFmV
-DL
-)= 0.034
-fp1 = Qc fc= 201 Hz
-fhf = fc/Qc= 174 kHz
-As shown in Fig. 18.33, Gvc(s) exhibits a single-pole response over a wide range of frequen-
-cies, so that it is relatively easy to design a wide-bandwidth voltage feedback loop with high
-crossover frequency fcv using a simple proportional-integral (PI) compensator,
-Gcv(s)= Gcm
-⎦
-1+ ωzv
-s
-)
-(18.149)
-A sketch of the magnitude response of the voltage loop gain Tv of Eq. (18.146), with a PI
-compensator of Eq. (18.149), is shown in Fig. 18.38. Assuming fzv < fcv < fhf , the magnitude
-asymptote has−20 dB/dec slope around the crossover frequency,
-||Tv||→H
-Rf
-GcoGcm
-ωp1
-ω (18.150)
-From Eq. (18.150) it follows that the gain Gcm can be selected to obtain the desired crossover
-frequency fcv,
-Gcm= Rf
-HGco
-fcv
-fp1
-(18.151)
-To achieve wide-bandwidth voltage regulation let us choose fcv = 40 kHz = fs/5. Equa-
-tion (18.151) yields Gcm = 67.1. The phase margin ϕv can be evaluated based on the phase
-contributions of the poles and zeroes shown in Fig. 18.38. Taking into account that fp1 << fcv,
-we have
-ϕv= 180◦+∠Tv( jω)= 180◦−90◦−90◦+ tan−1 fcv
-fzv
-−tan−1 fcv
-fhf
-(18.152)
+$$d_2 = \frac{i_{pk}}{m_2 T_s} \tag{18.143}$$
 
-772 18 Current-Programmed Control
-H
-R f
-Gc0Gcm
-ωp1
-ω
-fp1
-fzv
-fcv
-fhf
-||Tv||
-0d B
-Fig. 18.38 Sketch of the magnitude response of the loop gain Tv using a PI compensator Gcv(s)
-Fig. 18.39 Loop gain Tv in the design example of Sect. 18.6.2
-For these values, tan−1( fcv/ fhf )= 13◦. Equation (18.152) can be used to select fzv to achieve a
-desired phase margin. For example, the choice fzv= fcv/3 yields
-ϕv= tan−1 fcv
-fzv
-−tan−1 fcv
-fhf
-= 72◦−13◦= 59◦ (18.153)
-Inclusion of this PI compensator Gcv(s) results in the voltage loop gain Tv shown in Fig. 18.39.
-18.7 High-Frequency Dynamics of Current-Programmed Converters
-The simple model of Sect. 18.2 predicts that the inductor current iL is directly controlled by
-the current command ic, which implies small-signal control-to-current transfer function equal
-to unity at all frequencies,
-Gic(s)=
-ˆiL
-ˆic
-≈1 (18.154)
+若变换器工作于 DCM，则由式(18.143)算得的 $d_2$ 小于 $1 - d$。若变换器工作于 CCM，则 $1 - d$ 小于由式(18.143)算得的 $d_2$。一般而言，第二个子区间的长度可取为按式(18.142)和(18.143)算得两个值中的较小者。
 
-18.7 High-Frequency Dynamics of Current-Programmed Converters 773
-Let us compare this simple result with high-frequency predictions of the more accurate averaged
-small-signal model of Sect. 18.3. At high frequencies, small-signal perturbations of capacitor
-voltages become negligibly small. As a result, ˆm1 ≈0, ˆm2 ≈0, and inductor current slopes m1
-and m2 can be considered constant, equal to the unperturbed dc values M1 and M2, respectively.
-At high frequencies, the small-signal duty-cycle perturbation in Eq. (18.73) becomes
-ˆd(t)≈Fm
-[ˆic(t)−ˆiL(t)
-]
-(18.155)
-In a two-switch, single-inductor PWM converter, neglecting voltage perturbations, the duty-
-cycle to inductor current transfer function can be written as
-Gid=
-ˆiL
-ˆd
-≈M1+ M2
-s (18.156)
-Combining Eqs. (18.156) and (18.155), the more accurate model of Sect.18.3 yields the follow-
-ing prediction for the control-to-current transfer function at high frequencies
-Gic(s)=
-ˆiL
-ˆic
-≈ 1
-1+ s
-ωhf
-(18.157)
-where
-fhf = 1
-2πFm(M1+ M2)= M1+ M2
-2Ma+ M1−M2
-fs
-π (18.158)
-Note that exactly the same result for the high-frequency pole was found in Eq. ( 18.114). Nei-
-ther the simple model, which neglects inductor dynamics, nor the more accurate model, which
-implies a single-pole response at high frequencies, predicts instability or the need for the ar-
-tiﬁcial ramp discussed in Sect. 18.2. This is because the averaged small-signal models do not
-take into account converter switching and modulator sampling processes, which lead to various
-discrete-time phenomena in a current-programmed converter. The purpose of this section is to
-examine high-frequency dynamics of CPM controlled converters using sampled-data modeling
-techniques, and to compare predictions of the sampled-data model to the predictions of the
-averaged small-signal models.
-18.7.1 Sampled-Data Model
-Figure 18.40 shows waveforms in a current-programmed converter in response to a perturbation
-ˆi
-c in the control current ic, with an initial perturbation in the inductor current iL(t) denoted as
-ˆiL[n−1]. At t= DTs, in response to the ˆic and ˆiL[n−1] perturbations, the duty cycle D is
-perturbed by ˆd[n] and the inductor current perturbation assumes a new valueˆiL[n] over the next
-switching period Ts. Derivation of a sampled-data “transfer function” Gic = ˆiL/ˆic follows the
-approach described in [77], which includes taking into account samplingˆic(t) to obtain discrete-
-time samples ˆic[n], derivation of a discrete-time relationship betweenˆic[n] and ˆiL[n], and ﬁnding
-an equivalent hold transfer function that models the process in which continuous-time inductor
-current perturbation ˆiL(t) is obtained from the samples ˆiL[n].
+在子电路实现中，因此可将第二个子区间的长度计算为式(18.142)和(18.143)所给值中的较小者：
 
-774 18 Current-Programmed Control
-Fig. 18.40 Steady-state and perturbed waveforms in a current-programmed converter
-First, we note that the Laplace transform of the samples of ˆic(t) equals
-1
-Ts
-k→+∞∑
-k→−∞
-ˆic (s−jkωs) (18.159)
-where ˆic(s) is the Laplace transform of the continuous-time control current ˆic(t).
-Next, we proceed to derive a discrete-time relationship between ˆic[n] and ˆiL[n]. Waveform
-details around the sampling instant t= DTs are shown in Fig. 18.41. From the geometry of
-the waveforms, the next perturbation in the inductor current ˆiL[n] can be found in terms of the
-previous perturbation ˆiL[n−1], the duty-cycle perturbation ˆd[n] and the inductor current slopes
-m1 and m2,
-ˆiL[n]= ˆiL[n−1]+ (m1+ m2) ˆd[n]Ts (18.160)
-Similarly, ˆic[n] can be related to ˆiL[n−1], ˆd[n], m1 and ma,
-ˆic[n]= ˆiL[n−1]+ (m1+ ma) ˆd[n]Ts (18.161)
-Eliminating ˆd[n]f r o mE q s . (18.160) and ( 18.161) yields a discrete-time relationship between
-ˆic[n] and ˆiL[n],
-ˆiL[n]= αˆiL[n−1]+ (1−α )ˆic[n] (18.162)
-where the coeﬃcient α depends on the inductor current and artiﬁcial ramp slopes,
-α=−m2−ma
-m1+ ma
-(18.163)
+$$d_2 = \min\left( 1 - d,\; \frac{i_{pk}}{m_2 T_s} \right) \tag{18.144}$$
 
-18.7 High-Frequency Dynamics of Current-Programmed Converters 775
-m1
-−ma
-−m2
-ˆiL[n − 1]
-ˆiL[n]
-iL(t) + ˆiL(t)
-m1 −m2
-ˆic[n]
-ic(t) + ˆic(t)
-ic(t)
-−ma
-ˆd[n]Ts
-Fig. 18.41 Details of the steady-state and perturbed inductor current waveforms around the sampling
-instant t= DTs
-which is the same as Eq. (18.54) used in the stability analysis of Sect. 18.2.
-Application of theZ transform [176]t oE q .(18.162) results in
-ˆiL(z)= αˆiL(z)z−1+ (1−α )ˆic(z) (18.164)
-which yields the discrete-timeZ-domain transfer function
-Gic(z)=
-ˆiL(z)
-ˆic(z)
-= 1−α
-1−α z−1 (18.165)
-A discrete-time system is stable if all poles lie inside the unit circle in the complex z plane.
-Given that the transfer function Gic(z) has a pole at z= α , the stability condition becomes
-| α|< 1 (18.166)
-which is the same as the stability condition given by Eq. (18.55).
-As shown in Fig. 18.40, in response to a discrete-time perturbation ˆiL[n], the continuous-
-time inductor current perturbation ˆiL(t) is a pulse of amplitude ˆiL[n] and length Ts. The transfer
-function of the corresponding equivalent hold is therefore equal to the transfer function of the
-zero-order hold [176],
-1−e−sTs
-s (18.167)
-We now can combine Eqs. (18.165) and (18.167) to derive an expression for the sampled-data
-“transfer function”
-Gic(s)=
-ˆiL
-ˆic
-= 1−α
-1−α e−sTs
-1−e−sTs
-sTs
-(18.168)
-The ﬁrst part of the expression is obtained from Eq. (18.165) by replacing z−1 with e−sTs , which
-follows from the fact that a factor z−1 corresponds to delaying a signal by Ts, while the Laplace
-transform of a signal delayed by Ts equals e−sTs times the Laplace transform of the signal. The
-second part of the expression is the transfer function of the equivalent hold in Eq. ( 18.167),
-while Ts in the denominator is due to sampling and retaining only the low-frequency ( k= 0)
-portion of the spectrum of the sampled control input ˆic(t)i nE q .(18.159).
+采用式(18.144)给出的 $d_2$，式(18.141)可推广以允许电流编程变换器在 CCM 或 DCM 下运行：
 
-776 18 Current-Programmed Control
-1 kHz 10 kHz 100 kHz
--40
--20
-0
-20 Magnitude [dB]
-1 kHz 10 kHz 100 kHz
--180
--135
--90
--45
-0
- Phase [deg]
-Fig. 18.42 High-frequency magnitude and phase responses of Gic based on the sampled-data model for
-four values of the artiﬁcial ramp slope, Ma/M2= 0.1, 0.5, 1 and 5
-To illustrate magnitude and phase responses of the sampled-dataGic(s)i nE q .(18.168), con-
-sider a buck converter example operating at fs = 100 kHz and D= 0.5. The input dc voltage
-is Vg = 10 V , the output voltage is V= DVg = 5 V , and inductance is L= 5 μH. Values of
-the output ﬁlter capacitance and load do not aﬀect high-frequency control-to-inductor current
-responses. The inductor current slopes are M1= (Vg−V)/L= 1A/μs, and M2= V/L= 1A/μs.
-Since D= 0.5, the CPM controlled converter is stable for any Ma > 0. Magnitude and phase
-responses of the sampled-dataGic(s) are evaluated by replacings→jωin Eq. (18.168), and the
-results are shown in Fig.18.42 for four diﬀerent values of the artiﬁcial ramp slope,Ma/M2= 0.1,
-0.5, 1, and 5. In all cases, the magnitude responses start from 0 dB and phase responses start
-from 0◦, matching the responses expected based on the simple averaged small-signal model.
-For Ma/M2 = 0.1, α =−0.82, and the sampled-data frequency response exhibits peaking in
-the magnitude response and a sharp decline in the phase response from 0 ◦to−180◦around
-fs/2= 50 kHz. For Ma = 0, which corresponds to the period-doubling stability boundary, one
-may verify that the magnitude response goes to ∞at fs/2. The peaking in the magnitude re-
-sponse diminishes with increasing values of the artiﬁcial ramp slope. For very large Ma/M2,
-such as Ma/M2= 5i nF i g .18.42, the magnitude response starts to roll oﬀat a lower frequency,
-implying an eﬀectively reduced current control bandwidth.
-18.7.2 First-Order Approximation
-It can be veriﬁed that the predictions of the sampled-data model of Eq. ( 18.168) match ex-
-perimentally measured frequency responses very well. However, the “transfer function” of
-Eq. (18.168) is not a standard rational transfer function in s, and it does not oﬀer an intuitive
-design-oriented interpretation. It is therefore of interest to consider a rational transfer function
-approximation of G
-ic(s)i nE q . (18.168). Consider the ﬁrst-order Padé approximation [ 138]o f
-the term e−sTs ,
+$$d = \frac{2\left[ \langle v_c(t) \rangle_{T_s} (d + d_2) - R_f \langle i_L(t) \rangle_{T_s} \right]}{\dfrac{R_f}{L f_s}\left[ \langle v_1(t) \rangle_{T_s} + \langle v_2(t) \rangle_{T_s} \right] d_2 (d + d_2) + 2 V_a (d + d_2)} \tag{18.145}$$
 
-18.7 High-Frequency Dynamics of Current-Programmed Converters 777
-e−sTs ≈
-1−s
-ωs/π
-1+ s
-ωs/π
-(18.169)
-Note that the approximation includes a RHP zero and a pole at the same frequency fs/π.
-The magnitude response of the approximation is equal to 1 (0 dB) at all frequencies, exactly
-matching the magnitude response of e−jωTs at all frequencies. Substituting Eq. ( 18.169)i n t o
-Eq. (18.168) yields a ﬁrst-order rational transfer function approximation
-Gic(s)≈ 1
-1+ s
-ωhf
-(18.170)
-where
-fhf = 1−α
-1+ α
-fs
-π= M1+ M2
-2Ma+ M1−M2
-fs
-π (18.171)
-which is identical to the frequency response Gic(s) predicted by the more accurate averaged
-small-signal model given by Eq. ( 18.157). It follows that the more accurate averaged small-
-signal model of Sect. 18.3 is equivalent to the ﬁrst-order approximation of the sampled-data
-model.
-Figure 18.43 compares the magnitude and phase responses of the sampled-data model
-in Eq. ( 18.168) to the magnitude and phase responses of the ﬁrst-order approximation in
-Eq. (18.170) or, equivalently, Eq. ( 18.157), for the same buck converter example considered
-in Fig. 18.42, and for three values of the artiﬁcial ramp slope, Ma/M2 = 0.1, 0.5, and 5. For
-Ma/M2= 0.1, the ﬁrst-order approximation predicts a pole at 3.2 fs, which is a very poor approx-
-imation to the sampled-data model predictions. The high-frequency predictions of the ﬁrst-order
-1 kHz 10 kHz 100 kHz
--40
--20
-0
-20 Magnitude [dB]
-1 kHz 10 kHz 100 kHz
--180
--135
--90
--45
-0 Phase [deg]
-Fig. 18.43 Comparison of high-frequency Gic responses based on the sampled-data model and its ﬁrst-
-order approximation for three diﬀerent values of the artiﬁcial ramp slope, Ma/M2 = 0.1, 0.5, and 5. The
-ﬁrst-order approximation responses are identical to the predictions of the more accurate CPM model
+只要第二个子区间长度 $d_2$ 按式(18.144)计算，此关系对 CCM 和 DCM 均成立。表达式(18.145)用于组合 CCM/DCM 子电路 CPM 的实现。
 
-778 18 Current-Programmed Control
-approximation improve with increasing slope of the artiﬁcial ramp. For Ma = 0.5M2, which is
-a practical choice that guarantees stability for any duty cycle D, the example of Fig. 18.43 il-
-lustrates a very good match up to around fs/5. For large Ma/M2, such as Ma/M2 = 5, the
-magnitude and phase responses of the ﬁrst-order approximation or, equivalently, the more accu-
-rate averaged small-signal model, are in very good agreement with the sampled-data model at
-essentially all frequencies of interest.
-18.7.3 Second-Order Approximation
-As discussed in the previous subsection, the ﬁrst-order approximation does not predict CPM
-instability and it does not oﬀer accurate predictions of high-frequency responses in cases when
-a current-programmed converter operates close to the stability boundary. In this section, we
-show how a second-order rational transfer function approximation o ﬀers a way to accurately
-incorporate sampled-data eﬀects. The second-order Padé approximation [138]o ft h et e r me
-−sTs
-is given by
-e−sTs ≈
-1−π
-2
-s
-ωs/2+
-⎦ s
-ωs/2
-)2
-1+π
-2
-s
-ωs/2+
-⎦ s
-ωs/2
-)2 (18.172)
-The second-order approximation includes a pair of RHP zeroes and a pair of poles having the
-same Q factor and the same center frequency fs/2. As in the case of the ﬁrst-order approxima-
-tion, the magnitude response of the approximation is 1 (0 dB) at all frequencies. Substituting
-Eq. (18.172) into Eq. (18.168), yields a second-order rational transfer function approximation
-Gic(s)≈ 1
-1+π
-2
-1+ α
-1−α
-s
-ωs/2+
-⎦ s
-ωs/2
-)2 (18.173)
-or
-Gic(s)≈ 1
-1+ 1
-Qhf
-s
-ωs/2+
-⎦ s
-ωs/2
-)2 (18.174)
-where the Q-factor of the pair of poles in Gic(s)i s
-Qhf = 2
-π
-1−α
-1+ α = 2
-π
-M1+ M2
-2Ma+ M1−M2
-= 2
-π
-1
-1−2D+ 2D Ma
-M2
-(18.175)
-and the center frequency is at fs/2. At the stability boundary, α =−1 and Qhf →∞, which
-means that the second-order approximation given by Eq. (18.173) is capable of correctly predict-
-ing CPM instability. For the same buck converter example considered in Figs.18.42 and 18.43,
-Fig. 18.44 shows a comparison of the magnitude and phase responses of the second-order ap-
-proximation given by Eq. (18.173) and the sampled-data model given by Eq. (18.168)f o rt h r e e
-values of the artiﬁcial ramp slope, Ma/M2 = 0.1, 0.5, and 5. The second-order approximation
-matches predictions of the sampled-data model very well at all frequencies of interest, and for
-all values of the artiﬁcial ramp slope.
+### 18.5.3 仿真示例：电流编程控制降压变换器的频率响应
 
-18.8 Discontinuous Conduction Mode 779
-1 kHz 10 kHz 100 kHz
--40
--20
-0
-20 Magnitude [dB]
-1 kHz 10 kHz 100 kHz
--180
--135
--90
--45
-0
- Phase [deg]
-Fig. 18.44 Comparison of high-frequencyGic responses based on the sampled-data model and its second-
-order approximation for three diﬀerent values of the artiﬁcial ramp slope, Ma/M2= 0.1, 0.5, and 5
-The more accurate averaged small-signal model of Sect.18.3, which is equivalent to the ﬁrst-
-order approximation of the sampled-data model, can be extended to match predictions of the
-second-order approximation. As shown in [107], one approach to extending the more accurate
-model consists of replacing the modulator gain F
-m in Fig. 18.24 with a single-pole response
-Fm
-1+ s
-ωx
-(18.176)
-where Fm given by Eq. (18.74) remains the same as before, while the additional modulator pole
-frequency equals
-fx=π
-4
-⎦
-1−2D+ 2D Ma
-M2
-)
-fs (18.177)
-It can be shown that inclusion of the pole at fx results in high-frequency responses consistent
-with the second-order approximation of the sampled-data model. With this extension, the more
-accurate averaged small-signal model is capable of predicting CPM instability and of providing
-accurate predictions of CPM frequency responses at all frequencies of interest, and for all values
-of the artiﬁcial ramp slope M
-a. In practice, assuming an artiﬁcial ramp with a suﬃciently large
-slope Ma is applied, the analytical and simulation models developed in Sects.18.3 and 18.5 can
-be considered suﬃciently accurate.
-18.8 Discontinuous Conduction Mode
-A model of current-programmed converters operating in the discontinuous conduction mode
-is incorporated in the averaged simulation model described in Sect. 18.5.2. In this section, an
-analytical model for current-programmed DCM converters is derived using the averaged switch
+为说明 CPM 子电路的应用，考虑图18.32所示的降压变换器示例电路模型。为在 SPICE 中构建该平均电路模型，开关被替换为 CCM-DCM1 平均开关子电路。CPM 子电路的控制输入是独立电压源 $v_c$。三个受控电压源用于生成 CPM 子电路的其他输入。受控电压源 $E_i$ 与电感电流 $i_L$ 成正比。受控电压源 $E_1$ 等于 $v(1) - v(3)$，即晶体管导通、二极管关断的第一个子区间内加在电感上的电压 $\langle v_1(t) \rangle_{T_s}$。受控电压源 $E_2$ 等于 $v(3)$，即晶体管关断、二极管导通的第二个子区间内加在电感上的电压 $\langle v_2(t) \rangle_{T_s}$。
 
-780 18 Current-Programmed Control
-+
-L
-CR
-+
-v(t)vg(t)
-iL(t)
-Switch network
-+
-v1(t) v2(t)
-+
-i1(t) i2(t)
-Fig. 18.45 Current-programmed DCM buck–boost converter example
-modeling approach of Sect. 15.2. It is found that the average transistor voltage and current
-follow a power sink characteristic, while the average diode voltage and current obey a power
-source characteristic. Perturbation and linearization of these characteristics leads to a small-
-signal equivalent circuit that models CPM DCM converters. The basic DCM CPM buck, boost,
-and buck–boost converters essentially exhibit single-pole transfer functions: the second pole and
-the right half-plane zero appear at frequencies near to or greater than the switching frequency,
-owing to the small value of L in DCM.
-A DCM CPM buck–boost converter example is analyzed here. However, Eqs. ( 18.178)
-to (18.195) are written in general form, and apply equally well to DCM CPM buck and boost
-converters. The schematic of a buck–boost converter is illustrated in Fig. 18.45. The terminal
-waveforms of the switch network are deﬁned as shown: v
-1(t) and i1(t) are the transistor wave-
-forms, while v2(t) and i2(t) are the diode waveforms. Figure18.46 illustrates typical DCM wave-
-forms, for current-programmed control with an artiﬁcial ramp having slope−ma. The inductor
-current is zero at the beginning of each switching period. By solution of the transistor conduc-
-tion subinterval, the programmed current ipk can be related to the transistor duty cycle d1 by
-ic= ipk+ mad1Ts
-= (m1+ ma)d1Ts (18.178)
-Solution for d1 leads to
-d1(t)= ic(t)
-(m1+ ma)Ts
-(18.179)
-The average transistor current is found by integrating the i1(t) waveform of Fig. 18.46 over one
-switching period:
-⟨i1(t)⟩Ts = 1
-Ts
-∫ Ts
-0
-i1(τ)dτ= q1
-Ts
-(18.180)
-The total area q1 is equal to one-half of the peak currentipk, multiplied by the subinterval length
-d1Ts. Hence,
-⟨i1(t)⟩Ts = 1
-2ipk(t)d1(t) (18.181)
+SPICE 交流仿真在控制输入直流值等于 $V_c = 1.4\,\text{V}$ 所对应的静态工作点处进行。在该静态工作点，开关占空比为 $D = 0.676$，直流输出电压为 $V = 8.1\,\text{V}$，电感电流的直流分量为 $I_L = 0.81\,\text{A}$。变换器工作于 CCM。
 
-18.8 Discontinuous Conduction Mode 781
-Fig. 18.46 Waveforms, CPM DCM buck–boost example
-Elimination of ipk and d1, to express the average transistor current as a function of ic, leads to
-⟨i1(t)⟩Ts =
-1
-2 Li2
-c fs
-⟨v1(t)⟩Ts
-⎦
-1+ ma
-m1
-)2 (18.182)
-Finally, Eq. (18.182) can be rearranged to obtain the averaged switch network input port rela-
-tionship:
-⟨i1(t)⟩Ts⟨v1(t)⟩Ts =
-1
-2 Li2
-c fs
-⎦
-1+ ma
-m1
-)2 =⟨p(t)⟩Ts (18.183)
+![源页 p.769](../assets/page-snapshots/chapter-18/page-769.png)
 
-782 18 Current-Programmed Control
-Fig. 18.47 CPM DCM buck–boost converter model, derived via averaged switch modeling
-Thus, the average transistor waveforms obey a power sink characteristic. When ma = 0, then
-the average power⟨p(t)⟩TS is a function only of L, ic, and fs. The presence of the artiﬁcial ramp
-causes⟨p(t)⟩TS to additionally depend on the converter voltages, via m1.
-The power sink characteristic can also be explained via inductor energy arguments. During
-the ﬁrst subinterval, the inductor current increases from 0 to ipk. In the process, the inductor
-stores the following energy:
-W= 1
-2 Li2
-pk (18.184)
-The energy W is transferred from the power input vg, through the switch network input port,
-to the inductor, once per switching period. This energy transfer process accounts for the power
-ﬂow
-⟨p(t)⟩Ts = Wf s= 1
-2 Li2
-pk fs (18.185)
-The switch network input port, that is, the transistor terminals, can therefore be modeled by a
-power sink element, as in Fig. 18.47.
-The average switch network output port current, that is, the average diode current, is
-⟨i2(t)⟩Ts = 1
-Ts
-∫ Ts
-0
-i2(τ)dτ= q2
-Ts
-(18.186)
-By inspection of Fig. 18.46, the area q2 is given by
-q2= 1
-2ipkd2Ts (18.187)
-The duty cycle d2 is determined by the time required for the inductor current to return to zero,
-during the second subinterval. By arguments similar to those used to derive Eq. ( 15.19), the
-duty cycle d2 can be found as follows:
-d2(t)= d1(t)⟨v1(t)⟩Ts
-⟨v2(t)⟩Ts
-(18.188)
-Substitution of Eqs. (18.188), (18.187), and (18.185) into Eq. (18.186) yields
-⟨i2(t)⟩Ts = ⟨p(t)⟩Ts
-⟨v2(t)⟩Ts
-(18.189)
+图18.32 CPM 降压变换器示例：平均电路模型
 
-18.8 Discontinuous Conduction Mode 783
-Fig. 18.48 Steady-state model of the CPM DCM buck–boost converter
-The output port of the averaged switch network is therefore described by the relationship
-⟨i2(t)⟩Ts⟨v2(t)⟩Ts =
-1
-2 Li2
-c (t) fs
-⎦
-1+ ma
-m1
-)2 =⟨p(t)⟩Ts (18.190)
-In the averaged model, the diode can be replaced by a power source of value⟨p(t)⟩Ts , equal to the
-power apparently consumed at the switch network input port. During the second subinterval, the
-inductor releases all of its stored energy through the diode, to the converter output. This results
-in an average power ﬂow of value⟨p(t)⟩Ts .
-A CPM DCM buck–boost averaged model is therefore as given in Fig.18.47. In this model,
-the transistor is simply replaced by a power sink of value ⟨p(t)⟩Ts , while the diode is replaced
-by a power source also of value⟨p(t)⟩Ts .
-The steady-state equivalent circuit model of the CPM DCM buck–boost converter is ob-
-tained by letting the inductor and capacitor tend to short- and open-circuits, respectively. The
-model of Fig. 18.48 is obtained. The steady-state output voltage V can now be determined by
-equating the dc load power to the converter average power ⟨p(t)⟩Ts . For a resistive load, one
-obtains
-V2
-R = P (18.191)
-where the steady-state value of⟨p(t)⟩Ts is given by
-P=
-1
-2 LI2
-c (t) fs
-⎦
-1+ Ma
-M1
-)2 (18.192)
-and where Ic is the steady-state value of the control input ic(t). Solution for V yields the follow-
-ing result
-V=
-√
-PR= Ic
-√ RL fs
-2
-⎦
-1+ Ma
-M1
-)2 (18.193)
-for the case of a resistive load.
+控制-输出传递函数 $G_{vc}(s) = \hat{v}/\hat{v}_c$ 和 $G_{vd}(s) = \hat{v}/\hat{d}$ 的幅值和相位响应如图18.33所示。占空比-输出电压传递函数 $G_{vd}(s)$ 呈现出常见的二阶高 $Q$ 响应。在共轭复数极点对的中心频率附近，幅值响应出现峰值，相位从 $0°$ 急剧变化到 $-180°$。
 
-784 18 Current-Programmed Control
-Averaged models of the DCM CPM buck, boost, and other converters can be found in a
-similar manner. In each case, the average transistor waveforms are shown to follow a power
-sink characteristic, while the average diode waveforms follow a power source characteristic.
-The resulting equivalent circuits of the CPM DCM buck and boost converters are illustrated in
-Fig. 18.49. In each case, the average power is given by
-⟨p(t)⟩Ts =
-1
-2 Li2
-c (t) fs
-⎦
-1+ ma
-m1
-)2 (18.194)
-with m1 deﬁned as in Eq. (18.30).
-Steady-state characteristics of the DCM CPM buck, boost, and buck–boost converters are
-summarized in Table 18.6. In each case, the dc load power is Pload = VI and P is given by
-Eq. (18.192). The conditions for operation of a current-programmed converter in the discontin-
-uous conduction mode can be expressed as follows:
-|I|>|Icrit| for CCM
-|I|<|Icrit| for DCM (18.195)
-where I is the dc load current. The critical load current at the CCM-DCM boundary, Icrit,i s
-expressed as a function of Ic and the voltage conversion ratio M= V/Vg in Table18.6.
-Table 18.6 Steady-state DCM current-programmed characteristics of basic converters
-Converter MI crit Stability range when ma = 0
-Buck Pload−P
-Pload
-1
-2 (Ic−MmaTs)0 ≤M< 2
-3
-Boost Pload
-Pload−P
-⎦
-Ic−M−1
-M maTs
-)
-2M 0≤D≤1
-Buck–boost Depends on load characteristic:
-Pload = P
-⎦
-Ic−M
-M−1 maTs
-)
-2(M−1) 0≤D≤1
-In the discontinuous conduction mode, the inductor current is zero at the beginning and end
-of each switching period. As a result, the current-programmed controller does not exhibit the
-type of instability described in Sect. 18.2. The current programmed controllers of DCM boost
-and buck–boost converters are stable for all duty cycles with no artiﬁcial ramp. However, the
-CPM DCM buck converter exhibits a diﬀerent type of low-frequency instability when M> 2/3
-and m
-a = 0 that arises because the dc output characteristic is nonlinear and can exhibit two
-equilibrium points when the converter drives a resistive load. The stability range can be extended
-to 0≤D≤1 by addition of an artiﬁcial ramp having slope ma > 0.086m2, or by addition of
-output voltage feedback.
-```
+图18.33 降压变换器示例中，CPM 控制与占空比控制的控制-输出频率响应比较
+
+![源页 p.770](../assets/page-snapshots/chapter-18/page-770.png)
+
+相比之下，CPM 控制-输出响应具有一个主低频极点。在很宽的频率范围内相位滞后约为 $-90°$。一个高频极点在更高频率处贡献额外的相位滞后。图18.33的频率响应说明了 CPM 控制相对于占空比控制的一个优点：由于控制-输出频率响应由单个低频极点主导，在 CPM 控制的功率变换器周围闭合宽带宽的外电压反馈环路，比在以占空比为控制输入的变换器周围闭合要容易得多。比例-积分（PI）控制器常用于电流编程稳压器中。
+
+CPM 控制的另一个优点是对输入电压扰动的抑制。降压变换器示例中占空比控制和 CPM 控制的线路-输出频率响应比较如图18.34所示。占空比控制的线路-输出传递函数 $G_{vg}(s)$ 的直流渐近值近似等于占空比 $D = 0.676$。在 L-C 滤波器的转折频率处出现谐振极点。采用电流编程控制的线路-输出传递函数 $G_{vg\text{-cpm}}(s)$ 显著减小，在所关心频段内表现出超过 30 dB 的附加衰减。需再次指出，图18.34中的传递函数 $G_{vg\text{-cpm}}(s)$ 不能由18.1节的简单模型预测；必须采用18.3节的更精确模型。
+
+图18.34 降压变换器示例中，CPM 控制与占空比控制的线路-输出频率响应比较
+
+比较占空比控制与 CPM 控制下变换器的输出阻抗也很有意义。结果如图18.35所示。图中绘制的输出阻抗包含了 $10\,\Omega$ 的负载电阻。对于占空比控制，输出阻抗的直流渐近值由 $0.05\,\Omega$ 的电感绕线电阻主导。电感在 200 Hz 附近开始变得显著。在输出 LC 滤波器的谐振频率处，占空比控制变换器的输出阻抗出现明显的峰值。在更高频率处，输出阻抗由滤波电容的阻抗主导，并随频率升高而下降。
+
+在电流编程变换器中，低频阻抗较高，等于负载电阻与 CPM 输出电阻的并联。由于 CPM 控制引入的无损阻尼，串联电感不影响
+
+![源页 p.771](../assets/page-snapshots/chapter-18/page-771.png)
+
+输出阻抗。18.1节的简单模型预测电路的电感支路由电流源驱动；这实际上消除了电感对输出阻抗的影响。图18.35的曲线是用更精确的模型生成的；尽管如此，输出阻抗仍能被简单模型准确预测。可以看出，电流编程在低频处显著增大了变换器的输出阻抗。在高频处，占空比控制和 CPM 控制变换器的输出阻抗具有相同的渐近线。
+
+图18.35 降压变换器示例中，CPM 控制与占空比控制的输出阻抗比较
+
+## 18.6 电流编程变换器周围的电压反馈环路
+
+如图18.1和18.3所示，采用电流编程控制的变换器系统通常包含一个外电压反馈环路，其目的是调节变换器输出电压。如第9章所述，检测输出电压并与参考量比较。误差信号经电压环路补偿器处理，输出一个控制信号。在第9章的占空比控制变换器中，该控制信号是脉宽调制器的输入，脉宽调制器产生一个占空比与 PWM 控制输入成正比的开关控制信号。在 CPM 控制变换器中，电压环路补偿器生成的控制信号是 CPM 控制器的控制输入 $v_c = R_f i_c$。
+
+### 18.6.1 系统模型
+
+包含外电压环路的完整系统模型如图18.36所示。该模型与图9.2的系统模型非常相似，只是脉宽调制器模型被 CPM 控制器模型替代。为设计电压环路补偿器 $G_{cv}(s)$，方便起见利用 CPM 控制变换器的闭环传递函数 $G_{vc}(s) = \hat{v}/\hat{i}_c$。电压反馈环路的方框图如图18.37所示。
+
+![源页 p.772](../assets/page-snapshots/chapter-18/page-772.png)
+
+图18.36 对包含外电压反馈环路的 CPM 控制变换器建模的方框图
+
+图18.37 外电压反馈环路模型
+
+$G_{cv}(s)$ 的设计就是运用第9章的技术来整定电压环路增益
+
+$$T_v = H\, G_{cv}(s)\, \frac{1}{R_f}\, G_{vc}(s) \tag{18.146}$$
+
+使之达到目标穿超频率 $f_{cv}$ 和稳定裕度。
+
+将电压反馈环路闭合于电流编程变换器之后，闭环输入阻抗 $Z_i$ 可由18.4.4节的结果通过反馈定理求得。如17.5.2节所述，闭环输入导纳 $Y_i = 1/Z_i$ 可由下式求得：
+
+$$Y_i = \frac{1}{Z_i} = \frac{1}{Z_{N\text{-cpm}}}\, \frac{T_v}{1 + T_v} + \frac{1}{Z_{D\text{-cpm}}}\, \frac{1}{1 + T_v} \tag{18.147}$$
+
+其中 $Z_{N\text{-cpm}}$ 和 $Z_{D\text{-cpm}}$ 的表达式见18.4.4节。按照17.5.2节的讨论，闭环输入阻抗的结果可用于评估当带电压反馈环路的 CPM 变换器包含输入滤波器时，或更一般地当它由具有非零输出阻抗的电源供电时的系统稳定性。
+
+### 18.6.2 设计示例
+
+为说明外电压反馈环路的设计，考虑图18.32所示的 CPM 控制降压变换器，并按图18.1所示加入电压环路。系统小信号模型如图18.36所示。本例中，参考电压为 $V_{ref} = 3\,\text{V}$，电压检测增益设为 $H = 0.375$，从而输出直流电压理想地调节到
+
+$$V = V_{ref}/H = 8\,\text{V}$$
+
+静态工作点和小信号模型参数与18.5.3节所讨论的 CPM 降压变换器大致相同：$D = 0.67$，$I_L = V/R = 0.8\,\text{A}$，$M_a/M_2 = 0.525$，$F_m = 3.2\,\text{A}^{-1}$，$F_g = 0.016\,\Omega^{-1}$，$F_v = 0$。表18.3给出了更精确 CPM 模型预测的闭环控制-输出电压传递函数 $G_{vc}(s)$ 的表达式，
+
+$$G_{vc}(s) = G_{c0}\, \frac{1}{1 + \dfrac{s}{Q_c \omega_c} + \left( \dfrac{s}{\omega_c} \right)^2} \approx G_{c0}\, \frac{1}{\left( 1 + \dfrac{s}{\omega_{p1}} \right)\left( 1 + \dfrac{s}{\omega_{hf}} \right)} \tag{18.148}$$
+
+$$G_{c0} = \frac{V}{D}\, \frac{F_m}{1 + \dfrac{F_m V}{D R}} = 7.92\,\Omega \quad\rightarrow\quad 18\,\text{dB}\Omega$$
+
+$$f_c = \frac{1}{2\pi}\, \frac{1}{\sqrt{LC}}\, \sqrt{1 + \frac{F_m V}{D R}} = 5.9\,\text{kHz}$$
+
+$$Q_c = R\sqrt{\frac{C}{L}}\, \frac{\sqrt{1 + \dfrac{F_m V}{D R}}}{1 + \dfrac{R C F_m V}{D L}} = 0.034$$
+
+$$f_{p1} = Q_c f_c = 201\,\text{Hz}$$
+
+$$f_{hf} = f_c / Q_c = 174\,\text{kHz}$$
+
+![源页 p.773](../assets/page-snapshots/chapter-18/page-773.png)
+
+如图18.33所示，$G_{vc}(s)$ 在很宽的频率范围内呈现单极点响应，因此用简单的比例-积分（PI）补偿器即可较容易地设计出具有高穿超频率 $f_{cv}$ 的宽带宽电压反馈环路，
+
+$$G_{cv}(s) = G_{cm}\, \left( 1 + \frac{\omega_{zv}}{s} \right) \tag{18.149}$$
+
+采用式(18.149)的 PI 补偿器时，式(18.146)的电压环路增益 $T_v$ 的幅值响应示意图如图18.38所示。假设 $f_{zv} < f_{cv} < f_{hf}$，幅值渐近线在穿超频率附近具有 $-20\,\text{dB/dec}$ 的斜率，
+
+$$\|T_v\| \to \frac{H}{R_f}\, G_{c0}\, G_{cm}\, \frac{\omega_{p1}}{\omega} \tag{18.150}$$
+
+由式(18.150)可知，可选择增益 $G_{cm}$ 以获得所需的穿超频率 $f_{cv}$，
+
+$$G_{cm} = \frac{R_f}{H\, G_{c0}}\, \frac{f_{cv}}{f_{p1}} \tag{18.151}$$
+
+为实现宽带宽电压调节，选取 $f_{cv} = 40\,\text{kHz} = f_s/5$。式(18.151)给出 $G_{cm} = 67.1$。相位裕度 $\phi_v$ 可根据图18.38所示极点和零点的相位贡献来评估。考虑到 $f_{p1} \ll f_{cv}$，有
+
+$$\phi_v = 180° + \angle T_v(j\omega) = 180° - 90° - 90° + \tan^{-1}\frac{f_{cv}}{f_{zv}} - \tan^{-1}\frac{f_{cv}}{f_{hf}} \tag{18.152}$$
+
+![源页 p.774](../assets/page-snapshots/chapter-18/page-774.png)
+
+图18.38 采用 PI 补偿器 $G_{cv}(s)$ 时环路增益 $T_v$ 的幅值响应示意图
+
+图18.39 18.6.2节设计示例中的环路增益 $T_v$
+
+代入数值，$\tan^{-1}(f_{cv}/f_{hf}) = 13°$。式(18.152)可用于选择 $f_{zv}$ 以获得所需的相位裕度。例如，取 $f_{zv} = f_{cv}/3$ 可得
+
+$$\phi_v = \tan^{-1}\frac{f_{cv}}{f_{zv}} - \tan^{-1}\frac{f_{cv}}{f_{hf}} = 72° - 13° = 59° \tag{18.153}$$
+
+加入此 PI 补偿器 $G_{cv}(s)$ 后，所得电压环路增益 $T_v$ 如图18.39所示。
+
+## 18.7 电流编程变换器的高频动态特性
+
+18.2节的简单模型预测电感电流 $i_L$ 直接受电流命令 $i_c$ 控制，这意味着小信号控制-电流传递函数在所有频率上均等于 1，
+
+$$G_{ic}(s) = \frac{\hat{i}_L}{\hat{i}_c} \approx 1 \tag{18.154}$$
+
+![源页 p.775](../assets/page-snapshots/chapter-18/page-775.png)
+
+让我们将这一简单结果与18.3节更精确的平均小信号模型的高频预测进行比较。在高频下，电容电压的小信号扰动变得可以忽略。因此 $\hat{m}_1 \approx 0$，$\hat{m}_2 \approx 0$，电感电流斜率 $m_1$ 和 $m_2$ 可视为常数，分别等于未扰动的直流值 $M_1$ 和 $M_2$。在高频下，式(18.73)中的小信号占空比扰动变为
+
+$$\hat{d}(t) \approx F_m\left[ \hat{i}_c(t) - \hat{i}_L(t) \right] \tag{18.155}$$
+
+在一个含双开关、单电感的 PWM 变换器中，忽略电压扰动后，占空比-电感电流传递函数可写为
+
+$$G_{id} = \frac{\hat{i}_L}{\hat{d}} \approx \frac{M_1 + M_2}{s} \tag{18.156}$$
+
+将式(18.156)和(18.155)联立，18.3节的更精确模型给出高频下控制-电流传递函数的预测
+
+$$G_{ic}(s) = \frac{\hat{i}_L}{\hat{i}_c} \approx \frac{1}{1 + \dfrac{s}{\omega_{hf}}} \tag{18.157}$$
+
+其中
+
+$$f_{hf} = \frac{1}{2\pi}\, \frac{1}{F_m (M_1 + M_2)} = \frac{M_1 + M_2}{2 M_a + M_1 - M_2}\, \frac{f_s}{\pi} \tag{18.158}$$
+
+注意，式(18.114)中曾得到完全相同的高频极点结果。无论是忽略电感动态的简单模型，还是暗示高频下单极点响应的更精确模型，均未预测到不稳定性或18.2节讨论的人工斜坡的必要性。这是因为平均小信号模型未考虑变换器的开关过程和调制器的采样过程，而这些过程会在电流编程变换器中引起各种离散时间现象。本节旨在用采样数据建模技术考察 CPM 控制变换器的高频动态特性，并将采样数据模型的预测与平均小信号模型的预测进行比较。
+
+### 18.7.1 采样数据模型
+
+图18.40给出了电流编程变换器在控制电流 $i_c$ 出现扰动 $\hat{i}_c$ 时的波形，初始电感电流扰动记为 $\hat{i}_L[n-1]$。在 $t = D T_s$ 处，响应 $\hat{i}_c$ 和 $\hat{i}_L[n-1]$ 扰动，占空比 $D$ 受到扰动 $\hat{d}[n]$，电感电流扰动在下一个开关周期 $T_s$ 内取新值 $\hat{i}_L[n]$。采样数据"传递函数" $G_{ic} = \hat{i}_L/\hat{i}_c$ 的推导遵循文献[77]描述的方法，包括：对 $\hat{i}_c(t)$ 采样以获得离散时间样本 $\hat{i}_c[n]$，导出 $\hat{i}_c[n]$ 与 $\hat{i}_L[n]$ 之间的离散时间关系，以及求取一个等效保持传递函数来建模由样本 $\hat{i}_L[n]$ 得到连续时间电感电流扰动 $\hat{i}_L(t)$ 的过程。
+
+![源页 p.776](../assets/page-snapshots/chapter-18/page-776.png)
+
+图18.40 电流编程变换器中的稳态波形和受扰波形
+
+首先，$\hat{i}_c(t)$ 的样本的拉普拉斯变换等于
+
+$$\frac{1}{T_s}\, \sum_{\substack{k \to +\infty \\ k \to -\infty}} \hat{i}_c(s - j k \omega_s) \tag{18.159}$$
+
+其中 $\hat{i}_c(s)$ 是连续时间控制电流 $\hat{i}_c(t)$ 的拉普拉斯变换。
+
+接下来，推导 $\hat{i}_c[n]$ 与 $\hat{i}_L[n]$ 之间的离散时间关系。采样时刻 $t = D T_s$ 附近的波形细节如图18.41所示。由波形的几何关系，下一个电感电流扰动 $\hat{i}_L[n]$ 可用前一个扰动 $\hat{i}_L[n-1]$、占空比扰动 $\hat{d}[n]$ 以及电感电流斜率 $m_1$ 和 $m_2$ 表示：
+
+$$\hat{i}_L[n] = \hat{i}_L[n-1] + (m_1 + m_2)\, \hat{d}[n]\, T_s \tag{18.160}$$
+
+类似地，$\hat{i}_c[n]$ 可与 $\hat{i}_L[n-1]$、$\hat{d}[n]$、$m_1$ 和 $m_a$ 联系起来：
+
+$$\hat{i}_c[n] = \hat{i}_L[n-1] + (m_1 + m_a)\, \hat{d}[n]\, T_s \tag{18.161}$$
+
+从式(18.160)和(18.161)消去 $\hat{d}[n]$，得到 $\hat{i}_c[n]$ 与 $\hat{i}_L[n]$ 之间的离散时间关系
+
+$$\hat{i}_L[n] = \alpha\, \hat{i}_L[n-1] + (1 - \alpha)\, \hat{i}_c[n] \tag{18.162}$$
+
+其中系数 $\alpha$ 取决于电感电流和人工斜坡的斜率，
+
+$$\alpha = \frac{-m_2 - m_a}{m_1 + m_a} \tag{18.163}$$
+
+![源页 p.777](../assets/page-snapshots/chapter-18/page-777.png)
+
+图18.41 采样时刻 $t = D T_s$ 附近的稳态和受扰电感电流波形细节
+
+它与18.2节稳定性分析中使用的式(18.54)相同。
+
+对式(18.162)应用 $z$ 变换[176]，得到
+
+$$\hat{i}_L(z) = \alpha\, \hat{i}_L(z)\, z^{-1} + (1 - \alpha)\, \hat{i}_c(z) \tag{18.164}$$
+
+由此得到离散时间 $z$ 域传递函数
+
+$$G_{ic}(z) = \frac{\hat{i}_L(z)}{\hat{i}_c(z)} = \frac{1 - \alpha}{1 - \alpha\, z^{-1}} \tag{18.165}$$
+
+一个离散时间系统稳定的充要条件是所有极点均位于复 $z$ 平面单位圆内。由于传递函数 $G_{ic}(z)$ 在 $z = \alpha$ 处有一极点，稳定性条件为
+
+$$|\alpha| < 1 \tag{18.166}$$
+
+这与式(18.55)给出的稳定性条件相同。
+
+如图18.40所示，作为对离散时间扰动 $\hat{i}_L[n]$ 的响应，连续时间电感电流扰动 $\hat{i}_L(t)$ 是一个幅度为 $\hat{i}_L[n]$、宽度为 $T_s$ 的脉冲。因此，对应的等效保持的传递函数等于零阶保持器[176]的传递函数，
+
+$$\frac{1 - e^{-s T_s}}{s} \tag{18.167}$$
+
+现在可将式(18.165)和(18.167)合并，得到采样数据"传递函数"的表达式
+
+$$G_{ic}(s) = \frac{\hat{i}_L}{\hat{i}_c} = \frac{1 - \alpha}{1 - \alpha\, e^{-s T_s}}\, \frac{1 - e^{-s T_s}}{s T_s} \tag{18.168}$$
+
+表达式的第一部分由式(18.165)将 $z^{-1}$ 替换为 $e^{-s T_s}$ 得到，这基于这样一个事实：因子 $z^{-1}$ 对应于将信号延迟 $T_s$，而信号延迟 $T_s$ 后的拉普拉斯变换等于原信号拉普拉斯变换乘以 $e^{-s T_s}$。表达式的第二部分是式(18.167)中等效保持的传递函数，而分母中的 $T_s$ 来源于采样过程并仅保留受扰控制输入 $\hat{i}_c(t)$ 频谱的低频（$k = 0$）部分，见式(18.159)。
+
+![源页 p.778](../assets/page-snapshots/chapter-18/page-778.png)
+
+图18.42 基于采样数据模型的 $G_{ic}$ 的高频幅值和相位响应，对应人工斜坡斜率的四个取值 $M_a/M_2 = 0.1$、$0.5$、$1$ 和 $5$
+
+为说明式(18.168)中采样数据 $G_{ic}(s)$ 的幅值和相位响应，考虑一个工作于 $f_s = 100\,\text{kHz}$、$D = 0.5$ 的降压变换器示例。输入直流电压 $V_g = 10\,\text{V}$，输出电压 $V = D V_g = 5\,\text{V}$，电感 $L = 5\,\mu\text{H}$。输出滤波电容和负载的取值不影响高频控制-电感电流响应。电感电流斜率为 $M_1 = (V_g - V)/L = 1\,\text{A}/\mu\text{s}$，$M_2 = V/L = 1\,\text{A}/\mu\text{s}$。由于 $D = 0.5$，CPM 控制变换器对任意 $M_a > 0$ 均稳定。通过在式(18.168)中替换 $s \to j\omega$ 来计算采样数据 $G_{ic}(s)$ 的幅值和相位响应，结果如图18.42所示，对应人工斜坡斜率的四个不同取值 $M_a/M_2 = 0.1$、$0.5$、$1$、$5$。在所有情形中，幅值响应均从 0 dB 起始，相位响应均从 $0°$ 起始，与简单平均小信号模型预期的响应一致。
+
+对于 $M_a/M_2 = 0.1$，$\alpha = -0.82$，采样数据频率响应在 $f_s/2 = 50\,\text{kHz}$ 附近幅值响应出现峰值，相位响应从 $0°$ 急剧下降到 $-180°$。对于 $M_a = 0$（对应倍周期分岔稳定性边界），可验证幅值响应在 $f_s/2$ 处趋于无穷大。幅值响应的峰值随人工斜坡斜率增大而减小。对于很大的 $M_a/M_2$（如图18.42中 $M_a/M_2 = 5$），幅值响应在更低频率处开始滚降，意味着电流控制带宽的有效降低。
+
+### 18.7.2 一阶近似
+
+可以验证，式(18.168)的采样数据模型的预测与实测频率响应非常吻合。然而，式(18.168)的"传递函数"不是 $s$ 的标准有理传递函数，不提供直观的面向设计的解释。因此，考虑 $G_{ic}(s)$（式18.168）的有理传递函数近似是有意义的。考察 $e^{-s T_s}$ 项的一阶 Padé 近似[138]，
+
+$$e^{-s T_s} \approx \frac{1 - \dfrac{s}{\omega_s/\pi}}{1 + \dfrac{s}{\omega_s/\pi}} \tag{18.169}$$
+
+![源页 p.779](../assets/page-snapshots/chapter-18/page-779.png)
+
+注意该近似包含一个右半平面（RHP）零点和一个同频率 $f_s/\pi$ 处的极点。近似的幅值响应在所有频率上均等于 1（0 dB），与 $e^{-j\omega T_s}$ 的幅值响应在所有频率上完全吻合。将式(18.169)代入式(18.168)，得到一阶有理传递函数近似
+
+$$G_{ic}(s) \approx \frac{1}{1 + \dfrac{s}{\omega_{hf}}} \tag{18.170}$$
+
+其中
+
+$$f_{hf} = \frac{1 - \alpha}{1 + \alpha}\, \frac{f_s}{\pi} = \frac{M_1 + M_2}{2 M_a + M_1 - M_2}\, \frac{f_s}{\pi} \tag{18.171}$$
+
+它与18.3节更精确平均小信号模型给出的式(18.157)所预测的频率响应一致。由此可见，18.3节的更精确平均小信号模型等价于采样数据模型的一阶近似。
+
+图18.43比较了式(18.168)采样数据模型与式(18.170)（或等价地式(18.157)）一阶近似的幅值和相位响应，采用与图18.42相同的降压变换器示例，并取人工斜坡斜率的三个值 $M_a/M_2 = 0.1$、$0.5$、$5$。对于 $M_a/M_2 = 0.1$，一阶近似预测极点位于 $3.2 f_s$，这是对采样数据模型预测的非常差的近似。
+
+![源页 p.780](../assets/page-snapshots/chapter-18/page-780.png)
+
+图18.43 基于采样数据模型及其一阶近似的 $G_{ic}$ 高频响应比较，对应人工斜坡斜率的三个不同取值 $M_a/M_2 = 0.1$、$0.5$、$5$。一阶近似响应与更精确 CPM 模型的预测一致
+
+一阶近似的精度随人工斜坡斜率增大而提高。对于 $M_a = 0.5 M_2$（这是一个保证任意占空比 $D$ 下均稳定的实用选择），图18.43的示例表明直到约 $f_s/5$ 处都非常吻合。对于很大的 $M_a/M_2$（如 $M_a/M_2 = 5$），一阶近似（或等价地更精确平均小信号模型）的幅值和相位响应在基本上所有关心频段内都与采样数据模型非常吻合。
+
+### 18.7.3 二阶近似
+
+如上一小节所述，一阶近似既不能预测 CPM 不稳定性，也不能在电流编程变换器接近稳定性边界运行时给出高频响应的准确预测。本节展示二阶有理传递函数近似如何提供一种准确纳入采样数据效应的方法。$e^{-s T_s}$ 项的二阶 Padé 近似[138]为
+
+$$e^{-s T_s} \approx \frac{1 - \dfrac{\pi}{2}\, \dfrac{s}{\omega_s/2} + \left( \dfrac{s}{\omega_s/2} \right)^2}{1 + \dfrac{\pi}{2}\, \dfrac{s}{\omega_s/2} + \left( \dfrac{s}{\omega_s/2} \right)^2} \tag{18.172}$$
+
+二阶近似包含一对 RHP 零点和一对极点，它们具有相同的 $Q$ 值和相同的中心频率 $f_s/2$。与一阶近似相同，近似的幅值响应在所有频率上均为 1（0 dB）。将式(18.172)代入式(18.168)，得到二阶有理传递函数近似
+
+$$G_{ic}(s) \approx \frac{1}{1 + \dfrac{\pi}{2}\, \dfrac{1 + \alpha}{1 - \alpha}\, \dfrac{s}{\omega_s/2} + \left( \dfrac{s}{\omega_s/2} \right)^2} \tag{18.173}$$
+
+即
+
+$$G_{ic}(s) \approx \frac{1}{1 + \dfrac{1}{Q_{hf}}\, \dfrac{s}{\omega_s/2} + \left( \dfrac{s}{\omega_s/2} \right)^2} \tag{18.174}$$
+
+其中 $G_{ic}(s)$ 中极点对的 $Q$ 值为
+
+$$Q_{hf} = \frac{2}{\pi}\, \frac{1 - \alpha}{1 + \alpha} = \frac{2}{\pi}\, \frac{M_1 + M_2}{2 M_a + M_1 - M_2} = \frac{2}{\pi}\, \frac{1}{1 - 2 D + 2 D\, \dfrac{M_a}{M_2}} \tag{18.175}$$
+
+中心频率位于 $f_s/2$。在稳定性边界处，$\alpha = -1$，$Q_{hf} \to \infty$，这意味着式(18.173)给出的二阶近似能够正确预测 CPM 不稳定性。对于图18.42和18.43中所考虑的同一降压变换器示例，图18.44比较了式(18.173)给出的二阶近似与式(18.168)给出的采样数据模型的幅值和相位响应，对应人工斜坡斜率的三个值 $M_a/M_2 = 0.1$、$0.5$、$5$。二阶近似在所有关心频段内、对所有人工斜坡斜率取值均与采样数据模型的预测非常吻合。
+
+![源页 p.781](../assets/page-snapshots/chapter-18/page-781.png)
+
+图18.44 基于采样数据模型及其二阶近似的 $G_{ic}$ 高频响应比较，对应人工斜坡斜率的三个不同取值 $M_a/M_2 = 0.1$、$0.5$、$5$
+
+18.3节的更精确平均小信号模型（等价于采样数据模型的一阶近似）可以扩展以匹配二阶近似的预测。如文献[107]所示，扩展更精确模型的一种方法是将图18.24中的调制器增益 $F_m$ 替换为单极点响应
+
+$$\frac{F_m}{1 + \dfrac{s}{\omega_x}} \tag{18.176}$$
+
+其中 $F_m$ 仍由式(18.74)给出，而附加的调制器极点频率为
+
+$$f_x = \frac{\pi}{4}\left( 1 - 2 D + 2 D\, \frac{M_a}{M_2} \right) f_s \tag{18.177}$$
+
+可以证明，纳入 $f_x$ 处的极点后所得高频响应与采样数据模型的二阶近似一致。经过这一扩展，更精确的平均小信号模型能够预测 CPM 不稳定性，并能在所有关心频段内、对所有人工斜坡斜率 $M_a$ 取值给出 CPM 频率响应的准确预测。在实际应用中，只要施加具有足够大斜率 $M_a$ 的人工斜坡，18.3和18.5节开发的解析与仿真模型即可认为足够精确。
+
+## 18.8 断续导通模式
+
+18.5.2节所述的平均仿真模型中已纳入了断续导通模式下电流编程变换器的模型。本节采用15.2节的平均开关建模方法，导出电流编程 DCM 变换器的解析模型。可以发现，平均晶体管电压和电流遵循功率汇特性，而平均二极管电压和电流遵循功率源特性。对这些特性进行扰动和线性化，可得到建模 CPM DCM 变换器的小信号等效电路。基本的 DCM CPM 降压、升压和升降压变换器的传递函数本质上呈单极点特性：第二个极点和右半平面零点出现在接近或高于开关频率的频率处，这是由 DCM 下 $L$ 取值较小所致。
+
+此处分析一个 DCM CPM 升降压变换器示例。但式(18.178)至(18.195)写成一般形式，同样适用于 DCM CPM 降压和升压变换器。升降压变换器的电路图如图18.45所示。开关网络的端子波形如图所示定义：$v_1(t)$ 和 $i_1(t)$ 是晶体管波形，$v_2(t)$ 和 $i_2(t)$ 是二极管波形。图18.46给出了采用人工斜坡斜率为 $-m_a$ 的电流编程控制的典型 DCM 波形。每个开关周期开始时电感电流为零。通过求解晶体管导通子区间，可将编程电流 $i_{pk}$ 与晶体管占空比 $d_1$ 联系起来：
+
+$$i_c = i_{pk} + m_a d_1 T_s = (m_1 + m_a)\, d_1 T_s \tag{18.178}$$
+
+解得 $d_1$：
+
+$$d_1(t) = \frac{i_c(t)}{(m_1 + m_a) T_s} \tag{18.179}$$
+
+![源页 p.782](../assets/page-snapshots/chapter-18/page-782.png)
+
+平均晶体管电流由图18.46的 $i_1(t)$ 波形在一个开关周期内积分得到：
+
+$$\langle i_1(t) \rangle_{T_s} = \frac{1}{T_s} \int_0^{T_s} i_1(\tau)\, d\tau = \frac{q_1}{T_s} \tag{18.180}$$
+
+总面积 $q_1$ 等于峰值电流 $i_{pk}$ 的一半乘以子区间长度 $d_1 T_s$。因此
+
+$$\langle i_1(t) \rangle_{T_s} = \frac{1}{2}\, i_{pk}(t)\, d_1(t) \tag{18.181}$$
+
+图18.45 电流编程 DCM 升降压变换器示例
+
+消去 $i_{pk}$ 和 $d_1$，将平均晶体管电流表示为 $i_c$ 的函数，得
+
+$$\langle i_1(t) \rangle_{T_s} = \frac{1}{2 L}\, \frac{i_c^2(t)}{f_s}\, \frac{\langle v_1(t) \rangle_{T_s}}{\left( 1 + \dfrac{m_a}{m_1} \right)^2} \tag{18.182}$$
+
+最后，式(18.182)可重排得到平均开关网络输入端口关系：
+
+$$\langle i_1(t) \rangle_{T_s}\, \langle v_1(t) \rangle_{T_s} = \frac{1}{2 L}\, \frac{i_c^2(t)}{f_s}\, \left( 1 + \frac{m_a}{m_1} \right)^2 = \langle p(t) \rangle_{T_s} \tag{18.183}$$
+
+![源页 p.783](../assets/page-snapshots/chapter-18/page-783.png)
+
+图18.46 CPM DCM 升降压变换器示例的波形
+
+因此，平均晶体管波形遵循功率汇特性。当 $m_a = 0$ 时，平均功率 $\langle p(t) \rangle_{T_s}$ 仅是 $L$、$i_c$ 和 $f_s$ 的函数。人工斜坡的存在使 $\langle p(t) \rangle_{T_s}$ 还通过 $m_1$ 依赖于变换器电压。
+
+功率汇特性也可由电感能量论证来解释。在第一个子区间内，电感电流从 0 增加到 $i_{pk}$。在此过程中，电感储存如下能量：
+
+$$W = \frac{1}{2} L\, i_{pk}^2 \tag{18.184}$$
+
+能量 $W$ 每个开关周期从功率输入 $v_g$ 经开关网络输入端口传递到电感一次。这一能量传递过程对应功率流
+
+$$\langle p(t) \rangle_{T_s} = W\, f_s = \frac{1}{2} L\, i_{pk}^2\, f_s \tag{18.185}$$
+
+因此，开关网络输入端口（即晶体管端子）可用一个功率汇元件建模，如图18.47所示。
+
+图18.47 通过平均开关建模导出的 CPM DCM 升降压变换器模型
+
+平均开关网络输出端口电流，即平均二极管电流，为
+
+$$\langle i_2(t) \rangle_{T_s} = \frac{1}{T_s} \int_0^{T_s} i_2(\tau)\, d\tau = \frac{q_2}{T_s} \tag{18.186}$$
+
+由图18.46的观察，面积 $q_2$ 为
+
+$$q_2 = \frac{1}{2}\, i_{pk}\, d_2 T_s \tag{18.187}$$
+
+占空比 $d_2$ 由电感电流在第二个子区间内回到零所需的时间决定。采用与导出式(15.19)类似的论证，占空比 $d_2$ 可如下求得：
+
+$$d_2(t) = d_1(t)\, \frac{\langle v_1(t) \rangle_{T_s}}{\langle v_2(t) \rangle_{T_s}} \tag{18.188}$$
+
+将式(18.188)、(18.187)和(18.185)代入式(18.186)得
+
+$$\langle i_2(t) \rangle_{T_s} = \frac{\langle p(t) \rangle_{T_s}}{\langle v_2(t) \rangle_{T_s}} \tag{18.189}$$
+
+![源页 p.784](../assets/page-snapshots/chapter-18/page-784.png)
+
+图18.48 CPM DCM 升降压变换器的稳态模型
+
+因此，平均开关网络输出端口由如下关系描述
+
+$$\langle i_2(t) \rangle_{T_s}\, \langle v_2(t) \rangle_{T_s} = \frac{1}{2 L}\, \frac{i_c^2(t)}{f_s}\, \left( 1 + \frac{m_a}{m_1} \right)^2 = \langle p(t) \rangle_{T_s} \tag{18.190}$$
+
+在平均模型中，二极管可用一个值为 $\langle p(t) \rangle_{T_s}$ 的功率源替代，其值等于开关网络输入端口处表观消耗的功率。在第二个子区间内，电感通过二极管向变换器输出释放全部储能。这导致值为 $\langle p(t) \rangle_{T_s}$ 的平均功率流。
+
+因此，CPM DCM 升降压变换器的平均模型如图18.47所示。在该模型中，晶体管简单地用一个值为 $\langle p(t) \rangle_{T_s}$ 的功率汇替代，而二极管用一个同样为 $\langle p(t) \rangle_{T_s}$ 的功率源替代。
+
+令电感和电容分别趋于短路和开路，即可得到 CPM DCM 升降压变换器的稳态等效电路模型，如图18.48所示。现在可以通过令直流负载功率等于变换器平均功率 $\langle p(t) \rangle_{T_s}$ 来确定稳态输出电压 $V$。对于电阻负载，有
+
+$$\frac{V^2}{R} = P \tag{18.191}$$
+
+其中 $\langle p(t) \rangle_{T_s}$ 的稳态值为
+
+$$P = \frac{1}{2 L}\, \frac{I_c^2(t)}{f_s}\, \left( 1 + \frac{M_a}{M_1} \right)^2 \tag{18.192}$$
+
+而 $I_c$ 是控制输入 $i_c(t)$ 的稳态值。解得 $V$，得到如下结果
+
+$$V = \sqrt{P R} = I_c \sqrt{\frac{R L f_s}{2}}\, \left( 1 + \frac{M_a}{M_1} \right) \tag{18.193}$$
+
+此即电阻负载情形下的结果。
+
+![源页 p.785](../assets/page-snapshots/chapter-18/page-785.png)
+
+DCM CPM 降压、升压及其他变换器的平均模型可用类似方法求得。在每种情形中，平均晶体管波形均遵循功率汇特性，而平均二极管波形遵循功率源特性。所得 CPM DCM 降压和升压变换器的等效电路如图18.49所示。在每种情形中，平均功率为
+
+$$\langle p(t) \rangle_{T_s} = \frac{1}{2 L}\, \frac{i_c^2(t)}{f_s}\, \left( 1 + \frac{m_a}{m_1} \right)^2 \tag{18.194}$$
+
+其中 $m_1$ 按式(18.30)定义。
+
+DCM CPM 降压、升压和升降压变换器的稳态特性总结于表18.6。在每种情形中，直流负载功率为 $P_{load} = V I$，$P$ 由式(18.192)给出。电流编程变换器工作于断续导通模式的条件可表达为：
+
+$$|I| > |I_{crit}| \quad \text{CCM}$$
+
+$$|I| < |I_{crit}| \quad \text{DCM} \tag{18.195}$$
+
+其中 $I$ 是直流负载电流。CCM-DCM 边界处的临界负载电流 $I_{crit}$ 作为 $I_c$ 和电压变换比 $M = V/V_g$ 的函数列于表18.6中。
+
+表18.6 基本变换器的 DCM 电流编程稳态特性
+
+| 变换器 | $M$ | $I_{crit}$ | $m_a = 0$ 时的稳定范围 |
+|---|---|---|---|
+| 降压 | $\dfrac{P_{load} - P}{P_{load}}$ | $\dfrac{1}{2}\left( I_c - M\, m_a T_s \right)$ | $0 \le M < \dfrac{2}{3}$ |
+| 升压 | $\dfrac{P_{load}}{P_{load} - P}$ | $\dfrac{1}{2}\left( I_c - \dfrac{M-1}{M}\, m_a T_s \right)$ | $0 \le D \le 1$ |
+| 升降压 | 取决于负载特性：$P_{load} = P$ | $\dfrac{1}{2}\left( I_c - \dfrac{M}{M-1}\, m_a T_s \right)$ | $0 \le D \le 1$ |
+
+在断续导通模式下，每个开关周期开始和结束时电感电流均为零。因此，电流编程控制器不会出现18.2节所述类型的不稳定性。DCM 升压和升降压变换器的电流编程控制器在无人工斜坡时对所有占空比均稳定。然而，CPM DCM 降压变换器在 $M > 2/3$ 且 $m_a = 0$ 时表现出另一种低频不稳定性，其根源在于直流输出特性的非线性，当变换器驱动电阻负载时可能出现两个平衡点。通过加入斜率 $m_a > 0.086 m_2$ 的人工斜坡或加入输出电压反馈，可将稳定范围扩展到 $0 \le D \le 1$。

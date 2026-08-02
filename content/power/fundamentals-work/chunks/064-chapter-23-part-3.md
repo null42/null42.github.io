@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第23章part 3 - 23 Soft Switching"
+title: "第23章 软开关（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,112 +18,72 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第23章part 3 - 23 Soft Switching
+# 第23章 软开关（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 1032-1033  
-> Chunk ID: `chapter-23-part-3`
+## 23.5 关键点总结（续）
 
-## 主干提取
+![源页 p.1032](../assets/page-snapshots/chapter-23/page-1032.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$+$
+$D_s$
+$Q$
+$C$
+$R$
+$+$
+$v$
+$1 : n$
+$v_g$
+$L_{mp}$
+$C_{ws}$
+$D_p$
+$C_p$
+$C_s$
 
-## 术语表
+图23.44 含谐振开关网络的高压直流-直流变换器，习题23.2
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+(c) 槽谐振频率为多少？
+(d) 绘制晶体管漏-源电压和变压器励磁电流的波形。
 
-## 中文翻译
+**23.3** 图23.45 变压器隔离直流-直流变换器中，电容 $C_1$ 和 $C_2$ 及电感 $L_1$ 和 $L_M$ 值相对大，故开关纹波小。变压器模型含理想 $1:n$ 变压器，连同励磁电感 $L_M$（折算到初级）和漏感 $L_{\ell1}$ 和 $L_{\ell2}$ 如图。晶体管 $Q_1$ 表现输出电容 $C_{ds}$，二极管 $D_1$ 输出电容为 $C_d$。MOSFET $Q_1$ 含体二极管（未显式示出）。其他非理想性可忽略。谐振开关设计良好，使上述所有元件对变换器和谐振开关的理想工作有贡献。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$+$
+$D_1$
+$L_1$
+$C_2$
+$+$
+$v$
+$Q_1$
+$C_1$
+$R$
+$V_g$
+$1 : n$
+$i_1$
+理想变压器模型
+$L_M$
+$L_{\ell1}$
+$L_{\ell2}$
+$C_{ds}$
+$C_d$
 
-## 英文原文
+图23.45 含谐振开关网络的变压器隔离直流-直流变换器，习题23.3
 
-```text
-23.5 Summary of Key Points 1035
-+
-Ds
-Q
-CR
-+
-v
-1 : n
-vg
-Lmp Cws
-Dp
-Cp
-Cs
-Fig. 23.44 High-voltage dc–dc converter containing a resonant switch network, Problem 23.2
-(c) What is the tank resonant frequency?
-(d) Sketch the waveforms of the transistor drain-to-source voltage and transformer mag-
-netizing current.
-23.3 In the transformer-isolated dc–dc converter of Fig.23.45, capacitors C1 and C2 and induc-
-tors L1 and LM are relatively large in value, so that they have small switching ripples. The
-transformer model includes an ideal 1: n transformer, in conjunction with magnetizing in-
-ductance LM (referred to the primary side) and leakage inductances Lℓ1 and Lℓ2 as shown.
-Transistor Q1 exhibits output capacitances Cds, while the output capacitance of diode D1
-is Cd. MOSFET Q1 contains a body diode (not explicitly shown). Other nonidealities can
-be ignored. The resonant switch is well-designed, such that all elements listed above con-
-tribute to ideal operation of the converter and resonant switch.
-+
-D1
-L1
-C2
-+
-v
-Q1
-C1
-RVg
-1 : n
-i1
-Ideal
-Transformer
-model
-LM
-L 1 L 2
-Cds
-Cd
-Fig. 23.45 Transformer-isolated dc–dc converter containing a resonant switch network, Problem 23.3
+![源页 p.1033](../assets/page-snapshots/chapter-23/page-1033.png)
 
-1036 23 Soft Switching
-(a) What type of resonant switch is employed? What is the parent PWM converter?
-(b) Which semiconductor devices operate with zero-voltage switching? With zero-current
-switching?
-23.4 A buck–boost converter is realized using a half-wave ZCS quasi-resonant switch. The
-load resistance has value R, the input voltage has value Vg, and the converter switching
-frequency is fs.
-(a) Sketch the circuit schematic.
-(b) Write the complete system of equations that can be solved to determine the output
-voltage V, in terms of the quantities listed above and the component values. It is not
-necessary to actually solve your equations. You may also quote results listed in this
-textbook.
-23.5 It is desired to design a half-wave zero-current-switching quasi-resonant forward converter
-to operate with the following speciﬁcations: V
-g = 320 V, V= 42 V, 5 W≤P≤100 W.
-Design the converter to operate with a maximum switching frequency of 1 MHz and a
-switch conversion ratio of μ= 0.45. Attempt to minimize the peak transistor current,
-while maintaining zero-current switching at all operating points. You may neglect the
-transformer magnetizing current, and ignore the transformer reset scheme.
-(a) Specify your choices for the turns ratio n, and the tank elements Lr and Cr, referred
-to the transformer secondary side.
-(b) For your design of part (a), what is the minimum switching frequency?
-(c) What is the worst-case peak transistor current?
-23.6 Analysis of the ZVS quasi-resonant switch of Fig. 23.24.
-(a) For each subinterval, sketch the resonant switch cell circuit, and derive expressions
-for the tank inductor current and capacitor voltage waveforms.
-(b) For subinterval 2, in which Q1/D1 are oﬀand D2 conducts, write the loop equation
-which relates the tank capacitor voltage, tank inductor voltage, and any other net-
-work voltages as appropriate. Hence, for subinterval 2 relate the integral of the tank
-capacitor voltage to the change in tank inductor current.
-(c) Determine the switch network terminal-waveform average values, and hence derive
-an expression for the switch conversion ratioμ. Verify that your result coincides with
-Eq. (23.61).
-23.7 Analysis of the full-bridge zero-voltage transition converter of Sect. 23.4.1. The con-
-verter of Fig. 23.36 operates with the waveforms illustrated in Fig. 23.38. According to
-Eq. (23.68), the conversion ratio of this converter is given approximately by M(φ)= nφ.
-Derive an exact expression for M, based on the waveforms given in Fig. 23.38. Your re-
-sult should be a function of the length of subinterval 4, the load current, the switching
-frequency, and the values of the inductance and capacitances. Note: there is a reasonably
-simple answer to this question.
-```
+(a) 采用什么类型谐振开关？母体 PWM 变换器是什么？
+(b) 哪些半导体器件零电压开关？哪些零电流开关？
+
+**23.4** 用半波 ZCS 准谐振开关实现升降压变换器。负载电阻为 $R$，输入电压为 $V_g$，变换器开关频率为 $f_s$。
+(a) 绘制电路图。
+(b) 写出可解出输出电压 $V$（用上述量和元件值表示）的完整方程组。不必实际解方程。可引用本教材列出的结果。
+
+**23.5** 期望设计半波零电流开关准谐振正激变换器，工作指标为：$V_g = 320\,\text{V}$，$V = 42\,\text{V}$，$5\,\text{W} \le P \le 100\,\text{W}$。设计变换器以最大开关频率 $1\,\text{MHz}$ 和开关变换比 $\mu = 0.45$ 工作。尝试最小化峰值晶体管电流，同时在所有工作点保持零电流开关。可忽略变压器励磁电流，忽略变压器复位方案。
+(a) 指定匝比 $n$ 和槽元件 $L_r$、$C_r$ 的选择，折算到变压器副边。
+(b) 对部分(a) 的设计，最小开关频率为多少？
+(c) 最坏情况峰值晶体管电流为多少？
+
+**23.6** 图23.24 ZVS 准谐振开关的分析。
+(a) 对每个子区间，绘制谐振开关单元电路，推导槽电感电流和电容电压波形的表达式。
+(b) 子区间2（$Q_1/D_1$ 关断、$D_2$ 导通）中，写出关联槽电容电压、槽电感电压和其他适当网络电压的回路方程。故子区间2 中将槽电容电压积分与槽电感电流变化关联。
+(c) 确定开关网络端子波形平均值，推导开关变换比 $\mu$ 的表达式。验证结果与式(23.61) 一致。
+
+**23.7** 23.4.1 节全桥零电压过渡变换器的分析。图23.36 变换器以图23.38 所示波形工作。根据式(23.68)，此变换器的变换比近似为 $M(\phi) = n\phi$。基于图23.38 给出的波形推导 $M$ 的精确表达式。结果应为子区间4 长度、负载电流、开关频率及电感和电容值的函数。注：此问题有合理简单的答案。

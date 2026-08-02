@@ -31,15 +31,21 @@
 <style>
 #split-view-container {
 	position: fixed;
-	top: 0;
+	/* 保留顶部导航栏：从导航栏下方开始 */
+	top: 4.5rem;
 	right: 0;
 	width: 50%;
-	height: 100vh;
+	height: calc(100vh - 4.5rem);
 	z-index: 200;
 	display: flex;
 	flex-direction: column;
 	background: var(--color-card-base, #fff);
 	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ID+class 选择器优先级(110)高于 ID 选择器(100)，确保 hidden 类能覆盖 display:flex */
+#split-view-container.hidden {
+	display: none;
 }
 
 :global(.dark) #split-view-container {
@@ -48,18 +54,43 @@
 
 .split-view-divider {
 	position: absolute;
-	left: -3px;
+	left: -6px;
 	top: 0;
 	bottom: 0;
-	width: 6px;
+	width: 12px;
 	cursor: col-resize;
 	background: transparent;
 	z-index: 201;
+	/* 默认显示一条细线，提示可拖拽 */
+	border-left: 2px solid var(--color-line-divider, #e5e7eb);
+	transition: border-color 0.15s, background 0.15s;
 }
 
-.split-view-divider:hover {
+.split-view-divider:hover,
+.split-view-divider:active {
+	background: color-mix(in oklab, var(--color-primary, #3b82f6) 15%, transparent);
+	border-left-color: var(--color-primary, #3b82f6);
+}
+
+/* 拖拽手柄：中间一个小圆点，hover 时放大 */
+.split-view-divider::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 4px;
+	height: 32px;
+	border-radius: 2px;
+	background: var(--color-text-secondary, #9ca3af);
+	opacity: 0.4;
+	transition: opacity 0.15s, height 0.15s;
+}
+
+.split-view-divider:hover::after {
+	opacity: 0.8;
+	height: 40px;
 	background: var(--color-primary, #3b82f6);
-	opacity: 0.3;
 }
 
 .split-view-right {
@@ -151,13 +182,31 @@
 	border-color: var(--color-primary, #3b82f6);
 }
 
-/* 分屏时左栏调整 */
-:global(body.split-view-active) {
-	overflow: hidden;
+/* ─── 分屏时布局：两栏各自独立滚动 ─── */
+/* 方案：body 保持可滚动，#main-grid 宽度限制为 50vw 靠左显示，跟随 body 自然滚动 */
+/* 右栏 #split-view-container 为 position:fixed 固定在视口右侧，iframe 内部独立滚动 */
+/* 导航栏 #top-row 已是 sticky，会固定在顶部，不受 body 滚动影响 */
+
+/* 分屏时隐藏侧边栏（知识树、目录），避免被 iframe 遮挡或超出视口 */
+:global(body.split-view-active #article-toc-wrapper),
+:global(body.split-view-active .knowledge-sidebar-rail) {
+	display: none !important;
 }
 
-:global(body.split-view-active #post-container) {
+/* 左栏 main-grid：宽度限制为 50vw，靠左显示，跟随 body 自然滚动 */
+/* 不使用 position:fixed，避免被祖先 transform 破坏和高度计算问题 */
+:global(body.split-view-active #main-grid) {
 	width: 50vw !important;
+	max-width: 50vw !important;
+	margin: 0 !important;
+}
+
+/* 分屏时移除 content-wrapper 的动画和 transform，确保 #split-view-container 的 fixed 定位正确 */
+/* （fade-in-up 动画含 transform: translateY，会破坏后代 fixed 元素相对于视口的定位） */
+:global(body.split-view-active #content-wrapper) {
+	transform: none !important;
+	animation: none !important;
+	opacity: 1 !important;
 }
 </style>
 
@@ -199,18 +248,23 @@
 			const slug = link.getAttribute("data-split-target");
 			if (!slug) return;
 
-			const btn = document.createElement("a");
-			btn.className = "split-link-btn";
-			btn.href = "?" + SPLIT_PARAM + "=" + encodeURIComponent(slug);
-			btn.title = "在右侧分屏打开";
-			btn.textContent = "⧉";
-			btn.addEventListener("click", function (e) {
-				e.preventDefault();
-				e.stopPropagation();
-				openSplitView(slug);
-			});
+			// 给原始链接添加 title，明确提示"点击可跳转"
+		if (!link.title) {
+			link.title = "跳转到该文章（点击进入）";
+		}
 
-			link.insertAdjacentElement("afterend", btn);
+		const btn = document.createElement("a");
+		btn.className = "split-link-btn";
+		btn.href = "?" + SPLIT_PARAM + "=" + encodeURIComponent(slug);
+		btn.title = "分屏打开（在右侧显示，不离开当前文章）";
+		btn.textContent = "⧉";
+		btn.addEventListener("click", function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			openSplitView(slug);
+		});
+
+		link.insertAdjacentElement("afterend", btn);
 		});
 	}
 
@@ -218,6 +272,41 @@
 
 	let currentIframe: HTMLIFrameElement | null = null;
 	let container: HTMLElement | null = null;
+
+	// 设置左栏 #main-grid 的 inline style，确保宽度限制为 50vw 靠左显示
+	// （CSS 中的 :global() 规则可能因 astro HMR 或缓存问题未生效，用 JS 兜底）
+	// 不使用 position:fixed，左栏跟随 body 自然滚动，避免 transform 破坏和高度计算问题
+	function applyMainGridSplitStyle() {
+		const mainGrid = document.getElementById("main-grid");
+		if (!mainGrid) return;
+		const s = mainGrid.style;
+		s.setProperty("width", "50vw", "important");
+		s.setProperty("max-width", "50vw", "important");
+		s.setProperty("margin", "0", "important");
+
+		// 隐藏侧边栏（知识树、目录），避免在分屏时超出视口
+		const tocWrapper = document.getElementById("article-toc-wrapper");
+		if (tocWrapper) tocWrapper.style.setProperty("display", "none", "important");
+		document.querySelectorAll<HTMLElement>(".knowledge-sidebar-rail").forEach((el) => {
+			el.style.setProperty("display", "none", "important");
+		});
+	}
+
+	// 清除 #main-grid 的 inline style，恢复正常布局
+	function resetMainGridStyle() {
+		const mainGrid = document.getElementById("main-grid");
+		if (!mainGrid) return;
+		mainGrid.style.removeProperty("width");
+		mainGrid.style.removeProperty("max-width");
+		mainGrid.style.removeProperty("margin");
+
+		// 恢复侧边栏显示
+		const tocWrapper = document.getElementById("article-toc-wrapper");
+		if (tocWrapper) tocWrapper.style.removeProperty("display");
+		document.querySelectorAll<HTMLElement>(".knowledge-sidebar-rail").forEach((el) => {
+			el.style.removeProperty("display");
+		});
+	}
 
 	function openSplitView(slug: string) {
 		setSplitParam(slug);
@@ -237,6 +326,9 @@
 		container.classList.remove("hidden");
 		document.body.classList.add("split-view-active");
 
+		// 强制设置左栏 #main-grid 的 inline style，确保独立滚动
+		applyMainGridSplitStyle();
+
 		// iframe 加载完成后更新标题
 		iframe.addEventListener("load", function () {
 			try {
@@ -255,6 +347,8 @@
 		setSplitParam(null);
 		if (container) container.classList.add("hidden");
 		document.body.classList.remove("split-view-active");
+		// 重置 main-grid 内联样式，恢复正常布局
+		resetMainGridStyle();
 		if (currentIframe) {
 			currentIframe.src = "about:blank";
 			currentIframe = null;
@@ -282,9 +376,12 @@
 			const clampedWidth = Math.max(minWidth, Math.min(maxWidth, rightWidth));
 			container.style.width = clampedWidth + "px";
 
-			const postContainer = document.getElementById("post-container");
-			if (postContainer) {
-				postContainer.style.width = (window.innerWidth - clampedWidth) + "px";
+			// 同步调整左栏 main-grid 宽度（保持两栏总和 = 视口宽度）
+			const mainGrid = document.getElementById("main-grid");
+			if (mainGrid) {
+				const leftWidth = window.innerWidth - clampedWidth;
+				mainGrid.style.width = leftWidth + "px";
+				mainGrid.style.maxWidth = leftWidth + "px";
 			}
 		});
 
@@ -296,6 +393,60 @@
 	// ─── 初始化 ───
 
 	function init() {
+		// 在 iframe 内不初始化 SplitView，避免套娃（双开的目标文章自身也含 SplitView 组件）
+		if (window.self !== window.top) {
+			const embeddedContainer = document.getElementById("split-view-container");
+			if (embeddedContainer) embeddedContainer.remove();
+			// 确保 iframe 内部能滚动：强制 html/body 可滚动
+			// （某些全局 CSS 可能给 html/body 设置了 overflow:hidden 或 height:100%，导致 iframe 内容无法滚动）
+			const docEl = document.documentElement;
+			const body = document.body;
+			docEl.style.setProperty("overflow", "auto", "important");
+			docEl.style.setProperty("height", "auto", "important");
+			docEl.style.setProperty("min-height", "0", "important");
+			body.style.setProperty("overflow", "auto", "important");
+			body.style.setProperty("height", "auto", "important");
+			body.style.setProperty("min-height", "0", "important");
+
+			// 隐藏分屏 iframe 中不必要的 UI 元素：底部导航栏、页脚、浮动按钮等
+			// 这些元素在 iframe 中冗余且占用空间
+			const hideInIframe = ["#mobile-dock", "#footer", "#floating-toc-wrapper", ".back-to-top", "#disqus_thread"];
+			for (const sel of hideInIframe) {
+				document.querySelectorAll<HTMLElement>(sel).forEach((el) => {
+					el.style.setProperty("display", "none", "important");
+				});
+			}
+
+			// iframe 内不渲染双开按钮（避免套娃）。
+			// 拦截内部文章链接点击，跳转到新文章（离开分屏）。
+			// 必要性：iframe 内页面也加载了 Swup，Swup 的 AJAX 跳转在 iframe 内会异常，
+			// 导致点击链接无反应（表现为"没有跳转"）。用 capture 阶段拦截，先于 Swup 处理。
+			// 行为：点击链接文本 → 跳转到新文章（window.top.location.href），离开分屏；
+			//       用户想再次双开需在新文章页面点击 ⧉ 按钮。实现"区分跳转和双开"。
+			document.addEventListener(
+				"click",
+				function (e) {
+					const target = e.target as HTMLElement | null;
+					const link = target?.closest?.("a[href]");
+					if (!link) return;
+					const href = link.getAttribute("href") || "";
+					// 只处理内部文章链接（/posts/ 或迁移旧链接 /content/xxx.html）
+					const isInternalPost =
+						href.startsWith("/posts/") || (href.startsWith("/content/") && href.endsWith(".html"));
+					if (!isInternalPost) return;
+					// 排除带修饰键的点击（新标签打开等），交给浏览器默认行为
+					if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+					e.preventDefault();
+					e.stopPropagation();
+					// 跳转到新文章（离开分屏）
+					window.top.location.href = href;
+				},
+				true,
+			);
+
+			return;
+		}
+
 		renderSplitButtons();
 		initDivider();
 

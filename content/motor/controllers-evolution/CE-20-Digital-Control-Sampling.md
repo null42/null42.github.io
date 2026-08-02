@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-20: 数字控制与采样——从s域到z域发生了什么
 
 **副标题：Digital Control and Sampling: What Changes When You Go from s to z**
-**难度：** 
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-03（传递函数基础）、CE-13（离散时间系统）
+- **难度：** 
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-03（传递函数基础）、CE-13（离散时间系统）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 你设计了一个漂亮的连续时间控制器——超前-滞后、LQR、H∞，什么都好。现在你需要它在微控制器上运行，每毫秒读一次传感器，每毫秒更新一次执行器。在连续时间下完美工作的控制器，离散化后可能振荡、过冲甚至不稳定。为什么？因为采样改变了规则。本文详解采样导致的信息丢失与混叠、零阶保持的相位滞后、z变换与频率扭曲、四种离散化方法（前向/后向Euler、Tustin、ZOH等价）的权衡、$w'$变换的连续时间直觉恢复，以及从传递函数到可运行代码的完整实现路径。
 
-**认知挂钩：** 采样不是免费的——每一次从连续到离散的转换，你都在付出相位裕度的代价。
+- **认知挂钩：** 采样不是免费的——每一次从连续到离散的转换，你都在付出相位裕度的代价。
 
 ---
 
@@ -155,7 +155,7 @@ $$\dot{x}(t) \approx \frac{x[k+1] - x[k]}{T_s}$$
 
 $$s \approx \frac{z - 1}{T_s} \qquad \text{或} \qquad z \approx 1 + s T_s$$
 
-**稳定性映射：** 左半平面（$\text{Re}(s) < 0$）映射到 $\text{Re}(z) < 1$——一个半平面，不是单位圆。连续时间稳定极点如果位于 $s = -2/T_s$ 左侧，可能映射到不稳定离散极点。
+- **稳定性映射：** 左半平面（$\text{Re}(s) < 0$）映射到 $\text{Re}(z) < 1$——一个半平面，不是单位圆。连续时间稳定极点如果位于 $s = -2/T_s$ 左侧，可能映射到不稳定离散极点。
 
 ```text
                     Im[s]
@@ -184,7 +184,7 @@ $$\dot{x}(t) \approx \frac{x[k] - x[k-1]}{T_s}$$
 
 $$s \approx \frac{z - 1}{z T_s} \qquad \text{或} \qquad z \approx \frac{1}{1 - s T_s}$$
 
-**稳定性映射：** 整个左半平面映射到以 $z = 1/2$ 为中心、半径 $1/2$ 的圆内部。这意味着**后向Euler无条件稳定**——每个稳定的连续极点映射到稳定的离散极点，无论 $T_s$ 多大。这是它的主要优点。
+- **稳定性映射：** 整个左半平面映射到以 $z = 1/2$ 为中心、半径 $1/2$ 的圆内部。这意味着**后向Euler无条件稳定**——每个稳定的连续极点映射到稳定的离散极点，无论 $T_s$ 多大。这是它的主要优点。
 
 缺点：映射严重失真。快速连续极点（s平面远左处）映射到 $z \approx 0$ 而不是衰减到接近零。频率响应扭曲：虚轴映射到一个小圆，不是单位圆，所以离散系统的频率响应不匹配连续系统。后向Euler安全但不准确。
 
@@ -194,7 +194,7 @@ Tustin（或梯形法、双线性法）近似使用前向和后向差分的平�
 
 $$s \approx \frac{2}{T_s} \cdot \frac{z - 1}{z + 1} \qquad \text{或} \qquad z \approx \frac{1 + s T_s/2}{1 - s T_s/2}$$
 
-**稳定性映射：** 左半平面*精确*映射到单位圆内部。每个稳定的连续极点映射到稳定的离散极点，每个不稳定的连续极点映射到不稳定的离散极点。稳定性被完美保持。
+- **稳定性映射：** 左半平面*精确*映射到单位圆内部。每个稳定的连续极点映射到稳定的离散极点，每个不稳定的连续极点映射到不稳定的离散极点。稳定性被完美保持。
 
 Tustin由梯形积分法则推导：
 
@@ -208,7 +208,7 @@ $$\omega_{\text{discrete}} = \frac{2}{T_s} \tan\left(\frac{\omega_{\text{continu
 
 在低频（$\omega T_s \ll 1$），$\tan(x) \approx x$，所以 $\omega_d \approx \omega_c$——无扭曲，它们匹配。但随着频率增加，离散频率跑在连续频率前面。在奈奎斯特频率（$\omega_c = \pi/T_s$），正切趋于无穷——映射将无限的连续频率轴压缩到有限的单位圆上。
 
-**预扭曲（Prewarping）：** 如果你关心特定频率 $\omega_0$ 处的精确行为，可以预扭曲：设计连续控制器使其关键特征（如陷波、穿越频率）在*修改后的*频率 $\omega_0' = (2/T_s) \tan(\omega_0 T_s/2)$ 处。Tustin离散化后，特征恰好落在 $\omega_0$。这对陷波滤波器和谐振系统很重要。
+- **预扭曲（Prewarping）：** 如果你关心特定频率 $\omega_0$ 处的精确行为，可以预扭曲：设计连续控制器使其关键特征（如陷波、穿越频率）在*修改后的*频率 $\omega_0' = (2/T_s) \tan(\omega_0 T_s/2)$ 处。Tustin离散化后，特征恰好落在 $\omega_0$。这对陷波滤波器和谐振系统很重要。
 
 ### 5.4 ZOH等价（阶跃不变）：精确方法
 
@@ -369,26 +369,26 @@ $$u[k] = b_0 e[k] + b_1 e[k-1] + \cdots + b_m e[k-m] - a_1 u[k-1] - \cdots - a_n
 
 ## 10. 延伸阅读
 
-**权威数字控制教材：**
+- **权威数字控制教材：**
 - Franklin, G.F., Powell, J.D., & Workman, M. (1997). *Digital Control of Dynamic Systems*, 3rd ed. Addison-Wesley. —— 覆盖一切：采样、z变换、离散化方法、$w'$ 变换、量化效应和实现。标准参考。
 
-**z变换理论：**
+- **z变换理论：**
 - Ogata, K. (1995). *Discrete-Time Control Systems*, 2nd ed. Prentice-Hall. —— z变换、稳定性分析和数字控制器设计的系统化处理。$w'$ 变换和直接数字设计方法讲得好。
 
-**更现代的MATLAB处理：**
+- **更现代的MATLAB处理：**
 - Åström, K.J. & Wittenmark, B. (2011). *Computer-Controlled Systems: Theory and Design*, 3rd ed. Dover. —— 由数字PID和自适应控制的先驱撰写。严谨但可读。混叠、抗混叠滤波器和采样与控制设计交互的优秀覆盖。
 
-**奈奎斯特-香农定理：**
+- **奈奎斯特-香农定理：**
 - Shannon, C.E. (1949). "Communication in the Presence of Noise." *Proceedings of the IRE*, 37(1), 10–21. —— 原始论文。密集，但思想清晰度非凡。定理出现在第IV节。
 - Nyquist, H. (1928). "Certain Topics in Telegraph Transmission Theory." *Transactions of the AIEE*, 47(2), 617–644. —— 采样准则的更早表述。
 
-**频率扭曲与Tustin：**
+- **频率扭曲与Tustin：**
 - Tustin, A. (1947). "A method of analysing the behaviour of linear systems in terms of time series." *Journal of the IEE*, 94(1), 130–142. —— 原始双线性变换论文。Tustin在二战期间研究火炮控制伺服系统，需要分析采样数据系统。
 
-**关于 $\delta$ 算子与数值条件：**
+- **关于 $\delta$ 算子与数值条件：**
 - Middleton, R.H. & Goodwin, G.C. (1990). *Digital Control and Estimation: A Unified Approach.* Prentice-Hall. —— 引入 $\delta$ 算子作为高速率采样下移位算子的数值优越替代。如果你在定点硬件上做10+ kHz控制，这很重要。
 
-**本项目相关文档：**
+- **本项目相关文档：**
 - `care_vs_dare.md` —— 离散vs.连续Riccati方程以及为什么DARE是你实现的
 - `lead_lag_compensator_design.md` —— 第9节覆盖带Python示例的补偿器Tustin离散化
 - `bellman_to_lqr.md` —— 导致CARE和DARE的动态规划推导

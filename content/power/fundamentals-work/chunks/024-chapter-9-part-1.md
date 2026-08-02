@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第9章part 1 - 9 Controller Design"
+title: "第9章 控制器设计（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,943 +18,359 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第9章part 1 - 9 Controller Design
+# 第9章 控制器设计（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 358-377  
-> Chunk ID: `chapter-9-part-1`
+> 源页：358–377
+> 本部分涵盖 9.1 引言、9.2 负反馈对网络传递函数的影响、9.3 $1/(1+T)$ 和 $T/(1+T)$ 的构造、9.4 稳定性。
 
-## 主干提取
+## 9.1 引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+在所有开关变换器中，输出电压 $v(t)$ 是输入电网电压 $v_g(t)$、占空比 $d(t)$ 和负载电流 $i_{load}(t)$ 以及变换器电路元件值的函数。在直流-直流变换器应用中，希望获得恒定输出电压 $v(t) = V$，尽管 $v_g(t)$ 和 $i_{load}(t)$ 有扰动、变换器电路元件值有变化。这些扰动和变化的来源很多，典型情况如图9.1所示。离线电源的输入电压 $v_g(t)$ 通常含交流电力系统频率二次谐波（100 Hz 或 120 Hz）的周期变化，由整流电路产生。当邻近电力系统负载接入或断开时，$v_g(t)$ 的幅值也可能变化。负载电流 $i_{load}(t)$ 可能有显著幅值的变化，典型电源技术指标要求负载电流从满载阶跃到 50% 额定电流（或反之）时输出电压保持在指定范围内（例如 3.3 V ± 0.05 V）。电路元件值按一定容差制造，故变换器大批量生产时输出电压呈某种分布。希望此分布基本全部落在指定范围内；但不用负反馈则不切实际。类似考虑适用于逆变器应用，只是输出电压为交流。
 
-## 术语表
+故不能期望简单地将直流-直流变换器占空比设为单一值并在所有条件下获得给定恒定输出电压。使用负反馈的思想是构造一个电路自动按需调整占空比，以高精度获得所需输出电压，无论 $v_g(t)$ 或 $i_{load}(t)$ 有扰动或元件值有变化。当存在变化和未知因素使系统无法达到所需性能时，这样做很有用。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.359](../assets/page-snapshots/chapter-9/page-359.png)
 
-## 中文翻译
+图9.1 典型开关变换器的输出电压是电网输入电压 $v_g$、占空比 $d$ 和负载电流 $i_{load}$ 的函数：(a) 开环降压变换器；(b) 说明 $v$ 对独立量 $v_g$、$d$ 和 $i_{load}$ 依赖关系的功能图
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+反馈系统框图如图9.2所示。用增益为 $H(s)$ 的"传感器"测量输出电压 $v(t)$。在直流电压稳压器或直流-交流逆变器中，传感器电路通常是精密电阻组成的分压器。传感器输出信号 $H(s)v(s)$ 与参考输入电压 $v_{ref}(s)$ 比较。目标是使 $H(s)v(s)$ 等于 $v_{ref}(s)$，使 $v(s)$ 精确跟随 $v_{ref}(s)$，无论补偿器、脉宽调制器、栅极驱动器或变换器功率级中有扰动或元件变化。
 
-## 英文原文
+![源页 p.360](../assets/page-snapshots/chapter-9/page-360.png)
 
-```text
-9
-Controller Design
-9.1 Introduction
-In all switching converters, the output voltagev(t) is a function of the input line voltagevg(t), the
-duty cycle d(t), and the load current iload(t), as well as the converter circuit element values. In
-a dc–dc converter application, it is desired to obtain a constant output voltage v(t)= V, in spite
-of disturbances in vg(t) and iload(t), and in spite of variations in the converter circuit element
-values. The sources of these disturbances and variations are many, and a typical situation is
-illustrated in Fig. 9.1. The input voltage vg(t)o fa noﬀ-line power supply may typically contain
-periodic variations at the second harmonic of the ac power system frequency (100 Hz or 120
-Hz), produced by a rectiﬁer circuit. The magnitude of vg(t) may also vary when neighboring
-power system loads are switched on or oﬀ. The load current iload(t) may contain variations of
-signiﬁcant amplitude, and a typical power supply speciﬁcation is that the output voltage must
-remain within a speciﬁed range (for example, 3 .3V± 0.05 V) when the load current takes a
-step change from, for example, full rated load current to 50% of the rated current, and vice
-versa. The values of the circuit elements are constructed to a certain tolerance, and so in high-
-volume manufacturing of a converter, converters are constructed whose output voltages lie in
-some distribution. It is desired that essentially all of this distribution fall within the speciﬁed
-range; however, this is not practical to achieve without the use of negative feedback. Similar
-considerations apply to inverter applications, except that the output voltage is ac.
-So we cannot expect to simply set the dc–dc converter duty cycle to a single value, and
-obtain a given constant output voltage under all conditions. The idea behind the use of negative
-feedback is to build a circuit that automatically adjusts the duty cycle as necessary, to obtain
-the desired output voltage with high accuracy, regardless of disturbances in vg(t)o r iload(t)o r
-variations in component values. This is a useful thing to do whenever there are variations and
-unknowns that otherwise prevent the system from attaining the desired performance.
-A block diagram of a feedback system is shown in Fig. 9.2. The output voltage v(t)i sm e a -
-sured, using a “sensor” with gain H(s). In a dc voltage regulator or dc–ac inverter, the sensor
-circuit is usually a voltage divider, comprised of precision resistors. The sensor output signal
-H(s)v(s) is compared with a reference input voltage vre f (s). The objective is to make H(s)v(s)
-equal to vre f (s), so that v(s) accurately follows vre f (s) regardless of disturbances or component
-variations in the compensator, pulse-width modulator, gate driver, or converter power stage.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_9
-347
+图9.2 输出电压调节的反馈环路：(a) 降压变换器含反馈环路框图；(b) 反馈系统功能框图
 
-348 9 Controller Design
-(a)
-+
-+
-v(t)vg(t)
-Switching converter Load
-Pulse-width
-modulator
-vc(t)
-Transistor
-gate driver
-(t)
-iload(t
-(t)
-TsdTs t
-(b)
-v(t)
-)
-vg(t)
-iload(t)
-d(t)
-Switching converter
-Disturbances
-Control input
-}
-}
-v(t)= f(vg, i load,d )
-Fig. 9.1 The output voltage of a typical switching converter is a function of the line input voltagevg,t h e
-duty cycle d, and the load current iload:( a) open-loop buck converter; (b) functional diagram illustrating
-dependence of v on the independent quantities vg, d,a n diload
-The diﬀerence between the reference input vre f (s) and the sensor output H(s)v(s) is called
-the error signal ve(s). If the feedback system works perfectly, then vre f (s) = H(s)v(s), and
-hence the error signal is zero. In practice, the error signal is usually nonzero but nonetheless
-small. Obtaining a small error is one of the objectives in adding a compensator network G
-c(s)
-as shown in Fig. 9.2. Note that the transfer function from the error signal ve(s) to the output
-voltage v(s) is equal to the gains of the compensator, pulse-width modulator, and converter
-power stage. If the compensator gain Gc(s) is large enough in magnitude, then a small error
-signal can produce the required output voltage v(t)= V for a dc regulator ( Q: how should H
-and vre f then be chosen?). So a large compensator gain leads to a small error, and therefore the
-output follows the reference input with good accuracy. This is the key idea behind feedback
-systems.
-The averaged small-signal converter models derived in Chap.7 are used in the following sec-
-tions to ﬁnd the eﬀects of feedback on the small-signal transfer functions of the regulator. The
-loop gain T(s) is deﬁned as the product of the small-signal gains in the forward and feedback
-paths of the feedback loop. It is found that the transfer function from a disturbance to the output
-is multiplied by the factor 1/(1+ T(s)). Hence, when the loop gain T is large in magnitude,
-then the inﬂuence of disturbances on the output voltage is small. A large loop gain also causes
-the output voltage v(s) to be nearly equal to v
-re f (s)/H(s), with very little dependence on the
+参考输入 $v_{ref}(s)$ 与传感器输出 $H(s)v(s)$ 之差称为误差信号 $v_e(s)$。若反馈系统完美工作，则 $v_{ref}(s) = H(s)v(s)$，故误差信号为零。实际中误差信号通常非零但很小。获得小误差是加入如图9.2所示补偿网络 $G_c(s)$ 的目标之一。注意从误差信号 $v_e(s)$ 到输出电压 $v(s)$ 的传递函数等于补偿器、脉宽调制器和变换器功率级的增益之积。若补偿器增益 $G_c(s)$ 足够大，则小误差信号可产生直流稳压器所需输出电压 $v(t) = V$（问：此时应如何选择 $H$ 和 $v_{ref}$？）。故大补偿器增益导致小误差，因此输出以良好精度跟随参考输入。这是反馈系统背后的关键思想。
 
-9.1 Introduction 349
-(a)
-+
-+
-vvg
-Switching converterPower
-input
-Load
-+
-Compensator
-vref
-Reference
-input
-HvPulse-width
-modulator
-vc
-Transistor
-gate driver
-Gc(s)
-H(s)
-ve
-Error
-signal
-Sensor
-gain
-iload
-(b)
-vref
-Reference
-input
-vcve(t)
-Error
-signal
-Sensor
-gain
-v(t)
-vg(t)
-iload(t)
-d(t)
-Switching converter
-Disturbances
-Control input
-}
-}+ Pulse-width
-modulatorCompensator
-v(t)= f(vg, i load,d )
-Fig. 9.2 Feedback loop for regulation of the output voltage: (a) buck converter, with feedback loop block
-diagram; (b) functional block diagram of the feedback system
-gains in the forward path of the feedback loop. So the loop gain magnitude ∥ T∥ is a measure
-of how well the feedback system works. All of these gains can be easily constructed using the
-algebra-on-the-graph method; this allows easy evaluation of important closed-loop performance
-measures, such as the output voltage ripple resulting from 120 Hz rectiﬁcation ripple in vg(t)o r
-the closed-loop output impedance.
-Stability is another important issue in feedback systems. Adding a feedback loop can cause
-an otherwise well-behaved circuit to exhibit oscillations, ringing and overshoot, and other unde-
-sirable behavior. An in-depth treatment of stability is beyond the scope of this book; however,
-the simple phase margin criterion for assessing stability is used here. When the phase margin
-of the loop gain T is positive, then the feedback system is stable. Moreover, increasing the
-phase margin causes the system transient response to be better behaved, with less overshoot and
-ringing. The relation between phase margin and closed-loop response is quantiﬁed in Sect. 9.4.
-An example is given in Sect. 9.5, in which a compensator network is designed for a dc reg-
-ulator system. The compensator network is designed to attain adequate phase margin and good
+第7章导出的平均小信号变换器模型用于以下各节以研究反馈对稳压器小信号传递函数的影响。环路增益 $T(s)$ 定义为反馈环路前向和反馈路径中小信号增益的乘积。将发现从扰动到输出的传递函数乘以因子 $1/(1+T(s))$。故环路增益 $T$ 幅值大时，扰动对输出电压的影响小。大环路增益还使输出电压 $v(s)$ 近似等于 $v_{ref}(s)/H(s)$，对反馈环路前向路径中的增益几乎无依赖。故环路增益幅值 $\|T\|$ 是反馈系统工作好坏的度量。所有这些增益都可用"在图上做代数"方法轻易构造；这使重要闭环性能指标的评估变得容易，例如由 $v_g(t)$ 中 120 Hz 整流纹波引起的输出电压纹波或闭环输出阻抗。
 
-350 9 Controller Design
-rejection of expected disturbances. Lead compensators andP–D controllers are used to improve
-the phase margin and extend the bandwidth of the feedback loop. This leads to better rejection
-of high-frequency disturbances. Lag compensators and P–I controllers are used to increase the
-low-frequency loop gain. This leads to better rejection of low-frequency disturbances and very
-small steady-state error. More complicated compensators can achieve the advantages of both
-approaches.
-Injection methods for experimental measurement of loop gain are introduced in Sect. 9.6.
-The use of voltage or current injection solves the problem of establishing the correct quiescent
-operating point in high-gain systems. Conditions for obtaining an accurate measurement are
-exposed. The injection method also allows measurement of the loop gains of unstable systems.
-9.2 Eﬀect of Negative Feedback on the Network Transfer Functions
-We have seen how to derive the small-signal ac transfer functions of a switching converter. For
-example, the equivalent circuit model of the buck converter can be written as in Fig. 9.3.T h i s
-equivalent circuit contains three independent inputs: the control input variations ˆd, the power
-input voltage variations ˆvg, and the load current variations ˆiload. The output voltage variation ˆv
-can therefore be expressed as a linear combination of the three independent inputs, as follows:
-ˆv(s)= Gvd(s) ˆd(s)+ Gvg(s)ˆvg(s)−Zout(s) ˆi load(s) (9.1)
-where
-Gvd(s)= ˆv(s)
-ˆd(s)
-⏐⏐⏐
-⏐⏐⏐
-ˆvg=0
-ˆiload=0
-converter control-to-output transfer function (9.1a)
-Gvg(s)= ˆv(s)
-ˆvg(s)
-⏐⏐
-⏐⏐⏐
-⏐
-ˆd=0
-ˆiload=0
-converter line-to-output transfer function (9.1b)
-Zout(s)=−ˆv(s)
-ˆiload(s)
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvg=0
-ˆd=0
-converter output impedance (9.1c)
-The Bode diagrams of these quantities are constructed in Chap.8. Equation (9.1) describes how
-disturbances vg and iload propagate to the output v, through the transfer function Gvg(s) and the
-output impedance Zout(s). If the disturbances vg and iload are known to have some maximum
-worst-case amplitude, then Eq. (9.1) can be used to compute the resulting worst-case open-loop
-variation in v.
-As described previously, the feedback loop of Fig. 9.2 can be used to reduce the inﬂuences
-of vg and iload on the output v. To analyze this system, let us perturb and linearize its aver-
-aged signals about their quiescent operating points. Both the power stage and the control block
-diagram are perturbed and linearized:
-v
-re f (t)= Vre f+ ˆvre f (t) (9.2)
-ve(t)= Ve+ ˆve(t)
-etc.
+稳定性是反馈系统的另一个重要问题。加入反馈环路可使原本行为良好的电路出现振荡、振铃和超调及其他不良行为。对稳定性的深入处理超出了本书范围；但此处使用评估稳定性的简单相位裕度判据。当环路增益 $T$ 的相位裕度为正时，反馈系统稳定。而且增大相位裕度使系统暂态响应行为更好，超调和振铃更少。9.4 节量化相位裕度与闭环响应的关系。
 
-9.2 Eﬀect of Negative Feedback on the Network Transfer Functions 351
-Fig. 9.3 Small-signal converter model, which represents variations in vg, d,a n diload
-In a dc regulator system, the reference input is constant, so ˆvre f (t)= 0. In a switching ampliﬁer
-or dc–ac inverter, the reference input may contain an ac variation. In Fig. 9.4a, the converter
-model of Fig. 9.3 is combined with the perturbed and linearized control circuit block diagram.
-This is equivalent to the reduced block diagram of Fig. 9.4b, in which the converter model has
-been replaced by blocks representing Eq. (9.1).
-Solution of Fig. 9.4b for the output voltage variation v yields
-ˆv= ˆvre f
-GcGvd/VM
-1+ HGcGvd/VM
-+ ˆvg
-Gvg
-1+ HGcGvd/VM
-−ˆiload
-Zout
-1+ HGcGvd/VM
-(9.3)
-which can be written in the form
-ˆv= ˆvre f
-1
-H
-T
-1+ T+ ˆvg
-Gvg
-1+ T−ˆiload
-Zout
-1+ T (9.4)
-with
-T(s)= H(s)Gc(s)Gvd(s)/VM = “loop gain”
-Equation (9.4) is a general result. The loop gain T(s) is deﬁned in general as the product of the
-gains around the forward and feedback paths of the loop. This equation shows how the addition
-of a feedback loop modiﬁes the transfer functions and performance of the system, as described
-in detail below.
-9.2.1 Feedback Reduces the Transfer Functions from Disturbances to the Output
-The transfer function from vg to v in the open-loop buck converter of Fig.9.3 is Gvg(s), as given
-in Eq. (9.1). When feedback is added, this transfer function becomes
-ˆv(s)
-ˆvg(s)
-⏐⏐
-⏐
-⏐⏐⏐
-ˆvre f=0
-ˆiload=0
-= Gvg(s)
-1+ T(s) (9.5)
-from Eq. (9.4). So this transfer function is reduced via feedback by the factor 1/(1+T(s)). If the
-loop gain T(s) is large in magnitude, then the reduction can be substantial. Hence, the output
-voltage variation v resulting from a given vg variation is attenuated by the feedback loop.
+9.5 节给出一个示例，为直流稳压器系统设计补偿网络。补偿网络设计以达到足够相位裕度和良好
 
-352 9 Controller Design
-Fig. 9.4 V oltage regulator system small-signal model: (a) with converter equivalent circuit; (b) complete
-block diagram
-Equation (9.4) also predicts that the converter output impedance is reduced, from Zout(s)t o
-ˆv(s)
-−ˆiload(s)
-⏐⏐⏐⏐
-⏐
-⏐
-ˆvg=0
-ˆvre f=0
-= Zout(s)
-1+ T(s) (9.6)
-So the feedback loop also reduces the converter output impedance by a factor of 1/(1+ T(s)),
-and the inﬂuence of load current variations on the output voltage is reduced.
+![源页 p.361](../assets/page-snapshots/chapter-9/page-361.png)
 
-9.3 Construction of 1/(1+ T)a n dT/(1+ T) 353
-9.2.2 Feedback Causes the Transfer Function from the Reference Input to the Output
-to Be Insensitive to Variations in the Gains in the Forward Path of the Loop
-According to Eq. (9.4), the closed-loop transfer function from vre f to v is
-ˆv(s)
-ˆvre f (s)
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvg=0
-ˆiload=0
-= 1
-H(s)
-T(s)
-1+ T(s) (9.7)
-If the loop gain is large in magnitude, that is, ∥ T∥≫ 1, then (1+ T)≈T and T/(1+ T)≈
-T/T= 1. The transfer function then becomes
-ˆv(s)
-ˆvre f (s)≈1
-H(s) (9.8)
-which is independent of Gc(s), VM, and Gvd(s). So provided that the loop gain is large in mag-
-nitude, then variations in Gc(s), VM, and Gvd(s) have negligible eﬀect on the output voltage. Of
-course, in the dc regulator application, vre f (t) is constant and ˆvre f = 0. But Eq. ( 9.8) applies
-equally well to the dc values. For example, if the system is linear, then we can write
-V
-Vre f
-= 1
-H(0)
-T(0)
-1+ T(0)≈1
-H(0) (9.9)
-So to make the dc output voltageV accurately follow the dc referenceVre f′ we need only ensure
-that the dc sensor gain H(0) and dc reference Vre f are well known and accurate, and thatT(0) is
-large. Precision resistors are normally used to realizeH, but components with tightly controlled
-values need not be used in Gc, the pulse-width modulator, or the power stage. The sensitivity of
-the output voltage to the gains in the forward path is reduced, while the sensitivity of v to the
-feedback gain H and the reference input vre f is increased.
-9.3 Construction of the Important Quantities 1/(1+ T)a n dT/(1+ T)
-and the Closed-Loop Transfer Functions
-The transfer functions in Eqs. (9.4)t o( 9.9) can be easily constructed using the algebra-on-the-
-graph method [81]. Let us assume that we have analyzed the blocks in our feedback system, and
-have plotted the Bode diagram of∥ T(s)∥. To use a concrete example, suppose that the result is
-given in Fig. 9.5,f o rw h i c hT(s)i s
-T(s)= T0
-⎦
-1+ s
-ωz
-)
-⎛⎜⎜⎜⎜⎜⎝1+ s
-Qωp1.
-+
-⎦ s
-ωp1
-)2⎞⎟⎟⎟⎟⎟⎠
-⎦
-1+ s
-ωp2
-) (9.10)
-This example appears somewhat complicated. But the loop gains of practical voltage regulators
-are often even more complex, and may contain four, ﬁve, or more poles. Evaluation of Eqs. (9.5)
+抑制预期扰动。超前补偿器和 P-D 控制器用于改善相位裕度并扩展反馈环路带宽。这导致更好抑制高频扰动。滞后补偿器和 P-I 控制器用于增大低频环路增益。这导致更好抑制低频扰动和非常小的稳态误差。更复杂的补偿器可实现两种方法的优点。
 
-354 9 Controller Design
-fp1
-QdB| T0 |dB
-fz
-fc fp2
-Crossover
-frequency
-f
-|| T ||
-0 dB
-20 dB
-40 dB
-60 dB
-80 dB
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 9.5 Magnitude of the loop gain example, Eq. (9.10)
-to (9.7), to determine the closed-loop transfer functions, requires quite a bit of work. The loop
-gain T must be added to 1, and the resulting numerator and denominator must be refactored.
-Using this approach, it is diﬃcult to obtain physical insight into the relationship between the
-closed-loop transfer functions and the loop gain. In consequence, design of the feedback loop
-to meet speciﬁcations is diﬃcult.
-Using the algebra-on-the-graph method, the closed-loop transfer functions can be con-
-structed by inspection, and hence the relation between these transfer functions and the loop gain
-becomes obvious. Let us ﬁrst investigate how to plot∥T/(1+ T)∥. It can be seen from Fig. 9.5
-that there is a frequency f
-c, called the “crossover frequency,” where∥T∥= 1. At frequencies
-less than fc,∥T∥> 1; indeed,∥T∥≫ 1f o r f≪ fc. Hence, at low frequency, (1+ T)≈T, and
-T/(1+ T)≈T/T= 1. At frequencies greater than fc,∥T∥< 1, and∥T∥≪ 1f o r f≫ fc.S oa t
-high frequency, (1+ T)≈1 and T/(1+ T)≈T/1= T.S ow eh a v e
-T
-1+ T ≈
-{1f o r∥T∥≫ 1
-T for∥T∥≪ 1 (9.11)
-The asymptotes corresponding to Eq. (9.11) are relatively easy to construct. The low-frequency
-asymptote, for f< fc, is 1 or 0 dB. The high-frequency asymptotes, for f> fc, follow T.T h e
-result is shown in Fig. 9.6.
-So at low frequency, where∥ T∥ is large, the reference-to-output transfer function is
-ˆv(s)
-ˆvre f (s)= 1
-H(s)
-T(s)
-1+ T(s)≈1
-H(s) (9.12)
-This is the desired behavior, and the feedback loop works well at frequencies where ∥ T∥ is
-large. At high frequency (f≫ fc) where∥ T∥ is small, the reference-to-output transfer function
-is
-ˆv(s)
-ˆvre f (s)= 1
-H(s)
-T(s)
-1+ T(s)≈T(s)
-H(s)= Gc(s)Gvd(s)
-VM
-(9.13)
+9.6 节介绍实验测量环路增益的注入法。电压或电流注入的使用解决了高增益系统中建立正确静态工作点的问题。揭示了获得精确测量的条件。注入法还允许测量不稳定系统的环路增益。
 
-9.3 Construction of 1/(1+ T)a n dT/(1+ T) 355
-fp1
-fz
-fc
-fp2
-Crossover
-frequency
-f
-|| T ||
-0 dB
-20 dB
-40 dB
-60 dB
-80 dB
-T
-1+ T
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 9.6 Graphical construction of the asymptotes of∥T/(1+ T)∥. Exact curves are omitted
-This is not the desired behavior; in fact, this is the gain with the feedback connection removed
-(H→0). At high frequencies, the feedback loop is unable to reject the disturbance because the
-bandwidth of T is limited. The reference-to-output transfer function can be constructed on the
-graph by multiplying the T/(1+ T) asymptotes of Fig. 9.6 by 1/H.
-Thus, the crossover frequency fc represents the bandwidth of the feedback system, and
-within this bandwidth the closed-loop behavior is improved. Further, it can be observed from
-Fig. 9.6 that feedback moves the poles of the system:T contains two poles at frequency fp1 that
-are not present in T/(1+ T), and instead T/(1+ T) contains a pole at frequency fc. It can be
-shown that one of the poles of T is moved from frequency fp1 to approximately fz, where it
-cancels the zero. The second pole at fp1 is moved to approximately fc. Figure 9.6 illustrates
-how, within the bandwidth of the feedback loop, the frequencies of the poles are increased and
-their Q–factors are changed.
-We can plot the asymptotes of ∥1/(1+ T)∥ using similar arguments. At low frequencies
-where∥T∥≫ 1, then (1+ T)≈T, and hence 1/(1+ T)≈1/T At high frequencies where
-∥T∥≪ 1, then (1+ T)≈1 and 1/(1+ T)≈1. So we have
-1
-1+ T(s)≈
-⎧⎪⎪⎪⎨⎪⎪⎪
-⎩
-1T(s) for
-
-T
-
-≫ 1
-1f o r
-T
-≪ 1
-(9.14)
-The asymptotes for the T(s) example of Fig. 9.5 are plotted in Fig. 9.7.
-At low frequencies where∥ T∥ is large, the disturbance transfer function from v
-g to v is
-ˆv(s)
-ˆvg(s)= Gvg(s)
-1+ T(s)≈Gvg(s)
-T(s) (9.15)
-Again, Gvg(s) is the original transfer function, with no feedback. The closed-loop transfer func-
-tion has magnitude reduced by the factor 1/∥T∥. So if, for example, we want to reduce this trans-
-fer function by a factor of 20 at 120 Hz, then we need a loop gain∥ T∥ of at least 20⇒26 dB
-at 120 Hz. The disturbance transfer function from vg to v can be constructed on the graph, by
-multiplying the asymptotes of Fig. 9.7 by the asymptotes for Gvg(s).
+## 9.2 负反馈对网络传递函数的影响
 
-356 9 Controller Design
-fp1
-QdB|T0 |dB
-fz
-fc fp2
-Crossover
-frequency
-|| T ||
-0 dB
-20 dB
-40 dB
-60 dB
-80 dB
-f
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-QdB
-| T0 |dB fp1
-fz
-1
-1+ T
-+ 40 dB/decade
-+ 20 dB/decade
-Fig. 9.7 Graphical construction of∥1/(1+ T)∥
-Similar arguments apply to the output impedance. The closed-loop output impedance at low
-frequencies is
-ˆv(s)
-−ˆiload(s)
-= Zout(s)
-1+ T(s)≈Zout(s)
-T(s) (9.16)
-The output impedance is also reduced in magnitude by a factor of 1/∥T∥ at frequencies below
-the crossover frequency.
-At high frequencies ( f> fc) where∥ T∥ is small, then 1/(1+ T)≈1, and
-ˆv(s)
-ˆvg(s)= Gvg(s)
-1+ T(s)≈Gvg(s)
-ˆv(s)
-−ˆiload(s)
-= Zout(s)
-1+ T(s)≈Zout(s)
-(9.17)
-This is the same as the original disturbance transfer function and output impedance. So the
-feedback loop has essentially no eﬀect on the disturbance transfer functions at frequencies above
-the crossover frequency.
-Figure 9.8a illustrates an example of a buck converter having a loop gain T(s) given by
-T(s)= H(s)Gvd(s)/VM (9.18)
-This simple example contains no compensator. The L–C ﬁlter of the buck converter introduces
-resonant poles at frequency f = fp1, and the capacitor equivalent series resistance RC leads
-to a zero at frequency fz. The feedback sensor block H(s) contains a high-frequency pole at
-f= fp2. Hence, this example exhibits a loop gainT(s) identical to Eq. (9.10); let us assume that
-the element values lead to the magnitude plotted in Fig. 9.5. Hence, the quantity∥1/(1+ T)∥ is
-given by the plot of Fig. 9.7.
+我们已看到如何导出开关变换器的小信号交流传递函数。例如，降压变换器的等效电路模型可写成图9.3。此等效电路含三个独立输入：控制输入变化 $\hat{d}$、功率输入电压变化 $\hat{v}_g$ 和负载电流变化 $\hat{i}_{load}$。故输出电压变化 $\hat{v}$ 可表示为三个独立输入的线性组合：
 
-9.3 Construction of 1/(1+ T)a n dT/(1+ T) 357
-Fig. 9.8 Construction of the closed-loop output impedance of a simple buck regulator: ( a) feedback
-system, (b) open-loop (solid line) and closed-loop (dashed line) output impedance asymptotes
-We can construct the Bode plot of the open-loop output impedance Zout by setting ˆvg and ˆd
-to zero in Fig. 9.8a and then ﬁnding the impedance between the output terminals; the result is:
-Zout(s)= sL
- R
-
-⎦
-RC+ 1
-sC
-)
-(9.19)
-The approximate Bode diagram of the open-loop output impedance is constructed in Fig. 9.8b,
-for the typical case withRC ≪ R. The closed-loop output impedance is next constructed by mul-
-tiplying the open-loop output impedance of Fig. 9.8bb yt h e∥1/(1+ T)∥ asymptotes of Fig. 9.7,
-with the result illustrated in Fig. 9.8b. At frequencies greater than the crossover frequency fc,
+$$\hat{v}(s) = G_{vd}(s)\hat{d}(s) + G_{vg}(s)\hat{v}_g(s) - Z_{out}(s)\hat{i}_{load}(s) \tag{9.1}$$
 
-358 9 Controller Design
-the output impedance is unaﬀected by the feedback loop. At frequencies immediately below
-fc, the feedback loop reduces the output impedance and the ∥1/(1+ T)∥ term introduces a
-+ 20 dB/decade slope to∥Zout/(1+ T)∥.A t f = fz, the zero of Zout is cancelled by the pole of
-1/(1+ T), and hence no change in slope is observed in the closed-loop output impedance plot.
-Likewise, at f= fp1, the resonant poles ofZout are cancelled by the resonant zeroes of 1/(1+T),
-and again there is no change in the slope of ∥Zout/(1+ T)∥. These cancellations occur because
-the power stage circuit introduces the same poles into Gvd(s) and Zout(s).
-Another example is given later in this chapter, in which a feedback compensator circuit
-introduces poles and zeroes into T(s) that are not present in Zout(s). As a result, the closed-
-loop output impedance exhibits poles and zeroes induced by the compensator dynamics within
-∥1/(1+ T)∥.
-9.4 Stability
-It is well known that adding a feedback loop can cause an otherwise stable system to become
-unstable. Even though the transfer functions of the original converter, Eq. ( 9.1), as well as of
-the loop gain T(s), contain no right half-plane poles, it is possible for the closed-loop transfer
-functions of Eq. (9.4) to contain right half-plane poles. The feedback loop then fails to regulate
-the system at the desired quiescent operating point, and oscillations are usually observed. It is
-important to avoid this situation. And even when the feedback system is stable, it is possible
-for the transient response to exhibit undesirable ringing and overshoot. The stability problem
-is discussed in this section, and a method for ensuring that the feedback system is stable and
-well-behaved is explained.
-When feedback destabilizes the system, the denominator (1+T(s)) terms in Eq. (9.4) contain
-roots in the right half-plane (i.e., with positive real parts). If T(s) is a rational fraction, that is,
-the ratio N(s)/D(s) of two polynomial functions N(s) and D(s), then we can write
-T(s)
-1+ T(s)=
-N(s)
-D(s)
-1+ N(s)
-D(s)
-= N(s)
-N(s)+ D(s)
-1
-1+ T(s)= 1
-1+ N(s)
-D(s)
-= D(s)
-N(s)+ D(s)
-(9.20)
-So T(s)/(1+T(s)) and 1/(1+T(s)) contain the same poles, given by the roots of the polynomial
-(N(s)+ D(s)). A brute-force test for stability is to evaluate (N(s)+ D(s)), and factor the result to
-see whether any of the roots have positive real parts. However, for all but very simple loop gains,
-this involves a great deal of work. A more illuminating method is given by the Nyquist stability
-theorem, in which the number of right half-plane roots of ( N(s)+ D(s)) can be determined
-by testing T(s)[ 82, 83]. This theorem is discussed in Sect. 9.4.2. Often, a special case of the
-theorem known as the phase margin test is suﬃcient for designing most voltage regulators; the
-simpler phase margin test is discussed ﬁrst.
+其中
 
-9.4 Stability 359
-9.4.1 The Phase Margin Test
-The crossover frequency fc is deﬁned as the frequency where the magnitude of the loop gain is
-unity:
-
-T ( j2πf
-c)
-
-= 1⇒0 dB (9.21)
-To compute the phase marginϕ
-m, the phase of the loop gain T is evaluated at the crossover
-frequency, and 180◦is added. Hence,
-ϕm= 180◦+∠T( j2πfc) (9.22)
-If there is exactly one crossover frequency, and if the loop gainT(s) contains no right half-plane
-poles, then the quantities 1/(1 + T) and T/(1 + T) contain no right half-plane poles when
-the deﬁned in Eq. ( 9.22) is positive. Thus, using a simple test on T(s), we can determine the
-stability of T/(1+ T) and 1/(1+ T). This is an easy-to-use design tool—we simply ensure that
-the phase of T is greater than−180◦at the crossover frequency.
-When there are multiple crossover frequencies, the phase margin test may be ambiguous.
-Also, when T contains right half-plane poles (i.e., the original open-loop system is unstable),
-then the phase margin test cannot be used. In either case, the more general Nyquist stability
-theorem (Sect. 9.4.2) must be employed.
-The loop gain of a typical stable system is shown in Fig.9.9. It can be seen that∠T( j2πfc)=
-−112◦. Hence, ϕm = 180◦−112◦=+ 68◦. Since the phase margin is positive, T/(1+ T) and
-1/(1+ T) contain no right half-plane poles, and the feedback system is stable.
-The loop gain of an unstable system is sketched in Fig.9.10. For this example,∠T( j2πfc)=
-−230◦. The phase margin isϕm= 180◦−230◦=−50◦. The negative phase margin implies that
-T/(1+ T) and 1/(1+ T) each contain at least one right half-plane pole.
-fc
-Crossover
-frequency
-0 dB
-20 dB
-40 dB
-60 dB
-f
-fp1
-fz
-0
-m
- T
- T T
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
- T
-Fig. 9.9 Magnitude and phase of the loop gain of a stable system. The phase marginϕm is positive
+$$G_{vd}(s) = \left.\frac{\hat{v}(s)}{\hat{d}(s)}\right|_{\hat{v}_g=0,\,\hat{i}_{load}=0} \quad \text{变换器控制-输出传递函数} \tag{9.1a}$$
 
-360 9 Controller Design
-fc
-Crossover
-frequency
-0 dB
-20 dB
-40 dB
-60 dB
-f
-fp1
-fp2 0 T
- T
-m (< 0)
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
- T T
-Fig. 9.10 Magnitude and phase of the loop gain of an unstable system. The phase marginϕm is negative
-9.4.2 The Nyquist Stability Criterion
-The Nyquist Stability Criterion is a rigorous and general technique to evaluate stability of a
-closed-loop system, based on its loop gain. This technique determines the number of poles of
-the closed-loop transfer functionsT/(1+T) and 1/(1+T) that lie in the right half of the complex
-s-plane, based on a plot of the loop gain T(s) that can be derived from its Bode plot. The phase
-margin test of Sect. 9.4.1 is based on the Nyquist plot, and is a useful but not entirely general
-test for stability. In some cases, including several encountered later in this textbook, the more
-general Nyquist stability test must be employed.
-The Nyquist Stability Criterion is based on the conformal mapping of a contour Γthat
-encloses the right half (positive real portion) of the complex s-plane. The contour is mapped
-through the loop gain transfer function T(s). Encirclements of the −1 point by the mapped
-contour are employed to count the number of right half-plane poles that are present in the
-closed-loop transfer functions. The subsections below present a derivation, the precise rules for
-application, and some important examples.
-The Principle of the Argument
-Let us consider a transfer function T(s) having a zero at s= s
-1:
-T(s)= (s−s1) (9.23)
-Let us also consider a closed contour Γin the complex s-plane that encircles the point s1 as
-illustrated in Fig. 9.11a. The complex variable s is varied to follow the path Γ, beginning at
-some point a and proceeding around the contour in the clockwise direction through points b, c,
-and back to a. For the example T(s)o fE q . (9.23), the value of T(s) at some point s is seen to
-be the vector extending from s1 to s, having magnitude and phase as illustrated in Fig. 9.11a.
+$$G_{vg}(s) = \left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{d}=0,\,\hat{i}_{load}=0} \quad \text{变换器输入-输出传递函数} \tag{9.1b}$$
 
-9.4 Stability 361
-(a)
-Re(s)
-Im(s)
-s1
-Contour
-a
-b
-c
-(b)
-Re(T(s))
-Im(T(s))
-T ()
-(c)
-s0 ab c a
-Position along
-ContourT
-T T T T
-Fig. 9.11 Principle of the argument, example 1: ( a) a closed contour Γin the complex s plane, ( b)
-mapping of the contour Γthrough the transfer function T(s)o fE q . (9.23), (c) variation of the phase of
-T(s), as s varies around the contourΓ
-As sketched in Fig.9.11c, at s= a the phase∠T is 0◦.A s s varies along the contour, through
-b, c, and then back toa, the phase∠T decreases, and becomes−360◦after one complete traverse
-of contourΓ. This net phase change of−360◦indicates that the zero at s1 lies inside contourΓ.
-Figure 9.11b contains a plot of T(s)a s s varies around the contour Γ; the magnitude∥T∥
-and phase ∠T are identiﬁed and are identical to the quantities identiﬁed in Fig. 9.11a. This
-plot is a conformal mapping of the contour Γthrough the transfer function T(s); conformal
-mappings preserve local angles. The mapped contourT(Γ) encircles the origin of theT(s) plane,
-as indicated by the net change of−360◦in∠T(s).
-Figure 9.12a illustrates a second contourΓ′ that does not enclose the zero of T(s)a t s1.A s
-illustrated in Fig. 9.12c, after one complete traverse of contourΓ′, the net change in∠T is zero.
-The mapped contour T(Γ′) is illustrated in Fig. 9.12b; this contour does not encircle the origin
-of the T(s) plane.
-The phase of a complex function is sometimes referred to as its argument. Cauchy’s princi-
-ple of the argument tells us that when the closed contourΓencloses the zero s1, then the phase
-∠T(s) exhibits a net change of −360◦as s traversesΓonce in the clockwise direction. This is
-equivalent to saying that the mapped contour T(Γ) encircles the origin of the T plane.
-Next let us consider a transfer function T(s) that contains multiple poles and zeroes:
-T(s)= Tre f
-(s−z1)( s−z2)···
-(s−p1)( s−p2)··· (9.24)
-As usual, we can express the phase of T(s) as a sum of terms that arise from each zero or pole,
-as follows:
+$$Z_{out}(s) = -\left.\frac{\hat{v}(s)}{\hat{i}_{load}(s)}\right|_{\hat{v}_g=0,\,\hat{d}=0} \quad \text{变换器输出阻抗} \tag{9.1c}$$
 
-362 9 Controller Design
-Fig. 9.12 Principle of the argument, example 2: ( a) a closed contour Γ′ in the complex s plane, ( b)
-mapping of the contourΓ′ through the transfer function T(s)o fE q . (9.23), (c) variation of the phase of
-T(s), as s varies around the contourΓ′. Since the zero at s= s1 does not lie inside contourΓ′, there is no
-net change in the phase of T, and the mapped contour T(Γ′) does not encircle the origin of the T plane
-∠T(s)=∠(s−z1)+∠(s−z2)+···−∠(s−p1)−∠(s−p2)−··· (9.25)
-We can again deﬁne a closed contourΓin the complex s plane, and examine how the phaseT(s)
-changes as s traverses the contour once in the clockwise direction. Each zero of T(s) that lies
-inside the contour will cause a net change of −360◦in∠T, and each pole of T(s) lying inside
-the contour will cause a net change of+360◦in∠T. If a total of Z zeroes and P poles lie inside
-the contourΓ, then∠T will exhibit a net phase shift of−N360◦, where
-N= Z−P (9.26)
-The mapped contour T(Γ) will encircle the origin of the T(s) plane N times in the clockwise
-direction.
-Thus, the principle of the argument provides us with a tool to determine the number of poles
-and zeroes that lie inside a contourΓ.
-The Nyquist Contour
-It is desired to determine whether the closed-loop transfer functions of Eq. ( 9.20) contain un-
-stable poles that lie in the right half of the complex plane. To accomplish this, we can deﬁne a
-contourΓthat encloses the complete right half-plane, then employ the principle of the argument
-to test the number of closed-loop poles that are enclosed by this contour.
+![源页 p.362](../assets/page-snapshots/chapter-9/page-362.png)
 
-9.4 Stability 363
-Fig. 9.13 The Nyquist contour, which encloses the
-right half of the complex s plane
-Im(s)
-Re(s)
-A
-B
-C
-Figure 9.13 illustrates a contourΓcalled the Nyquist contour. This contour is traversed in
-the clockwise direction, and the region enclosed to the right of the contour is the right half of the
-complex s plane. The Nyquist contour is comprised of three parts. Segment Γ
-A is the positive
-part of the imaginary axis, in which
-s= jω with ω∈(0,∞) (9.27)
-SegmentΓB can be chosen to be a semicircular arc that lies to the right of all closed-loop poles,
-deﬁned as follows:
-s= Rejθ with R→∞and θ∈(+90◦,−90◦) (9.28)
-SegmentΓC is the negative part of the imaginary axis, in which
-s=−jω with ω∈(∞, 0) (9.29)
-SegmentΓC is the complex conjugate of segmentΓA.
-If a transfer function F(s) contains Z zeroes and P poles in the right half of the complex
-plane, then the mapping F(Γ) of the Nyquist contour will encircle the origin of the F(s) plane
-N= (Z−P) times.
-Stability Test
-The closed-loop transfer functions of Eq. (9.20) contain the denominator polynomialN(s)+D(s),
-whose roots are the closed-loop poles. It is desired to test whether this polynomial contains roots
-in the right half of the complex s-plane. Note from Eq. (9.20) that these roots are the zeroes of
-the quantity (1+ T(s)), and additionally that the poles of (1 + T(s)) coincide with the poles
-of T(s). Hence we could map the Nyquist contour of Fig. 9.13 through the transfer function
-(1+ T(s)), and evaluate the number of encirclements of the origin.
-In the complex plane, the quantity (1+T(s)) is simply equal to the quantityT(s) shifted to the
-right by one unit. If the mapped Nyquist contour (1+T(Γ)) encircles the origin, then the contour
-T(Γ) encircles the−1 point. So one could map the Nyquist contour Γof Fig. 9.13 through the
-loop gain T(s) and count the number of encirclementsN of the−1 point byT(Γ). The number of
-encirclements N is related to the number of poles in the right half-plane according toN= Z−P,
+图9.3 小信号变换器模型，表示 $v_g$、$d$ 和 $i_{load}$ 的变化
 
-364 9 Controller Design
-where Z is the number of right half-plane poles of the closed-loop gains T/(1+ T)o r1/(1+ T),
-and P is the number of right half-plane poles present in the original loop gain T(s).
-If the original open-loop system is stable, so that T(s) contains no right half-plane poles,
-then P= 0. In this common case N= Z: the number of encirclements of the−1 point by T(Γ)
-is equal to the number of right half-plane closed-loop poles in T/(1+ T)o r1/(1+ T).
-A Basic Example
-As a ﬁrst example, let us consider a loop gain T(s) having three poles:
-T(s)= T0⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω2
-)⎦
-1+ s
-ω3
-) (9.30)
-The magnitude and phase Bode plot of T(s) is sketched in Fig. 9.14 for some speciﬁc values of
-T0,ω1,ω2, andω3. For this example, T(s) exhibits a crossover frequencyωc with phase margin
-ϕm as illustrated.
-Figure 9.15a illustrates the ﬁrst part of the Nyquist plot, in which segment ΓA deﬁned by
-Eq. (9.27) is mapped through the loop gain. Since s= jωalongΓA, this amounts to a polar
-plot of T( jω) that corresponds to the magnitude and phase data of the Bode plot in Fig. 9.14.
-Atω= 0, the loop gain has magnitude T0 and phase 0◦, so that the Nyquist plot begins on the
-positive real axis at T= T0.A sωincreases, the magnitude decreases and the phase becomes
-negative as illustrated.
-At the crossover frequency fc, the loop gain has magnitude 1 and phase (−180◦+ϕm). The
-contour T( jω) crosses the unit circle at this point, as illustrated in Fig. 9.15a. At frequencies
-above fc the magnitude continues to decrease, and the contour T( jω) tends towards the origin.
-The second portion of the Nyquist contourΓB is deﬁned by Eq. (9.28). To evaluate how the
-loop gain T(s) maps the contourΓB, we ﬁrst substitute s= Rejθinto Eq. (9.30):
-fc
-Crossover
-frequency
-0 dB
-20 dB
-40 dB
-60 dB
-f
-fp1
-0
-ϕm
-∠ T
-∠ T||T||
-||T||
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-fp2
-fp3
-Fig. 9.14 Bode plot of loop gain T(s) for the example of Eq. (9.30)
+这些量的波特图在第8章构造。式 (9.1) 描述扰动 $v_g$ 和 $i_{load}$ 如何通过传递函数 $G_{vg}(s)$ 和输出阻抗 $Z_{out}(s)$ 传播到输出 $v$。若已知扰动 $v_g$ 和 $i_{load}$ 有某最大最坏情况幅值，则可用式 (9.1) 计算所得 $v$ 的最坏情况开环变化。
 
-9.4 Stability 365
-(a)
-–1
-Re[T(s)]
-Im[T(s)]
-Unit circle
-f = fc
-f = 0
-ϕm
-f
-T(jω )
-(b)
-–1
-Re[T(s)]
-Im[T(s)]
-T(jω )
-T(–jω )
-®¥
-Fig. 9.15 Nyquist plot for the loop gain of Fig. 9.14:( a) mapping of the contour ΓA through the loop
-gain T(s), (b) mapping of the complete Nyquist contour through the loop gain T(s)
-T(Rejθ)= T0⎦
-1+ Rejθ
-ω1
-)⎦
-1+ Rejθ
-ω2
-)⎦
-1+ Rejθ
-ω3
-) (9.31)
-Next, we let R→∞. This causes the denominator of Eq. (9.31) to tend to inﬁnity in magnitude,
-which causes the magnitude of T to tend to zero. This portion of the Nyquist plot collapses to
-the origin.
-The third portion of the Nyquist plot involves mapping the segmentΓC deﬁned by Eq. (9.29)
-through the loop gain T(s). This portion of the Nyquist contour is a polar plot ofT(−jω), which
-is the complex conjugate of T( jω). Hence this plot is easily sketched by reﬂecting the T( jω)
-plot about the real axis, as illustrated in Fig. 9.15b.
-We can now determine the number of encirclements of the−1 point by T(Γ). Examination
-of Fig. 9.15b shows that the −1 point lies outside the contour T(Γ) and hence there are no
-encirclements: N = 0. Since the original loop gain T(s) contains no right half-plane poles,
-P= 0. According to Eq. ( 9.26), Z= 0 so the closed-loop transfer functions contain no right
-half-plane poles, and the feedback loop is stable.
-If the phase marginϕm identiﬁed in Fig.9.14 had been negative, then the contourT(Γ) would
-appear as illustrated in Fig. 9.16. The plot of T( jω) crosses the unit circle in the third quadrant.
-In this case, the Nyquist plot of Fig. 9.16b encircles the−1 point twice: N= 2. Hence Z= 2
-and the closed-loop transfer functions contain two RHP poles. The feedback loop is unstable.
-For this example, the original T(s) contained three poles in the left half of the complex s-plane;
-in the closed-loop transfer function T/(1+ T), two of these poles have moved into the right
-half-plane, while one pole remains in the left half of the complex s-plane.
-Example 2: Three Crossover Frequencies
-As a second example, let us consider a loop gain having a low-frequency real pole at f = f1,
-and higher-frequency resonant poles at frequency f= f2 that is just beyond the (ﬁrst) crossover
-frequency:
-T(s)= T0
-⎦
-1+ s
-ω1
-) ⎛⎜⎜⎜⎜⎜⎝1+ s
-Qω2
-+
-⎦s
-ω2
-)2⎞⎟⎟⎟⎟⎟⎠
-(9.32)
+如前所述，图9.2 的反馈环路可用于减小 $v_g$ 和 $i_{load}$ 对输出 $v$ 的影响。为分析此系统，对其平均信号在静态工作点附近扰动和线性化。功率级和控制框图均扰动和线性化：
 
-366 9 Controller Design
-(a)
-Re[T(s)]
-Im[T(s)]
-Unit circle
-f = fc
-f = 0
-ϕm
-f
-(b)
-–1
-Re[T(s)]
-Im[T(s)]
-T(jω )
-T(–jω )
-®¥
-Fig. 9.16 Nyquist plot for an unstable system: (a) mapping of the contourΓA through the loop gain T(s),
-with negative phase marginϕm,( b) mapping of the complete Nyquist contour through the loop gain T(s)
-0 dB
-20 dB
-40 dB
-60 dB
-f
-f1
-0
-∠ T
-∠ T
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-f2
-1 2 3
-|| T |||| T ||
-Fig. 9.17 Bode plot of loop gainT(s) for the example of Eq. (9.32). The loop gain exhibits three crossover
-frequencies
-A Bode plot of the loop gain for this case is illustrated in Fig. 9.17. The resonant poles at
-f2 cause the magnitude of T increase above 0 dB in the vicinity of f2. Consequently, there are
-three crossover frequencies (designated 1, 2, and 3). We could associate a phase margin with
-each crossover frequency; for the plot of Fig.9.17, the phase margins associated with crossover
-frequencies 1 and 2 are positive, while the phase margin associated with crossover frequency 3
-is negative. Hence the simple phase margin test is ambiguous, and it is necessary to sketch the
-Nyquist plot to correctly determine whether this loop gain leads to a stable system.
-Figure 9.18 contains the Nyquist plot corresponding to the Bode plot of Fig. 9.17.F i g -
-ure 9.18a contains the mapped contour T(Γ
-A)= T( jω), with crossover points 1, 2, and 3 iden-
-tiﬁed. Figure 9.18b contains the mapping of the complete Nyquist contour. It can be seen that
-```
+$$v_{ref}(t) = V_{ref} + \hat{v}_{ref}(t) \tag{9.2}$$
+
+$$v_e(t) = V_e + \hat{v}_e(t) \quad \text{等}$$
+
+直流稳压器系统中参考输入为常数，故 $\hat{v}_{ref}(t) = 0$。在开关放大器或直流-交流逆变器中，参考输入可含交流变化。图9.4a 中，图9.3 的变换器模型与扰动和线性化的控制电路框图结合。这等价于图9.4b 的简化框图，其中变换器模型已被表示式 (9.1) 的框替代。
+
+由图9.4b 解输出电压变化 $v$ 得
+
+$$\hat{v} = \hat{v}_{ref}\frac{G_c G_{vd}/V_M}{1+HG_c G_{vd}/V_M} + \hat{v}_g\frac{G_{vg}}{1+HG_c G_{vd}/V_M} - \hat{i}_{load}\frac{Z_{out}}{1+HG_c G_{vd}/V_M} \tag{9.3}$$
+
+可写成
+
+$$\hat{v} = \hat{v}_{ref}\frac{1}{H}\frac{T}{1+T} + \hat{v}_g\frac{G_{vg}}{1+T} - \hat{i}_{load}\frac{Z_{out}}{1+T} \tag{9.4}$$
+
+其中
+
+$$T(s) = H(s)G_c(s)G_{vd}(s)/V_M = \text{环路增益}$$
+
+式 (9.4) 是一般结果。环路增益 $T(s)$ 一般定义为环路前向和反馈路径增益之积。此方程表明加入反馈环路如何修改系统的传递函数和性能，详见下文。
+
+### 9.2.1 反馈减小从扰动到输出的传递函数
+
+图9.3 开环降压变换器中从 $v_g$ 到 $v$ 的传递函数为式 (9.1) 给出的 $G_{vg}(s)$。加入反馈后此传递函数变为
+
+$$\left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{v}_{ref}=0,\,\hat{i}_{load}=0} = \frac{G_{vg}(s)}{1+T(s)} \tag{9.5}$$
+
+由式 (9.4)。故此传递函数被反馈减小因子 $1/(1+T(s))$。若环路增益 $T(s)$ 幅值大，则减小可很大。故给定 $v_g$ 变化引起的输出电压变化 $v$ 被反馈环路衰减。
+
+![源页 p.363](../assets/page-snapshots/chapter-9/page-363.png)
+
+图9.4 电压稳压器系统小信号模型：(a) 含变换器等效电路；(b) 完整框图
+
+式 (9.4) 还预测变换器输出阻抗从 $Z_{out}(s)$ 减小为
+
+$$\left.\frac{\hat{v}(s)}{-\hat{i}_{load}(s)}\right|_{\hat{v}_g=0,\,\hat{v}_{ref}=0} = \frac{Z_{out}(s)}{1+T(s)} \tag{9.6}$$
+
+故反馈环路也将变换器输出阻抗减小因子 $1/(1+T(s))$，负载电流变化对输出电压的影响被减小。
+
+### 9.2.2 反馈使从参考输入到输出的传递函数对环路前向路径中增益的变化不敏感
+
+按式 (9.4)，从 $v_{ref}$ 到 $v$ 的闭环传递函数为
+
+$$\left.\frac{\hat{v}(s)}{\hat{v}_{ref}(s)}\right|_{\hat{v}_g=0,\,\hat{i}_{load}=0} = \frac{1}{H(s)}\frac{T(s)}{1+T(s)} \tag{9.7}$$
+
+若环路增益幅值大，即 $\|T\| \gg 1$，则 $(1+T) \approx T$，$T/(1+T) \approx T/T = 1$。传递函数变为
+
+$$\frac{\hat{v}(s)}{\hat{v}_{ref}(s)} \approx \frac{1}{H(s)} \tag{9.8}$$
+
+与 $G_c(s)$、$V_M$ 和 $G_{vd}(s)$ 无关。故只要环路增益幅值大，$G_c(s)$、$V_M$ 和 $G_{vd}(s)$ 的变化对输出电压影响可忽略。当然，直流稳压器应用中 $v_{ref}(t)$ 为常数且 $\hat{v}_{ref} = 0$。但式 (9.8) 同样适用于直流值。例如，若系统为线性，可写
+
+$$\frac{V}{V_{ref}} = \frac{1}{H(0)}\frac{T(0)}{1+T(0)} \approx \frac{1}{H(0)} \tag{9.9}$$
+
+故为使直流输出电压 $V$ 精确跟随直流参考 $V_{ref}$，只需确保直流传感器增益 $H(0)$ 和直流参考 $V_{ref}$ 已知且精确，以及 $T(0)$ 大。通常用精密电阻实现 $H$，但 $G_c$、脉宽调制器或功率级中不必用值紧密控制的元件。输出电压对前向路径增益的灵敏度降低，而 $v$ 对反馈增益 $H$ 和参考输入 $v_{ref}$ 的灵敏度增大。
+
+## 9.3 重要量 $1/(1+T)$ 和 $T/(1+T)$ 的构造及闭环传递函数
+
+式 (9.4) 至 (9.9) 的传递函数可用"在图上做代数"方法 [81] 轻易构造。设已分析反馈系统中的各框，并画出 $\|T(s)\|$ 的波特图。为用具体例子，设结果如图9.5所示，其中 $T(s)$ 为
+
+$$T(s) = T_0\frac{\left(1+\dfrac{s}{\omega_z}\right)}{\left(1+\dfrac{s}{Q\omega_{p1}}+\left(\dfrac{s}{\omega_{p1}}\right)^2\right)\left(1+\dfrac{s}{\omega_{p2}}\right)} \tag{9.10}$$
+
+此例看起来有些复杂。但实际电压稳压器的环路增益通常更复杂，可能含四、五个或更多极点。计算式 (9.5)
+
+![源页 p.365](../assets/page-snapshots/chapter-9/page-365.png)
+
+图9.5 式 (9.10) 环路增益示例的幅值
+
+至 (9.7) 以确定闭环传递函数需要相当多的工作。须将环路增益 $T$ 加 1，并重新分解分子和分母。用此方法难以获得闭环传递函数与环路增益之间关系的物理洞察。因此，设计反馈环路以满足技术指标很困难。
+
+用"在图上做代数"方法，闭环传递函数可凭观察构造，故这些传递函数与环路增益的关系变得明显。先研究如何画 $\|T/(1+T)\|$。由图9.5可见有一频率 $f_c$，称为"穿越频率"，此处 $\|T\| = 1$。$f < f_c$ 时 $\|T\| > 1$；实际上 $f \ll f_c$ 时 $\|T\| \gg 1$。故低频 $(1+T) \approx T$，$T/(1+T) \approx T/T = 1$。$f > f_c$ 时 $\|T\| < 1$，$f \gg f_c$ 时 $\|T\| \ll 1$。故高频 $(1+T) \approx 1$，$T/(1+T) \approx T/1 = T$。故有
+
+$$\frac{T}{1+T} \approx \begin{cases} 1 & \text{对} \ \|T\| \gg 1 \\ T & \text{对} \ \|T\| \ll 1 \end{cases} \tag{9.11}$$
+
+对应式 (9.11) 的渐近线相对容易构造。低频渐近线（$f < f_c$）为 1 即 0 dB。高频渐近线（$f > f_c$）跟随 $T$。结果如图9.6所示。
+
+![源页 p.366](../assets/page-snapshots/chapter-9/page-366.png)
+
+图9.6 $\|T/(1+T)\|$ 渐近线的图解构造。省略精确曲线
+
+故低频（$\|T\|$ 大）下参考-输出传递函数为
+
+$$\frac{\hat{v}(s)}{\hat{v}_{ref}(s)} = \frac{1}{H(s)}\frac{T(s)}{1+T(s)} \approx \frac{1}{H(s)} \tag{9.12}$$
+
+这是所需行为，反馈环路在 $\|T\|$ 大的频率处工作良好。高频（$f \gg f_c$，$\|T\|$ 小）下参考-输出传递函数为
+
+$$\frac{\hat{v}(s)}{\hat{v}_{ref}(s)} = \frac{1}{H(s)}\frac{T(s)}{1+T(s)} \approx \frac{T(s)}{H(s)} = \frac{G_c(s)G_{vd}(s)}{V_M} \tag{9.13}$$
+
+这不是所需行为；实际上这是移除反馈连接（$H \to 0$）时的增益。高频下反馈环路因 $T$ 的带宽有限而无法抑制扰动。将图9.6 的 $T/(1+T)$ 渐近线乘以 $1/H$ 即可在图上构造参考-输出传递函数。
+
+故穿越频率 $f_c$ 代表反馈系统的带宽，在此带宽内闭环行为得到改善。此外，由图9.6可观察到反馈移动了系统极点：$T$ 含 $f_{p1}$ 处的两个极点，它们不存在于 $T/(1+T)$ 中，而 $T/(1+T)$ 含 $f_c$ 处的极点。可证 $T$ 的一个极点从 $f_{p1}$ 移到约 $f_z$ 处抵消零点。$f_{p1}$ 处的第二个极点移到约 $f_c$。图9.6说明了在反馈环路带宽内极点频率如何增大及其 Q 因子如何变化。
+
+可用类似论证画 $\|1/(1+T)\|$ 的渐近线。低频 $\|T\| \gg 1$ 时 $(1+T) \approx T$，故 $1/(1+T) \approx 1/T$。高频 $\|T\| \ll 1$ 时 $(1+T) \approx 1$，$1/(1+T) \approx 1$。故有
+
+$$\frac{1}{1+T(s)} \approx \begin{cases} \dfrac{1}{T(s)} & \text{对} \ \|T\| \gg 1 \\ 1 & \text{对} \ \|T\| \ll 1 \end{cases} \tag{9.14}$$
+
+图9.5 的 $T(s)$ 示例的渐近线绘于图9.7。
+
+![源页 p.367](../assets/page-snapshots/chapter-9/page-367.png)
+
+图9.7 $\|1/(1+T)\|$ 的图解构造
+
+低频（$\|T\|$ 大）下从 $v_g$ 到 $v$ 的扰动传递函数为
+
+$$\frac{\hat{v}(s)}{\hat{v}_g(s)} = \frac{G_{vg}(s)}{1+T(s)} \approx \frac{G_{vg}(s)}{T(s)} \tag{9.15}$$
+
+再次，$G_{vg}(s)$ 是无反馈的原始传递函数。闭环传递函数幅值减小因子 $1/\|T\|$。故若想在 120 Hz 处将此传递函数减小 20 倍，则需在 120 Hz 处至少有 $\|T\| = 20 \Rightarrow 26\text{ dB}$ 的环路增益。从 $v_g$ 到 $v$ 的扰动传递函数可通过将图9.7 的渐近线乘以 $G_{vg}(s)$ 的渐近线在图上构造。
+
+类似论证适用于输出阻抗。低频闭环输出阻抗为
+
+$$\frac{\hat{v}(s)}{-\hat{i}_{load}(s)} = \frac{Z_{out}(s)}{1+T(s)} \approx \frac{Z_{out}(s)}{T(s)} \tag{9.16}$$
+
+输出阻抗在穿越频率以下的频率处幅值也减小 $1/\|T\|$。
+
+高频（$f > f_c$，$\|T\|$ 小）下 $1/(1+T) \approx 1$，故
+
+$$\frac{\hat{v}(s)}{\hat{v}_g(s)} = \frac{G_{vg}(s)}{1+T(s)} \approx G_{vg}(s) \tag{9.17}$$
+
+$$\frac{\hat{v}(s)}{-\hat{i}_{load}(s)} = \frac{Z_{out}(s)}{1+T(s)} \approx Z_{out}(s)$$
+
+这与原始扰动传递函数和输出阻抗相同。故反馈环路对穿越频率以上的扰动传递函数基本无影响。
+
+图9.8a 给出一个降压变换器示例，其环路增益 $T(s)$ 为
+
+$$T(s) = H(s)G_{vd}(s)/V_M \tag{9.18}$$
+
+此简单示例不含补偿器。降压变换器的 L-C 滤波器在 $f = f_{p1}$ 处引入谐振极点，电容等效串联电阻 $R_C$ 在 $f_z$ 处引入零点。反馈传感器块 $H(s)$ 含 $f = f_{p2}$ 处的高频极点。故此示例的环路增益 $T(s)$ 与式 (9.10) 相同；设元件值导致图9.5 所示幅值。故 $\|1/(1+T)\|$ 由图9.7 给出。
+
+令图9.8a 中 $\hat{v}_g$ 和 $\hat{d}$ 为零然后求输出端子间阻抗，可构造开环输出阻抗 $Z_{out}$ 的波特图，结果为
+
+$$Z_{out}(s) = sL\,\|\,R\,\|\,\left(R_C + \frac{1}{sC}\right) \tag{9.19}$$
+
+![源页 p.368](../assets/page-snapshots/chapter-9/page-368.png)
+
+图9.8 简单降压稳压器闭环输出阻抗的构造：(a) 反馈系统；(b) 开环（实线）和闭环（虚线）输出阻抗渐近线
+
+开环输出阻抗的近似波特图构造于图9.8b，对应 $R_C \ll R$ 的典型情形。将图9.8b 的开环输出阻抗乘以图9.7 的 $\|1/(1+T)\|$ 渐近线即得闭环输出阻抗，结果如图9.8b所示。穿越频率 $f_c$ 以上的频率处输出阻抗不受反馈环路影响。$f_c$ 以下紧邻处反馈环路减小输出阻抗，$\|1/(1+T)\|$ 项给 $\|Z_{out}/(1+T)\|$ 引入 +20 dB/十倍频程斜率。$f = f_z$ 处 $Z_{out}$ 的零点被 $1/(1+T)$ 的极点抵消，故闭环输出阻抗图中无斜率变化。同样 $f = f_{p1}$ 处 $Z_{out}$ 的谐振极点被 $1/(1+T)$ 的谐振零点抵消，$\|Z_{out}/(1+T)\|$ 的斜率也无变化。这些抵消发生是因为功率级电路在 $G_{vd}(s)$ 和 $Z_{out}(s)$ 中引入相同极点。
+
+本章后续给出另一个例子，其中反馈补偿器电路在 $T(s)$ 中引入 $Z_{out}(s)$ 中不存在的极点和零点。结果闭环输出阻抗在 $\|1/(1+T)\|$ 中呈现由补偿器动态引起的极点和零点。
+
+## 9.4 稳定性
+
+众所周知，加入反馈环路可使原本稳定的系统变得不稳定。即使原始变换器的传递函数 [式 (9.1)] 和环路增益 $T(s)$ 都不含右半平面极点，式 (9.4) 的闭环传递函数也可能含右半平面极点。反馈环路随后无法在所需静态工作点调节系统，通常观察到振荡。避免此情况很重要。即使反馈系统稳定，暂态响应也可能呈现不希望的振铃和超调。本节讨论稳定性问题，并解释确保反馈系统稳定且行为良好的方法。
+
+当反馈使系统不稳定时，式 (9.4) 中的分母 $(1+T(s))$ 项含右半平面（即正实部）根。若 $T(s)$ 为有理分式，即两个多项式 $N(s)$ 和 $D(s)$ 之比 $N(s)/D(s)$，则可写
+
+$$\frac{T(s)}{1+T(s)} = \frac{\dfrac{N(s)}{D(s)}}{1+\dfrac{N(s)}{D(s)}} = \frac{N(s)}{N(s)+D(s)} \qquad \frac{1}{1+T(s)} = \frac{1}{1+\dfrac{N(s)}{D(s)}} = \frac{D(s)}{N(s)+D(s)} \tag{9.20}$$
+
+故 $T(s)/(1+T(s))$ 和 $1/(1+T(s))$ 含相同极点，由多项式 $(N(s)+D(s))$ 的根给出。稳定性的蛮力测试是计算 $(N(s)+D(s))$ 并分解结果看是否有正实部根。但对除很简单环路增益外的所有情形，这涉及大量工作。奈奎斯特稳定定理提供了一种更有启发性的方法，通过测试 $T(s)$ 确定 $(N(s)+D(s))$ 右半平面根的数目 [82, 83]。此定理在 9.4.2 节讨论。通常，称为相位裕度测试的定理特例足以设计大多数电压稳压器；先讨论更简单的相位裕度测试。
+
+### 9.4.1 相位裕度测试
+
+穿越频率 $f_c$ 定义为环路增益幅值为 1 的频率：
+
+$$\|T(j2\pi f_c)\| = 1 \Rightarrow 0\text{ dB} \tag{9.21}$$
+
+计算相位裕度 $\phi_m$ 时，在穿越频率处评估环路增益 $T$ 的相位，并加 180°。故
+
+$$\phi_m = 180° + \angle T(j2\pi f_c) \tag{9.22}$$
+
+若恰有一个穿越频率且环路增益 $T(s)$ 不含右半平面极点，则式 (9.22) 定义的 $\phi_m$ 为正时 $1/(1+T)$ 和 $T/(1+T)$ 不含右半平面极点。故用对 $T(s)$ 的简单测试可确定 $T/(1+T)$ 和 $1/(1+T)$ 的稳定性。这是一种易用的设计工具——只需确保穿越频率处 $T$ 的相位大于 −180°。
+
+当有多个穿越频率时，相位裕度测试可能有歧义。当 $T$ 含右半平面极点（即原始开环系统不稳定）时，相位裕度测试也不能使用。这两种情形下须用更一般的奈奎斯特稳定定理（9.4.2 节）。
+
+![源页 p.370](../assets/page-snapshots/chapter-9/page-370.png)
+
+图9.9 稳定系统环路增益的幅值和相位。相位裕度 $\phi_m$ 为正
+
+典型稳定系统的环路增益如图9.9所示。可见 $\angle T(j2\pi f_c) = -112°$。故 $\phi_m = 180° - 112° = +68°$。由于相位裕度为正，$T/(1+T)$ 和 $1/(1+T)$ 不含右半平面极点，反馈系统稳定。
+
+![源页 p.371](../assets/page-snapshots/chapter-9/page-371.png)
+
+图9.10 不稳定系统环路增益的幅值和相位。相位裕度 $\phi_m$ 为负
+
+不稳定系统的环路增益绘于图9.10。此例中 $\angle T(j2\pi f_c) = -230°$。相位裕度 $\phi_m = 180° - 230° = -50°$。负相位裕度意味着 $T/(1+T)$ 和 $1/(1+T)$ 各含至少一个右半平面极点。
+
+### 9.4.2 奈奎斯特稳定判据
+
+奈奎斯特稳定判据是一种基于环路增益评估闭环系统稳定性的严格且通用的技术。此技术基于可由环路增益 $T(s)$ 的波特图导出的 $T(s)$ 图，确定闭环传递函数 $T/(1+T)$ 和 $1/(1+T)$ 在复 s 平面右半部分的极点数。9.4.1 节的相位裕度测试基于奈奎斯特图，是稳定性的一种有用但不完全通用的测试。某些情形下（包括本书后续遇到的若干情形）须用更一般的奈奎斯特稳定测试。
+
+奈奎斯特稳定判据基于包围复 s 平面右半部分（正实部部分）的闭合围道 $\Gamma$ 的保角映射。该围道通过环路增益传递函数 $T(s)$ 映射。映射围道对 −1 点的包围用于计数闭环传递函数中存在的右半平面极点数。以下各小节给出推导、应用的精确规则和若干重要示例。
+
+**幅角原理**
+
+考虑有 $s = s_1$ 处零点的传递函数 $T(s)$：
+
+$$T(s) = (s - s_1) \tag{9.23}$$
+
+还考虑复 s 平面上包围点 $s_1$ 的闭合围道 $\Gamma$，如图9.11a所示。复变量 $s$ 沿围道 $\Gamma$ 变化，从某点 $a$ 出发顺时针经过 $b$、$c$ 回到 $a$。对式 (9.23) 的 $T(s)$，某点 $s$ 处 $T(s)$ 的值是从 $s_1$ 到 $s$ 的向量，有幅值和相位如图9.11a所示。
+
+![源页 p.372](../assets/page-snapshots/chapter-9/page-372.png)
+
+图9.11 幅角原理，示例1：(a) 复 s 平面上的闭合围道 $\Gamma$；(b) 通过式 (9.23) 的传递函数 $T(s)$ 映射围道 $\Gamma$；(c) $s$ 绕围道 $\Gamma$ 变化时 $T(s)$ 相位的变化
+
+如图9.11c所示，$s = a$ 时相位 $\angle T$ 为 0°。$s$ 沿围道经过 $b$、$c$ 回到 $a$ 时，$\angle T$ 减小，绕围道 $\Gamma$ 一周后变为 −360°。此 −360° 的净相位变化表明零点 $s_1$ 在围道 $\Gamma$ 内。图9.11b 含 $s$ 绕围道 $\Gamma$ 变化时 $T(s)$ 的图；幅值 $\|T\|$ 和相位 $\angle T$ 已标出，与图9.11a中所标量相同。此图是围道 $\Gamma$ 通过传递函数 $T(s)$ 的保角映射；保角映射保持局部角度。映射围道 $T(\Gamma)$ 包围 $T(s)$ 平面的原点，如 $\angle T(s)$ 的 −360° 净变化所示。
+
+![源页 p.373](../assets/page-snapshots/chapter-9/page-373.png)
+
+图9.12 幅角原理，示例2：(a) 复 s 平面上的闭合围道 $\Gamma'$；(b) 通过式 (9.23) 的 $T(s)$ 映射围道 $\Gamma'$；(c) $s$ 绕围道 $\Gamma'$ 变化时 $T(s)$ 相位的变化。由于 $s = s_1$ 处的零点不在围道 $\Gamma'$ 内，$T$ 的相位无净变化，映射围道 $T(\Gamma')$ 不包围 $T$ 平面的原点
+
+图9.12a 给出第二个围道 $\Gamma'$，它不包围 $T(s)$ 在 $s_1$ 处的零点。如图9.12c所示，绕围道 $\Gamma'$ 一周后 $\angle T$ 的净变化为零。映射围道 $T(\Gamma')$ 如图9.12b所示；此围道不包围 $T(s)$ 平面的原点。
+
+复函数的相位有时称为其幅角。柯西幅角原理告诉我们，当闭合围道 $\Gamma$ 包围零点 $s_1$ 时，$s$ 顺时针绕 $\Gamma$ 一周时相位 $\angle T(s)$ 有 −360° 的净变化。这等价于映射围道 $T(\Gamma)$ 包围 $T$ 平面原点。
+
+接下来考虑含多个极点和零点的传递函数 $T(s)$：
+
+$$T(s) = T_{ref}\frac{(s-z_1)(s-z_2)\cdots}{(s-p_1)(s-p_2)\cdots} \tag{9.24}$$
+
+照常可将 $T(s)$ 的相位表示为各零点或极点产生项之和：
+
+$$\angle T(s) = \angle(s-z_1) + \angle(s-z_2) + \cdots - \angle(s-p_1) - \angle(s-p_2) - \cdots \tag{9.25}$$
+
+可再次在复 s 平面定义闭合围道 $\Gamma$，研究 $s$ 顺时针绕围道一周时 $T(s)$ 相位如何变化。围道内的 $T(s)$ 每个零点使 $\angle T$ 有 −360° 净变化，围道内的每个极点使 $\angle T$ 有 +360° 净变化。若围道 $\Gamma$ 内共有 $Z$ 个零点和 $P$ 个极点，则 $\angle T$ 有 $-N \cdot 360°$ 的净相移，其中
+
+$$N = Z - P \tag{9.26}$$
+
+映射围道 $T(\Gamma)$ 将顺时针包围 $T(s)$ 平面原点 $N$ 次。
+
+故幅角原理提供了一种确定围道 $\Gamma$ 内极点和零点数目的工具。
+
+**奈奎斯特围道**
+
+希望确定式 (9.20) 的闭环传递函数是否含复平面右半部分的不稳定极点。为此可定义包围整个右半平面的围道 $\Gamma$，然后用幅角原理测试被此围道包围的闭环极点数。
+
+![源页 p.374](../assets/page-snapshots/chapter-9/page-374.png)
+
+图9.13 奈奎斯特围道，包围复 s 平面的右半部分
+
+图9.13 给出称为奈奎斯特围道的围道 $\Gamma$。此围道顺时针方向遍历，围道右侧包围的区域是复 s 平面的右半部分。奈奎斯特围道由三部分组成。段 $\Gamma_A$ 是虚轴的正部分，其中
+
+$$s = j\omega, \quad \omega \in (0, \infty) \tag{9.27}$$
+
+段 $\Gamma_B$ 可选为位于所有闭环极点右侧的半圆弧，定义如下：
+
+$$s = Re^{j\theta}, \quad R \to \infty, \quad \theta \in (+90°, -90°) \tag{9.28}$$
+
+段 $\Gamma_C$ 是虚轴的负部分，其中
+
+$$s = -j\omega, \quad \omega \in (\infty, 0) \tag{9.29}$$
+
+段 $\Gamma_C$ 是段 $\Gamma_A$ 的复共轭。
+
+若传递函数 $F(s)$ 在复平面右半部分含 $Z$ 个零点和 $P$ 个极点，则奈奎斯特围道的映射 $F(\Gamma)$ 将包围 $F(s)$ 平面原点 $N = (Z - P)$ 次。
+
+**稳定性测试**
+
+式 (9.20) 的闭环传递函数含分母多项式 $N(s)+D(s)$，其根为闭环极点。希望测试此多项式是否含复 s 平面右半部分的根。注意式 (9.20) 中这些根是量 $(1+T(s))$ 的零点，且 $(1+T(s))$ 的极点与 $T(s)$ 的极点重合。故可映射图9.13 的奈奎斯特围道通过传递函数 $(1+T(s))$，评估对原点的包围次数。
+
+复平面中量 $(1+T(s))$ 简单等于量 $T(s)$ 右移一个单位。若映射奈奎斯特围道 $(1+T(\Gamma))$ 包围原点，则围道 $T(\Gamma)$ 包围 −1 点。故可映射图9.13 的奈奎斯特围道 $\Gamma$ 通过环路增益 $T(s)$ 并计算 $T(\Gamma)$ 对 −1 点的包围次数 $N$。包围次数 $N$ 与右半平面极点数的关系为 $N = Z - P$，其中 $Z$ 是闭环增益 $T/(1+T)$ 或 $1/(1+T)$ 的右半平面极点数，$P$ 是原始环路增益 $T(s)$ 中的右半平面极点数。
+
+若原始开环系统稳定，即 $T(s)$ 不含右半平面极点，则 $P = 0$。此常见情形下 $N = Z$：$T(\Gamma)$ 对 −1 点的包围次数等于 $T/(1+T)$ 或 $1/(1+T)$ 中右半平面闭环极点数。
+
+**基本示例**
+
+作为第一个例子，考虑含三个极点的环路增益 $T(s)$：
+
+$$T(s) = T_0\frac{1}{\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{\omega_2}\right)\left(1+\dfrac{s}{\omega_3}\right)} \tag{9.30}$$
+
+![源页 p.375](../assets/page-snapshots/chapter-9/page-375.png)
+
+图9.14 式 (9.30) 示例的环路增益 $T(s)$ 波特图
+
+$T(s)$ 的幅值和相位波特图绘于图9.14，对应某些特定的 $T_0$、$\omega_1$、$\omega_2$、$\omega_3$ 值。此例中 $T(s)$ 有穿越频率 $\omega_c$ 和相位裕度 $\phi_m$ 如图所示。
+
+![源页 p.376](../assets/page-snapshots/chapter-9/page-376.png)
+
+图9.15 图9.14 环路增益的奈奎斯特图：(a) 通过环路增益 $T(s)$ 映射围道 $\Gamma_A$；(b) 通过环路增益 $T(s)$ 映射完整奈奎斯特围道
+
+图9.15a 给出奈奎斯特图的第一部分，其中式 (9.27) 定义的段 $\Gamma_A$ 通过环路增益映射。由于 $\Gamma_A$ 上 $s = j\omega$，这相当于图9.14 波特图幅值和相位数据的 $T(j\omega)$ 极坐标图。$\omega = 0$ 时环路增益幅值为 $T_0$、相位为 0°，故奈奎斯特图从正实轴上 $T = T_0$ 处开始。$\omega$ 增大时幅值减小、相位变负如图所示。
+
+穿越频率 $f_c$ 处环路增益幅值为 1、相位为 $(-180°+\phi_m)$。围道 $T(j\omega)$ 在此处过单位圆，如图9.15a所示。$f_c$ 以上频率幅值继续减小，围道 $T(j\omega)$ 趋向原点。
+
+奈奎斯特围道的第二部分 $\Gamma_B$ 由式 (9.28) 定义。为评估环路增益 $T(s)$ 如何映射围道 $\Gamma_B$，先将 $s = Re^{j\theta}$ 代入式 (9.30)：
+
+$$T(Re^{j\theta}) = T_0\frac{1}{\left(1+\dfrac{Re^{j\theta}}{\omega_1}\right)\left(1+\dfrac{Re^{j\theta}}{\omega_2}\right)\left(1+\dfrac{Re^{j\theta}}{\omega_3}\right)} \tag{9.31}$$
+
+然后令 $R \to \infty$。这使式 (9.31) 分母幅值趋向无穷，故 $T$ 的幅值趋向零。奈奎斯特图的此部分收缩到原点。
+
+奈奎斯特图的第三部分涉及通过环路增益 $T(s)$ 映射式 (9.29) 定义的段 $\Gamma_C$。奈奎斯特围道的此部分是 $T(-j\omega)$ 的极坐标图，它是 $T(j\omega)$ 的复共轭。故此图可通过将 $T(j\omega)$ 图关于实轴反射轻易画出，如图9.15b所示。
+
+现在可确定 $T(\Gamma)$ 对 −1 点的包围次数。考察图9.15b可知 −1 点在围道 $T(\Gamma)$ 外，故无包围：$N = 0$。由于原始环路增益 $T(s)$ 不含右半平面极点，$P = 0$。按式 (9.26)，$Z = 0$，故闭环传递函数不含右半平面极点，反馈环路稳定。
+
+若图9.14 中相位裕度 $\phi_m$ 为负，则围道 $T(\Gamma)$ 将如图9.16所示。$T(j\omega)$ 图在第三象限过单位圆。此时图9.16b 的奈奎斯特图包围 −1 点两次：$N = 2$。故 $Z = 2$，闭环传递函数含两个 RHP 极点。反馈环路不稳定。此例中原始 $T(s)$ 在复 s 平面左半部分含三个极点；在闭环传递函数 $T/(1+T)$ 中，其中两个极点移到右半平面，一个留在左半平面。
+
+![源页 p.377](../assets/page-snapshots/chapter-9/page-377.png)
+
+图9.16 不稳定系统的奈奎斯特图：(a) 通过环路增益 $T(s)$ 映射围道 $\Gamma_A$，相位裕度 $\phi_m$ 为负；(b) 通过环路增益 $T(s)$ 映射完整奈奎斯特围道
+
+**示例2：三个穿越频率**
+
+作为第二个例子，考虑有 $f = f_1$ 处低频实极点、以及 $f = f_2$ 处（恰在第一个穿越频率之外）高频谐振极点的环路增益：
+
+$$T(s) = T_0\frac{1}{\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{Q\omega_2}+\left(\dfrac{s}{\omega_2}\right)^2\right)} \tag{9.32}$$
+
+![源页 p.377](../assets/page-snapshots/chapter-9/page-377.png)
+
+图9.17 式 (9.32) 示例的环路增益 $T(s)$ 波特图。环路增益有三个穿越频率
+
+此情形的环路增益波特图如图9.17所示。$f_2$ 处的谐振极点使 $T$ 的幅值在 $f_2$ 附近升到 0 dB 以上。故有三个穿越频率（标记为 1、2、3）。可为每个穿越频率关联一个相位裕度；图9.17 中穿越频率 1 和 2 关联的相位裕度为正，穿越频率 3 关联的相位裕度为负。故简单相位裕度测试有歧义，须画奈奎斯特图正确确定此环路增益是否导致稳定系统。
+
+图9.18 含图9.17 波特图对应的奈奎斯特图。图9.18a 含映射围道 $T(\Gamma_A) = T(j\omega)$，标出穿越点 1、2、3。图9.18b 含完整奈奎斯特围道的映射。可见

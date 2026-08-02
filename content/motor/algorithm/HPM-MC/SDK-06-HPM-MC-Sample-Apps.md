@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](../ALG-09-High-Frequency-Injection.md)
 
-**文档版本：** v1.0
-**生成日期：** 2026-05-23
-**适用对象：** 电机控制工程师、嵌入式开发者
-**前置知识：** C语言编程、电机控制基础、HPM系列MCU
+- **文档版本：** v1.0
+- **生成日期：** 2026-05-23
+- **适用对象：** 电机控制工程师、嵌入式开发者
+- **前置知识：** C语言编程、电机控制基础、HPM系列MCU
 
 ---
 
@@ -125,7 +125,7 @@ v2 采用 `mcl_*_t` 配置结构体 + 统一 `hpm_mcl_loop_init()` 初始化模�
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制架构：**
+- **控制架构：**
 
 ```text
 Hall传感器 → UVW位置解码 → 六步换相表 → PWM输出 → BLDC电机
@@ -133,7 +133,7 @@ Hall传感器 → UVW位置解码 → 六步换相表 → PWM输出 → BLDC电�
                   └── 速度PI控制器 ←── IIR滤波 ←── 编码器速度
 ```
 
-**关键配置（bldc_block.c）：**
+- **关键配置（bldc_block.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -150,11 +150,11 @@ Hall传感器 → UVW位置解码 → 六步换相表 → PWM输出 → BLDC电�
 | `i_max` | 9A | 最大电流 |
 | `vbus` | 24V | 母线电压 |
 
-**硬件支持：** Hall传感器 (HPMSOC_HAS_HPMSDK_HALL) 或 QEIV2 UVW模式 (HPMSOC_HAS_HPMSDK_QEIV2)
+- **硬件支持：** Hall传感器 (HPMSOC_HAS_HPMSDK_HALL) 或 QEIV2 UVW模式 (HPMSOC_HAS_HPMSDK_QEIV2)
 
-**运行方式：** 串口输入目标转速（r/s），支持正反转。
+- **运行方式：** 串口输入目标转速（r/s），支持正反转。
 
-**mcl_app_config.h 特性开关：** 全部关闭（MCL_EN_* = 0），方波控制无需FOC特性。
+- **mcl_app_config.h 特性开关：** 全部关闭（MCL_EN_* = 0），方波控制无需FOC特性。
 
 **架构细节（HPM 官方资料补充）**:
 
@@ -202,7 +202,7 @@ motor0_t {
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制架构：**
+- **控制架构：**
 
 ```text
 QEI编码器 → ABZ位置解码 → Clarke/Park变换 → 电流PI(d/q) → 反Park → SVPWM
@@ -212,7 +212,7 @@ QEI编码器 → ABZ位置解码 → Clarke/Park变换 → 电流PI(d/q) → 反
                                               ADC电流采样 ← A相/B相
 ```
 
-**三种电流环模式：**
+- **三种电流环模式：**
 
 | 模式 | `mcl_loop_mode_t` | 宏定义 | 电流环执行位置 | 特点 |
 |------|-------------------|--------|---------------|------|
@@ -220,7 +220,7 @@ QEI编码器 → ABZ位置解码 → Clarke/Park变换 → 电流PI(d/q) → 反
 | 硬件FOC | `mcl_mode_hardware_foc` | `HW_CURRENT_FOC_ENABLE` | VSC+CLC+QEO硬件链 | 零CPU开销电流环 |
 | 混合FOC | `mcl_mode_hybrid_foc` | `MCL_HARDWARE_HYBRID_LOOP_ENABLE` | CLC硬件加速 | 部分硬件加速 |
 
-**硬件FOC加速链（HW_CURRENT_FOC_ENABLE）：**
+- **硬件FOC加速链（HW_CURRENT_FOC_ENABLE）：**
 
 ```text
 ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+SVPWM) → PWM DAC
@@ -228,7 +228,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
                                       QEI位置信号        QEI位置信号
 ```
 
-**关键配置（bldc_foc.c）：**
+- **关键配置（bldc_foc.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -243,9 +243,9 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 | `analog.opamp_gain` | 10 | 运放增益 |
 | `analog.sample_res` | 0.01Ω | 采样电阻 |
 
-**运行方式：** 先进行电机对中（三阶段对齐算法），然后选择速度模式或位置模式。
+- **运行方式：** 先进行电机对中（三阶段对齐算法），然后选择速度模式或位置模式。
 
-**mcl_app_config.h 特性开关：**
+- **mcl_app_config.h 特性开关：**
 
 | 宏 | 值 | 说明 |
 |----|-----|------|
@@ -266,10 +266,10 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制原理：**
+- **控制原理：**
 在d轴注入高频方波电压信号，通过检测q轴高频电流响应来估计转子位置。利用电机的凸极效应（`Ld ≠ Lq`），在零速和极低速下仍可获得可靠的位置信息。
 
-**关键配置（bldc_hfi.c + bldc_hfi_cfg.h）：**
+- **关键配置（bldc_hfi.c + bldc_hfi_cfg.h）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -284,7 +284,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 | `speedloop_para.i_max` | 300 | 速度环输出限幅 |
 | `inject_pole_detect.current_d_init_val` | 80 | N/S极性辨识初始电流 |
 
-**控制流程：**
+- **控制流程：**
 
 ```text
 1. 磁极辨识 (hpm_mcl_hfi_pole_detect) → 判断N/S极
@@ -292,7 +292,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 3. 速度闭环 → FOC电流环 → SVPWM输出
 ```
 
-**注意事项：**
+- **注意事项：**
 - 仅用于实验目的，demo级别实现
 - 使用v1 API (`BLDC_CONTROL_FOC_PARA` 结构体)
 - 运行速度为极低速1.1 r/s
@@ -310,10 +310,10 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制原理：**
+- **控制原理：**
 通过电机数学模型构建滑模观测器，利用电流误差作为滑模面，估计反电动势，进而通过PLL提取转子位置和速度。在中高速段（>5%额定转速）具有良好性能。
 
-**关键配置（bldc_smc.c + bldc_smc_cfg.h）：**
+- **关键配置（bldc_smc.c + bldc_smc_cfg.h）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -322,7 +322,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 | `BLDC_ANGLE_SET_TIME_MS` | 2000ms | 对中时间 |
 | 速度范围 | 15~40 r/s | 自动加减速循环 |
 
-**控制流程：**
+- **控制流程：**
 
 ```text
 1. 电机对中 (2000ms) → 注入d轴电流将转子拉到已知位置
@@ -331,7 +331,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 4. 速度自动循环 → 15→40→15 r/s 持续运行
 ```
 
-**注意事项：**
+- **注意事项：**
 - 使用v1 API
 - 存在最低速度限制（约5%额定转速），低速会失步
 - 启动包含强制定位阶段，不可干预
@@ -348,10 +348,10 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制原理：**
+- **控制原理：**
 在六步换相的悬空相上检测反电动势过零点（BEMF ZCP），过零后延时30°电角度执行换相。与Hall传感器方案相比，省去了位置传感器，降低了系统成本。
 
-**关键配置（bldc_over_zero.c）：**
+- **关键配置（bldc_over_zero.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -360,7 +360,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 | `TIMER_TIMES_1MS` | 10 | 定时器分频 |
 | `QEI_WDOG_TIMEOUT` | 200000 | 看门狗超时 |
 
-**控制流程：**
+- **控制流程：**
 
 ```text
 1. 强制定位 → 注入电流将转子拉到已知位置
@@ -369,11 +369,11 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 4. 速度闭环 → 自动加减速循环 5→40→5 r/s
 ```
 
-**硬件要求：**
+- **硬件要求：**
 - 需要电路板支持相电流/相电压采集
 - 连接电机扩展板J6/J7/J12到UU/UV/UW
 
-**注意事项：**
+- **注意事项：**
 - 使用v1 API
 - 低速过零信号弱，需要开环拖动加速到一定转速后切换
 - 适用于风扇、水泵等对低速性能要求不高的场景
@@ -390,7 +390,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**辨识参数：**
+- **辨识参数：**
 
 | 参数 | 符号 | 辨识方法 |
 |------|------|---------|
@@ -402,7 +402,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 
 > **注：** SDK v2中Ls由离线辨识模块通过代数计算 `Ls = Ld + Lq` 获得，而非独立注入交流电压。详见 [SDK-03-HPM-MC-v2-Detect.md](SDK-03-HPM-MC-v2-Detect.md#L251-L258)。
 
-**关键配置（bldc_offline_param_detection.c）：**
+- **关键配置（bldc_offline_param_detection.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -411,7 +411,7 @@ ADC → TRGM → VSC(Clarke+Park) → CLC(PI控制器) → TRGM → QEO(反Park+
 | `loop.mode` | `mcl_mode_offline_param_detection` | 离线辨识模式 |
 | `PWM_DEAD_AREA_TICK` | 100 | 死区时间 |
 
-**输出示例：**
+- **输出示例：**
 
 ```text
 motor parameter detection demo.
@@ -420,7 +420,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 ...
 ```
 
-**注意事项：**
+- **注意事项：**
 - 辨识前需先完成电机对中
 - 辨识结果会循环输出，供观察数据稳定性
 - 辨识得到的参数可直接填入 `bldc_foc.c` 的 `motor.cfg.mcl.physical.motor` 中使用
@@ -437,7 +437,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**系统架构：**
+- **系统架构：**
 
 ```text
 触摸屏输入 → LittleVGL GUI → 速度/位置设定值 → FOC控制 → PWM输出
@@ -445,7 +445,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
                 └── 实时显示 ←── 速度/位置反馈 ←── QEI编码器
 ```
 
-**关键配置：**
+- **关键配置：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -454,13 +454,13 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 | `BLDC_CURRENT_SET_TIME_MS` | 200ms | 电流校准时间 |
 | 显示屏型号 | LCD-800480W070TC | 7寸800×480触摸屏 |
 
-**运行方式：**
+- **运行方式：**
 1. 上电→初始化→电机对中（1~2秒）
 2. 屏幕显示图形界面
 3. 点击屏幕控件切换速度/位置模式
 4. 实时图形化显示速度和位置曲线
 
-**依赖：** LittleVGL 8.3.5、触摸屏驱动
+- **依赖：** LittleVGL 8.3.5、触摸屏驱动
 
 ---
 
@@ -474,10 +474,10 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**控制原理：**
+- **控制原理：**
 步进电机FOC将两相电流控制为相差90°的正弦波，通过控制正弦波的频率和幅值实现转速和转矩控制。与方波驱动相比，电流波形为正弦波，转矩脉动更小，噪音更低。
 
-**关键配置（step_motor_foc.c）：**
+- **关键配置（step_motor_foc.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -486,14 +486,14 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 | `cfg.path` (路径规划) | 梯形加减速 | 通过mcl_path_plan实现 |
 | `T_CURE_TIMES` | 1 | 电流环周期倍率 |
 
-**重要差异（与bldc_foc对比）：**
+- **重要差异（与bldc_foc对比）：**
 - 无编码器 (`mcl_mode_step_foc` 不需要encoder)
 - 使用 `mcl_path_plan` 进行梯形加减速路径规划
 - 4通道PWM输出（步进电机两相四线）
 - 极对数50（远大于普通BLDC的2~8极对）
 - PWM频率40kHz（普通BLDC用20kHz）
 
-**运行方式：** 自动循环切换速度和方向，串口打印速度信息，电流波形始终保持正弦波。
+- **运行方式：** 自动循环切换速度和方向，串口打印速度信息，电流波形始终保持正弦波。
 
 ---
 
@@ -507,7 +507,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-**与 step_motor_foc 的关键区别：**
+- **与 step_motor_foc 的关键区别：**
 
 | 特性 | step_motor_foc | step_motor_closed_loop |
 |------|---------------|----------------------|
@@ -517,7 +517,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 | loop.mode | `mcl_mode_step_foc` | `mcl_mode_foc` |
 | 用户交互 | 自动循环 | 串口选择模式+输入参数 |
 
-**关键配置（step_motor_closed_loop.c）：**
+- **关键配置（step_motor_closed_loop.c）：**
 
 | 参数 | 值 | 说明 |
 |------|-----|------|
@@ -526,12 +526,12 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 | `motor.pole_num` | 50 | 步进电机极对数 |
 | `STEP_MOTOR_QEI_FOC_PHASE_COUNT_PER_REV` | 编码器线数 | 位置反馈分辨率 |
 
-**运行方式：**
+- **运行方式：**
 1. 串口选择模式：0=位置模式，1=速度模式
 2. 速度模式：输入-10~+10 r/s
 3. 位置模式：输入目标位置值，电机精确定位并保持
 
-**应用场景：** 需要精确定位和防丢步的步进电机应用，如3D打印机、CNC、机器人关节等。
+- **应用场景：** 需要精确定位和防丢步的步进电机应用，如3D打印机、CNC、机器人关节等。
 
 ---
 
@@ -637,7 +637,7 @@ flux: 0.044056, ld: 0.000992, lq: 0.001803, ls: 0.002795, rs: 1.022872
 
 #### 5.1.1 初始化流程
 
-**原理：** FOC控制的初始化需要完成硬件资源配置、电机参数设定、控制环参数计算、中间件模块初始化和对中校准五个阶段。电流环PI参数根据电机电感和电阻自动计算，公式为：
+- **原理：** FOC控制的初始化需要完成硬件资源配置、电机参数设定、控制环参数计算、中间件模块初始化和对中校准五个阶段。电流环PI参数根据电机电感和电阻自动计算，公式为：
 
 $$K_p = L_s \cdot (2\pi \cdot f_{bw})^2 \cdot T_s \cdot 1.5$$
 
@@ -645,7 +645,7 @@ $$K_i = R_s \cdot (2\pi \cdot f_{bw})^2 \cdot T_s \cdot 1.5$$
 
 其中 $f_{bw}$ 为电流环带宽（500Hz），$T_s$ 为电流环周期（50μs）。
 
-**代码：**
+- **代码：**
 
 ```c
 int main(void)
@@ -668,7 +668,7 @@ int main(void)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 | 步骤 | 函数调用 | 作用 |
 |------|---------|------|
@@ -681,7 +681,7 @@ int main(void)
 | 7 | `hpm_mcl_loop_enable()` | 使能控制环，`loop->enable = true` |
 | 8 | `motor_angle_align()` | 三阶段对中算法，将转子拉到已知电角度位置 |
 
-**motor_init()内部初始化链：**
+- **motor_init()内部初始化链：**
 
 ```c
 void motor_init(void)
@@ -724,7 +724,7 @@ void motor_init(void)
 }
 ```
 
-**工程要点：**
+- **工程要点：**
 - 电流环PI参数由带宽自动推导，无需手动整定；速度环/位置环PI需根据负载惯量手动调整
 - `motor0`结构体放置在Fast RAM（`ATTR_PLACE_AT_FAST_RAM_INIT`），确保ISR访问零等待
 - 初始化顺序不可调换：analog → encoder → drivers → control → loop → detect，存在依赖关系
@@ -732,9 +732,9 @@ void motor_init(void)
 
 #### 5.1.2 ADC中断回调中的控制循环
 
-**原理：** FOC电流环以PWM频率（20kHz）运行，由ADC采样完成中断触发。每次中断执行：编码器角度处理 → 完整FOC控制环（电流环+速度环+位置环）。
+- **原理：** FOC电流环以PWM频率（20kHz）运行，由ADC采样完成中断触发。每次中断执行：编码器角度处理 → 完整FOC控制环（电流环+速度环+位置环）。
 
-**代码：**
+- **代码：**
 
 ```c
 SDK_DECLARE_EXT_ISR_M(BOARD_BLDC_ADC_IRQn, isr_adc)
@@ -750,7 +750,7 @@ void isr_adc(void)
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 | 行 | 代码 | 作用 |
 |----|------|------|
@@ -760,7 +760,7 @@ void isr_adc(void)
 | 4 | `hpm_mcl_encoder_process()` | 编码器角度处理：读取QEI位置、计算速度、IIR滤波、角度预测 |
 | 5 | `hpm_mcl_loop()` | **核心控制环入口**，根据loop->cfg->mode分发到具体控制函数 |
 
-**v2 API内部调用链（`hpm_mcl_loop` → `hpm_mcl_current_foc_loop`）：**
+- **v2 API内部调用链（`hpm_mcl_loop` → `hpm_mcl_current_foc_loop`）：**
 
 ```text
 hpm_mcl_loop()
@@ -779,7 +779,7 @@ hpm_mcl_loop()
        └─ hpm_mcl_drivers_update_bldc_duty()    // 更新PWM占空比
 ```
 
-**v1 API等效调用链（HFI/SMC示例中使用）：**
+- **v1 API等效调用链（HFI/SMC示例中使用）：**
 
 v1 API通过函数指针实现类似流程，核心函数为 `hpm_mcl_bldc_foc_ctrl_dq_to_pwm()`：
 
@@ -799,7 +799,7 @@ void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
 }
 ```
 
-**v1 vs v2 API对比：**
+- **v1 vs v2 API对比：**
 
 | 维度 | v1 API | v2 API |
 |------|--------|--------|
@@ -810,20 +810,20 @@ void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
 | 死区补偿 | 无 | 可选使能 |
 | 硬件加速 | 不支持 | VSC+CLC+QEO硬件链 |
 
-**工程要点：**
+- **工程要点：**
 - ADC中断优先级设为1（最高），确保电流环实时性
 - `hpm_mcl_encoder_process()`的第二个参数为MCU时钟周期数/PWM频率，用于角度预测的时间基准
 - 硬件FOC模式下，`hpm_mcl_loop()`仅设置CLC期望值，Clarke/Park/PI/SVPWM由硬件完成
 
 #### 5.1.3 三阶段对中算法
 
-**原理：** 编码器只能提供相对位置，上电时需要确定转子的绝对电角度。三阶段对中通过逐步减小d轴电流，将转子稳定拉到d轴方向：
+- **原理：** 编码器只能提供相对位置，上电时需要确定转子的绝对电角度。三阶段对中通过逐步减小d轴电流，将转子稳定拉到d轴方向：
 
 1. **阶段1：** 大电流粗对中（d=4A, q=0.6A扰动），快速将转子拉到d轴附近
 2. **阶段2：** 中电流精对中（d=1.5A），减小振荡
 3. **阶段3：** 小电流稳定（d=1.0A），消除残余振荡
 
-**代码：**
+- **代码：**
 
 ```c
 void motor_angle_align(void)
@@ -842,7 +842,7 @@ void motor_angle_align(void)
 }
 ```
 
-**工程要点：**
+- **工程要点：**
 - q轴扰动电流（0.6A）用于打破对称性，避免转子恰好停在磁极中性线
 - 硬件FOC模式下对中电流更大（d=8A），因为硬件链的电流环响应更快
 - 对中完成后，编码器零点被校准，后续角度读取即为正确的电角度
@@ -853,9 +853,9 @@ void motor_angle_align(void)
 
 #### 5.2.1 初始化流程
 
-**原理：** 方波控制无需FOC的Clarke/Park变换，初始化更简洁。核心是配置Hall/UVW编码器和六步换相表。
+- **原理：** 方波控制无需FOC的Clarke/Park变换，初始化更简洁。核心是配置Hall/UVW编码器和六步换相表。
 
-**代码：**
+- **代码：**
 
 ```c
 int main(void)
@@ -877,7 +877,7 @@ int main(void)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 | 步骤 | 函数调用 | 与FOC的差异 |
 |------|---------|------------|
@@ -887,7 +887,7 @@ int main(void)
 | 4 | `hpm_mcl_loop_start_block()` | **方波特有**：读取初始Hall状态，确定初始换相扇区 |
 | 5 | `hall_irq_enable()` | 使能Hall传感器UVW跳变中断 |
 
-**motor_init()关键配置：**
+- **motor_init()关键配置：**
 
 ```c
 void motor_init(void)
@@ -909,16 +909,16 @@ void motor_init(void)
 }
 ```
 
-**工程要点：**
+- **工程要点：**
 - 方波控制不需要`hpm_mcl_analog_init()`，因为无需电流采样
 - PWM初始化在`motor_init()`外独立调用，因为方波PWM配置（6路独立）与FOC（3对互补）不同
 - 速度设定值需乘以极对数和2π：`speed * MCL_2PI * MOTOR_POLE_NUM`，转换为机械角速度
 
 #### 5.2.2 换相中断回调
 
-**原理：** Hall传感器在每次UVW状态跳变时触发中断，中断服务函数完成：读取新Hall状态 → 计算电角度 → 刷新换相。
+- **原理：** Hall传感器在每次UVW状态跳变时触发中断，中断服务函数完成：读取新Hall状态 → 计算电角度 → 刷新换相。
 
-**代码（Hall传感器版本）：**
+- **代码（Hall传感器版本）：**
 
 ```c
 SDK_DECLARE_EXT_ISR_M(BOARD_BLDC_HALL_IRQ, isr_hall)
@@ -930,7 +930,7 @@ void isr_hall(void)
 }
 ```
 
-**代码（QEIV2-UVW版本）：**
+- **代码（QEIV2-UVW版本）：**
 
 ```c
 SDK_DECLARE_EXT_ISR_M(BOARD_BLDC_QEIV2_IRQ, isr_qei)
@@ -942,7 +942,7 @@ SDK_DECLARE_EXT_ISR_M(BOARD_BLDC_QEIV2_IRQ, isr_qei)
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 | 行 | 代码 | 作用 |
 |----|------|------|
@@ -950,7 +950,7 @@ SDK_DECLARE_EXT_ISR_M(BOARD_BLDC_QEIV2_IRQ, isr_qei)
 | 2 | `hpm_mcl_uvw_get_theta()` | 核心换相函数：读取UVW状态 → 查换相表 → 计算电角度 |
 | 3 | `hpm_mcl_loop_refresh_block()` | 刷新方波换相：根据新角度更新PWM导通相 |
 
-**Hall信号处理与换相表的关系：**
+- **Hall信号处理与换相表的关系：**
 
 `hpm_mcl_uvw_get_theta()` 内部执行以下映射：
 
@@ -972,7 +972,7 @@ hpm_mcl_stat_t encoder_get_uvw_level(mcl_encoder_uvw_level_t *level)
 }
 ```
 
-**六步换相的软件实现流程（`hpm_mcl_block_loop`内部）：**
+- **六步换相的软件实现流程（`hpm_mcl_block_loop`内部）：**
 
 ```text
 1. speed_pid(target_speed, actual_speed) → duty (0~1)
@@ -982,7 +982,7 @@ hpm_mcl_stat_t encoder_get_uvw_level(mcl_encoder_uvw_level_t *level)
 5. hpm_mcl_drivers_update_bldc_duty(duty, duty, duty)        // 三相同占空比
 ```
 
-**工程要点：**
+- **工程要点：**
 - `MOTOR_ANGLE_DETA` = $\pm\frac{\pi}{3p}$，正负号由`BOARD_BLDC_HALL_DIR_INV`决定，用于匹配电机旋转方向与Hall信号序列
 - Hall中断优先级设为1（最高），确保换相及时响应，延迟会导致转矩脉动
 - QEIV2-UVW模式通过软件模拟Hall信号，`level_tbl[6] = {5,4,6,2,3,1}` 定义了位置到UVW编码的映射
@@ -993,9 +993,9 @@ hpm_mcl_stat_t encoder_get_uvw_level(mcl_encoder_uvw_level_t *level)
 
 #### 5.3.1 初始化流程
 
-**原理：** HFI（High Frequency Injection）利用电机凸极效应（$L_d \neq L_q$），在d轴注入高频方波电压，通过检测q轴高频电流响应来估计转子位置。使用v1 API，通过函数指针链组织控制流程。
+- **原理：** HFI（High Frequency Injection）利用电机凸极效应（$L_d \neq L_q$），在d轴注入高频方波电压，通过检测q轴高频电流响应来估计转子位置。使用v1 API，通过函数指针链组织控制流程。
 
-**代码：**
+- **代码：**
 
 ```c
 int main(void)
@@ -1020,7 +1020,7 @@ int main(void)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 | 步骤 | 函数调用 | 作用 |
 |------|---------|------|
@@ -1029,7 +1029,7 @@ int main(void)
 | 3 | `motor0.adc_trig_event_callback = &motor0_highspeed_loop` | 注册ADC中断回调 |
 | 4 | `motor0.inject_pole_detect.status = true` | 启动N/S极性辨识 |
 
-**bldc_init_par()关键配置：**
+- **bldc_init_par()关键配置：**
 
 ```c
 void bldc_init_par(void)
@@ -1061,7 +1061,7 @@ void bldc_init_par(void)
 }
 ```
 
-**v1 API函数指针链：**
+- **v1 API函数指针链：**
 
 ```text
 ADC中断 → motor0_highspeed_loop()
@@ -1082,7 +1082,7 @@ ADC中断 → motor0_highspeed_loop()
              └─ func_getspd() → hpm_mcl_bldc_foc_al_speed()          // 速度计算
 ```
 
-**工程要点：**
+- **工程要点：**
 - `func_dqsvpwm`被替换为`hpm_mcl_hfi_loop`而非标准的`hpm_mcl_bldc_foc_ctrl_dq_to_pwm`，这是HFI注入的入口
 - 注入电压`vh = 0.625 × PWM_RELOAD`，每个PWM周期翻转一次，形成方波注入
 - PLL参数（kp=10, ki=1）决定了位置跟踪的动态响应，过大会振荡，过小跟踪延迟
@@ -1090,13 +1090,13 @@ ADC中断 → motor0_highspeed_loop()
 
 #### 5.3.2 HFI注入与位置跟踪
 
-**原理：** HFI核心算法分为三步：
+- **原理：** HFI核心算法分为三步：
 
 1. **高频信号提取：** 对相邻两个PWM周期的α/β电流做差分，提取高频分量
 2. **PLL锁相环跟踪：** 以高频电流误差为输入，通过PI锁相环估计转子位置
 3. **N/S极性辨识：** 注入d轴直流电流，比较0°和180°方向的电流响应差异
 
-**HFI核心代码（`hpm_mcl_hfi_loop`）：**
+- **HFI核心代码（`hpm_mcl_hfi_loop`）：**
 
 ```c
 void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
@@ -1131,7 +1131,7 @@ void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 | 代码块 | 作用 | 数学原理 |
 |--------|------|---------|
@@ -1142,9 +1142,9 @@ void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
 
 #### 5.3.3 HFI与FOC的切换逻辑
 
-**原理：** HFI仅在零低速有效（反电动势太弱时），中高速需切换到SMC/反电动势观测器。本demo为纯HFI实现，运行速度仅1.1 r/s，未实现切换逻辑。
+- **原理：** HFI仅在零低速有效（反电动势太弱时），中高速需切换到SMC/反电动势观测器。本demo为纯HFI实现，运行速度仅1.1 r/s，未实现切换逻辑。
 
-**定时器中断中的速度环与极性辨识：**
+- **定时器中断中的速度环与极性辨识：**
 
 ```c
 void isr_gptmr(void)
@@ -1166,12 +1166,12 @@ void isr_gptmr(void)
 }
 ```
 
-**切换逻辑说明：**
+- **切换逻辑说明：**
 - `inject_pole_detect.func()` 返回`true`表示极性辨识完成，可以运行速度环
 - 返回`false`表示正在辨识N/S极，此时d/q轴电流参考均设为0（仅靠极性辨识电流维持）
 - 实际工程中，HFI→SMC切换需要在速度超过阈值时平滑过渡角度估计值
 
-**工程要点：**
+- **工程要点：**
 - HFI仅适用于凸极电机（IPM），表贴式电机（SPM）因$L_d \approx L_q$无法使用
 - 注入电压幅值`vh`需根据电机电感凸极比调整，过小信噪比不足，过大产生转矩脉动
 - PLL滤波系数`filter=0.1`用于平滑位置估计，过大会增加延迟
@@ -1183,9 +1183,9 @@ void isr_gptmr(void)
 
 #### 5.4.1 初始化流程
 
-**原理：** SMC（Sliding Mode Controller/Observer）通过构建电机数学模型，利用电流误差驱动滑模面，估计反电动势，再通过PLL提取转子位置。适用于中高速（>5%额定转速）无感控制。
+- **原理：** SMC（Sliding Mode Controller/Observer）通过构建电机数学模型，利用电流误差驱动滑模面，估计反电动势，再通过PLL提取转子位置。适用于中高速（>5%额定转速）无感控制。
 
-**SMC数学模型：**
+- **SMC数学模型：**
 
 电机α轴电压方程：
 
@@ -1197,7 +1197,7 @@ $$\hat{u}_\alpha = R_s \cdot \hat{i}_\alpha + L_s \cdot \frac{d\hat{i}_\alpha}{d
 
 当滑模到达条件满足时，开关项 $K_{smc} \cdot \text{sgn}(\hat{i}_\alpha - i_\alpha)$ 的平均值即为反电动势估计 $\hat{e}_\alpha$。
 
-**代码：**
+- **代码：**
 
 ```c
 int main(void)
@@ -1225,7 +1225,7 @@ int main(void)
 }
 ```
 
-**bldc_init_par()关键配置：**
+- **bldc_init_par()关键配置：**
 
 ```c
 void bldc_init_par(void)
@@ -1248,14 +1248,14 @@ void bldc_init_par(void)
 }
 ```
 
-**工程要点：**
+- **工程要点：**
 - `hpm_mcl_smc_const_cal()` 根据电机参数预计算SMC观测器常数，避免运行时浮点运算
 - `func_dqsvpwm`被替换为`hpm_mcl_smc_loop`，与HFI类似通过函数指针注入观测器
 - SMC参数（zero, ksmc, filter_coeff）需根据电机参数和速度范围仔细整定
 
 #### 5.4.2 SMC位置估计代码
 
-**代码：**
+- **代码：**
 
 ```c
 void motor0_current_loop(float angle)
@@ -1270,7 +1270,7 @@ void motor0_current_loop(float angle)
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 | 行 | 代码 | 作用 |
 |----|------|------|
@@ -1280,7 +1280,7 @@ void motor0_current_loop(float angle)
 | 4 | `func_dqsvpwm()` → `hpm_mcl_smc_loop()` | SMC+FOC核心计算 |
 | 5 | `func_set_pwm()` | 更新PWM输出 |
 
-**`hpm_mcl_smc_loop`内部流程：**
+- **`hpm_mcl_smc_loop`内部流程：**
 
 ```c
 void hpm_mcl_smc_loop(BLDC_CONTROL_FOC_PARA *par, hpm_mcl_para_t *smc,
@@ -1304,7 +1304,7 @@ void hpm_mcl_smc_loop(BLDC_CONTROL_FOC_PARA *par, hpm_mcl_para_t *smc,
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 | 代码块 | 作用 | 关键参数 |
 |--------|------|---------|
@@ -1314,7 +1314,7 @@ void hpm_mcl_smc_loop(BLDC_CONTROL_FOC_PARA *par, hpm_mcl_para_t *smc,
 
 #### 5.4.3 中高速无传感器控制的实现流程
 
-**启动流程（定时器中断中实现）：**
+- **启动流程（定时器中断中实现）：**
 
 ```c
 void isr_gptmr(void)
@@ -1352,7 +1352,7 @@ void isr_gptmr(void)
 }
 ```
 
-**启动状态机：**
+- **启动状态机：**
 
 ```text
 ┌─────────────┐    速度≥5r/s    ┌──────────────┐    10秒后     ┌──────────────┐
@@ -1363,7 +1363,7 @@ void isr_gptmr(void)
      └───────────────────────────────────────────────────────────────┘
 ```
 
-**SMC参数整定关键点：**
+- **SMC参数整定关键点：**
 
 | 参数 | 变量 | 整定方法 |
 |------|------|---------|
@@ -1373,7 +1373,7 @@ void isr_gptmr(void)
 | PLL Kp | `0.314` | 决定位置跟踪带宽，过大会放大噪声 |
 | PLL Ki | `0.007` | 消除稳态位置误差，过大会导致振荡 |
 
-**工程要点：**
+- **工程要点：**
 - SMC最低可靠工作速度约为5 r/s（约5%额定转速），低于此速度反电动势信噪比不足
 - IF拖动阶段注入d轴大电流（800 PWM计数值≈25%占空比），强制将转子拉到d轴方向
 - `drag_angle`每次增加10°电角度，对应开环加速斜率约10°/10ms = 1000°/s
@@ -1417,7 +1417,7 @@ void isr_gptmr(void)
 
 #### 5.5.2 board层→middleware层→应用层的调用关系
 
-**v2 API调用关系（bldc_foc / bldc_block）：**
+- **v2 API调用关系（bldc_foc / bldc_block）：**
 
 ```text
 应用层                    中间件层                          板级层(callback)
@@ -1445,7 +1445,7 @@ ISR:
      └─ hpm_mcl_detect_loop()     → detect.callback.disable_output()
 ```
 
-**v1 API调用关系（bldc_hfi / bldc_smc）：**
+- **v1 API调用关系（bldc_hfi / bldc_smc）：**
 
 ```text
 应用层                    中间件层                          板级层(callback)
@@ -1476,7 +1476,7 @@ ISR:
 
 #### 5.5.3 中断回调机制
 
-**双中断架构：**
+- **双中断架构：**
 
 所有示例均采用"ADC中断（电流环）+ 定时器中断（速度环/检测）"的双中断架构：
 
@@ -1485,7 +1485,7 @@ ISR:
 | ADC ISR | 20kHz (PWM频率) | 1（最高） | 电流环（Clarke/Park/PI/InvPark/SVPWM） | < 50μs (1个PWM周期) |
 | GPTMR ISR | 100Hz~1kHz | 1 | 速度环/故障检测/极性辨识 | < 1ms |
 
-**v2 API回调注册方式：**
+- **v2 API回调注册方式：**
 
 ```c
 // 通过cfg结构体的callback字段注册
@@ -1495,7 +1495,7 @@ motor0.cfg.drivers.callback.update_duty_cycle = pwm_duty_set; // PWM更新
 motor0.cfg.detect.callback.disable_output = disable_all_pwm_output; // 故障保护
 ```
 
-**v1 API回调注册方式：**
+- **v1 API回调注册方式：**
 
 ```c
 // 通过函数指针字段注册
@@ -1506,7 +1506,7 @@ par->samplcurpar.func_sampl = &hpm_mcl_bldc_foc_current_cal;
 motor0.adc_trig_event_callback = &motor0_highspeed_loop;
 ```
 
-**v2 vs v1 回调机制对比：**
+- **v2 vs v1 回调机制对比：**
 
 | 维度 | v2 API | v1 API |
 |------|--------|--------|
@@ -1516,7 +1516,7 @@ motor0.adc_trig_event_callback = &motor0_highspeed_loop;
 | 可移植性 | 高（板级代码通过callback隔离） | 中（需适配BLDC_CONTROL_FOC_PARA结构体） |
 | 扩展性 | 高（新增loop_mode即可） | 中（需修改func_dqsvpwm指向） |
 
-**工程要点：**
+- **工程要点：**
 - ADC ISR必须在一个PWM周期内完成，否则会丢失采样点导致电流环不稳定
 - v1 API中`motor0_highspeed_loop`是用户自定义的ADC回调入口，v2 API中由`hpm_mcl_loop`统一处理
 - 故障检测（`hpm_mcl_detect_loop`）在定时器中断中运行，检测到异常后调用`disable_all_pwm_output`紧急关断

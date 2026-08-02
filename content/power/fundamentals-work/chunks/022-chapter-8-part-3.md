@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第8章part 3 - 8 Converter Transfer Functions"
+title: "第8章 变换器传递函数（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1243 +18,421 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第8章part 3 - 8 Converter Transfer Functions
+# 第8章 变换器传递函数（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 328-347  
-> Chunk ID: `chapter-8-part-3`
+> 源页：328–347
+> 本部分续接 8.2.3 RHP 零点物理起源，涵盖 8.3 阻抗和传递函数的图解构造、8.4 变换器传递函数图解构造、8.5 交流传递函数和阻抗测量、8.6 关键要点小结。
 
-## 主干提取
+## 8.2 变换器传递函数分析（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 8.2.3 变换器中右半平面零点的物理起源（续）
 
-## 术语表
+![源页 p.328](../assets/page-snapshots/chapter-8/page-328.png)
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+图8.39 图8.38 变换器在占空比阶跃响应下的波形。平均二极管电流和输出电压最初下降，如 RHP 零点所预测。最终电感电流增大，使平均二极管电流和输出电压增大
 
-## 中文翻译
+增大的占空比使电感电流缓慢增大，故平均二极管电流最终超过其原始 $d = 0.4$ 平衡值。输出电压幅值最终增大到对应 $d = 0.6$ 的新平衡值。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+右半平面零点的存在倾向于使宽带宽反馈环路不稳定，因为暂态期间输出最初朝错误方向变化。反馈环路稳定性的相位裕度测试在下一章讨论；当存在 RHP 零点时，在常规单环宽带反馈系统中难以获得足够的相位裕度。右半平面零点的预测及由此对为何控制 CCM 升压和升降压变换器的反馈环路倾向于振荡的解释，是平均变换器建模的早期成功之一。
 
-## 英文原文
+## 8.3 阻抗和传递函数的图解构造
 
-```text
-8.3 Graphical Construction of Impedances and Transfer Functions 317
-Fig. 8.39 Waveforms of the con-
-verters of Fig. 8.38,f o ras t e pr e -
-sponse in duty cycle. The average
-diode current and output voltage
-initially decrease, as predicted by
-the RHP zero. Eventually, the in-
-ductor current increases, causing
-the average diode current and the
-output voltage to increase
-t
-iD(t)
-iD(t) Ts
-t
-| v(t) |
-t
-iL(t)
-d = 0.6d = 0.4
-The increased duty cycle causes the inductor current to slowly increase, and hence the aver-
-age diode current eventually exceeds its original d= 0.4 equilibrium value. The output voltage
-eventually increases in magnitude, to the new equilibrium value corresponding to d= 0.6.
-The presence of a right half-plane zero tends to destabilize wide-bandwidth feedback loops,
-because during a transient the output initially changes in the wrong direction. The phase margin
-test for feedback loop stability is discussed in the next chapter; when a RHP zero is present,
-it is diﬃcult to obtain an adequate phase margin in conventional single-loop feedback systems
-having wide bandwidth. Prediction of the right half-plane zero, and the consequent explanation
-of why the feedback loops controlling CCM boost and buck–boost converters tend to oscillate,
-was one of the early successes of averaged converter modeling.
-8.3 Graphical Construction of Impedances and Transfer Functions
-Often, we can draw approximate Bode diagrams by inspection, without large amounts of messy
-algebra and the inevitable associated algebra mistakes. A great deal of insight can be gained into
-the operation of the circuit using this method. It becomes clear which components dominate
-the circuit response at various frequencies, and so suitable approximations become obvious.
-Analytical expressions for the approximate corner frequencies and asymptotes can be obtained
-directly. Impedances and transfer functions of quite complicated networks can be constructed.
-Thus insight can be gained, so that the design engineer can modify the circuit to obtain a desired
-frequency response.
+通常可凭观察画出近似波特图，无需大量杂乱代数及不可避免的相关代数错误。用此方法可获得对电路工作的大量洞察。可清楚哪个元件在各频率主导电路响应，故合适的近似变得明显。可直接获得近似转折频率和渐近线的解析表达式。可构造相当复杂网络的阻抗和传递函数。故可获得洞察，使设计工程师能修改电路以获得所需频率响应。
 
-318 8 Converter Transfer Functions
-The graphical construction method, also known as “doing algebra on the graph,” involves
-use of a few simple rules for combining the magnitude Bode plots of impedances and transfer
-functions.
-8.3.1 Series Impedances: Addition of Asymptotes
-R
-10 
-C
-1 μF
-Z(s)
-Fig. 8.40 Series R–C network example
-A series connection represents the addition of
-impedances. If the Bode diagrams of the individual
-impedance magnitudes are known, then the asymptotes
-of the series combination are found by simply taking
-the largest of the individual impedance asymptotes. In
-many cases, the result is exact. In other cases, such as
-when the individual asymptotes have the same slope,
-then the result is an approximation; nonetheless, the
-accuracy of the approximation can be quite good.
-Consider the series-connected R–C network of
-Fig. 8.40. It is desired to construct the magnitude
-asymptotes of the total series impedance Z(s), where
-Z(s)= R+ 1
-sC (8.150)
-Let us ﬁrst sketch the magnitudes of the individual impedances. The 10 Ωresistor has an
-impedance magnitude of 10Ω⇒20 dBΩ. This value is independent of frequency, and is given
-in Fig. 8.41. The capacitor has an impedance magnitude of 1/ωC. This quantity varies inversely
-withω, and hence its magnitude Bode plot is a line with slope−20 dB/decade. The line passes
-through 1Ω⇒0d BΩat the angular frequencyωwhere
-1
-ωC= 1Ω (8.151)
-that is, at
-ω= 1
-(1Ω)C= 1
-(1Ω)(10−6F)= 106 rad/sec (8.152)
-Fig. 8.41
-Impedance
-magnitudes of the
-individual elements
-in the network of
-Fig. 8.40
-1 MHz100 kHz10 kHz1 kHz100 Hz
-100 
-10 
-1 
-0.1 
-1 k
-10 k
-1
-C
-R = 10 20 dB
-1
-C =1 at 159 kHz
-40 dB
-20 dB
-0 dB
-60 dB
-80 dB
+图解构造法（也称"在图上做代数"）涉及用若干简单规则组合阻抗和传递函数的幅值波特图。
 
-8.3 Graphical Construction of Impedances and Transfer Functions 319
-In terms of frequency f , this occurs at
-f= ω
-2π= 106
-2π= 159 kHz (8.153)
-So the capacitor impedance magnitude is a line with slope −20 dB/dec, and which passes
-through 0 dBΩat 159 kHz, as shown in Fig. 8.41. It should be noted that, for simplicity, the
-asymptotes in Fig. 8.41 have been labeled R and 1/ωC. But to draw the Bode plot, we must
-actually plot dBΩ; for example, 20 log10(R/1Ω) and 20 log10((1/ωC)/1Ω).
-Let us now construct the magnitude of Z(s), given by Eq. (8.150). The magnitude of Z can
-be approximated as follows:
-Z ( jω)
-=
-
-R+ 1
-jωC
-
-≈
-⎧⎪⎪⎪⎨⎪⎪⎪⎩
-R for R≫ 1/ωC
-1
-ωC for R≪ 1/ωC (8.154)
-The asymptotes of the series combination are simply the larger of the individual resistor and
-capacitor asymptotes, as illustrated by the heavy lines in Fig. 8.42. For this example, these
-are in fact the exact asymptotes of ∥Z∥. In the limiting case as frequency tends to zero (dc),
-then the capacitor tends to an open circuit. The series combination is then dominated by the
-capacitor, and the exact function tends asymptotically to the capacitor impedance magnitude. In
-the limiting case as frequency tends to inﬁnity, then the capacitor tends to a short circuit, and
-the total impedance becomes simply R.S ot h e R and 1/ωC lines are the exact asymptotes for
-this example.
-The corner frequency f
-0, where the asymptotes intersect, can now be easily deduced. At
-angular frequencyω0= 2πf0, the two asymptotes are equal in value:
-1
-ω0C= R (8.155)
-Solution forω0 and f0 leads to:
-ω0 = 1
-RC= 1
-(10Ω)(10−6F)= 105 rad/sec
-f0 =ω0
-2π= 1
-2πRC= 16 kHz (8.156)
-1 MHz100 kHz10 kHz1 kHz100 Hz
-100 
-10 
-1 
-0.1 
-1 k
-10 k
-1
-C
-R
-|| Z ||
-f0
-1
-2 RC =1 6k H z
-40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-Fig. 8.42 Construction of the composite asymptotes of∥ Z∥. The asymptotes of the series combination
-can be approximated by simply selecting the larger of the individual resistor and capacitor asymptotes
+### 8.3.1 串联阻抗：渐近线相加
 
-320 8 Converter Transfer Functions
-So if we can write analytical expressions for the asymptotes, then we can equate the expressions
-to ﬁnd analytical expressions for the corner frequencies where the asymptotes intersect.
-The deviation of the exact curve from the asymptotes follows all of the usual rules. The
-slope of the asymptotes changes by +20 dB/decade at the corner frequency f0 (i.e., from
-−20 dBΩ/decade to 0 dBΩ/decade), and hence there is a zero at f = f0. So the exact curve
-deviates from the asymptotes by+3d BΩat f= f0, and by+1d BΩat f= 2 f0 and at f= f0/2.
-8.3.2 Series Resonant Circuit Example
-Z(s)
-R
-L
-C
-Fig. 8.43 Series R–L–C network example
-As a second example, let us construct the
-magnitude asymptotes for the series R–L–
-C circuit of Fig. 8.43. The series impedance
-Z(s)i s
-Z(s)= R+ sL+ 1
-sC (8.157)
-The magnitudes of the individual resistor, in-
-ductor, and capacitor asymptotes are plotted
-in Fig. 8.44, for the values
-R= 1kΩ
-L= 1 mH (8.158)
-C= 0.1μF
-The series impedance Z(s) is dominated by the capacitor at low frequency, by the resistor at mid
-frequencies, and by the inductor at high frequencies, as illustrated by the bold line in Fig. 8.44.
-The impedance Z(s) contains a zero at angular frequency ω1, where the capacitor and resistor
-asymptotes intersect. By equating the expressions for the resistor and capacitor asymptotes, we
-can ﬁndω
-1:
-R= 1
-ω1C⇒ω1= 1
-RC (8.159)
-A second zero occurs at angular frequencyω2, where the inductor and resistor asymptotes inter-
-sect. Upon equating the expressions for the resistor and inductor asymptotes at ω2, we obtain
-the following:
-Fig. 8.44 Graphical
-construction of ∥ Z∥
-of the series R–L–C
-network of Fig. 8.43,
-for the element values
-speciﬁed by Eq. (8.158)
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1 k
-100 
-10 
-1 
-10 k
-100 k
-1
-C
-R
-|| Z ||
-f1
-L
-60 dB
-40 dB
-20 dB
-0 dB
-80 dB
-100 dB
-f2
+![源页 p.329](../assets/page-snapshots/chapter-8/page-329.png)
 
-8.3 Graphical Construction of Impedances and Transfer Functions 321
-Fig. 8.45 Graphical con-
-struction of impedance
-asymptotes for the series
-R–L–C network example,
-with R decreased to 10Ω
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1 k
-100 
-10 
-1 
-10 k
-100 k
-1
-C
-R
-|| Z ||
-f0
-L
-60 dB
-40 dB
-20 dB
-0 dB
-80 dB
-100 dB
-R0
-R=ω2L⇒ω2= R
-L (8.160)
-So simple expressions for all important features of the magnitude Bode plot of Z(s) can be
-obtained directly. It should be noted that Eqs. (8.159) and (8.160) are approximate, rather than
-exact, expressions for the corner frequenciesω1 andω2. Equations (8.159) and (8.160) coincide
-with the results obtained via the low-Q approximation of Sect. 8.1.7.
-Next, suppose that the value of R is decreased to 10Ω.A s R is reduced in value, the approx-
-imate corner frequencies ω1 andω2 move closer together until, at R= 100Ω, they are both
-100 krad/sec. Reducing R further in value causes the asymptotes to become independent of the
-value of R, as illustrated in Fig. 8.45 for R= 10ω.T h e∥ Z∥ asymptotes now switch directly
-fromωL to 1/ωC.
-So now there are two zeroes atω=ω0. At corner frequencyω0, the inductor and capacitor
-asymptotes are equal in value. Hence,
-ω0L= 1
-ω0C= R0 (8.161)
-Solution for the angular corner frequencyω0 leads to
-ω0= 1√
-LC
-(8.162)
-Atω=ω0, the inductor and capacitor impedances both have magnitude R0, called the charac-
-teristic impedance.
-Since there are two zeroes at ω=ω0, there is a possibility that the two poles could be
-complex conjugates, and that peaking could occur in the vicinity ofω=ω0. So let us investigate
-what the actual curve does atω=ω0. The actual value of the series impedance Z( jω0)i s
-Z( jω0)= R+ jω0L+ 1
-jω0C (8.163)
-Substitution of Eq. (8.161) into Eq. (8.163) leads to
-Z( jω0)= R+ jR0+ R0
-j = R+ jR0−jR0= R (8.164)
-Atω=ω0, the inductor and capacitor impedances are equal in magnitude but opposite in phase.
-Hence, they exactly cancel out in the series impedance, and we are left with Z( jω0)= R,a s
+图8.40 串联 R-C 网络示例
 
-322 8 Converter Transfer Functions
-Fig. 8.46 Ac-
-tual impedance
-magnitude (solid
-line) for the series
-resonant R–L–C
-example. The induc-
-tor and capacitor
-impedances cancel
-out at f = f
-0,a n d
-hence Z( jω0)= R
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1 k
-100 
-10 
-1 
-10 k
-100 k
-1
-C
-R
-|| Z ||
-f0
-L
-60 dB
-40 dB
-20 dB
-0 dB
-80 dB
-100 dB
-R0
-Q = R0 /R
-Actual curve
-illustrated in Fig. 8.46. The actual curve in the vicinity of the resonance at ω=ω0 can deviate
-signiﬁcantly from the asymptotes, because its value is determined byR rather thanωL or 1/ωC.
-We know from Sect. 8.1.6 that the deviation of the actual curve from the asymptotes at
-ω=ω0 is equal to Q.F r o mF i g .8.46, one can see that
-⏐⏐⏐ Q
-⏐⏐⏐dB=
-⏐⏐⏐ R0
-⏐⏐⏐dBΩ−
-⏐⏐⏐ R
-⏐⏐⏐dBΩ (8.165)
-or,
-Q= R0
-R (8.166)
-Equations (8.161)t o( 8.166) are exact results for the series resonant circuit.
-The practice of adding asymptotes by simply selecting the larger asymptote can be applied
-to transfer functions as well as impedances. For example, suppose that we have already con-
-structed the magnitude asymptotes of two transfer functions, G1 and G2, and we wish to ﬁnd
-the asymptotes of G= G1+ G2. At each frequency, the asymptote for G can be approximated
-by simply selecting the larger of the asymptotes for G1 and G2:
-G= G1+ G2≈
-⎧⎪⎪⎨⎪⎪⎩
-G1,
-G1
-≫
-G2
-
-G2,
-G2
-≫
-G1
- (8.167)
-Corner frequencies can be found by equating expressions for asymptotes as illustrated in the
-preceding examples. In the next chapter, we will see that this approach yields a simple and
-powerful method for determining the closed-loop transfer functions of feedback systems.
-8.3.3 Parallel Impedances: Inverse Addition of Asymptotes
-A parallel combination represents inverse addition of impedances:
-Z
-par= 1⎦1
-Z1
-+ 1
-Z2
-+···
-)= Z1
- Z2
-··· (8.168)
-If the asymptotes of the individual impedances Z1, Z2,... , are known, then the asymptotes
-of the parallel combination Zpar can be found by simply selecting the smallest individual
-impedance asymptote. This is true because the smallest impedance will have the largest inverse,
-and will dominate the inverse sum. As in the case of the series impedances, this procedure will
-often yield the exact asymptotes of Zpar.
+串联连接代表阻抗相加。若已知各单个阻抗幅值的波特图，则串联组合的渐近线通过简单取各单个阻抗渐近线中最大者求得。许多情形下结果是精确的。其他情形下（如各渐近线斜率相同时），结果是近似；但近似的精度可相当好。
 
-8.3 Graphical Construction of Impedances and Transfer Functions 323
-Z(s) RLC
-Fig. 8.47 Parallel R–L–C network example
-Let us construct the magnitude asymp-
-totes for the parallel R–L–C network of
-Fig. 8.47, using the following element values:
-R= 10Ω
-L= 1 mH (8.169)
-C= 0.1μF
-Impedance magnitudes of the individual ele-
-ments are illustrated in Fig. 8.48. The asymptotes for the total parallel impedance Z are approx-
-imated by simply selecting the smallest individual element impedance, as shown by the heavy
-line in Fig. 8.48. So the parallel impedance is dominated by the inductor at low frequency, by
-the resistor at mid frequencies, and by the capacitor at high frequency. Approximate expressions
-for the angular corner frequencies are again found by equating asymptotes:
-atω=ω
-1, R=ω1L⇒ω1= R
-L (8.170)
-atω=ω2, R= 1
-ω2C⇒ω2= 1
-RC
-These expressions could have been obtained by conventional analysis, combined with the low-Q
-approximation of Sect. 8.1.7.
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1
-C
-R
-|| Z ||
-f1
-L
-40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 
-10 
-1 
-0.1 
-1 k
-10 k
-f2
-Fig. 8.48 Construction of the composite asymptotes of∥ Z∥, for the parallelR–L–C example. The asymp-
-totes of the parallel combination can be approximated by simply selecting the smallest of the individual
-resistor, inductor, and capacitor asymptotes
-8.3.4 Parallel Resonant Circuit Example
-Figure 8.49 illustrates what happens when the value of R in the parallel R–L–C network is
-increased to 1 kΩ. The asymptotes for∥ Z∥ then become independent of R, and change directly
-fromωL to 1/ωC at angular frequencyω0. The corner frequencyω0 is now the frequency where
-the inductor and capacitor asymptotes have equal value:
+考虑图8.40 的串联 R-C 网络。希望构造总串联阻抗 $Z(s)$ 的幅值渐近线，其中
 
-324 8 Converter Transfer Functions
-Fig. 8.49 Graphical con-
-struction of impedance
-asymptotes for the parallel
-R–L–C example, with R
-increased to 1 kΩ
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1
-C
-R
-|| Z ||
-f0
-L
-R040 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 
-10 
-1 
-0.1 
-1 k
-10 k
-ω0L= 1
-ω0C= R0 (8.171)
-which implies that
-ω0= 1√
-LC
-(8.172)
-Atω=ω0, the slope of the asymptotes of∥ Z∥ changes from+20 dB/decade to−20 dB/decade,
-and hence there are two poles. We should investigate whether peaking occurs, by determining
-the exact value of∥ Z∥ atω=ω
-0, as follows:
-Z ( jω0)= (R)
- ( jω0L)
-
-⎦ 1
-jω0C
-)
-= 1⎦1
-R+ 1
-jω0L+ jω0C
-) (8.173)
-Substitution of Eq. (8.171)i n t o(8.173) yields
-Z ( jω0)= 1
-1
-R+ 1
-jR0
-+ j
-R0
-= 1
-1
-R−j
-R0
-+ j
-R0
-= R (8.174)
-So atω=ω0, the impedances of the inductor and capacitor again cancel out, and we are left with
-Z( jω0)= R. The values of L and C determine the values of the asymptotes, but R determines
-the value of the actual curve atω=ω0.
-The actual curve is illustrated in Fig.8.50. The deviation of the actual curve from the asymp-
-totes atω=ω0 is
-⏐⏐⏐ Q
-⏐⏐⏐dB=
-⏐⏐⏐ R
-⏐⏐⏐dBΩ−
-⏐⏐⏐ R0
-⏐⏐⏐dBΩ (8.175)
-or,
-Q= R
-R0
-(8.176)
-Equations (8.171)t o( 8.176) are exact results for the parallel resonant circuit.
-The graphical construction method for impedance magnitudes is well known, and reac-
-tance paper can be purchased commercially. As illustrated in Fig. 8.51, the magnitudes of
-the impedances of various inductances, capacitances, and resistances are plotted on semi-
-logarithmic axes. Asymptotes for the impedances of R–L–C networks can be sketched directly
-on these axes, and numerical values of corner frequencies can then be graphically determined.
+$$Z(s) = R + \frac{1}{sC} \tag{8.150}$$
 
-8.3 Graphical Construction of Impedances and Transfer Functions 325
-Fig. 8.50 Actual
-impedance magni-
-tude (solid line) for
-the parallel resonant
-R–L–C example. The
-inductor and capacitor
-impedances cancel out
-at f = f
-0, and hence
-Z( jω0)= R
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1
-C
-R
-|| Z ||
-f0
-L
-R0Actual curve40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 
-10 
-1 
-0.1 
-1 k
-10 k
-Q = R /R0
-10 
-1 
-100 m
-100 
-1 k
-10 k
-10 m
-1 m
-100 ! H
-1 mH
-10 ! H 100 nH 10 nH 1 nH
-10 Hz 100 Hz 1 kHz 10 kHz 100 kHz 1 MHz
-1 ! H
-10 mH
-100 mH
-1 H
-10 H
-10 ! F
-100 ! F1 mF10 mF100 mF1 F
-1 ! F
-100 nF
-10 nF
-1 nF
-100 pF
-20 dB
-0 dB
-40 dB
-60 dB
-80 dB
-Fig. 8.51 “Reactance paper”: an aid for graphical construction of impedances, with the magnitudes of
-various inductive, capacitive, and resistive impedances preplotted
-8.3.5 Voltage Divider Transfer Functions: Division of Asymptotes
-Usually, we can express transfer functions in terms of impedances—for example, as the ratio
-of two impedances. If we can construct these impedances as described in the previous sections,
-then we can divide to construct the transfer function. In this section, construction of the transfer
-function H(s) of the two-pole R–L–C low-pass ﬁlter (Fig.8.52) is discussed in detail. A ﬁlter of
-this form appears in the canonical model for two-pole converters, and the results of this section
-are applied in the converter examples of the next section.
-The familiar voltage divider formula shows that the transfer function of this circuit can be
-expressed as the ratio of impedancesZ2/Zin, where Zin= Z1+Z2 is the network input impedance:
-ˆv2(s)
-ˆv1(s)= Z2
-Z1+ Z2
-= Z2
-Zin
-(8.177)
-For this example, Z1(s)= sL, and Z2(s) is the parallel combination of R and 1/sC. Hence, we
-can ﬁnd the transfer function asymptotes by constructing the asymptotes of Z2 and of the series
+先画各单个阻抗的幅值。10 Ω 电阻的阻抗幅值为 $10\,\Omega \Rightarrow 20\text{ dB}\Omega$。此值与频率无关，绘于图8.41。电容的阻抗幅值为 $1/\omega C$。此量与 $\omega$ 成反比，故其幅值波特图是斜率 −20 dB/十倍频程的直线。该直线在角频率 $\omega$ 处过 $1\,\Omega \Rightarrow 0\text{ dB}\Omega$，其中
 
-326 8 Converter Transfer Functions
-(a)
-+
-L
-C R
-+
-v2(s)
-H(s)
-Zout
-Z2Z1
-{
-{
-Zinv1(s)
-(b)
-L C R Zout
-Z2Z1
-{
-{
-(c)
-L
-C R
-Z2Z1
-{
-{
-Zin
-Fig. 8.52 Two-pole low-pass ﬁlter based on voltage divider circuit: (a) transfer function H(s), (b) deter-
-mination of Zout(s) by setting independent sources to zero, (c) determination of Zin(s)
-combination represented by Zin, and then dividing. Another approach, which is easier to apply
-in this example, is to multiply the numerator and denominator of Eq. (8.177)b y Z1:
-ˆv2(s)
-ˆv1(s)= Z2Z1
-Z1+ Z2
-1
-Z1
-= Zout
-Z1
-(8.178)
-where Zout= Z1∥ Z2 is the output impedance of the voltage divider. So another way to construct
-the voltage divider transfer function is to ﬁrst construct the asymptotes for Z1 and for the par-
-allel combination represented by Zout, and then divide. This method is useful when the parallel
-combination Z1∥Z2 is easier to construct than the series combination Z1+ Z2.I to f t e ng i v e sa
-diﬀerent approximate result, which may be more (or sometimes less) accurate than the result
-obtained using Zin.
-The output impedance Zout in Fig. 8.52bi s
-Zout(s)= R
- 1
-sC
- sL (8.179)
-The impedance of the parallel R–L–C network is constructed in Sect. 8.3.3, and is illustrated in
-Fig. 8.51a for the high-Q case.
-According to Eq. (8.178), the voltage divider transfer function magnitude is∥ H∥=∥ Zout∥/
-∥ Z1∥. This quantity is constructed in Fig. 8.53b. Forω<ω0, the asymptote of ∥ Zout∥ co-
-incides with ∥Z1∥: both are equal to ωL. Hence, the ratio is ∥ Zout∥/∥ Z1∥ = 1. For ω>
-ω0, the asymptote of ∥ Zout∥ is 1/ωC, while ∥ Z1∥ id equal to ωL. The ratio then becomes
-∥ Zout∥/∥ Z1∥= 1/ω2LC, and hence the high-frequency asymptote has a−40 dB/decade slope.
+$$\frac{1}{\omega C} = 1\,\Omega \tag{8.151}$$
 
-8.4 Graphical Construction of Converter Transfer Functions 327
-Fig. 8.53 Graphical construction of
-H and Zout of the voltage divider cir-
-cuit: ( a) output impedance Zout;( b)
-transfer function H
-(a) 1
-C
-R
-|| Zout ||
-f0
-R0
-|| Z1 || = L
-Q = R /R0
-(b)
-f0
-Q = R /R0L
-L =1
-1/ C
-L = 1
-2LC
-H = Zout
-Z1
-Fig. 8.54 Eﬀect of increasing L
-on the output impedance asymptotes,
-corner frequency, and Q-factor
-1
-C
-R
-|| Zout ||
-f0
-R0
-Q = R /R0
-Increasing
-L L
-Atω= ω0, ∥ Zout∥ has exact value R, while ∥Z1∥ has exact value R0. The ratio is then
-∥ H( jω0)∥=∥ Zout( jω0)∥/∥ Z1( jω0)∥= R/R0 = Q. So the ﬁlter transfer function H has the
-sameω0 and Q as the impedance Zout.
-It now becomes obvious how variations in element values aﬀect the salient features of the
-transfer function and output impedance. For example, the eﬀect of increasing L is illustrated in
-Fig. 8.54. This causes the angular resonant frequency ω0 to be reduced, and also reduces the
-Q-factor.
-8.4 Graphical Construction of Converter Transfer Functions
-The small-signal equivalent circuit model of the buck converter, derived in Chap. 7, is repro-
-duced in Fig. 8.55. Let us construct the transfer functions and terminal impedances of this con-
-verter, using the graphical approach of the previous section.
-The output impedance Zout(s) is found with the ˆd(s) and ˆvg(s) sources set to zero; the circuit
-of Fig. 8.56a is then obtained. This model coincides with the parallel R–L–C circuit analyzed
-in Sects. 8.3.3 and 8.3.4. As illustrated in Fig. 8.56b, the output impedance is dominated by the
+即
 
-328 8 Converter Transfer Functions
-+
-–
-+
-–
-L
-RC
-1 : D
-vg(t) Id (t)
-Vg d(t)
-i(t) +
-v(t)
-–
-Zout(s)Zin(s)
-ˆ ˆ
-ˆˆ
-ˆ
-Fig. 8.55 Small-signal model of the buck converter, with input impedance Zin(s) and output impedance
-Zout(s) explicitly deﬁned
-(a) L
-RC
-Zout(s)
-(b) 1
-C
-R
-|| Zout ||
-f0
-R0
-L
-Q = R /R0
-Fig. 8.56 Construction of buck converter output impedance Zout(s): (a) circuit model; ( b) impedance
-asymptotes
-inductor at low frequency, and by the capacitor at high frequency. At the resonant frequency f0,
-given by
-f0= 1
-2π
-√
-LC
-(8.180)
-the output impedance is equal to the load resistance R.T h eQ-factor of the circuit is equal to
-Q= R
-R0
-(8.181)
-where
-R0=ω0L= 1
-ω0C=
-√
-L
-C (8.182)
-Thus, the circuit is lightly damped (high Q) at light load, where the value of R is large.
-The converter input impedance Zin(s) is also found with the ˆd(s) and ˆvg(s) sources set to
-zero, as illustrated in Fig. 8.57a. The input impedance is referred to the primary side of the 1:D
-transformer, and is equal to
-Zin(s)= 1
-D2
-[Z1(s)+ Z2(s)] (8.183)
+$$\omega = \frac{1}{(1\,\Omega)C} = \frac{1}{(1\,\Omega)(10^{-6}\text{ F})} = 10^6\text{ rad/s} \tag{8.152}$$
 
-8.4 Graphical Construction of Converter Transfer Functions 329
-(a) L
-RC
-1 : D
-Zin(s)
-Z1(s) Z2(s)
-{
-{
-(b) 1
-C
-R
-f0
-f1
-L
-1
-2 RC
-1
-2 LC
-R0 = L
-C
-(c) 1
-C
-R
-f0
-|| Z1 ||
-f1
-|| Z2 ||
-L
-(d) 1
-C
-R
-|| Zout ||
-f0
-R0
-|| Z1 ||
-Q = R /R0
-f1
-|| Z2 ||
-L
-(e)
-f0
-Q = R /R0
-f1
-1
-D2
-R0
-2
-R
-1
-CD2
-L
-D2R
-D2
-R0
-D2|| Zin ||
-||
-Fig. 8.57 Construction of the input impedance Zin(s) for the buck converter: ( a) circuit model; ( b)t h e
-individual resistor, inductor, and capacitor impedance magnitudes; (c) construction of the impedance mag-
-nitudes∥Z1∥ and∥Z2∥;( d) construction of∥Zout∥;( e) ﬁnal result∥Zin∥
-where
-Z1(s)= sL (8.184)
-and
-Z2(s)= R
- 1
-sC (8.185)
-We begin construction of the impedance asymptotes corresponding to Eqs. ( 8.183)t o( 8.185)
-by constructing the individual resistor, capacitor, and inductor impedances as in Fig.8.57b. The
-impedances in Fig. 8.57 are constructed for the case R> R0. As illustrated in Fig. 8.57c,∥Z1∥
-coincides with the inductor reactance ωL. The impedance ∥Z2∥ is asymptotic to resistance R
+![源页 p.329](../assets/page-snapshots/chapter-8/page-329.png)
 
-330 8 Converter Transfer Functions
-at low frequencies and to the capacitor reactance 1 /ωC at high frequency. The resistor and
-capacitor asymptotes intersect at corner frequency f1, given by
-f1= 1
-2πRC (8.186)
-According to Eq. (8.183), the input impedance Zin(s) is equal to the series combination of Z1(s)
-and Z2(s), divided by the square of the turns ratioD. The asymptotes for the series combination
-[Z1(s)+ Z2(s)] are found by selecting the larger of the∥Z1∥ and∥Z2∥ asymptotes. The∥Z1∥ and
-∥Z2∥ asymptotes intersect at frequency f0, given by Eq. (8.180). It can be seen from Fig. 8.57c
-that the series combination is dominated by Z2 for f< f0 and by Z1 for f> f0. Upon scaling
-the [Z1(s)+ Z2(s)] asymptotes by the factor 1/D2, the input impedance asymptotes of Fig.8.57e
-are obtained.
-The zeroes of Zin(s), at frequency f0,h a v et h es a m eQ-factor as the poles of Zout(s)
-[Eq. (8.181)]. One way to see that this is true is to note that the output impedance can be ex-
-pressed as
-Zout(s)= Z1(s)Z2(s)
-Z1(s)+ Z2(s)= Z1(s)Z2(s)
-D2Zin(s) (8.187)
-Hence, we can relate Zout(s)t o Zin(s) as follows:
-Zin(s)= 1
-D2
-Z1(s)Z2(s)
-Zout(s) (8.188)
-The impedances∥Z1∥,∥Z2∥, and∥ Zout∥ are illustrated in Fig. 8.57d. At the resonant frequency
-f= f0, impedance Z1 has magnitude R0 and impedance Z2 has magnitude approximately equal
-to R0. The output impedance Zout has magnitude R. Hence, Eq. ( 8.188) predicts that the input
-impedance has the magnitude
-∥ Zin∥≈1
-D2
-R0R0
-R at f= f0 (8.189)
-At f= f0, the asymptotes of the input impedance have magnitude R0/D2. The deviation from
-the asymptotes is therefore equal to Q= R/R0, as illustrated in Fig. 8.57e.
-The control-to-output transfer functionGvd(s) is found with the ˆvg(s) source set to zero, as in
-Fig. 8.58a. This circuit coincides with the voltage divider analyzed in Sect.8.3.5. Hence, Gvd(s)
-can be expressed as
-Gvd(s)= Vg
-Zout(s)
-Z1(s) (8.190)
-The quantities∥ Zout∥ and∥Z1∥ are constructed in Fig. 8.58b. According to Eq. (8.190), we can
-construct∥Gvd(s)∥ by ﬁnding the ratio of∥ Zout∥ and∥Z1∥, and then scaling the result by Vg.F o r
-f< f0,∥ Zout∥ and∥Z1∥ are both equal toωL and hence∥ Zout∥/∥Z1∥ is equal to 1. As illustrated
-in Fig. 8.58c, the low-frequency asymptote of ∥Gvd(s)∥ has value Vg.F o r f > f0,∥ Zout∥ has
-asymptote 1/ωC, and∥Z1∥ is equal toωL. Hence,∥ Zout∥/∥Z1∥ has asymptote 1/ω2LC, and the
-high-frequency asymptote of∥Gvd(s)∥ is equal to Vg/ω2LC.T h e Q-factor of the two poles at
-f= f0 is again equal to R/R0.
+图8.41 图8.40 网络中各单个元件的阻抗幅值
 
-8.4 Graphical Construction of Converter Transfer Functions 331
-(a)
-+
-L
-RCVg (t)
-+
-(t)
-(b) 1
-C
-R
-|| Zout ||
-f0
-R0
-Q = R /R0
-|| Z1 || = L
-(c)
-f0
-Q = R /R0Vg
-L
-L = Vg
-Vg
-1/ C
-L = Vg
-2LC|| Gvd(s) ||
-dˆ vˆ
-Fig. 8.58 Construction of the control-to-output transfer functionGvd(s) for the buck converter: (a) circuit
-model; (b) relevant impedance asymptotes; (c) transfer function∥Gvd(s)∥
-Fig. 8.59 The line-to-output trans-
-fer function Gvg(s) for the buck con-
-verter: (a) circuit model; ( b) magni-
-tude asymptotes
-(a)
-+
-–
-L
-RC
-1 : D
-g(t)
-+
-(t)
-–
-(b)
-f0
-Q = R /R0
-D
-2LC|| Gvg(s) ||
-D
-vˆ vˆ
-The line-to-output transfer function Gvg(s) is found with the ˆd(s) sources set to zero, as
-in Fig. 8.59a. This circuit contains the same voltage divider as in Fig. 8.58, and additionally
-contains the 1:D transformer. The transfer function Gvg(s) can be expressed as
-Gvg(s)= DZout(s)
-Z1(s) (8.191)
-This expression is similar to Eq. (8.190), except for the scaling factor of D. Therefore, the line-
-to-output transfer function of Fig. 8.59b has the same shape as the control-to-output transfer
-function Gvd(s).
+以频率 $f$ 表示，此频率为
 
-332 8 Converter Transfer Functions
-8.5 Measurement of AC Transfer Functions and Impedances
-It is good engineering practice to measure the transfer functions of prototype converters and
-converter systems. Such an exercise can verify that the system has been correctly modeled and
-designed. Also, it is often useful to characterize individual circuit elements through measure-
-ment of their terminal impedances.
-Small-signal ac magnitude and phase measurements can be made using an instrument
-known as a network analyzer, or frequency response analyzer. The key inputs and outputs of
-a basic network analyzer are illustrated in Fig.8.60. The network analyzer provides a sinusoidal
-output voltage ˆv
-z of controllable amplitude and frequency. This signal can be injected into the
-system to be measured, at any desired location. The network analyzer also has two (or more)
-inputs, ˆvx and ˆvy. The return electrodes of ˆvz, ˆvy, and ˆvx are internally connected to earth ground.
-The network analyzer performs the function of a narrowband tracking voltmeter: it measures the
-components of ˆvx and ˆvy at the injection frequency, and displays the magnitude and phase of the
-quantity ˆvy/ˆvx. The narrowband tracking voltmeter feature is essential for switching converter
-measurements; otherwise, switching ripple and noise corrupt the desired sinusoidal signals and
-make accurate measurements impossible [ 80]. Modem network analyzers can automatically
-sweep the frequency of the injection source ˆvz to generate magnitude and phase Bode plots of
-the transfer function ˆvy/ˆvx.
-A typical test setup for measuring the transfer function of an ampliﬁer is illustrated in
-Fig. 8.61. A potentiometer, connected between a dc supply voltage VCC and ground, is used
-to bias the ampliﬁer input to attain the correct quiescent operating point. The injection source
-voltage ˆvz is coupled to the ampliﬁer input terminals via a dc blocking capacitor. This blocking
-capacitor prevents the injection voltage source from upsetting the dc bias. The network ana-
-lyzer inputs ˆv
-x and ˆvy are connected to the input and output terminals of the ampliﬁer. Hence,
-the measured transfer function is
-Network Analyzer
-Injection source Measured inputs
-vy
-Magnitude
-vz
-Frequency
-vz
-Output
-vz+
-–
-Input
-vx
-Input
-+– +–
-vy
-vx
-vy
-vx
-Data
-17.3 dB
-– 134.7˚
-Data bus
-to computer
-Fig. 8.60 Key features and functions of a network analyzer: sinusoidal source of controllable amplitude
-and frequency, two inputs, and determination of relative magnitude and phase of the input components at
-the injection frequency
+$$f = \frac{\omega}{2\pi} = \frac{10^6}{2\pi} = 159\text{ kHz} \tag{8.153}$$
 
-8.5 Measurement of AC Transfer Functions and Impedances 333
-Network Analyzer
-Injection source Measured inputs
-vy
-Magnitude
-vz
-Frequency
-vz
-Output
-vz+
-–
-Input
-vx
-Input
-+– +–
-vy
-vx
-vy
-vx
-Data
-–4.7 dB
-– 162.8˚
-Data bus
-to computer
-Device
-under test
-G(s)
-Input
-Output
-VCC
-DC
-bias
-adjust
-DC
-blocking
-capacitor
-Fig. 8.61 Measurement of a transfer function
-ˆvy(s)
-ˆvx(s)= G(s) (8.192)
-Note that the blocking capacitance, bias potentiometer, and ˆvz amplitude have no eﬀect on the
-measured transfer function
-An impedance
-Z(s)= ˆv(s)
-ˆi(s)
-(8.193)
-can be measured by treating the impedance as a transfer function from current to voltage. For
-example, measurement of the output impedance of an ampliﬁer is illustrated in Fig. 8.62.T h e
-quiescent operating condition is again established by a potentiometer which biases the ampliﬁer
-input. The injection source ˆv
-z is coupled to the ampliﬁer output through a dc blocking capacitor.
-The injection source voltage ˆvz excites a current ˆiout in impedance Zs. This current ﬂows into the
-output of the ampliﬁer, and excites a voltage across the ampliﬁer output impedance:
-Zout(s)= ˆvy(s)
-ˆiout(s)
-⏐⏐
-⏐⏐⏐
-⏐
-ampliﬁer
-ac input = 0
-(8.194)
+故电容阻抗幅值是斜率 −20 dB/十倍频程、在 159 kHz 处过 0 dBΩ 的直线，如图8.41所示。应注意为简化起见，图8.41 中渐近线标记为 $R$ 和 $1/\omega C$。但绘制波特图时实际须绘 dBΩ，例如 $20\log_{10}(R/1\,\Omega)$ 和 $20\log_{10}((1/\omega C)/1\,\Omega)$。
 
-334 8 Converter Transfer Functions
-VCC
-DC
-bias
-adjust
-Device
-under test
-G(s)
-Input
-Output
-Zout +
-– vz
-iout
-vy
-+–
-V oltage
-probe
-Zs
-{
-Rsource
-DC blocking
-capacitor
-Current
-probe
-vx
-+–
-Fig. 8.62 Measurement of the output impedance of a circuit
-A current probe is used to measure ˆiout. The current probe produces a voltage proportional
-to ˆiout; this voltage is connected to the network analyzer input ˆ vx. A voltage probe is used to
-measure the ampliﬁer output voltage ˆvy. The network analyzer displays the transfer function
-ˆvy/ˆvx, which is proportional to Zout. Note that the value of Zs and the amplitude of ˆvz do not
-aﬀect the measurement of Zout.
-In power applications, it is sometimes necessary to measure impedances that are very small
-in magnitude. Grounding problems [ 4] cause the test setup of Fig. 8.62 to fail in such cases.
-The reason is illustrated in Fig. 8.63a. Since there turn connections of the injection source ˆ vz
-and the analyzer input ˆvy are both connected to earth ground, the injected current ˆiout can return
-to the source through the return connections of either the injection source or the voltage probe.
-In practice, ˆiout divides between the two paths according to their relative impedances. Hence,
-a signiﬁcant current (1 −k)ˆiout ﬂows through the return connection of the voltage probe. If
-the voltage probe return connection has some total contact and wiring impedance Zprobe, then
-the current induces a voltage drop (1 −k)ˆioutZprobe in the voltage probe wiring, as illustrated
-in Fig. 8.63a. Hence, the network analyzer does not correctly measure the voltage drop across
-the impedance Z. If the internal ground connections of the network analyzer have negligible
-impedance, then the network analyzer will display the following impedance:
-Z+ (1−k)Zprobe= Z+ Zprobe
-Zrz (8.195)
-Here, Zrz is the impedance of the injection source return connection. So to obtain an accurate
-measurement, the following condition must be satisﬁed:
-
-Z
-
-≫
-
-
-
-⎦
-Z
-probe
-
-Z
-rz
-) 
-
- (8.196)
-A typical lower limit on∥ Z∥ is a few tens or hundreds of milliohms.
-An improved test setup for measurement of small impedances is illustrated in Fig.8.63b. An
-isolation transformer is inserted between the injection source and the dc blocking capacitor. The
-return connections of the voltage probe and injection source are no longer in parallel, and the
-injected current ˆi
-out must now return entirely through the injection source return connection. An
+现在构造式 (8.150) 给出的 $Z(s)$ 幅值。$Z$ 的幅值可近似为
 
-8.5 Measurement of AC Transfer Functions and Impedances 335
-(a) Impedance
-under test
-Z(s) +
-– vz
-iout
-vy
-+
-–
-V oltage
-probe
-Rsource
-vx
-+
-–
-Network Analyzer
-Injection source
-Measured
-inputs
-V oltage
-probe
-return
-connection
-Injection
-source
-return
-connection
-iout
-Zrz
-{{Zprobe
-ki out
-(1 –k) iout
-+ –(1 –k) iout Zprobe
-(b) Impedance
-under test
-Z(s) +
-– vz
-iout
-vy
-+
-–
-V oltage
-probe
-Rsource
-vx
-+
-–
-Network Analyzer
-Injection source
-Measured
-inputs
-V oltage
-probe
-return
-connection
-Injection
-source
-return
-connection
-Zrz
-{{Zprobe
-+ –0V
-0
-iout
-1 : n
-Fig. 8.63 Measurement of a small impedance Z(s): (a) current ﬂowing in the return connection of the
-voltage probe induces a voltage drop that corrupts the measurement; ( b) an improved experiment, incor-
-porating isolation of the injection source
+$$\|Z(j\omega)\| = \left\|R + \frac{1}{j\omega C}\right\| \approx \begin{cases} R & \text{对} \ R \gg 1/\omega C \\ \dfrac{1}{\omega C} & \text{对} \ R \ll 1/\omega C \end{cases} \tag{8.154}$$
 
-336 8 Converter Transfer Functions
-added beneﬁt is that the transformer turns ratio n can be increased, to better match the injection
-source impedance to the impedance under test. Note that the impedances of the transformer, of
-the blocking capacitor, and of the probe and injection source return connections, do not a ﬀect
-the measurement. Much smaller impedances can therefore be measured using this improved
-approach.
-8.6 Summary of Key Points
-1. The magnitude Bode diagrams of functions which vary as ( f/ f0)n have slopes equal to
-20n dB per decade, and pass through 0 dB at f= f0.
-2. It is good practice to express transfer functions in normalized pole-zero form; this form
-directly exposes expressions for the salient features of the response, that is, the corner
-frequencies, reference gain, etc.
-3. The right half-plane zero exhibits the magnitude response of the left half-plane zero, but
-the phase response of the pole.
-4. Poles and zeroes can be expressed in frequency-inverted form when it is desirable to refer
-the gain to a high-frequency asymptote.
-5. A two-pole response can be written in the standard normalized form of Eq. ( 8.58). When
-Q> 0.5, the poles are complex conjugates. The magnitude response then exhibits peaking
-in the vicinity of the corner frequency, with an exact value of Q at f = f0.H i g hQ also
-causes the phase to change sharply near the corner frequency.
-6. When Q is less than 0.5, the two-pole response can be plotted as two real poles. The low-
-Q approximation predicts that the two poles occur at frequencies f0/Q and Qf 0. These
-frequencies are within 10% of the exact values for Q≤0.3.
-7. When a circuit includes two damping elements, the composite Q-factor can be estimated
-as the “parallel combination” (inverse addition) of the Q-factors determined by the two
-elements individually. This estimation is within 10% of the exact value when the product
-of the individual Q-factors is greater than 5.
-8. The low- Q approximation can be extended to ﬁnd approximate roots of an arbitrary-degree
-polynomial. Approximate analytical expressions for the salient features can be derived.
-Numerical values are used to justify the approximations.
-9. Salient features of the transfer functions of the buck, boost, and buck–boost converters are
-tabulated in Sect. 8.2.2. The line-to-output transfer functions of these converters contain
-two poles. Their control-to-output transfer functions contain two poles, and may addition-
-ally contain a right half-plane zero.
-10. Approximate magnitude asymptotes of impedances and transfer functions can be easily
-derived by graphical construction. This approach is a useful supplement to conventional
-analysis, because it yields physical insight into the circuit behavior, and because it exposes
-suitable approximations. Several examples, including the impedances of basic series and
-parallel resonant circuits and the transfer function H(s) of the voltage divider circuit, are
-worked in Sect. 8.3. The input impedance, output impedance, and transfer functions of the
-buck converter are constructed in Sect.8.4, and physical origins of the asymptotes, corner
-frequencies, and Q-factor are found.
-11. Measurement of transfer functions and impedances using a network analyzer is discussed
-in Sect. 8.5. Careful attention to ground connections is important when measuring small
-impedances.
-```
+串联组合的渐近线简单取电阻和电容渐近线中较大者，如图8.42 中粗线所示。此例中这些实际上是 $\|Z\|$ 的精确渐近线。频率趋向零（直流）的极限情形下，电容趋向开路。串联组合由电容主导，精确函数渐近趋向电容阻抗幅值。频率趋向无穷的极限情形下，电容趋向短路，总阻抗简单为 $R$。故 $R$ 和 $1/\omega C$ 线是此例的精确渐近线。
+
+![源页 p.330](../assets/page-snapshots/chapter-8/page-330.png)
+
+图8.42 $\|Z\|$ 复合渐近线的构造。串联组合的渐近线可通过简单选取电阻和电容渐近线中较大者近似
+
+现在可轻易推断渐近线相交的转折频率 $f_0$。在角频率 $\omega_0 = 2\pi f_0$ 处，两渐近线值相等：
+
+$$\frac{1}{\omega_0 C} = R \tag{8.155}$$
+
+解 $\omega_0$ 和 $f_0$ 得
+
+$$\omega_0 = \frac{1}{RC} = \frac{1}{(10\,\Omega)(10^{-6}\text{ F})} = 10^5\text{ rad/s}$$
+
+$$f_0 = \frac{\omega_0}{2\pi} = \frac{1}{2\pi RC} = 16\text{ kHz} \tag{8.156}$$
+
+故若能写出渐近线的解析表达式，则可令表达式相等求渐近线相交的转折频率的解析表达式。
+
+精确曲线与渐近线的偏差遵循所有通常规则。转折频率 $f_0$ 处渐近线斜率变化 +20 dB/十倍频程（即从 −20 dBΩ/十倍频程到 0 dBΩ/十倍频程），故 $f = f_0$ 处有零点。故精确曲线在 $f = f_0$ 处与渐近线偏差 +3 dBΩ，在 $f = 2f_0$ 和 $f = f_0/2$ 处偏差 +1 dBΩ。
+
+### 8.3.2 串联谐振电路示例
+
+![源页 p.331](../assets/page-snapshots/chapter-8/page-331.png)
+
+图8.43 串联 R-L-C 网络示例
+
+作为第二个例子，构造图8.43 串联 R-L-C 电路的幅值渐近线。串联阻抗 $Z(s)$ 为
+
+$$Z(s) = R + sL + \frac{1}{sC} \tag{8.157}$$
+
+各电阻、电感和电容渐近线的幅值绘于图8.44，取值
+
+$$R = 1\text{ k}\Omega, \quad L = 1\text{ mH}, \quad C = 0.1\,\mu\text{F} \tag{8.158}$$
+
+![源页 p.331](../assets/page-snapshots/chapter-8/page-331.png)
+
+图8.44 图8.43 串联 R-L-C 网络 $\|Z\|$ 的图解构造，元件值由式 (8.158) 给出
+
+串联阻抗 $Z(s)$ 低频由电容主导，中频由电阻主导，高频由电感主导，如图8.44 粗线所示。
+
+阻抗 $Z(s)$ 在角频率 $\omega_1$ 处含零点，此处电容和电阻渐近线相交。令电阻和电容渐近线表达式相等可求 $\omega_1$：
+
+$$R = \frac{1}{\omega_1 C} \quad\Rightarrow\quad \omega_1 = \frac{1}{RC} \tag{8.159}$$
+
+第二个零点出现在角频率 $\omega_2$ 处，此处电感和电阻渐近线相交。令 $\omega_2$ 处电阻和电感渐近线表达式相等得
+
+$$R = \omega_2 L \quad\Rightarrow\quad \omega_2 = \frac{R}{L} \tag{8.160}$$
+
+故 $Z(s)$ 幅值波特图所有重要特征的简单表达式可直接获得。应注意式 (8.159) 和 (8.160) 是转折频率 $\omega_1$ 和 $\omega_2$ 的近似而非精确表达式。式 (8.159) 和 (8.160) 与 8.1.7 节低 Q 近似所得结果一致。
+
+![源页 p.332](../assets/page-snapshots/chapter-8/page-332.png)
+
+图8.45 串联 R-L-C 网络示例阻抗渐近线的图解构造，$R$ 减小到 10 Ω
+
+接下来设 $R$ 减小到 10 Ω。$R$ 减小时，近似转折频率 $\omega_1$ 和 $\omega_2$ 相互靠近，直到 $R = 100\,\Omega$ 时两者均为 100 krad/s。进一步减小 $R$ 使渐近线与 $R$ 的值无关，如图8.45 中 $R = 10\,\Omega$ 所示。$\|Z\|$ 渐近线现在直接从 $\omega L$ 切换到 $1/\omega C$。
+
+故现在 $\omega = \omega_0$ 处有两个零点。在转折频率 $\omega_0$ 处，电感和电容渐近线值相等。故
+
+$$\omega_0 L = \frac{1}{\omega_0 C} = R_0 \tag{8.161}$$
+
+解角转折频率 $\omega_0$ 得
+
+$$\omega_0 = \frac{1}{\sqrt{LC}} \tag{8.162}$$
+
+$\omega = \omega_0$ 处，电感和电容阻抗的幅值均为 $R_0$，称为特性阻抗。
+
+由于 $\omega = \omega_0$ 处有两个零点，两个极点可能是共轭复数，$\omega = \omega_0$ 附近可能出现峰值。故让我们研究 $\omega = \omega_0$ 处实际曲线的行为。串联阻抗 $Z(j\omega_0)$ 的实际值为
+
+$$Z(j\omega_0) = R + j\omega_0 L + \frac{1}{j\omega_0 C} \tag{8.163}$$
+
+将式 (8.161) 代入式 (8.163) 得
+
+$$Z(j\omega_0) = R + jR_0 + \frac{R_0}{j} = R + jR_0 - jR_0 = R \tag{8.164}$$
+
+$\omega = \omega_0$ 处，电感和电容阻抗幅值相等但相位相反。故它们在串联阻抗中精确抵消，剩下 $Z(j\omega_0) = R$，如图8.46所示。$\omega = \omega_0$ 谐振附近实际曲线可能与渐近线显著偏差，因为其值由 $R$ 而非 $\omega L$ 或 $1/\omega C$ 决定。
+
+![源页 p.333](../assets/page-snapshots/chapter-8/page-333.png)
+
+图8.46 串联谐振 R-L-C 示例的实际阻抗幅值（实线）。电感和电容阻抗在 $f = f_0$ 处抵消，故 $Z(j\omega_0) = R$
+
+由 8.1.6 节可知 $\omega = \omega_0$ 处实际曲线与渐近线的偏差为 $Q$。由图8.46 可见
+
+$$|Q|_{\text{dB}} = |R_0|_{\text{dB}\Omega} - |R|_{\text{dB}\Omega} \tag{8.165}$$
+
+或
+
+$$Q = \frac{R_0}{R} \tag{8.166}$$
+
+式 (8.161) 至 (8.166) 是串联谐振电路的精确结果。
+
+通过简单选取较大渐近线来相加渐近线的做法也可用于传递函数和阻抗。例如，设已构造两个传递函数 $G_1$ 和 $G_2$ 的幅值渐近线，希望求 $G = G_1 + G_2$ 的渐近线。每个频率处，$G$ 的渐近线可通过简单选取 $G_1$ 和 $G_2$ 渐近线中较大者近似：
+
+$$G = G_1 + G_2 \approx \begin{cases} G_1, & |G_1| \gg |G_2| \\ G_2, & |G_2| \gg |G_1| \end{cases} \tag{8.167}$$
+
+可通过令渐近线表达式相等求转折频率，如前述示例所示。下一章将看到此方法为确定反馈系统闭环传递函数提供了一种简单而强大的方法。
+
+### 8.3.3 并联阻抗：渐近线逆相加
+
+并联组合代表阻抗的逆相加：
+
+$$Z_{par} = \frac{1}{\left(\dfrac{1}{Z_1}+\dfrac{1}{Z_2}+\cdots\right)} = Z_1\,\|\,Z_2\,\|\,\cdots \tag{8.168}$$
+
+若已知各单个阻抗 $Z_1, Z_2, \ldots$ 的渐近线，则并联组合 $Z_{par}$ 的渐近线可通过简单选取各单个阻抗渐近线中最小者求得。这是因为最小阻抗的逆最大，将主导逆相加。与串联阻抗情形一样，此步骤通常给出 $Z_{par}$ 的精确渐近线。
+
+![源页 p.334](../assets/page-snapshots/chapter-8/page-334.png)
+
+图8.47 并联 R-L-C 网络示例
+
+构造图8.47 并联 R-L-C 网络的幅值渐近线，取值
+
+$$R = 10\,\Omega, \quad L = 1\text{ mH}, \quad C = 0.1\,\mu\text{F} \tag{8.169}$$
+
+各单个元件的阻抗幅值如图8.48所示。总并联阻抗 $Z$ 的渐近线通过简单选取各单个元件阻抗中最小者近似，如图8.48 粗线所示。故并联阻抗低频由电感主导，中频由电阻主导，高频由电容主导。角转折频率的近似表达式再次通过令渐近线相等求得：
+
+$$\omega = \omega_1\text{ 处}, \ R = \omega_1 L \quad\Rightarrow\quad \omega_1 = \frac{R}{L} \tag{8.170}$$
+
+$$\omega = \omega_2\text{ 处}, \ R = \frac{1}{\omega_2 C} \quad\Rightarrow\quad \omega_2 = \frac{1}{RC}$$
+
+这些表达式可由常规分析结合 8.1.7 节低 Q 近似获得。
+
+![源页 p.334](../assets/page-snapshots/chapter-8/page-334.png)
+
+图8.48 并联 R-L-C 示例 $\|Z\|$ 复合渐近线的构造。并联组合的渐近线可通过简单选取电阻、电感和电容渐近线中最小者近似
+
+### 8.3.4 并联谐振电路示例
+
+图8.49 给出并联 R-L-C 网络中 $R$ 增大到 1 kΩ 时的情形。$\|Z\|$ 的渐近线变得与 $R$ 无关，在角频率 $\omega_0$ 处直接从 $\omega L$ 切换到 $1/\omega C$。转折频率 $\omega_0$ 现在是电感和电容渐近线值相等的频率：
+
+![源页 p.335](../assets/page-snapshots/chapter-8/page-335.png)
+
+图8.49 并联 R-L-C 示例阻抗渐近线的图解构造，$R$ 增大到 1 kΩ
+
+$$\omega_0 L = \frac{1}{\omega_0 C} = R_0 \tag{8.171}$$
+
+这意味着
+
+$$\omega_0 = \frac{1}{\sqrt{LC}} \tag{8.172}$$
+
+$\omega = \omega_0$ 处，$\|Z\|$ 渐近线斜率从 +20 dB/十倍频程变到 −20 dB/十倍频程，故有两个极点。应研究是否出现峰值，方法如下确定 $\omega = \omega_0$ 处 $\|Z\|$ 的精确值：
+
+$$Z(j\omega_0) = (R)\,\|\,(j\omega_0 L)\,\|\,\left(\frac{1}{j\omega_0 C}\right) = \frac{1}{\left(\dfrac{1}{R}+\dfrac{1}{j\omega_0 L}+j\omega_0 C\right)} \tag{8.173}$$
+
+将式 (8.171) 代入式 (8.173) 得
+
+$$Z(j\omega_0) = \frac{1}{\dfrac{1}{R}+\dfrac{1}{jR_0}+\dfrac{j}{R_0}} = \frac{1}{\dfrac{1}{R}-\dfrac{j}{R_0}+\dfrac{j}{R_0}} = R \tag{8.174}$$
+
+故 $\omega = \omega_0$ 处，电感和电容的阻抗再次抵消，剩下 $Z(j\omega_0) = R$。$L$ 和 $C$ 的值决定渐近线的值，但 $R$ 决定 $\omega = \omega_0$ 处实际曲线的值。
+
+![源页 p.336](../assets/page-snapshots/chapter-8/page-336.png)
+
+图8.50 并联谐振 R-L-C 示例的实际阻抗幅值（实线）。电感和电容阻抗在 $f = f_0$ 处抵消，故 $Z(j\omega_0) = R$
+
+实际曲线如图8.50所示。$\omega = \omega_0$ 处实际曲线与渐近线的偏差为
+
+$$|Q|_{\text{dB}} = |R|_{\text{dB}\Omega} - |R_0|_{\text{dB}\Omega} \tag{8.175}$$
+
+或
+
+$$Q = \frac{R}{R_0} \tag{8.176}$$
+
+式 (8.171) 至 (8.176) 是并联谐振电路的精确结果。
+
+阻抗幅值的图解构造法广为人知，可购买商用反应纸。如图8.51所示，各电感、电容和电阻的阻抗幅值绘于半对数轴上。R-L-C 网络阻抗的渐近线可直接在这些轴上绘制，然后可用图解法确定转折频率的数值。
+
+![源页 p.336](../assets/page-snapshots/chapter-8/page-336.png)
+
+图8.51 "反应纸"：阻抗图解构造的辅助工具，预绘了各感性、容性和阻性阻抗的幅值
+
+### 8.3.5 分压传递函数：渐近线相除
+
+通常可将传递函数表示为阻抗的形式——例如两个阻抗之比。若能按前述各节构造这些阻抗，则可相除以构造传递函数。本节详细讨论双极点 R-L-C 低通滤波器（图8.52）传递函数 $H(s)$ 的构造。此形式的滤波器出现在双极点变换器的规范模型中，本节结果用于下一节的变换器示例。
+
+![源页 p.337](../assets/page-snapshots/chapter-8/page-337.png)
+
+图8.52 基于分压电路的双极点低通滤波器：(a) 传递函数 $H(s)$；(b) 令独立源为零确定 $Z_{out}(s)$；(c) 确定 $Z_{in}(s)$
+
+熟悉的分压公式表明此电路的传递函数可表示为阻抗比 $Z_2/Z_{in}$，其中 $Z_{in} = Z_1 + Z_2$ 为网络输入阻抗：
+
+$$\frac{\hat{v}_2(s)}{\hat{v}_1(s)} = \frac{Z_2}{Z_1+Z_2} = \frac{Z_2}{Z_{in}} \tag{8.177}$$
+
+此例中 $Z_1(s) = sL$，$Z_2(s)$ 为 $R$ 与 $1/sC$ 的并联组合。故可通过构造 $Z_2$ 和串联组合 $Z_{in}$ 的渐近线然后相除来求传递函数渐近线。另一种在此例中更易应用的方法是将式 (8.177) 分子分母同乘 $Z_1$：
+
+$$\frac{\hat{v}_2(s)}{\hat{v}_1(s)} = \frac{Z_2}{Z_1}\frac{Z_1}{Z_1+Z_2} = \frac{Z_{out}}{Z_1} \tag{8.178}$$
+
+其中 $Z_{out} = Z_1\,\|\,Z_2$ 为分压器的输出阻抗。故构造分压传递函数的另一种方法是先构造 $Z_1$ 和并联组合 $Z_{out}$ 的渐近线然后相除。当并联组合 $Z_1\,\|\,Z_2$ 比串联组合 $Z_1 + Z_2$ 更易构造时此方法有用。它通常给出不同的近似结果，可能比用 $Z_{in}$ 所得结果更精确（或有时更不精确）。
+
+图8.52b 中的输出阻抗 $Z_{out}$ 为
+
+$$Z_{out}(s) = R\,\|\,\frac{1}{sC}\,\|\,sL \tag{8.179}$$
+
+并联 R-L-C 网络的阻抗在 8.3.3 节构造，高 Q 情形如图8.51a所示。
+
+按式 (8.178)，分压传递函数幅值为 $\|H\| = \|Z_{out}\|/\|Z_1\|$。此量构造于图8.53b。$\omega < \omega_0$ 时，$\|Z_{out}\|$ 渐近线与 $\|Z_1\|$ 重合：两者均等于 $\omega L$。故比值为 $\|Z_{out}\|/\|Z_1\| = 1$。$\omega > \omega_0$ 时，$\|Z_{out}\|$ 的渐近线为 $1/\omega C$，而 $\|Z_1\|$ 等于 $\omega L$。比值变为 $\|Z_{out}\|/\|Z_1\| = 1/\omega^2LC$，故高频渐近线斜率为 −40 dB/十倍频程。
+
+![源页 p.338](../assets/page-snapshots/chapter-8/page-338.png)
+
+图8.53 分压电路 $H$ 和 $Z_{out}$ 的图解构造：(a) 输出阻抗 $Z_{out}$；(b) 传递函数 $H$
+
+$\omega = \omega_0$ 处，$\|Z_{out}\|$ 精确值为 $R$，$\|Z_1\|$ 精确值为 $R_0$。比值为 $\|H(j\omega_0)\| = \|Z_{out}(j\omega_0)\|/\|Z_1(j\omega_0)\| = R/R_0 = Q$。故滤波器传递函数 $H$ 与阻抗 $Z_{out}$ 有相同的 $\omega_0$ 和 $Q$。
+
+现在元件值变化如何影响传递函数和输出阻抗的显著特征变得明显。例如，增大 $L$ 的影响如图8.54所示。这使角谐振频率 $\omega_0$ 降低，也降低 Q 因子。
+
+![源页 p.338](../assets/page-snapshots/chapter-8/page-338.png)
+
+图8.54 增大 $L$ 对输出阻抗渐近线、转折频率和 Q 因子的影响
+
+## 8.4 变换器传递函数的图解构造
+
+第7章导出的降压变换器小信号等效电路模型复制于图8.55。让我们用上一节的图解法构造此变换器的传递函数和端子阻抗。
+
+![源页 p.338](../assets/page-snapshots/chapter-8/page-338.png)
+
+图8.55 降压变换器的小信号模型，明确定义了输入阻抗 $Z_{in}(s)$ 和输出阻抗 $Z_{out}(s)$
+
+令 $\hat{d}(s)$ 和 $\hat{v}_g(s)$ 源为零求输出阻抗 $Z_{out}(s)$，得图8.56a 电路。此模型与 8.3.3 和8.3.4 节分析的并联 R-L-C 电路一致。如图8.56b所示，输出阻抗低频由电感主导，高频由电容主导。在谐振频率 $f_0$ 处
+
+$$f_0 = \frac{1}{2\pi\sqrt{LC}} \tag{8.180}$$
+
+输出阻抗等于负载电阻 $R$。电路的 Q 因子为
+
+$$Q = \frac{R}{R_0} \tag{8.181}$$
+
+其中
+
+$$R_0 = \omega_0 L = \frac{1}{\omega_0 C} = \sqrt{\frac{L}{C}} \tag{8.182}$$
+
+故轻载时（$R$ 大）电路轻阻尼（高 Q）。
+
+![源页 p.339](../assets/page-snapshots/chapter-8/page-339.png)
+
+图8.56 降压变换器输出阻抗 $Z_{out}(s)$ 的构造：(a) 电路模型；(b) 阻抗渐近线
+
+令 $\hat{d}(s)$ 和 $\hat{v}_g(s)$ 源为零求变换器输入阻抗 $Z_{in}(s)$，如图8.57a所示。输入阻抗归算到 1:D 变压器一次侧，等于
+
+$$Z_{in}(s) = \frac{1}{D^2}[Z_1(s) + Z_2(s)] \tag{8.183}$$
+
+其中
+
+$$Z_1(s) = sL \tag{8.184}$$
+
+且
+
+$$Z_2(s) = R\,\|\,\frac{1}{sC} \tag{8.185}$$
+
+![源页 p.340](../assets/page-snapshots/chapter-8/page-340.png)
+
+图8.57 降压变换器输入阻抗 $Z_{in}(s)$ 的构造：(a) 电路模型；(b) 各单个电阻、电感和电容阻抗幅值；(c) $\|Z_1\|$ 和 $\|Z_2\|$ 的构造；(d) $\|Z_{out}\|$ 的构造；(e) 最终结果 $\|Z_{in}\|$
+
+从构造式 (8.183) 至 (8.185) 对应的阻抗渐近线开始，先如图8.57b 构造各单个电阻、电容和电感阻抗。图8.57 中的阻抗按 $R > R_0$ 情形构造。如图8.57c所示，$\|Z_1\|$ 与电感电抗 $\omega L$ 重合。$\|Z_2\|$ 低频渐近于电阻 $R$，高频渐近于电容电抗 $1/\omega C$。电阻和电容渐近线在转折频率 $f_1$ 处相交，由下式给出
+
+$$f_1 = \frac{1}{2\pi RC} \tag{8.186}$$
+
+按式 (8.183)，输入阻抗 $Z_{in}(s)$ 等于 $Z_1(s)$ 和 $Z_2(s)$ 串联组合除以匝比 $D$ 的平方。串联组合 $[Z_1(s) + Z_2(s)]$ 的渐近线通过选取 $\|Z_1\|$ 和 $\|Z_2\|$ 渐近线中较大者求得。$\|Z_1\|$ 和 $\|Z_2\|$ 渐近线在由式 (8.180) 给出的频率 $f_0$ 处相交。由图8.57c可见，串联组合 $f < f_0$ 时由 $Z_2$ 主导，$f > f_0$ 时由 $Z_1$ 主导。将 $[Z_1(s) + Z_2(s)]$ 渐近线按因子 $1/D^2$ 缩放，得图8.57e 的输入阻抗渐近线。
+
+$Z_{in}(s)$ 在频率 $f_0$ 处的零点与 $Z_{out}(s)$ 的极点 [式 (8.181)] 有相同的 Q 因子。可注意输出阻抗可表示为
+
+$$Z_{out}(s) = \frac{Z_1(s)Z_2(s)}{Z_1(s)+Z_2(s)} = \frac{Z_1(s)Z_2(s)}{D^2 Z_{in}(s)} \tag{8.187}$$
+
+故可将 $Z_{out}(s)$ 与 $Z_{in}(s)$ 关联如下：
+
+$$Z_{in}(s) = \frac{1}{D^2}\frac{Z_1(s)Z_2(s)}{Z_{out}(s)} \tag{8.188}$$
+
+阻抗 $\|Z_1\|$、$\|Z_2\|$ 和 $\|Z_{out}\|$ 如图8.57d所示。谐振频率 $f = f_0$ 处，阻抗 $Z_1$ 幅值为 $R_0$，阻抗 $Z_2$ 幅值近似等于 $R_0$。输出阻抗 $Z_{out}$ 幅值为 $R$。故式 (8.188) 预测输入阻抗幅值为
+
+$$\|Z_{in}\| \approx \frac{1}{D^2}\frac{R_0 R_0}{R} \quad \text{在} \ f = f_0 \text{ 处} \tag{8.189}$$
+
+$f = f_0$ 处，输入阻抗渐近线幅值为 $R_0/D^2$。故与渐近线的偏差为 $Q = R/R_0$，如图8.57e所示。
+
+令 $\hat{v}_g(s)$ 源为零求控制-输出传递函数 $G_{vd}(s)$，如图8.58a所示。此电路与 8.3.5 节分析的分压器一致。故 $G_{vd}(s)$ 可表示为
+
+$$G_{vd}(s) = V_g\frac{Z_{out}(s)}{Z_1(s)} \tag{8.190}$$
+
+$\|Z_{out}\|$ 和 $\|Z_1\|$ 构造于图8.58b。按式 (8.190)，可先求 $\|Z_{out}\|$ 与 $\|Z_1\|$ 之比然后用 $V_g$ 缩放来构造 $\|G_{vd}(s)\|$。$f < f_0$ 时 $\|Z_{out}\|$ 和 $\|Z_1\|$ 均等于 $\omega L$，故 $\|Z_{out}\|/\|Z_1\|$ 等于 1。如图8.58c所示，$\|G_{vd}(s)\|$ 的低频渐近线值为 $V_g$。$f > f_0$ 时 $\|Z_{out}\|$ 渐近线为 $1/\omega C$，$\|Z_1\|$ 等于 $\omega L$。故 $\|Z_{out}\|/\|Z_1\|$ 渐近线为 $1/\omega^2LC$，$\|G_{vd}(s)\|$ 的高频渐近线等于 $V_g/\omega^2LC$。$f = f_0$ 处两极点的 Q 因子再次等于 $R/R_0$。
+
+![源页 p.342](../assets/page-snapshots/chapter-8/page-342.png)
+
+图8.58 降压变换器控制-输出传递函数 $G_{vd}(s)$ 的构造：(a) 电路模型；(b) 相关阻抗渐近线；(c) 传递函数 $\|G_{vd}(s)\|$
+
+令 $\hat{d}(s)$ 源为零求输入-输出传递函数 $G_{vg}(s)$，如图8.59a所示。此电路含与图8.58 相同的分压器，外加 1:D 变压器。传递函数 $G_{vg}(s)$ 可表示为
+
+$$G_{vg}(s) = D\frac{Z_{out}(s)}{Z_1(s)} \tag{8.191}$$
+
+此表达式与式 (8.190) 类似，只是差一个缩放因子 $D$。故图8.59b 的输入-输出传递函数与控制-输出传递函数 $G_{vd}(s)$ 形状相同。
+
+![源页 p.342](../assets/page-snapshots/chapter-8/page-342.png)
+
+图8.59 降压变换器的输入-输出传递函数 $G_{vg}(s)$：(a) 电路模型；(b) 幅值渐近线
+
+## 8.5 交流传递函数和阻抗的测量
+
+测量原型变换器和变换器系统的传递函数是良好的工程实践。此类实践可验证系统已被正确建模和设计。此外，通过测量端子阻抗表征单个电路元件也常有用。
+
+小信号交流幅值和相位测量可用网络分析仪或频率响应分析仪进行。基本网络分析仪的关键输入和输出如图8.60所示。网络分析仪提供幅度和频率可控的正弦输出电压 $\hat{v}_z$。此信号可注入待测系统的任何所需位置。网络分析仪还有两个（或更多）输入 $\hat{v}_x$ 和 $\hat{v}_y$。$\hat{v}_z$、$\hat{v}_y$ 和 $\hat{v}_x$ 的返回端内部接到大地。网络分析仪执行窄带跟踪电压表功能：测量 $\hat{v}_x$ 和 $\hat{v}_y$ 在注入频率处的分量，显示量 $\hat{v}_y/\hat{v}_x$ 的幅值和相位。窄带跟踪电压表功能对开关变换器测量至关重要；否则开关纹波和噪声会破坏所需正弦信号使精确测量不可能 [80]。现代网络分析仪可自动扫描注入源 $\hat{v}_z$ 的频率以生成传递函数 $\hat{v}_y/\hat{v}_x$ 的幅值和相位波特图。
+
+![源页 p.343](../assets/page-snapshots/chapter-8/page-343.png)
+
+图8.60 网络分析仪的关键特性和功能：幅度和频率可控的正弦源、两个输入、以及确定输入分量在注入频率处的相对幅值和相位
+
+测量放大器传递函数的典型测试装置如图8.61所示。电位器接在直流电源电压 $V_{CC}$ 与地之间，用于偏置放大器输入以达到正确静态工作点。注入源电压 $\hat{v}_z$ 通过直流隔直电容耦合到放大器输入端。隔直电容防止注入电压源扰乱直流偏置。网络分析仪输入 $\hat{v}_x$ 和 $\hat{v}_y$ 接到放大器输入和输出端。故测得传递函数为
+
+![源页 p.344](../assets/page-snapshots/chapter-8/page-344.png)
+
+图8.61 传递函数的测量
+
+$$\frac{\hat{v}_y(s)}{\hat{v}_x(s)} = G(s) \tag{8.192}$$
+
+注意隔直电容、偏置电位器和 $\hat{v}_z$ 幅度对测得传递函数无影响。
+
+阻抗
+
+$$Z(s) = \frac{\hat{v}(s)}{\hat{i}(s)} \tag{8.193}$$
+
+可通过将阻抗视为从电流到电压的传递函数来测量。例如，放大器输出阻抗的测量如图8.62所示。静态工作条件再次由偏置放大器输入的电位器建立。注入源 $\hat{v}_z$ 通过直流隔直电容耦合到放大器输出。注入源电压 $\hat{v}_z$ 在阻抗 $Z_s$ 中激励电流 $\hat{i}_{out}$。此电流流入放大器输出，在放大器输出阻抗上激励电压：
+
+$$Z_{out}(s) = \left.\frac{\hat{v}_y(s)}{\hat{i}_{out}(s)}\right|_{\text{放大器交流输入}=0} \tag{8.194}$$
+
+![源页 p.345](../assets/page-snapshots/chapter-8/page-345.png)
+
+图8.62 电路输出阻抗的测量
+
+用电流探头测量 $\hat{i}_{out}$。电流探头产生正比于 $\hat{i}_{out}$ 的电压；此电压接到网络分析仪输入 $\hat{v}_x$。用电压探头测量放大器输出电压 $\hat{v}_y$。网络分析仪显示传递函数 $\hat{v}_y/\hat{v}_x$，正比于 $Z_{out}$。注意 $Z_s$ 的值和 $\hat{v}_z$ 的幅度不影响 $Z_{out}$ 的测量。
+
+在功率应用中，有时需测量幅值很小的阻抗。接地问题 [4] 使图8.62 的测试装置在此类情形下失效。原因如图8.63a所示。由于注入源 $\hat{v}_z$ 和分析仪输入 $\hat{v}_y$ 的返回端均接到大地，注入电流 $\hat{i}_{out}$ 可通过注入源或电压探头的返回端回到源。实际中 $\hat{i}_{out}$ 按两条路径的相对阻抗分配。故显著电流 $(1-k)\hat{i}_{out}$ 流过电压探头返回端。若电压探头返回端有一些总接触和接线阻抗 $Z_{probe}$，则该电流在电压探头接线中引起电压降 $(1-k)\hat{i}_{out}Z_{probe}$，如图8.63a所示。故网络分析仪不能正确测量阻抗 $Z$ 上的电压降。若网络分析仪内部接地连接阻抗可忽略，则网络分析仪显示如下阻抗：
+
+$$Z + (1-k)Z_{probe} = Z + Z_{probe}\,\|\,Z_{rz} \tag{8.195}$$
+
+这里 $Z_{rz}$ 是注入源返回端的阻抗。故为获得精确测量，须满足以下条件：
+
+$$\|Z\| \gg \left\|Z_{probe}\,\|\,Z_{rz}\right\| \tag{8.196}$$
+
+$\|Z\|$ 的典型下限为几十或几百毫欧。
+
+![源页 p.346](../assets/page-snapshots/chapter-8/page-346.png)
+
+图8.63 小阻抗 $Z(s)$ 的测量：(a) 电压探头返回连接中流动的电流引起破坏测量的电压降；(b) 改进的实验，含注入源的隔离
+
+测量小阻抗的改进测试装置如图8.63b所示。在注入源和直流隔直电容之间插入隔离变压器。电压探头和注入源的返回端不再并联，注入电流 $\hat{i}_{out}$ 现在必须完全通过注入源返回端返回。额外的好处是可增大变压器匝比 $n$，使注入源阻抗与待测阻抗更好匹配。注意变压器、隔直电容及探头和注入源返回端的阻抗不影响测量。用此改进方法可测量小得多的阻抗。
+
+## 8.6 关键要点小结
+
+1. 幅值随 $(f/f_0)^n$ 变化的函数的幅值波特图斜率为 $20n$ dB/十倍频程，在 $f = f_0$ 处过 0 dB。
+
+2. 以极点-零点归一化形式表示传递函数是好习惯；此形式直接暴露响应显著特征的表达式，即转折频率、参考增益等。
+
+3. 右半平面零点呈现左半平面零点的幅值响应，但极点的相位响应。
+
+4. 当希望将增益参考到高频渐近线时，极点和零点可用频率反演形式表示。
+
+5. 双极点响应可写成式 (8.58) 的标准归一化形式。$Q > 0.5$ 时极点为共轭复数。幅值响应在转折频率附近呈现峰值，$f = f_0$ 处精确值为 $Q$。高 Q 也使相位在转折频率附近急剧变化。
+
+6. $Q$ 小于 0.5 时，双极点响应可绘为两个实极点。低 Q 近似预测两极点出现在频率 $f_0/Q$ 和 $Qf_0$ 处。$Q \le 0.3$ 时这些频率与精确值偏差 10% 以内。
+
+7. 当电路含两个阻尼元件时，复合 Q 因子可估计为两个元件各自确定的 Q 因子的"并联组合"（逆相加）。各单独 Q 因子之积大于 5 时此估计与精确值偏差 10% 以内。
+
+8. 低 Q 近似可推广以求任意阶多项式的近似根。可导出显著特征的近似解析表达式。用数值验证近似。
+
+9. 降压、升压和升降压变换器传递函数的显著特征汇总于 8.2.2 节。这些变换器的输入-输出传递函数含两个极点。其控制-输出传递函数含两个极点，还可能含一个右半平面零点。
+
+10. 阻抗和传递函数的近似幅值渐近线可用图解构造轻易导出。此方法是常规分析的补充，因为它给出对电路行为的物理洞察，并暴露合适的近似。8.3 节给出了若干示例，包括基本串联和并联谐振电路的阻抗及分压电路的传递函数 $H(s)$。8.4 节构造了降压变换器的输入阻抗、输出阻抗和传递函数，并找到了渐近线、转折频率和 Q 因子的物理起源。
+
+11. 8.5 节讨论了用网络分析仪测量传递函数和阻抗。测量小阻抗时需仔细注意接地连接。

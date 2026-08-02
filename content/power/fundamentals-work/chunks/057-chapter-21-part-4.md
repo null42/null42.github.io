@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第21章part 4 - 21 Pulse-Width Modulated Rectifiers"
+title: "第21章 脉宽调制整流器（第4部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,221 +18,122 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第21章part 4 - 21 Pulse-Width Modulated Rectifiers
+# 第21章 脉宽调制整流器（第4部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 926-930  
-> Chunk ID: `chapter-21-part-4`
+## 习题（续）
 
-## 主干提取
+![源页 p.926](../assets/page-snapshots/chapter-21/page-926.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+交流输入电压由式(21.153)给出。输入滤波器对变换器波形的低频分量影响可忽略。确定稳态直流输出电压 $V$ 作为 $V_M$、$D_m$ 和 $\phi$ 的函数。
 
-## 术语表
+(e) 确定功率因数。可假设输入滤波器完全去除电流 $i_a(t)$、$i_b(t)$、$i_c(t)$ 中的开关谐波。但输入滤波器元件消耗或提供的线路频率无功功率可忽略。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+**21.9** 图21.49的三相 DCM 反激整流器中，输入滤波器对输入交流波形的低频分量影响可忽略。晶体管以开关频率 $f_s$ 和占空比 $d$ 工作。反激变压器 $T_1$、$T_2$、$T_3$ 各有折算到初级的励磁电感 $L$、匝比 $n:1$，漏感可忽略。
 
-## 中文翻译
+图21.49 基于断续导通模式反激变换器的隔离 $3\phi$ 交流-直流整流器，习题21.9
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+(a) 确定交流输入和直流输出电流低频分量的表达式。
 
-## 英文原文
+(b) 推导变换器的平均等效电路模型，给出元件值的表达式。
 
-```text
-21.8 Summary of Key Points 927
-with the ac input voltages given by Eq. (21.153). The input ﬁlter has negligible eﬀect
-of the low-frequency components of the converter waveforms. Determine the steady-
-state dc output voltage V, as a function of VM, Dm, and ϕ.
-(e) Determine the power factor. You may assume that the input ﬁlter completely removes
-the switching harmonics from the currents ia(t), ib(t), and ic(t). However, the input
-ﬁlter elements consume or supply negligible line frequency reactive power.
-21.9 In the three-phase DCM ﬂyback rectiﬁer of Fig. 21.49, the input ﬁlter has negligible ef-
-fect on the low-frequency components of the input ac waveforms. The transistor operates
-with switching frequency fs and duty cycle d. Flyback transformers T1, T2, and T3 each
-have magnetizing inductance L referred to the primary, turns ratio n : 1, and have negli-
-gible leakage inductances.
-C
-+
-v(t)
-dc output
-ia(t)
-ib(t)
-ic(t)
-Q1
-D1 D3D2
-D4 D5 D6
-T1
-T2
-T3
-a
-b
-c
-3
-input
-Input filter
-D7 D9D8
-D10 D11 D12
-T1
-T2
-T3
-Fig. 21.49 Isolated 3ϕac–dc rectiﬁer based on the ﬂyback converter operating in discontinuous conduc-
-tion mode, Problem 21.9
-(a) Determine expressions for the low-frequency components of the ac input and dc
-output currents.
-(b) Derive an averaged equivalent circuit model for the converter, and give expressions
-for the element values.
-(c) Derive the conditions for operation in the discontinuous conduction mode.
-21.10 Power stage design of a universal-input boost rectiﬁer. The objective of this problem is to
-work out the power stage design of a low-harmonic rectiﬁer based on the boost converter.
-This converter is to be designed to operate anywhere in the world, and hence the input
-voltage may vary over the range 90 to 270 Vrms, 50 to 60 Hz. The converter produces a
-regulated 385 V dc output, at 1000 W. The switching frequency fs is 100 kHz. You may
-assume that the controller operates perfectly, to produce an undistorted ac line current
-waveform and a well-regulated dc output voltage.
-(a) Derive an expression for how the duty cycle d(t) will vary over the ac line cycle.
-You may neglect converter dynamics and losses. Sketch d(t) under conditions of
-maximum and minimum ac line voltage.
-(b) Specify the inductor:
-(i) Specify the value of L such that, at the peak of the sinusoidal input voltage,
-and under worst-case conditions, the inductor current ripple Δig is 20% of the
-instantaneous low-frequency current ig(t).
+(c) 推导断续导通模式运行条件。
 
-928 21 Pulse-Width Modulated Rectiﬁers
-(ii) Specify the worst-case values of the peak and rms inductor current, assuming
-100% eﬃciency.
-(c) Determine the worst-case rms currents of the MOSFET and diode, assuming 100%
-eﬃciency.
-(d) Specify the value ofC that leads to a worst-case low-frequency (≪ fs) output voltage
-peak-peak ripple of 5 V .
-(e) Given the following loss elements
-Inductor winding resistance 0.1Ω
-MOSFET on-resistance 0 .4Ω
-Diode forward voltage drop 1.5 V
-Switching loss: model as i2
-g(t)(0.25Ω)
-For a constant 1000 W load, and assuming that the controller operates perfectly as
-described above, ﬁnd the rectiﬁer eﬃciency
-(i) at an ac input voltage of 90 V rms
-(ii) at an ac input voltage of 270 V rms
-21.11 The ﬂyback converter shown in Fig. 21.50 operates in the continuous conduction mode.
-The MOSFET has on-resistance Ron, and diode D1 has a constant forward voltage drop
-VD. All other loss elements can be neglected. The turns ratio of the ﬂyback transformer
-is 1:1. The controller varies the duty cycle such that⟨ig(t)⟩TS is equal to vg(t)/Re, where
-Re is the emulated resistance. The input voltage is vin(t)= VM sin(ωt). The input ﬁlter
-removes the switching harmonics from the input currentig(t), but has negligible eﬀect on
-the low-frequency components of the converter waveforms.
-R
-vin(t)
-iin(t) +
-vg(t)
-ig(t)
-+
-v(t)
-id (t)
-Q1
-L
-C
-D1
-Controller
-i(t)
-Input filter
-Fig. 21.50 Low-harmonic rectiﬁer system based on the CCM ﬂyback converter, Problem 21.11
-(a) Derive an expression for the rectiﬁer eﬃciency, in terms of VM, V, VD, Ron, and Re.
-(b) Given the following values, ﬁnd the value of MOSFET on-resistance which leads to
-an eﬃciency of 96%.
-rms input voltage 120 V
-Dc output voltage 120 V
-Diode D1 forward voltage drop 1.5 V
-Load power 200 W
+**21.10** 通用输入升压整流器的功率级设计。本题目的是完成基于升压变换器的低谐波整流器功率级设计。此变换器设计为在世界任何地方工作，故输入电压可在 90 至 270 Vrms、50 至 60 Hz 范围内变化。变换器产生调节后的 385 V 直流输出，功率 1000 W。开关频率 $f_s$ 为 100 kHz。可假设控制器完美工作，产生无畸变交流线路电流波形和良好调节的直流输出电压。
 
-21.8 Summary of Key Points 929
-21.12 Derive an expression for the emulated resistanceRe(Vg,rms, Rs, kv, vcontrol) of the average-
-current-controlled boost rectiﬁer with ac line voltage feedforward, Fig. 21.18.
-21.13 Derive the CPM boost rectiﬁer static input characteristics, Eq. (21.60).
-21.14 The boost rectiﬁer system of Fig. 21.51 employs average current control with ac line
-voltage feedforward.
-+
-+
-v(t)vg(t)
-ig(t)
-Gate
-driver
-Pulse width
-modulator
-CompensatorGc(s)
-+
-+
-vref1(t)x
-y
-Multiplier
-vcontrol(t) Gcv(s)
-+
-kv
-xy
-z2zPeak
-detector VM
-vref2(s)
-va(s)
-L
-C
-1
-100
-1
-100
-Ti (s)
-Tv(s)
-Pload
-500 W
-Fig. 21.51 Average current controlled boost rectiﬁer with input voltage feedforward, Problem 21.14
-The ac line frequency is 50 Hz. The rectiﬁer drives a constant power load of 500 W. The
-pulse-width modulator contains a ramp having a peak-to-peak amplitude of 3 V . There is
-no compensator in the inner wide-bandwidth average current control feedback loop. The
-average current sensing circuit has gain
-v
-a(s)
-ig(s)= Rs⎦
-1+ s
-ω0
-)
-Other converter parameter values are
-fs= 100kHz L= 2.5mH
-f0= ω0
-2π= 10kHz Rs= 1Ω
-V= 385V Vg,rms= 230V
-(a) Construct the magnitude and phase Bode diagrams of the loop gain Ti(s)o ft h e
-average-current-control loop. Label important features.
+(a) 推导占空比 $d(t)$ 在交流线路周期内如何变化的表达式。可忽略变换器动态和损耗。在最大和最小交流线路电压条件下绘制 $d(t)$。
 
-930 21 Pulse-Width Modulated Rectiﬁers
-(b) Determine numerical values of the crossover frequency and phase margin of Ti(s).
-The outer low-bandwidth feedback loop has loop gain Tv(s). The compensator of
-this loop has constant gainGcv(s)= 330. The multiplier gain iskv= 2. The capacitor
-value is C= 680μF. The reference voltage vref2(t)i s3 . 8 5V .
-(c) Determine the peak magnitude of the output 100 Hz voltage ripple.
-(d) Determine the quiescent control voltage Vcontrol.
-(e) Construct the magnitude and phase Bode diagrams of the loop gainTv(s) of the outer
-feedback loop. Label important features.
-(d) Determine numerical values of the crossover frequency and phase margin of Tv(s).
-21.15 A critical conduction mode controller causes a boost rectiﬁer to exhibit an ac input cur-
-rent waveform similar to Fig. 21.23b. The ac input voltage is 120 Vrms at 60 Hz. The
-rectiﬁer supplies 225 Vdc to a 120 W load. The boost converter inductance isL= 600μH.
-(a) Determine the emulated resistance Re.
-(b) Write the numerical expression for the converter switching frequency fs, as a func-
-tion of ton and the applied terminal voltages. Sketch fs vs. time.
-(c) What is the maximum switching frequency? What is the minimum switching fre-
-quency?
-(d) Derive an analytical expression for the rms transistor current for this control method,
-as a function of the magnitude of the sinusoidal line current. Compare the rms tran-
-sistor current of this approach with a CCM boost rectiﬁer having negligible current
-switching ripple.
-21.16 To obtain an isolated dc output, the boost converter in Fig. 21.5 is replaced by the full-
-bridge transformer-isolated CCM boost converter of Fig. 6.36. The transformer has neg-
-ligible magnetizing current. The inductor current and capacitor voltage ripples are small,
-the output capacitance is very large, and the converter is loaded with resistor R.
-(a) Derive an expression for the RMS transistor current.
-(b) Derive an expression for the RMS output capacitor current.
+(b) 规定电感：
 
-Part VI
-Resonant Converters
-```
+(i) 规定 $L$ 值，使在正弦输入电压峰值处且最坏条件下，电感电流纹波 $\Delta i_g$ 为瞬时低频电流 $i_g(t)$ 的 20%。
+
+![源页 p.927](../assets/page-snapshots/chapter-21/page-927.png)
+
+(ii) 假设 100% 效率，规定电感峰值和方均根电流的最坏值。
+
+(c) 假设 100% 效率，确定 MOSFET 和二极管的最坏情况方均根电流。
+
+(d) 规定导致最坏情况低频（$\ll f_s$）输出电压峰-峰纹波为 5 V 的 $C$ 值。
+
+(e) 给定如下损耗元件
+
+- 电感绕组电阻 0.1 Ω
+- MOSFET 导通电阻 0.4 Ω
+- 二极管正向压降 1.5 V
+- 开关损耗：建模为 $i_g^2(t)\,(0.25\,\Omega)$
+
+对恒定 1000 W 负载，假设控制器如上所述完美工作，求整流器效率
+
+(i) 在 90 V rms 交流输入电压下
+
+(ii) 在 270 V rms 交流输入电压下
+
+**21.11** 图21.50所示反激变换器工作于连续导通模式。MOSFET 导通电阻为 $R_{on}$，二极管 $D_1$ 正向压降恒为 $V_D$。其他损耗元件可忽略。反激变压器匝比为 1:1。控制器改变占空比使 $\langle i_g(t) \rangle_{T_s}$ 等于 $v_g(t)/R_e$，其中 $R_e$ 是仿真电阻。输入电压 $v_{in}(t) = V_M \sin(\omega t)$。输入滤波器去除输入电流 $i_g(t)$ 中的开关谐波，但对变换器波形的低频分量影响可忽略。
+
+图21.50 基于 CCM 反激变换器的低谐波整流器系统，习题21.11
+
+(a) 推导整流器效率的表达式，用 $V_M$、$V$、$V_D$、$R_{on}$ 和 $R_e$ 表示。
+
+(b) 给定如下值，求导致 96% 效率的 MOSFET 导通电阻值。
+
+- 方均根输入电压 120 V
+- 直流输出电压 120 V
+- 二极管 $D_1$ 正向压降 1.5 V
+- 负载功率 200 W
+
+![源页 p.928](../assets/page-snapshots/chapter-21/page-928.png)
+
+**21.12** 推导图21.18带交流线路电压前馈的平均电流控制升压整流器的仿真电阻 $R_e(V_{g,rms}, R_s, k_v, v_{control})$ 表达式。
+
+**21.13** 推导 CPM 升压整流器的静态输入特性式(21.60)。
+
+**21.14** 图21.51的升压整流器系统采用带交流线路电压前馈的平均电流控制。
+
+图21.51 带输入电压前馈的平均电流控制升压整流器，习题21.14
+
+交流线路频率为 50 Hz。整流器驱动 500 W 恒功率负载。脉宽调制器含峰-峰幅值为 3 V 的斜坡。内宽带宽平均电流控制反馈环路中无补偿器。平均电流检测电路增益为
+
+$$\frac{v_a(s)}{i_g(s)} = R_s\left( 1 + \frac{s}{\omega_0} \right)$$
+
+其他变换器参数值为
+
+- $f_s = 100\,\text{kHz}$，$L = 2.5\,\text{mH}$
+- $f_0 = \omega_0/(2\pi) = 10\,\text{kHz}$，$R_s = 1\,\Omega$
+- $V = 385\,\text{V}$，$V_{g,rms} = 230\,\text{V}$
+
+(a) 绘制平均电流控制环路环路增益 $T_i(s)$ 的幅值和相位波特图。标出重要特征。
+
+![源页 p.929](../assets/page-snapshots/chapter-21/page-929.png)
+
+(b) 确定 $T_i(s)$ 的穿超频率和相位裕度数值。
+
+外环低带宽反馈环路增益为 $T_v(s)$。此环路补偿器增益恒定 $G_{cv}(s) = 330$。乘法器增益 $k_v = 2$。电容值 $C = 680\,\mu\text{F}$。参考电压 $v_{ref2}(t)$ 为 3.85 V。
+
+(c) 确定输出 100 Hz 电压纹波的峰值幅值。
+
+(d) 确定静态控制电压 $V_{control}$。
+
+(e) 绘制外反馈环路增益 $T_v(s)$ 的幅值和相位波特图。标出重要特征。
+
+(d) 确定 $T_v(s)$ 的穿超频率和相位裕度数值。
+
+**21.15** 临界导通模式控制器使升压整流器呈现类似图21.23(b)的交流输入电流波形。交流输入电压为 120 Vrms、60 Hz。整流器向 120 W 负载供给 225 V 直流。升压变换器电感 $L = 600\,\mu\text{H}$。
+
+(a) 确定仿真电阻 $R_e$。
+
+(b) 写出变换器开关频率 $f_s$ 作为 $t_{on}$ 和外加端子电压函数的数值表达式。绘制 $f_s$ 随时间变化。
+
+(c) 最大开关频率是多少？最小开关频率是多少？
+
+(d) 推导此控制方法下方均根晶体管电流作为正弦线路电流幅值函数的解析表达式。将此方法的方均根晶体管电流与电流开关纹波可忽略的 CCM 升压整流器比较。
+
+**21.16** 为获得隔离直流输出，图21.5的升压变换器用图6.36的全桥变压器隔离 CCM 升压变换器替代。变压器励磁电流可忽略。电感电流和电容电压纹波小，输出电容很大，变换器以电阻 $R$ 为负载。
+
+(a) 推导方均根晶体管电流的表达式。
+
+(b) 推导方均根输出电容电流的表达式。
+
+![源页 p.930](../assets/page-snapshots/chapter-21/page-930.png)
+
+# 第六部分
+
+## 谐振变换器

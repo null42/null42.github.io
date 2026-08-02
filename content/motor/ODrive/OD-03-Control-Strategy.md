@@ -145,7 +145,7 @@ $$\tau_{int} = \text{clamp}(\tau_{int}, -\tau_{int\_lim}, \tau_{int\_lim})$$
 
 $$v_{des} = \text{clamp}(v_{des}, -v_{lim}, v_{lim})$$
 
-**超速检测：**
+- **超速检测：**
 
 若 $|v_{est}| > v_{lim\_tol} \cdot v_{lim}$，触发 `ERROR_OVERSPEED`。
 
@@ -205,7 +205,7 @@ $$K_{kp} = 0.25 \cdot K_{ki}^2$$
 
 $$\tau_{cogging}(pos) = \text{cogging\_map}\left[\left\lfloor \frac{pos}{ratio} \right\rfloor \bmod 3600\right]$$
 
-**非阻塞标定流程：**
+- **非阻塞标定流程：**
 
 1. 逐点移动 (index 0 → 3599)
 2. 等待位置误差 < `calib_pos_threshold` / CPR
@@ -237,7 +237,7 @@ $$P_{elec}[k] = P_{elec}[k-1] + T_s \cdot BW_{elec} \cdot (P_{motor\_elec} - P_{
 
 `controller.cpp` 是控制器的核心，每个控制周期执行一次。
 
-**执行顺序：**
+- **执行顺序：**
 
 ```text
 1. 读取所有 InputPort (pos_estimate, vel_estimate, pos_wrap)
@@ -450,7 +450,7 @@ if (config_.spinout_electrical_power_threshold > 0.0f &&
 | `vel_integrator_limit` | INFINITY | 积分限幅 [Nm] | 设为电机额定转矩的 20-50% |
 | `inertia` | 0.0 | 负载惯量 [Nm/(turn/s²)] | 影响前馈精度 |
 
-**速度环整定流程：**
+- **速度环整定流程：**
 1. 设置 `vel_gain = 0.05`，`vel_integrator_gain = 0.1`
 2. 逐步增大 vel_gain 直到速度跟踪良好但无振荡
 3. 设置 vel_integrator_gain = 2 × vel_gain
@@ -558,7 +558,7 @@ Controller 运行在 `current_meas_hz` 频率下（与电流采样频率相同�
 
 `axis.cpp`：
 
-**流程：**
+- **流程：**
 
 1. 进入速度控制模式，以 `homing_speed` 向 min_endstop 驱动
 2. 检测到 min_endstop 上升沿 → 停止

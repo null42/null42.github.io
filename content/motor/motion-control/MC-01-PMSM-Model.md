@@ -118,7 +118,7 @@ $$ \begin{bmatrix} \psi_a \\ \psi_b \\ \psi_c \end{bmatrix} = \begin{bmatrix} L_
 
 $$ \begin{aligned} v_d &= R_s i_d + L_d \frac{di_d}{dt} - \omega_e L_q i_q \\ v_q &= R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_{pm}) \end{aligned} $$
 
-**逐项解释：**
+- **逐项解释：**
 
 | 项 | 物理含义 | 类比 |
 |----|---------|------|
@@ -132,7 +132,7 @@ $$ \begin{aligned} v_d &= R_s i_d + L_d \frac{di_d}{dt} - \omega_e L_q i_q \\ v_
 
 $$ T_e = \frac{3}{2} \cdot pp \cdot \left[ \psi_{pm} \cdot i_q + (L_d - L_q) \cdot i_d \cdot i_q \right] $$
 
-**两项分别解释：**
+- **两项分别解释：**
 
 - **ψpm·iq**：永磁转矩——永磁体磁场与 q 轴电流相互作用产生，正比于 iq。
 - **(Ld-Lq)·id·iq**：磁阻转矩——只在 IPMSM (Ld ≠ Lq) 中存在。转子凸极导致磁阻沿 d/q 轴不同，类似一个条形磁铁会被吸引到磁阻最小的方向。

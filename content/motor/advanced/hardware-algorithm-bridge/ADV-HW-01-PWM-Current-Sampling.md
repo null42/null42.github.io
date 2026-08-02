@@ -18,14 +18,14 @@ navGroupOrder: 40
 
 # ADV-HW-01 PWM深度配置与电流采样时序联动
 
-**模块编号：** ADV-HW-01
-**模块名称：** PWM深度配置与电流采样时序联动（PWM Deep Configuration & Current Sampling Timing Linkage）
-**文档版本：** v2.0
-**适用对象：** 已掌握基础FOC理论和MCU外设配置的嵌入式工程师
-**前置知识：** HW-04 MCU外设与通信、ALG-05 有感FOC实现、MC-LIB-SVPWM
-**关联模块：** ADV-HW-02 ADC深度配置与DMA数据搬运
-**副标题：** 从寄存器到控制环，理解PWM与电流采样的精确协同
-**难度等级：** 
+- **模块编号：** ADV-HW-01
+- **模块名称：** PWM深度配置与电流采样时序联动（PWM Deep Configuration & Current Sampling Timing Linkage）
+- **文档版本：** v2.0
+- **适用对象：** 已掌握基础FOC理论和MCU外设配置的嵌入式工程师
+- **前置知识：** HW-04 MCU外设与通信、ALG-05 有感FOC实现、MC-LIB-SVPWM
+- **关联模块：** ADV-HW-02 ADC深度配置与DMA数据搬运
+- **副标题：** 从寄存器到控制环，理解PWM与电流采样的精确协同
+- **难度等级：** 
 
 ---
 

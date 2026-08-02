@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第17章part 1 - 17 Input Filter Design"
+title: "第17章 输入滤波器设计（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,934 +18,353 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第17章part 1 - 17 Input Filter Design
+# 第17章 输入滤波器设计（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 678-697  
-> Chunk ID: `chapter-17-part-1`
+> 源页：678–697
+> 本部分涵盖 17.1 引言、17.2 输入滤波器对变换器传递函数的影响、17.3 降压变换器示例、17.4 阻尼输入滤波器设计引言。
 
-## 主干提取
+## 17.1 引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 17.1.1 传导 EMI
 
-## 术语表
+几乎总是需要在开关变换器功率输入端加入滤波器。通过衰减变换器输入电流波形中的开关谐波，输入滤波器允许满足限制传导电磁干扰（EMI）的法规。输入滤波器还可保护变换器及其负载免受输入电压 $v_g(t)$ 中的暂态影响，从而提高系统可靠性。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+图17.1 给出一个简单降压变换器示例。变换器将图17.1b 所示脉动电流 $i_g(t)$ 注入电源 $v_g(t)$。$i_g(t)$ 的傅里叶级数含开关频率 $f_s$ 倍数处的谐波：
 
-## 中文翻译
+$$i_g(t) = DI + \sum_{k=1}^{\infty}\frac{2I}{k\pi}\sin(k\pi D)\cos(k\omega t) \tag{17.1}$$
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+实际中高阶谐波幅值也可显著受二极管反向恢复引起的电流尖峰及开关过渡有限斜率影响。$i_g(t)$ 的大高频电流谐波可干扰电视和无线电接收，可扰乱附近电子设备工作。故存在限制开关变换器注入电源谐波电流幅值的法规和标准 [143–150]。
 
-## 英文原文
+![源页 p.678](../assets/page-snapshots/chapter-17/page-678.png)
 
-```text
-17
-Input Filter Design
-17.1 Introduction
-17.1.1 Conducted EMI
-It is nearly always required that a ﬁlter be added at the power input of a switching converter. By
-attenuating the switching harmonics that are present in the converter input current waveform, the
-input ﬁlter allows compliance with regulations that limitconducted electromagnetic interference
-(EMI). The input ﬁlter can also protect the converter and its load from transients that in the input
-voltage vg(t), thereby improving the system reliability.
-A simple buck converter example is illustrated in Fig.17.1. The converter injects the pulsat-
-ing current ig(t)o fF i g .17.1b into the power source vg(t). The Fourier series of ig(t) contains
-harmonics at multiples of the switching frequency fs, as follows:
-ig(t)= DI+
-∞∑
-k=1
-2I
-kπsin(kπD) cos(kωt) (17.1)
-In practice, the magnitudes of the higher-order harmonics can also be signiﬁcantly aﬀected by
-the current spike caused by diode reverse recovery, and also by the ﬁnite slopes of the switching
-transitions. The large high-frequency current harmonics ofig(t) can interfere with television and
-radio reception, and can disrupt the operation of nearby electronic equipment. In consequence,
-regulations and standards exist that limit the amplitudes of the harmonic currents injected by a
-(a)
-+ CR
-+
-v
-Liig 1
-2
-vg(t)
-(b)
-t
-ig(t)
-DTs Ts
-0
-0
-0
-i i
-Fig. 17.1 Buck converter example: (a) circuit of power stage; (b) pulsating input current waveform
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_17
-675
+图17.1 降压变换器示例：(a) 功率级电路；(b) 脉动输入电流波形
 
-676 17 Input Filter Design
-(a)
-+ CR
-+
-v
-Liig 1
-2
-iin
-Lf
-Cf
-Input filter
-vg(t)
-(b)
-t
-ig(t)
-DTs Ts
-0
-0
-0
-iin(t)
-Fig. 17.2 Addition of a simple L–C low-pass ﬁlter to the power input terminals of the buck converter:
-(a) circuit; (b) input current waveforms
-switching converter into its power source [143–150]. As an example, if the dc inductor current
-i of Fig. 17.2 has a magnitude of several Amperes, then the fundamental component (n= 1) has
-an rms amplitude in the vicinity of one Ampere. Regulations may require attenuation of this
-current to a value typically in the range 10μA to 100μA.
-To meet limits on conducted EMI, it is necessary to add an input ﬁlter to the converter.
-Figure 17.2 illustrates a simple single-section L–C low-pass ﬁlter, added to the input of the
-converter of Fig. 17.1. This ﬁlter attenuates the current harmonics produced by the switching
-converter, and thereby smooths the current waveform drawn from the power source. If the ﬁlter
-has transfer function H(s)= iin/ig, then the input current Fourier series becomes
-iin(t)= H(0)DI+
-∞∑
-k=1
-∥H(kjω)∥ 2I
-kπsin(kπD) cos(kωt+∠H(kjω)) (17.2)
-In other words, the amplitude of each current harmonic at angular frequency kω is attenuated
-by the ﬁlter transfer function at the harmonic frequency,∥H(kjω)∥. Typical requirements eﬀec-
-tively limit the current harmonics to have amplitudes less than 100μA, and hence input ﬁlters
-are often required to attenuate the current amplitudes by 80 dB or more.
-To improve the reliability of the system, input ﬁlters are sometimes required to operate nor-
-mally when transients or periodic disturbances are applied to the power input. Such conducted
-susceptibility speciﬁcations force the designer to damp the input ﬁlter resonances, so that input
-disturbances do not excite excessive currents or voltages within the ﬁlter or converter.
-17.1.2 The Input Filter Design Problem
-The situation faced by the design engineer is typically as follows. A switching regulator has
-been designed, which meets performance speciﬁcations. The regulator was properly designed
+例如若图17.2 中直流电感电流 $i$ 幅值为数安，则基波分量（$n = 1$）方均根幅值约一安。法规可能要求将此电流衰减到典型 10 μA 至 100 μA 范围。
 
-17.1 Introduction 677
-Fig. 17.3 Small-signal equivalent circuit models of the buck converter: ( a) basic converter model, ( b)
-with addition of input ﬁlter
-as discussed in Chap. 9, using a small-signal model of the converter power stage such as the
-equivalent circuit of Fig.17.3a. In consequence, the transient response is well damped and suﬃ-
-ciently fast, with adequate phase margin at all expected operating points. The output impedance
-is suﬃciently small over a wide frequency range. The line-to-output transfer functionGvg(s), or
-audiosusceptibility,i ss uﬃciently small, so that the output voltage remains regulated in spite of
-variations in ˆvg(t).
-Having developed a good design that meets the above goals regarding dynamic response,
-the designer then addresses the problem of conducted EMI. A low-pass ﬁlter having attenua-
-tion suﬃcient to meet conducted EMI speciﬁcations is constructed and added to the converter
-input. A new problem then arises: the input ﬁlter changes the dynamics of the converter. The
-transient response is modiﬁed, and the control system may even become unstable. The output
-impedance may become large over some frequency range, possibly exhibiting resonances. The
-audiosusceptibility may be degraded.
-The problem is that the input ﬁlter a ﬀects the dynamics of the converter, often in a man-
-ner that degrades regulator performance. For example, when a single-section L–C input ﬁlter is
-added to a buck converter as in Fig.17.2a, the small-signal equivalent circuit model is modiﬁed
-as shown in Fig.17.3b. The input ﬁlter elements aﬀect all transfer functions of the converter, in-
-cluding the control-to-output transfer functionG
-vd(s), the line-to-output transfer functionGvg(s),
-and the converter output impedance Zout(s). Moreover, the inﬂuence of the input ﬁlter on these
-transfer functions can be quite severe.
+![源页 p.679](../assets/page-snapshots/chapter-17/page-679.png)
 
-678 17 Input Filter Design
-f
-|| Gvd || Gvd
-00 dBV
-20 dBV
-30 dBV
-100 Hz
-40 dBV
-zHk01zHk1
-10 dBV
-|| Gvd ||
-Gvd
-Fig. 17.4 Control-to-output transfer functions predicted by the equivalent circuit models of Fig. 17.3.
-Dashed lines: without input ﬁlter (Fig. 17.3a). Solid lines: with input ﬁlter (Fig. 17.3b)
-As an illustration, let us examine how the control-to-output transfer function Gvd(s)o ft h e
-buck converter of Fig.17.1 is altered when a simple L–C input ﬁlter is added as in Fig.17.2.F o r
-this example, the element values are chosen to be: D= 0.5, L= 100μH, C= 100μF, R=
-3Ω, Lf = 330μH, C f = 470μF. Figure 17.4 contains the Bode plot of the magnitude and phase
-of the control-to-output transfer function Gvd(s). The dashed lines are the magnitude and phase
-before the input ﬁlter was added, generated by solution of the model of Fig.17.3a. The complex
-poles of the converter output ﬁlter cause the phase to approach−180◦at high frequency. Usually,
-this is the model used to design the regulator feedback loop and to evaluate the phase margin
-(see Chap. 9). The solid lines of Fig. 17.4 show the magnitude and phase after addition of the
-input ﬁlter, generated by solution of the model of Fig. 17.3b. The magnitude exhibits a “glitch”
-at the resonant frequency of the input ﬁlter, and an additional−360◦of phase shift is introduced
-into the phase. It can be shown that Gvd(s) now contains an additional complex pole pair and
-a complex right half-plane zero pair, associated with the input ﬁlter dynamics. If the crossover
-frequency of the regulator feedback loop is near to or greater than the resonant frequency of the
-input ﬁlter, then the loop phase margin will become negative and instability will result. Such
-behavior is typical; consequently, input ﬁlters are notorious for destabilizing switching regulator
-systems.
-This chapter shows how to mitigate the stability problem, by introducing damping into the
-input ﬁlter and by designing the input ﬁlter such that its output impedance is suﬃciently small
-[69, 151–162]. The result of these measures is that the eﬀect of the input ﬁlter on the control-to-
-output transfer function becomes negligible, and hence the converter dynamics are much better
-behaved. Although analysis of the fourth-order system of Fig.17.3b is potentially quite complex,
-the approach used here simpliﬁes the problem through use of impedance inequalities involving
-the converter input impedance and the ﬁlter output impedance [151, 152]. These inequalities are
-based on Middlebrook’s Extra Element Theorem of Sect. 16.1. This approach allows the engi-
+图17.2 向降压变换器功率输入端加入简单 L-C 低通滤波器：(a) 电路；(b) 输入电流波形
 
-17.2 Eﬀect of an Input Filter on Converter Transfer Functions 679
-neer to gain the insight needed to eﬀectively design the input ﬁlter. Optimization of the damping
-networks of input ﬁlters, design of multiple-section ﬁlters, and the exact stability criterion, are
-also discussed.
-17.2 Eﬀect of an Input Filter on Converter Transfer Functions
-17.2.1 Modiﬁed Transfer Functions
-The control-to-output transfer function Gvd(s) is deﬁned as follows:
-Gvd(s)= ˆv(s)
-ˆd(s)
-⏐⏐
-⏐
-⏐⏐⏐
-ˆvg(s)=0
-(17.3)
-The control-to-output transfer functions of basic CCM converters with no input ﬁlters are listed
-in Sect. 8.2.2.
-+
-+ 1 : M(D)
-Le
-C R
-+
-j(s)d( s)
-e(s)d( s)
-vg(s) v(s)
-He(s)
-Zei
-Canonical Model
-Lf
-Cf
-Hi(s)
-Input Filter
-Fig. 17.5 Addition of an input ﬁlter to the canonical model of a switching converter
-Addition of an input ﬁlter to a switching regulator leads to the system illustrated in Fig.17.5.
-In Fig. 17.6, the input ﬁlter is represented by its Thevenin-equivalent circuit, with Hi(s) equal
-to the unloaded transfer function of the ﬁlter, and Zo equal to the output impedance of the input
-ﬁlter. To determine the control-to-output transfer function in the presence of the input ﬁlter,
-we set ˆvg(s) to zero and solve for ˆv(s)/ ˆd(s) according to Eq. (17.3). The input ﬁlter can then be
-represented simply by its output impedanceZo(s) as illustrated in Fig.17.7. Thus, the input ﬁlter
-can be treated as an extra element having impedance Zo(s), and the Extra Element Theorem of
-Chap. 16.1 can be employed to determine how addition of the input ﬁlter modiﬁes the control-
-to-output transfer function. Speciﬁcally, the modiﬁed control-to-output transfer function can be
-expressed as follows [151]:
-G
-vd(s)=
-⎛⎜⎜⎜⎜⎜
-⎝G
-vd(s)
-⏐⏐⏐
-⏐⏐⏐
-Zo(s)=0
-⎞⎟⎟⎟⎟⎟
-⎠
-⎦
-1+ Z
-o(s)
-ZN (s)
-)
-⎦
-1+ Zo(s)
-ZD(s)
-) (17.4)
+为满足传导 EMI 限值，须向变换器加入输入滤波器。图17.2 给出加到图17.1 变换器输入端的简单单节 L-C 低通滤波器。此滤波器衰减开关变换器产生的电流谐波，从而平滑从电源吸取的电流波形。若滤波器传递函数为 $H(s) = i_{in}/i_g$，则输入电流傅里叶级数变为
 
-680 17 Input Filter Design
-Fig. 17.6 Use of Thevenin-equivalent model for the input ﬁlter
-Fig. 17.7 Finding the control-to-output transfer function Gvd(s)
-where
-Gvd(s)
-⏐⏐⏐⏐Zo(s)=0
-(17.5)
-is the original control-to-output transfer function with no input ﬁlter.
-Figure 17.8 illustrates determination of ZN (s). In the presence of ˆd, a current ˆitest is injected
-at the input port of the converter, and the ˆd and ˆitest inputs are adjusted such that the output ˆv is
-nulled. Under these conditions, we ﬁnd ˆvtest and
-ZN = ˆvtest
-ˆitest
-⏐⏐
-⏐
-⏐
-ˆv→
-null
-0
-(17.6)
-When the output ˆv is nulled, then no current ﬂows through the load R, capacitor C, or inductor
-Le. Hence there is no voltage across these elements, and the voltages across the transformer
-windings are zero. With no secondary winding current, the transformer primary winding current
-is zero as well. Hence we can ﬁnd that
-ˆvtest =−e(s) ˆd (17.7)
-ˆitest = j(s) ˆd (17.8)
+$$i_{in}(t) = H(0)DI + \sum_{k=1}^{\infty}\|H(jk\omega)\|\frac{2I}{k\pi}\sin(k\pi D)\cos(k\omega t+\angle H(jk\omega)) \tag{17.2}$$
 
-17.2 Eﬀect of an Input Filter on Converter Transfer Functions 681
-Fig. 17.8 Finding ZN (s)
-Therefore,
-ZN =−e(s) ˆd
-j(s) ˆd
-=−e(s)
-j(s) (17.9)
-This is a general result, expressed in terms of the canonical model parameterse(s) and j(s). The
-impedance ZN is the input port impedance of the converter, under the conditions that ˆd and ˆitest
-are varied as necessary to null the output voltage ˆv. Generally, ZN is negative.
-Fig. 17.9 Finding ZD(s)
-Figure 17.9 illustrates determination of ZD(s). The input ˆd is set to zero, and current ˆitest is
-injected at the input port of the converter. The quantity ZD is given by
-ZD= ˆvtest
-ˆitest
-⏐⏐⏐⏐
-⏐⏐
-ˆd=0
-(17.10)
-Setting ˆd to zero causes the e(s) ˆd and j(s) ˆd sources to be zero. The driving-point impedance
-at the injection point is equal to the canonical model ﬁlter impedance Zei, reﬂected through the
-transformer turns ratio:
-ZD(s)= Zei(s)
-M2 (17.11)
+即角频率 $k\omega$ 处每个电流谐波幅值被滤波器在该谐波频率处的传递函数 $\|H(jk\omega)\|$ 衰减。典型要求有效限制电流谐波幅值小于 100 μA，故常需输入滤波器衰减电流幅值 80 dB 或更多。
 
-682 17 Input Filter Design
-This is a general result, expressed in terms of the canonical model parameters Zei and M.T h e
-impedance ZD is the input port impedance of the converter, under open-loop conditions with
-ˆd= 0.
-A similar analysis shows that the converter open-loop output impedance can be expressed
-in the form
-Zout(s)=
-⎦
-Zout(s)
-⏐⏐⏐
-⏐
-Zo(s)=0
-)
-⎦
-1+ Zo(s)
-Ze(s)
-)
-⎦
-1+ Zo(s)
-ZD(s)
-) (17.12)
-where
-Zout(s)
-⏐⏐
-⏐⏐
-Zo(s)=0
-(17.13)
-is the original converter output impedance with no input ﬁlter. The quantityZe(s) is equal to the
-converter input impedance Zi(s) under the conditions that the converter output is shorted:
-Ze= Zi
-⏐⏐
-⏐⏐
-ˆv=0
-(17.14)
-The quantity ZD(s) is again the open-loop driving-point impedance at the power input port of
-the open-loop converter, given by Eq. (17.11).
-17.2.2 Discussion
-Equation (17.4) relates the power stage control-to-output transfer function Gvd(s) to the output
-impedance Zo(s) of the input ﬁlter, and also to the quantities ZN (s) and ZD(s) measured at
-the power input port of the converter. The quantity ZD(s) coincides with the open-loop input
-impedance of the converter.
-As described above, the quantity ZN (s) is equal to the input port impedance of the converter
-power stage, under the conditions that ˆd(s) is varied as necessary to null ˆv(s) to zero. This is,
-in fact, the function performed by an ideal controller: it varies the duty cycle as necessary to
-maintain zero error of the output voltage. Therefore, Z
-N (s) coincides with the impedance that
-would be measured at the converter power input terminals, if an ideal feedback loop perfectly
-regulated the converter output voltage. Of course, Eq. ( 17.4) is valid in general, regardless of
-whether a control system is present.
-Figure 17.10 illustrates the large-signal dc behavior of a feedback loop that perfectly reg-
-ulates the converter output voltage. Regardless of the applied input voltage vg(t), the output
-voltage is maintained equal to the desired value V. The load power is therefore constant, and
-equal to Pload = V2/R. In the idealized case of a lossless converter, the power ﬂowing into the
-converter input terminals will also be equal to Pload, regardless of the value of vg(t). Hence, the
-power input terminal of the converter obeys the equation
-⟨vg(t)⟩Ts⟨ig(t)⟩Ts = Pload (17.15)
-This characteristic is illustrated in Fig. 17.10b, and is represented in Fig. 17.10a by the depen-
-dent power sink symbol. The properties of power sources and power sinks are discussed in
-detail in Chap. 15.
-Figure 17.10b also illustrates linearization of the constant input power characteristic, about
-a quiescent operating point. The resulting line has negative slope; therefore, the incremental
+为提高系统可靠性，有时要求输入滤波器在功率输入施加暂态或周期扰动时正常工作。此类传导敏感度指标迫使设计者阻尼输入滤波器谐振，使输入扰动不在滤波器或变换器中激发过大电流或电压。
 
-17.2 Eﬀect of an Input Filter on Converter Transfer Functions 683
-(a)
-++vg(t)
-Ts
-ig(t)
-Ts
-Pload
-Closed-loop
-voltage regulator
-R
-+
-V
-(b)
-Quiescent
-operating
-point
-vg(t)
-Ts
-ig(t)
-Ts
-vg(t)
-Ts
-ig(t)
-Ts
-= Pload
-slope Ig
-Vg
-M 2
-R
-Vg
-Ig
-Fig. 17.10 Power input port characteristics of an ideal switching voltage regulator: (a) equivalent circuit
-model, including dependent power sink, (b) constant power characteristic of input port
-(small signal) input resistance of the ideal voltage regulator is negative. For example, increasing
-the voltage⟨vg(t)⟩Ts causes the current⟨ig(t)⟩Ts to decrease, such that the power remains constant.
-This incremental resistance has the value [151, 156]:
-−R
-M2 (17.16)
-where R is the output load resistance, and M is the conversion ratio V/Vg. For the buck, boost,
-buck–boost, and other converters, the dc asymptote of ZN (s) coincides with the negative in-
-cremental resistance given by Eq. ( 17.16). In a closed-loop switching regulator that regulates
-its output voltage well, the negative incremental resistance ( 17.16) is the dc asymptote of the
-regulator closed-loop input impedance Zi(s).
-Loading of an L–C input ﬁlter and its output impedance Zo(s) by the negative incremental
-resistance of Eq. (17.16) can lead to instability. Indeed, the (ˆv/ˆvg) transfer function of the closed-
-loop regulator with input ﬁlter includes the voltage divider term
-Zi(s)
-Zo(s)+ Zi(s) (17.17)
+### 17.1.2 输入滤波器设计问题
 
-684 17 Input Filter Design
-If the regulator input impedance Zi(s) is well approximated by Eq. (17.16) and the input ﬁlter is
-an undamped L–C ﬁlter, then the divider ratio (17.17) contains RHP poles.
-Hence, when an undamped or lightly damped input ﬁlter is connected to the regulator input
-port, the input ﬁlter can interact with the negative resistance characteristic of Zi(s)t of o r ma
-negative resistance oscillator that can be viewed as the origin of input ﬁlter instabilities. It
-should be noted that the regulator closed-loop input impedance Zi(s)i sa l s oaﬀected by the
-power stage reactive elements and the loop gain, and reverts to a positive impedance at high
-frequencies. These additional dynamics also impact the stability of the system. A more detailed
-stability analysis that accounts for the dynamics of Z
-i(s) is explained in Sect. 17.5.
-17.2.3 Impedance Inequalities
-Expressions for ZN (s), ZD(s), and Ze(s) for the basic buck, boost, and buck–boost converters are
-listed in Table17.1.
-Equation (17.4) reveals that addition of the input ﬁlter causes the control-to-output transfer
-function Gvd(s) to be modiﬁed by the factor
-⎦
-1+ Zo(s)
-ZN (s)
-)
-⎦
-1+ Zo(s)
-ZD(s)
-) (17.18)
-called the correction factor. When the following inequalities are satisﬁed,
-∥Zo∥≪∥ ZN∥, and (17.19)
-∥Zo∥≪∥ ZD∥
-then the correction factor has a magnitude of approximately unity, and the input ﬁlter does not
-substantially alter the control-to-output transfer function [ 151, 152]. These inequalities limit
-the maximum allowable output impedance of the input ﬁlter, and constitute useful ﬁlter design
-criteria. One can sketch the Bode plots of∥ZN ( jω)∥ and∥ZD( jω)∥, and compare with the Bode
-plot of∥Zo( jω)∥. This allows the engineer to gain the insight necessary to design an input ﬁlter
-that satisﬁes inequalities (17.19).
-Table 17.1 Input ﬁlter design criteria for basic converters
-Converter ZN (s) ZD(s) Ze(s)
-Buck −R
-D2
-R
-D2
-⎦
-1+ s L
-R+ s2LC
-)
-(1+ sRC)
-sL
-D2
-Boost −D′2R
-⎦
-1−sL
-D′2R
-)
-D′2R
-⎦
-1+ s L
-D′2R+ s2 LC
-D′2
-)
-(1+ sRC) sL
-Buck–boost −D′2R
-D2
-⎦
-1−sDL
-D′2R
-) D′2R
-D2
-⎦
-1+ s L
-D′2R+ s2 LC
-D′2
-)
-(1+ sRC)
-sL
-D2
+设计工程师面临的典型情况如下。开关稳压器已设计好，满足性能指标。稳压器如第9章所述正确设计，
 
-17.3 Buck Converter Example 685
-The buck converter example of the next section illustrates how violation of inequali-
-ties (17.19) not only causes the transfer function Gvd(s) to be signiﬁcantly changed, but also
-can introduce resonant poles and RHP zeroes that can seriously degrade the converter loop gain
-and its phase margin.
-According to Eq. (17.12), the converter open-loop output impedance Zout(s) is not substan-
-tially aﬀected by the input ﬁlter when the following inequalities are satisﬁed:
-∥Zo∥≪∥ Ze∥, and (17.20)
-∥Zo∥≪∥ ZD∥
-An input ﬁlter design that satisﬁes inequalities (17.19) but not (17.20) can be expected to leave
-the loop gain unchanged, but to modify the open-loop converter output impedance. This would
-lead to a modiﬁed closed-loop output impedance as well.
-Similar impedance inequalities can be derived for the case of current-programmed convert-
-ers [154, 155], or converters operating in the discontinuous conduction mode. Feedforward of
-the converter input voltage was suggested in [157]. Analysis of the eﬀect of an input ﬁlter on a
-current-programmed converter is discussed in Sect. 18.4.4.
-17.3 Buck Converter Example
-Let us again consider the example of a simple buck converter withL–C input ﬁlter, as illustrated
-in Fig. 17.11a. Upon replacing the converter with its small-signal model, we obtain the equiv-
-alent circuit of Fig. 17.11b. Let us evaluate Eq. ( 17.4) for this example, to ﬁnd how the input
-ﬁlter modiﬁes the control-to-output transfer function of the converter.
-(a)
-+ C R
-+
-v
-L i1
-2Vg
-Lf
-Cf
-Input filter Converter
-30 V
-330 μH
-470 μF
-100 μH
-100 μF 3 
-D = 0.5
-(b)
-+
-L
-CR
-+1 : D
-+
-Converter model
-Vgd
-Id
-i
-vvg
-d^
-^
-^
-^^ ^
-Lf
-Input filter
-Cf
-Zo(s) Zi(s)
-330 μH
-470 μF
-100 μH
-100 μF 3 
-Fig. 17.11 Buck converter example: (a) converter circuit, (b) small-signal model
+![源页 p.680](../assets/page-snapshots/chapter-17/page-680.png)
 
-686 17 Input Filter Design
-17.3.1 Eﬀect of Undamped Input Filter
-The quantities ZN (s) and ZD(s) can be read from Table17.1, or can be derived from the converter
-model of Fig. 17.11b using Eqs. ( 17.6) and ( 17.10) as described in Sect. 17.2. Figure 17.12a
-illustrates determination of ZD based on the buck converter model Fig. 17.11b. Upon setting
-ˆd(s) to zero, the converter small-signal model reduces to the circuit of Fig. 17.12a. It can be
-seen that ZD(s) is equal to the input impedance of the R–L–C ﬁlter, divided by the square of the
-turns ratio:
-ZD(s)= 1
-D2
-⎦
-sL+ R
-
-1
-sC
-)
-(17.21)
-Construction of asymptotes for this impedance is treated in Sect.8.4, with the results for the nu-
-merical values of this example given in Fig.17.13. The load resistance dominates the impedance
-at low frequency, leading to a dc asymptote of R/D2 = 12Ω. For the high- Q case shown,
-∥ZD( jω)∥ follows the output capacitor asymptote, reﬂected through the square of the eﬀective
-turns ratio, at intermediate frequencies. A series resonance occurs at the output ﬁlter resonant
-frequency f0, given by
-f0= 1
-2π
-√
-LC
-(17.22)
-For the element values listed in Fig.17.11a, the resonant frequency is f0= 1.6 kHz. The values
-of the asymptotes at the resonant frequency f0 are given by the characteristic impedance R0,
-referred to the transformer primary:
-Fig. 17.12 Determination of the quantities ZN (s)a n dZD(s) for the circuit of Fig. 17.11b; (a) determina-
-tion of ZD(s), (b) determination of ZN (s)
+图17.3 降压变换器小信号等效电路模型：(a) 基本变换器模型；(b) 加入输入滤波器
 
-17.3 Buck Converter Example 687
-Fig. 17.13 Construction of∥ZN ( jω)∥ and∥ZD( jω)∥, buck converter example
-R0
-D2 = 1
-D2
-√
-L
-C (17.23)
-For the element values given in Fig. 17.11a, this expression is equal to 4 Ω.T h e Q-factor is
-given by
-Q= R
-R0
-= R
-√
-C
-L (17.24)
-This expression yields a numerical value of Q= 3. The value of∥ZD( jω)∥ at the resonant fre-
-quency 1.6 kHz is therefore equal to (4Ω)/(3)= 1.33Ω. At high frequency,∥ZD( jω)∥ follows
-the reﬂected inductor asymptote.
-Figure 17.12b illustrates determination of ZN based on the buck converter model in
-Fig. 17.11b. This impedance is equal to the converter input impedance under the conditions that
-ˆd(s) is varied to maintain the output voltage ˆv(s) at zero. Figure17.12b illustrates the derivation
-of an expression for ZN (s). A test current source ˆitest (s) is injected at the converter input port.
-The impedance ZN (s) can be viewed as the transfer function from ˆitest (s)t oˆvtest (s):
-ZN (s)= ˆvtest(s)
-ˆitest(s)
-⏐⏐⏐
-⏐⏐⏐
-ˆv−−→null0
-(17.25)
-The null condition ˆv(s)−−→null0 greatly simpliﬁes analysis of the circuit of Fig. 17.12b. Since the
-voltage ˆv(s) is zero, the currents through the capacitor and load impedances are also zero. This
-further implies that the inductor current ˆi(s) and transformer winding currents are zero, and
-hence the voltage across the inductor is also zero. Finally, the voltage ˆvs(s), equal to the output
-voltage plus the inductor voltage, is zero.
-Since the currents in the windings of the transformer model are zero, the current itest (s)i s
-equal to the independent source current I ˆd(s):
-ˆitest(s)= I ˆd(s) (17.26)
-Because ˆvs(s) is equal to zero, the voltage applied to the secondary of the transformer model is
-equal to the independent source voltage−Vg ˆd(s). Upon dividing by the turns ratio D, we obtain
-ˆvtest (s):
-ˆvtest(s)=−Vg ˆd(s)
-D (17.27)
+使用变换器功率级小信号模型如图17.3a 所示等效电路。故暂态响应良好阻尼且足够快，所有预期工作点有足够相位裕度。输出阻抗在宽频率范围内足够小。输入-输出传递函数 $G_{vg}(s)$（或称音频敏感度）足够小，使输出电压在 $\hat{v}_g(t)$ 变化下保持调节。
 
-688 17 Input Filter Design
-Insertion of Eqs. (17.26) and (17.27) into Eq. (17.25) leads to the following result:
-ZN (s)=
-⎛⎜⎜⎜⎜⎝−Vg ˆd(s)
-D
-⎞⎟⎟⎟⎟⎠
-(I ˆd(s))
-=−R
-D2 (17.28)
-The steady-state relationship I= DVg/R has been used to simplify the above result. This equa-
-tion coincides with the expression listed in Table 17.1. The Bode diagram of∥ZN ( jω)∥ is con-
-structed in Fig. 17.13; this plot coincides with the dc asymptote of ∥ZD( jω)∥. The impedance
-ZN is negative, and has magnitude equal to the reﬂected load resistance.
-Fig. 17.14 Determination of the ﬁlter output
-impedance Zo(s)
-Lf
-Cf
-Zo(s)
-Next, let us construct the Bode diagram of the ﬁlter output impedanceZo(s). When the inde-
-pendent source ˆvg(s) is set to zero, the input ﬁlter network reduces to the circuit of Fig.17.14.I t
-can be seen that Zo(s) is given by the parallel combination of the inductor Lf and the capacitor
-C f :
-Zo(s)= sL f
-
-
-
-1
-sCf
-(17.29)
-Construction of the Bode diagram of this parallel resonant circuit is discussed in Sect. 8.3.4.
-As illustrated in Fig. 17.15, the magnitude∥Zo( jω)∥ is dominated by the inductor impedance at
-low frequency, and by the capacitor impedance at high frequency. The inductor and capacitor
-asymptotes intersect at the ﬁlter resonant frequency:
-Fig. 17.15 Magnitude plot of the output impedance of the input ﬁlter of Fig.17.14. Since the ﬁlter is not
-damped, the Q-factor is very large
+开发满足上述动态响应目标的良好设计后，设计者着手解决传导 EMI 问题。构造衰减足够满足传导 EMI 指标的低通滤波器并加到变换器输入。随后出现新问题：输入滤波器改变变换器动态。暂态响应被修改，控制系统甚至可能不稳定。输出阻抗在某频率范围可能变大，可能出现谐振。音频敏感度可能退化。
 
-17.3 Buck Converter Example 689
-ff = 1
-2π √Lf C f
-(17.30)
-For the given values, the input ﬁlter resonant frequency is ff = 400 Hz. This ﬁlter has charac-
-teristic impedance
-R0 f =
-√
-Lf
-C f
-(17.31)
-equal to 0.84Ω. Since the input ﬁlter is undamped, its Q-factor is ideally inﬁnite. In practice,
-parasitic elements such as inductor loss and capacitor equivalent series resistance limit the value
-of Qf . Nonetheless, the impedance∥Zo( jω)∥ is very large in the vicinity of the ﬁlter resonant
-frequency ff .
-The Bode plot of the ﬁlter output impedance ∥Zo( jω)∥ is overlaid on the ∥ZN ( jω)∥ and
-∥ZD( jω)∥ plots in Fig.17.16, for the element values listed in Fig.17.11a. We can now determine
-whether the impedance inequalities ( 17.19) are satisﬁed. Note the design-oriented nature of
-Fig. 17.16: since analytical expressions are given for each impedance asymptote, the designer
-can easily adjust the component values to satisfy Eq. (17.19). For example, the values ofLf and
-C f should be chosen to ensure that the asymptotes of ∥Zo( jω)∥ lie below the worst-case value
-of R/D2, as well as the other asymptotes of∥ZD( jω)∥.
-It should also be apparent that it is a bad idea to choose the input and output ﬁlter reso-
-nant frequencies f0 and ff to be equal, because it would then be more di ﬃcult to satisfy the
-inequalities of Eq. (17.19). Instead, the resonant frequencies f0 and ff should be well separated
-in value.
-Since the input ﬁlter is undamped, it is impossible to satisfy the impedance inequali-
-ties (17.19) in the vicinity of the input ﬁlter resonant frequency ff . Regardless of the choice
-of element values, the input ﬁlter changes the control-to-output transfer function Gvd(s)i n
-the vicinity of frequency ff . Figures 17.17 and 17.18 illustrate the resulting correction factor
-[Eq. (17.18)] and the modiﬁed control-to-output transfer function [Eq. ( 17.4)], respectively. At
-zHk01zHk1zH001
-40 dB
-0 dB
-20 dB || ZN ||
-|| ZD ||
-f
-|| Zo ||
-L f 1
-C f
-12 
-Qf
-1
-D2C
-fo = 1.59 kHz
-f1 = 530 Hz
-Q = 3
-L
-D2
-R0f
-10 dB
-30 dB
-ff = 400 Hz
-R0/D2
-Fig. 17.16 Impedance design criteria ∥ZN ( jω)∥ and∥ZD( jω)∥ from Fig. 17.13, with the ﬁlter output
-impedance∥Zo( jω)∥ superimposed. The design criteria of Eq. ( 17.19) are not satisﬁed at the input ﬁlter
-resonance
+问题在于输入滤波器影响变换器动态，常以退化稳压器性能的方式。例如单节 L-C 输入滤波器加到降压变换器（如图17.2a）时，小信号等效电路模型修改如图17.3b所示。输入滤波器元件影响变换器所有传递函数，包括控制-输出传递函数 $G_{vd}(s)$、输入-输出传递函数 $G_{vg}(s)$ 和变换器输出阻抗 $Z_{out}(s)$。而且输入滤波器对这些传递函数的影响可相当严重。
 
-690 17 Input Filter Design
-f
-0
-0 dB
-100 Hz zHk01zHk1
-10 dB
-1+ Zo
-ZN
-1+ Zo
-ZD
-1+ Zo
-ZN
-1+ Zo
-ZD
-Fig. 17.17 Magnitude (upper plot) and phase (lower plot) of the correction factor, Eq. ( 17.18), for the
-buck converter example of Fig.17.11
-f
-|| Gvd || Gvd
-00 dB
-20 dB
-30 dB
-100 Hz
-40 dB
-zHk01zHk1
-10 dB
-|| Gvd ||
-Gvd
-Fig. 17.18 Eﬀect of undamped input ﬁlter on the control-to-output transfer function of the buck converter
-example. Dashed lines: without input ﬁlter. Solid lines: with undamped input ﬁlter
-frequencies well below the input ﬁlter resonant frequency, impedance inequalities ( 17.19)a r e
-well satisﬁed. The correction factor tends to the value 1 ∠0◦, and the control-to-output trans-
-fer function Gvd(s) is essentially unchanged. In the vicinity of the resonant frequency ff ,t h e
-correction factor contains a pair of complex poles, and also a pair of right half-plane complex
-zeroes. These cause a “glitch” in the magnitude plot of the correction factor, and they contribute
-360
-◦of lag to the phase of the correction factor. The glitch and its phase lag can be seen in the
-Bode plot of Gvd(s). At high frequency, the correction factor tends to a value of approximately
-1∠−360◦; consequently, the high-frequency magnitude ofGvd is unchanged. However, when the
+![源页 p.681](../assets/page-snapshots/chapter-17/page-681.png)
 
-17.3 Buck Converter Example 691
-–360◦contributed by the correction factor is added to the −180◦contributed at high frequency
-by the two poles of the original Gvd(s), a high-frequency phase asymptote of−540◦is obtained.
-If the crossover frequency of the converter feedback loop is placed near to or greater than the
-input ﬁlter resonant frequency ff , then a negative phase margin is inevitable. This explains why
-addition of an input ﬁlter often leads to instabilities and oscillations in switching regulators.
-17.3.2 Damping the Input Filter
-Let us damp the resonance of the input ﬁlter, so that impedance inequalities (17.19) are satisﬁed
-at all frequencies.
-(a)
-Lf
-Cf Rf
-(b)
-Lf
-Cf
-Rf
-Fig. 17.19 Two attempts to damp the input ﬁlter: ( a) addition of damping resistance Rf across C f ,( b)
-addition of damping resistance Rf in parallel with Lf
-One approach to damping the ﬁlter is to add resistorRf in parallel with capacitorC f as illus-
-trated in Fig. 17.19a. The output impedance of this network is identical to the parallel resonant
-impedance analyzed in Sect. 8.3.4. The maximum value of the output impedance occurs at the
-resonant frequency ff , and is equal in value to the resistance Rf . Hence, to satisfy impedance
-inequalities (17.19), we should choose Rf to be much less than the ∥ZN ( jω)∥ and∥ZD( jω)∥
-asymptotes. The condition Rf ≪∥ ZN ( jω)∥ can be expressed as:
-Rf ≪ R
-D2 (17.32)
-Unfortunately, this raises a new problem: the power dissipation inRf . The dc input voltageVg is
-applied across resistor Rf , and therefore Rf dissipates power equal to V2
-g/Rf . Equation (17.32)
-implies that this power loss is greater than the load power! Therefore, the circuit of Fig. 17.19a
-is not a practical solution.
-One solution to the power loss problem is to place Rf in parallel with Lf as illustrated in
-Fig. 17.19b. The value ofRf in Fig. 17.19b is also chosen according to Eq. (17.32). Since the dc
-voltage across inductorLf is zero, there is now no dc power loss in resistorRf . The problem with
-this circuit is that its transfer function contains a high-frequency zero. Addition of Rf degrades
-the slope of the high-frequency asymptote, from−40 dB/decade to−20 dB/decade. The circuit
-of Fig. 17.19bi seﬀectively a single-pole R–C low-pass ﬁlter, with no attenuation provided by
-inductor Lf .
+图17.4 图17.3 等效电路模型预测的控制-输出传递函数。虚线：无输入滤波器（图17.3a）。实线：有输入滤波器（图17.3b）
 
-692 17 Input Filter Design
-One practical solution is illustrated in Fig. 17.20 [152]. Dc blocking capacitor Cb is added
-in series with resistor Rf . Since no dc current can ﬂow through resistor Rf , its dc power loss is
-eliminated. The value of Cb is chosen to be very large such that, at the ﬁlter resonant frequency
-ff , the impedance of the Rf -Cb branch is dominated by resistor Rf . When Cb is suﬃciently
-large, then the output impedance of this network reduces to the output impedances of the ﬁlters
-of Fig. 17.19. The impedance asymptotes for the case of large Cb are illustrated in Fig. 17.20b.
-The low-frequency asymptotes of∥ZN ( jω)∥ and∥ZD( jω)∥ in Fig. 17.13 are equal to R/D2=
-12Ω. The choice Rf = 1Ωtherefore satisﬁes impedance inequalities ( 17.19) very well. The
-choice Cb = 4700μF leads to 1/2πff Cb = 0.084Ω, which is much smaller than Rf .T h er e -
-sulting magnitude||Zo( jω)|| is compared with∥ZN ( jω)∥ and∥ZD( jω)∥ in Fig. 17.21. It can be
-seen that the chosen values of Rf and Cb lead to adequate damping, and impedance inequali-
-ties (17.19) are now well satisﬁed.
-Figure 17.22 illustrates how addition of the damped input ﬁlter modiﬁes the magnitude and
-phase of the control-to-output transfer function. There is now very little change in Gvd(s), and
-we would expect that the performance of the converter feedback loop is unaﬀected by the input
-ﬁlter.
-(a)
-Cb
-Lf
-Cf
-Rf
-(b)
-1
-C f
-L f ff
-Rf
-R0f
-Fig. 17.20 A practical method to damping the input ﬁlter, including damping resistanceRf and dc block-
-ing capacitor Cb:( a) circuit, (b) output impedance asymptotes
-zHk01zHk1zH001
-40 dB
-0 dB
-20 dB || ZN ||
-|| ZD ||
-f
-|| Zo ||
-L f 1
-C f
-12 
-1
-D2C
-fo = 1.59 kHz
-f1 = 530 Hz
-Q = 3
-L
-D2
-R0f
-10 dB
-30 dB
-ff = 400 Hz
-Rf = 1 
-R0/D2
-Fig. 17.21 Impedance design criteria ∥ZN ( jω)∥ and∥ZD( jω)∥ from Fig. 17.13, with the damped ﬁlter
-output impedance∥Zo( jω)∥ of Fig.17.20 superimposed. The design criteria of Eq. (17.19) are well satisﬁed
+作为示例，让我们考察图17.1 降压变换器加入简单 L-C 输入滤波器（如图17.2）时控制-输出传递函数 $G_{vd}(s)$ 如何改变。此例元件值选择为：$D = 0.5$，$L = 100\,\mu\text{H}$，$C = 100\,\mu\text{F}$，$R = 3\,\Omega$，$L_f = 330\,\mu\text{H}$，$C_f = 470\,\mu\text{F}$。图17.4 含控制-输出传递函数 $G_{vd}(s)$ 的幅值和相位波特图。虚线为加入输入滤波器前由图17.3a 模型求解生成的幅值和相位。变换器输出滤波器的复极点使高频相位趋向 −180°。通常这是用于设计稳压器反馈环路和评估相位裕度的模型（见第9章）。图17.4 实线为加入输入滤波器后由图17.3b 模型求解生成的幅值和相位。幅值在输入滤波器谐振频率处呈现"毛刺"，相位引入附加 −360° 相移。可证 $G_{vd}(s)$ 现含与输入滤波器动态关联的附加复极点对和复右半平面零点对。若稳压器反馈环路穿越频率接近或大于输入滤波器谐振频率，则环路相位裕度变负导致不稳定。此行为典型；故输入滤波器以破坏开关稳压器系统稳定性著称。
 
-17.4 Design of a Damped Input Filter 693
-f
-|| Gvd || Gvd
-00 dBV
-20 dBV
-30 dBV
-100 Hz
-40 dBV
-zHk01zHk1
-10 dBV
-|| Gvd ||
-Gvd
-Fig. 17.22 Eﬀect of the damped input ﬁlter on the control-to-output transfer function of the buck con-
-verter example. Dashed lines: without input ﬁlter. Solid lines: with damped input ﬁlter
-17.4 Design of a Damped Input Filter
-As illustrated by the example of the previous section, design of an input ﬁlter requires not
-only that the ﬁlter impedance asymptotes satisfy impedance inequalities, but also that the ﬁlter
-be adequately damped. Damping of the input ﬁlter is also necessary to prevent transients and
-disturbances in vg(t) from exciting ﬁlter resonances. Other design constraints include attaining
-the desired ﬁlter attenuation, and minimizing the size of the reactive elements. Although a large
-number of classical ﬁlter design techniques are well known, these techniques do not address the
-problems of limiting the maximum output impedance and damping ﬁlter resonances.
-The value of the blocking capacitor Cb used to damp the input ﬁlter in Sect. 17.3.2 is ten
-times larger than the value ofC f , and hence its size and cost are of practical concern. Optimiza-
-tion of an input ﬁlter design therefore includes minimization of the size of the elements used in
-the damping networks.
-Several practical approaches to damping the single-sectionL–C low-pass ﬁlter are illustrated
-in Fig. 17.23 [152, 153, 158]. Figure 17.23a contains the Rf –Cb damping branch considered in
-the previous section. In Fig. 17.23b, the damping resistor Rf is placed in parallel with the ﬁlter
-inductor Lf , and a high-frequency blocking inductor Lb is placed in series with Rf . Inductor
-Lb causes the ﬁlter transfer function to roll-oﬀwith a high-frequency slope of−40 dB/decade.
-In Fig. 17.23c, the damping resistor Rf is placed in series with the ﬁlter inductor Lf , and the
-dc current is bypassed by inductor Lb. In each case, it is desired to obtain a given amount of
-damping (i.e., to cause the peak value of the ﬁlter output impedance to be no greater than a
-given value that satisﬁes the impedance inequalities (17.19)), while minimizing the value of Cb
-or Lb. This problem can be formulated in an alternate but equivalent form: for a given choice of
-Cb or Lb, ﬁnd the value of Rf that minimizes the peak output impedance [ 152]. The solutions
+本章表明如何通过向输入滤波器引入阻尼和设计输入滤波器使其输出阻抗足够小 [69, 151–162] 来缓解稳定性问题。这些措施的结果是输入滤波器对控制-输出传递函数的影响变得可忽略，故变换器动态行为更好。虽然图17.3b 四阶系统的分析可能相当复杂，但此处方法通过涉及变换器输入阻抗和滤波器输出阻抗的阻抗不等式简化问题 [151, 152]。这些不等式基于 16.1 节 Middlebrook 额外元件定理。此方法使工程师获得有效设计输入滤波器所需洞察。还讨论输入滤波器阻尼网络优化、多节滤波器设计和精确稳定判据。
 
-694 17 Input Filter Design
-Fig. 17.23 Several practical approaches
-to damping the single-section input ﬁlter:
-(a) Rf –Cb parallel damping, (b) Rf –Lb par-
-allel damping, (c) Rf –Lb series damping
-(a)
-+v1
-+
-v2
-Cb
-Rf
-Cf
-Lf
-(b)
-+v1
-+
-v
-2
-LbRf
-Cf
-Lf
-(c)
-+v1
-+
-v
-2
-Lb
-Rf
-Cf
-Lf
-to this optimization problem, for the three ﬁlter networks of Fig. 17.23, are summarized in this
-section. In each case, the quantities ff and R0 f are deﬁned by Eqs. (17.30) and (17.31).
-Consider the ﬁlter of Fig.17.23b, with ﬁxed values ofLf, C f , and Lb. Figure 17.24 contains
-Bode plots of the ﬁlter output impedance∥Z0( jω)∥ for several values of damping resistance Rf .
-For the limiting caseRf =∞, the circuit reduces to the original undamped ﬁlter with inﬁniteQf .
-In the limiting case Rf = 0, the ﬁlter is also undamped, but the resonant frequency is increased
-because Lb becomes connected in parallel with Lf . Between these two extremes, there must
-exist an optimum value of Rf that causes the peak ﬁlter output impedance to be minimized.
-It can be shown [ 152, 158] that all magnitude plots must pass through a common point, and
-therefore the optimum attains its peak at this point. This fact has been used to derive the design
-equations of optimally damped L-C ﬁlter sections.
-17.4.1 Rf –Cb Parallel Damping
-Optimization of the ﬁlter network of Fig. 17.23a and Sect. 17.3.2 was described in [ 152]. The
-high-frequency attenuation of this ﬁlter is not a ﬀected by the choice of Cb, and the high-
-frequency asymptote is identical to that of the original undamped ﬁlter. The sole tradeo ﬀin
-design of the damping elements for this ﬁlter is in the size of the blocking capacitor Cb vs. the
-damping achieved.
-```
+## 17.2 输入滤波器对变换器传递函数的影响
+
+### 17.2.1 修改的传递函数
+
+控制-输出传递函数 $G_{vd}(s)$ 定义如下：
+
+$$G_{vd}(s) = \left.\frac{\hat{v}(s)}{\hat{d}(s)}\right|_{\hat{v}_g(s)=0} \tag{17.3}$$
+
+无输入滤波器的基本 CCM 变换器控制-输出传递函数列于 8.2.2 节。
+
+![源页 p.682](../assets/page-snapshots/chapter-17/page-682.png)
+
+图17.5 向开关变换器规范模型加入输入滤波器
+
+向开关稳压器加入输入滤波器得图17.5 所示系统。图17.6 中输入滤波器用其戴维南等效电路表示，$H_i(s)$ 等于滤波器空载传递函数，$Z_o$ 等于输入滤波器输出阻抗。为确定输入滤波器存在下的控制-输出传递函数，令 $\hat{v}_g(s)$ 为零并按式 (17.3) 解 $\hat{v}(s)/\hat{d}(s)$。输入滤波器随后可简单用其输出阻抗 $Z_o(s)$ 表示，如图17.7所示。故输入滤波器可视为阻抗为 $Z_o(s)$ 的额外元件，可用 16.1 节额外元件定理确定加入输入滤波器如何修改控制-输出传递函数。具体地，修改后控制-输出传递函数可表示为 [151]：
+
+$$G_{vd}(s) = \left(\left.G_{vd}(s)\right|_{Z_o(s)=0}\right)\frac{\left(1+\dfrac{Z_o(s)}{Z_N(s)}\right)}{\left(1+\dfrac{Z_o(s)}{Z_D(s)}\right)} \tag{17.4}$$
+
+![源页 p.683](../assets/page-snapshots/chapter-17/page-683.png)
+
+图17.6 输入滤波器使用戴维南等效模型
+
+![源页 p.683](../assets/page-snapshots/chapter-17/page-683.png)
+
+图17.7 求控制-输出传递函数 $G_{vd}(s)$
+
+其中
+
+$$\left.G_{vd}(s)\right|_{Z_o(s)=0} \tag{17.5}$$
+
+是无输入滤波器的原始控制-输出传递函数。
+
+![源页 p.684](../assets/page-snapshots/chapter-17/page-684.png)
+
+图17.8 求 $Z_N(s)$
+
+图17.8 说明确定 $Z_N(s)$。$\hat{d}$ 存在下在变换器输入端口注入电流 $\hat{i}_{test}$，调整 $\hat{d}$ 和 $\hat{i}_{test}$ 输入使输出 $\hat{v}$ 置零。此条件下求 $\hat{v}_{test}$ 和
+
+$$Z_N = \left.\frac{\hat{v}_{test}}{\hat{i}_{test}}\right|_{\hat{v}\to\text{null} 0} \tag{17.6}$$
+
+输出 $\hat{v}$ 置零时无电流流过负载 $R$、电容 $C$ 或电感 $L_e$。故这些元件两端无电压，变压器绕组两端电压为零。无二次绕组电流时变压器一次绕组电流也为零。故可求得
+
+$$\hat{v}_{test} = -e(s)\hat{d} \tag{17.7}$$
+
+$$\hat{i}_{test} = j(s)\hat{d} \tag{17.8}$$
+
+故
+
+$$Z_N = \frac{-e(s)\hat{d}}{j(s)\hat{d}} = -\frac{e(s)}{j(s)} \tag{17.9}$$
+
+这是用规范模型参数 $e(s)$ 和 $j(s)$ 表示的一般结果。$Z_N$ 是 $\hat{d}$ 和 $\hat{i}_{test}$ 按需变化置零输出电压 $\hat{v}$ 条件下变换器的输入端口阻抗。一般 $Z_N$ 为负。
+
+![源页 p.684](../assets/page-snapshots/chapter-17/page-684.png)
+
+图17.9 求 $Z_D(s)$
+
+图17.9 说明确定 $Z_D(s)$。输入 $\hat{d}$ 设为零，在变换器输入端口注入电流 $\hat{i}_{test}$。量 $Z_D$ 为
+
+$$Z_D = \left.\frac{\hat{v}_{test}}{\hat{i}_{test}}\right|_{\hat{d}=0} \tag{17.10}$$
+
+令 $\hat{d}$ 为零使 $e(s)\hat{d}$ 和 $j(s)\hat{d}$ 源为零。注入处驱动点阻抗等于规范模型滤波器阻抗 $Z_{ei}$ 经变压器匝比反射：
+
+$$Z_D(s) = \frac{Z_{ei}(s)}{M^2} \tag{17.11}$$
+
+这是用规范模型参数 $Z_{ei}$ 和 $M$ 表示的一般结果。$Z_D$ 是 $\hat{d} = 0$ 开环条件下变换器的输入端口阻抗。
+
+类似分析表明变换器开环输出阻抗可表示为
+
+$$Z_{out}(s) = \left(\left.Z_{out}(s)\right|_{Z_o(s)=0}\right)\frac{\left(1+\dfrac{Z_o(s)}{Z_e(s)}\right)}{\left(1+\dfrac{Z_o(s)}{Z_D(s)}\right)} \tag{17.12}$$
+
+其中
+
+$$\left.Z_{out}(s)\right|_{Z_o(s)=0} \tag{17.13}$$
+
+是无输入滤波器的原始变换器输出阻抗。量 $Z_e(s)$ 等于变换器输出短路条件下变换器输入阻抗 $Z_i(s)$：
+
+$$Z_e = \left.Z_i\right|_{\hat{v}=0} \tag{17.14}$$
+
+量 $Z_D(s)$ 再次是开环变换器功率输入端口的开环驱动点阻抗，由式 (17.11) 给出。
+
+### 17.2.2 讨论
+
+式 (17.4) 将功率级控制-输出传递函数 $G_{vd}(s)$ 与输入滤波器输出阻抗 $Z_o(s)$ 及变换器功率输入端口量 $Z_N(s)$ 和 $Z_D(s)$ 关联。量 $Z_D(s)$ 与变换器开环输入阻抗一致。
+
+如上所述，量 $Z_N(s)$ 等于 $\hat{d}(s)$ 按需变化置零 $\hat{v}(s)$ 条件下变换器功率级的输入端口阻抗。这实际上是理想控制器执行的功能：按需改变占空比以保持输出电压零误差。故 $Z_N(s)$ 与理想反馈环路完美调节变换器输出电压时在变换器功率输入端子处测量到的阻抗一致。当然式 (17.4) 一般有效，无论是否存在控制系统。
+
+![源页 p.686](../assets/page-snapshots/chapter-17/page-686.png)
+
+图17.10 理想开关电压稳压器功率输入端口特性：(a) 等效电路模型，含受控功率吸收；(b) 输入端口恒功率特性
+
+图17.10 给出完美调节变换器输出电压的反馈环路的大信号直流行为。无论施加输入电压 $v_g(t)$ 如何，输出电压保持等于所需值 $V$。故负载功率恒定，等于 $P_{load} = V^2/R$。无损变换器理想化情形下流入变换器输入端子的功率也等于 $P_{load}$，无论 $v_g(t)$ 值如何。故变换器功率输入端子遵循方程
+
+$$\langle v_g(t)\rangle_{T_s}\langle i_g(t)\rangle_{T_s} = P_{load} \tag{17.15}$$
+
+此特性如图17.10b所示，在图17.10a 中用受控功率吸收符号表示。功率源和功率吸收的性质在第15章详细讨论。
+
+图17.10b 还说明在静态工作点附近线性化恒定输入功率特性。所得线有负斜率；故理想电压稳压器的增量（小信号）输入电阻为负。例如增大 $\langle v_g(t)\rangle_{T_s}$ 使 $\langle i_g(t)\rangle_{T_s}$ 减小以保持功率恒定。此增量电阻值为 [151, 156]：
+
+$$-\frac{R}{M^2} \tag{17.16}$$
+
+其中 $R$ 是输出负载电阻，$M$ 是变换比 $V/V_g$。对降压、升压、升降压等变换器，$Z_N(s)$ 的直流渐近线与式 (17.16) 给出的负增量电阻一致。在良好调节输出电压的闭环开关稳压器中，负增量电阻 (17.16) 是稳压器闭环输入阻抗 $Z_i(s)$ 的直流渐近线。
+
+L-C 输入滤波器及其输出阻抗 $Z_o(s)$ 被式 (17.16) 负增量电阻加载可导致不稳定。实际上含输入滤波器的闭环稳压器 $(\hat{v}/\hat{v}_g)$ 传递函数含分压项
+
+$$\frac{Z_i(s)}{Z_o(s)+Z_i(s)} \tag{17.17}$$
+
+若稳压器输入阻抗 $Z_i(s)$ 良好近似为式 (17.16) 且输入滤波器为无阻尼 L-C 滤波器，则分压比 (17.17) 含 RHP 极点。
+
+故当无阻尼或轻阻尼输入滤波器接到稳压器输入端口时，输入滤波器可与 $Z_i(s)$ 的负电阻特性相互作用形成负阻振荡器，可视为输入滤波器不稳定的起源。应注意稳压器闭环输入阻抗 $Z_i(s)$ 也受功率级储能元件和环路增益影响，高频时恢复为正阻抗。这些附加动态也影响系统稳定性。计入 $Z_i(s)$ 动态的更详细稳定性分析在 17.5 节解释。
+
+### 17.2.3 阻抗不等式
+
+基本降压、升压和升降压变换器的 $Z_N(s)$、$Z_D(s)$、$Z_e(s)$ 表达式列于表17.1。
+
+式 (17.4) 表明加入输入滤波器使控制-输出传递函数 $G_{vd}(s)$ 被因子
+
+$$\frac{\left(1+\dfrac{Z_o(s)}{Z_N(s)}\right)}{\left(1+\dfrac{Z_o(s)}{Z_D(s)}\right)} \tag{17.18}$$
+
+修改，称为校正因子。当以下不等式满足时
+
+$$\|Z_o\| \ll \|Z_N\|, \quad \text{且} \quad \|Z_o\| \ll \|Z_D\| \tag{17.19}$$
+
+校正因子幅值近似为 1，输入滤波器不显著改变控制-输出传递函数 [151, 152]。这些不等式限制输入滤波器最大允许输出阻抗，构成有用的滤波器设计准则。可绘 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 波特图，与 $\|Z_o(j\omega)\|$ 波特图比较。这使工程师获得设计满足不等式 (17.19) 的输入滤波器所需洞察。
+
+表17.1 基本变换器的输入滤波器设计准则
+
+| 变换器 | $Z_N(s)$ | $Z_D(s)$ | $Z_e(s)$ |
+|---|---|---|---|
+| 降压 | $-\dfrac{R}{D^2}$ | $\dfrac{R}{D^2}\!\left(1+s\dfrac{L}{R}+s^2 LC\right)$ | $\dfrac{(1+sRC)sL}{D^2}$ |
+| 升压 | $-D'^2 R\!\left(1-\dfrac{sL}{D'^2 R}\right)$ | $D'^2 R\!\left(1+s\dfrac{L}{D'^2 R}+s^2\dfrac{LC}{D'^2}\right)$ | $(1+sRC)sL$ |
+| 升降压 | $-\dfrac{D'^2 R}{D^2}\!\left(1-\dfrac{sDL}{D'^2 R}\right)$ | $\dfrac{D'^2 R}{D^2}\!\left(1+s\dfrac{L}{D'^2 R}+s^2\dfrac{LC}{D'^2}\right)$ | $\dfrac{(1+sRC)sL}{D^2}$ |
+
+下一节降压变换器示例说明违反不等式 (17.19) 不仅导致传递函数 $G_{vd}(s)$ 显著改变，还可引入谐振极点和 RHP 零点严重退化变换器环路增益和相位裕度。
+
+按式 (17.12)，当以下不等式满足时变换器开环输出阻抗 $Z_{out}(s)$ 不受输入滤波器显著影响：
+
+$$\|Z_o\| \ll \|Z_e\|, \quad \text{且} \quad \|Z_o\| \ll \|Z_D\| \tag{17.20}$$
+
+满足不等式 (17.19) 但不满足 (17.20) 的输入滤波器设计可预期保持环路增益不变但修改开环变换器输出阻抗。这也将导致修改的闭环输出阻抗。
+
+电流编程变换器 [154, 155] 或断续导通模式下工作的变换器可导出类似阻抗不等式。[157] 建议变换器输入电压前馈。输入滤波器对电流编程变换器影响的分析在 18.4.4 节讨论。
+
+## 17.3 降压变换器示例
+
+再次考虑图17.11a 所示含 L-C 输入滤波器的简单降压变换器示例。用小信号模型替代变换器后得图17.11b 等效电路。让我们为此例评估式 (17.4)，求输入滤波器如何修改变换器控制-输出传递函数。
+
+![源页 p.688](../assets/page-snapshots/chapter-17/page-688.png)
+
+图17.11 降压变换器示例：(a) 变换器电路；(b) 小信号模型
+
+### 17.3.1 无阻尼输入滤波器的影响
+
+量 $Z_N(s)$ 和 $Z_D(s)$ 可从表17.1 读取，或如 17.2 节所述用式 (17.6) 和 (17.10) 从图17.11b 变换器模型导出。图17.12a 说明基于图17.11b 降压变换器模型确定 $Z_D$。令 $\hat{d}(s)$ 为零后变换器小信号模型简化为图17.12a 电路。可见 $Z_D(s)$ 等于 R-L-C 滤波器输入阻抗除以匝比平方：
+
+$$Z_D(s) = \frac{1}{D^2}\!\left(sL+R\,\|\,\frac{1}{sC}\right) \tag{17.21}$$
+
+![源页 p.689](../assets/page-snapshots/chapter-17/page-689.png)
+
+图17.12 确定图17.11b 电路量 $Z_N(s)$ 和 $Z_D(s)$；(a) 确定 $Z_D(s)$；(b) 确定 $Z_N(s)$
+
+此阻抗渐近线的构造在 8.4 节处理，此例数值结果如图17.13所示。低频负载电阻主导阻抗，直流渐近线为 $R/D^2 = 12\,\Omega$。高 Q 情形下 $\|Z_D(j\omega)\|$ 在中频跟随输出电容渐近线（经有效匝比平方反射）。串联谐振在输出滤波器谐振频率 $f_0$ 处发生：
+
+$$f_0 = \frac{1}{2\pi\sqrt{LC}} \tag{17.22}$$
+
+图17.11a 所列元件值下谐振频率为 $f_0 = 1.6\text{ kHz}$。谐振频率 $f_0$ 处渐近线值由特性阻抗 $R_0$（归算到变压器一次侧）给出：
+
+$$\frac{R_0}{D^2} = \frac{1}{D^2}\sqrt{\frac{L}{C}} \tag{17.23}$$
+
+图17.11a 所给元件值下此式等于 4 Ω。Q 因子为
+
+$$Q = \frac{R}{R_0} = R\sqrt{\frac{C}{L}} \tag{17.24}$$
+
+此式给出数值 $Q = 3$。故谐振频率 1.6 kHz 处 $\|Z_D(j\omega)\|$ 值为 $(4\,\Omega)/3 = 1.33\,\Omega$。高频 $\|Z_D(j\omega)\|$ 跟随反射电感渐近线。
+
+![源页 p.690](../assets/page-snapshots/chapter-17/page-690.png)
+
+图17.13 构造 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$，降压变换器示例
+
+图17.12b 说明基于图17.11b 降压变换器模型确定 $Z_N$。此阻抗等于 $\hat{d}(s)$ 变化保持输出电压 $\hat{v}(s)$ 为零条件下变换器输入阻抗。图17.12b 说明 $Z_N(s)$ 表达式的推导。在变换器输入端口注入测试电流源 $\hat{i}_{test}(s)$。$Z_N(s)$ 可视为从 $\hat{i}_{test}(s)$ 到 $\hat{v}_{test}(s)$ 的传递函数：
+
+$$Z_N(s) = \left.\frac{\hat{v}_{test}(s)}{\hat{i}_{test}(s)}\right|_{\hat{v}\to\text{null} 0} \tag{17.25}$$
+
+置零条件 $\hat{v}(s) \to \text{null} 0$ 大幅简化图17.12b 电路分析。由于电压 $\hat{v}(s)$ 为零，电容和负载阻抗中电流也为零。这进一步意味着电感电流 $\hat{i}(s)$ 和变压器绕组电流为零，故电感两端电压也为零。最后，电压 $\hat{v}_s(s)$（等于输出电压加电感电压）为零。
+
+由于变压器模型绕组中电流为零，电流 $i_{test}(s)$ 等于独立源电流 $I\hat{d}(s)$：
+
+$$\hat{i}_{test}(s) = I\hat{d}(s) \tag{17.26}$$
+
+由于 $\hat{v}_s(s)$ 为零，施加到变压器模型二次侧的电压等于独立源电压 $-V_g\hat{d}(s)$。除以匝比 $D$ 得 $\hat{v}_{test}(s)$：
+
+$$\hat{v}_{test}(s) = -\frac{V_g\hat{d}(s)}{D} \tag{17.27}$$
+
+将式 (17.26) 和 (17.27) 代入式 (17.25) 得如下结果：
+
+$$Z_N(s) = \frac{\left(-\dfrac{V_g\hat{d}(s)}{D}\right)}{(I\hat{d}(s))} = -\frac{R}{D^2} \tag{17.28}$$
+
+已用稳态关系 $I = DV_g/R$ 简化上述结果。此方程与表17.1 所列表达式一致。$\|Z_N(j\omega)\|$ 波特图构造于图17.13；此图与 $\|Z_D(j\omega)\|$ 直流渐近线一致。$Z_N$ 为负，幅值等于反射负载电阻。
+
+![源页 p.691](../assets/page-snapshots/chapter-17/page-691.png)
+
+图17.14 确定滤波器输出阻抗 $Z_o(s)$
+
+接下来构造滤波器输出阻抗 $Z_o(s)$ 波特图。令独立源 $\hat{v}_g(s)$ 为零时输入滤波器网络简化为图17.14 电路。可见 $Z_o(s)$ 为电感 $L_f$ 和电容 $C_f$ 的并联组合：
+
+$$Z_o(s) = sL_f\,\|\,\frac{1}{sC_f} \tag{17.29}$$
+
+此并联谐振电路波特图的构造在 8.3.4 节讨论。如图17.15所示，幅值 $\|Z_o(j\omega)\|$ 低频由电感阻抗主导，高频由电容阻抗主导。电感和电容渐近线在滤波器谐振频率处相交：
+
+![源页 p.691](../assets/page-snapshots/chapter-17/page-691.png)
+
+图17.15 图17.14 输入滤波器输出阻抗幅值图。由于滤波器无阻尼，Q 因子非常大
+
+$$f_f = \frac{1}{2\pi\sqrt{L_f C_f}} \tag{17.30}$$
+
+给定值下输入滤波器谐振频率为 $f_f = 400\text{ Hz}$。此滤波器特性阻抗
+
+$$R_{0f} = \sqrt{\frac{L_f}{C_f}} \tag{17.31}$$
+
+等于 0.84 Ω。由于输入滤波器无阻尼，其 Q 因子理想为无穷。实际中电感损耗和电容等效串联电阻等寄生元件限制 $Q_f$ 值。但谐振频率 $f_f$ 附近 $\|Z_o(j\omega)\|$ 仍非常大。
+
+![源页 p.692](../assets/page-snapshots/chapter-17/page-692.png)
+
+图17.16 图17.13 阻抗设计准则 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$，叠加滤波器输出阻抗 $\|Z_o(j\omega)\|$。式 (17.19) 设计准则在输入滤波器谐振处不满足
+
+滤波器输出阻抗 $\|Z_o(j\omega)\|$ 波特图叠加于图17.13 的 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 图上，对应图17.11a 所列元件值，如图17.16所示。现可确定阻抗不等式 (17.19) 是否满足。注意图17.16 的面向设计性质：由于每个阻抗渐近线给出解析表达式，设计者可轻易调整元件值满足式 (17.19)。例如应选 $L_f$ 和 $C_f$ 值确保 $\|Z_o(j\omega)\|$ 渐近线低于 $R/D^2$ 最坏值及 $\|Z_D(j\omega)\|$ 其他渐近线。
+
+还应明显选择输入和输出滤波器谐振频率 $f_0$ 和 $f_f$ 相等是不好的主意，因为这样更难满足式 (17.19) 不等式。而是应使 $f_0$ 和 $f_f$ 数值上分得开。
+
+由于输入滤波器无阻尼，输入滤波器谐振频率 $f_f$ 附近不可能满足阻抗不等式 (17.19)。无论元件值如何选择，输入滤波器在 $f_f$ 附近改变控制-输出传递函数 $G_{vd}(s)$。图17.17 和17.18 分别说明所得校正因子 [式 (17.18)] 和修改后控制-输出传递函数 [式 (17.4)]。低于
+
+![源页 p.693](../assets/page-snapshots/chapter-17/page-693.png)
+
+图17.17 图17.11 降压变换器示例校正因子 [式 (17.18)] 的幅值（上图）和相位（下图）
+
+![源页 p.693](../assets/page-snapshots/chapter-17/page-693.png)
+
+图17.18 无阻尼输入滤波器对降压变换器示例控制-输出传递函数的影响。虚线：无输入滤波器。实线：有无阻尼输入滤波器
+
+输入滤波器谐振频率的频率处阻抗不等式 (17.19) 充分满足。校正因子趋向值 $1\angle 0°$，控制-输出传递函数 $G_{vd}(s)$ 基本不变。谐振频率 $f_f$ 附近校正因子含一对复极点和一对右半平面复零点。这些在校正因子幅值图中引起"毛刺"，对校正因子相位贡献 360° 滞后。$G_{vd}(s)$ 波特图中可见毛刺及其相位滞后。高频校正因子趋向约 $1\angle -360°$；故 $G_{vd}$ 高频幅值不变。但当校正因子贡献的 −360° 加到原始 $G_{vd}(s)$ 两极点高频贡献的 −180° 时，得 −540° 高频相位渐近线。若变换器反馈环路穿越频率置于接近或大于输入滤波器谐振频率 $f_f$，则负相位裕度不可避免。这解释了为何加入输入滤波器常导致开关稳压器不稳定和振荡。
+
+### 17.3.2 阻尼输入滤波器
+
+让我们阻尼输入滤波器谐振使阻抗不等式 (17.19) 在所有频率满足。
+
+![源页 p.694](../assets/page-snapshots/chapter-17/page-694.png)
+
+图17.19 阻尼输入滤波器的两种尝试：(a) 在 $C_f$ 两端加阻尼电阻 $R_f$；(b) 与 $L_f$ 并联加阻尼电阻 $R_f$
+
+阻尼滤波器的一种方法是在电容 $C_f$ 两端加电阻 $R_f$，如图17.19a所示。此网络输出阻抗与 8.3.4 节分析的并联谐振阻抗相同。输出阻抗最大值出现在谐振频率 $f_f$ 处，值等于电阻 $R_f$。故为满足阻抗不等式 (17.19)，应选 $R_f$ 远小于 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 渐近线。条件 $R_f \ll \|Z_N(j\omega)\|$ 可表示为
+
+$$R_f \ll \frac{R}{D^2} \tag{17.32}$$
+
+不幸的是这引出新问题：$R_f$ 中的功耗。直流输入电压 $V_g$ 施加到电阻 $R_f$，故 $R_f$ 耗散功率 $V_g^2/R_f$。式 (17.32) 意味着此功率损耗大于负载功率！故图17.19a 电路不是实际解决方案。
+
+解决功耗问题的一种方法是将 $R_f$ 与 $L_f$ 并联，如图17.19b所示。图17.19b 中 $R_f$ 值也按式 (17.32) 选择。由于电感 $L_f$ 两端直流电压为零，电阻 $R_f$ 中现在无直流功耗。此电路的问题是传递函数含高频零点。加入 $R_f$ 使高频渐近线斜率从 −40 dB/十倍频程退化到 −20 dB/十倍频程。图17.19b 电路有效为单极点 R-C 低通滤波器，电感 $L_f$ 不提供衰减。
+
+![源页 p.695](../assets/page-snapshots/chapter-17/page-695.png)
+
+图17.20 阻尼输入滤波器的实际方法，含阻尼电阻 $R_f$ 和隔直电容 $C_b$：(a) 电路；(b) 输出阻抗渐近线
+
+图17.20 [152] 给出一个实际解决方案。隔直电容 $C_b$ 与电阻 $R_f$ 串联。由于无直流电流流过电阻 $R_f$，其直流功耗消除。选 $C_b$ 值很大使滤波器谐振频率 $f_f$ 处 $R_f$-$C_b$ 支路阻抗由电阻 $R_f$ 主导。$C_b$ 足够大时此网络输出阻抗简化为图17.19 滤波器输出阻抗。大 $C_b$ 情形阻抗渐近线如图17.20b所示。
+
+图17.13 中 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 低频渐近线等于 $R/D^2 = 12\,\Omega$。故选 $R_f = 1\,\Omega$ 很好满足阻抗不等式 (17.19)。选 $C_b = 4700\,\mu\text{F}$ 导致 $1/(2\pi f_f C_b) = 0.084\,\Omega$，远小于 $R_f$。所得 $\|Z_o(j\omega)\|$ 与 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 比较如图17.21所示。可见所选 $R_f$ 和 $C_b$ 值导致充分阻尼，阻抗不等式 (17.19) 现充分满足。
+
+![源页 p.695](../assets/page-snapshots/chapter-17/page-695.png)
+
+图17.21 图17.13 阻抗设计准则 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$，叠加图17.20 阻尼滤波器输出阻抗 $\|Z_o(j\omega)\|$。式 (17.19) 设计准则充分满足
+
+![源页 p.696](../assets/page-snapshots/chapter-17/page-696.png)
+
+图17.22 阻尼输入滤波器对降压变换器示例控制-输出传递函数的影响。虚线：无输入滤波器。实线：有阻尼输入滤波器
+
+图17.22 说明加入阻尼输入滤波器如何修改控制-输出传递函数幅值和相位。$G_{vd}(s)$ 现几乎无变化，预期变换器反馈环路性能不受输入滤波器影响。
+
+## 17.4 阻尼输入滤波器设计
+
+如上一节示例所示，输入滤波器设计不仅要求滤波器阻抗渐近线满足阻抗不等式，还要求滤波器充分阻尼。输入滤波器阻尼也是防止 $v_g(t)$ 中暂态和扰动激发滤波器谐振所必需。其他设计约束包括获得所需滤波衰减和最小化储能元件尺寸。虽然大量经典滤波器设计技巧广为人知，但这些技巧不涉及限制最大输出阻抗和阻尼滤波器谐振的问题。
+
+17.3.2 节中用于阻尼输入滤波器的隔直电容 $C_b$ 值为 $C_f$ 的十倍，故其尺寸和成本是实际关注点。输入滤波器设计优化因此包括最小化阻尼网络中所用元件尺寸。
+
+![源页 p.697](../assets/page-snapshots/chapter-17/page-697.png)
+
+图17.23 阻尼单节输入滤波器的若干实际方法：(a) $R_f$-$C_b$ 并联阻尼；(b) $R_f$-$L_b$ 并联阻尼；(c) $R_f$-$L_b$ 串联阻尼
+
+图17.23 [152, 153, 158] 给出阻尼单节 L-C 低通滤波器的若干实际方法。图17.23a 含上一节考虑的 $R_f$-$C_b$ 阻尼支路。图17.23b 中阻尼电阻 $R_f$ 与滤波电感 $L_f$ 并联，高频阻塞电感 $L_b$ 与 $R_f$ 串联。电感 $L_b$ 使滤波器传递函数高频以 −40 dB/十倍频程斜率滚降。图17.23c 中阻尼电阻 $R_f$ 与滤波电感 $L_f$ 串联，直流电流被电感 $L_b$ 旁路。每种情形希望在最小化 $C_b$ 或 $L_b$ 值的同时获得给定阻尼量（即使滤波器输出阻抗峰值不大于满足阻抗不等式 (17.19) 的给定值）。此问题可用交替但等价的形式表述：对给定 $C_b$ 或 $L_b$ 选择求使峰值输出阻抗最小的 $R_f$ 值 [152]。解
+
+对此优化问题（对应图17.23 三个滤波网络）汇总于本节。每种情形 $f_f$ 和 $R_{0f}$ 由式 (17.30) 和 (17.31) 定义。
+
+考虑图17.23b 滤波器，$L_f$、$C_f$、$L_b$ 固定。图17.24 含若干阻尼电阻 $R_f$ 值的滤波器输出阻抗 $\|Z_0(j\omega)\|$ 波特图。$R_f = \infty$ 极限情形电路简化为 $Q_f$ 无穷的原始无阻尼滤波器。$R_f = 0$ 极限情形滤波器也无阻尼，但谐振频率增大因为 $L_b$ 与 $L_f$ 并联。此两极值之间必存在使峰值滤波器输出阻抗最小的 $R_f$ 最优值。可证 [152, 158] 所有幅值图必过公共点，故最优在此点取峰。此事实用于导出最优阻尼 L-C 滤波节设计方程。
+
+### 17.4.1 $R_f$-$C_b$ 并联阻尼
+
+图17.23a 和17.3.2 节滤波网络优化的描述见 [152]。此滤波器高频衰减不受 $C_b$ 选择影响，高频渐近线与原始无阻尼滤波器相同。此滤波器阻尼元件设计的唯一折中是隔直电容 $C_b$ 尺寸与所达阻尼。

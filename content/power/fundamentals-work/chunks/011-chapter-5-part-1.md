@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第5章part 1 - 5 The Discontinuous Conduction Mode"
+title: "第5章 断续导通模式（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,926 +18,486 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第5章part 1 - 5 The Discontinuous Conduction Mode
+# 第5章 断续导通模式（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 149-168  
-> Chunk ID: `chapter-5-part-1`
+当直流-直流变换器的理想开关用电流单向和/或电压单向半导体开关实现时，可能出现一种或多种新的工作模式，称为断续导通模式（DCM）。当电感电流或电容电压的开关纹波足够大，致使所施加的开关电流或电压极性反转，从而使用半导体器件实现开关时所依据的电流单向或电压单向假设被破坏时，便产生断续导通模式。DCM 常见于直流-直流变换器和整流器中，有时也见于逆变器或其他含双象限开关的变换器。
 
-## 主干提取
+断续导通模式通常出现在含电流单向开关的变换器中，在轻载下电感电流纹波较大时发生。由于通常要求变换器在负载断开时仍能工作，故 DCM 常被遇到。实际上，某些变换器专门设计为在所有负载下均工作于 DCM。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+变换器的特性在断续导通模式下发生根本变化。变换比 $M$ 变得依赖负载，输出阻抗增大。负载断开时可能失去对输出的控制。在后续章节将看到，变换器动态特性也会发生显著改变。
 
-## 术语表
+本章解释断续导通模式的起源，并推导模式边界。还描述了求解变换器波形和输出电压的方法。电感伏秒平衡和电容电荷平衡原理在稳态下无论工作模式如何都必须成立。但应用小纹波近似时须加小心，因为电感电流纹波（或某一电感电流、电容电压纹波）并不小。
 
-| English term | 中文译名 | Notes |
+以降压和升压变换器为例求解。基本降压、升压和升降压变换器的特性以表格形式总结。
+
+## 5.1 断续导通模式的起源与模式边界
+
+下面考察随负载功率降低，电感和开关电流波形如何变化。以降压变换器（图5.1）为简单例子。图5.2为连续导通
+
+图5.1 降压变换器示例
+
+![源页 p.150](../assets/page-snapshots/chapter-5/page-150.png)
+
+模式下的电感电流 $i_L(t)$ 和二极管电流 $i_D(t)$ 波形。如第2章所述，电感电流波形含直流分量 $I$ 和峰幅为 $\Delta i_L$ 的开关纹波。在第二子区间，二极管电流与电感电流相同。第二子区间内二极管电流的最小值为 $(I - \Delta i_L)$；由于二极管是单象限开关，连续导通模式下工作要求此电流保持为正。如第2章所示，电感电流直流分量 $I$ 等于负载电流：
+
+$$I = \frac{V}{R} \tag{5.1}$$
+
+图5.2 连续导通模式下降压变换器的波形：(a) 电感电流 $i_L(t)$，(b) 二极管电流 $i_D(t)$
+
+因为无直流电流流过电容 $C$。可见 $I$ 依赖负载电阻 $R$。开关纹波峰幅为
+
+![源页 p.151](../assets/page-snapshots/chapter-5/page-151.png)
+
+图5.3 连续与断续导通模式边界处降压变换器的波形：(a) 电感电流 $i_L(t)$，(b) 二极管电流 $i_D(t)$
+
+$$\Delta i_L = \frac{(V_g - V)}{2L}DT_s = \frac{V_g D D' T_s}{2L} \tag{5.2}$$
+
+纹波幅值取决于所施加电压 $(V_g - V)$、电感 $L$ 和晶体管导通时间 $DT_s$。但不依赖负载电阻 $R$。电感电流纹波幅值随所施加电压变化，而非随所施加电流变化。
+
+现假定负载电阻 $R$ 增大，使直流负载电流减小。电感电流直流分量 $I$ 随之减小，但纹波幅值 $\Delta i_L$ 保持不变。若继续增大 $R$，最终达到 $I = \Delta i_L$ 的点，如图5.3所示。可见电感电流 $i_L(t)$ 和二极管电流 $i_D(t)$ 在开关周期末均同时为零。然而负载电流为正且非零。
+
+若继续增大负载电阻 $R$ 会怎样？二极管电流不能为负，故二极管必须在开关周期结束前变为反偏。如图5.4所示，每个开关周期 $T_s$ 内现含三个子区间。在长度为 $D_1 T_s$ 的第一子区间内晶体管导通，在长度为 $D_2 T_s$ 的第二子区间内二极管导通。第二子区间末二极管电流到零，在开关周期剩余时间内晶体管和二极管均不导通。变换器工作于断续导通模式。
+
+图5.3提示了一种求连续与断续导通模式之间边界的方法。可见对该降压变换器例子，只要 $I > \Delta i_L$，二极管电流在整个 $DT_s < t < T_s$ 区间内均为正。故连续和断续导通模式的工作条件为
+
+![源页 p.152](../assets/page-snapshots/chapter-5/page-152.png)
+
+图5.4 断续导通模式下降压变换器的波形：(a) 电感电流 $i_L(t)$，(b) 二极管电流 $i_D(t)$
+
+$$I > \Delta i_L \quad \text{CCM} \tag{5.3}$$
+
+$$I < \Delta i_L \quad \text{DCM}$$
+
+其中 $I$ 和 $\Delta i_L$ 假定变换器工作于连续导通模式求得。将式 (5.1) 和式 (5.2) 代入式 (5.3) 得断续导通模式工作条件：
+
+$$\frac{DV_g}{R} < \frac{DD' T_s V_g}{2L} \tag{5.4}$$
+
+化简得
+
+$$\frac{2L}{RT_s} < D' \tag{5.5}$$
+
+也可表示为
+
+$$K < K_{crit}(D) \quad \text{DCM} \tag{5.6}$$
+
+其中
+
+$$K = \frac{2L}{RT_s} \quad \text{且} \quad K_{crit}(D) = D'$$
+
+![源页 p.153](../assets/page-snapshots/chapter-5/page-153.png)
+
+图5.5 降压变换器 $K_{crit}(D)$ 对 $D$。$K > K_{crit}$ 时变换器工作于 CCM，$K < K_{crit}$ 时工作于 DCM
+
+无量纲参数 $K$ 是变换器工作于断续导通模式倾向的量度。$K$ 值大导致连续模式工作，$K$ 值小则对某些占空比取值导致断续模式。模式边界处的 $K$ 临界值 $K_{crit}(D)$ 是占空比的函数，对降压变换器等于 $D'$。
+
+$K_{crit}(D)$ 对占空比 $D$ 的曲线如图5.5所示。图中也标出一个任选的 $K$ 值。对所示值，可见变换器在低占空比时工作于 DCM，在高占空比时工作于 CCM。图5.6展示较重载时的情况。负载电阻 $R$ 减小，使 $K$ 增大。若 $K$ 大于一，则变换器在所有占空比下均工作于连续导通模式。
+
+用负载电阻 $R$ 而非无量纲参数 $K$ 表示模式边界更为自然。式 (5.6) 可重排以直接显示模式边界对负载电阻的依赖：
+
+$$R < R_{crit}(D) \quad \text{CCM} \tag{5.7}$$
+
+$$R > R_{crit}(D) \quad \text{DCM}$$
+
+其中
+
+$$R_{crit}(D) = \frac{2L}{D' T_s}$$
+
+故当负载电阻 $R$ 超过临界值 $R_{crit}$ 时变换器进入断续导通模式。此临界值取决于电感、开关周期和占空比。注意，由于 $D' \le 1$，$R_{crit}$ 的最小值为 $2L/T_s$。因此，若 $R < 2L/T_s$，则变换器在所有占空比下均工作于连续导通模式。
+
+图5.6 $K$ 较大值时 $K$ 与 $K_{crit}(D)$ 的比较。因 $K > 1$，变换器在所有 $D$ 下均工作于 CCM
+
+![源页 p.154](../assets/page-snapshots/chapter-5/page-154.png)
+
+这些结果可用于非纯线性电阻的负载。定义有效负载电阻 $R$ 为直流输出电压与直流负载电流之比：$R = V/I$。然后将此有效负载电阻用于上述方程。
+
+表5.1 降压、升压和升降压变换器的 CCM-DCM 模式边界
+
+| 变换器 | $K_{crit}(D)$，$0 \le D \le 1$ 最大值 | $R_{crit}(D)$，$0 \le D \le 1$ 最小值 |
 |---|---|---|
-| TODO | TODO | TODO |
+| 降压 | $(1 - D)$，最大 $1$ | $\dfrac{2L}{(1 - D)T_s}$，$\dfrac{2L}{T_s}$ |
+| 升压 | $D(1 - D)^2$，$\dfrac{4}{27}$ | $\dfrac{2L}{D(1 - D)^2 T_s}$，$\dfrac{27}{2}\dfrac{L}{T_s}$ |
+| 升降压 | $(1 - D)^2$，$1$ | $\dfrac{2L}{(1 - D)^2 T_s}$，$\dfrac{2L}{T_s}$ |
 
-## 中文翻译
+对其他变换器可做类似的模式边界分析。升压变换器在 5.3 节分析，升降压变换器的分析留作习题。三种基本直流-直流变换器的结果列于表5.1。在每种情况下，无量纲参数 $K$ 定义为 $K = 2L/RT_s$，模式边界由下式给出
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$K > K_{crit}(D) \text{ 或 } R < R_{crit}(D) \quad \text{CCM} \tag{5.8}$$
 
-## 英文原文
+$$K < K_{crit}(D) \text{ 或 } R > R_{crit}(D) \quad \text{DCM}$$
 
-```text
-5
-The Discontinuous Conduction Mode
-When the ideal switches of a dc–dc converter are implemented using current-unidirectional
-and/or voltage-unidirectional semiconductor switches, one or more new modes of operation
-known as discontinuous conduction modes (DCM) can occur. The discontinuous conduction
-mode arises when the switching ripple in an inductor current or capacitor voltage is large enough
-to cause the polarity of the applied switch current or voltage to reverse, such that the current-
-or voltage-unidirectional assumptions made in realizing the switch with semiconductor devices
-are violated. The DCM is commonly observed in dc–dc converters and rectiﬁers, and can also
-sometimes occur in inverters or in other converters containing two-quadrant switches.
-The discontinuous conduction mode typically occurs with large inductor current ripple in a
-converter operating at light load and containing current-unidirectional switches. Since it is usu-
-ally required that converters operate with their loads removed, DCM is frequently encountered.
-Indeed, some converters are purposely designed to operate in DCM for all loads.
-The properties of converters change radically in the discontinuous conduction mode. The
-conversion ratio M becomes load-dependent, and the output impedance is increased. Control of
-the output may be lost when the load is removed. We will see in a later chapter that the converter
-dynamics are also signiﬁcantly altered.
-In this chapter, the origins of the discontinuous conduction mode are explained, and the
-mode boundary is derived. Techniques for solution of the converter waveforms and output volt-
-age are also described. The principles of inductor volt-second balance and capacitor charge
-balance must always be true in steady state, regardless of the operating mode. However, appli-
-cation of the small- ripple approximation requires some care, since the inductor current ripple
-(or one of the inductor current or capacitor voltage ripples) is not small.
-Buck and boost converters are solved as examples. Characteristics of the basic buck, boost,
-and buck–boost converters are summarized in tabular form.
-5.1 Origin of the Discontinuous Conduction Mode, and Mode Boundary
-Let us consider how the inductor and switch current waveforms change as the load power is
-reduced. Let us use the buck converter (Fig. 5.1) as a simple example. The inductor current
-iL(t) and diode current iD(t) waveforms are sketched in Fig. 5.2 for the continuous conduction
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_5
-135
+## 5.2 变换比 $M(D, K)$ 的分析
 
-136 5 The Discontinuous Conduction Mode
-Fig. 5.1 Buck converter
-example +
-Q1
-L
-CR
-+
-VD1Vg
-iL(t)
-iD(t)
-mode. As described in Chap. 2, the inductor current waveform contains a dc component I,
-plus switching ripple of peak amplitude ΔiL. During the second subinterval, the diode current
-is identical to the inductor current. The minimum diode current during the second subinterval
-is equal to ( I−ΔiL); since the diode is a single-quadrant switch, operation in the continuous
-conduction mode requires that this current remain positive. As shown in Chap. 2, the inductor
-current dc component I is equal to the load current:
-I= V
-R (5.1)
-(a) iL(t)
-t
-iL
-I
-0D T s Ts
-Conducting
-devices: Q1 D1 Q1
-(b) iD(t)
-t0 DTs Ts
-iL
-I
-Fig. 5.2 Buck converter waveforms in the continuous conduction mode: ( a) inductor current iL(t),
-(b) diode current iD(t)
-since no dc current ﬂows through capacitorC. It can be seen thatI depends on the load resistance
-R. The switching ripple peak amplitude is
+经过若干修改，第2章为连续导通模式稳态分析所开发的同样技巧和近似也可应用于断续导通模式。
 
-5.1 Origin of the Discontinuous Conduction Mode, and Mode Boundary 137
-(a) iL(t)
-t0 DTs Ts
-Conducting
-devices: Q1 D1 Q1
-iL
-I
-(b) iD(t)
-t0 DTs Ts
-I iL
-Fig. 5.3 Buck converter waveforms at the boundary between the continuous and discontinuous conduc-
-tion modes: (a) inductor current iL(t), (b) diode current iD(t)
-ΔiL= (Vg−V)
-2L DTs= VgDD′Ts
-2L (5.2)
-The ripple magnitude depends on the applied voltage (Vg−V), on the inductance L, and on the
-transistor conduction time DTs. But it does not depend on the load resistance R. The inductor
-current ripple magnitude varies with the applied voltages rather than the applied currents.
-Suppose now that the load resistance R is increased, so that the dc load current is decreased.
-The dc component of inductor current I will then decrease, but the ripple magnitude ΔiL will
-remain unchanged. If we continue to increase R, eventually the point is reached where I=ΔiL,
-illustrated in Fig.5.3. It can be seen that the inductor currentiL(t) and the diode current iD(t)a r e
-both zero at the end of the switching period. Yet the load current is positive and nonzero.
-What happens if we continue to increase the load resistance R? The diode current cannot
-be negative; therefore, the diode must become reverse-biased before the end of the switching
-period. As illustrated in Fig. 5.4, there are now three subintervals during each switching period
-T
-s. During the ﬁrst subinterval of length D1Ts the transistor conducts, and the diode conducts
-during the second subinterval of length D2Ts. At the end of the second subinterval the diode
-current reaches zero, and for the remainder of the switching period neither the transistor nor the
-diode conduct. The converter operates in the discontinuous conduction mode.
-Figure 5.3 suggests a way to ﬁnd the boundary between the continuous and discontinuous
-conduction modes. It can be seen that, for this buck converter example, the diode current is
-positive over the entire interval DTs < t< Ts provided that I>ΔiL. Hence, the conditions for
-operation in the continuous and discontinuous conduction modes are
+(a) 电感伏秒平衡。施加于电感的电压的直流分量必须为零：
 
-138 5 The Discontinuous Conduction Mode
-(a) iL(t)
-t0 DTs Ts
-Conducting
-devices: Q1 D1 Q1
-I
-X
-D1Ts D2Ts D3Ts
-(b) iD(t)
-t0 DTs Ts
-D2Ts
-Fig. 5.4 Buck converter waveforms in the discontinuous conduction mode: (a) inductor current iL(t), (b)
-diode current iD(t)
-I>ΔiL for CCM (5.3)
-I<ΔiL for DCM
-where I andΔiL are found assuming that the converter operates in the continuous conduction
-mode. Insertion of Eqs. (5.1) and (5.2) into Eq. (5.3) yields the following condition for operation
-in the discontinuous conduction mode:
-DVg
-R < DD′TsVg
-2L (5.4)
-Simpliﬁcation leads to
-2L
-RTs
-< D′ (5.5)
-This can also be expressed
-K< Kcrit(D) for DCM (5.6)
-where
-K= 2L
-RTs
-and Kcrit(D)= D′
+$$\langle v_L \rangle = \frac{1}{T_s}\int_0^{T_s} v_L(t)\,dt = 0 \tag{5.9}$$
 
-5.1 Origin of the Discontinuous Conduction Mode, and Mode Boundary 139
-Fig. 5.5 Buck converter Kcrit(D)v s . D.T h e
-converter operates in CCM when K > Kcrit,
-and in DCM when K< Kcrit Kcrit(D) =1 D
-0 D1
-0
-1
-2
-K = 2L/RTs
-K < Kcrit:
-DCM
-K > Kcrit:
-CCM
-The dimensionless parameter K is a measure of the tendency of a converter to operate in the
-discontinuous conduction mode. Large values of K lead to continuous mode operation, while
-small values lead to the discontinuous mode for some values of duty cycle. The critical value of
-K at the boundary between modes, Kcrit(D), is a function of duty cycle, and is equal to D′ for
-the buck converter.
-The critical value Kcrit(D) is plotted vs. duty cycle D in Fig. 5.5. An arbitrary choice of K
-is also illustrated. For the values shown, it can be seen that the converter operates in DCM at
-low duty cycle, and in CCM at high duty cycle. Figure5.6 illustrates what happens with heavier
-loading. The load resistance R is reduced in value, such that K is larger. If K is greater than one,
-then the converter operates in the continuous conduction mode for all duty cycles.
-It is natural to express the mode boundary in terms of the load resistance R, rather than the
-dimensionless parameter K. Equation (5.6) can be rearranged to directly expose the dependence
-of the mode boundary on the load resistance:
-R< Rcrit(D) for CCM (5.7)
-R> Rcrit(D)f o rD C M
-where
-Rcrit(D)= 2L
-D′Ts
-So the converter enters the discontinuous conduction mode when the load resistance R exceeds
-the critical value Rcrit. This critical value depends on the inductance, the switching period, and
-the duty cycle. Note that, since D′ ≤1, the minimum value of Rcrit is 2 L/Ts. Therefore, if
-R < 2L/Ts, then the converter will operate in the continuous conduction mode for all duty
-cycles.
-Fig. 5.6 Comparison of K with Kcrit(D), for a
-larger value of K.S i n c eK > 1, the converter
-operates in CCM for all D Kcrit(D)=1 D
-0 D1
-0
-1
-2
-K = 2L/RTs
-K > Kcrit:
-CCM
+(b) 电容电荷平衡。施加于电容的电流的直流分量必须为零：
 
-140 5 The Discontinuous Conduction Mode
-These results can be applied to loads that are not pure linear resistors. An e ﬀective load
-resistance R is deﬁned as the ratio of the dc output voltage to the dc load current: R= V/I.T h i s
-eﬀective load resistance is then used in the above equations.
-Table 5.1 CCM-DCM mode boundaries for the buck, boost, and buck–boost converters
-Converter Kcrit(D)m a x
-0≤D≤1
-(Kcrit) Rcrit(D)m i n
-0≤D≤1
-(Rcrit)
-Buck (1 −D)1 2L
-(1−D)Ts
-2 L
-Ts
-Boost D(1−D)2 4
-27
-2L
-D(1−D)2Ts
-27
-2
-L
-Ts
-Buck–boost (1 −D)2 1 2L
-(1−D)2Ts
-2 L
-Ts
-A similar mode boundary analysis can be performed for other converters. The boost con-
-verter is analyzed in Sect. 5.3, while analysis of the buck–boost converter is left as a homework
-problem. The results are listed in Table 5.1, for the three basic dc–dc converters. In each case,
-the dimensionless parameter K is deﬁned as K= 2L/RTs, and the mode boundary is given by
-K> Kcrit(D)o r R< Rcrit(D) for CCM (5.8)
-K< Kcrit(D)o r R> Rcrit(D)f o rD C M
-5.2 Analysis of the Conversion Ratio M(D, K)
-With a few modiﬁcations, the same techniques and approximations developed in Chap.2 for the
-steady-state analysis of the continuous conduction mode may be applied to the discontinuous
-conduction mode.
-(a) Inductor volt-second balance. The dc component of the voltage applied to an inductor must
-be zero:
-⟨vL⟩= 1
-Ts
-∫ Ts
-0
-vL(t)dt= 0 (5.9)
-(b) Capacitor charge balance. The dc component of current applied to a capacitor must be zero:
-⟨iC⟩= 1
-Ts
-∫ Ts
-0
-iC(t)dt= 0 (5.10)
-These principles must be true for any circuit that operates in steady state, regardless of the
-operating mode.
-(c) The linear-ripple approximation. Care must be used when employing the linear-ripple ap-
-proximation in the discontinuous conduction mode.
+$$\langle i_C \rangle = \frac{1}{T_s}\int_0^{T_s} i_C(t)\,dt = 0 \tag{5.10}$$
 
-5.2 Analysis of the Conversion Ratio M(D, K) 141
-(i) Output capacitor voltage ripple . Regardless of the operating mode, it is required that
-the output voltage ripple be small. Hence, for a well-designed converter operating in
-the discontinuous conduction mode, the peak output voltage rippleΔv should be much
-smaller in magnitude than the output voltage dc component V. So the linear-ripple
-approximation applies to the output voltage waveform:
-v(t)≈V (5.11)
-(ii) Inductor current ripple . By deﬁnition, the inductor current ripple is not small in the
-discontinuous conduction mode. Indeed, Eq. (5.3) states that the inductor current ripple
-ΔiL is greater in magnitude than the dc componentI. So neglecting the inductor current
-ripple leads to inaccurate results. In other converters, several inductor currents, or a
-capacitor voltage, may contain large switching ripple which should not be neglected.
-The equations necessary for solution of the voltage conversion ratio can be obtained by invoking
-volt-second balance for each inductor voltage, and charge balance for each capacitor current, in
-the network. The switching ripple is ignored in the output capacitor voltage, but the inductor
-current switching ripple must be accounted for in this buck converter example.
-Let us analyze the conversion ratio M= V/V
-g of the buck converter of Eq. (5.1). When the
-transistor conducts, for 0< t< D1Ts, the converter circuit reduces to the network of Fig. 5.7a.
-The inductor voltage and capacitor current are given by
-vL(t)= Vg−v(t) (5.12)
-iC(t)= iL(t)−v(t)
-R
-By making the linear-ripple approximation, to ignore the output capacitor voltage ripple, one
-obtains
-vL(t)≈Vg−V (5.13)
-iC(t)≈iL(t)−V
-R
-Note that the inductor current ripple has not been ignored.
-The diode conducts during subinterval 2, D1Ts< t< (D1+ D2)Ts. The circuit then reduces
-to Fig. 5.7b. The inductor voltage and capacitor current are given by
-vL(t)=−v(t) (5.14)
-iC(t)= iL(t)−v(t)
-R
-By neglecting the ripple in the output capacitor voltage, one obtains
-vL(t)≈−V (5.15)
-iC(t)≈iL(t)−V
-R
-The diode becomes reverse-biased at time t= (D1+ D2)Ts. The circuit is then as shown in
-Fig. 5.7c, with both transistor and diode in the o ﬀstate. The inductor voltage and inductor
+这些原理对任何稳态工作的电路都必须成立，无论工作模式如何。
 
-142 5 The Discontinuous Conduction Mode
-Fig. 5.7 Buck converter circuits for op-
-eration in the discontinuous conduction
-mode: (a) during subinterval 1, (b) during
-subinterval 2, (c) during subinterval 3
-(a)
-+Vg
-L
-CR
-+
-v(t)
-iC(t)+ vL(t)
-iL(t)
-(b)
-+Vg
-L
-CR
-+
-v(t)
-iC(t)+ vL(t)
-iL(t)
-(c)
-+Vg
-L
-CR
-+
-v(t)
-iC(t)+ vL(t)
-iL(t)
-current are both zero for the remainder of the switching period ( D1+ D2)Ts < t< Ts.T h e
-network equations for the third subinterval are given by
-vL= 0, iL= 0 (5.16)
-iC(t)= iL(t)−v(t)
-R
-Note that the inductor current is constant and equal to zero during the third subinterval, and
-therefore the inductor voltage must also be zero in accordance with the relationship vL(t)=
-Ld iL(t)/dt. In practice, parasitic ringing is observed during this subinterval. This ringing occurs
-owing to the resonant circuit formed by the inductor and the semiconductor device capacitances,
-and typically has little inﬂuence on the converter steady-state properties. Again ignoring the
-output capacitor voltage ripple, one obtains
-vL(t)= 0 (5.17)
-iC(t)=−V
-R
-Equations (5.13), (5.15), and (5.17) can now be used to plot the inductor voltage waveform as
-in Fig. 5.8. According to the principle of inductor volt-second balance, the dc component of this
-waveform must be zero. Since the waveform is rectangular, its dc component (or average value)
+(c) 线性纹波近似。在断续导通模式下应用线性纹波近似时须加小心。
 
-5.2 Analysis of the Conversion Ratio M(D, K) 143
-Fig. 5.8 Inductor voltage waveform
-vL(t), buck converter operating in discon-
-tinuous conduction mode
-vL(t)
-0
-Ts t
-D1Ts D2Ts D3Ts
-Vg
-is easily evaluated:
-⟨vL(t)⟩= D1(Vg−V)+ D2(−V)+ D3(0)= 0 (5.18)
-Solution for the output voltage yields
-V= Vg
-D1
-D1+ D2
-(5.19)
-The transistor duty cycle D (which coincides with the subinterval 1 duty cycle D1) is the con-
-trol input to the converter, and can be considered known. But the subinterval 2 duty cycle D2
-is unknown, and hence another equation is needed to eliminate D2 and solve for the output
-voltage V.
-The second equation is obtained by use of capacitor charge balance. The connection of the
-capacitor to its adjacent components is detailed in Fig.5.9. The node equation of this network is
-iL(t)= iC(t)+ v(t)
-R (5.20)
-By capacitor charge balance, the dc component of capacitor current must be zero:
-⟨iC⟩= 0 (5.21)
-Therefore, the dc load current must be supplied entirely by the other elements connected to the
-node. In particular, for the case of the buck converter, the dc component of inductor current
-must be equal to the dc load current:
-⟨iL⟩= V
-R (5.22)
-So we need to compute the dc component of the inductor current.
-Since the inductor current ripple is not small, determination of the inductor current dc com-
-ponent requires that we examine the current waveform in detail. The inductor current waveform
-is sketched in Fig. 5.10. The current begins the switching period at zero, and increases during
-Fig. 5.9 Connection of the output capacitor to adja-
-cent components in the buck converter
-L
-CR
-+
-v(t)
-iC(t)
-iL(t) v(t)/R
+![源页 p.155](../assets/page-snapshots/chapter-5/page-155.png)
 
-144 5 The Discontinuous Conduction Mode
-Fig. 5.10 Inductor current
-waveform iL(t), buck converter
-operating in discontinuous
-conduction mode
-iL(t)
-t0D T s Ts
-D1Ts D2Ts D3Ts
-iL = I
-ipkVg V
-L
-V
-L
-the ﬁrst subinterval with a constant slope, given by the applied voltage divided by the induc-
-tance. The peak inductor current ipk is equal to the constant slope, multiplied by the length of
-the ﬁrst subinterval:
-iL(D1Ts)= ipk= Vg−V
-L D1Ts (5.23)
-The dc component of the inductor current is again the average value:
-⟨iL⟩= 1
-Ts
-∫ Ts
-0
-iL(t)dt (5.24)
-The integral, or area under the iL(t) curve, is the area of the triangle having height ipk and
-base dimension (D1+ D2)Ts. Use of the triangle area formula yields
-∫ Ts
-0
-iL(t)dt= 1
-2ipk(D1+ D2)Ts (5.25)
-Substitution of Eqs. (5.23) and (5.25) into Eq. (5.24) leads to
-⟨iL⟩= (Vg−V)
-⎦D1Ts
-2L
-)
-(D1+ D2) (5.26)
-Finally, by equating this result to the dc load current, according to Eq. (5.22), we obtain
-V
-R= D1Ts
-2L (D1+ D2)(Vg−V) (5.27)
-Thus, we have two unknowns, V and D2, and we have two equations. The ﬁrst equation, Eq.
-(5.19), was obtained by inductor volt-second balance, while the second equation, Eq. ( 5.27),
-was obtained using capacitor charge balance. Elimination of D2 from the two equations, and
-solution for the voltage conversion ratio M(D1, K)= V/Vg, yields
-V
-Vg
-= 2
-1+
-√
-1+ 4K
-D2
-1
-(5.28)
-where K= 2L/RTs
-valid for K< Kcrit
+(i) 输出电容电压纹波。无论工作模式如何，要求输出电压纹波很小。故对设计良好、工作于断续导通模式的变换器，输出电压纹波峰值 $\Delta v$ 应远小于输出电压直流分量 $V$。故线性纹波近似适用于输出电压波形：
 
-5.3 Boost Converter Example 145
-Fig. 5.11 V oltage conversion
-ratio M(D, K), buck converter
-0.0
-0.2
-0.4
-0.6
-0.8
-1.0
-M(D,K)
-0.0 0.2 0.4 0.6 0.8 1.0
-D
-K = 0.01
-K = 0.1
-K = 0.5
-K 1
-This is the solution of the buck converter operating in discontinuous conduction mode.
-The complete buck converter characteristics, including both continuous and discontinuous
-conduction modes, are therefore
-M=
-⎧⎪⎪
-⎪⎪⎪⎪⎪⎪⎨⎪⎪⎪⎪⎪⎪⎪⎪⎩
-D for K> K
-crit
-2
-1+
-√
-1+ 4K
-D2
-for K< Kcrit (5.29)
-where the transistor duty cycle D is identical to the subinterval 1 duty cycle D1 of the above
-derivation. These characteristics are plotted in Fig. 5.11, for several values of K. It can be seen
-that the eﬀect of the discontinuous conduction mode is to cause the output voltage to increase.
-As K tends to zero (the unloaded case), M tends to unity for all nonzero D. The characteristics
-are continuous, and Eq. (5.28) intersects the CCM characteristic M= D at the mode boundary.
-5.3 Boost Converter Example
-As a second example, consider the boost converter of Fig. 5.12. Let us determine the bound-
-ary between modes, and solve for the conversion ratio in the discontinuous conduction mode.
-Behavior of the boost converter operating in the continuous conduction mode was analyzed pre-
-viously, in Sect. 2.3, and expressions for the inductor current dc component I and ripple peak
-magnitudeΔiL were found.
-When the diode conducts, its current is identical to the inductor current iL(t). As can be
-seen from Fig. 2.18, the minimum value of the inductor current during the diode conduction
-subinterval DTs < t< Ts is (I−ΔiL). If this minimum current is positive, then the diode is
+$$v(t) \approx V \tag{5.11}$$
 
-146 5 The Discontinuous Conduction Mode
-Fig. 5.12 Boost converter example
-+ Q1
-L
-CR
-+
-v(t)
-D1
-Vg
-i(t)
-+ vL(t)
-iD(t)
-iC(t)
-forward-biased for the entire subinterval DTs< t< Ts, and the converter operates in the contin-
-uous conduction mode. So the conditions for operation of the boost converter in the continuous
-and discontinuous conduction modes are
-I>ΔiL for CCM (5.30)
-I<ΔiL for DCM
-which is identical to the results for the buck converter. Substitution of the CCM solutions for I
-andΔiL,E q s .(2.39) and (2.43), yields
-Vg
-D′2R> DTsVg
-2L for CCM (5.31)
-This equation can be rearranged to obtain
-2L
-RTs
-> DD′2 for CCM (5.32)
-which is in the standard form
-K> Kcrit(D) for CCM (5.33)
-K< Kcrit(D)f o rD C M
-where
-K= 2L
-RTs
-and Kcrit(D)= DD′2
-The conditions for operation in the continuous or discontinuous conduction modes are of similar
-form to those for the buck converter; however, the critical value Kcrit(D)i sad iﬀerent function
-of the duty cycle D. The dependence of Kcrit(D) on the duty cycle D is plotted in Fig. 5.13.
-Kcrit(D) is zero at D= 0 and at D= 1, and has a maximum value of 4/27 at D= 1/3. Hence, if
-K is greater than 4/27, then the converter operates in the continuous conduction mode for all D.
-Figure 5.14 illustrates what happens when K is less than 4/27. The converter then operates in
-the discontinuous conduction mode for some intermediate range of values of D near D= 1/3.
-But the converter operates in the continuous conduction mode near D= 0 and D= 1. Unlike
-the buck converter, the boost converter must operate in the continuous conduction mode near
-D= 0 because the ripple magnitude approaches zero while the dc component I does not.
+(ii) 电感电流纹波。按定义，断续导通模式下电感电流纹波不小。式 (5.3) 表明电感电流纹波 $\Delta i_L$ 的幅值大于直流分量 $I$。故忽略电感电流纹波会导致不准确结果。在其他变换器中，若干电感电流或某一电容电压可能含大开关纹波，不应忽略。
 
-5.3 Boost Converter Example 147
-Fig. 5.13 Boost converter
-Kcrit(D)v s .D
-0
-0.05
-0.1
-0.15
-Kcrit(D)
-0 0.2 0.4 0.6 0.8 1
-D
-Kcrit
-1
-3 = 4
-27
-Fig. 5.14 Comparison of K
-with Kcrit(D)
-0
-0.05
-0.1
-0.15
-K
-crit
-(D)
-0 0.2 0.4 0.6 0.8 1
-D
-K
-K < Kcrit
-DCM CCM
-K > Kcrit
-CCM
-Next, let us analyze the conversion ratio M= V/Vg of the boost converter. When the tran-
-sistor conducts, for the subinterval 0< t< D1Ts, the converter circuit reduces to the circuit of
-Fig. 5.15a. The inductor voltage and capacitor current are given by
-vL(t)= Vg (5.34)
-iC(t)=−v(t)
-R
+通过对网络中每个电感电压应用伏秒平衡、对每个电容电流应用电荷平衡，可得求解电压变换比所需的方程。输出电容电压的开关纹波被忽略，但在本降压变换器例子中必须计入电感电流开关纹波。
 
-148 5 The Discontinuous Conduction Mode
-Fig. 5.15 Boost converter circuits
-for operation in the discontinuous
-conduction mode: ( a) during
-subinterval 1, 0 < t< D1Ts,
-(b) during subinterval 2,
-D1Ts< t< (D1+ D2)Ts,( c) during
-subinterval 3, (D1+ D2)Ts< t< Ts
-(a)
-CR
-+
-v(t)
-iC(t)
-+
-L
-Vg
-i(t)
-+ vL(t)
-(b)
-CR
-+
-v(t)
-iC(t)
-+
-L
-Vg
-i(t)
-+ vL(t)
-(c)
-CR
-+
-v(t)
-iC(t)
-+
-L
-Vg
-i(t)
-+ vL(t)
-Use of the linear-ripple approximation, to ignore the output capacitor voltage ripple, leads to
-vL(t)≈Vg (5.35)
-iC(t)≈−V
-R
-During the second subinterval D1Ts < t< (D1+ D2)Ts, the diode conducts. The circuit then
-reduces to Fig. 5.15b. The inductor voltage and capacitor current are given by
-vL(t)= Vg−v(t) (5.36)
-iC(t)= i(t)−v(t)
-R
-Neglect of the output capacitor voltage ripple yields
-vL(t)≈Vg−V (5.37)
-iC(t)≈i(t)−V
-R
-The inductor current ripple has not been neglected.
+下面分析式 (5.1) 降压变换器的变换比 $M = V/V_g$。晶体管导通时（$0 < t < D_1 T_s$），变换器电路简化为图5.7a所示网络。电感电压和电容电流为
 
-5.3 Boost Converter Example 149
-During the third subinterval, (D1+ D2)Ts < t< Ts, both transistor and diode are in the oﬀ
-state, and Fig. 5.15c is obtained. The network equations are
-vL= 0, i= 0
-iC(t)=−v(t)
-R (5.38)
-Use of the small-ripple approximation yields
-vL(t)= 0 (5.39)
-iC(t)=−V
-R
-Equations (5.35), (5.37), and (5.39) are now used to sketch the inductor voltage waveform as
-in Fig. 5.16. By volt-second balance, this waveform must have zero dc component when the
-converter operates in steady state. By equating the average value of thisvL(t) waveform to zero,
-one obtains
-D1Vg+ D2(Vg−V)+ D3(0)= 0 (5.40)
-Solution for the output voltage V yields
-V= D1+ D2
-D2
-Vg (5.41)
-The diode duty cycleD2 is again an unknown, and so a second equation is needed for elimination
-of D2 before the output voltage V can be found.
-We can again use capacitor charge balance to obtain the second equation. The connection
-of the output capacitor to its adjacent components is detailed in Fig. 5.17. Unlike the buck
-converter, the diode in the boost converter is connected to the output node. The node equation
-of Fig. 5.17 is
-iD(t)= iC(t)+ v(t)
-R (5.42)
-Fig. 5.16 Inductor voltage waveform
-vL(t), boost converter operating in discon-
-tinuous conduction mode
-vL(t)
-0
-Ts t
-D1Ts D2Ts D3Ts
-Vg
-Vg
-Fig. 5.17 Connection of the output capacitor to ad-
-jacent components in the boost converter
-CR
-+
-v(t)
-D1 iD(t)
-iC(t)
+$$v_L(t) = V_g - v(t) \tag{5.12}$$
 
-150 5 The Discontinuous Conduction Mode
-where iD(t) is the diode current. By capacitor charge balance, the capacitor current iC(t)m u s t
-have zero dc component in steady state. Therefore, the diode current dc component ⟨iD⟩ must
-be equal to the dc component of the load current:
-⟨iD⟩= V
-R (5.43)
-So we need to sketch the diode current waveform, and ﬁnd its dc component.
-The waveforms of the inductor currenti(t) and diode current iD(t) are illustrated in Fig.5.18.
-The inductor current begins at zero, and rises to a peak value ipk during the ﬁrst subinterval.
-This peak value ipk is equal to the slope Vg/L, multiplied by the length of the ﬁrst subinterval,
-D1Ts:
-ipk= Vg
-L D1Ts (5.44)
-The diode conducts during the second subinterval, and the inductor current then decreases to
-zero, where it remains during the third subinterval. The diode current iD(t) is identical to the
-inductor current i(t) during the second subinterval. During the ﬁrst and third subintervals, the
-diode is reverse-biased and hence iD(t) is zero.
-The dc component of the diode current,⟨iD⟩,i s
-⟨iD⟩= 1
-Ts
-∫ Ts
-0
-iD(t)dt (5.45)
-(a) i(t)
-t0 DTs Ts
-D1Ts D2Ts D3Ts
-ipkVg
-L
-Vg V
-L
-(b) iD(t)
-t0 DTs Ts
-D1Ts D2Ts D3Ts
-ipk
-iD 
-Vg V
-L
-Fig. 5.18 Boost converter waveforms in the discontinuous conduction mode: (a) inductor current i(t), (b)
-diode current iD(t)
+$$i_C(t) = i_L(t) - \frac{v(t)}{R}$$
 
-5.3 Boost Converter Example 151
-The integral is the area under the iD(t) waveform. As illustrated in Fig. 5.18b, this area is the
-area of the triangle having peak value ipk and base dimension D2Ts:
-∫ Ts
-0
-iD(t)dt= 1
-2 iρkD2Ts (5.46)
-Substitution of Eqs. (5.44) and (5.46) into Eq. (5.45) leads to the following expression for the
-dc component of the diode current:
-⟨iD⟩= 1
-Ts
-⎦1
-2 ipk D2Ts
-)
-= VgD1D2Ts
-2L (5.47)
-By equating this expression to the dc load current as in Eq. (5.43), one obtains the ﬁnal result
-VgD1D2Ts
-2L = V
-R (5.48)
-So now we have two unknowns, V and D2. We have two equations: Eq. ( 5.41) obtained via
-inductor volt-second balance, and Eq. ( 5.48) obtained using capacitor charge balance. Let us
-now eliminate D2 from this system of equations, and solve for the output voltageV. Solution of
-Eq. (5.41)f o rD2 yields
-D2= D1
-Vg
-V−Vg
-(5.49)
-By inserting this result into Eq. ( 5.48), and rearranging terms, one obtains the following
-quadratic equation:
-V2−VVg−
-V2
-g D2
-1
-K = 0 (5.50)
-Use of the quadratic formula yields
-V
-Vg
-=
-1±
-√
-1+ 4D2
-1
-K
-2 (5.51)
-The quadratic equation has two roots: one of the roots of Eq. ( 5.51) is positive, while the other
-is negative. We already know that the output voltage of the boost converter should be positive,
-and indeed, from Eq. (5.41), it can be seen that V/Vg must be positive since the duty cycles D1
-and D2 are positive. So we should select the positive root:
-V
-Vg
-= M(D1, K)=
-1+
-√
-1+ 4D2
-1
-K
-2 (5.52)
-where K= 2L/RTs
-valid for K< Kcrit(D)
-This is the solution of the boost converter operating in the discontinuous conduction mode.
+利用线性纹波近似忽略输出电容电压纹波，得
 
-152 5 The Discontinuous Conduction Mode
-Fig. 5.19 V oltage conversion
-ratio M(D, K) of the boost con-
-verter, including both continu-
-ous and discontinuous conduc-
-tion modes
-0
-1
-2
-3
-4
-5
-M(D,K)
-0 0.25 0.5 0.75 1
-D
-K 
-= 0.01
-K = 0.05
-K = 0.1
-K 4/27
-The complete boost converter characteristics, including both continuous and discontinuous
-conduction modes, are
-M=
-⎧⎪⎪⎪⎪⎪⎪⎪⎪⎨⎪⎪⎪⎪⎪⎪⎪⎪⎩
-1
-1−D for K> Kcrit
-1+
-√
-1+ 4D2
-K
-2 for K< Kcrit
-(5.53)
-These characteristics are plotted in Fig. 5.19, for several values of K. As in the buck converter,
-the eﬀect of the discontinuous conduction mode is to cause the output voltage to increase. The
-DCM portions of the characteristics are nearly linear, and can be approximated as
-M≈1
-2+ D√
-K
-(5.54)
-5.4 Summary of Results and Key Points
-The characteristics of the basic buck, boost, and buck–boost are summarized in Table 5.2.E x -
-pressions for Kcrit(D), as well as for the solutions of the dc conversion ratios in CCM and DCM,
-and for the DCM diode conduction duty cycle D2, are given.
-The dc conversion ratios of the DCM buck, boost, and buck–boost converters are compared
-in Fig. 5.20. The buck–boost characteristic is a line with slope 1 /
-√
-K. The characteristics of
-the buck and the boost converters are both asymptotic to this line, as well as to the line M=
-1. Hence, when operated deeply into the discontinuous conduction mode, the boost converter
-characteristic becomes nearly linear with slope 1/
-√
-K, especially at high duty cycle. Likewise,
-the buck converter characteristic becomes nearly linear with the same slope, when operated
-deeply into discontinuous conduction mode at low duty cycle.
+$$v_L(t) \approx V_g - V \tag{5.13}$$
 
-5.4 Summary of Results and Key Points 153
-Table 5.2 Summary of CCM-DCM characteristics for the buck, boost, and buck–boost converters
-Converter Kcrit(D)D C M M(D, K)D C M D2(D, K) CCM M(D)
-Buck (1 −D) 2
-1+
-√
-1+ 4K/D2
-K
-D M(D, K) D
-Boost D(1−D)2 1+
-√
-1+ 4D2/K
-2
-K
-D M(D, K) 1
-1−D
-Buck–boost (1 −D)2 −D√
-K
-√
-K −D
-1−D
-with K= 2L/RTs. DCM occurs for K< Kcrit.
-Fig. 5.20 Comparison of the dc
-conversion ratios of the buck–boost,
-buck, and boost converters oper-
-ated in the discontinuous conduction
-mode
-0
-1
-0 0.2 0.4 0.6 0.8 1
-D
-Boost
-Buck
-Buck-boost
- (
-DCM
-M(D,K)
-1
-K
-The following are the key points of this chapter:
-1. The discontinuous conduction mode occurs in converters containing current- or voltage-
-unidirectional switches, when the inductor current or capacitor voltage ripple is large
-enough to cause the switch current or voltage to reverse polarity.
-2. Conditions for operation in the discontinuous conduction mode can be found by determin-
-ing when the inductor current or capacitor voltage ripples and dc components cause the
-switch on state current or oﬀstate voltage to reverse polarity.
-3. The dc conversion ratio M of converters operating in the discontinuous conduction mode
-can be found by application of the principles of inductor volt-second and capacitor charge
-balance.
-4. Extra care is required when applying the small-ripple approximation. Some waveforms,
-such as the output voltage, should have small ripple which can be neglected. Other wave-
-forms, such as one or more inductor currents, may have large ripple that cannot be ignored.
+$$i_C(t) \approx i_L(t) - \frac{V}{R}$$
 
-154 5 The Discontinuous Conduction Mode
-5. The characteristics of a converter changes signiﬁcantly when the converter enters DCM.
-The output voltage becomes load-dependent, resulting in an increase in the converter output
-impedance.
-Problems
-5.1 The elements of the buck–boost converter of Fig.5.21 are ideal: all losses may be ignored.
-Your results for parts (a) and (b) should agree with Table5.2.
-Fig. 5.21 Buck–boost converter of
-Problems 5.1, 5.2,a n d5.16 + LC R
-+
-VVg
-Q1 D1
-i(t)
-(a) Show that the converter operates in discontinuous conduction mode when K< Kcrit,
-and derive expressions for K and Kcrit.
-(b) Derive an expression for the dc conversion ratio V/Vg of the buck–boost converter
-operating in discontinuous conduction mode.
-(c) For K= 0.1, plot V/Vg over the entire range 0≤D≤1.
-(d) Sketch the inductor voltage and current waveforms for K= 0.1 and D= 0.3. Label
-salient features.
-(e) What happens to V at no load (R→∞)? Explain why, physically.
-5.2 For this problem, the buck–boost converter of Fig. 5.21 employs a diode having forward
-voltage drop VD. All other elements should be modeled as ideal. Express your results in
-terms of the transistor duty cycle D, the input voltage Vg, the diode forward voltage drop
-VD, and the dimensionless parameter K= 2L/RTs where Ts is the switching period.
-(a) Derive an expression for the conditions under which this converter operates in the
-discontinuous conduction mode. Express your result in the form K< Kcrit, and give
-an expression for Kcrit.
-(b) Derive an equation for the steady-state output voltage V. Manipulate your equation
-into the form
-V= f
-⎦
-D, K, Vg, VD
-)
-5.3 A certain buck converter contains a synchronous rectiﬁer, as described in Sect. 4.1.5.
-(a) Does this converter operate in the discontinuous conduction mode at light load? Ex-
-plain.
-(b) The load resistance is disconnected ( R→∞), and the converter is operated with duty
-cycle 0.5. Sketch the inductor current waveform.
-```
+注意电感电流纹波未被忽略。
+
+二极管在第二子区间 $D_1 T_s < t < (D_1 + D_2)T_s$ 导通。电路简化为图5.7b。电感电压和电容电流为
+
+$$v_L(t) = -v(t) \tag{5.14}$$
+
+$$i_C(t) = i_L(t) - \frac{v(t)}{R}$$
+
+忽略输出电容电压纹波，得
+
+$$v_L(t) \approx -V \tag{5.15}$$
+
+$$i_C(t) \approx i_L(t) - \frac{V}{R}$$
+
+在 $t = (D_1 + D_2)T_s$ 时二极管变为反偏。电路如图5.7c所示，晶体管和二极管均处于关断状态。
+
+![源页 p.156](../assets/page-snapshots/chapter-5/page-156.png)
+
+图5.7 断续导通模式下降压变换器电路：(a) 第一子区间，(b) 第二子区间，(c) 第三子区间
+
+在开关周期剩余时间 $(D_1 + D_2)T_s < t < T_s$ 内，电感电压和电感电流均为零。第三子区间的网络方程为
+
+$$v_L = 0, \quad i_L = 0 \tag{5.16}$$
+
+$$i_C(t) = i_L(t) - \frac{v(t)}{R}$$
+
+注意第三子区间内电感电流恒定为零，故由关系 $v_L(t) = L\,di_L(t)/dt$ 知电感电压也必为零。实际中，此子区间内可观测到寄生振铃。此振铃由电感与半导体器件电容构成的谐振电路产生，对变换器稳态特性影响通常很小。再次忽略输出电容电压纹波，得
+
+$$v_L(t) = 0 \tag{5.17}$$
+
+$$i_C(t) = -\frac{V}{R}$$
+
+现可用式 (5.13)、(5.15) 和 (5.17) 绘制电感电压波形如图5.8。按电感伏秒平衡原理，该波形的直流分量必须为零。由于波形为矩形，其直流分量（即平均值）
+
+![源页 p.157](../assets/page-snapshots/chapter-5/page-157.png)
+
+图5.8 断续导通模式下降压变换器的电感电压波形 $v_L(t)$
+
+$$\langle v_L(t) \rangle = D_1(V_g - V) + D_2(-V) + D_3(0) = 0 \tag{5.18}$$
+
+容易求得：
+
+求解输出电压得
+
+$$V = V_g \frac{D_1}{D_1 + D_2} \tag{5.19}$$
+
+晶体管占空比 $D$（与第一子区间占空比 $D_1$ 一致）是变换器的控制输入，可视为已知。但第二子区间占空比 $D_2$ 未知，故需另一个方程以消去 $D_2$ 求解输出电压 $V$。
+
+第二个方程由电容电荷平衡得到。输出电容与相邻元件的连接详见图5.9。该网络的节点方程为
+
+$$i_L(t) = i_C(t) + \frac{v(t)}{R} \tag{5.20}$$
+
+由电容电荷平衡，电容电流的直流分量必须为零：
+
+$$\langle i_C \rangle = 0 \tag{5.21}$$
+
+故直流负载电流必须完全由连接到该节点的其他元件提供。具体地，对降压变换器，电感电流的直流分量必须等于直流负载电流：
+
+$$\langle i_L \rangle = \frac{V}{R} \tag{5.22}$$
+
+故需计算电感电流的直流分量。
+
+图5.9 降压变换器中输出电容与相邻元件的连接
+
+![源页 p.158](../assets/page-snapshots/chapter-5/page-158.png)
+
+图5.10 断续导通模式下降压变换器的电感电流波形 $i_L(t)$
+
+由于电感电流纹波不小，确定电感电流直流分量需详细考察电流波形。电感电流波形绘于图5.10。电流在开关周期初始时为零，在
+
+第一子区间内以恒定斜率上升，斜率由所施加电压除以电感给出。峰值电感电流 $i_{pk}$ 等于恒定斜率乘以第一子区间长度：
+
+$$i_L(D_1 T_s) = i_{pk} = \frac{V_g - V}{L}D_1 T_s \tag{5.23}$$
+
+电感电流的直流分量即平均值：
+
+$$\langle i_L \rangle = \frac{1}{T_s}\int_0^{T_s} i_L(t)\,dt \tag{5.24}$$
+
+该积分即 $i_L(t)$ 曲线下面积，为高 $i_{pk}$、底 $(D_1 + D_2)T_s$ 的三角形面积。用三角形面积公式得
+
+$$\int_0^{T_s} i_L(t)\,dt = \frac{1}{2}i_{pk}(D_1 + D_2)T_s \tag{5.25}$$
+
+将式 (5.23) 和式 (5.25) 代入式 (5.24) 得
+
+$$\langle i_L \rangle = \left(\frac{(V_g - V)D_1 T_s}{2L}\right)(D_1 + D_2) \tag{5.26}$$
+
+最后，将此结果与直流负载电流相等（按式 5.22），得
+
+$$\frac{V}{R} = \frac{D_1 T_s}{2L}(D_1 + D_2)(V_g - V) \tag{5.27}$$
+
+故有两个未知量 $V$ 和 $D_2$，两个方程。第一个方程式 (5.19) 由电感伏秒平衡得到，第二个方程式 (5.27) 由电容电荷平衡得到。从两个方程消去 $D_2$，求解电压变换比 $M(D_1, K) = V/V_g$，得
+
+$$\frac{V}{V_g} = \frac{2}{1 + \sqrt{1 + \dfrac{4K}{D_1^2}}} \tag{5.28}$$
+
+其中 $K = 2L/RT_s$，适用于 $K < K_{crit}$。
+
+![源页 p.159](../assets/page-snapshots/chapter-5/page-159.png)
+
+图5.11 降压变换器的电压变换比 $M(D, K)$
+
+这是降压变换器断续导通模式的解。
+
+包含连续和断续导通模式的完整降压变换器特性为
+
+$$M = \begin{cases} D & \text{当 } K > K_{crit} \\[6pt] \dfrac{2}{1 + \sqrt{1 + \dfrac{4K}{D^2}}} & \text{当 } K < K_{crit} \end{cases} \tag{5.29}$$
+
+其中晶体管占空比 $D$ 与上述推导中第一子区间占空比 $D_1$ 相同。这些特性对若干 $K$ 值绘于图5.11。可见断续导通模式的效应是使输出电压升高。当 $K$ 趋于零（无负载情形）时，对所有非零 $D$，$M$ 趋于一。特性是连续的，式 (5.28) 在模式边界处与 CCM 特性 $M = D$ 相交。
+
+## 5.3 升压变换器示例
+
+作为第二个例子，考虑图5.12的升压变换器。下面确定模式之间的边界，并求解断续导通模式下的变换比。
+
+升压变换器连续导通模式下的行为已在 2.3 节分析过，并求得电感电流直流分量 $I$ 和纹波峰幅 $\Delta i_L$ 的表达式。
+
+二极管导通时，其电流与电感电流 $i_L(t)$ 相同。由图2.18可见，二极管导通子区间 $DT_s < t < T_s$ 内电感电流的最小值为 $(I - \Delta i_L)$。若此最小电流为正，则二极管在整个 $DT_s < t < T_s$ 子区间内正偏，变换器工作于连续导通模式。故升压变换器连续和断续导通模式的工作条件为
+
+$$I > \Delta i_L \quad \text{CCM} \tag{5.30}$$
+
+$$I < \Delta i_L \quad \text{DCM}$$
+
+与降压变换器的结果相同。将 $I$ 和 $\Delta i_L$ 的 CCM 解（式 (2.39) 和式 (2.43)）代入，得
+
+$$\frac{V_g}{D'^2 R} > \frac{DT_s V_g}{2L} \quad \text{CCM} \tag{5.31}$$
+
+此方程可重排为
+
+$$\frac{2L}{RT_s} > DD'^2 \quad \text{CCM} \tag{5.32}$$
+
+即标准形式
+
+$$K > K_{crit}(D) \quad \text{CCM} \tag{5.33}$$
+
+$$K < K_{crit}(D) \quad \text{DCM}$$
+
+其中
+
+$$K = \frac{2L}{RT_s} \quad \text{且} \quad K_{crit}(D) = DD'^2$$
+
+连续或断续导通模式的工作条件与降压变换器形式类似，但临界值 $K_{crit}(D)$ 是占空比 $D$ 的不同函数。$K_{crit}(D)$ 对占空比 $D$ 的依赖绘于图5.13。$K_{crit}(D)$ 在 $D = 0$ 和 $D = 1$ 处为零，在 $D = 1/3$ 处取得最大值 $4/27$。故若 $K$ 大于 $4/27$，则变换器在所有 $D$ 下均工作于连续导通模式。
+
+图5.14展示 $K$ 小于 $4/27$ 时的情况。变换器在 $D = 1/3$ 附近的某中间 $D$ 值范围内工作于断续导通模式。但在 $D = 0$ 和 $D = 1$ 附近工作于连续导通模式。与降压变换器不同，升压变换器在 $D = 0$ 附近必须工作于连续导通模式，因为纹波幅值趋于零而直流分量 $I$ 并不趋于零。
+
+![源页 p.161](../assets/page-snapshots/chapter-5/page-161.png)
+
+图5.13 升压变换器 $K_{crit}(D)$ 对 $D$
+
+图5.14 $K$ 与 $K_{crit}(D)$ 的比较
+
+下面分析升压变换器的变换比 $M = V/V_g$。晶体管导通时（子区间 $0 < t < D_1 T_s$），变换器电路简化为图5.15a所示电路。电感电压和电容电流为
+
+$$v_L(t) = V_g \tag{5.34}$$
+
+$$i_C(t) = -\frac{v(t)}{R}$$
+
+![源页 p.162](../assets/page-snapshots/chapter-5/page-162.png)
+
+图5.15 断续导通模式下升压变换器电路：(a) 第一子区间 $0 < t < D_1 T_s$，(b) 第二子区间 $D_1 T_s < t < (D_1 + D_2)T_s$，(c) 第三子区间 $(D_1 + D_2)T_s < t < T_s$
+
+利用线性纹波近似忽略输出电容电压纹波，得
+
+$$v_L(t) \approx V_g \tag{5.35}$$
+
+$$i_C(t) \approx -\frac{V}{R}$$
+
+第二子区间 $D_1 T_s < t < (D_1 + D_2)T_s$ 内二极管导通。电路简化为图5.15b。电感电压和电容电流为
+
+$$v_L(t) = V_g - v(t) \tag{5.36}$$
+
+$$i_C(t) = i(t) - \frac{v(t)}{R}$$
+
+忽略输出电容电压纹波，得
+
+$$v_L(t) \approx V_g - V \tag{5.37}$$
+
+$$i_C(t) \approx i(t) - \frac{V}{R}$$
+
+电感电流纹波未被忽略。
+
+![源页 p.163](../assets/page-snapshots/chapter-5/page-163.png)
+
+第三子区间 $(D_1 + D_2)T_s < t < T_s$ 内晶体管和二极管均处于关断状态，得图5.15c。网络方程为
+
+$$v_L = 0, \quad i = 0$$
+
+$$i_C(t) = -\frac{v(t)}{R} \tag{5.38}$$
+
+利用小纹波近似，得
+
+$$v_L(t) = 0 \tag{5.39}$$
+
+$$i_C(t) = -\frac{V}{R}$$
+
+现用式 (5.35)、(5.37) 和 (5.39) 绘制电感电压波形如图5.16。由伏秒平衡，变换器稳态工作时此波形的直流分量必须为零。令 $v_L(t)$ 波形的平均值等于零，得
+
+$$D_1 V_g + D_2(V_g - V) + D_3(0) = 0 \tag{5.40}$$
+
+求解输出电压 $V$ 得
+
+$$V = \frac{D_1 + D_2}{D_2}V_g \tag{5.41}$$
+
+二极管占空比 $D_2$ 仍为未知，故在求输出电压 $V$ 前需第二个方程以消去 $D_2$。
+
+可再次用电容电荷平衡得到第二个方程。输出电容与相邻元件的连接详见图5.17。与降压变换器不同，升压变换器中二极管接到输出节点。图5.17的节点方程为
+
+$$i_D(t) = i_C(t) + \frac{v(t)}{R} \tag{5.42}$$
+
+图5.16 断续导通模式下升压变换器的电感电压波形 $v_L(t)$
+
+图5.17 升压变换器中输出电容与相邻元件的连接
+
+![源页 p.164](../assets/page-snapshots/chapter-5/page-164.png)
+
+其中 $i_D(t)$ 为二极管电流。由电容电荷平衡，稳态下电容电流 $i_C(t)$ 的直流分量必须为零。故二极管电流直流分量 $\langle i_D \rangle$ 必须等于负载电流的直流分量：
+
+$$\langle i_D \rangle = \frac{V}{R} \tag{5.43}$$
+
+故需绘制二极管电流波形并求其直流分量。
+
+电感电流 $i(t)$ 和二极管电流 $i_D(t)$ 的波形如图5.18所示。电感电流从零开始，在第一子区间内升至峰值 $i_{pk}$。此峰值 $i_{pk}$ 等于斜率 $V_g/L$ 乘以第一子区间长度 $D_1 T_s$：
+
+$$i_{pk} = \frac{V_g}{L}D_1 T_s \tag{5.44}$$
+
+二极管在第二子区间导通，电感电流随之降至零，并在第三子区间保持为零。第二子区间内二极管电流 $i_D(t)$ 与电感电流 $i(t)$ 相同。在第一和第三子区间内二极管反偏，故 $i_D(t)$ 为零。
+
+二极管电流的直流分量 $\langle i_D \rangle$ 为
+
+$$\langle i_D \rangle = \frac{1}{T_s}\int_0^{T_s} i_D(t)\,dt \tag{5.45}$$
+
+图5.18 断续导通模式下升压变换器的波形：(a) 电感电流 $i(t)$，(b) 二极管电流 $i_D(t)$
+
+![源页 p.165](../assets/page-snapshots/chapter-5/page-165.png)
+
+该积分为 $i_D(t)$ 波形下面积。如图5.18b所示，此面积为峰高 $i_{pk}$、底 $D_2 T_s$ 的三角形面积：
+
+$$\int_0^{T_s} i_D(t)\,dt = \frac{1}{2}i_{pk}D_2 T_s \tag{5.46}$$
+
+将式 (5.44) 和式 (5.46) 代入式 (5.45) 得二极管电流直流分量的表达式：
+
+$$\langle i_D \rangle = \frac{1}{T_s}\left(\frac{1}{2}i_{pk}D_2 T_s\right) = \frac{V_g D_1 D_2 T_s}{2L} \tag{5.47}$$
+
+将此表达式与直流负载电流相等（按式 5.43），得最终结果
+
+$$\frac{V_g D_1 D_2 T_s}{2L} = \frac{V}{R} \tag{5.48}$$
+
+故现有两个未知量 $V$ 和 $D_2$。有两个方程：式 (5.41) 由电感伏秒平衡得到，式 (5.48) 由电容电荷平衡得到。下面从方程组中消去 $D_2$ 并求解输出电压 $V$。由式 (5.41) 解 $D_2$ 得
+
+$$D_2 = \frac{D_1}{\dfrac{V}{V_g} - 1} \tag{5.49}$$
+
+将此结果代入式 (5.48) 并整理，得如下二次方程：
+
+$$V^2 - VV_g - \frac{V_g^2 D_1^2}{K} = 0 \tag{5.50}$$
+
+用求根公式得
+
+$$\frac{V}{V_g} = \frac{1 \pm \sqrt{1 + \dfrac{4D_1^2}{K}}}{2} \tag{5.51}$$
+
+该二次方程有两个根：式 (5.51) 的一个根为正，另一为负。已知升压变换器输出电压应为正，且由式 (5.41) 可见，因占空比 $D_1$ 和 $D_2$ 为正，$V/V_g$ 必为正。故应取正根：
+
+$$\frac{V}{V_g} = M(D_1, K) = \frac{1 + \sqrt{1 + \dfrac{4D_1^2}{K}}}{2} \tag{5.52}$$
+
+其中 $K = 2L/RT_s$，适用于 $K < K_{crit}(D)$。
+
+这是升压变换器断续导通模式的解。
+
+![源页 p.166](../assets/page-snapshots/chapter-5/page-166.png)
+
+图5.19 升压变换器的电压变换比 $M(D, K)$，含连续和断续导通模式
+
+包含连续和断续导通模式的完整升压变换器特性为
+
+$$M = \begin{cases} \dfrac{1}{1 - D} & \text{当 } K > K_{crit} \\[6pt] \dfrac{1 + \sqrt{1 + \dfrac{4D^2}{K}}}{2} & \text{当 } K < K_{crit} \end{cases} \tag{5.53}$$
+
+这些特性对若干 $K$ 值绘于图5.19。与降压变换器相同，断续导通模式的效应是使输出电压升高。DCM 部分的特性近于线性，可近似为
+
+$$M \approx \frac{1}{2} + D\sqrt{K} \tag{5.54}$$
+
+## 5.4 结果与要点总结
+
+基本降压、升压和升降压变换器的特性总结于表5.2。给出了 $K_{crit}(D)$ 的表达式，以及 CCM 和 DCM 下直流变换比的解和 DCM 二极管导通占空比 $D_2$ 的表达式。
+
+DCM 下降压、升压和升降压变换器的直流变换比比较如图5.20所示。升降压特性为斜率 $1/\sqrt{K}$ 的直线。降压和升压变换器的特性均以此直线和直线 $M = 1$ 为渐近线。故当深度工作于断续导通模式时，升压变换器特性近于斜率 $1/\sqrt{K}$ 的直线，尤其在高占空比处。同样，降压变换器在低占空比深度断续导通模式时特性近于相同斜率的直线。
+
+![源页 p.167](../assets/page-snapshots/chapter-5/page-167.png)
+
+表5.2 降压、升压和升降压变换器的 CCM-DCM 特性总结
+
+| 变换器 | $K_{crit}(D)$ | DCM $M(D, K)$ | DCM $D_2(D, K)$ | CCM $M(D)$ |
+|---|---|---|---|---|
+| 降压 | $(1 - D)$ | $\dfrac{2}{1 + \sqrt{1 + \dfrac{4K}{D^2}}}$ | $\dfrac{K}{D}M(D, K)$ | $D$ |
+| 升压 | $D(1 - D)^2$ | $\dfrac{1 + \sqrt{1 + \dfrac{4D^2}{K}}}{2}$ | $\dfrac{K}{D}M(D, K)$ | $\dfrac{1}{1 - D}$ |
+| 升降压 | $(1 - D)^2$ | $-\dfrac{D}{\sqrt{K}}$ | $\dfrac{\sqrt{K} - D}{1 - D}$ | $-\dfrac{D}{1 - D}$ |
+
+其中 $K = 2L/RT_s$。当 $K < K_{crit}$ 时发生 DCM。
+
+图5.20 升降压、降压和升压变换器断续导通模式下直流变换比的比较
+
+本章要点如下：
+
+1. 当含电流或电压单向开关的变换器中，电感电流或电容电压纹波足够大，致使开关电流或电压极性反转时，发生断续导通模式。
+
+2. 通过确定何时电感电流或电容电压纹波与直流分量使开关通态电流或关断态电压极性反转，可求得断续导通模式的工作条件。
+
+3. 断续导通模式下变换器的直流变换比 $M$ 可通过应用电感伏秒平衡和电容电荷平衡原理求得。
+
+4. 应用小纹波近似时需格外小心。某些波形（如输出电压）应有可忽略的小纹波。其他波形（如一个或多个电感电流）可能有不可忽略的大纹波。
+
+![源页 p.168](../assets/page-snapshots/chapter-5/page-168.png)
+
+5. 变换器进入 DCM 时特性发生显著变化。输出电压变得依赖负载，导致变换器输出阻抗增大。
+
+## 习题
+
+5.1 图5.21升降压变换器的各元件均为理想：所有损耗可忽略。(a)、(b) 的结果应与表5.2一致。
+
+图5.21 习题 5.1、5.2 和 5.16 的升降压变换器
+
+(a) 证明当 $K < K_{crit}$ 时变换器工作于断续导通模式，并推导 $K$ 和 $K_{crit}$ 的表达式。
+
+(b) 推导升降压变换器断续导通模式下直流变换比 $V/V_g$ 的表达式。
+
+(c) 对 $K = 0.1$，在 $0 \le D \le 1$ 全范围内绘制 $V/V_g$。
+
+(d) 对 $K = 0.1$、$D = 0.3$，绘制电感电压和电流波形，标注主要特征。
+
+(e) 无负载（$R \to \infty$）时 $V$ 如何？从物理上解释原因。
+
+5.2 本题中，图5.21的升降压变换器采用具有正向压降 $V_D$ 的二极管。其他所有元件均按理想建模。用晶体管占空比 $D$、输入电压 $V_g$、二极管正向压降 $V_D$ 和无量纲参数 $K = 2L/RT_s$（$T_s$ 为开关周期）表示结果。
+
+(a) 推导该变换器工作于断续导通模式的条件表达式。结果表为 $K < K_{crit}$ 形式，并给出 $K_{crit}$ 的表达式。
+
+(b) 推导稳态输出电压 $V$ 的方程。整理为如下形式
+
+$$V = f(D, K, V_g, V_D)$$
+
+5.3 某降压变换器含同步整流器，如 4.1.5 节所述。
+
+(a) 该变换器在轻载时是否工作于断续导通模式？说明理由。
+
+(b) 负载电阻断开（$R \to \infty$），变换器以占空比 0.5 工作。绘制电感电流波形。

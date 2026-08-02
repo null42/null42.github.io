@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)
 
-**文档版本：** v1.0
-**生成日期：** 2026-05-23
-**源码位置：** `hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.{h,c}`
-**中间件版本：** v1.11.0+ (SDK v1.11.0)
+- **文档版本：** v1.0
+- **生成日期：** 2026-05-23
+- **源码位置：** `hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.{h,c}`
+- **中间件版本：** v1.11.0+ (SDK v1.11.0)
 
 ---
 
@@ -123,7 +123,7 @@ tau = tau_ff + kp * (q_des - q) + kd * (dq_des - dq)
 | dq_des | 期望速度（位置保持时为0） | rad/s |
 | dq (dq_actual) | 实际速度（经滤波处理） | rad/s |
 
-**源码出处：** [hpm_mcl_hybrid_ctrl.h:L16](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L16) 和 [hpm_mcl_hybrid_ctrl.c:L70-L87](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L70-L87)
+- **源码出处：** [hpm_mcl_hybrid_ctrl.h:L16](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L16) 和 [hpm_mcl_hybrid_ctrl.c:L70-L87](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L70-L87)
 
 ### 2.2 控制框图
 
@@ -156,12 +156,12 @@ tau = tau_ff + kp * (q_des - q) + kd * (dq_des - dq)
 
 前馈力矩直接叠加到输出，用于补偿已知的外部力矩，不经过反馈回路。
 
-**典型用途：**
+- **典型用途：**
 - **重力补偿：** 对机器人关节预先施加克服重力的力矩
 - **摩擦力补偿：** 补偿库仑摩擦或粘滞摩擦
 - **动力学前馈：** 按逆动力学模型预计算需要力矩
 
-**设置接口：** [mcl_hybrid_ctrl_set_tau_ff()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L110-L112)
+- **设置接口：** [mcl_hybrid_ctrl_set_tau_ff()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L110-L112)
 
 #### 2.3.2 位置比例补偿 (kp 项)
 
@@ -200,9 +200,9 @@ dq_filtered[n] = alpha * dq_actual[n] + (1 - alpha) * dq_filtered[n-1]
 | 0 (禁用) | 无滤波 | 原始速度信号 |
 | 1.0 | 无滤波 | 等于原始值 |
 
-**源码出处：** [hpm_mcl_hybrid_ctrl.c:L54-L61](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L54-L61)
+- **源码出处：** [hpm_mcl_hybrid_ctrl.c:L54-L61](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L54-L61)
 
-**设置接口：** [mcl_hybrid_ctrl_set_speed_filter()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L167-L171)
+- **设置接口：** [mcl_hybrid_ctrl_set_speed_filter()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L167-L171)
 
 #### 2.3.5 速度死区 (Deadzone)
 
@@ -216,7 +216,7 @@ if |speed_filtered| < speed_deadzone:
 - **典型值：** 0.01 ~ 0.1 rad/s
 - **作用：** 消除静止时的力矩抖动，防止电机"滋滋"响
 
-**源码出处：** [hpm_mcl_hybrid_ctrl.c:L63-L68](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L63-L68)
+- **源码出处：** [hpm_mcl_hybrid_ctrl.c:L63-L68](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L63-L68)
 
 #### 2.3.6 力矩限幅
 
@@ -226,7 +226,7 @@ if |speed_filtered| < speed_deadzone:
 tau_output = clamp(tau_raw, tau_min, tau_max)
 ```
 
-**限幅值计算公式：**
+- **限幅值计算公式：**
 
 ```text
 tau_max = kt * I_max
@@ -234,11 +234,11 @@ tau_max = kt * I_max
 
 其中 kt 为电机转矩常数 (N·m/A)，I_max 为允许最大电流 (A)。
 
-**注意：** 当 tau_max 和 tau_min 都设为 0 时，限幅功能禁用。
+- **注意：** 当 tau_max 和 tau_min 都设为 0 时，限幅功能禁用。
 
-**源码出处：** [hpm_mcl_hybrid_ctrl.c:L89-L95](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L89-L95)
+- **源码出处：** [hpm_mcl_hybrid_ctrl.c:L89-L95](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L89-L95)
 
-**设置接口：** [mcl_hybrid_ctrl_set_limits()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L153-L157)
+- **设置接口：** [mcl_hybrid_ctrl_set_limits()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L153-L157)
 
 ### 2.4 mcl_hybrid_ctrl_step() 完整执行流程
 
@@ -268,7 +268,7 @@ mcl_hybrid_ctrl_step(cfg, state)
           clamp(tau_output, tau_min, tau_max)
 ```
 
-**源码出处：** [hpm_mcl_hybrid_ctrl.c:L44-L96](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L44-L96)
+- **源码出处：** [hpm_mcl_hybrid_ctrl.c:L44-L96](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L44-L96)
 
 ---
 
@@ -276,7 +276,7 @@ mcl_hybrid_ctrl_step(cfg, state)
 
 ### 3.1 mcl_hybrid_ctrl_cfg_t — 配置参数
 
-**定义位置：** [hpm_mcl_hybrid_ctrl.h:L32-L42](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L32-L42)
+- **定义位置：** [hpm_mcl_hybrid_ctrl.h:L32-L42](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L32-L42)
 
 ```c
 typedef struct {
@@ -292,11 +292,11 @@ typedef struct {
 } mcl_hybrid_ctrl_cfg_t;
 ```
 
-**初始化默认值（全部为0）：** [mcl_hybrid_ctrl_init()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L13-L29)
+- **初始化默认值（全部为0）：** [mcl_hybrid_ctrl_init()](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L13-L29)
 
 ### 3.2 mcl_hybrid_ctrl_state_t — 运行状态
 
-**定义位置：** [hpm_mcl_hybrid_ctrl.h:L47-L54](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L47-L54)
+- **定义位置：** [hpm_mcl_hybrid_ctrl.h:L47-L54](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.h#L47-L54)
 
 ```c
 typedef struct {
@@ -309,7 +309,7 @@ typedef struct {
 } mcl_hybrid_ctrl_state_t;
 ```
 
-**数据流示意：**
+- **数据流示意：**
 
 ```text
 编码器 ── q_actual ──┐
@@ -386,7 +386,7 @@ theta_forecast = theta_current + speed * ts_delay
 - **Park 变换（采样→d/q）：** 使用当前角度 `theta`
 - **逆 Park 变换（d/q→α/β）：** 使用预测角度 `theta_forecast`
 
-**源码出处：** [hpm_mcl_loop.c:L372-L376](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L372-L376)
+- **源码出处：** [hpm_mcl_loop.c:L372-L376](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L372-L376)
 
 ### 4.3 有感/无感切换架构
 
@@ -399,7 +399,7 @@ struct {
 } sensorless;
 ```
 
-**切换策略：**
+- **切换策略：**
 
 ```text
                   低速段                        高速段
@@ -540,13 +540,13 @@ mcl_hybrid_ctrl_set_position(&cfg, target_angle_rad);
 
 以下来自 [bldc_foc.c](../../../hpm_MC/samples/motor_ctrl/bldc_foc/src/bldc_foc.c) 示例的硬件混合环配置（`MCL_HARDWARE_HYBRID_LOOP_ENABLE` 宏使能时）：
 
-**模式设置：**
+- **模式设置：**
 
 ```c
 motor0.cfg.loop.mode = mcl_mode_hybrid_foc;
 ```
 
-**硬件加速环初始化：**
+- **硬件加速环初始化：**
 
 ```c
 motor0.cfg.hw_loop.clc_cfg.base = BOARD_CLC;
@@ -556,7 +556,7 @@ hpm_mcl_hw_loop_init(&motor0.hw_loop, &motor0.cfg.hw_loop);
 hpm_mcl_enable_clc_hardware_loop(&motor0.hw_loop);
 ```
 
-**Loop 初始化（带 hw_loop 参数）：**
+- **Loop 初始化（带 hw_loop 参数）：**
 
 ```c
 hpm_mcl_loop_init(&motor0.loop, &motor0.cfg.loop, &motor0.cfg.mcl,
@@ -644,7 +644,7 @@ kd ≈ 2 * sqrt(kp)
 
 本章节从源码层面逐行解析 `mcl_hybrid_ctrl_step()` 的实现细节，将第2章的控制理论与实际代码一一对应。
 
-**源码位置：** [hpm_mcl_hybrid_ctrl.c:L44-L96](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L44-L96)
+- **源码位置：** [hpm_mcl_hybrid_ctrl.c:L44-L96](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_hybrid_ctrl.c#L44-L96)
 
 ---
 

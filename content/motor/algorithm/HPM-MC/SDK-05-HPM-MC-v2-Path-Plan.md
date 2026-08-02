@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-11 MTPA弱磁](../ALG-11-MTPA-Flux-Weakening.md) | [ALG-12 速度环](../ALG-12-Speed-Loop-Torque-Observer.md) | [ADV-ALG-05 弱磁深度](../../advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA.md)
 
-**文档版本：** v1.0
-**生成日期：** 2026-05-23
-**适用对象：** 电机控制工程师、伺服系统开发者
-**前置知识：** C语言编程、电机控制基础、运动学基本概念
+- **文档版本：** v1.0
+- **生成日期：** 2026-05-23
+- **适用对象：** 电机控制工程师、伺服系统开发者
+- **前置知识：** C语言编程、电机控制基础、运动学基本概念
 
 ---
 
@@ -62,7 +62,7 @@ navGroupOrder: 30
 | **运动平滑性** | 速度突变，运行粗糙 | 连续速度剖面，低噪音低振动 |
 | **可预测性** | 难以估算运动时间 | 精确给出到达时间的运动轨迹 |
 
-**核心理念：** 将用户给定的离散目标点，转化为连续、受物理约束（最大加速度、最大速度）约束的时域轨迹。
+- **核心理念：** 将用户给定的离散目标点，转化为连续、受物理约束（最大加速度、最大速度）约束的时域轨迹。
 
 ### 1.3 v2 独有特性
 
@@ -94,7 +94,7 @@ v2 的路径规划模块与 v1 相比具有以下特征：
      (加速段)    (匀速段)      (减速段)
 ```
 
-**各阶段数学描述（机械角度域）：**
+- **各阶段数学描述（机械角度域）：**
 
 **加速段** `0 ≤ t < t_acc`：
 
@@ -138,7 +138,7 @@ t1_counter = num0 + num1                                 (第二拐点)
 t2_counter = num0 + num1 + num2                          (终点)
 ```
 
-**预计算插值系数：**
+- **预计算插值系数：**
 
 ```text
 a0 = acc · loop_ts · 0.5                                 (加速段系数)
@@ -165,7 +165,7 @@ theta_inc = a2 × (loop_ts × (t2_counter - ts) × 2 - loop_ts)
 /* 展开：θ_inc = 0.5 × dec × loop_ts² × (2×(t2-ts) - 1) */
 ```
 
-**物理含义：** 每个 `theta_inc` 是一个 PWM 周期内电机转过的**机械角度**（弧度）。随后乘以 `pole_num` 转换为电角度，再累加入 `theta_next`。
+- **物理含义：** 每个 `theta_inc` 是一个 PWM 周期内电机转过的**机械角度**（弧度）。随后乘以 `pole_num` 转换为电角度，再累加入 `theta_next`。
 
 ### 2.4 角度累积与归一化
 
@@ -325,7 +325,7 @@ typedef struct {
 | `time` | ≥ acc_time + dec_time | 需确保匀速段时间非负 |
 | `acc_time` | ≤ time | 用户自行保证约束 |
 
-**典型配置示例（2000rpm 电机，极对数 4）：**
+- **典型配置示例（2000rpm 电机，极对数 4）：**
 
 ```c
 mcl_path_plan_cfg_t path_cfg = {
@@ -395,7 +395,7 @@ tau = tau_ff + kp · (q_des - q_actual) + kd · (dq_des - dq_actual)
      tau_output → iq_ref → FOC 电流环
 ```
 
-**关键点：**
+- **关键点：**
 - `q_des` = `hpm_mcl_path_get_next_theta(path)` — 使用 **下一周期** 的角度作为目标，提供一周期前馈
 - `dq_des` = `(theta_next - theta_current) / loop_ts` — 从角度差反推速度（用户自行计算，模块不直接输出速度）
 - `tau_ff` 可用于重力补偿等场景，由用户按需填入
@@ -578,25 +578,25 @@ if (path->t_cure.ts == 0) {
 }
 ```
 
-**加速段步数推导：**
+- **加速段步数推导：**
 
 $$num_0 = \left\lfloor \frac{t_{acc}}{T_s} \right\rfloor$$
 
 其中 $T_s$ = `loop_ts`（PWM 周期）。`t0` 存储的是加速段结束的**绝对步序号**，即 `num0`。
 
-**匀速段步数推导：**
+- **匀速段步数推导：**
 
 $$num_1 = \left\lfloor \frac{t_{const}}{T_s} \right\rfloor = \left\lfloor \frac{t_{total} - t_{acc} - t_{dec}}{T_s} \right\rfloor$$
 
 `t1 = num0 + num1` 是匀速段结束的绝对步序号（第二拐点）。
 
-**减速段步数推导：**
+- **减速段步数推导：**
 
 $$num_2 = \left\lfloor \frac{t_{dec}}{T_s} \right\rfloor$$
 
 `t2 = num0 + num1 + num2` 是总步数（终点）。
 
-**插值系数推导：**
+- **插值系数推导：**
 
 - **加速段系数 `a0`：**
 
@@ -715,7 +715,7 @@ if (path->t_cure.ts > path->t_cure.t2) {
 
 #### 7.2.1 相关代码
 
-**推送曲线参数：**
+- **推送曲线参数：**
 
 ```c
 hpm_mcl_stat_t hpm_mcl_path_update_t_cure(mcl_path_plan_t *path, path_plan_t_cure_cfg_t *cfg)
@@ -736,7 +736,7 @@ hpm_mcl_stat_t hpm_mcl_path_update_t_cure(mcl_path_plan_t *path, path_plan_t_cur
 }
 ```
 
-**曲线完成时的切换（在 `hpm_mcl_path_t_cure_generate` 内）：**
+- **曲线完成时的切换（在 `hpm_mcl_path_t_cure_generate` 内）：**
 
 ```c
 if (path->t_cure.ts > path->t_cure.t2) {
@@ -753,7 +753,7 @@ if (path->t_cure.ts > path->t_cure.t2) {
 }
 ```
 
-**完成查询：**
+- **完成查询：**
 
 ```c
 bool hpm_mcl_path_t_cure_complete(mcl_path_plan_t *path)
@@ -791,7 +791,7 @@ bool hpm_mcl_path_t_cure_complete(mcl_path_plan_t *path)
   └──────────────────────────────────────────────────┘
 ```
 
-**状态转移表：**
+- **状态转移表：**
 
 | 当前状态 | 写入操作 | 写入后状态 |
 |---------|---------|-----------|
@@ -812,7 +812,7 @@ bool hpm_mcl_path_t_cure_complete(mcl_path_plan_t *path)
 2. **时序互斥：** 切换操作发生在 `generate()` 函数内部，此时已处于 PWM 中断上下文，不会被另一个 `generate()` 调用打断
 3. **标志位语义保证：** `current_empty` 和 `next_empty` 的修改是原子的（布尔赋值在 32 位 MCU 上是原子操作），不存在读写撕裂风险
 
-**潜在风险：** 若应用任务在 `generate()` 执行切换的瞬间调用 `update_t_cure()`，可能出现竞态。在 RTOS 环境下，建议在 `update_t_cure()` 调用前后关闭 PWM 中断（或使用 `__disable_irq()` / `__enable_irq()`），确保标志位修改的原子性。当前实现依赖用户在应用层保证调用时序。
+- **潜在风险：** 若应用任务在 `generate()` 执行切换的瞬间调用 `update_t_cure()`，可能出现竞态。在 RTOS 环境下，建议在 `update_t_cure()` 调用前后关闭 PWM 中断（或使用 `__disable_irq()` / `__enable_irq()`），确保标志位修改的原子性。当前实现依赖用户在应用层保证调用时序。
 
 #### 7.2.4 工程要点
 
@@ -829,7 +829,7 @@ bool hpm_mcl_path_t_cure_complete(mcl_path_plan_t *path)
 
 #### 7.3.1 相关代码
 
-**角度移位与累积（在 `hpm_mcl_path_t_cure_generate` 内）：**
+- **角度移位与累积（在 `hpm_mcl_path_t_cure_generate` 内）：**
 
 ```c
 path->theta.last = path->theta.current;
@@ -844,7 +844,7 @@ theta += path->theta.next;
 path->theta.next = MCL_ANGLE_MOD_X(0, MCL_PI * 2, theta);
 ```
 
-**MCL_ANGLE_MOD_X 宏定义（hpm_mcl_common.h）：**
+- **MCL_ANGLE_MOD_X 宏定义（hpm_mcl_common.h）：**
 
 ```c
 #define MCL_ANGLE_MOD_X(down, up, val)  \
@@ -878,7 +878,7 @@ $$\theta_{elec}[k+1] = \theta_{elec}[k] + \Delta\theta_{mech}[k] \times p$$
 - $\Delta\theta_{mech}[k]$ = 当前步的机械角度增量（由梯形曲线公式计算）
 - $p$ = `*path->pole_num`（极对数）
 
-**三级角度变量的含义与用途：**
+- **三级角度变量的含义与用途：**
 
 | 变量 | 含义 | 典型用途 |
 |------|------|---------|
@@ -886,7 +886,7 @@ $$\theta_{elec}[k+1] = \theta_{elec}[k] + \Delta\theta_{mech}[k] \times p$$
 | `theta.current` | 上一周期的电角度 | 当前控制环使用的角度反馈 |
 | `theta.next` | 本周期新计算的电角度 | 下一周期的前馈角度，hybrid 控制的 `q_des` |
 
-**移位操作时序：**
+- **移位操作时序：**
 
 ```text
 周期 k 调用 generate()：
@@ -917,7 +917,7 @@ if (val > up) {
 2. **确定性执行：** `fmodf` 在某些工具链上执行时间不确定，循环减法的迭代次数可预估（通常 1~2 次）
 3. **精度：** 避免浮点取模的精度陷阱
 
-**归一化的必要性：**
+- **归一化的必要性：**
 
 - **防止浮点溢出：** 若电机持续旋转，`theta` 会无限增大。`float` 的有效精度约 7 位十进制数，当角度累积到 $10^4$ rad 量级时，$2\pi \approx 6.28$ 的增量已无法精确表示，导致角度分辨率丢失
 - **三角函数输入约束：** FOC 的 Park/Clarke 变换要求角度在 $[0, 2\pi)$ 内，超出范围虽不报错但可能引入额外计算误差
@@ -1103,7 +1103,7 @@ bool hpm_mcl_path_t_cure_complete(mcl_path_plan_t *path)
 1. 当前曲线已执行完毕（`current_empty` 在 COMPLETE 状态下被置 true）
 2. 没有预装载的曲线等待执行（`next_empty` 仍为 true）
 
-**仅判断 `current_empty` 不够：** 若用户已通过 `update_t_cure()` 推送了下一条曲线到 `next` 缓冲区，`current_empty` 为 true 但 `next_empty` 为 false，此时路径尚未真正完成——还有一条曲线等待执行。
+- **仅判断 `current_empty` 不够：** 若用户已通过 `update_t_cure()` 推送了下一条曲线到 `next` 缓冲区，`current_empty` 为 true 但 `next_empty` 为 false，此时路径尚未真正完成——还有一条曲线等待执行。
 
 #### 7.5.5 工程要点
 

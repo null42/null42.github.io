@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第2章part 2 - 2 Principles of Steady-State Converter Analysis"
+title: "第2章 稳态变换器分析原理（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,355 +18,143 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第2章part 2 - 2 Principles of Steady-State Converter Analysis
+# 第2章 稳态变换器分析原理（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 51-57  
-> Chunk ID: `chapter-2-part-2`
+## 2.5 含双极点低通滤波器的变换器输出电压纹波估算
 
-## 主干提取
+上述表达式可用于选择 $L_1$、$L_2$ 和 $C_1$ 的值，以获得所需的开关纹波幅值。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+类似的方法却不能用于估算输出电容电压 $v_2(t)$ 的开关纹波幅值。由图2.22d可知，电流 $i_{C2}(t)$ 是连续的：与 $v_{L1}$、$v_{L2}$ 和 $i_{C1}$ 不同，电容电流 $i_{C2}(t)$ 是非脉动的。若忽略 $i_2(t)$ 的开关纹波，则电容电流 $i_{C2}(t)$ 不含交流分量。于是小纹波近似将得出输出开关纹波 $\Delta v_2$ 为零的结论。
 
-## 术语表
+当然，输出电压开关纹波并不为零。要估算该变换器中输出电压纹波的幅值，我们不能忽略电感电流 $i_2(t)$ 中存在的开关纹波，因为该电流纹波是驱动输出电容 $C_2$ 的唯一交流电流源。下一节将讨论在 Ćuk 变换器及其他类似变换器中处理此问题的一种简便方法。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.51](../assets/page-snapshots/chapter-2/page-51.png)
 
-## 中文翻译
+### 2.5 含双极点低通滤波器的变换器输出电压纹波估算
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+小纹波近似不适用的一个场合是含有双极点低通滤波器的变换器，例如 Ćuk 变换器（图2.20）或降压变换器（图2.25）的输出端。对于这些变换器，小纹波近似会预测输出电压纹波为零，且与输出滤波电容的取值无关。问题在于，这些场合下输出电容电流的唯一分量来自于电感电流纹波。因此，在计算输出电容电压纹波时不能忽略电感电流纹波，需要更精确的近似。
 
-## 英文原文
+一种对此场合有用的改进方法是更精确地估算电容电流波形 $i_C(t)$，把电感电流纹波考虑进去。电容电压纹波随后可由 $i_C(t)$ 波形正半部分所含的总电荷来确定。
 
-```text
-2.5 Estimating the Output V oltage Ripple in Converters Containing Two-Pole Low-Pass Filters 35
-These expressions can be used to select values of L1, L2, and C1, such that desired values of
-switching ripple magnitudes are obtained.
-Similar arguments cannot be used to estimate the switching ripple magnitude in the output
-capacitor voltage v2(t). According to Fig.2.22d, the current iC2(t) is continuous: unlike vL1, vL2,
-and iC1, the capacitor current iC2(t) is nonpulsating. If the switching ripple of i2(t) is neglected,
-then the capacitor current iC2(t) does not contain an ac component. The small-ripple approxima-
-tion then leads to the conclusion that the output switching rippleΔv2 is zero.
-Of course, the output voltage switching ripple is not zero. To estimate the magnitude of the
-output voltage ripple in this converter, we must not neglect the switching ripple present in the
-inductor current i2(t), since this current ripple is the only source of ac current driving the output
-capacitor C2. A simple way of doing this in the ´Cuk converter and in other similar converters is
-discussed in the next section.
-2.5 Estimating the Output Voltage Ripple in Converters Containing
-Two-Pole Low-Pass Filters
-A case where the small-ripple approximation is not useful is in converters containing two-pole
-low-pass ﬁlters, such as in the output of the ´Cuk converter (Fig. 2.20) or the buck converter
-(Fig. 2.25). For these converters, the small-ripple approximation predicts zero output voltage
-ripple, regardless of the value of the output ﬁlter capacitance. The problem is that the only
-component of output capacitor current in these cases is that arising from the inductor current
-ripple. Hence, inductor current ripple cannot be neglected when calculating the output capacitor
-voltage ripple, and a more accurate approximation is needed.
-An improved approach that is useful for this case is to estimate the capacitor current wave-
-form i
-C(t) more accurately, accounting for the inductor current ripple. The capacitor voltage
-ripple can then be related to the total charge contained in the positive portion of the iC(t)w a v e -
-form.
-Consider the buck converter of Fig.2.25. The inductor current waveform iL(t) contains a dc
-component I and linear ripple of peak magnitude ΔiL, as shown in Fig. 2.10. The dc compo-
-nent I must ﬂow entirely through the load resistance R (why?), while the ac switching ripple
-divides between the load resistance R and the ﬁlter capacitor C. In a well-designed converter,
-in which the capacitor provides signiﬁcant ﬁltering of the switching ripple, the capacitanceC is
-chosen large enough that its impedance at the switching frequency is much smaller than the load
-impedance R. Hence nearly all of the inductor current ripple ﬂows through the capacitor, and
-+
-–
-L
-CR
-+
-vC(t)
-–
-1
-2
-iC(t) iR(t)iL(t)
-Vg
-Fig. 2.25 The buck converter contains a two-pole output ﬁlter
+考虑图2.25的降压变换器。电感电流波形 $i_L(t)$ 含有直流分量 $I$ 和峰值幅值为 $\Delta i_L$ 的线性纹波，如图2.10所示。直流分量 $I$ 必须全部流过负载电阻 $R$（为什么？），而交流开关纹波则在负载电阻 $R$ 与滤波电容 $C$ 之间分配。在设计良好的变换器中，电容对开关纹波提供显著的滤波作用，电容 $C$ 选得足够大，使其在开关频率处的阻抗远小于负载阻抗 $R$。于是电感电流纹波几乎全部流过电容，只有很少部分流过负载。如图2.26所示，此时电容电流波形 $i_C(t)$ 等于去掉直流分量后的电感电流波形。电流纹波是线性的，峰值为 $\Delta i_L$。
 
-36 2 Principles of Steady-State Converter Analysis
-iC(t)
-vC(t)
-t
-t
-Total charge
-q
-DTs D'Ts
-Ts /2
-V
-ΔiL
-Δv
-Δv
-Fig. 2.26 Output capacitor voltage and current waveforms, for the buck converter in Fig.2.25
-very little ﬂows through the load. As shown in Fig.2.26, the capacitor current waveform iC(t)i s
-then equal to the inductor current waveform with the dc component removed. The current ripple
-is linear, with peak valueΔi
-L.
-When the capacitor current iC(t) is positive, charge is deposited on the capacitor plates and
-the capacitor voltage vC(t) increases. Therefore, between the two zero crossings of the capacitor
-current waveform, the capacitor voltage changes between its minimum and maximum extrema.
-The waveform is symmetrical, and the total change in vC is the peak-to-peak output voltage
-ripple, or 2Δv.
-This change in capacitor voltage can be related to the total chargeq contained in the positive
-portion of the capacitor current waveform. By the capacitor relation Q= CV,
-q= C(2Δv) (2.58)
-As illustrated in Fig. 2.26, the charge q is the integral of the current waveform between its zero
-crossings. For this example, the integral can be expressed as the area of the shaded triangle,
-having a heightΔiL. Owing to the symmetry of the current waveform, the zero crossings occur
-at the centerpoints of the DTs and D′Ts subintervals. Hence, the base dimension of the triangle
-is Ts/2. So the total charge q is given by
-q= 1
-2ΔiL
-Ts
-2 (2.59)
-Substitution of Eq. (2.58) into Eq. (2.59), and solution for the voltage ripple peak magnitudeΔv
-yields
-Δv=ΔiLTs
-8C (2.60)
+![源页 p.52](../assets/page-snapshots/chapter-2/page-52.png)
 
-2.6 Summary of Key Points 37
-Fig. 2.27 Estimating inductor
-current ripple when the inductor
-voltage waveform is continuous
-vL(t)
-iL(t)
-t
-t
-Total
-flux linkage
-−λ
-DTs D'Ts
-Ts /2
-I
-Δv
-Δi
-Δi
-This expression can be used to select a value for the capacitance C such that a given voltage
-rippleΔv is obtained. In practice, the additional voltage ripple caused by the capacitor equivalent
-series resistance (ESR) must also be included.
-Similar arguments can be applied to inductors. An example is considered in Problem2.10,i n
-which a two-pole input ﬁlter is added to a buck converter as in Fig. 2.33. The capacitor voltage
-ripple cannot be neglected; doing so would lead to the conclusion that no ac voltage is applied
-across the input ﬁlter inductor, resulting in zero input current ripple. The actual inductor voltage
-waveform is identical to the ac portion of the input ﬁlter capacitor voltage, with linear ripple
-and with peak valueΔv as illustrated in Fig.2.27. By use of the inductor relationλ= Li, a result
-similar to Eq. (2.60) can be derived. The derivation is left as a problem for the student.
-2.6 Summary of Key Points
-1. The dc component of a converter waveform is given by its average value, or the integral over
-one switching period, divided by the switching period. Solution of a dc–dc converter to ﬁnd
-its dc, or steady state, voltages and currents therefore involves averaging the waveforms.
-2. The linear- (or small-) ripple approximation greatly simpliﬁes the analysis. In a well-
-designed converter, the switching ripples in the inductor currents and capacitor voltages
-are small compared to the respective dc components, and can be neglected.
-3. The small-ripple approximation is properly applied only to inductor currents and capacitor
-voltages, which are continuous waveforms. Attempts to apply the small-ripple approxima-
-tion to switched (discontinuous) waveforms lead to erroneous results.
-4. The principle of inductor volt-second balance allows determination of the dc voltage compo-
-nents in any switching converter. In steady state, the average voltage applied to an inductor
-must be zero.
-5. The principle of capacitor charge balance allows determination of the dc components of the
-inductor currents in a switching converter. In steady state, the average current applied to a
-capacitor must be zero.
+当电容电流 $i_C(t)$ 为正时，电荷沉积在电容极板上，电容电压 $v_C(t)$ 上升。因此，在电容电流波形的两个过零点之间，电容电压在其最小值与最大值之间变化。波形是对称的，$v_C$ 的总变化量即峰峰值输出电压纹波，即 $2\Delta v$。
 
-38 2 Principles of Steady-State Converter Analysis
-6. By knowledge of the slopes of the inductor current and capacitor voltage waveforms, the
-ac switching ripple magnitudes may be computed. Inductance and capacitance values can
-then be chosen to obtain desired ripple magnitudes.
-7. In converters containing multiple-pole ﬁlters, continuous (nonpulsating) voltages and cur-
-rents are applied to one or more of the inductors or capacitors. Computation of the ac
-switching ripple in these elements can be done using capacitor charge and/or inductor ﬂux-
-linkage arguments, without use of the small-ripple approximation.
-8. Converters capable of increasing (boost), decreasing (buck), and inverting the voltage polar-
-ity (buck–boost and ´Cuk) have been described. Converter circuits are explored more fully
-in the problems and in a later chapter.
-Problems
-2.1 Analysis and design of a buck–boost converter: A buck–boost converter is illustrated
-in Fig. 2.28a, and a practical implementation using a transistor and diode is shown in
-Fig. 2.28b.
-Fig. 2.28 Buck–boost converter
-of Problem 2.1:( a) ideal converter
-circuit, ( b) implementation using
-MOSFET and diode
-+
-– L
-CR
-+
-v
-–
-12
-i(t)
-Vg
-+
-v
-–
-i(t)
-+
-–
-D1Q1
-LC R
-iT
-iD
-Vg
-(a)
-(b)
-(a) Find the dependence of the equilibrium output voltage V and inductor current I on
-the duty ratio D, input voltage Vg, and load resistance R. You may assume that the
-inductor current ripple and capacitor voltage ripple are small.
-(b) Plot your results of part (a) over the range 0≤D≤1.
-(c) Dc design: for the speciﬁcations
-Vg= 30 V V=−20V
-R= 4Ω fs= 40 kHz
-(i)F i n dD and I
-(ii) Calculate the value of L that will make the peak inductor current rippleΔi equal
-to ten percent of the average inductor current I.
-(iii) Choose C such that the peak output voltage rippleΔv is 0.1 V .
+电容电压的这一变化可与电容电流波形正半部分所含的总电荷 $q$ 相关联。由电容关系 $Q = CV$，有
 
-2.6 Summary of Key Points 39
-(d) Sketch the transistor drain current waveform iT (t) for your design of part (c). Include
-the eﬀects of inductor current ripple. What is the peak value of iT ? Also sketch iT (t)
-for the case when L is decreased such thatΔi is 50% of I. What happens to the peak
-value of iT in this case?
-(e) Sketch the diode current waveform iD(t) for the two cases of part (d).
-2.2 The boost converter illustrated in Fig.2.29 operates with the following conditions:
-Input voltage Vg= 3.3V
-Output voltage V= 5V
-Switching frequency fs= 500 kHz
-All elements are ideal, and the converter operates in steady state with waveforms similar
-to those illustrated in Fig. 2.15.
-(a) What is the duty cycle?
-Fig. 2.29 Boost converter of Problem 2.2
-(b) Sketch the waveform of the MOSFET drain-to-source voltage. Label the numerical
-values of all relevant times and voltages.
-(c) Find the dc component of the voltage waveform of Part (b).
-2.3 In a certain application, an unregulated dc input voltage can vary between 18 and 36 V . It
-is desired to produce a regulated output of 28 V to supplya2Al oad. Hence, a converter is
-needed that is capable of both increasing and decreasing the voltage. Since the input and
-output voltages are both positive, converters that invert the voltage polarity (such as the
-basic buck–boost converter) are not suited for this application.
-One converter that is capable of performing the required function is the nonisolated SEPIC
-(single-ended primary inductance converter) shown in Fig.2.30. This converter has a con-
-+
-–
-D1L1
-C2
-+
-v
-–
-Q1
-C1
-L2
-+
-vDS
-–
-iD
-Load
-R
-i1
-Vg
-Fig. 2.30 SEPIC of Problems 2.3 and 2.4
+$$q = C(2\Delta v) \tag{2.58}$$
 
-40 2 Principles of Steady-State Converter Analysis
-version ratio M(D) that can both buck and boost the voltage, but the voltage polarity is
-not inverted. In the normal converter operating mode, the transistor conducts during the
-ﬁrst subinterval (0 < t < DTs), and the diode conducts during the second subinterval
-(DTs< t< Ts). You may assume that all elements are ideal.
-(a) Derive expressions for the dc components of each capacitor voltage and inductor cur-
-rent, as functions of the duty cycle D, the input voltage Vg, and the load resistance
-R.
-(b) A control circuit automatically adjusts the converter duty cycle D, to maintain a con-
-stant output voltage of V = 28 V . The input voltage slowly varies over the range
-18 V≤Vg ≤36 V. The load current is constant and equal to 2 A. Over what range
-will the duty cycle D vary? Over what range will the input inductor current dc compo-
-nent I1 vary?
-2.4 For the SEPIC of Problem 2.3,
-(a) Derive expressions for each inductor current ripple and capacitor voltage ripple. Ex-
-press these quantities as functions of the switching period Ts; the component values
-L1, L2, C1, C2; the duty cycle D; the input voltage Vg; and the load resistance R.
-(b) Sketch the waveforms of the transistor voltage vDS (t) and transistor current iD(t), and
-give expressions for their peak values.
-2.5 The switches in the converter of Fig.2.31 operate synchronously: each is in position 1 for
-0< t< DTs, and in position 2 for DTs < t< Ts. Derive an expression for the voltage
-conversion ratio M(D)= V/Vg.S k e t c hM(D)v s .D.
-+
-–
-L
-C
-R
-+ v –
-2
-1iL
-Vg
-1
-2
-Fig. 2.31 H-bridge converter of Problems 2.5 and 2.7
-2.6 The switches in the converter of Fig.2.32 operate synchronously: each is in position 1 for
-0< t< DTs, and in position 2 for DTs < t< Ts. Derive an expression for the voltage
-conversion ratio M(D)= V/Vg.S k e t c hM(D)v s .D.
-+
-–
-L
-C
-R
-+ v –
-1
-2
-2
-1
-iL
-Vg
-Fig. 2.32 Current-fed bridge converter of Problems 2.6, 2.8,a n d2.9
+如图2.26所示，电荷 $q$ 是电流波形在两过零点之间的积分。对本例而言，该积分可表示为图中阴影三角形的面积，其高为 $\Delta i_L$。由于电流波形对称，过零点出现在 $DT_s$ 和 $D'T_s$ 两个子区间的中点。因此三角形的底边长度为 $T_s/2$。故总电荷 $q$ 为
 
-2.6 Summary of Key Points 41
-2.7 For the converter of Fig. 2.31, derive expressions for the inductor current ripple ΔiL and
-the capacitor voltage rippleΔvC.
-2.8 For the converter of Fig.2.32, derive an analytical expression for the dc component of the
-inductor current, I, as a function of D, Vg, and R. Sketch your result vs. D.
-2.9 For the converter of Fig. 2.32, derive expressions for the inductor current ripple ΔiL and
-the capacitor voltage rippleΔvC.
-2.10 To reduce the switching harmonics present in the input current of a certain buck converter,
-an input ﬁlter consisting of inductor L1 and capacitor C1 is added as shown in Fig. 2.33.
-Such ﬁlters are commonly used to meet regulations limiting conducted electromagnetic
-interference (EMI). For this problem, you may assume that all inductance and capacitance
-values are suﬃciently large, such that all ripple magnitudes are small.
-R
-+
-v
-–
-+
-– C2
-L2L1
-C1
-+
-vC1
-–
-i1
-iT
-i2
-D1
-Q1
-Vg
-Fig. 2.33 Addition of L-C input ﬁlter to buck converter, Problem 2.10
-(a) Sketch the transistor current waveform iT (t).
-(b) Derive analytical expressions for the dc components of the capacitor voltages and
-inductor currents.
-(c) Derive analytical expressions for the peak ripple magnitudes of the input ﬁlter inductor
-current and capacitor voltage.
-(d) Given the following values:
-Input voltage Vg= 48 V
-Output voltage V= 36 V
-Switching frequency fs= 100 kHz
-Load resistance R= 6Ω
-Select values for L1 and C1 such that (i) the peak voltage ripple on C1,ΔvC1,i st w o
-percent of the dc component VC1, and (ii) the input peak current rippleΔi1 is 20 mA.
-2.11 An ideal boost converter is shown in Fig.2.13a. For the converter operating in steady state,
-derive exact analytical expressions for:
-(a) the dc component of the output voltage,
-(b) the peak-to-peak inductor current ripple, and
-(c) the peak-to-peak capacitor voltage ripple.
-Your expressions should be written in terms of the circuit parameters Vg, R, Ts, L, C, and
-duty cycle D.
-```
+$$q = \frac{1}{2}\Delta i_L \frac{T_s}{2} \tag{2.59}$$
+
+将式 (2.58) 代入式 (2.59)，并求解电压纹波峰值幅值 $\Delta v$，得
+
+$$\Delta v = \frac{\Delta i_L T_s}{8C} \tag{2.60}$$
+
+![源页 p.53](../assets/page-snapshots/chapter-2/page-53.png)
+
+该式可用于选择电容 $C$ 的值，以获得给定的电压纹波 $\Delta v$。在实际中，还必须计入电容等效串联电阻（ESR）所引起的附加电压纹波。
+
+类似的论证也可用于电感。习题2.10即为一例，其中在降压变换器中加入了一个双极点输入滤波器，如图2.33所示。此时电容电压纹波不可忽略；若忽略则会得出输入滤波电感上无交流电压、从而输入电流纹波为零的结论。实际电感电压波形与输入滤波电容电压的交流部分完全相同，呈线性纹波，峰值 $\Delta v$，如图2.27所示。利用电感关系 $\lambda = Li$，可导出与式 (2.60) 类似的结果。推导留作习题。
+
+## 2.6 要点小结
+
+1. 变换器波形的直流分量由其平均值给出，即在一个开关周期上的积分除以开关周期。因此，求解直流-直流变换器的直流（稳态）电压和电流需要对波形进行平均。
+2. 线性纹波（小纹波）近似极大地简化了分析。在设计良好的变换器中，电感电流和电容电压的开关纹波远小于各自的直流分量，可以忽略。
+3. 小纹波近似只能正确地应用于电感电流和电容电压这类连续波形。试图将小纹波近似应用于开关（不连续）波形会得到错误结果。
+4. 电感伏秒平衡原理可以确定任何开关变换器中的直流电压分量。在稳态下，施加于电感的平均电压必须为零。
+5. 电容电荷平衡原理可以确定开关变换器中电感电流的直流分量。在稳态下，施加于电容的平均电流必须为零。
+6. 已知电感电流和电容电压波形的斜率，即可计算交流开关纹波幅值。进而可选择电感和电容值以获得所需的纹波幅值。
+7. 在含有多极点滤波器的变换器中，连续（非脉动）电压和电流施加于一个或多个电感或电容。这些元件中交流开关纹波的计算可利用电容电荷和/或电感磁链的论证完成，而无需使用小纹波近似。
+8. 本书已介绍了能够升压（升压变换器）、降压（降压变换器）和反极性（升降压变换器和 Ćuk 变换器）的变换器。变换器电路将在习题及后续章节中更充分地探讨。
+
+### 习题
+
+**2.1** 升降压变换器的分析与设计：图2.28a所示为升降压变换器，图2.28b为用晶体管和二极管的实际实现。
+
+![源页 p.54](../assets/page-snapshots/chapter-2/page-54.png)
+
+(a) 求平衡输出电压 $V$ 和电感电流 $I$ 对占空比 $D$、输入电压 $V_g$ 和负载电阻 $R$ 的依赖关系。可假设电感电流纹波和电容电压纹波很小。
+
+(b) 在 $0 \le D \le 1$ 范围内绘制 (a) 的结果。
+
+(c) 直流设计：给定参数
+$$V_g = 30\,\text{V}, \quad V = -20\,\text{V}, \quad R = 4\,\Omega, \quad f_s = 40\,\text{kHz}$$
+
+(i) 求 $D$ 和 $I$。
+
+(ii) 计算使峰值电感电流纹波 $\Delta i$ 等于平均电感电流 $I$ 的 10% 时的 $L$ 值。
+
+(iii) 选择 $C$ 使峰值输出电压纹波 $\Delta v$ 为 0.1 V。
+
+(d) 画出 (c) 设计中晶体管漏极电流波形 $i_T(t)$，包含电感电流纹波的影响。$i_T$ 的峰值是多少？再画出 $L$ 减小使 $\Delta i$ 为 $I$ 的 50% 时的 $i_T(t)$。此时 $i_T$ 的峰值如何变化？
+
+(e) 画出 (d) 两种情况下的二极管电流波形 $i_D(t)$。
+
+**2.2** 图2.29所示升压变换器的工作条件为：
+
+$$V_g = 3.3\,\text{V}, \quad V = 5\,\text{V}, \quad f_s = 500\,\text{kHz}$$
+
+所有元件均为理想，变换器在稳态下工作，波形类似于图2.15所示。
+
+![源页 p.55](../assets/page-snapshots/chapter-2/page-55.png)
+
+(a) 占空比为多少？
+
+(b) 画出 MOSFET 漏源电压波形，标出所有相关时间和电压的数值。
+
+(c) 求 (b) 电压波形的直流分量。
+
+**2.3** 在某一应用中，未稳压的直流输入电压可在 18 V 至 36 V 之间变化。要求产生一个 28 V 的稳压输出以向 2 A 负载供电。因此需要一台既能升压又能降压的变换器。由于输入和输出电压均为正，反极性变换器（如基本升降压变换器）不适用于此场合。
+
+一种能完成所需功能的变换器是图2.30所示的非隔离 SEPIC（单端初级电感变换器）。该变换器的变换比 $M(D)$ 既可降压也可升压，且电压极性不反转。在正常工作模式下，晶体管在第一子区间（$0 < t < DT_s$）导通，二极管在第二子区间（$DT_s < t < T_s$）导通。可假设所有元件均为理想。
+
+(a) 导出各电容电压和电感电流直流分量的表达式，表示为占空比 $D$、输入电压 $V_g$ 和负载电阻 $R$ 的函数。
+
+(b) 控制电路自动调节变换器占空比 $D$ 以维持 $V = 28\,\text{V}$ 的恒定输出。输入电压缓慢变化于 $18\,\text{V} \le V_g \le 36\,\text{V}$ 范围。负载电流恒定为 2 A。占空比 $D$ 在何范围内变化？输入电感电流直流分量 $I_1$ 在何范围内变化？
+
+![源页 p.56](../assets/page-snapshots/chapter-2/page-56.png)
+
+**2.4** 对习题2.3的 SEPIC，
+
+(a) 导出各电感电流纹波和电容电压纹波的表达式，表示为开关周期 $T_s$，元件值 $L_1$、$L_2$、$C_1$、$C_2$，占空比 $D$，输入电压 $V_g$，以及负载电阻 $R$ 的函数。
+
+(b) 画出晶体管电压 $v_{DS}(t)$ 和晶体管电流 $i_D(t)$ 的波形，并给出其峰值的表达式。
+
+**2.5** 图2.31所示变换器中的开关同步工作：每个开关在 $0 < t < DT_s$ 时位于位置1，在 $DT_s < t < T_s$ 时位于位置2。导出电压变换比 $M(D) = V/V_g$ 的表达式。绘制 $M(D)$ 随 $D$ 的变化。
+
+**2.6** 图2.32所示变换器中的开关同步工作：每个开关在 $0 < t < DT_s$ 时位于位置1，在 $DT_s < t < T_s$ 时位于位置2。导出电压变换比 $M(D) = V/V_g$ 的表达式。绘制 $M(D)$ 随 $D$ 的变化。
+
+![源页 p.57](../assets/page-snapshots/chapter-2/page-57.png)
+
+**2.7** 对图2.31的变换器，导出电感电流纹波 $\Delta i_L$ 和电容电压纹波 $\Delta v_C$ 的表达式。
+
+**2.8** 对图2.32的变换器，导出电感电流直流分量 $I$ 的解析表达式，表示为 $D$、$V_g$ 和 $R$ 的函数。绘制结果随 $D$ 的变化。
+
+**2.9** 对图2.32的变换器，导出电感电流纹波 $\Delta i_L$ 和电容电压纹波 $\Delta v_C$ 的表达式。
+
+**2.10** 为减小某降压变换器输入电流中的开关谐波，加入由电感 $L_1$ 和电容 $C_1$ 构成的输入滤波器，如图2.33所示。此类滤波器常用于满足限制传导电磁干扰（EMI）的规定。本题可假设所有电感和电容值足够大，使各纹波幅值都很小。
+
+(a) 画出晶体管电流波形 $i_T(t)$。
+
+(b) 导出各电容电压和电感电流直流分量的解析表达式。
+
+(c) 导出输入滤波电感电流和电容电压峰值纹波幅值的解析表达式。
+
+(d) 给定参数
+$$V_g = 48\,\text{V}, \quad V = 36\,\text{V}, \quad f_s = 100\,\text{kHz}, \quad R = 6\,\Omega$$
+
+选择 $L_1$ 和 $C_1$ 的值，使得 (i) $C_1$ 上的峰值电压纹波 $\Delta v_{C1}$ 为其直流分量 $V_{C1}$ 的 2%，(ii) 输入峰值电流纹波 $\Delta i_1$ 为 20 mA。
+
+**2.11** 图2.13a所示为一理想升压变换器。变换器在稳态工作时，导出以下各量的精确解析表达式：
+
+(a) 输出电压的直流分量；
+
+(b) 峰峰值电感电流纹波；
+
+(c) 峰峰值电容电压纹波。
+
+表达式应以电路参数 $V_g$、$R$、$T_s$、$L$、$C$ 和占空比 $D$ 表示。

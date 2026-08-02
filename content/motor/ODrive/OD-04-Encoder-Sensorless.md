@@ -101,7 +101,7 @@ flowchart LR
     PllPos -->|"反馈"| DeltaPos
 ```
 
-**离散时间 PLL 方程：**
+- **离散时间 PLL 方程：**
 
 $$pll\_vel[k] = pll\_vel[k-1] + K_i \cdot T_s \cdot \Delta pos[k]$$
 
@@ -128,11 +128,11 @@ $$phase = \frac{pll\_pos + interpolation \times 0.25}{CPR} \times 2\pi + phase\_
 
 基于论文：*"Sensorless Control of Surface-Mount Permanent-Magnet Synchronous Motors Based on a Nonlinear Observer"* (Lee, Hong, Nam, Ortega, Praly, Astolfi, 2010)。
 
-**核心思想：** 从电压和电流中估算永磁体磁链的 αβ 分量，从磁链角度提取转子位置。
+- **核心思想：** 从电压和电流中估算永磁体磁链的 αβ 分量，从磁链角度提取转子位置。
 
 ### 2.5 磁链观测器推导
 
-**电机电压方程 (αβ坐标系)：**
+- **电机电压方程 (αβ坐标系)：**
 
 $$V_{\alpha\beta} = R_s I_{\alpha\beta} + L_s \frac{dI_{\alpha\beta}}{dt} + \frac{d\psi_{\alpha\beta}}{dt}$$
 
@@ -140,11 +140,11 @@ $$V_{\alpha\beta} = R_s I_{\alpha\beta} + L_s \frac{dI_{\alpha\beta}}{dt} + \fra
 
 $$\psi_\alpha = \psi_{PM} \cos\theta_e, \quad \psi_\beta = \psi_{PM} \sin\theta_e$$
 
-**总磁链驱动电压：**
+- **总磁链驱动电压：**
 
 $$y_{\alpha\beta} = V_{\alpha\beta} - R_s I_{\alpha\beta}$$
 
-**观测器结构：**
+- **观测器结构：**
 
 定义状态变量 $x_{\alpha\beta}$ = 总磁链 (定子磁链 + 永磁体磁链)：
 
@@ -152,7 +152,7 @@ $$\eta_{\alpha\beta} = x_{\alpha\beta} - L_s I_{\alpha\beta}$$
 
 其中 $\eta_{\alpha\beta}$ 为估计的永磁体磁链。
 
-**非线性观测器 (eqn 8 of the paper)：**
+- **非线性观测器 (eqn 8 of the paper)：**
 
 $$\dot{x}_{\alpha\beta} = y_{\alpha\beta} + \frac{\gamma}{2} \cdot \frac{\psi_{PM}^2 - \|\eta\|^2}{\psi_{PM}^2} \cdot \eta_{\alpha\beta}$$
 
@@ -196,9 +196,9 @@ ODrive 支持 60° 安装的霍尔传感器，通过极性校准 `hall_polarity`
 
 ### 3.1 编码器偏移校准模型
 
-**校准原理：** 施加已知电角度旋转（开环），测量编码器实际移动量，计算电角度与编码器计数的对应关系。
+- **校准原理：** 施加已知电角度旋转（开环），测量编码器实际移动量，计算电角度与编码器计数的对应关系。
 
-**关键公式：**
+- **关键公式：**
 
 $$elec\_rad\_per\_enc = pole\_pairs \times 2\pi / CPR$$
 
@@ -605,7 +605,7 @@ STM32 SPI1/SPI3 → MOSI/SCLK/CS → 绝对编码器 (AS5047, MA732 等)
                               → abs_spi_cb() 回调
 ```
 
-**关键约束：**
+- **关键约束：**
 - 绝对编码器读取通过 SPI DMA 异步进行
 - `abs_spi_pos_updated_` 标志防止重复发起传输
 - SPI 时钟和相位由编码器类型自动配置

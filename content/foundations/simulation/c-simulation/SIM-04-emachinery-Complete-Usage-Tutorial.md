@@ -18,9 +18,9 @@ navGroupOrder: 30
 
 #  emachinery 仿真系统 — 完整使用教程
 
-**版本：** v1.0
-**日期：** 2026-06
-**适用对象：** 电机控制学习者、嵌入式开发者、首次使用 emachinery 仿真框架的用户
+- **版本：** v1.0
+- **日期：** 2026-06
+- **适用对象：** 电机控制学习者、嵌入式开发者、首次使用 emachinery 仿真框架的用户
 
 > **目标：** 一份自包含的教程，让你从零开始理解 emachinery 仿真系统的架构、启动运行、操作使用、功能扩展，最终能独立使用该系统进行电机控制仿真研究。
 
@@ -32,7 +32,7 @@ navGroupOrder: 30
 
 emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架，专为 PMSM（永磁同步电机）和 IM（感应电机）的控制算法验证而设计。
 
-**核心特点：**
+- **核心特点：**
 - C 语言仿真引擎：RK4 四阶龙格库塔法求解电机非线性状态方程，精度高、速度快
 - Python GUI：基于 Streamlit 的 Web 界面，参数配置、模式切换、结果可视化一体化
 - 自动代码生成：YAML 配置 → C 头文件/源文件自动生成，无需手动修改 C 代码
@@ -168,9 +168,9 @@ emachinery 提供 24 种仿真模式，按功能可分为 7 大类：
 
 #### 方式一（推荐）：Streamlit 图形界面
 
-**操作：** 双击 `%EMACHINERY_START_SCRIPT%`
+- **操作：** 双击 `%EMACHINERY_START_SCRIPT%`
 
-**脚本内容解析：**
+- **脚本内容解析：**
 ```batch
 @echo off
 chcp 65001 >nul                          # 设置控制台编码为 UTF-8，防止中文乱码
@@ -184,15 +184,15 @@ cd /d %EMACHINERY_ROOT%                     # 切换到源码根目录
 python -m emachinery.main                          # 启动 Streamlit GUI
 ```
 
-**运行成功后：** 浏览器自动打开 `http://localhost:8501`，看到 Streamlit 界面。
+- **运行成功后：** 浏览器自动打开 `http://localhost:8501`，看到 Streamlit 界面。
 
-**适合：** 日常使用、参数调优、查看仿真曲线
+- **适合：** 日常使用、参数调优、查看仿真曲线
 
 #### 方式二：命令行直接编译
 
-**操作：** 双击 `%EMACHINERY_BUILD_SCRIPT%`
+- **操作：** 双击 `%EMACHINERY_BUILD_SCRIPT%`
 
-**脚本做的事：** 设置 PATH → 切换到 C 源码目录 → 执行 `gmake.exe`
+- **脚本做的事：** 设置 PATH → 切换到 C 源码目录 → 执行 `gmake.exe`
 
 编译成功后，`frameworkCodes\c` 目录下生成 `main.exe`。手动运行：
 ```bash
@@ -202,7 +202,7 @@ main.exe
 
 仿真数据输出到 `%EMACHINERY_ROOT%\dat\电机名.dat`。
 
-**适合：** 只改了 C 代码需要快速编译验证、不想启动 Streamlit
+- **适合：** 只改了 C 代码需要快速编译验证、不想启动 Streamlit
 
 #### 方式三：手动命令
 
@@ -212,7 +212,7 @@ cd /d %EMACHINERY_ROOT%
 python -m emachinery.main
 ```
 
-**适合：** 调试启动问题、在已有终端环境中快速启动
+- **适合：** 调试启动问题、在已有终端环境中快速启动
 
 ### 2.3 启动后确认
 
@@ -237,9 +237,9 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 ### 3.2 Step 1: 选择运行模式
 
-**位置：** 左侧 sidebar 顶部的下拉菜单
+- **位置：** 左侧 sidebar 顶部的下拉菜单
 
-**可选项：**
+- **可选项：**
 
 | 选项 | 说明 | 适合 |
 |------|------|------|
@@ -251,43 +251,43 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 | **plugin_arbitrarily_plot_2d** | 任意 2D 信号图绘制 | 自定义信号对比 |
 | **plugin_example** | 插件开发示例 | 学习如何开发插件 |
 
-**首次使用建议：** 保持默认的 **「C」** 模式。
+- **首次使用建议：** 保持默认的 **「C」** 模式。
 
 ### 3.3 Step 2: 选择电机
 
-**位置：** sidebar 中的「电机选择:」下拉菜单
+- **位置：** sidebar 中的「电机选择:」下拉菜单
 
-**操作：** 从下拉列表中选择电机型号（如 `SEW100W`、`SEW200W` 等）
+- **操作：** 从下拉列表中选择电机型号（如 `SEW100W`、`SEW200W` 等）
 
-**底层机制：**
+- **底层机制：**
 - 电机列表从 `motor_library.json` 读取
 - 选中电机后，其额定参数（极对数、Rs、Ld、Lq、KE、Js、Vdc 等）自动加载
 - 电机参数显示在 sidebar 的折叠面板中（只读表格）
 - 也可以选择 `my-yaml-custom-motor` 使用 YAML 文件中的自定义电机参数
 
-**首次使用建议：** 保持默认的 `SEW100W`（100W 表贴式 PMSM，参数经过辨识验证）。
+- **首次使用建议：** 保持默认的 `SEW100W`（100W 表贴式 PMSM，参数经过辨识验证）。
 
 ### 3.4 Step 3: 选择用户
 
-**位置：** sidebar 中的「who_is_user:」下拉菜单
+- **位置：** sidebar 中的「who_is_user:」下拉菜单
 
-**说明：** emachinery 支持多用户并行开发，每个用户有独立的算法扩展和参数配置。选择不同用户会加载对应的 `user_config_*.yaml` 文件，影响可调参数列表、信号库和绘图配置。
+- **说明：** emachinery 支持多用户并行开发，每个用户有独立的算法扩展和参数配置。选择不同用户会加载对应的 `user_config_*.yaml` 文件，影响可调参数列表、信号库和绘图配置。
 
-**首次使用建议：** 保持默认用户即可。如果你是开发者，可以创建自己的用户配置。
+- **首次使用建议：** 保持默认用户即可。如果你是开发者，可以创建自己的用户配置。
 
 ### 3.5 Step 4: 查看/修改参数
 
-**位置：** sidebar 中的两个面板
+- **位置：** sidebar 中的两个面板
 
-**「仿真参数」折叠面板：** 显示当前 YAML 配置的完整内容（只读参考）
+- **「仿真参数」折叠面板：** 显示当前 YAML 配置的完整内容（只读参考）
 
-**「可调参数」折叠面板：**
+- **「可调参数」折叠面板：**
 1. 从下拉列表中选择你想调整的参数（可多选）
 2. 选中的参数以可编辑表格形式显示
 3. 直接在表格中修改数值
 4. 点击「将上述设置保存为该电机默认设置」可持久化修改
 
-**关键参数速查：**
+- **关键参数速查：**
 
 | 参数 | 含义 | 典型值 | 修改影响 |
 |------|------|--------|---------|
@@ -303,9 +303,9 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 ### 3.6 Step 5: 编译并运行
 
-**位置：** 页面上的 **「Save to C and compile」** 按钮
+- **位置：** 页面上的 **「Save to C and compile」** 按钮
 
-**点击后内部执行流程：**
+- **点击后内部执行流程：**
 1. 
 `SuperConfig` 类解析 sidebar 中的 `d_sim` 参数字典
 2. 自动生成 `super_config.h`（C 结构体类型定义）
@@ -313,15 +313,15 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 4. 调用 `gmake` 编译所有 C 文件 → 生成 `main.exe`
 5. 运行 `main.exe` → 输出 `dat/电机名.dat` 数据文件
 
-**编译成功标志：** 控制台输出 `_=50000`（表示仿真完成 50000 步）
+- **编译成功标志：** 控制台输出 `_=50000`（表示仿真完成 50000 步）
 
-**如果编译报错：** 错误信息会直接在 Streamlit 页面上显示（红色文本框），参见第 9 节。
+- **如果编译报错：** 错误信息会直接在 Streamlit 页面上显示（红色文本框），参见第 9 节。
 
 ### 3.7 Step 6: 查看仿真结果
 
 编译运行成功后，页面自动切换到绘图视图。
 
-**默认显示 7 个子图：**
+- **默认显示 7 个子图：**
 
 | 子图 | Y轴 | 信号 | 怎么看 |
 |------|-----|------|--------|
@@ -333,9 +333,9 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 | **uAB** | 电压 [V] | D/Q 轴电压指令、α/β 轴电压指令 | dq 轴接近直流，αβ 轴为正弦波 |
 | **Timebase** | 时间 [s] | timebase | 横轴参考 |
 
-**交互操作：** 缩放（鼠标框选/滚轮）、平移（拖动）、保存（工具栏图标）、重置（Home 图标）
+- **交互操作：** 缩放（鼠标框选/滚轮）、平移（拖动）、保存（工具栏图标）、重置（Home 图标）
 
-**自定义绘图布局：** 取消勾选「custom cplot display」旁边的复选框，或设置行×列数来自定义子图布局。
+- **自定义绘图布局：** 取消勾选「custom cplot display」旁边的复选框，或设置行×列数来自定义子图布局。
 
 ---
 
@@ -345,55 +345,55 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 #### MODE_SELECT_PWM_DIRECT (1) — PWM 直接控制
 
-**用途：** 给定固定占空比，验证逆变器基本功能
+- **用途：** 给定固定占空比，验证逆变器基本功能
 
-**操作步骤：**
+- **操作步骤：**
 1. 在 sidebar 模式选择中选择 `MODE_SELECT_PWM_DIRECT`
 2. 点击「Save to C and compile」运行仿真
 3. 观察输出：三相 PWM 占空比固定为 50%
 
-**预期结果：** 电机不旋转（无电流环控制），仅用于验证 PWM 输出通道
+- **预期结果：** 电机不旋转（无电流环控制），仅用于验证 PWM 输出通道
 
 #### MODE_SELECT_VOLTAGE_OPEN_LOOP (11) — 电压开环控制
 
-**用途：** 给定 αβ 轴电压旋转矢量，验证电机基本旋转
+- **用途：** 给定 αβ 轴电压旋转矢量，验证电机基本旋转
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_VOLTAGE_OPEN_LOOP`
 2. 在 `pmsm_comm.c` 的 `init_debug()` 中修改 `vvvf_voltage`（电压幅值，默认 3.0V）和 `vvvf_frequency`（频率，默认 5.0Hz）
 3. 编译运行
 
-**预期结果：** 电机以给定频率旋转，电流为正弦波（无闭环控制，转速不精确）
+- **预期结果：** 电机以给定频率旋转，电流为正弦波（无闭环控制，转速不精确）
 
 #### MODE_SELECT_WITHOUT_ENCODER_CURRENT_VECTOR_ROTATE (2) — 无编码器电流矢量旋转
 
-**用途：** 开环电流控制，验证 Park 变换和电流环基本功能
+- **用途：** 开环电流控制，验证 Park 变换和电流环基本功能
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_WITHOUT_ENCODER_CURRENT_VECTOR_ROTATE`
 2. 在 sidebar 可调参数中设定 `set_id_command` 和 `set_iq_command`
 3. 编译运行
 
-**预期结果：** 电流矢量以给定频率旋转，id/iq 跟踪给定值
+- **预期结果：** 电流矢量以给定频率旋转，id/iq 跟踪给定值
 
 ### 4.2 电流环 FOC 模式
 
 #### MODE_SELECT_FOC (3) — 有传感器 FOC
 
-**用途：** 验证 Clarke→Park→PI→解耦→InvPark 完整 FOC 链路
+- **用途：** 验证 Clarke→Park→PI→解耦→InvPark 完整 FOC 链路
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_FOC`
 2. 在 sidebar 可调参数中设定 `set_id_command = 0` 和 `set_iq_command = 额定值`（如 3A）
 3. 编译运行
 
-**预期结果：**
+- **预期结果：**
 - iD 子图：给定 0，反馈也为 0，仅有微小波动
 - iQ 子图：给定阶跃后，反馈在 2~5 个 CL_TS 内跟踪上，无超调或轻微超调（<5%）
 - uAB 子图：αβ 轴电压呈幅值恒定的正弦波
 - Vdc Util 子图：远小于 0.96
 
-**异常排查：**
+- **异常排查：**
 | 现象 | 可能原因 | 解决方案 |
 |------|---------|---------|
 | iQ 跟踪很慢 | CLBW_HZ 太小 | 增大 FOC.CLBW_HZ |
@@ -402,45 +402,45 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 #### MODE_SELECT_FOC_SENSORLESS (31) — 无传感器 FOC
 
-**用途：** 使用观测器估计角度代替编码器，验证无感控制
+- **用途：** 使用观测器估计角度代替编码器，验证无感控制
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_FOC_SENSORLESS`
 2. 确保对应的用户（如 USER_YZZ）的观测器代码已启用
 3. 编译运行
 
-**预期结果：** 观测器估计角度收敛到真实角度，电流环正常工作
+- **预期结果：** 观测器估计角度收敛到真实角度，电流环正常工作
 
 #### MODE_SELECT_ID_SWEEPING_FREQ (33) / MODE_SELECT_IQ_SWEEPING_FREQ (34) — 电流环扫频
 
-**用途：** 验证电流环频率响应，测量实际带宽
+- **用途：** 验证电流环频率响应，测量实际带宽
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_ID_SWEEPING_FREQ`（D 轴扫频）或 `MODE_SELECT_IQ_SWEEPING_FREQ`（Q 轴扫频）
 2. 在 sidebar 可调参数中启用 `bool_apply_sweeping_frequency_excitation: True`
 3. 设置扫频参数：`CMD_CURRENT_SINE_AMPERE`（扫频幅值）、`CMD_SPEED_SINE_HZ`（起始频率）、`CMD_SPEED_SINE_HZ_CEILING`（终止频率）
 4. 编译运行
 5. 在 Streamlit 中切换到 `plugin_Sweeping` 插件查看 Bode 图
 
-**预期结果：** -3dB 带宽接近设定的 `CLBW_HZ`，相位裕度 >45°
+- **预期结果：** -3dB 带宽接近设定的 `CLBW_HZ`，相位裕度 >45°
 
 ### 4.3 速度环模式
 
 #### MODE_SELECT_VELOCITY_LOOP (4) — 速度闭环（最常用）
 
-**用途：** 速度阶跃响应验证，观察速度环+电流环双环交互
+- **用途：** 速度阶跃响应验证，观察速度环+电流环双环交互
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_VELOCITY_LOOP`
 2. 修改 `pmsm_comm.c` 的 `_user_commands()` 中的转速指令序列（或使用 sidebar 中的 `set_rpm_speed_command`）
 3. 编译运行
 
-**预期结果：**
+- **预期结果：**
 - Speed 子图：转速反馈跟踪给定，阶跃时略有过冲（<10%），稳态无静差
 - iQ 子图：加速时 iQ 冲到限幅值，稳速后下降
 - Torque 子图：加速时 Tem > TLoad，稳速时 Tem ≈ TLoad
 
-**异常排查：**
+- **异常排查：**
 | 现象 | 可能原因 | 解决方案 |
 |------|---------|---------|
 | 转速持续振荡 | delta 太小 | 增大 FOC.delta |
@@ -449,30 +449,30 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 #### MODE_SELECT_VELOCITY_LOOP_SENSORLESS (41) — 无传感器速度闭环
 
-**用途：** 使用观测器估计角度和转速进行速度闭环控制
+- **用途：** 使用观测器估计角度和转速进行速度闭环控制
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_VELOCITY_LOOP_SENSORLESS`
 2. 确保对应观测器代码已启用
 3. 编译运行
 
-**预期结果：** 无感控制下转速跟踪给定，低速段角度误差较大
+- **预期结果：** 无感控制下转速跟踪给定，低速段角度误差较大
 
 #### MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED (47) — ESO 转速观测
 
-**用途：** 使用扩张状态观测器（ESO）估计转速和负载转矩
+- **用途：** 使用扩张状态观测器（ESO）估计转速和负载转矩
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED`
 2. 在 sidebar 可调参数中确保 `bool_ESO_SPEED_ON = True` 和 `bool_apply_ESO_SPEED_for_SPEED_FBK = True`
 3. 设置 `CAREFUL_ESOAF_OMEGA_OBSERVER`（观测器带宽，典型值 1000~5000）
 4. 编译运行
 
-**预期结果：**
+- **预期结果：**
 - Speed 子图：三条线（给定/实际/ESO 估计）完全重合
 - 突加负载时 ESO 估计有短暂滞后（<50ms），但很快跟踪上
 
-**异常排查：**
+- **异常排查：**
 | 现象 | 可能原因 | 解决方案 |
 |------|---------|---------|
 | ESO 估计发散 | 观测器带宽太大 | 减小 CAREFUL_ESOAF_OMEGA_OBSERVER |
@@ -481,42 +481,42 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 #### MODE_SELECT_VELOCITY_LOOP_WC_TUNER (43) — 速度环带宽整定
 
-**用途：** 使用 WC Tuner 自动整定速度环 PI 参数，并进行 HitWall 分析
+- **用途：** 使用 WC Tuner 自动整定速度环 PI 参数，并进行 HitWall 分析
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_VELOCITY_LOOP_WC_TUNER`
 2. 在 sidebar 可调参数中设置 `bool_apply_WC_tunner_for_speed_loop = True`
 3. 配置 HitWall 分析参数（如 `HitWall_high_RPM_command`、`HitWall_time_interval`）
 4. 编译运行
 
-**预期结果：** WC Tuner 自动计算 PI 参数，HitWall 分析显示不同电压限幅下的速度响应
+- **预期结果：** WC Tuner 自动计算 PI 参数，HitWall 分析显示不同电压限幅下的速度响应
 
 ### 4.4 位置环模式
 
 #### MODE_SELECT_POSITION_LOOP (5) — 位置闭环
 
-**用途：** 位置环+速度环+电流环三级联控制
+- **用途：** 位置环+速度环+电流环三级联控制
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_POSITION_LOOP`
 2. 在 sidebar 可调参数中设置 `set_deg_position_command`（位置指令，单位：度）
 3. 编译运行
 
-**预期结果：** 电机转子角度跟踪给定位置指令，无超调或轻微超调
+- **预期结果：** 电机转子角度跟踪给定位置指令，无超调或轻微超调
 
 ### 4.5 参数辨识模式
 
 #### MODE_SELECT_COMMISSIONING (9) — 参数自整定
 
-**用途：** 分步辨识电机参数：电阻 R → 电感 L → 磁链 KE → 惯量 Js
+- **用途：** 分步辨识电机参数：电阻 R → 电感 L → 磁链 KE → 惯量 Js
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_COMMISSIONING`
 2. 建议将 `NUMBER_OF_STEPS` 设为 100000（辨识需要较长时间）
 3. 编译运行
 4. 观察控制台输出
 
-**预期结果（按顺序）：**
+- **预期结果（按顺序）：**
 
 | 阶段 | 辨识参数 | 正常输出示例 | 耗时参考 |
 |------|---------|-------------|---------|
@@ -526,7 +526,7 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 | 4 | 永磁体磁链 KE | `COMM.KE=0.01072` | ~2s |
 | 5 | 转动惯量 Js | `Js=3.5e-6` | ~2s |
 
-**异常排查：**
+- **异常排查：**
 | 现象 | 可能原因 | 解决方案 |
 |------|---------|---------|
 | R 辨识值偏差大 | 逆变器压降未补偿 | 检查 __INVERTER_NONLINEARITY |
@@ -537,9 +537,9 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 #### MODE_SELECT_SWEEPING_FREQ_FOR_VELOCITY_AND_CURRENT (46) — 速度/电流扫频
 
-**用途：** 同时支持速度环和电流环的扫频分析
+- **用途：** 同时支持速度环和电流环的扫频分析
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_SWEEPING_FREQ_FOR_VELOCITY_AND_CURRENT`
 2. 在 sidebar 可调参数中启用 `bool_apply_sweeping_frequency_excitation: True`
 3. 设置扫频参数：
@@ -552,26 +552,26 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 4. 编译运行
 5. 切换到 `plugin_Sweeping` 插件查看 Bode 图
 
-**预期结果：** 自动生成 Bode 图（幅频+相频），-3dB 带宽接近设定值
+- **预期结果：** 自动生成 Bode 图（幅频+相频），-3dB 带宽接近设定值
 
 #### MODE_SELECT_NYQUIST_PLOTTING (91) — Nyquist 图绘制
 
-**用途：** 扫频提取频率响应，绘制 Nyquist 图验证稳定裕度
+- **用途：** 扫频提取频率响应，绘制 Nyquist 图验证稳定裕度
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_NYQUIST_PLOTTING`
 2. 配置 Nyquist 参数（`Nyquist_Input_Current_Amp`、`Nyquist_Freq_Ceiling` 等）
 3. 编译运行
 
-**预期结果：** 控制台输出每个频率点的幅值和相位，可手动绘制 Nyquist 图
+- **预期结果：** 控制台输出每个频率点的幅值和相位，可手动绘制 Nyquist 图
 
 ### 4.7 逆变器非线性模式
 
 #### MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS (49) — 逆变器非线性+无感
 
-**用途：** 研究逆变器死区效应对电流波形和无感观测器的影响
+- **用途：** 研究逆变器死区效应对电流波形和无感观测器的影响
 
-**操作步骤：**
+- **操作步骤：**
 1. 选择 `MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS`
 2. 在 `ACMSim.h` 中修改 `__INVERTER_NONLINEARITY` 宏：
    - 0 = 理想逆变器（无死区效应）
@@ -581,7 +581,7 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
    - 4 = LUT_Indexed 查表索引
 3. 编译运行
 
-**预期结果：**
+- **预期结果：**
 - 模式 0：电流波形光滑正弦
 - 模式 1~4：电流波形在过零点出现钳位效应（顶部/底部变平），电流 THD 升高
 
@@ -593,7 +593,7 @@ Step 6: 查看结果 ←── Step 5: 编译运行 ←── Step 4: 查看/修
 
 emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个独立的 Python 模块，包含一个 `index.py` 入口文件。插件通过 Streamlit sidebar 的模式选择下拉框加载。
 
-**插件加载机制：**
+- **插件加载机制：**
 1. 
 `_plugins/__init__.py` 自动扫描 `_plugins/` 下所有以 `plugin_` 开头的目录
 2. 将插件名添加到 `PLUGINS` 列表
@@ -602,73 +602,73 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 
 ### 5.2 plugin_Sweeping — 扫频分析
 
-**功能：** 执行扫频分析，自动生成 Bode 图（幅频+相频曲线）
+- **功能：** 执行扫频分析，自动生成 Bode 图（幅频+相频曲线）
 
-**使用方法：**
+- **使用方法：**
 1. 在 sidebar 模式选择中选择 `plugin_Sweeping`
 2. 选择仿真模式（通常为 46 或 33/34）
 3. 启用扫频参数（`bool_apply_sweeping_frequency_excitation: True`）
 4. 点击「Save to C and compile」运行仿真
 5. 页面自动显示扫频结果和 Bode 图
 
-**适用场景：** 测量电流环/速度环实际带宽、验证 PI 整定效果、评估稳定裕度
+- **适用场景：** 测量电流环/速度环实际带宽、验证 PI 整定效果、评估稳定裕度
 
 ### 5.3 plugin_MOO — 多目标优化
 
-**功能：** 多目标优化，在带宽和稳定裕度之间寻找最优权衡
+- **功能：** 多目标优化，在带宽和稳定裕度之间寻找最优权衡
 
-**使用方法：**
+- **使用方法：**
 1. 在 sidebar 模式选择中选择 `plugin_MOO`
 2. 配置优化参数（贝塞尔曲线阶数等）
 3. 运行优化
 
-**适用场景：** 参数寻优、控制性能权衡分析
+- **适用场景：** 参数寻优、控制性能权衡分析
 
 ### 5.4 plugin_Performance_calc — 性能计算
 
-**功能：** 自动计算控制性能指标
+- **功能：** 自动计算控制性能指标
 
-**计算的指标：**
+- **计算的指标：**
 - **带宽指标：** 电流环实际带宽（CLBW）、速度环实际带宽（VLBW）
 - **时域指标：** 上升时间、超调量、调节时间
 - **极值指标：** 各信号的最小值和最大值
 
-**使用方法：**
+- **使用方法：**
 1. 在 sidebar 模式选择中选择 `plugin_Performance_calc`
 2. 运行仿真
 3. 页面自动显示性能指标表格
 
-**适用场景：** 定量评估控制性能、对比不同参数下的控制效果
+- **适用场景：** 定量评估控制性能、对比不同参数下的控制效果
 
 ### 5.5 plugin_Lissajous — 李沙育图
 
-**功能：** 绘制 αβ 轴电流/电压的李沙育图形（椭圆轨迹）
+- **功能：** 绘制 αβ 轴电流/电压的李沙育图形（椭圆轨迹）
 
-**使用方法：**
+- **使用方法：**
 1. 在 sidebar 模式选择中选择 `plugin_Lissajous`
 2. 运行仿真
 3. 查看李沙育图
 
-**适用场景：** 观察电流矢量轨迹、验证 Clarke 变换正确性、分析电流谐波
+- **适用场景：** 观察电流矢量轨迹、验证 Clarke 变换正确性、分析电流谐波
 
 ### 5.6 plugin_arbitrarily_plot_2d — 任意 2D 绘图
 
-**功能：** 自定义选择任意两个信号进行 2D 绘图
+- **功能：** 自定义选择任意两个信号进行 2D 绘图
 
-**使用方法：**
+- **使用方法：**
 1. 在 sidebar 模式选择中选择 `plugin_arbitrarily_plot_2d`
 2. 选择 X 轴和 Y 轴信号
 3. 运行仿真
 
-**适用场景：** 自定义信号对比、相平面分析
+- **适用场景：** 自定义信号对比、相平面分析
 
 ### 5.7 plugin_example — 插件开发示例
 
-**功能：** 插件开发模板，展示如何创建新插件
+- **功能：** 插件开发模板，展示如何创建新插件
 
-**使用方法：** 参考 `plugin_example/index.py` 的代码结构开发自己的插件
+- **使用方法：** 参考 `plugin_example/index.py` 的代码结构开发自己的插件
 
-**插件开发步骤：**
+- **插件开发步骤：**
 1. 在 `_plugins/` 下创建新目录 `plugin_你的名字/`
 2. 创建 `index.py`，实现 `main(d_sim, user_config)` 函数
 3. 插件会自动出现在 sidebar 的模式选择下拉框中
@@ -699,7 +699,7 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 }
 ```
 
-**关键参数说明：**
+- **关键参数说明：**
 
 | 参数 | 含义 | 对 C 代码中的变量 |
 |------|------|-----------------|
@@ -747,7 +747,7 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 
 所有仿真参数定义在 `user_config.yaml` 中，通过 sidebar 可调参数面板修改。
 
-**仿真控制参数：**
+- **仿真控制参数：**
 
 | 参数 | 含义 | 典型值 | 约束 |
 |------|------|--------|------|
@@ -755,7 +755,7 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 | `sim.NUMBER_OF_STEPS` | 仿真总步数 | 50000 | 总时间 = 步数 × CLTS |
 | `sim.MACHINE_SIMULATIONs_PER_SAMPLING_PERIOD` | 电机模型积分次数/每次控制器执行 | 1 | 通常保持 1 |
 
-**FOC 控制参数：**
+- **FOC 控制参数：**
 
 | 参数 | 含义 | 典型值 | 约束 |
 |------|------|--------|------|
@@ -764,14 +764,14 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 | `FOC.VL_EXE_PER_CL_EXE` | 速度环降频比 | 1~20 | 仿真默认 1 |
 | `FOC.bool_apply_decoupling_voltages_to_current_regulation` | dq 轴解耦前馈开关 | false | 高速时建议 true |
 
-**限幅参数：**
+- **限幅参数：**
 
 | 参数 | 含义 | 典型值 |
 |------|------|--------|
 | `CL.LIMIT_DC_BUS_UTILIZATION` | 母线电压利用率上限 | 0.96 |
 | `VL.LIMIT_OVERLOAD_FACTOR` | 速度环输出限幅倍数（× 额定电流） | 1.0 |
 
-**参数间约束关系：**
+- **参数间约束关系：**
 ```text
 电流环实际带宽 ≤ 1/CLTS / 20     （采样定理约束）
 速度环实际带宽 ≈ CLBW_HZ / delta  （级联控制设计约束）
@@ -782,7 +782,7 @@ emachinery 的插件系统位于 `_plugins/` 目录下，每个插件是一个�
 
 emachinery 使用 **TI InstaSPIN 系列 PI 整定方法**，在 `utils/tuner.py` 中实现。
 
-**整定公式：**
+- **整定公式：**
 
 ```text
 电流环：
@@ -796,19 +796,19 @@ emachinery 使用 **TI InstaSPIN 系列 PI 整定方法**，在 `utils/tuner.py`
   speedKp = delta × speedKi / KT × Js （比例增益，KT = 1.5 × npp × KE）
 ```
 
-**整定流程：**
+- **整定流程：**
 1. 用户在 sidebar 中设置 `FOC.CLBW_HZ` 和 `FOC.delta`
 2. 
 `user_script_main.py` 的 `user_pre_process()` 调用 `tuner.InstaSPIN_series_PI_tuner()`
 3. 自动计算 6 个 PI 参数（d_currentKp/Ki, q_currentKp/Ki, speedKp/Ki）
 4. 计算结果写入 `d_sim` 字典，传递给 C 代码
 
-**Streamlit 页面上显示的整定结果：**
+- **Streamlit 页面上显示的整定结果：**
 ```text
 VLBW_Hz = 13.33 | speedKp = 1.294 | speedKi = 11.17 | q_currentKp = 27.46 | q_currentKi = 27.46
 ```
 
-**如何验证整定效果：**
+- **如何验证整定效果：**
 1. 运行速度闭环仿真（Mode 4）
 2. 观察 Speed 子图的阶跃响应
 3. 如果超调过大 → 增大 delta（降低速度环带宽）
@@ -835,11 +835,11 @@ emachinery 提供了 4 种用户扩展方式，从简单到复杂：
 
 #### user_pre_process(d_sim, user_config)
 
-**调用时机：** 仿真运行前（点击「Save to C and compile」之前）
+- **调用时机：** 仿真运行前（点击「Save to C and compile」之前）
 
-**功能：** 修改仿真参数、加载用户配置、计算 PI 参数
+- **功能：** 修改仿真参数、加载用户配置、计算 PI 参数
 
-**示例：**
+- **示例：**
 ```python
 def user_pre_process(d_sim, user_config):
     # 1. 加载用户专属 YAML 配置
@@ -868,11 +868,11 @@ def user_pre_process(d_sim, user_config):
 
 #### user_cplot_post_process(d_sim, user_plot_config, post_run)
 
-**调用时机：** 绘图前
+- **调用时机：** 绘图前
 
-**功能：** 自定义绘图配置（添加新子图、修改信号列表、覆盖绘图样式）
+- **功能：** 自定义绘图配置（添加新子图、修改信号列表、覆盖绘图样式）
 
-**示例：**
+- **示例：**
 ```python
 def user_cplot_post_process(d_sim, user_plot_config, post_run):
     if d_sim['user.who_is_user'] == YOUR_USER_ID:
@@ -886,21 +886,21 @@ def user_cplot_post_process(d_sim, user_plot_config, post_run):
 
 #### user_py_post_process(d_sim, simulation_result)
 
-**调用时机：** Python 仿真后（当前版本 C 仿真不使用此函数）
+- **调用时机：** Python 仿真后（当前版本 C 仿真不使用此函数）
 
-**功能：** 仿真结果后处理
+- **功能：** 仿真结果后处理
 
 #### user_cplot_post_plot_process(d_sim)
 
-**调用时机：** 绘图完成后
+- **调用时机：** 绘图完成后
 
-**功能：** 在 Streamlit 页面上添加额外的可视化内容
+- **功能：** 在 Streamlit 页面上添加额外的可视化内容
 
 ### 7.3 user_config_*.yaml 自定义配置
 
 每个用户可以创建自己的 YAML 配置文件，在 `user_pre_process()` 中根据 `who_is_user` 加载。
 
-**YAML 配置文件结构：**
+- **YAML 配置文件结构：**
 ```yaml
 simulation:
   # 追加到 d_sim 的仿真参数
@@ -934,7 +934,7 @@ cplot:
 
 每个用户可以创建 `simuser_*.c/h` 文件存放自定义控制算法，通过 `WHO_IS_USER` 宏条件编译启用。
 
-**现有用户算法扩展：**
+- **现有用户算法扩展：**
 
 | 用户 | 文件 | 算法 |
 |------|------|------|
@@ -944,7 +944,7 @@ cplot:
 | USER_BEZIER (224) | `simuser_bezier.c/h` | 贝塞尔曲线速度控制器 |
 | USER_CURY (201314) | `simuser_cury.c/h` | 自定义算法 |
 
-**添加新用户算法的步骤：**
+- **添加新用户算法的步骤：**
 1. 在 `ACMConfig.h` 中定义用户 ID 宏：`#define USER_YOURNAME <USER_ID>`
 2. 创建 `simuser_yourname.c` 和 `simuser_yourname.h`
 3. 在 `main_switch.c` 的 `main_switch()` 函数中添加 `#if WHO_IS_USER == USER_YOURNAME` 条件编译块
@@ -959,7 +959,7 @@ cplot:
 #define WHO_IS_USER 101976  // 来自 d_sim['user.who_is_user']
 ```
 
-**工作流程：**
+- **工作流程：**
 1. 用户在 sidebar 中选择 `who_is_user`
 2. 
 `st_interact.py` 将用户 ID 写入 `d_sim['user.who_is_user']`
@@ -973,7 +973,7 @@ cplot:
 
 ### 8.1 修改 C 代码的注意事项
 
-**可以修改的文件：**
+- **可以修改的文件：**
 
 | 文件 | 修改风险 | 说明 |
 |------|---------|------|
@@ -984,17 +984,17 @@ cplot:
 | `main.c` 的 `DYNAMICS_MACHINE()` | 高 | 修改电机状态方程，影响仿真正确性 |
 | `pmsm_comm.c` 的 `_onlyFOC()` | 高 | 修改 FOC 核心算法，影响控制性能 |
 
-**绝对不要修改的文件：**
+- **绝对不要修改的文件：**
 - `super_config.h` / `super_config.c`：由 Python 自动生成，修改会被覆盖
 
-**修改后必须：**
+- **修改后必须：**
 1. 重新编译（点击「Save to C and compile」）
 2. 验证仿真结果是否合理
 3. 如果修改了 `_onlyFOC()` 等核心函数，确保 `#if PC_SIMULATION` 条件编译不会影响实验代码
 
 ### 8.2 添加新仿真模式
 
-**步骤：**
+- **步骤：**
 
 1. **在 `ACMSim.h` 中定义模式宏：**
 ```c
@@ -1030,7 +1030,7 @@ void my_new_controller() {
 
 ### 8.3 添加新观测信号
 
-**步骤：**
+- **步骤：**
 
 1. **在 C 代码中计算信号值：** 在 `utility.c` 的 `write_data_to_file()` 函数中添加输出
 
@@ -1077,7 +1077,7 @@ cplot:
           y_label: "iq fbk"
 ```
 
-**绘图样式配置：**
+- **绘图样式配置：**
 ```yaml
 config:
   cjh_colors:
@@ -1140,15 +1140,15 @@ config:
 
 ### 10.1 参数扫描
 
-**目标：** 系统性地观察某个参数变化对仿真结果的影响
+- **目标：** 系统性地观察某个参数变化对仿真结果的影响
 
-**方法：**
+- **方法：**
 1. 在 Streamlit sidebar 中修改目标参数（如 `FOC.CLBW_HZ`）
 2. 点击「Save to C and compile」运行仿真
 3. 记录结果（截图或保存 .dat 文件）
 4. 修改参数值，重复步骤 2-3
 
-**典型参数扫描实验：**
+- **典型参数扫描实验：**
 
 | 扫描参数 | 范围 | 观察指标 |
 |---------|------|---------|
@@ -1159,14 +1159,14 @@ config:
 
 ### 10.2 对比实验
 
-**目标：** 对比两种控制策略或参数设置的效果差异
+- **目标：** 对比两种控制策略或参数设置的效果差异
 
-**方法：**
+- **方法：**
 1. 运行第一组参数的仿真，保存 .dat 文件（重命名，如 `SEW100W_case1.dat`）
 2. 修改参数，运行第二组仿真
 3. 使用 `plugin_arbitrarily_plot_2d` 或手动用 matplotlib 对比两组数据
 
-**典型对比实验：**
+- **典型对比实验：**
 - 有/无 dq 轴解耦前馈：`bool_apply_decoupling_voltages_to_current_regulation` true vs false
 - 有/无 ESO 速度估计：Mode 4 vs Mode 47
 - 不同逆变器模型：`__INVERTER_NONLINEARITY` 0 vs 1 vs 2
@@ -1176,7 +1176,7 @@ config:
 
 emachinery 的核心设计理念是**仿真代码与实验代码共享同一套 C 源码**，通过条件编译实现环境适配。
 
-**迁移步骤：**
+- **迁移步骤：**
 1. 在仿真中验证控制算法和 PI 参数
 2. 修改 `ACMConfig.h` 中的 `PC_SIMULATION` 宏为 0（或删除定义）
 3. 修改 `WHO_IS_USER` 为实验中使用的用户 ID
@@ -1184,7 +1184,7 @@ emachinery 的核心设计理念是**仿真代码与实验代码共享同一套 
 5. 注意 `#pragma DATA_SECTION` 等 DSP 专用指令在仿真中被忽略
 6. 注意 `super_config.h/c` 在实验中需要手动维护（不再由 Python 自动生成）
 
-**关键差异：**
+- **关键差异：**
 
 | 方面 | 仿真 | 实验 |
 |------|------|------|
@@ -1211,7 +1211,7 @@ emachinery 仿真系统与知识库的理论模块紧密关联，建议按以下
 3. 阅读相关知识库模块（如 CT-05 PID 整定）
 4. 根据理论分析调整参数，再次仿真验证
 
-**推荐学习顺序：**
+- **推荐学习顺序：**
 
 | 阶段 | 理论模块 | 仿真模式 | 学习目标 |
 |------|---------|---------|---------|
@@ -1277,7 +1277,7 @@ flowchart LR
     FCC --> C10["makefile + gmake.exe<br/>编译工具"]
 ```
 
-**说明：** 以上为 emachinery 工程完整目录结构。核心路径：
+- **说明：** 以上为 emachinery 工程完整目录结构。核心路径：
 - **C 仿真引擎**：`frameworkCodes/c/` — 包含 main.c、pmsm_comm.c、pmsm_observer.c、main_switch.c 等
 - **Python 桥梁层**：`emachinery/` 下的 super_config.py、st_main.py、st_interact.py
 - **后处理绘图**：`output_postProcessing/cplot.py`
@@ -1334,7 +1334,7 @@ flowchart LR
 
 ---
 
-**相关文档：**
+- **相关文档：**
 - [SIM-00 C 语言仿真总索引](./SIM-00-C-Simulation-Overview.md) — 按理论模块查找对应的仿真验证方案
 - [SIM-01 快速上手指南](./SIM-01-C-Simulation-QuickStart.md) — 15 分钟跑通第一个仿真
 - [SIM-02 代码概念映射](./SIM-02-C-Simulation-Code-Map.md) — C 代码与理论知识的精确映射

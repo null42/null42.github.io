@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第4章part 3 - 4 Switch Realization"
+title: "第4章 开关的实现（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,977 +18,313 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第4章part 3 - 4 Switch Realization
+# 第4章 开关的实现（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 122-141  
-> Chunk ID: `chapter-4-part-3`
+表4.5 Si 超结 MOSFET 与 GaN FET 的比较
 
-## 主干提取
-
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
-
-## 术语表
-
-| English term | 中文译名 | Notes |
+| 参数 | Si 超结 MOSFET | GaN FET |
 |---|---|---|
-| TODO | TODO | TODO |
+| 电压额定 | 650 V | 650 V |
+| $R_{on}$，25–150 °C | 24–60 mΩ | 25–50 mΩ |
+| $V_{DS} = 400\,\text{V}$ 下的 $Q_g$ | 123 nC（10 V） | 12 nC（6 V） |
+| $V_{SD}$ | 0.8 V | 4 V |
+| $Q_{rr}$ | 8.7 μC | — |
+| $t_{rr}$ | 440 ns | — |
 
-## 中文翻译
+图4.53 当栅极与源极短接时，FET（如 GaN 器件）的反向导通。当 $v_{ds} \le -V_{th}$ 时 FET 正偏导通
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+### 4.4.3 MOSFET 栅极驱动器
 
-## 英文原文
+下面讨论驱动功率 MOSFET 的若干实用电路和基本考虑。图4.54为一个同步降压变换器，其中主开关 $Q_1$ 和同步整流器 $Q_2$ 均用功率 MOSFET 实现。这一结构在相当多场合中出现，不仅见于低压直流-直流降压变换器，也见于直流-交流逆变器电路和具双向功率流动的变换器。该晶体管结构也称为半桥电路，图中所示栅极驱动电路称为半桥栅极驱动器。在这些应用中驱动 MOSFET 的基本原理几乎相同，本节以同步降压变换器为背景进行讨论。
 
-```text
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 107
-Table 4.5 Comparison of Si Superjunction MOSFET and GaN FET
-Si SJ MOSFET GaN FET
-V oltage rating 650 V 650 V
-Ron, 25–150◦C 24–60 m Ω 25–50 mΩ
-Qg at VDS = 400V 123 nC (10 V) 12 nC (6 V)
-VSD 0.8 V 4 V
-Qrr 8.7μC–
-trr 440 ns –
-Fig. 4.53 Reverse conduction through a FET such as a GaN
-device, when the gate is shorted to the source. The FET becomes
-forward-biased when vds ≤−Vth
-G
-S
-D
-–
-Vth
-+
-4.4.3 MOSFET Gate Drivers
-Now let us discuss some practical circuitry and basic considerations for driving power MOS-
-FETs. Figure 4.54 contains a synchronous buck converter; in which the main switchQ1 and the
-synchronous rectiﬁer Q2 are both realized using power MOSFETs. This conﬁguration is found
-in quite a few examples, including not only low-voltage dc–dc buck converters, but also dc-ac
-inverter circuits and converters having bidirectional power ﬂow. The transistor conﬁguration is
-also called a half-bridge circuit, and the gate driver circuitry illustrated in this ﬁgure is called
-a half-bridge gate driver. The fundamentals of driving the MOSFETs in these applications are
-nearly the same, and are discussed in this section in the context of the synchronous buck con-
-verter.
-In Fig. 4.54, MOSFET Q
-2 is driven by low-side driver DRLS . Since the source of Q2 is
-connected to ground, the gate is driven at zero volts to turn Q2 oﬀ, and at 12 V to turn Q2 on.
-The source of MOSFET Q1 is connected to the switch node voltage vs(t); this voltage is
-approximately zero when Q2 is on, but is approximately equal to the input voltage Vg when Q1
-is on. The high-side driverDRHS must drive the gate ofQ1 to 0 V with respect tovs(t)t ot u r nQ1
-oﬀ, and to+12 V with respect to vs(t)t ot u r nQ1 on. To drive Q1 in this manner, the high-side
-driver circuit is referenced to the switch node voltage vs(t), and a level shifter circuit converts
-the ground-referenced control signal to a vs-referenced signal as needed to drive the input of
-DRHS .
-A bootstrap power supply provides 12 V power to DRHS that is referenced to vs. When
-MOSFET Q2 conducts, then capacitor Cboot charges to 12 V through diode Dboot and Q2. While
-Q1 conducts, capacitor Cboot supplies power to DRHS , that is approximately+12 V with respect
-to vs. It is necessary to periodically turn Q2 on, to recharge Cboot to 12 V and maintain power to
-DRHS .
-Up-to-date gate driver ICs containundervoltage lockout(UVLO) circuitry that reliably turns
-oﬀboth MOSFETs when the 12 V power supply voltage is less than an UVLO threshold. This
-forces the MOSFETs into a known safe OFF-state while the 12 V power supply starts up. For
+在图4.54中，MOSFET $Q_2$ 由低边驱动器 $D_{RLS}$ 驱动。由于 $Q_2$ 的源极接地，故栅极驱动至 0 V 时关断 $Q_2$，驱动至 12 V 时开通 $Q_2$。
 
-108 4 Switch Realization
-+
-L
-iL
-+
-vs(t)
-Q1 D1
-Q2
-D2
-+ 12 V
-+ 12 V
-Logic input
-Vg
-c(t)
-Dboot
-Cboot
-Deadtime
-generator
-DRHS
-DRLS
-cHS(t) cLS(t)
-Level
-shift
-Fig. 4.54 Buck converter with MOSFET synchronous rectiﬁer and half-bridge gate driver
-reliable operation of the high-side bootstrap power supply, the voltage across capacitor Cboot
-must be higher than this UVLO threshold.
-The control signal c(t) is a logic signal that commands switching of the transistors, with
-switching frequency fs and duty cycle Dc. This signal drives adeadtime generator that produces
-signals that drive the driver circuitsDRLS and DRHS . It is necessary to make sure thatQ1 and Q2
-do not simultaneously conduct, even for a few nanoseconds—simultaneous conduction leads to
-very large current spikes drawn out of the source Vg, which can damage the MOSFETs or at
-least substantially reduce the eﬃciency. The function of the deadtime generator is to insert small
-delays, or deadtimes, that implement break-before-make switching, in which one transistor is
-fully turned oﬀbefore the next transistor begins to turn on. Typical waveforms of the control
-signals c(t), cHS (t), and cLS (t) are illustrated in Fig. 4.55.
-Fig. 4.55 Control waveforms of the
-deadtime generator block of Fig. 4.54
-c(t)
-cHS(t)
-t
-cLS(t)
-DcTs
-Tstdtd
-Q1 on
-Q1 off
-Q2 on
-Q2 off
+MOSFET $Q_1$ 的源极接开关节点电压 $v_s(t)$；当 $Q_2$ 导通时该电压近似为零，但当 $Q_1$ 导通时近似等于输入电压 $V_g$。高边驱动器 $D_{RHS}$ 必须以 $v_s(t)$ 为参考将 $Q_1$ 栅极驱动至 0 V 以关断 $Q_1$，并驱动至 +12 V（相对于 $v_s(t)$）以开通 $Q_1$。为此，高边驱动电路以开关节点电压 $v_s(t)$ 为参考，电平移位电路将参考地控制信号转换为参考 $v_s$ 的信号，以驱动 $D_{RHS}$ 的输入。
 
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 109
-Let us consider next the details of the switching transition in which the synchronous rectiﬁer
-Q2 turns oﬀ, and then the main switch Q1 turns on. In Fig. 4.56, the low-side driver DRLS and
-MOSFET Q2 are replaced by equivalent circuit models that aid in understanding the waveforms
-observed during this switching transition. The driverDRLS is replaced by a Thevenin-equivalent
-model consisting of a voltage sourcevthev(t) and a resistanceRthev. The voltage sourcevthev is the
-open-circuit output voltage of the driver, and can be assumed to be proportional to the control
-signal cLS (t)o fF i g .4.55. The resistance Rthev can be viewed, to ﬁrst order, as arising from the
-on-resistance of the output driver stage MOSFETs of the driver DRLS . It is traditional to rate
-gate drivers according to their peak current capability; so, for example, a driver rated at 12 V
-and 1 A would exhibit Rthev = (12 V)/(1 A)= 12Ω. Additionally, in Fig. 4.56, MOSFET Q2 is
-replaced with an equivalent circuit model consisting of the device capacitancesCgs, Cgd, andCds ,
-body diode D2, and a dependent current source that models the dependence of the drain current
-on vgs and vs.
-+
-L
-iL
-+
-vs(t)
-Q1 D1
-+ 12 V
-+
-Rthev
-vthev(t)
-Cgd
-Cgs
-+
-vgs(t)
-Gate driver
-model
-MOSFET
-model
-Vg
-D2Cds
-igd
-idr
-Fig. 4.56 Detail of half-bridge gate driver of Fig. 4.54, with low-side driver modeled by Thevenin-
-equivalent network, and with MOSFET Q2 replaced by its equivalent circuit model
-Waveforms of the switching transition are illustrated in Fig.4.57. Initially, Q2 is on, and its
-gate-to-source voltage vgs(t) is high. The switch node voltage vs(t) is approximately zero, and
-transistor Q1 is oﬀ. When the control signal cLS (t) commands the low-side driver to turn Q2 oﬀ,
-then the Q2 gate capacitances begin to discharge through the driver resistance Rthev. When the
-Q2 gate voltage vgs(t) falls below the Q2 threshold voltage Vth, then MOSFET Q2 is fully oﬀ.
-With a properly chosen deadtime td, this happens before Q1 begins to turn on.
-After Q2 has turned oﬀ, but before Q1 turns on, where does the inductor current iL(t)ﬂ o w ?
-It is assumed that the inductor current has small ripple, and does not signiﬁcantly change over
-the switching times illustrated in Fig. 4.57. With both Q1 and Q2 in the oﬀstate, and with
-positive inductor current in the direction illustrated, the inductor current will forward-bias the
-body diode D
-2. This body diode will continue to conduct for the remainder of the deadtime.
+自举电源向 $D_{RHS}$ 提供以 $v_s$ 为参考的 12 V 电源。当 MOSFET $Q_2$ 导通时，电容 $C_{boot}$ 经二极管 $D_{boot}$ 和 $Q_2$ 充电至 12 V。$Q_1$ 导通期间，电容 $C_{boot}$ 向 $D_{RHS}$ 供电，即相对于 $v_s$ 近似为 +12 V。须周期性地开通 $Q_2$，将 $C_{boot}$ 充电至 12 V，以维持对 $D_{RHS}$ 的供电。
 
-110 4 Switch Realization
-Fig. 4.57 Waveforms for the
-switching transition where Q2 turns
-oﬀand then Q1 turns on
-cHS(t)
-t
-cLS(t)
-td
-vgs(t)
-vs(t)
-0
-Vg
-Vth
-tr
-Q2 Q1D2
-Conducting
-Devices:
-tvr
-At the conclusion of the deadtime, the control signal cHS (t) commands the high-side driver
-to turn Q1 on. Since body diode D2 is conducting, it must undergo a reverse-recovery process,
-and hence reverse current ﬂows through D2 (also ﬂowing through Q1 and Vg). Consequently,
-D2 induces switching loss in Q1, as described in Sect. 4.3.I nF i g .4.57,t h eD2 reverse recovery
-time is labeled tr.
-When the reverse recovery of D2 has progressed enough to allow the diode voltage to
-change, then the switch node voltage vs(t) will rise. Figure 4.57 is sketched for the case that
-the body diode softness factor is S = 0, so that the voltage vs(t) changes after the reverse re-
-covery has concluded. During the interval of length tvr, the switch node voltage rises from zero
-to Vg. During this interval, the energy stored in the output capacitances Cds of MOSFETs Q1
-and Q2 is dissipated as switching loss in Q1. Switching loss as described in Sect. 4.2.2 is also
-induced in Q1.
-It can be observed from Fig. 4.56 that when vgs(t) and vthev(t) are both zero, there is zero
-voltage across Rthev, and hence idr is zero. This is what happens at the beginning of the tvr
-interval of Fig. 4.57. But since vs(t) is rising, current igd = Cgd dvs/dt is induced in capacitance
-Cgd. This current must ﬂow intoCgs since idr = 0. Hence, vgs(t) must increase as shown. Forvgs
-greater than zero, some negative driver currentidr will occur, limited by the Thevenin resistance
-Rthev.
-How high does vgs(t) become during the tvr interval? It is important thatvgs remain less than
-vth for the entire interval, so that MOSFET Q2 remains oﬀ.I f vgs rises above Vth, then Q2 will
-begin to turn on, leading to oscillations and additional switching loss. It is important to maintain
-vgs < Vth for the entire Q1 turn-on interval.
-A commonly used solution for reducing the rise of Vgs(t) is illustrated in Fig. 4.58. A small-
-value resistor Rg1 is connected between the high-side driverDRHS and the gate of MOSFET Q1.
-This slows down the turn-on ofQ1, reducing the rate at which the switch node voltagevs(t)r i s e s .
-Hence the current igd of the Q2 gate-to-drain capacitance is reduced, and vgs(t) increases more
-slowly. If Rg1 is large enough, then the low-side driver DRLS is able to maintain vgs(t) less than
+![源页 p.123](../assets/page-snapshots/chapter-4/page-123.png)
 
-4.5 Minority-Carrier Transistors 111
-+
-–
-L
-Q1 D1
-Q2
-D2
-+ 12 V
-+ 12 V
-Logic input
-Vg
-c(t)
-Dboot
-Cboot
-Deadtime
-generator
-DRHS
-DRLS
-cHS(t) cLS(t)
-Level
-shift
-Rg1
-Dg1
-Fig. 4.58 Addition of resistor Rg1 and diode Dg1 between high-side driver and gate of Q1, to slow down
-the turn-on of Q1 and maintain the Vgs of Q2 below Vth during the Q1 turn-on transition
-Vth. Diode Dg1 bypasses Rg1 during the turn-oﬀtransition of Q1, so that Rg1 reduces the turn-on
-speed but does not aﬀect the turn-oﬀspeed. If the inductor current iL can reverse polarity, then
-it may be desirable to insert a similar Rg2 and Dg2 network at the gate of Q2.
-4.5 Minority-Carrier Transistors
-4.5.1 Bipolar Junction Transistor (BJT)
-A cross-section of an NPN power BJT is illustrated in Fig. 4.59. As with other power devices,
-current ﬂows vertically through the silicon wafer. A lightly doped n−region is inserted in the
-collector, to obtain the desired voltage breakdown rating. The transistor operates in the oﬀstate
-Fig. 4.59 Power BJT structure.
-Crosshatched regions are metallized
-contacts
-Collector
-n
-n
-p
-EmitterBase
-n nn
+图4.54 含 MOSFET 同步整流器和半桥栅极驱动器的降压变换器
 
-112 4 Switch Realization
-(cutoﬀ) when the p–n base-emitter junction and the p–n−base-collector junction are reverse-
-biased; the applied collector-to-emitter voltage then appears essentially across the depletion
-region of the p–n−junction. The transistor operates in the on state (saturation) when both junc-
-tions are forward-biased; substantial minority charge is then present in the p and n−regions.
-This minority charge causes the n−region to exhibit a low on-resistance via the conductivity
-modulation eﬀect. Between the oﬀstate and the on state is the familiar active region, in which
-the p–n base-emitter junction is forward-biased and the p–n−base-collector junction is reverse-
-biased. When the BJT operates in the active region, the collector current is proportional to the
-base region minority charge, which in turn is proportional (in equilibrium) to the base current.
-There is in addition a fourth region of operation known as quasi-saturation, occurring between
-the active and saturation regions. Quasi-saturation occurs when the base current is insuﬃcient
-to fully saturate the device; hence, the minority charge present in then−region is insuﬃcient to
-fully reduce the n−region resistance, and high transistor on-resistance is observed.
-+
-VCC
-RL
-RB
-vs(t)
-iC(t)
-+
-vCE(t)
-iB(t)
-vBE(t)
-+
-Fig. 4.60 Circuit for BJT switching time example
-Consider the simple switching circuit of
-Fig. 4.60. Figure 4.61 contains waveforms il-
-lustrating the BJT turn-on and turn-o ﬀtran-
-sitions. The transistor operates in the o ﬀ
-state during interval (1), with the base-emitter
-junction reverse-biased by the source voltage
-v
-s(t)=−Vs1. The turn-on transition is initi-
-ated at the beginning of interval (2), when
-the source voltage changes to v
-s(t)=+ Vs2.
-Positive current is then supplied by source
-vs to the base of the BJT. This current ﬁrst
-charges the capacitances of the depletion re-
-gions of the reverse-biased base-emitter and
-base-collector junctions. At the end of inter-
-val (2), the base-emitter voltage exceeds zero
-suﬃciently for the base-emitter junction to
-become forward-biased. The length of interval (2) is called the turn-on delay time. During in-
-terval (3), minority charge is injected across the base-emitter junction from the emitter into the
-base region; the collector current is proportional to this minority base charge. Hence during
-interval (3), the collector current increases. Since the transistor drives a resistive load RL,t h e
-collector voltage also decreases during interval (3). This causes the voltage to reduce across the
-reverse-biased base-collector depletion region (Miller) capacitance. Increasing the base current
-IB1 (by reducing RB or increasing Vs2) increases the rate of change of both the base region mi-
-nority charge and the charge in the Miller capacitance. Hence, increasedIB1 leads to a decreased
-turn-on switching time.
-Near or at the end of interval (3), the base-collector p–n−junction becomes forward-biased.
-Minority carriers are then injected into the n−region, reducing its eﬀective resistivity. Depend-
-ing on the device geometry and the magnitude of the base current, a voltage tail [interval
-(4)] may be observed as the apparent resistance of the n−region decreases via conductivity
-modulation. The BJT reaches on-state equilibrium at the beginning of interval (5), with low
-on-resistance and with substantial minority charge present in both the n−and p regions. This
-minority charge signiﬁcantly exceeds the amount necessary to support the active region con-
-duction of the collector current ICon; its magnitude is a function of IB1−ICon/β, whereβis the
-active-region current gain.
+现代栅极驱动 IC 含欠压锁定（UVLO）电路，当 12 V 电源电压低于 UVLO 阈值时能可靠地关断两个 MOSFET。这在 12 V 电源启动期间强制 MOSFET 处于已知的安全关断状态。为保证高边自举电源可靠工作，电容 $C_{boot}$ 上的电压必须高于此 UVLO 阈值。
 
-4.5 Minority-Carrier Transistors 113
-t
-(1) (2) (3) (4) (5) (6)
-vs(t)
-vBE(t)
-iB(t)
-vCE(t)
-iC(t)
-s1
-Vs2
-s1
-0.7 V
-0
-IB1
-VCC
-IConRon
-0
-ICon
-B2
-(7) (8) (9)
-Fig. 4.61 BJT turn-on and turn-oﬀtransition waveforms
-The turn-oﬀprocess is initiated at the beginning of interval (6), when the source voltage
-changes to vs(t)=−Vs1. The base-emitter junction remains forward-biased as long as minority
-carriers are present in its vicinity. Also, the collector current continues to beiC(t)= ICon as long
-as the minority charge exceeds the amount necessary to support the active region conduction of
-ICon, that is, as long as excess charge is present. So during interval (6), a negative base current
-ﬂows equal to−IB2 = (−Vs1−vBE (t))/RB. This negative base current actively removes the to-
-tal stored minority charge. Recombination further reduces the stored minority charge. Interval
-(6) ends when all of the excess minority charge has been removed. The length of interval (6)
+控制信号 $c(t)$ 是命令晶体管开关的逻辑信号，具开关频率 $f_s$ 和占空比 $D_c$。该信号驱动一个死区生成器，产生驱动 $D_{RLS}$ 和 $D_{RHS}$ 驱动电路的信号。必须确保 $Q_1$ 和 $Q_2$ 不同时导通，即便几个纳秒也不行——同时导通会导致从电源 $V_g$ 抽取极大的电流尖峰，可能损坏 MOSFET，或至少大幅降低效率。死区生成器的功能是插入小的延迟（死区），实现先断后通开关：一个晶体管完全关断后，下一个晶体管才开始开通。控制信号 $c(t)$、$c_{HS}(t)$、$c_{LS}(t)$ 的典型波形如图4.55所示。
 
-114 4 Switch Realization
-Fig. 4.62 Ideal base current waveform
-for minimization of switching times
-iB(t) IB1
-B2
-IBon
-0
-t
-is called the storage time. During interval (7), the transistor operates in the active region. The
-collector current iC(t) is now proportional to the stored minority charge. Recombination and
-the negative base current continue to reduce the minority base charge, and hence the collector
-current decreases. In addition, the collector voltage increases, and hence the base current must
-charge the Miller capacitance. At the end of interval (7), the minority stored charge is equal
-to zero, and the base-emitter junction can become reverse-biased. The length of interval (7) is
-called the turn-oﬀtime or fall time. During interval (8), the reverse-biased base-emitter junc-
-tion capacitance is discharged to voltage −V
-s1. During interval (9), the transistor operates in
-equilibrium, in the oﬀstate.
-It is possible to turn the transistor o ﬀusing IB2 = 0; for example, we could let Vs1 be
-approximately zero. However, this leads to very long storage and turn-o ﬀswitching times. If
-IB2 = 0, then all of the stored minority charge must be removed passively, via recombination.
-From the standpoint of minimizing switching times, the base current waveform of Fig. 4.62 is
-ideal. The initial base current IB1 is large in magnitude, such that charge is inserted quickly into
-the base, and the turn-on switching times are short. A compromise value of equilibrium on-state
-current IBon is chosen, to yield a reasonably low collector-to-emitter forward voltage drop, while
-maintaining moderate amounts of excess stored minority charge and hence keeping the storage
-time reasonably short. The current −IB2 is large in magnitude, such that charge is removed
-quickly from the base and hence the storage and turn-oﬀswitching times are minimized.
-Unfortunately, in most BJTs, the magnitudes of IB1 and IB2 must be limited because ex-
-cessive values lead to device failure. As illustrated in Fig. 4.63, the base current ﬂows laterally
-through the p region. This current leads to a voltage drop in the resistance of the p material,
-which inﬂuences the voltage across the base-emitter junction. During the turn-oﬀtransition, the
-base current−IB2 causes the base-emitter junction voltage to be greater in the center of the base
-Fig. 4.63 Al a r g eIB2 leads to focus-
-ing of the emitter current away from
-the base contacts, due to the voltage
-induced by the lateral base region
-current
-Collector
-n
-n-
-p
-EmitterBase
-n
-B2
-p+ +
+图4.55 图4.54死区生成器模块的控制波形
 
-4.5 Minority-Carrier Transistors 115
-region, and smaller at the edges near the base contacts. This causes the collector current to focus
-near the center of the base region. In a similar fashion, a large IB1 causes the collector current
-to crowd near the edges of the base region during the turn-on transition. Since the collector-to-
-emitter voltage and collector current are simultaneously large during the switching transitions,
-substantial power loss can be associated with current focusing. Hence hot spots are induced at
-the center or edge of the base region. The positive temperature coe ﬃcient of the base-emitter
-junction current (corresponding to a negative temperature coe ﬃcient of the junction voltage)
-can then lead to thermal runaway and device failure. Thus, to obtain reliable operation, it may
-be necessary to limit the magnitudes of I
-B1 and IB2. It may also be necessary to add external
-snubber networks which the reduce the instantaneous transistor power dissipation during the
-switching transitions.
-Steady-state characteristics of the BJT are illustrated in Fig.4.64.I nF i g .4.64a, the collector
-current IC is plotted as a function of the base current IB, for various values of collector-to-
-emitter voltage VCE . The cutoﬀ, active, quasi-saturation, and saturation regions are identiﬁed.
-At a given collector currentIc, to operate in the saturation region with minimum forward voltage
-drop, the base current IB must be suﬃciently large. The slope dIC/dIB in the active region is
-the current gain β. It can be seen that β decreases at high current–near the rated current of
-the BJT, the current gain decreases rapidly and hence it is diﬃcult to fully saturate the device.
-Collector current IC is plotted as a function of collector-to-emitter voltage VCE in Fig. 4.64b,
-for various values of IB. The breakdown voltages BVsus, BVCEO , and BVCBO are illustrated.
-BVCBO is the avalanche breakdown voltage of the base-collector junction, with the emitter open
-circuited or with suﬃciently negative base current. BVCBO is the somewhat smaller collector-
-emitter breakdown voltage observed when the base current is zero; as avalanche breakdown is
-approached, free carriers are created that have the same e ﬀect as a positive base current and
-that cause the breakdown voltage to be reduced. BVsus is the breakdown voltage observed with
-positive base current. Because of the high instantaneous power dissipation, breakdown usually
-results in destruction of the BJT. In most applications, the oﬀ-state transistor voltage must not
-exceed BVCBO .
-At voltage levels up to 600 V , the BJT has been replaced by the MOSFET in power applica-
-tions. At 600 V and above, the BJT has been displaced by a more recent minority-carrier device,
-the IGBT.
-4.5.2 Insulated-Gate Bipolar Transistor (IGBT)
-A cross-section of the IGBT is illustrated in Fig. 4.65. Comparison with Fig. 4.47 reveals that
-the IGBT and power MOSFET are very similar in construction. The key di ﬀerence is the p
-region connected to the collector of the IGBT. So the IGBT is a modern four-layer power semi-
-conductor device having a MOS gate.
-The function of the added p region is to inject minority charges into the n
-−region while the
-device operates in the on state, as illustrated in Fig. 4.65. When the IGBT conducts, the p–n−
-junction is forward-biased, and the minority charges injected into then−region cause conductiv-
-ity modulation. This reduces the on-resistance of the n−region, and allows high-voltage IGBTs
-to be constructed which have low forward voltage drops. IGBTs rated as low as 600 V and as
-high as 6500 V are readily available. The forward voltage drops of these devices are typically 2
-to 4 V , much lower than would be obtained in equivalent MOSFETs of the same silicon area.
-Several schematic symbols for the IGBT are in current use; the symbol illustrated in
-Fig. 4.66a is the most popular. A two-transistor equivalent circuit for the IGBT is illustrated
+![源页 p.124](../assets/page-snapshots/chapter-4/page-124.png)
 
-116 4 Switch Realization
-(a)
-0 A
-5 A
-10 A
-IC VCE = 200 V
-0 A 50 mA 100 mA 150 mA
-Cutoff
-IB
-VCE = 20 V
-VCE = 5 V
-VCE = 0.2 V
-VCE = 0.5 V
-Active region
-Quasi-saturation
-Saturation regionSlope
-= 
-(b) IC
-VCE
-IB = 0
-Open emitter
-BVCBOBVCEOBVsus
-Increasing IB
-Fig. 4.64 BJT static characteristics: ( a) IC vs. IB, illustrating the regions of operation; ( b) IC vs. VCE ,
-illustrating voltage breakdown characteristics
-in Fig. 4.66b. The IGBT functions eﬀectively as an n-channel power MOSFET, cascaded by a
-PNP emitter-follower BJT. The physical locations of the two eﬀective devices are illustrated in
-Fig. 4.67. It can be seen that there are two e ﬀective currents: the eﬀective MOSFET channel
-current i1, and the eﬀective PNP collector current i2.
-The price paid for the reduced voltage drop of the IGBT is its increased switching times,
-especially during the turn-oﬀtransition. In particular, the IGBT turn-oﬀtransition exhibits a
-phenomenon known as current tailing.T h eeﬀective MOSFET can be turned oﬀquickly, by re-
-moving the gate charge such that the gate-to-emitter voltage is negative. This causes the channel
-current i
-1 to quickly become zero. However, the PNP collector current i2 continues to ﬂow as
-long as minority charge is present in the n−region. Since there is no way to actively remove the
-stored minority charge, it slowly decays via recombination. So i2 slowly decays in proportion
+接下来考察同步整流器 $Q_2$ 关断、主开关 $Q_1$ 随后开通这一开关过渡的细节。在图4.56中，低边驱动器 $D_{RLS}$ 和 MOSFET $Q_2$ 被替换为有助于理解该过渡期间观测波形的等效电路模型。驱动器 $D_{RLS}$ 由电压源 $v_{thev}(t)$ 和电阻 $R_{thev}$ 组成的戴维南等效模型替代。电压源 $v_{thev}$ 是驱动器的开路输出电压，可假定与图4.55的控制信号 $c_{LS}(t)$ 成正比。电阻 $R_{thev}$ 一阶近似下可视为由驱动器 $D_{RLS}$ 输出级 MOSFET 的导通电阻产生。栅极驱动器通常按其峰值电流能力额定；例如，一个 12 V、1 A 额定的驱动器其 $R_{thev} = (12\,\text{V})/(1\,\text{A}) = 12\,\Omega$。此外，在图4.56中，MOSFET $Q_2$ 被替换为由器件电容 $C_{gs}$、$C_{gd}$、$C_{ds}$、体二极管 $D_2$ 和一个受控电流源组成的等效电路模型，该受控源用以建模漏极电流对 $v_{gs}$ 和 $v_s$ 的依赖关系。
 
-4.5 Minority-Carrier Transistors 117
-Fig. 4.65 IGBT structure.
-Crosshatched regions
-are metallized contacts.
-Shaded regions are in-
-sulating silicon dioxide
-layers
-Collector
-p
-n
-nn
-pp
-Emitter
-Gate
-nn
-Minority carrier
-injection
-Fig. 4.66 The IGBT: (a) schematic
-symbol, (b) equivalent circuit
-(a)
-Collector
-Emitter
-Gate
-(b) C
-E
-G
-i2i1
-Fig. 4.67 Physical locations of the
-eﬀective MOSFET and PNP compo-
-nents of the IGBT
-p
-n
-nnp p nn
-i2 i1
-Collector
-Emitter
-to the minority charge, and a current tail is observed. The length of the current tail can be re-
-duced by introduction of recombination centers in the n−region, at the expense of a somewhat
-increased on-resistance. The current gain of the eﬀective PNP transistor can also be minimized,
-causing i1 to be greater than i2. Nonetheless, the turn-oﬀswitching time of the IGBT is sig-
-niﬁcantly longer than that of the MOSFET, with typical turn-o ﬀtimes in the range 0.5 μst o
-5 μs.
+图4.56 图4.54半桥栅极驱动器的细节，低边驱动器以戴维南等效网络建模，MOSFET $Q_2$ 以其等效电路模型替代
 
-118 4 Switch Realization
-Fig. 4.68 IGBT switching
-loss example +
-LiL(t)iA
-vA
-vB
-+
-iBDTs Ts
-+
-Ideal
-diode
-Physical
-IGBT
-Gate
-driver
-Vg
-A buck converter circuit containing an ideal diode and nonideal (physical) IGBT is illus-
-trated in Fig. 4.68. Turn-oﬀtransition waveforms are illustrated in Fig. 4.69; these waveforms
-are similar to the MOSFET waveforms of Fig. 4.25. The diode is initially reverse-biased, and
-the voltage vA(t) rises from approximately zero to Vg. The interval length (t1−t0) is the time re-
-quired for the gate drive circuit to charge the IGBT gate-to-collector capacitance. At timet= t1,
-the diode becomes forward-biased, and current begins to commute from the IGBT to the diode.
-The interval (t2−t1) is the time required for the gate drive circuit to discharge the IGBT gate-
-to-emitter capacitance to the threshold value which causes the eﬀective MOSFET in Fig. 4.66b
-to be in the oﬀstate. This time can be minimized by use of a high-current gate drive circuit
-which discharges the gate capacitance quickly. However, switching oﬀthe eﬀective MOSFET
-does not completely interrupt the IGBT current iA(t): current i2(t) continues to ﬂow through the
-eﬀective PNP bipolar junction transistor of Fig. 4.66b as long as minority carriers continue to
-Fig. 4.69 IGBT turn-oﬀtran-
-sition waveforms for the circuit
-of Fig. 4.68
-IGBT
-waveforms
-Diode
-waveforms
-t
-t
-t
-pA(t)
-= vAiA
-iL
-VgvA(t)
-iA(t)
-00
-00
-iL
-g
-Vg iL
-t0 t1 t2
-}
-Current tail
-t3
-iB(t)
-vB(t)
-Area Woff
+开关过渡的波形如图4.57所示。初始时 $Q_2$ 导通，其栅-源电压 $v_{gs}(t)$ 为高。开关节点电压 $v_s(t)$ 近似为零，晶体管 $Q_1$ 关断。当控制信号 $c_{LS}(t)$ 命令低边驱动器关断 $Q_2$ 时，$Q_2$ 的栅极电容开始经驱动器电阻 $R_{thev}$ 放电。当 $Q_2$ 栅极电压 $v_{gs}(t)$ 降至 $Q_2$ 阈值电压 $V_{th}$ 以下时，MOSFET $Q_2$ 完全关断。若死区 $t_d$ 选择恰当，此过程发生在 $Q_1$ 开始开通之前。
 
-4.5 Minority-Carrier Transistors 119
-exist within its base region. During the interval t2 < t< t3, the current is proportional to this
-stored minority charge, and the current tail interval length (t3−t2) is equal to the time required
-for this remaining stored minority charge to recombine.
-The energy Wof f lost during the turn-oﬀtransition of the IGBT is again the area under
-the instantaneous power waveform, as illustrated in Fig. 4.69. The switching loss can again be
-evaluated using Eq. (4.6). Switching loss typically limits the maximum switching frequencies
-of conventional PWM converters employing IGBTs to roughly 1 to 30 kHz.
-The added p–n−diode junction of the IGBT is not normally designed to block signiﬁcant
-voltage. Hence, the IGBT has negligible reverse voltage-blocking capability.
-Since the IGBT is a four-layer device, there is the possibility of SCR-type latchup, in which
-the IGBT cannot be turned oﬀby gate voltage control. Recent devices are not susceptible to this
-problem. These devices are quite robust, hot spot and current crowding problems are nonexis-
-tent, and the need for external snubber circuits is minimal.
-The on-state forward voltage drop of the IGBT can be modeled by a forward-biased diode
-junction, in series with an eﬀective on-resistance. The temperature coeﬃcient of the IGBT for-
-ward voltage drop is complicated by the fact that the diode junction voltage has a negative tem-
-perature coeﬃcient, while the on-resistance has a positive temperature coeﬃcient. Fortunately,
-near rated current the on-resistance dominates, leading to an overall positive temperature coeﬃ-
-cient. In consequence, IGBTs can be easily connected in parallel, with a modest current derating.
-Large modules are commercially available, containing multiple parallel-connected chips.
-Characteristics of several commercially available single-chip IGBTs and multiple-chip
-IGBT modules are listed in Table4.6.
-4.5.3 Thyristors (SCR, GTO)
-Of all conventional semiconductor power devices, the silicon-controlled rectiﬁer (SCR) is the
-oldest, has the lowest cost per rated kV A, and is capable of controlling the greatest amount
-of power. Devices having voltage ratings of 5000 to 7000 V and current ratings of several
-thousand amperes are available. In utility dc transmission line applications, series-connected
-light-triggered SCRs are employed in inverters and rectiﬁers that interface the ac utility system
-Table 4.6 Characteristics of several commercial IGBTs
-Part number Rated maximum
-voltage
-Rated average
-current
-VF (typical) tf (typical)
-Single-chip devices
-HGTP12N60A4 600 V 23 A 2.0 V 70 ns
-HGTG32N60E2 600 V 32 A 2.4 V 0 .62 μs
-HGTG30N120D2 1200 V 30 A 3.2 V 0 .58 μs
-Multiple-chip modules
-CM400HA-12E 600 V 400 A 2.7 V 0 .3 μs
-CM300HA-24E 1200 V 300 A 2.7 V 0 .3 μs
-CM800HA-34H 1700 V 800 A 3.3 V 0 .6 μs
-High voltage modules
-CM 800HB-50H 2500 V 800 A 3.15 V 1 .0 μs
-CM 600HB-90H 4500 V 900 A 3.3 V 1 .2 μs
+$Q_2$ 关断后、$Q_1$ 开通前，电感电流 $i_L(t)$ 流向何处？假定电感电流纹波很小，在图4.57所示开关时间内不显著变化。在 $Q_1$ 和 $Q_2$ 均处于关断状态且电感电流为图示正向的情况下，电感电流将使体二极管 $D_2$ 正偏。该体二极管在死区剩余时间内持续导通。
 
-120 4 Switch Realization
-Fig. 4.70 The SCR: ( a)
-schematic symbol, ( b) equiv-
-alent circuit
-(a)
-Anode (A)
-Cathode (K)
-Gate (G)
-(b) Anode
-Cathode
-GateQ1
-Q2
-Fig. 4.71 Physical locations
-of the eﬀective NPN and PNP
-components of the SCR
-A
-n
-p
-GK
-nn
-p
-K
-Q1
-Q2
-to dc transmission lines which carry roughly 1 kA and 1 MV . A single large SCR ﬁlls a silicon
-wafer that is several inches in diameter, and is mounted in a hockey-puck-style case.
-The schematic symbol of the SCR is illustrated in Fig. 4.70a, and an equivalent circuit con-
-taining NPN and PNP BJT devices is illustrated in Fig.4.70b. A cross-section of the silicon chip
-is illustrated in Fig. 4.71.Eﬀective transistor Q1 is composed of the n, p, and n−regions, while
-eﬀective transistor Q2 is composed of the p, n−, and p regions as illustrated.
-The device is capable of blocking both positive and negative anode-to-cathode voltages.
-Depending on the polarity of the applied voltage, one of thep–n−junctions is reverse-biased. In
-either case, the depletion region extends into the lightly dopedn−region. As with other devices,
-the desired voltage breakdown rating is obtained by proper design of the n−region thickness
-and doping concentration.
-The SCR can enter the on state when the applied anode-to-cathode voltage vAK is positive.
-Positive gate current iG then causes eﬀective transistor Q1 to turn on; this in turn supplies base
-current to eﬀective transistor Q2, and causes it to turn on as well. The e ﬀective connections
-of the base and collector regions of transistors Q1 and Q2 constitute a positive feedback loop.
-Provided that the product of the current gains of the two transistors is greater than one, then
-the currents of the transistors will increase regeneratively. In the on state, the anode current is
-limited by the external circuit, and both e ﬀective transistors operate fully saturated. Minority
-carriers are injected into all four regions, and the resulting conductivity modulation leads to
-very low forward voltage drop. In the on state, the SCR can be modeled as a forward-biased
-diode junction in series with a low-value on-resistance. Regardless of the gate current, the SCR
-is latched in the on state: it cannot be turned oﬀexcept by application of negative anode current
+![源页 p.125](../assets/page-snapshots/chapter-4/page-125.png)
 
-4.5 Minority-Carrier Transistors 121
-Fig. 4.72 Static iA–vAK characteristics of
-the SCR
-iA
-vAK
-iG = 0
-increasing iG
-Forward
-conducting
-Reverse
-blocking Forward
-blocking
-Reverse
-breakdown
-or negative anode-to-cathode voltage. In phase-controlled converters, the SCR turns oﬀat the
-zero crossing of the converter ac input or output waveform. In forced commutation converters,
-external commutation circuits force the controlled turn-oﬀof the SCR, by reversing either the
-anode current or the anode-to-cathode voltage.
-Static iA−vAK characteristics of the conventional SCR are illustrated in Fig. 4.72. It can
-be seen that the SCR is a voltage-bidirectional two-quadrant switch. The turn-on transition is
-controlled actively via the gate current. The turn-oﬀtransition is passive.
-During the turn-oﬀtransition, the rate at which forward anode-to-cathode voltage is reap-
-plied must be limited, to avoid retriggering the SCR. The turn-o ﬀtime t
-q is the time required
-for minority stored charge to be actively removed via negative anode current, and for recombi-
-nation of any remaining minority charge. During the turn-oﬀtransition, negative anode current
-actively removes stored minority charge, with waveforms similar to diode turn-o ﬀtransition
-waveforms of Fig. 4.31. Thus, after the ﬁrst zero crossing of the anode current, it is necessary
-to wait for time tq before reapplying positive anode-to-cathode voltage. It is then necessary to
-limit the rate at which the anode-to-cathode voltage increases, to avoid retriggering the device.
-Inverter-grade SCRs are optimized for faster switching times, and exhibit smaller values of t
-q.
-Conventional SCR wafers have large feature size, with coarse or nonexistent interdigitation
-of the gate and cathode contacts. The parasitic elements arising from this large feature size lead
-to several limitations. During the turn-on transition, the rate of increase of the anode current
-must be limited to a safe value. Otherwise, cathode current focusing can occur, which leads to
-formation of hot spots and device failure.
-The coarse feature size of the gate and cathode structure is also what prevents the conven-
-tional SCR from being turned oﬀby active gate control. One might apply a negative gate current,
-in an attempt to actively remove all of the minority stored charge and to reverse-bias the p–n
-gate-cathode junction. The reason that this attempt fails is illustrated in Fig.4.73.T h el a r g en e g -
-ative gate current ﬂows laterally through the adjoining the p region, inducing a voltage drop as
-shown. This causes the gate-cathode junction voltage to be smaller near the gate contact, and
-relatively larger away from the gate contact. The negative gate current is able to reverse-bias
-only the portion of the gate-cathode junction in the vicinity of the gate contact; the remainder
-of the gate-cathode junction continues to be forward-biased, and cathode current continues to
-ﬂow. In eﬀect, the gate contact is able to inﬂuence only the nearby portions of the cathode.
-The gate turn oﬀthyristor, or GTO, is a more recent power device having small feature
-size. The gate and cathode contacts highly interdigitated, such that the entire gate-cathode p–n
+图4.57 $Q_2$ 关断、随后 $Q_1$ 开通的开关过渡波形
 
-122 4 Switch Realization
-A
-n
-p
-GK
-nn
-p
-K
-++
-G
-iA
-Fig. 4.73 Negative gate current is unable to completely reverse-bias the gate-cathode junction. The anode
-current focuses away from the gate contact
-junction can be reverse-biased via negative gate current during the turn-oﬀtransition. Like the
-SCR, a single large GTO can ﬁll an entire silicon wafer. Maximum voltage and current ratings
-of commercial GTOs are lower than those of SCRs.
-The turn-oﬀgain of a GTO is the ratio of on-state current to the negative gate current magni-
-tude required to switch the device oﬀ. Typical values of this gain are 2 to 5, meaning that several
-hundred amperes of negative gate current may be required to turn oﬀa GTO conducting 1000 A.
-Also of interest is the maximum controllable on-state current. The GTO is able to conduct peak
-currents signiﬁcantly greater than the rated average current; however, it may not be possible to
-switch the device oﬀunder gate control while these high peak currents are present.
-4.6 Additional Sources of Switching Loss
-Switching loss caused by transistor switching times with a clamped inductive load is introduced
-in Sect. 4.2.2. Current tailing in IGBTs leads to this type of switching loss, as discussed in
-Sect. 4.5.2. Diode reverse recovery also induces switching loss as modeled in Sect. 4.3.3.
-Several other sources of switching loss are discussed in this section. Semiconductor output
-capacitances store energy that is dissipated in the transistor at the transistor turn-on transition.
-Inductances that eﬀectively are in series with the transistor store energy when the transistor
-conducts; when the transistor turns o ﬀand interrupts the inductor current, the stored energy
-is dissipated in the transistor. Diode reverse recovery can also induce switching loss in other
-circuit elements. These additional mechanisms of switching loss are discussed in this section.
-4.6.1 Device Capacitances, and Leakage, Package, and Stray Inductances
-Reactive elements can also lead to switching loss. Capacitances that are eﬀectively in parallel
-with switching elements are shorted out when the switch turns on, and any energy stored in
-the capacitance is lost. The capacitances are charged without energy loss when the switching
-elements turn oﬀ, and the transistor turn-oﬀloss W
-of f computed in Eq. ( 4.5) may be reduced.
+死区结束时，控制信号 $c_{HS}(t)$ 命令高边驱动器开通 $Q_1$。由于体二极管 $D_2$ 正在导通，它必须经历反向恢复过程，故反向电流流过 $D_2$（同时流过 $Q_1$ 和 $V_g$）。因此，$D_2$ 在 $Q_1$ 中引起开关损耗，如 4.3 节所述。在图4.57中，$D_2$ 的反向恢复时间记为 $t_r$。
 
-4.6 Additional Sources of Switching Loss 123
-Fig. 4.74 The energy stored in the
-semiconductor output capacitances is
-lost during the transistor turn-on tran-
-sition +
-+Vg
-Cds
-Cj
-Likewise, inductances that are eﬀectively in series with a switching element lose their stored
-energy when the switch turns oﬀ. Hence, series inductances lead to additional switching loss at
-turn-oﬀ, but can reduce the transistor turn-on loss.
-The stored energies of the reactive elements can be summed to ﬁnd the total energy loss
-per switching period due to these mechanisms. For linear capacitors and inductors, the stored
-energy is
-WC =
-∑
-capacitive
-elements
-1
-2 CiV2
-i (4.41)
-WL =
-∑
-inductive
-elements
-1
-2 LjI2
-j
-A common source of this type of switching loss is the output capacitances of the semiconductor
-switching devices. The depletion layers of reverse-biased semiconductor devices exhibit capac-
-itance which stores energy. When the transistor turns on, this stored energy is dissipated by
-the transistor. For example, in the buck converter of Fig. 4.74, the MOSFET exhibits drain-to-
-source capacitance C
-ds , and the reverse-biased diode exhibits junction capacitance C j.D u r i n g
-the switching transitions these two capacitances are eﬀectively in parallel, since the dc source
-Vg is eﬀectively a short-circuit at high frequency. To the extent that the capacitances are linear,
-the energy lost when the MOSFET turns on is
-WC = 1
-2
-⎦
-Cds+ C j
-)
-V2
-g (4.42)
-Typically, this type of switching loss is signiﬁcant at voltage levels above 100 V . The MOS-
-FET gate drive circuit, which must charge and discharge the MOSFET gate capacitances, also
-exhibits this type of loss.
-As noted in Sect. 4.4.1, the incremental drain-to-source capacitance C
-ds of the power MOS-
-FET is a strong function of the drain-to-source voltage vds. Cds(vds) follows an approximate
-inverse-square root dependence of vds, as given by Eq. ( 4.39). The energy stored in Cds at
-vds= VDS is
-WCds=
-∫
-vdsiCdt=
-∫ VDS
-0
-vdsCds(vds)dvds (4.43)
-where iC = Cds (vds)dvds/dt is the current in Cds. Substitution of Eq. (4.39)i n t o(4.43) yields
-WCds=
-∫ vDS
-0
-C′
-0(vds)√vds dvds= 2
-3 Cds(VDS)V2
-DS (4.44)
+当 $D_2$ 的反向恢复已进展到允许二极管电压变化时，开关节点电压 $v_s(t)$ 将上升。图4.57按体二极管软度因子 $S = 0$ 的情形绘制，故电压 $v_s(t)$ 在反向恢复结束后才变化。在长度为 $t_{vr}$ 的区间内，开关节点电压从零升至 $V_g$。在此区间内，MOSFET $Q_1$ 和 $Q_2$ 的输出电容 $C_{ds}$ 所储存的能量作为开关损耗在 $Q_1$ 中耗散。4.2.2 节所述的开关损耗也在 $Q_1$ 中引起。
 
-124 4 Switch Realization
-This energy is lost each time the MOSFET switches on. From the standpoint of switching loss,
-the drain-to-source capacitance is equivalent to a linear capacitance having the value4
-3 Cds (VDS).
-The Schottky diode is essentially a majority-carrier device, which does not exhibit a reverse-
-recovery transient such as in Fig. 4.31. Reverse-biased Schottky diodes do exhibit signiﬁcant
-junction capacitance, however, which can be modeled with a parallel capacitorC j as in Fig.4.74,
-and which leads to energy loss at the transistor turn-on transition.
-Common sources of series inductance are transformer leakage inductances in isolated con-
-verters (discussed in Chap. 6), as well as the inductances of interconnections and of semicon-
-ductor device packages. In addition to generating switching loss, these elements can lead to
-excessive peak voltage stress during the transistor turn-oﬀtransition. Interconnection and pack-
-age inductances can lead to signiﬁcant switching loss in high-current applications, and leakage
-inductance is an important source of switching loss in many transformer-isolated converters.
-4.6.2 Inducing Switching Loss in Other Elements
-Diode stored minority charge can induce switching loss in the (nonideal) converter reactive
-elements. As an example, consider the circuit of Fig. 4.75, containing an ideal voltage source
-vj(t), an inductor L, a capacitor C (which may represent the diode junction capacitance, or
-the junction capacitance in parallel with an external capacitor), and a silicon diode. The diode
-switching processes of many converter and rectiﬁer circuits can be modeled by a circuit of
-this form. The voltage source produces the rectangular waveform v
-i(t) illustrated in Fig. 4.76.
-This voltage is initially positive, causing the diode to become forward-biased and the inductor
-current iL(t) to increase linearly with slope V1/L. Since the current is increasing, the stored
-minority charge inside the diode also increases. At time t= t1, the source voltage vi(t) becomes
-negative, and the inductor current decreases with slope diL/dt = −V2/L. The diode stored
-charge also decreases, but at a slower rate that depends not only on iL but also on the minority-
-carrier recombination lifetime of the silicon material in the diode. Hence, at time t= t2, when
-iL(t) reaches zero, some stored minority charge remains in the diode. So the diode continues
-to be forward-biased, and the inductor current continues to decrease with the same slope. The
-negative current for t> t
-2 constitutes a reverse diode current, which actively removes diode
-stored charge. At some time later, t= t3, the diode stored charge in the vicinity of the diode
-junction becomes zero, and the diode junction becomes reverse-biased. The inductor current
-is now negative, and must ﬂow through the capacitor. The inductor and capacitor then form a
-series resonant circuit, which rings with decaying sinusoidal waveforms as shown. This ringing
-is eventually damped out by the parasitic loss elements of the circuit, such as the inductor
-winding resistance, inductor core loss, and capacitor equivalent series resistance.
-The diode recovered charge induces loss in this circuit. During the interval t
-2 < t< t3,t h e
-minority stored charge Qr recovered from the diode is
-Fig. 4.75 A circuit in which the diode
-stored charge induces ringing, and ulti-
-mately switching loss, in (nonideal) reac-
-tive elements
-+
-LiL(t)
-vL(t) +
-Silicon
-diodevi(t) CvB(t)
-iB(t)
+由图4.56可见，当 $v_{gs}(t)$ 和 $v_{thev}(t)$ 均为零时，$R_{thev}$ 上电压为零，故 $i_{dr}$ 为零。这正是图4.57中 $t_{vr}$ 区间开始时所发生的情况。但由于 $v_s(t)$ 上升，电容 $C_{gd}$ 中感应出电流 $i_{gd} = C_{gd}\,dv_s/dt$。该电流必须流入 $C_{gs}$，因为 $i_{dr} = 0$。故 $v_{gs}(t)$ 必然如图所示升高。当 $v_{gs}$ 大于零时，将出现一定的负向驱动器电流 $i_{dr}$，其值受戴维南电阻 $R_{thev}$ 限制。
 
-4.6 Additional Sources of Switching Loss 125
-Fig. 4.76 Waveforms of the circuit of
-Fig. 4.75
-t
-2
-Area
-r
-t
-V1
-0
-vi(t)
-t
-t3t1 t2
-vB(t)
-iL(t)
-2
-0
-0
-Qr=−
-∫ t3
-t2
-iL(t)dt (4.45)
-This charge is directly related to the energy stored in the inductor during this interval. The
-energy WL stored in the inductor is the integral of the power ﬂowing into the inductor:
-WL=
-∫ t3
-t2
-vL(t)iL(t)dt (4.46)
-During this interval, the applied inductor voltage is
-vL(t)= LdiL(t)
-dt =−V2 (4.47)
-Substitution of Eq. (4.47) into Eq. (4.46) leads to
-WL=
-∫ t3
-t2
-LdiL(t)
-dt iL(t)dt=
-∫ t3
-t2
-(−V2)iL(t)dt (4.48)
-Evaluation of the integral on the left side yields the stored inductor energy att= t3,o r Li2
-L(t3)/2.
-The right-side integral is evaluated by noting thatV2 is constant and by substitution of Eq. (4.45),
-yielding V2Qr. Hence, the energy stored in the inductor at t= t3 is
-WL= 1
-2 Li2
-L(t3)= V2Qr (4.49)
-or, the recovered charge multiplied by the source voltage. Fort> t3, the ringing of the resonant
-circuit formed by the inductor and capacitor causes this energy to be circulated back and forth
+在 $t_{vr}$ 区间内 $v_{gs}(t)$ 会升到多高？重要的是 $v_{gs}$ 在整段区间内须小于 $V_{th}$，以使 MOSFET $Q_2$ 保持关断。若 $v_{gs}$ 升至 $V_{th}$ 以上，$Q_2$ 将开始开通，导致振荡和附加的开关损耗。必须在 $Q_1$ 整个开通区间内维持 $v_{gs} < V_{th}$。
 
-126 4 Switch Realization
-between the inductor and capacitor. If parasitic loss elements in the circuit cause the ringing
-amplitude to eventually decay to zero, then the energy becomes lost as heat in the parasitic
-elements.
-So diode stored minority charge can lead to loss in circuits that do not contain an active
-switching element. Also, ringing waveforms that decay before the end of the switching period
-indicate the presence of switching loss.
-4.6.3 Eﬃciency vs. Switching Frequency
-Suppose next that we add up all of the energies lost due to switching, as discussed above:
-Wtot= Won+ Woﬀ+ WD+ WC+ WL+... (4.50)
-This is the energy lost in the switching transitions of one switching period. To obtain the average
-switching power loss, we must multiply by the switching frequency:
-Psw= Wtot fsw (4.51)
-Other losses in the converter include the conduction losses Pcond, modeled and solved as in
-Chap. 3, and other frequency-independent ﬁxed losses Pfix e d, such as the power required to
-operate the control circuit. The total loss is therefore
-Ploss = Pcond+ Pfix e d+ Wtot fsw (4.52)
-which increases linearly with frequency. At the critical frequency
-fcrit = Pcond+ Pfix e d
-Wtot
-(4.53)
-the switching losses are equal to the other converter losses. Below this critical frequency, the to-
-tal loss is dominated by the conduction and ﬁxed loss, and hence the total loss and converter eﬃ-
-ciency are not strong functions of switching frequency. Above the critical frequency, the switch-
-ing loss dominates the total loss, and the converter eﬃciency decreases rapidly with increasing
-switching frequency. Typical dependence of the full-load converter eﬃciency on switching fre-
-quency is plotted in Fig.4.77, for an arbitrary choice of parameter values. The critical frequency
-fcrit can be taken as a rough upper limit on the switching frequency of a practical converter.
-4.7 Summary of Key Points
-1. How an SPST ideal switch can be realized using semiconductor devices depends on the
-polarity of the voltage that the devices must block in the oﬀstate, and on the polarity of the
-current which the devices must conduct in the on state.
-2. Single-quadrant SPST switches can be realized using a single transistor or a single diode,
-depending on the relative polarities of the oﬀ-state voltage and on-state current.
-3. Two-quadrant SPST switches can be realized using a transistor and diode, connected in se-
-ries (bidirectional-voltage) or in antiparallel (bidirectional-current). Several four-quadrant
-schemes are also listed here.
-```
+减小 $v_{gs}(t)$ 上升的常用方案如图4.58所示。在高边驱动器 $D_{RHS}$ 与 MOSFET $Q_1$ 栅极之间串入一个小阻值电阻 $R_{g1}$。这减慢 $Q_1$ 的开通，降低开关节点电压 $v_s(t)$ 的上升速率。故 $Q_2$ 栅-漏电容的电流 $i_{gd}$ 减小，$v_{gs}(t)$ 上升更慢。若 $R_{g1}$ 足够大，则低边驱动器 $D_{RLS}$ 能维持 $v_{gs}(t)$ 低于 $V_{th}$。二极管 $D_{g1}$ 在 $Q_1$ 关断过渡期间旁路 $R_{g1}$，故 $R_{g1}$ 降低开通速度但不影响关断速度。若电感电流 $i_L$ 可反极性，则在 $Q_2$ 栅极也可插入类似的 $R_{g2}$ 与 $D_{g2}$ 网络。
+
+![源页 p.126](../assets/page-snapshots/chapter-4/page-126.png)
+
+图4.58 在高边驱动器与 $Q_1$ 栅极之间加入电阻 $R_{g1}$ 和二极管 $D_{g1}$，以减慢 $Q_1$ 的开通并在 $Q_1$ 开通过渡期间维持 $Q_2$ 的 $v_{gs}$ 低于 $V_{th}$
+
+## 4.5 少数载流子晶体管
+
+### 4.5.1 双极型晶体管（BJT）
+
+NPN 功率 BJT 的剖面如图4.59所示。与其他功率器件一样，电流纵向流过硅片。集电区中插入一个轻掺杂 $n^-$ 区，以获得所需的击穿电压额定。晶体管工作于关断状态
+
+图4.59 功率 BJT 结构。交叉阴影区为金属化接触
+
+![源页 p.127](../assets/page-snapshots/chapter-4/page-127.png)
+
+（截止）时，p–n 基-射结和 p–n⁻ 基-集结均反偏；所施加的集-射电压实质上降落在 p–n⁻ 结的耗尽区上。晶体管工作于通态（饱和）时两个结均正偏；此时 $p$ 区和 $n^-$ 区中存在大量少数电荷。此少数电荷通过电导调制效应使 $n^-$ 区呈现低导通电阻。在关断状态与导通状态之间是人们熟知的放大区，此时 p–n 基-射结正偏、p–n⁻ 基-集结反偏。当 BJT 工作于放大区时，集电极电流正比于基区少数电荷，后者（在平衡时）又正比于基极电流。此外还存在第四个工作区，称为准饱和，发生在放大区与饱和区之间。准饱和出现在基极电流不足以使器件完全饱和时；故 $n^-$ 区内的少数电荷不足以完全降低 $n^-$ 区电阻，可观测到较高的晶体管导通电阻。
+
+图4.60 BJT 开关时间示例电路
+
+考虑图4.60的简单开关电路。图4.61为说明 BJT 开通和关断过渡的波形。在区间 (1) 内晶体管工作于关断状态，基-射结被源电压 $v_s(t) = -V_{s1}$ 反偏。开通过渡在区间 (2) 开始时启动，此时源电压变为 $v_s(t) = +V_{s2}$。源 $v_s$ 随后向 BJT 基极提供正向电流。该电流首先对反偏的基-射结和基-集结的耗尽区电容充电。区间 (2) 结束时，基-射电压超过零足够多以使基-射结正偏。区间 (2) 的长度称为开通延迟时间。在区间 (3) 内，少数电荷跨基-射结从发射区注入基区；集电极电流正比于该基区少数电荷。故在区间 (3) 内集电极电流增大。由于晶体管驱动电阻负载 $R_L$，集电极电压也在区间 (3) 内降低。这使反偏基-集耗尽区（密勒）电容上的电压降低。增大基极电流 $I_{B1}$（通过减小 $R_B$ 或增大 $V_{s2}$）会增大基区少数电荷和密勒电容中电荷的变化速率。故 $I_{B1}$ 增大导致开通开关时间缩短。
+
+在区间 (3) 结束或接近结束时，基-集 p–n⁻ 结正偏。少数载流子随之注入 $n^-$ 区，降低其有效电阻率。视器件几何和基极电流大小而定，在区间 (4) 内可能观测到电压尾，其表现为 $n^-$ 区视在电阻随电导调制而降低。BJT 在区间 (5) 开始时达到通态平衡，导通电阻低，$n^-$ 区和 $p$ 区均存在大量少数电荷。此少数电荷远超过维持集电极电流 $I_{Con}$ 的放大区导通所需量；其量值是 $I_{B1} - I_{Con}/\beta$ 的函数，其中 $\beta$ 为放大区电流增益。
+
+![源页 p.128](../assets/page-snapshots/chapter-4/page-128.png)
+
+图4.61 BJT 开通和关断过渡波形
+
+关断过程在区间 (6) 开始时启动，此时源电压变为 $v_s(t) = -V_{s1}$。只要基-射结附近存在少数载流子，该结就保持正偏。同样，只要少数电荷超过维持 $I_{Con}$ 放大区导通所需量，即存在过剩电荷，集电极电流维持 $i_C(t) = I_{Con}$。故在区间 (6) 内流过负向基极电流 $-I_{B2} = (-V_{s1} - v_{BE}(t))/R_B$。该负向基极电流主动移除总存储少数电荷。复合进一步减少存储少数电荷。当所有过剩少数电荷被移除时，区间 (6) 结束。区间 (6) 的长度
+
+![源页 p.129](../assets/page-snapshots/chapter-4/page-129.png)
+
+图4.62 使开关时间最小化的理想基极电流波形
+
+称为存储时间。在区间 (7) 内，晶体管工作于放大区。集电极电流 $i_C(t)$ 此时正比于存储少数电荷。复合和负向基极电流继续减少基区少数电荷，故集电极电流减小。此外，集电极电压升高，故基极电流须对密勒电容充电。区间 (7) 结束时，少数存储电荷为零，基-射结可变为反偏。区间 (7) 的长度称为关断时间或下降时间。在区间 (8) 内，反偏基-射结电容放电至电压 $-V_{s1}$。在区间 (9) 内，晶体管工作于平衡的关断状态。
+
+可以采用 $I_{B2} = 0$ 关断晶体管；例如令 $V_{s1}$ 近似为零。但这会导致很长的存储时间和关断开关时间。若 $I_{B2} = 0$，则所有存储少数电荷须被动地通过复合移除。从开关时间最小化的角度，图4.62的基极电流波形是理想的。初始基极电流 $I_{B1}$ 量值大，使电荷快速插入基区，开通开关时间短。选择一个折中的平衡通态电流 $I_{Bon}$，以获得相当低的集-射正向压降，同时维持适度量的过剩存储少数电荷，从而保持存储时间相当短。电流 $-I_{B2}$ 量值大，使电荷从基区快速移除，从而最小化存储时间和关断开关时间。
+
+不幸的是，在大多数 BJT 中，$I_{B1}$ 和 $I_{B2}$ 的量值必须受限，因为过大的值会导致器件失效。如图4.63所示，基极电流横向流过 $p$ 区。此电流在 $p$ 材料电阻上引起压降，影响基-射结上的电压。在关断过渡期间，基极电流 $-I_{B2}$ 使基区中心处的基-射结电压更高，而靠近基极接触处的边缘电压更低。这使集电极电流聚焦于基区中心附近。类似地，大的 $I_{B1}$ 在开通过渡期间使集电极电流拥挤于基区边缘附近。由于开关过渡期间集-射电压和集电极电流同时较大，电流聚焦可伴随显著的功率损耗。故在基区中心或边缘形成热点。基-射结电流的正温度系数（对应于结电压的负温度系数）可导致热失控和器件失效。因此，为获得可靠工作，可能需要限制 $I_{B1}$ 和 $I_{B2}$ 的量值。也可能需要加入外部缓冲网络，以降低开关过渡期间晶体管的瞬时功率耗散。
+
+图4.63 大的 $I_{B2}$ 导致发射极电流因横向基区电流感生的电压而远离基极接触聚焦
+
+![源页 p.130](../assets/page-snapshots/chapter-4/page-130.png)
+
+BJT 的稳态特性如图4.64所示。在图4.64a中，集电极电流 $I_C$ 作为基极电流 $I_B$ 的函数绘出，对应若干集-射电压 $V_{CE}$ 值。标出了截止、放大、准饱和和饱和区。在给定集电极电流 $I_C$ 下，要在饱和区工作且正向压降最小，基极电流 $I_B$ 须足够大。放大区中 $dI_C/dI_B$ 的斜率即电流增益 $\beta$。可见 $\beta$ 在高电流下减小——在接近 BJT 额定电流处，电流增益迅速下降，故难以使器件完全饱和。在图4.64b中，集电极电流 $I_C$ 作为集-射电压 $V_{CE}$ 的函数绘出，对应若干 $I_B$ 值。击穿电压 $BV_{sus}$、$BV_{CEO}$、$BV_{CBO}$ 如图所示。$BV_{CBO}$ 是发射极开路或基极电流足够负时基-集结的雪崩击穿电压。$BV_{CEO}$ 是基极电流为零时观测到的略小的集-射击穿电压；当接近雪崩击穿时，产生的自由载流子与正向基极电流等效，使击穿电压降低。$BV_{sus}$ 是有正向基极电流时观测到的击穿电压。由于瞬时功率耗散高，击穿通常导致 BJT 损坏。在大多数应用中，关断态晶体管电压不得超过 $BV_{CEO}$。
+
+在 600 V 以下电压等级，BJT 在功率应用中已被 MOSFET 取代。在 600 V 及以上，BJT 已被一种较新的少数载流子器件——IGBT 所取代。
+
+### 4.5.2 绝缘栅双极型晶体管（IGBT）
+
+IGBT 的剖面如图4.65所示。与图4.47比较可见，IGBT 与功率 MOSFET 在结构上非常相似。关键区别在于 IGBT 中连接到集电极的 $p$ 区。故 IGBT 是一种具有 MOS 栅的现代四层功率半导体器件。
+
+所添加 $p$ 区的功能是在器件通态工作时向 $n^-$ 区注入少数电荷，如图4.65所示。当 IGBT 导通时，p–n⁻ 结正偏，注入 $n^-$ 区的少数电荷引起电导调制。这降低了 $n^-$ 区的导通电阻，使高压 IGBT 能以低正向压降构造。低至 600 V、高至 6500 V 额定的 IGBT 均有供货。这些器件的正向压降典型为 2 至 4 V，远低于相同硅面积的等效 MOSFET 所能达到的水平。
+
+IGBT 的若干电路符号在现行使用中；图4.66a所示为最常用的一种。IGBT 的双晶体管等效电路如图4.66b所示。IGBT 有效地等效为一个 n 沟道功率 MOSFET 后接一个 PNP 射极跟随 BJT 的级联。两个有效器件的物理位置如图4.67所示。可见有两个有效电流：有效 MOSFET 沟道电流 $i_1$ 和有效 PNP 集电极电流 $i_2$。
+
+![源页 p.131](../assets/page-snapshots/chapter-4/page-131.png)
+
+图4.64 BJT 静态特性：(a) $I_C$ 对 $I_B$，说明各工作区；(b) $I_C$ 对 $V_{CE}$，说明电压击穿特性
+
+IGBT 正向压降低的代价是开关时间增长，尤其在关断过渡期间。具体而言，IGBT 关断过渡表现出称为电流尾的现象。有效 MOSFET 可通过移除栅极电荷使栅-射电压为负而快速关断。这使沟道电流 $i_1$ 迅速降为零。但只要 $n^-$ 区中存在少数电荷，PNP 集电极电流 $i_2$ 就继续流动。由于无法主动移除存储少数电荷，它只能通过复合缓慢衰减。故 $i_2$ 随少数电荷缓慢衰减，观测到电流尾。在 $n^-$ 区中引入复合中心可缩短电流尾长度，代价是导通电阻略有增大。也可使有效 PNP 晶体管的电流增益最小化，使 $i_1$ 大于 $i_2$。尽管如此，IGBT 的关断开关时间仍显著长于 MOSFET，典型关断时间在 0.5 μs 至 5 μs 范围内。
+
+![源页 p.132](../assets/page-snapshots/chapter-4/page-132.png)
+
+图4.65 IGBT 结构。交叉阴影区为金属化接触，阴影区为绝缘二氧化硅层
+
+图4.66 IGBT：(a) 电路符号，(b) 等效电路
+
+图4.67 IGBT 中有效 MOSFET 和 PNP 部件的物理位置
+
+图4.68所示为含理想二极管和非理想（物理）IGBT 的降压变换器电路。关断过渡波形如图4.69所示；这些波形与图4.25的 MOSFET 波形类似。二极管初始反偏，电压 $v_A(t)$ 从近似零升至 $V_g$。区间长度 $(t_1 - t_0)$ 是栅极驱动电路对 IGBT 栅-集电容充电所需时间。在 $t = t_1$ 时二极管正偏，电流开始从 IGBT 换流到二极管。区间 $(t_2 - t_1)$ 是栅极驱动电路将 IGBT 栅-射电容放电至使图4.66b中有效 MOSFET 进入关断状态的阈值所需时间。用大电流栅极驱动电路快速放电栅极电容可使此时间最小化。但关断有效 MOSFET 并不能完全中断 IGBT 电流 $i_A(t)$：只要少数载流子继续存在于其基区，电流 $i_2(t)$ 就继续流过图4.66b中的有效 PNP 双极型晶体管。
+
+![源页 p.133](../assets/page-snapshots/chapter-4/page-133.png)
+
+图4.68 IGBT 开关损耗示例
+
+图4.69 图4.68电路的 IGBT 关断过渡波形
+
+在 $t_2 < t < t_3$ 区间内，电流正比于此存储少数电荷，电流尾区间长度 $(t_3 - t_2)$ 等于剩余存储少数电荷复合所需时间。
+
+IGBT 关断过渡期间损失的能量 $W_{off}$ 同样为瞬时功率波形下面积，如图4.69所示。开关损耗同样可用式 (4.6) 评估。开关损耗通常将采用 IGBT 的常规 PWM 变换器的最高开关频率限制在约 1 至 30 kHz。
+
+IGBT 附加的 p–n⁻ 二极管结通常未经设计以阻断显著电压。故 IGBT 的反向电压阻断能力可忽略。
+
+由于 IGBT 是四层器件，存在类似 SCR 的闩锁可能，即无法通过栅极电压控制关断。较新的器件不易出现此问题。这些器件相当坚固，热点和电流拥挤问题不存在，对外部缓冲电路的需求极小。
+
+IGBT 的通态正向压降可用一个正偏二极管结串联一个有效导通电阻建模。IGBT 正向压降的温度系数较为复杂，因为二极管结电压具负温度系数，而导通电阻具正温度系数。幸运的是，在接近额定电流时导通电阻占主导，总体呈正温度系数。因此 IGBT 容易并联，仅需适度电流降额。含多个并联芯片的大模块有商用供货。
+
+若干商用单芯片 IGBT 和多芯片 IGBT 模块的特性列于表4.6。
+
+![源页 p.134](../assets/page-snapshots/chapter-4/page-134.png)
+
+表4.6 若干商用 IGBT 的特性
+
+| 器件型号 | 额定最高电压 | 额定平均电流 | $V_F$（典型） | $t_f$（典型） |
+|---|---|---|---|---|
+| 单芯片器件 | | | | |
+| HGTP12N60A4 | 600 V | 23 A | 2.0 V | 70 ns |
+| HGTG32N60E2 | 600 V | 32 A | 2.4 V | 0.62 μs |
+| HGTG30N120D2 | 1200 V | 30 A | 3.2 V | 0.58 μs |
+| 多芯片模块 | | | | |
+| CM400HA-12E | 600 V | 400 A | 2.7 V | 0.3 μs |
+| CM300HA-24E | 1200 V | 300 A | 2.7 V | 0.3 μs |
+| CM800HA-34H | 1700 V | 800 A | 3.3 V | 0.6 μs |
+| 高压模块 | | | | |
+| CM800HB-50H | 2500 V | 800 A | 3.15 V | 1.0 μs |
+| CM600HB-90H | 4500 V | 900 A | 3.3 V | 1.2 μs |
+
+### 4.5.3 晶闸管（SCR、GTO）
+
+在所有常规半导体功率器件中，晶闸管（silicon-controlled rectifier，SCR）历史最久，每额定 kVA 的成本最低，且能控制最大的功率。有 5000 至 7000 V 电压额定、数千安电流额定的器件可供使用。在公用事业直流输电线路应用中，采用串联的光触发 SCR 构成逆变器与整流器，以接口交流公用电网与
+
+![源页 p.135](../assets/page-snapshots/chapter-4/page-135.png)
+
+图4.70 SCR：(a) 电路符号，(b) 等效电路
+
+图4.71 SCR 中有效 NPN 和 PNP 部件的物理位置
+
+约 1 kA、1 MV 的直流输电线路。单个大型 SCR 可占满数英寸直径的硅片，封装于冰球式外壳中。
+
+SCR 的电路符号如图4.70a所示，含 NPN 和 PNP BJT 器件的等效电路如图4.70b所示。硅芯片剖面如图4.71所示。有效晶体管 $Q_1$ 由 $n$、$p$、$n^-$ 区构成，有效晶体管 $Q_2$ 由 $p$、$n^-$、$p$ 区构成，如图所示。
+
+该器件能阻断正负两种极性的阳-阴极电压。视所施加电压的极性而定，两个 p–n⁻ 结之一反偏。无论哪种情况，耗尽区都延伸进入轻掺杂 $n^-$ 区。与其他器件一样，通过适当设计 $n^-$ 区的厚度和掺杂浓度获得所需的击穿电压额定。
+
+当所施加的阳-阴极电压 $v_{AK}$ 为正时，SCR 可进入通态。正向栅极电流 $i_G$ 使有效晶体管 $Q_1$ 开通；这反过来向有效晶体管 $Q_2$ 提供基极电流，使其也开通。晶体管 $Q_1$ 和 $Q_2$ 的基区和集电区的有效连接构成正反馈环路。只要两晶体管电流增益之积大于一，晶体管电流将再生式增大。在通态下，阳极电流由外电路限制，两个有效晶体管均工作于完全饱和状态。少数载流子注入所有四个区，由此产生的电导调制使正向压降很低。在通态下，SCR 可建模为一个正偏二极管结串联一个低值导通电阻。无论栅极电流如何，SCR 闩锁于通态：除非施加负向阳极电流
+
+![源页 p.136](../assets/page-snapshots/chapter-4/page-136.png)
+
+图4.72 SCR 的静态 $i_A$–$v_{AK}$ 特性
+
+或负向阳-阴极电压，否则无法关断。在相控变换器中，SCR 在变换器交流输入或输出波形的过零点关断。在强迫换流变换器中，外部换流电路通过反转阳极电流或阳-阴极电压来强制 SCR 的受控关断。
+
+常规 SCR 的静态 $i_A$–$v_{AK}$ 特性如图4.72所示。可见 SCR 是电压双向双象限开关。开通过渡通过栅极电流主动控制。关断过渡为被动。
+
+在关断过渡期间，重新施加正向阳-阴极电压的速率必须受限，以避免重新触发 SCR。关断时间 $t_q$ 是经负向阳极电流主动移除少数存储电荷以及任何剩余少数电荷复合所需时间。在关断过渡期间，负向阳极电流主动移除存储少数电荷，其波形类似于图4.31的二极管关断过渡波形。故在阳极电流第一次过零后，须等待时间 $t_q$ 才能重新施加正向阳-阴极电压。此后还须限制阳-阴极电压上升速率，以避免重新触发器件。逆变器级 SCR 针对更快开关时间优化，$t_q$ 值更小。
+
+常规 SCR 芯片特征尺寸大，栅极和阴极接触交叉指状粗或不存在。由这一大特征尺寸产生的寄生元件导致若干限制。在开通过渡期间，阳极电流的上升速率必须限于安全值。否则可能发生阴极电流聚焦，导致热点形成和器件失效。
+
+栅极和阴极结构的粗特征尺寸也使常规 SCR 无法通过主动栅极控制关断。人们可能施加负向栅极电流，试图主动移除所有少数存储电荷并使 p–n 栅-阴结反偏。此尝试失败的原因如图4.73所示。大的负向栅极电流横向流过邻近的 $p$ 区，感应出所示压降。这使栅-阴结电压在栅极接触附近更低，远离栅极接触处相对更高。负向栅极电流只能使栅极接触附近的栅-阴结部分反偏；栅-阴结的其余部分继续正偏，阴极电流继续流动。实际上，栅极接触只能影响其附近的阴极部分。
+
+门极可关断晶闸管（gate turn-off thyristor，GTO）是特征尺寸更小的较新功率器件。栅极和阴极接触高度交叉指状，使整个栅-阴 p–n
+
+![源页 p.137](../assets/page-snapshots/chapter-4/page-137.png)
+
+图4.73 负向栅极电流无法使栅-阴结完全反偏。阳极电流远离栅极接触聚焦
+
+结可在关断过渡期间通过负向栅极电流反偏。与 SCR 一样，单个大型 GTO 可占满整片硅片。商用 GTO 的最大电压和电流额定低于 SCR。
+
+GTO 的关断增益是通态电流与关断器件所需负向栅极电流量值之比。该增益的典型值为 2 至 5，意味着关断一个导通 1000 A 的 GTO 可能需要数百安的负向栅极电流。另一个关注的参数是最大可控通态电流。GTO 能导通远超额定平均电流的峰值电流；但在这些高峰值电流存在时，可能无法在栅极控制下关断器件。
+
+## 4.6 其他开关损耗源
+
+4.2.2 节介绍了钳位电感性负载下由晶体管开关时间引起的开关损耗。IGBT 的电流尾导致此类开关损耗，如 4.5.2 节所述。二极管反向恢复也引起开关损耗，如 4.3.3 节所建模。本节讨论其他若干开关损耗源。半导体输出电容所储存的能量在晶体管开通过渡期间于晶体管中耗散。与晶体管有效串联的电感在晶体管导通时储存能量；当晶体管关断并中断电感电流时，所储存能量在晶体管中耗散。二极管反向恢复也可在其他电路元件中引起开关损耗。本节讨论这些附加的开关损耗机制。
+
+### 4.6.1 器件电容与漏感、封装及杂散电感
+
+储能元件也可导致开关损耗。与开关元件有效并联的电容在开关开通时被短路，其储存能量损失。开关元件关断时电容充电无能量损失，式 (4.5) 计算的晶体管关断损耗 $W_{off}$ 可能减小。
+
+![源页 p.138](../assets/page-snapshots/chapter-4/page-138.png)
+
+图4.74 半导体输出电容所储能量在晶体管开通过渡期间损失
+
+同样，与开关元件有效串联的电感在开关关断时损失其储存能量。故串联电感在关断时引起附加开关损耗，但可减小晶体管开通损耗。
+
+储能元件所储能量可求和，得到每开关周期由此机制导致的总能量损耗。对线性电容和电感，所储能量为
+
+$$W_C = \sum_{\text{容性元件}} \frac{1}{2}C_i V_i^2 \tag{4.41}$$
+
+$$W_L = \sum_{\text{感性元件}} \frac{1}{2}L_j I_j^2$$
+
+此类开关损耗的一个常见来源是半导体开关器件的输出电容。反偏半导体器件的耗尽层呈现电容并储存能量。晶体管开通时，此储存能量被晶体管耗散。例如在图4.74的降压变换器中，MOSFET 呈现漏-源电容 $C_{ds}$，反偏二极管呈现结电容 $C_j$。在开关过渡期间，由于直流源 $V_g$ 在高频下有效短路，这两个电容有效并联。在电容为线性的范围内，MOSFET 开通时损失的能量为
+
+$$W_C = \frac{1}{2}(C_{ds} + C_j)V_g^2 \tag{4.42}$$
+
+典型情况下，此类开关损耗在 100 V 以上电压水平显著。MOSFET 栅极驱动电路须充放电 MOSFET 栅极电容，也呈现此类损耗。
+
+如 4.4.1 节所述，功率 MOSFET 的增量漏-源电容 $C_{ds}$ 是漏-源电压 $v_{ds}$ 的强函数。$C_{ds}(v_{ds})$ 近似按 $v_{ds}$ 的平方根倒数变化，如式 (4.39) 所给。$v_{ds} = V_{DS}$ 时 $C_{ds}$ 所储能量为
+
+$$W_{Cds} = \int v_{ds} i_C\,dt = \int_0^{V_{DS}} v_{ds} C_{ds}(v_{ds})\,dv_{ds} \tag{4.43}$$
+
+其中 $i_C = C_{ds}(v_{ds})\,dv_{ds}/dt$ 为 $C_{ds}$ 中的电流。将式 (4.39) 代入式 (4.43) 得
+
+$$W_{Cds} = \int_0^{v_{DS}} C'_0(v_{ds})\sqrt{v_{ds}}\,dv_{ds} = \frac{2}{3}C_{ds}(V_{DS})V_{DS}^2 \tag{4.44}$$
+
+![源页 p.139](../assets/page-snapshots/chapter-4/page-139.png)
+
+此能量在 MOSFET 每次开通时损失。从开关损耗角度看，漏-源电容等效于值为 $\frac{4}{3}C_{ds}(V_{DS})$ 的线性电容。
+
+肖特基二极管本质上是多数载流子器件，不呈现如图4.31那样的反向恢复暂态。但反偏肖特基二极管呈现显著的结电容，可用图4.74中的并联电容 $C_j$ 建模，并在晶体管开通过渡期间引起能量损失。
+
+串联电感的常见来源是隔离变换器中的变压器漏感（第6章讨论），以及互连和半导体器件封装的电感。除引起开关损耗外，这些元件还可在晶体管关断过渡期间导致过大的峰值电压应力。互连和封装电感可在大电流应用中引起显著开关损耗，漏感是许多变压器隔离变换器中重要的开关损耗源。
+
+### 4.6.2 在其他元件中引起的开关损耗
+
+二极管存储少数电荷可在（非理想）变换器储能元件中引起开关损耗。以图4.75电路为例，含理想电压源 $v_j(t)$、电感 $L$、电容 $C$（可表示二极管结电容，或结电容与外部电容的并联）以及一个硅二极管。许多变换器和整流器电路的二极管开关过程可用此形式电路建模。电压源产生图4.76所示矩形波 $v_i(t)$。该电压初始为正，使二极管正偏，电感电流 $i_L(t)$ 以斜率 $V_1/L$ 线性增大。由于电流增大，二极管内存储少数电荷也增大。在 $t = t_1$ 时，源电压 $v_i(t)$ 变负，电感电流以斜率 $di_L/dt = -V_2/L$ 减小。二极管存储电荷也减小，但速率较慢，不仅取决于 $i_L$，还取决于硅材料的少数载流子复合寿命。故在 $t = t_2$ 时，当 $i_L(t)$ 到达零时，二极管中仍残留一些存储少数电荷。故二极管继续正偏，电感电流以相同斜率继续减小。$t > t_2$ 期间的负向电流构成反向二极管电流，主动移除二极管存储电荷。在稍后的 $t = t_3$ 时，二极管结附近的存储电荷降为零，二极管结反偏。此时电感电流为负，必须流过电容。电感和电容随后形成串联谐振电路，以衰减正弦波振铃，如图所示。此振铃最终被电路的寄生损耗元件（如电感绕组电阻、电感磁芯损耗、电容等效串联电阻）阻尼至零。
+
+二极管恢复电荷在此电路中引起损耗。在 $t_2 < t < t_3$ 区间内，从二极管恢复的少数存储电荷 $Q_r$ 为
+
+图4.75 二极管存储电荷在（非理想）储能元件中引起振铃并最终引起开关损耗的电路
+
+![源页 p.140](../assets/page-snapshots/chapter-4/page-140.png)
+
+图4.76 图4.75电路的波形
+
+$$Q_r = -\int_{t_2}^{t_3} i_L(t)\,dt \tag{4.45}$$
+
+此电荷与该区间内电感所储能量直接相关。电感所储能量 $W_L$ 为流入电感的功率的积分：
+
+$$W_L = \int_{t_2}^{t_3} v_L(t) i_L(t)\,dt \tag{4.46}$$
+
+此区间内所施加电感电压为
+
+$$v_L(t) = L\frac{di_L(t)}{dt} = -V_2 \tag{4.47}$$
+
+将式 (4.47) 代入式 (4.46) 得
+
+$$W_L = \int_{t_2}^{t_3} L\frac{di_L(t)}{dt} i_L(t)\,dt = \int_{t_2}^{t_3} (-V_2) i_L(t)\,dt \tag{4.48}$$
+
+左边积分给出 $t = t_3$ 时的电感储能 $Li_L^2(t_3)/2$。右边积分通过注意到 $V_2$ 为常数并代入式 (4.45) 求得，结果为 $V_2 Q_r$。故 $t = t_3$ 时电感所储能量为
+
+$$W_L = \frac{1}{2}Li_L^2(t_3) = V_2 Q_r \tag{4.49}$$
+
+即恢复电荷乘以源电压。对 $t > t_3$，电感和电容构成的谐振电路的振铃使此能量在电感与电容之间来回流转。若电路中的寄生损耗元件使振铃幅度最终衰减至零，则该能量作为热量耗散在寄生元件中。
+
+故二极管存储少数电荷可在不含有源开关元件的电路中引起损耗。此外，在开关周期结束前衰减的振铃波形也指示存在开关损耗。
+
+### 4.6.3 效率与开关频率
+
+接下来假设把上述所有开关损失能量相加：
+
+$$W_{tot} = W_{on} + W_{off} + W_D + W_C + W_L + \cdots \tag{4.50}$$
+
+这是一个开关周期内开关过渡损失的能量。平均开关功率损耗为该能量乘以开关频率：
+
+$$P_{sw} = W_{tot} f_{sw} \tag{4.51}$$
+
+变换器的其他损耗包括如第3章建模和求解的导通损耗 $P_{cond}$，以及其他与频率无关的固定损耗 $P_{fixed}$（如控制电路工作所需功率）。故总损耗为
+
+$$P_{loss} = P_{cond} + P_{fixed} + W_{tot} f_{sw} \tag{4.52}$$
+
+随频率线性增大。在临界频率
+
+$$f_{crit} = \frac{P_{cond} + P_{fixed}}{W_{tot}} \tag{4.53}$$
+
+处，开关损耗等于变换器的其他损耗。低于此临界频率时，总损耗由导通损耗和固定损耗主导，故总损耗和变换器效率对开关频率不敏感。高于此临界频率时，开关损耗主导总损耗，变换器效率随开关频率升高而迅速下降。满载时变换器效率对开关频率的典型依赖关系如图4.77所示（参数值任意选取）。临界频率 $f_{crit}$ 可视为实际变换器开关频率的粗略上限。
+
+![源页 p.141](../assets/page-snapshots/chapter-4/page-141.png)
+
+## 4.7 要点总结
+
+1. 如何用半导体器件实现理想 SPST 开关，取决于器件在关断状态必须阻断的电压极性，以及在通态必须传导的电流极性。
+2. 单象限 SPST 开关可用单个晶体管或单个二极管实现，视关断态电压和通态电流的相对极性而定。
+3. 双象限 SPST 开关可用一个晶体管和一个二极管实现，二者串联（电压双向）或反并联（电流双向）。此处还列出若干四象限方案。

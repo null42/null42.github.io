@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第2章part 1 - 2 Principles of Steady-State Converter Analysis"
+title: "第2章 稳态变换器分析原理"
 tags:
   - power-electronics
   - 教材
@@ -18,1067 +18,464 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第2章part 1 - 2 Principles of Steady-State Converter Analysis
+# 第2章 稳态变换器分析原理
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 31-50  
-> Chunk ID: `chapter-2-part-1`
+## 2.1 引言
 
-## 主干提取
+在上一章中，我们介绍了降压变换器作为一种仅利用无损耗开关、电感和电容来降低直流电压的方法。开关产生如图2.1所示的矩形波 $v_s(t)$。当开关处于位置1时，$v_s(t)$ 等于直流输入电压 $V_g$；当开关处于位置2时，$v_s(t)$ 等于零。实际工程中，开关由功率半导体器件（如晶体管和二极管）实现，通过控制其导通和关断来完成理想开关的功能。开关频率 $f_s$ 等于开关周期 $T_s$ 的倒数，通常在 1 kHz～1 MHz 范围内，具体取决于半导体器件的开关速度。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.31](../assets/page-snapshots/chapter-2/page-31.png)
 
-## 术语表
+图2.1 理想开关，(a) 用于降低电压的直流分量，(b) 开关输出电压波形 $v_s(t)$
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+占空比 $D$ 定义为开关处于位置1的时间所占的比例，是一个介于零与一之间的数。占空比的补数 $D'$ 定义为 $(1-D)$。
 
-## 中文翻译
+开关降低了电压的直流分量：开关输出电压 $v_s(t)$ 的直流分量小于变换器直流输入电压 $V_g$。由傅里叶分析可知，$v_s(t)$ 的直流分量等于其平均值 $\langle v_s \rangle$，即
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$\langle v_s \rangle = \frac{1}{T_s} \int_0^{T_s} v_s(t)\,dt \tag{2.1}$$
 
-## 英文原文
+如图2.2所示，该积分等于曲线下方的面积，即 $D T_s V_g$。因此平均值为
 
-```text
-2
-Principles of Steady-State Converter Analysis
-2.1 Introduction
-In the previous chapter, the buck converter was introduced as a means of reducing the dc voltage,
-using only nondissipative switches, inductors, and capacitors. The switch produces a rectangular
-waveform vs(t) as illustrated in Fig. 2.1. The voltage vs(t) is equal to the dc input voltage Vg
-when the switch is in position 1, and is equal to zero when the switch is in position 2. In practice,
-the switch is realized using power semiconductor devices, such as transistors and diodes, which
-are controlled to turn on and oﬀas required to perform the function of the ideal switch. The
-switching frequency fs, equal to the inverse of the switching period Ts, generally lies in the
-range of 1 kHz–1 MHz, depending on the switching speed of the semiconductor devices. The
-+
-– R
-+
-v(t)
-–
-1
-2
-+
-vs(t)
-–
-Vg
-vs(t) Vg
-DTs D'Ts
-0
-t0 DTs Ts
-Switch
-position: 12 1
-(a)
-(b)
-Fig. 2.1 Ideal switch, (a), used to reduce the voltage dc component, and (b) its output voltage waveform
-vs(t)
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_2
-15
+$$\langle v_s \rangle = \frac{1}{T_s}(D T_s V_g) = D V_g \tag{2.2}$$
 
-16 2 Principles of Steady-State Converter Analysis
-Fig. 2.2 Determination of the switch out-
-put voltage dc component, by integrating
-and dividing by the switching period
-vs(t) Vg
-0
-t0 DTs Ts
-〈vs〉 = DVgarea =
-DTsVg
-duty ratio D is the fraction of time that the switch spends in position 1, and is a number between
-zero and one. The complement of the duty ratio, D′, is deﬁned as (1−D).
-The switch reduces the dc component of the voltage: the switch output voltagevs(t) has a dc
-component that is less than the converter dc input voltage Vg. From Fourier analysis, we know
-that the dc component of vs(t) is given by its average value⟨vs⟩,o r
-⟨vs⟩= 1
-Ts
-∫ Ts
-0
-vs(t)dt (2.1)
-As illustrated in Fig.2.2, the integral is given by the area under the curve, orDTsVg. The average
-value is therefore
-⟨vs⟩= 1
-Ts
-(DTsVg)= DVg (2.2)
-So the average value, or dc component, of vs(t) is equal to the duty cycle times the dc input
-voltage Vg. The switch reduces the dc voltage by a factor of D.
-What remains is to insert a low-pass ﬁlter as shown in Fig.2.3. The ﬁlter is designed to pass
-the dc component of vs(t), but to reject the components of vs(t) at the switching frequency and
-its harmonics. To accomplish this, we design the ﬁlter such that its cuto ﬀfrequency is much
-lower than the switching frequency. The output voltage v(t) is then essentially equal to the dc
-component of vs(t):
-v≈⟨vs⟩= DVg (2.3)
-The converter of Fig. 2.3 has been realized using lossless elements. To the extent that they are
-ideal, the inductor, capacitor, and switch do not dissipate power. For example, when the switch
-is closed, its voltage drop is zero, and the current is zero when the switch is open. In either
-+
-–
-L
-CR
-+
-v(t)
-–
-1
-2
-+
-vs(t)
-–
-Vg
-Fig. 2.3 Insertion of low-pass ﬁler, to remove the switching harmonics and pass only the dc component
-of vs(t) to the output
+即 $v_s(t)$ 的平均值（直流分量）等于占空比乘以直流输入电压 $V_g$。开关以 $D$ 为系数降低了直流电压。
 
-2.1 Introduction 17
-Fig. 2.4 Buck converter dc output voltage V vs.
-duty cycle D
-Vg
-0
-0 D
-V
-1
-case, the power dissipated by the switch is zero. Hence, e ﬃciencies approaching 100% can
-be obtained. So to the extent that the components are ideal, we can realize our objective of
-changing dc voltage levels using a lossless network.
-M(D)
-D
-0
-0.2
-0.4
-0.6
-0.8
-1
-0 0.2 0.4 0.6 0.8 1
-M(D)
-D
-0
-1
-2
-3
-4
-5
-0 0.2 0.4 0.6 0.8 1
-M(D)
-D
-–5
-–4
-–3
-–2
-–1
-0
-0 0.2 0.4 0.6 0.8 1
-(a)
-(b)
-(c)
-+
-–
-L
-CR
-+
-v
-–
-1
-2
-+
-–
-L
-CR
-+
-v
-–
-1
-2
-+
-– L
-CR
-+
-v
-–
-12
-M(D)= D
-M(D)= 1
-1–D
-M(D)= –D
-1–D
-iL (t)
-Vg
-iL (t)
-Vg
-iL (t)Vg
-Fig. 2.5 Three basic converters and their dc conversion ratios M(D)= V/Vg:( a) buck, ( b) boost, ( c)
-buck–boost
+![源页 p.32](../assets/page-snapshots/chapter-2/page-32.png)
 
-18 2 Principles of Steady-State Converter Analysis
-The network of Fig. 2.3 also allows control of the output. Figure 2.4 is the control charac-
-teristic of the converter. The output voltage, given by Eq. ( 2.3), is plotted vs. duty cycle. The
-buck converter has a linear control characteristic. Also, the output voltage is less than or equal
-to the input voltage, since 0 ≤D≤1. Feedback systems are often constructed that adjust the
-duty cycle D to regulate the converter output voltage. Inverters or power ampliﬁers can also be
-built, in which the duty cycle varies slowly with time and the output voltage follows.
-The buck converter is just one of many possible switching converters. Two other commonly
-used converters, which perform diﬀerent voltage conversion functions, are illustrated in Fig.2.5.
-In the boost converter, the positions of the inductor and switch are reversed. It is shown later
-in this chapter that the boost converter steps the voltage up: V ≥Vg. Another converter, the
-buck–boost converter, can either increase or decrease the magnitude of the voltage, but the
-polarity is inverted. So with a positive input voltage, the ideal buck–boost converter can produce
-a negative output voltage of any magnitude. It may at ﬁrst be surprising that dc output voltages
-can be produced that are greater in magnitude than the input, or that have opposite polarity. But
-it is indeed possible to produce any desired dc output voltage using a passive network of only
-inductors, capacitors, and embedded switches.
-In the above discussion, it was possible to derive an expression for the output voltage of
-the buck converter, Eq. ( 2.3), using some simple arguments based on Fourier analysis. How-
-ever, it may not be immediately obvious how to directly apply these arguments to ﬁnd the dc
-output voltage of the boost, buck–boost, or other converters. The objective of this chapter is the
-development of a more general method for analyzing any switching converter comprised of a
-network of inductors, capacitors, and switches [4, 8–13].
-The principles of inductor volt-second balance and capacitor charge balance are derived;
-these can be used to solve for the inductor currents and capacitor voltages of switching convert-
-ers. A useful approximation, the small-ripple or linear-ripple approximation, greatly facilitates
-the analysis. Some simple methods for selecting the ﬁlter element values are also discussed.
-2.2 Inductor Volt-Second Balance, Capacitor Charge Balance, and the
-Small-Ripple Approximation
-Let us more closely examine the inductor and capacitor waveforms in the buck converter of
-Fig. 2.6. It is impossible to build a perfect low-pass ﬁlter that allows the dc component to pass
-but completely removes the components at the switching frequency and its harmonics. So the
-+
-–
-L
-CR
-+
-v(t)
-–
-1
-2
-iL(t)
-+ vL(t) – iC(t)
-Vg
-Fig. 2.6 Buck converter circuit, with the inductor voltage vL(t) and capacitor voltage vC (t) waveforms
-speciﬁcally identiﬁed
+图2.2 通过积分并除以开关周期来确定开关输出电压的直流分量
 
-2.2 V olt-Second and Charge Balance, Small-Ripple Approximation 19
-v(t)
-t
-0
-V
-Actual waveform
-v(t) = V + vripple(t)
-dc component V
-Fig. 2.7 Output voltage waveform v(t), consisting of dc component V and switching ripple vripple (t)
-low-pass ﬁlter must allow at least some small amount of the high-frequency harmonics gen-
-erated by the switch to reach the output. Hence, in practice the output voltage waveform v(t)
-appears as illustrated in Fig. 2.7, and can be expressed as
-v(t)= V+ vripple (t) (2.4)
-So the actual output voltage v(t) consists of the desired dc component V, plus a small undesired
-ac component vripple (t) arising from the incomplete attenuation of the switching harmonics by
-the low-pass ﬁlter. The magnitude of vripple (t) has been exaggerated in Fig. 2.7.
-The output voltage switching ripple should be small in any well-designed converter, since
-the object is to produce a dc output. For example, in a computer power supply having a 3.3 V
-output, the switching ripple is normally required to be less than a few tens of millivolts, or less
-than 1% of the dc component V. So it is nearly always a good approximation to assume that the
-magnitude of the switching ripple is much smaller than the dc component:
-∥vripple∥≪ V (2.5)
-Therefore, the output voltage v(t) is well approximated by its dc component V, with the small-
-ripple term vripple (t) neglected:
-v(t)≈V (2.6)
-This approximation, known as the small-ripple approximation,o rt h elinear-ripple approxima-
-tion, greatly simpliﬁes the analysis of the converter waveforms and is used throughout this book.
-With this approximation, we replace the exponential or damped sinusoidal expressions for the
-inductor and capacitor waveforms with simpler linear waveforms; this approximation is justiﬁed
-provided that the switching period is much shorter than the natural time constants of the circuit.
-The small-ripple approximation is applied to the inductor currents and capacitor voltages of the
-converter, which are continuous variables. It must not be applied to discontinuous waveforms
-of the converter, such as the switch voltage, switch current, or inductor voltage.
-Next let us analyze the inductor current waveform. We can ﬁnd the inductor current by inte-
-grating the inductor voltage waveform. With the switch in position 1, the left side of the inductor
-is connected to the input voltage V
-g, and the circuit reduces to Fig.2.8a. It should be noted here
-that the reference polarities of vL(t) and iL(t) have been carefully deﬁned in Fig. 2.6, and these
-reference polarities are consistently followed in the circuits of Fig. 2.8a,b. The inductor voltage
-vL(t) is given by
-vL= Vg−v(t) (2.7)
+接下来需要插入一个如图2.3所示的低通滤波器。滤波器设计为通过 $v_s(t)$ 的直流分量，同时抑制 $v_s(t)$ 中开关频率及其谐波处的分量。为此，将滤波器的截止频率设计得远低于开关频率。于是输出电压 $v(t)$ 基本上等于 $v_s(t)$ 的直流分量：
 
-20 2 Principles of Steady-State Converter Analysis
-As described above, the output voltage v(t) consists of the dc component V,p l u sas m a l la c
-ripple term vripple (t). We can make the small-ripple approximation here, Eq. ( 2.6), to replace
-v(t) with its dc component V:
-vL≈Vg−V (2.8)
-So with the switch in position 1, the inductor voltage is essentially constant and equal toVg−V,
-as shown in Fig. 2.9. By knowledge of the inductor voltage waveform, the inductor current can
-be found by use of the deﬁnition
-vL(t)= LdiL(t)
-dt (2.9)
-Thus, during the ﬁrst interval, when vL(t) is approximately ( Vg−V), the slope of the inductor
-current waveform is
-diL(t)
-dt = vL(t)
-L ≈Vg−V
-L (2.10)
-which follows by dividing Eq. (2.9)b y L, and substituting Eq. (2.8). Since the inductor voltage
-vL(t) is essentially constant while the switch is in position 1, the inductor current slope is also
-essentially constant and the inductor current increases linearly.
-Similar arguments apply during the second subinterval, when the switch is in position 2.
-The left side of the inductor is then connected to ground, leading to the circuit of Fig. 2.8b. It is
-important to consistently deﬁne the polarities of the inductor current and voltage; in particular,
-the polarity of v
-L(t) is deﬁned consistently in Figs. 2.7, 2.8a,b. So the inductor voltage during
-the second subinterval is given by
-vL(t)=−v(t) (2.11)
-Use of the small-ripple approximation, Eq. (2.6), leads to
-vL(t)≈−V (2.12)
-So the inductor voltage is also essentially constant while the switch is in position 2, as illustrated
-in Fig. 2.9. Substitution of Eq. ( 2.12) into Eq. ( 2.9) and solution for the slope of the inductor
-current yields
-diL(t)
-dt ≈−V
-L (2.13)
-Hence, during the second subinterval the inductor current changes with a negative and essen-
-tially constant slope.
-We can now sketch the inductor current waveform (Fig.2.10). The inductor current begins at
-some initial value iL(0). During the ﬁrst subinterval, with the switch in position 1, the inductor
-L
-CR
-+
-v(t)
-–
-iL(t)
-+ vL(t) – iC(t)
-+
-–Vg
-L
-CR
-+
-v(t)
-–
-iL(t)
-+ vL(t) – iC(t)
-+
-–Vg
-(b)(a)
-Fig. 2.8 Buck converter circuit: (a) while the switch is in position 1, (b) while the switch is in position 2
+$$v \approx \langle v_s \rangle = D V_g \tag{2.3}$$
 
-2.2 V olt-Second and Charge Balance, Small-Ripple Approximation 21
-Fig. 2.9 Steady-state inductor voltage
-waveform, buck converter
-vL(t) Vg – V
-t
-– V
-D'TsDTs
-Switch
-position: 12 1
-Fig. 2.10 Steady-state inductor current
-waveform, buck converter –V
-L
-Vg –V
-L
-iL(t)
-t0 DTs Ts
-I
-iL(0)
-iL(DTs)
-ΔiL
-current increases with the slope given in Eq. ( 2.10). At time t= DTs, the switch changes to
-position 2. The current then decreases with the constant slope given by Eq. ( 2.13). At time
-t= Ts, the switch changes back to position 1, and the process repeats.
-It is of interest to calculate the inductor current ripple ΔiL. As illustrated in Fig. 2.10,t h e
-peak inductor current is equal to the dc component I plus the peak-to-average rippleΔiL.T h i s
-peak current ﬂows through not only the inductor, but also through the semiconductor devices
-that comprise the switch. Knowledge of the peak current is necessary when specifying the rat-
-ings of these devices.
-Since we know the slope of the inductor current during the ﬁrst subinterval, and we also
-know the length of the ﬁrst subinterval, we can calculate the ripple magnitude. The i
-L(t)w a v e -
-form is symmetrical about I, and hence during the ﬁrst subinterval the current increases by 2ΔiL
-(sinceΔiL is the peak ripple, the peak-to-peak ripple is 2ΔiL). So the change in current, 2ΔiL,
-is equal to the slope (the applied inductor voltage divided by L) times the length of the ﬁrst
-subinterval (DTs):
-(change in iL)= (slope)(length of subinterval)
-(2ΔiL)=
-⎦Vg−V
-L
-)
-(DTs) (2.14)
-Solution forΔiL yields
-ΔiL= Vg−V
-2L DTs (2.15)
-Typical values ofΔiL lie in the range of 10%– 20% of the full-load value of the dc component
-I. It is undesirable to allowΔiL to become too large; doing so would increase the peak currents of
-the inductor and of the semiconductor switching devices, and would increase their size and cost.
-So by design the inductor current ripple is also usually small compared to the dc component I.
-The small-ripple approximation i
-L(t)≈I is usually justiﬁed for the inductor current.
-The inductor value can be chosen such that a desired current rippleΔiL is attained. Solution
-of Eq. (2.15) for the inductance L yields
+图2.3的变换器由无损元件构成。在理想条件下，电感、电容和开关不消耗功率。例如，开关闭合时其压降为零，开关断开时其电流为零。无论哪种情况，开关消耗的功率都为零。因此，效率可趋近100%。在元件为理想的前提下，我们便能用一个无损网络来实现改变直流电压电平的目标。
 
-22 2 Principles of Steady-State Converter Analysis
-L= Vg−V
-2ΔiL
-DTs (2.16)
-This equation is commonly used to select the value of inductance in the buck converter.
-It is entirely possible to solve converters exactly, without use of the small-ripple approxima-
-tion. For example, one could use the Laplace transform to write expressions for the waveforms
-of the circuits of Fig. 2.8a,b. One could then invert the transforms, match boundary conditions,
-and ﬁnd the periodic steady-state solution of the circuit. Having done so, one could then ﬁnd
-the dc components of the waveforms and the peak values. But this is a great deal of work, and
-the results are nearly always intractable. Besides, the extra work involved in writing equations
-that exactly describe the ripple is a waste of time, since the ripple is small and is undesired. The
-small-ripple approximation is easy to apply, and quickly yields simple expressions for the dc
-components of the converter waveforms.
-The inductor current waveform of Fig.2.10 is drawn under steady-state conditions, with the
-converter operating in equilibrium. Let us consider next what happens to the inductor current
-when the converter is ﬁrst turned on. Suppose that the inductor current and output voltage are
-initially zero, and an input voltage V
-g is then applied. As shown in Fig. 2.11, iL(0) is zero.
-During the ﬁrst subinterval, with the switch in position 1, we know that the inductor current
-will increase, with a slope of ( Vg −v)/L and with v initially zero. Next, with the switch in
-position 2, the inductor current will change with a slope of −v/L; since v is initially zero, this
-slope is essentially zero. It can be seen that there is a net increase in inductor current over the
-ﬁrst switching period, becauseiL(Ts) is greater thaniL(0). Since the inductor current ﬂows to the
-output, the output capacitor will charge slightly, andv will increase slightly. The process repeats
-during the second and succeeding switching periods, with the inductor current increasing during
-each subinterval 1 and decreasing during each subinterval 2.
-As the output capacitor continues to charge and v increases, the slope during subinterval 1
-decreases while the slope during subinterval 2 becomes more negative. Eventually, the point is
-reached where the increase in inductor current during subinterval 1 is equal to the decrease in
-inductor current during subinterval 2. There is then no net change in inductor current over a
-iL(t)
-t0 DTs Ts
-iL(0) = 0
-iL(nTs)
-iL(Ts)
-2Ts nTs (n + 1)Ts
-iL((n + 1)Ts)
-Vg –v(t)
-L
-–v(t)
-L
-Fig. 2.11 Inductor current waveform during converter turn-on transient
+![源页 p.33](../assets/page-snapshots/chapter-2/page-33.png)
 
-2.2 V olt-Second and Charge Balance, Small-Ripple Approximation 23
-complete switching period, and the converter operates in steady state. The converter waveforms
-are periodic: iL(nTs)= iL((n+ 1)Ts). From this point on, the inductor current waveform appears
-as in Fig. 2.10.
-The requirement that, in equilibrium, the net change in inductor current over one switching
-period be zero leads us to a way to ﬁnd steady-state conditions in any switching converter: the
-principle of inductor volt-second balance. Given the deﬁning relation of an inductor:
-vL(t)= LdiL(t)
-dt (2.17)
-Integration over one complete switching period, say from t= 0t o Ts, yields
-iL(Ts)−iL(0)= 1
-L
-∫ TS
-0
-vL(t)dt (2.18)
-This equation states that the net change in inductor current over one switching period, given by
-the left-hand side of Eq. ( 2.18), is proportional to the integral of the applied inductor voltage
-over the interval. In steady state, the initial and ﬁnal values of the inductor current are equal,
-and hence the left-hand side of Eq. ( 2.18) is zero. Therefore, in steady state the integral of the
-applied inductor voltage must be zero:
-0=
-∫ TS
-0
-vL(t)dt (2.19)
-The right-hand side of Eq. (2.19) has the units of volt-seconds or ﬂux-linkages. Equation (2.19)
-states that the total area, or net volt-seconds, under the vL(t) waveform must be zero.
-An equivalent form is obtained by dividing both sides of Eq. ( 2.19) by the switching
-period Ts:
-0= 1
-TS
-∫ Ts
-0
-vL(t)dt=⟨vL⟩ (2.20)
-The right-hand side of Eq. (2.20) is recognized as the average value, or dc component, of vL(t).
-Equation (2.20) states that, in equilibrium, the applied inductor voltage must have zero dc com-
-ponent.
-The inductor voltage waveform of Fig. 2.9 is reproduced in Fig. 2.12, with the area un-
-der the vL(t) curve speciﬁcally identiﬁed. The total area λis given by the areas of the two
-rectangles, or
-λ=
-∫ TS
-0
-vL(t)dt= (Vg−V)(DTs)+ (−V)(D′Ts) (2.21)
-Fig. 2.12 The principle of inductor volt-
-second balance: in steady state, the net
-volt-seconds applied to an inductor ( i.e.,
-the total areaλ) must be zero
-vL(t) Vg – V
-t
-– V
-DTs
-Total area λ
+图2.3 插入低通滤波器，以去除开关谐波，仅将 $v_s(t)$ 的直流分量传递到输出端
 
-24 2 Principles of Steady-State Converter Analysis
-The average value is therefore
-⟨vL⟩= λ
-Ts
-= D(Vg−V)+ D′(−V) (2.22)
-By equating⟨vL⟩ to zero, and noting that D+ D′= 1, one obtains
-0= DVg−(D+ D′)V= DVg−V (2.23)
-Solution for V yields
-V= DVg (2.24)
-which coincides with the result obtained previously, Eq. (2.3). So the principle of inductor volt-
-second balance allows us to derive an expression for the dc component of the converter output
-voltage. An advantage of this approach is its generality—it can be applied to any converter. One
-simply sketches the applied inductor voltage waveform, and equates the average value to zero.
-This method is used later in this chapter, to solve several more complicated converters.
-Similar arguments can be applied to capacitors. The deﬁning equation of a capacitor is
-iC(t)= C dvC(t)
-dt (2.25)
-Integration of this equation over one switching period yields
-vC(Ts)−vC(0)= 1
-C
-∫ TS
-0
-iC(t)dt (2.26)
-In steady state, the net change over one switching period of the capacitor voltage must be zero,
-so that the left-hand side of Eq. ( 2.26) is equal to zero. Therefore, in equilibrium the integral
-of the capacitor current over one switching period (having the dimensions of amp-seconds, or
-charge) should be zero. There is no net change in capacitor charge in steady state. An equivalent
-statement is
-0= 1
-Ts
-∫ Ts
-0
-iC(t)dt=⟨iC⟩ (2.27)
-The average value, or dc component, of the capacitor current must be zero in equilibrium.
-This should be an intuitive result. If a dc current is applied to a capacitor, then the capacitor
-will charge continually and its voltage will increase without bound. Likewise, if a dc voltage is
-applied to an inductor, then the ﬂux will increase continually and the inductor current will in-
-crease without bound. Equation (2.27), called the principle of capacitor amp-second balance or
-capacitor charge balance, can be used to ﬁnd the steady-state currents in a switching converter.
-2.3 Boost Converter Example
-The boost converter, Fig.2.13a, is another well-known switched-mode converter that is capable
-of producing a dc output voltage greater in magnitude than the dc input voltage. A practical
-realization of the switch, using a MOSFET and diode, is shown in Fig. 2.13b. Let us apply the
-small-ripple approximation and the principles of inductor volt-second balance and capacitor
-charge balance to ﬁnd the steady-state output voltage and inductor current for this converter.
+图2.4 变换器控制特性：降压变换器直流输出电压 $V$ 与占空比 $D$ 的关系
 
-2.3 Boost Converter Example 25
-+
-–
-L
-CR
-+
-v
-–
-1
-2
-iL(t)
-Vg
-iC(t)+ vL(t) –
-+
-–
-L
-CR
-+
-v
-–
-iL(t)
-Vg
-iC(t)+ vL(t) –
-D1
-Q1
-DTs Ts
-+
-–
-(a)
-(b)
-Fig. 2.13 Boost converter: (a) with ideal switch, (b) practical realization using MOSFET and diode
-CR
-+
-v
-–
-iC(t)
-+
-–
-L
-iL(t)
-Vg
-+ vL(t) –
-CR
-+
-v
-–
-iC(t)
-+
-–
-L
-iL(t)
-Vg
-+ vL(t) –
-(a)
-(b)
-Fig. 2.14 Boost converter circuit, (a) while the switch is in position 1, (b) while the switch is in position 2
-With the switch in position 1, the right-hand side of the inductor is connected to ground,
-resulting in the network of Fig. 2.14a. The inductor voltage and capacitor current for this subin-
-terval are given by
-vL = Vg (2.28)
-iC =−v
-R
+图2.3的网络还允许对输出进行控制。图2.4是变换器的控制特性曲线。输出电压由式(2.3)给出，绘于图中为占空比的函数。降压变换器具有线性的控制特性。此外，由于 $0 \le D \le 1$，输出电压小于或等于输入电压。常常构建反馈系统来调节占空比 $D$，以实现对变换器输出电压的稳压。也可以构建逆变器或功率放大器，其中占空比随时间缓慢变化，输出电压随之变化。
 
-26 2 Principles of Steady-State Converter Analysis
-Use of the linear-ripple approximation, v≈V, leads to
-vL = V (2.29)
-iC =−V
-R
-With the switch in position 2, the inductor is connected to the output, leading to the circuit of
-Fig. 2.14b. The inductor voltage and capacitor current are then
-vL = Vg−v (2.30)
-iC = iL−v
-R
-Use of the small-ripple approximation, v≈V and iL≈I, leads to
-vL = Vg−V (2.31)
-iC = I−V
-R
-Equations (2.29) and (2.31) are used to sketch the inductor voltage and capacitor current wave-
-forms of Fig. 2.15.
-It can be inferred from the inductor voltage waveform of Fig.2.15a that the dc output voltage
-V is greater than the input voltage Vg. During the ﬁrst subinterval, vL(t) is equal to the dc input
-voltage Vg, and positive volt-seconds are applied to the inductor. Since, in steady-state, the
-total volt-seconds applied over one switching period must be zero, negative volt-seconds must
-be applied during the second subinterval. Therefore, the inductor voltage during the second
-subinterval, (V
-g−V), must be negative. Hence, V is greater than Vg.
-The total volt-seconds applied to the inductor over one switching period are
-∫ TS
-0
-vL(t)dt= (Vg)DTs+ (Vg−V)D′Ts (2.32)
-vL(t)
-Vg – V
-t
-DTs
-Vg
-D'Ts
-iC(t)
-– V/R
-t
-DTs
-I – V/R
-D'Ts
-(a)
-(b)
-Fig. 2.15 Boost converter voltage and current waveforms
+降压变换器只是众多可能的开关变换器之一。图2.5给出了另外两种常用变换器，它们执行不同的电压变换功能。在升压变换器中，电感与开关的位置互换。本章后面将证明，升压变换器使电压升高：$V \ge V_g$。另一种变换器——升降压变换器——既可以增大也可以减小电压的幅值，但极性反转。因此，在正输入电压下，理想的升降压变换器可以产生任意幅值的负输出电压。直流输出电压的幅值可以大于输入电压或极性与输入相反，这一点乍看似乎令人惊讶。但确实可以仅用电感、电容和内含开关的无源网络来产生任意所需的直流输出电压。
 
-2.3 Boost Converter Example 27
-Fig. 2.16 Dc conversion ratioM(D)
-of the boost converter
-M(D)
-D
-0
-1
-2
-3
-4
-5
-0 0.2 0.4 0.6 0.8 1
-M(D)= 1
-D'= 1
-1– D
-By equating this expression to zero and collecting terms, one obtains
-Vg(D+ D′)−VD
-′
-= 0 (2.33)
-Solution for V, and by noting that (D+ D′)= 1, yields the expression for the output voltage,
-V= Vg
-D′ (2.34)
-The voltage conversion ratio M(D) is the ratio of the output to the input voltage of a dc–dc
-converter. Equation (2.34) predicts that the voltage conversion ratio is given by
-M(D)= V
-Vg
-= 1
-D′ = 1
-1−D (2.35)
-This equation is plotted in Fig. 2.16.A t D= 0, V = Vg. The output voltage increases as D
-increases, and in the ideal case tends to inﬁnity as D tends to 1. So the ideal boost converter
-is capable of producing any output voltage greater than the input voltage. There are, of course,
-limits to the output voltage that can be produced by a practical boost converter. In the next
-chapter, component nonidealities are modeled, and it is found that the maximum output voltage
-of a practical boost converter is indeed limited. Nonetheless, very large output voltages can be
-produced if the nonidealities are suﬃciently small.
-The dc component of the inductor current is derived by use of the principle of capacitor
-charge balance. During the ﬁrst subinterval, the capacitor supplies the load current, and the
-capacitor is partially discharged. During the second subinterval, the inductor current supplies
-the load and, additionally, recharges the capacitor. The net change in capacitor charge over one
-switching period is found by integrating the i
-C(t) waveform of Fig.2.15b,
-∫ Ts
-0
-iC(t)dt=
-⎦
-−V
-R
-)
-DTs+
-⎦
-I−V
-R
-)
-D′Ts (2.36)
-Collecting terms, and equating the result to zero, leads to the steady-state result
-−V
-R (D+ D′)+ ID′= 0 (2.37)
+![源页 p.34](../assets/page-snapshots/chapter-2/page-34.png)
 
-28 2 Principles of Steady-State Converter Analysis
-Fig. 2.17 Variation of inductor cur-
-rent dc component I with duty cycle
-D, boost converter
-D
-0
-2
-4
-6
-8
-0 0.2 0.4 0.6 0.8 1
-I
-Vg/R
-By noting that (D+D′)= 1, and by solving for the inductor current dc componentI, one obtains
-I= V
-D′R (2.38)
-So the inductor current dc component I is equal to the load current, V/R, divided by D′. Substi-
-tution of Eq. (2.34) to eliminate V yields
-I= Vg
-D′2R (2.39)
-This equation is plotted in Fig. 2.17. It can be seen that the inductor current becomes large as D
-approaches 1.
-This inductor current, which coincides with the dc input current in the boost converter, is
-greater than the load current. Physically, this must be the case: to the extent that the converter
-elements are ideal, the converter input and output powers are equal. Since the converter output
-voltage is greater than the input voltage, the input current must likewise be greater than the out-
-put current. In practice, the inductor current ﬂows through the semiconductor forward voltage
-drops, the inductor winding resistance, and other sources of power loss. As the duty cycle ap-
-proaches one, the inductor current becomes very large and these component nonidealities lead
-to large power losses. In consequence, the eﬃciency of the boost converter decreases rapidly at
-high duty cycle.
-Next, let us sketch the inductor current i
-L(t) waveform and derive an expression for the
-inductor current ripple ΔiL. The inductor voltage waveform vL(t) has been already found
-(Fig. 2.15), so we can sketch the inductor current waveform directly. During the ﬁrst subinterval,
-with the switch in position 1, the slope of the inductor current is given by
-diL(t)
-dt = vL(t)
-L = Vg
-L (2.40)
-Likewise, when the switch is in position 2, the slope of the inductor current waveform is
-diL(t)
-dt = vL(t)
-L = Vg−V
-L (2.41)
-The inductor current waveform is sketched in Fig.2.18. During the ﬁrst subinterval, the change
-in inductor current, 2ΔiL, is equal to the slope multiplied by the length of the subinterval, or
+图2.5 三种基本变换器及其直流变换比 $M(D) = V/V_g$：(a) 降压，(b) 升压，(c) 升降压
 
-2.3 Boost Converter Example 29
-Fig. 2.18 Boost converter inductor
-current waveform iL(t) Vg –V
-L
-Vg
-L
-iL(t)
-t0 DTs Ts
-I ΔiL
-Fig. 2.19 Boost converter output
-voltage waveform v(t)
-v(t)
-t0 DTs Ts
-V Δv
-I
-C – V
-RC
-–V
-RC
-2ΔiL= Vg
-L DTs (2.42)
-Solution forΔiL leads to
-ΔiL= Vg
-2L DTs (2.43)
-This expression can be used to select the inductor value L such that a given value of ΔiL is
-obtained.
-Likewise, the capacitor voltage v(t) waveform can be sketched, and an expression derived
-for the output voltage ripple peak magnitudeΔv. The capacitor current waveform iC(t)i sg i v e n
-in Fig. 2.15. During the ﬁrst subinterval, the slope of the capacitor voltage waveform v(t)i s
-dvC(t)
-dt = iC(t)
-C =−V
-RC (2.44)
-During the second subinterval, the slope is
-dvC(t)
-dt = iC(t)
-C = I
-C−V
-RC (2.45)
-The capacitor voltage waveform is sketched in Fig.2.19. During the ﬁrst subinterval, the change
-in capacitor voltage,−2Δv, is equal to the slope multiplied by the length of the subinterval:
-−2Δv=−V
-RC DTs (2.46)
-Solution forΔv yields
-Δv= V
-2RC DTs (2.47)
-This expression can be used to select the capacitor value C to obtain a given output voltage
-ripple peak magnitudeΔv.
+在上述讨论中，我们能够基于傅里叶分析的一些简单论证推导出降压变换器输出电压的表达式——式(2.3)。然而，如何将这些论证直接应用于求解升压、升降压或其他变换器的直流输出电压，可能并非一目了然。本章的目标是建立一种更通用的方法，用于分析由电感、电容和开关构成的任何开关变换器 [4, 8–13]。
 
-30 2 Principles of Steady-State Converter Analysis
-2.4 ´Cuk Converter Example
-As a second example, consider the ´Cuk converter of Fig. 2.20a. This converter performs a dc
-conversion function similar to the buck–boost converter: it can either increase or decrease the
-magnitude of the dc voltage, and it inverts the polarity. A practical realization using a transistor
-and diode is illustrated in Fig. 2.20b.
-This converter operates via capacitive energy transfer. As illustrated in Fig. 2.21, capacitor
-C1 is connected through L1 to the input source while the switch is in position 2, and source
-energy is stored in C1. When the switch is in position 1, this energy is released through L2 to
-the load.
-The inductor currents and capacitor voltages are deﬁned, with polarities assigned somewhat
-arbitrarily, in Fig.2.20a. In this section, the principles of inductor volt-second balance and capac-
-itor charge balance are applied to ﬁnd the dc components of the inductor currents and capacitor
-voltages. The voltage and current ripple magnitudes are also found.
-During the ﬁrst subinterval, while the switch is in position 1, the converter circuit reduces
-to Fig. 2.21a. The inductor voltages and capacitor currents are
-vL1 = Vg
-vL2 =−v1−v2
-iC1= i2 (2.48)
-iC2= i2−v2
-R
-We next assume that the switching ripple magnitudes ini1(t), i2(t), v1(t), and v2(t) are small
-compared to their respective dc components I1, I2, V1, and V2. We can therefore make the
-small-ripple approximation, and Eq. (2.48) becomes
-+
-–
-L1
-C2 R
-+
-v2
-–
-C1 L2
-1 2
-+ v1 –i1 i2
-Vg
-+
-–
-L1
-C2 R
-+
-v2
-–
-C1 L2
-+ v1 –i1 i2
-D1Q1Vg
-(a)
-(b)
-Fig. 2.20 ´Cuk converter: (a) with ideal switch, (b) practical realization using MOSFET and diode
+我们将推导电感伏秒平衡原理和电容电荷平衡原理，它们可用于求解开关变换器的电感电流和电容电压。一个有用的近似——小纹波近似（也称线性纹波近似）——极大地简化了分析。此外还将讨论选择滤波元件值的若干简单方法。
 
-2.4 ´Cuk Converter Example 31
-+
-–
-L1
-C2 R
-+
-v2
-–
-C1
-L2
-i1
-i2
- –
-v1
-+
-iC1 iC2
-+ vL2 –+ vL1 –
-Vg
-+
-–
-L1
-C2 R
-+
-v2
-–
-C1
-L2i1 i2
- +
-v1
-–
-iC1
-iC2
-+ vL2 –+ vL1 –
-Vg
-(a)
-(b)
-Fig. 2.21 ´Cuk converter circuit: (a) while switch is in position 1, (b) while switch is in position 2
-vL1 = Vg
-vL2 =−V1−V2 (2.49)
-iC1 = I2
-iC2 = I2−V2
-R
-During the second subinterval, with the switch in position 2, the converter circuit elements are
-connected as in Fig. 2.21b. The inductor voltages and capacitor currents are:
-vL1 = Vg−v1
-vL2 =−v2
-iC1 = i1 (2.50)
-iC2 = i2−v2
-R
-We again make the small-ripple approximation, and hence Eq. (2.50) becomes
-vL1 = Vg−V1
-vL2 =−V2
-iC1 = I1 (2.51)
-iC2 = I2−V2
-R
-Equations (2.49) and (2.51) are used to sketch the inductor voltage and capacitor current wave-
-forms in Fig. 2.22.
+## 2.2 电感伏秒平衡、电容电荷平衡与小纹波近似
 
-32 2 Principles of Steady-State Converter Analysis
-vL1(t)
-Vg – V1
-t
-DTs
-Vg
-D'Ts
-vL2(t)
-– V1 – V2
-t
-DTs
-– V2
-D'Ts
-iC1(t)
-I2
-t
-DTs
-I1
-D'Ts
-iC2(t)
-I2 – V2 /R (= 0)
-tDTs D'Ts
-(a)
-(b)
-(c)
-(d)
-Fig. 2.22 ´Cuk converter waveforms: (a) inductor voltage vL1(t), (b) inductor voltage vL2(t), (c) capacitor
-current iC1(t), (d) capacitor current iC2(t)
-The next step is to equate the dc components, or average values, of the waveforms of
-Fig. 2.22 to zero, to ﬁnd the steady-state conditions in the converter. The results are
-⟨vL1⟩= DVg+ D′ ⎦
-Vg−V1
-)
-= 0
-⟨vL2⟩= D (−V1−V2)+ D′(−V2)= 0 (2.52)
-⟨iC1⟩= DI2+ D′I1= 0
-⟨iC2⟩= I2−V2
-R = 0
-Solution of this system of equations for the dc components of the capacitor voltages and inductor
-currents leads to
+让我们更仔细地考察图2.6中降压变换器的电感和电容波形。不可能构造一个完美的低通滤波器，既能通过直流分量又能完全消除开关频率及其谐波处的分量。因此，低通滤波器必须允许开关产生的至少少量高频谐波到达输出端。于是，实际中输出电压波形 $v(t)$ 如图2.7所示，可表示为
 
-2.4 ´Cuk Converter Example 33
-M(D)
-D
--5
--4
--3
--2
--1
-0
-0 0.2 0.4 0.6 0.8 1
-M(D)= V2
-Vg
-=– D
-1– D
-Fig. 2.23 Dc conversion ratio M(D)=−V/Vg of the ´Cuk converter
-V1 = Vg
-D′
-V2 =−D
-D′ Vg (2.53)
-I1 =−D
-D′ I2=
-⎦D
-D′
-)2 Vg
-R
-I2 = V2
-R =−D
-D′
-Vg
-R
-The dependence of the dc output voltage V2 on the duty cycle D is sketched in Fig. 2.23.
-The inductor current waveforms are sketched in Fig. 2.24a,b, and the capacitor C1 voltage
-waveform v1(t) is sketched in Fig. 2.24c. During the ﬁrst subinterval, the slopes of the wave-
-forms are given by
-di1(t)
-dt = vL1(t)
-L1
-= Vg
-L1
-di2(t)
-dt = vL2(t)
-L2
-=−V1−V2
-L2
-(2.54)
-dv1(t)
-dt = iC1(t)
-C1
-= I2
-C1
-Equation (2.49) has been used here to substitute for the values of vL1, vL2, and iC1 during the
-ﬁrst subinterval. During the second interval, the slopes of the waveforms are given by
-di1(t)
-dt = vL1(t)
-L1
-= Vg−V1
-L1
-di2(t)
-dt = vL2(t)
-L2
-=−V2
-L2
-(2.55)
-dv1(t)
-dt = iC1(t)
-C1
-= I1
-C1
-Equation (2.51) was used to substitute for the values of vL1, vL2, and iC1 during the second
-subinterval.
+$$v(t) = V + v_{ripple}(t) \tag{2.4}$$
 
-34 2 Principles of Steady-State Converter Analysis
-i1(t)
-tDTs Ts
-I1
-Δi1
-Vg –V1
-L1
-Vg
-L1
-–V2
-L2
-–V1 –V2
-L2
-i2(t)
-tDTs Ts
-I2 Δi2
-I1
-C1
-I2
-C1
-v1(t)
-tDTs Ts
-V1
-Δv1
-(a)
-(b)
-(c)
-Fig. 2.24 ´Cuk converter waveforms: ( a) inductor current i1(t), (b) inductor current i2(t), (c) capacitor
-voltage v1(t)
-During the ﬁrst subinterval, the quantities i1(t), i2(t), and v1(t) change by 2Δi1,−2Δi2, and
-−2Δv1, respectively. These changes are equal to the slopes given in Eq. ( 2.54), multiplied by
-the subinterval length DTs, yielding
-Δi1 = VgDTs
-2L1
-Δi2 = V1+ V2
-2L2
-DTs (2.56)
-Δv1 =−I2DTs
-2C1
-The dc relationships, Eq. ( 2.53), can now be used to simplify these expressions and eliminate
-V1, V2, and I1, leading to
-Δi1= VgDTs
-2L1
-Δi2= VgDTs
-2L2
-(2.57)
-Δv1 = VgD2Ts
-2D′RC1
-```
+即实际输出电压 $v(t)$ 由所需的直流分量 $V$ 加上一个小的不希望的交流分量 $v_{ripple}(t)$ 组成，后者由低通滤波器对开关谐波的不完全衰减引起。图2.7中 $v_{ripple}(t)$ 的幅值被夸大了。
+
+![源页 p.35](../assets/page-snapshots/chapter-2/page-35.png)
+
+图2.6 降压变换器电路，特别标出了电感电压 $v_L(t)$ 和电容电压 $v_C(t)$ 波形
+
+图2.7 输出电压波形 $v(t)$，由直流分量 $V$ 和开关纹波 $v_{ripple}(t)$ 组成
+
+在任何设计良好的变换器中，输出电压的开关纹波都应很小，因为目的是产生直流输出。例如，在输出为 3.3 V 的计算机电源中，通常要求开关纹波小于几十毫伏，即小于直流分量 $V$ 的 1%。因此，几乎总可以很好地近似认为开关纹波的幅值远小于直流分量：
+
+$$\|v_{ripple}\| \ll V \tag{2.5}$$
+
+因此，输出电压 $v(t)$ 可以很好地用其直流分量 $V$ 来近似，忽略小纹波项 $v_{ripple}(t)$：
+
+$$v(t) \approx V \tag{2.6}$$
+
+这一近似称为小纹波近似，或称线性纹波近似，它极大地简化了变换器波形的分析，本书全文都在使用。利用这一近似，我们将电感和电容波形的指数或衰减正弦表达式替换为更简单的线性波形；只要开关周期远短于电路的自然时间常数，这一近似就是合理的。
+
+小纹波近似适用于变换器的电感电流和电容电压等连续变量。它不能用于变换器的不连续波形，如开关电压、开关电流或电感电压。
+
+接下来分析电感电流波形。我们可以通过对电感电压波形积分来求得电感电流。开关处于位置1时，电感左侧连接到输入电压 $V_g$，电路简化为图2.8a。这里需要注意，$v_L(t)$ 和 $i_L(t)$ 的参考极性在图2.6中已仔细定义，并且在图2.8a、b的电路中始终遵循这些参考极性。电感电压 $v_L(t)$ 为
+
+$$v_L = V_g - v(t) \tag{2.7}$$
+
+![源页 p.36](../assets/page-snapshots/chapter-2/page-36.png)
+
+如前所述，输出电压 $v(t)$ 由直流分量 $V$ 加上一个小交流纹波项 $v_{ripple}(t)$ 组成。可以在此处使用小纹波近似——式(2.6)，用其直流分量 $V$ 替换 $v(t)$：
+
+$$v_L \approx V_g - V \tag{2.8}$$
+
+因此，开关处于位置1时，电感电压基本恒定且等于 $V_g - V$，如图2.9所示。已知电感电压波形后，可利用定义式
+
+$$v_L(t) = L \frac{di_L(t)}{dt} \tag{2.9}$$
+
+求出电感电流。于是，在第一个子区间内，当 $v_L(t)$ 近似为 $(V_g - V)$ 时，电感电流波形的斜率为
+
+$$\frac{di_L(t)}{dt} = \frac{v_L(t)}{L} \approx \frac{V_g - V}{L} \tag{2.10}$$
+
+上式由式(2.9)两边除以 $L$，并代入式(2.8)得到。由于开关处于位置1时电感电压 $v_L(t)$ 基本恒定，电感电流斜率也基本恒定，电感电流线性上升。
+
+在第二个子区间，即开关处于位置2时，类似的论证同样适用。此时电感左侧接地，得到图2.8b的电路。一致地定义电感电流和电压的极性很重要；特别是 $v_L(t)$ 的极性在图2.7、2.8a、b中始终一致地定义。因此，第二个子区间内的电感电压为
+
+$$v_L(t) = -v(t) \tag{2.11}$$
+
+利用小纹波近似——式(2.6)，得
+
+$$v_L(t) \approx -V \tag{2.12}$$
+
+因此，开关处于位置2时电感电压也基本恒定，如图2.9所示。将式(2.12)代入式(2.9)并求解电感电流斜率，得
+
+$$\frac{di_L(t)}{dt} \approx -\frac{V}{L} \tag{2.13}$$
+
+因此，在第二个子区间内，电感电流以负的、基本恒定的斜率变化。
+
+现在可以绘出电感电流波形（图2.10）。电感电流从某个初始值 $i_L(0)$ 开始。在第一个子区间，开关处于位置1，电感电流以式(2.10)给出的斜率上升。在 $t = D T_s$ 时刻，开关切换到位置2。电流随后以式(2.13)给出的恒定斜率下降。在 $t = T_s$ 时刻，开关切换回位置1，过程重复。
+
+![源页 p.37](../assets/page-snapshots/chapter-2/page-37.png)
+
+图2.9 降压变换器稳态电感电压波形
+
+图2.10 降压变换器稳态电感电流波形
+
+值得计算电感电流纹波 $\Delta i_L$。如图2.10所示，峰值电感电流等于直流分量 $I$ 加上峰-平均值纹波 $\Delta i_L$。该峰值电流不仅流过电感，也流过构成开关的半导体器件。在规定这些器件的额定值时，需要知道峰值电流。
+
+由于我们知道第一个子区间内电感电流的斜率，也知道第一个子区间的长度，因此可以计算纹波幅值。$i_L(t)$ 波形关于 $I$ 对称，因此在第一个子区间内电流增加了 $2\Delta i_L$（因为 $\Delta i_L$ 是峰值纹波，峰-峰纹波为 $2\Delta i_L$）。所以电流的变化量 $2\Delta i_L$ 等于斜率（所施加的电感电压除以 $L$）乘以第一个子区间的长度（$D T_s$）：
+
+$$\text{（}i_L \text{的变化量）} = \text{（斜率）} \times \text{（子区间长度）}$$
+
+$$(2\Delta i_L) = \frac{V_g - V}{L} (D T_s) \tag{2.14}$$
+
+解 $\Delta i_L$ 得
+
+$$\Delta i_L = \frac{V_g - V}{2L} D T_s \tag{2.15}$$
+
+$\Delta i_L$ 的典型值在直流分量 $I$ 满载值的 10%～20% 范围内。不应让 $\Delta i_L$ 过大；否则会增加电感及半导体开关器件的峰值电流，从而增大其体积和成本。因此，通过设计，电感电流纹波通常也远小于直流分量 $I$。小纹波近似 $i_L(t) \approx I$ 通常对电感电流是合理的。
+
+可以选择电感值使得获得所需的电流纹波 $\Delta i_L$。由式(2.15)解出电感 $L$ 得
+
+![源页 p.38](../assets/page-snapshots/chapter-2/page-38.png)
+
+$$L = \frac{V_g - V}{2 \Delta i_L} D T_s \tag{2.16}$$
+
+此式常用于选择降压变换器的电感值。
+
+完全可以不使用小纹波近似来精确求解变换器。例如，可以用拉普拉斯变换写出图2.8a、b电路波形的表达式，然后反演变换、匹配边界条件，求出电路的周期稳态解。进而可以求出波形的直流分量和峰值。但这需要大量工作，且结果几乎总是难以处理。况且，写出精确描述纹波的方程所付出的额外工作是浪费时间的，因为纹波很小且是不期望的。小纹波近似易于应用，能快速得到变换器波形直流分量的简单表达式。
+
+图2.10的电感电流波形是在稳态条件下、变换器工作于平衡状态时绘制的。接下来让我们考虑变换器刚接通时电感电流的情况。假设电感电流和输出电压初始为零，然后施加输入电压 $V_g$。如图2.11所示，$i_L(0)$ 为零。在第一个子区间，开关处于位置1，我们知道电感电流将上升，斜率为 $(V_g - v)/L$，而 $v$ 初始为零。接着，开关处于位置2时，电感电流以 $-v/L$ 的斜率变化；由于 $v$ 初始为零，该斜率基本为零。可以看出，在第一个开关周期内电感电流有净增加，因为 $i_L(T_s)$ 大于 $i_L(0)$。由于电感电流流向输出，输出电容将略微充电，$v$ 将略有增加。该过程在第二个及后续开关周期中重复，电感电流在每个子区间1增加、在每个子区间2减少。
+
+![源页 p.39](../assets/page-snapshots/chapter-2/page-39.png)
+
+图2.11 变换器接通暂态期间的电感电流波形
+
+随着输出电容继续充电、$v$ 增大，子区间1内的斜率减小而子区间2内的斜率变得更负。最终，达到子区间1内电感电流的增加量等于子区间2内电感电流减少量的状态。此时一个完整开关周期内电感电流净变化为零，变换器进入稳态工作。变换器波形是周期的：$i_L(n T_s) = i_L((n+1) T_s)$。从该点起，电感电流波形如图2.10所示。
+
+在平衡状态下，一个开关周期内电感电流净变化为零这一要求，引导我们找到任何开关变换器稳态条件的方法：电感伏秒平衡原理。给定电感的定义关系：
+
+$$v_L(t) = L \frac{di_L(t)}{dt} \tag{2.17}$$
+
+在一个完整开关周期（例如从 $t = 0$ 到 $T_s$）上积分，得
+
+$$i_L(T_s) - i_L(0) = \frac{1}{L} \int_0^{T_s} v_L(t)\,dt \tag{2.18}$$
+
+此式表明，一个开关周期内电感电流的净变化量（由式(2.18)左边给出）正比于该区间内所施加电感电压的积分。在稳态下，电感电流的初值和终值相等，因此式(2.18)左边为零。所以，稳态下所施加电感电压的积分必须为零：
+
+$$0 = \int_0^{T_s} v_L(t)\,dt \tag{2.19}$$
+
+式(2.19)右边具有伏秒或磁链的单位。式(2.19)表明，$v_L(t)$ 波形下的总面积，即净伏秒数，必须为零。
+
+将式(2.19)两边除以开关周期 $T_s$，得到等价形式：
+
+$$0 = \frac{1}{T_s} \int_0^{T_s} v_L(t)\,dt = \langle v_L \rangle \tag{2.20}$$
+
+式(2.20)右边被识别为 $v_L(t)$ 的平均值，即直流分量。式(2.20)表明，在平衡状态下，所施加的电感电压必须具有零直流分量。
+
+![源页 p.40](../assets/page-snapshots/chapter-2/page-40.png)
+
+图2.12 电感伏秒平衡原理：稳态下，施加于电感的净伏秒数（即总面积 $\lambda$）必须为零
+
+图2.9的电感电压波形再现于图2.12，并特别标出 $v_L(t)$ 曲线下的面积。总面积 $\lambda$ 由两个矩形的面积给出，即
+
+$$\lambda = \int_0^{T_s} v_L(t)\,dt = (V_g - V)(D T_s) + (-V)(D' T_s) \tag{2.21}$$
+
+因此平均值为
+
+$$\langle v_L \rangle = \frac{\lambda}{T_s} = D(V_g - V) + D'(-V) \tag{2.22}$$
+
+令 $\langle v_L \rangle$ 等于零，并注意到 $D + D' = 1$，得
+
+$$0 = D V_g - (D + D') V = D V_g - V \tag{2.23}$$
+
+解 $V$ 得
+
+$$V = D V_g \tag{2.24}$$
+
+这与之前得到的结果——式(2.3)一致。因此，电感伏秒平衡原理使我们能够推导出变换器输出电压直流分量的表达式。这种方法的优点在于其通用性——它可以应用于任何变换器。只需绘出所施加的电感电压波形，并令其平均值等于零即可。本章后面将用此方法求解几个更复杂的变换器。
+
+类似的论证可以应用于电容。电容的定义方程为
+
+$$i_C(t) = C \frac{dv_C(t)}{dt} \tag{2.25}$$
+
+在一个开关周期上积分此方程，得
+
+$$v_C(T_s) - v_C(0) = \frac{1}{C} \int_0^{T_s} i_C(t)\,dt \tag{2.26}$$
+
+在稳态下，一个开关周期内电容电压的净变化必须为零，因此式(2.26)左边为零。所以，在平衡状态下，一个开关周期内电容电流的积分（具有安秒或电荷的量纲）应为零。稳态下电容电荷没有净变化。等价的表述为
+
+$$0 = \frac{1}{T_s} \int_0^{T_s} i_C(t)\,dt = \langle i_C \rangle \tag{2.27}$$
+
+在平衡状态下，电容电流的平均值（即直流分量）必须为零。这应该是一个直观的结果：如果将直流电流施加于电容，电容将持续充电，其电压将无限制地增大。同样，如果将直流电压施加于电感，磁链将持续增加，电感电流将无限制地增大。式(2.27)称为电容安秒平衡原理或电容电荷平衡原理，可用于求开关变换器中的稳态电流。
+
+## 2.3 升压变换器示例
+
+升压变换器（图2.13a）是另一种著名的开关模式变换器，能够产生幅值大于直流输入电压的直流输出电压。图2.13b给出了使用MOSFET和二极管实现的实用开关。让我们应用小纹波近似以及电感伏秒平衡和电容电荷平衡原理，求该变换器的稳态输出电压和电感电流。
+
+![源页 p.41](../assets/page-snapshots/chapter-2/page-41.png)
+
+图2.13 升压变换器：(a) 采用理想开关，(b) 采用MOSFET和二极管的实用实现
+
+图2.14 升压变换器电路：(a) 开关处于位置1时，(b) 开关处于位置2时
+
+开关处于位置1时，电感右侧接地，得到图2.14a的网络。该子区间的电感电压和电容电流为
+
+$$v_L = V_g \tag{2.28}$$
+
+$$i_C = -\frac{v}{R}$$
+
+![源页 p.42](../assets/page-snapshots/chapter-2/page-42.png)
+
+利用线性纹波近似 $v \approx V$，得
+
+$$v_L = V_g \tag{2.29}$$
+
+$$i_C = -\frac{V}{R}$$
+
+开关处于位置2时，电感连接到输出端，得到图2.14b的电路。电感电压和电容电流为
+
+$$v_L = V_g - v \tag{2.30}$$
+
+$$i_C = i_L - \frac{v}{R}$$
+
+利用小纹波近似 $v \approx V$ 和 $i_L \approx I$，得
+
+$$v_L = V_g - V \tag{2.31}$$
+
+$$i_C = I - \frac{V}{R}$$
+
+式(2.29)和式(2.31)用于绘出图2.15的电感电压和电容电流波形。
+
+从图2.15a的电感电压波形可以推断，直流输出电压 $V$ 大于输入电压 $V_g$。在第一个子区间内，$v_L(t)$ 等于直流输入电压 $V_g$，施加于电感的是正伏秒。由于稳态下一个开关周期内施加的总伏秒必须为零，第二个子区间内必须施加负伏秒。因此，第二个子区间内的电感电压 $(V_g - V)$ 必须为负。故 $V$ 大于 $V_g$。
+
+一个开关周期内施加于电感的总伏秒为
+
+$$\int_0^{T_s} v_L(t)\,dt = (V_g)(D T_s) + (V_g - V)(D' T_s) \tag{2.32}$$
+
+![源页 p.43](../assets/page-snapshots/chapter-2/page-43.png)
+
+图2.15 升压变换器电压和电流波形
+
+图2.16 升压变换器的直流变换比 $M(D)$
+
+令上式等于零并合并同类项，得
+
+$$V_g(D + D') - V D' = 0 \tag{2.33}$$
+
+解 $V$，并注意到 $(D + D') = 1$，得输出电压表达式为
+
+$$V = \frac{V_g}{D'} \tag{2.34}$$
+
+电压变换比 $M(D)$ 定义为直流-直流变换器输出电压与输入电压之比。式(2.34)预测电压变换比为
+
+$$M(D) = \frac{V}{V_g} = \frac{1}{D'} = \frac{1}{1-D} \tag{2.35}$$
+
+此式绘于图2.16。当 $D = 0$ 时，$V = V_g$。随着 $D$ 增大，输出电压增大，在理想情况下当 $D$ 趋于1时趋向无穷大。因此，理想的升压变换器能够产生任何大于输入电压的输出电压。当然，实用升压变换器所能产生的输出电压是有限的。在下一章中，将对元件非理想性进行建模，并将发现实用升压变换器的最大输出电压确实受到限制。尽管如此，如果非理想性足够小，仍然可以产生很高的输出电压。
+
+电感电流的直流分量由电容电荷平衡原理推导。在第一个子区间，电容向负载供电，电容部分放电。在第二个子区间，电感电流供给负载并同时对电容充电。一个开关周期内电容电荷的净变化量通过对图2.15b的 $i_C(t)$ 波形积分求得：
+
+$$\int_0^{T_s} i_C(t)\,dt = \left(-\frac{V}{R}\right)(D T_s) + \left(I - \frac{V}{R}\right)(D' T_s) \tag{2.36}$$
+
+合并同类项，并令结果等于零，得稳态结果
+
+$$-\frac{V}{R}(D + D') + I D' = 0 \tag{2.37}$$
+
+![源页 p.44](../assets/page-snapshots/chapter-2/page-44.png)
+
+图2.17 升压变换器电感电流直流分量 $I$ 随占空比 $D$ 的变化
+
+注意到 $(D + D') = 1$，并解出电感电流直流分量 $I$，得
+
+$$I = \frac{V}{D' R} \tag{2.38}$$
+
+即电感电流直流分量 $I$ 等于负载电流 $V/R$ 除以 $D'$。将式(2.34)代入消去 $V$，得
+
+$$I = \frac{V_g}{D'^2 R} \tag{2.39}$$
+
+此式绘于图2.17。可以看出，当 $D$ 趋近1时，电感电流变得很大。
+
+该电感电流在升压变换器中与直流输入电流一致，大于负载电流。从物理上讲，这必然如此：在变换器元件为理想的前提下，变换器的输入功率和输出功率相等。由于变换器输出电压大于输入电压，输入电流也必须大于输出电流。实际中，电感电流流过半导体正向压降、电感绕组电阻及其他功率损耗源。当占空比趋近1时，电感电流变得很大，这些元件非理想性导致大的功率损耗。结果是，升压变换器在高占空比下效率迅速下降。
+
+接下来，绘出电感电流 $i_L(t)$ 波形并推导电感电流纹波 $\Delta i_L$ 的表达式。电感电压波形 $v_L(t)$ 已经求得（图2.15），因此可以直接绘出电感电流波形。在第一个子区间，开关处于位置1时，电感电流的斜率为
+
+$$\frac{di_L(t)}{dt} = \frac{v_L(t)}{L} = \frac{V_g}{L} \tag{2.40}$$
+
+同样，当开关处于位置2时，电感电流波形的斜率为
+
+$$\frac{di_L(t)}{dt} = \frac{v_L(t)}{L} = \frac{V_g - V}{L} \tag{2.41}$$
+
+电感电流波形绘于图2.18。在第一个子区间，电感电流的变化量 $2\Delta i_L$ 等于斜率乘以子区间长度，即
+
+![源页 p.45](../assets/page-snapshots/chapter-2/page-45.png)
+
+图2.18 升压变换器电感电流波形 $i_L(t)$
+
+图2.19 升压变换器输出电压波形 $v(t)$
+
+$$2\Delta i_L = \frac{V_g}{L} D T_s \tag{2.42}$$
+
+解 $\Delta i_L$ 得
+
+$$\Delta i_L = \frac{V_g}{2L} D T_s \tag{2.43}$$
+
+此式可用于选择电感值 $L$，以获得给定的 $\Delta i_L$ 值。
+
+同样，可以绘出电容电压 $v(t)$ 波形，并推导输出电压纹波峰值 $\Delta v$ 的表达式。电容电流波形 $i_C(t)$ 已在图2.15中给出。在第一个子区间，电容电压波形 $v(t)$ 的斜率为
+
+$$\frac{dv_C(t)}{dt} = \frac{i_C(t)}{C} = -\frac{V}{RC} \tag{2.44}$$
+
+在第二个子区间，斜率为
+
+$$\frac{dv_C(t)}{dt} = \frac{i_C(t)}{C} = \frac{I}{C} - \frac{V}{RC} \tag{2.45}$$
+
+电容电压波形绘于图2.19。在第一个子区间，电容电压的变化量 $-2\Delta v$ 等于斜率乘以子区间长度：
+
+$$-2\Delta v = -\frac{V}{RC} D T_s \tag{2.46}$$
+
+解 $\Delta v$ 得
+
+$$\Delta v = \frac{V}{2RC} D T_s \tag{2.47}$$
+
+此式可用于选择电容值 $C$，以获得给定的输出电压纹波峰值 $\Delta v$。
+
+## 2.4 Ćuk 变换器示例
+
+![源页 p.46](../assets/page-snapshots/chapter-2/page-46.png)
+
+作为第二个示例，考虑图2.20a的 Ćuk 变换器。该变换器执行的直流变换功能与升降压变换器类似：它既可以增大也可以减小直流电压的幅值，并且极性反转。图2.20b给出了使用晶体管和二极管的实用实现。
+
+图2.20 Ćuk 变换器：(a) 采用理想开关，(b) 采用MOSFET和二极管的实用实现
+
+该变换器通过电容性能量传递工作。如图2.21所示，当开关处于位置2时，电容 $C_1$ 通过 $L_1$ 连接到输入源，源能量存储于 $C_1$ 中。当开关处于位置1时，该能量通过 $L_2$ 释放到负载。
+
+图2.20a中定义了电感电流和电容电压，其极性是相当任意地指定的。本节将应用电感伏秒平衡和电容电荷平衡原理，求电感电流和电容电压的直流分量。同时还将求出电压和电流纹波幅值。
+
+在第一个子区间，即开关处于位置1时，变换器电路简化为图2.21a。电感电压和电容电流为
+
+$$v_{L1} = V_g$$
+
+$$v_{L2} = -v_1 - v_2$$
+
+$$i_{C1} = i_2 \tag{2.48}$$
+
+$$i_{C2} = i_2 - \frac{v_2}{R}$$
+
+接下来假设 $i_1(t)$、$i_2(t)$、$v_1(t)$ 和 $v_2(t)$ 中的开关纹波幅值远小于各自相应的直流分量 $I_1$、$I_2$、$V_1$ 和 $V_2$。因此可以使用小纹波近似，式(2.48)变为
+
+![源页 p.47](../assets/page-snapshots/chapter-2/page-47.png)
+
+图2.21 Ćuk 变换器电路：(a) 开关处于位置1时，(b) 开关处于位置2时
+
+$$v_{L1} = V_g$$
+
+$$v_{L2} = -V_1 - V_2 \tag{2.49}$$
+
+$$i_{C1} = I_2$$
+
+$$i_{C2} = I_2 - \frac{V_2}{R}$$
+
+在第二个子区间，开关处于位置2时，变换器电路元件连接如图2.21b所示。电感电压和电容电流为：
+
+$$v_{L1} = V_g - v_1$$
+
+$$v_{L2} = -v_2$$
+
+$$i_{C1} = i_1 \tag{2.50}$$
+
+$$i_{C2} = i_2 - \frac{v_2}{R}$$
+
+再次使用小纹波近似，式(2.50)变为
+
+$$v_{L1} = V_g - V_1$$
+
+$$v_{L2} = -V_2 \tag{2.51}$$
+
+$$i_{C1} = I_1$$
+
+$$i_{C2} = I_2 - \frac{V_2}{R}$$
+
+式(2.49)和式(2.51)用于绘出图2.22中的电感电压和电容电流波形。
+
+![源页 p.48](../assets/page-snapshots/chapter-2/page-48.png)
+
+图2.22 Ćuk 变换器波形：(a) 电感电压 $v_{L1}(t)$，(b) 电感电压 $v_{L2}(t)$，(c) 电容电流 $i_{C1}(t)$，(d) 电容电流 $i_{C2}(t)$
+
+下一步是令图2.22各波形的直流分量（即平均值）等于零，以求出变换器中的稳态条件。结果为
+
+$$\langle v_{L1} \rangle = D V_g + D'(V_g - V_1) = 0$$
+
+$$\langle v_{L2} \rangle = D(-V_1 - V_2) + D'(-V_2) = 0 \tag{2.52}$$
+
+$$\langle i_{C1} \rangle = D I_2 + D' I_1 = 0$$
+
+$$\langle i_{C2} \rangle = I_2 - \frac{V_2}{R} = 0$$
+
+求解此方程组，得电容电压和电感电流的直流分量为
+
+![源页 p.49](../assets/page-snapshots/chapter-2/page-49.png)
+
+图2.23 Ćuk 变换器的直流变换比 $M(D) = V_2/V_g$
+
+$$V_1 = \frac{V_g}{D'}$$
+
+$$V_2 = -\frac{D}{D'} V_g \tag{2.53}$$
+
+$$I_1 = -\frac{D}{D'} I_2 = \left(\frac{D}{D'}\right)^2 \frac{V_g}{R}$$
+
+$$I_2 = \frac{V_2}{R} = -\frac{D}{D'} \frac{V_g}{R}$$
+
+直流输出电压 $V_2$ 对占空比 $D$ 的依赖关系绘于图2.23。
+
+电感电流波形绘于图2.24a、b，电容 $C_1$ 电压波形 $v_1(t)$ 绘于图2.24c。在第一个子区间，各波形的斜率为
+
+$$\frac{di_1(t)}{dt} = \frac{v_{L1}(t)}{L_1} = \frac{V_g}{L_1}$$
+
+$$\frac{di_2(t)}{dt} = \frac{v_{L2}(t)}{L_2} = \frac{-V_1 - V_2}{L_2} \tag{2.54}$$
+
+$$\frac{dv_1(t)}{dt} = \frac{i_{C1}(t)}{C_1} = \frac{I_2}{C_1}$$
+
+此处使用了式(2.49)代入第一个子区间内 $v_{L1}$、$v_{L2}$ 和 $i_{C1}$ 的值。在第二个子区间，各波形的斜率为
+
+$$\frac{di_1(t)}{dt} = \frac{v_{L1}(t)}{L_1} = \frac{V_g - V_1}{L_1}$$
+
+$$\frac{di_2(t)}{dt} = \frac{v_{L2}(t)}{L_2} = \frac{-V_2}{L_2} \tag{2.55}$$
+
+$$\frac{dv_1(t)}{dt} = \frac{i_{C1}(t)}{C_1} = \frac{I_1}{C_1}$$
+
+此处使用了式(2.51)代入第二个子区间内 $v_{L1}$、$v_{L2}$ 和 $i_{C1}$ 的值。
+
+![源页 p.50](../assets/page-snapshots/chapter-2/page-50.png)
+
+图2.24 Ćuk 变换器波形：(a) 电感电流 $i_1(t)$，(b) 电感电流 $i_2(t)$，(c) 电容电压 $v_1(t)$
+
+在第一个子区间内，$i_1(t)$、$i_2(t)$ 和 $v_1(t)$ 分别变化 $2\Delta i_1$、$-2\Delta i_2$ 和 $-2\Delta v_1$。这些变化量等于式(2.54)给出的斜率乘以子区间长度 $D T_s$，得
+
+$$\Delta i_1 = \frac{V_g D T_s}{2 L_1}$$
+
+$$\Delta i_2 = \frac{V_1 + V_2}{2 L_2} D T_s \tag{2.56}$$
+
+$$\Delta v_1 = -\frac{I_2 D T_s}{2 C_1}$$
+
+现在可以使用直流关系式(2.53)简化这些表达式，消去 $V_1$、$V_2$ 和 $I_1$，得
+
+$$\Delta i_1 = \frac{V_g D T_s}{2 L_1}$$
+
+$$\Delta i_2 = \frac{V_g D T_s}{2 L_2} \tag{2.57}$$
+
+$$\Delta v_1 = \frac{V_g D^2 T_s}{2 D' R C_1}$$

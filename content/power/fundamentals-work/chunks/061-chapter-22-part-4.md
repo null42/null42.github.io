@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第22章part 4 - 22 Resonant Conversion"
+title: "第22章 谐振变换器（第4部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,66 +18,27 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第22章part 4 - 22 Resonant Conversion
+# 第22章 谐振变换器（第4部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 991-991  
-> Chunk ID: `chapter-22-part-4`
+## 22.6 关键点总结（续）
 
-## 主干提取
+![源页 p.991](../assets/page-snapshots/chapter-22/page-991.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+频率（仅考虑开环工作）。负载 $R$ 为线性电阻，可取任意正值：$0 \le R < \infty$。
 
-## 术语表
+(a) 绘制 $0 \le R < \infty$ 范围内所有 $R$ 值的输出特性（$M$ 与 $J$ 的关系）。标注模式边界，评估短路电流，并给出输出特性的解析表达式。
+(b) 变换器在 $R$（折算到槽特性阻抗 $R_0$）的哪个范围内按预期工作在 $k = 2$ 断续导通模式？
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+**22.11 作为单相高质量整流器的并联谐振变换器。** 期望在单相低谐波整流器系统中利用变压器隔离并联谐振直流-直流变换器。通过适当改变变换器开关频率，可获得可建模为图21.16 的近似理想整流器系统。可利用22.5.2 节的结果回答此问题。并联谐振槽网络含匝比 $1:n$ 的隔离变压器。可用近似图解法或计算机迭代回答部分(b) 和(c)。
 
-## 中文翻译
+(a) 绘制并联谐振变换器高于谐振连续导通模式工作时的归一化输入特性（归一化输入电压 $m_g = n v_g/v$ 与归一化输入电流 $j_g = i_g n R_0/v$ 的关系）。绘制 $F = f_s/f_0 = 1.0, 1.1, 1.2, 1.3, 1.5, 2.0$ 的曲线。将这些特性与期望的线性电阻输入特性 $v_g/i_g = R_{emulated}$ 比较。
+(b) 变换器开环工作，$F = 1.1$。施加的归一化输入电压为单位幅值整流正弦：$m_g(t) = |\sin(\omega t)|$。绘制由此产生的归一化输入电流波形 $j_g(t)$。峰值电流约多大？交叉死区时间多长？
+(c) 现加入反馈环，调节输入电流跟随输入电压使 $i_g(t) = v_g(t)/R_{emulated}$。可假设反馈环完美工作。对 $R_{emulated} = R_0$ 情形，且施加与部分(b) 相同的 $m_g(t)$ 波形，绘制一个交流线路周期内的开关频率波形[即展示控制器如何改变 $F$ 以调节 $i_g(t)$]。$F$ 的最大值为多少？注：实际中变换器会设计在更小的 $j_g$ 峰值下工作，使开关频率变化更平稳。
+(d) 选择元件值（槽电感、槽电容、变压器匝比），使部分(c) 的变换器满足以下指标：
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+- 交流输入电压 $120\,\text{V}_{rms}$，$60\,\text{Hz}$
+- 直流输出电压 $42\,\text{V}$
+- 平均功率 $800\,\text{W}$
+- 最大开关频率 $200\,\text{kHz}$
 
-## 英文原文
-
-```text
-22.6 Summary of Key Points 993
-frequency (consider only open-loop operation). The load R is a linear resistance which
-can assume any positive value: 0≤R<∞.
-(a) Plot the output characteristics ( M vs. J), for all values of R in the range 0 ≤R<
-∞. Label mode boundaries, evaluate the short-circuit current, and give analytical
-expressions for the output characteristics.
-(b) Over what range of R (referred to the tank characteristic impedance R0) does the
-converter operate as intended, in the k= 2 discontinuous conduction mode?
-22.11 The parallel resonant converter as a single-phase high-quality rectiﬁer. It is desired to
-utilize a transformer-isolated parallel resonant dc–dc converter in a single-phase low-
-harmonic rectiﬁer system. By properly varying the converter switching frequency, a near-
-ideal rectiﬁer system that can be modeled as in Fig. 21.16 is obtained. You may utilize
-the results of Sect.22.5.2 to answer this problem. The parallel resonant tank network con-
-tains an isolation transformer having a 1: n turns ratio. You may use either approximate
-graphical analysis or computer iteration to answer parts (b) and (c).
-(a) Plot the normalized input characteristics (normalized input voltage m
-g = nvg/v vs.
-normalized input current jg = ignR0/v) of the parallel resonant converter, operated
-in the continuous conduction mode above resonance. Plot curves for F= fs/ f0 =
-1.0, 1.1, 1.2, 1.3, 1.5, and 2.0. Compare these characteristics with the desired linear
-resistive input characteristic vg/ig= Remulated.
-(b) The converter is operated open-loop, with F= 1.1. The applied normalized input
-voltage is a rectiﬁed sinusoid of unity magnitude: mg(t)=| sin(ωt)|.S k e t c ht h er e -
-sulting normalized input current waveform jg(t). Approximately how large is the
-peak current? The crossover dead time?
-(c) A feedback loop is now added, which regulates the input current to follow the input
-voltage such that ig(t)= vg(t)/Remulated. You may assume that the feedback loop oper-
-ates perfectly. For the caseRemulated = R0, and with the same appliedmg(t) waveform
-as in part (b), sketch the switching-frequency waveform for one ac line period [i.e.,
-show how the controller must vary F to regulate ig(t)]. What is the maximum value
-of F? Note: In practice, the converter would be designed to operate with a smaller
-peak value of jg, so that the switching-frequency variations would be better behaved.
-(d) Choose element values (tank inductance, tank capacitance, and transformer turns
-ratio) such that the converter of part (c) meets the following speciﬁcations:
-Ac input voltage 120 Vrms, 60 Hz
-Dc output voltage 42 V
-Average power 800 W
-Maximum switching frequency 200 kHz
-Refer the element values to the primary side of the transformer.
-```
+将元件值折算到变压器初级侧。

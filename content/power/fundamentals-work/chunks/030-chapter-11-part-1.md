@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第11章part 1 - 11 Inductor Design"
+title: "第11章 电感设计（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1023 +18,527 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第11章part 1 - 11 Inductor Design
+# 第11章 电感设计（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 468-487  
-> Chunk ID: `chapter-11-part-1`
+> 源页：468–487
+> 本部分涵盖 11.1 滤波电感设计约束、11.2 $K_g$ 方法、11.3 多绕组磁性器件设计、11.4 示例。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+本章用几何常数（$K_g$）方法处理滤波电感等磁性元件的设计。此方法中最大磁通密度 $B_{max}$ 预先指定，元件设计以达到给定铜损。
 
-## 术语表
+11.1 和 11.1.5 节讨论基本滤波电感的设计。滤波电感应用中需获得所需电感、避免饱和、获得可接受的低直流绕组电阻和铜损。几何常数 $K_g$ 是直流铜损和绕组电阻为主导约束时磁芯有效磁尺寸的度量 [4, 99]。滤波电感设计涉及选择 $K_g$ 足够大的磁芯，然后计算所需气隙、匝数和线径。给出首轮滤波电感设计步骤。常用铁氧体磁芯形状的 $K_g$ 值列于附录 B。实际中 $K_g$ 方法可用于求得电感设计的起始估计。然后检查绕组几何细节并计算所有损耗。设计迭代可进一步优化设计。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+11.3 节覆盖 $K_g$ 方法向多绕组元件的扩展。需要多绕组的应用中须优化绕组线径使总铜损最小。还须写出峰值磁通密度与施加波形或所需绕组电感关系的方程。同样给出简单的逐步变压器设计方法。
 
-## 中文翻译
+本章 $K_g$ 方法的目标是设计具有给定铜损的磁性器件。$K_g$ 方法中不专门处理铁损，$B_{max}$ 是给定固定值。下一章将磁通密度视为待优化的设计变量。这使总损耗（铁损加铜损）可最小化。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+## 11.1 滤波电感设计约束
 
-## 英文原文
+CCM 降压变换器中使用的滤波电感如图11.1a所示。此应用中电感 $L$ 的值通常选择使电感电流纹波峰值幅值 $\Delta i$ 为满载电感电流直流分量 $I$ 的小部分，如图11.1b所示。如图11.2所示，使用足够大的气隙以防止峰值电流 $I + \Delta i$ 使磁芯饱和。
 
-```text
-11
-Inductor Design
-This chapter treats the design of magnetic elements such as ﬁlter inductors, using the geomet-
-rical constant ( Kg) method. With this method, the maximum ﬂux density Bmax is speciﬁed in
-advance, and the element is designed to attain a given copper loss.
-The design of a basic ﬁlter inductor is discussed in Sects. 11.1 and 11.1.5. In the ﬁlter
-inductor application, it is necessary to obtain the required inductance, avoid saturation, and
-obtain an acceptable low dc winding resistance and copper loss. The geometrical constantKg is
-a measure of the eﬀective magnetic size of a core, when dc copper loss and winding resistance
-are the dominant constraints [ 4, 99]. Design of a ﬁlter inductor involves selection of a core
-having a Kg suﬃciently large for the application, then computing the required air gap, turns,
-and wire size. A ﬁrst-pass ﬁlter inductor design procedure is given. Values of Kg for common
-ferrite core shapes are tabulated in Appendix B. In practice, the Kg method might be employed
-to ﬁnd a starting estimate of an inductor design. Details of the winding geometry would be
-examined, and all losses computed. Design iterations can then further optimize the design.
-Extension of the Kg method to multiple-winding elements is covered in Sect. 11.3. In appli-
-cations requiring multiple windings, it is necessary to optimize the wire sizes of the windings
-so that the overall copper loss is minimized. It is also necessary to write an equation that relates
-the peak ﬂux density to the applied waveforms or to the desired winding inductance. Again, a
-simple step-by-step transformer design approach is given.
-The goal of theKg approach of this chapter is the design of a magnetic device having a given
-copper loss. Core loss is not speciﬁcally addressed in theKg approach, and Bmax is a given ﬁxed
-value. In the next chapter, the ﬂux density is treated as a design variable to be optimized. This
-allows the overall loss (i.e., core loss plus copper loss) to be minimized.
-11.1 Filter Inductor Design Constraints
-A ﬁlter inductor employed in a CCM buck converter is illustrated in Fig. 11.1a. In this appli-
-cation, the value of inductance L is usually chosen such that the inductor current ripple peak
-magnitudeΔi is a small fraction of the full-load inductor current dc component I, as illustrated
-in Fig. 11.1b. As illustrated in Fig. 11.2, an air gap is employed that is suﬃciently large to pre-
-vent saturation of the core by the peak current I+Δi.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_11
-459
+![源页 p.469](../assets/page-snapshots/chapter-11/page-469.png)
 
-460 11 Inductor Design
-(a)
-+
-L
-i(t)
-(b) i(t)
-t0 DTs Ts
-I iL
-Fig. 11.1 Filter inductor employed in a CCM buck converter: (a) circuit schematic, (b) inductor current
-waveform
-Fig. 11.2 Filter inductor: (a) structure, (b) magnetic circuit model
-Let us consider the design of the ﬁlter inductor illustrated in Figs. 11.1 and 11.2.I t
-is assumed that the core and proximity losses are negligible, so that the inductor losses
-Fig. 11.3 Filter inductor
-equivalent circuit
-are dominated by the low-frequency copper losses. The inductor
-can therefore be modeled by the equivalent circuit of Fig.11.3,i n
-which R represents the dc resistance of the winding. It is desired
-to obtain a given inductance L and given winding resistance R.
-The inductor should not saturate when a given worst-case peak
-current Imax is applied. Note that speciﬁcation of R is equivalent
-to speciﬁcation of the copper loss Pcu, since
-Pcu= I2
-rms R (11.1)
-The inﬂuence of inductor winding resistance on converter e ﬃ-
-ciency and output voltage is modeled in Chap. 3.
+图11.1 CCM 降压变换器中的滤波电感：(a) 电路原理图；(b) 电感电流波形
 
-11.1 Filter Inductor Design Constraints 461
-Fig. 11.4 Filter inductor: (a) assumed geometry, (b) magnetic circuit
-It is assumed that the inductor geometry is topologically equivalent to Fig. 11.4a. An equiv-
-alent magnetic circuit is illustrated in Fig. 11.4b. The core reluctance Rc and air gap reluctance
-Rg are
-Rc= ℓc
-μcAc
-Rg= ℓg
-μ0Ac
-(11.2)
-whereℓc is the core magnetic path length, Ac is the core cross-sectional area, μc is the core
-permeability, andℓg is the air gap length. It is assumed that the core and air gap have the same
-cross-sectional areas. Solution of Fig. 11.4b yields
-ni=Φ(Rc+ Rg) (11.3)
-Usually, Rc≪ Rg, and hence Eq. (11.3) can be approximated as
-ni≈ΦRg (11.4)
-The air gap dominates the inductor properties. Four design constraints now can be identiﬁed.
-11.1.1 Maximum Flux Density
-Given a peak winding current Imax, it is desired to operate the core ﬂux density at a maximum
-value Bmax .T h ev a l u eo fBmax is chosen to be less than the worst-case saturation ﬂux density
-Bsat of the core material.
-Substitution ofΦ=BAc into Eq. (11.4) leads to
-ni= BAcRg (11.5)
-Upon letting I= Imax and B= Bmax , we obtain
-nImax = Bmax AcRg= Bmax
-ℓg
-μ0
-(11.6)
-This is the ﬁrst design constraint. The turns ratio n and the air gap lengthℓg are unknowns.
+![源页 p.469](../assets/page-snapshots/chapter-11/page-469.png)
 
-462 11 Inductor Design
-11.1.2 Inductance
-The given inductance value L must be obtained. The inductance is equal to
-L= n2
-Rg
-= μ0Acn2
-ℓg
-(11.7)
-This is the second design constraint. The turns ratio n, core area Ac, and gap length ℓg are
-unknown.
-Fig. 11.5 The winding must ﬁt in
-the core window area
-Core window
-area WA
-Wire bare area
-AW
-Core
-11.1.3 Winding Area
-As illustrated in Fig. 11.5, the winding must ﬁt through the window, i.e., the hole in the center
-of the core. The cross-sectional area of the conductor, or bare area, is AW . If the winding has n
-turns, then the area of copper conductor in the window is
-nAW (11.8)
-If the core has window area WA, then we can express the area available for the winding conduc-
-tors as
-KuWA (11.9)
-where Ku is the window utilization factor,o r ﬁll factor. Hence, the third design constraint can
-be expressed as
-KuWA≥nAW (11.10)
-The ﬁll factor Ku is the fraction of the core window area that is ﬁlled with copper. Ku must
-lie between zero and one. As discussed in [99], there are several mechanism that cause Ku to be
-less than unity. Round wire does not pack perfectly; this reduces Ku by a factor of 0.7 to 0.55,
-depending on the winding technique. The wire has insulation; the ratio of wire conductor area
-to total wire area varies from approximately 0.95 to 0.65, depending on the wire size and type
-of insulation. The bobbin uses some of the window area. Insulation may be required between
-windings and/or winding layers. Typical values of K
-u for cores with winding bobbins are 0.5
-for a simple low-voltage inductor, 0.25 to 0.3 for an o ﬀ-line transformer, 0.05 to 0.2 for a
-high-voltage transformer supplying several kV , and 0.65 for a low-voltage foil transformer or
-inductor.
+图11.2 滤波电感：(a) 结构；(b) 磁路模型
 
-11.1 Filter Inductor Design Constraints 463
-11.1.4 Winding Resistance
-The resistance of the winding is
-R= ρℓb
-AW
-(11.11)
-where ρis the resistivity of the conductor material, ℓb is the length of the wire, and AW is the
-wire bare area. The resistivity of copper at room temperature is 1.724· 10−6Ω-cm. The length
-of the wire comprising an n-turn winding can be expressed as
-ℓb= n(MLT) (11.12)
-where (MLT) is the mean-length-per-turn of the winding. The mean-length-per-turn is a function
-of the core geometry. Substitution of Eq. (11.12)i n t o(11.11) leads to
-R= ρn(MLT)
-AW
-(11.13)
-This is the fourth constraint.
-11.1.5 The Core Geometrical Constant Kg
-The four constraints, Eqs. (11.6), (11.7), (11.10), and (11.13), involve the quantitiesAc, WA, and
-MLT, which are functions of the core geometry, the quantities Imax, Bmax,μ0, L, Ku, R, and ρ,
-which are given speciﬁcations or other known quantities, andn,ℓ g, and AW , which are unknowns.
-Elimination of the unknowns n,ℓ g, and AW leads to the following equation:
-A2
-c WA
-(MLT)≥ρL2I2
-max
-B2max RKu
-(11.14)
-The quantities on the right side of this equation are speciﬁcations or other known quantities.
-The left side of the equation is a function of the core geometry alone. It is necessary to choose
-a core whose geometry satisﬁes Eq. (11.14).
-The quantity
-Kg= A2
-c WA
-(MLT) (11.15)
-is called the core geometrical constant. It is a ﬁgure-of-merit that describes the e ﬀective elec-
-trical size of magnetic cores, in applications where copper loss and maximum ﬂux density are
-speciﬁed. Tables are included in Appendix B that lists the values of K
-g for several standard
-families of ferrite cores. Kg has dimensions of length to the ﬁfth power.
-Equation (11.14) reveals how the speciﬁcations aﬀect the core size. Increasing the induc-
-tance or peak current requires an increase in core size. Increasing the peak ﬂux density allows
-a decrease in core size, and hence it is advantageous to use a core material that exhibits a high
-saturation ﬂux density. Allowing a larger winding resistance R, and hence larger copper loss,
-leads to a smaller core. Of course, the increased copper loss and smaller core size will lead to a
-higher temperature rise, which may be unacceptable. The ﬁll factor K
-u also inﬂuences the core
-size.
-Equation (11.15) reveals how core geometry aﬀects the core capabilities. An inductor capa-
-ble of meeting increased electrical requirements can be obtained by increasing either the core
+考虑图11.1 和11.2 所示滤波电感的设计。假定铁损和邻近损耗可忽略，故电感损耗由低频铜损主导。故电感可用图11.3 的等效电路建模，其中 $R$ 表示绕组直流电阻。希望获得给定电感 $L$ 和给定绕组电阻 $R$。施加给定最坏情况峰值电流 $I_{max}$ 时电感不应饱和。注意指定 $R$ 等价于指定铜损 $P_{cu}$，因为
 
-464 11 Inductor Design
-area Ac, or the window area WA. Increase of the core area requires additional iron core material.
-Increase of the window area implies that additional copper winding material is employed. We
-can trade iron for copper, or vice versa, by changing the core geometry in a way that maintains
-the Kg of Eq. (11.15).
-11.2 The Kg Method: A First-Pass Design
-The procedure developed in Sect. 11.1 is summarized below. This simple ﬁlter inductor de-
-sign procedure should be regarded as a ﬁrst-pass approach. Numerous issues have been ne-
-glected, including detailed insulation requirements, conductor eddy current losses, temperature
-rise, roundoﬀof number of turns, etc.
-The following quantities are speciﬁed, using the units noted:
-Wire resistivity ρ (Ω-cm)
-Peak winding current Imax (A)
-Inductance L (H)
-Winding resistance R (Ω)
-Winding ﬁll factor Ku
-Maximum operating ﬂux density Bmax (T)
-The core dimensions are expressed in cm:
-Core cross-sectional area Ac (cm2)
-Core window area WA (cm2)
-Mean length per turn MLT (cm)
-The use of centimeters rather than meters requires that appropriate factors be added to the
-design equations.
-1. Determine core size
-Kg≥ρL2I2
-max
-B2maxRKu
-108 (cm5) (11.16)
-Choose a core which is large enough to satisfy this inequality. Note the values of Ac, WA, and
-MLT for this core. The resistivity ρof copper wire is 1.724· 10−6Ω-cm at room temperature,
-and 2.3· 10−6Ω-cm at 100◦C.
-2. Determine number of turns
-n= LImax
-Bmax Ac
-104 (11.17)
-with Ac expressed in cm2 and Bmax expressed in T.
-3. Determine air gap length
-ℓg= μ0Acn2
-L 10−4 (m) (11.18)
-with Ac expressed in cm2. The permeability of free space is μ0 = 4π· 10−7 H/m. The air gap
-length is given in meters. The value expressed in Eq. (11.18) is approximate, and neglects fring-
-ing ﬂux and other nonidealities. Generally fringing ﬂux increases the inductance, and hence a
-somewhat longer gap would be needed to achieve the speciﬁed inductance.
+$$P_{cu} = I_{rms}^2 R \tag{11.1}$$
 
-11.3 Multiple-Winding Magnetics Design via the Kg Method 465
-Core manufacturers sell gapped cores. Rather than specifying the air gap length, the equiva-
-lent quantity AL is used. AL is equal to the inductance, in mH, obtained with a winding of 1000
-turns. When AL is speciﬁed, it is the core manufacturer’s responsibility to obtain the correct gap
-length. Equation (11.18) can be modiﬁed to yield the required AL, as follows:
-AL= 10B2
-max A2
-c
-LI2
-max
-(mH/1000 turns) (11.19)
-where Ac is given in cm2, L is given in Henries, and Bmax is given in Tesla.
-4. Evaluate wire size
-AW ≤KuWA
-n (cm2) (11.20)
-Select wire with bare copper area less than or equal to this value. An American Wire Gauge
-table is included in Appendix B.
-As a check, the winding resistance can be computed:
-R= ρn(MLT)
-Aw
-(Ω) (11.21)
-11.3 Multiple-Winding Magnetics Design via the Kg Method
-The Kg method can be extended to the case of multiple-winding magnetics, such as the trans-
-formers and coupled inductors described in Sects. 10.5.3 to 10.5.5. The desired turns ratios, as
-well as the desired winding voltage and current waveforms, are speciﬁed. In the case of a cou-
-pled inductor or ﬂyback transformer, the magnetizing inductance is also speciﬁed. It is desired
-to select a core size, number of turns for each winding, and wire sizes. It is also assumed that
-the maximum ﬂux density Bmax is given.
-With the Kg method, a desired copper loss is attained. In the multiple-winding case, each
-winding contributes some copper loss, and it is necessary to allocate the available window area
-among the various windings. In Sect.11.3.1 below, it is found that total copper loss is minimized
-if the window area is divided between the windings according to their apparent powers. This
-result is employed in the following sections, in which an optimized Kg method for coupled
-inductor design is developed.
-11.3.1 Window Area Allocation
-The ﬁrst issue to settle in design of a multiple-winding magnetic device is the allocation of the
-window area AW among the various windings. It is desired to design a device havingk windings
-with turns ratios n1 : n2 :... : nk. These windings must conduct rms currents I1, I2,..., Ik
-respectively. It should be noted that the windings are eﬀectively in parallel: the winding voltages
-are ideally related by the turns ratios
-v1(t)
-n1
-= v2(t)
-n2
-=··· = vk(t)
-nk
-(11.22)
-However, the winding rms currents are determined by the loads, and in general are not related
-to the turns ratios. The device is represented schematically in Fig. 11.6.
+第3章建模了电感绕组电阻对变换器效率和输出电压的影响。
 
-466 11 Inductor Design
-Fig. 11.6 It is desired to optimally allocate the win-
-d o wa r e ao fak–winding magnetic element to min-
-imize low-frequency copper losses, with given rms
-winding currents and turns ratios
-n1 : n2
-: nk
-rms current
-I1
-rms current
-I2
-rms current
-Ik
-Fig. 11.7 Basic core topology, in-
-cluding window area WA enclosed by
-core (a). The window is allocated to
-the various windings (b) to minimize
-low-frequency copper loss
-(a) Core
-Window area WA
-Core mean length
-per turn (MLT)
-Wire resistivity 
-Fill factor Ku
-(b)
-Total window
-area WA
-Winding 1 allocation
-1WA
-Winding 2 allocation
-2WA
-etc.
-{
-{
-The relevant geometrical parameters are summarized in Fig.11.7a. It is necessary to allocate
-a portion of the total window areaWA to each winding, as illustrated in Fig.11.7b. Let α j be the
-fraction of the window area allocated to winding j, where
-0< α j< 1
-α 1+ α 2+··· + α k= 1 (11.23)
-The low-frequency copper lossPcu, j in winding j depends on the dc resistanceRj of winding
-j, as follows:
-Pcu, j= I2
-j Rj (11.24)
-The resistance of winding j is
-Rj= ρℓj
-AW, j
-(11.25)
+![源页 p.469](../assets/page-snapshots/chapter-11/page-469.png)
 
-11.3 Multiple-Winding Magnetics Design via the Kg Method 467
-where ρis the wire resistivity,ℓj is the length of the wire used for winding j, and AW, j is the
-cross-sectional area of the wire used for winding j. These quantities can be expressed as
-ℓj= nj(MLT) (11.26)
-AW, j= WAKuα j
-nj
-(11.27)
-where (MLT) is the winding mean-length-per-turn, andKu is the winding ﬁll factor. Substitution
-of these expressions into Eq. (11.25) leads to
-Rj= ρ
-n2
-j (MLT)
-WAKuα j
-(11.28)
-The copper loss of winding j is therefore
-Pcu, j=
-n2
-j i2
-jρ(MLT)
-WAKuα j
-(11.29)
-The total copper loss of the k windings is
-Pcu,tot= Pcu,1+ Pcu,2+··· + Pcu,k= ρ(MLT)
-WAKu
-k∑
-j=1
-⎛⎜⎜⎜⎜⎜⎝
-n2
-j I2
-j
-α j
-⎞⎟⎟⎟⎟⎟⎠ (11.30)
-It is desired to choose theα js such that the total copper lossPcu,tot is minimized. Let us consider
-what happens when we vary one of the α s, say α 1, between 0 and 1.
-When α 1 = 0, then we allocate zero area to winding 1. In consequence, the resistance
-of winding 1 tends to inﬁnity. The copper loss of winding 1 also tends to inﬁnity. On the other
-hand, the other windings are given maximum area, and hence their copper losses can be reduced.
-Nonetheless, the total copper loss tends to inﬁnity.
-When α
-1 = 1, then we allocate all of the window area to winding 1, and none to the other
-windings. Hence, the resistance of winding 1, as well as its low-frequency copper loss, is mini-
-mized. But the copper losses of the remaining windings tend to inﬁnity.
-As illustrated in Fig. 11.8, there must be an optimum value of α 1 that lies between these
-two extremes, where the total copper loss is minimized. Let us compute the optimum values of
-α 1, α 2,..., α k using the method of Lagrange multipliers. It is desired to minimize Eq. ( 11.30),
-subject to the constraint of Eq. (11.23). Hence, we deﬁne the function
-Fig. 11.8 Variation of copper losses
-withα1
-1
-Copper
-loss
-10
-Pcu,tot
-P
-cu,
-1
-Pcu,2
-+Pcu,3
-+...+
-Pcu,k
+图11.3 滤波电感等效电路
 
-468 11 Inductor Design
-f (α 1, α 2,··· , α k,ξ)= Pcu,tot(α 1, α 2,··· , α k)+ξg(α 1, α 2,··· , α k) (11.31)
-where
-g(α 1, α 2,··· , α k)= 1−
-k∑
-j=1
-α j (11.32)
-is the constraint that must equal zero, and ξis the Lagrange multiplier. The optimum point is
-the solution of the system of equations
-∂f (α 1, α 2,··· , α k,ξ)
-∂α 1
-= 0
-∂f (α 1, α 2,··· , α k,ξ)
-∂α 2
-= 0
-..
-. (11.33)
-∂f (α
-1, α 2,··· , α k,ξ)
-∂α k
-= 0
-∂f (α 1, α 2,··· , α k,ξ)
-∂ξ = 0
-T h es o l u t i o ni s
-ξ= ρ(MLT)
-WAKu
-⎛⎜⎜⎜⎜⎜⎜⎝
-k∑
-j=1
-njIj
-⎞⎟⎟⎟⎟⎟⎟⎠
-2
-= Pcu,tot (11.34)
-α m= nmIm
-k∑
-j=1
-njIj
-(11.35)
-This is the optimal choice for the α s, and the resulting minimum value of Pcu,tot.
-According to Eq. (11.22), the winding voltages are proportional to the turns ratios. Hence,
-we can express the α ms in the alternate form
-α m= VmIm
-k∑
-j=1
-VjIj
-(11.36)
-by multiplying and dividing Eq. (11.35) by the quantity Vm/nm. It is irrelevant whether rms or
-peak voltages are used. Equation ( 11.36) is the desired result. It states that the window area
-should be allocated to the various windings in proportion to their apparent powers. The numer-
-ator of Eq. (11.36) is the apparent power of winding m, equal to the product of the rms current
-and the voltage. The denominator is the sum of the apparent powers of all windings.
-As an example, consider the PWM full-bridge transformer having a center-tapped secondary,
-as illustrated in Fig. 11.9. This can be viewed as a three-winding transformer, having a single
-primary-side winding of n
-1 turns, and two secondary-side windings, each ofn2 turns. The wind-
-ing current waveforms i1(t), i2(t), and i3(t) are illustrated in Fig. 11.10. Their rms values are
+![源页 p.470](../assets/page-snapshots/chapter-11/page-470.png)
 
-11.3 Multiple-Winding Magnetics Design via the Kg Method 469
-Ii1(t)
-n1 turns { } n2 turns
-} n2 turns
-i2(t)
-i3(t)
-Fig. 11.9 PWM full-bridge transformer example
-Fig. 11.10 Transformer wave-
-forms, PWM full-bridge trans-
-former example
-n2
-n1
-I
-t
-i1(t)
-00
-n2
-n1
-I
-i2(t) I
-0.5I 0.5I
-0
-i3(t) I
-0.5I 0.5I
-0
-0 DTs Ts 2TsTs +DTs
-I1=
-√
-1
-2Ts
-∫ 2TS
-0
-i2
-1(t)dt= n2
-n1
-I
-√
-D (11.37)
-I2= I3=
-√
-1
-2Ts
-∫ 2TS
-0
-i2
-2(t)dt= 1
-2 I
-√
-1+ D (11.38)
-Substitution of these expressions into Eq. (11.35) yields
-α 1= 1
-⎛⎜⎜⎜⎜⎝1+
-√
-1+ D
-D
-⎞⎟⎟⎟⎟⎠
-(11.39)
-α 2= α 3= 1
-2
-1
-⎛⎜⎜⎜⎜⎝1+
-√
-D
-1+ D
-⎞⎟⎟⎟⎟⎠
-(11.40)
-If the design is to be optimized at the operating point D= 0.75, then one obtains
-α 1= 0.396
-α 2= 0.302 (11.41)
-α 3= 0.302
+图11.4 滤波电感：(a) 假定几何；(b) 磁路
 
-470 11 Inductor Design
-So approximately 40% of the window area should be allocated to the primary winding, and
-30% should be allocated to each half of the center-tapped secondary. The total copper loss at
-this optimal design point is found from evaluation of Eq. (11.34):
-Pcu,tot= ρ(MLT)
-WAKu
-⎛⎜⎜⎜⎜⎜⎜⎝
-3∑
-j=1
-njIj
-⎞⎟⎟⎟⎟⎟⎟⎠
-2
-= ρ(MLT)n2
-2I2
-WAKu
-⎦
-1+ 2D+ 2
-√
-D(1+ D)
-)
-(11.42)
-11.3.2 Coupled Inductor Design Constraints
-Let us now consider how to design a k-winding coupled inductor, as discussed in Sect. 10.5.4
-and illustrated in Fig. 11.11. It is desired that the magnetizing inductance be a speciﬁed value
-LM, referred to winding 1. It is also desired that the numbers of turns for the other windings be
-chosen according to desired turns ratios. When the magnetizing current iM(t) reaches its maxi-
-mum value IM,max, the coupled inductor should operate with a given maximum ﬂux densityBmax.
-With rms currents I1, I2,..., Ik applied to the respective windings, the total copper loss should
-be a desired value Pcu given by Eq. (11.34). Hence, the design procedure involves selecting the
-core size and number of primary turns so that the desired magnetizing inductance, the desired
-ﬂux density, and the desired total copper loss are achieved. Other quantities, such as air gap
-length, secondary turns, and wire sizes, can then be selected. The derivation follows the deriva-
-tion for the single-winding case (Sect. 11.1), and incorporates the window area optimization of
-Sect. 11.3.1.
-The magnetizing current iM(t) can be expressed in terms of the winding currents i1(t), i2(t),
-..., ik(t) by solution of Fig. 11.11a (or by use of Ampere’s Law), as follows:
-iM(t)= i1(t)+ n2
-n1
-i2(t)+··· + nk
-n1
-ik(t) (11.43)
-Fig. 11.11 A k–winding magnetic device, with speciﬁed turns ratios and waveforms: (a) electrical circuit
-model, (b) magnetic circuit model
+假定电感几何拓扑等价于图11.4a。等效磁路如图11.4b所示。磁芯磁阻 $\mathcal{R}_c$ 和气隙磁阻 $\mathcal{R}_g$ 为
 
-11.3 Multiple-Winding Magnetics Design via the Kg Method 471
-By solution of the magnetic circuit model of Fig. 11.11b, we can write
-n1iM(t)= B(t)Ac· Rg (11.44)
-This equation is analogous to Eq. ( 11.4), and assumes that the reluctance Rg of the air gap is
-much larger than the reluctance Rc of the core. As usual, the total ﬂux Φ(t) is equal to B(t)Ac.
-Leakage inductances are ignored.
-To avoid saturation of the core, the instantaneous ﬂux density B(t) must be less than the
-saturation ﬂux density of the core material, Bsat. Let us deﬁne IM,max as the maximum value
-of the magnetizing current iM(t). According to Eq. ( 11.44), this will lead to a maximum ﬂux
-density Bmax given by
-n1IM,max = Bmax Ac· Rg= Bmax
-ℓg
-μ0
-(11.45)
-For a value of IM,max given by the circuit application, we should use Eq. ( 11.45) to choose the
-turns n1 and gap length ℓg such that the maximum ﬂux density Bmax is less than the satura-
-tion density Bsat. Equation (11.45) is similar to Eq. (11.6), but accounts for the magnetizations
-produced by multiple-winding currents.
-The magnetizing inductance LM, referred to winding 1, is equal to
-LM = n2
-1
-Rg
-= n2
-1
-μ0Ac
-ℓg
-(11.46)
-This equation is analogous to Eq. (11.7).
-As shown in Sect. 11.3.1, the total copper loss is minimized when the core window areaWA
-is allocated to the various windings according to Eq. (11.35)o r( 11.36). The total copper loss is
-then given by Eq. (11.34). Equation (11.34) can be expressed in the form
-Pcu= ρ(MLT)n2
-1I2
-tot
-WAKu
-(11.47)
-where
-Itot=
-k∑
-j=1
-nj
-n1
-Ij (11.48)
-is the sum of the rms winding currents, referred to winding 1.
-We can now eliminate the unknown quantities ℓg and n1 from Eqs. ( 11.45), ( 11.46),
-and (11.47). Equation (11.47) then becomes
-Pcu=
-ρ(MLT)L2
-M I2
-totI2
-M,max
-B2maxA2
-c
-WAKu
-(11.49)
-We can now rearrange this equation, by grouping terms that involve the core geometry on the
-left-hand side, and speciﬁcations on the right-hand side:
-A2
-c WA
-(MLT)=
-ρL2
-M I2
-totI2
-M,max
-B2maxKuPcu
-(11.50)
-The left-hand side of the equation can be recognized as the sameKg term deﬁned in Eq. (11.15).
-Therefore, to design a coupled inductor that meets the requirements of operating with a given
+$$\mathcal{R}_c = \frac{\ell_c}{\mu_c A_c}, \quad \mathcal{R}_g = \frac{\ell_g}{\mu_0 A_c} \tag{11.2}$$
 
-472 11 Inductor Design
-maximum ﬂux density Bmax, given primary magnetizing inductance LM, and with a given total
-copper loss Pcu, we must select a core that satisﬁes
-Kg≥
-ρL2
-M I2
-totI2
-M,max
-B2maxKuPcu
-(11.51)
-Once such a core is found, then the winding 1 turns and gap length can be selected to satisfy
-Eqs. (11.45) and (11.46). The turns of windings 2 throughk are selected according to the desired
-turns ratios. The window area is allocated among the windings according to Eq. (11.35), and the
-wire gauges are chosen using Eq. (11.27).
-The procedure above is applicable to design of coupled inductors. The results are applicable
-to design of ﬂyback and SEPIC transformers as well, although it should be noted that the proce-
-dure does not account for the eﬀects of core or proximity loss. It also can be extended to design
-of other devices, such as conventional transformers—doing so is left as a homework problem.
-11.3.3 First-Pass Design Procedure
-The following quantities are speciﬁed, using the units noted:
-Wire eﬀective resistivity ρ (Ω-cm)
-Total rms winding currents, referred to winding 1 I
-tot=
-k∑
-j=1
-nj
-ni
-Ij (A)
-Peak magnetizing current, referred to winding 1 IM,max (A)
-Desired turns ratios n2/n1, n3/n1,e t c .
-Magnetizing inductance, referred to winding 1 LM (H)
-Allowed total copper loss Pcu (W)
-Winding ﬁll factor Ku
-Maximum operating ﬂux density Bmax (T)
-The core dimensions are expressed in cm:
-Core cross-sectional area Ac (cm2)
-Core window area WA (cm2)
-Mean length per turn MLT (cm)
-The use of centimeters rather than meters requires that appropriate factors be added to the
-design equations.
-1. Determine core size
-Kg≥
-ρL2
-M I2
-totI2
-M,max
-B2maxPcuKu
-108 (cm5) (11.52)
-Choose a core which is large enough to satisfy this inequality. Note the values of Ac, WA, and
-MLT for this core. The resistivity ρof copper wire is 1.724· 10−6Ω· cm at room temperature,
-and 2.3· 10−6Ω· cm at 100◦C.
+其中 $\ell_c$ 是磁芯磁路长度，$A_c$ 是磁芯截面积，$\mu_c$ 是磁芯磁导率，$\ell_g$ 是气隙长度。假定磁芯和气隙截面积相同。解图11.4b 得
 
-11.3 Multiple-Winding Magnetics Design via the Kg Method 473
-2. Determine air gap length
-ℓg=
-μ0LM I2
-M,max
-B2maxAc
-104 (m) (11.53)
-Here, Bmax is expressed in Tesla, Ac is expressed in cm 2, andℓg is expressed in meters. The
-permeability of free space is μ0 = 4π· 10−7 H/m. This value is approximate, and neglects
-fringing ﬂux and other nonidealities.
-3. Determine number of winding 1 turns
-n1= LM IM,max
-BmaxAc
-104 (11.54)
-Here, Bmax is expressed in Tesla and Ac is expressed in cm2.
-4. Determine number of secondary turns
-Use the desired turns ratios:
-n2=
-⎦n2
-n1
-)
-n1
-n3=
-⎦n3
-n1
-)
-n1
-...
-(11.55)
-5. Evaluate fraction of window area allocated to each winding
-α 1 = n1I1
-n1Itot
-α 2 = n2I2
-n1Itot
-(11.56)
-...
-α k = nk Ik
-n1Itot
-6. Evaluate wire sizes
-Aw1 ≤α 1KuWA
-n1
-Aw2 ≤α 2KuWA
-n2
-... (11.57)
-Select wire with bare copper area less than or equal to these values. An American Wire Gauge
-table is included in Appendix B.
+$$ni = \Phi(\mathcal{R}_c + \mathcal{R}_g) \tag{11.3}$$
 
-474 11 Inductor Design
-11.4 Examples
-11.4.1 Coupled Inductor for a Two-Output Forward Converter
-As a ﬁrst example, let us consider the design of coupled inductors for the two-output forward
-converter illustrated in Fig. 11.12. This element can be viewed as two ﬁlter inductors that are
-wound on the same core. The turns ratio is chosen to be the same as the ratio of the output
-voltages. The magnetizing inductance performs the function of ﬁltering the switching harmon-
-ics for both outputs, and the magnetizing current is equal to the sum of the reﬂected winding
-currents.
-(a)
-n1 +
-v1
-n2
-turns
-i1
-+
-v2
-i2
-+vg
-Output 1
-28 V
-4 A
-Output 2
-12 V
-2 Afs = 200 kHz
-(b)
-n1 : n2
-+
-v1
-i1
-+
-v2
-i2
-LMiM
-Coupled
-inductor
-model
-vM
-(c)
-iM(t)
-vM(t)
-IM
-0
-0
-1
-iM
-D Ts
-Fig. 11.12 Two-output forward converter example: ( a) circuit schematic, ( b) coupled inductor model
-inserted into converter secondary-side circuit, (c) magnetizing current and voltage waveforms of coupled
-inductor, referred to winding 1
-At the nominal full-load operating point, the converter operates in the continuous conduction
-mode with a duty cycle of D= 0.35. The switching frequency is 200 kHz. At this operating
-point, it is desired that the ripple in the magnetizing current have a peak magnitude equal to
-20% of the dc component of magnetizing current.
+通常 $\mathcal{R}_c \ll \mathcal{R}_g$，故式 (11.3) 可近似为
 
-11.4 Examples 475
-The dc component of the magnetizing current IM is
-IM = I1+ n2
-n1
-I2
-= (4 A)+ 12
-28(2 A) (11.58)
-= 4.86 A
-The magnetizing current rippleΔiM can be expressed as
-ΔiM = V1D′Ts
-2LM
-(11.59)
-Since we wantΔiM to be equal to 20% of IM, we should choose LM as follows:
-LM = V1D′Ts
-2ΔiM
-= (28 V)(1−0.35)(5 μs)
-2(4.86 A)(20%) (11.60)
-= 47 μH
-The peak magnetizing current, referred to winding 1, is therefore
-IM,max= IM+ΔiM = 5.83 A (11.61)
-Since the current ripples of the winding currents are small compared to the respective dc com-
-ponents, the rms values of the winding currents are approximately equal to the dc components:
-I1= 4A, I2= 2 A. Therefore, the sum of the rms winding currents, referred to winding 1, is
-Itot= I1+ n2
-n1
-I2= 4.86 A (11.62)
-For this design, it is decided to allow 0.75 W of copper loss, and to operate the core at a max-
-imum ﬂux density of 0.25 Tesla. A ﬁll factor of 0.4 is assumed. The required Kg is found by
-evaluation of Eq. (11.52), as follows:
-Kg≥(1.724· 10−6Ω−cm)(47 μH)2(4.86 A)2(5.83 A)2
-(0.25 T)2(0.75 W)(0.4) 108 (11.63)
-= 16· 10−3 cm5
-A ferrite PQ 20/16 core is selected, which has a Kg of 22.4· 10−3 cm5. From Appendix B,t h e
-geometrical parameters for this core are Ac= 0.62 cm2, WA= 0.256 cm2, and MLT= 4.4c m .
-The air gap is found by evaluation of Eq. (11.53) as follows:
-ℓg=
-μ0LM I2
-M,max
-B2maxAc
-104
-= (4π· 10−7H/m)(47 μH)(5.83 A)2
-(0.25 T)2(0.62 cm2) 104 (11.64)
-= 0.52 mm
+$$ni \approx \Phi\mathcal{R}_g \tag{11.4}$$
 
-476 11 Inductor Design
-In practice, a slightly longer air gap would be necessary, to allow for the eﬀects of fringing ﬂux
-and other nonidealities. The winding 1 turns are found by evaluation of Eq. (11.54):
-n1 = LM IM,max
-BmaxAc
-104
-= (47 μH)(5.83 A)
-(0.25 T)(0.62 cm2)104 (11.65)
-= 17.6 turns
-The winding 2 turns are chosen according to the desired turns ratio:
-n2 =
-⎦n2
-n1
-)
-n1
-=
-⎦12
-28
-)
-(17.6) (11.66)
-= 7.54 turns
-The numbers of turns are rounded oﬀto n1 = 17 turns, n2 = 7 turns (18:8 would be another
-possible choice). The window area WA is allocated to the windings according to the fractions
-from Eq. (11.56):
-α 1= n1I1
-n1Itot
-= (17)(4 A)
-(17)(4.86 A)= 0.8235
-α 2= n2I2
-n1Itot
-= (7)(2 A)
-(17)(4.86 A)= 0.1695
-(11.67)
-The wire sizes can therefore be chosen as follows:
-Aw1≤α 1KuWA
-n1
-= (0.8235)(0.4)(0.256 cm2)
-(17) = 4.96· 10−3 cm2
-use AWG #21
-(11.68)
-Aw2≤α 2KuWA
-n2
-= (0.1695)(0.4)(0.256 cm2)
-(7) = 2.48· 10−3 cm2
-use AWG #24
-11.4.2 CCM Flyback Transformer
-As a second example, let us design the ﬂyback transformer for the converter illustrated in
-Fig. 11.13. This converter operates with an input voltage of 200 V , and produces an full-load
-output of 20 V at 5 A. The switching frequency is 150 kHz. Under these operating conditions, it
-is desired that the converter operate in the continuous conduction mode, with a magnetizing cur-
-rent ripple equal to 20% of the dc component of magnetizing current. The duty cycle is chosen
-to be D= 0.4, and the turns ratio is n
-2/n1 = 0.15. A copper loss of 1.5 W is allowed, not in-
-cluding proximity eﬀect losses. To allow room for isolation between the primary and secondary
+气隙主导电感特性。现在可确定四个设计约束。
 
-11.4 Examples 477
-Fig. 11.13 Flyback transformer
-design example: (a)c o n v e r t e r
-schematic, (b) typical
-waveforms
-(a)
-+
-LM
-+
-V
-Vg
-Q1
-D1
-n1 : n2
-C
-Transformer model
-iMi1
-R
-+
-vM
-i2
-(b)
-vM(t)
-0
-Vg
-DTs
-iM(t)
-IM
-0
-iM
-i1(t)
-IM
-0
-i2(t)
-IM
-0
-n1
-n2
-windings, a ﬁll factor ofKu= 0.3 is assumed. A maximum ﬂux density ofBmax= 0.25 T is used;
-this value is less than the worst-case saturation ﬂux density Bsat of the ferrite core material.
-By solution of the converter using capacitor charge balance, the dc component of the mag-
-netizing current can be found to be
-IM =
-⎦n2
-n1
-) 1
-D′
-V
-R= 1.25 A (11.69)
-Hence, the magnetizing current ripple should be
-ΔiM = (20%)IM = 0.25 A (11.70)
+### 11.1.1 最大磁通密度
 
-478 11 Inductor Design
-and the maximum value of the magnetizing current is
-IM,max= IM+ΔiM = 1.5 A (11.71)
-To obtain this ripple, the magnetizing inductance should be
-LM = VgDTs
-2ΔiM
-(11.72)
-= 1.07 mH
-The rms value of the primary winding current is found using Eq. ( A.6) of Appendix A,a sf o l -
-lows:
-I1= IM
-√
-D
-√
-1+ 1
-3
-⎦ΔiM
-IM
-)2
-= 0.796 A (11.73)
-The rms value of the secondary winding current is found in a similar manner:
-I2= n1
-n2
-IM
-√
-D′
-√
-1+ 1
-3
-⎦ΔiM
-IM
-)2
-= 6.50 A (11.74)
-Note that I2 is not simply equal to the turns ratio multiplied byI1. The total rms winding current
-is equal to:
-Itot= I1+ n2
-n1
-I2= 1.77 A (11.75)
-We can now determine the necessary core size. Evaluation of Eq. (11.52) yields
-Kg ≥
-ρL2
-M I2
-totI2
-M,max
-B2maxPcuKu
-108
-= (1.724· 10−6Ω−cm)(1.07· 10−3 H)2(1.77 A)2(1.5A )2
-(0.25 T)2(1.5W ) ( 0.3) 108 (11.76)
-= 0.049 cm5
-The smallest EE core listed in Appendix B that satisﬁes this inequality is the EE30, which has
-Kg= 0.0857 cm5. The dimensions of this core are
-Ac 1.09 cm2
-WA 0.476 cm2
-MLT 6.6c m
-ℓm 5.77 cm
-(11.77)
-The air gap lengthℓg is chosen according to Eq. (11.53):
-ℓg =
-μ0LM I2
-M,max
-B2maxAc
-104
-= (4π· 10−7H/m)(1.07· 10−3 H)(1.5A )2
-(0.25 T)2(1.09 cm2) 104 (11.78)
-= 0.44 mm
-```
+给定峰值绕组电流 $I_{max}$，希望磁芯磁通密度在最大值 $B_{max}$ 工作。$B_{max}$ 选择小于磁芯材料的最坏情况饱和磁通密度 $B_{sat}$。
+
+将 $\Phi = BA_c$ 代入式 (11.4) 得
+
+$$ni = BA_c\mathcal{R}_g \tag{11.5}$$
+
+令 $I = I_{max}$ 和 $B = B_{max}$ 得
+
+$$nI_{max} = B_{max}A_c\mathcal{R}_g = B_{max}\frac{\ell_g}{\mu_0} \tag{11.6}$$
+
+这是第一个设计约束。匝比 $n$ 和气隙长度 $\ell_g$ 是未知量。
+
+### 11.1.2 电感
+
+须获得给定电感值 $L$。电感为
+
+$$L = \frac{n^2}{\mathcal{R}_g} = \frac{\mu_0 A_c n^2}{\ell_g} \tag{11.7}$$
+
+这是第二个设计约束。匝比 $n$、磁芯面积 $A_c$ 和气隙长度 $\ell_g$ 是未知量。
+
+![源页 p.471](../assets/page-snapshots/chapter-11/page-471.png)
+
+图11.5 绕组须装入磁芯窗口面积
+
+### 11.1.3 绕组面积
+
+如图11.5所示，绕组须穿过窗口即磁芯中心孔。导体的截面积即裸面积为 $A_W$。若绕组 $n$ 匝，则窗口中铜导体面积为
+
+$$nA_W \tag{11.8}$$
+
+若磁芯窗口面积为 $W_A$，则可用绕组导体面积表示为
+
+$$K_u W_A \tag{11.9}$$
+
+其中 $K_u$ 是窗口利用因子或填充因子。故第三个设计约束可表示为
+
+$$K_u W_A \ge nA_W \tag{11.10}$$
+
+填充因子 $K_u$ 是磁芯窗口面积中填充铜的比例。$K_u$ 须在 0 和 1 之间。如 [99] 所述，有多种机理使 $K_u$ 小于 1。圆线不能完美填充；这使 $K_u$ 降低 0.7 到 0.55 的因子，取决于绕组技术。导线有绝缘；导线导体面积与总导线面积之比约 0.95 到 0.65，取决于线径和绝缘类型。线轴占用部分窗口面积。绕组之间和/或绕组层之间可能需要绝缘。有线轴磁芯的 $K_u$ 典型值为：简单低压电感 0.5，离线变压器 0.25–0.3，供电数千伏的高压变压器 0.05–0.2，低压箔变压器或电感 0.65。
+
+### 11.1.4 绕组电阻
+
+绕组电阻为
+
+$$R = \frac{\rho\ell_b}{A_W} \tag{11.11}$$
+
+其中 $\rho$ 是导体材料电阻率，$\ell_b$ 是导线长度，$A_W$ 是导线裸面积。室温下铜的电阻率为 $1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$。$n$ 匝绕组导线长度可表示为
+
+$$\ell_b = n(\text{MLT}) \tag{11.12}$$
+
+其中 MLT 是绕组每匝平均长度。每匝平均长度是磁芯几何的函数。将式 (11.12) 代入 (11.11) 得
+
+$$R = \frac{\rho n(\text{MLT})}{A_W} \tag{11.13}$$
+
+这是第四个约束。
+
+### 11.1.5 磁芯几何常数 $K_g$
+
+四个约束 [式 (11.6)、(11.7)、(11.10)、(11.13)] 涉及作为磁芯几何函数的量 $A_c$、$W_A$、MLT；作为给定技术指标或其他已知量的量 $I_{max}$、$B_{max}$、$\mu_0$、$L$、$K_u$、$R$、$\rho$；以及未知量 $n$、$\ell_g$、$A_W$。消去未知量 $n$、$\ell_g$、$A_W$ 得如下方程：
+
+$$\frac{A_c^2 W_A}{(\text{MLT})} \ge \frac{\rho L^2 I_{max}^2}{B_{max}^2 R K_u} \tag{11.14}$$
+
+此方程右边的量是技术指标或其他已知量。左边仅为磁芯几何的函数。须选择几何满足式 (11.14) 的磁芯。
+
+量
+
+$$K_g = \frac{A_c^2 W_A}{(\text{MLT})} \tag{11.15}$$
+
+称为磁芯几何常数。它是描述指定铜损和最大磁通密度时磁芯有效电气尺寸的品质因数。附录 B 含若干标准铁氧体磁芯系列 $K_g$ 值的表。$K_g$ 的量纲为长度的五次方。
+
+式 (11.14) 揭示技术指标如何影响磁芯尺寸。增大电感或峰值电流需要增大磁芯尺寸。增大峰值磁通密度允许减小磁芯尺寸，故使用高饱和磁通密度的磁芯材料有利。允许更大绕组电阻 $R$（故更大铜损）导致更小磁芯。当然增大铜损和更小磁芯尺寸导致更高温升，可能不可接受。填充因子 $K_u$ 也影响磁芯尺寸。
+
+式 (11.15) 揭示磁芯几何如何影响磁芯能力。增大磁芯面积 $A_c$ 或窗口面积 $W_A$ 可获得满足更高电气要求的电感。增大磁芯面积需要更多铁芯材料。增大窗口面积意味着使用更多铜绕组材料。可通过改变磁芯几何在保持式 (11.15) $K_g$ 的方式中以铜换铁或反之。
+
+## 11.2 $K_g$ 方法：首轮设计
+
+11.1 节开发的步骤总结如下。此简单滤波电感设计步骤应视为首轮方法。忽略了许多问题，包括详细绝缘要求、导体涡流损耗、温升、匝数取整等。
+
+以下量按所示单位指定：
+
+- 导线电阻率 $\rho$（Ω-cm）
+- 峰值绕组电流 $I_{max}$（A）
+- 电感 $L$（H）
+- 绕组电阻 $R$（Ω）
+- 绕组填充因子 $K_u$
+- 最大工作磁通密度 $B_{max}$（T）
+
+磁芯尺寸以 cm 表示：
+
+- 磁芯截面积 $A_c$（cm²）
+- 磁芯窗口面积 $W_A$（cm²）
+- 每匝平均长度 MLT（cm）
+
+使用厘米而非米要求在设计方程中加入适当因子。
+
+**1. 确定磁芯尺寸**
+
+$$K_g \ge \frac{\rho L^2 I_{max}^2}{B_{max}^2 R K_u}\cdot 10^8\ (\text{cm}^5) \tag{11.16}$$
+
+选择足够大以满足此不等式的磁芯。记录此磁芯的 $A_c$、$W_A$、MLT。室温下铜线电阻率 $\rho = 1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$，100°C 时 $2.3\cdot 10^{-6}\,\Omega\cdot\text{cm}$。
+
+**2. 确定匝数**
+
+$$n = \frac{LI_{max}}{B_{max}A_c}\cdot 10^4 \tag{11.17}$$
+
+$A_c$ 以 cm² 表示，$B_{max}$ 以 T 表示。
+
+**3. 确定气隙长度**
+
+$$\ell_g = \frac{\mu_0 A_c n^2}{L}\cdot 10^{-4}\ (\text{m}) \tag{11.18}$$
+
+$A_c$ 以 cm² 表示。自由空间磁导率 $\mu_0 = 4\pi\cdot 10^{-7}\text{ H/m}$。气隙长度以米表示。式 (11.18) 给出的值是近似的，忽略边缘磁通和其他非理想性。通常边缘磁通增大电感，故需稍长气隙以达到指定电感。
+
+磁芯制造商销售带气隙磁芯。不用指定气隙长度而使用等价量 $A_L$。$A_L$ 等于 1000 匝绕组获得的电感（mH）。指定 $A_L$ 时由磁芯制造商负责获得正确气隙长度。式 (11.18) 可修改为产生所需 $A_L$，如下：
+
+$$A_L = \frac{10B_{max}^2 A_c^2}{LI_{max}^2}\ (\text{mH/1000 匝}) \tag{11.19}$$
+
+$A_c$ 以 cm² 给出，$L$ 以亨利给出，$B_{max}$ 以特斯拉给出。
+
+**4. 评估线径**
+
+$$A_W \le \frac{K_u W_A}{n}\ (\text{cm}^2) \tag{11.20}$$
+
+选择裸铜面积小于等于此值的导线。附录 B 含美国线规表。
+
+作为检查，可计算绕组电阻：
+
+$$R = \frac{\rho n(\text{MLT})}{A_w}\ (\Omega) \tag{11.21}$$
+
+## 11.3 多绕组磁性器件的 $K_g$ 方法设计
+
+$K_g$ 方法可扩展到多绕组磁性器件的情形，如 10.5.3 至 10.5.5 节所述的变压器和耦合电感。指定所需匝比以及绕组电压和电流波形。耦合电感或反激变压器情形中还指定磁化电感。希望选择磁芯尺寸、每绕组匝数和线径。还假定最大磁通密度 $B_{max}$ 已给定。
+
+$K_g$ 方法达到所需铜损。多绕组情形中每绕组贡献一些铜损，须在各绕组间分配可用窗口面积。11.3.1 节发现按视在功率分配窗口面积时总铜损最小。此结果用于以下各节开发耦合电感设计的优化 $K_g$ 方法。
+
+### 11.3.1 窗口面积分配
+
+多绕组磁性器件设计中须解决的首要问题是各绕组间窗口面积 $W_A$ 的分配。希望设计有匝比 $n_1 : n_2 : \ldots : n_k$ 的 $k$ 绕组器件。这些绕组分别导通方均根电流 $I_1, I_2, \ldots, I_k$。应注意绕组有效并联：绕组电压理想地由匝比关联
+
+$$\frac{v_1(t)}{n_1} = \frac{v_2(t)}{n_2} = \cdots = \frac{v_k(t)}{n_k} \tag{11.22}$$
+
+但绕组方均根电流由负载决定，一般与匝比无关。器件示意如图11.6所示。
+
+![源页 p.475](../assets/page-snapshots/chapter-11/page-475.png)
+
+图11.6 希望最优分配 $k$ 绕组磁性元件的窗口面积以最小化低频铜损，给定方均根绕组电流和匝比
+
+![源页 p.475](../assets/page-snapshots/chapter-11/page-475.png)
+
+图11.7 基本磁芯拓扑，含磁芯包围的窗口面积 $W_A$ (a)。窗口分配给各绕组 (b) 以最小化低频铜损
+
+相关几何参数汇总于图11.7a。须将总窗口面积 $W_A$ 的一部分分配给每绕组，如图11.7b所示。设 $\alpha_j$ 为分配给绕组 $j$ 的窗口面积比例，其中
+
+$$0 < \alpha_j < 1, \quad \alpha_1 + \alpha_2 + \cdots + \alpha_k = 1 \tag{11.23}$$
+
+绕组 $j$ 中的低频铜损 $P_{cu,j}$ 取决于绕组 $j$ 的直流电阻 $R_j$：
+
+$$P_{cu,j} = I_j^2 R_j \tag{11.24}$$
+
+绕组 $j$ 的电阻为
+
+$$R_j = \frac{\rho\ell_j}{A_{W,j}} \tag{11.25}$$
+
+其中 $\rho$ 是导线电阻率，$\ell_j$ 是绕组 $j$ 所用导线长度，$A_{W,j}$ 是绕组 $j$ 所用导线截面积。这些量可表示为
+
+$$\ell_j = n_j(\text{MLT}) \tag{11.26}$$
+
+$$A_{W,j} = \frac{W_A K_u \alpha_j}{n_j} \tag{11.27}$$
+
+其中 MLT 是绕组每匝平均长度，$K_u$ 是绕组填充因子。将这些表达式代入式 (11.25) 得
+
+$$R_j = \frac{\rho n_j^2(\text{MLT})}{W_A K_u \alpha_j} \tag{11.28}$$
+
+故绕组 $j$ 的铜损为
+
+$$P_{cu,j} = \frac{n_j^2 i_j^2 \rho(\text{MLT})}{W_A K_u \alpha_j} \tag{11.29}$$
+
+$k$ 绕组的总铜损为
+
+$$P_{cu,tot} = P_{cu,1} + P_{cu,2} + \cdots + P_{cu,k} = \frac{\rho(\text{MLT})}{W_A K_u}\sum_{j=1}^{k}\frac{n_j^2 I_j^2}{\alpha_j} \tag{11.30}$$
+
+希望选择 $\alpha_j$ 使总铜损 $P_{cu,tot}$ 最小。考虑变化某个 $\alpha$（如 $\alpha_1$）从 0 到 1 时的情况。
+
+$\alpha_1 = 0$ 时分配给绕组 1 的面积为零。结果绕组 1 的电阻趋向无穷。绕组 1 的铜损也趋向无穷。另一方面，其他绕组获得最大面积，故其铜损可减小。但总铜损趋向无穷。
+
+$\alpha_1 = 1$ 时所有窗口面积分配给绕组 1，其他绕组无。故绕组 1 的电阻及其低频铜损最小。但其余绕组的铜损趋向无穷。
+
+如图11.8所示，两极值之间必存在使总铜损最小的 $\alpha_1$ 最优值。用拉格朗日乘子法计算 $\alpha_1, \alpha_2, \ldots, \alpha_k$ 的最优值。希望最小化式 (11.30)，受式 (11.23) 约束。故定义函数
+
+![源页 p.476](../assets/page-snapshots/chapter-11/page-476.png)
+
+图11.8 铜损随 $\alpha_1$ 的变化
+
+$$f(\alpha_1, \alpha_2, \ldots, \alpha_k, \xi) = P_{cu,tot}(\alpha_1, \alpha_2, \ldots, \alpha_k) + \xi g(\alpha_1, \alpha_2, \ldots, \alpha_k) \tag{11.31}$$
+
+其中
+
+$$g(\alpha_1, \alpha_2, \ldots, \alpha_k) = 1 - \sum_{j=1}^{k}\alpha_j \tag{11.32}$$
+
+是须为零的约束，$\xi$ 是拉格朗日乘子。最优点是方程组的解
+
+$$\frac{\partial f}{\partial \alpha_1} = 0, \quad \frac{\partial f}{\partial \alpha_2} = 0, \quad \ldots, \quad \frac{\partial f}{\partial \alpha_k} = 0, \quad \frac{\partial f}{\partial \xi} = 0 \tag{11.33}$$
+
+解为
+
+$$\xi = \frac{\rho(\text{MLT})}{W_A K_u}\!\left(\sum_{j=1}^{k}n_j I_j\right)^2 = P_{cu,tot} \tag{11.34}$$
+
+$$\alpha_m = \frac{n_m I_m}{\sum_{j=1}^{k}n_j I_j} \tag{11.35}$$
+
+这是 $\alpha$ 的最优选择及所得 $P_{cu,tot}$ 最小值。
+
+按式 (11.22)，绕组电压正比于匝比。故将式 (11.35) 乘除量 $V_m/n_m$ 可用交替形式表示 $\alpha_m$：
+
+$$\alpha_m = \frac{V_m I_m}{\sum_{j=1}^{k}V_j I_j} \tag{11.36}$$
+
+用方均根或峰值电压均可。式 (11.36) 是所需结果。它表明窗口面积应按各绕组的视在功率比例分配给各绕组。式 (11.36) 的分子是绕组 $m$ 的视在功率，等于方均根电流与电压之积。分母是所有绕组视在功率之和。
+
+作为例子，考虑图11.9 所示含中心抽头二次的脉宽调制全桥变压器。可视为三绕组变压器，含 $n_1$ 匝单一次绕组和两个各 $n_2$ 匝的二次绕组。绕组电流波形 $i_1(t)$、$i_2(t)$、$i_3(t)$ 如图11.10所示。其方均根值为
+
+![源页 p.477](../assets/page-snapshots/chapter-11/page-477.png)
+
+图11.9 脉宽调制全桥变压器示例
+
+![源页 p.477](../assets/page-snapshots/chapter-11/page-477.png)
+
+图11.10 变压器波形，脉宽调制全桥变压器示例
+
+$$I_1 = \sqrt{\frac{1}{2T_s}\int_0^{2T_s}i_1^2(t)\,dt} = \frac{n_2}{n_1}I\sqrt{D} \tag{11.37}$$
+
+$$I_2 = I_3 = \sqrt{\frac{1}{2T_s}\int_0^{2T_s}i_2^2(t)\,dt} = \frac{1}{2}I\sqrt{1+D} \tag{11.38}$$
+
+将这些表达式代入式 (11.35) 得
+
+$$\alpha_1 = \frac{1}{\left(1+\sqrt{\dfrac{1+D}{D}}\right)} \tag{11.39}$$
+
+$$\alpha_2 = \alpha_3 = \frac{1}{2}\frac{1}{\left(1+\sqrt{\dfrac{D}{1+D}}\right)} \tag{11.40}$$
+
+若设计在 $D = 0.75$ 工作点优化，则得
+
+$$\alpha_1 = 0.396, \quad \alpha_2 = 0.302, \quad \alpha_3 = 0.302 \tag{11.41}$$
+
+故约 40% 窗口面积应分配给一次绕组，30% 分配给中心抽头二次的每一半。此最优设计点的总铜损由式 (11.34) 求得：
+
+$$P_{cu,tot} = \frac{\rho(\text{MLT})}{W_A K_u}\!\left(\sum_{j=1}^{3}n_j I_j\right)^2 = \frac{\rho(\text{MLT})n_2^2 I^2}{W_A K_u}\!\left(1+2D+2\sqrt{D(1+D)}\right) \tag{11.42}$$
+
+### 11.3.2 耦合电感设计约束
+
+现在考虑如何设计 10.5.4 节所述、图11.11所示的 $k$ 绕组耦合电感。希望磁化电感为指定值 $L_M$（归算到绕组 1）。还希望其他绕组匝数按所需匝比选择。磁化电流 $i_M(t)$ 达到最大值 $I_{M,max}$ 时耦合电感应以给定最大磁通密度 $B_{max}$ 工作。各绕组施加方均根电流 $I_1, I_2, \ldots, I_k$ 时总铜损应为所需值 $P_{cu}$ [由式 (11.34) 给出]。故设计步骤涉及选择磁芯尺寸和一次匝数以达到所需磁化电感、所需磁通密度和所需总铜损。然后可选择气隙长度、二次匝数和线径。推导遵循单绕组情形（11.1 节）的推导，并入 11.3.1 节的窗口面积优化。
+
+![源页 p.479](../assets/page-snapshots/chapter-11/page-479.png)
+
+图11.11 $k$ 绕组磁性器件，指定匝比和波形：(a) 电气电路模型；(b) 磁路模型
+
+磁化电流 $i_M(t)$ 可通过解图11.11a（或用安培定律）用绕组电流 $i_1(t), i_2(t), \ldots, i_k(t)$ 表示：
+
+$$i_M(t) = i_1(t) + \frac{n_2}{n_1}i_2(t) + \cdots + \frac{n_k}{n_1}i_k(t) \tag{11.43}$$
+
+解图11.11b 的磁路模型可写
+
+$$n_1 i_M(t) = B(t)A_c\cdot\mathcal{R}_g \tag{11.44}$$
+
+此方程类似于式 (11.4)，假定气隙磁阻 $\mathcal{R}_g$ 远大于磁芯磁阻 $\mathcal{R}_c$。照常总磁通 $\Phi(t) = B(t)A_c$。忽略漏感。
+
+为避免磁芯饱和，瞬时磁通密度 $B(t)$ 须小于磁芯材料饱和磁通密度 $B_{sat}$。设 $I_{M,max}$ 为磁化电流 $i_M(t)$ 的最大值。按式 (11.44)，这导致最大磁通密度 $B_{max}$ 为
+
+$$n_1 I_{M,max} = B_{max}A_c\cdot\mathcal{R}_g = B_{max}\frac{\ell_g}{\mu_0} \tag{11.45}$$
+
+对电路应用给定的 $I_{M,max}$ 值，应用式 (11.45) 选择匝数 $n_1$ 和气隙长度 $\ell_g$ 使最大磁通密度 $B_{max}$ 小于饱和密度 $B_{sat}$。式 (11.45) 类似于式 (11.6)，但计入多绕组电流产生的磁化。
+
+归算到绕组 1 的磁化电感 $L_M$ 为
+
+$$L_M = \frac{n_1^2}{\mathcal{R}_g} = \frac{n_1^2\mu_0 A_c}{\ell_g} \tag{11.46}$$
+
+此方程类似于式 (11.7)。
+
+如 11.3.1 节所示，磁芯窗口面积 $W_A$ 按式 (11.35) 或 (11.36) 分配给各绕组时总铜损最小。总铜损随后由式 (11.34) 给出。式 (11.34) 可表示为
+
+$$P_{cu} = \frac{\rho(\text{MLT})n_1^2 I_{tot}^2}{W_A K_u} \tag{11.47}$$
+
+其中
+
+$$I_{tot} = \sum_{j=1}^{k}\frac{n_j}{n_1}I_j \tag{11.48}$$
+
+是归算到绕组 1 的方均根绕组电流之和。
+
+现在可从式 (11.45)、(11.46)、(11.47) 消去未知量 $\ell_g$ 和 $n_1$。式 (11.47) 变为
+
+$$P_{cu} = \frac{\rho(\text{MLT})L_M^2 I_{tot}^2 I_{M,max}^2}{B_{max}^2 A_c^2}\frac{1}{W_A K_u} \tag{11.49}$$
+
+可重排此方程，将涉及磁芯几何的项分组到左边，技术指标到右边：
+
+$$\frac{A_c^2 W_A}{(\text{MLT})} = \frac{\rho L_M^2 I_{tot}^2 I_{M,max}^2}{B_{max}^2 K_u P_{cu}} \tag{11.50}$$
+
+方程左边可识别为式 (11.15) 定义的相同 $K_g$ 项。故为设计以给定最大磁通密度 $B_{max}$、给定一次磁化电感 $L_M$ 和给定总铜损 $P_{cu}$ 工作的耦合电感，须选择满足
+
+$$K_g \ge \frac{\rho L_M^2 I_{tot}^2 I_{M,max}^2}{B_{max}^2 K_u P_{cu}} \tag{11.51}$$
+
+的磁芯。找到此磁芯后，可选择绕组 1 匝数和气隙长度满足式 (11.45) 和 (11.46)。绕组 2 至 $k$ 的匝数按所需匝比选择。窗口面积按式 (11.35) 分配给各绕组，线规用式 (11.27) 选择。
+
+上述步骤适用于耦合电感设计。结果也适用于反激和 SEPIC 变压器设计，但应注意此步骤未计入铁损或邻近损耗的影响。还可扩展到变压器等其他器件的设计——留作习题。
+
+### 11.3.3 首轮设计步骤
+
+以下量按所示单位指定：
+
+- 导线有效电阻率 $\rho$（Ω-cm）
+- 归算到绕组 1 的总方均根绕组电流 $I_{tot} = \sum_{j=1}^{k}\frac{n_j}{n_1}I_j$（A）
+- 归算到绕组 1 的峰值磁化电流 $I_{M,max}$（A）
+- 所需匝比 $n_2/n_1, n_3/n_1$ 等
+- 归算到绕组 1 的磁化电感 $L_M$（H）
+- 允许总铜损 $P_{cu}$（W）
+- 绕组填充因子 $K_u$
+- 最大工作磁通密度 $B_{max}$（T）
+
+磁芯尺寸以 cm 表示：
+
+- 磁芯截面积 $A_c$（cm²）
+- 磁芯窗口面积 $W_A$（cm²）
+- 每匝平均长度 MLT（cm）
+
+使用厘米而非米要求在设计方程中加入适当因子。
+
+**1. 确定磁芯尺寸**
+
+$$K_g \ge \frac{\rho L_M^2 I_{tot}^2 I_{M,max}^2}{B_{max}^2 P_{cu} K_u}\cdot 10^8\ (\text{cm}^5) \tag{11.52}$$
+
+选择足够大以满足此不等式的磁芯。记录 $A_c$、$W_A$、MLT。室温下铜线电阻率 $\rho = 1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$，100°C 时 $2.3\cdot 10^{-6}\,\Omega\cdot\text{cm}$。
+
+**2. 确定气隙长度**
+
+$$\ell_g = \frac{\mu_0 L_M I_{M,max}^2}{B_{max}^2 A_c}\cdot 10^4\ (\text{m}) \tag{11.53}$$
+
+$B_{max}$ 以特斯拉表示，$A_c$ 以 cm² 表示，$\ell_g$ 以米表示。$\mu_0 = 4\pi\cdot 10^{-7}\text{ H/m}$。此值近似，忽略边缘磁通和其他非理想性。
+
+**3. 确定绕组 1 匝数**
+
+$$n_1 = \frac{L_M I_{M,max}}{B_{max}A_c}\cdot 10^4 \tag{11.54}$$
+
+$B_{max}$ 以特斯拉表示，$A_c$ 以 cm² 表示。
+
+**4. 确定二次匝数**
+
+用所需匝比：
+
+$$n_2 = \left(\frac{n_2}{n_1}\right)n_1, \quad n_3 = \left(\frac{n_3}{n_1}\right)n_1, \quad \ldots \tag{11.55}$$
+
+**5. 评估各绕组窗口面积比例**
+
+$$\alpha_1 = \frac{n_1 I_1}{n_1 I_{tot}}, \quad \alpha_2 = \frac{n_2 I_2}{n_1 I_{tot}}, \quad \ldots, \quad \alpha_k = \frac{n_k I_k}{n_1 I_{tot}} \tag{11.56}$$
+
+**6. 评估线径**
+
+$$A_{w1} \le \frac{\alpha_1 K_u W_A}{n_1}, \quad A_{w2} \le \frac{\alpha_2 K_u W_A}{n_2}, \quad \ldots \tag{11.57}$$
+
+选择裸铜面积小于等于这些值的导线。附录 B 含美国线规表。
+
+## 11.4 示例
+
+### 11.4.1 双输出正激变换器的耦合电感
+
+作为第一个例子，考虑图11.12 所示双输出正激变换器的耦合电感设计。此元件可视为绕在同一磁芯上的两个滤波电感。匝比选择与输出电压比相同。磁化电感完成两个输出开关谐波的滤波功能，磁化电流等于反射绕组电流之和。
+
+![源页 p.483](../assets/page-snapshots/chapter-11/page-483.png)
+
+图11.12 双输出正激变换器示例：(a) 电路原理图；(b) 耦合电感模型插入变换器副侧电路；(c) 耦合电感归算到绕组 1 的磁化电流和电压波形
+
+额定满载工作点变换器在连续导通模式下以占空比 $D = 0.35$ 工作。开关频率 200 kHz。此工作点希望磁化电流纹波峰值幅值等于磁化电流直流分量的 20%。
+
+磁化电流直流分量 $I_M$ 为
+
+$$I_M = I_1 + \frac{n_2}{n_1}I_2 = (4\text{ A}) + \frac{12}{28}(2\text{ A}) = 4.86\text{ A} \tag{11.58}$$
+
+磁化电流纹波 $\Delta i_M$ 可表示为
+
+$$\Delta i_M = \frac{V_1 D'T_s}{2L_M} \tag{11.59}$$
+
+希望 $\Delta i_M$ 等于 $I_M$ 的 20%，故应选择 $L_M$：
+
+$$L_M = \frac{V_1 D'T_s}{2\Delta i_M} = \frac{(28\text{ V})(1-0.35)(5\,\mu\text{s})}{2(4.86\text{ A})(20\%)} = 47\,\mu\text{H} \tag{11.60}$$
+
+归算到绕组 1 的峰值磁化电流为
+
+$$I_{M,max} = I_M + \Delta i_M = 5.83\text{ A} \tag{11.61}$$
+
+由于绕组电流纹波相对于各自直流分量很小，绕组电流方均根值近似等于直流分量：$I_1 = 4\text{ A}$，$I_2 = 2\text{ A}$。故归算到绕组 1 的总方均根绕组电流为
+
+$$I_{tot} = I_1 + \frac{n_2}{n_1}I_2 = 4.86\text{ A} \tag{11.62}$$
+
+此设计决定允许 0.75 W 铜损，磁芯以最大磁通密度 0.25 特斯拉工作。假定填充因子 0.4。由式 (11.52) 求所需 $K_g$：
+
+$$K_g \ge \frac{(1.724\cdot 10^{-6}\,\Omega\cdot\text{cm})(47\,\mu\text{H})^2(4.86\text{ A})^2(5.83\text{ A})^2}{(0.25\text{ T})^2(0.75\text{ W})(0.4)}\cdot 10^8 = 16\cdot 10^{-3}\text{ cm}^5 \tag{11.63}$$
+
+选择铁氧体 PQ 20/16 磁芯，$K_g = 22.4\cdot 10^{-3}\text{ cm}^5$。由附录 B，此磁芯几何参数为 $A_c = 0.62\text{ cm}^2$，$W_A = 0.256\text{ cm}^2$，MLT = 4.4 cm。
+
+由式 (11.53) 求气隙：
+
+$$\ell_g = \frac{\mu_0 L_M I_{M,max}^2}{B_{max}^2 A_c}\cdot 10^4 = \frac{(4\pi\cdot 10^{-7}\text{ H/m})(47\,\mu\text{H})(5.83\text{ A})^2}{(0.25\text{ T})^2(0.62\text{ cm}^2)}\cdot 10^4 = 0.52\text{ mm} \tag{11.64}$$
+
+实际中需稍长气隙，以计入边缘磁通和其他非理想性。由式 (11.54) 求绕组 1 匝数：
+
+$$n_1 = \frac{L_M I_{M,max}}{B_{max}A_c}\cdot 10^4 = \frac{(47\,\mu\text{H})(5.83\text{ A})}{(0.25\text{ T})(0.62\text{ cm}^2)}\cdot 10^4 = 17.6\text{ 匝} \tag{11.65}$$
+
+绕组 2 匝数按所需匝比选择：
+
+$$n_2 = \left(\frac{n_2}{n_1}\right)n_1 = \left(\frac{12}{28}\right)(17.6) = 7.54\text{ 匝} \tag{11.66}$$
+
+匝数取整为 $n_1 = 17$ 匝，$n_2 = 7$ 匝（18:8 是另一可能选择）。窗口面积 $W_A$ 按式 (11.56) 的比例分配给绕组：
+
+$$\alpha_1 = \frac{n_1 I_1}{n_1 I_{tot}} = \frac{(17)(4\text{ A})}{(17)(4.86\text{ A})} = 0.8235 \tag{11.67}$$
+
+$$\alpha_2 = \frac{n_2 I_2}{n_1 I_{tot}} = \frac{(7)(2\text{ A})}{(17)(4.86\text{ A})} = 0.1695$$
+
+故可选择线径：
+
+$$A_{w1} \le \frac{\alpha_1 K_u W_A}{n_1} = \frac{(0.8235)(0.4)(0.256\text{ cm}^2)}{17} = 4.96\cdot 10^{-3}\text{ cm}^2\quad\text{用 AWG #21} \tag{11.68}$$
+
+$$A_{w2} \le \frac{\alpha_2 K_u W_A}{n_2} = \frac{(0.1695)(0.4)(0.256\text{ cm}^2)}{7} = 2.48\cdot 10^{-3}\text{ cm}^2\quad\text{用 AWG #24}$$
+
+### 11.4.2 CCM 反激变压器
+
+作为第二个例子，设计图11.13 所示变换器的反激变压器。此变换器输入电压 200 V，满载输出 20 V、5 A。开关频率 150 kHz。此工作条件下希望变换器在连续导通模式下工作，磁化电流纹波等于磁化电流直流分量的 20%。选择占空比 $D = 0.4$，匝比 $n_2/n_1 = 0.15$。允许 1.5 W 铜损（不含邻近效应损耗）。为留出一次和二次
+
+![源页 p.486](../assets/page-snapshots/chapter-11/page-486.png)
+
+图11.13 反激变压器设计示例：(a) 变换器原理图；(b) 典型波形
+
+绕组间绝缘空间，假定填充因子 $K_u = 0.3$。使用最大磁通密度 $B_{max} = 0.25\text{ T}$；此值小于铁氧体磁芯材料的最坏情况饱和磁通密度 $B_{sat}$。
+
+用电容电荷平衡解变换器，磁化电流直流分量为
+
+$$I_M = \left(\frac{n_2}{n_1}\right)\frac{1}{D'}\frac{V}{R} = 1.25\text{ A} \tag{11.69}$$
+
+故磁化电流纹波应为
+
+$$\Delta i_M = (20\%)I_M = 0.25\text{ A} \tag{11.70}$$
+
+磁化电流最大值为
+
+$$I_{M,max} = I_M + \Delta i_M = 1.5\text{ A} \tag{11.71}$$
+
+为获得此纹波，磁化电感应为
+
+$$L_M = \frac{V_g DT_s}{2\Delta i_M} = 1.07\text{ mH} \tag{11.72}$$
+
+一次绕组电流方均根值用附录 A 的式 (A.6) 求得：
+
+$$I_1 = I_M\sqrt{D}\sqrt{1+\frac{1}{3}\!\left(\frac{\Delta i_M}{I_M}\right)^2} = 0.796\text{ A} \tag{11.73}$$
+
+二次绕组电流方均根值类似求得：
+
+$$I_2 = \frac{n_1}{n_2}I_M\sqrt{D'}\sqrt{1+\frac{1}{3}\!\left(\frac{\Delta i_M}{I_M}\right)^2} = 6.50\text{ A} \tag{11.74}$$
+
+注意 $I_2$ 不简单等于匝比乘 $I_1$。总方均根绕组电流为
+
+$$I_{tot} = I_1 + \frac{n_2}{n_1}I_2 = 1.77\text{ A} \tag{11.75}$$
+
+现在可确定所需磁芯尺寸。计算式 (11.52) 得
+
+$$K_g \ge \frac{(1.724\cdot 10^{-6}\,\Omega\cdot\text{cm})(1.07\cdot 10^{-3}\text{ H})^2(1.77\text{ A})^2(1.5\text{ A})^2}{(0.25\text{ T})^2(1.5\text{ W})(0.3)}\cdot 10^8 = 0.049\text{ cm}^5 \tag{11.76}$$
+
+附录 B 中满足此不等式的最小 EE 磁芯为 EE30，$K_g = 0.0857\text{ cm}^5$。此磁芯尺寸为
+
+$$A_c \approx 1.09\text{ cm}^2, \quad W_A \approx 0.476\text{ cm}^2, \quad \text{MLT} \approx 6.6\text{ cm}, \quad \ell_m \approx 5.77\text{ cm} \tag{11.77}$$
+
+气隙长度 $\ell_g$ 按式 (11.53) 选择：
+
+$$\ell_g = \frac{\mu_0 L_M I_{M,max}^2}{B_{max}^2 A_c}\cdot 10^4 = \frac{(4\pi\cdot 10^{-7}\text{ H/m})(1.07\cdot 10^{-3}\text{ H})(1.5\text{ A})^2}{(0.25\text{ T})^2(1.09\text{ cm}^2)}\cdot 10^4 = 0.44\text{ mm} \tag{11.78}$$

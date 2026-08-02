@@ -373,7 +373,7 @@ void FieldOrientedController::update(uint32_t timestamp) {
 | `phase_resistance` | 相电阻 (Ω) | 0.1~1.0 | 自动测量 (motor calibration) |
 | `phase_inductance` | 相电感 (H) | 50e-6 ~ 500e-6 | 自动测量 (motor calibration) |
 
-**经验法则：**
+- **经验法则：**
 - 电流环带宽应 ≤ 开关频率的 1/10
 - 典型设置: 1000 rad/s (≈ 159 Hz)
 - 增大带宽 → 电流响应更快 → 但噪声更大
@@ -416,7 +416,7 @@ ODrive 使用 3 电阻法 (3-shunt) 采样相电流：
    ADC1   ADC2   ADC3
 ```
 
-**电流采样时序：**
+- **电流采样时序：**
 
 ```text
   PWM 周期
@@ -485,7 +485,7 @@ float pwm_phase = phase + phase_vel * Δt_o;
 
 其中 `Δt = (timestamp_diff) / TIM_1_8_CLOCK_HZ`，`TIM_1_8_CLOCK_HZ = 168MHz`。
 
-**时序图：**
+- **时序图：**
 
 ```text
 时间轴 →
@@ -589,7 +589,7 @@ ODrive 固件支持灵活的 PWM 频率配置。
 | `pwm_frequency` | PWM 载波频率 | 24000 Hz | 15k-40kHz |
 | `current_control_hz` | 电流回路频率 | 8000 Hz | 1k-24kHz |
 
-**频率关系图：**
+- **频率关系图：**
 
 ```text
   电流回路频率 ≤ PWM 频率
@@ -606,7 +606,7 @@ ODrive 固件支持灵活的 PWM 频率配置。
   │                                    │
 ```
 
-**跟踪速率 (slew rate) 限制：**
+- **跟踪速率 (slew rate) 限制：**
 
 PWM 更新频率对应的电流跟踪速率：
 
@@ -616,7 +616,7 @@ $$\frac{dI}{dt}\bigg|_{max} = \frac{V_{dc}}{\sqrt{3} \cdot L_s}$$
 
 当 $current\_control\_hz < pwm\_frequency$ 时，PI增益中的 $T_s$ 应与实际控制周期一致。
 
-**频率选择建议：**
+- **频率选择建议：**
 
 | 应用 | PWM频率 | 控制频率 | 说明 |
 |------|---------|---------|------|
@@ -665,7 +665,7 @@ $$\hat{I}_{bias}[k] = \hat{I}_{bias}[k-1] + \alpha \cdot (I_{raw}[k] - \hat{I}_{
 
 收敛时间常数：约 $5\tau = 1.0s$ 达 99.3% 精度。校准有效性要求至少 $7.5\tau = 1.5s$。
 
-**温度漂移影响：** DC偏置会随温度漂移（通常 ~100μV/°C）。ODrive 在每次上电和重新arm后都会重新校准。
+- **温度漂移影响：** DC偏置会随温度漂移（通常 ~100μV/°C）。ODrive 在每次上电和重新arm后都会重新校准。
 
 ---
 

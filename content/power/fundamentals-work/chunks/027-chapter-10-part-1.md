@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第10章part 1 - 10 Basic Magnetics Theory"
+title: "第10章 基本磁学理论（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,919 +18,483 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第10章part 1 - 10 Basic Magnetics Theory
+# 第10章 基本磁学理论（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 418-437  
-> Chunk ID: `chapter-10-part-1`
+> 源页：418–437
+> 本部分涵盖 10.1 基本磁学复习、10.2 变压器建模、10.3 磁性器件损耗机理、10.4 绕组导体涡流。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+磁性器件是每个开关变换器的组成部分。通常磁性器件的设计不能与变换器设计分离。功率电子工程师不仅须建模和设计变换器，还须建模和设计磁性器件。开关变换器磁性器件的建模和设计是本书第三部分的主题。
 
-## 术语表
+本章复习基本磁学理论，包括磁路、电感建模和变压器建模 [85–89]。描述磁性器件中的损耗机理。详细解释绕组涡流和邻近效应——大电流高频绕组中的重要损耗机理 [90–95]。第11章介绍电感设计，第12章讨论变压器设计。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+## 10.1 基本磁学复习
 
-## 中文翻译
+### 10.1.1 基本关系
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+基本磁学量如图10.1所示，还给出了类比的（可能更熟悉的）电学量。两点 $x_1$ 和 $x_2$ 之间的磁动势 $\mathcal{F}$（或标量势）由沿连接两点的路径对磁场 $H$ 的积分给出：
 
-## 英文原文
+$$\mathcal{F} = \int_{x_1}^{x_2}\mathbf{H}\cdot d\boldsymbol{\ell} \tag{10.1}$$
 
-```text
-10
-Basic Magnetics Theory
-Magnetics are an integral part of every switching converter. Often, the design of the magnetic
-devices cannot be isolated from the converter design. The power electronics engineer must
-not only model and design the converter, but must model and design the magnetics as well.
-Modeling and designing of magnetics for switching converters is the topic of Part III of this
-book.
-In this chapter, basic magnetics theory is reviewed, including magnetic circuits, inductor
-modeling, and transformer modeling [ 85–89]. Loss mechanisms in magnetic devices are de-
-scribed. Winding eddy currents and the proximity eﬀect, a signiﬁcant loss mechanism in high-
-current high-frequency windings, are explained in detail [90–95]. Inductor design is introduced
-in Chap. 11, and transformer design is covered in Chap. 12.
-10.1 Review of Basic Magnetics
-10.1.1 Basic Relationships
-The basic magnetic quantities are illustrated in Fig.10.1. Also illustrated are the analogous, and
-perhaps more familiar, electrical quantities. The magnetomotive force F , or scalar potential,
-between two points x1 and x2 is given by the integral of the magnetic ﬁeld H along a path
-connecting the points:
-F=
-∫ x2
-x1
-H· dℓ (10.1)
-where dℓ is a vector length element pointing in the direction of the path. The dot product yields
-the component of H in the direction of the path. If the magnetic ﬁeld is of uniform strength H
-passing through an element of lengthℓ as illustrated, then Eq. (10.1) reduces to
-F= Hℓ (10.2)
-This is analogous to the electric ﬁeld of uniform strength E, which induces a voltage V= Eℓ
-between two points separated by distanceℓ.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_10
-409
+其中 $d\boldsymbol{\ell}$ 是指向路径方向的向量长度元。点积给出 $H$ 在路径方向上的分量。若磁场为均匀强度 $H$，穿过长度为 $\ell$ 的元件如图所示，则式 (10.1) 简化为
 
-410 10 Basic Magnetics Theory
-Fig. 10.1 Comparison of magnetic ﬁeld H, MMF F ,ﬂ u xΦ, and ﬂux density B, with the analogous
-electrical quantities E, V, I,a n dJ
-Figure 10.1 also illustrates a total magnetic ﬂuxΦpassing through a surface S having area
-Ac. The total ﬂuxΦis equal to the integral of the normal component of the ﬂux density B over
-the surface
-Φ=
-∫
-sur f ace S
-B· dA (10.3)
-where dA is a vector area element having direction normal to the surface. For a uniform ﬂux
-density of magnitude B as illustrated, the integral reduces to
-Φ=BAc (10.4)
-Flux density B is analogous to the electrical current density J, and ﬂuxΦis analogous to the
-electric current I. If a uniform current density of magnitude J passes through a surface of area
-Ac, then the total current is I= JAc.
-Faraday’s law relates the voltage induced in a winding to the total ﬂux passing through the
-interior of the winding. Figure10.2 illustrates ﬂuxΦ(t) passing through the interior of a loop of
-Fig. 10.2 The voltage v(t) induced in a loop of
-wire is related by Faraday’s law to the derivative
-of the total ﬂuxΦ(t) passing through the interior
-of the loop
+$$\mathcal{F} = H\ell \tag{10.2}$$
 
-10.1 Review of Basic Magnetics 411
-Fig. 10.3 Illustration of Lenz’s law in a shorted
-loop of wire. The ﬂuxΦ(t) induces currenti(t), which
-in turn generates ﬂux Φ′(t) that tends to oppose
-changes inΦ(t) Flux (t)
-Induced current
-i(t)
-Shorted
-loop
-Induced
-flux 
-(t)
-wire. The loop encloses cross-sectional area Ac. According to Faraday’s law, the ﬂux induces a
-voltage v(t) in the wire, given by
-v(t)= dΦ(t)
-dt (10.5)
-where the polarities of v(t) andΦ(t) are deﬁned according to the right-hand rule, as in Fig. 10.2.
-For a uniform ﬂux distribution, we can express v(t) in terms of the ﬂux density B(t) by substitu-
-tion of Eq. (10.4):
-v(t)= Ac
-dB(t)
-dt (10.6)
-Thus, the voltage induced in a winding is related to the ﬂuxΦand ﬂux density B passing through
-the interior of the winding.
-Lenz’s law states that the voltage v(t) induced by the changing ﬂuxΦ(t)i nF i g .10.2 is of the
-polarity that tends to drive a current through the loop to counteract the ﬂux change. For example,
-consider the shorted loop of Fig. 10.3. The changing ﬂux Φ(t) passing through the interior of
-the loop induces a voltage v(t) around the loop. This voltage, divided by the impedance of the
-loop conductor, leads to a current i(t) as illustrated. The current i(t) induces a ﬂuxΦ′(t), which
-tends to oppose the changes in Φ(t). Lenz’s law is invoked later in this chapter, to provide a
-qualitative understanding of eddy current phenomena.
-Ampere’s law relates the current in a winding to the magnetomotive force F and magnetic
-ﬁeld H. The net MMF around a closed path of length ℓm is equal to the total current passing
-through the interior of the path. For example, Fig. 10.4 illustrates a magnetic core, in which a
-wire carrying current i(t) passes through the window in the center of the core. Let us consider
-the closed path illustrated, which follows the magnetic ﬁeld lines around the interior of the core.
-Ampere’s law states that
-∮
-closed path
-H· dℓ= total current passing through interior of path (10.7)
-Fig. 10.4 The net MMF around
-a closed path is related by Am-
-pere’s law to the total current passing
-through the interior of the path
+这与均匀强度 $E$ 的电场在相距 $\ell$ 的两点间引起电压 $V = E\ell$ 类似。
 
-412 10 Basic Magnetics Theory
-(a)
-B
-Hμ0
-(b)
-B
-H
-μ
-Fig. 10.5 B–H characteristics: (a) of free space or air, (b) of a typical magnetic core material
-The total current passing through the interior of the path is equal to the total current passing
-through the window in the center of the core, or i(t). If the magnetic ﬁeld is uniform and of
-magnitude H(t), then the integral is H(t)ℓm. So for the example of Fig. 10.4,E q .(10.7) reduces
-to
-F (t)= H(t)ℓm= i(t) (10.8)
-Thus, the magnetic ﬁeld strength H(t) is related to the winding current i(t). We can view
-winding currents as sources of MMF. Equation ( 10.8) states that the MMF around the core,
-F (t)= H(t)ℓm, is equal to the winding current MMF i(t). The total MMF around the closed
-loop, accounting for both MMFs, is zero.
-The relationship between B and H, or equivalently betweenΦand F , is determined by the
-core material characteristics. Figure 10.5a illustrates the characteristics of free space, or air:
-B= μ0H (10.9)
-The quantityμ0 is the permeability of free space, and is equal to 4 π· 10−7 Henries per meter
-in MKS units. Figure 10.5b illustrates the B–H characteristic of a typical iron alloy under high-
-level sinusoidal steady-state excitation. The characteristic is highly nonlinear, and exhibits both
-hysteresis and saturation. The exact shape of the characteristic is dependent on the excitation,
-and is diﬃcult to predict for arbitrary waveforms.
-For purposes of analysis, the core material characteristic of Fig.10.5b is usually modeled by
-the linear or piecewise-linear characteristics of Fig.10.6.I nF i g .10.6a, hysteresis and saturation
-are ignored. The B–H characteristic is then given by
-B= μH
-μ= μrμ0 (10.10)
-The core material permeabilityμcan be expressed as the product of the relative permeabilityμr
-and ofμ0. Typical values ofμr lie in the range 103 to 105.
-The piecewise-linear model of Fig. 10.6b accounts for saturation but not hysteresis. The
-core material saturates when the magnitude of the ﬂux density B exceeds the saturation ﬂux
-density Bsat.F o r| B|< Bsat, the characteristic follows Eq. ( 10.10). When| B|> Bsat,t h e
-model predicts that the core reverts to free space, with a characteristic having a much smaller
+![源页 p.419](../assets/page-snapshots/chapter-10/page-419.png)
 
-10.1 Review of Basic Magnetics 413
-(a)
-B
-H
-μ = μr μ0
-(b)
-B
-H
-μ
-Bsat
-sat
-Fig. 10.6 Approximation of the B–H characteristics of a magnetic core material: (a) by neglecting both
-hysteresis and saturation, (b) by neglecting hysteresis
-slope approximately equal to μ0. Square-loop materials exhibit this type of abrupt-saturation
-characteristic, and additionally have a very large relative permeabilityμr. Soft materials exhibit
-a less abrupt saturation characteristic, in whichμgradually decreases as H is increased. Typical
-values of Bsat are 1 to 2 Tesla for iron laminations and silicon steel, 0.5 to 1 Tesla for powdered
-iron and molypermalloy materials, and 0.25 to 0.5 Tesla for ferrite materials.
-Unit systems for magnetic quantities are summarized in Table 10.1. The MKS system is
-used throughout this book. The unrationalized CGS system also continues to ﬁnd some use.
-Conversions between these systems are listed.
-Table 10.1 Units for magnetic quantities
-Quantity MKS Unrationalized CGS Conversions
-Core material equation B=μ0μrHB =μrH
-B Tesla Gauss 1 T = 104G
-H Ampere/meter Oersted 1 A /m= 4π· 10−3 Oe
-Φ Weber Maxwell 1W b= 108Mx
-1T= 1W b/m2
-Figure 10.7 summarizes the relationships between the basic electrical and magnetic quanti-
-ties of a magnetic device. The winding voltage v(t) is related to the core ﬂux and ﬂux density
-via Faraday’s law. The winding currenti(t) is related to the magnetic ﬁeld strength via Ampere’s
-law. The core material characteristics relate B and H.
-We can now determine the electrical terminal characteristics of the simple inductor of
-Fig. 10.8a. A winding of n turns is placed on a core having permeabilityμ. Faraday’s law states
-that the ﬂuxΦ(t) inside the core induces a voltage vturn(t) in each turn of the winding, given by
-vturn(t)= dΦ(t)
-dt (10.11)
-Since the same ﬂuxΦ(t) passes through each turn of the winding, the total winding voltage is
+图10.1 磁场 $H$、磁动势 $\mathcal{F}$、磁通 $\Phi$ 和磁通密度 $B$ 与类比电学量 $E$、$V$、$I$、$J$ 的比较
 
-414 10 Basic Magnetics Theory
-Fig. 10.7 Summary of the steps in
-determination of the terminal electri-
-cal i–v characteristics of a magnetic
-element
-v(t)
-i(t)
-B(t), (t)
-H(t), F (t)
-Terminal
-characteristics
-Core
-characteristics
-Fig. 10.8 Inductor example:
-(a) inductor geometry, (b) appli-
-cation of Ampere’s law
-(a)
-core
-n
-turns
-Core area
-A
-c
-Core
-permeability
-μ
-+
-v(t)
-i(t)
-(b)
-n
-turns
-i(t)
-H
-Magnetic
-path
-length l
-m
-v(t)= nvturn(t)= ndΦ(t)
-dt (10.12)
-Equation (10.12) can be expressed in terms of the average ﬂux density B(t) by substitution of
-Eq. (10.4):
-v(t)= nAc
-dB(t)
-dt (10.13)
-where the average ﬂux density B(t)i sΦ(t)/Ac.
-The use of Ampere’s law is illustrated in Fig. 10.8b. A closed path is chosen which follows
-an average magnetic ﬁeld line around the interior of the core. The length of this path is called
-the mean magnetic path lengthℓm. If the magnetic ﬁeld strengthH(t) is uniform, then Ampere’s
-law states that Hℓm is equal to the total current passing through the interior of the path, that is,
-the net current passing through the window in the center of the core. Since there are n turns of
-wire passing through the window, each carrying currenti(t), the net current passing through the
-window is ni(t). Hence, Ampere’s law states that
-H(t)ℓm= ni(t) (10.14)
+图10.1 还给出穿过面积 $A_c$ 的表面 $S$ 的总磁通 $\Phi$。总磁通 $\Phi$ 等于磁通密度 $B$ 的法向分量在表面上的积分
 
-10.1 Review of Basic Magnetics 415
-Let us model the core material characteristics by neglecting hysteresis but accounting for
-saturation, as follows:
-B=
-⎧⎪⎪⎪⎪⎪⎨⎪⎪⎪⎪⎪⎩
-Bsat for H≥Bsat/μ
-μH for|H|< Bsat/μ
-−Bsat for H≤−Bsat/μ
-(10.15)
-The B–H characteristic saturated slopeμ0 is much smaller thanμ, and is ignored here. A char-
-acteristic similar to Fig. 10.6b is obtained. The current magnitude Isat at the onset of saturation
-can be found by substitution of H= Bsat/μinto Eq. (10.14). The result is
-Isat= Bsatℓm
-μn (10.16)
-We can now eliminateB and H from Eqs. (10.13)t o( 10.15), and solve for the electrical terminal
-characteristics. For|I|< Isat, B= μH. Equation (10.13) then becomes
-v(t)= μnAc
-dH(t)
-dt (10.17)
-Substitution of Eq. (10.14) into Eq. (10.17) to eliminate H(t) then leads to
-v(t)= μn2Ac
-ℓm
-di(t)
-dt (10.18)
-which is of the form
-v(t)= Ldi(t)
-dt (10.19)
-with
-L= μn2Ac
-ℓm
-(10.20)
-So the device behaves as an inductor for|I|< Isat. When|I|> Isat, then the ﬂux density B(t)=
-Bsat is constant. Faraday’s law states that the terminal voltage is then
-v(t)= nAc
-dBsat
-dt = 0 (10.21)
-When the core saturates, the magnetic device behavior approaches a short circuit. The device
-behaves as an inductor only when the winding current magnitude is less than Isat. Practical
-inductors exhibit some small residual inductance due to their nonzero saturated permeabilities;
-nonetheless, in saturation the inductor impedance is greatly reduced, and large inductor currents
-may result.
-10.1.2 Magnetic Circuits
-Figure 10.9a illustrates uniform ﬂux and magnetic ﬁeld inside an element having permeability
-μ, lengthℓ, and cross-sectional area Ac. The MMF between the two ends of the element is
-F= Hℓ (10.22)
+$$\Phi = \int_{\text{surface }S}\mathbf{B}\cdot d\mathbf{A} \tag{10.3}$$
 
-416 10 Basic Magnetics Theory
-(a)
-Flux
-{
-Length l
-MMF F Area
-Ac
-Core permeability μ
-H
-+
-R= l
-μAc
-(b)
-F
-R
-Fig. 10.9 An element containing magnetic ﬂux (a), and its equivalent magnetic circuit (b)
-Since H= B/μand B=Φ/Ac, we can express F as
-F= ℓ
-μAc
-Φ (10.23)
-This equation is of the form
-F=ΦR (10.24)
-with
-R= ℓ
-μAc
-(10.25)
-Equation ( 10.24) resembles Ohm’s law. This equation states that the magnetic ﬂux through
-an element is proportional to the MMF across the element. The constant of proportionality,
-or the reluctance R, is analogous to the resistance R of an electrical conductor. Indeed, we
-can construct a lumped-element magnetic circuit model that corresponds to Eq. ( 10.24), as in
-Fig. 10.9b. In this magnetic circuit model, voltage and current are replaced by MMF and ﬂux,
-while the element characteristic, Eq. (10.24), is represented by the analog of a resistor, having
-reluctance R.
-Complicated magnetic structures, composed of multiple windings and multiple heteroge-
-neous elements such as cores and air gaps, can be represented using equivalent magnetic circuits.
-These magnetic circuits can then be solved using conventional circuit analysis, to determine the
-various ﬂuxes, MMFs, and terminal voltages and currents. Kirchhoﬀ’s laws apply to magnetic
-circuits, and follow directly from Maxwell’s equations. The analog of Kirchhoﬀ’s current law
-holds because the divergence of B is zero, and hence magnetic ﬂux lines are continuous and
-cannot end. Therefore, any ﬂux line that enters a node must leave the node. As illustrated in
-Fig. 10.10, the total ﬂux entering a node must be zero. The analog of Kirchho ﬀ’s voltage law
-follows from Ampere’s law, Eq. (10.7). The left-hand-side integral in Eq. (10.7)i st h es u mo ft h e
-MMFs across the reluctances around the closed path. The right-hand-side of Eq. ( 10.7) states
-that currents in windings are sources of MMF. An n-turn winding carrying current i(t) can be
-modeled as an MMF source, analogous to a voltage source, of value ni(t). When these MMF
-sources are included, the total MMF around a closed path is zero.
-Consider the inductor with air gap of Fig.10.11a. A closed path following the magnetic ﬁeld
-lines is illustrated. This path passes through the core, of permeabilityμand lengthℓc, and across
-the air gap, of permeabilityμ0 and lengthℓg. The cross-sectional areas of the core and air gap
-are approximately equal. Application of Ampere’s law for this path leads to
-Fc+ Fg= ni (10.26)
+其中 $d\mathbf{A}$ 是方向垂直于表面的向量面积元。对如图所示幅值为 $B$ 的均匀磁通密度，积分简化为
 
-10.1 Review of Basic Magnetics 417
-(a)
-1
-2
-3
-Node (b)
-1
-2
-3
-Node 1 = 2 + 3
-Fig. 10.10 Kirchhoﬀ’s current law, applied to magnetic circuits: the net ﬂux entering a node must be
-zero. (a) physical element, in which three legs of a core meet at a node; (b) magnetic circuit model
-Fig. 10.11 Inductor with air gap example: (a) physical geometry; (b) magnetic circuit model
-where Fc and Fg are the MMFs across the core and air gap, respectively. The core and air gap
-characteristics can be modeled by reluctances as in Fig.10.9 and Eq. (10.25); the core reluctance
-Rc and air gap reluctance Rg are given by
-Rc= ℓc
-μAc
-Rg= ℓg
-μ0Ac
-(10.27)
-A magnetic circuit corresponding to Eqs. (10.26) and (10.27) is given in Fig. 10.11b. The wind-
-ing is a source of MMF, of value ni. The core and air gap reluctances are eﬀectively in series.
-The solution of the magnetic circuit is
-ni=Φ(Rc+ Rg) (10.28)
-The ﬂuxΦ(t) passes through the winding, and so we can use Faraday’s law to write
-v(t)= ndΦ(t)
-dt (10.29)
-Use of Eq. (10.28) to eliminateΦ(t) yields
+$$\Phi = BA_c \tag{10.4}$$
 
-418 10 Basic Magnetics Theory
-Fig. 10.12 Eﬀe c to fa i rg a po nt h e
-magnetic circuitΦvs. ni characteris-
-tics. The air gap increases the current
-Isat at the onset of core saturation
-1
-c + g
-1
-c
- = BAc
-ni Hc
-Bsat Ac
-sat Ac
-nIsat1 nIsat2
-v(t)= n2
-Rc+ Rg
-di(t)
-dt (10.30)
-Therefore, the inductance L is
-L= n2
-Rc+ Rg
-(10.31)
-The air gap increases the total reluctance of the magnetic circuit, and decreases the inductance.
-Air gaps are employed in practical inductors for two reasons. With no air gap ( Rg = 0),
-the inductance is directly proportional to the core permeabilityμ. This quantity is dependent on
-temperature and operating point, and is diﬃcult to control. Hence, it may be diﬃcult to construct
-an inductor having a well-controlled value of L. Addition of an air gap having a reluctance Rg
-greater than Rc causes the value of L in Eq. (10.31) to be insensitive to variations inμ.
-Addition of an air gap also allows the inductor to operate at higher values of winding current
-i(t) without saturation. The total ﬂuxΦis plotted vs. the winding MMF ni in Fig. 10.12. Since
-Φis proportional to B, and when the core is not saturatedni is proportional to the magnetic ﬁeld
-strength H in the core, Fig. 10.12 has the same shape as the core B–H characteristic. When the
-core is not saturated,Φis related to ni according to the linear relationship of Eq. (10.28). When
-the core saturates,Φis equal to
-Φsat= BsatAc (10.32)
-The winding current Isat at the onset of saturation is found by substitution of Eq. ( 10.32)
-into (10.28):
-Isat= BsatAc
-n (Rc+ Rg) (10.33)
-TheΦ-ni characteristics are plotted in Fig. 10.12 for two cases: (a) air gap present, and (b) no
-air gap (Rg= 0). It can be seen that Isat is increased by addition of an air gap. Thus, the air gap
-allows increase of the saturation current, at the expense of decreased inductance.
-10.2 Transformer Modeling
-Consider next the two-winding transformer of Fig. 10.13. The core has cross-sectional area Ac,
-mean magnetic path lengthℓm, and permeabilityμ. An equivalent magnetic circuit is given in
-Fig. 10.14. The core reluctance is
+磁通密度 $B$ 与电学电流密度 $J$ 类比，磁通 $\Phi$ 与电流 $I$ 类比。若幅值为 $J$ 的均匀电流密度穿过面积 $A_c$ 的表面，则总电流为 $I = JA_c$。
 
-10.2 Transformer Modeling 419
-Fig. 10.13 A two-winding trans-
-former
-Core
-n1
-turns
-+
-v1(t)
-i1(t)
-+
-v2(t)
-i2(t)
-n2
-turns
-Fig. 10.14 Magnetic circuit that models the
-two-winding transformer of Fig. 10.13
-R= ℓm
-μAc
-(10.34)
-Since there are two windings in this example, it is necessary to determine the relative polarities
-of the MMF generators. Ampere’s law states that
-Fc= n1i1+ n2i2 (10.35)
-The MMF generators are additive, because the currents i1 and i2 pass in the same direction
-through the core window. Solution of Fig.10.14 yields
-ΦR= n1i1+ n2i2 (10.36)
-This expression could also be obtained by substitution of Fc=ΦR into Eq. (10.35).
-10.2.1 The Ideal Transformer
-In the ideal transformer, the core reluctance R approaches zero. The causes the core MMF
-Fc=ΦR also to approach zero. Equation (10.35) then becomes
-0= n1i1+ n2i2 (10.37)
-Also, by Faraday’s law, we have
-v1= n1
-dΦ
-dt (10.38)
-v2= n2
-dΦ
-dt
-Note thatΦis the same in both equations above: the same total ﬂux links both windings. Elimi-
-nation ofΦleads to
+法拉第定律将绕组中感应的电压与穿过绕组内部的总磁通联系起来。图10.2 给出穿过导线环路内部的磁通 $\Phi(t)$。环路包围截面积 $A_c$。按法拉第定律，磁通在导线中感应电压 $v(t)$，为
 
-420 10 Basic Magnetics Theory
-Ideal
-n1 : n2
-+
-v1
-+
-v2
-i1 i2
-Fig. 10.15 Ideal transformer symbol
-dΦ
-dt = v1
-n1
-= v2
-n2
-(10.39)
-Equations (10.37) and (10.39) are the equations of the ideal transformer:
-v1
-n1
-= v2
-n2
-and n1i1+ n2i2= 0 (10.40)
-The ideal transformer symbol of Fig. 10.15 is deﬁned by Eq. (10.40).
-10.2.2 The Magnetizing Inductance
-For the actual case in which the core reluctance R is nonzero, we have
-ΦR= n1i1+ n2i2 with v1= n1
-dΦ
-dt (10.41)
-Elimination ofΦyields
-v1= n2
-1
-R
-d
-dt
-[
-i1+ n2
-n1
-i2
-]
-(10.42)
-This equation is of the form
-v1= LM
-diM
-dt (10.43)
-where
-LM = n2
-1
-R
-iM = i1+ n2
-n1
-i2 (10.44)
-are the magnetizing inductance and magnetizing current, referred to the primary winding. An
-equivalent circuit is illustrated in Fig.10.16.
-Figure 10.16 coincides with the transformer model introduced in Chap. 6. The magnetizing
-inductance models the magnetization of the core material. It is a real, physical inductor, which
-exhibits saturation and hysteresis. All physical transformers must contain a magnetizing induc-
-tance. For example, suppose that we disconnect the secondary winding. We are then left with
-a single winding on a magnetic core—an inductor. Indeed, the equivalent circuit of Fig. 10.16
+$$v(t) = \frac{d\Phi(t)}{dt} \tag{10.5}$$
 
-10.2 Transformer Modeling 421
-Fig. 10.16 Transformer model including magnetizing inductance
-predicts this behavior, via the magnetizing inductance. The magnetizing current causes the ratio
-of the winding currents to diﬀer from the turns ratio.
-The transformer saturates when the core ﬂux density B(t) exceeds the saturation ﬂux den-
-sity Bsat. When the transformer saturates, the magnetizing current iM(t) becomes large, the
-impedance of the magnetizing inductance becomes small, and the transformer windings be-
-come short circuits. It should be noted that large winding currentsi1(t) and i2(t) do not necessar-
-ily cause saturation: if these currents obey Eq. (10.37), then the magnetizing current is zero and
-there is no net magnetization of the core. Rather, saturation of a transformer is a function of the
-applied volt-seconds. The magnetizing current is given by
-iM(t)= 1
-LM
-∫
-v1(t)dt (10.45)
-Alternatively, Eq. (10.45) can be expressed in terms of the core ﬂux density B(t)a s
-B(t)= 1
-n1Ac
-∫
-v1(t)dt (10.46)
-The ﬂux density and magnetizing current will become large enough to saturate the core when the
-applied volt-secondsλ1 is too large, whereλ1 is deﬁned for a periodic ac voltage waveform as
-λ1=
-∫ t2
-1
-v1(t)dt (10.47)
-The limits are chosen such that the integral is taken over the positive portion of the applied
-periodic voltage waveform.
-To ﬁx a saturating transformer, the ﬂux density should be decreased by increasing the num-
-ber of turns, or by increasing the core cross-sectional areaAc. Adding an air gap has no eﬀect on
-saturation of conventional transformers, since it does not modify Eq. (10.46). An air gap simply
-makes the transformer less ideal, by decreasing LM and increasing iM(t) without changing B(t).
-Saturation mechanisms in transformers diﬀer from those of inductors, because transformer satu-
-ration is determined by the applied winding voltage waveforms, rather than the applied winding
-currents.
-10.2.3 Leakage Inductances
-In practice, there is some ﬂux which links one winding but not the other, by “leaking” into the
-air or by some other mechanism. As illustrated in Fig. 10.17, this ﬂux leads to leakage induc-
+其中 $v(t)$ 和 $\Phi(t)$ 的极性按右手定则定义，如图10.2所示。对均匀磁通分布，代入式 (10.4) 可用磁通密度 $B(t)$ 表示 $v(t)$：
 
-422 10 Basic Magnetics Theory
-Fig. 10.17 Leakage ﬂux in a two-winding transformer: ( a) transformer geometry, (b) an equivalent sys-
-tem
-Fig. 10.18 Two-winding transformer equivalent circuit, including magnetizing inductance referred to
-primary, and primary and secondary leakage inductances
-tance, i.e., additional eﬀective inductances that are in series with the windings. A topologically
-equivalent structure is illustrated in Fig. 10.17b, in which the leakage ﬂuxes Φℓ1 andΦℓ2 are
-shown explicitly as separate inductors.
-Figure 10.18 illustrates a transformer electrical equivalent circuit model, including series
-inductors Lℓ1 and Lℓ2 which model the leakage inductances. These leakage inductances cause
-the terminal voltage ratio v2(t)/v1(t)t od iﬀer from the ideal turns ratio n2/n1. In general, the
-terminal equations of a two-winding transformer can be written
+$$v(t) = A_c\frac{dB(t)}{dt} \tag{10.6}$$
 
-10.3 Loss Mechanisms in Magnetic Devices 423
-[v1(t)
-v2(t)
-]
-=
-[L11 L12
-L12 L22
-]d
-dt
-[i1(t)
-i2(t)
-]
-(10.48)
-The quantity L12 is called the mutual inductance, and is given by
-L12= n1n2
-R = n2
-n1
-LM (10.49)
-The quantities L11 and L22 are called the primary and secondary self-inductances, given by
-L11= Lℓ1+ n1
-n2
-L12
-L22= Lℓ2+ n2
-n1
-L12 (10.50)
-Note that Eq. (10.48) does not explicitly identify the physical turns ratio n2/n1. Rather, Eq.
-(10.48) expresses the transformer behavior as a function of electrical quantities alone. Equa-
-tion (10.48) can be used, however, to deﬁne the eﬀective turns ratio
-ne=
-√
-L22
-L11
-(10.51)
-and the coupling coeﬃcient
-k= L12
-√L11L22
-(10.52)
-The coupling coeﬃcient k lies in the range 0 ≤k ≤1, and is a measure of the degree of
-magnetic coupling between the primary and secondary windings. In a transformer with perfect
-coupling, the leakage inductances Lℓ1 and Lℓ2 are zero. The coupling coeﬃcient k is then equal
-to 1. Construction of low-voltage transformers having coupling coe ﬃcients in excess of 0.99
-is quite feasible. When the coupling coeﬃcient is close to 1, then the eﬀective turns ratio ne is
-approximately equal to the physical turns ratio n2/n1.
-10.3 Loss Mechanisms in Magnetic Devices
-10.3.1 Core Loss
-Energy is required to eﬀect a change in the magnetization of a core material. Not all of this en-
-ergy is recoverable in electrical form; a fraction is lost as heat. This power loss can be observed
-electrically as hysteresis of the B–H loop.
-Consider an n-turn inductor excited by periodic waveforms v(t) and i(t) having frequency f .
-The net energy that ﬂows into the inductor over one cycle is
-W=
-∫
-one cycle
-v(t)i(t)dt (10.53)
+故绕组中感应的电压与穿过绕组内部的磁通 $\Phi$ 和磁通密度 $B$ 有关。
 
-424 10 Basic Magnetics Theory
-We can relate this expression to the core B–H characteristic: substitute B(t)f o rv(t) using Fara-
-day’s law, Eq. (10.13), and substitute H(t)f o ri(t) using Ampere’s law, i.e., Eq. (10.14):
-W=
-∫
-one cycle
-⎦
-nAc
-dB(t)
-dt
-)⎦H(t)ℓm
-n
-)
-dt (10.54)
-= (Acℓm)
-∫
-one cycle
-Hd B
-The term Acℓm is the volume of the core, while the integral is the area of the B–H loop:
-(energy lost per cycle)= (core volume)(area of B−H loop) (10.55)
-The hysteresis power loss PH is equal to the energy lost per cycle, multiplied by the excitation
-frequency f :
-PH = ( f )(Acℓm)
-∫
-one cycle
-Hd B (10.56)
-To the extent that the size of the hysteresis loop is independent of frequency, hysteresis loss
-increases directly with operating frequency.
-Flux
-(t)
-Core
-i(t)
-Eddy
-current
-Fig. 10.19 Eddy currents in an iron core
-Magnetic core materials are iron alloys that,
-unfortunately, are also good electrical conduc-
-tors. As a result, ac magnetic ﬁelds can cause
-electrical eddy currents to ﬂow within the core
-material itself. An example is illustrated in
-Fig. 10.19. The ac ﬂux Φ(t) passes through the
-core. This induces eddy currents i(t) which, ac-
-cording to Lenz’s law, ﬂow in paths that oppose
-the time-varying ﬂuxΦ(t). These eddy currents
-cause i
-2R losses in the resistance of the core ma-
-terial. The eddy current losses are especially sig-
-niﬁcant in high-frequency applications.
-According to Faraday’s law, the ac ﬂuxΦ(t) induces voltage in the core, which drives the
-current around the paths illustrated in Fig. 10.19. Since the induced voltage is proportional to
-the derivative of the ﬂux, the voltage magnitude increases directly with the excitation frequency
-f . If the impedance of the core material is purely resistive and independent of frequency, then
-the magnitude of the induced eddy currents also increases directly with f . This implies that
-the i
-2R eddy current losses should increase as f 2. In power ferrite materials, the core material
-impedance magnitude actually decreases with increasing f . Over the useful frequency range,
-the eddy current losses typically increase faster than f 2.
-There is a basic tradeoﬀbetween saturation ﬂux density and core loss. Use of a high oper-
-ating ﬂux density leads to reduced size, weight, and cost. Silicon steel and similar materials ex-
-hibit saturation ﬂux densities of 1.5 to 2 T. Unfortunately, these core materials exhibit high core
-loss. In particular, the low resistivity of these materials leads to high eddy current loss. Hence,
-these materials are suitable for ﬁlter inductor and low-frequency transformer applications. The
-core material is produced in laminations or thin ribbons, to reduce the eddy current magnitude.
-Other ferrous alloys may contain molybdenum, cobalt, or other elements, and exhibit somewhat
-lower core loss as well as somewhat lower saturation ﬂux densities.
+![源页 p.420](../assets/page-snapshots/chapter-10/page-420.png)
 
-10.3 Loss Mechanisms in Magnetic Devices 425
-Iron alloys are also employed in powdered cores, containing ferromagnetic particles of suf-
-ﬁciently small diameter such that eddy currents are small. These particles are bound together
-using an insulating medium. Powdered iron and molybdenum permalloy powder cores exhibit
-typical saturation ﬂux densities of 0.6 to 0.8 T, with core losses signiﬁcantly lower than lam-
-inated ferrous alloy materials. The insulating medium behaves e ﬀectively as a distributed air
-gap, and hence these cores have relatively low permeability. Powder cores ﬁnd application as
-transformers at frequencies of several kHz, and as ﬁlter inductors in high frequency (100 kHz)
-switching converters.
-B, Tesla
-0.01 0.1 0.3
-Power loss density, Watts /cm3
-0.01
-0.1
-1
-20kHz
-50kHz
-100kHz
-200kHz500kHz1MHz
-Fig. 10.20 Typical core loss data for a high-frequency
-power ferrite material. Power loss density is plotted vs.
-peak ac ﬂux densityΔB, for sinusoidal excitation
-Amorphous alloys exhibit low hys-
-teresis loss. Core conductivity and eddy
-current losses are somewhat lower than
-ferrous alloys, but higher than ferrites.
-Saturation ﬂux densities in the range 0.6
-to 1.5 T are obtained.
-Ferrite cores are ceramic materi-
-als having low saturation ﬂux den-
-sity, 0.25 to 0.5 T. Their resistivities
-are much higher than other materi-
-als, and hence eddy current losses are
-much smaller. Manganese-zinc ferrite
-cores ﬁnd widespread use as induc-
-tors and transformers in converters hav-
-ing switching frequencies of 10 kHz to
-1 MHz. Nickel-zinc ferrite materials can
-be employed at yet higher frequencies.
-Figure 10.20 contains typical total
-core loss data, for a certain ferrite ma-
-terial. Power loss density, in Watts per
-cubic centimeter of core material, is plot-
-ted as a function of sinusoidal excitation
-frequency f and peak ac ﬂux densityΔB.
-At a given frequency, the core loss P
-fe
-can be approximated by an empirical function of the form
-Pfe = Kfe (ΔB)β Acℓm (10.57)
-The parameters Kfe and β are determined by ﬁtting Eq. (10.57) to the manufacturer’s published
-data. Typical values of β for ferrite materials operating in their intended range ofΔB and f lie
-in the range 2.6 to 2.8. The constant of proportionality Kfe increases rapidly with excitation
-frequency f . The dependence of Kfe on f can also be approximated by empirical formulae that
-are ﬁtted to the manufacturer’s published data; a fourth-order polynomial or a function of the
-form Kfe 0 fξare sometimes employed for this purpose. Parameters in empirical formulae ﬁtted
-to data measured under sinusoidal excitation can be used to improve prediction of ferrite core
-loss with nonsinusoidal waveforms, as described in [96].
+图10.2 导线环路中感应的电压 $v(t)$ 通过法拉第定律与穿过环路内部的总磁通 $\Phi(t)$ 的导数相关
 
-426 10 Basic Magnetics Theory
-10.3.2 Low-Frequency Copper Loss
-R
-i(t)
-Fig. 10.21 Winding
-equivalent circuit that
-models copper loss
-Signiﬁcant loss also occurs in the resistance of the copper windings.
-This is also a major determinant of the size of a magnetic device: if
-copper loss and winding resistance were irrelevant, then inductor and
-transformer elements could be made arbitrarily small by use of many
-small turns of small wire.
-Figure 10.21 contains an equivalent circuit of a winding, in which
-element R models the winding resistance. The copper loss of the
-winding is
-P
-cu= I2
-rms R (10.58)
-where Irms is the rms value of i(t). The dc resistance of the winding
-conductor can be expressed as
-R= ρℓb
-Aw
-(10.59)
-where Aw is the wire bare cross-sectional area, and ℓb is the length
-of the wire. The resistivity ρis equal to 1.724· 10−6Ω-cm for soft-
-annealed copper at room temperature. This resistivity increases to 2.3· 10−6Ω-cm at 100◦C.
-If a core has a mean length per turn given by MLT , then an n turn winding on this core will
-have lengthℓb= nMLT . The resistance of this winding will be:
-R= ρn(MLT )
-Aw
-(10.60)
-Appendix B contains tables of the mean lengths per turn of standard ferrite core shapes, as
-well as the areas of standard American wire gauges.
-10.4 Eddy Currents in Winding Conductors
-Eddy currents also cause power losses in winding conductors. This can lead to copper losses
-signiﬁcantly in excess of the value predicted by Eqs. (10.58) and (10.59). The speciﬁc conductor
-eddy current mechanisms are called the skin eﬀect and the proximity eﬀect. These mechanisms
-are most pronounced in high-current conductors of multi-layer windings, particularly in high-
-frequency converters.
-10.4.1 Introduction to the Skin and Proximity Eﬀects
-Figure 10.22a illustrates a currenti(t) ﬂowing through a solitary conductor. This current induces
-magnetic ﬂuxΦ(t), whose ﬂux lines follow circular paths around the current as shown. Accord-
-ing to Lenz’s law, the ac ﬂux in the conductor induces eddy currents, which ﬂow in a manner
-that tends to oppose the ac ﬂux Φ(t). Figure 10.22b illustrates the paths of the eddy currents.
-It can be seen that the eddy currents tend to reduce the net current density in the center of the
-conductor, and increase the net current density near the surface of the conductor.
-The current distribution within the conductor can be found by solution of Maxwell’s equa-
-tions. For a sinusoidal currenti(t) of frequency f , the result is that the current density is greatest
+![源页 p.420](../assets/page-snapshots/chapter-10/page-420.png)
 
-10.4 Eddy Currents in Winding Conductors 427
-(a)
-i(t)
-Wire
-(t)
-Eddy
-currents
-(b)
-i(t)
-Wire
-Eddy
-currents
-Current
-density
-Fig. 10.22 The skin eﬀect: (a) current i(t) induces ﬂux Φ(t), which in turn induces eddy currents in
-conductor; (b) the eddy currents tend to oppose the current i(t) in the center of the wire, and increase the
-current on the surface of the wire
-Frequency
-100 C
-25 C
-#20 AWG
-Wire diameter
-#30 AWG
-#40 AWG
-Penetration
-depth , cm
-0.001
-0.01
-0.1
-zHM1zHk001zHk01
-Fig. 10.23 Penetration depthδ, as a function of frequency f , for copper wire
-at the surface of the conductor. The current density is an exponentially decaying function of
-distance into the conductor, with characteristic length δ known as the penetration depth or skin
-depth. The penetration depth is given by
-δ=
-√ ρ
-πμ f (10.61)
-For a copper conductor, the permeability μis equal to μ0, and the resistivity ρis given in
-Sect. 10.3.2. At 100◦C, the penetration depth of a copper conductor is
-δ= 7.5√
-f
-cm (10.62)
-with f expressed in Hz. The penetration depth of copper conductors is plotted in Fig. 10.23,a s
-a function of frequency f . For comparison, the wire diameters d of standard American Wire
+图10.3 短路导线环路中楞次定律的说明。磁通 $\Phi(t)$ 感应电流 $i(t)$，后者反过来产生磁通 $\Phi'(t)$，倾向于阻碍 $\Phi(t)$ 的变化
 
-428 10 Basic Magnetics Theory
-Gauge (AWG) conductors are also listed. It can be seen that d/δ= 1 for AWG #40 at approxi-
-mately 500 kHz, while d/δ= 1 for AWG #22 at approximately 10 kHz.
-T h es k i neﬀect causes the resistance and copper loss of solitary large-diameter wires to
-increase at high frequency. High-frequency currents do not penetrate to the center of the con-
-ductor. The current crowds at the surface of the wire, the inside of the wire is not utilized, and
-the eﬀective wire cross-sectional area is reduced. However, the skin eﬀect alone is not suﬃcient
-to explain the increased high-frequency copper losses observed in multiple-layer transformer
-windings.
-i
-Current
-density J
-h
-Area
-i
-AreaArea
-i Conductor 1
-Conductor 2
-Fig. 10.24 The proximity eﬀect in adja-
-cent copper foil conductors. Conductor 1
-carries current i(t). Conductor 2 is open-
-circuited
-A conductor that carries a high-frequency current
-i(t) induces copper loss in an adjacent conductor by
-a phenomenon known as the proximity eﬀect.F i g -
-ure 10.24 illustrates two copper foil conductors that are
-placed in close proximity to each other. Conductor 1
-carries a high-frequency sinusoidal current i(t), whose
-penetration depth δ is much smaller than the thickness
-h of conductors 1 or 2. Conductor 2 is open-circuited,
-so that it carries a net current of zero. However, it is
-possible for eddy currents to be induced in conductor
-2 by the current i(t) ﬂowing in conductor 1.
-The current i(t) ﬂowing in conductor 1 generates
-a ﬂuxΦ(t) in the space between conductors 1 and 2;
-this ﬂux attempts to penetrate conductor 2. By Lenz’s
-law, a current is induced on the adjacent (left) side of
-conductor 2, which tends to oppose the ﬂux Φ(t). If
-the conductors are closely spaced, and if h≫ δ, then
-the induced current will be equal and opposite to the
-current i(t), as illustrated in Fig. 10.24.
-Since conductor 2 is open-circuited, the net current
-in conductor 2 must be zero. Therefore, a current +i(t) ﬂows on the right-side surface of con-
-ductor 2. So the current ﬂowing in conductor 1 induces a current that circulates on the surfaces
-of conductor 2.
-Figure 10.25 illustrates the proximity eﬀect in a simple transformer winding. The primary
-winding consists of three series-connected turns of copper foil, having thickness h≫ δ, and
-carrying net current i(t). The copper foil is a strip of copper whose width is the same as the
-height of the core window; this strip is wound around a leg of the core. Consequently, each
-turn of this foil comprises one layer of the winding, as illustrated in Fig.10.25b. The secondary
-winding is identical; to the extent that the magnetizing current is small, the secondary turns
-carry net current−i(t). The windings pass through the window of a magnetic core; the magnetic
-core material encloses the mutual ﬂux of the transformer.
-The high-frequency sinusoidal current i(t) ﬂows on the right surface of primary layer 1,
-adjacent to layer 2. This induces a copper loss in layer 1, which can be calculated as follows.
-Let R
-dc be the dc resistance of layer 1, given by Eq. ( 10.59), and let I be the rms value of
-i(t). The skin eﬀect causes the copper loss in layer 1 to be equal to the loss in a conductor of
-thickness δ with uniform current density. This reduction of the conductor thickness from h to δ
-eﬀectively increases the resistance by the same factor. Hence, layer 1 can be viewed as having
-an “ac resistance” given by
-```
+楞次定律指出图10.2 中变化磁通 $\Phi(t)$ 感应的电压 $v(t)$ 的极性倾向于驱动电流通过环路以抵消磁通变化。例如，考虑图10.3 的短路环路。穿过环路内部的变化磁通 $\Phi(t)$ 在环路中感应电压 $v(t)$。此电压除以环路导体的阻抗得电流 $i(t)$ 如图所示。电流 $i(t)$ 感应磁通 $\Phi'(t)$，倾向于阻碍 $\Phi(t)$ 的变化。本章后续用楞次定律定性理解涡流现象。
+
+安培定律将绕组中的电流与磁动势 $\mathcal{F}$ 和磁场 $H$ 联系。长度为 $\ell_m$ 的闭合路径上的净磁动势等于穿过路径内部的总电流。例如，图10.4 给出一个磁芯，载流 $i(t)$ 的导线穿过磁芯中心窗口。考虑所示的闭合路径，沿磁芯内部的磁场线。安培定律指出
+
+$$\oint_{\text{closed path}}\mathbf{H}\cdot d\boldsymbol{\ell} = \text{穿过路径内部的总电流} \tag{10.7}$$
+
+![源页 p.420](../assets/page-snapshots/chapter-10/page-420.png)
+
+图10.4 闭合路径上的净磁动势通过安培定律与穿过路径内部的总电流相关
+
+穿过路径内部的总电流等于穿过磁芯中心窗口的总电流，即 $i(t)$。若磁场均匀且幅值为 $H(t)$，则积分为 $H(t)\ell_m$。故对图10.4 的示例，式 (10.7) 简化为
+
+$$\mathcal{F}(t) = H(t)\ell_m = i(t) \tag{10.8}$$
+
+故磁场强度 $H(t)$ 与绕组电流 $i(t)$ 相关。可将绕组电流视为磁动势源。式 (10.8) 表明磁芯上的磁动势 $\mathcal{F}(t) = H(t)\ell_m$ 等于绕组电流磁动势 $i(t)$。考虑两个磁动势后，闭合环路上的总磁动势为零。
+
+$B$ 与 $H$（等价地 $\Phi$ 与 $\mathcal{F}$）之间的关系由磁芯材料特性决定。图10.5a 给出自由空间或空气的特性：
+
+$$B = \mu_0 H \tag{10.9}$$
+
+量 $\mu_0$ 是自由空间的磁导率，MKS 单位制中等于 $4\pi\cdot 10^{-7}$ H/m。图10.5b 给出典型铁合金在高电平正弦稳态激励下的 B-H 特性。特性高度非线性，呈现磁滞和饱和。特性的精确形状取决于激励，对任意波形难以预测。
+
+![源页 p.421](../assets/page-snapshots/chapter-10/page-421.png)
+
+图10.5 B-H 特性：(a) 自由空间或空气；(b) 典型磁芯材料
+
+为分析目的，图10.5b 的磁芯材料特性通常用图10.6 的线性或分段线性特性建模。图10.6a 中忽略磁滞和饱和。B-H 特性为
+
+$$B = \mu H, \quad \mu = \mu_r\mu_0 \tag{10.10}$$
+
+磁芯材料磁导率 $\mu$ 可表示为相对磁导率 $\mu_r$ 与 $\mu_0$ 之积。$\mu_r$ 的典型值在 $10^3$ 至 $10^5$ 范围。
+
+![源页 p.422](../assets/page-snapshots/chapter-10/page-422.png)
+
+图10.6 磁芯材料 B-H 特性的近似：(a) 忽略磁滞和饱和；(b) 忽略磁滞
+
+图10.6b 的分段线性模型计入饱和但不计入磁滞。磁通密度 $B$ 的幅值超过饱和磁通密度 $B_{sat}$ 时磁芯材料饱和。$|B| < B_{sat}$ 时特性遵循式 (10.10)。$|B| > B_{sat}$ 时模型预测磁芯回到自由空间，特性斜率小得多，约等于 $\mu_0$。方形回线材料呈现此类突变饱和特性，且有非常大的相对磁导率 $\mu_r$。软材料呈现较不突变的饱和特性，$\mu$ 随 $H$ 增大逐渐减小。$B_{sat}$ 的典型值为：铁叠片和硅钢 1–2 T，粉末铁和钼坡莫合金材料 0.5–1 T，铁氧体材料 0.25–0.5 T。
+
+磁学量的单位制汇总于表10.1。本书使用 MKS 单位制。非合理化 CGS 单位制仍有一些使用。列出了两种单位制之间的换算。
+
+表10.1 磁学量的单位
+
+| 量 | MKS | 非合理化 CGS | 换算 |
+|---|---|---|---|
+| 磁芯材料方程 | $B = \mu_0\mu_r H$ | $B = \mu_r H$ | |
+| $B$ | 特斯拉 | 高斯 | 1 T = 10⁴ G |
+| $H$ | 安/米 | 奥斯特 | 1 A/m = $4\pi\cdot 10^{-3}$ Oe |
+| $\Phi$ | 韦伯 | 麦克斯韦 | 1 Wb = 10⁸ Mx |
+| | | | 1 T = 1 Wb/m² |
+
+图10.7 汇总了磁性器件基本电学量和磁学量之间的关系。绕组电压 $v(t)$ 通过法拉第定律与磁芯磁通和磁通密度相关。绕组电流 $i(t)$ 通过安培定律与磁场强度相关。磁芯材料特性关联 $B$ 和 $H$。
+
+![源页 p.423](../assets/page-snapshots/chapter-10/page-423.png)
+
+图10.7 确定磁性元件端子电学 i-v 特性步骤的汇总
+
+![源页 p.423](../assets/page-snapshots/chapter-10/page-423.png)
+
+图10.8 电感示例：(a) 电感几何结构；(b) 安培定律的应用
+
+现在确定图10.8a 简单电感的电学端子特性。磁导率为 $\mu$ 的磁芯上绕 $n$ 匝绕组。法拉第定律指出磁芯内磁通 $\Phi(t)$ 在每匝绕组中感应电压 $v_{turn}(t)$，为
+
+$$v_{turn}(t) = \frac{d\Phi(t)}{dt} \tag{10.11}$$
+
+由于相同磁通 $\Phi(t)$ 穿过每匝绕组，总绕组电压为
+
+$$v(t) = nv_{turn}(t) = n\frac{d\Phi(t)}{dt} \tag{10.12}$$
+
+代入式 (10.4) 可用平均磁通密度 $B(t)$ 表示式 (10.12)：
+
+$$v(t) = nA_c\frac{dB(t)}{dt} \tag{10.13}$$
+
+其中平均磁通密度 $B(t) = \Phi(t)/A_c$。
+
+安培定律的应用如图10.8b所示。选择沿磁芯内部平均磁场线的闭合路径。此路径的长度称为平均磁路长度 $\ell_m$。若磁场强度 $H(t)$ 均匀，则安培定律指出 $H\ell_m$ 等于穿过路径内部的总电流，即穿过磁芯中心窗口的净电流。由于有 $n$ 匝导线穿过窗口，每匝载流 $i(t)$，穿过窗口的净电流为 $ni(t)$。故安培定律指出
+
+$$H(t)\ell_m = ni(t) \tag{10.14}$$
+
+让我们用忽略磁滞但计入饱和的方式建模磁芯材料特性：
+
+$$B = \begin{cases} B_{sat} & \text{对} \ H \ge B_{sat}/\mu \\ \mu H & \text{对} \ |H| < B_{sat}/\mu \\ -B_{sat} & \text{对} \ H \le -B_{sat}/\mu \end{cases} \tag{10.15}$$
+
+饱和斜率 $\mu_0$ 远小于 $\mu$，此处忽略。得与图10.6b 类似的特性。代入 $H = B_{sat}/\mu$ 到式 (10.14) 可求饱和起始时的电流幅值 $I_{sat}$，结果为
+
+$$I_{sat} = \frac{B_{sat}\ell_m}{\mu n} \tag{10.16}$$
+
+现在可从式 (10.13) 至 (10.15) 消去 $B$ 和 $H$，求解电学端子特性。$|I| < I_{sat}$ 时 $B = \mu H$。式 (10.13) 变为
+
+$$v(t) = \mu n A_c\frac{dH(t)}{dt} \tag{10.17}$$
+
+将式 (10.14) 代入式 (10.17) 消去 $H(t)$ 得
+
+$$v(t) = \frac{\mu n^2 A_c}{\ell_m}\frac{di(t)}{dt} \tag{10.18}$$
+
+形式为
+
+$$v(t) = L\frac{di(t)}{dt} \tag{10.19}$$
+
+其中
+
+$$L = \frac{\mu n^2 A_c}{\ell_m} \tag{10.20}$$
+
+故 $|I| < I_{sat}$ 时器件表现为电感。$|I| > I_{sat}$ 时磁通密度 $B(t) = B_{sat}$ 为常数。法拉第定律指出端子电压为
+
+$$v(t) = nA_c\frac{dB_{sat}}{dt} = 0 \tag{10.21}$$
+
+磁芯饱和时磁性器件行为接近短路。仅当绕组电流幅值小于 $I_{sat}$ 时器件表现为电感。实际电感因非零饱和磁导率而有一些小残余电感；但饱和时电感阻抗大幅减小，可能产生大电感电流。
+
+### 10.1.2 磁路
+
+![源页 p.425](../assets/page-snapshots/chapter-10/page-425.png)
+
+图10.9 含磁通的元件 (a) 及其等效磁路 (b)
+
+图10.9a 给出磁导率为 $\mu$、长度 $\ell$、截面积 $A_c$ 的元件内的均匀磁通和磁场。元件两端间的磁动势为
+
+$$\mathcal{F} = H\ell \tag{10.22}$$
+
+由于 $H = B/\mu$ 且 $B = \Phi/A_c$，可将 $\mathcal{F}$ 表示为
+
+$$\mathcal{F} = \frac{\ell}{\mu A_c}\Phi \tag{10.23}$$
+
+此方程形式为
+
+$$\mathcal{F} = \Phi\mathcal{R} \tag{10.24}$$
+
+其中
+
+$$\mathcal{R} = \frac{\ell}{\mu A_c} \tag{10.25}$$
+
+式 (10.24) 类似欧姆定律。此方程表明元件中的磁通正比于元件两端的磁动势。比例常数即磁阻 $\mathcal{R}$，与电导体电阻 $R$ 类似。实际上可构造对应于式 (10.24) 的集总元件磁路模型，如图10.9b所示。此磁路模型中，电压和电流分别用磁动势和磁通替代，元件特性 [式 (10.24)] 用电阻的模拟量表示，磁阻为 $\mathcal{R}$。
+
+由多个绕组和磁芯、气隙等多个异质元件组成的复杂磁结构可用等效磁路表示。然后用常规电路分析求解这些磁路，确定各磁通、磁动势和端子电压电流。基尔霍夫定律适用于磁路，直接来自麦克斯韦方程。基尔霍夫电流定律的模拟成立，因为 $B$ 的散度为零，故磁通线连续且不能终止。故进入节点的任何磁通线必须离开节点。如图10.10所示，进入节点的总磁通必须为零。基尔霍夫电压定律的模拟来自安培定律 [式 (10.7)]。式 (10.7) 左边积分是闭合路径上各磁阻的磁动势之和。式 (10.7) 右边表明绕组中的电流是磁动势源。载流 $i(t)$ 的 $n$ 匝绕组可建模为数值 $ni(t)$ 的磁动势源，与电压源类似。计入这些磁动势源后，闭合路径上的总磁动势为零。
+
+![源页 p.426](../assets/page-snapshots/chapter-10/page-426.png)
+
+图10.10 基尔霍夫电流定律应用于磁路：进入节点的净磁通必须为零。(a) 物理元件，磁芯三条腿在节点处汇合；(b) 磁路模型
+
+![源页 p.426](../assets/page-snapshots/chapter-10/page-426.png)
+
+图10.11 含气隙电感示例：(a) 物理几何；(b) 磁路模型
+
+考虑图10.11a 的含气隙电感。给出沿磁场线的闭合路径。此路径穿过磁导率为 $\mu$、长度 $\ell_c$ 的磁芯和磁导率为 $\mu_0$、长度 $\ell_g$ 的气隙。磁芯和气隙的截面积近似相等。对此路径应用安培定律得
+
+$$\mathcal{F}_c + \mathcal{F}_g = ni \tag{10.26}$$
+
+其中 $\mathcal{F}_c$ 和 $\mathcal{F}_g$ 分别是磁芯和气隙上的磁动势。磁芯和气隙特性可用图10.9 和式 (10.25) 的磁阻建模；磁芯磁阻 $\mathcal{R}_c$ 和气隙磁阻 $\mathcal{R}_g$ 为
+
+$$\mathcal{R}_c = \frac{\ell_c}{\mu A_c}, \quad \mathcal{R}_g = \frac{\ell_g}{\mu_0 A_c} \tag{10.27}$$
+
+对应式 (10.26) 和 (10.27) 的磁路如图10.11b所示。绕组是数值为 $ni$ 的磁动势源。磁芯和气隙磁阻有效串联。磁路解为
+
+$$ni = \Phi(\mathcal{R}_c + \mathcal{R}_g) \tag{10.28}$$
+
+磁通 $\Phi(t)$ 穿过绕组，故可用法拉第定律写
+
+$$v(t) = n\frac{d\Phi(t)}{dt} \tag{10.29}$$
+
+用式 (10.28) 消去 $\Phi(t)$ 得
+
+$$v(t) = \frac{n^2}{\mathcal{R}_c + \mathcal{R}_g}\frac{di(t)}{dt} \tag{10.30}$$
+
+故电感 $L$ 为
+
+$$L = \frac{n^2}{\mathcal{R}_c + \mathcal{R}_g} \tag{10.31}$$
+
+![源页 p.427](../assets/page-snapshots/chapter-10/page-427.png)
+
+图10.12 气隙对磁路 $\Phi$ 与 $ni$ 特性的影响。气隙增大磁芯饱和起始电流 $I_{sat}$
+
+气隙增大磁路的总磁阻，减小电感。实际电感中使用气隙有两个原因。无气隙（$\mathcal{R}_g = 0$）时电感正比于磁芯磁导率 $\mu$。此量取决于温度和工作点，难以控制。故构造电感值良好控制的电感可能困难。加入磁阻 $\mathcal{R}_g$ 大于 $\mathcal{R}_c$ 的气隙使式 (10.31) 中 $L$ 值对 $\mu$ 变化不敏感。
+
+加入气隙还允许电感在更高绕组电流 $i(t)$ 下工作而不饱和。总磁通 $\Phi$ 对绕组磁动势 $ni$ 绘于图10.12。由于 $\Phi$ 正比于 $B$，磁芯不饱和时 $ni$ 正比于磁芯磁场强度 $H$，图10.12 与磁芯 B-H 特性形状相同。磁芯不饱和时 $\Phi$ 按式 (10.28) 的线性关系与 $ni$ 相关。磁芯饱和时 $\Phi$ 等于
+
+$$\Phi_{sat} = B_{sat}A_c \tag{10.32}$$
+
+将式 (10.32) 代入 (10.28) 求饱和起始绕组电流 $I_{sat}$：
+
+$$I_{sat} = \frac{B_{sat}A_c}{n}(\mathcal{R}_c + \mathcal{R}_g) \tag{10.33}$$
+
+$\Phi$-$ni$ 特性对两种情形绘于图10.12：(a) 有气隙，(b) 无气隙（$\mathcal{R}_g = 0$）。可见加入气隙增大 $I_{sat}$。故气隙允许增大饱和电流，代价是减小电感。
+
+## 10.2 变压器建模
+
+接下来考虑图10.13 的双绕组变压器。磁芯截面积 $A_c$、平均磁路长度 $\ell_m$、磁导率 $\mu$。等效磁路如图10.14所示。磁芯磁阻为
+
+$$\mathcal{R} = \frac{\ell_m}{\mu A_c} \tag{10.34}$$
+
+![源页 p.428](../assets/page-snapshots/chapter-10/page-428.png)
+
+图10.13 双绕组变压器
+
+![源页 p.428](../assets/page-snapshots/chapter-10/page-428.png)
+
+图10.14 建模图10.13 双绕组变压器的磁路
+
+此例中有两个绕组，须确定磁动势发生器的相对极性。安培定律指出
+
+$$\mathcal{F}_c = n_1 i_1 + n_2 i_2 \tag{10.35}$$
+
+磁动势发生器是相加的，因为电流 $i_1$ 和 $i_2$ 以相同方向穿过磁芯窗口。解图10.14 得
+
+$$\Phi\mathcal{R} = n_1 i_1 + n_2 i_2 \tag{10.36}$$
+
+此式也可将 $\mathcal{F}_c = \Phi\mathcal{R}$ 代入式 (10.35) 得到。
+
+### 10.2.1 理想变压器
+
+理想变压器中磁芯磁阻 $\mathcal{R}$ 趋向零。这使磁芯磁动势 $\mathcal{F}_c = \Phi\mathcal{R}$ 也趋向零。式 (10.35) 变为
+
+$$0 = n_1 i_1 + n_2 i_2 \tag{10.37}$$
+
+此外，由法拉第定律有
+
+$$v_1 = n_1\frac{d\Phi}{dt} \tag{10.38}$$
+
+$$v_2 = n_2\frac{d\Phi}{dt}$$
+
+注意上述两式中 $\Phi$ 相同：相同总磁通链接两个绕组。消去 $\Phi$ 得
+
+$$\frac{d\Phi}{dt} = \frac{v_1}{n_1} = \frac{v_2}{n_2} \tag{10.39}$$
+
+式 (10.37) 和 (10.39) 是理想变压器方程：
+
+$$\frac{v_1}{n_1} = \frac{v_2}{n_2} \quad \text{且} \quad n_1 i_1 + n_2 i_2 = 0 \tag{10.40}$$
+
+图10.15 的理想变压器符号由式 (10.40) 定义。
+
+![源页 p.429](../assets/page-snapshots/chapter-10/page-429.png)
+
+图10.15 理想变压器符号
+
+### 10.2.2 磁化电感
+
+磁芯磁阻 $\mathcal{R}$ 非零的实际情形有
+
+$$\Phi\mathcal{R} = n_1 i_1 + n_2 i_2, \quad v_1 = n_1\frac{d\Phi}{dt} \tag{10.41}$$
+
+消去 $\Phi$ 得
+
+$$v_1 = \frac{n_1^2}{\mathcal{R}}\frac{d}{dt}\!\left[i_1 + \frac{n_2}{n_1}i_2\right] \tag{10.42}$$
+
+此方程形式为
+
+$$v_1 = L_M\frac{di_M}{dt} \tag{10.43}$$
+
+其中
+
+$$L_M = \frac{n_1^2}{\mathcal{R}}, \quad i_M = i_1 + \frac{n_2}{n_1}i_2 \tag{10.44}$$
+
+是归算到一次绕组的磁化电感和磁化电流。等效电路如图10.16所示。
+
+![源页 p.430](../assets/page-snapshots/chapter-10/page-430.png)
+
+图10.16 含磁化电感的变压器模型
+
+图10.16 与第6章引入的变压器模型一致。磁化电感建模磁芯材料的磁化。它是真实的物理电感，呈现饱和和磁滞。所有物理变压器都必含磁化电感。例如，设我们断开二次绕组。则只剩磁芯上的单个绕组——一个电感。实际上图10.16 的等效电路通过磁化电感预测了此行为。磁化电流使绕组电流比偏离匝比。
+
+磁芯磁通密度 $B(t)$ 超过饱和磁通密度 $B_{sat}$ 时变压器饱和。变压器饱和时磁化电流 $i_M(t)$ 变大，磁化电感阻抗变小，变压器绕组变为短路。应注意大绕组电流 $i_1(t)$ 和 $i_2(t)$ 不一定引起饱和：若这些电流遵循式 (10.37)，则磁化电流为零，磁芯无净磁化。变压器饱和而是施加伏秒的函数。磁化电流为
+
+$$i_M(t) = \frac{1}{L_M}\int v_1(t)\,dt \tag{10.45}$$
+
+或者，式 (10.45) 可用磁芯磁通密度 $B(t)$ 表示为
+
+$$B(t) = \frac{1}{n_1 A_c}\int v_1(t)\,dt \tag{10.46}$$
+
+施加伏秒 $\lambda_1$ 过大时磁通密度和磁化电流将大到足以使磁芯饱和，$\lambda_1$ 对周期性交流电压波形定义为
+
+$$\lambda_1 = \int_{t_1}^{t_2}v_1(t)\,dt \tag{10.47}$$
+
+选择积分限使积分取在施加周期电压波形的正部分。
+
+为修复饱和变压器，应通过增加匝数或增大磁芯截面积 $A_c$ 来减小磁通密度。加气隙对常规变压器饱和无影响，因为它不修改式 (10.46)。气隙仅使变压器更不理想，减小 $L_M$ 并增大 $i_M(t)$ 而不改变 $B(t)$。变压器饱和机理与电感不同，因为变压器饱和由施加的绕组电压波形而非施加的绕组电流决定。
+
+### 10.2.3 漏感
+
+实际中存在一些链接一个绕组但不链接另一绕组的磁通，通过"泄漏"到空气中或其他机理。如图10.17所示，此磁通导致漏感，即与绕组串联的附加有效电感。图10.17b 给出拓扑等效结构，其中漏磁通 $\Phi_{\ell 1}$ 和 $\Phi_{\ell 2}$ 显式表示为独立电感。
+
+![源页 p.431](../assets/page-snapshots/chapter-10/page-431.png)
+
+图10.17 双绕组变压器中的漏磁通：(a) 变压器几何；(b) 等效系统
+
+![源页 p.431](../assets/page-snapshots/chapter-10/page-431.png)
+
+图10.18 双绕组变压器等效电路，含归算到一次的磁化电感和一次、二次漏感
+
+图10.18 给出变压器电气等效电路模型，含建模漏感的串联电感 $L_{\ell 1}$ 和 $L_{\ell 2}$。这些漏感使端子电压比 $v_2(t)/v_1(t)$ 偏离理想匝比 $n_2/n_1$。一般地，双绕组变压器的端子方程可写为
+
+$$\begin{bmatrix} v_1(t) \\ v_2(t) \end{bmatrix} = \begin{bmatrix} L_{11} & L_{12} \\ L_{12} & L_{22} \end{bmatrix}\frac{d}{dt}\begin{bmatrix} i_1(t) \\ i_2(t) \end{bmatrix} \tag{10.48}$$
+
+量 $L_{12}$ 称为互感，为
+
+$$L_{12} = \frac{n_1 n_2}{\mathcal{R}} = \frac{n_2}{n_1}L_M \tag{10.49}$$
+
+量 $L_{11}$ 和 $L_{22}$ 称为一次和二次自感，为
+
+$$L_{11} = L_{\ell 1} + \frac{n_1}{n_2}L_{12}, \quad L_{22} = L_{\ell 2} + \frac{n_2}{n_1}L_{12} \tag{10.50}$$
+
+注意式 (10.48) 未显式标识物理匝比 $n_2/n_1$。而是式 (10.48) 将变压器行为仅表示为电学量的函数。但式 (10.48) 可用于定义有效匝比
+
+$$n_e = \sqrt{\frac{L_{22}}{L_{11}}} \tag{10.51}$$
+
+和耦合系数
+
+$$k = \frac{L_{12}}{\sqrt{L_{11}L_{22}}} \tag{10.52}$$
+
+耦合系数 $k$ 在 $0 \le k \le 1$ 范围内，是一次和二次绕组之间磁耦合程度的度量。完美耦合的变压器中漏感 $L_{\ell 1}$ 和 $L_{\ell 2}$ 为零。耦合系数 $k$ 等于 1。构造耦合系数超过 0.99 的低压变压器相当可行。耦合系数接近 1 时有效匝比 $n_e$ 近似等于物理匝比 $n_2/n_1$。
+
+## 10.3 磁性器件中的损耗机理
+
+### 10.3.1 铁损
+
+改变磁芯材料的磁化需要能量。并非所有能量都能以电学形式回收；一部分以热的形式损失。此功率损失可在电学上观察为 B-H 回线的磁滞。
+
+考虑频率 $f$ 的周期波形 $v(t)$ 和 $i(t)$ 激励的 $n$ 匝电感。一个周期内流入电感的净能量为
+
+$$W = \int_{\text{one cycle}}v(t)i(t)\,dt \tag{10.53}$$
+
+可将此表达式与磁芯 B-H 特性关联：用法拉第定律 [式 (10.13)] 替换 $v(t)$ 中的 $B(t)$，用安培定律 [式 (10.14)] 替换 $i(t)$ 中的 $H(t)$：
+
+$$W = \int_{\text{one cycle}}\!\left(nA_c\frac{dB(t)}{dt}\right)\!\left(\frac{H(t)\ell_m}{n}\right)dt = (A_c\ell_m)\int_{\text{one cycle}}H\,dB \tag{10.54}$$
+
+项 $A_c\ell_m$ 是磁芯体积，积分是 B-H 回线面积：
+
+$$\text{(每周期损失能量)} = \text{(磁芯体积)}\times\text{(B-H 回线面积)} \tag{10.55}$$
+
+磁滞功率损失 $P_H$ 等于每周期损失能量乘以激励频率 $f$：
+
+$$P_H = (f)(A_c\ell_m)\int_{\text{one cycle}}H\,dB \tag{10.56}$$
+
+在磁滞回线大小与频率无关的范围内，磁滞损失随工作频率直接增大。
+
+![源页 p.433](../assets/page-snapshots/chapter-10/page-433.png)
+
+图10.19 铁芯中的涡流
+
+磁芯材料是铁合金，不幸也是良好电导体。故交流磁场可在磁芯材料本身内引起电涡流。图10.19 给出一个例子。交流磁通 $\Phi(t)$ 穿过磁芯。这感应涡流 $i(t)$，按楞次定律在阻碍时变磁通 $\Phi(t)$ 的路径中流动。这些涡流在磁芯材料电阻中引起 $i^2R$ 损耗。涡流损耗在高频应用中尤为显著。
+
+按法拉第定律，交流磁通 $\Phi(t)$ 在磁芯中感应电压，驱动电流沿图10.19 所示路径流动。由于感应电压正比于磁通的导数，电压幅值随激励频率 $f$ 直接增大。若磁芯材料阻抗为纯阻且与频率无关，则感应涡流幅值也随 $f$ 直接增大。这意味着 $i^2R$ 涡流损耗应随 $f^2$ 增大。在功率铁氧体材料中，磁芯材料阻抗幅值实际上随 $f$ 增大而减小。在有用频率范围内，涡流损耗通常比 $f^2$ 增大更快。
+
+饱和磁通密度与铁损之间存在基本折中。使用高工作磁通密度导致减小体积、重量和成本。硅钢等材料呈现 1.5–2 T 的饱和磁通密度。但不幸的是这些磁芯材料呈现高铁损。特别是这些材料的低电阻率导致高涡流损耗。故这些材料适合滤波电感和低频变压器应用。磁芯材料以叠片或薄带形式生产，以减小涡流幅值。其他铁合金可含钼、钴或其他元素，呈现略低的铁损和略低的饱和磁通密度。
+
+铁合金也用于粉末磁芯，含直径足够小的铁磁颗粒使涡流小。这些颗粒用绝缘介质粘合在一起。粉末铁和钼坡莫合金粉末磁芯的典型饱和磁通密度为 0.6–0.8 T，铁损显著低于叠片铁合金材料。绝缘介质有效表现为分布式气隙，故这些磁芯磁导率相对低。粉末磁芯用作数 kHz 频率的变压器和高频（100 kHz）开关变换器中的滤波电感。
+
+![源页 p.434](../assets/page-snapshots/chapter-10/page-434.png)
+
+图10.20 高频功率铁氧体材料的典型铁损数据。功率损耗密度对正弦激励的峰值交流磁通密度 $\Delta B$ 绘制
+
+非晶合金呈现低磁滞损耗。磁芯电导率和涡流损耗略低于铁合金但高于铁氧体。获得 0.6–1.5 T 范围的饱和磁通密度。
+
+铁氧体磁芯是陶瓷材料，饱和磁通密度低，0.25–0.5 T。其电阻率远高于其他材料，故涡流损耗小得多。锰锌铁氧体磁芯广泛用作开关频率 10 kHz 至 1 MHz 变换器中的电感和变压器。镍锌铁氧体材料可在更高频率使用。
+
+图10.20 含某铁氧体材料的典型总铁损数据。功率损耗密度（每立方厘米磁芯材料的瓦特）作为正弦激励频率 $f$ 和峰值交流磁通密度 $\Delta B$ 的函数绘制。给定频率下铁损 $P_{fe}$ 可用如下经验函数近似
+
+$$P_{fe} = K_{fe}(\Delta B)^\beta A_c\ell_m \tag{10.57}$$
+
+参数 $K_{fe}$ 和 $\beta$ 由拟合式 (10.57) 到制造商公布数据确定。铁氧体材料在预期 $\Delta B$ 和 $f$ 范围内 $\beta$ 的典型值在 2.6–2.8 范围。比例常数 $K_{fe}$ 随激励频率 $f$ 快速增大。$K_{fe}$ 对 $f$ 的依赖也可用拟合到制造商公布数据的经验公式近似；有时为此用四阶多项式或 $K_{fe0}f^\xi$ 形式的函数。拟合到正弦激励下测量数据的经验公式参数可用于改善非正弦波形下铁氧体铁损的预测，如 [96] 所述。
+
+### 10.3.2 低频铜损
+
+![源页 p.435](../assets/page-snapshots/chapter-10/page-435.png)
+
+图10.21 建模铜损的绕组等效电路
+
+铜绕组电阻中也发生显著损耗。这也是磁性器件尺寸的主要决定因素：若铜损和绕组电阻无关，则可用许多小线径细线绕很多匝使电感和变压器元件任意小。
+
+图10.21 给出绕组等效电路，其中元件 $R$ 建模绕组电阻。绕组铜损为
+
+$$P_{cu} = I_{rms}^2 R \tag{10.58}$$
+
+其中 $I_{rms}$ 是 $i(t)$ 的方均根值。绕组导体的直流电阻可表示为
+
+$$R = \frac{\rho\ell_b}{A_w} \tag{10.59}$$
+
+其中 $A_w$ 是导线裸截面积，$\ell_b$ 是导线长度。电阻率 $\rho$ 在室温下对软退火铜等于 $1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$。100°C 时此电阻率增大到 $2.3\cdot 10^{-6}\,\Omega\cdot\text{cm}$。
+
+若磁芯每匝平均长度为 MLT，则此磁芯上 $n$ 匝绕组长度 $\ell_b = n\cdot\text{MLT}$。此绕组电阻为
+
+$$R = \frac{\rho n(\text{MLT})}{A_w} \tag{10.60}$$
+
+附录 B 含标准铁氧体磁芯形状每匝平均长度表和标准美国线规面积表。
+
+## 10.4 绕组导体中的涡流
+
+涡流也在绕组导体中引起功率损耗。这可导致铜损显著超过式 (10.58) 和 (10.59) 预测的值。具体导体涡流机理称为趋肤效应和邻近效应。这些机理在多层绕组的大电流导体中尤为明显，特别是在高频变换器中。
+
+### 10.4.1 趋肤效应和邻近效应引言
+
+![源页 p.436](../assets/page-snapshots/chapter-10/page-436.png)
+
+图10.22 趋肤效应：(a) 电流 $i(t)$ 感应磁通 $\Phi(t)$，后者反过来在导体中感应涡流；(b) 涡流倾向于阻碍导线中心的电流 $i(t)$，增大导线表面的电流
+
+图10.22a 给出流过孤立导体的电流 $i(t)$。此电流感应磁通 $\Phi(t)$，其磁通线围绕电流呈圆形路径如图所示。按楞次定律，导体中的交流磁通感应涡流，涡流以阻碍交流磁通 $\Phi(t)$ 的方式流动。图10.22b 给出涡流路径。可见涡流倾向于减小导体中心的净电流密度，增大导体表面的净电流密度。
+
+导体内的电流分布可通过求解麦克斯韦方程得到。对频率 $f$ 的正弦电流 $i(t)$，结果是导体表面电流密度最大。电流密度是进入导体距离的指数衰减函数，特征长度 $\delta$ 称为穿透深度或趋肤深度。穿透深度为
+
+$$\delta = \sqrt{\frac{\rho}{\pi\mu f}} \tag{10.61}$$
+
+对铜导体，磁导率 $\mu$ 等于 $\mu_0$，电阻率 $\rho$ 在 10.3.2 节给出。100°C 时铜导体的穿透深度为
+
+$$\delta = \frac{7.5}{\sqrt{f}}\text{ cm} \tag{10.62}$$
+
+$f$ 以 Hz 为单位。铜导体的穿透深度作为频率 $f$ 的函数绘于图10.23。为比较，还列出了标准美国线规（AWG）导体的线径 $d$。可见 AWG #40 在约 500 kHz 处 $d/\delta = 1$，而 AWG #22 在约 10 kHz 处 $d/\delta = 1$。
+
+![源页 p.436](../assets/page-snapshots/chapter-10/page-436.png)
+
+图10.23 铜导线穿透深度 $\delta$ 作为频率 $f$ 的函数
+
+趋肤效应使孤立大线径导线的电阻和铜损在高频增大。高频电流不穿透到导体中心。电流聚集在导线表面，导线内部未被利用，有效导线截面积减小。但趋肤效应本身不足以解释多层变压器绕组中观察到的高频铜损增大。
+
+![源页 p.437](../assets/page-snapshots/chapter-10/page-437.png)
+
+图10.24 相邻铜箔导体中的邻近效应。导体1载电流 $i(t)$。导体2开路
+
+载高频电流 $i(t)$ 的导体通过称为邻近效应的现象在相邻导体中引起铜损。图10.24 给出紧密相邻放置的两个铜箔导体。导体1载高频正弦电流 $i(t)$，其穿透深度 $\delta$ 远小于导体1或2的厚度 $h$。导体2开路，故净电流为零。但导体2中可由导体1中流动的电流 $i(t)$ 感应涡流。
+
+导体1中流动的电流 $i(t)$ 在导体1和2之间的空间中产生磁通 $\Phi(t)$；此磁通试图穿透导体2。按楞次定律，导体2相邻（左侧）表面感应电流，倾向于阻碍磁通 $\Phi(t)$。若导体紧密排列且 $h \gg \delta$，则感应电流等于且反向于电流 $i(t)$，如图10.24所示。
+
+由于导体2开路，导体2中净电流必须为零。故导体2右侧表面流动电流 $+i(t)$。故导体1中流动的电流在导体2表面感应循环电流。
+
+图10.25 给出简单变压器绕组中的邻近效应。一次绕组由三匝串联铜箔组成，厚度 $h \gg \delta$，载净电流 $i(t)$。铜箔是宽度等于磁芯窗口高度的铜带，绕在磁芯柱上。故此铜箔每匝构成绕组一层，如图10.25b所示。二次绕组相同；在磁化电流小的范围内，二次匝载净电流 $-i(t)$。绕组穿过磁芯窗口；磁芯材料包围变压器的互磁通。
+
+高频正弦电流 $i(t)$ 在一次层 1 的右侧表面流动，相邻于层 2。这在层 1 中引起铜损，可如下计算。设 $R_{dc}$ 为层 1 的直流电阻 [由式 (10.59) 给出]，$I$ 为 $i(t)$ 的方均根值。趋肤效应使层 1 的铜损等于电流密度均匀、厚度 $\delta$ 的导体中的损耗。导体厚度从 $h$ 减到 $\delta$ 有效使电阻增大相同因子。故层 1 可视为有"交流电阻"

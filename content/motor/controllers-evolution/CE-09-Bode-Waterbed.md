@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-09: Bode积分与水床效应
 
 **副标题：为什么你无法欺骗物理——灵敏度守恒定律**
-**难度：**  较高
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-03（频域分析基础）
+- **难度：**  较高
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-03（频域分析基础）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 Bode灵敏度积分（Bode Sensitivity Integral）揭示了反馈控制的一个根本约束：对于任何稳定的闭环系统，灵敏度函数 $\lvert S(j\omega) \rvert$ 的对数在所有频率上的积分恒为零。这意味着你无法在所有频率上同时降低灵敏度——在一个频段压低灵敏度，必然在另一个频段抬高它，就像按压水床一样。当开环传递函数含有右半平面（RHP）极点或零点时，积分变为严格正值，施加了一个你无法逃避的最低代价。这不是整定问题，而是守恒定律，对控制的意义如同热力学第二定律对物理的意义。
 
-**认知挂钩：** 你在50 Hz挖了一个深坑来抑制振动，5 Hz处就冒出一个峰——你没放它在那里，它是被"挤"出来的。这就是Bode积分在说话：灵敏度面积守恒，你只能选择峰值出现在哪里，不能选择它是否存在。
+- **认知挂钩：** 你在50 Hz挖了一个深坑来抑制振动，5 Hz处就冒出一个峰——你没放它在那里，它是被"挤"出来的。这就是Bode积分在说话：灵敏度面积守恒，你只能选择峰值出现在哪里，不能选择它是否存在。
 
 ---
 
@@ -316,23 +316,23 @@ $$\min_K \left\lVert \begin{matrix} W_1 S \\ W_2 KS \\ W_3 T \end{matrix} \right
 
 ## 12. 延伸阅读
 
-**原始文献——密集但奠基性：**
+- **原始文献——密集但奠基性：**
 - Bode, H.W. (1945). *Network Analysis and Feedback Amplifier Design.* Van Nostrand. — 第13–14章。Bode在贝尔实验室的反馈放大器设计背景下推导了这个积分。数学与控制理论相同——他只是称之为"回差"而不是"灵敏度"。
 
-**最易读的现代处理：**
+- **最易读的现代处理：**
 - Åström, K.J. & Murray, R.M. (2021). *Feedback Systems: An Introduction for Scientists and Engineers*, 2nd ed. Princeton. — 第12章："Fundamental Limits。" Bode积分及RHP极点和零点推广的清晰推导。免费PDF在线。
 
-**根本限制的权威专著：**
+- **根本限制的权威专著：**
 - Seron, M.M., Braslavsky, J.H., & Goodwin, G.C. (1997). *Fundamental Limitations in Filtering and Control.* Springer. — 完整处理：Bode积分、Poisson积分、时域约束、多变量推广。全面但数学要求高。
 
-**带设计实例的应用参考：**
+- **带设计实例的应用参考：**
 - Skogestad, S. & Postlethwaite, I. (2005). *Multivariable Feedback Control*, 2nd ed. Wiley. — 第5章："Limitations on Performance in SISO Systems。" 将Bode积分直接联系到实际设计约束，有算例。
 
-**RHP极点/零点推广的开创性论文：**
+- **RHP极点/零点推广的开创性论文：**
 - Freudenberg, J.S. & Looze, D.P. (1985). "Right half plane poles and zeros and design tradeoffs in feedback systems." *IEEE Trans. Automatic Control*, 30(6), 555–565. — 将Bode积分推广到不稳定被控对象和RHP零点的论文，量化了不稳定的"代价"。
 
-**H∞联系：**
+- **H∞联系：**
 - Doyle, J.C., Francis, B.A., & Tannenbaum, A.R. (1992). *Feedback Control Theory.* Macmillan. — 第5章：Bode积分如何约束H∞设计的最清晰阐述。免费PDF。
 
-**历史背景：**
+- **历史背景：**
 - Bode, H.W. (1940). "Relations between attenuation and phase in feedback amplifier design." *Bell System Technical Journal*, 19(3), 421–454. — 前驱论文。Bode的增益-相位关系（给定增益滚降有最小相位滞后）是灵敏度积分的对偶。它们共同构成线性系统的Bode"守恒定律"。

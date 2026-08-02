@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第16章part 1 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems"
+title: "第16章 面向设计的分析技巧：额外元件定理（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1257 +18,427 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第16章part 1 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
+# 第16章 面向设计的分析技巧：额外元件定理（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 629-648  
-> Chunk ID: `chapter-16-part-1`
+> 源页：629–648
+> 本部分涵盖 16.1 额外元件定理和 16.2 EET 示例。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+Middlebrook 额外元件定理（EET）是面向设计分析的强大技巧，辅助复杂电路和系统的分析，目标是导出对设计有用的可处理方程。与第13章反馈定理一样，它基于线性叠加和零双注入分析技巧。
 
-## 术语表
+额外元件定理揭示已知传递函数如何因加入新网络元件而改变。16.1 节含零双注入推导，16.2 节描述若干使用示例。此定理是第17章变换器输入滤波器分析的基础。16.2.3 节用 EET 获得如何阻尼 SEPIC 内部谐振的理解。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+N 额外元件定理（n-EET）是 EET 向同时加入多个元件的扩展。n-EET 的一个有用应用是将所有储能元件视为额外元件：传递函数可写为几乎无代数的归一化有理分式。此强大技巧可大幅扩展工程师对复杂动态电路进行可处理纸面分析和设计的能力。16.3 节无证明描述此技巧，并含若干示例。
 
-## 中文翻译
+## 16.1 额外元件定理
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+R. D. Middlebrook [139–141] 的额外元件定理表明传递函数如何因向网络加入阻抗而改变。此定理允许确定此额外元件对任何感兴趣传递函数的影响，无需重新求解系统。额外元件定理是面向设计分析的强大技巧。它导出保证元件不显著改变传递函数的阻抗不等式。额外元件定理在第17章使用，导向设计不退化开关稳压器环路增益的输入滤波器的相对简单方法。22.4 节也使用它确定负载电阻如何影响谐振逆变器特性。本节基于叠加原理导出 Middlebrook 额外元件定理，并通过示例说明其应用。
 
-## 英文原文
+![源页 p.630](../assets/page-snapshots/chapter-16/page-630.png)
 
-```text
-16
-Techniques of Design-Oriented Analysis: Extra
-Element Theorems
-Middlebrook’s Extra Element Theorem(EET) is a powerful technique of Design-Oriented Anal-
-ysis that aids in the analysis of complex circuits and systems, with the goal of deriving tractable
-equations that are useful for design. As with the Feedback Theorem of Chap. 13, it is based on
-linear superposition and the null double injection analysis technique.
-The Extra Element Theorem exposes how a known transfer function is changed by addition
-of a new network element. Section 16.1 contains a derivation by null double injection, and
-Sect. 16.2 describes several examples of its use. This theorem is the basis for the Chap. 17
-analysis of converter input ﬁlters. The EET is employed in Sect.16.2.3 to gain an understanding
-of how to damp the internal resonance of the SEPIC.
-The n-Extra Element Theorem(n-EET) is an extension of the EET to cover the simultaneous
-addition of multiple elements to a circuit. A useful application of the n-EET is the treatment of
-all reactive components as extra elements: a transfer function can be written as a normalized
-rational fraction with little or no algebra. This powerful technique can substantially extend the
-engineer’s ability to perform tractable paper analysis and design of complex dynamical circuits.
-Section 16.3 describes this technique without proof, and includes several examples.
-16.1 Extra Element Theorem
-The Extra Element Theorem of R. D. Middlebrook [139–141] shows how a transfer function is
-changed by the addition of an impedance to the network. The theorem allows one to determine
-the eﬀects of this extra element on any transfer function of interest, without solving the system
-all over again. The Extra Element Theorem is a powerful technique of design-oriented analysis.
-It leads to impedance inequalities which guarantee that an element does not substantially alter
-a transfer function. The Extra Element Theorem is employed in Chap. 17, where it leads to a
-relatively simple methodology for designing input ﬁlters that do not degrade the loop gains of
-switching regulators. It is also employed in Sect. 22.4, to determine how the load resistance af-
-fects the properties of a resonant inverter. In this section, Middlebrook’s Extra Element Theorem
-is derived, based on the principle of superposition. Its application is illustrated via examples.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_16
-625
+图16.1 加入元件如何改变传递函数 $G(s)$：(a) 加入新元件前的原始条件；(b) 加入阻抗为 $Z(s)$ 的元件
 
-626 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-(a)
-Port
-Open-circuit
-Linear circuit Linear circuit
-Input Output
-{
-+
-–vin(s)
-+
-vout(s)
-–
-G(s) Z(s)
-Transfer function
-(b)
-Port
-Input Output+
-–vin(s)
-+
-vout(s)
-–
-Transfer function
-G(s)
-Z(s)
-Fig. 16.1 How an added element changes a transfer functionG(s): (a) original conditions, before addition
-of new element; (b) addition of element having impedance Z(s)
-16.1.1 Basic Result
-Consider the linear circuit of Fig. 16.1a. This network contains an input vin(s) and an output
-vout(s). In addition, it contains a port whose terminals are open-circuited. It is assumed that the
-transfer function from vin(s)t o vout(s) is known, and is given by
-vout(s)
-vin(s) = G(s)
-⏐⏐⏐⏐
-⏐
-Z(s)→∞
-(16.1)
-The Extra Element Theorem tells us how the transfer function G(s) is modiﬁed when an
-impedance Z(s) is connected between the terminals at the port, as in Fig. 16.1b. The result is
-vout(s)
-vin(s) =
-⎦
-G(s)
-⏐⏐⏐
-⏐⏐
-Z(s)→∞
-)
-⎛⎜⎜⎜⎜⎜⎜⎜⎜
-⎜⎜⎜⎜⎝
-1+ Z
-N (s)
-Z(s)
-1+ ZD(s)
-Z(s)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟
-⎟⎟⎟⎟⎠
-(16.2)
-The right-hand side terms involving Z(s) account for the inﬂuence of Z(s)o n G(s), and are
-known as the correction factor.
-The Extra Element Theorem also applies to the dual form illustrated in Fig. 16.2.I nt h i s
-form, the transfer function is initially known under the conditions that the port is short-circuited.
-In Fig. 16.2b, the short circuit is replaced by the impedance Z(s). In this case, the addition of
-the impedance Z(s) causes the transfer function to become
-v
-out(s)
-vin(s) =
-⎦
-G(s)
-⏐⏐⏐⏐
-⏐
-Z(s)→0
-)
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ Z(s)
-ZN (s)
-1+ Z(s)
-ZD(s)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(16.3)
-The ZN (s) and ZD(s)t e r m si nE q s .(16.2) and ( 16.3) are identical. By equating the G(s)
-expressions of Eqs. (16.2) and (16.3), one can show that
-G(s)
-⏐⏐⏐Z(s)→∞
-G(s)
-⏐⏐⏐Z(s)→0
-= ZD(s)
-ZN (s) (16.4)
+### 16.1.1 基本结果
 
-16.1 Extra Element Theorem 627
-(a) G(s) Z(s)0
-Port
-Short-circuit
-Linear circuit
-Input Output
-{
-+
-–vin(s)
-+
-vout(s)
-–
-Transfer function
-(b)
-Port
-Linear circuit
-Input Output+
-–vin(s)
-+
-vout(s)
-–
-Transfer function
-G(s)
-Z(s)
-Fig. 16.2 The dual form of the Extra Element Theorem, in which the extra element replaces a short
-circuit: (a) original conditions; (b) addition of element having impedance Z(s)
-This is known as the reciprocity relationship.
-The quantities ZN (s) and ZD(s) can be found by measuring impedances at the port. The
-term ZD(s) is the Thevenin equivalent impedance seen looking into the port, also known as the
-driving-point impedance. As illustrated in Fig. 16.3a, this impedance is found by setting the
-independent source vin(s) to zero, and then measuring the impedance between the terminals of
-the port:
-ZD(s)= v(s)
-i(s)
-⏐⏐⏐⏐
-⏐
-vin(s)=0
-(16.5)
-Thus, ZD(s) is the impedance between the port terminals when the input vin(s) is set to zero.
-Determination of the impedance ZN (s) is illustrated in Fig. 16.3b. The term ZN (s) is found
-under the conditions that the output vout(s)i s nulled to zero. A current source i(s) is connected
-to the terminals of the port. In the presence of the input signal vin(s), the current i(s) is adjusted
-so that the output vout(s) is nulled to zero. Under these conditions, the quantity ZN (s)i sg i v e n
-by
-ZN (s)= v(s)
-i(s)
-⏐⏐⏐⏐
-⏐
-vout(s)→
-null
-0
-(16.6)
-Note that nulling the output is not the same as shorting the output. If one simply shorted the
-output, then a current would ﬂow through the short, which would induce voltage drops and
-currents in other elements of the network. These voltage drops and currents are not present
-when the output is nulled. The null condition of Fig. 16.3b does not employ any connections to
-the output of the circuit. Rather, the null condition is achieved by adjustment of the independent
-sources vin(s) and i(s) in a special way that causes the outputvout(s) to be zero. By superposition,
-vout(s) can be expressed as a linear combination ofvin(s) and i(s); therefore, for a givenvin(s), it
-is always possible to choose ani(s) that will causevout(s) to be zero. Under these null conditions,
-ZN (s) is measured as the ratio of v(s)t o i(s). In practice, the circuit analysis to ﬁnd ZN (s)i s
-simpler than analysis of ZD(s), because the null condition causes many of the signals within the
-circuit to be zero. Several examples are given in Sect. 16.2.
-The input and output quantities need not be voltages, but could also be currents or other
-signals that can be set or nulled to zero. The next section contains a derivation of the Extra
-Element Theorem with a general input u(s) and output y(s).
+考虑图16.1a 的线性电路。此网络含输入 $v_{in}(s)$ 和输出 $v_{out}(s)$。此外含端子开路的端口。假定从 $v_{in}(s)$ 到 $v_{out}(s)$ 的传递函数已知，为
 
-628 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-(a)
-ZD(s)= v(s)
-i(s) vin(s)=0
-Port
-Short-circuit
-Linear circuit
-Input Output
-{
-vin(s) = 0
-+
-vout(s)
-–
-i(s)
-+ v(s) –
-(b)
-ZN(s)= v(s)
-i(s) vout(s)0
-Port
-Linear circuit
-Input Output
-+
-vout(s) 0
-–
-i(s)
-+ v(s) –
-+
-–vin(s)
-Fig. 16.3 Determination of the quantities ZN (s)a n dZD(s): (a) ZD(s) is the driving-point impedance at
-the port, and is measured with the inputvin(s) set to zero; (b) ZN (s) is the impedance seen at the port under
-the condition that the output is nulled
-16.1.2 Derivation
-Figure 16.4a illustrates a general linear system having an input u(s) and an output y(s). In addi-
-tion, the system contains an electrical port having voltage v(s) and current i(s), with the polari-
-ties illustrated. Initially, the port is open-circuited:i(s)= 0. The transfer function of this system,
-with the port open-circuited, is
-Gold(s)= y(s)
-u(s)
-⏐⏐
-⏐⏐⏐
-i(s)=0
-(16.7)
-The objective of the Extra Element Theorem is to determine the new transfer functionG(s) that
-is obtained when an impedance Z(s) is connected to the port:
-G(s)= y(s)
-u(s) (16.8)
-The situation is illustrated in Fig. 16.4b. It can be seen that the conditions at the port are now
-given by
-v(s)=−i(s)Z(s) (16.9)
+$$\frac{v_{out}(s)}{v_{in}(s)} = \left.G(s)\right|_{Z(s)\to\infty} \tag{16.1}$$
 
-16.1 Extra Element Theorem 629
-(a)
-u(s) y(s)
-i(s) + v(s) –
-Port
-Open-circuit
-Linear network
-Input Output
-{
-(b)
-u(s) y(s)
-i(s) + v(s) –
-Port
-Linear network
-Input Outpu t
-Z(s)
-Fig. 16.4 Modiﬁcation of a linear network by addition of an extra element: ( a) original system; ( b)
-modiﬁed system, with impedance Z(s) connected at an electrical port
-To express the new transfer functionG(s)i nE q .(16.8) in terms of the original transfer function
-Gold(s)o fE q .( 16.7), we use current injection at the port, as illustrated in Fig. 16.5. There
-are now two independent inputs: the input u(s) and the independent current source i(s). The
-dependent quantities y(s) and v(s) can be expressed as functions of these independent inputs
-using the principle of superposition:
-y(s)= Gold(s)u(s)+ Gi(s)i(s) (16.10)
-v(s)= Gv(s)u(s)+ ZD(s)i(s) (16.11)
-Fig. 16.5 Current injection at the electrical port, by
-addition of independent current source i(s)
-u(s) y(s)
-i(s)
-+ v(s) –
-Port
-Linear network
-Input Outpu t
-where
-Gold(s)= y(s)
-u(s)
-⏐⏐
-⏐⏐⏐
-i(s)=0
-(16.12)
-Gi(s)= y(s)
-i(s)
-⏐⏐
-⏐⏐⏐
-u(s)=0
-(16.13)
-ZD(s)= v(s)
-i(s)
-⏐⏐⏐⏐
-⏐
-u(s)=0
-(16.14)
-Gv(s)= v(s)
-u(s)
-⏐⏐⏐⏐
-⏐
-i(s)=0
-(16.15)
+额外元件定理告诉我们当阻抗 $Z(s)$ 连接到端口端子间时（如图16.1b）传递函数 $G(s)$ 如何修改。结果为
 
-630 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-are the transfer functions from the independent inputs to the respective dependent quantitiesy(s)
-and v(s).
-The transfer function G(s) can be found by elimination of v(s) and i(s) from the system of
-equations (16.9)t o( 16.11), and solution for y(s) as a function of u(s). The result is
-G(s)= y(s)
-u(s)= Gold(s)−Gv(s)Gi(s)
-Z(s)+ ZD(s) (16.16)
-This intermediate result expresses the new transfer function G(s) as a function of the original
-transfer function Gold(s) and the extra element Z(s), as well as the quantities ZD(s), Gv(s), and
-Gi(s).
-Equation (16.14) gives a direct way to ﬁnd the quantity ZD(s). ZD(s) is the driving-point
-impedance at the port, when the input u(s) is set to zero. This quantity can be found either by
-conventional circuit analysis or simulation, or by laboratory measurement.
-Although Gv(s) and Gi(s) could also be determined from the deﬁnitions (16.13) and (16.15),
-it is preferable to eliminate these quantities, and instead express G(s)a saf u n c t i o no ft h e
-impedances at the given port. This can be accomplished via the following thought experiment.
-In the presence of the input u(s), we adjust the independent current source i(s) in the special
-way that causes the output y(s) to be nulled to zero. The impedance ZN (s) is deﬁned as the ratio
-of v(s)t o i(s) under these null conditions:
-ZN (s)= v(s)
-i(s)
-⏐⏐
-⏐
-⏐⏐
-y(s)→
-null
-0
-(16.17)
-The value of i(s) that achieves the null condition y(s)→
-null
-0 can be found by setting y(s)= 0i n
-Eq. (16.10), as follows:
-[Gold(s)u(s)+ Gi(s)i(s)]→
-null
-0 (16.18)
-Hence, the output y(s) is nulled when the inputs u(s) and i(s) are related as follows:
-u(s)
-⏐⏐
-⏐⏐⏐
-y(s)→
-null
-0
-=−Gi(s)
-Gold(s) i(s)
-⏐⏐
-⏐⏐⏐
-y(s)→
-null
-0
-(16.19)
-Under this null condition, the voltage v(s) is given by
-v(s)
-⏐⏐⏐y(s)→
-null
-0 = Gv(s)u(s)
-⏐⏐⏐y(s)→
-null
-0+ ZD(s)i(s)
-⏐⏐⏐y(s)→
-null
-0
-=
-⎦
-−Gv(s)Gi(s)
-Gold(s) + ZD(s)
-)
-i(s)
-⏐⏐⏐
-⏐
-⏐⏐
-y(s)→
-null
-0
-(16.20)
-which follows from Eqs. (16.11) and (16.19). Substitution of Eq. (16.17) into Eq. (16.20) yields
-v(s)
-⏐⏐⏐⏐
-⏐
-y(s)→
-null
-0
-= ZN (s)i(s)
-⏐⏐⏐⏐
-⏐
-y(s)→
-null
-0
-=
-⎦
-−Gv(s)Gi(s)
-Gold(s) + ZD(s)
-)
-i(s)
-⏐⏐⏐⏐
-⏐
-y(s)→
-null
-0
-(16.21)
-Hence,
-ZN (s)= ZD(s)−Gv(s)Gi(s)
-Gold(s) (16.22)
+$$\frac{v_{out}(s)}{v_{in}(s)} = \left(\left.G(s)\right|_{Z(s)\to\infty}\right)\frac{\left(1+\dfrac{Z_N(s)}{Z(s)}\right)}{\left(1+\dfrac{Z_D(s)}{Z(s)}\right)} \tag{16.2}$$
 
-16.1 Extra Element Theorem 631
-Solution for the quantity Gv(s)Gi(s) yields
-Gv(s)Gi(s)= (ZD(s)−ZN (s))Gold(s) (16.23)
-Thus, the unknown quantities Gv(s) and Gi(s) can be related to ZN (s) and ZD(s), which are
-properties of the port at which the new impedance Z(s) will be connected, and to the original
-transfer function Gold(s).
-The ﬁnal step is to substitute Eq. (16.23) into Eq. (16.16), leading to
-G(s)= Gold(s)−ZD(s)−ZN (s)
-Z(s)+ ZD(s) Gold(s) (16.24)
-This expression can be simpliﬁed as follows:
-G(s)= Gold(s)
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ ZN (s)
-Z(s)
-1+ ZD(s)
-Z(s)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(16.25)
-or,
-G(s)=
-⎦
-G(s)
-⏐⏐
-⏐⏐⏐
-Z(s)→∞
-)
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ ZN (s)
-Z(s)
-1+ ZD(s)
-Z(s)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(16.26)
-This is the desired result. It states how the transfer function G(s) is modiﬁed by addition of the
-extra element Z(s). The right-most term in Eq. (16.26) is called the correction factor; this term
-gives a quantitative measure of the change in G(s) arising from the introduction of Z(s).
-Derivation of the dual result, Eq. (16.3), follows similar steps.
-16.1.3 Discussion
-The general form of the Extra Element Theorem makes it useful for designing a system such that
-unwanted circuit elements do not degrade the desirable system performance already obtained.
-For example, suppose that we already know some transfer function or similar quantity G(s),
-under simpliﬁed or ideal conditions, and have designed the system such that this quantity meets
-speciﬁcations. We can then use the Extra Element Theorem to answer the following questions:
-•What is the eﬀect of a parasitic element Z(s) that was not included in the original analysis?
-•What happens if we later decide to add some additional components having impedanceZ(s)
-to the system?
-•Can we establish some conditions onZ(s) that ensure thatG(s) is not substantially changed?
-A common application of the Extra Element Theorem is the determination of conditions
-on the extra element that guarantee that the transfer function G(s) is not signiﬁcantly altered.
-According to Eqs. (16.2) and (16.26), this will occur when the correction factor is approximately
-equal to unity. The conditions are
-∥Z( jω)∥≫∥Z
-N ( jω)∥
-∥Z( jω)∥≫∥ZD( jω)∥ (16.27)
+涉及 $Z(s)$ 的右边项计入 $Z(s)$ 对 $G(s)$ 的影响，称为校正因子。
 
-632 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-This gives a formal way to show when an impedance can be ignored: one can plot the
-impedances∥ZN ( jω)∥ and∥ZD( jω))∥, and compare the results with a plot of ∥Z( jω)∥.T h e
-impedance Z(s) can be ignored over the range of frequencies where the inequalities (16.27)a r e
-satisﬁed.
-For the dual case in which the new impedance is inserted where there was previously a short
-circuit, Eq. (16.3), the inequalities are reversed:
-∥Z( jω)∥≪∥ZN ( jω)∥
-∥Z( jω)∥≪∥ZD( jω)∥ (16.28)
-This equation shows how to limit the magnitude ∥Z( jω)∥, to avoid signiﬁcantly changing the
-transfer function G(s).
-For quantitative design, Eqs. (16.27) and (16.28) raise an additional question: By what factor
-should||Z( jω)|| exceed (or be less than)||ZN ( jω)|| and||ZD( jω)||, in order for the inequalities
-of Eq. ( 16.27)o r( 16.28) to be well satisﬁed? This question can be answered by plotting the
-magnitudes and phases of the correction factor terms, as a function of the magnitudes and
-phases of (Z/ZN ) and (Z/ZD).
-Figure 16.6 shows contours of constant ||1+ Z/ZN||, as a function of the magnitude and
-phase of Z/ZN . Figure 16.7 shows similar contours of constant ∠(1+ Z/ZN ). It can be seen
-that, when||Z/ZN|| is less than – 20 dB, then the maximum deviation caused by the numerator
-(1 + Z/ZN ) term is less than±1 dB in magnitude, and less than±7◦in phase. For||Z/ZN|| less
-than−10 dB, the maximum deviation caused by the numerator (1 + Z/ZN ) term is less than
-±3.5 dB in magnitude, and less than±20◦in phase.
-Figures 16.8 and 16.9 contain contours of constant||1/(1+ Z/ZD)|| and∠1/(1+ Z/ZD), re-
-spectively, as a function of the magnitude and phase of Z/ZD. These plots contain minus signs
-because the terms appear in the denominator of the correction factor; otherwise, they are identi-
-cal to Figs. 16.6 and 16.7.A g a i n ,f o r||Z/Z
-D|| less than – 20 dB, the maximum deviation caused
-by the denominator (1+ Z/ZD) term is less than±1 dB in magnitude, and less than±7◦in phase.
-For||Z/ZD|| less than – 10 dB, the maximum deviation caused by the denominator (1 + Z/ZD)
-term is less than±3.5 dB in magnitude, and less than±20◦in phase.
-16.2 EET Examples
-16.2.1 A Simple Transfer Function
-The ﬁrst example illustrates how the Extra Element Theorem can be used to ﬁnd a transfer
-function essentially by inspection. We are given the circuit illustrated in Fig.16.10. It is desired
-to solve for the transfer function
-G(s)= v2(s)
-v1(s) (16.29)
-and to express this transfer function in factored pole-zero form. One way to do this is to employ
-the Extra Element Theorem, treating the capacitor C as an “extra” element. As illustrated in
-Fig. 16.11, the electrical port is taken to be at the location of the capacitor, and the “original
-conditions” are taken to be the case when the capacitor impedance is inﬁnite, i.e., an open
-circuit. Under these original conditions, the transfer function is given by the voltage divider
-composed of resistors R
-1, R3, and R4. Hence, G(s) can be expressed as
+额外元件定理也适用于图16.2所示的对偶形式。此形式中传递函数初始在端口短路条件下已知。图16.2b 中短路用阻抗 $Z(s)$ 替代。此情形加入阻抗 $Z(s)$ 使传递函数变为
 
-16.2 EET Examples 633
--30 dB
--25 dB
--20 dB
--15 dB
--10 dB
--5 dB
-0 dB
-5 dB
-10 dB
--180° -135° -90° -45° 0° 45° 90° 135° 180°
-Z
-ZN
-Z
-ZN dB
-0 dB 0 dB
-1 dB
-2 dB
-3 dB
-4 dB
-6 dB
-8 dB
-Fig. 16.6 Contours of constant∥1+ Z/ZN∥, as a function of the magnitude and phase of Z/ZN
--30 dB
--25 dB
--20 dB
--15 dB
--10 dB
--5 dB
-0 dB
-5 dB
-10 dB
--180° -135° -90° -45° 0° 45° 90° 135° 180°
-+ 5
-+ 10
-+ 15
-+ 20
-+ 30
-+ 45
-+ 60+ 90
-+ 120+ 150
-+ 2
-Z
-ZN dB
-Z
-ZN
-Fig. 16.7 Contours of constant∠(1+ Z/ZN ), as a function of the magnitude and phase of Z/ZN
-v2(s)
-v1(s)= G(s)=
-⎦ R4
-R1+ R3+ R4
-)
-⎦
-1+ ZN
-Z
-)
-⎦
-1+ ZD
-Z
-) (16.30)
-where Z(s) is the capacitor impedance 1/sC.
+$$\frac{v_{out}(s)}{v_{in}(s)} = \left(\left.G(s)\right|_{Z(s)\to 0}\right)\frac{\left(1+\dfrac{Z(s)}{Z_N(s)}\right)}{\left(1+\dfrac{Z(s)}{Z_D(s)}\right)} \tag{16.3}$$
 
-634 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
--30 dB
--25 dB
--20 dB
--15 dB
--10 dB
--5 dB
-0 dB
-5 dB
-10 dB
--180° -135° -90° -45° 0° 45° 90° 135° 180°
-Z
-ZD
-Z
-ZD dB
-0 dB 0 dB
-0.5 dB
-1 dB
-2 dB
-3 dB
-4 dB
-6 dB
-10 dB
-0.5 dB
-1 dB
-2 dB
-3 dB
-4 dB
-6 dB
-10 dB
-Fig. 16.8 Contours of constant∥1+ Z/ZD∥, as a function of the magnitude and phase of Z/ZD
--30 dB
--25 dB
--20 dB
--15 dB
--10 dB
--5 dB
-0 dB
-5 dB
-10 dB
--180° -135° -90° -45° 0° 45° 90° 135° 180°
-+ 2
-+ 5
-+ 10
-+ 15
-+ 20
-+ 30
-+ 45
-+ 60+ 90+ 120
-+ 150
-Z
-ZD dB
-Z
-ZD
-Fig. 16.9 Contours of constant∠(1+ Z/ZD), as a function of the magnitude and phase of Z/ZD
+式 (16.2) 和 (16.3) 中的 $Z_N(s)$ 和 $Z_D(s)$ 项相同。令式 (16.2) 和 (16.3) 的 $G(s)$ 表达式相等可证
 
-16.2 EET Examples 635
-Fig. 16.10 R–C circuit example of
-Sect. 16.2.1 +
-–
-R1
-C
-+
-v2(s)
-–
-v1(s)
-R2
-R3
-R4
-Fig. 16.11 Manipulation of the cir-
-cuit of Fig. 16.10 into the form of
-Fig. 16.1
-+
-–
-R1
-C
-+
-v2(s)
-–
-v1(s)
-R2
-R3
-R4
-+ v(s) –
-i(s)
-Linear circuit
-port
-The impedance ZD(s) is the Thevenin equivalent impedance seen at the port where the ca-
-pacitor is connected. As illustrated in Fig. 16.12a, this impedance is found by setting the inde-
-pendent source v1(s) to zero, and then determining the impedance between the port terminals.
-The result is
-ZD= R2+ R1|| (R3+ R4) (16.31)
-Figure 16.12b illustrates determination of the impedance ZN (s). A current source i(s) is con-
-nected to the port, in place of the capacitor. In the presence of the inputv1(s), the current source
-i(s) is adjusted so that the output v2(s) is nulled. Under these null conditions, the impedance
-ZN (s) is found as the ratio of v(s)t o i(s).
-It is easiest to ﬁnd ZN (s) by ﬁrst determining the eﬀect of the null condition on the signals
-in the circuit. Since v2 is nulled to zero, there is no current through the resistor R4. Since R3 is
-connected in series with R4, there is also no current through R3, and hence no voltage across R3.
-Therefore, the voltage v3 in Fig. 16.12b is equal to v2, i.e.,
-v3= v2 →
-null
-0 (16.32)
-Therefore, the voltage v is given by iR2. The impedance ZN is
-ZN (s)= v(s)
-i(s)
-⏐⏐⏐⏐
-⏐
-v2→
-null
-0
-= R2 (16.33)
+$$\frac{\left.G(s)\right|_{Z(s)\to\infty}}{\left.G(s)\right|_{Z(s)\to 0}} = \frac{Z_D(s)}{Z_N(s)} \tag{16.4}$$
 
-636 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-(a) R1
-+
-v2(s)
-–
-v1(s) = 0
-R2
-R3
-R4
-port
-ZD(s)
-(b) R1
-+
-v2(s) 0
-–
-R2
-R3
-R4
-port
-+
-–v1(s)
-+ v(s) –
-i(s)
-ZN(s)= v(s)
-i(s) v2(s)0
-v3(s)
-Fig. 16.12 Measurement of the quantities ZN (s)a n dZD(s): (a) determination of ZD(s); (b) determination
-of ZN (s)
-Note that, in general, the independent sources v1 and i are nonzero during the ZN measurement.
-For this example, the null condition implies that the current i(s) ﬂows entirely through the path
-composed of R2, R1, and v1.
-The transfer function G(s) is found by substitution of Eqs. ( 16.31) and ( 16.33)i n t o
-Eq. (16.30):
-G(s)=
-⎦ R4
-R1+ R3+ R4
-) (1+ sCR2)
-(1+ sC [R2+ R1|| (R3+ R4)]) (16.34)
-For this example, the result is obtained in standard normalized pole-zero form, because the
-capacitor is the only dynamic element in the circuit, and because the “original conditions,” in
-which the capacitor impedance tends to an open circuit, coincide with dc conditions in the
-circuit. A similar procedure can be applied to write the transfer function of a circuit, containing
-an arbitrary number of reactive elements, in normalized form via then-Extra Element Theorem
-of Sect. 16.3.
+这称为互易关系。
 
-16.2 EET Examples 637
-16.2.2 An Unmodeled Element
-In the simpleR–L–C low-pass ﬁlter illustrated in Fig.16.13, the capacitor dielectric loss, contact
-(termination) resistance, and foil resistance are modeled by a series resistanceResr known as the
-capacitor equivalent series resistance (ESR). Physical capacitors can contain signiﬁcant ESR,
-which can degrade performance and can also lead to failure when the power lossI2
-rms Resr causes
-excessive temperature rise within the capacitor. The presence of ESR also alters the ﬁlter transfer
-function. In ﬁrst-pass analysis of the transfer function, the ESR often is ignored (“unmodeled”);
-later, it may be desired to include the eﬀects of this element in the analysis. The object of this
-simple example is to include the ESR in the ﬁlter transfer function, as an extra element.
-The ﬁlter transfer function G(s) is deﬁned as
-G(s)= v
-2
-v1
-(16.35)
-Fig. 16.13 R–L–C ﬁlter example
-L
-C
-R
-+
-v2v1
-+
-Resr
-For the case Resr →0, the ﬁlter transfer function is
-G(s)
-⏐⏐⏐⏐
-⏐
-Resr→0
-= 1
-1+ sL
-R + s2LC
-(16.36)
-We can therefore employ the Extra Element Theorem to determine how nonzero ESR changes
-G(s). As illustrated in Fig. 16.14, we view the “original circuit” as the case where the ESR is
-a short circuit, and addition of the “extra element” constitutes breaking this short circuit at the
-port as shown.
-L
-C
-R
-+
-v2v1
-+
-Port
-Fig. 16.14 Treating the capacitor ESR as an extra element
-In the presence of the ESR, the transfer function becomes
-G(s)=
-⎦
-G(s)
-⏐⏐⏐
-⏐⏐
-Resr→0
-)
-⎦
-1+ Z(s)
-ZN (s)
-)
-⎦
-1+ Z(s)
-ZD(s)
-) (16.37)
-where Z(s) is equal to Resr .
+![源页 p.631](../assets/page-snapshots/chapter-16/page-631.png)
 
-638 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-(a) L
-C
-R
-+
-v2(s)
-ZD(s)
-v1(s) = 0
-(b) L
-C
-R
-+
-v2 0v1
-+
-i
-+
-v
-Fig. 16.15 Capacitor ESR example: (a) determination of ZD(s); (b) determination of ZN (s)
-Figure 16.15a illustrates determination of ZD(s). The input source v1(s) is set to zero, and
-the impedance between the terminals of the port is found. It can be seen that the impedance
-ZD(s) reduces to the capacitor impedance, in series with the parallel combination of the inductor
-impedance and the load resistance R:
-ZD(s)= 1
-sC+
-⎦
-R
- sL
-)
-=
-1+ sL
-R + s2LC
-sC
-⎦
-1+ sL
-R
-) (16.38)
-Figure 16.15b illustrates determination of ZN (s). In the presence of the input source v1(s), a
-current i(s) is injected at the port as shown. This current is adjusted such that the outputv2(s)i s
-nulled. Under these conditions, the quantityZN (s)i sg i v e nb yv(s)/i(s). It can be seen that when
-v2(s) is nulled, the voltagev(s) is equal to the currenti(s) multiplied by the capacitor impedance
-1/sC. Therefore,
-ZN (s)= v(s)
-i(s)
-⏐⏐
-⏐⏐⏐
-v2(s)→
-null
-0
-= 1
-sC (16.39)
-Note that, in general, i(s) will not be equal to zero during the ZN (s) measurement. The null con-
-dition is achieved by setting the source i(s) equal to the value−v1(s)/sL. Thus, in the presence
-of nonzero Resr , the transfer function G(s) can be expressed as follows:
-G(s)=
-⎦
-G(s)
-⏐⏐
-⏐⏐⏐
-Resr→0
-)
-⎦
-1+ Resr
-ZN (s)
-)
-⎦
-1+ Resr
-ZD(s)
-)
-=
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1
-1+ sL
-R + s2LC
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(1+ sCResr ))⎦
-1+ Resr
-ZD(s)
-) (16.40)
+图16.2 额外元件定理的对偶形式，其中额外元件替代短路：(a) 原始条件；(b) 加入阻抗 $Z(s)$ 的元件
 
-16.2 EET Examples 639
-It can be seen that the correction factor adds a zero at frequencyωz= 1/ResrC, arising from the
-ZN term. The denominator ZD term may additionally modify the transfer function; the denomi-
-nator term has negligible eﬀect provided that
-Resr ≪∥ ZD∥ (16.41)
-We can now plot the impedance inequalities ( 16.28) to examine how addition of Resr
-changes G(s). The magnitudes of ZD(s) and ZN (s) are constructed in Fig. 16.16 for the values
-L= 100μH, C= 1μF, R= 100Ω, and Resr = 2Ω, using the approximate graphical construction
-approach of Sect. 8.3.
-ZN is equal to the capacitor impedance; at low frequency, Resr ≪∥ ZN∥. However, at high
-frequency∥ZN∥ becomes small, and it is unavoidable that Resr becomes greater than∥ZN∥.T h i s
-leads to the zero at frequency fz, as noted previously.
-1 MHz100 kHz10 kHz1 kHz100 Hz
-1
-ωC
-Resr = 2 W
-|| ZD ||
-ωL40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 W
-10 W
-1 W
-0.1 W
-1 k W
-10 k W
-R
-|| ZN ||
-f0
-fz
-Q = 10
-1 W
-R0 = 10 W
-16 kHz
-Fig. 16.16 Construction of the magnitude impedance Bode plots of ZN , ZD,a n dResr
-For the values given,∥ZD∥≫ Resr at all frequencies except in the vicinity of the resonant
-frequency f0. In consequence, the denominator ZD term of Eq. ( 16.40) is substantially equal
-to one, except near this resonant frequency. At the resonant frequency f0, ZD is approximately
-equal to 1Ω, so that the denominator ZD term becomes equal to
-⎦
-1+ Resr
-ZD(s)
-)
-=
-⎦
-1+ 2Ω
-1Ω
-)
-= 3 (16.42)
-This eﬀectively reduces the transfer function Q–factor from 10 to approximately 10/3= 3.33.
-By multiplying out Eq. ( 16.40), it can be veriﬁed that the exact transfer function G(s) can
-be expressed as
-G(s)= (1+ sCResr )
-1+ s
-⎦L
-R+ ResrC
-)
-+ s2LC
-⎦R+ Resr
-R
-) (16.43)
-The eﬀect of the denominator ZD term is to reduce the exact Q-factor from 10 to 3.37, and to
-reduce the resonant frequency f0 from 15.9 kHz to 15.8 kHz.
+量 $Z_N(s)$ 和 $Z_D(s)$ 可通过在端口测量阻抗求得。项 $Z_D(s)$ 是从端口看入的戴维南等效阻抗，也称驱动点阻抗。如图16.3a所示，此阻抗通过令独立源 $v_{in}(s)$ 为零然后测量端口端子间阻抗求得：
 
-640 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-16.2.3 SEPIC Example
-As a third example, let us consider derivation and design of the small-signal transfer func-
-tions of the SEPIC. A small-signal SEPIC model is derived using average switch modeling
-in Sect. 14.1.3, with the result given in Fig. 14.7 and reproduced in Fig. 16.17. Analysis of the
-transfer function G
-vd(s) is tedious because of the convoluted nature of the circuit that results
-from averaged switch modeling. The Extra Element Theorem gives an alternate approach to
-solution of this circuit, leading to a simpliﬁed interpretation of the transfer functions. This ap-
-proach also leads to insight into how to damp the internal resonance of this fourth-order system,
-so that the small-signal transfer functions are better behaved.
-The diﬃculty in solution of the model of Fig.16.17 arises from element C
-1, which provides
-a path parallel to the DC transformer to couple the input and output sections of the model. If
-this element were not present, solution of the circuit would be considerably simpler. Therefore,
-the strategy employed in this section is to let C
-1 become an open circuit, and solve the much
-simpler model that is obtained. The Extra Element Theorem is then employed to incorporate
-the eﬀects of C
-1 into the transfer functions such as Gvd(s). We deﬁne
-Gvd−bb= ˆv
-ˆd
-⏐⏐⏐
-⏐⏐
-C1→0
-(16.44)
-The Extra Element Theorem predicts that this transfer function can be written as follows:
-Gvd= Gvd−bb
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ ZN
-Z
-1+ ZD
-Z
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(16.45)
-with Z = 1/sC1. The quantities ZN , and ZD are found using the Extra Element Theorem.
-The impedance ZD is the driving-point impedance at the port where C1 is connected. Equa-
-tions (16.44)–(16.45) state that the control-to-output transfer function of the SEPIC is equal to
-that of an eﬀective buck–boost converterGvd−bb, multiplied by a correction factor that accounts
-for the eﬀects of C1 and its associated resonances.
-+
-L1
-C2
-C1
-L2 R
-+ D : D
-+
-VC1
- + C1
-IL1
- + L1
-Vg + g
-IL2 + L2
-VC2
- + C2
-V1
-DD I2
-DD
-Fig. 16.17 The small-signal averaged switch model of the SEPIC, Fig. 14.7
+$$Z_D(s) = \left.\frac{v(s)}{i(s)}\right|_{v_{in}(s)=0} \tag{16.5}$$
 
-16.2 EET Examples 641
-+
-L1
-C2
-L2
-R
-+ D′ : D
-I2
-DD'd
-V1
-DD'd
-Vg +vg VC 2 +vC2
-+
-Fig. 16.18 When C1→0, the SEPIC model reduces to an eﬀective buck–boost converter
-When we let C1 tend to an open circuit, the SEPIC model of Fig. 16.17 can be reduced
-to the eﬀective buck–boost converter model illustrated in Fig. 16.18. The transfer functions of
-this circuit can now be found in the usual manner, as described in Chaps. 7 and 8. The transfer
-function from ˆd to ˆv is found by setting the ˆvg source to zero and solving for ˆv, with the following
-result:
-Gvd−bb(s)= Vg
-D′2
-1−s L1
-R
-⎦D
-D′
-)2
-1+ s
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-L2+
-⎦D
-D′
-)2
-L1
-R
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-+ s2C2
-⎦
-L2+
-⎦D
-D′
-)2
-L1
-)
-(16.46)
-This expression is of the form
-Gvd−bb(s)= Gd0
-1−s
-ωz
-1+ s
-Qoωo
-+
-⎦s
-ωo
-)2 (16.47)
-with
-Gd0= Vg
-D′2
-ωo= 1√
-C2
-⎦
-L2+
-⎦D
-D′
-)2
-L1
-) (16.48)
-Qo= R
-√ C2
-L2+
-⎦D
-D′
-)2
-L1
-ωz= R
-L1
-⎦D′
-D
-)2
-(RHP)
-Thus, Gvd−bb contains quadratic poles and a RHP zero.
-Derivation of ZN is illustrated in Fig. 16.19.T h eˆvg source is set to zero. In the presence of
-ˆd, a current ˆitest is injected into the port whereC1 would be connected. The sources are adjusted
-to null the output ˆv.
+故 $Z_D(s)$ 是输入 $v_{in}(s)$ 设为零时端口端子间的阻抗。
 
-642 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-Fig. 16.19 Derivation of ZN
-The quantity ZN is given by
-ZN = ˆvtest
-ˆitest
-⏐⏐
-⏐
-⏐⏐
-ˆv→
-null
-0
-(16.49)
-To analyze this circuit, we start with the null condition, and follow the signals towards the in-
-jection port. With the output voltage nulled ˆv→
-null
-0, the current in the load resistance R and the
-output capacitance C2 are also nulled. This implies that the current in the transformer secondary
-and primary windings are determined solely by the ˆdI2/DD′ current source of the averaged
-switch model. Consequently, the primary current is ˆdI2/D′2 as shown. Additionally, the injec-
-tion current ˆitest ﬂows entirely through inductor L2, and the voltage across L2 is equal to sL2ˆitest .
-This voltage also appears across the transformer secondary, and can be employed to ﬁnd the
-transformer primary voltage. This allows us to express the inductor L1 voltage as:
-ˆvL1=−V1 ˆd
-DD′ −sL2ˆitest
-D′
-D (16.50)
-We can also write the loop equation
-ˆvtest+ ˆvL1= sL2ˆitest (16.51)
-Finally, we can write the node equation
-ˆvL1
-sL1
-+
-ˆdI2
-D′2 + ˆitest = 0 (16.52)
+确定阻抗 $Z_N(s)$ 如图16.3b所示。项 $Z_N(s)$ 在输出 $v_{out}(s)$ 置零条件下求得。电流源 $i(s)$ 接到端口端子。输入信号 $v_{in}(s)$ 存在下调整 $i(s)$ 使输出 $v_{out}(s)$ 置零。此条件下量 $Z_N(s)$ 为
 
-16.2 EET Examples 643
-Elimination of ˆvL1 and ˆd from Eqs. 16.50, 16.51, and 16.52, and solution for ˆvtest/ˆitest , leads to
-the following expression for ZN :
-ZN (s)= s (L1+ L2)
-⎦
-1−s L1∥L2
-R
-D
-D′2
-)
-⎦
-1−s D2L1
-D′2R
-) (16.53)
-This equation is of the form
-ZN (s)= s (L1+ L2)
-⎦
-1−s
-ωzN
-)
-⎦
-1−s
-ωz
-) (16.54)
-It should be noted that a null impedance such asZN is not a passive or driving-point impedance,
-and it is possible for this impedance to be negative or to contain RHP poles or zeroes. Equa-
-tion (16.53) predicts that Z
-N exhibits a low-frequency asymptote given by the series combina-
-tion s(L1+ L2), which is purely inductive and exhibits phase of+90◦. ZN contains a RHP zero
-and a RHP pole; the RHP pole coincides with the RHP zero ωz of Gvd−bb. The high-frequency
-asymptote is given by sL2/D, which also is purely inductive with+90◦phase.
-The quantity ZD is the driving-point impedance seen at the capacitor C1 port, with the ˆvg
-and ˆd sources set to zero. As illustrated in Fig. 16.20, a test current ˆitest is injected at the port,
-and the port voltage ˆvtest is measured. Since there are no null conditions associated withZD,t h i s
-quantity generally depends on all elements, and therefore the algebra is more complex.
-Fig. 16.20 Derivation of ZD
+$$Z_N(s) = \left.\frac{v(s)}{i(s)}\right|_{v_{out}(s)\to\text{null} 0} \tag{16.6}$$
 
-644 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-With some analysis and careful algebra, one can show that
-ZD(s)= s(L1+ L2)
-⎦
-1+ s L1∥L2
-D′2R + s2 L1∥L2
-D′2 C2
-)
-⎛⎜⎜⎜⎜⎜
-⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ s
-L
-2+
-⎦D
-D′
-)2
-L1
-R + s2 C2
-⎦
-L2+
-⎦D
-D′
-)2
-L1
-)
-⎞⎟⎟⎟⎟⎟
-⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(16.55)
-This expression is of the form
-Z
-D(s)= s(L1+ L2)
-⎛⎜⎜⎜⎜⎜⎝1+ s
-QzDωzD
-+
-⎦ s
-ωzD
-)2⎞⎟⎟⎟⎟⎟⎠
-⎛⎜⎜⎜⎜⎜⎝1+ s
-Qoωo
-+
-⎦s
-ωo
-)2⎞⎟⎟⎟⎟⎟⎠
-(16.56)
-with
-ωzD= D′
-√(L1∥L2)C2
-(16.57)
-QzD= D′R
-√
-C2
-L1∥L2
-(16.58)
-The quantities Gvd−bb and ZD have identical denominator polynomials.
-Thus, the low-frequency asymptote of ZD is equal to s (L1+ L2). This asymptote is purely
-inductive, with a phase of +90◦. There are mid-frequency quadratic poles and zeroes; these
-may cause the mid-frequency asymptotes to become resistive or capacitive. The high-frequency
-asymptote is
-s (L1+ L2)
-⎦ωp
-ωz
-)2
-= s
-⎦L1
-D′2
-
-
-L
-2
-D2
-)
-(16.59)
-which again is purely inductive with phase of+90◦.
-16.2.4 Damping the SEPIC Internal Resonances
-Consider a SEPIC having the following element values: input voltage Vg = 18 V, output volt-
-age V = 24 V, switching frequency fs = 100 kHz, inductances L1 = 100μH, L2 = 50μH,
-capacitances C1 = 22μF, C2 = 220μF, and load resistance R= 5Ω. With these element
-values, Eq. 16.48 predicts that Gvd−bb contains complex poles at fo = 711 Hz with Qo = 4.9.
-Additionally, Gvd−bb contains a RHP zero at 4.5 kHz.
-The impedances ZN (Eq. (16.53)), ZD (Eq. (16.56)), and Z= 1/sC1 are plotted in Fig.16.21.
-At frequencies below approximately 2 kHz, the capacitorC1 impedance is much greater in mag-
-nitude that either ZN or ZD. Hence the correction factor in Eq. (16.45) is approximately equal to
-1, and the SEPIC Gvd is equal to the Gvd−bb of the eﬀective buck–boost model. At frequencies
-above approximately 6 kHz, the capacitor C1 impedance is much smaller in magnitude than
-both ZN and ZD. For this case, Eq. (16.45) reduces to:
-```
+注意置零输出不等于短路输出。若简单短路输出，则电流流过短路，在网络其他元件中引起电压降和电流。这些电压降和电流在输出置零时不存在。图16.3b 的置零条件不采用对电路输出的任何连接。而是置零条件通过以特殊方式调整独立源 $v_{in}(s)$ 和 $i(s)$ 使输出 $v_{out}(s)$ 为零来实现。由叠加，$v_{out}(s)$ 可表示为 $v_{in}(s)$ 和 $i(s)$ 的线性组合；故对给定 $v_{in}(s)$，总可选择使 $v_{out}(s)$ 为零的 $i(s)$。此置零条件下 $Z_N(s)$ 作为 $v(s)$ 与 $i(s)$ 之比测量。实际中求 $Z_N(s)$ 的电路分析比分析 $Z_D(s)$ 简单，因为置零条件使电路内许多信号为零。16.2 节给出若干示例。
+
+![源页 p.632](../assets/page-snapshots/chapter-16/page-632.png)
+
+图16.3 量 $Z_N(s)$ 和 $Z_D(s)$ 的确定：(a) $Z_D(s)$ 是端口处的驱动点阻抗，在输入 $v_{in}(s)$ 设为零时测量；(b) $Z_N(s)$ 是输出置零条件下端口处看到的阻抗
+
+输入和输出量不必是电压，也可为电流或其他可设零或置零的信号。下一节含用一般输入 $u(s)$ 和输出 $y(s)$ 的额外元件定理推导。
+
+### 16.1.2 推导
+
+图16.4a 给出含输入 $u(s)$ 和输出 $y(s)$ 的一般线性系统。此外系统含电压 $v(s)$ 和电流 $i(s)$ 的电气端口，极性如图所示。初始端口开路：$i(s) = 0$。端口开路时此系统的传递函数为
+
+$$G_{old}(s) = \left.\frac{y(s)}{u(s)}\right|_{i(s)=0} \tag{16.7}$$
+
+额外元件定理的目标是确定阻抗 $Z(s)$ 连接到端口时获得的新传递函数 $G(s)$：
+
+$$G(s) = \frac{y(s)}{u(s)} \tag{16.8}$$
+
+情况如图16.4b所示。可见端口条件现为
+
+$$v(s) = -i(s)Z(s) \tag{16.9}$$
+
+![源页 p.633](../assets/page-snapshots/chapter-16/page-633.png)
+
+图16.4 通过加入额外元件修改线性网络：(a) 原始系统；(b) 修改后系统，阻抗 $Z(s)$ 接在电气端口
+
+为用式 (16.7) 原始传递函数 $G_{old}(s)$ 表示式 (16.8) 的新传递函数 $G(s)$，在端口处用电流注入，如图16.5所示。现有两个独立输入：输入 $u(s)$ 和独立电流源 $i(s)$。因变量 $y(s)$ 和 $v(s)$ 可用叠加原理表示为这些独立输入的函数：
+
+$$y(s) = G_{old}(s)u(s) + G_i(s)i(s) \tag{16.10}$$
+
+$$v(s) = G_v(s)u(s) + Z_D(s)i(s) \tag{16.11}$$
+
+![源页 p.633](../assets/page-snapshots/chapter-16/page-633.png)
+
+图16.5 通过加入独立电流源 $i(s)$ 在电气端口处电流注入
+
+其中
+
+$$G_{old}(s) = \left.\frac{y(s)}{u(s)}\right|_{i(s)=0} \tag{16.12}$$
+
+$$G_i(s) = \left.\frac{y(s)}{i(s)}\right|_{u(s)=0} \tag{16.13}$$
+
+$$Z_D(s) = \left.\frac{v(s)}{i(s)}\right|_{u(s)=0} \tag{16.14}$$
+
+$$G_v(s) = \left.\frac{v(s)}{u(s)}\right|_{i(s)=0} \tag{16.15}$$
+
+是从独立输入到各自因变量 $y(s)$ 和 $v(s)$ 的传递函数。
+
+从方程组 (16.9) 至 (16.11) 消去 $v(s)$ 和 $i(s)$ 并解 $y(s)$ 作为 $u(s)$ 的函数可求传递函数 $G(s)$。结果为
+
+$$G(s) = \frac{y(s)}{u(s)} = G_{old}(s) - \frac{G_v(s)G_i(s)}{Z(s)+Z_D(s)} \tag{16.16}$$
+
+此中间结果将新传递函数 $G(s)$ 表示为原始传递函数 $G_{old}(s)$ 和额外元件 $Z(s)$ 及量 $Z_D(s)$、$G_v(s)$、$G_i(s)$ 的函数。
+
+式 (16.14) 给出直接求 $Z_D(s)$ 的方法。$Z_D(s)$ 是输入 $u(s)$ 设为零时端口处的驱动点阻抗。此量可用常规电路分析或仿真或实验室测量求得。
+
+虽然 $G_v(s)$ 和 $G_i(s)$ 也可由定义 (16.13) 和 (16.15) 确定，但更可取的是消去这些量，改为将 $G(s)$ 表示为给定端口处阻抗的函数。可通过以下思维实验完成。
+
+输入 $u(s)$ 存在下以使输出 $y(s)$ 置零的特殊方式调整独立电流源 $i(s)$。$Z_N(s)$ 定义为此置零条件下 $v(s)$ 与 $i(s)$ 之比：
+
+$$Z_N(s) = \left.\frac{v(s)}{i(s)}\right|_{y(s)\to\text{null} 0} \tag{16.17}$$
+
+实现置零条件 $y(s) \to \text{null} 0$ 的 $i(s)$ 值可通过在式 (16.10) 中令 $y(s) = 0$ 求得：
+
+$$\left[G_{old}(s)u(s) + G_i(s)i(s)\right] \to \text{null} 0 \tag{16.18}$$
+
+故当输入 $u(s)$ 和 $i(s)$ 如下相关时输出 $y(s)$ 置零：
+
+$$\left.u(s)\right|_{y(s)\to\text{null} 0} = -\frac{G_i(s)}{G_{old}(s)}\left.i(s)\right|_{y(s)\to\text{null} 0} \tag{16.19}$$
+
+此置零条件下电压 $v(s)$ 由式 (16.11) 和 (16.19) 得
+
+$$\left.v(s)\right|_{y(s)\to\text{null} 0} = \left.G_v(s)u(s)\right|_{y(s)\to\text{null} 0} + \left.Z_D(s)i(s)\right|_{y(s)\to\text{null} 0} = \left(-\frac{G_v(s)G_i(s)}{G_{old}(s)} + Z_D(s)\right)\left.i(s)\right|_{y(s)\to\text{null} 0} \tag{16.20}$$
+
+将式 (16.17) 代入式 (16.20) 得
+
+$$\left.v(s)\right|_{y(s)\to\text{null} 0} = Z_N(s)\left.i(s)\right|_{y(s)\to\text{null} 0} = \left(-\frac{G_v(s)G_i(s)}{G_{old}(s)} + Z_D(s)\right)\left.i(s)\right|_{y(s)\to\text{null} 0} \tag{16.21}$$
+
+故
+
+$$Z_N(s) = Z_D(s) - \frac{G_v(s)G_i(s)}{G_{old}(s)} \tag{16.22}$$
+
+解 $G_v(s)G_i(s)$ 得
+
+$$G_v(s)G_i(s) = (Z_D(s) - Z_N(s))G_{old}(s) \tag{16.23}$$
+
+故未知量 $G_v(s)$ 和 $G_i(s)$ 可与 $Z_N(s)$ 和 $Z_D(s)$（新阻抗 $Z(s)$ 将连接的端口性质）及原始传递函数 $G_{old}(s)$ 关联。
+
+最后一步是将式 (16.23) 代入式 (16.16) 得
+
+$$G(s) = G_{old}(s) - \frac{Z_D(s)-Z_N(s)}{Z(s)+Z_D(s)}G_{old}(s) \tag{16.24}$$
+
+此表达式可简化为
+
+$$G(s) = G_{old}(s)\frac{\left(1+\dfrac{Z_N(s)}{Z(s)}\right)}{\left(1+\dfrac{Z_D(s)}{Z(s)}\right)} \tag{16.25}$$
+
+或
+
+$$G(s) = \left(\left.G(s)\right|_{Z(s)\to\infty}\right)\frac{\left(1+\dfrac{Z_N(s)}{Z(s)}\right)}{\left(1+\dfrac{Z_D(s)}{Z(s)}\right)} \tag{16.26}$$
+
+这是所需结果。它表明传递函数 $G(s)$ 如何因加入额外元件 $Z(s)$ 而修改。式 (16.26) 最右项称为校正因子；此项定量给出引入 $Z(s)$ 引起的 $G(s)$ 变化。
+
+对偶结果 [式 (16.3)] 的推导遵循类似步骤。
+
+### 16.1.3 讨论
+
+额外元件定理的一般形式使其适合设计使不希望电路元件不退化已获得的理想系统性能的系统。例如设我们已在简化或理想条件下已知某传递函数或类似量 $G(s)$，并已设计系统使此量满足指标。然后用额外元件定理回答以下问题：
+
+- 原始分析中未包含的寄生元件 $Z(s)$ 的影响是什么？
+- 若后来决定向系统加入阻抗为 $Z(s)$ 的附加元件会发生什么？
+- 能否建立确保 $G(s)$ 不显著改变的对 $Z(s)$ 的条件？
+
+额外元件定理的常见应用是确定保证传递函数 $G(s)$ 不显著改变的额外元件条件。按式 (16.2) 和 (16.26)，当校正因子近似为 1 时发生。条件为
+
+$$\|Z(j\omega)\| \gg \|Z_N(j\omega)\|$$
+
+$$\|Z(j\omega)\| \gg \|Z_D(j\omega)\| \tag{16.27}$$
+
+这给出何时可忽略阻抗的正式方法：可绘 $\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$，与 $\|Z(j\omega)\|$ 图比较。不等式 (16.27) 满足的频率范围内可忽略阻抗 $Z(s)$。
+
+对偶情形（新阻抗插入先前为短路处）[式 (16.3)]，不等式反转：
+
+$$\|Z(j\omega)\| \ll \|Z_N(j\omega)\|$$
+
+$$\|Z(j\omega)\| \ll \|Z_D(j\omega)\| \tag{16.28}$$
+
+此方程表明如何限制 $\|Z(j\omega)\|$ 以避免显著改变传递函数 $G(s)$。
+
+对定量设计，式 (16.27) 和 (16.28) 引出附加问题：$\|Z(j\omega)\|$ 应超过（或小于）$\|Z_N(j\omega)\|$ 和 $\|Z_D(j\omega)\|$ 多少倍才能使式 (16.27) 或 (16.28) 不等式充分满足？此问题可通过绘校正因子项的幅值和相位作为 $(Z/Z_N)$ 和 $(Z/Z_D)$ 幅值和相位的函数来回答。
+
+![源页 p.637](../assets/page-snapshots/chapter-16/page-637.png)
+
+图16.6 $\|1+Z/Z_N\|$ 的等值线，作为 $Z/Z_N$ 幅值和相位的函数
+
+![源页 p.637](../assets/page-snapshots/chapter-16/page-637.png)
+
+图16.7 $\angle(1+Z/Z_N)$ 的等值线，作为 $Z/Z_N$ 幅值和相位的函数
+
+图16.6 给出 $\|1+Z/Z_N\|$ 的等值线作为 $Z/Z_N$ 幅值和相位的函数。图16.7 给出 $\angle(1+Z/Z_N)$ 的类似等值线。可见 $\|Z/Z_N\|$ 小于 −20 dB 时分子 $(1+Z/Z_N)$ 项引起的最大偏差幅值小于 ±1 dB、相位小于 ±7°。$\|Z/Z_N\|$ 小于 −10 dB 时分子项引起的最大偏差幅值小于 ±3.5 dB、相位小于 ±20°。
+
+![源页 p.638](../assets/page-snapshots/chapter-16/page-638.png)
+
+图16.8 $\|1+Z/Z_D\|$ 的等值线，作为 $Z/Z_D$ 幅值和相位的函数
+
+![源页 p.638](../assets/page-snapshots/chapter-16/page-638.png)
+
+图16.9 $\angle(1+Z/Z_D)$ 的等值线，作为 $Z/Z_D$ 幅值和相位的函数
+
+图16.8 和16.9 分别含 $\|1/(1+Z/Z_D)\|$ 和 $\angle 1/(1+Z/Z_D)$ 的等值线作为 $Z/Z_D$ 幅值和相位的函数。这些图含负号因为项出现在校正因子分母中；否则与图16.6 和16.7 相同。同样 $\|Z/Z_D\|$ 小于 −20 dB 时分母 $(1+Z/Z_D)$ 项引起的最大偏差幅值小于 ±1 dB、相位小于 ±7°。$\|Z/Z_D\|$ 小于 −10 dB 时分母项引起的最大偏差幅值小于 ±3.5 dB、相位小于 ±20°。
+
+## 16.2 EET 示例
+
+### 16.2.1 简单传递函数
+
+第一个示例说明额外元件定理如何用于基本凭观察求传递函数。给定图16.10 所示电路。希望求传递函数
+
+$$G(s) = \frac{v_2(s)}{v_1(s)} \tag{16.29}$$
+
+并将此传递函数表示为因式分解极点-零点形式。一种方法是采用额外元件定理，将电容 $C$ 视为"额外"元件。如图16.11所示，电气端口取在电容位置，"原始条件"取为电容阻抗为无穷大（即开路）的情形。此原始条件下传递函数由电阻 $R_1$、$R_3$、$R_4$ 组成的分压器给出。故 $G(s)$ 可表示为
+
+$$\frac{v_2(s)}{v_1(s)} = G(s) = \left(\frac{R_4}{R_1+R_3+R_4}\right)\frac{\left(1+\dfrac{Z_N}{Z}\right)}{\left(1+\dfrac{Z_D}{Z}\right)} \tag{16.30}$$
+
+其中 $Z(s)$ 是电容阻抗 $1/sC$。
+
+![源页 p.639](../assets/page-snapshots/chapter-16/page-639.png)
+
+图16.10 16.2.1 节的 R-C 电路示例
+
+![源页 p.639](../assets/page-snapshots/chapter-16/page-639.png)
+
+图16.11 将图16.10 电路整理为图16.1 形式
+
+阻抗 $Z_D(s)$ 是电容连接处端口看入的戴维南等效阻抗。如图16.12a所示，此阻抗通过令独立源 $v_1(s)$ 为零然后确定端口端子间阻抗求得。结果为
+
+$$Z_D = R_2 + R_1\,\|\,(R_3+R_4) \tag{16.31}$$
+
+![源页 p.640](../assets/page-snapshots/chapter-16/page-640.png)
+
+图16.2 量 $Z_N(s)$ 和 $Z_D(s)$ 的测量：(a) 确定 $Z_D(s)$；(b) 确定 $Z_N(s)$
+
+图16.12b 说明确定阻抗 $Z_N(s)$。电流源 $i(s)$ 接到端口替代电容。输入 $v_1(s)$ 存在下调整电流源 $i(s)$ 使输出 $v_2(s)$ 置零。此置零条件下阻抗 $Z_N(s)$ 作为 $v(s)$ 与 $i(s)$ 之比求得。
+
+先确定置零条件对电路中信号的影响最易求 $Z_N(s)$。由于 $v_2$ 置零，电阻 $R_4$ 中无电流。由于 $R_3$ 与 $R_4$ 串联，$R_3$ 中也无电流，故 $R_3$ 两端无电压。故图16.12b 中电压 $v_3$ 等于 $v_2$，即
+
+$$v_3 = v_2 \to \text{null} 0 \tag{16.32}$$
+
+故电压 $v$ 由 $iR_2$ 给出。阻抗 $Z_N$ 为
+
+$$Z_N(s) = \left.\frac{v(s)}{i(s)}\right|_{v_2\to\text{null} 0} = R_2 \tag{16.33}$$
+
+注意一般 $Z_N$ 测量期间独立源 $v_1$ 和 $i$ 非零。此例中置零条件意味着电流 $i(s)$ 完全流过 $R_2$、$R_1$、$v_1$ 组成的路径。
+
+将式 (16.31) 和 (16.33) 代入式 (16.30) 求传递函数 $G(s)$：
+
+$$G(s) = \left(\frac{R_4}{R_1+R_3+R_4}\right)\frac{(1+sCR_2)}{(1+sC[R_2+R_1\,\|\,(R_3+R_4)])} \tag{16.34}$$
+
+此例中结果以标准归一化极点-零点形式获得，因为电容是电路中唯一动态元件，且电容阻抗趋向开路的"原始条件"与电路中直流条件一致。类似步骤可用 16.3 节的 N 额外元件定理将含任意数量储能元件的电路传递函数写为归一化形式。
+
+### 16.2.2 未建模元件
+
+图16.13 所示简单 R-L-C 低通滤波器中，电容介质损耗、接触（端接）电阻和箔电阻用串联电阻 $R_{esr}$ 建模，即电容等效串联电阻（ESR）。实际电容可含显著 ESR，可退化性能并在功率损耗 $I_{rms}^2 R_{esr}$ 引起电容内过温时导致失效。ESR 的存在也改变滤波传递函数。传递函数首轮分析中常忽略 ESR（"未建模"）；后来可能希望将此元件影响纳入分析。此简单示例的目标是将 ESR 作为额外元件纳入滤波传递函数。
+
+![源页 p.641](../assets/page-snapshots/chapter-16/page-641.png)
+
+图16.13 R-L-C 滤波示例
+
+滤波传递函数 $G(s)$ 定义为
+
+$$G(s) = \frac{v_2}{v_1} \tag{16.35}$$
+
+$R_{esr} \to 0$ 情形滤波传递函数为
+
+$$\left.G(s)\right|_{R_{esr}\to 0} = \frac{1}{1+s\dfrac{L}{R}+s^2 LC} \tag{16.36}$$
+
+故可用额外元件定理确定非零 ESR 如何改变 $G(s)$。如图16.14所示，将"原始电路"视为 ESR 为短路的情形，加入"额外元件"构成在所示端口处断开此短路。
+
+![源页 p.641](../assets/page-snapshots/chapter-16/page-641.png)
+
+图16.14 将电容 ESR 视为额外元件
+
+ESR 存在时传递函数变为
+
+$$G(s) = \left(\left.G(s)\right|_{R_{esr}\to 0}\right)\frac{\left(1+\dfrac{Z(s)}{Z_N(s)}\right)}{\left(1+\dfrac{Z(s)}{Z_D(s)}\right)} \tag{16.37}$$
+
+其中 $Z(s)$ 等于 $R_{esr}$。
+
+![源页 p.642](../assets/page-snapshots/chapter-16/page-642.png)
+
+图16.15 电容 ESR 示例：(a) 确定 $Z_D(s)$；(b) 确定 $Z_N(s)$
+
+图16.15a 说明确定 $Z_D(s)$。输入源 $v_1(s)$ 设为零，求端口端子间阻抗。可见阻抗 $Z_D(s)$ 简化为电容阻抗与电感阻抗和负载电阻 $R$ 并联组合的串联：
+
+$$Z_D(s) = \frac{1}{sC} + \left(R\,\|\,sL\right) = \frac{1+s\dfrac{L}{R}+s^2 LC}{sC\left(1+s\dfrac{L}{R}\right)} \tag{16.38}$$
+
+图16.15b 说明确定 $Z_N(s)$。输入源 $v_1(s)$ 存在下在端口注入电流 $i(s)$ 如图。调整此电流使输出 $v_2(s)$ 置零。此条件下量 $Z_N(s)$ 由 $v(s)/i(s)$ 给出。可见 $v_2(s)$ 置零时电压 $v(s)$ 等于电流 $i(s)$ 乘电容阻抗 $1/sC$。故
+
+$$Z_N(s) = \left.\frac{v(s)}{i(s)}\right|_{v_2(s)\to\text{null} 0} = \frac{1}{sC} \tag{16.39}$$
+
+注意一般 $Z_N(s)$ 测量期间 $i(s)$ 不为零。置零条件通过令源 $i(s)$ 等于值 $-v_1(s)/sL$ 实现。故非零 $R_{esr}$ 存在时传递函数 $G(s)$ 可表示为
+
+$$G(s) = \left(\left.G(s)\right|_{R_{esr}\to 0}\right)\frac{\left(1+\dfrac{R_{esr}}{Z_N(s)}\right)}{\left(1+\dfrac{R_{esr}}{Z_D(s)}\right)} = \left(\frac{1}{1+s\dfrac{L}{R}+s^2 LC}\right)\frac{(1+sCR_{esr})}{\left(1+\dfrac{R_{esr}}{Z_D(s)}\right)} \tag{16.40}$$
+
+可见校正因子加入 $Z_N$ 项引起的频率 $\omega_z = 1/R_{esr}C$ 处零点。分母 $Z_D$ 项可附加修改传递函数；在以下条件满足时分母项影响可忽略
+
+$$R_{esr} \ll \|Z_D\| \tag{16.41}$$
+
+现可绘阻抗不等式 (16.28) 检查加入 $R_{esr}$ 如何改变 $G(s)$。用 8.3 节近似图解构造方法，$Z_D(s)$ 和 $Z_N(s)$ 的幅值对值 $L = 100\,\mu\text{H}$、$C = 1\,\mu\text{F}$、$R = 100\,\Omega$、$R_{esr} = 2\,\Omega$ 构造于图16.16。
+
+$Z_N$ 等于电容阻抗；低频 $R_{esr} \ll \|Z_N\|$。但高频 $\|Z_N\|$ 变小，$R_{esr}$ 不可避免地大于 $\|Z_N\|$。这导致前述频率 $f_z$ 处零点。
+
+![源页 p.643](../assets/page-snapshots/chapter-16/page-643.png)
+
+图16.16 $Z_N$、$Z_D$、$R_{esr}$ 幅值阻抗波特图的构造
+
+给定值下除谐振频率 $f_0$ 附近外所有频率 $\|Z_D\| \gg R_{esr}$。故式 (16.40) 分母 $Z_D$ 项除此谐振频率附近外基本为 1。谐振频率 $f_0$ 处 $Z_D$ 约等于 1 Ω，故分母 $Z_D$ 项变为
+
+$$\left(1+\frac{R_{esr}}{Z_D(s)}\right) = \left(1+\frac{2\,\Omega}{1\,\Omega}\right) = 3 \tag{16.42}$$
+
+这有效将传递函数 Q 因子从 10 降到约 10/3 = 3.33。
+
+展开式 (16.40) 可验证精确传递函数 $G(s)$ 可表示为
+
+$$G(s) = \frac{(1+sCR_{esr})}{1+s\!\left(\dfrac{L}{R}+R_{esr}C\right)+s^2 LC\!\left(\dfrac{R+R_{esr}}{R}\right)} \tag{16.43}$$
+
+分母 $Z_D$ 项的影响是将精确 Q 因子从 10 降到 3.37，将谐振频率 $f_0$ 从 15.9 kHz 降到 15.8 kHz。
+
+### 16.2.3 SEPIC 示例
+
+作为第三个例子，考虑 SEPIC 小信号传递函数的推导和设计。14.1.3 节用平均开关建模导出 SEPIC 小信号模型，结果如图14.7所示并复制于图16.17。由于平均开关建模所得电路卷曲性质，传递函数 $G_{vd}(s)$ 分析繁琐。额外元件定理给出此电路求解的替代方法，导致传递函数的简化解释。此方法还给出如何阻尼此四阶系统内部谐振使小信号传递函数行为更好的洞察。
+
+图16.17 模型求解的困难来自元件 $C_1$，它提供与直流变压器并联的路径耦合模型的输入和输出部分。若此元件不存在，电路求解将简单得多。故本节所用策略是令 $C_1$ 成为开路，求解所得简单得多的模型。然后用额外元件定理将 $C_1$ 的影响纳入 $G_{vd}(s)$ 等传递函数。定义
+
+$$G_{vd-bb} = \left.\frac{\hat{v}}{\hat{d}}\right|_{C_1\to 0} \tag{16.44}$$
+
+![源页 p.644](../assets/page-snapshots/chapter-16/page-644.png)
+
+图16.17 SEPIC 的小信号平均开关模型，图14.7
+
+额外元件定理预测此传递函数可写为
+
+$$G_{vd} = G_{vd-bb}\frac{\left(1+\dfrac{Z_N}{Z}\right)}{\left(1+\dfrac{Z_D}{Z}\right)} \tag{16.45}$$
+
+$Z = 1/sC_1$。量 $Z_N$ 和 $Z_D$ 用额外元件定理求得。阻抗 $Z_D$ 是 $C_1$ 连接处端口的驱动点阻抗。式 (16.44)–(16.45) 表明 SEPIC 的控制-输出传递函数等于有效升降压变换器 $G_{vd-bb}$ 乘以计入 $C_1$ 及其关联谐振影响的校正因子。
+
+![源页 p.645](../assets/page-snapshots/chapter-16/page-645.png)
+
+图16.18 $C_1 \to 0$ 时 SEPIC 模型简化为有效升降压变换器
+
+令 $C_1$ 趋向开路时，图16.17 SEPIC 模型可简化为图16.18 所示有效升降压变换器模型。此电路的传递函数现可按第7和8章所述常规方式求得。令 $\hat{v}_g$ 源为零解 $\hat{v}$ 求从 $\hat{d}$ 到 $\hat{v}$ 的传递函数，结果为
+
+$$G_{vd-bb}(s) = \frac{V_g}{D'^2}\frac{1-s\dfrac{L_1}{R}\!\left(\dfrac{D}{D'}\right)^2}{1+\dfrac{s}{R\!\left(L_2+\left(\dfrac{D}{D'}\right)^2 L_1\right)}+s^2 C_2\!\left(L_2+\left(\dfrac{D}{D'}\right)^2 L_1\right)} \tag{16.46}$$
+
+此表达式形式为
+
+$$G_{vd-bb}(s) = G_{d0}\frac{1-\dfrac{s}{\omega_z}}{1+\dfrac{s}{Q_o\omega_o}+\left(\dfrac{s}{\omega_o}\right)^2} \tag{16.47}$$
+
+其中
+
+$$G_{d0} = \frac{V_g}{D'^2}, \quad \omega_o = \frac{1}{\sqrt{C_2\!\left(L_2+\left(\dfrac{D}{D'}\right)^2 L_1\right)}}, \quad Q_o = R\sqrt{\frac{C_2}{L_2+\left(\dfrac{D}{D'}\right)^2 L_1}}, \quad \omega_z = \frac{R}{L_1}\!\left(\frac{D'}{D}\right)^2\ (\text{RHP}) \tag{16.48}$$
+
+故 $G_{vd-bb}$ 含二次极点和 RHP 零点。
+
+$Z_N$ 的推导如图16.19所示。$\hat{v}_g$ 源设为零。$\hat{d}$ 存在下向 $C_1$ 将连接的端口注入电流 $\hat{i}_{test}$。调整源使输出 $\hat{v}$ 置零。
+
+![源页 p.646](../assets/page-snapshots/chapter-16/page-646.png)
+
+图16.19 $Z_N$ 的推导
+
+量 $Z_N$ 为
+
+$$Z_N = \left.\frac{\hat{v}_{test}}{\hat{i}_{test}}\right|_{\hat{v}\to\text{null} 0} \tag{16.49}$$
+
+分析此电路从置零条件开始，沿信号向注入端口跟踪。输出电压置零 $\hat{v} \to \text{null} 0$ 时，负载电阻 $R$ 和输出电容 $C_2$ 中电流也置零。这意味着变压器二次和一次绕组中电流仅由平均开关模型的 $\hat{d}I_2/DD'$ 电流源决定。故一次电流为 $\hat{d}I_2/D'^2$ 如图所示。此外注入电流 $\hat{i}_{test}$ 完全流过电感 $L_2$，$L_2$ 两端电压为 $sL_2\hat{i}_{test}$。此电压也出现在变压器二次侧，可用于求变压器一次电压。这允许将电感 $L_1$ 电压表示为
+
+$$\hat{v}_{L1} = -\frac{V_1\hat{d}}{DD'} - \frac{sL_2\hat{i}_{test}}{D'/D} \tag{16.50}$$
+
+还可写回路方程
+
+$$\hat{v}_{test} + \hat{v}_{L1} = sL_2\hat{i}_{test} \tag{16.51}$$
+
+最后可写节点方程
+
+$$\frac{\hat{v}_{L1}}{sL_1} + \frac{\hat{d}I_2}{D'^2} + \hat{i}_{test} = 0 \tag{16.52}$$
+
+从式 (16.50)、(16.51)、(16.52) 消去 $\hat{v}_{L1}$ 和 $\hat{d}$ 并解 $\hat{v}_{test}/\hat{i}_{test}$ 得 $Z_N$ 的如下表达式：
+
+$$Z_N(s) = \frac{s(L_1+L_2)\left(1-s\dfrac{L_1\,\|\,L_2}{R}\dfrac{D}{D'^2}\right)}{\left(1-\dfrac{sD^2 L_1}{D'^2 R}\right)} \tag{16.53}$$
+
+此方程形式为
+
+$$Z_N(s) = s(L_1+L_2)\frac{\left(1-\dfrac{s}{\omega_{zN}}\right)}{\left(1-\dfrac{s}{\omega_z}\right)} \tag{16.54}$$
+
+应注意 $Z_N$ 等零阻抗不是无源或驱动点阻抗，此阻抗可为负或含 RHP 极点或零点。式 (16.53) 预测 $Z_N$ 呈现 $s(L_1+L_2)$ 串联组合给出的低频渐近线，纯感性，相位 +90°。$Z_N$ 含 RHP 零点和 RHP 极点；RHP 极点与 $G_{vd-bb}$ 的 RHP 零点 $\omega_z$ 重合。高频渐近线为 $sL_2/D$，也纯感性，相位 +90°。
+
+量 $Z_D$ 是 $\hat{v}_g$ 和 $\hat{d}$ 源设为零时电容 $C_1$ 端口处看到的驱动点阻抗。如图16.20所示，在端口注入测试电流 $\hat{i}_{test}$ 测量端口电压 $\hat{v}_{test}$。由于 $Z_D$ 无置零条件关联，此量一般取决于所有元件，故代数更复杂。
+
+![源页 p.647](../assets/page-snapshots/chapter-16/page-647.png)
+
+图16.20 $Z_D$ 的推导
+
+经分析和仔细代数可证
+
+$$Z_D(s) = \frac{s(L_1+L_2)\left(1+s\dfrac{L_1\,\|\,L_2}{D'^2 R}+s^2\dfrac{L_1\,\|\,L_2}{D'^2}C_2\right)}{\left(1+\dfrac{s}{R\!\left(L_2+\left(\dfrac{D}{D'}\right)^2 L_1\right)}+s^2 C_2\!\left(L_2+\left(\dfrac{D}{D'}\right)^2 L_1\right)\right)} \tag{16.55}$$
+
+此表达式形式为
+
+$$Z_D(s) = s(L_1+L_2)\frac{\left(1+\dfrac{s}{Q_{zD}\omega_{zD}}+\left(\dfrac{s}{\omega_{zD}}\right)^2\right)}{\left(1+\dfrac{s}{Q_o\omega_o}+\left(\dfrac{s}{\omega_o}\right)^2\right)} \tag{16.56}$$
+
+其中
+
+$$\omega_{zD} = \frac{D'}{\sqrt{(L_1\,\|\,L_2)C_2}} \tag{16.57}$$
+
+$$Q_{zD} = \frac{D'R}{\sqrt{\dfrac{C_2}{L_1\,\|\,L_2}}} \tag{16.58}$$
+
+量 $G_{vd-bb}$ 和 $Z_D$ 有相同分母多项式。
+
+故 $Z_D$ 的低频渐近线为 $s(L_1+L_2)$。此渐近线纯感性，相位 +90°。含中频二次极点和零点；可使中频渐近线变为阻性或容性。高频渐近线为
+
+$$s(L_1+L_2)\left(\frac{\omega_p}{\omega_z}\right)^2 = s\left(\frac{L_1}{D'^2}\,\|\,\frac{L_2}{D^2}\right) \tag{16.59}$$
+
+也纯感性，相位 +90°。
+
+### 16.2.4 阻尼 SEPIC 内部谐振
+
+考虑如下元件值的 SEPIC：输入电压 $V_g = 18\text{ V}$，输出电压 $V = 24\text{ V}$，开关频率 $f_s = 100\text{ kHz}$，电感 $L_1 = 100\,\mu\text{H}$、$L_2 = 50\,\mu\text{H}$，电容 $C_1 = 22\,\mu\text{F}$、$C_2 = 220\,\mu\text{F}$，负载电阻 $R = 5\,\Omega$。此元件值下式 (16.48) 预测 $G_{vd-bb}$ 含 $f_o = 711\text{ Hz}$ 处 $Q_o = 4.9$ 的复极点。此外 $G_{vd-bb}$ 含 4.5 kHz 处 RHP 零点。
+
+阻抗 $Z_N$ [式 (16.53)]、$Z_D$ [式 (16.56)] 和 $Z = 1/sC_1$ 绘于图16.21。约 2 kHz 以下频率电容 $C_1$ 阻抗幅值远大于 $Z_N$ 或 $Z_D$。故式 (16.45) 中校正因子近似为 1，SEPIC $G_{vd}$ 等于有效升降压模型的 $G_{vd-bb}$。约 6 kHz 以上频率电容 $C_1$ 阻抗幅值远小于 $Z_N$ 和 $Z_D$。此情形下式 (16.45) 简化为

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第15章part 1 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode"
+title: "第15章 断续导通模式的等效电路建模（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,975 +18,402 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第15章part 1 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
+# 第15章 断续导通模式的等效电路建模（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 589-608  
-> Chunk ID: `chapter-15-part-1`
+> 源页：589–608
+> 本部分涵盖 15.1 DCM 变换器动态引言、15.2 DCM 平均开关模型、15.3 DCM 开关网络小信号交流建模。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+至今我们已导出连续导通模式下工作的直流-直流脉宽调制（PWM）变换器的等效电路模型。如图15.1所示，基本直流变换特性用有效匝比等于变换比 $M(D)$ 的有效直流变压器建模。此模型预测变换器有电压源输出特性，使输出电压基本与负载电流或负载电阻 $R$ 无关。我们还看到如何精细化此模型以预测损耗和效率、变换器动态和小信号交流传递函数。我们发现降压变换器的传递函数含两个低频极点（归因于变换器滤波电感和电容）。升压和升降压变换器的控制-输出传递函数还含右半平面零点。最后，我们看到如何在变换器控制系统设计中利用这些结果。
 
-## 术语表
+断续导通模式（DCM）下工作的变换器的基本直流和小信号交流等效电路是什么？第5章发现 DCM 中输出电压变得依赖负载：变换比 $M(D, K)$ 是无量纲参数 $K = 2L/RT_s$ 的函数，后者又是负载电阻 $R$ 的函数。故变换器不再有电压源输出特性，直流变压器模型不太合适。
 
-| English term | 中文译名 | Notes |
+15.1 节用升降压 DCM 变换器示例介绍 DCM 变换器交流波形和平均动态。表明电感电压波形的滑动平均始终为零或近似为零，这就是为何实际中 DCM 通常可忽略高频电感动态，DCM 变换器比连续导通模式工作呈现更简单的降阶动态响应。
+
+基于电感电压波形滑动平均始终为零的近似，15.2 节用平均开关建模方法 [70–74, 126, 130, 131] 导出 DCM 开关网络的等效电路。表明无损电阻模型 [132–134] 是 DCM 开关网络的平均开关模型。此等效电路以清晰简单的方式表示 DCM 开关网络的稳态和大信号动态特性。断续导通模式下平均晶体管电压和电流遵循欧姆定律，故晶体管用有效电阻 $R_e$ 建模。平均二极管电压和电流遵循功率源特性，功率等于 $R_e$ 中有效耗散的功率。故二极管用受控功率源建模。
+
+![源页 p.590](../assets/page-snapshots/chapter-15/page-590.png)
+
+图15.1 本章的目标是导出断续导通模式下变换器的大信号直流和小信号交流等效电路模型
+
+15.4 节讨论可在 CCM 或 DCM 下工作的变换器的仿真模型。导出自动在模式间切换的平均开关模型，并在 SPICE 中实现。
+
+由于大多数变换器在某些工作点工作于断续导通模式，需要小信号交流 DCM 模型以证明此类变换器的控制系统设计正确。15.3 节通过线性化无损电阻模型导出 DCM 开关网络的小信号模型。DCM 变换器的传递函数与各自 CCM 传递函数大不相同。基本 DCM 降压、升压和升降压变换器本质呈现简单的单极点传递函数 [15, 135]，而高频动态通常可忽略。故 DCM 下工作的基本变换器易于控制；因此有时故意让变换器在所有负载下工作于 DCM。DCM Ćuk 或 SEPIC 等高阶变换器的传递函数复杂得多；但同样一个极点移到高频，实际影响可忽略。本章以 15.5 节讨论 DCM 变换器高频动态结束。更详细分析预测 DCM 变换器的高频动态与脉宽调制器关联的采样过程及电感电流对占空比扰动的响应性质有关 [136]。此行为可用开关频率附近的有效极点建模。
+
+## 15.1 DCM 变换器动态引言
+
+考虑图15.2 的升降压变换器。晶体管开关占空比由正弦 PWM 输入信号调制，
+
+$$v_c(t) = V_c + V_m\sin\omega_m t \tag{15.1}$$
+
+![源页 p.591](../assets/page-snapshots/chapter-15/page-591.png)
+
+图15.2 升降压变换器示例。晶体管开关占空比由 PWM 输入信号 $v_c(t)$ 调制
+
+其中调制频率 $f_m = \omega_m/(2\pi)$ 远小于变换器开关频率 $f_s$。图15.3 给出一个调制周期内的变换器开关和平均波形。此例中电感电流纹波大到变换器始终工作于 DCM。如图15.3b所示，电感电流波形 $i_L(t)$ 由每个开关周期内从零开始、到零结束的三角脉冲组成。如预期，电感电流的滑动平均 $\langle i_L(t)\rangle_{T_s}$ 保留电感电流的低频动态，包括直流分量和响应正弦调制晶体管占空比的交流分量。同样，输出电压的滑动平均 $\langle v(t)\rangle_{T_s}$ 含直流分量 $V$ 和正弦调制占空比引起的交流变化，而 $v(t)$ 中的开关纹波被去除，如图15.3c所示。特别感兴趣的是检查图15.3d所示电感电压开关和平均波形。开关波形 $v_L(t)$ 是遵循第5章所述 DCM 模式的脉动波形，
+
+$$v_L(t) = \begin{cases} v_g(t) & \text{$d_1 T_s$ 期间，晶体管导通、二极管关断} \\ v(t) & \text{$d_2 T_s$ 期间，晶体管关断、二极管导通} \\ 0 & \text{$d_3 T_s$ 期间，晶体管和二极管均关断} \end{cases} \tag{15.2}$$
+
+其中 $d_1$ 是晶体管开关占空比，$d_1 + d_2 + d_3 = 1$。
+
+可观察到滑动平均 $\langle v(t)\rangle_{T_s}$ 始终等于零或接近零。为解释 DCM 电感动态，考虑图15.4 所示几个开关周期内的电感电流和平均电感电压波形。占空比调制结果，第二周期中晶体管占空比比第一周期中 $d_1$ 长 $\Delta d$。对围绕时刻 $t$ 的平均区间，$v_L(t)$ 的滑动平均可求得为
+
+$$\langle v_L(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}v_L(\tau)\,d\tau = \frac{L}{T_s}(i_L(t+T_s/2)-i_L(t-T_s/2)) \tag{15.3}$$
+
+对图15.4所示示例，
+
+$$i_L(t-T_s/2) = i_L(t+T_s/2) = 0 \tag{15.4}$$
+
+故
+
+$$\langle v_L(t)\rangle_{T_s} = 0 \tag{15.5}$$
+
+由式 (15.3) 可知当 $i_L(t+T_s/2) = i_L(t-T_s/2)$ 时 $\langle v_L(t)\rangle_{T_s} = 0$，DCM 中开关周期部分内始终如此——即使变换器不在平衡态。图15.3 或15.4 示例中 $\langle v_L(t)\rangle_{T_s} \ne 0$ 仅在长度 $d_2 T_s$ 的时间区间内且仅当占空比在连续开关周期间变化时。参见图15.3d，$\langle v_L(t)\rangle_{T_s} \ne 0$ 中的非零脉冲显然含响应占空比调制的小低频分量。但如 15.5 节进一步讨论，$\langle v_L(t)\rangle_{T_s}$ 中与采样效应和高频动态相关的相对短、相对低幅度的非零脉冲不显著影响主导低频 DCM 动态。总之，DCM 中可简单假定电感伏秒平衡不仅在平衡态成立而且在所有时刻成立：
+
+$$\langle v_L(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}v_L(\tau)\,d\tau \approx 0 \tag{15.6}$$
+
+![源页 p.592](../assets/page-snapshots/chapter-15/page-592.png)
+
+图15.3 图15.2 升降压变换器的开关和平均波形。此例中变换器参数为 $V_g = 10\text{ V}$，$L = 5\,\mu\text{H}$，$C = 22\,\mu\text{F}$，$f_s = 1/T_s = 100\text{ kHz}$，$R = 30\,\Omega$，PWM 增益 $1/V_M = 1\text{ V}^{-1}$，$v_c(t) = 0.4 + 0.1\sin(\omega_m t)$，调制频率 $f_m = f_s/20 = 5\text{ kHz}$
+
+![源页 p.593](../assets/page-snapshots/chapter-15/page-593.png)
+
+图15.4 DCM 电感电流 $i_L(t)$ 和电感电压的滑动平均 $\langle v_L(t)\rangle_{T_s}$
+
+下一节遵循平均开关建模方法，用式 (15.6) 给出的近似导出 DCM 变换器的直流和交流模型。
+
+## 15.2 DCM 平均开关模型
+
+考虑图15.5 的升降压变换器。让我们遵循 14.1 节的平均开关建模方法，导出建模开关网络平均端子波形的等效电路。通用双开关网络及其端子量 $v_1(t)$、$i_1(t)$、$v_2(t)$、$i_2(t)$ 定义如图15.5所示，与图14.4a 一致。DCM 工作时电感和开关网络电压电流波形如图15.6所示。
+
+![源页 p.593](../assets/page-snapshots/chapter-15/page-593.png)
+
+图15.5 升降压变换器示例，标出开关网络端子量
+
+子区间 $d_1 T_s$ 内晶体管导通时，电感电流从零以 $v_g(t)/L$ 的斜率上升。此子区间末电感电流 $i_L(t)$ 达到峰值
+
+$$i_{pk} = \frac{v_g}{L}d_1 T_s \tag{15.7}$$
+
+![源页 p.594](../assets/page-snapshots/chapter-15/page-594.png)
+
+图15.6 电感和开关网络电压电流波形
+
+下一子区间二极管导通时，电感电流以 $v(t)/L$ 的斜率下降。此子区间在电感电流降到零、二极管反偏时结束。此子区间长度为 $d_2 T_s$。开关周期余下 $d_3 T_s$ 内电感电流和电感电压保持为零。
+
+可参照图15.6 波形导出 DCM 平均开关模型。长度 $T_s$、围绕时刻 $t$ 的平均区间已突出显示。
+
+遵循 14.1.2 节方法，用变换器状态变量（电感电流和电容电压）、输入电压 $v_g(t)$ 和子区间长度 $d_1$、$d_2$ 表示开关网络端子波形 $v_1(t)$、$v_2(t)$、$i_1(t)$、$i_2(t)$ 的平均值。
+
+求平均开关网络输入电压 $\langle v_1(t)\rangle_{T_s}$（即平均晶体管电压）时，从变换器电压回路方程开始很方便：
+
+$$v_1 = v_g - v_L \tag{15.8}$$
+
+对式 (15.8) 施加平均得
+
+$$\langle v_1\rangle_{T_s} = \langle v_g\rangle_{T_s} - \langle v_L\rangle_{T_s} \tag{15.9}$$
+
+计入近似式 (15.6) 有
+
+$$\langle v_1\rangle_{T_s} = \langle v_g\rangle_{T_s} \tag{15.10}$$
+
+对图15.6所示平均区间，注意 $\langle v_L\rangle_{T_s} = 0$ 精确成立。
+
+基于电压回路方程 $v_2 = v_L - v$ 的类似分析得平均二极管电压如下：
+
+$$\langle v_2\rangle_{T_s} = \langle -v\rangle_{T_s} \tag{15.11}$$
+
+平均开关网络输入电流 $\langle i_1(t)\rangle_{T_s}$ 通过在一个开关周期上积分图15.6 的 $i_1(t)$ 波形求得：
+
+$$\langle i_1(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}i_1(t)\,dt = \frac{q_1}{T_s} \tag{15.12}$$
+
+积分 $q_1$ 等于第一子区间内 $i_1(t)$ 波形下的面积。用三角形面积公式易求此面积：
+
+$$q_1 = \int_{t-T_s/2}^{t+T_s/2}i_1(t)\,dt = \frac{1}{2}(d_1 T_s)(i_{pk}) \tag{15.13}$$
+
+将式 (15.7)、(15.13)、(15.10) 代入式 (15.12) 得
+
+$$\langle i_1(t)\rangle_{T_s} = \frac{d_1^2 T_s}{2L}\langle v_g(t)\rangle_{T_s} = \frac{d_1^2 T_s}{2L}\langle v_1(t)\rangle_{T_s} \tag{15.14}$$
+
+注意 $\langle i_1(t)\rangle_{T_s}$ 不等于 $d_1\langle i_L(t)\rangle_{T_s}$。由于电感电流纹波不小，须画出含大开关纹波的实际输入电流波形，然后如式 (15.12) 至 (15.14) 正确计算平均。
+
+平均二极管电流 $\langle i_2(t)\rangle_{T_s}$ 用与上述 $\langle i_1(t)\rangle_{T_s}$ 类似的方法求得：
+
+$$\langle i_2(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}i_2(t)\,dt = \frac{q_2}{T_s} \tag{15.15}$$
+
+积分 $q_2$ 等于 $d_2 T_s$ 子区间内 $i_2(t)$ 波形下的面积。用三角形面积公式求此面积：
+
+$$q_2 = \int_{t-T_s/2}^{t+T_s/2}i_2(t)\,dt = \frac{1}{2}(d_2 T_s)(i_{pk}) \tag{15.16}$$
+
+将式 (15.7)、(15.16)、(15.10) 代入式 (15.15) 得
+
+$$\langle i_2(t)\rangle_{T_s} = \frac{d_1 d_2 T_s}{2L}\langle v_g(t)\rangle_{T_s} = \frac{d_1 d_2 T_s}{2L}\langle v_1(t)\rangle_{T_s} \tag{15.17}$$
+
+式 (15.10)、(15.11)、(15.14)、(15.17) 构成 DCM 升降压变换器开关网络的平均端子方程。这些方程中还需用开关占空比 $d_1 = d$ 和变换器平均波形表示子区间长度 $d_2$。考虑图15.6所示平均区间，注意 $i_L(t-T_s/2) = i_L(t+T_s/2) = 0$。此平均区间内电感电流无净变化，电感上无净伏秒。换句话说，图15.6所示平均区间上计算的平均电感电压为零，
+
+$$\langle v_L(t)\rangle_{T_s} = d_1\langle v_g(t)\rangle_{T_s} + d_2\langle v(t)\rangle_{T_s} = 0 \tag{15.18}$$
+
+基于式 (15.5) 给出的近似，得出式 (15.18) 可用于一般求 $d_2 T_s$ 子区间长度，即使变换器不在平衡态：
+
+$$d_2(t) = -d_1(t)\frac{\langle v_g(t)\rangle_{T_s}}{\langle v(t)\rangle_{T_s}} \tag{15.19}$$
+
+将式 (15.19) 代入式 (15.14) 和 (15.17) 得断续导通模式下开关网络平均端子波形的简单表达式：
+
+$$\langle i_1(t)\rangle_{T_s} = \frac{d_1^2 T_s}{2L}\langle v_1(t)\rangle_{T_s} \tag{15.20}$$
+
+$$\langle i_2(t)\rangle_{T_s} = \frac{d_1^2 T_s}{2L}\frac{\langle v_1(t)\rangle_{T_s}^2}{\langle v_2(t)\rangle_{T_s}} \tag{15.21}$$
+
+接下来构造对应平均开关网络方程 (15.20) 和 (15.21) 的等效电路。开关网络输入端口由式 (15.20) 建模。此方程表明平均输入电流 $\langle i_1(t)\rangle_{T_s}$ 正比于施加输入电压 $\langle v_1(t)\rangle_{T_s}$。换句话说，开关网络输入端口的低频分量遵循欧姆定律：
+
+$$\langle i_1(t)\rangle_{T_s} = \frac{\langle v_1(t)\rangle_{T_s}}{R_e(d_1)} \tag{15.22}$$
+
+其中有效电阻 $R_e$ 为
+
+$$R_e(d_1) = \frac{2L}{d_1^2 T_s} \tag{15.23}$$
+
+![源页 p.597](../assets/page-snapshots/chapter-15/page-597.png)
+
+图15.7 建模开关输入（晶体管）端口平均波形的等效电路
+
+等效电路如图15.7所示。$d_1 T_s$ 子区间内输入电流波形 $i_1(t)$ 的斜率正比于输入电压 $\langle v_g(t)\rangle_{T_s} = \langle v_1(t)\rangle_{T_s}$，如图15.6所示。结果峰值电流 $i_{pk}$、总电荷 $q_1$ 和平均输入电流 $\langle i_1(t)\rangle_{T_s}$ 也正比于 $\langle v_1(t)\rangle_{T_s}$。当然变换器内部无物理电阻。实际上若变换器元件为理想则变换器内部不产生热。而是 $R_e$ 表观消耗的功率传送到开关网络输出端口。
+
+开关网络输出（二极管）端口由式 (15.21) 建模，或
+
+$$\langle i_2(t)\rangle_{T_s}\langle v_2(t)\rangle_{T_s} = \frac{\langle v_1(t)\rangle_{T_s}^2}{R_e(d_1)} = \langle p(t)\rangle_{T_s} \tag{15.24}$$
+
+注意 $\langle v_1(t)\rangle_{T_s}^2/R_e$ 是有效电阻 $R_e(d_1)$ 表观消耗的平均功率 $\langle p(t)\rangle_{T_s}$。式 (15.24) 表明此功率从开关网络输出端口流出。故开关网络不消耗净功率——其平均输入和输出功率相等。
+
+式 (15.24) 也可通过考虑电感储能导出。第一子区间内电感电流从 0 增到 $i_{pk}$。此过程中电感储存如下能量：
+
+$$\frac{1}{2}Li_{pk}^2 = \frac{\langle v_1\rangle_{T_s}^2 d_1^2 T_s^2}{2L} = \frac{\langle v_1\rangle_{T_s}^2}{R_e(d_1)}T_s \tag{15.25}$$
+
+此处 $i_{pk}$ 已用式 (15.7) 和 (15.10) 用 $\langle v_1(t)\rangle_{T_s}$ 表示。此能量从电源 $v_g$ 经开关网络输入端子（即经晶体管）传送到电感。第二子区间内电感经开关网络输出端子（即经二极管）释放所有储能到输出。故平均输出功率可表示为每周期传送的能量除以开关周期：
+
+$$\langle p(t)\rangle_{T_s} = \left(\frac{\langle v_1\rangle_{T_s}^2}{R_e(d_1)}T_s\right)\!\left(\frac{1}{T_s}\right) = \frac{\langle v_1\rangle_{T_s}^2}{R_e(d_1)} \tag{15.26}$$
+
+此功率传送到负载，故
+
+$$\langle v\rangle_{T_s}\langle i_2\rangle_{T_s} = \langle v_2\rangle_{T_s}\langle i_2\rangle_{T_s} = \langle p(t)\rangle_{T_s} = \frac{\langle v_1\rangle_{T_s}^2}{R_e(d_1)} \tag{15.27}$$
+
+此结果与式 (15.24) 一致。
+
+平均功率 $\langle p(t)\rangle_{T_s}$ 与负载特性无关，仅由有效电阻 $R_e$ 和施加的开关网络输入端子电压或电流决定。换句话说，开关网络输出端口表现为等于 $R_e$ 表观消耗功率的功率源。此行为用图15.8 所示受控功率源符号示意表示。任何无损二端口网络中，当一个端口的电压和电流与连接到第二端口的外部网络特性无关时，第二端口必呈现受控功率源特性 [133]。此情形在多种常见功率处理应用中出现，包括断续导通模式下工作的开关网络。
+
+![源页 p.598](../assets/page-snapshots/chapter-15/page-598.png)
+
+图15.8 受控功率源：(a) 原理图符号；(b) i-v 特性
+
+![源页 p.598](../assets/page-snapshots/chapter-15/page-598.png)
+
+图15.9 受控功率吸收：(a) 原理图符号；(b) i-v 特性
+
+图15.8b 所示功率源特性对电压和电流对称；结果功率源呈现若干独特性质。与电压源类似，理想功率源不可短路；否则出现无穷电流。与电流源类似，理想功率源不可开路，以避免无穷端子电压。功率源须接到能吸收功率 $p(t)$ 的负载，工作点由负载和功率源 i-v 特性的交点定义。
+
+可类似定义功率流向反转的功率吸收元件。此元件的原理图符号和 i-v 特性如图15.9所示。
+
+![源页 p.599](../assets/page-snapshots/chapter-15/page-599.png)
+
+图15.10 功率源元件的电路操作：(a) 串联和并联功率源合并为单一等效功率源；(b) 功率源经任意匝比理想变压器反射的不变性
+
+如图15.10a所示，串联和并联功率源可合并为等于各源功率之和的单一功率源。图15.10b 说明功率源经任意匝比变压器反射如何保持不变。功率源对对偶变换也不变。
+
+DCM 通用双开关网络的大信号平均模型如图15.11b所示。输入端口有效表现为电阻 $R_e$。$R_e$ 表观消耗的瞬时功率传送到输出端口，输出端口表现为受控功率源。此无损二端口网络称为无损电阻模型（LFR）[132]。无损电阻表示 DCM 开关网络的基本功率变换特性 [134]。可证无损电阻不仅建模升降压变换器中的 DCM 开关网络平均特性，也建模其他 PWM 变换器中的。
+
+![源页 p.600](../assets/page-snapshots/chapter-15/page-600.png)
+
+图15.11 通用双开关网络 (a) 及断续导通模式下相应平均开关模型 (b)。平均晶体管波形遵循欧姆定律，平均二极管波形表现为受控功率源
+
+图15.12 用无损电阻模型替代 DCM 升降压变换器的开关网络
+
+DCM 升降压变换器开关网络用图15.11b 平均模型替代时，得图15.12 变换器等效电路。令所有平均波形为其静态值、令电感和电容分别成为短路和开路后，得图15.13 直流模型。
+
+含功率源或无损电阻的系统通常可轻易求解，通过令平均源和负载功率相等。例如图15.13 直流网络中流入变换器输入端子的功率为
+
+$$P = \frac{V_g^2}{R_e} \tag{15.28}$$
+
+流入负载电阻的功率为
+
+$$P = \frac{V^2}{R} \tag{15.29}$$
+
+![源页 p.601](../assets/page-snapshots/chapter-15/page-601.png)
+
+图15.13 含无损电阻模型的直流网络示例
+
+无损电阻模型表明此两功率须相等：
+
+$$P = \frac{V_g^2}{R_e} = \frac{V^2}{R} \tag{15.30}$$
+
+解电压变换比 $M = V/V_g$ 得
+
+$$\frac{V}{V_g} = \pm\sqrt{\frac{R}{R_e}} \tag{15.31}$$
+
+式 (15.31) 是一般结果，对任何可用无损电阻建模且驱动电阻负载的变换器有效。须用其他论证确定 $V/V_g$ 的极性。图15.5 升降压变换器中二极管极性表明 $V/V_g$ 必为负。$R_e$ 的稳态值为
+
+$$R_e(D) = \frac{2L}{D^2 T_s} \tag{15.32}$$
+
+其中 $D$ 是晶体管静态占空比。将式 (15.32) 代入 (15.31) 得
+
+$$\frac{V}{V_g} = -\sqrt{\frac{D^2 T_s R}{2L}} = -\frac{D}{\sqrt{K}} \tag{15.33}$$
+
+$K = 2L/RT_s$。此方程与表5.2 给出的先前稳态结果一致。
+
+波形含交流分量时类似论证适用。例如考虑图15.14 网络，其中电压和电流是时间的周期函数。可通过令平均源和负载功率相等确定波形的方均根值。流入变换器输入端口的平均功率为
+
+$$P_{av} = \frac{V_{g,rms}^2}{R_e} \tag{15.34}$$
+
+其中 $P_{av}$ 是有效电阻 $R_e$ 消耗的平均功率。电容 $C$ 不消耗平均功率，故平均功率 $P_{av}$ 须全部流入负载电阻 $R$：
+
+$$P_{av} = \frac{V_{rms}^2}{R} \tag{15.35}$$
+
+![源页 p.602](../assets/page-snapshots/chapter-15/page-602.png)
+
+图15.14 含无损电阻模型的交流网络示例
+
+令式 (15.34) 和 (15.35) 相等得
+
+$$\frac{V_{rms}}{V_{g,rms}} = \sqrt{\frac{R}{R_e}} \tag{15.36}$$
+
+故方均根端子电压遵循与直流情形相同的关系。
+
+DCM 降压、升压和升降压变换器及 DCM Ćuk 和 SEPIC 变换器的平均等效电路列于图15.15。每种情形中平均晶体管波形遵循欧姆定律，用有效电阻 $R_e$ 建模。平均二极管波形遵循功率源特性，等于 $R_e$ 中有效耗散的功率。降压、升压和升降压变换器的 $R_e$ 为
+
+$$R_e = \frac{2L}{d^2 T_s} \tag{15.37}$$
+
+Ćuk 和 SEPIC 变换器的 $R_e$ 为
+
+$$R_e = \frac{2(L_1\,\|\,L_2)}{d^2 T_s} \tag{15.38}$$
+
+此处 $d$ 是晶体管占空比。
+
+图15.15 变换器的稳态条件通过令电感和电容分别成为短路和开路、然后以 $d(t) = D$ 求解所得直流电路求得。升降压、Ćuk 和 SEPIC 随后简化为图15.13 电路。降压和升压变换器简化为图15.16 电路。这些变换器的平衡变换比 $M = V/V_g$ 作为 $R_e(D)$ 的函数汇总于表15.1。可证当负载电流 $I$ 小于临界电流 $I_{crit}$ 时这些变换器工作于断续导通模式：
+
+$$I > I_{crit} \quad \text{CCM}$$
+
+$$I < I_{crit} \quad \text{DCM} \tag{15.39}$$
+
+对所有这些变换器，$I_{crit}$ 为
+
+$$I_{crit} = \frac{1-D}{D}\frac{V_g}{R_e(D)} \tag{15.40}$$
+
+![源页 p.603](../assets/page-snapshots/chapter-15/page-603.png)
+
+图15.15 五种基本变换器断续导通模式下的大信号平均等效电路
+
+![源页 p.604](../assets/page-snapshots/chapter-15/page-604.png)
+
+图15.16 DCM 降压 (a) 和升压 (b) 变换器的直流等效电路
+
+表15.1 基本变换器的 CCM 和 DCM 变换比
+
+| 变换器 | $M$，CCM | $M$，DCM |
 |---|---|---|
-| TODO | TODO | TODO |
+| 降压 | $D$ | $\dfrac{2}{1+\sqrt{1+4R_e/R}}$ |
+| 升压 | $\dfrac{1}{1-D}$ | $\dfrac{1+\sqrt{1+4R/R_e}}{2}$ |
+| 升降压 | $-\dfrac{D}{1-D}$ | $-\sqrt{\dfrac{R}{R_e}}$ |
+| Ćuk、SEPIC | $\dfrac{D}{1-D}$ | $\sqrt{\dfrac{R}{R_e}}$ |
 
-## 中文翻译
+## 15.3 DCM 开关网络的小信号交流建模
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+下一步是构造断续导通模式下变换器的小信号等效电路模型。图15.15 的大信号交流等效电路中平均开关网络是非线性的。故构造小信号交流模型涉及无损电阻网络的扰动和线性化。图15.17a 大信号平均 DCM 开关网络模型中的信号在静态工作点附近扰动如下：
 
-## 英文原文
+![源页 p.605](../assets/page-snapshots/chapter-15/page-605.png)
 
-```text
-15
-AC and DC Equivalent Circuit Modeling of the
-Discontinuous Conduction Mode
-So far, we have derived equivalent circuit models for dc–dc pulse-width modulation (PWM)
-converters operating in the continuous conduction mode. As illustrated in Fig. 15.1, the basic
-dc conversion property is modeled by an eﬀective dc transformer, having a turns ratio equal to
-the conversion ratio M(D). This model predicts that the converter has a voltage-source output
-characteristic, such that the output voltage is essentially independent of the load current or
-load resistance R. We have also seen how to reﬁne this model, to predict losses and eﬃciency,
-converter dynamics, and small-signal ac transfer functions. We found that the transfer functions
-of the buck converter contain two low-frequency poles, owing to the converter ﬁlter inductor
-and capacitor. The control-to-output transfer functions of the boost and buck–boost converters
-additionally contain a right half-plane zero. Finally, we have seen how to utilize these results in
-the design of converter control systems.
-What are the basic dc and small-signal ac equivalent circuits of converters operating in the
-discontinuous conduction mode (DCM)? It was found in Chap. 5 that, in DCM, the output volt-
-age becomes load-dependent: the conversion ratio M(D, K) is a function of the dimensionless
-parameter K= 2L/RTs, which in turn is a function of the load resistance R. So the converter
-no longer has a voltage-source output characteristic, and hence the dc transformer model is less
-appropriate.
-In Sect. 15.1, a buck–boost DCM converter example is used to introduce DCM converter ac
-waveforms and averaged dynamics. It is shown that the moving average of the inductor voltage
-waveform is zero or approximately zero at all times, which is why, in practice, high-frequency
-inductor dynamics can usually be neglected in DCM, and DCM converters exhibit simpler,
-reduced-order dynamic responses compared to operation in the continuous conduction mode.
-Based on the approximation that the moving average of the inductor voltage waveform is
-zero at all times, the averaged switch modeling approach [ 70–74, 126, 130, 131]i se m p l o y e d
-in Sect. 15.2 to derive equivalent circuits of the DCM switch network. It is shown that the loss-
-free resistor model [132–134] is the averaged switch model of the DCM switch network. This
-equivalent circuit represents the steady-state and large-signal dynamic characteristics of the
-DCM switch network, in a clear and simple manner. In the discontinuous conduction mode, the
-average transistor voltage and current obey Ohm’s law, and hence the transistor is modeled by an
-eﬀective resistor Re. The average diode voltage and current obey a power source characteristic,
-with power equal to the power eﬀectively dissipated in Re. Therefore, the diode is modeled with
-a dependent power source.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_15
-585
+图15.17 DCM 变换器中通用双开关网络的平均模型：(a) 大信号模型；(b) 小信号模型
 
-586 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-DC
-CCM
-DCM
-+
-1 : M(D)
-Vg R
-+
-V
-+Vg R
-+
-V
-+
-+ 1 : M(D) Le
-C R
-+
-AC
-+ R
-+
-??
-vg(s)( s)
-e(s)d(s)
-j(s)d(s)
-vˆ vˆ
-vˆˆ
-ˆ
-ˆ
-g(s)( s)
-Fig. 15.1 The objective of this chapter is the derivation of large-signal dc and small-signal ac equivalent
-circuit models for converters operating in the discontinuous conduction mode
-Section 15.4 addresses simulation models for converters that may operate in CCM or DCM.
-An average switch model that automatically switches between modes is derived, and this model
-is implemented in SPICE.
-Since most converters operate in discontinuous conduction mode at some operating points,
-small-signal ac DCM models are needed, to prove that the control systems of such converters are
-correctly designed. In Sect. 15.3, a small-signal model of the DCM switch network is derived
-by linearization of the loss-free resistor model. The transfer functions of DCM converters are
-quite diﬀerent from their respective CCM transfer functions. The basic DCM buck, boost, and
-buck–boost converters essentially exhibit simple single-pole transfer functions [15, 135], while
-high-frequency dynamics can usually be neglected. So the basic converters operating in DCM
-are easy to control; for this reason, converters are sometimes purposely operated in DCM for
-all loads. The transfer functions of higher-order converters such as the DCM ´Cuk or SEPIC
-are considerably more complicated; but again, one pole is shifted to high frequency, where
-it has negligible practical eﬀect. This chapter concludes, in Sect. 15.5, with a discussion of
-high-frequency dynamics of DCM converters. The more detailed analysis predicts that the high-
-frequency dynamics of DCM converters are related to the sampling process associated with
-the pulse-width modulator, and the nature of the response of the inductor current to duty-cycle
-perturbations [136]. This behavior can be modeled by an e ﬀective pole in the vicinity of the
-switching frequency.
-15.1 Introduction to DCM Converter Dynamics
-Consider the buck–boost converter of Fig. 15.2. The transistor switch duty cycle is modulated
-by a sinusoidal PWM input signal,
-vc(t)= Vc+ Vm sinωmt (15.1)
+$$d(t) = D + \hat{d}(t)$$
 
-15.1 Introduction to DCM Converter Dynamics 587
-Pulse-width
-modulator
-Gate
-driver
-+
--
-+
--
-v(t) RCvg(t)
-vc(t)
-vL(t)
-iL(t)
-L
-Fig. 15.2 Buck–boost converter example. The transistor switch duty cycle is modulated by the PWM
-input signal vc(t)
-where the modulation frequency fm =ωm/(2π) is much smaller than the converter switching
-frequency fs. Figure 15.3 shows the converter switching and averaged waveforms over a modu-
-lation period. In this example, the inductor current ripple is so large that the converter operates
-in DCM at all times. As shown in Fig. 15.3b, inductor current waveform iL(t) consists of trian-
-gular pulses that start from zero and end at zero within a switching period. As expected, the
-moving average of the inductor current,⟨iL(t)⟩Ts , retains low-frequency dynamics of the induc-
-tor current, including a dc component and an ac component in response to the sinusoidally
-modulated transistor duty cycle. Similarly, the moving average of the output voltage, ⟨v(t)⟩
-Ts
-includes a dc component V, and an ac variation resulting from the sinusoidally modulated duty
-cycle, while the switching ripple in v(t) is removed, as shown in Fig. 15.3c. It is of particular
-interest to examine the inductor voltage switching and averaged waveforms shown in Fig.15.3d.
-The switching waveform vL(t) is a pulsating waveform that follows the DCM pattern described
-in Chap. 5,
-vL(t)=
-⎧⎪⎪⎪⎨⎪⎪⎪⎩
-vg(t) during d1Ts when transistor is on and diode is oﬀ
-v(t) during d2Ts when transistor is oﬀand diode is on
-0 during d3Ts when both transistor and diode are oﬀ
-(15.2)
-where d1 is the transistor switch duty cycle and d1+ d2+ d3= 1.
-One may observe that the moving average⟨v(t)⟩Ts is either equal to zero or is close to zero
-at all times. To explain the DCM inductor dynamics, consider the inductor current and the
-averaged inductor voltage waveforms shown in Fig.15.4 over a couple of switching periods. As
-a result of duty-cycle modulation, the transistor duty cycle in the second period is Δd longer
-than the duty cycle d
-1 in the ﬁrst period. For an averaging interval centered around time t,t h e
-moving average of vL(t) can be found as
-⟨vL(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-vL(τ)dτ= L
-Ts
-(iL(t+ Ts/2)−iL(t−Ts/2)) (15.3)
-For the example shown in Fig.15.4,
-iL(t−Ts/2)= iL(t+ Ts/2)= 0 (15.4)
+$$\langle v_1(t)\rangle_{T_s} = V_1 + \hat{v}_1(t)$$
 
-588 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-10 20
-0.5
-1
-10
-5
-0
--23
--22
--21
--10
--20
-10
-0
-10 20
-10 20
-t
-Ts
-t
-Ts
-t
-Ts
-t
-Ts
-iL(t)
-iL(t) Ts
-v(t)
-v(t) Ts
-vL(t) Ts
-vL(t)
-0
-(a)
-(b)
-(c)
-(d)
-Gate drive
-vc(t)
-Fig. 15.3 Switching and averaged waveforms in the buck–boost converter of Fig. 15.2. In this example,
-the converter parameters are Vg= 10 V ,L= 5μH, C= 22μF, fs = 1/Ts = 100 kHz, R= 30Ω,P W Mg a i n
-1/VM = 1V−1, vc(t)= 0.4+ 0.1 sin(ωmt), modulation frequency fm = fs/20= 5k H z
-and hence
-⟨vL(t)⟩Ts = 0 (15.5)
-It follows from Eq. ( 15.3) that⟨vL(t)⟩Ts = 0 whenever iL(t+ Ts/2)= iL(t−Ts/2), which is
-always the case over portions of a switching period in DCM—even when the converter is not
-in equilibrium. In the examples of Figs.15.3 or 15.4,⟨v
-L(t)⟩Ts /nequal0 only during time intervals of
-length d2Ts and only when duty cycle varies between successive switching periods. Referring to
-Fig. 15.3d, the nonzero pulses in⟨vL(t)⟩Ts /nequal0 clearly contain a small low-frequency component
-in response to the duty-cycle modulation. However, as discussed further in Sect. 15.5,t h er e l a -
-tively short, relatively low amplitude nonzero pulses in⟨vL(t)⟩Ts , which are related to sampling
-eﬀects and high-frequency dynamics, do not aﬀect the dominant, low-frequency DCM dynam-
-ics signiﬁcantly. In conclusion, in DCM, we can simply assume that the inductor volt-seconds
-balance holds not only in equilibrium but at all times:
-⟨vL(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-vL(τ)dτ≈0 (15.6)
+$$\langle i_1(t)\rangle_{T_s} = I_1 + \hat{i}_1(t) \tag{15.41}$$
 
-15.2 DCM Averaged Switch Model 589
-vL(t) Ts
-iL(t)
-d1Ts d1Tsd2Ts d3Ts
-(n + 1)TsnTs(n− 1)Ts
-t − Ts/2 t + Ts/2Time t
-Dd
-Averaging interval
-Fig. 15.4 DCM inductor current iL(t) and the moving average⟨vL(t)⟩Ts of the inductor voltage
-In the next section, following the averaged switch modeling approach, the approximation given
-by Eq. (15.6) is used to derive dc and ac models of DCM converters.
-15.2 DCM Averaged Switch Model
-Consider the buck–boost converter of Fig. 15.5. Let us follow the averaged switch model-
-ing approach of Sect. 14.1, to derive an equivalent circuit that models the averaged terminal
-waveforms of the switch network. The general two-switch network and its terminal quantities
-v1(t), i1(t), v2(t), and i2(t) are deﬁned as illustrated in Fig. 15.5, consistent with Fig. 14.4a. The
-inductor and switch network voltage and current waveforms are illustrated in Fig.15.6,f o rD C M
-operation.
-During the subinterval d1Ts, while the transistor conducts, the inductor current increases
-from zero with a slope ofvg(t)/L. At the end of this subinterval, the inductor currentiL(t) attains
-the peak value given by
-ipk= vg
-L d1Ts (15.7)
-+
-L
-CR
-+
-vvg
-iL
-+
-vL
-Switch network
-+
-v1 v2
-+
-i1 i2
-Fig. 15.5 Buck–boost converter example, with switch network terminal quantities identiﬁed
+$$\langle v_2(t)\rangle_{T_s} = V_2 + \hat{v}_2(t)$$
 
-590 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-Averaging interval
-t
-t
-t
-t
-t
-tt t + Ts/2t − Ts/2
-iL(t )
-vL(t )
-i1(t )
-v1(t )
-i2(t )
-v2(t )
-vg
-L
-v
-L
-ipk
-ipk
-ipk
-0
-0
-0
-d1Ts d2Ts d3Ts
-vg
-v
-Area q1
-Area q2
-i1(t) Ts
-v1(t) Ts
-i2(t) Ts
-v2(t) Ts
-vg − v
-vgvg
-vg − v
-− v − v
-0
-0
-0
-Fig. 15.6 Inductor and switch network voltage and current waveforms
-During the next subinterval, while the diode conducts, the inductor current decreases with a
-slope equal to v(t)/L. This subinterval ends when the inductor current drops to zero and the
-diode becomes reverse-biased. The length of this subinterval is d2Ts. The inductor current and
-the inductor voltage then remain zero for the balance d3Ts of the switching period.
-A DCM averaged switch model can be derived with reference to the waveforms of Fig.15.6.
-The averaging interval of length Ts, centered around time t is highlighted.
+$$\langle i_2(t)\rangle_{T_s} = I_2 + \hat{i}_2(t)$$
 
-15.2 DCM Averaged Switch Model 591
-Following the approach of Sect. 14.1.2, let us ﬁnd the average values of the switch network
-terminal waveforms v1(t), v2(t), i1(t), and i2(t) in terms of the converter state variables (inductor
-currents and capacitor voltages), the input voltage vg(t), and the subinterval lengths d1 and d2.
-To ﬁnd the average switch network input voltage⟨v1(t)⟩Ts , or the average transistor voltage,
-it is convenient to start from a converter voltage loop equation
-v1= vg−vL (15.8)
-Averaging applied to Eq. (15.8) yields
-⟨v1⟩Ts =⟨vg⟩Ts
-−⟨vL⟩Ts (15.9)
-Taking the approximation Eq. (15.6) into account, we have
-⟨v1⟩Ts =⟨vg⟩Ts
-(15.10)
-For the averaging interval shown in Fig.15.6, one may note that⟨vL⟩Ts = 0 exactly.
-Similar analysis, based on the voltage loop equation v2 = vL−v, leads to the following
-expression for the average diode voltage:
-⟨v2⟩Ts =⟨−v⟩Ts (15.11)
-The average switch network input current⟨i1(t)⟩Ts is found by integrating thei1(t) waveform
-of Fig. 15.6 over one switching period:
-⟨i1(t)⟩Ts = 1
-Ts
-t+Ts/2∫
-t−Ts/2
-i1(t)dt= q1
-Ts
-(15.12)
-The integral q1 is equal to the area under the i1(t) waveform during the ﬁrst subinterval. This
-area is easily evaluated using the triangle area formula:
-q1=
-t+Ts/2∫
-t−Ts/2
-i1(t)dt= 1
-2(d1Ts)(ipk) (15.13)
-Substitution of Eqs. (15.7), (15.13), and (15.10) into Eq. (15.12)g i v e s
-⟨i1(t)⟩Ts = d2
-1Ts
-2L ⟨vg(t)⟩Ts = d2
-1Ts
-2L ⟨v1(t)⟩Ts (15.14)
-Note that⟨i1(t)⟩TS is not equal to d1⟨iL(t)⟩TS . Since the inductor current ripple is not small, it is
-necessary to sketch the actual input current waveform, including the large switching ripple, and
-then correctly compute the average as in Eqs. (15.12)t o( 15.14).
-The average diode current ⟨i2(t)⟩TS is found in a manner similar to that used above for
-⟨i1(t)⟩TS :
-⟨i2(t)⟩Ts = 1
-Ts
-t+Ts/2∫
-t−Ts/2
-i2(t)dt= q2
-Ts
-(15.15)
+此处 $D$ 是晶体管占空比静态值，$V_1$ 是施加平均晶体管电压 $\langle v_1(t)\rangle_{T_s}$ 的静态值等。量 $\hat{d}(t)$、$\hat{v}_1(t)$ 等是绕各自静态值的小交流变化。希望线性化平均开关网络端子方程 (15.20) 和 (15.21)。
 
-592 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-The integral q2 is equal to the area under the i2(t) waveform during the d2Ts subinterval. This
-area is evaluated using the triangle area formula:
-q2=
-t+Ts/2∫
-t−Ts/2
-i2(t)dt= 1
-2(d2Ts)(ipk) (15.16)
-Substitution of Eqs. (15.7), (15.16), and (15.10) into Eq. (15.15) leads to:
-⟨i2(t)⟩TS = d1d2Ts
-2L ⟨vg(t)⟩Ts = d1d2Ts
-2L ⟨v1(t)⟩Ts (15.17)
-Equations (15.10), (15.11), (15.14), and (15.17) constitute the averaged terminal equations of
-the switch network in the DCM buck–boost converter. In these equations, it remains to express
-the subinterval length d
-2 in terms of the switch duty cycle d1 = d, and the converter averaged
-waveforms. Considering the averaging interval shown in Fig. 15.6, we note that iL(t−Ts/2)=
-iL(t+Ts/2)= 0. There is no net change in inductor current, and no net volt-seconds are applied to
-the inductor over this averaging interval. In other words, the average inductor voltage computed
-over the averaging interval shown in Fig.15.6 is zero,
-⟨vL(t)⟩Ts = d1⟨vg(t)⟩TS + d2⟨v(t)⟩Ts = 0 (15.18)
-Based on the approximation given by Eq. ( 15.5) we conclude that Eq. ( 15.18) can be used to
-ﬁnd the length of the d2Ts subinterval in general, even when the converter is not in equilibrium:
-d2(t)=−d1(t)⟨vg(t)⟩TS
-⟨v(t)⟩Ts
-(15.19)
-Substitution of Eq. (15.19) into Eqs. (15.14) and (15.17) allows us to obtain simple expressions
-for the averaged terminal waveforms of the switch network in the discontinuous conduction
-mode:
-⟨i1(t)⟩Ts = d2
-1Ts
-2L ⟨v1(t)⟩Ts (15.20)
-⟨i2(t)⟩Ts = d2
-1Ts
-2L
-⟨v1(t)⟩2
-Ts
-⟨v2(t)⟩Ts
-(15.21)
-Let us next construct an equivalent circuit corresponding to the averaged switch network
-equations (15.20) and (15.21). The switch network input port is modeled by Eq. ( 15.20). This
-equation states that the average input current⟨i1(t)⟩Ts is proportional to the applied input voltage
-⟨v1(t)⟩Ts . In other words, the low-frequency components of the switch network input port obey
-Ohm’s law:
-⟨i1(t)⟩Ts =⟨v1(t)⟩Ts
-Re(d1) (15.22)
-where the eﬀective resistance Re is
-Re(d1)= 2L
-d2
-1Ts
-(15.23)
+式 (15.20) 和 (15.21) 将平均端子电流 $\langle i_1(t)\rangle_{T_s}$ 和 $\langle i_2(t)\rangle_{T_s}$ 表示为晶体管占空比 $d(t) = d_1(t)$ 和平均端子电压 $\langle v_1(t)\rangle_{T_s}$、$\langle v_2(t)\rangle_{T_s}$ 的函数。扰动和线性化这些方程后将发现 $\hat{i}_1(t)$ 和 $\hat{i}_2(t)$ 表示为 $\hat{d}(t)$、$\hat{v}_1(t)$、$\hat{v}_2(t)$ 的线性函数。故小信号开关网络方程可写成如下形式：
 
-15.2 DCM Averaged Switch Model 593
-Fig. 15.7 Equivalent circuit that models the average wave-
-forms of the switch input (transistor) port
-An equivalent circuit is illustrated in Fig. 15.7. During the d1Ts subinterval, the slope of the in-
-put current waveform i1(t) is proportional to the input voltage⟨vg(t)⟩Ts =⟨v1(t)⟩Ts , as illustrated
-in Fig. 15.6. As a result, the peak current ipk, the total charge q1, and the average input current
-⟨i1(t)⟩Ts , are also proportional to⟨v1(t)⟩Ts . Of course, there is no physical resistor inside the con-
-verter. Indeed, if the converter elements are ideal, then no heat is generated inside the converter.
-Rather, the power apparently consumed by Re is transferred to the switch network output port.
-The switch network output (diode) port is modeled by Eq. (15.21), or
-⟨i2(t)⟩Ts⟨v2(t)⟩Ts =
-⟨v1(t)⟩2
-Ts
-Re(d1) =⟨p(t)⟩Ts (15.24)
-Note that⟨v1(t)⟩2
-Ts
-/Re is the average power⟨p(t)⟩Ts apparently consumed by the eﬀective resis-
-tor Re(d1). Equation (15.24) states that this power ﬂows out of the switch network output port.
-So the switch network consumes no net power—its average input and output powers are equal.
-Equation (15.24) can also be derived by consideration of the inductor stored energy. During
-the ﬁrst subinterval, the inductor current increases from 0 to ipk. In the process, the inductor
-stores the following energy:
-1
-2Li2
-pk=
-⟨v1⟩2
-Ts
-d2
-1T2
-s
-2L =
-⟨v1⟩2
-Ts
-Re(d1)Ts (15.25)
-Here, ipk has been expressed in terms of ⟨v1(t)⟩Ts using Eqs. ( 15.7) and ( 15.10). This energy
-is transferred from the source vg, through the switch network input terminals (i.e., through the
-transistor), to the inductor. During the second subinterval, the inductor releases all of its stored
-energy through the switch network output terminals (i.e., through the diode), to the output. The
-average output power can therefore be expressed as the energy transferred per cycle, divided by
-the switching period:
-⟨p(t)⟩
-Ts =
-⎛⎜⎜⎜⎜⎜⎝
-⟨v1⟩2
-Ts
-Re(d1)Ts
-⎞⎟⎟⎟⎟⎟⎠
-⎦1
-Ts
-)
-=
-⟨v1⟩2
-Ts
-Re(d1) (15.26)
-This power is transferred to the load, and hence
-⟨v⟩Ts⟨i2⟩Ts =⟨v2⟩Ts⟨i2⟩Ts =⟨p(t)⟩Ts =
-⟨v1⟩2
-Ts
-Re(d1) (15.27)
-This result coincides with Eq. (15.24).
-The average power ⟨p(t)⟩Ts is independent of the load characteristics, and is determined
-solely by the eﬀective resistance Re and the applied switch network input terminal voltage or
-current. In other words, the switch network output port behaves as a source of power, equal
+$$\hat{i}_1 = \frac{\hat{v}_1}{r_1} + j_1\hat{d} + g_1\hat{v}_2$$
 
-594 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-(a)
-p(t)
-+
-v(t)
-i(t)
-(b)
-v(t)i(t)= p(t)
-v(t)
-i(t)
-Fig. 15.8 The dependent power source: (a) schematic symbol, (b) i–v characteristic
-(a)
-p(t)
-+
-v(t)
-–
-i(t)
-(b)
-v(t)i(t)= – p(t)
-v(t)
-i(t)
-Fig. 15.9 The dependent power sink: (a) schematic symbol, (b) i–v characteristic
-to the power apparently consumed by the eﬀective resistance Re. This behavior is represented
-schematically by the dependent power source symbol illustrated in Fig. 15.8. In any lossless
-two-port network, when the voltage and current at one port are independent of the character-
-istics of the external network connected to the second port, then the second port must exhibit
-a dependent power source characteristic [ 133]. This situation arises in a number of common
-power-processing applications, including switch networks operating in the discontinuous con-
-duction mode.
-The power source characteristic illustrated in Fig. 15.8b is symmetrical with respect to volt-
-age and current; in consequence, the power source exhibits several unique properties. Similar to
-the voltage source, the ideal power source must not be short-circuited; otherwise, inﬁnite current
-occurs. And similar to the current source, the ideal power source must not be open-circuited, to
-avoid inﬁnite terminal voltage. The power source must be connected to a load capable of ab-
-sorbing the power p(t), and the operating point is deﬁned by the intersection of the load and
-power source i–v characteristics.
-We can deﬁne a power sink element similarly, with reversal of the direction of power ﬂow.
-The schematic symbol for this element is illustrated in Fig. 15.9, with its i–v characteristic.
+$$\hat{i}_2 = -\frac{\hat{v}_2}{r_2} + j_2\hat{d} + g_2\hat{v}_1 \tag{15.42}$$
 
-15.2 DCM Averaged Switch Model 595
-(a)
-P1
-P2 P3
-P1 + P2 + P3
-(b)
-P1P1
-n1 : n2
-Fig. 15.10 Circuit manipulations of power source elements: ( a) combination of series- and parallel-
-connected power sources into a single equivalent power source, ( b) invariance of the power source to
-reﬂection through an ideal transformer of arbitrary turns ratio
-As illustrated in Fig. 15.10a, series-and parallel-connected power sources can be combined
-into a single power source, equal to the sum of the powers of the individual sources. Fig-
-ure 15.10b illustrates how reﬂection of a power source through a transformer, having an arbi-
-trary turns ratio, leaves the power source unchanged. Power sources are also invariant to duality
-transformations.
-The averaged large-signal model of the general two-switch network in DCM is illustrated
-in Fig. 15.11b. The input port behaves e ﬀectively as resistance Re. The instantaneous power
-apparently consumed by Re is transferred to the output port, and the output port behaves as a
-dependent power source. This lossless two-port network is called the loss-free resistor model
-(LFR) [132]. The loss-free resistor represents the basic power conversion properties of DCM
-switch networks [ 134]. It can be shown that the loss-free resistor models the averaged prop-
-erties of DCM switch networks not only in the buck–boost converter, but also in other PWM
-converters.
-When the switch network of the DCM buck–boost converter is replaced by the averaged
-model of Fig. 15.11b, the converter equivalent circuit of Fig.15.12 is obtained. Upon setting all
-averaged waveforms to their quiescent values, and letting the inductor and capacitor become a
-short-circuit and an open-circuit, respectively, we obtain the dc model of Fig.15.13.
+这些方程描述图15.17b 的二端口等效电路。
 
-596 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-(a)
-+
-v2(t)
-+
-v1(t)
-i1(t) i2(t)
-(b) i2(t) Ts
-+
-v2(t) Tsv1(t) Ts
-i1(t) Ts
-Re(d1)
-+ p(t) Ts
-Fig. 15.11 The general two-switch network ( a), and the corresponding averaged switch model in the
-discontinuous conduction mode (b). The average transistor waveforms obey Ohm’s law, while the average
-diode waveforms behave as a dependent power source
-Fig. 15.12 Replacement of the switch network of the DCM buck–boost converter with the loss-free
-resistor model
-Systems containing power sources or loss-free resistors can usually be easily solved, by
-equating average source and load powers. For example, in the dc network of Fig. 15.13,t h e
-power ﬂowing into the converter input terminals is
-P=
-V2
-g
-Re
-(15.28)
-The power ﬂowing into the load resistor is
-P= V2
-R (15.29)
+参数 $r_1$、$j_1$、$g_1$ 可按 7.2.8 节所述对式 (15.20) 做泰勒展开求得。平均晶体管电流 $\langle i_1(t)\rangle_{T_s}$ [式 (15.20)] 可表示为如下形式：
 
-15.2 DCM Averaged Switch Model 597
-P
-Re(D)+ R
-+
-VVg
-I1
-Fig. 15.13 Dc network example containing a loss-free resistor model
-The loss-free resistor model states that these two powers must be equal:
-P=
-V2
-g
-Re
-= V2
-R (15.30)
-Solution for the voltage conversion ratio M= V/Vg yields
-V
-Vg
-=±
-√
-R
-Re
-(15.31)
-Equation (15.31) is a general result, valid for any converter that can be modeled by a loss-free
-resistor and that drives a resistive load. Other arguments must be used to determine the polarity
-of V/Vg. In the buck–boost converter shown in Fig. 15.5, the diode polarity indicates that V/Vg
-must be negative. The steady-state value of Re is
-Re(D)= 2L
-D2Ts
-(15.32)
-where D is the quiescent transistor duty cycle. Substitution of Eq. (15.32)i n t o(15.31) leads to
-V
-Vg
-=−
-√
-D2TsR
-2L =−D√
-K
-(15.33)
-with K = 2L/RTs. This equation coincides with the previous steady-state result given in Ta-
-ble 5.2.
-Similar arguments apply when the waveforms contain ac components. For example, con-
-sider the network of Fig.15.14, in which the voltages and currents are periodic functions of time.
-The rms values of the waveforms can be determined by simply equating the average source and
-load powers. The average power ﬂowing into the converter input port is
-Pav=
-V2
-g,rms
-Re
-(15.34)
-where Pav is the average power consumed by the eﬀective resistance Re. No average power is
-consumed by capacitor C, and hence the average power Pav must ﬂow entirely into the load
-resistor R:
-Pav= V2
-rms
-R (15.35)
+$$\langle i_1(t)\rangle_{T_s} = \frac{\langle v_1(t)\rangle_{T_s}}{R_e(d(t))} = f_1\!\left(\langle v_1(t)\rangle_{T_s},\langle v_2(t)\rangle_{T_s}, d(t)\right) \tag{15.43}$$
 
-598 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-p(t)
-Re
-+ R
-+
-v(t)vg(t)
-i1(t) i2(t)
-C
-Fig. 15.14 Ac network example containing a loss-free resistor model
-Upon equating Eqs. (15.34) and (15.35), we obtain
-Vrms
-Vg,rms
-=
-√
-R
-Re
-(15.36)
-Thus, the rms terminal voltages obey the same relationship as in the dc case.
-Averaged equivalent circuits of the DCM buck, boost, and buck–boost converters, as well
-as the DCM ´Cuk and SEPIC converters, are listed in Fig.15.15. In each case, the averaged tran-
-sistor waveforms obey Ohm’s law, and are modeled by an eﬀective resistance Re. The averaged
-diode waveforms follow a power source characteristic, equal to the power eﬀectively dissipated
-in Re. For the buck, boost, and buck–boost converters, Re is given by
-Re= 2L
-d2Ts
-(15.37)
-For the ´Cuk and SEPIC converters, Re is given by
-Re= 2(L1∥L2)
-d2Ts
-(15.38)
-Here, d is the transistor duty cycle.
-Steady-state conditions in the converters of Fig.15.15 are found by letting the inductors and
-capacitors become short circuits and open circuits, respectively, and then solving the resulting dc
-circuits with d(t)= D. The buck–boost, ´Cuk, and SEPIC then reduce to the circuit of Fig.15.13.
-The buck and boost converters reduce to the circuits of Fig.15.16. Equilibrium conversion ratios
-M= V/Vg of these converters are summarized in Table 15.1, as functions of Re(D). It can be
-shown that these converters operate in the discontinuous conduction mode whenever the load
-current I is less than the critical current I
-crit:
-I> Icrit for CCM
-I< Icrit for DCM (15.39)
-For all of these converters, Icrit is given by
-Icrit= 1−D
-D
-Vg
-Re(D) (15.40)
+将此表达式在静态工作点 $(V_1, V_2, D)$ 附近展为三维泰勒级数：
 
-15.2 DCM Averaged Switch Model 599
-Fig. 15.15 Averaged large-signal equivalent circuits of ﬁve basic converters operating in the discontinu-
-ous conduction mode
+$$I_1+\hat{i}_1(t) = f_1(V_1, V_2, D) + \hat{v}_1(t)\!\left.\frac{\partial f_1(v_1, V_2, D)}{\partial v_1}\right|_{v_1=V_1} + \hat{v}_2(t)\!\left.\frac{\partial f_1(V_1, v_2, D)}{\partial v_2}\right|_{v_2=V_2} + \hat{d}(t)\!\left.\frac{\partial f_1(V_1, V_2, d)}{\partial d}\right|_{d=D} \tag{15.44}$$
 
-600 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-(a)
-P
-Re(D)
-+ R
-+
-VVg
-(b)
-PRe(D)+ R
-+
-VVg
-Fig. 15.16 Dc equivalent circuits representing the buck (a) and boost (b) converters operating in DCM
-Table 15.1 CCM and DCM conversion ratios of basic converters
-Converter M, CCM M,D C M
-Buck D 2
-1+
-√
-1+ 4Re
-/R
-Boost 1
-1−D
-1+
-√
-1+ 4R/Re
-2
-Buck–boost, ´Cuk −D
-1−D −
-√
-R
-Re
-SEPIC D
-1−D
-√
-R
-Re
-15.3 Small-Signal AC Modeling of the DCM Switch Network
-The next step is construction of a small-signal equivalent circuit model for converters operating
-in the discontinuous conduction mode. In the large-signal ac equivalent circuits of Fig. 15.15,
-the averaged switch networks are nonlinear. Hence, construction of a small-signal ac model
-involves perturbation and linearization of the loss-free resistor network. The signals in the large-
-signal averaged DCM switch network model of Fig. 15.17a are perturbed about a quiescent
-operating point, as follows:
+$$+ \text{高阶非线性项}$$
 
-15.3 Small-Signal AC Modeling of the DCM Switch Network 601
-Fig. 15.17 Averaged models of the general two-switch network in a converter operating in DCM: ( a)
-large-signal model, (b) small-signal model
-d(t)= D+ ˆd(t)
-⟨v1(t)⟩Ts = V1+ ˆv1(t)
-⟨i1(t)⟩Ts = I1+ ˆi1(t) (15.41)
-⟨v2(t)⟩Ts = V2+ ˆv2(t)
-⟨i2(t)⟩Ts = I2+ ˆi2(t)
-Here, D is the quiescent value of the transistor duty cycle, V1 is the quiescent value of the
-applied average transistor voltage⟨v1(t)⟩Ts , etc. The quantities ˆd(t), ˆv1(t), etc., are small ac vari-
-ations about the respective quiescent values. It is desired to linearize the average switch network
-terminal equations (15.20) and (15.21).
-Equations (15.20) and (15.21) express the average terminal currents⟨i1(t)⟩Ts and⟨i2(t)⟩Ts as
-functions of the transistor duty cycled(t)= d1(t) and the average terminal voltages⟨v1(t)⟩Ts and
-⟨v2(t)⟩Ts . Upon perturbation and linearization of these equations, we will therefore ﬁnd thatˆi1(t)
-and ˆi2(t) are expressed as linear functions of ˆd(t), ˆv1(t), and ˆv2(t). So the small-signal switch
-network equations can be written in the following form:
-ˆi1= ˆv1
-r1
-+ j1 ˆd+ g1 ˆv2
-ˆi2=−ˆv2
-r2
-+ j2 ˆd+ g2 ˆv1 (15.42)
-These equations describe the two-port equivalent circuit of Fig.15.17b.
+为简化记号，上述方程中去掉了表示平均值的尖括号。式 (15.44) 两边直流项须相等：
 
-602 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-The parameters r1, j1, and g1 can be found by Taylor expansion of Eq. (15.20), as described
-in Sect. 7.2.8. The average transistor current⟨i1(t)⟩Ts ,E q .(15.20), can be expressed in the fol-
-lowing form:
-⟨i1(t)⟩Ts =⟨v1(t)⟩Ts
-Re(d(t))= f1
-⎦⟨v1(t)⟩Ts,⟨v2(t)⟩Ts, d(t)) (15.43)
-Let us expand this expression in a three-dimensional Taylor series, about the quiescent operating
-point (V1, V2, D):
-I1+ ˆi1(t)= f1(V1, V2, D)+ ˆv1(t)∂f1(v1, V2, D)
-∂v1
-⏐⏐
-⏐⏐⏐
-v1=V1
-+ˆv2(t)∂f1(V1, v2, D)
-∂v2
-⏐⏐⏐
-⏐
-⏐
-v2=V2
-+ ˆd(t)∂f1(V1, V2, d)
-∂d
-⏐⏐⏐
-⏐
-⏐
-d=D
-(15.44)
-+higher−order nonlinear terms
-For simplicity of notation, the angle brackets denoting average values are dropped in the above
-equation. The dc terms on both sides of Eq. (15.44) must be equal:
-I1= f1(V1, V2, D)= V1
-Re(D) (15.45)
-As usual, we linearize the equation by discarding the higher-order nonlinear terms. The remain-
-ing ﬁrst-order linear ac terms on both sides of Eq. (15.44) are equated:
-ˆi1(t)= ˆv1(t) 1
-r1
-+ ˆv2(t)g1+ ˆd(t) j1 (15.46)
-where
-1
-r1
-= ∂f1(v1, V2, D)
-∂v1
-⏐⏐
-⏐⏐⏐
-v1=V1
-= 1
-Re(D) (15.47)
-g1= ∂f1(V1, v2, D)
-∂v2
-⏐⏐⏐⏐
-⏐
-v2=V2
-= 0 (15.48)
-j1= ∂f1(V1, V2, d)
-∂d
-⏐⏐⏐
-⏐⏐
-d=D
-=−V1
-R2e (D)
-∂Re(d)
-∂d
-⏐⏐
-⏐⏐⏐
-⏐
-d=D
-(15.49)
-= 2V1
-DRe(D)
-Thus, the small-signal input resistance r1 is equal to the eﬀective resistance Re, evaluated at
-the quiescent operating point. This term describes how variations in ⟨v1(t)⟩Ts aﬀect⟨i1(t)⟩Ts ,
-via Re(D). The small-signal parameter g1 is equal to zero, since the average transistor current
-⟨i1(t)⟩TS is independent of the average diode voltage⟨v2(t)⟩Ts . The small-signal gain j1 describes
-how duty-cycle variations, which aﬀect the value of Re(d), lead to variations in⟨i1(t)⟩Ts .
-In a similar manner,⟨i2(t)⟩Ts from Eq. (15.21) can be expressed as
-⟨i2(t)⟩Ts =
-⟨v1(t)⟩2
-Ts
-Re(d(t))⟨v2(t)⟩Ts
-= f2
-⎦⟨v1(t)⟩Ts,⟨v2(t)⟩Ts, d(t)) (15.50)
-Expansion of the function f2(v1, v2, d) in a three-dimensional Taylor series about the quiescent
-operating point leads to
+$$I_1 = f_1(V_1, V_2, D) = \frac{V_1}{R_e(D)} \tag{15.45}$$
 
-15.3 Small-Signal AC Modeling of the DCM Switch Network 603
-I2+ ˆi2(t)= f2(V1, V2, D)+ ˆv1(t)∂f2(v1, V2, D)
-∂v1
-⏐⏐⏐⏐
-⏐
-v1=V1
-+ˆv2(t)∂f2(V1, v2, D)
-∂v2
-⏐⏐⏐
-⏐⏐
-v2=V2
-+ ˆd(t)∂f2(V1, V2, d)
-∂d
-⏐⏐⏐
-⏐⏐
-d=D
-(15.51)
-+higher−order nonlinear terms
-By equating the dc terms on both sides of Eq. (15.51), we obtain
-I2= f2(V1, V2, D)= V2
-1
-Re(D)V2
-(15.52)
-The higher-order nonlinear terms are discarded, leaving the following ﬁrst-order linear ac terms:
-ˆi2(t)= ˆv2(t)
-⎦
-−1
-r2
-)
-+ ˆv1(t)g2+ ˆd(t) j2 (15.53)
-with
-1
-r2
-=−∂f2(V1, v2, D)
-∂v2
-⏐⏐⏐
-⏐
-⏐
-v2=V2
-= 1
-R= 1
-M2Re(D) (15.54)
-g2= ∂f2(v1, V2, D)
-∂v1
-⏐⏐
-⏐⏐⏐
-v1=V1
-= 2
-MRe(D) (15.55)
-j2= ∂f2(V1, V2, d)
-∂d
-⏐⏐⏐
-⏐
-⏐
-d=D
-=− V2
-1
-R2e (D)V2
-∂Re(d)
-∂d
-⏐⏐
-⏐⏐⏐
-⏐
-d=D
-(15.56)
-= 2V1
-DMRe(D)
-The output resistance r2 describes how variations in⟨v2(t)⟩Ts inﬂuence⟨i2(t)⟩Ts . As illustrated
-in Fig. 15.18, r2 is determined by the slope of the power source characteristic, evaluated at the
-quiescent operating point. For a linear resistive load, r2 = R. For any type of load, it is true
-Fig. 15.18 The small-signal output resistance r2 is determined by the slope of the power source charac-
-teristic at the quiescent operating point
+照常丢弃高阶非线性项线性化方程。式 (15.44) 两边剩下的一阶线性交流项相等：
 
-604 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-Table 15.2 Small-signal DCM switch model parameters
-Switch network g1 j1 r1 g2 j2 r2
-General
-two-switch,
-Fig. 15.11a
-0 2V1
-DRe
-Re
-2
-MRe
-2V1
-DMRe
-M2Re
-Buck, Fig.15.21a −1
-Re
-2(1−M)V1
-DRe
-Re
-2−M
-MRe
-2(1−M)V1
-DMRe
-M2Re
-Boost,
-Fig. 15.21b − 1
-(M−1)2Re
-2MV1
-D(M−1)Re
-(M−1)2
-M2 Re
-2M−1
-(M−1)2Re
-2V1
-D(M−1)Re
-(M−1)2Re
-Fig. 15.19 Small-signal ac model of the DCM buck–boost converter obtained by insertion of the switch
-network two-port small-signal model into the original converter circuit
-that r2 = M2Re(D). The parameters j2 and g2 describe how variations in the duty cycle d(t)
-and in the average transistor voltage⟨v1(t)⟩Ts (which inﬂuence the average power⟨p(t)⟩Ts ) lead
-to variations in the average diode current⟨i2(t)⟩Ts . Values of the small-signal parameters in the
-DCM switch model of Fig. 15.17b are summarized in the top row of Table15.2.
-A small-signal model of the DCM buck–boost converter is obtained by replacing the transis-
-tor and diode of the converter with the switch model of Fig. 15.17b. The result is illustrated in
-Fig. 15.19. This equivalent circuit can now be solved using conventional linear circuit analysis
-techniques, to determine the transfer functions and other small-signal quantities of interest.
-The small-signal equivalent circuit models of Fig. 15.19 contain two dynamic elements: ca-
-pacitor C and inductor L. Control-to-output transfer functions obtained by solving this equiv-
-alent circuit model have two poles. It has been shown [ 71, 74, 126, 130, 131] that one of the
-poles, due to the capacitor C, appears at a low frequency, while the other pole (and a RHP
-zero) due to the inductor L, occurs at much higher frequency, close to or above the converter
-switching frequency. The small-signal equivalent circuit models have been derived from the
-large-signal averaged switch network equations (15.20) and (15.21). These equations are based
-on the approximation in Eq. ( 15.5), which states that the average inductor voltage, and there-
-fore its small-signal ac voltage, is zero. This contradicts predictions of the resulting small-signal
-model in Fig.15.19. As a result, we expect that the models derived in this section can be used to
-predict low-frequency dynamics, while predictions of the high-frequency dynamics due to the
-```
+$$\hat{i}_1(t) = \hat{v}_1(t)\frac{1}{r_1} + \hat{v}_2(t)g_1 + \hat{d}(t)j_1 \tag{15.46}$$
+
+其中
+
+$$\frac{1}{r_1} = \left.\frac{\partial f_1(v_1, V_2, D)}{\partial v_1}\right|_{v_1=V_1} = \frac{1}{R_e(D)} \tag{15.47}$$
+
+$$g_1 = \left.\frac{\partial f_1(V_1, v_2, D)}{\partial v_2}\right|_{v_2=V_2} = 0 \tag{15.48}$$
+
+$$j_1 = \left.\frac{\partial f_1(V_1, V_2, d)}{\partial d}\right|_{d=D} = -\frac{V_1}{R_e^2(D)}\left.\frac{\partial R_e(d)}{\partial d}\right|_{d=D} = \frac{2V_1}{DR_e(D)} \tag{15.49}$$
+
+故小信号输入电阻 $r_1$ 等于静态工作点处评估的有效电阻 $R_e$。此项描述 $\langle v_1(t)\rangle_{T_s}$ 的变化如何经 $R_e(D)$ 影响 $\langle i_1(t)\rangle_{T_s}$。小信号参数 $g_1$ 等于零，因为平均晶体管电流 $\langle i_1(t)\rangle_{T_s}$ 与平均二极管电压 $\langle v_2(t)\rangle_{T_s}$ 无关。小信号增益 $j_1$ 描述占空比变化如何通过影响 $R_e(d)$ 值导致 $\langle i_1(t)\rangle_{T_s}$ 变化。
+
+类似地，式 (15.21) 的 $\langle i_2(t)\rangle_{T_s}$ 可表示为
+
+$$\langle i_2(t)\rangle_{T_s} = \frac{\langle v_1(t)\rangle_{T_s}^2}{R_e(d(t))\langle v_2(t)\rangle_{T_s}} = f_2\!\left(\langle v_1(t)\rangle_{T_s},\langle v_2(t)\rangle_{T_s}, d(t)\right) \tag{15.50}$$
+
+将函数 $f_2(v_1, v_2, d)$ 在静态工作点附近展为三维泰勒级数得
+
+$$I_2+\hat{i}_2(t) = f_2(V_1, V_2, D) + \hat{v}_1(t)\!\left.\frac{\partial f_2(v_1, V_2, D)}{\partial v_1}\right|_{v_1=V_1} + \hat{v}_2(t)\!\left.\frac{\partial f_2(V_1, v_2, D)}{\partial v_2}\right|_{v_2=V_2} + \hat{d}(t)\!\left.\frac{\partial f_2(V_1, V_2, d)}{\partial d}\right|_{d=D} \tag{15.51}$$
+
+$$+ \text{高阶非线性项}$$
+
+令式 (15.51) 两边直流项相等得
+
+$$I_2 = f_2(V_1, V_2, D) = \frac{V_1^2}{R_e(D)V_2} \tag{15.52}$$
+
+丢弃高阶非线性项，剩下如下一阶线性交流项：
+
+$$\hat{i}_2(t) = \hat{v}_2(t)\!\left(-\frac{1}{r_2}\right) + \hat{v}_1(t)g_2 + \hat{d}(t)j_2 \tag{15.53}$$
+
+其中
+
+$$\frac{1}{r_2} = -\left.\frac{\partial f_2(V_1, v_2, D)}{\partial v_2}\right|_{v_2=V_2} = \frac{1}{R} = \frac{1}{M^2 R_e(D)} \tag{15.54}$$
+
+$$g_2 = \left.\frac{\partial f_2(v_1, V_2, D)}{\partial v_1}\right|_{v_1=V_1} = \frac{2}{MR_e(D)} \tag{15.55}$$
+
+$$j_2 = \left.\frac{\partial f_2(V_1, V_2, d)}{\partial d}\right|_{d=D} = -\frac{V_1^2}{R_e^2(D)V_2}\left.\frac{\partial R_e(d)}{\partial d}\right|_{d=D} = \frac{2V_1}{DMR_e(D)} \tag{15.56}$$
+
+输出电阻 $r_2$ 描述 $\langle v_2(t)\rangle_{T_s}$ 的变化如何影响 $\langle i_2(t)\rangle_{T_s}$。如图15.18所示，$r_2$ 由静态工作点处功率源特性的斜率确定。对线性电阻负载 $r_2 = R$。对任何类型负载，$r_2 = M^2 R_e(D)$ 成立。
+
+![源页 p.607](../assets/page-snapshots/chapter-15/page-607.png)
+
+图15.18 小信号输出电阻 $r_2$ 由静态工作点处功率源特性的斜率确定
+
+表15.2 小信号 DCM 开关模型参数
+
+| 开关网络 | $g_1$ | $j_1$ | $r_1$ | $g_2$ | $j_2$ | $r_2$ |
+|---|---|---|---|---|---|---|
+| 通用双开关，图15.11a | 0 | $\dfrac{2V_1}{DR_e}$ | $R_e$ | $\dfrac{2}{MR_e}$ | $\dfrac{2V_1}{DMR_e}$ | $M^2 R_e$ |
+| 降压，图15.21a | $-\dfrac{1}{R_e}$ | $\dfrac{2(1-M)V_1}{DR_e}$ | $R_e$ | $\dfrac{2-M}{MR_e}$ | $\dfrac{2(1-M)V_1}{DMR_e}$ | $M^2 R_e$ |
+| 升压，图15.21b | $-\dfrac{1}{(M-1)^2 R_e}$ | $\dfrac{2MV_1}{D(M-1)R_e}$ | $\dfrac{(M-1)^2}{M^2}R_e$ | $\dfrac{2M-1}{(M-1)^2 R_e}$ | $\dfrac{2V_1}{D(M-1)R_e}$ | $(M-1)^2 R_e$ |
+
+参数 $j_2$ 和 $g_2$ 描述占空比 $d(t)$ 的变化和平均晶体管电压 $\langle v_1(t)\rangle_{T_s}$ 的变化（影响平均功率 $\langle p(t)\rangle_{T_s}$）如何导致平均二极管电流 $\langle i_2(t)\rangle_{T_s}$ 的变化。图15.17b DCM 开关模型中小信号参数值汇总于表15.2 顶行。
+
+![源页 p.608](../assets/page-snapshots/chapter-15/page-608.png)
+
+图15.19 将开关网络二端口小信号模型插入原始变换器电路所得 DCM 升降压变换器的小信号交流模型
+
+DCM 升降压变换器的小信号模型通过用图15.17b 开关模型替代变换器的晶体管和二极管获得。结果如图15.19所示。此等效电路现可用常规线性电路分析技巧求解，确定传递函数和其他感兴趣的小信号量。
+
+图15.19 小信号等效电路模型含两个动态元件：电容 $C$ 和电感 $L$。求解此等效电路模型所得控制-输出传递函数有两个极点。已证 [71, 74, 126, 130, 131] 一个极点（归因于电容 $C$）出现在低频，而另一个极点（和右半平面零点）归因于电感 $L$，出现在高得多频率，接近或高于变换器开关频率。小信号等效电路模型由大信号平均开关网络方程 (15.20) 和 (15.21) 导出。这些方程基于式 (15.5) 的近似，即平均电感电压（故其小信号交流电压）为零。这与图15.19 所得小信号模型的预测矛盾。故预期本节导出的模型可预测低频动态，而

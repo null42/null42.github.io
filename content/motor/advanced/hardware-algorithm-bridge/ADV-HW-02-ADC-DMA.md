@@ -18,14 +18,14 @@ navGroupOrder: 40
 
 # ADV-HW-02 ADC深度配置与DMA数据搬运：从寄存器到控制环的精密桥梁
 
-**模块编号：** ADV-HW-02
-**模块名称：** ADC深度配置与DMA数据搬运（ADC Deep Configuration & DMA Data Transfer）
-**文档版本：** v2.0
-**适用对象：** 已掌握基础ADC/DMA概念和FOC控制环路的嵌入式工程师
-**前置知识：** HW-02 电流采样电路、HW-04 MCU外设与通信、ADV-HW-01 PWM深度配置
-**关联模块：** ADV-HW-01 PWM深度配置与电流采样时序联动
-**副标题：** 注入组、PWM触发、DMA双缓冲——理解电流采样的完整数据通路
-**难度等级：** 
+- **模块编号：** ADV-HW-02
+- **模块名称：** ADC深度配置与DMA数据搬运（ADC Deep Configuration & DMA Data Transfer）
+- **文档版本：** v2.0
+- **适用对象：** 已掌握基础ADC/DMA概念和FOC控制环路的嵌入式工程师
+- **前置知识：** HW-02 电流采样电路、HW-04 MCU外设与通信、ADV-HW-01 PWM深度配置
+- **关联模块：** ADV-HW-01 PWM深度配置与电流采样时序联动
+- **副标题：** 注入组、PWM触发、DMA双缓冲——理解电流采样的完整数据通路
+- **难度等级：** 
 
 ---
 

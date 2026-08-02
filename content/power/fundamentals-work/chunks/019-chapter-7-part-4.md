@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第7章part 4 - 7 AC Equivalent Circuit Modeling"
+title: "第7章 交流等效电路建模（第4部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,48 +18,13 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第7章part 4 - 7 AC Equivalent Circuit Modeling
+# 第7章 交流等效电路建模（第4部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 287-287  
-> Chunk ID: `chapter-7-part-4`
+> 源页：287
+> 本部分仅含图7.57的标题说明（习题7.12附图）。
 
-## 主干提取
+![源页 p.287](../assets/page-snapshots/chapter-7/page-287.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+图7.57 脉宽调制器，习题7.12：(a) 看起来很大。调整放大倍数使之与 (b) 相同
 
-## 术语表
-
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
-
-## 中文翻译
-
-TODO: 在这里写专业、通顺、前后一致的中文译文。
-
-## 英文原文
-
-```text
-7.6 Summary of Key Points 275
-(a)
-Triangle
-wave
-generator
-+
-vtri(t)
-vc(t)
-Comparator
-(t)
-PWM
-waveform
-Analog
-input
-(b) vtri(t)
-0
-t
-2 V
-50 μs 100 μs
-Fig. 7.57 Pulse-width modulator, Problem7.12 (a) looks very large. Adjust magniﬁcation to be the same
-as (b)
-```
+三角波发生器产生电压 $v_{tri}(t)$，模拟比较器将模拟控制电压 $v_c(t)$ 与 $v_{tri}(t)$ 比较，产生脉宽调制波形 $\delta(t)$。三角波形如图7.57b所示，峰-峰幅度为 $2V$，周期为 $50\,\mu\text{s}$。

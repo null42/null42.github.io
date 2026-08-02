@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第16章part 2 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems"
+title: "第16章 面向设计的分析技巧：额外元件定理（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1090 +18,396 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第16章part 2 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
+# 第16章 面向设计的分析技巧：额外元件定理（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 649-668  
-> Chunk ID: `chapter-16-part-2`
+> 源页：649–668
+> 本部分续接 16.2 EET 示例，涵盖 16.3 N 额外元件定理、16.4 n-EET 示例、16.5 频率反转。
 
-## 主干提取
+## 16.2 EET 示例（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 16.2.4 阻尼 SEPIC 内部谐振（续）
 
-## 术语表
+![源页 p.649](../assets/page-snapshots/chapter-16/page-649.png)
 
-| English term | 中文译名 | Notes |
+图16.21 无阻尼 SEPIC 示例阻抗 $Z_N$、$Z_D$、$Z = 1/sC_1$ 的幅值和相位波特图。虚线：$Z_N$ 和 $Z_D$。实线：$Z$
+
+$$G_{vd} \to \left.G_{vd-bb}\frac{1+\dfrac{Z_N}{Z}}{1+\dfrac{Z_D}{Z}}\right|_{Z\to 0} = G_{vd-bb}\!\left(\frac{Z_N}{Z_D}\right) \tag{16.60}$$
+
+由于 6 kHz 以上 $Z_N$ 和 $Z_D$ 均为感性，比值 $(Z_N/Z_D)$ 为常数，故 $G_{vd}$ 等于 $G_{vd-bb}$ 乘以此常数。
+
+阻抗 $\|Z\|$ 在 3 至 4 kHz 处幅值等于 $\|Z_N\|$ 或 $\|Z_D\|$。注意电容阻抗 $\angle Z$ 为 −90°，而 $Z_N$ 和 $Z_D$ 基本为感性，相位约 +90°。故 3 至 4 kHz 处 $Z/Z_N$ 和 $Z/Z_D$ 的相位约 180°，幅值约等于 1。此频率附近式 (16.45) 校正因子可大幅变化（按图16.6 至16.9）。预期校正因子分子和分母项含此频率附近的谐振。
+
+![源页 p.650](../assets/page-snapshots/chapter-16/page-650.png)
+
+图16.22 无阻尼控制-输出传递函数的幅值和相位波特图，SEPIC 示例。虚线：有效升降压模型 $G_{vd-bb}$ 响应。实线：SEPIC 响应（含校正因子）$G_{vd}$
+
+图16.22 含控制-输出传递函数 $G_{vd-bb}(s)$ 和 $G_{vd}(s)$ 波特图。有效升降压模型含谐振极点和 RHP 零点，导致 −270° 的高频相位渐近线。校正因子在 3 kHz 附近贡献两个附加高 Q 极点和两个 RHP 零点。这些项高频处贡献附加 −360° 相位。故在穿越频率高于 3 kHz 的反馈环路中难以获得足够相位裕度。
+
+![源页 p.651](../assets/page-snapshots/chapter-16/page-651.png)
+
+图16.23 向 SEPIC 加入阻尼网络元件 $R_b$ 和 $C_b$
+
+SEPIC 的动态可通过向 $C_1$ 加入阻尼网络大幅改善，如图16.23所示。这使"额外"阻抗 $Z(s)$ 变为
+
+$$Z(s) = \frac{1}{sC_1}\,\|\,\left(R_b+\frac{1}{sC_b}\right) \tag{16.61}$$
+
+选择元件值使 $\|Z\|$ 等于 $\|Z_N\|$ 或 $\|Z_D\|$ 的频率附近阻抗 $Z$ 由阻尼电阻 $R_b$ 主导。$Z$ 的相位趋向接近 0°，使 $Z/Z_N$ 和 $Z/Z_D$ 的相位趋向 90°。按图16.6 至16.9，此情形校正因子变化不那么极端。阻尼网络降低校正因子极点和零点的 Q 因子，还可将其 RHP 零点移到左半平面。
+
+电容 $C_b$ 是隔直电容，防止直流电压施加到电阻 $R_b$。这减小了否则在 $R_b$ 中引起的功率损耗。$\|Z\|$ 接近 $\|Z_N\|$ 或 $\|Z_D\|$ 的频率处电容 $C_b$ 阻抗应远小于 $R_b$。第17章更详细讨论此类 $R_b$-$C_b$ 阻尼网络。
+
+![源页 p.652](../assets/page-snapshots/chapter-16/page-652.png)
+
+图16.24 $Z_N$、$Z_D$ 和阻尼 $Z$ 幅值渐近线的构造
+
+图16.24 说明此示例 $Z_N$ 和 $Z_D$ 阻抗渐近线的构造。按上述设计含 $R_b$-$C_b$ 阻尼网络的阻抗 $Z$ 渐近线叠加。同样阻尼电阻 $R_b$ 在 $\|Z\|$ 等于 $\|Z_N\|$ 或 $\|Z_D\|$ 的频率处主导阻抗 $Z$。现可选择 $R_b$ 和 $C_b$ 值获得此 $Z$ 渐近线。
+
+![源页 p.653](../assets/page-snapshots/chapter-16/page-653.png)
+
+图16.25 阻尼 SEPIC 示例阻抗 $Z_N$、$Z_D$、$Z$ 的幅值和相位波特图。虚线：$Z_N$ 和 $Z_D$。实线：$Z$
+
+用值 $C_1 = 22\,\mu\text{F}$、$R_b = 2\,\Omega$、$C_b = 100\,\mu\text{F}$ 的阻尼 $Z$ 波特图如图16.25所示。$Z$ 幅值现约 2 kHz 频率处等于 $Z_N$ 或 $Z_D$ 幅值。此频率范围阻尼 $Z$ 相位约 −45°。
+
+![源页 p.654](../assets/page-snapshots/chapter-16/page-654.png)
+
+图16.26 R-C 阻尼网络对控制-输出传递函数的影响，SEPIC 示例。虚线：有效升降压模型 $G_{vd-bb}$ 响应。实线：SEPIC 响应（含校正因子）$G_{vd}$
+
+图16.26 比较所得 $G_{vd}(s)$ 与 $G_{vd-bb}(s)$。可观察到校正因子极点和零点 Q 因子大幅降低，RHP 零点移到左半平面。这些极点和零点近抵消。$G_{vd}(s)$ 的幅值和相位现近似等于有效升降压变换器模型。
+
+SEPIC 控制-输出传递函数 $G_{vd}(s)$ 自然含四极点和三 RHP 零点。额外元件定理方法表明此传递函数如何可视为更简单的有效升降压传递函数 $G_{vd-bb}(s)$（含两极点和一 RHP 零点）乘以计入附加极点和零点的校正因子。此外额外元件定理方法提供设计阻尼网络使校正因子极点和零点近抵消的框架。所得 $G_{vd}(s)$ 随后近似等于简单得多的 $G_{vd-bb}(s)$。
+
+## 16.3 N 额外元件定理
+
+N 额外元件定理（nEET）是 Middlebrook 额外元件定理向同时加入多个额外元件情形的扩展。其主要应用是将传递函数直接写为有理分式，无需进行回路和节点分析及代数操作。这通过将每个储能元件视为加入网络直流增益的"额外"元件完成。此方法对标准归一化传递函数形式中 $L$ 和 $C$ 的系数给出物理解释，允许复杂传递函数几乎凭观察导出。
+
+此处无证明描述用基本 nEET 导出传递函数，从简单示例开始。还描述涉及反演形式作为特殊情形的扩展。nEET 的推导和更一般处理见 [141, 142]。
+
+### 16.3.1 n-EET 引言
+
+给定含 $n$ 个电感和 $m$ 个电容的线性网络，希望求传递函数 $G(s) = y(s)/u(s)$。假定此传递函数可写为以直流增益为参考的有理分式，如下：
+
+$$G(s) = G_{dc}\frac{1+a_1 s+a_2 s^2+\ldots+a_{n+m}s^{n+m}}{1+b_1 s+b_2 s^2+\ldots+b_{n+m}s^{n+m}} \tag{16.62}$$
+
+传递函数不能写成此形式的特殊情形（如 $G(s)$ 含原点处极点或零点）在后续小节处理。此方法采用额外元件定理的推广，其中所有电感和电容视为"额外"元件，同时加入。$G(s)$ 的零点在输入存在下输出置零时求得，极点在输入设为零时求得。此方法允许在各种特殊条件下通过评估从电感或电容端口看入的电阻求得系数 $a_1, a_2, \ldots, a_{n+m}, b_1, b_2, \ldots, b_{n+m}$。
+
+先定义如下术语：
+
+- **直流状态**：电感的直流状态是短路，电容的直流状态是开路。
+- **高频状态**：电感的高频（HF）状态是开路，电容的高频状态是短路。
+
+在额外元件定理术语中，电路的"原始增益"是参考直流增益 $G_{dc} = G(0)$，在所有动态元件设为直流状态时求得。传递函数 $s$ 系数取决于储能元件如何变为高频状态，如下所述。
+
+$s^k$ 系数的一般形式量纲为 (Hz)$^{-k}$，是 $R_x C_i$ 和 $L_j/R_y$ 形式项的所有组合乘积之和，含正确量纲。$R_x$ 和 $R_y$ 项通过应用 nEET 在相应储能元件端子处注入求得。分母系数情形中输入源 $u(s)$ 设为零。分子系数情形中传递函数输出 $y(s)$ 置零。
+
+![源页 p.655](../assets/page-snapshots/chapter-16/page-655.png)
+
+图16.27 R-L-C 电路示例
+
+考虑图16.27 的低通滤波电路。希望计算传递函数 $G(s) = v_2(s)/v_1(s)$。此传递函数含两极点无零点（为什么？），可写为如下形式：
+
+$$G(s) = G_{dc}\frac{1}{1+b_1 s+b_2 s^2} \tag{16.63}$$
+
+$b_1$ 量纲为 (Hz)$^{-1}$。$b_1$ 中两个可能项为
+
+$$\frac{L}{R_a} \quad \text{和} \quad R_b C \tag{16.64}$$
+
+$b_2$ 量纲为 (Hz)$^{-2}$。$b_2$ 中唯一可能项形式为
+
+$$\left(\frac{L}{R_c}\right)(R_d C) \tag{16.65}$$
+
+nEET 告诉我们如何轻易找到 $R_a$、$R_b$、$R_c$、$R_d$。
+
+![源页 p.656](../assets/page-snapshots/chapter-16/page-656.png)
+
+图16.28 R-L-C 电路示例：用 nEET 求分母项
+
+直流增益 $G_{dc}$ 通过将两储能元件设为直流状态（电感设为短路、电容设为开路）求得。此条件下传递函数 $G(s)$ 简化为分压器：
+
+$$G_{dc} = \frac{R_2}{R_1+R_2} \tag{16.66}$$
+
+与 EET 的 $Z_D$ 项一样，分母多项式中的项在输入源 $v_1$ 设为零时求得。电感和电容视为额外元件，得图16.28 电路。
+
+由于电路含两个储能元件，分母为二阶多项式，可写为如下形式：
+
+$$\text{分母} = 1+s\!\left(\frac{L}{R_a}+R_b C\right)+s^2\!\left(\frac{L}{R_c}R_d C\right) \tag{16.67}$$
+
+电阻 $R_a$ 是电容设为直流状态（端口 B 视为开路）时电感端口（端口 A）看到的电阻。此条件下端口 A 端子间电阻为 $R_1$ 和 $R_2$ 的串联组合：
+
+$$R_a = R_1+R_2 \tag{16.68}$$
+
+类似地，电阻 $R_b$ 是电感设为直流状态（端口 A 视为短路）时电容端口（端口 B）看到的电阻。此条件下端口 B 端子间电阻为 $R_1$ 和 $R_2$ 的并联组合：
+
+$$R_b = R_1\,\|\,R_2 \tag{16.69}$$
+
+对 $s^2$ 系数，有两种原则上导致相同结果的方法。可选择其中一项（$R_c$ 或 $R_d$）与相应 $s^1$ 项相同。例如选与电感端口关联的项 $R_c$ 与 $s^1$ 系数中相同：
+
+$$R_c = R_a = R_1+R_2 \tag{16.70}$$
+
+则 $R_d$ 是电感设为高频状态（开路）时电容端口（端口 B）看入的电阻。端口 A 开路时端口 B 端子间电阻为
+
+$$R_d = R_2 \tag{16.71}$$
+
+故传递函数 $G(s)$ 为
+
+$$G(s) = \frac{R_2}{R_1+R_2}\frac{1}{1+s\!\left(\dfrac{L}{R_1+R_2}+R_1\,\|\,R_2\,C\right)+s^2\!\left(LC\frac{R_2}{R_1+R_2}\right)} \tag{16.72}$$
+
+故传递函数系数可用若干简单规则找到，无需代数分析。读者可通过常规分析验证式 (16.72) 结果并比较所需工作量。
+
+### 16.3.2 直流参考函数的步骤
+
+如上述简单示例所示，分母项通过令输入 $u(s)$ 为零并在特定条件下评估给定端口看到的电阻求得。分子项通过输入 $u(s)$ 存在下的零双注入置零输出 $y(s)$ 求得。含共 $p$ 个独立储能元件的网络中分子和分母多项式可含最高 $s^p$ 阶项。这些多项式内 $s^q$ 阶项可含储能元件每次取 $q$ 个的乘积之和的部分或全部组合。分子和分母多项式形式如下：
+
+$$1+s\!\left(\sum_{i=1}^{n}\frac{L_i}{R_i}+\sum_{i=1}^{m}R_i C_i\right)+s^2\!\left(\sum\sum\frac{L_i L_j}{R_i R_{j-i}}+\sum\sum\frac{L_i}{R_i}C_j R_{j-i}+\sum\sum C_i R_i C_j R_{j-i}\right)+s^3\!\left(\ldots\right)+s^4\ldots \tag{16.73}$$
+
+nEET 告诉我们如何轻易找到上述多项式中的电阻 $R_i$、$R_{j-i}$ 等。式 (16.73) 中每个电阻的第一下标（连字符前）表示测量电阻的端口，附加下标（连字符后）表示测量期间设为高频状态的端口。这些附加下标的顺序无关紧要。系数用以下特定条件确定：
+
+- **$s^1$ 系数**：$R_i$ 是所有其他端口设为直流状态时端口 $i$ 看到的电阻。
+- **$s^2$ 系数**：$R_i$ 与 $s^1$ 系数中相同，即所有其他端口设为直流状态时端口 $i$ 看到的电阻。$R_{j-i}$ 是除端口 $i$ 外所有其他端口设为直流状态时端口 $j$ 看到的电阻。端口 $i$ 设为高频状态。
+- **$s^3$ 系数**：$R_i$ 和 $R_{j-i}$ 与 $s^2$ 系数中相同。$R_{k-ij}$ 是除端口 $i$ 和 $j$ 外所有其他端口设为直流状态时端口 $k$ 看到的电阻。端口 $i$ 和 $j$ 设为高频状态。
+- **更高阶项**：上述过程对更高阶项继续。最高阶项在一个端口测量，所有其他端口设为高频状态。
+
+上述方程中项的顺序无关紧要；例如可由互易性证明 $R_{i-j}R_j = R_{j-i}R_i$（更高阶项有类似结果）。这意味着设为高频状态的储能元件可以是任一个：可选任一个并找到相应电阻项，导致一致结果。同样每项（如 $R_i$）通过在相应储能元件连接处（如替代 $L_1$）电流注入求得。分母项中传递函数输入设为零。分子项中在传递函数输入源存在下通过调整端口处电流注入置零输出。每个系数只需导出一个新项；其他项与先前低阶系数中相应项相同。
+
+遵循上述规则可直接写传递函数，无需代数操作。诚然需要一些练习才能熟练这些规则；但写出复杂电路精确表达式所需的工作量可大幅减少。
+
+## 16.4 n-EET 示例
+
+### 16.4.1 双节 L-C 滤波器
+
+作为 nEET 的另一个例子，考虑图16.29 的双节 L-C 滤波器。由于此电路有四个储能元件，预期传递函数 $G(s) = v_2(s)/v_1(s)$ 有四极点。还预期高频渐近线有 −80 dB/十倍频程斜率：高频时每个电感趋向开路、每个电容趋向短路，每个元件导致滤波输入和输出之间增益降低。故预期此滤波电路无零点。
+
+![源页 p.659](../assets/page-snapshots/chapter-16/page-659.png)
+
+图16.29 双节 L-C 滤波示例
+
+直流增益 $G_{dc}$ 通过将所有储能元件设为直流状态求得；输入直接连到输出，故 $G_{dc}$ 等于 1。故传递函数形式为
+
+$$G(s) = \frac{1}{1+b_1 s+b_2 s^2+b_3 s^3+b_4 s^4} \tag{16.74}$$
+
+![源页 p.659](../assets/page-snapshots/chapter-16/page-659.png)
+
+图16.30 双节 L-C 滤波示例：求分母项
+
+输入 $v_1(s)$ 设为零时求分母多项式。电路随后可写成图16.30。现对此电路应用 16.3.2 节步骤，在其他端口设为直流或高频状态时求端口处驱动点阻抗。结果汇总于表16.1。
+
+表16.1 双节 L-C 滤波示例分母项的推导
+
+| 项 | $L_1$ | $L_2$ | $C_1$ | $C_2$ | 结果 |
+|---|---|---|---|---|---|
+| $sL_1/R_a$ | 测量 | 直流/短路 | 直流/开路 | 直流/开路 | $R_a = R$ |
+| $sL_2/R_b$ | 直流/短路 | 测量 | 直流/开路 | 直流/开路 | $R_b = R$ |
+| $sC_1 R_c$ | 直流/短路 | 直流/短路 | 测量 | 直流/开路 | $R_c = 0$ |
+| $sC_2 R_d$ | 直流/短路 | 直流/短路 | 直流/开路 | 测量 | $R_d = 0$ |
+| $s^2(L_1/R_a)(L_2/R_{b-a})$ | 高频/开路 | 测量 | 直流/开路 | 直流/开路 | $R_{b-a} = \infty$ |
+| $s^2(L_1/R_a)(C_1 R_{c-a})$ | 高频/开路 | 直流/短路 | 测量 | 直流/开路 | $R_{c-a} = R$ |
+| $s^2(L_1/R_a)(C_2 R_{d-a})$ | 高频/开路 | 直流/短路 | 直流/开路 | 测量 | $R_{d-a} = R$ |
+| $s^2(L_2/R_b)(C_1 R_{c-b})$ | 直流/短路 | 高频/开路 | 测量 | 直流/开路 | $R_{c-b} = 0$ |
+| $s^2(L_2/R_b)(C_2 R_{d-b})$ | 直流/短路 | 高频/开路 | 直流/开路 | 测量 | $R_{d-b} = R$ |
+| $s^2(C_1 R_c)(C_2 R_{d-c})$ | 直流/短路 | 直流/短路 | 高频/短路 | 测量 | $R_{d-c} = 0$ |
+| $s^3(L_1/R_a)(C_1 R_{c-a})(L_2/R_{b-ac})$ | 高频/开路 | 测量 | 高频/短路 | 直流/开路 | $R_{b-ac} = R$ |
+| $s^3(L_1/R_a)(C_2 R_{d-a})(L_2/R_{b-ad})$ | 高频/开路 | 测量 | 直流/开路 | 高频/短路 | $R_{b-ad} = \infty$ |
+| $s^3(L_1/R_a)(C_2 R_{d-a})(C_1 R_{c-ad})$ | 高频/开路 | 直流/短路 | 测量 | 高频/短路 | $R_{c-ad} = 0$ |
+| $s^3(L_2/R_b)(C_2 R_{d-b})(C_1 R_{c-bd})$ | 直流/短路 | 高频/开路 | 测量 | 高频/短路 | $R_{c-bd} = 0$ |
+| $s^4(L_1/R_a)(C_1 R_{c-a})(L_2/R_{b-ac})(C_2 R_{d-abc})$ | 高频/开路 | 高频/开路 | 高频/短路 | 测量 | $R_{d-abc} = R$ |
+
+![源页 p.660](../assets/page-snapshots/chapter-16/page-660.png)
+
+图16.31 求 $R_a$
+
+分母项 $sL_1/R_a$ 中，系数 $R_a$ 是其余端口储能元件设为直流状态时端口 a 端子间电阻。如图16.31所示，端口 b 处电感 $L_2$ 成为短路，端口 c 和 d 处电容 $C_1$ 和 $C_2$ 成为开路。可见 $R_a$ 等于 $R$。表16.1 其余 $s^1$ 项留给读者验证。
+
+![源页 p.660](../assets/page-snapshots/chapter-16/page-660.png)
+
+图16.32 求 $R_{b-a}$
+
+图16.32 说明确定 $R_{b-a}$（分母项 $s^2(L_1/R_a)(L_2/R_{b-a})$ 所需）。$R_a$ 项与上一段导出结果一致。项 $R_{b-a}$ 是端口 a 处元件 $L_1$ 设为高频状态（开路）时端口 b 端子间电阻。其余储能元件 $C_1$ 和 $C_2$ 设为直流状态（开路）。此条件下端口 b 成为开路，故 $R_{b-a} = \infty$。故式 (16.75) 分母 $s^2$ 项等于零。表16.1 其余 $s^2$ 项留给读者验证。
+
+接下来考虑分母项 $s^3 L_1 L_2 C_1/R_x$。求解此项的一种方法是应用上一段结果将此项表示为 $s^3(L_1/R_a)(L_2/R_{b-a})(C_1 R_{c-ab})$。但由于上一段结果 $R_{b-a} = \infty$，此方法导致 $R_{c-ab} = \infty$ 的不定结果。而是应基于非零 $s^2$ 项。检查表16.1 可见项 $s^2(L_1/R_a)(C_1 R_{c-a})$ 非零。故求 $R_{b-ac}$ 将此分母项表示为 $s^3(L_1/R_a)(C_1 R_{c-a})(L_2/R_{b-ac})$。如图16.33所示，$R_{b-ac}$ 等于 $L_1$ 和 $C_1$ 设为高频状态、$C_2$ 保持直流状态时端口 b 端子间电阻。可见 $R_{b-ac} = R$。表16.1 其余 $s^3$ 项也留给读者验证。
+
+![源页 p.661](../assets/page-snapshots/chapter-16/page-661.png)
+
+图16.33 求 $R_{b-ac}$
+
+只有一个 $s^4$ 项。求此项应从非零 $s^3$ 项开始。上一段结果是此非零项。故将 $s^4$ 项表示为 $s^4(L_1/R_a)(C_1 R_{c-a})(L_2/R_{b-ac})(C_2 R_{d-abc})$。如图16.34所示，$R_{d-abc}$ 是端口 a、b、c 处元件设为高频状态时端口 d 端子间电阻。检查图16.34 可见 $R_{d-abc} = R$。
+
+![源页 p.661](../assets/page-snapshots/chapter-16/page-661.png)
+
+图16.34 求 $R_{d-abc}$
+
+表16.1 结果预测分母多项式为
+
+$$\text{分母} = 1+s\!\left(\frac{L_1}{R}+\frac{L_2}{R}+C_1\cdot 0+C_2\cdot 0\right)+s^2\!\left(\frac{L_1}{R}\frac{L_2}{\infty}+\frac{L_1}{R}C_1 R+\frac{L_1}{R}C_2 R+\frac{L_2}{R}C_1\cdot 0+\frac{L_2}{R}C_2 R+C_1\cdot 0\,C_2\cdot 0\right)+s^3\!\left(\frac{L_1}{R}C_1 R\frac{L_2}{R}+\frac{L_1}{R}\frac{L_2}{\infty}C_2 R+\frac{L_1}{R}C_2 R C_1\cdot 0+\frac{L_2}{R}C_2 R C_1\cdot 0\right)+s^4\!\left(\frac{L_1}{R}\frac{L_2}{R}C_1 R\,C_2 R\right) \tag{16.76}$$
+
+消去为零的项后传递函数 $G(s)$ 可写为
+
+$$G(s) = \frac{1}{1+s\!\left(\dfrac{L_1+L_2}{R}\right)+s^2\!\left(L_1(C_1+C_2)+L_2 C_2\right)+s^3\!\left(\dfrac{L_1 L_2 C_1}{R}\right)+s^4\!\left(L_1 L_2 C_1 C_2\right)} \tag{16.77}$$
+
+故此相当复杂的四阶滤波电路传递函数系数通过一系列简单电路评估求得。经练习可用图16.30 原理图快速执行这些评估。此外其他方式导出的项可用此方法检查。电路含多个电阻和更复杂互连时 nEET 方法特别有利。
+
+还应指出若没有 $G(s)$ 无零点的洞察，可用 16.3.2 节步骤计算分子多项式。将发现 $s^1$ 到 $s^4$ 阶分子项为零。
+
+### 16.4.2 桥 T 滤波示例
+
+作为第三个例子，考虑图16.35 的桥 T 滤波电路。由于元件 $C_2$，此电路传递函数 $G(s) = v_2(s)/v_1(s)$ 的常规分析相当繁重。让我们用 nEET 导出此传递函数。
+
+![源页 p.662](../assets/page-snapshots/chapter-16/page-662.png)
+
+图16.35 桥 T 滤波示例
+
+由于有两个储能元件，预期 $G(s)$ 含两极点。此外预期 $G(s)$ 高频渐近线等于 1，因为电容 $C_2$ 高频趋向零阻抗，将输出短路到输入。故 $G(s)$ 必含两零点使其高频幅值渐近线斜率为 0 dB/十倍频程。故传递函数形式为
+
+$$G(s) = G_{dc}\frac{1+a_1 s+a_2 s^2}{1+b_1 s+b_2 s^2} \tag{16.78}$$
+
+分析需应用 16.3.2 节步骤两次。首先用零双注入在输出 $v_2$ 置零条件下求分子多项式。在电阻名后加下标 $N$ 以区分分子项与
+
+同名分母项。其次在输入 $v_1$ 设为零条件下应用 16.3.2 节步骤求分母多项式。在分母电阻项名后加下标 $D$。
+
+先考虑确定 $G(s)$ 零点。分子多项式可表示为
+
+$$\text{分子} = 1+s(C_1 R_{Na}+C_2 R_{Nb})+s^2 C_1 R_{Na-b} C_2 R_{Nb} \tag{16.79}$$
+
+此处电容 $C_1$ 接在端口 a，电容 $C_2$ 接在端口 b。
+
+![源页 p.663](../assets/page-snapshots/chapter-16/page-663.png)
+
+图16.36 确定分子 $R_{Na}$
+
+图16.36 说明 $R_{Na}$ 的确定。电容 $C_2$ 设为直流状态（端口 b 开路）。输入源 $v_1$ 存在下在端口 a 施加电流源 $i_{test}$，调整两源使输出 $v_2$ 置零。沿此置零条件向注入点跟踪求端口 a 电压 $v_{test}$。输出电压置零时电阻 $R_3$ 中电流也置零。由于开路的端口 b 中无电流，电阻 $R_2$ 中电流也必置零。按欧姆定律 $R_2$ 两端电压为零，故电压 $v_{test}$ 为零。故分子 $R_{Na}$ 为
+
+$$R_{Na} = \left.\frac{v_{test}}{i_{test}}\right|_{v_2\to\text{null} 0} = 0 \tag{16.80}$$
+
+![源页 p.663](../assets/page-snapshots/chapter-16/page-663.png)
+
+图16.37 确定分子 $R_{Nb}$
+
+类似求 $R_{Nb}$。输入 $v_1$ 存在下在 $C_2$ 端口（端口 b）施加电流注入并调整使输出 $v_2$ 置零。电容 $C_1$ 设为直流状态，故端口 a 成为开路。此测量如图16.37所示。由于电阻 $R_3$ 中电流置零，电流 $i_{test}$ 必流过电阻 $R_2$ 和 $R_1$。故电压 $v_{test}$ 等于 $i_{test}(R_1+R_2)$，分子 $R_{Nb}$ 为
+
+$$R_{Nb} = \left.\frac{v_{test}}{i_{test}}\right|_{v_2\to\text{null} 0} = R_1+R_2 \tag{16.81}$$
+
+![源页 p.664](../assets/page-snapshots/chapter-16/page-664.png)
+
+图16.38 确定分子 $R_{Na-b}$
+
+求 $R_{Na-b}$ 时在端口 a 注入电流 $i_{test}$，电容 $C_2$ 设为高频状态（端口 b 短路）。调整独立源 $v_1$ 和 $i_{test}$ 使输出 $v_2$ 置零。此实验如图16.38所示。对此特定电路端口 b 短路使输出 $v_2$ 等于输入 $v_1$，故除非输入电压源 $v_1$ 为零否则无法实现输出置零条件。此条件下电流 $i_{test}$ 流过 $R_1$ 和 $R_2$ 的并联组合，故 $v_{test}$ 等于 $i_{test} R_1\,\|\,R_2$。分子 $R_{Na-b}$ 为
+
+$$R_{Na-b} = \left.\frac{v_{test}}{i_{test}}\right|_{v_2\to\text{null} 0} = R_1\,\|\,R_2 \tag{16.82}$$
+
+将式 (16.80)–(16.82) 代入式 (16.79) 得分子多项式为
+
+$$\text{分子} = 1+sC_2(R_1+R_2)+s^2 C_1 C_2 R_1 R_2 \tag{16.83}$$
+
+接下来考虑确定 $G(s)$ 极点。分母多项式可表示为
+
+$$\text{分母} = 1+s(C_1 R_{Da}+C_2 R_{Db})+s^2 C_1 R_{Da-b} C_2 R_{Db} \tag{16.84}$$
+
+驱动点电阻 $R_{Da}$、$R_{Db}$、$R_{Da-b}$ 在输入源 $v_1$ 设为零时求得。
+
+![源页 p.664](../assets/page-snapshots/chapter-16/page-664.png)
+
+图16.39 确定分母 $R_{Da}$
+
+图16.39 说明 $R_{Da}$ 的确定。电容 $C_2$ 设为直流状态（端口 b 开路），输入源 $v_1$ 设为零（短路）。求端口 a 端子间电阻，结果为
+
+$$R_{Da} = R_1\,\|\,(R_2+R_3) \tag{16.85}$$
+
+$R_{Db}$ 类似求得：是电容 $C_1$ 设为直流状态（端口 a 开路）且输入源 $v_1$ 设为零时端口 b 端子间电阻。结果为
+
+$$R_{Db} = R_3\,\|\,(R_1+R_2) \tag{16.86}$$
+
+![源页 p.665](../assets/page-snapshots/chapter-16/page-665.png)
+
+图16.40 确定分母 $R_{Da-b}$
+
+图16.40 说明 $R_{Da-b}$ 的确定。电容 $C_2$ 设为高频状态（端口 b 短路），输入源 $v_1$ 设为零（短路）。求端口 a 端子间电阻，结果为
+
+$$R_{Da-b} = R_1\,\|\,R_2 \tag{16.87}$$
+
+故分母多项式为
+
+$$\text{分母} = 1+s\!\left[C_1\!\left(R_1\,\|\,(R_2+R_3)\right)+C_2\!\left(R_3\,\|\,(R_1+R_2)\right)\right]+s^2\!\left[C_1 C_2\!\left(R_1\,\|\,(R_2+R_3)\right)\!\left(R_1\,\|\,R_2\right)\right] \tag{16.88}$$
+
+最后直流增益 $G_{dc}$ 通过将所有储能元件设为直流状态然后求传递函数求得。用分压公式得
+
+$$G_{dc} = \frac{R_3}{R_1+R_2+R_3} \tag{16.89}$$
+
+将式 (16.83)、(16.88)、(16.89) 代入式 (16.78) 得完整传递函数。
+
+## 16.5 频率反转
+
+有时传递函数或其他感兴趣函数的直流增益为零或无穷；这在复平面原点处有极点或零点时发生。功率电子领域中阻抗几乎总是如此，因为我们不希望直流或低频交流电流流过有损耗的电阻元件。这在采用 PI 或 PID 补偿器的补偿器传递函数中也常发生。
+
+### 16.5.1 示例：阻尼输入滤波器
+
+例如考虑图16.41 所示阻尼输入滤波电路的输出阻抗 $Z(s)$。测量此输出阻抗时令独立源 $\hat{v}_g$ 为零，然后注入电流 $\hat{i}$ 测量感应电压 $\hat{v}$，如图16.42所示。输出阻抗随后为
+
+$$Z(s) = \left.\frac{\hat{v}}{\hat{i}}\right|_{\hat{v}_g=0} \tag{16.90}$$
+
+故可将 $Z(s)$ 视为从 $\hat{i}$ 到 $\hat{v}$ 的传递函数。若尝试用基本形式的 N 额外元件定理表示 $Z(s)$，发现 $Z(s)$ 的直流值为零，故
+
+$$Z(s) = \frac{0\cdot\text{分子多项式}}{\text{分母多项式}} \tag{16.91}$$
+
+由于参考增益为零，此方法不工作。
+
+![源页 p.666](../assets/page-snapshots/chapter-16/page-666.png)
+
+图16.41 阻尼 LC 滤波器
+
+![源页 p.666](../assets/page-snapshots/chapter-16/page-666.png)
+
+图16.42 图16.41 LC 滤波器输出阻抗 $Z(s)$ 的测量
+
+![源页 p.667](../assets/page-snapshots/chapter-16/page-667.png)
+
+图16.43 图16.41 LC 滤波器典型输出阻抗渐近线的图解构造
+
+图16.43 用 8.3 节方法对假定元件值 $L_1 \gg L_2$ 给出输出阻抗渐近线的图解构造。看来 $Z(s)$ 可参考中频渐近线 $R$，用 $R/L_2$ 处反演极点加 $R/L_1$ 处零点和 $\omega_0 = 1/\sqrt{L_1 C}$ 处复极点表示：
+
+$$Z(s) \approx R\frac{\left(1+\dfrac{sL_1}{R}\right)\left(1+\dfrac{R}{sL_2}\right)}{\left(1+\dfrac{s}{Q\omega_0}+\left(\dfrac{s}{\omega_0}\right)^2\right)} \tag{16.92}$$
+
+这表明为求 $Z(s)$ 精确表达式可用频率反转以参考增益 $R$ 表示 $Z(s)$。
+
+这可用 nEET 处理频率反转的推广实现。首先须将储能元件"直流状态"和"高频状态"概念扩展为以下：
+
+- **参考状态**：储能元件的参考状态是使传递函数等于参考增益的状态（短路或开路）。
+- **反演状态**：储能元件的反演状态是其参考状态的反面（开路或短路）。
+
+图16.42 示例中 $L_1$ 短路、$L_2$ 开路、$C$ 开路时 $Z(s)$ 等于 $R$。故定义这些为这些元件的参考状态，汇总于表16.2。
+
+表16.2 阻尼 L-C 滤波示例中储能元件的参考状态和反演状态
+
+| 元件 | 参考状态 | 反演状态 |
 |---|---|---|
-| TODO | TODO | TODO |
+| $L_1$ | 短路 | 开路 |
+| $L_2$ | 开路 | 短路 |
+| $C$ | 开路 | 短路 |
 
-## 中文翻译
+$L_1$ 和 $C$ 的参考状态与其直流状态一致，而 $L_2$ 的参考状态与其高频状态一致。故用频率反转项处理 $L_2$：先前用形如
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$\frac{sL_2}{R_a} \tag{16.93}$$
 
-## 英文原文
+的项，现用反演形式
 
-```text
-16.2 EET Examples 645
-(a)
-Frequency, Hz
-102 103 104 105
-Magnitude, dB
--30
--20
--10
-0
-10
-20
-30
-40
-ZN
-ZD
-Z
-(b)
-Frequency, Hz
-102 103 104 105
-Phase, degrees
--90
--45
-0
-45
-90
-135
-ZN
-ZD
-Z
-Fig. 16.21 Magnitude and phase Bode plots of the impedancesZN , ZD,a n dZ= 1/sC1 for the undamped
-SEPIC example. Dashed curves: ZN and ZD. Solid curves: Z
-Gvd→Gvd−bb
-1+ ZN
-Z
-1+ ZD
-Z
-⏐⏐
-⏐
-⏐⏐⏐
-⏐⏐⏐
-⏐
-Z→0
-= Gvd−bb
-⎦ZN
-ZD
-)
-(16.60)
-Since ZN and ZD are both inductive above 6 kHz, the ratio ( ZN/ZD) is constant, and hence Gvd
-is equal to Gvd−bb scaled by this constant.
-The impedance∥Z∥ is equal in magnitude to∥ZN∥ or∥ZD∥ at 3 to 4 kHz. Note that the phase
-of the capacitor impedance∠Z is−90◦, while the impedances ZN and ZD are essentially induc-
+$$\frac{R_a}{sL_2} \tag{16.94}$$
 
-646 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-tive and have phases of approximately+90◦. Hence, at 3 to 4 kHz, the phases ofZ/ZN and Z/ZD
-are approximately 180◦, while the magnitudes are approximately equal to one. In the vicinity
-of these frequencies, the correction factor in Eq. ( 16.45) can vary substantially, according to
-Figs. 16.6 to 16.9. We expect the numerator and denominator terms of the correction factor to
-contain resonances at these frequencies.
-Figure 16.22 contains a Bode plot of the control-to-output transfer functions Gvd−bb(s) and
-Gvd(s). The eﬀective buck–boost model contains resonant poles and a RHP zero, leading to
-(a)
-Frequency, Hz
-102 103 104 105
-Magnitude, dB
--60
--40
--20
-0
-20 Gvd-bb
-Gvd
-(b)
-Frequency, Hz
-102 103 104 105
-Phase, degrees
--600
--500
--400
--300
--200
--100
-0
-Gvd-bb
-Gvd
-Fig. 16.22 Magnitude and phase Bode plots of the undamped control-to-output transfer function, SEPIC
-example. Dashed curves: response of the e ﬀective buck–boost model Gvd−bb. Solid curves: response of
-SEPIC, including correction factor, Gvd
+若电容 $C$ 的参考状态为其高频状态，则将形如
 
-16.2 EET Examples 647
-+
-D1L1
-C2 R
-+
-VQ1
-C1
-Vg L2
-Cb Rb
-Fig. 16.23 Addition of damping network elements Rb and Cb to the SEPIC
-a high-frequency phase asymptote of −270◦. The correction factor contributes two additional
-high–Q poles and two RHP zeroes, in the vicinity of 3 kHz. These terms contribute an additional
-−360◦of phase at high frequencies. Consequently, it is problematic to achieve an adequate phase
-margin in a feedback loop having a crossover frequency above 3 kHz.
-The dynamics of the SEPIC can be considerably improved by addition of a damping network
-to C1, as illustrated in Fig. 16.23. This causes the “extra” impedance Z(s) to become:
-Z(s)= 1
-sC1
-
-
-
-⎦
-R
-b+ 1
-sCb
-)
-(16.61)
-The element values are chosen so that the impedance Z is dominated by the damping resistor
-Rb in the vicinity of the frequencies where∥Z∥ is equal to∥ZN∥ or∥ZD∥. The phase of Z tends
-closer to 0◦, causing the phases of Z/ZN and Z/ZD to tend towards 90◦. According to Figs. 16.6
-to 16.9, the variation in the correction factor is much less extreme in this case. The damping
-network reduces the Q–factors of the poles and zeroes of the correction factor, and can also
-move its RHP zeroes into the left half-plane.
-Capacitor Cb is a dc blocking capacitor that prevents a dc voltage from being applied to
-resistor Rb. This reduces the power loss that otherwise would be induced in Rb. The impedance
-of capacitor Cb should be substantially smaller than Rb at the frequencies where∥Z∥ is close to
-∥ZN∥ or∥ZD∥. Damping networks such as this Rb–Cb network are discussed in more detail in
-Chap. 17.
-Figure 16.24 illustrates construction of the asymptotes of the impedancesZN and ZD for this
-example. Asymptotes for the impedance Z, including the Rb−Cb damping network designed
-as described above, are overlayed. Again, the damping resistor Rb dominates the impedance Z
-at the frequencies where ∥Z∥ is equal to ∥ZN∥ or∥ZD∥. The values of Rb and Cb can now be
-selected so that these Z asymptotes are obtained.
-A Bode plot of a damped Z, using the values C1 = 22μF, Rb = 2Ω, and Cb = 100μF, is
-illustrated in Fig. 16.25. The magnitude of Z is now equal to the magnitudes of ZN or ZD at
-frequencies in the vicinity of 2 kHz. At this frequency range, the phase of the damped Z is now
-approximately−45◦.
+$$sCR_a \tag{16.95}$$
 
-648 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-10 Ω
-1 Ω
-100 mΩ
-100 Ω
-10 Hz 100 Hz 1 kHz 10 kHz 100 kHz 1 MHz
-10 dBΩ
-0 dBΩ
-Ω
-20 dBΩ
-30 dBΩ
-40 dBΩ
-Ω
-Ω
-||Z ||
-||ZD
-||
-||ZN
-||
-Rb
-ω L1
-+L2
-1
-ω C1 + Cb
-1
-ω C1
-Fig. 16.24 Construction of the magnitude asymptotes for ZN , ZD, and the damped Z
-Figure 16.26 compares the resulting Gvd(s) with Gvd−bb(s). It can be observed that the Q–
-factors of the correction factor poles and zeroes are substantially reduced, and the RHP zeroes
-have moved to the left half-plane. These poles and zeroes nearly cancel. The magnitude and
-phase of Gvd(s) now is approximately equal to that of the eﬀective buck–boost converter model.
-The SEPIC control-to-output transfer functionGvd(s) naturally contains four poles and three
-RHP zeroes. The Extra Element Theorem approach shows how this transfer function can be
-viewed as a simpler eﬀective buck–boost transfer function Gvd−bb(s) containing two poles and
-one RHP zero, multiplied by a correction factor that accounts for the additional poles and zeroes.
-Further, the Extra Element Theorem approach provides a framework for designing a damping
-network that causes the correction factor poles and zeroes to approximately cancel. The result-
-ing G
-vd(s) is then approximately equal to the much simpler Gvd−bb(s).
-16.3 The n-Extra Element Theorem
-The n Extra Element Theorem (nEET) is an extension of Middlebrook’s Extra Element Theorem
-to the case when multiple extra elements are added simultaneously to a circuit. Its major appli-
-cation is to write transfer functions directly as rational fractions, without need to perform loop
-and node analysis and algebraic manipulations. This is accomplished by treating each reactive
-component as an “extra” element that is added to the dc gain of the network. The method gives
-a physical interpretation to the coeﬃcients of L and C in the standard normalized form of the
-transfer function, and it allows complex transfer functions to be derived nearly by inspection.
-Use of the basicnEET to derive transfer functions is described here without proof, beginning
-with a simple example. Extensions involving inverted forms as special cases are also described.
-For a derivation and more general treatment of the nEET, the interested reader is referred to
-[141, 142].
+的项替换为反演形式
 
-16.3 The n-Extra Element Theorem 649
-(a)
-Frequency, Hz
-102 103 104 105
-Magnitude, dB
--30
--20
--10
-0
-10
-20
-30
-40
-ZN
-ZD
-Z
-(b)
-Frequency, Hz
-102 103 104 105
-Phase, degrees
--90
--45
-0
-45
-90
-135
-ZN
-ZD
-Z
-Fig. 16.25 Magnitude and phase Bode plots of the impedances ZN , ZD,a n d Z for the damped SEPIC
-example. Dashed curves: ZN and ZD. Solid curves: Z
-16.3.1 Introduction to the n-EET
-Given a linear network containing n inductors and m capacitors, it is desired to ﬁnd a transfer
-function G(s)= y(s)/u(s). It is assumed here that this transfer function can be written as a
-rational fraction referenced to a dc gain, as follows:
-G(s)= Gdc
-1+ a1 s+ a2 s2+... + an+m sn+m
-1+ b1 s+ b2 s2+... + bn+m sn+m (16.62)
+$$\frac{1}{sCR_a} \tag{16.96}$$
 
-650 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-(a)
-Frequency, Hz
-102 103 104 105
-Magnitude, dB
--60
--40
--20
-0
-20
-Gvd-bb
-Gvd
-(b)
-Frequency, Hz
-102 103 104 105
-Phase, degrees
--600
--500
--400
--300
--200
--100
-0
-Gvd-bb
-Gvd
-Fig. 16.26 Eﬀects of R–C damping network on the control-to-output transfer function, SEPIC exam-
-ple. Dashed curves: response of the eﬀective buck–boost model Gvd−bb. Solid curves: response of SEPIC,
-including correction factor, Gvd
-Special cases whose transfer functions cannot be written in this manner, such as when G(s)
-contains poles or zeroes at the origin, are treated in a later section. The method used here
-employs a generalization of the Extra Element Theorem, in which all of the inductors and
-capacitors are treated as “extra” elements, and are added simultaneously. The zeroes ofG(s)a r e
-found with the output nulled in the presence of the input, while the poles are found with the
-input set to zero. The method allows the coeﬃcients a
-1, a2,... an+m, b1, b2,... bn+m to be found
-by evaluating the resistances seen looking into the inductor or capacitor ports under various
-special conditions.
+现将 16.3.2 节步骤推广，用参考状态和反演状态替代直流和高频端口状态。记号 $R_{N1-2}$、$R_{D3-12}$ 等现在的含义是连字符后附加下标表示测量期间设为反演状态的端口，其他端口设为参考状态。故 $Z(s)$ 将以如下形式表示
 
-16.3 The n-Extra Element Theorem 651
-Let us ﬁrst deﬁne the following terminology:
-DC state: the DC state of an inductor is a short circuit, and the DC state of a capacitor is an
-open circuit.
-HF state: the high-frequency (HF) state of an inductor is an open circuit, and the HF state
-of a capacitor is a short circuit.
-In the terminology of the Extra Element Theorem, the “original gain” of the circuit is the refer-
-ence dc gain Gdc = G(0), found with all dynamic elements set to their DC states. The transfer
-function s-coeﬃcients depend on how the reactive elements change to their HF states, as ex-
-plained below.
-The general form of the coeﬃcient of sk has dimensions (Hz)−k, and is a sum of products
-of all combinations of terms of the form RxCi and Lj/Ry which contain the proper dimensions.
-The Rx and Ry terms are found by application of the nEET, with injection at the terminals of the
-corresponding reactive element. In the case of denominator coeﬃcients, the input source u(s)i s
-set to zero. For numerator coeﬃcients, the transfer function output y(s) is nulled.
-+v1
-R1
-R2
-L
-C
-+
-v2
-Fig. 16.27 R–L–C circuit example
-Consider the low-pass ﬁlter circuit of Fig. 16.27. It is desired to compute the transfer func-
-tion G(s)= v2(s)/v1(s). This transfer function contains two poles and no zeroes (why?), and
-can be written in the following form:
-G(s)= Gdc
-1
-1+ b1 s+ b2 s2 (16.63)
-The dimensions of b1 are (Hz)−1. The two possible terms in b1 are
-L
-Ra
-and RbC (16.64)
-The dimensions of b2 are (Hz)−2. The only possible term in b2 is of the form:
-⎦L
-Rc
-)
-(RdC) (16.65)
-The nEET shows us how to easily ﬁnd Ra, Rb, Rc, and Rd.
+$$Z(s) = R\frac{\text{分子}}{\text{分母}} \tag{16.97}$$
 
-652 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-The dc gain Gdc is found by setting both reactive elements to their DC states,i.e., the induc-
-tor is set to a short circuit and the capacitor is set to an open circuit. Under these conditions, the
-transfer function G(s) reduces to that of a voltage divider:
-Gdc= R2
-R1+ R2
-(16.66)
-As with the ZD term of the EET, the terms in the denominator polynomial are found with
-the input source v1 set to zero. The inductor and capacitor are treated as extra elements, and the
-circuit of Fig. 16.28 is obtained.
-R1
-R2
-L
-C
-Port
-A
-Port
-B
-Fig. 16.28 R–L–C circuit example: use of the nEET to ﬁnd the denominator terms
-Since the circuit contains two reactive elements, the denominator is a second-order polyno-
-mial that can be written in the following form:
-denominator= 1+ s
-⎦L
-Ra
-+ RbC
-)
-+ s2
-⎦L
-Rc
-RdC
-)
-(16.67)
-The resistance Ra is the resistance seen at the inductor port (Port A), with the capacitor set to
-its DC state: Port B is treated as an open circuit. Under these conditions, the resistance between
-the terminals of Port A is the series combination of R1 and R2:
-Ra= R1+ R2 (16.68)
-In a similar manner, the resistance Rb is the resistance seen at the capacitor port (Port B) with
-the inductor set to its DC state: Port A is treated as a short circuit. Under these conditions, the
-resistance between the terminals of Port B is the parallel combination of R1 and R2:
-Rb= R1
-R2 (16.69)
-For the coeﬃcient of s2, there are two possible approaches that in principle lead to the same
-result. We can choose one of the terms (either Rc or Rd) to be the same as the corresponding s1
-term. For example, let us select the term associated with the inductor port,Rc,t ob et h es a m ea s
-in the s1 coeﬃcient:
-Rc= Ra= R1+ R2 (16.70)
+分母可含一、二或全部三个储能元件的乘积。对输出阻抗示例得
 
-16.3 The n-Extra Element Theorem 653
-Then Rd is the resistance looking into the capacitor port (Port B), with the inductor set to its
-high-frequency state, or open-circuited. With Port A open-circuited, the resistance between the
-terminals of Port B is seen to be
-Rd= R2 (16.71)
-Therefore, the transfer function G(s)i s
-G(s)= R2
-R1+ R2
-1
-1+ s
-⎦ L
-R1+ R2
-+ R1
-
-R
-2C
-)
-+ s2
-⎦
-LC R2
-R1+ R2
-) (16.72)
-Thus, the coeﬃcients in the transfer function can be found using some simple rules, without
-need for algebraic analysis. The reader may wish to verify the result of Eq. ( 16.72) via conven-
-tional analysis, and compare the amount of work required.
-16.3.2 Procedure for DC-Referenced Functions
-As illustrated in the simple example above, the denominator terms are found by setting the
-input u(s) to zero, and evaluating the resistance seen at the given port under speciﬁc conditions.
-The numerator terms are found by null double injection in the presence of the input u(s), to
-null the output y(s). For a network containing a total of p independent reactive elements, the
-numerator and denominator polynomials may contain terms of order up to sp. Terms within
-these polynomials of order sq could include some or all combinations of the sums of products
-of reactive elements taken q at a time. The numerator and denominator polynomials are of the
-following form:
-1+ s
-⎛⎜⎜⎜⎜⎜⎝
-n∑
-i=1
-Li
-Ri
-+
-m∑
-i=1
-RiCi
-⎞⎟⎟⎟⎟⎟⎠+ s2
-⎦∑∑ LiLj
-RiRj-i
-+
-∑∑ Li
-Ri
-C jRj-i+
-∑∑
-CiRiC jRj-i
-)
-+ s3
-⎦∑∑∑ LiLjLk
-RiRj-iRk-ij
-+
-∑∑∑ LiLj
-RiRj-i
-CkRk-ij +
-∑∑∑ Li
-Ri
-C jRj-iCkRk-ij
-+
-∑∑∑
-CiRiC jRj-iCkRk-ij
-)
-+ s4... (16.73)
-The nEET tells us how to easily ﬁnd the resistances Ri, Rj-i, etc., in the above polynomial. In
-Eq. (16.73), the ﬁrst subscript of each resistance (before the hyphen) denotes the port where
-the resistance is measured, while any additional subscripts (after the hyphen) denote ports that
-are set to their high-frequency states during this measurement. The order of these additional
-subscripts is irrelevant. The coeﬃcients are determined using the following speciﬁc conditions:
-Coeﬃcients of s1: Ri is the resistance seen at port i with all other ports set to their DC
-states.
-Coeﬃcients of s
-2: Ri is the same term as in the corresponding coe ﬃcient of s1, i.e., the
-resistance seen at port i with all other ports set to their DC states. Rj-i is the resistance seen
-at port j, with all other ports except port i set to their DC states. Port i is set to its HF state.
-Coeﬃcients of s3: Ri and Rj-i are the same terms appearing in the coeﬃcients of s2. Rk-ij is
-the resistance seen at port k, with all other ports except ports i and j set to their DC states.
-Ports i and j are set to their HF states.
+$$\text{分母} = 1+\left(\frac{sL_1}{R_{Da}}+sCR_{Db}+\frac{R_{Dc}}{sL_2}\right)+\left(sCR_{Db}\frac{sL_1}{R_{Da-b}}+sCR_{Db}\frac{R_{Dc-b}}{sL_2}+\frac{R_{Dc}}{sL_2}\frac{sL_1}{R_{Da-c}}\right)+\left(sCR_{Db}\frac{sL_1}{R_{Da-b}}\frac{R_{Dc-ab}}{sL_2}\right) \tag{16.98}$$
 
-654 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-Higher-order terms: the above process continues for higher-order terms. The highest-order
-term will be measured at one port, with all other ports set to their HF states.
-The orders of the terms in the above equation are irrelevant; for example, it can be shown by
-reciprocity that Ri- jRj = Rj-iRi (with a similar result for higher-order terms). This implies that
-it does not matter which reactive element is set to the high-frequency state: either one can be
-chosen, and the appropriate resistance terms found, leading to a consistent result. Again, each
-term (e.g., R
-i) is found by current injection at the connections to the corresponding reactive
-element (e.g., in place of L1). For denominator terms, the transfer function input is set to zero.
-For numerator terms, the output is nulled by adjusting the current injection at the port, in the
-presence of the transfer function input source. For each coeﬃcient, it is necessary to derive only
-one new term; the other terms are identical to the corresponding terms in a previous lower-order
-coeﬃcient.
-By following the above rules, the transfer function can be written directly, without need
-for algebraic manipulations. Admittedly, some practice is required to become facile with these
-rules; nonetheless, the eﬀort required to write exact expressions for complex circuits can be
-considerably reduced.
-16.4 n-EET Examples
-16.4.1 Two-Section L–C Filter
-As another example of the nEET, consider the two-section L–C ﬁlter of Fig. 16.29. Since this
-circuit has four reactive elements, we expect the transfer function G(s)= v2(s)/v1(s)t oh a v e
-four poles. We also expect the high-frequency asymptote to have a−80 dB/decade slope: at high
-frequency each inductor tends to an open circuit and each capacitor tends to a short circuit, with
-each element leading to reduction of the gain of the path between the input and output of the
-ﬁlter. Hence, we expect that this ﬁlter circuit contains no zeroes.
-+v1
-L1 L2
-R
-+
-v2C1 C2
-Fig. 16.29 Two-section L–C ﬁlter example
-The DC gain Gdc is found by setting all reactive elements to their dc states; the input is then
-directly connected to the output, and so Gdc is equal to one. Thus the transfer function is of the
-form:
-G(s)= 1
-1+ b1 s+ b2 s2+ b3 s3+ b4 s4 (16.74)
+通过互易关系 $R_{Di-j}R_{Dj} = R_{Dj-i}R_{Di}$，可用不止一种方式表示分母，与先前示例类似。
 
-16.4 n-EET Examples 655
-Fig. 16.30 Two-section L–C ﬁlter
-example: ﬁnding the denominator
-terms
-L1 L2
-RC1 C2
-Port
-a
-Port
-c
-Port
-d
-Port
-b
-The denominator polynomial is found when the input v1(s) is set to zero. The circuit can
-then be written as in Fig. 16.30. We now apply the procedure of Sect. 16.3.2 to this circuit,
-ﬁnding the driving-point impedances at the ports with the other ports set to their DC or HF
-states as required. The results are summarized in Table 16.1.
-Table 16.1 Derivation of Denominator Terms, Two-SectionL–C Filter Example
-Term
-States of Ports/ Reactive Elements
-ResultL1 L2 C1 C2
-Port A Port B Port C Port D
-sL1
-Ra
-Measurement DC /short DC /open DC /open Ra= R
-sL2
-Rb
-DC/short Measurement DC /open DC /open Rb= R
-sC1Rc DC/short DC /short Measurement DC /open Rc = 0
-sC2Rd DC/short DC /short DC /open Measurement Rd = 0
-s2 L1L2
-RaRb-a
-HF/open Measurement DC /open DC /open Rb-a=∞
-s2 L1
-Ra
-C1Rc-a HF/open DC /short Measurement DC /open Rc-a= R
-s2 L1
-Ra
-C2Rd-a HF/open DC /short DC /open Measurement Rd-a= R
-s2 L2
-Rb
-C1Rc-b DC/short HF /open Measurement DC /open Rc-b= 0
-s2 L2
-Rb
-C2Rd-b DC/short HF /open DC /open Measurement Rd-b= R
-s2C1RcC2Rd-c DC/short DC /short HF /short Measurement Rd-c= 0
-s3 L1
-Ra
-C1Rc-a
-L2
-Rb-ac
-HF/open Measurement HF /short DC /open Rb-ac= R
-s3 L1
-Ra
-C2Rd-a
-L2
-Rb-ad
-HF/open Measurement DC /open HF /short Rb-ad =∞
-s3 L1
-Ra
-C2Rd-a C1Rc-ad HF/open DC /short Measurement HF /short Rc-ad = 0
-s3 L2
-Rb
-C2Rd-b C1Rc-bd DC/short HF /open Measurement HF /short Rc-bd = 0
-s4 L1
-Ra
-C1Rc-a
-L2
-Rb-ac
-C2Rd-abc HF/open HF /open HF /short Measurement Rd-abc= R
+![源页 p.668](../assets/page-snapshots/chapter-16/page-668.png)
 
-656 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-Fig. 16.31 Finding Ra
-Ra
-R
-Port
-a
-Port
-c
-Port
-d
-Port
-b
-DC/short
-DC/open
-DC/open
-For the denominator term sL1/Ra, the coeﬃcient Ra is the resistance between the Port a
-terminals, with the reactive elements of the remaining ports set to their dc states. As illustrated
-in Fig. 16.31, inductor L2 at Port b becomes a short circuit, while capacitors C1 and C2 at Ports
-c and d become open circuits. It can be seen that Ra is equal to R. The remaining s1 terms of
-Table 16.1 are left to the reader to verify.
-Fig. 16.32 Finding Rb-a
-Rb-a
-R
-Port
-a
-Port
-c
-Port
-d
-Port
-b
-HF/open
-DC/open
-DC/open
-Figure 16.32 illustrates determination of Rb-a, as needed in the denominator term
-s2
-⎦L1
-Ra
-)⎦L2
-Rb-a
-)
-(16.75)
-The Ra term coincides with the result derived in the previous paragraph. The term Rb-a is the
-resistance between the Port b terminals, with the element L1 at Port a set to its high-frequency
-state (an open circuit). The remaining reactive elements C1 and C2 are set to their dc states
-(open circuits). It can be seen that Port b becomes an open circuit under these conditions, and
-hence Rb-a =∞. In consequence, the denominator s2 term of Eq. (16.75) is equal to zero. The
-remaining s2 terms of Table 16.1 are left to the reader to verify.
-Let us consider next the denominator term s3L1L2C1/Rx. One way to approach solu-
-tion for this term is to apply the result of the previous paragraph to express this term as
-s3(L1/Ra)(L2/Rb-a)(C1Rc-ab). However, since the result of the previous paragraph wasRb-a=∞,
-such an approach will lead to an indeterminate result withRc-ab=∞(try it!). Instead, we should
-base our approach on an s2 term that is nonzero. By examination of Table16.1, one can see that
-the term s2(L1/Ra)(C1Rc-a) is nonzero. Therefore, let us determine Rb-ac, as needed to express
-this denominator term as s3(L1/Ra)(C1Rc-a)(L2/Rb-ac). As illustrated in Fig. 16.33, the quantity
-Rb-ac is equal to the resistance between the Portb terminals when L1 and C1 are set to their high-
-frequency states, and C2 remains in its dc state. It can be seen that Rb-ac= R. The remaining s3
-t e r m so fT a b l e16.1 are also left to the reader to verify.
+图16.44 图16.41 阻尼 L-C 滤波示例：求输出阻抗分母项。独立源 $\hat{v}_g$ 和 $\hat{i}$ 设为零
 
-16.4 n-EET Examples 657
-Fig. 16.33 Finding Rb-ac
-Rb-ac
-R
-Port
-a
-Port
-c
-Port
-d
-Port
-b
-HF/open
-HF/short
-DC/open
-There is a single s4 term. To ﬁnd this term, we should begin with a nonzero s3 term. The
-result of the previous paragraph is such a term. Hence, let us express the s4 term in the form
-s4(L1/Ra)(C1Rc-a)(L2/Rb-ac)(C2Rd-abc). As illustrated in Fig. 16.34, the quantity Rd-abc is the re-
-sistance between the Port d terminals when the elements at Ports a, b, and c are set to their
-high-frequency states. By examination of Fig. 16.34, it can be seen that Rd-abc= R.
-Fig. 16.34 Finding Rd-abc
-Rd-abc
-R
-Port
-a
-Port
-c
-Port
-d
-Port
-b
-HF/open
-HF/short
-HF/open
-The results of Table 16.1 predict that the denominator polynomial is
-denominator= 1+ s
-⎦L1
-R + L2
-R + C1· 0+ C2· 0
-)
-+
-s2
-⎦L1
-R
-L2
-∞+ L1
-R C1R+ L1
-R C2R+ L2
-R C1· 0+ L2
-R C2R+ C1· 0 C2· 0
-)
-+
-s3
-⎦L1
-R C1R L2
-R + L1
-R
-L2
-∞C2R+ L1
-R C2RC1· 0+ L2
-R C2RC1· 0
-)
-+
-s4
-⎦L1
-R
-L2
-R C1RC2R
-)
-(16.76)
-Upon elimination of terms that evaluate to zero, the transfer function G(s) can then be written
-as:
-G(s)= 1
-1+ s
-⎦L1+ L2
-R
-)
-+ s2
-⎦
-L1 (C1+ C2)+ L2C2
-)
-+ s3
-⎦L1L2C1
-R
-)
-+ s4
-⎦
-L1L2C1C2
-) (16.77)
-Thus, the coeﬃcients in the transfer function of this somewhat complex fourth-order ﬁlter circuit
-are found through a sequence of simple circuit evaluations. With practice, one can perform these
-evaluations quickly using the schematic of Fig.16.30. Additionally, terms derived in other ways
-can be checked using this approach. The nEET approach is particularly advantageous when
-circuit contains multiple resistors and more complex interconnections.
-
-658 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-It should also be noted that, if we had not had the insight that G(s) contains no zeroes, we
-could have employed the procedure of Sect. 16.3.2 to compute the numerator polynomial. We
-would have found that the numerator terms of order s1 to s4 are zero.
-16.4.2 Bridge-T Filter Example
-As a third example, consider the Bridge-T ﬁlter circuit of Fig. 16.35. Conventional analysis of
-the transfer function G(s)= v2(s)/v1(s) for this circuit is somewhat onerous because of element
-C2. Let us derive this transfer function using the nEET.
-Since there are two reactive elements, we expectG(s) to contain two poles. Additionally, we
-expect the high-frequency asymptote of G(s) to be equal to one because capacitor C2 tends to
-zero impedance at high frequency, shorting the output to the input. ThereforeG(s) must contain
-two zeroes, so that its high-frequency magnitude asymptote has a slope of 0 dB/decade. Hence
-the transfer function is of the form
-G(s)= Gdc
-1+ a1 s+ a2 s2
-1+ b1 s+ b2 s2 (16.78)
-Analysis requires application of the procedure of Sect. 16.3.2 twice. First, null double injection
-is employed to ﬁnd the numerator polynomial under the conditions that the output v2 is nulled.
-A subscript N is appended to the resistance names, to distinguish these numerator terms from
-Fig. 16.35 Bridge-T ﬁlter example
-+v1
-R1
-R3
-+
-v2
-R2
-C1
-C2
-the similarly named denominator terms. Second the procedure of Sect. 16.3.2 is applied under
-the conditions that the input v1 is set to zero, to ﬁnd the denominator polynomial. A subscript
-D is appended to the names of the denominator resistance terms.
-First consider determination of the zeroes of G(s). The numerator polynomial can be ex-
-pressed in the form:
-numerator= 1+ s (C1RNa+ C2RNb )+ s2C1RNa-bC2RNb (16.79)
-Here, capacitor C1 is connected at Port a and capacitor C2 is connected at Port b.
-Figure 16.36 illustrates the determination of RNa . Capacitor C2 is set to its dc state (open
-circuit at Port b). In the presence of the input sourcev1, a current source itest is applied at Port a,
-and the two sources are adjusted to null the output v2. One follows this null condition towards
-
-16.4 n-EET Examples 659
-Fig. 16.36 Determination of
-numerator RNa
-+v1
-R1
-R3
-+
-v2 null→ 0
-R2
-Port
-b
-DC/open
-Port
-a
-+
-vtestitest
-0
-0
-the injection point to ﬁnd the Port a voltage vtest . With the output voltage nulled, the current
-through resistor R3 is also nulled. Since there is no current through the open-circuited Port b,
-the current through resistor R2 must also be nulled. By Ohm’s law, the voltage acrossR2 is zero,
-and hence the voltage vtest is zero. Therefore, the numerator RNa is
-RNa = vtest
-itest
-⏐⏐⏐⏐
-⏐
-v2→
-null
-0
-= 0 (16.80)
-The quantity RNb is found in a similar manner. In the presence of the input v1, current injection
-is applied at the C2 port (Port b) and adjusted to null the output v2. Capacitor C1 is set to its dc
-state, and hence Port a becomes an open circuit. This measurement is illustrated in Fig. 16.37.
-Since the current through resistorR3 is nulled to zero, the currentitest must ﬂow through resistors
-R2 and R1. Therefore the voltage vtest is equal to itest (R1+ R2), and the numerator RNb is given
-by:
-RNb = vtest
-itest
-⏐⏐
-⏐
-⏐⏐
-v2→
-null
-0
-= R1+ R2 (16.81)
-Fig. 16.37 Determination of
-numerator RNb
-+v1
-R1
-R3
-+
-R2
-Port
-bDC/open
-Port
-a
-0
-test +
-itest
-itest
-v2 null→ 0
-To ﬁnd RNa-b, the current itest is injected at Port a, and capacitor C2 is set to its high-
-frequency state (Port b is shorted). The independent sources v1 and itest are adjusted to null
-
-660 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-the output v2. This experiment is illustrated in Fig.16.38. For this particular circuit, the shorting
-of Port b causes the output v2 to be equal to the input v1, and hence the output null condition
-cannot be achieved unless the input voltage source v1 is zero. Under this condition, the current
-itest ﬂows through the parallel combination of R1 and R2, and hence vtest is equal to itest R1∥R2.
-The numerator RNa-b is given by
-RNa-b= vtest
-itest
-⏐⏐⏐
-⏐⏐
-v2→
-null
-0
-= R1
-
-R
-2 (16.82)
-Upon insertion of Eqs. ( 16.80)–(16.82) into Eq. ( 16.79), one ﬁnds that the numerator polyno-
-mial is given by
-numerator= 1+ sC2 (R1+ R2)+ s2C1C2R1R2 (16.83)
-Next consider determination of the poles of G(s). The denominator polynomial can be ex-
-pressed in the form:
-denominator= 1+ s (C1RDa+ C2RDb)+ s2C1RDa-bC2RDb (16.84)
-The driving-point resistances RDa, RDb, and RDa-b are found with the input source v1 set to zero.
-Figure 16.39 illustrates the determination of RDa. Capacitor C2 is set to its dc state (open
-circuit at Port b), and the input source v1 is set to zero (short circuit). The resistance between
-the Port a terminals is found, with the result
-RDa= R1
- (R2+ R3) (16.85)
-Fig. 16.38 Determination of
-numerator RNa-b
-+v1
-R1
-R3 null
-+
-v2 ® 0
-R2
-Port
-b
-HF/short
-Port
-a
-+
-vtestitest
-0
-itest
-Fig. 16.39 Determination of
-denominator RDa
-R1
-R3
-R2
-Port
-b
-DC/open
-Port
-a
-RDa
-
-16.5 Frequency Inversion 661
-The quantity RDb is found in a similar manner: it is the resistance between the Port (b) terminals
-with capacitor C1 set to its dc state (open circuit at Port a) and with the input source v1 set to
-zero. The result is
-RDb= R3
-
- (R
-1+ R2) (16.86)
-Figure 16.40 illustrates the determination of RDa-b. Capacitor C2 is set to its high-frequency
-state (short circuit at Port b), and the input source v1 is set to zero (short circuit). The resistance
-between the Port a terminals is found, with the result
-RDa-b= R1
-R2 (16.87)
-Fig. 16.40 Determination of
-denominator RDa-b
-R1
-R3
-R2
-Port
-b
-HF/short
-Port
-a
-RDa-b
-Hence, the denominator polynomial is
-denominator= 1+ s
-[
-C1
-⎦
-R1
- (R2+ R3)
-)
-+ C2
-⎦
-R3
- (R1+ R2)
-)]
-+
-s2 [
-C1C2
-⎦
-R1
-
- (R
-2+ R3)
-)⎦
-R1
-
-R
-2
-)]
-(16.88)
-Finally, the dc gain Gdc is found by setting all reactive elements to their dc states, and then
-solving for the transfer function. The result is found using the voltage divider formula to obtain
-Gdc= R3
-R1+ R2+ R3
-(16.89)
-The complete transfer function is obtained by substitution of Eqs. (16.83), (16.88), and (16.89)
-into Eq. (16.78).
-16.5 Frequency Inversion
-Sometimes, the dc gain of a transfer function or other function of interest is zero or inﬁnite;
-this occurs when there are poles or zeroes at the origin of the complex plane. In the power
-electronics ﬁeld, this is nearly always the case for impedances because we do not want the dc
-or low-frequency ac current to ﬂow through a lossy resistive element. This also often occurs in
-compensator transfer functions, where PI or PID compensators are employed.
-
-662 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-16.5.1 Example: Damped Input Filter
-For example, consider the output impedanceZ(s) of the damped input ﬁlter circuit illustrated in
-Fig. 16.41. To measure this output impedance, we would set the independent source ˆvg to zero,
-then inject a current ˆi and measure the induced voltage ˆv as shown in Fig. 16.42. The output
-impedance is then given by
-Z(s)= ˆv
-ˆi
-⏐⏐⏐
-⏐⏐⏐
-ˆvg=0
-(16.90)
-So we can view Z(s) as the transfer function from ˆi to ˆv. If we attempt to use the n-Extra
-Element Theorem in its basic form to express Z(s), we ﬁnd that the dc value of Z(s) is zero, so
-that
-Z(s)= 0· numeratorpolynomial
-denominatorpolynomial (16.91)
-Because the reference gain is zero, this approach does not work.
-Figure 16.43 illustrates graphical construction of the output impedance asymptotes, using
-the approach of Sect. 8.3, for some assumed element values with L1 ≫ L2. It appears that Z(s)
-could be expressed with reference to the midband asymptote R, using an inverted pole at R/L2,
-plus a zero at R/L1 and complex poles atω0= 1/√L1C:
-Z(s)≈R
-⎦
-1+ sL1
-R
-)
-⎦
-1+ R
-sL2
-) ⎛⎜⎜⎜⎜⎜⎝1+ s
-Qω0
-+
-⎦s
-ω0
-)2⎞⎟⎟⎟⎟⎟⎠
-(16.92)
-+
-L2
-Cvg
-L1R
-Z(s)
-Fig. 16.41 A damped LC ﬁlter
-Fig. 16.42 Measurement of the output impedance Z(s)o ft h eL Cﬁ l t e ro fF i g .16.41
-
-16.5 Frequency Inversion 663
-Fig. 16.43 Graphical construction of typical output impedance asymptotes of the LC ﬁlter of Fig. 16.41
-This suggests that, to ﬁnd the exact expression for Z(s), we could employ frequency inversion
-to express Z(s) with respect to the reference gain R.
-This can be achieved with a generalization of thenEET to handle frequency inversion. First,
-we must extend the notion of the “DC state” and “HF state” of a reactive element, to the follow-
-ing:
-Reference state: the reference state of a reactive element is the state (short circuit or open
-circuit) that causes the transfer function to be equal to the reference gain.
-Inverse state: the inverse state of a reactive element is the opposite (open circuit or short
-circuit) of its reference state.
-For the example of Fig.16.42, Z(s) is equal to R when L1 is short-circuited, L2 is open-circuited,
-and C is open-circuited. Hence we deﬁne these as the reference states of these elements, as
-summarized in Table 16.2.
-Table 16.2 Reference and Inverse States of Reactive Elements, Damped L–C Filter Example
-Element Reference State Inverse State
-L1 Short Open
-L2 Open Short
-C Open Short
-The reference states of elements L1 and C coincide with their DC states, while the reference
-state of L2 coincides with its HF state. We therefore treat L2 using frequency-inverted terms:
-where we previously employed a term of the form
-sL2
-Ra
-(16.93)
-we now use the inverted form Ra
-sL2
-(16.94)
-
-664 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-If the reference state of capacitor C had been its high-frequency state, then we would have
-replaced terms of the form
-sCRa (16.95)
-with the inverted form 1
-sCRa
-(16.96)
-We now generalize the procedure of Sect. 16.3.2, replacing DC and HF port states with ref-
-erence and inverse states. The notation RN1−2, RD3−12, etc., now has the meaning that additional
-subscripts after the hyphen denote ports that are set to their inverse states during measurement,
-while other ports are set to their reference states. Hence Z(s) will be expressed in the form
-Z(s)= R numerator
-denominator (16.97)
-The denominator may contain products having one, two, or all three reactive elements. For the
-output impedance example, we obtain:
-denominator= 1+
-⎦sL1
-RDa
-+ sCRDb+ RDc
-sL2
-)
-+
-⎦
-sCRDb
-sL1
-RDa−b
-+ sCRDb
-RDc−b
-sL2
-+ RDc
-sL2
-sL1
-RDa−c
-)
-+
-⎦
-sCRDb
-sL1
-RDa−b
-RDc−ab
-sL2
-)
-(16.98)
-Through the reciprocity relationship RDi−jRDj = RDj−iRDi, it is possible to express the denomi-
-nator in more than one way, as in earlier examples.
-Fig. 16.44 Damped L–C ﬁlter exam-
-ple of Fig. 16.41: ﬁnding the output
-impedance denominator terms. The inde-
-pendent sources ˆv
-g and ˆi are set to zero
-L2
-C
-L1
-R Port
-a
-Port
-b
-Port
-c
-We now ﬁnd the coeﬃcients RDa through RDc−ab in the usual way, except that “DC state” is
-replaced with “reference state,” and “HF state” is replaced with “inverse state.” The denominator
-coeﬃcients are found with the independent sources set to zero: ˆvg = 0 and ˆi= 0, as illustrated
-in Fig. 16.44.
-```
+现以通常方式求系数 $R_{Da}$ 到 $R_{Dc-ab}$，只是"直流状态"用"参考状态"替代，"高频状态"用"反演状态"替代。分母系数在独立源设为零（$\hat{v}_g = 0$ 和 $\hat{i} = 0$）时求得，如图16.44所示。

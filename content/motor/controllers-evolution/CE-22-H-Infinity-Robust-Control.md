@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-22: H∞鲁棒控制——当你知道模型是错的
 
 **副标题：H-Infinity Robust Control: When You Know Your Model Is Wrong**
-**难度：** 
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-09（频域分析）、CE-14（LQR与最优控制）
+- **难度：** 
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-09（频域分析）、CE-14（LQR与最优控制）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 LQR给你告诉它的对象的最优控制器。H∞给你能保证对你实际拥有的对象有效的最好控制器——而那永远不完全是模型中的那个。如果LQR是精密工程，H∞是带误差余量的工程。在控制中，余量是纸面设计和现场可用设计之间的区别。本文从LQR的根本局限出发，详解H∞的最坏情况设计思维、不确定性描述（加性/乘性/互质因子）、混合灵敏度问题与加权函数设计、DGKF双Riccati解、控制器降阶、Youla参数化视角下的H∞本质，以及何时用/何时不用H∞。
 
-**认知挂钩：** H∞不是另一个控制器——它是同一个凸问题（在Youla集上优化），只是换了范数：平均风险（H₂）vs 最坏情况（H∞）。
+- **认知挂钩：** H∞不是另一个控制器——它是同一个凸问题（在Youla集上优化），只是换了范数：平均风险（H₂）vs 最坏情况（H∞）。
 
 ---
 
@@ -88,7 +88,7 @@ $$G(s) = G_0(s) + \Delta(s) \cdot W_a(s)$$
 
 其中 $\Delta(s)$ 是任何满足 $\lVert\Delta\lVert_\infty \leq 1$ 的稳定传递函数，$W_a(s)$ 是频率权重，告诉你每个频率处不确定性可以有多大。$W_a(s)$ 在你非常不确定的频率处大；在你信任模型的频率处小。
 
-**何时使用：** 不确定性不随对象增益缩放。额外的振动模态、传感器谐振、你没建模的柔性体动态。
+- **何时使用：** 不确定性不随对象增益缩放。额外的振动模态、传感器谐振、你没建模的柔性体动态。
 
 ### 4.2 乘性不确定性
 
@@ -98,7 +98,7 @@ $$G(s) = G_0(s) \big(1 + \Delta(s) \cdot W_m(s)\big)$$
 
 现在10%的不确定性意味着在那个频率处对象所做的任何事的10%。这建模参数变化——电阻变化、增益漂移、极点/零点迁移。
 
-**何时使用：** 参数不确定性。对象结构是对的；数字是错的。
+- **何时使用：** 参数不确定性。对象结构是对的；数字是错的。
 
 ### 4.3 互质因子不确定性
 
@@ -108,7 +108,7 @@ $$G = (M + \Delta_M)^{-1}(N + \Delta_N)$$
 
 这捕获了独立移动*极点和零点*的不确定性。这是间隙度量（Gap Metric）用来衡量对象间距离的框架，也是 `ncfsyn`（归一化互质因子H∞综合）求解的。
 
-**何时使用：** 你不知道模型结构。未建模动态、忽略的耦合、你甚至不知道存在的柔性模态。
+- **何时使用：** 你不知道模型结构。未建模动态、忽略的耦合、你甚至不知道存在的柔性模态。
 
 ### 4.4 不确定性权重：编码你的知识
 
@@ -173,7 +173,7 @@ H∞设计的艺术是选择 $W_1$、$W_2$、$W_3$。以下如何将工程规格
 
 ### 6.1 性能权重 $W_1(s)$
 
-**指标：** "恒定参考的稳态跟踪误差必须小于0.1%。100 rad/s以上，我们不关心跟踪。"
+- **指标：** "恒定参考的稳态跟踪误差必须小于0.1%。100 rad/s以上，我们不关心跟踪。"
 
 翻译：在直流（$s = 0$），$\lvert S(0) \rvert < 0.001$，所以 $\lvert W_1(0) \rvert > 1000$。权重必须在低频大、高频小——积分器类形状：
 
@@ -188,7 +188,7 @@ $$W_1(s) = \frac{s/M_s + \omega_B}{s + \omega_B \cdot A}$$
 
 ### 6.2 控制权重 $W_2(s)$
 
-**指标：** "执行器在10 N·m处饱和。500 rad/s以上的控制努力是噪声，不应被放大。"
+- **指标：** "执行器在10 N·m处饱和。500 rad/s以上的控制努力是噪声，不应被放大。"
 
 $$W_2(s) = \frac{s + \omega_c / M_u}{\varepsilon s + \omega_c}$$
 
@@ -196,7 +196,7 @@ $$W_2(s) = \frac{s + \omega_c / M_u}{\varepsilon s + \omega_c}$$
 
 ### 6.3 鲁棒性权重 $W_3(s)$
 
-**指标：** "未建模动态在300 rad/s以上变得显著。补灵敏度必须在那之前滚降。"
+- **指标：** "未建模动态在300 rad/s以上变得显著。补灵敏度必须在那之前滚降。"
 
 如果乘性不确定性像 $s$ 增长（未建模高频动态的典型），设：
 
@@ -437,27 +437,27 @@ $$\text{找到稳定 } Q(s) \text{ 最小化 } \lVertT_0 + T_1 Q T_2\lVert_\inft
 
 ## 13. 延伸阅读
 
-**从这里开始——最直观的：**
+- **从这里开始——最直观的：**
 - Skogestad, S. & Postlethwaite, I. (2005). *Multivariable Feedback Control: Analysis and Design*, 2nd ed. Wiley. 第2、7–9章。学习H∞的金标准。第2章关于频域指标，第7–8章关于 $S$/$T$ 塑造和权重，第9章关于完整H∞解。为工程师而写，非数学家。
 
-**DGKF解详解：**
+- **DGKF解详解：**
 - Doyle, J.C., Glover, K., Khargonekar, P.P., & Francis, B.A. (1989). "State-space solutions to standard H₂ and H∞ control problems." *IEEE Trans. Automatic Control*, 34(8), 831–847. 使H∞可计算的论文。密集但核心——如果你想理解 `hinfsyn` 实际做了什么。
 
-**历史链条：**
+- **历史链条：**
 - Zames, G. (1981). "Feedback and optimal sensitivity: Model reference transformations, multiplicative seminorms, and approximate inverses." *IEEE Trans. Automatic Control*, 26(2), 301–320. 将Youla与H∞联系并启动鲁棒控制的论文。引入H∞范数作为鲁棒性的正确度量。
 - Youla, D.C., Jabr, H.A., Bongiorno, J.J. (1976). "Modern Wiener-Hopf design of optimal controllers — Part II." *IEEE Trans. Automatic Control*, 21(3), 319–338. Youla参数化——使H∞凸的结构结果。
 
-**综合参考：**
+- **综合参考：**
 - Zhou, K., Doyle, J.C., & Glover, K. (1996). *Robust and Optimal Control*. Prentice-Hall. 第14–18章。一切：小增益定理、不确定性建模、混合灵敏度、DGKF、μ分析、模型降阶。权威技术参考。
 
-**模型降阶：**
+- **模型降阶：**
 - Moore, B.C. (1981). "Principal component analysis in linear systems: Controllability, observability, and model reduction." *IEEE Trans. Automatic Control*, 26(1), 17–32. 平衡截断——降阶高阶H∞控制器的标准方法。
 - Antoulas, A.C. (2005). *Approximation of Large-Scale Dynamical Systems*. SIAM. 模型降阶的现代处理，包括平衡截断、Hankel范数近似和Krylov方法。
 
-**免费经典：**
+- **免费经典：**
 - Doyle, J.C., Francis, B.A., & Tannenbaum, A.R. (1992). *Feedback Control Theory*. Macmillan. 可免费获取PDF。第8章关于H∞，第9章关于设计约束。为本科生撰写——H∞为什么存在和解决什么问题的最清晰阐述。
 
-**MATLAB实现研究：**
+- **MATLAB实现研究：**
 - `hinfsyn` —— 基于DGKF的标准H∞求解器
 - `mixsyn` —— 混合灵敏度H∞设计（从权重构建 $P(s)$ 并调用 `hinfsyn` 的封装）
 - `ncfsyn` —— 使用归一化互质因子的回路成形H∞设计（通常更直观：塑造开环，然后鲁棒稳定化）

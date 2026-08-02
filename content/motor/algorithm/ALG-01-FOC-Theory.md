@@ -18,19 +18,19 @@ navGroupOrder: 30
 
 # ALG-01 FOC理论基础
 
-**模块编号：** ALG-01
-**模块名称：** FOC理论基础（Field-Oriented Control Theory）
-**文档版本：** v2.0
-**适用对象：** 电机控制工程师、嵌入式开发者
-**前置知识：** 线性代数、电路原理、自动控制理论
+- **模块编号：** ALG-01
+- **模块名称：** FOC理论基础（Field-Oriented Control Theory）
+- **文档版本：** v2.0
+- **适用对象：** 电机控制工程师、嵌入式开发者
+- **前置知识：** 线性代数、电路原理、自动控制理论
 
 ---
 
 ## 1.  核心摘要  
 
-**一句话：** FOC通过Clarke变换和Park变换将三相交流电机的控制问题转化为类似直流电机的控制问题，实现磁场与转矩的解耦控制。
+- **一句话：** FOC通过Clarke变换和Park变换将三相交流电机的控制问题转化为类似直流电机的控制问题，实现磁场与转矩的解耦控制。
 
-**认知挂钩：** 就像直流电机中励磁电流和电枢电流天然解耦一样，FOC通过坐标变换让交流电机也获得这种"直流级"的控制简洁性——d轴管磁场，q轴管转矩，各司其职。
+- **认知挂钩：** 就像直流电机中励磁电流和电枢电流天然解耦一样，FOC通过坐标变换让交流电机也获得这种"直流级"的控制简洁性——d轴管磁场，q轴管转矩，各司其职。
 
 ### 核心流程
 
@@ -62,7 +62,7 @@ FOC的核心洞察在于：三相交流电机的定子绕组在空间上互差12
 
 变换后，**d轴 = 磁链轴**（对齐转子永磁体N极），**q轴 = 转矩轴**（超前d轴90°电角度）。$i_d$ 控制磁场强度，$i_q$ 控制输出转矩——与直流电机如出一辙。
 
-**相关模块：** [ALG-02 电流采样时序](ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI电流调节器](ALG-03-PI-Current-Regulator.md) | [ALG-04 死区补偿](ALG-04-Deadtime-Compensation.md) | [ALG-05 有感FOC](ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](ALG-07-Sensorless-Observers.md)
+- **相关模块：** [ALG-02 电流采样时序](ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI电流调节器](ALG-03-PI-Current-Regulator.md) | [ALG-04 死区补偿](ALG-04-Deadtime-Compensation.md) | [ALG-05 有感FOC](ALG-05-Sensored-FOC.md) | [ALG-07 无感观测器](ALG-07-Sensorless-Observers.md)
 
 ---
 
@@ -85,7 +85,7 @@ $$
 - $\omega_e$：电角速度 ($rad/s$)
 - $t$：时间 ($s$)
 
-**三相电流的特点：**
+- **三相电流的特点：**
 1. 三相电流之和为零：$i_a + i_b + i_c = 0$（平衡系统）
 2. 在空间产生旋转磁场
 3. 难以直接控制转矩和磁通
@@ -98,12 +98,12 @@ $$
 
 #### 2.2.2 几何推导
 
-**坐标系定义：**
+- **坐标系定义：**
 - A相绕组轴线与α轴重合
 - B相绕组轴线超前α轴120°
 - C相绕组轴线滞后A相120°
 
-**矢量分解原理：**
+- **矢量分解原理：**
 
 将三相电流矢量投影到αβ轴：
 
@@ -116,7 +116,7 @@ $$
 - $\vec{b}$：B相单位矢量，方向角120°
 - $\vec{c}$：C相单位矢量，方向角-120°
 
-**投影到α轴：**
+- **投影到α轴：**
 
 $$
 \begin{aligned}
@@ -132,7 +132,7 @@ $$
 i_\alpha = i_a - \frac{1}{2}(-i_a) = \frac{3}{2}i_a
 $$
 
-**投影到β轴：**
+- **投影到β轴：**
 
 $$
 \begin{aligned}
@@ -146,12 +146,12 @@ $$
 
 为了保持变换前后功率不变，需要引入系数 $k$：
 
-**变换前功率：**
+- **变换前功率：**
 $$
 P_{abc} = u_a i_a + u_b i_b + u_c i_c
 $$
 
-**变换后功率：**
+- **变换后功率：**
 $$
 P_{\alpha\beta} = u_\alpha i_\alpha + u_\beta i_\beta
 $$
@@ -166,12 +166,12 @@ $$
 
 #### 2.3.2 几何推导
 
-**坐标系定义：**
+- **坐标系定义：**
 - αβ坐标系：静止坐标系，固定在定子上
 - dq坐标系：旋转坐标系，以同步角速度 $\omega_e$ 旋转
 - $\theta$：转子电角度，d轴与α轴的夹角
 
-**旋转变换原理：**
+- **旋转变换原理：**
 
 矢量 $\vec{i}$ 在αβ坐标系中表示为 $(i_\alpha, i_\beta)$，在dq坐标系中表示为 $(i_d, i_q)$。
 
@@ -181,7 +181,7 @@ $$
 \begin{bmatrix} i_d \\ i_q \end{bmatrix} = \begin{bmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix}
 $$
 
-**展开：**
+- **展开：**
 
 $$
 \begin{cases}
@@ -192,21 +192,21 @@ $$
 
 #### 2.3.3 物理意义
 
-**d轴（直轴）：**
+- **d轴（直轴）：**
 - 方向：与转子磁链方向一致
 - 作用：控制励磁（对于PMSM，控制弱磁）
 - 电流：$i_d$ 通常为0（表贴式PMSM）或负值（弱磁控制）
 
-**q轴（交轴）：**
+- **q轴（交轴）：**
 - 方向：与转子磁链垂直
 - 作用：控制转矩
 - 电流：$i_q$ 与转矩成正比
 
-**类比直流电机：**
+- **类比直流电机：**
 - $i_d$ → 励磁电流 $I_f$
 - $i_q$ → 电枢电流 $I_a$
 
-**关键理解：**
+- **关键理解：**
 - **Clarke = 降维**：3条120°轴 → 2条90°轴，信息不丢失（$i_a+i_b+i_c=0$约束）
 - **Park = 旋转**：αβ平面整体旋转 $\theta_e$，使正弦量变成直流量，便于PI控制
 - **d轴 = 磁链轴**，**q轴 = 转矩轴**：d轴对齐转子永磁体N极，q轴超前d轴90°电角度
@@ -216,13 +216,13 @@ $$
 
 #### 2.4.1 逆Park变换（旋转→静止）
 
-**变换矩阵：**
+- **变换矩阵：**
 
 $$
 \begin{bmatrix} u_\alpha \\ u_\beta \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} u_d \\ u_q \end{bmatrix}
 $$
 
-**展开：**
+- **展开：**
 
 $$
 \begin{cases}
@@ -233,13 +233,13 @@ $$
 
 #### 2.4.2 逆Clarke变换（2相→3相）
 
-**变换矩阵：**
+- **变换矩阵：**
 
 $$
 \begin{bmatrix} u_a \\ u_b \\ u_c \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ -\frac{1}{2} & \frac{\sqrt{3}}{2} \\ -\frac{1}{2} & -\frac{\sqrt{3}}{2} \end{bmatrix} \begin{bmatrix} u_\alpha \\ u_\beta \end{bmatrix}
 $$
 
-**展开：**
+- **展开：**
 
 $$
 \begin{cases}
@@ -267,7 +267,7 @@ $$
 
 #### 2.6.1 洛伦兹力原理
 
-**载流导体在磁场中受力：**
+- **载流导体在磁场中受力：**
 
 $$
 \vec{F} = I \vec{l} \times \vec{B}
@@ -278,7 +278,7 @@ $$
 - $\vec{l}$：导体长度矢量 ($m$)
 - $\vec{B}$：磁感应强度 ($T$)
 
-**转矩 = 力 × 力臂：**
+- **转矩 = 力 × 力臂：**
 
 $$
 T = F \cdot r = B \cdot I \cdot l \cdot r
@@ -302,7 +302,7 @@ $$
 
 #### 3.1.1 dq坐标系下的电压方程
 
-**表贴式PMSM（SPMSM）：** $L_d = L_q = L_s$
+- **表贴式PMSM（SPMSM）：** $L_d = L_q = L_s$
 
 $$
 \begin{cases}
@@ -311,7 +311,7 @@ u_q = R_s i_q + L_s \frac{di_q}{dt} + \omega_e (L_s i_d + \psi_f)
 \end{cases}
 $$
 
-**内置式PMSM（IPMSM）：** $L_d \neq L_q$
+- **内置式PMSM（IPMSM）：** $L_d \neq L_q$
 
 $$
 \begin{cases}
@@ -363,7 +363,7 @@ $$
 
 #### 3.1.4 转矩方程推导（能量法）
 
-**电磁功率：**
+- **电磁功率：**
 
 $$
 P_e = \frac{3}{2} (u_d i_d + u_q i_q)
@@ -375,7 +375,7 @@ $$
 - $i_d, i_q$：d轴、q轴电流 ($A$)
 - $\frac{3}{2}$：等幅值变换下的功率系数
 
-**机械功率：**
+- **机械功率：**
 
 $$
 P_m = T_e \omega_m = T_e \frac{\omega_e}{p}
@@ -388,7 +388,7 @@ $$
 - $\omega_e$：电角速度 ($rad/s$)
 - $p$：极对数
 
-**功率平衡：** $P_e = P_m$
+- **功率平衡：** $P_e = P_m$
 
 $$
 T_e = \frac{3}{2} p \frac{u_d i_d + u_q i_q}{\omega_e}
@@ -402,7 +402,7 @@ $$
 
 #### 3.1.5 转矩分量分析
 
-**永磁转矩：**
+- **永磁转矩：**
 
 $$
 T_{pm} = \frac{3}{2} p \psi_f i_q
@@ -411,7 +411,7 @@ $$
 - 由永磁体磁场与q轴电流相互作用产生
 - 与 $i_q$ 成正比
 
-**磁阻转矩：**
+- **磁阻转矩：**
 
 $$
 T_{rel} = \frac{3}{2} p (L_d - L_q) i_d i_q
@@ -425,7 +425,7 @@ $$
 
 #### 3.2.1 适用对象
 
-**表贴式PMSM（SPMSM）：** $L_d = L_q$，磁阻转矩为0
+- **表贴式PMSM（SPMSM）：** $L_d = L_q$，磁阻转矩为0
 
 #### 3.2.2 控制原理
 
@@ -435,7 +435,7 @@ $$
 T_e = \frac{3}{2} p \psi_f i_q
 $$
 
-**特点：**
+- **特点：**
 1. 转矩与 $i_q$ 成正比，线性关系
 2. 控制简单，易于实现
 3. 单位电流转矩最大（对于SPMSM即为MTPA）
@@ -449,7 +449,7 @@ u_q = R_s i_q + L_s \frac{di_q}{dt} + \omega_e \psi_f
 \end{cases}
 $$
 
-**分析：**
+- **分析：**
 - $u_d$：解耦项，补偿旋转电动势
 - $u_q$：包含电阻压降、电感压降、反电动势
 
@@ -461,13 +461,13 @@ $$
 
 #### 3.3.2 数学推导
 
-**构造拉格朗日函数：**
+- **构造拉格朗日函数：**
 
 $$
 \mathcal{L} = T_e + \lambda (I_s^2 - i_d^2 - i_q^2)
 $$
 
-**求极值：**
+- **求极值：**
 
 $$
 \begin{cases}
@@ -476,7 +476,7 @@ $$
 \end{cases}
 $$
 
-**求解得到：**
+- **求解得到：**
 
 $$
 i_d = \frac{\psi_f}{2(L_q - L_d)} - \sqrt{\frac{\psi_f^2}{4(L_q - L_d)^2} + i_q^2}
@@ -484,7 +484,7 @@ $$
 
 #### 3.3.3 工程实现
 
-**查表法：** 离线计算MTPA曲线，存储为查找表
+- **查表法：** 离线计算MTPA曲线，存储为查找表
 
 $$
 \begin{cases}
@@ -506,19 +506,19 @@ u_q = R_s i_q + L_q \frac{di_q}{dt} + \omega_e (L_d i_d + \psi_f)
 \end{cases}
 $$
 
-**耦合项：**
+- **耦合项：**
 1. $-\omega_e L_q i_q$：q轴电流对d轴的影响
 2. $\omega_e L_d i_d$：d轴电流对q轴的影响
 3. $\omega_e \psi_f$：反电动势
 
-**耦合的影响：**
+- **耦合的影响：**
 1. **动态响应变差：** d轴、q轴相互影响
 2. **PI参数难以整定：** 需要考虑耦合效应
 3. **高速性能下降：** 耦合项与转速成正比
 
 #### 3.4.2 前馈解耦控制
 
-**控制律设计：**
+- **控制律设计：**
 
 $$
 \begin{cases}
@@ -531,7 +531,7 @@ $$
 - $u_d^{PI}, u_q^{PI}$：PI控制器输出
 - $u_d^{dec}, u_q^{dec}$：前馈解耦项
 
-**解耦项设计：**
+- **解耦项设计：**
 
 $$
 \begin{cases}
@@ -551,7 +551,7 @@ u_q^{PI} = R_s i_q + L_q \frac{di_q}{dt}
 \end{cases}
 $$
 
-**特点：**
+- **特点：**
 1. d轴、q轴完全解耦
 2. 可独立设计PI控制器
 3. 动态性能大幅提升
@@ -566,17 +566,17 @@ $$
 G(s) = \frac{i(s)}{u(s)} = \frac{1}{R_s + L_s s} = \frac{1/R_s}{1 + \frac{L_s}{R_s} s}
 $$
 
-**时间常数：** $\tau = \frac{L_s}{R_s}$
+- **时间常数：** $\tau = \frac{L_s}{R_s}$
 
 #### 3.5.2 PI控制器设计
 
-**PI传递函数：**
+- **PI传递函数：**
 
 $$
 G_{PI}(s) = K_p + \frac{K_i}{s} = K_p \frac{s + K_i/K_p}{s}
 $$
 
-**闭环传递函数：**
+- **闭环传递函数：**
 
 $$
 G_{cl}(s) = \frac{G_{PI}(s) G(s)}{1 + G_{PI}(s) G(s)}
@@ -594,26 +594,26 @@ $$
 
 #### 3.5.3 带宽设计
 
-**闭环带宽：**
+- **闭环带宽：**
 
 $$
 \omega_c = \frac{1}{\tau_c}
 $$
 
-**设计原则：**
+- **设计原则：**
 1. 电流环带宽：$\omega_c = (5 \sim 10) \omega_{e,max}$
 2. 速度环带宽：$\omega_s = \frac{1}{5} \omega_c$
 3. 位置环带宽：$\omega_p = \frac{1}{5} \omega_s$
 
 ### 3.6 Clarke变换最终变换矩阵
 
-**等幅值变换（常用）：**
+- **等幅值变换（常用）：**
 
 $$
 \begin{bmatrix} i_\alpha \\ i_\beta \end{bmatrix} = \frac{2}{3} \begin{bmatrix} 1 & -\frac{1}{2} & -\frac{1}{2} \\ 0 & \frac{\sqrt{3}}{2} & -\frac{\sqrt{3}}{2} \end{bmatrix} \begin{bmatrix} i_a \\ i_b \\ i_c \end{bmatrix}
 $$
 
-**简化形式（利用三相平衡条件）：**
+- **简化形式（利用三相平衡条件）：**
 
 $$
 \begin{cases}
@@ -628,7 +628,7 @@ $$
 
 ### 4.1 FOC算法主流程
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
 ```c
 void foc_calc(foc_para_t *foc)
@@ -641,7 +641,7 @@ void foc_calc(foc_para_t *foc)
 }
 ```
 
-**执行流程：**
+- **执行流程：**
 
 ```mermaid
 flowchart TD
@@ -655,7 +655,7 @@ flowchart TD
 
 ### 4.2 Clarke变换实现
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
 ```c
 void clarke_transform(foc_para_t *foc)
@@ -665,14 +665,14 @@ void clarke_transform(foc_para_t *foc)
 }
 ```
 
-**代码分析：**
+- **代码分析：**
 
 1. **简化计算：** 利用三相平衡条件 $i_a + i_b + i_c = 0$，只需采样两相电流
 2. **系数定义：** `ONE_BY_SQRT3 = 0.57735026919f`，即 $\frac{1}{\sqrt{3}}$
 3. **内存访问：** 结构体指针访问，效率高
 4. **计算量：** 1次减法 + 1次乘法
 
-**对比MC_LIB实现：** [MCFOC_PMSM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c)
+- **对比MC_LIB实现：** [MCFOC_PMSM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c)
 
 ```c
 void MCFOC_Clark_F(ST_PMSM_ELEC_F* pPMSMe)
@@ -686,7 +686,7 @@ void MCFOC_Clark_F(ST_PMSM_ELEC_F* pPMSMe)
 
 ### 4.3 Park变换实现
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
 ```c
 void park_transform(foc_para_t *foc)
@@ -696,13 +696,13 @@ void park_transform(foc_para_t *foc)
 }
 ```
 
-**代码分析：**
+- **代码分析：**
 
 1. **三角函数预计算：** `sin_val` 和 `cos_val` 在 `sin_cos_val()` 函数中预先计算
 2. **计算量：** 4次乘法 + 2次加法/减法
 3. **精度问题：** 浮点数计算，需注意数值稳定性
 
-**对比MC_LIB实现：** [MCFOC_PMSM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c)
+- **对比MC_LIB实现：** [MCFOC_PMSM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_PMSM_F.c)
 
 ```c
 void MCFOC_Park_F(ST_PMSM_ELEC_F* pPMSMe)
@@ -719,19 +719,19 @@ void MCFOC_Park_F(ST_PMSM_ELEC_F* pPMSMe)
 }
 ```
 
-**MC_LIB增加了角度补偿机制：**
+- **MC_LIB增加了角度补偿机制：**
 - `TG_Triangle_Comp`：角度补偿项
 - `TG_Triangle_Est`：估算角度
 - 实际角度 = 估算角度 + 补偿角度
 
-**角度补偿的作用：**
+- **角度补偿的作用：**
 - 补偿采样延迟
 - 补偿滤波器延迟
 - 提高角度精度
 
 ### 4.4 逆Park变换实现
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
 ```c
 void inverse_park(foc_para_t *foc)
@@ -743,7 +743,7 @@ void inverse_park(foc_para_t *foc)
 
 ### 4.5 逆Clarke变换实现
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
 ```c
 void inverse_clarke(foc_para_t *foc)
@@ -756,7 +756,7 @@ void inverse_clarke(foc_para_t *foc)
 
 ### 4.6 数据结构设计
 
-**代码位置：** [foc_calc.h](AxDr/AxDr/User/motor/foc_calc.h)
+- **代码位置：** [foc_calc.h](AxDr/AxDr/User/motor/foc_calc.h)
 
 ```c
 typedef struct
@@ -781,7 +781,7 @@ typedef struct
 } foc_para_t;
 ```
 
-**设计分析：**
+- **设计分析：**
 
 1. **数据集中管理：** 所有FOC相关变量集中在一个结构体
 2. **内存布局优化：** 连续存储，提高缓存命中率
@@ -789,7 +789,7 @@ typedef struct
 
 ### 4.7 常量定义
 
-**代码位置：** [foc_calc.h](AxDr/AxDr/User/motor/foc_calc.h)
+- **代码位置：** [foc_calc.h](AxDr/AxDr/User/motor/foc_calc.h)
 
 ```c
 #define M_PI (3.14159265358f)         // 圆周率
@@ -800,16 +800,16 @@ typedef struct
 #define TWO_BY_SQRT3 (1.15470053838f) // 2/√3
 ```
 
-**精度分析：**
+- **精度分析：**
 - 使用 `float` 类型，有效数字约7位
 - 常量精度足够，不会引入显著误差
 - 预定义常量避免重复计算
 
 ### 4.8 SVPWM扇区判断实现
 
-**代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
+- **代码位置：** [foc_calc.c](AxDr/AxDr/User/motor/foc_calc.c)
 
-**核心思想：** 通过三个比较判断扇区
+- **核心思想：** 通过三个比较判断扇区
 
 ```c
 float va = foc->v_beta;
@@ -823,7 +823,7 @@ int c = (vc > 0.0f) ? 1 : 0;
 int sextant = (c << 2) + (b << 1) + a;
 ```
 
-**扇区映射：**
+- **扇区映射：**
 
 | sextant | 扇区 | 主矢量 |
 |---------|------|--------|
@@ -836,14 +836,14 @@ int sextant = (c << 2) + (b << 1) + a;
 
 ### 4.9 MC_LIB SVPWM实现
 
-**代码位置：** [MCFOC_SVPWM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_SVPWM_F.c)
+- **代码位置：** [MCFOC_SVPWM_F.c](MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_SVPWM_F.c)
 
-**特点：**
+- **特点：**
 1. 支持三电阻采样和单电阻采样
 2. 集成死区补偿
 3. 五段式调制支持
 
-**三电阻采样电流重构：**
+- **三电阻采样电流重构：**
 
 ```c
 void MCFOC_ThreeShunt_Current_Cal_F(ST_SVPWM_CONTROL_F* pSVPWM, ST_PMSM_ELEC_F* pPMSMe)
@@ -861,7 +861,7 @@ void MCFOC_ThreeShunt_Current_Cal_F(ST_SVPWM_CONTROL_F* pSVPWM, ST_PMSM_ELEC_F* 
 }
 ```
 
-**原理：** 利用三相电流之和为零的特性，只采样两相，第三相通过计算得到。
+- **原理：** 利用三相电流之和为零的特性，只采样两相，第三相通过计算得到。
 
 ### 4.10  hpm_MC 代码实现参考
 
@@ -887,7 +887,7 @@ void MCFOC_ThreeShunt_Current_Cal_F(ST_SVPWM_CONTROL_F* pSVPWM, ST_PMSM_ELEC_F* 
 
 ### 5.1 电流环PI参数整定
 
-**零极点对消法：**
+- **零极点对消法：**
 
 $$
 K_p = \frac{L_s}{\tau_c}, \quad K_i = \frac{R_s}{\tau_c}
@@ -895,7 +895,7 @@ $$
 
 其中 $\tau_c$ 为期望的闭环时间常数。
 
-**整定步骤：**
+- **整定步骤：**
 
 1. **测量电机参数：** 获取 $R_s$、$L_s$、$\psi_f$
 2. **确定带宽：** 电流环带宽通常设为 $500 \sim 2000\text{Hz}$
@@ -905,7 +905,7 @@ $$
    - 加入I控制，消除稳态误差
    - 调整参数，优化动态响应
 
-**带宽关系：**
+- **带宽关系：**
 
 $$
 \omega_{c,cur} = (5 \sim 10) \cdot \omega_{c,spd}
@@ -913,7 +913,7 @@ $$
 
 ### 5.2 前馈解耦参数
 
-**解耦项：**
+- **解耦项：**
 
 $$
 \begin{cases}
@@ -922,7 +922,7 @@ u_q^{dec} = \omega_e (\hat{L}_d i_d + \hat{\psi}_f)
 \end{cases}
 $$
 
-**参数估计：** $\hat{L}_d, \hat{L}_q, \hat{\psi}_f$ 的精度直接影响解耦效果。
+- **参数估计：** $\hat{L}_d, \hat{L}_q, \hat{\psi}_f$ 的精度直接影响解耦效果。
 
 ### 5.3 编码器校准
 
@@ -944,7 +944,7 @@ FOC控制的核心前提是获取精确的转子电角度 $\theta_e$。角度误
 
 #### 5.3.2 电角度偏移校准
 
-**问题描述：**
+- **问题描述：**
 
 编码器实际安装时，零点（Z信号或绝对零位）与电机A相绕组轴线之间存在未知的机械偏移角 $\theta_{offset}$。
 
@@ -959,7 +959,7 @@ $$
 - $\theta_{enc}$：编码器机械角度读数
 - $\theta_{offset}$：偏移角（待校准）
 
-**直流锁定法（最常用）：**
+- **直流锁定法（最常用）：**
 
 原理：给定固定电流矢量，转子自动对齐到该方向，此时读取编码器值与理论电角度的差即为偏移。
 
@@ -973,7 +973,7 @@ flowchart TD
     D --> E["计算偏移 θ_offset = -θ_enc_raw / p"]
 ```
 
-**C代码实现：**
+- **C代码实现：**
 
 ```c
 float calibrate_encoder_offset(float rated_current) {
@@ -1006,14 +1006,14 @@ $E_a = 0$ 时 $\theta_e = 0°$ 或 $180°$，对应转子N极/S极与A相轴线�
 
 #### 5.3.5 编码器线性度校准
 
-**误差来源：**
+- **误差来源：**
 
 实际编码器存在周期性误差和非周期性误差：
 - **安装偏心：** 机械安装偏心导致正弦形角度误差，频率 = 1×机械频率
 - **刻度不均：** 增量式编码器光栅刻度不均匀
 - **电气谐波：** 旋变解码器引入的谐波误差
 
-**分段线性化校准：**
+- **分段线性化校准：**
 
 方法：在已知角度位置（如用高精度编码器做参考）记录误差，建立查找表。
 
@@ -1035,7 +1035,7 @@ float get_corrected_angle(float raw_angle) {
 }
 ```
 
-**谐波补偿：**
+- **谐波补偿：**
 
 角度周期性误差可建模为傅里叶级数：
 
@@ -1047,7 +1047,7 @@ $$
 
 #### 5.3.6 角度延时补偿
 
-**采样延迟：**
+- **采样延迟：**
 
 电流采样和PWM更新之间存在延时，导致Park变换使用的角度滞后：
 
@@ -1058,7 +1058,7 @@ flowchart LR
     C --> D["角度 = 采样时角度 + ω_e × Ts"]
 ```
 
-**补偿方法：** 前向预测角度
+- **补偿方法：** 前向预测角度
 
 ```c
 float theta_compensated = theta_measured + omega_e * Ts_delay;
@@ -1069,7 +1069,7 @@ float theta_compensated = theta_measured + omega_e * Ts_delay;
 - 运算时间（FOC计算）
 - PWM影子寄存器更新延迟
 
-**速度前馈补偿：**
+- **速度前馈补偿：**
 
 利用当前转速预测未来角度：
 
@@ -1107,7 +1107,7 @@ FOC控制的精度和稳定性高度依赖电机参数准确性。参数辨识�
 | 在线辨识 | $R_s$ (温升), $\psi_f$ (温退磁) | 运行中实时更新 |
 | 机械辨识 | $J, B, T_c$ | 转动惯量、摩擦、死区 |
 
-**辨识精度影响链：**
+- **辨识精度影响链：**
 
 ```mermaid
 flowchart LR
@@ -1119,7 +1119,7 @@ flowchart LR
 
 #### 5.4.2 定子电阻辨识
 
-**直流注入法：**
+- **直流注入法：**
 
 原理：给定直流电压，稳态时电感压降为零，电阻 = 电压/电流
 
@@ -1147,7 +1147,7 @@ float identify_resistance(float ud_test) {
 }
 ```
 
-**注意事项：**
+- **注意事项：**
 - 测试电压不宜过大，避免过流或转子转动
 - 多次测量取平均，消除噪声
 - 正反方向各测一次，消除逆变器非线性影响：
@@ -1158,7 +1158,7 @@ $$
 
 #### 5.4.3 电感辨识
 
-**d轴电感辨识（电压脉冲法）：**
+- **d轴电感辨识（电压脉冲法）：**
 
 原理：给定阶跃电压，根据电流上升斜率计算电感
 
@@ -1190,7 +1190,7 @@ float identify_ld(float u_pulse, float dt) {
 }
 ```
 
-**q轴电感辨识：**
+- **q轴电感辨识：**
 
 类似d轴辨识，但需要锁定在 $\theta_e = 90°$（q轴对齐d轴绕组）：
 
@@ -1202,7 +1202,7 @@ flowchart TD
 ```
 <!-- 原ASCII文本流程图转为mermaid flowchart语法 -->
 
-**高频注入法（适用于IPMSM）：**
+- **高频注入法（适用于IPMSM）：**
 
 原理：注入高频旋转电压信号，从响应电流中提取d/q轴电感差异。
 
@@ -1214,11 +1214,11 @@ $$
 
 高频电流响应包含正序和负序分量，从负序分量幅值可辨识 $L_d, L_q$。
 
-**优势：** 不需要转子锁定，可在静止状态下完成辨识；对SPMSM和IPMSM均适用。
+- **优势：** 不需要转子锁定，可在静止状态下完成辨识；对SPMSM和IPMSM均适用。
 
 #### 5.4.4 永磁体磁链辨识
 
-**空载反电动势法：**
+- **空载反电动势法：**
 
 原理：电机由外部拖动至恒定转速，测量空载线电压
 
@@ -1239,7 +1239,7 @@ flowchart TD
 ```
 <!-- 原ASCII文本流程图转为mermaid flowchart语法 -->
 
-**电压方程法（在线辨识）：**
+- **电压方程法（在线辨识）：**
 
 稳态dq轴电压方程（忽略微分项）：
 
@@ -1256,19 +1256,19 @@ $$
 \psi_f = \frac{u_q - R_s i_q}{\omega_e} - L_d i_d
 $$
 
-**推荐条件：** $i_d = 0$ 时，$\psi_f = (u_q - R_s i_q) / \omega_e$，简化为仅需 $R_s$ 和转速。
+- **推荐条件：** $i_d = 0$ 时，$\psi_f = (u_q - R_s i_q) / \omega_e$，简化为仅需 $R_s$ 和转速。
 
 #### 5.4.5 机械参数辨识
 
-**转动惯量辨识：**
+- **转动惯量辨识：**
 
-**机械运动方程：**
+- **机械运动方程：**
 
 $$
 J \frac{d\omega_m}{dt} = T_e - B\omega_m - T_L
 $$
 
-**加减速法：**
+- **加减速法：**
 
 ```mermaid
 flowchart TD
@@ -1277,7 +1277,7 @@ flowchart TD
 ```
 <!-- 原ASCII文本流程图转为mermaid flowchart语法 -->
 
-**摩擦系数辨识：**
+- **摩擦系数辨识：**
 
 低速稳态运行，加速度为零：
 
@@ -1297,7 +1297,7 @@ $$
 | $\psi_f$ | 温度退磁 | -10%/100°C | 反电动势观测 |
 | $L_d, L_q$ | 磁饱和 | -30% 大电流 | 高频信号注入 |
 
-**递推最小二乘法（RLS）框架：**
+- **递推最小二乘法（RLS）框架：**
 
 $$
 y(k) = \varphi^T(k) \cdot \theta
@@ -1331,7 +1331,7 @@ $$
 3. **提高跟踪精度：** 平滑轨迹使控制器更容易跟踪
 4. **抑制振动：** 合理的加加速度限制避免激发机械谐振
 
-**轨迹规划层次：**
+- **轨迹规划层次：**
 
 ```mermaid
 flowchart TD
@@ -1347,7 +1347,7 @@ flowchart TD
 
 #### 5.5.2 梯形速度曲线（T型规划）
 
-**基本原理：**
+- **基本原理：**
 
 T型曲线将运动分为三个阶段：**加速段 → 匀速段 → 减速段**
 
@@ -1357,12 +1357,12 @@ flowchart LR
     B --> C["减速段\nt3 → t4\nV: Vmax → 0"]
 ```
 
-**参数定义：**
+- **参数定义：**
 - $A_{max}$：最大加速度 ($rad/s^2$ 或 $mm/s^2$)
 - $V_{max}$：最大速度 ($rad/s$ 或 $mm/s$)
 - $D$：总位移 ($rad$ 或 $mm$)
 
-**轨迹计算：**
+- **轨迹计算：**
 
 **情况1：能达到最大速度（$D \geq V_{max}^2 / A_{max}$）：**
 
@@ -1386,7 +1386,7 @@ $$
 
 加速减速对称：$t_a = t_d = V_{peak} / A_{max}$
 
-**C代码实现：**
+- **C代码实现：**
 
 ```c
 typedef struct {
@@ -1440,7 +1440,7 @@ void t_curve_update(t_curve_planner_t *tc, float dt) {
 
 #### 5.5.3 S型速度曲线
 
-**基本原理：**
+- **基本原理：**
 
 S型曲线在T型基础上增加**加加速度（Jerk）**限制，将加速度的突变变为缓变。曲线分为7段：
 
@@ -1454,7 +1454,7 @@ flowchart LR
     F --> G["7.减减速段\nJ = +Jmax\n加速度负向减小至0"]
 ```
 
-**7段分解：**
+- **7段分解：**
 1. 加加速段：$J = +J_{max}$，加速度线性增加
 2. 匀加速段：$J = 0$，加速度保持 $A_{max}$
 3. 减加速段：$J = -J_{max}$，加速度线性减小
@@ -1463,7 +1463,7 @@ flowchart LR
 6. 匀减速段：$J = 0$，加速度保持 $-A_{max}$
 7. 减减速段：$J = +J_{max}$，加速度负向减小至0
 
-**数学推导：**
+- **数学推导：**
 
 S型曲线的峰值为加加速度 $J_{max}$ 受限于：
 
@@ -1478,7 +1478,7 @@ $$
 
 其中 $s(t) \in \{+1, 0, -1\}$ 为各段Jerk符号。
 
-**各段持续时间：**
+- **各段持续时间：**
 
 $$
 \begin{aligned}
@@ -1489,7 +1489,7 @@ T_6 &= (V_{max} - V_{end}) / A_{max} - T_5  \quad \text{(匀减速段)}
 \end{aligned}
 $$
 
-**C代码实现（简化版）：**
+- **C代码实现（简化版）：**
 
 ```c
 typedef struct {
@@ -1545,7 +1545,7 @@ $$
 J = \frac{da}{dt} = \frac{d^3p}{dt^3}
 $$
 
-**Jerk限制的重要性：**
+- **Jerk限制的重要性：**
 
 1. **机械保护：** 高Jerk产生冲击力，激发机械谐振
    - 机床加工：$J \leq 50 m/s^3$（精加工）或 $J \leq 500 m/s^3$（粗加工）
@@ -1567,7 +1567,7 @@ flowchart LR
 
 每段独立规划，段间速度连续（V_start = V_end_prev）
 
-**Blend（融合）技术：** 相邻轨迹段之间重叠速度过渡段，避免停顿：
+- **Blend（融合）技术：** 相邻轨迹段之间重叠速度过渡段，避免停顿：
 
 ```mermaid
 flowchart LR
@@ -1680,20 +1680,20 @@ $$
 - $\omega_e$：电角速度 ($rad/s$)
 - $i_q(k)$：当前拍q轴电流 ($A$)
 
-**优势：** 响应速度极快，适合高性能伺服
+- **优势：** 响应速度极快，适合高性能伺服
 
-**挑战：** 对模型参数敏感，鲁棒性需额外设计
+- **挑战：** 对模型参数敏感，鲁棒性需额外设计
 
 ### 7.2 模型预测控制（MPC）
 
 基于电机模型预测下一时刻的状态，选择最优电压矢量：
 
-**有限集MPC（FCS-MPC）：**
+- **有限集MPC（FCS-MPC）：**
 - 枚举8个电压矢量，选择使代价函数最小的矢量
 - 无需调制器，直接输出开关状态
 - 开关频率不固定，需优化
 
-**连续集MPC（CCS-MPC）：**
+- **连续集MPC（CCS-MPC）：**
 - 结合SVPWM，计算最优占空比
 - 开关频率固定，谐波特性好
 
@@ -1717,7 +1717,7 @@ $$
 - **端到端学习控制：** 从电流/电压直接映射到PWM占空比，跳过传统坐标变换
 - **数字孪生辅助调参：** 利用电机数字孪生模型在线优化控制参数
 
-**相关模块：** [ALG-07 无感观测器](ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](ALG-09-High-Frequency-Injection.md) | [ALG-11 MTPA与弱磁](ALG-11-MTPA-Flux-Weakening.md) | [ALG-15 前沿研究](ALG-15-Advanced-Research.md)
+- **相关模块：** [ALG-07 无感观测器](ALG-07-Sensorless-Observers.md) | [ALG-09 高频注入](ALG-09-High-Frequency-Injection.md) | [ALG-11 MTPA与弱磁](ALG-11-MTPA-Flux-Weakening.md) | [ALG-15 前沿研究](ALG-15-Advanced-Research.md)
 
 ---
 

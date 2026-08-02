@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第3章part 2 - 3 Steady-State Equivalent Circuit Modeling, Losses, and Efficiency"
+title: "第3章 稳态等效电路建模、损耗与效率（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,179 +18,80 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第3章part 2 - 3 Steady-State Equivalent Circuit Modeling, Losses, and Efficiency
+# 第3章 稳态等效电路建模、损耗与效率（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 78-81  
-> Chunk ID: `chapter-3-part-2`
+(b) 求解模型，得到变换器输出电压和效率的解析表达式。
 
-## 主干提取
+(c) 现要求变换器在以下工作条件下效率不低于 80%：
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$$V_{batt} = 4.0\,\text{V}, \quad V = 3.3\,\text{V}, \quad I = 2\,\text{A}$$
 
-## 术语表
+可假设一个控制系统（图3.33中未示出）按需调节占空比以将输出电压稳压至 $V = 3.3\,\text{V}$。为满足上述要求，电感绕组电阻 $R_L$ 最大允许多大？此时变换器工作在何占空比？注：本题有简法与繁法两种解法。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+(d) 对 (c) 的设计，计算每个元件的功率损耗。
 
-## 中文翻译
+(e) 用 (c) 算得的 $R_L$，在 $0 \le D \le 1$ 全范围内精确绘制变换器输出电压和效率曲线。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+(f) 讨论 (e) 的曲线。是否符合预期？请解释。
 
-## 英文原文
+![源页 p.78](../assets/page-snapshots/chapter-3/page-78.png)
 
-```text
-3.6 Summary of Key Points 63
-(b) Solve your model to ﬁnd analytical expressions for the converter output voltage and
-eﬃciency.
-(c) It is decided that the converter must operate with an e ﬃciency of at least 80% under
-the following operating condition:
-Input voltage Vbatt = 4.0V
-Output voltage V= 3.3V
-Load current I= 2A
-You should assume that a controller system (not shown in Fig. 3.33) adjusts the duty
-cycle as necessary to regulate the output voltage to be V= 3.3 V. To meet the above
-requirements, how large can the inductor winding resistanceRL be? At what duty cycle
-will the converter then operate? Note: there is an easy way and a not-so-easy way to
-solve this part.
-(d) For your design of Part (c), compute the power loss in each element.
-(e) Accurately plot the converter output voltage and e ﬃciency over the complete range
-0 ≤D ≤1, using the value of inductor winding resistance RL computed in Part (c).
-(f) Discuss your plot of Part (e). Does it behave as your expect? Explain.
-3.7 To reduce the switching harmonics present in the input current of a certain buck converter,
-an input ﬁlter is added as shown in Fig. 3.34. Inductors L1 and L2 contain winding resis-
-tances RL1 and RL2, respectively. The MOSFET has on-resistance Ron, and the diode for-
-ward voltage drop can be modeled by a constant voltage VD plus a resistor RD. All other
-losses can be ignored.
-D1
-Q1
-R
-+
-v+ C2C1
-+
-v
-C1
-L2 RL2RL1L1
-Vg
-i1 i2
-Fig. 3.34 Buck converter with input ﬁlter, Problem 3.7
-(a) Derive a complete equivalent circuit model for this circuit.
-(b) Solve your model to ﬁnd the dc output voltage V.
-(c) Derive an expression for the eﬃciency. Manipulate your expression into a form similar
-to Eq. (3.35).
-3.8 A 1.5 V battery is to be used to power a 5 V , 1 A load. It has been decided to use a buck–
-boost converter in this application. A suitable transistor is found with an on-resistance of
-35 mΩ, and a Schottky diode is found with a forward drop of 0.5 V . The on-resistance of
-the Schottky diode may be ignored. The power stage schematic is shown in Fig.3.35.
-(a) Derive an equivalent circuit that models the dc properties of this converter. Include the
-transistor and diode conduction losses, as well as the inductor copper loss, but ignore all
-other sources of loss. Your model should correctly describe the converter dc input port.
-(b) It is desired that the converter operates with at least 70% e ﬃciency under nominal
-conditions (i.e., when the input voltage is 1.5 V and the output is 5 V at 1 A). How
+**3.7** 为减小某降压变换器输入电流中的开关谐波，加入输入滤波器，如图3.34所示。电感 $L_1$ 和 $L_2$ 分别含绕组电阻 $R_{L1}$ 和 $R_{L2}$，MOSFET 导通电阻为 $R_{on}$，二极管正向压降可用恒定电压 $V_D$ 串联电阻 $R_D$ 建模。其余损耗可忽略。
 
-64 3 Steady-State Equivalent Circuit Modeling, Losses, and E ﬃciency
-Q1
-100 μH Load
-+
-5 V
-1 A
-fs = 40 kHz
-DTs Ts
-+Vg
-1.5 V
-+
-Fig. 3.35 Nonideal buck–boost converter powering a 5 V load from a 1.5 V battery, Problem3.8
-large can the inductor winding resistance be? At what duty cycle will the converter then
-operate? Note: there is an easy way and a not-so-easy way to analytically solve this part.
-(c) For your design of part (b), compute the power loss in each element.
-(d) Plot the converter output voltage and e ﬃciency over the range 0 ≤D≤1, using the
-value of inductor winding resistance which you selected in part (b).
-(e) Discuss your plot of part (d). Does it behave as you expect? Explain.
-For Problems 3.9 and 3.10, a transistor having an on-resistance of 0.5Ωis used. To simplify
-the problems, you may neglect all losses other than the transistor conduction loss. You may
-also neglect the dependence of MOSFET on-resistance on rated blocking voltage. These
-simplifying assumptions reduce the diﬀerences between converters, but do not change the
-conclusions regarding which converter performs best in the given situations.
-3.9 It is desired to interface a 500 V dc source to a 400 V , 10 A load using a dc-dc converter.
-Two possible approaches, using buck and buck–boost converters, are illustrated in Fig.3.36.
-Use the assumptions described above to:
-(a)
-+
-400 V
-+
-500 V
-10 A
-+
-(b)
-+
-400 V
-500 V
-+
-10 A
-+
-Fig. 3.36 Problem 3.9: interfacing a 500 V source to a 400 V load, using: ( a) a buck converter, ( b)a
-buck–boost converter
+(a) 导出该电路的完整等效电路模型。
 
-3.6 Summary of Key Points 65
-(a) Derive equivalent circuit models for both converters, which model the converter input
-and output ports as well as the transistor conduction loss.
-(b) Determine the duty cycles that cause the converters to operate with the speciﬁed con-
-ditions.
-(c) Compare the transistor conduction losses and eﬃciencies of the two approaches, and
-conclude which converter is better suited to the speciﬁed application.
-3.10 It is desired to interface a 300 V battery to a 400 V , 10 A load using a dc-dc converter. Two
-possible approaches, using boost and buck–boost converters, are illustrated in Fig. 3.37.
-Using the assumptions described above (before Problem 3.9), determine the eﬃciency
-and power loss of each approach. Which converter is better for this application?
-(a)
-+
-400 V
-+
-300 V
-10 A
-(b)
-+
-400 V
-300 V
-+
-10 A
-Fig. 3.37 Problem 3.10: interfacing a 300 V battery to a 400 V load, using: ( a) a boost converter, (b)a
-buck–boost converter
-3.11 A buck converter is operated from the rectiﬁed 230 V ac mains, such that the converter dc
-input voltage is
-Vg= 325 V± 20%
-A control circuit automatically adjusts the converter duty cycle D, to maintain a constant
-dc output voltage of V= 240 V dc. The dc load current I can vary over a 10: 1 range:
-10 A≤I≤1A
-The MOSFET has an on-resistance of 0.8Ω. The diode conduction loss can be modeled
-by a 0.7 V source in series with a 0.2Ωresistor. All other losses can be neglected.
-(a) Derive an equivalent circuit that models the converter input and output ports, as well
-as the loss elements described above.
-(b) Given the range of variation of Vg and I described above, over what range will the
-duty cycle vary?
+(b) 求解模型得到直流输出电压 $V$。
 
-66 3 Steady-State Equivalent Circuit Modeling, Losses, and E ﬃciency
-(c) At what operating point (i.e., at what value of Vg and I) is the converter power loss
-the largest? What is the value of the eﬃciency at this operating point?
-3.12 In the ´Cuk converter of Fig.3.38, the MOSFET has on-resistance Ron and the diode has a
-constant forward voltage drop VD. All other losses can be neglected.
-+ D1
-L1
-C2 R
-+
-VQ1
-C1
-L2
-Vg
-Fig. 3.38 ´Cuk converter, Problem 3.12
-(a) Derive an equivalent circuit model for this converter. Suggestion: if you do not know
-how to handle some of the terms in your dc equations, then temporarily leave them
-as dependent sources. A more physical representation of these terms may become
-apparent once dc transformers are incorporated into the model.
-(b) Derive analytical expressions for the converter output voltage and for the eﬃciency.
-(c)F o r VD = 0, plot V/Vg vs. D over the range 0≤D≤1, for (i) Ron/R= 0.01, and (ii)
-Ron/R= 0.05.
-(d)F o r VD = 0, plot the converter eﬃciency over the range 0 ≤D≤1, for ( i) Ron/R
-= 0.01, and (ii) Ron/R= 0.05.
-```
+(c) 导出效率表达式，化为与式 (3.35) 类似的形式。
+
+**3.8** 用一节 1.5 V 电池向一个 5 V、1 A 负载供电。决定采用升降压变换器，已选定导通电阻 35 mΩ 的晶体管和正向压降 0.5 V 的肖特基二极管，二极管导通电阻可忽略。功率级电路如图3.35所示。
+
+(a) 导出建模该变换器直流特性的等效电路，包含晶体管和二极管导通损耗及电感铜损，忽略其余损耗源。模型应正确描述变换器的直流输入端口。
+
+![源页 p.79](../assets/page-snapshots/chapter-3/page-79.png)
+
+(b) 要求变换器在标称条件下（输入 1.5 V、输出 5 V/1 A）效率不低于 70%。电感绕组电阻最大允许多大？此时变换器工作在何占空比？注：本题有简法与繁法两种解析解法。
+
+(c) 对 (b) 的设计，计算每个元件的功率损耗。
+
+(d) 用 (b) 所选 $R_L$，在 $0 \le D \le 1$ 范围内绘制变换器输出电压和效率曲线。
+
+(e) 讨论 (d) 的曲线。是否符合预期？请解释。
+
+对于习题3.9和3.10，使用导通电阻为 0.5 Ω 的晶体管。为简化，可忽略晶体管导通损耗以外的所有损耗，也可忽略 MOSFET 导通电阻对额定阻断电压的依赖。这些简化假设会减小变换器之间的差异，但不改变关于哪种变换器在给定场合表现更优的结论。
+
+**3.9** 要求用一台直流-直流变换器将 500 V 直流源与 400 V、10 A 负载接口。图3.36给出了用降压变换器和升降压变换器的两种方案。利用上述假设：
+
+![源页 p.80](../assets/page-snapshots/chapter-3/page-80.png)
+
+(a) 为两种变换器各导出一个等效电路模型，建模变换器的输入和输出端口以及晶体管导通损耗。
+
+(b) 确定使变换器在指定条件下工作的占空比。
+
+(c) 比较两种方案的晶体管导通损耗和效率，说明哪种变换器更适合该应用。
+
+**3.10** 要求用一台直流-直流变换器将 300 V 电池与 400 V、10 A 负载接口。图3.37给出了用升压变换器和升降压变换器的两种方案。利用上述假设（习题3.9之前给出的），确定每种方案的效率和功率损耗。哪种变换器更适合该应用？
+
+![源页 p.81](../assets/page-snapshots/chapter-3/page-81.png)
+
+**3.11** 一台降压变换器由整流后的 230 V 交流市电供电，故变换器直流输入电压为
+
+$$V_g = 325\,\text{V} \pm 20\%$$
+
+控制系统自动调节占空比 $D$ 以维持直流输出电压 $V = 240\,\text{V}$ 恒定。直流负载电流 $I$ 可在 10:1 范围内变化：$10\,\text{A} \le I \le 1\,\text{A}$。MOSFET 导通电阻 0.8 Ω，二极管导通损耗可用 0.7 V 电压源串联 0.2 Ω 电阻建模，其余损耗可忽略。
+
+(a) 导出建模变换器输入输出端口及上述损耗元件的等效电路。
+
+(b) 在上述 $V_g$ 和 $I$ 变化范围内，占空比在何范围内变化？
+
+(c) 在何工作点（即何 $V_g$ 与 $I$ 值）变换器功率损耗最大？该工作点的效率是多少？
+
+**3.12** 图3.38所示 Ćuk 变换器中，MOSFET 导通电阻为 $R_{on}$，二极管正向压降为恒定 $V_D$，其余损耗可忽略。
+
+(a) 导出该变换器的等效电路模型。建议：若不知如何处理某些直流方程中的项，可暂以受控源保留，一旦把直流变压器纳入模型，这些项的物理表示可能就清楚了。
+
+(b) 导出变换器输出电压和效率的解析表达式。
+
+(c) 取 $V_D = 0$，在 $0 \le D \le 1$ 范围内绘制 $V/V_g$ 随 $D$ 的曲线，分别取 (i) $R_{on}/R = 0.01$，(ii) $R_{on}/R = 0.05$。
+
+(d) 取 $V_D = 0$，在 $0 \le D \le 1$ 范围内绘制变换器效率曲线，分别取 (i) $R_{on}/R = 0.01$，(ii) $R_{on}/R = 0.05$。

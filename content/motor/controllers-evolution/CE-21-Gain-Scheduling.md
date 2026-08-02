@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-21: 增益调度——处理非线性的实用方法，真正能出货的方法
 
 **副标题：Gain Scheduling: The Practical Way to Handle Nonlinearity That Actually Ships**
-**难度：** 
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-06（PID控制）、CE-12（LQR与状态空间方法）
+- **难度：** 
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-06（PID控制）、CE-12（LQR与状态空间方法）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 你有一个非线性对象。你知道如何设计线性控制器。教科书告诉你这是一个难题——Lyapunov函数、非线性观测器、反步法，全套理论。但工业界几十年来一直在出货增益调度（Gain Scheduling）控制器，想法极其简单：在多个工作点设计线性控制器，然后插值。增益调度一般没有稳定性保证。它可能以丑陋的方式失败。但它飞飞机、控反应器、导导弹——因为当调度变量变化足够慢时，它工作得很漂亮。本文详解增益调度的方法、何时有效、何时失败、隐藏耦合问题、LPV控制的理论升级、无扰切换技术，以及与MPC/NMPC的对比。
 
-**认知挂钩：** 增益调度出货的产品比NMPC永远都多——不是因为它理论上更优，而是因为它有效且能出货。
+- **认知挂钩：** 增益调度出货的产品比NMPC永远都多——不是因为它理论上更优，而是因为它有效且能出货。
 
 ---
 
@@ -270,7 +270,7 @@ $$r_{\text{inactive}} = y + \frac{u_{\text{active}}}{K_{\text{DC}}}$$
 
 **MPC是预测性的。** 每个瞬间，它使用模型求解有限时域优化。它规划未来控制轨迹，实现第一个，然后重复。
 
-**增益调度和线性MPC可以组合：** 使用增益调度处理对象非线性，MPC处理约束和预览。调度模型 $A(\rho), B(\rho)$ 在MPC预测内部使用——这被称为**LPV-MPC**或**调度MPC**。
+- **增益调度和线性MPC可以组合：** 使用增益调度处理对象非线性，MPC处理约束和预览。调度模型 $A(\rho), B(\rho)$ 在MPC预测内部使用——这被称为**LPV-MPC**或**调度MPC**。
 
 **非线性MPC**直接使用完整非线性模型 $f(x,u)$，每步求解非凸优化。它完全替代增益调度——非线性由模型处理，而非插值。代价：计算成本，以及非凸优化可能收敛到局部极小值。
 
@@ -303,25 +303,25 @@ $$r_{\text{inactive}} = y + \frac{u_{\text{active}}}{K_{\text{DC}}}$$
 
 ## 11. 延伸阅读
 
-**从这里开始——权威综述：**
+- **从这里开始——权威综述：**
 - Rugh, W.J. & Shamma, J.S. (2000). "Research on gain scheduling." *Automatica*, 36(10), 1401–1425. —— 经典综述。覆盖历史、隐藏耦合问题、冻结参数分析和LPV联系。如果你只读一篇增益调度的论文，读这篇。
 
-**LPV综合参考：**
+- **LPV综合参考：**
 - Apkarian, P. & Gahinet, P. (1995). "A convex characterization of gain-scheduled H∞ controllers." *IEEE Trans. Automatic Control*, 40(5), 853–864. —— 使LPV综合实用化的论文。证明H∞增益调度归结为有限一组LMI。
 - Apkarian, P., Gahinet, P., & Becker, G. (1995). "Self-scheduled H∞ control of linear parameter-varying systems: a design example." *Automatica*, 31(9), 1251–1261. —— 导弹自动驾驶仪设计示例。展示方法在现实航空航天问题上的工作。
 
-**无扰切换问题：**
+- **无扰切换问题：**
 - Graebe, S.F. & Ahlen, A. (1996). "Dynamic transfer among alternative controllers and its relation to antiwindup." *IEEE Trans. Control Systems Technology*, 4(1), 92–99. —— 无扰切换、抗饱和和控制器状态管理之间的联系。
 - Hanus, R., Kinnaert, M., & Henrotte, J.L. (1987). "Conditioning technique, a general anti-windup and bumpless transfer method." *Automatica*, 23(6), 729–739. —— 原始"条件化技术"论文；追踪模式实现的基础。
 
-**航空航天应用（增益调度的诞生地）：**
+- **航空航天应用（增益调度的诞生地）：**
 - Stevens, B.L., Lewis, F.L., & Johnson, E.N. (2015). *Aircraft Control and Simulation*, 3rd ed. Wiley. —— 第4–5章关于飞机动态和自动驾驶仪设计。对动压和马赫数的增益调度是飞行包络内飞行控制的标准方法。
 - Nichols, R.A., Reichert, R.T., & Rugh, W.J. (1993). "Gain scheduling for H-infinity controllers: a flight control example." *IEEE Trans. Control Systems Technology*, 1(2), 69–79. —— H∞设计与增益调度结合的早期演示。
 
-**切换系统反例（为什么保证很难）：**
+- **切换系统反例（为什么保证很难）：**
 - Liberzon, D. (2003). *Switching in Systems and Control.* Birkhäuser. —— 第2章：两个稳定系统可以产生不稳定的切换系统。理解增益调度局限性的必读。
 - Skafidas, E., Evans, R.J., Savkin, A.V., & Petersen, I.R. (1999). "Stability results for switched controller systems." *Automatica*, 35(4), 553–564. —— 何时在稳定控制器之间切换保持稳定性。
 
-**现代LPV工具箱参考：**
+- **现代LPV工具箱参考：**
 - MATLAB鲁棒控制工具箱：`systune` 和 `looptune` —— 增益调度控制器的自动整定。支持多模型、多目标优化。现代工程师的增益调度工作流。
 - MATLAB LPVTools（开源）：Hjartarson, A., Seiler, P., & Packard, A. (2015). "LPVTools: A toolbox for modeling, analysis, and synthesis of parameter varying control systems." *IFAC-PapersOnLine*, 48(26), 139–145. —— LPV文献的开源伴侣；实现基于网格和基于LFT的LPV综合。

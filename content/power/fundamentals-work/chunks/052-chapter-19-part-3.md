@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第19章part 3 - 19 Digital Control of Switched-Mode Power Converters"
+title: "第19章 开关模式功率变换器的数字控制（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,49 +18,24 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第19章part 3 - 19 Digital Control of Switched-Mode Power Converters
+# 第19章 开关模式功率变换器的数字控制（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 847-848  
-> Chunk ID: `chapter-19-part-3`
+## 习题（续）
 
-## 主干提取
+![源页 p.847](../assets/page-snapshots/chapter-19/page-847.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+(a) 对图19.25的模拟平均电流模式控制变换器，确定静态工作点，即求 $I_L$、$V$、$D$、$V_c$ 和 $V_{ref}$ 的直流值，其中 $V_{ref}$ 是电流控制环路的参考输入。
 
-## 术语表
+(b) 对图19.25的模拟平均电流模式控制变换器，在(a)求得的工作点处，绘制电流环路增益 $T_i(s)$ 的幅值和相位响应，确定穿超频率 $f_{ci}$ 和相位裕度 $\phi_i$。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+(c) 对图19.26的数字平均电流模式控制变换器，确定静态工作点，即求 $I_L$、$V$、$D$、$V_c[n]$ 和 $V_{ref}$ 的直流值。
 
-## 中文翻译
+(d) 给定调制器延迟 $t_d$，求(b)中频率 $f_{ci}$ 处数字控制环路的附加相位滞后 $\Delta\phi_d$。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+(e) 设计离散时间补偿器 $G_{cid}^*(z)$，使数字控制变换器的穿超频率和相位裕度与(b)中求得的值相同。采用以 $f_{ci}$ 预畸的双线性映射。将 $G_{cid}^*(z)$ 表示为因式分解的零极点形式。给出记录设计过程的推导。叠加(b)中环路增益 $T_i$ 和数字控制变换器中环路增益 $T_{id}$ 的幅值和相位响应图。
 
-## 英文原文
+![源页 p.848](../assets/page-snapshots/chapter-19/page-848.png)
 
-```text
-19.5 Summary of Key Points 845
-a) For the analog average current-mode controlled converter of Fig. 19.25, determine
-the steady-state operating point, i.e., ﬁnd the dc values of IL, V, D, Vc and Vre f ,
-where Vre f is the reference input for the current control loop.
-b) For the analog average current-mode controlled converter of Fig. 19.25, at the oper-
-ating point found in part (a), plot the magnitude and phase responses of the current
-loop gain Ti(s), and determine crossover frequency fci and phase marginφi.
-c) For the digital average current-mode controlled converter of Fig. 19.26, determine
-the steady-state operating point, i.e., ﬁnd the dc values of IL, V, D, Vc[n], and Vre f .
-d) Given the modulator delay td, ﬁnd the additional phase lagΔφd in the digital control
-loop at the frequency fci found in part (b).
-e) Design a discrete-time compensator G∗
-cid(z) so that the crossover frequency and the
-phase margin in the digitally controlled converter are the same as the values found
-in part (b). Use bilinear mapping with prewarping at fci. Express G∗
-cid(z) in factored
-pole/zero form. Show the work documenting your design process. Overlay plots of
-the magnitude and phase responses of the loop gain Ti found in part (b) and the loop
-gain Tid in the digitally controlled converter.
+# 第五部分
 
-Part V
-Modern Rectiﬁers and Power System Harmonics
-```
+## 现代整流器与电力系统谐波

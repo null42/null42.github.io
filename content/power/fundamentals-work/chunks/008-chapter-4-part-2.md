@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第4章part 2 - 4 Switch Realization"
+title: "第4章 开关的实现（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1022 +18,385 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第4章part 2 - 4 Switch Realization
+# 第4章 开关的实现（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 102-121  
-> Chunk ID: `chapter-4-part-2`
+二极管此时提供功率（但在典型变换器中，此功率在变换器别处损耗，通常损耗在晶体管中）。在 $t_2 < t < t_4$ 期间，电压和电流均为负，二极管再次消耗功率。除了少数载流子流过耗尽区所引起的负向电流外，对耗尽区电容充电还会引起附加电流。电流的这一电容分量不构成二极管内部的功率损耗。尽管如此，此时损耗的功率可能相当可观，因为电压和电流都很大，且这一功率损耗分量可导致二极管内部显著的开关损耗。不久将看到，从 $t_0$ 到 $t_4$ 的整段时间内，二极管内部的开关损耗与相关开关晶体管的开关损耗之和是相当可观的。
 
-## 主干提取
+从 $t_0$ 延伸至 $t_4$ 的时间称为反向恢复时间，记为 $t_r$。电流 $i(t)$ 波形负值部分所含电荷称为恢复电荷，记为 $Q_r$。该电荷由经负向 $i(t)$ 主动移除的存储少数电荷，以及反偏耗尽区电容电荷的变化两部分组成。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$t = t_2$ 时刻的峰值负向电流可能相当可观，视二极管结构而定，其值可达导通态电流 $I_{on}$ 的数倍。这可在反向恢复期间引起显著的瞬时功率耗散，且 $Q_r$ 量值显著。
 
-## 术语表
+若开关时间较慢，则 $Q_r$ 的量值可减小；因为这会使更多存储少数电荷通过复合消除，而非经负向 $i(t)$ 主动移除。若 $t_0 < t < t_2$ 期间 $di/dt$ 斜率减小，则观测到 $Q_r$ 亦随之减小。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+软度因子 $S$ 定义为
 
-## 中文翻译
+$$S = \frac{t_4 - t_2}{t_2 - t_0} \tag{4.11}$$
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+关断暂态以较大 $S$ 为特征的二极管称为软恢复二极管；反之，$S$ 值较小的二极管称为硬恢复（snappy）二极管。软恢复二极管较小的 $dv/dt$ 有助于相关功率晶体管的开通过程，也可减少电磁干扰的产生。半导体制造厂商能够通过器件设计调节 $S$。
 
-## 英文原文
+因此，人们熟知的二极管指数 $i$–$v$ 曲线是一种平衡关系，在暂态条件下可被破坏。在开通和关断开关过渡期间，由于存储少数电荷的变化以及反偏耗尽区内的变化，电流可能显著偏离平衡 $i$–$v$ 曲线。反向恢复时间 $t_r$ 是移除二极管中存储电荷并使其能够阻断全部所施加负向电压所需的时间。反向恢复期间二极管负向电流的面积即为恢复电荷 $Q_r$。
 
-```text
-4.3 The Power Diode 87
-the diode then supplies power (but in a typical converter, this power is lost elsewhere in the
-converter, usually in a transistor). For t2< t< t4, both voltage and current are negative, and the
-diode again consumes power. In addition to the negative current arising from minority charge
-ﬂowing across the depletion region, additional current is caused by charging the capacitance
-of the depletion region. This capacitive component of current does not constitute power loss
-within the diode. Nonetheless, the power lost at this time can be quite substantial, since both the
-voltage and current are large, and this component of power loss can lead to substantial switching
-loss within the diode. We will see soon that the total switching loss within the diode plus the
-associated switching transistor is substantial for the entire time from t
-0 to t4.
-The time extending from t0 to t4 is called the reverse recovery time, denoted tr. The charge
-contained in the negative portion of the current i(t) waveform is called the recovered charge,
-denoted Qr. This charge consists of the stored minority charge that is actively removed through
-negative i(t), as well as changes in the capacitive charge of the reverse-biased depletion region.
-The peak negative current at timet= t2 can be substantial, and may be several times larger than
-the on-state current Ion, depending on the construction of the diode. This can cause signiﬁcant
-instantaneous power dissipation during the reverse recovery, with signiﬁcant magnitude ofQr.
-The magnitude of Qr can be reduced if the switching time is slow; this then causes more of
-the stored minority charge to recombine rather than being actively removed through negative
-i(t). If the slope di/dt for t
-0< t< t2 is reduced, then Qr is observed to be reduced as well.
-The softness factor S is deﬁned as
-S= t4−t2
-t2−t0
-(4.11)
-A diode whose turn-oﬀtransient is characterized by relatively large S is called a soft recovery
-diode; conversely, a diode having a small value ofS is called a snappy diode. The reduced dv/dt
-of soft recovery diodes can aid in the turn-on process of the associated power transistor, and can
-also lead to reduced generation of electromagnetic interference. Semiconductor manufacturers
-are able to adjust S through device design.
-Thus, the familiar exponential i–v curve of the diode is an equilibrium relationship that can
-be violated during transient conditions. During the turn-on and turn-o ﬀswitching transients,
-the current may deviate substantially from the equilibrium i–v curve, because of changes in
-the stored minority charge and changes within the reverse-biased depletion region. The reverse
-recovery time tr is the time required to remove the stored charge in the diode and enable it to
-block the full applied negative voltage. The area of the negative diode current during reverse
-recovery is the recovered charge Q
-r.
-4.3.2 Discussion: Power Diodes
-As noted in Sect. 4.2, the diﬀused-junction p–n power diode contains a lightly doped epitaxial
-or intrinsic high-resistivity region, which allows a high breakdown voltage to be obtained. This
-region is often called thedrift region. As illustrated in Fig.4.32a, this region comprises one side
-of the p–n
-−junction (denoted n−); under reverse-biased conditions, essentially all of the applied
-voltage appears across the depletion region inside the n−region. Figure 4.32a illustrates the oﬀ
-state of a punch-through design, in which the depletion region extends all of the way across
-the n−region. The high electric ﬁeld is supported without breakdown by the lightly doped n−
-material.
+### 4.3.2 讨论：功率二极管
 
-88 4 Switch Realization
-(a)
-Low doping concentration
-{{
-pn n
-+
-Depletion region, reverse-biased
-+
-+
-+
-v
-E
-(b)
-Conductivity modulation
-pn - n
-+
-Minority carrier injection
-+
-+
-+
-+
-+
-+
-i
-v
-{
-Fig. 4.32 Power diode: (a) under reverse-bias conditions, (b) under forward-bias conditions
-On-state conditions are illustrated in Fig.4.32b. Holes are injected across the forward-biased
-junction, and become minority carriers in then−region. In addition, electrons are injected across
-the forward-biased n−–n junction, which increases the concentration of electron carriers in the
-n−region. These hole and electron carriers eﬀectively reduce the apparent resistivity of the n−
-region via conductivity modulation. Essentially all of the forward current i(t) is comprised of
-recombination of minority carriers: either the recombination of holes and electrons within the
-n
-−region, the recombination of minority holes with majority electrons within the n region, or
-the recombination of minority electrons with majority holes within the p region.
-Diodes are rated according to the length of their reverse recovery timetr. Standard recovery
-rectiﬁers are intended for 50 Hz or 60 Hz operation; reverse recovery times of these devices
-are usually not speciﬁed. Fast recovery rectiﬁers and ultrafast recovery rectiﬁers are intended
-for use in converter applications. The reverse recovery time tr, and sometimes also the recov-
-ered charge Qr, are speciﬁed by manufacturers of these devices. Ratings of several commercial
-devices are listed in Table4.1.
-Schottky diodes are essentially majority-carrier devices whose operation is based on the
-rectifying characteristic of a metal-semiconductor junction. These devices exhibit negligible
-minority stored charge, and their switching behavior can be adequately modeled simply by
-their depletion region capacitance and equilibrium exponential i–v characteristic. Hence, an
-advantage of the Schottky diode is its fast switching speed. An even more important advantage
+![源页 p.103](../assets/page-snapshots/chapter-4/page-103.png)
 
-4.3 The Power Diode 89
-Table 4.1 Characteristics of several commercial power rectiﬁer diodes
-Part number Rated maximum voltage Rated average current VF (typical) tr (max)
-Fast recovery rectiﬁers
-lN3913 400 V 30 A 1.1 V 400 ns
-SD453N2S20PC 2500 V 400 A 2.2 V 3 μs
-Ultrafast recovery rectiﬁers
-MUR815 150 V 8 A 0.975 V 35 ns
-RHRD660 600 V 6 A 1.7 V 35 ns
-RHRU100120 1200 V 100 A 2.6 V 60 ns
-Schottky rectiﬁers
-MBR6030L 30 V 60 A 0.48 V
-444CNQ045 45 V 440 A 0.69 V
-30CPQ150 150 V 30 A 1.19 V
-SiC Schottky rectiﬁers
-C4D10120E 1200 V 10 A 1.8 V
-C3D3060F 600 V 3 A 1.7 V
-of Schottky diodes is their low forward voltage drops, especially in devices rated 45 V or less.
-Silicon Schottky diodes are restricted to low breakdown voltages; very few commercial devices
-are rated to block 100 V or more. Their oﬀ-state reverse currents are considerably higher than
-those of p–n junction diodes. Characteristics of several commercial Schottky rectiﬁers are also
-listed in Table4.1.
-Wide-bandgap semiconductor materials have recently become commercially signiﬁcant. Sil-
-icon carbide (SiC) and, more recently, gallium nitride (GaN) materials exhibit an improved
-tradeoﬀbetween blocking voltage, on-resistance, and switching speed. Schottky barrier diodes
-based on SiC are available with 600 V and 1200 V ratings; these exhibit much faster switching
-speeds and much lower Q
-r than comparable silicon p–n devices. Although the built-in diode
-drop is larger, the switching loss is much smaller; hence, overall e ﬃciency improvements are
-observed. Because of the diﬃculties in producing high-quality compound semiconductor mate-
-rial, wide-bandgap power devices are more expensive than traditional silicon devices.
-Another important characteristic of a power semiconductor device is whether its on-resistance
-and forward voltage drop exhibit a positive temperature coeﬃcient. Such devices, including the
-MOSFET and IGBT, are advantageous because multiple chips can be easily paralleled, to ob-
-tain high-current modules. These devices also tend to be more rugged and less susceptible to
-hot-spot formation and second-breakdown problems. Diodes cannot be easily connected in par-
-allel, because of their negative temperature coeﬃcients: an imbalance in device characteristics
-may cause one diode to conduct more current than the others. This diode becomes hotter, which
-causes it to conduct even more of the total current. In consequence, the current does not di-
-vide evenly between the paralleled devices, and the current rating of one of the devices may
-be exceeded. Since BJTs and thyristors are controlled by a diode junction, these devices also
-exhibit negative temperature coeﬃcients and have similar problems when operated in parallel.
-Of course, it is possible to parallel any type of semiconductor device; however, use of matched
-devices, a common thermal substrate, and/or external circuitry may be required to cause the
-on-state currents of the devices to be equal.
+如 4.2 节所述，扩散结 p–n 功率二极管含有一个轻掺杂外延或本征高阻区，借此可获得高击穿电压。该区域常称为漂移区。如图4.32a所示，该区域构成 p–n⁻ 结的一侧（记为 $n^-$）；在反偏条件下，所施加的电压几乎全部降落在 $n^-$ 区内部的耗尽区上。图4.32a 所示为穿通设计的关断状态，其中耗尽区一直延伸跨过整个 $n^-$ 区。高电场由轻掺杂 $n^-$ 材料承受而不发生击穿。
 
-90 4 Switch Realization
-4.3.3 Modeling Diode-Induced Switching Loss
-Diode-induced switching loss is often one of the largest sources of power loss in a PWM switch-
-ing converter. In this section, the equivalent circuit models of Chap. 3 are extended to include
-the switching loss induced by the diode reverse-recovery process. The diode reverse recovery
-time t
-r and recovered charge Qr are included in the transistor and diode waveforms, and then
-these waveforms are related to the inductor and capacitor waveforms. The principles of inductor
-volt-second balance and capacitor charge balance are applied, along with the other techniques
-of Chap. 3. Equivalent circuits are then constructed, which include the eﬀects of diode-induced
-switching loss, that can be employed to predict eﬃciency and dc components of the converter
-waveforms.
-The discussion of this section employs the buck converter example illustrated in Fig. 4.33.
-An ideal MOSFET is assumed, which is driven by a control signal c(t) having a duty cycle Dc.
-The diode is taken to be a p–n diode having reverse recovery time tr and recovered charge Qr.
-Other nonidealities are neglected in this example, including conduction losses, switching ripple,
-etc.
-Fig. 4.33 Buck converter example:
-modeling switching loss +
-LILit vt
-vd
-+
-id
-Vg
-ig
-C
-iC
-R
-+
-V
-c(t)
-vL
-The assumed transistor and diode waveforms are illustrated in Fig. 4.34. In these idealized
-waveforms, the diode softness factor is taken to be S= 0. The switching ripple in the inductor
-current and capacitor voltage are assumed to be small. Additionally, the power stage duty cycle
-D is deﬁned according to the transistor voltage waveform vt(t): the transistor voltage is zero
-for the interval 0≤t≤DTs. This deﬁnition causes the inductor volt-second balance equation
-to coincide with the results for the ideal case, and leads to an equivalent circuit having a dc
-transformer with turns ratio 1 : D.
-It can be noted that the diode reverse recovery timetr distorts the duty cycle, and causes the
-eﬀective power stage duty cycle D to be smaller than the duty cycle Dc produced by the control
-circuit:
-D= Dc−tr
-Ts
-(4.12)
-Switching times, as well as phenomena such as gate driver delays, can create some ambiguity
-in determination of the duty cycle. In this discussion, the power stage duty cycle D is deﬁned
-according to the transistor voltage waveform.
-We can relate these waveforms to the inductor voltage, capacitor current, and converter input
-current. The inductor voltage vL(t) is related to the diode voltage vd(t) as follows:
-vL(t)= vd(t)−V (4.13)
+图4.32 功率二极管：(a) 反偏条件下，(b) 正偏条件下
 
-4.3 The Power Diode 91
-Fig. 4.34 Assumed
-waveforms for the
-buck converter with
-diode reverse recov-
-ery, Fig.4.33
-Transistor
-current
-Diode
-voltage
-Area
-tr
-t
-ILit (t)
-Qr
-0
-vt(t)
-t
-Vg
-0
-vd (t)
-DTs Ts
-IL
-Vg
-Transistor
-voltage
-t
-Vg
-0
-Diode
-current
-Area t
-IL
-0
-id (t)
-Qr
-DTs D Ts
-0
-Control
-signal
-t
-DcTs
-DTs
-on
-off
-c(t) DcTs
-Fig. 4.35 Buck converter example:
-inductor voltage waveform
-vL(t) Vg
-tDTs
-Subtraction of the output voltageV from the diode voltage waveformvd(t) illustrated in Fig.4.34
-leads to the inductor voltage waveform of Fig. 4.35. It can be seen that, with the deﬁnition of
-D as in Eq. ( 4.12), we obtain the usual inductor voltage waveform. Application of inductor
-volt-second balance to this waveform leads to
-⟨vL⟩= 0= DVg−V (4.14)
+通态条件如图4.32b所示。空穴跨正偏结注入，成为 $n^-$ 区的少数载流子。此外，电子跨正偏 $n^-$–$n$ 结注入，增大了 $n^-$ 区内电子载流子浓度。这些空穴和电子载流子通过电导调制有效降低 $n^-$ 区的视在电阻率。正向电流 $i(t)$ 几乎全部由少数载流子的复合构成：或为 $n^-$ 区内空穴与电子的复合，或为 $n$ 区内少数空穴与多数电子的复合，或为 $p$ 区内少数电子与多数空穴的复合。
 
-92 4 Switch Realization
-The capacitor current iC(t) is related to the inductor and load currents in the usual manner.
-Capacitor charge balance leads to
-⟨iC⟩= 0= IL−V
-R (4.15)
-Construction of an equivalent circuit corresponding to these two equations, according to the
-methods of Sect. 3.3, leads to the equivalent circuit of Fig.4.36.
-To complete the equivalent circuit model of the buck converter, an equation for the average
-input current Ig must be derived, as discussed in Sect.3.4. It can be seen from Fig. 4.33 that the
-input current ig(t) coincides with the transistor current it(t). The transistor current waveform is
-sketched in Fig. 4.34; its average is
-Ig=⟨it(t)⟩= 1
-Ts
-∫ Ts
-0
-it(t) dt (4.16)
-= 1
-Ts
-(DTsIL+ tr IL+ Qr) (4.17)
-= DIL+ tr
-Ts
-IL+ Qr
-Ts
-(4.18)
-Fig. 4.36 Buck converter example:
-equivalent circuit corresponding to
-Eqs. (4.14)a n d(4.15)
-iC
-= 0
-R
-+
-V+DVg
-+ vL
-= 0
-IL
-V/ R
-Fig. 4.37 Buck converter example:
-equivalent circuit corresponding to
-Eq. (4.18)
-+ DIL
-Ig
-Vg Qr /Ts tr IL /Ts
-Equation (4.18) can be viewed as a node equation describing the dc current drawn out of the
-source Vg. The corresponding equivalent circuit is constructed in Fig.4.37.
-A complete model of the buck converter with switching loss can now be obtained by com-
-bining Figs. 4.36 and 4.37 to obtain Fig. 4.38. The dependent sources are combined into a 1 : D
-dc transformer. In addition, the model includes two current sources that model the dc compo-
-nents of input current that are induced by the diode recovered charge Qr and reverse recovery
-time tr.
+二极管按其反向恢复时间 $t_r$ 的长短分档。标准恢复整流器用于 50 Hz 或 60 Hz 工作；这些器件的反向恢复时间通常不予标注。快恢复整流器和超快恢复整流器用于变换器场合。这些器件的制造商会标注反向恢复时间 $t_r$，有时还标注恢复电荷 $Q_r$。若干商用器件的额定值列于表4.1。
 
-4.3 The Power Diode 93
-R
-+
-V
-IL
-+
-Ig 1 : D
-Vg Qr /Ts tr IL /Ts
-Fig. 4.38 Complete model of the buck converter with diode-induced switching loss
-In the model of Fig. 4.38, the current sources consume power equal to
-Psw= Vg
-⎦Qr
-Ts
-+ IL
-tr
-Ts
-)
-(4.19)
-This is the switching loss induced by the diode reverse-recovery process. For the case S = 0,
-this power is dissipated in the transistor. For S > 0, this switching loss is dissipated partly in
-the diode and partly in the transistor.
-We can now solve the model of Fig.4.38, to derive expressions for the conversion ratio and
-eﬃciency. The conversion ratio M is equal to the turns ratio of the dc transformer:
-M= V
-Vg
-= D (4.20)
-The output power is
-Pout= VIL (4.21)
-The input power is
-Pin= Vg
-⎦
-DIL+ Qr
-Ts
-+ IL
-tr
-Ts
-)
-(4.22)
-The following equation for eﬃciency can be derived by taking the ratio of Eqs. (4.21) and (4.22),
-and simplifying:
-η= Pout
-Pin
-= 1
-1+ fs
-⎦tr
-D+ QrR
-D2Vg
-) (4.23)
-It can be seen that the eﬃciency is dependent on the switching frequency.
-Equation (4.23) is plotted in Fig. 4.39, for the values Vg = 24 V, fs = 100 kHz, R= 15Ω,
-Qr = 0.75μcoul, tr = 75 nsec. It can be seen that the switching loss causes the e ﬃciency to
-tend to zero at low duty cycle. This occurs because the output power goes to zero but switching
-loss remains. This model assumes that the switching ripple is negligible, and no attempt has
-been made to model how Qr and tr vary with current; in practice these quantities do vary with
-current, but somewhat weakly. It is found experimentally that switching loss does indeed cause
-the eﬃciency of constant-frequency converters to degrade substantially as the output power is
-reduced.
+![源页 p.104](../assets/page-snapshots/chapter-4/page-104.png)
 
-94 4 Switch Realization
-0 0.2 0.4 0.6 0.8 1
-0
-0.2
-0.4
-0.6
-0.8
-1
-D
-η
-Fig. 4.39 Buck converter eﬃciency predicted by Eq. (4.23)
-4.3.4 Boost Converter Example
-As another example of modeling switching loss, the boost converter of Fig. 4.40 is considered.
-Again, the switching loss induced by the diode reverse recovery is considered, including the
-eﬀects of reverse recovery time tr and recovered charge Qr. Additionally, the loss induced by
-the inductor dc winding resistance RL is modeled, but all other sources of loss are neglected.
-Also, the inductor current and capacitor voltage ripples are taken to be small.
-The transistor and diode waveforms are sketched in Fig. 4.41; these are similar to the buck
-waveforms of Fig.4.34 with the exception of the voltage amplitudes. Again, the converter power
-stage duty cycle D is deﬁned with respect to the transistor voltage waveform vt(t); this duty
-cycle diﬀers from the duty cycle Dc of the controller gate drive signal c(t) because of the diode
-reverse recovery time tr. We will see that this deﬁnition leads to an equivalent circuit having a
-dc transformer with turns ratio D′ :1 .
-To apply the principle of inductor volt-second balance, we ﬁrst construct the waveform of
-vL(t). In the boost converter, the inductor voltage vL(t) is related to the transistor voltage vt(t)
-and inductor current iL(t) according to
-vL(t)= Vg−iL(t)RL−vt(t) (4.24)
-Fig. 4.40 Boost converter ex-
-ample: modeling switching loss +
-L IL
-it
-vt
-vd
-+
-Vg
-ig
-C
-iC
-R
-+
-V
-+
-idvL
-+
-c(t)
+肖特基二极管本质上是多数载流子器件，其工作基于金属-半导体结的整流特性。这些器件的少数存储电荷可忽略，其开关行为可用耗尽区电容和平衡指数 $i$–$v$ 特性充分建模。故肖特基二极管的优点之一是开关速度快。肖特基二极管更重要的优点是正向压降低，尤其在 45 V 及以下器件中。
 
-4.3 The Power Diode 95
-Fig. 4.41 Assumed
-waveforms for the
-boost converter with
-diode reverse recov-
-ery, Fig.4.40
-Transistor
-current
-Diode
-voltage
-Area
-tr
-t
-ILit (t)
-Qr
-0
-vt(t)
-t
-V
-0
-vd (t)
-DTs Ts
-IL
-V
-Transistor
-voltage
-t
-V
-0
-Diode
-current
-Area t
-IL
-0
-id (t)
-Qr
-DTs D Ts
-0
-Control
-signal
-t
-DcTs
-DTs
-on
-off
-c(t) DcTs
-Fig. 4.42 Boost converter example:
-inductor voltage waveform
-vL(t) Vg L RL
-tDTs Vg L RL
-By subtraction of the transistor voltage waveform of Fig. 4.41 from Vg, and with use of the
-small-ripple approximation, the inductor voltage waveform of Fig. 4.42 is obtained. The dc
-component of this waveform is
-⟨ vL⟩= 0= D
-⎦
-Vg−ILRL
-)
-−D′ ⎦
-Vg−ILRL−V
-)
-(4.25)
-= Vg−ILRL−D′V
+表4.1 若干商用功率整流二极管的特性
 
-96 4 Switch Realization
-In the boost converter, the capacitor current iC is related to the diode current id and load
-current v/R according to the output node equation
-iC = id−v
-R (4.26)
-By capacitor charge balance, the average value of the capacitor current is zero. We can therefore
-use Eq. (4.26) to write
-⟨ iC⟩= 0=⟨ id⟩−V
-R (4.27)
-The dc component of the diode current is found by integration of the waveform of Fig.4.43:
-⟨ id⟩= 1
-Ts
-∫ Ts
-0
-id(τ) dτ (4.28)
-= 1
-Ts
-⎦IL
-⎦D′Ts−tr
-)−Qr
-)
-= D′IL−tr IL
-Ts
-−Qr
-Ts
-Fig. 4.43 Boost converter example:
-diode current waveform
-tr
-Diode
-current
-Area t
-IL
-0
-id (t)
-Qr
-DTs D Ts
-By convention in these equations, the recovered charge Qr is taken to be a positive quantity.
-Hence, the output node equation (4.27) becomes
-0= D′IL−tr IL
-Ts
-−Qr
-Ts
-−V
-R (4.29)
-Finally, we note that the input current ig(t) coincides with the inductor current iL(t), and
-hence the dc component of input current is
-Ig= IL (4.30)
-Hence, the equations that describe the dc model of this converter are
-0= Vg−ILRL−D′V (4.31)
-0= D′IL−tr IL
-Ts
-−Qr
-Ts
-−V
-R
-Ig= IL
+| 器件型号 | 额定最高电压 | 额定平均电流 | $V_F$（典型） | $t_r$（最大） |
+|---|---|---|---|---|
+| 快恢复整流器 | | | | |
+| lN3913 | 400 V | 30 A | 1.1 V | 400 ns |
+| SD453N2S20PC | 2500 V | 400 A | 2.2 V | 3 μs |
+| 超快恢复整流器 | | | | |
+| MUR815 | 150 V | 8 A | 0.975 V | 35 ns |
+| RHRD660 | 600 V | 6 A | 1.7 V | 35 ns |
+| RHRU100120 | 1200 V | 100 A | 2.6 V | 60 ns |
+| 肖特基整流器 | | | | |
+| MBR6030L | 30 V | 60 A | 0.48 V | — |
+| 444CNQ045 | 45 V | 440 A | 0.69 V | — |
+| 30CPQ150 | 150 V | 30 A | 1.19 V | — |
+| SiC 肖特基整流器 | | | | |
+| C4D10120E | 1200 V | 10 A | 1.8 V | — |
+| C3D3060F | 600 V | 3 A | 1.7 V | — |
 
-4.3 The Power Diode 97
-These equations follow from Eqs. (4.25), (4.29), and (4.30). An equivalent circuit corresponding
-to Eqs. (4.31) is given in Fig. 4.44. This dc circuit model accounts for diode-induced switching
-loss and for inductor dc winding resistance in the boost converter; other conduction losses could
-have been included as well, following the approach of Chap. 3.
-R
-+
-V+
-Ig = IL
-D :1
-Vg Qr /Ts tr IL /Ts
-RL
-Fig. 4.44 Complete model of the boost converter with diode-induced switching loss
-The two independent sources of Fig. 4.44 consume power
-Psw= V
-⎦tr IL
-Ts
-+ Qr
-Ts
-)
-(4.32)
-This power is equal to the switching loss within the MOSFET and diode induced by diode
-reverse recovery. In the model, these sources appear in parallel with the load and e ﬀectively
-behave as an additional load on the converter. Indeed, in the actual converter, the diode reverse
-recovery current ﬂows out of the output ﬁlter capacitor C and through the semiconductor de-
-vices.
-The model of Fig.4.44 can now be solved, to ﬁnd the conversion ratioM= V/V
-g. The result
-can be shown to be
-M= V
-Vg
-=
-⎦1
-D′
-)
-⎦
-1−Qr
-Ts
-RL
-D′Vg (1−tr/D′Ts)
-)
-⎦
-1+ RL
-D′2R (1−tr/D′Ts)
-) (4.33)
-This equation is plotted vs. duty cycle in Fig. 4.45, for the values fs = 100 kHz, Vg = 24 V,
-R= 15Ω, RL = 0.15Ω, Qr = 1μCoul, and tr = 50 nsec. The conversion ratio with switching
-loss (thick, lower line) is compared to the result with inductor winding resistance only (thin,
-upper line). It can be seen that the two curves are qualitatively similar, and the eﬀect of switching
-loss is more pronounced at high duty cycles.
-We can also evaluate the equivalent circuit model of Fig.4.44 to ﬁnd the converter eﬃciency.
-The input power is given by
-P
-in= VgIg (4.34)
-The output power is equal to
-Pout= V
-⎦
-D′Ig−Qr
-Ts
-−tr IL
-Ts
-)
-(4.35)
+硅肖特基二极管的击穿电压受限；很少有商用器件的阻断额定达到 100 V 或更高。其关断态反向电流显著高于 p–n 结二极管。若干商用肖特基整流器的特性亦列于表4.1。
 
-98 4 Switch Realization
-0 0.2 0.4 0.6 0.8 1
-0
-1
-2
-3
-4
-5
-D
-M
-Fig. 4.45 Conversion ratio V/Vg, boost converter with switching loss and inductor dc winding resistance.
-The lower (thick) line includes switching loss terms and dc winding resistance. The upper (thin) line
-includes dc winding resistance only, with no switching loss
-By taking the ratio of these two expressions and simplifying, we can show that the eﬃciency is
-given by
-η= V
-Vg
-⎦
-D′−Qr
-TsI L
-−tr
-Ts
-)
-(4.36)
-Additionally, the equivalent circuit model of Fig.4.44 can be solved for the inductor current IL,
-yielding
-IL=
-⎦Vg
-D′2R+ Qr
-TsD′
-)
-⎦
-1−tr
-D′Ts
-+ RL
-D′2R
-) (4.37)
-Equations (4.36) and ( 4.37) can be used to plot the converter e ﬃciency. The result is shown
-in Fig. 4.46, for the same parameter values of Fig. 4.45. Again, the result with switching loss
-(lower thick line) and without switching loss but with inductor winding resistance only (upper,
-thin line) are compared. It can be seen that these values of diode reverse recovery time and
-diode recovered charge lead to substantial reductions in e ﬃciency, even at low duty cycles
-where the diode reverse recovery causes negligible change in the conversion ratio V/Vg.T h e
-term multiplying 1/D′ on the right-hand side of Eq. ( 4.33) is not equal to the eﬃciency, and
-instead simply accounts for how the loss elements aﬀect the conversion ratio.
-The plot of Fig. 4.46 predicts that the eﬃciency tends to a value slightly less than 93% as
-the duty cycle tends to zero. It should be noted that the boost converter can be operated in
-passthrough mode at D= 0, where the MOSFET is always oﬀand never switches. In this case,
-there is no switching loss and the eﬃciency will jump to the upper curve that includes inductor
-dc copper loss only.
+宽禁带半导体材料近年已具商业重要性。碳化硅（SiC）以及更近期的氮化镓（GaN）材料在阻断电压、导通电阻与开关速度之间表现出更优的折中关系。基于 SiC 的肖特基势垒二极管有 600 V 和 1200 V 额定产品；其开关速度远快于可比硅 p–n 器件，$Q_r$ 远低。虽然内建二极管压降较大，但开关损耗小得多，故可观测到总体效率提升。由于高质量化合物半导体材料制备困难，宽禁带功率器件的价格高于传统硅器件。
 
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 99
-0 0.2 0.4 0.6 0.8 1
-0.75
-0.8
-0.85
-0.9
-0.95
-1
-D
-η
-Fig. 4.46 Eﬃciency of the boost converter with diode-induced switching loss. The lower (thick) line in-
-cludes switching loss terms and dc winding resistance. The upper (thin) line includes dc winding resistance
-only, with no switching loss
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET)
-4.4.1 Introduction to the Power MOSFET
-The power MOSFET is a modern power semiconductor device having gate lengths close to one
-micron. The power device is comprised of many small parallel-connected enhancement-mode
-MOSFET cells, which cover the surface of the silicon die. A cross-section of one cell is il-
-lustrated in Fig. 4.47. Current ﬂows vertically through the silicon wafer: the metallized drain
-connection is made on the bottom of the chip, while the metallized source connection and
-polysilicon gate are on the top surface. Under normal operating conditions, in which vds ≥0,
-both the p–n and p–n−junctions are reverse-biased. Figure 4.48a illustrates operation of the
-Fig. 4.47 Cross-section
-of DMOS n-channel
-power MOSFET structure.
-Crosshatched regions
-are metallized contacts.
-Shaded regions are in-
-sulating silicon dioxide
-layers
-Drain
-n
-n
-nn
-pp
-Source
-Gate
-nn
+功率半导体器件的另一重要特性是其导通电阻和正向压降是否具有正温度系数。此类器件（包括 MOSFET 和 IGBT）具有优势，因为多芯片容易并联以获得大电流模块。这些器件也往往更耐用，不易形成热点和发生二次击穿问题。二极管因具有负温度系数而不易并联：器件特性不平衡可能使一个二极管导通比其他二极管更多的电流。该二极管变得更热，从而导通总电流中更大的份额。结果是电流在并联器件间分配不均，某一器件的电流额定可能被超过。由于 BJT 和晶闸管由一个二极管结控制，这些器件亦呈负温度系数，并联工作时存在类似问题。当然，任何半导体器件都可并联；但可能需要使用匹配器件、共用热衬底和/或外部电路，才能使各器件的通态电流相等。
 
-100 4 Switch Realization
-(a)
-n
-n
-nn
-pp
-nn
-Depletion region
-Source
-Drain
-(b)
-n
-n
-nn pp nn
-Channel
-Source
-Drain
-(c)
-n
-n
-nnp p nn
-Body diode
-Source
-Drain
-Fig. 4.48 Operation of the power MOSFET: (a)i nt h eoﬀstate, vds across the depletion region in the n−
-region; (b) current ﬂow through the conducting channel in the on state; ( c) body diode due to the p−n−
-junction
+### 4.3.3 二极管引起开关损耗的建模
 
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 101
-device in the oﬀstate. The applied drain-to-source voltage then appears across the depletion
-region of the p–n−junction. The n−region is lightly doped, such that the desired breakdown
-voltage rating is attained. Figure 4.48b illustrates operation in the on state, with a su ﬃciently
-large positive gate-to-source voltage. A channel then forms at the surface of thep region, under-
-neath the gate. This channel is called an inversion region, it contains mobile electrons that are
-able to conduct current between the drain and source. The drain current ﬂows through the n−
-drift region, channel, n region, and out through the source contact. The on-resistance of the de-
-vice is the sum of the resistances of then−region, the channel, the source and drain contacts, etc.
-As the breakdown voltage is increased, the on-resistance becomes dominated by the resistance
-of the n−drift region. Since there are no minority carriers to cause conductivity modulation, the
-on-resistance increases rapidly as the breakdown voltage is increased to several hundred volts
-and beyond.
-The p–n−junction is called the body diode; as illustrated in Fig. 4.48c, this junction forms
-an eﬀective diode in parallel with the MOSFET channel. The body diode can become forward-
-biased when the drain-to-source voltage vds (t) is negative. This diode is capable of conducting
-the full rated current of the MOSFET. However, many MOSFETs are not optimized with re-
-spect to the speed of their body diodes, and the large peak currents that ﬂow during the reverse
-recovery transition of the body diode can cause device failure as described below. Most recent
-MOSFETs contain fast recovery body diodes; these devices are rated to withstand the peak
-currents during the body diode reverse recovery transition.
-The MOSFET structure of Fig. 4.48 also includes a parasitic BJT structure, formed by the
-source n region (emitter), substrate p region (base), and drift n
-−region (collector). Since the
-n and p regions are shorted by the source contact, this parasitic BJT is normally oﬀ. However,
-if a suﬃciently large current ﬂows through the bulk resistance of the p region, it is possible to
-forward-bias the p−n base-emitter junction. This situation may be observed during the reverse
-recovery transition of the body diode, and it can lead to latchup and failure of the MOSFET.
-Recent MOSFET designs are less prone to this failure mechanism.
-Typical n-channel MOSFET static switch characteristics are illustrated in Fig. 4.49.T h e
-drain current is plotted as a function of the gate-to-source voltage, for various values of drain-
-to-source voltage. When the gate-to-source voltage is less than the threshold voltage Vth,t h e
-device operates in the oﬀstate. A typical value of Vth is 3 V . When the gate-to-source voltage is
-greater than 6 or 7 V , the device operates in the on state; typically, the gate is driven to 12 or 15 V
-to ensure minimization of the forward voltage drop. In the on state, the drain-to-source voltage
-VDS is roughly proportional to the drain current ID. The MOSFET is able to conduct peak
-currents well in excess of its average current rating, and the nature of the static characteristics
-is unchanged at high current levels. Logic-level power MOSFETs are also available, which
-operate in the on state with a gate-to-source voltage of 5 V . Some p-channel devices can be
-obtained, but their properties are inferior to those of equivalent n-channel devices.
-The on-resistance and forward voltage drop of the MOSFET have a positive temperature
-coeﬃcient. This property makes it relatively easy to parallel devices. High-current MOSFET
-modules are available, containing several parallel-connect chips.
-The major capacitances of the MOSFET are illustrated in Fig. 4.50. This model is su ﬃ-
-cient for qualitative understanding of the MOSFET switching behavior; more accurate models
-account for the parasitic junction ﬁeld-eﬀect transistor inherent in the DMOS geometry. Switch-
-ing times of the MOSFET are determined essentially by the times required for the gate driver
-to charge these capacitances. Since the drain current is a function of the gate-to-source voltage,
+![源页 p.105](../assets/page-snapshots/chapter-4/page-105.png)
 
-102 4 Switch Realization
-0 A
-5 A
-10 A
-VGS
-ID
-VDS = 0.5 V
-VDS
-= 1 V
-VDS
-= 2 VVDS
-= 10 V
-VDS
-= 200 V
-0 V 5 V 10 V 15 V
-off
-state
-on state
-Fig. 4.49 Typical static characteristics of a power MOSFET. Drain currentID is plotted vs. gate-to-source
-voltage VGS , for various values of drain-to-source voltage VDS
-Fig. 4.50 MOSFET equivalent circuit which ac-
-counts for the body diode and eﬀective terminal ca-
-pacitances
-D
-S
-G
-Cds
-Cgs
-Cgd
-the rate at which the drain current changes is dependent on the rate at which the gate-to-source
-capacitance is charged by the gate drive circuit. Likewise, the rate at which the drain voltage
-changes is a function of the rate at which the gate-to-drain capacitance is charged. The drain-to-
-source capacitance leads directly to switching loss in PWM converters, since the energy stored
-in this capacitance is lost during the transistor turn-on transition. Switching loss is discussed in
-Sect. 4.6.
-The gate-to-source capacitance is essentially linear. However, the drain-to-source and gate-
-to-drain capacitances are strongly nonlinear: these incremental capacitances vary as the inverse
-square root of the applied capacitor voltage. For example, the dependence of the incremental
-drain-to-source capacitance can be written in the form
-C
-ds(vds)= C0
-√
-1+ vds
-V0
-(4.38)
+二极管引起的开关损耗常是 PWM 开关变换器中最大的功率损耗源之一。本节将第3章的等效电路模型加以扩展，以计入二极管反向恢复过程引起的开关损耗。将二极管反向恢复时间 $t_r$ 和恢复电荷 $Q_r$ 纳入晶体管和二极管波形，然后将这些波形与电感和电容波形相关联。应用电感伏秒平衡和电容电荷平衡原理以及第3章的其他方法，进而构造计入二极管引起开关损耗效应的等效电路，可用于预测变换器波形的效率和直流分量。
 
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 103
-where C0 and V0 are constants that depend on the construction of the device. These capacitances
-can easily vary by several orders of magnitude asvds varies over its normal operating range. For
-vds ≫ V0,E q .(4.38) can be approximated as
-Cds(vds)≈C0
-√
-V0
-vds
-= c′
-0√vds
-(4.39)
-These expressions are used in Sect. 4.6.1 to determine the switching loss due to energy stored
-in Cds .
-Table 4.2 Characteristics of several commercial n-channel power MOSFETs
-Part number Rated maximum voltage Rated average current Ron Qg (typical)
-SiSS64DN 30 V 40 A 2 .1mΩ 21 nC
-CSD18512Q5B 40 V 100 A 1 .3mΩ 75 nC
-NTMFS6H800N 80 V 203 A 1 .8mΩ 85 nC
-IXFH80N25X3 250 V 80 A 13 m Ω 83 nC
-IPL60R065P7 650 V 41 A 53 m Ω 67 nC
-Characteristics of several commercially available power MOSFETs are listed in Table 4.2.
-The gate charge Qg is the charge that the gate drive circuit must supply to the MOSFET to
-raise the gate voltage from zero to some speciﬁed value (typically 10 V), with a speciﬁed value
-of oﬀ-state drain-to-source voltage (typically 80% of the rated V
-DS). The total gate charge is
-the sum of the charges on the gate-to-drain and the gate-to-source capacitance. The total gate
-charge is to some extent a measure of the size and switching speed of the MOSFET. A ﬁgure of
-merit is the product of on-resistance R
-on and gate charge Qg; a device exhibiting lower RonQg
-is expected to operate with higher eﬃciency. The on-resistances listed in Table 4.2 are typical
-values speciﬁed at 25◦C; the on-resistance increases signiﬁcantly at elevated temperature.
-Unlike other power devices, MOSFETs are usually not selected on the basis of their rated av-
-erage current. Rather, on-resistance and its inﬂuence on conduction loss are the limiting factors,
-and MOSFETs typically operate at average currents somewhat less than the rated value.
-Majority-carrier silicon MOSFETs are usually the device of choice at voltages up to ap-
-proximately 600 V . At these voltages, the forward voltage drop is competitive or superior to the
-forward voltage drops of minority-carrier devices, and the switching speed is signiﬁcantly faster.
-Typical switching times are below 100 ns. At voltages greater than 600 V , minority-carrier de-
-vices having lower forward voltage drops, such as the IGBT, usually have been preferred. These
-minority-carrier devices are discussed in Sect. 4.5.
-The superjunction MOSFET [41] employs alternate heavily dopedn and p layers within the
-drift region, to carefully control the electric ﬁeld under oﬀ-state conditions. This enables better
-optimization of the tradeoﬀbetween on-resistance and blocking voltage, leading to signiﬁcantly
-better on-resistance, capacitance, and die area in MOSFETs at voltages of 500–800 V . The
-IPL60R06SP7 device listed in Table 4.2 is an example of a superjunction MOSFET.
-4.4.2 Wide-Bandgap FETs
-Power transistors based on wide-bandgap (WBG) materials have recently emerged as com-
-mercially signiﬁcant switching devices. In comparison with conventional silicon-based power
+本节的讨论采用图4.33所示降压变换器为例。假定 MOSFET 为理想，由占空比为 $D_c$ 的控制信号 $c(t)$ 驱动。二极管取为具有反向恢复时间 $t_r$ 和恢复电荷 $Q_r$ 的 p–n 二极管。本例忽略其他非理想性，包括导通损耗、开关纹波等。
 
-104 4 Switch Realization
-transistors, these wide-bandgap transistors can achieve higher breakdown voltage with lower
-on-resistance and faster switching times. Power MOSFETs based on Silicon Carbide (SiC) ﬁnd
-application at voltages above 600 V , and FET devices based on Gallium Nitride (GaN) currently
-ﬁnd application at voltages of 600 V and below.
-For a majority-carrier device having no conductivity modulation, the resistance Ron of the
-drift region can be expressed as
-ARon= k
-μnϵsE3c
-V2
-B (4.40)
-where Ron is the resistance of the drift region, A is the device area, k is a constant dependent on
-the process and other factors,μn is the electron mobility,ϵs is the semiconductor permittivity,Ec
-is the critical ﬁeld for avalanche breakdown, andVB is the device breakdown voltage. The right-
-hand side of Eq. (4.40) is known as the speciﬁc on-resistance of a power transistor technology,
-having units of transistor on-resistance per unit area. Wide-bandgap devices take advantage of
-this basic relationship to make signiﬁcant advances in performance. These parameters are listed
-in Table4.3 for selected semiconductor materials. The electron mobility listed for GaN material
-is for a high electron mobility transistor (HEMT), for the two-dimensional electron gas induced
-at the junction between AlGaN and GaN materials. Diﬀerent crystalline structures are possible
-in these materials, which can lead to a range of values.
-Table 4.3 Comparison of Power Semiconductor Materials [42]
-Material Bandgap Electron mobility Permittivity Critical ﬁeld Thermal conductivity
-[eV] μn [cm2/Vs] ϵs Ec [V/cm] [W /m◦K]
-Si 1.1 1350 11.8 3 · 105 150
-SiC (4H) 3.26 720 10 2 · 106 450
-GaN 3.44 1500–2000 (2DEG) 9 3 .3· 106 130
-The wide-bandgap energies of SiC and GaN materials lead to signiﬁcant increases in the crit-
-ical ﬁeld Ec, approximately an order-of-magnitude improvement. Equation (4.40) predicts that
-an order-of-magnitude improvement in Ec leads to a three orders-of-magnitude improvement in
-on-resistance Ron. Hence, wide-bandgap materials can potentially achieve a major improvement
-in the relationship between on-resistance and breakdown voltage.
-Additionally, a wide bandgap directly inﬂuences the impact on switching time because im-
-provement in speciﬁc on-resistance allows a reduction in device area while maintaining the
-same on-resistance. Reduction in device area reduces its capacitance, and hence also switch-
-ing loss. Further, wide-bandgap materials enable the use of majority-carrier devices in much
-higher voltage applications, with no current tail, no reverse recovery, and other advantages of
-majority-carrier device technology. Hence a technological improvement in Eq. (4.40) represents
-an improvement in a combination of on-resistance, switching time, and voltage breakdown.
-Native oxide layers can be grown on SiC, and manufacturers have developed vertical power
-MOSFETs in SiC having structures similar to Fig. 4.47. The properties of several commercial
-SiC power MOSFETs are listed in Table 4.4. Relative to Si MOSFET technology, these SiC
-MOSFETs achieve signiﬁcantly higher breakdown voltages, lower on-resistances, and lower
-gate charge. Silicon Carbide MOSFETs rated at 10 kV [43] and higher are feasible.
+图4.33 降压变换器示例：开关损耗建模
 
-4.4 Metal-Oxide-Semiconductor Field-Eﬀect Transistor (MOSFET) 105
-Table 4.4 Characteristics of several commercial SiC MOSFETs
-Part number Rated maximum voltage Rated average current Ron Qg (typical)
-C3M0030090K 900 V 63 A 30 m Ω 87 nC
-C3M0075120K 1200 V 30 A 75 m Ω 51 nC
-C2M0045170D 1700 V 72 A 45 m Ω 188 nC
-SCT3022AL 650 V 93 A 22 m Ω 133 nC
-CPM3-0900-0010A 900 V 196 A 10 m Ω 68 nC
-Table 4.3 notes that SiC exhibits signiﬁcantly lower electron mobility than Si. Since on-
-resistance depends on mobility, low-voltage SiC MOSFETs exhibit inferior on-resistance in
-low-voltage devices. The advantage of wide bandgap in SiC causes SiC devices to be superior
-to Si devices only at rated voltages above 600 V . At lower rated voltages, SiC MOSFETs exhibits
-lower speciﬁc resistance than Si MOSFETs.
-Silicon carbide exhibits high thermal conductivity and low thermal coeﬃcient of expansion.
-Bulk devices are able to operate at very high temperatures, possibly up to 300
-◦C. However, the
-packaging of these devices generally is limited to lower temperatures. Additionally, the reliabil-
-ity of oxide layers is compromised above 175
-◦C, which limits the maximum temperatures of
-SiC MOSFETs.
-The SiC MOSFET includes a body diode, as in Fig.4.48c. The forward voltage drop of this
-SiC p–n diode is 3–4 volts, and its reverse recovery time typically is several tens of nanoseconds.
-If reverse current conduction is required, the MOSFET can be turned on and operated as a
-synchronous rectiﬁer, to reduce conduction loss.
-As noted earlier, the SiC Schottky diode ﬁnds application as a replacement for high voltage
-Si p–n diodes, at 600 V and above. The SiC MOSFET may ﬁnd application as a replacement
-for the Si IGBT at 600 V and above, enabling higher switching frequencies and smaller reactive
-element size.
-Gallium Nitride (GaN) is a second wide-bandgap material ﬁnding signiﬁcant application
-in power electronics. The bandgap energy and critical ﬁeld of GaN is even higher than SiC,
-and Eq. ( 4.40) again predicts that GaN can potentially achieve a major improvement in the
-relationship between on-resistance and breakdown voltage. Thin-ﬁlm lateral GaN devices are
-deposited on a Si or SiC substrate. Since no native oxide is available in GaN, these transistors are
-heterostructure ﬁeld-eﬀect devices. Early devices were depletion-mode ﬁeld-eﬀect transistors,
-but enhancement-mode FETs now are oﬀered commercially [38].
-The structure of a simple enhancement-mode GAN FET is diagrammed in Fig.4.51. The de-
-vice may be fabricated on a silicon substrate, or possible another substrate material such as SiC
-Fig. 4.51 Basic structure of
-enhancement-mode GaN FET
-Source Gate
-Drain
-AlGaN
-p-type
-GaN
-intrinsic
-Substrate (Si)
-GaN
-Transition layers
+所假定的晶体管和二极管波形如图4.34所示。在这些理想化波形中，二极管软度因子取为 $S = 0$。电感电流和电容电压的开关纹波假定很小。此外，功率级占空比 $D$ 按晶体管电压波形 $v_t(t)$ 定义：在 $0 \le t \le DT_s$ 区间内晶体管电压为零。这一定义使电感伏秒平衡方程与理想情形的结果一致，并得到匝比为 $1 : D$ 的直流变换器等效电路。
 
-106 4 Switch Realization
-or sapphire. Since the coeﬃcients of thermal expansion of the substrate and the GaN materials
-diﬀer, transition layers are needed for improvement of reliability under thermal cycling. Intrin-
-sic GaN is deposited next. A layer of AlGaN is then deposited. The crystalline structures and
-bandgaps of AlGaN and GaN diﬀer, and hence the AlGaN–GaN interface is known as ahetero-
-junction. In the GAN FET, a two-dimensional electron gas (2DEG) forms at the heterojunction
-as illustrated in Fig.4.52; the 2DEG contains high-mobility electrons within the GaN material at
-the heterojunction. This type of device is also called ahigh electron mobility transistor(HEMT).
-Fig. 4.52 Formation of a
-two-dimensional electron gas
-(2DEG) at the heterojunction,
-comprised of high-mobility
-electrons
-Source
-Gate
-Drain
-AlGaN
-p-type
-GaN
-intrinsic
-Substrate (Si)
-GaN
-Transition layers
-2DEG
-The electrons within the 2DEG form a channel that can conduct current between the source
-and drain; because of their high mobility, the device exhibits low on-resistance. The gate forms
-a GaN diode between the gate terminal and the channel. The 2DEG can be controlled by the
-gate voltage: at zero gate voltage, the gate diode is reverse-biased, and its depletion region
-extends into the GaN region su ﬃcient to deplete the 2DEG. With positive gate voltage, the
-2DEG forms a complete conducting channel between drain and source. It is important to limit
-the on-state gate current to a value that does not exceed what the gate diode can handle. Thei–v
-characteristics of the gate GaN diode vary with temperature and drain current; depending on the
-manufacturer, a typical on-state gate-to-source voltage may be 3–5 V .
-The high electron mobility of these devices yields competitive on-resistance at voltages be-
-low 600 V . GaN FETs are available at rated voltages of tens of volts up to 650 V , and devices
-at much higher voltages are described in the literature. In comparison with Si MOSFETs, the
-GaN FET can achieve similar on-resistance with smaller area, smaller capacitances, and faster
-switching times. Table 4.5 contains a comparison of a 650 V GaN FET with a 650 V Si super-
-junction MOSFET, having similar on-resistance. The gate charge of the GaN FET is roughly an
-order-of-magnitude smaller than the Si MOSFET. For reverse conduction with zero gate bias,
-the Si MOSFET body diode exhibits a voltage drop of approximately 0.8 V , while the GaN FET
-exhibits a drop of approximately 4 V . The Si MOSFET body diode exhibits signiﬁcant reverse
-recovery, while the GaN FET does not.
-The GaN FET structure of Fig. 4.51 does not contain a body diode. Nonetheless, the device
-is able to conduct both positive and negative current between drain and source when the device
-is on. Further, when v
-gs = 0, the GaN FET will conduct when vds is suﬃciently negative such
-that vgd is positive enough to turn on the device, as illustrated in Fig.4.53. Hence, the GaN FET
-cannot block negative voltage, but it is a current-bidirectional two-quadrant switch.
-```
+![源页 p.106](../assets/page-snapshots/chapter-4/page-106.png)
+
+图4.34 含二极管反向恢复的降压变换器假定波形，图4.33
+
+可见二极管反向恢复时间 $t_r$ 使占空比发生畸变，致使有效功率级占空比 $D$ 小于控制电路产生的占空比 $D_c$：
+
+$$D = D_c - \frac{t_r}{T_s} \tag{4.12}$$
+
+开关时间以及栅极驱动器延迟等现象会给占空比的确定带来歧义。本讨论中，功率级占空比 $D$ 按晶体管电压波形定义。
+
+可将这些波形与电感电压、电容电流和变换器输入电流相关联。电感电压 $v_L(t)$ 与二极管电压 $v_d(t)$ 的关系为：
+
+$$v_L(t) = v_d(t) - V \tag{4.13}$$
+
+图4.35 降压变换器示例：电感电压波形
+
+从图4.34所示二极管电压波形 $v_d(t)$ 中减去输出电压 $V$，得到图4.35的电感电压波形。可见，按式 (4.12) 定义 $D$ 时，得到通常的电感电压波形。对此波形应用电感伏秒平衡得
+
+$$\langle v_L \rangle = 0 = DV_g - V \tag{4.14}$$
+
+![源页 p.107](../assets/page-snapshots/chapter-4/page-107.png)
+
+电容电流 $i_C(t)$ 以通常方式与电感电流和负载电流相关联。电容电荷平衡给出
+
+$$\langle i_C \rangle = 0 = I_L - \frac{V}{R} \tag{4.15}$$
+
+按 3.3 节的方法构造对应这两个方程的等效电路，得图4.36。
+
+为完善降压变换器的等效电路模型，需如 3.4 节所述导出平均输入电流 $I_g$ 的方程。由图4.33可见，输入电流 $i_g(t)$ 与晶体管电流 $i_t(t)$ 重合。晶体管电流波形绘于图4.34；其平均值为
+
+$$I_g = \langle i_t(t) \rangle = \frac{1}{T_s}\int_0^{T_s} i_t(t)\,dt \tag{4.16}$$
+
+$$= \frac{1}{T_s}(D T_s I_L + t_r I_L + Q_r) \tag{4.17}$$
+
+$$= D I_L + \frac{t_r}{T_s}I_L + \frac{Q_r}{T_s} \tag{4.18}$$
+
+图4.36 降压变换器示例：对应式 (4.14) 和 (4.15) 的等效电路
+
+图4.37 降压变换器示例：对应式 (4.18) 的等效电路
+
+式 (4.18) 可视为描述从电源 $V_g$ 抽取直流电流的节点方程。相应的等效电路如图4.37所示。
+
+将图4.36和图4.37合并即得图4.38，由此可得含开关损耗的降压变换器完整模型。受控源合并为 $1 : D$ 直流变换器。此外，模型含两个电流源，用以建模由二极管恢复电荷 $Q_r$ 和反向恢复时间 $t_r$ 引起的输入电流直流分量。
+
+![源页 p.108](../assets/page-snapshots/chapter-4/page-108.png)
+
+图4.38 含二极管引起开关损耗的降压变换器完整模型
+
+在图4.38的模型中，电流源消耗的功率为
+
+$$P_{sw} = V_g\left(\frac{Q_r}{T_s} + \frac{I_L t_r}{T_s}\right) \tag{4.19}$$
+
+这是二极管反向恢复过程引起的开关损耗。当 $S = 0$ 时，此功率在晶体管中耗散；当 $S > 0$ 时，此开关损耗部分在二极管中、部分在晶体管中耗散。
+
+现可求解图4.38的模型，导出变换比和效率的表达式。变换比 $M$ 等于直流变换器的匝比：
+
+$$M = \frac{V}{V_g} = D \tag{4.20}$$
+
+输出功率为
+
+$$P_{out} = V I_L \tag{4.21}$$
+
+输入功率为
+
+$$P_{in} = V_g\left(D I_L + \frac{Q_r}{T_s} + \frac{I_L t_r}{T_s}\right) \tag{4.22}$$
+
+取式 (4.21) 与式 (4.22) 之比并化简，可导出效率方程：
+
+$$\eta = \frac{P_{out}}{P_{in}} = \frac{1}{1 + f_s\left(\dfrac{t_r}{D} + \dfrac{Q_r R}{D^2 V_g}\right)} \tag{4.23}$$
+
+可见效率依赖于开关频率。
+
+式 (4.23) 绘于图4.39，参数取 $V_g = 24\,\text{V}$、$f_s = 100\,\text{kHz}$、$R = 15\,\Omega$、$Q_r = 0.75\,\mu\text{C}$、$t_r = 75\,\text{ns}$。可见开关损耗使效率在低占空比时趋于零。这是因为输出功率趋于零而开关损耗仍然存在。该模型假定开关纹波可忽略，且未尝试建模 $Q_r$ 和 $t_r$ 随电流的变化；实际上这些量确实随电流变化，但变化较弱。实验发现，开关损耗确实使恒频变换器的效率随输出功率降低而显著下降。
+
+![源页 p.109](../assets/page-snapshots/chapter-4/page-109.png)
+
+图4.39 式 (4.23) 预测的降压变换器效率
+
+### 4.3.4 升压变换器示例
+
+作为开关损耗建模的另一示例，考虑图4.40的升压变换器。同样考虑二极管反向恢复引起的开关损耗，计入反向恢复时间 $t_r$ 和恢复电荷 $Q_r$ 的影响。此外还建模电感直流绕组电阻 $R_L$ 引起的损耗，但忽略所有其他损耗源。并假定电感电流和电容电压纹波很小。
+
+晶体管和二极管波形绘于图4.41；除电压幅值不同外，与图4.34的降压波形类似。同样，变换器功率级占空比 $D$ 按晶体管电压波形 $v_t(t)$ 定义；由于二极管反向恢复时间 $t_r$，该占空比不同于控制器栅极驱动信号 $c(t)$ 的占空比 $D_c$。将看到这一定义导出匝比为 $D' : 1$ 的直流变换器等效电路。
+
+应用电感伏秒平衡原理，先构造 $v_L(t)$ 波形。升压变换器中，电感电压 $v_L(t)$ 与晶体管电压 $v_t(t)$ 和电感电流 $i_L(t)$ 的关系为
+
+$$v_L(t) = V_g - i_L(t)R_L - v_t(t) \tag{4.24}$$
+
+图4.40 升压变换器示例：开关损耗建模
+
+![源页 p.110](../assets/page-snapshots/chapter-4/page-110.png)
+
+图4.41 含二极管反向恢复的升压变换器假定波形，图4.40
+
+图4.42 升压变换器示例：电感电压波形
+
+从 $V_g$ 中减去图4.41的晶体管电压波形，并利用小纹波近似，得到图4.42的电感电压波形。该波形的直流分量为
+
+$$\langle v_L \rangle = 0 = D(V_g - I_L R_L) - D'(V_g - I_L R_L - V) \tag{4.25}$$
+
+$$= V_g - I_L R_L - D'V$$
+
+![源页 p.111](../assets/page-snapshots/chapter-4/page-111.png)
+
+升压变换器中，电容电流 $i_C$ 与二极管电流 $i_d$ 和负载电流 $v/R$ 的关系由输出节点方程给出：
+
+$$i_C = i_d - \frac{v}{R} \tag{4.26}$$
+
+由电容电荷平衡，电容电流的平均值为零。故可用式 (4.26) 写出
+
+$$\langle i_C \rangle = 0 = \langle i_d \rangle - \frac{V}{R} \tag{4.27}$$
+
+二极管电流的直流分量由图4.43波形的积分求得：
+
+$$\langle i_d \rangle = \frac{1}{T_s}\int_0^{T_s} i_d(\tau)\,d\tau \tag{4.28}$$
+
+$$= \frac{1}{T_s}\bigl(I_L(D'T_s - t_r) - Q_r\bigr)$$
+
+$$= D'I_L - \frac{t_r I_L}{T_s} - \frac{Q_r}{T_s}$$
+
+图4.43 升压变换器示例：二极管电流波形
+
+这些方程中约定恢复电荷 $Q_r$ 取正值。故输出节点方程 (4.27) 成为
+
+$$0 = D'I_L - \frac{t_r I_L}{T_s} - \frac{Q_r}{T_s} - \frac{V}{R} \tag{4.29}$$
+
+最后注意到输入电流 $i_g(t)$ 与电感电流 $i_L(t)$ 重合，故输入电流的直流分量为
+
+$$I_g = I_L \tag{4.30}$$
+
+故描述该变换器直流模型的方程为
+
+$$0 = V_g - I_L R_L - D'V \tag{4.31}$$
+
+$$0 = D'I_L - \frac{t_r I_L}{T_s} - \frac{Q_r}{T_s} - \frac{V}{R}$$
+
+$$I_g = I_L$$
+
+![源页 p.112](../assets/page-snapshots/chapter-4/page-112.png)
+
+这些方程来自式 (4.25)、(4.29) 和 (4.30)。对应式 (4.31) 的等效电路如图4.44所示。该直流电路模型计入升压变换器中二极管引起的开关损耗和电感直流绕组电阻；按第3章的方法还可纳入其他导通损耗。
+
+图4.44 含二极管引起开关损耗的升压变换器完整模型
+
+图4.44中两个独立源消耗的功率为
+
+$$P_{sw} = V\left(\frac{t_r I_L}{T_s} + \frac{Q_r}{T_s}\right) \tag{4.32}$$
+
+此功率等于二极管反向恢复在 MOSFET 和二极管中引起的开关损耗。在模型中，这些源与负载并联，实际表现为变换器的附加负载。在实际变换器中，二极管反向恢复电流确从输出滤波电容 $C$ 流出并流过半导体器件。
+
+求解图4.44模型可得变换比 $M = V/V_g$。可证结果为
+
+$$M = \frac{V}{V_g} = \left(\frac{1}{D'}\right)\frac{1 - \dfrac{Q_r R_L}{T_s D' V_g\left(1 - \dfrac{t_r}{D'T_s}\right)}}{1 + \dfrac{R_L}{D'^2 R\left(1 - \dfrac{t_r}{D'T_s}\right)}} \tag{4.33}$$
+
+该式对占空比绘于图4.45，参数取 $f_s = 100\,\text{kHz}$、$V_g = 24\,\text{V}$、$R = 15\,\Omega$、$R_L = 0.15\,\Omega$、$Q_r = 1\,\mu\text{C}$、$t_r = 50\,\text{ns}$。含开关损耗的变换比（粗实线，居下）与仅含电感绕组电阻的结果（细线，居上）比较。可见两条曲线定性相似，开关损耗的影响在高占空比时更为显著。
+
+还可评估图4.44等效电路模型以求变换器效率。输入功率为
+
+$$P_{in} = V_g I_g \tag{4.34}$$
+
+输出功率为
+
+$$P_{out} = V\left(D'I_g - \frac{Q_r}{T_s} - \frac{t_r I_L}{T_s}\right) \tag{4.35}$$
+
+![源页 p.113](../assets/page-snapshots/chapter-4/page-113.png)
+
+图4.45 升压变换器含开关损耗和电感直流绕组电阻时的变换比 $V/V_g$。下（粗）线含开关损耗项和直流绕组电阻；上（细）线仅含直流绕组电阻，无开关损耗
+
+取两式之比并化简，可证效率为
+
+$$\eta = \frac{V}{V_g}\left(D' - \frac{Q_r}{T_s I_L} - \frac{t_r}{T_s}\right) \tag{4.36}$$
+
+此外，求解图4.44等效电路模型可得电感电流 $I_L$：
+
+$$I_L = \left(\frac{V_g}{D'^2 R} + \frac{Q_r}{T_s D'}\right)\left(\frac{1}{1 - \dfrac{t_r}{D'T_s} + \dfrac{R_L}{D'^2 R}}\right) \tag{4.37}$$
+
+式 (4.36) 和 (4.37) 可用于绘制变换器效率。结果如图4.46所示，参数同图4.45。同样比较了含开关损耗（下粗线）和仅含电感绕组电阻无开关损耗（上细线）的结果。可见这些二极管反向恢复时间和恢复电荷的取值使效率显著降低，即便在二极管反向恢复对变换比 $V/V_g$ 影响可忽略的低占空比处亦然。式 (4.33) 右端乘以 $1/D'$ 的项不等于效率，而仅用以说明损耗元件如何影响变换比。
+
+图4.46 预测效率在占空比趋于零时趋向略低于 93% 的值。应指出，升压变换器可在 $D = 0$ 时工作于直通模式，此时 MOSFET 始终关断且从不开关。此种情形下无开关损耗，效率将跃升至仅含电感直流铜损的上曲线。
+
+![源页 p.114](../assets/page-snapshots/chapter-4/page-114.png)
+
+图4.46 含二极管引起开关损耗的升压变换器效率。下（粗）线含开关损耗项和直流绕组电阻；上（细）线仅含直流绕组电阻，无开关损耗
+
+## 4.4 金属-氧化物-半导体场效应晶体管（MOSFET）
+
+### 4.4.1 功率 MOSFET 简介
+
+功率 MOSFET 是一种现代功率半导体器件，栅长接近一微米。功率器件由许多小的并联增强型 MOSFET 元胞组成，这些元胞覆盖硅芯片表面。一个元胞的剖面如图4.47所示。电流纵向流过硅片：金属化漏极位于芯片底面，而金属化源极和多晶硅栅极位于顶面。在 $v_{ds} \ge 0$ 的正常工作条件下，p–n 和 p–n⁻ 两个结均反偏。图4.48a 所示为器件的关断状态。所施加的漏-源电压降落于 p–n⁻ 结的耗尽区上。$n^-$ 区轻掺杂，以获得所需的击穿电压额定。
+
+图4.47 DMOS n 沟道功率 MOSFET 结构剖面。交叉阴影区为金属化接触，阴影区为绝缘二氧化硅层
+
+![源页 p.115](../assets/page-snapshots/chapter-4/page-115.png)
+
+图4.48 功率 MOSFET 的工作：(a) 关断状态，$v_{ds}$ 降落于 $n^-$ 区的耗尽区上；(b) 通态下电流经导电沟道流通；(c) 由 p–n⁻ 结形成的体二极管
+
+![源页 p.116](../assets/page-snapshots/chapter-4/page-116.png)
+
+图4.48b所示为通态工作，此时正栅-源电压足够大。在 $p$ 区表面、栅极下方形成沟道。此沟道称为反型区，含可动电子，能在漏极与源极之间导电。漏极电流流过 $n^-$ 漂移区、沟道、$n$ 区，经源极接触流出。器件的导通电阻为 $n^-$ 区、沟道、源极和漏极接触等各部分电阻之和。
+
+随击穿电压增大，导通电阻越来越由 $n^-$ 漂移区的电阻主导。由于没有少数载流子引起电导调制，当击穿电压增至数百伏乃至更高时，导通电阻迅速增大。
+
+p–n⁻ 结称为体二极管；如图4.48c所示，该结形成与 MOSFET 沟道并联的有效二极管。当漏-源电压 $v_{ds}(t)$ 为负时，体二极管可正偏。该二极管能导通 MOSFET 的全额额定电流。但许多 MOSFET 的体二极管速度未作优化，体二极管反向恢复过渡期间流过的大峰值电流可能如后所述造成器件失效。较新的 MOSFET 含快速恢复体二极管；这些器件额定可承受体二极管反向恢复过渡期间的峰值电流。
+
+图4.48的 MOSFET 结构还包含一个寄生 BJT 结构，由源区 $n$（发射区）、衬底 $p$ 区（基区）和漂移 $n^-$ 区（集电区）构成。由于 $n$ 区和 $p$ 区被源极接触短路，此寄生 BJT 通常关断。但若有足够大电流流过 $p$ 区的体电阻，则可能使 p–n 基-射结正偏。这种情况可能在体二极管反向恢复过渡期间出现，可导致 MOSFET 发生闩锁并失效。较新的 MOSFET 设计不易出现此失效机制。
+
+典型 n 沟道 MOSFET 的静态开关特性如图4.49所示。漏极电流作为栅-源电压的函数绘出，对应若干漏-源电压值。当栅-源电压小于阈值电压 $V_{th}$ 时器件工作于关断状态。$V_{th}$ 的典型值为 3 V。当栅-源电压大于 6 或 7 V 时器件工作于导通状态；通常将栅极驱动至 12 或 15 V 以确保正向压降最小化。在导通状态下，漏-源电压 $V_{DS}$ 大致与漏极电流 $I_D$ 成正比。MOSFET 能导通远超其平均电流额定的峰值电流，且静态特性的性质在高电流水平下不变。也有逻辑电平功率 MOSFET 可供选用，其在 5 V 栅-源电压下工作于导通状态。一些 p 沟道器件也可获得，但其特性劣于等效的 n 沟道器件。
+
+MOSFET 的导通电阻和正向压降具有正温度系数。这一特性使器件相对容易并联。有大电流 MOSFET 模块可供使用，内含若干并联芯片。
+
+MOSFET 的主要电容如图4.50所示。该模型足以定性理解 MOSFET 的开关行为；更精确的模型计入 DMOS 几何结构中固有的寄生结型场效应晶体管。MOSFET 的开关时间本质上由栅极驱动器对这些电容充电所需时间决定。
+
+![源页 p.117](../assets/page-snapshots/chapter-4/page-117.png)
+
+图4.49 功率 MOSFET 的典型静态特性。漏极电流 $I_D$ 对栅-源电压 $V_{GS}$ 绘出，对应若干漏-源电压 $V_{DS}$ 值
+
+图4.50 计入体二极管和有效端子电容的 MOSFET 等效电路
+
+由于漏极电流是栅-源电压的函数，漏极电流的变化率取决于栅极驱动电路对栅-源电容充电的速率。同样，漏极电压的变化率是栅-漏电容充电速率的函数。漏-源电容在 PWM 变换器中直接引起开关损耗，因为储存在该电容中的能量在晶体管开通过渡期间损失。开关损耗在 4.6 节讨论。
+
+栅-源电容本质上是线性的。但漏-源电容和栅-漏电容强烈非线性：这些增量电容随所加电容电压的平方根倒数变化。例如，增量漏-源电容的依赖关系可写为
+
+$$C_{ds}(v_{ds}) = \frac{C_0}{\sqrt{1 + \dfrac{v_{ds}}{V_0}}} \tag{4.38}$$
+
+![源页 p.118](../assets/page-snapshots/chapter-4/page-118.png)
+
+其中 $C_0$ 和 $V_0$ 为取决于器件结构的常数。当 $v_{ds}$ 在其正常工作范围内变化时，这些电容可轻易变化若干个数量级。当 $v_{ds} \gg V_0$ 时，式 (4.38) 可近似为
+
+$$C_{ds}(v_{ds}) \approx \frac{C_0}{\sqrt{V_0}}\frac{1}{\sqrt{v_{ds}}} = \frac{c'_0}{\sqrt{v_{ds}}} \tag{4.39}$$
+
+这些表达式在 4.6.1 节用于确定 $C_{ds}$ 储能引起的开关损耗。
+
+表4.2 若干商用 n 沟道功率 MOSFET 的特性
+
+| 器件型号 | 额定最高电压 | 额定平均电流 | $R_{on}$ | $Q_g$（典型） |
+|---|---|---|---|---|
+| SiSS64DN | 30 V | 40 A | 2.1 mΩ | 21 nC |
+| CSD18512Q5B | 40 V | 100 A | 1.3 mΩ | 75 nC |
+| NTMFS6H800N | 80 V | 203 A | 1.8 mΩ | 85 nC |
+| IXFH80N25X3 | 250 V | 80 A | 13 mΩ | 83 nC |
+| IPL60R065P7 | 650 V | 41 A | 53 mΩ | 67 nC |
+
+若干商用功率 MOSFET 的特性列于表4.2。栅极电荷 $Q_g$ 是栅极驱动电路须向 MOSFET 供给、以使栅极电压从零升至某一给定值（通常 10 V）所需的电荷，此时关断态漏-源电压取某一给定值（通常为额定 $V_{DS}$ 的 80%）。总栅极电荷为栅-漏电容和栅-源电容上电荷之和。总栅极电荷在某种程度上是 MOSFET 尺寸和开关速度的量度。一个性能指标是导通电阻 $R_{on}$ 与栅极电荷 $Q_g$ 之积；$R_{on}Q_g$ 较低的器件预期以更高效率工作。表4.2所列导通电阻为 25 °C 下的典型值；在高温下导通电阻显著增大。
+
+与其他功率器件不同，MOSFET 通常不按额定平均电流选取。相反，导通电阻及其对导通损耗的影响是限制因素，MOSFET 通常工作在略低于额定值的平均电流下。
+
+多数载流子硅 MOSFET 通常在约 600 V 以下电压中为首选器件。在这些电压下，其正向压降与少数载流子器件相当或更优，且开关速度显著更快。典型开关时间低于 100 ns。在高于 600 V 时，具有更低正向压降的少数载流子器件（如 IGBT）通常更受青睐。这些少数载流子器件在 4.5 节讨论。
+
+超结 MOSFET [41] 在漂移区内采用交替的重掺杂 $n$ 层和 $p$ 层，以在关断态条件下精细控制电场。这使得导通电阻与阻断电压之间的折中获得更好优化，从而在 500–800 V 的 MOSFET 中获得显著更优的导通电阻、电容和芯片面积。表4.2所列 IPL60R06SP7 即为超结 MOSFET 之一例。
+
+### 4.4.2 宽禁带 FET
+
+![源页 p.119](../assets/page-snapshots/chapter-4/page-119.png)
+
+基于宽禁带（WBG）材料的功率晶体管近年作为具有商业意义的开关器件出现。与传统的硅基功率晶体管相比，这些宽禁带晶体管能在更低导通电阻和更快开关时间下获得更高击穿电压。基于碳化硅（SiC）的功率 MOSFET 用于 600 V 以上电压，基于氮化镓（GaN）的 FET 器件目前用于 600 V 及以下电压。
+
+对于无电导调制的多数载流子器件，漂移区的电阻 $R_{on}$ 可表示为
+
+$$A R_{on} = \frac{k\,V_B^2}{\mu_n \epsilon_s E_c^3} \tag{4.40}$$
+
+其中 $R_{on}$ 为漂移区电阻，$A$ 为器件面积，$k$ 为取决于工艺和其他因素的常数，$\mu_n$ 为电子迁移率，$\epsilon_s$ 为半导体介电常数，$E_c$ 为雪崩击穿的临界电场，$V_B$ 为器件击穿电压。式 (4.40) 右端称为功率晶体管技术的比导通电阻，单位为器件单位面积的导通电阻。宽禁带器件利用这一基本关系在性能上取得重大进展。所选半导体材料的这些参数列于表4.3。GaN 材料所列电子迁移率对应高电子迁移率晶体管（HEMT），为 AlGaN 与 GaN 材料之间界面感生的二维电子气。这些材料可存在不同的晶体结构，从而可能有一系列取值。
+
+表4.3 功率半导体材料比较 [42]
+
+| 材料 | 带隙 [eV] | 电子迁移率 $\mu_n$ [cm²/Vs] | 介电常数 $\epsilon_s$ | 临界电场 $E_c$ [V/cm] | 热导率 [W/m·K] |
+|---|---|---|---|---|---|
+| Si | 1.1 | 1350 | 11.8 | 3·10⁵ | 150 |
+| SiC (4H) | 3.26 | 720 | 10 | 2·10⁶ | 450 |
+| GaN | 3.44 | 1500–2000（2DEG） | 9 | 3.3·10⁶ | 130 |
+
+SiC 和 GaN 材料的宽禁带能量使临界电场 $E_c$ 显著增大，约有一个数量级的改善。式 (4.40) 预测 $E_c$ 改善一个数量级可使导通电阻 $R_{on}$ 改善三个数量级。故宽禁带材料有可能在导通电阻与击穿电压的关系上取得重大改善。
+
+此外，宽禁带直接影响开关时间，因为比导通电阻的改善允许在保持相同导通电阻下减小器件面积。器件面积减小使其电容减小，从而开关损耗也减小。再者，宽禁带材料使多数载流子器件能用于高得多的电压场合，无电流尾、无反向恢复，并具有多数载流子器件技术的其他优点。故式 (4.40) 中的技术改善代表了导通电阻、开关时间和电压击穿三者的综合改善。
+
+SiC 上可生长天然氧化层，制造商已开发出结构与图4.47类似的 SiC 垂直功率 MOSFET。若干商用 SiC 功率 MOSFET 的特性列于表4.4。相对于 Si MOSFET 技术，这些 SiC MOSFET 获得显著更高的击穿电压、更低的导通电阻和更低的栅极电荷。10 kV [43] 及以上的碳化硅 MOSFET 是可行的。
+
+![源页 p.120](../assets/page-snapshots/chapter-4/page-120.png)
+
+表4.4 若干商用 SiC MOSFET 的特性
+
+| 器件型号 | 额定最高电压 | 额定平均电流 | $R_{on}$ | $Q_g$（典型） |
+|---|---|---|---|---|
+| C3M0030090K | 900 V | 63 A | 30 mΩ | 87 nC |
+| C3M0075120K | 1200 V | 30 A | 75 mΩ | 51 nC |
+| C2M0045170D | 1700 V | 72 A | 45 mΩ | 188 nC |
+| SCT3022AL | 650 V | 93 A | 22 mΩ | 133 nC |
+| CPM3-0900-0010A | 900 V | 196 A | 10 mΩ | 68 nC |
+
+表4.3 注明 SiC 的电子迁移率显著低于 Si。由于导通电阻依赖迁移率，低压 SiC MOSFET 在低压器件中呈现较劣的导通电阻。SiC 宽禁带的优势使 SiC 器件仅在 600 V 以上额定电压时优于 Si 器件。在更低额定电压下，SiC MOSFET 呈现比 Si MOSFET 更低的比电阻。
+
+碳化硅具有高热导率和低热膨胀系数。体器件能在很高温度下工作，可能达 300 °C。但这些器件的封装通常限于较低温度。此外，氧化层在 175 °C 以上可靠性受损，这限制了 SiC MOSFET 的最高温度。
+
+SiC MOSFET 含体二极管，如图4.48c所示。此 SiC p–n 二极管的正向压降为 3–4 V，反向恢复时间通常为数十纳秒。若需反向电流导通，可将 MOSFET 开通作为同步整流器工作，以降低导通损耗。
+
+如前所述，SiC 肖特基二极管用作 600 V 及以上高压 Si p–n 二极管的替代。SiC MOSFET 可用作 600 V 及以上 Si IGBT 的替代，从而实现更高开关频率和更小的储能元件尺寸。
+
+氮化镓（GaN）是第二种在电力电子中获得重要应用的宽禁带材料。GaN 的带隙能量和临界电场甚至高于 SiC，式 (4.40) 再次预测 GaN 可能在导通电阻与击穿电压的关系上取得重大改善。薄膜横向 GaN 器件沉积在 Si 或 SiC 衬底上。由于 GaN 无天然氧化层，这些晶体管为异质结场效应器件。早期器件为耗尽型场效应晶体管，但增强型 FET 现已商用供货 [38]。
+
+图4.51 增强型 GaN FET 的基本结构
+
+![源页 p.121](../assets/page-snapshots/chapter-4/page-121.png)
+
+简单增强型 GaN FET 的结构如图4.51所示。该器件可制作在硅衬底上，也可制作在 SiC 或蓝宝石等其他衬底材料上。由于衬底与 GaN 材料的热膨胀系数不同，需要过渡层以提高热循环下的可靠性。其次沉积本征 GaN。然后沉积一层 AlGaN。AlGaN 和 GaN 的晶体结构和带隙不同，故 AlGaN–GaN 界面称为异质结。在 GaN FET 中，异质结处形成二维电子气（2DEG），如图4.52所示；2DEG 含异质结处 GaN 材料中的高迁移率电子。此类器件也称为高电子迁移率晶体管（HEMT）。
+
+图4.52 异质结处二维电子气（2DEG）的形成，由高迁移率电子组成
+
+2DEG 中的电子形成能在源极与漏极之间导电的沟道；由于电子迁移率高，器件呈现低导通电阻。栅极在栅极端子和沟道之间形成 GaN 二极管。2DEG 可由栅极电压控制：在零栅压下，栅极二极管反偏，其耗尽区向 GaN 区延伸足以使 2DEG 耗尽。在正栅压下，2DEG 形成漏极与源极之间完整的导电沟道。须将通态栅极电流限制在栅极二极管所能承受的值以内。栅极 GaN 二极管的 $i$–$v$ 特性随温度和漏极电流变化；视制造商而定，通态栅-源电压的典型值可能为 3–5 V。
+
+这些器件的高电子迁移率使其在 600 V 以下电压下具有竞争力的导通电阻。GaN FET 有数十伏至 650 V 额定电压产品，文献还描述了更高电压的器件。与 Si MOSFET 相比，GaN FET 能以更小面积、更小电容和更快开关时间获得相近的导通电阻。表4.5 给出一个 650 V GaN FET 与一个 650 V Si 超结 MOSFET（导通电阻相近）的比较。GaN FET 的栅极电荷大约比 Si MOSFET 小一个数量级。在零栅压反偏导通时，Si MOSFET 体二极管的压降约 0.8 V，而 GaN FET 的压降约 4 V。Si MOSFET 体二极管有显著反向恢复，而 GaN FET 则无。
+
+图4.51的 GaN FET 结构不含体二极管。但器件在导通时能在漏极与源极之间导通正向和反向电流。再者，当 $v_{gs} = 0$ 时，若 $v_{ds}$ 足够负使 $v_{gd}$ 正到足以开通器件，则 GaN FET 将导通，如图4.53所示。故 GaN FET 不能阻断负向电压，但它是电流双向的两象限开关。

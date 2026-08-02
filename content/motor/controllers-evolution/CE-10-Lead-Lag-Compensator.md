@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-10: 超前滞后补偿器设计
 
 **副标题：从极零点视角理解补偿器——一种形式，三种补偿器**
-**难度：**  较高
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-03（频域分析基础）、CE-09（Bode积分与水床效应）
+- **难度：**  较高
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-03（频域分析基础）、CE-09（Bode积分与水床效应）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 超前补偿器（Lead Compensator）和滞后补偿器（Lag Compensator）看似两种不同的东西，实则共享同一个传递函数形式：$C(s) = K \cdot \frac{s + z}{s + p}$。区别仅在于零点和极点的相对位置：$\lvert z \rvert < \lvert p \rvert$ 为超前（买到了相位提升），$\lvert p \rvert < \lvert z \rvert$ 为滞后（买到了DC增益提升）。超前-滞后级联则同时获得两者。理解这一点，补偿器设计就从记忆公式变成了在s平面上放置极零点的几何操作。
 
-**认知挂钩：** 超前补偿 ≈ 微分作用（PD），滞后补偿 ≈ 积分作用（PI），超前-滞后级联 ≈ PID。区别在于补偿器的极零点形式让你精确控制每个作用在哪个频率范围生效，而PID的三个增益隐式地决定了这些频率范围。
+- **认知挂钩：** 超前补偿 ≈ 微分作用（PD），滞后补偿 ≈ 积分作用（PI），超前-滞后级联 ≈ PID。区别在于补偿器的极零点形式让你精确控制每个作用在哪个频率范围生效，而PID的三个增益隐式地决定了这些频率范围。
 
 ---
 
@@ -89,7 +89,7 @@ $$G(s) = \frac{1}{s(s+2)}$$
 
 $$\lvert G(j\omega) \rvert = \frac{1}{\omega\sqrt{\omega^2 + 4}}, \qquad \angle G(j\omega) = -90^\circ - \arctan\!\left(\frac{\omega}{2}\right)$$
 
-**裸对象分析：**
+- **裸对象分析：**
 
 0 dB穿越频率求解 $\lvert G(j\omega_{cp}) \rvert = 1$：
 
@@ -99,7 +99,7 @@ $$\omega_{cp}^4 + 4\omega_{cp}^2 - 1 = 0 \;\Longrightarrow\; \omega_{cp} = \sqrt
 
 $$\angle G(j\omega_{cp}) = -90^\circ - \arctan(0.486/2) \approx -103.7^\circ$$
 
-**相位裕度：** $180^\circ - 103.7^\circ = 76.3^\circ$——宽裕。**增益裕度：** 无穷（相位在任何有限频率都不达到 $-180^\circ$）。
+- **相位裕度：** $180^\circ - 103.7^\circ = 76.3^\circ$——宽裕。**增益裕度：** 无穷（相位在任何有限频率都不达到 $-180^\circ$）。
 
 所以裸对象已经稳定且有舒适的裕度。有什么需要修的？两件事：
 
@@ -120,7 +120,7 @@ $$C_{\text{lead}}(s) = K \cdot \frac{s + z}{s + p}, \qquad \lvert z \rvert < \lv
 
 零点从 $\omega = \lvert z \rvert$ 附近开始拉相位上升；极点从 $\omega = \lvert p \rvert$ 附近把相位拉回来。在两者之间，净相位为正——"相位提升"。
 
-**为什么需要它：** 被控对象中每个实极点都添加相位滞后。当你推高穿越频率（为了速度），被控对象在新穿越处的相位更负。你需要额外相位来维持稳定性。超前网络正好在你放置提升的频率提供这些相位。
+- **为什么需要它：** 被控对象中每个实极点都添加相位滞后。当你推高穿越频率（为了速度），被控对象在新穿越处的相位更负。你需要额外相位来维持稳定性。超前网络正好在你放置提升的频率提供这些相位。
 
 ### 4.2 相位提升：多少，在哪里
 
@@ -148,7 +148,7 @@ $$\phi_{\max} = \arcsin\!\left(\frac{p - z}{p + z}\right) = \arcsin\!\left(\frac
 
 **步骤1——确定所需相位提升 $\phi_{\max}$。** 加5°–10°安全裕度，因为放置超前会略微上移穿越频率。我们设计 $\phi_{\max} = 50^\circ$。
 
-**步骤2——计算极零点比值 $r$：**
+- **步骤2——计算极零点比值 $r$：**
 
 $$r = \frac{p}{z} = \frac{1 + \sin\phi_{\max}}{1 - \sin\phi_{\max}}$$
 
@@ -164,7 +164,7 @@ $$z = \frac{\omega_{\max}}{\sqrt{r}} \approx \frac{0.486}{\sqrt{7.55}} \approx 0
 
 $$K = \left\lvert \frac{j\omega_{\max} + p}{j\omega_{\max} + z}\right \rvert = \frac{\sqrt{\omega_{\max}^2 + p^2}}{\sqrt{\omega_{\max}^2 + z^2}} \approx \frac{\sqrt{0.236 + 1.80}}{\sqrt{0.236 + 0.0313}} \approx 2.75$$
 
-**结果：** $C_{\text{lead}}(s) = 2.75 \cdot \dfrac{s + 0.177}{s + 1.34}$，$\lvert z \rvert = 0.177 < \lvert p \rvert = 1.34$——超前，如预期。
+- **结果：** $C_{\text{lead}}(s) = 2.75 \cdot \dfrac{s + 0.177}{s + 1.34}$，$\lvert z \rvert = 0.177 < \lvert p \rvert = 1.34$——超前，如预期。
 
 **步骤5——验证。** 环路传递函数 $L(s) = C_{\text{lead}}(s) \cdot G(s)$ 在偏移后的穿越频率处有改善的相位裕度。阶跃响应显示更快的上升时间和更少超调（或在更高穿越频率下相同超调）。
 
@@ -200,7 +200,7 @@ $$C_{\text{lag}}(s) = K \cdot \frac{s + z}{s + p}, \qquad \lvert p \rvert < \lve
 
 **步骤1——选择DC提升比。** 令 $\beta = z/p = 10$。滞后网络的DC增益为 $K \cdot \beta$。
 
-**步骤2——将极点放在穿越频率以下一个十倍频程（或更多）：**
+- **步骤2——将极点放在穿越频率以下一个十倍频程（或更多）：**
 
 $$p = \frac{\omega_{cp}}{10} \approx 0.0486, \qquad z = \beta \cdot p \approx 0.486$$
 
@@ -208,9 +208,9 @@ $$p = \frac{\omega_{cp}}{10} \approx 0.0486, \qquad z = \beta \cdot p \approx 0.
 
 $$K = \left\lvert \frac{j\omega_{cp} + p}{j\omega_{cp} + z}\right \rvert = \frac{\sqrt{\omega_{cp}^2 + p^2}}{\sqrt{\omega_{cp}^2 + z^2}} \approx \frac{\sqrt{0.236 + 0.00236}}{\sqrt{0.236 + 0.236}} \approx 0.71$$
 
-**结果：** $C_{\text{lag}}(s) = 0.71 \cdot \dfrac{s + 0.486}{s + 0.0486}$，$\lvert p \rvert = 0.0486 < \lvert z \rvert = 0.486$——滞后，如预期。
+- **结果：** $C_{\text{lag}}(s) = 0.71 \cdot \dfrac{s + 0.486}{s + 0.0486}$，$\lvert p \rvert = 0.0486 < \lvert z \rvert = 0.486$——滞后，如预期。
 
-**DC环路增益提升：** 补偿器的DC增益为 $0.71 \cdot 0.486/0.0486 \approx 7.1$。整体环路获得 $7.1\times$ 低频增益，斜坡误差从 $200\%$ 降至约 $200\% / 7.1 \approx 28\%$。进一步改善需要更大的 $\beta$（把极点推得更靠近零）。
+- **DC环路增益提升：** 补偿器的DC增益为 $0.71 \cdot 0.486/0.0486 \approx 7.1$。整体环路获得 $7.1\times$ 低频增益，斜坡误差从 $200\%$ 降至约 $200\% / 7.1 \approx 28\%$。进一步改善需要更大的 $\beta$（把极点推得更靠近零）。
 
 ### 5.4 滞后对闭环做了什么
 
@@ -233,9 +233,9 @@ $$C_{\text{lead-lag}}(s) = C_{\text{lead}}(s) \cdot C_{\text{lag}}(s) = K_1 \cdo
 
 超前部分在穿越附近添加相位裕度（速度 + 阻尼）。滞后部分提升DC增益（精度）。它们在不同频率范围操作，几乎不互相干扰，因为滞后的极点和零点比 $\omega_{\max}$ 低一个十倍频程以上。
 
-**设计顺序很重要：** 先设计超前（在目标穿越处固定相位裕度），再设计滞后（固定稳态误差）。为什么这个顺序？因为超前网络把穿越频率上移——如果你先相对于裸穿越设计滞后，超前会把穿越移近滞后动力学，可能吞噬你刚买到的相位裕度。
+- **设计顺序很重要：** 先设计超前（在目标穿越处固定相位裕度），再设计滞后（固定稳态误差）。为什么这个顺序？因为超前网络把穿越频率上移——如果你先相对于裸穿越设计滞后，超前会把穿越移近滞后动力学，可能吞噬你刚买到的相位裕度。
 
-**计算示例：** 级联§4.3的超前补偿器和§5.3的滞后补偿器：
+- **计算示例：** 级联§4.3的超前补偿器和§5.3的滞后补偿器：
 
 $$C_{\text{lead-lag}}(s) = 2.75 \cdot \frac{s + 0.177}{s + 1.34} \cdot 0.71 \cdot \frac{s + 0.486}{s + 0.0486}$$
 
@@ -328,7 +328,7 @@ $$C(z) = K \cdot \frac{(2 + z T_s) + (z T_s - 2)z^{-1}}{(2 + p T_s) + (p T_s - 2
 
 在典型控制回路速率（100 Hz–10 kHz）下，数字实现在回路带宽内与连续设计几乎完全一致。
 
-**实现注意：** 超前-滞后补偿器是两个一阶环节串联。将它们实现为两个级联差分方程，而不是单个二阶环节。这避免了系数量化问题，并使测试时旁通某一级变得轻而易举。
+- **实现注意：** 超前-滞后补偿器是两个一阶环节串联。将它们实现为两个级联差分方程，而不是单个二阶环节。这避免了系数量化问题，并使测试时旁通某一级变得轻而易举。
 
 ---
 
@@ -348,24 +348,24 @@ $$C(z) = K \cdot \frac{(2 + z T_s) + (z T_s - 2)z^{-1}}{(2 + p T_s) + (p T_s - 2
 
 ## 11. 延伸阅读
 
-**经典教材：**
+- **经典教材：**
 - Franklin, G.F., Powell, J.D., & Emami-Naeini, A. (2019). *Feedback Control of Dynamic Systems*, 8th ed. Pearson. — 第5–6章关于根轨迹和频域设计；超前-滞后补偿器的标准本科处理。
 
-**Bode图圣经：**
+- **Bode图圣经：**
 - Bode, H.W. (1945). *Network Analysis and Feedback Amplifier Design.* Van Nostrand. — 原始专著。密集，但每个补偿器设计师都应追溯其技艺的源头。
 
-**电力电子——补偿器仍是王者的领域：**
+- **电力电子——补偿器仍是王者的领域：**
 - Erickson, R.W. & Maksimovic, D. (2020). *Fundamentals of Power Electronics*, 3rd ed. Springer. — 第8–9章关于变换器传递函数和补偿器设计。开关变换器中的Type II和Type III补偿器就是超前和超前-滞后网络的另一个名字。
 
-**直觉理解极零点：**
+- **直觉理解极零点：**
 - Åström, K.J. & Murray, R.M. (2021). *Feedback Systems: An Introduction for Scientists and Engineers*, 2nd ed. Princeton University Press. — 第9章频域设计；出色的极零点直觉和现代示例。免费在线。
 
-**通过环路整形实现鲁棒性：**
+- **通过环路整形实现鲁棒性：**
 - Skogestad, S. & Postlethwaite, I. (2005). *Multivariable Feedback Control: Analysis and Design*, 2nd ed. Wiley. — 第1–2章经典环路整形；超前-滞后思维到MIMO系统的推广。$H_\infty$ 环路整形设计过程本质上是自动化的补偿器设计。
 
-**数字实现：**
+- **数字实现：**
 - Franklin, G.F., Powell, J.D., & Workman, M. (1997). *Digital Control of Dynamic Systems*, 3rd ed. Addison-Wesley. — 第6章离散等价；深入覆盖Tustin、ZOH和匹配极零点方法。
 
-**本项目的参考实现：**
+- **本项目的参考实现：**
 - `lead_lag_explorer.html` — 交互式Bode图 + 阶跃响应；移动 $z$、$p$、$K$ 滑块直接观察超前 vs 滞后行为
 - `lead_lag_compensator_demo.py` — 完整设计工作流的Python实现，含Tustin离散化和所有配置并排比较

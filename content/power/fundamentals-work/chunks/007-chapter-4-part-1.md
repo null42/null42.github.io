@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第4章part 1 - 4 Switch Realization"
+title: "第4章 开关的实现（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1058 +18,230 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第4章part 1 - 4 Switch Realization
+# 第4章 开关的实现（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 82-101  
-> Chunk ID: `chapter-4-part-1`
+在前几章中，我们看到降压、升压及其他几种直流-直流变换器的开关元件可以用晶体管和二极管实现。人们可能想知道这是为什么，以及一般如何用半导体实现开关。这是值得提出的问题，而且开关的实现方式取决于所执行的功率处理功能。逆变器和交-交变频器的开关比直流-直流变换器的开关实现更复杂。此外，半导体开关的实现方式可能以前几章理想开关分析所无法预测的方式改变变换器行为——下一章讨论的断续导通模式即为一例。本章讨论用晶体管和二极管实现开关的问题。
 
-## 主干提取
+![源页 p.82](../assets/page-snapshots/chapter-4/page-82.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+半导体功率器件表现为单刀单掷（SPST）开关，其理想模型如图4.1所示。因此，虽然我们常在变换器原理图中用理想单刀双掷（SPDT）开关（图4.2a），但含 SPST 开关的图4.2b更切合实际。用两个 SPST 开关实现一个 SPDT 开关并不像乍看那么简单，因为图4.2a、b并不完全等效：两个 SPST 开关可能同时处于通态或断态，从而导致图4.2a的 SPDT 开关所不能预测的行为。此外，开关状态可能取决于所加电压或电流波形——二极管就是熟知的例子。事实上，这些现象在轻载乃至偶尔在重载下都会发生，导致前面提到的断续导通模式，使变换器特性发生显著改变。
 
-## 术语表
+用半导体器件如何实现理想开关，取决于器件在断态必须阻断的电压极性和在通态必须传导的电流极性。例如，在图4.2b的直流-直流降压变换器中，开关 A 在断态必须阻断正电压 $V_g$，在通态必须传导正电流 $i_L$。若在所有预定工作点上，电流和阻断电压都位于图4.3所示平面的单一象限，则该开关可用一个晶体管或一个二极管简单地实现。单象限开关在直流-直流变换器中常用，这里简要讨论其工作。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.83](../assets/page-snapshots/chapter-4/page-83.png)
 
-## 中文翻译
+在逆变器电路中，需要双象限开关。输出电流是交流，故时正时负；若该电流流过开关，则开关电流为交流，半导体开关实现更复杂。双象限 SPST 开关可用一个晶体管和一个二极管实现。对偶情形也时有出现：开关电流始终为正，但阻断电压为交流；这类双象限开关可用晶体管和二极管的不同排列构造。交-交变频器通常需要四象限开关，能够阻断交流电压并传导交流电流，本章也讨论这些元件的实现。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+接下来考察同步整流器。MOSFET 的反向导电能力使其可用于通常需要二极管的场合：若 MOSFET 导通电阻足够小，则其导通损耗低于使用二极管的损耗。同步整流器常用于低电压大电流场合以获得更高效率。关于单、双、四象限开关的若干基础文献见参考书目 [4, 18–25]。
 
-## 英文原文
+![源页 p.84](../assets/page-snapshots/chapter-4/page-84.png)
 
-```text
-4
-Switch Realization
-We have seen in previous chapters that the switching elements of the buck, boost, and several
-other dc–dc converters can be implemented using a transistor and diode. One might wonder
-why this is so, and how to realize semiconductor switches in general. These are worthwhile
-questions to ask, and switch implementation can depend on the power processing function be-
-ing performed. The switches of inverters and cycloconverters require more complicated imple-
-mentations than those of dc–dc converters. Also, the way in which a semiconductor switch is
-implemented can alter the behavior of a converter in ways not predicted by the ideal-switch
-analysis of the previous chapters—an example is the discontinuous conduction mode treated in
-the next chapter. The realization of switches using transistors and diodes is the subject of this
-chapter.
-i
-v
-+
-–
-1
-0
-Fig. 4.1 SPST switch,
-with deﬁned voltage and
-current polarities
-Semiconductor power devices behave as single-pole single-throw
-(SPST) switches, represented ideally in Fig. 4.1. So, although we of-
-ten draw converter schematics using ideal single-pole double-throw
-(SPDT) switches as in Fig. 4.2a, the schematic of Fig. 4.2b contain-
-ing SPST switches is more realistic. The realization of a SPDT switch
-using two SPST switches is not as trivial as it might at ﬁrst seem,
-because Fig. 4.2a,b are not exactly equivalent. It is possible for both
-SPST switches to be simultaneously in the on state or in the oﬀstate,
-leading to behavior not predicted by the SPDT switch of Fig. 4.2a. In
-addition, it is possible for the switch state to depend on the applied
-voltage or current waveforms—a familiar example is the diode. In-
-deed, and it is common for these phenomena to occur in converters
-operating at light load, or occasionally at heavy load, leading to the discontinuous conduction
-mode previously mentioned. The converter properties are then signiﬁcantly modiﬁed.
-How an ideal switch can be realized using semiconductor devices depends on the polarity
-of the voltage that the devices must block in the oﬀstate, and on the polarity of the current that
-the devices must conduct in the on state. For example, in the dc–dc buck converter of Fig.4.2b,
-switch A must block positive voltageVg when in the oﬀstate, and must conduct positive current
-iL when in the on state. If, for all intended converter operating points, the current and blocking
-voltage lie in a single quadrant of the plane as illustrated in Fig. 4.3, then the switch can be
-implemented in a simple manner using a transistor or a diode. Use of single-quadrant switches
-is common in dc–dc converters. Their operation is discussed brieﬂy here.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_4
-67
+4.2 节简要讨论若干功率半导体器件。多数载流子器件（包括 MOSFET 和肖特基二极管）开关速度很快，故在断态电压不高时更受青睐；少数载流子器件（包括 BJT、IGBT 和晶闸管类——SCR 和 GTO）具有高击穿电压和低正向压降，但开关速度较慢。近年来基于宽禁带半导体（SiC 和 GaN）的二极管和 FET 器件代表了击穿电压、正向压降与开关时间折中关系的重大进步。
 
-68 4 Switch Realization
-L
-CR
-+
-V
-–
-i
-L(t)
-+
-–
-1
-2
-Vg
-L
-CR
-+
-V
-–
-i
-L(t)
-+
-–
-+ vA –
-–
-vB
-+
-A
-B
-iA
-iB
-Vg
-(a)
-(b)
-Fig. 4.2 Buck converter: (a) containing SPDT switch, (b) containing two SPST switches
-Switch
-off state voltage
-Switch
-on state
-current
-Fig. 4.3 A single-quadrant switch is capable of
-conducting currents of a single polarity, and of
-blocking voltages of a single polarity
-In inverter circuits, two-quadrant switches
-are required. The output current is ac, and hence
-is sometimes positive and sometimes negative.
-If this current ﬂows through the switch, then its
-current is ac, and the semiconductor switch re-
-alization is more complicated. A two-quadrant
-SPST switch can be realized using a transistor
-and diode. The dual case also sometimes oc-
-curs, in which the switch current is always posi-
-tive, but the blocking voltage is ac. This type of
-two-quadrant switch can be constructed using a
-diﬀerent arrangement of a transistor and diode.
-Cycloconverters generally require four-quadrant
-switches, which are capable of blocking ac volt-
-ages and conducting ac currents. Realizations of
-these elements are also discussed in this chapter.
-Next, the synchronous rectiﬁer is examined.
-The reverse-conducting capability of the metal-
-oxide-semiconductor ﬁeld-eﬀect transistor (MOSFET) allows it to be used where a diode would
-normally be required. If the MOSFET on-resistance is su ﬃciently small, then its conduction
-loss is less than that obtained using a diode. Synchronous rectiﬁers are sometimes used in low-
-voltage high-current applications to obtain improved eﬃciency. Several basic references treating
-single-, two-, and four-quadrant switches are listed in the bibliography [4, 18–25].
+用半导体器件实现开关之后，便可讨论开关损耗。在开关过渡期间有多种机制导致能量损耗 [26]。当晶体管驱动钳位电感性负载时，在开关过渡期间会经历很高的瞬时功率损耗。二极管存储电荷在晶体管开通过渡期间进一步增大该损耗。某些寄生电容和电感中储存的能量在开关过程中损失。在开关周期结束前衰减的寄生振铃也指示存在开关损耗。开关损耗随开关频率正比增大，并构成实际变换器工作频率的上限。
 
-4.1 Switch Applications 69
-Several power semiconductor devices are brieﬂy discussed in Sect.4.2. Majority-carrier de-
-vices, including the MOSFET and Schottky diode, exhibit very fast switching times, and hence
-are preferred when the oﬀ-state voltage levels are not too high. Minority-carrier devices, includ-
-ing the bipolar junction transistor (BJT), insulated-gate bipolar transistor (IGBT), and thyristors
-[silicon-controlled rectiﬁer (SCR) and gate turn-oﬀthyristor (GTO)] exhibit high breakdown
-voltages with low forward voltage drops, at the expense of reduced switching speed. Recent
-diodes and FET devices based on wide-bandgap semiconductors (SiC and GaN) represent a sig-
-niﬁcant advance in the tradeoﬀbetween breakdown voltage, forward voltage drop, and switch-
-ing times.
-Having realized the switches using semiconductor devices, switching loss can next be dis-
-cussed. There are a number of mechanisms that cause energy to be lost during the switching
-transitions [26]. When a transistor drives a clamped inductive load, it experiences high instan-
-taneous power loss during the switching transitions. Diode stored charge further increases this
-loss, during the transistor turn-on transition. Energy stored in certain parasitic capacitances
-and inductances is lost during switching. Parasitic ringing, which decays before the end of the
-switching period, also indicates the presence of switching loss. Switching loss increases directly
-with switching frequency, and imposes a maximum limit on the operating frequencies of practi-
-cal converters.
-4.1 Switch Applications
-4.1.1 Single-Quadrant Switches
-The ideal SPST switch is illustrated in Fig. 4.1. The switch contains power terminals 1 and 0,
-with current and voltage polarities deﬁned as shown. In the on state, the voltagev is zero, while
-the current i is zero in the oﬀstate. There is sometimes a third terminal C, where a control
-signal is applied. Distinguishing features of the SPST switch include the control method (active
-vs. passive) and the region of the i–v plane in which they can operate.
-i
-1
-0
-v
-+
-–
-i
-v
-on
-off
-(a) (b)
-Fig. 4.4 Diode symbol (a), and its ideal characteristic (b)
-A passive switch does not contain
-a control terminal C. The state of the
-switch is determined by the waveforms
-i(t) and v(t) applied to terminals 0 and
-1. The most common example is the
-diode, illustrated in Fig. 4.4. The ideal
-diode requires that v(t)≤0 and i(t)≥0.
-The diode is oﬀ(i = 0) when v < 0,
-and is on ( v= 0) when i> 0. It can
-block negative voltage but not positive
-voltage. A passive SPST switch can be
-realized using a diode provided that the
-intended operating points [i.e., the val-
-ues of v(t) and i(t) when the switch is in
-the on and oﬀstates] lie on the diode characteristic of Fig. 4.4b.
-The conducting state of an active switch is determined by the signal applied to the control
-terminal C. The state does not directly depend on the waveforms v(t) and i(t) applied to ter-
-minals 0 and 1. The BJT, MOSFET, IGBT, GTO, and MCT are examples of active switches.
-Idealized characteristics i(t)v s .v(t) for the BJT and IGBT are sketched in Fig. 4.5. When the
+## 4.1 开关的应用
 
-70 4 Switch Realization
-i
-v
-on
-off
-i
-1
-0
-v
-+
-–
-C
-i
-1
-0
-v
-+
-–
-C
-)b()a(
-Fig. 4.5 Bipolar junction transistor (BJT) and insulated-gate bipolar transistor (IGBT) symbols (a), and
-their idealized switch characteristics (b)
-i
-v
-on
-off
-on
-(reverse conduction)
-i
-1
-0
-v
-+
-–
-C
-(a) (b)
-Fig. 4.6 Power MOSFET symbol (a), and its idealized switch characteristic (b)
-control terminal causes the transistor to be in the o ﬀstate, i= 0 and the device is capable of
-blocking positive voltage: v≥0. When the control terminal causes the transistor to be in the
-on state, v= 0 and the device is capable of conducting positive current: i≥0. The reverse-
-conducting and reverse-blocking characteristics of the BJT and IGBT are poor or nonexistent,
-and have essentially no application in the power converter area. The power MOSFET (Fig.4.6)
-has similar characteristics, except that it is able to conduct current in the reverse direction. With
-one notable exception (the synchronous rectiﬁer discussed later), the MOSFET is normally op-
-erated with i≥0, in the same manner as the BJT and IGBT. So an active SPST switch can be
-realized using a BJT, IGBT, or MOSFET, provided that the intended operating points lie on the
-transistor characteristic of Fig. 4.5b.
-To determine how to implement an SPST switch using a transistor or diode, one compares
-the switch operating points with the i−v characteristics of Figs. 4.4b, 4.5b, and 4.6b. For exam-
-ple, when it is intended that the SPDT switch of Fig. 4.2a be in position 1, SPST switch A of
+### 4.1.1 单象限开关
 
-4.1 Switch Applications 71
-iA
-vA
-iL
-(a) (b)
-Vg
-Switch A
-on
-Switch A
-off
-iB
-vB
-iL
-–Vg
-Switch B
-on
-Switch B
-off
-Fig. 4.7 Operating points of switch A,( a), and switch B,( b), in the buck converter of Fig.4.2b
-Fig. 4.2b is closed, and SPST switch B is opened. Switch A then conducts the positive inductor
-current, iA = iL, and switch B must block negative voltage, vB =−Vg. These switch operating
-points are illustrated in Fig.4.7. Likewise, when it is intended that the SPDT switch of Fig.4.2a
-be in position 2, then SPST switch A is opened and switch B is closed. Switch B then conducts
-the positive inductor current, iB= iL, while switch A blocks positive voltage, vA= Vg.
-By comparison of the switch A operating points of Fig. 4.7a with Figs. 4.5b and 4.6b, it can
-be seen that a transistor (BJT, IGBT, or MOSFET) could be used, since switch A must block
-positive voltage and conduct positive current. Likewise, comparison of Fig. 4.7b with Fig. 4.4b
-reveals that switch B can be implemented using a diode, since switch B must block negative
-voltage and conduct positive current. Hence a valid switch realization is given in Fig.4.8.
-Figure 4.8 is an example of a single-quadrant switch realization: the devices are capable of
-conducting current of only one polarity, and blocking voltage of only one polarity. When the
-controller turns the transistor on, the diode becomes reverse-biased sincevB=−Vg. It is required
-that Vg be positive; otherwise, the diode will be forward-biased. The transistor conducts current
-iL. This current should also be positive, so that the transistor conducts in the forward direction.
-When the controller turns the transistor oﬀ, the diode must turn on so that the inductor cur-
-rent can continue to ﬂow. Turning the transistor oﬀcauses the inductor current iL(t) to decrease.
-Since vL(t)= LdiL(t)/dt, the inductor voltage becomes su ﬃciently negative to forward-bias
-the diode, and the diode turns on. Diodes that operate in this manner are sometimes called
-freewheeling diodes. It is required that iL be positive; otherwise, the diode cannot be forward-
-+
-–
-L iL(t)iA
-vA
-vB
-+
-–
-iB
-vL(t)
-+–
-+–
-Vg
-Fig. 4.8 Implementation of SPST switches of Fig. 4.2b using a transistor and diode
+理想 SPST 开关如图4.1所示，含功率端子 1 和 0，电流电压极性如图定义。通态时电压 $v$ 为零，断态时电流 $i$ 为零。有时还有第三个端子 C，施加控制信号。SPST 开关的区分特征包括控制方式（有源对无源）以及其可工作的 $i$–$v$ 平面区域。
 
-72 4 Switch Realization
-biased since iB = iL. The transistor blocks voltage Vg; this voltage should be positive to avoid
-operating the transistor in the reverse blocking mode.
-4.1.2 Current-Bidirectional Two-Quadrant Switches
-In any number of applications such as dc-ac inverters and servo ampliﬁers, it is required that
-the switching elements conduct currents of both polarities, but block only positive voltages. A
-current-bidirectional two-quadrant SPST switch of this type can be realized using a transistor
-and diode, connected in an antiparallel manner as in Fig. 4.9.
-The MOSFET of Fig. 4.6 is also a two-quadrant switch. However, it should be noted here
-that practical power MOSFETs inherently contain a built-in diode, often called the body diode,
-as illustrated in Fig.4.10a. The switching speed of the body diode typically is slower than that of
-the MOSFET. If the body diode is allowed to conduct, then high peak currents can occur during
-the diode tum-oﬀtransition. Some MOSFETs are not rated to handle these currents, and device
-failure can occur. To avoid this situation, external series and antiparallel diodes can be added as
-i
-v
-on
-(transistor conducts)
-off
-on
-(diode conducts)
-i
-1
-0
-v
-+
-–
-C
-(a) (b)
-Fig. 4.9 A current-bidirectional two-quadrant SPST switch: ( a) implementation using a transistor and
-antiparallel diode, (b) idealized switch characteristics
-i
-1
-0
-v
-+
-–
-C
-)b()a(
-Fig. 4.10 The power MOSFET inherently contains a built-in body diode: (a) equivalent circuit, (b) addi-
-tion of external diodes to prevent conduction of body diode
+![源页 p.85](../assets/page-snapshots/chapter-4/page-85.png)
 
-4.1 Switch Applications 73
-+
-–
-L
-+
-–
-Vg
-Vg CR
-Q1
-Q2
-D1
-D2
-iL
-iA
-iB
-v0
-+
-–
-vB
-+
-–
-vA
-+
-–
-Fig. 4.11 Inverter circuit using two-quadrant switches
-Fig. 4.12 Output voltage vs. duty cycle,
-for the inverter of Fig.4.11. This converter
-can produce both positive and negative
-output voltages
-v0
-D
-Vg
-–Vg
-0
-0.5 1
-in Fig. 4.10b. Power MOSFETs can be speciﬁcally designed to have a fast recovery body diode,
-and to operate reliably when the body diode is allowed to conduct the rated MOSFET current.
-However, signiﬁcant switching loss induced by the diode reverse-recovery process (discussed
-later in this chapter) may occur, depending on the switching speed and stored charge of the body
-diode.
-A SPDT current-bidirectional two-quadrant switch can again be derived using two SPST
-switches as in Fig.4.2b. An example is given in Fig.4.11. This converter operates from positive
-and negative dc supplies, and can produce an ac output voltagev(t) having either polarity. Tran-
-sistor Q
-2 is driven with the complement of the Q1 drive signal, so that Q1 conducts during the
-ﬁrst subinterval 0< t< DTs, and Q2 conducts during the second subinterval DTs< t< Ts.
-It can be seen from Fig. 4.11 that the switches must block voltage 2Vg. It is required that Vg
-be positive; otherwise, diodes D1 and D2 will conduct simultaneously, shorting out the source.
-It can be shown via inductor volt-second balance that
-v0= (2D−1)Vg (4.1)
-This equation is plotted in Fig.4.12. The converter output voltagev0 is positive for D> 0.5, and
-negative for D< 0.5. By sinusoidal variation of the duty cycle,
+无源开关不含控制端子 C，其状态由端子 0、1 上所加波形 $i(t)$ 和 $v(t)$ 决定。最常见的例子是二极管（图4.4）。理想二极管要求 $v(t) \le 0$ 且 $i(t) \ge 0$：$v < 0$ 时二极管关断（$i = 0$），$i > 0$ 时导通（$v = 0$）。它能阻断负电压但不能阻断正电压。只要预定工作点（即通态和断态时的 $v(t)$ 和 $i(t)$ 值）落在图4.4b的二极管特性上，就可用二极管实现无源 SPST 开关。
 
-74 4 Switch Realization
-Fig. 4.13 The switches in the inverter of
-Fig. 4.11 must be capable of conducting both
-positive and negative current, but need block
-only positive voltage
-Switch
-on state
-current
-Switch
-off state
-voltage
-+
-–Vg
-ia
-ib
-ic
-Fig. 4.14 The dc–3φac voltage-source inverter requires two-quadrant switches
-D(t)= 0.5+ Dm sin(ωt) (4.2)
-with Dn being a constant less than 0.5, the output voltage becomes sinusoidal. Hence this con-
-verter could be used as a dc-ac inverter.
-The load current is given by v0/R; in equilibrium, this current coincides with the inductor
-current iL,
-iL= v0
-R = (2D−1)Vg
-R (4.3)
-The switches must conduct this current. So the switch current is also positive when D> 0.5,
-and negative when D< 0.5. With high-frequency duty-cycle variations, the L−C ﬁlter may
-introduce a phase lag into the inductor current waveform, but it is nonetheless true that switch
-currents of both polarities occur. So the switch must operate in two quadrants of the plane, as
-illustrated in Fig. 4.13. When i
-L is positive, Q1 and D2 alternately conduct. When iL is negative,
-Q2 and D1 alternately conduct.
-A well-known dc-3øac inverter circuit, thevoltage-source inverter(VSI), operates in a simi-
-lar manner. As illustrated in Fig.4.14, the VSI contains three two-quadrant SPDT switches, one
-per phase. These switches block the dc input voltage Vg, and must conduct the output ac phase
-currents ia, ib, and ic, respectively. Figure4.14 illustrates realization of the current-bidirectional
-switches using IGBTs with antiparallel diodes.
-Another current-bidirectional two-quadrant switch example is the bidirectional battery
-charger/discharger illustrated in Fig. 4.15. This converter can be used, for example, to inter-
+有源开关的导通状态由施加于控制端 C 的信号决定，状态不直接取决于端子 0、1 上的波形 $v(t)$ 和 $i(t)$。BJT、MOSFET、IGBT、GTO、MCT 都是有源开关。BJT 和 IGBT 的理想化 $i(t)$ 对 $v(t)$ 特性如图4.5所示。当控制端使晶体管处于断态时，$i = 0$，器件能阻断正电压 $v \ge 0$；当控制端使晶体管处于通态时，$v = 0$，器件能传导正电流 $i \ge 0$。BJT 和 IGBT 的反向导电和反向阻断特性很差或不存在，在功率变换器领域基本无应用。功率 MOSFET（图4.6）特性类似，但能反向导电。除一个重要例外（后述同步整流器）外，MOSFET 通常按 $i \ge 0$ 工作，与 BJT 和 IGBT 相同。故只要预定工作点落在图4.5b的晶体管特性上，就可用 BJT、IGBT 或 MOSFET 实现有源 SPST 开关。
 
-4.1 Switch Applications 75
-L
-Q1
-Q2
-D1
-D2
-vbatt
-+
-–
-vbus
-Spacecraft
-main power bus
-+
-–
-vbus > vbatt
-Fig. 4.15 Bidirectional battery charger/discharger, based on the dc–dc buck converter
-face a battery to the main power bus of a spacecraft. Both the dc bus voltagevbus and the battery
-voltage vbatt are always positive. The semiconductor switch elements block positive voltage
-vbus. When the battery is being charged, iL is positive, and Q1 and D2 alternately conduct cur-
-rent. When the battery is being discharged, iL is negative, and Q2 and D1 alternately conduct.
-At the time a diode would conduct, it is possible for the gate driver to turn on its antiparallel
-MOSFET; the MOSFET then operates as asynchronous rectiﬁer as described in Sect. 4.1.5.A l -
-though this is a dc–dc converter, it requires two-quadrant switches because the power can ﬂow
-in either direction. Figure 4.15 illustrates realization of the current-bidirectional switches using
-MOSFETs having fast-recovery body diodes.
-Converters performing battery charging and battery discharging functions now ﬁnd signiﬁ-
-cant application in portable electronic devices such as cell phones and laptop computers. When
-the battery is being charged, the converter controller implements algorithms that control the
-charging proﬁle needed by the battery. While the battery is being discharged, the converter
-controller regulates the bus voltage.
-4.1.3 Voltage-Bidirectional Two-Quadrant Switches
-Switch
-on state
-current
-Switch
-off state
-voltage
-Fig. 4.16 V oltage-bidirectional two-quadrant
-switch properties
-Another type of two-quadrant switch, having
-the voltage-bidirectional properties illustrated in
-Fig. 4.16, is sometimes required. In applications
-where the switches must block both positive
-and negative voltages, but conduct only positive
-current, an SPST switch can be constructed us-
-ing a series-connected transistor and diode as in
-Fig. 4.17. When it is intended that the switch
-be in the oﬀstate, the controller turns the tran-
-sistor oﬀ. The diode then blocks negative volt-
-age, and the transistor blocks positive voltage.
-The series connection can block negative volt-
-ages up to the diode voltage rating, and positive
-voltages up to the transistor voltage rating. The
-silicon-controlled rectiﬁer is another example of
-a voltage-bidirectional two-quadrant switch.
+![源页 p.86](../assets/page-snapshots/chapter-4/page-86.png)
 
-76 4 Switch Realization
-Fig. 4.17 A voltage-bidirectional
-two-quadrant SPST switch: ( a)i m -
-plementation using a transistor and
-series diode, ( b) idealized switch
-characteristics
-i
-1
-0
-v
-+
-–
-C
-i
-v
-on
-off
-(transistor
-blocks voltage)
-off
-(diode
-blocks voltage)
-(a) (b)
-+
-–
-iL
-Vg
-φa
-φb
-φc
-+
-vab(t)
-–
-+
-vbc(t)
-–
-Fig. 4.18 Dc–3φbuck–boost inverter
-A converter that requires this type of two-quadrant switch is the dc-3øac buck–boost inverter
-shown in Fig.4.18 [22]. If the converter functions in inverter mode, so that the inductor current
-iL(t) is always positive, then all switches conduct only positive current. But the switches must
-block the output ac line-to-line voltages, which are sometimes positive and sometimes negative.
-Hence voltage-bidirectional two-quadrant switches are required.
-4.1.4 Four-Quadrant Switches
-The most general type of switch is the four-quadrant switch, capable of conducting currents of
-either polarity and blocking voltages of either polarity, as in Fig. 4.19. There are several ways
-of constructing a four-quadrant switch. As illustrated in Fig. 4.20b, two current-bidirectional
-two-quadrant switches described in Sect. 4.1.2 can be connected back-to-back. The transistors
-are driven on and oﬀsimultaneously. Another approach is the antiparallel connection of two
-voltage-bidirectional two-quadrant switches described in Sect. 4.1.3,a si nF i g .4.20a. A third
-approach, using only one transistor but additional diodes, is given in Fig.4.20c.
-Cycloconverters are a class of converters requiring four-quadrant switches. For example, a
-3øac-to-3øac matrix converter is illustrated in Fig.4.21. Each of the nine SPST switches is real-
-ized using one of the semiconductor networks of Fig. 4.20. With proper control of the switches,
-this converter can produce a three-phase output of variable frequency and voltage, from a given
-three-phase ac input. Note that there are no dc signals in this converter: all of the input and
-output voltages and currents are ac, and hence four-quadrant switches are necessary.
+为确定如何用晶体管或二极管实现 SPST 开关，需将开关工作点与图4.4b、4.5b、4.6b的 $i$–$v$ 特性比较。例如，当希望图4.2a的 SPDT 开关处于位置 1 时，图4.2b中 SPST 开关 A 闭合、开关 B 断开。开关 A 传导正电感电流 $i_A = i_L$，开关 B 必须阻断负电压 $v_B = -V_g$，这些工作点如图4.7所示。同样，当希望 SPDT 开关处于位置 2 时，开关 A 断开、开关 B 闭合，开关 B 传导正电感电流 $i_B = i_L$，开关 A 阻断正电压 $v_A = V_g$。
 
-4.1 Switch Applications 77
-Fig. 4.19 A four-quadrant switch can conduct
-either polarity of current, and can block either
-polarity of voltage
-Switch
-on state
-current
-Switch
-off state
-voltage
-i
-1
-0
-v
-+
-–
-i
-1
-0
-v
-+
-–
-i
-1
-0
-v
-+
-–
-)c()b()a(
-Fig. 4.20 Three ways of implementing a four-quadrant SPST switch
-ib
-ic
-ia
-+
-–
-+–
-+–van(t)
-vcn(t)
-vbn(t)
-tuptuocaø3tupnicaø3
-Fig. 4.21 A3φac–3φac matrix converter, which requires nine SPST four-quadrant switches
+将图4.7a的开关 A 工作点与图4.5b和4.6b比较，可见开关 A 必须阻断正电压并传导正电流，故可用晶体管（BJT、IGBT 或 MOSFET）。将图4.7b与图4.4b比较，开关 B 必须阻断负电压并传导正电流，故可用二极管。于是得到图4.8的合理开关实现。
 
-78 4 Switch Realization
-4.1.5 Synchronous Rectiﬁers
-The ability of the MOSFET channel to conduct current in the reverse direction makes it possible
-to employ a MOSFET where a diode would otherwise be required. When the MOSFET is
-connected as in Fig. 4.22a [note that the source and drain connections are reversed from the
-connections of Fig. 4.6a], the characteristics of Fig. 4.22b are obtained. The device can now
-block negative voltage and conduct positive current, with properties similar to those of the
-diode in Fig.4.4. The MOSFET must be controlled such that it operates in the on state when the
-diode would normally conduct, and in the oﬀstate when the diode would be reverse-biased.
-Thus, we could replace the diode in the buck converter of Fig. 4.8 with a MOSFET, as in
-Fig. 4.23. The BJT has also been replaced with a MOSFET in the ﬁgure. MOSFETQ2 is driven
-with the complement of the Q1 control signal.
-The trend in computer power supplies is reduction of output voltage levels, from 3.3 V
-to lower levels. As the output voltage is reduced, the diode conduction loss increases; in con-
-sequence, the diode conduction loss is easily the largest source of power loss in a sub-3.3 V
-power supply. Unfortunately, the diode junction contact potential limits what can be done to
-reduce the forward voltage drop of diodes. Schottky diodes having reduced junction potential
-can be employed; nonetheless, low-voltage power supplies containing diodes that conduct the
-output current must have low eﬃciency.
-i
-1
-0
-v
-+
-–
-C
-i
-v
-on
-off
-on
-(reverse conduction)
-(a) (b)
-Fig. 4.22 Power MOSFET connected as a synchronous rectiﬁer, (a), and its idealized switch characteris-
-tics, (b)
-+
-–
-L iL(t)iA
-vA
-vB
-+
-–
-iB
-+–
-Q1
-Q2
-C
-C
-Vg
-Fig. 4.23 Buck converter, implemented using a synchronous rectiﬁer
+![源页 p.87](../assets/page-snapshots/chapter-4/page-87.png)
 
-4.2 Introduction to Power Semiconductors 79
-A solution is to replace the diodes with MOSFETs operated as synchronous rectiﬁers. The
-conduction loss of a MOSFET having on-resistance Ron and operated with rms current is Irms ,
-is Irms 2Ron. The on-resistance can be decreased by use of a larger MOSFET. So the conduction
-loss can be reduced as low as desired, if one is willing to pay for a su ﬃciently large device.
-Synchronous rectiﬁers ﬁnd widespread use in low-voltage power supplies.
-The half-bridge MOSFET switches of Fig. 4.23 are also called synchronous switches and
-this buck converter is often called a synchronous buck converter. Most often, the synchronous
-rectiﬁer Q2 is driven with the complement of the gate drive signal that controls the main MOS-
-FET Q1. Further details regarding gate drivers of synchronous buck converters are discussed in
-Sect. 4.4.3.
-4.2 Introduction to Power Semiconductors
-4.2.1 Breakdown Voltage, Forward Voltage, and Switching Speed
-The most fundamental challenge in power semiconductor design is obtaining a high breakdown
-voltage, while maintaining low forward voltage drop and on-resistance [ 27, 28]. A closely re-
-lated issue is the longer switching times of high-voltage low on-resistance devices; during these
-switching times, signiﬁcant switching loss can be induced in the semiconductor devices. The
-tradeoﬀbetween breakdown voltage, on-resistance, and switching times is a key distinguishing
-feature of the various power devices.
-The breakdown voltage of a reverse-biased p–n junction and its associated depletion re-
-gion is a function of doping level: obtaining a high breakdown voltage requires low doping
-concentration, and hence high resistivity, in the material on at least one side of the junction.
-This high-resistivity region is usually the dominant contributor to the on-resistance of the de-
-vice, and hence high-voltage devices must have higher on-resistance than low-voltage devices.
-In majority-carrier devices, including the MOSFET and Schottky diode, this accounts for the
-ﬁrst-order dependence of on-resistance on rated voltage. However,minority-carrier devices, in-
-cluding the diﬀused-junction p–n diode, the bipolar junction transistor (BJT), the insulated-gate
-bipolar transistor (IGBT), and the thyristor family (SCR, GTO), exhibit another phenomenon
-known as conductivity modulation. When a minority-carrier device operates in the on state, mi-
-nority carriers are injected into the lightly doped high-resistivity region by the forward-biased
-p–n junction. The resulting high concentration of minority carriers eﬀectively reduces the ap-
-parent resistivity of the region, reducing the on-resistance of the device. Hence, minority-carrier
-devices exhibit lower on-resistances than comparable majority-carrier devices.
-However, the advantage of decreased on-resistance in minority-carrier devices comes with
-the disadvantage of decreased switching speed. The conducting state of any semiconductor de-
-vice is controlled by the presence or absence of key charge quantities within the device, and
-the turn-on and turn-oﬀswitching times are equal to the times required to insert or remove
-this controlling charge. Devices operating with conductivity modulation are controlled by their
-injected minority carriers. The total amount of controlling minority charge in minority-carrier
-devices is much greater than the charge required to control an equivalent majority-carrier de-
-vice. Although the mechanisms for inserting and removing the controlling charge of the vari-
-ous devices can diﬀer, it is nonetheless true that, because of their large amounts of minority
-charge, minority-carrier devices exhibit switching times that are signiﬁcantly longer than those
+图4.8是单象限开关实现的例子：器件只能传导单一极性电流、阻断单一极性电压。当控制器使晶体管开通时，因 $v_B = -V_g$，二极管反偏。要求 $V_g$ 为正，否则二极管将正偏。晶体管传导电流 $i_L$，该电流也应为正，以使晶体管正向导通。当控制器使晶体管关断时，二极管必须导通以使电感电流继续流动。关断晶体管使 $i_L(t)$ 减小，由于 $v_L(t) = L\,di_L(t)/dt$，电感电压变得足够负以使二极管正偏，二极管导通。这样工作的二极管有时称为续流二极管。要求 $i_L$ 为正，否则因 $i_B = i_L$ 二极管无法正偏。晶体管阻断电压 $V_g$，该电压应为正以避免晶体管工作于反向阻断模式。
 
-80 4 Switch Realization
-of majority-carrier devices. In consequence, majority-carrier devices ﬁnd application at lower
-voltage levels and higher switching frequencies, while the reverse is true of minority-carrier
-devices.
-The fundamental relationship between breakdown voltage, on-resistance, and switching
-speed, is a function of the energy bandgap of the semiconductor material. Electrons having
-low energy (in the valence band) are tightly bound to their atoms and do not participate in the
-conduction of electrical current. Electrons having su ﬃciently high energy (in the conduction
-band) are easily able to move from one atom to the next, and hence can participate in the con-
-duction of current. The band gap of a semiconductor material is the energy diﬀerence between
-the highest energy state of the valence band and the lowest energy state of the conduction band.
-The bandgap of Silicon (Si) is approximately 1.1 eV .
-Use of a wide-bandgap (WBG) semiconductor material can lead to a very signiﬁcant
-improvement in this tradeoﬀbetween voltage breakdown, on-resistance, and switching time.
-Power diodes and transistors based on Silicon Carbide (SiC, bandgap approximately 3.2 eV) or
-Gallium Nitride (GaN, bandgap 3.4 eV) materials are now becoming commercially signiﬁcant.
-These devices exhibit high-voltage characteristics that are superior to Silicon devices. Schottky
-diodes based on SiC technology are widely available at 600 to 1700 V , and can signiﬁcantly
-improve converter eﬃciency relative to Si technology. Commercial power MOSFET devices
-based on SiC technology are available or have been announced at voltages of 600 V to 10
-kV , and exhibit on-resistance and switching time far superior to what can be achieved with Si.
-Power transistors based on GaN technology are also available at voltages up to 650 V; these
-also exhibit signiﬁcantly better switching time and on-resistance.
-A detailed description of power semiconductor device physics and switching mechanisms
-is beyond the scope of this book. Selected references on power semiconductor devices are listed
-in the reference section [ 8, 11, 26, 28–40]. Rather, this and the following sections discuss the
-origins of switching times and forward voltage drop in power semiconductor devices at a high
-level. The averaged models of Chap. 3 are then extended to include switching losses. How the
-diﬀerent types of power semiconductor switches address the tradeoﬀbetween forward voltage
-drop and switching speed is also considered.
-4.2.2 Transistor Switching Loss with Clamped Inductive Load
-The nonzero switching times of practical semiconductor devices lead to power loss during the
-switching transitions. This loss, calledswitching loss, can signiﬁcantly reduce the eﬃciency of a
-switching converter. Multiple physical mechanisms induce switching loss; the most signiﬁcant
-are discussed throughout this chapter.
-Consider ﬁrst the switching waveforms in the buck converter of Fig. 4.24. Let us treat the
-diode as ideal, and investigate only the switching loss due to the transistor switching times.
-Semiconductor output capacitances, transformer leakage inductances, diode reverse recovery,
-and other sources of switching loss are neglected in this ﬁrst example. A MOSFET is illustrated
-in Fig. 4.24, but the introductory arguments of this section could apply to any power transistor.
-The diode and inductor present a clamped inductive load to the transistor. With such a load,
-the transistor voltage v
-A(t) and current iA(t) do not change simultaneously. For example, a mag-
-niﬁed view of the transistor turn-oﬀ-transition waveforms is given in Fig. 4.25. For simplicity,
-the waveforms are approximated as piecewise linear. The switching times are short, such that
-the inductor current iL(t) is essentially constant during the entire switching transitiont0< t< t2.
+### 4.1.2 电流双向双象限开关
 
-4.2 Introduction to Power Semiconductors 81
-+
-LiL(t)iA
-vA
-vB
-+
-iBDTs Ts
-+
-Ideal
-diode
-Physical
-MOSFET
-Gate
-driver
-Vg
-Fig. 4.24 MOSFET driving a clamped inductive load, buck converter example
-Transistor
-waveforms
-Diode
-waveforms
-t
-t
-t
-pA(t)
-= vAiA
-iL
-VgvA(t)
-iA(t)
-00
-00
-iL
-g
-area
-Woff
-Vg iL
-t0 t1 t2
-iB(t)
-vB(t)
-Fig. 4.25 Magniﬁed view of transistor turn-oﬀtransition waveforms for the circuit of Fig.4.24
-No current ﬂows through the diode while the diode is reverse-biased, and the diode cannot be-
-come forward-biased while its voltage vB(t) is negative. So ﬁrst, the voltage vA(t) across the
-transistor must rise from zero to Vg. The interval length (t1−t0) is essentially the time required
-for the gate driver to charge the MOSFET gate-to-drain capacitance. The transistor currentiA(t)
-is constant and equal to iL during this interval.
-The diode voltage vB(t) and current iB(t)a r eg i v e nb y
-vB(t)= vA(t)−Vg
-iA(t)+ iB(t)= iL (4.4)
+在直流-交流逆变器和伺服放大器等应用中，要求开关元件传导双极性电流但只阻断正电压。这类电流双向双象限 SPST 开关可用一个晶体管和一个二极管反向并联实现，如图4.9所示。
 
-82 4 Switch Realization
-At time t= t1, when vA = Vg, the diode becomes forward-biased. The current iL now begins to
-commute from the transistor to the diode. The interval length (t2−t1) is the time required for the
-gate driver to discharge the MOSFET gate-to-source capacitance down to the threshold voltage
-which causes the MOSFET to be in the oﬀstate.
-The instantaneous powerpA(t) dissipated by the transistor is equal tovA(t)iA(t). This quantity
-is also sketched in Fig. 4.25. The energy Wof f lost during the transistor turn-oﬀtransition is the
-area under this waveform. With the simplifying assumption that the waveforms are piecewise-
-linear, then the energy lost is the area of the shaded triangle:
-W
-of f = 1
-2 VgiL(t2−t0) (4.5)
-This is the energy lost during each transistor turn-o ﬀtransition in the simpliﬁed circuit of
-Fig. 4.24. A transistor having shorter switching time (t2−t0) would be expected to exhibit lower
-energy lost during this switching transition.
-The transistor turn-on waveforms of the simpliﬁed circuit of Fig.4.24 are qualitatively simi-
-l a rt ot h o s eo fF i g .4.25, with the time axis reversed. The transistor current must ﬁrst rise from 0
-to iL. The diode then becomes reverse-biased, and the transistor voltage can fall fromVg to zero.
-The instantaneous transistor power dissipation again has peak value VgiL, and if the waveforms
-are piecewise linear, then the energy lost during the turn-on transition Won i sg i v e nb y0 . 5VgiL
-multiplied by the transistor turn-on time.
-Thus, during one complete switching period, the total energy lost during the turn-on and
-turn-oﬀtransitions is (Won+Wof f ). If the switching frequency is fs, then the average power loss
-incurred due to switching is
-Psw= 1
-Ts
-∫
-switching
-transitions
-pA(t)dt= (Won+ Wof f ) fs (4.6)
-So the switching loss Psw is directly proportional to the switching frequency. This loss is also
-directly proportional to the energy losses Won and Wof f ; transistors having faster switching
-speeds are expected to exhibit lower switching loss.
-The above arguments constitute a simpliﬁed and highly idealized view of switching loss.
-Unfortunately, often they are insuﬃcient to explain the observed converter behavior related to
-switching loss; for example, they do not explain why zero-current switching of converters in-
-corporating MOSFETs and diodes is inferior to zero-voltage switching (converters that employ
-these soft-switching phenomena are the subject of Chaps. 22 and 23). Hence, the sections that
-follow reﬁne these arguments to account for the eﬀects of diode reverse recovery, device output
-capacitances, and similar phenomena.
-4.3 The Power Diode
-4.3.1 Introduction to Power Diodes
-A p–n diode is illustrated in Fig. 4.26. The right side of the p–n junction is doped with donor
-atoms that contribute weakly bound electrons to the semiconductor lattice, which can easily
-move from atom to atom. The left side of the junction is doped with acceptor atoms that create
+![源页 p.88](../assets/page-snapshots/chapter-4/page-88.png)
 
-4.3 The Power Diode 83
-Fig. 4.26 A p–n junction
-diode
-+ v
-np +
-+
-+
-+
-+
-+
-+ +
-+
-Fig. 4.27 Creation of de-
-pletion region at the p–n
-junction
-np +
-+
-+
-+
-+
-+
-+ +
-+
-+
-+
-+
-+
-+
-E
-vo +
-holes, which can also easily move from atom to atom and eﬀectively act as positive charge carri-
-ers. At the normal operating temperatures of the diode, these majority carriers exhibit thermally
-induced vibrations that cause them to move randomly around the semiconductor lattice.
-At the p–n junction, a depletion region forms. This occurs because the thermally induced
-motion of the charge carriers causes them to diﬀuse in the direction of decreasing carrier concen-
-tration. As illustrated in Fig.4.27, the concentration of mobile electrons is high on the right side
-of the junction, and low on the left side, and hence electrons diﬀuse to the left. These electrons
-become mobile minority carriers in the p region, having an energy state suﬃcient to continue
-to easily move from atom to atom within the semiconductor lattice. In a similar manner, holes
-diﬀuse into the n region, where they become minority carriers as well.
-These mobile carriers leave behind ionized dopant atoms near the junction, causing an elec-
-tric ﬁeld to form. For example, when a majority-carrier electron from the n region diﬀuses into
-the p region, it leaves behind an ionized atom in the n region that is missing an electron and
-therefore has net positive charge. Likewise, when holes from the p region diﬀuse into the n re-
-gion, they leave behind ionized atoms having net negative charge. This region of ionized atoms
-near the junction is called the space-charge layer,o r depletion region. These ionized atoms
-within this region lead to an electric ﬁeld E, with net voltage v
-o, as illustrated in Fig. 4.27.T h e
-voltage vo constitutes an energy barrier which tends to oppose the diﬀusion of the mobile carri-
-ers: it causes carriers to drift in the opposite direction. As more mobile carriers di ﬀuse across
-the junction, the ﬁeld continues to build. The device comes to equilibrium when the voltage
-and the electric ﬁeld strength are large enough to counteract the net diﬀusion of mobile charges
-across the junction.
-Figure 4.28 illustrates the situation in which an external voltage is applied that reverse-biases
-the p–n junction. This external voltage causes the further ionization of dopant atoms near the
-junction, and increases the size of the depletion region. Eﬀectively, the applied voltage appears
-across the depletion region and the electric ﬁeld within this region is increased. Increasing
-the reverse voltage requires that additional charge (from the external circuit) be added to the
-depletion region; this is a capacitive eﬀect that leads to the junction capacitance of the diode.
-Figure 4.29 illustrates the situation in which an external source forward-biases thep–n junc-
-tion. This external source reduces the voltage across the p–n junction, such that the depletion
+图4.6的 MOSFET 也是双象限开关。但应指出，实际功率 MOSFET 本身含一个内建二极管，常称体二极管，如图4.10a所示。体二极管的开关速度通常慢于 MOSFET。若允许体二极管导通，则在二极管关断过渡期间可能出现高峰值电流，某些 MOSFET 未经额定承受这些电流，可能造成器件失效。为避免这种情况，可如图4.10b所示加入外部串联和反并联二极管。功率 MOSFET 也可专门设计成具有快速恢复体二极管，并在体二极管导通额定 MOSFET 电流时可靠工作。但视体二极管的开关速度和存储电荷而定，可能产生由二极管反向恢复过程引起的显著开关损耗（本章后述）。
 
-84 4 Switch Realization
-Fig. 4.28 The diode
-under reverse-bias condi-
-tions
-np +
-+
-+
-+
-+
-+
-+ +
-+
-+
-+
-+
-+
-+
-E
-vo ++
-+
-+
-+
-+
-+
-Fig. 4.29 The
-diode under
-forward-bias
-conditions
-np +
-+
-+
-+
-+
-+
-+ +
-+
-+
-+
-+
-E
-vo +
-np
-vo +
-+
-+
-Hole concentrationElectron concentration
-Fig. 4.30 Minority-carrier concentrations and recombination under forward-bias conditions
-region electric ﬁeld is not large enough to counteract di ﬀusion of carriers across the junction.
-Under these forward-bias conditions, holes from the p-region diﬀuse across the junction, and
-become minority carriers in the n-region whose energy state is high enough to enable them be
-mobile carriers. Similarly, electrons from the n-region diﬀuse across the junction and become
-mobile minority carriers in the p-region.
-Figure 4.30 illustrates the mechanisms for conduction of current under forward-bias condi-
-tions. Electrons enter then-region from the external circuit, through the contact at the right edge
-of the n-region. These electrons become majority carriers in the n-region. Likewise, electrons
-leave the p-region through the contact at the left side of the p-region, creating majority-carrier
-holes in the p-region. Some of these majority carriers di ﬀuse across the forward-biased p–n
-junction, and become minority carriers.
-A number of processes cause minority carriers to lose their energy and recombine with ma-
-jority carriers. This occurs at some rate, and therefore the minority carriers last for an eﬀective
-lifetimeτL before recombination. As the minority carriers diﬀuse away from the junction, their
+双象限 SPDT 电流双向开关同样可由图4.2b的两个 SPST 开关构成。图4.11给出一个例子。该变换器由正负直流电源供电，能产生具任意极性的交流输出 $v(t)$。晶体管 $Q_2$ 以 $Q_1$ 驱动信号的互补信号驱动，$Q_1$ 在第一子区间 $0 < t < DT_s$ 导通，$Q_2$ 在第二子区间 $DT_s < t < T_s$ 导通。
 
-4.3 The Power Diode 85
-concentration diminishes through recombination as illustrated in Fig. 4.30. The slope of this
-concentration curve determines the rate at which the minority carriers diﬀuse.
-Under forward-bias conditions, the forward current consists entirely of recombination. A
-majority carrier from the external circuit enters the semiconductor at one of the contacts. This
-majority carrier may recombine with a minority carrier. Alternatively, it may diﬀuse across the
-junction, become a minority carrier, and then recombine.
-Under forward-bias conditions, the diode is charge controlled. It can be shown that the
-voltage v across the depletion region is related to the minority charge concentrations p
-s and ns
-at the edge of the depletion region according to the diode equation (written below as a function
-of the hole concentration at the right edge of the depletion region of Fig. 4.30):
-ps(t)= Qs0
-⎦
-eλv(t)−1
-)
-(4.7)
-The quantityλis kT/qe where k is Boltzmann’s constant, T is the Kelvin temperature, and
-qe is the charge of the electron. This equation states that greater forward-bias leads to greater
-minority charge injected across the junction. It also implies that the junction voltage cannot be
-decreased unless the minority charge at the edge of the depletion region is decreased.
-We can model the switching behavior using a lumped-element model of the minority charge.
-In the simplest single-lump model, we letq(t) be equal to the total minority charge on one side of
-the junction. This charge can reduce by recombination, and it can increase through application
-of positive terminal current i(t). Hence we can write
-dq(t)
-dt = i(t)−q(t)
-τL
-(4.8)
-In this equation, q/τL is the rate at which the minority carriers recombine. In equilibrium, the
-total stored minority charge q(t) is related to the charge concentration ps(t)o r ns(t) at the edge
-of the depletion region.
-In equilibrium, the net stored minority charge does not change: dq(t)/dt = 0. Equations
-(4.7) and (4.8) then predict
-i(t)= q(t)
-τL
-= Q0
-τL
-⎦
-eλv(t)−1
-)
-= I0
-⎦
-eλv(t)−1
-)
-(4.9)
-This is the traditional exponential diode equation. It can be seen that this is an equilibrium
-expression, and it does not hold during transient conditions ( i.e. during the diode switching
-times). In particular, during the diode turn-oﬀswitching transition, the voltagev(t) is determined
-by the stored minority charge concentration according to Eq. ( 4.7). To reduce this voltage, the
-stored minority charge must be removed. During the turn-oﬀswitching transition, the current
-can deviate from Eq. (4.9); Eq. (4.8) predicts that negative current can actively reduce the stored
-minority charge.
-Figure 4.31 illustrates typical diode waveforms and stored minority charge concentration
-proﬁles during the turn-oﬀtransient. Initially (for t ≤t0), the diode is in the on state, with
-a forward voltage v(t0)> 0 and conducting current i(t0)= Ion. The depletion region extends
-some distance x0 from the p–n junction; the shaded region illustrated in Fig. 4.31b denotes the
-depletion region at t = t0.F o r x > x0, there is a distribution of stored minority charge as
-illustrated in Fig. 4.31bf o rt= t0. The slope of this minority charge curve is proportional to the
-rate at which the minority carriers diﬀuse; this slope at x= x0 is proportional to Ion.
+由图4.11可见，开关必须阻断电压 $2V_g$。要求 $V_g$ 为正，否则 $D_1$ 和 $D_2$ 将同时导通而短路电源。由电感伏秒平衡可证
 
-86 4 Switch Realization
-(a)
-i(t)
-0
-v(t)
-t
-t0 t1 t2 t3 t4
-Ion
-Voff
-(b)
-Minority
-charge
-x
-t = t0
-t1
-t2
-0 x0 t = t3x3
-Fig. 4.31 The diode reverse-recovery process: ( a) waveforms of diode voltage v and diode current i;
-(b) minority charge concentration on one side of the p–n junction
-At time t= t0, the external circuit begins to reverse the direction of the applied current i(t).
-The rate di/dt at which the current changes is determined by the external circuit, and typically
-is limited by wiring and package inductances, transistor driver circuitry, etc.
-The current has become negative at time t= t1. The total stored charge, which is the area
-under the minority charge concentration curve of Fig.4.31b, has been reduced by both negative
-current and by recombination according to Eq.4.8. The slope of the charge concentration curve
-at the edge of the depletion region is negative, reﬂecting the reversal of current across the junc-
-tion. Because of its polarity, the electric ﬁeld within the depletion region does not oppose the
-ﬂow of minority carriers in the reverse direction, and the current i(t) now includes minority car-
-riers ﬂowing backwards across the depletion region. Since the minority charge concentration at
-x= x0 is still substantial, Eq. (4.7) predicts that the voltage across the depletion region remains
-positive. Because of the exponential nature of the diode equation, the voltage v(t)a t t= t1 is
-only slightly reduced from its initial value, and the diode remains forward-biased.
-At time t = t2, the stored minority charge at x = x0 has been removed. Equation ( 4.7)
-now predicts that the voltage across the depletion region can become negative. However, stored
-minority charge remains for x> x0, as illustrated in Fig. 4.31b. For t> t2, this minority charge
-continues to be removed, while the voltage becomes more negative. At timet= t3, the depletion
-region has increased in size, and extends to x= x3 [not shown in Fig. 4.31b]. Finally, at time
-t= t4, all of the minority stored charge has been removed. The diode now blocks the full reverse
-voltage Vof f , with no substantial reverse current.
-Let us consider the power consumption of the diode during the reverse-recovery process, as
-predicted by the waveforms of Fig.4.31a. For t< t0, the power ﬂowing into the diode is
-p(t)= v(t)i(t)= VF Ion (4.10)
-where VF is the forward voltage drop of the diode given by Eq. ( 4.9). This is the conduction
-loss of the diode. At time t= t1, the current has reversed while the voltage remains positive;
-```
+$$v_0 = (2D - 1) V_g \tag{4.1}$$
+
+![源页 p.89](../assets/page-snapshots/chapter-4/page-89.png)
+
+该式绘于图4.12。$D > 0.5$ 时 $v_0$ 为正，$D < 0.5$ 时为负。令占空比按正弦变化
+
+$$D(t) = 0.5 + D_m \sin(\omega t) \tag{4.2}$$
+
+其中 $D_m$ 为小于 0.5 的常数，则输出电压成为正弦。故该变换器可作为直流-交流逆变器。
+
+负载电流为 $v_0/R$，平衡时与电感电流 $i_L$ 相等：
+
+$$i_L = \frac{v_0}{R} = \frac{(2D - 1) V_g}{R} \tag{4.3}$$
+
+开关必须传导此电流，故 $D > 0.5$ 时开关电流为正，$D < 0.5$ 时为负。在高频占空比变化下，$L$–$C$ 滤波器可能给电感电流波形引入相移，但双极性开关电流仍会出现。故开关必须工作于平面的两个象限，如图4.13所示。$i_L$ 为正时 $Q_1$ 与 $D_2$ 交替导通；$i_L$ 为负时 $Q_2$ 与 $D_1$ 交替导通。
+
+![源页 p.90](../assets/page-snapshots/chapter-4/page-90.png)
+
+一种著名的直流-三相交流逆变电路——电压源逆变器（VSI）工作方式类似。如图4.14所示，VSI 含三个双象限 SPDT 开关，每相一个，阻断直流输入电压 $V_g$，并分别传导输出交流相电流 $i_a$、$i_b$、$i_c$。图4.14给出了用 IGBT 反并联二极管实现电流双向开关的方案。
+
+另一个电流双向双象限开关的例子是图4.15所示的双向电池充放电器。该变换器可用于将电池与航天器主电源母线接口。直流母线电压 $v_{bus}$ 和电池电压 $v_{batt}$ 始终为正，半导体开关阻断正电压 $v_{bus}$。电池充电时 $i_L$ 为正，$Q_1$ 与 $D_2$ 交替导通；电池放电时 $i_L$ 为负，$Q_2$ 与 $D_1$ 交替导通。在二极管本应导通的时刻，栅极驱动器可开通其反并联 MOSFET，此时 MOSFET 作为 4.1.5 节所述的同步整流器工作。虽是直流-直流变换器，但因其功率可双向流动，故需双象限开关。图4.15用具有快速恢复体二极管的 MOSFET 实现电流双向开关。
+
+执行电池充放电功能的变换器在手机、笔记本电脑等便携电子设备中应用广泛。电池充电时变换器控制器实现控制电池所需充电曲线的算法；电池放电时变换器控制器调节母线电压。
+
+### 4.1.3 电压双向双象限开关
+
+![源页 p.91](../assets/page-snapshots/chapter-4/page-91.png)
+
+另一类双象限开关具有图4.16的电压双向特性。在开关必须阻断正负电压但只传导正电流的场合，可用图4.17的晶体管与二极管串联构造 SPST 开关：当希望开关断开时控制器关断晶体管，二极管阻断负电压、晶体管阻断正电压。该串联连接可阻断直至二极管额定值的负电压和直至晶体管额定值的正电压。晶闸管是电压双向双象限开关的又一例子。
+
+图4.18所示直流-三相交流升降压逆变器 [22] 即为需要这类双象限开关的变换器。若变换器工作于逆变模式，电感电流 $i_L(t)$ 始终为正，则所有开关只传导正电流，但开关必须阻断时正时负的输出交流线电压，故需要电压双向双象限开关。
+
+### 4.1.4 四象限开关
+
+最一般的开关是四象限开关，能传导任一极性电流、阻断任一极性电压，如图4.19所示。构造四象限开关有若干方法：如图4.20b，可将 4.1.2 节的两个电流双向双象限开关背靠背连接，两晶体管同时开通和关断；或如图4.20a将 4.1.3 节的两个电压双向双象限开关反并联；或如图4.20c只用一个晶体管但附加二极管。
+
+![源页 p.92](../assets/page-snapshots/chapter-4/page-92.png)
+
+交-交变频器是需要四象限开关的一类变换器。例如图4.21所示三相交流-三相交流矩阵变换器，九个 SPST 开关各用图4.20的某一网络实现。适当控制开关，该变换器可从给定三相交流输入产生变频变压的三相输出。注意该变换器中无直流信号：所有输入输出电压电流均为交流，故必须用四象限开关。
+
+![源页 p.93](../assets/page-snapshots/chapter-4/page-93.png)
+
+### 4.1.5 同步整流器
+
+MOSFET 沟道反向导电的能力使其可用于原本需要二极管的位置。当 MOSFET 按图4.22a连接（注意源极和漏极连接与图4.6a相反）时，得到图4.22b的特性。该器件此时能阻断负电压并传导正电流，特性类似于图4.4的二极管。必须控制 MOSFET，使其在二极管本应导通时处于通态、在二极管本应反偏时处于断态。于是可用 MOSFET 取代图4.8降压变换器中的二极管，如图4.23所示，图中 BJT 也换成了 MOSFET。$Q_2$ 以 $Q_1$ 控制信号的互补信号驱动。
+
+计算机电源的趋势是输出电压从 3.3 V 向更低电平降低。输出电压降低时二极管导通损耗增大，以致在低于 3.3 V 的电源中二极管导通损耗成为最大的功率损耗源。不幸的是，二极管结接触电势限制了降低二极管正向压降的余地。可采用结电势较低的肖特基二极管，但含导通输出电流之二极管的低压电源效率仍不高。
+
+![源页 p.94](../assets/page-snapshots/chapter-4/page-94.png)
+
+解决办法是用作为同步整流器工作的 MOSFET 取代二极管。导通电阻为 $R_{on}$、方均根电流为 $I_{rms}$ 的 MOSFET 的导通损耗为 $I_{rms}^2 R_{on}$。用更大的 MOSFET 可降低导通电阻，故只要愿意为足够大的器件付费，导通损耗可任意降低。同步整流器在低压电源中应用广泛。
+
+图4.23的半桥 MOSFET 开关也称为同步开关，该降压变换器常称同步降压变换器。同步整流器 $Q_2$ 最常见的是以控制主 MOSFET $Q_1$ 的栅极驱动信号的互补信号驱动。同步降压变换器栅极驱动器的更多细节见 4.4.3 节。
+
+## 4.2 功率半导体简介
+
+### 4.2.1 击穿电压、正向压降与开关速度
+
+功率半导体设计中最基本的挑战是获得高击穿电压的同时保持低正向压降和低导通电阻 [27, 28]。与之密切相关的是高电压低导通电阻器件开关时间更长，在此期间可在半导体器件中引起显著开关损耗。击穿电压、导通电阻与开关时间的折中是区分各种功率器件的关键特征。
+
+反偏 p–n 结及其耗尽区的击穿电压是掺杂浓度的函数：要获得高击穿电压，结的至少一侧需低掺杂浓度，从而电阻率高。这个高阻区通常是器件导通电阻的主要来源，故高压器件的导通电阻必然高于低压器件。在多数载流子器件（MOSFET 和肖特基二极管）中，这解释了导通电阻对额定电压的一阶依赖。但少数载流子器件（扩散结 p–n 二极管、BJT、IGBT、晶闸管类 SCR/GTO）表现出电导调制现象：少数载流子器件导通时，正偏 p–n 结向轻掺杂高阻区注入少数载流子，由此产生的高浓度少数载流子有效降低该区域的视在电阻率，从而降低导通电阻。故少数载流子器件的导通电阻低于可比的多数载流子器件。
+
+![源页 p.95](../assets/page-snapshots/chapter-4/page-95.png)
+
+然而，少数载流子器件导通电阻降低的优点伴随开关速度降低的缺点。任何半导体器件的导通状态由器件内关键电荷量的存在与否控制，开通和关断时间等于插入或移除该控制电荷所需时间。电导调制器件由其注入的少数载流子控制。少数载流子器件中的控制少数电荷总量远大于控制等效多数载流子器件所需电荷。尽管各种器件插入和移除控制电荷的机制可能不同，但因少数电荷量大，少数载流子器件的开关时间显著长于多数载流子器件。因此，多数载流子器件适用于较低电压和较高开关频率，少数载流子器件则相反。
+
+击穿电压、导通电阻与开关速度之间的基本关系是半导体材料能带隙的函数。低能电子（价带）紧束缚于原子不参与导电；能量足够高的电子（导带）易于在原子间移动参与导电。半导体材料的带隙是价带最高能态与导带最低能态之间的能量差。硅（Si）的带隙约 1.1 eV。
+
+采用宽禁带（WBG）半导体材料可使击穿电压、导通电阻与开关时间的折中关系得到非常显著的改善。基于碳化硅（SiC，带隙约 3.2 eV）或氮化镓（GaN，带隙 3.4 eV）的功率二极管和晶体管如今已具商业重要性，其高压特性优于硅器件。基于 SiC 的肖特基二极管在 600 至 1700 V 已广泛供货，可相对 Si 技术显著提升变换器效率。基于 SiC 的功率 MOSFET 在 600 V 至 10 kV 已供货或公布，其导通电阻和开关时间远优于 Si 所能达到的水平。基于 GaN 的功率晶体管在 650 V 以下也有供货，开关时间和导通电阻同样显著更优。
+
+![源页 p.96](../assets/page-snapshots/chapter-4/page-96.png)
+
+对功率半导体器件物理和开关机制的详细描述超出本书范围。功率半导体的精选参考文献见 [8, 11, 26, 28–40]。本节及后续各节在高层次上讨论功率半导体器件中开关时间和正向压降的来源，然后将第3章的平均模型扩展以纳入开关损耗，并考察不同类型功率半导体开关如何处理正向压降与开关速度的折中。
+
+### 4.2.2 钳位电感性负载下的晶体管开关损耗
+
+实际半导体器件的非零开关时间导致开关过渡期间的功率损耗，称为开关损耗，可显著降低开关变换器的效率。引起开关损耗的物理机制有多种，本章讨论其中最重要的几种。
+
+先考虑图4.24降压变换器中的开关波形。把二极管视为理想，只研究晶体管开关时间引起的开关损耗。本例忽略半导体输出电容、变压器漏感、二极管反向恢复等其他开关损耗源。图4.24中用 MOSFET，但本节的导引性论证适用于任何功率晶体管。
+
+![源页 p.97](../assets/page-snapshots/chapter-4/page-97.png)
+
+二极管和电感对晶体管构成钳位电感性负载。在这样负载下，晶体管电压 $v_A(t)$ 和电流 $i_A(t)$ 不同时变化。例如，图4.25给出晶体管关断过渡波形的放大视图。为简化，波形近似为分段线性。开关时间很短，在整个过渡 $t_0 < t < t_2$ 内电感电流 $i_L(t)$ 基本恒定。
+
+二极管反偏时无电流流过，且在其电压 $v_B(t)$ 为负时不能正偏。故首先晶体管电压 $v_A(t)$ 必须从零升至 $V_g$。该区间长度 $(t_1 - t_0)$ 实质上是栅极驱动器对 MOSFET 栅漏电容充电所需时间，此间晶体管电流 $i_A(t)$ 恒定且等于 $i_L$。
+
+二极管电压 $v_B(t)$ 和电流 $i_B(t)$ 由下式给出
+
+$$v_B(t) = v_A(t) - V_g$$
+
+$$i_A(t) + i_B(t) = i_L \tag{4.4}$$
+
+![源页 p.98](../assets/page-snapshots/chapter-4/page-98.png)
+
+$t = t_1$ 时 $v_A = V_g$，二极管正偏，$i_L$ 开始从晶体管换流到二极管。区间长度 $(t_2 - t_1)$ 是栅极驱动器把 MOSFET 栅源电容放电至使 MOSFET 关断的阈值电压所需时间。
+
+晶体管耗散的瞬时功率 $p_A(t)$ 等于 $v_A(t) i_A(t)$，也绘于图4.25。晶体管关断过渡中损失的能量 $W_{off}$ 为该波形下面积。在波形分段线性的简化假设下，损失能量为阴影三角形面积：
+
+$$W_{off} = \frac{1}{2} V_g i_L (t_2 - t_0) \tag{4.5}$$
+
+这是图4.24简化电路中每次晶体管关断损失的能量。开关时间 $(t_2 - t_0)$ 较短的晶体管预期在此过渡中损失能量较低。
+
+图4.24简化电路的晶体管开通波形与图4.25在时间轴反转后定性相似：晶体管电流必须先从 0 升至 $i_L$，二极管随后反偏，晶体管电压才可从 $V_g$ 降至零。晶体管瞬时功耗峰值仍为 $V_g i_L$，在波形分段线性时开通过渡损失能量 $W_{on}$ 为 $0.5 V_g i_L$ 乘以晶体管开通时间。
+
+故一个完整开关周期内，开通和关断过渡损失的总能量为 $(W_{on} + W_{off})$。若开关频率为 $f_s$，则开关引起的平均功率损耗为
+
+$$P_{sw} = \frac{1}{T_s}\int_{\text{switching transitions}} p_A(t)\,dt = (W_{on} + W_{off}) f_s \tag{4.6}$$
+
+![源页 p.99](../assets/page-snapshots/chapter-4/page-99.png)
+
+故开关损耗 $P_{sw}$ 与开关频率成正比，也与 $W_{on}$ 和 $W_{off}$ 成正比；开关速度更快的晶体管预期开关损耗更低。
+
+上述论证是对开关损耗的简化高度理想化观点。不幸的是，它们往往不足以解释与开关损耗相关的可观测变换器行为；例如，它们不能解释为何含 MOSFET 和二极管的变换器中零电流开关劣于零电压开关（采用这些软开关现象的变换器是第22、23章的主题）。因此，以下各节细化这些论证以计入二极管反向恢复、器件输出电容等效应。
+
+## 4.3 功率二极管
+
+### 4.3.1 功率二极管简介
+
+图4.26所示为 p–n 二极管。p–n 结右侧掺入施主原子，向半导体晶格提供弱束缚电子，电子易于在原子间移动；左侧掺入受主原子，产生空穴，空穴也易于在原子间移动，等效为正电荷载流子。在二极管的正常工作温度下，这些多数载流子具有热致振动，使它们在半导体晶格中随机运动。
+
+![源页 p.100](../assets/page-snapshots/chapter-4/page-100.png)
+
+在 p–n 结处形成耗尽区。这是因为载流子的热运动使其沿载流子浓度降低的方向扩散。如图4.27所示，结右侧可动电子浓度高、左侧低，故电子向左扩散，在 p 区成为可动少数载流子，其能量足以继续在晶格中移动；空穴同样向 n 区扩散成为少数载流子。
+
+这些可动载流子在结附近留下被电离的掺杂原子，形成电场。例如，n 区多数载流子电子扩散到 p 区时，在 n 区留下缺电子因而净带正电的被电离原子；p 区空穴扩散到 n 区时，留下净带负电的被电离原子。结附近这一被电离原子区域称为空间电荷区或耗尽区，产生电场 $E$ 和净电压 $v_o$，如图4.27。$v_o$ 构成阻碍可动载流子扩散的势垒，使载流子向相反方向漂移。当足够多可动载流子扩散过结，电场继续增强，直至电压和电场强度大到足以抵消可动电荷跨结的净扩散，器件达到平衡。
+
+图4.28为施加反偏电压的情形。外施电压使结附近掺杂原子进一步电离，耗尽区增大，外施电压实质上出现在耗尽区上，区内电场增强。提高反偏电压需要向耗尽区补充电荷（来自外电路），这一电容效应导致二极管的结电容。
+
+图4.29为外施电源正偏 p–n 结的情形。外施电源降低结上电压，耗尽区电场不足以抵消载流子跨结扩散。在正偏下，p 区空穴跨结扩散，在 n 区成为少数载流子；n 区电子跨结扩散，在 p 区成为可动少数载流子。
+
+图4.30说明了正偏下导流机制。电子从外电路经 n 区右端接触进入 n 区成为多数载流子；电子经 p 区左端接触离开 p 区，在 p 区产生多数载流子空穴。部分多数载流子跨正偏 p–n 结扩散成为少数载流子。
+
+![源页 p.101](../assets/page-snapshots/chapter-4/page-101.png)
+
+多种过程使少数载流子失去能量与多数载流子复合。复合以一定速率发生，少数载流子存在一个有效寿命 $\tau_L$。少数载流子扩散离开结时，其浓度因复合而降低，如图4.30，该浓度曲线的斜率决定少数载流子扩散速率。
+
+正偏下，正向电流完全由复合构成。外电路的多数载流子从某一接触进入半导体，可与少数载流子复合，或跨结扩散成为少数载流子后再复合。
+
+正偏下二极管是电荷控制的。可证耗尽区上电压 $v$ 与耗尽区边缘少数电荷浓度 $p_s$、$n_s$ 的关系由二极管方程给出（以下以图4.30耗尽区右边缘空穴浓度为变量）：
+
+$$p_s(t) = Q_{s0}\left(e^{\lambda v(t)} - 1\right) \tag{4.7}$$
+
+其中 $\lambda = kT/q_e$，$k$ 为玻尔兹曼常数，$T$ 为开尔文温度，$q_e$ 为电子电荷。该式表明正向偏置越大注入跨结的少数电荷越多，也意味着除非耗尽区边缘的少数电荷减少，否则结电压不会下降。
+
+可用少数电荷的集总模型建模开关行为。在最简单的单集总模型中，令 $q(t)$ 为结一侧总少数电荷。该电荷可因复合而减少，也可因正端电流 $i(t)$ 而增加，故
+
+$$\frac{dq(t)}{dt} = i(t) - \frac{q(t)}{\tau_L} \tag{4.8}$$
+
+$q/\tau_L$ 为少数载流子复合速率。平衡时总存储少数电荷 $q(t)$ 与耗尽区边缘电荷浓度 $p_s(t)$ 或 $n_s(t)$ 相关。
+
+平衡时净存储少数电荷不变：$dq(t)/dt = 0$。式 (4.7) 和 (4.8) 给出
+
+$$i(t) = \frac{q(t)}{\tau_L} = \frac{Q_0}{\tau_L}\left(e^{\lambda v(t)} - 1\right) = I_0\left(e^{\lambda v(t)} - 1\right) \tag{4.9}$$
+
+这是传统的指数二极管方程。可见它是平衡表达式，在暂态（二极管开关时间内）不成立。特别是在二极管关断过渡期间，电压 $v(t)$ 由存储少数电荷浓度按式 (4.7) 决定；要降低电压，必须移除存储少数电荷。在关断过渡期间电流可偏离式 (4.9)；式 (4.8) 表明负向电流可主动减少存储少数电荷。
+
+![源页 p.102](../assets/page-snapshots/chapter-4/page-102.png)
+
+图4.31给出二极管关断暂态的典型波形和存储少数电荷浓度分布。初始（$t \le t_0$）二极管处于通态，正向电压 $v(t_0) > 0$，传导电流 $i(t_0) = I_{on}$。耗尽区从 p–n 结延伸距离 $x_0$，图4.31b阴影区为 $t = t_0$ 的耗尽区。对 $x > x_0$，存在存储少数电荷分布，其 $x = x_0$ 处斜率正比于 $I_{on}$。
+
+$t = t_0$ 时外电路开始使 $i(t)$ 反向。$di/dt$ 由外电路决定，通常受接线电感、封装电感、晶体管驱动电路等限制。
+
+$t = t_1$ 时电流变负。总存储电荷（图4.31b少数电荷浓度曲线下面积）因负电流和复合而减少。耗尽区边缘电荷浓度曲线斜率为负，反映跨结电流反向。由于电场极性不阻碍少数载流子反向流动，$i(t)$ 此时含反向跨耗尽区流动的少数载流子。因 $x = x_0$ 处少数电荷浓度仍可观，式 (4.7) 预测耗尽区电压仍为正。由于二极管方程的指数性，$t = t_1$ 时 $v(t)$ 仅比初值略低，二极管仍正偏。
+
+$t = t_2$ 时 $x = x_0$ 处存储少数电荷已被移除，式 (4.7) 预测耗尽区电压可变负。但 $x > x_0$ 处仍有存储少数电荷，如图4.31b。$t > t_2$ 时这些电荷继续被移除，电压变得更负。$t = t_3$ 时耗尽区扩大到 $x = x_3$（图4.31b未示）。最终 $t = t_4$ 时所有存储少数电荷被移除，二极管阻断全部反偏电压 $V_{off}$，无显著反向电流。
+
+由图4.31a波形考虑反向恢复过程中二极管功耗。$t < t_0$ 时流入二极管的功率为
+
+$$p(t) = v(t) i(t) = V_F I_{on} \tag{4.10}$$
+
+其中 $V_F$ 为式 (4.9) 给出的二极管正向压降，即二极管导通损耗。$t = t_1$ 时电流已反向而电压仍为正；

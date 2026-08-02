@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第13章part 1 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem"
+title: "第13章 面向设计的分析技巧：反馈定理（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1264 +18,488 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第13章part 1 - 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
+# 第13章 面向设计的分析技巧：反馈定理（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 515-534  
-> Chunk ID: `chapter-13-part-1`
+> 源页：515–534
+> 本部分涵盖 13.1 第四部分引言、13.2 反馈定理、13.3 运放 PD 补偿器示例、13.4 闭环稳压器示例引言。
 
-## 主干提取
+## 13.1 第四部分引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+本书第四部分开发理解和设计更大功率电子系统所需的分析工具。它在第二部分开发的基本建模和分析技巧基础上分析和仿真复杂反馈电路，包括含输入 EMI 滤波器、电流模式控制或数字控制的电路。
 
-## 术语表
+如第8章所述，面向设计的分析（D-OA）是辅助复杂电路和系统分析的分析工具集合，目标是导出对设计有用的可处理方程。第四部分覆盖基于线性叠加和零双注入分析技巧的三种更高级 D-OA 技巧。这些技巧的目标是进一步开发辅助复杂模拟系统设计的分析工具，包括开发附加近似方法和更强大的分析方法。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+9.1 节研究的闭环开关稳压器框图采用理想化框，未显式表示输入和输出阻抗或双向信号流。虽然这通常是有用的方法，但某些情形下电路元件之间的相互作用不易表征为不相互显著加载的单向框。Middlebrook 通用反馈定理 [106] 是允许确定电路环路增益和其他重要传递函数的通用技巧，无需识别框。此技巧可视为 9.6 节环路增益测量技巧的推广，进行解析"思维实验"以求反馈电路中零双注入所得传递函数。
 
-## 中文翻译
+13.2 节导出反馈定理的单环版本，基于线性叠加和零双注入。然后考察两个常见电路示例。13.3 节确定实际运放带宽对 PD 补偿器电路行为的影响。13.4 节用反馈定理求降压稳压器的闭环传递函数。此分析在第17章扩展以考察输入 EMI 滤波器对降压稳压器的影响，第18章扩展以考察 EMI 滤波器对电流模式稳压器系统的影响。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+平均开关建模是平均变换器建模主题的子集，导致与第8章开发模型等价的结果。此技巧特别适合基于 SPICE 的变换器仿真，在第14章开发。平均开关建模还揭示高效电子功率转换电路固有的直接和间接功率变换机理。平均开关建模在第15章扩展到断续导通模式的交流建模。
 
-## 英文原文
+额外元件定理揭示已知传递函数如何因加入新网络元件而改变；此定理在第16章引入。EET 的一个经典应用是在闭环开关稳压器中加入输入 EMI 滤波器及此滤波器的阻尼使其不退化稳压器性能和稳定性。输入滤波器分析和设计在第17章覆盖。N 额外元件定理（n-EET）是 EET 向同时加入多个元件的扩展。n-EET 的一个有用应用是将所有储能元件视为额外元件：传递函数可写为几乎无代数的归一化有理分式。
 
-```text
-13
-Techniques of Design-Oriented Analysis: The
-Feedback Theorem
-13.1 Introduction to Part IV
-Part IV of this text develops analytical tools needed to understand and design larger power
-electronic systems. It builds on the basic modeling and analysis techniques developed in PartII
-to analyze and simulate complex feedback circuits, including those having input EMI ﬁlters,
-current-mode control, or digital control.
-As introduced in Chap. 8, Design-Oriented Analysis (D-OA) is a collection of analytical
-tools that aid the analysis of complex circuits and systems, with the goal of deriving tractable
-equations that are useful for design. Part IV covers three more advanced techniques of D-OA
-that are based on linear superposition and the null double injection analysis technique. The
-goal of these techniques is the further development of analytical tools that aid in the design of
-complex analog systems, including development of additional approximation methods and of
-more powerful analytical methods.
-The closed-loop switching regulator block diagram studied in Sect. 9.1 employs idealized
-blocks that do not explicitly represent input and output impedances or bidirectional signal ﬂow.
-While this often is a useful approach, there are cases where interactions between circuit ele-
-ments are not easily characterized as unidirectional blocks that do not signiﬁcantly load each
-other. Middlebrook’s General Feedback Theorem [106] is a general technique that allows de-
-termination of loop gains and other important transfer functions of a circuit, without need for
-identiﬁcation of blocks. This technique can be viewed as a generalization of the loop gain mea-
-surement techniques described in Sect. 9.6, to perform analytical “thought experiments” to ﬁnd
-the transfer functions obtained by null double injection in the feedback circuit.
-The single-loop version of the feedback theorem is derived in Sect. 13.2, based on linear
-superposition and null double injection. Two common circuit examples are then examined. The
-eﬀect of the bandwidth of a practical op amp on the behavior of a PD compensator circuit is
-determined in Sect. 13.3. The feedback theorem is employed to ﬁnd the closed-loop transfer
-functions of a buck regulator in Sect. 13.4. This analysis is extended in Chap. 17 to examine
-the eﬀect of an input EMI ﬁlter on a buck regulator, and in Chap.18 to examine the eﬀect of an
-EMI ﬁlter on a current-mode regulator system.
-Averaged switch modeling is a subset of the subject of averaged converter modeling, and
-leads to results that are equivalent to the models developed in Chap. 8. This technique is par-
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_13
-509
+电流模式控制是开关变换器控制的常用方法，其中峰值晶体管电流替代占空比作为补偿器输出命令的控制变量。此方法含固有的内部电流反馈环路，可改善控制响应但使分析复杂化。第18章开发电流模式控制系统的 Tan 模型 [107]。
 
-510 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-ticularly well suited to SPICE-based simulation of converters, and is developed in Chap. 14.
-Averaged switch modeling also exposes the fundamental direct and indirect power conversion
-mechanisms that are inherent in high-eﬃciency electronic power conversion circuits. Averaged
-switch modeling is extended to ac modeling of the discontinuous conduction mode in Chap.15.
-The Extra Element Theorem exposes how a known transfer function is changed by addition
-of a new network element; this theorem is introduced in Chap. 16. A classic application of the
-EET is the addition of an input EMI ﬁlter to a closed-loop switching regulator, and damping of
-this ﬁlter so that it does not degrade regulator performance and stability. Input ﬁlter analysis and
-design is covered in Chap. 17.T h en–Extra Element Theorem (n–EET) is an extension of the
-EET to cover the simultaneous addition of multiple elements to a circuit. A useful application
-of the n–EET is the treatment of all reactive components as extra elements: a transfer function
-can be written as a normalized rational fraction with little or no algebra.
-Current-mode control is a popular approach to control of switching converters, in which the
-peak transistor current replaces the duty cycle as the control variable that is commanded by the
-compensator output. This approach contains an inherent inner current feedback loop, which can
-improve control response but complicates the analysis. The Tan model [ 107] of current-model
-control systems is developed in Chap. 18.
-With the advent of high-performance low-cost microcontrollers, digital control of switch-
-ing converters has proliferated. Digital control techniques for switching power converters are
-introduced in Chap. 19. The basic issues of sampling, quantization, and discrete time eﬀects are
-described and characterized. Techniques for design of digital compensators are developed.
-13.2 The Feedback Theorem
-Middlebrook’s Feedback Theorem is an application of the technique ofnull double injection,t o
-derive the important transfer functions of a closed-loop feedback circuit. In the presence of the
-input signal source, a test source is injected at a suitable point within the feedback circuit, and
-key quantities are derived under conditions of setting one of the independent inputs to zero, or
-of adjusting the two independent sources such that a dependent signal is nulled to zero. The null
-double injection technique relies on linear superposition to ﬁnd the desired transfer functions
-under these null or zeroed conditions. The feedback theorem is stated in Sect. 13.2.1, and is
-derived in Sect. 13.2.2.
-13.2.1 Basic Result
-Consider the feedback circuit represented by Fig. 13.1. The independent input source of this
-circuit is u
-i(s) and the output is uo(s) (the generic symbol u is employed; these signals may be
-voltages, currents, or other quantities). The circuit includes a feedback loop having loop gain
-T(s); in the laboratory, we could measure this loop gain using the voltage injection method of
-Sect. 9.6.1 or the current injection method of Sect. 9.6.2. V oltage or current injection using a
-source uz(s) is also illustrated in Fig. 13.1.
+随着高性能低成本微控制器的出现，开关变换器的数字控制已普及。第19章介绍开关功率变换器的数字控制技巧。描述和表征采样、量化和离散时间效应的基本问题。开发数字补偿器设计技巧。
 
-13.2 The Feedback Theorem 511
-y(s)+ +Input
-ui(s)
-Output
-uo(s)
-Injection
-uz(s)
-Error
-signal ux(s)
-Loop gain T(s)
-+
-Fig. 13.1 A feedback circuit contains an input source ui(s), output uo(s), and injection source uz(s)
-As noted in Sects. 9.6.1 and 9.6.2, the accuracy of the loop gain measured via the injec-
-tion method depends on the degree of loading at the injection point, according to Eqs. ( 9.96)
-and (9.100). In a practical laboratory experiment, some inaccuracy may be unavoidable. How-
-ever, for the purposes of theoretical analysis, we may choose to inject at anideal injection point
-where the impedance inequalities ( 9.96)o r( 9.100) are exactly satisﬁed. In such an analytical
-“thought experiment,” we inject at a point immediately following an ideal voltage source or cur-
-rent source whose value depends directly on the error signal of the feedback loop. Speciﬁcally,
-we inject at an ideal point that satisﬁes both of the following criteria:
-•A signal uz is injected directly after a source uy that is proportional to the error signal of the
-feedback loop.
-•The forward portion of the feedback loop must contain no parallel paths that allow the
-ampliﬁed error signal to reach the output without passing through the ideal injection point.
-If the injection point is shorted to ground, i.e.,i f ux = 0, then none of the ampliﬁed error
-signal should reach the output.
-Injection at an ideal point satisfying both of the above requirements will lead to an exact expres-
-sion for the physical loop gain T(s).
-The system of Fig. 13.1 contains two independent sources, ui(s) and the injection source
-uz(s). There are three dependent quantities: the output uo(s), and the signals uy(s) and ux(s),
-immediately before and after the injection source. Note the minus sign associated with uy in
-Fig. 13.1: this is needed to cancel the minus sign associated with negative feedback and obtain
-the correct loop gain polarity. We can deﬁne thought experiments in which an independent
-source is set to zero, or in which a dependent source is nulled. These thought experiments allow
-solution for the gains G∞(s), G0(s), T(s), and Tn(s), and ﬁnally for the overall transfer function:
-G(s)= uo
-ui
-= G∞
-T
-1+ T+ G0
-1
-1+ T (13.1)
-Each thought experiment is described in detail below.
-Loop gain T(s): The input ui(s) is set to zero. In the presence of the injection source uz(s),
-the circuit is solved for the loop gain T(s):
-T(s)= uy(s)
-ux(s)
-⏐⏐⏐
-⏐⏐⏐
-ui=0
-(13.2)
+## 13.2 反馈定理
 
-512 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-In practice, we assume that we know ux(s), and follow how it propagates around the feedback
-loop to ﬁnd uy(s). When the above conditions for an ideal injection point are satisﬁed, then the
-resulting T(s) will have the physical interpretation of the circuit loop gain.
-Ideal forward gain G∞(s): In the presence of the input ui(s), the signal uz(s) is injected
-and is adjusted as necessary to null uy(s). Under these conditions, referred to as null double
-injection, the circuit is solved to ﬁnd uo(s). The ideal forward gain is
-G∞(s)= uo(s)
-ui(s)
-⏐⏐
-⏐⏐⏐
-⏐
-uy→
-null
-0
-(13.3)
-The quantity uy is dependent on both independent sources ui and uz, and hence there is some
-choice of ui and uz that will cause uy to be nulled to zero. Note that nulling uy is not the same
-as shorting uy: the null condition takes place in the original circuit, and results from a speciﬁc
-selection of values of the independent sources. Speciﬁcally, nulling uy eﬀectively also nulls the
-error signal because of the conditions satisﬁed by the ideal injection point. HenceG∞is the gain
-from the input ui to the output uo under the condition that the error signal is nulled to zero: the
-output is perfectly regulated. It can be veriﬁed that the gain G(s)o fE q .( 13.1) reduces to G∞
-under the condition that T→∞.
-If the feedback circuit employs a conventional operational ampliﬁer, then nullingvy is equiv-
-alent to employing the principle of virtual ground, in accordance with common practice in the
-analysis of op amp circuits. In an op amp circuit with negative feedback,G∞coincides with the
-gain when an ideal op amp is present.
-Gain G0(s): In this thought experiment, null double injection is performed as follows: in the
-presence of the input ui(s), the signal uz(s) is injected and is adjusted as necessary to null ux(s).
-Under these conditions, the circuit is solved to ﬁnd uo(s). The gain G0 is
-G0(s)= uo(s)
-ui(s)
-⏐⏐⏐
-⏐
-⏐⏐
-ux→
-null
-0
-(13.4)
-Note that nulling ux eﬀectively prevents the ampliﬁed error signal from reaching the output,
-because of the conditions satisﬁed by the ideal injection point. Hence G0 is the gain from the
-input ui to the output uo under the condition that the feedback loop does not control the output.
-It can be veriﬁed that the gain G(s)o fE q .(13.1) reduces to G0 under the condition that T→0.
-The physical interpretation of G0 depends on the quantity being analyzed. For an ampliﬁer
-in which ui and uo are the input and output voltages, G0 has the interpretation of direct forward
-transmission through the feedback path. With ux nulled, there is no way for the input signal to
-reach the output via the forward path of the loop, and soG0 must result from signals reaching the
-output by ﬂowing (backwards!) through the feedback path. In the case of disturbance transfer
-functions such as a closed-loop Zout or Gvg,t h eG0 term represents the open-loop disturbance
-transfer function.
-Null loop gain Tn(s): In the presence of the input ui(s), the signal uz(s) is injected and
-is adjusted as necessary to null the output uo(s). Note that this is another case of null double
-injection. Under these conditions, the circuit is solved for the null loop gain Tn(s):
-Tn(s)= uy(s)
-ux(s)
-⏐⏐⏐
-⏐
-⏐⏐
-uo→
-null
-0
-(13.5)
+Middlebrook 反馈定理是零双注入技巧的应用，导出闭环反馈电路的重要传递函数。在输入信号源存在下，测试源在反馈电路内合适点注入，在将一个独立输入设为零或将两个独立源调整使某因变量信号置零的条件下导出关键量。零双注入技巧依靠线性叠加在这些零或置零条件下求所需传递函数。13.2.1 节陈述反馈定理，13.2.2 节导出。
 
-13.2 The Feedback Theorem 513
-Solution for Tn is similar to the analysis of T, although it is usually somewhat simpler because
-Tn does not depend on the load impedance. The null loop gainTn has less physical interpretation
-than does T; it is related to the other above quantities according to the reciprocity relationship:
-Tn(s)
-T(s) = G∞(s)
-G0(s) (13.6)
-Hence one can solve for three of the four gains, whichever is easiest, then employ the reci-
-procity relationship to ﬁnd the fourth gain. Finally, the overall closed-loop gain G(s) is found
-by evaluation of Eq. (13.1).
-13.2.2 Derivation
-The basic results of Sect.13.2.1 can be derived through the use of superposition and null double
-injection in the several thought experiments described.
-+ ue(s) uo(s)ui(s)
-iz
-ixiy
-0
-Fig. 13.2 Current injection iz = uz at an ideal injection point in a feedback loop. The original condition
-is illustrated, in which iz is set to zero
-Original condition: uz = 0, in the presence of the input ui. Figure 13.2 illustrates current
-injection at an ideal injection point, with the original condition iz = 0. In this case, the closed-
-loop forward gain G(s)i sg i v e nb y
-uo
-⏐⏐
-⏐
-⏐
-uz=0
-= Gui (13.7)
-This is the deﬁnition ofG(s). Additionally, under this condition we can expressix and iy in terms
-of the input ui:
-ix
-⏐⏐⏐⏐iz=0
-=−iy
-⏐⏐⏐⏐iz=0
-= Ga(s)ui (13.8)
-For the current injection illustrated in Fig. 13.2, ux = ix and uy = iy. Equation ( 13.8)i st h e
-deﬁnition of Ga(s). Both G(s) and Ga(s) are unknowns at this point. It is desired to eliminate
-Ga, and to solve for G.
-Injection of uz: Figure 13.3 illustrates the case in which the input ui is set to zero, and
-current injection iz = uz is applied. Under these conditions, we can express iy as some function
-of ix as follows:
+### 13.2.1 基本结果
 
-514 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-iy
-⏐⏐⏐⏐ui=0
-= T(s) ix
-⏐⏐⏐⏐ui=0
-(13.9)
-This is the deﬁnition of the loop gain T(s).
-Under these conditions, we can also express the quantities ix and iy as functions of the
-injection source iz, by writing the node equation at the injection point:
-ix+ iy= iz (13.10)
-By substitution of Eq. (13.9) into Eq. (13.10) and solution for ix and iy, we can ﬁnd that
-+ ue(s) uo(s)ui(s)
-iz
-ixiy
-0
-Fig. 13.3 Current injection iz= uz, with the input ui set to zero
-ix
-⏐⏐⏐
-⏐
-ui=0
-= 1
-1+ T iz (13.11)
-iy
-⏐⏐
-⏐⏐
-ui=0
-= T
-1+ T iz (13.12)
-Also under these conditions, we can express the output uo in terms of the injection source iz as
-uo
-⏐⏐
-⏐⏐
-ui=0
-= Gb(s) ix
-⏐⏐
-⏐⏐
-ui=0
-= Gb
-1+ T iz (13.13)
-This is the deﬁnition of Gb. It is desired to eliminate Gb.
-In the presence of both ui and uz= iz: we can employ superposition to express the depen-
-dent quantities ix, iy, and uo as functions of the two independent inputs ui and iz.F o rix, we can
-write
-ix= ix
-⏐⏐⏐
-⏐
-iz=0
-+ ix
-⏐⏐⏐
-⏐
-ui=0
-(13.14)
-Substitution of Eqs. (13.8) and (13.11) into Eq. (13.14) leads to the general expression for ix:
-ix= Ga ui+ 1
-1+ T iz (13.15)
-We can ﬁnd a similar expression for iy:
-iy= iy
-⏐⏐⏐⏐iz=0
-+ iy
-⏐⏐⏐⏐ui=0
-(13.16)
+考虑图13.1 所示的反馈电路。此电路的独立输入源为 $u_i(s)$，输出为 $u_o(s)$（采用通用符号 $u$；这些信号可为电压、电流或其他量）。电路含环路增益为 $T(s)$ 的反馈环路；实验室中可用 9.6.1 节的电压注入法或 9.6.2 节的电流注入法测量此环路增益。图13.1 还给出用源 $u_z(s)$ 的电压或电流注入。
 
-13.2 The Feedback Theorem 515
-Substitution of Eqs. (13.8) and (13.12) into Eq. (13.16) leads to the general expression for iy:
-iy=−Ga ui+ T
-1+ T iz (13.17)
-The output uo can be expressed via superposition as
-uo= uo
-⏐⏐
-⏐
-⏐
-iz=0
-+ uo
-⏐⏐
-⏐
-⏐
-ui=0
-(13.18)
-Substitution of Eqs. (13.7) and (13.13) into Eq. (13.18) leads to the general expression for uo:
-uo= Gu i+ Gb
-1+ T iz (13.19)
-Next, we perform the “thought experiments” described in Sect. 13.2.1.
-+ ue(s) uo(s)ui(s)
-iz
-ixiy
-0
-0
-Fig. 13.4 In the presence of ui, adjust iz= uz to null iy
-Null double injection, nulling iy: In the presence of the input ui, adjust iz as necessary to
-null iy, as illustrated in Fig. 13.4. Under these conditions, Eq. (13.17) becomes
-0=−Ga ui+ T
-1+ T iz
-⏐⏐⏐
-⏐
-iy→
-null
-0
-(13.20)
-and Eq. (13.19) becomes
-uo
-⏐⏐⏐⏐iy→
-null
-0
-= Gu i+ Gb
-1+ T iz
-⏐⏐⏐⏐iy→
-null
-0
-(13.21)
-Elimination of iz from Eqs. (13.20) and (13.21) leads to
-uo
-⏐⏐
-⏐⏐
-iy→
-null
-0
-= Gui+ GaGb
-T ui (13.22)
-We can deﬁne
-G∞= G+ GaGb
-T (13.23)
+![源页 p.517](../assets/page-snapshots/chapter-13/page-517.png)
 
-516 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Hence
-uo
-⏐⏐
-⏐⏐
-iy→
-null
-0
-= G∞ui (13.24)
-In this thought experiment, we adjust iz as necessary to null iy. Since iy is directly proportional
-to the error signal, nulling iy also nulls the error signal. Hence the gain G∞has the physical
-interpretation of the ideal forward gain of the loop, with zero error.
-Null double injection, nulling ix: In the presence of the input ui, adjust iz as necessary to
-null ix, as illustrated in Fig. 13.5. Under these conditions, Eq. (13.15) becomes
-0= Ga ui+ 1
-1+ T iz
-⏐⏐
-⏐⏐
-ix→
-null
-0
-(13.25)
-Equation (13.19) becomes
-uo
-⏐⏐
-⏐⏐
-ix→
-null
-0
-= Gu i+ Gb
-1+ T iz
-⏐⏐
-⏐⏐
-ix→
-null
-0
-(13.26)
-Elimination of iz from Eqs. (13.25) and (13.26) leads to
-ue(s) uo(s)ui(s)
-iz
-ixiy
-0
-G0(s)
-Fig. 13.5 In the presence of ui, adjust iz= uz to null ix
-uo
-⏐⏐
-⏐
-⏐
-ix→
-null
-0
-= Gui−GaGbui (13.27)
-We can deﬁne
-G0= G−GaGb (13.28)
-Hence
-uo
-⏐⏐⏐
-⏐
-ix→
-null
-0
-= G0ui (13.29)
-In this thought experiment, we adjust iz as necessary to null ix. Consequently, there is no trans-
-mission of the ampliﬁed error signal through the forward path:ix= 0. In the system depicted in
-Fig. 13.5, the only other way to obtain a nonzero output is via the feedback path, assuming that
+图13.1 反馈电路含输入源 $u_i(s)$、输出 $u_o(s)$ 和注入源 $u_z(s)$
 
-13.2 The Feedback Theorem 517
-signals are capable of propagating in either direction through this path. Hence, the gain G0 has
-the physical interpretation of direct forward transmission through the feedback path.
-In later examples, we will see that G0 may have the interpretation of the open-loop gain
-from disturbances to the output. In these examples, the system architecture is more complex
-than is envisioned in Fig. 13.5.
-+ ue(s) uo(s)ui(s)
-iz
-ixiy
-0
-Fig. 13.6 In the presence of ui, adjust iz= uz to null uo
-Null double injection, nulling uo: In the presence of the input ui, adjust iz as necessary to
-null uo, as illustrated in Fig. 13.6. Note that the output uo is not shorted. For example, in the
-case where the output uo is a voltage, this null condition implies that zero current ﬂows through
-the load impedance, and any current produced by the output block must ﬂow directly into the
-feedback path.
-Under these conditions, Eq. (13.19) becomes
-0= Gu
-i+ Gb
-1+ T iz
-⏐⏐⏐⏐uo→
-null
-0
-(13.30)
-Equation (13.15) becomes
-ix= Ga ui+ 1
-1+ T iz
-⏐⏐
-⏐⏐
-uo→
-null
-0
-(13.31)
-And Eq. (13.17) becomes
-iy=−Ga ui+ T
-1+ T iz
-⏐⏐⏐
-⏐
-uo→
-null
-0
-(13.32)
-We can eliminateui and iz
-⏐⏐
-⏐
-⏐
-uo→
-null
-0
-from the above equations, and solve for the relationship between
-iy and ix under the condition that the output uo is nulled. After performing some algebra, we
-obtain the following result:
-iy
-⏐⏐⏐⏐uo→
-null
-0
-= TG+ GaGb
-G−GaGb
-ix
-⏐⏐⏐⏐uo→
-null
-0
-(13.33)
-We can deﬁne
-Tn= iy
-ix
-⏐⏐⏐
-⏐
-uo→
-null
-0
-= TG+ GaGb
-G−GaGb
-(13.34)
+如 9.6.1 和 9.6.2 节所述，注入法测得环路增益的精度取决于注入点的加载程度 [式 (9.96) 和 (9.100)]。实际实验室实验中某些不精确可能不可避免。但为理论分析目的，可选择在阻抗不等式 (9.96) 或 (9.100) 精确满足的理想注入点注入。在此解析"思维实验"中，在直接取决于反馈环路误差信号的理想电压源或电流源之后立即的点注入。具体地，在满足以下两个准则的理想点注入：
 
-518 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-The null loop gain T n is the transfer function from ix to iy under the condition that, in the
-presence of the input ui, the injection source iz is adjusted to null the output uo. The null loop
-gain Tn has less physical interpretation than the loop gain T; it is similar except that the eﬀects
-of output loading are removed. Hence Tn is somewhat simpler to compute than T. The next
-paragraphs give a simple way to relate T and Tn, and hence computation of Tn can be a useful
-step in the computation of T.
-Final result: With the above deﬁnitions, one can solve the feedback circuit for the quantities
-G0, G∞, T, and Tn. One can determine the closed-loop transfer function G in terms of these
-quantities, by eliminating the intermediate quantities Ga and Gb from the above equations and
-solving for G in terms of G0, G∞, T, and Tn.F r o mE q .(13.28), we have
-G0= G−GaGb (13.35)
-From Eq. (13.23),
-G∞= G+ GaGb
-T (13.36)
-which can be rewritten as
-G∞T= TG+ GaGb (13.37)
-From Eq. (13.34), we have
-Tn= TG+ GaGb
-G−GaGb
-(13.38)
-Substitution of Eqs. (13.35) and (13.37) into Eq. (13.38) leads to the reciprocity relationship
-Tn= G∞T
-G0
-or Tn
-T = G∞
-G0
-(13.39)
-This important relationship implies that we need only to solve for three of the gains G0, G∞, T,
-and Tn; the fourth can be found from Eq. ( 13.39). Further, if the three gains are expressed in
-factored pole-zero form, then the fourth gain that results from Eq. (13.39) will also be factored.
-Now eliminate the quantity GaGb from Eqs. (13.35) and (13.36), and use the result to solve
-Eqs. (13.35)t o( 13.39)f o rG. After a few lines of algebra, the following result is obtained:
-G= G∞
-⎦
-1+ 1
-Tn
-)
-⎦
-1+ 1
-T
-) = G∞
-T
-1+ T+ G0
-1
-1+ T (13.40)
-This is the desired expression for the closed-loop gain G. Note that, for large loop gain,
-G→G∞ for ∥T∥→∞ (13.41)
-So G∞is the closed-loop forward gain with large loop gain. For small loop gain,
-G→G0 for ∥T∥→0 (13.42)
-Hence G0 is the closed-loop forward gain when the loop gain tends to zero.
+- 信号 $u_z$ 在正比于反馈环路误差信号的源 $u_y$ 之后立即注入。
+- 反馈环路的前向部分不含允许放大的误差信号不经过理想注入点到达输出的并联路径。若注入点短路到地（即 $u_x = 0$），则放大的误差信号不应有到达输出的部分。
 
-13.3 Example: Op Amp PD Compensator Circuit 519
-(a)
-++vin
-+
-vout
-R1
-R2
-R3
-RL
-C
-(b)
-v+
-vout
-Ro
-+
-v
-Gop(s) (v+ v )
-+
-Fig. 13.7 Op amp PD compensator circuit example: (a) circuit schematic, (b) op amp equivalent circuit
-model
-13.3 Example: Op Amp PD Compensator Circuit
-As a ﬁrst example of application of the feedback theorem, let us analyze the op amp circuit
-illustrated in Fig. 13.7a. With an ideal op amp, this lead-lag circuit exhibits a transfer func-
-tion having a zero and pole, and is suitable as a PD compensator in feedback loops requiring
-improvement of phase margin. To examine the impact of the frequency response and output
-impedance of a practical op amp, we will model the op amp using the equivalent circuit il-
-lustrated in Fig. 13.7b. The positive and negative input ports are modeled with inﬁnite input
-impedance, and a Thevenin-equivalent circuit models the output port. The op amp gain is
-G
-op (s)= Gop0
-⎦
-1+ s
-ω1
-) (13.43)
-For this example, the op amp model values are
-Gop0= 105⇒100 dB f1=ω1
-2π= 10 Hz
-Ro= 50 Ω
-This typical op amp internal gain Gop exhibits a dc gain of 100 dB and a pole at 10 Hz; its
-magnitude Bode plot is given in Fig. 13.8. The op amp unity gain frequency is 1 MHz: for
-frequencies above 10 Hz, the magnitude asymptote follows the equation
-∥Gop∥≈1M H z
-f (13.44)
-The element values are
-R1= 1.6k Ω R2= 16 Ω RL= 100 Ω
-R3= 1.6k Ω C= 0.1μF
-To analyze this feedback circuit, we insert the op amp model of Fig. 13.7b into the circuit of
-Fig. 13.7a, leading to the equivalent circuit illustrated in Fig.13.9.
-To apply the feedback theorem, we ﬁrst identify an ideal injection point. The error signal of
-this op amp feedback circuit can be taken to be the op amp diﬀerential input voltage (v+−v−):
-when this voltage is zero, the op amp circuit operates ideally with zero error. In the op amp
-model of Fig.13.7b, the dependent voltage source is proportional to (v+−v−), and hence we can
-employ voltage injection immediately following this source as illustrated in Fig. 13.9: this will
+在满足上述两个要求的理想点注入将导致物理环路增益 $T(s)$ 的精确表达式。
 
-520 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-f
-f1
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz 1 MHz
-60 dB
-40 dB
-20 dB
-80 dB
-100 dB
-120 dB
-0 dB
-Gop0
-|| Gop ||
-Fig. 13.8 The op amp internal gain exhibits a single-pole response with a unity gain frequency of 1 MHz
-cause vy to be directly proportional to the error signal ( v+−v−). With this choice of injection
-point, we can solve the circuit to ﬁnd G0, G∞, T, and Tn as described in Sect. 13.2.1.
-The ideal forward gain G∞is found according to Eq. (13.3). For this example, we obtain
-G∞(s)= vout(s)
-vin(s)
-⏐⏐
-⏐
-⏐⏐⏐
-vy→
-null
-0
-(13.45)
-As with all examples of null double injection, the key to easily solving for this gain is to begin
-with the null condition and its implications. When vy is nulled, the dependent voltage source
-−Gop v−is also nulled, which implies that v−is nulled. Hence, the current if can be related to
-the input voltage vin as follows:
-+vin
-+
-vout
-R1
-R2 R3
-RL
-C Ro
-+
-v
-op(s) v
-v+ = 0
-+
-+
-vxvy
-+
-vz
-if
-Fig. 13.9 PD compensator circuit, with the op amp equivalent circuit model inserted. V oltage injection
-at the output of the dependent voltage source is included
+图13.1 系统含两个独立源 $u_i(s)$ 和注入源 $u_z(s)$。有三个因变量：输出 $u_o(s)$ 及注入源前后信号 $u_y(s)$ 和 $u_x(s)$。注意图13.1 中 $u_y$ 关联负号：这用于抵消负反馈的负号并获得正确环路增益极性。可定义将独立源设零或将因变量置零的思维实验。这些思维实验允许求解增益 $G_\infty(s)$、$G_0(s)$、$T(s)$、$T_n(s)$，最终求得总传递函数：
 
-13.3 Example: Op Amp PD Compensator Circuit 521
-if =− vin−v−
-R1
-
-⎦
-R2+ 1
-sC
-)
-⏐⏐⏐⏐
-⏐⏐⏐
-⏐⏐⏐
-⏐
-⏐
-v−→
-null
-0
-=− vin
-R1
-
-⎦
-R2+ 1
-sC
-) (13.46)
-The null condition also allows us to easily relate the output voltage vout to if :
-vout= v−+ if R3
-⏐⏐
-⏐
-v−→
-null
-0
-= if R3 (13.47)
-Substitution of Eq. (13.46)i n t o(13.47) leads to the expression for G∞:
-G∞=− R3
-R1
-
-⎦
-R2+ 1
-sC
-)=−R3
-R1
-1+ s (R1+ R2) C
-1+ sR2C (13.48)
-For this op amp circuit example, the steps in determination of G∞coincide with use of the
-“virtual ground” principle commonly employed in beginning circuit analysis classes: nulling vy
-leads to v+= v−. The above analysis then follows. Indeed, the null double injection analysis of
-G∞can be viewed as a generalization to arbitrary feedback circuits.
-Substitution of numerical values into Eq. ( 13.48) reveals that G∞contains a DC gain G∞0,
-zero at frequency f2, and pole at frequency f3, as follows:
-f
-|| G∞ ||
-G∞ 0 = 1
-⇒ 0 dB
-∠ G∞
-0
-100 Hz
-+20 dB/decade
-f2 /10
-10f2
-10 kHz
-1 MHz10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-|| G∞ || ∠ G∞
-0 dB
-20 dB
-40 dB
-60 dB
-0
-45
-90
-f2
-1 kHz
-f3
-100 kHz
-+ 45 /decade /decade
-Fig. 13.10 Bode plot of G∞, op amp example
+$$G(s) = \frac{u_o}{u_i} = G_\infty\frac{T}{1+T} + G_0\frac{1}{1+T} \tag{13.1}$$
 
-522 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-∥G∞0∥= R3
-R1
-= 1⇒0 dB (13.49)
-f2= 1
-2π(R1+ R2) C= 1 kHz (13.50)
-f3= 1
-2πR2C= 100 kHz (13.51)
-A Bode plot of G∞is given in Fig. 13.10. This transfer function is typical of a PD compensator
-that might be employed to improve the phase margin of a switching converter feedback system
-having a crossover frequency in the vicinity of 10 kHz.
-The loop gain T(s) is found according to Eq. (13.2). For this example, we obtain
-T(s)= vy(s)
-vx(s)
-⏐⏐⏐⏐
-⏐
-⏐
-vin=0
-(13.52)
-Under the condition that the input voltage vin is set to zero, the equivalent circuit of Fig. 13.9
-reduces to Fig. 13.11.
-+
-vout
-R1
-R2 R3
-RL
-C Ro
-+
-v
-op(s) v
-+
-+
-vxvy
-+
-vz
-Fig. 13.11 Determination of loop gain T(s)
-To ﬁnd the loop gainT(s), we take vx as given and solve the circuit for vy. This can be done
-in several steps: ﬁrst ﬁnd the transfer function from vx to vout, then the transfer function from
-vout to v−, and then the transfer function from v−to vy. The loop gain can then be expressed as
-T(s)=
-⎦vout
-vx
-)⎦v−
-vout
-) ⎦vy
-v−
-)
-(13.53)
-The ﬁrst two terms of Eq. ( 13.53) are voltage divider transfer functions, while the third is the
-op amp internal gain Gop . Hence we can express Eq. (13.53)a s :
-T(s)=
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-RL
-
-
-
-[
-R
-3+ R1
-
-
-
-⎦
-R
-2+ 1
-sC
-)]
-Ro+ RL
-
-
-[
-R
-3+ R1
-
-
-⎦
-R
-2+ 1
-sC
-)]
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-vout
-vx
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-R1
-
-
-
-⎦
-R
-2+ 1
-sC
-)
-R3+ R1
-
-
-⎦
-R
-2+ 1
-sC
-)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-v−
-vout
-⎦
-Gop (s)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-vy
-v−
-(13.54)
+每个思维实验详述如下。
 
-13.3 Example: Op Amp PD Compensator Circuit 523
-We could simplify this expression via algebraic manipulations, to expressT(s) in factored form.
-However, it is easier to ﬁnd the factoredT(s) by use of the reciprocity relationship, Eq. (13.39).
-Hence, the construction of the Bode plot of T(s) is reserved for later, afterG0 and Tn have been
-found.
-The direct forward transmission gain G0(s) is found as deﬁned in Ex. (13.4). For this exam-
-ple, we obtain
-G0(s)= vout(s)
-vin(s)
-⏐⏐
-⏐⏐⏐
-⏐
-vx→
-null
-0
-(13.55)
-In the model of Fig. 13.9, in the presence of the input vin we adjust the injection source vz
-such that vx is nulled. Under these conditions, the dependent voltage source −Gop v−does not
-inﬂuence the output, and the circuit reduces to Fig.13.12, with Ro eﬀectively in parallel withRL.
-+vin
-+
-vout
-R1
-R2 R3
-RL
-C
-Ro
-Fig. 13.12 Determination of direct forward transmission through feedback path, G0
-It can be seen that G0 is a voltage divider transfer function:
-G0(s)= vout(s)
-vin(s)
-⏐⏐⏐
-⏐⏐⏐
-vx→
-null
-0
-=
-Ro
-
-R
-L
-Ro
-RL+ R3+ R1
-
-⎦
-R2+ 1
-sC
-) (13.56)
-This expression can be simpliﬁed via algebraic manipulation to the following factored form:
-G0(s)=
-Ro
-RL
-R1+ R3+ Ro
-RL
-1+ sC (R1+ R2)
-1+ sC
-⎦
-R2+ R1
-
-⎦
-R3+ Ro
-RL
-)) (13.57)
-The expression for G0 is in the following standard normalized form:
-G0= G00
-⎦
-1+ s
-ω2
-)
-⎦
-1+ s
-ω4
-) (13.58)
+**环路增益 $T(s)$**：输入 $u_i(s)$ 设为零。注入源 $u_z(s)$ 存在下求解电路环路增益 $T(s)$：
 
-524 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-with
-G00=
-Ro
-RL
-R1+ R3+ Ro
-RL
-= 0.0103⇒−39.7d B
-f2=ω2
-2π= 1
-2πC (R1+ R2)= 1 kHz (13.59)
-f4=ω4
-2π= 1
-2πC
-⎦
-R2+ R1
-
-
-⎦
-R
-3+ Ro
-
-R
-L
-))= 1930 Hz
-Figure 13.13 contains the Bode plot of G0(s).∥G0∥ is small in this example, and is unlikely to
-inﬂuence G(s) over frequencies of interest. However, this computation assists in determination
-of the factored T(s).
-The null loop gain Tn(s) is found as deﬁned in Eq. (13.5). For this example, we obtain
-Tn(s)= vy(s)
-vx(s)
-⏐⏐⏐⏐
-⏐⏐
-vo→
-null
-0
-(13.60)
-In the model of Fig.13.14: in the presence of the inputvin, we adjust the injection sourcevz such
-that the output vout is nulled. Under these conditions, we ﬁnd the transfer function from vx to vy.
-f
-|| G∀ ||
-G∀0 = 0.0103
-⇒
-1 MHz10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-|| G∀ ||
-0 dB
-20 dB
-f2
-1 kHz
-f4
-1.93 kHz
-Fig. 13.13 Bode plot of the magnitude of G0
-+vin
-+
-vout null
- 0
-R1
-R2 R3
-RL
-C Ro
-+
-v
-op(s) v
-v+ = 0
-+
-+
-®
-vxvy
-+
-vz
-if
-0
-if
-Fig. 13.14 Determination of null loop gain Tn
+$$T(s) = \left.\frac{u_y(s)}{u_x(s)}\right|_{u_i=0} \tag{13.2}$$
 
-13.3 Example: Op Amp PD Compensator Circuit 525
-The null condition implies that there is no voltage across the load resistor RL and hence
-there is no current through the load resistor. The op amp output current is
-if = vx
-Ro
-(13.61)
-Since the load current is zero, the currentif ﬂows through R3. Since the load voltage is zero, we
-can express v−as:
-v−=−if R3 (13.62)
-The voltage vy is related to v−by the op amp gain Gop :
-vy= Gop (s)v− (13.63)
-Hence, we can express the null loop gain as
-Tn(s)=
-⎦1
-Ro
-)
-
-if
-vx
-(−R3)
-v−
-if
-⎦
-Gop (s)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-vy
-v−
-(13.64)
-The expression for Tn is considerably simpler than the expression for T, because the load
-impedance does not aﬀect Tn. The null loop gain contains the same poles as Gop (s).
-We can now employ the reciprocity relationship, Eq. ( 13.39), to ﬁnd a factored expression
-for the loop gain T(s):
-T= G0Tn
-G∞
-(13.65)
-Insertion of Eqs. (13.64), (13.58), and (13.48) into Eq. (13.65) leads to the following expression
-for the loop gain:
-T(s)=
-⎦
-−R3
-Ro
-Gop (s)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-Tn
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-G00
-⎦
-1+ s
-ω2
-)
-⎦
-1+ s
-ω4
-)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-G0
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-−R1
-R3
-⎦
-1+ s
-ω3
-)
-⎦
-1+ s
-ω2
-)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-1
-G∞
-= T0
-⎦
-1+ s
-ω3
-)
-⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω4
-) (13.66)
-with
-T0= R1
-Ro
-Gop0G00
-= 33000⇒90.7 dB (13.67)
+实际中假定已知 $u_x(s)$，跟踪其如何绕反馈环路传播求得 $u_y(s)$。理想注入点条件满足时所得 $T(s)$ 具有电路环路增益的物理解释。
 
-526 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-Figure 13.15 contains a sketch of the magnitude and phase asymptotes of this loop gain. It can
-be seen that T(s) contains a DC gain of 90.7 dB, poles at 10 Hz and 1.9 kHz, and a zero at 100
-kHz. The crossover frequency fc can be estimated using the magnitude asymptote between the
-1.9 kHz pole and the 100 kHz zero; over this range of frequencies, we can express the magnitude
-asymptote as:
-f
-T0 ⇒ 90.7 dB
-∠ T
-100 kHz1 Hz 10 Hz 100 Hz 1 kHz 10 kHz
-|| T || ∠ T
-0
-f1
-10 Hz
-f3
-/decade
-40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 dB
-f4
-1.9 kHz
-fc
-ϕm
-Fig. 13.15 Sketch of the magnitude and phase asymptotes of the loop gain T(s)
-T(s)= T0
-⎛⎜⎜⎜⎜⎜⎝1+
-
-s
-ω3
-⎞⎟⎟⎟⎟⎟⎠
-⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω4
-)
-∥T∥≈T0
-(1)⎦ω
-ω1
-)⎦ω
-ω4
-) (13.68)
-At the crossover frequency fc, the magnitude of T is equal to unity. Insertion ofω=ωc with
-∥T∥= 1i n t oE q .(13.68) leads to
-1= T0
-ω1ω4
-ω2c
-(13.69)
-Hence the crossover frequency is
-fc=ωc
-2π=
-√
-T0 f1 f4
-= 25.2 kHz (13.70)
+**理想前向增益 $G_\infty(s)$**：输入 $u_i(s)$ 存在下注入信号 $u_z(s)$ 并按需调整使 $u_y(s)$ 置零。在此零双注入条件下求解电路求 $u_o(s)$。理想前向增益为
 
-13.3 Example: Op Amp PD Compensator Circuit 527
-We can estimate the phase margin as follows. Since the crossover frequency is more than a
-decade above both pole frequencies, the poles contribute a total of−180◦to∠T( fc). The zero at
-f3= 100 kHz contributes phase
-tan−1 fc
-f3
-= 14.2◦ (13.71)
-Hence, the phase of T at the crossover frequency is
-∠T( fc)=−180◦+ 14.2◦=−165.8◦ (13.72)
-The phase margin is
-ϕm= 180◦+∠T( fc)= 14.2◦ (13.73)
-Although the phase margin is positive, it is not very large. This implies that the closed-loop
-transfer function T/(1+T) contains complex poles at fc having high Q determined by evaluation
-of Eq. (9.41):
-Q=
-√cosϕm
-sinϕm
-= 4⇒12 dB (13.74)
-f
-|| T ||
-1 MHz10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-|| T/ (1+T ) ||
-f3
-40 dB
-20 dB
-0 dB
-60 dB
-80 dB
-100 dB
-f4
-fc
-QdB
-Fig. 13.16 Graphical construction of the closed-loop transfer function T/(1+ T)
-The graphical construction method can now be employed to construct the closed-loop trans-
-fer function T/(1+ T) according to Eq. (9.11). The result is illustrated in Fig. 13.16.B e l o wt h e
-crossover frequency fc,∥T∥ is large and hence T/(1+ T) is approximately equal to 1. There
-are two poles at the crossover frequency, having Q factor given by Eq. (13.74). At frequencies
-above fc, the transfer function∥T/(1+ T)∥ follows∥T∥.
+$$G_\infty(s) = \left.\frac{u_o(s)}{u_i(s)}\right|_{u_y \to \text{null} 0} \tag{13.3}$$
 
-528 13 Techniques of Design-Oriented Analysis: The Feedback Theorem
-f
-|| G ||
-1 MHz10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-|| G ||
-0 dB
-20 dB
-40 dB
-60 dB
-f2
-1 kHz
-fc
-25 kHz
-|| G ||
-|| G∞ ||
-∠ G
-0
-45
-90
-∠ G
-0
-100 Hz
-f2 /10
-∠ G
-∠ G∞
-Fig. 13.17 Graphical construction of the closed-loop transfer function G
-Finally, the closed-loop transfer function G= vout/vin can be found using Eq. ( 13.1), with
-the result illustrated in Fig. 13.17. G is given by
-G= G∞
-T
-1+ T+ G0
-1
-1+ T (13.75)
-The term G0/(1+ T) is small, and is found to be insigniﬁcant below 30 MHz. Hence G follows
-G∞below the crossover frequency, where T/(1+ T)≈1. The T/(1+ T) term introduces its
-resonance at the crossover frequency, and G diﬀers signiﬁcantly from G∞at frequencies above
-fc. The op amp is unable to produce the required gain at frequencies above 25 kHz, causing
-the closed-loop transfer function to diﬀer signiﬁcantly from the prediction obtained using the
-traditional op amp virtual ground principle.
-If this op amp circuit is employed as a PD compensator in a switching converter feedback
-loop, the compensator resonance at 25 kHz may seriously degrade the stability of the converter
-feedback loop. The resonance may introduce additional converter crossover frequencies, and the
-converter phase margin at frequencies approaching or exceeding 25 kHz may be substantially
-reduced. It would be possible to make G follow G
-∞at higher frequencies by employing an op
-amp whose unity gain frequency is larger: the PD circuit fc could be increased from 25 kHz to
-100 kHz by increasing the op amp unity gain frequency from 1 MHz to 4 MHz.
-13.4 Example: Closed-Loop Regulator
-As a second example, consider application of the feedback theorem to the closed-loop buck
-regulator of Sect. 9.5.4, with the compensator circuit of Fig. 15.29. Figure 13.18 shows the
-small-signal canonical model of the CCM converter power stage (from Fig. 7.38), along with
-the feedback and PID compensator circuit, and with injection ˆvz applied.
-The output of this system is taken to be the output voltage v. There are three independent
-inputs: the reference voltage vre f , the power input vg, and the load current variation iload.I n
-```
+量 $u_y$ 依赖于两个独立源 $u_i$ 和 $u_z$，故存在使 $u_y$ 置零的 $u_i$ 和 $u_z$ 选择。注意置零 $u_y$ 不等于短路 $u_y$：置零条件在原始电路中发生，是独立源值的特定选择结果。具体地，由于理想注入点满足的条件，置零 $u_y$ 也有效置零误差信号。故 $G_\infty$ 是误差信号置零（输出完美调节）条件下从输入 $u_i$ 到输出 $u_o$ 的增益。可验证式 (13.1) 的增益 $G(s)$ 在 $T \to \infty$ 时简化为 $G_\infty$。
+
+若反馈电路用常规运算放大器，则置零 $v_y$ 等价于运用虚地原理，符合运放电路分析的常见做法。负反馈运放电路中 $G_\infty$ 与理想运放存在时的增益一致。
+
+**增益 $G_0(s)$**：此思维实验中零双注入如下：输入 $u_i(s)$ 存在下注入信号 $u_z(s)$ 并按需调整使 $u_x(s)$ 置零。在此条件下求解电路求 $u_o(s)$。增益 $G_0$ 为
+
+$$G_0(s) = \left.\frac{u_o(s)}{u_i(s)}\right|_{u_x \to \text{null} 0} \tag{13.4}$$
+
+注意由于理想注入点满足的条件，置零 $u_x$ 有效阻止放大的误差信号到达输出。故 $G_0$ 是反馈环路不控制输出条件下从输入 $u_i$ 到输出 $u_o$ 的增益。可验证式 (13.1) 的增益 $G(s)$ 在 $T \to 0$ 时简化为 $G_0$。
+
+$G_0$ 的物理解释取决于分析的量。对 $u_i$ 和 $u_o$ 为输入输出电压的放大器，$G_0$ 解释为经反馈路径的直接前向传输。$u_x$ 置零时输入信号无法经环路前向路径到达输出，故 $G_0$ 必由（反向！）流过反馈路径到达输出的信号产生。对扰动传递函数（如闭环 $Z_{out}$ 或 $G_{vg}$），$G_0$ 项代表开环扰动传递函数。
+
+**零环路增益 $T_n(s)$**：输入 $u_i(s)$ 存在下注入信号 $u_z(s)$ 并按需调整使输出 $u_o(s)$ 置零。注意这是零双注入的另一情形。在此条件下求解零环路增益 $T_n(s)$：
+
+$$T_n(s) = \left.\frac{u_y(s)}{u_x(s)}\right|_{u_o \to \text{null} 0} \tag{13.5}$$
+
+求 $T_n$ 类似于分析 $T$，但通常更简单因为 $T_n$ 不依赖负载阻抗。零环路增益 $T_n$ 的物理解释少于 $T$；它按互易关系与其他量相关：
+
+$$\frac{T_n(s)}{T(s)} = \frac{G_\infty(s)}{G_0(s)} \tag{13.6}$$
+
+故可求四个增益中的三个（最易者），然后用互易关系求第四个。最后用式 (13.1) 求总闭环增益 $G(s)$。
+
+### 13.2.2 推导
+
+13.2.1 节的基本结果可通过叠加和零双注入在所述多个思维实验中导出。
+
+![源页 p.519](../assets/page-snapshots/chapter-13/page-519.png)
+
+图13.2 反馈环路中理想注入点的电流注入 $i_z = u_z$。原始条件 $i_z = 0$ 所示
+
+**原始条件**：$u_z = 0$，输入 $u_i$ 存在。图13.2 给出理想注入点的电流注入，原始条件 $i_z = 0$。此情形下闭环前向增益 $G(s)$ 为
+
+$$\left.u_o\right|_{u_z=0} = Gu_i \tag{13.7}$$
+
+这是 $G(s)$ 的定义。此外，此条件下可将 $i_x$ 和 $i_y$ 用输入 $u_i$ 表示：
+
+$$\left.i_x\right|_{i_z=0} = -\left.i_y\right|_{i_z=0} = G_a(s)u_i \tag{13.8}$$
+
+对图13.2 所示电流注入，$u_x = i_x$ 且 $u_y = i_y$。式 (13.8) 是 $G_a(s)$ 的定义。$G(s)$ 和 $G_a(s)$ 此时均为未知。希望消去 $G_a$ 求 $G$。
+
+**注入 $u_z$**：图13.3 给出输入 $u_i$ 设为零、施加电流注入 $i_z = u_z$ 的情形。此条件下可将 $i_y$ 表示为 $i_x$ 的某函数：
+
+$$\left.i_y\right|_{u_i=0} = T(s)\left.i_x\right|_{u_i=0} \tag{13.9}$$
+
+这是环路增益 $T(s)$ 的定义。
+
+![源页 p.520](../assets/page-snapshots/chapter-13/page-520.png)
+
+图13.3 电流注入 $i_z = u_z$，输入 $u_i$ 设为零
+
+此条件下还可写注入点节点方程将 $i_x$ 和 $i_y$ 表示为注入源 $i_z$ 的函数：
+
+$$i_x + i_y = i_z \tag{13.10}$$
+
+将式 (13.9) 代入式 (13.10) 并解 $i_x$ 和 $i_y$ 得
+
+$$\left.i_x\right|_{u_i=0} = \frac{1}{1+T}i_z \tag{13.11}$$
+
+$$\left.i_y\right|_{u_i=0} = \frac{T}{1+T}i_z \tag{13.12}$$
+
+此条件下还可将输出 $u_o$ 用注入源 $i_z$ 表示：
+
+$$\left.u_o\right|_{u_i=0} = G_b(s)\left.i_x\right|_{u_i=0} = \frac{G_b}{1+T}i_z \tag{13.13}$$
+
+这是 $G_b$ 的定义。希望消去 $G_b$。
+
+**$u_i$ 和 $u_z = i_z$ 均存在**：可用叠加将因变量 $i_x$、$i_y$、$u_o$ 表示为两个独立输入 $u_i$ 和 $i_z$ 的函数。对 $i_x$ 可写
+
+$$i_x = \left.i_x\right|_{i_z=0} + \left.i_x\right|_{u_i=0} \tag{13.14}$$
+
+将式 (13.8) 和 (13.11) 代入式 (13.14) 得 $i_x$ 的一般表达式：
+
+$$i_x = G_a u_i + \frac{1}{1+T}i_z \tag{13.15}$$
+
+类似可求 $i_y$：
+
+$$i_y = \left.i_y\right|_{i_z=0} + \left.i_y\right|_{u_i=0} \tag{13.16}$$
+
+将式 (13.8) 和 (13.12) 代入式 (13.16) 得 $i_y$ 的一般表达式：
+
+$$i_y = -G_a u_i + \frac{T}{1+T}i_z \tag{13.17}$$
+
+输出 $u_o$ 可用叠加表示为
+
+$$u_o = \left.u_o\right|_{i_z=0} + \left.u_o\right|_{u_i=0} \tag{13.18}$$
+
+将式 (13.7) 和 (13.13) 代入式 (13.18) 得 $u_o$ 的一般表达式：
+
+$$u_o = Gu_i + \frac{G_b}{1+T}i_z \tag{13.19}$$
+
+接下来进行 13.2.1 节所述的"思维实验"。
+
+![源页 p.521](../assets/page-snapshots/chapter-13/page-521.png)
+
+图13.4 $u_i$ 存在下调整 $i_z = u_z$ 置零 $i_y$
+
+**零双注入，置零 $i_y$**：输入 $u_i$ 存在下按需调整 $i_z$ 使 $i_y$ 置零，如图13.4所示。此条件下式 (13.17) 变为
+
+$$0 = -G_a u_i + \frac{T}{1+T}\left.i_z\right|_{i_y \to \text{null} 0} \tag{13.20}$$
+
+式 (13.19) 变为
+
+$$\left.u_o\right|_{i_y \to \text{null} 0} = Gu_i + \frac{G_b}{1+T}\left.i_z\right|_{i_y \to \text{null} 0} \tag{13.21}$$
+
+从式 (13.20) 和 (13.21) 消去 $i_z$ 得
+
+$$\left.u_o\right|_{i_y \to \text{null} 0} = Gu_i + \frac{G_a G_b}{T}u_i \tag{13.22}$$
+
+可定义
+
+$$G_\infty = G + \frac{G_a G_b}{T} \tag{13.23}$$
+
+故
+
+$$\left.u_o\right|_{i_y \to \text{null} 0} = G_\infty u_i \tag{13.24}$$
+
+此思维实验中按需调整 $i_z$ 置零 $i_y$。由于 $i_y$ 正比于误差信号，置零 $i_y$ 也置零误差信号。故 $G_\infty$ 的物理解释为零误差时环路的理想前向增益。
+
+![源页 p.522](../assets/page-snapshots/chapter-13/page-522.png)
+
+图13.5 $u_i$ 存在下调整 $i_z = u_z$ 置零 $i_x$
+
+**零双注入，置零 $i_x$**：输入 $u_i$ 存在下按需调整 $i_z$ 使 $i_x$ 置零，如图13.5所示。此条件下式 (13.15) 变为
+
+$$0 = G_a u_i + \frac{1}{1+T}\left.i_z\right|_{i_x \to \text{null} 0} \tag{13.25}$$
+
+式 (13.19) 变为
+
+$$\left.u_o\right|_{i_x \to \text{null} 0} = Gu_i + \frac{G_b}{1+T}\left.i_z\right|_{i_x \to \text{null} 0} \tag{13.26}$$
+
+从式 (13.25) 和 (13.26) 消去 $i_z$ 得
+
+$$\left.u_o\right|_{i_x \to \text{null} 0} = Gu_i - G_a G_b u_i \tag{13.27}$$
+
+可定义
+
+$$G_0 = G - G_a G_b \tag{13.28}$$
+
+故
+
+$$\left.u_o\right|_{i_x \to \text{null} 0} = G_0 u_i \tag{13.29}$$
+
+此思维实验中按需调整 $i_z$ 置零 $i_x$。故无放大的误差信号经前向路径传输：$i_x = 0$。图13.5 系统中获得非零输出的唯一其他途径是经反馈路径（假定信号能在此路径任一方向传播）。故 $G_0$ 的物理解释为经反馈路径的直接前向传输。
+
+后续示例中将看到 $G_0$ 可解释为从扰动到输出的开环增益。这些示例中系统架构比图13.5 所设想的更复杂。
+
+![源页 p.523](../assets/page-snapshots/chapter-13/page-523.png)
+
+图13.6 $u_i$ 存在下调整 $i_z = u_z$ 置零 $u_o$
+
+**零双注入，置零 $u_o$**：输入 $u_i$ 存在下按需调整 $i_z$ 使 $u_o$ 置零，如图13.6所示。注意输出 $u_o$ 未短路。例如输出 $u_o$ 为电压时此置零条件意味着零电流流过负载阻抗，输出块产生的任何电流必须直接流入反馈路径。
+
+此条件下式 (13.19) 变为
+
+$$0 = Gu_i + \frac{G_b}{1+T}\left.i_z\right|_{u_o \to \text{null} 0} \tag{13.30}$$
+
+式 (13.15) 变为
+
+$$i_x = G_a u_i + \frac{1}{1+T}\left.i_z\right|_{u_o \to \text{null} 0} \tag{13.31}$$
+
+式 (13.17) 变为
+
+$$i_y = -G_a u_i + \frac{T}{1+T}\left.i_z\right|_{u_o \to \text{null} 0} \tag{13.32}$$
+
+可从上述方程消去 $u_i$ 和 $i_z|_{u_o \to \text{null} 0}$ 并求输出 $u_o$ 置零条件下 $i_y$ 与 $i_x$ 的关系。经代数运算得如下结果：
+
+$$\left.i_y\right|_{u_o \to \text{null} 0} = \frac{TG+G_a G_b}{G-G_a G_b}\left.i_x\right|_{u_o \to \text{null} 0} \tag{13.33}$$
+
+可定义
+
+$$T_n = \left.\frac{i_y}{i_x}\right|_{u_o \to \text{null} 0} = \frac{TG+G_a G_b}{G-G_a G_b} \tag{13.34}$$
+
+零环路增益 $T_n$ 是输入 $u_i$ 存在下调整注入源 $i_z$ 置零输出 $u_o$ 条件下从 $i_x$ 到 $i_y$ 的传递函数。零环路增益 $T_n$ 的物理解释少于环路增益 $T$；除移除输出加载影响外与 $T$ 相似。故 $T_n$ 比 $T$ 略易计算。以下段落给出关联 $T$ 和 $T_n$ 的简单方法，故计算 $T_n$ 可是计算 $T$ 的有用步骤。
+
+**最终结果**：上述定义下可求解反馈电路得 $G_0$、$G_\infty$、$T$、$T_n$。从上述方程消去中间量 $G_a$ 和 $G_b$ 并用 $G_0$、$G_\infty$、$T$、$T_n$ 求 $G$ 可确定闭环传递函数 $G$。由式 (13.28) 有
+
+$$G_0 = G - G_a G_b \tag{13.35}$$
+
+由式 (13.23) 有
+
+$$G_\infty = G + \frac{G_a G_b}{T} \tag{13.36}$$
+
+可重写为
+
+$$G_\infty T = TG + G_a G_b \tag{13.37}$$
+
+由式 (13.34) 有
+
+$$T_n = \frac{TG+G_a G_b}{G-G_a G_b} \tag{13.38}$$
+
+将式 (13.35) 和 (13.37) 代入式 (13.38) 得互易关系
+
+$$T_n = \frac{G_\infty T}{G_0} \quad \text{或} \quad \frac{T_n}{T} = \frac{G_\infty}{G_0} \tag{13.39}$$
+
+此重要关系意味着只需求 $G_0$、$G_\infty$、$T$、$T_n$ 中三个增益；第四个可由式 (13.39) 求得。进一步，若三个增益以因式分解极点-零点形式表示，则由式 (13.39) 所得第四个增益也分解。
+
+现在从式 (13.35) 和 (13.36) 消去 $G_a G_b$，用结果从式 (13.35) 至 (13.39) 解 $G$。经几行代数得如下结果：
+
+$$G = G_\infty\frac{\left(1+\dfrac{1}{T_n}\right)}{\left(1+\dfrac{1}{T}\right)} = G_\infty\frac{T}{1+T} + G_0\frac{1}{1+T} \tag{13.40}$$
+
+这是闭环增益 $G$ 的所需表达式。注意大环路增益时
+
+$$G \to G_\infty \quad \text{对} \ \|T\| \to \infty \tag{13.41}$$
+
+故 $G_\infty$ 是大环路增益时的闭环前向增益。小环路增益时
+
+$$G \to G_0 \quad \text{对} \ \|T\| \to 0 \tag{13.42}$$
+
+故 $G_0$ 是环路增益趋向零时的闭环前向增益。
+
+## 13.3 示例：运放 PD 补偿器电路
+
+作为反馈定理应用的第一例，分析图13.7a 所示运放电路。用理想运放时此超前-滞后电路呈现含零点和极点的传递函数，适合用作需改善相位裕度的反馈环路中的 PD 补偿器。为考察实际运放频率响应和输出阻抗的影响，用图13.7b 所示等效电路建模运放。正负输入端口用无限输入阻抗建模，输出端口用戴维南等效电路建模。运放增益为
+
+$$G_{op}(s) = \frac{G_{op0}}{\left(1+\dfrac{s}{\omega_1}\right)} \tag{13.43}$$
+
+![源页 p.525](../assets/page-snapshots/chapter-13/page-525.png)
+
+图13.7 运放 PD 补偿器电路示例：(a) 电路原理图；(b) 运放等效电路模型
+
+此例运放模型值为
+
+$$G_{op0} = 10^5 \Rightarrow 100\text{ dB}, \quad f_1 = \frac{\omega_1}{2\pi} = 10\text{ Hz}, \quad R_o = 50\,\Omega$$
+
+此典型运放内部增益 $G_{op}$ 呈现 100 dB 直流增益和 10 Hz 处极点；其幅值波特图如图13.8所示。运放单位增益频率为 1 MHz：10 Hz 以上频率幅值渐近线遵循方程
+
+$$\|G_{op}\| \approx \frac{1\text{ MHz}}{f} \tag{13.44}$$
+
+元件值为
+
+$$R_1 = 1.6\text{ k}\Omega, \quad R_2 = 16\,\Omega, \quad R_L = 100\,\Omega, \quad R_3 = 1.6\text{ k}\Omega, \quad C = 0.1\,\mu\text{F}$$
+
+为分析此反馈电路，将图13.7b 运放模型插入图13.7a 电路，得图13.9 所示等效电路。
+
+![源页 p.526](../assets/page-snapshots/chapter-13/page-526.png)
+
+图13.8 运放内部增益呈现单位增益频率 1 MHz 的单极点响应
+
+应用反馈定理首先识别理想注入点。此运放反馈电路的误差信号可取运放差分输入电压 $(v_+ - v_-)$：此电压为零时运放电路以零误差理想工作。图13.7b 运放模型中受控电压源正比于 $(v_+ - v_-)$，故可在图13.9 中此源之后立即采用电压注入：这将使 $v_y$ 直接正比于误差信号 $(v_+ - v_-)$。选择此注入点后可按 13.2.1 节所述求解电路求 $G_0$、$G_\infty$、$T$、$T_n$。
+
+![源页 p.526](../assets/page-snapshots/chapter-13/page-526.png)
+
+图13.9 PD 补偿器电路，插入运放等效电路模型。含受控电压源输出处的电压注入
+
+按式 (13.3) 求理想前向增益 $G_\infty$。此例得
+
+$$G_\infty(s) = \left.\frac{v_{out}(s)}{v_{in}(s)}\right|_{v_y \to \text{null} 0} \tag{13.45}$$
+
+与所有零双注入示例一样，轻松求此增益的关键是从置零条件及其含义开始。$v_y$ 置零时受控电压源 $-G_{op} v_-$ 也置零，意味着 $v_-$ 置零。故电流 $i_f$ 可与输入电压 $v_{in}$ 关联如下：
+
+$$\left.i_f = -\frac{v_{in}-v_-}{R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)}\right|_{v_- \to \text{null} 0} = -\frac{v_{in}}{R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)} \tag{13.46}$$
+
+置零条件还允许轻松将输出电压 $v_{out}$ 与 $i_f$ 关联：
+
+$$v_{out} = \left.v_- + i_f R_3\right|_{v_- \to \text{null} 0} = i_f R_3 \tag{13.47}$$
+
+将式 (13.46) 代入 (13.47) 得 $G_\infty$ 表达式：
+
+$$G_\infty = -\frac{R_3}{R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)} = -\frac{R_3}{R_1}\frac{1+s(R_1+R_2)C}{1+sR_2 C} \tag{13.48}$$
+
+此运放电路示例中求 $G_\infty$ 的步骤与基础电路分析中常用的"虚地"原理一致：置零 $v_y$ 导致 $v_+ = v_-$。上述分析随后进行。实际上 $G_\infty$ 的零双注入分析可视为向任意反馈电路的推广。
+
+将数值代入式 (13.48) 显示 $G_\infty$ 含直流增益 $G_{\infty 0}$、频率 $f_2$ 处零点和频率 $f_3$ 处极点：
+
+$$\|G_{\infty 0}\| = \frac{R_3}{R_1} = 1 \Rightarrow 0\text{ dB} \tag{13.49}$$
+
+$$f_2 = \frac{1}{2\pi(R_1+R_2)C} = 1\text{ kHz} \tag{13.50}$$
+
+$$f_3 = \frac{1}{2\pi R_2 C} = 100\text{ kHz} \tag{13.51}$$
+
+$G_\infty$ 波特图如图13.10所示。此传递函数是可能用于改善穿越频率约 10 kHz 处开关变换器反馈系统相位裕度的 PD 补偿器的典型。
+
+![源页 p.527](../assets/page-snapshots/chapter-13/page-527.png)
+
+图13.10 运放示例 $G_\infty$ 波特图
+
+按式 (13.2) 求环路增益 $T(s)$。此例得
+
+$$T(s) = \left.\frac{v_y(s)}{v_x(s)}\right|_{v_{in}=0} \tag{13.52}$$
+
+输入电压 $v_{in}$ 设为零条件下图13.9 等效电路简化为图13.11。
+
+![源页 p.528](../assets/page-snapshots/chapter-13/page-528.png)
+
+图13.11 环路增益 $T(s)$ 的确定
+
+求环路增益 $T(s)$ 时取 $v_x$ 为给定，解电路求 $v_y$。可分几步完成：先求 $v_x$ 到 $v_{out}$ 的传递函数，再求 $v_{out}$ 到 $v_-$ 的传递函数，然后求 $v_-$ 到 $v_y$ 的传递函数。环路增益可表示为
+
+$$T(s) = \left(\frac{v_{out}}{v_x}\right)\!\left(\frac{v_-}{v_{out}}\right)\!\left(\frac{v_y}{v_-}\right) \tag{13.53}$$
+
+式 (13.53) 前两项为分压传递函数，第三项为运放内部增益 $G_{op}$。故式 (13.53) 可表示为
+
+$$T(s) = \underbrace{\frac{R_L\,\|\,\left[R_3+R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)\right]}{R_o+R_L\,\|\,\left[R_3+R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)\right]}}_{v_{out}/v_x}\underbrace{\frac{R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)}{R_3+R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)}}_{v_-/v_{out}}\underbrace{G_{op}(s)}_{v_y/v_-} \tag{13.54}$$
+
+可通过代数化简将此表达式表示为因式分解形式。但用互易关系 [式 (13.39)] 求 $T(s)$ 因式分解形式更容易。故 $T(s)$ 波特图的构造留到求出 $G_0$ 和 $T_n$ 之后。
+
+按式 (13.4) 定义求直接前向传输增益 $G_0(s)$。此例得
+
+$$G_0(s) = \left.\frac{v_{out}(s)}{v_{in}(s)}\right|_{v_x \to \text{null} 0} \tag{13.55}$$
+
+图13.9 模型中，输入 $v_{in}$ 存在下调整注入源 $v_z$ 使 $v_x$ 置零。此条件下受控电压源 $-G_{op} v_-$ 不影响输出，电路简化为图13.12，$R_o$ 有效与 $R_L$ 并联。
+
+![源页 p.529](../assets/page-snapshots/chapter-13/page-529.png)
+
+图13.12 经反馈路径的直接前向传输 $G_0$ 的确定
+
+可见 $G_0$ 为分压传递函数：
+
+$$G_0(s) = \left.\frac{v_{out}(s)}{v_{in}(s)}\right|_{v_x \to \text{null} 0} = \frac{R_o\,\|\,R_L}{R_o\,\|\,R_L+R_3+R_1\,\|\,\left(R_2+\dfrac{1}{sC}\right)} \tag{13.56}$$
+
+通过代数化简此表达式可得如下因式分解形式：
+
+$$G_0(s) = \frac{R_o\,\|\,R_L}{R_1+R_3+R_o\,\|\,R_L}\frac{1+sC(R_1+R_2)}{1+sC\!\left(R_2+\dfrac{R_1\,\|\,(R_3+R_o\,\|\,R_L)}{R_1}\right)} \tag{13.57}$$
+
+$G_0$ 表达式为如下标准归一化形式：
+
+$$G_0 = G_{00}\frac{\left(1+\dfrac{s}{\omega_2}\right)}{\left(1+\dfrac{s}{\omega_4}\right)} \tag{13.58}$$
+
+其中
+
+$$G_{00} = \frac{R_o\,\|\,R_L}{R_1+R_3+R_o\,\|\,R_L} = 0.0103 \Rightarrow -39.7\text{ dB} \tag{13.59}$$
+
+$$f_2 = \frac{\omega_2}{2\pi} = \frac{1}{2\pi C(R_1+R_2)} = 1\text{ kHz}$$
+
+$$f_4 = \frac{\omega_4}{2\pi} = \frac{1}{2\pi C\!\left(R_2+\dfrac{R_1\,\|\,(R_3+R_o\,\|\,R_L)}{R_1}\right)} = 1930\text{ Hz}$$
+
+图13.13 含 $G_0(s)$ 波特图。此例中 $\|G_0\|$ 小，不太可能影响感兴趣频率处的 $G(s)$。但此计算有助于确定 $T(s)$ 因式分解形式。
+
+![源页 p.530](../assets/page-snapshots/chapter-13/page-530.png)
+
+图13.13 $G_0$ 幅值波特图
+
+按式 (13.5) 定义求零环路增益 $T_n(s)$。此例得
+
+$$T_n(s) = \left.\frac{v_y(s)}{v_x(s)}\right|_{v_o \to \text{null} 0} \tag{13.60}$$
+
+图13.14 模型中：输入 $v_{in}$ 存在下调整注入源 $v_z$ 使输出 $v_{out}$ 置零。此条件下求 $v_x$ 到 $v_y$ 的传递函数。
+
+![源页 p.530](../assets/page-snapshots/chapter-13/page-530.png)
+
+图13.14 零环路增益 $T_n$ 的确定
+
+置零条件意味着负载电阻 $R_L$ 两端无电压故无电流流过负载电阻。运放输出电流为
+
+$$i_f = \frac{v_x}{R_o} \tag{13.61}$$
+
+由于负载电流为零，电流 $i_f$ 流过 $R_3$。由于负载电压为零，可将 $v_-$ 表示为
+
+$$v_- = -i_f R_3 \tag{13.62}$$
+
+电压 $v_y$ 通过运放增益 $G_{op}$ 与 $v_-$ 相关：
+
+$$v_y = G_{op}(s)v_- \tag{13.63}$$
+
+故可将零环路增益表示为
+
+$$T_n(s) = \underbrace{\left(\frac{1}{R_o}\right)}_{i_f/v_x}\underbrace{(-R_3)}_{v_-/i_f}\underbrace{G_{op}(s)}_{v_y/v_-} \tag{13.64}$$
+
+$T_n$ 表达式比 $T$ 简单得多，因为负载阻抗不影响 $T_n$。零环路增益含与 $G_{op}(s)$ 相同的极点。
+
+现在可用互易关系 [式 (13.39)] 求 $T(s)$ 因式分解表达式：
+
+$$T = \frac{G_0 T_n}{G_\infty} \tag{13.65}$$
+
+将式 (13.64)、(13.58)、(13.48) 代入式 (13.65) 得环路增益表达式：
+
+$$T(s) = \underbrace{\left(-\frac{R_3}{R_o}G_{op}(s)\right)}_{T_n}\underbrace{\left(G_{00}\frac{\left(1+\dfrac{s}{\omega_2}\right)}{\left(1+\dfrac{s}{\omega_4}\right)}\right)}_{G_0}\underbrace{\left(-\frac{R_1}{R_3}\frac{\left(1+\dfrac{s}{\omega_3}\right)}{\left(1+\dfrac{s}{\omega_2}\right)}\right)}_{1/G_\infty} = T_0\frac{\left(1+\dfrac{s}{\omega_3}\right)}{\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{\omega_4}\right)} \tag{13.66}$$
+
+其中
+
+$$T_0 = \frac{R_1}{R_o}G_{op0}G_{00} = 33000 \Rightarrow 90.7\text{ dB} \tag{13.67}$$
+
+图13.15 含此环路增益幅值和相位渐近线草图。可见 $T(s)$ 含 90.7 dB 直流增益、10 Hz 和 1.9 kHz 处极点、100 kHz 处零点。可用 1.9 kHz 极点和 100 kHz 零点之间的幅值渐近线估计穿越频率 $f_c$；此频率范围内幅值渐近线可表示为
+
+![源页 p.532](../assets/page-snapshots/chapter-13/page-532.png)
+
+图13.15 环路增益 $T(s)$ 幅值和相位渐近线草图
+
+$$\|T\| \approx T_0\frac{(1)\left(\dfrac{\omega}{\omega_1}\right)}{\left(\dfrac{\omega}{\omega_4}\right)} \tag{13.68}$$
+
+穿越频率 $f_c$ 处 $T$ 幅值为 1。将 $\omega = \omega_c$、$\|T\| = 1$ 代入式 (13.68) 得
+
+$$1 = T_0\frac{\omega_1\omega_4}{\omega_c^2} \tag{13.69}$$
+
+故穿越频率为
+
+$$f_c = \frac{\omega_c}{2\pi} = \sqrt{T_0 f_1 f_4} = 25.2\text{ kHz} \tag{13.70}$$
+
+可如下估计相位裕度。由于穿越频率比两极点频率高一个十倍频程以上，两极点对 $\angle T(f_c)$ 共贡献 −180°。$f_3 = 100\text{ kHz}$ 处的零点贡献相位
+
+$$\tan^{-1}\frac{f_c}{f_3} = 14.2° \tag{13.71}$$
+
+故穿越频率处 $T$ 的相位为
+
+$$\angle T(f_c) = -180° + 14.2° = -165.8° \tag{13.72}$$
+
+相位裕度为
+
+$$\phi_m = 180° + \angle T(f_c) = 14.2° \tag{13.73}$$
+
+虽然相位裕度为正，但不大。这意味着闭环传递函数 $T/(1+T)$ 含 $f_c$ 处由式 (9.41) 确定的高 Q 复极点：
+
+$$Q = \frac{\sqrt{\cos\phi_m}}{\sin\phi_m} = 4 \Rightarrow 12\text{ dB} \tag{13.74}$$
+
+![源页 p.533](../assets/page-snapshots/chapter-13/page-533.png)
+
+图13.16 闭环传递函数 $T/(1+T)$ 的图解构造
+
+现在可用图解构造法按式 (9.11) 构造闭环传递函数 $T/(1+T)$。结果如图13.16所示。穿越频率 $f_c$ 以下 $\|T\|$ 大故 $T/(1+T)$ 近似等于 1。穿越频率处有两个极点，Q 因子由式 (13.74) 给出。$f_c$ 以上频率传递函数 $\|T/(1+T)\|$ 跟随 $\|T\|$。
+
+![源页 p.534](../assets/page-snapshots/chapter-13/page-534.png)
+
+图13.17 闭环传递函数 $G$ 的图解构造
+
+最后，用式 (13.1) 求闭环传递函数 $G = v_{out}/v_{in}$，结果如图13.17所示。$G$ 为
+
+$$G = G_\infty\frac{T}{1+T} + G_0\frac{1}{1+T} \tag{13.75}$$
+
+项 $G_0/(1+T)$ 小，30 MHz 以下不显著。故穿越频率以下 $T/(1+T) \approx 1$ 处 $G$ 跟随 $G_\infty$。$T/(1+T)$ 项在穿越频率处引入谐振，$f_c$ 以上 $G$ 与 $G_\infty$ 显著不同。运放在 25 kHz 以上频率无法产生所需增益，使闭环传递函数与用传统运放虚地原理所得预测显著不同。
+
+若此运放电路用作开关变换器反馈环路中的 PD 补偿器，25 kHz 处的补偿器谐振可能严重退化变换器反馈环路的稳定性。谐振可能引入附加变换器穿越频率，接近或超过 25 kHz 频率处变换器相位裕度可能大幅减小。可用单位增益频率更大的运放使 $G$ 在更高频率跟随 $G_\infty$：将运放单位增益频率从 1 MHz 增到 4 MHz 可将 PD 电路 $f_c$ 从 25 kHz 提到 100 kHz。
+
+## 13.4 示例：闭环稳压器
+
+作为第二例，考虑将反馈定理应用于 9.5.4 节的闭环降压稳压器，补偿器电路为图15.29。图13.18 给出 CCM 变换器功率级小信号规范模型（来自图7.38）及反馈和 PID 补偿器电路，并施加注入 $\hat{v}_z$。
+
+此系统的输出取为输出电压 $v$。有三个独立输入：参考电压 $v_{ref}$、功率输入 $v_g$ 和负载电流变化 $i_{load}$。在

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第9章part 2 - 9 Controller Design"
+title: "第9章 控制器设计（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,982 +18,379 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第9章part 2 - 9 Controller Design
+# 第9章 控制器设计（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 378-397  
-> Chunk ID: `chapter-9-part-2`
+> 源页：378–397
+> 本部分续接 9.4 稳定性，涵盖 9.4.3–9.4.5 和 9.5 稳压器设计。
 
-## 主干提取
+## 9.4 稳定性（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.378](../assets/page-snapshots/chapter-9/page-378.png)
 
-## 术语表
+图9.18 有三个穿越频率示例（图9.17）的奈奎斯特图：(a) 通过环路增益 $T(s)$ 映射围道 $\Gamma_A$；(b) 通过环路增益 $T(s)$ 映射完整奈奎斯特围道
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+−1 点被包围两次。故闭环传递函数含复平面右半部分的两个极点，此反馈系统不稳定。
 
-## 中文翻译
+**示例3：反馈环路中的积分器**
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+若奈奎斯特围道 $\Gamma$ 经过环路增益 $T(s)$ 的一个或多个奇点，则保角映射性质丢失，上述各节的论证不再适用。此情形可在环路增益 $T(s)$ 含虚轴上的一个或多个极点时发生。一个常见例子是在补偿器中使用积分器（见 9.5.2 节），导致原点处极点。含原点极点的环路增益示例为
 
-## 英文原文
+$$T(s) = \frac{1}{\left(\dfrac{s}{\omega_0}\right)\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{\omega_2}\right)} \tag{9.33}$$
 
-```text
-9.4 Stability 367
-(a)
-Re[T(s)]
-Im[T(s)]
-Unit circle
-f = 0f
-1
-2
-3
-(b)
-–1
-Re[T(s)]
-Im[T(s)]
-T(jω )
-T(–jω )
-®¥
-Fig. 9.18 Nyquist plot for the example having three crossover frequencies (Fig. 9.17): (a) mapping of
-the contourΓA through the loop gain T(s), (b) mapping of the complete Nyquist contour through the loop
-gain T(s)
-the−1 point is encircled twice. Hence, the closed-loop transfer functions contain two poles in
-the right half of the complex plane, and this feedback system is unstable.
-Example 3: Integrator in Feedback Loop
-If the Nyquist contourΓpasses through one or more singularities of the loop gainT(s), then the
-conformal mapping property is lost, and the arguments of the above sections no longer apply.
-This case can occur when the loop gain T(s) contains one or more poles lying on the imaginary
-axis. A common example is the use of an integrator in the compensator (see Sect.9.5.2), leading
-to a pole at the origin. An example of a loop gain containing a pole at the origin is:
-T(s)= 1⎦s
-ω0
-)⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω2
-) (9.33)
-The corner frequenciesω0,ω1, andω2 are positive and real in this example. This special case
-can be handled by redeﬁning the Nyquist contour of Fig.9.13 as illustrated in Fig.9.19. A fourth
-segmentΓD is added, to jog the contour around the singularity. Segment ΓD is deﬁned to be a
-semicircular arc as follows:
-s=ϵ ejθ with ϵ→0 and θ∈(−90◦,+90◦) (9.34)
-The loop gain T(s)o fE q . (9.33) contains no poles inside the modiﬁed Nyquist contour of
-Fig. 9.19. Hence the number of right half-plane poles of the closed-loop transfer function
-T/(1+ T) is equal to the number of encirclements of the −1 point by the mapped modiﬁed
-Nyquist contour T(Γ).
-The magnitude and phase Bode plot ofT(s) is sketched in Fig.9.20 for some speciﬁc values
-ofω0,ω1, andω2. For this example, T(s) exhibits a crossover frequency fc with phase margin
-ϕm as illustrated.
-Figure 9.21a illustrates the ﬁrst part of the Nyquist plot, in which segment ΓA is mapped
-through the loop gain T(s). Along this segment, s= jωwithωvarying fromϵ (→0) to∞.
+此例中 $\omega_0$、$\omega_1$、$\omega_2$ 为正实数。可将图9.13 的奈奎斯特围道重新定义为如图9.19所示来处理此特殊情形。添加第四段 $\Gamma_D$ 绕过奇点。段 $\Gamma_D$ 定义为半圆弧如下：
 
-368 9 Controller Design
-Fig. 9.19 Modiﬁcation of the Nyquist contour to
-handle the special case in which the loop gain in-
-cludes a pole at the origin. Segment Γ
-D deﬁned by
-Eq. (9.34) routes the Nyquist contour around the pole
-at s = 0. The locations of poles of Eq. ( 9.33)a r e
-marked x
-fc
-Crossover
-frequency
-0 dB
-–20 dB
-–40 dB
-20 dB
-40 dB
-60 dB
-f
-fp1
-|| T ||
-0˚
-–90˚
-–180˚
-–270˚
-ϕm
-∠ T
-∠ T||T ||
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-fp2
-Fig. 9.20 Bode plot of loop gain T(s) for the example of Eq. (9.33)
-SegmentΓB is again deﬁned by Eq. (9.28), and this segment again maps to the origin. Seg-
-mentΓC is the complex conjugate of ΓC. The mapping of contours ΓA,ΓB, andΓC through
-the loop gain T(s) is illustrated in Fig. 9.21b. It can be seen that this contour is not closed; to
-complete the mapped contour,ΓD must be incorporated.
-Substitution of the mapping deﬁned by Eq. (9.34) into the loop gain of Eq. (9.33) leads to:
-T(ϵejθ)= 1⎦ϵejθ
-ω0
-)⎦
-1+ϵejθ
-ω1
-)⎦
-1+ϵejθ
-ω2
-) (9.35)
-Asϵ tends to zero, the pole terms associated with the corner frequencies ω1 andω2 tend to 1.
-Equation (9.35) then reduces to
-T(ϵejθ)=ω0 e−jθ
-ϵ (9.36)
-Asϵ tends to zero, the magnitude of Eq. ( 9.36) tends to inﬁnity. As θvaries from −90◦to
-+90◦, the phase of the mapped contour varies from +90◦to−90◦. The complete contour is
+$$s = \epsilon e^{j\theta}, \quad \epsilon \to 0, \quad \theta \in (-90°, +90°) \tag{9.34}$$
 
-9.4 Stability 369
-Fig. 9.21 Nyquist plot for the example of an integrator in the feedback loop (Fig. 9.20): (a) mapping of
-the contourΓA through the loop gain T(s), (b) mapping of the contoursΓA,ΓB,a n dΓC through the loop
-gain T(s), (c) mapping of complete modiﬁed Nyquist contour
-illustrated in Fig. 9.21c. It can be seen that the mapped contour is now closed, and that there
-are no encirclements of the−1 point provided that the phase margin is positive. The contour of
-Fig. 9.21c represents a stable system.
-Summary: Nyquist Stability Criterion
-Thus, the Nyquist stability criterion is closely related to the Bode plot of the loop gain. The
-segmentΓA corresponds to letting s= jω, and the mapping of ΓA through the loop gain T(s)
-constitutes a polar plot of T( jω). The number of right half-plane poles of the closed-loop trans-
-fer functions T/(1+T) and 1/(1+T) is rigorously discerned via determination of the number of
-encirclements of the−1 point by the Nyquist contour mapped through the loop gain T(s). This
-explains the origins of the phase margin test, and also provides a stability test for more complex
-cases such as loop gains having multiple crossover frequencies.
+![源页 p.379](../assets/page-snapshots/chapter-9/page-379.png)
 
-370 9 Controller Design
-9.4.3 The Relationship Between Phase Margin and Closed-Loop Damping Factor
-How much phase margin is necessary? Is a worst-case phase margin of 1 ◦satisfactory? Of
-course, good designs should have adequate design margins, but there is another important reason
-why additional phase margin is needed. A small phase margin (in T) causes the closed-loop
-transfer functions T/(1+ T) and 1/(1+ T) to exhibit resonant poles with high Q in the vicinity
-of the crossover frequency. The system transient response exhibits overshoot and ringing. As
-the phase margin is reduced these characteristics become worse (higherQ, longer ringing) until,
-for ϕm≤0◦, the system becomes unstable.
-Let us consider a loop gainT(s) which is well-approximated, in the vicinity of the crossover
-frequency, by the following function:
-T(s)= 1⎦s
-ω0
-)⎦
-1+ s
-ω2
-) (9.37)
-Magnitude and phase asymptotes are plotted in Fig.9.22. This function is a good approximation
-near the crossover frequency for many common loop gains, in which∥ T∥ approaches unity gain
-with a−20 dB/decade slope, with an additional pole at frequency f2 = ω2/2π. Any additional
-poles and zeroes are assumed to be suﬃciently far above or below the crossover frequency, such
-that they have negligible eﬀect on the system transfer functions near the crossover frequency.
-Note that, as f2→∞, the phase marginϕm approaches 90◦.A s f2→0, ϕm→0◦.S oa s f2
-is reduced, the phase margin is also reduced. Let’s investigate how this aﬀects the closed-loop
-response via T/(1+ T). We can write
-T(s)
-1+ T(s)= 1
-1+ 1
-T(s)
-= 1
-1+ s
-ω0
-+ s2
-ω0ω2
-(9.38)
-0 dB
-20 dB
-40 dB
-f
-0
- T
- T
-f0
-f2
-m
-f2
-f2/10
-10f2
-f0
-f
-f0 f2
-f 2
-|| T ||
-|| T ||
-Fig. 9.22 Magnitude and phase asymptotes for the loop gain T of Eq. (9.37)
+图9.19 修改奈奎斯特围道以处理环路增益含原点极点的特殊情形。式 (9.34) 定义的段 $\Gamma_D$ 使奈奎斯特围道绕过 $s = 0$ 处的极点。式 (9.33) 的极点位置标为 ×
 
-9.4 Stability 371
-using Eq. (9.37). By putting this into the standard normalized quadratic form, one obtains
-T(s)
-1+ T(s)= 1
-1+ s
-Qωc
-+
-⎦s
-ωc
-)2 (9.39)
-where
-ωc=√ω0ω2= 2πfc
-Q= ω0
-ωc
-=
-√ω0
-ω2
-So the closed-loop response contains quadratic poles at fc, the geometric mean of f0 and f2.
-These poles have a low Q-factor when f0 ≪ f2. In this case, we can use the low- Q approxima-
-tion to estimate their frequencies:
-Qωc= ω0 (9.40)
-ωc
-Q = ω2
-Magnitude asymptotes are plotted in Fig.9.23 for this case. It can be seen that these asymptotes
-conform to the rules of Sect.9.3 for constructing T/(1+T) by the algebra-on-the-graph method.
-Next consider the high-Q case. When the pole frequency f2 is reduced, reducing the phase
-margin, then the Q-factor given by Eq. (9.39) is increased. For Q> 0.5, resonant poles occur at
-frequency fc. The magnitude Bode plot for the case f2< f0 is given in Fig.9.24. The frequency
-fc continues to be the geometric mean of f2 and f0, and fc now coincides with the crossover
-(unity-gain) frequency of the∥ T∥ asymptotes. The exact value of the closed-loop gainT/(1+T)
-at frequency fc is equal to Q= f0/ fc. As shown in Fig. 9.24, this is identical to the value of the
-low-frequency−20 dB/decade asymptote ( f0/ f ), evaluated at frequency fc. It can be seen that
-the Q-factor becomes very large as the pole frequency f2 is reduced.
-The asymptotes of Fig. 9.24 also follow the algebra-on-the-graph rules of Sect. 9.3,b u tt h e
-deviation of the exact curve from the asymptotes is not predicted by the algebra-on-the-graph
-method.
-0 dB
-20 dB
-40 dB
-f
-|| T ||
-f0
-f2
-f0
-f
-f0 f2
-f 2
-T
-1+ T
-fc = f0 f2
-Q = f0 / fc
-Fig. 9.23 Construction of magnitude asymptotes of the closed-loop transfer function T/(1+ T), for the
-low-Q case
+式 (9.33) 的环路增益 $T(s)$ 在图9.19 的修改奈奎斯特围道内不含极点。故闭环传递函数 $T/(1+T)$ 的右半平面极点数等于映射修改奈奎斯特围道 $T(\Gamma)$ 对 −1 点的包围次数。
 
-372 9 Controller Design
-f
-|| T ||
-f0
-f2
-f0
-f
-f0 f2
-f 2
-T
-1+ T fc = f0 f2
-Q = f0/fc
-0 dB
-20 dB
-40 dB
-60 dB
-Fig. 9.24 Construction of magnitude asymptotes of the closed-loop transfer function T/(1+ T), for the
-high-Q case
-These two poles with Q-factor appear in both T/(1+T) and 1/(1+T). We need an easy way
-to predict the Q-factor. We can obtain such a relationship by ﬁnding the frequency at which the
-magnitude of T is exactly equal to unity. We then evaluate the exact phase ofT at this frequency,
-and compute the phase margin. This phase margin is a function of the ratiof0/ f2,o r Q2. We can
-then solve to ﬁnd Q as a function of the phase margin. The result is
-Q=
-√cosϕm
-sinϕm
-ϕm= tan−1
-√
-1+
-√
-1+ 4Q4
-2Q4
-(9.41)
-This function is plotted in Fig. 9.25, with Q expressed in dB. It can be seen that obtaining real
-poles (Q< 0.5) requires a phase margin of at least 76◦. To obtain Q= 1, a phase margin of 52◦
-is needed. The system with a phase margin of 1◦exhibits a closed-loop response with very high
-Q! With a small phase margin, T( jω) is very nearly equal to−1 in the vicinity of the crossover
-frequency. The denominator (1+ T) then becomes very small, causing the closed-loop transfer
-functions to exhibit a peaked response at frequencies near the crossover frequency fc.
-Figure 9.25 is the result for the simple loop gain deﬁned by Eq. ( 9.37). However, this loop
-gain is a good approximation for many other loop gains that are encountered in practice, in
-which∥ T∥ approaches unity gain with a−20 dB/decade slope, with an additional pole at fre-
-quency f2. If all other poles and zeroes of T(s)a r es uﬃciently far above or below the crossover
-frequency, then they have negligible eﬀect on the system transfer functions near the crossover
-frequency, and Fig.9.25 gives a good approximation for the relationship betweenϕm and Q.
-Another common case is the one in which∥ T∥ approaches unity gain with a−40 dB/decade
-slope, with an additional zero at frequency f2.A s f2 is increased, the phase margin is decreased
-and Q is increased. It can be shown that the relation betweenϕm and Q is exactly the same, Eq.
-(9.41).
+$T(s)$ 的幅值和相位波特图绘于图9.20，对应某些特定的 $\omega_0$、$\omega_1$、$\omega_2$ 值。此例中 $T(s)$ 有穿越频率 $f_c$ 和相位裕度 $\phi_m$ 如图所示。
 
-9.4 Stability 373
-0° 10° 20° 30° 40° 50° 60° 70° 80° 90°
-m
-Q
-Q =1 0 dB
-Q = 0.5
-m = 52
-m = 76
-0 dB
-5 dB
-10 dB
-15 dB
-20 dB
-Fig. 9.25 Relationship between loop-gain phase marginϕm and closed-loop peaking factor Q
-A case where Fig. 9.25 fails is when the loop gain T(s) contains three or more poles at or
-near the crossover frequency. The closed-loop response then also contains three or more poles
-near the crossover frequency, and these poles cannot be completely characterized by a single
-Q-factor. Additional work is required to ﬁnd the behavior of the exact T/(1+ T) and 1/(1+ T)
-near the crossover frequency, but nonetheless it can be said that a small phase margin leads to a
-peaked closed-loop response.
-9.4.4 Transient Response vs. Damping Factor
-One can solve for the unit-step response of the T/(1+ T) transfer function, by multiplying
-Eq. (9.39)b y1/s and then taking the inverse Laplace transform. The result for Q> 0.5i s
-ˆv(t)= 1+ 2Qe−ωct/2Q
-√
-4Q2−1
-sin
-⎡⎢⎢⎢⎢⎢⎣
-√
-4Q2−1
-2Q ωct+ tan−1 ⎦√
-4Q2−1
-)⎤⎥⎥⎥⎥⎥⎦ (9.42)
-For Q< 0.5, the result is
-ˆv(t)= 1−ω2
-ω2−ω1
-e−ω1t−ω1
-ω1−ω2
-e−ω2t (9.43)
-with
-ω1,ω2=ωc
-2Q
-⎦
-1±
-√
-1−4Q2
-)
-(9.44)
-These equations are plotted in Fig. 9.26 for various values of Q.
+![源页 p.379](../assets/page-snapshots/chapter-9/page-379.png)
 
-374 9 Controller Design
-Fig. 9.26 Unit-step response of the second-order system, Eqs. (9.42)a n d(9.43), for various values of Q
-According to Eq. (9.39), when f2 > 4 f0,t h eQ-factor is less than 0.5, and the closed-loop
-response contains a low-frequency and a high-frequency real pole. The transient response in
-this case, Eq. (9.43), contains decaying-exponential functions of time, of the form
-Ae
-(pole)t (9.45)
-This is called the “overdamped” case. With very low Q, the low-frequency pole leads to a slow
-step response.
-For f2= 4 f0,t h eQ-factor is equal to 0.5. The closed-loop response contains two real poles
-at frequency 2 f0. This is called the “critically damped” case. The transient response is faster
-than in the overdamped case, because the lowest-frequency pole is at a higher frequency. This is
-the fastest response that does not exhibit overshoot. Atωct=πradians (t= 1/2 fc), the voltage
-has reached 82% of its ﬁnal value. At ωct= 2πradians (t= 1/ fc), the voltage has reached
-98.6% of its ﬁnal value.
-For f2 < 4 f0,t h eQ-factor is greater than 0.5. The closed-loop response contains complex
-poles, and the transient response exhibits sinusoidal-type waveforms with decaying amplitude,
-Eq. (9.42). The rise time of the step response is faster than in the critically damped case, but the
-waveforms exhibit overshoot. The peak value of v(t)i s
-peak ˆv(t)= 1+ e
-−π/
-√
-4Q2−1 (9.46)
+图9.20 式 (9.33) 示例的环路增益 $T(s)$ 波特图
 
-9.4 Stability 375
-This is called the “underdamped” case. A Q-factor of 1 leads to an overshoot of 16.3%, while
-a Q-factor of 2 leads to a 44.4% overshoot. Large Q-factors lead to overshoots approaching
-100%.
-The exact transient response of the feedback loop may di ﬀer from the plots of Fig. 9.26,
-because of additional poles and zeroes in T, and because of diﬀerences in initial conditions.
-Nonetheless, Fig.9.26 illustrates how high-Q poles lead to overshoot and ringing. In most power
-applications, overshoot is unacceptable. For example, in a 3.3 V computer power supply, the
-voltage must not be allowed to overshoot to 5 or 6 volts when the supply is turned on—this
-would likely destroy all of the integrated circuits in the computer! So the Q-factor must be
-suﬃciently low, often 0.5 or less, corresponding to a phase margin of at least 76◦.
-9.4.5 Load Step Response vs. Damping Factor
-Usually we also are interested in the response of the output voltage to a step change in load cur-
-rent. Let us consider the case where the closed-loop output impedance can be well approximated
-by a second-order function of the form
-Z
-out(s)=
-⎦sR0
-ωc
-)
-1+ s
-Qωc
-+
-⎦s
-ωc
-)2 (9.47)
-This constitutes an eﬀective parallel R−L−C impedance having characteristic impedance R0,
-resonant frequency fc, and Q-factor Q. Also consider that the load current takes a step change
-of magnitude I0, with the following Laplace transform:
-ˆiload= I0
-s (9.48)
-One can multiply Eqs. ( 9.47) and ( 9.48), and then invert the Laplace transform to derive an
-expression for the output voltage response ˆv(t). For Q< 0.5, the result is:
-ˆv(t)=−I0R0Q√
-1−4Q2
-⎦
-e−ω1t−e−ω2t)
-(9.49)
-withω1 andω2 deﬁned as in Eq. (9.44). For the high-Q case Q> 0.5, the result is:
-ˆv(t)=−I0R02Q√
-4Q2−1
-e−ωct/2Q sin
-⎛⎜⎜⎜⎜⎜⎝
-√
-4Q2−1
-2Q ωct
-⎞⎟⎟⎟⎟⎟⎠ (9.50)
-These equations are plotted in Fig. 9.27 for various values of Q and for I0R0= 1. For non-unity
-I0R0, the curves can be multiplied by I0R0: the peak deviation in ˆ v(t) is proportional to the
-magnitude of the current step I0 multiplied by the characteristic impedance R0.F o rQ< 0.5, the
-peak voltage deviation has magnitude slightly less than I0R0Q.A t Q= 0.5, the peak voltage
-deviation is approximately−0.368 I0R0.A s Q→∞, the peak voltage deviation tends to−I0R0.
+图9.21a 给出奈奎斯特图的第一部分，其中段 $\Gamma_A$ 通过环路增益 $T(s)$ 映射。此段上 $s = j\omega$，$\omega$ 从 $\epsilon(\to 0)$ 变到 $\infty$。
 
-376 9 Controller Design
-ct
-0 5 10 15
--1
--0.5
-0
-0.5
-1
-Q = 50
-Q = 10
-Q = 4
-Q = 2
-Q = 1
-Q = 0.75
-Q = 0.5
-Q = 0.3
-Q = 0.2
-Q = 0.1
-Q = 0.05
-Fig. 9.27 Response of the second-order system to a unit step change in load current, Eqs. ( 9.49)
-and (9.50), for various values of Q. These curves are plotted for I0R0= 1
-9.5 Regulator Design
-Let’s now consider how to design a regulator system, to meet speciﬁcations or design goals re-
-garding rejection of disturbances, transient response, and stability. Typical dc regulator designs
-are deﬁned using speciﬁcations such as the following:
-1. Eﬀect of load current variations on the output voltage regulation. The output voltage must
-remain within a speciﬁed range when the load current varies in a prescribed way. This
-amounts to a limit on the maximum magnitude of the closed-loop output impedance of
-Eq. (9.6), repeated below
-ˆv(s)
-−ˆiload(s)
-⏐⏐⏐⏐⏐⏐ ˆvg=0
-ˆvre f=0
-= Zout(s)
-1+ T(s) (9.51)
-If, over some frequency range, the open-loop output impedance Zout has magnitude that
-exceeds the limit, then the loop gain T must be suﬃciently large in magnitude over the
-same frequency range, such that the magnitude of the closed-loop output impedance given
-in Eq. (9.51) is less than the given limit.
-2. Eﬀect of input voltage variations (for example, at the second harmonic of the ac line fre-
-quency) on the output voltage regulation . Speciﬁc maximum limits are usually placed on
-the amplitude of variations in the output voltage at the second harmonic of the ac line fre-
-quency (120 Hz or 100 Hz). If we know the magnitude of the rectiﬁcation voltage ripple
-which appears at the converter input (as ˆvg), then we can calculate the resulting output volt-
-age ripple (in ˆv) using the closed loop line-to-output transfer function of Eq. (9.5), repeated
-below
+![源页 p.380](../assets/page-snapshots/chapter-9/page-380.png)
 
-9.5 Regulator Design 377
-ˆv(s)
-ˆvg(s)
-⏐⏐
-⏐⏐⏐
-⏐
-ˆvre f=0
-ˆiload=0
-= Gvg(s)
-1+ T(s) (9.52)
-The output voltage ripple can be reduced by increasing the magnitude of the loop gain at
-the ripple frequency. In a typical good design,∥ T∥ is 20 dB or more at 120 Hz, so that the
-transfer function of Eq. (9.52) is at least an order of magnitude smaller than the open-loop
-line-to-output transfer function∥ Gvg∥.
-3. Transient response time. When a speciﬁed large disturbance occurs, such as a large step
-change in load current or input voltage, the output voltage may undergo a transient. Dur-
-ing this transient, the output voltage typically deviates from its speciﬁed allowable range.
-Eventually, the feedback loop operates to return the output voltage within tolerance. The
-time required to do so is the transient response time; typically, the response time can be
-shortened by increasing the feedback loop crossover frequency.
-4. Overshoot and ringing . As discussed in Sect. 9.4.4, the amount of overshoot and ringing
-allowed in the transient response may be limited. Such a speciﬁcation implies that the phase
-margin must be suﬃciently large.
-Each of these requirements imposes constraints on the loop gainT(s). Therefore, the design
-of the control system involves modifying the loop gain. As illustrated in Fig.9.2, a compensator
-network is added for this purpose. Several well-known strategies for design of the compensator
-transfer function G
-c(s) are discussed below.
-9.5.1 Lead ( PD) compensator
-This type of compensator transfer function is used to improve the phase margin. A zero is added
-to the loop gain, at a frequency fz suﬃciently far below the crossover frequency fc, such that
-the phase margin of T(s) is increased by the desired amount. The lead compensator is also
-called a proportional-plus-derivative,o r PD, controller—at high frequencies, the zero causes
-the compensator to diﬀerentiate the error signal. It often ﬁnds application in systems originally
-containing a two-pole response. By use of this type of compensator, the bandwidth of the feed-
-back loop (i.e., the crossover frequency fc) can be extended while maintaining an acceptable
-phase margin.
-As i d eeﬀect of the zero is that it causes the compensator gain to increase with frequency,
-with a+20 dB/decade slope. So steps must be taken to ensure that∥ T∥ remains equal to unity
-at the desired crossover frequency. Also, since the gain of any practical ampliﬁer must tend to
-zero at high frequency, the compensator transfer function Gc(s) must contain high-frequency
-poles. These poles also have the beneﬁcial eﬀect of attenuating high-frequency noise. Of partic-
-ular concern are the switching frequency harmonics present in the output voltage and feedback
-signals. If the compensator gain at the switching frequency is too great, then these switching
-harmonics are ampliﬁed by the compensator, and can disrupt the operation of the pulse-width
-modulator (see Sect. 7.3). So the compensator network should contain poles at a frequency less
-than the switching frequency. These considerations typically restrict the crossover frequency
-f
-c to be less than approximately 10% of the converter switching frequency fs. In addition, the
-circuit designer must take care not to exceed the gain-bandwidth limits of available operational
-ampliﬁers.
+图9.21 反馈环路含积分器示例（图9.20）的奈奎斯特图：(a) 通过环路增益 $T(s)$ 映射围道 $\Gamma_A$；(b) 通过环路增益 $T(s)$ 映射围道 $\Gamma_A$、$\Gamma_B$、$\Gamma_C$；(c) 完整修改奈奎斯特围道的映射
 
-378 9 Controller Design
-f
-c
- Gc
-GG c0
-0
-fp
-fz /10
-fp/10 10fz
-fmax
-= fz fp
-+ 45 /decade
-/decade
-fz
-Gc0
-fp
-fz
-||||
-Fig. 9.28 Magnitude and phase asymptotes of the PD compensator transfer function Gc of Eq. (9.53)
-The transfer function of the lead compensator therefore contains a low-frequency zero and
-several high-frequency poles. A simpliﬁed example containing a single high-frequency pole is
-given in Eq. (9.53) and illustrated in Fig. 9.28.
-Gc(s)= Gc0
-⎦
-1+ s
-ωz
-)
-⎦
-1+ s
-ωp
-) (9.53)
-The maximum phase occurs at a frequency fϕmax given by the geometrical mean of the pole and
-zero frequencies:
-fϕmax=
-√
-fz fp (9.54)
-To obtain the maximum improvement in phase margin, we should design our compensator so
-that the frequency fϕmax coincides with the loop gain crossover frequency fc. The value of the
-phase at this frequency can be shown to be
-∠Gc
-⎦
-fϕmax
-)
-= tan−1
-⎛⎜⎜⎜⎜⎜⎜⎜⎝
-1
-2
-√
-fp
-fz
-−1
-2
-√
-fz
-fp
-⎞⎟⎟⎟⎟⎟⎟⎟⎠ (9.55)
-This equation is plotted in Fig. 9.29. Equation (9.55) can be inverted to obtain
-fp
-fz
-= 1+ sin(θ)
-1−sin(θ) (9.56)
-where θ=∠Gc( fϕmax). Equations (9.55) and (9.53) imply that, to optimally obtain a compen-
-sator phase lead ofθat frequency fc, the pole and zero frequencies should be chosen as follows:
+段 $\Gamma_B$ 再次由式 (9.28) 定义，此段再次映射到原点。段 $\Gamma_C$ 是 $\Gamma_C$ 的复共轭。围道 $\Gamma_A$、$\Gamma_B$、$\Gamma_C$ 通过环路增益 $T(s)$ 的映射如图9.21b所示。可见此围道未闭合；要完成映射围道须并入 $\Gamma_D$。
 
-9.5 Regulator Design 379
-1 10 100 1000
-Maximum
-phase lead
-0
-15
-30
-45
-60
-75
-90
-fp / fz
-Fig. 9.29 Maximum phase leadθvs. frequency ratio fp/ fz for the lead compensator
-fz= fc
-√
-1−sin(θ)
-1+ sin(θ)
-fp= fc
-√
-1+ sin(θ)
-1−sin(θ)
-(9.57)
-When it is desired to avoid changing the crossover frequency, the magnitude of the compen-
-sator gain is chosen to be unity at the loop gain crossover frequency fc. This requires that Gc0
-be chosen according to the following formula:
-Gc0=
-√
-fz
-fp
-(9.58)
-It can be seen that Gc0 is less than unity, and therefore the lead compensator reduces the dc
-gain of the feedback loop. Other choices of Gc0 can be selected when it is desired to shift the
-crossover frequency fc; for example, increasing the value ofGc0 causes the crossover frequency
-to increase. If the frequencies fp and fz are chosen as in Eq. (9.57), then fϕmax of Eq. (9.53) will
-coincide with the new crossover frequency fc.
-The Bode diagram of a typical loop gainT(s) containing two poles is illustrated in Fig.9.30.
-The phase margin of the original T(s) is small, since the crossover frequency fc is substantially
-greater than the pole frequency f0. The result of adding a lead compensator is also illustrated.
-The lead compensator of this example is designed to maintain the same crossover frequency but
-improve the phase margin.
+将式 (9.34) 定义的映射代入式 (9.33) 的环路增益得
 
-380 9 Controller Design
-f
-0
- T
- T
-T0
-f0
-0
-fz
-fc
-m
-T0 Gc0 Original gain
-Compensated gain
-Original phase asymptotes
-Compensated phase asymptotes
-0 dB
-20 dB
-40 dB
-60 dB
-fp
-|| T ||
-|| T ||
-Fig. 9.30 Compensation of a loop gain containing two poles, using a lead (PD) compensator. The phase
-marginϕm is improved
-9.5.2 Lag ( PI) Compensator
-This type of compensator is used to increase the low-frequency loop gain, such that the output
-is better regulated at dc and at frequencies well below the loop crossover frequency. As given
-in Eq. (9.59) and illustrated in Fig.9.31, an inverted zero is added to the loop gain, at frequency
-fL.
-Gc(s)= Gc∞
-⎦
-1+ωL
-s
-)
-(9.59)
-If fL is suﬃciently lower than the loop crossover frequency fc, then the phase margin is un-
-changed. This type of compensator is also called a proportional-plus-integral,o r PI, controller.
-At low frequencies, the inverted zero causes the compensator to integrate the error signal.
-To the extent that the compensator gain can be made arbitrarily large at dc, the dc loop gain
-T(0) becomes arbitrarily large. This causes the dc component of the error signal to approach
-zero. In consequence, the steady-state output voltage is perfectly regulated, and the disturbance-
-to-output transfer functions approach zero at dc. Such behavior is easily obtained in practice,
-with the compensator of Eq. (9.59) realized using a conventional operational ampliﬁer.
-Although the PI compensator is useful in nearly all types of feedback systems, it is an
-especially simple and eﬀective approach for systems originally containing a single pole. For the
-example of Fig. 9.32, the original uncompensated loop gain is of the form
-T
-u(s)= Tu0⎦
-1+ s
-ω0
-) (9.60)
-The compensator transfer function of Eq. ( 9.59) is used, so that the compensated loop gain is
-T(s)= Tu(s) Gc(s). Magnitude and phase asymptotes of T(s) are also illustrated in Fig. 9.32.
-The compensator high-frequency gain Gc∞is chosen to obtain the desired crossover frequency
+$$T(\epsilon e^{j\theta}) = \frac{1}{\left(\dfrac{\epsilon e^{j\theta}}{\omega_0}\right)\left(1+\dfrac{\epsilon e^{j\theta}}{\omega_1}\right)\left(1+\dfrac{\epsilon e^{j\theta}}{\omega_2}\right)} \tag{9.35}$$
 
-9.5 Regulator Design 381
-f
-Gc
- Gc
-Gc
-0
-fL/10
-+ 45 /decade
-fL
-10fL
-|| ||
-Fig. 9.31 Magnitude and phase asymptotes of the PI compensator transfer function Gc of Eq. (9.59)
-0 dB
-20 dB
-40 dB
-f
-90
-0
-Gc Tu0
-fL
-f0
-Tu0
- Tu
-u
-f0
-|| T ||
-|| T || fc
- T
-10fL
-10f0 m
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 9.32 Compensation of a loop gain containing a single pole, using a lag (PI) compensator. The loop
-gain magnitude is increased
-fc. If we approximate the compensated loop gain by its high-frequency asymptote, then at high
-frequencies we can write
-T
-≈Tu0Gc∞⎦f
-f0
-) (9.61)
-At the crossover frequency f= fc, the loop gain has unity magnitude. Equation (9.61) predicts
-that the crossover frequency is
-fc≈Tu0Gc∞f0 (9.62)
+$\epsilon$ 趋向零时，$\omega_1$ 和 $\omega_2$ 关联的极点项趋向 1。式 (9.35) 简化为
 
-382 9 Controller Design
-0 dB
-20 dB
-40 dB
-f
-Gc Tu0
-fL f0
-T
-fc
-1
-1+ T
-fL f0
-1
-Gc Tu0
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-|| ||
-Fig. 9.33 Construction of∥1/(1+ T)∥, for the PI-compensated example of Fig. 9.32
-Hence, to obtain a desired crossover frequency fc, we should choose the compensator gain Gc∞
-as follows:
-Gc∞= fc
-Tu0 f0
-(9.63)
-The corner frequency fL is then chosen to be suﬃciently less than fc, such that an adequate
-phase margin is maintained.
-Magnitude asymptotes of the quantity 1/(1+ T(s)) are constructed in Fig. 9.33. At frequen-
-cies less than fL,t h ePI compensator improves the rejection of disturbances. At dc, where the
-magnitude of Gc approaches inﬁnity, the magnitude of 1/(1+T) tends to zero. Hence, the closed-
-loop disturbance-to-output transfer functions, such as Eqs. (9.51) and (9.52), tend to zero at dc.
-9.5.3 Combined ( PID) Compensator
-The advantages of the lead and lag compensators can be combined, to obtain both wide band-
-width and zero steady-state error. At low frequencies, the compensator integrates the error sig-
-nal, leading to large low-frequency loop gain and accurate regulation of the low-frequency com-
-ponents of the output voltage. At high frequency (in the vicinity of the crossover frequency),
-the compensator introduces phase lead into the loop gain, improving the phase margin. Such a
-compensator is sometimes called a PID controller.
-A typical Bode diagram of a practical version of this compensator is illustrated in Fig. 9.34.
-The compensator has transfer function
-G
-c(s)= Gcm
-⎦
-1+ωL
-s
-) ⎦
-1+ s
-ωz
-)
-⎦
-1+ s
-ωp1
-)⎦
-1+ s
-ωp2
-) (9.64)
-The inverted zero at frequency fL functions in the same manner as the PI compensator. The
-zero at frequency fz adds phase lead in the vicinity of the crossover frequency, as in the PD
+$$T(\epsilon e^{j\theta}) = \frac{\omega_0 e^{-j\theta}}{\epsilon} \tag{9.36}$$
 
-9.5 Regulator Design 383
-0 dB
-20 dB
-40 dB
-f
- Gc
-Gc|||| Gc|||| Gc
-Gcm
-fz
-fp1
-90
-0
-fz /10
-fp1/10
-10fz
-fL
-fc
-fL /10
-10fL
-90 /decade
-45 /decade
-/decade
-fp2
-fp2 /10
-10fp1
-Fig. 9.34 Magnitude and phase asymptotes of the combined (PID) compensator transfer function Gc of
-Eq. (9.64)
-compensator. The high-frequency poles at frequencies fp1 and fp2 must be present in practical
-compensators, to cause the gain to roll oﬀat high frequencies and to prevent the switching ripple
-from disrupting the operation of the pulse-width modulator. The loop gain crossover frequency
-fc is chosen to be greater than fL and fz, but less than fp1 and fp2.
-9.5.4 Design Example
-To illustrate the design of PI and PD compensators, let us consider the design of a combined
-PID compensator for the dc–dc buck converter system of Fig. 9.35. The input voltage vg(t)f o r
-this system has nominal value 28 V . It is desired to supply a regulated 15 V to a 5 A load. The
-load is modeled here with a 3Ωresistor. An accurate 5 V reference is available.
-The ﬁrst step is to select the feedback gainH(s). The gain H is chosen such that the regulator
-produces a regulated 15 V dc output. Let us assume that we will succeed in designing a good
-feedback system, which causes the output voltage to accurately follow the reference voltage.
-This is accomplished via a large loop gain T, which leads to a small error voltage: ve ≈0.
-Hence, Hv≈vre f So we should choose
-H= Vre f
-V = 5
-15= 1
-3 (9.65)
-The quiescent duty cycle is given by the steady-state solution of the converter:
-D= V
-Vg
-= 15
-28= 0.536 (9.66)
-The quiescent value of the control voltage, Vc, must satisfy Eq. (7.85). Hence,
-Vc= DVM = 2.14 V (9.67)
-Thus, the quiescent conditions of the system are known. It remains to design the compensator
-gain Gc(s).
+$\epsilon$ 趋向零时式 (9.36) 的幅值趋向无穷。$\theta$ 从 −90° 变到 +90° 时映射围道的相位从 +90° 变到 −90°。完整围道如图9.21c所示。可见映射围道现闭合，相位裕度为正时无 −1 点包围。图9.21c 的围道代表稳定系统。
 
-384 9 Controller Design
-+
-+
-v(t)vg(t)
-28 V
-+
-Compensator
-HvPulse-width
-modulator
-vc
-Transistor
-gate driver
-Gc(s)
-H(s)
-ve
-Error
-signal
-Sensor
-gain
-iload
-L
-50 μH
-C
-500 μF
-R
-3 
-fs = 100 kHz
-VM = 4 V vref
-5 V
-Fig. 9.35 Design example
-Fig. 9.36 System small-signal ac model, design example
-A small-signal ac model of the regulator system is illustrated in Fig. 9.36. The buck con-
-verter ac model is represented in canonical form. Disturbances in the input voltage and in the
-load current are modeled. For generality, reference voltage variations ˆ vre f are included in the
-diagram; in a dc voltage regulator, these variations are normally zero.
+**总结：奈奎斯特稳定判据**
 
-9.5 Regulator Design 385
-The open-loop converter transfer functions are discussed in the previous chapters. The open-
-loop control-to-output transfer function is
-Gvd(s)= V
-D
-1
-1+ s L
-R+ s2LC
-(9.68)
-The open-loop control-to-output transfer function contains two poles, and can be written in the
-following normalized form:
-Gvd(s)= Gd0
-1
-1+ s
-Q0ω0
-+
-⎦s
-ω0
-)2 (9.69)
-By equating like coeﬃcients in Eqs. (9.68) and ( 9.69), one ﬁnds that the dc gain, corner fre-
-quency, and Q-factor are given by
-Gd0= V
-D= 28 V
-f0= ω0
-2π= 1
-2π
-√
-LC
-= 1 kHz (9.70)
-Q0= R
-√
-C
-L= 9.5⇒19.5d B
-In practice, parasitic loss elements, such as the capacitor equivalent series resistance ( esr),
-would cause a lower Q-factor to be observed. Figure 9.37 contains a Bode diagram of Gvd(s).
-0 dB
-20 dB
-40 dB
-f
- T |||| T0 = 8.6 18.7 dB
-f0
-Q0 = 9.5 19.5 dB
-fz
-fp
-fc
-Q0
-1/T0 = 0.12 
-1
-1+ T
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 9.37 Converter small-signal control-to-output transfer function Gvd, design example
+故奈奎斯特稳定判据与环路增益的波特图密切相关。段 $\Gamma_A$ 对应令 $s = j\omega$，$\Gamma_A$ 通过环路增益 $T(s)$ 的映射构成 $T(j\omega)$ 的极坐标图。闭环传递函数 $T/(1+T)$ 和 $1/(1+T)$ 的右半平面极点数通过确定奈奎斯特围道经环路增益 $T(s)$ 映射后对 −1 点的包围次数严格判定。这解释了相位裕度测试的起源，也为更复杂情形（如有多个穿越频率的环路增益）提供了稳定性测试。
 
-386 9 Controller Design
-The open-loop line-to-output transfer function is
-Gvg(s)= D 1
-1+ s L
-R+ s2LC
-(9.71)
-This transfer function contains the same poles as inGvd(s), and can be written in the normalized
-form
-Gvg(s)= Gg0
-1
-1+ s
-Q0ω0
-+
-⎦s
-ω0
-)2 (9.72)
-with Gg0= D. The open-loop output impedance of the buck converter is
-Zout(s)= R
-
-
-1
-sC
-
-sL= sL
-1+ s L
-R+ s2LC
-(9.73)
-Use of these equations to represent the converter in block-diagram form leads to the com-
-plete system block diagram of Fig. 9.38. The loop gain of the system is
-T(s)= Gc(s)
-⎦1
-VM
-)
-Gvd(s)H(s) (9.74)
-Substitution of Eq. (9.69)i n t o(9.74) leads to
-T(s)=
-⎦Gc(s)H(s)
-VM
-) ⎦V
-D
-) 1⎛⎜⎜⎜⎜⎜⎝1+ s
-Q0ω0
-+
-⎦s
-ω0
-)2⎞⎟⎟⎟⎟⎟⎠
-(9.75)
-The closed-loop disturbance-to-output transfer functions are given by Eqs. (9.5) and (9.6).
-Fig. 9.38 System block diagram, design example
-```
+### 9.4.3 相位裕度与闭环阻尼系数的关系
+
+需要多少相位裕度？最坏情况 1° 的相位裕度是否令人满意？当然，良好设计应有足够设计裕度，但还需要额外相位裕度有另一个重要原因。小相位裕度（$T$ 中）使闭环传递函数 $T/(1+T)$ 和 $1/(1+T)$ 在穿越频率附近呈现高 Q 谐振极点。系统暂态响应呈现超调和振铃。相位裕度减小时这些特性变差（更高 Q、更长振铃），直到 $\phi_m \le 0°$ 时系统变得不稳定。
+
+考虑在穿越频率附近可由如下函数良好近似的环路增益 $T(s)$：
+
+$$T(s) = \frac{1}{\left(\dfrac{s}{\omega_0}\right)\left(1+\dfrac{s}{\omega_2}\right)} \tag{9.37}$$
+
+![源页 p.381](../assets/page-snapshots/chapter-9/page-381.png)
+
+图9.22 式 (9.37) 环路增益 $T$ 的幅值和相位渐近线
+
+幅值和相位渐近线绘于图9.22。此函数是许多常见环路增益在穿越频率附近的良好近似，其中 $\|T\|$ 以 −20 dB/十倍频程斜率接近单位增益，在 $f_2 = \omega_2/2\pi$ 处有附加极点。假定任何附加极点和零点足够远离穿越频率上下，对穿越频率附近的系统传递函数影响可忽略。
+
+注意 $f_2 \to \infty$ 时相位裕度 $\phi_m$ 趋向 90°。$f_2 \to 0$ 时 $\phi_m \to 0°$。故 $f_2$ 减小时相位裕度也减小。让我们研究这如何通过 $T/(1+T)$ 影响闭环响应。可写
+
+$$\frac{T(s)}{1+T(s)} = \frac{1}{1+\dfrac{1}{T(s)}} = \frac{1}{1+\dfrac{s}{\omega_0}+\dfrac{s^2}{\omega_0\omega_2}} \tag{9.38}$$
+
+将其写成标准归一化二次形式得
+
+$$\frac{T(s)}{1+T(s)} = \frac{1}{1+\dfrac{s}{Q\omega_c}+\left(\dfrac{s}{\omega_c}\right)^2} \tag{9.39}$$
+
+其中
+
+$$\omega_c = \sqrt{\omega_0\omega_2} = 2\pi f_c, \quad Q = \frac{\omega_0}{\omega_c} = \sqrt{\frac{\omega_0}{\omega_2}}$$
+
+故闭环响应在 $f_c$（$f_0$ 和 $f_2$ 的几何平均）处含二次极点。$f_0 \ll f_2$ 时这些极点有低 Q 因子。此时可用低 Q 近似估计其频率：
+
+$$Q\omega_c = \omega_0 \tag{9.40}$$
+
+$$\frac{\omega_c}{Q} = \omega_2$$
+
+![源页 p.382](../assets/page-snapshots/chapter-9/page-382.png)
+
+图9.23 低 Q 情形闭环传递函数 $T/(1+T)$ 幅值渐近线的构造
+
+此情形的幅值渐近线绘于图9.23。可见这些渐近线符合 9.3 节用"在图上做代数"方法构造 $T/(1+T)$ 的规则。
+
+接下来考虑高 Q 情形。极点频率 $f_2$ 减小（相位裕度减小）时式 (9.39) 给出的 Q 因子增大。$Q > 0.5$ 时 $f_c$ 处出现谐振极点。$f_2 < f_0$ 情形的幅值波特图如图9.24所示。$f_c$ 仍是 $f_2$ 和 $f_0$ 的几何平均，$f_c$ 现与 $\|T\|$ 渐近线的穿越（单位增益）频率重合。$f_c$ 处闭环增益 $T/(1+T)$ 的精确值等于 $Q = f_0/f_c$。如图9.24所示，这与低频 −20 dB/十倍频程渐近线 $(f_0/f)$ 在 $f_c$ 处的值相同。可见极点频率 $f_2$ 减小时 Q 因子变得很大。
+
+![源页 p.383](../assets/page-snapshots/chapter-9/page-383.png)
+
+图9.24 高 Q 情形闭环传递函数 $T/(1+T)$ 幅值渐近线的构造
+
+图9.24 的渐近线也遵循 9.3 节"在图上做代数"规则，但"在图上做代数"方法不能预测精确曲线与渐近线的偏差。
+
+这两个有 Q 因子的极点同时出现在 $T/(1+T)$ 和 $1/(1+T)$ 中。需要一种预测 Q 因子的简单方法。可通过求 $T$ 的幅值恰为 1 的频率获得此关系。然后在此频率评估 $T$ 的精确相位并计算相位裕度。此相位裕度是比值 $f_0/f_2$ 即 $Q^2$ 的函数。然后可解出 $Q$ 作为相位裕度的函数，结果为
+
+$$Q = \frac{\sqrt{\cos\phi_m}}{\sin\phi_m} \qquad \phi_m = \tan^{-1}\frac{\sqrt{1+\sqrt{1+4Q^4}}}{2Q^4} \tag{9.41}$$
+
+![源页 p.384](../assets/page-snapshots/chapter-9/page-384.png)
+
+图9.25 环路增益相位裕度 $\phi_m$ 与闭环峰值因子 $Q$ 的关系
+
+此函数绘于图9.25，$Q$ 以 dB 表示。可见获得实极点（$Q < 0.5$）需要至少 76° 的相位裕度。$Q = 1$ 需要 52° 相位裕度。相位裕度 1° 的系统呈现非常高 Q 的闭环响应！小相位裕度时 $T(j\omega)$ 在穿越频率附近非常接近 −1。分母 $(1+T)$ 随之变得很小，使闭环传递函数在穿越频率 $f_c$ 附近的频率呈现峰值响应。
+
+图9.25 是式 (9.37) 定义的简单环路增益的结果。但此环路增益是实践中遇到的许多其他环路增益的良好近似，其中 $\|T\|$ 以 −20 dB/十倍频程斜率接近单位增益，在 $f_2$ 处有附加极点。若 $T(s)$ 的所有其他极点和零点足够远离穿越频率上下，则它们对穿越频率附近的系统传递函数影响可忽略，图9.25 给出 $\phi_m$ 与 $Q$ 关系的良好近似。
+
+另一种常见情形是 $\|T\|$ 以 −40 dB/十倍频程斜率接近单位增益、在 $f_2$ 处有附加零点。$f_2$ 增大时相位裕度减小、$Q$ 增大。可证 $\phi_m$ 与 $Q$ 的关系完全相同，即式 (9.41)。
+
+图9.25 失效的情形是环路增益 $T(s)$ 在或近穿越频率处含三个或更多极点。闭环响应也在穿越频率附近含三个或更多极点，这些极点不能完全由单一 Q 因子表征。需要额外工作求精确 $T/(1+T)$ 和 $1/(1+T)$ 在穿越频率附近的行为，但可断言小相位裕度导致峰值闭环响应。
+
+### 9.4.4 暂态响应与阻尼系数的关系
+
+可将式 (9.39) 乘以 $1/s$ 然后取逆拉普拉斯变换求 $T/(1+T)$ 传递函数的单位阶跃响应。$Q > 0.5$ 时结果为
+
+$$\hat{v}(t) = 1 + \frac{2Qe^{-\omega_c t/2Q}}{\sqrt{4Q^2-1}}\sin\!\left[\frac{\sqrt{4Q^2-1}}{2Q}\omega_c t + \tan^{-1}\!\left(\sqrt{4Q^2-1}\right)\right] \tag{9.42}$$
+
+$Q < 0.5$ 时结果为
+
+$$\hat{v}(t) = 1 - \frac{\omega_2}{\omega_2-\omega_1}e^{-\omega_1 t} - \frac{\omega_1}{\omega_1-\omega_2}e^{-\omega_2 t} \tag{9.43}$$
+
+其中
+
+$$\omega_{1,2} = \frac{\omega_c}{2Q}\left(1 \pm \sqrt{1-4Q^2}\right) \tag{9.44}$$
+
+这些方程对各种 $Q$ 值绘于图9.26。
+
+![源页 p.385](../assets/page-snapshots/chapter-9/page-385.png)
+
+图9.26 二阶系统 [式 (9.42) 和 (9.43)] 对各种 $Q$ 值的单位阶跃响应
+
+按式 (9.39)，$f_2 > 4f_0$ 时 Q 因子小于 0.5，闭环响应含一个低频和一个高频实极点。此情形的暂态响应 [式 (9.43)] 含衰减指数时间函数，形式为
+
+$$Ae^{(\text{极点})t} \tag{9.45}$$
+
+这称为"过阻尼"情形。$Q$ 很低时低频极点导致缓慢的阶跃响应。
+
+$f_2 = 4f_0$ 时 Q 因子等于 0.5。闭环响应在 $2f_0$ 处含两个实极点。这称为"临界阻尼"情形。暂态响应比过阻尼情形快，因为最低频率极点在更高频率。这是不呈现超调的最快响应。$\omega_c t = \pi$ 弧度（$t = 1/2f_c$）时电压达到最终值的 82%。$\omega_c t = 2\pi$ 弧度（$t = 1/f_c$）时电压达到最终值的 98.6%。
+
+$f_2 < 4f_0$ 时 Q 因子大于 0.5。闭环响应含复极点，暂态响应呈现幅度衰减的正弦型波形 [式 (9.42)]。阶跃响应的上升时间比临界阻尼情形快，但波形呈现超调。$v(t)$ 的峰值为
+
+$$\hat{v}(t)_{\text{peak}} = 1 + e^{-\pi/\sqrt{4Q^2-1}} \tag{9.46}$$
+
+![源页 p.386](../assets/page-snapshots/chapter-9/page-386.png)
+
+这称为"欠阻尼"情形。$Q = 1$ 导致 16.3% 超调，$Q = 2$ 导致 44.4% 超调。大 Q 因子导致接近 100% 的超调。
+
+由于 $T$ 中附加极点和零点以及初始条件差异，反馈环路的精确暂态响应可能与图9.26 的图不同。但图9.26 说明了高 Q 极点如何导致超调和振铃。在大多数功率应用中，超调不可接受。例如，在 3.3 V 计算机电源中，电源开启时不允许电压超调到 5 或 6 伏——这可能摧毁计算机中的所有集成电路！故 Q 因子必须足够低，通常 0.5 或更低，对应至少 76° 的相位裕度。
+
+### 9.4.5 负载阶跃响应与阻尼系数的关系
+
+通常我们还对输出电压对负载电流阶跃变化的响应感兴趣。考虑闭环输出阻抗可由如下二阶函数良好近似的情形
+
+$$Z_{out}(s) = \frac{\left(\dfrac{sR_0}{\omega_c}\right)}{1+\dfrac{s}{Q\omega_c}+\left(\dfrac{s}{\omega_c}\right)^2} \tag{9.47}$$
+
+这构成有效并联 R-L-C 阻抗，特性阻抗 $R_0$、谐振频率 $f_c$ 和 Q 因子 $Q$。还考虑负载电流取幅值 $I_0$ 的阶跃变化，拉普拉斯变换为
+
+$$\hat{i}_{load} = \frac{I_0}{s} \tag{9.48}$$
+
+将式 (9.47) 和 (9.48) 相乘然后逆拉普拉斯变换可导出输出电压响应 $\hat{v}(t)$ 的表达式。$Q < 0.5$ 时结果为
+
+$$\hat{v}(t) = -\frac{I_0 R_0 Q}{\sqrt{1-4Q^2}}\left(e^{-\omega_1 t} - e^{-\omega_2 t}\right) \tag{9.49}$$
+
+$\omega_1$ 和 $\omega_2$ 如式 (9.44) 定义。高 Q 情形 $Q > 0.5$ 时结果为
+
+$$\hat{v}(t) = -\frac{I_0 R_0}{2Q\sqrt{4Q^2-1}}e^{-\omega_c t/2Q}\sin\!\left(\frac{\sqrt{4Q^2-1}}{2Q}\omega_c t\right) \tag{9.50}$$
+
+![源页 p.387](../assets/page-snapshots/chapter-9/page-387.png)
+
+图9.27 二阶系统对负载电流单位阶跃变化的响应 [式 (9.49) 和 (9.50)]，对各种 $Q$ 值。这些曲线按 $I_0R_0 = 1$ 绘制
+
+这些方程对各种 $Q$ 值和 $I_0R_0 = 1$ 绘于图9.27。$I_0R_0$ 非 1 时曲线可乘以 $I_0R_0$：$\hat{v}(t)$ 的峰值偏差正比于电流阶跃幅值 $I_0$ 乘以特性阻抗 $R_0$。$Q < 0.5$ 时峰值电压偏差幅值略小于 $I_0R_0Q$。$Q = 0.5$ 时峰值电压偏差约 $-0.368I_0R_0$。$Q \to \infty$ 时峰值电压偏差趋向 $-I_0R_0$。
+
+## 9.5 稳压器设计
+
+现在考虑如何设计稳压器系统以满足关于扰动抑制、暂态响应和稳定性的技术指标或设计目标。典型直流稳压器设计用如下技术指标定义：
+
+1. **负载电流变化对输出电压调节的影响**。负载电流按预定方式变化时输出电压必须保持在指定范围内。这相当于对式 (9.6) 闭环输出阻抗的最大幅值施加限制，重复如下
+
+$$\left.\frac{\hat{v}(s)}{-\hat{i}_{load}(s)}\right|_{\hat{v}_g=0,\,\hat{v}_{ref}=0} = \frac{Z_{out}(s)}{1+T(s)} \tag{9.51}$$
+
+若在某频率范围内开环输出阻抗 $Z_{out}$ 幅值超过限值，则环路增益 $T$ 必须在相同频率范围内幅值足够大，使式 (9.51) 给出的闭环输出阻抗幅值小于给定限值。
+
+2. **输入电压变化（例如在交流电网频率二次谐波处）对输出电压调节的影响**。通常对输出电压在交流电网频率二次谐波（120 Hz 或 100 Hz）处变化的幅值施加具体最大限值。若已知变换器输入处整流电压纹波幅值（作为 $\hat{v}_g$），则可用式 (9.5) 的闭环输入-输出传递函数计算所得输出电压纹波（$\hat{v}$ 中），重复如下
+
+$$\left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{v}_{ref}=0,\,\hat{i}_{load}=0} = \frac{G_{vg}(s)}{1+T(s)} \tag{9.52}$$
+
+增大纹波频率处的环路增益幅值可减小输出电压纹波。典型良好设计中 120 Hz 处 $\|T\|$ 为 20 dB 或更大，使式 (9.52) 的传递函数比开环输入-输出传递函数 $\|G_{vg}\|$ 小至少一个数量级。
+
+3. **暂态响应时间**。当发生指定的大扰动（如负载电流或输入电压的大阶跃变化）时，输出电压可能经历暂态。此暂态期间输出电压通常偏离其指定允许范围。最终反馈环路工作使输出电压回到容差范围内。所需时间即暂态响应时间；通常增大反馈环路穿越频率可缩短响应时间。
+
+4. **超调和振铃**。如 9.4.4 节所述，暂态响应中允许的超调和振铃量可能受限。此技术指标意味着相位裕度必须足够大。
+
+这些要求各自对环路增益 $T(s)$ 施加约束。因此控制系统设计涉及修改环路增益。如图9.2所示，为此加入补偿网络。下面讨论几种知名的补偿器传递函数 $G_c(s)$ 设计策略。
+
+### 9.5.1 超前（PD）补偿器
+
+此类补偿器传递函数用于改善相位裕度。在足够低于穿越频率 $f_c$ 的频率 $f_z$ 处向环路增益加入零点，使 $T(s)$ 的相位裕度增大所需量。超前补偿器也称比例-微分或 PD 控制器——高频下零点使补偿器对误差信号微分。它常用于原本含双极点响应的系统。用此类补偿器可在保持可接受相位裕度的同时扩展反馈环路带宽（即穿越频率 $f_c$）。
+
+![源页 p.389](../assets/page-snapshots/chapter-9/page-389.png)
+
+图9.28 式 (9.53) PD 补偿器传递函数 $G_c$ 的幅值和相位渐近线
+
+零点的一个副作用是使补偿器增益随频率以 +20 dB/十倍频程斜率增大。故须采取措施确保 $\|T\|$ 在所需穿越频率处保持为 1。此外，由于任何实际放大器的增益在高频必趋向零，补偿器传递函数 $G_c(s)$ 须含高频极点。这些极点还有衰减高频噪声的有益效果。特别关注的是输出电压和反馈信号中的开关频率谐波。若补偿器在开关频率处增益过大，则这些开关谐波被补偿器放大，可扰乱脉宽调制器的工作（见 7.3 节）。故补偿网络应含频率低于开关频率的极点。这些考虑通常将穿越频率 $f_c$ 限制在约变换器开关频率 $f_s$ 的 10% 以下。此外，电路设计者须注意不超过可用运算放大器的增益-带宽极限。
+
+故超前补偿器的传递函数含一个低频零点和若干高频极点。含单个高频极点的简化示例如式 (9.53) 所示并绘于图9.28。
+
+$$G_c(s) = G_{c0}\frac{\left(1+\dfrac{s}{\omega_z}\right)}{\left(1+\dfrac{s}{\omega_p}\right)} \tag{9.53}$$
+
+最大相位出现在极点和零点频率的几何平均给出的频率 $f_{\phi\text{max}}$ 处：
+
+$$f_{\phi\text{max}} = \sqrt{f_z f_p} \tag{9.54}$$
+
+为获得相位裕度的最大改善，应设计补偿器使频率 $f_{\phi\text{max}}$ 与环路增益穿越频率 $f_c$ 重合。此频率处的相位值可证为
+
+$$\angle G_c\!\left(f_{\phi\text{max}}\right) = \tan^{-1}\!\left(\frac{1}{2}\sqrt{\frac{f_p}{f_z}} - \frac{1}{2}\sqrt{\frac{f_z}{f_p}}\right) \tag{9.55}$$
+
+![源页 p.390](../assets/page-snapshots/chapter-9/page-390.png)
+
+图9.29 超前补偿器最大相位超前 $\theta$ 对频率比 $f_p/f_z$ 的关系
+
+此方程绘于图9.29。式 (9.55) 可反演得
+
+$$\frac{f_p}{f_z} = \frac{1+\sin(\theta)}{1-\sin(\theta)} \tag{9.56}$$
+
+其中 $\theta = \angle G_c(f_{\phi\text{max}})$。式 (9.55) 和 (9.53) 意味着，为在频率 $f_c$ 处最优获得补偿器相位超前 $\theta$，极点和零点频率应选择如下：
+
+$$f_z = f_c\sqrt{\frac{1-\sin(\theta)}{1+\sin(\theta)}}, \quad f_p = f_c\sqrt{\frac{1+\sin(\theta)}{1-\sin(\theta)}} \tag{9.57}$$
+
+希望不改变穿越频率时，选择补偿器增益在环路增益穿越频率 $f_c$ 处幅值为 1。这要求 $G_{c0}$ 按如下公式选择：
+
+$$G_{c0} = \sqrt{\frac{f_z}{f_p}} \tag{9.58}$$
+
+可见 $G_{c0}$ 小于 1，故超前补偿器减小反馈环路的直流增益。希望移动穿越频率 $f_c$ 时可选其他 $G_{c0}$；例如增大 $G_{c0}$ 使穿越频率增大。若 $f_p$ 和 $f_z$ 按式 (9.57) 选择，则式 (9.53) 的 $f_{\phi\text{max}}$ 与新穿越频率 $f_c$ 重合。
+
+![源页 p.391](../assets/page-snapshots/chapter-9/page-391.png)
+
+图9.30 用超前（PD）补偿器补偿含两个极点的环路增益。相位裕度 $\phi_m$ 得到改善
+
+含两个极点的典型环路增益 $T(s)$ 波特图如图9.30所示。原始 $T(s)$ 的相位裕度小，因为穿越频率 $f_c$ 显著大于极点频率 $f_0$。加入超前补偿器的结果也如图所示。此例的超前补偿器设计为保持相同穿越频率但改善相位裕度。
+
+### 9.5.2 滞后（PI）补偿器
+
+此类补偿器用于增大低频环路增益，使输出在直流和远低于环路穿越频率的频率处得到更好调节。如式 (9.59) 所示并绘于图9.31，在频率 $f_L$ 处向环路增益加入反演零点。
+
+$$G_c(s) = G_{c\infty}\left(1+\frac{\omega_L}{s}\right) \tag{9.59}$$
+
+![源页 p.392](../assets/page-snapshots/chapter-9/page-392.png)
+
+图9.31 式 (9.59) PI 补偿器传递函数 $G_c$ 的幅值和相位渐近线
+
+若 $f_L$ 足够低于环路穿越频率 $f_c$，则相位裕度不变。此类补偿器也称比例-积分或 PI 控制器。低频下反演零点使补偿器对误差信号积分。在补偿器增益可在直流任意大的范围内，直流环路增益 $T(0)$ 变得任意大。这使误差信号的直流分量趋向零。结果稳态输出电压被完美调节，扰动-输出传递函数在直流处趋向零。此行为在实践中用常规运算放大器实现式 (9.59) 的补偿器即可轻易获得。
+
+虽然 PI 补偿器在几乎所有类型的反馈系统中都有用，但对原本含单极点的系统特别简单有效。图9.32 的示例中，原始未补偿环路增益形式为
+
+$$T_u(s) = T_{u0}\frac{1}{1+\dfrac{s}{\omega_0}} \tag{9.60}$$
+
+用式 (9.59) 的补偿器传递函数，故补偿后环路增益为 $T(s) = T_u(s)G_c(s)$。$T(s)$ 的幅值和相位渐近线也如图9.32所示。选择补偿器高频增益 $G_{c\infty}$ 以获得所需穿越频率
+
+![源页 p.392](../assets/page-snapshots/chapter-9/page-392.png)
+
+图9.32 用滞后（PI）补偿器补偿含单极点的环路增益。环路增益幅值增大
+
+$f_c$。若用高频渐近线近似补偿后环路增益，则高频处可写
+
+$$\|T\| \approx T_{u0}G_{c\infty}\left(\frac{f}{f_0}\right) \tag{9.61}$$
+
+穿越频率 $f = f_c$ 处环路增益幅值为 1。式 (9.61) 预测穿越频率为
+
+$$f_c \approx T_{u0}G_{c\infty} f_0 \tag{9.62}$$
+
+故为获得所需穿越频率 $f_c$，应按如下选择补偿器增益 $G_{c\infty}$：
+
+$$G_{c\infty} = \frac{f_c}{T_{u0} f_0} \tag{9.63}$$
+
+然后选择转折频率 $f_L$ 足够低于 $f_c$，以保持足够相位裕度。
+
+量 $1/(1+T(s))$ 的幅值渐近线构造于图9.33。$f_L$ 以下频率处 PI 补偿器改善扰动抑制。直流处 $G_c$ 幅值趋向无穷时 $1/(1+T)$ 幅值趋向零。故闭环扰动-输出传递函数（如式 (9.51) 和 (9.52)）在直流处趋向零。
+
+![源页 p.393](../assets/page-snapshots/chapter-9/page-393.png)
+
+图9.33 PI 补偿示例（图9.32）$\|1/(1+T)\|$ 的构造
+
+### 9.5.3 组合（PID）补偿器
+
+超前和滞后补偿器的优点可组合，以同时获得宽带宽和零稳态误差。低频下补偿器对误差信号积分，导致大低频环路增益和输出电压低频分量的精确调节。高频下（穿越频率附近）补偿器向环路增益引入相位超前，改善相位裕度。此类补偿器有时称 PID 控制器。
+
+实际版本此补偿器的典型波特图如图9.34所示。补偿器传递函数为
+
+$$G_c(s) = G_{cm}\frac{\left(1+\dfrac{\omega_L}{s}\right)\left(1+\dfrac{s}{\omega_z}\right)}{\left(1+\dfrac{s}{\omega_{p1}}\right)\left(1+\dfrac{s}{\omega_{p2}}\right)} \tag{9.64}$$
+
+![源页 p.394](../assets/page-snapshots/chapter-9/page-394.png)
+
+图9.34 组合（PID）补偿器传递函数 $G_c$ [式 (9.64)] 的幅值和相位渐近线
+
+$f_L$ 处的反演零点功能与 PI 补偿器相同。$f_z$ 处的零点在穿越频率附近加入相位超前，如 PD 补偿器。$f_{p1}$ 和 $f_{p2}$ 处的高频极点在实际补偿器中必须存在，使增益在高频滚降并防止开关纹波扰乱脉宽调制器工作。环路增益穿越频率 $f_c$ 选择大于 $f_L$ 和 $f_z$ 但小于 $f_{p1}$ 和 $f_{p2}$。
+
+### 9.5.4 设计示例
+
+为说明 PI 和 PD 补偿器的设计，考虑为图9.35 的直流-直流降压变换器系统设计组合 PID 补偿器。此系统输入电压 $v_g(t)$ 标称值 28 V。希望向 5 A 负载提供调节的 15 V。负载在此用 3 Ω 电阻建模。有精密 5 V 参考可用。
+
+第一步是选择反馈增益 $H(s)$。选择 $H$ 使稳压器产生调节的 15 V 直流输出。设我们将成功设计良好反馈系统使输出电压精确跟随参考电压。这通过大环路增益 $T$ 实现，导致小误差电压：$v_e \approx 0$。故 $Hv \approx v_{ref}$。故应选择
+
+$$H = \frac{V_{ref}}{V} = \frac{5}{15} = \frac{1}{3} \tag{9.65}$$
+
+静态占空比由变换器稳态解给出：
+
+$$D = \frac{V}{V_g} = \frac{15}{28} = 0.536 \tag{9.66}$$
+
+控制电压静态值 $V_c$ 须满足式 (7.85)。故
+
+$$V_c = DV_M = 2.14\text{ V} \tag{9.67}$$
+
+故系统静态条件已知。剩下设计补偿器增益 $G_c(s)$。
+
+![源页 p.395](../assets/page-snapshots/chapter-9/page-395.png)
+
+图9.35 设计示例
+
+![源页 p.395](../assets/page-snapshots/chapter-9/page-395.png)
+
+图9.36 设计示例的系统小信号交流模型
+
+稳压器系统的小信号交流模型如图9.36所示。降压变换器交流模型以规范形式表示。建模了输入电压和负载电流中的扰动。为通用性，图中含参考电压变化 $\hat{v}_{ref}$；直流电压稳压器中这些变化通常为零。
+
+开环变换器传递函数在前几章讨论。开环控制-输出传递函数为
+
+$$G_{vd}(s) = \frac{V}{D}\frac{1}{1+s\dfrac{L}{R}+s^2LC} \tag{9.68}$$
+
+开环控制-输出传递函数含两个极点，可写成如下归一化形式：
+
+$$G_{vd}(s) = \frac{G_{d0}}{1+\dfrac{s}{Q_0\omega_0}+\left(\dfrac{s}{\omega_0}\right)^2} \tag{9.69}$$
+
+令式 (9.68) 和 (9.69) 的同类系数相等得直流增益、转折频率和 Q 因子为
+
+$$G_{d0} = \frac{V}{D} = 28\text{ V}, \quad f_0 = \frac{\omega_0}{2\pi} = \frac{1}{2\pi\sqrt{LC}} = 1\text{ kHz}, \quad Q_0 = R\sqrt{\frac{C}{L}} = 9.5 \Rightarrow 19.5\text{ dB} \tag{9.70}$$
+
+实际中，寄生损耗元件（如电容等效串联电阻 esr）会导致观察到更低的 Q 因子。图9.37 含 $G_{vd}(s)$ 的波特图。
+
+![源页 p.396](../assets/page-snapshots/chapter-9/page-396.png)
+
+图9.37 设计示例的变换器小信号控制-输出传递函数 $G_{vd}$
+
+开环输入-输出传递函数为
+
+$$G_{vg}(s) = D\frac{1}{1+s\dfrac{L}{R}+s^2LC} \tag{9.71}$$
+
+此传递函数含与 $G_{vd}(s)$ 相同的极点，可写成归一化形式
+
+$$G_{vg}(s) = \frac{G_{g0}}{1+\dfrac{s}{Q_0\omega_0}+\left(\dfrac{s}{\omega_0}\right)^2} \tag{9.72}$$
+
+$G_{g0} = D$。降压变换器的开环输出阻抗为
+
+$$Z_{out}(s) = R\,\|\,\frac{1}{sC}\,\|\,sL = \frac{sL}{1+s\dfrac{L}{R}+s^2LC} \tag{9.73}$$
+
+用这些方程以框图形式表示变换器得图9.38 的完整系统框图。系统的环路增益为
+
+$$T(s) = G_c(s)\!\left(\frac{1}{V_M}\right)\!G_{vd}(s)H(s) \tag{9.74}$$
+
+将式 (9.69) 代入式 (9.74) 得
+
+$$T(s) = \left(G_c(s)\frac{H(s)}{V_M}\right)\!\left(\frac{V}{D}\right)\frac{1}{\left(1+\dfrac{s}{Q_0\omega_0}+\left(\dfrac{s}{\omega_0}\right)^2\right)} \tag{9.75}$$
+
+闭环扰动-输出传递函数由式 (9.5) 和 (9.6) 给出。
+
+![源页 p.397](../assets/page-snapshots/chapter-9/page-397.png)
+
+图9.38 设计示例的系统框图

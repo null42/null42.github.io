@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第7章part 3 - 7 AC Equivalent Circuit Modeling"
+title: "第7章 交流等效电路建模（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1274 +18,483 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第7章part 3 - 7 AC Equivalent Circuit Modeling
+# 第7章 交流等效电路建模（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 267-286  
-> Chunk ID: `chapter-7-part-3`
+> 源页：267–286
+> 本部分续接 7.5 状态空间平均，涵盖 7.5.2–7.5.5、7.6 关键要点小结和习题 7.1–7.12。
 
-## 主干提取
+## 7.5 状态空间平均（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 7.5.2 基本状态空间平均模型
 
-## 术语表
+现在考虑一个工作于连续导通模式的脉宽调制变换器。变换器电路含构成状态向量 $\mathbf{x}(t)$ 的独立状态，并由构成输入向量 $\mathbf{u}(t)$ 的独立电源驱动。第一子区间内，开关在位置 1，变换器简化为线性电路，可用如下状态方程描述：
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+$$\begin{aligned} \mathbf{K}\frac{d\mathbf{x}(t)}{dt} &= \mathbf{A}_1\mathbf{x}(t) + \mathbf{B}_1\mathbf{u}(t) \\ \mathbf{y}(t) &= \mathbf{C}_1\mathbf{x}(t) + \mathbf{E}_1\mathbf{u}(t) \end{aligned} \tag{7.104}$$
 
-## 中文翻译
+第二子区间内，开关在位置 2，变换器简化为另一线性电路，其状态方程为
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$\begin{aligned} \mathbf{K}\frac{d\mathbf{x}(t)}{dt} &= \mathbf{A}_2\mathbf{x}(t) + \mathbf{B}_2\mathbf{u}(t) \\ \mathbf{y}(t) &= \mathbf{C}_2\mathbf{x}(t) + \mathbf{E}_2\mathbf{u}(t) \end{aligned} \tag{7.105}$$
 
-## 英文原文
+两个子区间内电路元件连接不同，故相应状态方程矩阵 $\mathbf{A}_1, \mathbf{B}_1, \mathbf{C}_1, \mathbf{E}_1$ 和 $\mathbf{A}_2, \mathbf{B}_2, \mathbf{C}_2, \mathbf{E}_2$ 也可能不同。给定这些状态方程，状态空间平均的结果是平衡和小信号交流模型的状态方程。
 
-```text
-7.5 State-Space Averaging 255
-7.5.2 The Basic State-Space Averaged Model
-Consider now that we are given a PWM converter, operating in the continuous conduction
-mode. The converter circuit contains independent states that form the state vector x(t), and
-the converter is driven by independent sources that form the input vector u(t). During the ﬁrst
-subinterval, when the switches are in position 1, the converter reduces to a linear circuit that can
-be described by the following state equations:
-Kdx(t)
-dt = A1x(t)+ B1u(t)
-y(t)= C1x(t)+ E1u(t) (7.104)
-During the second subinterval, with the switches in position 2, the converter reduces to another
-linear circuit whose state equations are
-Kdx(t)
-dt = A2x(t)+ B2u(t) (7.105)
-y(t)= C2x(t)+ E2u(t)
-During the two subintervals, the circuit elements are connected diﬀerently; therefore, the respec-
-tive state equation matrices A1, B1, C1, E1 and A2, B2, C2, E2 may also diﬀer. Given these
-state equations, the result of state-space averaging is the state equations of the equilibrium and
-small-signal ac models.
-Provided that the natural frequencies of the converter, as well as the frequencies of variations
-of the converter inputs, are much slower than the switching frequency, then the state-space
-averaged model that describes the converter in equilibrium is
-0= AX+ BU (7.106)
-Y= CX+ EU
-where the averaged matrices are
-A= DA
-1+ D′A2
-B= DB1+ D′B2
-C= DC1+ D′C2
-E= DE1+ D′E2 (7.107)
-The equilibrium dc components are
-X= equilibrium (dc) state vector
-U= equilibrium (dc) input vector
-Y= equilibrium (dc) output vector
-D= equilibrium (dc) duty cycle (7.108)
-Quantities deﬁned in Eq. (7.108) represent the equilibrium values of the averaged vectors. Equa-
-tion (7.106) can be solved to ﬁnd the equilibrium state and output vectors:
-X=−A−1BU (7.109)
-Y= (−CA−1B+ E)U
+若变换器的自然频率及变换器输入的变化频率均远低于开关频率，则描述平衡态变换器的状态空间平均模型为
 
-256 7 AC Equivalent Circuit Modeling
-The state equations of the small-signal ac model are
-Kdˆx(t)
-dt = Aˆx(t)+ Bˆu(t)+{(A1−A2)X+ (B1−B2)U} ˆd(t) (7.110)
-ˆy(t)= Cˆx(t)+ Eˆu(t)+{(C1−C2)X+ (E1−E2)U} ˆd(t)
-The quantities ˆx(t), ˆu(t), ˆy(t), and ˆd(t)i nE q .(7.110) are small ac variations about the equilibrium
-solution, or quiescent operating point, deﬁned by Eqs. (7.106)t o( 7.109).
-So if we can write the converter state equations, Eqs. ( 7.104) and ( 7.105), then we can
-always ﬁnd the averaged dc and small-signal ac models, by evaluation of Eqs. (7.106)t o( 7.110).
-7.5.3 Discussion of the State-Space Averaging Result
-As in Sects. 7.1 and 7.2, the low-frequency components of the inductor currents and capacitor
-voltages are modeled by averaging over an interval of length Ts. Hence, we can deﬁne the
-average of the state vector x(t)a s
-⟨x(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-x(τ) dτ (7.111)
-The low-frequency components of the input and output vectors are modeled in a similar manner.
-By averaging the inductor voltages and capacitor currents, one then obtains the following low-
-frequency state equation:
-Kd⟨x(t)⟩Ts
-dt = ⎦d(t)A1+ d′(t)A2
-)⟨x(t)⟩Ts + ⎦d(t)B1+ d′(t)B2
-)⟨u(t)⟩Ts (7.112)
-This result is equivalent to Eq. (7.2).
-For example, let us consider how the elements of the state vector x(t) change over one
-switching period. During the ﬁrst subinterval, with the switches in position 1, the converter
-state equations are given by Eq. (7.104). Therefore, the elements of x(t) change with the slopes
-K−1(A1x(t)+B1u(t)). If we make the small ripple approximation, thatx(t) and u(t) do not change
-much over one switching period, then the slopes are essentially constant and are approximately
-equal to
-dx(t)
-dt = K−1 ⎦A1⟨x(t)⟩Ts + B1⟨u(t)⟩Ts
-) (7.113)
-This assumption coincides with the requirements for small switching ripple in all elements of
-x(t) and that variations in u(t) be slow compared to the switching frequency. If we assume that
-the state vector is initially equal to x(0), then we can write
-x(dTs)/bracehext/bracehext
-ﬁnal
-value
-= x(0)
-initial
-value
-+ (dTs)
-interval
-length
-K−1 ⎦A1⟨x(t)⟩Ts + B1⟨u(t)⟩Ts
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-slope
-(7.114)
-Similar arguments apply during the second subinterval. With the switch in position 2, the state
-equations are given by Eq. (7.105). With the assumption of small ripple during this subinterval,
-the state vector now changes with slope
-dx(t)
-dt = K−1 ⎦A2⟨x(t)⟩Ts + B2⟨u(t)⟩Ts
-) (7.115)
+$$\begin{aligned} \mathbf{0} &= \mathbf{A}\mathbf{X} + \mathbf{B}\mathbf{U} \\ \mathbf{Y} &= \mathbf{C}\mathbf{X} + \mathbf{E}\mathbf{U} \end{aligned} \tag{7.106}$$
 
-7.5 State-Space Averaging 257
-K A 1 x Ts
-+ B1 u Ts
-K A 2 x Ts
-+ B2 u Ts
-t
-x(t)
-x(0) x(Ts)
-dTs Ts0
-K dA 1 +d'A 2 x Ts
-+ dB1 +d'B2 u Ts
-x(t) Ts
-Fig. 7.40 How an element of the state vector, and its average, evolve over one switching period
-The state vector at the end of the switching period is
-x(Ts)
-ﬁnal
-value
-= x(dTs)/bracehext/bracehext
-initial
-value
-+ (d′Ts)
-interval
-length
-K−1 ⎦A2⟨x(t)⟩Ts + B2⟨u(t)⟩Ts
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-slope
-(7.116)
-Substitution of Eq. (7.114) into Eq. (7.116) allows us to determine x(Ts) in terms of x(0):
-x(Ts)= x(0)+ dTsK−1 ⎦A1⟨x(t)⟩Ts + B1⟨u(t)⟩Ts
-)+ d′TsK−1 ⎦A2⟨x(t)⟩Ts + B2⟨u(t)⟩Ts
-) (7.117)
-Upon collecting terms, one obtains
-x(Ts)= x(0)+ TsK−1 ⎦d(t)A1+ d′(t)A2
-)⟨x(t)⟩Ts + TsK−1 ⎦d(t)B1+ d′(t)B2
-)⟨u(t)⟩Ts (7.118)
-Next, we approximate the derivative of⟨x(t)⟩TS using the net change over one switching period:
-d⟨x(t)⟩Ts
-dt ≈x(Ts)−x(0)
-Ts
-(7.119)
-Substitution of Eq. (7.118)i n t o(7.119) leads to
-Kd⟨x(t)⟩Ts
-dt = (d(t)A1+ d′(t)A2)⟨x(t)⟩Ts + (d(t)B1+ d′(t)B2)⟨u(t)⟩Ts (7.120)
-which is identical to Eq. (7.113). This is the basic averaged model which describes the converter
-dynamics. It is nonlinear because the control input d(t) is multiplied by ⟨x(t)⟩Ts and⟨u(t)⟩Ts .
-Variation of a typical element of x(t) and its average are illustrated in Fig. 7.40.
-It is also desired to ﬁnd the low-frequency components of the output vector y(t) by averag-
-ing. The vector y(t) is described by Eq. (7.104) for the ﬁrst subinterval, and by Eq. ( 7.105)f o r
-the second subinterval. Hence, the elements of y(t) may be discontinuous at the switching tran-
-sitions, as illustrated in Fig. 7.41. We can again remove the switching harmonics by averaging
-over one switching period; the result is
-⟨y(t)⟩Ts = d(t) ⎦C1⟨x(t)⟩Ts + E1⟨u(t)⟩Ts
-)+ d′(t) ⎦C2⟨x(t)⟩Ts + E2⟨u(t)⟩Ts
-) (7.121)
-Rearrangement of terms yields
-⟨y(t)⟩Ts = ⎦d(t)C1+ d′(t)C2
-)⟨x(t)⟩Ts + ⎦d(t)E1+ d′(t)E2
-)⟨u(t)⟩Ts (7.122)
+其中平均矩阵为
 
-258 7 AC Equivalent Circuit Modeling
-t
-y(t)
-dTs Ts
-0
-0
-C1 x(t) Ts
-+ E1 u(t) Ts
-C2 x(t) Ts
-+ E2 u(t) Ts
-y(t) Ts
-Fig. 7.41 Averaging an element of the output vector y(t)
-This is again a nonlinear equation.
-The averaged state equations, (7.120) and (7.122), are collected below:
-Kd⟨x(t)⟩TS
-dt = (d(t)A1+ d′(t)A2)⟨x(t)⟩Ts + (d(t)B1+ d′(t)B2)⟨u(t)⟩Ts (7.123)
-⟨y(t)⟩Ts = (d(t)C1+ d′(t)C2)⟨x(t)⟩Ts + (d(t)E1+ d′(t)E2)⟨u(t)⟩Ts
-The next step is the linearization of these equations about a quiescent operating point, to con-
-struct a small-signal ac model. When dc inputs d(t)= D and u(t)= U are applied, converter
-operates in equilibrium when the derivatives of all of the elements of ⟨x(t)⟩Ts are zero. Hence,
-by setting the derivative of⟨x(t)⟩Ts to zero in Eq. (7.123), we can deﬁne the converter quiescent
-operating point as the solution of
-0= AX+ BU (7.124)
-Y= CX+ EU
-where deﬁnitions ( 7.107) and ( 7.108) have been used. We now perturb and linearize the con-
-verter waveforms about this quiescent operating point:
-⟨x(t)⟩Ts = X+ ˆx(t)
-⟨u(t)⟩Ts = U+ ˆu(t) (7.125)
-⟨y(t)⟩Ts = Y+ ˆy(t)
-d(t)= D+ ˆd(t)⇒d′(t)= D′−ˆd(t)
-Here, ˆu(t) and ˆd(t) are small ac variations in the input vector and duty ratio. The vectors ˆx(t)
-and ˆy(t) are the resulting small ac variations in the state and output vectors. We must assume
-that these ac variations are much smaller than the quiescent values. In other words,
-∥U∥≫∥ ˆu(t)∥
-D≫| ˆd(t)|
-∥X∥≫∥ ˆx(t)∥
-∥Y∥≫∥ ˆy(t)∥ (7.126)
-Here,∥x∥ denotes a norm of the vector x.
+$$\begin{aligned} \mathbf{A} &= D\mathbf{A}_1 + D'\mathbf{A}_2 \\ \mathbf{B} &= D\mathbf{B}_1 + D'\mathbf{B}_2 \\ \mathbf{C} &= D\mathbf{C}_1 + D'\mathbf{C}_2 \\ \mathbf{E} &= D\mathbf{E}_1 + D'\mathbf{E}_2 \end{aligned} \tag{7.107}$$
 
-7.5 State-Space Averaging 259
-Substitution of Eq. (7.125) into Eq. (7.123) yields
-Kd(X+ ˆx(t))
-dt =
-⎦
-(D+ ˆd(t))A1+
-⎦
-D′−ˆd(t)
-)
-A2
-)
-(X+ ˆx(t))
-+
-⎦
-(D+ ˆd(t))B1+ (D′−ˆd(t))B2
-)
-(U+ ˆu(t))
-(7.127)
-(Y+ ˆy(t))=
-⎦
-(D+ ˆd(t))C1+ (D′−ˆd(t))C2
-)
-(X+ ˆx(t))
-+
-⎦
-(D+ ˆd(t))E1+ (D′−ˆd(t))E2
-)
-(U+ ˆu(t))
-The derivative dX/dt is zero. By collecting terms, one obtains
-Kdˆx(t)
-dt/bracehext/bracehext/bracehext/bracehext
-ﬁrst order ac
-= (AX+ BU)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-dc terms
-+ Aˆx(t)+ Bˆu(t)+{(A1−A2)X+ (B1−B2)U} ˆd(t)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-ﬁrst-order ac terms
-+ (A1−A2)ˆx(t) ˆd(t)+ (B1−B2)ˆu(t) ˆd(t)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-second-order nonlinear terms
-(7.128)
-(Y+ ˆy(t))/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-dc+1storder ac
-= (CX+ EU)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-dc terms
-+ Cˆx(t)+ Eˆu(t)+{(C1−C2)X+ (E1−E2)U} ˆd(t)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-ﬁrst-order ac terms
-+ (C1−C2)ˆx(t) ˆd(t)+ (E1−E2)ˆu(t) ˆd(t)/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-second-order nonlinear terms
-Since the dc terms satisfy Eq. ( 7.124), they drop out of Eq. ( 7.128). Also, if the small-signal
-assumption (7.126) is satisﬁed, then the second-order nonlinear terms of Eq. ( 7.128) are small
-in magnitude compared to the ﬁrst-order ac terms. We can therefore neglect the nonlinear terms,
-to obtain the following linearized ac model:
-Kdˆx(t)
-dt = Aˆx(t)+ Bˆu(t)+{(A1−A2)X+ (B1−B2)U} ˆd(t) (7.129)
-ˆy(t)= Cˆx(t)+ Eˆu(t)+{(C1−C2)X+ (E1−E2)U} ˆd(t)
-This is the desired result, which coincides with Eq. (7.109).
-7.5.4 Example: State-Space Averaging of a Nonideal Buck-Boost Converter
-Let us apply the state-space averaging method to model the buck–boost converter of Fig. 7.42.
-We will model the conduction loss of MOSFET Q1 by on-resistance Ron, and the forward volt-
-age drop of diode D1 by an independent voltage source of value VD. It is desired to obtain a
-complete equivalent circuit, which models both the input port and the output port of the con-
-verter.
-The independent states of the converter are the inductor currenti(t) and the capacitor voltage
-v(t). Therefore, we should deﬁne the state vector x(t)a s
-x(t)=
-[i(t)
-v(t)
-]
-(7.130)
+平衡直流分量为
 
-260 7 AC Equivalent Circuit Modeling
-+ LC R
-+
-v(t)vg(t)
-Q1 D1
-i(t)
-ig(t)
-Fig. 7.42 Buck–boost converter example
-The input voltage vg(t) is an independent source which should be placed in the input vector
-u(t). In addition, we have chosen to model the diode forward voltage drop with an independent
-voltage source of value VD. So this voltage source should also be included in the input vector
-u(t). Therefore, let us deﬁne the input vector as
-u(t)=
-[vg(t)
-VD
-]
-(7.131)
-To model the converter input port, we need to ﬁnd the converter input currentig(t). To calculate
-this dependent current, it should be included in the output vector y(t). Therefore, let us choose
-to deﬁne y(t)a s
-y(t)= [ig(t)] (7.132)
-Note that it is not necessary to include the output voltagev(t) in the output vector y(t), since v(t)
-is already included in the state vector x(t).
-Next, let us write the state equations for each subinterval. When the switch is in position
-1, the converter circuit of Fig. 7.43a is obtained. The inductor voltage, capacitor current, and
-converter input current are
-Ldi(t)
-dt = vg(t)−i(t)Ron
-C dv(t)
-dt =−v(t)
-R
-ig(t)= i(t)
-(7.133)
-These equations can be written in the following state-space form:
-[L 0
-0 C
-]
-
-d
-dt
-[i(t)
-v(t)
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-=
-⎡⎢⎢⎢⎢⎢⎢⎣
-−Ron 0
-0 −1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[i(t)
-v(t)
-]
-
-+
-[10
-00
-]
-
-[vg(t)
-VD
-]
-
-K dx(t)
-dt A1 x(t) B1 u(t)
-[
-ig(t)
-]
-
-=
-[
-10
-]
-
-[i(t)
-v(t)
-]
-
-+
-[
-00
-]
-
-[vg(t)
-VD
-]
-
-y(t) C1 x(t) E1 u(t)
-(7.134)
-So we have identiﬁed the state equation matrices A1, B1, C1, and E1.
+$$\begin{aligned} \mathbf{X} &= \text{平衡（直流）状态向量} \\ \mathbf{U} &= \text{平衡（直流）输入向量} \\ \mathbf{Y} &= \text{平衡（直流）输出向量} \\ D &= \text{平衡（直流）占空比} \end{aligned} \tag{7.108}$$
 
-7.5 State-Space Averaging 261
-(a)
-+ LC R
-+
-v(t)
-i(t)
-vg(t)
-Ronig(t)
-(b)
-+ LC R
-+
-v(t)
-i(t)
-vg(t)
-+
-VD
-ig(t)
-Fig. 7.43 Buck–boost converter circuit: (a) during subinterval 1, (b) during subinterval 2
-With the switch in position 2, the converter circuit of Fig. 7.43b is obtained. For this subin-
-terval, the inductor voltage, capacitor current, and converter input current are given by
-Ldi(t)
-dt = v(t)−VD
-C dv(t)
-dt =−v(t)
-R −i(t) (7.135)
-ig(t)= 0
-When written in state-space form, these equations become
-[L 0
-0 C
-]
-
-d
-dt
-[i(t)
-v(t)
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-=
-⎡⎢⎢⎢⎢⎢⎢⎣
-01
-−1−1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[i(t)
-v(t)
-]
-
-+
-[0−1
-00
-]
-/bracehext/bracehext
-[vg(t)
-VD
-]
-
-K dx(t)
-dt A2 x(t) B2 u(t)
-[
-ig(t)
-]
-
-=
-[
-00
-]
-
-[i(t)
-v(t)
-]
-
-+
-[
-00
-]
-
-[vg(t)
-VD
-]
-
-y(t) C2 x(t) E2 u(t)
-(7.136)
-So we have also identiﬁed the subinterval 2 matrices A2, B2, C2, and E2.
+式 (7.108) 定义的量表示平均向量的平衡值。式 (7.106) 可解出平衡状态和输出向量：
 
-262 7 AC Equivalent Circuit Modeling
-The next step is to evaluate the state-space averaged equilibrium equations (7.106)t o( 7.108).
-The averaged matrix A is
-A= DA1+ D′A2= D
-⎡⎢⎢⎢⎢⎢⎢⎣
-−Ron 0
-0 −1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦+ D′
-⎡⎢⎢⎢⎢⎢⎢⎣
-01
-−1−1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦=
-⎡⎢⎢⎢⎢⎢⎢⎣
-−DRon D′
-−D′ −1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦ (7.137)
-In a similar manner, the averaged matrices B, C, and E are evaluated, with the following
-results:
-B= DB1+ D′B2=
-[D−D′
-00
-]
-C= DC1+ D′C2=
-[
-D 0
-]
-E= DE1+ D′E2=
-[
-00
-]
-(7.138)
-The dc state equations (7.106) therefore become
-[0
-0
-]
-=
-⎡⎢⎢
-⎢⎢⎢⎢⎣
-−DR
-on D′
-−D′ −1
-R
-⎤⎥⎥
-⎥⎥⎥⎥⎦
-[I
-V
-]
-+
-[D−D
-′
-00
-][Vg
-VD
-]
-[
-Ig
-]
-=
-[
-D 0
-] [I
-V
-]
-+
-[
-00
-] [Vg
-VD
-] (7.139)
-Evaluation of Eq. (7.109) leads to the following solution for the equilibrium state and output
-vectors:
-[I
-V
-]
-=
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1
-1+ D
-D′2
-Ron
-R
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-D
-D′2R
-1
-D′R
-−D
-D′ 1
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-[Vg
-VD
-]
-[
-Ig
-]
-=
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1
-1+ D
-D′2
-Ron
-R
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-[
-D2
-D′2R
-1
-D′R
-][Vg
-VD
-]
-(7.140)
-Alternatively, the steady-state equivalent circuit of Fig.7.44 can be constructed as usual from Eq.
-(7.139). The top row of Eq. (7.139) could have been obtained by application of the principle of
-inductor volt-second balance to the inductor voltage waveform. The second row of Eq. ( 7.139)
-could have been obtained by application of the principle of capacitor charge balance to the
-capacitor current waveform. The i
-g(t) equation expresses the dc component of the converter
-input current. By reconstructing circuits that are equivalent to these three equations, the dc
-model of Fig. 7.44 is obtained.
+$$\mathbf{X} = -\mathbf{A}^{-1}\mathbf{B}\mathbf{U} \qquad \mathbf{Y} = (-\mathbf{C}\mathbf{A}^{-1}\mathbf{B} + \mathbf{E})\mathbf{U} \tag{7.109}$$
 
-7.5 State-Space Averaging 263
-+
-+
-Vg
-Ig I
-R
-1 : D D' : 1
-DRon D'VD
-+
-V
-Fig. 7.44 Dc circuit model for the buck–boost converter model, equivalent to Eq. (7.139)
-The small-signal model is found by evaluation of Eq. (7.109). The vector coeﬃcients of ˆd(t)
-in Eq. (7.109)a r e
-(A1−A2) X+ (B1−B2) U=
-[−V−IRon
-I
-]
-+
-[Vg+ VD
-0
-]
-=
-[Vg−V−IRon+ VD
-I
-]
-(C1−C2) X+ (E1−E2) U= [I] (7.141)
-The small-signal ac state equations (7.109) therefore become
-[L 0
-0 C
-]d
-dt
-[ˆi(t)
-ˆv(t)
-]
-=
-⎡⎢⎢⎢⎢⎢⎢⎣
-−DRon D′
-−D′ −1
-R
-⎤⎥⎥⎥⎥⎥⎥⎦
-[ˆi(t)
-ˆv(t)
-]
-+
-[D−D′
-00
-][ˆvg(t)
-0
-]
-+
-[Vg−V−IRon+ VD
-I
-]
-ˆd(t)
-[ˆig(t)
-]
-=
-[
-D 0
-][ˆi(t)
-ˆv(t)
-]
-+
-[
-00
-][ˆvg(t)
-0
-]
-+ [I]ˆd(t)
-(7.142)
-Note that, since the diode forward voltage drop is modeled as the constant value VD, there
-are no ac variations in this source, and ˆvD(t) equals zero. Again, a circuit model equivalent to
-Eq. (7.142) can be constructed, in the usual manner. When written in scalar form, Eq. ( 7.142)
-becomes
-Ldˆi(t)
-dt = D′ ˆv(t)−DRonˆi(t)+ Dˆvg(t)+
-⎦
-Vg−V−IRon+ VD
-) ˆd(t)
-C dˆv(t)
-dt =−D′ˆi(t)−ˆv(t)
-R + I ˆd(t)
-ˆig(t)= Dˆi(t)+ I ˆd(t)
-(7.143)
-Circuits corresponding to these equations are listed in Fig.7.45. These circuits can be combined
-into the complete small-signal ac equivalent circuit model of Fig.7.46.
+小信号交流模型的状态方程为
 
-264 7 AC Equivalent Circuit Modeling
-Fig. 7.45 Circuits equivalent to the small-signal converter equations: ( a) inductor loop, ( b) capacitor
-node, (c) input port
-Fig. 7.46 Complete small-signal ac equivalent circuit model, nonideal buck–boost converter example
-7.5.5 Example: State-Space Averaging of a Boost Converter with ESR
-As a ﬁnal example, let us employ the state-space averaging method to derive the model of the
-nonideal boost converter of Fig.7.47. This circuit includes a resistor RC that models the capaci-
-tor equivalent series resistance; the dashed line encloses the capacitor model including an ideal
-capacitor C and ESR RC. Students often experience diﬃculty in deriving the averaged equations
+$$\begin{aligned} \mathbf{K}\frac{d\hat{\mathbf{x}}(t)}{dt} &= \mathbf{A}\hat{\mathbf{x}}(t) + \mathbf{B}\hat{\mathbf{u}}(t) + \{(\mathbf{A}_1 - \mathbf{A}_2)\mathbf{X} + (\mathbf{B}_1 - \mathbf{B}_2)\mathbf{U}\}\hat{d}(t) \\ \hat{\mathbf{y}}(t) &= \mathbf{C}\hat{\mathbf{x}}(t) + \mathbf{E}\hat{\mathbf{u}}(t) + \{(\mathbf{C}_1 - \mathbf{C}_2)\mathbf{X} + (\mathbf{E}_1 - \mathbf{E}_2)\mathbf{U}\}\hat{d}(t) \end{aligned} \tag{7.110}$$
 
-7.5 State-Space Averaging 265
-+ Q1
-L
-C R
-+
-v(t)
-D1
-vg
-iL(t)
-RC +
-vC(t)
-Fig. 7.47 Boost converter circuit, including capacitor equivalent series resistance RC
-v(t)
-tdTs Ts0
-i R||RC
-Fig. 7.48 The capacitor ESR causes the output voltage waveform v(t) to become discontinuous
-of this circuit, and the state-space averaging method provides a framework for correctly deriv-
-ing the averaged model. With the exception of the capacitor ESR, we will model all elements
-as ideal.
-As illustrated in Fig. 7.48, the capacitor ESR causes the output voltagev(t) to be discontinu-
-ous. When the diode conducts, the inductor current causes the output voltage to be greater by an
-amount iL(t) R∥RC and so the voltage exhibits a discontinuity during the switching times. Hence,
-we must be careful not to attempt to apply the small-ripple approximation to the output voltage
-v(t). On the other hand, the voltage vC(t) of the ideal capacitor portion of the capacitor model is
-continuous and exhibits small ripple.
-The independent states of this circuit are the inductor current iL(t) and the capacitor voltage
-vC(t). Note that vC(t) is deﬁned as the voltage across the ideal capacitor portion of the capacitor
-model. The state vector x(t) is therefore deﬁned as
-x(t)=
-[iL(t)
-vC(t)
-]
-(7.144)
-The input voltage vg(t) is an independent source which should be placed in the input vectoru(t).
-We have chosen to model no other independent sources. Therefore, let us deﬁne the input vector
-as
-u(t)=
-[
-vg(t)
-]
-(7.145)
-To model the converter input port, we need to ﬁnd the converter input currentig(t). For the boost
-converter, the input current ig(t) coincides with the inductor current iL(t). Since iL(t) is already
-in the state vector x(t), no additional information is gained by inclusion of ig(t) in the output
-vector. On the other hand, to model the output port, we must write an equation for the output
-voltage v(t). Since the actual output voltage v(t) no longer coincides with the capacitor state
+式 (7.110) 中的量 $\hat{\mathbf{x}}(t)$、$\hat{\mathbf{u}}(t)$、$\hat{\mathbf{y}}(t)$ 和 $\hat{d}(t)$ 是绕式 (7.106) 至 (7.109) 定义的平衡解（静态工作点）的小交流变化。
 
-266 7 AC Equivalent Circuit Modeling
-(a)
-+vg
-LiL(t)
-RC
-C
-R
-+
-v(t)
-+
-vC(t)
-+vL(t) +vL(t) 
-iC(t)
-(b)
-+vg
-LiL(t)
-RC
-C
-R
-+
-v(t)
-+
-vC(t)
-iC(t)
-Fig. 7.49 Boost with ESR converter circuit: (a) during subinterval 1, (b) during subinterval 2
-vC(t), we must write additional equations that can be solved for the averaged output voltage.
-Therefore v(t) must be included in the output vector. Hence, let us choose to deﬁne y(t)a s
-y(t)=
-[
-v(t)
-]
-(7.146)
-Thus for this example, the output vector contains only the dependent quantity v(t).
-Next, we will develop the state equations for each subinterval. For the ﬁrst subinterval, the
-MOSFET conducts and the converter circuit reduces to that of Fig. 7.49a. We can express the
-inductor voltage and capacitor current as:
-LdiL(t)
-dt = vg(t)
-C dvC(t)
-dt =−vC(t)
-R+ RC
-(7.147)
-Note that we have been careful to express the capacitor current in terms of the capacitor voltage
-vC(t), rather than the output voltage v(t). This is necessary because the state equations must
-be written as functions of the elements of the independent vectors x(t) and u(t), but not the
-dependent vector y(t).
-For the ﬁrst subinterval, we can express the output quantity also as a function of the elements
-of x(t) and u(t), as follows:
-v(t)= vC(t) R
-R+ RC
-(7.148)
-Again, we have been careful to express v(t) as a function of the capacitor state vC(t).
-We can next write Eqs. (7.147) and (7.148) in matrix form. The result is
-[L 0
-0 C
-]
-
-d
-dt
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-=
-⎡⎢⎢⎢⎢⎢⎢⎢⎣
-00
-0 −1
-R+ RC
-⎤⎥⎥⎥⎥⎥⎥⎥⎦
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext
-+
-[1
-0
-]
-
-[
-vg(t)
-]
-
-K dx(t)
-dt A1 x(t) B1 u(t)
-[
-v(t)
-]
-
-=
-[
-0 R
-R+ RC
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext
-+
-[
-0
-]
-
-[
-vg(t)
-]
-
-y(t) C1 x(t) E1 u(t)
-(7.149)
+故若能写出变换器状态方程 (7.104) 和 (7.105)，则总可通过计算式 (7.106) 至 (7.110) 求得平均直流和小信号交流模型。
 
-7.5 State-Space Averaging 267
-For the second subinterval, the MOSFET is o ﬀand the diode conducts. The circuit of
-Fig. 7.49b is obtained. We can express the inductor voltage and capacitor current as:
-LdiL(t)
-dt = vg(t)−v(t)= vg(t)−vC(t) R
-R+ RC
-−iL(t) R∥RC
-C dvC(t)
-dt = v(t)−vC(t)
-RC
-=−vC(t)
-R+ RC
-+ iL(t) R
-R+ RC
-(7.150)
-In the above equations, it was necessary to eliminate the output voltage v(t), again because the
-state equations must be written as functions of the elements of the independent vectors x(t) and
-u(t), but not the dependent vector y(t). The notation R∥RC denotes the parallel combination of
-R and RC.
-For this subinterval, we can express the output also as a function of the elements ofx(t) and
-u(t), as follows:
-v(t)= vC(t) R
-R+ RC
-+ iL(t) R∥RC (7.151)
-Again, we have been careful to express v(t) as a function of the capacitor state vC(t). We can
-now assemble the above equations to obtain the state-space description of the circuit during the
-second subinterval:
-[L 0
-0 C
-]
-
-d
-dt
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-=
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-−R∥RC −R
-R+ RC
-R
-R+ RC
-−1
-R+ RC
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext
-+
-[1
-0
-]
-
-[
-vg(t)
-]
-
-K dx(t)
-dt A2 x(t) B2 u(t)
-[
-v(t)
-]
-
-=
-[
-R∥RC
-R
-R+ RC
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[iL(t)
-vC(t)
-]
-/bracehext/bracehext
-+
-[
-0
-]
-
-[
-vg(t)
-]
-
-y(t) C2 x(t) E2 u(t)
-(7.152)
-The state-space averaging method predicts that the converter steady-state model is
-[0
-0
-]
-
-=
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-−D′(R∥RC) −D′ R
-R+ RC
-D′ R
-R+ RC
-−1
-R+ RC
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[IL
-VC
-]
-
-+
-[1
-0
-]
-
-[
-Vg
-]
-
-0 DA1+ D′A2 X DB1+ D′B2 U
-[
-V
-]
-
-=
-[
-D′(R∥RC) R
-R+ RC
-]
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-[IL
-VC
-]
-
-+
-[
-0
-]
-
-[
-Vg
-]
-
-Y DC1+ D′C2 X DE1+ D′E2 U
-(7.153)
+### 7.5.3 状态空间平均结果的讨论
 
-268 7 AC Equivalent Circuit Modeling
-(a)
-+Vg
-+D′V
-DD′(R||RC)
-IL
-(b)
-D′IL R
-+
-V
-(c)
-R
-RC
-VC +
-V DIL
-+
-Fig. 7.50 Steps in the construction of the steady-state equivalent circuit for the boost converter with
-capacitor equivalent series resistance: ( a) inductor loop, ( b) output node, ( c) connection of capacitor to
-output node
-Let us construct a steady-state equivalent circuit corresponding to the above equations. The
-output terminal of our converter is the output voltage V, rather than the capacitor voltage VC.
-Therefore, it is helpful to ﬁrst express the above equations in terms of the output voltage V,b y
-using the output equation to eliminate VC. This leads to the following equations:
-0= Vg−D′V−DD′IL (R∥RC) (7.154a)
-0= D′IL−V
-R (7.154b)
-V= VC
-R
-R+ RC
-+ D′IL (R∥RC) (7.154c)
-Equation (7.154a) can be recognized as a voltage loop equation, resulting from volt-second bal-
-ance on the inductor. The current of this loop is the dc inductor current IL. Construction of an
-equivalent circuit corresponding to this equation leads to the network of Fig. 7.50a. Likewise,
-Eq. (7.154b) is the equation of the output node, having voltage V. A corresponding equivalent
-circuit for this equation is shown in Fig. 7.50b. Equation (7.154c) describes how the capacitor
-C and its voltage VC is connected to the output node. We might expect that the ideal capacitor
-element C is connected through the ESR RC to the output node, as it is in the original converter
-circuit of Fig. 7.47. Indeed this is the case: Fig. 7.50c is a circuit corresponding to Eq. (7.154c),
-with the capacitor voltage VC connected to the output node voltage V through resistor RC.R e -
-sistors R and RC constitute a voltage divider having the divider ratio R/(R+ RC)s h o w ni n
-Eq. (7.154c). The second term in the equation accounts for how the current D′IL increases the
-output voltage, through the Thevenin-equivalent output resistance of the voltage divider,R∥RC.
-The circuits of Fig. 7.50 can be combined into the complete steady-state equivalent circuit
-illustrated in Fig. 7.51. It can be observed that the steady-state voltages V and VC are equal.
-Additionally, the capacitor ESR leads to an additional eﬀective series resistor DD′(R∥RC). This
-resistor models the loss induced in the ESR by the ac capacitor current, and its e ﬀect on the
-converter eﬃciency.
+如 7.1 和 7.2 节，电感电流和电容电压的低频分量通过在长度为 $T_s$ 的区间上平均建模。故可定义状态向量 $\mathbf{x}(t)$ 的平均为
 
-7.5 State-Space Averaging 269
-+Vg R
-D : 1DD (R||RC)
-RC
-+
-V+
-VC
-IL
-Fig. 7.51 Steady-state model of the boost converter, including eﬀects of capacitor equivalent series resis-
-tance RC
-The small-signal ac state-space averaged model is found by evaluation of Eq. ( 7.110). The
-result is
-[L 0
-0 C
-]d
-dt
-[ˆiL(t)
-ˆvC(t)
-]
-=
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-−D′(R∥RC) −D′ R
-R+ RC
-D′ R
-R+ RC
-−1
-R+ RC
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-[ˆiL(t)
-ˆvC(t)
-]
-+
-[1
-0
-][
-ˆvg(t)
-]
-(7.155)
-+
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-IL R∥RC+ VC
-R
-R+ RC
-−IL
-R
-R+ RC
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-ˆd(t) (7.156)
-[
-ˆv(t)
-]
-=
-[
-D′(R∥RC) R
-R+ RC
-][ˆiL(t)
-ˆvC(t)
-]
-+
-[
-−IL R∥RC
-]ˆd(t) (7.157)
-To construct a small-signal ac circuit model, it is helpful to again express the equations in terms
-of the converter output voltage ˆv rather than the capacitor voltage ˆvC. This is accomplished by
-using the output equation to eliminate ˆvC from the right side of the state equations. After some
-algebra, we obtain
-L dˆiL
-dt = ˆvg−D′ ˆv−DD′(R∥RC)ˆiL+ ((D−D′)(R∥RC)IL+ V) ˆd (7.158a)
-C dˆvC
-dt = D′ˆiL−ˆv
-R−IL ˆd (7.158b)
-ˆv= ˆvC
-R
-R+ RC
-+ (D′ˆiL−IL ˆd)(R∥RC) (7.158c)
-Equation (7.158a) can be recognized as a voltage loop equation, describing the small-signal ac
-components of the voltage around a loop containing the inductor. The current of this loop is
-the ac inductor current ˆi
-L. Construction of an equivalent circuit corresponding to this equation
+$$\langle \mathbf{x}(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}\mathbf{x}(\tau)\,d\tau \tag{7.111}$$
 
-270 7 AC Equivalent Circuit Modeling
-Fig. 7.52 Steps in the construction of the small-signal ac equivalent circuit for the boost converter with
-capacitor equivalent series resistance: ( a) inductor loop, ( b) output node, ( c) connection of capacitor to
-output node, (d) composite circuit, output node and capacitor
-Fig. 7.53 Complete small-signal ac model of the boost converter, including eﬀects of capacitor equivalent
-series resistance RC
-leads to the network of Fig. 7.52a. Likewise, Eq. (7.158b) is the equation of the output node,
-having voltage ˆv. A corresponding equivalent circuit for this equation is shown in Fig. 7.52b.
-Although the capacitor current Cd ˆvC/dt ﬂows out of this node, Eq. (7.158b) does not describe
-whether the capacitor is connected through the capacitor ESR, and so at this point we will leave
-the capacitor branch as an unknown element.
-Equation (7.158c) describes how the capacitor C and its voltage ˆvC are connected to the
-output node. As in the steady-state model, we expect that the ideal capacitor element C is con-
-nected through the ESR RC to the output node. Again, this is the case: Fig. 7.52c is a circuit
-corresponding to Eq. (7.158c), with the capacitor voltage ˆvC connected to the output node volt-
-age ˆv through resistor RC. Resistors R and RC again constitute a voltage divider having the
+输入和输出向量的低频分量以类似方式建模。通过平均电感电压和电容电流，得到如下低频状态方程：
 
-7.6 Summary of Key Points 271
-divider ratio R/(R+ RC)s h o w ni nE q . (7.158c). The second term in the equation accounts for
-how the total current ( D′ˆiL+ IL ˆd) (from the transformer secondary plus the ˆd current source)
-increases the output voltage, through the Thevenin-equivalent output resistance of the voltage
-divider, R∥RC. The circuits of Fig.7.52b and c can be combined into the single circuit illustrated
-in Fig. 7.52d.
-The circuits of Fig. 7.52a,d now can be combined, and the dependent sources replaced by
-an eﬀective transformer as illustrated in Fig. 7.53. In this small-signal ac model, the voltages ˆv
-and ˆvC can diﬀer, and the capacitor ESR leads to new transfer function dynamics not present in
-the converter without ESR.
-7.6 Summary of Key Points
-1. The CCM converter analytical techniques of Chaps. 2 and 3 can be extended to predict con-
-verter ac behavior. The key step is to average the converter waveforms over one switching
-period. This removes the switching harmonics, thereby exposing directly the desired dc and
-low-frequency ac components of the waveforms. In particular, expressions for the averaged
-inductor voltages, capacitor currents, and converter input current are usually found.
-2. Since switching converters are nonlinear systems, it is desirable to construct small-signal
-linearized models. This is accomplished by perturbing and linearizing the averaged model
-about a quiescent operating point.
-3. Ac equivalent circuits can be constructed, in the same manner used in Chap. 3 to construct
-dc equivalent circuits. If desired, the ac equivalent circuits may be reﬁned to account for
-the eﬀects of converter losses and other nonidealities.
-4. The conventional pulse-width modulator circuit has linear gain, dependent on the slope of
-the sawtooth waveform, or equivalently on its peak-to-peak magnitude. The pulse-width
-modulator also introduces sampling to the system.
-5. The canonical circuit describes the basic properties shared by all dc–dc PWM converters
-operating in the continuous conduction mode. At the heart of the model is the ideal 1:M(D)
-transformer, introduced in Chap. 3 to represent the basic dc–dc conversion function, and
-generalized here to include ac variations. The converter reactive elements introduce an ef-
-fective low-pass ﬁlter into the network. The model also includes independent sources that
-represent the eﬀect of duty-cycle variations. The parameter values in the canonical models
-of several basic converters are tabulated for easy reference.
-6. The state-space averaging method of Sect. 7.5 is essentially the same as the basic approach
-of Sect. 7.2, except that the formality of the state-space network description is used. The
-general results are listed in Sect. 7.5.2. State-space averaging is a formal approach that
-shows how a small-signal averaged model can always be derived, provided that the state
-equations can be written for each subinterval.
+$$\mathbf{K}\frac{d\langle \mathbf{x}(t)\rangle_{T_s}}{dt} = \bigl(d(t)\mathbf{A}_1 + d'(t)\mathbf{A}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + \bigl(d(t)\mathbf{B}_1 + d'(t)\mathbf{B}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s} \tag{7.112}$$
 
-272 7 AC Equivalent Circuit Modeling
-Problems
-7.1 An ideal boost converter operates in the continuous conduction mode.
-(a) Determine the nonlinear averaged equations of this converter.
-(b) Now construct a small-signal ac model. Let
-⟨vg(t)⟩Ts = Vg+ ˆvg(t)
-d(t)= D+ ˆd(t)
-⟨i(t)⟩Ts = I+ ˆi(t)
-⟨v(t)⟩Ts = V+ ˆv(t)
-where Vg, D, I, and V are steady-state dc values; ˆvg(t) and ˆd(t) are small ac variations
-in the power and control inputs; andˆi(t) and ˆv(t) are the resulting small ac variations in
-the inductor current and output voltage, respectively. Show that the following model
-results:
-Large-signal dc components
-0=−D
-′V+ Vg
-0= D′I−V
-R
-Small-signal ac components
-Ldˆi(t)
-dt =−D′ ˆv(t)+ V ˆd(t)+ ˆvg(t)
-C dˆv(t)
-dt = D′ˆi(t)−I ˆd(t)−ˆv(t)
-R
-7.2 Construct an equivalent circuit that corresponds to the boost converter small-signal ac
-equations derived in Problem 7.1(b).
-7.3 Manipulate your boost converter equivalent circuit of Problem 7.2 into canonical form.
-Explain each step in your derivation. Verify that the elements in your canonical model
-agree with Table7.1.
-7.4 The ideal current-fed bridge converter of Fig. 2.32 operates in the continuous conduction
-mode.
-(a) Determine the nonlinear averaged equations of this converter.
-(b) Perturb and linearize, to determine the small-signal ac equations.
-(c) Construct a small-signal ac equivalent circuit model for this converter.
-7.5 Construct a complete small-signal ac equivalent circuit model for the ﬂyback converter
-shown in Fig. 7.19, operating in continuous conduction mode. The transformer contains
-magnetizing inductance L, referred to the primary. In addition, the transformer exhibits
-signiﬁcant core loss, which can be modeled by a resistor RC in parallel with the primary
-winding. All other elements are ideal. You may use any valid method to solve this problem.
-Your model should correctly predict variations inig(t).
-7.6 Modeling the ´Cuk converter. You may use any valid method to solve this problem.
-(a) Derive the small-signal dynamic equations that model the ideal ´Cuk converter.
-(b) Construct a complete small-signal equivalent circuit model for the ´Cuk converter.
+此结果等价于式 (7.2)。
 
-7.6 Summary of Key Points 273
-+vg(t)
-+
-v(t)RL1
-L2
-C1
-C2
-ig(t)
-Fig. 7.54 Inverse-SEPIC, Problem 7.7
-7.7 Modeling the inverse-SEPIC. You may use any valid method to solve this problem.
-(a) Derive the small-signal dynamic equations that model the converter shown in Fig.7.54.
-(b) Construct a complete small-signal equivalent circuit model for the inverse-SEPIC.
-7.8 Consider the nonideal buck converter of Fig.7.55. The input voltage sourcevg(t) has inter-
-nal resistance Rg. Other component nonidealities may be neglected.
-+
-L
-CR
-+
-v(t)vg(t)
-Rg
-ig(t)
-Fig. 7.55 Nonideal buck converter, Problem 7.8
-(a) Using the state-space averaging method, determine the small-signal ac equations that
-describe variations in i, v, and ig, which occur owing to variations in the transistor
-duty cycle d and input voltage vg.
-(b) Construct an ac equivalent circuit model corresponding to your equations of part (a).
-(c) Solve your model to determine an expression for the small-signal control-to-output
-transfer function.
-7.9 Starting with Eq. (7.19), derive Eqs. (7.20) and (7.22). Show all steps in your derivation.
-7.10 A ﬂyback converter operates in the continuous conduction mode. The MOSFET switch
-has on-resistance Ron, and the secondary-side diode has a constant forward voltage drop
-VD. The ﬂyback transformer has primary winding resistance Rp and secondary winding
-resistance Rs.
-(a) Derive the small-signal ac equations for this converter.
-(b) Derive a complete small-signal ac equivalent circuit model, which is valid in the con-
-tinuous conduction mode and which correctly models the above losses, as well as the
-converter input and output ports.
-7.11 The two-output ﬂyback converter of Fig. 7.56a operates in the continuous conduction
-mode. It may be assumed that the converter is lossless.
+例如，考虑状态向量 $\mathbf{x}(t)$ 的元素在一个开关周期内如何变化。第一子区间内，开关在位置 1，变换器状态方程由式 (7.104) 给出。因此 $\mathbf{x}(t)$ 的元素以斜率 $\mathbf{K}^{-1}(\mathbf{A}_1\mathbf{x}(t) + \mathbf{B}_1\mathbf{u}(t))$ 变化。若做小纹波近似，即 $\mathbf{x}(t)$ 和 $\mathbf{u}(t)$ 在一个开关周期内变化不大，则斜率基本恒定，近似等于
 
-274 7 AC Equivalent Circuit Modeling
-Fig. 7.56 Two-output ﬂyback converter, Problem 7.11:( a) converter circuit, (b) small-signal ac equiva-
-lent circuit
-(a) Derive a small-signal ac equivalent circuit for this converter.
-(b) Show that the small-signal ac equivalent circuit for this two-output converter can be
-written in the generalized canonical form of Fig. 7.56b. Give analytical expressions
-for the generators e(s) and j(s).
-7.12 A pulse-width modulator circuit is constructed in which the sawtooth-wave generator is
-replaced by a triangle-wave generator, as illustrated in Fig. 7.57a. The triangle waveform
-is illustrated in Fig. 7.57b.
-(a) Determine the converter switching frequency, in Hz.
-(b) Determine the gain d(t)/vc(t) for this circuit.
-(c) Over what range of vc is your answer to (b) valid?
-```
+$$\frac{d\mathbf{x}(t)}{dt} = \mathbf{K}^{-1}\bigl(\mathbf{A}_1\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_1\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.113}$$
+
+此假设与 $\mathbf{x}(t)$ 所有元素中开关纹波小以及 $\mathbf{u}(t)$ 的变化远慢于开关频率的要求一致。若假定状态向量初值为 $\mathbf{x}(0)$，则可写
+
+$$\underbrace{\mathbf{x}(dT_s)}_{\text{终值}} = \underbrace{\mathbf{x}(0)}_{\text{初值}} + \underbrace{(dT_s)}_{\text{区间长度}}\,\mathbf{K}^{-1}\bigl(\mathbf{A}_1\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_1\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.114}$$
+
+类似论证适用于第二子区间。开关在位置 2 时，状态方程由式 (7.105) 给出。在此子区间内做小纹波近似，状态向量现在以斜率
+
+$$\frac{d\mathbf{x}(t)}{dt} = \mathbf{K}^{-1}\bigl(\mathbf{A}_2\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_2\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.115}$$
+
+![源页 p.269](../assets/page-snapshots/chapter-7/page-269.png)
+
+图7.40 状态向量的一个元素及其平均在一个开关周期内的演化
+
+变化。开关周期末的状态向量为
+
+$$\underbrace{\mathbf{x}(T_s)}_{\text{终值}} = \underbrace{\mathbf{x}(dT_s)}_{\text{初值}} + \underbrace{(d'T_s)}_{\text{区间长度}}\,\mathbf{K}^{-1}\bigl(\mathbf{A}_2\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_2\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.116}$$
+
+将式 (7.114) 代入式 (7.116) 可用 $\mathbf{x}(0)$ 表示 $\mathbf{x}(T_s)$：
+
+$$\mathbf{x}(T_s) = \mathbf{x}(0) + dT_s\mathbf{K}^{-1}\bigl(\mathbf{A}_1\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_1\langle \mathbf{u}(t)\rangle_{T_s}\bigr) + d'T_s\mathbf{K}^{-1}\bigl(\mathbf{A}_2\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{B}_2\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.117}$$
+
+合并同类项得
+
+$$\mathbf{x}(T_s) = \mathbf{x}(0) + T_s\mathbf{K}^{-1}\bigl(d(t)\mathbf{A}_1 + d'(t)\mathbf{A}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + T_s\mathbf{K}^{-1}\bigl(d(t)\mathbf{B}_1 + d'(t)\mathbf{B}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s} \tag{7.118}$$
+
+接下来，用一个开关周期上的净变化近似 $\langle \mathbf{x}(t)\rangle_{T_s}$ 的导数：
+
+$$\frac{d\langle \mathbf{x}(t)\rangle_{T_s}}{dt} \approx \frac{\mathbf{x}(T_s) - \mathbf{x}(0)}{T_s} \tag{7.119}$$
+
+将式 (7.118) 代入式 (7.119) 得
+
+$$\mathbf{K}\frac{d\langle \mathbf{x}(t)\rangle_{T_s}}{dt} = \bigl(d(t)\mathbf{A}_1 + d'(t)\mathbf{A}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + \bigl(d(t)\mathbf{B}_1 + d'(t)\mathbf{B}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s} \tag{7.120}$$
+
+与式 (7.113) 相同。这是描述变换器动态的基本平均模型。它是非线性的，因为控制输入 $d(t)$ 与 $\langle \mathbf{x}(t)\rangle_{T_s}$ 和 $\langle \mathbf{u}(t)\rangle_{T_s}$ 相乘。$\mathbf{x}(t)$ 的典型元素及其平均的变化如图7.40所示。
+
+还希望通过平均求输出向量 $\mathbf{y}(t)$ 的低频分量。第一子区间内 $\mathbf{y}(t)$ 由式 (7.104) 描述，第二子区间内由式 (7.105) 描述。故 $\mathbf{y}(t)$ 的元素在开关转换处可能不连续，如图7.41所示。可再次在一个开关周期上平均去除开关谐波，结果为
+
+$$\langle \mathbf{y}(t)\rangle_{T_s} = d(t)\bigl(\mathbf{C}_1\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{E}_1\langle \mathbf{u}(t)\rangle_{T_s}\bigr) + d'(t)\bigl(\mathbf{C}_2\langle \mathbf{x}(t)\rangle_{T_s} + \mathbf{E}_2\langle \mathbf{u}(t)\rangle_{T_s}\bigr) \tag{7.121}$$
+
+整理得
+
+$$\langle \mathbf{y}(t)\rangle_{T_s} = \bigl(d(t)\mathbf{C}_1 + d'(t)\mathbf{C}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + \bigl(d(t)\mathbf{E}_1 + d'(t)\mathbf{E}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s} \tag{7.122}$$
+
+![源页 p.270](../assets/page-snapshots/chapter-7/page-270.png)
+
+图7.41 输出向量 $\mathbf{y}(t)$ 的一个元素的平均
+
+这又是一个非线性方程。
+
+平均状态方程 (7.120) 和 (7.122) 汇集如下：
+
+$$\mathbf{K}\frac{d\langle \mathbf{x}(t)\rangle_{T_s}}{dt} = \bigl(d(t)\mathbf{A}_1 + d'(t)\mathbf{A}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + \bigl(d(t)\mathbf{B}_1 + d'(t)\mathbf{B}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s} \tag{7.123}$$
+
+$$\langle \mathbf{y}(t)\rangle_{T_s} = \bigl(d(t)\mathbf{C}_1 + d'(t)\mathbf{C}_2\bigr)\langle \mathbf{x}(t)\rangle_{T_s} + \bigl(d(t)\mathbf{E}_1 + d'(t)\mathbf{E}_2\bigr)\langle \mathbf{u}(t)\rangle_{T_s}$$
+
+下一步是在静态工作点附近线性化这些方程以构造小信号交流模型。当施加直流输入 $d(t) = D$ 和 $\mathbf{u}(t) = \mathbf{U}$ 时，$\langle \mathbf{x}(t)\rangle_{T_s}$ 所有元素的导数为零时变换器处于平衡态。故通过在式 (7.123) 中令 $\langle \mathbf{x}(t)\rangle_{T_s}$ 的导数为零，可将变换器静态工作点定义为如下方程的解：
+
+$$\begin{aligned} \mathbf{0} &= \mathbf{A}\mathbf{X} + \mathbf{B}\mathbf{U} \\ \mathbf{Y} &= \mathbf{C}\mathbf{X} + \mathbf{E}\mathbf{U} \end{aligned} \tag{7.124}$$
+
+其中已用定义 (7.107) 和 (7.108)。现在在静态工作点附近扰动和线性化变换器波形：
+
+$$\begin{aligned} \langle \mathbf{x}(t)\rangle_{T_s} &= \mathbf{X} + \hat{\mathbf{x}}(t) \\ \langle \mathbf{u}(t)\rangle_{T_s} &= \mathbf{U} + \hat{\mathbf{u}}(t) \\ \langle \mathbf{y}(t)\rangle_{T_s} &= \mathbf{Y} + \hat{\mathbf{y}}(t) \\ d(t) &= D + \hat{d}(t) \quad\Rightarrow\quad d'(t) = D' - \hat{d}(t) \end{aligned} \tag{7.125}$$
+
+这里 $\hat{\mathbf{u}}(t)$ 和 $\hat{d}(t)$ 是输入向量和占空比的小交流变化。向量 $\hat{\mathbf{x}}(t)$ 和 $\hat{\mathbf{y}}(t)$ 是所得状态和输出向量的小交流变化。须假定这些交流变化远小于静态值，即
+
+$$\|\mathbf{U}\| \gg \|\hat{\mathbf{u}}(t)\|, \quad D \gg |\hat{d}(t)|, \quad \|\mathbf{X}\| \gg \|\hat{\mathbf{x}}(t)\|, \quad \|\mathbf{Y}\| \gg \|\hat{\mathbf{y}}(t)\| \tag{7.126}$$
+
+这里 $\|\mathbf{x}\|$ 表示向量 $\mathbf{x}$ 的范数。
+
+将式 (7.125) 代入式 (7.123) 得
+
+$$\mathbf{K}\frac{d(\mathbf{X} + \hat{\mathbf{x}}(t))}{dt} = \bigl((D + \hat{d}(t))\mathbf{A}_1 + (D' - \hat{d}(t))\mathbf{A}_2\bigr)(\mathbf{X} + \hat{\mathbf{x}}(t)) + \bigl((D + \hat{d}(t))\mathbf{B}_1 + (D' - \hat{d}(t))\mathbf{B}_2\bigr)(\mathbf{U} + \hat{\mathbf{u}}(t)) \tag{7.127}$$
+
+$$(\mathbf{Y} + \hat{\mathbf{y}}(t)) = \bigl((D + \hat{d}(t))\mathbf{C}_1 + (D' - \hat{d}(t))\mathbf{C}_2\bigr)(\mathbf{X} + \hat{\mathbf{x}}(t)) + \bigl((D + \hat{d}(t))\mathbf{E}_1 + (D' - \hat{d}(t))\mathbf{E}_2\bigr)(\mathbf{U} + \hat{\mathbf{u}}(t))$$
+
+$d\mathbf{X}/dt$ 为零。合并同类项得
+
+$$\underbrace{\mathbf{K}\frac{d\hat{\mathbf{x}}(t)}{dt}}_{\text{一阶交流}} = \underbrace{(\mathbf{A}\mathbf{X} + \mathbf{B}\mathbf{U})}_{\text{直流项}} + \underbrace{\mathbf{A}\hat{\mathbf{x}}(t) + \mathbf{B}\hat{\mathbf{u}}(t) + \{(\mathbf{A}_1 - \mathbf{A}_2)\mathbf{X} + (\mathbf{B}_1 - \mathbf{B}_2)\mathbf{U}\}\hat{d}(t)}_{\text{一阶交流项}} + \underbrace{(\mathbf{A}_1 - \mathbf{A}_2)\hat{\mathbf{x}}(t)\hat{d}(t) + (\mathbf{B}_1 - \mathbf{B}_2)\hat{\mathbf{u}}(t)\hat{d}(t)}_{\text{二阶非线性项}} \tag{7.128}$$
+
+$$(\mathbf{Y} + \hat{\mathbf{y}}(t)) = \underbrace{(\mathbf{C}\mathbf{X} + \mathbf{E}\mathbf{U})}_{\text{直流项}} + \underbrace{\mathbf{C}\hat{\mathbf{x}}(t) + \mathbf{E}\hat{\mathbf{u}}(t) + \{(\mathbf{C}_1 - \mathbf{C}_2)\mathbf{X} + (\mathbf{E}_1 - \mathbf{E}_2)\mathbf{U}\}\hat{d}(t)}_{\text{一阶交流项}} + \underbrace{(\mathbf{C}_1 - \mathbf{C}_2)\hat{\mathbf{x}}(t)\hat{d}(t) + (\mathbf{E}_1 - \mathbf{E}_2)\hat{\mathbf{u}}(t)\hat{d}(t)}_{\text{二阶非线性项}}$$
+
+由于直流项满足式 (7.124)，它们从式 (7.128) 中消去。又若满足小信号假设 (7.126)，则式 (7.128) 的二阶非线性项的幅度远小于一阶交流项。故可忽略非线性项，得如下线性化交流模型：
+
+$$\begin{aligned} \mathbf{K}\frac{d\hat{\mathbf{x}}(t)}{dt} &= \mathbf{A}\hat{\mathbf{x}}(t) + \mathbf{B}\hat{\mathbf{u}}(t) + \{(\mathbf{A}_1 - \mathbf{A}_2)\mathbf{X} + (\mathbf{B}_1 - \mathbf{B}_2)\mathbf{U}\}\hat{d}(t) \\ \hat{\mathbf{y}}(t) &= \mathbf{C}\hat{\mathbf{x}}(t) + \mathbf{E}\hat{\mathbf{u}}(t) + \{(\mathbf{C}_1 - \mathbf{C}_2)\mathbf{X} + (\mathbf{E}_1 - \mathbf{E}_2)\mathbf{U}\}\hat{d}(t) \end{aligned} \tag{7.129}$$
+
+这是所需结果，与式 (7.110) 一致。
+
+### 7.5.4 示例：非理想升降压变换器的状态空间平均
+
+让我们用状态空间平均法建模图7.42 的升降压变换器。我们将用导通电阻 $R_{on}$ 建模 MOSFET $Q_1$ 的导通损耗，用数值为 $V_D$ 的独立电压源建模二极管 $D_1$ 的正向压降。希望得到建模变换器输入端口和输出端口的完整等效电路。
+
+![源页 p.272](../assets/page-snapshots/chapter-7/page-272.png)
+
+图7.42 升降压变换器示例
+
+变换器的独立状态为电感电流 $i(t)$ 和电容电压 $v(t)$。故应定义状态向量 $\mathbf{x}(t)$ 为
+
+$$\mathbf{x}(t) = \begin{bmatrix} i(t) \\ v(t) \end{bmatrix} \tag{7.130}$$
+
+输入电压 $v_g(t)$ 是应放入输入向量 $\mathbf{u}(t)$ 的独立电源。此外，我们选择用数值为 $V_D$ 的独立电压源建模二极管正向压降。故此电压源也应包含在输入向量 $\mathbf{u}(t)$ 中。故定义输入向量为
+
+$$\mathbf{u}(t) = \begin{bmatrix} v_g(t) \\ V_D \end{bmatrix} \tag{7.131}$$
+
+为建模变换器输入端口，需求变换器输入电流 $i_g(t)$。为计算此因变量电流，应将其包含在输出向量 $\mathbf{y}(t)$ 中。故选择定义 $\mathbf{y}(t)$ 为
+
+$$\mathbf{y}(t) = [i_g(t)] \tag{7.132}$$
+
+注意不必将输出电压 $v(t)$ 包含在输出向量 $\mathbf{y}(t)$ 中，因为 $v(t)$ 已在状态向量 $\mathbf{x}(t)$ 中。
+
+接下来写每个子区间的状态方程。开关在位置 1 时，得图7.43a 变换器电路。电感电压、电容电流和变换器输入电流为
+
+$$\begin{aligned} L\frac{di(t)}{dt} &= v_g(t) - i(t)R_{on} \\ C\frac{dv(t)}{dt} &= -\frac{v(t)}{R} \\ i_g(t) &= i(t) \end{aligned} \tag{7.133}$$
+
+![源页 p.273](../assets/page-snapshots/chapter-7/page-273.png)
+
+图7.43 升降压变换器电路：(a) 子区间 1；(b) 子区间 2
+
+这些方程可写成如下状态空间形式：
+
+$$\underbrace{\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}}_{\mathbf{K}} \frac{d}{dt}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} = \underbrace{\begin{bmatrix} -R_{on} & 0 \\ 0 & -\dfrac{1}{R} \end{bmatrix}}_{\mathbf{A}_1}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}}_{\mathbf{B}_1}\underbrace{\begin{bmatrix} v_g(t) \\ V_D \end{bmatrix}}_{\mathbf{u}(t)} \tag{7.134}$$
+
+$$\underbrace{[i_g(t)]}_{\mathbf{y}(t)} = \underbrace{\begin{bmatrix} 1 & 0 \end{bmatrix}}_{\mathbf{C}_1}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 0 & 0 \end{bmatrix}}_{\mathbf{E}_1}\underbrace{\begin{bmatrix} v_g(t) \\ V_D \end{bmatrix}}_{\mathbf{u}(t)}$$
+
+故已识别状态方程矩阵 $\mathbf{A}_1, \mathbf{B}_1, \mathbf{C}_1, \mathbf{E}_1$。
+
+开关在位置 2 时，得图7.43b 变换器电路。此子区间内，电感电压、电容电流和变换器输入电流为
+
+$$\begin{aligned} L\frac{di(t)}{dt} &= v(t) - V_D \\ C\frac{dv(t)}{dt} &= -\frac{v(t)}{R} - i(t) \\ i_g(t) &= 0 \end{aligned} \tag{7.135}$$
+
+写成状态空间形式时，这些方程变为
+
+$$\underbrace{\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}}_{\mathbf{K}} \frac{d}{dt}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} = \underbrace{\begin{bmatrix} 0 & 1 \\ -1 & -\dfrac{1}{R} \end{bmatrix}}_{\mathbf{A}_2}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 0 & -1 \\ 0 & 0 \end{bmatrix}}_{\mathbf{B}_2}\underbrace{\begin{bmatrix} v_g(t) \\ V_D \end{bmatrix}}_{\mathbf{u}(t)} \tag{7.136}$$
+
+$$\underbrace{[i_g(t)]}_{\mathbf{y}(t)} = \underbrace{\begin{bmatrix} 0 & 0 \end{bmatrix}}_{\mathbf{C}_2}\underbrace{\begin{bmatrix} i(t) \\ v(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 0 & 0 \end{bmatrix}}_{\mathbf{E}_2}\underbrace{\begin{bmatrix} v_g(t) \\ V_D \end{bmatrix}}_{\mathbf{u}(t)}$$
+
+故也已识别子区间 2 矩阵 $\mathbf{A}_2, \mathbf{B}_2, \mathbf{C}_2, \mathbf{E}_2$。
+
+下一步是计算状态空间平均平衡方程 (7.106) 至 (7.108)。平均矩阵 $\mathbf{A}$ 为
+
+$$\mathbf{A} = D\mathbf{A}_1 + D'\mathbf{A}_2 = D\begin{bmatrix} -R_{on} & 0 \\ 0 & -\dfrac{1}{R} \end{bmatrix} + D'\begin{bmatrix} 0 & 1 \\ -1 & -\dfrac{1}{R} \end{bmatrix} = \begin{bmatrix} -DR_{on} & D' \\ -D' & -\dfrac{1}{R} \end{bmatrix} \tag{7.137}$$
+
+类似地，平均矩阵 $\mathbf{B}, \mathbf{C}, \mathbf{E}$ 计算如下：
+
+$$\mathbf{B} = D\mathbf{B}_1 + D'\mathbf{B}_2 = \begin{bmatrix} D & -D' \\ 0 & 0 \end{bmatrix} \qquad \mathbf{C} = D\mathbf{C}_1 + D'\mathbf{C}_2 = \begin{bmatrix} D & 0 \end{bmatrix} \qquad \mathbf{E} = D\mathbf{E}_1 + D'\mathbf{E}_2 = \begin{bmatrix} 0 & 0 \end{bmatrix} \tag{7.138}$$
+
+故直流状态方程 (7.106) 变为
+
+$$\begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} -DR_{on} & D' \\ -D' & -\dfrac{1}{R} \end{bmatrix}\begin{bmatrix} I \\ V \end{bmatrix} + \begin{bmatrix} D & -D' \\ 0 & 0 \end{bmatrix}\begin{bmatrix} V_g \\ V_D \end{bmatrix} \tag{7.139}$$
+
+$$[I_g] = \begin{bmatrix} D & 0 \end{bmatrix}\begin{bmatrix} I \\ V \end{bmatrix} + \begin{bmatrix} 0 & 0 \end{bmatrix}\begin{bmatrix} V_g \\ V_D \end{bmatrix}$$
+
+计算式 (7.109) 得平衡状态和输出向量的如下解：
+
+$$\begin{bmatrix} I \\ V \end{bmatrix} = \frac{1}{1 + \dfrac{DD'^2R_{on}}{R}}\begin{bmatrix} \dfrac{D}{D'^2R} & \dfrac{1}{D'R} - \dfrac{D}{D'} \\ \dfrac{1}{D'R} & -\dfrac{1}{R} \end{bmatrix}\begin{bmatrix} V_g \\ V_D \end{bmatrix} \tag{7.140}$$
+
+$$[I_g] = \frac{1}{1 + \dfrac{DD'^2R_{on}}{R}}\begin{bmatrix} \dfrac{D^2}{D'^2R} & \dfrac{1}{D'R} \end{bmatrix}\begin{bmatrix} V_g \\ V_D \end{bmatrix}$$
+
+也可照常由式 (7.139) 构造图7.44 的稳态等效电路。式 (7.139) 的顶行可通过对电感电压波形施加电感伏秒平衡原理得到。式 (7.139) 的第二行可通过对电容电流波形施加电容电荷平衡原理得到。$i_g(t)$ 方程表述变换器输入电流的直流分量。通过重建等效于这三个方程的电路，得图7.44 的直流模型。
+
+![源页 p.275](../assets/page-snapshots/chapter-7/page-275.png)
+
+图7.44 升降压变换器模型的直流电路模型，等效于式 (7.139)
+
+小信号模型由式 (7.110) 求得。式 (7.110) 中 $\hat{d}(t)$ 的向量系数为
+
+$$\begin{aligned} (\mathbf{A}_1 - \mathbf{A}_2)\mathbf{X} + (\mathbf{B}_1 - \mathbf{B}_2)\mathbf{U} &= \begin{bmatrix} -V - IR_{on} \\ I \end{bmatrix} + \begin{bmatrix} V_g + V_D \\ 0 \end{bmatrix} = \begin{bmatrix} V_g - V - IR_{on} + V_D \\ I \end{bmatrix} \\ (\mathbf{C}_1 - \mathbf{C}_2)\mathbf{X} + (\mathbf{E}_1 - \mathbf{E}_2)\mathbf{U} &= [I] \end{aligned} \tag{7.141}$$
+
+故小信号交流状态方程 (7.110) 变为
+
+$$\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}\frac{d}{dt}\begin{bmatrix} \hat{i}(t) \\ \hat{v}(t) \end{bmatrix} = \begin{bmatrix} -DR_{on} & D' \\ -D' & -\dfrac{1}{R} \end{bmatrix}\begin{bmatrix} \hat{i}(t) \\ \hat{v}(t) \end{bmatrix} + \begin{bmatrix} D & -D' \\ 0 & 0 \end{bmatrix}\begin{bmatrix} \hat{v}_g(t) \\ 0 \end{bmatrix} + \begin{bmatrix} V_g - V - IR_{on} + V_D \\ I \end{bmatrix}\hat{d}(t) \tag{7.142}$$
+
+$$[\hat{i}_g(t)] = \begin{bmatrix} D & 0 \end{bmatrix}\begin{bmatrix} \hat{i}(t) \\ \hat{v}(t) \end{bmatrix} + \begin{bmatrix} 0 & 0 \end{bmatrix}\begin{bmatrix} \hat{v}_g(t) \\ 0 \end{bmatrix} + [I]\hat{d}(t)$$
+
+注意，由于二极管正向压降建模为常数 $V_D$，此源中无交流变化，$\hat{v}_D(t)$ 为零。可照常构造等效于式 (7.142) 的电路模型。写成标量形式时，式 (7.142) 变为
+
+$$\begin{aligned} L\frac{d\hat{i}(t)}{dt} &= D'\hat{v}(t) - DR_{on}\hat{i}(t) + D\hat{v}_g(t) + (V_g - V - IR_{on} + V_D)\hat{d}(t) \\ C\frac{d\hat{v}(t)}{dt} &= -D'\hat{i}(t) - \frac{\hat{v}(t)}{R} + I\hat{d}(t) \\ \hat{i}_g(t) &= D\hat{i}(t) + I\hat{d}(t) \end{aligned} \tag{7.143}$$
+
+对应这些方程的电路列于图7.45。这些电路可合并为图7.46 的完整小信号交流等效电路模型。
+
+![源页 p.276](../assets/page-snapshots/chapter-7/page-276.png)
+
+图7.45 等效于小信号变换器方程的电路：(a) 电感回路；(b) 电容节点；(c) 输入端口
+
+![源页 p.276](../assets/page-snapshots/chapter-7/page-276.png)
+
+图7.46 非理想升降压变换器示例的完整小信号交流等效电路模型
+
+### 7.5.5 示例：含 ESR 的升压变换器的状态空间平均
+
+作为最后一个例子，让我们用状态空间平均法导出图7.47 非理想升压变换器的模型。此电路含一个电阻 $R_C$，建模电容等效串联电阻；虚线框内为含理想电容 $C$ 和 ESR $R_C$ 的电容模型。学生常在导出此电路的平均方程时遇到困难，状态空间平均法为正确导出平均模型提供了框架。除电容 ESR 外，我们将所有元件建模为理想。
+
+![源页 p.277](../assets/page-snapshots/chapter-7/page-277.png)
+
+图7.47 升压变换器电路，含电容等效串联电阻 $R_C$
+
+![源页 p.277](../assets/page-snapshots/chapter-7/page-277.png)
+
+图7.48 电容 ESR 使输出电压波形 $v(t)$ 不连续
+
+如图7.48所示，电容 ESR 使输出电压 $v(t)$ 不连续。二极管导通时，电感电流使输出电压增大 $i_L(t)(R\,\|\,R_C)$，故电压在开关时刻呈现不连续。故须注意不要对输出电压 $v(t)$ 施加小纹波近似。另一方面，电容模型中理想电容部分的电压 $v_C(t)$ 是连续的且呈小纹波。
+
+此电路的独立状态为电感电流 $i_L(t)$ 和电容电压 $v_C(t)$。注意 $v_C(t)$ 定义为电容模型中理想电容部分的电压。故状态向量 $\mathbf{x}(t)$ 定义为
+
+$$\mathbf{x}(t) = \begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix} \tag{7.144}$$
+
+输入电压 $v_g(t)$ 是应放入输入向量 $\mathbf{u}(t)$ 的独立电源。我们选择不建模其他独立电源。故定义输入向量为
+
+$$\mathbf{u}(t) = [v_g(t)] \tag{7.145}$$
+
+为建模变换器输入端口，需求变换器输入电流 $i_g(t)$。对升压变换器，输入电流 $i_g(t)$ 与电感电流 $i_L(t)$ 重合。由于 $i_L(t)$ 已在状态向量 $\mathbf{x}(t)$ 中，将 $i_g(t)$ 包含在输出向量中无额外信息。另一方面，为建模输出端口，须写输出电压 $v(t)$ 的方程。由于实际输出电压 $v(t)$ 不再与电容状态
+
+![源页 p.278](../assets/page-snapshots/chapter-7/page-278.png)
+
+图7.49 含 ESR 的升压变换器电路：(a) 子区间 1；(b) 子区间 2
+
+$v_C(t)$ 重合，须写可求解平均输出电压的附加方程。故 $v(t)$ 必须包含在输出向量中。故选择定义 $\mathbf{y}(t)$ 为
+
+$$\mathbf{y}(t) = [v(t)] \tag{7.146}$$
+
+故此例中输出向量仅含因变量 $v(t)$。
+
+接下来导出每个子区间的状态方程。第一子区间内，MOSFET 导通，变换器电路简化为图7.49a。可将电感电压和电容电流表示为
+
+$$\begin{aligned} L\frac{di_L(t)}{dt} &= v_g(t) \\ C\frac{dv_C(t)}{dt} &= -\frac{v_C(t)}{R + R_C} \end{aligned} \tag{7.147}$$
+
+注意我们已仔细将电容电流用电容电压 $v_C(t)$ 而非输出电压 $v(t)$ 表示。这是必要的，因为状态方程须写成独立向量 $\mathbf{x}(t)$ 和 $\mathbf{u}(t)$ 元素的函数，而非因变量向量 $\mathbf{y}(t)$ 的函数。
+
+第一子区间内，输出量也可表示为 $\mathbf{x}(t)$ 和 $\mathbf{u}(t)$ 元素的函数，如下：
+
+$$v(t) = v_C(t)\frac{R}{R + R_C} \tag{7.148}$$
+
+再次，我们已仔细将 $v(t)$ 表示为电容状态 $v_C(t)$ 的函数。
+
+接下来可将式 (7.147) 和 (7.148) 写成矩阵形式，结果为
+
+$$\underbrace{\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}}_{\mathbf{K}} \frac{d}{dt}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} = \underbrace{\begin{bmatrix} 0 & 0 \\ 0 & -\dfrac{1}{R+R_C} \end{bmatrix}}_{\mathbf{A}_1}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 1 \\ 0 \end{bmatrix}}_{\mathbf{B}_1}\,[v_g(t)] \tag{7.149}$$
+
+$$\underbrace{[v(t)]}_{\mathbf{y}(t)} = \underbrace{\begin{bmatrix} 0 & \dfrac{R}{R+R_C} \end{bmatrix}}_{\mathbf{C}_1}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{[0]}_{\mathbf{E}_1}\,[v_g(t)]$$
+
+第二子区间内，MOSFET 关断，二极管导通，得图7.49b 电路。可将电感电压和电容电流表示为
+
+$$\begin{aligned} L\frac{di_L(t)}{dt} &= v_g(t) - v(t) = v_g(t) - v_C(t)\frac{R}{R+R_C} - i_L(t)(R\,\|\,R_C) \\ C\frac{dv_C(t)}{dt} &= \frac{v(t) - v_C(t)}{R_C} = -\frac{v_C(t)}{R+R_C} + \frac{i_L(t)R}{R+R_C} \end{aligned} \tag{7.150}$$
+
+上述方程中须消去输出电压 $v(t)$，因为状态方程须写成独立向量 $\mathbf{x}(t)$ 和 $\mathbf{u}(t)$ 元素的函数，而非因变量向量 $\mathbf{y}(t)$ 的函数。记号 $R\,\|\,R_C$ 表示 $R$ 和 $R_C$ 的并联组合。
+
+此子区间内，输出也可表示为 $\mathbf{x}(t)$ 和 $\mathbf{u}(t)$ 元素的函数，如下：
+
+$$v(t) = v_C(t)\frac{R}{R+R_C} + i_L(t)(R\,\|\,R_C) \tag{7.151}$$
+
+再次，我们已仔细将 $v(t)$ 表示为电容状态 $v_C(t)$ 的函数。现在可汇集上述方程得第二子区间内电路的状态空间描述：
+
+$$\underbrace{\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}}_{\mathbf{K}} \frac{d}{dt}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} = \underbrace{\begin{bmatrix} -(R\,\|\,R_C) & -\dfrac{R}{R+R_C} \\ \dfrac{R}{R+R_C} & -\dfrac{1}{R+R_C} \end{bmatrix}}_{\mathbf{A}_2}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{\begin{bmatrix} 1 \\ 0 \end{bmatrix}}_{\mathbf{B}_2}\,[v_g(t)] \tag{7.152}$$
+
+$$\underbrace{[v(t)]}_{\mathbf{y}(t)} = \underbrace{\begin{bmatrix} R\,\|\,R_C & \dfrac{R}{R+R_C} \end{bmatrix}}_{\mathbf{C}_2}\underbrace{\begin{bmatrix} i_L(t) \\ v_C(t) \end{bmatrix}}_{\mathbf{x}(t)} + \underbrace{[0]}_{\mathbf{E}_2}\,[v_g(t)]$$
+
+状态空间平均法预测变换器稳态模型为
+
+$$\underbrace{\begin{bmatrix} 0 \\ 0 \end{bmatrix}}_{\mathbf{0} = D\mathbf{A}_1 + D'\mathbf{A}_2\,\mathbf{X} + D\mathbf{B}_1 + D'\mathbf{B}_2\,\mathbf{U}} = \begin{bmatrix} -D'(R\,\|\,R_C) & -D'\dfrac{R}{R+R_C} \\ D'\dfrac{R}{R+R_C} & -\dfrac{1}{R+R_C} \end{bmatrix}\begin{bmatrix} I_L \\ V_C \end{bmatrix} + \begin{bmatrix} 1 \\ 0 \end{bmatrix}[V_g] \tag{7.153}$$
+
+$$\underbrace{[V]}_{\mathbf{Y} = D\mathbf{C}_1 + D'\mathbf{C}_2\,\mathbf{X} + D\mathbf{E}_1 + D'\mathbf{E}_2\,\mathbf{U}} = \begin{bmatrix} D'(R\,\|\,R_C) & \dfrac{R}{R+R_C} \end{bmatrix}\begin{bmatrix} I_L \\ V_C \end{bmatrix} + [0][V_g]$$
+
+让我们构造对应上述方程的稳态等效电路。变换器输出端是输出电压 $V$ 而非电容电压 $V_C$。故先用输出方程消去 $V_C$，将上述方程用输出电压 $V$ 表示更有帮助。得如下方程：
+
+$$0 = V_g - D'V - DD'I_L(R\,\|\,R_C) \tag{7.154a}$$
+
+$$0 = D'I_L - \frac{V}{R} \tag{7.154b}$$
+
+$$V = V_C\frac{R}{R+R_C} + D'I_L(R\,\|\,R_C) \tag{7.154c}$$
+
+式 (7.154a) 可识别为由电感伏秒平衡得到的电压回路方程。此回路的电流为直流电感电流 $I_L$。构造对应此方程的等效电路得图7.50a 网络。类似地，式 (7.154b) 是电压为 $V$ 的输出节点方程。对应此方程的等效电路如图7.50b所示。式 (7.154c) 描述电容 $C$ 及其电压 $V_C$ 如何连接到输出节点。我们可能预期理想电容元件 $C$ 通过 ESR $R_C$ 连接到输出节点，如原始变换器电路图7.47中那样。确实如此：图7.50c 是对应式 (7.154c) 的电路，电容电压 $V_C$ 通过电阻 $R_C$ 连接到输出节点电压 $V$。电阻 $R$ 和 $R_C$ 构成分压器，分压比为 $R/(R+R_C)$，如式 (7.154c) 所示。方程第二项说明电流 $D'I_L$ 如何通过分压器的戴维南等效输出电阻 $R\,\|\,R_C$ 升高输出电压。
+
+![源页 p.280](../assets/page-snapshots/chapter-7/page-280.png)
+
+图7.50 构造含电容等效串联电阻的升压变换器稳态等效电路的步骤：(a) 电感回路；(b) 输出节点；(c) 电容到输出节点的连接
+
+图7.50 的电路可合并为图7.51 所示的完整稳态等效电路。可见稳态电压 $V$ 和 $V_C$ 相等。此外，电容 ESR 导致一个附加有效串联电阻 $DD'(R\,\|\,R_C)$。此电阻建模 ESR 中由交流电容电流引起的损耗及其对变换器效率的影响。
+
+![源页 p.281](../assets/page-snapshots/chapter-7/page-281.png)
+
+图7.51 升压变换器的稳态模型，含电容等效串联电阻 $R_C$ 的影响
+
+小信号交流状态空间平均模型由式 (7.110) 求得，结果为
+
+$$\begin{bmatrix} L & 0 \\ 0 & C \end{bmatrix}\frac{d}{dt}\begin{bmatrix} \hat{i}_L(t) \\ \hat{v}_C(t) \end{bmatrix} = \begin{bmatrix} -D'(R\,\|\,R_C) & -D'\dfrac{R}{R+R_C} \\ D'\dfrac{R}{R+R_C} & -\dfrac{1}{R+R_C} \end{bmatrix}\begin{bmatrix} \hat{i}_L(t) \\ \hat{v}_C(t) \end{bmatrix} + \begin{bmatrix} 1 \\ 0 \end{bmatrix}[\hat{v}_g(t)] \tag{7.155}$$
+
+$$+ \begin{bmatrix} I_L(R\,\|\,R_C) + \dfrac{V_C R}{R+R_C} \\ -\dfrac{I_L R}{R+R_C} \end{bmatrix}\hat{d}(t) \tag{7.156}$$
+
+$$[\hat{v}(t)] = \begin{bmatrix} D'(R\,\|\,R_C) & \dfrac{R}{R+R_C} \end{bmatrix}\begin{bmatrix} \hat{i}_L(t) \\ \hat{v}_C(t) \end{bmatrix} + [-I_L(R\,\|\,R_C)]\hat{d}(t) \tag{7.157}$$
+
+为构造小信号交流电路模型，将方程用变换器输出电压 $\hat{v}$ 而非电容电压 $\hat{v}_C$ 表示更有帮助。这通过用输出方程从状态方程右边消去 $\hat{v}_C$ 完成。经代数运算后得
+
+$$L\frac{d\hat{i}_L}{dt} = \hat{v}_g - D'\hat{v} - DD'(R\,\|\,R_C)\hat{i}_L + \bigl((D-D')(R\,\|\,R_C)I_L + V\bigr)\hat{d} \tag{7.158a}$$
+
+$$C\frac{d\hat{v}_C}{dt} = D'\hat{i}_L - \frac{\hat{v}}{R} - I_L\hat{d} \tag{7.158b}$$
+
+$$\hat{v} = \hat{v}_C\frac{R}{R+R_C} + (D'\hat{i}_L - I_L\hat{d})(R\,\|\,R_C) \tag{7.158c}$$
+
+式 (7.158a) 可识别为描述含电感回路上小信号交流电压分量的电压回路方程。此回路的电流为交流电感电流 $\hat{i}_L$。构造对应此方程的等效电路
+
+![源页 p.282](../assets/page-snapshots/chapter-7/page-282.png)
+
+图7.52 构造含电容等效串联电阻的升压变换器小信号交流等效电路的步骤：(a) 电感回路；(b) 输出节点；(c) 电容到输出节点的连接；(d) 输出节点与电容的复合电路
+
+![源页 p.282](../assets/page-snapshots/chapter-7/page-282.png)
+
+图7.53 升压变换器的完整小信号交流模型，含电容等效串联电阻 $R_C$ 的影响
+
+得图7.52a 网络。类似地，式 (7.158b) 是电压为 $\hat{v}$ 的输出节点方程。对应此方程的等效电路如图7.52b所示。虽然电容电流 $C\,d\hat{v}_C/dt$ 从此节点流出，但式 (7.158b) 未描述电容是否通过电容 ESR 连接，故此时我们将电容支路留为未知元件。
+
+式 (7.158c) 描述电容 $C$ 及其电压 $\hat{v}_C$ 如何连接到输出节点。与稳态模型一样，我们预期理想电容元件 $C$ 通过 ESR $R_C$ 连接到输出节点。确实如此：图7.52c 是对应式 (7.158c) 的电路，电容电压 $\hat{v}_C$ 通过电阻 $R_C$ 连接到输出节点电压 $\hat{v}$。电阻 $R$ 和 $R_C$ 再次构成
+
+![源页 p.283](../assets/page-snapshots/chapter-7/page-283.png)
+
+分压器，分压比为 $R/(R+R_C)$，如式 (7.158c) 所示。方程第二项说明总电流 $(D'\hat{i}_L + I_L\hat{d})$（来自变压器副侧加 $\hat{d}$ 电流源）如何通过分压器的戴维南等效输出电阻 $R\,\|\,R_C$ 升高输出电压。图7.52b、c 的电路可合并为图7.52d 所示单一电路。
+
+图7.52a、d 的电路现可合并，并用有效变压器替代受控源，如图7.53所示。在此小信号交流模型中，电压 $\hat{v}$ 和 $\hat{v}_C$ 可不同，电容 ESR 导致无 ESR 变换器中不存在的新的传递函数动态。
+
+## 7.6 关键要点小结
+
+1. 第2、3章的 CCM 变换器分析技巧可扩展以预测变换器交流行为。关键步骤是在一个开关周期上平均变换器波形。这去除开关谐波，从而直接暴露所需的波形直流和低频交流分量。特别地，通常需求平均电感电压、电容电流和变换器输入电流的表达式。
+
+2. 由于开关变换器是非线性系统，希望构造小信号线性化模型。这通过在静态工作点附近扰动和线性化平均模型完成。
+
+3. 可用第3章构造直流等效电路相同的步骤构造交流等效电路。如需要，交流等效电路可精细化以计入变换器损耗和其他非理想性的影响。
+
+4. 常规脉宽调制器电路有线性增益，取决于锯齿波形的斜率，或等价地取决于其峰-峰幅度。脉宽调制器还向系统引入采样。
+
+5. 规范电路描述所有连续导通模式下工作的直流-直流脉宽调制变换器共有的基本性质。模型的核心是第3章引入的 1:M(D) 理想变压器（表示基本直流-直流变换功能），此处推广以包含交流变化。变换器储能元件在网络中引入有效低通滤波器。模型还含表示占空比变化影响的独立源。若干基本变换器规范模型的参数值列表以供参考。
+
+6. 7.5 节的状态空间平均法本质上与 7.2 节的基本方法相同，只是使用了状态空间网络描述的形式。一般结果列于 7.5.2 节。状态空间平均是一种形式化方法，表明只要能写出每个子区间的状态方程，总能导出小信号平均模型。
+
+## 习题
+
+**7.1** 一个理想升压变换器工作于连续导通模式。
+
+(a) 确定此变换器的非线性平均方程。
+
+(b) 现构造小信号交流模型。令
+
+$$\langle v_g(t)\rangle_{T_s} = V_g + \hat{v}_g(t), \quad d(t) = D + \hat{d}(t), \quad \langle i(t)\rangle_{T_s} = I + \hat{i}(t), \quad \langle v(t)\rangle_{T_s} = V + \hat{v}(t)$$
+
+其中 $V_g$、$D$、$I$ 和 $V$ 为稳态直流值；$\hat{v}_g(t)$ 和 $\hat{d}(t)$ 为功率和控制输入的小交流变化；$\hat{i}(t)$ 和 $\hat{v}(t)$ 为电感电流和输出电压的所得小交流变化。证明得到如下模型：
+
+大信号直流分量
+
+$$0 = -D'V + V_g, \quad 0 = D'I - \frac{V}{R}$$
+
+小信号交流分量
+
+$$L\frac{d\hat{i}(t)}{dt} = -D'\hat{v}(t) + V\hat{d}(t) + \hat{v}_g(t), \quad C\frac{d\hat{v}(t)}{dt} = D'\hat{i}(t) - I\hat{d}(t) - \frac{\hat{v}(t)}{R}$$
+
+**7.2** 构造对应习题7.1(b) 升压变换器小信号交流方程的等效电路。
+
+**7.3** 将习题7.2 的升压变换器等效电路整理为规范形式。解释推导中的每一步。验证规范模型中的元件与表7.1 一致。
+
+**7.4** 图2.32 的理想电流馈电桥变换器工作于连续导通模式。
+
+(a) 确定此变换器的非线性平均方程。
+
+(b) 扰动和线性化，确定小信号交流方程。
+
+(c) 构造此变换器的小信号交流等效电路模型。
+
+**7.5** 为图7.19所示工作于连续导通模式的反激变换器构造完整的小信号交流等效电路模型。变压器含归算到一次侧的磁化电感 $L$。此外，变压器呈现显著铁损，可用与一次绕组并联的电阻 $R_C$ 建模。所有其他元件为理想。可用任何有效方法求解此题。模型应正确预测 $i_g(t)$ 的变化。
+
+**7.6** Ćuk 变换器建模。可用任何有效方法求解此题。
+
+(a) 导出建模理想 Ćuk 变换器的小信号动态方程。
+
+(b) 为 Ćuk 变换器构造完整的小信号等效电路模型。
+
+![源页 p.285](../assets/page-snapshots/chapter-7/page-285.png)
+
+图7.54 反相 SEPIC，习题7.7
+
+**7.7** 反相 SEPIC 建模。可用任何有效方法求解此题。
+
+(a) 导出建模图7.54所示变换器的小信号动态方程。
+
+(b) 为反相 SEPIC 构造完整的小信号等效电路模型。
+
+![源页 p.285](../assets/page-snapshots/chapter-7/page-285.png)
+
+图7.55 非理想降压变换器，习题7.8
+
+**7.8** 考虑图7.55 的非理想降压变换器。输入电压源 $v_g(t)$ 有内阻 $R_g$。其他元件非理想性可忽略。
+
+(a) 用状态空间平均法确定描述由晶体管占空比 $d$ 和输入电压 $v_g$ 变化引起的 $i$、$v$ 和 $i_g$ 变化的小信号交流方程。
+
+(b) 构造对应 (a) 方程的交流等效电路模型。
+
+(c) 求解模型以确定小信号控制-输出传递函数的表达式。
+
+**7.9** 从式 (7.19) 出发，导出式 (7.20) 和 (7.22)。展示推导中的所有步骤。
+
+**7.10** 一个反激变换器工作于连续导通模式。MOSFET 开关有导通电阻 $R_{on}$，副侧二极管有恒定正向压降 $V_D$。反激变压器有一次绕组电阻 $R_p$ 和二次绕组电阻 $R_s$。
+
+(a) 导出此变换器的小信号交流方程。
+
+(b) 导出在连续导通模式下有效且正确建模上述损耗及变换器输入和输出端口的完整小信号交流等效电路模型。
+
+**7.11** 图7.56a 的双输出反激变换器工作于连续导通模式。可假定变换器无损。
+
+![源页 p.286](../assets/page-snapshots/chapter-7/page-286.png)
+
+图7.56 双输出反激变换器，习题7.11：(a) 变换器电路；(b) 小信号交流等效电路
+
+(a) 为此变换器导出小信号交流等效电路。
+
+(b) 证明此双输出变换器的小信号交流等效电路可写成图7.56b 的广义规范形式。给出发生器 $e(s)$ 和 $j(s)$ 的解析表达式。
+
+**7.12** 构造一个脉宽调制器电路，其中锯齿波发生器由三角波发生器替代，如图7.57a所示。三角波形如图7.57b所示。
+
+![源页 p.286](../assets/page-snapshots/chapter-7/page-286.png)
+
+图7.57 习题7.12
+
+(a) 确定变换器开关频率，以 Hz 为单位。
+
+(b) 确定此电路的增益 $d(t)/v_c(t)$。
+
+(c) $v_c$ 在何范围内 (b) 的答案有效？

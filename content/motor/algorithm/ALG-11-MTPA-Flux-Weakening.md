@@ -18,10 +18,10 @@ navGroupOrder: 30
 
 # ALG-11 MTPA 与弱磁控制
 
-**模块编号：** ALG-11
-**模块名称：** MTPA 与弱磁控制（MTPA & Flux Weakening）
-**难度等级：** 
-**前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现
+- **模块编号：** ALG-11
+- **模块名称：** MTPA 与弱磁控制（MTPA & Flux Weakening）
+- **难度等级：** 
+- **前置知识：** ALG-01 FOC理论基础、ALG-05 有感FOC实现
 
 ---
 

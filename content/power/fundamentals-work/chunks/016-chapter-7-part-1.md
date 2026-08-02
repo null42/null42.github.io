@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第7章part 1 - 7 AC Equivalent Circuit Modeling"
+title: "第7章 交流等效电路建模（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1000 +18,431 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第7章part 1 - 7 AC Equivalent Circuit Modeling
+# 第7章 交流等效电路建模（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 227-246  
-> Chunk ID: `chapter-7-part-1`
+> 源页：227–246
+> 本部分涵盖 7.1 引言和 7.2 基本交流建模方法。
 
-## 主干提取
+## 7.1 引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+变换器系统总是需要反馈。例如，在典型的直流-直流变换器应用中，输出电压 $v(t)$ 必须保持恒定，无论输入电压 $v_g(t)$ 或有效负载电阻 $R$ 如何变化。这通过构造一个电路来实现，该电路改变变换器控制输入[即占空比 $d(t)$]，使输出电压 $v(t)$ 被调节为等于所需的参考值 $v_{ref}$。在逆变器系统中，反馈环路使输出电压跟随正弦参考电压。在现代低谐波整流器系统中，控制系统使变换器输入电流正比于输入电压，使输入端口对交流电源呈现电阻性负载。故反馈被广泛采用。
 
-## 术语表
+含降压变换器和反馈环路框图的典型直流-直流系统如图7.1所示。希望设计此反馈系统使输出电压被精确调节，且对 $v_g(t)$ 或负载电流的扰动不敏感。此外，反馈系统应稳定，暂态超调、建立时间和稳态调节等性能应满足技术指标。变换器及其控制系统（如图7.1）的交流建模和设计是本书第二部分的主题。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.228](../assets/page-snapshots/chapter-7/page-228.png)
 
-## 中文翻译
+图7.1 一个简单的直流-直流稳压器系统，含降压变换器功率级和反馈网络
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+为设计图7.1系统，我们需要开关变换器的动态模型。功率输入电压、负载电流或占空比的变化如何影响输出电压？小信号传递函数是什么？为回答这些问题，我们将第2和第3章发展的稳态模型扩展以包含变换器电感和电容引入的动态。连续导通模式下变换器的动态可用与第2、3章很相似的技巧建模；所得交流等效电路与第3章导出的直流等效电路高度相似。
 
-## 英文原文
+建模是用数学手段表示物理现象。在工程中，希望建模系统的重要主导行为而忽略其他不重要的现象。使用元件的简化端子方程，系统响应的许多方面被完全忽略，即"未建模"。所得简化模型给出对系统行为的物理洞察，有助于工程师设计系统以给定方式工作。故建模过程涉及用近似忽略小但复杂的现象，以求理解最重要的内容。一旦获得基本洞察，可能希望仔细精细化模型，计入一些先前忽略的现象。现实是真实物理系统很复杂，其详细分析很容易导致难以处理且无用的数学混乱。近似模型是获得理解和物理洞察的重要工具。
 
-```text
-7
-AC Equivalent Circuit Modeling
-7.1 Introduction
-Converter systems invariably require feedback. For example, in a typical dc–dc converter appli-
-cation, the output voltage v(t) must be kept constant, regardless of changes in the input voltage
-vg(t)o ri nt h eeﬀective load resistance R. This is accomplished by building a circuit that varies
-the converter control input [i.e., the duty cycle d(t)] in such a way that the output voltage v(t)
-is regulated to be equal to a desired reference value vre f . In inverter systems, a feedback loop
-causes the output voltage to follow a sinusoidal reference voltage. In modern low-harmonic
-rectiﬁer systems, a control system causes the converter input current to be proportional to the
-input voltage, such that the input port presents a resistive load to the ac source. So feedback is
-commonly employed.
-A typical dc–dc system incorporating a buck converter and feedback loop block diagram is
-illustrated in Fig. 7.1. It is desired to design this feedback system in such a way that the output
-voltage is accurately regulated, and is insensitive to disturbances in vg(t) or in the load current.
-In addition, the feedback system should be stable, and properties such as transient overshoot,
-settling time, and steady-state regulation should meet speciﬁcations. The ac modeling and de-
-sign of converters and their control systems such as Fig. 7.1 is the subject of Part II of this
-book.
-To design the system of Fig.7.1, we need a dynamic model of the switching converter. How
-do variations in the power input voltage, the load current, or the duty cycle a ﬀect the output
-voltage? What are the small-signal transfer functions? To answer these questions, we will extend
-the steady-state models developed in Chaps. 2 and 3 to include the dynamics introduced by the
-inductors and capacitors of the converter. Dynamics of converters operating in the continuous
-conduction mode can be modeled using techniques quite similar to those of Chaps. 2 and 3;t h e
-resulting ac equivalent circuits bear a strong resemblance to the dc equivalent circuits derived
-in Chap. 3.
-Modeling is the representation of physical phenomena by mathematical means. In engineer-
-ing, it is desired to model the important dominant behavior of a system, while neglecting other
-insigniﬁcant phenomena. Simpliﬁed terminal equations of the component elements are used,
-and many aspects of the system response are neglected altogether, that is, they are “unmodeled.”
-The resulting simpliﬁed model yields physical insight into the system behavior, which aids the
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_7
-215
+如第2章所述，设计良好的变换器在连续导通模式（CCM）下工作时开关纹波很小。故应忽略开关纹波，仅建模变换器波形中潜在的交流变化。例如，假定控制信号 $v_c(t)$ 中引入某种交流变化，使
 
-216 7 AC Equivalent Circuit Modeling
-+
-+
-v(t)vg(t)
-Switching converterPower
-input
-Load
-+
-R
-Compensator
-Gc(s)
-vref
-Voltage
-reference
-v
-Feedback
-connection
-Pulse-width
-modulator
-vc
-Transistor
-gate driver
-c(t)
-c(t)
-TsdTs t t
-vc(t)
-Controller
-Fig. 7.1 A simple dc–dc regulator system, including a buck converter power stage and a feedback net-
-work
-engineer in designing the system to operate in a given speciﬁed manner. Thus, the modeling pro-
-cess involves use of approximations to neglect small but complicating phenomena, in an attempt
-to understand what is most important. Once this basic insight is gained, it may be desirable to
-carefully reﬁne the model, by accounting for some of the previously ignored phenomena. It is
-a fact of life that real, physical systems are complex, and their detailed analysis can easily lead
-to an intractable and useless mathematical mess. Approximate models are an important tool for
-gaining understanding and physical insight.
-As discussed in Chap.2, the switching ripple is small in a well-designed converter operating
-in continuous conduction mode (CCM). Hence, we should ignore the switching ripple, and
-model only the underlying ac variations in the converter waveforms. For example, suppose that
-some ac variation is introduced into the control signal v
-c(t), such that
-vc(t)= Vc+ Vcm cosωmt (7.1)
-where Vc and Vcm are constants,|Vcm|≪ Vc, and the modulation frequencyωm is much smaller
-than the converter switching frequencyωS = 2πfs. This control signal is fed into a pulse-width
-modulator (PWM) that generates a gate drive signal having switching frequency fs= 1/Ts and
-whose duty cycle during each switching period depends on the control signal vc(t) applied dur-
-ing that period. The resulting transistor gate drive signal is illustrated in Fig. 7.2a, and typical
-buck–boost converter inductor current and output voltage waveformsiL(t) and v(t) are illustrated
-in Fig. 7.2b. The spectrum of v(t) is illustrated in Fig. 7.3. This spectrum contains components
-at the switching frequency as well as its harmonics and sidebands; these components are small
-in magnitude if the switching ripple is small. In addition, the spectrum contains a low-frequency
+$$v_c(t) = V_c + V_{cm}\cos\omega_m t \tag{7.1}$$
 
-7.1 Introduction 217
-0 5 10 15 20
-0
-0.5
-1
-0 5 10 15 20
-0
-2
-4
-6
-0 5 10 15 20
-17
-16
-15
-14
-13
-iL(t) Ts
-iL(t)
-vc(t)
-Gate drive
-(a)
-(b)
-(c)
-t
-Ts
-t
-Ts
-t
-Ts
-v(t) Ts
-v(t)
-Fig. 7.2 Ac variation of the converter signals: (a) control signalvc(t) and transistor gate drive logic signal,
-in which the duty cycle varies slowly; (b) the resulting inductor current waveform; (c) the resulting output
-voltage waveform. Both the actual waveforms iL(t)a n d v(t), as well as their averaged, low-frequency
-components⟨iL(t)⟩Ts and⟨v(t)⟩Ts are illustrated
-Spectrum
-of v (t)
-m s
-{
-Modulation
-frequency and its
-harmonics
-{
-Switching
-frequency and
-sidebands
-{
-Switching
-harmonics
-Fig. 7.3 Spectrum of the output voltage waveform v(t)o fF i g .7.2
-component at the modulation frequency ωm. The magnitude and phase of this component de-
-pend not only on the control signal and duty-cycle variation, but also on the frequency response
-of the converter. If we neglect the switching ripple, then this low-frequency component remains
-[also illustrated in Fig. 7.2c]. The objective of our ac modeling e ﬀorts is to predict this low-
-frequency component.
+其中 $V_c$ 和 $V_{cm}$ 为常数，$|V_{cm}| \ll V_c$，调制频率 $\omega_m$ 远小于变换器开关频率 $\omega_s = 2\pi f_s$。此控制信号馈入脉宽调制器（PWM），产生开关频率 $f_s = 1/T_s$ 的栅极驱动信号，其每个开关周期内的占空比取决于该周期内施加的控制信号 $v_c(t)$。所得晶体管栅极驱动信号如图7.2a所示，典型的升降压变换器电感电流和输出电压波形 $i_L(t)$ 和 $v(t)$ 如图7.2b所示。$v(t)$ 的频谱如图7.3所示。该频谱含开关频率及其谐波和边带的分量；若开关纹波很小，这些分量幅度很小。此外，频谱含调制频率 $\omega_m$ 处的低频分量。该分量的幅度和相位不仅取决于控制信号和占空比变化，还取决于变换器的频率响应。若忽略开关纹波，则此低频分量保留[亦示于图7.2c]。我们交流建模的目标是预测此低频分量。
 
-218 7 AC Equivalent Circuit Modeling
-A simple method for deriving the small-signal model of CCM converters is explained in
-Sect. 7.2. The switching ripples in the inductor current and capacitor voltage waveforms are
-removed by averaging over one switching period. Hence, the low-frequency components of the
-inductor and capacitor waveforms are modeled by equations of the form
-Ld⟨iL(t)⟩Ts
-dt =⟨vL(t)⟩Ts
-C d⟨vC(t)⟩Ts
-dt =⟨iC(t)⟩Ts (7.2)
-where⟨x(t)⟩Ts denotes the average of x(t) over an interval of length Ts:
-⟨x(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-x(τ)dτ (7.3)
-So we will employ the basic approximation of removing the high-frequency switching ripple by
-averaging over one switching period. Yet the average value is allowed to vary from one switch-
-ing period to the next, such that low-frequency variations are modeled. In e ﬀect, the “moving
-average” of Eq. (7.3) constitutes low-pass ﬁltering of the waveform. A few of the numerous
-references on averaged modeling of switching converters are listed at the end of this chapter
-[15–17, 46, 61–76].
-Note that the principles of inductor volt-second balance and capacitor charge balance pre-
-dict that the right-hand sides of Eqs. ( 7.2) are zero when the converter operates in equilibrium.
-Equations (7.2) describe how the inductor currents and capacitor voltages change when nonzero
-average inductor voltage and capacitor current are applied over a switching period.
-The averaged inductor voltage and capacitor currents of Eq. ( 7.2) are, in general, nonlin-
-ear functions of the signals in the converter, and hence Eqs. ( 7.2) constitute a set of nonlinear
-diﬀerential equations. Indeed, the spectrum in Fig. 7.3 also contains harmonics of the modula-
-tion frequencyω
-m. In most converters, these harmonics become signiﬁcant in magnitude as the
-modulation frequency ωm approaches the switching frequency ωs, or as the modulation am-
-plitude Dm approaches the quiescent duty cycle D. Nonlinear elements are not uncommon in
-electrical engineering; indeed, all semiconductor devices exhibit nonlinear behavior. To obtain
-a linear model that is easier to analyze, we usually construct a small-signal model that has been
-linearized about a quiescent operating point, in which the harmonics of the modulation or exci-
-tation frequency are neglected. As an example, Fig. 7.4 illustrates linearization of the familiar
-diode i–v characteristic shown in Fig. 7.4b. Suppose that the diode current i(t) has a quiescent
-(dc) value I and a signal component ˆi(t). As a result, the voltage v(t) across the diode has a
-quiescent value V and a signal component ˆv(t). If the signal components are small compared to
-the quiescent values,
-| ˆv|≪| V|,| ˆi|≪| I| (7.4)
-then the relationship between ˆv(t) andˆi(t) is approximately linear, ˆv(t)= r
-Dˆi(t). The conductance
-1/rD represents the slope of the diode characteristic, evaluated at the quiescent operating point.
-The small-signal equivalent circuit model of Fig. 7.4c describes the diode behavior for small
-variations around the quiescent operating point.
-An example of a nonlinear converter characteristic is the dependence of the steady-state
-output voltageV of the buck–boost converter on the duty cycleD, illustrated in Fig.7.5. Suppose
-that the converter operates with some dc output voltage, say, V = −Vg, corresponding to a
+![源页 p.229](../assets/page-snapshots/chapter-7/page-229.png)
 
-7.1 Introduction 219
-Fig. 7.4 Small-signal equivalent circuit modeling of the diode: (a) a nonlinear diode conducting currenti;
-(b) linearization of the diode characteristic around a quiescent operating point; (c) a linearized small-signal
-model
-Fig. 7.5 Linearization of the static
-control-to-output characteristic of the
-buck–boost converter about the quiescent
-operating point D= 0.5
-quiescent duty cycle of D= 0.5. Duty-cycle variations ˆd about this quiescent value will excite
-variations ˆv in the output voltage. If the magnitude of the duty-cycle variation is su ﬃciently
-small, then we can compute the resulting output voltage variations by linearizing the curve. The
-slope of the linearized characteristic in Fig. 7.5 is chosen to be equal to the slope of the actual
-nonlinear characteristic at the quiescent operating point; this slope is the dc control-to-output
-gain of the converter. The linearized and nonlinear characteristics are approximately equal in
-value provided that the duty-cycle variations ˆd are suﬃciently small.
-Although it illustrates the process of small-signal linearization, the buck–boost example of
-Fig. 7.5 is oversimpliﬁed. The inductors and capacitors of the converter cause the gain to exhibit
-a frequency response. To correctly predict the poles and zeroes of the small-signal transfer
-functions, we must linearize the converter averaged di ﬀerential equations, Eqs. ( 7.2). This is
-done in Sect. 7.2. A small-signal ac equivalent circuit can then be constructed using the methods
+图7.2 变换器信号的交流变化：(a) 控制信号 $v_c(t)$ 和晶体管栅极驱动逻辑信号，其中占空比缓慢变化；(b) 所得电感电流波形；(c) 所得输出电压波形。同时给出了实际波形 $i_L(t)$ 和 $v(t)$ 及其平均低频分量 $\langle i_L(t)\rangle_{T_s}$ 和 $\langle v(t)\rangle_{T_s}$
 
-220 7 AC Equivalent Circuit Modeling
-Fig. 7.6 Small-signal ac equivalent circuit model of the buck–boost converter
-developed in Chap.3. The resulting small-signal model of the buck–boost converter is illustrated
-in Fig. 7.6; this model can be solved using conventional circuit analysis techniques, to ﬁnd the
-small-signal transfer functions, output impedance, and other frequency-dependent properties. In
-systems such as Fig. 6.51, the equivalent circuit model can be inserted in place of the converter.
-When small-signal models of the other system elements (such as the pulse-width modulator)
-are inserted, then a complete linearized system model is obtained. This model can be analyzed
-using standard linear techniques, such as the Laplace transform, to gain insight into the behavior
-and properties of the system.
-Two well-known variants of the ac modeling method, state-space averaging and circuit av-
-eraging, are explained in Sect. 7.5 and Chap. 14. An extension of circuit averaging, known
-as averaged switch modeling , is also discussed in Chap. 14. Since the switches are the only
-elements that introduce switching harmonics, equivalent circuit models can be derived by av-
-eraging only the switch waveforms. The converter models suitable for analysis or simulation
-are obtained simply by replacing the switches with the averaged switch model. The averaged
-switch modeling technique can be extended to other modes of operation such as the discontinu-
-ous conduction mode, as well as to current-programmed control and to resonant converters. In
-Sect. 7.4, it is shown that the small-signal model of any dc–dc pulse-width modulated CCM
-converter can be written in a standard form. Called the canonical model, this equivalent cir-
-cuit describes the basic physical functions that any of these converters must perform. A simple
-model of the pulse-width modulator circuit is described in Sect. 7.3.
-These models are useless if you do not know how to apply them. So in Chap.8, the frequency
-response of converters is explored, in a design-oriented and detailed manner. Small-signal trans-
-fer functions of the basic converters are tabulated. Bode plots of converter transfer functions
-and impedances are derived in a simple, approximate manner, which allows insight to be gained
-into the origins of the frequency response of complex converter systems.
-These results are used to design converter control systems in Chap. 9 and input ﬁlters in
-Chap. 17. The modeling techniques are extended in Chaps.15 and 18 to cover the discontinuous
-conduction mode and the current-programmed mode.
-7.2 The Basic AC Modeling Approach
-In this section, the steps in derivation of the small-signal ac model of a PWM converter are
-derived and explained. The key steps are: (a) development of the equations relating the low-
-frequency averages of the inductor and capacitor waveforms, with use of a dynamic version
-of the small-ripple approximation, (b) perturbation and linearization of the averaged equations,
-and (c) construction of an ac equivalent circuit model.
+![源页 p.229](../assets/page-snapshots/chapter-7/page-229.png)
 
-7.2 The Basic AC Modeling Approach 221
-+
-L
-CR
-+
-v(t)
-12
-i(t)
-vg(t)
-Fig. 7.7 Buck–boost converter example
-(a)
-+ LC R
-+
-v(t)
-i(t)
-vg(t)
-(b)
-+ LC R
-+
-v(t)
-i(t)
-vg(t)
-Fig. 7.8 Buck–boost converter circuit: ( a) when the switch is in position 1, ( b) when the switch is in
-position 2
-The buck–boost converter of Fig. 7.7 is employed as an example. The analysis begins as
-usual, by determination of the voltage and current waveforms of the inductor and capacitor.
-When the switch is in position 1, the circuit of Fig. 7.8a is obtained. The inductor voltage and
-capacitor current are
-vL(t)= Ldi(t)
-dt = vg(t) (7.5)
-iC(t)= C dv(t)
-dt =−v(t)
-R (7.6)
-With the switch in position 2, the circuit of Fig.7.8b is obtained. Its inductor voltage and capac-
-itor current are
-vL(t)= Ldi(t)
-dt = v(t) (7.7)
-iC(t)= C dv(t)
-dt =−i(t)−v(t)
-R (7.8)
-7.2.1 Averaging the Inductor and Capacitor Waveforms
-We ﬁrst derive the equation that governs how the averaged components of the inductor wave-
-forms evolve with time. We know that the instantaneous inductor current and voltage are related
-by the deﬁnition
-Ldi(t)
-dt = vL(t) (7.9)
-Is there a similar relationship between the averages of the inductor voltage and current? Let us
-compute the derivative of the average inductor current:
+图7.3 图7.2 输出电压波形 $v(t)$ 的频谱
 
-222 7 AC Equivalent Circuit Modeling
-d⟨i(t)⟩Ts
-dt = d
-dt
-[1
-Ts
-∫ t+Ts/2
-t−Ts/2
-i(τ)dτ
-]
-(7.10)
-On the right side of this equation, we can interchange the order of diﬀerentiation and integration
-because the inductor current is continuous, and because its derivativevL(t)/L has a ﬁnite number
-of discontinuities over the period of integration. Hence, the above equation becomes
-d⟨i(t)⟩Ts
-dt = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-di (τ)
-dτ dτ (7.11)
-Finally, we can use Eq. (7.9) to replace di(τ)/dτwith vL(τ):
-d⟨i(t)⟩Ts
-dt = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-vL(τ)
-L dτ (7.12)
-This can be rearranged to obtain
-L d⟨i(t)⟩Ts
-dt =⟨vL(t)⟩Ts (7.13)
-This result shows that average components of the inductor voltage and current follow the same
-deﬁning equation (7.9), with no change in L and no additional terms.
-We can employ a similar analysis to ﬁnd the relationship between the average components
-of a capacitor voltage and current, with the following result:
-C d⟨v(t)⟩Ts
-dt =⟨iC(t)⟩Ts (7.14)
-We next need to evaluate the right sides of the above two equations, by averaging the inductor
-voltage and capacitor current waveforms.
-7.2.2 The Average Inductor Voltage and the Small-Ripple Approximation
-The inductor voltage and current waveforms for the buck–boost converter example are illus-
-trated in Fig. 7.9. It is desired to compute the average inductor voltage ⟨vL(t)⟩Ts at some arbi-
-trary time t. As illustrated in Fig. 7.9, the averaging interval extends over the interval beginning
-at t−Ts/2 and ending at t+ Ts/2. For the example time illustrated, there is an interval of length
-dTs in which the inductor voltage is vL = vg, and there are two intervals of total length d′Ts in
-which the inductor voltage is vL= v.
-We now make the small-ripple approximation. But rather than replacing vg(t), v(t), and i(t)
-with their dc components Vg, V and I as in Chap. 2, we now replace them with their low-
-frequency averaged values⟨vg(t)⟩Ts ,⟨v(t)⟩Ts , and⟨i(t)⟩Ts , deﬁned by Eq. (7.3). It is important to
-note that it is valid to apply the small-ripple approximation only to quantities that actually have
-small ripple and are nonpulsating; hence, we apply this approximation to the inductor currents,
-capacitor voltages, and independent sources that indeed have small ripple and are continuous
-functions of time.
-The usefulness of the small-ripple approximation here is that we ignore the changes in these
-quantities during one switching period or during the averaging interval (t−T
-s/2, t+Ts/2). As in
-the steady-state case, the small-ripple approximation considerably simpliﬁes the mathematics.
+7.2 节解释了导出 CCM 变换器小信号模型的简单方法。电感电流和电容电压波形的开关纹波通过在一个开关周期上平均来去除。故电感和电容波形的低频分量由如下形式的方程建模
 
-7.2 The Basic AC Modeling Approach 223
-Fig. 7.9 Mechanics of evaluating the
-average inductor waveforms at some ar-
-bitrary time t: averaging the inductor
-voltage v
-L(t) and the inductor currenti(t)
-v Ts
-L
-i(τ)
-vg Ts
-Lv Ts
-L
-τ
-τ
-vL(τ)
-dTs
-v(t) Ts
-vg(t)
-Ts
-Averaging interval
-Total time
-d′Ts
-t + Ts/2t Ts/2 t
-Ts/2
-tt + Ts/2t Ts/2
-Ts/2
-This approximation is valid provided that the natural frequencies of the circuit are su ﬃciently
-slower than the switching frequency, so that the ripples in the actual inductor current and capac-
-itor voltage waveforms are indeed small.
-With the small-ripple approximation, we can express the inductor voltage for the subinterval
-of length dTs [Eq. (7.5)] as
-vL(t)= Ldi(t)
-dt ≈⟨vg(t)⟩Ts (7.15)
-In a similar manner, for the remaining subintervals of total length d′Ts [Eq. (7.7)], we can ex-
-press the inductor voltage as
-vL(t)= Ldi(t)
-dt ≈⟨v(t)⟩Ts (7.16)
-The average inductor voltage is therefore
-⟨vL(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-vL(τ) dτ≈d(t)⟨vg(t)⟩Ts + d′(t)⟨v(t)⟩Ts (7.17)
-Insertion of this expression into Eq. (7.13) leads to
-Ld⟨i(t)⟩Ts
-dt = d(t)⟨vg(t)⟩Ts + d′(t)⟨v(t)⟩Ts (7.18)
-This equation describes how the low-frequency components of the inductor current vary with
-time, and is the desired result.
-7.2.3 Discussion of the Averaging Approximation
-The averaging operator, Eq. (7.3), is repeated below:
-⟨x(t)⟩Ts = 1
-Ts
-∫ t+Ts/2
-t−Ts/2
-x(τ)dτ (7.19)
+$$\begin{aligned} L\frac{d\langle i_L(t)\rangle_{T_s}}{dt} &= \langle v_L(t)\rangle_{T_s} \\ C\frac{d\langle v_C(t)\rangle_{T_s}}{dt} &= \langle i_C(t)\rangle_{T_s} \end{aligned} \tag{7.2}$$
 
-224 7 AC Equivalent Circuit Modeling
-Averaging is an artiﬁce that facilitates the derivation of tractable equations describing the low-
-frequency dynamics of the switching converter. It removes the waveform components at the
-switching frequency and its harmonics, while preserving the magnitude and phase of the wave-
-form low-frequency components. In this chapter, we replace the converter waveforms by their
-averages, to ﬁnd models that describe the dynamic properties of switching converters operating
-in the continuous conduction mode. In later chapters of this text, this averaging operator is em-
-ployed in other situations such as the discontinuous conduction mode or current-programmed
-control.
-Figure 7.2 illustrates the inductor current and voltage waveforms of a buck–boost converter
-in which the duty cycle is varied sinusoidally. The waveform averages as computed by Eq. (7.19)
-are superimposed. It can be seen that the⟨i(t)⟩
-Ts waveform indeed passes through the center of
-the actual i(t) waveform. Additionally, an increase in⟨vL(t)⟩Ts causes an increase in the slope of
-⟨i(t)⟩Ts , as predicted by Eq. (7.13).
-The averaging operator of Eq. ( 7.19) is a transformation that e ﬀectively performs a low-
-pass function to remove the switching ripple. Indeed, we can take the Laplace transformation
-of Eq. (7.19) to obtain:
-⟨x(s)⟩
-Ts = Gav(s)x(s) (7.20)
-It can be shown that Gav(s)i sg i v e nb y
-Gav(s)= esTs/2−e−sTs/2
-sTs
-(7.21)
-We can compute the eﬀect of the averaging operator on a sinusoid of angular frequency ωby
-letting s= jωin the above equation. The transfer function Gav then becomes
-Gav( jω)= ejωTs/2−e−jωTs/2
-jωTs
-= sin(ωTs/2)
-ωTs/2 (7.22)
-Figure 7.10 contains a plot of the magnitude (expressed in decibels) of Eq. 7.22 vs. frequency
-(for more information on frequency response plots, see Sect. 8.1). The averaging operator ex-
-hibits a low-frequency gain of 1 (or 0 dB), and a gain of zero (or −∞dB) at the switching
-frequency fs and its harmonics. Equation (7.22) is purely real, and exhibits zero phase shift for
-frequencies less than the switching frequency. Thus, the averaging operator preserves the magni-
-tude and phase of the low-frequency components of the waveform, while removing components
-at the switching frequency and its harmonics.
-For frequencies f greater than approximately f
-s/3, Fig. 7.10 exhibits substantial attenuation.
-This suggests that averaged models may not accurately predict transient responses at higher
-frequencies. The high-frequency dynamics of the discontinuous conduction mode is an example
-of this behavior, and is discussed further in Sect. 15.5.
-Unlike the steady-state analyses of Chaps. 2 and 3,F i g .7.9 is sketched at an arbitrary time
-t, with an averaging interval that does not necessarily begin when the transistor is switched
-on. This rigorous deﬁnition of averaging is important when modeling high-bandwidth control
-schemes such as the current-programmed mode of Chap. 18. The choice of averaging interval
-extending from ( t−T
-s/2) to ( t+ Ts/2) preserves the phase of the waveform, and therefore
-correctly predicts the behavior of current-programmed converters. It should also be noted that
-computing the average by integrating one half-cycle into the future [i.e., to (t+ T
-s/2)] does not
-violate any physical causality constraint, because this is merely a modeling artiﬁce that is not
-implemented in a physical circuit.
+其中 $\langle x(t)\rangle_{T_s}$ 表示 $x(t)$ 在长度为 $T_s$ 的区间上的平均：
 
-7.2 The Basic AC Modeling Approach 225
-Fig. 7.10 Frequency response of the averaging operator:∥ Gav( jω)∥ given by Eq. (7.22)
-We may also note that the result of Eq. (7.18) can be derived without such rigor. For deriva-
-tion of continuous-time models of the continuous conduction mode, the same result is obtained
-regardless of whether the averaging interval begins at ( t−Ts/2) or at the instant when the
-transistor is switched on. For the remainder of this textbook, we will continue to employ the
-simpler arguments begun in Chap. 2, in which the averaging interval begins when the transistor
-is switched on. In later chapters, the more rigorous treatment will be employed when necessary,
-such as when modeling the high-frequency dynamics of current-programmed control.
-7.2.4 Averaging the Capacitor Waveforms
-A similar procedure leads to the capacitor dynamic equation. The capacitor voltage and current
-waveforms are sketched in Fig. 7.11. When the switch is in position 1, the capacitor current is
-given by
-i
-C(t)= C dv(t)
-dt =−v(t)
-R ≈−⟨v(t)⟩Ts
-R (7.23)
-With the switch in position 2, the capacitor current is
-iC(t)= C dv(t)
-dt =−i(t)−v(t)
-R ≈−⟨i(t)⟩Ts −⟨v(t)⟩Ts
-R (7.24)
-The average capacitor current can be found by averaging Eqs. (7.23) and (7.24); the result is
-⟨iC(t)⟩Ts = d(t)
-⎦
-−⟨v(t)⟩Ts
-R
-)
-+ d′(t)
-⎦
-−⟨i(t)⟩Ts −⟨v(t)⟩Ts
-R
-)
-(7.25)
-Upon inserting this equation into Eq. (7.2) and collecting terms, one obtains
+$$\langle x(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}x(\tau)\,d\tau \tag{7.3}$$
 
-226 7 AC Equivalent Circuit Modeling
-Fig. 7.11 Buck–boost converter wave-
-forms: (a) capacitor current, ( b)c a p a c i -
-tor voltage
-(a)
-t
-iC(t)
-dTs Ts
-0
-v(t) Ts
-R i(t) Ts
-v(t) Ts
-R
-iC(t) Ts
-(b) tv(t)
-dTs Ts
-0
-v(0)
-v(dTs)
-v(Ts)
-v(t) Ts
-v(t) Ts
-RC
-v(t) Ts
-RC
-i(t) Ts
-C
-C d⟨v(t)⟩Ts
-dt =−d′(t)⟨i(t)⟩Ts −⟨v(t)⟩Ts
-R (7.26)
-This is the basic averaged equation which describes dc and low-frequency ac variations in the
-capacitor voltage.
-7.2.5 The Average Input Current
-In Chap. 3, it was found to be necessary to write an additional equation that models the dc
-component of the converter input current. This allowed the input port of the converter to be
-modeled by the dc equivalent circuit. A similar procedure must be followed here, so that low-
-frequency variations at the converter input port are modeled by the ac equivalent circuit.
-For the buck–boost converter example, the current ig(t) drawn by the converter from the
-input source is equal to the inductor current i(t) during the ﬁrst subinterval, and zero during the
-second subinterval. By neglecting the inductor current ripple and replacingi(t) with its averaged
-value⟨i(t)⟩TS , we can express the input current as follows:
-ig(t)=
-{⟨i(t)⟩Ts during subinterval 1
-0 during subinterval 2 (7.27)
-The input current waveform is illustrated in Fig. 7.12. Upon averaging over one switching pe-
-riod, one obtains
-Fig. 7.12 Buck–boost converter wave-
-forms: input source current ig(t)
-t
-ig(t)
-dTs Ts
-0 0
-i(t) Ts
-ig(t)
-Ts
-0
+故我们采用在一个开关周期上平均以去除高频开关纹波这一基本近似。但平均值允许从一个开关周期到下一个变化，从而建模低频变化。实际上，式 (7.3) 的"滑动平均"构成对波形的低通滤波。开关变换器平均建模的若干文献列于本章末 [15–17, 46, 61–76]。
 
-7.2 The Basic AC Modeling Approach 227
-⟨ig(t)⟩Ts = d(t)⟨i(t)⟩Ts (7.28)
-This is the basic averaged equation which describes dc and low-frequency ac variations in the
-converter input current.
-7.2.6 Perturbation and Linearization
-The buck–boost converter averaged equations, Eqs. (7.18), (7.26), and (7.28), are collected be-
-low:
-Ld⟨i(t)⟩TS
-dt = d(t)⟨vg(t)⟩Ts + d′(t)⟨v(t)⟩TS
-C d⟨v(t)⟩TS
-dt =−d′(t)⟨i(t)⟩Ts −⟨v(t)⟩Ts
-R (7.29)
-⟨ig(t)⟩TS = d(t)⟨i(t)⟩Ts
-These equations are nonlinear because they involve the multiplication of time-varying quantities.
-For example, the capacitor current depends on the product of the control inputd′(t) and the low-
-frequency component of the inductor current, ⟨i(t)⟩Ts . Multiplication of time-varying signals
-generates harmonics, and is a nonlinear process. Most of the techniques of ac circuit analysis,
-such as the Laplace transform and other frequency-domain methods, are not useful for nonlinear
-systems. So we need to linearize Eqs. (7.29) by constructing a small-signal model.
-Suppose that we drive the converter at some steady-state, or quiescent, duty ratio d(t)= D,
-with quiescent input voltage vg(t)= Vg. We know from our steady-state analysis of Chaps. 2
-and 3 that, after any transients have subsided, the inductor current⟨i(t)⟩TS , the capacitor voltage
-⟨v(t)⟩Ts , and the input current⟨ig(t)⟩Ts will reach the quiescent values I, V, and Ig, respectively,
-where
-V=−D
-D′ Vg
-I=−V
-D′R
-Ig= DI (7.30)
-Equations (7.30) are derived as usual via the principles of inductor volt-second and capacitor
-charge balance. They could also be derived from Eqs. (7.29) by noting that, in steady state, the
-derivatives must equal zero.
-To construct a small-signal ac model at a quiescent operating point (I, V), one assumes that
-the input voltage vg(t) and the duty cycle d(t) are equal to some given quiescent values Vg and
-D, plus some superimposed small ac variations ˆvg(t) and ˆd(t). Hence, we have
-⟨vg(t)⟩Ts = Vg+ ˆvg(t) (7.31)
-d(t)= D+ ˆd(t)
-In response to these inputs, and after any transients have subsided, the averaged inductor current
-⟨i(t)⟩Ts , the averaged capacitor voltage ⟨v(t)⟩Ts , and the averaged input current ⟨ig(t)⟩Ts wave-
-forms will be equal to the corresponding quiescent valuesI, V, and Ig, plus some superimposed
-small ac variations ˆi(t), ˆv(t), and ˆig(t):
+注意电感伏秒平衡和电容电荷平衡原理预言，当变换器在平衡点工作时式 (7.2) 的右边为零。式 (7.2) 描述了当一个开关周期内施加非零平均电感电压和电容电流时，电感电流和电容电压如何变化。
 
-228 7 AC Equivalent Circuit Modeling
-⟨i(t)⟩Ts = I+ ˆi(t)
-⟨v(t)⟩Ts = V+ ˆv(t) (7.32)
-⟨ig(t)⟩Ts = Ig+ ˆig(t)
-With the assumptions that the ac variations are small in magnitude compared to the dc quiescent
-values, or ⏐⏐⏐ˆvg(t)
-⏐⏐⏐≪
-⏐⏐⏐Vg
-⏐⏐⏐
-⏐⏐⏐ ˆd(t)
-⏐⏐⏐≪|D|⏐⏐
-⏐ˆi(t)
-⏐⏐
-⏐≪|I|
-|ˆv(t)|≪|V|⏐⏐
-⏐ˆi
-g(t)
-⏐⏐
-⏐≪
-⏐⏐
-⏐I
-g
-⏐⏐
-⏐
-(7.33)
-then the nonlinear equations ( 7.29) can be linearized. This is done by inserting Eqs. ( 7.31)
-and (7.32) into Eq. (7.29). For the inductor equation, one obtains
-Ld(I+ ˆi(t))
-dt = (D+ ˆd(t))(Vg+ ˆvg(t))+ (D′−ˆd(t))(V+ ˆv(t)) (7.34)
-It should be noted that the complement of the duty cycle is given by
-d′(t)= (1−d(t))= 1−(D+ ˆd(t))= D′−ˆd(t) (7.35)
-where D′= 1−D. The minus sign arises in the expression ford′(t) because a d(t) variation that
-causes d(t) to increase will cause d′(t) to decrease.
-By multiplying out Eq. (7.34) and collecting terms, one obtains
-L
-⎦dI
-dt+ dˆi(t)
-dt
-)
-=
-⎦
-DVg+ D′V
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-Dc terms
-+
-⎦
-Dˆvg(t)+ D′ ˆv(t)+
-⎦
-Vg−V
-) ˆd(t)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-1st order ac terms
-(linear)
-+ ˆd(t)
-⎦
-ˆvg(t)−ˆv(t)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-2nd order ac terms
-(nonlinear)
-(7.36)
-The derivative of I is zero, since I is by deﬁnition a dc (constant) term. For the purposes of
-deriving a small-signal ac model, the dc terms can be considered known constant quantities. On
-the right-hand side of Eq. (7.36), three types of terms arise:
-Dc terms: These terms contain dc quantities only.
-First-order ac terms: Each of these terms contains a single ac quantity, usually multiplied by a
-constant coeﬃcient such as a dc term. These terms are linear functions of the ac variations.
-Second-order ac terms : These terms contain the products of ac quantities. Hence they are
-nonlinear, because they involve the multiplication of time-varying signals.
-It is desired to neglect the nonlinear ac terms. Provided that the small-signal assumption,
-Eq. (7.33), is satisﬁed, then each of the second-order nonlinear terms is much smaller in magni-
-tude that one or more of the linear ﬁrst-order ac terms. For example, the second-order ac term
-ˆd(t)ˆvg(t) is much smaller in magnitude than the ﬁrst-order ac term Dˆvg(t) whenever| ˆd(t)|≪ D.
-So we can neglect the second-order terms. Also, by deﬁnition [or by use of Eq. ( 7.30)], the dc
-terms on the right-hand side of the equation are equal to the dc terms on the left-hand side, or
-zero.
+式 (7.2) 中平均电感电压和电容电流一般是变换器信号的非线性函数，故式 (7.2) 构成一组非线性微分方程。实际上，图7.3 频谱也含调制频率 $\omega_m$ 的谐波。在大多数变换器中，当调制频率 $\omega_m$ 接近开关频率 $\omega_s$ 或调制幅度 $D_m$ 接近静态占空比 $D$ 时，这些谐波的幅度变得显著。非线性元件在电气工程中并不罕见；实际上所有半导体器件都表现非线性行为。为获得更易分析的线性模型，通常构造在静态工作点线性化的小信号模型，其中忽略调制或激励频率的谐波。作为例子，图7.4 给出了熟悉的二极管 i–v 特性（如图7.4b）的线性化。假定二极管电流 $i(t)$ 有静态（直流）值 $I$ 和信号分量 $\hat{i}(t)$。结果二极管两端电压 $v(t)$ 有静态值 $V$ 和信号分量 $\hat{v}(t)$。若信号分量远小于静态值，
 
-7.2 The Basic AC Modeling Approach 229
-We are left with the ﬁrst-order ac terms on both sides of the equation. Hence,
-Ldˆi(t)
-dt = Dˆvg(t)+ D′ ˆv(t)+ (Vg−V) ˆd(t) (7.37)
-This is the desired result: the small-signal linearized equation that describes variations in the
-inductor current.
-The capacitor equation can be linearized in a similar manner. insertion of Eqs. ( 7.31)
-and (7.32) into the capacitor equation of Eq. (7.29) yields
-cd(V+ ˆv(t))
-dt =−
-⎦
-D′−ˆd(t)
-)
-(I+ ˆi(t))−(V+ ˆv(t))
-R (7.38)
-Upon multiplying out Eq. (7.38) and collecting terms, one obtains
-C
-⎦dV
-dt + dˆv(t)
-dt
-)
-=
-⎦
-−D′I−V
-R
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-Dc terms
-+
-⎦
-−D′ˆi(t)−ˆv(t)
-R + Id′(t)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-1st order ac terms
-(linear)
-+ ˆd(t)ˆi(t)/bracehext/bracehext
-2nd order ac term
-(nonlinear)
-(7.39)
-By neglecting the second-order terms, and noting that the dc terms on both sides of the equation
-are equal, we again obtain a linearized ﬁrst-order equation, containing only the ﬁrst-order ac
-t e r m so fE q .(7.39):
-C dˆv(t)
-dt =−D′ˆi(t)−ˆv(t)
-R + I ˆd(t) (7.40)
-This is the desired small-signal linearized equation that describes variations in the capacitor
-voltage.
-Finally, the equation of the average input current is also linearized. Insertion of Eqs. ( 7.31)
-and (7.32) into the input current equation of Eq. (7.29) yields
-Ig+ ˆig(t)= (D+ ˆd(t))(l+ ˆi(t)) (7.41)
-By collecting terms, we obtain
-Ig
-Dc term
-+ ˆig(t)
-1st order ac term
-= (DI)
-Dc term
-+
-⎦
-Dˆi(t)+ I ˆd(t)
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-1st order ac terms
-(linear)
-+ ˆd(t)ˆi(t)/bracehext/bracehext
-2nd order ac term
-(nonlinear)
-(7.42)
-We again neglect the second-order nonlinear terms. The dc terms on both sides of the equation
-are equal. The remaining ﬁrst-order linear ac terms are
-ˆig(t)= Dˆi(t)+ I ˆd(t) (7.43)
-This is the linearized small-signal equation that describes the low-frequency ac components of
-the converter input current.
-In summary, the nonlinear averaged equations of a switching converter can be linearized
-about a quiescent operating point. The converter independent inputs are expressed as constant
-(dc) values, plus small ac variations. In response, the converter averaged waveforms assume
-similar forms. Insertion of Eqs. (7.31) and (7.32) into the converter averaged nonlinear equations
-yields dc terms, linear ac terms, and nonlinear terms. If the ac variations are suﬃciently small
-in magnitude, then the nonlinear terms are much smaller than the linear ac terms, and so can be
-neglected. The remaining linear ac terms comprise the small-signal ac model of the converter.
+$$|\hat{v}| \ll |V|, \quad |\hat{i}| \ll |I| \tag{7.4}$$
 
-230 7 AC Equivalent Circuit Modeling
-7.2.7 Construction of the Small-Signal Equivalent Circuit Model
-Equations (7.37), (7.40), and (7.43) are the small-signal ac description of the ideal buck–boost
-converter, and are collected below:
-Ldˆi(t)
-dt = Dˆvg(t)+ D′ ˆv(t)+ (Vg−V) ˆd(t)
-C dˆv(t)
-dt =−D′ˆi(t)−ˆv(t)
-R + I ˆd(t)
-ˆig(t)= Dˆi(t)+ I ˆd(t) (7.44)
-In Chap. 3, we collected the averaged dc equations of a converter, and reconstructed an equiva-
-lent circuit that modeled the dc properties of the converter. We can use the same procedure here,
-to construct averaged small-signal ac models of converters.
-The inductor equation of ( 7.44), or Eq. ( 7.37), describes the voltages around a loop con-
-taining the inductor. Indeed, this equation was derived by ﬁnding the inductor voltage via loop
-analysis, then averaging, perturbing, and linearizing. So the equation represents the voltages
-around a loop of the small-signal model, which contains the inductor. The loop current is the
-small-signal ac inductor current ˆi(t). As illustrated in Fig. 7.13,t h et e r mLdˆi(t)/dt represents
-the voltage across the inductor L in the small-signal model. This voltage is equal to three other
-voltage terms. Dˆvg(t) and D′ ˆv(t) represent dependent sources as shown. These terms will be
-combined into ideal transformers. The term (Vg−V) ˆd(t) is driven by the control input ˆd(t), and
-is represented by an independent source as shown.
-Fig. 7.13 Circuit equivalent to the small-signal ac inductor loop equation of Eq. (7.44)o r( 7.37)
-The capacitor equation of ( 7.44), or Eq. ( 7.40), describes the currents ﬂowing into a node
-attached to the capacitor. This equation was derived by ﬁnding the capacitor current via node
-analysis, then averaging, perturbing, and linearizing. Hence, this equation describes the cur-
-rents ﬂowing into a node of the small-signal model, attached to the capacitor. As illustrated in
-Fig. 7.14,t h et e r mCd ˆv(t)/dt represents the current ﬂowing through capacitor C in the small-
-signal model. The capacitor voltage is ˆ v(t). According to the equation, this current is equal
-to three other terms. The term −D′ˆi(t) represents a dependent source, which will eventually
-be combined into an ideal transformer. The term −ˆv(t)/R is recognized as the current ﬂowing
-through the load resistor in the small-signal model. The resistor is connected in parallel with
-the capacitor, such that the ac voltage across the resistor R is ˆv(t) as expected. The term I ˆd(t)i s
-driven by the control input ˆd(t), and is represented by an independent source as shown.
+则 $\hat{v}(t)$ 与 $\hat{i}(t)$ 的关系近似线性，$\hat{v}(t) = r_D\hat{i}(t)$。电导 $1/r_D$ 代表二极管特性在静态工作点处的斜率。图7.4c 的小信号等效电路模型描述了二极管在静态工作点附近小变化时的行为。
 
-7.2 The Basic AC Modeling Approach 231
-Fig. 7.14 Circuit equivalent to the small-signal ac capacitor node equation of Eq. (7.44)o r( 7.40)
-Fig. 7.15 Circuit equivalent to the small-
-signal ac input source current equation of
-Eq. (7.44)o r( 7.43)
-Fig. 7.16 Buck–boost converter small-signal ac equivalent circuit: ( a) the circuits of Figs. 7.13, 7.14,
-7.15, collected together; (b) combination of dependent sources into eﬀective ideal transformers, leading to
-the ﬁnal model
-Finally, the input current equation of ( 7.44), or Eq. ( 7.43), describes the small-signal ac
-current ˆig(t) drawn by the converter out of the input voltage source ˆvg(t). This is a node equation
-which states thatˆig(t) is equal to the currents in two branches, as illustrated in Fig.7.15. The ﬁrst
-branch, corresponding to the Dˆi(t) term, is dependent on the ac inductor current ˆi(t). Hence, we
-represent this term using a dependent current source; this source will eventually be incorporated
-into an ideal transformer. The second branch, corresponding to the I ˆd(t) term, is driven by the
-control input dˆ(t), and is represented by an independent source as shown.
-The circuits of Figs.7.13, 7.14, and 7.15 are collected in Fig.7.16a. As discussed in Chap.3,
-the dependent sources can be combined into e ﬀective ideal transformers, as illustrated in
-Fig. 7.16b. The sinusoid superimposed on the transformer symbol indicates that the transformer
+![源页 p.231](../assets/page-snapshots/chapter-7/page-231.png)
 
-232 7 AC Equivalent Circuit Modeling
-is ideal, and is part of the averaged small-signal ac model. So the eﬀective dc transformer prop-
-erty of CCM dc–dc converters also inﬂuences small-signal ac variations in the converter signals.
-The equivalent circuit of Fig. 7.16b can now be solved using techniques of conventional
-linear circuit analysis, to ﬁnd the converter transfer functions, input and output impedances, etc.
-This is done in detail in the next chapter. Also, the model can be reﬁned by inclusion of losses
-and other nonidealities—an example is given in Sect. 7.2.10.
-7.2.8 Discussion of the Perturbation and Linearization Step
-In the perturbation and linearization step, it is assumed that an averaged voltage or current con-
-sists of a constant (dc) component and a small-signal ac variation around the dc component. In
-Sect. 7.2.6, the linearization step was completed by neglecting nonlinear terms that correspond
-to products of the small-signal ac variations. In general, the linearization step amounts to taking
-the Taylor expansion of a nonlinear relation and retaining only the constant and linear terms.
-For example, the large-signal averaged equation for the inductor current in Eq. ( 7.29) can be
-written as:
-Ld⟨i(t)⟩
-Ts
-dt = d(t)⟨vg(t)⟩Ts + d′(t)⟨v(t)⟩Ts = f1
-⎦
-⟨vg(t)⟩Ts,⟨v(t)⟩Ts, d(t)
-)
-(7.45)
-Let us expand this expression in a three-dimensional Taylor series, about the quiescent operating
-point (Vg, V, D):
-L
-⎦dI
-dt+ dˆi(t)
-dt
-)
-= f1
-⎦
-Vg, V, D
-)
-+ ˆvg(t)∂f1(vg, V, D)
-∂vg
-⏐⏐
-⏐⏐⏐
-⏐
-vg=Vg
-+ˆv(t)∂f1(Vg, v, D)
-∂v
-⏐⏐
-⏐⏐⏐
-⏐
-v=V+ ˆd(t)∂f1(Vg, V, d)
-∂d
-⏐⏐
-⏐⏐⏐
-⏐
-d=D
-(7.46)
-+higher-order nonlinear terms
-For simplicity of notation, the angle brackets denoting average values are dropped in the above
-equation. The derivative of I is zero, since I is by deﬁnition a dc (constant) term. Equating the
-dc terms on both sides of Eq. (7.46)g i v e s
-0= f1(Vg, V, D) (7.47)
-which is the volt-second balance relationship for the inductor. The coeﬃcients with the linear
-terms on the right-hand side of Eq. (7.46) are found as follows:
-∂f1(vg, V, D)
-∂vg
-⏐⏐⏐⏐
-⏐⏐
-vg=Vg
-= D (7.48)
-∂f1(Vg, v, D)
-∂v
-⏐⏐⏐⏐
-⏐⏐
-v=V
-= D′ (7.49)
-∂f1(Vg, V, d)
-∂d
-⏐⏐
-⏐
-⏐⏐⏐
-d=D
-= Vg−V (7.50)
-Using (7.48), (7.49), and (7.50), neglecting higher-order nonlinear terms, and equating the linear
-ac terms on both sides of Eq. (7.46)g i v e
+图7.4 二极管的小信号等效电路建模：(a) 导通电流 $i$ 的非线性二极管；(b) 在静态工作点附近线性化二极管特性；(c) 线性化小信号模型
 
-7.2 The Basic AC Modeling Approach 233
-Ldˆi(t)
-dt = Dˆvg(t)+ D′ ˆv(t)+ (Vg−V) ˆd(t) (7.51)
-which is identical to Eq. (7.37) derived in Sect. 7.2.6. In conclusion, the linearization step can
-always be accomplished using the Taylor expansion.
-(a)
-Nonlinear
-Load
-+
-v
-i (b)
-v
-i
-I
-V
-Slope
-1/R
-Fig. 7.17 Small-signal modeling of nonlinear load characteristic: ( a) schematic, (b) linearization of i–v
-characteristic
-A similar approach can be employed to nonlinear loads in the small-signal model. Fig-
-ure 7.17 depicts linearization of a nonlinear load characteristic in which
-i= f (v) (7.52)
-We can expand thisi–v characteristic in a Taylor series about the quiescent operating point (V, I):
-I+ ˆi= f (V)+ ˆv df (v)
-dv
-⏐⏐
-⏐
-⏐⏐
-v=V
-+ higher-order nonlinear terms (7.53)
-The small-signal terms are
-ˆi= ˆv
-R (7.54)
-where R is determined by the slope at the quiescent operating point:
-1
-R= df (v)
-dv
-⏐⏐
-⏐⏐⏐
-v=V
-(7.55)
-The DC solution of the converter proceeds from the nonlinear load characteristic of Eq. ( 7.52)
-with v = V and i = I. The small-signal ac model of the converter employs the linearized
-equation (7.54).
-7.2.9 Results for Several Basic Converters
-The equivalent circuit models for the buck, boost, and buck–boost converters operating in the
-continuous conduction mode are summarized in Fig. 7.18. The buck and boost converter mod-
-els contain ideal transformers having turns ratios equal to the converter conversion ratio. The
-buck–boost converter contains ideal transformers having buck and boost conversion ratios; this
-is consistent with the derivation of Sect. 6.1.2 of the buck–boost converter as a cascade connec-
-tion of buck and boost converters. When the load is nonlinear, the incremental load resistance
+非线性变换器特性的一个例子是升降压变换器稳态输出电压 $V$ 对占空比 $D$ 的依赖，如图7.5所示。假定变换器以某直流输出电压工作，比如 $V = -V_g$，对应静态占空比 $D = 0.5$。绕此静态值的占空比变化 $\hat{d}$ 将激励输出电压的变化 $\hat{v}$。若占空比变化幅度足够小，则可通过线性化曲线计算所得输出电压变化。图7.5 中线性化特性的斜率选为等于实际非线性特性在静态工作点处的斜率；此斜率是变换器的直流控制-输出增益。只要占空比变化 $\hat{d}$ 足够小，线性化特性与非线性特性在数值上近似相等。
 
-234 7 AC Equivalent Circuit Modeling
-Fig. 7.18 Averaged small-signal ac models for several basic converters operating in continuous conduc-
-tion mode: (a) buck, (b) boost, (c) buck–boost
-of Eq. (7.55) is employed. These models can be solved to ﬁnd the converter transfer functions,
-input and output impedances, inductor current variations, etc. By insertion of appropriate turns
-ratios, the equivalent circuits of Fig. 7.18 can be adapted to model the transformer-isolated ver-
-sions of the buck, boost, and buck–boost converters, including the forward, ﬂyback, and other
-converters.
-7.2.10 Example: A Nonideal Flyback Converter
-To illustrate that the techniques of the previous section are useful for modeling a variety of
-converter phenomena, let us next derive a small-signal ac equivalent circuit of a converter con-
-taining transformer isolation and resistive losses. An isolated ﬂyback converter is illustrated in
-Fig. 7.19. The ﬂyback transformer has magnetizing inductance L, referred to the primary wind-
-ing, and turns ratio 1:n. MOSFET Q
-1 has on-resistance Ron. Other loss elements, as well as the
-transformer leakage inductances and the switching losses, are negligible. The ac modeling of
-this converter begins in a manner similar to the dc converter analysis of Sect.6.3.4. The ﬂyback
-transformer is replaced by an equivalent circuit consisting of the magnetizing inductance L in
-parallel with an ideal transformer, as illustrated in Fig. 7.20a.
-```
+![源页 p.231](../assets/page-snapshots/chapter-7/page-231.png)
+
+图7.5 在静态工作点 $D = 0.5$ 附近线性化升降压变换器的静态控制-输出特性
+
+虽然图7.5 的升降压例子说明了小信号线性化过程，但过于简化。变换器的电感和电容使增益呈现频率响应。为正确预测小信号传递函数的极点和零点，必须线性化变换器平均微分方程式 (7.2)。这在 7.2 节完成。然后用第3章发展的方法构造交流等效电路。所得升降压变换器小信号模型如图7.6所示；该模型可用常规电路分析技巧求解，求小信号传递函数、输出阻抗及其他频率相关特性。在如图6.51 的系统中，等效电路模型可插入变换器位置。当其他系统元件（如脉宽调制器）的小信号模型也被插入后，即得完整的线性化系统模型。该模型可用拉普拉斯变换等标准线性技巧分析，以获得对系统行为和性质的洞察。
+
+![源页 p.232](../assets/page-snapshots/chapter-7/page-232.png)
+
+图7.6 升降压变换器的小信号交流等效电路模型
+
+交流建模法的两个知名变体——状态空间平均和电路平均——在 7.5 节和第14章解释。电路平均的扩展称为平均开关建模，亦在第14章讨论。由于开关是引入开关谐波的唯元件，通过仅平均开关波形即可导出等效电路模型。适用于分析或仿真的变换器模型只需用平均开关模型替代开关即可得到。平均开关建模技巧可扩展到其他工作模式如断续导通模式，以及电流编程控制和谐振变换器。7.4 节表明，任何脉宽调制 CCM 直流-直流变换器的小信号模型都可写成标准形式。称为规范模型，此等效电路描述任何此类变换器必须完成的基本物理功能。7.3 节描述脉宽调制器电路的简单模型。
+
+若不知如何应用，这些模型就无用。故第8章以面向设计的方式详细探讨变换器的频率响应。列表给出基本变换器的小信号传递函数。以简单近似方式导出变换器传递函数和阻抗的波特图，从而获得对复杂变换器系统频率响应起源的洞察。
+
+这些结果用于第9章设计变换器控制系统和第17章设计输入滤波器。建模技巧在第15和18章扩展到断续导通模式和电流编程模式。
+
+## 7.2 基本交流建模方法
+
+本节导出并解释脉宽调制变换器小信号交流模型的推导步骤。关键步骤为：(a) 利用动态版小纹波近似，建立电感和电容波形低频平均之间的关系方程；(b) 对平均方程进行扰动和线性化；(c) 构造交流等效电路模型。
+
+![源页 p.233](../assets/page-snapshots/chapter-7/page-233.png)
+
+图7.7 升降压变换器示例
+
+![源页 p.233](../assets/page-snapshots/chapter-7/page-233.png)
+
+图7.8 升降压变换器电路：(a) 开关在位置 1 时；(b) 开关在位置 2 时
+
+以图7.7 的升降压变换器为例。分析照常从确定电感和电容的电压和电流波形开始。开关在位置 1 时，得图7.8a 电路。电感电压和电容电流为
+
+$$v_L(t) = L\frac{di(t)}{dt} = v_g(t) \tag{7.5}$$
+
+$$i_C(t) = C\frac{dv(t)}{dt} = -\frac{v(t)}{R} \tag{7.6}$$
+
+开关在位置 2 时，得图7.8b 电路。其电感电压和电容电流为
+
+$$v_L(t) = L\frac{di(t)}{dt} = v(t) \tag{7.7}$$
+
+$$i_C(t) = C\frac{dv(t)}{dt} = -i(t) - \frac{v(t)}{R} \tag{7.8}$$
+
+### 7.2.1 平均电感和电容波形
+
+首先导出支配电感波形平均分量随时间演化的方程。已知瞬时电感电流和电压由定义关系
+
+$$L\frac{di(t)}{dt} = v_L(t) \tag{7.9}$$
+
+电感电压和电流的平均之间是否有类似关系？计算平均电感电流的导数：
+
+$$\frac{d\langle i(t)\rangle_{T_s}}{dt} = \frac{d}{dt}\left[\frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}i(\tau)\,d\tau\right] \tag{7.10}$$
+
+此方程右边，可交换微分和积分的顺序，因为电感电流连续且其导数 $v_L(t)/L$ 在积分区间上有有限个不连续点。故上式变为
+
+$$\frac{d\langle i(t)\rangle_{T_s}}{dt} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}\frac{di(\tau)}{d\tau}\,d\tau \tag{7.11}$$
+
+最后，用式 (7.9) 将 $di(\tau)/d\tau$ 替换为 $v_L(\tau)$：
+
+$$\frac{d\langle i(t)\rangle_{T_s}}{dt} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}\frac{v_L(\tau)}{L}\,d\tau \tag{7.12}$$
+
+整理得
+
+$$L\frac{d\langle i(t)\rangle_{T_s}}{dt} = \langle v_L(t)\rangle_{T_s} \tag{7.13}$$
+
+此结果表明，电感电压和电流的平均分量遵循相同的定义方程 (7.9)，$L$ 不变且无附加项。
+
+可用类似分析求电容电压和电流平均分量之间的关系，结果为
+
+$$C\frac{d\langle v(t)\rangle_{T_s}}{dt} = \langle i_C(t)\rangle_{T_s} \tag{7.14}$$
+
+接下来需要通过平均电感电压和电容电流波形来计算上述两方程的右边。
+
+### 7.2.2 平均电感电压与小纹波近似
+
+升降压变换器示例的电感电压和电流波形如图7.9所示。需求某任意时刻 $t$ 的平均电感电压 $\langle v_L(t)\rangle_{T_s}$。如图7.9所示，平均区间从 $t - T_s/2$ 延伸到 $t + T_s/2$。对所示示例时刻，有一段长度为 $dT_s$ 的区间电感电压为 $v_L = v_g$，以及总长度为 $d'T_s$ 的两段区间电感电压为 $v_L = v$。
+
+现做小纹波近似。但不是像第2章那样用 $v_g(t)$、$v(t)$ 和 $i(t)$ 的直流分量 $V_g$、$V$ 和 $I$ 替代它们，而是用式 (7.3) 定义的低频平均值 $\langle v_g(t)\rangle_{T_s}$、$\langle v(t)\rangle_{T_s}$ 和 $\langle i(t)\rangle_{T_s}$ 替代。重要的是，小纹波近似仅对实际纹波小且非脉动的量有效；故此近似应用于确实有小纹波且为时间连续函数的电感电流、电容电压和独立电源。
+
+![源页 p.235](../assets/page-snapshots/chapter-7/page-235.png)
+
+图7.9 在某任意时刻 $t$ 计算平均电感波形的机理：平均电感电压 $v_L(t)$ 和电感电流 $i(t)$
+
+小纹波近似在此的用处是忽略这些量在一个开关周期或平均区间 $(t - T_s/2, t + T_s/2)$ 内的变化。与稳态情形一样，小纹波近似大幅简化数学。
+
+此近似在电路自然频率远低于开关频率时有效，故实际电感电流和电容电压波形的纹波确实很小。
+
+采用小纹波近似，长度为 $dT_s$ 的子区间内的电感电压 [式 (7.5)] 可表示为
+
+$$v_L(t) = L\frac{di(t)}{dt} \approx \langle v_g(t)\rangle_{T_s} \tag{7.15}$$
+
+类似地，对总长度为 $d'T_s$ 的其余子区间 [式 (7.7)]，电感电压可表示为
+
+$$v_L(t) = L\frac{di(t)}{dt} \approx \langle v(t)\rangle_{T_s} \tag{7.16}$$
+
+故平均电感电压为
+
+$$\langle v_L(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}v_L(\tau)\,d\tau \approx d(t)\langle v_g(t)\rangle_{T_s} + d'(t)\langle v(t)\rangle_{T_s} \tag{7.17}$$
+
+将此式代入式 (7.13) 得
+
+$$L\frac{d\langle i(t)\rangle_{T_s}}{dt} = d(t)\langle v_g(t)\rangle_{T_s} + d'(t)\langle v(t)\rangle_{T_s} \tag{7.18}$$
+
+此方程描述电感电流低频分量如何随时间变化，是所需结果。
+
+### 7.2.3 平均近似的讨论
+
+平均算子，即式 (7.3)，重复如下：
+
+$$\langle x(t)\rangle_{T_s} = \frac{1}{T_s}\int_{t-T_s/2}^{t+T_s/2}x(\tau)\,d\tau \tag{7.19}$$
+
+平均是一种技巧，便于导出描述开关变换器低频动态的可处理方程。它去除开关频率及其谐波处的波形分量，同时保留波形低频分量的幅度和相位。本章用平均值替代变换器波形，以求建模连续导通模式下开关变换器动态性质的模型。在本书后续章节中，此平均算子还用于断续导通模式或电流编程控制等情形。
+
+图7.2 给出占空比按正弦变化时升降压变换器的电感电流和电压波形。由式 (7.19) 计算的波形平均值叠加其上。可见 $\langle i(t)\rangle_{T_s}$ 波形确实穿过实际 $i(t)$ 波形的中心。此外，$\langle v_L(t)\rangle_{T_s}$ 增大导致 $\langle i(t)\rangle_{T_s}$ 的斜率增大，正如式 (7.13) 所预言。
+
+式 (7.19) 的平均算子是一种变换，有效执行低通功能以去除开关纹波。实际上，对式 (7.19) 取拉普拉斯变换得
+
+$$\langle x(s)\rangle_{T_s} = G_{av}(s)\,x(s) \tag{7.20}$$
+
+可证 $G_{av}(s)$ 为
+
+$$G_{av}(s) = \frac{e^{sT_s/2} - e^{-sT_s/2}}{sT_s} \tag{7.21}$$
+
+令 $s = j\omega$ 可计算平均算子对角频率 $\omega$ 的正弦量的作用。传递函数 $G_{av}$ 变为
+
+$$G_{av}(j\omega) = \frac{e^{j\omega T_s/2} - e^{-j\omega T_s/2}}{j\omega T_s} = \frac{\sin(\omega T_s/2)}{\omega T_s/2} \tag{7.22}$$
+
+![源页 p.237](../assets/page-snapshots/chapter-7/page-237.png)
+
+图7.10 平均算子的频率响应：$\|G_{av}(j\omega)\|$ 由式 (7.22) 给出
+
+图7.10 绘出了式 (7.22) 的幅值（以分贝表示）对频率的曲线（频率响应图的更多信息见 8.1 节）。平均算子表现出低频增益为 1（即 0 dB），在开关频率 $f_s$ 及其谐波处增益为零（即 $-\infty$ dB）。式 (7.22) 为纯实数，在低于开关频率处呈零相移。故平均算子保留波形低频分量的幅度和相位，同时去除开关频率及其谐波处的分量。
+
+对高于约 $f_s/3$ 的频率 $f$，图7.10 表现出显著衰减。这表明平均模型可能不能准确预测较高频率的暂态响应。断续导通模式的高频动态是此行为的一个例子，在 15.5 节进一步讨论。
+
+与第2、3章的稳态分析不同，图7.9 在任意时刻 $t$ 绘制，平均区间不一定从晶体管开通时刻开始。这种严格的平均定义对建模如第18章电流编程模式等高带宽控制方案很重要。从 $(t - T_s/2)$ 到 $(t + T_s/2)$ 的平均区间选择保留波形的相位，因此正确预测电流编程变换器的行为。还应注意，通过积分未来半个周期[即到 $(t + T_s/2)$]来计算平均并不违反任何物理因果约束，因为这仅是一种建模技巧，不在物理电路中实现。
+
+也可注意式 (7.18) 的结果可不必如此严格地导出。对连续导通模式的连续时间模型推导，无论平均区间从 $(t - T_s/2)$ 开始还是从晶体管开通时刻开始，结果相同。本书余下部分将继续采用第2章开始的较简单论证，其中平均区间从晶体管开通时刻开始。后续章节在必要时将采用更严格的处理，如建模电流编程控制的高频动态。
+
+### 7.2.4 平均电容波形
+
+类似步骤可得电容动态方程。电容电压和电流波形绘于图7.11。开关在位置 1 时，电容电流为
+
+$$i_C(t) = C\frac{dv(t)}{dt} = -\frac{v(t)}{R} \approx -\frac{\langle v(t)\rangle_{T_s}}{R} \tag{7.23}$$
+
+开关在位置 2 时，电容电流为
+
+$$i_C(t) = C\frac{dv(t)}{dt} = -i(t) - \frac{v(t)}{R} \approx -\langle i(t)\rangle_{T_s} - \frac{\langle v(t)\rangle_{T_s}}{R} \tag{7.24}$$
+
+平均电容电流可由平均式 (7.23) 和 (7.24) 求得，结果为
+
+$$\langle i_C(t)\rangle_{T_s} = d(t)\!\left(-\frac{\langle v(t)\rangle_{T_s}}{R}\right) + d'(t)\!\left(-\langle i(t)\rangle_{T_s} - \frac{\langle v(t)\rangle_{T_s}}{R}\right) \tag{7.25}$$
+
+将此方程代入式 (7.2) 并合并同类项得
+
+![源页 p.238](../assets/page-snapshots/chapter-7/page-238.png)
+
+图7.11 升降压变换器波形：(a) 电容电流；(b) 电容电压
+
+$$C\frac{d\langle v(t)\rangle_{T_s}}{dt} = -d'(t)\langle i(t)\rangle_{T_s} - \frac{\langle v(t)\rangle_{T_s}}{R} \tag{7.26}$$
+
+这是描述电容电压中直流和低频交流变化的基本平均方程。
+
+### 7.2.5 平均输入电流
+
+在第3章中发现有必要写一个额外方程建模变换器输入电流的直流分量。这使变换器输入端口可由直流等效电路建模。此处须遵循类似步骤，以使输入端口的低频变化由交流等效电路建模。
+
+对升降压变换器示例，变换器从输入电源吸取的电流 $i_g(t)$ 在第一子区间等于电感电流 $i(t)$，在第二子区间为零。忽略电感电流纹波并用其平均值 $\langle i(t)\rangle_{T_s}$ 替代 $i(t)$，可将输入电流表示为
+
+$$i_g(t) = \begin{cases}\langle i(t)\rangle_{T_s} & \text{子区间 1 期间} \\ 0 & \text{子区间 2 期间}\end{cases} \tag{7.27}$$
+
+输入电流波形如图7.12所示。在一个开关周期上平均得
+
+![源页 p.238](../assets/page-snapshots/chapter-7/page-238.png)
+
+图7.12 升降压变换器波形：输入电源电流 $i_g(t)$
+
+$$\langle i_g(t)\rangle_{T_s} = d(t)\langle i(t)\rangle_{T_s} \tag{7.28}$$
+
+这是描述变换器输入电流中直流和低频交流变化的基本平均方程。
+
+### 7.2.6 扰动与线性化
+
+升降压变换器的平均方程，式 (7.18)、(7.26) 和 (7.28)，汇集如下：
+
+$$\begin{aligned} L\frac{d\langle i(t)\rangle_{T_s}}{dt} &= d(t)\langle v_g(t)\rangle_{T_s} + d'(t)\langle v(t)\rangle_{T_s} \\ C\frac{d\langle v(t)\rangle_{T_s}}{dt} &= -d'(t)\langle i(t)\rangle_{T_s} - \frac{\langle v(t)\rangle_{T_s}}{R} \end{aligned} \tag{7.29}$$
+
+$$\langle i_g(t)\rangle_{T_s} = d(t)\langle i(t)\rangle_{T_s}$$
+
+这些方程是非线性的，因为涉及时变量的乘积。例如，电容电流取决于控制输入 $d'(t)$ 与电感电流低频分量 $\langle i(t)\rangle_{T_s}$ 的乘积。时变信号相乘产生谐波，是非线性过程。交流电路分析的大多数技巧，如拉普拉斯变换和其他频域方法，对非线性系统不适用。故需通过构造小信号模型来线性化式 (7.29)。
+
+假定以某稳态或静态占空比 $d(t) = D$ 驱动变换器，静态输入电压 $v_g(t) = V_g$。由第2、3章的稳态分析可知，暂态消退后，电感电流 $\langle i(t)\rangle_{T_s}$、电容电压 $\langle v(t)\rangle_{T_s}$ 和输入电流 $\langle i_g(t)\rangle_{T_s}$ 将分别达到静态值 $I$、$V$ 和 $I_g$，其中
+
+$$V = -\frac{D}{D'}V_g \qquad I = -\frac{V}{D'R} \qquad I_g = DI \tag{7.30}$$
+
+式 (7.30) 照常用电感伏秒平衡和电容电荷平衡原理导出。也可由式 (7.29) 注意稳态时导数必须为零来导出。
+
+为在静态工作点 $(I, V)$ 构造小信号交流模型，假定输入电压 $v_g(t)$ 和占空比 $d(t)$ 等于某给定静态值 $V_g$ 和 $D$ 加上叠加的小交流变化 $\hat{v}_g(t)$ 和 $\hat{d}(t)$。故
+
+$$\langle v_g(t)\rangle_{T_s} = V_g + \hat{v}_g(t) \tag{7.31}$$
+
+$$d(t) = D + \hat{d}(t)$$
+
+在这些输入激励下，暂态消退后，平均电感电流 $\langle i(t)\rangle_{T_s}$、平均电容电压 $\langle v(t)\rangle_{T_s}$ 和平均输入电流 $\langle i_g(t)\rangle_{T_s}$ 波形将等于相应静态值 $I$、$V$ 和 $I_g$ 加上叠加的小交流变化 $\hat{i}(t)$、$\hat{v}(t)$ 和 $\hat{i}_g(t)$：
+
+$$\langle i(t)\rangle_{T_s} = I + \hat{i}(t)$$
+
+$$\langle v(t)\rangle_{T_s} = V + \hat{v}(t) \tag{7.32}$$
+
+$$\langle i_g(t)\rangle_{T_s} = I_g + \hat{i}_g(t)$$
+
+假定交流变化幅度远小于直流静态值，即
+
+$$|\hat{v}_g(t)| \ll |V_g|, \quad |\hat{d}(t)| \ll |D|, \quad |\hat{i}(t)| \ll |I|, \quad |\hat{v}(t)| \ll |V|, \quad |\hat{i}_g(t)| \ll |I_g| \tag{7.33}$$
+
+则非线性方程 (7.29) 可线性化。将式 (7.31) 和 (7.32) 代入式 (7.29) 完成。对电感方程得
+
+$$L\frac{d(I + \hat{i}(t))}{dt} = (D + \hat{d}(t))(V_g + \hat{v}_g(t)) + (D' - \hat{d}(t))(V + \hat{v}(t)) \tag{7.34}$$
+
+注意占空比的补为
+
+$$d'(t) = 1 - d(t) = 1 - (D + \hat{d}(t)) = D' - \hat{d}(t) \tag{7.35}$$
+
+其中 $D' = 1 - D$。$d'(t)$ 表达式中出现负号是因为使 $d(t)$ 增大的 $\hat{d}(t)$ 变化将使 $d'(t)$ 减小。
+
+展开式 (7.34) 并合并同类项得
+
+$$L\!\left(\frac{dI}{dt} + \frac{d\hat{i}(t)}{dt}\right) = \underbrace{(DV_g + D'V)}_{\text{直流项}} + \underbrace{\left(D\hat{v}_g(t) + D'\hat{v}(t) + (V_g - V)\hat{d}(t)\right)}_{\text{一阶交流项（线性）}} + \underbrace{\hat{d}(t)(\hat{v}_g(t) - \hat{v}(t))}_{\text{二阶交流项（非线性）}} \tag{7.36}$$
+
+$I$ 的导数为零，因为 $I$ 按定义为直流（常数）项。为导出小信号交流模型，直流项可视为已知常量。式 (7.36) 右边出现三类项：
+
+- **直流项**：仅含直流量。
+- **一阶交流项**：每项含单个交流量，通常乘以直流项等常系数。这些是交流变化的线性函数。
+- **二阶交流项**：含交流量的乘积。因涉及时变信号相乘，故为非线性。
+
+希望忽略非线性交流项。只要满足小信号假设式 (7.33)，每个二阶非线性项的幅度远小于一个或多个线性一阶交流项。例如，二阶交流项 $\hat{d}(t)\hat{v}_g(t)$ 的幅度远小于一阶交流项 $D\hat{v}_g(t)$（只要 $|\hat{d}(t)| \ll D$）。故可忽略二阶项。且按定义[或用式 (7.30)]，方程右边的直流项等于左边的直流项，或为零。
+
+![源页 p.241](../assets/page-snapshots/chapter-7/page-241.png)
+
+方程两边只剩一阶交流项。故
+
+$$L\frac{d\hat{i}(t)}{dt} = D\hat{v}_g(t) + D'\hat{v}(t) + (V_g - V)\hat{d}(t) \tag{7.37}$$
+
+这是所需结果：描述电感电流变化的小信号线性化方程。
+
+电容方程可类似线性化。将式 (7.31) 和 (7.32) 代入式 (7.29) 的电容方程得
+
+$$C\frac{d(V + \hat{v}(t))}{dt} = -(D' - \hat{d}(t))(I + \hat{i}(t)) - \frac{V + \hat{v}(t)}{R} \tag{7.38}$$
+
+展开式 (7.38) 并合并同类项得
+
+$$C\!\left(\frac{dV}{dt} + \frac{d\hat{v}(t)}{dt}\right) = \underbrace{\left(-D'I - \frac{V}{R}\right)}_{\text{直流项}} + \underbrace{\left(-D'\hat{i}(t) - \frac{\hat{v}(t)}{R} + I\hat{d}(t)\right)}_{\text{一阶交流项（线性）}} + \underbrace{\hat{d}(t)\hat{i}(t)}_{\text{二阶交流项（非线性）}} \tag{7.39}$$
+
+忽略二阶项并注意方程两边直流项相等，再次得到线性化一阶方程，仅含式 (7.39) 的一阶交流项：
+
+$$C\frac{d\hat{v}(t)}{dt} = -D'\hat{i}(t) - \frac{\hat{v}(t)}{R} + I\hat{d}(t) \tag{7.40}$$
+
+这是描述电容电压变化的小信号线性化方程。
+
+最后，平均输入电流方程也线性化。将式 (7.31) 和 (7.32) 代入式 (7.29) 的输入电流方程得
+
+$$I_g + \hat{i}_g(t) = (D + \hat{d}(t))(I + \hat{i}(t)) \tag{7.41}$$
+
+合并同类项得
+
+$$\underbrace{I_g}_{\text{直流项}} + \underbrace{\hat{i}_g(t)}_{\text{一阶交流项}} = \underbrace{(DI)}_{\text{直流项}} + \underbrace{\left(D\hat{i}(t) + I\hat{d}(t)\right)}_{\text{一阶交流项（线性）}} + \underbrace{\hat{d}(t)\hat{i}(t)}_{\text{二阶交流项（非线性）}} \tag{7.42}$$
+
+再次忽略二阶非线性项。方程两边直流项相等。剩下的一阶线性交流项为
+
+$$\hat{i}_g(t) = D\hat{i}(t) + I\hat{d}(t) \tag{7.43}$$
+
+这是描述变换器输入电流低频交流分量的线性化小信号方程。
+
+总结：开关变换器的非线性平均方程可在静态工作点附近线性化。变换器独立输入表示为常数（直流）值加小交流变化。响应地，变换器平均波形取类似形式。将式 (7.31) 和 (7.32) 代入变换器平均非线性方程得直流项、线性交流项和非线性项。若交流变化幅度足够小，则非线性项远小于线性交流项，可忽略。剩下的线性交流项构成变换器的小信号交流模型。
+
+### 7.2.7 构造小信号等效电路模型
+
+式 (7.37)、(7.40) 和 (7.43) 是理想升降压变换器的小信号交流描述，汇集如下：
+
+$$\begin{aligned} L\frac{d\hat{i}(t)}{dt} &= D\hat{v}_g(t) + D'\hat{v}(t) + (V_g - V)\hat{d}(t) \\ C\frac{d\hat{v}(t)}{dt} &= -D'\hat{i}(t) - \frac{\hat{v}(t)}{R} + I\hat{d}(t) \\ \hat{i}_g(t) &= D\hat{i}(t) + I\hat{d}(t) \end{aligned} \tag{7.44}$$
+
+在第3章中，我们汇集变换器的平均直流方程并重建建模变换器直流性质的等效电路。此处可用相同步骤构造变换器的平均小信号交流模型。
+
+式 (7.44) 的电感方程，即式 (7.37)，描述含电感的回路上的电压。实际上，此方程通过回路分析求电感电压，然后平均、扰动和线性化导出。故该方程表示含电感的小信号模型回路上的电压。回路电流为小信号交流电感电流 $\hat{i}(t)$。如图7.13所示，项 $L\,d\hat{i}(t)/dt$ 代表小信号模型中电感 $L$ 两端的电压。此电压等于其他三个电压项。$D\hat{v}_g(t)$ 和 $D'\hat{v}(t)$ 代表如图所示的受控源。这些项将合并为理想变压器。项 $(V_g - V)\hat{d}(t)$ 由控制输入 $\hat{d}(t)$ 驱动，用如图所示的独立源表示。
+
+![源页 p.242](../assets/page-snapshots/chapter-7/page-242.png)
+
+图7.13 等效于式 (7.44) 或 (7.37) 的小信号交流电感回路方程的电路
+
+式 (7.44) 的电容方程，即式 (7.40)，描述流入接电容的节点的电流。此方程通过节点分析求电容电流，然后平均、扰动和线性化导出。故该方程描述小信号模型中接电容的节点上流动的电流。如图7.14所示，项 $C\,d\hat{v}(t)/dt$ 代表小信号模型中流过电容 $C$ 的电流。电容电压为 $\hat{v}(t)$。按方程，此电流等于其他三项。项 $-D'\hat{i}(t)$ 代表受控源，最终将合并为理想变压器。项 $-\hat{v}(t)/R$ 被识别为小信号模型中流过负载电阻的电流。该电阻与电容并联，使电阻 $R$ 两端的交流电压如预期为 $\hat{v}(t)$。项 $I\hat{d}(t)$ 由控制输入 $\hat{d}(t)$ 驱动，用如图所示的独立源表示。
+
+![源页 p.243](../assets/page-snapshots/chapter-7/page-243.png)
+
+图7.14 等效于式 (7.44) 或 (7.40) 的小信号交流电容节点方程的电路
+
+![源页 p.243](../assets/page-snapshots/chapter-7/page-243.png)
+
+图7.15 等效于式 (7.44) 或 (7.43) 的小信号交流输入电源电流方程的电路
+
+最后，式 (7.44) 的输入电流方程，即式 (7.43)，描述变换器从输入电压源 $\hat{v}_g(t)$ 吸取的小信号交流电流 $\hat{i}_g(t)$。这是一个节点方程，表述 $\hat{i}_g(t)$ 等于两个支路的电流，如图7.15所示。第一支路对应 $D\hat{i}(t)$ 项，依赖于交流电感电流 $\hat{i}(t)$。故用受控电流源表示此项；此源最终将并入理想变压器。第二支路对应 $I\hat{d}(t)$ 项，由控制输入 $\hat{d}(t)$ 驱动，用如图所示的独立源表示。
+
+![源页 p.243](../assets/page-snapshots/chapter-7/page-243.png)
+
+图7.16 升降压变换器小信号交流等效电路：(a) 图7.13、7.14、7.15 的电路汇集；(b) 将受控源合并为有效理想变压器，得最终模型
+
+图7.13、7.14 和7.15 的电路汇集于图7.16a。如第3章所述，受控源可合并为有效理想变压器，如图7.16b所示。变压器符号上叠加的正弦表明该变压器是理想的，是平均小信号交流模型的一部分。故 CCM 直流-直流变换器的有效直流变压器特性也影响变换器信号的小信号交流变化。
+
+图7.16b 的等效电路现可用常规线性电路分析技巧求解，求变换器传递函数、输入和输出阻抗等。下一章详细完成此工作。此外，模型可通过计入损耗和其他非理想性来精细化——7.2.10 节给出一个例子。
+
+### 7.2.8 扰动与线性化步骤的讨论
+
+在扰动和线性化步骤中，假定平均电压或电流由常数（直流）分量和绕直流分量的小信号交流变化组成。7.2.6 节通过忽略对应于小信号交流变化乘积的非线性项完成线性化。一般而言，线性化步骤相当于对非线性关系取泰勒展开并仅保留常数和线性项。
+
+例如，式 (7.29) 中电感电流的大信号平均方程可写为
+
+$$L\frac{d\langle i(t)\rangle_{T_s}}{dt} = d(t)\langle v_g(t)\rangle_{T_s} + d'(t)\langle v(t)\rangle_{T_s} = f_1\!\left(\langle v_g(t)\rangle_{T_s}, \langle v(t)\rangle_{T_s}, d(t)\right) \tag{7.45}$$
+
+将此表达式在静态工作点 $(V_g, V, D)$ 附近展为三维泰勒级数：
+
+$$L\!\left(\frac{dI}{dt} + \frac{d\hat{i}(t)}{dt}\right) = f_1(V_g, V, D) + \hat{v}_g(t)\!\left.\frac{\partial f_1(v_g, V, D)}{\partial v_g}\right|_{v_g=V_g} + \hat{v}(t)\!\left.\frac{\partial f_1(V_g, v, D)}{\partial v}\right|_{v=V} + \hat{d}(t)\!\left.\frac{\partial f_1(V_g, V, d)}{\partial d}\right|_{d=D} \tag{7.46}$$
+
+$$+ \text{高阶非线性项}$$
+
+为简化记号，上面方程中去掉了表示平均值的尖括号。$I$ 的导数为零，因为 $I$ 按定义为直流（常数）项。令式 (7.46) 两边直流项相等得
+
+$$0 = f_1(V_g, V, D) \tag{7.47}$$
+
+即电感的伏秒平衡关系。式 (7.46) 右边线性项的系数求得如下：
+
+$$\left.\frac{\partial f_1(v_g, V, D)}{\partial v_g}\right|_{v_g=V_g} = D \tag{7.48}$$
+
+$$\left.\frac{\partial f_1(V_g, v, D)}{\partial v}\right|_{v=V} = D' \tag{7.49}$$
+
+$$\left.\frac{\partial f_1(V_g, V, d)}{\partial d}\right|_{d=D} = V_g - V \tag{7.50}$$
+
+用式 (7.48)、(7.49) 和 (7.50)，忽略高阶非线性项，并令式 (7.46) 两边线性交流项相等得
+
+$$L\frac{d\hat{i}(t)}{dt} = D\hat{v}_g(t) + D'\hat{v}(t) + (V_g - V)\hat{d}(t) \tag{7.51}$$
+
+与 7.2.6 节导出的式 (7.37) 相同。总之，线性化步骤总可用泰勒展开完成。
+
+![源页 p.245](../assets/page-snapshots/chapter-7/page-245.png)
+
+图7.17 非线性负载特性小信号建模：(a) 原理图；(b) i–v 特性的线性化
+
+类似方法可用于小信号模型中的非线性负载。图7.17 给出非线性负载特性的线性化，其中
+
+$$i = f(v) \tag{7.52}$$
+
+将此 i–v 特性在静态工作点 $(V, I)$ 附近展为泰勒级数：
+
+$$I + \hat{i} = f(V) + \hat{v}\!\left.\frac{df(v)}{dv}\right|_{v=V} + \text{高阶非线性项} \tag{7.53}$$
+
+小信号项为
+
+$$\hat{i} = \frac{\hat{v}}{R} \tag{7.54}$$
+
+其中 $R$ 由静态工作点处的斜率确定：
+
+$$\frac{1}{R} = \left.\frac{df(v)}{dv}\right|_{v=V} \tag{7.55}$$
+
+变换器的直流解由式 (7.52) 的非线性负载特性在 $v = V$ 和 $i = I$ 处求得。变换器的小信号交流模型采用线性化方程 (7.54)。
+
+### 7.2.9 若干基本变换器的结果
+
+连续导通模式下降压、升压和升降压变换器的等效电路模型汇总于图7.18。降压和升压变换器模型含匝比等于变换器变换比的理想变压器。升降压变换器含具有降压和升压变换比的理想变压器；这与 6.1.2 节将升降压变换器视为降压和升压变换器级联连接的推导一致。当负载为非线性时，采用式 (7.55) 的增量负载电阻。这些模型可求解以得变换器传递函数、输入和输出阻抗、电感电流变化等。通过插入适当匝比，图7.18 的等效电路可改造以建模降压、升压和升降压变换器的变压器隔离版本，包括正激、反激等变换器。
+
+![源页 p.246](../assets/page-snapshots/chapter-7/page-246.png)
+
+图7.18 连续导通模式下若干基本变换器的平均小信号交流模型：(a) 降压；(b) 升压；(c) 升降压
+
+### 7.2.10 示例：非理想反激变换器
+
+为说明上一节的技巧对建模各种变换器现象有用，接下来导出一个含变压器隔离和电阻损耗的变换器的小信号交流等效电路。图7.19 给出一个隔离反激变换器。反激变压器有归算到一次绕组的磁化电感 $L$，匝比 1:n。MOSFET $Q_1$ 的导通电阻为 $R_{on}$。其他损耗元件以及变压器漏感和开关损耗可忽略。此变换器的交流建模以与 6.3.4 节直流变换器分析类似的方式开始。将反激变压器替换为磁化电感 $L$ 与理想变压器并联的等效电路，如图7.20a所示。

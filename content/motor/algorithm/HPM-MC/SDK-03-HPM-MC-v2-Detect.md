@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-13 保护优化](../ALG-13-Protection-Optimization.md) | [HW-06 电源保护](../../hardware/HW-06-Power-Management-Protection.md)
 
-**文档版本：** v1.1
-**生成日期：** 2026-05-26
-**适用对象：** 电机控制工程师、嵌入式开发者
-**前置知识：** C语言编程、FOC控制基础、PMSM电机模型
+- **文档版本：** v1.1
+- **生成日期：** 2026-05-26
+- **适用对象：** 电机控制工程师、嵌入式开发者
+- **前置知识：** C语言编程、FOC控制基础、PMSM电机模型
 
 ---
 
@@ -170,7 +170,7 @@ navGroupOrder: 30
                              等待电流泄放干净，防止干扰下一项检测
 ```
 
-**状态机定义：** [hpm_mcl_loop.h:L83-L92](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.h#L83-L92)
+- **状态机定义：** [hpm_mcl_loop.h:L83-L92](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.h#L83-L92)
 
 ```c
 typedef enum {
@@ -188,9 +188,9 @@ typedef enum {
 
 ### 2.2 电阻检测（Rs Detection）
 
-**原理：** 注入直流电压（仅d轴），逐步递增 Ud，直到 αβ 轴合成电流幅值达到半额定电流，由欧姆定律 V=I×R 计算电阻。
+- **原理：** 注入直流电压（仅d轴），逐步递增 Ud，直到 αβ 轴合成电流幅值达到半额定电流，由欧姆定律 V=I×R 计算电阻。
 
-**算法实现：** [hpm_mcl_control.c:L359-L377](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L359-L377)
+- **算法实现：** [hpm_mcl_control.c:L359-L377](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L359-L377)
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -218,19 +218,19 @@ typedef enum {
 └──────────────────────────────────────────────────────────┘
 ```
 
-**数学公式：**
+- **数学公式：**
 
 ```text
 Rs = Ud_accumulated / Is_measured
 ```
 
-**注入策略：** 电压步进增量由 `ud_delta` 配置。该值越小精度越高但检测越慢；越大速度越快但步进太粗可能导致电流超调。建议取值范围：0.0001 ~ 0.001（标幺值）。
+- **注入策略：** 电压步进增量由 `ud_delta` 配置。该值越小精度越高但检测越慢；越大速度越快但步进太粗可能导致电流超调。建议取值范围：0.0001 ~ 0.001（标幺值）。
 
 ### 2.3 电感检测（Ld / Lq Detection）
 
-**原理：** 分别在 d 轴和 q 轴施加满幅母线电压（相当于阶跃响应），测量电流在 `inductor_detection_times` 个控制周期内的变化率 di/dt，由 V = L × di/dt 计算电感。
+- **原理：** 分别在 d 轴和 q 轴施加满幅母线电压（相当于阶跃响应），测量电流在 `inductor_detection_times` 个控制周期内的变化率 di/dt，由 V = L × di/dt 计算电感。
 
-**Ld 检测算法：** [hpm_mcl_control.c:L379-L402](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L379-L402)
+- **Ld 检测算法：** [hpm_mcl_control.c:L379-L402](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L379-L402)
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -257,9 +257,9 @@ Rs = Ud_accumulated / Is_measured
 └──────────────────────────────────────────────────────────┘
 ```
 
-**Lq 检测：** 与 Ld 完全对称——Ud=0, Uq=Vbus（q轴注入）。代码位于 [hpm_mcl_control.c:L404-L424](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L404-L424)。
+- **Lq 检测：** 与 Ld 完全对称——Ud=0, Uq=Vbus（q轴注入）。代码位于 [hpm_mcl_control.c:L404-L424](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L404-L424)。
 
-**数学公式：**
+- **数学公式：**
 
 ```text
 Ld = Vbus / 2 / (ΔIs / Δt)
@@ -268,7 +268,7 @@ Lq = Vbus / 2 / (ΔIs / Δt)
 
 > **注：** 公式中 `Vbus/2` 是因为 SVPWM 调制下单相最大输出电压为母线电压的一半（相电压峰值 = Vbus/√3，等效到合成矢量约为 Vbus/2）。
 
-**Ls 计算：** Ls 不是独立检测的，而是简单的代数计算：
+- **Ls 计算：** Ls 不是独立检测的，而是简单的代数计算：
 
 ```c
 detection->result.ls = detection->result.ld + detection->result.lq;
@@ -278,9 +278,9 @@ detection->result.ls = detection->result.ld + detection->result.lq;
 
 ### 2.4 磁链检测（Flux Detection）
 
-**原理：** 反电动势法。在 q 轴注入满幅电压使电机开环旋转，对反电动势积分，通过低通滤波提取稳态值，取峰值作为磁链幅值。
+- **原理：** 反电动势法。在 q 轴注入满幅电压使电机开环旋转，对反电动势积分，通过低通滤波提取稳态值，取峰值作为磁链幅值。
 
-**算法实现：** [hpm_mcl_control.c:L433-L457](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L433-L457)
+- **算法实现：** [hpm_mcl_control.c:L433-L457](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L433-L457)
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -313,7 +313,7 @@ detection->result.ls = detection->result.ld + detection->result.lq;
 └──────────────────────────────────────────────────────────┘
 ```
 
-**数学原理（反电动势积分法）：**
+- **数学原理（反电动势积分法）：**
 
 ```text
 ψα = ∫(Uα - Iα × Rs) dt - Iα × Ls
@@ -321,7 +321,7 @@ detection->result.ls = detection->result.ld + detection->result.lq;
 ψf = sqrt(ψα² + ψβ²)
 ```
 
-**注入策略：** `flux_detection_times` 决定了检测持续时间，时间越长磁链峰值越容易被捕捉到，但电机转动也越多。典型配置为 10000 个控制周期。
+- **注入策略：** `flux_detection_times` 决定了检测持续时间，时间越长磁链峰值越容易被捕捉到，但电机转动也越多。典型配置为 10000 个控制周期。
 
 ### 2.5 注入信号策略总结
 
@@ -341,7 +341,7 @@ detection->result.ls = detection->result.ld + detection->result.lq;
 
 ### 3.1 完整配置结构体
 
-**定义位置：** [hpm_mcl_control.h:L159-L168](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L159-L168)
+- **定义位置：** [hpm_mcl_control.h:L159-L168](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L159-L168)
 
 ```c
 typedef struct {
@@ -371,7 +371,7 @@ typedef struct {
 
 ### 3.3 运行时数据结构
 
-**定义位置：** [hpm_mcl_control.h:L174-L190](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L174-L190)
+- **定义位置：** [hpm_mcl_control.h:L174-L190](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L174-L190)
 
 ```c
 typedef struct {
@@ -395,7 +395,7 @@ typedef struct {
 
 ### 3.4 检测结果结构体
 
-**定义位置：** [hpm_mcl_control.h:L40-L46](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L40-L46)
+- **定义位置：** [hpm_mcl_control.h:L40-L46](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.h#L40-L46)
 
 ```c
 typedef struct {
@@ -689,7 +689,7 @@ flux: 0.044366, ld: 0.000987, lq: 0.001785, ls: 0.002773, rs: 1.040307
 
 ### 7.1 离线检测状态机调度 (`hpm_mcl_detect_offline_para`)
 
-**源码位置：** [hpm_mcl_loop.c:L120-L278](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L120-L278)
+- **源码位置：** [hpm_mcl_loop.c:L120-L278](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L120-L278)
 
 该函数是离线参数检测的**总调度器**，在 `mcl_mode_offline_param_detection` 模式下由 `hpm_mcl_loop()` 每个控制周期调用一次。它完成电流采样→坐标变换→状态机驱动→电压输出→死区补偿→PWM更新的完整信号链。
 
@@ -911,7 +911,7 @@ init → wait → rs → wait → ld → wait → lq → wait → ls → wait �
 | `flux` | 调用 `offline_param_detection_flux` + PID电流环 | wait(last=flux) | error |
 | `end`/`error` | 空操作，保持当前状态 | — | — |
 
-**wait 状态的作用：** 每个检测阶段完成后，注入的电压/电流需要时间泄放。wait 状态持续 `delay_times` 个控制周期，确保：
+- **wait 状态的作用：** 每个检测阶段完成后，注入的电压/电流需要时间泄放。wait 状态持续 `delay_times` 个控制周期，确保：
 1. 上阶段残余电流衰减至零（LR时间常数 τ = L/R）
 2. 电机回到机械静止（Rs/Ld/Lq 阶段要求）
 3. 避免残余磁场/电流干扰下一阶段测量
@@ -984,9 +984,9 @@ duty.c += duty_offset.c_offset;
 
 ### 7.2 定子电阻 Rs 检测实现 (`hpm_mcl_control_offline_param_detection_rs`)
 
-**源码位置：** [hpm_mcl_control.c:L359-L377](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L359-L377)
+- **源码位置：** [hpm_mcl_control.c:L359-L377](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L359-L377)
 
-**原理公式：**
+- **原理公式：**
 
 $$R_s = \frac{U_d}{I_s}$$
 
@@ -1037,9 +1037,9 @@ hpm_mcl_stat_t hpm_mcl_control_offline_param_detection_rs(mcl_control_offline_pa
 
 ### 7.3 d 轴电感 Ld 检测实现 (`hpm_mcl_control_offline_param_detection_ld`)
 
-**源码位置：** [hpm_mcl_control.c:L379-L402](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L379-L402)
+- **源码位置：** [hpm_mcl_control.c:L379-L402](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L379-L402)
 
-**原理公式：**
+- **原理公式：**
 
 $$L_d = \frac{V_{bus}/2}{\Delta I_s / \Delta t}$$
 
@@ -1101,9 +1101,9 @@ hpm_mcl_stat_t hpm_mcl_control_offline_param_detection_ld(mcl_control_offline_pa
 
 ### 7.4 q 轴电感 Lq 检测实现 (`hpm_mcl_control_offline_param_detection_lq`)
 
-**源码位置：** [hpm_mcl_control.c:L404-L424](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L404-L424)
+- **源码位置：** [hpm_mcl_control.c:L404-L424](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L404-L424)
 
-**原理公式：**
+- **原理公式：**
 
 $$L_q = \frac{V_{bus}/2}{\Delta I_s / \Delta t}$$
 
@@ -1167,9 +1167,9 @@ ld: 0.000968, lq: 0.001808  →  Lq/Ld ≈ 1.87
 
 ### 7.5 磁链 Flux 检测实现 (`hpm_mcl_control_offline_param_detection_flux`)
 
-**源码位置：** [hpm_mcl_control.c:L433-L457](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L433-L457)
+- **源码位置：** [hpm_mcl_control.c:L433-L457](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L433-L457)
 
-**原理公式（反电动势积分法）：**
+- **原理公式（反电动势积分法）：**
 
 $$\psi_\alpha = \int (U_\alpha - I_\alpha R_s) \, dt - I_\alpha L_s$$
 
@@ -1249,14 +1249,14 @@ if (loop->rundata.offline_detection.mode == offline_param_detection_mode_flux) {
 
 ### 7.6 死区补偿在检测中的作用
 
-**相关源码位置：**
+- **相关源码位置：**
 - 编译期强制检查：[hpm_mcl_loop.c:L132-L138](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L132-L138)
 - 运行时补偿执行：[hpm_mcl_loop.c:L266-L270](../../../hpm_MC/middleware/hpm_mcl_v2/core/loop/hpm_mcl_loop.c#L266-L270)
 - 补偿算法实现：[hpm_mcl_control.c:L257-L300](../../../hpm_MC/middleware/hpm_mcl_v2/core/control/hpm_mcl_control.c#L257-L300)
 
 #### 为什么参数检测必须启用死区补偿
 
-**编译期硬约束：**
+- **编译期硬约束：**
 
 ```c
 #if !defined(MCL_CFG_EN_DEAD_AREA_COMPENSATION) || (MCL_CFG_EN_DEAD_AREA_COMPENSATION == 0)
@@ -1270,7 +1270,7 @@ $$\Delta U = \frac{2 \cdot T_d \cdot U_{dc}}{T_s} \cdot \text{sign}(I)$$
 
 其中 $T_d$ 为死区时间，$T_s$ 为 PWM 周期，$\text{sign}(I)$ 为电流极性。
 
-**死区对参数检测的影响：**
+- **死区对参数检测的影响：**
 
 | 检测项 | 死区影响 | 误差方向 |
 |--------|---------|---------|

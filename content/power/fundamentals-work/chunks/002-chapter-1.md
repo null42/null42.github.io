@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "1 Introduction"
+title: "第1章 引言"
 tags:
   - power-electronics
   - 教材
@@ -18,572 +18,114 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 1 Introduction
+# 第1章 引言
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 19-30  
-> Chunk ID: `chapter-1`
+## 1.1 功率处理概述
 
-## 主干提取
+电力电子领域研究的是利用电子器件对电功率进行变换处理 [1–7]。其核心元件是开关变换器，如图1.1所示。一般而言，一个开关变换器包含功率输入端口、控制输入端口和一个功率输出端口。原始输入功率按照控制输入的指令进行处理，从而得到经过调理的输出功率。变换器可以完成若干种基本功能 [2]：在直流-直流变换器中，直流输入电压被转换为幅值更大或更小的直流输出电压，极性可能相反，也可能实现输入与输出参考地之间的隔离；在交流-直流整流器中，交流输入电压被整流，产生直流输出电压，并可对直流输出电压和/或交流输入电流波形进行控制；其逆过程——直流-交流逆变，则将直流输入电压变换为幅值和频率均可控的交流输出电压；交流-交流变频则是把交流输入电压变换为幅值和频率均可控的给定交流输出电压。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+控制几乎总是必不可少的。在输入电压和负载电流发生变动时，人们几乎总是希望得到一个稳压良好的输出电压。如图1.2所示，控制器模块是任何功率处理系统不可或缺的组成部分。
 
-## 术语表
+![源页 p.19](../assets/page-snapshots/chapter-1/page-19.png)
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+在任何功率处理应用中，高效率都是至关重要的。其首要原因通常并非为了节省电费，也不是为了节约能源——尽管这些追求十分高尚。真正的原因在于：构建输出功率可观的低效率变换器在实际中是不可行的。设变换器输出功率为 $P_{out}$、输入功率为 $P_{in}$，则其效率为
 
-## 中文翻译
+$$\eta = \frac{P_{out}}{P_{in}} \tag{1.1}$$
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+变换器中的功率损耗 $P_{loss} = P_{in} - P_{out}$ 可以与输出功率相关联如下：
 
-## 英文原文
+$$Q = \frac{P_{out}}{P_{loss}} = \frac{\eta}{1-\eta} \tag{1.2}$$
 
-```text
-1
-Introduction
-1.1 Introduction to Power Processing
-The ﬁeld of power electronics is concerned with the processing of electrical power using elec-
-tronic devices [1–7]. The key element is the switching converter, illustrated in Fig. 1.1. In gen-
-eral, a switching converter contains power input and control input ports, and a power output port.
-The raw input power is processed as speciﬁed by the control input, yielding the conditioned out-
-put power. One of several basic functions can be performed [ 2]. In a dc–dc converter, the dc
-input voltage is converted to a dc output voltage having a larger or smaller magnitude, possibly
-with opposite polarity or with isolation of the input and output ground references. In an ac-dc
-rectiﬁer, an ac input voltage is rectiﬁed, producing a dc output voltage. The dc output voltage
-and/or ac input current waveform may be controlled. The inverse process, dc–ac inversion,i n -
-volves transforming a dc input voltage into an ac output voltage of controllable magnitude and
-frequency. Ac-ac cycloconversion involves converting an ac input voltage to a given ac output
-voltage of controllable magnitude and frequency.
-Control is invariably required. It is nearly always desired to produce a well-regulated output
-voltage, in the presence of variations in the input voltage and load current. As illustrated in
-Fig. 1.2, a controller block is an integral part of any power processing system.
-High eﬃciency is essential in any power processing application. The primary reason for
-this is usually not the desire to save money on one’s electric bills, nor to conserve energy, in
-spite of the nobility of such pursuits. Rather, high eﬃciency converters are necessary because
-construction of low-eﬃciency converters, producing substantial output power, is impractical.
-The eﬃciency of a converter having output power Pout and input power Pin is
-Fig. 1.1 The switching converter, a
-basic power processing block
-Switching
-converter
-Power
-input Power
-output
-Control
-input
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_1
-1
+式 (1.2) 绘于图1.3。量 $Q = P_{out}/P_{loss}$ 是衡量功率变换器品质的一项基本指标。损耗 $P_{loss}$ 会被变换器电路元件转化为热量，必须由冷却系统将其带走。在大多数应用中，最大输出功率受限于冷却系统带走这些热量的能力，这也就限制了最大允许输出功率。若损耗功率可观，则需要体积庞大且昂贵的冷却系统，变换器内部的电路元件可能工作在高温下，系统的可靠性也会随之下降。事实上，在大输出功率场合，用给定的冷却技术可能根本无法对变换器元件进行充分冷却。
 
-2 1 Introduction
-Fig. 1.2 A controller is generally
-required
-Switching
-converter
-Power
-input Power
-output
-Control
-input
-Controller
-Reference
-FeedbackFeedforward
-η= Pout
-Pin
-(1.1)
-The power lost in the converter Ploss = Pin−Pout can be related to the output power as:
-Q= Pout
-Ploss
-= η
-1−η (1.2)
-0 0.5 1 1.5
-0.2
-0.4
-0.6
-0.8
-h
-1
-Ploss / Pout
-Fig. 1.3 Converter power loss vs. eﬃciency
-Equation (1.2)i sp l o t -
-ted in Fig. 1.3. The quan-
-tity Q = Pout/Ploss is a
-fundamental measure of
-the quality of the power
-converter. The loss P
-loss
-is converted into heat by
-the converter circuit el-
-ements and must be re-
-moved by a cooling sys-
-tem. In most applica-
-tions, the maximum out-
-put power is limited by
-the capacity of the cool-
-ing system to remove
-this heat, and this lim-
-its the maximum allow-
-able output power. If the
-loss power is substantial,
-then a large and expen-
-sive cooling system is
-needed, the circuit ele-
-ments within the converter may operate at high temperature, and the system reliability may be
-reduced. Indeed, at high output powers, it may be impossible to adequately cool the converter
-elements using a given cooling technology.
+![源页 p.20](../assets/page-snapshots/chapter-1/page-20.png)
 
-1.1 Introduction to Power Processing 3
-Increasing the eﬃciency is the key to obtaining higher output powers. For example, if the
-converter eﬃciency is 90%, then the converter loss power is equal to only 11% of the output
-power and Pout/Ploss = 9. For a given cooling system technology and size, there is a maximum
-amount of Ploss that can be handled. With this maximum loss, the maximum output power then
-depends on the converter Q and eﬃciency according to Fig. 1.3. It can be seen that the output
-power can be increased if the eﬃciency is increased. In this way,Q (and, less directly, eﬃciency
-η) is a good measure of the success of a given converter technology. Figure 1.4 illustrates a
-converter that processes a large amount of power, with very high Q. Since very little power
-is lost, the converter elements can be packaged with high density and a small cooling system,
-leading to a converter of small size and weight, and of low temperature rise.
-Converter
-Small converter
-Large output powerLarge input power
-Pin Pout
-Fig. 1.4 A goal of current technology is to construct converters of small size and weight, which process
-substantial power at high eﬃciency
-How can we build a circuit that changes the voltage, yet dissipates negligible power? The
-various conventional circuit elements are illustrated in Fig. 1.5. The available circuit elements
-fall broadly into the classes of resistive elements, capacitive elements, magnetic devices includ-
-ing inductors and transformers, semiconductor devices operated in the linear mode (for exam-
-ple, as class A or class B ampliﬁers), and semiconductor devices operated in the switched mode
-(such as in logic devices where transistors operate in either the fully on or fully o ﬀstates). In
-conventional signal processing applications, where eﬃciency is not the primary concern, mag-
-netic devices are usually avoided wherever possible, because of their large size and the diﬃculty
-DTs Ts
-Resistors Capacitors Magnetics Semiconductor devices
-Linear-
-mode
-+
-–
-Switched-mode
-Fig. 1.5 Devices available to the circuit designer [2]
+提高效率是获得更大输出功率的关键。例如，若变换器效率为 90%，则变换器的损耗功率仅等于输出功率的 11%，即 $P_{out}/P_{loss} = 9$。对于给定的冷却技术和冷却系统规模，存在一个可处理的最大 $P_{loss}$。在此最大损耗下，最大输出功率便取决于变换器的 $Q$ 值和效率，其关系如图1.3所示。可以看出，效率提高时输出功率随之增大。因此，$Q$（以及较间接地，效率 $\eta$）是衡量某项变换器技术成功与否的良好指标。图1.4所示为一台以极高 $Q$ 处理大功率的变换器。由于损耗极小，变换器元件可以高密度封装并配以小型冷却系统，从而得到体积小、重量轻、温升低的变换器。
 
-4 1 Introduction
-of incorporating them into integrated circuits. In contrast, capacitors and magnetic devices are
-important elements of switching converters, because ideally they do not consume power. It is the
-resistive element, as well as the linear-mode semiconductor device, that is avoided [2]. Switched-
-mode semiconductor devices are also employed. When a semiconductor device operates in the
-oﬀstate, its current is zero and hence its power dissipation is zero. When the semiconductor de-
-vice operates in the on (saturated) state, its voltage drop is small and hence its power dissipation
-is also small. In either event, the power dissipated by the semiconductor device is low. So ca-
-pacitive and inductive elements, as well as switched-mode semiconductor devices, are available
-for synthesis of high-eﬃciency converters.
-Let us now consider how to construct the simple dc–dc converter example illustrated in
-Fig. 1.6. The input voltageV
-g is 100 V . It is desired to supply 50 V to an eﬀective 5Ωload, such
-that the dc load current is 10 A.
-+
-–
-+
-V
-50 V
-–
-Vg
-100 V
-Dc-dc
-converter
-I
-10 A
-R
-5 W
-Fig. 1.6 A simple power processing example: construction of a 500 W dc–dc converter
-Introductory circuits textbooks describe a low-e ﬃciency method to perform the required
-function: the voltage divider circuit illustrated in Fig. 1.7a. The dc–dc converter then consists
-simply of a variable resistor, whose value is adjusted such that the required output voltage is
-obtained. The load current ﬂows through the variable resistor. For the speciﬁed voltage and
-current levels, the power P
-loss dissipated in the variable resistor equals the load power Pout =
-500 W. The source Vg supplies power Pin = 1000 W. Figure 1.7b illustrates a more practical
-implementation known as the linear series-pass regulator. The variable resistor of Fig. 1.7ai s
-replaced by a linear-mode power transistor, whose base current is controlled by a feedback
-system such that the desired output voltage is obtained. The power dissipated by the linear-
-mode transistor of Fig.1.7b is approximately the same as the 500 W lost by the variable resistor
-in Fig. 1.7a. Series-pass linear regulators generally ﬁnd modern application only at low power
-levels of a few watts.
-Figure 1.8 illustrates another approach. A single-pole double-throw (SPDT) switch is con-
-nected as shown. The switch output voltagev
-s(t) is equal to the converter input voltageVg when
-the switch is in position 1, and is equal to zero when the switch is in position 2. The switch po-
-sition is varied periodically, as illustrated in Fig. 1.9, such that v
-s(t) is a rectangular waveform
-having frequency fs and period Ts = 1/ fs. The duty cycle D is deﬁned as the fraction of time
-in which the switch occupies position 1. Hence, 0 ≤D≤1. In practice, the SPDT switch is
-realized using switched-mode semiconductor devices, which are controlled such that the SPDT
-switching function is attained.
+![源页 p.21](../assets/page-snapshots/chapter-1/page-21.png)
 
-1.1 Introduction to Power Processing 5
-+
-– R
-5 W
-+
-V
-50 V
-–
-Vg
-100 V
-I
-10 A
-+ 50 V –
-Ploss = 500 W
-Pout = 500 WPin = 1000 W
-+
-– R
-5 W
-+
-V
-50 V
-–
-Vg
-100 V
-I
-10 A+ 50 V –
-Ploss ≈ 500 W
-Pout = 500 WPin ≈ 1000 W
-+–Linear amplifier
-and base driver
-Vref
-(a)
-(b)
-Fig. 1.7 Changing the dc voltage via dissipative means: (a) voltage divider, (b) series pass regulator
-+
-– R
-+
-v(t)
-50 V
-–
-1
-2
-+
-vs(t)
-–
-Vg
-100 V
-I
-10 A
-Fig. 1.8 Insertion of SPDT switch which changes the dc component of the voltage
-vs(t) Vg
-DTs (1 – D) Ts
-0
-t
-switch
-position: 12 1
-Vs = DVg
-Fig. 1.9 Switch output voltage waveform vs(t)
+我们如何构建一个能改变电压却又几乎不消耗功率的电路呢？各类常规电路元件如图1.5所示。可用电路元件大致分为以下几类：电阻性元件、电容性元件、包含电感和变压器在内的磁性器件、工作于线性模式的半导体器件（例如甲类或乙类放大器），以及工作于开关模式的半导体器件（例如逻辑器件中晶体管工作于完全导通或完全关断状态）。在常规信号处理应用中，效率并非首要考量，因此通常尽可能避免使用磁性器件，因为它们体积大，且难以集成到集成电路中。相反，电容器和磁性器件却是开关变换器的重要元件，因为理想情况下它们不消耗功率。应当避免使用的反而是电阻性元件以及线性模式半导体器件 [2]。开关模式半导体器件同样得到采用：当半导体器件工作于关断状态时，其电流为零，故功耗为零；当其工作于导通（饱和）状态时，其压降很小，功耗同样很小。无论哪种情形，半导体器件的功耗都很低。因此，电容性、电感性元件以及开关模式半导体器件均可用于综合高效率变换器。
 
-6 1 Introduction
-The switch changes the dc component of the voltage. Recall from Fourier analysis that the
-dc component of a periodic waveform is equal to its average value. Hence, the dc component of
-vs(t)i s
-Vs= 1
-Ts
-∫ Ts
-0
-vs(t)dt= DVg (1.3)
-Thus, the switch changes the dc voltage, by a factor equal to the duty cycle D. To convert the
-input voltage Vg = 100 V into the desired output voltage of V= 50 V, a duty cycle of D= 0.5
-is required.
-Again, the power dissipated by the switch is ideally zero. When the switch contacts are
-closed, then their voltage is zero and hence the power dissipation is zero. When the switch
-contacts are open, then the current is zero and again the power dissipation is zero. So we have
-succeeded in changing the dc voltage component, using a device that is ideally lossless.
-In addition to the desired dc component V
-s, the switch output voltage waveform vs(t)a l s o
-contains undesirable harmonics of the switching frequency. In most applications, these harmon-
-ics must be removed, such that the output voltage v(t) is essentially equal to the dc component
-V= Vs. A low-pass ﬁlter can be employed for this purpose. Figure 1.10 illustrates the introduc-
-tion of a single-section L–C low-pass ﬁlter. If the ﬁlter comer frequency f0 is suﬃciently less
-than the switching frequency fs, then the ﬁlter essentially passes only the dc component ofvs(t).
-To the extent that the switch, inductor, and capacitor elements are ideal, the e ﬃciency of this
-dc–dc converter can approach 100%.
-+
-– R
-+
-v(t)
-–
-1
-2
-+
-vs(t)
-–
-Vg
-100 V
-i(t)
-L
-C
-Ploss small Pout = 500 WPin ≈ 500 W
-Fig. 1.10 Addition of L–C low-pass ﬁlter, for removal of switching harmonics
-In Fig. 1.11, a control system is introduced for regulation of the output voltage. Since the
-output voltage is a function of the switch duty cycle, a control system can be constructed that
-varies the duty cycle to cause the output voltage to follow a given reference. Figure 1.11 also
-illustrates a typical way in which the SPDT switch is realized using switched-mode semicon-
-ductor devices. The converter power stage developed in Figs. 1.8, 1.9, 1.10, 1.11 is called the
-buck converter, because it reduces the dc voltage.
-Converters can be constructed that perform other power processing functions. For example,
-Fig. 1.12 illustrates a circuit known as the boost converter, in which the positions of the induc-
-tor and SPDT switch are interchanged. This converter is capable of producing output voltages
-that are greater in magnitude than the input voltage. In general, any given input voltage can
-be converted into any desired output voltage, using a converter containing switching devices
-embedded within a network of reactive elements.
+![源页 p.22](../assets/page-snapshots/chapter-1/page-22.png)
 
-1.1 Introduction to Power Processing 7
-(t)
-TsdTs t
-+
-–
-+
-v
-–
-v
-g
-Switching converterPower
-input
-Load
-–+
-Compensator
-vref
-Reference
-input
-HvPulse-width
-modulator
-vc
-Transistor
-gate driver
-Gc(s)
-H(s)
-ve
-Error
-signal
-Sensor
-gain
-i
-Fig. 1.11 Addition of control system to regulate the output voltage
-+
-–
-L
-CR
-+
-V
-–
-1
-2
-Vg
-D
-0 0.2 0.4 0.6 0.8 1
-V
-5Vg
-4Vg
-3Vg
-2Vg
-Vg
-0
-(a)
-(b)
-Fig. 1.12 The boost converter: (a) ideal converter circuit, (b) output voltage V vs. transistor duty cycle D
-Figure 1.13a illustrates a simple dc-1øac inverter circuit. As illustrated in Fig. 1.13b, the
-switch duty cycle is modulated sinusoidally. This causes the switch output voltage vs(t) to con-
-tain a low-frequency sinusoidal component. The L–C ﬁlter cutoﬀfrequency f0 is selected to
-pass the desired low-frequency components of vs(t), but to attenuate the high-frequency switch-
+现在考虑如何构建图1.6所示这一简单的直流-直流变换器示例。输入电压 $V_g$ 为 100 V，要求向一个等效 5 Ω 的负载供电 50 V，此时直流负载电流为 10 A。
 
-8 1 Introduction
-1
-2
-+
-–
-Load
-+ v(t)–
-2
-1
-Vg
-vs(t)
-–+
-t
-vs(t)
-(a)
-(b)
-Fig. 1.13 A bridge-type dc-1φac inverter: (a) ideal inverter circuit, ( b) typical pulse-width-modulated
-switch voltage waveform vs(t), and its low-frequency component
-ing harmonics. The controller modulates the duty cycle such that the desired output frequency
-and voltage magnitude are obtained.
-1.2 Several Applications of Power Electronics
-The power levels encountered in high-eﬃciency switching converters range from (1) less than
-one watt, in dc–dc converters within battery-operated portable equipment, to (2) tens, hundreds,
-or thousands of watts in power supplies for computers and o ﬃce equipment, to (3) kilowatts
-to megawatts, in variable-speed motor drives, to (4) roughly 1000 megawatts in the rectiﬁers
-and inverters that interface dc transmission lines to the ac utility power system. The converter
-systems of several applications are illustrated in this section.
-A power supply system for a laptop computer is illustrated in Fig. 1.14. A lithium battery
-powers the system, and several dc–dc converters change the battery voltage into the voltages
-required by the loads. A buck converter produces the low-voltage dc required by the micropro-
-cessor. A boost converter increases the battery voltage to the level needed by the disk drive. An
-inverter produces high-voltage high-frequency ac to drive lamps that light the display. A charger
-with transformer isolation converts the ac line voltage into dc to charge the battery. The converter
-switching frequencies are typically in the vicinity of several hundred kilohertz; this leads to sub-
-stantial reductions in the size and weight of the reactive elements. Power management is used,
-to control sleep modes in which power consumption is reduced and battery life is extended.
-In a distributed power system , an intermediate dc voltage appears at the computer backplane.
-Each printed circuit card contains high-density dc–dc converters that produce locally regulated
-low voltages. Commercial applications of power electronics include oﬀ-line power systems for
-computers, oﬃce and laboratory equipment, uninterruptable ac power supplies, and electronic
-ballasts for gas discharge lighting.
+电路基础教材描述了一种低效率的实现方法，即图1.7a所示的分压电路。此时直流-直流变换器仅由一个可变电阻构成，调节其阻值以获得所需的输出电压。负载电流流过该可变电阻。在给定的电压和电流下，可变电阻消耗的功率 $P_{loss}$ 等于负载功率 $P_{out} = 500\,\text{W}$，电源 $V_g$ 供电 $P_{in} = 1000\,\text{W}$。图1.7b给出了一种更实用的实现方案，称为线性串联调整稳压器：图1.7a中的可变电阻被一个线性模式功率晶体管取代，由反馈系统控制其基极电流以获得所需的输出电压。图1.7b中线性模式晶体管消耗的功率近似等于图1.7a中可变电阻消耗的 500 W。串联调整型线性稳压器如今通常仅用于几瓦的低功率场合。
 
-1.2 Several Applications of Power Electronics 9
-vac(t)
-iac(t) Charger
-PWM
-Rectifier
-Lithium
-battery
-ac line input
-Inverter
-Buck
-converter
-Boost
-converter
-Display
-backlighting
-Microprocessor
-Power
-management
-Disk
-drive
-Fig. 1.14 A laptop computer power supply system
-Solar
-array
-+
-vbus
-–
-Batteries
-Battery
-charge/discharge
-controllers
-Dc-dc
-converter
-Payload
-Dc-dc
-converter
-Payload
-Dissipative
-shunt regulator
-Fig. 1.15 Power system of an earth-orbiting spacecraft
-Figure 1.15 illustrates a power system of an earth-orbiting spacecraft. A solar array produces
-the main power bus voltage Vbus. DC–DC converters convert Vbus to the regulated voltages
-required by the spacecraft payloads. Battery charge /discharge controllers interface the main
-power bus to batteries; these controllers may also contain dc–dc converters. Aerospace applica-
-tions of power electronics include the power systems of aircraft, spacecraft, and other aerospace
-vehicles.
-Figure 1.16 illustrates an electric vehicle power and drive system. Batteries are charged
-by a converter that draws high power-factor sinusoidal current from a single-phase or three-
-phase ac line. The batteries supply power to variable-speed ac motors to propel the vehicle. The
-speeds of the ac motors are controlled by variation of the electrical input frequency. Inverters
-produce three-phase ac output voltages of variable frequency and variable magnitude, to control
-the speed of the ac motors and the vehicle. A dc–dc converter steps down the battery voltage
+![源页 p.23](../assets/page-snapshots/chapter-1/page-23.png)
 
-10 1 Introduction
-3øac line
-50/60 Hz
-Battery
-charger
-battery
-+
-vb
-–
-Variable-frequency
-Variable-voltage ac
-Inverter
-ac machine
-Inverter
-Inverter
-ac machine
-DC-DC
-converter
-µP
-system
-controller
-Vehicle
-electronicsLow-voltage
-dc bus
-control bus
-ac machine ac machine
-Inverter
-Fig. 1.16 An electric vehicle power and drive system
-to the lower dc levels required by the electronics of the system. Applications of motor drives
-include speed control of industrial processes, such as control of compressors, fans, and pumps;
-transportation applications such as electric vehicles, subways, and locomotives; and motion
-control applications in areas such as computer peripherals and industrial robots.
-Power electronics also ﬁnds application in other diverse industries, including dc power sup-
-plies, uninterruptable power supplies, and battery chargers for portable electronics, electric ve-
-hicles, and the telecommunications industry; inverter systems for renewable energy generation
-applications such as wind and photovoltaic power; and utility power systems applications in-
-cluding high-voltage dc transmission and static VAR (reactive volt-ampere) compensators.
-1.3 Elements of Power Electronics
-One of the things that makes the power electronics ﬁeld interesting is its incorporation of con-
-cepts from a diverse set of ﬁelds, including:
-•analog circuits
-•electronic devices
-•control systems
-•power systems
-•magnetics
-•electric machines
-•numerical simulation
+图1.8给出了另一种方案。一只单刀双掷开关（SPDT 开关）按图示连接。当开关处于位置 1 时，开关输出电压 $v_s(t)$ 等于变换器输入电压 $V_g$；当开关处于位置 2 时，输出电压为零。开关位置周期性变化，如图1.9所示，于是 $v_s(t)$ 成为一个频率为 $f_s$、周期为 $T_s = 1/f_s$ 的矩形波。占空比 $D$ 定义为开关处于位置 1 的时间所占的比例，故 $0 \le D \le 1$。实际工程中，SPDT 开关由开关模式半导体器件实现，并加以控制以实现 SPDT 开关功能。
 
-1.3 Elements of Power Electronics 11
-Thus, the practice of power electronics requires a broad electrical engineering background. In
-addition, there are fundamental concepts that are unique to the power electronics ﬁeld, and that
-require specialized study.
-The presence of high-frequency switching makes the understanding of switched-mode con-
-verters not straightforward. Hence, converter modeling is central to the study of power electron-
-ics. As introduced in Eq. (1.3), the dc component of a periodic waveform is equal to its average
-value. This ideal can be generalized, to predict the dc components of all converter waveforms
-via averaging. In Part I of this book, averaged equivalent circuit models of converters operating
-in steady state are derived. These models not only predict the basic ideal behavior of switched-
-mode converters, but also model eﬃciency and losses. Realization of the switching elements,
-using power semiconductor devices, is also discussed.
-Design of the converter control system requires models of the converter dynamics. In PartII
-of this book, the averaging technique is extended, to describe low-frequency variations in the
-converter waveforms. Small-signal equivalent circuit models are developed, which predict the
-control-to-output and line-to-transfer functions, as well as other ac quantities of interest. These
-models are then employed to design converter control systems and to lend an understanding of
-the well-known current-programmed control technique.
-The magnetic elements are key components of any switching converter. The design of high-
-power high-frequency magnetic devices having high e ﬃciency and small size and weight is
-central to most converter technologies. High-frequency power magnetics design is discussed in
-Part III.
-More advanced control, design-oriented analysis, and simulation are the topics of Part IV.
-The Feedback Theorem, Extra Element Theorem, andn-Extra Element Theorem are techniques
-of design-oriented analysis that enable analytical solution and design of complex systems, based
-on the ideas of null double injection. These techniques are applied to converter control systems,
-damping internal resonances, designing input ﬁlters, and analyzing peak- and average-current
-mode control. The average switch modeling approach to converter modeling is developed, and
-is employed to model converter dynamics in the discontinuous conduction mode and to perform
-SPICE-based averaged simulations of converters. High-frequency converter dynamics are con-
-sidered based on the ideas of converter sampled-data modeling; this explains observed behavior
-of discontinuous conduction mode converters and of current programmed converters are fre-
-quencies approaching half of the switching frequency. Digital control of switching converters
-is now implemented in a variety of converter applications; analog-to-digital converters, digital
-pulse-width modulators, and digital compensators are modeled and discussed.
-Pollution of the ac power system by rectiﬁer harmonics is a recognized problem. As a re-
-sult, many converter systems now incorporate low-harmonic rectiﬁers, which draw sinusoidal
-currents from the utility system. These modern rectiﬁers are considerably more sophisticated
-than the conventional diode bridge: they may contain high-frequency switched-mode convert-
-ers, with control systems that regulate the ac line current waveform. Modem rectiﬁer technology
-is treated in Part V.
-Resonant converters employ quasi-sinusoidal waveforms, as opposed to the rectangular
-waveforms of the buck converter illustrated in Fig. 1.9. These resonant converters ﬁnd appli-
-cation where high-frequency inverters and converters are needed. Resonant converters are mod-
-eled in Part VI. Their loss mechanisms, including the processes of zero-voltage switching and
-zero-current switching, are discussed.
+![源页 p.24](../assets/page-snapshots/chapter-1/page-24.png)
 
-Part I
-Converters in Equilibrium
-```
+开关改变了电压的直流分量。由傅里叶分析可知，周期波形的直流分量等于其平均值。因此，$v_s(t)$ 的直流分量为
+
+$$V_s = \frac{1}{T_s}\int_0^{T_s} v_s(t)\,dt = D\,V_g \tag{1.3}$$
+
+可见，开关以一个等于占空比 $D$ 的系数改变了直流电压。要将输入电压 $V_g = 100\,\text{V}$ 转换为所需的输出电压 $V = 50\,\text{V}$，需占空比 $D = 0.5$。
+
+同样，开关消耗的功率在理想情况下为零。当开关触点闭合时，其两端电压为零，故功耗为零；当触点断开时，电流为零，功耗亦为零。如此，我们便用一个理想无损器件成功改变了电压的直流分量。
+
+除了所需的直流分量 $V_s$ 之外，开关输出电压波形 $v_s(t)$ 还包含开关频率处不希望有的谐波。在大多数应用中，必须去除这些谐波，使输出电压 $v(t)$ 基本等于直流分量 $V = V_s$。为此可采用低通滤波器。图1.10给出了引入单节 L–C 低通滤波器的情形。若滤波器转折频率 $f_0$ 远低于开关频率 $f_s$，则滤波器基本上只通过 $v_s(t)$ 的直流分量。在开关、电感、电容均为理想元件的前提下，该直流-直流变换器的效率可趋近 100%。
+
+![源页 p.25](../assets/page-snapshots/chapter-1/page-25.png)
+
+图1.11引入了用于调节输出电压的控制系统。由于输出电压是开关占空比的函数，因此可构建一个改变占空比、使输出电压跟随给定参考量的控制系统。图1.11还给出了用开关模式半导体器件实现 SPDT 开关的一种典型方式。图1.8至图1.11中逐步发展出来的变换器功率级称为降压变换器，因为它降低了直流电压。
+
+也可以构建完成其他功率处理功能的变换器。例如，图1.12所示的电路称为升压变换器，其中电感与 SPDT 开关的位置互换。该变换器能够产生幅值高于输入电压的输出电压。一般地，利用内含开关器件并由储能元件构成的网络，可将任意给定输入电压转换为任意所需输出电压。
+
+![源页 p.26](../assets/page-snapshots/chapter-1/page-26.png)
+
+图1.13a给出了一个简单的直流-单相交流逆变电路。如图1.13b所示，开关占空比按正弦规律调制，这使得开关输出电压 $v_s(t)$ 含有一个低频正弦分量。L–C 滤波器的截止频率 $f_0$ 选为可通过 $v_s(t)$ 中所需低频分量、却衰减高频开关谐波之值。控制器对占空比进行调制，以获得所需的输出频率和电压幅值。
+
+## 1.2 电力电子的若干应用
+
+高效率开关变换器所涉及的功率等级十分宽广：从（1）电池供电便携设备中直流-直流变换器不足一瓦的功率，到（2）计算机及办公设备电源中数瓦、数十瓦、数百瓦乃至上千瓦的功率，到（3）变速电机驱动中数千瓦至数兆瓦的功率，再到（4）将直流输电线路与交流公用电网相连的整流器和逆变器中约 1000 兆瓦的功率。本节给出若干应用的变换器系统示例。
+
+![源页 p.27](../assets/page-snapshots/chapter-1/page-27.png)
+
+图1.14所示为一台笔记本电脑的电源系统。系统由锂电池供电，多台直流-直流变换器将电池电压转换为各负载所需电压：降压变换器产生微处理器所需的低压直流；升压变换器将电池电压提升至硬盘驱动器所需电压；逆变器产生高压高频交流以点亮显示背光；带变压器隔离的充电器将交流市电转换为直流为电池充电。变换器开关频率通常在数百千赫附近，这使储能元件的体积和重量大为减小。系统采用电源管理，控制休眠模式以降低功耗并延长电池寿命。
+
+在分布式电源系统中，计算机背板上出现一个中间直流电压，每块印刷电路板上装有高密度直流-直流变换器，就地产生稳压低压。电力电子的商业应用还包括计算机、办公及实验室设备的离线式电源、不间断交流电源以及气体放电灯的电子镇流器。
+
+![源页 p.28](../assets/page-snapshots/chapter-1/page-28.png)
+
+图1.15所示为一颗地球轨道航天器的电源系统。太阳能电池阵列产生主电源母线电压 $V_{bus}$，直流-直流变换器将 $V_{bus}$ 转换为航天器各有效载荷所需的稳压电压。电池充放电控制器将主电源母线与电池接口；这些控制器中也可能包含直流-直流变换器。电力电子在航空航天领域的应用还包括飞机、航天器及其他航空航天飞行器的电源系统。
+
+图1.16所示为一套电动汽车的电力与驱动系统。电池由一台变换器充电，该变换器从单相或三相交流电网吸收高功率因数的正弦电流。电池向变速交流电机供电以驱动车辆。交流电机的转速通过改变电气输入频率来控制。逆变器产生频率和幅值均可变的三相交流输出电压，以控制交流电机及车辆的转速。一台直流-直流变换器将电池电压降至系统电子设备所需的较低直流电压。电机驱动的应用包括：工业过程的转速控制（如压缩机、风机和水泵的控制）、交通领域（如电动汽车、地铁和机车），以及计算机外围设备和工业机器人等领域的运动控制。
+
+电力电子在其他众多行业也有应用，包括：直流电源、不间断电源及便携电子设备、电动汽车和电信行业的电池充电器；风力发电和光伏发电等可再生能源发电中的逆变器系统；以及公用电力系统中的高压直流输电和静止无功补偿器等应用。
+
+## 1.3 电力电子的组成要素
+
+电力电子领域之所以引人入胜，原因之一是它融合了来自众多领域的概念，包括：
+
+- 模拟电路
+- 电子器件
+- 控制系统
+- 电力系统
+- 磁学
+- 电机
+- 数值仿真
+
+![源页 p.29](../assets/page-snapshots/chapter-1/page-29.png)
+
+因此，从事电力电子工作需要扎实的电气工程综合背景。此外，还有一些为电力电子领域所独有的基本概念，需要专门学习。
+
+高频开关的存在使开关模式变换器的理解并非易事。因此，变换器建模是电力电子研究的核心。如式 (1.3) 所引入，周期波形的直流分量等于其平均值。这一思想可以推广，通过平均来预测所有变换器波形的直流分量。在本书第一部分中，将推导变换器在稳态下工作的平均等效电路模型。这些模型不仅能预测开关模式变换器的基本理想行为，还能建模效率与损耗。书中还将讨论利用功率半导体器件实现开关元件的问题。
+
+变换器控制系统的设计需要变换器动态特性模型。在本书第二部分中，平均法将得到推广，用于描述变换器波形中的低频变化；并由此建立小信号等效电路模型，以预测控制-输出传递函数、输入-输出传递函数以及其他感兴趣的交流量。随后，这些模型被用于设计变换器控制系统，并帮助读者理解著名的电流编程控制技术。
+
+磁性元件是任何开关变换器的关键部件。设计高效率、小体积轻重量、高功率高频的磁性器件，是大多数变换器技术的核心。第三部分讨论高频功率磁性器件的设计。
+
+第四部分的主题是更高级的控制、面向设计的分析方法与仿真。反馈定理、额外元件定理以及 N 额外元件定理都是面向设计的分析方法，它们基于零双注入的思想，能够对复杂系统进行解析求解与设计。这些方法被应用于变换器控制系统、内部谐振的阻尼、输入滤波器的设计，以及峰值电流模式和平均电流模式控制的分析。书中发展了用于变换器建模的平均开关建模方法，并用它对断续导通模式下变换器的动态特性进行建模，以及进行基于 SPICE 的变换器平均仿真。基于变换器采样数据建模的思想，讨论了高频变换器动态特性；这解释了在频率趋于开关频率一半时断续导通模式变换器与电流编程控制变换器的某些可观测行为。开关变换器的数字控制如今已在各种变换器应用中实现；书中对模数转换器、数字脉宽调制器和数字补偿器进行了建模与讨论。
+
+整流器谐波对交流公用电网的污染是一个公认的问题。因此，如今许多变换器系统都采用了低谐波整流器，从公用电网吸收正弦电流。这些现代整流器远比常规二极管整流桥复杂：它们可能内含高频开关模式变换器，并配有调节交流电网电流波形的控制系统。第五部分讨论现代整流器技术。
+
+谐振变换器采用准正弦波形，而非如图1.9所示降压变换器的矩形波形。这类谐振变换器适用于需要高频逆变器与变换器的场合。第六部分对谐振变换器进行建模，并讨论其损耗机理，包括零电压开关和零电流开关过程。
+
+![源页 p.30](../assets/page-snapshots/chapter-1/page-30.png)
+
+---
+
+# 第一部分　变换器的稳态分析

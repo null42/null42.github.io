@@ -18,21 +18,21 @@ navGroupOrder: 30
 
 # ALG-05 有感FOC实现
 
-**模块编号：** ALG-05  
-**模块名称：** 有感FOC实现（Sensored FOC Implementation）  
-**文档版本：** v2.0  
-**适用对象：** 电机控制工程师、嵌入式开发者  
-**前置知识：** ALG-01 FOC理论基础、C语言编程、STM32外设配置  
+- **模块编号：** ALG-05  
+- **模块名称：** 有感FOC实现（Sensored FOC Implementation）  
+- **文档版本：** v2.0  
+- **适用对象：** 电机控制工程师、嵌入式开发者  
+- **前置知识：** ALG-01 FOC理论基础、C语言编程、STM32外设配置  
 
 ---
 
 ## 1. ?? 核心摘要  ??
 
-**一句话：** 有感FOC通过编码器获取精确转子位置，结合双闭环PI控制（电流环+速度环）和SVPWM调制，实现高性能的电机速度/位置伺服控制。
+- **一句话：** 有感FOC通过编码器获取精确转子位置，结合双闭环PI控制（电流环+速度环）和SVPWM调制，实现高性能的电机速度/位置伺服控制。
 
-**认知挂钩：** 如果说FOC理论是"地图"，有感FOC就是"带GPS导航的驾驶"——编码器提供精确位置，PI控制器是油门和方向盘，SVPWM是发动机的喷油系统，三者协同实现精准驱动。
+- **认知挂钩：** 如果说FOC理论是"地图"，有感FOC就是"带GPS导航的驾驶"——编码器提供精确位置，PI控制器是油门和方向盘，SVPWM是发动机的喷油系统，三者协同实现精准驱动。
 
-**有感FOC vs 无感FOC：**
+- **有感FOC vs 无感FOC：**
 
 | 特性 | 有感FOC | 无感FOC |
 |------|---------|---------|
@@ -43,7 +43,7 @@ navGroupOrder: 30
 | 启动方式 | 直接启动 | 需要特殊启动策略 |
 | 适用场景 | 伺服、精密定位 | 风机、水泵 |
 
-**系统架构：**
+- **系统架构：**
 
 ```mermaid
 flowchart TD
@@ -88,27 +88,27 @@ flowchart TD
 
 #### 2.1.1 增量式编码器
 
-**工作原理：** 输出A、B两相正交脉冲信号，通过计数脉冲确定位置增量。
+- **工作原理：** 输出A、B两相正交脉冲信号，通过计数脉冲确定位置增量。
 
-**特点：**
+- **特点：**
 - 分辨率：每转脉冲数（PPR）
 - 需要零位信号（Z相）进行位置校准
 - 掉电后位置丢失
 
-**接口方式：**
+- **接口方式：**
 - 正交编码器接口（QEI/Encoder Timer）
 - 方向判断：A相超前B相90°为正转，反之为反转
 
 #### 2.1.2 绝对值编码器
 
-**工作原理：** 直接输出绝对位置信息，无需计数。
+- **工作原理：** 直接输出绝对位置信息，无需计数。
 
-**特点：**
+- **特点：**
 - 掉电后位置保持
 - 分辨率高（12bit~21bit）
 - 成本较高
 
-**接口方式：**
+- **接口方式：**
 - SSI（同步串行接口）
 - SPI接口
 - BiSS-C接口
@@ -124,7 +124,7 @@ $$
 - $\theta_m$：机械角度（rad）
 - $p$：极对数
 
-**极对数的影响：**
+- **极对数的影响：**
 
 | 极对数 | 电角度/机械角度 | 电气转速/机械转速 |
 |--------|----------------|------------------|
@@ -156,7 +156,7 @@ flowchart TD
     Rc --> GND
 ```
 
-**采样原理：** 通过测量采样电阻上的电压降，计算相电流。
+- **采样原理：** 通过测量采样电阻上的电压降，计算相电流。
 
 $$
 I_{phase} = \frac{V_{sense}}{R_{sense}}
@@ -179,7 +179,7 @@ PWM_A   │    │    │    │    │    │    │    │
         开关动作后等待稳定再采样
 ```
 
-**同步原则：**
+- **同步原则：**
 1. 在PWM开通期间采样（下桥臂导通时）
 2. 避开开关噪声区域
 3. 采样点应在PWM脉冲中间
@@ -198,8 +198,8 @@ $$
 - $\theta(k-1)$：上一时刻角度 ($rad$)
 - $T_s$：采样周期 ($s$)
 
-**优点：** 计算简单，实时性好  
-**缺点：** 高频噪声大，低速精度差
+- **优点：** 计算简单，实时性好  
+- **缺点：** 高频噪声大，低速精度差
 
 #### 2.4.2 M法（脉冲计数法）
 
@@ -213,7 +213,7 @@ $$
 - $T_s$：采样周期 ($s$)
 - $PPR$：编码器每转脉冲数 (Pulses Per Revolution)
 
-**适用场景：** 中高速测量
+- **适用场景：** 中高速测量
 
 #### 2.4.3 T法（周期测量法）
 
@@ -227,7 +227,7 @@ $$
 - $N$：相邻两个脉冲之间的时钟计数值
 - $PPR$：编码器每转脉冲数 (Pulses Per Revolution)
 
-**适用场景：** 低速测量
+- **适用场景：** 低速测量
 
 ### 2.5 SVPWM原理
 
@@ -262,11 +262,11 @@ graph TD
 
 #### 2.6.1 转子定位
 
-**目的：** 将转子磁极对准到已知位置（通常为电角度0°）。
+- **目的：** 将转子磁极对准到已知位置（通常为电角度0°）。
 
-**方法：** 在d轴注入直流电流，产生固定磁场，吸引转子对齐。
+- **方法：** 在d轴注入直流电流，产生固定磁场，吸引转子对齐。
 
-**定位电流选择：**
+- **定位电流选择：**
 
 $$
 I_{align} = (0.5 \sim 1.0) \times I_{rated}
@@ -276,7 +276,7 @@ $$
 - $I_{align}$：定位电流 ($A$)
 - $I_{rated}$：电机额定电流 ($A$)
 
-**定位时间：**
+- **定位时间：**
 
 $$
 t_{align} > \frac{5J}{B}
@@ -289,9 +289,9 @@ $$
 
 #### 2.6.2 IF强拖启动
 
-**IF（Current-Frequency）启动：** 电流闭环+开环频率斜坡。
+- **IF（Current-Frequency）启动：** 电流闭环+开环频率斜坡。
 
-**原理：** 角度自增（开环），电流闭环控制，逐步提升频率使电机加速。
+- **原理：** 角度自增（开环），电流闭环控制，逐步提升频率使电机加速。
 
 ---
 
@@ -309,7 +309,7 @@ $$
 
 ### 3.2 电流环PI参数计算
 
-**零极点对消法：**
+- **零极点对消法：**
 
 选择PI控制器的零点对消电机极点：
 
@@ -353,7 +353,7 @@ $$
 K_{i,spd} = \frac{K_{p,spd} \cdot \omega_{c,spd}}{4}
 $$
 
-**带宽关系：**
+- **带宽关系：**
 
 $$
 \omega_{c,spd} = \frac{1}{5} \omega_{c,cur}
@@ -361,7 +361,7 @@ $$
 
 ### 3.5 SVPWM作用时间计算
 
-**扇区I计算：**
+- **扇区I计算：**
 
 $$
 T_4 = \frac{\sqrt{3} T_s}{U_{dc}} V_{ref} \sin(\frac{\pi}{3} - \theta)
@@ -412,7 +412,7 @@ $$
 
 ### 4.1 控制模式定义
 
-**代码位置：** [foc_drv.h:19-40](../../AxDr/AxDr/User/motor/foc_drv.h#L19)
+- **代码位置：** [foc_drv.h:19-40](../../AxDr/AxDr/User/motor/foc_drv.h#L19)
 
 ```c
 typedef enum
@@ -436,7 +436,7 @@ typedef enum
 } ctrl_mode_t;
 ```
 
-**模式说明：**
+- **模式说明：**
 
 | 模式 | 角度来源 | 电流环 | 速度环 | 应用场景 |
 |------|---------|--------|--------|---------|
@@ -447,7 +447,7 @@ typedef enum
 
 ### 4.2 MT6816磁编码器接口
 
-**代码位置：** [encoder.c:11-51](../../AxDr/AxDr/User/motor/encoder.c#L11)
+- **代码位置：** [encoder.c:11-51](../../AxDr/AxDr/User/motor/encoder.c#L11)
 
 #### 4.2.1 SPI通信时序
 
@@ -499,7 +499,7 @@ void RINE_MT6816_SPI_Get_AngleData(void)
 }
 ```
 
-**数据格式分析：**
+- **数据格式分析：**
 
 | 位 | 内容 | 说明 |
 |----|------|------|
@@ -509,7 +509,7 @@ void RINE_MT6816_SPI_Get_AngleData(void)
 
 #### 4.2.2 角度计算
 
-**代码位置：** [encoder.c:61-83](../../AxDr/AxDr/User/motor/encoder.c#L61)
+- **代码位置：** [encoder.c:61-83](../../AxDr/AxDr/User/motor/encoder.c#L61)
 
 ```c
 void MT6816_Calc_Elec_Angle(uint8_t pole_pairs)
@@ -549,7 +549,7 @@ void MT6816_Calc_Elec_Angle(uint8_t pole_pairs)
 
 ### 4.3 ADC采样回调
 
-**代码位置：** [foc_ctrl.c:14-38](../../AxDr/AxDr/User/motor/foc_ctrl.c#L14)
+- **代码位置：** [foc_ctrl.c:14-38](../../AxDr/AxDr/User/motor/foc_ctrl.c#L14)
 
 ```c
 void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef* hadc)
@@ -580,7 +580,7 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef* hadc)
 
 ### 4.4 电流校准
 
-**代码位置：** [foc_drv.c:75-89](../../AxDr/AxDr/User/motor/foc_drv.c#L75)
+- **代码位置：** [foc_drv.c:75-89](../../AxDr/AxDr/User/motor/foc_drv.c#L75)
 
 ```c
 void get_curr_off(void)
@@ -603,7 +603,7 @@ void get_curr_off(void)
 }
 ```
 
-**校准条件：**
+- **校准条件：**
 - 电机未通电
 - 采样电阻无电流流过
 - 环境温度稳定
@@ -612,7 +612,7 @@ void get_curr_off(void)
 
 #### 4.5.1 串级PI控制器
 
-**代码位置：** [pid.c:128-157](../../AxDr/AxDr/User/utils/pid.c#L128)
+- **代码位置：** [pid.c:128-157](../../AxDr/AxDr/User/utils/pid.c#L128)
 
 ```c
 float serial_pid_ctrl(pid_para_t *pid, float ref_value, float fdback_value)
@@ -650,7 +650,7 @@ float serial_pid_ctrl(pid_para_t *pid, float ref_value, float fdback_value)
 
 #### 4.5.2 并行PI控制器
 
-**代码位置：** [pid.c:92-125](../../AxDr/AxDr/User/utils/pid.c#L92)
+- **代码位置：** [pid.c:92-125](../../AxDr/AxDr/User/utils/pid.c#L92)
 
 ```c
 float parallel_pid_ctrl(pid_para_t *pid, float ref_value, float fback_value) 
@@ -686,7 +686,7 @@ float parallel_pid_ctrl(pid_para_t *pid, float ref_value, float fback_value)
 }
 ```
 
-**串级PI vs 并行PI：**
+- **串级PI vs 并行PI：**
 
 | 特性 | 串级PI | 并行PI |
 |------|--------|--------|
@@ -697,7 +697,7 @@ float parallel_pid_ctrl(pid_para_t *pid, float ref_value, float fback_value)
 
 ### 4.6 PI参数自动计算
 
-**代码位置：** [foc_drv.c:20-35](../../AxDr/AxDr/User/motor/foc_drv.c#L20)
+- **代码位置：** [foc_drv.c:20-35](../../AxDr/AxDr/User/motor/foc_drv.c#L20)
 
 ```c
 void foc_update_current_ctrl_gain(uint16_t bandwidth)
@@ -719,7 +719,7 @@ void foc_update_current_ctrl_gain(uint16_t bandwidth)
 }
 ```
 
-**电机参数配置：**
+- **电机参数配置：**
 
 ```c
 mt.para.Rs = 0.17780f;      // 定子电阻 (Ω)
@@ -731,7 +731,7 @@ mt.para.pairs = 7;          // 极对数
 
 ### 4.7 速度环控制实现
 
-**代码位置：** [foc_ctrl.c:158-171](../../AxDr/AxDr/User/motor/foc_ctrl.c#L158)
+- **代码位置：** [foc_ctrl.c:158-171](../../AxDr/AxDr/User/motor/foc_ctrl.c#L158)
 
 ```c
 case spd_curr:
@@ -766,7 +766,7 @@ case spd_curr:
 
 ### 4.8 速度斜坡控制
 
-**代码位置：** [foc_ctrl.c:180-203](../../AxDr/AxDr/User/motor/foc_ctrl.c#L180)
+- **代码位置：** [foc_ctrl.c:180-203](../../AxDr/AxDr/User/motor/foc_ctrl.c#L180)
 
 ```c
 void foc_speed_ctrl(uint8_t N)
@@ -797,7 +797,7 @@ void foc_speed_ctrl(uint8_t N)
 
 ### 4.9 SVPWM扇区判断
 
-**代码位置：** [foc_calc.c:115-131](../../AxDr/AxDr/User/motor/foc_calc.c#L115)
+- **代码位置：** [foc_calc.c:115-131](../../AxDr/AxDr/User/motor/foc_calc.c#L115)
 
 ```c
 void svpwm_sector(foc_para_t *foc)
@@ -826,7 +826,7 @@ void svpwm_sector(foc_para_t *foc)
 
 ### 4.10 SVPWM中点钳位调制
 
-**代码位置：** [foc_calc.c:96-113](../../AxDr/AxDr/User/motor/foc_calc.c#L96)
+- **代码位置：** [foc_calc.c:96-113](../../AxDr/AxDr/User/motor/foc_calc.c#L96)
 
 ```c
 void svpwm_midpoint(foc_para_t *foc)
@@ -856,7 +856,7 @@ void svpwm_midpoint(foc_para_t *foc)
 
 ### 4.11 启动状态机
 
-**代码位置：** [foc_ctrl.c:39-96](../../AxDr/AxDr/User/motor/foc_ctrl.c#L39)
+- **代码位置：** [foc_ctrl.c:39-96](../../AxDr/AxDr/User/motor/foc_ctrl.c#L39)
 
 ```c
 void motor_ctrl(void)
@@ -918,7 +918,7 @@ void motor_ctrl(void)
 
 ### 4.12 IF强拖启动实现
 
-**代码位置：** [foc_ctrl.c:116-130](../../AxDr/AxDr/User/motor/foc_ctrl.c#L116)
+- **代码位置：** [foc_ctrl.c:116-130](../../AxDr/AxDr/User/motor/foc_ctrl.c#L116)
 
 ```c
 case dragif_mode:
@@ -940,7 +940,7 @@ case dragif_mode:
 }
 ```
 
-**启动参数配置：**
+- **启动参数配置：**
 
 ```c
 mc.theta_acc = 0.001f;   // 角度增量（对应加速度）
@@ -950,7 +950,7 @@ mc.iq_set = 1.0f;        // q轴电流（启动转矩）
 
 ### 4.13 高级启动状态机（含观测器切换）
 
-**代码位置：** [startup.c:71-163](../../AxDr/AxDr/User/motor/startup.c#L71)
+- **代码位置：** [startup.c:71-163](../../AxDr/AxDr/User/motor/startup.c#L71)
 
 ```c
 void startup_update(startup_t *startup, observer_t *obs)
@@ -1012,7 +1012,7 @@ void startup_update(startup_t *startup, observer_t *obs)
 
 ### 4.14 制动策略
 
-**能耗制动：**
+- **能耗制动：**
 
 ```c
 void foc_pwm_stop(void)
@@ -1023,7 +1023,7 @@ void foc_pwm_stop(void)
 }
 ```
 
-**再生制动：** 速度环给定负值，电流环自动产生反向电流。
+- **再生制动：** 速度环给定负值，电流环自动产生反向电流。
 
 ### 4.15 数据结构设计
 
@@ -1131,13 +1131,13 @@ typedef struct
 
 ### 5.1 电流环PI参数整定
 
-**零极点对消法：**
+- **零极点对消法：**
 
 $$
 K_p = \frac{L_s}{\tau_c}, \quad K_i = \frac{R_s}{\tau_c}
 $$
 
-**整定步骤：**
+- **整定步骤：**
 
 1. **确定电流环参数**：先整定电流环，确保电流响应快速稳定
 2. **设置电流环带宽**：通常为 $500 \sim 2000\text{Hz}$
@@ -1147,7 +1147,7 @@ $$
    - 加入I控制，消除稳态误差
    - 调整参数，优化动态响应
 
-**代码中的带宽配置：**
+- **代码中的带宽配置：**
 
 ```c
 foc_update_current_ctrl_gain(500);  // 电流环带宽500Hz
@@ -1155,7 +1155,7 @@ foc_update_current_ctrl_gain(500);  // 电流环带宽500Hz
 
 ### 5.2 速度环PI参数整定
 
-**整定步骤：**
+- **整定步骤：**
 
 1. **确定电流环参数**：先整定电流环，确保电流响应快速稳定
 2. **设置速度环带宽**：通常为电流环带宽的1/5~1/10
@@ -1165,7 +1165,7 @@ foc_update_current_ctrl_gain(500);  // 电流环带宽500Hz
    - 加入I控制，消除稳态误差
    - 调整参数，优化动态响应
 
-**抗积分饱和限幅配置：**
+- **抗积分饱和限幅配置：**
 
 ```c
 pid_limit_init(&id_pi, 10.8f, -10.8f, 10.8f, -10.8f);  // 电流环
@@ -1183,7 +1183,7 @@ pid_limit_init(&spd_pi, 5.0f, -5.0f, 5.0f, -5.0f);     // 速度环
 | 开关噪声耦合 | 高 | 硬件滤波+软件滤波 |
 | 采样时序偏差 | 中 | 精确同步 |
 
-**提高精度的方法：**
+- **提高精度的方法：**
 
 1. **硬件措施：**
    - 使用低温度系数采样电阻

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第10章part 3 - 10 Basic Magnetics Theory"
+title: "第10章 基本磁学理论（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,447 +18,235 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第10章part 3 - 10 Basic Magnetics Theory
+# 第10章 基本磁学理论（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 458-467  
-> Chunk ID: `chapter-10-part-3`
+> 源页：458–467
+> 本部分续接 10.5 各类磁性器件，涵盖 10.5.5 反激变压器、10.6 关键要点小结和习题 10.1–10.14。
 
-## 主干提取
+## 10.5 各类磁性器件（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.458](../assets/page-snapshots/chapter-10/page-458.png)
 
-## 术语表
+图10.48 耦合电感小 B-H 回线
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+### 10.5.5 反激变压器
 
-## 中文翻译
+如第6章所述，反激变压器功能为含两个绕组的电感。晶体管导通区间使用一次绕组，二极管导通区间使用二次绕组。图10.49a 给出反激变换器，反激变压器建模为与理想变压器并联的磁化电感。磁化电流 $i_M(t)$ 正比于磁芯磁场强度 $H_c(t)$。典型 DCM 波形如图10.49b所示。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+![源页 p.458](../assets/page-snapshots/chapter-10/page-458.png)
 
-## 英文原文
+图10.49 反激变压器：(a) 变换器原理图，含变压器等效电路；(b) DCM 电流波形
 
-```text
-10.5 Several Types of Magnetic Devices, Their B–H Loops, and Core vs. Copper Loss 449
-Fig. 10.48 Coupled inductor minor
-B–H loop
-B
-Hc0
-Hc
-Hc
-coupled inductor
-large excitation
-B
-10.5.5 Flyback Transformer
-As discussed in Chap. 6, the ﬂyback transformer functions as an inductor with two windings.
-The primary winding is used during the transistor conduction interval, and the secondary is used
-during the diode conduction interval. A ﬂyback converter is illustrated in Fig. 10.49a, with the
-ﬂyback transformer modeled as a magnetizing inductance in parallel with an ideal transformer.
-The magnetizing current iM(t) is proportional to the core magnetic ﬁeld strength Hc(t). Typical
-DCM waveforms are given in Fig.10.49b.
-Since the ﬂyback transformer stores energy, an air gap is needed. Core loss depends on
-the magnitude of the ac component of the magnetizing current. TheB–H loop for discontinuous
-conduction mode operation is illustrated in Fig.10.50. When the converter is designed to operate
-in DCM, the core loss is signiﬁcant. The peak ac ﬂux densityΔB is then chosen to maintain an
-acceptably low core loss. For CCM operation, core loss is less signiﬁcant, and the maximum
-ﬂux density may be limited only by saturation of the core. In either case, winding proximity
-losses are typically quite signiﬁcant. Unfortunately, interleaving the windings has little impact
-on the proximity loss because the primary and secondary winding currents are out of phase.
-(a)
-+
-LM
-+
-v
-vg
-n1 : n2
-iMi1 i2
-(b) i1(t) i1,pk
-i2(t)
-tiM(t)
-t
-i1,pk
-Fig. 10.49 Flyback transformer: (a) converter schematic, with transformer equivalent circuit; (b)D C M
-current waveforms
+由于反激变压器储存能量，需要气隙。铁损取决于磁化电流交流分量的幅值。断续导通模式工作的 B-H 回线如图10.50所示。变换器设计为 DCM 工作时铁损显著。然后选择峰值交流磁通密度 $\Delta B$ 以保持可接受的低铁损。CCM 工作时铁损不太显著，最大磁通密度可能仅受磁芯饱和限制。两种情形下绕组邻近损耗通常都相当显著。不幸的是，由于一次和二次绕组电流反相，交错绕组对邻近损耗影响不大。
 
-450 10 Basic Magnetics Theory
-Fig. 10.50 Operational B–H loop of a
-DCM ﬂyback transformer
-10.6 Summary of Key Points
-1. Magnetic devices can be modeled using lumped-element magnetic circuits, in a manner
-similar to that commonly used to model electrical circuits. The magnetic analogs of electri-
-cal voltage V, current I, and resistance R are magnetomotive force (MMF) F , ﬂuxΦ, and
-reluctance R, respectively.
-2. Faraday’s law relates the voltage induced in a loop of wire to the derivative of ﬂux passing
-through the interior of the loop.
-3. Ampere’s law relates the total MMF around a loop to the total current passing through the
-center of the loop. Ampere’s law implies that winding currents are sources of MMF, and
-that when these sources are included, then the net MMF around a closed path is equal to
-zero.
-4. Magnetic core materials exhibit hysteresis and saturation. A core material saturates when
-the ﬂux density B reaches the saturation ﬂux density B
-sat.
-5. Air gaps are employed in inductors to prevent saturation when a given maximum current
-ﬂows in the winding, and to stabilize the value of inductance. The inductor with air gap
-can be analyzed using a simple magnetic equivalent circuit, containing core and air gap
-reluctances and a source representing the winding MMF.
-6. Conventional transformers can be modeled using sources representing the MMFs of each
-winding, and the core MMF. The core reluctance approaches zero in an ideal transformer.
-Nonzero core reluctance leads to an electrical transformer model containing a magnetizing
-inductance, eﬀectively in parallel with the ideal transformer. Flux that does not link both
-windings, or “leakage ﬂux,” can be modeled using series inductors.
-7. The conventional transformer saturates when the applied winding volt-seconds are too large.
-Addition of an air gap has no eﬀect on saturation. Saturation can be prevented by increasing
-the core cross-sectional area, or by increasing the number of primary turns.
-8. Magnetic materials exhibit core loss, due to hysteresis of the B–H loop and to induced eddy
-currents ﬂowing in the core material. In available core materials, there is a tradeoﬀbetween
-high saturation ﬂux density B
-sat and high core loss Pfe . Laminated iron alloy cores exhibit
-the highest Bsat but also the highest Pfe , while ferrite cores exhibit the lowest Pfe but also
-the lowest Bsat. Between these two extremes are powdered iron alloy and amorphous alloy
-materials.
-9. The skin and proximity eﬀects lead to eddy currents in winding conductors, which increase
-the copper loss Pcu in high-current high-frequency magnetic devices. When a conductor has
+![源页 p.459](../assets/page-snapshots/chapter-10/page-459.png)
 
-10.6 Summary of Key Points 451
-thickness approaching or larger than the penetration depth δ, magnetic ﬁelds in the vicinity
-of the conductor induce eddy currents in the conductor. According to Lenz’s law, these eddy
-currents ﬂow in paths that tend to oppose the applied magnetic ﬁelds.
-10. The magnetic ﬁeld strengths in the vicinity of the winding conductors can be determined by
-use of MMF diagrams. These diagrams are constructed by application of Ampere’s law, fol-
-lowing the closed paths of the magnetic ﬁeld lines which pass near the winding conductors.
-Multiple-layer noninterleaved windings can exhibit high maximum MMFs, with resulting
-high eddy currents and high copper loss.
-11. An expression for the copper loss in a layer, as a function of the magnetic ﬁeld strengths
-or MMFs surrounding the layer, is given in Sect. 10.4.4. This expression can be used in
-conjunction with the MMF diagram, to compute the copper loss in each layer of a winding.
-The results can then be summed, yielding the total winding copper loss. When the eﬀective
-layer thickness is near to or greater than one skin depth, the copper losses of multiple-layer
-noninterleaved windings are greatly increased.
-12. Pulse-width modulated winding currents contain signiﬁcant total harmonic distortion; this
-can lead to a further increase of copper loss. The increase in proximity loss caused by
-current harmonics is most pronounced in multiple-layer noninterleaved windings, with an
-eﬀective layer thickness near one skin depth.
-Problems
-10.1 The core illustrated in Fig. 10.51a is 1 cm thick. All legs are 1 cm wide, except for the
-right-hand side vertical leg, which is 0.5 cm wide. You may neglect nonuniformities in
-the ﬂux distribution caused by turning comers.
-(a)
-Core relative permeability μr = 1000
-n1 = 10
-3 cm 3 cm
-3c m
-3c m
-0.5 cm
-1c m
-1c m
-i1
-n1 turns
-3c m
-3c m
-(b)
-n1 = 10
-i1
-n1 turns
-n2 = 20
-i2
-n2 turns
-Fig. 10.51 Problem 10.1
-(a) Determine the magnetic circuit model of this device, and label the values of all re-
-luctances in your model.
-(b) Determine the inductance of the winding.
-A second winding is added to the same core, as shown in Fig. 10.51b.
-(c) Modify your model of part (a) to include this winding.
+图10.50 DCM 反激变压器的工作 B-H 回线
 
-452 10 Basic Magnetics Theory
-(d) The electrical equations for this circuit may be written in the form
-[v1
-v2
-]
-=
-[L11 L12
-L12 L22
-]d
-dt
-[i1
-i2
-]
-Use superposition to determine analytical expressions and numerical values for L11,
-L12, and L22.
-10.2 Two windings are placed as illustrated in Fig.10.52a on a core of uniform cross-sectional
-area Ac = 1c m2. Each winding has 50 turns. The relative permeability of the core is
-μr= 104.
-Fig. 10.52 Problem 10.2
-(a)
-5 cm
-5 cm
-5 cm
-i2+
-v2
-i1+
-v1
-(b)
-L+
-(c)
-L
-(a) Sketch an equivalent magnetic circuit, and determine numerical values for each reluc-
-tance.
-(b) Determine the self-inductance of each winding.
-(c) Determine the inductance L+ obtained when the windings are connected in series as
-in Fig. 10.52b.
-(d) Determine the inductance L−obtained when the windings are connected in anti-series
-as in Fig. 10.52c.
-10.3 All three legs of the magnetic device illustrated in Fig. 10.53 are of uniform cross-
-sectional area AC. Legs 1 and 2 each have magnetic path length 3 ℓ, while leg 3 has
-magnetic path lengthℓ. Both windings have n turns. The core has permeabilityμ≫μ0.
-Fig. 10.53 Magnetic core for
-Problem 10.3
-i2
-+
-v2
-i1
-+
-v1
-Leg
-1
-Leg
-3
-Leg
-2
+## 10.6 关键要点小结
 
-10.6 Summary of Key Points 453
-(a) Sketch a magnetic equivalent circuit, and give analytical expressions for all element
-values. A voltage source is connected to winding 1, such that v1(t) is a square wave
-of peak value Vmax and period Ts. Winding 2 is open-circuited.
-(b) Sketch i1(t) and label its peak value.
-(c) Find the ﬂuxϕ2(t) in leg 2. Sketchϕ2(t) and label its peak value.
-(d) Sketch v2(t) and label its peak value.
-10.4 The magnetic device illustrated in Fig. 10.54a consists of two windings, which can re-
-place the two inductors in a ´Cuk, SEPIC, or other similar converter. For this problem, all
-three legs have the same uniform cross-sectional area Ac. The legs have gaps of lengths
-g1, g2, and g3, respectively. The core permeabilityμis very large. You may neglect fring-
-ing ﬂux. Legs 1 and 2 have windings containing n1 and n2 turns, respectively.
-(a) i2
-+
-v2
-i1
-+
-v1
-n1
-turns
-n2
-turns
-Gap
-length
-g1
-g3
-Gap
-length
-g
-2
-(b)
-+ R V
-+
-Vg
-i1 i2
-n1
-turns
-n2
-turns
-Fig. 10.54 Magnetic core and converter for Problem 10.4
-(a) Derive a magnetic circuit model for this device, and give analytical expressions for
-each reluctance in your model. Label the polarities of the MMF generators.
-(b) Write the electrical terminal equations of this device in the matrix form
-[v1
-v2
-]
-=
-[L11 L12
-L12 L22
-]d
-dt
-[i1
-i2
-]
-and derive analytical expressions for L11, L12, and L22.
-(c) Derive an electrical circuit model for this device, and give analytical expressions
-for the turns ratio and each inductance in your model, in terms of the turns and
-reluctances of part (a).
-This single magnetic device is to be used to realize the two inductors of the ´Cuk
-converter, as in Fig.10.54b.
+1. 磁性器件可用集总元件磁路建模，方式与通常用于建模电路的方式类似。电学电压 $V$、电流 $I$ 和电阻 $R$ 的磁学模拟量分别为磁动势（MMF）$\mathcal{F}$、磁通 $\Phi$ 和磁阻 $\mathcal{R}$。
 
-454 10 Basic Magnetics Theory
-(d) Sketch the voltage waveforms v1(t) and v2(t), making the linear-ripple approxima-
-tion as appropriate. You may assume that the converter operates in the continuous
-conduction mode.
-(e) The voltage waveforms of part (d) are applied to your model of parts (b) and (c).
-Solve your model to determine the slopes of the inductor current ripples during in-
-tervals DTs and D′Ts. Sketch the steady-state inductor current waveforms i1(t) and
-i2(t), and label all slopes.
-(f) By skillful choice of n1/n2 and the air gap lengths, it is possible to make the induc-
-tor current rippleΔi in either i1(t)o r i2(t) go to zero. Determine the conditions on
-n1/n2, g1, g2, and g3 that cause the current ripple in i2(t) to become zero. Sketch the
-resulting i1(t) and i2(t), and label all slopes.
-It is possible to couple the inductors in this manner, and cause one of the inductor cur-
-rent ripples to go to zero, in any converter in which the inductor voltage waveforms are
-proportional.
-10.5 Over its usable operating range, a certain permanent magnet material has the B–H char-
-acteristics illustrated by the solid line in Fig. 10.55. The magnet has lengthℓm = 0.5c m ,
-and cross-sectional area 4 cm2. Bm = 1 T. Derive an equivalent magnetic circuit model
-for the magnet, and label the numerical values of the elements.
-Fig. 10.55 B–H characteristic of the per-
-manent magnet material for Problem 10.5
-B
-H
-μ = 1.06 μ0
-Bm
-10.6 The two-transistor forward converter of Fig. 6.29 operates with Vg = 300 V, V= 28 V,
-switching frequency fs = 100 kHz, and turns ratio n = 0.25. The dc load power is
-250 W. The transformer uses an EC41 ferrite core; relevant data for this core is listed
-in Appendix B. The core loss is given by Fig. 10.20. The primary winding consists of
-44 turns of #21 AWG wire, and the secondary winding is composed of 11 turns of #15
-AWG wire. Data regarding the American wire gauge is also listed in AppendixB. For this
-problem, you may assume that ΔB= Bmax/2, and you may neglect skin and proximity
-losses. You may assume that the magnetizing current and the output ﬁlter inductor current
-are very small.
-(a) Estimate the core loss of this transformer
-(b) Determine the copper loss of this transformer. You may neglect proximity losses.
-10.7 The two-transistor forward converter of Fig. 6.29 operates in CCM with Vg = 300 V,
-V = 28 V, switching frequency fs = 100 kHz, and turns ratio n= 0.25. The dc load
-power is 250 W. The transformer uses an EC41 ferrite core; relevant data for this core is
-listed in Appendix B. This core has window heightℓw = 2.78 cm. The primary winding
-consists of 44 turns of #24 AWG wire, and the secondary winding is composed of 11
-turns of #14 AWG wire. Each winding comprises one layer. Data regarding the American
-wire gauge is also listed in Appendix B. The winding operates at room temperature.
+2. 法拉第定律将导线环路中感应的电压与穿过环路内部的磁通的导数联系起来。
 
-10.6 Summary of Key Points 455
-(a) Determine the primary and secondary copper losses induced by the dc components
-of the winding currents.
-(b) Determine the primary and secondary copper losses induced by the fundamental
-components of the winding currents.
-(c) Determine the primary and secondary copper losses induced by the second harmonic
-components of the winding currents.
-10.8 The winding currents of the transformer in a high-voltage inverter are essentially sinu-
-soidal, with negligible harmonics and no dc components. The primary winding consists
-of one layer containing 10 turns of round copper wire. The secondary winding consists
-of 250 turns of round copper wire, arranged in ten layers. The operating frequency is
-f= 50 kHz, and the winding porosity is 0.8. Determine the primary and secondary wire
-diameters and wire gauges that minimize the total copper loss.
-10.9 A certain three-winding transformer contains one primary and two secondaries. The oper-
-ating frequency is 40 kHz. The primary winding contains a total of 60 turns of #26 AWG,
-arranged in three layers. The secondary windings each consist of ﬁve turns of copper
-foil, one turn per layer. The foil thickness is 0.25 mm. The primary layers have porosity
-0.8, while the secondary layer porosity is 1. The primary winding carries a sinusoidal
-current having rms value I, while each secondary carries rms current 6 I. The windings
-are not interleaved: the primary winding is closest to the center leg of the core, followed
-by secondary winding #1, followed by secondary winding #2.
-(a) Sketch an MMF diagram illustrating the magnetic ﬁelds in the vicinity of each wind-
-ing layer.
-(b) Determine the increased copper loss, due to the proximity eﬀect, in each layer.
-(c) Determine the ratio of copper loss to dc copper loss, F
-R, for the entire transformer
-windings.
-(d) In this application, it is not feasible to interleave the primary winding with the other
-windings. However, changing the conductor size is permissible. Discuss how the
-windings could be better optimized.
-10.10 A transformer winding contains a four-layer primary winding, and two two-layer sec-
-ondary windings. Each layer of the primary winding carries total current I. Each layer
-of secondary winding #1 carries total current 1.5I. Each layer of secondary winding #2
-carries total current 0.5I. All currents are sinusoidal. The e ﬀective relative conductor
-thickness is ϕ= 2. The windings are partially interleaved, in the following order: two
-primary layers, followed by both layers of secondary #1, followed by both layers of sec-
-ondary #2, and ﬁnally the two remaining primary layers. You may assume that the core
-has negligible reluctance.
-(a) Sketch an MMF diagram for this winding arrangement.
-(b) Each primary layer has dc resistance R
-dc−p, and each secondary layer has dc resis-
-tance Rdc−s. Determine the increased copper loss, due to the proximity e ﬀect, for
-each layer.
-(c) Determine the increase in total transformer copper loss, due to the proximity eﬀect.
-10.11 A transformer is connected to a voltage source and a load as illustrated in Fig. 10.56.
-The primary winding is excited by the voltage v1(t) whose waveform is illustrated in
-Fig. 10.57. The switching frequency is fs = 1/Ts = 200 kHz, and the duty cycle is
-D= 1/3. The load current is a 200 kHz sinusoid having amplitude 5 A rms.
+3. 安培定律将环路周围的总磁动势与穿过环路中心的总电流联系起来。安培定律意味着绕组电流是磁动势源，计入这些源后闭合路径上的净磁动势为零。
 
-456 10 Basic Magnetics Theory
-Fig. 10.56 Transformer circuit of
-Problem 10.11 +
-n1:n2
-v1(t daol)
-Fig. 10.57 Primary volt-
-age waveform v1(t) for Prob-
-lem 10.11 t
-v1(t) +24 V
-TsDTs
-The transformer consists of a ferrite PQ 26/25 core, with ﬂat copper (ribbon) windings.
-The primary winding consists of two turns of ﬂat copper of rectangular cross-section,
-with a copper width of 1.25 cm and a copper thickness of 0.07 cm. The secondary wind-
-ing consists of eight turns of ﬂat copper also of rectangular cross-section, with a copper
-width of 1.25 cm and a copper thickness of 0.017 cm. Each turn comprises one layer in
-the winding. You may assume that the transformer operates at a temperature of 100 ◦C.
-The core loss data for this core operating at 200 kHz is plotted in Fig. 10.58.
-Fig. 10.58 Core loss vs. peak ac
-ﬂux density for Problem 10.11
-ΔB, Tesla
-0.01 0.1 0.3
-Power loss density, Watts/cm3
-0.01
-0.1
-1
-200kHz
-The primary and secondary windings are interleaved as follows:
-•Three layers of secondary
-•One layer of primary
-•Two layers of secondary
+4. 磁芯材料呈现磁滞和饱和。磁通密度 $B$ 达到饱和磁通密度 $B_{sat}$ 时磁芯材料饱和。
 
-10.6 Summary of Key Points 457
-•One layer of primary
-•Three layers of secondary
-(a) Find the peak ac ﬂux density ΔB and the core loss Pfe for this transformer.
-(b) Find the dc resistance Rdc andϕfor each layer.
-(c) Sketch the MMF diagram for this transformer, and ﬁnd the eﬀective m for each layer.
-(d) Compute the total power loss in each layer, and the total transformer loss, in Watts.
-10.12 The windings in the transformer shown in Fig.10.59 are realized using copper foil layers
-arranged as shown in Fig.10.60. The primary has two turns, each consisting of a layer of
-copper foil carrying high-frequency sinusoidal current 2 i. The secondary has four turns,
-Fig. 10.59 Transformer of Prob-
-lem 10.12
-2:4
-primary secondary
-2 i i
-pri1 pri2sec1 sec2 sec3 sec4
-Core
-MMF
-F(x)
-x
-Fig. 10.60 MMF diagram for a simple transformer with interleaved windings. Each layer operates with
-m= 1
+5. 电感中使用气隙以防止给定最大电流流过绕组时饱和，并稳定电感值。含气隙电感可用含磁芯和气隙磁阻及表示绕组磁动势的源的简单磁等效电路分析。
 
-458 10 Basic Magnetics Theory
-each consisting of a layer of copper foil carrying current i. The foil thickness is much
-greater than the penetration depthδ, i.e., ϕ≫ 1. The windings are partially interleaved
-as illustrated in Fig. 10.60. The copper loss due to a current i through a copper layer of
-thicknessδis equal to P.
-(a) Sketch the current distribution in the layers, and the MMF diagram for this winding
-arrangement.
-(b) Find the total copper loss in the transformer, in terms of P.
-(c) It is desired to rearrange the winding layers to minimize the total copper loss. Sketch
-how the layers should be arranged, sketch the corresponding MMF diagram, and
-compute the total loss in terms of P.
-10.13 A single-output forward converter contains a transformer having a noninterleaved sec-
-ondary winding with four layers. The converter operates at D= 0.3i nC C M ,w i t ha
-secondary winding current waveform similar to Fig.10.38.
-(a) Estimate the value ofϕ
-1 that minimizes the secondary winding copper losses.
-(b) Determine the resulting secondary copper loss, relative to I2
-rms Rdc.
-10.14 A schematic diagram and waveforms of the isolated SEPIC, operating in CCM, are given
-in Figs. 6.39 and 6.40.
-(a) Do you expect the SEPIC transformer to contain an air gap? Why or why not?
-(b) Sketch the SEPIC transformer B–H loop, for CCM operation.
-(c) For CCM operation, do you expect core loss to be signiﬁcant? Explain your reason-
-ing.
-(d) For CCM operation, do you expect winding proximity losses to be signiﬁcant? Ex-
-plain your reasoning.
-```
+6. 常规变压器可用表示每绕组磁动势和磁芯磁动势的源建模。理想变压器中磁芯磁阻趋向零。非零磁芯磁阻导致含磁化电感的电气变压器模型，磁化电感有效与理想变压器并联。不链接两个绕组的磁通（"漏磁通"）可用串联电感建模。
+
+7. 常规变压器在施加绕组伏秒过大时饱和。加气隙对饱和无影响。可通过增大磁芯截面积或增加一次匝数防止饱和。
+
+8. 磁性材料因 B-H 回线磁滞和磁芯材料中感应涡流而呈现铁损。可用磁芯材料中存在高饱和磁通密度 $B_{sat}$ 和高铁损 $P_{fe}$ 之间的折中。叠片铁合金磁芯 $B_{sat}$ 最高但 $P_{fe}$ 也最高，铁氧体磁芯 $P_{fe}$ 最低但 $B_{sat}$ 也最低。此两极值之间有粉末铁合金和非晶合金材料。
+
+9. 趋肤效应和邻近效应导致绕组导体中的涡流，增大大电流高频磁性器件的铜损 $P_{cu}$。导体厚度接近或大于穿透深度 $\delta$ 时，导体附近的磁场在导体中感应涡流。按楞次定律，这些涡流在阻碍外加磁场的路径中流动。
+
+10. 绕组导体附近的磁场强度可用磁动势图确定。这些图通过应用安培定律沿穿过绕组导体附近的磁场线闭合路径构造。多层非交错绕组可呈现高最大磁动势，导致高涡流和高铜损。
+
+11. 10.4.4 节给出层中铜损作为包围层的磁场强度或磁动势函数的表达式。此表达式可与磁动势图结合计算绕组每层铜损。然后求和得总绕组铜损。有效层厚度接近或大于一个趋肤深度时，多层非交错绕组的铜损大幅增大。
+
+12. 脉宽调制绕组电流含显著总谐波失真；这可导致铜损进一步增大。电流谐波引起的邻近损耗增大在有效层厚度近一个趋肤深度的多层非交错绕组中最为显著。
+
+## 习题
+
+**10.1** 图10.51a 所示磁芯厚 1 cm。所有腿宽 1 cm，右侧垂直腿除外，宽 0.5 cm。可忽略转角引起的磁通分布不均匀。
+
+![源页 p.460](../assets/page-snapshots/chapter-10/page-460.png)
+
+图10.51 习题10.1
+
+(a) 确定此器件的磁路模型，标注模型中所有磁阻的值。
+
+(b) 确定绕组电感。
+
+同一磁芯上加入第二个绕组，如图10.51b所示。
+
+(c) 修改 (a) 的模型以包含此绕组。
+
+(d) 此电路的电气方程可写成
+
+$$\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} L_{11} & L_{12} \\ L_{12} & L_{22} \end{bmatrix}\frac{d}{dt}\begin{bmatrix} i_1 \\ i_2 \end{bmatrix}$$
+
+用叠加法确定 $L_{11}$、$L_{12}$ 和 $L_{22}$ 的解析表达式和数值。
+
+![源页 p.461](../assets/page-snapshots/chapter-10/page-461.png)
+
+图10.52 习题10.2
+
+**10.2** 两个绕组如图10.52a 所示放置在均匀截面积 $A_c = 1\text{ cm}^2$ 的磁芯上。每绕组 50 匝。磁芯相对磁导率 $\mu_r = 10^4$。
+
+(a) 画等效磁路，确定各磁阻的数值。
+
+(b) 确定每绕组的自感。
+
+(c) 确定如图10.52b 所示绕组串联时的电感 $L_+$。
+
+(d) 确定如图10.52c 所示绕组反串联时的电感 $L_-$。
+
+![源页 p.461](../assets/page-snapshots/chapter-10/page-461.png)
+
+图10.53 习题10.3 的磁芯
+
+**10.3** 图10.53 所示磁性器件的三条腿均为均匀截面积 $A_C$。腿 1 和 2 的磁路长度各为 $3\ell$，腿 3 磁路长度为 $\ell$。两绕组各 $n$ 匝。磁芯磁导率 $\mu \gg \mu_0$。
+
+电压源接到绕组 1，使 $v_1(t)$ 为峰值 $V_{max}$、周期 $T_s$ 的方波。绕组 2 开路。
+
+(a) 画磁等效电路，给出所有元件值的解析表达式。
+
+(b) 画 $i_1(t)$ 并标注其峰值。
+
+(c) 求腿 2 中的磁通 $\phi_2(t)$。画 $\phi_2(t)$ 并标注其峰值。
+
+(d) 画 $v_2(t)$ 并标注其峰值。
+
+![源页 p.462](../assets/page-snapshots/chapter-10/page-462.png)
+
+图10.54 习题10.4 的磁芯和变换器
+
+**10.4** 图10.54a 所示磁性器件含两个绕组，可替代 Ćuk、SEPIC 或其他类似变换器中的两个电感。此题中三条腿有相同均匀截面积 $A_c$。腿的气隙长度分别为 $g_1$、$g_2$、$g_3$。磁芯磁导率 $\mu$ 很大。可忽略边缘磁通。腿 1 和 2 分别含 $n_1$ 和 $n_2$ 匝绕组。
+
+(a) 导出此器件的磁路模型，给出模型中各磁阻的解析表达式。标注磁动势发生器的极性。
+
+(b) 将此器件的电气端子方程写成矩阵形式
+
+$$\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} L_{11} & L_{12} \\ L_{12} & L_{22} \end{bmatrix}\frac{d}{dt}\begin{bmatrix} i_1 \\ i_2 \end{bmatrix}$$
+
+导出 $L_{11}$、$L_{12}$、$L_{22}$ 的解析表达式。
+
+(c) 导出此器件的电气电路模型，给出模型中匝比和各电感的解析表达式（用 (a) 的匝数和磁阻表示）。
+
+此单个磁性器件用于实现图10.54b 的 Ćuk 变换器的两个电感。
+
+(d) 画电压波形 $v_1(t)$ 和 $v_2(t)$，适当做线性纹波近似。可假定变换器工作于连续导通模式。
+
+(e) (d) 的电压波形施加到 (b) 和 (c) 的模型。求解模型确定 $DT_s$ 和 $D'T_s$ 区间内电感电流纹波的斜率。画稳态电感电流波形 $i_1(t)$ 和 $i_2(t)$，标注所有斜率。
+
+(f) 通过巧妙选择 $n_1/n_2$ 和气隙长度，可使 $i_1(t)$ 或 $i_2(t)$ 的电感电流纹波 $\Delta i$ 为零。确定使 $i_2(t)$ 中电流纹波为零的 $n_1/n_2$、$g_1$、$g_2$、$g_3$ 条件。画所得 $i_1(t)$ 和 $i_2(t)$，标注所有斜率。
+
+在任何电感电压波形成正比的变换器中，都可用此方式耦合电感并使一个电感电流纹波为零。
+
+![源页 p.463](../assets/page-snapshots/chapter-10/page-463.png)
+
+图10.55 习题10.5 永磁材料的 B-H 特性
+
+**10.5** 在其可用工作范围内，某永磁材料有图10.55 中实线所示的 B-H 特性。磁铁长度 $\ell_m = 0.5\text{ cm}$，截面积 $4\text{ cm}^2$。$B_m = 1\text{ T}$。导出磁铁的等效磁路模型，标注元件数值。
+
+![源页 p.463](../assets/page-snapshots/chapter-10/page-463.png)
+
+图10.56 习题10.11 的变压器电路
+
+**10.6** 图6.29 的双管正激变换器工作于 $V_g = 300\text{ V}$，$V = 28\text{ V}$，开关频率 $f_s = 100\text{ kHz}$，匝比 $n = 0.25$。直流负载功率 250 W。变压器用 EC41 铁氧体磁芯；相关数据列于附录 B。铁损由图10.20 给出。一次绕组由 44 匝 #21 AWG 线组成，二次绕组由 11 匝 #15 AWG 线组成。美国线规数据亦列于附录 B。此题可假定 $\Delta B = B_{max}/2$，可忽略趋肤和邻近损耗。可假定磁化电流和输出滤波电感电流很小。
+
+(a) 估计此变压器的铁损。
+
+(b) 确定此变压器的铜损。可忽略邻近损耗。
+
+**10.7** 图6.29 的双管正激变换器在 CCM 下工作，$V_g = 300\text{ V}$，$V = 28\text{ V}$，开关频率 $f_s = 100\text{ kHz}$，匝比 $n = 0.25$。直流负载功率 250 W。变压器用 EC41 铁氧体磁芯；相关数据列于附录 B。此磁芯窗口高度 $\ell_w = 2.78\text{ cm}$。一次绕组由 44 匝 #24 AWG 线组成，二次绕组由 11 匝 #14 AWG 线组成。每绕组一层。美国线规数据亦列于附录 B。绕组在室温下工作。
+
+(a) 确定绕组电流直流分量引起的一次和二次铜损。
+
+(b) 确定绕组电流基波分量引起的一次和二次铜损。
+
+(c) 确定绕组电流二次谐波分量引起的一次和二次铜损。
+
+**10.8** 高压逆变器中变压器的绕组电流基本正弦，谐波和直流分量可忽略。一次绕组含一层 10 匝圆铜线。二次绕组含 250 匝圆铜线，排列成十层。工作频率 $f = 50\text{ kHz}$，绕组孔隙率 0.8。确定使总铜损最小的一次和二次线径和线规。
+
+**10.9** 某三绕组变压器含一个一次和两个二次。工作频率 40 kHz。一次绕组共 60 匝 #26 AWG，排列成三层。二次绕组各含 5 匝铜箔，每层一匝。箔厚 0.25 mm。一次层孔隙率 0.8，二次层孔隙率 1。一次绕组载方均根值 $I$ 的正弦电流，每二次载方均根电流 $6I$。绕组未交错：一次绕组最接近磁芯中心柱，接着二次绕组 #1，再二次绕组 #2。
+
+(a) 画说明各绕组层附近磁场的磁动势图。
+
+(b) 确定各层因邻近效应增大的铜损。
+
+(c) 确定整个变压器绕组的铜损与直流铜损之比 $F_R$。
+
+(d) 此应用中不可行将一次绕组与其他绕组交错。但可改变导体尺寸。讨论如何更好地优化绕组。
+
+**10.10** 变压器绕组含四层一次绕组和两个双层二次绕组。一次绕组每层载总电流 $I$。二次绕组 #1 每层载总电流 $1.5I$。二次绕组 #2 每层载总电流 $0.5I$。所有电流为正弦。有效相对导体厚度 $\varphi = 2$。绕组部分交错，顺序如下：两一次层，接着二次 #1 两层，接着二次 #2 两层，最后剩余两一次层。可假定磁芯磁阻可忽略。
+
+(a) 画此绕组排列的磁动势图。
+
+(b) 每一次层直流电阻 $R_{dc-p}$，每一次层直流电阻 $R_{dc-s}$。确定各层因邻近效应增大的铜损。
+
+(c) 确定因邻近效应引起的总变压器铜损增大。
+
+![源页 p.465](../assets/page-snapshots/chapter-10/page-465.png)
+
+图10.57 习题10.11 的一次电压波形 $v_1(t)$
+
+**10.11** 变压器如图10.56 所示接到电压源和负载。一次绕组由图10.57 所示波形 $v_1(t)$ 激励。开关频率 $f_s = 1/T_s = 200\text{ kHz}$，占空比 $D = 1/3$。负载电流为 200 kHz 正弦，幅值 5 A 方均根。
+
+变压器由铁氧体 PQ 26/25 磁芯和扁铜（带）绕组组成。一次绕组含两匝矩形截面扁铜，铜宽 1.25 cm，铜厚 0.07 cm。二次绕组含八匝矩形截面扁铜，铜宽 1.25 cm，铜厚 0.017 cm。每匝构成绕组一层。可假定变压器在 100°C 下工作。此磁芯 200 kHz 工作的铁损数据绘于图10.58。
+
+![源页 p.465](../assets/page-snapshots/chapter-10/page-465.png)
+
+图10.58 习题10.11 的铁损对峰值交流磁通密度
+
+一次和二次绕组交错如下：
+
+- 三层二次
+- 一层一次
+- 两层二次
+- 一层一次
+- 三层二次
+
+(a) 求此变压器的峰值交流磁通密度 $\Delta B$ 和铁损 $P_{fe}$。
+
+(b) 求各层的直流电阻 $R_{dc}$ 和 $\varphi$。
+
+(c) 画此变压器的磁动势图，求各层的有效 $m$。
+
+(d) 计算各层总功率损耗和变压器总损耗（瓦特）。
+
+![源页 p.466](../assets/page-snapshots/chapter-10/page-466.png)
+
+图10.59 习题10.12 的变压器
+
+![源页 p.466](../assets/page-snapshots/chapter-10/page-466.png)
+
+图10.60 简单交错绕组变压器的磁动势图。每层以 $m = 1$ 运行
+
+**10.12** 图10.59 所示变压器绕组用如图10.60 所示铜箔层实现。一次两匝，每匝由载高频正弦电流 $2i$ 的铜箔层组成。二次四匝，每匝由载电流 $i$ 的铜箔层组成。箔厚远大于穿透深度 $\delta$，即 $\varphi \gg 1$。绕组部分交错如图10.60所示。电流 $i$ 通过厚度 $\delta$ 铜层的铜损等于 $P$。
+
+(a) 画层中电流分布和此绕组排列的磁动势图。
+
+(b) 求变压器总铜损，以 $P$ 表示。
+
+(c) 希望重排绕组层以最小化总铜损。画层应如何排列，画相应磁动势图，计算以 $P$ 表示的总损耗。
+
+**10.13** 单输出正激变换器含四层非交错二次绕组的变压器。变换器在 CCM 下以 $D = 0.3$ 工作，二次绕组电流波形类似于图10.38。
+
+(a) 估计使二次绕组铜损最小的 $\varphi_1$ 值。
+
+(b) 确定所得二次铜损，相对于 $I_{rms}^2 R_{dc}$。
+
+**10.14** 隔离 SEPIC 的原理图和波形在图6.39 和6.40 中给出。
+
+(a) 你预期 SEPIC 变压器含气隙吗？为什么？
+
+(b) 画 CCM 工作的 SEPIC 变压器 B-H 回线。
+
+(c) CCM 工作时你预期铁损显著吗？解释理由。
+
+(d) CCM 工作时你预期绕组邻近损耗显著吗？解释理由。

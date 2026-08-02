@@ -287,14 +287,14 @@ ODrive 采用自定义的数据流通信模式，定义于 `component.hpp`。
 └─────────────┘          └────────────┘          └─────────────┘
 ```
 
-**OutputPort 关键特性：**
+- **OutputPort 关键特性：**
 - `operator=(T value)`: 更新值，年龄归零
 - `reset()`: 标记为过期 (age++), 每次控制循环开始时调用
 - `present()`: 仅返回本控制周期更新的值 (age==0)
 - `previous()`: 返回上一控制周期的值 (age==1)
 - `any()`: 返回最近值 (无视年龄, 线程安全)
 
-**InputPort 可连接目标：**
+- **InputPort 可连接目标：**
 1. 内部存储的值 `T`
 2. 外部常量指针 `T*`
 3. 外部 OutputPort 指针 `OutputPort<T>*`
@@ -619,7 +619,7 @@ bool ODrive::any_error() {
 }
 ```
 
-**级联撤防 (Cascading Disarm)：** 如果发生系统级错误，`disarm_with_error()` 将同时撤防所有轴的电机并使制动电阻进入安全状态：
+- **级联撤防 (Cascading Disarm)：** 如果发生系统级错误，`disarm_with_error()` 将同时撤防所有轴的电机并使制动电阻进入安全状态：
 
 ```cpp
 void ODrive::disarm_with_error(Error error) {

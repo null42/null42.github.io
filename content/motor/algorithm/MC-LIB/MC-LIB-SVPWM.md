@@ -20,9 +20,9 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-05 有感FOC](../ALG-05-Sensored-FOC.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-04-26  
-**源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_SVPWM_F.c/h`
+- **文档版本：** v1.0  
+- **生成日期：** 2026-04-26  
+- **源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_SVPWM_F.c/h`
 
 ---
 
@@ -113,7 +113,7 @@ $$
 - $U_{ref1}, U_{ref2}, U_{ref3}$：扇区判断参考值 ($V$)，通过其符号组合确定扇区
 - $U_\alpha, U_\beta$：αβ轴参考电压分量 ($V$)，由电流环PI控制器输出
 
-**扇区编码：**
+- **扇区编码：**
 
 | Sector | Uref1 | Uref2 | Uref3 | 编码 |
 |--------|-------|-------|-------|------|
@@ -204,7 +204,7 @@ static Q08U_ Txyz_Table[3][8] =
 };
 ```
 
-**映射关系说明：**
+- **映射关系说明：**
 
 | 扇区 | 最大值相 | 中间值相 | 最小值相 |
 |------|---------|---------|---------|
@@ -302,14 +302,14 @@ void MCFOC_SVPWM_ThreeShunt_F(ST_SVPWM_CONTROL_F* pSVPWM,
 
 ### 4.2 算法分析
 
-**关键点：**
+- **关键点：**
 
 1. **扇区判断**：通过三个比较值的符号组合确定扇区
 2. **时间计算**：根据扇区选择对应的时间计算公式
 3. **调制深度限制**：超过50%时进行比例缩放
 4. **占空比映射**：通过查表将Txyz映射到三相占空比
 
-**计算量分析：**
+- **计算量分析：**
 
 | 步骤 | 乘法 | 加法 | 除法 |
 |------|------|------|------|
@@ -351,7 +351,7 @@ void MCFOC_SVPWM_ThreeShunt_F(ST_SVPWM_CONTROL_F* pSVPWM,
         └─────────────────────────────────────┘
 ```
 
-**电流重构原理：**
+- **电流重构原理：**
 
 当某相上管导通、其他两相下管导通时，母线电流等于该相电流。
 
@@ -457,9 +457,9 @@ void MCFOC_SVPWM_OneShunt_F(ST_SVPWM_CONTROL_F* pSVPWM,
 
 ### 5.3 最小脉宽问题
 
-**问题：** 当矢量作用时间太短时，无法完成ADC采样。
+- **问题：** 当矢量作用时间太短时，无法完成ADC采样。
 
-**解决：** 通过移相补偿增加有效采样窗口。
+- **解决：** 通过移相补偿增加有效采样窗口。
 
 ```text
 原始波形：
@@ -693,7 +693,7 @@ void MCFOC_OneShunt_Current_Cal_F(ST_SVPWM_CONTROL_F* pSVPWM,
 void MCFOC_SVPWM_Init_F(ST_SVPWM_CONTROL_F* pSVPWM);
 ```
 
-**功能：** 初始化SVPWM控制结构体
+- **功能：** 初始化SVPWM控制结构体
 
 ### 9.2 SVPWM计算函数
 
@@ -707,7 +707,7 @@ void MCFOC_SVPWM_OneShunt_F(ST_SVPWM_CONTROL_F* pSVPWM,
                              ST_PMSM_ELEC_F* pPMSMe);
 ```
 
-**调用时机：** 在电流环周期调用（通常100μs）
+- **调用时机：** 在电流环周期调用（通常100μs）
 
 ### 9.3 电流重构函数
 
@@ -721,7 +721,7 @@ void MCFOC_OneShunt_Current_Cal_F(ST_SVPWM_CONTROL_F* pSVPWM,
                                    ST_PMSM_ELEC_F* pPMSMe);
 ```
 
-**调用时机：** 在ADC采样完成后调用
+- **调用时机：** 在ADC采样完成后调用
 
 ### 9.4 死区补偿函数
 
@@ -730,7 +730,7 @@ void MCFOC_DeadTime_COMP_F(ST_SVPWM_CONTROL_F* pSVPWM,
                             ST_PMSM_ELEC_F* pPMSMe);
 ```
 
-**调用时机：** 在SVPWM计算后、PWM输出前调用
+- **调用时机：** 在SVPWM计算后、PWM输出前调用
 
 ---
 

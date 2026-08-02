@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第6章part 3 - 6 Converter Circuits"
+title: "第6章 变换器电路（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,442 +18,196 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第6章part 3 - 6 Converter Circuits
+# 第6章 变换器电路（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 217-226  
-> Chunk ID: `chapter-6-part-3`
+> 源页：217–226
+> 本部分涵盖 6.4 关键要点小结和习题 6.1–6.12。
 
-## 主干提取
+## 6.4 关键要点小结
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.217](../assets/page-snapshots/chapter-6/page-217.png)
 
-## 术语表
+图6.40 隔离 SEPIC 变换器波形，连续导通模式
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.217](../assets/page-snapshots/chapter-6/page-217.png)
 
-## 中文翻译
+图6.41 隔离反相 SEPIC
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+1. 升压变换器可视为反相的降压变换器，而升降压和 Ćuk 变换器由降压与升压变换器的级联连接产生。这些变换器的性质与其起源一致。对负载进行差分连接可获得交流输出。可能的变换器有无穷多种，本章列出了其中若干。
 
-## 英文原文
+2. 为理解大多数含变压器变换器的工作，变压器可建模为与理想变压器并联的磁化电感。磁化电感必须遵循电感的所有通常规则，包括伏秒平衡原理。
 
-```text
-6.4 Summary of Key Points 203
-Fig. 6.40 Waveforms
-of the isolated SEPIC,
-continuous conduction
-mode
-is(t)
-i1(t)
-i2(t)
-t
-Q1 D1
-Conducting
-devices:
-ip(t)
-DTs D'Ts
-Ts
-2
-i1
-0
-(i1 + i2) / n
-I1
-I2
-Fig. 6.41 Isolated
-inverse-SEPIC + D1
-L2
-C2
-+
-v
-Q1
-C1
-R
-Vg
-1 : n
-6.4 Summary of Key Points
-1. The boost converter can be viewed as an inverse buck converter, while the buck–boost and
-´Cuk converters arise from cascade connections of buck and boost converters. The properties
-of these converters are consistent with their origins. Ac outputs can be obtained by di ﬀer-
-ential connection of the load. An inﬁnite number of converters are possible, and several are
-listed in this chapter.
-2. For understanding the operation of most converters containing transformers, the transformer
-can be modeled as a magnetizing inductance in parallel with an ideal transformer. The mag-
+![源页 p.218](../assets/page-snapshots/chapter-6/page-218.png)
 
-204 6 Converter Circuits
-(a)
-+ D1
-L1
-C2 R v
-+
-Q1
-C1
-L2
-Vg
-(b)
-+ D1
-L1
-C2 R v
-+
-Q1
-C1a
-L2
-Vg
-C1b
-(c)
-+ D1
-L1
-C2 R
-+
-v
-Q1
-C1a
-L2
-Vg
-C1b
-1 : n
-Fig. 6.42 Obtaining isolation in the ´Cuk converter: ( a) basic nonisolated ´Cuk converter, ( b) splitting
-capacitor C1 into two series capacitors, (c) insertion of transformer between capacitors
-netizing inductance must obey all of the usual rules for inductors, including the principle of
-volt-second balance.
-3. The steady-state behavior of transformer-isolated converters may be understood by ﬁrst re-
-placing the transformer with the magnetizing-inductance-plus-ideal-transformer equivalent
-circuit. The techniques developed in the previous chapters can then be applied, including
-use of inductor volt-second balance and capacitor charge balance to ﬁnd dc currents and
-voltages, use of equivalent circuits to model losses and eﬃciency, and analysis of the dis-
-continuous conduction mode.
-4. In the full-bridge, half-bridge, and push-pull isolated versions of the buck and/or boost con-
-verters, the transformer frequency is twice the output ripple frequency. The transformer is
-reset while it transfers energy: the applied voltage polarity alternates on successive switch-
-ing periods.
-5. In the conventional forward converter, the transformer is reset while the transistor is o ﬀ.
-The transformer magnetizing inductance operates in the discontinuous conduction mode,
-and the maximum duty cycle is limited.
-6. The ﬂyback converter is based on the buck–boost converter. The ﬂyback transformer is
-actually a two-winding inductor, which stores and transfers energy.
+图6.42 在 Ćuk 变换器中获得隔离：(a) 基本非隔离 Ćuk 变换器；(b) 将电容 $C_1$ 分成两个串联电容；(c) 在电容之间插入变压器
 
-6.4 Summary of Key Points 205
-Problems
-Fig. 6.43 Tapped-inductor boost con-
-verter, Problem 6.1
-+ Q1 CR
-+
-V
-D1
-Vg
-n1
-turns
-n2
-turns
-{
-{
-6.1 Tapped-inductor boost converter. The boost converter is sometimes modiﬁed as illustrated
-in Fig. 6.43, to obtain a larger conversion ratio than would otherwise occur. The inductor
-winding contains a total of ( n1+ n2) turns. The transistor is connected to a tap placed n1
-turns from the left side of the inductor, as shown. The tapped inductor can be viewed as a
-two-winding (n1 : n2) transformer, in which the two windings are connected in series. The
-inductance of the entire (n1+ n2) turn winding is L.
-(a) Sketch an equivalent circuit model for the tapped inductor, which includes a mag-
-netizing inductance and an ideal transformer. Label the values of the magnetizing
-inductance and turns ratio.
-(b) Determine an analytical expression for the conversion ratio M = V/Vg.Y o um a y
-assume that the transistor, diode, tapped inductor, and capacitor are lossless. You may
-also assume that the converter operates in continuous conduction mode.
-(c)S k e t c hM(D)v s .D for n1= n2, and compare to the nontapped (n2= 0) case.
-6.2 Analysis of the DCM ﬂyback converter. The ﬂyback converter of Fig. 6.32d operates in
-the discontinuous conduction mode.
-(a) Model the ﬂyback transformer as a magnetizing inductance in parallel with an ideal
-transformer, and sketch the converter circuits during the three subintervals.
-(b) Derive the conditions for operation in discontinuous conduction mode.
-(c) Solve the converter: derive expressions for the steady-state output voltageV and subin-
-terval 2 (diode conduction interval) duty cycle D2.
-6.3 Analysis of the isolated inverse-SEPIC of Fig. 6.41. You may assume that the converter
-operates in the continuous conduction mode, and that all inductor current ripples and ca-
-pacitor voltage ripples are small.
-(a) Derive expressions for the dc components of the magnetizing current, inductor current,
-and capacitor voltages.
-(b) Derive analytical expressions for the rms values of the primary and secondary winding
-currents. Note that these quantities do not simply scale by the turns ratio.
-6.4 The two-transistor ﬂyback converter. The converter of Fig. 6.44 is sometimes used when
-the dc input voltage is high. Transistors Q1 and Q2 are driven with the same gating signal,
-such that they turn on and oﬀsimultaneously with the same duty cycle D. Diodes D1 and
-D2 ensure that the oﬀ-state voltages of the transistors do not exceed Vg. The converter
-operates in discontinuous conduction mode. The magnetizing inductance, referred to the
-primary side, is LM.
+3. 变压器隔离变换器的稳态行为可通过先用磁化电感加理想变压器等效电路替代变压器来理解。随后可应用前几章发展的技巧，包括用电感伏秒平衡和电容电荷平衡求直流电流和电压、用等效电路建模损耗和效率，以及分析断续导通模式。
 
-206 6 Converter Circuits
-Fig. 6.44 Two-transistor ﬂyback
-converter, Problem 6.4 +
-D1
-Q1
-1 : n
-CR
-+
-v
-D2
-D3
-Vg
-Q2
-(a) Determine an analytical expression for the steady-state output voltage V.
-(b) Over what range of duty cycles does the transformer reset properly? Explain.
-6.5 A nonideal ﬂyback converter. The ﬂyback converter shown in Fig. 6.32d operates in the
-continuous conduction mode. The MOSFET has on-resistance Ron, and the diode has a
-constant forward voltage dropVD. The ﬂyback transformer has primary winding resistance
-Rp and secondary winding resistance Rs.
-(a) Derive a complete steady-state equivalent circuit model, which is valid in the contin-
-uous conduction mode, and which correctly models the loss elements listed above as
-well as the converter input and output ports. Sketch your equivalent circuit.
-(b) Derive an analytical expression for the converter eﬃciency.
-6.6 A low-voltage computer power supply with synchronous rectiﬁcation. The trend in digital
-integrated circuits is towards lower power supply voltages. It is diﬃcult to construct a high-
-eﬃciency low-voltage power supply, because the conduction loss arising in the secondary-
-side diodes becomes very large. The objective of this problem is to estimate how the
-eﬃciency of a forward converter varies as the output voltage is reduced, and to investigate
-the use of synchronous rectiﬁers.
-The forward converter of Fig. 6.24 operates from a dc input of Vg = 325 V, and supplies
-20 A to its dc load. Consider three cases: ( i) V= 5V ,( ii) V= 3.3 V, and (iii) V= 1.5V .
-For each case, the turns ration3/n1 is chosen such that the converter produces the required
-output voltage at a transistor duty cycle of D = 0.4. The MOSFET has on-resistance
-Ron= 5Ω. The secondary-side Schottky diodes have forward voltage drops ofVF = 0.5V .
-All other elements can be considered ideal.
-(a) Derive an equivalent circuit for the forward converter, which models the semiconduc-
-tor conduction losses described above.
-(b) Solve your model for cases (i), (ii), and (iii) described above. For each case, determine
-numerical values of the turns ratio n3/n1 and for the eﬃciencyη.
-(c) The secondary-side Schottky diodes are replaced by MOSFETs operating as syn-
-chronous rectiﬁers. The MOSFETs each have an on-resistance of 4 m Ω. Determine
-the new numerical values of the turns ratio n3/n1 and the eﬃciency η, for cases ( i),
-(ii), and (iii).
-6.7 Rotation of switching cells. A network containing switches and reactive elements has ter-
-minals a, b, and c, as illustrated in Fig. 6.45a. You are given that the relationship between
-the terminal voltages is Vbc/Vac=μ(D).
+4. 在降压和/或升压变换器的全桥、半桥和推挽隔离版本中，变压器频率是输出纹波频率的两倍。变压器在传输能量的同时复位：在相继的开关周期内施加电压极性交替。
 
-6.4 Summary of Key Points 207
-(a)
-+
-+
-vVg
-aAb B
-c
-C
-vbc
-vac
-= μ(D)
-vac vbc
-+ +
-(b) 1
-2
-ba
-c
-vac vbc
-+ +
-(c)
-a b
-c
-vac vbc
-++
-1 : n
-12
-Fig. 6.45 Rotation of three-terminal switching cells, Problem 6.7
-(a) Derive expressions for the source-to-load conversion ratio V/Vg = M(D), in terms of
-μ(D), for the following three connection schemes:
+5. 在常规正激变换器中，变压器在晶体管关断期间复位。变压器磁化电感工作于断续导通模式，最大占空比受限。
+
+6. 反激变换器以升降压变换器为基础。反激变压器实际上是双绕组电感，储存并传输能量。
+
+## 习题
+
+![源页 p.219](../assets/page-snapshots/chapter-6/page-219.png)
+
+图6.43 抽头电感升压变换器，习题6.1
+
+**6.1 抽头电感升压变换器。** 升压变换器有时按图6.43所示修改，以获得比其他方式更大的变换比。电感绕组共含 $(n_1 + n_2)$ 匝。晶体管接到距电感左侧 $n_1$ 匝处的抽头，如图所示。抽头电感可视为双绕组（$n_1 : n_2$）变压器，两绕组串联连接。整个 $(n_1 + n_2)$ 匝绕组的电感为 $L$。
+
+(a) 画出抽头电感的等效电路模型，包含磁化电感和理想变压器。标注磁化电感和匝比的数值。
+
+(b) 求变换比 $M = V/V_g$ 的解析表达式。可假定晶体管、二极管、抽头电感和电容无损。也可假定变换器工作于连续导通模式。
+
+(c) 对 $n_1 = n_2$ 画出 $M(D)$ 对 $D$ 的曲线，并与无抽头（$n_2 = 0$）情形比较。
+
+**6.2 DCM 反激变换器分析。** 图6.32d 的反激变换器工作于断续导通模式。
+
+(a) 将反激变压器建模为与理想变压器并联的磁化电感，画出三个子区间内的变换器电路。
+
+(b) 导出断续导通模式工作的条件。
+
+(c) 求解变换器：导出稳态输出电压 $V$ 和子区间 2（二极管导通区间）占空比 $D_2$ 的表达式。
+
+**6.3 图6.41 隔离反相 SEPIC 的分析。** 可假定变换器工作于连续导通模式，且所有电感电流纹波和电容电压纹波均很小。
+
+(a) 导出磁化电流、电感电流和电容电压的直流分量表达式。
+
+(b) 导出一次和二次绕组电流方均根值的解析表达式。注意这些量并不简单按匝比缩放。
+
+**6.4 双管反激变换器。** 图6.44 的变换器有时用于直流输入电压较高的场合。晶体管 $Q_1$ 和 $Q_2$ 用同一栅极信号驱动，使它们以相同占空比 $D$ 同时开通和关断。二极管 $D_1$ 和 $D_2$ 确保晶体管关断态电压不超过 $V_g$。变换器工作于断续导通模式。归算到一次侧的磁化电感为 $L_M$。
+
+![源页 p.220](../assets/page-snapshots/chapter-6/page-220.png)
+
+图6.44 双管反激变换器，习题6.4
+
+(a) 求稳态输出电压 $V$ 的解析表达式。
+
+(b) 变压器在何种占空比范围内能正确复位？解释之。
+
+**6.5 非理想反激变换器。** 图6.32d 的反激变换器工作于连续导通模式。MOSFET 的导通电阻为 $R_{on}$，二极管有恒定正向压降 $V_D$。反激变压器有一次绕组电阻 $R_p$ 和二次绕组电阻 $R_s$。
+
+(a) 导出完整的稳态等效电路模型，在连续导通模式下有效，正确建模上述损耗元件及变换器输入和输出端口。画出等效电路。
+
+(b) 导出变换器效率的解析表达式。
+
+**6.6 采用同步整流的低压计算机电源。** 数字集成电路的趋势是电源电压越来越低。构造高效率低压电源很困难，因为副侧二极管的导通损耗变得很大。本习题的目标是估计正激变换器效率随输出电压降低如何变化，并考察同步整流器的使用。
+
+图6.24 的正激变换器由直流输入 $V_g = 325\text{ V}$ 工作，向直流负载供电 20 A。考虑三种情形：(i) $V = 5\text{ V}$，(ii) $V = 3.3\text{ V}$，(iii) $V = 1.5\text{ V}$。每种情形下选择匝比 $n_3/n_1$ 使变换器在晶体管占空比 $D = 0.4$ 时产生所需输出电压。MOSFET 导通电阻 $R_{on} = 5\,\Omega$。副侧肖特基二极管正向压降 $V_F = 0.5\text{ V}$。所有其他元件可视为理想。
+
+(a) 导出正激变换器的等效电路，建模上述半导体导通损耗。
+
+(b) 对上述情形 (i)、(ii)、(iii) 求解模型。对每种情形确定匝比 $n_3/n_1$ 和效率 $\eta$ 的数值。
+
+(c) 副侧肖特基二极管替换为作为同步整流器工作的 MOSFET。每只 MOSFET 导通电阻为 $4\text{ m}\Omega$。对情形 (i)、(ii)、(iii) 确定匝比 $n_3/n_1$ 和效率 $\eta$ 的新数值。
+
+**6.7 开关单元的旋转。** 含开关和储能元件的网络有端子 a、b、c，如图6.45a 所示。已知端电压关系为 $V_{bc}/V_{ac} = \mu(D)$。
+
+![源页 p.221](../assets/page-snapshots/chapter-6/page-221.png)
+
+图6.45 三端开关单元的旋转，习题6.7
+
+(a) 对以下三种连接方案，导出用 $\mu(D)$ 表示的电源-负载变换比 $V/V_g = M(D)$ 的表达式：
+
 (i) a-A b-B c-C
+
 (ii) a-B b-C c-A
+
 (iii) a-C b-A c-B
-(b) Consider the three-terminal network of Fig. 6.45b. Determineμ(D) for this network.
-Plug your answer into your results from part (a), to verify that the buck, boost, and
-buck–boost converters are generated.
-(c) Consider the three-terminal network of Fig. 6.45c. Determineμ(D) for this network.
-Plug your answer into your results from part (a). What converters are generated?
-6.8 Transformer-isolated current-sense circuit. It is often required that the current ﬂowing in
-a power transistor be sensed. A noninductive resistor R placed in series with the transistor
-will produce a voltage v(t) that is proportional to the transistor drain current iD(t). Use of
-a transformer allows isolation between the power transistor and the control circuit. The
-transformer turns ratio also allows reduction of the current and power loss and increase
-of the voltage of the resistor. This problem is concerned with design of the transformer-
-isolated current-sense circuit of Fig. 6.46.
-The transformer has a single-turn primary and an n-turn secondary winding. The transis-
-tor switches on and oﬀwith duty cycle D and switching frequency fs. While the transistor
-conducts, its current is essentially constant and is equal toI. Diodes D1 and D2 are conven-
-tional silicon diodes having forward voltage drop VD. Diode DZ is a Zener diode, which
-can be modeled as a voltage source of value VZ, with the polarity indicated in the ﬁg-
 
-208 6 Converter Circuits
-Fig. 6.46 Transformer-isolated circuit for sens-
-ing the transistor switch current, Problem 6.8
-1 : n
-iD(t)
-R
-+
-v(t)
-D1
-Dz
-D2
-Vz
-+
-Q1
-ure. For a proper design, the circuit elements should be chosen such that the transformer
-magnetizing current, in conjunction with diode D2, operates in discontinuous conduction
-mode. In a good design, the magnetizing current is much smaller than the transistor current.
-Three subintervals occur during each switching period: subinterval 1, in which Q1 and D1
-conduct; subinterval 2, in which D2 and DZ conduct; subinterval 3, in which Q1, D1 and
-D2 are oﬀ.
-(a) Sketch the current-sense circuit, replacing the transformer and zener diode by their
-equivalent circuits.
-(b) Sketch the waveforms of the transistor current iD(t), the transformer magnetizing cur-
-rent iM(t), the primary winding voltage, and the voltage v(t). Label salient features.
-(c) Determine the conditions on the Zener voltage VZ that ensure that the transformer
-magnetizing current is reset to zero before the end of the switching period.
-(d) You are given the following speciﬁcations:
-Switching frequency fs= 100 kHz
-Transistor duty cycle D≤0.75
-Transistor peak current max iD(t)≤25 A
-The output voltage v(t) should equal 5 V when the transistor current is 25 A. To avoid
-saturating the transformer core, the volt-seconds applied to the single-turn primary
-winding while the transistor conducts should be no greater than 2 volt- μsec. The sili-
-con diode forward voltage drops are VD= 0.7V .
-Design the circuit: select values of R, n, and VZ.
-6.9 Optimal reset of the forward converter transformer. As illustrated in Fig.6.47, it is possible
-to reset the transformer of the forward converter using a voltage source other than the dc
-input Vg; several such schemes appear in the literature. By optimally choosing the value of
-the reset voltage Vr, the peak voltage stresses imposed on transistor Q1 and diode D2 can
-be reduced. The maximum duty cycle can also be increased, leading to a lower transformer
-turns ratio and lower transistor current. The resulting improvement in converter cost and
-eﬃciency can be signiﬁcant when the dc input voltage varies over a wide range.
-(a) As a function of Vg, the transistor duty cycle D, and the transformer turns ratios, what
-is the minimum value ofVr that causes the transformer magnetizing current to be reset
-to zero by the end of the switching period?
-(b) For your choice of Vr from part (a), what is the peak voltage imposed on transistor
-Q1?
+(b) 考虑图6.45b 的三端网络。求此网络的 $\mu(D)$。将结果代入 (a) 的结果，验证生成了降压、升压和升降压变换器。
 
-6.4 Summary of Key Points 209
-+
-D1
-Q1
-R
-+
-v
-D2
-D3
-Vg
-+ Vr
-n1 : n3
-: n2
-Reset
-winding
-Fig. 6.47 Forward converter with auxiliary reset winding, Problem 6.9
-This converter is to be used in a universal-input o ﬀ-line application, with the following
-speciﬁcations. The input voltage Vg can vary between 127 and 380 V . The load voltage is
-regulated by variation of the duty cycle, and is equal to 12 V . The load power is 480 W.
-(c) Choose the turns ratio n3/n1 such that the total active switch stress is minimized. For
-your choice of n3/n1, over what range will the duty cycle vary? What is the peak
-transistor current?
-(d) Compare your design of Part (c) with the conventional scheme in which n1 = n2 and
-Vr= Vg. Compare the worst-case peak transistor voltage and peak transistor current.
-(e) Suggest a way to implement the voltage source Vr. Give a schematic of the power
-stage components of your implementation. Use a few sentences to describe the control-
-circuit functions required by your implementation, if any.
-L1
-C1 R
-+Vg
-1
-2C2 LM
-1 : n
-1
-2
-Fig. 6.48 Forward converter of Problem 6.10
-6.10 In the converter illustrated in Fig. 6.48, the transformer has magnetizing inductance LM
-referred to the primary side, and has turns ratio 1 : n. It is desired that all elements operate
+(c) 考虑图6.45c 的三端网络。求此网络的 $\mu(D)$。将结果代入 (a) 的结果。生成了哪些变换器？
 
-210 6 Converter Circuits
-in the continuous conduction mode (CCM) over the range 0 ≤D < 1. This mode is
-deﬁned as follows: each switching period contains two subintervals numbered 1 and 2; in
-the schematic illustrated in Fig. 6.48, switches labeled “1” conduct during subinterval 1
-for time DTs, and switches labeled “2” conduct during subinterval 2 for time (1−D)Ts.
-(a) Solve the converter in steady state, to ﬁnd the dc components of both capacitor volt-
-ages and both inductor currents.
-(b) Sketch both capacitor voltage waveforms and both inductor current waveforms, in-
-cluding dc components and ripples.
-(c) Show how to realize the switches using BJTs and diodes, so that the converter operates
-in CCM over the range 0≤D< 1.
-(d) Does the transformer reset properly ( i.e., do the volt-seconds balance on LM)f o r
-D > 0.5? Explain.
-6.11 A ﬂyback converter with core loss and diode reverse recovery
-+
-–
-LM
-+
-V
-–
-V
-g
-Q1
-D11:n
-C
-Fig. 6.49 Flyback converter
-1: n
-+
-v1(t) v2(t)
-+
-i1(t) i2(t)
-Ideal
-transformer
-i1'(t)
-LM
-iM(t)
-RM
-Flyback transformer model
-Fig. 6.50 Transformer equivalent circuit model, with core loss modeled by element RM
-A ﬂyback converter is illustrated in Fig. 6.49. This converter operates in continuous con-
-duction mode. The following two loss mechanisms are signiﬁcant in this converter: diode
-reverse recovery, and transformer core loss. All other loss mechanisms can be ignored.
-•The silicon diode D1 has reverse recovery time tr and recovered charge Qr.Y o um a y
-model these parameters as being independent of current.
+**6.8 变压器隔离电流检测电路。** 常需检测功率晶体管中流动的电流。与晶体管串联的非感性电阻 $R$ 产生正比于晶体管漏电流 $i_D(t)$ 的电压 $v(t)$。使用变压器可实现功率晶体管与控制电路之间的隔离。变压器匝比还允许减小电流和功率损耗并增大电阻上的电压。本习题关于图6.46 变压器隔离电流检测电路的设计。
 
-6.4 Summary of Key Points 211
-•The transformer core loss may be modeled using a resistor RM in parallel with the
-magnetizing inductance LM. This leads to the transformer equivalent circuit illustrated
-in Fig. 6.50.
-(a) Derive a dc equivalent circuit model for this converter. Your model should include the
-eﬀects of the diode reverse-recovery process and the transformer core loss.
-(b) Derive an expression for the converter eﬃciency. It is not necessary to eliminate Vg,
-V, and IM from your answer to this part.
-(c) The element values are Vg = 24 V, fs = 100 kHz, R= 15 Ω, D= 0.4, n= 2, RM =
-240Ω, Qr= 0.75 μCoul, tr= 75 nsec. Compute the eﬃciency and the output voltage.
-6.12 Design of a multiple-output dc–dc ﬂyback converter. For this problem, you may neglect all
-losses and transformer leakage inductances. It is desired that the three-output ﬂyback con-
-verter shown in Fig.6.51 operates in the discontinuous conduction mode, with a switching
-frequency of fs = 100 kHz. The nominal operating conditions are given in the diagram,
-and you may that there are no variations in the input voltage or the load currents. Select
-D3= 0.1 (the duty cycle of subinterval 3, in which all semiconductors are oﬀ). The objec-
-tive of this problem is to ﬁnd a good steady-state design, in which the semiconductor peak
-blocking voltages and peak currents are reasonably low.
-+
-i1
-Vg
-165 V dc
-+15 V
-1 A
-0.5 A
-+5 V
-4 A
-np : n1
-: n2
-: n3
-i2
-i3
-ip
-Fig. 6.51 Three-output ﬂyback converter design, Problem 6.12
-(a) It is possible to ﬁnd a design in which the transistor peak blocking voltage is less than
-300 V , and the peak diode blocking voltages are all less than 35 V , under steady-state
-conditions. Design the converter such that this is true. Specify: ( i) the transistor duty
-cycle D,( ii) the magnetizing inductance LM, referred to the primary, ( iii)t h et u r n s
-ratios n1/np and n3/np.
-(b) For your design of part (a), determine the rms currents of the four windings. Note that
-they do not simply scale by the turns ratios.
+变压器有单匝一次绕组和 $n$ 匝二次绕组。晶体管以占空比 $D$ 和开关频率 $f_s$ 开关。晶体管导通期间，其电流基本恒定且等于 $I$。二极管 $D_1$ 和 $D_2$ 为常规硅二极管，正向压降 $V_D$。二极管 $D_Z$ 为齐纳二极管，可建模为数值为 $V_Z$ 的电压源，极性如图所示。
 
-Part II
-Converter Dynamics and Control
-```
+![源页 p.222](../assets/page-snapshots/chapter-6/page-222.png)
+
+图6.46 检测晶体管开关电流的变压器隔离电路，习题6.8
+
+正确设计应选择电路元件使变压器磁化电流与二极管 $D_2$ 配合工作于断续导通模式。良好设计中磁化电流远小于晶体管电流。每个开关周期内出现三个子区间：子区间 1，$Q_1$ 和 $D_1$ 导通；子区间 2，$D_2$ 和 $D_Z$ 导通；子区间 3，$Q_1$、$D_1$ 和 $D_2$ 关断。
+
+(a) 画出电流检测电路，将变压器和齐纳二极管用其等效电路替代。
+
+(b) 画出晶体管电流 $i_D(t)$、变压器磁化电流 $i_M(t)$、一次绕组电压和电压 $v(t)$ 的波形。标注关键特征。
+
+(c) 确定保证变压器磁化电流在开关周期结束前复位到零的齐纳电压 $V_Z$ 条件。
+
+(d) 给定如下技术指标：
+
+- 开关频率 $f_s = 100\text{ kHz}$
+- 晶体管占空比 $D \le 0.75$
+- 晶体管峰值电流 $\max i_D(t) \le 25\text{ A}$
+- 晶体管电流为 25 A 时输出电压 $v(t)$ 应等于 5 V
+- 为避免变压器磁芯饱和，晶体管导通期间施加于单匝一次绕组的伏秒不大于 2 V·μs
+- 硅二极管正向压降 $V_D = 0.7\text{ V}$
+
+设计该电路：选择 $R$、$n$ 和 $V_Z$ 的值。
+
+**6.9 正激变换器变压器的最优复位。** 如图6.47所示，可用不同于直流输入 $V_g$ 的电压源复位正激变换器的变压器；文献中有若干此类方案。通过最优选择复位电压 $V_r$ 的值，可降低施加于晶体管 $Q_1$ 和二极管 $D_2$ 的峰值电压应力。最大占空比也可提高，从而降低变压器匝比和晶体管电流。当直流输入电压在大范围内变化时，由此带来的变换器成本和效率改善可很显著。
+
+![源页 p.223](../assets/page-snapshots/chapter-6/page-223.png)
+
+图6.47 含辅助复位绕组的正激变换器，习题6.9
+
+(a) 用 $V_g$、晶体管占空比 $D$ 和变压器匝比表示，使变压器磁化电流在开关周期结束前复位到零的 $V_r$ 最小值是多少？
+
+(b) 对 (a) 选择的 $V_r$，施加于晶体管 $Q_1$ 的峰值电压是多少？
+
+此变换器用于通用输入离线应用，技术指标如下。输入电压 $V_g$ 可在 127–380 V 之间变化。负载电压由占空比变化调节，等于 12 V。负载功率为 480 W。
+
+(c) 选择匝比 $n_3/n_1$ 使总有源开关应力最小。对所选 $n_3/n_1$，占空比在何范围内变化？晶体管峰值电流是多少？
+
+(d) 将 (c) 的设计与 $n_1 = n_2$ 且 $V_r = V_g$ 的常规方案比较。比较最坏情况下的晶体管峰值电压和峰值电流。
+
+(e) 提出实现电压源 $V_r$ 的方案。给出实现的功率级元件原理图。用几句话描述实现所需的任何控制电路功能（若有）。
+
+![源页 p.223](../assets/page-snapshots/chapter-6/page-223.png)
+
+图6.48 习题6.10 的正激变换器
+
+**6.10** 图6.48 的变换器中，变压器有归算到一次侧的磁化电感 $L_M$，匝比 $1 : n$。要求所有元件在 $0 \le D < 1$ 范围内工作于连续导通模式（CCM）。此模式定义如下：每个开关周期含编号为 1 和 2 的两个子区间；图6.48 中标"1"的开关在子区间 1 内导通 $DT_s$ 时间，标"2"的开关在子区间 2 内导通 $(1 - D)T_s$ 时间。
+
+(a) 求解变换器稳态，求两个电容电压和两个电感电流的直流分量。
+
+(b) 画出两个电容电压波形和两个电感电流波形，包括直流分量和纹波。
+
+(c) 说明如何用 BJT 和二极管实现开关，使变换器在 $0 \le D < 1$ 范围内工作于 CCM。
+
+(d) $D > 0.5$ 时变压器是否正确复位（即 $L_M$ 上的伏秒是否平衡）？解释之。
+
+**6.11 含铁损和二极管反向恢复的反激变换器**
+
+![源页 p.224](../assets/page-snapshots/chapter-6/page-224.png)
+
+图6.49 反激变换器
+
+![源页 p.224](../assets/page-snapshots/chapter-6/page-224.png)
+
+图6.50 变压器等效电路模型，铁损用元件 $R_M$ 建模
+
+图6.49 给出一个反激变换器。此变换器工作于连续导通模式。以下两种损耗机理在该变换器中显著：二极管反向恢复和变压器铁损。所有其他损耗机理可忽略。
+
+- 硅二极管 $D_1$ 的反向恢复时间为 $t_r$，恢复电荷为 $Q_r$。可将这些参数建模为与电流无关。
+
+- 变压器铁损可用与磁化电感 $L_M$ 并联的电阻 $R_M$ 建模，得到图6.50 的变压器等效电路。
+
+(a) 导出此变换器的直流等效电路模型。模型应包括二极管反向恢复过程和变压器铁损的影响。
+
+(b) 导出变换器效率的表达式。此部分不必从答案中消去 $V_g$、$V$ 和 $I_M$。
+
+(c) 元件值为 $V_g = 24\text{ V}$，$f_s = 100\text{ kHz}$，$R = 15\,\Omega$，$D = 0.4$，$n = 2$，$R_M = 240\,\Omega$，$Q_r = 0.75\,\mu\text{C}$，$t_r = 75\,\text{ns}$。计算效率和输出电压。
+
+**6.12 多路输出直流-直流反激变换器设计。** 本习题可忽略所有损耗和变压器漏感。要求图6.51 的三输出反激变换器工作于断续导通模式，开关频率 $f_s = 100\text{ kHz}$。额定工作条件如图所示，可假定输入电压或负载电流无变化。取 $D_3 = 0.1$（子区间 3 的占空比，所有半导体均关断）。本习题目标是求得良好的稳态设计，使半导体峰值阻断电压和峰值电流合理地低。
+
+![源页 p.225](../assets/page-snapshots/chapter-6/page-225.png)
+
+图6.51 三输出反激变换器设计，习题6.12
+
+(a) 可找到一个稳态条件下晶体管峰值阻断电压小于 300 V、所有二极管峰值阻断电压均小于 35 V 的设计。设计变换器使之成立。给出：(i) 晶体管占空比 $D$；(ii) 归算到一次侧的磁化电感 $L_M$；(iii) 匝比 $n_1/n_p$ 和 $n_3/n_p$。
+
+(b) 对 (a) 的设计，确定四个绕组的方均根电流。注意它们并不简单按匝比缩放。

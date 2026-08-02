@@ -352,7 +352,7 @@
 		currentTheme = isDark ? "dark" : "default";
 	}
 
-	// 加载 Mermaid 库
+	// 加载 Mermaid 库（本地化，避免 CDN 延迟）
 	async function loadMermaid() {
 		if (typeof window.mermaid !== "undefined") {
 			return Promise.resolve();
@@ -360,32 +360,21 @@
 
 		return new Promise((resolve, reject) => {
 			const script = document.createElement("script");
-			script.src =
-				"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.12.0/mermaid.min.js";
+			script.src = "/vendor/mermaid/mermaid.min.js";
 
 			script.onload = () => {
-				console.log("Mermaid library loaded successfully");
 				resolve();
 			};
 
-			script.onerror = (error) => {
-				console.error("Failed to load Mermaid library:", error);
-				// 尝试备用 CDN
+			script.onerror = () => {
+				// 本地加载失败时回退到 CDN
 				const fallbackScript = document.createElement("script");
 				fallbackScript.src =
-					"https://unpkg.com/mermaid@11.12.0/dist/mermaid.min.js";
+					"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.12.0/mermaid.min.js";
 
-				fallbackScript.onload = () => {
-					console.log("Mermaid library loaded from fallback CDN");
-					resolve();
-				};
-
+				fallbackScript.onload = () => resolve();
 				fallbackScript.onerror = () => {
-					reject(
-						new Error(
-							"Failed to load Mermaid from both primary and fallback CDNs",
-						),
-					);
+					reject(new Error("Failed to load Mermaid from local and CDN"));
 				};
 
 				document.head.appendChild(fallbackScript);
@@ -395,7 +384,7 @@
 		});
 	}
 
-	// 加载 svg-pan-zoom 库
+	// 加载 svg-pan-zoom 库（本地化）
 	async function loadSvgPanZoom() {
 		if (typeof window.svgPanZoom !== "undefined") {
 			return Promise.resolve();
@@ -403,29 +392,17 @@
 
 		return new Promise((resolve, _reject) => {
 			const script = document.createElement("script");
-			script.src =
-				"https://unpkg.com/svg-pan-zoom@3.6.2/dist/svg-pan-zoom.min.js";
-			script.onload = () => {
-				resolve();
-			};
+			script.src = "/vendor/mermaid/svg-pan-zoom.min.js";
+			script.onload = () => resolve();
 
 			script.onerror = () => {
-				// 尝试备用 CDN
+				// 本地加载失败时回退到 CDN
 				const fallbackScript = document.createElement("script");
 				fallbackScript.src =
-					"https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.2/dist/svg-pan-zoom.min.js";
+					"https://unpkg.com/svg-pan-zoom@3.6.2/dist/svg-pan-zoom.min.js";
 
-				fallbackScript.onload = () => {
-					resolve();
-				};
-
-				fallbackScript.onerror = () => {
-					console.warn(
-						"Failed to load svg-pan-zoom, pan/zoom features will be unavailable",
-					);
-					resolve(); // 不阻塞，只是功能降级
-				};
-
+				fallbackScript.onload = () => resolve();
+				fallbackScript.onerror = () => resolve(); // 不阻塞，功能降级
 				document.head.appendChild(fallbackScript);
 			};
 
@@ -680,9 +657,21 @@
 			// 初始化主题状态
 			initializeThemeState();
 
-			// 加载并初始化 Mermaid，同时加载 svg-pan-zoom
-			await Promise.all([loadMermaid(), loadSvgPanZoom()]);
-			await initializeMermaid();
+			// 检查页面是否有 mermaid 图表，没有则跳过加载库
+			const hasMermaid = document.querySelectorAll(".mermaid[data-mermaid-code]").length > 0;
+			if (!hasMermaid) {
+				return;
+			}
+
+			// 延迟加载：使用 requestIdleCallback 避免阻塞页面首次渲染
+			// 页面内容优先渲染，mermaid 库在浏览器空闲时加载
+			const startLoad = () => Promise.all([loadMermaid(), loadSvgPanZoom()]).then(() => initializeMermaid());
+
+			if ("requestIdleCallback" in window) {
+				window.requestIdleCallback(() => startLoad().catch(console.error), { timeout: 3000 });
+			} else {
+				setTimeout(() => startLoad().catch(console.error), 200);
+			}
 		} catch (error) {
 			console.error("Failed to initialize Mermaid system:", error);
 		}

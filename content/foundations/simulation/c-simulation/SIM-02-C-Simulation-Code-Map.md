@@ -18,9 +18,9 @@ navGroupOrder: 30
 
 #  仿真代码  知识库概念映射
 
-**版本：** v1.0
-**日期：** 2026-05
-**适用对象：** 电机控制学习者、嵌入式开发者、需要深入理解 C 仿真源码与理论知识对应关系的研究者
+- **版本：** v1.0
+- **日期：** 2026-05
+- **适用对象：** 电机控制学习者、嵌入式开发者、需要深入理解 C 仿真源码与理论知识对应关系的研究者
 
 > **目标：** 在读源码时，能随时查阅每段 C 代码背后对应的理论知识；在看知识库时，能立即定位到 C 代码中的具体实现位置。
 
@@ -228,7 +228,7 @@ flowchart LR
 | `PI_POS_MACRO(v)` (位置环 PI) | CT-04 位置环 | **位置环专用 PI 宏**。与 `PI_MACRO` 结构类似，但误差先做 **角度 wrap-around 处理**：将角度误差限制在 -0.5~+0.5 圈（即 -π~+π 弧度范围）内。例如，给定位置 350°、反馈位置 10°，实际误差应为 -20°（最短路径），而非 340°。这个 wrap-around 是位置环的核心技巧——避免角度跳变（如从 359°→0°）导致 PI 输出异常大值 |
 | `COMM_PI_tuning(LL, RR, BW_current, delta, JJ, KE, npp)` | [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) PI 设计、[CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) 整定 | **TI InstaSPIN 整定公式解析**。将电机物理参数自动映射为 PI 增益，分为电流环和速度环两组公式： |
 
-**电流环整定公式：**
+- **电流环整定公式：**
 
 ```text
 Kp_d = Ld × BW_current
@@ -246,7 +246,7 @@ Ki_q = Lq × BW_current × (R / Lq) × Ts  = Kp_q × (R/Lq) × Ts
 
 物理直觉：电流环带宽 BW_current 等于 RL 电路的截止频率（Kp/L），所以 Kp = L × BW。Ki 使得 PI 零点恰好补偿 RL 电路的极点（s+R/L），实现零极点对消。
 
-**速度环整定公式：**
+- **速度环整定公式：**
 
 ```text
 K = npp × KE / Js               (转矩→加速度增益，rad/(s·N·m))
@@ -306,14 +306,14 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 | `eso_one_parameter_tuning(omega_ob)` | [CT-11](../control-theory/CT-11-Observer-Design.md) 观测器极点配置 | **ESO 单参数整定**。所有观测器增益 `ell[0..3]` 由单一带宽参数 `omega_ob`（观测器带宽，rad/s）决定。调参方法（也是一种变体极点配置）：`ell[0] = k1 × ω_ob`，`ell[1] = k2 × ω_ob²`，`ell[2] = k3 × ω_ob³ / J`，`ell[3] = k4 × ω_ob⁴ / J`。其中系数 k1~k4 根据 `bool_ramp_load_torque` 标志选择不同方案。增大 ω_ob 使观测器收敛更快但噪声放大更严重 |
 | `init_esoaf()` | 观测器初始化 | **ESO 初始化**：设置初始观测器带宽 `CAREFUL_ESOAF_OMEGA_OBSERVER`，调用 `eso_one_parameter_tuning()` 计算增益系数。初始状态估计：位置=0、速度=0、负载转矩=0（从静止空载开始观测） |
 
-**反 EMF 观测器原理简述：**
+- **反 EMF 观测器原理简述：**
 
 反 EMF 观测器（也是 SMO 的基础）利用电机电压方程中反电动势项包含位置信息的原理：
 - 从电压方程 `uα = R×iα + L×diα/dt + eα` 估计 αβ 轴反电动势 eα, eβ
 - 电角度 `θe = atan2(-eα, eβ)`（反电动势矢量角 = 转子磁场位置）
 - 转速 `ωe = dθe/dt`
 
-**低速极限：** 反电动势幅值与转速成正比（`|E| = ωe × KE`），低速时信噪比低导致估计误差大，需要切换到开环启动或高频注入法。
+- **低速极限：** 反电动势幅值与转速成正比（`|E| = ωe × KE`），低速时信噪比低导致估计误差大，需要切换到开环启动或高频注入法。
 
 ---
 

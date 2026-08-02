@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第8章part 1 - 8 Converter Transfer Functions"
+title: "第8章 变换器传递函数（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1270 +18,484 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第8章part 1 - 8 Converter Transfer Functions
+# 第8章 变换器传递函数（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 288-307  
-> Chunk ID: `chapter-8-part-1`
+> 源页：288–307
+> 本部分涵盖章引言和 8.1 波特图复习。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+工程设计过程包含几个主要步骤：
 
-## 术语表
+1. 定义技术指标和其他设计目标。
+2. 提出电路。这是一个依赖工程师物理洞察和经验的创造性过程。
+3. 建模电路。如第7章所述建模变换器功率级。用供应商提供的数据等对元件和系统其他部分适当建模。
+4. 进行面向设计的分析。这涉及建立方程以选择元件值使技术指标和设计目标得以满足。此外，工程师可能需进一步理解电路行为并获得物理洞察，以便通过添加元件或改变电路连接来改进设计。
+5. 模型验证。在额定工作条件下将模型预测与实验室原型比较。按需精细化模型，使模型预测与实验室测量一致。
+6. 进行最坏情况分析（或其他可靠性和成品率分析）。这涉及定量评估模型性能，判断在所有条件下是否满足技术指标。计算机仿真非常适合此任务。
+7. 迭代。重复上述步骤以改进设计，直至最坏情况行为满足技术指标，或可靠性和成品率足够高。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+本章覆盖步骤 4、5、6 所需的面向设计分析技巧、实验传递函数测量和计算机仿真。
 
-## 中文翻译
+8.1 至 8.3 节讨论第7章等效电路模型预测的变换器传递函数、输入阻抗和输出阻抗的波特图分析和构造技巧。例如，升降压变换器的小信号等效电路模型如图7.18c所示。该模型复制于图8.1，并标出了重要输入和端子阻抗。令占空比变化 $\hat{d}(s)$ 为零，然后求 $\hat{v}_g(s)$ 到 $\hat{v}(s)$ 的传递函数，即得输入-输出传递函数 $G_{vg}(s)$：
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$G_{vg}(s) = \left.\frac{\hat{v}(s)}{\hat{v}_g(s)}\right|_{\hat{d}(s)=0} \tag{8.1}$$
 
-## 英文原文
+![源页 p.289](../assets/page-snapshots/chapter-8/page-289.png)
 
-```text
-8
-Converter Transfer Functions
-The engineering design process is comprised of several major steps:
-1. Speciﬁcations and other design goals are deﬁned.
-2. A circuit is proposed . This is a creative process that draws on the physical insight and
-experience of the engineer.
-3. The circuit is modeled . The converter power stage is modeled as described in Chap. 7.
-Components and other portions of the system are modeled as appropriate, often with vendor-
-supplied data.
-4. Design-oriented analysis of the circuit is performed. This involves development of equa-
-tions that allow element values to be chosen such that speciﬁcations and design goals are
-met. In addition, it may be necessary for the engineer to gain additional understanding and
-physical insight into the circuit behavior, so that the design can be improved by adding
-elements to the circuit or by changing circuit connections.
-5. Model veriﬁcation. Predictions of the model are compared to a laboratory prototype, under
-nominal operating conditions. The model is reﬁned as necessary, so that the model predic-
-tions agree with laboratory measurements.
-6. Worst-case analysis (or other reliability and production yield analysis) of the circuit is per-
-formed. This involves quantitative evaluation of the model performance, to judge whether
-speciﬁcations are met under all conditions. Computer simulation is well suited to this task.
-7. Iteration. The above steps are repeated to improve the design until the worst-case behavior
-meets speciﬁcations, or until the reliability and production yield are acceptably high.
-This chapter covers techniques of design-oriented analysis, measurement of experimental trans-
-fer functions, and computer simulation, as needed in steps 4, 5, and 6.
-Sections 8.1 to 8.3 discuss techniques for analysis and construction of the Bode plots of the
-converter transfer functions, input impedance, and output impedance predicted by the equiva-
-lent circuit models of Chap. 7. For example, the small-signal equivalent circuit model of the
-buck–boost converter is illustrated in Fig. 7.18c. This model is reproduced in Fig. 8.1, with the
-important inputs and terminal impedances identiﬁed. The line-to-output transfer functionGvg(s)
-is found by setting duty cycle variations ˆd(s) to zero, and then solving for the transfer function
-from ˆvg(s)t oˆv(s):
-Gvg(s)= ˆv(s)
-ˆvg(s)
-⏐⏐⏐⏐⏐⏐ ˆd(s)= 0
-(8.1)
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_8
-277
+图8.1 升降压变换器的小信号等效电路模型，如第7章所导出
 
-278 8 Converter Transfer Functions
-+
-+
-L
-RC
-1 : D D' : 1
-vg(s) Id(s) I (s)
-(s) +
-(s)
-(Vg V) d(s)
-Zout(s)Zin(s)
-(s) Control input
-Line
-input
-Output
-d
-i
-v
-d
-ˆ
-ˆ ˆ
-ˆ
-Fig. 8.1 Small-signal equivalent circuit model of the buck–boost converter, as derived in Chap.7
-This transfer function describes how variations or disturbances in the applied input voltagevg(t)
-lead to disturbances in the output voltage v(t). It is important in design of an output voltage
-regulator. For example, in an oﬀ-line power supply, the converter input voltage vg(t) contains
-undesired even harmonics of the ac power line voltage. The transfer function Gvg(s)i su s e dt o
-determine the eﬀect of these harmonics on the converter output voltage v(t).
-The control-to-output transfer functionGvd(s) is found by setting the input voltage variations
-ˆvg(s) to zero, and then solving the equivalent circuit model for ˆv(s) as a function of ˆd(s):
-Gvd(s)= ˆv(s)
-ˆd(s)
-⏐⏐⏐
-⏐
-⏐⏐
-ˆvg(s)= 0
-(8.2)
-This transfer function describes how control input variations ˆd(s) inﬂuence the output voltage
-ˆv(s). In an output voltage regulator system, Gvd(s) is a key component of the loop gain and has
-a signiﬁcant eﬀect on regulator performance.
-The output impedance Zout(s) is found under the conditions that ˆvg(s) and ˆd(s) variations are
-set to zero. Zout(s) describes how variations in the load current aﬀect the output voltage. This
-quantity is also important in voltage regulator design. It may be appropriate to deﬁne Zout(s)
-either including or not including the load resistance R.
-The converter input impedanceZin(s) plays a signiﬁcant role when an electromagnetic inter-
-ference (EMI) ﬁlter is added at the converter power input. The relative magnitudes of Zin and
-the EMI ﬁlter output impedance inﬂuence whether the EMI ﬁlter disrupts the transfer function
-Gvd(s). Design of input EMI ﬁlters is the subject of Chap. 17.
-An objective of this chapter is the construction of Bode plots of the important transfer func-
-tions and terminal impedances of switching converters. For example, Fig. 8.2 illustrates the
-magnitude and phase plots of Gvd(s) for the buck–boost converter model of Fig. 8.1. Rules for
-construction of magnitude and phase asymptotes are reviewed in Sect. 8.1, including two types
-of features that often appear in converter transfer functions: resonances and right half-plane
-zeroes. Bode diagrams of the small-signal transfer functions of the buck–boost converter are
-derived in detail in Sect.8.2, and the transfer functions of the basic buck, boost, and buck–boost
-converters are tabulated. The physical origins of the right half-plane zero are also described.
-Ad iﬃculty usually encountered in circuit analysis (step 4 of the above list) is the complex-
-ity of the circuit model: practical circuits may contain hundreds of elements, and hence their
+此传递函数描述施加输入电压 $v_g(t)$ 的变化或扰动如何导致输出电压 $v(t)$ 的扰动。它在输出电压稳压器设计中很重要。例如，在离线电源中，变换器输入电压 $v_g(t)$ 含不希望的交流电网电压偶次谐波。传递函数 $G_{vg}(s)$ 用于确定这些谐波对变换器输出电压 $v(t)$ 的影响。
 
-8.1 Review of Bode Plots 279
-f
-0˚
-–90˚
-–180˚
-–270˚
-|| Gvd ||
-Gd0 =
-|| Gvd || Gvd
-0 dBV
-–20 dBV
-–40 dBV
-20 dBV
-40 dBV
-60 dBV
-80 dBV
-Q =
-Gvd
-10-1/2Q f0
-101/2Q f0
-0˚
-–20 dB/decade
-–40 dB/decade
-–270˚
-fz /10
-10fz
-1 MHz10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-f0
-V
-DD' D'R C
-L
-D'
-2 LC
-D'2R
-2 DL
-(RHP)
-fz
-DVg
-(D')3RC
-Vg
-2D'LC
-Fig. 8.2 Bode plot of control-to-output transfer function predicted by the model of Fig.8.1, with analyti-
-cal expressions for the important features
-analysis may lead to complicated derivations, intractable equations, and lots of algebra mis-
-takes. Design-oriented analysis [78] is a collection of tools and techniques that can alleviate
-these problems. Some tools for approaching the design of a complicated converter system are
-described in this chapter. Writing the transfer functions in normalized form directly exposes the
-important features of the response. Analytical expressions for these features, as well as for the
-asymptotes, lead to simple equations that are useful in design. Well-separated roots of trans-
-fer function polynomials can be approximated in a simple way. Sect. 8.3 describes a graphical
-method for constructing Bode plots of transfer functions and impedances, essentially by inspec-
-tion. This method can: (1) reduce the amount of algebra and associated algebra mistakes; (2)
-lead to greater insight into circuit behavior, which can be applied to design the circuit; and (3)
-lead to the insight necessary to make suitable approximations that render the equations tractable.
-Some more advanced techniques of design-oriented analysis are covered in Part IV.
-Experimental measurement of transfer functions and impedances (needed in step 4, model
-veriﬁcation) is discussed in Sect. 8.5. Use of computer simulation to plot converter transfer
-functions (as needed in step 6, worst-case analysis) is covered in Chap. 14.
-8.1 Review of Bode Plots
-A Bode plot is a plot of the magnitude and phase of a transfer function or other complex-valued
-quantity, vs. frequency. Magnitude in decibels and phase in degrees are plotted vs. frequency, us-
-ing semi-logarithmic axes. The magnitude plot is eﬀectively a log–log plot, since the magnitude
-is expressed in decibels and the frequency axis is logarithmic.
+令输入电压变化 $\hat{v}_g(s)$ 为零，然后求解等效电路模型中 $\hat{v}(s)$ 作为 $\hat{d}(s)$ 的函数，即得控制-输出传递函数 $G_{vd}(s)$：
 
-280 8 Converter Transfer Functions
-The magnitude of a dimensionless quantity G can be expressed in decibels as follows:
-∥ G∥dB= 20 log10 (∥ G∥) (8.3)
-Decibel values of some simple magnitudes are listed in Table 8.1. Care must be used when the
-magnitude is dimensionless. Since it is not proper to take the logarithm of a quantity having
-dimensions, the magnitude must ﬁrst be normalized. For example, to express the magnitude of
-an impedance Z in decibels, we should normalize by dividing by a base impedance R
-base:
-∥ Z∥dB= 20 log10
-⎦∥ Z∥
-Rbase
-)
-(8.4)
-Table 8.1 Expressing magnitudes in decibels
-Actual magnitude Magnitude in dB
-1/2 −6d B
-10 d B
-26 d B
-5= 10/22 0 d B −6d B= 14 dB
-10 20 dB
-1000= 103 3· 20 dB= 60 dB
-The value of Rbase is arbitrary, but we need
-to tell others what value we have used. So
-if ∥ Z∥ is 5 Ω, and we choose Rbase =
-10 Ω, then we can say that ∥ Z∥dB =
-20 log10(5Ω/10Ω)=−6 dB with respect to
-10Ω. A common choice is Rbase = 1Ω; deci-
-bel impedances expressed with Rbase = 1Ω
-are said to be expressed in dB Ω.S o5 Ωis
-equivalent to 14 dBΩ. Current switching har-
-monics at the input port of a converter are of-
-ten expressed in dB μA, or dB using a base
-current of 1 μA : 60 dB μA is equivalent to
-1000 μA, or 1 mA.
-The magnitude Bode plots of functions equal to powers off are linear. For example, suppose
-that the magnitude of a dimensionless quantity G( f )i s
-∥ G∥=
-⎦f
-f0
-)n
-(8.5)
-where f0 and n are constants. The magnitude in decibels is
-∥ G∥dB= 20 log10
-⎦f
-f0
-)n
-= 20n log10
-⎦f
-f0
-)
-(8.6)
-This equation is plotted in Fig.8.3, for several values ofn. The magnitudes have value 1⇒0d B
-at frequency f = f0. They are linear functions of log 10( f ). The slope is the change in ∥ G∥dB
-arising from a unit change in log 10( f ); a unit increase in log 10( f ) corresponds to a factor of
-10, or a decade, increase in f .F r o mE q . (8.6), a decade increase in f leads to an increase in
-∥ G∥dB of 20n dB. Hence, the slope is 20 n dB per decade. Equivalently, we can say that the
-slope is 20n log10(2)≈6n dB per octave, where an octave is a factor of 2 change in frequency.
-In practice, the magnitudes of most frequency-dependent functions can usually be approximated
-over a limited range of frequencies by functions of the form (8.5); over this range of frequencies,
-the magnitude Bode plot is approximately linear with slope 20n dB/decade.
-A simple transfer function whose magnitude is of the form (8.5)i st h epole at the origin:
-G(s)= 1
-⎦s
-ω0
-) (8.7)
+$$G_{vd}(s) = \left.\frac{\hat{v}(s)}{\hat{d}(s)}\right|_{\hat{v}_g(s)=0} \tag{8.2}$$
 
-8.1 Review of Bode Plots 281
-f
-f0
-2
-f
-f0
-2
-0 dB
-20 dB
-40 dB
-60 dB
-f
-log scale
-f
-00.1f0 10f0
-f
-f0
-f
-f0
-1
-n = 1
-n = 2
-n
-n20 dB/decade
-40 dB/decade
-Fig. 8.3 Magnitude Bode plots of functions which vary as f n are linear, with slope n dB per decade
-The magnitude is
-∥ G( jω))∥= 1
-
-jω
-ω0
-
-
-= 1
-⎦ω
-ω0
-) (8.8)
-If we deﬁne f=ω/2πand f0=ω0/2π,t h e nE q .(8.8) becomes
-∥ G∥=
-⎦f
-f0
-)−1
-(8.9)
-which is of the form of Eq. ( 8.5) with n=−1. As illustrated in Fig. 8.3, the magnitude Bode
-plot of the pole at the origin ( 8.7) has a−20 dB per decade slope, and passes through 0 dB at
-frequency f= f0.
-+
-R
-Cv1(s)
-+
-v2(s)
-Fig. 8.4 Simple R–C low-pass ﬁlter example
-8.1.1 Single-Pole Response
-Consider the simpleR–C low-pass ﬁlter illustrated
-in Fig. 8.4. The transfer function is given by the
-voltage divider ratio
-G(s)= v2(s)
-v1(s)=
-1
-sC
-1
-sC+ R
-(8.10)
-This transfer function is a ratio of voltages, and
-hence is dimensionless. By multiplying the numer-
-ator and denominator by sC, we can express the
-transfer function as a rational fraction:
+此传递函数描述控制输入变化 $\hat{d}(s)$ 如何影响输出电压 $\hat{v}(s)$。在输出电压稳压器系统中，$G_{vd}(s)$ 是环路增益的关键组成部分，对稳压器性能有显著影响。
 
-282 8 Converter Transfer Functions
-G(s)= 1
-1+ sRC (8.11)
-The transfer function now coincides with the following standard normalized form for a single
-pole:
-G(s)= 1⎦
-1+ s
-ω0
-) (8.12)
-The parameterω0 = 2πf0 is found by equating the coe ﬃcients of s in the denominators of
-Eqs. (8.11) and (8.12). The result is
-ω0= 1
-RC (8.13)
-Since R and C are real positive quantities, ω0 is also real and positive. The denominator of
-Eq. (8.12) contains a root at s=−ω0, and hence G(s) contains a real pole in the left half of the
-complex plane.
-Im(G(j ))
-Re(G(j ))
-G(j )
-||G(j ) ||
-G(j )
-Fig. 8.5 Magnitude and phase of the
-complex-valued function G( jω)
-To ﬁnd the magnitude and phase of the trans-
-fer function, we let s = jω, where j is the square
-root of−1. We then ﬁnd the magnitude and phase of
-the resulting complex-valued function. With s= jω,
-Eq. (8.12) becomes
-G ( jω)= 1⎦
-1+ jω
-ω0
-)=
-1−jω
-ω0
-1+
-⎦ω
-ω0
-)2 (8.14)
-The complex-valued G( jω) is illustrated in Fig. 8.5,
-for one value ofω. The magnitude is
-G ( jω)
-=
-√[Re ⎦G ( jω) )]2+ [Im ⎦G ( jω) )]2
-= 1√
-1+
-⎦ω
-ω0
-)2
-(8.15)
-Here, we have assumed thatω0 is real. In decibels, the magnitude is
-∥ G( jω)∥dB=−20 log10
-⎛⎜⎜⎜⎜⎜⎜⎜⎝
-√
-1+
-⎦ω
-ω0
-)2
-⎞⎟⎟⎟⎟⎟⎟⎟⎠dB (8.16)
-The easy way to sketch the magnitude Bode plot of G is to investigate the asymptotic behavior
-for large and small frequency.
-For small frequency,ω≪ω0 and f≪ f0, it is true that
-⎦ω
-ω0
-)
-≪ 1 (8.17)
+在 $\hat{v}_g(s)$ 和 $\hat{d}(s)$ 变化为零的条件下求输出阻抗 $Z_{out}(s)$。$Z_{out}(s)$ 描述负载电流变化如何影响输出电压。此量在电压稳压器设计中也很重要。定义 $Z_{out}(s)$ 时可能适合包含或不包含负载电阻 $R$。
 
-8.1 Review of Bode Plots 283
-Fig. 8.6 Magnitude
-asymptotes for the
-single real pole trans-
-fer function
-f
-f0
-–1
-–20 dB/decade
-ff00.1f0 10f0
-0 dB
-–20 dB
-–40 dB
-–60 dB
-0 dB
-|| G(j ) ||dB
-The (ω/ω0)2 term of Eq. (8.15) is therefore much smaller than 1, and hence Eq. (8.15) becomes
-∥ G( jω)∥≈1√
-1
-= 1 (8.18)
-In decibels, the magnitude is approximately
-∥ G( jω)∥dB≈0 dB (8.19)
-Thus, as illustrated in Fig. 8.6, at low frequency∥ G( jω)∥dB is asymptotic to 0 dB.
-At high frequency,ω≫ω0 and f≫ f0. In this case, it is true that
-⎦ω
-ω0
-)
-≫ 1 (8.20)
-We can then say that
-1+
-⎦ω
-ω0
-)2
-≈
-⎦ω
-ω0
-)2
-(8.21)
-Hence, Eq. (8.15) now becomes
-
-G ( jω)
-
-≈ 1
-√⎦ω
-ω0
-)2
-=
-⎦f
-f0
-)−1
-(8.22)
-This expression coincides with Eq. ( 8.5), with n=−1. So at high frequency, ∥ G( jω)∥dB has
-slope−20 dB per decade, as illustrated in Fig. 8.6. Thus, the asymptotes of∥ G( jω)∥ are equal
-to 1 at low frequency, and (f/ f0)−1 at high frequency. The asymptotes intersect at f0. The actual
-magnitude tends toward these asymptotes at very low frequency and very high frequency. In the
-vicinity of the corner frequency f0, the actual curve deviates somewhat from the asymptotes.
-The deviation of the exact curve from the asymptotes can be found by simply evaluating
-Eq. (8.15). At the corner frequency f= f0,E q .(8.15) becomes
-
-G ( jω
-0)
-
-= 1
-1+
-⎦ω0
-ω0
-)2 = 1√
-2
-(8.23)
+在变换器功率输入端加入电磁干扰（EMI）滤波器时，变换器输入阻抗 $Z_{in}(s)$ 起重要作用。$Z_{in}$ 与 EMI 滤波器输出阻抗的相对大小影响 EMI 滤波器是否扰动传递函数 $G_{vd}(s)$。输入 EMI 滤波器的设计是第17章的主题。
 
-284 8 Converter Transfer Functions
-Fig. 8.7 Deviation of the actual curve
-from the asymptotes, real pole
-–20 dB/decade
-f
-f0
-0 dB
-–10 dB
-–20 dB
-–30 dB
-||G(j ) || dB
-3 dB1 dB
-0.5f0 1 dB
-2f0
-In decibels, the magnitude is
-∥ G( jω0)∥dB=−20 log10
-⎛⎜⎜⎜⎜⎜⎜⎜⎝
-√
-1+
-⎦ω0
-ω0
-)2
-⎞⎟⎟⎟⎟⎟⎟⎟⎠≈−3 dB (8.24)
-So the actual curve deviates from the asymptotes by−3 dB at the corner frequency, as illustrated
-in Fig. 8.7. Similar arguments show that the actual curve deviates from the asymptotes by−1d B
-at f= f0/2 and at f= 2 f0.
-The phase of G( jω)i s
-∠G( jω)= tan−1
-⎦Im(G( jω))
-Re(G( jω))
-)
-(8.25)
-Insertion of the real and imaginary parts of Eq. (8.14) into Eq. (8.25) leads to
-∠G( jω)=−tan−1
-⎦ω
-ω0
-)
-(8.26)
-This function is plotted in Fig.8.8. It tends to 0◦at low frequency and to−90◦at high frequency.
-At the corner frequency f= f0, the phase is−45◦.
-Fig. 8.8 Exact phase plot,
-real pole
-0
-f
-0.01f0 0.1f0 f0 10f0 100f0
-G(j )
-f0
-0 asymptote
- asymptote
+本章目标之一是构造开关变换器重要传递函数和端子阻抗的波特图。例如，图8.2 给出图8.1 升降压变换器模型 $G_{vd}(s)$ 的幅值和相位图。8.1 节复习幅值和相位渐近线的构造规则，包括变换器传递函数中常出现的两类特征：谐振和右半平面零点。8.2 节详细导出升降压变换器小信号传递函数的波特图，并列表给出基本降压、升压和升降压变换器的传递函数。还描述了右半平面零点的物理起源。
 
-8.1 Review of Bode Plots 285
-Fig. 8.9 One choice for
-the mid-frequency phase
-asymptote, which correctly
-predicts the actual slope at
-f= f
-0
-0
-f
-0.01f0 0.1f0 f0 100f0
-G(j )
-f0
-fa = f0 / 4.81
-fb = 4.81 f0
-Since the high-frequency and low-frequency phase asymptotes do not intersect, we need a
-third asymptote to approximate the phase in the vicinity of the corner frequency f0.O n ew a y
-to do this is illustrated in Fig. 8.9, where the slope of the asymptote is chosen to be identical to
-the slope of the actual curve at f = f0. It can be shown that, with this choice, the asymptote
-intersection frequencies fa and fb are given by
-fa = f0e−π/2≈f0
-4.81 (8.27)
-fb = f0eπ/2≈4.81 f0
-A simpler choice, which better approximates the actual curve, is
-fa = f0
-10 (8.28)
-fb = 10 f0
-This asymptote is compared to the actual curve in Fig.8.10. The pole causes the phase to change
-over a frequency span of approximately two decades, centered at the corner frequency. The slope
-of the asymptote in this frequency span is−45
-◦per decade. At the break frequencies fa and fb,
-the actual phase deviates from the asymptotes by tan−1(0.1)= 5.7◦.
-The magnitude and phase asymptotes for the single-pole response are summarized in
-Fig. 8.11. It is good practice to consistently express single-pole transfer functions in the nor-
-malized form of Eq. (8.12). Both terms in the denominator of Eq. (8.12) are dimensionless, and
-the coeﬃcient of s0 is unity. Equation (8.12) is easy to interpret, because of its normalized form.
-At low frequencies, where the ( s/ω0) term is small in magnitude, the transfer function is ap-
-proximately equal to 1. At high frequencies, where the (s/ω0) term has magnitude much greater
-than 1, the transfer function is approximately ( s/ω0)−1. This leads to a magnitude of ( f/ f0)−1.
-The corner frequency is f0 =ω0/2π. So the transfer function is written directly in terms of its
-salient features, that is, its asymptotes and its corner frequency.
+![源页 p.290](../assets/page-snapshots/chapter-8/page-290.png)
 
-286 8 Converter Transfer Functions
-0
-f
-0.01f0 0.1f0 f0 100f0
-G(j )
-f0
-fa = f0/10
-fb = 10f0
-Fig. 8.10 A simpler choice for the mid-frequency phase asymptote, which better approximates the curve
-over the entire frequency range
-0˚G(j )
-f0
-–45˚
-f0/10
-10f0
-–90˚
-5.7˚
-5.7˚
-–45˚/decade
-–20 dB/decade
-f0
-|| G(j )|| dB 3 dB1 dB
-0.5f0 1 dB
-2f0
-0 dB
-Fig. 8.11 Summary of the magnitude and phase Bode plot for the single real pole
+图8.2 图8.1 模型预测的控制-输出传递函数波特图，含重要特征的解析表达式
 
-8.1 Review of Bode Plots 287
-8.1.2 Single Zero Response
-A single zero response contains a root in the numerator of the transfer function, and can be
-written in the following normalized form:
-G(s)=
-⎦
-1+ s
-ω0
-)
-(8.29)
-This transfer function has magnitude
-∥ G( jω)∥=
-√
-1+
-⎦ω
-ω0
-)2
-(8.30)
-At low frequency, f≪ f0=ω0/2π, the transfer function magnitude tends to 1⇒0 dB. At high
-frequency, f ≫ f0, the transfer function magnitude tends to ( f/ f0). As illustrated in Fig. 8.12,
-the high-frequency asymptote has slope+20 dB/decade. The phase is given by
-∠G( jω)= tan−1
-⎦ω
-ω0
-)
-(8.31)
-With the exception of a minus sign, the phase is identical to Eq. (8.26). Hence, suitable asymp-
-totes are as illustrated in Fig. 8.12. The phase tends to 0◦at low frequency and to+90◦at high
-frequency. Over the interval f0/10< f< 10 f0, the phase asymptote has a slope of+45◦/decade.
-0˚G(j )
-f0
-45˚
-f0 /10
-10f0 +90˚
-5.7˚
-5.7˚
-+45˚/decade
-+20 dB/decade
-f0
-|| G(j ) || dB
-3 dB1 dB
-0.5f0 1 dB
-2f0
-0 dB
-Fig. 8.12 Summary of the magnitude and phase Bode plot for the single real zero
+电路分析（上述步骤 4）中常遇到的困难是电路模型的复杂性：实际电路可能含数百个元件，故其分析可能导致复杂推导、难处理的方程和大量代数错误。面向设计的分析 [78] 是可缓解这些问题的工具和技巧的集合。本章描述处理复杂变换器系统设计的一些工具。以归一化形式书写传递函数可直接暴露响应的重要特征。这些特征及渐近线的解析表达式导出设计中有用的简单方程。传递函数多项式根分得开时可用简单方式近似。8.3 节描述构造传递函数和阻抗波特图的图解法，本质上是凭观察完成。此方法可：(1) 减少代数量及相关代数错误；(2) 增进对电路行为的洞察，以用于设计电路；(3) 获得做适当近似使方程可处理所需的洞察。面向设计分析的更多高级技巧在第四部分讨论。
 
-288 8 Converter Transfer Functions
-8.1.3 Right Half-Plane Zero
-Right half-plane zeroes are often encountered in the small-signal transfer functions of switching
-converters. These terms have the following normalized form:
-G(s)=
-⎦
-1−s
-ω0
-)
-(8.32)
-The root of Eq. (8.32) is positive, and hence lies in the right half of the complex s-plane. The
-right half-plane zero is also sometimes called a nonminimum phase zero. Its normalized form,
-Eq. (8.32), resembles the normalized form of the (left half-plane) zero of Eq. ( 8.29), with the
-exception of a minus sign in the coeﬃcient of s. The minus sign causes a phase reversal at high
-frequency.
-The transfer function has magnitude
-∥ G( jω)∥=
-√
-1+
-⎦ω
-ω0
-)2
-(8.33)
-This expression is identical to Eq. (8.30). Hence, it is impossible to distinguish a right half-plane
-zero from a left half-plane zero by the magnitude alone. The phase is given by
-∠G( jω)=−tan−1
-⎦ω
-ω0
-)
-(8.34)
-This coincides with the expression for the phase of the single pole, Eq. (8.26). So the right half-
-plane zero exhibits the magnitude response of the left half-plane zero, but the phase response of
-the pole. Magnitude and phase asymptotes are summarized in Fig. 8.13.
-+20 dB/decade
-f0
-|| G(j ) || dB
-3 dB1 dB
-0.5f0 1 dB
-2f0
-0 dB
-0˚G(j )
-f0
-–45˚
-f0 /10
-10f0
-–90˚
-5.7˚
-5.7˚
-–45˚/decade
-Fig. 8.13 Summary of the magnitude and phase Bode plot for the single real RHP zero
+8.5 节讨论传递函数和阻抗的实验测量（步骤 4 模型验证所需）。第14章覆盖用计算机仿真绘制变换器传递函数（步骤 6 最坏情况分析所需）。
 
-8.1 Review of Bode Plots 289
-8.1.4 Frequency Inversion
-Two other forms arise, from inversion of the frequency axis. The inverted pole has the transfer
-function
-G(s)= 1⎦
-1+ω0
-s
-) (8.35)
-As illustrated in Fig.8.14, the inverted pole has a high-frequency gain of 1, and a low-frequency
-asymptote having a+ 20 dB/decade slope. This form is useful for describing the gain of high-
-pass ﬁlters, and of other transfer functions where it is desired to emphasize the high-frequency
-gain, with attenuation of low frequencies. Equation (8.35) is equivalent to
-G(s)=
-⎦s
-ω0
-)
-⎦
-1+ s
-ω0
-) (8.36)
-However, Eq. (8.35) more directly emphasizes that the high-frequency gain is 1.
-The inverted zero has the form
-G(s)=
-⎦
-1+ω0
-s
-)
-(8.37)
-As illustrated in Fig.8.15, the inverted zero has a high-frequency gain asymptote equal to 1, and
-a low-frequency asymptote having a slope equal to −20 dB/decade. An example of the use of
-0˚
-G(j )
-f0
-+45˚
-f0 /10
-10f0
-+90˚
-5.7˚
-5.7˚
-–45˚/decade
-0 dB
-+20 dB/decade
-f0
-||G(j ) || dB
-3 dB
-1 dB
-0.5f0
-1 dB
-2f0
-Fig. 8.14 Inversion of the frequency axis: summary of the magnitude and phase Bode plots for the
-inverted real pole
+## 8.1 波特图复习
 
-290 8 Converter Transfer Functions
-0˚
-G(j )
-f0
-–45˚
-f0 /10
-10f0
-–90˚
-5.7˚
-5.7˚
-+45˚/decade
-–20 dB/decade
-f0
-|| G(j ) || dB
-3 dB
-1 dB
-0.5f0
-1 dB
-2f0
-0 dB
-Fig. 8.15 Inversion of the frequency axis: summary of the magnitude and phase Bode plot for the inverted
-real zero
-this type of transfer function is the proportional-plus-integral controller, discussed in connection
-with feedback loop design in the next chapter. Equation (8.37) is equivalent to
-G(s)=
-⎦
-1+ s
-ω0
-)
-⎦s
-ω0
-) (8.38)
-However, Eq. (8.37) is the preferred form when it is desired to emphasize the value of the high-
-frequency gain asymptote.
-The use of frequency inversion is illustrated by example in the next section.
-8.1.5 Combinations
-The Bode diagram of a transfer function containing several pole, zero, and gain terms can be
-constructed by simple addition. At any given frequency, the magnitude (in decibels) of the
-composite transfer function is equal to the sum of the decibel magnitudes of the individual
-terms. Likewise, at a given frequency the phase of the composite transfer function is equal to
-the sum of the phases of the individual terms.
-For example, suppose that we have already constructed the Bode diagrams of two complex-
-valued functions ofω, G
-1(ω) and G2(ω). These functions have magnitudes R1(ω) and R2(ω),
-and phases θ1(ω) and θ2(ω), respectively. It is desired to construct the Bode diagram of the
-product G3(ω)= G1(ω) G2(ω). Let G3(ω) have magnitude R3(ω), and phase θ3(ω). To ﬁnd this
-magnitude and phase, we can express G1(ω), G2(ω), and G3(ω) in polar form:
+波特图是传递函数或其他复值量的幅值和相位对频率的图。幅值以分贝表示、相位以度表示，对频率用半对数轴绘制。幅值图实际上是双对数图，因为幅值以分贝表示而频率轴为对数。
 
-8.1 Review of Bode Plots 291
-G1(ω)= R1(ω)ejθ1(ω)
-G2(ω)= R2(ω)ejθ2(ω) (8.39)
-G3(ω)= R3(ω)ejθ3(ω)
-The product G3(ω) can then be expressed as
-G3(ω)= G1(ω)G2(ω)= R1(ω)ejθ1(ω)R2(ω)ejθ2(ω) (8.40)
-Simpliﬁcation leads to
-G3(ω)= (R1(ω)R2(ω)) ej(θ1(ω)+θ2(ω)) (8.41)
-Hence, the composite phase is
-θ3(ω)= θ1(ω)+θ2(ω) (8.42)
-The total magnitude is
-R3(ω)= R1(ω)R2(ω) (8.43)
-When expressed in decibels, Eq. (8.43) becomes
-⏐⏐⏐R3(ω)
-⏐⏐⏐dB=
-⏐⏐⏐R1(ω)
-⏐⏐⏐dB+
-⏐⏐⏐R2(ω)
-⏐⏐⏐dB (8.44)
-So the composite phase is the sum of the individual phases, and when expressed in decibels, the
-composite magnitude is the sum of the individual magnitudes. The composite magnitude slope,
-in dB per decade, is therefore also the sum of the individual slopes in dB per decade.
-For example, consider construction of the Bode plot of the following transfer function:
-G(s)= G0⎦
-1+ s
-ω1
-)⎦
-1+ s
-ω2
-) (8.45)
-where G0 = 40⇒32 dB, f1 =ω1/2π= 100 Hz, f2 =ω2/2π= 2 kHz. This transfer function
-contains three terms: the gainG0, and the poles at frequenciesf1 and f2. The asymptotes for each
-of these terms are illustrated in Fig. 8.16.T h eg a i nG0 is a positive real number, and therefore
-contributes zero phase shift with the gain 32 dB. The poles at 100 Hz and 2 kHz each contribute
-asymptotes as in Fig. 8.11.
-At frequencies less than 100 Hz, the G0 term contributes a gain magnitude of 32 dB, while
-the two poles each contribute magnitude asymptotes of 0 dB. So the low-frequency composite
-magnitude asymptote is 32 dB+ 0d B+ 0d B= 32 dB. For frequencies between 100 Hz and
-2k H z , t h eG0 gain again contributes 32 dB, and the pole at 2 kHz continues to contribute a
-0 dB magnitude asymptote. However, the pole at 100 Hz now contributes a magnitude asymp-
-tote that decreases with a−20 dB per decade slope. The composite magnitude asymptote there-
-fore also decreases with a−20 dB per decade slope, as illustrated in Fig. 8.16. For frequencies
-greater than 2 kHz, the poles at 100 Hz and 2 kHz each contribute decreasing asymptotes hav-
-ing slopes of −20 dB/decade. The composite asymptote therefore decreases with a slope of
-−20 dB/decade−20 dB/decade=−40 dB/decade, as illustrated.
-The composite phase asymptote is also constructed in Fig. 8.16. Below 10 Hz, all terms
-contribute 0
-◦asymptotes. For frequencies between f1/10= 10 Hz and f2/10= 200 Hz, the pole
-at f1 contributes a decreasing phase asymptote having a slope of−45◦/decade. Between 200 Hz
-and 10 f1 = 1 kHz, both poles contribute decreasing asymptotes with−45◦/decade slopes; the
+无量纲量 $G$ 的幅值可用分贝表示为
 
-292 8 Converter Transfer Functions
-–40 dB/decade
-f
-|| G ||
- G
- G|| G ||
-0˚
-–45˚
-–90˚
-–135˚
-–180˚
-–60 dB
-0 dB
-–20 dB
-–40 dB
-20 dB
-40 dB
-f1
-100 Hz
-f2
-2 kHz
-G0 = 40 32 dB
-–20 dB/decade
-0 dB
-f1/10
-10 Hz
-f2/10
-200 Hz
-10f1
-1 kHz
-10f2
-20 kHz
-0˚
-–45˚/decade
-–90˚/decade
-–45˚/decade
-1 Hz 10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 8.16 Construction of magnitude and phase asymptotes for the transfer function of Eq. (8.45). Dashed
-lines: asymptotes for individual terms. Solid lines: composite asymptotes
-composite slope is therefore −90◦/decade. Between 1 kHz and 10 f2 = 20 kHz, the pole at
-f1 contributes a constant−90◦phase asymptote, while the pole at f2 contributes a decreasing
-asymptote with−45◦/decade slope. The composite slope is then−45◦/decade. For frequencies
-greater than 20 kHz, both poles contribute constant −90◦asymptotes, leading to a composite
-phase asymptote of−180◦.
-As a second example, consider the transfer function A(s) represented by the magnitude
-and phase asymptotes of Fig. 8.17. Let us write the transfer function that corresponds to these
-asymptotes. The dc asymptote is A0. At corner frequency f1, the asymptote slope increases
-from 0 dB/decade to+20 dB/decade. Hence, there must be a zero at frequencyf1. At frequency
-f2, the asymptote slope decreases from+20 dB/decade to 0 dB/decade. Therefore the transfer
-function contains a pole at frequency f2. So we can express the transfer function as
-A(s)= A0
-⎦
-1+ s
-ω1
-)
-⎦
-1+ s
-ω2
-) (8.46)
-whereω1 andω2 are equal to 2πf1 and 2πf2, respectively.
-Fig. 8.17 Magnitude and
-phase asymptotes of example
-transfer function A(s)
-|| A ||
- A
-f1
-f2
-|| A0 ||dB +20 dB/decade
-f1 /10
-10f1 f2 /10
-10f2
-–45˚/decade+45˚/dec
-0˚
-|| A ||dB
-0˚
-–90˚
+$$\|G\|_{\text{dB}} = 20\log_{10}(\|G\|) \tag{8.3}$$
 
-8.1 Review of Bode Plots 293
-We can use Eq. (8.46) to derive analytical expressions for the asymptotes. For f< f1, and
-letting s= jω, we can see that the (s/ω1) and (s/ω2) terms each have magnitude less than 1. The
-asymptote is derived by neglecting these terms. Hence, the low-frequency magnitude asymptote
-is
-
-
-
-
-
-
-A
-0
-⎛⎜⎜⎜⎜⎜⎝1+
-
-s
-ω1
-⎞⎟⎟⎟⎟⎟⎠
-⎛⎜⎜⎜⎜⎜⎝1+
-
-s
-ω2
-⎞⎟⎟⎟⎟⎟⎠
-
-
-
-
-
-
-s= jω
-= A0
-1
-1= A0 (8.47)
-For f1< f< f2, the numerator term (s/ω1) has magnitude greater than 1, while the denominator
-term ( s/ω2) has magnitude less than 1. The asymptote is derived by neglecting the smaller
-terms:
-
-
-
-
-
-
-A
-0
-⎦
-1+ s
-ω1
-)
-⎛⎜⎜⎜⎜⎜
-⎝1+
-
-sω2
-⎞⎟⎟⎟⎟⎟
-⎠
-
-
-
-
-
-
-s= jω
-= A0
-
-
-
-s
-ω1
-
-
-
-s= jω
-1 = A0
-ω
-ω1
-= A0
-f
-f1
-(8.48)
-This is the expression for the mid-frequency magnitude asymptote of A(s). For f > f2,t h e
-(s/ω1) and ( s/ω2) terms each have magnitude greater than 1. The expression for the high-
-frequency asymptote is therefore:
-
-
-
-
-
-A
-0
-⎦
-1+ s
-ω1
-)
-⎦
-1+ s
-ω2
-)
-
-
-
-
-
-s= jω
-= A0
-
-
-s
-ω1
-
-
-s= jω
-
-s
-ω2
-
-
-s= jω
-= A0
-ω2
-ω1
-= A0
-f2
-f1
-(8.49)
-We can conclude that the high-frequency gain is
-A∞= A0
-f2
-f1
-(8.50)
-Thus, we can derive analytical expressions for the asymptotes.
-The transfer function A(s) can also be written in a second form, using inverted poles and
-zeroes. Suppose that A(s) represents the transfer function of a high-frequency ampliﬁer, whose
-dc gain is not important. We are then interested in expressing A(s) directly in terms of the high-
-frequency gain A∞. We can view the transfer function as having an inverted pole at frequency
-f2, which introduces attenuation at frequencies less than f2. In addition, there is an inverted zero
-at f= f1.S o A(s) could also be written as
-A(s)= A∞
-⎦
-1+ω1
-s
-)
-⎦
-1+ω2
-s
-) (8.51)
-It can be veriﬁed that Eqs. (8.51) and (8.46) are equivalent.
+表8.1 列出一些简单幅值的分贝值。量纲为无量纲时须小心。由于对有量纲的量取对数不妥，须先归一化幅值。例如，为以分贝表示阻抗 $Z$ 的幅值，应除以基准阻抗 $R_{base}$ 归一化：
 
-294 8 Converter Transfer Functions
-8.1.6 Quadratic Pole Response: Resonance
-+
-L
-CRv1(s)
-+
-v2(s)
-Fig. 8.18 Two-pole low-pass ﬁlter example
-Consider next the transfer function
-G(s) of the two-pole low-pass ﬁlter of
-Fig. 8.18. The buck converter contains
-a ﬁlter of this type. When manipulated
-into canonical form, the models of the
-boost and buck–boost also contain simi-
-lar ﬁlters. One can show that the transfer
-function of this network is
-G(s)= v
-2(s)
-v1(s)= 1
-1+ s L
-R+ s2LC
-(8.52)
-This transfer function contains a second-order denominator polynomial, and is of the form
-G(s)= 1
-1+ a1 s+ a2 s2 (8.53)
-with a1= L/R and a2= LC.
-To construct the Bode plot of this transfer function, we might try to factor the denominator
-into its two roots:
-G(s)= 1⎦
-1−s
-s1
-)⎦
-1−s
-s2
-) (8.54)
-Use of the quadratic formula leads to the following expressions for the roots:
-s1 =−a1
-2a2
-⎡⎢⎢⎢
-⎢⎢⎢⎣1−
-√1−4a2
-a2
-1
-⎤⎥⎥⎥
-⎥⎥⎥⎦ (8.55)
-s
-2 =−a1
-2a2
-⎡⎢⎢⎢⎢⎢⎢⎣1+
-√
-1−4a2
-a2
-1
-⎤⎥⎥⎥⎥⎥⎥⎦ (8.56)
-If 4a2 ≤a2
-1, then the roots are real. Each real pole then exhibits a Bode diagram as derived in
-Sect. 8.1.1, and the composite Bode diagram can be constructed as described in Sect. 8.1.5 (but
-a better approach is described in Sect. 8.1.7).
-If 4a2> a2
-1, then the roots (8.55) and (8.56) are complex. In Sect. 8.1.1, the assumption was
-made thatω0 is real; hence, the results of that section cannot be applied to this case. We need to
-do some additional work, to determine the magnitude and phase for the case when the roots are
-complex.
-The transfer functions of Eqs. ( 8.52) and ( 8.53) can be written in the following standard
-normalized form:
-G(s)= 1
-1+ 2ζs
-ω0
-+
-⎦s
-ω0
-)2 (8.57)
+$$\|Z\|_{\text{dB}} = 20\log_{10}\!\left(\frac{\|Z\|}{R_{base}}\right) \tag{8.4}$$
 
-8.1 Review of Bode Plots 295
-If the coeﬃcients a1 and a2 are real and positive, then the parametersζandω0 are also real and
-positive. The parameterω0 is again the angular corner frequency, and we can deﬁnef0=ω0/2π.
-The parameterζis called the damping factor:ζcontrols the shape of the transfer function in the
-vicinity of f= f0. An alternative standard normalized form is
-G(s)= 1
-1+ s
-Qω0
-+
-⎦s
-ω0
-)2 (8.58)
-where
-Q= 1
-2ζ (8.59)
-The parameter Q is called the quality factor of the circuit, and is a measure of the dissipation
-in the system. A more general deﬁnition of Q, for sinusoidal excitation of a passive element or
-network, is
-Q= 2π (peak stored energy)
-(energy dissipated per cycle) (8.60)
-For a second-order passive system, Eqs. (8.59) and (8.60) are equivalent. We will see that theQ-
-factor has a very simple interpretation in the magnitude Bode diagrams of second-order transfer
-functions.
-Analytical expressions for the parametersQ andω0 can be found by equating like powers of
-s in the original transfer function, Eq. (8.52), and in the normalized form, Eq. (8.58). The result
-is
-f0 =ω0
-2π= 1
-2π
-√
-LC
-(8.61)
-Q= R
-√
-C
-L
-The roots s1 and s2 of Eqs. (8.55) and ( 8.56) are real when Q≤0.5, and are complex when
-Q> 0.5.
-The magnitude of G is
-G ( jω)
-= 1√⎛⎜⎜⎜⎜⎜⎝1−
-⎦ω
-ω0
-)2⎞⎟⎟⎟⎟⎟⎠
-2
-+ 1
-Q2
-⎦ω
-ω0
-)2
-(8.62)
-Asymptotes of∥ G∥ are illustrated in Fig. 8.19. At low frequencies, (ω/ω0)≪ 1, and hence
-Fig. 8.19 Magni-
-tude asymptotes for
-the two-pole transfer
-function
-f
-f0
-–2
-–40 dB/decade
-ff00.1f0 10f0
-0 dB
-|| G(j ) ||dB
-0 dB
-–20 dB
-–40 dB
-–60 dB
+表8.1 以分贝表示幅值
 
-296 8 Converter Transfer Functions
-
-G
-
-→1f o r ω≪ω
-0 (8.63)
-At high frequencies where (ω/ω0)≫ 1, the (ω/ω0)4 term dominates the expression inside the
-radical of Eq. (8.62). Hence, the high-frequency asymptote is
-G
-→
-⎦f
-f0
-)−2
-forω≫ω0 (8.64)
-This expression coincides with Eq. (8.5), with n=−2. Therefore, the high-frequency asymptote
-has slope−40 dB/decade. The asymptotes intersect at f= f0, and are independent of Q.
-|| G ||
-f0
-| Q |dB0 dB
-–40 dB/decade
-Fig. 8.20 Important features of the magnitude Bode
-plot, for the two-pole transfer function
-The parameter Q aﬀects the deviation of
-the actual curve from the asymptotes, in the
-neighborhood of the corner frequency f
-0.T h e
-exact magnitude at f= f0 is found by substi-
-tution ofω=ω0 into Eq. (8.62):
-G ( jω0)
-= Q (8.65)
-So the exact transfer function has magnitude
-Q at the corner frequency f0. In decibels,
-Eq. (8.65)i s
-
-G ( jω
-0)
-
-
-dB=
-⏐⏐
-⏐Q
-⏐⏐
-⏐
-dB (8.66)
-So if, for example, Q= 2⇒6 dB, then the
-actual curve deviates from the asymptotes by 6 dB at the corner frequency f = f0. Salient
-features of the magnitude Bode plot of the second-order transfer function are summarized in
-Fig. 8.20.
-The phase of G is
-∠G ( jω)=−tan−1
-⎡⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣
-1
-Q
-⎦ω
-ω0
-)
-1−
-⎦ω
-ω0
-)2
-⎤⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
-(8.67)
-The phase tends to 0◦at low frequency and to−180◦at high frequency. At f = f0, the phase
-is−90◦. As illustrated in Fig. 8.21, increasing the value of Q causes a sharper phase change be-
-tween the 0◦and−180◦asymptotes. We again need a mid-frequency asymptote, to approximate
-the phase transition in the vicinity of the corner frequency f0, as illustrated in Fig. 8.22.A si n
-the case of the real single pole, we could choose the slope of this asymptote to be identical to
-the slope of the actual curve at f= f0. It can be shown that this choice leads to the following
-asymptote break frequencies:
-fa=
-⎦
-eπ/2)−1
-2Q
-f0
-fb=
-⎦
-eπ/2) 1
-2Q
-f0
-(8.68)
-```
+| 实际幅值 | 分贝幅值 |
+|---|---|
+| 1/2 | −6 dB |
+| 1 | 0 dB |
+| 2 | 6 dB |
+| 5 = 10/2 | 20 dB − 6 dB = 14 dB |
+| 10 | 20 dB |
+| 1000 = 10³ | 3 × 20 dB = 60 dB |
+
+$R_{base}$ 的值任意，但须告知他人所用的值。故若 $\|Z\|$ 为 5 Ω，选 $R_{base} = 10\,\Omega$，则可说 $\|Z\|_{\text{dB}} = 20\log_{10}(5\,\Omega/10\,\Omega) = -6\text{ dB}$（相对于 10 Ω）。一个常见选择是 $R_{base} = 1\,\Omega$；以 $R_{base} = 1\,\Omega$ 表示的分贝阻抗称为以 dBΩ 表示。故 5 Ω 等价于 14 dBΩ。变换器输入端口的电流开关谐波常以 dBμA 表示，即以 1 μA 为基准电流的分贝表示：60 dBμA 等价于 1000 μA，即 1 mA。
+
+等于 $f$ 的幂的函数幅值波特图为线性。例如，设无量纲量 $G(f)$ 的幅值为
+
+$$\|G\| = \left(\frac{f}{f_0}\right)^n \tag{8.5}$$
+
+其中 $f_0$ 和 $n$ 为常数。分贝幅值为
+
+$$\|G\|_{\text{dB}} = 20\log_{10}\!\left(\frac{f}{f_0}\right)^n = 20n\log_{10}\!\left(\frac{f}{f_0}\right) \tag{8.6}$$
+
+此方程对若干 $n$ 值绘于图8.3。幅值在频率 $f = f_0$ 处取值 1 ⇒ 0 dB。它们是 $\log_{10}(f)$ 的线性函数。斜率是 $\log_{10}(f)$ 单位变化引起的 $\|G\|_{\text{dB}}$ 变化；$\log_{10}(f)$ 单位增大对应 $f$ 增大 10 倍，即一个十倍频程。由式 (8.6)，$f$ 增大十倍频程使 $\|G\|_{\text{dB}}$ 增 $20n$ dB。故斜率为 $20n$ dB/十倍频程。等价地，可说斜率为 $20n\log_{10}(2) \approx 6n$ dB/倍频程，其中一个倍频程是频率变化 2 倍。实际中，大多数频率相关函数的幅值通常可在有限频率范围内用式 (8.5) 形式的函数近似；在此频率范围内，幅值波特图近似为斜率 $20n$ dB/十倍频程的直线。
+
+![源页 p.292](../assets/page-snapshots/chapter-8/page-292.png)
+
+图8.3 幅值随 $f^n$ 变化的函数的幅值波特图为线性，斜率为 $n$ dB/十倍频程
+
+幅值为式 (8.5) 形式的一个简单传递函数是原点处的极点：
+
+$$G(s) = \frac{1}{\left(\dfrac{s}{\omega_0}\right)} \tag{8.7}$$
+
+其幅值为
+
+$$\|G(j\omega)\| = \left\|\frac{j\omega}{\omega_0}\right\|^{-1} = \left(\frac{\omega}{\omega_0}\right)^{-1} \tag{8.8}$$
+
+定义 $f = \omega/2\pi$ 和 $f_0 = \omega_0/2\pi$，式 (8.8) 变为
+
+$$\|G\| = \left(\frac{f}{f_0}\right)^{-1} \tag{8.9}$$
+
+即式 (8.5) 形式，$n = -1$。如图8.3所示，原点处极点 (8.7) 的幅值波特图斜率为 −20 dB/十倍频程，在频率 $f = f_0$ 处过 0 dB。
+
+![源页 p.292](../assets/page-snapshots/chapter-8/page-292.png)
+
+图8.4 简单 R-C 低通滤波器示例
+
+### 8.1.1 单极点响应
+
+考虑图8.4 的简单 R-C 低通滤波器。传递函数由分压比给出
+
+$$G(s) = \frac{v_2(s)}{v_1(s)} = \frac{\dfrac{1}{sC}}{\dfrac{1}{sC} + R} \tag{8.10}$$
+
+此传递函数是电压之比，故无量纲。分子分母同乘 $sC$，可将传递函数表示为有理分式：
+
+$$G(s) = \frac{1}{1 + sRC} \tag{8.11}$$
+
+传递函数现与如下单极点标准归一化形式一致：
+
+$$G(s) = \frac{1}{\left(1 + \dfrac{s}{\omega_0}\right)} \tag{8.12}$$
+
+令式 (8.11) 和 (8.12) 分母中 $s$ 的系数相等，求得参数 $\omega_0 = 2\pi f_0$，结果为
+
+$$\omega_0 = \frac{1}{RC} \tag{8.13}$$
+
+由于 $R$ 和 $C$ 为正实量，$\omega_0$ 也为正实数。式 (8.12) 的分母含根 $s = -\omega_0$，故 $G(s)$ 含左半平面上的实极点。
+
+![源页 p.293](../assets/page-snapshots/chapter-8/page-293.png)
+
+图8.5 复值函数 $G(j\omega)$ 的幅值和相位
+
+为求传递函数的幅值和相位，令 $s = j\omega$，其中 $j$ 为 $\sqrt{-1}$。然后求所得复值函数的幅值和相位。令 $s = j\omega$，式 (8.12) 变为
+
+$$G(j\omega) = \frac{1}{\left(1 + j\dfrac{\omega}{\omega_0}\right)} = \frac{1 - j\dfrac{\omega}{\omega_0}}{1 + \left(\dfrac{\omega}{\omega_0}\right)^2} \tag{8.14}$$
+
+复值 $G(j\omega)$ 对某 $\omega$ 值如图8.5所示。幅值为
+
+$$\|G(j\omega)\| = \sqrt{[\text{Re}(G(j\omega))]^2 + [\text{Im}(G(j\omega))]^2} = \frac{1}{\sqrt{1 + \left(\dfrac{\omega}{\omega_0}\right)^2}} \tag{8.15}$$
+
+这里假定 $\omega_0$ 为实数。以分贝表示的幅值为
+
+$$\|G(j\omega)\|_{\text{dB}} = -20\log_{10}\!\left(\sqrt{1 + \left(\frac{\omega}{\omega_0}\right)^2}\right)\text{ dB} \tag{8.16}$$
+
+绘制 $G$ 的幅值波特图的简单方法是研究大频率和小频率下的渐近行为。
+
+小频率下，$\omega \ll \omega_0$ 且 $f \ll f_0$，有
+
+$$\left(\frac{\omega}{\omega_0}\right) \ll 1 \tag{8.17}$$
+
+故式 (8.15) 的 $(\omega/\omega_0)^2$ 项远小于 1，式 (8.15) 变为
+
+$$\|G(j\omega)\| \approx \frac{1}{\sqrt{1}} = 1 \tag{8.18}$$
+
+以分贝表示，幅值近似为
+
+$$\|G(j\omega)\|_{\text{dB}} \approx 0\text{ dB} \tag{8.19}$$
+
+故如图8.6所示，低频下 $\|G(j\omega)\|_{\text{dB}}$ 渐近于 0 dB。
+
+![源页 p.294](../assets/page-snapshots/chapter-8/page-294.png)
+
+图8.6 单实极点传递函数的幅值渐近线
+
+高频下，$\omega \gg \omega_0$ 且 $f \gg f_0$。此时有
+
+$$\left(\frac{\omega}{\omega_0}\right) \gg 1 \tag{8.20}$$
+
+故
+
+$$1 + \left(\frac{\omega}{\omega_0}\right)^2 \approx \left(\frac{\omega}{\omega_0}\right)^2 \tag{8.21}$$
+
+故式 (8.15) 变为
+
+$$\|G(j\omega)\| \approx \frac{1}{\sqrt{\left(\dfrac{\omega}{\omega_0}\right)^2}} = \left(\frac{f}{f_0}\right)^{-1} \tag{8.22}$$
+
+此式与式 (8.5) 一致，$n = -1$。故高频下 $\|G(j\omega)\|_{\text{dB}}$ 斜率为 −20 dB/十倍频程，如图8.6所示。故 $\|G(j\omega)\|$ 的渐近线低频为 1、高频为 $(f/f_0)^{-1}$。渐近线在 $f_0$ 处相交。实际幅值在很低频和很高频处趋向这些渐近线。在转折频率 $f_0$ 附近，实际曲线与渐近线有一定偏差。
+
+可通过简单计算式 (8.15) 求实际曲线与渐近线的偏差。在转折频率 $f = f_0$ 处，式 (8.15) 变为
+
+$$\|G(j\omega_0)\| = \frac{1}{\sqrt{1 + \left(\dfrac{\omega_0}{\omega_0}\right)^2}} = \frac{1}{\sqrt{2}} \tag{8.23}$$
+
+![源页 p.295](../assets/page-snapshots/chapter-8/page-295.png)
+
+图8.7 实极点实际曲线与渐近线的偏差
+
+以分贝表示的幅值为
+
+$$\|G(j\omega_0)\|_{\text{dB}} = -20\log_{10}\!\left(\sqrt{1 + \left(\frac{\omega_0}{\omega_0}\right)^2}\right) \approx -3\text{ dB} \tag{8.24}$$
+
+故实际曲线在转折频率处与渐近线偏差 −3 dB，如图8.7所示。类似论证表明实际曲线在 $f = f_0/2$ 和 $f = 2f_0$ 处与渐近线偏差 −1 dB。
+
+$G(j\omega)$ 的相位为
+
+$$\angle G(j\omega) = \tan^{-1}\!\left(\frac{\text{Im}(G(j\omega))}{\text{Re}(G(j\omega))}\right) \tag{8.25}$$
+
+将式 (8.14) 的实部和虚部代入式 (8.25) 得
+
+$$\angle G(j\omega) = -\tan^{-1}\!\left(\frac{\omega}{\omega_0}\right) \tag{8.26}$$
+
+![源页 p.295](../assets/page-snapshots/chapter-8/page-295.png)
+
+图8.8 实极点的精确相位图
+
+此函数绘于图8.8。低频趋向 0°，高频趋向 −90°。在转折频率 $f = f_0$ 处，相位为 −45°。
+
+![源页 p.296](../assets/page-snapshots/chapter-8/page-296.png)
+
+图8.9 中频相位渐近线的一种选择，正确预测了 $f = f_0$ 处的实际斜率
+
+由于高频和低频相位渐近线不相交，需第三条渐近线近似转折频率 $f_0$ 附近的相位。一种做法如图8.9所示，其中渐近线斜率选为与 $f = f_0$ 处实际曲线的斜率相同。可证此选择下渐近线交点频率 $f_a$ 和 $f_b$ 为
+
+$$f_a = f_0 e^{-\pi/2} \approx \frac{f_0}{4.81} \tag{8.27}$$
+
+$$f_b = f_0 e^{\pi/2} \approx 4.81 f_0$$
+
+一个更好地近似实际曲线的更简单选择为
+
+$$f_a = \frac{f_0}{10} \tag{8.28}$$
+
+$$f_b = 10 f_0$$
+
+此渐近线与实际曲线比较如图8.10所示。极点使相位在以转折频率为中心的约两个十倍频程范围内变化。此频率范围内渐近线斜率为 −45°/十倍频程。在转折频率 $f_a$ 和 $f_b$ 处，实际相位与渐近线偏差 $\tan^{-1}(0.1) = 5.7°$。
+
+![源页 p.297](../assets/page-snapshots/chapter-8/page-297.png)
+
+图8.10 中频相位渐近线的一种更简单选择，在整个频率范围内更好地近似曲线
+
+![源页 p.297](../assets/page-snapshots/chapter-8/page-297.png)
+
+图8.11 单实极点幅值和相位波特图小结
+
+单极点响应的幅值和相位渐近线汇总于图8.11。始终以式 (8.12) 的归一化形式表示单极点传递函数是好习惯。式 (8.12) 分母中的两项均无量纲，且 $s^0$ 的系数为 1。式 (8.12) 因其归一化形式而易解释。低频下 $(s/\omega_0)$ 项幅值小，传递函数近似为 1。高频下 $(s/\omega_0)$ 项幅值远大于 1，传递函数近似为 $(s/\omega_0)^{-1}$，幅值为 $(f/f_0)^{-1}$。转折频率为 $f_0 = \omega_0/2\pi$。故传递函数直接以其显著特征（渐近线和转折频率）书写。
+
+### 8.1.2 单零点响应
+
+单零点响应在传递函数分子中含一个根，可写成如下归一化形式：
+
+$$G(s) = \left(1 + \frac{s}{\omega_0}\right) \tag{8.29}$$
+
+此传递函数幅值为
+
+$$\|G(j\omega)\| = \sqrt{1 + \left(\frac{\omega}{\omega_0}\right)^2} \tag{8.30}$$
+
+低频 $f \ll f_0 = \omega_0/2\pi$ 下，传递函数幅值趋向 1 ⇒ 0 dB。高频 $f \gg f_0$ 下，传递函数幅值趋向 $(f/f_0)$。如图8.12所示，高频渐近线斜率为 +20 dB/十倍频程。相位为
+
+$$\angle G(j\omega) = \tan^{-1}\!\left(\frac{\omega}{\omega_0}\right) \tag{8.31}$$
+
+除一个负号外，相位与式 (8.26) 相同。故合适的渐近线如图8.12所示。低频相位趋向 0°，高频趋向 +90°。在区间 $f_0/10 < f < 10f_0$ 内，相位渐近线斜率为 +45°/十倍频程。
+
+![源页 p.298](../assets/page-snapshots/chapter-8/page-298.png)
+
+图8.12 单实零点幅值和相位波特图小结
+
+### 8.1.3 右半平面零点
+
+右半平面零点在开关变换器的小信号传递函数中常见。这些项有如下归一化形式：
+
+$$G(s) = \left(1 - \frac{s}{\omega_0}\right) \tag{8.32}$$
+
+式 (8.32) 的根为正，故位于复 s 平面右半平面。右半平面零点有时也称非最小相位零点。其归一化形式 (8.32) 与（左半平面）零点的归一化形式 (8.29) 类似，只是 $s$ 的系数差一个负号。该负号在高频引起相位反转。
+
+传递函数幅值为
+
+$$\|G(j\omega)\| = \sqrt{1 + \left(\frac{\omega}{\omega_0}\right)^2} \tag{8.33}$$
+
+此式与式 (8.30) 相同。故仅凭幅值无法区分右半平面零点和左半平面零点。相位为
+
+$$\angle G(j\omega) = -\tan^{-1}\!\left(\frac{\omega}{\omega_0}\right) \tag{8.34}$$
+
+与单极点相位表达式 (8.26) 一致。故右半平面零点呈现左半平面零点的幅值响应，但极点的相位响应。幅值和相位渐近线汇总于图8.13。
+
+![源页 p.299](../assets/page-snapshots/chapter-8/page-299.png)
+
+图8.13 单实 RHP 零点幅值和相位波特图小结
+
+### 8.1.4 频率反转
+
+由频率轴反演可得另外两种形式。反演极点的传递函数为
+
+$$G(s) = \frac{1}{\left(1 + \dfrac{\omega_0}{s}\right)} \tag{8.35}$$
+
+如图8.14所示，反演极点高频增益为 1，低频渐近线斜率为 +20 dB/十倍频程。此形式适用于描述高通滤波器的增益及其他希望强调高频增益、衰减低频的传递函数。式 (8.35) 等价于
+
+$$G(s) = \frac{\left(\dfrac{s}{\omega_0}\right)}{\left(1 + \dfrac{s}{\omega_0}\right)} \tag{8.36}$$
+
+但式 (8.35) 更直接地强调高频增益为 1。
+
+![源页 p.300](../assets/page-snapshots/chapter-8/page-300.png)
+
+图8.14 频率轴反演：反演实极点幅值和相位波特图小结
+
+反演零点的形式为
+
+$$G(s) = \left(1 + \frac{\omega_0}{s}\right) \tag{8.37}$$
+
+如图8.15所示，反演零点高频增益渐近线为 1，低频渐近线斜率为 −20 dB/十倍频程。使用此类传递函数的一个例子是比例-积分控制器，将在下一章结合反馈环路设计讨论。式 (8.37) 等价于
+
+$$G(s) = \frac{\left(1 + \dfrac{s}{\omega_0}\right)}{\left(\dfrac{s}{\omega_0}\right)} \tag{8.38}$$
+
+但式 (8.37) 是希望强调高频增益渐近线值时的首选形式。
+
+![源页 p.301](../assets/page-snapshots/chapter-8/page-301.png)
+
+图8.15 频率轴反演：反演实零点幅值和相位波特图小结
+
+频率反演的使用在下一节以示例说明。
+
+### 8.1.5 组合
+
+含若干极点、零点和增益项的传递函数的波特图可通过简单相加构造。在任一给定频率处，复合传递函数的幅值（以分贝表示）等于各单项分贝幅值之和。同样，在给定频率处，复合传递函数的相位等于各单项相位之和。
+
+例如，设已构造两个 $\omega$ 的复值函数 $G_1(\omega)$ 和 $G_2(\omega)$ 的波特图。这些函数有幅值 $R_1(\omega)$ 和 $R_2(\omega)$，相位 $\theta_1(\omega)$ 和 $\theta_2(\omega)$。希望构造乘积 $G_3(\omega) = G_1(\omega)G_2(\omega)$ 的波特图。设 $G_3(\omega)$ 有幅值 $R_3(\omega)$ 和相位 $\theta_3(\omega)$。为求此幅值和相位，可将 $G_1(\omega)$、$G_2(\omega)$ 和 $G_3(\omega)$ 表示为极坐标形式：
+
+$$\begin{aligned} G_1(\omega) &= R_1(\omega)e^{j\theta_1(\omega)} \\ G_2(\omega) &= R_2(\omega)e^{j\theta_2(\omega)} \\ G_3(\omega) &= R_3(\omega)e^{j\theta_3(\omega)} \end{aligned} \tag{8.39}$$
+
+乘积 $G_3(\omega)$ 可表示为
+
+$$G_3(\omega) = G_1(\omega)G_2(\omega) = R_1(\omega)e^{j\theta_1(\omega)}\,R_2(\omega)e^{j\theta_2(\omega)} \tag{8.40}$$
+
+化简得
+
+$$G_3(\omega) = (R_1(\omega)R_2(\omega))\,e^{j(\theta_1(\omega)+\theta_2(\omega))} \tag{8.41}$$
+
+故复合相位为
+
+$$\theta_3(\omega) = \theta_1(\omega) + \theta_2(\omega) \tag{8.42}$$
+
+总幅值为
+
+$$R_3(\omega) = R_1(\omega)R_2(\omega) \tag{8.43}$$
+
+以分贝表示时，式 (8.43) 变为
+
+$$|R_3(\omega)|_{\text{dB}} = |R_1(\omega)|_{\text{dB}} + |R_2(\omega)|_{\text{dB}} \tag{8.44}$$
+
+故复合相位为各相位之和，以分贝表示时复合幅值为各幅值之和。以 dB/十倍频程为单位的复合幅值斜率因此也是各斜率之和。
+
+例如，考虑构造如下传递函数的波特图：
+
+$$G(s) = G_0\frac{1}{\left(1+\dfrac{s}{\omega_1}\right)\left(1+\dfrac{s}{\omega_2}\right)} \tag{8.45}$$
+
+其中 $G_0 = 40 \Rightarrow 32\text{ dB}$，$f_1 = \omega_1/2\pi = 100\text{ Hz}$，$f_2 = \omega_2/2\pi = 2\text{ kHz}$。此传递函数含三项：增益 $G_0$ 以及频率 $f_1$ 和 $f_2$ 处的极点。各项的渐近线如图8.16所示。增益 $G_0$ 为正实数，故贡献零相移和 32 dB 增益。100 Hz 和 2 kHz 处的极点各贡献如图8.11的渐近线。
+
+![源页 p.303](../assets/page-snapshots/chapter-8/page-303.png)
+
+图8.16 式 (8.45) 传递函数幅值和相位渐近线的构造。虚线：单项渐近线。实线：复合渐近线
+
+100 Hz 以下频率，$G_0$ 项贡献 32 dB 增益幅值，两个极点各贡献 0 dB 幅值渐近线。故低频复合幅值渐近线为 32 dB + 0 dB + 0 dB = 32 dB。100 Hz 至 2 kHz 之间，$G_0$ 增益仍贡献 32 dB，2 kHz 处极点继续贡献 0 dB 幅值渐近线。但 100 Hz 处极点现在贡献以 −20 dB/十倍频程斜率下降的幅值渐近线。故复合幅值渐近线也以 −20 dB/十倍频程斜率下降，如图8.16所示。2 kHz 以上频率，100 Hz 和 2 kHz 处极点各贡献斜率 −20 dB/十倍频程的下降渐近线。故复合渐近线以 −20 dB/十倍频程 − 20 dB/十倍频程 = −40 dB/十倍频程 的斜率下降。
+
+复合相位渐近线也构造于图8.16。10 Hz 以下，所有项贡献 0° 渐近线。$f_1/10 = 10\text{ Hz}$ 至 $f_2/10 = 200\text{ Hz}$ 之间，$f_1$ 处极点贡献斜率 −45°/十倍频程的下降相位渐近线。200 Hz 至 $10f_1 = 1\text{ kHz}$ 之间，两个极点各贡献斜率 −45°/十倍频程的下降渐近线，故复合斜率为 −90°/十倍频程。1 kHz 至 $10f_2 = 20\text{ kHz}$ 之间，$f_1$ 处极点贡献恒定 −90° 相位渐近线，而 $f_2$ 处极点贡献斜率 −45°/十倍频程的下降渐近线，故复合斜率为 −45°/十倍频程。20 kHz 以上频率，两个极点各贡献恒定 −90° 渐近线，故复合相位渐近线为 −180°。
+
+作为第二个例子，考虑图8.17 幅值和相位渐近线表示的传递函数 $A(s)$。让我们写出对应这些渐近线的传递函数。直流渐近线为 $A_0$。在转折频率 $f_1$ 处，渐近线斜率从 0 dB/十倍频程增到 +20 dB/十倍频程。故 $f_1$ 处必有零点。在频率 $f_2$ 处，渐近线斜率从 +20 dB/十倍频程减到 0 dB/十倍频程。故传递函数含 $f_2$ 处的极点。故传递函数可表示为
+
+$$A(s) = A_0\frac{\left(1+\dfrac{s}{\omega_1}\right)}{\left(1+\dfrac{s}{\omega_2}\right)} \tag{8.46}$$
+
+其中 $\omega_1$ 和 $\omega_2$ 分别等于 $2\pi f_1$ 和 $2\pi f_2$。
+
+![源页 p.303](../assets/page-snapshots/chapter-8/page-303.png)
+
+图8.17 示例传递函数 $A(s)$ 的幅值和相位渐近线
+
+可用式 (8.46) 导出渐近线的解析表达式。$f < f_1$ 时，令 $s = j\omega$，可见 $(s/\omega_1)$ 和 $(s/\omega_2)$ 项幅值均小于 1。忽略这些项得渐近线。故低频幅值渐近线为
+
+$$A_0\left|\frac{1}{1}\right|_{s=j\omega} = A_0 \tag{8.47}$$
+
+$f_1 < f < f_2$ 时，分子项 $(s/\omega_1)$ 幅值大于 1，分母项 $(s/\omega_2)$ 幅值小于 1。忽略较小项得渐近线：
+
+$$A_0\left|\frac{s}{\omega_1}\right|_{s=j\omega}\frac{1}{1} = A_0\frac{\omega}{\omega_1} = A_0\frac{f}{f_1} \tag{8.48}$$
+
+这是 $A(s)$ 中频幅值渐近线的表达式。$f > f_2$ 时，$(s/\omega_1)$ 和 $(s/\omega_2)$ 项幅值均大于 1。高频渐近线的表达式为
+
+$$A_0\left|\frac{s}{\omega_1}\right|_{s=j\omega}\left|\frac{1}{\dfrac{s}{\omega_2}}\right|_{s=j\omega} = A_0\frac{\omega_2}{\omega_1} = A_0\frac{f_2}{f_1} \tag{8.49}$$
+
+可得出高频增益为
+
+$$A_\infty = A_0\frac{f_2}{f_1} \tag{8.50}$$
+
+故可导出渐近线的解析表达式。
+
+传递函数 $A(s)$ 也可用反演极点和零点写成第二种形式。设 $A(s)$ 表示高频放大器的传递函数，其直流增益不重要。我们希望直接用高频增益 $A_\infty$ 表示 $A(s)$。可将传递函数视为在频率 $f_2$ 处有反演极点，在 $f < f_2$ 时引入衰减。此外，$f = f_1$ 处有反演零点。故 $A(s)$ 也可写为
+
+$$A(s) = A_\infty\frac{\left(1+\dfrac{\omega_1}{s}\right)}{\left(1+\dfrac{\omega_2}{s}\right)} \tag{8.51}$$
+
+可验证式 (8.51) 和 (8.46) 等价。
+
+### 8.1.6 二次极点响应：谐振
+
+![源页 p.305](../assets/page-snapshots/chapter-8/page-305.png)
+
+图8.18 双极点低通滤波器示例
+
+接下来考虑图8.18 双极点低通滤波器的传递函数 $G(s)$。降压变换器含此类滤波器。整理为规范形式后，升压和升降压变换器的模型也含类似滤波器。可证此网络的传递函数为
+
+$$G(s) = \frac{v_2(s)}{v_1(s)} = \frac{1}{1 + s\dfrac{L}{R} + s^2LC} \tag{8.52}$$
+
+此传递函数含二阶分母多项式，形式为
+
+$$G(s) = \frac{1}{1 + a_1 s + a_2 s^2} \tag{8.53}$$
+
+其中 $a_1 = L/R$，$a_2 = LC$。
+
+为构造此传递函数的波特图，可尝试将分母分解为两个根：
+
+$$G(s) = \frac{1}{\left(1-\dfrac{s}{s_1}\right)\left(1-\dfrac{s}{s_2}\right)} \tag{8.54}$$
+
+用求根公式得根的表达式为
+
+$$s_1 = -\frac{a_1}{2a_2}\!\left[1 - \sqrt{1 - \frac{4a_2}{a_1^2}}\right] \tag{8.55}$$
+
+$$s_2 = -\frac{a_1}{2a_2}\!\left[1 + \sqrt{1 - \frac{4a_2}{a_1^2}}\right] \tag{8.56}$$
+
+若 $4a_2 \le a_1^2$，则根为实。每个实极点呈现 8.1.1 节导出的波特图，复合波特图可按 8.1.5 节构造（但更好的方法在 8.1.7 节描述）。
+
+若 $4a_2 > a_1^2$，则根 (8.55) 和 (8.56) 为复。8.1.1 节中假定 $\omega_0$ 为实，故该节结果不适用于此情形。需做额外工作以确定根为复时的幅值和相位。
+
+式 (8.52) 和 (8.53) 的传递函数可写成如下标准归一化形式：
+
+$$G(s) = \frac{1}{1 + \dfrac{2\zeta s}{\omega_0} + \left(\dfrac{s}{\omega_0}\right)^2} \tag{8.57}$$
+
+若系数 $a_1$ 和 $a_2$ 为正实数，则参数 $\zeta$ 和 $\omega_0$ 也为正实数。参数 $\omega_0$ 仍为角转折频率，可定义 $f_0 = \omega_0/2\pi$。参数 $\zeta$ 称为阻尼系数：$\zeta$ 控制 $f = f_0$ 附近传递函数的形状。另一种标准归一化形式为
+
+$$G(s) = \frac{1}{1 + \dfrac{s}{Q\omega_0} + \left(\dfrac{s}{\omega_0}\right)^2} \tag{8.58}$$
+
+其中
+
+$$Q = \frac{1}{2\zeta} \tag{8.59}$$
+
+参数 $Q$ 称为电路的品质因数，是系统耗散的度量。对无源元件或网络在正弦激励下，$Q$ 的更一般定义为
+
+$$Q = 2\pi\frac{\text{峰值储能}}{\text{每周期耗散能量}} \tag{8.60}$$
+
+对二阶无源系统，式 (8.59) 和 (8.60) 等价。我们将看到 $Q$ 因子在二阶传递函数的幅值波特图中有很简单的解释。
+
+可通过令原始传递函数 (8.52) 和归一化形式 (8.58) 中 $s$ 的同次幂系数相等求得 $Q$ 和 $\omega_0$ 的解析表达式，结果为
+
+$$f_0 = \frac{\omega_0}{2\pi} = \frac{1}{2\pi\sqrt{LC}} \tag{8.61}$$
+
+$$Q = R\sqrt{\frac{C}{L}}$$
+
+$Q \le 0.5$ 时根 (8.55) 和 (8.56) 为实，$Q > 0.5$ 时为复。
+
+$G$ 的幅值为
+
+$$\|G(j\omega)\| = \frac{1}{\sqrt{\left(1 - \left(\dfrac{\omega}{\omega_0}\right)^2\right)^2 + \dfrac{1}{Q^2}\left(\dfrac{\omega}{\omega_0}\right)^2}} \tag{8.62}$$
+
+![源页 p.306](../assets/page-snapshots/chapter-8/page-306.png)
+
+图8.19 双极点传递函数的幅值渐近线
+
+$\|G\|$ 的渐近线如图8.19所示。低频 $(\omega/\omega_0) \ll 1$ 时
+
+$$\|G\| \to 1 \quad \text{对} \ \omega \ll \omega_0 \tag{8.63}$$
+
+高频 $(\omega/\omega_0) \gg 1$ 时，式 (8.62) 根号内的 $(\omega/\omega_0)^4$ 项主导。故高频渐近线为
+
+$$\|G\| \to \left(\frac{f}{f_0}\right)^{-2} \quad \text{对} \ \omega \gg \omega_0 \tag{8.64}$$
+
+此式与式 (8.5) 一致，$n = -2$。故高频渐近线斜率为 −40 dB/十倍频程。渐近线在 $f = f_0$ 处相交，与 $Q$ 无关。
+
+![源页 p.307](../assets/page-snapshots/chapter-8/page-307.png)
+
+图8.20 双极点传递函数幅值波特图的重要特征
+
+参数 $Q$ 影响转折频率 $f_0$ 附近实际曲线与渐近线的偏差。将 $\omega = \omega_0$ 代入式 (8.62) 得 $f = f_0$ 处的精确幅值：
+
+$$\|G(j\omega_0)\| = Q \tag{8.65}$$
+
+故精确传递函数在转折频率 $f_0$ 处幅值为 $Q$。以分贝表示，式 (8.65) 为
+
+$$\|G(j\omega_0)\|_{\text{dB}} = |Q|_{\text{dB}} \tag{8.66}$$
+
+故若 $Q = 2 \Rightarrow 6\text{ dB}$，则实际曲线在转折频率 $f = f_0$ 处与渐近线偏差 6 dB。二阶传递函数幅值波特图的显著特征汇总于图8.20。
+
+$G$ 的相位为
+
+$$\angle G(j\omega) = -\tan^{-1}\!\left[\frac{\dfrac{1}{Q}\dfrac{\omega}{\omega_0}}{1 - \left(\dfrac{\omega}{\omega_0}\right)^2}\right] \tag{8.67}$$
+
+低频相位趋向 0°，高频趋向 −180°。在 $f = f_0$ 处，相位为 −90°。如图8.21所示，增大 $Q$ 使 0° 和 −180° 渐近线之间的相位变化更陡。我们再次需要中频渐近线以近似转折频率 $f_0$ 附近的相位过渡，如图8.22所示。与实单极点情形一样，可选此渐近线斜率与 $f = f_0$ 处实际曲线斜率相同。可证此选择导致如下渐近线转折频率：
+
+$$f_a = \left(e^{\pi/2}\right)^{-\frac{1}{2Q}} f_0 \tag{8.68}$$
+
+$$f_b = \left(e^{\pi/2}\right)^{\frac{1}{2Q}} f_0$$

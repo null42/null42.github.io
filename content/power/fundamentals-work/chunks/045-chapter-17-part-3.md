@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第17章part 3 - 17 Input Filter Design"
+title: "第17章 输入滤波器设计（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,319 +18,167 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第17章part 3 - 17 Input Filter Design
+# 第17章 输入滤波器设计（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 718-726  
-> Chunk ID: `chapter-17-part-3`
+> 源页：718–726
+> 本部分续接 17.5 稳定判据，并涵盖 17.6 关键要点小结和习题 17.1–17.11。
 
-## 主干提取
+## 17.5 稳定判据（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 17.5.2 闭环输入阻抗（续）
 
-## 术语表
+![源页 p.718](../assets/page-snapshots/chapter-17/page-718.png)
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+图17.43 确定 $Y_{i\infty}$
 
-## 中文翻译
+环路增益 $T$ 幅值大的频率处变换器闭环增量输入导纳 $Y_i$ 为负。量 $1/Y_{i\infty}$ 与表17.1 所列 $Z_N$ 一致；环路增益大时变换器闭环输入阻抗跟随 $Z_N$。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+增益 $Y_{i0}$ 为
 
-## 英文原文
+$$Y_{i0}(s) = \left.\frac{\hat{i}_t(s)}{\hat{v}_t(s)}\right|_{\hat{v}_{ref}=0,\,\hat{v}_x\to\text{null} 0} \tag{17.74}$$
 
-```text
-17.5 Stability Criteria 715
-Fig. 17.43 Determination of Yi∞
-At frequencies where the loop gainT is large in magnitude, the converter closed-loop incremen-
-tal input admittanceYi is negative. The quantity 1/Yi∞coincides with theZN listed in Table17.1;
-when the loop gain is large then the converter closed-loop input impedance follows ZN .
-The gain Yi0 is given by
-Yi0(s)=
-ˆit(s)
-ˆvt(s)
-⏐⏐⏐⏐
-⏐⏐
-ˆvre f=0
-ˆvx→
-null
-0
-(17.74)
-The loop reference variation ˆvre f is set to zero. In the presence of the test source ˆvt, the signal
-ˆvz is adjusted such that ˆvx is nulled. Figure 17.44 illustrates solution of the model under these
-conditions.
-With ˆvx equal to zero, the duty-cycle variation ˆd is zero. Hence the canonical model sources
-e(s) ˆd and j(s) ˆd become zero. The converter input admittanceYi0 is then the eﬀective ﬁlter input
-admittance 1/Zei(s), reﬂected through the transformer turns ratio M2:
-Yi0(s)= M2
-Zei(s) (17.75)
-At frequencies where the loop gain T is small in magnitude, then the converter closed-loop
-incremental input admittance Yi follows the open-loop value M2/Zei. This quantity is a passive
-admittance, having phase in the range−90◦≤∠Yi ≤+90◦. The quantity 1/Yi0 coincides with
-the ZD listed in Table 17.1; when the loop gain is small then the converter closed-loop input
-impedance follows ZD.
-The loop gain T(s)o fE q .(17.70) is given by
-T(s)= ˆvy(s)
-ˆvx(s)
-⏐⏐⏐⏐
-⏐
-ˆvre f=0
-ˆvt=0
-(17.76)
-This is the loop gain of the original closed-loop regulator, before addition of the input ﬁlter.
+环路参考变化 $\hat{v}_{ref}$ 设为零。测试源 $\hat{v}_t$ 存在下调整 $\hat{v}_z$ 使 $\hat{v}_x$ 置零。图17.44 说明此条件下模型的求解。
 
-716 17 Input Filter Design
-Fig. 17.44 Determination of Yi0
-Construction of Zi
-Construction of the closed-loop input impedance Zi = 1/Yi based on the results of
-Eqs. (17.70), (17.73), and (17.75). Graphical construction of Zi is illustrated in Fig. 17.45 for a
-simple buck converter example. Figure 17.45a contains magnitude asymptotes of T, T/(1+ T),
-and 1/(1+ T), constructed as described in Sect. 9.3. The loop gain for this simple example in-
-cludes the resonant poles of the converterL–C ﬁlter at frequency fo, plus a high-frequency zero.
-The loop crossover frequency is fc, and the phase margin ofT leads to peaking with closed-loop
-Q-factor Qc as described in Sect. 9.4.3.
-Figure 17.45b illustrates construction of the admittance terms of Eq. ( 17.70). The ZN and
-ZD terms of Table 17.1 are inverted to obtain their admittances, and then are multiplied by the
-T/(1+ T) and 1/(1+ T) plots of Fig.17.45a. Figure 17.45c contains plots of the magnitude and
-phase of the converter closed-loop input impedance Zi, derived from Fig. 17.45b according to
-Eq. (17.70).
-At frequencies well below the original loop crossover frequency fc where the loop gain T
-is large in magnitude, then T/(1+ T)≈1 and 1/(1+ T) is small. Hence, Yi≈Yi∞and Zi≈ZN .
-As illustrated in Fig. 17.45c, Zi follows−R/M2 and has phase−180◦at low frequency.
-At frequencies well above fc where∥T∥≪ 1, then∥T/(1+ T)∥≪ 1 and∥1/(1+ T)∥≈1.
-Hence Yi≈Yi0 and the closed-loop input impedanceZi follows ZD. For the example asymptotes
-of Fig. 17.45, Zi follows the inductor asymptote sL/ M2 at high frequency, with a phase of+90◦.
-In the vicinity of the original loop crossover frequency fc, the impedance Zi transitions
-between ZN and ZD. In general, the ZN and ZD asymptotes can diﬀer at the loop crossover
-frequency, and hence this transition will contain new asymptotes that are not present in ZN and
-ZD alone. Depending on the phase margin of the original loop gainT,t h eT/(1+T) and 1/(1+T)
-t e r m so fE q .(17.70) may contain resonant poles and peaking in the vicinity of fc. This leads to
+![源页 p.719](../assets/page-snapshots/chapter-17/page-719.png)
 
-17.5 Stability Criteria 717
-Fig. 17.45 Steps in the construction of the asymptotes of the closed-loop converter input impedance
-Zi(s): (a) converter loop gain T and the closed-loop quantities T/(1+ T)a n d1/(1+ T); (b) the admittance
-terms of Eq. (17.70); (c) the resulting magnitude and phase asymptotes of Zi(s)
+图17.44 确定 $Y_{i0}$
 
-718 17 Input Filter Design
-resonant zeroes in Zi = 1/Yi; therefore it is possible that∥Zi∥ is smaller than∥ZN∥ and∥ZD∥ in
-the vicinity of fc. Additionally, Zi contains a RHP pole at frequency fnd; at frequencies greater
-than fnd, the negative sign ofZN is cancelled by the negative sign of the RHP pole, andZi reverts
-to a passive open-loop impedance. It should be noted that the RHP pole of Zi does not directly
-lead to instability: when the converter is driven by a voltage source vg, the current is given by
-the transfer function ig = vg/Zi. This transfer function contains a RHP zero at fnd, and exhibits
-no RHP poles.
-Determination of stability
-Next, we can construct the minor loop gain Tm = Zo/Zi of Eq. (17.68). In Fig. 17.46, an input
-ﬁlter impedance Zo is overlayed on the Zi impedance of Fig. 17.45c. As illustrated in Fig.17.46,
-the magnitude of Tm can be found by subtracting the magnitude∥Zi∥dB from∥Zo∥dB.A tt h ef r e -
-quency or frequencies where∥Zi∥=∥Zo∥, the minor loop gainTm exhibits a crossover frequency.
-The phase of Tm at a given frequency also can be found by subtracting:∠Tm=∠Zo−∠Zi.
-The Bode plot of the minor loop gain Tm is constructed in Fig. 17.47, based on the
-impedance asymptotes of Fig.17.46. To conform with the conventional appearance of loop gain
-phase, the phase asymptotes of Tm have been shifted by−360◦; this corresponds to multiplying
-Tm by e−j360◦
-= 1, and does not change the result. For the speciﬁc case sketched in Fig. 17.46,
-the input ﬁlter impedance∥Zo∥ is greater than the converter closed-loop input impedance ∥Zi∥
-over the frequency range from fmc1 to fmc2. As illustrated in Fig. 17.47, the minor loop gain
-Tm exhibits crossover frequencies at fmc1 and fmc2, and reaches a peak magnitude of Rf M2/R
-at the ﬁlter resonant frequency ff . The phase of Tm at frequency fmc1 is approximately−90◦,
-corresponding to a phase margin of+90◦. The phase of Tm is approximately−270◦at fmc2, cor-
-Fig. 17.46 Superimposing the input ﬁlter impedance asymptotes Zo on the converter closed-loop input
-impedance asymptotes Zi to determine the minor loop gain Tm
+$\hat{v}_x$ 为零时占空比变化 $\hat{d}$ 为零。故规范模型源 $e(s)\hat{d}$ 和 $j(s)\hat{d}$ 为零。变换器输入导纳 $Y_{i0}$ 随后为有效滤波输入导纳 $1/Z_{ei}(s)$ 经变压器匝比 $M^2$ 反射：
 
-17.5 Stability Criteria 719
-Fig. 17.47 Bode plot of minor loop gain Tm for the example of Fig. 17.46
-Re[Tm(jω )]
-Im[Tm(jω )]
-+1f = 0
-f = fmc1
-f = fmc2
-f = ff
-f →∞
-– R f
-R/M2
-Fig. 17.48 Nyquist plot of minor loop gain Tm for the example of Fig. 17.46. Crosshatching denotes the
-region to the right of the contour; the−1 point is enclosed
-responding to a phase margin of−90◦. The minor loop gain Tm contains resonant poles at the
-original loop crossover frequency fc and a right half-plane zero at frequency fnd.
-With multiple crossover frequencies, determination of stability should be resolved by use
-of the Nyquist plot. The positive-frequency portion of the Nyquist plot of the minor loop gain
-Tm(s) is illustrated in Fig. 17.48. The minor loop gain has magnitude zero at dc. As frequency
-increases, Tm increases in magnitude with approximate phase−90◦, until it reaches unity mag-
-nitude at f = fmc1. In the vicinity of f = ff , Tm has magnitude greater than 1, with phase
-decreasing from−90◦towards−270◦. At frequencies greater than fmc2, Tm exhibits magnitude
-less than 1. It can be seen that the−1 point is encircled once by the positive-frequency portion
+$$Y_{i0}(s) = \frac{M^2}{Z_{ei}(s)} \tag{17.75}$$
 
-720 17 Input Filter Design
-of the Nyquist plot sketched in Fig. 17.48. The negative-frequency portion of the Nyquist plot,
-which is the complex conjugate (not shown in Fig. 17.48), also encircles the −1 point once.
-Consequently, the closed-loop term
-1
-1+ Tm
-= Zi
-Zo+ Zi
-(17.77)
-contains two right half-plane poles, and is unstable. The regulator closed-loop transfer functions
-such as Eq. (17.67) will also exhibit these two right half-plane poles.
-It can be observed from Fig.17.48 that the encirclements of the−1 point could be eliminated
-by reducing the magnitude of the quantity Rf/(R/M2) to be less than unity. Then the Nyquist
-plot no longer would encircle the −1 point, and the minor loop Tm would no longer introduce
-RHP poles. This coincides with the earlier conclusion that adequate damping of the input ﬁlter
-can stabilize the system.
-17.5.3 Discussion
-Section 17.5 describes two distinct approaches to derivation of the exact stability boundary of a
-switching regulator with addition of an input ﬁlter. In Sect. 17.5.1, the Extra Element Theorem
-is employed to determine the modiﬁed loop gain T′(s). The usual gain and phase margin tests
-can then be employed to ascertain the stability of the modiﬁed regulator system. By contrast,
-the approach of Sect. 17.5.2 employs the Feedback Theorem to ﬁnd the new closed-loop poles
-induced by addition of the input ﬁlter. These poles are ascribed to a voltage divider term that
-accounts for the loading of the input ﬁlter impedance Z
-o(s) by the closed-loop converter input
-impedance Zi(s). This voltage divider term can be viewed as having an eﬀective minor loop gain
-Tm(s)= Zo(s)/Zi(s), whose stability can be ascertained using the usual techniques including
-phase and gain margins and the Nyquist stability tests.
-Thus, we have two distinct approaches to determination of the stability boundary of the reg-
-ulator when modiﬁed by addition of an input ﬁlter. It can be veriﬁed that identical closed-loop
-poles and characteristic equations are predicted by the two approaches. Hence, provided that the
-original unmodiﬁed system is stable, the two approaches predict identical stability boundaries.
-Finally, it should be emphasized that Sects. 17.1 to 17.4 are concerned with design of an
-input ﬁlter that does not disrupt the important transfer functions of the closed-loop regulator,
-while Sect. 17.5 is concerned with determination of the formal stability boundary. While these
-are very diﬀerent goals, it is revealing that all approaches rely on the impedances ZN and ZD
-of Table 17.1,a l b e i ti nd iﬀerent ways. Ultimately, the impedance inequalities of Eq. (17.19)a r e
-the governing design criteria, with the issue only being how conservative should the design be.
-The engineer can employ modern tools to plot the relevant equations of all sections and produce
-an informed and optimized design.
-17.6 Summary of Key Points
-1. Switching converters usually require input ﬁlters, to reduce conducted electromagnetic in-
-terference and possibly also to meet requirements concerning conducted susceptibility.
-2. Addition of an input ﬁlter to a converter alters the control-to-output and other transfer func-
-tions of the converter. Design of the converter control system must account for the eﬀects
-of the input ﬁlter.
+环路增益 $T$ 幅值小的频率处变换器闭环增量输入导纳 $Y_i$ 跟随开环值 $M^2/Z_{ei}$。此量为无源导纳，相位在 $-90° \le \angle Y_i \le +90°$ 范围。量 $1/Y_{i0}$ 与表17.1 所列 $Z_D$ 一致；环路增益小时变换器闭环输入阻抗跟随 $Z_D$。
 
-17.6 Summary of Key Points 721
-3. If the input ﬁlter is not damped, then it typically introduces complex poles and RHP zeroes
-into the converter control-to-output transfer function, at the resonant frequencies of the
-input ﬁlter. If these resonant frequencies are lower than the crossover frequency of the
-controller loop gain, then the phase margin will become negative and the regulator will be
-unstable.
-4. The input ﬁlter can be designed so that it does not signiﬁcantly change the converter control-
-to-output and other transfer functions. Impedance inequalities ( 17.19) give simple design
-criteria that guarantee this. To meet these design criteria, the resonances of the input ﬁlter
-must be suﬃciently damped.
-5. Optimization of the damping networks of single-section ﬁlters can yield signiﬁcant savings
-in ﬁlter element size. Equations for optimizing three diﬀerent ﬁlter sections are listed.
-6. Substantial savings in ﬁlter element size can be realized via cascading ﬁlter sections. The
-design of noninteracting cascaded ﬁlter sections can be achieved by an approach similar to
-the original input ﬁlter design method. Impedance inequalities ( 17.50) give design criteria
-that guarantee that interactions are not substantial.
-7. Another useful approach for determination of the exact stability boundary is based on the
-loading of the input ﬁlter, whose output impedance is Z
-o(s), by the closed-loop converter
-input impedance Zi(s). The stability is examined by treating Tm(s)= Zo(s)/Zi(s) as a minor
-loop gain using conventional techniques such as the Nyquist stability theorem and the phase
-margin test.
-Problems
-17.1 It is required to design an input ﬁlter for the ﬂyback converter of Fig. 17.49. The max-
-imum allowed amplitude of switching harmonics of iin(t)i s1 0 μA rms. Calculate the
-required attenuation of the ﬁlter at the switching frequency.
-+
-Lp
-+
-vVg
-Q1
-D11:n
-C RInput
-filter
-ig(t) n = 0.5
-250 μH 100 μF
-48 V
-5 
-iin(t)
-D = 0.3
-fs = 200 kHz
-Fig. 17.49 Flyback converter, Problems 17.1, 17.4, 17.6, 17.8,a n d17.10
-17.2 In the boost converter of Fig.17.50, the input ﬁlter is designed so that the maximum am-
-plitude of switching harmonics of iin(t) is not greater than 10 μA rms. Find the required
-attenuation of the ﬁlter at the switching frequency.
+式 (17.70) 的环路增益 $T(s)$ 为
 
-722 17 Input Filter Design
-+
-+
-v
-vg
-L
-C R
-100 μH
-33 ! F 12 48 V
-Input
-filter
-iin(t) ig(t)
-D = 0.6
-fs = 200 kHz
-Fig. 17.50 Boost converter, Problems 17.2, 17.5, 17.7,a n d17.9
-17.3 Derive the expressions for ZN and ZD in Table17.1.
-17.4 The input ﬁlter for the ﬂyback converter of Fig. 17.49 is designed using a single Lf –C f
-section. The ﬁlter is damped using a resistor Rf in series with a very large blocking
-capacitor Cb.
-(a) Sketch a small-signal model of the ﬂyback converter. Derive expressions for ZN (s)
-and ZD(s) using your model. Sketch the magnitude Bode plots of ZN and ZD, and
-label all salient features.
-(b) Design the input ﬁlter, i.e., select the values of Lf, C f , and Rf ,s ot h a t :(i) the ﬁlter
-attenuation at the switching frequency is at least 100 dB, and ( ii) the magnitude of
-the ﬁlter output impedance Zo(s) satisﬁes the conditions|| Zo( jω)||< 0.3|| ZD( jω)||
-and|| Zo( jω)||< 0.3|| ZN ( jω)||, for all frequencies.
-(c) Use Spice simulations to verify that the ﬁlter designed in part (b) meets the speciﬁ-
-cations.
-(d) Using Spice simulations, plot the converter control-to-output magnitude and phase
-responses without the input ﬁlter, and with the ﬁlter designed in part (b). Comment
-on the changes introduced by the ﬁlter.
-17.5 It is required to design the input ﬁlter for the boost converter of Fig. 17.50 using a sin-
-gle Lf –C f section. The ﬁlter is damped using a resistor Rf in series with a very large
-blocking capacitor Cb.
-(a) Sketch the magnitude Bode plots of ZN (s) and ZD(s) for the boost converter, and
-label all salient features.
-(b) Design the input ﬁlter, i.e., select the values of Lf, C f , and Rf ,s ot h a t :(i)t h e
-ﬁlter attenuation at the switching frequency is at least 80 dB, and ( ii) the mag-
-nitude of the ﬁlter output impedance Zo(s) satisﬁes the conditions || Zo( jω)|| <
-0.2|| ZD( jω)||,|| Zo(ω)||< 0.2|| ZN (ω)||, for all frequencies.
-(c) Use Spice simulations to verify that the ﬁlter designed in part (b) meets the speciﬁ-
-cations.
-(d) Using Spice simulations, plot the converter control-to-output magnitude and phase
-responses without the input ﬁlter, and with the ﬁlter designed in part (b). Comment
-on the changes in the control-to-output responses introduced by the ﬁlter.
-17.6 Repeat the ﬁlter design of Problem 17.4 using the optimum ﬁlter damping approach de-
-scribed in Sect. 17.4.1. Find the values of Lf, C f, Rf , and Cb.
+$$T(s) = \left.\frac{\hat{v}_y(s)}{\hat{v}_x(s)}\right|_{\hat{v}_{ref}=0,\,\hat{v}_t=0} \tag{17.76}$$
 
-17.6 Summary of Key Points 723
-17.7 Repeat the ﬁlter design of Problem 17.5 using the optimum ﬁlter damping approach of
-Sect. 17.4.1. Find the values of Lf, C f, Rf , and Cb.
-17.8 Repeat the ﬁlter design of Problem 17.4 using the optimum Rf –Lb parallel damping ap-
-proach described in Sect. 17.4.2. Find the values of Lf, C f, Rf , and Lb.
-17.9 Repeat the ﬁlter design of Problem 17.5 using the optimum Rf –Lb parallel damping ap-
-proach described in Sect. 17.4.2. Find the values of Lf, C f, Rf , and Lb.
-17.10 It is required to design the input ﬁlter for the ﬂyback converter of Fig. 17.32 using two
-ﬁlter sections. Each ﬁlter section is damped using a resistor in series with a blocking
-capacitor.
-(a) Design the input ﬁlter, i.e., select values of all circuit parameters, so that (i) the ﬁlter
-attenuation at the switching frequency is at least 100 dB, and ( ii) the magnitude of
-the ﬁlter output impedance Zo(s) satisﬁes the conditions|| Zo( jω)∥< 0.3|| ZD( jω)||
-and|| Zo( jω)||< 0.3|| ZN (ω)||, for all frequencies.
-(b) Use Spice simulations to verify that the ﬁlter designed in part (a) meets the speciﬁ-
-cations.
-(c) Using Spice simulations, plot the converter control-to-output magnitude and phase
-responses without the input ﬁlter, and with the ﬁlter designed in part (b). Comment
-on the changes introduced by the ﬁlter.
-17.11 Consider the boost voltage regulator of Problem9.3. It is required to design an input ﬁlter
-for this voltage regulator. The ﬁlter should have a single Lf –C f section with optimum
-damping using a resistor Rf in series with a capacitor Cb.
-(a) Design the input ﬁlter, i.e., select values of all circuit parameters, so that ( i)t h e
-ﬁlter attenuation at the switching frequency fs = 200 kHz is equal to at least 80 dB,
-and (ii) the magnitude of the ﬁlter output impedance Zo(s) satisﬁes the conditions
-|| Zo( jω)∥≤0.4|| ZD( jω)|| and|| Zo( jω)||≤0.4|| ZN (ω)||, for all frequencies.
-(b) Determine the closed-loop input impedance Zi(s) of the regulator in Problem 9.3.
-Examine stability of the closed-loop system by analysis of the minor loop gain
-Tm(s)= Zo(s)/Zi(s), where Zo(s) is the output impedance of the input ﬁlter designed
-in part (a).
-```
+这是加入输入滤波器前原始闭环稳压器的环路增益。
+
+**构造 $Z_i$**
+
+基于式 (17.70)、(17.73)、(17.75) 结果构造闭环输入阻抗 $Z_i = 1/Y_i$。图17.45 给出简单降压变换器示例 $Z_i$ 的图解构造。图17.45a 含 $T$、$T/(1+T)$、$1/(1+T)$ 的幅值渐近线，按 9.3 节描述构造。此简单示例环路增益含变换器 L-C 滤波器频率 $f_o$ 处的谐振极点和高频零点。环路穿越频率为 $f_c$，$T$ 的相位裕度导致 9.4.3 节所述闭环 Q 因子 $Q_c$ 的峰值。
+
+![源页 p.720](../assets/page-snapshots/chapter-17/page-720.png)
+
+图17.45 构造闭环变换器输入阻抗 $Z_i(s)$ 渐近线的步骤：(a) 变换器环路增益 $T$ 及闭环量 $T/(1+T)$ 和 $1/(1+T)$；(b) 式 (17.70) 的导纳项；(c) 所得 $Z_i(s)$ 幅值和相位渐近线
+
+图17.45b 说明式 (17.70) 导纳项的构造。表17.1 的 $Z_N$ 和 $Z_D$ 项求逆得导纳，然后乘以图17.45a 的 $T/(1+T)$ 和 $1/(1+T)$ 图。图17.45c 含按式 (17.70) 由图17.45b 导出的变换器闭环输入阻抗 $Z_i$ 幅值和相位图。
+
+原始环路穿越频率 $f_c$ 以下远处的频率（环路增益 $T$ 幅值大）处 $T/(1+T) \approx 1$ 且 $1/(1+T)$ 小。故 $Y_i \approx Y_{i\infty}$ 且 $Z_i \approx Z_N$。如图17.45c所示，$Z_i$ 低频跟随 $-R/M^2$，相位 −180°。
+
+$f_c$ 以上远处（$\|T\| \ll 1$）处 $\|T/(1+T)\| \ll 1$ 且 $\|1/(1+T)\| \approx 1$。故 $Y_i \approx Y_{i0}$ 且闭环输入阻抗 $Z_i$ 跟随 $Z_D$。对图17.45 渐近线示例，$Z_i$ 高频跟随电感渐近线 $sL/M^2$，相位 +90°。
+
+原始环路穿越频率 $f_c$ 附近阻抗 $Z_i$ 在 $Z_N$ 和 $Z_D$ 之间过渡。一般 $Z_N$ 和 $Z_D$ 渐近线在环路穿越频率处可不同，故此过渡含 $Z_N$ 和 $Z_D$ 单独不存在的新渐近线。取决于原始环路增益 $T$ 的相位裕度，式 (17.70) 的 $T/(1+T)$ 和 $1/(1+T)$ 项可含 $f_c$ 附近的谐振极点和峰值。这导致
+
+$Z_i = 1/Y_i$ 中的谐振零点；故 $f_c$ 附近 $\|Z_i\|$ 可能小于 $\|Z_N\|$ 和 $\|Z_D\|$。此外 $Z_i$ 含频率 $f_{nd}$ 处的 RHP 极点；$f_{nd}$ 以上频率处 $Z_N$ 的负号被 RHP 极点的负号抵消，$Z_i$ 恢复为无源开环阻抗。应注意 $Z_i$ 的 RHP 极点不直接导致不稳定：变换器由电压源 $v_g$ 驱动时电流由传递函数 $i_g = v_g/Z_i$ 给出。此传递函数含 $f_{nd}$ 处 RHP 零点，不含 RHP 极点。
+
+**稳定性确定**
+
+接下来可构造式 (17.68) 的小环路增益 $T_m = Z_o/Z_i$。图17.46 中输入滤波器阻抗 $Z_o$ 叠加于图17.45c 的 $Z_i$ 阻抗上。如图17.46所示，$T_m$ 幅值可通过从 $\|Z_o\|_{\text{dB}}$ 减去 $\|Z_i\|_{\text{dB}}$ 求得。$\|Z_i\| = \|Z_o\|$ 的频率处小环路增益 $T_m$ 呈现穿越频率。给定频率处 $T_m$ 相位也可通过减法求得：$\angle T_m = \angle Z_o - \angle Z_i$。
+
+![源页 p.721](../assets/page-snapshots/chapter-17/page-721.png)
+
+图17.46 将输入滤波器阻抗渐近线 $Z_o$ 叠加于变换器闭环输入阻抗渐近线 $Z_i$ 以确定小环路增益 $T_m$
+
+小环路增益 $T_m$ 波特图基于图17.46 阻抗渐近线构造于图17.47。为符合环路增益相位的常规外观，$T_m$ 相位渐近线偏移 −360°；这对应于 $T_m$ 乘以 $e^{-j360°} = 1$，不改变结果。对图17.46 所绘特定情形，输入滤波器阻抗 $\|Z_o\|$ 在 $f_{mc1}$ 到 $f_{mc2}$ 频率范围内大于变换器闭环输入阻抗 $\|Z_i\|$。如图17.47所示，小环路增益 $T_m$ 在 $f_{mc1}$ 和 $f_{mc2}$ 处呈现穿越频率，在滤波器谐振频率 $f_f$ 处达到峰值 $R_f M^2/R$。$f_{mc1}$ 处 $T_m$ 相位约 −90°，对应 +90° 相位裕度。$f_{mc2}$ 处 $T_m$ 相位约 −270°，
+
+![源页 p.722](../assets/page-snapshots/chapter-17/page-722.png)
+
+图17.47 图17.46 示例小环路增益 $T_m$ 波特图
+
+![源页 p.722](../assets/page-snapshots/chapter-17/page-722.png)
+
+图17.48 图17.46 示例小环路增益 $T_m$ 奈奎斯特图。交叉影线表示围道右侧区域；−1 点被包围
+
+对应 −90° 相位裕度。小环路增益 $T_m$ 含原始环路穿越频率 $f_c$ 处的谐振极点和频率 $f_{nd}$ 处的右半平面零点。
+
+有多个穿越频率时稳定性确定应用奈奎斯特图解决。小环路增益 $T_m(s)$ 奈奎斯特图正频率部分如图17.48所示。小环路增益直流处幅值为零。频率增大时 $T_m$ 以约 −90° 相位增大幅值，直到 $f = f_{mc1}$ 处达单位幅值。$f = f_f$ 附近 $T_m$ 幅值大于 1，相位从 −90° 向 −270° 递减。$f_{mc2}$ 以上频率 $T_m$ 幅值小于 1。可见图17.48 所绘奈奎斯特图正频率部分包围 −1 点一次。奈奎斯特图负频率部分（复共轭，图17.48 未示）也包围 −1 点一次。故闭环项
+
+$$\frac{1}{1+T_m} = \frac{Z_i}{Z_o+Z_i} \tag{17.77}$$
+
+含两个右半平面极点，不稳定。式 (17.67) 等稳压器闭环传递函数也将呈现这两个右半平面极点。
+
+从图17.48 可观察到将量 $R_f/(R/M^2)$ 幅值降到 1 以下可消除 −1 点的包围。则奈奎斯特图不再包围 −1 点，小环路 $T_m$ 不再引入 RHP 极点。这与先前输入滤波器充分阻尼可稳定系统的结论一致。
+
+### 17.5.3 讨论
+
+17.5 节描述加入输入滤波器的开关稳压器精确稳定边界推导的两种不同方法。17.5.1 节用额外元件定理确定修改后环路增益 $T'(s)$。然后可用通常增益和相位裕度测试确定修改后稳压器系统的稳定性。相反 17.5.2 节方法用反馈定理求加入输入滤波器引起的新闭环极点。这些极点归因于计入输入滤波器阻抗 $Z_o(s)$ 被闭环变换器输入阻抗 $Z_i(s)$ 加载的分压项。此分压项可视为有效小环路增益 $T_m(s) = Z_o(s)/Z_i(s)$，其稳定性可用包括相位和增益裕度及奈奎斯特稳定测试的通常技巧确定。
+
+故有两种确定加入输入滤波器修改后稳压器稳定边界的不同方法。可验证两方法预测相同闭环极点和特征方程。故假定原始未修改系统稳定，两方法预测相同稳定边界。
+
+最后应强调 17.1 至17.4 节涉及设计不破坏闭环稳压器重要传递函数的输入滤波器，而 17.5 节涉及确定形式稳定边界。虽然这些目标非常不同，但揭示所有方法都依赖表17.1 的阻抗 $Z_N$ 和 $Z_D$（虽然以不同方式）。最终式 (17.19) 阻抗不等式是主导设计准则，问题仅是设计应多保守。工程师可用现代工具绘制各节相关方程并产生知情优化的设计。
+
+## 17.6 关键要点小结
+
+1. 开关变换器通常需要输入滤波器以减小传导电磁干扰，可能还需满足传导敏感度要求。
+
+2. 向变换器加入输入滤波器改变变换器控制-输出及其他传递函数。变换器控制系统设计须计入输入滤波器影响。
+
+3. 若输入滤波器无阻尼，则通常在输入滤波器谐振频率处向变换器控制-输出传递函数引入复极点和 RHP 零点。若这些谐振频率低于控制器环路增益穿越频率，则相位裕度变负，稳压器不稳定。
+
+4. 可设计输入滤波器使其不显著改变变换器控制-输出及其他传递函数。阻抗不等式 (17.19) 给出保证此的简单设计准则。为满足此设计准则须充分阻尼输入滤波器谐振。
+
+5. 单节滤波器阻尼网络优化可显著节省滤波元件尺寸。列出三种滤波节优化方程。
+
+6. 级联滤波节可实现滤波元件尺寸的显著节省。非互作用级联滤波节设计可用与原始输入滤波器设计方法类似的方法实现。阻抗不等式 (17.50) 给出保证相互作用不显著的设计准则。
+
+7. 确定精确稳定边界的另一种有用方法基于输入滤波器（输出阻抗 $Z_o(s)$）被闭环变换器输入阻抗 $Z_i(s)$ 加载。通过将 $T_m(s) = Z_o(s)/Z_i(s)$ 视为小环路增益用奈奎斯特稳定定理和相位裕度测试等常规技巧检验稳定性。
+
+## 习题
+
+![源页 p.724](../assets/page-snapshots/chapter-17/page-724.png)
+
+图17.49 反激变换器，习题17.1、17.4、17.6、17.8、17.10
+
+**17.1** 需为图17.49 的反激变换器设计输入滤波器。$i_{in}(t)$ 开关谐波最大允许幅值为 10 μA 方均根。计算开关频率处所需滤波器衰减。
+
+![源页 p.725](../assets/page-snapshots/chapter-17/page-725.png)
+
+图17.50 升压变换器，习题17.2、17.5、17.7、17.9
+
+**17.2** 图17.50 升压变换器中输入滤波器设计使 $i_{in}(t)$ 开关谐波最大幅值不大于 10 μA 方均根。求开关频率处所需滤波器衰减。
+
+**17.3** 导出表17.1 中 $Z_N$ 和 $Z_D$ 的表达式。
+
+**17.4** 图17.49 反激变换器输入滤波器用单 $L_f$-$C_f$ 节设计。滤波器用与很大阻塞电容 $C_b$ 串联的电阻 $R_f$ 阻尼。
+
+(a) 画反激变换器小信号模型。用模型导出 $Z_N(s)$ 和 $Z_D(s)$ 表达式。画 $Z_N$ 和 $Z_D$ 幅值波特图，标注所有显著特征。
+
+(b) 设计输入滤波器（选 $L_f$、$C_f$、$R_f$ 值）使：(i) 开关频率处滤波衰减至少 100 dB；(ii) 所有频率处滤波器输出阻抗 $Z_o(s)$ 幅值满足 $\|Z_o(j\omega)\| < 0.3\|Z_D(j\omega)\|$ 和 $\|Z_o(j\omega)\| < 0.3\|Z_N(j\omega)\|$。
+
+(c) 用 SPICE 仿真验证 (b) 设计的滤波器满足指标。
+
+(d) 用 SPICE 仿真绘制无输入滤波器和有 (b) 设计滤波器时变换器控制-输出幅值和相位响应。评论滤波器引入的变化。
+
+**17.5** 需用单 $L_f$-$C_f$ 节为图17.50 升压变换器设计输入滤波器。滤波器用与很大阻塞电容 $C_b$ 串联的电阻 $R_f$ 阻尼。
+
+(a) 画升压变换器 $Z_N(s)$ 和 $Z_D(s)$ 幅值波特图，标注所有显著特征。
+
+(b) 设计输入滤波器（选 $L_f$、$C_f$、$R_f$ 值）使：(i) 开关频率处滤波衰减至少 80 dB；(ii) 所有频率处 $\|Z_o(j\omega)\| < 0.2\|Z_D(j\omega)\|$、$\|Z_o(j\omega)\| < 0.2\|Z_N(j\omega)\|$。
+
+(c) 用 SPICE 仿真验证 (b) 设计的滤波器满足指标。
+
+(d) 用 SPICE 仿真绘制无输入滤波器和有 (b) 设计滤波器时变换器控制-输出幅值和相位响应。评论滤波器引入的变化。
+
+**17.6** 用 17.4.1 节最优滤波阻尼方法重复习题17.4 滤波器设计。求 $L_f$、$C_f$、$R_f$、$C_b$ 值。
+
+**17.7** 用 17.4.1 节最优滤波阻尼方法重复习题17.5 滤波器设计。求 $L_f$、$C_f$、$R_f$、$C_b$ 值。
+
+**17.8** 用 17.4.2 节最优 $R_f$-$L_b$ 并联阻尼方法重复习题17.4 滤波器设计。求 $L_f$、$C_f$、$R_f$、$L_b$ 值。
+
+**17.9** 用 17.4.2 节最优 $R_f$-$L_b$ 并联阻尼方法重复习题17.5 滤波器设计。求 $L_f$、$C_f$、$R_f$、$L_b$ 值。
+
+**17.10** 需用双滤波节为图17.32 反激变换器设计输入滤波器。每节用与阻塞电容串联的电阻阻尼。
+
+(a) 设计输入滤波器（选所有电路参数值）使：(i) 开关频率处滤波衰减至少 100 dB；(ii) 所有频率处 $\|Z_o(j\omega)\| < 0.3\|Z_D(j\omega)\|$ 和 $\|Z_o(j\omega)\| < 0.3\|Z_N(j\omega)\|$。
+
+(b) 用 SPICE 仿真验证 (a) 设计的滤波器满足指标。
+
+(c) 用 SPICE 仿真绘制无输入滤波器和有 (b) 设计滤波器时变换器控制-输出幅值和相位响应。评论滤波器引入的变化。
+
+**17.11** 考虑习题9.3 的升压电压稳压器。需为此电压稳压器设计输入滤波器。滤波器应为单 $L_f$-$C_f$ 节，用与电容 $C_b$ 串联的电阻 $R_f$ 最优阻尼。
+
+(a) 设计输入滤波器（选所有电路参数值）使：(i) 开关频率 $f_s = 200\text{ kHz}$ 处滤波衰减至少 80 dB；(ii) 所有频率处 $\|Z_o(j\omega)\| \le 0.4\|Z_D(j\omega)\|$ 和 $\|Z_o(j\omega)\| \le 0.4\|Z_N(j\omega)\|$。
+
+(b) 确定习题9.3 稳压器的闭环输入阻抗 $Z_i(s)$。通过分析小环路增益 $T_m(s) = Z_o(s)/Z_i(s)$（$Z_o(s)$ 为 (a) 设计输入滤波器输出阻抗）检验闭环系统稳定性。

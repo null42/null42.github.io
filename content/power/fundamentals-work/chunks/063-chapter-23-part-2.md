@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第23章part 2 - 23 Soft Switching"
+title: "第23章 软开关（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,976 +18,842 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第23章part 2 - 23 Soft Switching
+# 第23章 软开关（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 1012-1031  
-> Chunk ID: `chapter-23-part-2`
+## 23.2 零电流开关准谐振开关单元（续）
 
-## 主干提取
+![源页 p.1012](../assets/page-snapshots/chapter-23/page-1012.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+$$\mu = F P_1(J_s) \tag{23.57}$$
 
-## 术语表
+其中 $P_1(J_s)$ 为
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+$$P_1(J_s) = \frac{1}{2\pi}\left[ \frac{1}{2} J_s + 2\pi - \sin^{-1}(J_s) + \frac{1}{J_s}\left( 1 - \sqrt{1 - J_s^2} \right) \right] \tag{23.58}$$
 
-## 中文翻译
+全波情形，$P_1(J_s)$ 本质上与 $J_s$ 无关：
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$P_1(J_s) \approx 1 \tag{23.59}$$
 
-## 英文原文
+$P_1(J_s)$ 偏离 1 的最坏情况发生在 $J_s$ 趋于 1 时，$P_1(J_s)$ 趋于 0.96。故 $0 < J_s < 1$ 范围内 $P_1(J_s)$ 在 1 的 4% 以内。故全波情形下，开关变换比可很好近似为
 
-```text
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1015
-μ= FP1(Js) (23.57)
-where P1(Js) is given by
-P1(Js)= 1
-2π
-[1
-2 Js+ 2π−sin−1(Js)+ 1
-Js
-⎦
-1−
-√
-1−J2s
-)]
-(23.58)
-In the full-wave case, P1(Js) is essentially independent of Js:
-P1(Js)≈1 (23.59)
-The worst-case deviation of P1(Js) from 1 occurs as Js tends to 1, where P1(Js) tends to 0.96.
-So P1(Js) lies within 4% of unity for 0 < Js < 1. Hence, for the full-wave case, it is a good
-approximation to express the switch conversion ratio as
-μ≈F= fs
-f0
-(23.60)
-The full-wave quasi-resonant switch therefore exhibits voltage-source output characteristics,
-controllable by F. Equations describing the average waveforms of CCM PWM converters can
-be adapted to apply to full-wave ZCS quasi-resonant converters, simply by replacing the duty
-cycle d with the normalized switching frequency F. The conversion ratios of full-wave quasi-
-resonant converters exhibit negligible dependence on the load current.
-The variation of the switch conversion ratio μwith F and Js is plotted in Fig. 23.19.F o r
-a typical voltage regulator application, the range of switching-frequency variations is much
-smaller in the full wave mode than in the half-wave mode, because μdoes not depend on the
-load current. Variations in the load current do not induce the controller to signiﬁcantly change
-the switching frequency.Fig. 23.19 Characteristics of the
-full-wave ZCS quasi-resonant switch
-0 0.2 0.4 0.6 0.8 1
-0
-0.2
-0.4
-0.6
-0.8
-1
-μ
-Js
-ZCS boundary
-max F boundary
-F = 0.2 0.4 0.6 0.8
+$$\mu \approx F = \frac{f_s}{f_0} \tag{23.60}$$
 
-1016 23 Soft Switching
-23.3 Resonant Switch Topologies
-So far, we have considered the zero-current-switching quasi-resonant switch cell, illustrated
-in Fig. 23.20. The ideal SPST switch is realized using a voltage-bidirectional or current-
-bidirectional two-quadrant switch, to obtain half-wave or full-wave ZCS quasi-resonant switch
-networks, respectively.
-Fig. 23.20 Basic ZCS quasi-
-resonant switch cell
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Lr
-Cr
-ZCS quasi-resonant switch cell
-Switch network
-+
-v1r(t)
-i2r(t)
-D2
-SW
-The resonant elements Lr and Cr can be moved to several diﬀerent positions in the converter,
-without altering the basic switch properties. For example, Fig.23.21 illustrates connection of the
-resonant tank capacitor Cr between the cathode of diode D2, and the converter output or input
-terminals. Although this may change the dc component of the tank capacitor voltage, the ac
-components of the tank capacitor voltage waveform are unchanged. Also, the terminal voltage
-waveform v2(t) is unchanged. The voltages vg(t) and v(t) contain negligible high-frequency ac
-components, and hence the converter input and output terminal potentials can be considered to
-be at high-frequency ac ground.
-A test to determine the topology of a resonant switch network is to replace all low-frequency
-ﬁlter inductors with open circuits, and to replace all dc sources and low-frequency ﬁlter capac-
-itors with short circuits [ 343]. The elements of the resonant switch cell remain. In the case of
-the zero-current-switching quasi-resonant switch, the network of Fig. 23.22 is always obtained.
-It can be seen from Fig. 23.22 that diode D2 switches on and oﬀat the zero crossings of the
-tank capacitor voltage v2(t), while the switch elements Q1 and D1 switch at the zero crossings
-of the tank inductor current i1(t). Zero-voltage switching of diode D2 is highly advantageous,
-because it essentially eliminates the switching loss caused by the recovered charge and output
-capacitance of diodeD2. Zero-current switching ofQ1 and D1 can be used to advantage whenQ1
-is realized by an SCR or IGBT. However, in high-frequency converters employing MOSFETs,
-zero-current switching of Q1 and D1 is generally a poor choice. Signiﬁcant switching loss due
-to the output capacitances of Q1 and D1 may be observed. In addition, in the full-wave case,
-the recovered charge of diode D1 leads to signiﬁcant ringing and switching loss at the end of
-subinterval 2 [333].
-The ZCS quasi-resonant switch exhibits increased conduction loss, relative to an equivalent
-PWM switch, because the peak transistor current is increased. The peak transistor current is
-given by Eq. (23.17); since Js≤1, the peak current is I1pk≥2I2. In addition, the full-wave ZCS
-switch exhibits poor eﬃciency at light load, owing to the conduction loss caused by circulating
-tank currents. The half-wave ZCS switch exhibits additional conduction loss due to the added
+故全波准谐振开关表现出电压源输出特性，由 $F$ 控制。描述 CCM PWM 变换器平均波形的方程可通过将占空比 $d$ 替换为归一化开关频率 $F$ 适配到全波 ZCS 准谐振变换器。全波准谐振变换器的变换比对负载电流依赖可忽略。
 
-23.3 Resonant Switch Topologies 1017
+开关变换比 $\mu$ 随 $F$ 和 $J_s$ 的变化绘于图23.19。典型电压调节器应用中，全波模式开关频率变化范围比半波模式小得多，因 $\mu$ 不依赖负载电流。负载电流变化不诱导控制器显著改变开关频率。
+
+图23.19 全波 ZCS 准谐振开关的特性
+
+| 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 |
+|---|---|---|---|---|---|
+
+| 0 | | | | | |
+| 0.2 | | | | | |
+| 0.4 | | | | | |
+| 0.6 | | | | | |
+| 0.8 | | | | | |
+| 1 | | | | | |
+
+| | $\mu$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| | $J_s$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| ZCS 边界 | | | | | | |
+|---|---|---|---|---|---|---|
+
+| max $F$ 边界 | | | | | | |
+|---|---|---|---|---|---|---|
+
+| $F = 0.2$ | $0.4$ | $0.6$ | $0.8$ |
+|---|---|---|---|
+
+![源页 p.1013](../assets/page-snapshots/chapter-23/page-1013.png)
+
+## 23.3 谐振开关拓扑
+
+至此考虑了零电流开关准谐振开关单元，如图23.20。理想 SPST 开关用电压双向或电流双流通电双象限开关实现，分别得半波或全波 ZCS 准谐振开关网络。
+
+图23.20 基本准谐振 ZCS 开关单元
+
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$L_r$
+$C_r$
+ZCS 准谐振开关单元
+开关网络
+$+$
+$v_{1r}(t)$
+$i_{2r}(t)$
+$D_2$
+$SW$
+
+谐振元件 $L_r$ 和 $C_r$ 可移到变换器中几个不同位置，而不改变基本开关性质。例如，图23.21 说明了谐振槽电容 $C_r$ 连接在二极管 $D_2$ 阴极与变换器输出或输入端子之间。虽然这可能改变槽电容电压的直流分量，但槽电容电压波形的交流分量不变。端子电压波形 $v_2(t)$ 也不变。电压 $v_g(t)$ 和 $v(t)$ 含可忽略高频交流分量，故变换器输入和输出端子电位可视为高频交流地。
+
+确定谐振开关网络拓扑的测试是将所有低频滤波电感替换为开路，将所有直流源和低频滤波电容替换为短路 [343]。谐振开关单元的元件保留。零电流开关准谐振开关情形，总得到图23.22 网络。从图23.22 可见，二极管 $D_2$ 在槽电容电压 $v_2(t)$ 过零时开关，开关元件 $Q_1$ 和 $D_1$ 在槽电感电流 $i_1(t)$ 过零时开关。二极管 $D_2$ 零电压开关非常有利，因它实质上消除了 $D_2$ 恢复电荷和输出电容引起的开关损耗。$Q_1$ 和 $D_1$ 的零电流开关在 $Q_1$ 用 SCR 或 IGBT 实现时有优势。但在采用 MOSFET 的高频变换器中，$Q_1$ 和 $D_1$ 零电流开关通常是不良选择。$Q_1$ 和 $D_1$ 输出电容可引起显著开关损耗。此外，全波情形中，二极管 $D_1$ 的恢复电荷导致子区间2 结束时的显著振铃和开关损耗 [333]。
+
+ZCS 准谐振开关表现出比等效 PWM 开关增加的导通损耗，因峰值晶体管电流增大。峰值晶体管电流由式(23.17) 给出；由于 $J_s \le 1$，峰值电流 $I_{1\,pk} \ge 2 I_2$。此外，全波 ZCS 开关轻载时因循环槽电流引起的导通损耗而效率差。半波 ZCS 开关因二极管 $D_1$ 的附加
+
+![源页 p.1014](../assets/page-snapshots/chapter-23/page-1014.png)
+
 (a)
-+
-v2(t)
-i1(t) i2(t)
-Vg
-Lr
-Cr
-ZCS quasi-resonant switch
-D2
-SW
-+
-L
-C R
-+
-V
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$V_g$
+$L_r$
+$C_r$
+ZCS 准谐振开关
+$D_2$
+$SW$
+$+$
+$L$
+$C$
+$R$
+$+$
+$V$
+
 (b)
-+
-v2(t)
-i1(t) i2(t)
-Vg
-Lr
-Cr
-ZCS quasi-resonant switch
-D2
-SW
-+
-L
-C R
-+
-V
-Fig. 23.21 Connection of the tank capacitor of the ZCS quasi-resonant cell to other points at ac ground:
-(a) connection to the dc output, ( b) connection to the dc input. In each case, the ac components of the
-waveforms are unchanged
-Fig. 23.22 Elimination of converter
-low-frequency elements causes the
-ZCS quasi-resonant switch cell to re-
-duce to this network
-+
-v2(t)
-i1(t)
-Lr
-CrD2
-SW
-forward voltage drop of diode D1. The peak transistor voltage is V1, which is identical to the
-PWM case.
-23.3.1 The Zero-Voltage-Switching Quasi-Resonant Switch
-The resonant switch network illustrated in Fig. 23.23 is the dual of the network of Fig. 23.22.
-This network is known as the zero-voltage-switching quasi-resonant switch [ 334]. Since the
-tank capacitor Cr appears in parallel with the SPST switch, the elements Q1 and D1 used to
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$V_g$
+$L_r$
+$C_r$
+ZCS 准谐振开关
+$D_2$
+$SW$
+$+$
+$L$
+$C$
+$R$
+$+$
+$V$
 
-1018 23 Soft Switching
-realize the SPST switch turn on and oﬀat zero voltage. The tank inductor Lr is eﬀectively in
-series with diode D2, and hence diode D2 switches at zero current. Converters containing ZVS
-quasi-resonant switches can be realized in a number of ways. The only requirement is that,
-when the low-frequency ﬁlter inductors, ﬁlter capacitors, and sources are replaced by open-or
-short circuits as described above, then the high-frequency switch network of Fig. 23.23 should
-remain.
-For example, a zero-voltage-switching quasi-resonant buck converter is illustrated in
-Fig. 23.24a. Typical tank capacitor voltage and tank inductor current waveforms are given in
-Fig. 23.24b. A current-bidirectional realization of the two-quadrant SPST switch is shown; this
-causes the ZVS quasi-resonant switch to operate in the half-wave mode. Use of a voltage-
-bidirectional two-quadrant SPST switch allows full-wave operation.
-By analysis similar to that of Sect. 23.2, it can be shown that the switch conversion ratioμ
-of the half-wave ZVS quasi-resonant switch is
-μ= 1−FP
-1
-2
-⎦1
-Js
-)
-(23.61)
-The function P1
-2
-(Js) is again given by Eq. (23.46), and the quantity Js is deﬁned in Eq. (23.44).
-For the full-wave ZVS quasi-resonant switch, one obtains
-μ= 1−FP1
-⎦1
-Js
-)
-(23.62)
-where P1(Js) is given by Eq. (23.58). The condition for zero-voltage switching is
-Js≥1 (23.63)
-Thus, the zero-voltage switching property is lost at light load. The peak transistor voltage is
-given by
-peak transistor voltage Vcr,pk= (1+ Js)V1 (23.64)
-This equation predicts that load current variations can lead to large voltage stress on transistor
-Q1. For example, if it is desired to obtain zero-voltage switching over a 5:1 range of load current
-variations, then Js should vary between 1 and 5. According to Eq. ( 23.64), the peak transistor
-voltage then varies between two times and six times the applied voltage V1. The maximum
-transistor current is equal to the applied current I2. Although the maximum transistor current
-in the ZVS quasi-resonant switch is identical to that of the PWM switch, the peak transistor
-blocking voltage is substantially increased. This leads to increased conduction loss, because
-transistor on-resistance increases rapidly with rated blocking voltage.
-Fig. 23.23 Elimination of converter low-frequency
-elements reduces the ZVS quasi-resonant switch cell
-to this network Lr
-Cr
-D2
-SW
+图23.21 ZCS 准谐振单元槽电容连接到其他交流接地点：(a) 连接到直流输出，(b) 连接到直流输入。每种情形波形的交流分量不变
 
-23.3 Resonant Switch Topologies 1019
+图23.22 消除变换器低频元件使 ZCS 准谐振开关单元简化为此网络
+
+$+$
+$v_2(t)$
+$i_1(t)$
+$L_r$
+$C_r$
+$D_2$
+$SW$
+
+正向压降而有附加导通损耗。峰值晶体管电压为 $V_1$，与 PWM 情形相同。
+
+### 23.3.1 零电压开关准谐振开关
+
+图23.23 所示谐振开关网络是图23.22 网络的对偶。此网络称为零电压开关准谐振开关 [334]。由于槽电容 $C_r$ 与 SPST 开关并联，实现 SPST 开关的元件 $Q_1$ 和 $D_1$ 零电压开通和关断。槽电感 $L_r$ 实际与二极管 $D_2$ 串联，故二极管 $D_2$ 零电流开关。含 ZVS 准谐振开关的变换器可用多种方式实现。唯一要求是，当上述低频滤波电感、滤波电容和源替换为开路或短路时，图23.23 的高频开关网络应保留。
+
+![源页 p.1015](../assets/page-snapshots/chapter-23/page-1015.png)
+
+例如，零电压开关准谐振降压变换器如图23.24a。典型槽电容电压和槽电感电流波形如图23.24b。所示为电流双流通电双象限 SPST 开关实现；这使 ZVS 准谐振开关半波模式工作。用电压双向双象限 SPST 开关可实现全波工作。
+
+用类似于23.2 节的分析可证，半波 ZVS 准谐振开关的开关变换比 $\mu$ 为
+
+$$\mu = 1 - F P_{\frac{1}{2}}\left( \frac{1}{J_s} \right) \tag{23.61}$$
+
+函数 $P_{\frac{1}{2}}(J_s)$ 再次由式(23.46) 给出，量 $J_s$ 由式(23.44) 定义。全波 ZVS 准谐振开关情形，得
+
+$$\mu = 1 - F P_1\left( \frac{1}{J_s} \right) \tag{23.62}$$
+
+其中 $P_1(J_s)$ 由式(23.58) 给出。零电压开关条件为
+
+$$J_s \ge 1 \tag{23.63}$$
+
+故零电压开关性质轻载时失去。峰值晶体管电压为
+
+峰值晶体管电压 $V_{cr,pk} = (1 + J_s) V_1 \tag{23.64}$
+
+此式预测负载电流变化可导致晶体管 $Q_1$ 上大电压应力。例如，若期望在 5:1 负载电流变化范围内获得零电压开关，则 $J_s$ 应在 1 和 5 之间变化。根据式(23.64)，峰值晶体管电压在施加电压 $V_1$ 的 2 倍到 6 倍之间变化。最大晶体管电流等于施加电流 $I_2$。虽然 ZVS 准谐振开关的最大晶体管电流与 PWM 开关相同，但峰值晶体管阻断电压显著增大。这导致导通损耗增加，因晶体管导通电阻随额定阻断电压快速增大。
+
+图23.23 消除变换器低频元件使 ZVS 准谐振开关单元简化为此网络
+
+$L_r$
+$C_r$
+$D_2$
+$SW$
+
+![源页 p.1016](../assets/page-snapshots/chapter-23/page-1016.png)
+
 (a)
-Lr
-Cr
-D2
-+
-L
-CR
-+
-VVg
-I
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-+ vCr(t)
-iLr(t)
-D1
-Q1
+$L_r$
+$C_r$
+$D_2$
+$+$
+$L$
+$C$
+$R$
+$+$
+$V$
+$V_g$
+$I$
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$+$
+$v_{Cr}(t)$
+$i_{Lr}(t)$
+$D_1$
+$Q_1$
+
 (b)
- = 0t
-vCr(t)
-V1
-iLr(t) I2
-Subinterval: 12 3 4
-Conducting
-devices: Q1
-D2
-Q1D1
-D2
-X
-0Ts
-Fig. 23.24 A ZVS quasi-resonant buck converter: (a) circuit, (b) tank waveforms
-23.3.2 The Zero-Voltage-Switching Multiresonant Switch
-The resonant switch network of Fig. 23.25 contains tank capacitor Cd in parallel with diode D2,
-as in the ZCS switch network of Fig.23.22. In addition, it contains tank capacitor Cs in parallel
-with the SPST switch, as in the ZVS switch network of Fig.23.23. In consequence, all semicon-
-ductor elements switch at zero voltage. This three-element resonant switch network is known as
-the zero-voltage-switching multiresonant switch (ZVS MRS). Since no semiconductor output
-capacitances or diode recovered charges lead to ringing or switching loss, the ZVS MRS ex-
-hibits very low switching loss. For the same reason, generation of electromagnetic interference
-is reduced.
-A half-wave ZVS MRS realization of the buck converter is illustrated in Fig. 23.26.I na
-typical design that must operate over a 5:1 load range and with 0 .4≤μ≤0.6, the designer
-might choose a maximum F of 1.0, a maximum J of 1.4, and C
-d/Cs= 3, where these quantities
-are deﬁned as follows:
+$\xi = 0$
+$t$
+$v_{Cr}(t)$
+$V_1$
+$i_{Lr}(t)$
+$I_2$
+子区间：1 2 3 4
+导通器件：$Q_1$
+$D_2$
+$Q_1$ $D_1$
+$D_2$
+$X$
+$0$
+$T_s$
 
-1020 23 Soft Switching
-Fig. 23.25 Elimination of converter low-frequency
-elements reduces the ZVS multiresonant switch cell
-to this network Lr
-Cs
-D2
-SW
-Cd
-Lr
-D2
-+
-L
-CR
-+
-VVg
-I
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t) Cd
-Cs
-D1
-Q1
-Fig. 23.26 Half-wave ZVS multiresonant buck converter
-f0= 1
-2π√LCt
-R0=
-√
-L
-Ct
-F= fs
-f0
-J= I2R0
-V1
-(23.65)
-As usual, the conversion ratio is deﬁned as μ= V2/V1. The resulting peak transistor voltage
-for this typical design is approximately 2.8 V1, while the peak transistor current is 2 I2. Hence,
-conduction losses are higher than in an equivalent PWM switch. The range of switch conversion
-ratiosμis a function of the capacitor ratio Cd/Cs; in a good design, values of μranging from
-nearly one to nearly zero can be obtained, with a wide range of dc load currents and while
-maintaining zero-voltage switching.
-Analysis and design charts for the ZVS MRS are given in [335–338]. Results for the typical
-choice Cd= 3Cs are plotted in Fig.23.27. These plots illustrate how the switch conversion ratio
-μvaries as a function of load current and switching frequency. Figure 23.27a also illustrates
-the boundary of zero-voltage switching: ZVS is lost for operation outside the dashed lines.
-Decreasing the ratio of C
-d to Cs reduces the area of the ZVS region.
-Other resonant converters in which all semiconductor devices operate with zero-voltage
-switching are known. Examples include some operating modes of the parallel and LCC resonant
-converters described in Chap.22, as well as the class-E converters described in [340–342].
-23.3.3 Quasi-Square-Wave Resonant Switches
-Another basic class of resonant switch networks is the quasi-square wave converters. Both zero-
-voltage switching and zero-current switching versions are known; the resonant tank networks
+图23.24 ZVS 准谐振降压变换器：(a) 电路，(b) 槽波形
 
-23.3 Resonant Switch Topologies 1021
+### 23.3.2 零电压开关多谐振开关
+
+图23.25 的谐振开关网络含与二极管 $D_2$ 并联的槽电容 $C_d$，如图23.22 ZCS 开关网络。此外，它含与 SPST 开关并联的槽电容 $C_s$，如图23.23 ZVS 开关网络。结果，所有半导体元件零电压开关。此三元件谐振开关网络称为零电压开关多谐振开关（ZVS MRS）。由于无半导体输出电容或二极管恢复电荷导致振铃或开关损耗，ZVS MRS 开关损耗很低。同理，电磁干扰产生减少。
+
+降压变换器的半波 ZVS MRS 实现如图23.26。须在 5:1 负载范围和 $0.4 \le \mu \le 0.6$ 下工作的典型设计中，设计者可能选最大 $F$ 为 1.0、最大 $J$ 为 1.4、$C_d/C_s = 3$，这些量定义如下：
+
+![源页 p.1017](../assets/page-snapshots/chapter-23/page-1017.png)
+
+图23.25 消除变换器低频元件使 ZVS 多谐振开关单元简化为此网络
+
+$L_r$
+$C_s$
+$D_2$
+$SW$
+$C_d$
+
+$L_r$
+$D_2$
+$+$
+$L$
+$C$
+$R$
+$+$
+$V$
+$V_g$
+$I$
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$C_d$
+$C_s$
+$D_1$
+$Q_1$
+
+图23.26 半波 ZVS 多谐振降压变换器
+
+$$f_0 = \frac{1}{2\pi\sqrt{L C_t}}$$
+
+$$R_0 = \sqrt{\frac{L}{C_t}}$$
+
+$$F = \frac{f_s}{f_0}$$
+
+$$J = \frac{I_2 R_0}{V_1} \tag{23.65}$$
+
+如常，变换比定义为 $\mu = V_2/V_1$。此典型设计所得峰值晶体管电压约 $2.8 V_1$，峰值晶体管电流为 $2 I_2$。故导通损耗比等效 PWM 开关高。开关变换比 $\mu$ 的范围是电容比 $C_d/C_s$ 的函数；在良好设计中，可获得从近 1 到近 0 的 $\mu$ 值，直流负载电流范围宽且保持零电压开关。
+
+ZVS MRS 的分析和设计图表见 [335–338]。典型选择 $C_d = 3 C_s$ 的结果绘于图23.27。这些图说明开关变换比 $\mu$ 如何随负载电流和开关频率变化。图23.27a 还说明了零电压开关边界：虚线外失去 ZVS。降低 $C_d$ 与 $C_s$ 之比减小 ZVS 区域面积。
+
+所有半导体器件零电压开关工作的其他谐振变换器已知。示例包括第22章描述的并联和 LCC 谐振变换器的某些工作模式，以及 [340–342] 描述的 E 类变换器。
+
+### 23.3.3 准方波谐振开关
+
+另一基本类谐振开关网络是准方波变换器。零电压开关和零电流开关版本均已知；谐振槽网络
+
+![源页 p.1018](../assets/page-snapshots/chapter-23/page-1018.png)
+
 (a)
-F = 0.6
-0.7
-J
-μ
-0.8
-0.91.0
-1.1
-1.00.5 1.5 2.0 2.5
-1.0
-0.5
-0
-(b)
-J = 0.0
-0.5
-F
-μ
-1.0
-1.52.0
-2.5
-1.00.5 1.5 2.0 2.5
-1.0
-0.5
-0
-Fig. 23.27 Conversion ratioμfor the multiresonant switch with Cd = 3Cs:( a) conversion ratioμvs.
-normalized current J (solid lines: conversion ratio; dashed lines: boundaries of zero-voltage switching),
-(b) conversion ratioμvs. normalized switching frequency F
+$F = 0.6$
+$0.7$
+$J$
+$\mu$
+$0.8$
+$0.9$
+$1.0$
+$1.1$
+$1.0$
+$0.5$
+$1.5$
+$2.0$
+$2.5$
+$1.0$
+$0.5$
+$0$
 
-1022 23 Soft Switching
+(b)
+$J = 0.0$
+$0.5$
+$F$
+$\mu$
+$1.0$
+$1.5$
+$2.0$
+$2.5$
+$1.0$
+$0.5$
+$1.5$
+$2.0$
+$2.5$
+$1.0$
+$0.5$
+$0$
+
+图23.27 $C_d = 3 C_s$ 时多谐振开关的变换比 $\mu$：(a) 变换比 $\mu$ 与归一化电流 $J$ 的关系（实线：变换比；虚线：零电压开关边界），(b) 变换比 $\mu$ 与归一化开关频率 $F$ 的关系
+
+![源页 p.1019](../assets/page-snapshots/chapter-23/page-1019.png)
+
 (a)
-Lr Cr
-D2
-SW
+$L_r$
+$C_r$
+$D_2$
+$SW$
+
 (b)
-Lr Cr D2
-SW
-Fig. 23.28 Elimination of converter low-frequency elements reduces the quasi-resonant switch cells to
-these networks: (a) ZCS quasi-square-wave network, (b) ZVS quasi-square-wave network
-+
-Lr
-Cr
-Vg
-Cf
-Lf D1
-D2
-Q1 L
-CR
-+
-V
-I
-Fig. 23.29 Incorporation of a ZCS quasi-square-wave resonant switch into a buck converter containing
-an L–C input ﬁlter
-are illustrated in Fig. 23.28. In the network of Fig. 23.28a, all semiconductor devices are ef-
-fectively in series with the tank inductor, and hence operate with zero-current switching. In
-the network of Fig. 23.28b, all semiconductor devices are eﬀectively in parallel with the tank
-capacitor, and hence operate with zero-voltage switching.
-Figure 23.29 illustrates implementation of a zero current switching quasi-square wave res-
-onant switch, in a buck converter with input ﬁlter. Elements Lf and C f are large in value, and
-constitute a single-section L–C input ﬁlter. Elements Lr and Cr form the series resonant tank;
-these elements are placed in series with input ﬁlter capacitorC f . Since Cr and C f are connected
-in series, they can be combined into a single small-value capacitor. In this zero-current switching
-converter, the peak transistor current is identical to the peak transistor current of an equivalent
-PWM converter. However, the peak transistor blocking voltage is increased. The ZCS QSW
-resonant switch exhibits a switch conversion ratioμthat is restricted to the range 0 ≤μ≤0.5.
-Analysis of this resonant switch is given in [343, 344].
-A buck converter, containing a zero-voltage-switching quasi-square wave (ZVS QSW) res-
-onant switch, is illustrated in Fig. 23.30. Typical waveforms are given in Fig. 23.31. Since the
-tank inductor L
-r and the output ﬁlter inductor L are connected in parallel, these two elements
-can be combined into a single inductor having a small value nearly equal to Lr. Analyses of
-the ZVS QSW resonant switch are given in [ 70, 344, 345]. A related full-bridge converter is
-described in [328]. The ZVS QSW resonant switch is notable because zero-voltage switching
-is obtained in all semiconductor devices, yet the peak transistor voltage is identical to that of an
-equivalent PWM switch [343]. However, the peak transistor currents are increased.
-Characteristics of the zero-voltage-switching quasi-square wave resonant switch are plotted
-in Fig. 23.32. The switch conversion ratio μ= V
-2/V1 is plotted as a function of normalized
-switching frequency F and normalized output current J, where these quantities are deﬁned as
+$L_r$
+$C_r$
+$D_2$
+$SW$
 
-23.3 Resonant Switch Topologies 1023
-+ CrVg
-D1
-D2
-Q1
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Lr
-L
-CR
-+
-V
-I
-Fig. 23.30 Incorporation of a ZVS quasi-square-wave resonant switch into a buck converter
-Fig. 23.31 Waveforms of the ZVS quasi-
-square-wave resonant switch converter of
-Fig. 23.30
-V1
-Lr
-V2
-Lr
-0Ts
-i2(t)
-v2(t) V1
-0t
-0
-Conducting
-devices: D2X XQ1D1
-follows:
-f0= 1
-2π√LrCr
-R0=
-√
-Lr
-Cr
-(23.66)
-F= fs
-f0
-J= I2R0
-V1
-In addition, the zero-voltage-switching boundary is plotted. It can be seen that the requirement
-for zero-voltage switching limits the switch conversion ratio μto the range 0.5≤μ≤1. In
-consequence, the buck converter of Fig. 23.30 cannot produce output voltages less than 0.5Vg
-without losing the ZVS property. A version which attains 0≤μ≤1, at the expense of increased
-transistor voltage stress, is described in [ 346]. In addition, the two-switch version of the ZVS
-QSW switch can operate with ZVS forμ<0.5.
-A useful variant of the converter of Fig. 23.30 involves replacement of the diode with a
-synchronous rectiﬁer, as illustrated in Fig.23.33 [338, 339]. The second transistor introduces an
-additional degree of freedom in control of the converter, because this transistor can be allowed
-to conduct longer than the diode would otherwise conduct. This fact can be used to extend the
-region of zero-voltage switching to conversion ratios approaching zero, and also to operate the
-converter with constant switching frequency.
+图23.28 消除变换器低频元件使准谐振开关单元简化为这些网络：(a) ZCS 准方波网络，(b) ZVS 准方波网络
 
-1024 23 Soft Switching
-J = 00.5135
-μ
-F
-1.0
-0.5
-0.5 1.0
-Fig. 23.32 Characteristics of the ZVS quasi-square-wave resonant switch network: switch conversion
-ratioμ, as a function of F and J. Dashed line: ZVS boundary
-+ CrVg
-D1
-D2Q1
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Lr
-CR
-+
-V
-I
-Q2
-Fig. 23.33 Quasi-square-wave ZVS buck converter containing a synchronous rectiﬁer
-Typical tank element waveforms for the circuit of Fig. 23.33 are illustrated in Fig. 23.34.
-These waveforms resemble those of the single switch case, Fig. 23.31, except that the tank
-current is negative while transistor Q2 conducts. The duty cycle D is deﬁned with respect to the
-turn-oﬀtransitions of transistors Q1 and Q2, as illustrated.
-Characteristics of the two-switch QSW-ZVS switch network are plotted in Fig. 23.35,f o r
-the case of constant switching frequency at F= 0.5. The boundary of zero-voltage switching
-is also illustrated. Operation at a lower value of F causes the ZVS boundary to be extended to
-larger values of J, and to values ofμthat more closely approach the extreme valuesμ= 0 and
-μ= 1.
-To the extent that the commutation intervals can be neglected, one would expect that the
-switch conversion ratioμis simply equal to the duty cycleD. It can be seen from Fig.23.35 that
-this is indeed the case. The characteristics are approximately horizontal lines, nearly indepen-
-dent of load current J.
+$+$
+$L_r$
+$C_r$
+$V_g$
+$C_f$
+$L_f$
+$D_1$
+$D_2$
+$Q_1$
+$L$
+$C$
+$R$
+$+$
+$V$
+$I$
 
-23.4 Soft Switching in PWM Converters 1025
-Fig. 23.34 Waveforms for the two-
-switch QSW-ZVS converter of Fig.23.33
-V1
-Lr
-V2
-Lr
-0Ts
-i2(t)
-v2(t) V1
-0t
-0
-Conducting
-devices: D2X XQ1D1 Q2
-D 0Ts
-Zero-voltage switching quasi-square wave converters exhibit very low switching loss, be-
-cause all semiconductor elements operate with zero-voltage switching. In the constant-frequency
-case containing a synchronous rectiﬁer, the converter behavior is nearly the same as for the
-hard-switched PWM case, since μ≈D. The major disadvantage is the increased conduction
-loss, caused by the reversal of the inductor current.
-23.4 Soft Switching in PWM Converters
-The quasi-square wave approach of the previous section is notable because it attains zero-
-voltage switching without increasing the peak voltage applied to the transistor. Several related
-soft-switching approaches have now become popular, which also attain zero-voltage switching
-without increasing the transistor peak voltage stress. In this section, popular zero-voltage switch-
-ing versions of the full bridge, forward, and ﬂyback converters, as well as the voltage-source
-inverter, are brieﬂy discussed.
-23.4.1 The Zero-Voltage Transition Full-Bridge Converter
-It is possible to obtain soft switching in other types of converters as well. An example is the zero-
-voltage transition (ZVT) converter based on the full-bridge transformer-isolated buck converter,
-illustrated in Fig.23.36 [324–327]. The transistor and diode output capacitances are represented
-in the ﬁgure by capacitances C
-leg. Commutating inductor Lc is placed in series with the trans-
-former; the net inductance Lc includes both transformer leakage inductance and the inductance
-of an additional discrete element. This inductor causes the full-bridge switch network to drive
-an eﬀective inductive load, and results in zero-voltage switching of the primary-side semicon-
-ductor devices. Although the waveforms are not sinusoidal, it can nonetheless be said that the
-switch network output current ic(t) lags the voltage vs(t), because the zero crossings of ic(t)
-occur after the ZVS switching transitions are completed.
-The output voltage is controlled via phase control. As illustrated in Fig. 23.37, both halves
-of the bridge switch network operate with a 50% duty cycle, and the phase diﬀerence between
-the half-bridge switch networks is controlled. The idealized waveforms of Fig. 23.37 neglect
+图23.29 将 ZCS 准方波谐振开关纳入含 L–C 输入滤波器的降压变换器
 
-1026 23 Soft Switching
-D = 0.8
-0.7
-J
-μ
-0.6
-0.5
-0.3
-0.2
-1.0
-0.5
-0
-F = 0.5
-8.06.02.0 0.4
-0.4
-Fig. 23.35 Conversion ratioμ, as a function of duty cycle D and normalized load current J, for the two-
-switch QSW-ZVS converter illustrated in Fig. 23.33. Curves are plotted for constant-frequency control
-with F= 0.5. The dashed line is the zero-voltage switching boundary
-the switching transitions, and the subinterval numbers correspond to those of the more detailed
-Fig. 23.38. The phase-shift variable φlies in the range 0≤φ≤1, and assumes the role of the
-duty cycle d in this converter. The quantityφis deﬁned as
-φ= (t1−t0)⎦Ts
-2
-) (23.67)
-By volt-second balance on the secondary-side ﬁlter inductor, the conversion ratio M(φ)i se x -
-pressed as
-M(φ)= V
-Vg
-= nφ (23.68)
-This expression neglects the lengths of the switching transitions.
-ic(t) Lc
-+Vg
-Q1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-+
-v2(t)
-Cleg1
-Cleg2 Cleg4
-Cleg3
-+
-v4(t)
-+
-vs(t)
-D5
-D6
-I1 : n
-: n
-+
-V
-ig(t)
-Fig. 23.36 Zero-voltage transition converter, based on the full-bridge isolated buck converter
+如图23.28。图23.28a 网络中，所有半导体器件实际与槽电感串联，故零电流开关工作。图23.28b 网络中，所有半导体器件实际与槽电容并联，故零电压开关工作。
 
-23.4 Soft Switching in PWM Converters 1027
-v2(t)
-v4(t)
-vs(t)
-ig(t)
-Vg
-Vg
-Vg
-g
-nI
-00
-0 0
-00
-Conducting
-devices: Q4 D3 Q3D4
-Q2 Q1 Q1 Q2 Q2
-Subinterval: 04 6 1 0 0 t
-Ts/2
-Ts/2
-Ts
-Ts/2 Ts/2
-0
-D4
-)Ts/2
-Fig. 23.37 Phase-shift control of the ZVT full-bridge converter. Switching transitions are neglected in
-this ﬁgure, and subinterval numbering follows Fig.23.38
-Although the circuit appears symmetrical, the phase-shift control scheme introduces an
-asymmetry that causes the two half-bridge switch networks to behave quite di ﬀerently dur-
-ing the switching transitions. During subintervals 4 and 10, energy is actively transmitted from
-the source Vg through the switches and transformer. These subintervals are initiated by the
-switching of the half-bridge network composed of the elements Q1, D1, Q2, and D2, called the
-“passive-to-active” (P-A) transition [326]. Subintervals 4 and 10 are terminated by the switching
-of the half-bridge network comprised by the elements Q3, D3, Q4, and D4, called the “active-
-to-passive” (A–P) transition.
-The turn-on and turn-oﬀswitching processes of this converter are similar to the zero-voltage-
-switching turn-oﬀprocess described in the previous section. Detailed primary-side waveforms
-are illustrated in Fig. 23.38. During subinterval 0, Q2 and D4 conduct. If the transformer mag-
-netizing current iM is negligible, then the commutating inductor current is given byic(t0)=−nI,
-where I is the load current. The passive-to-active transition is initiated when transistor Q2 is
-turned oﬀ. The negativeic then causes capacitors Cleg1 and Cleg2 to charge, increasing v2(t). Dur-
-ing subinterval 1, Lc, Cleg1, and Cleg2 form a resonant network that rings with approximately
-sinusoidal waveforms. If suﬃcient energy was initially stored inLc, then v2(t) eventually reaches
-Vg, terminating subinterval 1. Diode D1 then clamps v2(t)t o Vg during subinterval 2. Transistor
+图23.29 说明了零电流开关准方波谐振开关在含输入滤波器降压变换器中的实现。元件 $L_f$ 和 $C_f$ 数值大，构成单节 L–C 输入滤波器。元件 $L_r$ 和 $C_r$ 构成串联谐振槽；这些元件与输入滤波电容 $C_f$ 串联放置。由于 $C_r$ 和 $C_f$ 串联，可合并为单个小值电容。此零电流开关变换器中，峰值晶体管电流与等效 PWM 变换器的峰值晶体管电流相同。但峰值晶体管阻断电压增大。ZCS QSW 谐振开关的开关变换比 $\mu$ 限于 $0 \le \mu \le 0.5$ 范围。
 
-1028 23 Soft Switching
-Q1 is turned on at zero voltage during subinterval 2; in practice, this is implemented by insertion
-of a small delay between the switching transitions of transistors Q2 and Q1.
-If Lc does not initially store suﬃcient energy to charge the total capacitance ( Cleg1+ Cleg2)
-from v2= 0t o v2= Vg during subinterval 1, then v2(t) will never reach Vg. Switching loss will
-then occur when transistor Q1 is turned on. This situation typically occurs at light load, where
-I is small. Sometimes, the design engineer may choose to simply accept this power loss; after
-all, other losses such as conduction loss are small at light load. An alternative is to modify the
-circuit to increase the energy stored in L
-c at t= t0 under light load conditions. One way to
-accomplish this is to increase the transformer magnetizing current iM(t0) to a signiﬁcant level;
-at the beginning of subinterval 1, ic is then equal to ic(t0)=−nI+ iM(t0) with iM(t0)< 0. At
-light load where I is small, the magnetizing current maintains the required level of ic.
-During subintervals 0, 1, 2, and 3, secondary-side diodes D5 and D6 both conduct; hence,
-zero voltage appears across all transformer windings. In consequence, voltage Vg is applied to
-commutating inductor Lc during subintervals 2 and 3, causingic(t) to increase with slope Vg/Lc.
-Current ic(t) reaches zero at the end of subinterval 2, and increases to the positive value+nI at
-the end of subinterval 3. The reversal of polarity of ic(t) enables zero-voltage switching during
-the next switching transitions, subinterval 5 and subintervals 7–9.
-At the end of subinterval 3, the current in diode D6 has decreased to zero. D6 then becomes
-reverse-biased, with zero-current switching. At this instant, diode D6 must begin to block volt-
-age 2nVg. The output capacitance of D6 prevents the voltage from changing immediately to
-2nVg; instead, the resonant circuit formed by Lc and the D6 output capacitance begins to ring
-in a manner similar to Fig. 4.76. Peak D6 voltages are typically observed that are consider-
-ably in excess of 2 nVg, and it is usually necessary to add voltage-clamp snubbers that prevent
-the secondary-side diode voltages from exceeding a safe value. Several dissipative and non-
-dissipative approaches are discussed in [325–327].
-The active-to-passive switching transition occurs during subinterval 5. This subinterval is
-initiated when transistor Q
-4 is turned oﬀ. The positive currentic(t1) is equal to the reﬂected load
-current nI, and charges capacitors Cleg3 and Cleg4 from v4 = 0t o v4 = Vg. Subinterval 5 ends
-when v4 reaches Vg; Diode D3 then becomes forward-biased. Transistor Q3 is then turned on
-during subinterval 6, with zero-voltage switching. This is typically implemented by insertion of
-a small delay between the switching of transistors Q
-4 and Q3. Because ic is constant and equal
-to nI during subinterval 5, the active-to-passive transition maintains zero-voltage switching at
-all load currents.
-Circuit behavior during the next half switching period, comprising subintervals 6 to 11,
-is symmetrical and therefore similar to the behavior observed during subintervals 0 to 5. The
-switching transitions of transistors Q
-1 and Q2 are passive-to-active transitions, and occur with
-zero-voltage switching provided that suﬃcient energy is stored in Lc as described above. The
-switching transitions of Q3 and Q4 are active-to-passive, and occur with zero-voltage switching
-at all loads.
-The zero-voltage transition converter exhibits low primary-side switching loss and gener-
-ated EMI. Conduction loss is increased with respect to an ideal PWM full-bridge topology,
-because of the current i
-c that circulates through the primary-side semiconductors during subin-
-tervals 0 and 6. However, this increase in conduction loss can be small if the range of input
-voltage variations is narrow. This soft-switching approach has now found commercial success.
+此谐振开关的分析见 [343, 344]。
 
-23.4 Soft Switching in PWM Converters 1029
-g/Lc
-v2(t)
-v4(t)
-vs(t)
-ic(t)
-Vg
-Vg
-Vg
-g
-nI
-Vg/Lc
-00
-00
-00 0
-nI
-/2Cleg
-nI/2Cleg
-Conducting
-devices: D4 D4 D4 Q4 X D3 D3 D3 Q3 X D4
-Q2 D1X Q1 Q1 Q1 X D2 Q2 Q2 Q2
-D5
-D6
-D5 D5
-D6 D6 D6
-D5 D5 D5
-D6 D6 D6
-D5 D5 D5
-D6 D6
-D5
-D6
-D5
-D6XX
-XX
-Subinterval: 01 2 3 4 5 6 7 8 91 01 1 0
-t
-} Active
-} Passive
+含零电压开关准方波（ZVS QSW）谐振开关的降压变换器如图23.30。典型波形如图23.31。由于槽电感 $L_r$ 和输出滤波电感 $L$ 并联，这两个元件可合并为单个电感，其值近 $L_r$。ZVS QSW 谐振开关的分析见 [70, 344, 345]。相关全桥变换器见 [328]。ZVS QSW 谐振开关值得注意，因所有半导体器件获得零电压开关，但峰值晶体管电压与等效 PWM 开关相同 [343]。但峰值晶体管电流增大。
+
+零电压开关准方波谐振开关的特性绘于图23.32。开关变换比 $\mu = V_2/V_1$ 作为归一化开关频率 $F$ 和归一化输出电流 $J$ 的函数绘制，这些量定义为
+
+![源页 p.1020](../assets/page-snapshots/chapter-23/page-1020.png)
+
+$+$
+$C_r$
+$V_g$
+$D_1$
+$D_2$
+$Q_1$
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$L_r$
+$L$
+$C$
+$R$
+$+$
+$V$
+$I$
+
+图23.30 将 ZVS 准方波谐振开关纳入降压变换器
+
+图23.31 图23.30 ZVS 准方波谐振开关变换器的波形
+
+$V_1$
+$L_r$
+$V_2$
+$L_r$
+$0$
+$T_s$
+$i_2(t)$
+$v_2(t)$
+$V_1$
+$0$
+$t$
+$0$
+导通器件：$D_2$ $X$ $X$ $Q_1$ $D_1$
+
+$$f_0 = \frac{1}{2\pi\sqrt{L_r C_r}}$$
+
+$$R_0 = \sqrt{\frac{L_r}{C_r}} \tag{23.66}$$
+
+$$F = \frac{f_s}{f_0}$$
+
+$$J = \frac{I_2 R_0}{V_1}$$
+
+此外还绘出了零电压开关边界。可见零电压开关要求将开关变换比 $\mu$ 限于 $0.5 \le \mu \le 1$ 范围。结果，图23.30 降压变换器不能在不失去 ZVS 性质的情况下产生小于 $0.5 V_g$ 的输出电压。在增加晶体管电压应力代价下获得 $0 \le \mu \le 1$ 的版本见 [346]。此外，ZVS QSW 开关的双开关版本可在 $\mu < 0.5$ 时 ZVS 工作。
+
+图23.30 变换器的一个有用变体是用同步整流器替代二极管，如图23.33 [338, 339]。第二个晶体管在变换器控制中引入附加自由度，因为可允许此晶体管导通比二极管原本导通更长时间。此事实可用于将零电压开关区域扩展到接近零的变换比，也使变换器以恒定开关频率工作。
+
+![源页 p.1021](../assets/page-snapshots/chapter-23/page-1021.png)
+
+| $J = 0$ | $0.5$ | $1$ | $3$ | $5$ |
+|---|---|---|---|---|
+
+| | $\mu$ | | | |
+|---|---|---|---|---|
+
+| | $F$ | | | |
+|---|---|---|---|---|
+
+| $1.0$ | | | | |
+| $0.5$ | | | | |
+| $0.5$ | | | | |
+| $1.0$ | | | | |
+
+图23.32 ZVS 准方波谐振开关网络的特性：作为 $F$ 和 $J$ 函数的开关变换比 $\mu$。虚线：ZVS 边界
+
+$+$
+$C_r$
+$V_g$
+$D_1$
+$D_2$
+$Q_1$
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$L_r$
+$L$
+$C$
+$R$
+$+$
+$V$
+$I$
+$Q_2$
+
+图23.33 含同步整流器的准方波 ZVS 降压变换器
+
+图23.33 电路的典型槽元件波形如图23.34。这些波形类似于单开关情形图23.31，除晶体管 $Q_2$ 导通期间槽电流为负。占空比 $D$ 相对于晶体管 $Q_1$ 和 $Q_2$ 的关断过渡定义，如图所示。
+
+双开关 QSW-ZVS 开关网络的特性绘于图23.35，恒定开关频率 $F = 0.5$ 情形。还绘出了零电压开关边界。较低 $F$ 值工作使 ZVS 边界扩展到更大 $J$ 值和更接近极值 $\mu = 0$ 和 $\mu = 1$ 的 $\mu$ 值。
+
+在换流区间可忽略的程度上，开关变换比 $\mu$ 简单等于占空比 $D$。从图23.35 可见确实如此。特性近似为水平线，几乎与负载电流 $J$ 无关。
+
+![源页 p.1022](../assets/page-snapshots/chapter-23/page-1022.png)
+
+图23.34 图23.33 双开关 QSW-ZVS 变换器的波形
+
+$V_1$
+$L_r$
+$V_2$
+$L_r$
+$0$
+$T_s$
+$i_2(t)$
+$v_2(t)$
+$V_1$
+$0$
+$t$
+$0$
+导通器件：$D_2$ $X$ $X$ $Q_1$ $D_1$ $Q_2$
+$D$
+$0$
+$T_s$
+
+零电压开关准方波变换器开关损耗很低，因所有半导体元件零电压开关工作。含同步整流器的恒定频率情形中，变换器行为几乎与硬开关 PWM 情形相同，因 $\mu \approx D$。主要缺点是导通损耗增加，由电感电流反向引起。
+
+## 23.4 PWM 变换器中的软开关
+
+上节准方波方法值得注意，因它在不开高晶体管峰值电压的情况下获得零电压开关。几种相关软开关方法现流行，也在不增加晶体管峰值电压应力的情况下获得零电压开关。本节简要讨论全桥、正激、反激变换器以及电压源逆变器的流行零电压开关版本。
+
+### 23.4.1 零电压过渡全桥变换器
+
+也可在其他类型变换器中获得软开关。示例是基于全桥变压器隔离降压变换器的零电压过渡（ZVT）变换器，如图23.36 [324–327]。晶体管和二极管输出电容在图中用电容 $C_{leg}$ 表示。换流电感 $L_c$ 与变压器串联放置；净电感 $L_c$ 包括变压器漏感和附加分立元件的电感。此电感使全桥开关网络驱动有效电感负载，导致初级半导体器件零电压开关。虽然波形非正弦，但仍可说开关网络输出电流 $i_c(t)$ 滞后电压 $v_s(t)$，因 $i_c(t)$ 过零发生在 ZVS 开关过渡完成后。
+
+输出电压通过相位控制。如图23.37，桥开关网络两半均以 50% 占空比工作，控制两个半桥开关网络之间的相位差。图23.37 理想波形忽略
+
+| $D = 0.8$ | $0.7$ | | | |
+|---|---|---|---|---|
+
+| | $J$ | | | |
+|---|---|---|---|---|
+
+| | $\mu$ | | | |
+|---|---|---|---|---|
+
+| $0.6$ | $0.5$ | $0.3$ | $0.2$ | |
+|---|---|---|---|---|
+
+| $1.0$ | $0.5$ | $0$ | | |
+|---|---|---|---|---|
+
+| $F = 0.5$ | | | | |
+|---|---|---|---|---|
+
+| $8.0$ | $6.0$ | $2.0$ | $0.4$ | |
+|---|---|---|---|---|
+
+| $0.4$ | | | | |
+|---|---|---|---|---|
+
+图23.35 图23.33 双开关 QSW-ZVS 变换器的变换比 $\mu$，作为占空比 $D$ 和归一化负载电流 $J$ 的函数。曲线以恒定频率控制 $F = 0.5$ 绘制。虚线为零电压开关边界
+
+![源页 p.1023](../assets/page-snapshots/chapter-23/page-1023.png)
+
+开关过渡，子区间编号对应更详细的图23.38。相移变量 $\phi$ 在 $0 \le \phi \le 1$ 范围内，在此变换器中起占空比 $d$ 的作用。量 $\phi$ 定义为
+
+$$\phi = (t_1 - t_0)\left( \frac{T_s}{2} \right) \tag{23.67}$$
+
+通过副边滤波电感的伏-秒平衡，变换比 $M(\phi)$ 表示为
+
+$$M(\phi) = \frac{V}{V_g} = n \phi \tag{23.68}$$
+
+此式忽略开关过渡长度。
+
+$i_c(t)$
+$L_c$
+$+$
+$V_g$
+$Q_1$
+$Q_2$
+$Q_3$
+$Q_4$
+$D_1$
+$D_2$
+$D_3$
+$D_4$
+$+$
+$v_2(t)$
+$C_{leg1}$
+$C_{leg2}$
+$C_{leg4}$
+$C_{leg3}$
+$+$
+$v_4(t)$
+$+$
+$v_s(t)$
+$D_5$
+$D_6$
+$I$
+$1 : n$
+$1 : n$
+$+$
+$V$
+$i_g(t)$
+
+图23.36 基于全桥隔离降压变换器的零电压过渡变换器
+
+![源页 p.1024](../assets/page-snapshots/chapter-23/page-1024.png)
+
+$v_2(t)$
+$v_4(t)$
+$v_s(t)$
+$i_g(t)$
+$V_g$
+$V_g$
+$V_g$
+$g$
+$nI$
+$0$
+$0$
+$0$ $0$
+$0$
+导通器件：$Q_4$ $D_3$ $Q_3$ $D_4$
+$Q_2$ $Q_1$ $Q_1$ $Q_2$ $Q_2$
+子区间：0 4 6 1 0 0 $t$
+$T_s/2$
+$T_s/2$
+$T_s$
+$T_s/2$ $T_s/2$
+$0$
+$D_4$
+$)T_s/2$
+
+图23.37 ZVT 全桥变换器的相移控制。此图忽略开关过渡，子区间编号遵循图23.38
+
+虽然电路看起来对称，但相移控制方案引入的不对称性使两个半桥开关网络在开关过渡期间行为截然不同。子区间4 和10 期间，能量从源 $V_g$ 经开关和变压器主动传输。这些子区间由 $Q_1$、$D_1$、$Q_2$、$D_2$ 组成的半桥网络开关启动，称为"被动-主动"（P-A）过渡 [326]。子区间4 和10 由 $Q_3$、$D_3$、$Q_4$、$D_4$ 组成的半桥网络开关终止，称为"主动-被动"（A-P）过渡。
+
+此变换器的开通和关断开关过程类似于上节描述的零电压开关关断过程。详细初级波形如图23.38。子区间0 中，$Q_2$ 和 $D_4$ 导通。若变压器励磁电流 $i_M$ 可忽略，则换流电感电流为 $i_c(t_0) = -nI$，其中 $I$ 是负载电流。被动-主动过渡在晶体管 $Q_2$ 关断时启动。负 $i_c$ 随后使电容 $C_{leg1}$ 和 $C_{leg2}$ 充电，$v_2(t)$ 升高。子区间1 中，$L_c$、$C_{leg1}$、$C_{leg2}$ 形成谐振网络，以近似正弦波形振铃。若 $L_c$ 中初始存储足够能量，则 $v_2(t)$ 最终达到 $V_g$，终止子区间1。二极管 $D_1$ 随后在子区间2 将 $v_2(t)$ 钳位到 $V_g$。晶体管
+
+![源页 p.1025](../assets/page-snapshots/chapter-23/page-1025.png)
+
+$Q_1$ 在子区间2 零电压开通；实际中通过在 $Q_2$ 和 $Q_1$ 开关过渡之间插入小延迟实现。
+
+若 $L_c$ 初始存储的能量不足以在子区间1 将总电容 $(C_{leg1} + C_{leg2})$ 从 $v_2 = 0$ 充到 $v_2 = V_g$，则 $v_2(t)$ 永不达到 $V_g$。晶体管 $Q_1$ 开通时将产生开关损耗。此情形通常在轻载 $I$ 小时发生。有时设计工程师可能选择直接接受此功耗；毕竟轻载时导通损耗等其他损耗小。替代方案是修改电路以增加轻载条件下 $t = t_0$ 时 $L_c$ 存储的能量。一种方法是增大变压器励磁电流 $i_M(t_0)$ 到显著水平；子区间1 开始时，$i_c$ 等于 $i_c(t_0) = -nI + i_M(t_0)$，$i_M(t_0) < 0$。轻载 $I$ 小时，励磁电流维持所需 $i_c$ 水平。
+
+子区间0、1、2、3 期间，副边二极管 $D_5$ 和 $D_6$ 均导通；故所有变压器绕组两端电压为零。结果，子区间2 和3 期间电压 $V_g$ 加在换流电感 $L_c$ 上，使 $i_c(t)$ 以斜率 $V_g/L_c$ 增大。$i_c(t)$ 在子区间2 结束时达零，子区间3 结束时增至正值 $+nI$。$i_c(t)$ 极性反转使下次开关过渡（子区间5 和子区间7–9）零电压开关。
+
+子区间3 结束时，二极管 $D_6$ 电流降到零。$D_6$ 随后反偏，零电流开关。此刻，二极管 $D_6$ 须开始阻断电压 $2nV_g$。$D_6$ 输出电容阻止电压立即变为 $2nV_g$；而是 $L_c$ 和 $D_6$ 输出电容形成的谐振电路开始以类似于图4.76 的方式振铃。$D_6$ 峰值电压通常观察
+
+显著超过 $2nV_g$，通常须加电压钳位缓冲器防止副边二极管电压超过安全值。[325–327] 讨论了几种耗散和非耗散方法。
+
+主动-被动开关过渡发生在子区间5。此子区间在晶体管 $Q_4$ 关断时启动。正电流 $i_c(t_1)$ 等于反射负载电流 $nI$，使电容 $C_{leg3}$ 和 $C_{leg4}$ 从 $v_4 = 0$ 充到 $v_4 = V_g$。子区间5 在 $v_4$ 达 $V_g$ 时结束；二极管 $D_3$ 随后正偏。晶体管 $Q_3$ 随后在子区间6 零电压开关开通。这通常通过在 $Q_4$ 和 $Q_3$ 开关之间插入小延迟实现。由于 $i_c$ 在子区间5 恒定等于 $nI$，主动-被动过渡在所有负载电流下保持零电压开关。
+
+下半开关周期（子区间6 至11）的电路行为对称，故类似于子区间0 至5 的行为。晶体管 $Q_1$ 和 $Q_2$ 的开关过渡是被动-主动过渡，在上述 $L_c$ 存储足够能量时零电压开关。$Q_3$ 和 $Q_4$ 的开关过渡是主动-被动，在所有负载下零电压开关。
+
+零电压过渡变换器表现出低初级开关损耗和 EMI。与理想 PWM 全桥拓扑相比导通损耗增加，因子区间0 和6 期间 $i_c$ 流过初级半导体器件的循环。但输入电压变化范围窄时此导通损耗增加可小。此软开关方法已取得商业成功。
+
+![源页 p.1026](../assets/page-snapshots/chapter-23/page-1026.png)
+
+$g/L_c$
+$v_2(t)$
+$v_4(t)$
+$v_s(t)$
+$i_c(t)$
+$V_g$
+$V_g$
+$V_g$
+$g$
+$nI$
+$V_g/L_c$
+$0$
+$0$
+$0$
+$0$ $0$
+$nI$
+$/2C_{leg}$
+$nI/2C_{leg}$
+导通器件：$D_4$ $D_4$ $D_4$ $Q_4$ $X$ $D_3$ $D_3$ $D_3$ $Q_3$ $X$ $D_4$
+$Q_2$ $D_1$ $X$ $Q_1$ $Q_1$ $Q_1$ $X$ $D_2$ $Q_2$ $Q_2$ $Q_2$
+$D_5$
+$D_6$
+$D_5$ $D_5$
+$D_6$ $D_6$ $D_6$
+$D_5$ $D_5$ $D_5$
+$D_6$ $D_6$ $D_6$
+$D_5$ $D_5$ $D_5$
+$D_6$ $D_6$
+$D_5$
+$D_6$
+$D_5$
+$D_6$ $X$ $X$
+$X$ $X$
+子区间：0 1 2 3 4 5 6 7 8 9 1 0 1 1 0
+$t$
+} 主动
+} 被动
 }
-Secondary
-diodes
-Fig. 23.38 Detailed diagram of primary-side waveforms of the ZVT full-bridge converter, illustrating
-the zero-voltage switching mechanisms. An ideal transformer is assumed
-23.4.2 The Auxiliary Switch Approach
-A similar approach can be used in forward, ﬂyback, and other transformer-isolated converters.
-As illustrated in Fig. 23.39, an “active-clamp snubber” network consisting of a capacitor and
-auxiliary MOSFET Q2 is added, that is eﬀectively in parallel with the original power transistor
-Q1 [350]. The MOSFET body diodes and output drain-to-source capacitances, as well as the
-transformer leakage inductance Lℓ, participate in the circuit operation. These elements lead to
-zero-voltage switching, with waveforms similar to those of the ZVT full-bridge converter of
-Sect. 23.4.1 or the two-transistor QSW-ZVS switch of Sect. 23.3.3. The transistors are driven
-by complementary signals; for example, after turning o ﬀQ1, the controller waits for a short
-delay time and then turns on Q2.
-The active-clamp snubber can be viewed as a voltage-clamp snubber, similar to the dissipa-
-tive snubber illustrated in Fig. 23.6. However, the snubber contains no resistor; instead, MOS-
+副边二极管
 
-1030 23 Soft Switching
+图23.38 ZVT 全桥变换器初级波形的详细图，说明零电压开关机制。假设理想变压器
+
+### 23.4.2 辅助开关方法
+
+类似方法可用于正激、反激和其他变压器隔离变换器。如图23.39，添加由电容和辅助 MOSFET $Q_2$ 组成的"有源钳位缓冲器"网络，实际与原功率晶体管 $Q_1$ 并联 [350]。MOSFET 体二极管和输出漏-源电容以及变压器漏感 $L_\ell$ 参与电路工作。这些元件导致零电压开关，波形类似于23.4.1 节 ZVT 全桥变换器或23.3.3 节双晶体管 QSW-ZVS 开关。晶体管由互补信号驱动；例如，关断 $Q_1$ 后，控制器等待短延迟时间然后开通 $Q_2$。
+
+有源钳位缓冲器可视为电压钳位缓冲器，类似于图23.6 所示耗散型缓冲器。但缓冲器无电阻；而是
+
+![源页 p.1027](../assets/page-snapshots/chapter-23/page-1027.png)
+
 (a)
-+
-Q1
-CR
-+
-V
-LD2
-D3
-Vg
-L
-Cds
-Csvs
-+
-Q2
-+
-vds
-i
+$+$
+$Q_1$
+$C$
+$R$
+$+$
+$V$
+$L$
+$D_2$
+$D_3$
+$V_g$
+$L$
+$C_{ds}$
+$C_{svs}$
+$+$
+$Q_2$
+$+$
+$v_{ds}$
+$i$
+
 (b)
-+
-L
-Vg
-Cds
-Csvs
-+
-Q1
-Q2
-Fig. 23.39 Active-clamp snubber circuits: (a) forward converter, (b) ﬂyback converter
-FET Q2 allows bidirectional power ﬂow, so that the energy stored in capacitorCs can ﬂow back
-into the converter.
-The voltage vs can be found by volt-second inductance on the transformer magnetizing
-inductance. If the lengths of the commutation intervals are neglected, and if the voltage ripple
-in v
-s(t) can be neglected, then one ﬁnds that
-Vs= D
-D′ Vg (23.69)
-The voltage vs is eﬀectively an unloaded output of the converter. With the two-quadrant switch
-provided by Q2, this output operates in continuous conduction mode with no load, and hence
-the peak voltage of Q1 is clamped to the minimum level necessary to balance the volt-seconds
-applied to the transformer magnetizing inductance.
-Typical waveforms for a forward converter incorporating an active-clamp snubber are il-
-lustrated in Fig. 23.40. The current iℓ(t) reverses direction while Q2 conducts. When Q2 turns
+$+$
+$L$
+$V_g$
+$C_{ds}$
+$C_{svs}$
+$+$
+$Q_1$
+$Q_2$
 
-23.4 Soft Switching in PWM Converters 1031
-oﬀ, capacitor Cds begins to discharge. When vds reaches zero, the body diode of Q1 becomes
-forward-biased. Q1 can then be turned on at zero voltage.
-An added beneﬁt of the active-clamp snubber, when used in a forward converter, is that it
-resets the transformer. Consequently, the converter can operate at any duty cycle, including duty
-cycles greater than 50%. When the converter must operate with a wide range of input voltages,
-this can allow substantial improvements in transistor stresses and eﬃciency. The MOSFETs in
-Fig. 23.39 operate with zero-voltage switching, while the secondary-side diodes operate with
-zero-current switching.
-This approach is quite versatile, and similar auxiliary circuits can be added to other converter
-circuits to obtain zero-voltage switching [351–353].
-23.4.3 Auxiliary Resonant Commutated Pole
-The auxiliary resonant commutated pole (ARCP) is a related circuit that uses an auxiliary four-
-quadrant switch (or two equivalent two-quadrant switches) to obtain soft switching in the tran-
-sistors of a bridge inverter circuit [354–356]. This approach ﬁnds application in dc–ac inverter
-circuits. Figure 23.41 illustrates a half-bridge circuit, or one phase of a three-phase voltage-
-source inverter, driving an ac load. This circuit can lead to zero-voltage switching that mitigates
-the switching loss induced by the reverse recovery of diodes D
-1 and D2. Filter inductor Lf is
-relatively large, so that the output current ia(t) is essentially constant during the resonant com-
-Fig. 23.40 Waveforms of the active-
-clamp snubber circuit of Fig. 23.39a
-i (t)
-vds(t)
-0
-0
-vs + Vg
-+
-+ Load
-Lf ia
-Cds
-Cds
-van
-Vg
-2
-Vg
-2
-Lr ir
-Q1
-Q2
-D1
-D2
-Q3 Q4
-D3 D4
-Fig. 23.41 Half-bridge circuit driving an ac load, with ARCP zero-voltage switching
+图23.39 有源钳位缓冲电路：(a) 正激变换器，(b) 反激变换器
 
-1032 23 Soft Switching
-(a) ir(t)
-van(t) Vg /2
-0
-Conducting
-devices: Q1Q3D2
-g /2
-ia
-D2
-D4
-Q3
-D4
-Q3
-(D1)
-D4
-Q1
-Interval: 123 t
-(b) ir(t)
-van(t) Vg /2
-0
-Conducting
-devices: Q1Q3D2
-g /2
-ia
-D2
-D4
-Q3
-D4
-Q3
-D1
-D4
-Q1
-Interval: 123
-Q2
-iboost
-t
-Fig. 23.42 Waveforms of the ARCP circuit of Fig.23.41:( a) basic waveforms, (b) with current boost
-mutation interval. Capacitors Cds are relatively small, and model the output capacitances of the
-semiconductor devices. Inductor Lr is also relatively small, and elements Lr and Cds form a
-resonant circuit that rings during part of the commutation process. Semiconductor switching
-devices Q3, Q4, D3, and D4 form an auxiliary four-quadrant switch that turns on to initiate the
-resonant commutation process.
-Typical commutation waveforms are illustrated in Fig. 23.42a, for the case in which the ac
-load current ia is positive. Diode D2 is initially conducting the output current ia. It is desired to
-turn oﬀD2 and turn onQ1, with zero-voltage switching. This is accomplished with the following
-sequence:
+MOSFET $Q_2$ 允许双向功率流动，故电容 $C_s$ 存储的能量可流回变换器。
 
-23.5 Summary of Key Points 1033
-Interval 1. Turn on transistor Q3. Devices D2, Q3, and D4 conduct.
-Interval 2. When the current in D2 reaches zero, D2 turns oﬀ. A resonant ring-
-ing interval occurs.
-Interval 3. When the voltage van reaches Vg/2, diode D1 begins to become
-forward-biased. Transistor Q1 is then immediately turned on at
-zero voltage.
-At the conclusion of interval 3,ir(t) reaches zero and diodeD3 turns oﬀ. For negative current,
-the process for commutation of diode D1 is similar, except that transistor Q4 and diode D3
-conduct the resonant current ir(t).
-One issue related to the waveforms of Fig. 23.42a is that the circuit always operates at the
-boundary of zero-voltage switching. At the end of interval 2, diode D1 is not actually forward-
-biased, because its current never actually becomes positive. Instead, transistor Q1 should be
-turned on at the beginning of interval 3. If transistor Q1 is gated on late, then the continued
-ringing will cause voltage van(t) to decrease, and zero-voltage switching will be lost.
-To further assist in the zero-voltage switching commutation process, transistor Q2 can be
-turned on while D2 conducts, as illustrated in Fig. 23.42b. Transistor Q2 is used to lengthen the
-duration of interval 1: now, when the current ir(t) exceeds current ia by an amount iboost , then
-the controller turns oﬀQ2 to end interval 1. This causes diode D1 to become forward-biased
-during the beginning of interval 3. Transistor Q1 is then turned on with zero-voltage switching,
-while D1 is conducting.
-Regardless of whether the circuit operates with the waveforms of Fig.23.42a or b, the ARCP
-approach eliminates the switching loss caused by the reverse recovery of diodesD1 and D2.U n -
-like the previous circuits of this chapter, the ARCP has no circulating currents that cause con-
-duction loss, because the tank inductor current ir(t) is nonzero only in the vicinity of the com-
-mutation interval. The approach of Fig. 23.42a does not completely eliminate the loss caused
-by the device output capacitances. This loss is eliminated using the current boost of Fig.23.42b,
-but additional conduction loss is incurred because of the increased peakir(t). The waveforms of
-Fig. 23.42b may, in fact, lead to reduced eﬃciency relative to Fig.23.42a!
-23.5 Summary of Key Points
-1. In a resonant switch converter, the switch network of a PWM converter is replaced by a
-switch network containing resonant elements. The resulting hybrid converter combines the
-properties of the resonant switch network and the parent PWM converter.
-2. Analysis of a resonant or soft-switching switch cell involves determination of the switch
-conversion ratioμ. The resonant switch waveforms are determined, and are then averaged.
-The switch conversion ratioμis a generalization of the PWM CCM duty cycled. The results
-of the averaged analysis of PWM converters operating in CCM can be directly adapted to
-the related resonant switch converter, simply by replacing d withμ.
-3. In the zero-current-switching quasi-resonant switch, diode D
-2 operates with zero-voltage
-switching, while transistor Q1 and diode D1 operate with zero-current switching. In the
-zero-voltage-switching quasi-resonant switch, the transistor Q1 and diode D1 operate with
-zero-voltage switching, while diode D2 operates with zero-current switching.
-4. In the zero-voltage-switching multiresonant switch, all semiconductor devices operate with
-zero-voltage switching. In consequence, very low switching loss is observed.
+电压 $v_s$ 可通过变压器励磁电感的伏-秒平衡求得。若忽略换流区间长度且 $v_s(t)$ 电压纹波可忽略，则得
 
-1034 23 Soft Switching
-5. In the quasi-square-wave zero-voltage-switching resonant switches, all semiconductor de-
-vices operate with zero-voltage switching, and with peak voltages equal to those of the
-parent PWM converter. The switch conversion ratio is restricted to the range 0.5≤μ≤1.
-Versions containing synchronous rectiﬁers can operate with values ofμapproaching zero.
-6. The zero-voltage transition approach, as well as the active-clamp snubber approach, lead
-to zero-voltage switching of the transistors and zero-current switching of the diodes. These
-approaches have been successful in substantially improving the eﬃciencies of transformer-
-isolated converters. The auxiliary resonant commutated pole induces zero-voltage switch-
-ing in bridge circuits such as the voltage-source inverter.
-Problems
-23.1 In the forward converter of Fig. 23.43, L and C are large ﬁlter elements while Lp, Ls, and
-Cr have relatively small values. The transformer reset mechanism is not shown; for this
-problem, you may assume that the transformer is ideal.
-(a) Classify the resonant switch.
-(b) Which semiconductor devices operate with zero-voltage switching? With zero-current
-switching?
-(c) What is the resonant frequency?
-23.2 In the high-voltage converter of Fig. 23.44, capacitor C is relatively large in value. The
-transformer model includes an ideal 1: n transformer, in conjunction with magnetizing
-inductance Lmp (referred to the primary side) and winding capacitance Cws (referred to
-the secondary side). Transistor Q and diode Dp exhibit total output capacitance Cp, while
-the output capacitance of diode Ds is Cs. Other nonidealities, such as transformer leakage
-inductance, can be ignored. The resonant switch is well-designed, such that all elements
-listed above contribute to ideal operation of the converter and resonant switch.
-(a) What type of resonant switch is employed? What is the parent PWM converter?
-(b) Which semiconductor devices operate with zero-voltage switching? With zero-current
-switching?
-+
-Q
-1 : n
-CR
-+
-v
-LDs
-Dp
-vg
-LsLp
-Cr
-Fig. 23.43 Forward converter with resonant switch, Problem 23.1
-```
+$$V_s = \frac{D}{D'} V_g \tag{23.69}$$
+
+电压 $v_s$ 实际是变换器的空载输出。有 $Q_2$ 提供的双象限开关，此输出在无负载下连续导通模式工作，故 $Q_1$ 峰值电压钳位到平衡变压器励磁电感伏-秒所需的最低水平。
+
+含正激变换器有源钳位缓冲器的典型波形如图23.40。$Q_2$ 导通期间电流 $i_\ell(t)$ 反向。$Q_2$ 关断时
+
+![源页 p.1028](../assets/page-snapshots/chapter-23/page-1028.png)
+
+电容 $C_{ds}$ 开始放电。$v_{ds}$ 达零时，$Q_1$ 体二极管正偏。$Q_1$ 随后可零电压开通。
+
+正激变换器中有源钳位缓冲器的附加优点是复位变压器。故变换器可在任意占空比下工作，包括大于 50% 的占空比。变换器须在宽输入电压范围下工作时，这可显著改善晶体管应力和效率。图23.39 MOSFET 零电压开关工作，副边二极管零电流开关工作。
+
+此方法相当通用，类似辅助电路可加到其他变换器电路获得零电压开关 [351–353]。
+
+### 23.4.3 辅助谐振换流极
+
+辅助谐振换流极（ARCP）是相关电路，用辅助四象限开关（或两个等效双象限开关）在桥逆变器电路的晶体管中获得软开关 [354–356]。此方法用于直流-交流逆变电路。图23.41 说明了驱动交流负载的半桥电路或三相电压源逆变器的一相。此电路可导致零电压开关，减轻二极管 $D_1$ 和 $D_2$ 反向恢复引起的开关损耗。滤波电感 $L_f$ 相对大，故输出电流 $i_a(t)$ 在谐振换
+
+图23.40 图23.39a 有源钳位缓冲电路的波形
+
+$i(t)$
+$v_{ds}(t)$
+$0$
+$0$
+$v_s + V_g$
+$+$
+$+$ 负载
+$L_f$
+$i_a$
+$C_{ds}$
+$C_{ds}$
+$v_{an}$
+$V_g$
+$\frac{2}{V_g}$
+$\frac{2}{V_g}$
+$L_r$
+$i_r$
+$Q_1$
+$Q_2$
+$D_1$
+$D_2$
+$Q_3$ $Q_4$
+$D_3$ $D_4$
+
+图23.41 驱动交流负载的半桥电路，带 ARCP 零电压开关
+
+![源页 p.1029](../assets/page-snapshots/chapter-23/page-1029.png)
+
+(a)
+$i_r(t)$
+$v_{an}(t)$
+$V_g/2$
+$0$
+导通器件：$Q_1$ $Q_3$ $D_2$
+$g/2$
+$i_a$
+$D_2$
+$D_4$
+$Q_3$
+$D_4$
+$Q_3$
+$(D_1)$
+$D_4$
+$Q_1$
+区间：1 2 3 $t$
+
+(b)
+$i_r(t)$
+$v_{an}(t)$
+$V_g/2$
+$0$
+导通器件：$Q_1$ $Q_3$ $D_2$
+$g/2$
+$i_a$
+$D_2$
+$D_4$
+$Q_3$
+$D_4$
+$Q_3$
+$D_1$
+$D_4$
+$Q_1$
+区间：1 2 3
+$Q_2$
+$i_{boost}$
+$t$
+
+图23.42 图23.41 ARCP 电路的波形：(a) 基本波形，(b) 带电流增强
+
+流区间内本质恒定。电容 $C_{ds}$ 相对小，建模半导体器件的输出电容。电感 $L_r$ 也相对小，元件 $L_r$ 和 $C_{ds}$ 形成在换流过程部分期间振铃的谐振电路。半导体开关器件 $Q_3$、$Q_4$、$D_3$、$D_4$ 构成辅助四象限开关，开通启动谐振换流过程。
+
+交流负载电流 $i_a$ 为正情形的典型换流波形如图23.42a。二极管 $D_2$ 初始导通输出电流 $i_a$。期望关断 $D_2$ 并零电压开通 $Q_1$。以下序列实现：
+
+![源页 p.1030](../assets/page-snapshots/chapter-23/page-1030.png)
+
+区间1。开通晶体管 $Q_3$。器件 $D_2$、$Q_3$、$D_4$ 导通。
+
+区间2。$D_2$ 电流到零时，$D_2$ 关断。谐振振铃区间发生。
+
+区间3。电压 $v_{an}$ 达 $V_g/2$ 时，二极管 $D_1$ 开始正偏。晶体管 $Q_1$ 随即零电压开通。
+
+区间3 结束时，$i_r(t)$ 达零，二极管 $D_3$ 关断。负电流情形，二极管 $D_1$ 的换流过程类似，除晶体管 $Q_4$ 和二极管 $D_3$ 导通谐振电流 $i_r(t)$。
+
+图23.42a 波形的一个相关问题是电路总在零电压开关边界工作。区间2 结束时，二极管 $D_1$ 实际未正偏，因其电流从未变正。而是应在区间3 开始时开通晶体管 $Q_1$。若 $Q_1$ 栅极开通晚，持续振铃将使电压 $v_{an}(t)$ 下降，失去零电压开关。
+
+为进一步辅助零电压开关换流过程，可在 $D_2$ 导通时开通晶体管 $Q_2$，如图23.42b。晶体管 $Q_2$ 用于延长区间1 持续时间：现在 $i_r(t)$ 超过电流 $i_a$ 一量 $i_{boost}$ 时，控制器关断 $Q_2$ 结束区间1。这使二极管 $D_1$ 在区间3 开始时正偏。晶体管 $Q_1$ 随后在 $D_1$ 导通时零电压开关开通。
+
+无论电路以图23.42a 还是 b 的波形工作，ARCP 方法消除二极管 $D_1$ 和 $D_2$ 反向恢复引起的开关损耗。与本章前面电路不同，ARCP 无导致导通损耗的循环电流，因槽电感电流 $i_r(t)$ 仅在换流区间附近非零。图23.42a 方法不完全消除
+
+器件输出电容引起的损耗。此损耗用图23.42b 的电流增强消除，但因 $i_r(t)$ 峰值增大而产生附加导通损耗。图23.42b 波形实际上可能导致比图23.42a 更低的效率！
+
+## 23.5 关键点总结
+
+1. 谐振开关变换器中，PWM 变换器的开关网络被含谐振元件的开关网络替代。所得混合变换器结合了谐振开关网络和母体 PWM 变换器的性质。
+
+2. 谐振或软开关开关单元的分析涉及确定开关变换比 $\mu$。确定谐振开关波形，然后平均。开关变换比 $\mu$ 是 PWM CCM 占空比 $d$ 的推广。CCM 中 PWM 变换器平均分析的结果可直接适配到相关谐振开关变换器，只需将 $d$ 替换为 $\mu$。
+
+3. 零电流开关准谐振开关中，二极管 $D_2$ 零电压开关工作，晶体管 $Q_1$ 和二极管 $D_1$ 零电流开关工作。零电压开关准谐振开关中，晶体管 $Q_1$ 和二极管 $D_1$ 零电压开关工作，二极管 $D_2$ 零电流开关工作。
+
+4. 零电压开关多谐振开关中，所有半导体器件零电压开关工作。结果，开关损耗很低。
+
+![源页 p.1031](../assets/page-snapshots/chapter-23/page-1031.png)
+
+5. 准方波零电压开关谐振开关中，所有半导体器件零电压开关工作，峰值电压与母体 PWM 变换器相同。开关变换比限于 $0.5 \le \mu \le 1$ 范围。含同步整流器的版本可在 $\mu$ 接近零下工作。
+
+6. 零电压过渡方法以及有源钳位缓冲器方法导致晶体管零电压开关和二极管零电流开关。这些方法在显著改善变压器隔离变换器效率方面已成功。辅助谐振换流极在桥电路（如电压源逆变器）中引起零电压开关。
+
+## 习题
+
+**23.1** 图23.43 正激变换器中，$L$ 和 $C$ 为大滤波元件，而 $L_p$、$L_s$、$C_r$ 值相对小。变压器复位机制未示出；此题可假设变压器理想。
+(a) 分类谐振开关。
+(b) 哪些半导体器件零电压开关？哪些零电流开关？
+(c) 谐振频率为多少？
+
+**23.2** 图23.44 高压变换器中，电容 $C$ 值相对大。变压器模型含理想 $1:n$ 变压器，连同励磁电感 $L_{mp}$（折算到初级）和绕组电容 $C_{ws}$（折算到次级）。晶体管 $Q$ 和二极管 $D_p$ 表现总输出电容 $C_p$，二极管 $D_s$ 的输出电容为 $C_s$。变压器漏感等其他非理想性可忽略。谐振开关设计良好，使上述所有元件对变换器和谐振开关的理想工作有贡献。
+(a) 采用什么类型谐振开关？母体 PWM 变换器是什么？
+(b) 哪些半导体器件零电压开关？哪些零电流开关？
+
+$+$
+$Q$
+$1 : n$
+$C$
+$R$
+$+$
+$v$
+$L$
+$D_s$
+$D_p$
+$v_g$
+$L_s$
+$L_p$
+$C_r$
+
+图23.43 含谐振开关的正激变换器，习题23.1

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第23章part 1 - 23 Soft Switching"
+title: "第23章 软开关（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1046 +18,725 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第23章part 1 - 23 Soft Switching
+# 第23章 软开关（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 992-1011  
-> Chunk ID: `chapter-23-part-1`
+除第22章介绍的谐振电路外，降低前几章 PWM 变换器开关损耗也备受关注。本章讨论在降压、升压和其他变换器中获得软开关的几种较流行方法。
 
-## 主干提取
+导致开关损耗的机制在第4章讨论，包括二极管反向恢复、半导体输出电容和 IGBT 电流拖尾。软开关涉及在 PWM 变换器中减轻一个或多个这些开关损耗机制。否则将丢失的能量被回收，转移到变换器源或负载。半导体器件在给定开通或关断开关过渡期间的工作可分类为硬开关、零电流开关或零电压开关。二极管和晶体管软开关工作在23.1节研究。特别地，优选二极管关断过渡零电压开关，优选 MOSFET 开通过渡零电压开关。但零电压开关以增加导通损耗为代价，故工程师须考虑软开关对整体变换器效率的影响。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+谐振开关变换器是一大类变换器，其中传统降压、升压或其他变换器的 PWM 开关网络被含谐振元件的开关单元替代。这些谐振元件的位置使半导体器件零电流或零电压开关工作，使一个或多个开关损耗机制减少或消除。其他软开关方法可能采用谐振开关过渡，但其他方面表现出硬开关变换器的近似矩形波形。无论哪种情况，所得混合变换器结合了谐振开关网络和母体硬开关 PWM 变换器的性质。
 
-## 术语表
+软开关变换器可表现出降低的开关损耗，代价是增加导通损耗。获得零电压或零电流开关要求谐振元件有大纹波；这些元件常以类似于串联或并联谐振变换器断续导通模式的方式工作。与其他谐振方案一样，设计此类变换器的目标是：(1) 通过提高开关频率获得更小的变压器和低通滤波元件和/或(2) 减少由二极管存储电荷、半导体器件电容、变压器漏感和绕组电容等元件非理想性引起的开关损耗。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.993](../assets/page-snapshots/chapter-23/page-993.png)
 
-## 中文翻译
+谐振开关和软开关思想相当通用，可应用于各种拓扑和应用。大量谐振开关网络已在文献中记录；这里列出几种基本方法 [70, 72, 73, 251, 328, 331–349]。基本零电流开关准谐振开关网络在23.2节详细分析。求出开关网络端子波形的平均分量，进而确定开关变换比 $\mu$。开关变换比 $\mu$ 起 CCM PWM 开关网络占空比 $d$ 的作用。例如，降压变换器的变换比 $M$ 等于 $\mu$。槽网络的半波和全波振铃都考虑；它们导致不同的开关变换比函数 $\mu$。一般而言，给定变换比为 $M(d)$ 的 PWM CCM 变换器，可用开关变换比为 $\mu$ 的谐振开关网络替代 PWM 开关网络。所得准谐振变换器将具有变换比 $M(\mu)$。故可获得所有基本变换器（降压、升压、升降压、正激、反激等）的软开关版本，表现出零电压或零电流开关和其他 desirable 性质。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+23.3节列出其他几种谐振开关网络的特性：零电压开关准谐振开关网络、零电流开关和零电压开关准方波网络、多谐振开关网络。用这些网络可使所有晶体管和二极管零电压开关。
 
-## 英文原文
+几种相关软开关方法现流行，在常用变换器中实现晶体管的零电压开关。零电压过渡方法用于全桥降压派生变换器。有源钳位缓冲器常加到正激和反激变换器，以实现零电压开关和复位变压器。这些电路导致晶体管零电压开关，但副边二极管（非最优）零电流开关。尽管如此，可实现高效率。辅助谐振换流极可在电压源逆变器中实现零电压开关。这些变换器在23.4节简要讨论。
 
-```text
-23
-Soft Switching
-In addition to the resonant circuits introduced in Chap. 22, there has been much interest in
-reducing the switching loss of the PWM converters of the previous chapters. Several of the
-more popular approaches to obtaining soft switching in buck, boost, and other converters are
-discussed in this chapter.
-Mechanisms that cause switching loss are discussed in Chap. 4, including diode reverse re-
-covery, semiconductor output capacitances, and IGBT current tailing. Soft switching involves
-mitigation of one or more of these switching loss mechanisms in a PWM converter. The energy
-that would otherwise be lost is recovered, and is transferred to the converter source or load. The
-operation of a semiconductor device, during a given turn-on or turn-o ﬀswitching transition,
-can be classiﬁed as hard-switched, zero-current switched, or zero-voltage switched. Operation
-of diodes and transistors with soft switching is examined in Sect.23.1. In particular, it is prefer-
-able to operate diodes with zero-voltage switching at their turn-o ﬀtransitions, and to operate
-MOSFETs with zero-voltage switching during their turn-on transitions. However, zero-voltage
-switching comes at the expense of increased conduction loss, and so the engineer must consider
-the eﬀect of soft switching on the overall converter eﬃciency.
-Resonant switch converters are a broad class of converters in which the PWM switch net-
-work of a conventional buck, boost, or other converter is replaced with a switch cell containing
-resonant elements. These resonant elements are positioned such that the semiconductor devices
-operate with zero-current or zero-voltage switching, and such that one or more of the switching
-loss mechanisms is reduced or eliminated. Other soft-switching approaches may employ reso-
-nant switching transitions, but otherwise exhibit the approximately rectangular waveforms of
-hard-switched converters. In any case, the resulting hybrid converter combines the properties of
-the resonant switching network and the parent hard-switched PWM converter.
-Soft-switching converters can exhibit reduced switching loss, at the expense of increased
-conduction loss. Obtaining zero-voltage or zero-current switching requires that the resonant
-elements have large ripple; often, these elements are operated in a manner similar to the dis-
-continuous conduction modes of the series or parallel resonant converters. As in other resonant
-schemes, the objectives of designing such a converter are: (1) to obtain smaller transformer and
-low-pass ﬁlter elements via increase of the switching frequency and/or (2) to reduce the switch-
-ing loss induced by component nonidealities such as diode stored charge, semiconductor device
-capacitances, and transformer leakage inductance and winding capacitance.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_23
-995
+## 23.1 半导体器件的软开关机制
 
-996 23 Soft Switching
-The resonant switch and soft-switching ideas are quite general, and can be applied to a
-variety of topologies and applications. A large number of resonant switch networks have been
-documented in the literature; a few basic approaches are listed here [70, 72, 73, 251, 328, 331–
-349]. The basic zero-current-switching quasi-resonant switch network is analyzed in detail in
-Sect. 23.2. Expressions for the average components of the switch network terminal waveforms
-are found, leading to determination of the switch conversion ratio μ. The switch conversion
-ratioμperforms the role of the duty cycle d of CCM PWM switch networks. For example, the
-buck converter exhibits conversion ratio M equal toμ. Both half-wave and full-wave ringing of
-the tank network are considered; these lead to diﬀerent switch conversion ratio functionsμ.I n
-general, given a PWM CCM converter having conversion ratio M(d), we can replace the PWM
-switch network with a resonant switch network having switch conversion ratioμ. The resulting
-quasi-resonant converter will then have conversion ratioM(μ). So we can obtain soft-switching
-versions of all of the basic converters (buck, boost, buck–boost, forward, ﬂyback, etc.) that
-exhibit zero-voltage or zero-current switching and other desirable properties.
-In Sect. 23.3, the characteristics of several other resonant switch networks are listed: the
-zero-voltage-switching quasi-resonant switch network, the zero-current-switching and zero-
-voltage-switching quasi-square-wave networks, and the multiresonant switch network. One can
-obtain zero-voltage switching in all transistors and diodes using these networks.
-Several related soft-switching approaches are now popular, which attain zero-voltage switch-
-ing of the transistor or transistors in commonly used converters. The zero-voltage transition
-approach ﬁnds application in full-bridge buck-derived converters. Active-clamp snubbers are
-often added to forward and ﬂyback converters, to attain zero-voltage switching and to reset
-the transformer. These circuits lead to zero-voltage switching of the transistors, but (less-than-
-optimal) zero-current switching of the secondary-side diodes. Nonetheless, high eﬃciency can
-be achieved. An auxiliary resonant commutated pole can achieve zero-voltage switching in
-voltage-source inverters. These converters are brieﬂy discussed in Sect.23.4.
-23.1 Soft-Switching Mechanisms of Semiconductor Devices
-When loosely used, the terms “zero-current switching” and “zero-voltage switching” normally
-refer to one or more switching transitions of the transistor in a converter. However, to fully
-understand how a converter generates switching loss, one must closely examine the switching
-transitions of every semiconductor device. As described in Sect. 4.6, there are typically several
-mechanisms that are sources of signiﬁcant switching loss. At the turn-oﬀtransition of a diode,
-its reverse-recovery process can induce loss in the transistor or other elements of the converter.
-The energy stored in the output capacitance of a MOSFET can be lost when the MOSFET turns
-on. IGBTs can lose signiﬁcant energy during their turnoﬀtransition, owing to the current tailing
-phenomenon. The eﬀects of zero-current switching and zero-voltage switching on each of these
-devices are discussed in detail below.
-23.1.1 Diode Switching
-As discussed in Chap. 4, the reverse-recovery process usually leads to signiﬁcant switching
-loss associated with the turn-o ﬀtransition of diodes. This is often the largest single source
+宽松使用时，"零电流开关"和"零电压开关"术语通常指变换器中晶体管的一个或多个开关过渡。但要完全理解变换器如何产生开关损耗，须仔细检查每个半导体器件的开关过渡。如4.6节所述，通常有几种机制是显著开关损耗的来源。二极管关断过渡时，其反向恢复过程可在晶体管或变换器其他元件中引起损耗。MOSFET 输出电容存储的能量可在 MOSFET 开通时丢失。IGBT 关断过渡时因电流拖尾现象可丢失显著能量。零电流开关和零电压开关对每种器件的影响下面详细讨论。
 
-23.1 Soft-Switching Mechanisms of Semiconductor Devices 997
+### 23.1.1 二极管开关
+
+如第4章所述，反向恢复过程通常导致与二极管关断过渡相关的显著开关损耗。这常是硬开关变换器中最大的单一损耗源。功率二极管开通过渡通常损耗可忽略。现代开关变换器中常遇三种二极管关断过渡波形：硬开关、零电流开关和零电压开关。
+
+![源页 p.994](../assets/page-snapshots/chapter-23/page-994.png)
+
+图23.1 说明了传统硬开关 PWM 降压变换器。二极管电压和电流波形 $v(t)$ 和 $i(t)$ 也给出，反向恢复时间被放大。输出电感电流纹波小。晶体管开通时二极管关断；反向恢复过程导致大幅值负峰值电流。二极管须立即承受全反偏电压 $V_g$，故 $v(t)$ 和 $i(t)$ 在反向恢复期间须以大斜率变化。如4.3.3节所述，二极管硬开关在晶体管中引起能量损耗 $W_D$，近似为
+
+$$W_D = V_g Q_r + t_r V_g I \tag{23.1}$$
+
+其中 $Q_r$ 是二极管恢复电荷，$t_r$ 是反向恢复时间，均取为正量。恢复电荷相对大，因为关断过渡期间 $di/dt$ 大。二极管输出电容 $C_j$ 与二极管封装及其他接线电感形成的谐振电路导致反向恢复时间结束时的振铃。
+
+![源页 p.995](../assets/page-snapshots/chapter-23/page-995.png)
+
 (a)
-+
-I
-v(t)
-+
-i(t)
-+
+$L_r$
+$C_r$
+$+V_g$
+$v(t)$
+$+$
+$i(t)$
+$I$
+
+(b)
+$i(t)$
+$v(t)$
+$0$
+$0$
+$-V_g$
+Area
+$Q_r$
+$t$
+
+图23.2 二极管关断过渡的零电流开关，ZCS 准谐振降压变换器示例：(a) 变换器电路图，(b) 二极管电压和电流波形
+
+图23.2 说明了二极管关断过渡的零电流开关。变换器示例为准谐振零电压开关降压变换器（见23.3.1节）。输出电感电流纹波再次小。但槽电感 $L_r$ 现与二极管串联。所得二极管电流波形 $i(t)$ 以受限斜率变化，如图。$i(t)$ 过零变负时二极管反向恢复过程开始。负 $i(t)$ 主动移除二极管存储电荷；此反向恢复时间内二极管保持正偏。存储电荷移除后，二极管电压须快速变为 $-V_g$。如4.6.1节所述，反向恢复时间结束时电感 $L_r$ 中存储能量 $W_D$：
+
+$$W_D = V_g Q_r \tag{23.2}$$
+
+$L_r$ 和二极管输出电容 $C_j$ 形成的谐振电路随后使此能量在 $L_r$ 和 $C_j$ 之间循环。此能量最终被电路中寄生电阻元件耗散，故丢失。由于式(23.1) 和(23.2) 形式相似，硬开关和零电流开关下二极管反向恢复过程引起的开关损耗幅值相似。零电流开关可能因 $di/dt$ 减小导致恢复电荷 $Q_r$ 减小而有较低损耗。
+
+![源页 p.996](../assets/page-snapshots/chapter-23/page-996.png)
+
+图23.3 耗散型缓冲电路，保护二极管免受振铃引起的过电压
+
+$C_R$
+
+二极管输出电容
+串联电感
+槽电路
+缓冲电路
+
+二极管零电流开关也常导致 $L_r$ 和 $C_j$ 振铃期间峰值反压增大，因 $L_r$ 值相对大。
+
+二极管硬开关或零电流开关工作且二极管串联存在显著电感时，二极管电压波形观察到显著振铃。由串联电感和二极管输出电容组成的谐振电路被二极管反向恢复过程激励，所得振铃电压幅值可足以导致二极管击穿和失效。常见示例是硬开关变压器隔离变换器副边的二极管；谐振电路由变压器漏感和二极管输出电容形成。其他示例是图23.2 和23.36 的电路，其中串联电感是分立槽电感。
+
+常用于保护二极管免受过反电压的简单缓冲电路如图23.3 所示。电阻 $R$ 阻尼谐振电路振铃。电容 $C$ 防止二极管关断电压在 $R$ 中引起过大功耗。但 $R$ 每开关周期消耗的能量通常大于式(23.1) 或(23.2)。
+
+图23.4 说明了二极管关断过渡的零电压开关。图示为零电压开关准方波降压变换器示例，23.3.3节讨论。此变换器的输出电感 $L_r$ 充当槽电感，表现出大电流纹波使电流 $i_r(t)$ 反向。二极管导通时其电流 $i(t)$ 等于 $i_r(t)$。$i_r(t)$ 变负时二极管继续导通直到存储电荷 $Q_r$ 被移除。二极管随后反偏，$i_r(t)$ 流过 $C_r$ 和二极管输出电容 $C_j$。此类开关中二极管电压和电流均以受限斜率变化，二极管反向恢复过程引起的损耗可忽略，因为波形不被电路寄生电阻显著阻尼，且反向恢复期间峰值电流相对低。二极管存储电荷和二极管输出电容都表现为有效非线性电容，可与槽电容 $C_r$ 组合（或替代）。
+
+二极管零电压开关工作时不需要图23.3 等缓冲电路。
+
+故二极管关断过渡零电压开关是导致最小开关损耗的首选方法。关断过渡零电流开关可能有问题，因振铃在二极管两端引起高峰值反压。
+
+![源页 p.997](../assets/page-snapshots/chapter-23/page-997.png)
+
+### 23.1.2 MOSFET 开关
+
+MOSFET 在硬开关变换器中常遇的开关损耗机制在第4章讨论，典型 MOSFET 电压和电流波形如图23.5。此电路 MOSFET 中最显著的开关损耗分量是：(1) 二极管反向恢复过程引起的损耗和(2) MOSFET 输出电容 $C_{ds}$ 存储能量的丢失。两种损耗机制都发生在 MOSFET 开通过程。
+
+(a)
+$+$
+$C_r$
+$V_g$
+$v(t)$
+$+$
+$i_r(t)$
+$L_r$
+$i(t)$
+
+(b)
+$i(t)$
+$v(t)$
+$V_g$
+$0$
+$V_g$
+$0$
+Area
+$Q_r$
+
+图23.4 二极管关断过渡的零电压开关，ZVS 准方波降压变换器示例：(a) 变换器电路图，(b) 二极管电流和电压波形
+
+图23.5 硬开关电路中，快速栅极驱动器下 MOSFET 关断过渡基本不产生开关损耗。这是因为 MOSFET 的可观输出电容 $C_{ds}$。此电容在 MOSFET 关断时使电压 $v(t)$ 接近零，故关断开关损耗很小。MOSFET 关断后，输出电感电流 $I$ 流过 $C_{ds}$。电压 $v(t)$ 随后升高直到 $v = V_g$ 且二极管正偏。
+
+但 MOSFET 开通时，高峰值电流流过 MOSFET 沟道，由二极管反向恢复和 MOSFET、二极管输出电容引起。这导致 MOSFET 硬开关开通过渡的显著能量损耗。
+
+MOSFET（或其他晶体管）硬开关工作且 MOSFET 串联存在显著电感时，MOSFET
+
+![源页 p.998](../assets/page-snapshots/chapter-23/page-998.png)
+
+(a)
+$+$
+$I$
+$+$
+$v(t)$
+$i(t)$
+$+$
 Silicon
 diode
-Fast
-transistor
-Vg
-(b) i(t)
-v(t)
-0
-0
-Vg
-Area
-Qr
-t
-I
-Fig. 23.1 Hard switching at the turn-oﬀtransition of a diode, conventional buck converter example: (a)
-schematic, (b) diode voltage and current waveforms
-of loss in a hard-switched converter. Normally, negligible loss is associated with the turn-on
-transition of power diodes. Three types of diode turn-o ﬀtransition waveforms are commonly
-encountered in modern switching converters: hard switching, zero-current switching, and zero-
-voltage switching.
-Figure 23.1 illustrates a conventional hard-switched PWM buck converter. The diode volt-
-age and current waveforms v(t) and i(t) are also illustrated, with an exaggerated reverse recov-
-ery time. The output inductor current ripple is small. The diode turns oﬀwhen the transistor is
-turned on; the reverse recovery process leads to a negative peak current of large amplitude. The
-diode must immediately support the full reverse voltage Vg, and hence both v(t) and i(t)m u s t
-change with large slopes during reverse recovery. As described in Sect.4.3.3, hard switching of
-the diode induces energy loss WD in the transistor, given approximately by
-WD= VgQr+ trVgI (23.1)
-where Qr is the diode recovered charge and tr is the reverse recovery time, both taken to be
-positive quantities. The recovered charge is relatively large because the slope di/dt is large
-during the turn-oﬀtransition. The resonant circuit formed by the diode output capacitance C j
-and the diode package and other wiring inductances leads to ringing at the end of the reverse
-recovery time.
+$V_g$
+$C_{ds}$
 
-998 23 Soft Switching
-(a)
-Lr
-Cr
-+Vg
-v(t)
-+
-i(t)
-I
-(b) i(t)
-v(t)
-0
-0
-– Vg
-Area
-Qr
-t
-Fig. 23.2 Zero-current switching at the turn-oﬀtransition of a diode, ZCS quasi-resonant buck converter
-example: (a) converter schematic, (b) diode voltage and current waveforms
-Figure 23.2 illustrates zero-current switching at the turn-oﬀtransition of a diode. The con-
-verter example is a quasi-resonant zero-voltage switching buck converter (see Sect.23.3.1). The
-output inductor current ripple is again small. However, tank inductor Lr is now connected in
-series with the diode. The resulting diode current waveform i(t) changes with a limited slope
-as shown. The diode reverse-recovery process commences when i(t) passes through zero and
-becomes negative. The negative i(t) actively removes stored charge from the diode; during this
-reverse recovery time, the diode remains forward-biased. When the stored charge is removed,
-then the diode voltage must rapidly change to −Vg. As described in Sect. 4.6.1, energy WD is
-stored in inductor Lr at the end of the reverse recovery time, given by
-WD= VgQr (23.2)
-The resonant circuit formed by Lr and the diode output capacitance C j then cause this energy
-to be circulated between Lr and C j. This energy is eventually dissipated by parasitic resistive
-elements in the circuit, and hence is lost. Since Eqs. ( 23.1) and ( 23.2) are similar in form,
-the switching losses induced by the reverse-recovery processes of diodes operating with hard
-switching and with zero-current switching are similar in magnitude. Zero-current switching
-may lead to somewhat lower loss because the reduced di/dt leads to less recovered charge Q
-r.
-
-23.1 Soft-Switching Mechanisms of Semiconductor Devices 999
-Fig. 23.3 A dissipative snubber circuit,
-for protection of a diode from excessive
-voltage caused by ringing
-CR
-Diode output
-capacitance
-Series
-inductance
-Tank
-circuit
-Snubber
-circuit
-Zero-current switching of diodes also typically leads to increased peak inverse diode voltage
-during the ringing of Lr and C j, because of the relatively large value of Lr.
-When a diode operates with hard switching or zero-current switching, and when substantial
-inductance is present in series with the diode, then signiﬁcant ringing is observed in the diode
-voltage waveform. A resonant circuit, comprised of the series inductance and the diode output
-capacitance, is excited by the diode reverse recovery process, and the resulting ringing voltage
-can be of large enough magnitude to lead to breakdown and failure of the diode. A common
-example is the diodes on the secondary side of a hard-switched transformer-isolated converter;
-the resonant circuit is then formed by the transformer leakage inductance and the diode out-
-put capacitance. Other examples are the circuits of Figs. 23.2 and 23.36, in which the series
-inductance is a discrete tank inductor.
-A simple snubber circuit that is often used to protect the diode from excessive reverse volt-
-age is illustrated in Fig. 23.3. Resistor R damps the ringing of the resonant circuit. Capacitor C
-prevents the oﬀ-state voltage of the diode from causing excessive power loss inR. Nonetheless,
-the energy consumed by R per switching period is typically greater than Eqs. (23.1)o r( 23.2).
-Figure 23.4 illustrates zero-voltage switching at the turn-oﬀtransition of a diode. The ﬁgure
-illustrates the example of a zero-voltage switching quasi-square wave buck converter, discussed
-in Sect. 23.3.3. The output inductor L
-r of this converter assumes the role of the tank inductor,
-and exhibits large current ripple that causes the current ir(t) to reverse polarity. While the diode
-conducts, its current i(t) is equal to ir(t). When ir(t) becomes negative, the diode continues to
-conduct until its stored charge Qr has been removed. The diode then becomes reverse-biased,
-and ir(t) ﬂows through capacitor Cr and the diode output capacitance C j. The diode voltage
-and current both change with limited slope in this type of switching, and the loss induced by
-the diode reverse-recovery process is negligible because the waveforms are not signiﬁcantly
-damped by parasitic resistances in the circuit, and because the peak currents during reverse
-recovery are relatively low. The diode stored charge and diode output capacitance both behave
-as an eﬀective nonlinear capacitor that can be combined with (or replace) tank capacitor C
-r.
-Snubber circuits such as Fig. 23.3 are not necessary when the diode operates with zero-voltage
-switching.
-Thus, zero-voltage switching at the turn-oﬀtransition of a diode is the preferred approach
-that leads to minimum switching loss. Zero-current switching at the turn-o ﬀtransition can be
-problematic, because of the high peak inverse voltage induced across the diode by ringing.
-
-1000 23 Soft Switching
-23.1.2 MOSFET Switching
-The switching loss mechanisms typically encountered by a MOSFET in a hard-switched con-
-verter are discussed in Chap. 4, and typical MOSFET voltage and current waveforms are illus-
-trated in Fig. 23.5. The most signiﬁcant components of switching loss in the MOSFET of this
-circuit are: (1) the loss induced by the diode reverse recovery process and (2) the loss of the
-energy stored in the MOSFET output capacitance Cds. Both loss mechanisms occur during the
-MOSFET turn-on process.
-(a)
-+ CrVg v(t)
-+
-ir(t)
-Lri(t)
-(b) i(t)
-v(t)
-Vg
-0
-Vg
-0
-Area
-Qr
-Fig. 23.4 Zero-voltage switching at the turn-oﬀtransition of a diode, ZVS quasi-square wave buck con-
-verter example: (a) converter schematic, (b) diode current and voltage waveforms
-In the hard-switched circuit of Fig.23.5, with a fast gate driver there is essentially no switch-
-ing loss incurred during the MOSFET turn-oﬀtransition. This occurs because of the substantial
-output capacitance Cds of the MOSFET. This capacitance holds the voltage v(t) close to zero
-while the MOSFET turns oﬀ, so that the turn-oﬀswitching loss is very small. After the MOSFET
-has turned oﬀ, the output inductor current I ﬂows through Cds. The voltage v(t) then increases
-until v= Vg and the diode becomes forward-biased.
-However, when the MOSFET turns on, a high peak current ﬂows through the MOSFET
-channel, induced by the diode reverse recovery and by the output capacitances of the MOSFET
-and diode. This leads to substantial energy loss during the hard-switched turn-on transition of
-the MOSFET.
-When a MOSFET (or other transistor) operates with hard switching, and when substantial
-inductance is present in series with the MOSFET, then signiﬁcant ringing is observed in the
-
-23.1 Soft-Switching Mechanisms of Semiconductor Devices 1001
-(a)
-+
-I
-+ v(t
-i(t)
-+
-Silicon
-diodeVg
-Cds
-(b) i(t)
-v(t)
-0
-0
-Vg
-t
-I
-Fig. 23.5 Hard switching of a MOSFET in a conventional buck converter: ( a) schematic, (b) MOSFET
-voltage and current waveforms
-MOSFET voltage waveform. A resonant circuit, composed of the MOSFET output capacitance
-and the series inductance, is excited when the MOSFET turns o ﬀ, and the resulting ringing
-voltage can be of large enough magnitude to lead to breakdown and failure of the MOSFET.
-A common example is the MOSFET of the ﬂyback converter, in which series inductance is
-introduced by the transformer leakage inductance. An R-C snubber circuit, similar to that used
-for the diode in Fig. 23.3, can be used to protect the MOSFET from damage caused by excessive
-applied voltage. Another common snubber circuit is illustrated in Fig.23.6. When the MOSFET
-turns oﬀ, the current ﬂowing in the transformer leakage inductance Lℓ begins to ﬂow into the
-MOSFET capacitance Cds. These parasitic elements then ring, and the peak transistor voltage
-can signiﬁcantly exceed the ideal value of (D/D′)Vg.
-One simple way to design the snubber circuit of Fig. 23.6 is to choose the capacitance Cs
-to be large, so that vs(t)≈Vs contains negligible switching ripple. The resistance Rs is then
-chosen so that the power consumption of Rs at the desired voltage Vs is equal to the switching
-loss caused by Lℓ:
-V2
-s
-Rs
-≈1
-2Li2 fs (23.3)
-
-1002 23 Soft Switching
-Fig. 23.6 Insertion of a dis-
-sipative voltage-clamped snub-
-ber circuit into a ﬂyback con-
-verter. The MOSFET voltage is
-clamped to a peak value of (Vg+
-vs) +
-Lll
-Vg
-Cds
-CsRs
-Ds
-vs
-+
-Snubber
-circuit
-The current i is equal to the current ﬂowing in the transformer primary just before the MOSFET
-is turned oﬀ. This approximate expression is useful for obtaining a ﬁrst estimate of how to
-choose Rs to obtain a given desired Vs.
-Zero-current switching does not a ﬀect the switching loss that arises from the MOSFET
-output capacitance, and it may or may not inﬂuence the loss induced by diode reverse recovery.
-In consequence, zero-current switching is of little or no help in improving the e ﬃciency of
-converters that employ MOSFETs.
-Fig. 23.7 Zero-voltage switching
-of a MOSFET, ZVS quasi-square
-wave buck converter example. The
-MOSFET, its body diode, and its out-
-put capacitance Cds are illustrated.
-(a) Schematic, (b)M O S F E Tv o l t a g e
-and current waveforms
-(a)
-+
-Cds
-Vg
-+ v(t
-ir(t)
-Lr
-i(t)
 (b)
-i(t)
-v(t) Vg
-0
+$i(t)$
+$v(t)$
+$0$
+$0$
+$V_g$
+$t$
+$I$
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1003
-Zero-voltage switching can prevent both diode reverse recovery and semiconductor out-
-put capacitances from inducing switching loss in MOSFETs. An example is illustrated in
-Fig. 23.7. This circuit is again a zero-voltage switching quasi-square wave example, discussed
-in Sect. 23.3.3. The converter circuit naturally discharges the energy stored in Cds, before the
-MOSFET is switched on. When the drain-to-source voltage v(t) passes through zero, the MOS-
-FET body diode becomes forward-biased. The MOSFET can then be turned on at zero voltage,
-without incurring turn-on switching loss. The MOSFET turn-on transition must be completed
-before the tank inductor current ir(t) becomes positive. The MOSFET turn-oﬀtransition is also
-lossless, and is similar to the hard-switched case discussed above.
-Zero-voltage switching of a MOSFET also causes its body diode to operate with zero-
-voltage switching. This can eliminate the switching loss associated with reverse recovery of
-the slow body diode, and improve the reliability of circuits that forward-bias this diode.
-Zero-voltage switching can also eliminate the overvoltage problems associated with trans-
-former leakage inductances, removing the need for voltage-clamped snubber circuits such as in
-Fig. 23.6. An example is discussed in Sect. 23.4.2.
-23.1.3 IGBT Switching
-Like the MOSFET, the IGBT typically encounters substantial switching loss during its turn-on
-transition, induced by the reverse-recovery process of diodes within the converter. In addition,
-the IGBT exhibits signiﬁcant switching loss during its turn-oﬀtransition, caused by the current
-tailing phenomenon (see Chap. 4).
-Zero-voltage switching has been successfully applied to IGBT circuits—an example is the
-auxiliary resonant commutation circuit discussed in Sect. 23.4.3. This has the principal advan-
-tage of eliminating the switching loss caused by diode reverse recovery. Although zero-voltage
-switching can reduce the loss incurred during the turn-oﬀtransition, it is diﬃcult to eliminate
-the substantial loss caused by current tailing.
-23.2 The Zero-Current Switching Quasi-Resonant Switch Cell
-Figure 23.8a illustrates a generic buck converter, consisting of a switch cell cascaded by anL–C
-low-pass ﬁlter. When the switch cell is realized as in Fig.23.8b, then a conventional PWM buck
-converter is obtained. Figures23.8b,c illustrate two other possible realizations of the switch cell:
-the half-wave and full-wave zero-current-switching quasi-resonant switches [331, 332]. In these
-switch cells, a resonant tank capacitorCr is placed in parallel with diodeD2, while resonant tank
-capacitor Lr is placed in series with the active transistor element.
-Both resonant switch cells require a two-quadrant SPST switch. In the half-wave switch cell
-of Fig.23.8c, diode D1 is added in series with transistorQ1. This causes theQ1–D1 SPST switch
-to turn oﬀat the ﬁrst zero crossing of the tank inductor currenti1(t). In the full-wave switch cell
-of Fig. 23.8d, antiparallel diode D1 allows bidirectional ﬂow of the tank inductor current i1(t).
-With this switch network, the Q1–D1 SPST switch is normally turned oﬀat the second zero
-crossing of the i1(t) waveform. In either switch cell, the Lr and Cr elements are relatively small
-in value, such that their resonant frequency f0 is greater than the switching frequency fs, where
-f0= 1
-2π√LrCr
-=ω0
-2π (23.4)
+图23.5 传统降压变换器中 MOSFET 的硬开关：(a) 电路图，(b) MOSFET 电压和电流波形
 
-1004 23 Soft Switching
+电压波形观察到显著振铃。由 MOSFET 输出电容和串联电感组成的谐振电路在 MOSFET 关断时被激励，所得振铃电压幅值可足以导致 MOSFET 击穿和失效。常见示例是反激变换器的 MOSFET，其中串联电感由变压器漏感引入。可用类似于图23.3 用于二极管的 R-C 缓冲电路保护 MOSFET 免受过压损害。另一种常见缓冲电路如图23.6 所示。MOSFET 关断时，变压器漏感 $L_\ell$ 中流动的电流开始流入 MOSFET 电容 $C_{ds}$。这些寄生元件随后振铃，峰值晶体管电压可显著超过理想值 $(D/D')V_g$。
+
+设计图23.6 缓冲电路的一种简单方法是选电容 $C_s$ 大，使 $v_s(t) \approx V_s$ 含可忽略开关纹波。然后选电阻 $R_s$ 使 $R_s$ 在期望电压 $V_s$ 下的功耗等于 $L_\ell$ 引起的开关损耗：
+
+$$\frac{V_s^2}{R_s} \approx \frac{1}{2} L_i^2 f_s \tag{23.3}$$
+
+![源页 p.999](../assets/page-snapshots/chapter-23/page-999.png)
+
+图23.6 在反激变换器中插入耗散型电压钳位缓冲电路。MOSFET 电压钳位在峰值 $(V_g + v_s)$
+
+$+$
+$L_{ll}$
+$V_g$
+$C_{ds}$
+$C_s$
+$R_s$
+$D_s$
+$v_s$
+$+$
+缓冲电路
+
+电流 $i$ 等于 MOSFET 关断前在变压器初级流动的电流。此近似表达式对获得如何选 $R_s$ 以获得给定期望 $V_s$ 的初步估计有用。
+
+零电流开关不影响 MOSFET 输出电容引起的开关损耗，可能影响也可能不影响二极管反向恢复引起的损耗。故零电流开关对改善采用 MOSFET 的变换器效率几乎无帮助。
+
+图23.7 MOSFET 的零电压开关，ZVS 准方波降压变换器示例。MOSFET、其体二极管和输出电容 $C_{ds}$ 如图。(a) 电路图，(b) MOSFET 电压和电流波形
+
 (a)
-+
-L
-CR
-+
-v(t)vg(t)
-i(t)
-+
-v2(t)
-i1(t) i2(t)
-Switch
-cell
-+
-v1(t)
+$+$
+$C_{ds}$
+$V_g$
+$+$
+$v(t)$
+$i_r(t)$
+$L_r$
+$i(t)$
+
 (b)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-PWM switch cell
+$i(t)$
+$v(t)$
+$V_g$
+$0$
+
+![源页 p.1000](../assets/page-snapshots/chapter-23/page-1000.png)
+
+零电压开关可防止二极管反向恢复和半导体输出电容在 MOSFET 中引起开关损耗。示例见图23.7。此电路再次为零电压开关准方波示例，23.3.3节讨论。变换器电路在 MOSFET 开通前自然放电 $C_{ds}$ 存储的能量。漏-源电压 $v(t)$ 过零时，MOSFET 体二极管正偏。MOSFET 随后可零电压开通，不产生开通开关损耗。MOSFET 开通过渡须在槽电感电流 $i_r(t)$ 变正前完成。MOSFET 关断过渡也无损，类似于上面讨论的硬开关情形。
+
+MOSFET 零电压开关也使其体二极管零电压开关工作。这可消除慢体二极管反向恢复相关的开关损耗，并改善正偏此二极管的电路的可靠性。
+
+零电压开关还可消除变压器漏感引起的过压问题，去除图23.6 等电压钳位缓冲电路的需要。23.4.2节讨论示例。
+
+### 23.1.3 IGBT 开关
+
+与 MOSFET 一样，IGBT 开通过渡常遇显著开关损耗，由变换器内二极管反向恢复过程引起。此外，IGBT 关断过渡表现出显著开关损耗，由电流拖尾现象引起（见第4章）。
+
+零电压开关已成功应用于 IGBT 电路——示例是23.4.3节讨论的辅助谐振换流电路。这主要优点是消除二极管反向恢复引起的开关损耗。虽然零电压开关可减少关断过渡损耗，但难以消除电流拖尾引起的可观损耗。
+
+## 23.2 零电流开关准谐振开关单元
+
+图23.8a 说明了通用降压变换器，由开关单元与 L–C 低通滤波器级联组成。开关单元实现如图23.8b 时得传统 PWM 降压变换器。图23.8b、c 给出开关单元的另两种实现：半波和全波零电流开关准谐振开关 [331, 332]。这些开关单元中，谐振槽电容 $C_r$ 与二极管 $D_2$ 并联，谐振槽电感 $L_r$ 与有源晶体管元件串联。
+
+两种谐振开关单元都需双象限 SPST 开关。图23.8c 的半波单元中，二极管 $D_1$ 与晶体管 $Q_1$ 串联。这使 $Q_1$–$D_1$ SPST 开关在槽电感电流 $i_1(t)$ 第一次过零时关断。图23.8d 的全波单元中，反并联二极管 $D_1$ 允许槽电感电流 $i_1(t)$ 双向流动。此开关网络中，$Q_1$–$D_1$ SPST 开关通常在 $i_1(t)$ 波形第二次过零时关断。任一开关单元中，$L_r$ 和 $C_r$ 元件值相对小，使其谐振频率 $f_0$ 大于开关频率 $f_s$：
+
+$$f_0 = \frac{1}{2\pi\sqrt{L_r C_r}} = \frac{\omega_0}{2\pi} \tag{23.4}$$
+
+![源页 p.1001](../assets/page-snapshots/chapter-23/page-1001.png)
+
+(a)
+$+$
+$L$
+$C$
+$R$
+$+$
+$v(t)$
+$v_g(t)$
+$i(t)$
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+开关单元
+$+$
+$v_1(t)$
+
+(b)
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+PWM 开关单元
+
 (c)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Lr
-Cr
-Half-wave ZCS quasi-resonant switch cell
-Switch network
-+
-v1r(t)
-i2r(t)D1
-D2
-Q1
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$L_r$
+$C_r$
+半波 ZCS 准谐振开关单元
+开关网络
+$+$
+$v_{1r}(t)$
+$i_{2r}(t)$
+$D_1$
+$D_2$
+$Q_1$
+
 (d)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Lr
-Cr
-Full-wave ZCS quasi-resonant switch cell
-Switch network
-+
-v1r(t)
-i2r(t)
-D1
-D2
-Q1
-Fig. 23.8 Implementation of the switch cell in a buck converter: (a) buck converter, with arbitrary switch
-cell; (b) PWM switch cell; (c) half-wave ZCS quasi-resonant switch cell; (d) full-wave ZCS quasi-resonant
-switch cell
+$+$
+$v_2(t)$
+$i_1(t)$ $i_2(t)$
+$+$
+$v_1(t)$
+$L_r$
+$C_r$
+全波 ZCS 准谐振开关单元
+开关网络
+$+$
+$v_{1r}(t)$
+$i_{2r}(t)$
+$D_1$
+$D_2$
+$Q_1$
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1005
-In the analysis which follows, it is assumed that the converter ﬁlter element values L and C
-have negligible switching ripple. Hence, the switch cell terminal waveforms v1(t) and i2(t)a r e
-well-approximated by their average values:
-i2(t)≈⟨i2(t)⟩Ts
-v1(t)≈⟨v1(t)⟩Ts
-(23.5)
-with the average deﬁned as in Eq. ( 7.3). In steady-state, we can further approximate v1(t) and
-i2(t) by their dc components V1 and I2:
-i2(t)≈I2
-v1(t)≈V1
-(23.6)
-Thus, the small-ripple approximation is employed for the converter ﬁlter elements, as usual.
-+
-+
-v2(t)
-i1(t)
-v1(t) Ts
-Lr
-Cr
-Half-wave ZCS quasi-resonant switch cell
-Switch network
-+
-v1r(t)
-i2r(t)D1
-D2
-Q1
-i2(t) Ts
-Fig. 23.9 The half-wave ZCS quasi-resonant switch cell, driven by the terminal quantities⟨v1(t)⟩Ts and
-⟨i2(t)⟩Ts
-To understand the operation of the half-wave ZCS quasi-resonant switch cell, we can solve
-the simpliﬁed circuit illustrated in Fig. 23.9. In accordance with the averaged switch modeling
-approach of Sects. 14.1 and 15.2, it is desired to determine the average terminal waveforms
-⟨v2(t)⟩TS and⟨i1(t)⟩Ts , as functions of the applied quantities ⟨v1(t)⟩TS and⟨i2(t)⟩TS . The switch
-conversion ratioμis then given by
-μ= ⟨v2(t)⟩Ts
-⟨v1r(t)⟩Ts
-= ⟨i1(t)⟩Ts
-⟨i2r(t)⟩Ts
-(23.7)
-In steady state, we can write
-μ= V2
-V1
-= I1
-I2
-(23.8)
-The steady-state analysis of this section employs Eq. (23.8) to determineμ.
-23.2.1 Waveforms of the Half-Wave ZCS Quasi-Resonant Switch Cell
-Typical waveforms of the half-wave cell of Fig. 23.9 are illustrated in Fig. 23.10. Each switch-
-ing period consists of four subintervals as shown, having angular lengths α,β, δ, andξ.T h e
+图23.8 降压变换器中开关单元的实现：(a) 降压变换器，任意开关单元；(b) PWM 开关单元；(c) 半波 ZCS 准谐振开关单元；(d) 全波 ZCS 准谐振开关单元
 
-1006 23 Soft Switching
-Fig. 23.10 Tank inductor current and
-capacitor voltage waveforms, for the
-half-wave ZCS quasi-resonant switch of
-Fig. 23.9
-V1
-Lr
-I2
-Cr
- = 0t
-i1(t)
-I2
-v2(t)
-0Ts
-Vc1
-Subinterval: 12 3 4
-Conducting
-devices:
-Q1
-D2
-D1
-Q1
-D1
-D2X
-switching period begins when the controller turns on transistor Q1. The initial values of the
-tank inductor current i1(t) and tank capacitor voltage v2(t) are zero. During subinterval 1, all
-three semiconductor devices conduct. Diode D2 is forward-biased because i1(t) is less than I2.
-In consequence, during subinterval 1 the switch cell reduces to the circuit of Fig. 23.11.
-The slope of the inductor current is given by
-di1(t)
-dt = V1
-Lr
-(23.9)
-with the initial condition i1(0)= 0. The solution is
-i1(t)= V1
-Lr
-t=ω0t V1
-R0
-(23.10)
-where the tank characteristic impedance R0 is deﬁned as
-R0=
-√
-Lr
-Cr
-(23.11)
-It is convenient to express the waveforms in terms of the angle θ=ω0t, instead of time t.A t
-the end of subinterval 1,ω0t=α. The subinterval ends when diode D2 becomes reverse-biased.
-Since the diode D2 current is equal to I2−i1(t), this occurs when i1(t)= I2. Hence, we can write
-Fig. 23.11 Circuit of the switch network
-during subinterval 1
-+
-+
-v2(t)
-i1(t)
-V1
-Lr
-I2
+![源页 p.1002](../assets/page-snapshots/chapter-23/page-1002.png)
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1007
-Fig. 23.12 Circuit of the switch network
-during subinterval 2
-+
-+
-v2(t)
-i1(t)
-V1
-Lr
-I2Cr
-ic(t)
-i1(α)=αV1
-R0
-= I2 (23.12)
-Solution forαyields
-α= I2R0
-V1
-(23.13)
-During subinterval 2, transistor Q1 and diode D1 conduct, while diode D2 is reverse-biased.
-The switch network then becomes the circuit illustrated in Fig. 23.12. The resonant Lr–Cr tank
-network is excited by the constant sources V1 and I2. The network equations are
-Lr
-di1(ω0t)
-dt = V1−v2(ω0t)
-Cr
-dv2(ω0t)
-dt = i1(ω0t)−I2 (23.14)
-with the initial conditions
-v2(α)= 0 (23.15)
-i1(α)= I2
-T h es o l u t i o ni s
-i1(ω0t)= I2+ V1
-R0
-sin(ω0t−α) (23.16)
-v2(ω0t)= V1(1−cos(ω0t−α))
-The tank inductor current rises to a peak value given by
-I1 pk= I2+ V1
-R0
-(23.17)
-The subinterval ends at the ﬁrst zero crossing of i1(t). If we denote the angular length of the
-subinterval asβ, then we can write
-i1(α+β)= I2+ V1
-R0
-sin(β)= 0 (23.18)
-Solution for sin(β) yields
-sin(β)=−I2R0
-V1
-(23.19)
-Care must be employed when solving Eq. ( 23.19) for the angle β. It can be observed from
-Fig. 23.10 that the angleβis greater thanπ. The correct branch of the arcsine function must be
-selected, as follows:
+以下分析假设变换器滤波元件 $L$ 和 $C$ 的开关纹波可忽略。故开关单元端子波形 $v_1(t)$ 和 $i_2(t)$ 可用其平均值很好近似：
 
-1008 23 Soft Switching
-β=π+ sin−1
-⎦I2R0
-V1
-)
-(23.20)
-where
-−π
-2< sin−1(x)≤π
-2
-Note that the inequality
-I2< V1
-R0
-(23.21)
-must be satisﬁed; otherwise, there is no solution to Eq. ( 23.19). At excessive load currents,
-where Eq. (23.21) is not satisﬁed, the tank inductor current never reaches zero, and the transistor
-does not switch oﬀat zero current.
-The tank capacitor voltage at the end of subinterval 2 is found by evaluation of Eq. ( 23.16)
-atω0t= (α+β). The cos(β) term can be expressed as
-cos(β)=−
-√
-1−sin2(β)=−
-√
-1−
-⎦I2R0
-V1
-)2
-(23.22)
-Substitution of Eq. (23.22) into Eq. (23.16) leads to
-v2(α+β)= Vc1= V1
-⎛⎜⎜⎜⎜⎜⎜⎜⎝1+
-√
-1−
-⎦I2R0
-V1
-)2
-⎞⎟⎟⎟⎟⎟⎟⎟⎠ (23.23)
-At the end of subinterval 2, diode D1 becomes reverse-biased. Transistor Q1 can then be
-switched oﬀat zero current.
-During subinterval 3, all semiconductor devices are oﬀ, and the switch cell reduces to the
-circuit of Fig.23.13. The tank capacitor Cr is discharged by the ﬁlter inductor currentI2. Hence,
-the tank capacitor voltage v2 decreases linearly to zero. The circuit equations are
-Cr
-dv2(ω0t)
-dt =−I2 (23.24)
-v2(α+β)= Vc1
-T h es o l u t i o ni s
-v2(ω0t)= Vc1−I2R0(ω0t−α−β) (23.25)
-Subinterval 3 ends when the tank capacitor voltage reaches zero. Diode D2 then becomes
-forward-biased. Hence, we can write
-v2(α+β+δ)= Vc1−I2R0δ= 0 (23.26)
-whereδis the angular length of subinterval 3. Solution forδyields
-Fig. 23.13 Circuit of the switch network
-during subinterval 3
-+
-v2(t) I2Cr
+$$i_2(t) \approx \langle i_2(t) \rangle_{T_s}$$
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1009
-δ= Vc1
-I2R0
-= V1
-I2R0
-⎛⎜⎜⎜⎜⎜⎜⎜⎝1−
-√
-1−
-⎦I2R0
-V1
-)2
-⎞⎟⎟⎟⎟⎟⎟⎟⎠ (23.27)
-Subinterval 4, of angular length ξ, is identical to the diode conduction subinterval of the
-conventional PWM switch network. Diode D2 conducts the ﬁlter inductor current I2, and the
-tank capacitor voltage v2 is equal to zero. Transistor Q1 is oﬀ, and the input current i1 is equal
-to zero.
-The angular length of the switching period is
-ω0Ts=α+β+δ+ξ= 2πf0
-fs
-= 2π
-F (23.28)
-where
-F= fs
-f0
-(23.29)
-Quasi-resonant switch networks are usually controlled by variation of the switching frequency
-fs or, in normalized terms, by variation of F. Note that the interval lengths α,β, and δare
-determined by the response of the tank network. Hence, control of the switching frequency is
-equivalent to control of the fourth subinterval lengthξ. The subinterval lengthξmust be positive,
-and hence, the minimum switching period is limited as follows:
-ω0Ts≥α+β+δ (23.30)
-Substitution of Eqs. (23.13), (23.20), and (23.27) into Eq. (23.30) yields
-2π
-F ≥I2R0
-V1
-+π+ sin−1
-⎦I2R0
-V1
-)
-+ V1
-I2R0
-⎛⎜⎜⎜⎜⎜⎜⎜⎝1−
-√
-1−
-⎦I2R0
-V1
-)2
-⎞⎟⎟⎟⎟⎟⎟⎟⎠ (23.31)
-This expression limits the maximum switching frequency, or maximumF, of the half-wave ZCS
-quasi-resonant switch cell.
-23.2.2 The Average Terminal Waveforms
-It is now desired to solve for the power processing function performed by the switch network.
-The switch conversion ratioμis a generalization of the duty cycled. It expresses how a resonant
-switch network controls the average voltages and currents of a converter. In our buck converter
-example, we can deﬁneμas the ratio of⟨v2(t)⟩TS to⟨v1(t)⟩TS , or equivalently, the ratio of⟨i1(t)⟩TS
-to⟨i2(t)⟩TS . In a hard-switched PWM network, this ratio is equal to the duty cycle d. Hence,
-analytical results derived for hard-switched PWM converters can be adapted to quasi-resonant
-converters, simply by replacing d withμ. In this section, we derive an expression for μ,b y
-averaging the terminal waveforms of the switch network.
-The switch input current waveform i1(t)o fF i g .23.10 is reproduced in Fig. 23.14. The aver-
-age switch input current is given by
-⟨i1(t)⟩Ts = 1
-Ts
-∫ t+Ts
-t
-i1(t)dt= q1+ q2
-Ts
-(23.32)
+$$v_1(t) \approx \langle v_1(t) \rangle_{T_s} \tag{23.5}$$
 
-1010 23 Soft Switching
-Fig. 23.14 Input current waveform i1(t),
-and the areas q1 and q2 during subintervals
-1 and 2, respectively
-+
-00
-i1(t)
-I2 i1(t) Ts
-t
-q2q1
-The charge quantitiesq1 and q2 are the areas under thei1(t) waveform during the ﬁrst and second
-subintervals, respectively. The chargeq1 is given by the triangle area formula
-q1=
-∫ α
-ω0
-0
-i1(t)dt= 1
-2
-⎦α
-ω0
-)
-(I2) (23.33)
-The timeα/ω0 is the length of subinterval 1. The charge q2 is
-q2=
-∫ α+β
-ω0
-α
-ω0
-i1(t)dt (23.34)
-According to Fig.23.12, during subinterval 2 the currenti1(t) can be related to the tank capacitor
-current iC(t) and the switch output current I2 by the node equation
-i1(t)= iC(t)+ I2 (23.35)
-Substitution of Eq. (23.35) into Eq. (23.34) leads to
-q2=
-∫ α+β
-ω0
-α
-ω0
-iC(t)dt+
-∫ α+β
-ω0
-α
-ω0
-I2dt (23.36)
-Both integrals in Eq. (23.36) can easily be evaluated, as follows. Since the second term involves
-the integral of the constant current I2, this term is
-∫ α+β
-ω0
-α
-ω0
-I2dt= I2
-β
-ω0
-(23.37)
-The ﬁrst term in Eq. ( 23.36) involves the integral of the capacitor current over subinterval 2.
-Hence, this term is equal to the change in capacitor charge over the second subinterval:
-∫ α+β
-ω0
-α
-ω0
-iC(t)dt= C
-⎦
-v2
-⎦α+β
-ω0
-)
-−v2
-⎦α
-ω0
-))
-(23.38)
-(recall thatΔq= CΔv in a capacitor). During the second subinterval, the tank capacitor voltage
-is initially zero, and has a ﬁnal value of Vc1. Hence, Eq. (23.38) reduces to
-∫ α+β
-ω0
-α
-ω0
-iC(t)dt= C (Vc1−0)= CVc1 (23.39)
+平均定义如式(7.3)。稳态下，可进一步用直流分量 $V_1$ 和 $I_2$ 近似 $v_1(t)$ 和 $i_2(t)$：
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1011
-Substitution of Eqs. ( 23.37) and (23.39) into Eq. (23.36) leads to the following expression for
-q2:
-q2= CVc1+ I2
-β
-ω0
-(23.40)
-Equations (23.33) and ( 23.40) can now be inserted into Eq. ( 23.32), to obtain the following
-expression for the switch input current:
-⟨i1(t)⟩Ts = αI2
-2ω0Ts
-+ CVc1
-Ts
-+ βI2
-ω0Ts
-(23.41)
-Substitution of Eq. (23.41)i n t o(23.8) leads to the following expression for the switch con-
-version ratio:
-μ=⟨i1(t)⟩Ts
-I2
-= α
-2ω0Ts
-+ CVc1
-I2Ts
-+ β
-ω0Ts
-(23.42)
-Finally, the quantitiesα,β, and Vc1 can be eliminated, using Eqs. (23.13), (23.20), (23.23). The
-result is
-μ= F 1
-2π
-[1
-2 Js+π+ sin−1(Js)+ 1
-Js
-⎦
-1+
-√
-1−J2s
-)]
-(23.43)
-where
-Js= I2R0
-V1
-(23.44)
-Equation (23.43) is of the form
-μ= FP1
-2
-(Js) (23.45)
-where
-P1
-2
-(Js)= 1
-2π
-[1
-2 Js+π+ sin−1(Js)+ 1
-Js
-⎦
-1+
-√
-1−J2s
-)]
-(23.46)
-Thus, the switch conversion ratio μis directly controllable by variation of the switching fre-
-quency, throughF. The switch conversion ratio is also a function of the applied terminal voltage
-V1 and current I2,v i aJs. The function P1
-2
-(Js) is sketched in Fig. 23.15. The switch conversion
-ratioμis sketched in Fig. 23.16, for various values of F and Js. These characteristics are sim-
-ilar in shape to the function P(Js), and are simply scaled by the factor F. It can be seen that
-the conversion ratioμis a strong function of the current I2,v i a Js. The characteristics end at
-Js = 1; according to Eq. (23.31), the zero-current switching property is lost when Js > 1. The
-characteristics also end at the maximum switching-frequency limit given by Eq. ( 23.31). This
-expression can be simpliﬁed by use of Eq. (23.43), to express the limit in terms ofμas follows:
-μ≤1−JsF
-4π (23.47)
-The switch conversion ratioμis thus limited to a value slightly less than 1.
-The averaged waveforms of converters containing half-wave ZCS quasi-resonant switches
-can now be determined. The results of the analysis of PWM converters operating in the continu-
+$$i_2(t) \approx I_2$$
 
-1012 23 Soft Switching
-0
-2
-4
-6
-8
-10
-0 0.2 0.4 0.6 0.8 1
-Js
-P (Js )1
-2
-Fig. 23.15 The function P 1
-2
-(Js)
-ous conduction mode can be directly adapted to the related quasi-resonant converters, simply by
-replacing the duty cycle d with the switch conversion ratioμ. For the buck converter example,
-the conversion ratio is
-M= V
-Vg
-=μ (23.48)
-This result could also be derived by use of the principle of inductor volt-second balance. The
-average voltage across the ﬁlter inductor is (μVg−V). Upon equating this voltage to zero, we
-obtain Eq. (23.48).
-In the buck converter, I2 is equal to the load current I, while V1 is equal to the converter
-input voltage Vg. Hence, the quantity Js is
-Js= IR0
-Vg
-(23.49)
-Zero-current switching occurs for
-I≤Vg
-R0
-(23.50)
-The output voltage can vary over the range
-0≤V≤Vg−FIR0
-4π (23.51)
-which nearly coincides with the PWM output voltage range 0≤V≤Vg.
+$$v_1(t) \approx V_1 \tag{23.6}$$
 
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell 1013
-Fig. 23.16 Characteristics of the half-
-wave ZCS quasi-resonant switch
-0 0.2 0.4 0.6 0.8 1
-0
-0.2
-0.4
-0.6
-0.8
-1
-μ
-Js
-ZCS boundary
-max F boundary
-F = 0.1
-0.2
-0.3
-0.4
-0.5
-0.6
-0.7
-0.8
-0.9
-+
-Q1
-L
-CR
-+
-VD1
-Vg
-i2(t)
-D2
-Lr
-CrIg
-+
-v1(t)
-i1(t)
-v2(t) +
-Fig. 23.17 Boost converter containing a half-wave ZCS quasi-resonant switch
-A boost converter employing a half-wave ZCS quasi-resonant switch is illustrated in
-Fig. 23.17. The conversion ratio of the boost converter is given by
-M= V
-Vg
-= 1
-1−μ (23.52)
-The half-wave switch conversion ratioμis again given by Eqs. (23.44)t o( 23.46). For the boost
-converter, the applied switch voltage V1 is equal to the output voltage V, while the applied
-switch current I2 is equal to the ﬁlter inductor current, or Ig. Hence, the quantity Js is
-Js= I2R0
-V1
-= IgR0
-V (23.53)
+故对变换器滤波元件采用小纹波近似，如常。
 
-1014 23 Soft Switching
-Fig. 23.18 Tank inductor current and ca-
-pacitor voltage waveforms, for the full-
-wave ZCS quasi-resonant switch cell of
-Fig. 23.8d
-I2
-Cr
-V1
-Lr
- = 0t
-i1(t)
-I2
-v2(t)
-0Ts
-Vc1
-Subinterval: 12 3 4
-Conducting
-devices:
-Q1
-D2
-Q1 D1 D2X
-Also, the input current Ig of the boost converter is related to the load current I according to
-Ig= I
-1−μ (23.54)
-Equations (23.52)t o( 23.54), in conjunction with Eqs. (23.44)t o( 23.46), describe the averaged
-waveforms of the half-wave quasi-resonant ZCS boost converter.
-23.2.3 The Full-Wave ZCS Quasi-Resonant Switch Cell
-The full-wave ZCS quasi-resonant switch cell is illustrated in Fig. 23.8d. It diﬀers from the
-half-wave cell in that elements D1 and Q1 are connected in antiparallel, to form a current-
-bidirectional two-quadrant switch. Typical tank inductor current and tank capacitor voltage
-waveforms are illustrated in Fig. 23.18. These waveforms are similar to those of the half-wave
-case, except that the Q1/D1 switch interrupts the tank inductor current i1(t) at its second zero
-crossing. While i1(t) is negative, diode D1 conducts, and transistor Q1 can be turned oﬀat zero
-current.
-The analysis is nearly the same as for the half-wave case, with the exception of subinterval
-2. The subinterval 2 angular lengthβand ﬁnal voltage Vc1 can be shown to be
-β=
-{π+ sin−1(Js) (half wave)
-2π−sin−1(Js)( f u l l w a v e ) (23.55)
-Vc1=
-⎧⎪⎪⎨⎪⎪⎩
-V1
-⎦
-1+
-√
-1−J2s
-)
-(half wave)
-V1
-⎦
-1−
-√
-1−J2s
-)
-(full wave) (23.56)
-In either case, the switch conversion ratio μis given by Eq. (23.42). For the full-wave switch,
-one obtains
-```
+$+$
+$+$
+$v_2(t)$
+$i_1(t)$
+$v_1(t)$
+$T_s$
+$L_r$
+$C_r$
+半波 ZCS 准谐振开关单元
+开关网络
+$+$
+$v_{1r}(t)$
+$i_{2r}(t)$
+$D_1$
+$D_2$
+$Q_1$
+$i_2(t)$ $T_s$
+
+图23.9 半波 ZCS 准谐振开关单元，由端子量 $\langle v_1(t) \rangle_{T_s}$ 和 $\langle i_2(t) \rangle_{T_s}$ 驱动
+
+为理解半波 ZCS 准谐振开关单元的工作，可解图23.9 所示简化电路。根据14.1 和15.2 节的平均开关建模方法，须确定平均端子波形 $\langle v_2(t) \rangle_{T_S}$ 和 $\langle i_1(t) \rangle_{T_s}$ 作为施加量 $\langle v_1(t) \rangle_{T_S}$ 和 $\langle i_2(t) \rangle_{T_S}$ 的函数。开关变换比 $\mu$ 为
+
+$$\mu = \frac{\langle v_2(t) \rangle_{T_s}}{\langle v_{1r}(t) \rangle_{T_s}} = \frac{\langle i_1(t) \rangle_{T_s}}{\langle i_{2r}(t) \rangle_{T_s}} \tag{23.7}$$
+
+稳态下可写
+
+$$\mu = \frac{V_2}{V_1} = \frac{I_1}{I_2} \tag{23.8}$$
+
+本节稳态分析用式(23.8) 确定 $\mu$。
+
+### 23.2.1 半波 ZCS 准谐振开关单元的波形
+
+图23.9 半波单元的典型波形如图23.10。每个开关周期由四个子区间组成，角长度分别为 $\alpha$、$\beta$、$\delta$、$\xi$。
+
+![源页 p.1003](../assets/page-snapshots/chapter-23/page-1003.png)
+
+图23.10 图23.9 半波 ZCS 准谐振开关的槽电感电流和电容电压波形
+
+$V_1$
+$L_r$
+$I_2$
+$C_r$
+$\xi = 0$
+$t$
+$i_1(t)$
+$I_2$
+$v_2(t)$
+$0$
+$T_s$
+$V_{c1}$
+子区间：1 2 3 4
+导通器件：
+$Q_1$
+$D_2$
+$D_1$
+$Q_1$
+$D_1$
+$D_2$
+$X$
+
+开关周期在控制器开通晶体管 $Q_1$ 时开始。槽电感电流 $i_1(t)$ 和槽电容电压 $v_2(t)$ 的初值为零。子区间1 中，三个半导体器件都导通。二极管 $D_2$ 正偏因 $i_1(t)$ 小于 $I_2$。结果子区间1 中开关单元简化为图23.11 电路。
+
+电感电流斜率为
+
+$$\frac{di_1(t)}{dt} = \frac{V_1}{L_r} \tag{23.9}$$
+
+初始条件 $i_1(0) = 0$。解为
+
+$$i_1(t) = \frac{V_1}{L_r} t = \omega_0 t \frac{V_1}{R_0} \tag{23.10}$$
+
+其中槽特性阻抗 $R_0$ 定义为
+
+$$R_0 = \sqrt{\frac{L_r}{C_r}} \tag{23.11}$$
+
+用角度 $\theta = \omega_0 t$ 而非时间 $t$ 表示波形方便。子区间1 结束时 $\omega_0 t = \alpha$。子区间在二极管 $D_2$ 反偏时结束。由于二极管 $D_2$ 电流等于 $I_2 - i_1(t)$，这在 $i_1(t) = I_2$ 时发生。故可写
+
+图23.11 子区间1 中开关网络的电路
+
+$+$
+$+$
+$v_2(t)$
+$i_1(t)$
+$V_1$
+$L_r$
+$I_2$
+
+![源页 p.1004](../assets/page-snapshots/chapter-23/page-1004.png)
+
+图23.12 子区间2 中开关网络的电路
+
+$+$
+$+$
+$v_2(t)$
+$i_1(t)$
+$V_1$
+$L_r$
+$I_2$
+$C_r$
+$i_c(t)$
+
+$$i_1(\alpha) = \alpha \frac{V_1}{R_0} = I_2 \tag{23.12}$$
+
+解 $\alpha$ 得
+
+$$\alpha = \frac{I_2 R_0}{V_1} \tag{23.13}$$
+
+子区间2 中，晶体管 $Q_1$ 和二极管 $D_1$ 导通，二极管 $D_2$ 反偏。开关网络变为图23.12 所示电路。谐振 $L_r$–$C_r$ 槽网络由恒源 $V_1$ 和 $I_2$ 激励。网络方程为
+
+$$L_r \frac{di_1(\omega_0 t)}{dt} = V_1 - v_2(\omega_0 t)$$
+
+$$C_r \frac{dv_2(\omega_0 t)}{dt} = i_1(\omega_0 t) - I_2 \tag{23.14}$$
+
+初始条件
+
+$$v_2(\alpha) = 0 \tag{23.15}$$
+
+$$i_1(\alpha) = I_2$$
+
+解为
+
+$$i_1(\omega_0 t) = I_2 + \frac{V_1}{R_0} \sin(\omega_0 t - \alpha) \tag{23.16}$$
+
+$$v_2(\omega_0 t) = V_1(1 - \cos(\omega_0 t - \alpha))$$
+
+槽电感电流升至峰值
+
+$$I_{1\,pk} = I_2 + \frac{V_1}{R_0} \tag{23.17}$$
+
+子区间在 $i_1(t)$ 第一次过零时结束。若记子区间角长度为 $\beta$，则可写
+
+$$i_1(\alpha + \beta) = I_2 + \frac{V_1}{R_0} \sin(\beta) = 0 \tag{23.18}$$
+
+解 $\sin(\beta)$ 得
+
+$$\sin(\beta) = -\frac{I_2 R_0}{V_1} \tag{23.19}$$
+
+解式(23.19) 求 $\beta$ 时须小心。从图23.10 可见 $\beta$ 大于 $\pi$。须选反正弦函数的正确分支：
+
+![源页 p.1005](../assets/page-snapshots/chapter-23/page-1005.png)
+
+$$\beta = \pi + \sin^{-1}\left( \frac{I_2 R_0}{V_1} \right) \tag{23.20}$$
+
+其中
+
+$$-\frac{\pi}{2} < \sin^{-1}(x) \le \frac{\pi}{2}$$
+
+注意不等式
+
+$$I_2 < \frac{V_1}{R_0} \tag{23.21}$$
+
+须满足；否则式(23.19) 无解。负载电流过大、式(23.21) 不满足时，槽电感电流永不过零，晶体管不在零电流关断。
+
+子区间2 结束时槽电容电压由式(23.16) 在 $\omega_0 t = (\alpha + \beta)$ 处评估求得。$\cos(\beta)$ 项可表示为
+
+$$\cos(\beta) = -\sqrt{1 - \sin^2(\beta)} = -\sqrt{1 - \left( \frac{I_2 R_0}{V_1} \right)^2} \tag{23.22}$$
+
+将式(23.22) 代入式(23.16) 得
+
+$$v_2(\alpha + \beta) = V_{c1} = V_1 \left( 1 + \sqrt{1 - \left( \frac{I_2 R_0}{V_1} \right)^2} \right) \tag{23.23}$$
+
+子区间2 结束时，二极管 $D_1$ 反偏。晶体管 $Q_1$ 随后可零电流关断。
+
+子区间3 中，所有半导体器件关断，开关单元简化为图23.13 电路。槽电容 $C_r$ 被滤波电感电流 $I_2$ 放电。故槽电容电压 $v_2$ 线性降到零。电路方程为
+
+$$C_r \frac{dv_2(\omega_0 t)}{dt} = -I_2 \tag{23.24}$$
+
+$$v_2(\alpha + \beta) = V_{c1}$$
+
+解为
+
+$$v_2(\omega_0 t) = V_{c1} - I_2 R_0 (\omega_0 t - \alpha - \beta) \tag{23.25}$$
+
+子区间3 在槽电容电压到零时结束。二极管 $D_2$ 随后正偏。故可写
+
+$$v_2(\alpha + \beta + \delta) = V_{c1} - I_2 R_0 \delta = 0 \tag{23.26}$$
+
+其中 $\delta$ 是子区间3 的角长度。解 $\delta$ 得
+
+图23.13 子区间3 中开关网络的电路
+
+$+$
+$v_2(t)$
+$I_2$
+$C_r$
+
+![源页 p.1006](../assets/page-snapshots/chapter-23/page-1006.png)
+
+$$\delta = \frac{V_{c1}}{I_2 R_0} = \frac{V_1}{I_2 R_0} \left( 1 - \sqrt{1 - \left( \frac{I_2 R_0}{V_1} \right)^2} \right) \tag{23.27}$$
+
+子区间4，角长度 $\xi$，与传统 PWM 开关网络的二极管导通子区间相同。二极管 $D_2$ 导通滤波电感电流 $I_2$，槽电容电压 $v_2$ 等于零。晶体管 $Q_1$ 关断，输入电流 $i_1$ 等于零。
+
+开关周期的角长度为
+
+$$\omega_0 T_s = \alpha + \beta + \delta + \xi = 2\pi \frac{f_0}{f_s} = \frac{2\pi}{F} \tag{23.28}$$
+
+其中
+
+$$F = \frac{f_s}{f_0} \tag{23.29}$$
+
+准谐振开关网络通常通过改变开关频率 $f_s$ 控制，或归一化项通过改变 $F$ 控制。注意区间长度 $\alpha$、$\beta$、$\delta$ 由槽网络响应确定。故开关频率控制等价于第四子区间长度 $\xi$ 控制。子区间长度 $\xi$ 须为正，故最小开关周期限制为：
+
+$$\omega_0 T_s \ge \alpha + \beta + \delta \tag{23.30}$$
+
+将式(23.13)、(23.20) 和(23.27) 代入式(23.30) 得
+
+$$\frac{2\pi}{F} \ge \frac{I_2 R_0}{V_1} + \pi + \sin^{-1}\left( \frac{I_2 R_0}{V_1} \right) + \frac{V_1}{I_2 R_0} \left( 1 - \sqrt{1 - \left( \frac{I_2 R_0}{V_1} \right)^2} \right) \tag{23.31}$$
+
+此式限制半波 ZCS 准谐振开关单元的最大开关频率或最大 $F$。
+
+### 23.2.2 平均端子波形
+
+现需求开关网络执行的功率处理函数。开关变换比 $\mu$ 是占空比 $d$ 的推广。它表示谐振开关网络如何控制变换器的平均电压和电流。在降压变换器示例中，可定义 $\mu$ 为 $\langle v_2(t) \rangle_{T_S}$ 与 $\langle v_1(t) \rangle_{T_S}$ 之比，或等价地 $\langle i_1(t) \rangle_{T_S}$ 与 $\langle i_2(t) \rangle_{T_S}$ 之比。在硬开关 PWM 网络中，此比等于占空比 $d$。故为硬开关 PWM 变换器推导的解析结果可通过将 $d$ 替换为 $\mu$ 适配到准谐振变换器。本节推导 $\mu$ 的表达式，通过平均开关网络的端子波形。
+
+图23.10 的开关输入电流波形 $i_1(t)$ 在图23.14 中重现。平均开关输入电流为
+
+$$\langle i_1(t) \rangle_{T_s} = \frac{1}{T_s} \int_t^{t+T_s} i_1(t)\, dt = \frac{q_1 + q_2}{T_s} \tag{23.32}$$
+
+![源页 p.1007](../assets/page-snapshots/chapter-23/page-1007.png)
+
+图23.14 输入电流波形 $i_1(t)$ 及子区间1 和2 中的面积 $q_1$ 和 $q_2$
+
+$+$
+$0$
+$0$
+$i_1(t)$
+$I_2$
+$i_1(t)$
+$T_s$
+$t$
+$q_2$
+$q_1$
+
+电荷量 $q_1$ 和 $q_2$ 分别是第一和第二子区间内 $i_1(t)$ 波形下的面积。电荷 $q_1$ 由三角形面积公式给出：
+
+$$q_1 = \int_0^{\alpha/\omega_0} i_1(t)\, dt = \frac{1}{2} \left( \frac{\alpha}{\omega_0} \right)(I_2) \tag{23.33}$$
+
+时间 $\alpha/\omega_0$ 是子区间1 的长度。电荷 $q_2$ 为
+
+$$q_2 = \int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} i_1(t)\, dt \tag{23.34}$$
+
+根据图23.12，子区间2 中电流 $i_1(t)$ 可通过节点方程与槽电容电流 $i_C(t)$ 和开关输出电流 $I_2$ 关联：
+
+$$i_1(t) = i_C(t) + I_2 \tag{23.35}$$
+
+将式(23.35) 代入式(23.34) 得
+
+$$q_2 = \int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} i_C(t)\, dt + \int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} I_2\, dt \tag{23.36}$$
+
+式(23.36) 中两个积分都易评估。第二项涉及恒流 $I_2$ 的积分，此项为
+
+$$\int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} I_2\, dt = I_2 \frac{\beta}{\omega_0} \tag{23.37}$$
+
+式(23.36) 第一项涉及子区间2 内电容电流的积分。故此项等于第二子区间内电容电荷变化：
+
+$$\int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} i_C(t)\, dt = C \left[ v_2\left( \frac{\alpha+\beta}{\omega_0} \right) - v_2\left( \frac{\alpha}{\omega_0} \right) \right] \tag{23.38}$$
+
+（回忆电容中 $\Delta q = C \Delta v$）。第二子区间内，槽电容电压初值为零，终值为 $V_{c1}$。故式(23.38) 简化为
+
+$$\int_{\alpha/\omega_0}^{(\alpha+\beta)/\omega_0} i_C(t)\, dt = C(V_{c1} - 0) = C V_{c1} \tag{23.39}$$
+
+![源页 p.1008](../assets/page-snapshots/chapter-23/page-1008.png)
+
+将式(23.37) 和(23.39) 代入式(23.36) 得 $q_2$ 的如下表达式：
+
+$$q_2 = C V_{c1} + I_2 \frac{\beta}{\omega_0} \tag{23.40}$$
+
+式(23.33) 和(23.40) 现可代入式(23.32)，得开关输入电流的如下表达式：
+
+$$\langle i_1(t) \rangle_{T_s} = \frac{\alpha I_2}{2 \omega_0 T_s} + \frac{C V_{c1}}{T_s} + \frac{\beta I_2}{\omega_0 T_s} \tag{23.41}$$
+
+将式(23.41) 代入式(23.8) 得开关变换比的如下表达式：
+
+$$\mu = \frac{\langle i_1(t) \rangle_{T_s}}{I_2} = \frac{\alpha}{2 \omega_0 T_s} + \frac{C V_{c1}}{I_2 T_s} + \frac{\beta}{\omega_0 T_s} \tag{23.42}$$
+
+最后，量 $\alpha$、$\beta$、$V_{c1}$ 可用式(23.13)、(23.20)、(23.23) 消去。结果为
+
+$$\mu = F \frac{1}{2\pi} \left[ \frac{1}{2} J_s + \pi + \sin^{-1}(J_s) + \frac{1}{J_s} \left( 1 + \sqrt{1 - J_s^2} \right) \right] \tag{23.43}$$
+
+其中
+
+$$J_s = \frac{I_2 R_0}{V_1} \tag{23.44}$$
+
+式(23.43) 形式为
+
+$$\mu = F P_{\frac{1}{2}}(J_s) \tag{23.45}$$
+
+其中
+
+$$P_{\frac{1}{2}}(J_s) = \frac{1}{2\pi} \left[ \frac{1}{2} J_s + \pi + \sin^{-1}(J_s) + \frac{1}{J_s} \left( 1 + \sqrt{1 - J_s^2} \right) \right] \tag{23.46}$$
+
+故开关变换比 $\mu$ 可通过改变开关频率（通过 $F$）直接控制。开关变换比也是施加端子电压 $V_1$ 和电流 $I_2$ 的函数（通过 $J_s$）。函数 $P_{\frac{1}{2}}(J_s)$ 草图如图23.15。开关变换比 $\mu$ 草图如图23.16，对应各种 $F$ 和 $J_s$ 值。这些特性形状类似于函数 $P(J_s)$，仅按因子 $F$ 缩放。可见变换比 $\mu$ 是电流 $I_2$（通过 $J_s$）的强函数。特性在 $J_s = 1$ 处结束；根据式(23.31)，$J_s > 1$ 时失去零电流开关性质。特性也在式(23.31) 给出的最大开关频率限制处结束。此式可用式(23.43) 简化，以 $\mu$ 表示限制：
+
+$$\mu \le 1 - J_s F$$
+
+![源页 p.1009](../assets/page-snapshots/chapter-23/page-1009.png)
+
+$$+ \frac{F}{4\pi} \tag{23.47}$$
+
+故开关变换比 $\mu$ 限于略小于 1 的值。
+
+含半波 ZCS 准谐振开关的变换器的平均波形现可确定。连续
+
+| 0 | 2 | 4 | 6 | 8 | 10 |
+|---|---|---|---|---|---|
+
+| | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 |
+|---|---|---|---|---|---|---|
+
+| | $J_s$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| | $P_{\frac{1}{2}}(J_s)$ | | | | | |
+|---|---|---|---|---|---|---|
+
+图23.15 函数 $P_{\frac{1}{2}}(J_s)$
+
+导通模式下 PWM 变换器分析结果可直接适配到相关准谐振变换器，只需将占空比 $d$ 替换为开关变换比 $\mu$。降压变换器示例中，变换比为
+
+$$M = \frac{V}{V_g} = \mu \tag{23.48}$$
+
+此结果也可用电感伏-秒平衡原理推导。滤波电感平均电压为 $(\mu V_g - V)$。将此电压等于零，得式(23.48)。
+
+降压变换器中，$I_2$ 等于负载电流 $I$，$V_1$ 等于变换器输入电压 $V_g$。故量 $J_s$ 为
+
+$$J_s = \frac{I R_0}{V_g} \tag{23.49}$$
+
+零电流开关发生在
+
+$$I \le \frac{V_g}{R_0} \tag{23.50}$$
+
+输出电压可在范围
+
+$$0 \le V \le V_g - \frac{F I R_0}{4\pi} \tag{23.51}$$
+
+内变化，与 PWM 输出电压范围 $0 \le V \le V_g$ 几乎重合。
+
+![源页 p.1010](../assets/page-snapshots/chapter-23/page-1010.png)
+
+图23.16 半波 ZCS 准谐振开关的特性
+
+| 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 |
+|---|---|---|---|---|---|
+
+| 0 | | | | | | |
+| 0.2 | | | | | | |
+| 0.4 | | | | | | |
+| 0.6 | | | | | | |
+| 0.8 | | | | | | |
+| 1 | | | | | | |
+
+| | $\mu$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| | $J_s$ | | | | | |
+|---|---|---|---|---|---|---|
+
+| ZCS 边界 | | | | | | |
+|---|---|---|---|---|---|---|
+
+| max $F$ 边界 | | | | | | |
+|---|---|---|---|---|---|---|
+
+| $F = 0.1$ | $0.2$ | $0.3$ | $0.4$ | $0.5$ | $0.6$ | $0.7$ | $0.8$ | $0.9$ |
+|---|---|---|---|---|---|---|---|---|
+
+$+$
+$Q_1$
+$L$
+$C$
+$R$
+$+$
+$V$
+$D_1$
+$V_g$
+$i_2(t)$
+$D_2$
+$L_r$
+$C_r$
+$I_g$
+$+$
+$v_1(t)$
+$i_1(t)$
+$v_2(t)$
+$+$
+
+图23.17 含半波 ZCS 准谐振开关的升压变换器
+
+采用半波 ZCS 准谐振开关的升压变换器如图23.17。升压变换器的变换比为
+
+$$M = \frac{V}{V_g} = \frac{1}{1 - \mu} \tag{23.52}$$
+
+半波开关变换比 $\mu$ 再次由式(23.44) 至(23.46) 给出。升压变换器中，施加开关电压 $V_1$ 等于输出电压 $V$，施加开关电流 $I_2$ 等于滤波电感电流，即 $I_g$。故量 $J_s$ 为
+
+$$J_s = \frac{I_2 R_0}{V_1} = \frac{I_g R_0}{V} \tag{23.53}$$
+
+![源页 p.1011](../assets/page-snapshots/chapter-23/page-1011.png)
+
+升压变换器的输入电流 $I_g$ 与负载电流 $I$ 的关系为
+
+$$I_g = \frac{I}{1 - \mu} \tag{23.54}$$
+
+式(23.52) 至(23.54) 结合式(23.44) 至(23.46) 描述半波准谐振 ZCS 升压变换器的平均波形。
+
+图23.18 图23.8d 全波 ZCS 准谐振开关单元的槽电感电流和电容电压波形
+
+$I_2$
+$C_r$
+$V_1$
+$L_r$
+$\xi = 0$
+$t$
+$i_1(t)$
+$I_2$
+$v_2(t)$
+$0$
+$T_s$
+$V_{c1}$
+子区间：1 2 3 4
+导通器件：
+$Q_1$
+$D_2$
+$Q_1$ $D_1$ $D_2$ $X$
+
+### 23.2.3 全波 ZCS 准谐振开关单元
+
+全波 ZCS 准谐振开关单元如图23.8d。与半波单元的区别在于 $D_1$ 和 $Q_1$ 反并联连接，形成电流双向双象限开关。典型槽电感电流和槽电容电压波形如图23.18。这些波形与半波情形相似，除 $Q_1/D_1$ 开关在槽电感电流 $i_1(t)$ 第二次过零时中断。$i_1(t)$ 为负时，二极管 $D_1$ 导通，晶体管 $Q_1$ 可零电流关断。
+
+分析与半波情形几乎相同，除子区间2 外。子区间2 角长度 $\beta$ 和终值电压 $V_{c1}$ 可证为
+
+$$\beta = \begin{cases} \pi + \sin^{-1}(J_s) & \text{（半波）} \\ 2\pi - \sin^{-1}(J_s) & \text{（全波）} \end{cases} \tag{23.55}$$
+
+$$V_{c1} = \begin{cases} V_1 \left( 1 + \sqrt{1 - J_s^2} \right) & \text{（半波）} \\ V_1 \left( 1 - \sqrt{1 - J_s^2} \right) & \text{（全波）} \end{cases} \tag{23.56}$$
+
+任一情形，开关变换比 $\mu$ 由式(23.42) 给出。全波开关情形，得

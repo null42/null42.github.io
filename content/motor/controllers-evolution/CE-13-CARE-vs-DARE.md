@@ -19,9 +19,9 @@ navGroupOrder: 50
 # CE-13: CARE vs DARE——连续与离散Riccati方程
 
 **副标题：两个代数Riccati方程，同一个思想——为什么形式不同、何时用哪个、它们如何联系**
-**难度：** 
-**适用对象：** 控制理论学习者、电机控制工程师
-**前置知识：** CE-12（从Bellman原理到Riccati方程）
+- **难度：** 
+- **适用对象：** 控制理论学习者、电机控制工程师
+- **前置知识：** CE-12（从Bellman原理到Riccati方程）
 
 ---
 
@@ -29,7 +29,7 @@ navGroupOrder: 50
 
 CARE（Continuous-time Algebraic Riccati Equation）和DARE（Discrete-time Algebraic Riccati Equation）分别是连续时间和离散时间LQR问题的稳态解。它们形式不同——CARE包含 $A^T P + PA$ 项，DARE包含 $A^T PA$ 项——根本原因在于"下一状态"在两个时间域中的工作方式不同：离散时间做一步预测，连续时间关注瞬时变化率。本文并排对比两者，解释形式差异的来源，展示DARE在 $\Delta t \to 0$ 极限下如何退化为CARE，并给出实践中的选择指南：工程实现用DARE，学术分析和教学用CARE。
 
-**认知挂钩：** DARE的增益公式里有 $A$，CARE的增益公式里没有——这不是疏忽，而是离散时间"预测下一步"与连续时间"瞬时对抗漂移"的本质区别。
+- **认知挂钩：** DARE的增益公式里有 $A$，CARE的增益公式里没有——这不是疏忽，而是离散时间"预测下一步"与连续时间"瞬时对抗漂移"的本质区别。
 
 ---
 

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第12章part 1 - 12 Transformer Design"
+title: "第12章 变压器设计（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1102 +18,501 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第12章part 1 - 12 Transformer Design
+# 第12章 变压器设计（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 493-512  
-> Chunk ID: `chapter-12-part-1`
+> 源页：493–512
+> 本部分涵盖 12.1 变压器设计基本约束、12.2 首轮设计步骤、12.3 示例、12.4 交流电感设计、12.5 小结和习题 12.1–12.4。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+上一章的设计方法中指定铜损 $P_{cu}$ 和最大磁通密度 $B_{max}$，未专门处理铁损 $P_{fe}$。此方法适用于多种应用，如主导设计约束为铜损和饱和磁通密度的滤波电感。但在相当一大类应用中，工作磁通密度受铁损而非饱和限制。例如，在常规高频变压器中，通常须在减小的峰值交流磁通密度 $\Delta B$ 下工作以限制铁损。
 
-## 术语表
+铁损受限磁性器件的设计特征是求使铁损加铜损最小的交流磁通密度。通常此优化问题还涉及优化绕组几何以控制交流邻近损耗，并可能并入隔离等其他约束。故需多次设计迭代。本章开发基本设计方程，并求使总铁损加直流铜损最小的首轮设计。然后可估计绕组几何，并按 10.4 节所述分析交流邻近损耗。然后按需迭代设计。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+本章覆盖一般变压器设计问题。希望设计如图12.1所示的 $k$ 绕组变压器。建模铜损 $P_{cu}$ 和铁损 $P_{fe}$。增大工作磁通密度（减少匝数）时铜损减小但铁损增大。我们将确定使总功率损耗 $P_{tot} = P_{fe} + P_{cu}$ 最小的工作磁通密度。
 
-## 中文翻译
+可推广上一章导出的磁芯几何常数 $K_g$ 设计方法以处理铜损和铁损均显著的磁性器件设计。这导致几何常数 $K_{gfe}$——变压器设计应用中磁芯有效磁尺寸的度量。本章给出若干 $K_{gfe}$ 方法变压器设计示例。还导出了铁损显著的单绕组电感设计的类似步骤。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+![源页 p.494](../assets/page-snapshots/chapter-12/page-494.png)
 
-## 英文原文
+图12.1 $k$ 绕组变压器，铁损和铜损均显著
 
-```text
-12
-Transformer Design
-In the design methods of the previous chapter, copper loss Pcu and maximum ﬂux density Bmax
-are speciﬁed, while core loss Pfe is not speciﬁcally addressed. This approach is appropriate for
-a number of applications, such as the ﬁlter inductor in which the dominant design constraints
-are copper loss and saturation ﬂux density. However, in a substantial class of applications, the
-operating ﬂux density is limited by core loss rather than saturation. For example, in a conven-
-tional high-frequency transformer, it is usually necessary to limit the core loss by operating at a
-reduced value of the peak ac ﬂux densityΔB.
-Design of core loss-limited magnetic devices is characterized by ﬁnding the ac ﬂux density
-that minimizes total core plus copper loss. Typically, this optimization problem also involves
-optimization of the winding geometry to control ac proximity losses, and possibly incorpora-
-tion of other constraints such as galvanic isolation. Consequently, multiple design iterations are
-required. In this chapter, the basic design equations are developed, and a ﬁrst-pass design that
-minimizes the total core loss plus dc copper loss is found. The winding geometry can then be
-estimated, and ac proximity losses can be analyzed as described in Sect. 10.4. The design can
-then be iterated as needed.
-This chapter covers the general transformer design problem. It is desired to design a k-
-winding transformer as illustrated in Fig. 12.1. Both copper loss Pcu and core loss Pfe are mod-
-eled. As the operating ﬂux density is increased (by decreasing the number of turns), the copper
-loss is decreased but the core loss is increased. We will determine the operating ﬂux density that
-minimizes the total power loss Ptot = Pfe + Pcu.
-It is possible to generalize the core geometrical constant Kg design method, derived in the
-previous chapter, to treat the design of magnetic devices when both copper loss and core loss
-are signiﬁcant. This leads to the geometrical constant Kgfe , a measure of the eﬀective magnetic
-size of core in a transformer design application. Several examples of transformer designs via
-the Kgfe method are given in this chapter. A similar procedure is also derived, for design of
-single-winding inductors in which core loss is signiﬁcant.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_12
-485
+## 12.1 变压器设计：基本约束
 
-486 12 Transformer Design
-Fig. 12.1 A k-winding transformer, in which
-both core loss and copper loss are signiﬁcant
-n1 : n2
-: nk
-R1 R2
-Rk
-+
-v1(t)
-+
-v2(t)
-+
-vk(t)
-i1(t) i2(t)
-ik(t)
-12.1 Transformer Design: Basic Constraints
-As in the case of the ﬁlter inductor design, we can write several basic constraining equations.
-These equations can then be combined into a single equation for selection of the core size. In
-the case of transformer design, the basic constraints describe the core loss, ﬂux density, copper
-loss, and total power loss vs. ﬂux density. The ﬂux density is then chosen to optimize the total
-power loss.
-12.1.1 Core Loss
-As described in Chap. 10, the total core loss Pfe depends on the peak ac ﬂux density ΔB,t h e
-operating frequency f , and the volume of the core. At a given frequency, we can approximate
-the core loss by a function of the form
-Pfe = Kfe (ΔB)βAcℓm (12.1)
-Again, Ac is the core cross-sectional area,ℓm is the core mean magnetic path length, and hence
-Acℓm is the volume of the core. Kfe is a constant of proportionality which depends on the
-operating frequency. The exponent β is determined from the core manufacturer’s published
-data. Typically, the value of β for ferrite power materials is approximately 2.6; for other core
-materials, this exponent lies in the range 2 to 3. Equation ( 12.1) generally assumes that the
-applied waveforms are sinusoidal; eﬀects of waveform harmonic content are ignored here.
-12.1.2 Flux Density
-An arbitrary periodic primary voltage waveformv1(t) is illustrated in Fig.12.2. The volt-seconds
-applied during the positive portion of the waveform is denotedλ1:
-λ1=
-∫ t2
-t1
-v1(t)dt (12.2)
-These volt-seconds, or ﬂux-linkages, cause the ﬂux density to change from its negative peak to
-its positive peak value. Hence, from Faraday’s law, the peak value of the ac component of the
-ﬂux density is
+与滤波电感设计一样，可写若干基本约束方程。然后合并为选择磁芯尺寸的单一方程。变压器设计中基本约束描述铁损、磁通密度、铜损和总功率损耗对磁通密度的关系。然后选择磁通密度以优化总功率损耗。
 
-12.1 Transformer Design: Basic Constraints 487
-Fig. 12.2 An arbitrary transformer pri-
-mary voltage waveform, illustrating the
-volt-seconds applied during the positive
-portion of the cycle
-area 1
-v1(t)
-t1 t2 t
-ΔB= λ1
-2n1Ac
-(12.3)
-Note that, for a given applied voltage waveform and λ1, we can reduce ΔB by increasing the
-primary turns n1. This has the eﬀect of decreasing the core loss according to Eq. (12.1). However,
-it also causes the copper loss to increase, since the new windings will be comprised of more
-turns of smaller wire. As a result, there is an optimal choice for ΔB, in which the total loss is
-minimized. In the next sections, we will determine the optimal ΔB. Having done so, we can
-then use Eq. (12.3) to determine the primary turns n1, as follows:
-n1= λ1
-2ΔBAc
-(12.4)
-It should also be noted that, in some converter topologies such as the forward converter with
-conventional reset winding, the ﬂux density B(t) and the magnetizing current iM(t) are not al-
-lowed to be negative. In consequence, the instantaneous ﬂux density B(t) contains a dc bias.
-Provided that the core does not approach saturation, this dc bias does not signiﬁcantly a ﬀect
-the core loss: core loss is determined by the ac component of B(t). Equations (12.2)t o( 12.4)
-continue to apply to this case, sinceΔB is the peak value of the ac component of B(t).
-12.1.3 Copper Loss
-As shown in Sect. 11.3.1, the total copper loss is minimized when the core window area WA is
-allocated to the various windings according to their relative apparent powers. The total copper
-loss is then given by Eq. (11.34). This equation can be expressed in the form
-Pcu= ρ(MLT )n2
-1I2
-tot
-WAKu
-(12.5)
-where
-Itot =
-k∑
-j=1
-nj
-n1
-Ij (12.6)
+### 12.1.1 铁损
 
-488 12 Transformer Design
-is the sum of the rms winding currents, referred to winding 1. Use of Eq. (12.4) to eliminate n1
-from Eq. (12.5) leads to
-Pcu=
-⎛⎜⎜⎜⎜⎝
-ρλ2
-1I2
-tot
-4Ku
-⎞⎟⎟⎟⎟⎠
-⎦(MLT )
-WAA2c
-)⎦ 1
-ΔB
-)2
-(12.7)
-The right-hand side of Eq. ( 12.7) is grouped into three terms. The ﬁrst group contains speciﬁ-
-cations, while the second group is a function of the core geometry. The last term is a function
-ofΔB, to be chosen to optimize the design. It can be seen that copper loss varies as the inverse
-square ofΔB; increasingΔB reduces Pcu.
-The increased copper loss due to the proximity eﬀect is not explicitly accounted for in this
-design procedure. In practice, the proximity loss must be estimated after the core and winding
-geometries are known. However, the increased ac resistance due to proximity loss can be ac-
-counted for in the design procedure. The eﬀective value of the wire resistivityρis increased by
-a factor equal to the estimated ratio R
-ac/Rdc. When the core geometry is known, the engineer
-can attempt to implement the windings such that the estimated Rac/Rdc is obtained. Several
-design iterations may be needed.
-12.1.4 Total Power Loss vs.ΔB
-The total power loss Ptot is found by adding Eqs. (12.1) and (12.7):
-Ptot = Pfe + Pcu (12.8)
-The dependence of Pfe, Pcu, and Ptot onΔB is sketched in Fig. 12.3.
-Fig. 12.3 Dependence of cop-
-per loss, core loss, and total loss
-on peak ac ﬂux density
-B
-Power
-loss
-Ptot
-Copper loss P
-cu Core loss P
-fe
-Optimum B
-12.1.5 Optimum Flux Density
-Let us now choose the value ofΔB that minimizes Eq. (12.8). At the optimumΔB, we can write
-dPtot
-d(ΔB)= dP fe
-d(ΔB)+ dPcu
-d(ΔB)= 0 (12.9)
-Note that the optimum does not necessarily occur where Pfe = Pcu. Rather, it occurs where
-dP fe
-d(ΔB)=−dPcu
-d(ΔB) (12.10)
+如第10章所述，总铁损 $P_{fe}$ 取决于峰值交流磁通密度 $\Delta B$、工作频率 $f$ 和磁芯体积。给定频率下可用如下形式的函数近似铁损
 
-12.1 Transformer Design: Basic Constraints 489
-The derivatives of the core and copper losses with respect toΔB are given by
-dP fe
-d(ΔB)= βKfe (ΔB)(β−1)Acℓm (12.11)
-dPcu
-d(ΔB)=−2
-⎛⎜⎜⎜⎜⎝
-ρλ2
-1I2
-tot
-4Ku
-⎞⎟⎟⎟⎟⎠
-⎦(MLT )
-WAA2c
-)
-(ΔB)−3 (12.12)
-Substitution of Eqs. (12.11) and (12.12) into Eq. (12.10), and solution forΔB, leads to the opti-
-mum ﬂux density
-ΔB=
-⎡⎢⎢⎢⎢⎣
-ρλ2
-1I2
-tot
-2Ku
-(MLT )
-WAA3cℓm
-1
-βKfe
-⎤⎥⎥⎥⎥⎦
-⎦ 1
-β+2
-)
-(12.13)
-The resulting total power loss is found by substitution of Eq. ( 12.13)i n t o( 12.1), ( 12.8),
-and (12.9). Simpliﬁcation of the resulting expression leads to
-Ptot =
-[
-AcℓmKfe
-]⎦2
-β+2
-) ⎡⎢⎢⎢⎢⎣
-ρλ2
-1I2
-tot
-4Ku
-(MLT )
-WAA2c
-⎤⎥⎥⎥⎥⎦
-⎦β
-β+2
-) ⎡⎢⎢⎢⎢⎢⎢⎣
-⎦β
-2
-)−
-⎦β
-β+2
-)
-+
-⎦β
-2
-)⎦ 2
-β+2
-)⎤⎥⎥⎥⎥⎥⎥⎦ (12.14)
-This expression can be regrouped, as follows:
-WA(Ac)(2(β−1)/β)
-(MLT )ℓ(2/β)
-m
-⎡⎢⎢⎢⎢⎢⎢⎣
-⎦β
-2
-)−
-⎦β
-β+2
-)
-+
-⎦β
-2
-)⎦2
-β+2
-)⎤⎥⎥⎥⎥⎥⎥⎦
-−
-⎦β+2
-β
-)
-=
-ρλ2
-1I2
-tot K(2/β)
-fe
-4Ku(Ptot)((β+2)/β) (12.15)
-The terms on the left side of Eq. ( 12.15) depend on the core geometry, while the terms on
-the right side depend on speciﬁcations regarding the application ( ρ, Itot,λ1, Ku, Ptot) and the
-desired core material (Kfe, β). The left side of Eq. (12.15) can be deﬁned as the core geometrical
-constant Kgfe :
-Kgfe = WA(Ac)(2(β−1)/β)
-(MLT )ℓ(2/β)
-m
-⎡⎢⎢⎢⎢⎢⎢⎣
-⎦β
-2
-)−
-⎦β
-β+2
-)
-+
-⎦β
-2
-)⎦ 2
-β+2
-)⎤⎥⎥⎥⎥⎥⎥⎦
-−
-⎦β+2
-β
-)
-(12.16)
-Hence, to design a transformer, the right side of Eq. ( 12.15) is evaluated. A core is selected
-whose Kgfe exceeds this value:
-Kgfe ≥
-ρλ2
-1I2
-tot K(2/β)
-fe
-4Ku(Ptot)((β+2)/β) (12.17)
-The quantity Kgfe is similar to the geometrical constant Kg used in the previous chapter to
-design magnetics when core loss is negligible. Kgfe is a measure of the magnetic size of a core,
-for applications in which core loss is signiﬁcant. Unfortunately, Kgfe depends on β, and hence
-the choice of core material aﬀects the value of Kgfe . However, the β of most high-frequency
-ferrite materials lies in the narrow range 2.6 to 2.8, and Kgfe varies by no more than±5% over
-this range. Appendix B lists the values of Kgfe for various standard ferrite cores, for the value
-β= 2.7.
-Once a core has been selected, then the values of Ac, WA,ℓ m, and MLT are known. The
-peak ac ﬂux densityΔB can then be evaluated using Eq. (12.13), and the primary turnsn1 can be
-found using Eq. (12.4). The number of turns for the remaining windings can be computed using
+$$P_{fe} = K_{fe}(\Delta B)^\beta A_c\ell_m \tag{12.1}$$
 
-490 12 Transformer Design
-the desired turns ratios. The various window area allocations are found using Eq. ( 11.35). The
-wire sizes for the various windings can then be computed as discussed in the previous chapter,
-Aw, j= KuWAαj
-nj
-(12.18)
-where Aw, j is the wire area for winding j.
-12.2 A First-Pass Transformer Design Procedure
-The procedure developed in the previous sections is summarized below. As in the ﬁlter inductor
-design procedure of the previous chapter, this simple transformer design procedure should be
-regarded as a ﬁrst-pass approach. Numerous issues have been neglected, including detailed
-insulation requirements, conductor eddy current losses, temperature rise, roundoﬀof number of
-turns, etc.
-The following quantities are speciﬁed, using the units noted:
-Wire eﬀective resistivity ρ (Ω-cm)
-Total rms winding currents, referred to primary I
-tot =
-k∑
-j=1
-nj
-ni
-Ij (A)
-Desired turns ratios n2/n1, n3/n1,e t c .
-Applied primary volt-seconds λ1=
-∫
-positive
-portion
-o f cycle
-v1(t) dt (V-sec)
-Allowed total power dissipation Ptot (W)
-Winding ﬁll factor Ku
-Core loss exponent β
-Core loss coeﬃcient Kfe (W/cm3Tβ)
-The core dimensions are expressed in cm:
-Core cross-sectional area Ac (cm2)
-Core window area WA (cm2)
-Mean length per turn MLT (cm)
-Magnetic path length ℓm (cm)
-Peak ac ﬂux density ΔB (Tesla)
-Wire areas Aw1, Aw2,... (cm2)
-The use of centimeters rather than meters requires that appropriate factors be added to the
-design equations.
-12.2.1 Procedure
-1. Determine core size.
-Kgfe ≥
-ρλ2
-1I2
-tot K(2/β)
-fe
-4Ku(Ptot)((β+2)/β) 108 (12.19)
-Choose a core that is large enough to satisfy this inequality. If necessary, it may be possible
-to use a smaller core by choosing a core material having lower loss, i.e., smaller Kfe .
+$A_c$ 是磁芯截面积，$\ell_m$ 是磁芯平均磁路长度，故 $A_c\ell_m$ 是磁芯体积。$K_{fe}$ 是取决于工作频率的比例常数。指数 $\beta$ 由磁芯制造商公布数据确定。通常铁氧体功率材料的 $\beta$ 约 2.6；其他磁芯材料此指数在 2 至 3 范围。式 (12.1) 一般假定施加波形为正弦；此处忽略波形谐波含量的影响。
 
-12.2 A First-Pass Transformer Design Procedure 491
-2. Evaluate peak ac f lux density .
-ΔB=
-⎡⎢⎢⎢⎢⎣108ρλ2
-1I2
-tot
-2Ku
-(MLT )
-WAA3cℓm
-1
-βKfe
-⎤⎥⎥⎥⎥⎦
-⎦1
-β+2
-)
-(12.20)
-Check whetherΔB is greater than the core material saturation ﬂux density. If the core op-
-erates with a ﬂux dc bias, then the dc bias plus ΔB should not exceed the saturation ﬂux
-density. Proceed to the next step if adequate margins exist to prevent saturation. Otherwise,
-(1) repeat the procedure using a core material having greater core loss, or (2) use the Kg
-design method, in which the maximum ﬂux density is speciﬁed.
-3. Evaluate primary turns .
-n1= λ1
-2ΔBAc
-104 (12.21)
-4. Choose numbers o f turns f or other windings .
-According to the desired turns ratios:
-n2 = n1
-⎦n2
-n1
-)
-n3 = n1
-⎦n3
-n1
-)
-(12.22)
-...
-5. Evaluate f raction o f window area allocated to each winding .
-α1 = n1I1
-n1Itot
-α2 = n2I2
-n1Itot
-..
-. (12.23)
-α
-k = nk Ik
-n1Itot
-6. Evaluate wire sizes .
-Aw1 ≤α1KuWA
-n1
-Aw2 ≤α2KuWA
-n2
-(12.24)
-...
-Choose wire gauges to satisfy these criteria.
-A winding geometry can now be determined, and copper losses due to the proximity eﬀect
-can be evaluated. If these losses are signiﬁcant, it may be desirable to further optimize the
-design by reiterating the above steps, accounting for proximity losses by increasing the eﬀective
+### 12.1.2 磁通密度
 
-492 12 Transformer Design
-wire resistivity to the value ρef f = ρcuPcu/Pdc, where Pcu is the actual copper loss including
-proximity eﬀects, and Pdc is the copper loss obtained when the proximity eﬀect is negligible.
-If desired, the power losses and transformer model parameters can now be checked. For the
-simple model of Fig. 12.4, the following parameters are estimated:
-Magnetizing inductance, referred to winding 1: LM = μn2
-1Ac
-ℓm
-Peak ac magnetizing current, referred to winding 1: iM,pk= λ1
-2LM
-Winding resistances:
-R1 = ρn1(MLT )
-Aw1
-R2 = ρn2(MLT )
-Aw2
-...
-The core loss, copper loss, and total power loss can be determined using Eqs. ( 12.1), (12.7),
-and (12.8), respectively.
-n1 : n2
-: nk
-R1 R2
-Rk
-i1(t) i2(t)
-ik(t)
-LM
-iM(t)
-Fig. 12.4 Computed elements of simple transformer model
-12.3 Examples
-12.3.1 Example 1: Single-Output Isolated ´Cuk Converter
-As an example, let us consider the design of a simple two-winding transformer for the ´Cuk
-converter of Fig. 12.5. This transformer is to be optimized at the operating point shown, corre-
-sponding to D= 0.5. The steady-state converter solution is Vc1 = Vg, Vc2 = V. The desired
+图12.2 给出任意周期性一次电压波形 $v_1(t)$。波形正部分期间施加的伏秒记为 $\lambda_1$：
 
-12.3 Examples 493
-transformer turns ratio is n= n1/n2= 5. The switching frequency is fs= 200 kHz, correspond-
-ing to Ts= 5μs. A ferrite pot core is to be used; at 200 kHz, the chosen ferrite core material is
-described by the following parameters: Kfe = 24.7W/Tβcm3, β= 2.6. A ﬁll factor of Ku= 0.5
-is assumed. Total power loss of Ptot = 0.25 W is allowed. Copper wire, having a resistivity of
-ρ= 1.724· 10−6Ω-cm, is to be used.
-+
-+
-V
-5 V
-Vg
-25 V
-n : 1
-I
-20 A
-Ig
-4 A
-+
-v2(t)v1(t)
-+
-i1(t) i2(t)
-vC2(t)++ vC1(t)
-Fig. 12.5 Isolated ´Cuk converter example
-Fig. 12.6 Waveforms, ´Cuk
-converter transformer design
-example
-v1(t)
-i1(t)
-i2(t)
-DTs
-Area 1VC1
-C2
-D Ts
-I/n
-g
-I
-g
-Transformer waveforms are illustrated in Fig.12.6. The applied primary volt-seconds are
-λ1= DT sVc1 = (0.5)(5μsec)(25 V) (12.25)
-= 62.5V−μsec
-The primary rms current is
-I1=
-√
-D
-⎦I
-n
-)2
-+ D′(Ig)2= 4A (12.26)
+$$\lambda_1 = \int_{t_1}^{t_2}v_1(t)\,dt \tag{12.2}$$
 
-494 12 Transformer Design
-It is assumed that the rms magnetizing current is much smaller than the rms winding currents.
-Since the transformer contains only two windings, the secondary rms current is equal to
-I2= nI1= 20 A (12.27)
-The total rms winding current, referred to the primary, is
-Itot = I1+ 1
-n I2= 8 A (12.28)
-The core size is evaluated using Eq. (12.19):
-Kgfe ≥(1.724· 10−6)(62.5· 10−6)2(8)2(24.7)(2/26)
-4(0.5)(0.25)(4.6/2.6) 108
-= 0.00295 (12.29)
-The pot core data of Appendix B lists the 2213 pot core with Kgfe = 0.0049 for β = 2.7.
-Evaluation of Eq. (12.16) shows that Kgfe = 0.0047 for this core, when β= 2.6. In any event,
-2213 is the smallest standard pot core size having Kgfe ≤0.00295. The increased value of
-Kgfe should lead to lower total power loss. The peak ac ﬂux density is found by evaluation of
-Eq. (12.20), using the geometrical data for the 2213 pot core:
-ΔB=
-[
-108 (1.724· 10−6)(62.5· 10−6)2(8)2
-2(0.5)
-(4.42)
-(0.297)(0.635)3(3.15)
-1
-(2.6)(24.7)
-](1/4.6)
-(12.30)
-= 0.0858Tesla
-This ﬂux density is considerably less than the saturation ﬂux density of approximately 0.35
-Tesla. The primary turns are determined by evaluation of Eq. (12.21):
-n1 = 104 (62.5· 10−6)
-2(0.0858)(0.635) (12.31)
-= 5.74 turns
-The secondary turns are found by evaluation of Eq. ( 12.22). It is desired that the transformer
-have a 5:1 turns ratio, and hence
-n2= n1
-n = 1.15 turns (12.32)
-In practice, we might select n1 = 5 and n2 = 1. This would lead to a slightly higher ΔB and
-slightly higher loss.
-The fraction of the window area allocated to windings 1 and 2 are determined using
-Eq. (12.23):
-α1 = (4A)
-(8A)= 0.5 (12.33)
-α2 =
-(1
-5 )(20A)
-(8A) = 0.5
-For this example, the window area is divided equally between the primary and secondary wind-
-ings, since the ratio of their rms currents is equal to the turns ratio. We can now evaluate the
-primary and secondary wire areas, via Eq. (12.24):
+![源页 p.495](../assets/page-snapshots/chapter-12/page-495.png)
 
-12.3 Examples 495
-Aw1 = (0.5)(0.5)(0.297)
-(5) = 14.8· 10−3cm2
-Aw2 = (0.5)(0.5)(0.297)
-(1) = 74.2· 10−3cm2 (12.34)
-The wire gauge is selected using the wire table of Appendix B. AWG #16 has area 13 .07·
-10−3cm2, and is suitable for the primary winding. AWG #9 is suitable for the secondary winding,
-with area 66.3· 10−3cm2. These are very large conductors, and one turn of AWG #9 is not
-a practical solution! We can also expect signiﬁcant proximity losses, and signiﬁcant leakage
-inductance. In practice, interleaved foil windings might be used. Alternatively, Litz wire or
-several parallel strands of smaller wire could be employed.
-It is a worthwhile exercise to repeat the above design at several di ﬀerent switching fre-
-quencies, to determine how transformer size varies with switching frequency. As the switching
-frequency is increased, the core loss coeﬃcient Kfe increases. Figure 12.7 illustrates the trans-
-former pot core size, for various switching frequencies over the range 25 kHz to 1 MHz, for this
-´Cuk converter example using P material withPtot < 0.25 W. Peak ﬂux densities in Tesla are also
-plotted. For switching frequencies below 250 kHz, increasing the frequency causes the core size
-to decrease. This occurs because of the decreased applied volt-secondsλ
-1. Over this range, the
-optimalΔB is essentially independent of switching frequency; the ΔB variations shown occur
-owing to quantization of core sizes.
-For switching frequencies greater than 250 kHz, increasing frequency causes greatly in-
-creased core loss. Maintaining Ptot ≤0.25W then requires thatΔB be reduced, and hence the
-core size is increased. The minimum transformer size for this example is apparently obtained at
-250 kHz.
-0
-0.02
-0.04
-0.06
-0.08
-0.1
-Switching frequency
-B, Tesla
-Pot core size
-4226
-3622
-2616
-2213
-1811 1811
-2213
-2616
-25 kHz 50 kHz 100 kHz 200 kHz 250 kHz 400 kHz 500 kHz 1000 kHz
-Fig. 12.7 Variation of transformer size (bar chart) with switching frequency, ´Cuk converter example.
-Optimum peak ac ﬂux density (data points) is also plotted
-In practice, several matters complicate the dependence of transformer size on switching
-frequency. Figure 12.7 ignores the winding geometry and copper losses due to winding eddy
-currents. Greater power losses can be allowed in larger cores. Use of a di ﬀerent core material
+图12.2 任意变压器一次电压波形，说明周期正部分期间施加的伏秒
 
-496 12 Transformer Design
-may allow higher or lower switching frequencies. The same core material, used in a di ﬀerent
-application with diﬀerent speciﬁcations, may lead to a diﬀerent optimal frequency. Nonetheless,
-examples have been reported in the literature [ 100–103] in which ferrite transformer size is
-minimized at frequencies ranging from several hundred kilohertz to several megahertz. More
-detailed design optimizations can be performed using computer optimization programs [ 104,
-105].
-12.3.2 Example 2: Multiple-Output Full-Bridge Buck Converter
-As a second example, let us consider the design of transformer T
-1 for the multiple-output full-
-bridge buck converter of Fig. 12.8. This converter has a 5 V and a 15 V output, with maximum
-loads as shown. The transformer is to be optimized at the full-load operating point shown, corre-
-sponding to D= 0.75. Waveforms are illustrated in Fig.12.9. The converter switching frequency
-is fs= 150 kHz. In the full-bridge conﬁguration, the transformer waveforms have fundamental
-frequency equal to one-half of the switching frequency, so the eﬀective transformer frequency
-is 75 kHz. Upon accounting for losses caused by diode forward voltage drops, one ﬁnds that the
-desired transformer turns ratios n
-1 : n2 : n3 are 110:5: 15. A ferrite EE consisting of Magnetics,
-Inc. P-material is to be used in this example; at 75 kHz, this material is described by the follow-
-ing parameters: Kfe = 7.6W/Tβcm3, β= 2.6. A ﬁll factor of Ku = 0.25 is assumed in this
-isolated multiple-output application. Total power loss of Ptot = 4 W, or approximately 0.5% of
-the load power, is allowed. Copper wire, having a resistivity of ρ= 1.724· 10−6Ω-cm, is to be
-used.
-The applied primary volt-seconds are
-λ1= DT sVg= (0.75)(6.67 μsec)(160 V)= 800 V−μsec (12.35)
-The primary rms current is
-I1=
-⎦n2
-n1
-I5V+ n3
-n1
-I15V
-)√
-D= 5.7A (12.36)
-: n2
-+
-v1(t)+
-D1
-Q1
-D2Q2
-D3
-Q3
-D4Q4
-i1(t)
-+
-5 V
-D5
-D6
-I5V
-100 Ai2a(t)
-+
-15 V
-D7
-D8
-i3a(t)
-n1 :
-: n2
-: n3
-: n3
-i2b(t)
-i2b(t)
-I15V
-15 A
-T1
-Vg
-160 V
-Fig. 12.8 Multiple-output full-bridge isolated buck converter example
+这些伏秒（磁链）使磁通密度从负峰值变到正峰值。故由法拉第定律，磁通密度交流分量峰值为
 
-12.3 Examples 497
-t
-i2a(t)
-0
-i3a(t)
-0 DTs Ts 2TsTs+DTs
-i1(t)
-0
-v1(t)
-00
-Vg
-g
-Area 1
-= Vg DTs
-n2
-n1
-I5V + n3
-n1
-I15V
-n2
-n1
-I5V + n3
-n1
-I15V
-I5V
-0.5I5V
-I15V
-0.5I15V
-0
-Fig. 12.9 Transformer waveforms, full-bridge converter example
-The 5 V secondary windings carry rms current
-I2= 1
-2 I5V
-√
-1+ D= 66.1A (12.37)
-The 15 V secondary windings carry rms current
-I3= 1
-2 I15V
-√
-1+ D= 9.9A (12.38)
-The total rms winding current, referred to the primary, is
-Itot =
-∑
-all5
-windings
-nj
-n1
-Ij= I1+ 2n2
-n1
-I2+ 2n3
-n1
-I3 (12.39)
-= 14.4A
-The core size is evaluated using Eq. (12.19):
-Kgfe ≥(1.724· 10−6)(800· 10−6)2(14.4)2(7.6)(2/2.6)
-4(0.25)(4)(4.6/2.6) 108 (12.40)
-= 0.00937
-The EE core data of AppendixB lists the EE40 core with Kgfe = 0.0118 for β= 2.7. Evaluation
-of Eq. (12.16) shows that Kgfe = 0.0108 for this core, when β= 2.6. In any event, EE40 is the
+$$\Delta B = \frac{\lambda_1}{2n_1 A_c} \tag{12.3}$$
 
-498 12 Transformer Design
-smallest standard EE core size having Kgfe ≤0.00937. The peak ac ﬂux density is found by
-evaluation of Eq. (12.20), using the geometrical data for the EE40 core:
-ΔB=
-[
-108 (1.724· 10−6)(800· 10−6)2(14.4)2
-2(0.25)
-(8.5)
-(1.1)(1.27)3(7.7)
-1
-(2.6)(7.6)
-](1/46)
-(12.41)
-= 0.23 Tesla
-This ﬂux density is less than the saturation ﬂux density of approximately 0.35 Tesla. The primary
-turns are determined by evaluation of Eq. (12.21):
-n1 = 104 (800· 10−6)
-2(0.23)(1.27) (12.42)
-= 13.7 turns
-The secondary turns are found by evaluation of Eq. ( 12.22). It is desired that the transformer
-have a 110:5:15 turns ratio, and hence
-n2 = 5
-110n1= 0.62 turns (12.43)
-n3 = 5
-110n1= 1.87 turns (12.44)
-In practice, we might select n1 = 22, n2 = 1, and n3 = 3. This would lead to a reduced ΔB
-with reduced core loss and increased copper loss. Since the resultingΔB is suboptimal, the total
-power loss will be increased. According to Eq. (12.3), the peak ac ﬂux density for the EE40 core
-will be
-ΔB= (800· 10−6)
-2(22)(1.27) 104= 0.143 Tesla (12.45)
-The resulting core and copper loss can be computed using Eqs. (12.1) and (12.7):
-Pfe = (7.6)(0.143)2.6(1.27)(7.7)= 0.47 W (12.46)
-Pcu = (1.724· 10−6)(800· 10−6)2(14.4)2
-4(0.25)
-(8.5)
-(1.1)(1.27)2
-1
-(0.143)2 108 (12.47)
-= 5.4W
-Hence, the total power loss would be
-Ptot = Pfe + Pcu= 5.9 W (12.48)
-Since this is 50% greater than the design goal of 4 W, it is necessary to increase the core size.
-The next larger EE core is the EE50 core, having Kgfe of 0.0284. The optimum ac ﬂux density
-for this core, given by Eq. (12.3), isΔB= 0.14 T; operation at this ﬂux density would require
+注意对给定施加电压波形和 $\lambda_1$，可增大一次匝数 $n_1$ 来减小 $\Delta B$。这按式 (12.1) 减小铁损。但也使铜损增大，因为新绕组由更多匝更细导线组成。故存在使总损耗最小的 $\Delta B$ 最优选择。以下各节确定最优 $\Delta B$。然后可用式 (12.3) 确定一次匝数 $n_1$：
 
-12.4 AC Inductor Design 499
-n1 = 12 and would lead to a total power loss of 2.3 W. With n1 = 22, calculations similar to
-Eqs. (12.45)t o( 12.48) lead to a peak ﬂux density ofΔB= 0.08 T. The resulting power losses
-would then be Pfe = 0.23 W, Pcu= 3.89 W, Ptot = 4.12 W.
-With the EE50 core and n1 = 22, the fraction of the available window area allocated to the
-primary winding is given by Eq. (12.23)a s
-α1= I1
-Itot
-= 5.7
-14.4= 0.396 (12.49)
-The fraction of the available window area allocated to each half of the 5 V secondary winding
-should be
-α2= n2I2
-n1Itot
-= 5
-110
-66.1
-14.4= 0.209 (12.50)
-The fraction of the available window area allocated to each half of the 15 V secondary winding
-should be
-α3= n3I3
-n1Itot
-= 15
-110
-9.9
-14.4= 0.094 (12.51)
-The primary wire area Aw1, 5 V secondary wire area Aw2, and 15 V secondary wire area Aw3 are
-then given by Eq. (12.24)a s
-Aw1 = α1KuWA
-n1
-= (0.396)(0.25)(1.78)
-(22) = 8.0· 10−3cm2
-⇒AWG#19
-Aw2 = α2KuWA
-n2
-= (0.209)(0.25)(1.78)
-(1) = 930· 10−3cm2 (12.52)
-⇒AWG#8
-Aw3 = α3KuWA
-n3
-= (0.094)(0.25)(1.78)
-(3) = 13.9· 10−3cm2
-⇒AWG#16
-It may be preferable to wind the 15 V outputs using two #19 wires in parallel; this would lead
-to the same area A w3 but would be easier to wind. The 5 V windings could be wound using
-many turns of smaller paralleled wires, but it would probably be easier to use a ﬂat copper foil
-winding. If insulation requirements allow, proximity losses could be minimized by interleaving
-several thin layers of foil with the primary winding.
-12.4 AC Inductor Design
-The transformer design procedure of the previous sections can be adapted to handle the design
-of other magnetic devices in which both core loss and copper loss are signiﬁcant. A procedure
-is outlined here for design of single-winding inductors whose waveforms contain signiﬁcant
-high-frequency ac components (Fig. 12.10). An optimal value of ΔB is found, which leads to
-minimum total core plus copper loss. The major diﬀerence is that we must design to obtain a
-given inductance, using a core with an air gap. The constraints and a step-by-step procedure are
-brieﬂy outlined below.
+$$n_1 = \frac{\lambda_1}{2\Delta B A_c} \tag{12.4}$$
 
-500 12 Transformer Design
-(a)
-+
-v(t) L
-i(t)
-(b)
-Core
-Window area WA
-Core mean length
-per turn (MLT)
-Wire resistivity 
-Fill factor Ku
-Air gap
-lg
-n
-turns
-Core area
-A
-c
-(c)
-Area 
-v(t)
-t1 t2 t
-i(t)
-Fig. 12.10 Ac inductor, in which copper loss and core loss are signiﬁcant: ( a) deﬁnition of terminal
-quantities, (b) core geometry, (c) arbitrary terminal waveforms
-12.4.1 Outline of Derivation
-As in the ﬁlter inductor design procedure of the previous chapter, the desired inductanceL must
-be obtained, given by
-L= μ0Acn2
-ℓg
-(12.53)
-The applied voltage waveform and the peak ac component of the ﬂux density ΔB are related
-according to
-ΔB= λ
-2nAc
-(12.54)
-The copper loss is given by
-Pcu= ρn2(MLT )
-KuWA
-I2 (12.55)
-where I is the rms value of i(t). The core loss Pfe is given by Eq. (12.1).
-The value ofΔB that minimizes the total power loss Ptot = Pcu+ Pfe is found in a manner
-similar to the transformer design derivation. Equation ( 12.54) is used to eliminate n from the
+还应指出，在某些变换器拓扑（如含常规复位绕组的正激变换器）中，磁通密度 $B(t)$ 和磁化电流 $i_M(t)$ 不允许为负。结果瞬时磁通密度 $B(t)$ 含直流偏置。只要磁芯不接近饱和，此直流偏置对铁损无显著影响：铁损由 $B(t)$ 交流分量决定。式 (12.2) 至 (12.4) 继续适用于此情形，因为 $\Delta B$ 是 $B(t)$ 交流分量的峰值。
 
-12.4 AC Inductor Design 501
-expression for Pcu. The optimalΔB is then computed by setting the derivative of Ptot to zero.
-The result is
-ΔB=
-[ρλ2I2
-2Ku
-(MLT )
-WAA3cℓm
-1
-βKfe
-]⎦1
-β+2
-)
-(12.56)
-which is essentially the same as Eq. (12.13). The total power loss Ptot is evaluated at this value
-ofΔB, and the resulting expression is manipulated to ﬁnd Kgfe . The result is
-Kgfe ≥
-ρλ2I2K(2/β)
-fe
-2Ku(Ptot)((β+2)/β) (12.57)
-where Kgfe is deﬁned as in Eq. (12.16). A core that satisﬁes this inequality is selected.
-12.4.2 First-Pass AC Inductor Design Procedure
-The units of Sect. 12.2 are employed here.
-1. Determine core size.
-Kgfe ≥
-ρλ2I2K(2/β)
-fe
-2Ku(Ptot)((β+2)/β) 108 (12.58)
-Choose a core that is large enough to satisfy this inequality. If necessary, it may be possible
-to use a smaller core by choosing a core material having lower loss, that is, smaller Kfe .
-2. Evaluate peak ac f lux density .
-ΔB=
-[
-108ρλ2I2
-2Ku
-(MLT )
-W4A3cℓm
-1
-βKfe
-]⎦1
-β+2
-)
-(12.59)
-3. Number o f turns .
-n= λ
-2ΔBAc
-104 (12.60)
-4. Air gap length.
-ℓg= μ0Acn2
-L 10−4 (12.61)
-with Ac speciﬁed in cm2 andℓg expressed in meters. Alternatively, the air gap can be indi-
-rectly expressed via AL(mH/1000 turns):
-AL= L
-n2 109 (12.62)
-5. Check f or saturation .
-If the inductor current contains a dc component Idc, then the maximum total ﬂux density
-Bmax is greater than the peak ac ﬂux densityΔB. The maximum total ﬂux density, in Tesla,
-is given by
-Bmax =ΔB+ LIdc
-nAc
-104 (12.63)
-If Bmax is close to or greater than the saturation ﬂux densityBsat, then the core may saturate.
-The ﬁlter inductor design procedure of the previous chapter should then be used, to operate
-at a lower ﬂux density.
+### 12.1.3 铜损
 
-502 12 Transformer Design
-6. Evaluate wire size .
-Aw≤KuWA
-n (12.64)
-A winding geometry can now be determined, and copper losses due to the proximity eﬀect
-can be evaluated. If these losses are signiﬁcant, it may be desirable to further optimize the
-design by reiterating the above steps, accounting for proximity losses by increasing the
-eﬀective wire resistivity to the valueρef f = ρcuPcu/Pdc, where Pcu is the actual copper loss
-including proximity eﬀects, and Pdc is the copper loss predicted when the proximity eﬀect
-is ignored.
-7. Check power loss .
-Pcu = ρn(MLT )
-Aw
-I2
-Pfe = Kfe (ΔB)β Acℓm (12.65)
-Ptot = Pcu+ Pfe
-12.5 Summary
-1. In a multiple-winding transformer, the low-frequency copper losses are minimized when
-the available window area is allocated to the windings according to their apparent powers,
-or ampere-turns.
-2. As peak ac ﬂux density is increased, core loss increases while copper losses decrease. There
-is an optimum ﬂux density that leads to minimum total power loss. Provided that the core
-material is operated near its intended frequency, then the optimum ﬂux density is less than
-the saturation ﬂux density. Minimization of total loss then determines the choice of peak ac
-ﬂux density.
-3. The core geometrical constant K
-gfe is a measure of the magnetic size of a core, for appli-
-cations in which core loss is signiﬁcant. In the Kgfe design method, the peak ﬂux density
-is optimized to yield minimum total loss, as opposed to the Kg design method where peak
-ﬂux density is a given speciﬁcation.
-Problems
-12.1 Forward converter inductor and transformer design. The objective of this problem set is
-to design the magnetics (two inductors and one transformer) of the two-transistor, two-
-output forward converter shown in Fig. 12.11. The ferrite core material to be used for all
-three devices has a saturation ﬂux density of approximately 0.3 T at 120◦C. To provide a
-safety margin for your designs, you should use a maximum ﬂux density Bmax that is no
-greater than 75% of this value. The core loss at 100 kHz is described by Eq. ( 12.1), with
-the parameter values β= 2.6 and Kfe = 50W/Tβcm3. Calculate copper loss at 100◦C.
-Steady-state converter analysis and design . You may assume 100% eﬃciency and ideal
-lossless components for this section.
+如 11.3.1 节所示，磁芯窗口面积 $W_A$ 按各绕组相对视在功率分配时总铜损最小。总铜损随后由式 (11.34) 给出。此方程可表示为
 
-12.5 Summary 503
-+Vg
-325 V
-n1
-turns
-+
-V1
-L1
-5 V
-30 A
-n2
-turns
-i1
-+
-V2
-L2
-15 V
-1 A
-n3
-turns
-i2
-fs = 100 kHz
-Fig. 12.11 Two-output forward converter of Problem12.1
-(a) Select the transformer turns ratios so that the desired output voltages are obtained
-when the duty cycle is D= 0.4.
-(b) Specify values of L1 and L2 such that their current ripplesΔi1 andΔi2 are 10% of their
-respective full-load current dc components I1 and I2.
-(c) Determine the peak and rms currents in each inductor and transformer winding.
-Inductor design. Allow copper loss of 1 W in L1 and 0.4 W in L2. Assume a ﬁll factor
-of Ku = 0.5. Use ferrite EE cores—tables of geometrical data for standard EE core sizes
-are given in Appendix B. Design the output ﬁlter inductors L1 and L2. For each inductor,
-specify:
-(i) EE core size
-(ii) Air gap length
-(iii) Number of turns
-(iv)A W G w i r e s i z e
-Transformer design. Allow a total power loss of 1 W. Assume a ﬁll factor of Ku = 0.35
-(lower than for the ﬁlter inductors, to allow space for insulation between the windings).
-Use a ferrite EE core. You may neglect losses due to the skin and proximity eﬀects, but you
-should include core and copper losses. Design the transformer, and specify the following:
-(i) EE core size
-(ii) Turns n1, n2, and n3
-(iii) AWG wire size for the three windings
-Check your transformer design:
-(iv) Compute the maximum ﬂux density. Will the core saturate?
-(v) Compute the core loss, the copper loss of each winding, and the total power loss
+$$P_{cu} = \frac{\rho(\text{MLT})n_1^2 I_{tot}^2}{W_A K_u} \tag{12.5}$$
 
-504 12 Transformer Design
-12.2 A single-transistor forward converter operates with an input voltage Vg = 160 V, and
-supplies two outputs: 24 V at 2 A, and 15 V at 6 A. The duty cycle is D= 0.4. The turns
-ratio between the primary winding and the reset winding is 1:1. The switching frequency
-is 100 kHz. The core material loss equation parameters are β= 2.7, Kfe = 50. You may
-assume a ﬁll factor of 0.25. Do not allow the core maximum ﬂux density to exceed 0.3 T.
-Design a transformer for this application, having a total power loss no greater than 1.5 W
-at 100◦C. Neglect proximity losses. You may neglect the reset winding. Use a ferrite PQ
-core. Specify: core size, peak ac ﬂux density, wire sizes, and number of turns for each
-winding. Compute the core and copper losses for your design.
-12.3 Flyback/SEPIC transformer design. The “transformer” of the ﬂyback and SEPIC convert-
-ers is an energy storage device, which might be more accurately described as a multiple-
-winding inductor. The magnetizing inductance Lp functions as an energy-transferring in-
-ductor of the converter, and therefore the “transformer” normally contains an air gap. The
-converter may be designed to operate in either the continuous or discontinuous conduction
-mode. Core loss may be signiﬁcant. It is also important to ensure that the peak current in
-the magnetizing inductance does not cause saturation.
-A ﬂyback transformer is to be designed for the following two-output ﬂyback converter
-application:
-Input: 160 Vdc
-Output 1: 5 Vdc at 10 A
-Output 2: 15 Vdc at l A
-Switching frequency: 100 kHz
-Magnetizing inductance L
-p: 1.33 mH, referred to primary
-Turns ratio: 160: 5: 15
-Transformer power loss: Allow 1 W total
-(a) Does the converter operate in CCM or DCM? Referred to the primary winding, how
-large are (i) the magnetizing current rippleΔi,( ii) the magnetizing current dc compo-
-nent I, and (iii) the peak magnetizing current Ipk?
-(b) Determine ( i) the rms winding currents, and ( ii) the applied primary volt-secondsλ1.
-Isλ1 proportional to Ipk?
-(c) Modify the transformer and ac inductor design procedures of this chapter, to derive a
-general procedure for designing ﬂyback transformers that explicitly accounts for both
-core and copper loss, and that employs the optimum ac ﬂux density that minimizes
-the total loss.
-(d) Give a general step-by-step design procedure, with all speciﬁcations and units clearly
-stated.
-(e) Design the ﬂyback transformer for the converter of part (a), using your step-by-step
-procedure of Part (d). Use a ferrite EE core, with β= 2.7 and K
-fe = 50W/Tβcm3.
-Specify: core size, air gap length, turns, and wire sizes for all windings.
-(f) For your ﬁnal design of part (e), what are ( i) the core loss, ( ii) the total copper loss,
-and (iii) the peak ﬂux density?
-12.4 Over the intended range of operating frequencies, the frequency dependence of the core
-loss coeﬃcient Kfe of a certain ferrite core material can be approximated using a mono-
-tonically increasing fourth-order polynomial of the form
-```
+其中
+
+$$I_{tot} = \sum_{j=1}^{k}\frac{n_j}{n_1}I_j \tag{12.6}$$
+
+是归算到绕组 1 的方均根绕组电流之和。用式 (12.4) 从式 (12.5) 消去 $n_1$ 得
+
+$$P_{cu} = \left(\frac{\rho\lambda_1^2 I_{tot}^2}{4K_u}\right)\!\left(\frac{\text{MLT}}{W_A A_c^2}\right)\!\left(\frac{1}{\Delta B}\right)^2 \tag{12.7}$$
+
+式 (12.7) 右边分为三组。第一组含技术指标，第二组是磁芯几何的函数。最后一项是 $\Delta B$ 的函数，待选择以优化设计。可见铜损随 $\Delta B$ 的平方反比变化；增大 $\Delta B$ 减小 $P_{cu}$。
+
+此设计步骤未显式计入邻近效应引起的铜损增大。实际中须在磁芯和绕组几何已知后估计邻近损耗。但可在设计步骤中计入邻近损耗引起的交流电阻增大。导线电阻率 $\rho$ 的有效值增大估计比 $R_{ac}/R_{dc}$ 的因子。磁芯几何已知后，工程师可尝试实现绕组使获得估计的 $R_{ac}/R_{dc}$。可能需多次设计迭代。
+
+### 12.1.4 总功率损耗与 $\Delta B$ 的关系
+
+总功率损耗 $P_{tot}$ 由式 (12.1) 和 (12.7) 相加求得：
+
+$$P_{tot} = P_{fe} + P_{cu} \tag{12.8}$$
+
+$P_{fe}$、$P_{cu}$、$P_{tot}$ 对 $\Delta B$ 的依赖如图12.3所示。
+
+![源页 p.496](../assets/page-snapshots/chapter-12/page-496.png)
+
+图12.3 铜损、铁损和总损耗对峰值交流磁通密度的依赖
+
+### 12.1.5 最优磁通密度
+
+现在选择使式 (12.8) 最小的 $\Delta B$ 值。在最优 $\Delta B$ 处可写
+
+$$\frac{dP_{tot}}{d(\Delta B)} = \frac{dP_{fe}}{d(\Delta B)} + \frac{dP_{cu}}{d(\Delta B)} = 0 \tag{12.9}$$
+
+注意最优不一定出现在 $P_{fe} = P_{cu}$ 处。而是出现在
+
+$$\frac{dP_{fe}}{d(\Delta B)} = -\frac{dP_{cu}}{d(\Delta B)} \tag{12.10}$$
+
+处。铁损和铜损对 $\Delta B$ 的导数为
+
+$$\frac{dP_{fe}}{d(\Delta B)} = \beta K_{fe}(\Delta B)^{(\beta-1)}A_c\ell_m \tag{12.11}$$
+
+$$\frac{dP_{cu}}{d(\Delta B)} = -2\left(\frac{\rho\lambda_1^2 I_{tot}^2}{4K_u}\right)\!\left(\frac{\text{MLT}}{W_A A_c^2}\right)\!(\Delta B)^{-3} \tag{12.12}$$
+
+将式 (12.11) 和 (12.12) 代入式 (12.10) 并解 $\Delta B$ 得最优磁通密度
+
+$$\Delta B = \left[\frac{\rho\lambda_1^2 I_{tot}^2}{2K_u}\frac{(\text{MLT})}{W_A A_c^3\ell_m}\frac{1}{\beta K_{fe}}\right]^{1/(\beta+2)} \tag{12.13}$$
+
+将式 (12.13) 代入 (12.1)、(12.8)、(12.9) 求得总功率损耗。化简得
+
+$$P_{tot} = [A_c\ell_m K_{fe}]^{2/(\beta+2)}\!\left[\frac{\rho\lambda_1^2 I_{tot}^2}{4K_u}\frac{(\text{MLT})}{W_A A_c^2}\right]^{\beta/(\beta+2)}\!\left[\left(\frac{\beta}{2}\right)^{-\beta/(\beta+2)}+\left(\frac{\beta}{2}\right)^{2/(\beta+2)}\right] \tag{12.14}$$
+
+此表达式可重组如下：
+
+$$\frac{W_A(A_c)^{(2(\beta-1)/\beta)}}{(\text{MLT})\ell_m^{(2/\beta)}}\!\left[\left(\frac{\beta}{2}\right)^{-\beta/(\beta+2)}+\left(\frac{\beta}{2}\right)^{2/(\beta+2)}\right]^{-(\beta+2)/\beta} = \frac{\rho\lambda_1^2 I_{tot}^2 K_{fe}^{(2/\beta)}}{4K_u(P_{tot})^{((\beta+2)/\beta)}} \tag{12.15}$$
+
+式 (12.15) 左边的项取决于磁芯几何，右边的项取决于应用技术指标（$\rho, I_{tot}, \lambda_1, K_u, P_{tot}$）和所需磁芯材料（$K_{fe}, \beta$）。式 (12.15) 左边可定义为磁芯几何常数 $K_{gfe}$：
+
+$$K_{gfe} = \frac{W_A(A_c)^{(2(\beta-1)/\beta)}}{(\text{MLT})\ell_m^{(2/\beta)}}\!\left[\left(\frac{\beta}{2}\right)^{-\beta/(\beta+2)}+\left(\frac{\beta}{2}\right)^{2/(\beta+2)}\right]^{-(\beta+2)/\beta} \tag{12.16}$$
+
+故为设计变压器，计算式 (12.15) 右边。选择 $K_{gfe}$ 超过此值的磁芯：
+
+$$K_{gfe} \ge \frac{\rho\lambda_1^2 I_{tot}^2 K_{fe}^{(2/\beta)}}{4K_u(P_{tot})^{((\beta+2)/\beta)}} \tag{12.17}$$
+
+量 $K_{gfe}$ 类似上一章铁损可忽略时设计磁性器件所用的几何常数 $K_g$。$K_{gfe}$ 是铁损显著时磁芯磁尺寸的度量。不幸的是 $K_{gfe}$ 取决于 $\beta$，故磁芯材料选择影响 $K_{gfe}$ 值。但大多数高频铁氧体材料的 $\beta$ 在 2.6 至 2.8 的窄范围内，$K_{gfe}$ 在此范围内变化不超过 ±5%。附录 B 列出各标准铁氧体磁芯 $\beta = 2.7$ 时的 $K_{gfe}$ 值。
+
+选择磁芯后，$A_c$、$W_A$、$\ell_m$、MLT 已知。可用式 (12.13) 评估峰值交流磁通密度 $\Delta B$，用式 (12.4) 求一次匝数 $n_1$。其余绕组匝数用所需匝比计算。各窗口面积分配用式 (11.35) 求。各绕组线径按上一章所述计算：
+
+$$A_{w,j} = \frac{K_u W_A \alpha_j}{n_j} \tag{12.18}$$
+
+其中 $A_{w,j}$ 是绕组 $j$ 的线面积。
+
+## 12.2 首轮变压器设计步骤
+
+上一节开发的步骤总结如下。与上一章滤波电感设计步骤一样，此简单变压器设计步骤应视为首轮方法。忽略了许多问题，包括详细绝缘要求、导体涡流损耗、温升、匝数取整等。
+
+以下量按所示单位指定：
+
+- 导线有效电阻率 $\rho$（Ω-cm）
+- 归算到一次的总方均根绕组电流 $I_{tot} = \sum_{j=1}^{k}\frac{n_j}{n_1}I_j$（A）
+- 所需匝比 $n_2/n_1, n_3/n_1$ 等
+- 施加一次伏秒 $\lambda_1 = \int_{\text{正部分}}v_1(t)\,dt$（V-秒）
+- 允许总功率耗散 $P_{tot}$（W）
+- 绕组填充因子 $K_u$
+- 铁损指数 $\beta$
+- 铁损系数 $K_{fe}$（W/cm³T$^\beta$）
+
+磁芯尺寸以 cm 表示：
+
+- 磁芯截面积 $A_c$（cm²）
+- 磁芯窗口面积 $W_A$（cm²）
+- 每匝平均长度 MLT（cm）
+- 磁路长度 $\ell_m$（cm）
+- 峰值交流磁通密度 $\Delta B$（特斯拉）
+- 线面积 $A_{w1}, A_{w2}, \ldots$（cm²）
+
+使用厘米而非米要求在设计方程中加入适当因子。
+
+### 12.2.1 步骤
+
+**1. 确定磁芯尺寸。**
+
+$$K_{gfe} \ge \frac{\rho\lambda_1^2 I_{tot}^2 K_{fe}^{(2/\beta)}}{4K_u(P_{tot})^{((\beta+2)/\beta)}}\cdot 10^8 \tag{12.19}$$
+
+选择足够大以满足此不等式的磁芯。如有必要可通过选择铁损更小（即 $K_{fe}$ 更小）的磁芯材料使用更小磁芯。
+
+**2. 评估峰值交流磁通密度。**
+
+$$\Delta B = \left[\frac{10^8\rho\lambda_1^2 I_{tot}^2}{2K_u}\frac{(\text{MLT})}{W_A A_c^3\ell_m}\frac{1}{\beta K_{fe}}\right]^{1/(\beta+2)} \tag{12.20}$$
+
+检查 $\Delta B$ 是否大于磁芯材料饱和磁通密度。若磁芯有直流偏置，则直流偏置加 $\Delta B$ 不应超过饱和磁通密度。若防止饱和的裕量足够则进入下一步。否则：(1) 用铁损更大的磁芯材料重复步骤，或 (2) 用指定最大磁通密度的 $K_g$ 设计方法。
+
+**3. 评估一次匝数。**
+
+$$n_1 = \frac{\lambda_1}{2\Delta B A_c}\cdot 10^4 \tag{12.21}$$
+
+**4. 选择其他绕组匝数。**
+
+按所需匝比：
+
+$$n_2 = n_1\!\left(\frac{n_2}{n_1}\right), \quad n_3 = n_1\!\left(\frac{n_3}{n_1}\right), \quad \ldots \tag{12.22}$$
+
+**5. 评估各绕组窗口面积比例。**
+
+$$\alpha_1 = \frac{n_1 I_1}{n_1 I_{tot}}, \quad \alpha_2 = \frac{n_2 I_2}{n_1 I_{tot}}, \quad \ldots, \quad \alpha_k = \frac{n_k I_k}{n_1 I_{tot}} \tag{12.23}$$
+
+**6. 评估线径。**
+
+$$A_{w1} \le \frac{\alpha_1 K_u W_A}{n_1}, \quad A_{w2} \le \frac{\alpha_2 K_u W_A}{n_2}, \quad \ldots \tag{12.24}$$
+
+选择满足这些标准的线规。
+
+现在可确定绕组几何并评估邻近效应引起的铜损。若这些损耗显著，可能希望通过重复上述步骤进一步优化设计，通过将有效导线电阻率增大到 $\rho_{eff} = \rho_{cu}P_{cu}/P_{dc}$ 来计入邻近损耗，其中 $P_{cu}$ 是含邻近效应的实际铜损，$P_{dc}$ 是邻近效应可忽略时的铜损。
+
+如需要，现在可检查功率损耗和变压器模型参数。对图12.4 的简单模型，估计以下参数：
+
+- 归算到绕组 1 的磁化电感：$L_M = \frac{\mu n_1^2 A_c}{\ell_m}$
+- 归算到绕组 1 的峰值交流磁化电流：$i_{M,pk} = \frac{\lambda_1}{2L_M}$
+- 绕组电阻：$R_1 = \frac{\rho n_1(\text{MLT})}{A_{w1}}$，$R_2 = \frac{\rho n_2(\text{MLT})}{A_{w2}}$，$\ldots$
+
+铁损、铜损和总功率损耗可分别用式 (12.1)、(12.7)、(12.8) 确定。
+
+![源页 p.500](../assets/page-snapshots/chapter-12/page-500.png)
+
+图12.4 简单变压器模型的计算元件
+
+## 12.3 示例
+
+### 12.3.1 示例1：单输出隔离 Ćuk 变换器
+
+作为例子，考虑图12.5 的 Ćuk 变换器简单双绕组变压器设计。此变压器在所示工作点（$D = 0.5$）优化。稳态变换器解为 $V_{c1} = V_g$，$V_{c2} = V$。所需变压器匝比 $n = n_1/n_2 = 5$。开关频率 $f_s = 200\text{ kHz}$，对应 $T_s = 5\,\mu\text{s}$。使用铁氧体罐形磁芯；200 kHz 时所选铁氧体磁芯材料参数为：$K_{fe} = 24.7\text{ W/T}^\beta\text{cm}^3$，$\beta = 2.6$。假定填充因子 $K_u = 0.5$。允许总功率损耗 $P_{tot} = 0.25\text{ W}$。使用电阻率 $\rho = 1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$ 的铜线。
+
+![源页 p.501](../assets/page-snapshots/chapter-12/page-501.png)
+
+图12.5 隔离 Ćuk 变换器示例
+
+![源页 p.501](../assets/page-snapshots/chapter-12/page-501.png)
+
+图12.6 Ćuk 变换器变压器设计示例波形
+
+变压器波形如图12.6所示。施加一次伏秒为
+
+$$\lambda_1 = DT_s V_{c1} = (0.5)(5\,\mu\text{s})(25\text{ V}) = 62.5\text{ V-}\mu\text{s} \tag{12.25}$$
+
+一次方均根电流为
+
+$$I_1 = \sqrt{D\!\left(\frac{I}{n}\right)^2 + D'(I_g)^2} = 4\text{ A} \tag{12.26}$$
+
+假定方均根磁化电流远小于方均根绕组电流。由于变压器仅含两个绕组，二次方均根电流为
+
+$$I_2 = nI_1 = 20\text{ A} \tag{12.27}$$
+
+归算到一次的总方均根绕组电流为
+
+$$I_{tot} = I_1 + \frac{1}{n}I_2 = 8\text{ A} \tag{12.28}$$
+
+用式 (12.19) 评估磁芯尺寸：
+
+$$K_{gfe} \ge \frac{(1.724\cdot 10^{-6})(62.5\cdot 10^{-6})^2(8)^2(24.7)^{(2/2.6)}}{4(0.5)(0.25)^{(4.6/2.6)}}\cdot 10^8 = 0.00295 \tag{12.29}$$
+
+附录 B 的罐形磁芯数据列出 2213 罐形磁芯 $\beta = 2.7$ 时 $K_{gfe} = 0.0049$。式 (12.16) 评估表明此磁芯 $\beta = 2.6$ 时 $K_{gfe} = 0.0047$。无论如何 2213 是满足 $K_{gfe} \ge 0.00295$ 的最小标准罐形磁芯尺寸。$K_{gfe}$ 增大值应导致更低总功率损耗。用 2213 罐形磁芯几何数据由式 (12.20) 求峰值交流磁通密度：
+
+$$\Delta B = \left[\frac{10^8(1.724\cdot 10^{-6})(62.5\cdot 10^{-6})^2(8)^2}{2(0.5)}\frac{(4.42)}{(0.297)(0.635)^3(3.15)}\frac{1}{(2.6)(24.7)}\right]^{(1/4.6)} = 0.0858\text{ 特斯拉} \tag{12.30}$$
+
+此磁通密度远小于约 0.35 特斯拉的饱和磁通密度。由式 (12.21) 确定一次匝数：
+
+$$n_1 = \frac{10^4(62.5\cdot 10^{-6})}{2(0.0858)(0.635)} = 5.74\text{ 匝} \tag{12.31}$$
+
+由式 (12.22) 求二次匝数。希望变压器匝比 5:1，故
+
+$$n_2 = \frac{n_1}{n} = 1.15\text{ 匝} \tag{12.32}$$
+
+实际中可选 $n_1 = 5$，$n_2 = 1$。这将导致略高 $\Delta B$ 和略高损耗。
+
+绕组 1 和 2 的窗口面积比例由式 (12.23) 确定：
+
+$$\alpha_1 = \frac{(4\text{ A})}{(8\text{ A})} = 0.5 \tag{12.33}$$
+
+$$\alpha_2 = \frac{\left(\dfrac{1}{5}\right)(20\text{ A})}{(8\text{ A})} = 0.5$$
+
+此例中窗口面积在一次和二次绕组间均等分配，因为其方均根电流之比等于匝比。现在由式 (12.24) 评估一次和二次线面积：
+
+$$A_{w1} = \frac{(0.5)(0.5)(0.297)}{5} = 14.8\cdot 10^{-3}\text{ cm}^2 \tag{12.34}$$
+
+$$A_{w2} = \frac{(0.5)(0.5)(0.297)}{1} = 74.2\cdot 10^{-3}\text{ cm}^2$$
+
+用附录 B 线表选择线规。AWG #16 面积 $13.07\cdot 10^{-3}\text{ cm}^2$，适合一次绕组。AWG #9 面积 $66.3\cdot 10^{-3}\text{ cm}^2$，适合二次绕组。这些是非常大的导体，一匝 AWG #9 不是实际解决方案！还可预期显著邻近损耗和显著漏感。实际中可用交错箔绕组。或者可用利兹线或多股并联细线。
+
+在不同开关频率下重复上述设计以确定变压器尺寸如何随开关频率变化是有益的。开关频率增大时铁损系数 $K_{fe}$ 增大。图12.7 给出此 Ćuk 变换器示例用 P 材料 $P_{tot} < 0.25\text{ W}$ 时 25 kHz 至 1 MHz 范围内各开关频率下的变压器罐形磁芯尺寸。还绘制了峰值磁通密度（特斯拉）。开关频率低于 250 kHz 时增大频率使磁芯尺寸减小。这是因为施加伏秒 $\lambda_1$ 减小。此范围内最优 $\Delta B$ 基本与开关频率无关；所示 $\Delta B$ 变化因磁芯尺寸量化。
+
+开关频率高于 250 kHz 时增大频率使铁损大幅增大。保持 $P_{tot} \le 0.25\text{ W}$ 须减小 $\Delta B$，故磁芯尺寸增大。此例最小变压器尺寸显然在 250 kHz 处获得。
+
+![源页 p.503](../assets/page-snapshots/chapter-12/page-503.png)
+
+图12.7 Ćuk 变换器示例中变压器尺寸（柱状图）随开关频率的变化。还绘制了最优峰值交流磁通密度（数据点）
+
+实际中若干因素使变压器尺寸对开关频率的依赖复杂化。图12.7 忽略绕组几何和绕组涡流引起的铜损。更大磁芯可允许更大功率损耗。用不同磁芯材料可允许更高或更低开关频率。同一磁芯材料用于技术指标不同的不同应用可导致不同最优频率。但文献 [100–103] 报道了铁氧体变压器尺寸在数百千赫至数兆赫范围内最小化的示例。可用计算机优化程序 [104, 105] 进行更详细的设计优化。
+
+### 12.3.2 示例2：多输出全桥降压变换器
+
+作为第二个例子，考虑图12.8 多输出全桥降压变换器变压器 $T_1$ 的设计。此变换器有 5 V 和 15 V 输出，最大负载如图所示。变压器在所示满载工作点（$D = 0.75$）优化。波形如图12.9所示。变换器开关频率 $f_s = 150\text{ kHz}$。全桥结构中变压器波形基频等于开关频率的一半，故有效变压器频率为 75 kHz。计入二极管正向压降引起的损耗后，所需变压器匝比 $n_1 : n_2 : n_3$ 为 110:5:15。此例用 Magnetics, Inc. P 材料铁氧体 EE 磁芯；75 kHz 时此材料参数为：$K_{fe} = 7.6\text{ W/T}^\beta\text{cm}^3$，$\beta = 2.6$。此隔离多输出应用假定填充因子 $K_u = 0.25$。允许总功率损耗 $P_{tot} = 4\text{ W}$，约负载功率的 0.5%。使用电阻率 $\rho = 1.724\cdot 10^{-6}\,\Omega\cdot\text{cm}$ 的铜线。
+
+![源页 p.504](../assets/page-snapshots/chapter-12/page-504.png)
+
+图12.8 多输出全桥隔离降压变换器示例
+
+![源页 p.505](../assets/page-snapshots/chapter-12/page-505.png)
+
+图12.9 全桥变换器示例变压器波形
+
+施加一次伏秒为
+
+$$\lambda_1 = DT_s V_g = (0.75)(6.67\,\mu\text{s})(160\text{ V}) = 800\text{ V-}\mu\text{s} \tag{12.35}$$
+
+一次方均根电流为
+
+$$I_1 = \left(\frac{n_2}{n_1}I_{5\text{V}} + \frac{n_3}{n_1}I_{15\text{V}}\right)\!\sqrt{D} = 5.7\text{ A} \tag{12.36}$$
+
+5 V 二次绕组载方均根电流
+
+$$I_2 = \frac{1}{2}I_{5\text{V}}\sqrt{1+D} = 66.1\text{ A} \tag{12.37}$$
+
+15 V 二次绕组载方均根电流
+
+$$I_3 = \frac{1}{2}I_{15\text{V}}\sqrt{1+D} = 9.9\text{ A} \tag{12.38}$$
+
+归算到一次的总方均根绕组电流为
+
+$$I_{tot} = \sum_{\text{所有5个绕组}}\frac{n_j}{n_1}I_j = I_1 + 2\frac{n_2}{n_1}I_2 + 2\frac{n_3}{n_1}I_3 = 14.4\text{ A} \tag{12.39}$$
+
+用式 (12.19) 评估磁芯尺寸：
+
+$$K_{gfe} \ge \frac{(1.724\cdot 10^{-6})(800\cdot 10^{-6})^2(14.4)^2(7.6)^{(2/2.6)}}{4(0.25)(4)^{(4.6/2.6)}}\cdot 10^8 = 0.00937 \tag{12.40}$$
+
+附录 B 的 EE 磁芯数据列出 EE40 磁芯 $\beta = 2.7$ 时 $K_{gfe} = 0.0118$。式 (12.16) 评估表明此磁芯 $\beta = 2.6$ 时 $K_{gfe} = 0.0108$。无论如何 EE40 是满足 $K_{gfe} \ge 0.00937$ 的最小标准 EE 磁芯尺寸。用 EE40 磁芯几何数据由式 (12.20) 求峰值交流磁通密度：
+
+$$\Delta B = \left[\frac{10^8(1.724\cdot 10^{-6})(800\cdot 10^{-6})^2(14.4)^2}{2(0.25)}\frac{(8.5)}{(1.1)(1.27)^3(7.7)}\frac{1}{(2.6)(7.6)}\right]^{(1/4.6)} = 0.23\text{ 特斯拉} \tag{12.41}$$
+
+此磁通密度小于约 0.35 特斯拉的饱和磁通密度。由式 (12.21) 确定一次匝数：
+
+$$n_1 = \frac{10^4(800\cdot 10^{-6})}{2(0.23)(1.27)} = 13.7\text{ 匝} \tag{12.42}$$
+
+由式 (12.22) 求二次匝数。希望变压器匝比 110:5:15，故
+
+$$n_2 = \frac{5}{110}n_1 = 0.62\text{ 匝} \tag{12.43}$$
+
+$$n_3 = \frac{15}{110}n_1 = 1.87\text{ 匝} \tag{12.44}$$
+
+实际中可选 $n_1 = 22$，$n_2 = 1$，$n_3 = 3$。这将导致减小 $\Delta B$、减小铁损和增大铜损。由于所得 $\Delta B$ 次优，总功率损耗增大。按式 (12.3)，EE40 磁芯的峰值交流磁通密度为
+
+$$\Delta B = \frac{(800\cdot 10^{-6})}{2(22)(1.27)}\cdot 10^4 = 0.143\text{ 特斯拉} \tag{12.45}$$
+
+用式 (12.1) 和 (12.7) 计算所得铁损和铜损：
+
+$$P_{fe} = (7.6)(0.143)^{2.6}(1.27)(7.7) = 0.47\text{ W} \tag{12.46}$$
+
+$$P_{cu} = \frac{(1.724\cdot 10^{-6})(800\cdot 10^{-6})^2(14.4)^2}{4(0.25)}\frac{(8.5)}{(1.1)(1.27)^2}\frac{1}{(0.143)^2}\cdot 10^8 = 5.4\text{ W} \tag{12.47}$$
+
+故总功率损耗为
+
+$$P_{tot} = P_{fe} + P_{cu} = 5.9\text{ W} \tag{12.48}$$
+
+由于这比 4 W 设计目标大 50%，须增大磁芯尺寸。下一更大的 EE 磁芯为 EE50，$K_{gfe} = 0.0284$。此磁芯的最优交流磁通密度 [由式 (12.3) 给出] 为 $\Delta B = 0.14\text{ T}$；在此磁通密度工作需 $n_1 = 12$，总功率损耗 2.3 W。$n_1 = 22$ 时，类似式 (12.45) 至 (12.48) 的计算得峰值磁通密度 $\Delta B = 0.08\text{ T}$。所得功率损耗为 $P_{fe} = 0.23\text{ W}$，$P_{cu} = 3.89\text{ W}$，$P_{tot} = 4.12\text{ W}$。
+
+用 EE50 磁芯和 $n_1 = 22$，一次绕组分配的可用窗口面积比例由式 (12.23) 给出：
+
+$$\alpha_1 = \frac{I_1}{I_{tot}} = \frac{5.7}{14.4} = 0.396 \tag{12.49}$$
+
+5 V 二次每半应分配的可用窗口面积比例为
+
+$$\alpha_2 = \frac{n_2 I_2}{n_1 I_{tot}} = \frac{\dfrac{5}{110}(66.1)}{14.4} = 0.209 \tag{12.50}$$
+
+15 V 二次每半应分配的可用窗口面积比例为
+
+$$\alpha_3 = \frac{n_3 I_3}{n_1 I_{tot}} = \frac{\dfrac{15}{110}(9.9)}{14.4} = 0.094 \tag{12.51}$$
+
+一次线面积 $A_{w1}$、5 V 二次线面积 $A_{w2}$、15 V 二次线面积 $A_{w3}$ 由式 (12.24) 给出：
+
+$$A_{w1} = \frac{\alpha_1 K_u W_A}{n_1} = \frac{(0.396)(0.25)(1.78)}{22} = 8.0\cdot 10^{-3}\text{ cm}^2\Rightarrow\text{AWG #19} \tag{12.52}$$
+
+$$A_{w2} = \frac{\alpha_2 K_u W_A}{n_2} = \frac{(0.209)(0.25)(1.78)}{1} = 930\cdot 10^{-3}\text{ cm}^2\Rightarrow\text{AWG #8}$$
+
+$$A_{w3} = \frac{\alpha_3 K_u W_A}{n_3} = \frac{(0.094)(0.25)(1.78)}{3} = 13.9\cdot 10^{-3}\text{ cm}^2\Rightarrow\text{AWG #16}$$
+
+15 V 输出可能更愿意用两根 #19 并联绕制；这将导致相同面积 $A_{w3}$ 但更易绕制。5 V 绕组可用多匝更细并联线绕制，但用扁铜箔绕制可能更容易。如绝缘要求允许，可用箔薄层与一次绕组交错使邻近损耗最小。
+
+## 12.4 交流电感设计
+
+前面各节的变压器设计步骤可改造以处理铁损和铜损均显著的其他磁性器件设计。此处给出含显著高频交流分量的单绕组电感（图12.10）设计的步骤。求使总铁损加铜损最小的 $\Delta B$ 最优值。主要区别是须设计获得给定电感，使用含气隙的磁芯。约束和逐步步骤简述如下。
+
+![源页 p.508](../assets/page-snapshots/chapter-12/page-508.png)
+
+图12.10 交流电感，铜损和铁损均显著：(a) 端子量定义；(b) 磁芯几何；(c) 任意端子波形
+
+### 12.4.1 推导概要
+
+与上一章滤波电感设计步骤一样，须获得所需电感 $L$：
+
+$$L = \frac{\mu_0 A_c n^2}{\ell_g} \tag{12.53}$$
+
+施加电压波形和磁通密度峰值交流分量 $\Delta B$ 的关系为
+
+$$\Delta B = \frac{\lambda}{2nA_c} \tag{12.54}$$
+
+铜损为
+
+$$P_{cu} = \frac{\rho n^2(\text{MLT})}{K_u W_A}I^2 \tag{12.55}$$
+
+其中 $I$ 是 $i(t)$ 的方均根值。铁损 $P_{fe}$ 由式 (12.1) 给出。
+
+用类似变压器设计推导的方法求使总功率损耗 $P_{tot} = P_{cu} + P_{fe}$ 最小的 $\Delta B$ 值。用式 (12.54) 从 $P_{cu}$ 表达式消去 $n$。然后令 $P_{tot}$ 导数为零计算最优 $\Delta B$，结果为
+
+$$\Delta B = \left[\frac{\rho\lambda^2 I^2}{2K_u}\frac{(\text{MLT})}{W_A A_c^3\ell_m}\frac{1}{\beta K_{fe}}\right]^{1/(\beta+2)} \tag{12.56}$$
+
+与式 (12.13) 基本相同。在此 $\Delta B$ 值评估总功率损耗 $P_{tot}$，整理所得表达式求 $K_{gfe}$，结果为
+
+$$K_{gfe} \ge \frac{\rho\lambda^2 I^2 K_{fe}^{(2/\beta)}}{2K_u(P_{tot})^{((\beta+2)/\beta)}} \tag{12.57}$$
+
+$K_{gfe}$ 如式 (12.16) 定义。选择满足此不等式的磁芯。
+
+### 12.4.2 首轮交流电感设计步骤
+
+采用 12.2 节的单位。
+
+**1. 确定磁芯尺寸。**
+
+$$K_{gfe} \ge \frac{\rho\lambda^2 I^2 K_{fe}^{(2/\beta)}}{2K_u(P_{tot})^{((\beta+2)/\beta)}}\cdot 10^8 \tag{12.58}$$
+
+选择足够大以满足此不等式的磁芯。如有必要可通过选择铁损更小（即 $K_{fe}$ 更小）的磁芯材料使用更小磁芯。
+
+**2. 评估峰值交流磁通密度。**
+
+$$\Delta B = \left[\frac{10^8\rho\lambda^2 I^2}{2K_u}\frac{(\text{MLT})}{W_A^4 A_c^3\ell_m}\frac{1}{\beta K_{fe}}\right]^{1/(\beta+2)} \tag{12.59}$$
+
+**3. 匝数。**
+
+$$n = \frac{\lambda}{2\Delta B A_c}\cdot 10^4 \tag{12.60}$$
+
+**4. 气隙长度。**
+
+$$\ell_g = \frac{\mu_0 A_c n^2}{L}\cdot 10^{-4}\ (\text{m}) \tag{12.61}$$
+
+$A_c$ 以 cm² 表示，$\ell_g$ 以米表示。或者可通过 $A_L$（mH/1000 匝）间接表示气隙：
+
+$$A_L = \frac{L}{n^2}\cdot 10^9 \tag{12.62}$$
+
+**5. 检查饱和。**
+
+若电感电流含直流分量 $I_{dc}$，则最大总磁通密度 $B_{max}$ 大于峰值交流磁通密度 $\Delta B$。最大总磁通密度（特斯拉）为
+
+$$B_{max} = \Delta B + \frac{LI_{dc}}{nA_c}\cdot 10^4 \tag{12.63}$$
+
+若 $B_{max}$ 接近或大于饱和磁通密度 $B_{sat}$，则磁芯可能饱和。此时应用上一章滤波电感设计步骤在更低磁通密度工作。
+
+**6. 评估线径。**
+
+$$A_w \le \frac{K_u W_A}{n} \tag{12.64}$$
+
+现在可确定绕组几何并评估邻近效应引起的铜损。若这些损耗显著，可能希望通过重复上述步骤进一步优化设计，通过将有效导线电阻率增大到 $\rho_{eff} = \rho_{cu}P_{cu}/P_{dc}$ 来计入邻近损耗，其中 $P_{cu}$ 是含邻近效应的实际铜损，$P_{dc}$ 是忽略邻近效应时的铜损。
+
+**7. 检查功率损耗。**
+
+$$P_{cu} = \frac{\rho n(\text{MLT})}{A_w}I^2 \tag{12.65}$$
+
+$$P_{fe} = K_{fe}(\Delta B)^\beta A_c\ell_m$$
+
+$$P_{tot} = P_{cu} + P_{fe}$$
+
+## 12.5 小结
+
+1. 多绕组变压器中，可用窗口面积按各绕组视在功率或安匝分配时低频铜损最小。
+
+2. 峰值交流磁通密度增大时铁损增大而铜损减小。存在使总功率损耗最小的最优磁通密度。只要磁芯材料在其预期频率附近工作，最优磁通密度小于饱和磁通密度。总损耗最小化随后决定峰值交流磁通密度的选择。
+
+3. 磁芯几何常数 $K_{gfe}$ 是铁损显著时磁芯磁尺寸的度量。$K_{gfe}$ 设计方法中峰值磁通密度优化为最小总损耗，而非 $K_g$ 设计方法中峰值磁通密度为给定技术指标。
+
+## 习题
+
+![源页 p.511](../assets/page-snapshots/chapter-12/page-511.png)
+
+图12.11 习题12.1 的双输出正激变换器
+
+**12.1** 正激变换器电感和变压器设计。此习题集的目标是设计图12.11 所示双管双输出正激变换器的磁性器件（两个电感和一个变压器）。三个器件所用的铁氧体磁芯材料 120°C 时饱和磁通密度约 0.3 T。为给设计提供安全裕量，应使用不大于此值 75% 的最大磁通密度 $B_{max}$。100 kHz 时铁损由式 (12.1) 描述，参数 $\beta = 2.6$，$K_{fe} = 50\text{ W/T}^\beta\text{cm}^3$。100°C 时计算铜损。
+
+*稳态变换器分析和设计*。此节可假定 100% 效率和理想无损元件。
+
+(a) 选择变压器匝比使占空比 $D = 0.4$ 时获得所需输出电压。
+
+(b) 指定 $L_1$ 和 $L_2$ 值使其电流纹波 $\Delta i_1$ 和 $\Delta i_2$ 为各自满载电流直流分量 $I_1$ 和 $I_2$ 的 10%。
+
+(c) 确定每个电感和变压器绕组的峰值和方均根电流。
+
+*电感设计*。$L_1$ 允许铜损 1 W，$L_2$ 允许 0.4 W。假定填充因子 $K_u = 0.5$。用铁氧体 EE 磁芯——附录 B 给出标准 EE 磁芯尺寸几何数据表。设计输出滤波电感 $L_1$ 和 $L_2$。每个电感指定：(i) EE 磁芯尺寸；(ii) 气隙长度；(iii) 匝数；(iv) AWG 线径。
+
+*变压器设计*。允许总功率损耗 1 W。假定填充因子 $K_u = 0.35$（低于滤波电感，为绕组间绝缘留空间）。用铁氧体 EE 磁芯。可忽略趋肤和邻近效应损耗，但应计入铁损和铜损。设计变压器，指定：(i) EE 磁芯尺寸；(ii) 匝数 $n_1$、$n_2$、$n_3$；(iii) 三个绕组的 AWG 线径。
+
+检查变压器设计：(iv) 计算最大磁通密度。磁芯会饱和吗？(v) 计算铁损、每绕组铜损和总功率损耗。
+
+**12.2** 单管正激变换器输入电压 $V_g = 160\text{ V}$，提供两路输出：24 V、2 A 和 15 V、6 A。占空比 $D = 0.4$。一次绕组与复位绕组匝比为 1:1。开关频率 100 kHz。磁芯材料损耗方程参数 $\beta = 2.7$，$K_{fe} = 50$。可假定填充因子 0.25。不允许磁芯最大磁通密度超过 0.3 T。为此应用设计总功率损耗不大于 1.5 W（100°C）的变压器。忽略邻近损耗。可忽略复位绕组。用铁氧体 PQ 磁芯。指定：磁芯尺寸、峰值交流磁通密度、线径、每绕组匝数。计算设计的铁损和铜损。
+
+**12.3** 反激/SEPIC 变压器设计。反激和 SEPIC 变压器的"变压器"是储能器件，更准确地可描述为多绕组电感。磁化电感 $L_p$ 功能为变换器的能量传输电感，故"变压器"通常含气隙。变换器可设计为在连续或断续导通模式工作。铁损可能显著。还须确保磁化电感中的峰值电流不引起饱和。
+
+为以下双输出反激变换器应用设计反激变压器：
+
+- 输入：160 V 直流
+- 输出 1：5 V 直流，10 A
+- 输出 2：15 V 直流，1 A
+- 开关频率：100 kHz
+- 磁化电感 $L_p$：1.33 mH，归算到一次
+- 匝比：160:5:15
+- 变压器功率损耗：允许共 1 W
+
+(a) 变换器在 CCM 还是 DCM 工作？归算到一次绕组，(i) 磁化电流纹波 $\Delta i$、(ii) 磁化电流直流分量 $I$、(iii) 峰值磁化电流 $I_{pk}$ 各多大？
+
+(b) 确定 (i) 方均根绕组电流，(ii) 施加一次伏秒 $\lambda_1$。$\lambda_1$ 与 $I_{pk}$ 成正比吗？
+
+(c) 修改本章的变压器和交流电感设计步骤，导出显式计入铁损和铜损并采用使总损耗最小的最优交流磁通密度的反激变压器设计的一般步骤。
+
+(d) 给出一般逐步设计步骤，清楚说明所有技术指标和单位。
+
+(e) 用 (d) 的逐步步骤为 (a) 的变换器设计反激变压器。用铁氧体 EE 磁芯，$\beta = 2.7$，$K_{fe} = 50\text{ W/T}^\beta\text{cm}^3$。指定：磁芯尺寸、气隙长度、所有绕组匝数和线径。
+
+(f) 对 (e) 的最终设计，(i) 铁损、(ii) 总铜损、(iii) 峰值磁通密度各是多少？
+
+**12.4** 在预期工作频率范围内，某铁氧体磁芯材料铁损系数 $K_{fe}$ 的频率依赖可用如下形式的单调递增四阶多项式近似

@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "20 Power and Harmonics in Nonsinusoidal Systems"
+title: "第20章 非正弦系统中的功率与谐波"
 tags:
   - power-electronics
   - 教材
@@ -18,870 +18,398 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 20 Power and Harmonics in Nonsinusoidal Systems
+# 第20章 非正弦系统中的功率与谐波
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 849-865  
-> Chunk ID: `chapter-20`
+## 第20章 非正弦系统中的功率与谐波
 
-## 主干提取
+整流曾是一个简单得多的话题。一本教科书只需讨论各种电路即可涵盖该主题，如峰值检测和电感输入整流器、相控桥、多相变压器连接，或许还有倍压电路。但近年来，整流器变得精密得多，现在是系统而非单纯的电路。它们常包含脉宽调制变换器（如升压变换器）以及调节交流输入电流波形的控制系统。因此现代整流器技术已纳入许多直流-直流变换器基础知识。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+原因在于传统峰值检测和相控整流器产生的不良交流线路电流谐波和低功率因数。电力系统谐波的不利影响已被充分认识。这些影响包括：三相系统中不安全的中线电流幅值、变压器和感应电机的发热与寿命缩短、系统电压波形退化、功率因数校正电容中的不安全电流，以及某些电力系统保护元件的误动作。从某种意义上说，传统整流器是交流配电系统的谐波污染源。随着电子设备在社会的广泛部署，整流器谐波已成为一个重大且可测量的问题。因此需要高质量整流器，以高功率因数、高效率、低谐波产生量运行。现已有若干国际标准专门限制谐波电流幅值，既适用于工业电机驱动等大功率设备，也适用于荧光灯电子镇流器和办公设备电源等低功率设备。
 
-## 术语表
+本章讨论含非正弦波形的电力系统中的能量流动。平均功率、方均根值和功率因数用电压和电流波形的傅里叶级数表示。讨论三相系统中的谐波电流，并列出现行标准。随后各章讨论传统线路换流整流器中的谐波与谐波抑制、高质量整流器电路及其模型，以及高质量整流器的控制。
 
-| English term | 中文译名 | Notes |
+![源页 p.849](../assets/page-snapshots/chapter-20/page-849.png)
+
+## 20.1 平均功率
+
+考虑能量从电源经给定表面传输到负载，如图20.1所示。在图20.1的网络中，电压波形 $v(t)$（不一定为正弦）由电源给定，电流波形由负载的响应决定。在电源输出阻抗不可忽略的更一般情形中，$v(t)$ 和 $i(t)$ 均取决于电源和负载的特性。平衡三相系统可按相处理，采用线电流和线-中点电压。若 $v(t)$ 和 $i(t)$ 为周期性，则可用傅里叶级数表示：
+
+$$v(t) = V_0 + \sum_{n=1}^{\infty} V_n \cos(n\omega t - \phi_n) \tag{20.1}$$
+
+$$i(t) = I_0 + \sum_{n=1}^{\infty} I_n \cos(n\omega t - \theta_n)$$
+
+其中交流线路电压波形的周期定义为 $T = 2\pi/\omega$。一般而言，瞬时功率 $p(t) = v(t)\, i(t)$ 在交流线路周期的不同时刻可正可负。能量在电源与负载之间双向流动。我们关心的是一个周期内传输到负载的净能量，
+
+$$W_{cycle} = \int_0^T v(t)\, i(t)\, dt \tag{20.2}$$
+
+这与平均功率直接相关：
+
+$$P_{av} = \frac{W_{cycle}}{T} = \frac{1}{T} \int_0^T v(t)\, i(t)\, dt \tag{20.3}$$
+
+图20.1 观察能量经表面 S 的传输
+
+让我们研究电压和电流波形的谐波含量与平均功率之间的关系。将傅里叶级数式(20.1)代入式(20.3)得
+
+$$P_{av} = \frac{1}{T} \int_0^T \left( V_0 + \sum_{n=1}^{\infty} V_n \cos(n\omega t - \phi_n) \right) \left( I_0 + \sum_{n=1}^{\infty} I_n \cos(n\omega t - \theta_n) \right) dt \tag{20.4}$$
+
+为求此积分，须将无穷级数逐项相乘。可以证明交叉乘积项的积分为零，对积分的唯一贡献来自同频电压和电流谐波的乘积：
+
+![源页 p.850](../assets/page-snapshots/chapter-20/page-850.png)
+
+$$\int_0^T \left( V_n \cos(n\omega t - \phi_n) \right)\left( I_m \cos(m\omega t - \theta_m) \right) dt = \begin{cases} 0 & n \ne m \\ \dfrac{V_n I_n}{2} \cos(\phi_n - \theta_n) & n = m \end{cases} \tag{20.5}$$
+
+因此平均功率为
+
+$$P_{av} = V_0 I_0 + \sum_{n=1}^{\infty} \frac{V_n I_n}{2} \cos(\phi_n - \theta_n) \tag{20.6}$$
+
+故只有当 $v(t)$ 和 $i(t)$ 的傅里叶级数含同频项时，才有净能量传输到负载。例如，若 $v(t)$ 和 $i(t)$ 都含三次谐波，则在三次谐波频率处有净能量传输，平均功率为
+
+$$\frac{V_3 I_3}{2} \cos(\phi_3 - \theta_3) \tag{20.7}$$
+
+此处 $V_3 I_3/2$ 等于三次谐波电流和电压的方均根伏安值。$\cos(\phi_3 - \theta_3)$ 项是位移项，考虑三次谐波电压和电流之间的相位差。
+
+图20.2 电压、电流和瞬时功率波形，示例1。电压仅含基波，电流仅含三次谐波。平均功率为零
+
+含谐波系统中功率流的若干示例如图20.2至20.4。示例1（图20.2）中，电压仅含基波，电流仅含三次谐波。可见瞬时功率波形 $p(t)$ 的平均值为零，故 $P_{av}$ 为零。能量在电源与负载之间循环，但一个周期内传输到负载的净能量为零。示例2（图20.3）中，电压和电流都仅含三次谐波。此时平均功率由式(20.7)给出。示例3（图20.4）中，电压含基波、三次和五次谐波，电流含基波、五次和七次谐波，即
+
+![源页 p.851](../assets/page-snapshots/chapter-20/page-851.png)
+
+图20.3 电压、电流和瞬时功率波形，示例2。电压和电流都仅含三次谐波且同相。在三次谐波频率处有净能量传输
+
+图20.4 电压、电流和瞬时功率波形，示例3。电压含基波、三次和五次谐波。电流含基波、五次和七次谐波。在基波和五次谐波频率处有净能量传输
+
+$$v(t) = 1.2 \cos(\omega t) + 0.33 \cos(3\omega t) + 0.2 \cos(5\omega t)$$
+
+$$i(t) = 0.6 \cos(\omega t + 30°) + 0.1 \cos(5\omega t + 45°) + 0.1 \cos(7\omega t + 60°) \tag{20.8}$$
+
+由于只有基波和五次谐波同时出现在两个波形中，故在这两个频率处有平均功率传输。由式(20.6)求平均功率；除基波和五次谐波项外所有项均为零，得
+
+$$p_{av} = \frac{(1.2)(0.6)}{2} \cos(30°) + \frac{(0.2)(0.1)}{2} \cos(45°) = 0.32 \tag{20.9}$$
+
+瞬时功率及其平均值如图20.4所示。
+
+![源页 p.852](../assets/page-snapshots/chapter-20/page-852.png)
+
+## 20.2 波形的方均根（RMS）值
+
+周期为 $T$ 的周期波形 $v(t)$ 的方均根值定义为
+
+$$\text{(rms 值)} = \sqrt{\frac{1}{T} \int_0^T v^2(t)\, dt} \tag{20.10}$$
+
+方均根值也可用傅里叶分量表示。将式(20.1)代入式(20.10)并利用式(20.5)化简，得
+
+$$\text{(rms 值)} = \sqrt{V_0^2 + \sum_{n=1}^{\infty} \frac{V_n^2}{2}} \tag{20.11}$$
+
+同样，交叉乘积项的积分为零。当波形为电流时此式成立：
+
+$$\text{(rms 电流)} = \sqrt{I_0^2 + \sum_{n=1}^{\infty} \frac{I_n^2}{2}} \tag{20.12}$$
+
+因此，波形中谐波的存在总是增大其方均根值。特别地，当电压 $v(t)$ 仅含基波而电流 $i(t)$ 含谐波时，谐波增大电流的方均根值而不改变平均功率。这是不理想的，因为谐波不会导致向负载的净能量传递，却增大系统中的 $I_{rms}^2 R$ 损耗。
+
+实际系统中，电源、负载和/或传输线中总存在串联电阻，导致遵循如下表达式的无用功率损耗：
+
+$$\text{(rms 电流)}^2\, R_{series} \tag{20.13}$$
+
+此类损耗元件的例子有：交流发电机绕组电阻、连接电源与负载的导线电阻、变压器绕组电阻、半导体器件电阻，以及开关变换器中的磁元件绕组电阻。因此希望在传输所需能量和平均功率到负载的同时使方均根电流尽可能小。
+
+通常也存在并联电阻，导致遵循如下关系的功率损耗：
+
+$$\frac{\text{(rms 电压)}^2}{R_{shunt}} \tag{20.14}$$
+
+例子包括变压器和交流发电机的铁损，以及开关变换器晶体管的开关损耗。因此希望在传输所需平均功率到负载的同时使方均根电压尽可能小。
+
+![源页 p.853](../assets/page-snapshots/chapter-20/page-853.png)
+
+## 20.3 功率因数
+
+功率因数是衡量电源与负载网络之间能量传输有效程度的指标。它在图20.1所示给定表面处测量，定义为
+
+$$\text{功率因数} = \frac{\text{(平均功率)}}{\text{(rms 电压)(rms 电流)}} \tag{20.15}$$
+
+功率因数始终在零到一之间。理想情况即单位功率因数，发生在服从欧姆定律的负载中。此时电压和电流波形形状相同、含相同谐波频谱且同相。对给定平均功率吞吐，在最大（单位）功率因数下，即线性电阻负载时，方均根电流和电压最小。当电压不含谐波但负载为非线性且含动态时，功率因数可表示为两项之积，一项源于电流基波分量的相移，另一项源于电流谐波。
+
+### 20.3.1 线性电阻负载，非正弦电压
+
+此时电流谐波与电压谐波同相且成正比。因此所有谐波都导致向负载的净能量传递。电流谐波幅值和相位为
+
+$$I_n = \frac{V_n}{R} \tag{20.16}$$
+
+$$\theta_n = \phi_n \quad \text{故} \quad \cos(\theta_n - \phi_n) = 1 \tag{20.17}$$
+
+方均根电压仍为
+
+$$\text{(rms 电压)} = \sqrt{V_0^2 + \sum_{n=1}^{\infty} \frac{V_n^2}{2}} \tag{20.18}$$
+
+方均根电流为
+
+$$\text{(rms 电流)} = \sqrt{I_0^2 + \sum_{n=1}^{\infty} \frac{I_n^2}{2}} = \sqrt{\frac{V_0^2}{R^2} + \sum_{n=1}^{\infty} \frac{V_n^2}{2 R^2}} \tag{20.19}$$
+
+$$= \frac{1}{R}\, \text{(rms 电压)}$$
+
+利用式(20.6)，平均功率为
+
+$$P_{av} = V_0 I_0 + \sum_{n=1}^{\infty} \frac{V_n I_n}{2} \cos(\phi_n - \theta_n) = \frac{V_0^2}{R} + \sum_{n=1}^{\infty} \frac{V_n^2}{2 R} \tag{20.20}$$
+
+$$= \frac{1}{R}\, \text{(rms 电压)}^2$$
+
+![源页 p.854](../assets/page-snapshots/chapter-20/page-854.png)
+
+将式(20.19)和(20.20)代入式(20.15)可知功率因数为 1。因此，若负载为线性纯电阻，则无论 $v(t)$ 的谐波含量如何，功率因数均为 1。负载电流波形 $i(t)$ 的谐波含量与 $v(t)$ 相同，所有谐波都导致向负载的能量传递。这提出了基于非正弦波形构建配电系统、使能量高效传输到负载的可能性。
+
+### 20.3.2 非线性动态负载，正弦电压
+
+若电压 $v(t)$ 含基波分量但无直流分量或谐波，即 $V_0 = V_2 = V_3 = \cdots = 0$，则 $i(t)$ 中的谐波不导致向负载的净能量传递。平均功率表达式(20.6)变为
+
+$$P_{av} = \frac{V_1 I_1}{2} \cos(\phi_1 - \theta_1) \tag{20.21}$$
+
+但 $i(t)$ 中的谐波确实影响方均根电流值：
+
+$$\text{(rms 电流)} = \sqrt{I_0^2 + \sum_{n=1}^{\infty} \frac{I_n^2}{2}} \tag{20.22}$$
+
+因此，如示例1（图20.2）所示，谐波使负载从电源汲取更多方均根电流，但不增加平均功率。增大电流谐波不会使更多能量传输到负载，却会增大串联电阻元件 $R_{series}$ 中的附加损耗。
+
+此外，负载动态和储能元件的存在使电压和电流基波分量的相位差为 $(\theta_1 - \phi_1)$，也降低功率因数。平均功率式(20.21)中的 $\cos(\phi_1 - \theta_1)$ 项小于 1。但电流的方均根值式(20.22)与相位无关。因此，使 $i(t)$ 相对于 $v(t)$ 相移会降低平均功率而不改变方均根电压或电流，从而降低功率因数。
+
+将式(20.21)和(20.22)代入式(20.15)，正弦电压下的功率因数可写为：
+
+$$\text{(功率因数)} = \left( \frac{\dfrac{I_1}{\sqrt{2}}}{\sqrt{I_0^2 + \sum_{n=1}^{\infty} \dfrac{I_n^2}{2}}} \right) \left( \cos(\phi_1 - \theta_1) \right) \tag{20.23}$$
+
+$$= \text{(畸变因子)(位移因子)}$$
+
+故当电压不含谐波时，功率因数可写成两项之积。第一项称为畸变因子，是电流方均根基波分量与电流总方均根值之比：
+
+$$\text{(畸变因子)} = \frac{\dfrac{I_1}{\sqrt{2}}}{\sqrt{I_0^2 + \sum_{n=1}^{\infty} \dfrac{I_n^2}{2}}} = \frac{\text{(rms 基波电流)}}{\text{(rms 电流)}} \tag{20.24}$$
+
+![源页 p.855](../assets/page-snapshots/chapter-20/page-855.png)
+
+图20.5 畸变因子与总谐波失真的关系
+
+式(20.23)第二项称为位移因子，是电压和电流波形基波分量之间夹角的余弦。
+
+总谐波失真（THD）定义为不含基波的波形的方均根值与基波方均根幅值之比。无直流时，可写为：
+
+$$\text{(THD)} = \frac{\sqrt{\sum_{n=2}^{\infty} I_n^2}}{I_1} \tag{20.25}$$
+
+总谐波失真与畸变因子密切相关。比较式(20.24)和(20.25)（取 $I_0 = 0$），得
+
+$$\text{(畸变因子)} = \frac{1}{\sqrt{1 + (\text{THD})^2}} \tag{20.26}$$
+
+此式绘于图20.5。适度失真波形的畸变因子很接近 1。例如，若波形含幅值为基波 10% 的三次谐波，畸变因子为 99.5%。三次谐波增至 20% 使畸变因子降至 98%，33% 的谐波幅值对应畸变因子 95%。因此除非谐波幅值相当大，否则功率因数不会因谐波的存在而显著降低。
+
+畸变因子远小于 1 的一个示例是图20.6的传统峰值检测整流器。在此电路中，交流线路电流由出现在电压波形峰值处的短时电流脉冲组成。线路电流的基波分量本质上与电压同相，位移因子接近 1。但低阶电流谐波幅值相当大，接近基波幅值——典型电流频谱如图20.7所示。峰值检测整流器的畸变因子通常在 55%–65% 范围。所得功率因数与此值相近。
+
+在北美，标准 120 V 电源插座由 15 A 断路器保护。因此可用负载功率相当有限。将断路器电流降额 20%，假设直流-直流变换器和峰值检测整流器的典型效率，功率因数为 55%，可得最大可用直流负载功率的如下估计：
+
+$$\text{(交流电压)(降额后断路器电流)(功率因数)(整流器效率)}$$
+
+$$= (120\,\text{V})(80\%\,\text{of}\,15\,\text{A})(0.55)(0.98) \tag{20.27}$$
+
+$$= 776\,\text{W}$$
+
+直流-直流变换器效率低于 1 会进一步降低可用直流负载功率。用峰值检测整流器供电超过此值的负载功率，需要用户安装更高电流和/或更高电压的供电设施，既不便又昂贵。
+
+使用功率因数接近 1 的整流器电路可显著增大可用直流负载功率：
+
+$$\text{(交流电压)(降额后断路器电流)(功率因数)(整流器效率)}$$
+
+$$= (120\,\text{V})(80\%\,\text{of}\,15\,\text{A})(0.99)(0.93) \tag{20.28}$$
+
+$$= 1325\,\text{W}$$
+
+![源页 p.856](../assets/page-snapshots/chapter-20/page-856.png)
+
+图20.6 传统峰值检测整流器
+
+图20.7 单相峰值检测整流器的典型交流线路电流频谱。显示了第 1 至第 19 次谐波
+
+![源页 p.857](../assets/page-snapshots/chapter-20/page-857.png)
+
+几乎是峰值检测整流器可用功率的两倍。仅此一点就足以成为在商业系统中采用高质量整流器的有力理由。
+
+## 20.4 正弦系统中的功率相量
+
+视在功率定义为方均根电压与方均根电流之积。视在功率易于测量——只需在给定表面处的电路中接入电压表和电流表读取乘积即可。许多电力系统元件（如变压器）须按其能供给的视在功率来额定。视在功率的单位为伏安（VA）。式(20.15)定义的功率因数是平均功率与视在功率之比。
+
+在正弦电压和电流波形情形中，还可定义复功率 $S$ 和无功功率 $Q$。若正弦电压 $v(t)$ 和电流 $i(t)$ 可用相量 $V$ 和 $I$ 表示，则复功率为相量
+
+$$S = V I^* = P + j Q \tag{20.29}$$
+
+其中 $I^*$ 是 $I$ 的复共轭，$j$ 是 $-1$ 的平方根。$S$ 的幅值 $\|S\|$ 等于以 VA 为单位的视在功率。$S$ 的实部是平均功率 $P$，单位为瓦。$S$ 的虚部是无功功率 $Q$，单位为无功伏安（VAR）。
+
+说明 $S$、$P$、$Q$ 的相量图如图20.8所示。角 $(\phi_1 - \theta_1)$ 是电压相量 $V$ 与电流相量 $I$ 之间的夹角。$(\phi_1 - \theta_1)$ 也是复功率 $S$ 的相位。纯正弦情形下的功率因数为
+
+$$\text{功率因数} = \frac{P}{\|S\|} = \cos(\phi_1 - \theta_1) \tag{20.30}$$
+
+须强调此式仅在电压和电流纯正弦时成立。此时式(20.24)的畸变因子为 1，功率因数等于式(20.30)的位移因子。
+
+无功功率 $Q$ 不导致电源与负载之间的净能量传输。存在无功功率时，方均根电流和视在功率大于传输平均功率 $P$ 所需的最小值。在电感中，电流
+
+![源页 p.858](../assets/page-snapshots/chapter-20/page-858.png)
+
+图20.8 正弦系统的功率相量图，说明电压、电流和复功率相量
+
+滞后电压 $90°$，使位移因子为零。电感中能量的交替存储与释放导致电流流动和非零视在功率，但平均功率 $P$ 为零。正如电阻消耗实（平均）功率 $P$，电感可视为无功功率 $Q$ 的消耗者。在电容中，电流超前电压 $90°$，同样使位移因子为零。电容提供无功功率 $Q$，常置于公用配电系统中靠近感性负载处。若电容提供的无功功率等于电感消耗的无功功率，则净电流（从电源流入电容-感性负载组合）与电压同相，得到单位功率因数和最小方均根电流幅值。
+
+下一章将看到，相控整流器产生的非正弦电流波形的基波分量滞后于电压。此滞后电流并非源于储能，但确实导致位移因子降低，以及方均根电流和视在功率大于传输平均功率所需的最小值。
+
+## 20.5 三相系统中的谐波电流
+
+谐波电流的存在也会在三相系统中导致一些特殊问题。在三相四线制系统中，谐波电流可导致中线中出现大电流，可能轻易超过导体的方均根电流额定值。功率因数校正电容可能经历显著增大的方均根电流，导致失效。本节研究这些问题，并推导三相系统中谐波电流流动的性质。
+
+### 20.5.1 三相四线制网络中的谐波电流
+
+考虑图20.9的三相四线制网络。一般而言，可将线电流和线-中点电压的傅里叶级数表示为：
+
+$$i_a(t) = I_{a0} + \sum_{k=1}^{\infty} I_{ak} \cos(k\omega t - \theta_{ak})$$
+
+$$i_b(t) = I_{b0} + \sum_{k=1}^{\infty} I_{bk} \cos(k(\omega t - 120°) - \theta_{bk}) \tag{20.31}$$
+
+$$i_c(t) = I_{c0} + \sum_{k=1}^{\infty} I_{ck} \cos(k(\omega t + 120°) - \theta_{ck})$$
+
+$$v_{an}(t) = V_m \cos(\omega t)$$
+
+$$v_{bn}(t) = V_m \cos(\omega t - 120°) \tag{20.32}$$
+
+$$v_{cn}(t) = V_m \cos(\omega t + 120°)$$
+
+![源页 p.859](../assets/page-snapshots/chapter-20/page-859.png)
+
+图20.9 三相四线制网络中的电流流动
+
+因此中线电流 $i_n = i_a + i_b + i_c$，即
+
+$$i_n(t) = I_{a0} + I_{b0} + I_{c0} + \sum_{k=1}^{\infty} \left[ I_{ak} \cos(k\omega t - \theta_{ak}) + I_{bk} \cos(k(\omega t - 120°) - \theta_{bk}) + I_{ck} \cos(k(\omega t + 120°) - \theta_{ck}) \right] \tag{20.33}$$
+
+当负载不平衡时（即使电压平衡且无畸变），我们对中线电流和线电流不能多说别的。若负载不平衡且非线性，则线电流和中线电流可含任意阶谐波，包括偶次和三倍次谐波。
+
+负载平衡时式(20.33)大为简化。平衡非线性负载是指对所有 $k$ 有 $I_{ak} = I_{bk} = I_{ck} = I_k$ 且 $\theta_{ak} = \theta_{bk} = \theta_{ck} = \theta_k$，即三相的谐波幅值和相移均相同。此时式(20.33)简化为
+
+$$i_n(t) = 3 I_0 + \sum_{k=3,6,9,\cdots} 3 I_k \cos(k\omega t - \theta_k) \tag{20.34}$$
+
+故基波和大部分谐波抵消，不出现在中线导体中。因此，公用事业有利平衡其非线性负载及谐波。
+
+但并非所有谐波都从式(20.34)中抵消：直流和三倍次（triple-n，即 3、6、9、…）谐波相加而非抵消。方均根中线电流为
+
+$$i_{n,rms} = 3 \sqrt{I_0^2 + \sum_{k=3,6,9,\cdots} \frac{I_k^2}{2}} \tag{20.35}$$
+
+**示例**
+
+一个平衡非线性负载产生含基波和 20% 三次谐波的线电流：$i_{an}(t) = I_1 \cos(\omega t - \theta_1) + 0.2 I_1 \cos(3\omega t - \theta_3)$。求方均根中线电流，并比较其幅值与方均根线电流幅值。
+
+![源页 p.860](../assets/page-snapshots/chapter-20/page-860.png)
+
+图20.10 三相三线制星形连接网络中的电流流动
+
+**解：**
+
+$$i_{n,rms} = 3 \sqrt{\frac{(0.2 I_1)^2}{2}} = \frac{0.6 I_1}{\sqrt{2}}$$
+
+$$i_{1,rms} = \sqrt{\frac{I_1^2 + (0.2 I_1)^2}{2}} = \frac{I_1}{\sqrt{2}} \sqrt{1 + 0.04} \approx \frac{I_1}{\sqrt{2}} \tag{20.36}$$
+
+故中线电流幅值为线电流幅值的 60%！三相中的三倍次谐波相加，使 20% 的三次谐波导致 60% 的三次谐波中线电流。而三次谐波的存在对方均根线电流值影响很小。故有显著的中线意外电流流动。
+
+### 20.5.2 三相三线制网络中的谐波电流
+
+若星形连接负载无中线连接（如图20.10），则 $i_n(t)$ 必须为零。若负载平衡，则式(20.34)仍适用，因此负载电流的直流和三倍次谐波必须为零。故线电流 $i_a$、$i_b$、$i_c$ 不能含三倍次或直流谐波。实际发生的是负载中点 $n'$ 处感应出含直流和三倍次谐波的电压，从而消除三倍次和直流负载电流谐波。
+
+此结果仅在负载平衡时成立。负载不平衡时，所有谐波都可出现在线电流中，包括三倍次和直流。实际中负载绝不会完全平衡，故会测得少量三次谐波线电流。
+
+如图20.11所示采用三角形连接负载时，同样无中线连接，故线电流不能含三倍次或直流分量。但负载按线-线连接，由无畸变正弦电压激励。故三倍次谐波和直流电流确实会流过非线性负载。因此这些电流仅在三角形内部循环。若负载平衡，则同样无线电流中出现三倍次谐波。
+
+![源页 p.861](../assets/page-snapshots/chapter-20/page-861.png)
+
+图20.11 平衡非线性三角形连接负载可产生三倍次电流谐波。这些谐波在三角形内部循环，但若负载各相平衡则不流过线路
+
+### 20.5.3 功率因数校正电容中的谐波电流流动
+
+谐波电流倾向于流过并联的功率因数校正电容。在某种程度上这是好事，因为电容对电力系统电流起低通滤波作用，防止非线性负载污染整个电力系统。谐波电流的流动被限制在非线性负载和本地功率因数校正电容之间，电压波形畸变得以减小。高频谐波电流倾向于
+
+![源页 p.862](../assets/page-snapshots/chapter-20/page-862.png)
+
+图20.12 电容器等效电路。损耗用等效串联电阻（ESR）建模
+
+流过并联电容，因为电容阻抗随频率降低，而传输线的感性阻抗随频率升高。在此意义上，功率因数校正电容缓解非线性负载产生的谐波电流影响的方式，与缓解感性负载产生的无功电流影响的方式相同。
+
+但问题在于功率因数校正电容可能未按这些谐波电流额定，因此当电容暴露于显著谐波电流时可能过热失效。电容中的损耗用图20.12所示的等效串联电阻（ESR）建模。ESR 模拟介电损耗（介电质 D-E 回线的磁滞）、接触电阻以及箔和引线电阻。产生的功率损耗等于 $i_{rms}^2\, (esr)$。介电材料通常是热的不良导体，故适度功率损耗可在电容中心引起大温升。因此方均根电流须限制在安全值。
+
+典型功率因数校正电容按电压 $V$、频率 $f$ 和无功功率（kVAR）额定。这些额定值由电容 $C$ 和安全方均根电流 $I_{rms}$ 在无畸变正弦波形下计算而得：
+
+$$\text{额定 rms 电压}\, V_{rms} = \frac{I_{rms}}{2\pi f C} \tag{20.37}$$
+
+![源页 p.863](../assets/page-snapshots/chapter-20/page-863.png)
+
+$$\text{额定 rms 电压} = \frac{I_{rms}^2}{2\pi f C} \tag{20.38}$$
+
+在无畸变系统中，除非方均根电压也增大，否则方均根电流（因而电容 ESR 损耗）不会增大。但高频谐波可在电压不增大的情况下导致更大的方均根电流。任何流过的谐波都使方均根电流超过式(20.37)预测值。若电容未按附加功率损耗额定，则可能失效或过早老化。
+
+## 习题
+
+**20.1** 无源整流器电路。在图20.13的无源整流器电路中，$L$ 很大，使电感电流 $i(t)$ 本质上为直流。所有元件均为理想。
+
+图20.13 习题20.1的无源整流器电路
+
+(a) 确定直流输出电压、电流和功率。
+
+(b) 画出交流线路电流波形 $i_g(t)$ 和整流器输出电压波形 $v_R(t)$。
+
+(c) 确定交流线路电流的方均根幅值、基波方均根幅值和三次谐波方均根幅值。若要求三次谐波幅值小于 $2.3\,\text{A}$（方均根），此整流器网络是否符合？
+
+(d) 确定在表面 $S_1$ 和 $S_2$ 处测得的功率因数。
+
+**20.2** 图20.14的三相整流器接到平衡 60 Hz、$3\phi$、480 V（方均根，线-线）正弦电源，如图所示。所有元件均为理想。电感 $L$ 足够大，使电流 $i(t)$ 本质上恒定，含可忽略的 360 Hz 纹波。
+
+图20.14 习题20.2的三相整流器电路
+
+(a) 画出波形 $v_d(t)$。
+
+(b) 确定直流输出电压 $V$。
+
+(c) 画出线电流波形 $i_a(t)$、$i_b(t)$、$i_c(t)$。
+
+(d) 求 $i_a(t)$ 的傅里叶级数。
+
+(e) 求畸变因子、位移因子、功率因数和线电流 THD。
+
+![源页 p.864](../assets/page-snapshots/chapter-20/page-864.png)
+
+**20.3** 谐波污染督察。在图20.15的网络中，在所示表面处观察到电压谐波。本题目的是判断应将观察到的谐波污染归咎于电源还是负载。电源元件或负载元件之一含产生谐波的非线性，另一元件为线性。
+
+图20.15 习题20.3至20.5的单相电力系统
+
+(a) 先考虑负载为无源线性阻抗 $Z_2(s)$ 的情形，其相位对所有正 $\omega$ 位于 $-90° \le \angle Z_2(j\omega) \le +90°$ 范围。电源产生谐波。将平均功率 $P$ 表示为
+
+$$P = \sum_{n=0}^{\infty} P_n$$
+
+其中 $P_n$ 是谐波序号 $n$ 传输到负载的平均功率。关于 $P_n$ 的极性你能说什么？
+
+(b) 接着考虑负载为非线性、电源为线性且可用戴维南等效正弦电压源和线性阻抗 $Z_1(s)$ 建模的情形。同样将平均功率 $P$ 表示为平均功率之和，如(a)。此时关于 $P_n$ 的极性你能说什么？
+
+(c) 测得如下傅里叶级数：
+
+![源页 p.865](../assets/page-snapshots/chapter-20/page-865.png)
+
+| 谐波序号 | $v(t)$ | $i(t)$ |
 |---|---|---|
-| TODO | TODO | TODO |
+| | 幅值 | 相位 | 幅值 | 相位 |
+| 1 | 230 V | 0° | 6 A | -20° |
+| 3 | 20 V | 180° | 4 A | 20° |
+| 5 | 8 V | 60° | 1 A | -110° |
 
-## 中文翻译
+你要指控谁？解释理由。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+**20.4** 对习题20.3的网络和波形，确定所示表面处的功率因数和流向负载的平均功率。高于五次谐波的谐波幅值可忽略。
 
-## 英文原文
+**20.5** 用如下傅里叶级数重做习题20.3(c)：
 
-```text
-20
-Power and Harmonics in Nonsinusoidal Systems
-Rectiﬁcation used to be a much simpler topic. A textbook could cover the topic simply by dis-
-cussing the various circuits, such as the peak-detection and inductor-input rectiﬁers, the phase-
-controlled bridge, polyphase transformer connections, and perhaps multiplier circuits. But re-
-cently, rectiﬁers have become much more sophisticated, and are now systems rather than mere
-circuits. They often include pulse-width modulated converters such as the boost converter, with
-control systems that regulate the ac input current waveform. So modern rectiﬁer technology
-now incorporates many of the dc–dc converter fundamentals.
-The reason for this is the undesirable ac line current harmonics, and low power factors, of
-conventional peak-detection and phase-controlled rectiﬁers. The adverse eﬀects of power sys-
-tem harmonics are well-recognized. These eﬀects include: unsafe neutral current magnitudes in
-three-phase systems, heating and reduction of life in transformers and induction motors, degra-
-dation of system voltage waveforms, unsafe currents in power factor correction capacitors, and
-malfunctioning of certain power system protection elements. In a real sense, conventional rec-
-tiﬁers are harmonic polluters of the ac power distribution system. With the widespread deploy-
-ment of electronic equipment in our society, rectiﬁer harmonics have become a signiﬁcant and
-measurable problem. Thus there is a need for high-quality rectiﬁers, which operate with high
-power factor, high eﬃciency, and reduced generation of harmonics. Several international stan-
-dards now exist that speciﬁcally limit the magnitudes of harmonic currents, for both high-power
-equipment such as industrial motor drives and low-power equipment such as electronic ballasts
-for ﬂuorescent lamps and power supplies for oﬃce equipment.
-This chapter treats the ﬂow of energy in power systems containing nonsinusoidal waveforms.
-Average power, rms values, and power factor are expressed in terms of the Fourier series of the
-voltage and current waveforms. Harmonic currents in three-phase systems are discussed, and
-present-day standards are listed. The following chapters treat harmonics and harmonic mitiga-
-tion in conventional line-commutated rectiﬁers, high-quality rectiﬁer circuits and their models,
-and control of high-quality rectiﬁers.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_20
-849
+| 谐波序号 | $v(t)$ | $i(t)$ |
+|---|---|---|
+| | 幅值 | 相位 | 幅值 | 相位 |
+| 1 | 120 V | 0° | 5 A | 25° |
+| 3 | 4 V | 60° | 0.5 A | 40° |
+| 5 | 2 V | -160° | 0.2 A | -100° |
 
-850 20 Power and Harmonics in Nonsinusoidal Systems
-+Source Load
-Surface S
-+
-v(t)
-i(t)
-Fig. 20.1 Observe the transmission of energy through surface S
-20.1 Average Power
-Let us consider the transmission of energy from a source to a load, through a given surface as
-in Fig. 20.1. In the network of Fig. 20.1, the voltage waveform v(t) (not necessarily sinusoidal)
-is given by the source, and the current waveform is determined by the response of the load. In
-the more general case in which the source output impedance is signiﬁcant, then v(t) and i(t)
-both depend on the characteristics of the source and load. Balanced three-phase systems may be
-treated in the same manner, on a per-phase basis, using a line current and line-to-neutral voltage.
-If v(t) and i(t) are periodic, then they may be expressed as Fourier series:
-v(t)= V
-0+
-∞∑
-n=1
-Vn cos(nωt−ϕn) (20.1)
-i(t)= I0+
-∞∑
-n=1
-In cos(nωt−θn)
-where the period of the ac line voltage waveform is deﬁned as T = 2π/ω. In general, the
-instantaneous power p(t)= v(t)i(t) can assume both positive and negative values at various
-points during the ac line cycle. Energy then ﬂows in both directions between the source and
-load. It is of interest to determine the net energy transmitted to the load over one cycle, or
-Wcycle=
-∫ T
-0
-v(t)i(t) dt (20.2)
-This is directly related to the average power as follows:
-Pav= Wcycle
-T = 1
-T
-∫ T
-0
-v(t)i(t) dt (20.3)
-Let us investigate the relationship between the harmonic content of the voltage and current wave-
-forms, and the average power. Substitution of the Fourier series, Eq. (20.1), into Eq. (20.3) yields
-Pav= 1
-T
-∫ T
-0
-⎛⎜⎜⎜⎜⎜⎝V0+
-∞∑
-n=1
-Vn cos (nωt−ϕn)
-⎞⎟⎟⎟⎟⎟⎠
-⎛⎜⎜⎜⎜⎜⎝I0+
-∞∑
-n=1
-In cos (nωt−θn)
-⎞⎟⎟⎟⎟⎟⎠dt (20.4)
-To evaluate this integral, we must multiply out the inﬁnite series. It can be shown that the inte-
-grals of cross-product terms are zero, and the only contributions to the integral comes from the
-products of voltage and current harmonics of the same frequency:
+**20.6** 一个平衡三相星形连接负载每相用 20 Ω 电阻构建。该负载接到一个平衡三相星形连接电压源，其基波电压分量为 380 V（方均根，线-线）。此外，每相（线-中点）电压源产生三次和五次谐波。每个谐波幅值为 20 V（方均根），且与（线-中点）基波同相。
 
-20.1 Average Power 851
-∫ T
-0
-(Vn cos(nωt−ϕn))( Im cos(mωt−θm)) dt=
-⎧⎪⎪⎨⎪⎪⎩
-0i f n/nequalm
-VnIn
-2 cos (ϕn−θn) if n= m (20.5)
-The average power is therefore
-Pav= V0I0+
-∞∑
-n=1
-VnIn
-2 cos (ϕn−θn) (20.6)
-So net energy is transmitted to the load only when the Fourier series of v(t) and i(t) contain
-terms at the same frequency. For example, if v(t) and i(t) both contain third harmonic, then net
-energy is transmitted at the third harmonic frequency, with average power equal to
-V3I3
-2 cos (ϕ3−θ3) (20.7)
-Here, V3I3/2 is equal to the rms volt-amperes of the third harmonic current and voltage. The
-cos(φ3−θ3) term is a displacement term which accounts for the phase diﬀerence between the
-third harmonic voltage and current.
-Fig. 20.2 V oltage, current, and in-
-stantaneous power waveforms, ex-
-ample 1. The voltage contains only
-fundamental and the current con-
-tains only third harmonic. The av-
-erage power is zero
-v(t) i(t)
-0
-0.5
-1
-p(t) = v(t)i(t)
-Pav = 0
-0
-0.5
-1
-Some examples of power ﬂow in systems containing harmonics are illustrated in Figs. 20.2
-to 20.4. In example 1, Fig. 20.2, the voltage contains fundamental only, while the current con-
-tains third harmonic only. It can be seen that the instantaneous power waveform p(t) has a zero
-average value, and hence Pav is zero. Energy circulates between the source and load, but over
-one cycle the net energy transferred to the load is zero. In example 2, Fig. 20.3, the voltage and
-current each contain only third harmonic. The average power is given by Eq. (20.7) in this case.
-In example 3, Fig. 20.4, the voltage waveform contains fundamental, third harmonic, and
-ﬁfth harmonic, while the current contains fundamental, ﬁfth harmonic, and seventh harmonic,
-as follows:
+(a) 电源和负载中点相连，构成四线制系统。求线电流和中线电流的傅里叶级数。
 
-852 20 Power and Harmonics in Nonsinusoidal Systems
-Fig. 20.3 V oltage, current, and in-
-stantaneous power waveforms, ex-
-ample 2. The voltage and current
-each contain only third harmonic,
-and are in phase. Net energy is
-transmitted at the third harmonic
-frequency
-v(t), i(t)
-0
-0.5
-1
-0
-0.5
-1
-p(t) = v(t)i(t)
-Pav = 0.5
-Fig. 20.4 V oltage, current, and
-instantaneous power waveforms,
-example 3. The voltage contains
-fundamental, third, and ﬁfth
-harmonics. The current contains
-fundamental, ﬁfth, and seventh
-harmonics. Net energy is transmit-
-ted at the fundamental and ﬁfth
-harmonic frequencies
-v(t)
-i(t)
-0.0
-0.5
-1.0
-p(t) = v(t)i(t)
-Pav = 0.32
-0.0
-0.2
-0.4
-0.6
-v(t)= 1.2 cos (ωt)+ 0.33 cos(3ωt)+ 0.2 cos (5ωt)
-i(t)= 0.6 cos (ωt+ 30◦)+ 0.1 cos (5ωt+ 45◦)+ 0.1 cos(7ωt+ 60◦) (20.8)
-Average power is transmitted at the fundamental and ﬁfth harmonic frequencies, since only
-these frequencies are present in both waveforms. The average power is found by evaluation of
-
-20.2 Root-Mean-Square (RMS) Value of a Waveform 853
-Eq. (20.6); all terms are zero except for the fundamental and ﬁfth harmonic terms, as follows:
-pav= (1.2)(0.6)
-2 cos(30◦)+ (0.2)(0.1)
-2 cos(45◦)= 0.32 (20.9)
-The instantaneous power and its average are illustrated in Fig.20.4.
-20.2 Root-Mean-Square (RMS) Value of a Waveform
-The rms value of a periodic waveform v(t) with period T is deﬁned as
-(rms value)=
-√
-1
-T
-∫ T
-0
-v2(t)dt (20.10)
-The rms value can also be expressed in terms of the Fourier components. Insertion of Eq. (20.1)
-into Eq. (20.10), and simpliﬁcation using Eq. (20.5), yields
-(rms value)=
-√
-V2
-0 +
-∞∑
-n=1
-V2n
-2 (20.11)
-Again, the integrals of the cross-product terms are zero. This expression holds when the wave-
-form is a current:
-(rms current)=
-√
-I2
-0+
-∞∑
-n=1
-I2n
-2 (20.12)
-Thus, the presence of harmonics in a waveform always increases its rms value. In particular,
-in the case where the voltage v(t) contains only fundamental while the current i(t) contains
-harmonics, then the harmonics increase the rms value of the current while leaving the average
-power unchanged. This is undesirable, because the harmonics do not lead to net delivery of
-energy to the load, yet they increase the Irms 2R losses in the system.
-In a practical system, series resistances always exist in the source, load, and/or transmission
-wires, which lead to unwanted power losses obeying the expression
-(rms current)2Rseries (20.13)
-Examples of such loss elements are the resistance of ac generator windings, the resistance of the
-wire connecting the source and load, the resistance of transformer windings, and the resistance
-of semiconductor devices, and magnetics windings in switching converters. Thus, it is desired
-to make the rms current as small as possible, while transferring the required amount of energy
-and average power to the load.
-Shunt resistances usually also exist, which cause power loss according to the relation
-(rms voltage)2
-Rshunt
-(20.14)
-Examples include the core losses in transformers and ac generators, and switching converter
-transistor switching loss. Therefore, it is desired to also make the rms voltage as small as possi-
-ble while transferring the required average power to the load.
-
-854 20 Power and Harmonics in Nonsinusoidal Systems
-20.3 Power Factor
-Power factor is a ﬁgure-of-merit that measures how eﬀectively energy is transmitted between a
-source and load network. It is measured at a given surface as in Fig.20.1, and is deﬁned as
-power factor= (average power)
-(rms voltage)(rms current) (20.15)
-The power factor always has a value between zero and one. The ideal case, unity power factor,
-occurs for a load that obeys Ohm’s Law. In this case, the voltage and current waveforms have
-the same shape, contain the same harmonic spectrum, and are in phase. For a given average
-power throughput, the rms current and voltage are minimized at maximum (unity) power factor,
-that is, with a linear resistive load. In the case where the voltage contains no harmonics but the
-load is nonlinear and contains dynamics, then the power factor can be expressed as a product of
-two terms, one resulting from the phase shift of the fundamental component of the current, and
-the other resulting from the current harmonics.
-20.3.1 Linear Resistive Load, Nonsinusoidal Voltage
-In this case, the current harmonics are in phase with, and proportional to, the voltage harmonics.
-As a result, all harmonics result in the net transfer of energy to the load. The current harmonic
-magnitudes and phases are
-I
-n= Vn
-R (20.16)
-θn= ϕn so cos(θn−ϕn)= 1 (20.17)
-The rms voltage is again
-(rms voltage)=
-√
-V2
-0+
-∞∑
-n=1
-V2n
-2 (20.18)
-and the rms current is
-(rms current)=
-√
-I2
-0+
-∞∑
-n=1
-I2n
-2 =
-√
-V2
-0
-R2 +
-∞∑
-n=1
-V2n
-2R2 (20.19)
-= 1
-R(rms voltage)
-By use of Eq. (20.6), the average power is
-Pav = V0I0+
-∞∑
-n=1
-VnIn
-2 cos(ϕn−θn)
-= V2
-0
-R +
-∞∑
-n=1
-V2
-n
-2R (20.20)
-= 1
-R(rms voltage)2
-
-20.3 Power Factor 855
-Insertion of Eqs. (20.19) and (20.20) into Eq. (20.15) then shows that the power factor is unity.
-Thus, if the load is linear and purely resistive, then the power factor is unity regardless of the
-harmonic content of v(t). The harmonic content of the load current waveform i(t) is identical to
-that of v(t), and all harmonics result in the transfer of energy to the load. This raises the possi-
-bility that one could construct a power distribution system based on nonsinusoidal waveforms
-in which the energy is eﬃciently transferred to the load.
-20.3.2 Nonlinear Dynamical Load, Sinusoidal Voltage
-If the voltage v(t) contains a fundamental component but no dc component or harmonics, so
-that V0 = V2 = V3 =... = 0, then harmonics in i(t) do not result in transmission of net energy
-to the load. The average power expression, Eq. (20.6), becomes
-Pav= V1I1
-2 cos(ϕ1−θ1) (20.21)
-However, the harmonics in i(t)d oaﬀect the value of the rms current:
-(rms current)=
-√
-I2
-0+
-∞∑
-n=1
-I2n
-2 (20.22)
-Hence, as in example 1 (Fig. 20.2), harmonics cause the load to draw more rms current from
-the source, but not more average power. Increasing the current harmonics does not cause more
-energy to be transferred to the load, but does cause additional losses in series resistive elements
-Rseries.
-Also, the presence of load dynamics and reactive elements, which causes the phase of the
-fundamental components of the voltage and current to di ﬀer by (θ1 −ϕ1), also reduces the
-power factor. The cos(ϕ1−θ1) term in the average power Eq. (20.21) becomes less than unity.
-However, the rms value of the current, Eq. ( 20.22), does not depend on the phase. So shifting
-the phase of i(t) with respect tov(t) reduces the average power without changing the rms voltage
-or current, and hence the power factor is reduced.
-By substituting Eqs. ( 20.21) and (20.22)i n t o(20.15), we can express the power factor for
-the sinusoidal voltage in the following form:
-(power factor)=
-⎛⎜⎜⎜
-⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-I
-1
-√
-2√
-I2
-0+
-∞∑
-n−1
-I2
-n
-2
-⎞⎟⎟⎟
-⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(cos(ϕ
-1−θ1)) (20.23)
-= (distortion factor)(displacement factor)
-So when the voltage contains no harmonics, then the power factor can be written as the product
-of two terms. The ﬁrst, called the distortion factor, is the ratio of the rms fundamental compo-
-nent of the current to the total rms value of the current
-(distortion factor)=
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-I1
-√
-2√
-I2
-0+
-∞∑
-n=1
-I2
-n
-2
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-= (rms fundamental current)
-(rms current) (20.24)
-
-856 20 Power and Harmonics in Nonsinusoidal Systems
-THD
-Distortion factor
-0%
-20%
-40%
-60%
-80%
-100%
-70%
-80%
-90%
-100%
-Fig. 20.5 Distortion factor vs. total harmonic distortion
-The second term of Eq. (20.23) is called the displacement factor, and is the cosine of the angle
-between the fundamental components of the voltage and current waveforms.
-The total harmonic distortion (THD) is deﬁned as the ratio of the rms value of the waveform
-not including the fundamental, to the rms fundamental magnitude. When no dc is present, this
-can be written as:
-(THD)=
-√∞∑
-n=2
-I2n
-I1
-(20.25)
-The total harmonic distortion and the distortion factor are closely related. Comparison of Eqs.
-(20.24) and (20.25), with I0= 0, leads to
-(distortion factor)= 1√
-1+ (THD)2
-(20.26)
-This equation is plotted in Fig. 20.5. The distortion factor of a waveform with a moderate
-amount of distortion is quite close to unity. For example, if the waveform contains third har-
-monic whose magnitude is 10% of the fundamental, the distortion factor is 99.5%. Increasing
-the third harmonic to 20% decreases the distortion factor to 98%, and a 33% harmonic magni-
-tude yields a distortion factor of 95%. So the power factor is not signiﬁcantly degraded by the
-presence of harmonics unless the harmonics are quite large in magnitude.
-An example of a case in which the distortion factor is much less than unity is the conven-
-tional peak-detection rectiﬁer of Fig. 20.6. In this circuit, the ac line current consists of short-
-duration current pulses occurring at the peak of the voltage waveform. The fundamental com-
-ponent of the line current is essentially in phase with the voltage, and the displacement factor
-is close to unity. However, the low-order current harmonics are quite large, close in magnitude
-to that of the fundamental—a typical current spectrum is given in Fig. 20.7. The distortion fac-
-tor of peak-detection rectiﬁers is usually in the range 55%–65%. The resulting power factor is
-similar in value.
-In North America, the standard 120 V power outlet is protected by a 15 A circuit breaker.
-In consequence, the available load power is quite limited. Derating the circuit breaker current
-
-20.3 Power Factor 857
-Fig. 20.6 Conventional peak-detection rectiﬁer
-100%
-91%
-73%
-52%
-32%
-19% 15% 15% 13% 9%
-0%
-20%
-40%
-60%
-80%
-100%
-13 579 1 1 1 3 1 5 1 7 1 9
-Harmonic number
-Harmonic amplitude,
-percent of fundamental
-THD = 136%
-Distortion factor = 59%
-Fig. 20.7 Typical ac line current spectrum of a single-phase peak-detection rectiﬁer. Harmonics 1 to 19
-are shown
-by 20%, assuming typical eﬃciencies for the dc–dc converter and peak- detection rectiﬁer, and
-with a power factor of 55%, one obtains the following estimate for the maximum available dc
-load power:
-(ac voltage) (derated breaker current) (power factor) (rectiﬁer eﬃciency)
-= (120V) (80% of15 A) (0 .55) (0 .98) (20.27)
-= 776 W
-The less-than-unity eﬃciency of a dc–dc converter would further reduce the available dc load
-power. Using a peak-detection rectiﬁer to supply a load power greater than this requires that the
-user installs higher amperage and/or higher voltage service, which is inconvenient and costly.
-The use of a rectiﬁer circuit having nearly unity power factor would allow a signiﬁcant increase
-in available dc load power:
-(ac voltage) (derated breaker current) (power factor) (rectiﬁer eﬃciency)
-= (120V) (80% of 15A) (0 .99) (0 .93) (20.28)
-= 1325W
-or almost twice the available power of the peak-detection rectiﬁer. This alone can be a com-
-pelling reason to employ high-quality rectiﬁers in commercial systems.
-
-858 20 Power and Harmonics in Nonsinusoidal Systems
-Real axis
-Imaginary
-axis
-V
-I
-S = VI*
-||S|| = Vrms
-Irms
-1 1
-1 1
-1 1
-P
-Q
-Fig. 20.8 Power phasor diagram for a sinusoidal system, illustrating the voltage, current, and complex
-power phasors
-20.4 Power Phasors in Sinusoidal Systems
-The apparent power is deﬁned as the product of the rms voltage and rms current. Apparent
-power is easily measured—it is simply the product of the readings of a voltmeter and ammeter
-placed in the circuit at the given surface. Many power system elements, such as transformers,
-must be rated according to the apparent power that they are able to supply. The unit of apparent
-power is the volt-ampere, or V A. The power factor, deﬁned in Eq. (20.15), is the ratio of average
-power to apparent power.
-In the case of sinusoidal voltage and current waveforms, we can additionally deﬁne the
-complex power S and the reactive power Q. If the sinusoidal voltage v(t) and current i(t) can
-be represented by the phasors V and I, then the complex power is a phasor deﬁned as
-S= VI
-∗= P+ jQ (20.29)
-Here, I∗is the complex conjugate of I, and j is the square root of−1. The magnitude of S,o r
-∥S∥, is equal to the apparent power, measured in V A. The real part ofS is the average power P,
-having units of watts. The imaginary part of S is the reactive power Q, having units of reactive
-volt-amperes, or V ARs.
-A phasor diagram illustrating S, P, and Q, is given in Fig. 20.8. The angle (ϕ1−θ1)i st h e
-angle between the voltage phasor V and the current phasor I.(ϕ1−θ1) is additionally the phase
-of the complex power S. The power factor in the purely sinusoidal case is therefore
-power factor= P
-∥S∥= cos(ϕ1−θ1) (20.30)
-It should be emphasized that this equation is valid only for systems in which the voltage and
-current are purely sinusoidal. The distortion factor of Eq. ( 20.24) then becomes unity, and the
-power factor is equal to the displacement factor as in Eq. (20.30).
-The reactive power Q does not lead to net transmission of energy between the source and
-load. When reactive power is present, the rms current and apparent power are greater than
-the minimum amount necessary to transmit the average power P. In an inductor, the current
-
-20.5 Harmonic Currents in Three-Phase Systems 859
-lags the voltage by 90◦, causing the displacement factor to be zero. The alternate storing and
-releasing of energy in an inductor leads to current ﬂow and nonzero apparent power, but the
-average power P is zero. Just as resistors consume real (average) power P, inductors can be
-viewed as consumers of reactive power Q. In a capacitor, the current leads to voltage by 90 ◦,
-again causing the displacement factor to be zero. Capacitors supply reactive power Q, and are
-commonly placed in the utility power distribution system near inductive loads. If the reactive
-power supplied by the capacitor is equal to the reactive power consumed by the inductor, then
-the net current (ﬂowing from the source into the capacitor-inductive-load combination) will be
-in phase with the voltage, leading unity power factor and minimum rms current magnitude.
-It will be seen in the next chapter that phase-controlled rectiﬁers produce a nonsinusoidal
-current waveform whose fundamental component lags the voltage. This lagging current does
-not arise from energy storage, but it does nonetheless lead to a reduced displacement factor,
-and to rms current and apparent power that are greater than the minimum amount necessary to
-transmit the average power.
-20.5 Harmonic Currents in Three-Phase Systems
-The presence of harmonic currents can also lead to some special problems in three-phase sys-
-tems. In a four-wire three-phase system, harmonic currents can lead to large currents in the
-neutral conductors, which may easily exceed the conductor rms current rating. Power factor
-correction capacitors may experience signiﬁcantly increased rms currents, causing them to fail.
-In this section, these problems are examined, and the properties of harmonic current ﬂow in
-three-phase systems are derived.
-20.5.1 Harmonic Currents in Three-Phase Four-Wire Networks
-Let us consider the three-phase four-wire network of Fig. 20.9. In general, we can express the
-Fourier series of the line currents and line-neutral voltages as follows:
-i
-a(t)= Ia0+
-∞∑
-k=1
-Iak cos(kωt−θak)
-ib(t)= Ib0+
-∞∑
-k=1
-Ibk cos(k(ωt−120◦)−θbk) (20.31)
-ic(t)= Ic0+
-∞∑
-k=1
-Ick cos(k(ωt+ 120◦)−θck)
-van(t)= Vm cos(ωt)
-vbn(t)= Vm cos(ωt−120◦) (20.32)
-vCn(t)= Vm cos(ωt+ 120◦)
-
-860 20 Power and Harmonics in Nonsinusoidal Systems
-+
-+
-+
-van(t)
-vbn(t)
-vcn(t)
-a
-c
-b
-nIdeal
-source
-Nonlinear
-loads
-Neutral connection
-ia(t)
-ic(t)
-in(t)
-ib(t)
-Fig. 20.9 Current ﬂow in a three-phase four-wire network
-The neutral current is therefore in= ia+ ib+ ic,o r
-in(t)= Ia0+ Ib0+ Ic0+
-∞∑
-k=1
-[Iak cos(kωt−θak)+ Ibk cos(k(ωt−120◦)−θbk)+ Ick cos(k(ωt+ 120◦)−θck)](20.33)
-When the load is unbalanced (even though the voltages are balanced and undistorted), we can
-say little else about the neutral and line currents. If the load is unbalanced and nonlinear, then
-the line and neutral currents may contain harmonics of any order, including even and triplen
-harmonics.
-Equation ( 20.33) is considerably simpliﬁed in the case where the loads are balanced. A
-balanced nonlinear load is one in which I
-ak = Ibk = Ick = Ik and θak = θbk = θck = θk, for all
-k; that is, the harmonics of the three phases all have equal amplitudes and phase shifts. In this
-case, Eq. (20.33) reduces to
-in(t)= 3I0+
-∞∑
-k=3,6,9,···
-3Ik cos(kωt−θk) (20.34)
-Hence, the fundamental and most of the harmonics cancel out, and do not appear in the neutral
-conductor. Thus, it is in the interests of the utility to balance their nonlinear loads as well as
-their harmonics.
-But not all of the harmonics cancel out of Eq. ( 20.34) :t h ed ca n d triplen (triple-n,o r
-3, 6, 9,... ) harmonics add rather than cancel. The rms neutral current is
-in,rms= 3
-√
-I2
-0+
-∞∑
-k=3,6,9,···
-I2
-k
-2 (20.35)
-Example
-A balanced nonlinear load produces line currents containing fundamental and 20% third
-harmonic: ian(t)= I1 cos(ωt−θ1)+ 0.2I1 cos(3ωt−θ3). Find the rms neutral current, and
-compare its amplitude to the rms line current amplitude.
-
-20.5 Harmonic Currents in Three-Phase Systems 861
-Solution:
-in,rms = 3
-√
-(0.2I1)2
-2 = 0.6I1
-√
-2
-i1,rms =
-√
-I2
-1+ (0.2I1)2
-2 = I1
-√
-2
-√
-1+ 0.04≈I1
-√
-2
-(20.36)
-So the neutral current magnitude is 60% of the line current magnitude! The triplen harmonics in
-the three phases add, such that 20% third harmonic leads to 60% third harmonic neutral current.
-Yet the presence of the third harmonic has very little eﬀect on the rms value of the line current.
-Signiﬁcant unexpected neutral current ﬂows.
-20.5.2 Harmonic Currents in Three-Phase Three-Wire Networks
-If there is no neutral connection to the wye-connected load, as in Fig. 20.10, then in(t)m u s t
-be zero. If the load is balanced, then Eq. ( 20.34) still applies, and therefore the dc and triplen
-harmonics of the load currents must be zero. Therefore, the line currents ia, ib, and ic cannot
-contain triplen or dc harmonics. What happens is that a voltage is induced at the load neutral
-point n′, containing dc and triplen harmonics, which eliminates the triplen and dc load current
-harmonics.
-This result is true only when the load is balanced. With an unbalanced load, all harmonics
-can appear in the line currents, including triplen and dc. In practice, the load is never exactly
-balanced, and some small amounts of third harmonic line currents are measured.
-With a delta-connected load as in Fig. 20.11, there is also no neutral connection, so the line
-currents cannot contain triplen or dc components. But the loads are connected line-to-line, and
-are excited by undistorted sinusoidal voltages. Hence triplen harmonic and dc currents do, in
-general, ﬂow through the nonlinear loads. Therefore, these currents simply circulate around the
-delta. If the load is balanced, then again no triplen harmonics appear in the line currents.
-+
-+
-+
-van(t)
-vbn(t)
-vcn(t)
-a
-c
-b
-nIdeal
-source
-Nonlinear
-loads
-ia(t)
-ic(t)
-in(t) = 0
-ib(t)
-+
-vn'n
-n'
-Fig. 20.10 Current ﬂow in a three-phase three-wire wye-connected network
-
-862 20 Power and Harmonics in Nonsinusoidal Systems
-+
-+
-+
-van(t)
-vbn(t)
-vcn(t)
-a
-c
-b
-nIdeal
-source
-Delta-
-connected
-nonlinear
-loads
-ia(t)
-ic(t)
-in(t) = 0
-ib(t)
-Fig. 20.11 A balanced nonlinear delta-connected load may generate triplen current harmonics. These
-harmonics circulate around the delta, but do not ﬂow through the lines if the load phases are balanced
-20.5.3 Harmonic Current Flow in Power Factor Correction Capacitors
-Harmonic currents tend to ﬂow through shunt-connected power factor correction capacitors. To
-some extent, this is a good thing because the capacitors tend to low-pass ﬁlter the power sys-
-tem currents, and prevent nonlinear loads from polluting the entire power system. The ﬂow of
-harmonic currents is then conﬁned to the nonlinear load and local power factor correction ca-
-pacitors, and voltage waveform distortion is reduced. High-frequency harmonic currents tend to
-ﬂow through shunt capacitors because the capacitor impedance decreases with frequency, while
-the inductive impedance of transmission lines increases with frequency. In this sense, power fac-
-tor correction capacitors mitigate the eﬀects of harmonic currents arising from nonlinear loads
-in much the same way that they mitigate the eﬀects of reactive currents that arise from inductive
-loads.
-esr
-C
-Fig. 20.12 Capacitor
-equivalent circuit. Losses
-are modeled by an equiv-
-alent series resistance
-(ESR)
-But the problem is that the power factor correction capacitors
-may not be rated to handle these harmonic currents, and hence there
-is a danger that the capacitors may overheat and fail when they are
-exposed to signiﬁcant harmonic currents. The loss in capacitors is
-modeled using an equivalent series resistance (ESR) as shown in
-Fig. 20.12. The ESR models dielectric loss (hysteresis of the dielec-
-tric D−E loop), contact resistance, and foil and lead resistances.
-Power loss occurs, equal to i
-rms 2(esr). Dielectric materials are typi-
-cally poor conductors of heat, so a moderate amount of power loss
-can cause a large temperature rise in the center of the capacitor. In
-consequence, the rms current must be limited to a safe value.
-Typical power factor correction capacitors are rated by voltageV,
-frequency f , and reactive power in kV ARs. These ratings are com-
-puted from the capacitance C and safe rms current I
-rms, assuming
-undistorted sinusoidal waveforms, as follows:
-rated rms voltageVrms= Irms
-2πfC (20.37)
-
-20.5 Harmonic Currents in Three-Phase Systems 863
-rated rms voltage= I2
-rms
-2πfC (20.38)
-In an undistorted system, the rms current, and hence also the capacitor ESR loss, cannot in-
-crease unless the rms voltage is also increased. But high-frequency harmonics can lead to larger
-rms currents without an increased voltage. Any harmonics that ﬂow result in increased rms cur-
-rent beyond the expected value predicted by Eq. (20.37). If the capacitor is not rated to handle
-additional power loss, then failure or premature aging can occur.
-Problems
-20.1 Passive rectiﬁer circuit. In the passive rectiﬁer circuit of Fig. 20.13, L is very large, such
-that the inductor current i(t) is essentially dc. All components are ideal.
-+
-vR(t)
-+
-V
-ig(t)
-S1 S2
-L
-C R
-40 
-vg(t)
-230 Vrms
-50 Hz
-i(t)
-Fig. 20.13 Passive rectiﬁer circuit of Problem 20.1
-(a) Determine the dc output voltage, current, and power.
-(b) Sketch the ac line current waveform ig(t) and the rectiﬁer output voltage waveform
-vR(t).
-(c) Determine the ac line current rms magnitude, fundamental rms magnitude, and third
-harmonic rms magnitude. If it is required that the third harmonic magnitude be less
-than 2.3 A rms, would this rectiﬁer network conform?
-(d) Determine the power factor, measured at surfaces S
-1 and S 2.
-20.2 The three-phase rectiﬁer of Fig. 20.14 is connected to a balanced 60 Hz 3ø ac480V (rms,
-line-line) sinusoidal source as shown. All elements are ideal. The inductance L is large,
-such that the current i(t) is essentially constant, with negligible 360 Hz ripple.
-(a) Sketch the waveform vd(t).
-(b) Determine the dc output voltage V
-(c) Sketch the line current waveforms ia(t), ib(t), and ic(t).
-(d) Find the Fourier series of ia(t).
-(e) Find the distortion factor, displacement factor, power factor, and line current THD.
-
-864 20 Power and Harmonics in Nonsinusoidal Systems
-+
-vd(t)
-Li(t)
-C R
-20 
-+
-V
-ia(t)
-ib(t)
-ic(t)
-a
-b
-c
-Balanced
-480 V
-Fig. 20.14 Three-phase rectiﬁer circuit of Problem 20.2
-20.3 Harmonic pollution police. In the network of Fig. 20.15, voltage harmonics are observed
-at the indicated surface. The object of this problem is to decide whether to blame the
-source or the load for the observed harmonic pollution. Either the source element or the
-load element contains a nonlinearity that generates harmonics, while the other element is
-linear.
-+
-daoLecruoS
-vs(t)
-Surface
-S
-+
-v(t)
-i(t)
-Z1
-Z2
-Fig. 20.15 Single-phase power system of Problems 20.3 to 20.5
-(a) Consider ﬁrst the case where the load is a passive linear impedance Z2(s), and hence
-its phase lies in the range −90◦≤∠Z2(iω)≤+90◦for all positive ω. The source
-generates harmonics. Express the average power P in the form
-P=
-∞∑
-n=0
-Pn
-where Pn is the average power transmitted to the load by harmonic number n. What
-can you say about the polarities of the Pns?
-(b) Consider next the case where the load is nonlinear, while the source is linear and can
-be modeled by a Thevenin-equivalent sinusoidal voltage source and linear impedance
-Z1(s). Again express the average power P as a sum of average powers, as in part (a).
-What can you say about the polarities of the Pns in this case?
-(c) The following Fourier series are measured:
-
-20.5 Harmonic Currents in Three-Phase Systems 865
-Harmonic number v(t) i(t)
-Magnitude Phase Magnitude Phase
-1 230 V 0 ◦ 6A −20◦
-3 20 V 180 ◦ 4A 2 0 ◦
-58 V 6 0 ◦ 1A −110◦
-Who do you accuse? Explain your reasoning.
-20.4 For the network and waveforms of Problem 20.3, determine the power factor at the indi-
-cated surface, and the average power ﬂowing to the load. Harmonics higher in frequency
-than the ﬁfth harmonic are negligible in magnitude.
-20.5 Repeat Problem 20.3(c), using the following Fourier series:
-Harmonic number v(t) i(t)
-Magnitude Phase Magnitude Phase
-1 120 V 0 ◦ 5A 2 5 ◦
-34 V 6 0 ◦ 0.5 A 40 ◦
-52 V −160◦ 0.2 A −100◦
-20.6 A balanced three-phase wye-connected load is constructed using a 20 Ωresistor in each
-phase. This load is connected to a balanced three-phase wye-connected voltage source,
-whose fundamental voltage component is 380 Vrms line-to-line. In addition, each (line-to-
-neutral) voltage source produces third and ﬁfth harmonics. Each harmonic has amplitude
-20 Vrms, and is in phase with the (line-to-neutral) fundamental.
-(a) The source and load neutral points are connected, such that a four-wire system is
-obtained. Find the Fourier series of the line currents and the neutral current.
-(b) The neutral connection is broken, such that a three-wire system is obtained. Find the
-Fourier series of the line currents. Also ﬁnd the Fourier series of the voltage between
-the source and load neutral points.
-```
+(b) 中线连接断开，构成三线制系统。求线电流的傅里叶级数。并求电源与负载中点之间电压的傅里叶级数。

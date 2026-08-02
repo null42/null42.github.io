@@ -32,7 +32,7 @@ navGroupOrder: 30
 
 **原理**：构造一个滑模面 $s = \hat{i}_s - i_s$（估算电流-实测电流），用开关函数强制系统在滑模面上滑动。
 
-**αβ坐标系下的SMO：**
+- **αβ坐标系下的SMO：**
 
 $$\frac{d\hat{i}_\alpha}{dt} = -\frac{R}{L}\hat{i}_\alpha + \frac{1}{L}v_\alpha - \frac{k}{L} \cdot \text{sign}(\hat{i}_\alpha - i_\alpha)$$
 

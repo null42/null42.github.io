@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第5章part 2 - 5 The Discontinuous Conduction Mode"
+title: "第5章 断续导通模式（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,340 +18,248 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第5章part 2 - 5 The Discontinuous Conduction Mode
+# 第5章 断续导通模式（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 169-176  
-> Chunk ID: `chapter-5-part-2`
+5.4 一个未调节的直流输入电压 $V_g$ 在 $35\,\text{V} \le V_g \le 70\,\text{V}$ 范围内变化。一个降压变换器将该电压降至 28 V；反馈回路按需改变占空比，使变换器输出电压始终等于 28 V。负载功率在 $10\,\text{W} \le P_{load} \le 1000\,\text{W}$ 范围内变化。元件值为
 
-## 主干提取
+$$L = 22\,\mu\text{H} \quad C = 470\,\mu\text{F} \quad f_s = 75\,\text{kHz}$$
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+损耗可忽略。
 
-## 术语表
+(a) 变换器在什么 $V_g$ 和负载电流范围内工作于 CCM？
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+(b) 确定稳态晶体管占空比的最大值和最小值。
 
-## 中文翻译
+5.5 图5.22变换器中两个晶体管由同一栅极驱动信号驱动，使其以占空比 $D$ 同步开通和关断。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+![源页 p.169](../assets/page-snapshots/chapter-5/page-169.png)
 
-## 英文原文
+图5.22 习题 5.5 的 Watkins–Johnson 变换器
 
-```text
-5.4 Summary of Results and Key Points 155
-5.4 An unregulated dc input voltage Vg varies over the range 35 V ≤Vg ≤70 V. A buck
-converter reduces this voltage to 28 V; a feedback loop varies the duty cycle as necessary
-such that the converter output voltage is always equal to 28 V . The load power varies over
-the range 10 W≤Pload≤1000 W. The element values are
-L= 22 μH C= 470 μF fs= 75 kHz
-Losses may be ignored.
-(a) Over what range of Vg and load current does the converter operate in CCM?
-(b) Determine the maximum and minimum values of the steady-state transistor duty cy-
-cle.
-5.5 The transistors in the converter of Fig. 5.22 are driven by the same gate drive signal, so
-that they turn on and oﬀin synchronism with duty cycle D.
-Fig. 5.22 Watkins–Johnson
-converter of Problem 5.5 + CR
-+
-VVg
-Q1
-D1
-i(t)
-L
-D2
-Q2
-(a) Determine the conditions under which this converter operates in the discontinuous
-conduction mode, as a function of the steady-state duty ratioD and the dimensionless
-parameter K= 2L/RTs.
-(b) What happens to your answer to Part (a) for D< 0.5?
-(c) Derive an expression for the dc conversion ratio M(D, K). Sketch M vs. D for K= 10
-and for K= 0.1, over the range 0≤D≤1.
-5.6 In the buck converter illustrated in Fig. 5.23, the diode has forward voltage drop VF .Y o u
-may model this voltage as being independent of current. All other elements should be mod-
-eled as ideal. In this problem, you will show how this diode drop changes the equations of
-the discontinuous conduction mode.
-Fig. 5.23 Buck converter of
-Problem 5.6 +
-Q1
-L
-CR
-+
-VD1Vg
-iL(t)
-iD(t)
-(a) Derive the conditions under which the converter operates in the discontinuous con-
-duction mode. Express your result in terms of the quantities K= 2L/RTs and Kcrit.
-Note that Kcrit may now depend not only on D, but also on other element values.
+(a) 确定该变换器工作于断续导通模式的条件，表为稳态占空比 $D$ 和无量纲参数 $K = 2L/RT_s$ 的函数。
 
-156 5 The Discontinuous Conduction Mode
-(b) Derive closed-form analytical expressions for the conversion ratio M= V/Vg for both
-continuous and discontinuous conduction modes.
-(c) The element values are
-VD= 0.5V fs= 250 kHz
-Vg= 5V R= 4Ω
-L1= 2.2 μH
-C is large. Plot the conversion ratio M= V/Vg for the entire range 0≤D≤1.
-(d) What happens near D= 0? Does the converter operate in CCM or DCM? Compare
-with your result from part (a).
-5.7 DCM mode boundary analysis of the ´Cuk converter of Fig. 5.24. The capacitor voltage
-ripples are small.
-+ D1
-L1
-C2 R
-+
-VQ1
-C1
-L2
-Vg
-i1 i2
-iD
-+ vC1
-Fig. 5.24 ´Cuk converter, Problems 5.7, 5.8, 5.14,a n d5.15
-(a) Sketch the diode current waveform for CCM operation. Find its peak value, in terms
-of the ripple magnitudes ΔiL1, ΔiL2, and the dc components I1 and I2,o ft h et w o
-inductor currents iL1(t) and iL2(t), respectively.
-(b) Derive an expression for the conditions under which the ´Cuk converter operates in the
-discontinuous conduction mode. Express your result in the form K< Kcrit(D), and
-give formulas for K and Kcrit(D).
-5.8 DCM conversion ratio analysis of the ´Cuk converter of Fig.5.24.
-(a) Suppose that the converter operates at the boundary between CCM and DCM, with
-the following element and parameter values:
-D= 0.4 fs= 100 kHz
-Vg= 120V R= 10Ω
-L1= 54 μH L2= 27 μH
-C1= 47 μF C2= 100 μF
-Sketch the diode current waveformiD(t), and the inductor current waveformsi1(t) and
-i2(t). Label the magnitudes of the ripples and dc components of these waveforms.
-(b) Suppose next that the converter operates in the discontinuous conduction mode, with
-ad iﬀerent choice of parameter and element values. Derive an analytical expression
-for the dc conversion ratio M(D, K).
+(b) 对 $D < 0.5$，(a) 的答案如何？
 
-5.4 Summary of Results and Key Points 157
-(c) Sketch the diode current waveform iD(t), and the inductor current waveformsi1(t) and
-i2(t), for operation in the discontinuous conduction mode.
-5.9 DCM mode boundary analysis of the modiﬁed SEPIC of Fig.5.25 The converter illustrated
-in Fig. 5.25 is similar to the SEPIC, except that an additional diode is placed in series
-with the input inductor L1. The objective of this problem is to analyze the discontinuous
-conduction mode associated with large ripple in the inductor current i1(t).
-+
-D2
-L1
-C2
-+
-v
-Q1
-C1
-L2
-RVg
-D1
-i1
-Fig. 5.25 Modiﬁed SEPIC for Problem 5.9
-i1(t)
-t0 DTs Ts
-Conducting
-devices: Q1, D1
-D1Ts D2Ts D3Ts
-D1, D2 D2
-Fig. 5.26 Inductor current waveform i1(t)
-For this problem, you may assume that the switching ripples in the current of inductor L2,
-the voltage of capacitor C1, and the voltage of capacitor C2, are negligible. Figure 5.26
-depicts the inductor current waveformi1(t) and the sequence of conducting devices for the
-discontinuous conduction mode that is the subject of this problem. Neglect all losses.
-(a) Derive an expression for the boundary between the discontinuous conduction mode
-illustrated in Fig. 5.26 and the continuous conduction mode. Express your result in
-terms of the parameters K and Kcrit(D), in the usual manner, and give expressions for
-K and Kcrit.
-(b) Derive the system of equations that relate the dc components of the important wave-
-forms of the circuit in the discontinuous conduction mode of Fig. 5.26. Solve to ﬁnd
-the conversion ratio:
-M(D, K)= V
-Vg
-Your result should be a function of D and K only, with other intermediate variables
-eliminated.
+(c) 推导直流变换比 $M(D, K)$ 的表达式。对 $K = 10$ 和 $K = 0.1$，在 $0 \le D \le 1$ 范围内绘制 $M$ 对 $D$ 的曲线。
 
-158 5 The Discontinuous Conduction Mode
-5.10 DCM mode boundary analysis of the SEPIC of Fig. 5.27
-+
-D1L1
-C2 R
-+
-VQ1
-C1
-Vg
-i1
-i2
-iD
-L2
-Fig. 5.27 SEPIC, Problems 5.10 and 5.11
-(a) Sketch the diode current waveform for CCM operation. Find its peak value, in terms
-of the ripple magnitudes ΔiL1, ΔiL2, and the dc components I1 and I2,o ft h et w o
-inductor currents iL1(t) and iL2(t), respectively.
-(b) Derive an expression for the conditions under which the SEPIC operates in the dis-
-continuous conduction mode. Express your result in the form K< Kcrit(D), and give
-formulas for K and Kcrit(D).
-5.11 DCM conversion ratio analysis of the SEPIC of Fig.5.27.
-(a) Suppose that the converter operates at the boundary between CCM and DCM, with
-the following element and parameter values:
-D= 0.225 fs= 100 kHz
-Vg= 120V R= 10Ω
-L1= 50 μH L2= 75 μH
-C1= 47 μF C2= 200μF
-Sketch the diode current waveformiD(t), and the inductor current waveformsi1(t) and
-i2(t). Label the magnitudes of the ripples and dc components of these waveforms.
-(b) Suppose next that the converter operates in the discontinuous conduction mode, with
-ad iﬀerent choice of parameter and element values. Derive an analytical expression
-for the dc conversion ratio M(D, K).
-(c) Sketch the diode current waveform iD(t), and the inductor current waveformsi1(t) and
-i2(t), for operation in the discontinuous conduction mode.
-5.12 An L−C input ﬁlter is added to a buck converter as illustrated in Fig. 5.28. Inductors L1
-and L2 and capacitor C2 are large in value, such that their switching ripples are small. All
-losses can be neglected.
-(a) Sketch the capacitor C1 voltage waveform v1(t), and derive expressions for its dc
-component V1 and peak ripple magnitudeΔv1.
-(b) The load current is increased ( R is decreased in value) such that Δv1 is greater than
-V1.
-(i) Sketch the capacitor voltage waveform v1(t).
-(ii) For each subinterval, determine which semiconductor devices conduct.
+5.6 图5.23所示降压变换器中，二极管有正向压降 $V_F$。可将此电压建模为与电流无关。其他所有元件按理想建模。本题将展示该二极管压降如何改变断续导通模式的方程。
 
-5.4 Summary of Results and Key Points 159
-C1
-+
-v1
-L2Q1
-D1
-+
-L1
-Vg R
-+
-v2C2
-i1 i2
-Fig. 5.28 Buck converter with input ﬁlter, Problems 5.12 and 5.13
-(iii) Determine the conditions under which the discontinuous conduction mode oc-
-curs. Express your result in the form K< Kcrit(D), and give formulas for K and
-Kcrit(D).
-5.13 Derive an expression for the conversion ratio M(D, K) of the DCM converter described
-in the previous problem. Note: D is the transistor duty cycle.
-5.14 In the Cuk converter of Fig. 5.24, inductors L1 and L2 and capacitor C2 are large in value,
-such that their switching ripples are small. All losses can be neglected.
-(a) Assuming that the converter operates in CCM, sketch the capacitor C1 voltage wave-
-form vC1(t), and derive expressions for its dc componentV1 and peak ripple magnitude
-ΔvC1.
-(b) The load current is increased ( R is decreased in value) such thatΔvC1 is greater than
-V1.
-(i) Sketch the capacitor voltage waveform vC1(t).
-(ii) For each subinterval, determine which semiconductor devices conduct.
-(iii) Determine the conditions under which the discontinuous conduction mode oc-
-curs. Express your result in the form K< Kcrit(D), and give formulas for K and
-Kcrit(D).
-5.15 Derive an expression for the conversion ratio M(D, K)o ft h eD C M ´Cuk converter de-
-scribed in the previous problem. Note: D is the transistor duty cycle.
-5.16 A DCM buck–boost converter as in Fig.5.21 is to be designed to operate under the follow-
-ing conditions:
-136 V≤Vg≤204 V
-5W ≤Pload≤100 W
-V=−150 V
-fs= 100 kHz
-You may assume that a feedback loop will vary to transistor duty cycle as necessary to
-maintain a constant output voltage of−150 V .
-Design the converter, subject to the following considerations:
-•The converter should operate in the discontinuous conduction mode at all times
-•Given the above requirements, choose the element values to minimize the peak inductor
-current
-•The output voltage peak ripple should be less than 1V .
-Specify:
+图5.23 习题 5.6 的降压变换器
 
-160 5 The Discontinuous Conduction Mode
-(a) The inductor value L
-(b) The output capacitor value C
-(c) The worst-case peak inductor current ipk
-(d) The maximum and minimum values of the transistor duty cycle D
-5.17 A DCM boost converter as in Fig. 5.12 is to be designed to operate under the following
-conditions:
-18 V≤Vg≤36 V
-5W ≤Pload≤100 W
-V= 48 V
-fs= 150 kHz
-You may assume that a feedback loop will vary to transistor duty cycle as necessary to
-maintain a constant output voltage of 48 V .
-Design the converter, subject to the following considerations:
-•The converter should operate in the discontinuous conduction mode at all times. To
-ensure an adequate design margin, the inductance L should be chosen such that K is no
-greater than 75% of Kcrit at all operating points.
-•Given the above requirements, choose the element values to minimize the peak inductor
-current.
-•The output voltage peak ripple should be less than 1V .
-Specify:
-(a) The inductor value L
-(b) The output capacitor value C
-(c) The worst-case peak inductor current ipk
-(d) The maximum and minimum values of the transistor duty cycle D.
-(e) The values of D, K, and Kcrit at the following operating points: ( i) Vg = 18 V and
-Pload = 5W ;( ii) Vg= 36 V and Pload = 5W ;( iii) Vg= 18 V and Pload = 100 W; (iv)
-Vg= 36 V and Pload=100 W.
-5.18 In dc–dc converters used in battery-powered portable equipment, it is sometimes required
-that the converter continue to regulate its load voltage with high eﬃciency while the load
-is in a low-power “sleep” mode. The power required by the transistor gate drive circuitry,
-as well as much of the switching loss, is dependent on the switching frequency but not on
-the load current. So to obtain high eﬃciency at very low load powers, a variable-frequency
-control scheme is used, in which the switching frequency is reduced in proportion to the
-load current.
-Consider the boost converter system of Fig.5.29a. The battery pack consists of two nickel-
-cadmium cells, which produce a voltage of V
-g = 2.4V± 0.4 V . The converter boosts
-this voltage to a regulated 5 V . As illustrated in Fig. 5.29b, the converter operates in the
-discontinuous conduction mode, with constant transistor on-time ton. The transistor oﬀ-
-time tof f is varied by the controller to regulate the output voltage.
-(a) Write the equations for the CCM-DCM boundary and conversion ratio M= V/Vg,i n
-terms of ton, tof f, L, and the eﬀective load resistance R.
-For parts (b) and (c), the load current can vary between 100μA and 1 A. The transistor
-on-time is ﬁxed: ton= 10 μs.
-(b) Select values for L and C such that:
-•The output voltage peak ripple is no greater than 50 mV ,
+![源页 p.170](../assets/page-snapshots/chapter-5/page-170.png)
 
-5.4 Summary of Results and Key Points 161
-Fig. 5.29 Boost con-
-verter employed in
-portable battery-powered
-equipment with sleep
-mode, Problem 5.18:
-(a) converter circuit,
-(b) inductor current
-waveform
-(a) L
-C R
-+
-v(t)Vg
-i(t)
-Battery pack Effective load
-Iload
-(b) i(t)
-t
-ipk
-ton toff
-•The converter always operates in DCM, and
-•The peak inductor current is as small as possible.
-(c) For your design of part (b), what are the maximum and minimum values of the switch-
-ing frequency?
-5.19 An unregulated dc input voltage Vg varies over the range 35V ≤Vg ≤70V. A buck
-converter reduces this voltage to 28 V; a feedback loop varies the duty cycle as necessary
-such that the converter output voltage is always equal to 28 V . The load power varies over
-the range 10W≤P
-load≤1000W. The buck converter elements areL= 22μH, C= 470μF,
-fs= 75kHz. Losses may be ignored.
-Pload
-Vg
-1000 W
-10 W
-75 V35 V
-Fig. 5.30 Vg vs. Pload axes, Problem 5.19
+(a) 推导变换器工作于断续导通模式的条件。用 $K = 2L/RT_s$ 和 $K_{crit}$ 表示结果。注意 $K_{crit}$ 此时可能不仅取决于 $D$，还可能取决于其他元件值。
 
-162 5 The Discontinuous Conduction Mode
-(a) Over what range of Vg and Pload does the converter operate in continuous conduction
-mode? Sketch the mode boundary on the axes of Fig. 5.30, and identify the region
-over which the converter operates in CCM.
-(b) Determine the maximum and minimum values of the steady-state transistor duty cy-
-cle.
-```
+(b) 推导连续和断续导通模式下变换比 $M = V/V_g$ 的闭式解析表达式。
+
+(c) 元件值为
+
+$$V_D = 0.5\,\text{V} \quad f_s = 250\,\text{kHz}$$
+
+$$V_g = 5\,\text{V} \quad R = 4\,\Omega$$
+
+$$L_1 = 2.2\,\mu\text{H}$$
+
+$C$ 较大。在 $0 \le D \le 1$ 全范围内绘制变换比 $M = V/V_g$。
+
+(d) 在 $D = 0$ 附近发生什么？变换器工作于 CCM 还是 DCM？与 (a) 的结果比较。
+
+5.7 图5.24 Ćuk 变换器的 DCM 模式边界分析。电容电压纹波很小。
+
+图5.24 习题 5.7、5.8、5.14 和 5.15 的 Ćuk 变换器
+
+![源页 p.171](../assets/page-snapshots/chapter-5/page-171.png)
+
+(a) 绘制 CCM 工作下的二极管电流波形。用两个电感电流 $i_{L1}(t)$ 和 $i_{L2}(t)$ 的纹波幅值 $\Delta i_{L1}$、$\Delta i_{L2}$ 及直流分量 $I_1$、$I_2$ 表示其峰值。
+
+(b) 推导 Ćuk 变换器工作于断续导通模式的条件。结果表为 $K < K_{crit}(D)$ 形式，并给出 $K$ 和 $K_{crit}(D)$ 的公式。
+
+5.8 图5.24 Ćuk 变换器的 DCM 变换比分析。
+
+(a) 假定变换器工作于 CCM 与 DCM 的边界处，元件和参数值为
+
+$$D = 0.4 \quad f_s = 100\,\text{kHz}$$
+
+$$V_g = 120\,\text{V} \quad R = 10\,\Omega$$
+
+$$L_1 = 54\,\mu\text{H} \quad L_2 = 27\,\mu\text{H}$$
+
+$$C_1 = 47\,\mu\text{F} \quad C_2 = 100\,\mu\text{F}$$
+
+绘制二极管电流波形 $i_D(t)$ 及电感电流波形 $i_1(t)$ 和 $i_2(t)$。标注这些波形的纹波和直流分量幅值。
+
+(b) 其次假定变换器工作于断续导通模式，另选一组参数和元件值。推导直流变换比 $M(D, K)$ 的解析表达式。
+
+![源页 p.172](../assets/page-snapshots/chapter-5/page-172.png)
+
+(c) 绘制断续导通模式下的二极管电流波形 $i_D(t)$ 和电感电流波形 $i_1(t)$、$i_2(t)$。
+
+5.9 图5.25所示改进型 SEPIC 的 DCM 模式边界分析。图5.25所示变换器与 SEPIC 类似，不同之处在于输入电感 $L_1$ 串联了一个附加二极管。本题旨在分析由电感电流 $i_1(t)$ 大纹波引起的断续导通模式。
+
+图5.25 习题 5.9 的改进型 SEPIC
+
+图5.26 电感电流波形 $i_1(t)$
+
+![源页 p.173](../assets/page-snapshots/chapter-5/page-173.png)
+
+本题可假定电感 $L_2$ 的电流、电容 $C_1$ 的电压、电容 $C_2$ 的电压的开关纹波可忽略。图5.26绘出了电感电流波形 $i_1(t)$ 及本题所讨论断续导通模式下的导通器件序列。忽略所有损耗。
+
+(a) 推导图5.26所示断续导通模式与连续导通模式之间边界的表达式。按通常方式用参数 $K$ 和 $K_{crit}(D)$ 表示结果，并给出 $K$ 和 $K_{crit}$ 的表达式。
+
+(b) 推导图5.26断续导通模式下电路重要波形直流分量之间的关系方程组。求解变换比：
+
+$$M(D, K) = \frac{V}{V_g}$$
+
+结果应仅为 $D$ 和 $K$ 的函数，其他中间变量应消去。
+
+5.10 图5.27 SEPIC 的 DCM 模式边界分析
+
+图5.27 习题 5.10 和 5.11 的 SEPIC
+
+![源页 p.174](../assets/page-snapshots/chapter-5/page-174.png)
+
+(a) 绘制 CCM 工作下的二极管电流波形。用两个电感电流 $i_{L1}(t)$ 和 $i_{L2}(t)$ 的纹波幅值 $\Delta i_{L1}$、$\Delta i_{L2}$ 及直流分量 $I_1$、$I_2$ 表示其峰值。
+
+(b) 推导 SEPIC 工作于断续导通模式的条件。结果表为 $K < K_{crit}(D)$ 形式，并给出 $K$ 和 $K_{crit}(D)$ 的公式。
+
+5.11 图5.27 SEPIC 的 DCM 变换比分析。
+
+(a) 假定变换器工作于 CCM 与 DCM 的边界处，元件和参数值为
+
+$$D = 0.225 \quad f_s = 100\,\text{kHz}$$
+
+$$V_g = 120\,\text{V} \quad R = 10\,\Omega$$
+
+$$L_1 = 50\,\mu\text{H} \quad L_2 = 75\,\mu\text{H}$$
+
+$$C_1 = 47\,\mu\text{F} \quad C_2 = 200\,\mu\text{F}$$
+
+绘制二极管电流波形 $i_D(t)$ 及电感电流波形 $i_1(t)$ 和 $i_2(t)$。标注这些波形的纹波和直流分量幅值。
+
+(b) 其次假定变换器工作于断续导通模式，另选一组参数和元件值。推导直流变换比 $M(D, K)$ 的解析表达式。
+
+(c) 绘制断续导通模式下的二极管电流波形 $i_D(t)$ 和电感电流波形 $i_1(t)$、$i_2(t)$。
+
+5.12 一个 $L$–$C$ 输入滤波器加到降压变换器上，如图5.28所示。电感 $L_1$、$L_2$ 和电容 $C_2$ 取值较大，使其开关纹波很小。所有损耗可忽略。
+
+(a) 绘制电容 $C_1$ 的电压波形 $v_1(t)$，并推导其直流分量 $V_1$ 和峰值纹波幅值 $\Delta v_1$ 的表达式。
+
+(b) 负载电流增大（$R$ 减小）使 $\Delta v_1$ 大于 $V_1$。
+
+(i) 绘制电容电压波形 $v_1(t)$。
+
+(ii) 对每个子区间，确定哪些半导体器件导通。
+
+![源页 p.175](../assets/page-snapshots/chapter-5/page-175.png)
+
+图5.28 含输入滤波器的降压变换器，习题 5.12 和 5.13
+
+(iii) 确定断续导通模式发生的条件。结果表为 $K < K_{crit}(D)$ 形式，并给出 $K$ 和 $K_{crit}(D)$ 的公式。
+
+5.13 推导上一题所述 DCM 变换器变换比 $M(D, K)$ 的表达式。注：$D$ 为晶体管占空比。
+
+5.14 在图5.24 Ćuk 变换器中，电感 $L_1$、$L_2$ 和电容 $C_2$ 取值较大，使其开关纹波很小。所有损耗可忽略。
+
+(a) 假定变换器工作于 CCM，绘制电容 $C_1$ 的电压波形 $v_{C1}(t)$，并推导其直流分量 $V_1$ 和峰值纹波幅值 $\Delta v_{C1}$ 的表达式。
+
+(b) 负载电流增大（$R$ 减小）使 $\Delta v_{C1}$ 大于 $V_1$。
+
+(i) 绘制电容电压波形 $v_{C1}(t)$。
+
+(ii) 对每个子区间，确定哪些半导体器件导通。
+
+(iii) 确定断续导通模式发生的条件。结果表为 $K < K_{crit}(D)$ 形式，并给出 $K$ 和 $K_{crit}(D)$ 的公式。
+
+5.15 推导上一题所述 DCM Ćuk 变换器变换比 $M(D, K)$ 的表达式。注：$D$ 为晶体管占空比。
+
+5.16 一个 DCM 升降压变换器如图5.21所示，要求在以下条件下工作：
+
+$$136\,\text{V} \le V_g \le 204\,\text{V}$$
+
+$$5\,\text{W} \le P_{load} \le 100\,\text{W}$$
+
+$$V = -150\,\text{V}$$
+
+$$f_s = 100\,\text{kHz}$$
+
+可假定反馈回路将按需改变晶体管占空比以维持 $-150\,\text{V}$ 的恒定输出电压。
+
+设计该变换器，须满足以下考虑：
+
+- 变换器应始终工作于断续导通模式
+- 在上述要求下，选择元件值使峰值电感电流最小
+- 输出电压峰值纹波应小于 1 V
+
+给出：
+
+![源页 p.176](../assets/page-snapshots/chapter-5/page-176.png)
+
+(a) 电感值 $L$
+
+(b) 输出电容值 $C$
+
+(c) 最恶劣情况下的峰值电感电流 $i_{pk}$
+
+(d) 晶体管占空比 $D$ 的最大值和最小值
+
+5.17 一个 DCM 升压变换器如图5.12所示，要求在以下条件下工作：
+
+$$18\,\text{V} \le V_g \le 36\,\text{V}$$
+
+$$5\,\text{W} \le P_{load} \le 100\,\text{W}$$
+
+$$V = 48\,\text{V}$$
+
+$$f_s = 150\,\text{kHz}$$
+
+可假定反馈回路将按需改变晶体管占空比以维持 48 V 的恒定输出电压。
+
+设计该变换器，须满足以下考虑：
+
+- 变换器应始终工作于断续导通模式。为保证足够的设计裕度，电感 $L$ 的选择应使在所有工作点 $K$ 不大于 $K_{crit}$ 的 75%。
+- 在上述要求下，选择元件值使峰值电感电流最小。
+- 输出电压峰值纹波应小于 1 V。
+
+给出：
+
+(a) 电感值 $L$
+
+(b) 输出电容值 $C$
+
+(c) 最恶劣情况下的峰值电感电流 $i_{pk}$
+
+(d) 晶体管占空比 $D$ 的最大值和最小值。
+
+(e) 以下工作点处 $D$、$K$、$K_{crit}$ 的值：(i) $V_g = 18\,\text{V}$ 且 $P_{load} = 5\,\text{W}$；(ii) $V_g = 36\,\text{V}$ 且 $P_{load} = 5\,\text{W}$；(iii) $V_g = 18\,\text{V}$ 且 $P_{load} = 100\,\text{W}$；(iv) $V_g = 36\,\text{V}$ 且 $P_{load} = 100\,\text{W}$。
+
+5.18 用于电池供电便携设备的直流-直流变换器中，有时要求变换器在负载处于低功率"休眠"模式时仍能以高效率调节负载电压。晶体管栅极驱动电路所需功率以及大部分开关损耗取决于开关频率而不取决于负载电流。故在很低负载功率下为获得高效率，采用变频控制方案，其中开关频率与负载电流成正比地降低。
+
+考虑图5.29a的升压变换器系统。电池组由两个镍镉电池组成，产生 $V_g = 2.4\,\text{V} \pm 0.4\,\text{V}$ 的电压。变换器将该电压升至稳压 5 V。如图5.29b所示，变换器工作于断续导通模式，晶体管导通时间 $t_{on}$ 恒定。控制器改变晶体管关断时间 $t_{off}$ 以调节输出电压。
+
+(a) 写出 CCM-DCM 边界和变换比 $M = V/V_g$ 的方程，用 $t_{on}$、$t_{off}$、$L$ 和有效负载电阻 $R$ 表示。
+
+对 (b) 和 (c)，负载电流可在 100 μA 至 1 A 之间变化。晶体管导通时间固定：$t_{on} = 10\,\mu\text{s}$。
+
+(b) 选择 $L$ 和 $C$ 的值，使：
+
+- 输出电压峰值纹波不大于 50 mV，
+
+![源页 p.175](../assets/page-snapshots/chapter-5/page-175.png)
+
+图5.29 用于含休眠模式的便携电池供电设备的升压变换器，习题 5.18：(a) 变换器电路，(b) 电感电流波形
+
+- 变换器始终工作于 DCM，且
+
+- 峰值电感电流尽可能小。
+
+(c) 对 (b) 的设计，开关频率的最大值和最小值是多少？
+
+5.19 一个未调节的直流输入电压 $V_g$ 在 $35\,\text{V} \le V_g \le 70\,\text{V}$ 范围内变化。一个降压变换器将该电压降至 28 V；反馈回路按需改变占空比，使变换器输出电压始终等于 28 V。负载功率在 $10\,\text{W} \le P_{load} \le 1000\,\text{W}$ 范围内变化。降压变换器元件为 $L = 22\,\mu\text{H}$、$C = 470\,\mu\text{F}$、$f_s = 75\,\text{kHz}$。损耗可忽略。
+
+图5.30 习题 5.19 的 $V_g$ 对 $P_{load}$ 坐标轴
+
+![源页 p.176](../assets/page-snapshots/chapter-5/page-176.png)
+
+(a) 变换器在什么 $V_g$ 和 $P_{load}$ 范围内工作于连续导通模式？在图5.30的坐标轴上绘制模式边界，并标出变换器工作于 CCM 的区域。
+
+(b) 确定稳态晶体管占空比的最大值和最小值。

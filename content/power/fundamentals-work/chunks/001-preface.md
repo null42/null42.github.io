@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "Preface"
+title: "前言"
 tags:
   - power-electronics
   - 教材
@@ -18,577 +18,528 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# Preface
+# 前言
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 6-18  
-> Chunk ID: `preface`
+第一版和第二版的目标是作为电力电子导论课程的教材，其中电力电子基础被定义、严格呈现，并以足够深度处理，使学生获得设计实际电力电子系统所需的知识和技能。附加目标是作为从事电力电子设计的工程师的参考书，以及希望将此领域知识发展到超出导论课程水平的学生的参考书。第三版中，前版的基本目标和哲学未变。
 
-## 主干提取
+自第二版以来，电力电子领域发展巨大，包括电动汽车、无线电能传输和公用微电网等新的重要商业应用。技术增长包括宽禁带功率半导体的商业化、开关变换器数字控制的普及以及变换器建模的成熟。我们的大学电力电子课程也在内容和组织上演变。本版是对这些变化的响应，相对前版是一次重大修订。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+截至2020年，科罗拉多大学我们提供三门电力电子核心研究生课程序列。第一门课程"电力电子导论"涵盖基本变换器分析、变换器控制器和磁学。第三版中此材料在第1–12章呈现，水平与此课程覆盖一致且顺序相同。我们的第二门课程"电力电子系统的建模与控制"涵盖功率变换器应用、控制和面向设计的分析的更高级主题。此材料在第三版第13–21章详细覆盖；此部分文本代表技术材料和覆盖范围的重大修订。我们的第三门课程"电力电子中的谐振和软开关现象"主要依赖补充讲义而非此教材。第三版第22和23章覆盖此第三门课程部分的总结。
 
-## 术语表
+第4章功率半导体器件的覆盖已加强和更新。功率二极管开关的讨论显著扩展，引出二极管引起开关损耗的平均建模。添加了宽禁带器件和 MOSFET 栅极驱动器的新材料。开关损耗机制的讨论已更新和重组，MCT 部分已删除。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+第三版采用更成熟的平均观点，基于式(7.3) 定义的梯形移动平均。平均模型的波形成为真正的连续量，近似和逻辑步骤清晰定义。第7章新
 
-## 中文翻译
+![源页 p.7](../assets/page-snapshots/chapter-preface/page-7.png)
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+材料包括平均算子一节，以及小纹波近似如何与梯形移动平均工作的新处理。此外，第7章的逻辑流已显著修订以符合我们现校园课程教授此材料的方式，状态空间平均的新材料已添加。此平均观点随后贯穿全书剩余部分。最值得注意的是，此观点引出 Tan 和 Middlebrook 的电流编程控制模型。第18章电流编程控制已据此显著修订和更新。采样的高频效应也在与电流编程控制和断续导通模式交流建模的联系中讨论。
 
-## 英文原文
+前版对稳定性和相位裕度的处理可能使一些学生产生误解；为缓解此，我们引入了奈奎斯特稳定性新节。教师可选择电力电子课程中是否有时间覆盖此材料，但解释作为文本中的参考可用。相位裕度文本的来源严格解释，条件稳定系统或具有多个交叉频率的系统等特殊情况被裁定。输入滤波器一章新增一节，依赖奈奎斯特稳定性判据确定输入滤波器存在时的精确稳定性边界。
 
-```text
-Preface
-The objective of the First and Second Editions was to serve as a textbook for introductory power
-electronics courses where the fundamentals of power electronics are deﬁned, rigorously pre-
-sented, and treated in suﬃcient depth so that students acquire the knowledge and skills needed
-to design practical power electronic systems. An additional goal was to contribute as a reference
-book for engineers who practice power electronics design, and for students who want to develop
-their knowledge of the area beyond the level of introductory courses. In this Third Edition, the
-basic objectives and philosophy of the earlier editions have not been changed.
-Since we wrote the Second Edition, the ﬁeld of power electronics has grown tremen-
-dously, including new signiﬁcant commercial applications such as electric vehicles, wireless
-power transfer, and utility microgrids. Technical growth includes the commercialization of wide
-bandgap power semiconductors, widespread digital control of switching converters, and matu-
-ration of converter modeling. Our university power electronics curriculum has evolved as well,
-in content as well as in organization. This edition is a response to these changes, and represents
-a signiﬁcant revision relative to the previous edition.
-As of 2020, at the University of Colorado we oﬀer a sequence of three core graduate courses
-in power electronics. The ﬁrst course,Introduction to Power Electronics, covers basic converter
-analysis, converter controllers, and magnetics. In the Third Edition, this material is presented in
-Chaps. 1–12, at the level and in the order covered in this class. Our second course,Modeling and
-Control of Power Electronics Systems, covers more advanced topics of power converter applica-
-tions, control, and design-oriented analysis. This material is covered in detail in Chaps. 13–21
-in the Third Edition; this portion of the text represents a major revision of technical material
-and coverage. Our third course, Resonant and Soft Switching Phenomena in Power Electronics,
-relies primarily on supplementary notes rather than this textbook. Chapters 22 and 23 of the
-Third Edition cover a summary of a portion of this third course.
-The coverage of power semiconductor devices in Chap. 4 has been bolstered and updated.
-The discussion of power diode switching has been signiﬁcantly expanded, leading into aver-
-aged modeling of diode-induced switching loss. New material on wide bandgap devices and on
-MOSFET gate drivers has been added. The discussion of switching loss mechanisms has been
-updated and reorganized, and the MCT section is removed.
-The Third Edition adopts a more mature viewpoint of averaging, based on the trapezoidal
-moving average deﬁned in Eq. ( 7.3). The waveforms of the averaged model become true con-
-tinuous quantities, with the approximations and logical steps clearly deﬁned. New material in
-vii
+全新的第IV部分"高级建模、分析和控制技术"组织为遵循我们高级变换器控制课程的逻辑流，并纳入关于零双注入技术（Middlebrook 反馈定理和额外元件定理）以及开关变换器数字控制的新章节。电路平均、平均开关建模和平均仿真的主题合并为单个逻辑章节。额外元件定理的新示例包括 SEPIC 平均开关模型的求解和 SEPIC 内部谐振的阻尼。
 
-viii Preface
-Chap. 7 includes a section on the averaging operator, and a new treatment of how the small-
-ripple approximation works with the trapezoidal moving average. Additionally, the logical ﬂow
-of Chap. 7 has been signiﬁcantly revised to conform to how we now teach this material in our
-on-campus courses, and new material on state-space averaging has been added. This new view-
-point of averaging then is followed throughout the remainder of the book. Of most note, this
-viewpoint leads to the current-programmed control model of Tan and Middlebrook. The current-
-programmed control Chap. 18 has been signiﬁcantly revised and updated accordingly. The high-
-frequency eﬀects of sampling are discussed as well, in connection with current-programmed
-control and also with ac modeling of the discontinuous conduction mode.
-The previous treatment of stability and phase margin would leave some students with mis-
-conceptions; to alleviate this, we have introduced a new section on Nyquist stability. Instructors
-may choose whether there is time to cover this material in a power electronics course, but the
-explanation is available as a reference in the text. The origin of the phase margin text is rigor-
-ously explained, and special cases such as conditionally stable systems or those with multiple
-crossover frequencies are adjudicated. A new section in the chapter on input ﬁlters has been
-added, which relies on the Nyquist stability criterion to determine the exact stability boundary
-in the presence of an input ﬁlter.
-An all-new Part IV Advanced Modeling, Analysis, and Control Techniques has been orga-
-nized to follow the logical ﬂow of our advanced converter control course, and incorporates new
-chapters on null double injection techniques (Middlebrook’s feedback theorem and extra ele-
-ment theorem) and on digital control of switching converters. The topics of circuit averaging,
-average switch modeling, and averaged simulation are consolidated into a single logical chap-
-ter. New examples of the extra element theorem include solution of the SEPIC averaged switch
-model, and damping the internal resonances of the SEPIC.
-Chapter 18 on current-programmed control has been signiﬁcantly revised and reorganized.
-As noted above, it now employs the model of Tan and Middlebrook, using the trapezoidal mov-
-ing average. New sections on simulation, sampling and high-frequency dynamics, and input
-ﬁlters are incorporated into the chapter. A new section on average current-mode control has
-also been added.
-The new Chap. 19 on digital control of switching converters extends the analog control
-techniques of earlier chapters, to address the relevant issues of digital controllers. Quantiza-
-tion, sampling, and controller delays are modeled. The Z-transform is employed to model the
-discrete-time portion of the feedback loop, with the Laplace transform used as usual for the
-remaining analog system. Digital compensator design and realization is then addressed.
-This text has evolved from courses developed over thirty-ﬁve years of teaching power elec-
-tronics at the University of Colorado. These courses, in turn, were heavily inﬂuenced by our
-previous experiences as graduate students at the California Institute of Technology, under the
-direction of Profs. Slobodan ´Cuk and R. D. Middlebrook, to whom we are grateful. We would
-also like to thank the many readers of the First and Second Editions, students, and instructors
-who oﬀered their comments and suggestions, or who pointed out errata. We have attempted to
-incorporate these suggestions wherever possible.
-Boulder, CO, USA Robert W. Erickson
-Boulder, CO, USA Dragan Maksimovi ´c
+第18章电流编程控制已显著修订和重组。如上所述，现采用 Tan 和 Middlebrook 的模型，使用梯形移动平均。仿真、采样和高频动态以及输入滤波器的新节纳入本章。还添加了平均电流模式控制的新节。
 
-Contents
-1 Introduction ............................................................ 1
-1.1 Introduction to Power Processing ...................................... 1
-1.2 Several Applications of Power Electronics ............................... 8
-1.3 Elements of Power Electronics ........................................ 1 0
-Part I Converters in Equilibrium
-2 Principles of Steady-State Converter Analysis .............................. 1 5
-2.1 Introduction ........................................................ 1 5
-2.2 V olt-Second and Charge Balance, Small-Ripple Approximation ............. 1 8
-2.3 Boost Converter Example ............................................. 2 4
-2.4 ´Cuk Converter Example .............................................. 3 0
-2.5 Estimating the Output V oltage Ripple in Converters Containing Two-Pole
-Low-Pass Filters .................................................... 3 5
-2.6 Summary of Key Points .............................................. 3 7
-Problems ............................................................... 3 8
-3 Steady-State Equivalent Circuit Modeling, Losses, and E ﬃciency ............. 4 3
-3.1 The DC Transformer Model ........................................... 4 3
-3.2 Inclusion of Inductor Copper Loss ..................................... 4 6
-3.3 Construction of Equivalent Circuit Model ............................... 4 9
-3.3.1 Inductor V oltage Equation ...................................... 5 0
-3.3.2 Capacitor Current Equation ..................................... 5 0
-3.3.3 Complete Circuit Model ....................................... 5 1
-3.3.4 E ﬃciency.................................................... 5 2
-3.4 How to Obtain the Input Port of the Model .............................. 5 4
-3.5 Example: Inclusion of Semiconductor Conduction Losses in the Boost
-Converter Model .................................................... 5 6
-3.6 Summary of Key Points .............................................. 6 0
-Problems ............................................................... 6 1
-ix
+第19章开关变换器数字控制的新章扩展前几章的模拟控制技术，以解决数字控制器的相关问题。量化、采样和控制器延迟被建模。用 Z 变换建模反馈环的离散时间部分，其余模拟系统如常使用拉普拉斯变换。然后解决数字补偿器设计和实现。
 
-x Contents
-4 Switch Realization ...................................................... 6 7
-4.1 Switch Applications ................................................. 6 9
-4.1.1 Single-Quadrant Switches ...................................... 6 9
-4.1.2 Current-Bidirectional Two-Quadrant Switches ..................... 7 2
-4.1.3 V oltage-Bidirectional Two-Quadrant Switches ..................... 7 5
-4.1.4 Four-Quadrant Switches ....................................... 7 6
-4.1.5 Synchronous Rectiﬁers ........................................ 7 8
-4.2 Introduction to Power Semiconductors .................................. 7 9
-4.2.1 Breakdown V oltage, Forward V oltage, and Switching Speed ......... 7 9
-4.2.2 Transistor Switching Loss with Clamped Inductive Load ............ 8 0
-4.3 The Power Diode .................................................... 8 2
-4.3.1 Introduction to Power Diodes ................................... 8 2
-4.3.2 Discussion: Power Diodes ...................................... 8 7
-4.3.3 Modeling Diode-Induced Switching Loss ......................... 9 0
-4.3.4 Boost Converter Example ...................................... 9 4
-4.4 Metal-Oxide-Semiconductor Field-E ﬀect Transistor (MOSFET) ............ 9 9
-4.4.1 Introduction to the Power MOSFET .............................. 9 9
-4.4.2 Wide-Bandgap FETs .......................................... 1 0 3
-4.4.3 MOSFET Gate Drivers ........................................ 1 0 7
-4.5 Minority-Carrier Transistors .......................................... 1 1 1
-4.5.1 Bipolar Junction Transistor (BJT) ............................... 1 1 1
-4.5.2 Insulated-Gate Bipolar Transistor (IGBT) ......................... 1 1 5
-4.5.3 Thyristors (SCR, GTO) ........................................ 1 1 9
-4.6 Additional Sources of Switching Loss .................................. 1 2 2
-4.6.1 Device Capacitances, and Leakage, Package, and Stray Inductances . . . 122
-4.6.2 Inducing Switching Loss in Other Elements ....................... 1 2 4
-4.6.3 E ﬃciency vs. Switching Frequency .............................. 1 2 6
-4.7 Summary of Key Points .............................................. 1 2 6
-Problems ............................................................... 1 2 8
-5 The Discontinuous Conduction Mode ...................................... 1 3 5
-5.1 Origin of the Discontinuous Conduction Mode, and Mode Boundary ........ 1 3 5
-5.2 Analysis of the Conversion Ratio M(D, K) .............................. 1 4 0
-5.3 Boost Converter Example ............................................. 1 4 5
-5.4 Summary of Results and Key Points .................................... 1 5 2
-Problems ............................................................... 1 5 4
-6 Converter Circuits ...................................................... 1 6 3
-6.1 Circuit Manipulations ................................................ 1 6 4
-6.1.1 Inversion of Source and Load ................................... 1 6 4
-6.1.2 Cascade Connection of Converters ............................... 1 6 6
-6.1.3 Rotation of Three-Terminal Cell ................................. 1 6 9
-6.1.4 Di ﬀerential Connection of the Load .............................. 1 7 0
-6.2 A Short List of Converters ............................................ 1 7 4
-6.3 Transformer Isolation ................................................ 1 7 8
-6.3.1 Full-Bridge and Half-Bridge Isolated Buck Converters .............. 1 8 1
-6.3.2 Forward Converter ............................................ 1 8 7
+此教材从科罗拉多大学三十五年电力电子教学开发的课程演变而来。这些课程反过来深受我们在加州理工学院做研究生时在 Slobodan Ćuk 和 R. D. Middlebrook 教授指导下经验的强烈影响，我们对他们深表感激。我们还感谢第一版和第二版的许多读者、学生和教师，他们提供了评论和建议或指出了勘误。我们已尽可能纳入这些建议。
 
-Contents xi
-6.3.3 Push-Pull Isolated Buck Converter ............................... 1 9 2
-6.3.4 Flyback Converter ............................................ 1 9 4
-6.3.5 Boost-Derived Isolated Converters ............................... 1 9 8
-6.3.6 Isolated Versions of the SEPIC and the ´Cuk Converter .............. 2 0 1
-6.4 Summary of Key Points .............................................. 2 0 3
-Problems ............................................................... 2 0 5
-Part II Converter Dynamics and Control
-7 AC Equivalent Circuit Modeling .......................................... 2 1 5
-7.1 Introduction ........................................................ 2 1 5
-7.2 The Basic AC Modeling Approach ..................................... 2 2 0
-7.2.1 Averaging the Inductor and Capacitor Waveforms .................. 2 2 1
-7.2.2 The Average Inductor V oltage and the Small-Ripple Approximation . . . 222
-7.2.3 Discussion of the Averaging Approximation ....................... 2 2 3
-7.2.4 Averaging the Capacitor Waveforms ............................. 2 2 5
-7.2.5 The Average Input Current ..................................... 2 2 6
-7.2.6 Perturbation and Linearization .................................. 2 2 7
-7.2.7 Construction of the Small-Signal Equivalent Circuit Model .......... 2 3 0
-7.2.8 Discussion of the Perturbation and Linearization Step ............... 2 3 2
-7.2.9 Results for Several Basic Converters ............................. 2 3 3
-7.2.10 Example: A Nonideal Flyback Converter ......................... 2 3 4
-7.3 Modeling the Pulse-Width Modulator ................................... 2 4 2
-7.4 The Canonical Circuit Model .......................................... 2 4 5
-7.4.1 Development of the Canonical Circuit Model ...................... 2 4 5
-7.4.2 Example: Manipulation of the Buck–Boost Converter Model into
-Canonical Form .............................................. 2 4 8
-7.4.3 Canonical Circuit Parameter Values for Some Common Converters ... 2 5 0
-7.5 State-Space Averaging ............................................... 2 5 1
-7.5.1 The State Equations of a Network ............................... 2 5 2
-7.5.2 The Basic State-Space Averaged Model .......................... 2 5 5
-7.5.3 Discussion of the State-Space Averaging Result .................... 2 5 6
-7.5.4 Example: State-Space Averaging of a Nonideal Buck–Boost Converter 259
-7.5.5 Example: State-Space Averaging of a Boost Converter with ESR ..... 2 6 4
-7.6 Summary of Key Points .............................................. 2 7 1
-Problems ............................................................... 2 7 2
-8 Converter Transfer Functions ............................................ 2 7 7
-8.1 Review of Bode Plots ................................................ 2 7 9
-8.1.1 Single-Pole Response .......................................... 2 8 1
-8.1.2 Single Zero Response ......................................... 2 8 7
-8.1.3 Right Half-Plane Zero ......................................... 2 8 8
-8.1.4 Frequency Inversion ........................................... 2 8 9
-8.1.5 Combinations ................................................ 2 9 0
-8.1.6 Quadratic Pole Response: Resonance ............................ 2 9 4
-8.1.7 The Low- Q Approximation ..................................... 2 9 8
+美国科罗拉多州博尔德　Robert W. Erickson
+美国科罗拉多州博尔德　Dragan Maksimović
 
-xii Contents
-8.1.8 The High- Q Approximation .................................... 3 0 1
-8.1.9 Approximate Roots of an Arbitrary-Degree Polynomial ............. 3 0 4
-8.2 Analysis of Converter Transfer Functions ............................... 3 0 9
-8.2.1 Example: Transfer Functions of the Buck–Boost Converter .......... 3 0 9
-8.2.2 Transfer Functions of Some Basic CCM Converters ................ 3 1 5
-8.2.3 Physical Origins of the RHP Zero in Converters .................... 3 1 6
-8.3 Graphical Construction of Impedances and Transfer Functions .............. 3 1 7
-8.3.1 Series Impedances: Addition of Asymptotes ....................... 3 1 8
-8.3.2 Series Resonant Circuit Example ................................ 3 2 0
-8.3.3 Parallel Impedances: Inverse Addition of Asymptotes ............... 3 2 2
-8.3.4 Parallel Resonant Circuit Example ............................... 3 2 3
-8.3.5 V oltage Divider Transfer Functions: Division of Asymptotes ......... 3 2 5
-8.4 Graphical Construction of Converter Transfer Functions ................... 3 2 7
-8.5 Measurement of AC Transfer Functions and Impedances ................... 3 3 2
-8.6 Summary of Key Points .............................................. 3 3 6
-Problems ............................................................... 3 3 7
-9 Controller Design ....................................................... 3 4 7
-9.1 Introduction ........................................................ 3 4 7
-9.2 E ﬀect of Negative Feedback on the Network Transfer Functions ............ 3 5 0
-9.2.1 Feedback Reduces the Transfer Functions from Disturbances to the
-Output ...................................................... 3 5 1
-9.2.2 Feedback Causes the Transfer Function from the Reference Input
-to the Output to Be Insensitive to Variations in the Gains in the
-Forward Path of the Loop ...................................... 3 5 3
-9.3 Construction of 1 /(1+ T) and T/(1+ T) ................................ 3 5 3
-9.4 Stability ........................................................... 3 5 8
-9.4.1 The Phase Margin Test ......................................... 3 5 9
-9.4.2 The Nyquist Stability Criterion .................................. 3 6 0
-9.4.3 The Relationship Between Phase Margin and Closed-Loop Damping
-Factor ....................................................... 3 7 0
-9.4.4 Transient Response vs. Damping Factor .......................... 3 7 3
-9.4.5 Load Step Response vs. Damping Factor ......................... 3 7 5
-9.5 Regulator Design .................................................... 3 7 6
-9.5.1 Lead ( PD) compensator ........................................ 3 7 7
-9.5.2 Lag ( PI) Compensator ......................................... 3 8 0
-9.5.3 Combined ( PID) Compensator .................................. 3 8 2
-9.5.4 Design Example .............................................. 3 8 3
-9.6 Measurement of Loop Gains .......................................... 3 9 2
-9.6.1 V oltage Injection .............................................. 3 9 4
-9.6.2 Current Injection .............................................. 3 9 6
-9.6.3 Measurement of Unstable Systems ............................... 3 9 7
-9.7 Summary of Key Points .............................................. 3 9 8
-Problems ............................................................... 3 9 9
+![源页 p.8](../assets/page-snapshots/chapter-preface/page-8.png)
 
-Contents xiii
-Part III Magnetics
-10 Basic Magnetics Theory .................................................. 4 0 9
-10.1 Review of Basic Magnetics ........................................... 4 0 9
-10.1.1 Basic Relationships ........................................... 4 0 9
-10.1.2 Magnetic Circuits ............................................. 4 1 5
-10.2 Transformer Modeling ............................................... 4 1 8
-10.2.1 The Ideal Transformer ......................................... 4 1 9
-10.2.2 The Magnetizing Inductance .................................... 4 2 0
-10.2.3 Leakage Inductances .......................................... 4 2 1
-10.3 Loss Mechanisms in Magnetic Devices ................................. 4 2 3
-10.3.1 Core Loss ................................................... 4 2 3
-10.3.2 Low-Frequency Copper Loss ................................... 4 2 6
-10.4 Eddy Currents in Winding Conductors .................................. 4 2 6
-10.4.1 Introduction to the Skin and Proximity Eﬀects ..................... 4 2 6
-10.4.2 Leakage Flux in Windings ...................................... 4 3 1
-10.4.3 Foil Windings and Layers ...................................... 4 3 2
-10.4.4 Power Loss in a Layer ......................................... 4 3 4
-10.4.5 Example: Power Loss in a Transformer Winding ................... 4 3 6
-10.4.6 Interleaving the Windings ...................................... 4 3 8
-10.4.7 PWM Waveform Harmonics .................................... 4 4 1
-10.5 Several Types of Magnetic Devices, Their B–H Loops, and Core vs. Copper
-Loss .............................................................. 4 4 4
-10.5.1 Filter Inductor ................................................ 4 4 4
-10.5.2 AC Inductor ................................................. 4 4 6
-10.5.3 Transformer .................................................. 4 4 7
-10.5.4 Coupled Inductor ............................................. 4 4 8
-10.5.5 Flyback Transformer .......................................... 4 4 9
-10.6 Summary of Key Points .............................................. 4 5 0
-Problems ............................................................... 4 5 1
-11 Inductor Design ......................................................... 4 5 9
-11.1 Filter Inductor Design Constraints ...................................... 4 5 9
-11.1.1 Maximum Flux Density ........................................ 4 6 1
-11.1.2 Inductance ................................................... 4 6 2
-11.1.3 Winding Area ................................................ 4 6 2
-11.1.4 Winding Resistance ........................................... 4 6 3
-11.1.5 The Core Geometrical Constant Kg .............................. 4 6 3
-11.2 The Kg Method: A First-Pass Design ................................... 4 6 4
-11.3 Multiple-Winding Magnetics Design via the Kg Method ................... 4 6 5
-11.3.1 Window Area Allocation ....................................... 4 6 5
-11.3.2 Coupled Inductor Design Constraints ............................ 4 7 0
-11.3.3 First-Pass Design Procedure .................................... 4 7 2
-11.4 Examples .......................................................... 4 7 4
-11.4.1 Coupled Inductor for a Two-Output Forward Converter ............. 4 7 4
+## 目录
 
-xiv Contents
-11.4.2 CCM Flyback Transformer ..................................... 4 7 6
-11.5 Summary of Key Points .............................................. 4 8 1
-Problems ............................................................... 4 8 2
-12 Transformer Design ..................................................... 4 8 5
-12.1 Transformer Design: Basic Constraints ................................. 4 8 6
-12.1.1 Core Loss ................................................... 4 8 6
-12.1.2 Flux Density ................................................. 4 8 6
-12.1.3 Copper Loss ................................................. 4 8 7
-12.1.4 Total Power Loss vs.ΔB ....................................... 4 8 8
-12.1.5 Optimum Flux Density ........................................ 4 8 8
-12.2 A First-Pass Transformer Design Procedure ............................. 4 9 0
-12.2.1 Procedure ................................................... 4 9 0
-12.3 Examples .......................................................... 4 9 2
-12.3.1 Example 1: Single-Output Isolated ´Cuk Converter.................. 4 9 2
-12.3.2 Example 2: Multiple-Output Full-Bridge Buck Converter ............ 4 9 6
-12.4 AC Inductor Design ................................................. 4 9 9
-12.4.1 Outline of Derivation .......................................... 5 0 0
-12.4.2 First-Pass AC Inductor Design Procedure ......................... 5 0 1
-12.5 Summary .......................................................... 5 0 2
-Problems ............................................................... 5 0 2
-Part IV Advanced Modeling, Analysis, and Control Techniques
-13 Techniques of Design-Oriented Analysis: The Feedback Theorem ............ 5 0 9
-13.1 Introduction to Part IV ............................................... 5 0 9
-13.2 The Feedback Theorem .............................................. 5 1 0
-13.2.1 Basic Result ................................................. 5 1 0
-13.2.2 Derivation ................................................... 5 1 3
-13.3 Example: Op Amp PD Compensator Circuit ............................. 5 1 9
-13.4 Example: Closed-Loop Regulator ...................................... 5 2 8
-13.5 Summary of Key Points .............................................. 5 4 0
-Problems ............................................................... 5 4 0
-14 Circuit Averaging, Averaged Switch Modeling, and Simulation ............... 5 4 7
-14.1 Circuit Averaging and Averaged Switch Modeling ........................ 5 4 8
-14.1.1 Obtaining a Time-Invariant Circuit ............................... 5 5 0
-14.1.2 Circuit Averaging ............................................. 5 5 0
-14.1.3 Perturbation and Linearization .................................. 5 5 2
-14.1.4 Indirect Power ................................................ 5 5 5
-14.2 Additional Conﬁgurations of Switch Networks ........................... 5 5 8
-14.3 Simulation of Averaged Circuit Models ................................. 5 6 6
-14.3.1 Simulation Model of the Ideal CCM Averaged Switch Network ...... 5 6 8
-14.3.2 Averaged Switch Modeling and Simulation of Conduction Losses .... 5 6 9
-14.3.3 Inclusion of Switch Conduction Losses in Simulations .............. 5 7 1
-14.3.4 Example: SEPIC DC Conversion Ratio and Eﬃciency .............. 5 7 2
+1 引言 ……………………………………………… 1
+1.1 功率处理导论 ………………………………… 1
+1.2 电力电子的若干应用 …………………………… 8
+1.3 电力电子的要素 ……………………………… 10
 
-Contents xv
-14.3.5 Example: Transient Response of a Buck–Boost Converter ........... 5 7 5
-14.4 Summary of Key Points .............................................. 5 7 9
-Problems ............................................................... 5 8 0
-15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode .......... 5 8 5
-15.1 Introduction to DCM Converter Dynamics ............................... 5 8 6
-15.2 DCM Averaged Switch Model ......................................... 5 8 9
-15.3 Small-Signal AC Modeling of the DCM Switch Network .................. 6 0 0
-15.3.1 Example: Control-to-Output Frequency Response of a DCM Boost
-Converter .................................................... 6 0 7
-15.4 Combined CCM/DCM Averaged Switch Simulation Model ................ 6 0 8
-15.4.1 Example: CCM/DCM SEPIC Frequency Responses ................ 6 1 1
-15.4.2 Example: Loop Gain and Closed-Loop Responses of a Buck V oltage
-Regulator .................................................... 6 1 4
-15.5 High-Frequency Dynamics of Converters in DCM ........................ 6 1 8
-15.6 Summary of Key Points .............................................. 6 2 2
-Problems ............................................................... 6 2 2
-16 Techniques of Design-Oriented Analysis: Extra Element Theorems ........... 6 2 5
-16.1 Extra Element Theorem .............................................. 6 2 5
-16.1.1 Basic Result ................................................. 6 2 6
-16.1.2 Derivation ................................................... 6 2 8
-16.1.3 Discussion ................................................... 6 3 1
-16.2 EET Examples ...................................................... 6 3 2
-16.2.1 A Simple Transfer Function .................................... 6 3 2
-16.2.2 An Unmodeled Element ....................................... 6 3 7
-16.2.3 SEPIC Example .............................................. 6 4 0
-16.2.4 Damping the SEPIC Internal Resonances ......................... 6 4 4
-16.3 The n-Extra Element Theorem ......................................... 6 4 8
-16.3.1 Introduction to the n-EET ...................................... 6 4 9
-16.3.2 Procedure for DC-Referenced Functions .......................... 6 5 3
-16.4 n-EET Examples .................................................... 6 5 4
-16.4.1 Two-Section L–C Filter ........................................ 6 5 4
-16.4.2 Bridge-T Filter Example ....................................... 6 5 8
-16.5 Frequency Inversion ................................................. 6 6 1
-16.5.1 Example: Damped Input Filter .................................. 6 6 2
-16.5.2 Other Special Cases ........................................... 6 6 8
-Problems ............................................................... 6 6 9
-17 Input Filter Design ...................................................... 6 7 5
-17.1 Introduction ........................................................ 6 7 5
-17.1.1 Conducted EMI .............................................. 6 7 5
-17.1.2 The Input Filter Design Problem ................................ 6 7 6
-17.2 Eﬀect of an Input Filter on Converter Transfer Functions .................. 6 7 9
-17.2.1 Modiﬁed Transfer Functions .................................... 6 7 9
-17.2.2 Discussion ................................................... 6 8 2
-17.2.3 Impedance Inequalities ........................................ 6 8 4
+### 第I部分 变换器稳态
 
-xvi Contents
-17.3 Buck Converter Example ............................................. 6 8 5
-17.3.1 Eﬀect of Undamped Input Filter ................................. 6 8 6
-17.3.2 Damping the Input Filter ....................................... 6 9 1
-17.4 Design of a Damped Input Filter ....................................... 6 9 3
-17.4.1 Rf –Cb Parallel Damping ....................................... 6 9 4
-17.4.2 Rf –Lb Parallel Damping ....................................... 6 9 6
-17.4.3 Rf –Lb Series Damping ......................................... 6 9 8
-17.4.4 Cascading Filter Sections ...................................... 6 9 9
-17.4.5 Example: Two Stage Input Filter ................................ 7 0 0
-17.5 Stability Criteria .................................................... 7 0 4
-17.5.1 Modiﬁed Phase Margin ........................................ 7 0 6
-17.5.2 Closed-Loop Input Impedance .................................. 7 1 1
-17.5.3 Discussion ................................................... 7 2 0
-17.6 Summary of Key Points .............................................. 7 2 0
-Problems ............................................................... 7 2 1
-18 Current-Programmed Control ............................................ 7 2 5
-18.1 A Simple First-Order Model .......................................... 7 2 8
-18.1.1 Simple Model via Algebraic Approach: Buck–Boost Example ....... 7 2 9
-18.1.2 Averaged Switch Modeling ..................................... 7 3 3
-18.2 Oscillation for D> 0.5 ............................................... 7 3 8
-18.3 A More Accurate Model .............................................. 7 4 6
-18.3.1 Current-Programmed Controller Model ........................... 7 4 6
-18.3.2 Small-Signal Averaged Model .................................. 7 4 8
-18.4 Current-Programmed Transfer Functions ................................ 7 5 2
-18.4.1 Discussion ................................................... 7 5 4
-18.4.2 Current-Programmed Transfer Functions of the CCM Buck Converter . 755
-18.4.3 Results for Basic Converters .................................... 7 5 8
-18.4.4 Addition of an Input Filter to a Current-Programmed Converter ...... 7 6 0
-18.5 Simulation of CPM Controlled Converters ............................... 7 6 3
-18.5.1 Simulation Model for CPM Controlled Converters in CCM .......... 7 6 4
-18.5.2 Combined CCM/DCM Simulation Model ......................... 7 6 5
-18.5.3 Simulation Example: Frequency Responses of a Buck Converter with
-Current-Programmed Control .................................. 7 6 6
-18.6 V oltage Feedback Loop Around a Current-Programmed Converter .......... 7 6 9
-18.6.1 System Model ................................................ 7 6 9
-18.6.2 Design Example .............................................. 7 7 0
-18.7 High-Frequency Dynamics of Current-Programmed Converters ............ 7 7 2
-18.7.1 Sampled-Data Model .......................................... 7 7 3
-18.7.2 First-Order Approximation ..................................... 7 7 6
-18.7.3 Second-Order Approximation ................................... 7 7 8
-18.8 Discontinuous Conduction Mode ...................................... 7 7 9
-18.9 Average Current-Mode Control ........................................ 7 8 6
-18.9.1 System Model and Transfer Functions ............................ 7 8 8
-18.9.2 Design Example: ACM Controlled Boost Converter ................ 7 9 1
-18.10 Summary of Key Points .............................................. 7 9 8
-Problems ............................................................... 7 9 9
+2 稳态变换器分析原理 …………………………… 15
+2.1 引言 …………………………………………… 15
+2.2 伏-秒和电荷平衡，小纹波近似 ………………… 18
+2.3 升压变换器示例 ……………………………… 24
+2.4 Ćuk 变换器示例 ……………………………… 30
+2.5 含双极点低通滤波器的变换器输出电压纹波估计 … 35
+2.6 关键点总结 …………………………………… 37
+习题 ………………………………………………… 38
 
-Contents xvii
-19 Digital Control of Switched-Mode Power Converters ........................ 8 0 5
-19.1 Digital Control Loop ................................................. 8 0 6
-19.1.1 A/D and DPWM Quantization .................................. 8 0 7
-19.1.2 Sampling and Delays in the Control Loop ......................... 8 1 0
-19.2 Introduction to Discrete-Time Systems .................................. 8 1 2
-19.2.1 Integration in Continuous Time and in Discrete Time ............... 8 1 2
-19.2.2 z-Transform and Frequency Responses of Discrete-Time Systems..... 8 1 4
-19.2.3 Continuous Time to Discrete Time Mapping ...................... 8 1 7
-19.3 Discrete-Time Compensator Design .................................... 8 2 2
-19.3.1 Design Procedure ............................................. 8 2 3
-19.3.2 Design Example .............................................. 8 2 4
-19.4 Digital Controller Implementation ..................................... 8 2 7
-19.4.1 Discrete-Time Compensator Realization .......................... 8 2 8
-19.4.2 Quantization Eﬀects, Digital Pulse-Width Modulators and A/D
-Converters ................................................... 8 3 0
-19.5 Summary of Key Points .............................................. 8 3 8
-Problems ............................................................... 8 3 8
-Part V Modern Rectiﬁers and Power System Harmonics
-20 Power and Harmonics in Nonsinusoidal Systems ............................ 8 4 9
-20.1 Average Power ...................................................... 8 5 0
-20.2 Root-Mean-Square (RMS) Value of a Waveform ......................... 8 5 3
-20.3 Power Factor ....................................................... 8 5 4
-20.3.1 Linear Resistive Load, Nonsinusoidal V oltage ..................... 8 5 4
-20.3.2 Nonlinear Dynamic Load, Sinusoidal V oltage ..................... 8 5 5
-20.4 Power Phasors in Sinusoidal Systems ................................... 8 5 8
-20.5 Harmonic Currents in Three-Phase Systems ............................. 8 5 9
-20.5.1 Harmonic Currents in Three-Phase Four-Wire Networks ............ 8 5 9
-20.5.2 Harmonic Currents in Three-Phase Three-Wire Networks ........... 8 6 1
-20.5.3 Harmonic Current Flow in Power Factor Correction Capacitors ....... 8 6 2
-Problems ............................................................... 8 6 3
-21 Pulse-Width Modulated Rectiﬁers ........................................ 8 6 7
-21.1 Properties of the Ideal Rectiﬁer ........................................ 8 6 8
-21.2 Realization of a Near-Ideal Rectiﬁer .................................... 8 7 0
-21.2.1 CCM Boost Converter ......................................... 8 7 2
-21.2.2 Simulation Example: DCM Boost Rectiﬁer ....................... 8 7 6
-21.2.3 DCM Flyback Converter ....................................... 8 7 8
-21.3 Control of the Current Waveform ...................................... 8 8 0
-21.3.1 Average Current Control ....................................... 8 8 1
-21.3.2 Current-Programmed Control ................................... 8 8 6
-21.3.3 Critical Conduction Mode and Hysteretic Control .................. 8 8 9
-21.3.4 Nonlinear Carrier Control ...................................... 8 9 2
-21.4 Single-Phase Converter Systems Incorporating Ideal Rectiﬁers .............. 8 9 5
-21.4.1 Energy Storage ............................................... 8 9 5
+3 稳态等效电路建模、损耗和效率 ……………… 43
+3.1 直流变压器模型 ……………………………… 43
+3.2 电感铜损的纳入 ……………………………… 46
+3.3 等效电路模型的构建 …………………………… 49
+3.3.1 电感电压方程 ……………………………… 50
+3.3.2 电容电流方程 ……………………………… 50
+3.3.3 完整电路模型 ……………………………… 51
+3.3.4 效率 ……………………………………… 52
+3.4 如何获得模型的输入端口 ……………………… 54
+3.5 示例：升压变换器模型中半导体导通损耗的纳入 … 56
+3.6 关键点总结 …………………………………… 60
+习题 ………………………………………………… 61
 
-xviii Contents
-21.4.2 Modeling the Outer Low-Bandwidth Control System ............... 9 0 0
-21.5 RMS Values of Rectiﬁer Waveforms .................................... 9 0 5
-21.5.1 Boost Rectiﬁer Example ....................................... 9 0 6
-21.5.2 Comparison of Single-Phase Rectiﬁer Topologies .................. 9 0 8
-21.6 Modeling Losses and Eﬃciency in CCM High-Quality Rectiﬁers ........... 9 1 0
-21.6.1 Expression for Controller Duty Cycle d(t) ........................ 9 1 3
-21.6.2 Expression for the DC Load Current ............................. 9 1 3
-21.6.3 Solution for Converter Eﬃciencyη.............................. 9 1 5
-21.6.4 Design Example .............................................. 9 1 6
-21.7 Ideal Three-Phase Rectiﬁers ........................................... 9 1 7
-21.8 Summary of Key Points .............................................. 9 2 3
-Problems ............................................................... 9 2 5
-Part VI Resonant Converters
-22 Resonant Conversion .................................................... 9 3 3
-22.1 Sinusoidal Analysis of Resonant Converters ............................. 9 3 8
-22.1.1 Controlled Switch Network Model ............................... 9 3 8
-22.1.2 Modeling the Rectiﬁer and Capacitive Filter Networks .............. 9 4 0
-22.1.3 Resonant Tank Network ........................................ 9 4 2
-22.1.4 Solution of Converter V oltage Conversion RatioM= V/Vg .......... 9 4 3
-22.2 Examples .......................................................... 9 4 4
-22.2.1 Series Resonant DC–DC Converter Example ...................... 9 4 4
-22.2.2 Subharmonic Modes of the Series Resonant Converter .............. 9 4 6
-22.2.3 Parallel Resonant DC–DC Converter Example ..................... 9 4 7
-22.3 Soft Switching ...................................................... 9 5 1
-22.3.1 Operation of the Full Bridge Below Resonance: Zero-Current
-Switching ................................................... 9 5 1
-22.3.2 Operation of the Full-Bridge Above Resonance: Zero-V oltage
-Switching ................................................... 9 5 4
-22.4 Load-Dependent Properties of Resonant Converters ....................... 9 5 7
-22.4.1 Inverter Output Characteristics .................................. 9 5 8
-22.4.2 Dependence of Transistor Current on Load ........................ 9 6 0
-22.4.3 Dependence of the ZVS/ZCS Boundary on Load Resistance ......... 9 6 5
-22.4.4 Another Example ............................................. 9 6 7
-22.4.5 LLC Example ................................................ 9 7 2
-22.4.6 Results for Basic Tank Networks ................................ 9 7 3
-22.5 Exact Characteristics of the Series and Parallel Resonant Converters ......... 9 7 6
-22.5.1 Series Resonant Converter ...................................... 9 7 7
-22.5.2 Parallel Resonant Converter .................................... 9 8 3
-22.6 Summary of Key Points .............................................. 9 8 8
-Problems ............................................................... 9 8 8
+![源页 p.9](../assets/page-snapshots/chapter-preface/page-9.png)
 
-Contents xix
-23 Soft Switching .......................................................... 9 9 5
-23.1 Soft-Switching Mechanisms of Semiconductor Devices ................... 9 9 6
-23.1.1 Diode Switching .............................................. 9 9 6
-23.1.2 MOSFET Switching ........................................... 1000
-23.1.3 IGBT Switching .............................................. 1003
-23.2 The Zero-Current-Switching Quasi-Resonant Switch Cell .................. 1003
-23.2.1 Waveforms of the Half-Wave ZCS Quasi-Resonant Switch Cell ...... 1005
-23.2.2 The Average Terminal Waveforms ............................... 1009
-23.2.3 The Full-Wave ZCS Quasi-Resonant Switch Cell .................. 1014
-23.3 Resonant Switch Topologies .......................................... 1016
-23.3.1 The Zero-V oltage-Switching Quasi-Resonant Switch ............... 1017
-23.3.2 The Zero-V oltage-Switching Multiresonant Switch ................. 1019
-23.3.3 Quasi-Square-Wave Resonant Switches ........................... 1020
-23.4 Soft Switching in PWM Converters .................................... 1025
-23.4.1 The Zero-V oltage Transition Full-Bridge Converter................. 1025
-23.4.2 The Auxiliary Switch Approach ................................. 1029
-23.4.3 Auxiliary Resonant Commutated Pole ............................ 1031
-23.5 Summary of Key Points .............................................. 1033
-Problems ............................................................... 1034
-Appendices
-RMS Values of Commonly Observed Converter Waveforms...................... 1037
-A.1 Some Common Waveforms ........................................... 1037
-A.2 General Piecewise Waveform .......................................... 1040
-Magnetics Design Tables ..................................................... 1043
-B.1 Pot Core Data ....................................................... 1044
-B.2 EE Core Data ....................................................... 1045
-B.3 EC Core Data ....................................................... 1046
-B.4 ETD Core Data ..................................................... 1047
-B.5 PQ Core Data ....................................................... 1048
-B.6 American Wire Gauge Data ........................................... 1049
-References .................................................................. 1051
-Index ...................................................................... 1071
-```
+4 开关实现 ………………………………………… 67
+4.1 开关应用 ……………………………………… 69
+4.1.1 单象限开关 ………………………………… 69
+4.1.2 电流双向双象限开关 ……………………… 72
+4.1.3 电压双向双象限开关 ……………………… 75
+4.1.4 四象限开关 ………………………………… 76
+4.1.5 同步整流器 ………………………………… 78
+4.2 功率半导体导论 ……………………………… 79
+4.2.1 击穿电压、正向电压和开关速度 …………… 79
+4.2.2 钳位电感负载下的晶体管开关损耗 ……… 80
+4.3 功率二极管 …………………………………… 82
+4.3.1 功率二极管导论 …………………………… 82
+4.3.2 讨论：功率二极管 ………………………… 87
+4.3.3 二极管引起开关损耗的建模 ……………… 90
+4.3.4 升压变换器示例 …………………………… 94
+4.4 金属-氧化物-半导体场效应晶体管（MOSFET） … 99
+4.4.1 功率 MOSFET 导论 ………………………… 99
+4.4.2 宽禁带 FET ………………………………… 103
+4.4.3 MOSFET 栅极驱动器 ……………………… 107
+4.5 少数载流子晶体管 …………………………… 111
+4.5.1 双极结型晶体管（BJT） …………………… 111
+4.5.2 绝缘栅双极晶体管（IGBT） ………………… 115
+4.5.3 晶闸管（SCR、GTO） ……………………… 119
+4.6 开关损耗的其他来源 ………………………… 122
+4.6.1 器件电容及漏感、封装和杂散电感 ……… 122
+4.6.2 其他元件中引起开关损耗 ………………… 124
+4.6.3 效率与开关频率 …………………………… 126
+4.7 关键点总结 …………………………………… 126
+习题 ………………………………………………… 128
+
+5 断续导通模式 …………………………………… 135
+5.1 断续导通模式的起源和模式边界 …………… 135
+5.2 变换比 $M(D, K)$ 的分析 ……………………… 140
+5.3 升压变换器示例 ……………………………… 145
+5.4 结果和关键点总结 …………………………… 152
+习题 ………………………………………………… 154
+
+6 变换器电路 ……………………………………… 163
+6.1 电路操作 ……………………………………… 164
+6.1.1 源和负载的倒置 …………………………… 164
+6.1.2 变换器的级联连接 ………………………… 166
+6.1.3 三端单元的旋转 …………………………… 169
+6.1.4 负载的差分连接 …………………………… 170
+6.2 变换器简表 …………………………………… 174
+6.3 变压器隔离 …………………………………… 178
+6.3.1 全桥和半桥隔离降压变换器 ……………… 181
+6.3.2 正激变换器 ………………………………… 187
+
+![源页 p.10](../assets/page-snapshots/chapter-preface/page-10.png)
+
+6.3.3 推挽隔离降压变换器 ……………………… 192
+6.3.4 反激变换器 ………………………………… 194
+6.3.5 升压派生隔离变换器 ……………………… 198
+6.3.6 SEPIC 和 Ćuk 变换器的隔离版本 ………… 201
+6.4 关键点总结 …………………………………… 203
+习题 ………………………………………………… 205
+
+### 第II部分 变换器动态和控制
+
+7 交流等效电路建模 ……………………………… 215
+7.1 引言 …………………………………………… 215
+7.2 基本交流建模方法 …………………………… 220
+7.2.1 电感和电容波形的平均 …………………… 221
+7.2.2 平均电感电压和小纹波近似 ……………… 222
+7.2.3 平均近似的讨论 …………………………… 223
+7.2.4 电容波形的平均 …………………………… 225
+7.2.5 平均输入电流 ……………………………… 226
+7.2.6 扰动和线性化 ……………………………… 227
+7.2.7 小信号等效电路模型的构建 ……………… 230
+7.2.8 扰动和线性化步骤的讨论 ………………… 232
+7.2.9 几种基本变换器的结果 …………………… 233
+7.2.10 示例：非理想反激变换器 ………………… 234
+7.3 脉宽调制器的建模 …………………………… 242
+7.4 规范电路模型 ………………………………… 245
+7.4.1 规范电路模型的展开 ……………………… 245
+7.4.2 示例：升降压变换器模型化为规范形式 … 248
+7.4.3 一些常见变换器的规范电路参数值 …… 250
+7.5 状态空间平均 ………………………………… 251
+7.5.1 网络的状态方程 …………………………… 252
+7.5.2 基本状态空间平均模型 …………………… 255
+7.5.3 状态空间平均结果的讨论 ………………… 256
+7.5.4 示例：非理想升降压变换器的状态空间平均 … 259
+7.5.5 示例：含 ESR 升压变换器的状态空间平均 … 264
+7.6 关键点总结 …………………………………… 271
+习题 ………………………………………………… 272
+
+8 变换器传递函数 ………………………………… 277
+8.1 波特图回顾 …………………………………… 279
+8.1.1 单极点响应 ………………………………… 281
+8.1.2 单零点响应 ………………………………… 287
+8.1.3 右半平面零点 ……………………………… 288
+8.1.4 频率反演 …………………………………… 289
+8.1.5 组合 ……………………………………… 290
+8.1.6 二阶极点响应：谐振 ……………………… 294
+8.1.7 低 $Q$ 近似 ………………………………… 298
+
+![源页 p.11](../assets/page-snapshots/chapter-preface/page-11.png)
+
+8.1.8 高 $Q$ 近似 ………………………………… 301
+8.1.9 任意次多项式的近似根 …………………… 304
+8.2 变换器传递函数的分析 ……………………… 309
+8.2.1 示例：升降压变换器的传递函数 ………… 309
+8.2.2 一些基本 CCM 变换器的传递函数 ……… 315
+8.2.3 变换器中 RHP 零点的物理起源 …………… 316
+8.3 阻抗和传递函数的图解构造 …………………… 317
+8.3.1 串联阻抗：渐近线相加 ……………………… 318
+8.3.2 串联谐振电路示例 ………………………… 320
+8.3.3 并联阻抗：渐近线反相加 …………………… 322
+8.3.4 并联谐振电路示例 ………………………… 323
+8.3.5 分压传递函数：渐近线相除 ………………… 325
+8.4 变换器传递函数的图解构造 …………………… 327
+8.5 交流传递函数和阻抗的测量 …………………… 332
+8.6 关键点总结 …………………………………… 336
+习题 ………………………………………………… 337
+
+9 控制器设计 ……………………………………… 347
+9.1 引言 …………………………………………… 347
+9.2 负反馈对网络传递函数的影响 ………………… 350
+9.2.1 反馈减小从扰动到输出的传递函数 …… 351
+9.2.2 反馈使从参考输入到输出的传递函数对环路前向增益变化不敏感 … 353
+9.3 $1/(1+T)$ 和 $T/(1+T)$ 的构造 ………………… 353
+9.4 稳定性 ………………………………………… 358
+9.4.1 相位裕度测试 ……………………………… 359
+9.4.2 奈奎斯特稳定性判据 ……………………… 360
+9.4.3 相位裕度与闭环阻尼因子的关系 ………… 370
+9.4.4 瞬态响应与阻尼因子 ……………………… 373
+9.4.5 负载阶跃响应与阻尼因子 ………………… 375
+9.5 调节器设计 …………………………………… 376
+9.5.1 超前（PD）补偿器 ………………………… 377
+9.5.2 滞后（PI）补偿器 …………………………… 380
+9.5.3 组合（PID）补偿器 ………………………… 382
+9.5.4 设计示例 …………………………………… 383
+9.6 环路增益的测量 ……………………………… 392
+9.6.1 电压注入 …………………………………… 394
+9.6.2 电流注入 …………………………………… 396
+9.6.3 不稳定系统的测量 ………………………… 397
+9.7 关键点总结 …………………………………… 398
+习题 ………………………………………………… 399
+
+![源页 p.12](../assets/page-snapshots/chapter-preface/page-12.png)
+
+### 第III部分 磁学
+
+10 基本磁学理论 …………………………………… 409
+10.1 基本磁学回顾 ………………………………… 409
+10.1.1 基本关系 ………………………………… 409
+10.1.2 磁路 ……………………………………… 415
+10.2 变压器建模 …………………………………… 418
+10.2.1 理想变压器 ……………………………… 419
+10.2.2 励磁电感 ………………………………… 420
+10.2.3 漏感 ……………………………………… 421
+10.3 磁性器件中的损耗机制 ……………………… 423
+10.3.1 磁芯损耗 ………………………………… 423
+10.3.2 低频铜损 ………………………………… 426
+10.4 绕组导体中的涡流 …………………………… 426
+10.4.1 趋肤和邻近效应导论 ……………………… 426
+10.4.2 绕组中的漏磁通 ………………………… 431
+10.4.3 箔绕组和层 ……………………………… 432
+10.4.4 一层中的功率损耗 ……………………… 434
+10.4.5 示例：变压器绕组中的功率损耗 ……… 436
+10.4.6 绕组交错 ………………………………… 438
+10.4.7 PWM 波形谐波 …………………………… 441
+10.5 几种磁性器件、其 B–H 回线和磁芯与铜损 … 444
+10.5.1 滤波电感 ………………………………… 444
+10.5.2 交流电感 ………………………………… 446
+10.5.3 变压器 …………………………………… 447
+10.5.4 耦合电感 ………………………………… 448
+10.5.5 反激变压器 ……………………………… 449
+10.6 关键点总结 …………………………………… 450
+习题 ………………………………………………… 451
+
+11 电感设计 ………………………………………… 459
+11.1 滤波电感设计约束 …………………………… 459
+11.1.1 最大磁通密度 …………………………… 461
+11.1.2 电感 ……………………………………… 462
+11.1.3 绕组面积 ………………………………… 462
+11.1.4 绕组电阻 ………………………………… 463
+11.1.5 磁芯几何常数 $K_g$ ………………………… 463
+11.2 $K_g$ 法：初 pass 设计 ………………………… 464
+11.3 通过 $K_g$ 法的多绕组磁学设计 ……………… 465
+11.3.1 窗口面积分配 …………………………… 465
+11.3.2 耦合电感设计约束 ……………………… 470
+11.3.3 初 pass 设计程序 ………………………… 472
+11.4 示例 ………………………………………… 474
+11.4.1 双输出正激变换器的耦合电感 ………… 474
+
+![源页 p.13](../assets/page-snapshots/chapter-preface/page-13.png)
+
+11.4.2 CCM 反激变压器 ………………………… 476
+11.5 关键点总结 …………………………………… 481
+习题 ………………………………………………… 482
+
+12 变压器设计 ……………………………………… 485
+12.1 变压器设计：基本约束 ……………………… 486
+12.1.1 磁芯损耗 ………………………………… 486
+12.1.2 磁通密度 ………………………………… 486
+12.1.3 铜损 ……………………………………… 487
+12.1.4 总功率损耗与 $\Delta B$ ……………………… 488
+12.1.5 最优磁通密度 …………………………… 488
+12.2 初 pass 变压器设计程序 ……………………… 490
+12.2.1 程序 ……………………………………… 490
+12.3 示例 ………………………………………… 492
+12.3.1 示例1：单输出隔离 Ćuk 变换器 ………… 492
+12.3.2 示例2：多输出全桥降压变换器 ………… 496
+12.4 交流电感设计 ………………………………… 499
+12.4.1 推导提纲 ………………………………… 500
+12.4.2 初 pass 交流电感设计程序 ……………… 501
+12.5 总结 ………………………………………… 502
+习题 ………………………………………………… 502
+
+### 第IV部分 高级建模、分析和控制技术
+
+13 面向设计的分析技术：反馈定理 ……………… 509
+13.1 第IV部分引言 ………………………………… 509
+13.2 反馈定理 ……………………………………… 510
+13.2.1 基本结果 ………………………………… 510
+13.2.2 推导 ……………………………………… 513
+13.3 示例：运放 PD 补偿器电路 …………………… 519
+13.4 示例：闭环调节器 …………………………… 528
+13.5 关键点总结 …………………………………… 540
+习题 ………………………………………………… 540
+
+14 电路平均、平均开关建模和仿真 ……………… 547
+14.1 电路平均和平均开关建模 …………………… 548
+14.1.1 获得时不变电路 …………………………… 550
+14.1.2 电路平均 ………………………………… 550
+14.1.3 扰动和线性化 …………………………… 552
+14.1.4 间接功率 ………………………………… 555
+14.2 开关网络的其他配置 ………………………… 558
+14.3 平均电路模型的仿真 ………………………… 566
+14.3.1 理想 CCM 平均开关网络的仿真模型 …… 568
+14.3.2 导通损耗的平均开关建模和仿真 ……… 569
+14.3.3 仿真中开关导通损耗的纳入 …………… 571
+14.3.4 示例：SEPIC 直流变换比和效率 ……… 572
+
+![源页 p.14](../assets/page-snapshots/chapter-preface/page-14.png)
+
+14.3.5 示例：升降压变换器的瞬态响应 ……… 575
+14.4 关键点总结 …………………………………… 579
+习题 ………………………………………………… 580
+
+15 断续导通模式的等效电路建模 ………………… 585
+15.1 DCM 变换器动态导论 ………………………… 586
+15.2 DCM 平均开关模型 …………………………… 589
+15.3 DCM 开关网络的小信号交流建模 …………… 600
+15.3.1 示例：DCM 升压变换器的控制-输出频率响应 … 607
+15.4 组合 CCM/DCM 平均开关仿真模型 ………… 608
+15.4.1 示例：CCM/DCM SEPIC 频率响应 ……… 611
+15.4.2 示例：降压电压调节器的环路增益和闭环响应 … 614
+15.5 DCM 变换器的高频动态 ……………………… 618
+15.6 关键点总结 …………………………………… 622
+习题 ………………………………………………… 622
+
+16 面向设计的分析技术：额外元件定理 ………… 625
+16.1 额外元件定理 ………………………………… 625
+16.1.1 基本结果 ………………………………… 626
+16.1.2 推导 ……………………………………… 628
+16.1.3 讨论 ……………………………………… 631
+16.2 EET 示例 ……………………………………… 632
+16.2.1 简单传递函数 …………………………… 632
+16.2.2 未建模元件 ……………………………… 637
+16.2.3 SEPIC 示例 ………………………………… 640
+16.2.4 SEPIC 内部谐振的阻尼 …………………… 644
+16.3 n 额外元件定理 ……………………………… 648
+16.3.1 n-EET 导论 ………………………………… 649
+16.3.2 直流参考函数的程序 …………………… 653
+16.4 n-EET 示例 …………………………………… 654
+16.4.1 两节 L–C 滤波器 ………………………… 654
+16.4.2 桥-T 滤波器示例 ………………………… 658
+16.5 频率反演 ……………………………………… 661
+16.5.1 示例：阻尼输入滤波器 ………………… 662
+16.5.2 其他特殊情况 …………………………… 668
+习题 ………………………………………………… 669
+
+17 输入滤波器设计 ………………………………… 675
+17.1 引言 …………………………………………… 675
+17.1.1 传导 EMI ………………………………… 675
+17.1.2 输入滤波器设计问题 ……………………… 676
+17.2 输入滤波器对变换器传递函数的影响 ……… 679
+17.2.1 修正传递函数 …………………………… 679
+17.2.2 讨论 ……………………………………… 682
+17.2.3 阻抗不等式 ……………………………… 684
+
+![源页 p.15](../assets/page-snapshots/chapter-preface/page-15.png)
+
+17.3 降压变换器示例 ……………………………… 685
+17.3.1 无阻尼输入滤波器的影响 ………………… 686
+17.3.2 阻尼输入滤波器 …………………………… 691
+17.4 阻尼输入滤波器的设计 ……………………… 693
+17.4.1 $R_f$–$C_b$ 并联阻尼 ………………………… 694
+17.4.2 $R_f$–$L_b$ 并联阻尼 ………………………… 696
+17.4.3 $R_f$–$L_b$ 串联阻尼 ………………………… 698
+17.4.4 级联滤波器节 …………………………… 699
+17.4.5 示例：两级输入滤波器 ………………… 700
+17.5 稳定性判据 …………………………………… 704
+17.5.1 修正相位裕度 …………………………… 706
+17.5.2 闭环输入阻抗 …………………………… 711
+17.5.3 讨论 ……………………………………… 720
+17.6 关键点总结 …………………………………… 720
+习题 ………………………………………………… 721
+
+18 电流编程控制 …………………………………… 725
+18.1 简单一阶模型 ………………………………… 728
+18.1.1 代数法的简单模型：升降压示例 ……… 729
+18.1.2 平均开关建模 …………………………… 733
+18.2 $D > 0.5$ 时的振荡 …………………………… 738
+18.3 更精确的模型 ………………………………… 746
+18.3.1 电流编程控制器模型 …………………… 746
+18.3.2 小信号平均模型 ………………………… 748
+18.4 电流编程传递函数 …………………………… 752
+18.4.1 讨论 ……………………………………… 754
+18.4.2 CCM 降压变换器的电流编程传递函数 …… 755
+18.4.3 基本变换器的结果 ……………………… 758
+18.4.4 输入滤波器加入电流编程变换器 ……… 760
+18.5 CPM 控制变换器的仿真 ……………………… 763
+18.5.1 CCM 中 CPM 控制变换器的仿真模型 …… 764
+18.5.2 组合 CCM/DCM 仿真模型 ………………… 765
+18.5.3 仿真示例：电流编程控制降压变换器的频率响应 … 766
+18.6 电流编程变换器周围的电压反馈环 ………… 769
+18.6.1 系统模型 ………………………………… 769
+18.6.2 设计示例 ………………………………… 770
+18.7 电流编程变换器的高频动态 ………………… 772
+18.7.1 采样数据模型 …………………………… 773
+18.7.2 一阶近似 ………………………………… 776
+18.7.3 二阶近似 ………………………………… 778
+18.8 断续导通模式 ………………………………… 779
+18.9 平均电流模式控制 …………………………… 786
+18.9.1 系统模型和传递函数 …………………… 788
+18.9.2 设计示例：ACM 控制升压变换器 ……… 791
+18.10 关键点总结 …………………………………… 798
+习题 ………………………………………………… 799
+
+![源页 p.16](../assets/page-snapshots/chapter-preface/page-16.png)
+
+19 开关模式功率变换器的数字控制 ……………… 805
+19.1 数字控制环 …………………………………… 806
+19.1.1 A/D 和 DPWM 量化 ……………………… 807
+19.1.2 控制环中的采样和延迟 ………………… 810
+19.2 离散时间系统导论 …………………………… 812
+19.2.1 连续时间和离散时间中的积分 ………… 812
+19.2.2 z 变换和离散时间系统的频率响应 …… 814
+19.2.3 连续时间到离散时间映射 ……………… 817
+19.3 离散时间补偿器设计 ………………………… 822
+19.3.1 设计程序 ………………………………… 823
+19.3.2 设计示例 ………………………………… 824
+19.4 数字控制器实现 ……………………………… 827
+19.4.1 离散时间补偿器实现 …………………… 828
+19.4.2 量化效应、数字脉宽调制器和 A/D 变换器 … 830
+19.5 关键点总结 …………………………………… 838
+习题 ………………………………………………… 838
+
+### 第V部分 现代整流器和电力系统谐波
+
+20 非正弦系统中的功率和谐波 …………………… 849
+20.1 平均功率 ……………………………………… 850
+20.2 波形的方均根（RMS）值 ……………………… 853
+20.3 功率因数 ……………………………………… 854
+20.3.1 线性电阻负载、非正弦电压 ……………… 854
+20.3.2 非线性动态负载、正弦电压 ……………… 855
+20.4 正弦系统中的功率相量 ……………………… 858
+20.5 三相系统中的谐波电流 ……………………… 859
+20.5.1 三相四线网络中的谐波电流 …………… 859
+20.5.2 三相三线网络中的谐波电流 …………… 861
+20.5.3 功率因数校正电容中的谐波电流流 ……… 862
+习题 ………………………………………………… 863
+
+21 脉宽调制整流器 ………………………………… 867
+21.1 理想整流器的性质 …………………………… 868
+21.2 近似理想整流器的实现 ……………………… 870
+21.2.1 CCM 升压变换器 …………………………… 872
+21.2.2 仿真示例：DCM 升压整流器 ……………… 876
+21.2.3 DCM 反激变换器 …………………………… 878
+21.3 电流波形的控制 ……………………………… 880
+21.3.1 平均电流控制 …………………………… 881
+21.3.2 电流编程控制 …………………………… 886
+21.3.3 临界导通模式和滞环控制 ……………… 889
+21.3.4 非线性载波控制 ………………………… 892
+21.4 含理想整流器的单相变换器系统 …………… 895
+21.4.1 能量存储 ………………………………… 895
+
+![源页 p.17](../assets/page-snapshots/chapter-preface/page-17.png)
+
+21.4.2 外环低带宽控制系统的建模 …………… 900
+21.5 整流器波形的 RMS 值 ………………………… 905
+21.5.1 升压整流器示例 ………………………… 906
+21.5.2 单相整流器拓扑的比较 ………………… 908
+21.6 CCM 高质量整流器中损耗和效率的建模 …… 910
+21.6.1 控制器占空比 $d(t)$ 的表达式 …………… 913
+21.6.2 直流负载电流的表达式 ………………… 913
+21.6.3 变换器效率 $\eta$ 的求解 …………………… 915
+21.6.4 设计示例 ………………………………… 916
+21.7 理想三相整流器 ……………………………… 917
+21.8 关键点总结 …………………………………… 923
+习题 ………………………………………………… 925
+
+### 第VI部分 谐振变换器
+
+22 谐振变换 ………………………………………… 933
+22.1 谐振变换器的正弦分析 ……………………… 938
+22.1.1 受控开关网络模型 ……………………… 938
+22.1.2 整流器和容性滤波网络的建模 ………… 940
+22.1.3 谐振槽网络 ……………………………… 942
+22.1.4 变换器电压变换比 $M = V/V_g$ 的求解 …… 943
+22.2 示例 ………………………………………… 944
+22.2.1 串联谐振直流-直流变换器示例 ………… 944
+22.2.2 串联谐振变换器的子谐波模式 …………… 946
+22.2.3 并联谐振直流-直流变换器示例 ………… 947
+22.3 软开关 ………………………………………… 951
+22.3.1 全桥低于谐振的工作：零电流开关 …… 951
+22.3.2 全桥高于谐振的工作：零电压开关 …… 954
+22.4 谐振变换器的负载依赖性质 ………………… 957
+22.4.1 逆变器输出特性 ………………………… 958
+22.4.2 晶体管电流对负载的依赖 ……………… 960
+22.4.3 ZVS/ZCS 边界对负载电阻的依赖 …… 965
+22.4.4 另一示例 ………………………………… 967
+22.4.5 LLC 示例 ………………………………… 972
+22.4.6 基本槽网络的结果 ……………………… 973
+22.5 串联和并联谐振变换器的精确特性 ………… 976
+22.5.1 串联谐振变换器 ………………………… 977
+22.5.2 并联谐振变换器 ………………………… 983
+22.6 关键点总结 …………………………………… 988
+习题 ………………………………………………… 988
+
+![源页 p.18](../assets/page-snapshots/chapter-preface/page-18.png)
+
+23 软开关 …………………………………………… 995
+23.1 半导体器件的软开关机制 …………………… 996
+23.1.1 二极管开关 ……………………………… 996
+23.1.2 MOSFET 开关 …………………………… 1000
+23.1.3 IGBT 开关 ………………………………… 1003
+23.2 零电流开关准谐振开关单元 ………………… 1003
+23.2.1 半波 ZCS 准谐振开关单元的波形 ……… 1005
+23.2.2 平均端子波形 …………………………… 1009
+23.2.3 全波 ZCS 准谐振开关单元 ……………… 1014
+23.3 谐振开关拓扑 ………………………………… 1016
+23.3.1 零电压开关准谐振开关 ………………… 1017
+23.3.2 零电压开关多谐振开关 ………………… 1019
+23.3.3 准方波谐振开关 ………………………… 1020
+23.4 PWM 变换器中的软开关 ……………………… 1025
+23.4.1 零电压过渡全桥变换器 ………………… 1025
+23.4.2 辅助开关方法 …………………………… 1029
+23.4.3 辅助谐振换流极 ………………………… 1031
+23.5 关键点总结 …………………………………… 1033
+习题 ………………………………………………… 1034
+
+### 附录
+
+常用观察到的变换器波形的 RMS 值 ……………… 1037
+A.1 一些常见波形 ………………………………… 1037
+A.2 通用分段波形 ………………………………… 1040
+
+磁学设计表 ………………………………………… 1043
+B.1 罐形磁芯数据 ………………………………… 1044
+B.2 EE 磁芯数据 ………………………………… 1045
+B.3 EC 磁芯数据 ………………………………… 1046
+B.4 ETD 磁芯数据 ………………………………… 1047
+B.5 PQ 磁芯数据 ………………………………… 1048
+B.6 美国线规数据 ………………………………… 1049
+
+参考文献 …………………………………………… 1051
+索引 ………………………………………………… 1071

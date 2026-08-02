@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第15章part 2 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode"
+title: "第15章 断续导通模式的等效电路建模（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1012 +18,375 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第15章part 2 - 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
+# 第15章 断续导通模式的等效电路建模（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 609-628  
-> Chunk ID: `chapter-15-part-2`
+> 源页：609–628
+> 本部分续接 15.3，涵盖 15.4 CCM/DCM 组合平均开关仿真模型、15.5 DCM 高频动态、15.6 关键要点小结和习题 15.1–15.7。
 
-## 主干提取
+## 15.3 DCM 开关网络的小信号交流建模（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.609](../assets/page-snapshots/chapter-15/page-609.png)
 
-## 术语表
+图15.20 忽略电感 $L$ 动态所得低频交流模型。用表15.2 适当参数可建模降压、升压或升降压变换器
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+电感 $L$ 的高频动态可疑。DCM 变换器高频动态的起源、分析和更精确预测在 15.5 节讨论。
 
-## 中文翻译
+确定低频小信号传递函数的简单近似方法是在图15.19 等效电路中简单短路 $L$ 忽略电感高频动态。简化的降一阶模型如图15.20所示。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+小信号开关模型可用于建模其他 DCM 变换器，只需分别用二端口模型图15.17b 的端口 1 和 2 替代晶体管和二极管。在降压和升压变换器分析中给出更方便结果的替代方法是分别如图15.21a、b 所示定义开关网络。这些开关网络也可用图15.21c 的二端口小信号等效电路建模；但须重新导出参数 $r_1$、$j_1$、$g_1$ 等的表达式。这些表达式再次通过线性化平均开关网络端子电流方程求得。
 
-## 英文原文
+表15.2 列出图15.21a 降压开关网络（中行）和图15.21b 升压开关网络（底行）的小信号参数。将小信号二端口模型插入 DCM 降压和升压变换器，同时短路 $L$ 忽略电感高频动态，得图15.20 所示相同等效电路。模型参数由表15.2 给出。
 
-```text
-15.3 Small-Signal AC Modeling of the DCM Switch Network 605
-+
-+ CR
-DCM switch network small-signal ac model
-r1 j1dg 1v2 g2v1 j2dr 2 vvˆ ˆ ˆ ˆ ˆ ˆg
-Fig. 15.20 Low-frequency ac model obtained by neglecting inductor L dynamics. The buck, boost, or
-buck–boost converters can be modeled, by employing the appropriate parameters from Table15.2
-inductor L are of questionable validity. The origins, analysis, and more accurate predictions of
-high-frequency dynamics of DCM converters are discussed in Sect. 15.5.
-A simple approximate way to determine the low-frequency small-signal transfer functions is
-to neglect the inductor high-frequency dynamics by simply shorting L in the equivalent circuit
-of Fig. 15.19. The simpliﬁed, ﬁrst-order model is shown in Fig. 15.20.
-The small-signal switch model can be employed to model other DCM converters, by simply
-replacing the transistor and diode with ports 1 and 2, respectively, of the two-port model of
-Fig. 15.17b. An alternative approach, which yields more convenient results in the analysis of
-the buck and boost converters, is to deﬁne the switch network as illustrated in Figs. 15.21a,b,
-respectively. These switch networks can also be modeled using the two-port small-signal equiv-
-alent circuit of Fig.15.21c; however, new expressions for the parametersr1, j1, g1, etc., must be
-derived. These expressions are again found by linearizing the equations of the averaged switch
-network terminal currents.
-Table15.2 lists the small-signal parameters for the buck switch network of Fig.15.21a( m i d -
-dle row) and for the boost switch network of Fig. 15.21b (bottom row). Insertion of the small-
-signal two-port model into the DCM buck and boost converters, together with shorting L to
-neglect the inductor high-frequency dynamics, leads to the same equivalent circuits shown in
-Fig. 15.20. The model parameters are given in Table15.2.
-The control-to-output transfer function G
-vd(s) is found by letting ˆvg= 0i nF i g .15.20. Solu-
-tion for ˆv then leads to
-Gvd(s)= ˆv
-ˆd
-⏐⏐⏐
-⏐
-⏐
-ˆvg=0
-= Gd0⎦
-1+ s
-ωp
-) (15.57)
-with
-Gd0 = j2(R∥r2)
-ωp = 1
-(R∥r2)C (15.58)
-The line-to-output transfer function Gvg(s) is found by letting ˆd= 0i nF i g .15.20. One then
-obtains
-Gvg(s)= ˆv
-ˆvg
-⏐⏐⏐⏐
-⏐
-⏐
-ˆd=0
-= Gg0
-⎦
-1+ s
-ωp
-) (15.59)
+![源页 p.610](../assets/page-snapshots/chapter-15/page-610.png)
 
-606 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-(a)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-(b)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-(c)
-+ +
-vˆ ˆ ˆ1
-i1
-r1 j1d g1v ˆ
-ˆ
-2 g2v
-ˆ
-ˆ ˆ1 j2dr 2 v2
-i2
-Fig. 15.21 A convenient way to model the switch networks of DCM buck and boost converters: ( a)
-deﬁned terminal quantities of the DCM buck switch network, (b) deﬁned terminal quantities of the boost
-switch network, (c) two-port small-signal ac model. The model parameters are given in Table15.2
-with
-Gg0= g2(R∥r2)= M (15.60)
-Expressions for Gd0, Gg0, and ωp are listed in Table15.3, for the DCM buck, boost, and buck–
-boost converters with resistive loads [15, 135].
-The ac modeling approach described in this section is both general and useful. The transistor
-and diode of a DCM converter can be simply replaced by the two-port network of Fig. 15.17b,
-leading to the small-signal ac model. Alternatively, the switch network can be deﬁned as in
-Fig. 15.21a or b, and then modeled by the same two-port network, Fig.15.21c. The small-signal
-converter model can then be solved via conventional circuit analysis techniques, to obtain the
-small-signal transfer functions of the converter.
+图15.21 DCM 降压和升压变换器开关网络建模的方便方式：(a) DCM 降压开关网络定义的端子量；(b) 升压开关网络定义的端子量；(c) 二端口小信号交流模型。模型参数由表15.2 给出
 
-15.3 Small-Signal AC Modeling of the DCM Switch Network 607
-Table 15.3 Salient features of DCM converter small-signal transfer functions
-Converter Gd0 Gg0 ωp
-Buck 2V
-D
-1−M
-2−M M 2−M
-(1−M)RC
-Boost 2V
-D
-M−1
-2M−1 M 2M−1
-(M−1)RC
-Buck–boost V
-D M 2
-RC
-15.3.1 Example: Control-to-Output Frequency Response of a DCM Boost Converter
-As a simple numerical example, let us ﬁnd the small-signal control-to-output transfer function
-of a DCM boost converter having the following element and parameter values:
-R= 12Ω
-L= 5 μH (15.61)
-C= 470 μF
-fs= 100 kHz
-The output voltage is regulated to beV= 36 V . It is desired to determineGvd(s) at the operating
-point where the load current is I= 3 A and the dc input voltage is Vg= 24 V .
-The eﬀective resistance Re(D) is found by solution of the dc equivalent circuit of Fig.15.16b.
-Since the load current I and the input and output voltagesV and Vg are known, the power source
-value P is
-P= I(V−Vg)= (3 A)(36 V−24 V)= 36 W (15.62)
-The eﬀective resistance is therefore
-Re=
-V2
-g
-P = (24 V)2
-36 W = 16Ω (15.63)
-The steady-state duty cycle D can now be found using Eq. (15.37):
-D=
-√
-2L
-ReTs
-=
-√
-2(5 μH)
-(16Ω)(10 μs)= 0.25 (15.64)
-The expressions given in Table15.3 for Gd0 andωp of the boost converter can now be evaluated:
-Gd0= 2V
-D
-M−1
-2M−1= 2(36 V)
-(0.25)
-⎦(36 V)
-(24 V)−1
-)
-⎦
-2(36 V)
-(24 V)−1
-)= 72 V⇒37 dBV
-fp= ωp
-2π= 2M−1
-2π(M−1)RC=
-⎦
-2(36 V)
-(24 V)−1
-)
-2π
-⎦(36 V)
-(24 V)−1
-)
-(12Ω)(470μF)
-= 112 Hz (15.65)
+令 $\hat{v}_g = 0$ 求控制-输出传递函数 $G_{vd}(s)$。解 $\hat{v}$ 得
 
-608 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-fp
-112 Hz
-Gd0 37 dBV
-f
-0
-0
-⏐⏐⏐ ⏐ Gvd
-⏐⏐⏐ ⏐ Gvd
-Gvd
-0 dBV
-20 dBV
-40 dBV
-60 dBV
-Gvd
-10 Hz 100 Hz 1 kHz 10 kHz 100 kHz
-Fig. 15.22 Magnitude and phase of the control-to-output transfer function, DCM boost example. Solid
-lines: function and its asymptotes, approximate single-pole response predicted by the model of Fig. 15.20.
-Dashed lines: more accurate response that includes high-frequency inductor dynamics
-A Bode diagram of the control-to-output transfer function is constructed in Fig. 15.22.T h e
-solid lines illustrate the magnitude and phase predicted by the approximate single-pole model
-of Fig. 15.20. The dashed lines are the predictions of the more accurate model discussed in
-Sect. 15.5, which include a second pole at f2= 64 kHz and a RHP zero at fz= 127 kHz, arising
-from the inductor dynamics. Since the switching frequency is 100 kHz, the accuracy of the
-model at these frequencies cannot be guaranteed. Nonetheless, in practice, the lagging phase
-asymptotes arising from the inductor dynamics can be observed beginning at f2/10= 6.4k H z .
-15.4 Combined CCM/DCM Averaged Switch Simulation Model
-All converters containing a diode rectiﬁer operate in discontinuous conduction mode (DCM)
-if the load current is suﬃciently low. In some cases, converters are purposely designed to op-
-erate in DCM. It is therefore of interest to develop averaged models suitable for simulation of
-converters that may operate in either CCM or DCM.
-Figure 15.23 illustrates the general two-switch network, and the corresponding large-signal
-averaged models in CCM and DCM. The CCM averaged switch model, which is derived in
-Sect. 14.1, is an ideal transformer with d′:d turns ratio. In DCM, the large-signal averaged
-switch model is a loss-free resistor, as derived in Sect. 15.2. Our objective is to construct a
-combined CCM/DCM averaged switch model that reduces to the model of Fig. 15.23ao rt o
-the model of Fig. 15.23c depending on the operating mode of the converter. Let us deﬁne an
-eﬀective switch conversion ratioμ(t), so that the averaged switch model in both modes has the
-same form as in CCM, as shown in Fig.15.24. If the converter operates in CCM, then the switch
-conversion ratioμ(t) is equal to the switch duty cycle d(t),
-μ= d (15.66)
+$$G_{vd}(s) = \left.\frac{\hat{v}}{\hat{d}}\right|_{\hat{v}_g=0} = \frac{G_{d0}}{1+\dfrac{s}{\omega_p}} \tag{15.57}$$
 
-15.4 Combined CCM/DCM Averaged Switch Simulation Model 609
-(a)
-+
-v2(t)
-+
-v1(t)
-i1(t) i2(t)
-(b) i2(t) Ts
-+
-–
-v2(t) Tsv1(t) Ts
-i1(t) Ts
-+
-–
-CCM/DCM
-averaged switch model
-1 – μ : μ
-(c) i2(t) Ts
-+
-–
-v2(t) Tsv1(t) Ts
-i1(t) Ts
-Re(d1)
-+
-–
-p(t) Ts
-DCM
-averaged switch model
-Fig. 15.23 Summary of averaged switch modeling: (a) general two-switch network, (b) averaged switch
-model in CCM, and (c) averaged switch model in DCM
-If the converter operates in DCM, then the eﬀective switch conversion ratio can be computed so
-that the terminal characteristics of the averaged switch model of Fig. 15.24 match the terminal
-characteristics of the loss-free resistor model of Fig.15.23c. Matching the port 1 characteristics
-gives
-⟨v1(t)⟩Ts = 1−μ
-μ ⟨v2(t)⟩Ts = Re⟨i1(t)⟩Ts (15.67)
-which can be solved for the switch conversion ratioμ,
-μ= 1
-1+ Re⟨i1(t)⟩Ts
-⟨v2(t)⟩Ts
-(15.68)
+其中
 
-610 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-i2(t) Ts
-+
-v2(t) Tsv1(t) Ts
-i1(t) Ts
-+
-CCM/DCM
-averaged switch model
-1 μ : μ
-Fig. 15.24 A general averaged switch model using the equivalent switch conversion ratioμ
-It can be veriﬁed that matching the port 2 characteristics of the models in Figs.15.23c and 15.24
-gives exactly the same result for the eﬀective switch conversion ratio in DCM.
-The switch conversion ratioμ(t) can be considered a generalization of the duty cycle d(t)
-of CCM switch networks. Based on this approach, models and results developed for converters
-in CCM can be used not only for DCM but also for other operating modes or even for other
-converter conﬁgurations by simply replacing the switch duty cycle d(t) with the appropriate
-switch conversion ratioμ(t)[ 71–74]. For example, if M(d) is the conversion ratio in CCM, then
-M(μ), withμgiven by Eq. (15.68), is the conversion ratio in DCM. The switch conversion ratio
-in DCM depends on the averaged terminal voltage and current, as well as the switch duty cycle
-d through the eﬀective resistance R
-e = 2L/d2Ts. If the converter is completely unloaded, then
-the average transistor current⟨i1(t)⟩Ts is zero, and the DCM switch conversion ratio becomes
-μ= 1. As a result, the dc output voltage attains the maximum possible value V= Vg M(1). This
-is consistent with the results of the steady-state DCM analyses in Chap. 5 and Sect. 15.2.
-To construct a combined CCM/DCM averaged switch model based on the general averaged
-switch model of Fig.15.24, it is necessary to specify which of the two expressions for the switch
-conversion ratio to use: Eq. ( 15.66), which is valid in CCM, or Eq. ( 15.68), which is valid in
-DCM. At the CCM/DCM boundary, these two expressions must give the same result,μ= d.I f
-the load current decreases further, the converter operates in DCM, the average switch current
-⟨i1(t)⟩Ts decreases, and the DCM switch conversion ratio in Eq. ( 15.68) becomes greater than
-the switch duty cycled. We conclude that the correct value of the switch conversion ratio, which
-takes into account operation in CCM or DCM, is the larger of the two values computed using
-Eq. (15.66) and Eq. (15.68).
-Figure 15.25 shows an implementation of the combined CCM/DCM model as a SPICE sub-
-circuit CCM-DCM1. This subcircuit has the same ﬁve interface nodes as the subcircuits CCM1
-and CCM2 of Sect. 14.3.1 The controlled sources Et and Gd model the port 1 (transistor) and
-port 2 (diode) averaged characteristics, as shown in Fig.15.24. The switch conversion ratioμis
-equal to the voltagev(u) at the subcircuit node u. The controlled voltage sourceEu computes the
-switch conversion ratio as the greater of the two values obtained from Eqs. (15.66) and (15.68).
-The controlled current source Ga, the zero-value voltage source Va, and the resistor Ra form
-an auxiliary circuit to ensure that the solution found by the simulator has the transistor and the
-diode currents with correct polarities,⟨i1(t)⟩Ts > 0,⟨i2(t)⟩Ts > 0. The subcircuit parameters are
-the inductance L relevant for CCM/DCM operation, and the switching frequency fs. The default
-values in the subcircuit are arbitrarily set to L= 100μH and fs= 100 kHz.
+$$G_{d0} = j_2(R\,\|\,r_2), \quad \omega_p = \frac{1}{(R\,\|\,r_2)C} \tag{15.58}$$
 
-15.4 Combined CCM/DCM Averaged Switch Simulation Model 611
-(a) i2(t) Ts
-v2(t) Ts
-v1(t) Ts
-i1(t) Ts
-d
-+ +1
-2
-3
-4
-5
-CCM-DCM1
-(b) *****************************************************************
-* MODEL: CCM-DCM1
-* Application: two-switch PWM converters, CCM or DCM
-* Limitations: ideal switches, no transformer
-*****************************************************************
-* Parameters:
-* L = equivalent inductance for DCM
-* fs = switching frequency
-*****************************************************************
-* Nodes:
-* 1: transistor positive (drain for an n-channel MOS)
-* 2: transistor negative (source for an n-channel MOS)
-* 3: diode cathode
-* 4: diode anode
-* 5: duty cycle control input
-*****************************************************************
-.subckt CCM-DCM1 1 2 3 4 5
-+ params: L=100u fs=1E5
-Et 1 2 value={(1-v(u))*v(3,4)/v(u)}
-Gd 4 3 value={(1-v(u))*i(Et)/v(u)}
-Ga 0 a value={MAX(i(Et),0)}
-Va a b
-Ra b 0 1k
-Eu u 0 table {MAX(v(5),
-+ v(5)*v(5)/(v(5)*v(5)+2*L*fs*i(Va)/v(3,4)))} (0 0) (1 1)
-.ends
-*****************************************************************
-Fig. 15.25 Implementation of the combined CCM-DCM averaged switch model: (a) schematic symbol,
-(b) SPICE netlist
-The SPICE subcircuit CCM-DCM1 of Fig. 15.25 can be used for dc, ac, and transient sim-
-ulations of PWM converters containing a transistor switch and a diode switch. This subcircuit
-is included in the model library switch.lib. It can be modiﬁed further for use in converters with
-isolation transformer.
-15.4.1 Example: CCM/DCM SEPIC Frequency Responses
-As another example, consider the SEPIC of Fig.15.26. According to Eq. (15.39), this converter
-operates in CCM if
-V
-R> 1−D
-D
-Vg
-Re(D) (15.69)
+令 $\hat{d} = 0$ 求输入-输出传递函数 $G_{vg}(s)$。得
 
-612 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-+
-D1
-L1
-C2
-+
-v
-Q1
-C1
-L2
-R
-Vg
-RL1
-RL2
-100 μH
-500 μH 47 μF
-200 μF
-0.02 
-0.1 
-120 V
-D= 0.4
-load
-fs = 100 kHz
-Fig. 15.26 SEPIC example
-d
-+
-L1
-C2
-+
-v
-C1
-L2
-R
-Vg
-RL1
-RL2
-100 μH
-500 μH 47 μF
-200 μF
-0.02 
-0.1 
-120V load
-+
-vc
-1
-2
-4
-3
-5
-CCM-DCM1
-4321
-5
-0
-Xswitch
-L = 83.3 ! H
-fs = 100 kHz
-Fig. 15.27 SEPIC simulation example: averaged circuit model
-where Re(D)i sg i v e nb yE q .(15.38). Upon neglecting losses in the converter, one ﬁnds that the
-CCM conversion ratio is V
-Vg
-≈D
-1−D (15.70)
-When Eqs. (15.38) and (15.70) are substituted into Eq. ( 15.69), the condition for operation in
-CCM becomes:
-R< 2(L1∥L2)
-(1−D)2Ts
-= 46Ω (15.71)
-Figure 15.27 shows the averaged circuit model obtained by replacing the switch network
-with the CCM-DCM1 subcircuit of Fig. 15.25. A part of the circuit netlist is included in
+$$G_{vg}(s) = \left.\frac{\hat{v}}{\hat{v}_g}\right|_{\hat{d}=0} = \frac{G_{g0}}{1+\dfrac{s}{\omega_p}} \tag{15.59}$$
 
-15.4 Combined CCM/DCM Averaged Switch Simulation Model 613
-Fig. 15.27. The connections and the parameters of the CCM-DCM1 subcircuit are deﬁned by
-the Xswitch line. In the SEPIC, the inductance parameter L= 83.3μH is equal to the parallel
-combination of L1 and L2. The voltage source vc sets the quiescent value of the duty cycle to
-D= 0.4, and the small-signal ac value to ˆd= 1. Ac simulation is performed on a linearized cir-
-cuit model, so that amplitudes of all small-signal ac waveforms are directly proportional to the
-amplitude of the ac input, regardless of the input ac amplitude value. For example, the control-
-to-output transfer function is Gvd= ˆv/ ˆd, where ˆv= v(4) in the circuit of Fig.15.27a. We can set
-the input ac amplitude to 1, so that the control-to-output transfer function Gvd can be measured
-directly as v(5). This setup is just for convenience in ﬁnding small-signal frequency responses
-by simulation. For measurements of converter transfer functions in an experimental circuit (see
-Sect. 8.5), the actual amplitude of the small-signal ac variation ˆd would be set to a fraction of
-the quiescent duty cycle D. Parameters of the ac simulation are set by the .ac line in the netlist:
-the signal frequency is swept from the minimum frequency of 5 Hz to the maximum frequency
-of 50 kHz in 201 points per decade.
-Figure 15.28 shows magnitude and phase responses of the control-to-output transfer func-
-tion obtained by SPICE ac simulations for two diﬀerent values of the load resistance: R= 40Ω,
-for which the converter operates in CCM, and R = 50Ω, for which the converter operates
-in DCM. For these two operating points, the quiescent (dc) voltages and currents in the cir-
-cuit are nearly the same. Nevertheless, the frequency responses are qualitatively very diﬀerent
-in the two operating modes. In CCM, the converter exhibits a fourth-order response with two
-pairs of high-Q complex-conjugate poles and a pair of complex-conjugate zeroes. Another RHP
-(right half-plane) zero can be observed at frequencies approaching 50 kHz. In DCM, there is
-a dominant low-frequency pole followed by a pair of complex-conjugate poles and a pair of
-Fig. 15.28 Magnitude and phase responses of the control-to-output transfer function obtained by simu-
-lation of the SEPIC example, for two values of load resistance. For R= 50Ω, the converter operates in
-DCM (solid lines), and for R= 40Ωthe converter operates in CCM (dashed lines)
+其中
 
-614 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-complex-conjugate zeroes. The frequencies of the complex poles and zeroes are very close in
-value. High-frequency dynamics contribute additional phase lag at higher frequencies.
-In the design of a feedback controller around a converter that may operate in CCM or in
-DCM, one should take into account that the crossover frequency, the phase margin, and the
-closed-loop responses can be substantially di ﬀerent depending on the operating mode. This
-point is illustrated by the example of the next section.
-15.4.2 Example: Loop Gain and Closed-Loop Responses of a Buck Voltage Regulator
-A controller design for a buck converter example is discussed in Sect. 9.5.4. The converter and
-the block diagram of the controller are shown in Fig.9.35. This converter system is designed to
-regulate the dc output voltage at V= 15 V for the load current up to 5 A. Let us test this design
-by simulation. An averaged circuit model of a practical realization of the buck voltage regulator
-described in Sect. 9.5.4 is shown in Fig.15.29. The MOSFET and the diode switch are replaced
-by the averaged switch model implemented as the CCM-DCM1 subcircuit. The pulse-width
-modulator with V
-M = 4 V is modeled according to the discussion in Sect. 7.3 as a dependent
-voltage source Epwm controlled by the PWM input voltage vx.T h ev a l u eo fEpwm is equal to
-1/VM = 0.25 times the PWM input voltage vx, with a limit for the minimum value set to 0.1
-V , and a limit for the maximum value set to 0.9 V . The output of the pulse-width modulator is
-the control duty-cycle input to the CCM-DCM1 averaged switch subcircuit. Given the speciﬁed
-limits for Epwm, the switch duty cycle d(t) can take values in the range:
-Dmin≤d(t)≤Dmax (15.72)
-2
-1
-3
-4
-5
-CCM-DCM1
-+
-+
-+
-C2
-50 μH
-11 k500 μF
-Vg
-28 V
-L
-C R
-vref
-5 V
-+12 V
-LM324
-R1
-R2
-R3 C3
-R4
-85 k
-1.1 nF2.7 nF
-47 k
-120 k
-vz
-yvx
-Epwm
-VM = 4 V
-value = {LIMIT(0.25 vx, 0.1, 0.9)}
-+
-v
-iLOAD321
-4
-5678
-.nodeset v(3)=15 v(5)=5 v(6)=4.144 v(8)=0.536
-Xswitch
-L = 50 μ
-fs = 100 k z
-Fig. 15.29 Buck voltage regulator example
+$$G_{g0} = g_2(R\,\|\,r_2) = M \tag{15.60}$$
 
-15.4 Combined CCM/DCM Averaged Switch Simulation Model 615
-where Dmin = 0.1, and Dmax = 0.9. Practical PWM integrated circuits often have a limit
-Dmax< 1 for the maximum possible duty cycle. The voltage sensor and the compensator are im-
-plemented around an op amp LM324. With very large loop gain in the system, the steady-state
-error voltage is approximately zero, i.e., the dc voltages at the plus and the minus inputs of the
-op amp are almost the same,
-v(5)= v
-re f (15.73)
-As a result, the quiescent (dc) output voltage V is set by the reference voltage vre f and the
-voltage divider comprised of R1, R2, R4:
-V R4
-R1+ R2+ R4
-= vre f = 5 V (15.74)
-By setting the ac reference voltage ˆvre f to zero, one can ﬁnd the combined transfer function of
-the voltage sensor and the compensator as:
-H(s)Gc(s)= ˆvy
-ˆv =
-R3+ 1
-sC3
-R1+ R2
-
-
-1
-sC2
-(15.75)
-This transfer function can be written in factored pole-zero form as
-GcmH
-⎦
-1+ s
-ωz
-) ⎦
-1+ ωL
-s
-)
-⎦
-1+ s
-ωp
-) (15.76)
-where
-GcmH= R3
-R1+ R2
-(15.77)
-fz= ωz
-2π= 1
-2πR2C2
-(15.78)
-fL= ωL
-2π= 1
-2πR3C3
-(15.79)
-fp= ωP
-2π= 1
-2π(R1∥R2) C2
-(15.80)
-The design described in Sect. 9.5.4 resulted in the following values for the gain and the corner
-frequencies:
-GcmH= 3.7(1/3)= 1.23, fz= 1.7k H z, fL= 500 Hz, fP= 14.5 kHz (15.81)
-Eqs. (15.74) and ( 15.77)t o( 15.81) can be used to select the circuit parameter values. Let us
-(somewhat arbitrarily) choose C2 = 1.1 nF. Then, from Eq. (15.78), we have R2 = 85 kΩ, and
-Eq. (15.80) yields R1= 11 kΩ.F r o mE q .(15.77) we obtain R3= 120 kΩ, and Eq. (15.79)g i v e s
-C3 = 2.7kΩ. Finally, R4 = 47 kΩis found from Eq. (15.74). The voltage regulator design can
-now be tested by simulations of the circuit in Fig. 15.29.
+DCM 降压、升压和升降压变换器电阻负载的 $G_{d0}$、$G_{g0}$、$\omega_p$ 表达式列于表15.3 [15, 135]。
 
-616 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-Loop gains can be obtained by simulation using exactly the same techniques described in
-Sect. 9.6 for experimental measurement of loop gains [137]. Let us apply the voltage injection
-technique of Sect.9.6.1. An ac voltage sourcevz is injected between the compensator output and
-the PWM input. This is a good injection point since the output impedance of the compensator
-built around the op amp is small, and the PWM input impedance is very large (inﬁnity in the
-circuit model of Fig. 15.29). With the ac source amplitude set (arbitrarily) to 1, and no other ac
-sources in the circuit, ac simulations are performed to ﬁnd the loop gain as
-T(s)= ˆv
-y
-ˆvx
-=−v(6)
-v(7) (15.82)
-To perform ac analysis, the simulator ﬁrst solves for the quiescent (dc) operating point. The
-circuit is then linearized at this operating point, and small-signal frequency responses are com-
-puted for the speciﬁed range of signal frequencies. Solving for the quiescent operating point
-involves numerical solution of a system of nonlinear equations. In some cases, the numerical
-solution does not converge and the simulation is aborted with an error message. In particular,
-convergence problems often occur in circuits with feedback, especially when the loop gain at dc
-is very large. This is the case in the circuit of Fig. 15.29. To help convergence when the simula-
-tor is solving for the quiescent operating point, one can specify approximate or expected values
-of node voltages using the .nodeset line as shown in Fig.15.29. In this case, we know by design
-that the quiescent output voltage is close to 15 V ( v(3)= 15), that the negative input of the op
-amp is very close to the reference (v(5)= 5), and that the quiescent duty cycle is approximately
-D= V/V
-g= 0.536, so that v(8)= 0.536 V . Given these approximate node voltages, the numeri-
-cal solution converges, and the following quiescent operating points are found by the simulator
-for two values of the load resistance R:
-R= 3Ω, v(3)= 15.2V, v(5)= 5.0V, v(7)= 2.173 V, v(8)= 0.543 V, D= 0.543 (15.83)
-R= 25Ω, v(3)= 15.2V, v(5)= 5.0V, v(7)= 2.033 V, v(8)= 0.508 V, D= 0.508 (15.84)
-For the nominal load resistance R= 3Ω, the converter operates in CCM, so that D= V/V
-g.F o r
-R= 25Ω, the same dc output voltage is obtained for a lower value of the quiescent duty cycle,
-which means that the converter operates in DCM.
-The magnitude and phase responses of the loop gain found for the operating points given
-by Eqs. (15.83) and (15.84)a r es h o w ni nF i g .15.30.F o rR= 3Ω, the crossover frequency is
-fc = 5.3 kHz, and the phase margin is φM = 47o, very close to the values ( fc = 5k H z, φM =
-52◦) that we designed for in Sect. 9.5.4. At light load, for R= 25Ω, the loop gain responses are
-considerably diﬀerent because the converter operates in DCM. The crossover frequency drops
-to fc= 390 Hz, while the phase margin isφM = 55◦.
-The magnitude responses of the line-to-output transfer function are shown in Fig. 15.31,
-again for two values of the load resistance,R= 3Ωand R= 25Ω. The open-loop responses are
-obtained by braking the feedback loop at node 8, and setting the dc voltage at this node to the
-quiescent value D of the duty cycle. For R= 3Ω, the open-loop and closed-loop responses can
-be compared to the theoretical plots shown in Fig. 9.45. At 100 Hz, the closed-loop magnitude
-response is 0.012⇒−38 dB. A 1 V , 100 Hz variation invg(t) would induce a 12 mV variation
-in the output voltage v(t). For R= 25Ω, the closed-loop magnitude response is 0.02⇒−34 dB,
+表15.3 DCM 变换器小信号传递函数的显著特征
 
-15.4 Combined CCM/DCM Averaged Switch Simulation Model 617
-f
-0
-|| ||T || ||T T
-0 dB
-20 dB
-40 dB
-zHk05zHk5zH05zH5 500 Hz
-60 dB
-R = 3 
-T
-R = 25 
-R = 3 
-R = 25 
-m = 55 m = 47
-fc = 5.3 kHzfc = 390 Hz
-Fig. 15.30 Loop gain in the buck voltage regulator example
-f
-||Gvg ||
-0 dB
-20 dB
-zHk05zHk5zH05zH5 500 Hz
-R = 3 
-R = 25 
-Open loop, d(t) = constant
-Closed loop
-Fig. 15.31 Line-to-output response of the buck voltage regulator example
-which means that the 1 V , 100 Hz variation in vg(t) would induce a 20 mV variation in the
-output voltage. Notice how the regulator performance in terms of rejecting the input voltage
-disturbance is signiﬁcantly worse at light load than at the nominal load.
-A test of the transient response to a step change in load is shown in Fig. 15.32. The load
-current is initially equal to 1.5 A, and increases toiLOAD = 5Aa t t= 0.1 ms. When the converter
-is operated in open-loop at constant duty cycle, the response is governed by the natural time
-constants of the converter network. A large undershoot and long lightly damped oscillations can
-be observed in the output voltage. With the feedback loop closed, the controller dynamically
-adjusts the duty cycle d(t) trying to maintain the output voltage constant. The output voltage
-drops by about 0.2 V , and it returns to the regulated value after a short, well-damped transient.
+| 变换器 | $G_{d0}$ | $G_{g0}$ | $\omega_p$ |
+|---|---|---|---|
+| 降压 | $\dfrac{2V}{D}\dfrac{1-M}{2-M}$ | $M$ | $\dfrac{2-M}{(1-M)RC}$ |
+| 升压 | $\dfrac{2V}{D}\dfrac{M-1}{2M-1}$ | $M$ | $\dfrac{2M-1}{(M-1)RC}$ |
+| 升降压 | $\dfrac{V}{D}$ | $M$ | $\dfrac{2}{RC}$ |
 
-618 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-0 0.2 ms 0.4 ms 0.6 ms 0.8 ms 1.0 ms 1.2 ms 1.4 ms 1.6 ms 1.8 ms 2.0 ms
-0 0.2 ms 0.4 ms 0.6 ms 0.8 ms 1.0 ms 1.2 ms 1.4 ms 1.6 ms 1.8 ms 2.0 ms
-0
-2 A
-4 A
-6 A
-14 V
-15 V
-16 V
-v
-iLOAD
-t
-Closed loop
-Open loop
-d(t) = constant
-Fig. 15.32 Load transient response of the buck voltage regulator example
-The voltage regulator example of Fig. 15.29 illustrates how the performance can vary sig-
-niﬁcantly if the regulator is expected to supply a wide range of loads. In practice, further tests
-would also be performed to account for expected ranges of input voltages, and variations in
-component parameter values. Design iterations may be necessary to ensure that performance
-speciﬁcations are met under worst-case conditions.
-15.5 High-Frequency Dynamics of Converters in DCM
-As discussed in Sect. 15.3, transfer functions of converters operating in discontinuous conduc-
-tion mode exhibit a dominant low-frequency pole. To correctly model the high-frequency dy-
-namics of DCM converters, the approximation given by Eq. ( 15.5) must be removed, i.e., one
-must account for the fact that the ac voltage across the inductor is not zero [130]. In this section,
-we show that the high-frequency dynamics of DCM converters are related to the sampling pro-
-cess associated with the pulse-width modulator and the nature of the response of the inductor
-current to duty-cycle perturbations [136].
-Figure 15.33 shows details of steady-state and small-signal perturbed waveforms in a DCM
-converter. During the switching period shown, the inductor current ramps up from zero with a
-slope m
-1, and then ramps down to zero with a slopem2. It is assumed that converter voltages do
-not change appreciably so that the slopes m1 and m2 can be considered constant.
-The PWM input signal vc(t) has a steady-state dc component Vc and a small-signal ac per-
-turbation ˆvc. During the switching period shown in Fig. 15.33, the transistor switch gate-drive
-waveform is extended by ˆdTs, where ˆd= ˆvc/VM and VM is the amplitude of the PWM ramp.
-Figure 15.33d shows that the perturbation in the transistor gate-drive waveform is a pulse of
-length ˆdTs, which occurs at the modulated edge of the gate-drive waveform. As a result, a per-
-turbation in the inductor current waveform is observed. It is important to note that the converter
-waveforms are unaﬀected by the ac perturbation ˆvc until the modulated (trailing) edge of the
+本节所述交流建模方法既通用又有用。DCM 变换器的晶体管和二极管可简单用图15.17b 的二端口网络替代得小信号交流模型。或者开关网络可如图15.21a 或 b 定义，然后用相同二端口网络图15.21c 建模。然后可用常规电路分析技巧求解小信号变换器模型得变换器小信号传递函数。
 
-15.5 High-Frequency Dynamics of Converters in DCM 619
-Ts
-VM
-Vc + ˆvc
-Vc
-iL + ˆiL
-iL
-m1 m2
-ˆdTs
-(m1 + m2) ˆdTs
-D2Ts
-ˆiL
-(a)
-(b)
-(c)
-(d)
-(e)
-t
-t
-t
-t
-t
-Fig. 15.33 Steady-state and small-signal perturbed waveforms in a DCM converter
-gate-drive signal. As shown in Fig. 15.33e, the inductor current ac perturbation is a trapezoidal
-pulse starting at the modulated edge of the gate-drive signal and extending over a time interval
-approximately equal to D2Ts.
-(m1 + m2) ˆdTs
-D2Ts
-ˆiL
-ˆdTsd (t)
-t
-t
-Fig. 15.34 Impulse response of the small-signal perturbed inductor current waveforms in a DCM con-
-verter
-In the small-signal limit, ˆdTs is very short, and the transitions inˆiL can be neglected. Hence,
-as illustrated in Fig.15.34, the response from the perturbation in the gate-drive waveform to the
-inductor current perturbation can be viewed as a response from an impulse ˆdTsδ(t) to a pulse of
-amplitude (m1+ m2) ˆdTs and length D2Ts. It should be noted that the unit impulse δ(t) occurs
-at the modulated edge of the gate-drive waveform. The impulse represents the small-signal
-sampling process that occurs at the modulated edge in the pulse-width modulator.
+### 15.3.1 示例：DCM 升压变换器的控制-输出频率响应
 
-620 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-We are now in a position to explain the nature of the high-frequency dynamics of DCM
-converters in frequency domain. Let us derive a control-to-inductor current transfer function
-Gic(s)= ˆiL/ˆvc based on the time-domain waveforms shown in Figs. 15.33 and 15.34.I nt h e
-derivations, a sampled variable x is denoted by a star, x∗.
-In general, given a small-signal perturbation ˆvc(t), the corresponding duty-cycle perturbation
-is a sampled variable
-ˆd∗(t)= ˆvc(t)
-VM
-k→+∞∑
-k→−∞
-δ(t−kTs) (15.85)
-The Laplace transform of Eq. (15.85) yields
-ˆd∗(s)= 1
-VM
-1
-Ts
-k→+∞∑
-k→−∞
-ˆvc(s−jkωs) (15.86)
-whereωs = 2πfs. In time domain, the impulse response of the inductor current perturbation is
-shown in Fig. 15.34,
-ˆiL= (m1+ m2) ˆdTs (h(t)−h(t−D2Ts)) (15.87)
-where h(t) is the unit step function. The small-signal inductor current response resembles the
-response of a sample-and-hold to an impulse, i.e., a translation from a sampled variable to
-a continuous-time variable. Given the sampled nature of the duty-cycle perturbation, and the
-continuous-time nature of the converter states, it is appropriate to refer to the response in
-Eq. (15.87)a sa n equivalent hold [77].
-The Laplace transform of the impulse response in Eq. (15.87) can be used to ﬁnd the transfer
-function of the equivalent hold for the inductor current perturbation:
-L
-⎦ˆi
-L(t)
-)
-= (m1+ m2) ˆdTs
-1−e−sD2Ts
-s (15.88)
-From (15.86) and (15.88), it follows that
-ˆi∗
-L(s)= (m1+ m2)Ts
-VM
-1−e−sD2Ts
-s
-1
-Ts
-k→+∞∑
-k→−∞
-ˆvc(s−jkωs) (15.89)
-Given the sampled-data nature of a pulse-width modulated converter, it is not surprising that
-the inductor current spectrum consists of an inﬁnite sum of responses to the images of ˆ vc(s).
-Since we are interested only in the converter responses at frequencies well below the switching
-frequency, a control-to-inductor current "transfer function" can be obtained by retaining only
-the low-frequency (k= 0) portion of the spectrum of ˆiL(s),
-Gic(s)=
-ˆiL
-ˆvc
-= (m1+ m2)
-VM
-1−e−sD2Ts
-s (15.90)
-Note that the transfer function ( 15.90) is not a standard rational function of s. Instead, the
-transfer function contains an e−sDTs term, which is a result of the sampling process and the
-equivalent hold response illustrated in Fig. 15.34.F r o mE q .(15.90), an approximate rational
-transfer function can be obtained using an approximation known as the Padé approximation
-[138]. The ﬁrst-order Padé approximation is given by:
+作为简单数值示例，求如下元件和参数值的 DCM 升压变换器小信号控制-输出传递函数：
 
-15.5 High-Frequency Dynamics of Converters in DCM 621
-e−sD2Ts ≈
-1−s
-ω2
-1+ s
-ω2
-, (15.91)
-where
-f2=ω2
-2π= 1
-πD2Ts
-= 1
-D2
-fs
-π. (15.92)
-Applying (15.91)t o( 15.90) yields an approximate control-to-inductor current transfer function,
-including high-frequency dynamics,
-Gic(s)≈(m1+ m2)D2Ts
-VM
-1
-1+ s
-ω2
-(15.93)
-where the pole frequency is given by Eq. (15.92). This expression for the high-frequency pole is
-general, valid for all basic converters operating in DCM. Since 0< D2< 1, Eq. (15.92) implies
-that the high-frequency pole is always greater than approximately one third of the switching
-frequency. Taking the steady-state solution forD2 into account, the pole frequency can be found
-in terms of the conversion ratio M and the duty cycle D. For the basic converters, the results are
-summarized in Table 15.4. Although the derivation in this section has been focused on Gic(s)
-only, the same high-frequency pole can be found in all other DCM converter transfer functions.
-Table 15.4 High-frequency pole in DCM converter control-to-output transfer functions
-Converter High-frequency pole f2
-Buck M
-D(1−M)
-fs
-π
-Boost M−1
-D
-fs
-π
-Buck–boost |M|
-D
-fs
-π
-It is important to reiterate that the high-frequency pole in frequency responses is an ap-
-proximation to the responses represented by the converter time-domain dynamics illustrated
-in Fig. 15.34. In response to a duty-cycle perturbation, the inductor current perturbation is a
-pulse of length D2Ts. The longer the equivalent hold pulse, the longer time delay is between
-the duty-cycle perturbation and the perturbations in converter waveforms. In frequency domain,
-this corresponds to additional phase lag due to a lower frequency f2 in the converter control-to-
-output responses. Since the equivalent hold extends over a fraction of a switching period, the
-resulting pole f2 is very high, and the additional phase lag can usually be ignored in practice.
-The behavior discussed in Sect.8.2.3, leading to the right half-plane zero in frequency responses
-of boost or buck–boost CCM converters, is present in DCM converters as well. An increase in
-duty cycle, for example, results in the output voltage temporarily moving in the opposite direc-
-tion. However, in DCM converters this opposite-direction transient is also limited to a fraction
-of a switching period and has essentially no impact on the design or stability of control loops
-around DCM converters.
+$$R = 12\,\Omega, \quad L = 5\,\mu\text{H}, \quad C = 470\,\mu\text{F}, \quad f_s = 100\text{ kHz} \tag{15.61}$$
 
-622 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-15.6 Summary of Key Points
-1. In the discontinuous conduction mode, the average transistor voltage and current are pro-
-portional, and hence obey Ohm’s law. An averaged equivalent circuit can be obtained by re-
-placing the transistor with an eﬀective resistor R
-e(d). The average diode voltage and current
-obey a power source characteristic, with power equal to the power eﬀectively dissipated by
-Re. In the averaged equivalent circuit, the diode is replaced with a dependent power source.
-2. The two-port lossless network consisting of an e ﬀective resistor and power source, which
-results from averaging the transistor and diode waveforms of DCM converters, is called
-a loss-free resistor. This network models the basic power-processing functions of DCM
-converters, much in the same way that the ideal dc transformer models the basic functions
-of CCM converters.
-3. The large-signal averaged model can be solved under equilibrium conditions to determine
-the quiescent values of the converter currents and voltages. Average power arguments can
-often be used.
-4. A small-signal ac model for the DCM switch network can be derived by perturbing and
-linearizing the loss-free resistor network. The result has the form of a two-porty-parameter
-model. The model describes the small-signal variations in the transistor and diode currents,
-as functions of variations in the duty cycle and in the transistor and diode ac voltage varia-
-tions.
-5. To simplify the ac analysis of the DCM buck and boost converters, it is convenient to deﬁne
-two other forms of the small-signal switch model, corresponding to the switch networks
-of Figs. 15.21a and 15.21b. These models are also y-parameter two-port models, but have
-diﬀerent parameter values.
-6. The inductor dynamics of the DCM buck, boost, and buck–boost converters occur at high
-frequency, above or just below the switching frequency. Hence, in most cases the high-
-frequency inductor dynamics can be ignored. In the small-signal ac model, the inductance
-L is set to zero, and the remaining model is solved relatively easily for the low-frequency
-converter dynamics. The DCM buck, boost, and buck–boost converters exhibit transfer func-
-tions containing essentially a single low-frequency dominant pole.
-7. The high-frequency dynamics of DCM converters are related to the sampling process asso-
-ciated with the pulse-width modulator and the nature of the response of the inductor current
-to duty-cycle perturbations.
-Problems
-15.1 Averaged switch modeling of a ﬂyback converter. The converter of Fig.15.35 operates in
-the discontinuous conduction mode. The two-winding inductor has a l: n turns ratio and
-negligible leakage inductance, and can be modeled as an ideal transformer in parallel with
-primary-side magnetizing inductance Lp.
-(a) Sketch the transistor and diode voltage and current waveforms, and derive expressions
-for their average values.
-(b) Sketch an averaged model for the converter that includes a loss-free resistor network,
-and give an expression for Re(d).
+输出电压调节为 $V = 36\text{ V}$。希望确定负载电流 $I = 3\text{ A}$、直流输入电压 $V_g = 24\text{ V}$ 工作点的 $G_{vd}(s)$。
 
-15.6 Summary of Key Points 623
-+
-Lp
-+
-v
-vg
-Q1
-D11:n
-CR
-Fig. 15.35 Flyback converter, Problem 15.1
-(c) Solve your model to determine the voltage ratio V/Vg in the discontinuous conduction
-mode.
-(d) Over what range of load current I is your answer of part (c) valid? Express the DCM
-boundary in the form I< Icirt(D, Re, Vg, n).
-(e) Derive an expression for the small-signal control-to-output transfer function G vd(s).
-You may neglect inductor dynamics.
-15.2 Averaged switch modeling of a nonisolated Watkins–Johnson converter. The converter
-of Fig. 15.36 operates in the discontinuous conduction mode. The two-winding inductor
-has a 1:1 turns ratio and negligible leakage inductance, and can be modeled as an ideal
-transformer in parallel with magnetizing inductance L.
-+ L
-+
-vvg
-Q1
-D1
-1:1
-CR
-Fig. 15.36 Watkins–Johnson converter, Problem15.2
-(a) Sketch the transistor and diode voltage and current waveforms, and derive expressions
-for their average values.
-(b) Sketch an averaged model for the converter that includes a loss-free resistor network,
-and give an expression for Re(d).
-(c) Solve your model to determine the converter conversion ratio M(D)= V/Vg in the
-discontinuous conduction mode. Over what range of load currents is your expression
-valid?
-15.3 Sketch the steady-state output characteristics of the buck–boost converter: plot the output
-voltage V vs. the load current I, for several values of duty cycleD. Include both CCM and
-DCM operation, and clearly label the boundary between modes.
+由图15.16b 直流等效电路解有效电阻 $R_e(D)$。由于负载电流 $I$ 和输入输出电压 $V$、$V_g$ 已知，功率源值 $P$ 为
 
-624 15 Equivalent Circuit Modeling of the Discontinuous Conduction Mode
-15.4 In the network of Fig. 15.37, the power source waveform p(t)i sg i v e nb y
-p(t)= 1000 cos2 377t
-The circuit operates in steady state. Determine the rms resistor voltage VR,rms.
-+
-vR(t)p(t) R
-20 
-L1
-7 mH
-L2
-7 mH
-C1
-C2
-30 μF
-300 μF
-Fig. 15.37 Network with a power source, Problem 15.4
-15.5 Verify the expressions forGd0 andωp given in Table15.3.
-15.6 A certain buck converter operates with an input voltage of Vg = 28 V and an output
-voltage of V= 15 V . The load resistance isR= 10Ω. Other element and parameter values
-are L= 8μH, C= 220μF, fs= 150kHz.
-(a) Determine the value of Re.
-(b) Determine the quiescent duty cycle D.
-(c) Sketch a Bode plot of the control-to-output transfer function Gvd(s). Label the values
-of all salient features. You may neglect inductor dynamics.
-15.7 Using the approach of Sect. 15.5, determine the control-to-output transfer function Gvd(s)
-of a boost converter. Do not make the approximation L≈0.
-(a) Derive analytical expressions for the dc gain Gd0 and the RHP zero frequency ωz,a s
-functions of M, Re, D, Vg, L, C, and R.
-(b) With the assumption that C is suﬃciently large and that L is suﬃciently small, the
-poles of Gvd(s) can be factored using the low- Q approximation. Do so, and express
-the two poles as functions of M, D, L, C, and R. Show that the low-frequency pole
-matches the expression in Table15.3, and that the high-frequency pole is given by the
-expression in Table15.4.
-```
+$$P = I(V-V_g) = (3\text{ A})(36\text{ V}-24\text{ V}) = 36\text{ W} \tag{15.62}$$
+
+故有效电阻为
+
+$$R_e = \frac{V_g^2}{P} = \frac{(24\text{ V})^2}{36\text{ W}} = 16\,\Omega \tag{15.63}$$
+
+现可用式 (15.37) 求静态占空比 $D$：
+
+$$D = \sqrt{\frac{2L}{R_e T_s}} = \sqrt{\frac{2(5\,\mu\text{H})}{(16\,\Omega)(10\,\mu\text{s})}} = 0.25 \tag{15.64}$$
+
+现可评估表15.3 升压变换器 $G_{d0}$ 和 $\omega_p$ 的表达式：
+
+$$G_{d0} = \frac{2V}{D}\frac{M-1}{2M-1} = \frac{2(36\text{ V})}{(0.25)}\frac{\left(\dfrac{36\text{ V}}{24\text{ V}}-1\right)}{\left(2\dfrac{36\text{ V}}{24\text{ V}}-1\right)} = 72\text{ V} \Rightarrow 37\text{ dBV}$$
+
+$$f_p = \frac{\omega_p}{2\pi} = \frac{2M-1}{2\pi(M-1)RC} = \frac{\left(2\dfrac{36\text{ V}}{24\text{ V}}-1\right)}{2\pi\left(\dfrac{36\text{ V}}{24\text{ V}}-1\right)(12\,\Omega)(470\,\mu\text{F})} = 112\text{ Hz} \tag{15.65}$$
+
+![源页 p.612](../assets/page-snapshots/chapter-15/page-612.png)
+
+图15.22 DCM 升压示例控制-输出传递函数的幅值和相位。实线：函数及其渐近线，图15.20 模型预测的近似单极点响应。虚线：含高频电感动态的更精确响应
+
+控制-输出传递函数波特图构造于图15.22。实线给出图15.20 近似单极点模型预测的幅值和相位。虚线是 15.5 节讨论的更精确模型预测，含电感动态引起的 $f_2 = 64\text{ kHz}$ 处第二极点和 $f_z = 127\text{ kHz}$ 处 RHP 零点。由于开关频率为 100 kHz，这些频率处模型的精度不能保证。但实际中可观察到电感动态引起的滞后相位渐近线从 $f_2/10 = 6.4\text{ kHz}$ 开始。
+
+## 15.4 组合 CCM/DCM 平均开关仿真模型
+
+所有含二极管整流器的变换器在负载电流足够低时工作于断续导通模式（DCM）。某些情形中变换器故意设计为 DCM 工作。故开发适合可在 CCM 或 DCM 下工作的变换器仿真的平均模型很有意义。
+
+图15.23 给出通用双开关网络及 CCM 和 DCM 中相应大信号平均模型。14.1 节导出的 CCM 平均开关模型是 $d':d$ 匝比的理想变压器。DCM 中大信号平均开关模型是无损电阻，如 15.2 节导出。目标是构造根据变换器工作模式简化为图15.23a 或图15.23c 模型的组合 CCM/DCM 平均开关模型。定义有效开关变换比 $\mu(t)$，使两种模式下的平均开关模型形式相同如图15.24所示。变换器工作于 CCM 时开关变换比 $\mu(t)$ 等于开关占空比 $d(t)$：
+
+$$\mu = d \tag{15.66}$$
+
+![源页 p.613](../assets/page-snapshots/chapter-15/page-613.png)
+
+图15.23 平均开关建模汇总：(a) 通用双开关网络；(b) CCM 平均开关模型；(c) DCM 平均开关模型
+
+变换器工作于 DCM 时可计算有效开关变换比使图15.24 平均开关模型端子特性匹配图15.23c 无损电阻模型端子特性。匹配端口 1 特性得
+
+$$\langle v_1(t)\rangle_{T_s} = \frac{1-\mu}{\mu}\langle v_2(t)\rangle_{T_s} = R_e\langle i_1(t)\rangle_{T_s} \tag{15.67}$$
+
+可解开关变换比 $\mu$：
+
+$$\mu = \frac{1}{1+\dfrac{R_e\langle i_1(t)\rangle_{T_s}}{\langle v_2(t)\rangle_{T_s}}} \tag{15.68}$$
+
+![源页 p.614](../assets/page-snapshots/chapter-15/page-614.png)
+
+图15.24 使用等效开关变换比 $\mu$ 的通用平均开关模型
+
+可验证匹配图15.23c 和15.24 模型端口 2 特性给出 DCM 有效开关变换比的完全相同结果。
+
+开关变换比 $\mu(t)$ 可视为 CCM 开关网络占空比 $d(t)$ 的推广。基于此方法，为 CCM 变换器开发的模型和结果不仅可用于 DCM 还可用于其他工作模式甚至其他变换器结构，只需用适当开关变换比 $\mu(t)$ 替代开关占空比 $d(t)$ [71–74]。例如若 $M(d)$ 是 CCM 中变换比，则 $M(\mu)$（$\mu$ 由式 (15.68) 给出）是 DCM 中变换比。DCM 中开关变换比取决于平均端子电压和电流，以及通过有效电阻 $R_e = 2L/d^2 T_s$ 的开关占空比 $d$。若变换器完全空载，则平均晶体管电流 $\langle i_1(t)\rangle_{T_s}$ 为零，DCM 开关变换比变为 $\mu = 1$。结果直流输出电压达到最大可能值 $V = V_g M(1)$。这与第5章和15.2 节稳态 DCM 分析结果一致。
+
+为基于图15.24 通用平均开关模型构造组合 CCM/DCM 平均开关模型，须指定使用开关变换比两个表达式中的哪个：CCM 有效的式 (15.66) 或 DCM 有效的式 (15.68)。CCM/DCM 边界处两表达式须给出相同结果 $\mu = d$。若负载电流进一步降低，变换器工作于 DCM，平均开关电流 $\langle i_1(t)\rangle_{T_s}$ 减小，式 (15.68) DCM 开关变换比大于开关占空比 $d$。得出计入 CCM 或 DCM 工作的开关变换比正确值是式 (15.66) 和式 (15.68) 计算两值中的较大者。
+
+![源页 p.615](../assets/page-snapshots/chapter-15/page-615.png)
+
+图15.25 组合 CCM-DCM 平均开关模型的实现：(a) 原理图符号；(b) SPICE 网表
+
+图15.25 给出组合 CCM/DCM 模型作为 SPICE 子电路 CCM-DCM1 的实现。此子电路有与 14.3.1 节子电路 CCM1 和 CCM2 相同的五个接口节点。受控源 Et 和 Gd 建模图15.24 所示端口 1（晶体管）和端口 2（二极管）平均特性。开关变换比 $\mu$ 等于子电路节点 $u$ 处电压 $v(u)$。受控电压源 Eu 计算开关变换比为式 (15.66) 和 (15.68) 所得两值中的较大者。受控电流源 Ga、零值电压源 Va 和电阻 Ra 构成辅助电路确保仿真器找到的解中晶体管和二极管电流极性正确（$\langle i_1(t)\rangle_{T_s} > 0$、$\langle i_2(t)\rangle_{T_s} > 0$）。子电路参数是 CCM/DCM 工作相关的电感 $L$ 和开关频率 $f_s$。子电路中默认值任意设为 $L = 100\,\mu\text{H}$ 和 $f_s = 100\text{ kHz}$。
+
+图15.25 SPICE 子电路 CCM-DCM1 可用于含晶体管开关和二极管开关的脉宽调制变换器的直流、交流和暂态仿真。此子电路包含在模型库 switch.lib 中。可进一步修改用于含隔离变压器的变换器。
+
+### 15.4.1 示例：CCM/DCM SEPIC 频率响应
+
+作为另一个例子，考虑图15.26 的 SEPIC。按式 (15.39) 此变换器在以下条件工作于 CCM：
+
+$$\frac{V}{R} > \frac{1-D}{D}\frac{V_g}{R_e(D)} \tag{15.69}$$
+
+![源页 p.616](../assets/page-snapshots/chapter-15/page-616.png)
+
+图15.26 SEPIC 示例
+
+![源页 p.616](../assets/page-snapshots/chapter-15/page-616.png)
+
+图15.27 SEPIC 仿真示例：平均电路模型
+
+其中 $R_e(D)$ 由式 (15.38) 给出。忽略变换器损耗后发现 CCM 变换比为
+
+$$\frac{V}{V_g} \approx \frac{D}{1-D} \tag{15.70}$$
+
+将式 (15.38) 和 (15.70) 代入式 (15.69) 得 CCM 工作条件：
+
+$$R < \frac{2(L_1\,\|\,L_2)}{(1-D)^2 T_s} = 46\,\Omega \tag{15.71}$$
+
+图15.27 给出用图15.25 CCM-DCM1 子电路替代开关网络所得平均电路模型。图15.27 含部分网表。CCM-DCM1 子电路的连接和参数由 `Xswitch` 行定义。SEPIC 中电感参数 $L = 83.3\,\mu\text{H}$ 等于 $L_1$ 和 $L_2$ 的并联组合。电压源 $v_c$ 设静态占空比值为 $D = 0.4$，小信号交流值为 $\hat{d} = 1$。交流仿真在线性化电路模型上执行，故所有小信号交流波形的幅值正比于交流输入幅值，无论输入交流幅值为何。例如控制-输出传递函数为 $G_{vd} = \hat{v}/\hat{d}$，其中图15.27a 电路中 $\hat{v} = v(4)$。可设输入交流幅值为 1，故控制-输出传递函数 $G_{vd}$ 可直接作为 $v(5)$ 测量。此设置仅为仿真求小信号频率响应的方便。实验电路中测量变换器传递函数（见 8.5 节）时小信号交流变化 $\hat{d}$ 的实际幅值设为静态占空比 $D$ 的一部分。交流仿真参数由网表 `.ac` 行设置：信号频率从最小 5 Hz 扫到最大 50 kHz，每十倍频程 201 点。
+
+![源页 p.617](../assets/page-snapshots/chapter-15/page-617.png)
+
+图15.28 SEPIC 示例仿真所得控制-输出传递函数的幅值和相位响应，对应两个负载电阻值。$R = 50\,\Omega$ 时变换器工作于 DCM（实线），$R = 40\,\Omega$ 时工作于 CCM（虚线）
+
+图15.28 给出两个不同负载电阻值 SPICE 交流仿真所得控制-输出传递函数的幅值和相位响应：$R = 40\,\Omega$（变换器工作于 CCM）和 $R = 50\,\Omega$（变换器工作于 DCM）。这两个工作点电路中静态（直流）电压电流几乎相同。但两种工作模式下频率响应定性非常不同。CCM 中变换器呈现四阶响应，含两对高 Q 共轭复极点和一对共轭复零点。接近 50 kHz 处还可观察到另一个 RHP（右半平面）零点。DCM 中有一个主导低频极点，后跟一对共轭复极点和一对共轭复零点。复极点和零点频率非常接近。高频动态在更高频率贡献附加相位滞后。
+
+在可在 CCM 或 DCM 下工作的变换器周围设计反馈控制器时应考虑穿越频率、相位裕度和闭环响应可能因工作模式而显著不同。下一节示例说明此点。
+
+### 15.4.2 示例：降压电压稳压器的环路增益和闭环响应
+
+9.5.4 节讨论了降压变换器示例的控制器设计。变换器和控制器框图如图9.35所示。此变换器系统设计为在负载电流达 5 A 时调节直流输出电压 $V = 15\text{ V}$。让我们通过仿真测试此设计。图15.29 给出 9.5.4 节所述降压电压稳压器实际实现的平均电路模型。MOSFET 和二极管开关用 CCM-DCM1 子电路实现的平均开关模型替代。$V_M = 4\text{ V}$ 的脉宽调制器按 7.3 节讨论建模为 PWM 输入电压 $v_x$ 控制的受控电压源 $E_{pwm}$。$E_{pwm}$ 的值等于 $1/V_M = 0.25$ 乘 PWM 输入电压 $v_x$，最小值限为 0.1 V，最大值限为 0.9 V。脉宽调制器输出是 CCM-DCM1 平均开关子电路的控制占空比输入。给定 $E_{pwm}$ 的指定限值，开关占空比 $d(t)$ 可取值范围为
+
+$$D_{min} \le d(t) \le D_{max} \tag{15.72}$$
+
+![源页 p.618](../assets/page-snapshots/chapter-15/page-618.png)
+
+图15.29 降压电压稳压器示例
+
+$D_{min} = 0.1$，$D_{max} = 0.9$。实际 PWM 集成电路通常有最大可能占空比限值 $D_{max} < 1$。电压传感器和补偿器围绕运放 LM324 实现。系统环路增益很大时稳态误差电压近似为零，即运放正负输入端直流电压几乎相同：
+
+$$v(5) = v_{ref} \tag{15.73}$$
+
+故静态（直流）输出电压 $V$ 由参考电压 $v_{ref}$ 和 $R_1$、$R_2$、$R_4$ 组成的分压器设定：
+
+$$V\frac{R_4}{R_1+R_2+R_4} = v_{ref} = 5\text{ V} \tag{15.74}$$
+
+令交流参考电压 $\hat{v}_{ref}$ 为零，可得电压传感器和补偿器的组合传递函数为
+
+$$H(s)G_c(s) = \frac{\hat{v}_y}{\hat{v}} = \frac{R_3+\dfrac{1}{sC_3}}{R_1+R_2\,\|\,\dfrac{1}{sC_2}} \tag{15.75}$$
+
+此传递函数可写成因式分解极点-零点形式
+
+$$G_{cm}H\frac{\left(1+\dfrac{s}{\omega_z}\right)\left(1+\dfrac{\omega_L}{s}\right)}{\left(1+\dfrac{s}{\omega_p}\right)} \tag{15.76}$$
+
+其中
+
+$$G_{cm}H = \frac{R_3}{R_1+R_2} \tag{15.77}$$
+
+$$f_z = \frac{\omega_z}{2\pi} = \frac{1}{2\pi R_2 C_2} \tag{15.78}$$
+
+$$f_L = \frac{\omega_L}{2\pi} = \frac{1}{2\pi R_3 C_3} \tag{15.79}$$
+
+$$f_p = \frac{\omega_p}{2\pi} = \frac{1}{2\pi(R_1\,\|\,R_2)C_2} \tag{15.80}$$
+
+9.5.4 节所述设计得如下增益和转折频率值：
+
+$$G_{cm}H = 3.7(1/3) = 1.23, \quad f_z = 1.7\text{ kHz}, \quad f_L = 500\text{ Hz}, \quad f_p = 14.5\text{ kHz} \tag{15.81}$$
+
+可用式 (15.74) 和 (15.77) 至 (15.81) 选择电路参数值。（稍任意地）选 $C_2 = 1.1\text{ nF}$。则由式 (15.78) $R_2 = 85\text{ k}\Omega$，式 (15.80) 给出 $R_1 = 11\text{ k}\Omega$。由式 (15.77) 得 $R_3 = 120\text{ k}\Omega$，式 (15.79) 给出 $C_3 = 2.7\text{ nF}$。最后由式 (15.74) 得 $R_4 = 47\text{ k}\Omega$。现可通过图15.29 电路仿真测试电压稳压器设计。
+
+环路增益可通过 9.6 节实验测量环路增益所述完全相同的技巧由仿真获得 [137]。应用 9.6.1 节的电压注入技巧。交流电压源 $v_z$ 注入在补偿器输出和 PWM 输入之间。这是良好注入点，因为围绕运放构造的补偿器输出阻抗小，而 PWM 输入阻抗很大（图15.29 电路模型中为无穷）。设交流源幅值为 1（任意），电路中无其他交流源，交流仿真求环路增益为
+
+$$T(s) = \frac{\hat{v}_y}{\hat{v}_x} = -\frac{v(6)}{v(7)} \tag{15.82}$$
+
+为执行交流分析，仿真器首先求解静态（直流）工作点。然后在此工作点线性化电路，对指定信号频率范围计算小信号频率响应。求解静态工作点涉及非线性方程组的数值解。某些情形中数值解不收敛，仿真以错误消息中止。特别是含反馈的电路常出现收敛问题，特别是直流环路增益很大时。图15.29 电路即如此。仿真器求解静态工作点时为帮助收敛可用 `.nodeset` 行指定节点电压的近似或预期值，如图15.29所示。此例中我们由设计知道静态输出电压接近 15 V（$v(3) = 15$），运放负输入非常接近参考（$v(5) = 5$），静态占空比近似 $D = V/V_g = 0.536$，故 $v(8) = 0.536\text{ V}$。给定这些近似节点电压，数值解收敛，仿真器为两个负载电阻 $R$ 值找到如下静态工作点：
+
+$$R = 3\,\Omega: \ v(3) = 15.2\text{ V}, \ v(5) = 5.0\text{ V}, \ v(7) = 2.173\text{ V}, \ v(8) = 0.543\text{ V}, \ D = 0.543 \tag{15.83}$$
+
+$$R = 25\,\Omega: \ v(3) = 15.2\text{ V}, \ v(5) = 5.0\text{ V}, \ v(7) = 2.033\text{ V}, \ v(8) = 0.508\text{ V}, \ D = 0.508 \tag{15.84}$$
+
+标称负载电阻 $R = 3\,\Omega$ 时变换器工作于 CCM，故 $D = V/V_g$。$R = 25\,\Omega$ 时相同直流输出电压以更低静态占空比值获得，意味着变换器工作于 DCM。
+
+![源页 p.621](../assets/page-snapshots/chapter-15/page-621.png)
+
+图15.30 降压电压稳压器示例中的环路增益
+
+式 (15.83) 和 (15.84) 所给工作点的环路增益幅值和相位响应如图15.30所示。$R = 3\,\Omega$ 时穿越频率 $f_c = 5.3\text{ kHz}$，相位裕度 $\phi_M = 47°$，非常接近 9.5.4 节设计值（$f_c = 5\text{ kHz}$，$\phi_M = 52°$）。轻载 $R = 25\,\Omega$ 时环路增益响应因变换器工作于 DCM 而显著不同。穿越频率降到 $f_c = 390\text{ Hz}$，相位裕度 $\phi_M = 55°$。
+
+![源页 p.621](../assets/page-snapshots/chapter-15/page-621.png)
+
+图15.31 降压电压稳压器示例的输入-输出响应
+
+输入-输出传递函数的幅值响应如图15.31所示，仍为两个负载电阻值 $R = 3\,\Omega$ 和 $R = 25\,\Omega$。开环响应通过在节点 8 处断开反馈环路并将该节点直流电压设为占空比静态值 $D$ 获得。$R = 3\,\Omega$ 时开环和闭环响应可与图9.45 所示理论图比较。100 Hz 处闭环幅值响应为 $0.012 \Rightarrow -38\text{ dB}$。$v_g(t)$ 中 1 V、100 Hz 变化将在输出电压 $v(t)$ 中引起 12 mV 变化。$R = 25\,\Omega$ 时闭环幅值响应为 $0.02 \Rightarrow -34\text{ dB}$，意味着 $v_g(t)$ 中 1 V、100 Hz 变化将在输出电压中引起 20 mV 变化。注意稳压器在抑制输入电压扰动方面的性能在轻载时比标称负载时显著更差。
+
+![源页 p.622](../assets/page-snapshots/chapter-15/page-622.png)
+
+图15.32 降压电压稳压器示例的负载暂态响应
+
+负载阶跃变化的暂态响应测试如图15.32所示。负载电流初始为 1.5 A，$t = 0.1\text{ ms}$ 时增到 $i_{LOAD} = 5\text{ A}$。变换器在恒定占空比下开环工作时，响应由变换器网络自然时间常数支配。可观察到输出电压大下冲和长轻阻尼振荡。反馈环路闭合时控制器动态调整占空比 $d(t)$ 试图保持输出电压恒定。输出电压降约 0.2 V，经短暂良好阻尼暂态后回到调节值。
+
+图15.29 电压稳压器示例说明稳压器预期供给宽范围负载时性能如何显著变化。实际中还须进行进一步测试以计入预期输入电压范围和元件参数值变化。可能需设计迭代以确保最坏情况条件下满足性能指标。
+
+## 15.5 DCM 变换器的高频动态
+
+如 15.3 节讨论，断续导通模式下变换器的传递函数呈现主导低频极点。为正确建模 DCM 变换器的高频动态，须去除式 (15.5) 给出的近似，即须计入电感两端交流电压不为零的事实 [130]。本节表明 DCM 变换器的高频动态与脉宽调制器关联的采样过程及电感电流对占空比扰动的响应性质有关 [136]。
+
+图15.33 给出 DCM 变换器中稳态和小信号扰动波形的细节。所示开关周期内电感电流从零以斜率 $m_1$ 上升，然后以斜率 $m_2$ 降到零。假定变换器电压不显著变化故斜率 $m_1$ 和 $m_2$ 可视为常数。
+
+![源页 p.623](../assets/page-snapshots/chapter-15/page-623.png)
+
+图15.33 DCM 变换器中的稳态和小信号扰动波形
+
+PWM 输入信号 $v_c(t)$ 含稳态直流分量 $V_c$ 和小信号交流扰动 $\hat{v}_c$。图15.33所示开关周期内晶体管开关栅极驱动波形延长 $\hat{d}T_s$，其中 $\hat{d} = \hat{v}_c/V_M$，$V_M$ 是 PWM 斜坡幅值。图15.33d 表明晶体管栅极驱动波形的扰动是长度 $\hat{d}T_s$ 的脉冲，出现在栅极驱动波形的调制边处。结果观察到电感电流波形的扰动。重要注意在栅极驱动信号的调制（后沿）之前变换器波形不受交流扰动 $\hat{v}_c$ 影响。如图15.33e所示，电感电流交流扰动是从栅极驱动信号调制边开始、延伸约 $D_2 T_s$ 时间区间的梯形脉冲。
+
+![源页 p.624](../assets/page-snapshots/chapter-15/page-624.png)
+
+图15.34 DCM 变换器中小信号扰动电感电流波形的冲激响应
+
+小信号极限下 $\hat{d}T_s$ 很短，$\hat{i}_L$ 中的过渡可忽略。故如图15.34所示，从栅极驱动波形扰动到电感电流扰动的响应可视为从冲激 $\hat{d}T_s\delta(t)$ 到幅值 $(m_1+m_2)\hat{d}T_s$、长度 $D_2 T_s$ 脉冲的响应。应注意单位冲激 $\delta(t)$ 出现在栅极驱动波形的调制边处。冲激表示脉宽调制器中在调制边发生的小信号采样过程。
+
+现在可解释 DCM 变换器高频动态在频域的性质。让我们基于图15.33 和15.34 所示时域波形导出控制-电感电流传递函数 $G_{ic}(s) = \hat{i}_L/\hat{v}_c$。推导中采样变量 $x$ 用星号 $x^*$ 表示。
+
+一般地给定小信号扰动 $\hat{v}_c(t)$，相应占空比扰动是采样变量
+
+$$\hat{d}^*(t) = \frac{\hat{v}_c(t)}{V_M}\sum_{k=-\infty}^{+\infty}\delta(t-kT_s) \tag{15.85}$$
+
+式 (15.85) 的拉普拉斯变换得
+
+$$\hat{d}^*(s) = \frac{1}{V_M}\frac{1}{T_s}\sum_{k=-\infty}^{+\infty}\hat{v}_c(s-jk\omega_s) \tag{15.86}$$
+
+其中 $\omega_s = 2\pi f_s$。时域中电感电流扰动的冲激响应如图15.34所示，
+
+$$\hat{i}_L = (m_1+m_2)\hat{d}T_s(h(t)-h(t-D_2 T_s)) \tag{15.87}$$
+
+其中 $h(t)$ 是单位阶跃函数。小信号电感电流响应类似于采样保持对冲激的响应，即从采样变量到连续时间变量的转换。给定占空比扰动的采样性质和变换器状态的连续时间性质，将式 (15.87) 的响应称为等效保持 [77] 是合适的。
+
+式 (15.87) 冲激响应的拉普拉斯变换可用于求电感电流扰动的等效保持传递函数：
+
+$$\mathcal{L}\!\left[\hat{i}_L(t)\right] = (m_1+m_2)\hat{d}T_s\frac{1-e^{-sD_2 T_s}}{s} \tag{15.88}$$
+
+由式 (15.86) 和 (15.88) 得
+
+$$\hat{i}_L^*(s) = \frac{(m_1+m_2)T_s}{V_M}\frac{1-e^{-sD_2 T_s}}{s}\frac{1}{T_s}\sum_{k=-\infty}^{+\infty}\hat{v}_c(s-jk\omega_s) \tag{15.89}$$
+
+给定脉宽调制变换器的采样数据性质，电感电流谱由对 $\hat{v}_c(s)$ 镜像的无限和响应组成并不意外。由于仅感兴趣远低于开关频率的变换器响应，可通过仅保留 $\hat{i}_L(s)$ 谱的低频（$k = 0$）部分获得控制-电感电流"传递函数"：
+
+$$G_{ic}(s) = \frac{\hat{i}_L}{\hat{v}_c} = \frac{m_1+m_2}{V_M}\frac{1-e^{-sD_2 T_s}}{s} \tag{15.90}$$
+
+注意传递函数 (15.90) 不是 $s$ 的标准有理函数。而是传递函数含 $e^{-sD_2 T_s}$ 项，这是采样过程和图15.34 所示等效保持响应的结果。由式 (15.90) 可用 Padé 近似 [138] 获得近似有理传递函数。一阶 Padé 近似为
+
+$$e^{-sD_2 T_s} \approx \frac{1-\dfrac{s}{\omega_2}}{1+\dfrac{s}{\omega_2}} \tag{15.91}$$
+
+其中
+
+$$f_2 = \frac{\omega_2}{2\pi} = \frac{1}{\pi D_2 T_s} = \frac{1}{D_2}\frac{f_s}{\pi} \tag{15.92}$$
+
+将式 (15.91) 应用于式 (15.90) 得含高频动态的近似控制-电感电流传递函数：
+
+$$G_{ic}(s) \approx \frac{(m_1+m_2)D_2 T_s}{V_M}\frac{1}{1+\dfrac{s}{\omega_2}} \tag{15.93}$$
+
+极点频率由式 (15.92) 给出。此高频极点表达式是通用的，对所有 DCM 基本变换器有效。由于 $0 < D_2 < 1$，式 (15.92) 意味高频极点始终大于约开关频率的三分之一。计入 $D_2$ 的稳态解后可用变换比 $M$ 和占空比 $D$ 表示极点频率。基本变换器的结果汇总于表15.4。虽然本节推导仅关注 $G_{ic}(s)$，相同高频极点可在所有其他 DCM 变换器传递函数中找到。
+
+表15.4 DCM 变换器控制-输出传递函数中的高频极点
+
+| 变换器 | 高频极点 $f_2$ |
+|---|---|
+| 降压 | $\dfrac{M}{D(1-M)}\dfrac{f_s}{\pi}$ |
+| 升压 | $\dfrac{M-1}{D}\dfrac{f_s}{\pi}$ |
+| 升降压 | $\dfrac{|M|}{D}\dfrac{f_s}{\pi}$ |
+
+重要重申频率响应中的高频极点是对图15.34 所示变换器时域动态表示的响应的近似。占空比扰动的响应中电感电流扰动是长度 $D_2 T_s$ 的脉冲。等效保持脉冲越长，占空比扰动与变换器波形扰动之间的时间延迟越长。频域中这对应变换器控制-输出响应中更低频率 $f_2$ 的附加相位滞后。由于等效保持延伸开关周期的一部分，所得极点 $f_2$ 非常高，附加相位滞后实际中通常可忽略。
+
+8.2.3 节讨论的导致升压或升降压 CCM 变换器频率响应中右半平面零点的行为在 DCM 变换器中也存在。例如占空比增大导致输出电压暂时朝相反方向移动。但 DCM 变换器中此反方向暂态也限于开关周期的一部分，对 DCM 变换器周围控制环路的设计或稳定性基本无影响。
+
+## 15.6 关键要点小结
+
+1. 断续导通模式下平均晶体管电压和电流成正比，故遵循欧姆定律。可用有效电阻 $R_e(d)$ 替代晶体管获得平均等效电路。平均二极管电压和电流遵循功率源特性，功率等于 $R_e$ 有效耗散的功率。平均等效电路中二极管用受控功率源替代。
+
+2. 由 DCM 变换器晶体管和二极管波形平均所得由有效电阻和功率源组成的二端口无损网络称为无损电阻。此网络建模 DCM 变换器的基本功率处理功能，与理想直流变压器建模 CCM 变换器基本功能的方式类似。
+
+3. 大信号平均模型可在平衡条件下求解以确定变换器电流电压的静态值。常可用平均功率论证。
+
+4. DCM 开关网络的小信号交流模型可通过扰动和线性化无损电阻网络导出。结果为二端口 y 参数模型形式。模型描述晶体管和二极管电流的小信号变化作为占空比变化及晶体管和二极管交流电压变化的函数。
+
+5. 为简化 DCM 降压和升压变换器的交流分析，定义对应图15.21a 和15.21b 开关网络的另两种小信号开关模型形式很方便。这些模型也是 y 参数二端口模型，但参数值不同。
+
+6. DCM 降压、升压和升降压变换器的电感动态出现在高频，在开关频率以上或以下。故大多数情形下高频电感动态可忽略。小信号交流模型中令电感 $L$ 为零，剩余模型相对易求解低频变换器动态。DCM 降压、升压和升降压变换器的传递函数本质含单低频主导极点。
+
+7. DCM 变换器的高频动态与脉宽调制器关联的采样过程及电感电流对占空比扰动的响应性质有关。
+
+## 习题
+
+![源页 p.627](../assets/page-snapshots/chapter-15/page-627.png)
+
+图15.35 反激变换器，习题15.1
+
+**15.1** 反激变换器的平均开关建模。图15.35 变换器工作于断续导通模式。双绕组电感匝比 1:n，漏感可忽略，可建模为与一次侧磁化电感 $L_p$ 并联的理想变压器。
+
+(a) 画晶体管和二极管电压电流波形，导出其平均值表达式。
+
+(b) 画含无损电阻网络变换器的平均模型，给出 $R_e(d)$ 表达式。
+
+(c) 解模型确定断续导通模式下电压比 $V/V_g$。
+
+(d) (c) 答案在何负载电流 $I$ 范围内有效？以 $I < I_{crit}(D, R_e, V_g, n)$ 形式表达 DCM 边界。
+
+(e) 导出小信号控制-输出传递函数 $G_{vd}(s)$ 表达式。可忽略电感动态。
+
+![源页 p.627](../assets/page-snapshots/chapter-15/page-627.png)
+
+图15.36 Watkins–Johnson 变换器，习题15.2
+
+**15.2** 非隔离 Watkins–Johnson 变换器的平均开关建模。图15.36 变换器工作于断续导通模式。双绕组电感匝比 1:1，漏感可忽略，可建模为与磁化电感 $L$ 并联的理想变压器。
+
+(a) 画晶体管和二极管电压电流波形，导出其平均值表达式。
+
+(b) 画含无损电阻网络变换器的平均模型，给出 $R_e(d)$ 表达式。
+
+(c) 解模型确定断续导通模式下变换器变换比 $M(D) = V/V_g$。表达式在何负载电流范围内有效？
+
+**15.3** 画升降压变换器的稳态输出特性：对若干占空比 $D$ 值画输出电压 $V$ 对负载电流 $I$。包括 CCM 和 DCM 工作，清楚标出模式间边界。
+
+![源页 p.628](../assets/page-snapshots/chapter-15/page-628.png)
+
+图15.37 含功率源的网络，习题15.4
+
+**15.4** 图15.37 网络中功率源波形 $p(t)$ 为
+
+$$p(t) = 1000\cos^2 377t$$
+
+电路稳态工作。确定电阻电压方均根值 $V_{R,rms}$。
+
+**15.5** 验证表15.3 中 $G_{d0}$ 和 $\omega_p$ 的表达式。
+
+**15.6** 某降压变换器输入电压 $V_g = 28\text{ V}$，输出电压 $V = 15\text{ V}$。负载电阻 $R = 10\,\Omega$。其他元件和参数值为 $L = 8\,\mu\text{H}$，$C = 220\,\mu\text{F}$，$f_s = 150\text{ kHz}$。
+
+(a) 确定 $R_e$ 值。
+
+(b) 确定静态占空比 $D$。
+
+(c) 画控制-输出传递函数 $G_{vd}(s)$ 波特图。标注所有显著特征值。可忽略电感动态。
+
+**15.7** 用 15.5 节方法确定升压变换器的控制-输出传递函数 $G_{vd}(s)$。不做 $L \approx 0$ 近似。
+
+(a) 导出直流增益 $G_{d0}$ 和 RHP 零点频率 $\omega_z$ 作为 $M$、$R_e$、$D$、$V_g$、$L$、$C$、$R$ 函数的解析表达式。
+
+(b) 假定 $C$ 足够大且 $L$ 足够小，$G_{vd}(s)$ 的极点可用低 Q 近似分解。这样做，将两个极点表示为 $M$、$D$、$L$、$C$、$R$ 的函数。证明低频极点与表15.3 中表达式匹配，高频极点由表15.4 中表达式给出。

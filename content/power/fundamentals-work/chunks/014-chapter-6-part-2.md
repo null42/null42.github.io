@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第6章part 2 - 6 Converter Circuits"
+title: "第6章 变换器电路（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1071 +18,321 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第6章part 2 - 6 Converter Circuits
+# 第6章 变换器电路（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 197-216  
-> Chunk ID: `chapter-6-part-2`
+> 源页：197–216
+> 本部分续接 6.3 节"变压器隔离"，涵盖 6.3.1 全桥/半桥（续）、6.3.2 正激变换器、6.3.3 推挽隔离降压变换器、6.3.4 反激变换器、6.3.5 升压派生隔离变换器、6.3.6 SEPIC 与 Ćuk 变换器的隔离版本。
 
-## 主干提取
+## 6.3 变压器隔离（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.197](../assets/page-snapshots/chapter-6/page-197.png)
 
-## 术语表
+图6.21 全桥变压器隔离降压变换器波形
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+因此必有 $i_{D5} = i_{D6} = 0.5i$ 在第二子区间成立。实际上，二极管电流与此结果略有差异，因为磁化电流非零。
 
-## 中文翻译
+图6.20b 中的理想变压器电流满足
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$i_1'(t) - ni_{D5}(t) + ni_{D6}(t) = 0 \tag{6.21}$$
 
-## 英文原文
+理想变压器一次侧的节点方程为
 
-```text
-6.3 Transformer Isolation 183
-Fig. 6.21 Waveforms of
-the full-bridge transformer-
-isolated buck converter
-iM(t)
-vT(t)
-vs(t)
-iD5(t)
-i(t)
-Vg
-0 0
-g
-nVg
-0
-nVg
-0
-i
-0.5 i 0.5 i
-0
-iI
-Vg
-LM
-Vg
-LM
-t
-0 DTs Ts 2TsTs+DTs
-Q1
-Q4
-D5
-D6
-D5 Q2
-Q3
-D6
-D6
-D5conducting
-devices:
-Therefore, it must be true that iD5 = iD6 = 0.5i during the second subinterval. In practice, the
-diode currents diﬀer slightly from this result, because of the nonzero magnetizing current.
-The ideal transformer currents in Fig. 6.20b obey
-i′
-1(t)−niD5(t)+ niD6(t)= 0 (6.21)
-The node equation at the primary of the ideal transformer is
-i1(t)= iM(t)+ i′
-1(t) (6.22)
-Elimination of i′
-1(t) from Eqs. (6.21) and (6.22) leads to
-i1(t)−niD5(t)+ niD6(t)= iM(t) (6.23)
-Equations ( 6.23) and ( 6.20) describe, in the general case, the transformer winding currents
-during the second subinterval. According to Eq. (6.23), the magnetizing current iM(t) may ﬂow
-through the primary winding, through one of the secondary windings, or it may divide between
-all three of these windings. How the division occurs depends on the i–v characteristics of the
-conducting transistors and diodes, and on the transformer leakage inductances. In the case where
-i1= 0, the solution to Eqs. (6.20) and (6.23)i s
+$$i_1(t) = i_M(t) + i_1'(t) \tag{6.22}$$
 
-184 6 Converter Circuits
-iD5(t)= 1
-2i(t)−1
-2niM(t)
-iD6(t)= 1
-2i(t)+ 1
-2niM(t)
-(6.24)
-Provided that iM ≪ ni, then iD5 and iD6 are each approximately 0.5i.
-The next switching period, Ts< t< 2Ts, proceeds in a similar manner, except that the trans-
-former is excited with voltage of the opposite polarity. During Ts< t< (Ts+ DTs), transistors
-Q2 and Q3 and diode D6 conduct. The applied transformer primary voltage is vT =−Vg, which
-causes the magnetizing current to decrease with slope−Vg/LM. The voltagevs(t) is equal tonVg,
-and the output inductor current i(t) ﬂows through diode D6. Diodes D5 and D6 again both con-
-duct during (Ts+ DTs)< t< 2Ts, with operation similar to subinterval 2 described previously.
-It can be seen that the switching ripple in the output ﬁlter elements has frequency fs = 1/Ts.
-However, the transformer waveforms have frequency 0.5 fs.
-By application of the principle of inductor volt-second balance to the magnetizing induc-
-tance, the average value of the transformer voltage vT (t) must be zero when the converter oper-
-ates in steady state. During the ﬁrst switching period, positive volt-seconds are applied to the
-transformer, approximately equal to
-[
-V
-g−⎦Q1 and Q4 forward voltage drops)]
-(Q1 and Q4 conduction time) (6.25)
-During the next switching period, negative volt-seconds are applied to the transformer, given by
-−
-[
-Vg−⎦Q2 and Q3 forward voltage drops)]
-(Q2 and Q3 conduction time) (6.26)
-The net volt-seconds, that is, the sum of Eqs. ( 6.25) and ( 6.26), should equal zero. While the
-full-bridge scheme causes this to be approximately true, in practice there exist imbalances such
-as small diﬀerences in the transistor forward voltage drops or in the transistor switching times,
-so that⟨vT⟩ is small but nonzero. In consequence, during every two switching periods there is a
-net increase in the magnitude of the magnetizing current. This increase can cause the transistor
-forward voltage drops to change such that small imbalances are compensated. However, if the
-imbalances are too large, then the magnetizing current becomes large enough to saturate the
-transformer.
-Transformer saturation under steady-state conditions can be avoided by placing a capacitor
-in series with the transformer primary. Imbalances then induce a dc voltage component across
-the capacitor, rather than across the transformer primary. Another solution is the use of current-
-programmed control, discussed in a later chapter. The series capacitor is omitted when current-
-programmed control is used.
-By application of the principle of volt-second balance to the output ﬁlter inductor L, the dc
-load voltage must be equal to the dc component of v
-s(t):
-V=⟨vs⟩ (6.27)
-By inspection of the vs(t) waveform in Fig.6.21,⟨vs⟩= nDVg. Hence,
-V= nDVg (6.28)
+从式 (6.21) 和 (6.22) 消去 $i_1'(t)$ 得
 
-6.3 Transformer Isolation 185
-So as in the buck converter, the output voltage can be controlled by variation of the transistor
-duty cycle D. An additional increase or decrease of the voltage can be obtained via the physical
-transformer turns ratio n. Equation ( 6.28) is valid for operation in the continuous conduction
-mode; as in the nonisolated buck converter, the full-bridge and half-bridge converters can oper-
-ate in discontinuous conduction mode at light load. The converter can operate over essentially
-the entire range of duty cycles 0≤D< 1.
-Transistors Q
-1 and Q2 must not conduct simultaneously; doing so would short out the dc
-source Vg, causing ashoot-through current spike. This transistorcross-conduction condition can
-lead to low eﬃciency and transistor failure. Cross conduction can be prevented by introduction
-of delay between the turn-oﬀof one transistor and the turn-on of the next transistor. DiodesD1 to
-D4 ensure that the peak transistor voltage is limited to the dc input voltage Vg, and also provide
-a conduction path for the transformer magnetizing current at light load. Details of the switching
-transitions of the full-bridge circuit are discussed further in a later chapter, in conjunction with
-zero-voltage switching phenomena.
-The full-bridge conﬁguration is typically used in switching power supplies at power levels
-of approximately 750 W and greater. It is usually not used at lower power levels because of its
-high parts count—four transistors and their associated drive circuits are required. The utilization
-of the transformer is good, leading to small transformer size. In particular, the utilization of the
-transformer core is very good, since the transformer magnetizing current can be both positive
-and negative. Hence, the entire coreB–H loop can be used. However, in practice, the ﬂux swing
-is usually limited by core loss. The transformer primary winding is eﬀectively utilized. But the
-center-tapped secondary winding is not, since each half of the center-tapped winding transmits
-power only during alternate switching periods. Also, the secondary winding currents during
-subinterval 2 lead to winding power loss, but not to transmittal of energy to the load. Design of
-the transformer of the full-bridge conﬁguration is discussed in detail in a later chapter.
-The half-bridge transformer-isolated buck converter is illustrated in Fig.6.22. Typical wave-
-forms are illustrated in Fig. 6.23. This circuit is similar to the full-bridge of Fig. 6.20a, except
-transistors Q
-3 and Q4, and their antiparallel diodes, have been replaced with large-value ca-
-pacitors Ca and Cb. By volt-second balance of the transformer magnetizing inductance, the dc
-voltage across capacitor Cb is equal to the dc component of the voltage across transistor Q2,o r
-CR
-+
-v
-LD3
-D4
-1: n
-: n
-i(t)
-+
-vs(t)
-+
-vT(t)+Vg
-D1
-Q1
-D2Q2
-i1(t) iD3(t)Ca
-Cb
-Fig. 6.22 Half-bridge transformer-isolated buck converter
+$$i_1(t) - ni_{D5}(t) + ni_{D6}(t) = i_M(t) \tag{6.23}$$
 
-186 6 Converter Circuits
-Fig. 6.23 Waveforms of
-the half-bridge transformer-
-isolated buck converter
-0.5Vg
-LM
-0.5Vg
-LM
-iM(t)
-vT(t)
-vs(t)
-iD3(t)
-i(t)
-0.5Vg
-0 0
-Vg
-0.5nVg
-0
-0.5nVg
-0
-i
-0.5 i 0.5 i
-0
-iI
-t
-0 DTs Ts 2TsTs+DTs
-Q1
-D3 D4
-D3 Q2
-D4 D4
-D3conducting
-devices:
-0.5Vg. The transformer primary voltage vT (t)i st h e n0.5Vg when transistor Q1 conducts, and
-−0.5Vg when transistor Q2 conducts. The magnitude of vT (t) is half as large as in the full-bridge
-conﬁguration, with the result that the output voltage is reduced by a factor of 0.5:
-V= 0.5nDVg (6.29)
-The factor of 0.5 can be compensated for by doubling the transformer turns ratio n. However,
-this causes the transistor currents to double.
-So the half-bridge conﬁguration needs only two transistors rather than four, but these two
-transistors must handle currents that are twice as large as those of the full-bridge circuit. In
-consequence, the half-bridge conﬁguration ﬁnds application at lower power levels, for which
-transistors with suﬃcient current rating are readily available, and where low parts count is
-important. Utilization of the transformer core and windings is essentially the same as in the
-full-bridge, and the peak transistor voltage is clamped to the dc input voltage V
-g by diodes D1
-and D2. It is possible to omit capacitor Ca if desired. The current-programmed mode generally
-does not work with half-bridge converters.
+式 (6.23) 和 (6.20) 在一般情形下描述了第二子区间内的变压器绕组电流。根据式 (6.23)，磁化电流 $i_M(t)$ 可流过一次绕组、流过某个二次绕组，或在这三个绕组之间分配。分配如何发生取决于导通晶体管和二极管的 i–v 特性以及变压器漏感。在 $i_1 = 0$ 的情形下，式 (6.20) 和 (6.23) 的解为
 
-6.3 Transformer Isolation 187
-+
-D1
-Q1
-n1 : n2 : n3
-CR
-+
-V
-LD2
-D3
-Vg
-Fig. 6.24 Single-transistor forward converter
-6.3.2 Forward Converter
-The forward converter is illustrated in Fig.6.24. This transformer-isolated converter is based on
-the buck converter. It requires a single transistor, and hence ﬁnds application at power levels
-lower than those commonly encountered in the full-bridge and half-bridge conﬁgurations. Its
-nonpulsating output current, shared with other buck-derived converters, makes the forward con-
-verter well suited for applications involving high output currents. The maximum transistor duty
-cycle is limited in value; for the common choice n
-1 = n2, the duty cycle is limited to the range
-0≤D< 0.5.
-The transformer magnetizing current is reset to zero while the transistor is in the o ﬀstate.
-How this occurs can be understood by replacing the three-winding transformer in Fig.6.24 with
-the equivalent circuit of Fig. 6.18b. The resulting circuit is illustrated in Fig. 6.25, and typical
-waveforms are given in Fig.6.26. The magnetizing inductanceLM, in conjunction with diodeD1,
-must operate in the discontinuous conduction mode. The output inductorL, in conjunction with
-diode D3, may operate in either continuous or discontinuous conduction mode. The waveforms
-of Fig. 6.26 are sketched for continuous mode operation of inductor L. During each switching
-period, three subintervals then occur as illustrated in Fig. 6.27.
-During subinterval 1, transistor Q1 conducts and the circuit of Fig. 6.27a is obtained. Diode
-D2 becomes forward-biased, while diodesD1 and D3 are reverse-biased. V oltageVg is applied to
-the transformer primary winding, and hence the transformer magnetizing currentiM(t) increases
-with a slope of Vg/LM as illustrated in Fig. 6.26. The voltage across diode D3 is equal to Vg,
-multiplied by the turns ratio n3/n1.
-The second subinterval begins when transistorQ1 is switched oﬀ. The circuit of Fig.6.27bi s
-then obtained. The transformer magnetizing currentiM(t) at this instant is positive, and must con-
-tinue to ﬂow. Since transistorQ1 is oﬀ, the equivalent circuit model predicts that the magnetizing
-current must ﬂow into the primary of the ideal transformer. It can be seen thatn1iM ampere-turns
-ﬂow out of the polarity mark of the primary winding. Hence, according to Eq. ( 6.16), an equal
-number of total ampere-turns must ﬂow into the polarity marks of the other windings. DiodeD2
-prevents current from ﬂowing into the polarity mark of winding 3. Hence, the current iMn1/n2
-must ﬂow into the polarity mark of winding 2. So diode D1 becomes forward-biased, while
+$$\begin{aligned} i_{D5}(t) &= \frac{1}{2}i(t) - \frac{1}{2n}i_M(t) \\ i_{D6}(t) &= \frac{1}{2}i(t) + \frac{1}{2n}i_M(t) \end{aligned} \tag{6.24}$$
 
-188 6 Converter Circuits
-+
-D1
-Q1
-n1 : n2 : n3
-CR
-+
-V
-LD2
-D3
-Vg
-LM
-iM i1'
-i1 i2
-i3
-+
-v1
-+
-vD3
-+
-v3
-+
-vQ1
-v2
-+
-Fig. 6.25 Forward converter, with transformer equivalent circuit model
-Fig. 6.26 Waveforms of the
-forward converter
-v1
-iM
-vD3
-t
-Vg
-n1
-n2
-Vg
-0
-Vg
-LM
-n1
-n2
-Vg
-LM 0
-00
-n3
-n1
-Vg
-DTs D2Ts D3Ts
-Ts
-Q1
-D2
-D1
-D3
-D3Conducting
-devices:
-diode D2 is reverse-biased. V oltageVg is applied to winding 2, and hence the voltage across the
-magnetizing inductance is −Vgn1/n2, referred to winding 1. This negative voltage causes the
-magnetizing current to decrease, with a slope of−Vgn1/n2LM. Since diode D2 is reverse-biased,
-diode D3 must turn on to conduct the output inductor current i(t).
+只要 $i_M \ll ni$，则 $i_{D5}$ 和 $i_{D6}$ 各约等于 $0.5i$。
 
-6.3 Transformer Isolation 189
-(a)
-+
-D1 offQ1 on
-n1 : n2 : n3
-CR
-+
-V
-LD2 on
-Vg
-LM
-iM i1'
-i1 i2
-i3
-+
-v1
-+
-vD3
-+
-v3v2
-+
-(b)
-+
-D1 on
-Q1 off
-n1 : n2 : n3
-CR
-+
-V
-L
-D3 on
-Vg
-LM
-iM i1'
-i1
-i2 = iM n1 /n2
-i3
-+
-v1
-+
-vD3
-+
-v3v2
-+
-(c)
-+
-D1 offQ1 off
-n1 : n2 : n3
-CR
-+
-V
-L
-D3 on
-Vg
-LM
-i1'
-i1 i2
-i3
-+
-v1
-+
-vD3
-+
-v3v2
-+
-iM
-= 0
-Fig. 6.27 Forward converter circuit: (a) during subinterval 1, (b) during subinterval 2, (c) during subin-
-terval 3
-When the magnetizing current reaches zero, diode D1 becomes reverse-biased. Subinterval
-3 then begins, and the circuit of Fig. 6.27c is obtained. Elements Q1, D1, and D2 operate in the
-oﬀstate, and the magnetizing current remains at zero for the balance of the switching period.
-By application of the principle of inductor volt-second balance to the transformer magnetiz-
-ing inductance, the primary winding voltagev1(t) must have zero average. Referring to Fig.6.26,
-the average of v1(t)i sg i v e nb y
-⟨v1⟩= D(Vg)+ D2(−Vg n1/n2)+ D3(0)= 0 (6.30)
+下一个开关周期 $T_s < t < 2T_s$ 的工作与之类似，只是变压器以相反极性的电压激励。在 $T_s < t < (T_s + DT_s)$ 内，晶体管 $Q_2$ 和 $Q_3$ 以及二极管 $D_6$ 导通。所施加的变压器一次电压为 $v_T = -V_g$，使磁化电流以 $-V_g/L_M$ 的斜率下降。$v_s(t)$ 等于 $nV_g$，输出电感电流 $i(t)$ 流过二极管 $D_6$。在 $(T_s + DT_s) < t < 2T_s$ 内，$D_5$ 和 $D_6$ 再次同时导通，工作与前述第二子区间类似。
 
-190 6 Converter Circuits
-Fig. 6.28 Magnetizing cur-
-rent waveform, forward con-
-verter: ( a)D C M , D< 0.5;
-(b) CCM, D> 0.5
-(a)
-iM(t)
-DTs D2Ts D3Ts t
-(b)
-iM(t)
-DTs D2Ts t2Ts
-Solution for the duty cycle D2 yields
-D2= n2
-n1
-D (6.31)
-Note that the duty cycle D3 cannot be negative. But since D+ D2+ D3= 1, we can write
-D3= 1−D−D2≥0 (6.32)
-Substitution of Eq. (6.31) into Eq. (6.32) leads to
-D3= 1−D
-⎦
-1+ n2
-n1
-)
-≥0 (6.33)
-Solution for D then yields
-D≤ 1
-1+ n2
-n1
-(6.34)
-So the maximum duty cycle is limited. For the common choice n1= n2, the limit becomes
-D≤1
-2 (6.35)
-If this limit is violated, then the transistor oﬀ-time is insuﬃcient to reset the transformer magne-
-tizing current to zero before the end of the switching period. Transformer saturation may then
-occur.
-The transformer magnetizing current waveform iM(t) is illustrated in Fig. 6.28, for the typ-
-ical case where n1 = n2. Figure 6.28a illustrates operation with D < 0.5. The magnetizing
-inductance, in conjunction with diode D1, operates in the discontinuous conduction mode, and
-iM(t) is reset to zero before the end of each switching period. Figure 6.28b illustrates what hap-
-pens when the transistor duty cycle D is greater than 0.5. There is then no third subinterval, and
-the magnetizing inductance operates in continuous conduction mode. Furthermore, subinterval
+可见，输出滤波元件上的开关纹波频率为 $f_s = 1/T_s$。但变压器波形的频率为 $0.5f_s$。
 
-6.3 Transformer Isolation 191
-2 is not long enough to reset the magnetizing current to zero. Hence, there is a net increase of
-iM(t) over each switching period. Eventually, the magnetizing current will become large enough
-to saturate the transformer.
-The converter output voltage can be found by application of the principle of inductor volt-
-second balance to inductor L. The voltage across inductor L must have zero dc component, and
-therefore the dc output voltage V is equal to the dc component of diode D3 voltage vD3(t). The
-waveform vD3(t) is illustrated in Fig. 6.26. It has an average value of
-⟨vD3⟩= V= n3
-n1
-DVg (6.36)
-This is the solution of the forward converter in the continuous conduction mode. The solution
-is subject to the constraint given in Eq. (6.34).
-It can be seen from Eq. (6.34) that the maximum duty cycle could be increased by decreasing
-the turns ratio n2/n1. This would cause iM(t) to decrease more quickly during subinterval 2,
-resetting the transformer faster. Unfortunately, this also increases the voltage stress applied
-to transistor Q1. The maximum voltage applied to transistor Q1 occurs during subinterval 2;
-solution of the circuit of Fig. 6.27b for this voltage yields
-max ⎦vQ1
-)= Vg
-⎦
-1+ n1
-n2
-)
-(6.37)
-For the common choice n1= n2, the voltage applied to the transistor during subinterval 2 is 2Vg.
-In practice, a somewhat higher voltage is observed, due to ringing associated with the trans-
-former leakage inductance. So decreasing the turns ration2/n1 allows increase of the maximum
-transistor duty cycle, at the expense of increased transistor blocking voltage.
-A two-transistor version of the forward converter is illustrated in Fig. 6.29. Transistors Q1
-and Q2 are controlled by the same gate drive signal, such that they both conduct during subin-
-terval 1, and are oﬀduring subintervals 2 and 3. The secondary side of the converter is identical
-to the single-transistor forward converter; diode D3 conducts during subinterval 1, while diode
-+
-D1
-Q1
-1 : n
-CR
-+
-V
-L
-D2
-D3
-Vg
-Q2
-D4
-Fig. 6.29 Two-transistor forward converter
+将电感伏秒平衡原理应用于磁化电感，稳态工作时变压器电压 $v_T(t)$ 的平均值必须为零。在第一个开关周期内，正向伏秒施加于变压器，约等于
 
-192 6 Converter Circuits
-D4 conducts during subintervals 2 and 3. During subinterval 2, the magnetizing current iM(t)
-forward-biases diodes D1 and D2. The transformer primary winding is then connected to Vg,
-with polarity opposite to that of subinterval 1. The magnetizing current then decreases, with
-slope−Vg/LM. When the magnetizing current reaches zero, diodes D1 and D2 become reverse-
-biased. The magnetizing current then remains at zero for the balance of the switching period.
-So operation of the two-transistor forward converter is similar to the single-transistor forward
-converter, in which n1 = n2. The duty cycle is limited to D< 0.5. This converter has the ad-
-vantage that the transistor peak blocking voltage is limited to Vg, and is clamped by diodes D1
-and D2. Typical power levels of the two-transistor forward converter are similar to those of the
-half-bridge conﬁguration.
-The utilization of the transformer of the forward converter is quite good. Since the trans-
-former magnetizing current cannot be negative, only half of the core B–H loop can be used.
-This would seemingly imply that the transformer cores of forward converters should be twice
-as large as those of full- or half-bridge converters. However, in modern high-frequency convert-
-ers, the ﬂux swing is constrained by core loss rather than by the core material saturation ﬂux
-density. In consequence, the utilization of the transformer core of the forward converter can be
-as good as in the full- or half-bridge conﬁgurations. Utilization of the primary and secondary
-windings of the transformer is better than in the full-bridge, half-bridge, or push-pull conﬁgu-
-rations, since the forward converter requires no center-tapped windings. During subinterval 1,
-all of the available winding copper is used to transmit power to the load. Essentially no unnec-
-essary current ﬂows during subintervals 2 and 3. Typically, the magnetizing current is small
-compared to the reﬂected load current, and has negligible eﬀect on the transformer utilization.
-So the transformer core and windings are eﬀectively utilized in modern forward converters.
-6.3.3 Push-Pull Isolated Buck Converter
-The push-pull isolated buck converter is illustrated in Fig. 6.30. The secondary-side circuit is
-identical with the full- and half-bridge converters, with identical waveforms. The primary-side
-circuit contains a center-tapped winding. Transistor Q
-1 conducts for time DTs during the ﬁrst
-switching period. Transistor Q2 conducts for an identical length of time during the next switch-
-ing period, such that volt-second balance is maintained across the transformer primary winding.
-Converter waveforms are illustrated in Fig.6.31. This converter can operate over the entire range
-of duty cycles 0≤D< 1. Its conversion ratio is given by
-V= nDVg (6.38)
-Fig. 6.30 Push-pull iso-
-lated buck converter CR
-+
-V
-LD1
-D2
-1 : n
-+
-Vg
-Q1
-Q2
-+
-vs(t)
-vT(t)
-+
-vT(t)
-+
-iD1(t)
-i(t)
+$$\big[V_g - (\text{$Q_1$ 和 $Q_4$ 的正向压降})\big](\text{$Q_1$ 和 $Q_4$ 的导通时间}) \tag{6.25}$$
 
-6.3 Transformer Isolation 193
-Fig. 6.31 Waveforms of
-the push-pull isolated buck
-converter
-iM(t)
-vT(t)
-vs(t)
-iD1(t)
-i(t)
-Vg
-0 0
-g
-nVg
-0
-nVg
-0
-i
-0.5 i 0.5 i
-0
-iI
-Vg
-LM
-Vg
-LM
-t
-0 DTs Ts 2TsTs+DTs
-Q1
-D1 D2
-D1 Q2
-D2 D2
-D1Conducting
-devices:
-This converter is sometimes used in conjunction with low input voltages. It tends to exhibit
-low primary-side conduction losses, since at any given instant only one transistor is connected
-in series with the dc source Vg. The ability to operate with transistor duty cycles approaching
-unity also allows the turns ratio n to be minimized, reducing the transistor currents.
-The push-pull conﬁguration is prone to transformer saturation problems. Since it cannot be
-guaranteed that the forward voltage drops and conduction times of transistors Q1 and Q2 are
-exactly equal, small imbalances can cause the dc component of voltage applied to the trans-
-former primary to be nonzero. In consequence, during every two switching periods there is a
-net increase in the magnitude of the magnetizing current. If this imbalance continues, then the
-magnetizing current can eventually become large enough to saturate the transformer.
-Current-programmed control can be employed to mitigate the transformer saturation prob-
-lems. Operation of the push-pull converter using only duty-cycle control is not recommended.
-Utilization of the transformer core material and secondary winding is similar to that for the
-full-bridge converter. The ﬂux and magnetizing current can be both positive and negative, and
-therefore the entire B–H loop can be used, if desired. Since the primary and secondary windings
-are both center-tapped, their utilization is suboptimal.
+在下一个开关周期内，反向伏秒施加于变压器，为
 
-194 6 Converter Circuits
-6.3.4 Flyback Converter
-The ﬂyback converter is based on the buck–boost converter. Its derivation is illustrated in
-Fig. 6.32. Figure 6.32a depicts the basic buck–boost converter, with the switch realized using
-a MOSFET and diode. In Fig. 6.32b, the inductor winding is constructed using two wires, with
-a 1:1 turns ratio. The basic function of the inductor is unchanged, and the parallel windings
-are equivalent to a single winding constructed of larger wire. In Fig. 6.32c, the connections
-between the two windings are broken. One winding is used while the transistor Q1 conducts,
-while the other winding is used when diode D1 conducts. The total current in the two windings
-is unchanged from the circuit of Fig. 6.32b; however, the current is now distributed between
-the windings diﬀerently. The magnetic ﬁelds inside the inductor in both cases are identical.
-Fig. 6.32 Derivation of the ﬂy-
-back converter: (a) buck–boost
-converter; ( b) inductor L is
-wound with two parallel wires;
-(c) inductor windings are iso-
-lated, leading to the ﬂyback con-
-verter; (d) with a 1 : n turns ra-
-tio and positive output
-(a)
-+ L V
-+
-Vg
-Q1 D1
-(b)
-+ L V
-+
-Vg
-Q1 D1
-1:1
-(c)
-+ LM V
-+
-Vg
-Q1 D1
-1:1
-(d)
-+
-LM
-+
-V
-Vg
-Q1
-D11:n
-C
+$$-\big[V_g - (\text{$Q_2$ 和 $Q_3$ 的正向压降})\big](\text{$Q_2$ 和 $Q_3$ 的导通时间}) \tag{6.26}$$
 
-6.3 Transformer Isolation 195
-Although the two-winding magnetic device is represented using the same symbol as the trans-
-former, a more descriptive name is “two-winding inductor.” This device is sometimes also called
-a ﬂyback transformer. Unlike the ideal transformer, current does not ﬂow simultaneously in
-both windings of the ﬂyback transformer. Figure 6.32d illustrates the usual conﬁguration of the
-ﬂyback converter. The MOSFET source is connected to the primary-side ground, simplifying
-the gate drive circuit. The transformer polarity marks are reversed, to obtain a positive output
-voltage. A 1:n turns ratio is introduced; this allows better converter optimization.
-Fig. 6.33 Flyback converter
-circuit: ( a) with transformer
-equivalent circuit model, ( b)
-during subinterval 1, (c) during
-subinterval 2
-(a)
-+
-LM
-+
-v
-Vg
-Q1
-D11:n
-C
-Transformer model
-iig
-R
-iC+
-vL
-(b)
-+ LM
-+
-vVg
-1:n
-C
-Transformer model
-iig
-R
-iC+
-vL
-(c)
-+
-+
-vVg
-1:n
-C
-Transformer model
-i
-R
-iC
-i/n
-v/n
-+
-+
-vL
-ig
-= 0
-The ﬂyback converter may be analyzed by insertion of the model of Fig.6.18b in place of the
-ﬂyback transformer. The circuit of Fig. 6.33a is then obtained. The magnetizing inductance LM
-functions in the same manner as inductor L of the original buck–boost converter of Fig. 6.32a.
-When transistor Q1 conducts, energy from the dc source Vg is stored in LM. When diode D1
-conducts, this stored energy is transferred to the load, with the inductor voltage and current
-scaled according to the 1:n turns ratio.
+净伏秒，即式 (6.25) 与 (6.26) 之和，应为零。全桥方案使此条件近似成立，但实际中总存在不平衡，例如晶体管正向压降或开关时间的微小差异，使 $\langle v_T \rangle$ 很小但非零。结果是，每两个开关周期磁化电流幅值净增。此增量可使晶体管正向压降变化从而补偿微小不平衡。但若不平衡过大，磁化电流将增大到足以使变压器饱和。
 
-196 6 Converter Circuits
-Fig. 6.34 Flyback converter waveforms,
-continuous conduction mode
-vL
-iC
-ig
-t
-Vg
-0
-DTs D'Ts
-Ts
-Q1 D1
-Conducting
-devices:
-I
-During subinterval 1, while transistor Q1 conducts, the converter circuit model reduces to
-Fig. 6.33b. The inductor voltage vL, capacitor current iC, and dc source current ig are given by
-vL = Vg
-iC =−v
-R (6.39)
-ig = i
-With the assumption that the converter operates in the continuous conduction mode, with small
-inductor current ripple and small capacitor voltage ripple, the magnetizing current i and output
-capacitor voltage v can be approximated by their dc components,I and V, respectively. Equation
-(6.39) then becomes
-vL = Vg
-iC =−V
-R (6.40)
-ig= I
-During the second subinterval, the transistor is in the o ﬀstate, and the diode conducts. The
-equivalent circuit of Fig. 6.33c is obtained. The primary-side magnetizing inductance voltage
-vL, the capacitor current iC, and the dc source current ig for this subinterval are
+在变压器一次侧串联一个电容可避免稳态条件下的变压器饱和。不平衡此时在电容上引起直流电压分量，而非在变压器一次侧。另一种方案是采用电流编程控制，将在后续章节讨论。采用电流编程控制时，串联电容省略。
 
-6.3 Transformer Isolation 197
-vL =−v
-n
-iC = i
-n−v
-R (6.41)
-ig= 0
-It is important to consistently deﬁnevL(t) on the same side of the transformer for all subintervals.
-Upon making the small-ripple approximation, one obtains
-vL =−V
-n
-iC = I
-n−V
-R (6.42)
-ig = 0
-The vL(t), iC(t), and ig(t) waveforms are sketched in Fig. 6.34 for continuous conduction mode
-operation.
-Application of the principle of volt-second balance to the primary-side magnetizing induc-
-tance yields
-⟨vL⟩= D(Vg)+ D′
-⎦
-−V
-n
-)
-= 0 (6.43)
-Solution for the conversion ratio then leads to
-M(D)= V
-Vg
-= n D
-D′ (6.44)
-So the conversion ratio of the ﬂyback converter is similar to that of the buck–boost converter,
-but contains an added factor of n.
-Application of the principle of charge balance to the output capacitor C leads to
-⟨iC⟩= D
-⎦
-−V
-R
-)
-+ D′
-⎦I
-n−V
-R
-)
-= 0 (6.45)
-Solution for I yields
-I= nV
-D′R (6.46)
-This is the dc component of the magnetizing current, referred to the primary. The dc component
-of the source current ig is
-Ig=⟨ig⟩= D(I)+ D′(0) (6.47)
-An equivalent circuit that models the dc components of the ﬂyback converter waveforms can
-now be constructed. Circuits corresponding to the inductor loop equation ( 6.43) and to node
-equations (6.45) and ( 6.47) are illustrated in Fig. 6.35a. By replacing the dependent sources
-with ideal dc transformers, one obtains Fig. 6.35b. This is the dc equivalent circuit of the ﬂy-
-back converter. It contains a 1: D buck-type conversion ratio, followed by a D′ : 1 boost-type
-conversion ratio, and an added factor of 1:n arising from the ﬂyback transformer turns ratio. By
-use of the method developed in Chap. 3, the model can be reﬁned to account for losses and to
-predict the converter eﬃciency. The ﬂyback converter can also be operated in the discontinuous
-conduction mode; analysis is left as a homework problem. The results are similar to the DCM
-buck–boost converter results tabulated in Chap. 5, but are generalized to account for the turns
-ratio 1:n.
+将伏秒平衡原理应用于输出滤波电感 $L$，直流负载电压必须等于 $v_s(t)$ 的直流分量：
 
-198 6 Converter Circuits
-(a)
-++ R
-+
-VVg
-D'InD'Vn+ DVgDI
-IIg
-(b)
-+ R
-+
-VVg
-IIg
-1: D D': n
-Fig. 6.35 Flyback converter equivalent circuit model, CCM: ( a) circuits corresponding to Eqs. ( 6.43),
-(6.45), and (6.47); (b) equivalent circuit containing ideal dc transformers
-The ﬂyback converter is commonly used at the 50 to 100 W power range, as well as in high-
-voltage power supplies for televisions and computer monitors. It has the advantage of very low
-parts count. Multiple outputs can be obtained using a minimum number of parts: each additional
-output requires only an additional winding, diode, and capacitor. However, in comparison with
-the full-bridge, half-bridge, or two-transistor forward converters, the ﬂyback converter has the
-disadvantages of high transistor voltage stress and poor cross-regulation. The peak transistor
-voltage is equal to the dc input voltage V
-g plus the reﬂected load voltage V/n; in practice, ad-
-ditional voltage is observed due to ringing associated with the transformer leakage inductance.
-Rigorous comparison of the utilization of the ﬂyback transformer with the transformers of buck-
-derived circuits is diﬃcult because of the diﬀerent functions performed by these elements. The
-magnetizing current of the ﬂyback transformer is unipolar, and hence no more than half of the
-core material B–H loop can be utilized. The magnetizing current must contain a signiﬁcant dc
-component. Yet, the size of the ﬂyback transformer is quite small in designs intended to oper-
-ate in the discontinuous conduction mode. However, DCM operation leads to increased peak
-currents in the transistor, diode, and ﬁlter capacitors. Continuous conduction mode designs re-
-quire larger values of L
-M, and hence larger ﬂyback transformers, but the peak currents in the
-power-stage elements are lower.
-6.3.5 Boost-Derived Isolated Converters
-Transformer-isolated boost converters can be derived by inversion of the source and load of
-buck-derived isolated converters. A number of conﬁgurations are known, and two of these are
-brieﬂy discussed here. These converters ﬁnd some employment in high-voltage power supplies,
-as well as in low-harmonic rectiﬁer applications.
-A full-bridge conﬁguration is diagrammed in Fig. 6.36, and waveforms for the continuous
-conduction mode are illustrated in Fig. 6.37. The circuit topologies during the ﬁrst and second
+$$V = \langle v_s \rangle \tag{6.27}$$
 
-6.3 Transformer Isolation 199
-CR
-+
-v
-L
-D1
-D2
-1 : n
-: n
-i(t)
-+
-vT(t)+Vg
-Q1
-Q2
-Q3
-Q4
-+ vL(t)
-io(t)
-Fig. 6.36 Full-bridge transformer-isolated boost converter
-vL(t)
-i(t)
-io(t)
-t
-Vg
-0
-Q1
-D1
-Conducting
-devices:
-Vg V/n
-I/n
-vT(t)
-00
-V/n
- V/n
-Vg
-Vg V/n
-I/n
-0
-DTs D'Ts
-Ts
-DTs D'Ts
-Ts
-Q2
-Q3
-Q4
-Q1
-Q2
-Q3
-Q4
-Q1
-Q4
-Q2
-Q3
-D2
-I
-Fig. 6.37 Waveforms of the transformer-isolated full-bridge boost converter, CCM
+由图6.21中 $v_s(t)$ 波形可见，$\langle v_s \rangle = nDV_g$。故
 
-200 6 Converter Circuits
-(a)
-+
-Vg
-CR
-+
-V
-L
-D1
-D2
-1 : n
-Q1
-Q2
-+ vL(t)
-vT(t)
-+
-vT(t)
-+
-io(t)
-i(t)
-(b)
-+
-Vg
-CR
-+
-V
-D1
-D2
-1 : n
-Q1
-Q2
-Fig. 6.38 Push-pull isolated converters: ( a) based on the boost converter, ( b) based on the Watkins–
-Johnson converter
-subintervals are equivalent to those of the basic nonisolated boost converter, and when the turns
-ratio is 1:1, the inductor current i(t) and output current io(t) waveforms are identical to the
-inductor current and diode current waveforms of the nonisolated boost converter.
-During subinterval 1, all four transistors operate in the on state. This connects the inductor
-L across the dc input sourceVg, and causes diodes D1 and D2 to be reverse-biased. The inductor
-current i(t) increases with slopeVg/L, and energy is transferred from the dc sourceVg to inductor
-L. During the second subinterval, transistors Q2 and Q3 operate in the oﬀstate, so that inductor
-L is connected via transistors Q1 and Q4 through the transformer and diode D1 to the dc output.
-The next switching period is similar, except that during subinterval 2, transistors Q1 and Q4
-operate in the oﬀstate, and inductor L is connected via transistors Q2 and Q3 through the
-transformer and diode D2 to the dc output. If the transistor oﬀ-times and the diode forward drops
-are identical, then the average transformer voltage is zero, and the net volt-seconds applied to
-the transformer magnetizing inductance over two switching periods is zero.
-Application of the principle of inductor volt-second balance to the inductor voltage wave-
-form vL(t) yields
-⟨vL⟩= D(Vg)+ D′
-⎦
-Vg−V
-n
-)
-= 0 (6.48)
-Solution for the conversion ratio M(D) then leads to
-M(D)= V
-Vg
-= n
-D′ (6.49)
+$$V = nDV_g \tag{6.28}$$
 
-6.3 Transformer Isolation 201
-This result is similar to the boost converter M(D), with an added factor of n due to the trans-
-former turns ratio.
-The transistors must block the reﬂected load voltage V/n= Vg/D′. In practice, additional
-voltage is observed due to ringing associated with the transformer leakage inductance. Because
-the instantaneous transistor current is limited by inductor L, saturation of the transformer due
-to small imbalances in the semiconductor forward voltage drops or conduction times is not
-catastrophic. Indeed, control schemes are known in which the transformer is purposely operated
-in saturation during subinterval 1 [53, 55].
-A push-pull conﬁguration is depicted in Fig. 6.38a. This conﬁguration requires only two
-transistors, each of which must block voltage 2 V/n. Operation is otherwise similar to that of
-the full-bridge. During subinterval 1, both transistors conduct. During subinterval 2, one of the
-transistors operates in the o ﬀstate, and energy is transferred from the inductor through the
-transformer and one of the diodes to the output. Transistors conduct during subinterval 2 during
-alternate switching periods, such that transformer volt-second balance is maintained. A similar
-push-pull version of the Watkins–Johnson converter, converter 6 of Fig. 6.15, is illustrated in
-Fig. 6.38b.
-6.3.6 Isolated Versions of the SEPIC and the ´Cuk Converter
-The artiﬁce used to obtain isolation in the ﬂyback converter can also be applied to the SEPIC
-and inverse-SEPIC. Referring to Fig. 6.39a, inductor L
-2 can be realized using two windings,
-leading to the isolated SEPIC of Fig. 6.39b. An equivalent circuit is given in Fig. 6.39c. It can
-be seen that the magnetizing inductance performs the energy storage function of the original
-inductor L2. In addition, the ideal transformer provides isolation and a turns ratio.
-Typical primary and secondary winding current waveforms ip(t) and is(t) are portrayed in
-Fig. 6.40, for the continuous conduction mode. The magnetic device must function as both a ﬂy-
-back transformer and also a conventional two-winding transformer. During subinterval 1, while
-transistor Q
-1 conducts, the magnetizing current ﬂows through the primary winding, and the sec-
-ondary winding current is zero. During subinterval 2, while diodeD1 conducts, the magnetizing
-current ﬂows through the secondary winding to the load. In addition, the input inductor current
-i
-1 ﬂows through the primary winding. This induces an additional component of secondary cur-
-rent i1/n, which also ﬂows to the load. So design of the SEPIC transformer is somewhat unusual,
-and the rms winding currents are larger than those of the ﬂyback transformer.
-By application of the principle of volt-second balance to inductorsL1 and LM, the conversion
-ratio can be shown to be
-M(D)= V
-Vg
-= nD
-D′ (6.50)
-Ideally, the transistor must block voltage Vg/D′. In practice, additional voltage is observed due
-to ringing associated with the transformer leakage inductance.
-An isolated version of the inverse-SEPIC is shown in Fig.6.41. Operation and design of the
-transformer is similar to that of the SEPIC.
-Isolation in the ´Cuk converter is obtained in a diﬀerent manner [58]. The basic nonisolated
-´Cuk converter is illustrated in Fig.6.42a. In Fig.6.42b, capacitorC1 is split into two series capac-
-itors C1a and C1b. A transformer can now be inserted between these capacitors, as indicated in
-Fig. 6.42c. The polarity marks have been reversed, so that a positive output voltage is obtained.
+![源页 p.199](../assets/page-snapshots/chapter-6/page-199.png)
 
-202 6 Converter Circuits
-(a)
-+
-D1
-L1
-C2
-+
-v
-Q1
-C1
-L2
-RVg
-(b)
-+
-D1L1
-C2
-+
-v
-Q1
-C1
-RVg
-1 : n
-ip isi1
-(c)
-+
-D1L1
-C2
-+
-v
-Q1
-C1
-RVg
-1 : nip
-isi1 i2
-Ideal
-Transformer
-model
-LM
-= L2
-Fig. 6.39 Obtaining isolation in the SEPIC: (a) basic nonisolated converter, (b) isolated SEPIC, (c) with
-transformer equivalent circuit model
-Having capacitors in series with the transformer primary and secondary windings ensures that
-no dc voltage is applied to the transformer. The transformer functions in a conventional manner,
-with small magnetizing current and negligible energy storage within the magnetizing induc-
-tance.
-Utilization of the transformer of the ´Cuk converter is quite good. The magnetizing current
-can be both positive and negative, and hence the entire coreB–H loop can be utilized if desired.
-There are no center-tapped windings, and all of the copper is eﬀectively utilized. The transistor
-must block voltage Vg/D′, plus some additional voltage due to ringing associated with the
-transformer leakage inductance. The conversion ratio is identical to that of the isolated SEPIC,
-Eq. (6.50).
-The isolated SEPIC and ´Cuk converter ﬁnd application as switching power supplies, typi-
-cally at power levels of several hundred watts. They also ﬁnd use as ac–dc low-harmonic recti-
-ﬁers.
-```
+与降压变换器一样，输出电压可通过改变晶体管占空比 $D$ 控制。通过物理变压器匝比 $n$ 可进一步升高或降低电压。式 (6.28) 对连续导通模式工作有效；与非隔离降压变换器一样，全桥和半桥变换器在轻载时可工作于断续导通模式。变换器几乎可在整个占空比范围 $0 \le D < 1$ 内工作。
+
+晶体管 $Q_1$ 和 $Q_2$ 不可同时导通；否则将短路直流电源 $V_g$，产生穿通电流尖峰。这种晶体管交叉导通可导致效率降低和晶体管失效。在一只晶体管关断与下一只晶体管开通之间引入延迟可防止交叉导通。二极管 $D_1$ 至 $D_4$ 确保晶体管峰值电压被钳位到直流输入电压 $V_g$，并在轻载时为变压器磁化电流提供导通路径。全桥电路开关过渡的细节将在后续章节结合零电压开关现象进一步讨论。
+
+全桥结构通常用于约 750 W 及以上功率等级的开关电源。它一般不用于较低功率等级，因为元件数多——需要四只晶体管及其驱动电路。变压器的利用率良好，故变压器体积较小。特别地，变压器磁芯利用率很高，因为变压器磁化电流既可为正也可为负，因此可用整个磁芯 B-H 回线。但实际中，磁通摆幅通常受铁损限制。变压器一次绕组利用率高。但中心抽头二次绕组利用率不高，因为中心抽头绕组的每一半只在交替的开关周期内传输功率。而且，第二子区间内的二次绕组电流导致绕组功率损耗，但不向负载传输能量。全桥结构变压器的设计将在后续章节详细讨论。
+
+半桥变压器隔离降压变换器如图6.22所示，典型波形如图6.23所示。此电路与图6.20a 全桥类似，只是晶体管 $Q_3$ 和 $Q_4$ 及其反并联二极管被替换为大值电容 $C_a$ 和 $C_b$。由变压器磁化电感的伏秒平衡，电容 $C_b$ 上的直流电压等于晶体管 $Q_2$ 两端电压的直流分量，即 $0.5V_g$。
+
+![源页 p.199](../assets/page-snapshots/chapter-6/page-199.png)
+
+图6.22 半桥变压器隔离降压变换器
+
+![源页 p.200](../assets/page-snapshots/chapter-6/page-200.png)
+
+图6.23 半桥变压器隔离降压变换器波形
+
+晶体管 $Q_1$ 导通时变压器一次电压 $v_T(t)$ 为 $0.5V_g$，$Q_2$ 导通时为 $-0.5V_g$。$v_T(t)$ 的幅值是全桥结构的一半，因此输出电压也减小为原来的 0.5：
+
+$$V = 0.5nDV_g \tag{6.29}$$
+
+该 0.5 系数可通过将变压器匝比 $n$ 翻倍来补偿。但这会使晶体管电流翻倍。
+
+因此半桥结构只需两只而非四只晶体管，但这两只晶体管必须承受两倍于全桥电路的电流。故半桥结构适用于较低功率等级，此时具有足够电流定额的晶体管容易获得，且低元件数很重要。变压器磁芯和绕组的利用率与全桥基本相同，晶体管峰值电压由二极管 $D_1$ 和 $D_2$ 钳位至直流输入电压 $V_g$。电容 $C_a$ 如需要可省略。电流编程模式一般不适用于半桥变换器。
+
+### 6.3.2 正激变换器
+
+正激变换器如图6.24所示。这种变压器隔离变换器以降压变换器为基础。它只需一只晶体管，故适用于低于全桥和半桥常见功率等级的场合。其非脉动输出电流（与其他降压派生变换器相同）使正激变换器适合高输出电流应用。晶体管最大占空比受限；当取常见选择 $n_1 = n_2$ 时，占空比限于 $0 \le D < 0.5$ 范围。
+
+![源页 p.201](../assets/page-snapshots/chapter-6/page-201.png)
+
+图6.24 单管正激变换器
+
+晶体管关断期间，变压器磁化电流被复位到零。其机理可通过将图6.24中的三绕组变压器替换为图6.18b 的等效电路来理解。所得电路如图6.25所示，典型波形如图6.26所示。磁化电感 $L_M$ 与二极管 $D_1$ 配合工作于断续导通模式。输出电感 $L$ 与二极管 $D_3$ 配合可工作于连续或断续导通模式。图6.26波形按电感 $L$ 连续模式工作绘制。每个开关周期内出现三个子区间，如图6.27所示。
+
+子区间 1 内，晶体管 $Q_1$ 导通，得到图6.27a 电路。二极管 $D_2$ 正偏，二极管 $D_1$ 和 $D_3$ 反偏。$V_g$ 施加于变压器一次绕组，故变压器磁化电流 $i_M(t)$ 以 $V_g/L_M$ 的斜率上升，如图6.26所示。二极管 $D_3$ 两端电压等于 $V_g$ 乘以匝比 $n_3/n_1$。
+
+子区间 2 始于晶体管 $Q_1$ 关断时刻，此时得到图6.27b 电路。此时变压器磁化电流 $i_M(t)$ 为正，且必须继续流动。由于 $Q_1$ 关断，等效电路模型预测磁化电流必须流入理想变压器的一次侧。可见 $n_1 i_M$ 安匝从一次绕组的极性标记端流出。故根据式 (6.16)，等量的总安匝必须从其他绕组的极性标记端流入。二极管 $D_2$ 阻止电流流入绕组 3 的极性标记端。故电流 $i_M n_1/n_2$ 必须流入绕组 2 的极性标记端。于是二极管 $D_1$ 正偏，
+
+![源页 p.202](../assets/page-snapshots/chapter-6/page-202.png)
+
+图6.25 含变压器等效电路模型的正激变换器
+
+![源页 p.202](../assets/page-snapshots/chapter-6/page-202.png)
+
+图6.26 正激变换器波形
+
+二极管 $D_2$ 反偏。$V_g$ 施加于绕组 2，故归算到绕组 1 的磁化电感两端电压为 $-V_g n_1/n_2$。此负电压使磁化电流以 $-V_g n_1/(n_2 L_M)$ 的斜率下降。由于二极管 $D_2$ 反偏，二极管 $D_3$ 必须导通以承载输出电感电流 $i(t)$。
+
+![源页 p.203](../assets/page-snapshots/chapter-6/page-203.png)
+
+图6.27 正激变换器电路：(a) 子区间 1，(b) 子区间 2，(c) 子区间 3
+
+当磁化电流降到零时，二极管 $D_1$ 变为反偏。子区间 3 随之开始，得到图6.27c 电路。$Q_1$、$D_1$ 和 $D_2$ 工作于关断状态，磁化电流在开关周期余下部分保持为零。
+
+将电感伏秒平衡原理应用于变压器磁化电感，一次绕组电压 $v_1(t)$ 的平均值必须为零。参见图6.26，$v_1(t)$ 的平均值为
+
+$$\langle v_1 \rangle = D(V_g) + D_2\!\left(-V_g \frac{n_1}{n_2}\right) + D_3(0) = 0 \tag{6.30}$$
+
+![源页 p.204](../assets/page-snapshots/chapter-6/page-204.png)
+
+图6.28 正激变换器磁化电流波形：(a) DCM，$D < 0.5$；(b) CCM，$D > 0.5$
+
+解出占空比 $D_2$ 得
+
+$$D_2 = \frac{n_2}{n_1}D \tag{6.31}$$
+
+注意占空比 $D_3$ 不能为负。由于 $D + D_2 + D_3 = 1$，可写
+
+$$D_3 = 1 - D - D_2 \ge 0 \tag{6.32}$$
+
+将式 (6.31) 代入式 (6.32) 得
+
+$$D_3 = 1 - D\!\left(1 + \frac{n_2}{n_1}\right) \ge 0 \tag{6.33}$$
+
+解出 $D$ 得
+
+$$D \le \frac{1}{1 + \dfrac{n_2}{n_1}} \tag{6.34}$$
+
+故最大占空比受限。对常见选择 $n_1 = n_2$，该限值变为
+
+$$D \le \frac{1}{2} \tag{6.35}$$
+
+若违反此限值，则晶体管关断时间不足以在开关周期结束前将变压器磁化电流复位到零，可能引起变压器饱和。
+
+变压器磁化电流波形 $i_M(t)$ 如图6.28所示，对应 $n_1 = n_2$ 的典型情形。图6.28a 为 $D < 0.5$ 的工作。磁化电感与二极管 $D_1$ 配合工作于断续导通模式，$i_M(t)$ 在每个开关周期结束前复位到零。图6.28b 为晶体管占空比 $D$ 大于 0.5 时的情况。此时没有第三子区间，磁化电感工作于连续导通模式。而且，子区间 2 不足以将磁化电流复位到零。故每个开关周期 $i_M(t)$ 净增。最终磁化电流将增大到足以使变压器饱和。
+
+将电感伏秒平衡原理应用于电感 $L$ 可求出变换器输出电压。电感 $L$ 两端电压的直流分量必须为零，因此直流输出电压 $V$ 等于二极管 $D_3$ 电压 $v_{D3}(t)$ 的直流分量。$v_{D3}(t)$ 波形如图6.26所示，其平均值为
+
+$$\langle v_{D3} \rangle = V = \frac{n_3}{n_1}DV_g \tag{6.36}$$
+
+这是正激变换器在连续导通模式下的解。该解受式 (6.34) 约束。
+
+由式 (6.34) 可见，减小匝比 $n_2/n_1$ 可提高最大占空比。这将使 $i_M(t)$ 在子区间 2 内下降更快，更快复位变压器。但这也增大了施加于晶体管 $Q_1$ 的电压应力。施加于晶体管 $Q_1$ 的最大电压出现于子区间 2；由图6.27b 电路解此电压得
+
+$$\max(v_{Q1}) = V_g\!\left(1 + \frac{n_1}{n_2}\right) \tag{6.37}$$
+
+对常见选择 $n_1 = n_2$，子区间 2 内施加于晶体管的电压为 $2V_g$。实际中，由于变压器漏感引起的振铃，观察到的电压略高。故减小匝比 $n_2/n_1$ 可提高最大晶体管占空比，代价是晶体管阻断电压增大。
+
+![源页 p.205](../assets/page-snapshots/chapter-6/page-205.png)
+
+图6.29 双管正激变换器
+
+双管正激变换器如图6.29所示。晶体管 $Q_1$ 和 $Q_2$ 由同一栅极驱动信号控制，故两者在子区间 1 内同时导通，在子区间 2 和 3 内关断。变换器副侧与单管正激变换器相同；二极管 $D_3$ 在子区间 1 内导通，而二极管 $D_4$ 在子区间 2 和 3 内导通。子区间 2 内，磁化电流 $i_M(t)$ 使二极管 $D_1$ 和 $D_2$ 正偏。变压器一次绕组接到 $V_g$，极性与子区间 1 相反。磁化电流以 $-V_g/L_M$ 的斜率下降。当磁化电流降到零时，二极管 $D_1$ 和 $D_2$ 变为反偏。磁化电流在开关周期余下部分保持为零。
+
+故双管正激变换器的工作与 $n_1 = n_2$ 的单管正激变换器类似。占空比限于 $D < 0.5$。此变换器的优点是晶体管峰值阻断电压限于 $V_g$，并由二极管 $D_1$ 和 $D_2$ 钳位。双管正激变换器的典型功率等级与半桥结构类似。
+
+正激变换器变压器的利用率相当好。由于变压器磁化电流不能为负，只能使用磁芯 B-H 回线的一半。这看似意味着正激变换器的变压器磁芯应为全桥或半桥变换器的两倍大。但在现代高频变换器中，磁通摆幅受铁损而非磁芯材料饱和磁通密度限制。因此，正激变换器变压器磁芯的利用率可与全桥或半桥结构一样好。变压器一次和二次绕组的利用率优于全桥、半桥或推挽结构，因为正激变换器不需要中心抽头绕组。子区间 1 内，所有可用绕组铜都用于向负载传输功率。子区间 2 和 3 内基本无多余电流流动。通常，磁化电流相对于反射负载电流很小，对变压器利用率的影响可忽略。故现代正激变换器的变压器磁芯和绕组利用率良好。
+
+### 6.3.3 推挽隔离降压变换器
+
+推挽隔离降压变换器如图6.30所示。其副侧电路与全桥和半桥变换器相同，波形也相同。原侧电路含一个中心抽头绕组。晶体管 $Q_1$ 在第一个开关周期内导通 $DT_s$ 时间。晶体管 $Q_2$ 在下一个开关周期内导通相同时间，以维持变压器一次绕组的伏秒平衡。变换器波形如图6.31所示。此变换器可在整个占空比范围 $0 \le D < 1$ 内工作。其变换比为
+
+$$V = nDV_g \tag{6.38}$$
+
+![源页 p.206](../assets/page-snapshots/chapter-6/page-206.png)
+
+图6.30 推挽隔离降压变换器
+
+![源页 p.207](../assets/page-snapshots/chapter-6/page-207.png)
+
+图6.31 推挽隔离降压变换器波形
+
+此变换器有时与低输入电压配合使用。它倾向于具有较低的原侧导通损耗，因为任何时刻只有一只晶体管与直流电源 $V_g$ 串联。晶体管占空比接近 1 的工作能力也允许最小化匝比 $n$，从而减小晶体管电流。
+
+推挽结构容易出现变压器饱和问题。由于无法保证晶体管 $Q_1$ 和 $Q_2$ 的正向压降和导通时间完全相等，微小不平衡可使施加于变压器一次侧的电压直流分量非零。结果是每两个开关周期磁化电流幅值净增。若此不平衡持续，磁化电流最终可增大到使变压器饱和。
+
+电流编程控制可用于缓解变压器饱和问题。推挽变换器仅用占空比控制时不推荐使用。变压器磁芯材料和二次绕组的利用率与全桥变换器类似。磁通和磁化电流既可为正也可为负，因此如需要可使用整个 B-H 回线。由于一次和二次绕组均为中心抽头，其利用率非最优。
+
+### 6.3.4 反激变换器
+
+反激变换器以升降压变换器为基础。其推导如图6.32所示。图6.32a 为基本升降压变换器，开关用一只 MOSFET 和一只二极管实现。图6.32b 中，电感绕组用两根线绕制，匝比 1:1。电感的基本功能不变，并联绕组等效于用较粗导线绕制的单个绕组。图6.32c 中，两绕组之间的连接断开。晶体管 $Q_1$ 导通期间使用一个绕组，二极管 $D_1$ 导通期间使用另一绕组。两绕组的总电流与图6.32b 电路相同；但电流在绕组之间的分配不同。两种情形下电感内部的磁场相同。
+
+![源页 p.208](../assets/page-snapshots/chapter-6/page-208.png)
+
+图6.32 反激变换器的推导：(a) 升降压变换器；(b) 电感 $L$ 用两根并联导线绕制；(c) 电感绕组隔离，得到反激变换器；(d) 匝比 1:n，输出为正
+
+虽然该双绕组磁性器件用与变压器相同的符号表示，但更具描述性的名称是"双绕组电感"。此器件有时也称反激变压器。与理想变压器不同，反激变压器的两个绕组中并不同时有电流流动。图6.32d 给出反激变换器的常见结构。MOSFET 的源极接原侧地，简化了栅极驱动电路。变压器极性标记反转，以获得正输出电压。引入 1:n 匝比；这可实现更好的变换器优化。
+
+![源页 p.209](../assets/page-snapshots/chapter-6/page-209.png)
+
+图6.33 反激变换器电路：(a) 含变压器等效电路模型；(b) 子区间 1；(c) 子区间 2
+
+将图6.18b 模型插入反激变压器位置即可分析反激变换器，得到图6.33a 电路。磁化电感 $L_M$ 的作用与图6.32a 原始升降压变换器中电感 $L$ 相同。晶体管 $Q_1$ 导通时，来自直流电源 $V_g$ 的能量储存于 $L_M$。二极管 $D_1$ 导通时，此储存能量传送到负载，电感电压和电流按 1:n 匝比缩放。
+
+![源页 p.210](../assets/page-snapshots/chapter-6/page-210.png)
+
+图6.34 反激变换器波形，连续导通模式
+
+子区间 1 内，晶体管 $Q_1$ 导通时，变换器电路模型简化为图6.33b。电感电压 $v_L$、电容电流 $i_C$ 和直流电源电流 $i_g$ 为
+
+$$\begin{aligned} v_L &= V_g \\ i_C &= -\frac{v}{R} \\ i_g &= i \end{aligned} \tag{6.39}$$
+
+假定变换器工作于连续导通模式，电感电流纹波和电容电压纹波很小，磁化电流 $i$ 和输出电容电压 $v$ 可分别用其直流分量 $I$ 和 $V$ 近似。式 (6.39) 于是变为
+
+$$\begin{aligned} v_L &= V_g \\ i_C &= -\frac{V}{R} \\ i_g &= I \end{aligned} \tag{6.40}$$
+
+第二子区间内，晶体管处于关断状态，二极管导通，得到图6.33c 等效电路。该子区间内归算到一次侧的磁化电感电压 $v_L$、电容电流 $i_C$ 和直流电源电流 $i_g$ 为
+
+$$\begin{aligned} v_L &= -\frac{v}{n} \\ i_C &= \frac{i}{n} - \frac{v}{R} \\ i_g &= 0 \end{aligned} \tag{6.41}$$
+
+在所有子区间内，必须一致地在变压器同一侧定义 $v_L(t)$，这一点很重要。采用小纹波近似得
+
+$$\begin{aligned} v_L &= -\frac{V}{n} \\ i_C &= \frac{I}{n} - \frac{V}{R} \\ i_g &= 0 \end{aligned} \tag{6.42}$$
+
+$v_L(t)$、$i_C(t)$ 和 $i_g(t)$ 波形在连续导通模式下绘于图6.34。
+
+将伏秒平衡原理应用于归算到一次侧的磁化电感得
+
+$$\langle v_L \rangle = D(V_g) + D'\!\left(-\frac{V}{n}\right) = 0 \tag{6.43}$$
+
+解出变换比得
+
+$$M(D) = \frac{V}{V_g} = \frac{nD}{D'} \tag{6.44}$$
+
+故反激变换器的变换比与升降压变换器类似，但含一个附加因子 $n$。
+
+将电荷平衡原理应用于输出电容 $C$ 得
+
+$$\langle i_C \rangle = D\!\left(-\frac{V}{R}\right) + D'\!\left(\frac{I}{n} - \frac{V}{R}\right) = 0 \tag{6.45}$$
+
+解出 $I$ 得
+
+$$I = \frac{nV}{D'R} \tag{6.46}$$
+
+这是归算到一次侧的磁化电流直流分量。电源电流 $i_g$ 的直流分量为
+
+$$I_g = \langle i_g \rangle = D(I) + D'(0) \tag{6.47}$$
+
+现在可构造反激变换器波形的直流分量等效电路。对应于电感回路方程 (6.43) 和节点方程 (6.45)、(6.47) 的电路如图6.35a 所示。用理想直流变压器替换受控源，得图6.35b。这是反激变换器的直流等效电路。它包含 1:D 的降压型变换比，其后接 $D':1$ 的升压型变换比，以及反激变压器匝比引入的附加因子 1:n。用第3章建立的方法，该模型可精细化以计入损耗并预测变换器效率。反激变换器也可工作于断续导通模式；分析留作习题。结果与第5章列表的 DCM 升降压变换器结果类似，但推广到计入匝比 1:n。
+
+![源页 p.212](../assets/page-snapshots/chapter-6/page-212.png)
+
+图6.35 反激变换器等效电路模型，CCM：(a) 对应式 (6.43)、(6.45) 和 (6.47) 的电路；(b) 含理想直流变压器的等效电路
+
+反激变换器常用于 50–100 W 功率范围，以及电视机和计算机显示器的高压电源。其优点是元件数非常少。可用最少的元件获得多路输出：每增加一路输出只需增加一个绕组、一只二极管和一只电容。但与全桥、半桥或双管正激变换器相比，反激变换器有晶体管电压应力高和交叉调节差的缺点。晶体管峰值电压等于直流输入电压 $V_g$ 加反射负载电压 $V/n$；实际中，由于变压器漏感引起的振铃，还观察到额外电压。
+
+将反激变压器的利用率与降压派生电路的变压器严格比较是困难的，因为这些元件完成的功能不同。反激变压器的磁化电流是单极性的，故磁芯材料 B-H 回线至多只能利用一半。磁化电流必须含显著的直流分量。然而，在为断续导通模式工作设计时，反激变压器的体积相当小。但 DCM 工作导致晶体管、二极管和滤波电容中的峰值电流增大。连续导通模式设计需要更大的 $L_M$ 值，故反激变压器更大，但功率级元件中的峰值电流较低。
+
+### 6.3.5 升压派生隔离变换器
+
+隔离型升压变换器可通过反演降压派生隔离变换器的电源和负载导出。已知有多种结构，此处简要讨论其中两种。这些变换器在高压电源以及低谐波整流器应用中有一定应用。
+
+图6.36 给出一种全桥结构，连续导通模式波形如图6.37所示。第一和第二子区间的电路拓扑与基本非隔离升压变换器相同，当匝比为 1:1 时，电感电流 $i(t)$ 和输出电流 $i_o(t)$ 波形与非隔离升压变换器的电感电流和二极管电流波形相同。
+
+![源页 p.213](../assets/page-snapshots/chapter-6/page-213.png)
+
+图6.36 全桥变压器隔离升压变换器
+
+![源页 p.213](../assets/page-snapshots/chapter-6/page-213.png)
+
+图6.37 变压器隔离全桥升压变换器波形，CCM
+
+子区间 1 内，四只晶体管全部导通。这使电感 $L$ 接到直流输入电源 $V_g$，并使二极管 $D_1$ 和 $D_2$ 反偏。电感电流 $i(t)$ 以 $V_g/L$ 的斜率上升，能量从直流电源 $V_g$ 传送到电感 $L$。第二子区间内，晶体管 $Q_2$ 和 $Q_3$ 关断，故电感 $L$ 经晶体管 $Q_1$ 和 $Q_4$、变压器和二极管 $D_1$ 接到直流输出。下一个开关周期类似，只是子区间 2 内晶体管 $Q_1$ 和 $Q_4$ 关断，电感 $L$ 经晶体管 $Q_2$ 和 $Q_3$、变压器和二极管 $D_2$ 接到直流输出。若晶体管关断时间和二极管正向压降相同，则变压器电压平均值为零，两个开关周期内施加于变压器磁化电感的净伏秒为零。
+
+将电感伏秒平衡原理应用于电感电压波形 $v_L(t)$ 得
+
+$$\langle v_L \rangle = D(V_g) + D'\!\left(V_g - \frac{V}{n}\right) = 0 \tag{6.48}$$
+
+解出变换比 $M(D)$ 得
+
+$$M(D) = \frac{V}{V_g} = \frac{n}{D'} \tag{6.49}$$
+
+此结果与升压变换器 $M(D)$ 类似，含一个由变压器匝比引入的附加因子 $n$。
+
+晶体管须阻断反射负载电压 $V/n = V_g/D'$。实际中，由于变压器漏感引起的振铃，还观察到额外电压。由于电感 $L$ 限制晶体管瞬时电流，半导体正向压降或导通时间微小不平衡引起的变压器饱和不会产生灾难性后果。事实上，已知有控制方案在子区间 1 内有意让变压器工作于饱和状态 [53, 55]。
+
+图6.38a 给出推挽结构。此结构只需两只晶体管，每只须阻断电压 $2V/n$。工作在其他方面与全桥类似。子区间 1 内两只晶体管均导通。子区间 2 内一只晶体管关断，能量从电感经变压器和一只二极管传送到输出。晶体管在交替的开关周期内于子区间 2 导通，以维持变压器伏秒平衡。图6.38b 给出 Watkins–Johnson 变换器（图6.15 的变换器 6）的类似推挽版本。
+
+![源页 p.214](../assets/page-snapshots/chapter-6/page-214.png)
+
+图6.38 推挽隔离变换器：(a) 基于升压变换器；(b) 基于 Watkins–Johnson 变换器
+
+### 6.3.6 SEPIC 与 Ćuk 变换器的隔离版本
+
+用于在反激变换器中获得隔离的技巧也可应用于 SEPIC 和反相 SEPIC。参见图6.39a，电感 $L_2$ 可用两个绕组实现，得到图6.39b 的隔离 SEPIC。等效电路如图6.39c 所示。可见磁化电感完成原电感 $L_2$ 的储能功能。此外，理想变压器提供隔离和匝比。
+
+图6.40 给出连续导通模式下典型的一次和二次绕组电流波形 $i_p(t)$ 和 $i_s(t)$。该磁性器件既须作为反激变压器工作，又须作为常规双绕组变压器工作。子区间 1 内，晶体管 $Q_1$ 导通时，磁化电流流过一次绕组，二次绕组电流为零。子区间 2 内，二极管 $D_1$ 导通时，磁化电流流过二次绕组到负载。此外，输入电感电流 $i_1$ 流过一次绕组。这感应出二次电流的附加分量 $i_1/n$，也流向负载。故 SEPIC 变压器的设计有些特殊，其绕组方均根电流大于反激变压器。
+
+将伏秒平衡原理应用于电感 $L_1$ 和 $L_M$，可证变换比为
+
+$$M(D) = \frac{V}{V_g} = \frac{nD}{D'} \tag{6.50}$$
+
+理想情况下，晶体管须阻断电压 $V_g/D'$。实际中，由于变压器漏感引起的振铃，还观察到额外电压。
+
+![源页 p.215](../assets/page-snapshots/chapter-6/page-215.png)
+
+图6.39 在 SEPIC 中获得隔离：(a) 基本非隔离变换器；(b) 隔离 SEPIC；(c) 含变压器等效电路模型
+
+![源页 p.215](../assets/page-snapshots/chapter-6/page-215.png)
+
+图6.40 SEPIC 隔离变换器波形，连续导通模式
+
+反相 SEPIC 的隔离版本如图6.41所示。变压器的工作和设计与 SEPIC 类似。
+
+Ćuk 变换器的隔离以不同方式获得 [58]。基本非隔离 Ćuk 变换器如图6.42a 所示。图6.42b 中，电容 $C_1$ 分成两个串联电容 $C_{1a}$ 和 $C_{1b}$。现可在这些电容之间插入变压器，如图6.42c 所示。极性标记已反转，以获得正输出电压。
+
+变压器一次和二次绕组与电容串联，确保无直流电压施加于变压器。变压器以常规方式工作，磁化电流小，磁化电感内的储能可忽略。
+
+Ćuk 变换器变压器的利用率相当好。磁化电流既可为正也可为负，故如需要可利用整个磁芯 B-H 回线。无中心抽头绕组，所有铜均有效利用。晶体管须阻断电压 $V_g/D'$，加上由于变压器漏感振铃引起的额外电压。变换比与隔离 SEPIC 的相同，即式 (6.50)。
+
+隔离 SEPIC 和 Ćuk 变换器作为开关电源应用，典型功率等级为数百瓦。它们也用作交流-直流低谐波整流器。

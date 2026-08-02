@@ -18,12 +18,12 @@ navGroupOrder: 40
 
 # ADV-HW-03 编码器深度处理与测速方法
 
-**模块编号：** ADV-HW-03
-**模块名称：** 编码器深度处理与测速方法（Encoder Deep Processing & Speed Measurement）
-**文档版本：** v2.0
-**适用对象：** 已掌握基础FOC理论的嵌入式工程师
-**前置知识：** HW-03 位置传感器接口、ALG-05 有感FOC实现
-**难度等级：** 
+- **模块编号：** ADV-HW-03
+- **模块名称：** 编码器深度处理与测速方法（Encoder Deep Processing & Speed Measurement）
+- **文档版本：** v2.0
+- **适用对象：** 已掌握基础FOC理论的嵌入式工程师
+- **前置知识：** HW-03 位置传感器接口、ALG-05 有感FOC实现
+- **难度等级：** 
 
 ---
 

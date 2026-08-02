@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第22章part 1 - 22 Resonant Conversion"
+title: "第22章 谐振变换器（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1089 +18,344 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第22章part 1 - 22 Resonant Conversion
+# 第22章 谐振变换器（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 931-950  
-> Chunk ID: `chapter-22-part-1`
+## 第22章 谐振变换器
 
-## 主干提取
+本书第六部分讨论一类工作方式与第一至五部分 PWM 变换器显著不同的变换器。谐振功率变换器[272, 295–329]含谐振 LC 网络，其电压和电流波形在每个开关周期的一个或多个子区间内按正弦变化。这些正弦变化的幅值大，故第2章引入的小纹波近似不适用。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+直流-高频交流逆变器在多种应用中需要，包括无线功率传输、气体放电灯电子镇流器[296, 297]、感应加热与烹饪、电外科发生器，以及采用压电变压器或致动器的应用。这些应用通常需要产生数十或数百千赫兹的正弦波，具有中等或低总谐波失真。图22.1(a)给出了一个简单谐振逆变器系统。开关网络产生方波电压 $v_s(t)$。如图22.2所示，$v_s(t)$ 的频谱含基波和奇次谐波。此电压加到谐振槽网络输入端。槽网络谐振频率 $f_0$ 调谐到 $v_s(t)$ 的基波分量即开关频率 $f_s$，且槽在 $f_s$ 谐波处响应可忽略。因此，槽电流 $i_s(t)$ 以及负载电压 $v(t)$ 和负载电流 $i(t)$ 本质上是频率 $f_s$ 的正弦波形，谐波可忽略。通过改变开关频率 $f_s$（接近或远离谐振频率 $f_0$），可控制 $i_s(t)$、$v(t)$、$i(t)$ 的幅值。其他控制输出电压的方案（如桥式开关网络的相移控制）也是可能的。可采用多种谐振槽网络；图22.1(b)–(e)给出了知名的串联、并联、LCC 和 LLC 槽网络。采用串联谐振槽网络的逆变器称为串联谐振或串联负载逆变器。并联谐振或并联负载逆变器中，负载电压等于谐振槽电容电压。LCC 逆变器采用与负载串联和并联的槽电容，LLC 逆变器采用串联和并联槽电感。
 
-## 术语表
+图22.3给出了气体放电灯电子镇流器的高频逆变器。LCC 逆变器的半桥配置以近似正弦的高频交流波形驱动灯。变换器被控制以提供相对高电压启动灯，之后较低电压。当镇流器由交流公用电源供电时，低谐波整流器通常为逆变器提供输入直流电压。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+![源页 p.931](../assets/page-snapshots/chapter-22/page-931.png)
 
-## 中文翻译
+图22.1 一类基本谐振逆变器，由(a)驱动接近谐振的谐振槽网络 $N_T$ 的开关网络 $N_S$ 组成。若干常见槽网络：(b) 串联，(c) 并联，(d) LCC，(e) LLC
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+图22.2 槽网络主要响应外加波形的基波分量
 
-## 英文原文
+![源页 p.932](../assets/page-snapshots/chapter-22/page-932.png)
 
-```text
-22
-Resonant Conversion
-Part VI of this text deals with a class of converters whose operation di ﬀers signiﬁcantly from
-the PWM converters covered in PartsI to V. Resonant power converters[272, 295–329] contain
-resonant L–C networks whose voltage and current waveforms vary sinusoidally during one or
-more subintervals of each switching period. These sinusoidal variations are large in magnitude,
-and hence the small-ripple approximation introduced in Chap. 2 does not apply.
-Dc-to-high-frequency-ac inverters are required in a variety of applications, including wire-
-less power transfer, electronic ballasts for gas-discharge lamps [ 296, 297], induction heating
-and cooking, electrosurgical generators, and applications employing piezoelectric transformers
-or actuators. These applications typically require generation of a sinusoid of tens or hundreds
-of kHz, having moderate or low total harmonic distortion. A simple resonant inverter system is
-illustrated in Fig. 22.1a. A switch network produces a square wave voltage vs(t). As illustrated
-in Fig. 22.2, the spectrum of vs(t) contains fundamental plus odd harmonics. This voltage is
-applied to the input terminals of a resonant tank network. The tank network resonant frequency
-f0 is tuned to the fundamental component ofvs(t), that is, to the switching frequency fs, and the
-tank exhibits negligible response at the harmonics of fs. In consequence, the tank current is(t),
-as well as the load voltage v(t) and load current i(t), have essentially sinusoidal waveforms of
-frequency fs, with negligible harmonics. By changing the switching frequency fs (closer to or
-further from the resonant frequency f0), the magnitudes of is(t), v(t), and i(t) can be controlled.
-Other schemes for control of the output voltage, such as phase-shift control of the bridge switch
-network, are also possible. A variety of resonant tank networks can be employed; Fig. 22.1b–e
-illustrate the well-known series, parallel, LCC, and LLC tank networks. Inverters employing
-the series resonant tank network are known as the series resonant,o r series loaded,i n v e r t e r .I n
-the parallel resonant or parallel loaded inverter, the load voltage is equal to the resonant tank
-capacitor voltage. The LCC inverter employs tank capacitors both in series and in parallel with
-the load, while the LLC inverter employs both series and shunt tank inductors.
-Figure 22.3 illustrates a high-frequency inverter of an electronic ballast for a gas-discharge
-lamp. A half-bridge conﬁguration of the LCC inverter drives the lamp with an approximately
-sinusoidal high-frequency ac waveform. The converter is controlled to provide a relatively high
-voltage to start the lamp, and a lower voltage thereafter. When the ballast is powered by the ac
-utility, a low-harmonic rectiﬁer typically provides the input dc voltage for the inverter.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_22
-933
+图22.3 作为气体放电灯电子镇流器的半桥 LLC 逆变器电路
 
-934 22 Resonant Conversion
-(a)
-Resonant tank network
-Resistive
-load
-R
-is(t) i(t)
-v(t)
-+
-+dc
-source
-vg(t)
-vs(t)
-+
-Switch network
-LC s
-Cp
-NS NT
-(b)
-Series tank network
-LC s
-(c)
-Parallel tank network
-L
-Cp
-(d)
-LCC tank network
-LC s
-Cp
-(e)
-LLC tank network
-CLs
-Lp
-Fig. 22.1 A basic class of resonant inverters that consist of (a) a switch network NS that drives a resonant
-tank network NT near resonance. Several common tank networks: (b) series, (c) parallel, (d) LCC,( e) LLC
-A resonant dc–dc converter can be constructed by rectifying and ﬁltering the ac output
-of a resonant inverter. Figure 22.4 illustrates a series resonant dc–dc converter, in which the
-approximately sinusoidal resonant tank output currentiR(t) is rectiﬁed by a diode bridge rectiﬁer,
-and ﬁltered by a large capacitor to supply a dc load having current I and voltage V.A g a i n ,b y
-variation of the switching frequency fs (closer to or further from the resonant frequency f0),
-the magnitude of the tank current iR(t), and hence also the dc load current I, can be controlled.
-Resonant dc–dc converters based on series, parallel, LCC, and other resonant tank networks
-are well understood. These converters are employed when specialized application requirements
+通过对谐振逆变器交流输出整流和滤波可构建谐振直流-直流变换器。图22.4给出了串联谐振直流-直流变换器，其中近似正弦的谐振槽输出电流 $i_R(t)$ 由二极管桥整流器整流，并由大电容滤波以供给电流 $I$、电压 $V$ 的直流负载。同样，通过改变开关频率 $f_s$（接近或远离谐振频率 $f_0$），可控制槽电流 $i_R(t)$ 的幅值，因而控制直流负载电流 $I$。
 
-22 Resonant Conversion 935
-Fig. 22.2 The tank network responds
-primarily to the fundamental component
-of the applied waveforms
-f
-Switch
-output
-voltage
-spectrum
-Resonant
-tank
-response
-Tank
-current
-spectrum
-ffs 3fs 5fs
-ffs 3fs 5fs
-fs 3fs 5fs
-+
-Fig. 22.3 Half-bridge LLC inverter circuit, as an electronic ballast for a gas-discharge lamp
-justify their use. For example, they are commonly employed in high-voltage dc power supplies
-[298, 299], because the substantial leakage inductance and winding capacitance of high-voltage
-transformers leads unavoidably to a resonant tank network. The same principle can be employed
-to construct resonant link inverters or resonant link cycloconverters [ 300–302]; controllable
-switch networks are then employed on both sides of the resonant tank network.
-Figure 22.5 illustrates another approach to resonant power conversion, in which resonant
-elements are inserted into the switch network of an otherwise-PWM converter. A resonant
-switch network, or quasi-resonant converter, is then obtained. For example, in Fig. 22.5b, res-
-onant elements Lr and Cr are combined with the switch network transistor and diode. The
-resonant frequency of these elements is somewhat higher than the switching frequency. This
-causes the switch network waveformsi1(t) and v2(t) to become quasi-sinusoidal pulses. The res-
-onant switch network of Fig.22.5b can replace the PWM switch network of Fig.22.5a in nearly
-any PWM converter. For example, insertion of the resonant switch network of Fig. 22.5bi n t o
-the converter circuit of Fig. 22.5c leads to a quasi-resonant buck converter. Numerous resonant
+基于串联、并联、LCC 等谐振槽网络的谐振直流-直流变换器已被充分理解。这些变换器在专门应用要求
 
-936 22 Resonant Conversion
-iR(t)
-vR(t)
-+
-+
-Transfer function
-H(s)
-R
-+
-v(t)
-Resonant tank network
-is(t)
-dc
-source
-vg(t)
-vs(t)
-+
-Switch network
-LC s
-NS NT
-i(t)
-Rectifier network
-NR NF
-Low-pass
-filter
-network
-dc
-load
-Fig. 22.4 Derivation of a resonant dc–dc converter, by rectiﬁcation and ﬁltering of the output of a reso-
-nant inverter
-switch networks are known, which lead to a large number of resonant switch versions of buck,
-boost, buck–boost, and other converters. Quasi-resonant converters are described in Chap.23.
-The chief advantage of resonant converters is their reduced switching loss, via mechanisms
-known as zero-current switching (ZCS), and zero-voltage switching (ZVS). The turn-on and/or
-turn-oﬀtransitions of the various converter semiconductor elements can occur at zero crossings
-of the resonant converter quasi-sinusoidal waveforms. This eliminates some of the switching
-loss mechanisms described in Chap.4. Hence, switching loss is reduced, and resonant converters
-can operate at switching frequencies that are higher than in comparable PWM converters. Zero-
-voltage switching can also eliminate some of the sources of converter-generated electromagnetic
-interference.
-Resonant converters exhibit several disadvantages. Although the resonant element values
-can be chosen such that good performance with high eﬃciency is obtained at a single operating
-point, typically it is di ﬃcult to optimize the resonant elements such that good performance
-is obtained over a wide range of load currents and input voltages. Signiﬁcant currents may
-circulate through the tank elements, even when the load is removed, leading to poor eﬃciency
-at light load. Also, the quasi-sinusoidal waveforms of resonant converters exhibit greater peak
-values than those exhibited by the rectangular waveforms of PWM converters, provided that
-the PWM current spikes due to diode stored charge are ignored. For these reasons, resonant
-converters exhibit increased conduction losses and tank inductor losses, which can oﬀset their
-reduced switching losses.
-In this chapter, the properties of the series, parallel, and other resonant inverters and dc–
-dc converters are investigated using the sinusoidal approximation [296, 303–305]. Harmonics
-of the switching frequency are neglected, and the tank waveforms are assumed to be purely
-sinusoidal. This allows simple equivalent circuits to be derived for the bridge inverter, tank,
-rectiﬁer, and output ﬁlter portions of the converter, whose operation can be understood and
-solved using standard linear ac analysis. This intuitive approach is quite accurate for operation
-in the continuous conduction mode with a high-Q response, but becomes less accurate when the
-tank is operated with a low Q-factor or for operation of dc–dc resonant converters in or near the
-discontinuous conduction mode.
+![源页 p.933](../assets/page-snapshots/chapter-22/page-933.png)
 
-22 Resonant Conversion 937
-(a)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-PWM switch network
-(b)
-+
-v1(t)
-+
-v2(t)
-i1(t) i2(t)
-Lr
-Cr
-ZCS quasi-resonant
-switch network
-(c)
-+
-L
-CR
-+
-v(t)vg(t)
-i(t)
-+
-v2(t)
-i1(t) i2(t)
-Switch
-network
-+
-v1(t)
-Fig. 22.5 Derivation of a quasi-resonant converter: ( a) conventional PWM switch network, ( b)aZ C S
-quasi-resonant switch network, ( c) a quasi-resonant buck converter is obtained by employing a quasi-
-resonant switch network such as (b) in a buck converter
-For dc–dc resonant converters, the important result of this approach is that the dc voltage
-conversion ratio of a continuous conduction mode resonant converter is given approximately
-by the ac transfer function of the tank circuit, evaluated at the switching frequency. The tank
-is loaded by an eﬀective output resistance, having a value nearly equal to the output voltage
-divided by the output current. It is thus quite easy to determine how the tank components and
-circuit connections aﬀect the converter behavior. The inﬂuence of tank component losses, trans-
-former nonidealities, etc., on the output voltage and converter eﬃciency can also be found. Sev-
-eral resonant network theorems are presented, which allow the load dependence of conduction
-loss and of the zero-voltage-or zero-current-switching properties to be explained in a simple
-and intuitive manner.
-It is found that the series resonant converter operates with a step-down voltage conversion
-ratio. With a 1:1 transformer turns ratio, the dc output voltage is ideally equal to the dc input volt-
-age when the transistor switching frequency is equal to the tank resonant frequency. The output
-voltage is reduced as the switching frequency is increased or decreased away from resonance.
-On the other hand, the parallel resonant converter is capable of both step-up and step-down of
-voltage levels, depending on the switching frequency and the eﬀective tank Q-factor. The exact
-steady-state solutions of the ideal series and parallel resonant dc–dc converters are stated in
-Sect. 22.5.
-Zero-voltage switching and zero-current switching mechanisms of the series resonant con-
-verter are described in Sect. 22.3. In Sect. 22.4, the dependence of resonant inverter properties
-on load is examined. A simple frequency-domain approach explains why some resonant con-
+图22.4 通过对谐振逆变器输出整流和滤波导出谐振直流-直流变换器
 
-938 22 Resonant Conversion
-verters, over certain ranges of operating points, exhibit large circulating tank currents and low
-eﬃciency. The boundaries of zero-voltage switching and zero-current switching are also deter-
-mined.
-It is also possible to modify the PWM converters of the previous chapters, so that zero-
-current or zero-voltage switching is obtained. A number of diverse approaches are known that
-lead to soft switching in buck, boost, forward, ﬂyback, bridge, and other topologies. Chapter23
-summarizes some of the well-known schemes, including resonant switches, quasi-square wave
-switches, the full-bridge zero-voltage transition converter, and zero-voltage switching in for-
-ward and ﬂyback converters containing active-clamp snubbers. A detailed description of soft-
-switching mechanisms of diodes, MOSFETs, and IGBTs is also given.
-22.1 Sinusoidal Analysis of Resonant Converters
-Consider the class of resonant converters that contain a controlled switch networkNs that drives
-a linear resonant tank network NT . In a resonant inverter, the tank network drives a resistive
-load as in Fig. 22.1. The reactive component of the load impedance, if any, can be e ﬀectively
-incorporated into the tank network. In the case of a resonant dc–dc converter, the resonant tank
-network is connected to an uncontrolled rectiﬁer network NR, ﬁlter network NF and load R,a s
-illustrated in Fig. 22.4. Many well-known converters can be represented in this form, including
-the series, parallel, LCC, and LLC topologies.
-In the most common modes of operation, the controlled switch network produces a square
-wave voltage output vs(t) whose frequency fs is close to the tank network resonant frequency
-f0. In response, the tank network rings with approximately sinusoidal waveforms of frequency
-fs. In the case where the resonant tank responds primarily to the fundamental component fs of
-the switch waveform vs(t), and has negligible response at the harmonic frequencies nf s, n= 3,
-5, 7,... , then the tank waveforms are well approximated by their fundamental components. As
-shown in Fig. 22.2, this is indeed the case when the tank network contains a high- Q resonance
-at or near the switching frequency, and a low-pass characteristic at higher frequencies. Hence,
-let us neglect harmonics, and compute the relationships between the fundamental components
-of the tank terminal waveforms vs(t), is(t), iR(t), and vR(t).
-22.1.1 Controlled Switch Network Model
-is(t)
-+vg vs(t)
-+
-Switch network
-NS
-1
-2
-1
-2
-Fig. 22.6 An ideal switch network
-If the switch network of Fig. 22.6 is controlled to produce a
-square wave of frequency fs =ωs/2πas in Fig. 22.7, then
-its output voltage waveform vs(t) can be expressed in the
-Fourier series
-vs(t)= 4Vg
-π
-∑
-n=1,3,5,...
-1
-n sin(nωst) (22.1)
-The fundamental component is
-vs1(t)= 4Vg
-πsin(ωst)= Vs1 sin(ωst) (22.2)
+证明其使用合理时被采用。例如，它们常用于高压直流电源[298, 299]，因为高压变压器的显著漏感和绕组电容不可避免地导致谐振槽网络。同一原理可用于构建谐振链逆变器或谐振链交-交变频器[300–302]；然后在谐振槽网络两侧都采用可控开关网络。
 
-22.1 Sinusoidal Analysis of Resonant Converters 939
-Fig. 22.7 Switch network voltage vs(t)
-and its fundamental component vs1(t) t
-vs(t)
-Fundamental component
-Vg
-g
-4 Vg
-vs1(t)π
-Fig. 22.8 Switch network waveforms
-is(t)a n dig(t)
-st
-is(t)
-ig(t)
-s
-Is1
-which has a peak amplitude of (4 /π) times the dc input voltage Vg, and is in phase with the
-original square wavevs(t). Hence, the switch network output terminal is modeled as a sinusoidal
-voltage generator, vs1(t).
-It is also of interest to model the converter dc input port. This requires computation of the
-dc component Ig of the switch input current ig(t). The switch input current ig(t) is equal to the
-output current is(t) when the switches are in position 1, and its inverse−is(t) when the switches
-are in position 2. Under the conditions described above, the tank rings sinusoidally and is(t)i s
-well approximated by a sinusoid of some peak amplitude Is1 and phaseϕs:
-is(t)≈Is1 sin(ωst−ϕs) (22.3)
-The input current waveform is shown in Fig.22.8.
-The dc component, or average value, of the input current can be found by averaging ig(t)
-over one half-switching period:
-⟨ig(t)⟩Ts = 2
-Ts
-∫ Ts/2
-0
-ig(τ)dτ
-≈2
-Ts
-∫ Ts/2
-0
-Is1 sin(ωsτ−ϕs)dτ
-= 2
-πIs1 cos(ϕs) (22.4)
-Thus, the dc component of the converter input current depends directly on the peak amplitude
-of the tank input current Is1 and on the cosine of its phase shiftϕs.
+图22.5给出了谐振功率变换的另一种方法，其中将谐振元件插入原本为 PWM 变换器的开关网络中，得到谐振开关网络或准谐振变换器。例如图22.5(b)中，谐振元件 $L_r$ 和 $C_r$ 与开关网络晶体管和二极管组合。这些元件的谐振频率略高于开关频率。这使开关网络波形 $i_1(t)$ 和 $v_2(t)$ 变为准正弦脉冲。图22.5(b)的谐振开关网络几乎可替换任何 PWM 变换器中图22.5(a)的 PWM 开关网络。例如，将图22.5(b)的谐振开关网络插入图22.5(c)的变换器电路得准谐振降压变换器。已知众多谐振
 
-940 22 Resonant Conversion
-+
-+
-vg
-vs1(t)=
-4Vg
-sin ( st)
-2Is1 cos ( s)
-is1(t) =
-Is1 sin ( s s)
-Fig. 22.9 An equivalent circuit for the switch network, which models the fundamental component of the
-output voltage waveform and the dc component of the input current waveform
-An equivalent circuit for the switch is given in Fig.22.9. This circuit models the basic energy
-conversion properties of the switch: the dc power supplied by the voltage sourceVg is converted
-into ac power at the switch output. Note that the dc power at the source is the product ofVg and
-the dc component ofig(t), and the ac power at the switch is the average ofvs(t)is(t). Furthermore,
-if the harmonics of vs(t) are negligible, then the switch output voltage can be represented by its
-fundamental component, a sinusoid vs1(t) of peak amplitude 4 Vg/π. It can be veriﬁed that the
-switch network dc input power and fundamental average output power, predicted by Fig. 22.9,
-are equal.
-22.1.2 Modeling the Rectiﬁer and Capacitive Filter Networks
-In the series resonant dc–dc converter, the output rectiﬁer is driven by the nearly sinusoidal tank
-output current iR(t). A large capacitor CF is placed at the dc output, so that the output voltage
-v(t) contains negligible harmonics of the switching frequency fs, as shown in Fig.22.10. Hence,
-we can make the small-ripple approximation as usual: v(t)≈V, i(t)≈I. The diode rectiﬁers
-switch when iR(t) passes through zero, as shown in Fig.22.11. The rectiﬁer input voltagevR(t)i s
-essentially a square wave, equal to+v(t) when iR(t) is positive and−v(t) when iR(t)i sn e g a t i v e .
-Note that vR(t) is in phase with iR(t).
-If the tank output current iR(t) is a sinusoid with peak amplitude IR1 and phase shiftϕR:
-iR(t)= IR1 sin(ωst−ϕR) (22.5)
-Fig. 22.10 Uncontrolled rectiﬁer with ca-
-pacitive ﬁlter network, as in the series res-
-onant converter
-iR(t)
-R
-+
-v(t)
-i(t)
-Rectifier network
-NR NF
-Low-pass
-filter
-network
-dc
-load
-+
-vR(t)
-| iR(t) |
+![源页 p.934](../assets/page-snapshots/chapter-22/page-934.png)
 
-22.1 Sinusoidal Analysis of Resonant Converters 941
-(a) vR(t)V
-iR(t)
-st
-R
-(b)
-iR1(t)
-vR1(t)
-fundamental
-4 V
-iR1(t)= vR1(t)
-Re
-Re = 8
-2 R
-st
-R
-Fig. 22.11 Rectiﬁer network input terminal waveforms: (a) actual waveforms vR(t)a n diR(t), (b) funda-
-mental components vR1(t)a n diR1(t)
-then the rectiﬁer input voltage may be expressed in the Fourier series
-vR(t)= 4V
-π
-∞∑
-n=1,3,5,···
-1
-n sin(nωst−ϕR) (22.6)
-whereϕR is the phase shift of iR(t), with respect to vs(t). This voltage waveform is impressed on
-the output port of the resonant tank network. Again, if the tank network responds primarily to the
-fundamental component ( fs)o f vR(t), and has negligible response at the harmonic frequencies
-nf s, n= 3, 5, 7... , then the harmonics of vR(t) can be ignored. The voltage waveform vR(t)i s
-then well approximated by its fundamental component vR1(t):
-vR1(t)= 4V
-πsin(ωst−ϕR)= VR1 sin(ωst−ϕR) (22.7)
-The fundamental voltage componentvR1(t) has a peak value of (4/π) times the dc output voltage
-V, and is in phase with the current iR(t).
-Re= 8
-π2 R
-The rectiﬁed tank output current,|iR(t)|, is ﬁltered by capacitor CF . Since no dc current can pass
-through CF , the dc component of |iR(t)| must be equal to the steady-state load current I.B y
-equating dc components we obtain
-I= 2
-Ts
-∫ Ts/2
-0
-IR1| sin(ωst−ϕR)|dt
-= 2
-πIR1 (22.8)
-Therefore, the load current and the tank output current amplitudes are directly related in steady
-state.
-Since vR1(t), the fundamental component of vR(t) is in phase with iR(t), the rectiﬁer presents
-an eﬀective resistive load Re to the tank circuit. The value of Re is equal to the ratio of vR1(t)t o
-iR(t). Division of Eq. (22.7)b yE q .(22.5), and elimination of IR1 using Eq. (22.8) yields
+图22.5 准谐振变换器的导出：(a) 常规 PWM 开关网络，(b) ZCS 准谐振开关网络，(c) 在降压变换器中采用(b)的准谐振开关网络得到准谐振降压变换器
 
-942 22 Resonant Conversion
-Fig. 22.12 An equivalent circuit for the rectiﬁer
-and ﬁlter network, which models the fundamental
-components of the rectiﬁer ac input waveforms and
-the dc components of the load waveforms. The rec-
-tiﬁer presents an eﬀective resistive load R
-e to the
-tank network
-iR1(t)
-RRe
-2 IR1
-Re = 8
-2 R
-+
-vR1(t)
-+
-V
-I
-Re= vR1(t)
-iR(t) = 8
-π2
-V
-I (22.9)
-With a resistive load R equal to V/I, this equation reduces to
-Re= 8
-π2 R= 0.8106R (22.10)
-Thus, the tank network is damped by an eﬀective load resistance Re equal to 81% of the actual
-load resistance R. An equivalent circuit that models the rectiﬁer network input port fundamental
-components and output port dc components is given in Fig. 22.12.
-22.1.3 Resonant Tank Network
-We have postulated that the eﬀects of harmonics can be neglected, and we have consequently
-shown that the bridge can be modeled as a fundamental voltage source vs1(t). In the case of a
-dc–dc converter, the rectiﬁer can be modeled using an eﬀective resistor of valueRe. We can now
-solve the resonant tank network by standard linear analysis.
-As shown in Fig.22.13, the tank circuit is a linear network with the following voltage trans-
-fer function: vR1(s)
-vs1(s)= H(s) (22.11)
-Hence, the ratio VR1/Vs1 of the peak magnitudes of vR1(t) and vs1(t) is given by
-VR1
-Vs1
-=∥H(s)∥s= jωs (22.12)
-Fig. 22.13 The linear tank network, ex-
-cited by an e ﬀective sinusoidal input
-source and driving an e ﬀective resistive
-load Resonant
-network
-is1(t) iR1(t)
-Transfer function
-H(s)
-+ Re
-Zi
-+
-vR1(t)vs1(t)
+开关网络，导致大量降压、升压、升降压及其他变换器的谐振开关版本。准谐振变换器在第23章描述。
 
-22.1 Sinusoidal Analysis of Resonant Converters 943
-In addition, iR(s)i sg i v e nb y
-iR(s)= vR1(s)
-Re
-= H(s)
-Re
-vs1(s) (22.13)
-So the peak magnitude of iR(t)i s
-IR1=∥H(s)||s= jωS
-Re
-Vs1 (22.14)
-Thus, the magnitude of the tank transfer function is found, with an eﬀective resistive load.
-22.1.4 Solution of Converter Voltage Conversion Ratio M= V/Vg
-An equivalent circuit of a complete dc–dc resonant converter is depicted in Fig. 22.14.T h e
-voltage conversion ratio of the resonant converter can now be found:
-M= V
-Vg
-= (R)
-⎦2
-π
-)
-
-⎦1
-Re
-)
-
-⎦
-∥H(s)∥s= jωs
-)
-/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext/bracehext
-⎦4
-π
-)
-
-⎦V
-I
-) ⎦I
-IR1
-)⎦IR1
-VR1
-)⎦ VR1
-Vs1
-)⎦ Vs1
-Vg
-)
-(22.15)
-Simpliﬁcation by use of Eq. (22.10) yields
-V
-Vg
-=∥H(s)∥s= jωs (22.16)
-Equation (22.16) is the desired result. It states that the dc conversion ratio of the resonant con-
-verter is approximately the same as the ac transfer function of the resonant tank circuit, evalu-
-ated at the switching frequency fs. This intuitive result can be applied to converters with many
-diﬀerent types of tank circuits. However, it should be reemphasized that Eq. ( 22.16) is valid
-only if the response of the tank circuit to the harmonics of vs(t) is negligible compared to the
-vs1(t)=
-4Vg
-sin ( st)
-Resonant
-network
-Transfer function
-H(s)
-+ RRe
-+ Zi
-is1(t) iR1(t)
-+
-vR1(t) 2 IR1
-Re = 8
-2 R
-+
-V
-I
-Vg
-2Is1 cos ( s)
-Fig. 22.14 Steady-state equivalent circuit that models the dc and fundamental components of resonant
-converter waveforms
+谐振变换器的主要优点是通过零电流开关（ZCS）和零电压开关（ZVS）机制降低开关损耗。变换器各半导体元件的开通和/或关断过渡可发生在谐振变换器准正弦波形的过零处。这消除了第4章所述的部分开关损耗机制。因此开关损耗降低，谐振变换器可在高于可比 PWM 变换器的开关频率下工作。零电压开关还可消除部分变换器产生的电磁干扰源。
 
-944 22 Resonant Conversion
-Series tank network
-LC
-vs1(t)=
-4Vg
-sin ( st)
-Transfer function H(s)
-+ Re
-Zi
-is1(t) iR1(t)
-+
-vR1(t)
-Re = 8
-2 R
-+Vg
-2Is1 cos ( s)
-R2 IR1
-+
-V
-I
-Fig. 22.15 Steady-state equivalent circuit of the series resonant converter
-fundamental response, an assumption that is not always justiﬁed. In addition, we have assumed
-that the switch network is controlled to produce a square wave and that the rectiﬁer network
-drives a capacitive-type ﬁlter network. Finally, the transfer functionH(s) is evaluated using the
-eﬀective load resistance R
-e given by Eq. (22.9).
-22.2 Examples
-22.2.1 Series Resonant DC–DC Converter Example
-The series resonant converter with switching-frequency control is shown in Fig. 22.4. Current-
-bidirectional two-quadrant switches are necessary. For this circuit, the tank network consists of
-as e r i e sL–C circuit, and Fig. 22.14 can be redrawn as in Fig. 22.15. The transfer function H(s)
-is therefore:
-H(s)= Re
-Zi(s)= Re
-Re+ sL+ 1
-sC
-=
-⎦ s
-Qeω0
-)
-1+
-⎦ s
-Qeω0
-)
-+
-⎦s
-ω0
-)2 (22.17)
-where
-ω0 = 1√
-LC
-= 2πf0
-R0 =
-√
-L
-C
-Qe = R0
-Re
+谐振变换器有若干缺点。虽然可选谐振元件值使单一工作点获得高性能高效率，但通常难以优化谐振元件使宽负载电流和输入电压范围内均获得良好性能。即使负载断开，槽元件中也可能循环显著电流，导致轻载效率低。此外，谐振变换器的准正弦波形的峰值大于 PWM 变换器的矩形波形（假设二极管存储电荷引起的 PWM 电流尖峰可忽略）。因此，谐振变换器的导通损耗和槽电感损耗增大，可能抵消其降低的开关损耗。
 
-22.2 Examples 945
-The magnitude of H( jωs), which coincides with the converter dc conversion ratioM= V/Vg,i s
-M=∥H( jωs)∥= 1√
-1+ Q2e
-⎦1
-F−F
-)2
-(22.18)
-where
-F= fs/ f0 (22.19)
-The Bode diagrams of Zi(s) and H(s) are constructed in Fig. 22.16, using the graphical con-
-struction method of Chap. 8. The series resonant impedance Zi(s) is dominated by the capacitor
-C at low frequency, and by the inductor L at high frequency. At the resonant frequency f0,t h e
-impedances of the inductor and capacitor are equal in magnitude and opposite in phase; hence,
-they cancel. The series resonant impedance Z
-i(s) is equal to Re at f= f0.
-1
-C
-Re
-|| Zi ||
-f0
-L
-R0
-Qe = R0 /Re
-1
-|| H ||
-f0
-Qe = R0 /Re
-Re /R0
-ReC
-R
-e / L
-Fig. 22.16 Construction of the Bode diagrams of Zi(s)a n dH(s) for the series resonant converter
-The transfer function ∥H( jω)∥ is constructed graphically, by division of Re by the ∥Zi∥
-asymptotes of Fig. 22.16. At resonance, one obtains∥H∥= Re/Re= 1. At frequencies above or
-below the resonant frequency,∥Zi∥> Re and hence∥H∥< 1. So the conversion ratio M is less
-than or equal to 1. It can also be seen that a decrease in the load resistanceR, which increases the
-eﬀective quality factor Qe, causes a more peaked response in the vicinity of resonance. Exact
-characteristics of the series resonant converter are plotted in Fig.22.49.
+本章用正弦近似[296, 303–305]研究串联、并联及其他谐振逆变器和直流-直流变换器的性质。忽略开关频率谐波，假设槽波形纯正弦。这允许为变换器的桥逆变器、槽、整流器和输出滤波部分导出简单等效电路，其工作可用标准线性交流分析理解求解。此直观方法对高 $Q$ 响应的连续导通模式工作相当准确，但在槽以低 $Q$ 值工作或直流-直流谐振变换器在或接近断续导通模式时精度降低。
 
-946 22 Resonant Conversion
-Over what range of switching frequencies is Eq. (22.18) accurate? The response of the tank
-to the fundamental component of vs(t)m u s tb es uﬃciently greater than the response to the
-harmonics of vs(t). This is certainly turn for operation above resonance becauseH(s) contains a
-bandpass characteristic that decreases with a single-pole slope for fs> f0. For the same reason,
-Eq. (22.18) is valid when the switching frequency is below but near resonance.
-However, for switching frequencies fs much less than the resonant frequency f0, the sinu-
-soidal approximation breaks down completely because the tank responds more strongly to the
-harmonics of v
-s(t) than to its fundamental. For example, at fs = f0/3, the third harmonic of
-vs(t) is equal to f0 and directly excites the tank resonance. Some other type of analysis must be
-used to understand what happens at these lower frequencies. Also, in the low- Q case, the ap-
-proximation is less accurate because the ﬁlter response is less peaked, and hence does not favor
-the fundamental component as strongly. As shown in a later section, discontinuous conduction
-modes may then occur whose waveforms are highly nonsinusoidal.
-Fig. 22.17 Excitation of the tank
-network by the third harmonic of the
-switching frequency
-Switch
-output
-voltage
-spectrum
-ffs 3fs 5fs
-f
-Resonant
-tank
-response
-fs 3fs 5fs
-Tank
-current
-spectrum
-ffs 3fs 5fs
-22.2.2 Subharmonic Modes of the Series Resonant Converter
-If the nth harmonic of the switch output waveform vs(t) is close to the resonant tank frequency,
-nf s ∼f0, and if the tank e ﬀective quality factor Qe is suﬃciently large, then as illustrated
-in Fig. 22.17, the tank responds primarily to harmonic n. All other components of the tank
-waveforms can then be neglected, and it is a good approximation to replace vs(t) with its nth
-harmonic component:
-vs(t)≈vsn(t)= 4Vg
-nπsin(nωst) (22.20)
-This expression diﬀers from Eq. (22.2) because the amplitude is reduced by a factor of 1/n, and
-the frequency is nf s rather than fs.
+![源页 p.935](../assets/page-snapshots/chapter-22/page-935.png)
 
-22.2 Examples 947
-Fig. 22.18 The subharmonic modes of
-the series resonant converter. These modes
-occur when the harmonics of the switching
-frequency excite the tank resonance
-fsf0
-M
-etc.
-1
-3 f0
-1
-5 f0
-1
-3
-1
-5
-1
-The arguments used to model the tank and rectiﬁer /ﬁlter networks are unchanged from
-Sect. 22.1. The rectiﬁer presents an eﬀective resistive load to the tank, of value Re = 8R/π2.
-In consequence, the converter dc conversion ratio is given by
-M= V
-Vg
-=∥H( jnωs)∥
-n (22.21)
-This is a good approximation provided that nf s is close to f0, and that Qe is suﬃciently large.
-Typical characteristics are sketched in Fig.22.18.
-The series resonant converter is not generally designed to operate in a subharmonic mode,
-since the fundamental modes yield greater output voltage and power, and hence higher e ﬃ-
-ciency. Nonetheless, the system designer should be aware of their existence, because inadvertent
-operation in these modes can lead to large signal instabilities.
-22.2.3 Parallel Resonant DC–DC Converter Example
-The parallel resonant dc–dc converter is diagrammed in Fig. 22.19.I td iﬀers from the series
-resonant converter in two ways. First, the tank capacitor appears in parallel with the rectiﬁer
-network rather than in series: this causes the tank transfer function H(s)t oh a v ead iﬀerent
-form. Second, the rectiﬁer drives an inductive-input low-pass ﬁlter. In consequence, the value
-of the eﬀective resistance Re diﬀers from that of the rectiﬁer with a capacitive ﬁlter. Nonethe-
-less, sinusoidal approximations can be used to understand the operation of the parallel resonant
-converter.
-As in the series resonant converter, the switch network is controlled to produce a square
-wave v
-s(t). If the tank network responds primarily to the fundamental component of vs(t), then
-arguments identical to those of Sect. 22.1 can be used to model the output fundamental com-
-ponents and input dc components of the switch waveforms. The resulting equivalent circuit is
-identical to Fig. 22.9.
-The uncontrolled rectiﬁer with inductive ﬁlter network can be described using the dual of
-the arguments of Sect. 22.1.2. In the parallel resonant converter, the output rectiﬁers are driven
-by the nearly sinusoidal tank capacitor voltage vR(t), and the diode rectiﬁers switch when vR(t)
-passes through zero as in Fig. 22.20. If the ﬁlter inductor current ripple is small, then in steady
-state the ﬁlter inductor current is essentially equal to the dc load current I. The rectiﬁer input
-current iR(t) is therefore a square wave of amplitude I, and is in phase with the tank capacitor
-voltage vR(t):
+对直流-直流谐振变换器，此方法的重要结果是连续导通模式谐振变换器的直流电压变换比近似由槽电路在开关频率处求值的交流传递函数给出。槽由有效输出电阻加载，其值几乎等于输出电压除以输出电流。因此很容易确定槽元件和电路连接如何影响变换器行为。槽元件损耗、变压器非理想性等对输出电压和变换器效率的影响也可求得。给出若干谐振网络定理，以简单直观的方式解释导通损耗和零电压或零电流开关性质的负载依赖性。
 
-948 22 Resonant Conversion
-iR(t)= 4I
-π
-∞∑
-n=1,3,5,...
-1
-n sin(nωst−ϕR) (22.22)
-whereϕR is the phase shift of vR(t).
-iR(t)
-vR(t)
-+
-+ R
-+
-v(t)
-Resonant tank network
-is(t)
-dc
-source
-vg(t)
-vs(t)
-+
-Switch network
-L
-Cp
-NS NT
-i(t)
-Rectifier network
-NR NF
-Low-pass filter
-network
-dc
-load
-Fig. 22.19 Block diagram of the parallel resonant converter
-(a)
-vR(t)
-I iR(t)
-st
-R
-(b)
-vR1(t)
-iR1(t)
-fundamental
-4 I
-iR1(t)= vR1(t)
-Re
-Re =
-2
-8 R
-st
-R
-Fig. 22.20 Rectiﬁer network input terminal waveforms, for the parallel resonant converter: ( a) actual
-waveforms vR(t)a n diR(t), (b) fundamental components vR1(t)a n diR1(t)
-The fundamental component of iR(t)i s
-iR1(t)= 4I
-πsin(ωst−ϕR) (22.23)
-Hence, the rectiﬁer again presents an eﬀective resistive load to the tank circuit, equal to
-Re= vR1(t)
-iR1(t)=πVR1
-4I (22.24)
-The ac components of the rectiﬁed tank capacitor voltage|vR(t)| are removed by the output low-
-pass ﬁlter. In steady state, the output voltage V is equal to and inductive ﬁlter network of the
-parallel resonant the dc component of|vR(t)|:
-V= 2
-Ts
-∫ Ts/2
-0
-VR1| sin(ωst−ϕR)|dt= 2
-πVR1 (22.25)
+发现串联谐振变换器以降压电压变换比工作。1:1 变压器匝比下，晶体管开关频率等于槽谐振频率时直流输出电压理想地等于直流输入电压。开关频率增减远离谐振时输出电压降低。另一方面，并联谐振变换器能升压也能降压，取决于开关频率和有效槽 $Q$ 值。理想串联和并联谐振直流-直流变换器的精确稳态解在22.5节给出。
 
-22.2 Examples 949
-So the load voltage V and the tank capacitor voltage amplitude are directly related in steady state.
-Substitution of Eq. (22.25) and resistive load characteristics V= IR into Eq. (22.24) yields
-Re=π2
-8 R= 1.2337R (22.26)
-iR1(t)
-RRe
-Re =
-2
-8 R
-+
-vR1(t)
-+
-V
-I
-+2 VR1
-Fig. 22.21 An equivalent circuit for the rectiﬁer and
-inductive ﬁlter network of the parallel resonant con-
-verter, which models the fundamental components of
-the rectiﬁer ac input waveforms and the dc compo-
-nents of the load waveforms
-An equivalent circuit for the uncontrolled
-rectiﬁer with inductive ﬁlter network is given
-in Fig. 22.21. This model is similar to the
-one used for the series resonant converter,
-Fig. 22.12, except that the roles of the recti-
-ﬁer input voltage v
-R(t) and current iR(t)a r e
-interchanged, and the eﬀective resistance Re
-has a diﬀerent value. The model for the com-
-plete converter is given in Fig.22.22.
-Solution of Fig. 22.22 yields the con-
-verter dc conversion ratio:
-M= V
-Vg
-= 8
-π2∥H(s)∥s= jωs (22.27)
-where H(s) is the tank transfer function
-H(s)= Zo(s)
-sL (22.28)
-and
-Zo(s)= sL∥ 1
-sC∥Re (22.29)
-Parallel tank network
-L
-C
-vs1(t)=
-4Vg
-sin ( st)
-Transfer function H(s)
-+ Re
-Zi
-is1(t) iR1(t)
-+
-vR1(t)+Vg
-2Is1 cos ( s)
-Re =
-2
-8 R
-R
-+
-V
-I
-+2 VR1
-Fig. 22.22 Equivalent circuit for the parallel resonant converter, which models the fundamental compo-
-nents of the tank waveforms and the dc components of the converter input current and output voltage
+22.3节描述串联谐振变换器的零电压开关和零电流开关机制。22.4节考察谐振逆变器性质对负载的依赖。简单的频域方法解释为何某些谐振变换器在某些工作点范围内表现出大循环槽电流和低效率。还确定零电压开关和零电流开关的边界。
 
-950 22 Resonant Conversion
-The Bode magnitude diagrams of H(s) and Zo(s) are constructed in Fig. 22.23,u s i n gt h e
-graphical construction method of Chap. 8. The impedance Zo(s) is the parallel combination
-of the impedances of the tank inductor L, capacitor C, and eﬀective load Re. The magnitude
-asymptote of the parallel combination of these components, at a given frequency, is equal to the
-smallest of the individual asymptotes ωL, 1/ωC, and R
-e. Hence, at low frequency where the
-inductor impedance dominates the parallel combination,||Zo(s)||/simequalωL, while at high frequency
-the capacitor dominates and ||Zo(s)||/simequal1/ωC. At resonance, the impedances of the inductor
-and capacitor are equal in magnitude but opposite in phase, so that their e ﬀects cancel. The
-impedance||Zo(s)∥ is then equal to Re:
-∥ Zo(s)∥s= jωs = 1
-1
-jω0L+ jω0C+ 1
-Re
-= Re (22.30)
-with
-ω0L= 1
-ω0C= R0
-The dc conversion ratio is therefore
-M= 8
-π2
-
-
-Z
-o(s)
-sL
-
-
-s= jωs
-= 8
-π2
-
-
-
-
-
-
-1
-1+ s
-Qeω0
-+
-⎦s
-ω0
-)2
-
-
-
-
-
-
-s= jωs
-(22.31)
-= 8
-π2
-1√
-⎦1−F2)2+
-⎦F
-Qe
-)2
-where F= fs/ f0.
-At resonance, the conversion ratio is
-M= 8
-π2
-Re
-R0
-= R
-R0
-(22.32)
-The actual peak value of M occurs at a switching frequency slightly below the resonant fre-
-quency, with peak M slightly greater than Eq. ( 22.32). Provided that the load resistance R is
-greater than the tank characteristic impedance Re, the parallel resonant converter can produce
-conversion ratios both greater than and less than one. In fact, the ideal parallel resonant con-
-verter can produce conversion ratios approaching inﬁnity, provided that the output current is
-limited to values less than Vg/R0. Of course, losses limit the maximum output voltage that can
-be produced by practical converters.
+也可修改前几章的 PWM 变换器以获得零电流或零电压开关。已知多种多样使降压、升压、正激、反激、桥式等拓扑实现软开关的方法。第23章总结若干知名方案，包括谐振开关、准方波开关、全桥零电压过渡变换器，以及含主动钳位缓冲电路的正激和反激变换器中的零电压开关。还详细描述二极管、MOSFET 和 IGBT 的软开关机制。
 
-22.3 Soft Switching 951
-(a)
-1
-C
-Re
-|| Zo ||
-f0
-L
-R0
-Qe = Re /R0
-(b)
-1
-2LC
-1
-|| H ||
-f0
-Qe = Re /R0
-Re /R0
-Fig. 22.23 Construction of Bode diagrams of Zi(s)a n dH(s) for the parallel resonant converter
-22.3 Soft Switching
-As mentioned previously, the soft-switching phenomena known as zero-current switching (ZCS)
-and zero-voltage switching (ZVS) can lead to reduced switching loss. When the turn-on and/or
-turn-oﬀtransitions of a semiconductor switching device coincide with the zero crossings of
-the applied waveforms, some of the switching loss mechanisms discussed in Sect. 4.6 are elim-
-inated. In converters containing MOSFETs and diodes, zero-voltage switching mitigates the
-switching loss otherwise caused by diode recovered charge and semiconductor output capaci-
-tance.
-Zero-current switching can mitigate the switching loss caused by current tailing in IGBTs
-and by stray inductances. Zero-current switching can also be used for commutation of SCRs.
-In the majority of applications, where diode recovered charge and semiconductor output capac-
-itances are the dominant sources of PWM switching loss, zero-voltage switching is preferred.
-22.3.1 Operation of the Full Bridge Below Resonance: Zero-Current Switching
-When the series and parallel resonant inverters and dc–dc converters are operated below reso-
-nance, the zero-current switching phenomenon can occur, in which the circuit causes the tran-
-sistor current to go to zero before the transistor is turned o ﬀ. Let us consider the operation of
-the full-bridge switch network of the series resonant converter in detail.
+## 22.1 谐振变换器的正弦分析
 
-952 22 Resonant Conversion
-L
-+Vg
-CQ1
-Q2
-Q3
-Q4
-D1
-D2
-D3
-D4
-+
-vs(t)
-is(t)
-+
-vds1(t)
-iQ1(t)
-Fig. 22.24 A series resonant converter incorporating a full-bridge switch network
-Ts
-2
-t
-vs(t)
-Vg
-g
-vs1(t)
-t
-is(t)
-t
-Ts
-2 + t
-Q1
-Q4
-D1
-D4
-Q2
-Q3
-D2
-D3
-Conducting
-devices:
-turn-on of
-Q1, Q4
-turn-off of
-Q1, Q4
-turn-on of
-Q2, Q3
-turn-off of
-Q2, Q3
-Fig. 22.25 Switch network output waveforms for the series resonant converter, operated below resonance
-in the k= 1 CCM. Zero-current switching aids the transistor turn-oﬀprocess
-A full-bridge circuit, realized using power MOSFETs and antiparallel diodes, is shown in
-Fig. 22.24. The switch output voltage vs(t), and its fundamental component vs1(t), as well as
-the approximately sinusoidal tank current waveform is(t), are illustrated in Fig. 22.25.A tf r e -
-quencies less than the tank resonant frequency, the input impedance of the series resonant tank
-network Zi(s) is dominated by the tank capacitor impedance (see Fig. 22.16a). Hence, the tank
-presents an eﬀective capacitive load to the bridge, and switch current is(t) leads the switch volt-
-```
+考虑含受控开关网络 $N_S$ 驱动线性谐振槽网络 $N_T$ 的谐振变换器类。谐振逆变器中，槽网络驱动电阻负载，如图22.1。负载阻抗的电抗分量（若有）可有效纳入槽网络。谐振直流-直流变换器情形中，谐振槽网络接到不可控整流器网络 $N_R$、滤波网络 $N_F$ 和负载 $R$，如图22.4。许多知名变换器可表示为此形式，包括串联、并联、LCC 和 LLC 拓扑。
+
+在最常见工作模式下，受控开关网络产生频率 $f_s$ 接近槽网络谐振频率 $f_0$ 的方波电压输出 $v_s(t)$。作为响应，槽网络以频率 $f_s$ 的近似正弦波形振荡。在谐振槽主要响应开关波形 $v_s(t)$ 的基波分量 $f_s$ 且在谐波频率 $n f_s$（$n = 3, 5, 7, \ldots$）处响应可忽略的情形中，槽波形可由其基波分量很好近似。如图22.2所示，当槽网络在或接近开关频率处含高 $Q$ 谐振且在更高频率处有低通特性时确实如此。因此，让我们忽略谐波，计算槽端子波形 $v_s(t)$、$i_s(t)$、$i_R(t)$、$v_R(t)$ 基波分量之间的关系。
+
+### 22.1.1 受控开关网络模型
+
+图22.6 理想开关网络
+
+若图22.6的开关网络被控制产生频率 $f_s = \omega_s/(2\pi)$ 的方波，如图22.7，则其输出电压波形 $v_s(t)$ 可用傅里叶级数表示
+
+$$v_s(t) = \frac{4 V_g}{\pi} \sum_{n=1,3,5,\ldots} \frac{1}{n} \sin(n \omega_s t) \tag{22.1}$$
+
+基波分量为
+
+$$v_{s1}(t) = \frac{4 V_g}{\pi} \sin(\omega_s t) = V_{s1} \sin(\omega_s t) \tag{22.2}$$
+
+![源页 p.936](../assets/page-snapshots/chapter-22/page-936.png)
+
+图22.7 开关网络电压 $v_s(t)$ 及其基波分量 $v_{s1}(t)$
+
+图22.8 开关网络波形 $i_s(t)$ 和 $i_g(t)$
+
+峰值幅值为 $(4/\pi)$ 倍直流输入电压 $V_g$，且与原方波 $v_s(t)$ 同相。故开关网络输出端子建模为正弦电压源 $v_{s1}(t)$。
+
+建模变换器直流输入端口也有意义。这需计算开关输入电流 $i_g(t)$ 的直流分量 $I_g$。开关输入电流 $i_g(t)$ 在开关处于位置 1 时等于输出电流 $i_s(t)$，处于位置 2 时等于其负 $-i_s(t)$。在上述条件下，槽正弦振荡，$i_s(t)$ 可由某峰值幅值 $I_{s1}$ 和相位 $\phi_s$ 的正弦很好近似：
+
+$$i_s(t) \approx I_{s1} \sin(\omega_s t - \phi_s) \tag{22.3}$$
+
+输入电流波形如图22.8。
+
+输入电流的直流分量（平均值）可通过在半个开关周期上对 $i_g(t)$ 平均求得：
+
+$$\langle i_g(t) \rangle_{T_s} = \frac{2}{T_s} \int_0^{T_s/2} i_g(\tau)\, d\tau \approx \frac{2}{T_s} \int_0^{T_s/2} I_{s1} \sin(\omega_s \tau - \phi_s)\, d\tau = \frac{2}{\pi}\, I_{s1} \cos(\phi_s) \tag{22.4}$$
+
+因此变换器输入电流的直流分量直接取决于槽输入电流峰值幅值 $I_{s1}$ 及其相移 $\phi_s$ 的余弦。
+
+![源页 p.937](../assets/page-snapshots/chapter-22/page-937.png)
+
+图22.9 开关网络等效电路，建模输出电压波形的基波分量和输入电流波形的直流分量
+
+图22.9给出了开关的等效电路。此电路建模开关的基本能量转换性质：电压源 $V_g$ 供给的直流功率转换为开关输出处的交流功率。注意源的直流功率是 $V_g$ 与 $i_g(t)$ 直流分量之积，开关处的交流功率是 $v_s(t)\, i_s(t)$ 的平均。此外，若 $v_s(t)$ 的谐波可忽略，则开关输出电压可用其基波分量表示，即峰值幅值 $4 V_g/\pi$ 的正弦 $v_{s1}(t)$。可验证图22.9预测的开关网络直流输入功率和基波平均输出功率相等。
+
+### 22.1.2 整流器和电容滤波网络建模
+
+串联谐振直流-直流变换器中，输出整流器由近正弦的槽输出电流 $i_R(t)$ 驱动。直流输出处放大电容 $C_F$ 使输出电压 $v(t)$ 含可忽略的开关频率 $f_s$ 谐波，如图22.10。故可如常做小纹波近似：$v(t) \approx V$，$i(t) \approx I$。二极管整流器在 $i_R(t)$ 过零时切换，如图22.11。整流器输入电压 $v_R(t)$ 本质上是方波，$i_R(t)$ 正时等于 $+v(t)$，负时等于 $-v(t)$。注意 $v_R(t)$ 与 $i_R(t)$ 同相。
+
+图22.10 串联谐振变换器中带电容滤波网络的不可控整流器
+
+![源页 p.938](../assets/page-snapshots/chapter-22/page-938.png)
+
+若槽输出电流 $i_R(t)$ 是峰值幅值 $I_{R1}$、相移 $\phi_R$ 的正弦：
+
+$$i_R(t) = I_{R1} \sin(\omega_s t - \phi_R) \tag{22.5}$$
+
+图22.11 整流器网络输入端子波形：(a) 实际波形 $v_R(t)$ 和 $i_R(t)$，(b) 基波分量 $v_{R1}(t)$ 和 $i_{R1}(t)$
+
+则整流器输入电压可用傅里叶级数表示
+
+$$v_R(t) = \frac{4 V}{\pi} \sum_{n=1,3,5,\ldots} \frac{1}{n} \sin(n \omega_s t - \phi_R) \tag{22.6}$$
+
+其中 $\phi_R$ 是 $i_R(t)$ 相对于 $v_s(t)$ 的相移。此电压波形加到谐振槽网络输出端口。同样，若槽网络主要响应 $v_R(t)$ 的基波分量（$f_s$）且在谐波频率 $n f_s$（$n = 3, 5, 7, \ldots$）处响应可忽略，则 $v_R(t)$ 的谐波可忽略。$v_R(t)$ 可由其基波分量 $v_{R1}(t)$ 很好近似：
+
+$$v_{R1}(t) = \frac{4 V}{\pi} \sin(\omega_s t - \phi_R) = V_{R1} \sin(\omega_s t - \phi_R) \tag{22.7}$$
+
+![源页 p.939](../assets/page-snapshots/chapter-22/page-939.png)
+
+基波电压分量 $v_{R1}(t)$ 峰值为 $(4/\pi)$ 倍直流输出电压 $V$，且与电流 $i_R(t)$ 同相。
+
+整流后的槽输出电流 $|i_R(t)|$ 由电容 $C_F$ 滤波。由于无直流电流可通过 $C_F$，$|i_R(t)|$ 的直流分量必须等于稳态负载电流 $I$。令直流分量相等得
+
+$$I = \frac{2}{T_s} \int_0^{T_s/2} I_{R1} |\sin(\omega_s t - \phi_R)|\, dt = \frac{2}{\pi}\, I_{R1} \tag{22.8}$$
+
+因此负载电流和槽输出电流幅值在稳态下直接相关。
+
+由于 $v_R(t)$ 的基波分量 $v_{R1}(t)$ 与 $i_R(t)$ 同相，整流器对槽电路呈现有效电阻负载 $R_e$。$R_e$ 值等于 $v_{R1}(t)$ 与 $i_R(t)$ 之比。式(22.7)除以式(22.5)并用式(22.8)消去 $I_{R1}$ 得
+
+![源页 p.940](../assets/page-snapshots/chapter-22/page-940.png)
+
+图22.12 整流器和滤波网络等效电路，建模整流器交流输入波形基波分量和负载波形直流分量。整流器对槽网络呈现有效电阻负载 $R_e$
+
+$$R_e = \frac{v_{R1}(t)}{i_R(t)} = \frac{8}{\pi^2}\, \frac{V}{I} \tag{22.9}$$
+
+负载电阻 $R$ 等于 $V/I$ 时，此式简化为
+
+$$R_e = \frac{8}{\pi^2}\, R = 0.8106\, R \tag{22.10}$$
+
+因此槽网络由等于实际负载电阻 $R$ 的 81% 的有效负载电阻 $R_e$ 阻尼。建模整流器网络输入端口基波分量和输出端口直流分量的等效电路如图22.12。
+
+### 22.1.3 谐振槽网络
+
+我们已假设谐波影响可忽略，因此已证明桥可建模为基波电压源 $v_{s1}(t)$。直流-直流变换器情形中，整流器可用值 $R_e$ 的有效电阻建模。现在可用标准线性分析求解谐振槽网络。
+
+如图22.13所示，槽电路是如下电压传递函数的线性网络：
+
+$$\frac{v_{R1}(s)}{v_{s1}(s)} = H(s) \tag{22.11}$$
+
+故 $v_{R1}(t)$ 和 $v_{s1}(t)$ 峰值幅值之比 $V_{R1}/V_{s1}$ 为
+
+$$\frac{V_{R1}}{V_{s1}} = \|H(s)\|_{s = j\omega_s} \tag{22.12}$$
+
+图22.13 由有效正弦输入源激励、驱动有效电阻负载 $R_e$ 的线性槽网络
+
+![源页 p.941](../assets/page-snapshots/chapter-22/page-941.png)
+
+此外，$i_R(s)$ 为
+
+$$i_R(s) = \frac{v_{R1}(s)}{R_e} = \frac{H(s)}{R_e}\, v_{s1}(s) \tag{22.13}$$
+
+故 $i_R(t)$ 的峰值幅值为
+
+$$I_{R1} = \frac{\|H(s)\|_{s = j\omega_s}}{R_e}\, V_{s1} \tag{22.14}$$
+
+因此求得了有效电阻负载下槽传递函数的幅值。
+
+### 22.1.4 变换器电压变换比 $M = V/V_g$ 的求解
+
+完整直流-直流谐振变换器的等效电路如图22.14。谐振变换器的电压变换比现为：
+
+$$M = \frac{V}{V_g} = \left( R \right)\left( \frac{2}{\pi} \right)\left( \frac{1}{R_e} \right)\left( \|H(s)\|_{s=j\omega_s} \right)\left( \frac{4}{\pi} \right)\left( \frac{V}{I} \right)\left( \frac{I}{I_{R1}} \right)\left( \frac{I_{R1}}{V_{R1}} \right)\left( \frac{V_{R1}}{V_{s1}} \right)\left( \frac{V_{s1}}{V_g} \right) \tag{22.15}$$
+
+用式(22.10)化简得
+
+$$\frac{V}{V_g} = \|H(s)\|_{s = j\omega_s} \tag{22.16}$$
+
+图22.14 建模谐振变换器波形直流和基波分量的稳态等效电路
+
+![源页 p.942](../assets/page-snapshots/chapter-22/page-942.png)
+
+式(22.16)是所需结果。它表明谐振变换器的直流变换比近似等于谐振槽电路在开关频率 $f_s$ 处求值的交流传递函数。此直观结果可应用于多种槽电路类型的变换器。但应再次强调，式(22.16)仅在槽电路对 $v_s(t)$ 谐波的响应相对于基波响应可忽略时有效，此假设并非总是成立。此外，我们假设开关网络被控制产生方波且整流器网络驱动电容型滤波网络。最后，传递函数 $H(s)$ 用式(22.9)给定的有效负载电阻 $R_e$ 求值。
+
+## 22.2 示例
+
+### 22.2.1 串联谐振直流-直流变换器示例
+
+开关频率控制的串联谐振变换器如图22.4。需电流双向两象限开关。对此电路，槽网络由串联 LC 电路组成，图22.14可重画为图22.15。传递函数 $H(s)$ 因此为：
+
+$$H(s) = \frac{R_e}{Z_i(s)} = \frac{R_e}{R_e + s L + \dfrac{1}{s C}} = \frac{\left( \dfrac{s}{Q_e \omega_0} \right)}{1 + \left( \dfrac{s}{Q_e \omega_0} \right) + \left( \dfrac{s}{\omega_0} \right)^2} \tag{22.17}$$
+
+其中
+
+$$\omega_0 = \frac{1}{\sqrt{LC}} = 2\pi f_0$$
+
+$$R_0 = \sqrt{\frac{L}{C}}$$
+
+$$Q_e = \frac{R_0}{R_e}$$
+
+图22.15 串联谐振变换器的稳态等效电路
+
+![源页 p.943](../assets/page-snapshots/chapter-22/page-943.png)
+
+$H(j\omega_s)$ 的幅值与变换器直流变换比 $M = V/V_g$ 一致，为
+
+$$M = \|H(j\omega_s)\| = \frac{1}{\sqrt{1 + Q_e^2 \left( \dfrac{1}{F} - F \right)^2}} \tag{22.18}$$
+
+其中
+
+$$F = f_s/f_0 \tag{22.19}$$
+
+$Z_i(s)$ 和 $H(s)$ 的波特图用第8章的图解构造法构造，如图22.16。串联谐振阻抗 $Z_i(s)$ 低频由电容 $C$ 主导，高频由电感 $L$ 主导。谐振频率 $f_0$ 处，电感和电容阻抗幅值相等相位相反；故它们抵消。串联谐振阻抗 $Z_i(s)$ 在 $f = f_0$ 处等于 $R_e$。
+
+图22.16 串联谐振变换器 $Z_i(s)$ 和 $H(s)$ 波特图的构造
+
+![源页 p.944](../assets/page-snapshots/chapter-22/page-944.png)
+
+传递函数 $\|H(j\omega)\|$ 通过将 $R_e$ 除以图22.16的 $\|Z_i\|$ 渐近线图解构造。谐振处得 $\|H\| = R_e/R_e = 1$。高于或低于谐振频率时 $\|Z_i\| > R_e$，故 $\|H\| < 1$。故变换比 $M$ 小于或等于 1。还可看到负载电阻 $R$ 减小（增大有效品质因数 $Q_e$）使谐振附近响应更尖锐。串联谐振变换器的精确特性绘于图22.49。
+
+式(22.18)在什么开关频率范围内准确？槽对 $v_s(t)$ 基波分量的响应须充分大于对 $v_s(t)$ 谐波的响应。谐振以上工作时确实如此，因为 $H(s)$ 含带通特性，在 $f_s > f_0$ 时以单极点斜率下降。同样原因，式(22.18)在开关频率低于但接近谐振时有效。
+
+但开关频率 $f_s$ 远低于谐振频率 $f_0$ 时，正弦近似完全失效，因为槽对 $v_s(t)$ 谐波的响应强于基波。例如 $f_s = f_0/3$ 时，$v_s(t)$ 的三次谐波等于 $f_0$ 并直接激励槽谐振。须用其他分析方法理解这些更低频率下发生的情况。此外，低 $Q$ 情形近似精度较低，因为滤波响应不那么尖锐，故不那么偏向基波分量。如后节所示，此时可能出现波形高度非正弦的断续导通模式。
+
+图22.17 开关频率三次谐波激励槽网络
+
+![源页 p.945](../assets/page-snapshots/chapter-22/page-945.png)
+
+### 22.2.2 串联谐振变换器的子谐波模式
+
+若开关输出波形 $v_s(t)$ 的第 $n$ 次谐波接近谐振槽频率，$n f_s \sim f_0$，且槽有效品质因数 $Q_e$ 足够大，则如图22.17所示，槽主要响应谐波 $n$。槽波形的所有其他分量可忽略，用 $v_s(t)$ 的第 $n$ 次谐波分量代替 $v_s(t)$ 是好近似：
+
+$$v_s(t) \approx v_{sn}(t) = \frac{4 V_g}{n \pi} \sin(n \omega_s t) \tag{22.20}$$
+
+此式不同于式(22.2)，因为幅值减小 $1/n$ 因子，频率为 $n f_s$ 而非 $f_s$。
+
+图22.18 串联谐振变换器的子谐波模式。这些模式在开关频率谐波激励槽谐振时出现
+
+用于建模槽和整流器/滤波网络的论证与22.1节相同。整流器对槽呈现值 $R_e = 8R/\pi^2$ 的有效电阻负载。因此变换器直流变换比为
+
+$$M = \frac{V}{V_g} = \frac{\|H(j n \omega_s)\|}{n} \tag{22.21}$$
+
+在 $n f_s$ 接近 $f_0$ 且 $Q_e$ 足够大时这是好近似。典型特性如图22.18。
+
+串联谐振变换器通常不设计为在子谐波模式工作，因为基波模式产生更高输出电压和功率，因而效率更高。但系统设计者应意识到其存在，因为这些模式中的意外工作可导致大信号不稳定。
+
+### 22.2.3 并联谐振直流-直流变换器示例
+
+并联谐振直流-直流变换器如图22.19。它与串联谐振变换器有两点不同。第一，槽电容与整流器网络并联而非串联：这使槽传递函数 $H(s)$ 形式不同。第二，整流器驱动电感输入低通滤波器。因此有效电阻 $R_e$ 值不同于电容滤波整流器。但正弦近似可用于理解并联谐振变换器的工作。
+
+与串联谐振变换器一样，开关网络被控制产生方波 $v_s(t)$。若槽网络主要响应 $v_s(t)$ 的基波分量，则可用与22.1节相同的论证对开关波形的输出基波分量和输入直流分量建模。所得等效电路与图22.9相同。
+
+带电感滤波网络的不可控整流器可用22.1.2节论证的对偶描述。并联谐振变换器中，输出整流器由近正弦的槽电容电压 $v_R(t)$ 驱动，二极管整流器在 $v_R(t)$ 过零时切换，如图22.20。若滤波电感电流纹波小，则稳态下滤波电感电流本质等于直流负载电流 $I$。故整流器输入电流 $i_R(t)$ 是幅值 $I$ 的方波，且与槽电容电压 $v_R(t)$ 同相：
+
+![源页 p.946](../assets/page-snapshots/chapter-22/page-946.png)
+
+图22.19 并联谐振变换器的框图
+
+$$i_R(t) = \frac{4 I}{\pi} \sum_{n=1,3,5,\ldots} \frac{1}{n} \sin(n \omega_s t - \phi_R) \tag{22.22}$$
+
+其中 $\phi_R$ 是 $v_R(t)$ 的相移。
+
+图22.20 并联谐振变换器整流器网络输入端子波形：(a) 实际波形 $v_R(t)$ 和 $i_R(t)$，(b) 基波分量 $v_{R1}(t)$ 和 $i_{R1}(t)$
+
+$i_R(t)$ 的基波分量为
+
+$$i_{R1}(t) = \frac{4 I}{\pi} \sin(\omega_s t - \phi_R) \tag{22.23}$$
+
+故整流器再次对槽电路呈现有效电阻负载，等于
+
+$$R_e = \frac{v_{R1}(t)}{i_{R1}(t)} = \frac{\pi V_{R1}}{4 I} \tag{22.24}$$
+
+整流后槽电容电压 $|v_R(t)|$ 的交流分量由输出低通滤波器去除。稳态下，输出电压 $V$ 等于 $|v_R(t)|$ 的直流分量：
+
+$$V = \frac{2}{T_s} \int_0^{T_s/2} V_{R1} |\sin(\omega_s t - \phi_R)|\, dt = \frac{2}{\pi}\, V_{R1} \tag{22.25}$$
+
+![源页 p.947](../assets/page-snapshots/chapter-22/page-947.png)
+
+故负载电压 $V$ 和槽电容电压幅值在稳态下直接相关。将式(22.25)和电阻负载特性 $V = I R$ 代入式(22.24)得
+
+$$R_e = \frac{\pi^2}{8}\, R = 1.2337\, R \tag{22.26}$$
+
+图22.21 并联谐振变换器整流器和电感滤波网络等效电路，建模整流器交流输入波形基波分量和负载波形直流分量
+
+带电感滤波网络的不可控整流器等效电路如图22.21。此模型与串联谐振变换器所用模型（图22.12）相似，只是整流器输入电压 $v_R(t)$ 和电流 $i_R(t)$ 的角色互换，有效电阻 $R_e$ 值不同。完整变换器模型如图22.22。
+
+求解图22.22得变换器直流变换比：
+
+$$M = \frac{V}{V_g} = \frac{8}{\pi^2}\, \|H(s)\|_{s = j\omega_s} \tag{22.27}$$
+
+其中 $H(s)$ 是槽传递函数
+
+$$H(s) = \frac{Z_o(s)}{s L} \tag{22.28}$$
+
+$$Z_o(s) = s L \parallel \frac{1}{s C} \parallel R_e \tag{22.29}$$
+
+图22.22 并联谐振变换器等效电路，建模槽波形基波分量和变换器输入电流、输出电压直流分量
+
+![源页 p.948](../assets/page-snapshots/chapter-22/page-948.png)
+
+$H(s)$ 和 $Z_o(s)$ 的波特幅值图用第8章图解构造法构造，如图22.23。$Z_o(s)$ 是槽电感 $L$、电容 $C$ 和有效负载 $R_e$ 阻抗的并联组合。给定频率处这些元件并联组合的幅值渐近线等于各单独渐近线 $\omega L$、$1/(\omega C)$、$R_e$ 中的最小者。故低频处电感阻抗主导并联组合，$\|Z_o(s)\| \approx \omega L$，高频处电容主导，$\|Z_o(s)\| \approx 1/(\omega C)$。谐振处，电感和电容阻抗幅值相等相位相反，故其效应抵消。$\|Z_o(s)\|$ 等于 $R_e$：
+
+$$\|Z_o(s)\|_{s = j\omega_s} = \frac{1}{\dfrac{1}{j\omega_0 L} + j\omega_0 C + \dfrac{1}{R_e}} = R_e \tag{22.30}$$
+
+$$\omega_0 L = \frac{1}{\omega_0 C} = R_0$$
+
+故直流变换比为
+
+$$M = \frac{8}{\pi^2} \left\| \frac{Z_o(s)}{s L} \right\|_{s = j\omega_s} = \frac{8}{\pi^2} \left\| \frac{1}{1 + \dfrac{s}{Q_e \omega_0} + \left( \dfrac{s}{\omega_0} \right)^2} \right\|_{s = j\omega_s} = \frac{8}{\pi^2}\, \frac{1}{\sqrt{(1 - F^2)^2 + \left( \dfrac{F}{Q_e} \right)^2}} \tag{22.31}$$
+
+其中 $F = f_s/f_0$。
+
+谐振处变换比为
+
+$$M = \frac{8}{\pi^2}\, \frac{R_e}{R_0} = \frac{R}{R_0} \tag{22.32}$$
+
+$M$ 的实际峰值出现在略低于谐振频率的开关频率处，峰值略大于式(22.32)。只要负载电阻 $R$ 大于槽特性阻抗 $R_e$，并联谐振变换器可产生大于和小于 1 的变换比。事实上，理想并联谐振变换器可产生趋于无穷的变换比，只要输出电流限制在小于 $V_g/R_0$ 的值。当然，损耗限制了实际变换器可产生的最大输出电压。
+
+![源页 p.949](../assets/page-snapshots/chapter-22/page-949.png)
+
+图22.23 并联谐振变换器 $Z_i(s)$ 和 $H(s)$ 波特图的构造
+
+## 22.3 软开关
+
+如前所述，零电流开关（ZCS）和零电压开关（ZVS）软开关现象可降低开关损耗。半导体开关器件的开通和/或关断过渡与外加波形的过零重合时，4.6节讨论的部分开关损耗机制被消除。在含 MOSFET 和二极管的变换器中，零电压开关减轻二极管恢复电荷和半导体输出电容引起的开关损耗。
+
+零电流开关可减轻 IGBT 电流拖尾和杂散电感引起的开关损耗。零电流开关也可用于 SCR 的换流。在二极管恢复电荷和半导体输出电容是 PWM 开关损耗主要来源的大多数应用中，零电压开关更优。
+
+### 22.3.1 全桥低于谐振工作：零电流开关
+
+当串联和并联谐振逆变器及直流-直流变换器在低于谐振下工作时，可出现零电流开关现象，电路使晶体管电流在晶体管关断前降为零。让我们详细考虑串联谐振变换器全桥开关网络的工作。
+
+![源页 p.950](../assets/page-snapshots/chapter-22/page-950.png)
+
+图22.24 含全桥开关网络的串联谐振变换器
+
+图22.25 串联谐振变换器低于谐振在 $k = 1$ CCM 下工作时的开关网络输出波形。零电流开关辅助晶体管关断过程
+
+图22.24给出了用功率 MOSFET 和反并联二极管实现的全桥电路。开关输出电压 $v_s(t)$ 及其基波分量 $v_{s1}(t)$ 以及近似正弦的槽电流波形 $i_s(t)$ 如图22.25。低于槽谐振频率时，串联谐振槽网络 $Z_i(s)$ 的输入阻抗由槽电容阻抗主导（见图22.16(a)）。故槽对桥呈现有效电容负载，开关电流 $i_s(t)$ 超前于开关电压。

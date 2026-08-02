@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第16章part 3 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems"
+title: "第16章 面向设计的分析技巧：额外元件定理（第3部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,394 +18,197 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第16章part 3 - 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
+# 第16章 面向设计的分析技巧：额外元件定理（第3部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 669-677  
-> Chunk ID: `chapter-16-part-3`
+> 源页：669–677
+> 本部分续接 16.5 频率反转，并含习题 16.1–16.8。
 
-## 主干提取
+## 16.5 频率反转（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 16.5.1 示例：阻尼输入滤波器（续）
 
-## 术语表
+![源页 p.669](../assets/page-snapshots/chapter-16/page-669.png)
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+图16.45 图16.41 阻尼 L-C 滤波示例：求 $R_{Da}$。端口 b 和 c 处储能元件设为参考状态时求端口 a 看到的电阻
 
-## 中文翻译
+系数 $R_{Da}$ 是端口 b（$C$）设为参考（直流/开路）状态、端口 c（$L_2$）设为参考（高频/开路）状态时 $L_1$ 端口（端口 a）看到的电阻。从图16.45 检查此条件可见 $R_{Da} = \infty$（开路）。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+系数 $R_{Da-b}$ 是端口 b（$C$）设为反演（直流/开路）状态、端口 c（$L_2$）设为参考（高频/开路）状态时 $L_1$ 端口（端口 a）看到的电阻。从图16.46 检查此条件可见 $R_{Da-b} = R$。
 
-## 英文原文
+![源页 p.670](../assets/page-snapshots/chapter-16/page-670.png)
 
-```text
-16.5 Frequency Inversion 665
-Fig. 16.45 Damped L–C ﬁlter example
-of Fig. 16.41: ﬁnding RDa. The resistance
-seen at Port a is found with the reactive
-elements at Ports b and c set to their refer-
-ence states
-The coeﬃcient RDa is the resistance seen at the L1 port (Port a) when Port b ( C)i s
-set to its reference (DC /open) state, and Port c ( L2) is set to its reference (HF /open) state.
-From examination of Fig. 16.45 with these conditions, it can be seen that RDa = ∞(open
-circuit).
-The coeﬃcient RDa−b is the resistance seen at theL1 port (Port a) when Port b (C) is set to its
-inverse (DC/open) state, and Port c (L2) is set to its reference (HF/open) state. From examination
-of Fig. 16.46 with these conditions, it can be seen that RDa−b= R.
-The port states and results for the seven denominator terms are listed in Table 16.3. Deriva-
-tion of the remaining terms of Table 16.3 is left for the reader. The resulting denominator is
-denominator= 1+ sCR+ R
-sL2
-+ sCR sL1
-R + R
-sL2
-sL1
-R (16.99)
-We will further simplify the denominator after the numerator has been found.
-Fig. 16.46 Damped L–C ﬁlter example
-of Fig. 16.41: ﬁnding RDa−b. The resis-
-tance seen at Port a is found with the re-
-active element at Port b set to its inverse
-state (short) and Port c set to its reference
-state
-C: inverse
+图16.46 图16.41 阻尼 L-C 滤波示例：求 $R_{Da-b}$。端口 b 处储能元件设为反演状态（短路）、端口 c 设为参考状态时求端口 a 看到的电阻
 
-666 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-Table 16.3 Derivation of Denominator Terms, Damped L–C Filter Example
-Term
-States of Ports/ Reactive Elements
-ResultL1 CL 2
-Port a Port b Port c
-sL1
-RDa
-Measurement Reference /open Reference /open RDa=∞
-sCRDb Reference/short Measurement Reference /open RDb= R
-RDc
-sL2
-Reference/short Reference /open Measurement RDc= R
-sCRDb
-sL1
-RDa−b
-Measurement Inverse /short Reference /open RDa−b= R
-sCRDb
-RDc−b
-sL2
-Reference/short Inverse /short Measurement RDc−b= 0
-RDc
-sL2
-sL1
-RDa−c
-Measurement Reference /open Inverse /short RDa−c= R
-sCRDb
-sL1
-RDa−b
-RDc−ab
-sL2
-Inverse/open Inverse /short Measurement RDc−ab= 0
-The numerator may also contain products having one, two, or all three reactive elements.
-For the output impedance example, we obtain:
-numerator= 1+
-⎦sL1
-RNa
-+ sCRNb+ RNc
-sL2
-)
-+
-⎦sL1
-RNa
-sCRNb−a+ sL1
-RNa
-RNc−a
-sL2
-+ RNc
-sL2
-sCRNb−c
-)
-+
-⎦sL1
-RNa
-RNc−a
-sL2
-sCRNb−ac
-)
-(16.100)
-As usual, the numerator terms are found in the presence of ˆi, with the transfer function output
-(ˆv ) nulled to zero. Since in this example the output voltage coincides with the capacitor (Port
-b) voltage, we expect the capacitor terms to be zero.
-We again employ the generalized deﬁnitions of reference and inverse states. In the pres-
-ence of ˆi, we inject at the L1, C,o r L2 port, and adjust the injection such that ˆv is nulled. The
-coeﬃcients are the resistances seen at the injection ports under these conditions.
-For example, to ﬁnd RNa , we inject a current at the L1 port (Port a), with C (Port b) set to its
-reference state (open) and L2 set to its reference state (open). The injection current is adjusted
-in the presence of the current ˆi to null ˆv, as illustrated in Fig. 16.47. With ˆv nulled to zero, it can
-be seen that ˆvtest = ˆitest R, and hence RNa = R.
-From examination of Fig. 16.47, it can be seen that nulling the output voltage ˆv causes the
-voltages across ports b and c to be zero. Consequently, numerator terms associated with these
-ports are zero, and the only nonzero numerator term is RNa . Determination of the numerator
-terms is summarized in Table 16.4.
+七个分母项的端口状态和结果列于表16.3。表16.3 其余项的推导留给读者。所得分母为
 
-16.5 Frequency Inversion 667
-Fig. 16.47 Determination of
-numerator term RNa
-Table 16.4 Derivation of Numerator Terms, Damped L–C Filter Example
-Term
-States of Ports/ Reactive Elements
-ResultL1 CL 2
-Port a Port b Port c
-sL1
-RNa
-Measurement Reference /open Reference /open RNa = R
-sCRNb Reference/short Measurement Reference /open RNb = 0
-RNc
-sL2
-Reference/short Reference /open Measurement RNc = 0
-sL1
-RNa
-sCRNb−a Inverse/open Measurement Reference /open RNb−a= 0
-sL1
-RNa
-RNc−a
-sL2
-Inverse/open Reference /open Measurement RNc−a= 0
-RNc
-sL2
-sCRNb−c Reference/short Measurement Inverse /short RNb−c= 0
-sL1
-RNa
-RNc−a
-sL2
-sCRNb−ac Inverse/open Measurement Inverse /short RNb−ac= 0
-The resulting expression for the output impedance is
-Z(s)= R
-1+ sL1
-R
-1+ sRC+ R
-sL2
-+ s2L1C+ sL1
-sL2
-(16.101)
-If desired, we can eliminate the inverted terms by multiplying the numerator and denominator
-by the factor sL2/R to obtain
-Z(s)= sL2
-1+ sL1
-R
-1+ s(L1+ L2)
-R + s2L2C+ s3L1L2C
-R
-(16.102)
-In summary, the nEET allows us to write the transfer functions of quite complex systems
-with a minimum of algebraic manipulations. Inverted forms can also be handled by deﬁnition of
+$$\text{分母} = 1+\left(sCR+\frac{R}{sL_2}+sCR\frac{sL_1}{R}+\frac{R}{sL_2}\frac{sL_1}{R}\right) \tag{16.99}$$
 
-668 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-a reference gain that occurs when the reactive elements are set to reference states. This allows
-us to solve the case where there are poles or zeroes at the origin.
-16.5.2 Other Special Cases
-It sometimes happens in application of the n-EET that all terms for an intermediate power of s
-are zero. This happens in circuits having undamped resonances. When we compute the higher-
-order terms, we then obtain (0·∞) for all terms.
-Fig. 16.48 Undamped L–C ﬁlter
-example +
-L
-Cv1
-+
-v2
-An example is the undamped L–C ﬁlter illustrated in Fig. 16.48. The transfer function of
-this circuit is
-G(s)= v2
-v1
-= 1
-1+ s2LC (16.103)
-The n-EET encounters problems with this example because the coeﬃcient of s1 in the denomi-
-nator is zero. Hence we are unable to compute the coeﬃcient of s2: we obtain (0·∞).
-Fig. 16.49 Addition of dummy re-
-sistor Rdum to the undamped L–C ﬁl-
-ter example +
-L
-Cv1
-+
-v2Rdum
-A solution is to insert a dummy resistor Rdum into the circuit as in Fig. 16.49; this adds a
-nonzero damping term. We can then proceed with the n-EET analysis as usual, to obtain the
-transfer function
-G(s)= 1
-1+ s
-⎦ L
-Rdum
-+ C· 0
-)
-+ s2 L
-RCR
-(16.104)
-= 1
-1+ s L
-Rdum
-+ s2LC
-(16.105)
-The original circuit is obtained when we let Rdum→∞. The transfer function then becomes
-G(s)= 1
-1+ s2LC (16.106)
-The technique of adding dummy resistors to the circuit can allow the n-EET to be employed
-when degenerate cases arise.
+求分子后进一步化简分母。
 
-16.5 Frequency Inversion 669
-Problems
-16.1 Analysis of the buck–boost converter control-to-output transfer function Gvd(s) using the
-Extra Element Theorem . Averaged switch modeling of the buck–boost converter leads
-to the continuous conduction mode small-signal ac model illustrated in Fig. 16.50.O n e
-approach to solving for Gvd(s) in this circuit is to employ the Extra Element Theorem,
-treating inductor L as the extra element. No credit will be given for other methods.
-+ D' : DI1 + i1 I2 + i2
-I2
-DD' dV1 + v1
-V1
-DD' d
-V2 + v2
-+
-+
-L
-+vg CR
-Fig. 16.50 Small-signal ac model for the CCM buck–boost converter of Problem16.1, derived by average
-switch modeling
-(a)L e t L→short circuit, and determine the “original transfer function” Gd0.
-(b) Determine ZN (s) and ZD(s), and hence derive the expression for Gvd(s). Express your
-result in standard normalized form.
-16.2 Analysis and design of a CCM SEPIC . A dc–dc SEPIC, along with nominal element val-
-ues, is illustrated in Fig. 16.50. The object of this problem is to employ the Extra Element
-Theorem as discussed in Sect. 16.2.3 to gain insight into the physical origins of the salient
-features of the control-to-output transfer function Gvd(s), and to improve its behavior by
-addition of a damping network. It is expected that your work will follow the analysis of
-Sect. 16.2.3; no credit will be given for other approaches.
-(a) Sketch the small-signal averaged switch model for this converter. Evaluate the numer-
-ical values of the quiescent conditions in your model (i.e., the steady-state duty cycle
-D and the switch model quantities I1, I2, V1, and V2).
-(b) Using the simple approximation C1 →open circuit, determine the approximate
-control-to-output transfer function
-Gvd−bb(s)= ˆv(s)
-ˆd(s)
-⏐⏐⏐
-⏐⏐
-C1→0
-Construct the Bode plot of the magnitude and phase of this transfer function on semi-
-log axes, and label salient features (corner frequencies, Q-factors, dc gain) as appro-
-priate.
+表16.3 阻尼 L-C 滤波示例分母项的推导
 
-670 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-+
-–
-L1
-C2
-+
-v
-12 V
-–
-C1
-L2 Rvg
-100 μH
-100 μH
-3.3 μF
-100 μF 3 Ω18 V
-fs = 100 kHz
-Fig. 16.51 CCM SEPIC of Problem 16.2
-(c) Construct the Bode plots of ∥ZN∥ and∥ZD∥, using semi-log axes, and label the nu-
-merical values of the salient features. Overlay the capacitor C1 impedance. Hence,
-estimate the frequencies of the resonant poles and zeroes in Gvd(s) induced by the in-
-ternal resonance. Verify your analysis by simulation, using an averaged model to plot
-the Bode plot of the exact G
-vd(s).
-(d) Add an Rb–Cb damping network as discussed in Sect.16.2.4, as follows. ChooseCb=
-10C1. Select Rb such that the resonant poles and zeroes are approximately centered on
-the Rb asymptote of the impedanceZ(s)o fE q .(16.61). Overlay the∥Z(s)∥ asymptotes
-on your Bode plots of∥ZN∥ and∥ZD∥. Again use averaged simulation to plot the exact
-magnitude and phase of the damped Gvd(s), and verify that the internal resonance is
-adequately damped.
-16.3 Analysis of a CCM ´Cuk Converter.A ´Cuk converter is illustrated in Fig. 16.52. The ob-
-jective of this problem is to employ the Extra Element Theorem to derive an expression
-for the line-to-output transfer function G
-vg(s), with an approach that is similar to that em-
-ployed in the SEPIC example of Sect. 16.2.3. Like the SEPIC, the ´Cuk converter can be
-viewed as an eﬀective buck–boost converter plus correction factor terms that account for
-an additional internal resonance.
-+
-L1
-C2 R
-+
-v2
-C1 L2
-+ v1
-i1 i2
-D1Q1vg
-Fig. 16.52 ´Cuk converter circuit of Problem 16.3
-(a) Construct the average switch model for this converter operating in continuous conduc-
-tion mode.
-(b)I f w e l e tC1 →0 (open circuit) in the small-signal model, then an e ﬀective buck–
-boost converter is obtained. Sketch the small-signal model for this case, and ﬁnd its
-line-to-output transfer function Gvg−bb(s).
+| 项 | $L_1$ | $C$ | $L_2$ | 结果 |
+|---|---|---|---|---|
+| $sL_1/R_{Da}$ | 测量 | 参考/开路 | 参考/开路 | $R_{Da} = \infty$ |
+| $sCR_{Db}$ | 参考/短路 | 测量 | 参考/开路 | $R_{Db} = R$ |
+| $R_{Dc}/sL_2$ | 参考/短路 | 参考/开路 | 测量 | $R_{Dc} = R$ |
+| $sCR_{Db}\,sL_1/R_{Da-b}$ | 测量 | 反演/短路 | 参考/开路 | $R_{Da-b} = R$ |
+| $sCR_{Db}\,R_{Dc-b}/sL_2$ | 参考/短路 | 反演/短路 | 测量 | $R_{Dc-b} = 0$ |
+| $R_{Dc}/sL_2\,sL_1/R_{Da-c}$ | 测量 | 参考/开路 | 反演/短路 | $R_{Da-c} = R$ |
+| $sCR_{Db}\,sL_1/R_{Da-b}\,R_{Dc-ab}/sL_2$ | 反演/开路 | 反演/短路 | 测量 | $R_{Dc-ab} = 0$ |
 
-16.5 Frequency Inversion 671
-(c) Apply the Extra Element Theorem to ﬁnd ZN (s) and ZD(s) in the correction factor of
-the line-to-output transfer function.
-(d) For some values, plot Gvg.
-16.4 Figure 16.53 contains a small-signal model of a boost converter that includes inductor
-resistance RL.
-Fig. 16.53 Large-signal dc and small-signal ac model of the CCM boost converter of Problem 16.4
-(a)U s e t h en-Extra Element Theorem to derive an expression for the control-to-output
-transfer function Gvd(s) predicted by this circuit model. No credit will be given for
-other methods.
-(b) Can the inductor resistance RL be used to move the right half-plane zero into the left
-half-plane? Explain. What is the resulting eﬀect on the converter eﬃciency? Compare
-the resulting loss in RL with the load power.
-16.5 A boost converter including an output capacitor equivalent series resistance RC is illus-
-trated in Fig.16.54. For continuous conduction mode operation, the small-signal ac model
-for this converter can be derived by state-space averaging, with the result illustrated in
-Fig. 16.55.
-+ Q1
-L
-C R
-+
-v(t)
-D1
-vg
-iL(t)
-RC +
-vC(t)
-Fig. 16.54 Boost converter with capacitor ESR RC , Problem 16.5
+分子也可含一、二或全部三个储能元件的乘积。对输出阻抗示例得
 
-672 16 Techniques of Design-Oriented Analysis: Extra Element Theorems
-Fig. 16.55 Small-signal ac model for the boost converter of Fig.16.54
-Use the n-Extra Element Theorem to derive an expression for the control-to-output transfer
-function Gvd(s) of this converter. No credit will be given for other methods. Be sure to
-explain how you derived each term. You may use the following substitutions:
-Re= DD′ (R∥RC)
-Ve= (D−D′) (R∥RC) IL+ V
-You may express your answer in terms of the following quantities:R, RC, IL, D, D′, V, Re,
-Ve, L, C. It is not necessary to further simplify your answers.
-16.6 Use the n-Extra Element Theorem to derive an expression for the control-to-output transfer
-function Gvd(s) predicted by the SEPIC small-signal model of Fig. 16.17.
-16.7 A small-signal ac model of the ´Cuk converter operating in continuous conduction mode is
-illustrated in Fig. 16.56. Resistors Rl1 and Rl2 model the inductor copper loss.
-+vg(t)
-L1
-+
-v(t) R
-1 : DD' : 1
-+
-+Rl1
-C1
-L2Rl2
-C2
-d(t)V1 d(t)V1
-d(t) I1 + I2
-Fig. 16.56 Small-signal ac model of the ´Cuk converter of Problem 16.7
-Use the n-EET to determine the line-to-output transfer functionGvg(s). Your result should
-be expressed as a rational fraction in s. No credit will be given for methods that do not
-employ the n-EET.
+$$\text{分子} = 1+\left(\frac{sL_1}{R_{Na}}+sCR_{Nb}+\frac{R_{Nc}}{sL_2}\right)+\left(\frac{sL_1}{R_{Na}}sCR_{Nb-a}+\frac{sL_1}{R_{Na}}\frac{R_{Nc-a}}{sL_2}+\frac{R_{Nc}}{sL_2}sCR_{Nb-c}\right)+\left(\frac{sL_1}{R_{Na}}\frac{R_{Nc-a}}{sL_2}sCR_{Nb-ac}\right) \tag{16.100}$$
 
-16.5 Frequency Inversion 673
-16.8 Figure. 16.57 contains the schematic of a single-section input ﬁlter with an R–C damping
-network.
-Fig. 16.57 Damped L–C input ﬁlter section, Problem 16.8
-Use the n-EET to write the expression for the output impedance Z(s) of this network. No
-credit will be given for methods that do not employ the n-EET.
-```
+照常分子项在 $\hat{i}$ 存在下、传递函数输出（$\hat{v}$）置零时求得。由于此例中输出电压与电容（端口 b）电压重合，预期电容项为零。
+
+再次采用参考状态和反演状态的广义定义。$\hat{i}$ 存在下在 $L_1$、$C$ 或 $L_2$ 端口注入，调整注入使 $\hat{v}$ 置零。此条件下注入端口看到的电阻为系数。
+
+![源页 p.671](../assets/page-snapshots/chapter-16/page-671.png)
+
+图16.47 确定分子项 $R_{Na}$
+
+例如求 $R_{Na}$ 时在 $L_1$ 端口（端口 a）注入电流，$C$（端口 b）设为参考状态（开路），$L_2$ 设为参考状态（开路）。电流 $\hat{i}$ 存在下调整注入使 $\hat{v}$ 置零，如图16.47所示。$\hat{v}$ 置零时可见 $\hat{v}_{test} = \hat{i}_{test} R$，故 $R_{Na} = R$。
+
+从图16.47 检查可见置零输出电压 $\hat{v}$ 使端口 b 和 c 两端电压为零。故这些端口关联的分子项为零，唯一非零分子项为 $R_{Na}$。分子项确定的汇总见表16.4。
+
+表16.4 阻尼 L-C 滤波示例分子项的推导
+
+| 项 | $L_1$ | $C$ | $L_2$ | 结果 |
+|---|---|---|---|---|
+| $sL_1/R_{Na}$ | 测量 | 参考/开路 | 参考/开路 | $R_{Na} = R$ |
+| $sCR_{Nb}$ | 参考/短路 | 测量 | 参考/开路 | $R_{Nb} = 0$ |
+| $R_{Nc}/sL_2$ | 参考/短路 | 参考/开路 | 测量 | $R_{Nc} = 0$ |
+| $sL_1/R_{Na}\,sCR_{Nb-a}$ | 反演/开路 | 测量 | 参考/开路 | $R_{Nb-a} = 0$ |
+| $sL_1/R_{Na}\,R_{Nc-a}/sL_2$ | 反演/开路 | 参考/开路 | 测量 | $R_{Nc-a} = 0$ |
+| $R_{Nc}/sL_2\,sCR_{Nb-c}$ | 参考/短路 | 测量 | 反演/短路 | $R_{Nb-c} = 0$ |
+| $sL_1/R_{Na}\,R_{Nc-a}/sL_2\,sCR_{Nb-ac}$ | 反演/开路 | 测量 | 反演/短路 | $R_{Nb-ac} = 0$ |
+
+所得输出阻抗表达式为
+
+$$Z(s) = R\frac{1+\dfrac{sL_1}{R}}{1+sCR+\dfrac{R}{sL_2}+s^2 L_1 C+\dfrac{sL_1}{sL_2}} \tag{16.101}$$
+
+如需要可通过分子分母同乘因子 $sL_2/R$ 消去反演项：
+
+$$Z(s) = sL_2\frac{1+\dfrac{sL_1}{R}}{1+s\dfrac{(L_1+L_2)}{R}+s^2 L_2 C+s^3\dfrac{L_1 L_2 C}{R}} \tag{16.102}$$
+
+总之 nEET 允许以最少代数操作写出相当复杂系统的传递函数。反演形式也可通过定义储能元件设为参考状态时出现的参考增益来处理。这允许求解原点处有极点或零点的情形。
+
+### 16.5.2 其他特殊情形
+
+应用 n-EET 时有时 $s$ 的某中间幂的所有项为零。这在含无阻尼谐振的电路中发生。计算高阶项时所有项得到 $(0\cdot\infty)$。
+
+![源页 p.672](../assets/page-snapshots/chapter-16/page-672.png)
+
+图16.48 无阻尼 L-C 滤波示例
+
+一个例子是图16.48 所示无阻尼 L-C 滤波器。此电路传递函数为
+
+$$G(s) = \frac{v_2}{v_1} = \frac{1}{1+s^2 LC} \tag{16.103}$$
+
+n-EET 在此例中遇到问题，因为分母中 $s^1$ 系数为零。故无法计算 $s^2$ 系数：得到 $(0\cdot\infty)$。
+
+![源页 p.672](../assets/page-snapshots/chapter-16/page-672.png)
+
+图16.49 向无阻尼 L-C 滤波示例加入虚拟电阻 $R_{dum}$
+
+解决方案是向电路插入虚拟电阻 $R_{dum}$（如图16.49），加入非零阻尼项。然后可如常进行 n-EET 分析得传递函数
+
+$$G(s) = \frac{1}{1+s\!\left(\dfrac{L}{R_{dum}}+C\cdot 0\right)+s^2\!\left(\frac{L}{R_{dum}}R_{dum}C\right)} \tag{16.104}$$
+
+$$= \frac{1}{1+s\dfrac{L}{R_{dum}}+s^2 LC} \tag{16.105}$$
+
+令 $R_{dum} \to \infty$ 时得原始电路。传递函数变为
+
+$$G(s) = \frac{1}{1+s^2 LC} \tag{16.106}$$
+
+向电路加入虚拟电阻的技巧可在退化情形出现时使用 n-EET。
+
+## 习题
+
+**16.1** 用额外元件定理分析升降压变换器控制-输出传递函数 $G_{vd}(s)$。升降压变换器的平均开关建模导致图16.50 所示连续导通模式小信号交流模型。求此电路中 $G_{vd}(s)$ 的一种方法是采用额外元件定理，将电感 $L$ 视为额外元件。其他方法不计分。
+
+![源页 p.673](../assets/page-snapshots/chapter-16/page-673.png)
+
+图16.50 习题16.1 的 CCM 升降压变换器小信号交流模型，由平均开关建模导出
+
+(a) 令 $L \to$ 短路，确定"原始传递函数" $G_{d0}$。
+
+(b) 确定 $Z_N(s)$ 和 $Z_D(s)$，从而导出 $G_{vd}(s)$ 表达式。以标准归一化形式表示结果。
+
+![源页 p.674](../assets/page-snapshots/chapter-16/page-674.png)
+
+图16.51 习题16.2 的 CCM SEPIC
+
+**16.2** CCM SEPIC 的分析和设计。图16.50 给出一个直流-直流 SEPIC 及标称元件值。此题目标是如 16.2.3 节所述采用额外元件定理获得对控制-输出传递函数 $G_{vd}(s)$ 显著特征物理起源的洞察，并通过加入阻尼网络改善其行为。预期工作遵循 16.2.3 节分析；其他方法不计分。
+
+(a) 画此变换器的小信号平均开关模型。评估模型中静态条件的数值（即稳态占空比 $D$ 和开关模型量 $I_1$、$I_2$、$V_1$、$V_2$）。
+
+(b) 用 $C_1 \to$ 开路的简单近似确定近似控制-输出传递函数
+
+$$G_{vd-bb}(s) = \left.\frac{\hat{v}(s)}{\hat{d}(s)}\right|_{C_1\to 0}$$
+
+在半对数轴上构造此传递函数幅值和相位的波特图，适当标注显著特征（转折频率、Q 因子、直流增益）。
+
+(c) 在半对数轴上构造 $\|Z_N\|$ 和 $\|Z_D\|$ 波特图，标注显著特征数值。叠加电容 $C_1$ 阻抗。由此估计内部谐振引起的 $G_{vd}(s)$ 谐振极点和零点的频率。用平均模型仿真验证分析，绘制精确 $G_{vd}(s)$ 波特图。
+
+(d) 如 16.2.4 节所述加入 $R_b$-$C_b$ 阻尼网络：选 $C_b = 10C_1$。选 $R_b$ 使谐振极点和零点近似居中于式 (16.61) 阻抗 $Z(s)$ 的 $R_b$ 渐近线上。在 $\|Z_N\|$ 和 $\|Z_D\|$ 波特图上叠加 $\|Z(s)\|$ 渐近线。再次用平均仿真绘制阻尼 $G_{vd}(s)$ 精确幅值和相位，验证内部谐振得到充分阻尼。
+
+![源页 p.674](../assets/page-snapshots/chapter-16/page-674.png)
+
+图16.52 习题16.3 的 Ćuk 变换器电路
+
+**16.3** CCM Ćuk 变换器分析。图16.52 给出一个 Ćuk 变换器。此题目标是采用额外元件定理导出输入-输出传递函数 $G_{vg}(s)$ 表达式，方法类似于 16.2.3 节 SEPIC 示例。与 SEPIC 一样，Ćuk 变换器可视为有效升降压变换器加计入附加内部谐振的校正因子项。
+
+(a) 构造此变换器连续导通模式下工作的平均开关模型。
+
+(b) 小信号模型中令 $C_1 \to 0$（开路）则得有效升降压变换器。画此情形的小信号模型，求其输入-输出传递函数 $G_{vg-bb}(s)$。
+
+(c) 应用额外元件定理求输入-输出传递函数校正因子中的 $Z_N(s)$ 和 $Z_D(s)$。
+
+(d) 对某些值绘制 $G_{vg}$。
+
+![源页 p.675](../assets/page-snapshots/chapter-16/page-675.png)
+
+图16.53 习题16.4 的 CCM 升压变换器大信号直流和小信号交流模型
+
+**16.4** 图16.53 含含电感电阻 $R_L$ 的升压变换器小信号模型。
+
+(a) 用 N 额外元件定理导出此电路模型预测的控制-输出传递函数 $G_{vd}(s)$ 表达式。其他方法不计分。
+
+(b) 电感电阻 $R_L$ 能否用于将右半平面零点移到左半平面？解释。对变换器效率的最终影响是什么？比较 $R_L$ 中损耗与负载功率。
+
+![源页 p.675](../assets/page-snapshots/chapter-16/page-675.png)
+
+图16.54 含电容 ESR $R_C$ 的升压变换器，习题16.5
+
+**16.5** 图16.54 给出含输出电容等效串联电阻 $R_C$ 的升压变换器。连续导通模式下工作时此变换器的小信号交流模型可用状态空间平均导出，结果如图16.55所示。
+
+![源页 p.676](../assets/page-snapshots/chapter-16/page-676.png)
+
+图16.55 图16.54 升压变换器的小信号交流模型
+
+用 N 额外元件定理导出此变换器控制-输出传递函数 $G_{vd}(s)$ 表达式。其他方法不计分。须说明每项如何导出。可用如下替换：
+
+$$R_e = DD'(R\,\|\,R_C), \quad V_e = (D-D')(R\,\|\,R_C)I_L+V$$
+
+答案可用以下量表示：$R$、$R_C$、$I_L$、$D$、$D'$、$V$、$R_e$、$V_e$、$L$、$C$。不必进一步化简答案。
+
+**16.6** 用 N 额外元件定理导出图16.17 SEPIC 小信号模型预测的控制-输出传递函数 $G_{vd}(s)$ 表达式。
+
+![源页 p.676](../assets/page-snapshots/chapter-16/page-676.png)
+
+图16.56 习题16.7 的 Ćuk 变换器小信号交流模型
+
+**16.7** 图16.56 给出连续导通模式下工作的 Ćuk 变换器小信号交流模型。电阻 $R_{l1}$ 和 $R_{l2}$ 建模电感铜损。
+
+用 n-EET 确定输入-输出传递函数 $G_{vg}(s)$。结果应表示为 $s$ 的有理分式。不用 n-EET 的方法不计分。
+
+![源页 p.677](../assets/page-snapshots/chapter-16/page-677.png)
+
+图16.57 阻尼 L-C 输入滤波节，习题16.8
+
+**16.8** 图16.57 含含 R-C 阻尼网络的单节输入滤波器原理图。
+
+用 n-EET 写此网络输出阻抗 $Z(s)$ 表达式。不用 n-EET 的方法不计分。

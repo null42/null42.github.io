@@ -18,11 +18,11 @@ navGroupOrder: 30
 
 # ALG-10 过调制与六阶梯波
 
-**模块编号：** ALG-10
-**模块名称：** 过调制与六阶梯波（Overmodulation & Six-Step Wave）
-**文档版本：** v2.0
-**适用对象：** 电机控制工程师、嵌入式开发者
-**前置知识：** ALG-09 SVPWM 空间矢量调制、Park/Clarke 坐标变换、逆变器拓扑基础
+- **模块编号：** ALG-10
+- **模块名称：** 过调制与六阶梯波（Overmodulation & Six-Step Wave）
+- **文档版本：** v2.0
+- **适用对象：** 电机控制工程师、嵌入式开发者
+- **前置知识：** ALG-09 SVPWM 空间矢量调制、Park/Clarke 坐标变换、逆变器拓扑基础
 
 ---
 
@@ -313,7 +313,7 @@ overmod_state_t overmod_state_update(float valpha, float vbeta, float vdc)
 | 退出过调制阈值 $m_{exit}$ | 0.90 ~ 0.93 | 滞回宽度建议 0.03 ~ 0.05 |
 | 六阶梯波阈值 $m_{six}$ | 1.14 ~ 1.15 | 接近理论最大值时切换为六步模式 |
 
-**滞回控制伪代码：**
+- **滞回控制伪代码：**
 
 ```text
 if (m > m_enter && !overmod_active):

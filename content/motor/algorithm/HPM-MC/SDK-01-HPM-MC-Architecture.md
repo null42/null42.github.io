@@ -20,10 +20,10 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-05-23  
-**适用对象：** 电机控制工程师、嵌入式开发者  
-**前置知识：** C语言编程、电机控制基础、FOC/六步换相原理
+- **文档版本：** v1.0  
+- **生成日期：** 2026-05-23  
+- **适用对象：** 电机控制工程师、嵌入式开发者  
+- **前置知识：** C语言编程、电机控制基础、FOC/六步换相原理
 
 ---
 
@@ -222,7 +222,7 @@ hpm_mcl_v2/
 └──────────────────────────────────────────────────────────┘
 ```
 
-**设计特点：** v1 通过函数指针实现可替换性——`func_getspd`、`func_pid`、`func_sampl`、`func_set_pwm`、`func_dqsvpwm`、`func_smc_const` 等均可由用户替换。但这也意味着用户需要自己管理这些函数指针的初始化。
+- **设计特点：** v1 通过函数指针实现可替换性——`func_getspd`、`func_pid`、`func_sampl`、`func_set_pwm`、`func_dqsvpwm`、`func_smc_const` 等均可由用户替换。但这也意味着用户需要自己管理这些函数指针的初始化。
 
 #### 3.1.2 hpm_motor_math（数学抽象层）
 
@@ -602,7 +602,7 @@ typedef enum {
 } mcl_loop_mode_t;
 ```
 
-**初始化流程（hpm_mcl_loop_init 宏多态重载）：**
+- **初始化流程（hpm_mcl_loop_init 宏多态重载）：**
 
 ```text
 hpm_mcl_loop_init(loop, cfg, mcl_cfg, encoder, analog, control, drivers, path [, hw_loop])
@@ -615,7 +615,7 @@ hpm_mcl_loop_init(loop, cfg, mcl_cfg, encoder, analog, control, drivers, path [,
                     path/hw_loop        enable_smc / enable_dead_area...
 ```
 
-**运行期接口：**
+- **运行期接口：**
 
 | 函数 | 功能 |
 |------|------|
@@ -629,7 +629,7 @@ hpm_mcl_loop_init(loop, cfg, mcl_cfg, encoder, analog, control, drivers, path [,
 | `hpm_mcl_loop_mode_set` | 动态切换运行模式 |
 | `hpm_mcl_motor_angle_alignment` | 电机角度对中（支持基础/三阶段两种算法） |
 
-**三阶段角度对中算法：**
+- **三阶段角度对中算法：**
 
 ```text
 Stage 1: 大电流粗对中 (d_current + q_current, delay_ms)
@@ -667,7 +667,7 @@ Stage 3: 小电流稳定化 (d_current, delay_ms)
 > - `hpm_mcl_encoder_force_theta` — 强制设置角度（无感模式切换用）
 > - `hpm_mcl_encoder_get_sensorless_theta` — 获取无感估计角度
 
-**角度预测机制：** 启用 `MCL_EN_THETA_FORECAST` 后，编码器根据当前速度和采样延迟预测电气角度，补偿中断处理延迟造成的角度滞后。
+- **角度预测机制：** 启用 `MCL_EN_THETA_FORECAST` 后，编码器根据当前速度和采样延迟预测电气角度，补偿中断处理延迟造成的角度滞后。
 
 #### 4.2.7 Core层 — sensor/analog（模拟采样抽象）
 
@@ -906,7 +906,7 @@ MC_LIB 模块划分（FOC为例）:            hpm_mcl_v2 模块划分（FOC为�
                                         └── mcl_detect_t (检测)
 ```
 
-**差异分析：** MC_LIB 将算法逻辑（坐标变换、SVPWM、观测器）作为独立模块文件，每个模块有自己的状态结构体；hpm_mcl_v2 将这些算法统一收敛到 `mcl_control_method_t` 函数指针表中，模块边界由"功能职责"决定（采样/传感器/控制/驱动/调度/检测），而非"算法类型"。
+- **差异分析：** MC_LIB 将算法逻辑（坐标变换、SVPWM、观测器）作为独立模块文件，每个模块有自己的状态结构体；hpm_mcl_v2 将这些算法统一收敛到 `mcl_control_method_t` 函数指针表中，模块边界由"功能职责"决定（采样/传感器/控制/驱动/调度/检测），而非"算法类型"。
 
 ### 5.3 硬件加速差异
 
@@ -989,7 +989,7 @@ v2 中此机制简化，默认使用 `float` 类型的 `hpm_mcl_type_t`，通过
 
 ### 6.2 HPM VSC（Vector Signal Controller）
 
-**功能：** Clarke变换 + Park变换硬件加速
+- **功能：** Clarke变换 + Park变换硬件加速
 
 ```text
 输入: Ia, Ib, Ic (三相电流) + sinθ, cosθ
@@ -1003,7 +1003,7 @@ VSC硬件方式: 1个时钟周期完成全部变换（硬件并行计算）
 
 ### 6.3 HPM CLC（Current Loop Controller）
 
-**功能：** PID电流环硬件加速
+- **功能：** PID电流环硬件加速
 
 ```text
 输入: Id_ref, Iq_ref, Id_fbk, Iq_fbk
@@ -1018,7 +1018,7 @@ hpm_mcl_pid_to_3p3z() 将用户PID参数转换为3P3Z系数
 
 ### 6.4 HPM QEO（Quadrature Encoder Output）
 
-**功能：** 逆Park变换 + SVPWM调制硬件加速
+- **功能：** 逆Park变换 + SVPWM调制硬件加速
 
 ```text
 输入: Ud, Uq, sinθ, cosθ
@@ -1048,7 +1048,7 @@ hpm_mcl_pid_to_3p3z() 将用户PID参数转换为3P3Z系数
 └──────────────┴──────────────┴──────────────┴───────────────┘
 ```
 
-**混合模式（hybrid_foc）的优势：** 可独立启用/禁用每个硬件加速模块，如在调试阶段用软件执行Clarke/Park（方便加断点观察中间值），量产时切换到全硬件加速。
+- **混合模式（hybrid_foc）的优势：** 可独立启用/禁用每个硬件加速模块，如在调试阶段用软件执行Clarke/Park（方便加断点观察中间值），量产时切换到全硬件加速。
 
 ---
 
@@ -1122,7 +1122,7 @@ hpm_mcl v1 (2021-2023)                hpm_mcl_v2 (2023-2025)
 
 ### 8.1 Clarke变换实现 (`hpm_mcl_bldc_foc_clarke`)
 
-**原理公式：**
+- **原理公式：**
 
 Clarke变换将三相静止坐标系（abc）的电流投影到两相静止坐标系（αβ）。对于三相平衡系统（$I_a + I_b + I_c = 0$），幅值不变形式的变换为：
 
@@ -1130,7 +1130,7 @@ $$I_\alpha = I_a$$
 
 $$I_\beta = \frac{I_a + 2I_b}{\sqrt{3}} = \frac{1}{\sqrt{3}}I_a + \frac{2}{\sqrt{3}}I_b$$
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_clarke(HPM_MOTOR_MATH_TYPE currentu, HPM_MOTOR_MATH_TYPE currentv, HPM_MOTOR_MATH_TYPE currentw,
@@ -1145,7 +1145,7 @@ void hpm_mcl_bldc_foc_clarke(HPM_MOTOR_MATH_TYPE currentu, HPM_MOTOR_MATH_TYPE c
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 1. `(void)currentw;` — 三相平衡时 $I_c = -(I_a + I_b)$，W相电流不参与计算，直接忽略。
 
@@ -1162,7 +1162,7 @@ void hpm_mcl_bldc_foc_clarke(HPM_MOTOR_MATH_TYPE currentu, HPM_MOTOR_MATH_TYPE c
 
 4. 整个 $I_\beta$ 分支绕过了 `HPM_MOTOR_MATH_MUL` 宏，直接使用整数乘法+移位，这是为了在所有数学模式下都能获得一致的定点精度。
 
-**工程要点：**
+- **工程要点：**
 
 - **为何用定点整数而非浮点？** 嵌入式MCU上整数乘法+移位（1~2周期）远快于浮点除法（数十周期），即使FPU可用也如此。$1/\sqrt{3}$ 是无理数，浮点除法无法精确表示，定点近似同样有效。
 - **系数精度：** `9370/16384 = 0.5719` 与理论值 $1/\sqrt{3} = 0.5774$ 存在约0.95%的偏差，`18918/16384 = 1.1548` 与 $2/\sqrt{3} = 1.1547$ 偏差仅0.01%。Iβ分量的主要贡献来自Iv项（系数≈1.15），Iu项（系数≈0.57）是次要贡献，因此整体误差可控。
@@ -1172,7 +1172,7 @@ void hpm_mcl_bldc_foc_clarke(HPM_MOTOR_MATH_TYPE currentu, HPM_MOTOR_MATH_TYPE c
 
 ### 8.2 Park变换实现 (`hpm_mcl_bldc_foc_park`)
 
-**原理公式：**
+- **原理公式：**
 
 Park变换将两相静止坐标系（αβ）的电流旋转到两相旋转坐标系（dq），旋转角度为转子电角度θ：
 
@@ -1180,7 +1180,7 @@ $$I_d = I_\alpha \cos\theta + I_\beta \sin\theta$$
 
 $$I_q = -I_\alpha \sin\theta + I_\beta \cos\theta$$
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_park(HPM_MOTOR_MATH_TYPE currentalpha, HPM_MOTOR_MATH_TYPE currentbeta,
@@ -1192,12 +1192,12 @@ void hpm_mcl_bldc_foc_park(HPM_MOTOR_MATH_TYPE currentalpha, HPM_MOTOR_MATH_TYPE
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 1. `*currentd = MUL(cos, Iα) + MUL(sin, Iβ)` — 标准Park变换d轴分量，旋转矩阵第一行。
 2. `*currentq = MUL(-sin, Iα) + MUL(cos, Iβ)` — 标准Park变换q轴分量，旋转矩阵第二行。注意 $-\sin\theta$ 的负号。
 
-**sin/cos查表法实现（`bldc_foc_sin_cos`）：**
+- **sin/cos查表法实现（`bldc_foc_sin_cos`）：**
 
 ```c
 #define PRECISION       (0.18)
@@ -1230,7 +1230,7 @@ static void bldc_foc_sin_cos(HPM_MOTOR_MATH_TYPE angle, HPM_MOTOR_MATH_TYPE angl
 }
 ```
 
-**查表法解析：**
+- **查表法解析：**
 
 - **表结构：** 501个float元素，覆盖0°~90°，步长0.18°（`PRECISION`），即 $90/0.18 = 500$ 个间隔 + 1 = 501个点。
 - **四象限对称利用：** 只存储0°~90°的正弦值，通过三角函数对称性推导全0°~360°：
@@ -1240,7 +1240,7 @@ static void bldc_foc_sin_cos(HPM_MOTOR_MATH_TYPE angle, HPM_MOTOR_MATH_TYPE angl
   - `[270°, 360°]`: $\sin(\theta) = -\text{table}[i]$, $\cos(\theta) = \text{table}[500-i]$（第四象限sin为负）
 - **索引计算：** `transfer = angle / 0.18`，将角度映射到表索引。
 
-**工程要点：**
+- **工程要点：**
 
 - **查表 vs 实时计算：** `sinf()`/`cosf()` 即使有FPU也需数十周期，查表仅需一次数组访问+一次索引计算。501个float = 2004字节Flash，对HPM MCU来说微不足道。
 - **0.18°分辨率：** 对应电角度360°有2000个插值点，角度误差最大0.09°，对大多数电机控制应用足够。若需更高精度，可改用线性插值。
@@ -1250,7 +1250,7 @@ static void bldc_foc_sin_cos(HPM_MOTOR_MATH_TYPE angle, HPM_MOTOR_MATH_TYPE angl
 
 ### 8.3 逆Park变换实现 (`hpm_mcl_bldc_foc_inv_park`)
 
-**原理公式：**
+- **原理公式：**
 
 逆Park变换将dq旋转坐标系的电压指令旋转回αβ静止坐标系，是Park变换的逆运算：
 
@@ -1258,7 +1258,7 @@ $$U_\alpha = U_d \cos\theta - U_q \sin\theta$$
 
 $$U_\beta = U_d \sin\theta + U_q \cos\theta$$
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_inv_park(HPM_MOTOR_MATH_TYPE ud, HPM_MOTOR_MATH_TYPE uq,
@@ -1270,12 +1270,12 @@ void hpm_mcl_bldc_foc_inv_park(HPM_MOTOR_MATH_TYPE ud, HPM_MOTOR_MATH_TYPE uq,
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 1. `*ualpha = MUL(cos, Ud) + MUL(-sin, Uq)` — 逆旋转矩阵第一行：$U_\alpha = U_d\cos\theta - U_q\sin\theta$
 2. `*ubeta = MUL(sin, Ud) + MUL(cos, Uq)` — 逆旋转矩阵第二行：$U_\beta = U_d\sin\theta + U_q\cos\theta$
 
-**工程要点：**
+- **工程要点：**
 
 - **Park与逆Park的对称性：** Park变换的旋转矩阵是 $R(\theta)$，逆Park是 $R(\theta)^T$（正交矩阵的逆等于转置）。代码中可以清楚看到：Park的d轴行是 `[cos, sin]`，逆Park的α轴行是 `[cos, -sin]`，恰好是转置关系。
 - **sin/cos复用：** 逆Park与Park共用同一组 sin/cos 值，在 `hpm_mcl_bldc_foc_ctrl_dq_to_pwm` 中只需查表一次，减少计算开销。
@@ -1285,11 +1285,11 @@ void hpm_mcl_bldc_foc_inv_park(HPM_MOTOR_MATH_TYPE ud, HPM_MOTOR_MATH_TYPE uq,
 
 ### 8.4 SVPWM实现 (`hpm_mcl_bldc_foc_svpwm`)
 
-**原理公式：**
+- **原理公式：**
 
 空间矢量脉宽调制（SVPWM）将αβ坐标系下的电压参考矢量 $U_{ref}$ 分解为相邻两个基本电压矢量和一个零矢量的时间加权组合，生成三相PWM占空比。
 
-**扇区判断原理：** 将电压参考矢量投影到三个相隔60°的轴上：
+- **扇区判断原理：** 将电压参考矢量投影到三个相隔60°的轴上：
 
 $$U_{ref1} = U_\beta$$
 
@@ -1299,7 +1299,7 @@ $$U_{ref3} = -\frac{\sqrt{3}}{2}U_\alpha - \frac{1}{2}U_\beta$$
 
 根据 $U_{ref1}, U_{ref2}, U_{ref3}$ 的正负号组合确定扇区（1~6）。
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_svpwm(BLDC_CONTROL_PWM_PARA *par)
@@ -1375,23 +1375,23 @@ void hpm_mcl_bldc_foc_svpwm(BLDC_CONTROL_PWM_PARA *par)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
-**1) 参考电压投影与扇区判断：**
+- **1) 参考电压投影与扇区判断：**
 
 - `ualpha_60 = (ualpha_60 * 14189) >> 14` — 计算 $U_\alpha \cdot \frac{\sqrt{3}}{2}$。`14189/16384 ≈ 0.8663`，近似 $\frac{\sqrt{3}}{2} \approx 0.8660$。
 - `ubeta_30 = ubeta_30 >> 1` — 计算 $U_\beta / 2$，右移1位等价于除以2。
 - `uref1 = Uβ`, `uref2 = Uα·√3/2 - Uβ/2`, `uref3 = -Uα·√3/2 - Uβ/2` — 三个投影值。
 - 扇区编码：`uref1≥0 → +1`, `uref2≥0 → +2`, `uref3≥0 → +4`，组合得到 sector 值1~6（注意：sector变量值与实际空间扇区号有偏移，如case 1对应实际扇区2）。
 
-**2) 矢量作用时间计算（以sector2为例）：**
+- **2) 矢量作用时间计算（以sector2为例）：**
 
 - `tx = -uref2` — 第一有效矢量作用时间
 - `ty = -uref3` — 第二有效矢量作用时间
 - `t0 = pwm_reload - tx - ty` — 零矢量作用时间
 - **过调制处理：** 当 `t0 < 0`（即 $tx + ty > T_{reload}$），按比例缩放tx和ty，使零矢量时间为0，保持矢量方向不变但幅值被限幅。
 
-**3) 七段式PWM占空比计算：**
+- **3) 七段式PWM占空比计算：**
 
 以sector2为例，开关序列为 `000-010-110-111-110-010-000`：
 - `twon = t0 >> 1` — W相从零矢量时间的一半开始
@@ -1400,7 +1400,7 @@ void hpm_mcl_bldc_foc_svpwm(BLDC_CONTROL_PWM_PARA *par)
 
 这确保了对称的七段式开关模式，最小化开关损耗。
 
-**4) 输出限幅：**
+- **4) 输出限幅：**
 
 ```c
 if (tuon < 0) tuon = 0;
@@ -1408,7 +1408,7 @@ if (tuon < 0) tvon = 0;   //  代码缺陷：应为 tvon < 0
 if (tuon < 0) twon = 0;   //  代码缺陷：应为 twon < 0
 ```
 
-**工程要点：**
+- **工程要点：**
 
 - **代码缺陷：** 输出限幅部分三次都检查 `tuon < 0`，应为分别检查 `tuon`、`tvon`、`twon`。这是典型的复制粘贴错误，在正常工况下不易触发（SVPWM输出通常不会为负），但在过调制或异常输入时可能导致tvon/twon为负值而未被钳位。
 - **过调制策略：** 当参考电压超出六边形内切圆时，代码采用等比例缩放（保持方向、限幅幅值），这是最简单的过调制方法。更高级的实现可采用两步过调制（Overmodulation I/II）。
@@ -1418,7 +1418,7 @@ if (tuon < 0) twon = 0;   //  代码缺陷：应为 twon < 0
 
 ### 8.5 PI控制器实现 (`hpm_mcl_bldc_foc_pi_contrl`)
 
-**原理公式：**
+- **原理公式：**
 
 位置式PI控制器的离散形式：
 
@@ -1426,7 +1426,7 @@ $$u(k) = K_p \cdot e(k) + K_i \cdot \sum_{j=0}^{k} e(j)$$
 
 其中 $e(k) = \text{target} - \text{cur}$ 为误差，$\sum e(j)$ 为误差累积（积分项）。
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_pi_contrl(BLDC_CONTRL_PID_PARA *par)
@@ -1454,7 +1454,7 @@ void hpm_mcl_bldc_foc_pi_contrl(BLDC_CONTRL_PID_PARA *par)
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 1. 
 
@@ -1469,7 +1469,7 @@ void hpm_mcl_bldc_foc_pi_contrl(BLDC_CONTRL_PID_PARA *par)
    - 若输出超限（`result > i_max` 或 `result < -i_max`），直接钳位输出
    - **关键：** `par->mem = portion_asi` 仅在 `else` 分支执行——即**输出未饱和时才更新积分存储**。当输出饱和时，积分项被冻结，防止积分器持续累积导致严重的超调和响应迟缓。
 
-**工程要点：**
+- **工程要点：**
 
 - **条件积分法 Anti-Windup：** 这是最简单的抗积分饱和方案——输出饱和时停止积分累积。相比更复杂的Back-calculation方法，实现简单但可能在饱和边界处有轻微的不连续性。
 - **积分项的递推实现：** `portion_asi = Ki * e(k) + mem` 等价于 $I(k) = I(k-1) + K_i \cdot e(k)$，但代码先算 `Ki*e + mem` 再存回 `mem`，避免了一次额外的中间变量。注意 `mem` 存储的是"含当前误差的积分值"而非"纯积分和"，这意味着 $K_i$ 已经被乘入积分存储中。
@@ -1480,13 +1480,13 @@ void hpm_mcl_bldc_foc_pi_contrl(BLDC_CONTRL_PID_PARA *par)
 
 ### 8.6 FOC一站式控制链 (`hpm_mcl_bldc_foc_ctrl_dq_to_pwm`)
 
-**原理概述：**
+- **原理概述：**
 
 该函数是FOC电流环的完整执行链，在一个PWM周期内完成从ADC采样到PWM占空比输出的全部计算：
 
 $$\text{ADC} \rightarrow \text{Clarke} \rightarrow \text{Park} \rightarrow \text{PI}_d/\text{PI}_q \rightarrow \text{InvPark} \rightarrow \text{SVPWM}$$
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
@@ -1516,7 +1516,7 @@ void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
 }
 ```
 
-**逐行解析：**
+- **逐行解析：**
 
 | 步骤 | 代码 | 功能 | 数据流 |
 |:----:|------|------|--------|
@@ -1530,7 +1530,7 @@ void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
 | 8 | `pwmpar.target_α/β = ...` | 传递电压参考 | Uα,Uβ → pwmpar |
 | 9 | `func_spwm(&pwmpar)` | SVPWM调制回调 | Uα,Uβ → PWM占空比 |
 
-**工程要点：**
+- **工程要点：**
 
 - **函数指针的串联：** `func_sampl`、`func_pid`、`func_spwm` 三个回调函数构成了用户与库的接口边界。用户需自行实现ADC采样、PI运算（或复用库提供的 `hpm_mcl_bldc_foc_pi_contrl`）和SVPWM（或复用 `hpm_mcl_bldc_foc_svpwm`），并注册到对应函数指针。
 - **电流环→逆Park→SVPWM的串联关系：** PI输出的Ud/Uq是dq轴电压指令，必须经逆Park变换回αβ坐标系后才能送入SVPWM。这是因为SVPWM工作在静止坐标系下，需要αβ电压分量来计算扇区和占空比。
@@ -1541,7 +1541,7 @@ void hpm_mcl_bldc_foc_ctrl_dq_to_pwm(BLDC_CONTROL_FOC_PARA *par)
 
 ### 8.7 滑模观测器实现 (`hpm_mcl_smc_pos_cal` + `hpm_mcl_smc_pll`)
 
-**原理公式：**
+- **原理公式：**
 
 PMSM在αβ坐标系下的电压方程：
 
@@ -1555,7 +1555,7 @@ $$E_\alpha = -\omega_e \psi_f \sin\theta, \quad E_\beta = \omega_e \psi_f \cos\t
 
 滑模观测器通过构造电流观测器，利用滑模控制律使观测电流追踪实际电流，从而提取反电动势估计值，再通过PLL提取位置和速度。
 
-**代码片段 — 位置估计 (`hpm_mcl_smc_pos_cal`)：**
+- **代码片段 — 位置估计 (`hpm_mcl_smc_pos_cal`)：**
 
 ```c
 void hpm_mcl_smc_pos_cal(hpm_mcl_para_t *par)
@@ -1590,9 +1590,9 @@ void hpm_mcl_smc_pos_cal(hpm_mcl_para_t *par)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
-**1) 电流观测器（离散化模型）：**
+- **1) 电流观测器（离散化模型）：**
 
 ```text
 Îα[k] = F · Îα[k-1] + G · (Uα - Ẑα - Zα)
@@ -1605,7 +1605,7 @@ void hpm_mcl_smc_pos_cal(hpm_mcl_para_t *par)
 - `alpha_cal` — 低通滤波后的反电动势估计 Ẑα
 - `zalpha_cal` — 滑模控制律输出 Zα（开关信号）
 
-**2) 滑模控制律（带边界层的符号函数）：**
+- **2) 滑模控制律（带边界层的符号函数）：**
 
 ```text
 if |error| < zero:  Z = 2·error·K_smc    (线性区，消除抖振)
@@ -1617,7 +1617,7 @@ if error ≤ -zero:   Z = -K_smc            (负饱和)
 - `ksmc` — 滑模增益，需满足 $K_{smc} > \max|E|$ 才能保证滑模面可达性。
 - `2 * alhpa_err * ksmc` — 边界层内的斜率为 $2K_{smc}/zero$，在 `error = ±zero` 处与饱和值 `±ksmc` 平滑衔接。
 
-**3) 低通滤波器提取等效控制：**
+- **3) 低通滤波器提取等效控制：**
 
 ```text
 Ẑα = (1 - λ) · Ẑα + λ · Zα
@@ -1626,7 +1626,7 @@ if error ≤ -zero:   Z = -K_smc            (负饱和)
 - `filter_coeff` — 滤波系数λ，越小滤波效果越强但相位延迟越大
 - 滑模控制律输出Zα是高频开关信号，低通滤波提取其直流分量（等效控制），即为反电动势估计值
 
-**代码片段 — PLL角度跟踪 (`hpm_mcl_smc_pll`)：**
+- **代码片段 — PLL角度跟踪 (`hpm_mcl_smc_pll`)：**
 
 ```c
 float hpm_mcl_smc_pll(hpm_mcl_para_t *par, hpm_smc_pll_para_t *pll)
@@ -1663,27 +1663,27 @@ float hpm_mcl_smc_pll(hpm_mcl_para_t *par, hpm_smc_pll_para_t *pll)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
-**1) 相位误差计算：**
+- **1) 相位误差计算：**
 
 $$err = -\hat{E}_\alpha \cos\hat{\theta} - \hat{E}_\beta \sin\hat{\theta}$$
 
 这是反电动势估计向量 $\hat{E}$ 与估计角度向量之间的叉积，物理含义是角度估计误差 $\Delta\theta$ 的线性近似（当 $\Delta\theta$ 很小时 $err \approx |\hat{E}| \cdot \Delta\theta$）。
 
-**2) PI速度估计：**
+- **2) PI速度估计：**
 
 - 比例项：$P = K_p \cdot err$
 - 积分项：$I = K_i \cdot err + mem$，带积分限幅（`max_i/min_i`）
 - 输出：$\hat{\omega} = P + I$，带输出限幅（`max_o/min_o`）
 
-**3) 角度积分：**
+- **3) 角度积分：**
 
 - `theta_last += speedout * loop_in_sec` — $\hat{\theta}_{rad} += \hat{\omega} \cdot T_s$
 - `fmodf(theta_last, 2π)` — 弧度值归一化到 $[0, 2\pi)$
 - `theta = fmodf(theta_last * 57.29578 + theta0, 360)` — 转换为角度制（$180/\pi \approx 57.29578$），加上初始角度偏移 `theta0`，归一化到 $[0°, 360°)$
 
-**工程要点：**
+- **工程要点：**
 
 - **SMC参数整定优先级：** `ksmc`（滑模增益）> `zero`（边界层）> `filter_coeff`（滤波系数）。`ksmc` 过小导致观测器发散，过大加剧抖振；`zero` 过大降低位置精度，过小无法消除抖振；`filter_coeff` 需在响应速度和滤波效果间折中。
 - **PLL vs 反正切法：** 早期无感FOC常用 $\hat{\theta} = \arctan(\hat{E}_\beta / \hat{E}_\alpha)$ 直接计算角度，但反正切法对噪声敏感且无法直接获取速度。PLL通过闭环跟踪自然获得平滑的速度和位置估计，是工业界的主流方案。
@@ -1693,11 +1693,11 @@ $$err = -\hat{E}_\alpha \cos\hat{\theta} - \hat{E}_\beta \sin\hat{\theta}$$
 
 ### 8.8 方波换相控制实现 (`hpm_mcl_bldc_block_ctrl`)
 
-**原理概述：**
+- **原理概述：**
 
 六步换相（方波控制）将一个电角度周期（360°）分为6个区间，每个区间60°，对应一种特定的两相导通组合。根据Hall传感器状态确定当前区间，驱动对应的上下桥臂开关。
 
-**代码片段：**
+- **代码片段：**
 
 ```c
 void hpm_mcl_bldc_block_ctrl(uint8_t motorindex, uint8_t dir, uint8_t step)
@@ -1743,7 +1743,7 @@ void hpm_mcl_bldc_block_ctrl(uint8_t motorindex, uint8_t dir, uint8_t step)
 }
 ```
 
-**Hall换相表 (`hpm_mcl_bldc_block_step_get`)：**
+- **Hall换相表 (`hpm_mcl_bldc_block_step_get`)：**
 
 ```c
 uint8_t hpm_mcl_bldc_block_step_get(bldc_hall_phase_t phase, uint8_t hall_u, uint8_t hall_v, uint8_t hall_w)
@@ -1759,9 +1759,9 @@ uint8_t hpm_mcl_bldc_block_step_get(bldc_hall_phase_t phase, uint8_t hall_u, uin
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
-**1) 正转换相表：**
+- **1) 正转换相表：**
 
 | Step | 导通上桥 | 导通下桥 | 电流路径 |
 |:----:|:--------:|:--------:|:--------:|
@@ -1772,11 +1772,11 @@ uint8_t hpm_mcl_bldc_block_step_get(bldc_hall_phase_t phase, uint8_t hall_u, uin
 | 5 | W+ | U- | W→U |
 | 6 | V+ | U- | V→U |
 
-**2) 方向控制：** 反转时，正转的"上桥PWM+下桥常通"变为"下桥PWM+上桥常通"，同时步序反转，等效于电流方向翻转。
+- **2) 方向控制：** 反转时，正转的"上桥PWM+下桥常通"变为"下桥PWM+上桥常通"，同时步序反转，等效于电流方向翻转。
 
-**3) Hall查表：** 3个Hall信号组合为3位索引 `(U<<2)|(V<<1)|W`（0~7），查表得到步号1~6。120° Hall和60° Hall使用不同的查找表，因为两者的电角度间距不同。
+- **3) Hall查表：** 3个Hall信号组合为3位索引 `(U<<2)|(V<<1)|W`（0~7），查表得到步号1~6。120° Hall和60° Hall使用不同的查找表，因为两者的电角度间距不同。
 
-**工程要点：**
+- **工程要点：**
 
 - **PWM引脚控制方式：** `hpm_mcl_bldc_pwm_enable/disable` 直接控制单个PWM引脚的输出使能，而非修改占空比。导通相的上桥输出PWM波形（由速度PI控制占空比），下桥常通；关断相的上下桥均关闭（高阻态）。
 - **Hall相位配置：** 120° Hall（最常见）的三个Hall信号依次相差120°电角度；60° Hall相差60°。两者查表不同，必须正确配置 `bldc_hall_phase_t`，否则换相时序错误会导致电机抖动或反转。
@@ -1786,7 +1786,7 @@ uint8_t hpm_mcl_bldc_block_step_get(bldc_hall_phase_t phase, uint8_t hall_u, uin
 
 ### 8.9 HFI高频注入实现
 
-**原理公式：**
+- **原理公式：**
 
 高频注入法利用PMSM的磁凸极效应（d轴和q轴电感不等：$L_d \neq L_q$），在d轴注入高频电压信号 $V_{inj} = V_h \sin(\omega_h t)$，通过检测电流响应中的高频分量来估计转子位置。
 
@@ -1796,7 +1796,7 @@ $$i_{dh} = \frac{V_h}{\omega_h L_d} \sin(\omega_h t), \quad i_{qh} = \frac{\Delt
 
 其中 $\Delta L = L_q - L_d$ 为电感差，$\Delta\theta$ 为估计角度误差。q轴高频电流包含 $2\Delta\theta$ 信息，可用于角度跟踪。
 
-**代码片段 — HFI核心解调 (`hpm_mcl_hfi_core`)：**
+- **代码片段 — HFI核心解调 (`hpm_mcl_hfi_core`)：**
 
 ```c
 void hpm_mcl_hfi_core(float alpha, float beta, hpm_hfi_para_t *inject)
@@ -1820,7 +1820,7 @@ void hpm_mcl_hfi_core(float alpha, float beta, hpm_hfi_para_t *inject)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 1. 
 
@@ -1832,7 +1832,7 @@ void hpm_mcl_hfi_core(float alpha, float beta, hpm_hfi_para_t *inject)
 4. 
 `last_alpha = alpha` — 保存当前值供下一周期使用。
 
-**代码片段 — HFI PLL (`hpm_mcl_hfi_pll`)：**
+- **代码片段 — HFI PLL (`hpm_mcl_hfi_pll`)：**
 
 ```c
 float hpm_mcl_hfi_pll(float alpha, float beta, float sin_val, float cos_val, hpm_hfi_pll_para_t *pll)
@@ -1867,7 +1867,7 @@ float hpm_mcl_hfi_pll(float alpha, float beta, float sin_val, float cos_val, hpm
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 1. 
 
@@ -1877,7 +1877,7 @@ float hpm_mcl_hfi_pll(float alpha, float beta, float sin_val, float cos_val, hpm
 `deta += speedout * loop_s` — 角度积分，`deta` 以弧度为单位。
 4. 角度归一化到 $[0, 2\pi)$ 范围。
 
-**代码片段 — HFI完整电流环 (`hpm_mcl_hfi_loop`)：**
+- **代码片段 — HFI完整电流环 (`hpm_mcl_hfi_loop`)：**
 
 ```c
 void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
@@ -1912,7 +1912,7 @@ void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
 1. ADC采样 + Clarke变换 — 获取三相电流
 2. 
@@ -1928,7 +1928,7 @@ void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
 `inject->vh = -inject->vh` — 每个控制周期翻转注入电压极性（方波注入）
 8. 逆Park + SVPWM — 生成PWM占空比
 
-**工程要点：**
+- **工程要点：**
 
 - **方波注入 vs 正弦注入：** 代码使用方波注入（`vh = -vh` 翻转），实现简单但频谱含奇次谐波。正弦注入需要sin/cos生成和更复杂的解调，但频谱更干净。方波注入在工业应用中更常见。
 - **d轴目标电流的覆盖：** `if (pole->currentd_force != 0) par->currentdpipar.target = pole->currentd_force` — 磁极辨识期间强制设定d轴电流，覆盖用户设定值。辨识完成后 `currentd_force = 0`，恢复正常d轴电流控制（通常为0）。
@@ -1938,7 +1938,7 @@ void hpm_mcl_hfi_loop(BLDC_CONTROL_FOC_PARA *par, hpm_hfi_para_t *inject,
 
 ### 8.10 过零检测实现
 
-**原理公式：**
+- **原理公式：**
 
 无感BLDC方波控制中，悬浮相（非导通相）的反电动势在过零点与中点电压相交。检测到过零点后，延迟30°电角度即为最佳换相时刻。
 
@@ -1950,7 +1950,7 @@ $$t_{commutation} = t_{zero\_crossing} + \frac{30°}{\omega_e}$$
 
 $$V_{midpoint} \approx \frac{V_{active1} + V_{active2}}{2}$$
 
-**代码片段 — 过零检测状态机 (`hpm_mcl_over_zero_step_get`)：**
+- **代码片段 — 过零检测状态机 (`hpm_mcl_over_zero_step_get`)：**
 
 ```c
 int8_t hpm_mcl_over_zero_step_get(hpm_mcl_over_zero_cfg_t *cfg)
@@ -2053,9 +2053,9 @@ int8_t hpm_mcl_over_zero_step_get(hpm_mcl_over_zero_cfg_t *cfg)
 }
 ```
 
-**逐块解析：**
+- **逐块解析：**
 
-**1) 三状态状态机：**
+- **1) 三状态状态机：**
 
 | 状态 | 功能 | 说明 |
 |:----:|------|------|
@@ -2063,13 +2063,13 @@ int8_t hpm_mcl_over_zero_step_get(hpm_mcl_over_zero_cfg_t *cfg)
 | `fsm_location` | 初始定位 | 开环启动，等待W相反电动势过零，确定初始换相位置 |
 | `fsm_running` | 正常运行 | 连续检测过零点，30°延迟后换相 |
 
-**2) 初始定位阶段 (`fsm_location`)：**
+- **2) 初始定位阶段 (`fsm_location`)：**
 
 - 计算 `adc_over_zero_w = (adc_u + adc_v) >> 1` — 用U和V相ADC值的中点近似W相的中点电压
 - 两步确认：`adc_zero_ph == 0` → 等待W相电压低于中点（连续15次确认），`adc_zero_ph == 1` → 再次确认（连续15次），`adc_zero_ph == 2` → 定位完成，进入运行态
 - `HPM_OVER_ZERO_INIT_FILTER_TIMES = 15` — 初始定位需要更严格的滤波（15次连续确认），避免启动时误触发
 
-**3) 运行阶段过零检测 (`fsm_running`)：**
+- **3) 运行阶段过零检测 (`fsm_running`)：**
 
 - 每个控制周期 `interval_tick++` 和 `delay_degree_30++` — 累计时间，用于30°延迟计算
 - 根据当前待检测的区间和方向，选择对应的悬浮相和比较方向：
@@ -2078,13 +2078,13 @@ int8_t hpm_mcl_over_zero_step_get(hpm_mcl_over_zero_cfg_t *cfg)
   - 其他区间类似
 - `HPM_OVER_ZERO_FILTER_TIMES = 5` — 运行态滤波次数较少（5次），保证响应速度
 
-**4) 30°延迟换相：**
+- **4) 30°延迟换相：**
 
 - `last_interval_tick` — 上一次过零点到当前过零点的周期数（对应60°电角度）
 - `delay_degree_30 > (last_interval_tick >> 1)` — 当延迟计数超过上次间隔的一半时换相。因为60°的一半是30°，所以 `last_interval_tick / 2` 对应30°电角度的时间
 - 换相后更新 `next_interval`：正转 `(interval % 6) + 1`，反转递减
 
-**速度计算 (`hpm_mcl_over_zero_cal_speed`)：**
+- **速度计算 (`hpm_mcl_over_zero_cal_speed`)：**
 
 ```c
 float hpm_mcl_over_zero_cal_speed(hpm_mcl_over_zero_cfg_t *cfg)
@@ -2096,7 +2096,7 @@ float hpm_mcl_over_zero_cal_speed(hpm_mcl_over_zero_cfg_t *cfg)
 
 公式推导：$\text{RPM} = \frac{60 / p}{360 \cdot T_s \cdot (N_{tick} + 1)}$，其中 $p$ 为极对数，$T_s$ 为控制周期，$N_{tick}$ 为两次换相间的周期数。
 
-**工程要点：**
+- **工程要点：**
 
 - **中点电压近似误差：** 用两相导通相电压的平均值近似中点电压，忽略了死区、管压降等非理想因素。在低母线电压或大电流时误差较大，可能导致换相偏移。更精确的实现应增加二极管压降补偿。
 - **30°延迟的精度：** 基于上次换相间隔估算30°时间，在加速/减速过程中存在滞后。理想情况下应使用速度估计值实时计算30°延迟，但代码采用简单的"半间隔"近似，在稳态下精度足够。

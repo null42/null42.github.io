@@ -20,9 +20,9 @@ navGroupOrder: 30
 
 >  关联模块：[ALG-06 位置速度观测器](../ALG-06-Position-Speed-Observer.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md)
 
-**文档版本：** v1.0  
-**生成日期：** 2026-04-26  
-**源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_EST_F.c/h`
+- **文档版本：** v1.0  
+- **生成日期：** 2026-04-26  
+- **源码位置：** `MC_LIB/3_MC/31_FOC/310_FOC_F/MCFOC_EST_F.c/h`
 
 ---
 
@@ -84,7 +84,7 @@ MCFOC_EST_F模块实现了多种无感观测器算法：
 
 **滑模观测器**通过构造电流观测器，利用滑模控制律提取反电动势信息。
 
-**PMSM电压方程（αβ坐标系）：**
+- **PMSM电压方程（αβ坐标系）：**
 
 $$
 \begin{cases}
@@ -100,7 +100,7 @@ $$
 - $L_s$：定子电感 ($H$)
 - $e_\alpha, e_\beta$：αβ轴反电动势 ($V$)
 
-**电流观测器：**
+- **电流观测器：**
 
 $$
 \begin{cases}
@@ -116,7 +116,7 @@ $$
 - $u_\alpha, u_\beta$：αβ轴定子电压 ($V$)
 - $z_\alpha, z_\beta$：滑模控制律输出，等效反电动势 ($V$)
 
-**滑模控制律：**
+- **滑模控制律：**
 
 $$
 \begin{cases}
@@ -132,7 +132,7 @@ $$
 - $i_\alpha, i_\beta$：αβ轴实际电流 ($A$)
 - $\text{sign}(\cdot)$：符号函数
 
-**反电动势提取（低通滤波）：**
+- **反电动势提取（低通滤波）：**
 
 $$
 \begin{cases}
@@ -232,7 +232,7 @@ void MCFOC_EST_SMO_F(ST_SMO_CONTROL_F* pSMO,
 
 ### 2.4 算法分析
 
-**关键点：**
+- **关键点：**
 
 1. **滑模增益选择**：
    - H1必须足够大以克服反电动势：$H_1 > \max(|e_\alpha|, |e_\beta|)$
@@ -257,7 +257,7 @@ void MCFOC_EST_SMO_F(ST_SMO_CONTROL_F* pSMO,
 
 **磁链观测器**通过积分电压方程估计磁链，进而计算转子位置。
 
-**磁链方程：**
+- **磁链方程：**
 
 $$
 \begin{cases}
@@ -272,7 +272,7 @@ $$
 - $R_s$：定子电阻 ($\Omega$)
 - $i_\alpha, i_\beta$：αβ轴定子电流 ($A$)
 
-**转子磁链：**
+- **转子磁链：**
 
 $$
 \begin{cases}
@@ -287,7 +287,7 @@ $$
 - $L_s$：定子电感 ($H$)
 - $i_\alpha, i_\beta$：αβ轴定子电流 ($A$)
 
-**角度计算：**
+- **角度计算：**
 
 $$
 \theta = \arctan\left(\frac{\psi_{f\beta}}{\psi_{f\alpha}}\right)
@@ -358,9 +358,9 @@ void MCFOC_EST_FLUX_F(ST_FLUX_CONTROL_F* pFLUX,
 
 ### 3.4 磁链漂移问题
 
-**问题：** 纯积分器存在直流漂移问题。
+- **问题：** 纯积分器存在直流漂移问题。
 
-**解决：** 使用低通滤波器代替纯积分器：
+- **解决：** 使用低通滤波器代替纯积分器：
 
 $$
 \Psi = \frac{1}{s + \omega_c}(U - R \cdot I)
@@ -374,7 +374,7 @@ $$
 
 **反电动势观测器**直接估计反电动势，适用于高速运行。
 
-**反电动势与角度关系：**
+- **反电动势与角度关系：**
 
 $$
 \begin{cases}
@@ -389,7 +389,7 @@ $$
 - $\psi_f$：永磁体磁链 ($Wb$)
 - $\theta$：转子电角度 ($rad$)
 
-**角度计算：**
+- **角度计算：**
 
 $$
 \theta = -\arctan\left(\frac{e_\alpha}{e_\beta}\right)
@@ -449,7 +449,7 @@ $$
 - $\hat{e}_\alpha, \hat{e}_\beta$：滤波后的αβ轴反电动势估计值 ($V$)
 - $\hat{\theta}$：估计的电角度 ($rad$)
 
-**PI调节器：**
+- **PI调节器：**
 
 $$
 \dot{\hat{\omega}} = K_i \cdot \varepsilon
@@ -465,7 +465,7 @@ $$
 - $K_i$：PLL积分增益
 - $\varepsilon$：相位误差信号 ($V$)
 
-**角度积分：**
+- **角度积分：**
 
 $$
 \hat{\theta} = \int \hat{\omega} \, dt
@@ -511,7 +511,7 @@ void MCFOC_EST_PLL_F(ST_SMO_CONTROL_F* pSMO,
 | Ki | $\frac{\omega_n^2}{\psi_f}$ | 积分增益，$\omega_n$为自然频率 ($rad/s$)，$\psi_f$为永磁体磁链 ($Wb$) |
 | $\omega_n$ | $\omega_n = \frac{\omega_{bw}}{2\zeta}$ | 自然频率，$\omega_{bw}$为期望的PLL带宽 ($rad/s$) |
 
-**典型值：**
+- **典型值：**
 - $\zeta = 0.707$（阻尼比）
 - $\omega_n = 2\pi \times 10 \sim 50$ rad/s（自然频率）
 
@@ -651,7 +651,7 @@ void MCFOC_EST_FLUX_Init_F(ST_FLUX_CONTROL_F* pFLUX);
 void MCFOC_EST_EMF_Init_F(ST_EMF_CONTROL_F* pEMF);
 ```
 
-**功能：** 初始化观测器结构体
+- **功能：** 初始化观测器结构体
 
 ### 8.2 观测器计算函数
 
@@ -669,7 +669,7 @@ void MCFOC_EST_EMF_F(ST_EMF_CONTROL_F* pEMF,
                       ST_PMSM_PARA_F* pPMSMa);
 ```
 
-**调用时机：** 在电流环周期调用（通常100μs）
+- **调用时机：** 在电流环周期调用（通常100μs）
 
 ### 8.3 参数自适应函数
 
@@ -679,7 +679,7 @@ void MCFOC_EST_SMO_Adapt_F(ST_SMO_CONTROL_F* pSMO,
                             ST_PMSM_PARA_F* pPMSMa);
 ```
 
-**调用时机：** 在速度环周期调用（通常1ms）
+- **调用时机：** 在速度环周期调用（通常1ms）
 
 ---
 

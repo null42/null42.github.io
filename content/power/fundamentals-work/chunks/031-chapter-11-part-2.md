@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第11章part 2 - 11 Inductor Design"
+title: "第11章 电感设计（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,232 +18,119 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第11章part 2 - 11 Inductor Design
+# 第11章 电感设计（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 488-492  
-> Chunk ID: `chapter-11-part-2`
+> 源页：488–492
+> 本部分续接 11.4.2 反激变压器示例，并涵盖 11.5 关键要点小结和习题 11.1–11.5。
 
-## 主干提取
+## 11.4 示例（续）
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+### 11.4.2 CCM 反激变压器（续）
 
-## 术语表
+绕组 1 匝数按式 (11.54) 选择：
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+$$n_1 = \frac{L_M I_{M,max}}{B_{max}A_c}\cdot 10^4 = \frac{(1.07\cdot 10^{-3}\text{ H})(1.5\text{ A})}{(0.25\text{ T})(1.09\text{ cm}^2)}\cdot 10^4 = 58.7\text{ 匝} \tag{11.79}$$
 
-## 中文翻译
+由于需整数匝，此值取整为
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+$$n_1 = 59 \tag{11.80}$$
 
-## 英文原文
+为获得所需匝比，$n_2$ 应选择：
 
-```text
-11.4 Examples 479
-The number of winding 1 turns is chosen according to Eq. (11.54), as follows:
-n1 = LM IM,max
-BmaxAc
-104
-= (1.07· 10−3 H)(1.5A )
-(0.25 T)(1.09 cm2) 104 (11.79)
-= 58.7 turns
-Since an integral number of turns is required, we roundoﬀthis value to
-n1= 59 (11.80)
-To obtain the desired turns ratio, n2 should be chosen as follows:
-n2 =
-⎦n2
-n1
-)
-n1
-= (0.15)59 (11.81)
-= 8.81
-We again round this value oﬀ,t o
-n2= 9 (11.82)
-The fractions of the window area allocated to windings 1 and 2 are selected in accordance with
-Eq. (11.56):
-α 1 = I1
-Itot
-= (0.796 A)
-(1.77 A) = 0.45
-α 2 = n2I2
-n1Itot
-= (9)(6.5A )
-(59)(1.77 A)= 0.55 (11.83)
-The wire gauges should therefore be
-AW1 ≤α 1KuWA
-n1
-= 1.09· 10−3 cm2 —use #28 AWG
-AW2 ≤α 2KuWA
-n2
-= 8.88· 10−3 cm2 —use #19 AWG (11.84)
-The above American Wire Gauges are selected using the wire gauge table given at the end of
-Appendix B.
-The above design does not account for core loss or copper loss caused by the proximity
-eﬀect. Let us compute the core loss for this design. Figure Fig. 11.14 contains a sketch of the
-B–H loop for this design. The ﬂux densityB(t) can be expressed as a dc component (determined
-by the dc value of the magnetizing current IM), plus an ac variation of peak amplitudeΔB that
-is determined by the current rippleΔiM. The maximum value of B(t) is labeled Bmax; this value
-is determined by the sum of the dc component and the ac ripple component. The core material
-saturates when the applied B(t) exceeds B
-sat; hence, to avoid saturation, Bmax should be less
-than Bsat. The core loss is determined by the amplitude of the ac variations in B(t), i.e., byΔB.
+$$n_2 = \left(\frac{n_2}{n_1}\right)n_1 = (0.15)\cdot 59 = 8.81 \tag{11.81}$$
 
-480 11 Inductor Design
-Fig. 11.14 B–H loop for the ﬂyback transformer
-design example
-B(t)
-Hc(t)
-CCM flyback
-example
-large excitation
-Bsat
-BBmax
-Fig. 11.15 Variation of ﬂux density B(t), ﬂy-
-back transformer example
-vM(t)
-0
-Vg
-DTs
-B(t)
-Bmax
-0
-B
-Vg
-n1 Ac
-The ac componentΔB is determined using Faraday’s law, as follows. Solution of Faraday’s
-law for the derivative of B(t) leads to
-dB(t)
-dt = vM(t)
-n1Ac
-(11.85)
-As illustrated in Fig. 11.15, the voltage applied during the ﬁrst subinterval is vM(t)= Vg.T h i s
-causes the ﬂux density to increase with slope
-dB(t)
-dt = Vg
-n1Ac
-(11.86)
-Over the ﬁrst subinterval 0 < t< DTs, the ﬂux density B(t) changes by the net amount 2ΔB.
-This net change is equal to the slope given by Eq. (11.86), multiplied by the interval lengthDTs:
-ΔB=
-⎦ Vg
-2n1Ac
-)
-(DTs) (11.87)
-Upon solving forΔB and expressing Ac in cm2, we obtain
-ΔB= VgDTs
-2n1Ac
-104 (11.88)
+再次取整：
 
-11.5 Summary of Key Points 481
-B, Tesla
-0.01 0.1 0.3
-Power loss density,
-Watts/cm3
-0.01
-0.1
-1
-20kHz
-50kHz
-100kHz
-200kHz400kHz
-150kHz
-0.04
-W/cm3
-0.041
-Fig. 11.16 Determination of core loss density for the ﬂyback transformer design example
-For the ﬂyback transformer example, the peak ac ﬂux density is found to be
-ΔB= (200 V)(0.4)(6.67 μs)
-2(59)(1.09 cm2) 104 (11.89)
-= 0.041 T
-To determine the core loss, we next examine the data provided by the manufacturer for the
-given core material. A typical plot of core loss is illustrated in Fig. 11.16. For the values ofΔB
-and switching frequency of the ﬂyback transformer design, this plot indicates that 0.04 W will
-be lost in every cm3 of the core material. Of course, this value neglects the eﬀects of harmonics
-on core loss. The total core loss Pfe will therefore be equal to this loss density, multiplied by the
-volume of the core:
-Pfe = (0.04 W/cm3)(Acℓm)
-= (0.04 W/cm3)(1.09 cm2)(5.77 cm) (11.90)
-= 0.25 W
-This core loss is less than the copper loss of 1.5 W, and neglecting the core loss is often war-
-ranted in designs that operate in the continuous conduction mode and that employ ferrite core
-materials.
-11.5 Summary of Key Points
-1. A variety of magnetic devices are commonly used in switching converters. These devices
-diﬀer in their core ﬂux density variations, as well as in the magnitudes of the ac winding cur-
-rents. When the ﬂux density variations are small, core loss can be neglected. Alternatively,
-a low-frequency material can be used, having higher saturation ﬂux density.
+$$n_2 = 9 \tag{11.82}$$
 
-482 11 Inductor Design
-2. The core geometrical constant Kg is a measure of the magnetic size of a core, for appli-
-cations in which copper loss is dominant. In the Kg design method, ﬂux density and total
-copper loss are speciﬁed. Design procedures for single-winding ﬁlter inductors and for con-
-ventional multiple-winding transformers are derived.
-Problems
-11.1 A simple buck converter operates with a 50 kHz switching frequency and a dc input volt-
-age of Vg= 40 V. The output voltage is V= 20 V. The load resistance is R≥4Ω.
-(a) Determine the value of the output ﬁlter inductance L such that the peak-to-average
-inductor current rippleΔi is 10% of the dc component I.
-(b) Determine the peak steady-state inductor current Imax.
-(c) Design an inductor which has the values of L and Imax from parts (a) and (b). Use a
-ferrite EE core, with Bmax = 0.25 T. Choose a value of winding resistance such that
-the inductor copper loss is less than or equal to 1 W at room temperature. Assume
-Ku= 0.5. Specify: core size, gap length, wire size (AWG), and number of turns.
-11.2 A boost converter operates at the following quiescent point:Vg= 28 V, V= 48 V, Pload=
-150 W, fs= 100 kHz. Design the inductor for this converter. Choose the inductance value
-such that the peak current ripple is 10% of the dc inductor current. Use a peak ﬂux density
-of 0.225 T, and assume a ﬁll factor of 0.5. Allow copper loss equal to 0.5% of the load
-power, at room temperature. Use a ferrite PQ core. Specify: core size, air gap length, wire
-gauge, and number of turns.
-11.3 Extension of the K
-g approach to design of two-winding transformers. It is desired to de-
-sign a transformer having a turns ratio of 1 : n. The transformer stores negligible energy,
-no air gap is required, and the ratio of the winding currents i2(t)/i1(t) is essentially equal
-to the turns ratio n. The applied primary volt-secondsλ1 are deﬁned for a typical PWM
-voltage waveform v1(t)i nF i g .10.45b; these volt-seconds should cause the maximum ﬂux
-density to be equal to a speciﬁed value Bmax =ΔB. You may assume that the ﬂux density
-B(t) contains no dc bias, as in Fig.10.46. You should allocate half of the core window area
-to each winding. The total copper loss Pcu is also speciﬁed. You may neglect proximity
-losses.
-(a) Derive a transformer design procedure, in which the following quantities are speciﬁed:
-total copper loss Pcu, maximum ﬂux density Bmax, ﬁll factor Ku, wire resistivityρ,r m s
-primary current I1, applied primary volt-secondsλ1, and turns ratio 1:n. Your procedure
-should yield the following data: required core geometrical constant Kg, primary and
-secondary turns n1 and n2, and primary and secondary wire areas Aw1 and Aw2.
-(b) The voltage waveform applied to the transformer primary winding of the ´Cuk converter
-(Fig. 6.42c) is equal to the converter input voltageVg while the transistor conducts, and
-is equal to −VgD/(1−D) while the diode conducts. This converter operates with a
-switching frequency of 100 kHz, and a transistor duty cycle D equal to 0.4. The dc
-input voltage is Vg = 120 V, the dc output voltage is V = 24 V, and the load power
-is 200 W. You may assume a ﬁll factor of Ku = 0.3. Use your procedure of part (a) to
-design a transformer for this application, in which Bmax= 0.15 T, and Pcu= 0.25 W at
-100◦C. Use a ferrite PQ core. Specify: core size, primary and secondary turns, and wire
-gauges.
+绕组 1 和 2 的窗口面积比例按式 (11.56) 选择：
 
-11.5 Summary of Key Points 483
-11.4 Coupled inductor design. The two-output forward converter of Fig. 10.47ae m p l o y s
-secondary-side coupled inductors. An air gap is employed.
-Design a coupled inductor for the following application: V1 = 5V, V2 = 15 V, I1 =
-20 A, I2= 4A, D= 0.4. The magnetizing inductance should be equal to 8μH, referred to
-the 5 V winding. You may assume a ﬁll factor Ku of 0.5. Allow a total of 1 W of copper
-loss at 100◦C, and use a peak ﬂux density of Bmax= 0.2 T. Use a ferrite EE core. Specify:
-core size, air gap length, number of turns, and wire gauge for each winding.
-11.5 Flyback transformer design. A ﬂyback converter operates with a 160 Vdc input, and pro-
-duces a 28 Vdc output. The maximum load current is 2 A. The transformer turns ratio is
-8:1. The switching frequency is 100 kHz. The converter should be designed to operate in
-the discontinuous conduction mode at all load currents. The total copper loss should be
-less than 0.75 W.
-(a) Choose the value of transformer magnetizing inductance L
-M such that, at maximum
-load current, D3= 0.1 (the duty cycle of subinterval 3, in which all semiconductors are
-oﬀ). Please indicate whether your value of LM is referred to the primary or secondary
-winding. What is the peak transistor current? The peak diode current?
-(b) Design a ﬂyback transformer for this application. Use a ferrite pot core with Bmax =
-0.25 Tesla, and with ﬁll factor Ku = 0.4. Specify: core size, primary and secondary
-turns and wire sizes, and air gap length.
-(c) For your design of part (b), compute the copper losses in the primary and secondary
-windings. You may neglect proximity loss.
-(d) For your design of part (b), compute the core loss. Loss data for the core material is
-given by Fig. 10.20. Is the core loss less than the copper loss computed in Part (c)?
-```
+$$\alpha_1 = \frac{I_1}{I_{tot}} = \frac{0.796\text{ A}}{1.77\text{ A}} = 0.45 \tag{11.83}$$
+
+$$\alpha_2 = \frac{n_2 I_2}{n_1 I_{tot}} = \frac{(9)(6.5\text{ A})}{(59)(1.77\text{ A})} = 0.55$$
+
+故线径应为
+
+$$A_{W1} \le \frac{\alpha_1 K_u W_A}{n_1} = 1.09\cdot 10^{-3}\text{ cm}^2\quad\text{用 #28 AWG} \tag{11.84}$$
+
+$$A_{W2} \le \frac{\alpha_2 K_u W_A}{n_2} = 8.88\cdot 10^{-3}\text{ cm}^2\quad\text{用 #19 AWG}$$
+
+上述美国线规用附录 B 末尾的线规表选择。
+
+上述设计未计入铁损或邻近效应引起的铜损。让我们计算此设计的铁损。图11.14 给出此设计的 B-H 回线草图。磁通密度 $B(t)$ 可表示为由磁化电流直流值 $I_M$ 决定的直流分量加上由电流纹波 $\Delta i_M$ 决定的峰值 $\Delta B$ 的交流变化。$B(t)$ 的最大值标记为 $B_{max}$；此值由直流分量加交流纹波分量之和决定。施加 $B(t)$ 超过 $B_{sat}$ 时磁芯材料饱和；故为避免饱和 $B_{max}$ 应小于 $B_{sat}$。铁损由 $B(t)$ 交流变化的幅值即 $\Delta B$ 决定。
+
+![源页 p.489](../assets/page-snapshots/chapter-11/page-489.png)
+
+图11.14 反激变压器设计示例的 B-H 回线
+
+![源页 p.489](../assets/page-snapshots/chapter-11/page-489.png)
+
+图11.15 反激变压器示例磁通密度 $B(t)$ 的变化
+
+交流分量 $\Delta B$ 用法拉第定律确定如下。解法拉第定律求 $B(t)$ 的导数得
+
+$$\frac{dB(t)}{dt} = \frac{v_M(t)}{n_1 A_c} \tag{11.85}$$
+
+如图11.15所示，第一子区间施加电压 $v_M(t) = V_g$。这使磁通密度以斜率
+
+$$\frac{dB(t)}{dt} = \frac{V_g}{n_1 A_c} \tag{11.86}$$
+
+增大。第一子区间 $0 < t < DT_s$ 内磁通密度 $B(t)$ 净变化量为 $2\Delta B$。此净变化等于式 (11.86) 给出的斜率乘区间长度 $DT_s$：
+
+$$\Delta B = \left(\frac{V_g}{2n_1 A_c}\right)(DT_s) \tag{11.87}$$
+
+解 $\Delta B$ 并将 $A_c$ 以 cm² 表示得
+
+$$\Delta B = \frac{V_g DT_s}{2n_1 A_c}\cdot 10^4 \tag{11.88}$$
+
+![源页 p.490](../assets/page-snapshots/chapter-11/page-490.png)
+
+图11.16 反激变压器设计示例铁损密度的确定
+
+反激变压器示例的峰值交流磁通密度为
+
+$$\Delta B = \frac{(200\text{ V})(0.4)(6.67\,\mu\text{s})}{2(59)(1.09\text{ cm}^2)}\cdot 10^4 = 0.041\text{ T} \tag{11.89}$$
+
+为确定铁损，接下来检查制造商为给定磁芯材料提供的数据。图11.16 给出典型铁损图。对反激变压器设计的 $\Delta B$ 和开关频率值，此图表明每 cm³ 磁芯材料损失 0.04 W。当然此值忽略谐波对铁损的影响。总铁损 $P_{fe}$ 因此等于此损耗密度乘磁芯体积：
+
+$$P_{fe} = (0.04\text{ W/cm}^3)(A_c\ell_m) = (0.04\text{ W/cm}^3)(1.09\text{ cm}^2)(5.77\text{ cm}) = 0.25\text{ W} \tag{11.90}$$
+
+此铁损小于 1.5 W 铜损。在连续导通模式工作且使用铁氧体磁芯材料的设计中忽略铁损通常是有保证的。
+
+## 11.5 关键要点小结
+
+1. 开关变换器中常用多种磁性器件。这些器件在磁芯磁通密度变化及交流绕组电流幅值上不同。磁通密度变化小时可忽略铁损。或者可用饱和磁通密度更高的低频材料。
+
+2. 磁芯几何常数 $K_g$ 是铜损为主时磁芯磁尺寸的度量。$K_g$ 设计方法中指定磁通密度和总铜损。导出了单绕组滤波电感和常规多绕组变压器的设计步骤。
+
+## 习题
+
+**11.1** 简单降压变换器以 50 kHz 开关频率和 $V_g = 40\text{ V}$ 直流输入工作。输出电压 $V = 20\text{ V}$。负载电阻 $R \ge 4\,\Omega$。
+
+(a) 确定使峰-平均电感电流纹波 $\Delta i$ 为直流分量 $I$ 的 10% 的输出滤波电感 $L$ 值。
+
+(b) 确定峰值稳态电感电流 $I_{max}$。
+
+(c) 设计具有 (a) 和 (b) 的 $L$ 和 $I_{max}$ 值的电感。用铁氧体 EE 磁芯，$B_{max} = 0.25\text{ T}$。选择绕组电阻值使室温下电感铜损小于等于 1 W。假定 $K_u = 0.5$。指定：磁芯尺寸、气隙长度、线径（AWG）和匝数。
+
+**11.2** 升压变换器在如下静态点工作：$V_g = 28\text{ V}$，$V = 48\text{ V}$，$P_{load} = 150\text{ W}$，$f_s = 100\text{ kHz}$。为此变换器设计电感。选择电感值使峰值电流纹波为直流电感电流的 10%。用峰值磁通密度 0.225 T，假定填充因子 0.5。室温下允许铜损等于负载功率的 0.5%。用铁氧体 PQ 磁芯。指定：磁芯尺寸、气隙长度、线径和匝数。
+
+**11.3** $K_g$ 方法向双绕组变压器设计的扩展。希望设计匝比 1 : n 的变压器。变压器储能可忽略，不需气隙，绕组电流比 $i_2(t)/i_1(t)$ 基本等于匝比 $n$。施加一次伏秒 $\lambda_1$ 对图10.45b 的典型脉宽调制电压波形 $v_1(t)$ 定义；此伏秒应使最大磁通密度等于指定值 $B_{max} = \Delta B$。可假定磁通密度 $B(t)$ 不含直流偏置（如图10.46）。应将磁芯窗口面积的一半分配给每绕组。总铜损 $P_{cu}$ 也指定。可忽略邻近损耗。
+
+(a) 导出变压器设计步骤，其中指定以下量：总铜损 $P_{cu}$、最大磁通密度 $B_{max}$、填充因子 $K_u$、导线电阻率 $\rho$、方均根一次电流 $I_1$、施加一次伏秒 $\lambda_1$、匝比 1:n。步骤应产生以下数据：所需磁芯几何常数 $K_g$、一次和二次匝数 $n_1$ 和 $n_2$、一次和二次线面积 $A_{w1}$ 和 $A_{w2}$。
+
+(b) Ćuk 变换器（图6.42c）变压器一次绕组施加的电压波形在晶体管导通时等于变换器输入电压 $V_g$，二极管导通时等于 $-V_g D/(1-D)$。此变换器以 100 kHz 开关频率工作，晶体管占空比 $D = 0.4$。直流输入电压 $V_g = 120\text{ V}$，直流输出电压 $V = 24\text{ V}$，负载功率 200 W。可假定填充因子 $K_u = 0.3$。用 (a) 的步骤为此应用设计变压器，$B_{max} = 0.15\text{ T}$，100°C 时 $P_{cu} = 0.25\text{ W}$。用铁氧体 PQ 磁芯。指定：磁芯尺寸、一次和二次匝数、线径。
+
+**11.4** 耦合电感设计。图10.47a 的双输出正激变换器使用副侧耦合电感。使用气隙。
+
+为以下应用设计耦合电感：$V_1 = 5\text{ V}$，$V_2 = 15\text{ V}$，$I_1 = 20\text{ A}$，$I_2 = 4\text{ A}$，$D = 0.4$。磁化电感应等于 8 μH（归算到 5 V 绕组）。可假定填充因子 $K_u = 0.5$。100°C 时允许共 1 W 铜损，用峰值磁通密度 $B_{max} = 0.2\text{ T}$。用铁氧体 EE 磁芯。指定：磁芯尺寸、气隙长度、每绕组匝数和线径。
+
+**11.5** 反激变压器设计。反激变换器以 160 V 直流输入工作，产生 28 V 直流输出。最大负载电流 2 A。变压器匝比 8:1。开关频率 100 kHz。变换器应设计为在所有负载电流下工作于断续导通模式。总铜损应小于 0.75 W。
+
+(a) 选择变压器磁化电感 $L_M$ 值使最大负载电流时 $D_3 = 0.1$（所有半导体关断的子区间 3 的占空比）。请说明 $L_M$ 值是归算到一次还是二次绕组。峰值晶体管电流是多少？峰值二极管电流？
+
+(b) 为此应用设计反激变压器。用铁氧体罐形磁芯，$B_{max} = 0.25\text{ T}$，填充因子 $K_u = 0.4$。指定：磁芯尺寸、一次和二次匝数和线径、气隙长度。
+
+(c) 对 (b) 的设计，计算一次和二次绕组铜损。可忽略邻近损耗。
+
+(d) 对 (b) 的设计，计算铁损。磁芯材料损耗数据由图10.20 给出。铁损是否小于 (c) 计算的铜损？

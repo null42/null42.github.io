@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第19章part 1 - 19 Digital Control of Switched-Mode Power Converters"
+title: "第19章 开关模式功率变换器的数字控制（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,1069 +18,445 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第19章part 1 - 19 Digital Control of Switched-Mode Power Converters
+# 第19章 开关模式功率变换器的数字控制（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 807-826  
-> Chunk ID: `chapter-19-part-1`
+## 第19章 开关模式功率变换器的数字控制
 
-## 主干提取
+基于通用或专用微控制器、数字信号处理器（DSP）或可编程逻辑器件的数字控制方法和数字控制器，已广泛应用于较高功率等级的电力电子应用，包括电机驱动或电网同步三相逆变器和整流器。在这些应用中，数字控制在处理复杂的控制、管理和监视任务方面具有明显的技术和经济优势。数字控制同样适用于无处不在的中低功率开关模式功率变换应用，如负载点（POL）稳压器、非隔离和隔离直流-直流变换器、单相功率因数校正（PFC）整流器和逆变器等。在这些应用中，开关频率通常在数百千赫到数兆赫范围，要求快得多的动态响应。控制器成本和控制器功耗很容易在系统成本和功耗中占相当大比例。在许多应用中，借助本书其他章节讨论的分析、建模和设计技术，现成模拟控制器的持续进步已成功应对控制挑战。近年来，高频开关模式功率变换器的实用数字控制已从概念验证的实验室演示[181–189]，发展到多家厂商商业可得的数字 PWM 控制器（DPWM）芯片。许多混合信号 DPWM 控制器架构和实现策略已被研究并在实践中实现。例如，现已有很多标准微控制器或 DSP 芯片，具有多个 PWM 和模数（A/D）转换通道，允许基于软件的控制和电源管理功能。高性能数字控制环路也可用现场可编程门阵列（FPGA）芯片或专用集成电路中实现的数字逻辑，连同定制 DPWM 和 A/D 模块来实现，而可编程性、电源管理和系统接口功能则交由嵌入式微控制器完成。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+![源页 p.807](../assets/page-snapshots/chapter-19/page-807.png)
 
-## 术语表
+除了利用数字控制器实现方面持续快速进步外，数字控制技术也为高频开关模式功率变换应用的发展带来了机遇。数字控制的优点包括参数的可编程性和应用灵活性。此外，更先进技术的实际实现也已得到演示，包括改进动态响应的方法[190–201]、系统辨识[202–205]、自整定和自适应控制方法[206–214]，以及效率优化和电源管理功能[215–222]。
 
-| English term | 中文译名 | Notes |
+图19.1 数字控制的开关模式功率变换器
+
+本章旨在介绍高频开关模式功率变换器数字控制的分析、建模和设计。图19.1以同步降压变换器为例给出了一个数字控制的变换器。目标是建立对数字 PWM 控制环路工作原理的理解，包括延迟和量化的影响，对环路动态建模，并使读者能够设计高性能数字控制环路。假设读者已掌握前面各章的内容，特别是第7–9章，但不假设读者具备离散时间或数字控制背景。19.1节讨论数字控制环路中的信号传播和功能块。19.2节介绍离散时间系统。19.3节介绍离散时间补偿器设计，19.4节介绍数字控制器实现技术。高频开关模式功率变换器数字控制的更详细论述见文献[223]。
+
+## 19.1 数字控制环路
+
+在图19.1所示数字控制开关变换器中，输出电压用增益为 $H(s)$ 的传感器测量。传递函数 $H(s)$ 可包含输出电压的缩放和模拟滤波。与常规模拟控制环路一样，传感器输出信号与参考电压 $v_{ref}$ 比较得到误差信号 $v_e(t)$。误差信号在时间上被采样、在幅值上被模数（A/D）转换器量化。A/D 采样通常以恒定速率进行，称为采样频率 $f_{sampling} = 1/T_{sampling}$。然后 A/D 输出 $v_e[n]$ 是一个数字字，表示模拟误差信号 $v_e$ 在时刻 $t = n T_{sampling}$ 的值。A/D 采样频率通常与开关频率 $f_s$ 同步，$f_{sampling} = k f_s$，其中 $k$ 为正整数。实践中，常选取采样周期等于开关周期：$k = 1$，
+
+$$T_{sampling} = T_s \tag{19.1}$$
+
+![源页 p.808](../assets/page-snapshots/chapter-19/page-808.png)
+
+基于离散化误差信号 $v_e[n]$，数字补偿器 $G_{cd}$ 在数字脉宽调制器（DPWM）输入处更新占空比命令信号 $v_c[n]$。最后，给定 $v_c[n]$，DPWM 输出开关控制信号 $c(t)$，其占空比 $d[n]$ 与占空比命令 $v_c[n]$ 成正比。数字控制环路在概念上与9.1节讨论的标准模拟电压模式控制环路非常相似，但因(1)幅值量化和(2)采样（即时间量化）而有两大显著差异。
+
+### 19.1.1 A/D 与 DPWM 量化
+
+在图19.1所示控制环路中，数字信号 $v_e[n]$ 和 $v_c[n]$ 用有限位数的数字变量表示。实际 A/D 转换器产生位数有限的数字输出，如 12 或 14 位。数字脉宽调制器同样在分辨率上有限。本节介绍 A/D 转换器和数字脉宽调制器的量化特性。
+
+**模数转换**
+
+除时间采样外，A/D 转换器还进行幅值量化。图19.2(a)给出了在 $0$ 到满量程电压 $V_{FS}$ 的模拟输入电压范围上工作的标准 A/D 转换器的量化特性 $Q_{A/D}$。检测到的模拟信号 $H v$ 被量化为 $n_{A/D}$ 位的数字字。该量化信号的最小有效位（LSB）值为
+
+$$q_{A/D} = \frac{V_{FS}}{2^{n_{A/D}}} \tag{19.2}$$
+
+其中 $n_{A/D}$ 是 A/D 分辨率位数。图19.2(a)示例为 $n_{A/D} = 3$。经 A/D 转换的检测模拟信号与参考电压 $v_{ref}$ 数字相减，得到数字误差信号 $v_e[n]$。另一种方式是，A/D 量化可如图19.2(b)所示，量化特性以零为中心。无论哪种方式，宽度为 $q_{A/D}$ 的零误差区间内的模拟电压产生零数字误差信号 $v_e[n] = 0$，这意味着 LSB 分辨率 $q_{A/D}$ 决定了数字控制环路对输出电压的调节精度。
+
+举例，假设 $H = 1$，期望将输出直流电压 $V$ 调节在 $V_{ref} = 1\,\text{V}$ 的 $\pm 0.25\%$ 范围内，即 $\pm 2.5\,\text{mV}$ 内。因此 LSB 分辨率须满足 $q_{A/D} < 5\,\text{mV}$。式(19.2)意味着所需的 A/D 分辨率位数为
+
+$$n_{A/D} > \log_2\left( \frac{V_{FS}}{q_{A/D}} \right) \tag{19.3}$$
+
+设 $V_{FS} = 2\,\text{V}$（标准 A/D 转换器的典型满量程电压值），则至少需要 $n_{A/D} = 9$ 位的 A/D 分辨率才能满足直流电压调节指标。如图19.2(b)所示，当量化以零为中心时，可保持相同 LSB 分辨率但可缩小电压转换范围，从而有效减少表示 $v_e[n]$ 所需的位数。此类"窗口" A/D 转换器见文献[181, 182, 184, 193]。
+
+![源页 p.809](../assets/page-snapshots/chapter-19/page-809.png)
+
+图19.2 A/D 量化特性：(a) $0$–$V_{FS}$ 电压范围，(b) 以零误差为中心
+
+**数字脉宽调制**
+
+数字脉宽调制如图19.3(a)所示，遵循7.3节图7.30所述标准模拟 PWM 的相同原理。占空比命令信号 $v_c[n]$ 与数字锯齿斜坡比较，使输出控制信号 $c(t)$ 的占空比 $d[n]$ 与 $v_c[n]$ 成正比。如图19.3(a)所示，$c(t)$ 脉冲的时间分辨率为 $q_{DPWM} T_s$，其中
+
+$$q_{DPWM} = \frac{1}{2^{n_{DPWM}}} \tag{19.4}$$
+
+$n_{DPWM}$ 是 DPWM 分辨率位数。图19.3示例中 $n_{DPWM} = 3$。
+
+![源页 p.810](../assets/page-snapshots/chapter-19/page-810.png)
+
+图19.3 数字脉宽调制器：(a) 栅极驱动信号 $c(t)$ 的时间量化，(b) 量化特性
+
+在图19.3(a)中，假设数字锯齿斜坡的幅值为 $1 - 2^{-n_{DPWM}}$，对应等效 DPWM 增益等于 $1\,\text{V}^{-1}$，即 $V_M = 1\,\text{V}$。所得 DPWM 量化特性如图19.3(b)所示。
+
+在标准 DPWM 实现中，数字锯齿斜坡简单地由频率为 $f_{clk}$ 的数字时钟驱动的数字计数器产生。DPWM 时间分辨率由时钟周期 $T_{clk} = 1/f_{clk}$ 决定，
+
+$$q_{DPWM} T_s = T_{clk} \tag{19.5}$$
+
+占空比分辨率决定了变换器输出电压可定位的精度。例如，在图19.1的降压变换器中，直流输出电压 $V = D V_g$。给定占空比量化，输出电压定位分辨率为
+
+$$\Delta V = q_{DPWM} V_g \tag{19.6}$$
+
+或
+
+$$\frac{\Delta V}{V} = q_{DPWM}\, \frac{V_g}{V} = \frac{1}{2^{n_{DPWM}}}\, \frac{1}{M} \tag{19.7}$$
+
+假设期望在 $M = V/V_g = 0.2$ 的变换器中将输出电压定位在 $0.1\%$ 以内。式(19.7)意味着需要 13 位 DPWM 才能满足电压定位指标，而式(19.5)意味着标准 DPWM 实现需要时钟频率
+
+$$f_{clk} = 2^{n_{DPWM}}\, f_s = 8192\, f_s \tag{19.8}$$
+
+例如，若 $f_s = 1\,\text{MHz}$，所需时间分辨率为 $122\,\text{ps}$，所需时钟频率 $f_{clk} = 8.192\,\text{GHz}$。式(19.8)说明了高频开关模式功率变换器数字 PWM 控制器实现的实际挑战之一：高开关频率和高 DPWM 分辨率的要求需要高系统时钟频率。该问题已通过替代 DPWM 实现技术解决，产生了实用的高频高分辨率 DPWM 实现[181, 182, 184, 185, 188, 224–234]。
+
+![源页 p.811](../assets/page-snapshots/chapter-19/page-811.png)
+
+**理想量化特性**
+
+A/D 和 DPWM 量化特性是高度非线性的，对数字控制变换器的稳定性和工作有影响。在19.4.2节重新讨论 A/D 和 DPWM 量化效应之前，我们假设 A/D 和 DPWM 单元具有高分辨率，使数字控制环路中量化引起的非线性可忽略：
+
+$$v_e[n] = Q_{A/D}(v_e(n T_s)) \approx v_e(n T_s)$$
+
+$$d[n] \approx \frac{v_c[n]}{V_M} = v_c[n] \quad (V_M = 1\,\text{V}) \tag{19.9}$$
+
+对 DPWM，一个常见假设是 $V_M = 1\,\text{V}$。式(19.9)的理想（极高分辨率）量化特性意味着 A/D 转换器和 DPWM 模块可简单地建模为单位增益块，$v_e[n]/v_e(n T_s) = 1$，$d[n]/v_c[n] = 1\,\text{V}^{-1}$。
+
+图19.4 数字控制开关模式功率变换器的工作波形
+
+### 19.1.2 控制环路中的采样与延迟
+
+图19.4说明了满足式(19.1)（A/D 采样速率等于开关频率）时数字控制变换器的稳态和暂态工作。理想情况下，误差信号的数字样本 $v_e[n]$ 等于模拟误差信号 $v_e(t)$ 在时刻 $n T_s$ 的值，$v_e[n] = v_e(n T_s)$。数字反馈环路控制的量是模拟误差信号 $v_e(t)$ 的采样值 $v_e[n]$。假设一个设计良好、直流环路增益很大的反馈环路，稳态误差被驱动到零，如图19.4(a)所示：
+
+$$v_e[n] \to 0 \tag{19.10}$$
+
+在平衡状态下，模拟误差信号的直流值 $V_e$ 可能不等于零。数字控制环路中的直流调节误差源于误差信号 $v_e(t)$ 含有开关纹波，使样本 $v_e[n]$ 不一定等于直流值 $V_e$。数字控制变换器是一个采样数据系统。在 A/D 采样等于开关频率时，平衡时的直流误差可解释为开关纹波分量混叠到直流。该误差不大于纹波幅值。一个实践含义是，采样应在被采样的
+
+![源页 p.812](../assets/page-snapshots/chapter-19/page-812.png)
+
+模拟信号可能含开关过渡引起的大噪声的时刻（如开关事件之后立即）之外进行。混叠误差可通过在 A/D 转换器前加入"抗混叠"模拟低通滤波器减小，或以高于开关频率的速率采样模拟信号并以数字方式执行抗混叠滤波来减小。
+
+更一般地，应理解 A/D 以 $f_s$ 采样会将模拟信号中高于奈奎斯特速率 $f_s/2$ 的任何频率分量混叠回 $f_s/2$ 以下[235]。因此，讨论离散时间补偿器 $G_{cd}$ 的频率响应时，我们将限于不超过奈奎斯特频率 $f_s/2$ 的频率。
+
+现在考虑信号在数字控制环路中的传播。由于 A/D 转换并非瞬时完成，数字信号 $v_e[n]$ 在一段通常称为 A/D 转换时间的时间间隔后才对数字控制器可用。给定更新后的 $v_e[n]$，离散时间补偿器 $G_{cd}$ 计算数字脉宽调制器（DPWM）输入处数字占空比命令信号 $v_c[n]$ 的更新。A/D 转换时间与计算 $v_c[n]$ 所需时间合计为图19.4所示控制器时间延迟 $t_{ctrl}$。占空比命令 $v_c[n]$ 在整个开关周期内保持恒定，如图19.4(b)所示。作为响应，数字脉宽调制器输出图19.4(c)所示控制脉冲 $c(t)$，其占空比为 $d[n]$，其中 $d[n] = v_c[n]/V_M = v_c[n]$（假设 $V_M = 1\,\text{V}$）。DPWM 输出处调制脉冲与稳态脉冲之差 $\hat{c}(t)$ 如图19.4(d)所示。注意响应 $\hat{c}(t)$ 在 $v_c[n]$ 更新后延迟 $D T_s$ 出现，这是脉宽调制相关采样过程的结果，如15.5节讨论。
+
+需注意图19.1数字控制环路中有两个采样过程：A/D 转换器采样和脉宽调制器采样。两个采样事件之间的时间代表数字控制环路中的延迟，
+
+$$t_d = t_{ctrl} + t_{mod} = t_{ctrl} + D T_s \tag{19.11}$$
+
+式(19.11)中的控制环路延迟含两个分量：执行 A/D 转换所需时间 $t_{ctrl}$ 和数字补偿器计算 DPWM 输入信号 $v_c[n]$ 更新所需时间，以及与后沿数字脉宽调制器相关的调制器延迟 $t_{mod} = D T_s$。其他 DPWM 类型（如前沿或双沿 DPWM）提供不同的调制器延迟，总结于表19.1[223]。这些结果与文献[68]给出的分析一致。
+
+表19.1 常规采样脉宽调制器的延迟
+
+| PWM | 调制器延迟 $t_{mod}$ |
+|---|---|
+| 后沿 | $D T_s$ |
+| 前沿 | $(1-D) T_s$ |
+| 双沿 | $T_s/2$ |
+
+![源页 p.813](../assets/page-snapshots/chapter-19/page-813.png)
+
+在频域中，数字控制环路中延迟 $t_d$ 的效应可通过对延迟 $t_d$ 的信号施加拉普拉斯变换来建模：
+
+$$\mathcal{L}\{x(t - t_d)\} = \int_{t \to -\infty}^{t \to +\infty} x(t - t_d)\, e^{-st}\, dt = \int_{\tau \to -\infty}^{\tau \to +\infty} x(\tau)\, e^{-s(\tau + t_d)}\, d\tau = e^{-s t_d}\, x(s) \tag{19.12}$$
+
+因此，延迟 $t_d$ 的拉普拉斯变换频域模型为
+
+$$G_{delay}(s) = e^{-s t_d} \tag{19.13}$$
+
+其幅值响应 $\|G_{delay}(j\omega)\| = 1$，相位响应为
+
+$$\angle G_{delay}(j\omega) = -\omega t_d \tag{19.14}$$
+
+式(19.14)的相位滞后可能显著，应在离散时间补偿器设计中予以考虑。该问题在19.3节进一步讨论。
+
+## 19.2 离散时间系统导论
+
+本节简要介绍离散时间系统分析和建模技术。本节所述技术使读者能够设计图19.1数字控制变换器中的离散时间补偿器 $G_{cd}(z)$。
+
+### 19.2.1 连续时间与离散时间中的积分
+
+图7.1给出了开关变换器周围的标准模拟控制环路。连续时间补偿器 $G_c(s)$ 可基于第9章讨论的频域技术设计。考虑一个简单的积分补偿器，
+
+$$G_c(s) = \frac{v_c(s)}{v_e(s)} = \frac{\omega_o}{s} \tag{19.15}$$
+
+其中 $v_e$ 是误差信号，$v_c$ 是加到脉宽调制器输入的信号。连续时间 $s$ 域传递函数 $G_c(s)$ 在 $s = 0$ 处有一极点。在时域中，补偿器输出 $v_c(t)$ 是输入 $v_e(t)$ 的积分，
+
+$$v_c(t) = v_c(0) + \omega_o \int_0^t v_e(\tau)\, d\tau \tag{19.16}$$
+
+其中 $v_c(0)$ 是 $t = 0$ 处的初始条件。图19.5给出了 $v_c(t)$ 和 $v_e(t)$ 的波形示例。本例中，$v_e(t)$ 是频率为 $f_s/10$ 的正弦波形，$f_s = 1/T_s$ 是采样频率。现在考虑如何在图19.1所示数字控制器中实现积分补偿器，即给定补偿器输入处的离散时间样本 $v_e[n] = v_e(n T_s)$ 如何计算离散时间补偿器输出处的样本 $v_c[n]$。
+
+首先，式(19.16)的连续时间积分可写为：
+
+![源页 p.814](../assets/page-snapshots/chapter-19/page-814.png)
+
+图19.5 连续时间和离散时间积分
+
+$$v_c(t) = v_c(t - T_s) + \omega_o \int_{t-T_s}^{t} v_e(\tau)\, d\tau \tag{19.17}$$
+
+为精确重现式(19.17)，离散时间补偿器应执行如下计算：
+
+$$v_c(n T_s) = v_c[n] = v_c[n-1] + \omega_o \int_{(n-1)T_s}^{n T_s} v_e(\tau)\, d\tau \tag{19.18}$$
+
+其中 $(n-1)T_s$ 到 $T_s$ 上的积分代表 $v_e(t)$ 在 $t = (n-1)T_s$ 与 $t = n T_s$ 之间采样间隔 $T_s$ 内的波形面积。然而，由于 $v_e(t)$ 的值仅在离散时刻可得，精确重现式(19.18)的连续时间积分不可行。相反，必须仅用 $v_e$ 的可用离散时间样本近似执行积分。一种方法基于对 $v_e$ 在采样周期 $T_s$ 内波形下面积的梯形近似，如图19.5所示：
+
+$$v_c[n] = v_c[n-1] + \omega_o T_s\, \frac{v_e[n] + v_e[n-1]}{2} \tag{19.19}$$
+
+式(19.19)中 $v_c[n]$ 的计算相对简单，只需 $v_e[n-1]$ 与 $v_e[n]$ 相加、乘以常数、再加上与之前计算的 $v_c[n-1]$ 的乘积。显然，式(19.19)易于用数字逻辑硬件实现或作为软件中几行简单代码实现。图19.5表明，式(19.19)近似离散时间积分所得样本 $v_c[n]$ 接近但不等于模拟积分器输出信号 $v_c(t)$ 的样本 $v_c(n T_s)$。对给定 $v_e(t)$，增大采样频率可使式(19.17)模拟连续时间积分的样本 $v_c(n T_s)$ 与式(19.19)离散时间积分器输出 $v_c[n]$ 之间的差异减小。
+
+![源页 p.815](../assets/page-snapshots/chapter-19/page-815.png)
+
+导出式(19.19)的梯形近似并非离散时间近似连续时间积分的唯一方法。后向欧拉近似为
+
+$$v_c[n] = v_c[n-1] + \omega_o T_s\, v_e[n-1] \tag{19.20}$$
+
+前向欧拉近似为
+
+$$v_c[n] = v_c[n-1] + \omega_o T_s\, v_e[n] \tag{19.21}$$
+
+三种近似均有应用；一般而言梯形近似精度更高。
+
+### 19.2.2 离散时间系统的 z 变换与频率响应
+
+式(19.19)、(19.20)和(19.21)定义了三个时域的离散时间积分补偿器。在前几章中，我们大量依赖连续时间拉普拉斯变换、$s$ 域传递函数以及频率响应和频域分析、建模和设计技术。介绍离散时间系统相应的变换和频域技术是有意义的[176]。这里的介绍旨在非常简短和基础，但足以使读者基于前几章提供的标准模拟、连续时间背景进行数字控制器设计。
+
+在离散时间系统中，z 变换起着连续时间电路和系统中拉普拉斯变换的作用。给定离散时间信号 $x[n]$，z 变换定义为
+
+$$\mathcal{Z}\{x[n]\} = x(z) = \sum_{n \to -\infty}^{n \to +\infty} x[n]\, z^{-n} \tag{19.22}$$
+
+与拉普拉斯变换一样，z 变换是线性的：
+
+$$\mathcal{Z}\{a\, x[n] + b\, y[n]\} = a\, \mathcal{Z}\{x[n]\} + b\, \mathcal{Z}\{y[n]\} = a\, x(z) + b\, y(z) \tag{19.23}$$
+
+其中 $a$、$b$ 为常数。对于延迟一个采样周期的变量，z 变换可如下求得：
+
+$$\mathcal{Z}\{x[n-1]\} = \sum_{n \to -\infty}^{n \to +\infty} x[n-1]\, z^{-n} = \sum_{k \to -\infty}^{k \to +\infty} x[k]\, z^{-(k+1)} = z^{-1} \sum_{k \to -\infty}^{k \to +\infty} x[k]\, z^{-k} = z^{-1}\, x(z) \tag{19.24}$$
+
+因此，在时域将离散时间信号延迟一个采样周期等价于将该信号的 z 变换乘以因子 $z^{-1}$。换言之，$z^{-1}$ 在 $z$ 域中建模单位延迟。
+
+对式(19.19)的离散时间积分器应用 z 变换（含式(19.24)），得
+
+$$v_c(z) = z^{-1}\, v_c(z) + \frac{\omega_o T_s}{2}\left( v_e(z) + z^{-1}\, v_e(z) \right) \tag{19.25}$$
+
+表19.2 离散时间积分器的传递函数
+
+| 近似 | $G_{cd}(z)$ |
+|---|---|
+| 梯形 | $\dfrac{\omega_o T_s}{2}\, \dfrac{z+1}{z-1}$ |
+| 后向欧拉 | $\omega_o T_s\, \dfrac{1}{z-1}$ |
+| 前向欧拉 | $\omega_o T_s\, \dfrac{z}{z-1}$ |
+
+由此得式(19.19)离散时间积分补偿器（19.2.1节用梯形近似导出）的离散时间 $z$ 域传递函数：
+
+$$G_{cd}(z) = \frac{v_c(z)}{v_e(z)} = \frac{\omega_o T_s}{2}\, \frac{1 + z^{-1}}{1 - z^{-1}} = \frac{\omega_o T_s}{2}\, \frac{z+1}{z-1} \tag{19.26}$$
+
+表19.2给出了三种离散时间积分器的离散时间 $z$ 域传递函数。
+
+对于连续时间 $s$ 域传递函数（如式(19.15)的连续时间积分补偿器 $G_c(s)$），我们知道对频率 $\omega$ 的正弦扰动的响应可通过将 $s$ 替换为 $j\omega$ 并求 $G_c(j\omega)$ 的幅值和相位得到。特别地，如8.1节讨论并如图8.3所示，积分补偿器幅值响应的波特图是一条 $-20\,\text{dB/dec}$ 斜率的直线。那么 $G_{cd}(z)$ 的频率响应如何？为回答此问题，回忆 $z^{-1}$ 在 $z$ 域中建模单位延迟。另一方面，类似于式(19.12)中建模延迟的方法，对延迟一个采样周期 $T_s$ 的信号 $x(t)$ 施加拉普拉斯变换得
+
+$$\mathcal{L}\{x(t - T_s)\} = \int_{t \to -\infty}^{t \to +\infty} x(t - T_s)\, e^{-st}\, dt = \int_{\tau \to -\infty}^{\tau \to +\infty} x(\tau)\, e^{-s(\tau + T_s)}\, d\tau = e^{-s T_s}\, x(s) \tag{19.27}$$
+
+比较式(19.24)和式(19.27)，可得 $z$ 域传递函数的频率响应可通过将 $z^{-1}$ 替换为 $e^{-s T_s}$、再将 $s$ 替换为 $j\omega$ 求得，与连续时间 $s$ 域传递函数相同：
+
+$$G_{cd}(j\omega) = G_{cd}(z)\big|_{z \to e^{j\omega T_s}} \tag{19.28}$$
+
+让我们求式(19.26)离散时间积分补偿器的频率响应：
+
+$$G_{cd}(j\omega) = \frac{\omega_o T_s}{2}\, \frac{1 + e^{-j\omega T_s}}{1 - e^{-j\omega T_s}} = \frac{\omega_o T_s}{2}\, \frac{e^{j\omega T_s/2} + e^{-j\omega T_s/2}}{e^{j\omega T_s/2} - e^{-j\omega T_s/2}} \tag{19.29}$$
+
+对式(19.29)应用欧拉公式（$e^{jx} = \cos x + j\sin x$）得
+
+$$G_{cd}(j\omega) = -j\, \frac{\omega_o T_s}{2}\, \frac{\cos\left( \dfrac{\omega T_s}{2} \right)}{\sin\left( \dfrac{\omega T_s}{2} \right)} \tag{19.30}$$
+
+![源页 p.816](../assets/page-snapshots/chapter-19/page-816.png)
+
+比较式(19.30)中 $G_{cd}(j\omega)$ 与式(19.15)原始连续时间积分补偿器的频率响应 $G_c(j\omega)$ 是有意义的，
+
+$$G_c(j\omega) = -j\, \frac{\omega_o}{\omega} \tag{19.31}$$
+
+式(19.30)中 $G_{cd}(j\omega)$ 与式(19.31)中 $G_c(j\omega)$ 的相位响应在所有频率上完全相同。两个传递函数在所有频率上均呈现 $-90°$ 相位。应注意，这仅对基于梯形近似的离散时间积分器成立。相比之下，基于前向欧拉或后向欧拉近似的离散时间积分器的相位响应与连续时间积分器的相位响应不同。
+
+为比较幅值响应，先考虑低频 $(\omega T_s/2) \ll 1$，即 $f \ll f_s/\pi$：
+
+$$\left. G_{cd}(j\omega) \right|_{(\omega T_s/2) \ll 1} \approx -j\left( \frac{\omega_o T_s}{2} \right) \frac{1}{\omega T_s/2} = -j\, \frac{\omega_o}{\omega} = G_c(j\omega) \tag{19.32}$$
+
+式(19.32)表明，在远低于采样频率（$f \ll f_s/\pi$）的频段，离散时间积分器的幅值响应很好地近似连续时间积分器的幅值响应。但在更高频率处，幅值响应差异增大。幅值响应的失配在图19.5中可见。本例中 $f = f_s/10$，$v_c[n]$ 与连续时间积分器输出 $v_c(n T_s)$ 之间的失配相对较小但仍可见。
+
+此外，虽然 $\|G_c(j\omega)\| > 0$ 在所有频率成立，但 $\|G_{cd}(j\omega)\| = 0$ 出现在 $\omega T_s/2 = (2k+1)\pi/2$ 处：
+
+$$\|G_{cd}(j\omega)\| = 0,\quad \text{对于}\; f = \frac{f_s}{2},\, \frac{3 f_s}{2}, \cdots \tag{19.33}$$
+
+图19.6比较了 $G_c(s)$ 和 $G_{cd}(z)$ 的幅值响应，取 $f_s = 1\,\text{MHz}$，$f_o = 100\,\text{kHz}$。低频处响应吻合良好，接近 $f_s/2$ 及以上频率处偏离更明显。
+
+图19.6 连续时间和离散时间积分器的幅值响应，$f_s = 1\,\text{MHz}$，$f_o = 100\,\text{kHz}$。离散时间积分器基于梯形近似
+
+![源页 p.817](../assets/page-snapshots/chapter-19/page-817.png)
+
+### 19.2.3 连续时间到离散时间的映射
+
+19.2.1和19.2.2节以简单积分补偿器为例介绍了离散时间系统。本节旨在从更复杂的连续时间补偿器传递函数 $G_c(s)$（如第9章讨论的 PI、PD 和 PID 补偿器）导出离散时间补偿器传递函数 $G_{cd}(z)$。连续时间到离散时间的映射方法有很多，即从 $s$ 域传递函数 $G_c(s)$ 求 $G_{cd}(z)$ 的方法有很多[176]。这里描述一种直接由19.2.1和19.2.2节梯形近似导出离散时间积分器的方法：
+
+$$G_c(s) = \frac{\omega_o}{s} \;\to\; G_{cd}(z) = \frac{\omega_o T_s}{2}\, \frac{z+1}{z-1} \tag{19.34}$$
+
+式(19.34)表明，从任意 $G_c(s)$ 出发，可通过如下替换 $s$ 得到 $G_{cd}(z)$：
+
+$$s \to \frac{2}{T_s}\, \frac{z-1}{z+1} \tag{19.35}$$
+
+利用式(19.35)，$G_{cd}(z)$ 可如下求得：
+
+$$G_{cd}(z) = \left. G_c(s) \right|_{s \to \frac{2}{T_s}\frac{z-1}{z+1}} \tag{19.36}$$
+
+式(19.35)和(19.36)定义的映射称为双线性或 Tustin 映射[176]。图19.7说明了双线性映射的若干性质。本例中，$s$ 域传递函数含若干实极点 $s = 0, -\alpha_1, \ldots, \alpha_5$ 和若干零点 $s = 0, j\beta_1, -j\beta_1, \ldots, -j\beta_5$。由式(19.35)解 $z$ 关于 $s$ 的关系可求得这些极点和零点到 $z$ 平面的映射：
+
+$$z = \frac{1 + \dfrac{s T_s}{2}}{1 - \dfrac{s T_s}{2}} \tag{19.37}$$
+
+图19.7 用双线性法从 $s$ 平面 (a) 到 $z$ 平面 (b) 的映射
+
+![源页 p.818](../assets/page-snapshots/chapter-19/page-818.png)
+
+$s$ 平面的原点 $s = 0$ 映射到 $z$ 平面的 $z = 1$。回忆连续时间积分器在 $s = 0$ 处有极点。因此，离散时间积分器在 $z = +1$ 处有极点。如表19.2所示，这对所有离散时间积分器成立。由式(19.37)可证，$s$ 平面虚轴上的点 $s = j\omega$ 映射到 $z$ 平面单位圆 $\|z\| = 1$ 上的点。$s$ 平面负实轴上的点映射到 $z$ 平面实轴上 $z = +1$ 和 $z = -1$ 之间的点。$s$ 平面的整个左半平面映射到 $z$ 平面单位圆内部。
+
+举例，考虑映射9.5.2节所述 PI 补偿器，
+
+$$G_c(s) = G_{c\infty}\left( 1 + \frac{\omega_L}{s} \right) \tag{19.38}$$
+
+首先，采用双线性映射式(19.36)将补偿器传递函数 $G_{cd}(z)$ 表示为 $z$ 的函数：
+
+$$G_{cd}(z) = G_{c\infty}\left( 1 + \frac{\omega_L\, \dfrac{2}{T_s}\, \dfrac{z-1}{z+1}}{\phantom{\omega_L}} \right) \tag{19.39}$$
+
+经代数化简，可表示为零极点形式
+
+$$G_{cd}(z) = G_{c\infty}\left( 1 + \frac{\omega_L T_s}{2} \right) \frac{z - \dfrac{1 - \omega_L T_s/2}{1 + \omega_L T_s/2}}{z - 1} \tag{19.40}$$
+
+由于 PI 补偿器中 $f_L$ 通常远低于 $f_s$，$(\omega_L T_s/2) \ll 1$，式(19.40)可简化为
+
+$$G_{cd}(z) \approx G_{c\infty}\, \frac{z - (1 - \omega_L T_s)}{z - 1} \tag{19.41}$$
+
+离散时间 PI 补偿器在 $z = 1$ 处有一极点，在约 $1 - \omega_L T_s$ 处有一实零点。对给定采样频率 $f_s = 1/T_s$，当 $\omega_L$ 趋于零时，离散时间零点趋于 $z = 1$。一般而言，映射连续时间低频极点或零点会得到接近 $z$ 平面 $+1$ 点的离散时间极点或零点。这可能导致离散时间补偿器实现中的舍入误差和设计约束，19.4节进一步讨论。
+
+图19.8比较了式(19.38)模拟 PI 补偿器 $G_c(s)$（取 $G_{c\infty} = 1$，$f_L = 20\,\text{kHz}$）与式(19.40)由 $f_s = 1\,\text{MHz}$ 双线性映射所得离散时间 PI 补偿器的幅值和相位响应，
+
+$$G_{cd}(z) = 1.063\, \frac{z - 0.8743}{z - 1} \tag{19.42}$$
+
+可观察到，在远低于采样速率 $f_s$ 的频率范围内，幅值和相位响应吻合很好。图19.8的响应绘制到奈奎斯特频率 $f_s/2 = 500\,\text{kHz}$。
+
+图19.8 模拟连续时间 PI 补偿器 $G_c(s)$（$G_{c\infty} = 1$，$f_L = 20\,\text{kHz}$）与由双线性映射所得离散时间补偿器 $G_{cd}(z)$（$f_s = 1\,\text{MHz}$）的幅值和相位响应
+
+![源页 p.819](../assets/page-snapshots/chapter-19/page-819.png)
+
+作为另一示例，考虑映射9.5.1节所述 PD 补偿器，
+
+$$G_c(s) = G_{c0}\left( 1 + \frac{s}{\omega_z} \right) \left/ \left( 1 + \frac{s}{\omega_p} \right) \right. \tag{19.43}$$
+
+双线性映射式(19.36)得
+
+$$G_{cd}(z) = G_{c0}\left( 1 + \frac{2}{\omega_z T_s} \right) \left/ \left( 1 + \frac{2}{\omega_p T_s} \right) \right. \frac{z - \dfrac{1 - \omega_z T_s/2}{1 + \omega_z T_s/2}}{z - \dfrac{1 - \omega_p T_s/2}{1 + \omega_p T_s/2}} \tag{19.44}$$
+
+离散时间 PD 补偿器在实 $z$ 轴上有一零点和一极点。设 $f_s = 1\,\text{MHz}$，希望数字实现 $G_{c0} = 1$、$f_z = 100\,\text{kHz}$、$f_p = 400\,\text{kHz}$ 的 PD 补偿器。注意此处连续时间零点和极点频率并不比采样频率 $f_s$ 低很多。将数值代入式(19.40)，得
+
+$$G_{cd}(z) = 2.329\, \frac{z - 0.5219}{z + 0.1137} \tag{19.45}$$
+
+图19.9比较了 $G_c(s)$ 和 $G_{cd}(z)$ 的频率响应。由于 PD 补偿器转折频率相对较高，在幅值和相位响应中均可观察到差异，尤其在接近 $f_s/2$ 处。在达到 $\sqrt{f_z f_p} = 200\,\text{kHz}$ 处的最大相位超前后，$G_{cd}$ 的相位随频率下降比 $G_c$ 快得多。$G_{cd}$ 的幅值在所有关心频段内均大于 $G_c$ 的幅值，且幅值响应差异随频率增大。
+
+双线性（Tustin）映射的一种推广称为频率预畸变[176]，可在某种程度上缓解当关心转折频率相对接近 $f_s/2$ 时 $G_c$ 与 $G_{cd}$ 频率响应之间的差异。带预畸的双线性映射如下执行：
+
+$$s \to k_{prewarp}\, \frac{2}{T_s}\, \frac{z-1}{z+1} \tag{19.46}$$
+
+图19.9 模拟连续时间 PD 补偿器 $G_c(s)$（$G_{c0} = 1$，$f_z = 100\,\text{kHz}$，$f_p = 400\,\text{kHz}$）、双线性映射所得离散时间补偿器 $G_{cd}(z)$（$f_s = 1\,\text{MHz}$）以及以 $f_{prewarp} = 200\,\text{kHz}$ 预畸的双线性映射所得离散时间补偿器 $G_{cd}^*(z)$ 的幅值和相位响应
+
+![源页 p.820](../assets/page-snapshots/chapter-19/page-820.png)
+
+$$G_{cd}^*(z) = \left. G_c(s) \right|_{s \to k_{prewarp}\, \frac{2}{T_s}\frac{z-1}{z+1}} \tag{19.47}$$
+
+其中
+
+$$k_{prewarp} = \frac{\omega_{prewarp} T_s/2}{\tan\left( \omega_{prewarp} T_s/2 \right)} \tag{19.48}$$
+
+选取 $k_{prewarp}$ 使 $G_c$ 与 $G_{cd}^*$ 在特定频率 $\omega_{prewarp}$ 处幅值和相位精确匹配，
+
+$$\left\| G_{cd}^*(j\omega_{prewarp}) \right\| = \left\| G_c(j\omega_{prewarp}) \right\|$$
+
+$$\angle G_{cd}^*(j\omega_{prewarp}) = \angle G_c(j\omega_{prewarp}) \tag{19.49}$$
+
+图19.9给出了以预畸频率 $f_{prewarp} = \sqrt{f_z f_p} = 200\,\text{kHz}$ 进行双线性映射所得离散时间补偿器 $G_{cd}^*$ 的频率响应。$G_{cd}^*$ 与 $G_c$ 在预畸频率处的精确匹配以及预畸频率附近的改进匹配，是以较低频率处失配略增为代价的。
+
+作为本节最后一个示例，考虑映射9.5.3节所述连续时间 PID 补偿器。补偿器传递函数为
+
+$$G_c(s) = G_{cm}\left( 1 + \frac{\omega_L}{s} \right)\left( 1 + \frac{s}{\omega_z} \right) \left/ \left( 1 + \frac{s}{\omega_{p1}} \right) \right. \tag{19.50}$$
+
+与式(9.64)相比，式(19.50)的传递函数中已去掉 $f_{p2}$ 处的第二个极点。在实际模拟控制器实现中，$f_{p2}$ 处的高频极点必须存在，以使增益在高频处滚降并
+
+![源页 p.821](../assets/page-snapshots/chapter-19/page-821.png)
+
+防止开关纹波干扰模拟脉宽调制器的工作。此外，由于模拟电路实现的限制（如运放增益带宽积），该高频极点是不可避免的。在图19.1的数字控制器实现中，检测到的模拟电压由 A/D 转换器以等于开关频率的速率采样。因此，开关纹波分量不存在于数字补偿器中，无需将 $f_{p2}$ 处的高频极点映射到离散时间。相反，高频（抗混叠）滤波可保留在模拟域的电压检测传递函数 $H(s)$ 中，用于在 A/D 转换前衰减开关纹波和噪声。利用式(19.47)，得 PID 补偿器的 $z$ 域离散时间传递函数
+
+$$G_{cd}^*(z) = G_d\, \frac{(z - z_L)(z - z_z)}{(z - 1)(z - z_p)} \tag{19.51}$$
+
+其中
+
+$$G_d = G_{cm}\, \frac{f_{p1}}{f_z}\left( 1 + a\, \frac{f_L}{f_{prewarp}} \right)\left( 1 + a\, \frac{f_z}{f_{prewarp}} \right) \left/ \left( 1 + a\, \frac{f_{p1}}{f_{prewarp}} \right) \right. \tag{19.52}$$
+
+$$z_L = \frac{1 - a\, f_L/f_{prewarp}}{1 + a\, f_L/f_{prewarp}},\quad z_z = \frac{1 - a\, f_z/f_{prewarp}}{1 + a\, f_z/f_{prewarp}},\quad z_p = \frac{1 - a\, f_{p1}/f_{prewarp}}{1 + a\, f_{p1}/f_{prewarp}} \tag{19.53}$$
+
+$$a = \tan\left( \frac{\pi\, f_{prewarp}}{f_s} \right) \tag{19.54}$$
+
+本节讨论的映射技术以及其他许多技术，都得到 MATLAB[236]等计算机工具的良好支持。表19.3总结了双线性映射（式19.35、19.36）和带预畸的双线性映射（式19.46–19.48）及对应的 MATLAB 函数。
+
+表19.3 连续时间到离散时间的映射
+
+| 方法 | 映射 | MATLAB 函数 |
 |---|---|---|
-| TODO | TODO | TODO |
+| 双线性（Tustin） | $s \to \dfrac{2}{T_s}\, \dfrac{z-1}{z+1}$ | `Gcd = c2d(Gc,Ts,'tustin')` |
+| 带预畸的双线性（Tustin） | $s \to k_{prewarp}\, \dfrac{2}{T_s}\, \dfrac{z-1}{z+1}$ | `Gcd = c2d(Gc,Ts,'prewarp',wprewarp)` |
 
-## 中文翻译
+![源页 p.822](../assets/page-snapshots/chapter-19/page-822.png)
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+## 19.3 离散时间补偿器设计
 
-## 英文原文
+数字控制变换器中的环路增益 $T_d$ 包含传感器传递函数 $H(s)$、控制-输出传递函数 $G_{vd}(s)$、建模为 $G_{delay}(s) = e^{-s t_d}$ 的延迟以及补偿器传递函数 $G_{cd}(z)$（或 $G_{cd}^*(z)$）。应注意环路增益不包含零阶保持器。环路增益 $T_d$ 的幅值和相位响应可如下求得
 
-```text
-19
-Digital Control of Switched-Mode Power Converters
-Digital control methods and digital controllers based on general-purpose or dedicated micro-
-controllers, digital signal processors (DSP’s), or programmable logic devices have been widely
-adopted in power electronics applications at relatively high-power levels, including motor drives
-or grid-tied three-phase inverters and rectiﬁers. In these applications, digital control oﬀers clear
-technical and economic advantages in addressing complex control, management, and monitor-
-ing tasks. Digital control is also applicable to ubiquitous low-to-medium power switched-mode
-power conversion applications such as point-of-load (POL) regulators, non-isolated and iso-
-lated dc–dc converters, single-phase power factor correction (PFC) rectiﬁers and inverters, etc.
-In these applications, switching frequencies are typically in the range from hundreds of kilo-
-hertz to multiple megahertz, and much faster dynamic responses are required. The controller
-cost and the controller power consumption can easily present signiﬁcant portions of the system
-cost and power dissipation. In many applications, control challenges have been successfully
-met by continuous advances of readily available analog controllers, using analysis, modeling,
-and design techniques discussed in other chapters of this book. More recently, practical digital
-control of high-frequency switched-mode power converters has moved from proof-of-concept
-laboratory demonstrations [181–189], to digital PWM controller (DPWM) chips commercially
-available from multiple vendors. A number of mixed-signal DPWM controller architectures and
-implementation strategies have been investigated and realized in practice. For example, many
-standard microcontrollers or DSP chips are now available, featuring multiple PWM and analog-
-to-digital (A/D) conversion channels, allowing software-based control and power management
-functions. High-performance digital control loops can also be realized using digital logic im-
-plemented in ﬁeld-programmable gate array (FPGA) chips or specialized integrated circuits,
-together with custom DPWM and A/D blocks, while programmability, power management, and
-system interface functions are delegated to embedded microcontrollers.
-In addition to taking advantage of continuous and rapid advances in digital controller re-
-alizations, digital control techniques have opened opportunities for advances in high-frequency
-switched-mode power conversion applications. Advantages of digital control include programma-
-bility of parameters and ﬂexibility in applications. Furthermore, practical realizations of more
-advanced techniques have been demonstrated, including approaches leading to improved dy-
-namic responses [190–201], system identiﬁcation [202–205], auto-tuning and adaptive control
-methods [206–214], as well as eﬃciency optimization and power management functions [215–
-222].
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_19
-805
+$$T_d(j\omega) = \left. \left( H(s)\, G_{vd}(s)\, e^{-s t_d} \right) \right|_{s \to j\omega}\, \left. G_{cd}^*(z) \right|_{z \to e^{j\omega T_s}} \tag{19.55}$$
 
-806 19 Digital Control of Switched-Mode Power Converters
-Switching converter
-Digital controller
-Analog-to-digital
-converter
-Discrete-time
-compensator
-Gate drives
-Load
-Digital
-PWM
-Ts
-L
-CR v(t)
-+
-H(s)
-vref
-ve(t)
-A/DGcd (z)
-c(t)
-vg(t)
-iL(t)
-ve[n]vc[n]
-d[n]Ts
-Fig. 19.1 Digitally controlled switched-mode power converter
-The purpose of this chapter is to provide an introduction to analysis, modeling, and design
-of digital control for high-frequency switched-mode power converters. Figure19.1 shows a dig-
-itally controlled converter, using the synchronous buck converter as an example. The objectives
-are to develop understanding of the operation of the digital PWM control loop, including the
-eﬀects of delays and quantization, to model the loop dynamics, and to enable the reader to de-
-sign high-performance digital control loops. It is assumed that the reader has mastery of the
-materials in the preceding chapters, especially Chaps. 7–9, but no background in discrete-time
-or digital control is assumed. Signal propagation and functional blocks in the digital control
-loop are discussed in Sect. 19.1. Section 19.2 presents an introduction to discrete-time systems.
-Discrete-time compensator design is presented in Sect. 19.3, while Sect. 19.4 gives an introduc-
-tion to digital controller implementation techniques. A more detailed treatment of the subject
-of digital control of high-frequency switched-mode power converters can be found in [223].
-19.1 Digital Control Loop
-In the digitally controlled switching converter of Fig.19.1, the output voltage is measured using
-a sensor with gain H(s). The transfer function H(s) may include scaling and analog ﬁltering of
-the output voltage. As in the conventional analog control loop, the sensor output signal is com-
-pared with a reference voltage vre f to obtain the error signal ve(t). The error signal is sampled
-in time and quantized in amplitude by an analog-to-digital (A/D) converter. The A/D sampling
-usually occurs at a constant rate, which is called the sampling frequency fsampling = 1/Tsampling .
-Then the A/D output ve[n] is a digital word that represents the analog error signal ve at time
-t= nTsampling .T h eA/D sampling frequency is in general synchronized with the switching fre-
-quency fs, fsampling = kf s, where k is a positive integer. In practice, a common choice is to select
-the sampling period to be equal to the switching period: k= 1,
-Tsampling = Ts (19.1)
+与模拟电压模式控制变换器的环路增益（式(9.4)，$V_M = 1$）相比，式(19.55)有两点不同：延迟的存在，以及补偿器 $G_{cd}$ 的采样数据离散时间性质。下面的示例说明这些差异。
 
-19.1 Digital Control Loop 807
-Based on the discretized error signals ve[n], the digital compensator Gcd updates the duty-cycle
-command signal vc[n] at the input of the digital pulse-width modulator (DPWM). Finally, given
-vc[n], the DPWM outputs a switch control signal c(t) with duty cycle d[n] proportional to the
-duty-cycle command vc[n]. The digital control loop is conceptually very similar to the standard
-analog voltage-mode control loop discussed in Sect. 9.1, but with two signiﬁcant diﬀerences
-due to (1) quantization in amplitude, and (2) sampling, i.e., quantization in time.
-19.1.1 A/D and DPWM Quantization
-In the control loop illustrated in Fig. 19.1, the digital signals ve[n] and vc[n] are represented by
-digital variables having a ﬁnite number of bits. Practical A/D converters produce digital outputs
-having a limited number of bits such as 12 or 14. Digital pulse-width modulators similarly are
-limited in their resolution. This section introduces the quantization characteristics of the A /D
-converter and of the digital pulse-width modulator.
-Analog-to-Digital Conversion
-In addition to sampling in time, the A /D converter performs quantization in amplitude. Fig-
-ure 19.2a shows the quantization characteristic QA/D of a standard A/D converter operating
-over an analog input voltage range from 0 to a full-scale voltage VFS . The sensed analog sig-
-nal Hv is quantized to an nA/D-bit digital word. The least signiﬁcant bit (LSB) value of this
-quantized signal is
-qA/D= VFS
-2nA/D
-(19.2)
-where nA/D is the A/D resolution in bits. The example in Fig. 19.2ai ss h o w nf o rnA/D = 3.
-The A/D-converted sensed analog signal is digitally subtracted from the reference voltage vre f
-to obtain the digital error signal ve[n]. As an alternative, the A/D quantization can be viewed
-as shown in Fig. 19.2b, where the quantization characteristic is centered around zero. Either
-way, analog voltages within a zero-error bin of width qA/D produce a zero digital error signal
-ve[n]= 0, which implies that the LSB resolution qA/D determines how well the output voltage
-can be regulated by the digital control loop.
-As an example, suppose that H= 1, and that it is desired to regulate the output dc voltage
-V within± 0.25% of Vre f = 1V ,i.e., within± 2.5 mV . The LSB resolution must therefore meet
-the condition qA/D< 5 mV . Equation (19.2) implies that the required A/D resolution in bits is
-nA/D> log2
-⎦VFS
-qA/D
-)
-(19.3)
-Suppose VFS = 2 V , which is a typical full-scale voltage value for standard A /D converters.
-Then an A/D resolution of at least nA/D = 9 bits is required to meet the dc voltage regulation
-speciﬁcation. When the quantization is centered around zero, as shown in Fig. 19.2b, the same
-LSB resolution can be achieved but the voltage conversion range can be reduced, thus eﬀectively
-reducing the number of bits required to represent ve[n]. Such “window” A/D converters have
-been described in [181, 182, 184, 193].
-Digital Pulse-Width Modulation
-Digital pulse-width modulation, illustrated in Fig.19.3a, follows the same principles as the stan-
-dard analog PWM described in Sect. 7.3,F i g .7.30. The duty-cycle command signal vc[n]i s
+**示例**
 
-808 19 Digital Control of Switched-Mode Power Converters
-ve
-ve[n]= QA/D(ve)QA/D(Hv)
-qA/D qA/D
-ve[n]
-Zero-error
-bin
-Zero-error
-bin
-ve[n]= ve
-Hv
-(a) (b)
-VFS0
-Fig. 19.2 A/D quantization characteristic over (a)0 −VFS voltage range, and (b) centered around zero
-error
-compared with a digital saw-tooth ramp, so that the duty cycle d[n] of the output control sig-
-nal c(t) is proportional to vc[n] .A ss h o w ni nF i g .19.3a, the time resolution of the c(t) pulse is
-qDPWM Ts where
-qDPWM = 1
-2nDPWM
-(19.4)
-and nDPWM is the DPWM resolution in bits. In the example shown in Fig. 19.3, nDPWM = 3.
-vc[n]
-qDPW M
-d[n]
-0
-0
-1
-1
-Ts
-d[n]Ts
-t
-c(t)
-(a) (b)
-QDPW M(vc[n])
-qDPW MTs
-t0
-2nDPW M − 1
-Fig. 19.3 Digital pulse-width modulator: (a) time-quantization of the gate-drive signalc(t)a n d(b) quan-
-tization characteristic
+本示例旨在求式(19.55)环路增益频率响应并与模拟控制器下的环路增益响应比较。为工作于 $f_s = 1\,\text{MHz}$ 开关频率的同步降压变换器设计一个模拟 PID 补偿器。式(9.64)给出的模拟补偿器传递函数，取 $f_L = 8\,\text{kHz}$，$f_z = 33\,\text{kHz}$，$G_{cm} = 5.45$，$f_{p1} = 300\,\text{kHz}$，$f_{p2} = 1\,\text{MHz}$，得到穿超频率 $f_c = 100\,\text{kHz}$，相位裕度 $52°$。平衡时 $V = V_{ref} = 1.8\,\text{V}$，故 $D \approx V/V_g = 0.36$。
 
-19.1 Digital Control Loop 809
-In Fig. 19.3a it is assumed that the amplitude of the digital saw-tooth ramp is 1 −2−nDPWM
-which corresponds to the equivalent DPWM gain equal to 1 V−1, i.e., VM = 1 V . The resulting
-DPWM quantization characteristic is shown in Fig. 19.3b.
-In a standard DPWM implementation, the digital saw-tooth ramp is generated simply by a
-digital counter driven by a digital clock with frequency fclk. The DPWM timing resolution is
-then determined by the clock period Tclk= 1/ fclk,
-qDPWM Ts= Tclk (19.5)
-The duty-cycle resolution determines how precisely the converter output voltage can be posi-
-tioned. For example, in a buck converter of Fig. 19.1, the dc output voltage is V= DVg.G i v e n
-the duty-cycle quantization, the output voltage positioning resolution is therefore
-ΔV= qDPWM Vg (19.6)
-or,
-ΔV
-V = qDPWM
-Vg
-V = 1
-2nDPWM
-1
-M (19.7)
-Suppose that it is desired to position the output voltage within 0 .1% in a converter with
-M= V/Vg = 0.2. Equation ( 19.7) implies that a 13-bit DPWM is required to meet the volt-
-age positioning speciﬁcation, while Eq. ( 19.5) implies that a standard DPWM implementation
-would require a clock frequency
-fclk= 2nDPWM fs= 8192 fs (19.8)
-If, for example, fs = 1 MHz, the required time resolution is 122 ps, and the required clock
-frequency is fclk = 8.192 GHz. Equation ( 19.8) illustrates one of the practical challenges in
-implementation of digital PWM controllers for high-frequency switched-mode power convert-
-ers: the high switching frequency and the need for high DPWM resolution require high sys-
-tem clock frequency. This problem has been addressed using alternative DPWM implemen-
-tation techniques, resulting in practical high-frequency, high-resolution DPWM realizations
-[181, 182, 184, 185, 188, 224–234].
-Ideal Quantization Characteristics
-The A/D and the DPWM quantization characteristics are highly nonlinear, which has implica-
-tions on the stability and operation of the digitally controlled converter. Until we return to the
-A/D and the DPWM quantization eﬀects in Sect. 19.4.2, we will assume that high-resolution
-A/D and DPWM units are available so that quantization-induced nonlinearities in the digital
-control loop can be neglected:
-v
-e[n]= QA/D(ve(nTs))≈ve(nTs)
-d[n]≈vc[n]
-VM
-= vc[n]
-1V
-(19.9)
-For the DPWM, a common assumption is that VM = 1 V . The ideal (very high resolution)
-quantization characteristics in Eq. ( 19.9) imply that the A/D converter and the DPWM blocks
-can be modeled simply as unity gain blocks, ve[n]/ve(nTs)= 1, d[n]/vc[n]= 1V−1.
+在将模拟补偿器映射到离散时间之前，先从模拟补偿器传递函数中去掉 $f_{p2}$ 处的高频极点。该极点改为分配给 A/D 转换器前电压检测中的模拟抗混叠滤波器，
 
-810 19 Digital Control of Switched-Mode Power Converters
-Steady-state
-Transient
-t
-t
-t
-t
-Ts
-Ts
-ve(t)
-td
-DTs
-0
-Dc error
-nTs (n + 1)Ts
-(a)
-(b)
-(c)
-(d)
-vc[n]
-d[n]Ts
-tctrl
-ve[n]
-c(t)
-ˆc(t)
-Fig. 19.4 Operating waveforms in a digitally controlled switched-mode power converter
-19.1.2 Sampling and Delays in the Control Loop
-Figure 19.4 illustrates steady-state and transient operation of a digitally controlled converter
-where Eq. ( 19.1) is satisﬁed, so that the A /D sampling rate equals the switching frequency.
-Ideally, the digital sample ve[n] of the error signal equals the value of the analog error signal
-ve(t) at time nTs, ve[n]= ve(nTs). The quantity controlled by the digital feedback loop is the
-sampled value ve[n] of the analog error signal ve(t). Assuming a well-designed feedback loop
-with very large dc loop gain, the steady-state error is driven to zero, as shown in Fig.19.4a:
-ve[n]→0 (19.10)
-In equilibrium, the dc value Ve of the analog error signal may not be equal to zero. The dc
-regulation error in the digitally controlled loop is a result of the fact that the error signal ve(t)
-includes switching ripple so that the sample ve[n] is not necessarily equal to the dc value Ve.
-The digitally controlled converter is a sampled-data system. With A /D sampling equal to the
-switching frequency, the dc error in equilibrium can be interpreted as aliasing of the switching
-ripple components to dc. The error is no larger than the amplitude of the ripple. A practical
-implication is that sampling should be performed away from points in time when the sampled
+$$H(s) = \frac{1}{1 + \dfrac{s}{\omega_{p2}}} \tag{19.56}$$
 
-19.1 Digital Control Loop 811
-analog signal may include large noise caused by switching transitions, such as immediately
-after switching events. Aliasing errors can be reduced by including an “anti-aliasing” analog
-low-pass ﬁlter before the A/D converter, or by sampling the analog signal at a rate higher than
-the switching frequency and performing the anti-aliasing ﬁltering digitally.
-More generally, it should be understood that A/D sampling at fs aliases any frequency com-
-ponents of the analog signal beyond the Nyquist rate fs/2 back to frequencies below fs/2[ 235].
-Therefore, when we discuss frequency responses of the discrete-time compensatorGcd, we will
-restrict our attention to frequencies up to the Nyquist frequency fs/2.
-Let us now consider propagation of the signals through the digital control loop. Since the
-A/D conversion is not instantaneous, the digital signal ve[n] is available to the digital controller
-after a certain time interval commonly referred to as A/D conversion time. Given the updated
-ve[n], the discrete-time compensatorGcd computes an update to the digital duty-cycle command
-signal vc[n] at the input of the digital pulse-width modulator (DPWM). Combined, the A /D
-conversion time plus the time it takes to computevc[n], equal a controller time delay tctrl shown
-in Fig. 19.4. The duty-cycle command vc[n] is held constant through the switching period, as
-shown in Fig. 19.4b. In response, the digital pulse-width modulator outputs a control pulse c(t)
-shown in Fig. 19.4c with duty cycle d[n], where d[n]= vc[n]/VM = vc[n], assuming VM = 1V .
-The diﬀerence ˆc(t) between the modulated and the steady-state pulse at the DPWM output is
-shown in Fig. 19.4d. Note that the response ˆc(t) occurs with delay DTs after the time vc[n]i s
-updated, which is a result of the sampling process associated with pulse-width modulation, as
-discussed in Sect. 15.5.
-It is important to note that there are two sampling processes in the digital control loop of
-Fig. 19.1: sampling by the A/D converter and sampling by the pulse-width modulator. The time
-between the two sampling events represents the delay in the digital control loop,
-td= tctrl+ tmod= tctrl+ DTs (19.11)
-The control loop delay in Eq. (19.11) includes two components: the timetctrl required to perform
-A/D conversion and the time required by the digital compensator to compute an update of the
-signal vc[n] at the DPWM inputs, and the modulator delay tmod = DTs associated with the
-trailing-edge digital pulse-width modulator. Other DPWM types, such as leading-edge or dual-
-edge DPWM oﬀer diﬀerent modulator delays, as summarized in Table19.1 [223]. These results
-are consistent with the analysis presented in [68].
-Table 19.1 Delays in regularly sampled pulse-width modulators
-PWM Modulator delay tmod
-Trailing-edge DTs
-Leading-edge (1 −D)Ts
-Dual-edge Ts/2
+基于式(19.50)的 $G_c(s)$，采用以目标穿超频率为预畸频率的双线性映射，由式(19.52)–(19.54)得到式(19.51)的离散时间补偿器：
 
-812 19 Digital Control of Switched-Mode Power Converters
-In the frequency domain, the eﬀect of the delay td in the digital control loop can be modeled
-by applying the Laplace transform to a signal delayed by td, as follows:
-L{x(t−td)}=
-t→+∞∫
-t→−∞
-x(t−td)e−stdt=
-τ→+∞∫
-τ→−∞
-x(τ)e−s(τ+td )dτ= e−std x(s) (19.12)
-It follows that the Laplace-transform frequency-domain model of the delay td is given by
-Gdelay(s)= e−std (19.13)
-with magnitude response|| Gdelay( jω)||= 1, and phase response given by
-∠Gdelay( jω)=−ωtd (19.14)
-The phase lag of Eq. (19.14) can be signiﬁcant, and should be taken into account in the design
-of the discrete-time compensator. This issue is discussed further in Sect. 19.3.
-19.2 Introduction to Discrete-Time Systems
-The purpose of this section is to present a brief introduction to discrete-time system analysis and
-modeling techniques. The techniques presented in this section enable design of the discrete-time
-compensator Gcd(z) in the digitally controlled converter of Fig.19.1.
-19.2.1 Integration in Continuous Time and in Discrete Time
-A standard analog control loop around a switching converter is shown in Fig.7.1. The continuous-
-time compensator Gc(s) can be designed based on the frequency-domain techniques discussed
-in Chap. 9. Consider a simple integral compensator,
-Gc(s)= vc(s)
-ve(s)=ωo
-s (19.15)
-where ve is the error signal and vc is the signal applied to the input of the pulse-width modulator.
-The continuous-time, s-domain transfer function Gc(s) has a pole at s= 0. In the time domain,
-the output vc(t) of the compensator is an integral of the input ve(t),
-vc(t)= vc(0)+ωo
-t∫
-0
-ve(τ)dτ (19.16)
-where vc(0) is the initial condition att= 0. Figure 19.5 illustrates an example of waveformsvc(t)
-and ve(t). In this example, ve(t) is a sinusoidal waveform at frequency fs/10, where fs = 1/Ts
-is the sampling frequency. Let us now consider how to realize the integral compensator in the
-digital controller shown in Fig.19.1, i.e., how to compute the samples vc[n] at the discrete-time
-compensator output given the discrete-time samples ve[n]= ve(nTs) at the compensator input.
-First, note that the continuous-time integration in Eq. (19.16) can be written as:
+$$G_{cd}^*(z) = 27.3898\, \frac{(z - 0.9493)(z - 0.8063)}{(z - 1)(z - 0.01278)} \tag{19.57}$$
 
-19.2 Introduction to Discrete-Time Systems 813
-t
-t
-(a)
-(b)
-ve(t)
-vc(t)
-Ts
-ve[n− 1]
-ve[n]
-vc[n]
-vc[n− 1]
-Fig. 19.5 Continuous-time and discrete-time integration
-vc(t)= vc(t−Ts)+ωo
-t∫
-t−Ts
-ve(τ)dτ. (19.17)
-To reproduce Eq. (19.17) exactly, the discrete-time compensator should perform the following
-calculation:
-vc(nTs)= vc[n]= vc[n−1]+ωo
-nTs∫
-(n−1)Ts
-ve(τ)dτ (19.18)
-where the integral over the interval (n−1)Ts to Ts represents the area under the waveform ve(t)
-over the sampling interval Ts between t= (n−1)Ts and t= nTs. However, since values ofve(t)
-are only available at discrete-times, the exact reproduction of the continuous-time integration in
-Eq. (19.18) is not feasible. Instead, one must perform the integration approximately, using only
-the available discrete-time samples of ve. One approach, based on a trapezoidal approximation
-to the area under the waveform ve over a sampling period Ts, is illustrated in Fig. 19.5:
-vc[n]= vc[n−1]+ωoTs
-ve[n]+ ve[n−1]
-2 (19.19)
-The computation of vc[n]i nE q .( 19.19) is relatively simple, requiring only an addition of
-ve[n−1] and ve[n], a multiplication by a constant, and an addition of the product and the
-previously computed vc[n−1]. It is clear that Eq. (19.19) can easily be implemented in digital
-logic hardware or as simple lines of code in software. Figure 19.5 shows how the samples vc[n]
-obtained by the approximate discrete-time integration in Eq. ( 19.19) are close to, but not ex-
-actly equal to the samples vc(nTs) of the analog integrator output signal vc(t). For a given ve(t),
-increase of the sampling frequency causes the diﬀerences between the samples vc(nTs)o ft h e
-analog, continuous-time integration in Eq. (19.17) and the discrete-time integrator outputsvc[n]
-in Eq. (19.19) to diminish.
+由式(19.55)求得的环路增益 $T_d$ 的幅值和相位响应如图19.10所示，对应若干环路延迟 $t_d$ 值，并与模拟控制变换器（$t_d = 0$）的环路增益响应比较。以穿超频率为预畸频率的双线性映射很好地保持了幅值响应。此外，延迟项完全不影响幅值响应。因此，数字控制环路的幅值响应与模拟控制器的环路增益幅值响应基本相同，穿超频率保持不变，$f_c \approx 100\,\text{kHz}$。然而，数字控制环路延迟对相位响应和所得相位裕度的影响更显著。考虑的最短延迟 $t_d = D T_s = 0.36\,\mu\text{s}$ 假设一个高性能数字控制器，A/D 转换和补偿器计算很快完成，$t_{ctrl} \approx 0$。由式(19.14)，穿超频率处的附加相位滞后为 $-\omega_c t_d = -13°$，使相位裕度降到 $52° - 13° = 39°$。延迟 $t_d = D T_s + T_s/2 = 0.86\,\mu\text{s}$（对应 $t_{ctrl} = T_s/2 = 0.5\,\mu\text{s}$）使相位裕度降到 $52° - 31° = 21°$。最后一种情况是 A/D 转换和补偿器计算耗时整个开关周期 $t_{ctrl} = T_s$，代表非常低性能的数字
 
-814 19 Digital Control of Switched-Mode Power Converters
-The trapezoidal approximation leading to Eq. (19.19) is not the only possible way to approx-
-imate continuous-time integration in discrete-time. The backward Euler approximation is given
-by:
-vc[n]= vc[n−1]+ωoTsve[n−1] (19.20)
-The forward Euler approximation is
-vc[n]= vc[n−1]+ωoTsve[n]. (19.21)
-All three approximations ﬁnd application; generally the trapezoidal approximation is more ac-
-curate.
-19.2.2 z-Transform and Frequency Responses of Discrete-Time Systems
-Equations ( 19.19), ( 19.20), and ( 19.21) deﬁne three discrete-time integral compensators in
-the time domain. In the previous chapters, we have extensively relied on the continuous-
-time Laplace transform, s-domain transfer functions, as well as on frequency responses and
-frequency-domain analysis, modeling and design techniques. It is of interest to introduce the
-corresponding transforms and frequency-domain techniques developed for discrete-time sys-
-tems [176]. The introduction here is intended to be very brief and at a basic level, but su ﬃ-
-cient to enable the reader to undertake digital controller designs based on the standard analog,
-continuous-time background provided in the previous chapters.
-In discrete-time systems, the Z-transform plays the role the Laplace transform has in
-continuous-time circuits and systems. Given a discrete-time signal x[n], the Z-transform is
-deﬁned as
-Z{x[n]}= x(z)=
-n→+∞∑
-n→−∞
-x[n]z−n (19.22)
-Just like the Laplace transform, theZ-transform is linear:
-Z{ax[n]+ by[n]}= aZ{x[n]}+ bZ{y[n]}= ax(z)+ by(z) (19.23)
-where a and b are constants. For a variable delayed by one sampling period, the Z-transform
-can be found as follows:
-Z{x[n−1]}=
-n→+∞∑
-n→−∞
-x[n−1]z−n=
-k→+∞∑
-k→−∞
-x[k]z−(k+1)= z−1
-k→+∞∑
-k→−∞
-x[k]z−k= z−1 x(z) (19.24)
-It follows that delaying a discrete-time signal by a sampling period in time domain is equivalent
-to multiplying theZ-transform of the signal by a factor z−1. In other words, z−1 models a unit
-delay in the z-domain.
-Application of the Z-transform, including Eq. ( 19.24), to the discrete-time integrator
-Eq. (19.19), yields
-vc(z)= z−1vc(z)+ωoTs
-ve(z)+ z−1ve(z)
-2 (19.25)
+![源页 p.823](../assets/page-snapshots/chapter-19/page-823.png)
 
-19.2 Introduction to Discrete-Time Systems 815
-Table 19.2 Transfer functions of discrete-time integrators
-Approximation Gcd(z)
-Trapezoidal ωoTs
-2
-z+ 1
-z−1
-Backward Euler ωoTs
-1
-z−1
-Forward Euler ωoTs
-z
-z−1
-which leads to the discrete-time, z-domain transfer function of the discrete-time integral com-
-pensator of Eq. (19.19), derived using the trapezoidal approximation in Sect. 19.2.1:
-Gcd(z)= vc(z)
-ve(z)=ωoTs
-2
-1+ z−1
-1−z−1 =ωoTs
-2
-z+ 1
-z−1 (19.26)
-Table 19.2 shows the discrete-time z-domain transfer functions for the three considered discrete-
-time integrators.
-For continuous-time s-domain transfer functions, such as the continuous-time integral com-
-pensator Gc(s)i nE q .( 19.15), we know that the response to a sinusoidal perturbation at fre-
-quencyωcan be found by replacing s with jω, and evaluating the magnitude and phase of
-Gc( jω). In particular, as discussed in Sect. 8.1 and shown in Fig. 8.3, the Bode plot of the inte-
-gral compensator magnitude response is a straight line with−20 dB/decade slope. What can be
-said about the frequency responses of Gcd(z)? To answer this question, recall that z−1 models a
-unit delay in the z-domain. On the other hand, similar to the approach taken to model a delay
-in Eq. (19.12), applying the Laplace transform to a signal x(t) delayed by a sampling period Ts
-results in
-L{x(t−Ts)}=
-t→+∞∫
-t→−∞
-x(t−Ts)e−stdt=
-τ→+∞∫
-τ→−∞
-x(τ)e−s(τ+Ts)dτ= e−sTs x(s) (19.27)
-By comparing Eq. ( 19.24) and Eq. ( 19.27), we conclude that the frequency response of a z-
-domain transfer function can be found by replacing z−1 with e−sTs , and then s with jω,a si nt h e
-case of continuous-time s-domain transfer functions:
-Gcd( jω)= Gcd(z)|z→ejωTs (19.28)
-Let us evaluate the frequency response of the discrete-time integral compensator in Eq. (19.26):
-Gcd( jω)=ωoTs
-2
-1+ e−jωTs
-1−e−jωTs
-=ωoTs
-2
-ejωTs/2+ e−jωTs/2
-ejωTs/2−e−jωTs/2 (19.29)
-Application of Euler’s formula (ejx = cos x+ j sin x)t oE q .(19.29) leads to
-Gcd( jω)=−jωoTs
-2
-cos
-⎦ωTs
-2
-)
-sin
-⎦ωTs
-2
-) (19.30)
+图19.10 同步降压变换器设计示例中，模拟控制器（$t_d = 0$）和若干环路延迟 $t_d = D T_s = 0.36\,\mu\text{s}$、$t_d = D T_s + 0.5 T_s = 0.86\,\mu\text{s}$、$t_d = D T_s + T_s = 1.36\,\mu\text{s}$ 下数字控制器的环路增益幅值和相位响应
 
-816 19 Digital Control of Switched-Mode Power Converters
-It is of interest to compare the frequency responses ofGcd( jω)i nE q .(19.30) with the frequency
-response Gc( jω) of the original continuous-time integral compensator in (19.15),
-Gc( jω)=−jωo
-ω (19.31)
-The phase responses ofGcd ( jω)i nE q .(19.30) and Gc( jω)i nE q .(19.31) are exactly the same at
-all frequencies. Both transfer functions exhibit−90◦phase at all frequencies. It should be noted
-that this is the case only for the discrete-time integrator based on the trapezoidal approxima-
-tion. In contrast, the phase responses of the discrete-time integrator based on the forward Euler
-or the backward Euler approximations diﬀer from the phase response of the continuous-time
-integrator.
-To compare the magnitude responses, consider ﬁrst low frequencies such that (ωT
-s/2)≪ 1,
-i.e., f≪ fs/π,
-Gcd( jω)
-⏐⏐
-⏐⏐
-(ωTs/2)≪1
-≈−j
-⎦ωoTs
-2
-) 1⎦ωTs
-2
-)=−jωo
-ω= Gc( jω) (19.32)
-Equation ( 19.32) shows that the magnitude response of the discrete-time integrator approxi-
-mates very well the magnitude response of the continuous-time integrator at frequencies su ﬃ-
-ciently low compared to the sampling frequency ( f ≪ fs/π). At higher frequencies, however,
-the diﬀerences in magnitude responses increase. The mismatch in magnitude responses is visi-
-ble in Fig. 19.5. In this example, f= fs/10, and the mismatches between vc[n] and the values
-vc(nTs) obtained at the output of the continuous-time integrator are relatively small, but visible.
-Furthermore, while||Gc( jω)||> 0 at all frequencies, ||Gcd( jω)||= 0 at frequencies such that
-ωTs/2= (2k+ 1)π/2: Gcd( jω)
-= 0, for f= fs
-2, 3 fs
-2 ,··· (19.33)
-The magnitude responses of Gc(s) and Gcd(z) are compared in Fig. 19.6 for fs = 1 MHz and
-fo= 100 kHz. The responses match closely at low frequencies, and depart more signiﬁcantly at
-frequencies approaching fs/2 and beyond.
-0.001 0.01 0.1 0.5 1 2
--40
--30
--20
--10
-0
-10
-20
-30
-40
-Magnitude, dB
-f
-fs
-||Gcd ( jw)||
-||Gc( jw)||
-Fig. 19.6 Magnitude responses of the continuous-time and discrete-time integrators, fs = 1M H z ,fo =
-100 kHz. The discrete-time integrator is based on the trapezoidal approximation
+实现。此时延迟 $t_d = D T_s + T_s = 1.36\,\mu\text{s}$ 使相位裕度仅剩 $52° - 49° = 3°$。本示例说明，环路延迟在高频开关功率变换器的高性能宽带宽数字控制环路设计中是非常显著的因素。
 
-19.2 Introduction to Discrete-Time Systems 817
-19.2.3 Continuous Time to Discrete Time Mapping
-Sections 19.2.1 and 19.2.2 introduced discrete-time systems using a simple integral compen-
-sator example. The objective of this section is to derive discrete-time compensator transfer
-functions Gcd(z) starting from more complex continuous-time compensator transfer functions
-Gc(s), such as PI, PD and PID compensators discussed in Chap. 9. There are many diﬀerent
-continuous-time to discrete-time mapping approaches, i.e., approaches to ﬁnding Gcd(z)s t a r t -
-ing from an s-domain transfer function Gc(s)[ 176]. Here we describe a mapping approach that
-follows directly from the derivation of the discrete-time integrator in Sects. 19.2.1 and 19.2.2
-using the trapezoidal approximation:
-Gc(s)=ωo
-s →Gcd(z)=ωoTs
-2
-z+ 1
-z−1 (19.34)
-Equation (19.34) suggests that starting from an arbitrary Gc(s), Gcd(z) can be obtained by re-
-placing s as follows:
-s→2
-Ts
-z−1
-z+ 1 (19.35)
-By use of Eq. (19.35), Gcd(z) can be found as:
-Gcd(z)= Gc(s)
-⏐⏐⏐
-⏐
-s→2
-Ts
-z−1
-z+1
-(19.36)
-The mapping deﬁned by Eqs. ( 19.35) and (19.36) is known as the bilinear or Tustin mapping
-[176]. Figure 19.7 illustrates several properties of the bilinear mapping. In this example, an s-
-domain transfer function contains several real poles at s= 0,−α1,...,α5 and several zeroes at
-s= 0, jβ1,−jβ1,..., −jβ5. The mapping of these poles and zeroes into the z-plane is found by
-solving for z in terms of s from Eq. (19.35):
-z=
-1+ sTs
-2
-1−sTs
-2
-(19.37)
-(a) (b)
-Re(z)
-Im(z)
--0.5 s
-1
-2
-3
-4
-5
-- 1- 2- 3- 4- 5
-- 5
-- 4
-- 3
-- 2
-- 1
-- 1- 2- 3- 4- 5
-1
-2
-34
-5
-- 5 - 4 - 3
-- 2
-- 1
--1 +1
-+0.5 s
--0.5 s
-Im(s)
-Re(s)
-Fig. 19.7 Mapping from s-plane (a)t o z-plane (b) using the bilinear method
+### 19.3.1 设计流程
 
-818 19 Digital Control of Switched-Mode Power Converters
-The origin s= 0i nt h e s-plane maps to z= 1i nt h e z-plane. Recall that a continuous-time
-integrator has a pole at s= 0. Hence, a discrete-time integrator has a pole at z=+ 1. As shown
-in Table 19.2, this is true for all discrete-time integrators. From Eq. ( 19.37), it can be shown
-that points s= jωon the s-plane imaginary axis map to points on the unit circle || z||= 1i n
-the z-plane. Points on the negative real axis in the s plane map to points on the real axis in the
-z-plane between z=+ 1 and z=−1. The entire left half-plane in the s-plane maps to the interior
-of the unit circle in the z-plane.
-As an example, consider mapping the PI compensator described in Sect. 9.5.2,
-Gc(s)= Gc∞
-⎦
-1+ωL
-s
-)
-(19.38)
-First, we employ the bilinear mapping, Eq. (19.36), to express the compensator transfer function
-Gcd(z) as a function of z:
-Gcd(z)= Gc∞
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎝
-1+ ωL⎦2
-T2
-z−1
-z+ 1
-)
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎠
-(19.39)
-With some algebra, this can be expressed in pole-zero form as
-Gcd(z)= Gc∞
-⎦
-1+ωLTs
-2
-) z−1−ωLTs/2
-1+ωLTs/2
-z−1 (19.40)
-Since fL in PI compensators is usually very low compared to fs,(ωLTs/2)≪ 1, Eq. (19.40) can
-be simpliﬁed as follows:
-Gcd(z)≈Gc∞
-z−(1−ωLTs)
-z−1 (19.41)
-The discrete-time PI compensator has a pole at z= 1, and a real zero at approximately 1 −
-ωLTs. For a given sampling frequency fs= 1/Ts,a sωL approaches zero, the discrete-time zero
-tends to z= 1. In general, mapping continuous-time low-frequency poles or zeroes results in
-discrete-time poles or zeroes close to the+1 point of thez-plane. This can lead to roundoﬀerrors
-and design constraints in implementation of discrete-time compensators, discussed further in
-Sect. 19.4.
-Figure 19.8 compares the magnitude and phase responses of the analog PI compensator
-Gc(s)i nE q .( 19.38), with Gc∞= 1, fL = 20 kHz, and the discrete-time PI compensator in
-Eq. (19.40) obtained by bilinear mapping with fs= 1M H z ,
-Gcd(z)= 1.063 z−0.8743
-z−1 (19.42)
-One may observe that the magnitude and phase responses match very well over frequencies well
-below the sampling rate fs. The responses in Fig. 19.8 are plotted up to the Nyquist frequency
-fs/2= 500 kHz.
-As another example, consider mapping a PD compensator described in Sect. 9.5.1,
-Gc(s)= Gc0
-⎦
-1+ s
-ωz
-)
-⎦
-1+ s
-ωp
-) (19.43)
+本节描述一个基本的离散时间补偿器设计流程，基于19.1节对数字控制环路和环路延迟的描述、9.5节的模拟稳压器设计以及19.2.3节的连续时间到离散时间映射技术。该方法由四步组成：
 
-19.2 Introduction to Discrete-Time Systems 819
-1 kHz 10 kHz 100 kHz
-10
-0
-10
-20
-30
-Magnitude [dB]
-1 kHz 10 kHz 100 kHz
-80
-60
-40
-20
-0
-Phase [deg]
-||Gc( jw)||
-||Gcd ( jw)||
-∠Gcd ( jw)
-∠Gc( jw)
-Fig. 19.8 Magnitude and phase responses of an analog, continuous-time PI compensatorGc(s), Gc∞= 1,
-fL = 20 kHz, and the discrete-time compensator Gcd(z) obtained by bilinear mapping, fs = 1M H z
-The bilinear mapping, Eq. (19.36), results in
-Gcd(z)= Gc0
-⎛⎜⎜⎜⎜⎜⎜⎜⎜⎜
-⎜⎜⎜⎜⎝
-1+ 2ωzTs
-1+ 2
-ωpTs
-⎞⎟⎟⎟⎟⎟⎟⎟⎟⎟
-⎟⎟⎟⎟⎠
-⎦
-z−1−ω
-zTs/2
-1+ωzTs/2
-)
-⎦
-z−1−ωpTs/2
-1+ωpTs/2
-) (19.44)
-The discrete-time PD compensator has a zero and a pole on the real z-plane axis. Suppose
-that fs = 1 MHz and that it is desired to implement digitally a PD compensator with Gc0= 1,
-fz= 100 kHz, fp= 400 kHz. Note that in this case the continuous-time zero and pole frequen-
-cies are not much lower than the sampling frequency fs. By substituting the numerical values
-in Eq. (19.40), we get
-Gcd(z)= 2.329 z−0.5219
-z+ 0.1137 (19.45)
-The frequency responses of Gc(s) and Gcd(z) are compared in Fig. 19.9. Since the PD compen-
-sator corner frequencies are relatively high, discrepancies can be observed in both magnitude
-and phase responses, especially at frequencies approaching fs/2. After reaching a maximum
-phase lead at √fz fp = 200 kHz, the phase of Gcd drops much faster with frequency than the
-phase of Gc. The magnitude of Gcd is larger than the magnitude of Gc at all frequencies of
-interest, and the diﬀerence in magnitude responses increases with frequency.
-A generalization of the bilinear (Tustin) mapping known as frequency prewarping [176] can
-be applied to mitigate, to some extent, the diﬀerences between Gc and Gcd frequency responses
-in cases when corner frequencies of interest are relatively close to fs/2. The bilinear mapping
-with prewarp is performed as follows:
-s→kprewarp
-2
-Ts
-z−1
-z+ 1. (19.46)
+1. 求系统未补偿环路增益 $T_{ud}(s)$，包括数字实现引起的预期延迟 $t_d$（19.1节讨论）以及 $H(s)$ 中的抗混叠模拟滤波：
 
-820 19 Digital Control of Switched-Mode Power Converters
-10 kHz 100 kHz
-0
-5
-10
-Magnitude [dB]
-10 kHz 100 kHz
-0
-20
-40
-Phase [deg]
-∠Gc( jw)
-∠Gcd ( jw)
-∠G∗
-cd ( jw)
-||G∗
-cd ( jw)||
-||Gcd ( jw)||
-||Gc( jw)||
-Fig. 19.9 Magnitude and phase responses of an analog, continuous-time PD compensator Gc(s), Gc0 =
-1, fz = 100 kHz, fp = 400 kHz, the discrete-time compensator Gcd(z) obtained by bilinear mapping,
-fs = 1 MHz, and the discrete-time compensator G∗
-cd(z) obtained by bilinear mapping with prewarping at
-fprewarp= 200 kHz
-G∗
-cd(z)= Gc(s)|s→kprewarp 2
-Ts
-z−1
-z+1
-(19.47)
-where
-kprewarp= ωprewarpTs/2
-tan
-⎦
-ωprewarpTs/2
-) (19.48)
-is found so that the magnitude and the phase of Gc and G∗
-cd match exactly at a particular fre-
-quencyωprewarp,
-G∗
-cd( jωprewarp)
-=
-Gc( jωprewarp)
-
-∠G∗
-cd( jωprewarp)=∠Gc( jωprewarp)
-(19.49)
-Figure 19.9 shows the frequency responses of the discrete-time compensator G∗
-cd obtained by
-bilinear mapping with the prewarp frequency fprewarp = √fz fp = 200 kHz. The exact match
-between Gcd∗and Gc at the prewarp frequency, and the improved match around the prewarp
-frequency, are obtained at the expense of somewhat increased mismatch at lower frequencies.
-As a ﬁnal example in this section, consider mapping the continuous-time PID compensator
-described in Sect. 9.5.3. The compensator transfer function is
-Gc(s)= Gcm
-⎦
-1+ωL
-s
-) ⎦
-1+ s
-ωz
-)
-⎦
-1+ s
-ωp1
-) (19.50)
-Compared to the transfer function in Eq. ( 9.64), the second pole at fp2 has been dropped from
-the transfer function in Eq. ( 19.50). In a practical analog controller implementation, the high-
-frequency pole at fp2 must be present to cause the gain to roll o ﬀat high frequencies and to
+$$T_{ud}(s) = H(s)\, G_{vd}(s)\, G_{delay}(s) = H(s)\, G_{vd}(s)\, e^{-s t_d} \tag{19.58}$$
 
-19.2 Introduction to Discrete-Time Systems 821
-prevent the switching ripple from disrupting the operation of the analog pulse-width modula-
-tor. Furthermore, the high-frequency pole is unavoidable due to analog circuit implementation
-limitations, such as the op amp gain-bandwidth product. In the digital controller realization of
-Fig. 19.1, the sensed analog voltage is sampled by the A /D converter at the rate equal to the
-switching frequency. As a result, the switching ripple components are not present in the digi-
-tal compensator, and there is no reason to map the high-frequency pole at fp2 to discrete-time.
-Instead, the high-frequency (anti-aliasing) ﬁltering can be left in the sensing transfer function
-H(s) in the analog domain, where it serves the purpose of attenuating switching ripples and
-noise before A/D conversion. Using Eq. ( 19.47), the z-domain, discrete-time transfer function
-of the PID compensator is obtained,
-G∗
-cd(z)= Gd
-(z−zL)(z−zz)
-(z−1)(z−zp) (19.51)
-where
-Gd= Gcm
-fp1
-fz
-⎦
-1+ a fL
-fprewarp
-)⎦
-1+ a fz
-fprewarp
-)
-1+ a fp1
-fprewarp
-(19.52)
-zL=
-1−a fL
-fprewarp
-1+ a fL
-fprewarp
-, zz=
-1−a fz
-fprewarp
-1+ a fz
-fprewarp
-, zp=
-1−a fp1
-fprewarp
-1+ a fp1
-fprewarp
-(19.53)
-a= tan
-⎦
-πfprewarp
-fs
-)
-(19.54)
-The mapping techniques discussed in this section, and many others, are well supported
-by computer tools such as MATLAB [ 236]. Table 19.3 summarizes the bilinear mapping
-(Eqs. 19.35, 19.36) and the bilinear mapping with prewarp (Eqs. 19.46–19.48), together with
-the corresponding MATLAB functions.
-Table 19.3 Continuous-time to discrete-time mapping
-Method mapping MATLAB function
-Bilinear (Tustin) s→2
-Ts
-z−1
-z+ 1 Gcd= c2d(Gc,Ts,’tustin’)
-Bilinear (Tustin) with prewarp s→kprewarp
-2
-Ts
-z−1
-z+ 1 Gcd= c2d(Gc,Ts,’prewarp’,wprewarp)
+2. 用9.5节讨论的技术设计模拟连续时间补偿器 $G_c(s)$，但 $G_c(s)$ 中不应包含高频模拟滚降极点。如下一节进一步解释，在 PID 补偿器设计中，可按式(19.68)配置 $f_{p1}$ 处的高频极点，使所得离散时间补偿器具有式(19.69)的标准 PID 形式。
 
-822 19 Digital Control of Switched-Mode Power Converters
-19.3 Discrete-Time Compensator Design
-The loop gain Td in a digitally controlled converter includes the sensor transfer function H(s),
-the control-to-output transfer function Gvd(s), the delay modeled as Gdelay(s)= e−std , and the
-compensator transfer function Gcd(z)( o rG∗
-cd(z)). It should be noted that the loop gain does not
-include a zero-order-hold. The magnitude and phase responses of the loop gainTd can be found
-as
-Td( jω)=
-⎦
-H(s)Gvd(s)e−std
-) ⏐⏐⏐⏐s→jω
-G∗
-cd(z)
-⏐⏐⏐⏐z→ejωTs
-(19.55)
-Compared to the loop gain in an analog voltage-mode controlled converter, Eq. ( 9.4) with
-VM = 1, Eq. (19.55)d iﬀers in two ways: the presence of the delay, and the sampled-data discrete-
-time nature of the compensator Gcd. These diﬀerences are illustrated in the following example.
-Example
-The objective of this example is to evaluate the loop gain frequency response in Eq. (19.55) and
-to compare it to the loop gain response with an analog controller. An analog PID compensator
-is designed for a synchronous buck converter operating at fs = 1 MHz switching frequency.
-The analog compensator transfer function given in Eq. ( 9.64), with fL = 8k H z ,fz = 33 kHz,
-Gcm= 5.45, fp1= 300 kHz, fp2= 1 MHz, results in the crossover frequency fc= 100 kHz with
-52◦phase margin. In equilibrium, V= Vre f = 1.8 V , so thatD≈V/Vg= 0.36.
-Before mapping the analog compensator to discrete-time, the high-frequency pole at fp2 is
-removed from the analog compensator transfer function. This pole is instead allocated to an
-analog anti-aliasing ﬁlter in voltage sensing before the A/D converter,
-H(s)= 1
-1+ s
-ωp2
-(19.56)
-Based on Gc(s)o fE q .( 19.50), with the use of bilinear mapping with the prewarp frequency
-equal to the target crossover frequency, a discrete-time compensator of Eq. ( 19.51) is obtained
-from Eqs. (19.52)–(19.54):
-G∗
-cd(z)= 27.3898(z−0.9493)(z−0.8063)
-(z−1)(z−0.01278) (19.57)
-The magnitude and phase responses of the loop gain Td, evaluated from Eq. (19.55), are shown
-in Fig. 19.10 for several values of the loop delay td, in comparison to the loop gain responses
-in the analog controlled converter (td= 0). The bilinear mapping with prewarp frequency equal
-to the crossover frequency preserves the magnitude response very well. Furthermore, the delay
-term does not aﬀect the magnitude responses at all. As a result, the magnitude responses in
-the digital control loop stay essentially the same as the loop gain magnitude response with the
-analog controller, and the crossover frequency remains the same, f
-c ≈100 kHz. However, the
-digital control loop delay more signiﬁcantly aﬀects the phase responses and the resulting phase
-margins. The shortest considered delaytd= DTs= 0.36 μs assumes a high-performance digital
-controller where the A/D conversion and the compensator computations are completed very
-quickly so that tctrl ≈0. From Eq. (19.14), the additional phase lag at the crossover frequency
-is−ωctd =−13◦, which reduces the phase margin to 52◦−13◦= 39◦. A delay of td = DTs+
-Ts/2= 0.86 μs, which corresponds to tctrl = Ts/2= 0.5 μs, reduces the phase margin to 52◦−
-31◦= 21◦. The ﬁnal case is when the A/D conversion and the compensator calculations take
-an entire switching period, tctrl = Ts, which is representative of a very low-performance digital
+3. 用双线性映射将步骤2设计的模拟补偿器 $G_c(s)$ 映射为离散时间补偿器 $G_{cd}(z)$，或用带预畸的双线性映射映射为离散时间补偿器 $G_{cd}^*(z)$，如19.2.3节讨论。通过选取预畸频率 $f_{prewarp}$ 等于目标穿超频率 $f_c$，可保持步骤2设计的穿超频率 $f_c$ 和相位裕度，
 
-19.3 Discrete-Time Compensator Design 823
-td = 0
-td = 0.36 ms
-td = 0.86 ms
-td = 1.36 ms
-∠T
-||T||
-Fig. 19.10 Loop gain magnitude and phase responses in the synchronous buck converter design example
-with the analog controller ( td = 0), and with digital controllers with several loop delays, td = DTs =
-0.36 μs, td = DTs+ 0.5Ts = 0.86 μs, td = DTs+ Ts = 1.36 μs
-implementation. In this case, the delay of td= DTs+ Ts= 1.36 μs reduces the phase margin to
-just 52◦−49◦= 3◦. The example illustrates that the loop delay can be a very signiﬁcant factor
-in the design of high-performance, wide-bandwidth digital control loops for high-frequency
-switching power converters.
-19.3.1 Design Procedure
-A basic discrete-time compensator design procedure is described in this section based on the
-description of the digital control loop and loop delay in Sect. 19.1, the analog regulator design
-of Sect. 9.5, and the continuous-time to discrete-time mapping techniques of Sect. 19.2.3.T h e
-approach consists of four steps:
-1. Find the system uncompensated loop gain Tud(s), including the anticipated delay td due to
-digital implementation, as discussed in Sect.19.1, and anti-aliasing analog ﬁltering in H(s):
-Tud(s)= H(s)Gvd(s)Gdelay(s)= H(s)Gvd(s)e−std (19.58)
-2. Design an analog continuous-time compensator Gc(s) using techniques discussed in Sect.9.5,
-except that high-frequency analog roll-oﬀpoles should not be included in Gc(s). As ex-
-plained further in the next section, in a PID compensator design, one may choose to position
-the high-frequency pole at fp1 according to Eq. ( 19.68) so that the resulting discrete-time
-compensator has the standard PID form of Eq. (19.69).
-3. Map the analog compensator Gc(s) designed in Step 2 to the discrete-time compensator
-Gcd(z) using the bilinear mapping, or to the discrete-time compensator G∗
-cd(s)u s i n gt h e
-bilinear mapping with prewarp, as discussed in Sect.19.2.3. The crossover frequency fc and
+$$f_{prewarp} = f_c \tag{19.59}$$
 
-824 19 Digital Control of Switched-Mode Power Converters
-the phase margin designed in Step 2 can be preserved by choosing the prewarp frequency
-fprewarp equal to the target crossover frequency fc,
-fprewarp= fc (19.59)
-4. Evaluate magnitude and phase responses of the loop gain Td using Eq. ( 19.55), and ver-
-ify that the design targets are met. Furthermore, closed-loop frequency responses can be
-evaluated as in Eqs. (9.4), but with Td from Eq. (19.55) replacing the continuous-time loop
-gain T.
-5. Realize the discrete-time compensator as described in Sect. 19.4.
-The digital compensator design approach described in this section is based on continuous-time
-small-signal averaged converter models, standard analog design techniques, and mapping from
-continuous time to discrete time. It should be noted that Eq. (19.58) is an approximation based
-on standard averaging techniques. Exact converter discrete-time converter models [ 237] allow
-applications of more advanced design techniques directly in z-domain [176]. These techniques
-are described in more detail in [223].
-19.3.2 Design Example
-The objective is to design a discrete-time digital compensatorGcd around the synchronous buck
-converter shown in Fig.19.1. The input dc voltage is Vg= 5 V , and the objective is to precisely
-regulate the output voltage to V = Vre f = 1.8 V . The inductance is L= 1 μH, with a series
-resistance Rs = 30 mΩthat models a combination of MOSFET on-resistance and the inductor
-winding resistance. The output ﬁlter capacitor has C= 200 μF and an equivalent series resis-
-tance Resr = 0.8mΩ. The converter operates at fs = 1 MHz switching frequency, and the load
-current is between 0 A and 5 A. When the converter is unloaded (R is very large), the converter
-control-to-output transfer function is
-Gvd(s)= Gd0
-1+ s
-ωesr
-1+ s
-Qω0
-+
-⎦s
-ω0
-)2 (19.60)
-where Gd0 = Vg = 5V , fesr = 1/(2πResrC)= 1M H z ,f0 ≈1/(2π
-√
-LC)= 11.3 kHz and
-Q≈√L/C/(Rs+ Resr )= 2.3.
-Let us ﬁrst design an analog PID compensator to achieve a crossover frequencyf= 100 kHz
-with a phase margin of 52◦. Assuming H= 1, and VM = 1 V , following the design approach
-exempliﬁed in Sect. 9.5.4, we arrive at the analog PID compensator
-Gc(s)= Gcm
-⎦
-1+ ωL
-s
-) ⎦
-1+ s
-ωz
-)
-⎦
-1+ s
-ωp1
-)⎦
-1+ s
-ωp2
-) (19.61)
-where Gcm = 5.45, fL = 8k H z ,fz = 33 kHz, and fp1 = 300 kHz are determined to meet the
-crossover frequency and phase margin speciﬁcations, while fp2 = 1 MHz represents a high-
-frequency pole in the analog control loop. The objective now is to follow the procedure outlined
-in this section to design a digital controller given the same crossover frequency and phase mar-
-gin speciﬁcations.
-```
+4. 用式(19.55)求环路增益 $T_d$ 的幅值和相位响应，验证满足设计目标。此外，闭环频率响应可如式(9.4)求，但用式(19.55)的 $T_d$ 替换连续时间环路增益 $T$。
+
+5. 按19.4节所述实现离散时间补偿器。
+
+本节描述的数字补偿器设计方法基于连续时间小信号平均变换器模型、标准模拟设计技术以及连续时间到离散时间的映射。应注意式(19.58)是基于标准平均技术的近似。精确的变换器离散时间模型[237]允许直接在 $z$ 域应用更先进的设计技术[176]。这些技术在文献[223]中有更详细描述。
+
+### 19.3.2 设计示例
+
+目标是围绕图19.1所示同步降压变换器设计离散时间数字补偿器 $G_{cd}$。输入直流电压 $V_g = 5\,\text{V}$，目标是精确调节输出电压至 $V = V_{ref} = 1.8\,\text{V}$。电感 $L = 1\,\mu\text{H}$，串联电阻 $R_s = 30\,\text{m}\Omega$（建模 MOSFET 导通电阻与电感绕线电阻的组合）。输出滤波电容 $C = 200\,\mu\text{F}$，等效串联电阻 $R_{esr} = 0.8\,\text{m}\Omega$。变换器工作于 $f_s = 1\,\text{MHz}$ 开关频率，负载电流在 $0\,\text{A}$ 至 $5\,\text{A}$ 之间。当变换器空载（$R$ 很大）时，变换器控制-输出传递函数为
+
+$$G_{vd}(s) = G_{d0}\, \frac{1 + \dfrac{s}{\omega_{esr}}}{1 + \dfrac{1}{Q}\, \dfrac{s}{\omega_0} + \left( \dfrac{s}{\omega_0} \right)^2} \tag{19.60}$$
+
+其中 $G_{d0} = V_g = 5\,\text{V}$，$f_{esr} = 1/(2\pi R_{esr} C) = 1\,\text{MHz}$，$f_0 \approx 1/(2\pi\sqrt{LC}) = 11.3\,\text{kHz}$，$Q \approx \sqrt{L/C}/(R_s + R_{esr}) = 2.3$。
+
+先设计一个模拟 PID 补偿器，以实现 $f = 100\,\text{kHz}$ 穿超频率和 $52°$ 相位裕度。假设 $H = 1$，$V_M = 1\,\text{V}$，遵循9.5.4节示例的设计方法，得模拟 PID 补偿器
+
+$$G_c(s) = G_{cm}\left( 1 + \frac{\omega_L}{s} \right)\left( 1 + \frac{s}{\omega_z} \right) \left/ \left( 1 + \frac{s}{\omega_{p1}} \right) \left( 1 + \frac{s}{\omega_{p2}} \right) \right. \tag{19.61}$$
+
+其中 $G_{cm} = 5.45$，$f_L = 8\,\text{kHz}$，$f_z = 33\,\text{kHz}$，$f_{p1} = 300\,\text{kHz}$ 按穿超频率和相位裕度指标确定，而 $f_{p2} = 1\,\text{MHz}$ 代表模拟控制环路中的高频极点。现在的目标是按本节所述流程在给定相同穿超频率和相位裕度指标下设计数字控制器。
+
+![源页 p.824](../assets/page-snapshots/chapter-19/page-824.png)

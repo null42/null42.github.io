@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第19章part 2 - 19 Digital Control of Switched-Mode Power Converters"
+title: "第19章 开关模式功率变换器的数字控制（第2部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,818 +18,338 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第19章part 2 - 19 Digital Control of Switched-Mode Power Converters
+# 第19章 开关模式功率变换器的数字控制（第2部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 827-846  
-> Chunk ID: `chapter-19-part-2`
+## 19.3 离散时间补偿器设计（续）
 
-## 主干提取
+![源页 p.827](../assets/page-snapshots/chapter-19/page-827.png)
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+本节前面的介绍已表明，环路延迟可显著影响数字控制环路，过大的环路延迟使宽带宽数字控制环路无法设计。假设一个高性能数字控制器实现，在 $f_s = 1\,\text{MHz}$ 下变换器延迟 $t_d = D T_s = 0.36\,\mu\text{s}$。设计目标与模拟控制环路相同：低频环路增益很大，穿超频率 $f_c = 100\,\text{kHz}$，相位裕度 $52°$。电压传感器传递函数式(19.56)中含极点在 $f_{p2} = 1\,\text{MHz}$ 的单极抗混叠滤波器。以模拟补偿器设计为起点，保持 PI 转折频率不变，$f_L = 8\,\text{kHz}$。由于延迟 $t_d$ 在目标穿超频率处引入 $-13°$ 相位，PD 补偿器须重新设计，使 $f_c$ 处的相位超前提升到 $52° + 13° = 65°$。给定所需相位超前 $\theta = 65°$、$f_c = 100\,\text{kHz}$，式(9.57)给出 $f_z = 22\,\text{kHz}$，$f_{p1} = 450\,\text{kHz}$。最后，求 $G_{cm}$ 以实现目标穿超频率，
 
-## 术语表
+$$G_{cm} = \sqrt{\frac{f_z}{f_{p1}}}\, \left( \frac{f_c}{f_o} \right)^2\, \frac{1}{V_g} = 3.51/\text{V} \tag{19.62}$$
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+现在式(19.50)的模拟补偿器所有参数均已确定，式(19.52)–(19.54)给出 $f_{prewarp} = f_c$ 时的离散时间补偿器，
 
-## 中文翻译
+$$G_{cd}^*(z) = 31.7593\, \frac{(z - 0.9493)(z - 0.8654)}{(z - 1)(z + 0.1881)} \tag{19.63}$$
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+图19.11比较了同步降压稳压器设计示例中模拟补偿器式(19.61)与计入环路延迟 $t_d = D T_s = 0.36\,\mu\text{s}$ 设计的数字控制器的环路增益幅值和相位响应。注意数字控制稳压器实现了大致相同的穿超频率和相位裕度。
 
-## 英文原文
+图19.11 同步降压稳压器设计示例中，模拟控制器（$t_d = 0$）与计入环路延迟 $t_d = D T_s = 0.36\,\mu\text{s}$ 设计的数字控制器的环路增益幅值和相位响应
 
-```text
-19.3 Discrete-Time Compensator Design 825
-In the introductory part of this section, we have found that the loop delay can a ﬀect the
-digital control loop signiﬁcantly, and that excessive loop delays make it impossible to design
-wide-bandwidth digital control loops. Let us assume a high-performance digital controller im-
-plementation, with the delay td= DTs= 0.36 μs in the converter operating at fs= 1M H z .T h e
-design objectives are the same as for the analog control loop: very large loop gain at low fre-
-quencies, fc= 100 kHz crossover frequency, and 52◦phase margin. A single-pole anti-aliasing
-ﬁlter with a pole at fp2= 1 MHz is included in the voltage sensor transfer function, Eq. (19.56).
-Using the analog compensator design as a starting point, the PI corner frequency is kept the
-same, fL = 8 kHz. Since the delay td introduces−13◦phase at the target crossover frequency,
-the PD compensator must be redesigned to boost the phase lead at fc to 52◦+ 13◦= 65◦.G i v e n
-the required phase leadθ= 65◦at fc= 100 kHz, Eq. (9.57) leads to fz= 22 kHz, fp1= 450 kHz.
-Finally, Gcm is found to achieve the target crossover frequency,
-Gcm=
-√
-fz
-fp1
-⎦fc
-fo
-)2 1
-Vg
-= 3.51/V (19.62)
-Now that all parameters in the analog compensator of Eq. ( 19.50) have been determined,
-Eqs. (19.52)–(19.54) yield the discrete-time compensator for fprewarp = fc,
-G∗
-cd(z)= 31.7593(z−0.9493)(z−0.8654)
-(z−1)(z+ 0.1881) (19.63)
-Figure 19.11 compares the loop gain magnitude and phase responses in the synchronous buck
-regulator design example with the analog compensator in Eq. (19.61), and with the digital con-
-troller designed to take into account the loop delaytd= DTs= 0.36 μs. Note that approximately
-the same crossover frequency and phase margin have been achieved in the digitally controlled
-regulator.
-||T|| (analog controller)
-||Td|| (digital controller)
-∠Td
-∠T
-Fig. 19.11 Loop gain magnitude and phase responses in the synchronous buck regulator design example
-with the analog controller ( td = 0), and with the digital controller designed to take into account the loop
-delay td = DTs= 0.36 μs
+![源页 p.828](../assets/page-snapshots/chapter-19/page-828.png)
 
-826 19 Digital Control of Switched-Mode Power Converters
- 1 % Synchronous Buck converter parameters
- 2 Vg = 5; Vref = 1.8; D = Vref/Vg; % Input and reference voltages, duty cycle
- 3 L = 1e-6; RL = 30e-3; % Inductance and series resistance
- 4 C = 200e-6; Resr = 0.8e-3; % Capacitance and capacitor ESR
- 5 fo = 1/(2*pi*sqrt(L*C)); % Pole frequency
- 6 R = 1000; % Load resistance
- 7 fs = 1e6; Ts = 1/fs; % Switching frequency and period
- 8 
- 9 s = tf('s'); z = tf('z',Ts); % Define s and z
-10
-11 % Open-loop control to output transfer function
-12 Gvd = Vg*(Resr+1/s/C)/(Resr + 1/s/C + s*L + RL); 
-13 fp2 = 1e6; H = 1/(1 + s/2/pi/fp2); % Sensor transfer function
-14 Tu = H * Gvd; % Uncompensated loop gain, no delay
-15
-16 % Analog PID compensator
-17 fc = 100e3; % Cross-over frequency
-18 fL = 8e3; fz = 33e3; fp1 = 300e3; % Corner frequencies
-19 Gcm = sqrt(fz/fp1)*(fc/fo)^2/Vg; % Mid-frequency gain
-20 % Analog compensator transfer function
-21 Gc = Gcm*(1 + 2*pi*fL/s)*(1 + s/2/pi/fz)/(1+s/2/pi/fp1); 
-22 T = Gc*Tu; % Loop gain with analog compensator
-23
-24 % Uncompensated loop gain, including delay
-25 td = D*Ts; % Delay in the digital control loop
-26 Tu.IODelay = td; % Delay
-27 Tud = c2d(Tu,Ts,'impulse'); % Mapping of Tu with delay 
-28 % Analog PID compensator redesigned for digital implementation
-29 fL = 8e3; fz = 22e3; fp1 = 450e3; % Corner frequencies
-30 Gcm = sqrt(fz/fp1)*(fc/fo)^2/Vg; % Mid-frequency gain
-31 Gca = Gcm*(1 + 2*pi*fL/s)*(1 + s/2/pi/fz)/(1+s/2/pi/fp1);
-32 % Digital compensator transfer function
-33 Gcd = c2d(Gca, Ts, 'prewarp', 2*pi*fc);
-34 Td = Tud*Gcd; % Loop gain with digital compensator
-35
-36 % Compare magnitude and phase responses of T and Td
-37 options = bodeoptions; options.Grid = 'on'; 
-38 options.FreqUnits = 'Hz'; options.XLim = [100, 500e3]; 
-39 bode(T, 'k', options); % Bode plot of T
-40 hold on; % Overlay plots 
-41 bode(Td, 'b', options); % Bode plot of Td
-Fig. 19.12 A MATLAB script that generates the analog and digital loop gain Bode plots shown in
-Fig. 19.11
-A MATLAB script that generates the plots in Fig. 19.11 is shown in Fig. 19.12. The script
-starts by assigning the converter parameters (lines 1-7), followed by deﬁnitions of complex vari-
-ables s and z (line 9). Open-loop control-to-output transfer function of the buck converterGvd(s)
-and the uncompensated loop gain Tu(s) are formulated in lines 11-14. Analog PID compensator
-parameters are deﬁned in lines 16-19 followed by the analog compensator transfer function
-Gc(s) in line 21 and the loop gain T(s) with the analog compensator in line 22. No delays are
-included in the analog controller. In line 26, delay td = DTs is included as a property of the un-
-compensated loop gain, which is then mapped to discrete-time uncompensated loop gain Tud(z)
-in line 27. The analog compensator, redesigned to take the delay into account, is deﬁned in lines
-28–31, and then mapped in line 33 to obtain the compensator G∗
-cd(z), and the loop gain Td(z)
-in line 34. Bode plots of T(s) and Td(z) are generated in lines 36-41 using the MATLABbode
-command.
+图19.12 生成图19.11所示模拟和数字环路增益波特图的 MATLAB 脚本
 
-19.4 Digital Controller Implementation 827
-v(t)( analog controller)
-v(t)( digital controller)
-vc(t)( analog controller)
-vc[n]( digital controller)
-t [µ s]
-t [µ s]
-(a)
-(b)
-Fig. 19.13 Step-load (2.5 A to 5 A) transient responses in the synchronous buck converter example with
-the analog controller (td = 0), and with the digital controller designed to take into account the loop delay
-td = DTs = 0.36 μs: ( a) control signals vc for the analog and digital controllers, ( b) output voltage
-responses v(t) for the analog and digital controllers
-Figure 19.13 compares step-load (2.5 A to 5 A) transient responses. While the output volt-
-age v(t) responses in Fig. 19.13b are very similar, diﬀerences can be appreciated in the control
-signal responses shown in Fig. 19.13a. The digital controller produces discrete-time step-wise
-waveform vc[n], while vc(t) in the analog controller is a continuous-time waveform that includes
-a switching-ripple component.
-19.4 Digital Controller Implementation
-Digital controllers can be practically realized in a number of ways. For example, many stan-
-dard microcontrollers or digital signal processing chips are now available, featuring multiple
-PWM and A/D conversion channels, allowing software-based control and power management
-functions. The digital controller and its digital compensation algorithm are implemented in the
-ﬁrmware of these chips, using a programming language such as C. An alternative approach
-consists of implementing the control loop in hardware, using ﬁeld-programmable gate arrays
-(FPGA) or custom integrated circuits. In combination with specialized A/D and DPWM blocks,
-this approach enables high-performance designs at high switching frequencies. Controllers of
-this type can be developed, realized and tested using standard digital design ﬂow starting from
+图19.12给出了生成图19.11曲线的 MATLAB 脚本。脚本先赋值变换器参数（第1–7行），然后定义复变量 $s$ 和 $z$（第9行）。第11–14行列出降压变换器开环控制-输出传递函数 $G_{vd}(s)$ 和未补偿环路增益 $T_u(s)$。第16–19行定义模拟 PID 补偿器参数，第21行给出模拟补偿器传递函数 $G_c(s)$，第22行给出带模拟补偿器的环路增益 $T(s)$。模拟控制器不含延迟。第26行将延迟 $t_d = D T_s$ 作为未补偿环路增益的属性纳入，第27行映射到离散时间未补偿环路增益 $T_{ud}(z)$。第28–31行定义重新设计以计入延迟的模拟补偿器，第33行映射得到补偿器 $G_{cd}^*(z)$，第34行得到环路增益 $T_d(z)$。第36–41行用 MATLAB `bode` 命令生成 $T(s)$ 和 $T_d(z)$ 的波特图。
 
-828 19 Digital Control of Switched-Mode Power Converters
-logic functions described using a hardware description language (HDL) such as VHDL or Ver-
-ilog, prototyping and experimental veriﬁcations using FPGA development platforms, ultimately
-targeting relatively small, relatively low gate-count integrated circuits capable of matching or
-surpassing state-of-the-art analog solutions in terms of dynamic performance, power consump-
-tion and cost. This section provides an introduction to digital controller implementation issues,
-with pointers to further details discussed in literature.
-19.4.1 Discrete-Time Compensator Realization
-Analog compensators are typically realized usingRC networks around standard analog building
-blocks - operational or transconductance ampliﬁers. A discrete-time compensatorG
-cd is realized
-using digital building blocks: adders, multipliers, and storage elements. There are many possible
-ways to arrange these building blocks to realize a givenGcd(z)[ 176, 223]. This section presents
-two realization architectures particularly well suited for discrete-time PI or PID compensators
-in the digital control loop around a converter: a cascade realization, and a parallel realization.
-The cascade realization of a PID transfer function Gcd(z)i nE q .( 19.51)i ss h o w ni n
-Fig. 19.14.
-ve[n] vc[n]
-zL zz zp
-z− 1 z− 1 z− 1 z− 1
-Gd
-Anti wind-up
-limiter
-u1[n] u2[n] u3[n] u4[n]
-Fig. 19.14 Cascade realization of the discrete-time PID compensator
-The equations that can be used as a starting point in coding the compensator in microcon-
-troller software or in HDL are as follows:
-u1[n]= Gdve[n]
-u2[n]= u1[n]−zLu1[n−1]
-u3[n]= u2[n]−zzu2[n−1]
-u4[n]= u3[n]+ zpu4[n−1]
-vc[n]= u4[n]+ vc[n−1]
-(19.64)
-The compensator parameters, the gainGd, the zeroeszL, zz and the polezp, are the multiplicative
-factors, which can easily be programmable. Integration, which is performed in the last step of
-Eq. (19.64), includes a limiter. The purpose of the limiter is to prevent the duty-cycle command
-v
-c[n] at the integrator output from drifting away from the allowed operating range (0 to 1, as-
-suming DPWM with VM = 1). This ”anti-windup” limiter function is similar to voltage limiting
-at the output of an analog compensator built around an op amp. In coding the compensator,
-one must also pay attention to the number of bits allocated to digital words representing the
-parameters and the signal values in order to prevent overﬂows or other calculation errors [223].
+![源页 p.829](../assets/page-snapshots/chapter-19/page-829.png)
 
-19.4 Digital Controller Implementation 829
-Another realization of the PID compensator is the parallel form, derived by a partial fraction
-expansion of Gcd:
-Gcd(z)= Gd
-(z−zL)(z−zz)
-(z−1)(z−zp) = KP+ Ki
-1
-1−z−1 + KD
-1−z−1
-1−zpz−1 (19.65)
-where the coeﬃcients KP, KD, and KI can be found in terms of Gd, zL, zz and zp parameters,
-KP= Gd(zL+ zz−zp−(2−zp)zLzz)
-KI = Gd
-(1−zL)(1−zz)
-1−zp
-Kd= Gd
-(zL−zp)(zz−zp)
-(1−zp)2
-(19.66)
-The parallel realization is shown in Fig. 19.15.
-ve[n] vc[n]
-z− 1
-z− 1
-z− 1
-Anti wind-up
-limiter
-KP
-KI
-KD
-zp
-up[n]
-ui[n]
-ud [n]
-ud1[n]
-Fig. 19.15 Parallel realization of the discrete-time PID compensator
-The equations serving as a starting point for microcontroller or HDL coding are as follows:
-up[n]= KPve[n]
-ui[n]= KIve[n]+ ui[n−1]
-ud1[n]= KD(ve[n]−ve[n−1])
-ud[n]= ud1[n]+ zpud[n−1]
-vc[n]= up[n]+ ui[n]+ ud[n]
-(19.67)
-Note that an anti-windup limiter is included in the integration stage.
+图19.13 同步降压变换器示例中，模拟控制器（$t_d = 0$）与计入环路延迟 $t_d = D T_s = 0.36\,\mu\text{s}$ 设计的数字控制器的阶跃负载（2.5 A 至 5 A）暂态响应：(a) 模拟和数字控制器的控制信号 $v_c$，(b) 模拟和数字控制器的输出电压响应 $v(t)$
 
-830 19 Digital Control of Switched-Mode Power Converters
-The discrete-time PID transfer function in Eq. ( 19.65) has two zeroes and two poles. One
-pole is at z= 1, which correspond to the integral action in the compensator. The second pole at
-z= zp corresponds to the high-frequency pole at fp1 in the continuous-time PID compensator.
-From Eq. (19.53), it follows that
-fp1= fprewarp
-a = fprewarp
-tan
-⎦
-πfprewarp
-fs
-) (19.68)
-results in zp = 0. In this case, the discrete-time transfer function Gcd has a simple PID form
-[176], with KP, KI, and KD representing the proportional, integral, and derivative gains, respec-
-tively,
-Gcd(z)= Gd
-(z−zL)(z−zz)
-z(z−1) = KP+ KI
-1
-1−z−1 + KD(1−z−1) (19.69)
-With zp= 0, the realization in Fig.19.15 is simpliﬁed because ud= ud1. The simple PID form is
-particularly well suited for design techniques based on tuning the gains KP, KI and KD directly
-[176, 223].
-19.4.2 Quantization Eﬀects, Digital Pulse-Width Modulators and A/D Converters
-Figures 19.2 and 19.3 show A/D and DPWM quantization characteristics, respectively. So far,
-in modeling and design of the digital control loop, we have neglected the quantization e ﬀects
-by simply assuming that very high-resolution A /D and DPWM blocks are employed, so that
-Eq. ( 19.9) holds. It has been observed that the nonlinearities introduced by practical, ﬁnite
-resolution A/D and DPWM blocks can result in persistent disturbances sometimes referred to
-as ”limit cycling” [238–240]. The quantization eﬀects, as well as basic conditions necessary to
-avoid limit-cycling disturbances, are discussed in this section ﬁrst, followed by an overview of
-A/D and DPWM implementation approaches.
-Assuming that a stable digital feedback control loop has been designed, a digitally controlled
-converter is expected to operate at an equilibrium point where all controller variables have
-constant values, and where all converter waveforms are periodic, with the period equal to T
-s =
-1/ fs. To ﬁnd the equilibrium solution, consider a dc model of a digitally controlled converter,
-including A/D and DPWM quantization, as shown in Fig. 19.16. This is a static model, so the
-discrete-time compensator is represented by its dc gain Gcd0,
-Gcd0= Gcd(z)
-⏐⏐⏐
-⏐
-z→1
-(19.70)
-while H0 is the sensor dc gain. Neglecting losses, the converter is represented by an ideal
-1: M(D) transformer, where M(D) = V/Vg is the dc conversion ratio. The A /D quantiza-
-tion characteristics Ve[n]= QA/D(Ve(nTs)) is shown in Fig.19.2, while the DWPM quantization
-D= QDPWM (Vc[n]) is shown in Fig. 19.3. An equilibrium solution in the model of Fig. 19.16
-can be found using a graphical approach illustrated in Fig. 19.17, where the digital error signal
-Ve[n]a tt h eA/D converter output is shown as a function of the analog sample Ve = Ve(nTs)a t
-the A/D converter input.
+图19.13比较了阶跃负载（2.5 A 至 5 A）暂态响应。虽然图19.13(b)的输出电压 $v(t)$ 响应非常相似，但图19.13(a)的控制信号响应可看出差异。数字控制器产生离散时间阶梯状波形 $v_c[n]$，而模拟控制器中 $v_c(t)$ 是含开关纹波分量的连续时间波形。
 
-19.4 Digital Controller Implementation 831
-Vg V Ho
-Vref
-VeVe[n]Vc[n]
-D
-QDPWM QA/DGcdo
-1: M(D)
-+
-−
-A/D
-quantization
-DPWM
-quantization
-Fig. 19.16 Dc model of a digitally controlled converter, including A/D and DPWM quantization
-Vref
-Vref
-Ve
-Ve[n]= QA/D(Ve)
-Ve[n]
-Ve[n]
-Ve[n]= Ve
-Ve = Vref − VgHoGcdoVe[n]
-Ve = Vref − VgHoQDPWM (GcdoVe[n])
-Ve
-qA/D
-VgHoqDPW M
-qDPW M/Gcdo
-A
-AB
-B
-B
-(a)
-(b)
-Fig. 19.17 Graphical approach to ﬁnding the quiescent operating point in a digitally controlled converter
-with A/Dc o n v e r t e ra n dD P W Mh a v i n g(a) inﬁnite resolution, and (b) ﬁnite resolution. Expressions for Ve
-as a function of Ve[n] are shown for the synchronous buck converter example
+## 19.4 数字控制器实现
 
-832 19 Digital Control of Switched-Mode Power Converters
-Consider ﬁrst the case in Fig. 19.17a where very high-resolution A/D and DPWM are em-
-ployed, so that quantization eﬀects can be neglected. In this case, the equilibrium solution is
-found at the intersection of the A/D characteristic:
-Ve[n]= Ve (19.71)
-and the dc characteristic of the components around the loop:
-Ve= Vre f−VgH0Gcd0Ve[n] (19.72)
-This assumes a synchronous buck converter example with M(D)= D. Elimination of Ve from
-Eqs. (19.71) and (19.72) allows an equilibrium solution to be found algebraically:
-Ve[n]= Vre f
-1+ VgH0Gcd0
-(19.73)
-When the dc gain Gcd0 is large but ﬁnite, then the equilibrium point denoted as point A in
-Fig. 19.17a is achieved, which corresponds to a small but nonzero dc error. In the case when the
-compensator includes an integral action, Gcd0→∞, then the equilibrium solution is at point B,
-which corresponds to zero dc error. This is all consistent with the discussion in Sect.9.2, which
-shows how a large dc loop gain drives the regulation error to zero.
-Consider next a case where practical, ﬁnite resolution A /D and DPWM elements are em-
-ployed. A graphical solution is illustrated Fig. 19.17b. The A/D quantization characteristic is
-now highly nonlinear, Ve[n]= QA/D(Ve), with the widths of the A/D quantization bins equal to
-qA/D. Because of the DPWM quantization, the characteristic around the loop is also nonlinear:
-Ve= Vre f−VgH0QDPWM (Gcd0Ve[n]) (19.74)
-Again this assumes a synchronous buck converter example with M(D)= D, and dc control-to-
-output gain equal to Gd0= Vg. The widths of the horizontal bins in the characteristic around the
-loop are equal to VgH0qDPWM where qDPWM = 1/2nDPWM is the LSB resolution of the DPWM.
-The height of a vertical step in the characteristic given by Eq. (19.74) is equal toqDPWM/Gcd0.I f
-the compensator dc gain Gcd0 is ﬁnite, then the equilibrium solution is at point A in Fig.19.17b,
-on a vertical segment of the A/D characteristic. The A/D output Ve[n] can only be equal to an
-integer multiple ofqA/D, not a fraction ofqA/D. Therefore, the equilibrium point A in Fig.19.17b
-is not feasible. Given a large, but ﬁnite dc gain of the compensator, the digitally controlled
-converter does not have a ﬁxed equilibrium point. Instead, the A/D converter output must bounce
-among two or more quantization steps, resulting in a persistent disturbance (limit cycling) in
-converter waveforms.
-If the compensator includes an integral action, Gcd0 →∞, the widths of the vertical steps
-in the characteristic given by Eq. ( 19.74) vanish. The characteristic around the A/D converter
-becomes a series of points, VgH0qDPWM apart on the horizontal (Ve) axis. In this case, multiple
-equilibrium solutions are possible, as illustrated by two points B in Fig. 19.17b. Each one of
-the two possible equilibrium solutions is inside the A/D converter zero-error bin, Ve[n]= 0. It
-should be noted that the existence of multiple possible equilibrium solutions corresponding to
-Ve[n]= 0 is predicated upon the assumption that the compensator includes integral action, and
-that the widths of the bins due to DPWM quantization are shorter than the A/Db i n s ,
-VgH0qDPWM < qA/D (19.75)
+数字控制器可多种方式实际实现。例如，现有很多标准微控制器或数字信号处理芯片，具有多个 PWM 和 A/D 转换通道，允许基于软件的控制和电源管理功能。数字控制器及其数字补偿算法以 C 等编程语言在这些芯片的固件中实现。另一种方法是用现场可编程门阵列（FPGA）或定制集成电路以硬件实现控制环路。结合专用 A/D 和 DPWM 模块，该方法可在高开关频率下实现高性能设计。此类控制器可用标准数字设计流程开发、实现和测试，从
 
-19.4 Digital Controller Implementation 833
-Equation (19.75) is a condition for the synchronous buck converter example where M(D)= D
-and Gd0 = Vg. In general, a necessary condition for existence of an equilibrium solution in a
-digitally controlled converter can be written as:
-Gd0H0qDPWM < qA/D (19.76)
-where Gd0 is the converter dc control-to-output gain.
-t [µ s]
-t [µ s]
-(a)
-(b)
-No quantization
-No quantization
-Quantization:
-Quantization:
-qA/D = 4m V
-qA/D = 4m V
-10-bit DPWM
-10-bit DPWM
-vc[n]
-v(t)
-Fig. 19.18 Comparison of step-load (2.5 A-to-5 A) transient responses in the digitally controlled syn-
-chronous buck regulator of Sect. 19.3.1 without and with quantization eﬀects, qA/D= 4m V ,nDPWM = 10
-Figure 19.18 shows a comparison of step-load transient responses in the digitally controlled
-synchronous buck regulator example of Sect. 19.3.1, for the case when very high-resolution
-A/D and DPWM are employed so that quantization e ﬀects can be neglected, and for a case
-of practical, ﬁnite resolution components, qA/D = 4m V , nDPWM = 10, qDWPM = 1/210,
-VgH0qDPWM = 4.9 mV . The compensator includes an integral action, so that Gcd0 →∞,b u t
-the DPWM resolution is not suﬃciently high and the condition in Eq. ( 19.75) is not met. The
-step-load transient responses in Fig. 19.18 are similar, except that quantization eﬀects result in
-periodic limit-cycling.
+![源页 p.830](../assets/page-snapshots/chapter-19/page-830.png)
 
-834 19 Digital Control of Switched-Mode Power Converters
-0 50 100 150 200
-0.2
-0.3
-0.4
-0.5
-0.6
-0.7
-0.8
-0 50 100 150 200
-1.77
-1.78
-1.79
-1.8
-1.81
-t [µ s]
-t [µ s]
-(a)
-(b)
-No quantization
-No quantization
-Quantization:
-Quantization:
-qA/D = 4m V
-qA/D = 4m V
-12-bit DPWM
-12-bit DPWM
-vc[n]
-v(t)
-Fig. 19.19 Comparison of step-load (2.5 A-to-5 A) transient responses in the digitally controlled syn-
-chronous buck regulator of Sect. 19.3.1 without and with quantization eﬀects, qA/D= 4m V ,nDPWM = 12
-If Eq. (19.75) is not satisﬁed, the equilibrium solution may or may not exist, depending on
-whether there is a point in the characteristic given by Eq. (19.74) inside the A/D converter zero-
-error bin or not. Another important observation is that limit cycling, if it does occur, is relatively
-small in amplitude, in the order of the LSB resolution q
-A/D of the A/D converter, as illustrated
-by the waveforms of Fig.19.18.
-Figure 19.19 shows a comparison of the same step-load transient responses but for the
-case when the DPWM resolution is increased to 12 bits, nDPWM = 12, qDWPM = 1/212,
-VgH0qDPWM = 1.2 mV , thus meeting the condition in Eq. ( 19.75). After a brief transient, the
-regulator with practical A/D and DPWM components comes to equilibrium without limit cy-
-cling. Note that, after approximately 75 μsec, the output voltage remains within the zero-error
-bin, and small-amplitude ringing (undamped by feedback control) decays towards the quantized
-equilibrium point.
-Related to the discussion of the existence of equilibrium solutions with A /D and DPWM
-quantization, it is of interest to note that the A /D quantization, in combination with the inte-
-gral action in the compensator, results in an eﬀective steady-state quantization of the duty-cycle
+用 VHDL 或 Verilog 等硬件描述语言（HDL）描述的逻辑功能出发，用 FPGA 开发平台进行原型设计和实验验证，最终以相对小、相对低门数的集成电路实现，在动态性能、功耗和成本方面可匹配或超过最先进的模拟方案。本节介绍数字控制器实现问题，并指出文献中的更多细节。
 
-19.4 Digital Controller Implementation 835
-t
-t
-Ts
-Vc
-0
-qA/D
-(a)
-(b)
-ve[n]
-vc[n]
-KI qA/D
-Fig. 19.20 Waveforms illustrating quantization of the DPWM input signalvc[n] due to A/D quantization
-and integral action of the digital compensator: (a) an impulse in error ve[n], and (b) impulse response of a
-digital compensator with integral gain KI
-command Vc[n]. As a result, for an equilibrium solution to exist, it is not suﬃcient that the com-
-pensator includes integral action and that the DPWM resolution is su ﬃciently high. Consider
-the response of an integral compensator to a unit error impulse of amplitude equal to qA/D, i.e.,
-the smallest possible disturbance at the compensator input. The integrator response to this unit
-impulse is a step, as shown in Fig. 19.20, where K
-I is the integral gain. The step amplitude in
-vc[n] is equal to KIqA/D. In conclusion, because of the A/D quantization and the integral gain
-KI in the compensator, the duty-cycle command signalVc[n], and therefore the duty cycle itself,
-are eﬀectively quantized with a bin width equal to KIqA/D, regardless of how high the DPWM
-resolution may be. This eﬀective DPWM quantization has exactly the same eﬀect on the exis-
-tence of an equilibrium solution as the DPWM LSB resolution qDWPM in Eq. ( 19.76), which
-leads to another necessary condition,
-Gd0H0KIqA/D< qA/D (19.77)
-or,
-Gd0H0KI < 1 (19.78)
-When we combine the fact that an integral action is necessary, with the conditions in Eqs. (19.76)
-and (19.78), we ﬁnd that the conditions for existence of an equilibrium solution in a digitally
-controlled converter can be written as follows:
-Gd0H0qDPWM < qA/D
-0< KI < 1
-Gd0H0
-(19.79)
-where Gd0 is the converter dc control-to-output gain, andKI is the compensator integral gain. In
-general, for any Gcd(z), KI can be found as
-KI = lim
-z→1
-(z−1)Gcd(z) (19.80)
+### 19.4.1 离散时间补偿器实现
 
-836 19 Digital Control of Switched-Mode Power Converters
-One may verify that with qA/D= 4 mV , andnDPWM = 12, the conditions in Eq. (19.79) are both
-met for the compensator in the design example of Sect. 19.3.1.
-If the conditions in Eq. ( 19.79) are met, a digitally controlled converter has at least one
-equilibrium solution in the zero-error bin of the A/D converter, Ve[n]= 0. It should be under-
-stood, however, that existence of an equilibrium solution is not suﬃcient to guarantee no limit
-cycling [238–240]. With quantization eﬀects, the converter is a complex nonlinear dynamic sys-
-tem and limit-cycling disturbances can sometimes be observed even when the loop is design for
-stable operation, and when the DPWM resolution and the compensator integral gain K
-I meet
-Eq. (19.79). On the other hand, for a stable, well-designed loop with high-resolution A /D and
-DPWM components, the amplitude of any limit-cycling disturbances in the output voltage is
-relatively small, in the order of q
-A/D, as illustrated in the example of Fig. 19.18. Therefore, in
-practice, such small-amplitude disturbances can often be tolerated.
-Sections 19.1.1 and the discussion of quantization eﬀects point to the need for fast, high-
-resolution A/D and DPWM components in a digitally controlled regulator.
-Digital Pulse-Width Modulators
-Modulators with high timing resolution are required so that the converter output voltage (or
-current) can be precisely regulated. Furthermore, high-resolution pulse-width modulators are
-needed to avoid or to minimize the amplitude of any limit-cycle disturbances. A digital modula-
-tor in combination with the converter power stage operates as a power digital-to-analog (D/A)
-converter, taking digital commandv
-c[n] as an input and producing converter voltage (or current)
-as an analog output. This power-D/A view has led to a number of DPWM developments based
-on techniques adopted from the signal D/A conversion area.
-A traditional counter-based DPWM replicates analog pulse-width modulation as shown in
-Fig. 19.3: a saw-tooth or a triangular analog waveform is replaced by a digital counter clocked at
-fclk, while a digital comparator outputs the modulated waveform by comparing the counter out-
-put with the digital duty-cycle command vc[n]. A counter-based DPWM of resolution nDPWM
-requires a clock frequency fclk = 2nDPWM fs, where fs is the switching frequency. To achieve
-high resolution at high switching frequencies, prohibitively high clock rates may be required.
-To remove the need for very high clock frequencies, a ﬁne time resolution can instead be
-achieved using a tapped delay line [224]. The delay cells in the delay line can also be designed
-to accomplish feed-forward compensation of the input voltage [ 184]. Hybrid DPWMs [ 225]
-combine delay-line and counter approaches to achieve desirable tradeo ﬀs between clock rate
-and complexity or gate count. Various hybrid DPWM implementations have been described in
-[229, 232]. Other approaches in the area of high-resolution digital pulse-width modulation can
-be found in [ 226, 230, 232, 233]. An overview and classiﬁcation of DPWM architectures and
-realizations has been presented in [227].
-In addition to high-resolution DPWM hardware architectures, following the power-D /A
-view of a digitally controlled switched-mode power converter,ΔΣtechniques, which have been
-used in signal processing and digital audio applications [241], have more recently been applied
-to digitally controlled converters.
-In the digital control loop, the ΔΣmodulator is placed between the discrete-time compen-
-sator Gcd and the DPWM. Figure 19.21 shows a second-order ΔΣmodulator following the
-“error-feedback” architecture [241]. The error-feedback architecture has an advantage of includ-
-ing no delays in the forward path from the high-resolution nh-bit compensator output vch[n]t o
-the lower-resolution nDPWM -bit duty-cycle command vc[n] provided to the hardware DPWM
+模拟补偿器通常用标准模拟构建块——运算或跨导放大器周围的 RC 网络实现。离散时间补偿器 $G_{cd}$ 用数字构建块实现：加法器、乘法器和存储元件。实现给定 $G_{cd}(z)$ 有多种可能方式[176, 223]。本节介绍两种特别适合变换器数字控制环路中离散时间 PI 或 PID 补偿器的实现架构：级联实现和并联实现。
 
-19.4 Digital Controller Implementation 837
-vch[n] vc[n]
-From 
-compensator
-To 
-DPWM
-nh nDPW M
-nDPW M
-(MSB)
-nh − nDPW M
-(LSB)
-z− 1
-z− 1
-2
-2nd -order ∆Σmodulator
-Fig. 19.21 Second-order error-feedbackΔΣmodulator placed between the compensator and the nDPWM -
-bit DPWM c can improve the eﬀective DPWM resolution by nx = nh−nDPWM bits
-component. In theΔΣmodulator, the nDPWM most signiﬁcant bits (MSB) of thenh-bit signal are
-delivered to the nDPWM -bit DPWM, while the quantization error having nx = nh−nDPWM least
-signiﬁcant bits (LSB) is fed back through a simple digital ﬁlter. The ΔΣmodulator shifts the
-quantization error (viewed as quantization noise) to high frequencies, where the noise is ﬁltered
-by the low-pass action of the switched-mode power converter. E ﬀective resolution improve-
-ments can be obtained, thus enabling digital pulse-width modulation at high frequencies and
-with low power consumption [188]. For example, with a 7-10-bit hardware DPWM, the second-
-orderΔΣmodulator oﬀers about 6-7 bits of eﬀective resolution improvement. It has also been
-shown that eﬀective resolution improvements are better with dual-edge (triangle-wave) DPWM
-compared to trailing-edge (saw-tooth) DPWM [231].
-In conclusion, by combining delay-line or hybrid DPWM techniques with ΔΣmodulation,
-DPWM’s having very high eﬀective resolution can be realized using relatively modest hardware
-resources, even at switching frequencies in the high megahertz range.
-A/D Converters
-For fast control loops and precise regulation, A/D converters must have high eﬀective resolution
-around a reference, and a short conversion time. Furthermore, simplicity, low-power consump-
-tion, and suitability for integration in digital VLSI processes are important. On the other hand,
-linearity or wide conversion range may be compromised in order to reduce the A/D complexity.
-These speciﬁcations diﬀer from the typical requirements in standard A/D converters developed
-for signal processing, open-loop sensing, or slow control system applications, which is why
-various switching converter-speciﬁc A/D realizations have been investigated.
-A window-ﬂash A/D converter [ 182] consists of a small number of analog comparators
-centered around an analog reference V
-re f , with a conversion characteristic shown in Fig. 19.2b.
-In some applications, as few as three A /D output levels (+qA/D,0 ,a n d−qA/D) are suﬃcient,
-which allows a window-ﬂash A/D implementation using only two comparators [ 184]. Target-
-ing implementation in digital VLSI processes, delay-line based window A /D converters have
-been introduced in [ 181]. Instead of analog comparators, the voltage-dependent delay charac-
-teristic of logic gates is used to perform voltage-to-delay and delay-to-digital conversion. Cur-
-rent sensing using delay-line A/D has been proposed in [242]. The delay-line A/D concept has
-been developed further in [ 189], where a high-performance, low-power, programmable archi-
-tecture has been demonstrated. A similar approach, using a ring-oscillator A/D, targeting very
+式(19.51)的 PID 传递函数 $G_{cd}(z)$ 的级联实现如图19.14所示。
 
-838 19 Digital Control of Switched-Mode Power Converters
-low-power mobile applications, has been described in [185]. An alternative A/D circuit realiza-
-tion approach, using threshold inverter quantization (TIQ) has been proposed in [ 243]. In the
-TIQ A/D approach, logic inverters with programmed thresholds replace analog comparators,
-enabling fast conversion and asynchronous sampling in a high-performance digital hysteretic
-controller [243].
-19.5 Summary of Key Points
-1. Digital control has become a practical technique for high-performance switching power
-conversion systems that enables higher-level control functionality in modern power man-
-agement systems. These control systems include analog-to-digital converters and digital
-pulse-width modulators that perform signal quantization/sampling of both amplitude and
-time. These quantization eﬀects introduce new phenomena that may limit controller perfor-
-mance and that should be considered in the closed-loop design.
-2. The analog system modeling, analysis, and design techniques of earlier chapters can be
-adapted to the case when the controller /compensator is implemented digitally. The loop
-gain T
-d( jω) of the digital control system includes both the gains of the analog portions
-such as Gvd( jω) and H( jω) as well as the gains of the A/D converter, digital compensator,
-and the DPWM.
-3. An approach to incorporate the digital controller discrete-time response Gcd(z) into the
-continuous-time response Gvd(s)H(s) of the analog portion of the system is developed in
-this chapter. Approximations can be employed that relate the digital and analog signals
-associated with integration: the trapezoidal approximation Eq. ( 19.35) provides a way to
-connect the s-plane transfer functions of the analog portion and the z-plane transfer func-
-tions of the digital portion. The magnitude and phase of the loop gain T
-d( jω) can be found
-and plotted, and the important quantities such as the crossover frequency and phase margin
-can be evaluated.
-4. TheZ-transform is a well-known approach for modeling discrete-time digital systems such
-as the digital compensator. This approach provides a direct and simple way to represent the
-operation of digital compensators. The deﬁnition z= esTs , or the trapezoidal approxima-
-tion (19.35), leads to a direct connection between the Z-transform of the digital domain
-and the Laplace transform of the analog domain.
-5. The converter modeling and analog controller design techniques of earlier chapters can
-be employed as a starting point for design of a digital controller. The delays inherent in
-the digital controller elements must be added. A PI, PD, or PID compensator is designed
-as discussed in Chap. 9, that then is translated to the z-domain as discussed in Sect. 19.3.
-Section 19.4 describes implementation of the compensator algorithm in digital hardware.
-Problems
-19.1 A microcontroller operates at fclk = 120 MHz clock frequency and has counter-based
-DPWM units. Assuming trailing-edge pulse-width modulation, calculate the DPWM
-resolution as the number of bits n
-DPWM available when the microcontroller is used to
-implement a digital controller around a switched-mode power converter operating at dif-
-ferent switching frequencies: (i) fs= 100 kHz, (ii) fs= 250 kHz, or (iii) fs= 1M H z .
+图19.14 离散时间 PID 补偿器的级联实现
 
-19.5 Summary of Key Points 839
-19.2 A microcontroller has high-resolution DPWM units, which oﬀer 150 ps timing resolu-
-tion. Assuming trailing-edge pulse-width modulation, calculate the DPWM resolution as
-the number of bits nDPWM available when the microcontroller is used to implement a dig-
-ital controller around a switched-mode power converter operating at diﬀerent switching
-frequencies: (i) fs= 100 kHz, (ii) fs= 250 kHz, or (iii) fs= 1M H z .
-19.3 A digital controller, which includes an nDPWM -bit DPWM, is used to control a switched-
-mode power converter having dc conversion ratio M(D)= V/Vg. Derive an expression
-for the voltage positioning resolution pv =ΔV/V in %, whereΔV is a step in the output
-voltage V that corresponds to a least signiﬁcant bit (LSB) step qDPWM in duty cycle D.
-The expression for pv should be in terms of M(D) and nDPWM . Based on this general
-expression, derive pv as a function of D and nDPWM for the three basic conversion ratios:
-(i) buck M(D)= D, (ii) boost M(D)= 1/(1−D), and (iii) buck–boost M(D)= D/(1−D).
-In the three cases considered, how diﬃcult is it to precisely position the output voltage
-at high step-down or high step-up conversion ratios?
-19.4 A microcontroller has A/D converters with nA/D-bit resolution and full-scale voltage
-VFS . The microcontroller is used to implement a digital controller around a switched-
-mode power converter so that the output voltage is regulated at V= Vre f/Ho, where Ho
-is the voltage sensing gain at dc. To allow for proper operation during transients, the
-A/D converter must not saturate as long as the output voltage remains within ± 10% of
-the nominal output voltage V. Choose Vre f and Ho as functions of V and VFS to achieve
-the best possible resolution ΔV in output voltage regulation, where ΔV corresponds to
-the zero-error bin of the A/D converter. Given nA/D = 10, VFS = 2 V , andV= 12 V ,
-calculate numerical values for Vre f , Ho, andΔV.
-19.5 A digital controller has a window A/D converter with a number of qA/D bins centered
-around an analog reference voltage Vre f . The controller is used around a switched-mode
-power converter so that the output voltage is regulated at V = Vre f/Ho, where Ho is
-the voltage sensing gain at dc. To allow for proper operation during transients, the A/D
-converter must not saturate as long as the output voltage remains within ± 10% of the
-nominal output voltage V.H o wm a n yqA/D bins are required in the window A /D con-
-verter? Given Vre f = 2V ,qA/D= 5 mV , andV= 12 V , calculate numerical values forHo,
-ΔV corresponding to qA/D, and the number of bins required.
-19.6 An analog proportional-derivative (PD) compensator transfer function is
-Gc(s)= Gc0
-1+ s
-ωz
-1+ s
-ωp
-where Gc0 = 1, fz = 10 kHz and fp = 100 kHz. As discussed in Sect. 9.5.1, the analog
-PD compensator oﬀers the largest phase lead at fx = √fz fp = 31.6 kHz. You may use
-MATLAB or a tool of your choice to perform mapping and calculations requested in this
-problem.
-(a) Construct the Bode plot of Gc(s) magnitude and phase. Calculate the magnitude (in
-dB) and phase (in degrees) responses at (i) f= fz, (ii) f= fx, and (iii) f= fp.
-(b) Using bilinear mapping with prewarp at fprewarp = fx,m a pGc(s)t o G∗
-cd(z). Calculate
-the magnitude (in dB) and phase (in degrees) responses of G∗
-cd at (i) f = fz, (ii)
-f = fx, and (iii) f = fp, and compare to the results obtained in part (a) for three
-diﬀerent sampling frequencies: fs = 500 kHz, fs = 250 kHz, and fs = 150 kHz.
-Overlay Bode plots of Gc and G∗
-cd for the three diﬀerent sampling frequencies.
+可作为在微控制器软件或 HDL 中编写补偿器代码起点的方程如下：
 
-840 19 Digital Control of Switched-Mode Power Converters
-19.7 Figure 19.22 shows a boost voltage regulator similar to the closed-loop regulated boost
-converter in Problem 9.3, except that the controller is implemented digitally. Converter
-components can be considered ideal. The voltage sensor transfer function is
-H(s)= Ho
-1+ s
-ωp
-where Ho = 1/120, and fp = 10 kHz. The voltage reference is Vre f = 1 V . The full-
-scale voltage of the A/D converter is VFS = 2 V . The controller employs a trailing-edge
-DPWM with VM = 1 V , and an integral discrete-time compensatorGcd(z). In parts (a)–
-(c) of the problem, you may assume that the A /D converter and the DPWM are very
-high-resolution components with unity gains. The A/D converter is sampling the sensed
-voltage vs once per switching period, and the delay in the digital control loop is td =
-tmod = DTs. To construct requested Bode plots and to perform numerical calculations
-you may use MATLAB or a tool of your choice.
-Fig. 19.22 Digitally controlled boost converter of Problem 19.7
-(a) Determine steady-state dc output voltage V, duty cycle D, and delay td in the digital
-control loop.
-(b) Assuming analog controller implementation with a negligible delay, design an ana-
-log integral compensator Gc(s)= Kc/s, i.e., determine Kc to obtain crossover fre-
-quency fc = 125 Hz. With this Gc(s), construct the Bode plot of the loop gain T(s)
-magnitude and phase. Label values of all corner frequencies andQ-factors, as appro-
-priate. Determine phase margin.
-(c) Following the design procedure of Sect.19.3, design a discrete-time integral compen-
-sator Gcd(z) to achieve the same crossover frequency and phase margin speciﬁcations
+$$\begin{aligned}
+u_1[n] &= G_d\, v_e[n] \\
+u_2[n] &= u_1[n] - z_L\, u_1[n-1] \\
+u_3[n] &= u_2[n] - z_z\, u_2[n-1] \\
+u_4[n] &= u_3[n] + z_p\, u_4[n-1] \\
+v_c[n] &= u_4[n] + v_c[n-1]
+\end{aligned} \tag{19.64}$$
 
-19.5 Summary of Key Points 841
-as in part (b). Overlay Bode plots of the magnitude and phase responses of T(s) and
-Td(z) and numerically verify the values obtained for the crossover frequency and the
-phase margin.
-(d) Find the minimum A/D resolution nA/D and the minimum DPWM resolution nDPWM
-required so that the dc output voltage is regulated to within± 0.25 V , and so that the
-necessary no-limit-cycling conditions in Eq. (19.79)a r em e t .
-Fig. 19.23 Digitally controlled forward converter of Problem 19.8
-19.8 Figure 19.23 shows a digitally controlled forward converter. This closed-loop voltage
-regulator is similar to the system with the analog controller in Problem9.5. The quiescent
-value of the input voltage is Vg = 380 V . The transformer has turns ratio n1/n3 = 4.5.
-The duty cycle produced by the digital pulse-width modulator is restricted to the range
-0≤d(t)≤0.5 and in that range d[n]= vc[n]/VM where VM = 1 V . The DPWM employs
-dual-edge modulation and hasnDPWM = 12-bit resolution. The A/D converter hasnA/D=
-9-bit resolution and is sampling the sensed voltage vs once per switching period Ts.T h e
-delay in the digital control loop is td = Ts/2. The A/D converter and the DPWM have
-unity gains. Converter components can be considered ideal, and parameter values are
-shown in Fig.19.23. The small-signal models and transfer functions of forward and buck
-converters are similar. The transformer magnetizing inductance has negligible inﬂuence
-on the converter dynamics, and can be ignored. The discrete-time compensator is
-G
-cd(z)= 0.1152z−0.91
-z−1
-You may use MATLAB or a tool of your choice to perform mapping, calculations, and
-plotting.
+补偿器参数——增益 $G_d$、零点 $z_L$、$z_z$ 和极点 $z_p$——是乘法因子，易于可编程。式(19.64)最后一步执行的积分含限幅器。限幅器的目的是防止积分器输出处的占空比命令 $v_c[n]$ 漂离允许工作范围（0 到 1，假设 DPWM 的 $V_M = 1$）。这一"防积分饱和"限幅功能类似于围绕运放构建的模拟补偿器输出处的电压限幅。编写补偿器代码时，还须注意分配给表示参数和信号值的数字字的位数，以防止溢出或其他计算错误[223]。
 
-842 19 Digital Control of Switched-Mode Power Converters
-(a) Determine the quiescent values of the duty cycle D and the output voltage V.
-(b) Derive expressions for the control-to-output transfer function Gvd(s) and the uncom-
-pensated loop gain Tu(s), including eﬀects of the voltage sensor transfer function
-H(s)= vs/v, and delay td in the digital control loop.
-(c) Construct a Bode plot of the loop gainTd magnitude and phase. What is the crossover
-frequency? What is the phase margin?
-(d) Are the necessary no-limit-cycling conditions in Eq. (19.79) satisﬁed for the system
-in Fig. 19.23?
-Fig. 19.24 Digitally controlled buck–boost voltage regulator system, Problem 19.9
-19.9 Design of a digitally controlled buck–boost voltage regulator. This design problem is
-similar to Problem 9.9, except that the controller is implemented digitally. The buck–
-boost converter of Fig. 19.24 operates in the continuous conduction mode, with the ele-
-ment values shown. The nominal input voltage is Vg = 48 V, and it is desired to regu-
-late the output voltage at −15 V. Design the best compensator that you can, which has
-high crossover frequency (but no greater than 10% of the switching frequency), large
-loop gain over the bandwidth of the feedback loop, and phase margin of at least 45 ◦.
-The A/D converter, which has up to 12-bit resolution, nA/D ≤12, samples the sensed
-output voltage once per switching period. The DPWM, which has up to 10-bit resolu-
-tion, nDPWM ≤10 uses trailing-edge modulation. The delay in the digital control loop is
-td = tmod = DTs.T h eA/D converter and the DPWM have unity gains. The sensor H(s)
-has an inverting gain, and includes a single-pole anti-aliasing ﬁlter
-H(s)=−H0
-1+ s
-ωp
-where H0> 0 and fp= 100 kHz. In the design, you may use MATLAB or a tool of your
-choice to perform mapping, plotting and calculations.
+![源页 p.831](../assets/page-snapshots/chapter-19/page-831.png)
 
-19.5 Summary of Key Points 843
-(a) Specify the required value of H0. Select nA/D and nDPWM to achieve best possible dc
-voltage regulation while meeting the necessary no-limit-cycling condition expressed
-in Eq. (19.76).
-(b) Design the discrete-time compensatorGcd(z). Construct Bode plots of the uncompen-
-sated loop gain Tud magnitude and phase (including eﬀects of delay in the feedback
-loop), as well as the magnitude and phase of your compensator transfer function
-Gcd(z). Label the important features of your plots. Verify that the no-limit-cycling
-conditions expressed in Eq. (19.79) are satisﬁed.
-(c) Construct Bode diagrams of the magnitude and phase of your compensated loop
-gain Td(z), and also of the magnitude of the quantities Td/(1+ Td) and 1/(1+ Td).
-Calculate crossover frequency and phase margin.
-(d) Discuss your design. What prevents you from further increasing the crossover fre-
-quency?
-Fig. 19.25 Boost converter with analog average current-mode control
-19.10 Figure 19.25 shows a boost converter with analog average current-mode control of the
-inductor current. The analog compensator transfer function is
-Gci(s)= Gcm
-1+ ωz
-s
-1+ s
-ωp
-where Gcm= 0.63, fz= 4k H z ,fp= 25 kHz. The current sensing gain is Rf = 0.25Ω.
-Figure 19.26 shows the same converter with average current-mode control implemented
-digitally. Current sensing includes an analog single-pole anti-aliasing ﬁlter
-vs
-iL
-= Rf
-1
-1+ s
-ωa
-where Rf = 0.25Ωand fa = 200 kHz. In both cases, the power stage parameters are
-the same and losses can be neglected. You may assume that the A /D converter and
+PID 补偿器的另一种实现是并联形式，由 $G_{cd}$ 的部分分式展开导出：
 
-844 19 Digital Control of Switched-Mode Power Converters
-Fig. 19.26 Boost converter with digital average current-mode control
-Fig. 19.27 Timing diagram for the digitally controlled boost converter in Fig.19.26
-the DPWM are very high-resolution components with unity gains. A timing diagram
-illustrating sampling of the inductor current and operation of the digital pulse-width
-modulator is shown in Fig. 19.27. Note that a dual-edge (triangle-wave) DPWM is em-
-ployed. In the design of the digital controller you only need to consider the modular
-delay t
-d= tmod= Ts/2, as shown in Fig. 19.27. You may use MATLAB or a tool of your
-choice to perform calculations, and to construct Bode plots.
-```
+$$G_{cd}(z) = G_d\, \frac{(z - z_L)(z - z_z)}{(z - 1)(z - z_p)} = K_P + K_I\, \frac{1}{1 - z^{-1}} + K_D\, \frac{1 - z^{-1}}{1 - z_p\, z^{-1}} \tag{19.65}$$
+
+其中系数 $K_P$、$K_D$、$K_I$ 可用 $G_d$、$z_L$、$z_z$、$z_p$ 参数表示为
+
+$$K_P = G_d\left( z_L + z_z - z_p - (2 - z_p)\, z_L z_z \right)$$
+
+$$K_I = G_d\, \frac{(1 - z_L)(1 - z_z)}{1 - z_p}$$
+
+$$K_D = G_d\, \frac{(z_L - z_p)(z_z - z_p)}{(1 - z_p)^2} \tag{19.66}$$
+
+并联实现如图19.15所示。
+
+图19.15 离散时间 PID 补偿器的并联实现
+
+作为微控制器或 HDL 编码起点的方程如下：
+
+$$\begin{aligned}
+u_p[n] &= K_P\, v_e[n] \\
+u_i[n] &= K_I\, v_e[n] + u_i[n-1] \\
+u_{d1}[n] &= K_D\left( v_e[n] - v_e[n-1] \right) \\
+u_d[n] &= u_{d1}[n] + z_p\, u_d[n-1] \\
+v_c[n] &= u_p[n] + u_i[n] + u_d[n]
+\end{aligned} \tag{19.67}$$
+
+注意积分级中含防积分饱和限幅器。
+
+![源页 p.832](../assets/page-snapshots/chapter-19/page-832.png)
+
+式(19.65)的离散时间 PID 传递函数有两个零点和两个极点。一个极点在 $z = 1$ 处，对应补偿器中的积分作用。$z = z_p$ 处的第二个极点对应连续时间 PID 补偿器中 $f_{p1}$ 处的高频极点。由式(19.53)可知，
+
+$$f_{p1} = \frac{f_{prewarp}}{a} = \frac{f_{prewarp}}{\tan\left( \dfrac{\pi\, f_{prewarp}}{f_s} \right)} \tag{19.68}$$
+
+使 $z_p = 0$。此时，离散时间传递函数 $G_{cd}$ 具有简单的 PID 形式[176]，$K_P$、$K_I$、$K_D$ 分别代表比例、积分、微分增益，
+
+$$G_{cd}(z) = G_d\, \frac{(z - z_L)(z - z_z)}{z(z - 1)} = K_P + K_I\, \frac{1}{1 - z^{-1}} + K_D\,(1 - z^{-1}) \tag{19.69}$$
+
+当 $z_p = 0$ 时，图19.15的实现因 $u_d = u_{d1}$ 而简化。这种简单 PID 形式特别适合直接整定 $K_P$、$K_I$、$K_D$ 增益的设计技术[176, 223]。
+
+### 19.4.2 量化效应、数字脉宽调制器与 A/D 转换器
+
+图19.2和19.3分别给出了 A/D 和 DPWM 的量化特性。至此，在数字控制环路的建模和设计中，我们假设采用极高分辨率的 A/D 和 DPWM 模块使式(19.9)成立，从而忽略了量化效应。已观察到，实际有限分辨率 A/D 和 DPWM 模块引入的非线性可能导致持续扰动，有时称为"极限环"[238–240]。本节首先讨论量化效应及避免极限环扰动所需的基本条件，然后概述 A/D 和 DPWM 的实现方法。
+
+假设已设计出稳定的数字反馈控制环路，数字控制变换器应在一个平衡点工作，该点所有控制器变量取恒定值，所有变换器波形以 $T_s = 1/f_s$ 为周期呈周期性。为求平衡解，考虑图19.16所示含 A/D 和 DPWM 量化的数字控制变换器直流模型。这是一个静态模型，故离散时间补偿器用其直流增益 $G_{cd0}$ 表示，
+
+$$G_{cd0} = \left. G_{cd}(z) \right|_{z \to 1} \tag{19.70}$$
+
+而 $H_0$ 是传感器直流增益。忽略损耗，变换器用理想 $1: M(D)$ 变压器表示，其中 $M(D) = V/V_g$ 是直流变换比。A/D 量化特性 $V_e[n] = Q_{A/D}(V_e(n T_s))$ 如图19.2所示，DPWM 量化 $D = Q_{DPWM}(V_c[n])$ 如图19.3所示。图19.16模型的平衡解可用图19.17所示图解法求得，其中 A/D 转换器输出处的数字误差信号 $V_e[n]$ 作为 A/D 转换器输入处模拟样本 $V_e = V_e(n T_s)$ 的函数绘出。
+
+![源页 p.833](../assets/page-snapshots/chapter-19/page-833.png)
+
+图19.16 含 A/D 和 DPWM 量化的数字控制变换器直流模型
+
+图19.17 求 A/D 转换器和 DPWM 为 (a) 无限分辨率、(b) 有限分辨率时数字控制变换器静态工作点的图解法。$V_e$ 作为 $V_e[n]$ 函数的表达式针对同步降压变换器示例给出
+
+![源页 p.834](../assets/page-snapshots/chapter-19/page-834.png)
+
+先考虑图19.17(a)采用极高分辨率 A/D 和 DPWM、量化效应可忽略的情形。此时平衡解由 A/D 特性
+
+$$V_e[n] = V_e \tag{19.71}$$
+
+与环路周围各元件直流特性
+
+$$V_e = V_{ref} - V_g H_0 G_{cd0}\, V_e[n] \tag{19.72}$$
+
+的交点求得。此处假设同步降压变换器示例 $M(D) = D$。从式(19.71)和(19.72)消去 $V_e$，可代数求得平衡解：
+
+$$V_e[n] = \frac{V_{ref}}{1 + V_g H_0 G_{cd0}} \tag{19.73}$$
+
+当直流增益 $G_{cd0}$ 大但有限时，达到图19.17(a)中记为点 A 的平衡点，对应小但非零的直流误差。当补偿器含积分作用、$G_{cd0} \to \infty$ 时，平衡解在点 B，对应零直流误差。这与9.2节讨论一致，该节表明大直流环路增益将调节误差驱动到零。
+
+接下来考虑采用实际有限分辨率 A/D 和 DPWM 元件的情形。图19.17(b)给出了图解。A/D 量化特性现为高度非线性的 $V_e[n] = Q_{A/D}(V_e)$，A/D 量化区间宽度为 $q_{A/D}$。由于 DPWM 量化，环路周围特性也是非线性的：
+
+$$V_e = V_{ref} - V_g H_0\, Q_{DPWM}(G_{cd0}\, V_e[n]) \tag{19.74}$$
+
+此处同样假设同步降压变换器示例 $M(D) = D$，直流控制-输出增益 $G_{d0} = V_g$。环路周围特性的水平区间宽度为 $V_g H_0 q_{DPWM}$，其中 $q_{DPWM} = 1/2^{n_{DPWM}}$ 是 DPWM 的 LSB 分辨率。式(19.74)所给特性的垂直阶跃高度为 $q_{DPWM}/G_{cd0}$。若补偿器直流增益 $G_{cd0}$ 有限，平衡解在图19.17(b)的点 A，位于 A/D 特性的垂直段上。A/D 输出 $V_e[n]$ 只能等于 $q_{A/D}$ 的整数倍，不能是 $q_{A/D}$ 的分数。因此图19.17(b)的平衡点 A 不可行。给定大但有限的补偿器直流增益，数字控制变换器没有固定平衡点。相反，A/D 转换器输出必须在两个或更多量化级之间跳变，导致变换器波形中的持续扰动（极限环）。
+
+若补偿器含积分作用、$G_{cd0} \to \infty$，式(19.74)所给特性的垂直阶跃宽度消失。A/D 转换器周围特性变为水平（$V_e$）轴上间隔为 $V_g H_0 q_{DPWM}$ 的一系列点。此时可能有多个平衡解，如图19.17(b)中两个点 B 所示。两个可能平衡解中的每一个都在 A/D 转换器零误差区间内，$V_e[n] = 0$。应注意，存在对应 $V_e[n] = 0$ 的多个可能平衡解的前提是补偿器含积分作用，且 DPWM 量化引起的区间宽度小于 A/D 区间宽度，
+
+$$V_g H_0\, q_{DPWM} < q_{A/D} \tag{19.75}$$
+
+![源页 p.835](../assets/page-snapshots/chapter-19/page-835.png)
+
+式(19.75)是 $M(D) = D$、$G_{d0} = V_g$ 的同步降压变换器示例的条件。一般而言，数字控制变换器中存在平衡解的必要条件可写为：
+
+$$G_{d0}\, H_0\, q_{DPWM} < q_{A/D} \tag{19.76}$$
+
+其中 $G_{d0}$ 是变换器直流控制-输出增益。
+
+图19.18 19.3.1节数字控制同步降压稳压器在无量化效应和有量化效应（$q_{A/D} = 4\,\text{mV}$，$n_{DPWM} = 10$）时的阶跃负载（2.5 A 至 5 A）暂态响应比较
+
+图19.18比较了19.3.1节数字控制同步降压稳压器示例在采用极高分辨率 A/D 和 DPWM（量化效应可忽略）与采用实际有限分辨率元件（$q_{A/D} = 4\,\text{mV}$，$n_{DPWM} = 10$，$q_{DPWM} = 1/2^{10}$，$V_g H_0 q_{DPWM} = 4.9\,\text{mV}$）时的阶跃负载暂态响应。补偿器含积分作用，故 $G_{cd0} \to \infty$，但 DPWM 分辨率不够高，式(19.75)条件不满足。图19.18的阶跃负载暂态响应相似，只是量化效应导致周期性极限环。
+
+![源页 p.836](../assets/page-snapshots/chapter-19/page-836.png)
+
+图19.19 19.3.1节数字控制同步降压稳压器在无量化效应和有量化效应（$q_{A/D} = 4\,\text{mV}$，$n_{DPWM} = 12$）时的阶跃负载（2.5 A 至 5 A）暂态响应比较
+
+若式(19.75)不满足，平衡解可能存在也可能不存在，取决于式(19.74)所给特性中是否有一点落在 A/D 转换器零误差区间内。另一重要观察是，极限环若发生，其幅值相对较小，约为 A/D 转换器 LSB 分辨率 $q_{A/D}$ 的量级，如图19.18波形所示。
+
+图19.19比较了相同阶跃负载暂态响应，但 DPWM 分辨率提高到 12 位，$n_{DPWM} = 12$，$q_{DPWM} = 1/2^{12}$，$V_g H_0 q_{DPWM} = 1.2\,\text{mV}$，满足式(19.75)条件。经短暂暂态后，采用实际 A/D 和 DPWM 元件的稳压器达到平衡，无极限环。注意约 $75\,\mu\text{s}$ 后，输出电压保持在零误差区间内，小幅振荡（未被反馈控制阻尼）衰减至量化平衡点。
+
+与 A/D 和 DPWM 量化下平衡解存在性的讨论相关，值得注意 A/D 量化与补偿器中的积分作用结合，导致 DPWM 输入信号 $V_c[n]$ 的有效稳态量化。
+
+![源页 p.837](../assets/page-snapshots/chapter-19/page-837.png)
+
+图19.20 说明由 A/D 量化和数字补偿器积分作用引起的 DPWM 输入信号 $v_c[n]$ 量化的波形：(a) 误差 $v_e[n]$ 中的一个脉冲，(b) 积分增益为 $K_I$ 的数字补偿器的脉冲响应
+
+因此，为使平衡解存在，仅补偿器含积分作用且 DPWM 分辨率足够高是不够的。考虑积分补偿器对幅度等于 $q_{A/D}$（即补偿器输入处最小可能扰动）的单位误差脉冲的响应。该积分器对单位脉冲的响应是一个阶跃，如图19.20所示，其中 $K_I$ 是积分增益。$v_c[n]$ 中阶跃幅度等于 $K_I q_{A/D}$。结论是，由于 A/D 量化和补偿器中的积分增益 $K_I$，占空比命令信号 $V_c[n]$（因此占空比本身）被有效量化，区间宽度为 $K_I q_{A/D}$，无论 DPWM 分辨率多高。这一有效 DPWM 量化对平衡解存在性的影响与式(19.76)中 DPWM LSB 分辨率 $q_{DPWM}$ 完全相同，由此得另一必要条件，
+
+$$G_{d0}\, H_0\, K_I\, q_{A/D} < q_{A/D} \tag{19.77}$$
+
+即
+
+$$G_{d0}\, H_0\, K_I < 1 \tag{19.78}$$
+
+将积分作用必要性这一事实与式(19.76)和(19.78)条件结合，数字控制变换器中平衡解存在条件可写为：
+
+$$G_{d0}\, H_0\, q_{DPWM} < q_{A/D}$$
+
+$$0 < K_I < \frac{1}{G_{d0}\, H_0} \tag{19.79}$$
+
+其中 $G_{d0}$ 是变换器直流控制-输出增益，$K_I$ 是补偿器积分增益。一般而言，对任意 $G_{cd}(z)$，$K_I$ 可如下求得
+
+$$K_I = \lim_{z \to 1} (z - 1)\, G_{cd}(z) \tag{19.80}$$
+
+![源页 p.838](../assets/page-snapshots/chapter-19/page-838.png)
+
+可验证，取 $q_{A/D} = 4\,\text{mV}$、$n_{DPWM} = 12$ 时，19.3.1节设计示例中的补偿器同时满足式(19.79)的两个条件。
+
+若式(19.79)条件满足，数字控制变换器在 A/D 转换器零误差区间 $V_e[n] = 0$ 内至少有一个平衡解。但应理解，平衡解的存在并不足以保证无极限环[238–240]。在量化效应下，变换器是复杂的非线性动态系统，即使环路设计为稳定运行且 DPWM 分辨率和补偿器积分增益 $K_I$ 满足式(19.79)，有时仍可观察到极限环扰动。另一方面，对于设计良好、采用高分辨率 A/D 和 DPWM 元件的稳定环路，任何输出电压中的极限环扰动幅值相对较小，约为 $q_{A/D}$ 量级，如图19.18示例所示。因此，实践中常可容忍这种小幅扰动。
+
+19.1.1节和量化效应讨论表明，数字控制稳压器需要快速、高分辨率的 A/D 和 DPWM 元件。
+
+**数字脉宽调制器**
+
+需高时间分辨率的调制器以精确调节变换器输出电压（或电流）。此外，需高分辨率脉宽调制器以避免或最小化极限环扰动幅值。数字调制器与变换器功率级组合作为功率数模（D/A）转换器工作，以数字命令 $v_c[n]$ 为输入、变换器电压（或电流）为模拟输出。这一功率 D/A 视角催生了多种借鉴信号 D/A 转换领域技术的 DPWM 发展。
+
+传统基于计数器的 DPWM 复制图19.3所示模拟脉宽调制：锯齿或三角模拟波形由 $f_{clk}$ 时钟驱动的数字计数器替代，数字比较器将计数器输出与数字占空比命令 $v_c[n]$ 比较输出调制波形。分辨率为 $n_{DPWM}$ 的基于计数器的 DPWM 需要时钟频率 $f_{clk} = 2^{n_{DPWM}} f_s$，其中 $f_s$ 是开关频率。要在高开关频率下实现高分辨率，可能需要高得不可接受的时钟速率。
+
+为消除对极高时钟频率的需求，可用抽头延迟线实现精细时间分辨率[224]。延迟线中的延迟单元也可设计为实现输入电压的前馈补偿[184]。混合 DPWM[225]结合延迟线和计数器方法，在时钟速率与复杂度或门数之间取得 desirable 折中。各种混合 DPWM 实现见文献[229, 232]。高分辨率数字脉宽调制的其他方法见文献[226, 230, 232, 233]。DPWM 架构和实现的概述与分类见文献[227]。
+
+除高分辨率 DPWM 硬件架构外，遵循数字控制开关模式功率变换器的功率 D/A 观点，ΔΣ 技术（已用于信号处理和数字音频应用[241]）最近被应用于数字控制变换器。
+
+在数字控制环路中，ΔΣ 调制器置于离散时间补偿器 $G_{cd}$ 与 DPWM 之间。图19.21给出了遵循"误差反馈"架构[241]的二阶 ΔΣ 调制器。误差反馈架构的优点是从高分辨率 $n_h$ 位补偿器输出 $v_{ch}[n]$ 到提供给硬件 DPWM 的较低分辨率 $n_{DPWM}$ 位占空比命令 $v_c[n]$ 的前向路径中不含延迟。
+
+![源页 p.839](../assets/page-snapshots/chapter-19/page-839.png)
+
+图19.21 置于补偿器和 $n_{DPWM}$ 位 DPWM 之间的二阶误差反馈 ΔΣ 调制器可将有效 DPWM 分辨率提高 $n_x = n_h - n_{DPWM}$ 位
+
+在 ΔΣ 调制器中，$n_h$ 位信号的 $n_{DPWM}$ 个最高有效位（MSB）送到 $n_{DPWM}$ 位 DPWM，而量化误差（含 $n_x = n_h - n_{DPWM}$ 个最低有效位 LSB）通过简单数字滤波器反馈。ΔΣ 调制器将量化误差（视为量化噪声）移到高频，在此处噪声被开关模式功率变换器的低通作用滤波。可获得有效分辨率提升，从而实现高频低功耗的数字脉宽调制[188]。例如，用 7–10 位硬件 DPWM，二阶 ΔΣ 调制器提供约 6–7 位有效分辨率提升。还表明双沿（三角波）DPWM 比后沿（锯齿波）DPWM 的有效分辨率提升更好[231]。
+
+结论是，通过结合延迟线或混合 DPWM 技术与 ΔΣ 调制，可在高达兆赫范围的开关频率下以相对适度的硬件资源实现极高有效分辨率的 DPWM。
+
+**A/D 转换器**
+
+对快速控制环路和精确调节，A/D 转换器须在参考附近具有高有效分辨率，且转换时间短。此外，简单性、低功耗和适合在数字 VLSI 工艺中集成也很重要。另一方面，为降低 A/D 复杂度，线性度或宽转换范围可能被折中。这些指标不同于为信号处理、开环检测或慢速控制系统应用而开发的标准 A/D 转换器的典型要求，因此人们研究了多种针对开关变换器的 A/D 实现。
+
+窗口闪速 A/D 转换器[182]由少量以模拟参考 $V_{ref}$ 为中心的模拟比较器组成，转换特性如图19.2(b)所示。在某些应用中，仅需三个 A/D 输出电平（$+q_{A/D}$、$0$、$-q_{A/D}$）即可，这使仅用两个比较器即可实现窗口闪速 A/D[184]。面向数字 VLSI 工艺实现，基于延迟线的窗口 A/D 转换器在文献[181]中引入。不用模拟比较器，而是利用逻辑门电压相关延迟特性执行电压-延迟和延迟-数字转换。基于延迟线 A/D 的电流检测在文献[242]中提出。延迟线 A/D 概念在文献[189]中进一步发展，演示了一种高性能、低功耗、可编程架构。文献[185]描述了一种类似方法（环振荡器 A/D），面向极低功耗移动应用。文献[243]提出了一种替代 A/D 电路实现方法——阈值反相器量化（TIQ）。在 TIQ A/D 方法中，用编程阈值的逻辑反相器替代模拟比较器，在高性能数字滞环控制器中实现快速转换和异步采样[243]。
+
+## 19.5 要点总结
+
+1. 数字控制已成为高性能开关功率变换系统的实用技术，使现代电源管理系统能实现更高级的控制功能。这些控制系统包含对幅值和时间都进行量化/采样的模数转换器和数字脉宽调制器。这些量化效应引入了新现象，可能限制控制器性能，应在闭环设计中予以考虑。
+
+2. 前几章的模拟系统建模、分析和设计技术可改造到控制器/补偿器数字实现的情形。数字控制系统环路增益 $T_d(j\omega)$ 既含模拟部分增益（如 $G_{vd}(j\omega)$ 和 $H(j\omega)$），也含 A/D 转换器、数字补偿器和 DPWM 的增益。
+
+3. 本章开发了一种将数字控制器离散时间响应 $G_{cd}(z)$ 纳入系统模拟部分连续时间响应 $G_{vd}(s) H(s)$ 的方法。可采用将积分相关的数字和模拟信号联系起来的近似：梯形近似式(19.35)提供了一种将模拟部分的 $s$ 平面传递函数与数字部分的 $z$ 平面传递函数联系起来的方法。可求得并绘制环路增益 $T_d(j\omega)$ 的幅值和相位，评估穿超频率和相位裕度等重要量。
+
+4. z 变换是建模离散时间数字系统（如数字补偿器）的常用方法。该方法提供了一种直接而简单的方式来表示数字补偿器的工作。$z = e^{s T_s}$ 的定义或梯形近似式(19.35)建立了数字域 z 变换与模拟域拉普拉斯变换之间的直接联系。
+
+5. 前几章的变换器建模和模拟控制器设计技术可作为数字控制器设计的起点。须加入数字控制器元件固有的延迟。如第9章所述设计 PI、PD 或 PID 补偿器，然后如19.3节所述转换到 $z$ 域。19.4节描述补偿器算法在数字硬件中的实现。
+
+## 习题
+
+**19.1** 一个微控制器工作于 $f_{clk} = 120\,\text{MHz}$ 时钟频率，含基于计数器的 DPWM 单元。假设后沿脉宽调制，计算该微控制器在不同开关频率下实现数字控制开关模式功率变换器时 DPWM 分辨率位数 $n_{DPWM}$：(i) $f_s = 100\,\text{kHz}$，(ii) $f_s = 250\,\text{kHz}$，(iii) $f_s = 1\,\text{MHz}$。
+
+![源页 p.840](../assets/page-snapshots/chapter-19/page-840.png)
+
+**19.2** 一个微控制器含高分辨率 DPWM 单元，提供 $150\,\text{ps}$ 时间分辨率。假设后沿脉宽调制，计算不同开关频率下的 DPWM 分辨率位数 $n_{DPWM}$：(i) $f_s = 100\,\text{kHz}$，(ii) $f_s = 250\,\text{kHz}$，(iii) $f_s = 1\,\text{MHz}$。
+
+**19.3** 一个含 $n_{DPWM}$ 位 DPWM 的数字控制器用于控制直流变换比 $M(D) = V/V_g$ 的开关模式功率变换器。推导电压定位分辨率 $p_v = \Delta V/V$（以 % 为单位）的表达式，其中 $\Delta V$ 是对应占空比 $D$ 的 LSB 步长 $q_{DPWM}$ 的输出电压 $V$ 的步进。$p_v$ 的表达式应以 $M(D)$ 和 $n_{DPWM}$ 表示。基于此一般表达式，对三种基本变换比推导 $p_v$ 作为 $D$ 和 $n_{DPWM}$ 函数的表达式：(i) 降压 $M(D) = D$，(ii) 升压 $M(D) = 1/(1-D)$，(iii) 升降压 $M(D) = D/(1-D)$。在三种情形中，高降压或高升压变换比下精确配置输出电压有多困难？
+
+**19.4** 一个微控制器含 $n_{A/D}$ 位分辨率、满量程电压 $V_{FS}$ 的 A/D 转换器。该微控制器用于实现开关模式功率变换器的数字控制器，使输出电压调节到 $V = V_{ref}/H_0$，其中 $H_0$ 是直流电压检测增益。为允许暂态期间正常工作，只要输出电压保持在额定输出电压 $V$ 的 $\pm 10\%$ 以内，A/D 转换器就不应饱和。选择 $V_{ref}$ 和 $H_0$ 作为 $V$ 和 $V_{FS}$ 的函数以在输出电压调节中获得最佳分辨率 $\Delta V$，其中 $\Delta V$ 对应 A/D 转换器的零误差区间。给定 $n_{A/D} = 10$，$V_{FS} = 2\,\text{V}$，$V = 12\,\text{V}$，计算 $V_{ref}$、$H_0$、$\Delta V$ 的数值。
+
+**19.5** 一个数字控制器含以模拟参考电压 $V_{ref}$ 为中心、若干 $q_{A/D}$ 区间的窗口 A/D 转换器。该控制器用于开关模式功率变换器，使输出电压调节到 $V = V_{ref}/H_0$，其中 $H_0$ 是直流电压检测增益。为允许暂态期间正常工作，只要输出电压保持在额定输出电压 $V$ 的 $\pm 10\%$ 以内，A/D 转换器就不应饱和。窗口 A/D 转换器需要多少个 $q_{A/D}$ 区间？给定 $V_{ref} = 2\,\text{V}$，$q_{A/D} = 5\,\text{mV}$，$V = 12\,\text{V}$，计算 $H_0$、对应 $q_{A/D}$ 的 $\Delta V$ 和所需区间数的数值。
+
+**19.6** 一个模拟比例-微分（PD）补偿器传递函数为
+
+$$G_c(s) = G_{c0}\, \frac{1 + \dfrac{s}{\omega_z}}{1 + \dfrac{s}{\omega_p}}$$
+
+其中 $G_{c0} = 1$，$f_z = 10\,\text{kHz}$，$f_p = 100\,\text{kHz}$。如9.5.1节讨论，模拟 PD 补偿器在 $f_x = \sqrt{f_z f_p} = 31.6\,\text{kHz}$ 处提供最大相位超前。可用 MATLAB 或所选工具完成本题的映射和计算。
+
+(a) 绘制 $G_c(s)$ 的幅值和相位波特图。计算在 (i) $f = f_z$、(ii) $f = f_x$、(iii) $f = f_p$ 处的幅值（dB）和相位（度）响应。
+
+(b) 用以 $f_{prewarp} = f_x$ 预畸的双线性映射将 $G_c(s)$ 映射为 $G_{cd}^*(z)$。计算三种不同采样频率 $f_s = 500\,\text{kHz}$、$f_s = 250\,\text{kHz}$、$f_s = 150\,\text{kHz}$ 下 $G_{cd}^*$ 在 (i) $f = f_z$、(ii) $f = f_x$、(iii) $f = f_p$ 处的幅值（dB）和相位（度）响应，并与(a)结果比较。叠加三种采样频率下 $G_c$ 和 $G_{cd}^*$ 的波特图。
+
+![源页 p.841](../assets/page-snapshots/chapter-19/page-841.png)
+
+**19.7** 图19.22给出了一个升压稳压器，与习题9.3的闭环升压变换器相似，但控制器为数字实现。变换器元件可视为理想。电压传感器传递函数为
+
+$$H(s) = \frac{H_0}{1 + \dfrac{s}{\omega_p}}$$
+
+其中 $H_0 = 1/120$，$f_p = 10\,\text{kHz}$。电压参考 $V_{ref} = 1\,\text{V}$。A/D 转换器满量程电压 $V_{FS} = 2\,\text{V}$。控制器采用 $V_M = 1\,\text{V}$ 的后沿 DPWM 和积分离散时间补偿器 $G_{cd}(z)$。在(a)–(c)中，可假设 A/D 转换器和 DPWM 为极高分辨率单位增益元件。A/D 转换器每开关周期对检测电压 $v_s$ 采样一次，数字控制环路延迟 $t_d = t_{mod} = D T_s$。绘制所需波特图和执行数值计算时可用 MATLAB 或所选工具。
+
+图19.22 习题19.7的数字控制升压变换器
+
+(a) 确定稳态直流输出电压 $V$、占空比 $D$ 和数字控制环路延迟 $t_d$。
+
+(b) 假设延迟可忽略的模拟控制器实现，设计模拟积分补偿器 $G_c(s) = K_c/s$，即确定 $K_c$ 以获得穿超频率 $f_c = 125\,\text{Hz}$。用此 $G_c(s)$ 绘制环路增益 $T(s)$ 幅值和相位波特图。标出所有转折频率和 $Q$ 值。确定相位裕度。
+
+(c) 按19.3节设计流程，设计离散时间积分补偿器 $G_{cd}(z)$ 以实现与
+
+![源页 p.842](../assets/page-snapshots/chapter-19/page-842.png)
+
+(b)相同的穿超频率和相位裕度指标。叠加 $T(s)$ 和 $T_d(z)$ 的幅值和相位响应波特图，数值验证穿超频率和相位裕度的值。
+
+(d) 求使直流输出电压调节在 $\pm 0.25\,\text{V}$ 以内且满足式(19.79)无极限环条件所需的最小 A/D 分辨率 $n_{A/D}$ 和最小 DPWM 分辨率 $n_{DPWM}$。
+
+图19.23 习题19.8的数字控制正激变换器
+
+**19.8** 图19.23给出了一个数字控制的正激变换器。该闭环电压稳压器与习题9.5中模拟控制器的系统相似。输入电压静态值为 $V_g = 380\,\text{V}$。变压器匝比 $n_1/n_3 = 4.5$。数字脉宽调制器产生的占空比限于 $0 \le d(t) \le 0.5$ 范围，在该范围内 $d[n] = v_c[n]/V_M$，其中 $V_M = 1\,\text{V}$。DPWM 采用双沿调制，$n_{DPWM} = 12$ 位分辨率。A/D 转换器 $n_{A/D} = 9$ 位分辨率，每开关周期 $T_s$ 对检测电压 $v_s$ 采样一次。数字控制环路延迟 $t_d = T_s/2$。A/D 转换器和 DPWM 均为单位增益。变换器元件可视为理想，参数值如图19.23所示。正激和降压变换器的小信号模型和传递函数相似。变压器励磁电感对变换器动态的影响可忽略，可忽略。离散时间补偿器为
+
+$$G_{cd}(z) = 0.1152\, \frac{z - 0.91}{z - 1}$$
+
+可用 MATLAB 或所选工具完成映射、计算和绘图。
+
+![源页 p.843](../assets/page-snapshots/chapter-19/page-843.png)
+
+(a) 确定占空比 $D$ 和输出电压 $V$ 的静态值。
+
+(b) 推导控制-输出传递函数 $G_{vd}(s)$ 和未补偿环路增益 $T_u(s)$ 的表达式，包括电压传感器传递函数 $H(s) = v_s/v$ 和数字控制环路延迟 $t_d$ 的影响。
+
+(c) 绘制环路增益 $T_d$ 的幅值和相位波特图。穿超频率是多少？相位裕度是多少？
+
+(d) 图19.23系统是否满足式(19.79)的无极限环必要条件？
+
+图19.24 习题19.9的数字控制升降压电压稳压器系统
+
+**19.9** 数字控制升降压电压稳压器设计。本设计问题与习题9.9相似，但控制器为数字实现。图19.24的升降压变换器工作于连续导通模式，元件值如图所示。额定输入电压 $V_g = 48\,\text{V}$，期望调节输出电压至 $-15\,\text{V}$。设计你能做到的最好补偿器，具有高穿超频率（但不超过开关频率的 10%）、反馈环路带宽内大环路增益、至少 $45°$ 相位裕度。A/D 转换器分辨率最高 12 位（$n_{A/D} \le 12$），每开关周期对检测输出电压采样一次。DPWM 分辨率最高 10 位（$n_{DPWM} \le 10$），采用后沿调制。数字控制环路延迟 $t_d = t_{mod} = D T_s$。A/D 转换器和 DPWM 均为单位增益。传感器 $H(s)$ 具反相增益，含单极抗混叠滤波器
+
+$$H(s) = -\frac{H_0}{1 + \dfrac{s}{\omega_p}}$$
+
+其中 $H_0 > 0$，$f_p = 100\,\text{kHz}$。设计中可用 MATLAB 或所选工具完成映射、绘图和计算。
+
+![源页 p.844](../assets/page-snapshots/chapter-19/page-844.png)
+
+(a) 指定所需 $H_0$ 值。选择 $n_{A/D}$ 和 $n_{DPWM}$ 以在满足式(19.76)无极限环必要条件的同时实现最佳直流电压调节。
+
+(b) 设计离散时间补偿器 $G_{cd}(z)$。绘制未补偿环路增益 $T_{ud}$ 的幅值和相位波特图（含反馈环路延迟影响），以及补偿器传递函数 $G_{cd}(z)$ 的幅值和相位。标出图中的重要特征。验证满足式(19.79)的无极限环条件。
+
+(c) 绘制补偿后环路增益 $T_d(z)$ 的幅值和相位波特图，以及 $T_d/(1+T_d)$ 和 $1/(1+T_d)$ 的幅值。计算穿超频率和相位裕度。
+
+(d) 讨论你的设计。什么阻止你进一步提高穿超频率？
+
+图19.25 模拟平均电流模式控制的升压变换器
+
+**19.10** 图19.25给出了带模拟平均电流模式控制电感电流的升压变换器。模拟补偿器传递函数为
+
+$$G_{ci}(s) = G_{cm}\, \frac{1 + \dfrac{\omega_z}{s}}{1 + \dfrac{s}{\omega_p}}$$
+
+其中 $G_{cm} = 0.63$，$f_z = 4\,\text{kHz}$，$f_p = 25\,\text{kHz}$。电流检测增益 $R_f = 0.25\,\Omega$。图19.26给出了同一变换器以数字实现的平均电流模式控制。电流检测含模拟单极抗混叠滤波器
+
+$$\frac{v_s}{i_L} = R_f\, \frac{1}{1 + \dfrac{s}{\omega_a}}$$
+
+其中 $R_f = 0.25\,\Omega$，$f_a = 200\,\text{kHz}$。两种情形功率级参数相同，损耗可忽略。可假设 A/D 转换器和
+
+![源页 p.845](../assets/page-snapshots/chapter-19/page-845.png)
+
+图19.26 数字平均电流模式控制的升压变换器
+
+图19.27 图19.26数字控制升压变换器的时序图
+
+DPWM 为极高分辨率单位增益元件。图19.27给出了说明电感电流采样和数字脉宽调制器工作的时序图。注意采用双沿（三角波）DPWM。数字控制器设计中只需考虑调制器延迟 $t_d = t_{mod} = T_s/2$，如图19.27所示。可用 MATLAB 或所选工具完成计算和波特图绘制。
+
+![源页 p.846](../assets/page-snapshots/chapter-19/page-846.png)

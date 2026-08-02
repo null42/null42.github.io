@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第14章part 1 - 14 Circuit Averaging, Averaged Switch Modeling, and Simulation"
+title: "第14章 电路平均、平均开关建模与仿真（第1部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,799 +18,341 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第14章part 1 - 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
+# 第14章 电路平均、平均开关建模与仿真（第1部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 552-571  
-> Chunk ID: `chapter-14-part-1`
+> 源页：552–571
+> 本部分涵盖 14.1 电路平均与平均开关建模、14.2 开关网络的其他结构、14.3 平均电路模型仿真引言。
 
-## 主干提取
+## 章引言
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+电路平均是导出变换器等效电路的另一种知名技巧。电路平均技巧不平均变换器状态方程，而是直接平均变换器波形。所有操作在电路图上而非方程上进行，故电路平均技巧给模型更物理解释。由于电路平均涉及平均和小信号线性化，它与状态空间平均等价。但许多情形下电路平均更易应用，且允许小信号交流模型几乎凭观察写出。电路平均技巧还可直接应用于多种变换器和开关元件，包括相控整流器、断续导通模式或电流编程下工作的脉宽调制变换器及准谐振变换器——这些在后续章节描述。但其他情形下可能导出较难分析和理解的复杂模型。为克服此问题，可结合电路平均和状态空间平均。电路平均在状态空间平均之前开发，见 [16]。因其通用性，后来对开关网络电路平均重新产生兴趣 [70–76, 108]。
 
-## 术语表
+14.1 节开发电路平均和平均开关建模技巧。这些技巧用于建模 SEPIC 和升压变换器示例，并开发直流和小信号交流变换器模型。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+平均开关模型还揭示开关模式电路如何以高效率从一个电压向另一电压变换功率的基本能量变换过程：直流或低频交流被 PWM 晶体管开关变换（逆变）为高频交流。此交流功率随后被二极管或其他开关元件变换回（整流为）直流或低频交流。此功率称为变换器内流动的间接功率。14.1.4 节讨论间接功率及其与平均开关模型的关系。
 
-## 中文翻译
+平均开关模型很适合仿真。用平均开关模型替代半导体开关后，SPICE 等电路仿真程序可绘制开关变换器系统的小信号交流传递函数。这是平均开关建模方法的非常有用应用。14.3 节开发连续导通模式下变换器的 SPICE 仿真。断续导通模式下变换器的平均开关建模在第15章开发，同时开发 DCM 平均仿真。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+## 14.1 电路平均与平均开关建模
 
-## 英文原文
+电路平均的关键步骤是用电压和电流源替代变换器开关以获得时不变电路拓扑。电压和电流发生器的波形定义为与原始变换器的开关波形相同。获得时不变电路网络后，可在一个开关周期上平均变换器波形以去除开关谐波。平均电路模型中的任何非线性元件随后可扰动和线性化，得小信号交流模型。
 
-```text
-14
-Circuit Averaging, Averaged Switch Modeling, and
-Simulation
-Circuit averaging is another well-known technique for derivation of converter equivalent cir-
-cuits. Rather than averaging the converter state equations, with the circuit averaging technique
-we average the converter waveforms directly. All manipulations are performed on the circuit
-diagram, instead of on its equations, and hence the circuit averaging technique gives a more
-physical interpretation to the model. Since circuit averaging involves averaging and small-signal
-linearization, it is equivalent to state-space averaging. However, in many cases circuit averaging
-is easier to apply, and allows the small-signal ac model to be written almost by inspection. The
-circuit averaging technique can also be applied directly to a number of di ﬀerent types of con-
-verters and switch elements, including phase-controlled rectiﬁers, PWM converters operated in
-discontinuous conduction mode or with current programming, and quasi-resonant converters—
-these are described in later chapters. However, in other cases it may lead to involuted models
-that are less easy to analyze and understand. To overcome this problem, the circuit averaging
-and state-space averaging approaches can be combined. Circuit averaging was developed be-
-fore state-space averaging, and is described in [ 16]. Because of its generality, there was a later
-resurgence of interest in circuit averaging of switch networks [70–76, 108].
-The techniques of circuit averaging and averaged switch modeling are developed in
-Sect. 14.1. These techniques are employed to model SEPIC and boost converter examples, and
-both dc and small-signal ac converter models are developed.
-The averaged switch model also exposes the fundamental energy conversion process by
-which a switched-mode circuit can convert power from one voltage to another with high e ﬃ-
-ciency: dc or low-frequency ac is converted (inverted) to high-frequency ac by the switching
-of the PWM transistor. This ac power is then converted back (rectiﬁed) to dc or low-frequency
-ac by the diode or other switching element. This power is called the indirect power that ﬂows
-within the converter. Indirect power and its relationship to the averaged switch model is dis-
-cussed in Sect. 14.1.4.
-The averaged switch model lends itself well to simulation. When the semiconductor switches
-are replaced with an averaged switch model, circuit simulation programs such as SPICE are able
-to plot small-signal ac transfer functions of switching converter systems. This is a very useful
-application of the averaged switch modeling approach. SPICE simulation of converters operat-
-ing in the continuous conduction mode is developed in Sect. 14.3. Averaged switch modeling
-of converters operating in the discontinuous conduction mode is developed in Chap. 15, along
-with averaged simulations of DCM.
-© Springer Nature Switzerland AG 2020
-R. W. Erickson, D. Maksimovi´c, Fundamentals of Power Electronics,
-https://doi.org/10.1007/978-3-030-43881-4_14
-547
+图14.1中将开关元件与变换器其余部分分离。故变换器由含变换器开关元件的开关网络和含储能及其他剩余元件的时不变网络组成。图14.1 给出含两个单刀单掷（SPST）开关的简单情形；开关可用二端口网络表示。含多个晶体管或二极管（如多相变换器）的更复杂系统中，开关网络可含两个以上端口。
 
-548 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-14.1 Circuit Averaging and Averaged Switch Modeling
-The key step in circuit averaging is to replace the converter switches with voltage and current
-sources, to obtain a time-invariant circuit topology. The waveforms of the voltage and current
-generators are deﬁned to be identical to the switch waveforms of the original converter. Once
-a time-invariant circuit network is obtained, then the converter waveforms can be averaged
-over one switching period to remove the switching harmonics. Any nonlinear elements in the
-averaged circuit model can then be perturbed and linearized, leading to the small-signal ac
-model.
-In Fig. 14.1, the switching elements are separated from the remainder of the converter. The
-converter therefore consists of a switch network containing the converter switching elements,
-and a time-invariant network containing the reactive and other remaining elements. Figure14.1
-illustrates the simple case in which there are two single-pole single-throw (SPST) switches;
-the switches can then be represented using a two-port network. In more complicated systems
-containing multiple transistors or diodes, such as in polyphase converters, the switch network
-may contain more than two ports.
-+
-Time-invariant network
-containing converter reactive elements
-C L
-+ vC(t) iL(t)
-R
-+
-v(t)vg(t)
-Power input Load
-Switch network
-port 1
-port 2
-d(t)Control
-input
-+
-v1(t)
-+
-v2(t)
-i1(t) i2(t)
-Fig. 14.1 A switching converter can be viewed as a switch network connected to a time-invariant network
-The central idea of the averaged switch modeling approach is to ﬁnd an averaged circuit
-model for the switch network. The resulting averaged switch model can then be inserted into
-the converter circuit to obtain a complete averaged circuit model of the converter. An important
-advantage of the averaged switch modeling approach is that the same model can be used in many
-diﬀerent converter conﬁgurations. It is not necessary to rederive an averaged circuit model for
-each particular converter. Furthermore, in many cases, the averaged switch model simpliﬁes
+![源页 p.553](../assets/page-snapshots/chapter-14/page-553.png)
 
-14.1 Circuit Averaging and Averaged Switch Modeling 549
-+
-v1(t)
-+
-D1
-L1
-C2
-Q1
-C1
-L2 R
-iL1(t)
-vg(t)
-Switch network
-iL2(t)
-+ vC1(t
-+
-vC2(t)
-v2(t)
-+
-i1(t) i2(t)
-Duty
-cycle d(t)
-Fig. 14.2 Schematic of the SEPIC, arranged in the form of Fig. 14.1
-t
-v2(t)
-dTs Ts
-0
-0
-0
-vC1 + vC2
-t
-i1(t)
-dTs Ts
-0
-0
-0
-iL1 + iL2
-t
-v1(t)
-dTs Ts
-0
-0
-v1(t) Ts
-0
-vC1 + vC2
-t
-i2(t)
-dTs Ts
-0
-0
-i2(t) Ts
-0
-iL1 + iL2
-i1(t) Ts
-v2(t) Ts
-Fig. 14.3 Switch network terminal waveforms in the CCM SEPIC
-converter analysis and yields good intuitive understanding of the converter steady-state and
-dynamic properties.
-The ﬁrst step in the process of ﬁnding an averaged switch model for a switch network is
-to sketch the converter in the form of Fig. 14.1, in which a switch network containing only the
-converter switching elements is explicitly deﬁned. The CCM SEPIC example shown in Fig.14.2
-is used to illustrate the process. There is usually more than one way to deﬁne the two ports of the
-switch network; a natural way to deﬁne the two-port switch network of the SEPIC is illustrated
-in Fig. 14.2. The switch network terminal waveforms v
-1(t), i1(t), v2(t), and i2(t) are illustrated
+图14.1 开关变换器可视为连接到时不变网络的开关网络
 
-550 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-in Fig. 14.3 for CCM operation. Note that it is not necessary that the ports of the switch network
-be electrically connected within the switch network itself. Furthermore, there is no requirement
-that any of the terminal voltage or current waveforms of the switch network be nonpulsating.
-14.1.1 Obtaining a Time-Invariant Circuit
-The next step of the circuit averaging technique is to replace the switch network with dependent
-voltage and current sources, so that the circuit connections do not vary in time. The switch
-network deﬁned in the SEPIC is shown in Fig.14.4a. As with any two-port network, two of the
-four terminal voltages and currents can be taken as independent inputs to the switch network.
-The remaining two voltages and /or currents are viewed as dependent outputs of the switch
-network. In general, the choice of independent inputs is arbitrary, as long as the inputs can
-indeed be independent in the given converter circuit. For CCM operation, one can choose one
-terminal current and one terminal voltage as the independent inputs. For this example, let us
-select i
-1(t) and v2(t) as the switch network independent inputs. In addition, the duty cycle d(t)
-is the independent control input. Hence the dependent outputs are taken to be v1(t) and i2(t).
-In Fig. 14.4b, the ports of the switch network are replaced by dependent voltage and current
-sources. The waveforms of these dependent sources are deﬁned to be identical to the actual
-dependent outputs v
-1(t) and i2(t) given in Fig.14.3. Since all waveforms in Fig.14.4b match the
-waveforms of Figs.14.4a and 14.3, the circuits are electrically equivalent. So far, no approxima-
-tions have been made.
-14.1.2 Circuit Averaging
-The next step is determination of the average values of the switch network terminal waveforms
-in terms of the converter state variables (inductor currents and capacitor voltages) and the con-
-verter independent inputs (such as the input voltage and the transistor duty cycle). The basic
-assumption is made that the natural time constants of the converter network are much longer
-that the switching period Ts. This assumption coincides with the requirement for small switch-
-ing ripple. One may average the waveforms over a time interval which is short compared to the
-system natural time constants, without signiﬁcantly altering the system response [ 16]. Hence,
-when the basic assumption is satisﬁed, it is a good approximation to average the converter wave-
-forms over the switching period Ts. The resulting averaged model predicts the low-frequency
-behavior of the system, while neglecting the high-frequency switching harmonics. In the SEPIC
-example, by use of the usual small-ripple approximation, the average values of the switch net-
-work terminal waveforms of Fig. 14.3 can be expressed in terms of the independent inputs and
-the state variables as follows:
-⟨v
-1(t)⟩Ts = d′(t) ⎦⟨vC1(t)⟩Ts +⟨vC2(t)⟩Ts
-) (14.1)
-⟨i1(t)⟩Ts = d(t) ⎦⟨iL1(t)⟩Ts +⟨iL2(t)⟩Ts
-) (14.2)
-⟨v2(t)⟩TS = d(t) ⎦⟨vC1(t)⟩Ts +⟨vC2(t)⟩Ts
-) (14.3)
-⟨i2(t)⟩Ts = d′(t)(⟨iL1(t)⟩Ts +⟨iL2(t)⟩Ts ) (14.4)
-We have selected⟨i1(t)⟩Ts and⟨v2(t)⟩Ts as the independent inputs of the averaged switch network.
-The dependent outputs of the averaged switch network are then⟨i2(t)⟩Ts and⟨v1(t)⟩Ts . The next
-step is to express, if possible, the switch network dependent outputs ⟨i2(t)⟩Ts and⟨v1(t)⟩Ts as
+平均开关建模方法的核心思想是为开关网络找到平均电路模型。所得平均开关模型可插入变换器电路得变换器的完整平均电路模型。平均开关建模方法的重要优点是同一模型可用于许多不同变换器结构。不必为每个特定变换器重新导出平均电路模型。此外，许多情形下平均开关模型简化
 
-14.1 Circuit Averaging and Averaged Switch Modeling 551
-(a)
-+
-v2(t)
-i1(t) i2(t)
-+
-v1(t)
-Switch network
-(b)
-+
-+
-v2(t)
-i1(t)
-Switch network
-i2(t)v1(t)
-i2(t)
-(c)
-+
-+
-v2(t) Ts
-i1(t) Ts
-Averaged switch network
-+
-v1(t) Ts
-i2(t) Ts
-d'(t)
-d(t) v2(t) Ts
-d'(t)
-d(t) i1(t) Ts
-(d)
-+ D' : DI1 + i1 I2 + i2
-I2
-DD'dV1 + v1
-V1
-DD'd
-V2 + v2
-+ +
-Averaged switch network
-Fig. 14.4 Derivation of the averaged switch model for the CCM SEPIC: (a) switch network; (b) switch
-network where the switches are replaced with dependent sources whose waveforms match the switch
-terminal dependent waveforms; (c) large-signal, nonlinear averaged switch model obtained by averaging
-the switch network terminal waveforms in (b); (d) dc and ac small-signal averaged switch model
+变换器分析并给出对变换器稳态和动态性质的良好直观理解。
 
-552 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-functions solely of the switch network independent inputs ⟨i1(t)⟩Ts, ⟨v2(t)⟩Ts , and the control
-input d(t). In this step, the averaged switch outputs should not be written as functions of other
-converter signals such as⟨vg(t)⟩Ts,⟨vC1(t)⟩Ts,⟨vC2(t)⟩Ts,⟨iL1(t)⟩Ts,⟨iL2(t)⟩Ts ,e t c .
-We can use Eqs. (14.2) and (14.3) to write
-⟨iL1(t)⟩Ts +⟨iL2(t)⟩TS =⟨i1(t)⟩Ts
-d(t) (14.5)
-⟨vC1(t)⟩Ts +⟨vC2(t)⟩Ts =⟨v2(t)⟩Ts
-d(t) (14.6)
-Substitution of these expressions into Eqs. (14.1) and (14.4) leads to
-⟨v1(t)⟩Ts = d′(t)
-d(t)⟨v2(t)⟩Ts (14.7)
-⟨i2(t)⟩Ts = d′(t)
-d(t)⟨i1(t)⟩Ts (14.8)
-The averaged equivalent circuit for the switch network, that corresponds to Eqs. (14.7) and (14.8),
-is illustrated in Fig. 14.4c. Upon completing the averaging step, the switching harmonics have
-been removed from all converter waveforms, leaving only the dc and low-frequency ac compo-
-nents. This large-signal, nonlinear, time-invariant model is valid for frequencies suﬃciently less
-than the switching frequency. Averaging the waveforms of Fig. 14.3 modiﬁes only the switch
-network; the remainder of the converter circuit is unchanged. Therefore, the averaged circuit
-model of the converter is obtained simply by replacing the switch network with the averaged
-switch model. The switch network of Fig. 14.4a can be identiﬁed in any two-switch converter,
-such as the buck, boost, buck–boost, SEPIC, or´Cuk. If the converter operates in continuous con-
-duction mode, the derivation of the averaged switch model follows the same steps, and the result
-shown in Fig. 14.4c is the same for all of these converter topologies. This means that the model
-of Fig. 14.4c can be used as a general large-signal averaged switch model for all two-switch
-converters operating in CCM.
-14.1.3 Perturbation and Linearization
-The model of Fig. 14.4c is nonlinear, because the dependent generators given by Eqs. ( 14.7)
-and (14.8) are nonlinear functions of d(t),⟨i
-2(t)⟩TS , and⟨v1(t)⟩TS . To construct a small-signal ac
-model, we perturb and linearize Eqs. (14.7) and (14.8) in the usual fashion. Let
-d(t)= D+ ˆd(t)
-⟨v1(t)⟩Ts = V1+ ˆv1(t)
-⟨i1(t)⟩Ts = I1+ ˆi1(t) (14.9)
-⟨v2(t)⟩TS = V2+ ˆv2(t)
-⟨i2(t)⟩Ts = I2+ ˆi2(t)
-With these substitutions, Eq. (14.7) becomes
-(D+ ˆd)(V1+ ˆv1)= (D′−ˆd)(V2+ ˆv2) (14.10)
+为开关网络求平均开关模型过程中第一步是将变换器画成图14.1 的形式，其中含变换器开关元件的开关网络明确定义。图14.2 所示 CCM SEPIC 示例用于说明此过程。定义开关网络两端口通常不止一种方式；SEPIC 双端口开关网络的自然定义如图14.2所示。开关网络端子波形 $v_1(t)$、$i_1(t)$、$v_2(t)$、$i_2(t)$ 如图14.3所示（CCM 工作）。注意开关网络的端口不必在开关网络本身内电气连接。此外，开关网络的任何端子电压或电流波形都不要求非脉动。
 
-14.1 Circuit Averaging and Averaged Switch Modeling 553
-Fig. 14.5 Linearization of the dependent voltage
-source
-Fig. 14.6 Linearization of the dependent current
-source
-It is desired to solve for the dependent quantityV1+ ˆv1. Equation (14.10) can be manipulated
-as follows:
-D(V1+ ˆv1)= D′(V2+ ˆv2)−ˆd(V1+ V2)−ˆdˆv1−ˆdˆv2 (14.11)
-The terms ˆd(t)ˆv1(t) and ˆd(t)ˆv2(t) are nonlinear, and are small in magnitude provided that the ac
-variations are much smaller than the quiescent values [as in Eq. (7.33)]. When the small-signal
-assumption is satisﬁed, these terms can be neglected. Upon eliminating the nonlinear terms and
-solving for the switch network dependent output V
-1+ ˆv1, we obtain
-(V1+ ˆv1)= D′
-D (V2+ ˆv2)−ˆd
-⎦V1+ V2
-D
-)
-(14.12)
-= D′
-D (V2+ ˆv2)−ˆd
-⎦V1
-DD′
-)
-The term ( V1/DD′) ˆd(t) is driven by the control input ˆd2 and hence can be represented by an
-independent voltage source as in Fig.14.5.T h et e r m(D′/D)(V2+ ˆv2(t)) is equal to the constant
-value (D′/D) multiplied by the port 2 independent voltage (V2+ ˆv2(t)). This term is represented
-by a dependent voltage source in Fig. 14.5. This dependent source will become the primary
-winding of an ideal transformer.
-In a similar manner, substitution of the relationships (14.9) into Eq. (14.8) leads to:
-(D+ ˆd)(I2+ ˆi2)= (D′−ˆd)(I1+ ˆi1) (14.13)
-The terms ˆi1(t) ˆd(t) and ˆi2(t) ˆd(t) are nonlinear, and can be neglected when the small-signal as-
-sumption is satisﬁed. Elimination of the nonlinear terms, and solution for I2+ ˆi2, yields
-(I2+ ˆi2)= D′
-D (I1+ ˆi1)−ˆd
-⎦I1+ I2
-D
-)
-(14.14)
-= D′
-D (I1+ ˆi1)−ˆd
-⎦I2
-DD′
-)
+![源页 p.554](../assets/page-snapshots/chapter-14/page-554.png)
 
-554 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-Fig. 14.7 A dc and small-signal ac averaged circuit model of the CCM SEPIC
-The term ( I2/DD′) ˆd(t) is driven by the control input ˆd(t), and is represented by an indepen-
-dent current source in Fig. 14.6.T h et e r m(D′/D)(I1+ ˆi1(t)) is dependent on the port 1 current
-(I1+ ˆi1(t)). This term is modeled by a dependent current source in Fig. 14.6; this source will
-become the secondary winding of an ideal transformer. Equations (14.12) and (14.14) describe
-the averaged switch network model of Fig. 14.4d. Note that the model contains both dc and
-small-signal ac terms: one equivalent circuit is used for both the dc and the small-signal ac
-models. The transformer symbol contains both a solid line indicating that it is an ideal trans-
-former capable of passing dc voltages and currents, and a sinusoidal line which indicates that
-small-signal ac variations are modeled. The averaged switch model of Fig.14.4d reveals that the
-switch network performs the functions of: (i) transformation of dc and small-signal ac voltage
-and current levels according to the D
-′:D conversion ratio and (ii) introduction of ac voltage and
-current variations into the converter circuit, driven by the control input d(t). When this model
-is inserted into Fig. 14.2, the dc and small-signal ac SEPIC model of Fig. 14.7 is obtained. This
-model can now be solved to determine the steady-state voltages and currents as well as the
-small-signal converter transfer functions.
-The reference directions of the switch network waveforms in Figs.14.2 and 14.3 are deﬁned
-such that these waveforms are positive or zero for this example. The dc components of the
-averaged waveforms of Figs. 14.4 and 14.7 lead to average power ﬂowing into port 1 of the
-switch network, and ﬂowing out of port 2. Since no losses are modeled, the averaged switch
-network is lossless (for ˆd= 0), and the port 1 input power is equal to the port 2 output power,
-with voltages and currents transformed by the switch network conversion ratio D/D
-′.
-In summary, the circuit averaging method involves replacing the switch network with equiv-
-alent voltage and current sources, such that a time-invariant network is obtained. The converter
-waveforms are then averaged over one switching period to remove the switching harmonics.
-The large-signal model is perturbed and linearized about a quiescent operating point, to obtain
-a dc and a small-signal averaged switch model. Replacement of the switch network with the
-averaged switch model yields a complete averaged circuit model of the converter.
+图14.2 排列成图14.1 形式的 SEPIC 原理图
 
-14.1 Circuit Averaging and Averaged Switch Modeling 555
-14.1.4 Indirect Power
-The averaged switch models of Figs.14.1, 14.4d, and 14.7 contain a dc transformer that transfers
-average power from input port 1 to output port 2 of the switch network. Yet, in the original
-circuits of Figs. 14.4a and 14.2, there is no direct connection between the transistor port 1 and
-the diode port 2. What is the physical mechanism in the circuit that leads to transmission of
-average power between ports 1 and 2? The existence and operation of such a mechanism are
-key to the validity and justiﬁcation of the averaged switch model.
-Let us examine in more detail the power ﬂowing into port 1 of the switch network, as deﬁned
-by the port 1 voltage v1(t) and current i1(t) waveforms of Fig. 14.3. The instantaneous power
-ﬂowing into port 1 can be expressed as:
-p1(t)= v1(t)i1(t) (14.15)
-We can express the instantaneous voltage v1(t) and current i1(t) in terms of their dc (average)
-components and high-frequency ac (switching) components as follows:
-v1(t)=⟨v1(t)⟩Ts + ˜v1(t)
-i1(t)=⟨i1(t)⟩Ts + ˜i1(t) (14.16)
-where ˜v1(t) and˜i1(t) are the high-frequency switching components ofv1(t) and i1(t), respectively.
-By deﬁnition, these quantities are purely ac and have zero average:
-⟨˜v1(t)⟩Ts = 0
-⟨˜i1(t)⟩Ts = 0 (14.17)
-The dc or low-frequency components of v1(t) and i1(t)a r e⟨v1(t)⟩Ts and⟨i1(t)⟩Ts , averaged ac-
-cording to Eq. (7.3) as usual. We can express the port 1 instantaneous power as
-p1(t)= ⎦⟨v1⟩Ts + ˜v1(t)) ⎦
-⟨i1⟩Ts + ˜i1(t)
-)
-=⟨v1⟩Ts⟨i1⟩Ts +⟨v1⟩Ts
-˜i1(t)+⟨i1⟩Ts ˜v1(t)+ ˜v1(t)˜i1(t) (14.18)
-The net energy ﬂowing into port 1 over one switching period is
-P1=⟨p1(t)⟩Ts (14.19)
-In this discussion, we do not model losses and consider the transistor as an ideal switch. With
-this ideal switch assumption, the average port 1 power is zero:
-P1=⟨p1(t)⟩Ts = 0 (14.20)
-Now substitute Eq. ( 14.18) into Eq. ( 14.20). Equation ( 14.17) implies that the cross-product
-terms⟨v1⟩Ts
-˜i1(t) and⟨i1⟩Ts ˜v1(t) have zero average. Hence we obtain
-0=⟨v1⟩Ts⟨i1⟩Ts +⟨˜v1(t)˜i1(t)⟩Ts (14.21)
+![源页 p.554](../assets/page-snapshots/chapter-14/page-554.png)
 
-556 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-port 1
-port 2
-Fig. 14.8 Circuit modeling only the switching-frequency components of the converter waveforms
-This can be rearranged as
-⟨v1⟩Ts⟨i1⟩Ts =−⟨˜v1(t)˜i1(t)⟩Ts (14.22)
-The quantity⟨v1⟩Ts⟨i1⟩Ts is the dc power ﬂowing into the switch network port 1 of the averaged
-model. Equation (14.22) shows that the transistor operating as an ideal switch converts this into
-ac average power⟨˜v1(t)˜i1(t)⟩Ts that ﬂows out of port 1. This ac average power is transmitted at
-the switching frequency and its harmonics (see Sect. 20.1 for a detailed explanation of average
-power in nonsinusoidal systems). The transistor behaves as an inverter, converting dc power
-into ac power at the switching frequency. This ac power is calledindirect power [9, 109].
-The ac components ˜v1(t) and ˜i1(t) are not included in the averaged model, and hence the
-averaged model is unable to represent how the ac power ﬂows through the converter. We could
-sketch a circuit that models the high-frequency components of the converter waveforms, such
-as ˜v1(t), ˜i1(t), etc. Figure 14.8 is obtained from Fig. 14.2 by the dc (average) components of
-the converter waveforms to zero; the remaining signals of the circuit occur at the switching
-frequency and its harmonics. It is assumed that v
-g(t) contains only dc, so the input voltage
-source is set to zero. As noted above, port 1 of the switch network becomes a source of switching
-harmonics and ac power.
-Figure 14.9 illustrates the waveforms ˜v1(t), ˜i1(t), ˜v2(t), and ˜i2(t), for operation in continuous
-conduction mode with small ripple in the inductor currents and capacitor voltages. Under these
-conditions, the inductors behave nearly as open circuits at the switching frequency, and the
-capacitors behave nearly as short circuits. In consequence, the indirect power ﬂows out of port
-1, through capacitor C
-1, and into port 2.
-We can write the equations of the instantaneous and average power in port 2 of the switch
-network in a similar manner. The instantaneous power ﬂowing out of port 2 is
-p2(t)= v2(t)i2(t) (14.23)
+图14.3 CCM SEPIC 开关网络端子波形
 
-14.1 Circuit Averaging and Averaged Switch Modeling 557
-Fig. 14.9 Switching-frequency components of the switch network waveforms, SEPIC example
-The reference polarities of v2(t) and i2(t) have been chosen such that both of these waveforms
-are positive. In consequence, positive p2(t) represents generated power that ﬂows out of switch
-network port 2. The instantaneous voltage v2(t) and current i2(t) are expressed in terms of their
-dc (average) components and high-frequency ac (switching) components as follows:
-v2(t)=⟨v2⟩Ts + ˜v2(t)
-i2(t)=⟨i2⟩Ts + ˜i2(t) (14.24)
-By deﬁnition, ˜v2(t) and ˜i2(t) are purely ac and have zero average:
-⟨˜v2(t)⟩Ts = 0
-⟨˜i2(t)⟩Ts = 0 (14.25)
-The port 2 instantaneous power is
-p2(t)= ⎦⟨v2⟩Ts + ˜v2(t)) ⎦
-⟨i2⟩Ts + ˜i2(t)
-)
-=⟨v2⟩Ts⟨i2⟩Ts +⟨v2⟩Ts
-˜i2(t)+⟨i2⟩Ts ˜v2(t)+ ˜v2(t)˜i2(t) (14.26)
-The net energy ﬂowing out of port 2 over one switching period is
-P2=⟨p2(t)⟩Ts (14.27)
-Again, we do not model losses and consider the diode as an ideal switch. With this ideal switch
-assumption, the average port 2 power is zero:
-P2=⟨p2(t)⟩Ts = 0 (14.28)
+### 14.1.1 获得时不变电路
 
-558 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-Now substitute Eq. ( 14.26) into Eq. ( 14.28). Equation ( 14.25) implies that the cross-product
-terms⟨v2⟩Ts
-˜i2(t) and⟨i2⟩Ts ˜v2(t) have zero average. Hence we obtain
-0=⟨v2⟩Ts⟨i2⟩Ts +⟨˜v2(t)˜i2(t)⟩Ts (14.29)
-This can be rearranged as
-⟨v2⟩Ts⟨i2⟩Ts =−⟨˜v2(t)˜i2(t)⟩Ts (14.30)
-So port 2 behaves as a rectiﬁer that converts the ac indirect power ﬂowing into port 2 (from the
-remainder of the converter) into dc power. This dc power ﬂows out of port 2, and is the port 2
-power of the averaged model.
-Thus, dc power ﬂows into port 1 of the switch network. The switching transistor performs
-the function of inversion, converting the dc power into ac indirect power that ﬂows out of switch
-network port 1 and through the remainder of the converter circuit including its reactive elements.
-This ac indirect power then ﬂows into port 2 of the switch network, where the switching diode
-performs the function of rectiﬁcation to convert the indirect power back to dc. This dc power
-constitutes the port 2 power of the averaged switch model.
-It can be observed that the process of average switch modeling requires assumptions to be
-made about the time-invariant network and the waveforms of its reactive elements, which are
-then employed in modeling the switch network itself. The derivation summarized in Fig. 14.4
-relies on these assumptions. For example, when the inductor current or capacitor voltage ripple
-is large, then the switch network models of Figs. 14.4c,d are not valid averaged representations
-of the switch network of Fig. 14.4a. Additional analysis is required, that accounts for how the
-reactive elements respond to the operation of the switch network, and how the ac indirect power
-propagates out of the switch network port 1, through the converter reactive elements, and into
-the switch network port 2. Averaged switch models for the discontinuous conduction mode are
-developed in Chap. 15, and for resonant switch converters in Chap. 23.
-In converters that include a dc path between the converter input V
-g and output V terminals
-for at least one subinterval, the indirect power can be smaller than the converter input power.
-The remaining power is called direct power; the direct power ﬂows from the converter input
-to the output without the intermediate steps of high-frequency inversion and rectiﬁcation. The
-buck and boost converters exhibit direct power ﬂow, while the buck–boost, SEPIC,´Cuk, and all
-transformer-isolated converters do not. In general, we expect the indirect power conversion path
-to incur higher loss than direct conversion: direct power is subject only to dc conduction losses,
-while indirect power conversion incurs dc conduction losses as well as magnetics ac losses and
-semiconductor switching loss. Hence, converters that operate with a lower fraction of indirect
-power conversion can be expected to exhibit higher eﬃciency.
-14.2 Additional Conﬁgurations of Switch Networks
-The switch network of Fig. 14.4a can be identiﬁed in all two-switch converters, including buck,
-boost, SEPIC, ´Cuk, etc. As illustrated in Fig. 14.10, a complete averaged circuit model of the
-converter can be constructed simply by replacing the switch network with the averaged switch
-model. For example, Fig.14.11 shows an averaged circuit model of the boost converter obtained
-by identifying the switch network of Fig.14.4a and replacing the switch network with the model
-of Fig. 14.4d.
+电路平均技巧的下一步是用受控电压和电流源替代开关网络，使电路连接不随时间变化。SEPIC 中定义的开关网络如图14.4a所示。与任何二端口网络一样，四个端子电压和电流中的两个可取为开关网络的独立输入。其余两个电压和/或电流视为开关网络的因变量输出。一般地，独立输入的选择任意，只要输入在给定变换器电路中确实可独立。CCM 工作时可选一个端子电流和一个端子电压作为独立输入。此例选 $i_1(t)$ 和 $v_2(t)$ 作为开关网络独立输入。此外占空比 $d(t)$ 是独立控制输入。故因变量输出取 $v_1(t)$ 和 $i_2(t)$。
 
-14.2 Additional Conﬁgurations of Switch Networks 559
-(a)
-+
-Time-invariant network
-containing converter reactive elements
-C L
-+ vC(t) iL(t)
-R
-+
-v(t)vg(t)
-Power input Load
-d(t)
-+
-v1(t)
-+
-v2(t)
-i1(t) i2(t)
-Duty
-cycle
-Duty
-cycle
-Switch
-network
-(b) daoLtupnirewoP
-+Time-invariant network
-containing converter reactive elements
-Fig. 14.10 Construction of an averaged circuit model for a two-switch converter operating in CCM: ( a)
-the converter circuit with the general two-switch network identiﬁed; ( b) dc and ac small-signal averaged
-circuit model obtained by replacing the switch network with the averaged model
-So far, we have described derivation of the averaged switch model for the general two-switch
-network where the ports of the switch network coincide with the switch ports. No connections
-are assumed between the switches within the switch network itself. As a result, this switch
-network and its averaged model can be used to easily construct averaged circuit models of
-many two-switch converters, as illustrated in Fig. 14.10. It is important to note, however, that
+图14.4b中，开关网络端口用受控电压和电流源替代。这些受控源的波形定义为与图14.3 所给实际因变量输出 $v_1(t)$ 和 $i_2(t)$ 相同。由于图14.4b 中所有波形与图14.4a 和14.3 的波形匹配，电路电气等价。至今未做任何近似。
 
-560 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-(a)
-+
-L
-CR
-+
-v(t)vg(t)
-i(t)
-+
-v1(t)
-i1(t) i2(t)
- v2(t) +
-Switch
-network
-Fig. 14.11 Construction of an averaged circuit model for an ideal boost converter example: converter
-circuit with the switch network of Fig. 14.4a identiﬁed; ( b) a dc and small-signal ac averaged circuit
-model obtained by replacing the switch network with the model of Fig. 14.4d
-the deﬁnition of the switch network ports is not unique. Di ﬀerent deﬁnitions of the switch
-network lead to equivalent, but not identical, averaged switch models. The alternative forms of
-the averaged switch model may result in simpler circuit models, or models that provide better
-physical insight. Two alternative averaged switch models, better suited for analyses of boost
-and buck converters, are described in this section.
-Consider the ideal boost converter of Fig. 14.12a. The switch network contains the transis-
-tor and the diode, as in Fig. 14.11a, but the switch network ports are deﬁned diﬀerently. Let us
-proceed with the derivation of the corresponding averaged switch model. The switch network
-terminal waveforms are shown in Fig. 14.12b. Since i
-1(t) and v2(t) coincide with the converter
-inductor current and capacitor voltage, it is convenient to choose these waveforms as the inde-
-pendent inputs to the switch network. The steps in the derivation of the averaged switch model
-are illustrated in Fig. 14.13.
-First, we replace the switch network with dependent voltage and current generators as illus-
-trated in Fig. 14.13b. The voltage generatorv1(t) models the dependent voltage waveform at the
-input port of the switch network, i.e., the transistor voltage. As illustrated in Fig. 14.12b, v1(t)
-is zero when the transistor conducts, and is equal to v2(t) when the diode conducts:
-v1(t)=
-{ 0, 0< t< dTs
-v2(t), dTs< t< Ts
-(14.31)
-When v1(t) is deﬁned in this manner, the inductor voltage waveform is unchanged. Likewise,
-i2(t) models the dependent current waveform at port 2 of the network, i.e., the diode current. As
-illustrated in Fig. 14.12b, i2(t) is equal to zero when the transistor conducts, and is equal to i1(t)
-when the diode conducts:
+### 14.1.2 电路平均
 
-14.2 Additional Conﬁgurations of Switch Networks 561
-(a)
-+
-L
-CR
-+
-v(t)vg(t)
-i(t)
-+
-v1(t)
-i1(t) i2(t)
-Switch network
-+
-v2(t)
-(b)
-t
-v1(t)
-dTs Ts
-0
-0
-0
-v2(t)
-t
-i2(t)
-dTs Ts
-0 0
-0
-i1(t)
-v1(t) Ts
-i2(t) Ts
-Fig. 14.12 An ideal boost converter example: ( a) converter circuit showing another possible deﬁnition
-of the switch network; (b) terminal waveforms of the switch network
-i2(t)=
-{ 0, 0< t< dTs
-i1(t), dTs< t< Ts
-(14.32)
-With i2(t) deﬁned in this manner, the capacitor current waveform is unchanged. Therefore, the
-original converter circuit shown in Fig. 14.12a and the circuit obtained by replacing the switch
-network of Fig. 14.13a with the switch network of Fig. 14.13b are electrically identical. So far,
-no approximations have been made. Next, we remove the switching harmonics by averaging all
-signals over one switching period, as in Eq. (7.3). The results are
-⟨v1(t)⟩Ts = d′(t)⟨v2(t)⟩Ts (14.33)
-⟨i2(t)⟩Ts = d′(t)⟨i1(t)⟩Ts
-Here we have assumed that the switching ripples of the inductor current and capacitor voltage
-are small, or at least linear functions of time. The averaged switch model of Fig. 14.13ci s
-now obtained. This is a large-signal, nonlinear model, which can replace the switch network in
-the original converter circuit, for construction of a large-signal nonlinear circuit model of the
-converter. The switching harmonics have been removed from all converter waveforms, leaving
-only the dc and low-frequency ac components.
+下一步是确定开关网络端子波形的平均值（用变换器状态变量（电感电流和电容电压）和变换器独立输入（如输入电压和晶体管占空比）表示）。做基本假定：变换器网络的自然时间常数远大于开关周期 $T_s$。此假定与小开关纹波要求一致。可在远短于系统自然时间常数的时间区间上平均波形而不显著改变系统响应 [16]。故基本假定满足时在一个开关周期 $T_s$ 上平均变换器波形是良好近似。所得平均模型预测系统的低频行为，同时忽略高频开关谐波。SEPIC 示例中用常规小纹波近似，图14.3 开关网络端子波形的平均值可用独立输入和状态变量表示如下：
 
-562 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-(a)
-+
-v1(t)
-+
-v2(t)
-i1(t) i2(t)
-(b)
-+v1(t)
-+
-v2(t)
-i1(t)
-i2(t)
-Switch network
-(c)
-+
-v2(t) Ts
-+d'(t) v2(t) Ts
-d'(t) i1(t) Ts
-i1(t) Ts
-Averaged switch network
-Fig. 14.13 Derivation of the averaged switch model for the CCM boost of Fig.14.12:( a) switch network;
-(b) switch network where the switches are replaced with dependent sources whose waveforms match
-the switch terminal dependent waveforms; ( c) large-signal, nonlinear averaged switch model obtained
-by averaging the switch network terminal waveforms in ( b); (d) dc and ac small-signal averaged switch
-network model
+$$\langle v_1(t)\rangle_{T_s} = d'(t)\!\left(\langle v_{C1}(t)\rangle_{T_s}+\langle v_{C2}(t)\rangle_{T_s}\right) \tag{14.1}$$
 
-14.2 Additional Conﬁgurations of Switch Networks 563
-The model can be linearized by perturbing and linearizing the converter waveforms about a
-quiescent operating point, in the usual manner. Let
-⟨vg(t)⟩TS = Vg+ ˆvg(t)
-d(t)= D+ ˆd(t)⇒d′(t)= D′−ˆd(t)
-⟨i(t)⟩Ts =⟨i1(t)⟩Ts = I + ˆi(t) (14.34)
-⟨v(t)⟩Ts =⟨v2(t)⟩Ts = V+ ˆv(t)
-⟨v1(t)⟩Ts = V1+ ˆv1(t)
-⟨i2(t)⟩Ts = I2+ ˆi2(t)
-The nonlinear voltage generator at port 1 of the averaged switch network has value
-(D′−ˆd(t))(V+ ˆv(t))= D′(V+ ˆv(t))−V ˆd(t)−ˆv(t) ˆd(t) (14.35)
-The term ˆv(t) ˆd(t) is nonlinear, and is small in magnitude provided that the ac variations are
-much smaller than the quiescent values [as in Eq. (7.33)]. When the small-signal assumption is
-satisﬁed, this term can be neglected. The termV ˆd(t) is driven by the control input, and hence can
-be represented by an independent voltage source. The term D′(V+ ˆv(t)) is equal to the constant
-value D′ multiplied by the output voltage ( V+ ˆv(t)). This term is dependent on the output
-capacitor voltage; it is represented by a dependent voltage source. This dependent source will
-become the primary winding of an ideal transformer.
-The nonlinear current generator at the port 2 of the averaged switch network is treated in a
-similar manner. Its current is
-(D′−ˆd(t))(I+ ˆi(t))= D′(I+ ˆi(t))−I ˆd(t)−ˆi(t) ˆd(t) (14.36)
-The term ˆi(t) ˆd(t) is nonlinear, and can be neglected provided that the small-signal assumption is
-satisﬁed.
-The term I ˆd(t) is driven by the control input ˆd(t), and is represented by an independent
-current source. The term D′(I+ ˆi(t)) is dependent on the inductor current (I+ ˆi(t)). This term is
-modeled by a dependent current source; this source will become the secondary winding of an
-ideal transformer.
-Upon elimination of the nonlinear terms, and replacement of the dependent generators
-with an ideal D′:1 transformer, the combined dc and small-signal ac averaged switch model
-of Fig. 14.13d is obtained. Figure14.14 shows the complete averaged circuit model of the boost
-converter.
-It is interesting to compare the models of Figs. 14.11b and 14.14. The two averaged circuit
-models of the boost converter are equivalent—they result in the same steady-state solution,
-and the same converter transfer functions. However, since both ports of the switch network in
-Fig. 14.12a share the same reference ground, the resulting averaged circuit model in Fig. 14.14
-is easier to solve, and gives better physical insight into steady-state operation and dynamics of
-the boost converter. The circuit model of Fig.14.14 reveals that the switch network performs the
-functions of: (i) transformation of dc and small-signal ac voltage and current levels according
-to the D
-′:1 conversion ratio and ( ii) introduction of ac voltage and current variations into the
-converter circuit, driven by the control input d(t). The model of Fig. 14.14 obtained using the
-circuit averaging approach is identical to the model of Fig. 7.18b obtained using the basic ac
-modeling technique of Sect. 7.2.
+$$\langle i_1(t)\rangle_{T_s} = d(t)\!\left(\langle i_{L1}(t)\rangle_{T_s}+\langle i_{L2}(t)\rangle_{T_s}\right) \tag{14.2}$$
 
-564 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-Fig. 14.14 Dc and small-signal ac averaged circuit model of the boost converter
-(a)
-+
-L
-CR
-+
-v(t)vg(t)
-i(t)
-+
-v2(t)
-i1(t) i2(t)
-Switch network
-+
-v1(t)
-(b)
-t
-i1(t)
-dTs Ts
-0 0
-0
-i2
-t
-v2(t)
-dTs Ts
-0
-0
-0
-v1
-i1(t) Ts
-i2(t) Ts
-v2(t) Ts
-Fig. 14.15 Buck converter example: (a) converter circuit, (b) switch waveforms
-Next, we consider the CCM buck converter of Fig. 14.15, where the switch network ports
-are deﬁned to share a common ground terminal. The derivation of the corresponding averaged
-switch model follows the same steps as in the SEPIC and the boost examples. Let us select
-v1(t) and i2(t) as the independent terminal variables of the two-port switch network, since these
-quantities coincide with the applied converter input voltage vg(t) and the inductor current i(t),
+$$\langle v_2(t)\rangle_{T_s} = d(t)\!\left(\langle v_{C1}(t)\rangle_{T_s}+\langle v_{C2}(t)\rangle_{T_s}\right) \tag{14.3}$$
 
-14.2 Additional Conﬁgurations of Switch Networks 565
-Fig. 14.16 Averaged switch modeling, buck converter example: ( a) dc and small-signal ac averaged
-switch model; ( b) Averaged circuit model of the buck converter obtained by replacement of the switch
-network by the averaged switch model
-respectively. We then need to express the averaged dependent terminal waveforms⟨i1(t)⟩Ts and
-⟨v2(t)⟩Ts as functions of the control input d(t) and of⟨v1(t)⟩Ts and⟨i2(t)⟩Ts . Upon averaging the
-waveforms of Fig.14.15b, one obtains
-⟨i1(t)⟩Ts = d(t)⟨i2(t)⟩Ts (14.37)
-⟨v2(t)⟩TS = d(t)⟨v1(t)⟩TS
-Perturbation and linearization of Eq. (14.37) then leads to
-I1+ ˆi1(t)= D(I2+ ˆi2(t))+ I2 ˆd(t) (14.38)
-V2+ ˆv2(t)= D(V1+ ˆv1(t))+ V1 ˆd(t)
-An equivalent circuit corresponding to Eq. ( 14.38) is illustrated in Fig. 14.16a. Replacement
-of the switch network in Fig. 14.15a with the averaged switch model of Fig. 14.16a leads to the
-converter averaged circuit model of Fig.14.16b. The circuit model of Fig.14.16b reveals that the
-switch network performs the functions of: ( i) transformation of dc and small-signal ac voltage
-and current levels according to the 1:D conversion ratio and (ii) introduction of ac voltage and
-current variations into the converter circuit, driven by the control input d(t). The model is easy
-to solve for both dc conversion ratio and small-signal frequency responses. It is identical to the
-model shown in Fig. 7.18a.
-The three basic switch networks—the buck switch network, the boost switch network, and
-the general two-switch network—together with the corresponding averaged switch models are
-shown in Fig. 14.17.
+$$\langle i_2(t)\rangle_{T_s} = d'(t)\!\left(\langle i_{L1}(t)\rangle_{T_s}+\langle i_{L2}(t)\rangle_{T_s}\right) \tag{14.4}$$
 
-566 14 Circuit Averaging, Averaged Switch Modeling, and Simulation
-Fig. 14.17 Three basic switch networks, and their CCM dc and small-signal ac averaged switch models:
-(a) the buck switch network, (b) the boost switch network, and (c) the general two-switch network
-14.3 Simulation of Averaged Circuit Models
-Computer simulation can be a powerful tool in the engineering design process. Starting from
-design speciﬁcations, an initial design typically includes selection of system and circuit conﬁg-
-urations, as well as component types and values. In this process, component and system models
-are constructed based on vendor-supplied data, and by applications of analysis and modeling
-techniques. These models, validated by experimental data whenever possible, are the basis upon
-which the designer can choose parameter values and verify the achieved performance against
-the design speciﬁcations. One must take into account the fact that actual parameter values will
-not match their nominal values because of inevitable production tolerances, changes in environ-
-mental conditions (such as temperature), and aging. In the design veriﬁcation step, worst-case
-analysis (or other reliability and production yield analysis) is performed to judge whether the
-speciﬁcations are met under all conditions, i.e., for expected ranges of component parameter
-values. Computer simulation is very well suited for this task: using reliable models and appro-
-priate simulation setups, the system performance can be tested for various sets of component
-```
+我们选 $\langle i_1(t)\rangle_{T_s}$ 和 $\langle v_2(t)\rangle_{T_s}$ 作为平均开关网络的独立输入。平均开关网络的因变量输出随后为 $\langle i_2(t)\rangle_{T_s}$ 和 $\langle v_1(t)\rangle_{T_s}$。下一步是尽可能将开关网络因变量输出 $\langle i_2(t)\rangle_{T_s}$ 和 $\langle v_1(t)\rangle_{T_s}$ 表示为仅开关网络独立输入 $\langle i_1(t)\rangle_{T_s}$、$\langle v_2(t)\rangle_{T_s}$ 和控制输入 $d(t)$ 的函数。此步骤中平均开关输出不应写为其他变换器信号如 $\langle v_g(t)\rangle_{T_s}$、$\langle v_{C1}(t)\rangle_{T_s}$、$\langle v_{C2}(t)\rangle_{T_s}$、$\langle i_{L1}(t)\rangle_{T_s}$、$\langle i_{L2}(t)\rangle_{T_s}$ 等的函数。
+
+可用式 (14.2) 和 (14.3) 写
+
+$$\langle i_{L1}(t)\rangle_{T_s}+\langle i_{L2}(t)\rangle_{T_s} = \frac{\langle i_1(t)\rangle_{T_s}}{d(t)} \tag{14.5}$$
+
+$$\langle v_{C1}(t)\rangle_{T_s}+\langle v_{C2}(t)\rangle_{T_s} = \frac{\langle v_2(t)\rangle_{T_s}}{d(t)} \tag{14.6}$$
+
+将这些表达式代入式 (14.1) 和 (14.4) 得
+
+$$\langle v_1(t)\rangle_{T_s} = \frac{d'(t)}{d(t)}\langle v_2(t)\rangle_{T_s} \tag{14.7}$$
+
+$$\langle i_2(t)\rangle_{T_s} = \frac{d'(t)}{d(t)}\langle i_1(t)\rangle_{T_s} \tag{14.8}$$
+
+对应式 (14.7) 和 (14.8) 的开关网络平均等效电路如图14.4c所示。完成平均步骤后，开关谐波已从所有变换器波形中去除，只剩直流和低频交流分量。此大信号非线性时不变模型在远低于开关频率的频率处有效。平均图14.3 波形仅修改开关网络；变换器电路其余部分不变。故用平均开关模型替代开关网络即得变换器平均电路模型。图14.4a 的开关网络可在任何双开关变换器（如降压、升压、升降压、SEPIC 或 Ćuk）中识别。若变换器工作于连续导通模式，平均开关模型的推导遵循相同步骤，图14.4c 所示结果对所有这些变换器拓扑相同。这意味着图14.4c 的模型可用作所有 CCM 双开关变换器的通用大信号平均开关模型。
+
+![源页 p.556](../assets/page-snapshots/chapter-14/page-556.png)
+
+图14.4 CCM SEPIC 平均开关模型的推导：(a) 开关网络；(b) 开关用波形匹配开关端子因变量波形的受控源替代的开关网络；(c) 通过平均 (b) 中开关网络端子波形获得的大信号非线性平均开关模型；(d) 直流和交流小信号平均开关模型
+
+### 14.1.3 扰动与线性化
+
+图14.4c 的模型是非线性的，因为式 (14.7) 和 (14.8) 给出的受控发生器是 $d(t)$、$\langle i_2(t)\rangle_{T_s}$、$\langle v_1(t)\rangle_{T_s}$ 的非线性函数。为构造小信号交流模型，按常规方式扰动和线性化式 (14.7) 和 (14.8)。令
+
+$$d(t) = D + \hat{d}(t)$$
+
+$$\langle v_1(t)\rangle_{T_s} = V_1 + \hat{v}_1(t)$$
+
+$$\langle i_1(t)\rangle_{T_s} = I_1 + \hat{i}_1(t) \tag{14.9}$$
+
+$$\langle v_2(t)\rangle_{T_s} = V_2 + \hat{v}_2(t)$$
+
+$$\langle i_2(t)\rangle_{T_s} = I_2 + \hat{i}_2(t)$$
+
+代入后式 (14.7) 变为
+
+$$(D+\hat{d})(V_1+\hat{v}_1) = (D'-\hat{d})(V_2+\hat{v}_2) \tag{14.10}$$
+
+![源页 p.558](../assets/page-snapshots/chapter-14/page-558.png)
+
+图14.5 受控电压源的线性化
+
+![源页 p.558](../assets/page-snapshots/chapter-14/page-558.png)
+
+图14.6 受控电流源的线性化
+
+希望解因变量 $V_1 + \hat{v}_1$。式 (14.10) 可如下操作：
+
+$$D(V_1+\hat{v}_1) = D'(V_2+\hat{v}_2) - \hat{d}(V_1+V_2) - \hat{d}\hat{v}_1 - \hat{d}\hat{v}_2 \tag{14.11}$$
+
+项 $\hat{d}(t)\hat{v}_1(t)$ 和 $\hat{d}(t)\hat{v}_2(t)$ 是非线性的，在交流变化远小于静态值 [如式 (7.33)] 时幅度小。小信号假设满足时可忽略这些项。消去非线性项并解开关网络因变量输出 $V_1 + \hat{v}_1$ 得
+
+$$V_1+\hat{v}_1 = \frac{D'}{D}(V_2+\hat{v}_2) - \hat{d}\!\left(\frac{V_1+V_2}{D}\right) = \frac{D'}{D}(V_2+\hat{v}_2) - \hat{d}\!\left(\frac{V_1}{DD'}\right) \tag{14.12}$$
+
+项 $(V_1/DD')\hat{d}(t)$ 由控制输入 $\hat{d}$ 驱动，故可用图14.5 所示的独立电压源表示。项 $(D'/D)(V_2+\hat{v}_2(t))$ 等于常数 $(D'/D)$ 乘端口 2 独立电压 $(V_2+\hat{v}_2(t))$。此项用图14.5 所示受控电压源表示。此受控源将成为理想变压器的一次绕组。
+
+类似地将关系 (14.9) 代入式 (14.8) 得
+
+$$(D+\hat{d})(I_2+\hat{i}_2) = (D'-\hat{d})(I_1+\hat{i}_1) \tag{14.13}$$
+
+项 $\hat{i}_1(t)\hat{d}(t)$ 和 $\hat{i}_2(t)\hat{d}(t)$ 是非线性的，小信号假设满足时可忽略。消去非线性项并解 $I_2 + \hat{i}_2$ 得
+
+$$I_2+\hat{i}_2 = \frac{D'}{D}(I_1+\hat{i}_1) - \hat{d}\!\left(\frac{I_1+I_2}{D}\right) = \frac{D'}{D}(I_1+\hat{i}_1) - \hat{d}\!\left(\frac{I_2}{DD'}\right) \tag{14.14}$$
+
+项 $(I_2/DD')\hat{d}(t)$ 由控制输入 $\hat{d}(t)$ 驱动，用图14.6 所示独立电流源表示。项 $(D'/D)(I_1+\hat{i}_1(t))$ 依赖于端口 1 电流 $(I_1+\hat{i}_1(t))$。此项用图14.6 所示受控电流源建模；此源将成为理想变压器的二次绕组。式 (14.12) 和 (14.14) 描述图14.4d 的平均开关网络模型。注意模型含直流和小信号交流项：一个等效电路同时用于直流和小信号交流模型。变压器符号含表明能通过直流电压和电流的理想变压器实线，以及表明建模小信号交流变化的正弦线。图14.4d 的平均开关模型揭示开关网络执行：(i) 按 $D':D$ 变换比变换直流和小信号交流电压电流电平，(ii) 由控制输入 $d(t)$ 驱动向变换器电路引入交流电压和电流变化。将此模型插入图14.2 得图14.7 的直流和小信号交流 SEPIC 模型。此模型现可求解以确定稳态电压电流及小信号变换器传递函数。
+
+![源页 p.559](../assets/page-snapshots/chapter-14/page-559.png)
+
+图14.7 CCM SEPIC 的直流和小信号交流平均电路模型
+
+图14.2 和14.3 中开关网络波形参考方向定义为使此示例中这些波形为正或零。图14.4 和14.7 平均波形的直流分量导致平均功率流入开关网络端口 1、流出端口 2。由于未建模损耗，平均开关网络无损（$\hat{d} = 0$ 时），端口 1 输入功率等于端口 2 输出功率，电压电流由开关网络变换比 $D/D'$ 变换。
+
+总结：电路平均方法涉及用等效电压和电流源替代开关网络以获得时不变网络。然后在一个开关周期上平均变换器波形以去除开关谐波。大信号模型在静态工作点附近扰动和线性化得直流和小信号平均开关模型。用平均开关模型替代开关网络得变换器完整平均电路模型。
+
+### 14.1.4 间接功率
+
+图14.1、14.4d、14.7 的平均开关模型含将平均功率从开关网络输入端口 1 传输到输出端口 2 的直流变压器。但在图14.4a 和14.2 的原始电路中，晶体管端口 1 和二极管端口 2 之间无直接连接。电路中导致端口 1 和 2 之间平均功率传输的物理机理是什么？此机理的存在和运作是平均开关模型有效性和合理性的关键。
+
+让我们更详细地考察流入开关网络端口 1 的功率（由图14.3 端口 1 电压 $v_1(t)$ 和电流 $i_1(t)$ 波形定义）。流入端口 1 的瞬时功率可表示为
+
+$$p_1(t) = v_1(t)i_1(t) \tag{14.15}$$
+
+可将瞬时电压 $v_1(t)$ 和电流 $i_1(t)$ 用其直流（平均）分量和高频交流（开关）分量表示：
+
+$$v_1(t) = \langle v_1(t)\rangle_{T_s} + \tilde{v}_1(t)$$
+
+$$i_1(t) = \langle i_1(t)\rangle_{T_s} + \tilde{i}_1(t) \tag{14.16}$$
+
+其中 $\tilde{v}_1(t)$ 和 $\tilde{i}_1(t)$ 分别是 $v_1(t)$ 和 $i_1(t)$ 的高频开关分量。按定义这些量是纯交流且零平均：
+
+$$\langle \tilde{v}_1(t)\rangle_{T_s} = 0$$
+
+$$\langle \tilde{i}_1(t)\rangle_{T_s} = 0 \tag{14.17}$$
+
+$v_1(t)$ 和 $i_1(t)$ 的直流或低频分量为 $\langle v_1(t)\rangle_{T_s}$ 和 $\langle i_1(t)\rangle_{T_s}$，照常按式 (7.3) 平均。可将端口 1 瞬时功率表示为
+
+$$p_1(t) = \left(\langle v_1\rangle_{T_s}+\tilde{v}_1(t)\right)\!\left(\langle i_1\rangle_{T_s}+\tilde{i}_1(t)\right) = \langle v_1\rangle_{T_s}\langle i_1\rangle_{T_s}+\langle v_1\rangle_{T_s}\tilde{i}_1(t)+\langle i_1\rangle_{T_s}\tilde{v}_1(t)+\tilde{v}_1(t)\tilde{i}_1(t) \tag{14.18}$$
+
+一个开关周期内流入端口 1 的净能量为
+
+$$P_1 = \langle p_1(t)\rangle_{T_s} \tag{14.19}$$
+
+此讨论中不建模损耗并将晶体管视为理想开关。此理想开关假设下端口 1 平均功率为零：
+
+$$P_1 = \langle p_1(t)\rangle_{T_s} = 0 \tag{14.20}$$
+
+将式 (14.18) 代入式 (14.20)。式 (14.17) 意味交叉积项 $\langle v_1\rangle_{T_s}\tilde{i}_1(t)$ 和 $\langle i_1\rangle_{T_s}\tilde{v}_1(t)$ 零平均。故得
+
+$$0 = \langle v_1\rangle_{T_s}\langle i_1\rangle_{T_s}+\langle \tilde{v}_1(t)\tilde{i}_1(t)\rangle_{T_s} \tag{14.21}$$
+
+![源页 p.561](../assets/page-snapshots/chapter-14/page-561.png)
+
+图14.8 仅建模变换器波形开关频率分量的电路
+
+可重排为
+
+$$\langle v_1\rangle_{T_s}\langle i_1\rangle_{T_s} = -\langle \tilde{v}_1(t)\tilde{i}_1(t)\rangle_{T_s} \tag{14.22}$$
+
+量 $\langle v_1\rangle_{T_s}\langle i_1\rangle_{T_s}$ 是流入平均模型开关网络端口 1 的直流功率。式 (14.22) 表明作为理想开关工作的晶体管将此直流功率变换为从端口 1 流出的交流平均功率 $\langle \tilde{v}_1(t)\tilde{i}_1(t)\rangle_{T_s}$。此交流平均功率在开关频率及其谐波处传输（非正弦系统平均功率的详细解释见 20.1 节）。晶体管表现为逆变器，将直流功率变换为开关频率处的交流功率。此交流功率称为间接功率 [9, 109]。
+
+交流分量 $\tilde{v}_1(t)$ 和 $\tilde{i}_1(t)$ 不包含在平均模型中，故平均模型无法表示交流功率如何流过变换器。可画建模变换器波形高频分量（如 $\tilde{v}_1(t)$、$\tilde{i}_1(t)$ 等）的电路。图14.8 由图14.2 将变换器波形直流（平均）分量设为零获得；电路剩余信号在开关频率及其谐波处。假定 $v_g(t)$ 仅含直流，故输入电压源设为零。如上所述，开关网络端口 1 成为开关谐波和交流功率的源。
+
+图14.9 给出连续导通模式下电感电流和电容电压小纹波时 $\tilde{v}_1(t)$、$\tilde{i}_1(t)$、$\tilde{v}_2(t)$、$\tilde{i}_2(t)$ 的波形。此条件下电感在开关频率处近乎开路，电容近乎短路。结果间接功率从端口 1 流出，经电容 $C_1$，流入端口 2。
+
+可类似写开关网络端口 2 的瞬时和平均功率方程。从端口 2 流出的瞬时功率为
+
+$$p_2(t) = v_2(t)i_2(t) \tag{14.23}$$
+
+![源页 p.562](../assets/page-snapshots/chapter-14/page-562.png)
+
+图14.9 开关网络波形的开关频率分量，SEPIC 示例
+
+$v_2(t)$ 和 $i_2(t)$ 的参考极性选择使两波形均为正。故正 $p_2(t)$ 代表从开关网络端口 2 流出的产生功率。瞬时电压 $v_2(t)$ 和电流 $i_2(t)$ 用其直流（平均）分量和高频交流（开关）分量表示：
+
+$$v_2(t) = \langle v_2\rangle_{T_s} + \tilde{v}_2(t)$$
+
+$$i_2(t) = \langle i_2\rangle_{T_s} + \tilde{i}_2(t) \tag{14.24}$$
+
+按定义 $\tilde{v}_2(t)$ 和 $\tilde{i}_2(t)$ 为纯交流且零平均：
+
+$$\langle \tilde{v}_2(t)\rangle_{T_s} = 0$$
+
+$$\langle \tilde{i}_2(t)\rangle_{T_s} = 0 \tag{14.25}$$
+
+端口 2 瞬时功率为
+
+$$p_2(t) = \left(\langle v_2\rangle_{T_s}+\tilde{v}_2(t)\right)\!\left(\langle i_2\rangle_{T_s}+\tilde{i}_2(t)\right) = \langle v_2\rangle_{T_s}\langle i_2\rangle_{T_s}+\langle v_2\rangle_{T_s}\tilde{i}_2(t)+\langle i_2\rangle_{T_s}\tilde{v}_2(t)+\tilde{v}_2(t)\tilde{i}_2(t) \tag{14.26}$$
+
+一个开关周期内从端口 2 流出的净能量为
+
+$$P_2 = \langle p_2(t)\rangle_{T_s} \tag{14.27}$$
+
+同样不建模损耗并将二极管视为理想开关。此理想开关假设下端口 2 平均功率为零：
+
+$$P_2 = \langle p_2(t)\rangle_{T_s} = 0 \tag{14.28}$$
+
+将式 (14.26) 代入式 (14.28)。式 (14.25) 意味交叉积项 $\langle v_2\rangle_{T_s}\tilde{i}_2(t)$ 和 $\langle i_2\rangle_{T_s}\tilde{v}_2(t)$ 零平均。故得
+
+$$0 = \langle v_2\rangle_{T_s}\langle i_2\rangle_{T_s}+\langle \tilde{v}_2(t)\tilde{i}_2(t)\rangle_{T_s} \tag{14.29}$$
+
+可重排为
+
+$$\langle v_2\rangle_{T_s}\langle i_2\rangle_{T_s} = -\langle \tilde{v}_2(t)\tilde{i}_2(t)\rangle_{T_s} \tag{14.30}$$
+
+故端口 2 表现为整流器，将从变换器其余部分流入端口 2 的交流间接功率变换为直流功率。此直流功率从端口 2 流出，是平均模型的端口 2 功率。
+
+故直流功率流入开关网络端口 1。开关晶体管执行逆变功能，将直流功率变换为从开关网络端口 1 流出并经变换器其余电路（含储能元件）的交流间接功率。此交流间接功率随后流入开关网络端口 2，此处开关二极管执行整流功能将间接功率变换回直流。此直流功率构成平均开关模型的端口 2 功率。
+
+可观察到平均开关建模过程需要对时不变网络及其储能元件波形做假定，然后用于建模开关网络本身。图14.4 所述推导依赖这些假定。例如电感电流或电容电压纹波大时图14.4c、d 的开关网络模型不是图14.4a 开关网络的有效平均表示。需要额外分析，计入储能元件如何响应开关网络工作及交流间接功率如何从开关网络端口 1 传播出、经变换器储能元件、流入开关网络端口 2。断续导通模式的平均开关模型在第15章开发，谐振开关变换器的在第23章。
+
+在至少一个子区间内含变换器输入 $V_g$ 和输出 $V$ 之间直流路径的变换器中，间接功率可小于变换器输入功率。其余功率称为直接功率；直接功率从变换器输入流到输出而不经高频逆变和整流的中间步骤。降压和升压变换器呈现直接功率流，而升降压、SEPIC、Ćuk 和所有变压器隔离变换器不呈现。一般地，预期间接功率变换路径比直接变换产生更高损耗：直接功率仅受直流导通损耗，而间接功率变换产生直流导通损耗及磁性交流损耗和半导体开关损耗。故以更低间接功率比例工作的变换器可预期呈现更高效率。
+
+## 14.2 开关网络的其他结构
+
+图14.4a 的开关网络可在所有双开关变换器中识别，包括降压、升压、SEPIC、Ćuk 等。如图14.10所示，用平均开关模型替代开关网络即可构造变换器完整平均电路模型。例如图14.11 给出通过识别图14.4a 开关网络并用图14.4d 模型替代开关网络获得的升压变换器平均电路模型。
+
+![源页 p.564](../assets/page-snapshots/chapter-14/page-564.png)
+
+图14.10 CCM 双开关变换器平均电路模型的构造：(a) 识别通用双开关网络的变换器电路；(b) 用平均模型替代开关网络获得的直流和交流小信号平均电路模型
+
+至今已描述了开关网络端口与开关端口重合的通用双开关网络平均开关模型的推导。不假定开关网络本身内开关之间有连接。故此开关网络及其平均模型可用于轻易构造许多双开关变换器的平均电路模型，如图14.10所示。但应注意
+
+![源页 p.565](../assets/page-snapshots/chapter-14/page-565.png)
+
+图14.11 理想升压变换器示例平均电路模型的构造：(a) 识别图14.4a 开关网络的变换器电路；(b) 用图14.4d 模型替代开关网络获得的直流和小信号交流平均电路模型
+
+开关网络端口的定义不唯一。开关网络的不同定义导致等价但不相同的平均开关模型。平均开关模型的替代形式可导致更简单的电路模型或提供更好物理洞察的模型。本节描述两种更适合升压和降压变换器分析的替代平均开关模型。
+
+考虑图14.12a 的理想升压变换器。开关网络含晶体管和二极管（如图14.11a），但开关网络端口定义不同。让我们推导相应平均开关模型。开关网络端子波形如图14.12b所示。由于 $i_1(t)$ 和 $v_2(t)$ 与变换器电感电流和电容电压重合，选这些波形作为开关网络独立输入很方便。平均开关模型推导步骤如图14.13所示。
+
+![源页 p.566](../assets/page-snapshots/chapter-14/page-566.png)
+
+图14.12 理想升压变换器示例：(a) 显示开关网络另一种可能定义的变换器电路；(b) 开关网络端子波形
+
+首先用受控电压和电流发生器替代开关网络，如图14.13b所示。电压发生器 $v_1(t)$ 建模开关网络输入端口的因变量电压波形即晶体管电压。如图14.12b所示，晶体管导通时 $v_1(t)$ 为零，二极管导通时等于 $v_2(t)$：
+
+$$v_1(t) = \begin{cases} 0, & 0 < t < dT_s \\ v_2(t), & dT_s < t < T_s \end{cases} \tag{14.31}$$
+
+$v_1(t)$ 如此定义时电感电压波形不变。同样 $i_2(t)$ 建模网络端口 2 的因变量电流波形即二极管电流。如图14.12b所示，晶体管导通时 $i_2(t)$ 为零，二极管导通时等于 $i_1(t)$：
+
+$$i_2(t) = \begin{cases} 0, & 0 < t < dT_s \\ i_1(t), & dT_s < t < T_s \end{cases} \tag{14.32}$$
+
+$i_2(t)$ 如此定义时电容电流波形不变。故图14.12a 原始变换器电路和用图14.13b 开关网络替代图14.13a 开关网络所得电路电气相同。至今未做近似。接下来按式 (7.3) 在一个开关周期上平均所有信号去除开关谐波，结果为
+
+$$\langle v_1(t)\rangle_{T_s} = d'(t)\langle v_2(t)\rangle_{T_s} \tag{14.33}$$
+
+$$\langle i_2(t)\rangle_{T_s} = d'(t)\langle i_1(t)\rangle_{T_s}$$
+
+此处假定电感电流和电容电压的开关纹波小或至少是时间的线性函数。图14.13c 的平均开关模型现获得。这是大信号非线性模型，可替代原始变换器电路中的开关网络以构造变换器的大信号非线性电路模型。开关谐波已从所有变换器波形中去除，只剩直流和低频交流分量。
+
+![源页 p.567](../assets/page-snapshots/chapter-14/page-567.png)
+
+图14.13 图14.12 CCM 升压变换器平均开关模型的推导：(a) 开关网络；(b) 开关用波形匹配开关端子因变量波形的受控源替代的开关网络；(c) 通过平均 (b) 中开关网络端子波形获得的大信号非线性平均开关模型；(d) 直流和交流小信号平均开关网络模型
+
+模型可通过按常规方式在静态工作点附近扰动和线性化变换器波形来线性化。令
+
+$$\langle v_g(t)\rangle_{T_s} = V_g + \hat{v}_g(t)$$
+
+$$d(t) = D + \hat{d}(t) \Rightarrow d'(t) = D' - \hat{d}(t)$$
+
+$$\langle i(t)\rangle_{T_s} = \langle i_1(t)\rangle_{T_s} = I + \hat{i}(t) \tag{14.34}$$
+
+$$\langle v(t)\rangle_{T_s} = \langle v_2(t)\rangle_{T_s} = V + \hat{v}(t)$$
+
+$$\langle v_1(t)\rangle_{T_s} = V_1 + \hat{v}_1(t)$$
+
+$$\langle i_2(t)\rangle_{T_s} = I_2 + \hat{i}_2(t)$$
+
+平均开关网络端口 1 的非线性电压发生器值为
+
+$$(D'-\hat{d}(t))(V+\hat{v}(t)) = D'(V+\hat{v}(t)) - V\hat{d}(t) - \hat{v}(t)\hat{d}(t) \tag{14.35}$$
+
+项 $\hat{v}(t)\hat{d}(t)$ 是非线性的，交流变化远小于静态值 [如式 (7.33)] 时幅度小。小信号假设满足时可忽略此项。项 $V\hat{d}(t)$ 由控制输入驱动，故可用独立电压源表示。项 $D'(V+\hat{v}(t))$ 等于常数 $D'$ 乘输出电压 $(V+\hat{v}(t))$。此项依赖于输出电容电压；用受控电压源表示。此受控源将成为理想变压器的一次绕组。
+
+平均开关网络端口 2 的非线性电流发生器类似处理。其电流为
+
+$$(D'-\hat{d}(t))(I+\hat{i}(t)) = D'(I+\hat{i}(t)) - I\hat{d}(t) - \hat{i}(t)\hat{d}(t) \tag{14.36}$$
+
+项 $\hat{i}(t)\hat{d}(t)$ 是非线性的，小信号假设满足时可忽略。
+
+项 $I\hat{d}(t)$ 由控制输入 $\hat{d}(t)$ 驱动，用独立电流源表示。项 $D'(I+\hat{i}(t))$ 依赖于电感电流 $(I+\hat{i}(t))$。此项用受控电流源建模；此源将成为理想变压器的二次绕组。
+
+消去非线性项并用理想 $D':1$ 变压器替代受控发生器后，得图14.13d 的组合直流和小信号交流平均开关模型。图14.14 给出升压变换器完整平均电路模型。
+
+![源页 p.569](../assets/page-snapshots/chapter-14/page-569.png)
+
+图14.14 升压变换器的直流和小信号交流平均电路模型
+
+比较图14.11b 和14.14 的模型很有趣。升压变换器的两个平均电路模型等价——导致相同稳态解和相同变换器传递函数。但由于图14.12a 开关网络两端口共享相同参考地，图14.14 所得平均电路模型更易求解，并对升压变换器稳态工作和动态给出更好物理洞察。图14.14 电路模型揭示开关网络执行：(i) 按 $D':1$ 变换比变换直流和小信号交流电压电流电平，(ii) 由控制输入 $d(t)$ 驱动向变换器电路引入交流电压和电流变化。电路平均方法所得图14.14 模型与 7.2 节基本交流建模技巧所得图7.18b 模型相同。
+
+![源页 p.569](../assets/page-snapshots/chapter-14/page-569.png)
+
+图14.15 降压变换器示例：(a) 变换器电路；(b) 开关波形
+
+接下来考虑图14.15 的 CCM 降压变换器，其中开关网络端口定义为共享共地端子。相应平均开关模型的推导遵循与 SEPIC 和升压示例相同的步骤。选 $v_1(t)$ 和 $i_2(t)$ 作为二端口开关网络的独立端子变量，因为这些量分别与施加的变换器输入电压 $v_g(t)$ 和电感电流 $i(t)$ 重合。然后需将平均因变量端子波形 $\langle i_1(t)\rangle_{T_s}$ 和 $\langle v_2(t)\rangle_{T_s}$ 表示为控制输入 $d(t)$ 和 $\langle v_1(t)\rangle_{T_s}$、$\langle i_2(t)\rangle_{T_s}$ 的函数。平均图14.15b 波形得
+
+$$\langle i_1(t)\rangle_{T_s} = d(t)\langle i_2(t)\rangle_{T_s} \tag{14.37}$$
+
+$$\langle v_2(t)\rangle_{T_s} = d(t)\langle v_1(t)\rangle_{T_s}$$
+
+扰动和线性化式 (14.37) 得
+
+$$I_1+\hat{i}_1(t) = D(I_2+\hat{i}_2(t)) + I_2\hat{d}(t) \tag{14.38}$$
+
+$$V_2+\hat{v}_2(t) = D(V_1+\hat{v}_1(t)) + V_1\hat{d}(t)$$
+
+对应式 (14.38) 的等效电路如图14.16a所示。用图14.16a 平均开关模型替代图14.15a 开关网络得图14.16b 变换器平均电路模型。图14.16b 电路模型揭示开关网络执行：(i) 按 $1:D$ 变换比变换直流和小信号交流电压电流电平，(ii) 由控制输入 $d(t)$ 驱动向变换器电路引入交流电压和电流变化。模型易于求解直流变换比和小信号频率响应。它与图7.18a 所示模型相同。
+
+![源页 p.570](../assets/page-snapshots/chapter-14/page-570.png)
+
+图14.16 平均开关建模，降压变换器示例：(a) 直流和小信号交流平均开关模型；(b) 用平均开关模型替代开关网络获得的降压变换器平均电路模型
+
+![源页 p.571](../assets/page-snapshots/chapter-14/page-571.png)
+
+图14.17 三种基本开关网络及其 CCM 直流和小信号交流平均开关模型：(a) 降压开关网络；(b) 升压开关网络；(c) 通用双开关网络
+
+三种基本开关网络——降压开关网络、升压开关网络和通用双开关网络——连同相应平均开关模型如图14.17所示。
+
+## 14.3 平均电路模型的仿真
+
+计算机仿真可成为工程设计过程中的强大工具。从设计指标出发，初始设计通常包括选择系统和电路结构以及元件类型和值。此过程中基于供应商数据和建模技巧的应用构造元件和系统模型。这些模型尽可能由实验数据验证，是设计者选择参数值并对照设计指标验证所达性能的基础。须考虑实际参数值因不可避免的生产容差、环境条件变化（如温度）和老化而不匹配标称值。设计验证步骤中进行最坏情况分析（或其他可靠性和成品率分析）以判断是否在所有条件下（即预期元件参数值范围内）满足指标。计算机仿真非常适合此任务：用可靠模型和适当仿真设置，可对各种元件参数集测试系统性能

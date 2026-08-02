@@ -7,7 +7,7 @@ chapterOrder: 10
 category: 电力电子基础教材
 source: power
 visibility: public
-title: "第4章part 4 - 4 Switch Realization"
+title: "第4章 开关的实现（第4部分）"
 tags:
   - power-electronics
   - 教材
@@ -18,292 +18,144 @@ navGroup: 教材研读
 navGroupOrder: 25
 ---
 
-# 第4章part 4 - 4 Switch Realization
+# 第4章 开关的实现（第4部分）
 
-> Source: `Fundamentals of Power Electronics 3rd Edition.pdf`  
-> Pages: 142-148  
-> Chunk ID: `chapter-4-part-4`
+图4.77 效率与开关频率的关系，基于式 (4.52)，损耗和负载功率取值任意。开关损耗使效率在高频时迅速下降
 
-## 主干提取
+4. “同步整流器”是指一个按反向电流连接导通的 MOSFET，并按需施加栅极驱动控制。该器件可用于原本需要二极管的位置。若采用导通电阻 $R_{on}$ 足够低的 MOSFET，可获得更低的导通损耗。
 
-- TODO: 提取本节核心论点、公式关系、控制框图含义、器件/拓扑约束和实验结论。
+5. 多数载流子器件（包括 MOSFET 和肖特基二极管）开关时间很快，实质上由器件电容的充电决定。但这些器件的正向压降随击穿电压增大而迅速增大。
 
-## 术语表
+6. 少数载流子器件（包括 BJT、IGBT 和晶闸管类）能在相对较低的正向压降下获得高击穿电压。但这些器件的开关时间更长，由插入或移除存储少数电荷所需时间决定。
 
-| English term | 中文译名 | Notes |
-|---|---|---|
-| TODO | TODO | TODO |
+7. 宽禁带半导体器件可显著改善击穿电压、导通电阻与开关速度之间的折中关系。碳化硅 MOSFET、SiC 肖特基二极管和 GaN HEMT 实现了远超硅所能达到的性能。
 
-## 中文翻译
+8. 开关过渡期间因多种机制损失能量。由此产生的平均功率损耗即开关损耗，等于此能量损失乘以开关频率。开关损耗对实际变换器的开关频率施加了上限。
 
-TODO: 在这里写专业、通顺、前后一致的中文译文。
+9. 二极管和电感对晶体管构成“钳位电感性负载”。晶体管驱动此类负载时，在开关过渡期间经历高瞬时功率损耗。一个导致显著开关损耗的例子是 IGBT 及其关断过渡期间观测到的“电流尾”。
 
-## 英文原文
+![源页 p.143](../assets/page-snapshots/chapter-4/page-143.png)
 
-```text
-4.7 Summary of Key Points 127
-50%
-60%
-70%
-80%
-90%
-100%
-fsw
-10 kHz 100 kHz 1 MHz
-dc asymptote
-fcrit
-Fig. 4.77 Eﬃciency vs. switching frequency, based on Eq. ( 4.52), using arbitrary values for the choice
-of loss and load power. Switching loss causes the eﬃciency to decrease rapidly at high frequency
-4. A “synchronous rectiﬁer” is a MOSFET connected to conduct reverse current, with gate
-drive control as necessary. This device can be used where a diode would otherwise be re-
-quired. If a MOSFET with suﬃciently low Ron is used, reduced conduction loss is obtained.
-5. Majority-carrier devices, including the MOSFET and Schottky diode, exhibit very fast
-switching times, controlled essentially by the charging of the device capacitances. How-
-ever, the forward voltage drops of these devices increases quickly with increasing break-
-down voltage.
-6. Minority-carrier devices, including the BJT, IGBT, and thyristor family, can exhibit high
-breakdown voltages with relatively low forward voltage drop. However, the switching times
-of these devices are longer, and are controlled by the times needed to insert or remove stored
-minority charge.
-7. Wide-bandgap semiconductor devices can signiﬁcantly improve the tradeoﬀbetween break-
-down voltage, on-resistance, and switching speed. Silicon carbide MOSFETs, SiC Schottky
-diodes, and GaN HEMTs have realized performance well beyond that achieved with silicon.
-8. Energy is lost during switching transitions, owing to a variety of mechanisms. The result-
-ing average power loss, or switching loss, is equal to this energy loss multiplied by the
-switching frequency. Switching loss imposes an upper limit on the switching frequencies
-of practical converters.
-9. The diode and inductor present a “clamped inductive load” to the transistor. When a tran-
-sistor drives such a load, it experiences high instantaneous power loss during the switching
-transitions. An example where this leads to signiﬁcant switching loss is the IGBT and the
-“current tail” observed during its turn-oﬀtransition.
+10. 人们熟知的 p–n 二极管指数 $i$–$v$ 特性是一种平衡关系，在开关过渡期间不成立。要关断二极管，必须移除其内部存储少数电荷。在反向恢复过程中，可能有显著负向电流流过二极管，并在晶体管中引起开关损耗。
 
-128 4 Switch Realization
-10. The familiar exponential i–v characteristic of the p–n diode is an equilibrium relationship
-that does not apply during switching transitions. To turn o ﬀthe diode, its internal stored
-minority charge must be removed. During the reverse-recovery process, signiﬁcant negative
-current can ﬂow through the diode that induces switching loss in the transistor.
-11. The equivalent circuit models of the previous chapter can be extended to model the switch-
-ing loss caused by diode reverse recovery. Switching waveforms including the switching
-transitions are averaged, to ﬁnd expressions for their dc components. These averaged ex-
-pressions are employed in the construction of equivalent circuits.
-12. Other signiﬁcant sources of switching loss include diode stored charge and energy stored in
-certain parasitic capacitances and inductances. Parasitic ringing also indicates the presence
-of switching loss.
-Problems
-In Problems 4.1 to 4.6 and 4.10, the input voltage Vg is dc and positive with the polarity shown.
-Specify how to implement the switches using a minimal number of diodes and transistors, such
-that the converter operates over the entire range of duty cycles 0 ≤D≤1. The switch states
-should vary as shown in Fig. 4.78. You may assume that the inductor current ripples and capac-
-itor voltage ripples are small.
-Switch
-position
-t0 DTs Ts
-1
-2
-Fig. 4.78 Switch control method for Problems 4.1 to 4.6
-For each problem, do the following:
-(a) Realize the switches using SPST ideal switches, and explicitly deﬁne the voltage and
-current of each switch.
-(b) Express the on-state current and o ﬀ-state voltage of each SPST switch in terms of the
-converter inductor currents, capacitor voltages, and/or input source voltage.
-(c) Solve the converter to determine the inductor currents and capacitor voltages, as in
-Chap. 2.
-(d) Determine the polarities of the switch on-state currents and o ﬀ-state voltages. Do the
-polarities vary with duty cycle?
-(e) State how each switch can be realized using transistors and/or diodes, and whether the real-
-ization requires single-quadrant, current-bidirectional two-quadrant, voltage-bidirectional
-two-quadrant, or four-quadrant switches.
+11. 前一章的等效电路模型可加以扩展，以建模二极管反向恢复引起的开关损耗。对包含开关过渡的开关波形求平均，求得其直流分量的表达式。这些平均表达式用于构造等效电路。
 
-4.7 Summary of Key Points 129
-4.1 Realize the switches in the converter of Fig. 4.79, following steps (a) to (e) described
-above.
-+
-12
-12
-Vg
-Fig. 4.79 Converter for Problem 4.1
-4.2 Realize the switches in the converter of Fig. 4.80, following steps (a) to (e) described
-above.
-+
-1
-2
-2
-1
-Vg
-Fig. 4.80 Converter for Problem 4.2
-4.3 Realize the switches in the converter of Fig. 4.81, following steps (a) to (e) described
-above.
-+
-1
-2Vg
-Fig. 4.81 Converter for Problem 4.3
-4.4 Realize the switches in the converter of Fig. 4.82, following steps (a) to (e) described
-above.
+12. 其他重要的开关损耗源包括二极管存储电荷以及储存在某些寄生电容和电感中的能量。寄生振铃也指示存在开关损耗。
 
-130 4 Switch Realization
-+ 1 2
-12
-Vg
-Fig. 4.82 Converter for Problem 4.4
-4.5 Realize the switches in the converter of Fig. 4.83, following steps (a) to (e) described
-above.
-+
-Vg
-12
-21
-Fig. 4.83 Converter for Problem 4.5
-4.6 Realize the switches in the converter of Fig. 4.84, following steps (a) to (e) described
-above.
-+Vg
-1
-2
-1
-2
-Fig. 4.84 Converter for Problem 4.6
+## 习题
 
-4.7 Summary of Key Points 131
-4.7 The buck–boost converter of Fig. 4.85 is implemented with a MOSFET and a p–n diode.
-The MOSFET can be modeled as ideal, but the diode exhibits a substantial reverse-
-recovery process, with reverse recovery time tr and recovered charge Qr. In addition,
-the inductor has winding resistance RL. The converter operates in continuous conduction
-mode.
-+
-–
-L
-Vg CR
-+
-–
-RL
-Fig. 4.85 Converter for Problem 4.7
-Derive an equivalent circuit that models the dc components of the converter waveforms
-and that accounts for the loss mechanisms described above.
-4.8 Solve the equivalent circuit model derived in Problem4.7, to ﬁnd closed-form expressions
-for the output voltage and inductor current.
-4.9 A certain boost converter is implemented with a MOSFET and ap–n diode. The MOSFET
-can be modeled as ideal, but the diode exhibits a substantial reverse-recovery process, with
-reverse recovery time tr and recovered charge Qr. In addition, the inductor has winding
-resistance RL.
-(a) Derive an equivalent circuit that models the dc components of the converter wave-
-forms and that accounts for the loss elements described above.
-(b) Solve your model to ﬁnd an expression for the output voltage.
-(c) Plot the output voltage vs. duty cycle over the range 0 ≤D< 1, for the following
-values: RL = 0.25Ω, fs = 150 kHz, Qr = 5μcoul, tr = 100 nsec, R= 60Ω, Vg =
-24 V.
-4.10 It is desired to convert 60 Hz 120 V AC to 240 V AC, to power a 1 kW AC load. Although
-a conventional 60 Hz transformer could be used in this application, such a transformer is
-large and heave. Instead, it is decided to use a boost converter switching at 100 kHz, as
-illustrated in Fig. 4.86. Potentially, this converter is small and lightweight. It operates at a
-constant duty cycle of approximately 0.5, so that v(t)= 2v
-g(t). The elements L and C are
-chosen to ﬁlter the switching harmonics and have small switching ripples; however, they
-have negligible eﬀect on the 60 Hz components of the waveforms. The load is a linear
-impedance Z. Realize the switches in the converter of Fig. 4.86, following steps (a) to (e)
-listed above Problem 4.1.
-4.11 The converter illustrated in Fig. 4.87 is sometimes employed in low-power applications
-requiring a wide range of conversion ratios. It is desired that all elements operate in the
-continuous conduction mode (CCM) over the range 0 ≤D< 1. This mode is deﬁned
-as follows: each switching period contains two subintervals numbered 1 and 2; in the
-schematic illustrated in Fig. 4.87, switches labeled “1” conduct during subinterval 1 for
-time DT
-s, and switches labeled “2” conduct during subinterval 2 for time (1−D)Ts.
+在习题 4.1 至 4.6 和 4.10 中，输入电压 $V_g$ 为直流，极性如图所示为正。说明如何用最少数量的二极管和晶体管实现各开关，使变换器能在整个占空比范围 $0 \le D \le 1$ 内工作。开关状态应如图4.78所示变化。可假定电感电流纹波和电容电压纹波很小。
 
-132 4 Switch Realization
-vg(t)
-Lig(t)
-Z
-+
-v(t)
-–
-C
-1
-2
-120 V (rms)
-AC source
-240 V (rms)
-AC load
-Fig. 4.86 Converter for Problem 4.10
-+
-1
-12 2
-Vg
-+
-VR
-L1
-L2
-C1
-C2
-Fig. 4.87 Double buck–boost converter of Problem 4.11
-(a) Solve the converter in steady state, to ﬁnd the dc components of both capacitor volt-
-ages and both inductor currents. Your expressions should be functions of Vg, D, and
-R only. Clearly label the polarity or direction of each of these quantities on your
-schematic.
-(b) Show how to realize the switches using BJT’s and diodes, so that the converter oper-
-ates in CCM over the range 0≤D< 1. Document all steps in your derivation.
-(c) How does your switch realization change if the duty cycle is restricted to the range
-0≤D< 0.5? Sketch the circuit and switch realization for this case.
-4.12 An IGBT and a silicon diode operate in a buck converter, with the IGBT waveforms illus-
-trated in Fig. 4.88. The converter operates with input voltage Vg = 400 V, output voltage
-V= 200 V, and load current I= 10 A.
-(a) Estimate the total energy lost during the switching transitions. You may graphically
-estimate the waveforms of Fig. 4.88.
-(b) The forward voltage drop of the IGBT is 2.5 V , and the diode has forward voltage drop
-1.5 V . All other sources of conduction loss and ﬁxed loss can be neglected. Estimate
-the semiconductor conduction loss.
-(c) Sketch the converter eﬃciency over the range of switching frequencies 1 kHz≤fs≤
-100 kHz, and label numerical values.
-4.13 Two MOSFETs are employed as current-bidirectional two-quadrant switches in a bidirec-
-tional battery charger/discharger based on the dc–dc buck converter, similar to Fig. 4.15.
+图4.78 习题 4.1 至 4.6 的开关控制方式
 
-4.7 Summary of Key Points 133
-t, μs
-vCE(t)
-iC(t)10 A
-20 A
-0 A
-30 A
-40 A400 V
-300 V
-200 V
-100 V
-0 V
-i
-CvCE
-vCE(t)
-01 2
-iC(t)
-Fig. 4.88 IGBT voltage and current waveforms, Problem 4.12
-This converter interfaces a 16 V battery to a 28 V main power bus. The maximum bat-
-tery current is 40 A. The MOSFETs have on-resistances of 35 m Ω. Their body diodes
-have forward voltage drops of 1.0 V , and exhibit recovered charge Qr of 25 μC and re-
-verse recovery times tr of 200 ns in the given circuit. You may assume that all diodes in
-this problem have “snappy” reverse recovery characteristics, and also assume that diode
-stored charge is the dominant cause of switching loss in this circuit. You may neglect all
-losses other than the semiconductor conduction losses and the switching loss induced by
-diode stored charge.
-The current-bidirectional two-quadrant switches are realized as in Fig. 4.10a, utilizing the
-MOSFET body diodes.
-(a) Estimate the switching energy loss, conduction loss, and converter e ﬃciency, when
-the battery is being charged at the maximum rate. The switching frequency is 100 kHz.
-External diodes are now added as illustrated in Fig. 4.10b. These diodes have forward
-voltage drops of 1.0 V , and exhibit recovered charge Q
-r of 5 μC and reverse recovery
-times tr of 40 ns in the given circuit.
-(b) Repeat the analysis of Part (a), for this case.
-(c) Over what range of switching frequencies does the addition of the external diodes
-improve the converter eﬃciency?
-4.14 A switching converter operates with a switching frequency of 100 kHz. The converter
-waveforms exhibit damped sinusoidal ringing, initiated by the transistor turn-o ﬀtransi-
-tion, which decays slowly but eventually reaches zero before the end of the switching
-period. This ringing occurs in a series resonant circuit formed by parasitic inductances
-and capacitances in the circuit. The frequency of the ringing is 5 MHz. During the ﬁrst
-period of sinusoidal ringing, the ac inductor current reaches a peak magnitude of 0.5 A,
-and the ac capacitor voltage reaches a peak magnitude of 200 V . Determine the following
-quantities:
-(a) the value of the total parasitic inductance,
-(b) the value of the total parasitic capacitance,
-(c) the energy lost per switching period, associated with this ringing, and
-(d) the switching loss associated with this ringing.
-(e) Derive a general expression for the switching loss, as a function of the switching
-frequency, ringing frequency, and the ringing voltage and current peak magnitudes
-during the ﬁrst period of ringing.
-```
+对每道习题，完成以下各项：
+
+(a) 用理想 SPST 开关实现各开关，并明确定义每个开关的电压和电流。
+
+(b) 用变换器的电感电流、电容电压和/或输入电源电压表示每个 SPST 开关的通态电流和关断态电压。
+
+(c) 如第2章所示求解变换器，确定电感电流和电容电压。
+
+(d) 确定各开关通态电流和关断态电压的极性。这些极性是否随占空比变化？
+
+(e) 说明每个开关如何用晶体管和/或二极管实现，以及该实现需要单象限、电流双向双象限、电压双向双象限还是四象限开关。
+
+![源页 p.144](../assets/page-snapshots/chapter-4/page-144.png)
+
+4.1 按上述步骤 (a)–(e) 实现图4.79变换器中的开关。
+
+图4.79 习题 4.1 的变换器
+
+4.2 按上述步骤 (a)–(e) 实现图4.80变换器中的开关。
+
+图4.80 习题 4.2 的变换器
+
+4.3 按上述步骤 (a)–(e) 实现图4.81变换器中的开关。
+
+图4.81 习题 4.3 的变换器
+
+4.4 按上述步骤 (a)–(e) 实现图4.82变换器中的开关。
+
+![源页 p.145](../assets/page-snapshots/chapter-4/page-145.png)
+
+图4.82 习题 4.4 的变换器
+
+4.5 按上述步骤 (a)–(e) 实现图4.83变换器中的开关。
+
+图4.83 习题 4.5 的变换器
+
+4.6 按上述步骤 (a)–(e) 实现图4.84变换器中的开关。
+
+图4.84 习题 4.6 的变换器
+
+![源页 p.146](../assets/page-snapshots/chapter-4/page-146.png)
+
+4.7 图4.85的升降压变换器用一个 MOSFET 和一个 p–n 二极管实现。MOSFET 可视为理想，但二极管呈现显著的反向恢复过程，反向恢复时间为 $t_r$、恢复电荷为 $Q_r$。此外，电感有绕组电阻 $R_L$。变换器工作于连续导通模式。
+
+图4.85 习题 4.7 的变换器
+
+推导一个等效电路，建模变换器波形的直流分量并计入上述损耗机制。
+
+4.8 求解习题 4.7 导出的等效电路模型，求输出电压和电感电流的闭式表达式。
+
+4.9 某升压变换器用一个 MOSFET 和一个 p–n 二极管实现。MOSFET 可视为理想，但二极管呈现显著的反向恢复过程，反向恢复时间为 $t_r$、恢复电荷为 $Q_r$。此外，电感有绕组电阻 $R_L$。
+
+(a) 推导一个等效电路，建模变换器波形的直流分量并计入上述损耗元件。
+
+(b) 求解模型，求输出电压的表达式。
+
+(c) 在 $0 \le D < 1$ 范围内绘制输出电压对占空比的曲线，参数取：$R_L = 0.25\,\Omega$、$f_s = 150\,\text{kHz}$、$Q_r = 5\,\mu\text{C}$、$t_r = 100\,\text{ns}$、$R = 60\,\Omega$、$V_g = 24\,\text{V}$。
+
+4.10 希望将 60 Hz、120 V 交流转换为 240 V 交流，以供电给 1 kW 交流负载。虽然本应用可使用常规 60 Hz 变压器，但此种变压器体积大、重量沉。现决定采用以 100 kHz 开关的升压变换器，如图4.86所示。该变换器有可能小而轻。它以约 0.5 的恒定占空比工作，使 $v(t) = 2v_g(t)$。$L$ 和 $C$ 用于滤除开关谐波，其开关纹波很小；但对波形的 60 Hz 分量影响可忽略。负载为线性阻抗 $Z$。按习题 4.1 前所列步骤 (a)–(e) 实现图4.86变换器中的开关。
+
+4.11 图4.87所示变换器有时用于需要宽变换比范围的低功率场合。要求所有元件在 $0 \le D < 1$ 范围内均工作于连续导通模式（CCM）。该模式定义如下：每个开关周期含编号为 1 和 2 的两个子区间；在图4.87所示原理图中，标“1”的开关在子区间 1 内导通时间为 $DT_s$，标“2”的开关在子区间 2 内导通时间为 $(1 - D)T_s$。
+
+![源页 p.147](../assets/page-snapshots/chapter-4/page-147.png)
+
+图4.86 习题 4.10 的变换器
+
+图4.87 习题 4.11 的双升降压变换器
+
+(a) 在稳态下求解变换器，求两个电容电压和两个电感电流的直流分量。表达式应仅为 $V_g$、$D$、$R$ 的函数。在原理图上清晰标注各量的极性或方向。
+
+(b) 说明如何用 BJT 和二极管实现各开关，使变换器在 $0 \le D < 1$ 范围内工作于 CCM。记录推导的所有步骤。
+
+(c) 若占空比限于 $0 \le D < 0.5$ 范围，开关实现如何改变？画出此情形的电路和开关实现。
+
+4.12 一个 IGBT 和一个硅二极管在降压变换器中工作，IGBT 波形如图4.88所示。变换器输入电压 $V_g = 400\,\text{V}$、输出电压 $V = 200\,\text{V}$、负载电流 $I = 10\,\text{A}$。
+
+(a) 估算开关过渡期间的总能量损失。可从图4.88的波形图上估算。
+
+(b) IGBT 的正向压降为 2.5 V，二极管正向压降为 1.5 V。忽略所有其他导通损耗和固定损耗。估算半导体导通损耗。
+
+(c) 在 $1\,\text{kHz} \le f_s \le 100\,\text{kHz}$ 范围内绘制变换器效率对开关频率的曲线，并标注数值。
+
+4.13 两个 MOSFET 作为电流双向双象限开关用于基于直流-直流降压变换器的双向电池充放电器，类似于图4.15。
+
+![源页 p.148](../assets/page-snapshots/chapter-4/page-148.png)
+
+图4.88 习题 4.12 的 IGBT 电压和电流波形
+
+该变换器将一个 16 V 电池与 28 V 主电源母线接口。电池最大电流为 40 A。MOSFET 的导通电阻为 35 mΩ。其体二极管正向压降为 1.0 V，在给定电路中呈现恢复电荷 $Q_r$ 为 25 μC、反向恢复时间 $t_r$ 为 200 ns。可假定本题中所有二极管均具“硬恢复”（snappy）反向恢复特性，并假定二极管存储电荷是本电路开关损耗的主导原因。可忽略除半导体导通损耗和二极管存储电荷引起的开关损耗以外的所有损耗。
+
+电流双向双象限开关按图4.10a实现，利用 MOSFET 体二极管。
+
+(a) 估算电池以最大速率充电时的开关能量损耗、导通损耗和变换器效率。开关频率为 100 kHz。
+
+现按图4.10b加入外部二极管。这些二极管正向压降为 1.0 V，在给定电路中呈现恢复电荷 $Q_r$ 为 5 μC、反向恢复时间 $t_r$ 为 40 ns。
+
+(b) 对此情形重复 (a) 的分析。
+
+(c) 在什么开关频率范围内，加入外部二极管能改善变换器效率？
+
+4.14 一个开关变换器以 100 kHz 开关频率工作。变换器波形呈现阻尼正弦振铃，由晶体管关断过渡引发，缓慢衰减但在开关周期结束前最终降至零。此振铃发生于电路中寄生电感和电容构成的串联谐振电路中。振铃频率为 5 MHz。在振铃的第一个周期内，交流电感电流达到 0.5 A 的峰值，交流电容电压达到 200 V 的峰值。确定以下各量：
+
+(a) 总寄生电感的值；
+
+(b) 总寄生电容的值；
+
+(c) 每开关周期由此振铃损失的能量；
+
+(d) 由此振铃引起的开关损耗；
+
+(e) 导出开关损耗作为开关频率、振铃频率以及振铃第一周期内电压和电流峰值的一般表达式。
