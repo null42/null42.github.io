@@ -20,6 +20,7 @@ import { remarkExcerpt } from "./remark-excerpt.js";
 import { remarkImageGrid } from "./remark-image-grid.js";
 import { remarkMermaid } from "./remark-mermaid.js";
 import { remarkPlantuml } from "./remark-plantuml.js";
+import rehypeSplitLinks from "./rehype-split-links.mjs";
 import { remarkPostLinks } from "./remark-post-links.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
@@ -49,6 +50,7 @@ export function createSiteMarkdownProcessorOptions(): { remarkPlugins: any[]; re
 			rehypePlantuml,
 			rehypeFigure,
 			[rehypeExternalLinks, { siteUrl: siteConfig.site_url }],
+			rehypeSplitLinks,
 			[rehypeEmailProtection, { method: "base64" }],
 			[rehypeComponents, { components: { github: GithubCardComponent } }],
 			[

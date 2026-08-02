@@ -1,0 +1,331 @@
+---
+/**
+ * SplitView 组件：文章双开功能
+ *
+ * 功能：
+ * 1. 为文章正文中所有 [data-split-target] 链接追加"双开"按钮（⧉）
+ * 2. 当 URL 包含 ?split=<slug> 时，将文章区域分为左右两栏：
+ *    - 左栏：当前文章内容
+ *    - 右栏：iframe 加载目标文章
+ * 3. Esc 键或关闭按钮退出分屏
+ *
+ * URL 协议：/posts/current-article/?split=target-article-slug
+ */
+---
+
+<div id="split-view-container" class="hidden">
+	<div id="split-view-divider" class="split-view-divider"></div>
+	<div id="split-view-right" class="split-view-right">
+		<div class="split-view-header">
+			<span id="split-view-title" class="split-view-title"></span>
+			<button id="split-view-close" class="split-view-close" title="关闭分屏 (Esc)">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+					<path d="M4.28 3.22a.75.75 0 0 0-1.06 1.06L6.94 8l-3.72 3.72a.75.75 0 1 0 1.06 1.06L8 9.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L9.06 8l3.72-3.72a.75.75 0 0 0-1.06-1.06L8 6.94 4.28 3.22Z"/>
+				</svg>
+			</button>
+		</div>
+		<iframe id="split-view-iframe" class="split-view-iframe" title="分屏文章"></iframe>
+	</div>
+</div>
+
+<style>
+#split-view-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100vh;
+	z-index: 200;
+	display: flex;
+	flex-direction: column;
+	background: var(--color-card-base, #fff);
+	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) #split-view-container {
+	background: var(--color-card-base, #1a1a1a);
+}
+
+.split-view-divider {
+	position: absolute;
+	left: -3px;
+	top: 0;
+	bottom: 0;
+	width: 6px;
+	cursor: col-resize;
+	background: transparent;
+	z-index: 201;
+}
+
+.split-view-divider:hover {
+	background: var(--color-primary, #3b82f6);
+	opacity: 0.3;
+}
+
+.split-view-right {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: hidden;
+}
+
+.split-view-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
+	border-bottom: 1px solid var(--color-line-divider, #e5e7eb);
+	background: var(--color-card-base, #f9fafb);
+	min-height: 2.5rem;
+}
+
+:global(.dark) .split-view-header {
+	background: var(--color-card-base, #252525);
+}
+
+.split-view-title {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--color-text-secondary, #6b7280);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	flex: 1;
+}
+
+.split-view-close {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.75rem;
+	height: 1.75rem;
+	border: none;
+	border-radius: 0.375rem;
+	background: transparent;
+	color: var(--color-text-secondary, #6b7280);
+	cursor: pointer;
+	transition: all 0.15s;
+	flex-shrink: 0;
+}
+
+.split-view-close:hover {
+	background: var(--color-primary, #3b82f6);
+	color: white;
+}
+
+.split-view-iframe {
+	flex: 1;
+	border: none;
+	width: 100%;
+	background: white;
+}
+
+/* 双开按钮样式 */
+:global(.split-link-btn) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-left: 0.25rem;
+	border: 1px solid var(--color-line-divider, #d1d5db);
+	border-radius: 0.25rem;
+	background: var(--color-bg-hover, #f3f4f6);
+	color: var(--color-text-secondary, #9ca3af);
+	font-size: 0.7rem;
+	line-height: 1;
+	cursor: pointer;
+	vertical-align: baseline;
+	text-decoration: none;
+	transition: all 0.15s;
+}
+
+:global(.dark) .split-link-btn {
+	background: var(--color-bg-hover, #374151);
+	color: var(--color-text-secondary, #9ca3af);
+}
+
+:global(.split-link-btn:hover) {
+	background: var(--color-primary, #3b82f6);
+	color: white;
+	border-color: var(--color-primary, #3b82f6);
+}
+
+/* 分屏时左栏调整 */
+:global(body.split-view-active) {
+	overflow: hidden;
+}
+
+:global(body.split-view-active #post-container) {
+	width: 50vw !important;
+}
+</style>
+
+<script>
+/**
+ * SplitView 客户端逻辑
+ *
+ * 两个职责：
+ * 1. 为 [data-split-target] 链接渲染双开按钮
+ * 2. 处理 ?split= 参数，显示分屏
+ */
+(function () {
+	const SPLIT_PARAM = "split";
+
+	// ─── 工具函数 ───
+
+	function getSplitParam() {
+		const params = new URLSearchParams(window.location.search);
+		return params.get(SPLIT_PARAM);
+	}
+
+	function setSplitParam(slug: string | null) {
+		const url = new URL(window.location.href);
+		if (slug) {
+			url.searchParams.set(SPLIT_PARAM, slug);
+		} else {
+			url.searchParams.delete(SPLIT_PARAM);
+		}
+		window.history.replaceState({}, "", url.toString());
+	}
+
+	// ─── 双开按钮渲染 ───
+
+	function renderSplitButtons() {
+		const links = document.querySelectorAll("a[data-split-target]");
+		links.forEach(function (link) {
+			if (link.nextElementSibling && link.nextElementSibling.classList && link.nextElementSibling.classList.contains("split-link-btn")) return;
+
+			const slug = link.getAttribute("data-split-target");
+			if (!slug) return;
+
+			const btn = document.createElement("a");
+			btn.className = "split-link-btn";
+			btn.href = "?" + SPLIT_PARAM + "=" + encodeURIComponent(slug);
+			btn.title = "在右侧分屏打开";
+			btn.textContent = "⧉";
+			btn.addEventListener("click", function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+				openSplitView(slug);
+			});
+
+			link.insertAdjacentElement("afterend", btn);
+		});
+	}
+
+	// ─── 分屏视图 ───
+
+	let currentIframe: HTMLIFrameElement | null = null;
+	let container: HTMLElement | null = null;
+
+	function openSplitView(slug: string) {
+		setSplitParam(slug);
+
+		const targetUrl = "/posts/" + slug + "/";
+		container = document.getElementById("split-view-container");
+		if (!container) return;
+
+		const iframe = document.getElementById("split-view-iframe") as HTMLIFrameElement | null;
+		if (!iframe) return;
+		const titleEl = document.getElementById("split-view-title");
+		if (titleEl) titleEl.textContent = slug;
+
+		iframe.src = targetUrl;
+		currentIframe = iframe;
+
+		container.classList.remove("hidden");
+		document.body.classList.add("split-view-active");
+
+		// iframe 加载完成后更新标题
+		iframe.addEventListener("load", function () {
+			try {
+				const iframeDoc = iframe.contentDocument;
+				if (iframeDoc) {
+					const title = iframeDoc.querySelector("h1, [data-pagefind-meta='title']");
+					if (titleEl && title) titleEl.textContent = title.textContent || slug;
+				}
+			} catch (_e) {
+				// 跨域限制，保持 slug 作为标题
+			}
+		});
+	}
+
+	function closeSplitView() {
+		setSplitParam(null);
+		if (container) container.classList.add("hidden");
+		document.body.classList.remove("split-view-active");
+		if (currentIframe) {
+			currentIframe.src = "about:blank";
+			currentIframe = null;
+		}
+	}
+
+	// ─── 分隔条拖拽 ───
+
+	function initDivider() {
+		const divider = document.getElementById("split-view-divider");
+		if (!divider) return;
+
+		let isDragging = false;
+
+		divider.addEventListener("mousedown", function (e) {
+			isDragging = true;
+			e.preventDefault();
+		});
+
+		document.addEventListener("mousemove", function (e) {
+			if (!isDragging || !container) return;
+			const rightWidth = window.innerWidth - e.clientX;
+			const minWidth = 300;
+			const maxWidth = window.innerWidth - 300;
+			const clampedWidth = Math.max(minWidth, Math.min(maxWidth, rightWidth));
+			container.style.width = clampedWidth + "px";
+
+			const postContainer = document.getElementById("post-container");
+			if (postContainer) {
+				postContainer.style.width = (window.innerWidth - clampedWidth) + "px";
+			}
+		});
+
+		document.addEventListener("mouseup", function () {
+			isDragging = false;
+		});
+	}
+
+	// ─── 初始化 ───
+
+	function init() {
+		renderSplitButtons();
+		initDivider();
+
+		const closeBtn = document.getElementById("split-view-close");
+		if (closeBtn) closeBtn.addEventListener("click", closeSplitView);
+
+		// Esc 关闭分屏
+		document.addEventListener("keydown", function (e) {
+			if (e.key === "Escape" && document.body.classList.contains("split-view-active")) {
+				closeSplitView();
+			}
+		});
+
+		// 页面加载时检查 ?split= 参数
+		const splitSlug = getSplitParam();
+		if (splitSlug) openSplitView(splitSlug);
+
+		// 监听 URL 变化（浏览器前进/后退）
+		window.addEventListener("popstate", function () {
+			const slug = getSplitParam();
+			if (slug) openSplitView(slug);
+			else if (document.body.classList.contains("split-view-active")) closeSplitView();
+		});
+	}
+
+	// 等待 DOM 就绪
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", init);
+	} else {
+		init();
+	}
+})();
+</script>
