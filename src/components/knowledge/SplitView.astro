@@ -249,8 +249,8 @@
 			if (!slug) return;
 
 			// 给原始链接添加 title，明确提示"点击可跳转"
-		if (!link.title) {
-			link.title = "跳转到该文章（点击进入）";
+		if (!link.getAttribute("title")) {
+			link.setAttribute("title", "跳转到该文章（点击进入）");
 		}
 
 		const btn = document.createElement("a");
@@ -439,7 +439,7 @@
 					e.preventDefault();
 					e.stopPropagation();
 					// 跳转到新文章（离开分屏）
-					window.top.location.href = href;
+				if (window.top) window.top.location.href = href;
 				},
 				true,
 			);
