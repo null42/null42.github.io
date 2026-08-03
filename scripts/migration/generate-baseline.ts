@@ -100,6 +100,8 @@ export async function buildMigrationBaseline(options: BaselineOptions): Promise<
         attachments.push({ path: attachmentSourcePath, sha256: sha256(canonicalizeAttachmentBytes(data, attachmentSourcePath)) })
       } catch (error) {
         if (error instanceof Error && error.message.includes('outside the content root')) throw error
+        // 教材翻译 chunk 可能引用原始书籍页面快照（版权限制无法包含），跳过缺失的附件而非中断基线生成
+        if ((error as NodeJS.ErrnoException).code === 'ENOENT') continue
         throw new Error(`failed to read public attachment for content/${relative}`, { cause: error })
       }
     }
