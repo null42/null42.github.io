@@ -959,7 +959,7 @@ ALG-04 建立了死区补偿的理论基础（电压误差模型、电流过零�
 
 ---
 
-> **仿真验证：** 本模块的补偿算法可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。对应仿真模式：MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS (49)，可对比开启/关闭各补偿环节时的电流波形、转矩纹波和转速波动。
+> **仿真验证：** 本模块的补偿算法可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。对应仿真模式：MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS (49)，可对比开启/关闭各补偿环节时的电流波形、转矩纹波和转速波动。
 
 > **前置模块：** [ALG-04 死区补偿策略](./ALG-04-Deadtime-Compensation.md) | [ALG-06 位置速度观测器](./ALG-06-Position-Speed-Observer.md) | [ALG-12 速度环与转矩观测器](./ALG-12-Speed-Loop-Torque-Observer.md) | [ALG-14 THD 谐波分析](./ALG-14-THD-Harmonic-Analysis.md)
 

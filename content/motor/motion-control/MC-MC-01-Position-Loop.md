@@ -469,7 +469,7 @@ $$R_J = \frac{J_{load}}{J_{motor}}$$
 
 | 模块 | 关联说明 |
 | --- | --- |
-| [CT-14 三环级联PID](../control-theory/CT-14-Cascaded-PID-Control.md) | 位置环是三环级联的最外层，带宽分离法则的完整推导 |
+| [CT-14 三环级联PID](../../foundations/control-theory/CT-14-Cascaded-PID-Control.md) | 位置环是三环级联的最外层，带宽分离法则的完整推导 |
 | [ALG-12 速度环与转矩观测器](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) | 速度环是位置环的直接内环，速度环带宽决定位置环Kp上限 |
 | [CE-06 级联控制](../controllers-evolution/CE-06-Cascaded-Control.md) | 级联控制的理论基础与历史演化 |
 | [MC-MC-02 速度与加速度前馈](./MC-MC-02-Feedforward.md) | 前馈是消除位置环跟踪误差的根本方法 |

@@ -76,7 +76,7 @@ MC-08（无感观测器）→ MC-09（凸极效应 / MTPA）→ MC-10（参数�
 
 ## 交叉引用
 
-- [ALG-01 ~ ALG-11](../algorithm/) — 算法实现系列
-- [CT-01 ~ CT-16](../control-theory/) — 控制理论系列
-- [MC-MC-01 ~ MC-MC-06](./) — 运动控制实战系列
-- [MC-TP-01 ~ MC-TP-06](./) — 轨迹规划系列
+- [ALG-01 ~ ALG-11](../algorithm/README.md) — 算法实现系列
+- [CT-01 ~ CT-16](../../foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md) — 控制理论系列
+- [MC-MC-01 ~ MC-MC-06](./MC-MC-01-Position-Loop.md) — 运动控制实战系列
+- [MC-TP-01 ~ MC-TP-06](./MC-TP-01-Kinematics-Constraints.md) — 轨迹规划系列

@@ -762,5 +762,5 @@ $$\mathbf{u}^*(\mathbf{x}) = \mathbf{K}_i\mathbf{x} + \mathbf{c}_i, \quad \mathb
 ---
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 关键操作：在电流环控制中分别实现PI和MPC-CC，对比阶跃响应上升时间和稳态纹波

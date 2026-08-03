@@ -1749,7 +1749,7 @@ $$
 ---
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_FOC (3)，关键操作：设定 id=0.5A / iq=0，观察 uAB 子图中 αβ 电压是否为旋转矢量
 
 >  检验你的理解：[ALG-01 检验题目](./ALG-01-assessment.md)

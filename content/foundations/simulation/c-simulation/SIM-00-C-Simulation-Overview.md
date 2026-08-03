@@ -83,10 +83,10 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [ALG-00 电流环直觉](../algorithm/ALG-00-Current-Loop-Intuition.md) | 观察 Kp/Ki 对电流阶跃响应的影响：增大 Kp 加快上升但可能超调，增大 Ki 消除静差但可能振荡 | `MODE_SELECT_FOC` (3) | 在 sidebar 可调参数中改 `FOC.CLBW_HZ`（=Kp/L）和 `FOC.delta`（影响 Ki），设定 id=0, iq=额定值，观察 iD/iQ 子图的阶跃响应波形 |
-| [ALG-01 FOC 理论](../algorithm/ALG-01-FOC-Theory.md) | 验证 Clarke→Park→PI→解耦→InvPark 完整变换链路：id/iq 是否正确解耦，角度变换是否正确 | `MODE_SELECT_FOC` (3) | 设定非零 id 命令（如 id=0.5A, iq=0），观察 uAB 子图中 αβ 电压是否为旋转矢量；改变角度 theta_d，验证 dq 轴电流是否恒定 |
-| [ALG-03 PI 电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md) | 扫频验证电流环实际带宽：用正弦扫频激励测量电流环闭环频率响应，找到 -3dB 带宽点 | `MODE_SELECT_ID_SWEEPING_FREQ` (33) 或 `MODE_SELECT_IQ_SWEEPING_FREQ` (34) | 启用扫频模式，电流环带宽理论值 = CLBW_HZ，实际 -3dB 点受采样延迟和离散化影响会略低 |
-| [ALG-02 电流采样时序](../algorithm/ALG-02-Current-Sampling-Timing.md) | 理解采样周期 CL_TS 对电流环性能的影响：采样越快控制越好，但计算负担越大 | 任意 FOC 模式 | 改 `sim.CLTS`（如从 1e-4 改为 5e-4），观察电流环阶跃响应是否变差；同时注意 `NUMBER_OF_STEPS` 相应调整以保持总仿真时间 |
+| [ALG-00 电流环直觉](../../../motor/algorithm/ALG-00-Current-Loop-Intuition.md) | 观察 Kp/Ki 对电流阶跃响应的影响：增大 Kp 加快上升但可能超调，增大 Ki 消除静差但可能振荡 | `MODE_SELECT_FOC` (3) | 在 sidebar 可调参数中改 `FOC.CLBW_HZ`（=Kp/L）和 `FOC.delta`（影响 Ki），设定 id=0, iq=额定值，观察 iD/iQ 子图的阶跃响应波形 |
+| [ALG-01 FOC 理论](../../../motor/algorithm/ALG-01-FOC-Theory.md) | 验证 Clarke→Park→PI→解耦→InvPark 完整变换链路：id/iq 是否正确解耦，角度变换是否正确 | `MODE_SELECT_FOC` (3) | 设定非零 id 命令（如 id=0.5A, iq=0），观察 uAB 子图中 αβ 电压是否为旋转矢量；改变角度 theta_d，验证 dq 轴电流是否恒定 |
+| [ALG-03 PI 电流调节器](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) | 扫频验证电流环实际带宽：用正弦扫频激励测量电流环闭环频率响应，找到 -3dB 带宽点 | `MODE_SELECT_ID_SWEEPING_FREQ` (33) 或 `MODE_SELECT_IQ_SWEEPING_FREQ` (34) | 启用扫频模式，电流环带宽理论值 = CLBW_HZ，实际 -3dB 点受采样延迟和离散化影响会略低 |
+| [ALG-02 电流采样时序](../../../motor/algorithm/ALG-02-Current-Sampling-Timing.md) | 理解采样周期 CL_TS 对电流环性能的影响：采样越快控制越好，但计算负担越大 | 任意 FOC 模式 | 改 `sim.CLTS`（如从 1e-4 改为 5e-4），观察电流环阶跃响应是否变差；同时注意 `NUMBER_OF_STEPS` 相应调整以保持总仿真时间 |
 
 ---
 
@@ -94,12 +94,12 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [ALG-05 有感 FOC](../algorithm/ALG-05-Sensored-FOC.md) | 速度阶跃响应：给定阶跃转速指令，观察速度跟踪、iq 电流、转矩的时域响应 | `MODE_SELECT_VELOCITY_LOOP` (4) | 修改 `pmsm_comm.c` 的 `_user_commands()` 函数中的转速指令序列（如 0→400rpm→-400rpm），添加负载阶跃（ACM.TLoad），观察 Speed/Torque 子图 |
-| [ALG-12 速度环与转矩观测器](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) | 负载转矩在线估计：ESO 能否准确跟踪未知负载转矩 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 在 `_user_commands()` 中施加未知负载阶跃，观察 `OFSR.esoaf.xTL` 是否跟踪真实负载 `ACM.TLoad` |
-| [CT-04 PID 控制原理](../control-theory/CT-04-PID-Control-Principles.md) | P/I/D 各环节对速度环响应的影响：纯P有静差，加I消除静差，加D抑制超调 | `MODE_SELECT_VELOCITY_LOOP` (4) | 在 `init_CTRL()` 中分别将 `PID_Speed->Kp`/`Ki_CODE` 设为零，观察 Speed 子图的稳态误差和超调变化 |
-| [CT-05 PID 整定与实现](../control-theory/CT-05-PID-Tuning-Implementation.md) | TI InstaSPIN 整定公式验证：Kp=L*BW, Ki=Kp*R/L*Ts 的实际效果 | `MODE_SELECT_VELOCITY_LOOP` (4) | 改 `FOC.delta`（速度/电流带宽比），delta 越大速度环越慢，观察 Speed 子图响应速度变化 |
-| [CT-14 级联 PID](../control-theory/CT-14-Cascaded-PID-Control.md) | 电流环+速度环双环交互：速度环输出作为电流环给定 | `MODE_SELECT_VELOCITY_LOOP` (4) | 改 `VL_EXE_PER_CL_EXE`（速度环降频比），如从 1 改为 10，观察速度环控制效果变差 |
-| [CT-06 前馈控制](../control-theory/CT-06-Feedforward-Control.md) | dq 轴解耦前馈的效果：抵消反电动势耦合项 | `MODE_SELECT_VELOCITY_LOOP` (4) | 切换 YAML 中 `bool_apply_decoupling_voltages_to_current_regulation`，观察高速时 id/iq 耦合是否减少 |
+| [ALG-05 有感 FOC](../../../motor/algorithm/ALG-05-Sensored-FOC.md) | 速度阶跃响应：给定阶跃转速指令，观察速度跟踪、iq 电流、转矩的时域响应 | `MODE_SELECT_VELOCITY_LOOP` (4) | 修改 `pmsm_comm.c` 的 `_user_commands()` 函数中的转速指令序列（如 0→400rpm→-400rpm），添加负载阶跃（ACM.TLoad），观察 Speed/Torque 子图 |
+| [ALG-12 速度环与转矩观测器](../../../motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.md) | 负载转矩在线估计：ESO 能否准确跟踪未知负载转矩 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 在 `_user_commands()` 中施加未知负载阶跃，观察 `OFSR.esoaf.xTL` 是否跟踪真实负载 `ACM.TLoad` |
+| [CT-04 PID 控制原理](../../control-theory/CT-04-PID-Control-Principles.md) | P/I/D 各环节对速度环响应的影响：纯P有静差，加I消除静差，加D抑制超调 | `MODE_SELECT_VELOCITY_LOOP` (4) | 在 `init_CTRL()` 中分别将 `PID_Speed->Kp`/`Ki_CODE` 设为零，观察 Speed 子图的稳态误差和超调变化 |
+| [CT-05 PID 整定与实现](../../control-theory/CT-05-PID-Tuning-Implementation.md) | TI InstaSPIN 整定公式验证：Kp=L*BW, Ki=Kp*R/L*Ts 的实际效果 | `MODE_SELECT_VELOCITY_LOOP` (4) | 改 `FOC.delta`（速度/电流带宽比），delta 越大速度环越慢，观察 Speed 子图响应速度变化 |
+| [CT-14 级联 PID](../../control-theory/CT-14-Cascaded-PID-Control.md) | 电流环+速度环双环交互：速度环输出作为电流环给定 | `MODE_SELECT_VELOCITY_LOOP` (4) | 改 `VL_EXE_PER_CL_EXE`（速度环降频比），如从 1 改为 10，观察速度环控制效果变差 |
+| [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | dq 轴解耦前馈的效果：抵消反电动势耦合项 | `MODE_SELECT_VELOCITY_LOOP` (4) | 切换 YAML 中 `bool_apply_decoupling_voltages_to_current_regulation`，观察高速时 id/iq 耦合是否减少 |
 
 ---
 
@@ -107,11 +107,11 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [ALG-06 位置与速度观测器](../algorithm/ALG-06-Position-Speed-Observer.md) | 角度跟踪观测器（ATO/PLL）：观测位置能否跟踪真实位置 | `MODE_SELECT_FOC_SENSORLESS` (31) | 对比 `OBSV.theta_d`（观测角度）和 `ACM.theta_d`（真实角度），观察收敛过程和无感启动 |
-| [ALG-07 无感观测器](../algorithm/ALG-07-Sensorless-Observers.md) | 多种观测器（反EMF/SMO/磁链/EKF）在低速和高速下的性能对比 | `MODE_SELECT_VELOCITY_LOOP_SENSORLESS` (41) | 切换观测器类型，观察低速（<100rpm）时的角度误差和高速反转时的跟踪性能 |
-| [CT-11 观测器设计](../control-theory/CT-11-Observer-Design.md) | 观测器极点配置对收敛速度的影响：极点离原点越远收敛越快但对噪声越敏感 | `MODE_SELECT_Marino2005` (44) | 改观测器增益参数，观察角度误差收敛曲线（初始角度偏差→收敛到零的时间） |
-| [CT-16 ADRC](../control-theory/CT-16-ADRC-Theory.md) | ESO 扩张状态观测器：同时估计转速、位置、负载转矩 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 改 `CAREFUL_ESOAF_OMEGA_OBSERVER`（观测器带宽），观察 OFSR.esoaf.xTL 对阶跃负载的估计 |
-| [CT-17 LADRC](../control-theory/CT-17-LADRC-Linear-ADRC.md) | 线性 ADRC 验证：线性 ESO + 线性状态误差反馈控制律 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 对比 ADRC 与 PI 速度环的抗扰动性能 |
+| [ALG-06 位置与速度观测器](../../../motor/algorithm/ALG-06-Position-Speed-Observer.md) | 角度跟踪观测器（ATO/PLL）：观测位置能否跟踪真实位置 | `MODE_SELECT_FOC_SENSORLESS` (31) | 对比 `OBSV.theta_d`（观测角度）和 `ACM.theta_d`（真实角度），观察收敛过程和无感启动 |
+| [ALG-07 无感观测器](../../../motor/algorithm/ALG-07-Sensorless-Observers.md) | 多种观测器（反EMF/SMO/磁链/EKF）在低速和高速下的性能对比 | `MODE_SELECT_VELOCITY_LOOP_SENSORLESS` (41) | 切换观测器类型，观察低速（<100rpm）时的角度误差和高速反转时的跟踪性能 |
+| [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design.md) | 观测器极点配置对收敛速度的影响：极点离原点越远收敛越快但对噪声越敏感 | `MODE_SELECT_Marino2005` (44) | 改观测器增益参数，观察角度误差收敛曲线（初始角度偏差→收敛到零的时间） |
+| [CT-16 ADRC](../../control-theory/CT-16-ADRC-Theory.md) | ESO 扩张状态观测器：同时估计转速、位置、负载转矩 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 改 `CAREFUL_ESOAF_OMEGA_OBSERVER`（观测器带宽），观察 OFSR.esoaf.xTL 对阶跃负载的估计 |
+| [CT-17 LADRC](../../control-theory/CT-17-LADRC-Linear-ADRC.md) | 线性 ADRC 验证：线性 ESO + 线性状态误差反馈控制律 | `MODE_SELECT_VELOCITY_LOOP_USING_ESO_FOR_SPEED` (47) | 对比 ADRC 与 PI 速度环的抗扰动性能 |
 
 ---
 
@@ -119,8 +119,8 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [ALG-13 参数自整定](../algorithm/ALG-13-Protection-Optimization.md) | 分步参数辨识全流程：电阻→电感→磁链→惯量，理解每步的物理原理 | `MODE_SELECT_COMMISSIONING` (9) | 观察控制台输出：R 辨识（电流扫频+最小二乘拟合）、L 辨识（正弦激励+相干解调）、KE 辨识（反电动势法）、Js 辨识（Awaya1992 观测器） |
-| [HW-01 电机本体基础](../hardware/HW-01-Motor-Basics.md) | 不同电机参数（Ld/Lq、Rs、KE、Js）对控制性能的影响 | 任意 FOC 模式 | 在 Streamlit 中切换不同电机（SEW100W、SEW200W 等），观察相同 PI 参数下不同电机的响应差异 |
+| [ALG-13 参数自整定](../../../motor/algorithm/ALG-13-Protection-Optimization.md) | 分步参数辨识全流程：电阻→电感→磁链→惯量，理解每步的物理原理 | `MODE_SELECT_COMMISSIONING` (9) | 观察控制台输出：R 辨识（电流扫频+最小二乘拟合）、L 辨识（正弦激励+相干解调）、KE 辨识（反电动势法）、Js 辨识（Awaya1992 观测器） |
+| [HW-01 电机本体基础](../../../motor/hardware/HW-01-Motor-Basics.md) | 不同电机参数（Ld/Lq、Rs、KE、Js）对控制性能的影响 | 任意 FOC 模式 | 在 Streamlit 中切换不同电机（SEW100W、SEW200W 等），观察相同 PI 参数下不同电机的响应差异 |
 
 ---
 
@@ -128,8 +128,8 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [ALG-04 死区补偿](../algorithm/ALG-04-Deadtime-Compensation.md) | 逆变器非线性建模对比：理想/查表/Sigmoid拟合/Sul1996 模型 | `MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS` (49) | 在 `ACMSim.h` 中改 `__INVERTER_NONLINEARITY` 宏（0=理想, 1=Sul1996, 2=Sigmoid, 3=LUT, 4=LUT_Indexed），观察电流波形畸变程度 |
-| [ALG-10 过调制](../algorithm/ALG-10-Overmodulation.md) | 电压利用率极限：母线电压利用率接近 1.0 时进入过调制区 | 任意 FOC 模式 | 将转速指令设到接近额定转速，改 `LIMIT_DC_BUS_UTILIZATION` 从 0.96 到 1.0，观察 Vdc Util 子图和电流谐波 |
+| [ALG-04 死区补偿](../../../motor/algorithm/ALG-04-Deadtime-Compensation.md) | 逆变器非线性建模对比：理想/查表/Sigmoid拟合/Sul1996 模型 | `MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS` (49) | 在 `ACMSim.h` 中改 `__INVERTER_NONLINEARITY` 宏（0=理想, 1=Sul1996, 2=Sigmoid, 3=LUT, 4=LUT_Indexed），观察电流波形畸变程度 |
+| [ALG-10 过调制](../../../motor/algorithm/ALG-10-Overmodulation.md) | 电压利用率极限：母线电压利用率接近 1.0 时进入过调制区 | 任意 FOC 模式 | 将转速指令设到接近额定转速，改 `LIMIT_DC_BUS_UTILIZATION` 从 0.96 到 1.0，观察 Vdc Util 子图和电流谐波 |
 
 ---
 
@@ -137,8 +137,8 @@ emachinery 是一个 **Python + C 混合** 的电机控制数值仿真框架。
 
 | KB 模块 | 仿真验证内容 | 推荐 Mode | 关键操作 |
 |--------|------------|----------|---------|
-| [CT-03 频域响应与 Bode 图](../control-theory/CT-03-Frequency-Response-Bode.md) | 实测电流环/速度环频率响应，生成 Bode 图 | `MODE_SELECT_SWEEPING_FREQ_FOR_VELOCITY_AND_CURRENT` (46) | 启用扫频，在 Streamlit 中切换到 `plugin_Sweeping` 插件查看自动生成的 Bode 图，找 -3dB 带宽和相位裕度 |
-| [CT-07 Nyquist 稳定判据](../control-theory/CT-07-Nyquist-Stability.md) | 实测 Nyquist 图，验证系统稳定裕度 | `MODE_SELECT_NYQUIST_PLOTTING` (91) | 观察 Nyquist 轨迹相对于 (-1, 0) 点的位置，判断闭环稳定性 |
+| [CT-03 频域响应与 Bode 图](../../control-theory/CT-03-Frequency-Response-Bode.md) | 实测电流环/速度环频率响应，生成 Bode 图 | `MODE_SELECT_SWEEPING_FREQ_FOR_VELOCITY_AND_CURRENT` (46) | 启用扫频，在 Streamlit 中切换到 `plugin_Sweeping` 插件查看自动生成的 Bode 图，找 -3dB 带宽和相位裕度 |
+| [CT-07 Nyquist 稳定判据](../../control-theory/CT-07-Nyquist-Stability.md) | 实测 Nyquist 图，验证系统稳定裕度 | `MODE_SELECT_NYQUIST_PLOTTING` (91) | 观察 Nyquist 轨迹相对于 (-1, 0) 点的位置，判断闭环稳定性 |
 
 ---
 
@@ -430,5 +430,5 @@ emachinery 支持多用户并行开发，每个用户可以创建独立的算法
 6. **电机参数准确性**：仿真中使用的电机参数来自 `motor_library.json`，辨识实验中如果辨识结果与真实值偏差较大，检查 YAML 中的激励信号幅值是否合适（太小信噪比低，太大可能饱和）。
 
 ## 延伸实践
--  [路径13: 无位置传感器控制](../practice/PRACTICE-13-Sensorless-Control.md) — 无MATLAB许可证时，可用C仿真平台验证SMO/MRAS等无感算法
+-  [路径13: 无位置传感器控制](../../../motor/practice/PRACTICE-13-Sensorless-Control.md) — 无MATLAB许可证时，可用C仿真平台验证SMO/MRAS等无感算法
 -  [SIM-05: 数字孪生与真实电机模型](./SIM-05-Digital-Twin.md) — 参数辨识、模型验证、在线自适应、仿真置信度评估

@@ -1169,7 +1169,7 @@ MTPA条件等价于磁链幅值最小化。非线性磁链观测器直接提供$
 | [VESC](https://github.com/vedderb/bldc) | 开源电调非线性磁链观测器实现 |
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP_SENSORLESS (41)，关键操作：切换观测器类型为非线性磁链观测器，观察零速/低速下的角度误差、γ自适应过程、与SMO的性能对比
 
 >  检验你的理解：[ALG-16 检验题目](./ALG-16-assessment.md)

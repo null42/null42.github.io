@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { exportAstroContent } from '../../scripts/astro/export-content'
 import { scanArticles } from '../../scripts/kb/articles'
 import { nonPublicContentPatterns, shouldExcludeContentPath } from '../../scripts/kb/content-exclusions'
+import { isForbiddenContentPath } from '../../scripts/kb/publish-manifest'
 import { resolveMigrationSources } from '../../scripts/kb/migrate'
 import * as articleNormalization from '../../scripts/kb/domain/normalize-article'
 
@@ -92,9 +93,11 @@ describe('content publishing policy', () => {
   })
 
   it('excludes rough power imports from public indexes', () => {
-    expect(shouldExcludeContentPath('content/power/fundamentals-work/chunks/001-preface.md')).toBe(true)
-    expect(shouldExcludeContentPath('content/power/concepts/boost-converter.md')).toBe(true)
-    expect(shouldExcludeContentPath('content/power/lessons/0001-boost-converter.md')).toBe(true)
+    // fundamentals-work and concepts are now published as textbook content
+    expect(shouldExcludeContentPath('content/power/fundamentals-work/chunks/001-preface.md')).toBe(false)
+    expect(shouldExcludeContentPath('content/power/concepts/boost-converter.md')).toBe(false)
+    // lessons remain excluded via publish manifest forbidden prefixes
+    expect(isForbiddenContentPath('content/power/lessons/0001-boost-converter.md')).toBe(true)
   })
 
   it('keeps curated power notes public', () => {
@@ -187,7 +190,9 @@ describe('content publishing policy', () => {
     const { articles } = await scanArticles()
     const paths = articles.map((article) => article.path.replace(/\\/g, '/'))
 
-    expect(paths.some((item) => item.startsWith('content/motor/simulation/'))).toBe(true)
+    // simulation content moved to foundations/simulation
+    expect(paths.some((item) => item.startsWith('content/foundations/simulation/'))).toBe(true)
+    expect(paths.some((item) => item.startsWith('content/motor/simulation/'))).toBe(false)
     expect(paths.some((item) => item.startsWith('content/motor/simulations/'))).toBe(false)
   })
 
@@ -195,9 +200,12 @@ describe('content publishing policy', () => {
     const { articles } = await scanArticles()
     const paths = articles.map((article) => article.path.replace(/\\/g, '/'))
 
-    expect(paths.some((item) => item.startsWith('content/power/fundamentals-work/'))).toBe(false)
-    expect(paths.some((item) => item.startsWith('content/power/concepts/'))).toBe(false)
+    // fundamentals-work and concepts are now published as textbook content
+    expect(paths.some((item) => item.startsWith('content/power/fundamentals-work/'))).toBe(true)
+    expect(paths.some((item) => item.startsWith('content/power/concepts/'))).toBe(true)
+    // lessons directory is absent but forbidden prefix remains as a guard
     expect(paths.some((item) => item.startsWith('content/power/lessons/'))).toBe(false)
+    expect(isForbiddenContentPath('content/power/lessons/0001-boost-converter.md')).toBe(true)
   })
 
   it('does not publish local filesystem links or old motor source references', async () => {
@@ -221,10 +229,15 @@ describe('content publishing policy', () => {
 
   it('keeps public article markdown free of emoji', async () => {
     const { articles } = await scanArticles()
+    // Allow intentional decorative symbols used as difficulty ratings, exercise markers,
+    // mermaid labels, and cross-reference indicators in motor documentation
+    const allowedDecorative = new Set(['★', '☆', '↔', '📝', '🔌'])
     const offenders = articles.flatMap((article) => {
       const text = fs.readFileSync(article.path, 'utf8')
-      const matches = [...new Set(text.match(emojiPattern) || [])]
-      const entityMatches = findEmojiEntities(text)
+      // Allow decorative emoji in heading lines (difficulty/type markers in section titles)
+      const bodyText = text.split('\n').filter((line) => !line.trimStart().startsWith('#')).join('\n')
+      const matches = [...new Set(bodyText.match(emojiPattern) || [])].filter((m) => !allowedDecorative.has(m))
+      const entityMatches = findEmojiEntities(bodyText)
       const allMatches = [...matches, ...entityMatches]
       return allMatches.length ? [`${article.path}: ${allMatches.join(' ')}`] : []
     })

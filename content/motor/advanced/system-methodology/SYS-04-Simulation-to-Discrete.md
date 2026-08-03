@@ -2506,4 +2506,4 @@ grid on;
 >  检验你的理解：[SYS-04 检验题目](./SYS-04-assessment.md)
 
 ## 延伸学习
--  [SIM-05: 数字孪生与真实电机模型](../../simulation/SIM-05-Digital-Twin.md) — 参数辨识、模型验证、在线自适应、仿真置信度评估
+-  [SIM-05: 数字孪生与真实电机模型](../../../foundations/simulation/c-simulation/SIM-05-Digital-Twin.md) — 参数辨识、模型验证、在线自适应、仿真置信度评估

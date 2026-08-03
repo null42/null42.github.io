@@ -496,7 +496,7 @@ $$\Delta I_{LSB} = \frac{20}{4096} \approx 0.0049 \text{ A}$$
 
 | 模块 | 关联说明 |
 |------|---------|
-| [CT-06 前馈控制](../control-theory/CT-06-Feedforward-Control.md) | 前馈控制的通用理论框架 |
+| [CT-06 前馈控制](../../foundations/control-theory/CT-06-Feedforward-Control.md) | 前馈控制的通用理论框架 |
 | [MC-MC-01 位置环设计](./MC-MC-01-Position-Loop.md) | 位置环P控制是前馈的基础，前馈解决P控制的跟踪误差 |
 | [CE-16 轨迹跟踪](../controllers-evolution/CE-16-Trajectory-Tracking.md) | 从LQR/MPC理论视角讨论轨迹跟踪 |
 | [MC-TP-02 S曲线速度规划](./MC-TP-02-Trapezoidal-S-Curve.md) | S曲线提供前馈所需的解析速度和加速度 |

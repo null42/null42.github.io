@@ -115,7 +115,7 @@ A: 所有zip压缩包的解压密码统一为 `chenshamotor`。
 A: 站4是模糊PI在双闭环中的应用（用模糊推理替代传统PI整定），站7是模糊PI在MTPA+弱磁综合策略中的应用（PI仅是其中一环，模糊推理用于协调MTPA和弱磁的切换）。站7是站4的进阶。
 
 **Q: 没有MATLAB许可证怎么办？**
-A: 可使用知识库[路径9: C仿真验证](../simulation/SIM-00-C-Simulation-Overview.md)的C仿真平台替代。
+A: 可使用知识库[路径9: C仿真验证](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md)的C仿真平台替代。
 
 **Q: 教材如何使用？**
 A: 袁雷的书偏重控制原理推导，袁登科的书偏重系统实现，建议根据需要选读对应章节，不必通读。

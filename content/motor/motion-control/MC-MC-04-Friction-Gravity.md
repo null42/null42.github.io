@@ -585,7 +585,7 @@ $$\Delta I_{LSB} = \frac{I_{rated}}{2^{N_{DAC}}}$$
 
 | 模块 | 关联说明 |
 |------|---------|
-| [CT-06 前馈控制](../control-theory/CT-06-Feedforward-Control.md) | 摩擦和重力补偿本质上是前馈控制的应用 |
+| [CT-06 前馈控制](../../foundations/control-theory/CT-06-Feedforward-Control.md) | 摩擦和重力补偿本质上是前馈控制的应用 |
 | [ALG-18 补偿算法](../algorithm/ALG-18-Compensation-Algorithms.md) | 通用补偿算法框架 |
 | [MC-MC-01 位置环设计](./MC-MC-01-Position-Loop.md) | 摩擦和重力导致位置环稳态偏差 |
 | [MC-MC-02 速度与加速度前馈](./MC-MC-02-Feedforward.md) | 摩擦/重力补偿与前馈控制配合使用 |

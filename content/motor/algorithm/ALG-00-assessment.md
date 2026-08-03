@@ -1140,7 +1140,7 @@ float get_scheduled_Kp(float I_abs, float temperature) {
 3. **每读完一章**，停下来问自己："这一章到底讲了什么？能用一句话总结吗？"
 4. **做完每一道练习题**后再往下读
 5. **遇到不懂的概念**，及时查阅前置知识（见第7.1节）
-6. **必要时**，先学习 [CT-04 PID控制原理](../control-theory/CT-04-PID-Control-Principles.md)，建立PID的基础认知
+6. **必要时**，先学习 [CT-04 PID控制原理](../../foundations/control-theory/CT-04-PID-Control-Principles.md)，建立PID的基础认知
 
 **给自己2-3周时间**，慢慢来，比较快。理解比速度重要！
 
@@ -1152,7 +1152,7 @@ float get_scheduled_Kp(float I_abs, float temperature) {
 
 1. **必读：** [ALG-03 PI电流调节器](./ALG-03-PI-Current-Regulator.md) — 本模块的"升级版"
 2. **强烈推荐：** [ADV-ALG-01 带宽设计与滤波器](../advanced/algorithm/ADV-ALG-01-Bandwidth-Filter.md) — 三环协同设计
-3. **建议阅读：** [CT-02 时域分析](../control-theory/CT-02-Time-Domain-Analysis.md) — 一阶/二阶系统的数学基础
+3. **建议阅读：** [CT-02 时域分析](../../foundations/control-theory/CT-02-Time-Domain-Analysis.md) — 一阶/二阶系统的数学基础
 4. **可选阅读：** [HW-02 电流采样](../hardware/HW-02-Current-Sensing.md) — 理解硬件如何获取电流信号
 
 ### 实践项目（按难度排序）

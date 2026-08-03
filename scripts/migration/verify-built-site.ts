@@ -39,6 +39,8 @@ const walkHtml = (directory: string): string[] => readdirSync(directory, { withF
 const resolveInternalAsset = (distDir: string, htmlPath: string, reference: string) => {
 	const clean = reference.split(/[?#]/, 1)[0];
 	if (!clean || clean.includes("${") || clean.startsWith("#") || /^(?:[a-z]+:|\/\/)/i.test(clean)) return undefined;
+	// 跳过外部仓库代码路径（如 lxfoc/），这些不是站点内部资源
+	if (clean.startsWith("/lxfoc/") || clean.startsWith("/lxfoc")) return undefined;
 	if (clean.startsWith("/")) return routeToFile(distDir, clean);
 	const absolute = resolve(dirname(htmlPath), clean);
 	return extname(absolute) ? absolute : join(absolute, "index.html");

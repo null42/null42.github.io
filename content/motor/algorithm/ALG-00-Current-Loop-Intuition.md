@@ -300,7 +300,7 @@ $$G_{plant}(s) = \frac{I(s)}{U(s)} = \frac{1}{Ls + R} = \frac{1/R}{\tau s + 1}$$
 │      -90° ━━━━ 高频（输出滞后90°）
 ```
 
-> ** 深入学习：** 想要完整掌握频域分析方法，请阅读 [CT-03 频域响应与Bode图](../control-theory/CT-03-Frequency-Response-Bode.md)
+> ** 深入学习：** 想要完整掌握频域分析方法，请阅读 [CT-03 频域响应与Bode图](../../foundations/control-theory/CT-03-Frequency-Response-Bode.md)
 
 ---
 
@@ -765,9 +765,9 @@ PWM频率: f_pwm=20kHz
 
 | 概念 | 关联模块 | 学习必要性 |
 |------|---------|-----------|
-| 电阻、电感的物理特性 | [EE-01 RLC基础](../electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.md) | 必须掌握 |
+| 电阻、电感的物理特性 | [EE-01 RLC基础](../../foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.md) | 必须掌握 |
 | 一阶RC/RL电路瞬态响应 | EE-01 第3章 | 建议了解 |
-| 开环控制vs闭环控制 | [CT-01 开环与闭环](../control-theory/CT-01-Open-Loop-Closed-Loop.md) | 建议了解 |
+| 开环控制vs闭环控制 | [CT-01 开环与闭环](../../foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md) | 建议了解 |
 
 ---
 
@@ -819,8 +819,8 @@ PWM频率: f_pwm=20kHz
 
 | 搭配模块 | 目的 | 学习顺序 |
 |---------|------|---------|
-| [CT-04 PID控制原理](../control-theory/CT-04-PID-Control-Principles.md) | 系统学习PID三个环节的作用 | 可与本模块并行 |
-| [CT-02 时域分析](../control-theory/CT-02-Time-Domain-Analysis.md) | 理解一阶/二阶系统的数学描述 | 先学CT-02再学本模块更扎实 |
+| [CT-04 PID控制原理](../../foundations/control-theory/CT-04-PID-Control-Principles.md) | 系统学习PID三个环节的作用 | 可与本模块并行 |
+| [CT-02 时域分析](../../foundations/control-theory/CT-02-Time-Domain-Analysis.md) | 理解一阶/二阶系统的数学描述 | 先学CT-02再学本模块更扎实 |
 | [HW-02 电流采样](../hardware/HW-02-Current-Sensing.md) | 理解硬件如何获取电流信号 | 可在本模块之后学习 |
 
 ---
@@ -1148,5 +1148,5 @@ Ki = α × R    ← 只看电阻 R
 ---
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_FOC (3)，关键操作：改 sidebar 中 FOC.CLBW_HZ 和 FOC.delta，观察 iD/iQ 子图的电流阶跃响应波形

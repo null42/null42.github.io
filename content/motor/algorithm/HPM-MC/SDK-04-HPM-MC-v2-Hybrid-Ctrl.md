@@ -11,14 +11,14 @@ title: HPM-MC v2 力位混合控制模块深度解析
 tags:
   - motor-control
 status: learning
-summary: ">  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../a"
+summary: ">  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../../foundations/control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../a"
 navGroup: 控制与算法
 navGroupOrder: 30
 ---
 
 # HPM-MC v2 力位混合控制模块深度解析  
 
->  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)
+>  关联模块：[ALG-08 初始位置检测](../ALG-08-Initial-Position-Detection.md) | [CT-06 前馈控制](../../../foundations/control-theory/CT-06-Feedforward-Control.md) | [ADV-ALG-07 前馈解耦](../../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md)
 
 - **文档版本：** v1.0
 - **生成日期：** 2026-05-23

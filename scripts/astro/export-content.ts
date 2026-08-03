@@ -26,7 +26,7 @@ const rootRedirects: Record<string, string> = {
   '/about.html': '/about/',
   // 仅保留 .html 旧格式重定向；以 / 结尾的新格式路径会导致 resolveLegacyOutputPath
   // 生成目录而非 index.html 文件，与 verify-built-site 的 routeToFile 路径不匹配。
-  '/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html': '/posts/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/'
+  '/content/power/roadmap/matlab-simulink-power-electronics-fast-track.html': '/posts/foundations/simulation/matlab-simulink/applications/matlab-simulink-power-electronics-fast-track/'
 }
 
 export function normalizeMarkdown(body: string, sourcePath: string): { body: string; rewrittenLinks: number } {

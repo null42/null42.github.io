@@ -276,7 +276,7 @@ DSP中实现：$\mathbf{u}[k] = -\mathbf{K}\mathbf{x}[k] + \mathbf{N}r[k]$
 - `hpm_mcl_v2` 中弱磁策略集成在路径规划中（超越基速时自动降额加速度）
 - 应用层可在 d 轴电流参考中注入弱磁分量
 
-参考: [SDK-05-HPM-MC-v2-Path-Plan.md](../algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan.md) 第6节「弱磁控制关联」
+参考: [SDK-05-HPM-MC-v2-Path-Plan.md](../../motor/algorithm/HPM-MC/SDK-05-HPM-MC-v2-Path-Plan.md) 第6节「弱磁控制关联」
 
 ---
 

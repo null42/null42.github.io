@@ -105,7 +105,7 @@ graph LR
 
 -  `foc_smo_luenberger_2020.slx` — FOC+SMO+龙伯格观测器对比模型
 -  `motor_smo.slx` — 电机+滑模观测器模型
--  [C仿真替代方案](../simulation/SIM-00-C-Simulation-Overview.md) — 无MATLAB许可证时使用路径9的C仿真平台
+-  [C仿真替代方案](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) — 无MATLAB许可证时使用路径9的C仿真平台
 -  `教材3: 阮毅/陈伯时《电力拖动自动控制系统》` chenshamotor
 
 ## 7. 常见问题

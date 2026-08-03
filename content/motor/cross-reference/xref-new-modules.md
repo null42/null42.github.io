@@ -52,7 +52,7 @@ navGroupOrder: 10
 | 算法知识点 | 关联模块 | 关联机制 | 引用链接 |
 |-----------|---------|---------|---------|
 | 无差拍vs PI | ALG-03 PI电流调节器 | 无差拍是PI的替代方案，带宽更高但鲁棒性更弱 | [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) |
-| 与MPC的关系 | CT-19 MPC | 无差拍是MPC的特例（代价函数仅含跟踪误差） | [CT-19](../control-theory/CT-19-Model-Predictive-Control.md) |
+| 与MPC的关系 | CT-19 MPC | 无差拍是MPC的特例（代价函数仅含跟踪误差） | [CT-19](../../foundations/control-theory/CT-19-Model-Predictive-Control.md) |
 | 一拍延迟补偿 | ALG-18 角度延迟补偿 | 电流预测+角度预测联合补偿 | [ALG-18](../algorithm/ALG-18-Compensation-Algorithms.md) |
 
 ### CT-19 MPC → 关联映射
@@ -61,7 +61,7 @@ navGroupOrder: 10
 |-----------|-------------|---------|---------|
 | FCS-MPC代价函数 | ALG-03 PI电流调节器 | MPC是PI的替代方案，带宽更高但计算量更大 | [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) |
 | MPC-TC | ALG-01 FOC理论 | MPC-TC类似DTC但有预测优化 | [ALG-01](../algorithm/ALG-01-FOC-Theory.md) |
-| 模型参数敏感性 | CT-04 PID控制 | MPC对模型精度要求远高于PI | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) |
+| 模型参数敏感性 | CT-04 PID控制 | MPC对模型精度要求远高于PI | [CT-04](../../foundations/control-theory/CT-04-PID-Control-Principles.md) |
 
 ### PMI-01~03 → 关联映射
 

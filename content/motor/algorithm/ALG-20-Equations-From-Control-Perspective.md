@@ -683,7 +683,7 @@ void current_loop(motor_ctrl_t *mc,
 ---
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_FOC (3)，关键操作：修改前馈解耦开关，观察高速时id/iq跟踪差异
 
 >  检验你的理解：ALG-20 检验题目（待补充）

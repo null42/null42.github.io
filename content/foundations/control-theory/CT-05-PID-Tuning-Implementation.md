@@ -266,7 +266,7 @@ void PI_BumplessParamChange(PI_Controller *pi, float new_Kp, float new_Ki) {
 - 双电流环 PID 独立整定（d轴/q轴分别调参）
 
 **硬件加速**: HPM CLC（Current Loop Controller）硬件实现 PID，释放 CPU 用于其他任务
-参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) 第3节「控制链核心」
+参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../../motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) 第3节「控制链核心」
 
 ---
 
@@ -382,7 +382,7 @@ FOC电流环，Vdc=48V, Imax=20A, Ls=1.5mH, Rs=0.25Ω
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：改 FOC.delta（速度/电流带宽比 5~25），观察 Speed 子图响应速度变化
 
 >  检验你的理解：[CT-05 检验题目](./CT-05-assessment.md)

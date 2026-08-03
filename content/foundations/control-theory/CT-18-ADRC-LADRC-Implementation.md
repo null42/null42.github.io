@@ -824,7 +824,7 @@ CT-15中的增益调度、前馈补偿策略在LADRC中依然有用：
 
 FOC的标准结构（Clarke→Park→PI电流环→iPark→SVPWM）中，只需将PI电流环替换为LADRC即可。传感FOC中速度环同样可替换。无传感FOC（观测器方案）中，LADRC的LESO与角度/速度观测器的配合需要特别注意——避免"观测器套观测器"造成的级联延迟。
 
-参考：[../algorithm/ALG-05-Sensored-FOC.md](../algorithm/ALG-05-Sensored-FOC.md)
+参考：[../algorithm/ALG-05-Sensored-FOC.md](../../motor/algorithm/ALG-05-Sensored-FOC.md)
 
 ---
 

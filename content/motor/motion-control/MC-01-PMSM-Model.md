@@ -32,7 +32,7 @@ navGroupOrder: 30
 ## 前置知识
 - [MC-02](MC-02-Clarke-Park.md) — Clarke/Park 坐标变换（理解 abc→αβ→dq 的数学工具）
 - [ALG-01](../algorithm/ALG-01-FOC-Theory.md) — FOC 理论基础
-- [CT-01](../control-theory/CT-01-Open-Loop-Closed-Loop.md) — 开环与闭环控制基础
+- [CT-01](../../foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md) — 开环与闭环控制基础
 
 ## 核心摘要
 PMSM 数学模型是 FOC 所有推导的起点。本文从 abc 三相静止坐标系出发，经过 αβ 两相静止坐标系，最终到达 dq 同步旋转坐标系，推导出 FOC 核心的电压方程和转矩方程。掌握这三组方程及其变换关系，是理解后续电流环设计、MTPA 控制和无感观测器的基础。
@@ -246,7 +246,7 @@ model/lxfoc_model_pmsm.c:65-70  →  PMSM 状态微分方程
 |---------|------|------|
 | [MC-02 Clarke/Park 变换](MC-02-Clarke-Park.md) | 后置 | 坐标变换数学工具 |
 | [ALG-01 FOC 理论](../algorithm/ALG-01-FOC-Theory.md) | 后置 | 算法框架 |
-| [CT-01 开环与闭环](../control-theory/CT-01-Open-Loop-Closed-Loop.md) | 前置 | 控制理论基础 |
+| [CT-01 开环与闭环](../../foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md) | 前置 | 控制理论基础 |
 | [MC-03 空间矢量](MC-03-Space-Vector.md) | 后置 | 电压矢量合成 |
 | [MC-06 电流环](MC-06-Current-Loop.md) | 后置 | 基于电压方程的 PI 设计 |
 | [MC-09 IPMSM vs SPMSM](MC-09-IPMSM-vs-SPMSM.md) | 后置 | 转矩方程的 MTPA 应用 |

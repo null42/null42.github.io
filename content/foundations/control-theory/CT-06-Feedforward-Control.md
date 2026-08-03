@@ -240,7 +240,7 @@ flowchart TD
 - 前馈+反馈联合：前馈提高响应速度，反馈保证稳态精度
 
 **d/q轴解耦前馈**: 编译宏 `HPM_MCL_ENABLE_DQ_AXIS_DECOUPLING` 使能
-参考: [SDK-04-HPM-MC-v2-Hybrid-Ctrl.md](../algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl.md)
+参考: [SDK-04-HPM-MC-v2-Hybrid-Ctrl.md](../../motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl.md)
 
 ---
 

@@ -76,15 +76,15 @@ flowchart TB
 
 | 站号 | 模块 | 核心内容 | 难度 | 预计学习时间 |
 |------|------|---------|------|------------|
-| 第1站 | [EE-01 RLC基础](./electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.md) | 电阻、电容、电感基础特性、瞬态响应 |  | 3-4小时 |
-| 第2站 | [EE-02 二极管与整流电路](./electronics-basics/EE-02-Diodes-And-Rectification.md) | PN结、二极管特性、整流电路、滤波 |  | 4-5小时 |
-| 第3站 | [EE-03 BJT三极管基础](./electronics-basics/EE-03-BJT-Basics.md) | 双极型晶体管、放大区/饱和区/截止区 |  | 3-4小时 |
-| 第4站 | [EE-04 MOSFET器件原理](./electronics-basics/EE-04-MOSFET-Principles.md) | MOS结构、沟道形成、阈值电压、输出特性 |  | 4-5小时 |
-| 第5站 | [EE-05 MOSFET驱动与保护](./electronics-basics/EE-05-MOSFET-Gate-Drive.md) | 栅极驱动、米勒效应、保护电路 |  | 5-6小时 |
-| 第6站 | [EE-06 IGBT器件原理](./electronics-basics/EE-06-IGBT-Principles.md) | IGBT结构、导通压降、关断拖尾 |  | 3-4小时 |
-| 第7站 | [EE-07 运算放大器](./electronics-basics/EE-07-OpAmp.md) | 运放基础、同相反相放大、信号调理 |  | 4-5小时 |
-| 第8站 | [EE-08 整流与逆变拓扑](./electronics-basics/EE-08-Rectifier-Inverter.md) | 整流电路、逆变拓扑、PWM调制 |  | 5-6小时 |
-| 第9站 | [EE-09 H桥](./electronics-basics/EE-09-H-Bridge.md) | H桥结构、PWM调速、续流、死区插入 |  | 4-5小时 |
+| 第1站 | [EE-01 RLC基础](../foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.md) | 电阻、电容、电感基础特性、瞬态响应 |  | 3-4小时 |
+| 第2站 | [EE-02 二极管与整流电路](../foundations/power-electronics-basics/EE-02-Diodes-And-Rectification.md) | PN结、二极管特性、整流电路、滤波 |  | 4-5小时 |
+| 第3站 | [EE-03 BJT三极管基础](../foundations/power-electronics-basics/EE-03-BJT-Basics.md) | 双极型晶体管、放大区/饱和区/截止区 |  | 3-4小时 |
+| 第4站 | [EE-04 MOSFET器件原理](../foundations/power-electronics-basics/EE-04-MOSFET-Principles.md) | MOS结构、沟道形成、阈值电压、输出特性 |  | 4-5小时 |
+| 第5站 | [EE-05 MOSFET驱动与保护](../foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive.md) | 栅极驱动、米勒效应、保护电路 |  | 5-6小时 |
+| 第6站 | [EE-06 IGBT器件原理](../foundations/power-electronics-basics/EE-06-IGBT-Principles.md) | IGBT结构、导通压降、关断拖尾 |  | 3-4小时 |
+| 第7站 | [EE-07 运算放大器](../foundations/power-electronics-basics/EE-07-OpAmp.md) | 运放基础、同相反相放大、信号调理 |  | 4-5小时 |
+| 第8站 | [EE-08 整流与逆变拓扑](../foundations/power-electronics-basics/EE-08-Rectifier-Inverter.md) | 整流电路、逆变拓扑、PWM调制 |  | 5-6小时 |
+| 第9站 | [EE-09 H桥](../foundations/power-electronics-basics/EE-09-H-Bridge.md) | H桥结构、PWM调速、续流、死区插入 |  | 4-5小时 |
 
 **学习路径推荐**：按站号顺序学习，EE-01~EE-03为零基础入门，EE-04~EE-06为功率器件核心，EE-07~EE-09为信号调理与拓扑应用
 
@@ -94,25 +94,25 @@ flowchart TB
 
 | 站号 | 模块 | 核心内容 | 难度 | 预计学习时间 |
 |------|------|---------|------|------------|
-| 第1站 | [CT-01 开环与闭环控制](./control-theory/CT-01-Open-Loop-Closed-Loop.md) | 开环/闭环概念、反馈结构、灵敏度函数 |  | 2-3小时 |
-| 第2站 | [CT-02 时域分析](./control-theory/CT-02-Time-Domain-Analysis.md) | 时域响应、一阶/二阶系统、性能指标 |  | 4-5小时 |
-| 第3站 | [CT-03 频域响应与Bode图](./control-theory/CT-03-Frequency-Response-Bode.md) | 频率响应、Bode图、增益裕度/相位裕度 |  | 4-5小时 |
-| 第4站 | [CT-04 PID控制原理](./control-theory/CT-04-PID-Control-Principles.md) | P/I/D各环节作用、时域分析 |  | 3-4小时 |
-| 第5站 | [CT-05 PID整定与实现](./control-theory/CT-05-PID-Tuning-Implementation.md) | 整定方法(Z-N/频域)、抗积分饱和 |  | 4-5小时 |
-| 第6站 | [CT-06 前馈控制](./control-theory/CT-06-Feedforward-Control.md) | 前馈原理、扰动补偿、2-DOF结构 |  | 3-4小时 |
-| 第7站 | [CT-07 Nyquist稳定判据](./control-theory/CT-07-Nyquist-Stability.md) | Nyquist判据、稳定裕度、条件稳定 |  | 5-6小时 |
-| 第8站 | [CT-08 根轨迹](./control-theory/CT-08-Root-Locus.md) | 根轨迹绘制、零极点配置、设计应用 |  | 4-5小时 |
-| 第9站 | [CT-09 补偿器设计](./control-theory/CT-09-Compensator-Design.md) | 超前/滞后补偿、频域设计方法 |  | 5-6小时 |
-| 第10站 | [CT-10 状态空间](./control-theory/CT-10-State-Space.md) | 状态空间模型、能控能观、极点配置 |  | 4-5小时 |
-| 第11站 | [CT-11 观测器设计](./control-theory/CT-11-Observer-Design.md) | 全阶/降阶观测器、分离原理 |  | 5-6小时 |
-| 第12站 | [CT-12 状态反馈](./control-theory/CT-12-State-Feedback.md) | 状态反馈控制、极点配置方法 |  | 5-6小时 |
-| 第13站 | [CT-13 LQR/LQG](./control-theory/CT-13-LQR-LQG.md) | LQR原理、权矩阵选择、LQG结构 |  | 4-5小时 |
-| 第14站 | [CT-14 三环级联PID](./control-theory/CT-14-Cascaded-PID-Control.md) | 三环带宽分配10:3:1法则、bumpless transfer、Anti-windup |  | 4-5小时 |
-| 第15站 | [CT-15 PID优化策略](./control-theory/CT-15-PID-Optimization-Strategies.md) | 不完全微分、微分滤波、自适应PID增益调度、前馈解耦 |  | 4-5小时 |
-| 第16站 | [CT-16 ADRC自抗扰控制](./control-theory/CT-16-ADRC-Theory.md) | ESO扩张状态观测器、扰动补偿、TD跟踪微分器 |  | 5-6小时 |
-| 第17站 | [CT-17 LADRC线性自抗扰](./control-theory/CT-17-LADRC-Linear-ADRC.md) | LESO带宽参数化(ωo)、LADRC电流环/速度环设计 |  | 5-6小时 |
-| 第18站 | [CT-18 ADRC/LADRC工程实现](./control-theory/CT-18-ADRC-LADRC-Implementation.md) | PI→LADRC迁移路径、频域对比、参数整定实操 |  | 4-5小时 |
-| 第19站 | [CT-19 模型预测控制MPC](./control-theory/CT-19-Model-Predictive-Control.md) | FCS-MPC、MPC-CC、MPC-TC、与PI/ADRC对比 |  | 6-8小时 |
+| 第1站 | [CT-01 开环与闭环控制](../foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md) | 开环/闭环概念、反馈结构、灵敏度函数 |  | 2-3小时 |
+| 第2站 | [CT-02 时域分析](../foundations/control-theory/CT-02-Time-Domain-Analysis.md) | 时域响应、一阶/二阶系统、性能指标 |  | 4-5小时 |
+| 第3站 | [CT-03 频域响应与Bode图](../foundations/control-theory/CT-03-Frequency-Response-Bode.md) | 频率响应、Bode图、增益裕度/相位裕度 |  | 4-5小时 |
+| 第4站 | [CT-04 PID控制原理](../foundations/control-theory/CT-04-PID-Control-Principles.md) | P/I/D各环节作用、时域分析 |  | 3-4小时 |
+| 第5站 | [CT-05 PID整定与实现](../foundations/control-theory/CT-05-PID-Tuning-Implementation.md) | 整定方法(Z-N/频域)、抗积分饱和 |  | 4-5小时 |
+| 第6站 | [CT-06 前馈控制](../foundations/control-theory/CT-06-Feedforward-Control.md) | 前馈原理、扰动补偿、2-DOF结构 |  | 3-4小时 |
+| 第7站 | [CT-07 Nyquist稳定判据](../foundations/control-theory/CT-07-Nyquist-Stability.md) | Nyquist判据、稳定裕度、条件稳定 |  | 5-6小时 |
+| 第8站 | [CT-08 根轨迹](../foundations/control-theory/CT-08-Root-Locus.md) | 根轨迹绘制、零极点配置、设计应用 |  | 4-5小时 |
+| 第9站 | [CT-09 补偿器设计](../foundations/control-theory/CT-09-Compensator-Design.md) | 超前/滞后补偿、频域设计方法 |  | 5-6小时 |
+| 第10站 | [CT-10 状态空间](../foundations/control-theory/CT-10-State-Space.md) | 状态空间模型、能控能观、极点配置 |  | 4-5小时 |
+| 第11站 | [CT-11 观测器设计](../foundations/control-theory/CT-11-Observer-Design.md) | 全阶/降阶观测器、分离原理 |  | 5-6小时 |
+| 第12站 | [CT-12 状态反馈](../foundations/control-theory/CT-12-State-Feedback.md) | 状态反馈控制、极点配置方法 |  | 5-6小时 |
+| 第13站 | [CT-13 LQR/LQG](../foundations/control-theory/CT-13-LQR-LQG.md) | LQR原理、权矩阵选择、LQG结构 |  | 4-5小时 |
+| 第14站 | [CT-14 三环级联PID](../foundations/control-theory/CT-14-Cascaded-PID-Control.md) | 三环带宽分配10:3:1法则、bumpless transfer、Anti-windup |  | 4-5小时 |
+| 第15站 | [CT-15 PID优化策略](../foundations/control-theory/CT-15-PID-Optimization-Strategies.md) | 不完全微分、微分滤波、自适应PID增益调度、前馈解耦 |  | 4-5小时 |
+| 第16站 | [CT-16 ADRC自抗扰控制](../foundations/control-theory/CT-16-ADRC-Theory.md) | ESO扩张状态观测器、扰动补偿、TD跟踪微分器 |  | 5-6小时 |
+| 第17站 | [CT-17 LADRC线性自抗扰](../foundations/control-theory/CT-17-LADRC-Linear-ADRC.md) | LESO带宽参数化(ωo)、LADRC电流环/速度环设计 |  | 5-6小时 |
+| 第18站 | [CT-18 ADRC/LADRC工程实现](../foundations/control-theory/CT-18-ADRC-LADRC-Implementation.md) | PI→LADRC迁移路径、频域对比、参数整定实操 |  | 4-5小时 |
+| 第19站 | [CT-19 模型预测控制MPC](../foundations/control-theory/CT-19-Model-Predictive-Control.md) | FCS-MPC、MPC-CC、MPC-TC、与PI/ADRC对比 |  | 6-8小时 |
 
 **学习路径推荐**：CT-01~CT-06为经典控制（电机控制核心），CT-07~CT-09为频域设计工具，CT-10~CT-13为现代控制方法
 
@@ -241,10 +241,10 @@ flowchart TB
 
 | 站号 | 模块 | 核心内容 | 难度 | 预计学习时间 |
 |------|------|---------|------|------------|
-| 入站 | [仿真入口总索引](./simulation/SIM-00-C-Simulation-Overview.md) | KB 模块→仿真模式对应表（FOC/速度环/无感/参数辨识/逆变器/扫频） |  | 15分钟 |
-| 第1站 | [快速上手指南](./simulation/SIM-01-C-Simulation-QuickStart.md) | 环境准备、三种启动方式、Streamlit 操作流程、YAML 参数速查、绘图解读 |  | 30分钟 |
-| 第2站 | [代码概念映射](./simulation/SIM-02-C-Simulation-Code-Map.md) | C 仿真源码与 KB 理论的逐函数对照、代码定位指南、安全提示 |  | 1-2小时 |
-| 第5站 | [数字孪生与真实电机模型](./simulation/SIM-05-Digital-Twin.md) | 参数辨识、模型验证、在线自适应、仿真置信度 |  | 5-6小时 |
+| 入站 | [仿真入口总索引](../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) | KB 模块→仿真模式对应表（FOC/速度环/无感/参数辨识/逆变器/扫频） |  | 15分钟 |
+| 第1站 | [快速上手指南](../foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart.md) | 环境准备、三种启动方式、Streamlit 操作流程、YAML 参数速查、绘图解读 |  | 30分钟 |
+| 第2站 | [代码概念映射](../foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map.md) | C 仿真源码与 KB 理论的逐函数对照、代码定位指南、安全提示 |  | 1-2小时 |
+| 第5站 | [数字孪生与真实电机模型](../foundations/simulation/c-simulation/SIM-05-Digital-Twin.md) | 参数辨识、模型验证、在线自适应、仿真置信度 |  | 5-6小时 |
 
 **学习路径推荐**：入站查阅验证目标 → 第1站跑通第一个仿真 → 第2站深入理解 C 代码实现
 
@@ -344,7 +344,7 @@ flowchart TB
 |------|------|---------|------|------------|
 | 第1站 | [SYS-05 功能安全体系](./advanced/system-methodology/SYS-05-Functional-Safety.md) | ISO 26262、ASIL分级、安全状态设计、FMEA/FTA |  | 5-6小时 |
 | 第2站 | [SYS-06 系统测试与验证](./advanced/system-methodology/SYS-06-System-Testing-Validation.md) | HIL测试、型式试验、EMC测试、回归测试 |  | 5-6小时 |
-| 第3站 | [SIM-05 数字孪生与真实电机模型](./simulation/SIM-05-Digital-Twin.md) | 参数辨识、模型验证、在线自适应、仿真置信度 |  | 5-6小时 |
+| 第3站 | [SIM-05 数字孪生与真实电机模型](../foundations/simulation/c-simulation/SIM-05-Digital-Twin.md) | 参数辨识、模型验证、在线自适应、仿真置信度 |  | 5-6小时 |
 
 **学习路径推荐**：第1站建立安全意识 → 第2站掌握测试方法 → 第3站深化仿真验证
 

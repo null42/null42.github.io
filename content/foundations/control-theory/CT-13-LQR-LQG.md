@@ -302,7 +302,7 @@ flowchart LR
 - 三阶段对齐算法（Three-Stage Alignment）可视为最优控制中的 bang-bang + terminal cost 问题
 - 路径规划的梯形速度曲线是 jerk-optimal（最小加加速度）的工程近似
 
-参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) + [SDK-04-HPM-MC-v2-Hybrid-Ctrl.md](../algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl.md)
+参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../../motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) + [SDK-04-HPM-MC-v2-Hybrid-Ctrl.md](../../motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl.md)
 
 ---
 

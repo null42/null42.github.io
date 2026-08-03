@@ -486,7 +486,7 @@ deadbeat_init(&db_ctrl,
 ### 8.4 从 PI 迁移到无差拍的步骤
 
 1. **确保 PI 已调好**：先在 PI 控制下确认电机参数（$R_s$, $L_s$, $\psi_f$）的准确性
-2. **离线验证模型**：用 C 仿真（[SIM-00](../simulation/SIM-00-C-Simulation-Overview.md)）验证离散模型预测精度
+2. **离线验证模型**：用 C 仿真（[SIM-00](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md)）验证离散模型预测精度
 3. **参数辨识**：运行在线参数辨识，获取 $R_s$、$L_s$ 的精确值
 4. **低速切换**：先在低速（$\omega_e < 100$ rad/s）下切换到无差拍，观察电流阶跃响应
 5. **逐步提速**：每提高 200 rad/s，检查电流 THD 和稳态误差
@@ -600,7 +600,7 @@ $$v_q(k) = \frac{1}{0.0616} [5 - 0.9692 \times 0] = 81.2 \text{ V}$$
 
 ---
 
-> **仿真验证**：本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。建议新增 MODE_SELECT_DEADBEAT_IQ_STEP 模式，对比 PI 与无差拍在相同参数下的电流阶跃响应。
+> **仿真验证**：本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。建议新增 MODE_SELECT_DEADBEAT_IQ_STEP 模式，对比 PI 与无差拍在相同参数下的电流阶跃响应。
 
 > **相关模块**：[ALG-03 PI 电流调节器](./ALG-03-PI-Current-Regulator.md) | [ADV-ALG-07 前馈解耦](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) | [ALG-04 死区补偿](./ALG-04-Deadtime-Compensation.md)
 

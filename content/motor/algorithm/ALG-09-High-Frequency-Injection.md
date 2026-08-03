@@ -763,7 +763,7 @@ HFI与高速观测器的全速域组合是当前工业主流方案：
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_FOC_SENSORLESS (31)，关键操作：在低速（<100rpm）观察 HFI 注入信号和观测器角度误差
 
 >  检验你的理解：[ALG-09 检验题目](./ALG-09-assessment.md)

@@ -590,13 +590,13 @@ CT-06详细推导了前馈控制的原理（$G_{ff}(s) = G^{-1}(s)$的逆模型�
 
 ALG-05是有感FOC的完整实现，其系统架构图就是三环级联（速度环PI→电流环PI→SVPWM）。CT-14是该架构**控制参数设计的理论基础**——ALG-05的代码中那些Kp/Ki数值不是随便填的。
 
-见：[ALG-05-Sensored-FOC.md](../algorithm/ALG-05-Sensored-FOC.md)
+见：[ALG-05-Sensored-FOC.md](../../motor/algorithm/ALG-05-Sensored-FOC.md)
 
 ### 5.6 与ALG-12（速度环与负载转矩观测器）的关系
 
 ALG-12详细推导了速度环PI的SO法整定公式和负载转矩观测器设计。CT-14的三环框架中，速度环是连接电流环和位置环的关键桥梁——**速度环的参数质量直接决定了位置环能看到什么样的「内环」**。
 
-见：[ALG-12-Speed-Loop-Torque-Observer.md](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md)
+见：[ALG-12-Speed-Loop-Torque-Observer.md](../../motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.md)
 
 ---
 
@@ -812,10 +812,10 @@ MPC在伺服驱动的优势：
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：改 VL_EXE_PER_CL_EXE（速度环降频比，如从 1 改为 10），观察速度环控制效果变差
 
 >  检验你的理解：[CT-14 检验题目](./CT-14-assessment.md)
 
 ## 延伸实践
--  [路径12-5: 三闭环位置控制](../practice/PRACTICE-12-PMSM-Simulation.md#站5) — 电流+速度+位置三环仿真验证
+-  [路径12-5: 三闭环位置控制](../../motor/practice/PRACTICE-12-PMSM-Simulation.md#站5) — 电流+速度+位置三环仿真验证

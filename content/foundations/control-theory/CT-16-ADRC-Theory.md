@@ -461,7 +461,7 @@ MTPA和弱磁控制中，电流给定(id_ref, iq_ref)需要根据转速、转矩
 
 在有传感器的FOC中，速度环用ADRC替代PI可显著改善负载突变时的速度保持性能。电流环LADRC的实验表明：当Rs变化±30%，LADRC的电流跟踪误差<1%，而PI的误差高达5~8%。
 
-参考：[../algorithm/ALG-05-Sensored-FOC.md](../algorithm/ALG-05-Sensored-FOC.md)
+参考：[../algorithm/ALG-05-Sensored-FOC.md](../../motor/algorithm/ALG-05-Sensored-FOC.md)
 
 ---
 
@@ -688,7 +688,7 @@ ESO带宽ωo在运行过程中根据工况自适应调整：
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP_USING_ESO (47)，关键操作：改 CAREFUL_ESOAF_OMEGA_OBSERVER（观测器带宽），观察扰动估计 xTL 和转速跟踪性能
 
 >  检验你的理解：[CT-16 检验题目](./CT-16-assessment.md)

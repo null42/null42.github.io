@@ -30,6 +30,6 @@ describe('knowledge map', () => {
     expect(serialized).not.toContain('password')
     expect(serialized).not.toContain('content/encrypted')
     const count = navigation.flatMap(section => section.routes.flatMap(route => route.stages.flatMap(stage => stage.articles))).length
-    expect(count).toBe(371)
+    expect(count).toBe(558)
   })
 })

@@ -115,15 +115,15 @@ flowchart LR
 
 | C 代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `struct MachineSimulated ACM;` | 文件顶部，全局声明 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **全局电机仿真对象**。`ACM`（AC Machine）是整个仿真中最重要的全局变量。它包含 5 阶状态变量 `x[0..4]`（机械角度 θm、机械转速 ωm、有功磁链 KA、d 轴电流 id、q 轴电流 iq）、状态导数 `x_dot[0..4]`、输入（uAB、TLoad）、输出（varOmega、theta_d、iAB、iDQ、Tem、KA）等 30+ 个成员变量。所有仿真代码都通过这个结构体与电机模型交互 |
-| `struct ControllerForExperiment *CTRL;` | 文件顶部 | [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC | **控制器输入/输出全局指针**。指向控制器结构体，包含电机参数（motor）、传感器输入（i: iAB/theta_d/varOmega/Vdc）、状态（s: cosT/sinT/PID 指针/观测器状态）、输出（o: cmd_uAB/cmd_uDQ/cmd_iAB）、逆变器（inv）、捕获外设（cap）和全局标志（g） |
+| `struct MachineSimulated ACM;` | 文件顶部，全局声明 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 电机数学模型 | **全局电机仿真对象**。`ACM`（AC Machine）是整个仿真中最重要的全局变量。它包含 5 阶状态变量 `x[0..4]`（机械角度 θm、机械转速 ωm、有功磁链 KA、d 轴电流 id、q 轴电流 iq）、状态导数 `x_dot[0..4]`、输入（uAB、TLoad）、输出（varOmega、theta_d、iAB、iDQ、Tem、KA）等 30+ 个成员变量。所有仿真代码都通过这个结构体与电机模型交互 |
+| `struct ControllerForExperiment *CTRL;` | 文件顶部 | [ALG-05](../../../motor/algorithm/ALG-05-Sensored-FOC.md) 有感 FOC | **控制器输入/输出全局指针**。指向控制器结构体，包含电机参数（motor）、传感器输入（i: iAB/theta_d/varOmega/Vdc）、状态（s: cosT/sinT/PID 指针/观测器状态）、输出（o: cmd_uAB/cmd_uDQ/cmd_iAB）、逆变器（inv）、捕获外设（cap）和全局标志（g） |
 | `#if PC_SIMULATION` 条件编译块 | 散布在文件中 | 仿真与实验共用 | **条件编译标识**。仿真专用代码放在 `#if PC_SIMULATION ... #endif` 块内，DSP 实验代码放在 `#else ... #endif` 块内。通过 `ACMConfig.h` 中的 `PC_SIMULATION` 宏（模拟为 1，实验为 0）控制编译路径 |
 
 #### 2.1.2 仿真主循环
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `main()` | 大致第 5-43 行 | [CT-01](../control-theory/CT-01-Open-Loop-Closed-Loop.md) 开闭环结构、[SYS-04](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **仿真主循环入口**。结构：① 初始化（`init_Machine()`, `init_debug()`, `init_CTRL()`, `init_experiment()`）→ ② 写文件头（`write_header_to_file()`）→ ③ 主循环 `for k=0..NUMBER_OF_STEPS-1`：调用 `_user_time_varying_parameters()` → `machine_simulation()` → `measurement()` → `write_data_to_file(k)` → `main_switch(mode_select)` → ④ 写文件尾。每个 `k` 代表一个 hs 步长。控制器通过 `dfe_counter` 计数器降频执行 |
+| `main()` | 大致第 5-43 行 | [CT-01](../../control-theory/CT-01-Open-Loop-Closed-Loop.md) 开闭环结构、[SYS-04](../../../motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **仿真主循环入口**。结构：① 初始化（`init_Machine()`, `init_debug()`, `init_CTRL()`, `init_experiment()`）→ ② 写文件头（`write_header_to_file()`）→ ③ 主循环 `for k=0..NUMBER_OF_STEPS-1`：调用 `_user_time_varying_parameters()` → `machine_simulation()` → `measurement()` → `write_data_to_file(k)` → `main_switch(mode_select)` → ④ 写文件尾。每个 `k` 代表一个 hs 步长。控制器通过 `dfe_counter` 计数器降频执行 |
 | `dfe_counter` 变量 | main() 循环内 | 离散控制理论 | **降频计数器**。每步 `dfe_counter++`，当 `dfe_counter % (CL_TS/hs) == 0` 时执行控制器代码。模拟 DSP 的 PWM ISR 周期中断：电机模型用小步长积分，控制器用大步长执行 |
 | `static int k` 仿真步计数器 | main() 第一行 | 仿真基础设施 | **仿真步索引**。从 0 到 `NUMBER_OF_STEPS-1`。`k` 的值用于 `write_data_to_file(k)` 写入数据行索引，以及判断仿真是否结束 |
 
@@ -131,18 +131,18 @@ flowchart LR
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `init_Machine()` | 大致第 47-106 行 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机参数加载与状态初始化**。从 `d_sim.init.*` 结构体（由 `super_config.c` 初始化）加载电机参数到 `ACM` 结构体：① 电气参数：定子电阻 R、d 轴电感 Ld、q 轴电感 Lq、永磁体磁链 KE、有效转子电阻 Rreq（PMSM 为 0，IM 为 >0）；② 机械参数：转动惯量 Js、极对数 npp、摩擦系数 Bm；③ 将全部 5 个状态变量 `x[0..4]` 初始化为零（电机从静止状态开始）；④ 计算派生参数如 KL[0..3]（dq 轴电感矩阵元素） |
-| `ACM.R` / `ACM.Ld` / `ACM.Lq` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机参数 | **定子电阻与交直轴电感**。R 影响电流环稳态精度和低速性能（电阻压降在低速时占主导），Ld 和 Lq 决定电流环的动态响应速度。凸极比 (Lq-Ld)/Ld 影响磁阻转矩大小和 MTPA 轨迹形状。仿真中这些参数都来自 `motor_library.json` 的电机参数数据库 |
-| `ACM.KE` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 反电势系数 | **永磁体磁链（反电势系数）**。单位 V·s/rad（或等效于 N·m/A = Wb）。KE 决定了给定转速下的反电动势幅值（`BackEMF = KE × ωe`），也决定了电流到转矩的转换系数 |
-| `ACM.Js` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 转动惯量 | **转动惯量**。决定机械时间常数 τm = Js/Bm（Bm 为摩擦系数）。惯量越大，转速变化越慢。在速度环 PI 整定中，Js 直接用于计算前馈增益 `K = npp × KE / Js` |
-| `ACM.npp` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 极对数 | **极对数**。将机械量转换为电气量的乘数因子：`ωe = npp × ωm`，`θe = npp × θm`。极对数越多，相同机械转速下电气频率越高，对控制器时序要求越严格 |
-| `ACM.Rreq` | init_Machine() 中 | [HW-01](../hardware/HW-01-Motor-Basics.md) 有效转子电阻 | **转子有效电阻**，用于感应电机（IM）转子磁链计算。对于 PMSM：Rreq = 0（永磁体励磁，无需计算转子磁链动态）；对于 IM：Rreq > 0（感应电机，转子磁链由滑差产生）；Rreq < 0 为非法值。`` 错误设值会导致电机模型行为异常 |
+| `init_Machine()` | 大致第 47-106 行 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机参数加载与状态初始化**。从 `d_sim.init.*` 结构体（由 `super_config.c` 初始化）加载电机参数到 `ACM` 结构体：① 电气参数：定子电阻 R、d 轴电感 Ld、q 轴电感 Lq、永磁体磁链 KE、有效转子电阻 Rreq（PMSM 为 0，IM 为 >0）；② 机械参数：转动惯量 Js、极对数 npp、摩擦系数 Bm；③ 将全部 5 个状态变量 `x[0..4]` 初始化为零（电机从静止状态开始）；④ 计算派生参数如 KL[0..3]（dq 轴电感矩阵元素） |
+| `ACM.R` / `ACM.Ld` / `ACM.Lq` | init_Machine() 中 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 电机参数 | **定子电阻与交直轴电感**。R 影响电流环稳态精度和低速性能（电阻压降在低速时占主导），Ld 和 Lq 决定电流环的动态响应速度。凸极比 (Lq-Ld)/Ld 影响磁阻转矩大小和 MTPA 轨迹形状。仿真中这些参数都来自 `motor_library.json` 的电机参数数据库 |
+| `ACM.KE` | init_Machine() 中 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 反电势系数 | **永磁体磁链（反电势系数）**。单位 V·s/rad（或等效于 N·m/A = Wb）。KE 决定了给定转速下的反电动势幅值（`BackEMF = KE × ωe`），也决定了电流到转矩的转换系数 |
+| `ACM.Js` | init_Machine() 中 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 转动惯量 | **转动惯量**。决定机械时间常数 τm = Js/Bm（Bm 为摩擦系数）。惯量越大，转速变化越慢。在速度环 PI 整定中，Js 直接用于计算前馈增益 `K = npp × KE / Js` |
+| `ACM.npp` | init_Machine() 中 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 极对数 | **极对数**。将机械量转换为电气量的乘数因子：`ωe = npp × ωm`，`θe = npp × θm`。极对数越多，相同机械转速下电气频率越高，对控制器时序要求越严格 |
+| `ACM.Rreq` | init_Machine() 中 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 有效转子电阻 | **转子有效电阻**，用于感应电机（IM）转子磁链计算。对于 PMSM：Rreq = 0（永磁体励磁，无需计算转子磁链动态）；对于 IM：Rreq > 0（感应电机，转子磁链由滑差产生）；Rreq < 0 为非法值。`` 错误设值会导致电机模型行为异常 |
 
 #### 2.1.4 电机状态方程（DYNAMICS_MACHINE）
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `DYNAMICS_MACHINE(t, x, fx)` | 大致第 108-152 行 | [HW-01](../hardware/HW-01-Motor-Basics.md) PMSM 状态方程 | **PMSM dq 轴非线性状态方程 C 实现**。这是整个仿真物理核心——定义了电机的 5 个微分方程，每次 RK4 计算斜率时调用此函数。输入：当前时间 t、5 维状态向量 x[0..4]、控制器施加的 dq 轴电压 uDQ[0..1] 和负载转矩 TLoad。输出：5 维状态导数 fx[0..4]。5 个微分方程如下： |
+| `DYNAMICS_MACHINE(t, x, fx)` | 大致第 108-152 行 | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) PMSM 状态方程 | **PMSM dq 轴非线性状态方程 C 实现**。这是整个仿真物理核心——定义了电机的 5 个微分方程，每次 RK4 计算斜率时调用此函数。输入：当前时间 t、5 维状态向量 x[0..4]、控制器施加的 dq 轴电压 uDQ[0..1] 和负载转矩 TLoad。输出：5 维状态导数 fx[0..4]。5 个微分方程如下： |
 | `fx[0] = x[1] + ...` | 第 1 个微分方程 | HW-01 位置方程 | **机械角位置微分方程**：`dθm/dt = ωm + ω_slip / npp`。对于 PMSM 滑差 ω_slip 为零，即 `dθm/dt = ωm`（角位置的变化率等于角速度）；对于感应电机，加上滑差项以正确追踪转子位置 |
 | `fx[1] = (Tem - TLoad - Bm*x[1]) / Js` | 第 2 个微分方程 | HW-01 转速方程 | **机械转速微分方程（运动方程）**：`dωm/dt = (Tem - TLoad - Bm×ωm) / Js`。输入：电磁转矩 Tem、负载转矩 TLoad、摩擦转矩 Bm×ωm。输出：角加速度。这是牛顿第二定律在旋转运动中的体现——净转矩除以转动惯量等于角加速度 |
 | `fx[2] = Rreq * (iD - KA/(Ld-Lq))` | 第 3 个微分方程 | HW-01 磁链方程 | **有功磁链微分方程**：`dKA/dt = Rreq × (iD - KA/(Ld-Lq))`。对于 PMSM（Rreq=0），`dKA/dt = 0`，即永磁体磁链恒定不变。对于感应电机，转子磁链随 d 轴电流动态变化，时间常数 τr = (Ld-Lq)/Rreq |
@@ -156,7 +156,7 @@ flowchart LR
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `RK4(t, x, hs)` | 大致第 154-187 行 | 数值积分方法、[SYS-04](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **四阶 Runge-Kutta 法求解常微分方程组**。这是将连续电机状态方程离散化的核心数值算法。输入：当前时间 t、状态向量 x[0..4]、仿真步长 hs。输出：更新后的状态向量 x[0..4]。算法分 4 步： |
+| `RK4(t, x, hs)` | 大致第 154-187 行 | 数值积分方法、[SYS-04](../../../motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 数值仿真基本原理 | **四阶 Runge-Kutta 法求解常微分方程组**。这是将连续电机状态方程离散化的核心数值算法。输入：当前时间 t、状态向量 x[0..4]、仿真步长 hs。输出：更新后的状态向量 x[0..4]。算法分 4 步： |
 | `k1 = hs * DYNAMICS_MACHINE(t_n, x_n)` | RK4 第 1 阶段 | 数值积分 | **第 1 斜率**：从当前点 (t_n, x_n) 出发，用当前状态的导数计算第一个试探斜率。这是欧拉法（一阶 RK）的斜率 |
 | `k2 = hs * DYNAMICS_MACHINE(t_n+hs/2, x_n+k1/2)` | RK4 第 2 阶段 | 数值积分 | **第 2 斜率**：用 k1 推进半步，在新点计算第二个斜率。这个"中点试探"显著提高了精度 |
 | `k3 = hs * DYNAMICS_MACHINE(t_n+hs/2, x_n+k2/2)` | RK4 第 3 阶段 | 数值积分 | **第 3 斜率**：用 k2 推进半步，在新点计算第三个斜率。与第 2 阶段使用不同的中点估计 |
@@ -175,7 +175,7 @@ flowchart LR
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `inverter_model()` | 大致第 316-456 行 | [ALG-04](../algorithm/ALG-04-Deadtime-Compensation.md) 死区补偿、[HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md) 功率器件与门极驱动、[EE-08](../electronics-basics/EE-08-Rectifier-Inverter.md) 逆变器原理 | **逆变器非线性建模**。控制器的电压指令是理想值，但实际逆变器因死区时间、管压降、开关延迟等因素存在非线性。此函数根据 `__INVERTER_NONLINEARITY` 宏选择不同模型，模拟这些非线性效应 |
+| `inverter_model()` | 大致第 316-456 行 | [ALG-04](../../../motor/algorithm/ALG-04-Deadtime-Compensation.md) 死区补偿、[HW-05](../../../motor/hardware/HW-05-Power-Devices-Gate-Drivers.md) 功率器件与门极驱动、[EE-08](../../power-electronics-basics/EE-08-Rectifier-Inverter.md) 逆变器原理 | **逆变器非线性建模**。控制器的电压指令是理想值，但实际逆变器因死区时间、管压降、开关延迟等因素存在非线性。此函数根据 `__INVERTER_NONLINEARITY` 宏选择不同模型，模拟这些非线性效应 |
 | `__INVERTER_NONLINEARITY = 0` | 宏定义在 `ACMSim.h` | 理想逆变器 | **Mode 0：理想逆变器**。`u_out = u_cmd`（输出电压等于指令电压）。仿真默认值，适合验证控制器算法本身的正确性，不考虑逆变器非理想效应 |
 | `__INVERTER_NONLINEARITY = 1` | 宏定义在 `ACMSim.h` | Sul1996 数学模型 | **Mode 1：Sul1996 数学模型**。基于死区时间 Td、管压降 Vce、直流母线电压 Vdc 的解析模型：`ΔV = Td/Ts × Vdc × sign(i) + Vce × sign(i)`。误差电压的幅值固定，符号随电流方向翻转，导致零电流附近出现电压畸变（"零电流钳位"效应）。这是最经典也最常用的逆变器非线性模型 |
 | `__INVERTER_NONLINEARITY = 2` | 宏定义在 `ACMSim.h` | Sigmoid 拟合 | **Mode 2：Sigmoid 函数拟合**。用 S 型曲线 `ΔV = a / (1+exp(-b×i)) + c` 拟合实验测得的电压误差 vs 电流特性。相比 Sul1996 的符号函数切换，Sigmoid 在零电流附近连续可导，避免了数值计算中的刚性切换问题 |
@@ -186,7 +186,7 @@ flowchart LR
 
 | C 函数/代码段 | 所在行区域 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- | --- |
-| `measurement()` | 大致第 250-290 行 | [ALG-02](../algorithm/ALG-02-Current-Sampling-Timing.md) 电流采样时序、[HW-02](../hardware/HW-02-Current-Sensing.md) 电流采样电路 | **模拟 DSP 的 ADC 采样过程**。将电机实际物理量"拷贝"到控制器的输入结构体中，模拟传感器采集过程。核心操作：① `(*CTRL).i->iAB[0] = ACM.iAB[0] + CURRENT_OFFSET_A`：α 轴电流加偏移误差；② `(*CTRL).i->iAB[1] = ACM.iAB[1] + CURRENT_OFFSET_B`：β 轴电流加偏移误差；③ `(*CTRL).i->varOmega = ACM.varOmega`：转速赋值；④ `(*CTRL).i->theta_d = ACM.theta_d`：电角度赋值。偏移误差可以模拟 ADC 零漂/运放失调电压的影响 |
+| `measurement()` | 大致第 250-290 行 | [ALG-02](../../../motor/algorithm/ALG-02-Current-Sampling-Timing.md) 电流采样时序、[HW-02](../../../motor/hardware/HW-02-Current-Sensing.md) 电流采样电路 | **模拟 DSP 的 ADC 采样过程**。将电机实际物理量"拷贝"到控制器的输入结构体中，模拟传感器采集过程。核心操作：① `(*CTRL).i->iAB[0] = ACM.iAB[0] + CURRENT_OFFSET_A`：α 轴电流加偏移误差；② `(*CTRL).i->iAB[1] = ACM.iAB[1] + CURRENT_OFFSET_B`：β 轴电流加偏移误差；③ `(*CTRL).i->varOmega = ACM.varOmega`：转速赋值；④ `(*CTRL).i->theta_d = ACM.theta_d`：电角度赋值。偏移误差可以模拟 ADC 零漂/运放失调电压的影响 |
 | `CURRENT_OFFSET_A` / `CURRENT_OFFSET_B` | measurement() 内 | ADV-HW-01 PWM 与电流采样 | **电流采样偏移量**。模拟 ADC 的零偏误差（来自运放失调电压、ADC 参考电压误差等）。非零的偏移量会导致电流环出现基频波动（在 dq 坐标系中表现为电气频率的纹波）。设置非零值可以研究偏移对控制系统的影响，这对于无传感器控制（依赖于电流信息估计位置）尤为重要 |
 | `ENABLE_ENCODER_NOISE` | measurement() 条件编译 | HW-03 位置传感器 | **编码器噪声模拟开关**。当启用时，给角度和转速信号叠加随机噪声，模拟编码器量化误差或电磁干扰。用于评估观测器和控制系统对测量噪声的鲁棒性 |
 
@@ -200,11 +200,11 @@ flowchart LR
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `_onlyFOC(theta_d_elec, iAB, varOmega)` | [ALG-01](../algorithm/ALG-01-FOC-Theory.md) FOC 理论、[ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) PI 电流调节器 | **FOC 核心链路（有传感器版本）**。这是整个仿真中最重要的控制函数——完整实现了从电流采样到 PWM 电压指令输出的全链路。执行顺序（这就是 FOC 的标准计算流程）： |
+| `_onlyFOC(theta_d_elec, iAB, varOmega)` | [ALG-01](../../../motor/algorithm/ALG-01-FOC-Theory.md) FOC 理论、[ALG-05](../../../motor/algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[ALG-03](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) PI 电流调节器 | **FOC 核心链路（有传感器版本）**。这是整个仿真中最重要的控制函数——完整实现了从电流采样到 PWM 电压指令输出的全链路。执行顺序（这就是 FOC 的标准计算流程）： |
 | ① `Clarke 变换`：iα,iβ ← iA,iB,iC | FOC 链路第 1 步 | ALG-01 Clarke 变换；**Clarke 变换（三相→两相静止）**。将三相电流 ia、ib、ic 变换为 αβ 轴电流：`iα = ia`（恒幅值变换下的简化），`iβ = (ia + 2×ib) / √3`。恒幅值变换保持电流幅值不变。注意：仿真中用两相电流计算（iA、iB），隐式假设 `ic = -ia - ib`（无零序分量） |
 | ② `Park 变换`：id,iq ← iα,iβ, θe | FOC 链路第 2 步 | ALG-01 Park 变换；**Park 变换（静止→旋转坐标系）**。将 αβ 轴电流旋转到 dq 旋转坐标系：`id = iα×cos(θe) + iβ×sin(θe)`，`iq = -iα×sin(θe) + iβ×cos(θe)`。使用电角度 θe。结果：id 对应励磁分量，iq 对应转矩分量，在稳态时两者都为直流量，便于 PI 控制 |
 | ③ `tustin_PI()` 或 `incremental_PI()`：id 电流 PI 调节 | FOC 链路第 3 步 | CT-05 PID 整定与实现；**D 轴电流 PI 调节**。iq 电流 PI 调节同步进行。PI 控制器计算使 id/iq 跟踪指令值所需的 dq 轴电压。参见 2.2.3 节 PI 实现详解 |
-| ④ `dq 轴解耦前馈`（可选） | FOC 链路第 4 步 | [ADV-ALG-07](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) 前馈解耦；**解耦前馈补偿**。在 PI 输出的基础上叠加解耦项：`ud_final = ud_pi_output - ωe×Lq×iq`，`uq_final = uq_pi_output + ωe×(Ld×id + KA)`。目的是抵消 dq 轴之间的交叉耦合（反电动势项），使 PI 只需处理误差信号本身。解耦效果在高速时尤为明显——不解耦时高速下 id 和 iq 稳态误差增大。通过 `bool_apply_decoupling_voltages_to_current_regulation` 控制是否启用 |
+| ④ `dq 轴解耦前馈`（可选） | FOC 链路第 4 步 | [ADV-ALG-07](../../../motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) 前馈解耦；**解耦前馈补偿**。在 PI 输出的基础上叠加解耦项：`ud_final = ud_pi_output - ωe×Lq×iq`，`uq_final = uq_pi_output + ωe×(Ld×id + KA)`。目的是抵消 dq 轴之间的交叉耦合（反电动势项），使 PI 只需处理误差信号本身。解耦效果在高速时尤为明显——不解耦时高速下 id 和 iq 稳态误差增大。通过 `bool_apply_decoupling_voltages_to_current_regulation` 控制是否启用 |
 | ⑤ 电压限幅 (`LIMIT_DC_BUS_UTILIZATION`) | FOC 链路第 5 步 | ALG-10 过调制；**dq 轴电压限幅**。将 PI 输出限幅在 `Vdc × LIMIT_DC_BUS_UTILIZATION / √3` 内（对六拍运行而言理论最大值 = Vdc/√3 ≈ 0.577×Vdc；SVPWM 可达 Vdc/√3 = 0.577×Vdc；过调制可进一步提高到 0.637×Vdc）。限幅保证了电压在逆变器可实现范围内，防止积分饱和 |
 | ⑥ `反 Park 变换 (InvPark)`：uα,uβ ← ud,uq, θe | FOC 链路第 6 步 | ALG-01 反 Park 变换；**反 Park 变换（旋转→静止坐标系）**。将 dq 轴电压变换回 αβ 轴电压：`uα = ud×cos(θe) - uq×sin(θe)`，`uβ = ud×sin(θe) + uq×cos(θe)`。这是控制器输出的 αβ 轴电压指令，经逆变器施加到电机 |
 | `(*CTRL).o->cmd_uAB[0..1] = uα, uβ` | FOC 链路最后 | 输出；**将 αβ 电压指令写入控制器输出结构体**。这是控制器最终输出。在真实 DSP 实验中，这些电压值用于 SVPWM 计算和 PWM 占空比更新；在仿真中，通过 `inverter_model()` 转换为实际电机电压 |
@@ -213,8 +213,8 @@ flowchart LR
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `_velocityController(cmd_varOmega, varOmega)` | [CT-14](../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID、[ALG-12](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) 速度环与转矩观测器 | **速度环降频执行**。速度环以远低于电流环的频率执行（典型降频比 VL_EXE_PER_CL_EXE = 1~10）。函数内部使用计数器 `the_vc_count`，当其达到 `VL_EXE_PER_CL_EXE` 时执行一次速度 PI 计算并复位计数器。支持多种 PI 实现：普通 PI、Bezier 自适应 PI（根据误差动态调整增益）、WB 自定义速度环（支持扫频和 HitWall 分析） |
-| `FOC_with_velocity_control(theta_d_elec, varOmega, cmd_varOmega, cmd_iDQ, iAB)` | [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[CT-14](../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID | **速度环 + 电流环级联控制**。完整的三环（位置/速度/电流）中使用了速度环外环+电流环内环。执行流程：① 设置 d 轴电流指令 `cmd_iDQ[0] = cmd_iD`（通常为 0，MTPA 下为负值）；② 调用 `_velocityController(cmd_varOmega, varOmega)` 得到 q 轴电流指令 `cmd_iDQ[1]`；③ 调用 `_onlyFOC(theta_d_elec, iAB, varOmega)` 执行 FOC 电流环。速度环输出限幅值 = 电机额定电流或最大允许电流。如果速度命令阶跃过大，速度环输出饱和，iq 指令被限幅在最大值，此时电流环以最大电流加速，直到速度跟踪上后 iq 退出饱和 |
+| `_velocityController(cmd_varOmega, varOmega)` | [CT-14](../../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID、[ALG-12](../../../motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.md) 速度环与转矩观测器 | **速度环降频执行**。速度环以远低于电流环的频率执行（典型降频比 VL_EXE_PER_CL_EXE = 1~10）。函数内部使用计数器 `the_vc_count`，当其达到 `VL_EXE_PER_CL_EXE` 时执行一次速度 PI 计算并复位计数器。支持多种 PI 实现：普通 PI、Bezier 自适应 PI（根据误差动态调整增益）、WB 自定义速度环（支持扫频和 HitWall 分析） |
+| `FOC_with_velocity_control(theta_d_elec, varOmega, cmd_varOmega, cmd_iDQ, iAB)` | [ALG-05](../../../motor/algorithm/ALG-05-Sensored-FOC.md) 有感 FOC、[CT-14](../../control-theory/CT-14-Cascaded-PID-Control.md) 级联 PID | **速度环 + 电流环级联控制**。完整的三环（位置/速度/电流）中使用了速度环外环+电流环内环。执行流程：① 设置 d 轴电流指令 `cmd_iDQ[0] = cmd_iD`（通常为 0，MTPA 下为负值）；② 调用 `_velocityController(cmd_varOmega, varOmega)` 得到 q 轴电流指令 `cmd_iDQ[1]`；③ 调用 `_onlyFOC(theta_d_elec, iAB, varOmega)` 执行 FOC 电流环。速度环输出限幅值 = 电机额定电流或最大允许电流。如果速度命令阶跃过大，速度环输出饱和，iq 指令被限幅在最大值，此时电流环以最大电流加速，直到速度跟踪上后 iq 退出饱和 |
 | `VELOCITY_LOOP_DOWN_SAMPLING_RATIO` (VL_EXE_PER_CL_EXE) | CT-14 级联 PID | **速度环降频比**。速度环每 VL_EXE_PER_CL_EXE 个电流环周期执行一次。典型值：1（与电流环同频）到 10（降频 10 倍）。降频的理由：速度环带宽远低于电流环（通常为 1/10~1/5），无需每个电流周期都执行。增大降频比降低 CPU 负载但可能导致速度环控制品质下降 |
 | `PID_Speed` 结构体 | CT-05 PID 整定与实现 | **速度环 PI 控制器实例**。包含 Kp、Ki、积分项 i1、输出限幅等。速度环的 Kp/Ki 根据 `init_CTRL()` 中 TI InstaSPIN 整定公式计算：`K = npp × KE / Js`（转矩→加速度增益），`Kp_speed = CLBW_HZ / (delta × K)`，`Ki_speed = Kp_speed × (CLBW_HZ/delta) × CL_TS`。这里 delta 是速度环带宽与电流环带宽的比值（速度环更慢） |
 
@@ -222,11 +222,11 @@ flowchart LR
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `tustin_PI(r)` | [CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **双线性变换（Tustin 方法）离散化 PI 控制器**。Tustin 变换（梯形积分法）将连续域 s 映射到离散域 z：`s ≈ (2/Ts) × (z-1)/(z+1)`。得到的离散 PI 差分方程为：`u(k) = u(k-1) + Kp×(e(k)-e(k-1)) + (Ki×Ts/2)×(e(k)+e(k-1))`。核心特性：**动态抗积分饱和（Dynamic Clamping）**——I_Term 被限幅在 `OutLimit - P_Term`（而非固定限幅），确保输出始终在合法范围内。输出 = P_Term + I_Term。相比增量式 PI，Tustin PI 对积分项有更平滑的处理 |
-| `incremental_PI(r)` | [CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **增量式 PI**：`Out = OutPrev + Kp×(Err-ErrPrev) + Ki×Err`。输出的是"变化量"，当前输出 = 上次输出 + 增量。优点：① 天然抗积分饱和（只需限幅最终输出即可，无需单独的积分限幅逻辑）；② 输出平滑过渡（增量式不易出现大的跳变）；③ 无积分存储（不需要保存积分累加值）；④ 适合嵌入式定点运算（不需要大的积分值范围）。缺点：① 需要保存上一步状态（OutPrev 和 ErrPrev）；② 从零初始状态下首次响应比位置式 PI 慢一个周期 |
-| `PI_MACRO(v)` (TI 官方) | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **TI C2000 系列 DSP 官方增量式 PI 宏**。执行流程：① 比例项 `up = Kp × (Ref - Fbk)`；② 积分项 `ui = ui + Ki × up`（注意 TI 的实现中用 Ki 乘的是比例项 up 而非误差 e——这是 TI 的独特实现）；③ 条件积分：仅当输出未达到饱和极限时才更新积分项（抗积分饱和）；④ 输出 `Out = up + ui`；⑤ 限幅到 `[Umin, Umax]`。条件积分（Anti-windup via conditional integration）是工业级 PI 实现的关键特性 |
+| `tustin_PI(r)` | [CT-05](../../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **双线性变换（Tustin 方法）离散化 PI 控制器**。Tustin 变换（梯形积分法）将连续域 s 映射到离散域 z：`s ≈ (2/Ts) × (z-1)/(z+1)`。得到的离散 PI 差分方程为：`u(k) = u(k-1) + Kp×(e(k)-e(k-1)) + (Ki×Ts/2)×(e(k)+e(k-1))`。核心特性：**动态抗积分饱和（Dynamic Clamping）**——I_Term 被限幅在 `OutLimit - P_Term`（而非固定限幅），确保输出始终在合法范围内。输出 = P_Term + I_Term。相比增量式 PI，Tustin PI 对积分项有更平滑的处理 |
+| `incremental_PI(r)` | [CT-05](../../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **增量式 PI**：`Out = OutPrev + Kp×(Err-ErrPrev) + Ki×Err`。输出的是"变化量"，当前输出 = 上次输出 + 增量。优点：① 天然抗积分饱和（只需限幅最终输出即可，无需单独的积分限幅逻辑）；② 输出平滑过渡（增量式不易出现大的跳变）；③ 无积分存储（不需要保存积分累加值）；④ 适合嵌入式定点运算（不需要大的积分值范围）。缺点：① 需要保存上一步状态（OutPrev 和 ErrPrev）；② 从零初始状态下首次响应比位置式 PI 慢一个周期 |
+| `PI_MACRO(v)` (TI 官方) | [CT-04](../../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **TI C2000 系列 DSP 官方增量式 PI 宏**。执行流程：① 比例项 `up = Kp × (Ref - Fbk)`；② 积分项 `ui = ui + Ki × up`（注意 TI 的实现中用 Ki 乘的是比例项 up 而非误差 e——这是 TI 的独特实现）；③ 条件积分：仅当输出未达到饱和极限时才更新积分项（抗积分饱和）；④ 输出 `Out = up + ui`；⑤ 限幅到 `[Umin, Umax]`。条件积分（Anti-windup via conditional integration）是工业级 PI 实现的关键特性 |
 | `PI_POS_MACRO(v)` (位置环 PI) | CT-04 位置环 | **位置环专用 PI 宏**。与 `PI_MACRO` 结构类似，但误差先做 **角度 wrap-around 处理**：将角度误差限制在 -0.5~+0.5 圈（即 -π~+π 弧度范围）内。例如，给定位置 350°、反馈位置 10°，实际误差应为 -20°（最短路径），而非 340°。这个 wrap-around 是位置环的核心技巧——避免角度跳变（如从 359°→0°）导致 PI 输出异常大值 |
-| `COMM_PI_tuning(LL, RR, BW_current, delta, JJ, KE, npp)` | [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) PI 设计、[CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) 整定 | **TI InstaSPIN 整定公式解析**。将电机物理参数自动映射为 PI 增益，分为电流环和速度环两组公式： |
+| `COMM_PI_tuning(LL, RR, BW_current, delta, JJ, KE, npp)` | [ALG-03](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) PI 设计、[CT-05](../../control-theory/CT-05-PID-Tuning-Implementation.md) 整定 | **TI InstaSPIN 整定公式解析**。将电机物理参数自动映射为 PI 增益，分为电流环和速度环两组公式： |
 
 - **电流环整定公式：**
 
@@ -260,7 +260,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `StepByStepCommissioning_NEW_WB()` | [ALG-13](../algorithm/ALG-13-Protection-Optimization.md) 参数自整定与保护优化 | **分步参数辨识状态机**。整个辨识流程由 `bool_comm_status` 驱动的状态机控制，按顺序执行 0→1→2→3→4→5→6： |
+| `StepByStepCommissioning_NEW_WB()` | [ALG-13](../../../motor/algorithm/ALG-13-Protection-Optimization.md) 参数自整定与保护优化 | **分步参数辨识状态机**。整个辨识流程由 `bool_comm_status` 驱动的状态机控制，按顺序执行 0→1→2→3→4→5→6： |
 | `bool_comm_status = 0`：初始化 | 辨识初始化 | **初始化阶段**：设置初始电压/电流激励参数、初始化 PI 控制器为零输出、建立基本的角度和电流测量通路。确保电机处于安全锁定状态 |
 | `bool_comm_status = 1`：`COMM_resistanceId(id_fb, iq_fb)` | 电阻辨识 | **定子电阻辨识（I-V 法）**：对 d 轴或 β 轴施加阶梯变化的电流指令（如 0→0.5A→1.0A→1.5A→2.0A），在每个阶梯采集稳态电流和电压数据点，用**最小二乘法线性回归**（`linreg` 函数）拟合 R = ΔV/ΔI。原理：直流条件下 `V = R × I`（无电感影响和反电动势），多点测量提高拟合精度。精确的电阻值对低速下无传感器控制和电流环性能至关重要（低速时电阻压降主导） |
 | `bool_comm_status = 2`：电感辨识（阶跃法） | 电感辨识 | **电感辨识（电压阶跃法）**：施加方波电压脉冲，记录电流上升/下降的斜率，由 `v = L × di/dt` 推算电感 `L = V × Δt / ΔI`。方法简单但不精确（存在电阻压降和反电动势干扰） |
@@ -296,14 +296,14 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | C 函数/代码段 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `pmsm_observers()` | [ALG-07](../algorithm/ALG-07-Sensorless-Observers.md) 无感观测器、[CT-11](../control-theory/CT-11-Observer-Design.md) 观测器设计 | **多种观测器统一调度入口**。根据用户配置选择反 EMF/SMO（滑模）/磁链/EKF（扩展卡尔曼滤波）/MRAS 等不同原理的观测器。每种观测器估计电角度 θe 和电角速度 ωe，用于无传感器 FOC 闭环 |
-| `Main_esoaf_chen2021()` | [CT-16](../control-theory/CT-16-ADRC-Theory.md) ADRC 理论、[CT-17](../control-theory/CT-17-LADRC-Linear-ADRC.md) LADRC、[CT-18](../control-theory/CT-18-ADRC-LADRC-Implementation.md) ADRC 实现 | **扩张状态观测器（ESO）主函数**。用 4 阶 RK4 求解 ESO 状态方程。ESO 是 ADRC（自抗扰控制）的核心——它将外部扰动和内部不确定性扩张为一个新的状态变量进行估计： |
+| `pmsm_observers()` | [ALG-07](../../../motor/algorithm/ALG-07-Sensorless-Observers.md) 无感观测器、[CT-11](../../control-theory/CT-11-Observer-Design.md) 观测器设计 | **多种观测器统一调度入口**。根据用户配置选择反 EMF/SMO（滑模）/磁链/EKF（扩展卡尔曼滤波）/MRAS 等不同原理的观测器。每种观测器估计电角度 θe 和电角速度 ωe，用于无传感器 FOC 闭环 |
+| `Main_esoaf_chen2021()` | [CT-16](../../control-theory/CT-16-ADRC-Theory.md) ADRC 理论、[CT-17](../../control-theory/CT-17-LADRC-Linear-ADRC.md) LADRC、[CT-18](../../control-theory/CT-18-ADRC-LADRC-Implementation.md) ADRC 实现 | **扩张状态观测器（ESO）主函数**。用 4 阶 RK4 求解 ESO 状态方程。ESO 是 ADRC（自抗扰控制）的核心——它将外部扰动和内部不确定性扩张为一个新的状态变量进行估计： |
 | ESO 状态变量 x[0] | CT-16 扩张状态 | **xPos**：估计机械位置（角度）。与编码器测量值对比得到角度误差，作为 ESO 的输入修正项 |
 | ESO 状态变量 x[1] | CT-16 扩张状态 | **xOmg**：估计机械角速度。从位置估计的导数得到，同时受电磁转矩和负载转矩影响 |
 | ESO 状态变量 x[2] | CT-16 扩张状态 | **xTL**：估计负载转矩。这是 ESO 的"扩张状态"——通过观测转速误差反向推算出施加在电机上的总扰动，再减去已知的电磁转矩得到未知的负载转矩 |
 | ESO 状态变量 x[3] | CT-16 扩张状态 | **xPL**：估计负载转矩的导数。进一步将扰动的变化率也纳入观测，提高了对时变负载的跟踪能力 |
 | ESO 输入 | CT-16 观测器输入 | **双输入**：① 角度误差（以 sine 形式 `sin(θ_measured - θ_estimated)` 输入，是观测器修正项的核心）；② 电磁转矩 Tem（作为已知输入前馈到转速方程，提高转速估计精度） |
-| `eso_one_parameter_tuning(omega_ob)` | [CT-11](../control-theory/CT-11-Observer-Design.md) 观测器极点配置 | **ESO 单参数整定**。所有观测器增益 `ell[0..3]` 由单一带宽参数 `omega_ob`（观测器带宽，rad/s）决定。调参方法（也是一种变体极点配置）：`ell[0] = k1 × ω_ob`，`ell[1] = k2 × ω_ob²`，`ell[2] = k3 × ω_ob³ / J`，`ell[3] = k4 × ω_ob⁴ / J`。其中系数 k1~k4 根据 `bool_ramp_load_torque` 标志选择不同方案。增大 ω_ob 使观测器收敛更快但噪声放大更严重 |
+| `eso_one_parameter_tuning(omega_ob)` | [CT-11](../../control-theory/CT-11-Observer-Design.md) 观测器极点配置 | **ESO 单参数整定**。所有观测器增益 `ell[0..3]` 由单一带宽参数 `omega_ob`（观测器带宽，rad/s）决定。调参方法（也是一种变体极点配置）：`ell[0] = k1 × ω_ob`，`ell[1] = k2 × ω_ob²`，`ell[2] = k3 × ω_ob³ / J`，`ell[3] = k4 × ω_ob⁴ / J`。其中系数 k1~k4 根据 `bool_ramp_load_torque` 标志选择不同方案。增大 ω_ob 使观测器收敛更快但噪声放大更严重 |
 | `init_esoaf()` | 观测器初始化 | **ESO 初始化**：设置初始观测器带宽 `CAREFUL_ESOAF_OMEGA_OBSERVER`，调用 `eso_one_parameter_tuning()` 计算增益系数。初始状态估计：位置=0、速度=0、负载转矩=0（从静止空载开始观测） |
 
 - **反 EMF 观测器原理简述：**
@@ -321,7 +321,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | C 宏/结构体 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `PI_CONTROLLER` 结构体 | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **PI 控制器数据结构（TI 格式）**。成员变量完整列表： |
+| `PI_CONTROLLER` 结构体 | [CT-04](../../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理 | **PI 控制器数据结构（TI 格式）**。成员变量完整列表： |
 | `PI_CONTROLLER.Ref` | 给定值 | **Reference（给定/指令值）**。如 d 轴电流指令 id_cmd。在 PI 计算前由调用者设置 |
 | `PI_CONTROLLER.Fbk` | 反馈值 | **Feedback（反馈/测量值）**。如 d 轴电流实际值 id_fb。在 PI 计算前由调用者设置（从 ADC 采样获得） |
 | `PI_CONTROLLER.Out` | 输出 | **Output（输出值）**。PI 计算后更新，如 d 轴电压指令 ud_cmd |
@@ -332,7 +332,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 | `PI_CONTROLLER.v1` | 预限幅输出 | **预限幅输出值**。`v1 = up + ui`（限幅前的输出值）。用于判断是否饱和：如果 `v1 > Umax` 或 `v1 < Umin`，说明控制器进入饱和区 |
 | `PI_CONTROLLER.i1` | 积分存储 | **积分项的历史存储值**。在 TI 的 PI_MACRO 实现中，积分使用 up（比例项）而不是误差 e 来计算增量：`ui = ui + Ki × up`。这与标准学术实现不同——TI 通过在比例项上积分来间接积分误差，效果等价 |
 | `PI_CONTROLLER.w1` | 饱和标记 | **输出饱和状态标记**。1 = 输出达到饱和上限，0 = 未饱和。用于抗积分饱和逻辑的条件判断 |
-| `PI_MACRO(v)` | [CT-04](../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理、[CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **TI 官方增量式 PI 宏的详细执行流程**： |
+| `PI_MACRO(v)` | [CT-04](../../control-theory/CT-04-PID-Control-Principles.md) PID 控制原理、[CT-05](../../control-theory/CT-05-PID-Tuning-Implementation.md) PID 实现 | **TI 官方增量式 PI 宏的详细执行流程**： |
 | 第 1 步：计算比例项 | PI_MACRO 内部 | `v.up = v.Kp × (v.Ref - v.Fbk)`——计算当前误差的比例响应。这部分是瞬时的，没有历史依赖 |
 | 第 2 步：条件积分（Anti-windup） | PI_MACRO 内部 | `if (v.Out >= v.Umax && v.up > 0) { /* 正向饱和，不积分 */ }` 和 `if (v.Out <= v.Umin && v.up < 0) { /* 反向饱和，不积分 */ }`。条件积分逻辑：仅当输出未饱和时，才将当前的比例项累积到积分项中：`v.ui = v.ui + v.Ki × v.up`。这防止了积分饱和——当控制器输出已经达到物理极限时，继续积分只会让恢复过程更慢 |
 | 第 3 步：合成输出 | PI_MACRO 内部 | `v.v1 = v.up + v.ui`——预限幅输出 = 比例项 + 积分项 |
@@ -346,7 +346,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | C 结构体/宏 | 对应 KB 概念 | 详细说明 |
 | --- | --- | --- |
-| `struct MachineSimulated` | [HW-01](../hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机仿真对象的完整定义**（30+ 成员变量）。这个结构体是理解仿真中电机状态的核心： |
+| `struct MachineSimulated` | [HW-01](../../../motor/hardware/HW-01-Motor-Basics.md) 电机数学模型 | **电机仿真对象的完整定义**（30+ 成员变量）。这个结构体是理解仿真中电机状态的核心： |
 | `x[0]` = `varTheta` | 机械角度 | **状态变量 0：机械角位置（rad）**。这是转子的实际机械角度。经过 `θe = npp × θm` 转换为电角度用于坐标变换 |
 | `x[1]` = `varOmega` | 机械转速 | **状态变量 1：机械角速度（rad/s）**。乘以 `60/(2π)` 可转换为 rpm。乘以 `npp` 得到电气角速度 |
 | `x[2]` = `KA` | 有功磁链 | **状态变量 2：有功磁链幅值（Wb）**。PMSM 下恒等于 KE（永磁体磁链），IM 下按转子磁链动态方程变化 |
@@ -361,7 +361,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 | `theta_d` | 电角度 | **电机输出：电角度（rad）**。`θe = npp × θm`，用于坐标变换 |
 | `R, Ld, Lq, KE, Js, npp` | 电机参数 | **电机物理参数**。`R`：相电阻（Ω），`Ld`：d 轴电感（H），`Lq`：q 轴电感（H），`KE`：反电势系数/永磁磁链（V·s/rad = Wb），`Js`：转动惯量（kg·m²），`npp`：极对数 |
 | `KL[0..3]` | 电感矩阵元素 | **dq 轴电感矩阵的 4 个元素**。用于处理 Ld≠Lq（凸极）时的电感矩阵变换 |
-| `struct ControllerForExperiment` | [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) 有感 FOC | **控制器输入/输出结构体集合**。这是控制器与仿真环境的接口，定义了"控制器看到什么"和"控制器输出什么"： |
+| `struct ControllerForExperiment` | [ALG-05](../../../motor/algorithm/ALG-05-Sensored-FOC.md) 有感 FOC | **控制器输入/输出结构体集合**。这是控制器与仿真环境的接口，定义了"控制器看到什么"和"控制器输出什么"： |
 | `(*CTRL).motor->*` | 电机参数 | **控制器存储的电机参数副本**。包括 R、Ld、Lq、KE、Js、npp、Vdc 等。可能在参数自整定后被更新 |
 | `(*CTRL).i->iAB[0..1]` | 电流输入 | **控制器读取的 αβ 轴电流（A）**。由 `measurement()` 从 `ACM.iAB` 赋值，可能叠加了偏移误差 |
 | `(*CTRL).i->theta_d` | 角度输入 | **控制器读取的电角度（rad）**。由 `measurement()` 从 `ACM.theta_d` 赋值。有感模式下直接使用编码器值，无感模式下被观测器估计值覆盖 |
@@ -514,7 +514,7 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 1. **函数调用链追踪法**：从 `main()` → `main_switch()` → `_onlyFOC()` 逐层深入，每层理解该函数做了什么、输入是什么、输出是什么。不要一上来就钻进最底层的细节。
 
-2. **对比阅读法**：同时打开 `pmsm_comm.c` 的 `_onlyFOC()` 和 [ALG-01 FOC 理论](../algorithm/ALG-01-FOC-Theory.md)，逐行对照数学公式和 C 代码实现。你会发现几乎每个数学公式都能在代码中找到 1:1 的对应。
+2. **对比阅读法**：同时打开 `pmsm_comm.c` 的 `_onlyFOC()` 和 [ALG-01 FOC 理论](../../../motor/algorithm/ALG-01-FOC-Theory.md)，逐行对照数学公式和 C 代码实现。你会发现几乎每个数学公式都能在代码中找到 1:1 的对应。
 
 3. **改参观察法**：在 `_user_commands()` 中设计简单的仿真场景（如阶跃响应），修改一个参数（如 Kp），重新编译运行，观察波形变化。这是将"知"转化为"行"的最快方式。
 
@@ -609,35 +609,35 @@ Ki_speed = Kp_speed × (BW_current / delta) × CL_TS
 
 | KB 编号 | 模块名称 | 路径 |
 | --- | --- | --- |
-| HW-01 | 电机本体基础与数学模型 | [../hardware/HW-01-Motor-Basics.md](../hardware/HW-01-Motor-Basics.md) |
-| HW-02 | 电流采样电路 | [../hardware/HW-02-Current-Sensing.md](../hardware/HW-02-Current-Sensing.md) |
-| HW-03 | 位置传感器 | [../hardware/HW-03-Position-Sensor.md](../hardware/HW-03-Position-Sensor.md) |
-| HW-05 | 功率器件与门极驱动 | [../hardware/HW-05-Power-Devices-Gate-Drivers.md](../hardware/HW-05-Power-Devices-Gate-Drivers.md) |
-| CT-01 | 开环与闭环控制结构 | [../control-theory/CT-01-Open-Loop-Closed-Loop.md](../control-theory/CT-01-Open-Loop-Closed-Loop.md) |
-| CT-02 | 时域分析 | [../control-theory/CT-02-Time-Domain-Analysis.md](../control-theory/CT-02-Time-Domain-Analysis.md) |
-| CT-04 | PID 控制原理 | [../control-theory/CT-04-PID-Control-Principles.md](../control-theory/CT-04-PID-Control-Principles.md) |
-| CT-05 | PID 整定与实现 | [../control-theory/CT-05-PID-Tuning-Implementation.md](../control-theory/CT-05-PID-Tuning-Implementation.md) |
-| CT-07 | Nyquist 稳定判据 | [../control-theory/CT-07-Nyquist-Stability.md](../control-theory/CT-07-Nyquist-Stability.md) |
-| CT-11 | 观测器设计（极点配置） | [../control-theory/CT-11-Observer-Design.md](../control-theory/CT-11-Observer-Design.md) |
-| CT-14 | 级联 PID 控制 | [../control-theory/CT-14-Cascaded-PID-Control.md](../control-theory/CT-14-Cascaded-PID-Control.md) |
-| CT-16 | ADRC（自抗扰控制）理论 | [../control-theory/CT-16-ADRC-Theory.md](../control-theory/CT-16-ADRC-Theory.md) |
-| CT-17 | LADRC（线性 ADRC） | [../control-theory/CT-17-LADRC-Linear-ADRC.md](../control-theory/CT-17-LADRC-Linear-ADRC.md) |
-| CT-18 | ADRC/LADRC 工程实现 | [../control-theory/CT-18-ADRC-LADRC-Implementation.md](../control-theory/CT-18-ADRC-LADRC-Implementation.md) |
-| ALG-01 | FOC 理论（Clarke/Park/InvPark） | [../algorithm/ALG-01-FOC-Theory.md](../algorithm/ALG-01-FOC-Theory.md) |
-| ALG-02 | 电流采样时序 | [../algorithm/ALG-02-Current-Sampling-Timing.md](../algorithm/ALG-02-Current-Sampling-Timing.md) |
-| ALG-03 | PI 电流调节器设计 | [../algorithm/ALG-03-PI-Current-Regulator.md](../algorithm/ALG-03-PI-Current-Regulator.md) |
-| ALG-04 | 死区补偿 | [../algorithm/ALG-04-Deadtime-Compensation.md](../algorithm/ALG-04-Deadtime-Compensation.md) |
-| ALG-05 | 有感 FOC 实现 | [../algorithm/ALG-05-Sensored-FOC.md](../algorithm/ALG-05-Sensored-FOC.md) |
-| ALG-06 | 位置与速度观测器 | [../algorithm/ALG-06-Position-Speed-Observer.md](../algorithm/ALG-06-Position-Speed-Observer.md) |
-| ALG-07 | 无感观测器（反 EMF/SMO/EKF） | [../algorithm/ALG-07-Sensorless-Observers.md](../algorithm/ALG-07-Sensorless-Observers.md) |
-| ALG-10 | 过调制 | [../algorithm/ALG-10-Overmodulation.md](../algorithm/ALG-10-Overmodulation.md) |
-| ALG-12 | 速度环与转矩观测器 | [../algorithm/ALG-12-Speed-Loop-Torque-Observer.md](../algorithm/ALG-12-Speed-Loop-Torque-Observer.md) |
-| ALG-13 | 参数自整定与保护优化 | [../algorithm/ALG-13-Protection-Optimization.md](../algorithm/ALG-13-Protection-Optimization.md) |
-| ADV-ALG-07 | 前馈解耦 | [../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md](../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) |
-| ADV-HW-01 | PWM 与电流采样 | [../advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md](../advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md) |
-| ADV-HW-02 | ADC 与 DMA | [../advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md](../advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md) |
-| EE-08 | 整流器与逆变器原理 | [../electronics-basics/EE-08-Rectifier-Inverter.md](../electronics-basics/EE-08-Rectifier-Inverter.md) |
-| SYS-04 | 数值仿真基本原理 | [../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) |
+| HW-01 | 电机本体基础与数学模型 | [../hardware/HW-01-Motor-Basics.md](../../../motor/hardware/HW-01-Motor-Basics.md) |
+| HW-02 | 电流采样电路 | [../hardware/HW-02-Current-Sensing.md](../../../motor/hardware/HW-02-Current-Sensing.md) |
+| HW-03 | 位置传感器 | [../hardware/HW-03-Position-Sensor.md](../../../motor/hardware/HW-03-Position-Sensor.md) |
+| HW-05 | 功率器件与门极驱动 | [../hardware/HW-05-Power-Devices-Gate-Drivers.md](../../../motor/hardware/HW-05-Power-Devices-Gate-Drivers.md) |
+| CT-01 | 开环与闭环控制结构 | [../control-theory/CT-01-Open-Loop-Closed-Loop.md](../../control-theory/CT-01-Open-Loop-Closed-Loop.md) |
+| CT-02 | 时域分析 | [../control-theory/CT-02-Time-Domain-Analysis.md](../../control-theory/CT-02-Time-Domain-Analysis.md) |
+| CT-04 | PID 控制原理 | [../control-theory/CT-04-PID-Control-Principles.md](../../control-theory/CT-04-PID-Control-Principles.md) |
+| CT-05 | PID 整定与实现 | [../control-theory/CT-05-PID-Tuning-Implementation.md](../../control-theory/CT-05-PID-Tuning-Implementation.md) |
+| CT-07 | Nyquist 稳定判据 | [../control-theory/CT-07-Nyquist-Stability.md](../../control-theory/CT-07-Nyquist-Stability.md) |
+| CT-11 | 观测器设计（极点配置） | [../control-theory/CT-11-Observer-Design.md](../../control-theory/CT-11-Observer-Design.md) |
+| CT-14 | 级联 PID 控制 | [../control-theory/CT-14-Cascaded-PID-Control.md](../../control-theory/CT-14-Cascaded-PID-Control.md) |
+| CT-16 | ADRC（自抗扰控制）理论 | [../control-theory/CT-16-ADRC-Theory.md](../../control-theory/CT-16-ADRC-Theory.md) |
+| CT-17 | LADRC（线性 ADRC） | [../control-theory/CT-17-LADRC-Linear-ADRC.md](../../control-theory/CT-17-LADRC-Linear-ADRC.md) |
+| CT-18 | ADRC/LADRC 工程实现 | [../control-theory/CT-18-ADRC-LADRC-Implementation.md](../../control-theory/CT-18-ADRC-LADRC-Implementation.md) |
+| ALG-01 | FOC 理论（Clarke/Park/InvPark） | [../algorithm/ALG-01-FOC-Theory.md](../../../motor/algorithm/ALG-01-FOC-Theory.md) |
+| ALG-02 | 电流采样时序 | [../algorithm/ALG-02-Current-Sampling-Timing.md](../../../motor/algorithm/ALG-02-Current-Sampling-Timing.md) |
+| ALG-03 | PI 电流调节器设计 | [../algorithm/ALG-03-PI-Current-Regulator.md](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) |
+| ALG-04 | 死区补偿 | [../algorithm/ALG-04-Deadtime-Compensation.md](../../../motor/algorithm/ALG-04-Deadtime-Compensation.md) |
+| ALG-05 | 有感 FOC 实现 | [../algorithm/ALG-05-Sensored-FOC.md](../../../motor/algorithm/ALG-05-Sensored-FOC.md) |
+| ALG-06 | 位置与速度观测器 | [../algorithm/ALG-06-Position-Speed-Observer.md](../../../motor/algorithm/ALG-06-Position-Speed-Observer.md) |
+| ALG-07 | 无感观测器（反 EMF/SMO/EKF） | [../algorithm/ALG-07-Sensorless-Observers.md](../../../motor/algorithm/ALG-07-Sensorless-Observers.md) |
+| ALG-10 | 过调制 | [../algorithm/ALG-10-Overmodulation.md](../../../motor/algorithm/ALG-10-Overmodulation.md) |
+| ALG-12 | 速度环与转矩观测器 | [../algorithm/ALG-12-Speed-Loop-Torque-Observer.md](../../../motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.md) |
+| ALG-13 | 参数自整定与保护优化 | [../algorithm/ALG-13-Protection-Optimization.md](../../../motor/algorithm/ALG-13-Protection-Optimization.md) |
+| ADV-ALG-07 | 前馈解耦 | [../advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md](../../../motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.md) |
+| ADV-HW-01 | PWM 与电流采样 | [../advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md](../../../motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.md) |
+| ADV-HW-02 | ADC 与 DMA | [../advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md](../../../motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md) |
+| EE-08 | 整流器与逆变器原理 | [../electronics-basics/EE-08-Rectifier-Inverter.md](../../power-electronics-basics/EE-08-Rectifier-Inverter.md) |
+| SYS-04 | 数值仿真基本原理 | [../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md](../../../motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) |
 
 ---
 

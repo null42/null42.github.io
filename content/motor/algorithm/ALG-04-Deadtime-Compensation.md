@@ -346,7 +346,7 @@ $$\Delta V = V_{dc} \cdot \frac{100ns}{50\mu s} = 0.2\% \cdot V_{dc}$$
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_INVERTER_NONLINEARITY_SENSORLESS (49)，关键操作：在 ACMSim.h 中改 `__INVERTER_NONLINEARITY` 宏（0=理想, 1=Sul1996, 2=Sigmoid, 3=LUT），对比电流波形畸变程度
 
 >  检验你的理解：[ALG-04 检验题目](./ALG-04-assessment.md)

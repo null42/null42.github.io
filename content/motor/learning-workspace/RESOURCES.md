@@ -34,10 +34,10 @@ navGroupOrder: 10
 
 ## 控制理论路径
 
-- [CT-04 PID控制原理](../control-theory/CT-04-PID-Control-Principles.md)
-- [CT-14 三环级联PID](../control-theory/CT-14-Cascaded-PID-Control.md)
-- [CT-16~18 ADRC/LADRC](../control-theory/CT-16-ADRC-Theory.md)
-- [CT-19 MPC](../control-theory/CT-19-Model-Predictive-Control.md)
+- [CT-04 PID控制原理](../../foundations/control-theory/CT-04-PID-Control-Principles.md)
+- [CT-14 三环级联PID](../../foundations/control-theory/CT-14-Cascaded-PID-Control.md)
+- [CT-16~18 ADRC/LADRC](../../foundations/control-theory/CT-16-ADRC-Theory.md)
+- [CT-19 MPC](../../foundations/control-theory/CT-19-Model-Predictive-Control.md)
 
 ## 硬件路径
 

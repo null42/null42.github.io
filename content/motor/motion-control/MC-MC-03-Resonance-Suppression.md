@@ -553,9 +553,9 @@ $$\Delta f_{notch} \approx \frac{f_s}{2N}$$
 
 | 模块 | 关联说明 |
 |------|---------|
-| [CT-03 频率响应与伯德图](../control-theory/CT-03-Frequency-Response-Bode.md) | 伯德图是识别谐振频率的核心工具 |
-| [CT-09 补偿器设计](../control-theory/CT-09-Compensator-Design.md) | 陷波滤波器是补偿器设计的典型应用 |
-| [CT-14 三环级联PID](../control-theory/CT-14-Cascaded-PID-Control.md) | 谐振主要影响速度环，进而限制位置环带宽 |
+| [CT-03 频率响应与伯德图](../../foundations/control-theory/CT-03-Frequency-Response-Bode.md) | 伯德图是识别谐振频率的核心工具 |
+| [CT-09 补偿器设计](../../foundations/control-theory/CT-09-Compensator-Design.md) | 陷波滤波器是补偿器设计的典型应用 |
+| [CT-14 三环级联PID](../../foundations/control-theory/CT-14-Cascaded-PID-Control.md) | 谐振主要影响速度环，进而限制位置环带宽 |
 | [ADV-ALG-01 带宽与滤波](../advanced/algorithm/ADV-ALG-01-Bandwidth-Filter.md) | 滤波器设计的理论基础 |
 | [MC-MC-01 位置环设计](./MC-MC-01-Position-Loop.md) | 谐振限制速度环带宽→间接限制位置环Kp |
 | [HW-03 位置传感器](../hardware/HW-03-Position-Sensor.md) | 编码器安装位置影响谐振观测 |

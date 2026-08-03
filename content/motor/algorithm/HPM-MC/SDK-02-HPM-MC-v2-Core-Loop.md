@@ -18,7 +18,7 @@ navGroupOrder: 30
 
 # HPM-MC v2 核心控制循环深度解析  
 
->  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [CT-04 PID控制](../../control-theory/CT-04-PID-Control-Principles.md)
+>  关联模块：[ALG-05 有感FOC](../ALG-05-Sensored-FOC.md) | [ALG-02 电流采样](../ALG-02-Current-Sampling-Timing.md) | [ALG-03 PI调节器](../ALG-03-PI-Current-Regulator.md) | [CT-04 PID控制](../../../foundations/control-theory/CT-04-PID-Control-Principles.md)
 
 - **文档版本：** v1.0  
 - **生成日期：** 2026-05-23  

@@ -137,5 +137,5 @@ typedef struct {
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_FOC_SENSORLESS (31)，关键操作：对比 OBSV.theta_d（观测角度）和 ACM.theta_d（真实角度），观察观测器收敛过程

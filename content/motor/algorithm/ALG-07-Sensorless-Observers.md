@@ -1305,7 +1305,7 @@ $$
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP_SENSORLESS (41)，关键操作：切换观测器类型，观察低速和高速下的角度误差、反转时的跟踪性能
 
 >  检验你的理解：[ALG-07 检验题目](./ALG-07-assessment.md)

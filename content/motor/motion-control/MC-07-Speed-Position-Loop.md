@@ -32,7 +32,7 @@ navGroupOrder: 30
 ## 前置知识
 - [MC-06](MC-06-Current-Loop.md) — 电流环 PI 设计与带宽整定
 - [ALG-05](../algorithm/ALG-05-Sensored-FOC.md) — 速度环控制算法
-- [CT-05](../control-theory/CT-05-PID-Tuning-Implementation.md) — 频域设计与带宽分离原理
+- [CT-05](../../foundations/control-theory/CT-05-PID-Tuning-Implementation.md) — 频域设计与带宽分离原理
 
 ## 核心摘要
 速度环与位置环是 FOC 三环串级结构中最外两层。速度环承接位置环输出的速度给定，向电流环输出 Iq 指令；位置环面向最终被控变量（角度/位移）。两环设计的核心是**带宽分离**（每级约 10 倍间隔）和**级联抗饱和**（防止积分器在级间传播）。
@@ -263,7 +263,7 @@ fsm/lxfoc_fsm.c: LXFO_FSM_STATE_RUN:
 |---------|------|------|
 | [MC-06 电流环](MC-06-Current-Loop.md) | ← 下游：速度环输出 Iq_ref 送入电流环 | 级联控制 |
 | [ALG-05 速度环控制](../algorithm/ALG-05-Sensored-FOC.md) | ↔ 算法实现：对称最优法 PI 设计 | 控制算法 |
-| [CT-05 频域设计](../control-theory/CT-05-PID-Tuning-Implementation.md) | ← 理论基础：带宽分离与 Bode 图分析 | 控制理论 |
+| [CT-05 频域设计](../../foundations/control-theory/CT-05-PID-Tuning-Implementation.md) | ← 理论基础：带宽分离与 Bode 图分析 | 控制理论 |
 | [MC-01 PMSM 模型](MC-01-PMSM-Model.md) | ← 被控对象：运动方程推导速度传递函数 | 电机建模 |
 | [MC-08 无感观测器](MC-08-Sensorless-Observers.md) | ↔ 速度源：观测器提供速度反馈替代编码器 | 信号链路 |
 

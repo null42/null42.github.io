@@ -83,9 +83,9 @@ navGroupOrder: 10
 
 | 硬件基础知识点 | 影响的电控模块 | 影响机制 | 引用链接 |
 |-----------|-------------|---------|---------|
-| BJT图腾柱 | EE-05 MOSFET栅极驱动 | 推挽输出级→图腾柱栅极驱动：NPN+PNP互补对提供大电流驱动 | [EE-05](../electronics-basics/EE-05-MOSFET-Gate-Drive.md#3-直观理解) |
+| BJT图腾柱 | EE-05 MOSFET栅极驱动 | 推挽输出级→图腾柱栅极驱动：NPN+PNP互补对提供大电流驱动 | [EE-05](../../foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive.md#3-直观理解) |
 | BJT vs MOSFET特性 | HW-05 功率器件 | 电流驱动vs电压驱动、饱和压降vs导通电阻→功率器件选型基础 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#器件选型对比) |
-| BJT(输入)→MOSFET(开关) | EE-06 IGBT原理 | IGBT=BJT导通特性+MOSFET输入特性=电压控制低饱和压降 | [EE-06](../electronics-basics/EE-06-IGBT-Principles.md#2-问题引入) |
+| BJT(输入)→MOSFET(开关) | EE-06 IGBT原理 | IGBT=BJT导通特性+MOSFET输入特性=电压控制低饱和压降 | [EE-06](../../foundations/power-electronics-basics/EE-06-IGBT-Principles.md#2-问题引入) |
 | 达林顿管 | HW-05 功率器件 | 高电流增益复合管：小基极电流控制大集电极电流 | [HW-05](../hardware/HW-05-Power-Devices-Gate-Drivers.md#IGBT选型) |
 
 ### EE-05 MOSFET栅极驱动 → 电控关联

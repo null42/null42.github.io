@@ -1303,7 +1303,7 @@ SVPWM输出电压矢量的精度受硬件约束：
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：修改 pmsm_comm.c 的 _user_commands() 中转速指令序列和负载阶跃，观察 Speed/Torque 子图
 
 >  检验你的理解：[ALG-05 检验题目](./ALG-05-assessment.md)

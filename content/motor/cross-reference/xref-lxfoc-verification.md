@@ -190,7 +190,7 @@ navGroupOrder: 10
 ### 3.3 position (位置环控制)
 
 **源文件**: `lxfoc/control/lxfoc_control_position.c`
-**KB参考**: [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md), [CT-14](../control-theory/CT-14-Cascaded-PID-Control.md)
+**KB参考**: [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md), [CT-14](../../foundations/control-theory/CT-14-Cascaded-PID-Control.md)
 
 #### 公式一致性
 
@@ -824,7 +824,7 @@ navGroupOrder: 10
 ### 5.1 ADRC/LADRC
 
 **源文件**: `lxfoc/advanced/lxfoc_advanced_adrc.c` + `.h`
-**KB参考**: [CT-16](../control-theory/CT-16-ADRC-Theory.md), [CT-17](../control-theory/CT-17-LADRC-Linear-ADRC.md), [CT-18](../control-theory/CT-18-ADRC-LADRC-Implementation.md)
+**KB参考**: [CT-16](../../foundations/control-theory/CT-16-ADRC-Theory.md), [CT-17](../../foundations/control-theory/CT-17-LADRC-Linear-ADRC.md), [CT-18](../../foundations/control-theory/CT-18-ADRC-LADRC-Implementation.md)
 
 #### 公式一致性
 
@@ -936,7 +936,7 @@ navGroupOrder: 10
 ### 5.3 LQR/LQI
 
 **源文件**: `lxfoc/advanced/lxfoc_advanced_lqr.c` + `.h`
-**KB参考**: [CT-13](../control-theory/CT-13-LQR-LQG.md)
+**KB参考**: [CT-13](../../foundations/control-theory/CT-13-LQR-LQG.md)
 
 #### 公式一致性
 
@@ -988,7 +988,7 @@ navGroupOrder: 10
 ### 5.4 MPC
 
 **源文件**: `lxfoc/advanced/lxfoc_advanced_mpc.c` + `.h`
-**KB参考**: [CT-19](../control-theory/CT-19-Model-Predictive-Control.md)
+**KB参考**: [CT-19](../../foundations/control-theory/CT-19-Model-Predictive-Control.md)
 
 #### 公式一致性
 

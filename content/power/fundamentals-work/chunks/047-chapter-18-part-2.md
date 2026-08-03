@@ -416,17 +416,17 @@ $Q_c$ 和 $\omega_c$ 由式(18.108)和(18.109)给出。
 
 | 简单模型 | 占空周期控制传递函数 |
 |---|---|
-| $\dfrac{\hat{v}}{\hat{i}_c} = -\dfrac{D'R}{(1+D)}\, \dfrac{1 - \dfrac{sDL}{D'^2 R}}{1 + \dfrac{sRC}{1+D}}$ | $G_{vd}(s) = -\dfrac{|V|}{DD'}\, \dfrac{1 - \dfrac{sDL}{D'^2 R}}{\text{den}(s)}$，$G_{id}(s) = \dfrac{|V|(1+D)}{DD'^2 R}\, \dfrac{1 + \dfrac{sRC}{1+D}}{\text{den}(s)}$ |
+| $\dfrac{\hat{v}}{\hat{i}_c} = -\dfrac{D'R}{(1+D)}\, \dfrac{1 - \dfrac{sDL}{D'^2 R}}{1 + \dfrac{sRC}{1+D}}$ | $G_{vd}(s) = -\dfrac{\lvert V \rvert}{DD'}\, \dfrac{1 - \dfrac{sDL}{D'^2 R}}{\text{den}(s)}$，$G_{id}(s) = \dfrac{\lvert V \rvert(1+D)}{DD'^2 R}\, \dfrac{1 + \dfrac{sRC}{1+D}}{\text{den}(s)}$ |
 | $\dfrac{\hat{v}}{\hat{v}_g} = -\dfrac{D^2}{1-D^2}\, \dfrac{1}{1 + \dfrac{sRC}{1+D}}$ | $G_{vg}(s) = -\dfrac{D}{D'}\, \dfrac{1}{\text{den}(s)}$，$G_{ig}(s) = \dfrac{D}{D'^2 R}\, \dfrac{1+sRC}{\text{den}(s)}$ |
 | | $\text{den}(s) = 1 + s\dfrac{L}{D'^2 R} + s^2 \dfrac{LC}{D'^2}$ |
 
 | 更精确模型 | |
 |---|---|
-| $\dfrac{\hat{v}}{\hat{i}_c} = G_{vc}(s) = \dfrac{G_{c0}\left( 1 - \dfrac{sDL}{D'^2 R} \right)}{1 + \dfrac{s}{Q_c \omega_c} + \left( \dfrac{s}{\omega_c} \right)^2}$ | $G_{c0} = -\dfrac{|V|}{DD'}\, \dfrac{F_m}{1 + \dfrac{F_m |V|(1+D)}{DD'^2 R} - F_m F_v \dfrac{|V|}{DD'}}$ |
-| | $\omega_c = \dfrac{D'}{\sqrt{LC}}\, \sqrt{1 + \dfrac{F_m |V|(1+D)}{DD'^2 R} - F_m F_v \dfrac{|V|}{DD'}}$ |
-| | $Q_c = D' R\sqrt{\dfrac{C}{L}}\, \dfrac{\sqrt{1 + \dfrac{F_m |V|(1+D)}{DD'^2 R} - F_m F_v \dfrac{|V|}{DD'}}}{1 + \dfrac{F_m |V| RC}{DL} + F_m F_v \dfrac{|V|}{D'}}$ |
-| $\dfrac{\hat{v}}{\hat{v}_g} = G_{vg\text{-cpm}}(s) = \dfrac{G_{g0}\left( 1 + \dfrac{s}{\omega_{gz}} \right)}{1 + \dfrac{s}{Q_c \omega_c} + \left( \dfrac{s}{\omega_c} \right)^2}$ | $G_{g0} = -\dfrac{D}{D'}\, \dfrac{1 + \dfrac{F_m |V|}{D'^2 R} - F_m F_g \dfrac{|V|}{D^2}}{1 + \dfrac{F_m |V|(1+D)}{DD'^2 R} - F_m F_v \dfrac{|V|}{DD'}}$ |
-| | $\omega_{gz} = \dfrac{DD'^2 R}{|V| L F_m F_g}\left( 1 + \dfrac{F_m |V|}{D'^2 R} - F_m F_g \dfrac{|V|}{D^2} \right)$ |
+| $\dfrac{\hat{v}}{\hat{i}_c} = G_{vc}(s) = \dfrac{G_{c0}\left( 1 - \dfrac{sDL}{D'^2 R} \right)}{1 + \dfrac{s}{Q_c \omega_c} + \left( \dfrac{s}{\omega_c} \right)^2}$ | $G_{c0} = -\dfrac{\lvert V \rvert}{DD'}\, \dfrac{F_m}{1 + \dfrac{F_m \lvert V \rvert(1+D)}{DD'^2 R} - F_m F_v \dfrac{\lvert V \rvert}{DD'}}$ |
+| | $\omega_c = \dfrac{D'}{\sqrt{LC}}\, \sqrt{1 + \dfrac{F_m \lvert V \rvert(1+D)}{DD'^2 R} - F_m F_v \dfrac{\lvert V \rvert}{DD'}}$ |
+| | $Q_c = D' R\sqrt{\dfrac{C}{L}}\, \dfrac{\sqrt{1 + \dfrac{F_m \lvert V \rvert(1+D)}{DD'^2 R} - F_m F_v \dfrac{\lvert V \rvert}{DD'}}}{1 + \dfrac{F_m \lvert V \rvert RC}{DL} + F_m F_v \dfrac{\lvert V \rvert}{D'}}$ |
+| $\dfrac{\hat{v}}{\hat{v}_g} = G_{vg\text{-cpm}}(s) = \dfrac{G_{g0}\left( 1 + \dfrac{s}{\omega_{gz}} \right)}{1 + \dfrac{s}{Q_c \omega_c} + \left( \dfrac{s}{\omega_c} \right)^2}$ | $G_{g0} = -\dfrac{D}{D'}\, \dfrac{1 + \dfrac{F_m \lvert V \rvert}{D'^2 R} - F_m F_g \dfrac{\lvert V \rvert}{D^2}}{1 + \dfrac{F_m \lvert V \rvert(1+D)}{DD'^2 R} - F_m F_v \dfrac{\lvert V \rvert}{DD'}}$ |
+| | $\omega_{gz} = \dfrac{DD'^2 R}{\lvert V \rvert L F_m F_g}\left( 1 + \dfrac{F_m \lvert V \rvert}{D'^2 R} - F_m F_g \dfrac{\lvert V \rvert}{D^2} \right)$ |
 
 本节导出的更精确模型一并列出。为完整起见，也包含了占空周期控制的传递函数。在每种情况下，主要特征量表示为相应占空周期控制下的值乘以一个考虑电流编程控制效应的因子。
 

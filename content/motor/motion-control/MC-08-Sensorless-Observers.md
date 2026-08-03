@@ -275,7 +275,7 @@ observer/lxfoc_observer_speed.c →  速度估计（从角度差分/滤波）
 | [MC-01 PMSM 模型](MC-01-PMSM-Model.md) | ← 理论基础：αβ 坐标系方程与 BEMF 模型 | 电机建模 |
 | [MC-06 电流环](MC-06-Current-Loop.md) | → 下游：观测器角度/速度送入电流环做 Park 变换 | 控制链路 |
 | [ALG-07 无感观测器](../algorithm/ALG-07-Sensorless-Observers.md) | ↔ 算法实现：SMO 滑模切换与 PLL 设计 | 观测器算法 |
-| [CT-16 状态观测器](../control-theory/CT-16-ADRC-Theory.md) | ← 理论基础：滑模到达条件与 Lyapunov 稳定性 | 控制理论 |
+| [CT-16 状态观测器](../../foundations/control-theory/CT-16-ADRC-Theory.md) | ← 理论基础：滑模到达条件与 Lyapunov 稳定性 | 控制理论 |
 | [MC-10 参数敏感性](MC-10-Parameter-Sensitivity.md) | ↔ 参数依赖：Rs/Ls 热漂移对观测器精度的影响 | 参数鲁棒性 |
 
 > 📝 检验你的理解：[MC-08-assessment](MC-08-assessment.md)

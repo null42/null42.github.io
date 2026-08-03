@@ -373,7 +373,7 @@ describe('rendering fixture', () => {
   })
 
   it('normalizes the real CT-01 formulas and feedback Mermaid label before rendering', () => {
-    const markdown = fs.readFileSync('content/motor/control-theory/CT-01-Open-Loop-Closed-Loop.md', 'utf8')
+    const markdown = fs.readFileSync('content/foundations/control-theory/CT-01-Open-Loop-Closed-Loop.md', 'utf8')
     const normalizedMath = normalizeMathDelimiters(markdown)
     const mermaidBlocks = [...markdown.matchAll(/```mermaid\s*\n([\s\S]*?)\n```/g)].map((match) => match[1])
     const closedLoopDiagram = mermaidBlocks.find((block) => block.includes('FB -->|"- "| SUM')) || ''

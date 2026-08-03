@@ -324,7 +324,7 @@ speed_ref = p_term + integral + d_term;
 - 双电流环 PID 独立整定（d轴/q轴分别调参）
 
 **硬件加速**: HPM CLC（Current Loop Controller）硬件实现 PID，释放 CPU 用于其他任务
-参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) 第3节「控制链核心」
+参考: [SDK-02-HPM-MC-v2-Core-Loop.md](../../motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop.md) 第3节「控制链核心」
 
 ---
 
@@ -438,7 +438,7 @@ Tustin离散化后：u_d(k)=a·u_d(k-1)+b·[e(k)-e(k-1)]
 ---
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_VELOCITY_LOOP (4)，关键操作：在 init_CTRL() 中分别将 PID_Speed->Kp 或 Ki_CODE 设为零，观察 Speed 子图稳态误差和超调变化
 
 >  检验你的理解：[CT-04 检验题目](./CT-04-assessment.md)

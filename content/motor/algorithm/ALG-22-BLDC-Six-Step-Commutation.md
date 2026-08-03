@@ -25,7 +25,7 @@ navGroupOrder: 30
 - **模块名称：** BLDC六步换相（Six-Step Commutation / 方波控制）
 - **文档版本：** v1.0
 - **适用对象：** 电机控制工程师、嵌入式开发者、无人机/电动车驱动开发者
-- **前置知识：** [ALG-01 FOC理论基础](ALG-01-FOC-Theory.md) | [EE-09 H桥驱动](../electronics-basics/EE-09-H-Bridge.md) | [HW-01 电机本体基础](../hardware/HW-01-Motor-Basics.md)
+- **前置知识：** [ALG-01 FOC理论基础](ALG-01-FOC-Theory.md) | [EE-09 H桥驱动](../../foundations/power-electronics-basics/EE-09-H-Bridge.md) | [HW-01 电机本体基础](../hardware/HW-01-Motor-Basics.md)
 
 ---
 
@@ -451,7 +451,7 @@ MC_LIB的六步换相模块（[MC-LIB-Six-Step](./MC-LIB/MC-LIB-Six-Step.md)）�
 | [ALG-08 初始位置检测](ALG-08-Initial-Position-Detection.md) | 对比：FOC脉冲注入预定位 vs 六步强拖预定位 |
 | [ALG-09 高频注入](ALG-09-High-Frequency-Injection.md) | 对比：FOC零速无感 vs 六步低速无感失效 |
 | [ALG-17 V/F控制](ALG-17-VF-Control.md) | 类比：都是标量/离散控制，都不需要精确转子位置 |
-| [EE-09 H桥](../electronics-basics/EE-09-H-Bridge.md) | 硬件基础：六步换相的开关实现 |
+| [EE-09 H桥](../../foundations/power-electronics-basics/EE-09-H-Bridge.md) | 硬件基础：六步换相的开关实现 |
 | [HW-01 电机本体](../hardware/HW-01-Motor-Basics.md) | 电机选型：BLDC（梯形反EMF）vs PMSM（正弦反EMF） |
 | [MC-LIB-Six-Step](./MC-LIB/MC-LIB-Six-Step.md) | 代码实践：MC_LIB六步换相模块详解 |
 

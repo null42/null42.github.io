@@ -403,7 +403,7 @@ EKF在零速时理论上无法收敛（因反电动势为零，能观性丧失�
 - 中高速: SMO（滑模观测器）
 - 全速域: 混合控制（有感编码器 + 无感SMO 融合）
 
-参考: [ALG-07-Sensorless-Observers.md](../algorithm/ALG-07-Sensorless-Observers.md) + [SDK-03-HPM-MC-v2-Detect.md](../algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect.md)
+参考: [ALG-07-Sensorless-Observers.md](../../motor/algorithm/ALG-07-Sensorless-Observers.md) + [SDK-03-HPM-MC-v2-Detect.md](../../motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect.md)
 
 ---
 

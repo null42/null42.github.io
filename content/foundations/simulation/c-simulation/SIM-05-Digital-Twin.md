@@ -23,7 +23,7 @@ navGroupOrder: 30
 - **版本：** v1.0
 - **日期：** 2026-06
 - **适用对象：** 电机控制算法工程师、仿真工程师、嵌入式开发者
-- **前置模块：** [SIM-00 C仿真总索引](./SIM-00-C-Simulation-Overview.md)、[ALG-03 PI电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md)
+- **前置模块：** [SIM-00 C仿真总索引](./SIM-00-C-Simulation-Overview.md)、[ALG-03 PI电流调节器](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md)
 
 ---
 
@@ -467,14 +467,14 @@ $$FIT = \left(1 - \frac{\|y_{meas} - y_{sim}\|_2}{\|y_{meas} - \bar{y}_{meas}\|_
 
 | 数字孪生能力 | 服务控制算法开发 | 对应KB模块 | 关键接口 |
 |------------|----------------|-----------|---------|
-| 参数辨识 | 获取真实参数→PI自整定 | [ALG-03](../algorithm/ALG-03-PI-Current-Regulator.md) PI整定 | Ld,Lq,ψf,Rs |
-| 模型验证 | 仿真与实测对标→算法迁移信心 | [SYS-04](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 仿真到离散 | 阶跃响应/Bode图 |
-| 在线自适应 | 温度/老化补偿→容错控制 | [ALG-16](../algorithm/ALG-16-Nonlinear-Flux-Observer.md) 非线性观测器 | 在线参数估计 |
+| 参数辨识 | 获取真实参数→PI自整定 | [ALG-03](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) PI整定 | Ld,Lq,ψf,Rs |
+| 模型验证 | 仿真与实测对标→算法迁移信心 | [SYS-04](../../../motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) 仿真到离散 | 阶跃响应/Bode图 |
+| 在线自适应 | 温度/老化补偿→容错控制 | [ALG-16](../../../motor/algorithm/ALG-16-Nonlinear-Flux-Observer.md) 非线性观测器 | 在线参数估计 |
 | 仿真置信度 | 量化可信度→决定迁移策略 | [SIM-00](./SIM-00-C-Simulation-Overview.md) C仿真 | FIT指标 |
-| 预测性维护 | 早期故障检测→减少停机 | [SYS-05](../advanced/system-methodology/SYS-05-Functional-Safety.md) 功能安全 | 残差分析 |
-| 饱和建模 | 电感查表→MTPA轨迹修正 | [ALG-11](../algorithm/ALG-11-MTPA-Flux-Weakening.md) MTPA/弱磁 | Ld(Id,Iq) LUT |
-| 死区补偿 | 电压畸变修正→电流THD改善 | [ALG-04](../algorithm/ALG-04-Deadtime-Compensation.md) 死区补偿 | 死区补偿量 |
-| 铁损建模 | 弱磁区效率修正 | [ALG-11](../algorithm/ALG-11-MTPA-Flux-Weakening.md) 弱磁 | Rfe(ω) |
+| 预测性维护 | 早期故障检测→减少停机 | [SYS-05](../../../motor/advanced/system-methodology/SYS-05-Functional-Safety.md) 功能安全 | 残差分析 |
+| 饱和建模 | 电感查表→MTPA轨迹修正 | [ALG-11](../../../motor/algorithm/ALG-11-MTPA-Flux-Weakening.md) MTPA/弱磁 | Ld(Id,Iq) LUT |
+| 死区补偿 | 电压畸变修正→电流THD改善 | [ALG-04](../../../motor/algorithm/ALG-04-Deadtime-Compensation.md) 死区补偿 | 死区补偿量 |
+| 铁损建模 | 弱磁区效率修正 | [ALG-11](../../../motor/algorithm/ALG-11-MTPA-Flux-Weakening.md) 弱磁 | Rfe(ω) |
 
 ### 与emachinery仿真的结合
 
@@ -608,7 +608,7 @@ $$FIT = \left(1 - \frac{\|y_{meas} - y_{sim}\|_2}{\|y_{meas} - \bar{y}_{meas}\|_
 
 **延伸阅读**：
 - [SIM-00 C仿真总索引](./SIM-00-C-Simulation-Overview.md) —— emachinery仿真框架总览
-- [ALG-03 PI电流调节器](../algorithm/ALG-03-PI-Current-Regulator.md) —— PI参数与电机参数的关系
-- [ALG-04 死区补偿](../algorithm/ALG-04-Deadtime-Compensation.md) —— 死区效应建模与补偿
-- [ALG-11 MTPA与弱磁](../algorithm/ALG-11-MTPA-Flux-Weakening.md) —— 饱和与铁损对弱磁的影响
-- [SYS-04 仿真到离散](../advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) —— 仿真到实物的迁移方法论
+- [ALG-03 PI电流调节器](../../../motor/algorithm/ALG-03-PI-Current-Regulator.md) —— PI参数与电机参数的关系
+- [ALG-04 死区补偿](../../../motor/algorithm/ALG-04-Deadtime-Compensation.md) —— 死区效应建模与补偿
+- [ALG-11 MTPA与弱磁](../../../motor/algorithm/ALG-11-MTPA-Flux-Weakening.md) —— 饱和与铁损对弱磁的影响
+- [SYS-04 仿真到离散](../../../motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.md) —— 仿真到实物的迁移方法论

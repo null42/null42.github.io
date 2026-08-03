@@ -711,4 +711,4 @@ $M(s)$通常设计为高增益低频的补偿器，在饱和发生时将多余�
 >  检验你的理解：[CT-15 检验题目](./CT-15-assessment.md)
 
 ## 延伸实践
--  [路径12-4: 模糊PI双闭环控制](../practice/PRACTICE-12-PMSM-Simulation.md#站4) — 模糊PI替代传统PI的仿真验证
+-  [路径12-4: 模糊PI双闭环控制](../../motor/practice/PRACTICE-12-PMSM-Simulation.md#站4) — 模糊PI替代传统PI的仿真验证

@@ -890,7 +890,7 @@ $$
 
 
 ##  仿真验证
-> 本模块的理论可在 [C 语言仿真](../simulation/SIM-00-C-Simulation-Overview.md) 中验证。
+> 本模块的理论可在 [C 语言仿真](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md) 中验证。
 > 对应仿真模式：MODE_SELECT_COMMISSIONING (9)，关键操作：观察控制台输出：R→L→KE→Js 分步辨识过程和辨识精度
 
 >  检验你的理解：[ALG-13 检验题目](./ALG-13-assessment.md)

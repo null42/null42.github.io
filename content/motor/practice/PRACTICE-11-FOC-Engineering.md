@@ -104,7 +104,7 @@ graph LR
 A: 先运行对应目录下的.m脚本初始化参数，再打开.slx模型。例如站3需先运行current_pi.m再打开pi_current.slx。
 
 **Q: 没有MATLAB许可证？**
-A: 可使用知识库[路径9: C仿真验证](../simulation/SIM-00-C-Simulation-Overview.md)的C仿真平台替代，支持FOC/速度环/无感等算法验证。
+A: 可使用知识库[路径9: C仿真验证](../../foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview.md)的C仿真平台替代，支持FOC/速度环/无感等算法验证。
 
 **Q: 固件如何编译？**
 A: 使用Keil uVision打开Projects目录下的odrive_mks.uvprojx工程文件，需要STM32F4 HAL库和ARM CMSIS支持。

@@ -321,7 +321,7 @@ void state_space_update(float x[3], float u[2], float dt) {
 - 电流环设计基于 d/q 轴解耦模型（前馈补偿交叉耦合项）
 - SMC 滑模观测器基于 α/β 轴状态方程
 
-参考: [SDK-01-HPM-MC-Architecture.md](../algorithm/HPM-MC/SDK-01-HPM-MC-Architecture.md) + [ALG-07-Sensorless-Observers.md](../algorithm/ALG-07-Sensorless-Observers.md)
+参考: [SDK-01-HPM-MC-Architecture.md](../../motor/algorithm/HPM-MC/SDK-01-HPM-MC-Architecture.md) + [ALG-07-Sensorless-Observers.md](../../motor/algorithm/ALG-07-Sensorless-Observers.md)
 
 ---
 

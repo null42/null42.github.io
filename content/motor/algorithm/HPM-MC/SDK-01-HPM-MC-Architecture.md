@@ -18,7 +18,7 @@ navGroupOrder: 30
 
 # HPM_MC电机控制库 - 架构总览  
 
->  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../control-theory/CT-11-Observer-Design.md)
+>  关联模块：[ALG-01 FOC理论](../ALG-01-FOC-Theory.md) | [ALG-07 无感观测器](../ALG-07-Sensorless-Observers.md) | [CT-11 观测器设计](../../../foundations/control-theory/CT-11-Observer-Design.md)
 
 - **文档版本：** v1.0  
 - **生成日期：** 2026-05-23  
