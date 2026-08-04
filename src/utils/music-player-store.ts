@@ -28,6 +28,7 @@ export interface MusicPlayerState {
   duration: number
   error?: string
   loopMode: MusicLoopMode
+  loading: boolean
   muted: boolean
   playing: boolean
   track: MusicTrack
@@ -54,7 +55,10 @@ export interface MusicPlayerStore {
 
 interface StoreOptions {
   audio?: MusicPlayerAudio
+  currentIndex?: number
+  currentTime?: number
   loopMode?: MusicLoopMode
+  muted?: boolean
   onDestroy?: () => void
   random?: () => number
   tracks: MusicTrack[]
@@ -91,6 +95,15 @@ declare global {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
+const MUSIC_PLAYER_STORAGE_KEY = 'null42:music-player:v1'
+
+interface MusicPlayerSnapshot {
+  currentIndex?: number
+  currentTime?: number
+  loopMode?: MusicLoopMode
+  muted?: boolean
+  volume?: number
+}
 
 function requireLocalTrack(track: MusicTrack): MusicTrack {
   if (!track.src.startsWith('/') || track.src.startsWith('//') || /^[a-z][a-z\d+.-]*:/i.test(track.src)) {
@@ -114,7 +127,10 @@ function createBrowserAudio(): MusicPlayerAudio {
 
 export function createMusicPlayerStore({
   audio: providedAudio,
+  currentIndex = 0,
+  currentTime = 0,
   loopMode = 'list',
+  muted = false,
   onDestroy,
   random = Math.random,
   tracks: inputTracks,
@@ -128,19 +144,23 @@ export function createMusicPlayerStore({
   let destroyed = false
   let playbackRequested = false
   let playOperation = 0
+  let pendingInitialTime = Number.isFinite(currentTime) ? Math.max(0, currentTime) : 0
+  const initialIndex = Number.isInteger(currentIndex) ? (currentIndex + tracks.length) % tracks.length : 0
   let state: MusicPlayerState = {
-    currentIndex: 0,
-    currentTime: 0,
+    currentIndex: initialIndex,
+    currentTime: pendingInitialTime,
     duration: Number.isFinite(audio.duration) ? audio.duration : 0,
     loopMode,
-    muted: false,
+    loading: true,
+    muted,
     playing: false,
-    track: tracks[0],
+    track: tracks[initialIndex],
     tracks,
     volume: clamp(volume, 0, 1),
   }
 
   audio.preload = 'metadata'
+  audio.muted = state.muted
   audio.volume = state.volume
   audio.src = state.track.src
   audio.load()
@@ -152,6 +172,7 @@ export function createMusicPlayerStore({
   const loadTrack = (index: number, resume = playbackRequested) => {
     if (destroyed) return
     const normalizedIndex = (index + tracks.length) % tracks.length
+    pendingInitialTime = 0
     playOperation += 1
     audio.pause()
     audio.src = tracks[normalizedIndex].src
@@ -162,6 +183,7 @@ export function createMusicPlayerStore({
       currentTime: 0,
       duration: Number.isFinite(audio.duration) ? audio.duration : 0,
       error: undefined,
+      loading: true,
       playing: false,
       track: tracks[normalizedIndex],
     })
@@ -178,7 +200,7 @@ export function createMusicPlayerStore({
     } catch (error) {
       if (destroyed || operation !== playOperation) return
       playbackRequested = false
-      publish({ error: error instanceof Error ? error.message : '播放失败', playing: false })
+      publish({ error: error instanceof Error ? error.message : '播放失败', loading: false, playing: false })
     }
   }
   const pause = () => {
@@ -194,8 +216,11 @@ export function createMusicPlayerStore({
       void play()
       return
     }
+    const randomIndex = Math.floor(clamp(random(), 0, 0.999999) * tracks.length)
     const nextIndex = state.loopMode === 'random'
-      ? Math.floor(clamp(random(), 0, 0.999999) * tracks.length)
+      ? tracks.length > 1 && randomIndex === state.currentIndex
+        ? (randomIndex + 1) % tracks.length
+        : randomIndex
       : state.currentIndex + 1
     loadTrack(nextIndex, true)
   }
@@ -203,18 +228,34 @@ export function createMusicPlayerStore({
     currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
     duration: Number.isFinite(audio.duration) ? audio.duration : 0,
   })
-  const syncPlay = () => publish({ playing: true })
+  const syncPlay = () => publish({ loading: false, playing: true })
   const syncPause = () => publish({ playing: false })
   const syncVolume = () => publish({ muted: audio.muted, volume: audio.volume })
   const syncError = () => {
     playbackRequested = false
-    publish({ error: '音频加载或解码失败', playing: false })
+    publish({ error: '音频加载或解码失败', loading: false, playing: false })
+  }
+  const syncLoading = () => publish({ loading: true })
+  const syncReady = () => {
+    if (pendingInitialTime > 0) {
+      const duration = Number.isFinite(audio.duration) ? audio.duration : pendingInitialTime
+      audio.currentTime = clamp(pendingInitialTime, 0, duration)
+      pendingInitialTime = 0
+    }
+    publish({
+      currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
+      duration: Number.isFinite(audio.duration) ? audio.duration : 0,
+      loading: false,
+    })
   }
 
   audio.addEventListener('ended', ended)
   audio.addEventListener('timeupdate', syncTime)
   audio.addEventListener('durationchange', syncTime)
-  audio.addEventListener('loadedmetadata', syncTime)
+  audio.addEventListener('loadedmetadata', syncReady)
+  audio.addEventListener('loadstart', syncLoading)
+  audio.addEventListener('waiting', syncLoading)
+  audio.addEventListener('canplay', syncReady)
   audio.addEventListener('play', syncPlay)
   audio.addEventListener('pause', syncPause)
   audio.addEventListener('volumechange', syncVolume)
@@ -234,7 +275,15 @@ export function createMusicPlayerStore({
       if (playbackRequested) pause()
       else await play()
     },
-    previous() { if (!destroyed) loadTrack(state.currentIndex - 1) },
+    previous() {
+      if (destroyed) return
+      if (audio.currentTime > 3) {
+        audio.currentTime = 0
+        syncTime()
+        return
+      }
+      loadTrack(state.currentIndex - 1)
+    },
     next() { if (!destroyed) loadTrack(state.currentIndex + 1) },
     select(index) {
       if (destroyed) return
@@ -273,7 +322,10 @@ export function createMusicPlayerStore({
       audio.removeEventListener('ended', ended)
       audio.removeEventListener('timeupdate', syncTime)
       audio.removeEventListener('durationchange', syncTime)
-      audio.removeEventListener('loadedmetadata', syncTime)
+      audio.removeEventListener('loadedmetadata', syncReady)
+      audio.removeEventListener('loadstart', syncLoading)
+      audio.removeEventListener('waiting', syncLoading)
+      audio.removeEventListener('canplay', syncReady)
       audio.removeEventListener('play', syncPlay)
       audio.removeEventListener('pause', syncPause)
       audio.removeEventListener('volumechange', syncVolume)
@@ -289,18 +341,75 @@ export function createMusicPlayerStore({
 export function getGlobalMusicPlayerStore(options: GlobalStoreOptions): MusicPlayerStore {
   const windowRef = options.window ?? window as MusicPlayerWindow
   if (windowRef.__null42MusicPlayerStore) return windowRef.__null42MusicPlayerStore
+  const storage = getMusicPlayerStorage(windowRef)
+  const snapshot = readMusicPlayerSnapshot(storage)
+  let persistTimer: ReturnType<typeof setTimeout> | undefined
+  let unsubscribePersistence: (() => void) | undefined
   let store: MusicPlayerStore
+  const persist = () => {
+    if (!storage || !store) return
+    const state = store.getState()
+    try {
+      storage.setItem(MUSIC_PLAYER_STORAGE_KEY, JSON.stringify({
+        currentIndex: state.currentIndex,
+        currentTime: state.currentTime,
+        loopMode: state.loopMode,
+        muted: state.muted,
+        volume: state.volume,
+      } satisfies MusicPlayerSnapshot))
+    } catch {}
+  }
+  const queuePersist = () => {
+    if (persistTimer) clearTimeout(persistTimer)
+    persistTimer = setTimeout(persist, 500)
+  }
   store = createMusicPlayerStore({
     ...options,
+    currentIndex: snapshot.currentIndex,
+    currentTime: snapshot.currentTime,
+    loopMode: snapshot.loopMode ?? options.loopMode,
+    muted: snapshot.muted,
+    volume: snapshot.volume ?? options.volume,
     onDestroy: () => {
+      if (persistTimer) clearTimeout(persistTimer)
+      persist()
+      unsubscribePersistence?.()
+      windowRef.removeEventListener('pagehide', persist)
       if (windowRef.musicPlayerViewLifecycle?.store === store) {
         windowRef.musicPlayerViewLifecycle.dispose()
       }
       if (windowRef.__null42MusicPlayerStore === store) delete windowRef.__null42MusicPlayerStore
     },
   })
+  unsubscribePersistence = store.subscribe(queuePersist)
+  windowRef.addEventListener('pagehide', persist)
   windowRef.__null42MusicPlayerStore = store
   return store
+}
+
+function getMusicPlayerStorage(windowRef: MusicPlayerWindow): Storage | undefined {
+  try {
+    return windowRef.localStorage
+  } catch {
+    return undefined
+  }
+}
+
+function readMusicPlayerSnapshot(storage: Storage | undefined): MusicPlayerSnapshot {
+  if (!storage) return {}
+  try {
+    const value = JSON.parse(storage.getItem(MUSIC_PLAYER_STORAGE_KEY) || '{}') as MusicPlayerSnapshot
+    if (!value || typeof value !== 'object') return {}
+    return {
+      currentIndex: Number.isInteger(value.currentIndex) ? value.currentIndex : undefined,
+      currentTime: Number.isFinite(value.currentTime) ? value.currentTime : undefined,
+      loopMode: value.loopMode && ['list', 'one', 'random'].includes(value.loopMode) ? value.loopMode : undefined,
+      muted: typeof value.muted === 'boolean' ? value.muted : undefined,
+      volume: Number.isFinite(value.volume) ? clamp(value.volume!, 0, 1) : undefined,
+    }
+  } catch {
+    return {}
+  }
 }
 
 function formatTime(seconds: number): string {
@@ -310,14 +419,20 @@ function formatTime(seconds: number): string {
   return `${minutes}:${String(remainder).padStart(2, '0')}`
 }
 
+const lyricCache = new Map<string, Array<{ time: number; text: string }>>()
+
 function currentLyric(track: MusicTrack, currentTime: number): string {
   if (!track.lyrics?.trim()) return '暂无歌词'
-  const lines = track.lyrics.split(/\r?\n/).flatMap((line) => {
-    const match = line.match(/^\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\](.*)$/)
-    if (!match) return []
-    const fraction = match[3] ? Number(`0.${match[3]}`) : 0
-    return [{ time: Number(match[1]) * 60 + Number(match[2]) + fraction, text: match[4].trim() }]
-  }).filter(line => line.text)
+  let lines = lyricCache.get(track.id)
+  if (!lines) {
+    lines = track.lyrics.split(/\r?\n/).flatMap((line) => {
+      const match = line.match(/^\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\](.*)$/)
+      if (!match) return []
+      const fraction = match[3] ? Number(`0.${match[3]}`) : 0
+      return [{ time: Number(match[1]) * 60 + Number(match[2]) + fraction, text: match[4].trim() }]
+    }).filter(line => line.text)
+    lyricCache.set(track.id, lines)
+  }
   let active = lines[0]?.text ?? '暂无歌词'
   for (const line of lines) {
     if (line.time > currentTime) break
@@ -340,13 +455,19 @@ export function bindMusicPlayerView(root: HTMLElement, store: MusicPlayerStore):
   const toggle = root.querySelector<HTMLButtonElement>('[data-music-action="toggle"]')
   const mute = root.querySelector<HTMLButtonElement>('[data-music-action="mute"]')
 
+  const loadingStatus = root.querySelector<HTMLElement>(`[data-music-loading]`)
+  const trackItems = [...root.querySelectorAll<HTMLElement>(`[data-track-index]`)]
+
   const unsubscribe = store.subscribe((state) => {
     root.dataset.musicPlaying = String(state.playing)
+    root.dataset.musicLoading = String(state.loading)
+    root.setAttribute(`aria-busy`, String(state.loading))
     if (title) title.textContent = state.track.title
     if (artist) artist.textContent = state.track.artist
     if (current) current.textContent = formatTime(state.currentTime)
     if (duration) duration.textContent = formatTime(state.duration)
-    if (loop) loop.textContent = state.loopMode
+    if (loop) loop.textContent = ({ list: `列表`, one: `单曲`, random: `随机` } as const)[state.loopMode]
+    if (loadingStatus) loadingStatus.hidden = !state.loading
     if (lyrics) lyrics.textContent = currentLyric(state.track, state.currentTime)
     if (errorStatus) {
       errorStatus.textContent = state.error ?? ''
@@ -361,7 +482,7 @@ export function bindMusicPlayerView(root: HTMLElement, store: MusicPlayerStore):
     toggle?.setAttribute('aria-label', state.playing ? '暂停' : '播放')
     if (toggle) toggle.textContent = state.playing ? '⏸' : '▶'
     mute?.setAttribute('aria-pressed', String(state.muted))
-    root.querySelectorAll<HTMLElement>('[data-track-index]').forEach((item) => {
+    trackItems.forEach((item) => {
       item.toggleAttribute('data-active', Number(item.dataset.trackIndex) === state.currentIndex)
     })
   })

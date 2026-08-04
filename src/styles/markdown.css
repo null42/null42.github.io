@@ -3,6 +3,65 @@
 .custom-md {
   overflow-wrap: break-word;
 
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    scroll-margin-top: 6rem;
+  }
+
+  p {
+    line-height: 1.85;
+  }
+
+  li + li {
+    margin-top: 0.32em;
+  }
+
+  figure {
+    margin-block: 1.75rem;
+  }
+
+  figure img {
+    border-radius: calc(var(--radius-large) - 0.35rem);
+    box-shadow: 0 0.9rem 2.4rem color-mix(in srgb, #102a31 13%, transparent);
+  }
+
+  figcaption {
+    margin-top: 0.65rem;
+    color: var(--meta-divider);
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  details {
+    margin-block: 1rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line-divider);
+    border-radius: calc(var(--radius-large) - 0.4rem);
+    background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  }
+
+  summary {
+    cursor: pointer;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  kbd {
+    padding: 0.12rem 0.38rem;
+    border: 1px solid var(--line-divider);
+    border-bottom-width: 2px;
+    border-radius: 0.35rem;
+    background: var(--btn-regular-bg);
+    font: 0.82em var(--font-jetbrains-mono), ui-monospace, monospace;
+  }
+
   body.sticky-navbar & {
     [id] {
       scroll-margin-top: 5.5rem;

@@ -483,6 +483,7 @@ const isEpub = manifest.kind === "epub"
 		let currentBlobUrls: string[] = []
 		// 加载锁：防止快速切换章节时并发加载导致内容错乱
 		let loadingSegmentIndex = -1
+		let activeSegmentRequest: AbortController | null = null
 
 		// 监听解锁事件
 		document.addEventListener("private-reader:unlocked", async (event: any) => {
@@ -520,17 +521,17 @@ const isEpub = manifest.kind === "epub"
 			loadingEl?.classList.add("hidden")
 			contentEl?.classList.remove("hidden")
 
-			// 加载第一段
-			await loadSegment(0)
-			// 构建 TOC
-			buildToc()
-			// 应用持久化设置
 			applyPersistedSettings()
+			buildToc()
+			const savedSegment = loadProgress()
+			const initialSegment = savedSegment >= 0 && savedSegment < totalSegments ? savedSegment : 0
+			await loadSegment(initialSegment)
 		})
 
 		async function fetchManifest(slug: string): Promise<any> {
 			try {
 				const res = await fetch(`/private-reader/${slug}/manifest.json`)
+				if (!res.ok) throw new Error(`HTTP ${res.status}`)
 				return await res.json()
 			} catch {
 				return null
@@ -543,6 +544,9 @@ const isEpub = manifest.kind === "epub"
 			if (!seg) return
 			// 加载锁：如果用户快速切换，取消旧的加载（通过比较 index）
 			loadingSegmentIndex = index
+			activeSegmentRequest?.abort()
+			const requestController = new AbortController()
+			activeSegmentRequest = requestController
 
 			// 1. 淡出旧内容（仅当内容已显示时）
 			if (contentEl && !contentEl.classList.contains("hidden")) {
@@ -567,7 +571,8 @@ const isEpub = manifest.kind === "epub"
 
 		try {
 			// 4. fetch + 解密
-			const res = await fetch(`/private-reader/${slug}/${seg.file}`)
+			const res = await fetch(`/private-reader/${slug}/${seg.file}`, { signal: requestController.signal })
+			if (!res.ok) throw new Error(`HTTP ${res.status}`)
 			const ciphertextBase64 = await res.text()
 			// 期间用户又切换了，放弃渲染
 			if (loadingSegmentIndex !== index) return
@@ -614,11 +619,14 @@ const isEpub = manifest.kind === "epub"
 				preloadSegment(index + 1)
 			} catch (err) {
 				if (loadingSegmentIndex !== index) return
+				if (err instanceof DOMException && err.name === "AbortError") return
 				loadingEl?.classList.add("hidden")
 				if (contentEl) {
 					contentEl.classList.remove("hidden", "fading")
 					contentEl.textContent = "段加载失败"
 				}
+			} finally {
+				if (activeSegmentRequest === requestController) activeSegmentRequest = null
 			}
 		}
 
@@ -846,11 +854,6 @@ const isEpub = manifest.kind === "epub"
 					if (prefs.margin) applyMargin(prefs.margin)
 				}
 			} catch {}
-			// 恢复进度
-			const savedSeg = loadProgress()
-			if (savedSeg > 0 && savedSeg < totalSegments) {
-				loadSegment(savedSeg)
-			}
 		}
 
 		function savePrefs(prefs: any): void {
@@ -869,6 +872,8 @@ const isEpub = manifest.kind === "epub"
 		}
 
 		function applyFontSize(size: number): void {
+			const input = host?.querySelector<HTMLInputElement>(`[data-font-size]`)
+			if (input) input.value = String(size)
 			host?.style.setProperty("--reader-font-size", `${size}px`)
 			const valEl = host?.querySelector<HTMLElement>("[data-font-size-value]")
 			if (valEl) valEl.textContent = String(size)
@@ -876,6 +881,8 @@ const isEpub = manifest.kind === "epub"
 		}
 
 		function applyLineHeight(lh: number): void {
+			const input = host?.querySelector<HTMLInputElement>(`[data-line-height]`)
+			if (input) input.value = String(lh)
 			host?.style.setProperty("--reader-line-height", String(lh))
 			const valEl = host?.querySelector<HTMLElement>("[data-line-height-value]")
 			if (valEl) valEl.textContent = String(lh)
@@ -883,6 +890,8 @@ const isEpub = manifest.kind === "epub"
 		}
 
 		function applyMargin(m: number): void {
+			const input = host?.querySelector<HTMLInputElement>(`[data-margin]`)
+			if (input) input.value = String(m)
 			host?.style.setProperty("--reader-margin", `${m}rem`)
 			const valEl = host?.querySelector<HTMLElement>("[data-margin-value]")
 			if (valEl) valEl.textContent = String(m)
@@ -935,6 +944,16 @@ const isEpub = manifest.kind === "epub"
 		})
 
 		// 键盘导航
+		document.addEventListener(`keydown`, (event) => {
+			const target = event.target as HTMLElement | null
+			if (event.key === `Escape`) {
+				tocDrawer?.classList.add(`hidden`)
+				settingsDrawer?.classList.add(`hidden`)
+			}
+			if (event.ctrlKey || event.metaKey || event.altKey || target?.matches(`input, textarea, select, [contenteditable=true]`)) {
+				event.stopImmediatePropagation()
+			}
+		}, { capture: true })
 		document.addEventListener("keydown", (e) => {
 			if (e.key === "ArrowLeft" && currentSegment > 0) loadSegment(currentSegment - 1)
 			if (e.key === "ArrowRight" && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)

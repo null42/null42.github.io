@@ -32,6 +32,7 @@ const tracks: MusicTrack[] = [
 afterEach(() => {
   window.musicPlayerViewLifecycle?.dispose()
   delete window.__null42MusicPlayerStore
+  window.localStorage.clear()
   document.body.innerHTML = ''
   vi.restoreAllMocks()
 })
@@ -187,7 +188,25 @@ describe('real local music player', () => {
     store.cycleLoopMode()
     expect(store.getState().loopMode).toBe('random')
     audio.dispatchEvent(new Event('ended'))
-    expect(store.getState().currentIndex).toBe(0)
+    expect(store.getState().currentIndex).toBe(1)
+  })
+
+  it('restarts the current track before moving to the previous one', () => {
+    const audio = new FakeAudio()
+    const store = createMusicPlayerStore({ tracks, audio, currentIndex: 1 })
+    audio.currentTime = 12
+    store.previous()
+    expect(store.getState().currentIndex).toBe(1)
+    expect(audio.currentTime).toBe(0)
+  })
+
+  it('reports buffering and ready states', () => {
+    const audio = new FakeAudio()
+    const store = createMusicPlayerStore({ tracks, audio })
+    audio.dispatchEvent(new Event(`waiting`))
+    expect(store.getState().loading).toBe(true)
+    audio.dispatchEvent(new Event(`canplay`))
+    expect(store.getState().loading).toBe(false)
   })
 
   it('rejects remote track sources', () => {
@@ -216,6 +235,22 @@ describe('real local music player', () => {
     const second = getGlobalMusicPlayerStore({ tracks, audio: new FakeAudio(), window })
     expect(second).toBe(first)
     expect(second.getState().track.id).toBe('second')
+  })
+
+  it('restores safe playback preferences from local storage', () => {
+    window.localStorage.setItem('null42:music-player:v1', JSON.stringify({
+      currentIndex: 1,
+      currentTime: 42,
+      loopMode: 'one',
+      muted: true,
+      volume: 0.35,
+    }))
+    const audio = new FakeAudio()
+    const store = getGlobalMusicPlayerStore({ tracks, audio, window })
+    audio.dispatchEvent(new Event('loadedmetadata'))
+
+    expect(store.getState()).toMatchObject({ currentIndex: 1, currentTime: 42, loopMode: 'one', muted: true, volume: 0.35 })
+    expect(audio.currentTime).toBe(42)
   })
 
   it('creates a fresh global store after the previous store is destroyed', () => {

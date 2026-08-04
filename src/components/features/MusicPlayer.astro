@@ -40,6 +40,8 @@ const tracks = musicPlayerConfig.local.playlist;
 		<div class="music-player__lyrics" data-music-lyrics aria-live="polite">暂无歌词</div>
 		<p class="music-player__error" data-music-error role="status" aria-live="polite" hidden></p>
 
+		<p class="music-player__loading" data-music-loading role="status" aria-live="polite">正在缓冲音频…</p>
+
 		{full && (
 			<div class="music-player__playlist" aria-label="播放列表">
 				<h2>播放列表</h2>
@@ -59,6 +61,7 @@ const tracks = musicPlayerConfig.local.playlist;
 	.music-player__disc{display:grid;place-items:center;width:4.25rem;aspect-ratio:1;border-radius:50%;color:white;background:radial-gradient(circle at 50% 50%,#26353a 0 14%,#b86f80 15% 19%,#2d383d 20% 48%,#77b8a9 49% 52%,#222d31 53%);box-shadow:0 .75rem 1.8rem rgba(23,43,45,.2)}
 	.music-player[data-music-playing="true"] .music-player__disc{animation:music-spin 8s linear infinite}
 	.music-player__body{min-width:0;display:grid;gap:.8rem}
+	.music-player[data-music-loading="true"] .music-player__disc{animation:music-pulse 1.2s ease-in-out infinite alternate}
 	.music-player__heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 	.music-player__heading>div{min-width:0;display:grid;gap:.15rem}
 	.music-player__heading strong,.music-player__heading span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -73,6 +76,7 @@ const tracks = musicPlayerConfig.local.playlist;
 	.music-player__controls [data-music-volume]{width:5.5rem}
 	.music-player__lyrics{min-height:1.4rem;padding:.45rem .7rem;border-radius:.7rem;background:color-mix(in srgb,var(--primary) 8%,transparent);font-size:.8rem;color:var(--primary)}
 	.music-player__error{margin:0;color:#dc2626;font-size:.78rem}
+	.music-player__loading{margin:0;color:var(--meta-divider);font-size:.75rem}
 	.music-player--full{grid-template-columns:8rem minmax(0,1fr);padding:clamp(1rem,3vw,2rem)}
 	.music-player--full .music-player__disc{width:8rem}
 	.music-player__playlist{display:grid;gap:.6rem;margin-top:.5rem}
@@ -81,6 +85,7 @@ const tracks = musicPlayerConfig.local.playlist;
 	.music-player__playlist button[data-active]{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,transparent)}
 	.music-player__playlist small{color:var(--meta-divider)}
 	@keyframes music-spin{to{transform:rotate(360deg)}}
+	@keyframes music-pulse{to{transform:scale(.94);filter:saturate(.72)}}
 	@media(max-width:42rem){.music-player,.music-player--full{grid-template-columns:1fr}.music-player__disc,.music-player--full .music-player__disc{width:5rem}.music-player__heading{align-items:center}.music-player__controls [data-music-volume]{flex:1;min-width:5rem}}
-	@media(prefers-reduced-motion:reduce){.music-player[data-music-playing="true"] .music-player__disc{animation:none}}
+	@media(prefers-reduced-motion:reduce){.music-player[data-music-playing="true"] .music-player__disc,.music-player[data-music-loading="true"] .music-player__disc{animation:none}}
 </style>
