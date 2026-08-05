@@ -34,6 +34,17 @@ const postsCollection = defineCollection({
 		order: z.number().optional().default(0),
 		difficulty: z.string().optional(),
 		quality: z.string().optional(),
+		codeFiles: z.array(z.object({
+			path: z.string().min(1),
+			label: z.string().optional(),
+			language: z.string().optional(),
+		})).optional().default([]),
+		codeSync: z.array(z.object({
+			headingId: z.string().min(1),
+			file: z.string().min(1),
+			lines: z.string().regex(/^\d+(?:-\d+)?$/),
+			label: z.string().optional(),
+		})).optional().default([]),
 
 		/* For internal use */
 		prevTitle: z.string().default(""),

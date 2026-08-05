@@ -242,10 +242,11 @@ const verifyField = isV2
 	 * 3. 解密 verifyField 验证密码正确性
 	 * 4. 验证成功 → 隐藏密码门，显示阅读器，派发 unlocked 事件
 	 */
-	import { initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
+	import { getPrivateReaderSession, initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
 
 	const shell = document.querySelector<HTMLElement>("[data-private-reader='shell']")
-	if (shell) {
+	if (shell && shell.dataset.privateReaderReady !== "true") {
+		shell.dataset.privateReaderReady = "true"
 		const slug = shell.getAttribute("data-slug") || ""
 		const schema = shell.getAttribute("data-schema") || "v1"
 		const bookSalt = shell.getAttribute("data-book-salt") || ""
@@ -260,6 +261,7 @@ const verifyField = isV2
 		const statusEl = shell.querySelector<HTMLElement>("[data-password-status]")
 
 		const lifecycle = initPrivateReaderLifecycle()
+		const session = getPrivateReaderSession()
 		;(window as Window & { privateReaderLifecycle?: any }).privateReaderLifecycle = lifecycle
 
 		const showStatus = (msg: string) => {
@@ -292,12 +294,14 @@ const verifyField = isV2
 				}
 
 				if (!verified) {
+					if (session.bookPassword === password) delete session.bookPassword
 					hideStatus()
 					showError()
 					return
 				}
 
 				// 解密成功，切换到阅读器
+				session.bookPassword = password
 				if (input) input.value = ""
 				hideStatus()
 				if (gateWrapper) gateWrapper.classList.add("hidden")
@@ -321,12 +325,9 @@ const verifyField = isV2
 			if (pwd) unlock(pwd)
 		})
 
-		// 离开路由时 dispose
-		window.addEventListener("beforeunload", () => {
-			lifecycle.dispose()
-		})
-		window.addEventListener("swup:leave:page", () => {
-			lifecycle.dispose()
-		})
+		if (session.bookPassword) {
+			if (input) input.value = session.bookPassword
+			queueMicrotask(() => void unlock(session.bookPassword || ""))
+		}
 	}
 </script>

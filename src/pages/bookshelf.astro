@@ -352,37 +352,6 @@ const booksByCategory = categories.map(cat => ({
 </style>
 
 <script>
-	/**
-	 * 公开书架：搜索过滤 + 随机打开
-	 *
-	 * 搜索：匹配 data-search-text（标题+描述，已转小写）
-	 * 随机：从可见书中随机选一本跳转
-	 */
-	const searchInput = document.querySelector<HTMLInputElement>("[data-bookshelf-search]")
-	const randomBtn = document.querySelector<HTMLButtonElement>("[data-bookshelf-random]")
-	const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-bookshelf-card]"))
-	const categories = Array.from(document.querySelectorAll<HTMLElement>("[data-bookshelf-category]"))
-
-	const applySearch = () => {
-		const query = (searchInput?.value || "").trim().toLowerCase()
-		for (const card of cards) {
-			const text = card.getAttribute("data-search-text") || ""
-			card.classList.toggle("hidden-by-search", !!query && !text.includes(query))
-		}
-		// 隐藏没有可见卡片的分类
-		for (const cat of categories) {
-			const visible = cat.querySelectorAll<HTMLElement>("[data-bookshelf-card]:not(.hidden-by-search)")
-			cat.classList.toggle("hidden-by-search", visible.length === 0)
-		}
-	}
-
-	searchInput?.addEventListener("input", applySearch)
-
-	randomBtn?.addEventListener("click", () => {
-		const visible = cards.filter(c => !c.classList.contains("hidden-by-search"))
-		if (visible.length === 0) return
-		const pick = visible[Math.floor(Math.random() * visible.length)]
-		const slug = pick.getAttribute("data-slug")
-		if (slug) window.location.href = `/bookshelf/${slug}/`
-	})
+	import { initBookshelfController } from "@/utils/bookshelf-controller";
+	initBookshelfController();
 </script>

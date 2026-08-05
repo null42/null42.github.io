@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root { color-scheme: light dark; font-family: Inter, "Microsoft YaHei", sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: radial-gradient(circle at top left,#39c6b7 0,transparent 34%),linear-gradient(135deg,#101722,#1b2635); color:#edf7f6; }
+    main { width:min(760px,calc(100% - 2rem)); padding:clamp(1.5rem,5vw,3rem); border:1px solid #ffffff2b; border-radius:24px; background:#101722d9; box-shadow:0 24px 80px #0007; }
+    h1 { margin:0 0 .7rem; font-size:clamp(2rem,7vw,4rem); }
+    p { line-height:1.8; color:#bfd0d2; }
+    button { border:0; border-radius:999px; padding:.8rem 1.2rem; background:#62e1cf; color:#09201d; font-weight:800; cursor:pointer; }
+    output { display:block; margin-top:1rem; min-height:1.5em; color:#ffe28a; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>HTML &times; Static</h1>
+    <p>&#36825;&#26159;&#19968;&#20010;&#30452;&#25509;&#30001;&#38745;&#24577;&#31449;&#25176;&#31649;&#30340; HTML &#25991;&#26723;&#12290;CSS&#12289;JavaScript &#21644;&#34920;&#21333;&#20132;&#20114;&#22343;&#22312;&#38548;&#31163;&#30340;&#38405;&#35835;&#26694;&#20013;&#36816;&#34892;&#12290;</p>
+    <button id="demo" type="button">&#36816;&#34892;&#20132;&#20114;</button>
+    <output id="result" aria-live="polite"></output>
+  </main>
+  <script>
+    document.querySelector('#demo').addEventListener('click', () => {
+      document.querySelector('#result').textContent = `JavaScript OK - ${new Date().toLocaleTimeString()}`;
+    });
+  </script>
+</body>
+</html>

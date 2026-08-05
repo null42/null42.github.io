@@ -1,0 +1,28 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+export function getStaticPaths() {
+	const contentRoot = path.resolve("content/html");
+	if (!fs.existsSync(contentRoot)) return [];
+	const paths: Array<{ params: { slug: string }; props: { html: string } }> = [];
+	const walk = (directory: string) => {
+		for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+			const absolutePath = path.join(directory, entry.name);
+			if (entry.isDirectory()) walk(absolutePath);
+			else if (entry.isFile() && entry.name.toLowerCase().endsWith(".html")) {
+				const relative = path.relative(contentRoot, absolutePath).replace(/\\/g, "/");
+				const bridge = `<script>(()=>{const send=()=>parent.postMessage({type:"null42:html-resize",height:Math.max(640,document.documentElement.scrollHeight)},"*");addEventListener("load",send);addEventListener("resize",send);new ResizeObserver(send).observe(document.documentElement);send()})();<\/script>`;
+				const source = fs.readFileSync(absolutePath, "utf8");
+				const html = /<\/body>/i.test(source) ? source.replace(/<\/body>/i, `${bridge}</body>`) : `${source}${bridge}`;
+				paths.push({ params: { slug: relative.replace(/\.html$/i, "") }, props: { html } });
+			}
+		}
+	};
+	walk(contentRoot);
+	return paths;
+}
+
+const { html } = Astro.props;
+---
+<Fragment set:html={html} />

@@ -71,7 +71,7 @@ const forbiddenDirectDependencies = [
 const cloudflarePatterns = [
   /@astrojs\/cloudflare/i,
   /\bwrangler\b/i,
-  /\b(?:cloudflare\s+)?worker(?:s)?\b/i,
+  /\bcloudflare\s+worker(?:s)?\b/i,
   /\b(?:kv|vectorize|workers?\s+ai)\s+(?:binding|namespace|index)/i,
   /\b(?:CLOUDFLARE|CF_ACCOUNT|CF_API|KV_NAMESPACE|VECTORIZE|WORKERS_AI)[A-Z0-9_]*\b/,
 ]

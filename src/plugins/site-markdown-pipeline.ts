@@ -21,6 +21,7 @@ import { remarkImageGrid } from "./remark-image-grid.js";
 import { remarkMermaid } from "./remark-mermaid.js";
 import { remarkPlantuml } from "./remark-plantuml.js";
 import rehypeSplitLinks from "./rehype-split-links.mjs";
+import rehypeSourcePageFallback from "./rehype-source-page-fallback.mjs";
 import { remarkPostLinks } from "./remark-post-links.mjs";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
 
@@ -46,6 +47,7 @@ export function createSiteMarkdownProcessorOptions(): { remarkPlugins: any[]; re
 			[rehypeKatex, { katex }],
 			[rehypeCallouts, { theme: siteConfig.post.rehypeCallouts.theme }],
 			rehypeSlug,
+			rehypeSourcePageFallback,
 			rehypeMermaid,
 			rehypePlantuml,
 			rehypeFigure,

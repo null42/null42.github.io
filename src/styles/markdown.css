@@ -62,6 +62,34 @@
     font: 0.82em var(--font-jetbrains-mono), ui-monospace, monospace;
   }
 
+  .source-page-fallback {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+    margin-block: 1.5rem;
+    padding: 1rem;
+    border: 1px dashed color-mix(in srgb, var(--primary) 55%, var(--line-divider));
+    border-radius: calc(var(--radius-large) - 0.25rem);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 10%, var(--card-bg)), var(--card-bg));
+  }
+
+  .source-page-fallback__number {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.55rem;
+    background: var(--primary);
+    color: white;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow: 0 0.7rem 1.6rem color-mix(in srgb, var(--primary) 25%, transparent);
+  }
+
+  .source-page-fallback strong { color: var(--content-text); }
+  .source-page-fallback p { margin: 0.3rem 0 0; color: var(--meta-divider); font-size: 0.84rem; line-height: 1.6; }
+
   body.sticky-navbar & {
     [id] {
       scroll-margin-top: 5.5rem;

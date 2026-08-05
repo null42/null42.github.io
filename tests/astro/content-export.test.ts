@@ -78,6 +78,32 @@ describe('Astro content export', () => {
     }
   })
 
+  it('preserves article code workspace metadata', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-code-workspace-'))
+    fs.mkdirSync(path.join(root, 'content', 'motor'), { recursive: true })
+    fs.writeFileSync(path.join(root, 'content', 'motor', 'topic.md'), `---
+title: Topic
+date: 2026-07-01
+codeFiles:
+  - path: motor/example.c
+    label: example.c
+    language: c
+codeSync:
+  - headingId: implementation
+    file: motor/example.c
+    lines: 4-9
+---
+
+# Topic`, 'utf8')
+
+    await exportAstroContent({ rootDir: root })
+    const output = fs.readFileSync(path.join(root, 'src/content/posts/motor/topic.md'), 'utf8')
+
+    expect(output).toContain('codeFiles:')
+    expect(output).toContain('codeSync:')
+    expect(output).toContain('headingId: implementation')
+  })
+
   it('keeps compatibility hierarchy fields out of exporter calculations', () => {
     const exporter = fs.readFileSync('scripts/astro/export-content.ts', 'utf8')
     expect(exporter).not.toMatch(/parsed\.data\.(?:section|navGroup|chapter|stage)/)
@@ -257,6 +283,17 @@ describe('Astro content export', () => {
     expect(result.body).toContain('> [!WARNING] 注意')
     expect(result.body).toContain('![图](/content/motor/figure.png)')
     expect(result.body).not.toContain('<script>')
+  })
+
+  it('preserves unavailable image syntax for the renderer fallback', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'astro-missing-image-'))
+    fs.mkdirSync(path.join(root, 'content/power/chunks'), { recursive: true })
+    fs.writeFileSync(path.join(root, 'content/power/chunks/topic.md'), '---\ntitle: Topic\ndate: 2026-07-01\n---\n\n![source](../assets/page-snapshots/chapter/page-7.png)', 'utf8')
+
+    await exportAstroContent({ rootDir: root })
+    const output = fs.readFileSync(path.join(root, 'src/content/posts/power/chunks/topic.md'), 'utf8')
+
+    expect(output).toContain('![source](/content/power/assets/page-snapshots/chapter/page-7.png)')
   })
 
   it('copies referenced local assets and reports missing assets', async () => {

@@ -14,6 +14,7 @@
  * - PDF 文件直接从 public/pdfs/ 静态提供，无加密
  */
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import PdfReader from "@/components/readers/PdfReader.astro";
 import { Icon } from "astro-icon/components";
 import fs from "node:fs";
 import path from "node:path";
@@ -65,7 +66,6 @@ export function getStaticPaths() {
 
 const { slug, file, sizeBytes, title, description, category } = Astro.props;
 const pdfUrl = `/pdfs/${file}`;
-const pdfInitialUrl = `${pdfUrl}#page=1`;
 ---
 
 <MainGridLayout title={`书架 · ${title}`} description={description || `在线阅读 ${title}`}>
@@ -90,78 +90,9 @@ const pdfInitialUrl = `${pdfUrl}#page=1`;
 			</p>
 		</header>
 
-		<div class="pdf-reader-toolbar card-base" data-pdf-toolbar>
-			<label class="pdf-reader-page-control">
-				<span>页码</span>
-				<input type="number" min="1" value="1" inputmode="numeric" data-pdf-page />
-			</label>
-			<label class="pdf-reader-view-control">
-				<span>视图</span>
-				<select data-pdf-view>
-					<option value="FitH">适合宽度</option>
-					<option value="Fit">适合页面</option>
-					<option value="100">实际大小</option>
-				</select>
-			</label>
-			<button type="button" data-pdf-fullscreen>全屏阅读</button>
-			<a href={pdfUrl} target="_blank" rel="noopener noreferrer">独立打开</a>
-			<span class="pdf-reader-toolbar-hint">页码会保存在当前设备</span>
-		</div>
-
-		<div class="pdf-reader-viewport card-base" data-pdf-viewport>
-			<iframe
-				class="pdf-reader-iframe"
-				src={pdfInitialUrl}
-				title={title}
-				loading="lazy"
-			></iframe>
-		</div>
+		<PdfReader slug={slug} pdfUrl={pdfUrl} title={title} />
 	</article>
 </MainGridLayout>
-
-<script is:inline define:vars={{ slug, pdfUrl }}>
-	(() => {
-		const iframe = document.querySelector(".pdf-reader-iframe");
-		const pageInput = document.querySelector("[data-pdf-page]");
-		const viewSelect = document.querySelector("[data-pdf-view]");
-		const fullscreenButton = document.querySelector("[data-pdf-fullscreen]");
-		const viewport = document.querySelector("[data-pdf-viewport]");
-		if (!(iframe instanceof HTMLIFrameElement) || !(pageInput instanceof HTMLInputElement) || !(viewSelect instanceof HTMLSelectElement)) return;
-
-		const storageKey = `bookshelf:pdf:${slug}`;
-		const readState = () => {
-			try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch { return {}; }
-		};
-		const saveState = (page, view) => {
-			try { localStorage.setItem(storageKey, JSON.stringify({ page, view })); } catch {}
-		};
-		const applyState = () => {
-			const page = Math.max(1, Number.parseInt(pageInput.value, 10) || 1);
-			const view = viewSelect.value || "FitH";
-			pageInput.value = String(page);
-			iframe.src = `${pdfUrl}#page=${page}&view=${encodeURIComponent(view)}`;
-			saveState(page, view);
-		};
-
-		const saved = readState();
-		if (Number.isFinite(saved.page) && saved.page > 0) pageInput.value = String(saved.page);
-		if (["FitH", "Fit", "100"].includes(saved.view)) viewSelect.value = saved.view;
-		applyState();
-		pageInput.addEventListener("change", applyState);
-		viewSelect.addEventListener("change", applyState);
-		pageInput.addEventListener("keydown", (event) => {
-			if (event.key === "Enter") applyState();
-		});
-		fullscreenButton?.addEventListener("click", async () => {
-			if (!(viewport instanceof HTMLElement)) return;
-			if (document.fullscreenElement) await document.exitFullscreen();
-			else await viewport.requestFullscreen();
-		});
-		document.addEventListener("fullscreenchange", () => {
-			if (fullscreenButton instanceof HTMLButtonElement) fullscreenButton.textContent = document.fullscreenElement ? "退出全屏" : "全屏阅读";
-		});
-	})();
-</script>
 
 <style>
 	.pdf-reader-page {
@@ -217,47 +148,6 @@ const pdfInitialUrl = `${pdfUrl}#page=1`;
 		color: var(--content-meta);
 	}
 
-	.pdf-reader-toolbar {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-		padding: 0.75rem 1rem;
-		position: sticky;
-		top: 4.75rem;
-		z-index: 10;
-		backdrop-filter: blur(16px);
-	}
-
-	.pdf-reader-page-control,
-	.pdf-reader-view-control {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		font-size: 0.82rem;
-		color: var(--content-meta);
-	}
-
-	.pdf-reader-toolbar input,
-	.pdf-reader-toolbar select,
-	.pdf-reader-toolbar button,
-	.pdf-reader-toolbar a {
-		min-height: 2.25rem;
-		border: 1px solid var(--line-divider);
-		border-radius: var(--radius-medium);
-		background: var(--btn-regular-bg);
-		color: var(--content-text);
-		padding: 0.4rem 0.65rem;
-		font: inherit;
-		text-decoration: none;
-	}
-
-	.pdf-reader-toolbar input { width: 5rem; }
-	.pdf-reader-toolbar button { cursor: pointer; }
-	.pdf-reader-toolbar button:hover,
-	.pdf-reader-toolbar a:hover { border-color: var(--primary); color: var(--primary); }
-	.pdf-reader-toolbar-hint { margin-left: auto; color: var(--meta-divider); font-size: 0.75rem; }
-
 	.pdf-reader-cat,
 	.pdf-reader-format {
 		padding: 0.15rem 0.5rem;
@@ -285,36 +175,4 @@ const pdfInitialUrl = `${pdfUrl}#page=1`;
 		opacity: 0.85;
 	}
 
-	.pdf-reader-viewport {
-		padding: 0;
-		overflow: hidden;
-		min-height: 75vh;
-	}
-
-	.pdf-reader-iframe {
-		display: block;
-		width: 100%;
-		height: 80vh;
-		border: 0;
-		background: var(--btn-regular-bg);
-	}
-
-	.pdf-reader-viewport:fullscreen {
-		width: 100vw;
-		height: 100vh;
-		border-radius: 0;
-		background: #202124;
-	}
-
-	.pdf-reader-viewport:fullscreen .pdf-reader-iframe { height: 100vh; }
-
-	@media (max-width: 768px) {
-		.pdf-reader-toolbar { top: 4rem; gap: 0.5rem; }
-		.pdf-reader-toolbar-hint { display: none; }
-		.pdf-reader-page-control,
-		.pdf-reader-view-control { flex: 1 1 auto; }
-		.pdf-reader-iframe {
-			height: 72vh;
-		}
-	}
 </style>

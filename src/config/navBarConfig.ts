@@ -10,11 +10,9 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Tags: { name: "标签", url: "/tags/", icon: "material-symbols:tag-rounded" },
 	Search: { name: "搜索", url: "/search/", icon: "material-symbols:search-rounded" },
 	About: { name: "关于", url: "/about/", icon: "material-symbols:person" },
-	Friends: { name: "友链", url: "/friends/", icon: "material-symbols:group", pageKey: "friends" },
 	Gallery: { name: "相册", url: "/gallery/", icon: "material-symbols:photo-album-outline", pageKey: "gallery" },
-	Sponsor: { name: "打赏", url: "/sponsor/", icon: "material-symbols:favorite", pageKey: "sponsor" },
-	Guestbook: { name: "留言板", url: "/guestbook/", icon: "material-symbols:chat-outline", pageKey: "guestbook" },
 	Bookshelf: { name: "书架", url: "/bookshelf/", icon: "material-symbols:menu-book-outline" },
+	HtmlDocs: { name: "HTML 文档", url: "/html/", icon: "material-symbols:html-rounded" },
 };
 
 const articleMenu: NavBarLink = {
@@ -26,9 +24,9 @@ const articleMenu: NavBarLink = {
 
 const moreMenu: NavBarLink = {
 	name: "更多",
-	url: "/friends/",
+	url: "/bookshelf/",
 	icon: "material-symbols:apps",
-	children: [LinkPresets.Friends, LinkPresets.Gallery, LinkPresets.Bookshelf, LinkPresets.Sponsor, LinkPresets.Guestbook],
+	children: [LinkPresets.Bookshelf, LinkPresets.HtmlDocs, LinkPresets.Gallery],
 };
 
 export const navBarConfig: NavBarConfig = {

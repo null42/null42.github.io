@@ -4342,22 +4342,16 @@
       "finalUrl": "/data/allPostMeta.json"
     },
     {
-      "path": "/friends/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/friends/"
-    },
-    {
       "path": "/gallery/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/gallery/"
     },
     {
-      "path": "/guestbook/",
+      "path": "/html/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/guestbook/"
+      "finalUrl": "/html/"
     },
     {
       "path": "/index.html",
@@ -7798,12 +7792,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/search/"
-    },
-    {
-      "path": "/sponsor/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/sponsor/"
     },
     {
       "path": "/tags/",

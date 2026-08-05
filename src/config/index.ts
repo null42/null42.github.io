@@ -21,9 +21,6 @@ export type {
 	SakuraConfig,
 	SidebarLayoutConfig,
 	SiteConfig,
-	SponsorConfig,
-	SponsorItem,
-	SponsorMethod,
 	WidgetComponentConfig,
 	WidgetComponentType,
 	WidgetSpecificConfig,
@@ -45,7 +42,6 @@ export { sakuraConfig } from "./effectsConfig"; // 动画特效配置（樱花�
 export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮配置
 export { fontConfig, fontsList } from "./fontConfig"; // 字体配置
 export { footerConfig } from "./footerConfig"; // 页脚配置
-export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
 export { galleryConfig } from "./galleryConfig"; // 相册配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
 // 组件配置
@@ -58,4 +54,3 @@ export { profileConfig } from "./profileConfig"; // 用户资料配置
 export { sidebarLayoutConfig } from "./sidebarConfig"; // 侧边栏布局配置
 // 核心配置
 export { siteConfig } from "./siteConfig"; // 站点基础配置
-export { sponsorConfig } from "./sponsorConfig"; // 打赏配置

@@ -1,0 +1,135 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+interface CodeFileConfig { path: string; label?: string; language?: string }
+interface CodeSyncConfig { headingId: string; file: string; lines: string; label?: string }
+interface Props { files?: CodeFileConfig[]; sync?: CodeSyncConfig[] }
+
+const { files = [], sync = [] } = Astro.props;
+const contentRoot = path.resolve("content");
+const loadedFiles = files.map((file) => {
+	const absolutePath = path.resolve(contentRoot, file.path);
+	const relative = path.relative(contentRoot, absolutePath);
+	if (relative.startsWith("..") || path.isAbsolute(relative)) throw new Error(`Code file escaped content root: ${file.path}`);
+	if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isFile()) throw new Error(`Article code file not found: content/${file.path}`);
+	return { ...file, label: file.label || path.basename(file.path), lines: fs.readFileSync(absolutePath, "utf8").replace(/\r\n/g, "\n").split("\n") };
+});
+const hasWorkspace = loadedFiles.length > 0;
+---
+
+{hasWorkspace && (
+	<div class="article-code-workspace" data-code-workspace>
+		<button class="code-workspace-launch" type="button" data-code-open aria-expanded="false">代码联动</button>
+		<aside class="code-workspace-panel" data-code-panel aria-label="文章关联代码" aria-hidden="true">
+			<header class="code-workspace-header">
+				<div><strong>文章 × 代码</strong><span data-code-context>随文章滚动自动定位</span></div>
+				<button type="button" data-code-close aria-label="关闭代码面板">×</button>
+			</header>
+			<nav class="code-workspace-tabs" aria-label="代码文件">
+				{loadedFiles.map((file, index) => <button type="button" data-code-tab={file.path} class:list={{ active: index === 0 }}>{file.label}</button>)}
+			</nav>
+			<div class="code-workspace-files">
+				{loadedFiles.map((file, index) => (
+					<pre data-code-file={file.path} class:list={{ active: index === 0 }} aria-label={file.label}><code>{file.lines.map((line, lineIndex) => <span class="code-workspace-line" data-code-line={lineIndex + 1}><i>{lineIndex + 1}</i><b>{line || " "}</b></span>)}</code></pre>
+				))}
+			</div>
+			<script is:inline type="application/json" data-code-sync set:html={JSON.stringify(sync)}></script>
+		</aside>
+	</div>
+)}
+
+<script>
+	type SyncConfig = { headingId: string; file: string; lines: string; label?: string };
+	const initCodeWorkspaces = () => {
+			document.querySelectorAll<HTMLElement>("[data-code-workspace]:not([data-code-ready])").forEach((root) => {
+			root.dataset.codeReady = "true";
+			const eventController = new AbortController();
+			const panel = root.querySelector<HTMLElement>("[data-code-panel]");
+			const openButton = root.querySelector<HTMLButtonElement>("[data-code-open]");
+			const context = root.querySelector<HTMLElement>("[data-code-context]");
+			const syncNode = root.querySelector<HTMLScriptElement>("[data-code-sync]");
+			const sync = JSON.parse(syncNode?.textContent || "[]") as SyncConfig[];
+			const setOpen = (open: boolean) => {
+				panel?.setAttribute("aria-hidden", String(!open));
+				openButton?.setAttribute("aria-expanded", String(open));
+				document.body.classList.toggle("code-workspace-active", open);
+			};
+			const activate = (file: string, lines = "", label = "") => {
+				root.querySelectorAll<HTMLElement>("[data-code-file]").forEach((node) => node.classList.toggle("active", node.dataset.codeFile === file));
+				root.querySelectorAll<HTMLElement>("[data-code-tab]").forEach((node) => node.classList.toggle("active", node.dataset.codeTab === file));
+				root.querySelectorAll<HTMLElement>("[data-code-line]").forEach((node) => node.classList.remove("highlighted", "highlight-start", "highlight-end"));
+				const [startRaw, endRaw] = lines.split("-");
+				const start = Number(startRaw);
+				const end = Number(endRaw || startRaw);
+				const activeFile = root.querySelector<HTMLElement>(`[data-code-file="${CSS.escape(file)}"]`);
+				if (activeFile && Number.isFinite(start)) {
+					for (let line = start; line <= end; line += 1) activeFile.querySelector<HTMLElement>(`[data-code-line="${line}"]`)?.classList.add("highlighted");
+					activeFile.querySelector<HTMLElement>(`[data-code-line="${start}"]`)?.classList.add("highlight-start");
+					activeFile.querySelector<HTMLElement>(`[data-code-line="${end}"]`)?.classList.add("highlight-end");
+					activeFile.querySelector<HTMLElement>(`[data-code-line="${start}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+				}
+				if (context) context.textContent = label || (lines ? `高亮 ${lines} 行` : "手动浏览");
+			};
+			openButton?.addEventListener("click", () => setOpen(panel?.getAttribute("aria-hidden") === "true"), { signal: eventController.signal });
+			root.querySelector("[data-code-close]")?.addEventListener("click", () => setOpen(false), { signal: eventController.signal });
+			root.querySelectorAll<HTMLButtonElement>("[data-code-tab]").forEach((button) => button.addEventListener("click", () => activate(button.dataset.codeTab || ""), { signal: eventController.signal }));
+			const observer = new IntersectionObserver((entries) => {
+				const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+				if (!visible) return;
+				const match = sync.find((item) => item.headingId === visible.target.id);
+				if (match) { setOpen(true); activate(match.file, match.lines, match.label || visible.target.textContent || ""); }
+			}, { rootMargin: "-10% 0px -40% 0px", threshold: 0 });
+			for (const item of sync) { const heading = document.getElementById(item.headingId); if (heading) observer.observe(heading); }
+			let scrollFrame = 0;
+			const syncFromScroll = () => {
+				cancelAnimationFrame(scrollFrame);
+				scrollFrame = requestAnimationFrame(() => {
+					const focusLine = window.innerHeight * 0.32;
+					const candidate = sync
+						.map((item) => ({ item, heading: document.getElementById(item.headingId) }))
+						.filter((entry): entry is { item: SyncConfig; heading: HTMLElement } => Boolean(entry.heading))
+						.map((entry) => ({ ...entry, distance: Math.abs(entry.heading.getBoundingClientRect().top - focusLine) }))
+						.sort((left, right) => left.distance - right.distance)[0];
+					if (!candidate || candidate.distance > window.innerHeight * 0.65) return;
+					setOpen(true);
+					activate(candidate.item.file, candidate.item.lines, candidate.item.label || candidate.heading.textContent || "");
+				});
+			};
+			window.addEventListener("scroll", syncFromScroll, { passive: true, signal: eventController.signal });
+			window.addEventListener("resize", syncFromScroll, { passive: true, signal: eventController.signal });
+			syncFromScroll();
+			document.addEventListener("keydown", (event) => { if (event.key === "Escape" && document.body.classList.contains("code-workspace-active")) setOpen(false); }, { signal: eventController.signal });
+			window.addEventListener("swup:leave:page", () => {
+				observer.disconnect();
+				document.body.classList.remove("code-workspace-active");
+				eventController.abort();
+			}, { once: true, signal: eventController.signal });
+		});
+	};
+	initCodeWorkspaces();
+	window.swup?.hooks?.on("page:view", initCodeWorkspaces);
+</script>
+
+<style>
+	.code-workspace-launch { position: fixed; right: 1rem; bottom: 5.5rem; z-index: 60; border: 0; border-radius: 999px; padding: .75rem 1rem; background: var(--primary); color: white; font-weight: 800; box-shadow: 0 .8rem 2rem color-mix(in srgb,var(--primary) 35%,transparent); cursor: pointer; }
+	.code-workspace-panel { position: fixed; inset: 4.5rem 0 0 auto; z-index: 70; display: grid; grid-template-rows: auto auto minmax(0,1fr); width: min(50vw, 56rem); background: #11161d; color: #e5edf5; border-left: 1px solid rgba(255,255,255,.14); box-shadow: -1.2rem 0 3rem rgba(0,0,0,.28); transform: translateX(0); transition: transform .24s ease; }
+	.code-workspace-panel[aria-hidden="true"] { transform: translateX(105%); pointer-events: none; }
+	.code-workspace-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 1rem; border-bottom:1px solid rgba(255,255,255,.12); }
+	.code-workspace-header>div { display:grid; gap:.15rem; } .code-workspace-header span { color:#93a4b7; font-size:.75rem; }
+	.code-workspace-header button { border:0; background:transparent; color:white; font-size:1.6rem; cursor:pointer; }
+	.code-workspace-tabs { display:flex; overflow:auto; border-bottom:1px solid rgba(255,255,255,.1); }
+	.code-workspace-tabs button { border:0; border-bottom:2px solid transparent; padding:.65rem .9rem; background:transparent; color:#93a4b7; white-space:nowrap; cursor:pointer; }
+	.code-workspace-tabs button.active { color:white; border-color:#66d9c8; background:rgba(102,217,200,.08); }
+	.code-workspace-files { min-height:0; overflow:hidden; }
+	.code-workspace-files pre { display:none; height:100%; margin:0; overflow:auto; padding:1rem 0 4rem; background:#11161d; font:13px/1.65 var(--font-jetbrains-mono),ui-monospace,monospace; tab-size:4; }
+	.code-workspace-files pre.active { display:block; }
+	.code-workspace-line { display:grid; grid-template-columns:3.5rem minmax(max-content,1fr); min-height:1.65em; padding-right:1rem; }
+	.code-workspace-line i { position:sticky; left:0; padding-right:.8rem; background:#11161d; color:#526173; text-align:right; font-style:normal; user-select:none; }
+	.code-workspace-line b { padding-left:1rem; color:#d8e2ec; font-weight:400; white-space:pre; }
+	.code-workspace-line.highlighted { background:rgba(255,207,102,.14); box-shadow:inset 3px 0 #ffcf66; }
+	.code-workspace-line.highlighted i { background:#282619; color:#ffcf66; }
+	:global(body.code-workspace-active #content-wrapper) { margin-right:min(50vw,56rem); transition:margin-right .24s ease; }
+	@media(max-width:70rem){ .code-workspace-panel{inset:0;width:100vw;} :global(body.code-workspace-active #content-wrapper){margin-right:0;} .code-workspace-launch{bottom:4.75rem;} }
+	@media(prefers-reduced-motion:reduce){.code-workspace-panel,:global(body.code-workspace-active #content-wrapper){transition:none}.code-workspace-line{scroll-behavior:auto}}
+</style>

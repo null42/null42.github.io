@@ -17,7 +17,6 @@ src/config/
 ├── expressiveCodeConfig.ts   # 代码高亮配置
 ├── fontConfig.ts             # 字体配置
 ├── footerConfig.ts           # 页脚配置
-├── friendsConfig.ts          # 友链配置
 ├── galleryConfig.ts          # 相册配置
 ├── licenseConfig.ts          # 许可证配置
 ├── musicConfig.ts            # 音乐播放器配置
@@ -26,7 +25,6 @@ src/config/
 ├── plantumlConfig.ts         # PlantUML 图表配置
 ├── profileConfig.ts          # 用户资料配置
 ├── sidebarConfig.ts          # 侧边栏布局配置
-├── sponsorConfig.ts          # 打赏配置
 └── README.md                 # 本文件
 ```
 
@@ -57,7 +55,6 @@ import { profileConfig } from "@/config/profileConfig";
 | `expressiveCodeConfig.ts` | 代码高亮配置（亮色/暗色主题、折叠、语言徽章） |
 | `fontConfig.ts` | 字体配置（字体列表、回退、预加载） |
 | `footerConfig.ts` | 页脚配置（自定义 HTML 注入，如备案号） |
-| `friendsConfig.ts` | 友链配置（友链列表、页面设置） |
 | `galleryConfig.ts` | 相册配置（相册列表、瀑布流列宽） |
 | `licenseConfig.ts` | 许可证配置（CC 协议等） |
 | `musicConfig.ts` | 音乐播放器配置（Meting API / 本地音乐） |
@@ -66,7 +63,6 @@ import { profileConfig } from "@/config/profileConfig";
 | `plantumlConfig.ts` | PlantUML 图表渲染配置 |
 | `profileConfig.ts` | 用户资料配置（头像、姓名、社交链接） |
 | `sidebarConfig.ts` | 侧边栏布局配置（左侧/右侧/移动端组件列表） |
-| `sponsorConfig.ts` | 打赏配置（打赏方式、打赏者列表） |
 
 ## 📝 说明
 

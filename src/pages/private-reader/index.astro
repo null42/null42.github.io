@@ -142,6 +142,13 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 						spellcheck="false"
 						data-shelf-input
 					/>
+					<input
+						type="password"
+						class="shelf-stage-input"
+						placeholder="阅读密码（与书架密码相同可留空）"
+						autocomplete="off"
+						data-book-session-input
+					/>
 					<button type="submit" class="shelf-stage-submit" data-shelf-submit>
 						解密书名
 					</button>
@@ -561,10 +568,11 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 	 * 2. Shelf 解密：用户输入 shelf 密码 → 派生 shelfKey → 解密所有书名
 	 * 3. 书架交互：TXT/EPUB 分架标签过滤
 	 */
-	import { initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
+	import { getPrivateReaderSession, initPrivateReaderLifecycle } from "@/utils/private-reader-controller"
 
 	const page = document.querySelector<HTMLElement>("[data-private-reader='library']")
-	if (page) {
+	if (page && page.dataset.privateReaderReady !== "true") {
+		page.dataset.privateReaderReady = "true"
 		const carrier = page.querySelector<HTMLElement>(".private-reader-data-carrier")
 		const gateStage = page.querySelector<HTMLElement>("[data-gate-stage]")
 		const shelfStage = page.querySelector<HTMLElement>("[data-shelf-stage]")
@@ -578,6 +586,7 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 
 		const shelfForm = page.querySelector<HTMLFormElement>("[data-shelf-form]")
 		const shelfInput = page.querySelector<HTMLInputElement>("[data-shelf-input]")
+		const bookSessionInput = page.querySelector<HTMLInputElement>("[data-book-session-input]")
 		const shelfSubmit = page.querySelector<HTMLButtonElement>("[data-shelf-submit]")
 		const shelfError = page.querySelector<HTMLElement>("[data-shelf-error]")
 		const shelfStatus = page.querySelector<HTMLElement>("[data-shelf-status]")
@@ -593,6 +602,7 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 			const gateToken = carrier.getAttribute("data-gate-token") || ""
 
 			const lifecycle = initPrivateReaderLifecycle()
+			const session = getPrivateReaderSession()
 			;(window as any).privateReaderLifecycle = lifecycle
 
 			const showStatus = (el: HTMLElement | null, msg: string) => {
@@ -623,11 +633,17 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 						return
 					}
 					// Gate 验证成功，切换到 Shelf 层
+					session.gatePassword = pwd
 					if (gateInput) gateInput.value = ""
 					hideStatus(gateStatus)
 					gateStage.classList.add("hidden")
 					shelfStage.classList.remove("hidden")
 					shelfInput?.focus()
+					if (session.shelfPassword && shelfInput) {
+						shelfInput.value = session.shelfPassword
+						if (bookSessionInput && session.bookPassword) bookSessionInput.value = session.bookPassword
+						queueMicrotask(() => shelfForm?.requestSubmit())
+					}
 				} catch {
 					hideStatus(gateStatus)
 					showError(gateError)
@@ -677,6 +693,8 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 					}
 
 					// Shelf 解密成功，切换到书架
+					session.shelfPassword = pwd
+					session.bookPassword = bookSessionInput?.value.trim() || session.bookPassword || pwd
 					if (shelfInput) shelfInput.value = ""
 					hideStatus(shelfStatus)
 					shelfStage.classList.add("hidden")
@@ -745,9 +763,10 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 			if (slug) window.location.href = `/private-reader/${slug}/`
 		})
 
-		// 离开路由时 dispose
-			window.addEventListener("beforeunload", () => lifecycle.dispose())
-			window.addEventListener("swup:leave:page", () => lifecycle.dispose())
+			if (session.gatePassword && gateInput) {
+				gateInput.value = session.gatePassword
+				queueMicrotask(() => gateForm?.requestSubmit())
+			}
 		}
 	}
 </script>

@@ -139,6 +139,19 @@ describe('generated output privacy scan', () => {
     ]))
   })
 
+  it('allows the explicit static HTML document library while retaining legacy path checks', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generated-html-library-'))
+    fs.mkdirSync(path.join(root, 'content', 'html'), { recursive: true })
+    fs.mkdirSync(path.join(root, 'content', 'encrypted'), { recursive: true })
+    fs.writeFileSync(path.join(root, 'content', 'html', 'demo.html'), '<main>public document</main>', 'utf8')
+    fs.writeFileSync(path.join(root, 'content', 'encrypted', 'demo.html'), '<main>legacy page</main>', 'utf8')
+
+    const result = await scanGeneratedOutput({ rootDir: root, includeTrackedFiles: false })
+
+    expect(result.issues.some((issue) => issue.path === 'content/html/demo.html' && issue.rule === 'forbidden-path')).toBe(false)
+    expect(result.issues.some((issue) => issue.path === 'content/encrypted/demo.html' && issue.rule === 'forbidden-path')).toBe(true)
+  })
+
   it('detects arbitrary Windows drive absolute paths, not only user or workspace paths', () => {
     const workspace = windowsPath('E', 'gitee_CodeStorage', '学习', 'null42.github.io')
     expect(findAbsolutePaths(`leak ${windowsPath('E', 'gitee_CodeStorage', '学习', 'null42.github.io', 'content', 'private.md')}`, workspace)).toHaveLength(1)

@@ -59,14 +59,14 @@ describe('route manifest', () => {
     expect(routes).toEqual(expect.arrayContaining([
       '/2/',
       '/posts/power/getting-started/',
-      '/friends/',
       '/gallery/',
-      '/guestbook/',
-      '/sponsor/',
     ]))
     for (const route of [
       '/anime/',
       '/bangumi/',
+      '/friends/',
+      '/guestbook/',
+      '/sponsor/',
       '/gallery/firefly-2026/',
       '/gallery/encrypted-test/',
     ]) expect(routes).not.toContain(route)
@@ -76,8 +76,11 @@ describe('route manifest', () => {
     for (const file of [
       'src/pages/anime.astro',
       'src/pages/bangumi.astro',
+      'src/pages/friends.astro',
       'src/pages/gallery/index.astro',
       'src/pages/gallery/[album].astro',
+      'src/pages/guestbook.astro',
+      'src/pages/sponsor.astro',
     ]) expect(fs.existsSync(file)).toBe(false)
     for (const file of [
       'public/gallery/encrypted-test/urls.txt',

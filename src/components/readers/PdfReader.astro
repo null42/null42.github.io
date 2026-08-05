@@ -1,0 +1,225 @@
+---
+interface Props {
+	slug: string;
+	pdfUrl: string;
+	title: string;
+}
+
+const { slug, pdfUrl, title } = Astro.props;
+---
+
+<section
+	class="pdfjs-reader card-base"
+	data-pdfjs-reader
+	data-pdf-url={pdfUrl}
+	data-pdf-slug={slug}
+	aria-label={`${title} PDF 阅读器`}
+>
+	<div class="pdfjs-toolbar" role="toolbar" aria-label="PDF 阅读控制">
+		<button type="button" data-pdf-prev aria-label="上一页">上一页</button>
+		<label class="pdfjs-page-field">
+			<span>页</span>
+			<input type="number" min="1" value="1" inputmode="numeric" data-pdf-page aria-label="跳转页码" />
+			<span>/ <strong data-pdf-total>—</strong></span>
+		</label>
+		<button type="button" data-pdf-next aria-label="下一页">下一页</button>
+		<label>
+			<span class="sr-only">缩放方式</span>
+			<select data-pdf-scale aria-label="缩放方式">
+				<option value="width">适合宽度</option>
+				<option value="page">适合整页</option>
+				<option value="1">100%</option>
+				<option value="1.25">125%</option>
+				<option value="1.5">150%</option>
+				<option value="2">200%</option>
+			</select>
+		</label>
+		<button type="button" data-pdf-fullscreen>全屏</button>
+		<a href={pdfUrl} target="_blank" rel="noopener noreferrer">原文件</a>
+	</div>
+
+	<div class="pdfjs-status" data-pdf-status role="status" aria-live="polite">正在加载 PDF…</div>
+	<div class="pdfjs-stage" data-pdf-stage tabindex="0">
+		<canvas data-pdf-canvas aria-label={`${title} 当前页`}></canvas>
+	</div>
+</section>
+
+<script>
+	type PdfDocument = {
+		numPages: number;
+		getPage: (page: number) => Promise<any>;
+		destroy: () => Promise<void>;
+	};
+
+	type PdfRuntime = {
+		GlobalWorkerOptions: { workerSrc: string };
+		getDocument: (options: Record<string, unknown>) => { promise: Promise<PdfDocument> };
+	};
+
+	const runtimeKey = "__null42PdfReaderRuntime";
+	const windowRef = window as Window & typeof globalThis & { [runtimeKey]?: { sync: () => void; hookAttached: boolean } };
+
+	async function loadPdfRuntime(): Promise<PdfRuntime> {
+		const moduleUrl = "/vendor/pdfjs/pdf.min.mjs";
+		const runtime = await import(/* @vite-ignore */ moduleUrl) as unknown as PdfRuntime;
+		runtime.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
+		return runtime;
+	}
+
+	async function bindReader(root: HTMLElement): Promise<void> {
+		if (root.dataset.pdfReady === "true") return;
+		root.dataset.pdfReady = "true";
+		const pdfUrl = root.dataset.pdfUrl || "";
+		const slug = root.dataset.pdfSlug || pdfUrl;
+		const canvas = root.querySelector<HTMLCanvasElement>("[data-pdf-canvas]");
+		const stage = root.querySelector<HTMLElement>("[data-pdf-stage]");
+		const status = root.querySelector<HTMLElement>("[data-pdf-status]");
+		const pageInput = root.querySelector<HTMLInputElement>("[data-pdf-page]");
+		const totalEl = root.querySelector<HTMLElement>("[data-pdf-total]");
+		const scaleSelect = root.querySelector<HTMLSelectElement>("[data-pdf-scale]");
+		const previousButton = root.querySelector<HTMLButtonElement>("[data-pdf-prev]");
+		const nextButton = root.querySelector<HTMLButtonElement>("[data-pdf-next]");
+		const fullscreenButton = root.querySelector<HTMLButtonElement>("[data-pdf-fullscreen]");
+		if (!pdfUrl || !canvas || !stage || !status || !pageInput || !totalEl || !scaleSelect) return;
+
+		const storageKey = `pdf-reader:${slug}`;
+		let pdf: PdfDocument | null = null;
+		let currentPage = 1;
+		let renderTask: { cancel: () => void; promise: Promise<void> } | null = null;
+		let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+		const context = canvas.getContext("2d", { alpha: false });
+		if (!context) return;
+
+		try {
+			const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+			if (Number.isInteger(saved.page) && saved.page > 0) currentPage = saved.page;
+			if (["width", "page", "1", "1.25", "1.5", "2"].includes(saved.scale)) scaleSelect.value = saved.scale;
+		} catch {}
+
+		const persist = () => {
+			try { localStorage.setItem(storageKey, JSON.stringify({ page: currentPage, scale: scaleSelect.value })); } catch {}
+		};
+
+		const render = async () => {
+			if (!pdf || !root.isConnected) return;
+			currentPage = Math.min(pdf.numPages, Math.max(1, currentPage));
+			pageInput.value = String(currentPage);
+			previousButton?.toggleAttribute("disabled", currentPage <= 1);
+			nextButton?.toggleAttribute("disabled", currentPage >= pdf.numPages);
+			status.hidden = false;
+			status.textContent = `正在渲染第 ${currentPage} / ${pdf.numPages} 页…`;
+			renderTask?.cancel();
+			const page = await pdf.getPage(currentPage);
+			const baseViewport = page.getViewport({ scale: 1 });
+			const availableWidth = Math.max(280, stage.clientWidth - 32);
+			const availableHeight = Math.max(360, window.innerHeight - 190);
+			const scaleMode = scaleSelect.value;
+			const scale = scaleMode === "width"
+				? availableWidth / baseViewport.width
+				: scaleMode === "page"
+					? Math.min(availableWidth / baseViewport.width, availableHeight / baseViewport.height)
+					: Number(scaleMode);
+			const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+			const viewport = page.getViewport({ scale: Math.max(0.25, scale) });
+			canvas.width = Math.floor(viewport.width * pixelRatio);
+			canvas.height = Math.floor(viewport.height * pixelRatio);
+			canvas.style.width = `${Math.floor(viewport.width)}px`;
+			canvas.style.height = `${Math.floor(viewport.height)}px`;
+			const task = page.render({ canvasContext: context, viewport, transform: pixelRatio === 1 ? null : [pixelRatio, 0, 0, pixelRatio, 0, 0] }) as { cancel: () => void; promise: Promise<void> };
+			renderTask = task;
+			try {
+				await task.promise;
+				status.hidden = true;
+				persist();
+			} catch (error) {
+				if (!(error instanceof Error) || error.name !== "RenderingCancelledException") throw error;
+			}
+		};
+
+		const goToPage = (page: number) => {
+			if (!pdf) return;
+			currentPage = Math.min(pdf.numPages, Math.max(1, Math.trunc(page) || 1));
+			stage.scrollTo({ top: 0, left: 0, behavior: "auto" });
+			void render();
+		};
+
+		previousButton?.addEventListener("click", () => goToPage(currentPage - 1));
+		nextButton?.addEventListener("click", () => goToPage(currentPage + 1));
+		pageInput.addEventListener("change", () => goToPage(Number(pageInput.value)));
+		pageInput.addEventListener("keydown", (event) => { if (event.key === "Enter") goToPage(Number(pageInput.value)); });
+		scaleSelect.addEventListener("change", () => void render());
+		fullscreenButton?.addEventListener("click", async () => {
+			if (document.fullscreenElement === root) await document.exitFullscreen();
+			else await root.requestFullscreen();
+		});
+		document.addEventListener("fullscreenchange", () => {
+			if (!root.isConnected) return;
+			if (fullscreenButton) fullscreenButton.textContent = document.fullscreenElement === root ? "退出全屏" : "全屏";
+			if (document.fullscreenElement === root || !document.fullscreenElement) void render();
+		});
+		stage.addEventListener("keydown", (event) => {
+			if (event.key === "ArrowLeft" || event.key === "PageUp") { event.preventDefault(); goToPage(currentPage - 1); }
+			if (event.key === "ArrowRight" || event.key === "PageDown") { event.preventDefault(); goToPage(currentPage + 1); }
+		});
+		new ResizeObserver(() => {
+			if (!pdf || !["width", "page"].includes(scaleSelect.value)) return;
+			if (resizeTimer) clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(() => void render(), 120);
+		}).observe(stage);
+
+		try {
+			const runtime = await loadPdfRuntime();
+			pdf = await runtime.getDocument({
+				url: pdfUrl,
+				cMapUrl: "/vendor/pdfjs/cmaps/",
+				cMapPacked: true,
+				standardFontDataUrl: "/vendor/pdfjs/standard_fonts/",
+				wasmUrl: "/vendor/pdfjs/wasm/",
+			}).promise;
+			currentPage = Math.min(pdf.numPages, currentPage);
+			totalEl.textContent = String(pdf.numPages);
+			pageInput.max = String(pdf.numPages);
+			await render();
+		} catch (error) {
+			root.dataset.pdfReady = "error";
+			status.hidden = false;
+			status.textContent = `PDF 加载失败：${error instanceof Error ? error.message : "未知错误"}`;
+		}
+	}
+
+	const sync = () => {
+		document.querySelectorAll<HTMLElement>("[data-pdfjs-reader]").forEach((root) => { void bindReader(root); });
+	};
+
+	if (!windowRef[runtimeKey]) windowRef[runtimeKey] = { sync, hookAttached: false };
+	windowRef[runtimeKey]!.sync = sync;
+	if (!windowRef[runtimeKey]!.hookAttached && window.swup?.hooks) {
+		window.swup.hooks.on("page:view", sync);
+		windowRef[runtimeKey]!.hookAttached = true;
+	}
+	document.addEventListener("swup:enable", () => {
+		if (!windowRef[runtimeKey]!.hookAttached && window.swup?.hooks) {
+			window.swup.hooks.on("page:view", sync);
+			windowRef[runtimeKey]!.hookAttached = true;
+		}
+	}, { once: true });
+	sync();
+</script>
+
+<style>
+	.pdfjs-reader { overflow: hidden; min-height: 70vh; background: color-mix(in srgb, var(--card-bg) 96%, #111827 4%); }
+	.pdfjs-toolbar { position: sticky; top: 4.5rem; z-index: 5; display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; padding: .7rem; border-bottom: 1px solid var(--line-divider); background: color-mix(in srgb, var(--card-bg) 90%, transparent); backdrop-filter: blur(18px); }
+	.pdfjs-toolbar button,.pdfjs-toolbar input,.pdfjs-toolbar select,.pdfjs-toolbar a { min-height: 2.35rem; border: 1px solid var(--line-divider); border-radius: .7rem; padding: .4rem .7rem; background: var(--btn-regular-bg); color: var(--content-text); font: inherit; text-decoration: none; }
+	.pdfjs-toolbar button:not(:disabled),.pdfjs-toolbar select,.pdfjs-toolbar a { cursor: pointer; }
+	.pdfjs-toolbar button:disabled { opacity: .42; }
+	.pdfjs-toolbar button:hover:not(:disabled),.pdfjs-toolbar a:hover { border-color: var(--primary); color: var(--primary); }
+	.pdfjs-page-field { display: inline-flex; align-items: center; gap: .35rem; color: var(--content-meta); }
+	.pdfjs-page-field input { width: 4.5rem; }
+	.pdfjs-status { padding: .65rem 1rem; color: var(--primary); font-size: .82rem; text-align: center; }
+	.pdfjs-stage { display: grid; justify-items: center; align-items: start; min-height: 70vh; max-height: calc(100vh - 10rem); overflow: auto; padding: 1rem; background: #30343b; overscroll-behavior: contain; outline: none; }
+	.pdfjs-stage canvas { display: block; max-width: none; background: white; box-shadow: 0 1rem 3rem rgba(0,0,0,.32); }
+	.pdfjs-reader:fullscreen { width: 100vw; height: 100vh; border-radius: 0; }
+	.pdfjs-reader:fullscreen .pdfjs-toolbar { top: 0; }
+	.pdfjs-reader:fullscreen .pdfjs-stage { max-height: calc(100vh - 3.8rem); min-height: calc(100vh - 3.8rem); }
+	@media(max-width: 48rem) { .pdfjs-toolbar { top: 4rem; gap: .4rem; } .pdfjs-toolbar button,.pdfjs-toolbar input,.pdfjs-toolbar select,.pdfjs-toolbar a { min-height: 2.65rem; } .pdfjs-stage { padding: .5rem; max-height: calc(100vh - 8rem); } }
+</style>

@@ -48,8 +48,15 @@ export interface PrivateReaderLifecycle {
 	activeSlugs: () => string[]
 }
 
+export interface PrivateReaderSession {
+	gatePassword?: string
+	shelfPassword?: string
+	bookPassword?: string
+}
+
 type PrivateReaderWindow = Window & {
 	privateReaderLifecycle?: PrivateReaderLifecycle
+	privateReaderSession?: PrivateReaderSession
 	swup?: { hooks: { on: (event: string, handler: () => void) => (() => void) | void } }
 }
 
@@ -61,6 +68,7 @@ interface BookBinding {
 declare global {
 	interface Window {
 		privateReaderLifecycle?: PrivateReaderLifecycle
+		privateReaderSession?: PrivateReaderSession
 	}
 }
 
@@ -78,9 +86,6 @@ export function initPrivateReaderLifecycle(
 	if (windowRef.privateReaderLifecycle) return windowRef.privateReaderLifecycle
 
 	const bindings = new Map<string, BookBinding>()
-	// gateKey 和 shelfKey 全局共享（所有书使用同一组密码）
-	let gateKeyCache: CryptoKey | null = null
-	let shelfKeyCache: CryptoKey | null = null
 	const lifecycleController = new AbortController()
 	let hookAttached = false
 	let removeHook: (() => void) | undefined
@@ -148,25 +153,17 @@ export function initPrivateReaderLifecycle(
 				binding.segmentCache.clear()
 			}
 			bindings.clear()
-			gateKeyCache = null
-			shelfKeyCache = null
 			if (windowRef.privateReaderLifecycle === lifecycle) {
 				delete windowRef.privateReaderLifecycle
 			}
 		},
 		async deriveGateKey(password, gateSaltBase64) {
-			if (gateKeyCache) return gateKeyCache
-			gateKeyCache = await deriveKeyGeneric(password, gateSaltBase64, windowRef)
-			return gateKeyCache
+			return deriveKeyGeneric(password, gateSaltBase64, windowRef)
 		},
 		async deriveShelfKey(password, shelfSaltBase64) {
-			if (shelfKeyCache) return shelfKeyCache
-			shelfKeyCache = await deriveKeyGeneric(password, shelfSaltBase64, windowRef)
-			return shelfKeyCache
+			return deriveKeyGeneric(password, shelfSaltBase64, windowRef)
 		},
 		async deriveBookKey(slug, password, bookSaltBase64) {
-			const existing = bindings.get(slug)
-			if (existing) return existing.key
 			const key = await deriveKeyGeneric(password, bookSaltBase64, windowRef)
 			bindings.set(slug, { key, segmentCache: new Map() })
 			return key
@@ -228,6 +225,11 @@ export function initPrivateReaderLifecycle(
 
 	windowRef.privateReaderLifecycle = lifecycle
 	return lifecycle
+}
+
+export function getPrivateReaderSession(windowRef: PrivateReaderWindow = window as PrivateReaderWindow): PrivateReaderSession {
+	windowRef.privateReaderSession ??= {}
+	return windowRef.privateReaderSession
 }
 
 // ---------- 辅助函数 ----------

@@ -1,0 +1,64 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+export function getStaticPaths() {
+	const root = path.resolve("content/html");
+	const paths: Array<{ params: { slug: string }; props: { title: string; description: string; slug: string } }> = [];
+	const walk = (directory: string) => {
+		if (!fs.existsSync(directory)) return;
+		for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+			const absolute = path.join(directory, entry.name);
+			if (entry.isDirectory()) walk(absolute);
+			else if (entry.isFile() && entry.name.endsWith(".html")) {
+				const relative = path.relative(root, absolute).replace(/\\/g, "/");
+				const slug = relative.replace(/\.html$/i, "");
+				const metadataPath = absolute.replace(/\.html$/i, ".json");
+				let metadata: { title?: string; description?: string } = {};
+				try { if (fs.existsSync(metadataPath)) metadata = JSON.parse(fs.readFileSync(metadataPath, "utf8")); } catch {}
+				paths.push({ params: { slug }, props: { slug, title: metadata.title || path.basename(slug), description: metadata.description || "HTML 文档" } });
+			}
+		}
+	};
+	walk(root);
+	return paths;
+}
+
+const { slug, title, description } = Astro.props;
+---
+
+<MainGridLayout title={`HTML · ${title}`} description={description}>
+	<article class="html-document-page">
+		<header class="html-document-header card-base"><a href="/html/">← HTML 文档</a><div><h1>{title}</h1><p>{description}</p></div><button type="button" data-html-fullscreen>全屏</button></header>
+		<div class="html-document-frame card-base" data-html-frame>
+			<iframe title={title} src={`/html-raw/${slug}/`} sandbox="allow-scripts allow-forms allow-modals" data-html-iframe></iframe>
+		</div>
+	</article>
+</MainGridLayout>
+
+<script>
+	const initHtmlDocument = () => {
+		const frame = document.querySelector<HTMLElement>("[data-html-frame]");
+		const iframe = document.querySelector<HTMLIFrameElement>("[data-html-iframe]");
+		const button = document.querySelector<HTMLButtonElement>("[data-html-fullscreen]");
+		if (!frame || !iframe || frame.dataset.ready) return;
+		frame.dataset.ready = "true";
+		const eventController = new AbortController();
+		window.addEventListener("message", (event) => {
+			if (event.source !== iframe.contentWindow || event.data?.type !== "null42:html-resize") return;
+			const height = Number(event.data.height);
+			if (Number.isFinite(height)) iframe.style.height = `${Math.max(640, Math.min(height, 20_000))}px`;
+		}, { signal: eventController.signal });
+		button?.addEventListener("click", async () => { if (document.fullscreenElement === frame) await document.exitFullscreen(); else await frame.requestFullscreen(); }, { signal: eventController.signal });
+		document.addEventListener("fullscreenchange", () => { if (button) button.textContent = document.fullscreenElement === frame ? "????" : "??"; }, { signal: eventController.signal });
+		window.addEventListener("swup:leave:page", () => eventController.abort(), { once: true, signal: eventController.signal });
+	};
+	initHtmlDocument();
+	window.swup?.hooks?.on("page:view", initHtmlDocument);
+</script>
+
+<style>
+	.html-document-page{display:grid;gap:1rem}.html-document-header{display:flex;align-items:center;gap:1rem;padding:1rem;flex-wrap:wrap}.html-document-header>a{color:var(--primary)}.html-document-header>div{display:grid;gap:.2rem;flex:1}.html-document-header h1,.html-document-header p{margin:0}.html-document-header p{color:var(--meta-divider)}.html-document-header button{border:1px solid var(--line-divider);border-radius:.7rem;padding:.55rem .85rem;background:var(--btn-regular-bg);color:inherit;cursor:pointer}.html-document-frame{padding:0;overflow:auto;background:white}.html-document-frame iframe{display:block;width:100%;min-height:70vh;border:0;background:white}.html-document-frame:fullscreen{width:100vw;height:100vh;border-radius:0}.html-document-frame:fullscreen iframe{height:100vh!important}
+</style>
+

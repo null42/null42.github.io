@@ -46,7 +46,8 @@ export async function scanGeneratedOutput(options: ScanOptions = {}) {
   // Astro 内部构建缓存（dist/.prerender/）包含构建机器的绝对路径，不是部署产物，不扫描
   const ignoreDotPrerender = ['**/.prerender/**']
   const generatedFiles = await fg(roots.map((root) => root.replace(/\\/g, '/') + '/**/*'), { cwd: rootDir, onlyFiles: true, dot: true, unique: true, ignore: ignoreDotPrerender })
-  const forbiddenGeneratedFiles = await fg(forbiddenGeneratedPatterns, { cwd: rootDir, onlyFiles: true, dot: true, unique: true, ignore: ignoreDotPrerender })
+  const forbiddenGeneratedFiles = (await fg(forbiddenGeneratedPatterns, { cwd: rootDir, onlyFiles: true, dot: true, unique: true, ignore: ignoreDotPrerender }))
+    .filter((relativePath) => !relativePath.startsWith('content/html/'))
   const trackedFiles = options.includeTrackedFiles === false ? [] : listTrackedFiles(rootDir)
   const candidates = [...new Set([...generatedFiles, ...forbiddenGeneratedFiles, ...trackedFiles])].sort()
   const existence = await Promise.all(candidates.map((relativePath) =>

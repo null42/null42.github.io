@@ -138,6 +138,8 @@ export async function exportAstroContent(options: ExportOptions = {}): Promise<E
       ...(canonical.stageId ? { stageId: canonical.stageId, stageTitle: canonical.stageTitle } : {}),
       articleId: canonical.articleId,
       order: canonical.order,
+      ...(Array.isArray(parsed.data.codeFiles) ? { codeFiles: parsed.data.codeFiles } : {}),
+      ...(Array.isArray(parsed.data.codeSync) ? { codeSync: parsed.data.codeSync } : {}),
       ...(visibilityDecision.summary && canonical.difficulty ? { difficulty: canonical.difficulty } : {}),
       ...(visibilityDecision.summary && canonical.quality ? { quality: canonical.quality } : {}),
       ...(visibilityDecision.encryptedPayload ? { encryptedPayload: '/content/' + normalizedPath.replace(/\.md$/i, '.json') } : {})
@@ -358,7 +360,7 @@ function decodeStrictBase64(value: unknown): Buffer | undefined {
 }
 
 function degradeUnavailableLocalLinks(body: string, rootDir: string): string {
-  return body.replace(/\[([^\]]+)\]\((\/(?:content|sims)\/[^)]+)\)/g, (match, label: string, target: string) => {
+  return body.replace(/(?<!!)\[([^\]]+)\]\((\/(?:content|sims)\/[^)]+)\)/g, (match, label: string, target: string) => {
     const pathname = decodeURIComponent(target.split(/[?#]/, 1)[0])
     const source = pathname.startsWith('/content/')
       ? path.join(rootDir, ...pathname.slice(1).split('/'))

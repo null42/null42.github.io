@@ -14,6 +14,19 @@ status: learning
 summary: "学会修改 `pmsm_comm.c` 的 `_user_commands()` 函数来设计自己的仿真场景。"
 navGroup: 仿真方法
 navGroupOrder: 30
+codeFiles:
+  - path: motor/simulation/code-examples/02-custom-speed-profile/pmsm_comm_modified_excerpt.c
+    label: pmsm_comm.c
+    language: c
+codeSync:
+  - headingId: 修改方案
+    file: motor/simulation/code-examples/02-custom-speed-profile/pmsm_comm_modified_excerpt.c
+    lines: 8-21
+    label: 速度与负载时间轴实现
+  - headingId: 修改要点
+    file: motor/simulation/code-examples/02-custom-speed-profile/pmsm_comm_modified_excerpt.c
+    lines: 8-21
+    label: 指令与负载关键代码
 ---
 
 # 示例 2：自定义速度/负载曲线

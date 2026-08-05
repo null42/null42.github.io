@@ -457,7 +457,9 @@ const isEpub = manifest.kind === "epub"
 <script>
 	// 阅读器主机逻辑：监听解锁事件，加载并渲染内容
 	const host = document.querySelector<HTMLElement>("[data-reader-host]")
-	if (host) {
+	if (host && host.dataset.readerReady !== "true") {
+		host.dataset.readerReady = "true"
+		const eventController = new AbortController()
 		const slug = host.getAttribute("data-slug") || ""
 		const kind = host.getAttribute("data-kind") || ""
 		const titleEl = host.querySelector<HTMLElement>("[data-reader-title]")
@@ -484,6 +486,7 @@ const isEpub = manifest.kind === "epub"
 		// 加载锁：防止快速切换章节时并发加载导致内容错乱
 		let loadingSegmentIndex = -1
 		let activeSegmentRequest: AbortController | null = null
+		let positionSaveTimer: ReturnType<typeof setTimeout> | undefined
 
 		// 监听解锁事件
 		document.addEventListener("private-reader:unlocked", async (event: any) => {
@@ -525,8 +528,8 @@ const isEpub = manifest.kind === "epub"
 			buildToc()
 			const savedSegment = loadProgress()
 			const initialSegment = savedSegment >= 0 && savedSegment < totalSegments ? savedSegment : 0
-			await loadSegment(initialSegment)
-		})
+			await loadSegment(initialSegment, true)
+		}, { signal: eventController.signal })
 
 		async function fetchManifest(slug: string): Promise<any> {
 			try {
@@ -538,7 +541,7 @@ const isEpub = manifest.kind === "epub"
 			}
 		}
 
-		async function loadSegment(index: number): Promise<void> {
+		async function loadSegment(index: number, restorePosition = false): Promise<void> {
 			if (!manifestData || !cryptoKey || index < 0 || index >= totalSegments) return
 			const seg = manifestData.segments[index]
 			if (!seg) return
@@ -612,8 +615,9 @@ const isEpub = manifest.kind === "epub"
 				saveProgress()
 				updateTocActive()
 
-				// 8. 滚动重置：回到阅读器主体顶部
-				scrollReaderToTop()
+				// 8. 初次进入恢复章内位置，主动切章则回到顶部
+				if (restorePosition) restoreScrollPosition(index)
+				else scrollReaderToTop()
 
 				// 9. 预加载下一段（仅解密，利用 lifecycle 段缓存）
 				preloadSegment(index + 1)
@@ -776,6 +780,21 @@ const isEpub = manifest.kind === "epub"
 			try {
 				localStorage.setItem(`private-reader:progress:${slug}`, String(currentSegment))
 			} catch {}
+		}
+
+		function saveScrollPosition(): void {
+			try {
+				localStorage.setItem(`private-reader:position:${slug}`, JSON.stringify({ segment: currentSegment, scrollY: window.scrollY }))
+			} catch {}
+		}
+
+		function restoreScrollPosition(segment: number): void {
+			requestAnimationFrame(() => requestAnimationFrame(() => {
+				try {
+					const saved = JSON.parse(localStorage.getItem(`private-reader:position:${slug}`) || "{}")
+					window.scrollTo({ top: saved.segment === segment && Number.isFinite(saved.scrollY) ? saved.scrollY : 0, behavior: "auto" })
+				} catch { scrollReaderToTop() }
+			}))
 		}
 
 		function loadProgress(): number {
@@ -953,19 +972,26 @@ const isEpub = manifest.kind === "epub"
 			if (event.ctrlKey || event.metaKey || event.altKey || target?.matches(`input, textarea, select, [contenteditable=true]`)) {
 				event.stopImmediatePropagation()
 			}
-		}, { capture: true })
+		}, { capture: true, signal: eventController.signal })
 		document.addEventListener("keydown", (e) => {
 			if (e.key === "ArrowLeft" && currentSegment > 0) loadSegment(currentSegment - 1)
 			if (e.key === "ArrowRight" && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
-		})
+		}, { signal: eventController.signal })
+
+		window.addEventListener("scroll", () => {
+			if (positionSaveTimer) clearTimeout(positionSaveTimer)
+			positionSaveTimer = setTimeout(saveScrollPosition, 180)
+		}, { passive: true, signal: eventController.signal })
 
 		// 离开页面时释放所有图片 blob URL，避免内存泄漏
 		// 覆盖两种场景：SPA 导航（swup）和浏览器导航/关闭
-		window.addEventListener("swup:leave:page", () => {
+		const cleanup = () => {
+			saveScrollPosition()
+			activeSegmentRequest?.abort()
 			revokeBlobUrls()
-		}, { once: true })
-		window.addEventListener("pagehide", () => {
-			revokeBlobUrls()
-		}, { once: true })
+			eventController.abort()
+		}
+		window.addEventListener("swup:leave:page", cleanup, { once: true, signal: eventController.signal })
+		window.addEventListener("pagehide", cleanup, { once: true, signal: eventController.signal })
 	}
 </script>
