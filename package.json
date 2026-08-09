@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx scripts/astro/export-content.ts && astro dev",
-    "build": "corepack pnpm assessments:migrate && corepack pnpm code:import && corepack pnpm code:verify && corepack pnpm html:import && corepack pnpm html:verify && corepack pnpm kb:check && corepack pnpm kb:clean && corepack pnpm content:generate && corepack pnpm kb:navigation && corepack pnpm routes:manifest && node scripts/generate-icons.js && tsx scripts/generate-lqips.ts && node scripts/run-astro-build.mjs -- astro build && node scripts/run-subset-fonts.mjs && pagefind --site dist && tsx scripts/security/verify-assessment-production.ts && tsx scripts/security/scan-generated-output.ts",
+    "build": "corepack pnpm assessments:migrate && corepack pnpm code:verify && corepack pnpm html:verify && corepack pnpm kb:check && corepack pnpm kb:clean && corepack pnpm content:generate && corepack pnpm kb:navigation && corepack pnpm routes:manifest && node scripts/generate-icons.js && tsx scripts/generate-lqips.ts && node scripts/run-astro-build.mjs -- astro build && node scripts/run-subset-fonts.mjs && pagefind --site dist && tsx scripts/security/verify-assessment-production.ts && tsx scripts/security/scan-generated-output.ts",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
