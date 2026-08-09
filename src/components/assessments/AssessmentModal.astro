@@ -1,0 +1,99 @@
+---
+import type { ArticleAssessment } from '@/utils/assessment-library'
+
+interface Props { assessment: ArticleAssessment }
+const { assessment } = Astro.props
+const answerKey = Object.fromEntries(assessment.questions.map(question => [question.id, {
+	type: question.type,
+	correct: question.correct,
+	expected: question.expected,
+	gradable: question.gradable,
+}]))
+---
+
+<section class="assessment-entry" data-assessment-root data-pagefind-ignore="all">
+	<button type="button" class="assessment-launch" data-assessment-open>打开知识检验 <span>{assessment.questions.length} 题</span></button>
+	<dialog class="assessment-dialog" data-assessment-dialog aria-labelledby={`assessment-title-${assessment.id}`}>
+		<header><div><small>即时练习 · 关闭后清空</small><h2 id={`assessment-title-${assessment.id}`}>{assessment.title}</h2></div><button type="button" data-assessment-close aria-label="关闭测验">×</button></header>
+		<form method="dialog" data-assessment-form>
+			{assessment.questions.map((question, index) => (
+				<fieldset class="assessment-question" data-question={question.id}>
+					<legend><span>{String(index + 1).padStart(2, '0')}</span>{question.title}</legend>
+					<p class="assessment-prompt">{question.prompt}</p>
+					{question.type === 'single' && question.options.map(option => <label><input type="radio" name={question.id} value={option.id} /> <strong>{option.id}.</strong> {option.label}</label>)}
+					{question.type === 'multiple' && question.options.map(option => <label><input type="checkbox" name={question.id} value={option.id} /> <strong>{option.id}.</strong> {option.label}</label>)}
+					{question.type === 'true-false' && <div class="assessment-inline"><label><input type="radio" name={question.id} value="true" /> 正确</label><label><input type="radio" name={question.id} value="false" /> 错误</label></div>}
+					{question.type === 'fill' && <input class="assessment-text" name={question.id} type="text" autocomplete="off" placeholder="填写答案" />}
+					{question.type === 'code' && <textarea class="assessment-code" name={question.id} rows="7" spellcheck="false" placeholder="输入代码或解题思路"></textarea>}
+					<div class="assessment-actions"><button type="button" data-assessment-check>检查本题</button><output data-assessment-feedback hidden></output></div>
+					<details data-assessment-explanation><summary>查看解析</summary><p>{question.explanation}</p></details>
+				</fieldset>
+			))}
+			<footer><span>不记录得分、状态、错题或答题时间</span><button type="button" data-assessment-close>关闭并清空</button></footer>
+		</form>
+		<script is:inline type="application/json" data-assessment-key set:html={JSON.stringify(answerKey).replace(/</g, '\u003c')}></script>
+	</dialog>
+</section>
+
+<script>
+	import { acquireBodyScrollLock } from '@/utils/document-interaction-lock'
+	type Answer = { type: string; correct: string[]; expected: string; gradable: boolean }
+	type AssessmentLifecycle = { dispose: () => void }
+	const assessmentWindow = window as typeof window & { __assessmentModalLifecycle?: AssessmentLifecycle }
+	assessmentWindow.__assessmentModalLifecycle?.dispose()
+	const lifecycleController = new AbortController()
+	let removePageViewHook: (() => void) | undefined
+	let activeControllers: AbortController[] = []
+	const normalize = (value: string) => value.toLowerCase().replace(/[\s`*_，,。.;；:：()（）\[\]{}]/g, '')
+	const resetDialog = (dialog: HTMLDialogElement) => {
+		const form = dialog.querySelector<HTMLFormElement>('[data-assessment-form]')
+		form?.reset()
+		dialog.querySelectorAll<HTMLOutputElement>('[data-assessment-feedback]').forEach(output => { output.hidden = true; output.textContent = ''; output.className = '' })
+		dialog.querySelectorAll<HTMLDetailsElement>('[data-assessment-explanation]').forEach(details => { details.open = false })
+	}
+	const initAssessmentModals = () => {
+		activeControllers.forEach(controller => controller.abort())
+		activeControllers = []
+		document.querySelectorAll<HTMLElement>('[data-assessment-root]').forEach(root => {
+			const dialog = root.querySelector<HTMLDialogElement>('[data-assessment-dialog]')
+			const keyNode = root.querySelector<HTMLScriptElement>('[data-assessment-key]')
+			if (!dialog || !keyNode) return
+			const answers = JSON.parse(keyNode.textContent || '{}') as Record<string, Answer>
+			const controller = new AbortController()
+			activeControllers.push(controller)
+			let releaseScrollLock: (() => void) | undefined
+			const close = () => { if (dialog.open) dialog.close(); else resetDialog(dialog) }
+			root.querySelector('[data-assessment-open]')?.addEventListener('click', () => {
+				window.dispatchEvent(new CustomEvent('firefly:overlay-open', { detail: { source: 'assessment' } }))
+				dialog.showModal()
+				releaseScrollLock ??= acquireBodyScrollLock()
+			}, { signal: controller.signal })
+			root.querySelectorAll('[data-assessment-close]').forEach(button => button.addEventListener('click', close, { signal: controller.signal }))
+			dialog.addEventListener('close', () => { releaseScrollLock?.(); releaseScrollLock = undefined; resetDialog(dialog) }, { signal: controller.signal })
+			dialog.addEventListener('click', event => { if (event.target === dialog) close() }, { signal: controller.signal })
+			dialog.addEventListener('click', event => {
+				const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('[data-assessment-check]') : null
+				const question = button?.closest<HTMLElement>('[data-question]')
+				if (!button || !question) return
+				const answer = answers[question.dataset.question || '']
+				const output = question.querySelector<HTMLOutputElement>('[data-assessment-feedback]')
+				if (!answer || !output) return
+				const selected = [...question.querySelectorAll<HTMLInputElement>('input:checked')].map(input => input.value).sort()
+				const text = question.querySelector<HTMLInputElement | HTMLTextAreaElement>('.assessment-text,.assessment-code')?.value.trim() || ''
+				if (!selected.length && !text) { output.hidden = false; output.className = 'is-empty'; output.textContent = '请先作答。'; return }
+				if (!answer.gradable) { output.hidden = false; output.className = 'is-neutral'; output.textContent = '已提交，请展开解析自行核对。'; return }
+				const correct = answer.type === 'fill' ? normalize(text) === normalize(answer.expected) : selected.join('|') === [...answer.correct].sort().join('|')
+				output.hidden = false; output.className = correct ? 'is-correct' : 'is-wrong'; output.textContent = correct ? '回答正确。' : '回答不正确，请查看解析。'
+			}, { signal: controller.signal })
+			window.addEventListener('firefly:overlay-open', event => { if ((event as CustomEvent<{ source?: string }>).detail?.source !== 'assessment') close() }, { signal: controller.signal })
+		})
+	}
+	const attachSwupHook = () => { removePageViewHook?.(); removePageViewHook = window.swup?.hooks?.on('page:view', initAssessmentModals) }
+	initAssessmentModals()
+	if (window.swup?.hooks) attachSwupHook(); else document.addEventListener('swup:enable', attachSwupHook, { once: true, signal: lifecycleController.signal })
+	assessmentWindow.__assessmentModalLifecycle = { dispose: () => { lifecycleController.abort(); removePageViewHook?.(); activeControllers.forEach(controller => controller.abort()); activeControllers = [] } }
+</script>
+
+<style>
+	.assessment-entry{margin:1.5rem 0}.assessment-launch{display:flex;align-items:center;justify-content:space-between;width:100%;border:1px solid color-mix(in srgb,var(--primary) 35%,var(--line-divider));border-radius:1rem;padding:1rem 1.15rem;background:color-mix(in srgb,var(--primary) 8%,var(--card-bg));color:inherit;font-weight:800;cursor:pointer}.assessment-launch span{border-radius:999px;padding:.25rem .6rem;background:var(--primary);color:white;font-size:.75rem}.assessment-dialog{width:min(54rem,calc(100vw - 1rem));max-height:min(90vh,60rem);border:1px solid var(--line-divider);border-radius:1rem;padding:0;background:var(--card-bg);color:var(--deep-text);box-shadow:0 2rem 6rem rgba(0,0,0,.35)}.assessment-dialog::backdrop{background:rgba(2,6,23,.66);backdrop-filter:blur(4px)}.assessment-dialog>header{position:sticky;top:0;z-index:2;display:flex;align-items:start;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;border-bottom:1px solid var(--line-divider);background:var(--card-bg)}.assessment-dialog h2,.assessment-dialog header small{margin:0}.assessment-dialog header small{color:var(--meta-divider)}.assessment-dialog header button{border:0;background:transparent;color:inherit;font-size:1.6rem;cursor:pointer}.assessment-dialog form{display:grid;gap:1rem;padding:1rem}.assessment-question{display:grid;gap:.75rem;margin:0;border:1px solid var(--line-divider);border-radius:.85rem;padding:1rem}.assessment-question legend{padding:0 .35rem;font-weight:800}.assessment-question legend span{margin-right:.5rem;color:var(--primary);font:700 .75rem ui-monospace,monospace}.assessment-prompt,.assessment-question details p{margin:0;white-space:pre-wrap}.assessment-question>label,.assessment-inline label{display:flex;gap:.5rem;align-items:flex-start;border:1px solid var(--line-divider);border-radius:.65rem;padding:.65rem .75rem;cursor:pointer}.assessment-inline{display:flex;gap:.65rem;flex-wrap:wrap}.assessment-text,.assessment-code{width:100%;box-sizing:border-box;border:1px solid var(--line-divider);border-radius:.65rem;padding:.7rem .8rem;background:var(--btn-regular-bg);color:inherit}.assessment-code{resize:vertical;font-family:ui-monospace,monospace}.assessment-actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}.assessment-actions button,.assessment-dialog footer button{border:0;border-radius:.65rem;padding:.55rem .8rem;background:var(--primary);color:white;font-weight:700;cursor:pointer}.assessment-actions output.is-correct{color:#15803d}.assessment-actions output.is-wrong{color:#dc2626}.assessment-actions output.is-neutral,.assessment-actions output.is-empty{color:#b45309}.assessment-question details{border-top:1px dashed var(--line-divider);padding-top:.7rem}.assessment-question summary{cursor:pointer;font-weight:700}.assessment-dialog footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.5rem .2rem 0;color:var(--meta-divider);font-size:.85rem}@media(max-width:42rem){.assessment-dialog{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0}.assessment-dialog footer{align-items:stretch;flex-direction:column}.assessment-dialog footer button{width:100%}}
+</style>

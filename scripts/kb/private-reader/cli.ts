@@ -8,10 +8,7 @@
  *   tsx scripts/kb/private-reader/cli.ts clean         # 清理 content/private-reader/
  *   tsx scripts/kb/private-reader/cli.ts salts         # 生成/查看共享 salts
  *
- * 环境变量：
- *   KB_READER_GATE_PASSWORD  - Gate 层密码（进入书架）
- *   KB_READER_SHELF_PASSWORD - Shelf 层密码（解密书名）
- *   KB_READER_BOOK_PASSWORD  - Book 层密码（解密内容）
+ * 密码：固定使用 123，不读取环境变量。
  *
  * 配置：
  *   - scripts/private-reader/.local-paths.json（gitignore）列出待加密书籍
@@ -19,7 +16,6 @@
  *
  * 安全：
  *   - 拒绝在 .local-paths.json / .salts.json 被 git 追踪时运行
- *   - 拒绝在密码缺失时运行
  *   - 日志只输出 slug、kind、段数、耗时
  */
 
@@ -30,6 +26,7 @@ import { execSync } from 'node:child_process'
 import { encryptTxtFile } from './encrypt-txt'
 import { encryptEpubFile } from './encrypt-epub'
 import { generateSalt, SALT_LEN } from './crypto'
+import { getPrivateReaderPasswords } from './password'
 
 interface BookEntry {
   slug: string
@@ -72,22 +69,8 @@ async function main(): Promise<void> {
   }
 }
 
-/**
- * 读取三个密码环境变量。
- */
 function readPasswords(): { gate: string; shelf: string; book: string } {
-  const gate = process.env.KB_READER_GATE_PASSWORD
-  const shelf = process.env.KB_READER_SHELF_PASSWORD
-  const book = process.env.KB_READER_BOOK_PASSWORD
-  if (!gate || !shelf || !book) {
-    console.error('Error: 缺少密码环境变量。需要同时设置：')
-    console.error('  KB_READER_GATE_PASSWORD  - Gate 层密码（进入书架）')
-    console.error('  KB_READER_SHELF_PASSWORD - Shelf 层密码（解密书名）')
-    console.error('  KB_READER_BOOK_PASSWORD  - Book 层密码（解密内容）')
-    process.exitCode = 1
-    throw new Error('missing passwords')
-  }
-  return { gate, shelf, book }
+  return getPrivateReaderPasswords()
 }
 
 /**

@@ -1,0 +1,48 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "epub",
+  "slug": "gif-test-epub",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "Y58L25IFy6gz/bRMyCkV4A=="
+  },
+  "gate": {
+    "token": "8PL17OnsusrISLbPcybnP19LvAo6Z/fAomqLIkCC3+3LON/CykTaBf5IU+8grfUxaXk="
+  },
+  "shelf": {
+    "title": "Ls3cGQ1m7Vi6hX+5c0JZsiMD4kIjsowo1a5Xk068KBW2koth+D90JQLSH7/35csps4Vca5g=",
+    "author": "WbDUHCeisLa5iBCEbD+As7f7Zfw0ei2w3HKl5l56u708zhLFCBv0YA=="
+  },
+  "toc": [
+    {
+      "id": "nav-0",
+      "title": "JDHvkCKnpE2OmrPSpHbIUWUmzoqn/++EhrUyfTWj4TMx014Yn2zQ9T6zMYxibw==",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "+/OXhlZhUKWzm9uG",
+      "bytes": 594,
+      "chapterId": "chapter1",
+      "href": "OEBPS/chapter1.xhtml"
+    }
+  ],
+  "assets": {
+    "OEBPS/test.gif": {
+      "file": "asset-0000.bin",
+      "iv": "fPgwN50Pd0B8/yh4",
+      "mediaType": "image/gif",
+      "bytes": 4850315
+    }
+  },
+  "reading": {
+    "estimatedTimeMin": 2
+  }
+}

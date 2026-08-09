@@ -26,6 +26,7 @@ import KnowledgeTree from "@/components/knowledge/KnowledgeTree.astro";
 import StagePostNavigation from "@/components/knowledge/StagePostNavigation.astro";
 import SplitView from "@/components/knowledge/SplitView.astro";
 import ArticleCodeWorkspace from "@/components/knowledge/ArticleCodeWorkspace.astro";
+import AssessmentModal from "@/components/assessments/AssessmentModal.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
 import RecommendedPost from "@/components/misc/RecommendedPost.astro";
 import SharePoster from "@/components/misc/SharePoster.svelte";
@@ -36,9 +37,11 @@ import { siteConfig } from "@/config/siteConfig";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { getApiUrlList, processCoverImageSync } from "@/utils/image-utils";
 import { url } from "@/utils/url-utils";
+import { loadAssessmentsForPost } from "@/utils/assessment-library";
 import navigation from "@/generated/knowledge-navigation.json";
 import { findArticleHierarchy, getStagePostNavigation } from "@/utils/knowledge-navigation";
 import { decideVisibility } from "../../../scripts/kb/domain/normalize-article";
+import codeManifest from "../../../content/code-library/manifest.json";
 
 export async function getStaticPaths() {
 	const blogEntries = await getRoutablePosts();
@@ -56,6 +59,19 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const visibilityDecision = decideVisibility(entry.data.visibility);
 const pagefindExcluded = !visibilityDecision.pagefind;
+const resolvedCodeFiles = [...entry.data.codeFiles];
+const resolvedCodeSync = [...entry.data.codeSync];
+const codeReferenceErrors: string[] = [];
+const assessments = loadAssessmentsForPost(entry.id);
+for (const reference of entry.data.codeRefs) {
+	const project = codeManifest.projects.find((candidate) => candidate.codeId === reference.codeId);
+	const file = project?.files.find((candidate) => candidate.name === reference.file || candidate.path === reference.file);
+	if (!project) { codeReferenceErrors.push(`未知 codeId：${reference.codeId}`); continue; }
+	if (!file) { codeReferenceErrors.push(`代码文件不存在：${reference.codeId}/${reference.file}`); continue; }
+	const localPath = `code-library/${file.path}`;
+	if (!resolvedCodeFiles.some((candidate) => candidate.path === localPath)) resolvedCodeFiles.push({ path: localPath, label: file.name, language: file.language });
+	resolvedCodeSync.push({ headingId: reference.headingId, file: localPath, lines: reference.lines, label: reference.label });
+}
 
 const { remarkPluginFrontmatter } = await render(entry);
 
@@ -526,6 +542,7 @@ const stageNavigation = hierarchy ? getStagePostNavigation(navigation, hierarchy
   {entry.data.comment && !entry.data.password && <Comment post={entry} />}
 
   <!-- 双开文档分屏 -->
+  {assessments.map(assessment => <AssessmentModal assessment={assessment} />)}
   <SplitView />
-  <ArticleCodeWorkspace files={entry.data.codeFiles} sync={entry.data.codeSync} />
+  <ArticleCodeWorkspace files={resolvedCodeFiles} sync={resolvedCodeSync} errors={codeReferenceErrors} />
 </MainGridLayout>

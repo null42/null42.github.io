@@ -544,6 +544,7 @@ body.wallpaper-transparent #navbar-wrapper #navbar[data-full-width="true"] > div
     .mobile-dock__btn--center .mobile-dock__icon { font-size: 1.625rem; }
     .mobile-dock__overlay { position: fixed; inset: 0; z-index: 88; background: rgba(0,0,0,.3); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
     .mobile-dock__overlay.is-open { opacity: 1; pointer-events: auto; }
+    .mobile-dock__overlay[hidden], .mobile-dock__sheet[hidden] { display: none !important; pointer-events: none !important; }
     .mobile-dock__sheet { position: fixed; right: .5rem; bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + 4.75rem); left: .5rem; z-index: 89; padding: .875rem; border-radius: 1rem; background: color-mix(in oklch, var(--float-panel-bg) 88%, transparent); box-shadow: 0 8px 32px rgba(0,0,0,.18); backdrop-filter: blur(20px) saturate(1.8); transform: translateY(calc(100% + 1rem)); opacity: 0; pointer-events: none; transition: transform .3s ease, opacity .2s ease; }
     .mobile-dock__sheet.is-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
     .mobile-dock__sheet-title { padding: .25rem .25rem .625rem; color: var(--content-meta); font: 600 .75rem/1 ui-monospace, SFMono-Regular, monospace; letter-spacing: .1em; text-transform: uppercase; }

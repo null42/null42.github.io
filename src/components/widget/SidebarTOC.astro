@@ -49,6 +49,13 @@ const showTitle = widgetConfig?.showTitle !== false;
 <script>
   import { TOCManager } from "@/utils/toc-utils";
 
+  type SidebarTOCLifecycle = { dispose: () => void };
+  const sidebarWindow = window as typeof window & { __sidebarTOCLifecycle?: SidebarTOCLifecycle };
+  sidebarWindow.__sidebarTOCLifecycle?.dispose();
+  const eventController = new AbortController();
+  let removePageViewHook: (() => void) | undefined;
+  let pendingInit: ReturnType<typeof setTimeout> | undefined;
+
   if (typeof window.SidebarTOC === "undefined") {
     window.SidebarTOC = {
       manager: null
@@ -81,33 +88,40 @@ const showTitle = widgetConfig?.showTitle !== false;
     }
   }
 
-  if (!window.sidebarTOCListenersInitialized) {
-    window.sidebarTOCListenersInitialized = true;
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initSidebarTOC, { once: true });
-    } else {
+  const scheduleInit = (delay = 0) => {
+    if (pendingInit) clearTimeout(pendingInit);
+    pendingInit = setTimeout(() => {
+      pendingInit = undefined;
       initSidebarTOC();
-    }
+    }, delay);
+  };
+  const attachSwupHook = () => {
+    removePageViewHook?.();
+    removePageViewHook = window.swup?.hooks?.on("page:view", () => scheduleInit());
+  };
 
-    document.addEventListener("swup:contentReplaced", () => {
-      setTimeout(initSidebarTOC, 100);
-    });
-    document.addEventListener("astro:page-load", () => {
-      setTimeout(initSidebarTOC, 100);
-    });
-    window.addEventListener("popstate", () => {
-      setTimeout(initSidebarTOC, 200);
-    });
-    window.addEventListener("hashchange", () => {
-      if (!window.tocInternalNavigation) {
-        setTimeout(initSidebarTOC, 100);
-      }
-      window.tocInternalNavigation = false;
-    });
-    document.addEventListener("password:decrypted", () => {
-      setTimeout(initSidebarTOC, 200);
-    });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => scheduleInit(), { once: true, signal: eventController.signal });
   } else {
-    initSidebarTOC();
+    scheduleInit();
   }
+  if (window.swup?.hooks) attachSwupHook();
+  else document.addEventListener("swup:enable", attachSwupHook, { once: true, signal: eventController.signal });
+  window.addEventListener("hashchange", () => {
+    if (!window.tocInternalNavigation) scheduleInit(100);
+    window.tocInternalNavigation = false;
+  }, { signal: eventController.signal });
+  document.addEventListener("password:decrypted", () => scheduleInit(200), { signal: eventController.signal });
+
+  sidebarWindow.__sidebarTOCLifecycle = {
+    dispose: () => {
+      eventController.abort();
+      removePageViewHook?.();
+      removePageViewHook = undefined;
+      if (pendingInit) clearTimeout(pendingInit);
+      pendingInit = undefined;
+      window.SidebarTOC.manager?.cleanup();
+      window.SidebarTOC.manager = null;
+    },
+  };
 </script>

@@ -46,7 +46,7 @@ export function validateNavigationCoverage(coverage: NavigationCoverage): string
 
 export function selectExpectedArticleIds(articles: BaselineArticle[], sectionIds: Set<string>): string[] {
   return articles
-    .filter((article) => article.visibility === 'public' && article.sectionId !== undefined && sectionIds.has(article.sectionId))
+    .filter((article) => article.visibility === 'public' && article.sectionId !== undefined && sectionIds.has(article.sectionId) && !/-assessment(?:$|\/)/i.test(article.articleId))
     .map((article) => article.articleId)
 }
 

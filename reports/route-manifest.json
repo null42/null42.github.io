@@ -254,76 +254,10 @@
       "finalUrl": "/46/"
     },
     {
-      "path": "/47/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/47/"
-    },
-    {
-      "path": "/48/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/48/"
-    },
-    {
-      "path": "/49/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/49/"
-    },
-    {
       "path": "/5/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/5/"
-    },
-    {
-      "path": "/50/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/50/"
-    },
-    {
-      "path": "/51/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/51/"
-    },
-    {
-      "path": "/52/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/52/"
-    },
-    {
-      "path": "/53/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/53/"
-    },
-    {
-      "path": "/54/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/54/"
-    },
-    {
-      "path": "/55/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/55/"
-    },
-    {
-      "path": "/56/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/56/"
-    },
-    {
-      "path": "/57/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/57/"
     },
     {
       "path": "/6/",
@@ -388,6 +322,12 @@
       "finalUrl": "/categories/"
     },
     {
+      "path": "/code/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/code/"
+    },
+    {
       "path": "/content/blog/hello.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -416,25 +356,11 @@
       "target": "/posts/encrypted/worldbuilding/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-01-assessment/",
-      "target": "/posts/foundations/control-theory/ct-01-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-01-Open-Loop-Closed-Loop.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/",
       "target": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-02-assessment/",
-      "target": "/posts/foundations/control-theory/ct-02-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-02-Time-Domain-Analysis.html",
@@ -444,25 +370,11 @@
       "target": "/posts/foundations/control-theory/ct-02-time-domain-analysis/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-03-assessment/",
-      "target": "/posts/foundations/control-theory/ct-03-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-03-Frequency-Response-Bode.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-03-frequency-response-bode/",
       "target": "/posts/foundations/control-theory/ct-03-frequency-response-bode/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-04-assessment/",
-      "target": "/posts/foundations/control-theory/ct-04-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-04-PID-Control-Principles.html",
@@ -472,25 +384,11 @@
       "target": "/posts/foundations/control-theory/ct-04-pid-control-principles/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-05-assessment/",
-      "target": "/posts/foundations/control-theory/ct-05-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-05-PID-Tuning-Implementation.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/",
       "target": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-06-assessment/",
-      "target": "/posts/foundations/control-theory/ct-06-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-06-Feedforward-Control.html",
@@ -500,25 +398,11 @@
       "target": "/posts/foundations/control-theory/ct-06-feedforward-control/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-07-assessment/",
-      "target": "/posts/foundations/control-theory/ct-07-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-07-Nyquist-Stability.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-07-nyquist-stability/",
       "target": "/posts/foundations/control-theory/ct-07-nyquist-stability/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-08-assessment/",
-      "target": "/posts/foundations/control-theory/ct-08-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-08-Root-Locus.html",
@@ -528,25 +412,11 @@
       "target": "/posts/foundations/control-theory/ct-08-root-locus/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-09-assessment/",
-      "target": "/posts/foundations/control-theory/ct-09-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-09-Compensator-Design.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-09-compensator-design/",
       "target": "/posts/foundations/control-theory/ct-09-compensator-design/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-10-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-10-assessment/",
-      "target": "/posts/foundations/control-theory/ct-10-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-10-State-Space.html",
@@ -556,25 +426,11 @@
       "target": "/posts/foundations/control-theory/ct-10-state-space/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-11-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-11-assessment/",
-      "target": "/posts/foundations/control-theory/ct-11-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-11-Observer-Design.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-11-observer-design/",
       "target": "/posts/foundations/control-theory/ct-11-observer-design/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-12-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-12-assessment/",
-      "target": "/posts/foundations/control-theory/ct-12-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-12-State-Feedback.html",
@@ -584,13 +440,6 @@
       "target": "/posts/foundations/control-theory/ct-12-state-feedback/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-13-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-13-assessment/",
-      "target": "/posts/foundations/control-theory/ct-13-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-13-LQR-LQG.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -598,25 +447,11 @@
       "target": "/posts/foundations/control-theory/ct-13-lqr-lqg/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-14-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-14-assessment/",
-      "target": "/posts/foundations/control-theory/ct-14-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-14-Cascaded-PID-Control.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/",
       "target": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-15-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-15-assessment/",
-      "target": "/posts/foundations/control-theory/ct-15-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-15-PID-Optimization-Strategies.html",
@@ -633,20 +468,6 @@
       "target": "/posts/foundations/control-theory/ct-16-adrc-theory/"
     },
     {
-      "path": "/content/foundations/control-theory/CT-16-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-16-assessment/",
-      "target": "/posts/foundations/control-theory/ct-16-assessment/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-17-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-17-assessment/",
-      "target": "/posts/foundations/control-theory/ct-17-assessment/"
-    },
-    {
       "path": "/content/foundations/control-theory/CT-17-LADRC-Linear-ADRC.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -659,13 +480,6 @@
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/",
       "target": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/"
-    },
-    {
-      "path": "/content/foundations/control-theory/CT-18-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-18-assessment/",
-      "target": "/posts/foundations/control-theory/ct-18-assessment/"
     },
     {
       "path": "/content/foundations/control-theory/CT-19-Model-Predictive-Control.html",
@@ -682,25 +496,11 @@
       "target": "/posts/foundations/control-theory/readme/"
     },
     {
-      "path": "/content/foundations/power-electronics-basics/EE-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-01-assessment/"
-    },
-    {
       "path": "/content/foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
       "target": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
-    },
-    {
-      "path": "/content/foundations/power-electronics-basics/EE-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-02-assessment/"
     },
     {
       "path": "/content/foundations/power-electronics-basics/EE-02-Diodes-And-Rectification.html",
@@ -710,25 +510,11 @@
       "target": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/"
     },
     {
-      "path": "/content/foundations/power-electronics-basics/EE-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-03-assessment/"
-    },
-    {
       "path": "/content/foundations/power-electronics-basics/EE-03-BJT-Basics.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/",
       "target": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/"
-    },
-    {
-      "path": "/content/foundations/power-electronics-basics/EE-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-04-assessment/"
     },
     {
       "path": "/content/foundations/power-electronics-basics/EE-04-MOSFET-Principles.html",
@@ -738,25 +524,11 @@
       "target": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/"
     },
     {
-      "path": "/content/foundations/power-electronics-basics/EE-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-05-assessment/"
-    },
-    {
       "path": "/content/foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/",
       "target": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/"
-    },
-    {
-      "path": "/content/foundations/power-electronics-basics/EE-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-06-assessment/"
     },
     {
       "path": "/content/foundations/power-electronics-basics/EE-06-IGBT-Principles.html",
@@ -766,13 +538,6 @@
       "target": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/"
     },
     {
-      "path": "/content/foundations/power-electronics-basics/EE-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-07-assessment/"
-    },
-    {
       "path": "/content/foundations/power-electronics-basics/EE-07-OpAmp.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -780,25 +545,11 @@
       "target": "/posts/foundations/power-electronics-basics/ee-07-opamp/"
     },
     {
-      "path": "/content/foundations/power-electronics-basics/EE-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-08-assessment/"
-    },
-    {
       "path": "/content/foundations/power-electronics-basics/EE-08-Rectifier-Inverter.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/",
       "target": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/"
-    },
-    {
-      "path": "/content/foundations/power-electronics-basics/EE-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-assessment/",
-      "target": "/posts/foundations/power-electronics-basics/ee-09-assessment/"
     },
     {
       "path": "/content/foundations/power-electronics-basics/EE-09-H-Bridge.html",
@@ -899,13 +650,6 @@
       "target": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/"
     },
     {
-      "path": "/content/foundations/simulation/c-simulation/SIM-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-assessment/",
-      "target": "/posts/foundations/simulation/c-simulation/sim-05-assessment/"
-    },
-    {
       "path": "/content/foundations/simulation/c-simulation/SIM-05-Digital-Twin.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -983,25 +727,11 @@
       "target": "/posts/motor/30-percent-roadmap/"
     },
     {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-01-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-01-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-01-bandwidth-filter/",
       "target": "/posts/motor/advanced/algorithm/adv-alg-01-bandwidth-filter/"
-    },
-    {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-05-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-05-assessment/"
     },
     {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA.html",
@@ -1011,25 +741,11 @@
       "target": "/posts/motor/advanced/algorithm/adv-alg-05-field-weakening-mtpa/"
     },
     {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-07-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-07-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-07-feedforward-decoupling/",
       "target": "/posts/motor/advanced/algorithm/adv-alg-07-feedforward-decoupling/"
-    },
-    {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-09-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-09-assessment/"
     },
     {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point.html",
@@ -1039,13 +755,6 @@
       "target": "/posts/motor/advanced/algorithm/adv-alg-09-per-unit-fixed-point/"
     },
     {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-13-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-13-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-13-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -1053,25 +762,11 @@
       "target": "/posts/motor/advanced/algorithm/adv-alg-13-pid-structure-tuning/"
     },
     {
-      "path": "/content/motor/advanced/algorithm/ADV-ALG-15-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-15-assessment/",
-      "target": "/posts/motor/advanced/algorithm/adv-alg-15-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-15-debug-methodology/",
       "target": "/posts/motor/advanced/algorithm/adv-alg-15-debug-methodology/"
-    },
-    {
-      "path": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-01-assessment/",
-      "target": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-01-assessment/"
     },
     {
       "path": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling.html",
@@ -1088,20 +783,6 @@
       "target": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-adc-dma/"
     },
     {
-      "path": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-assessment/",
-      "target": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-assessment/"
-    },
-    {
-      "path": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-03-assessment/",
-      "target": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-03-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -1116,25 +797,11 @@
       "target": "/posts/motor/advanced/readme/"
     },
     {
-      "path": "/content/motor/advanced/system-methodology/SYS-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-01-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-01-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/system-methodology/SYS-01-Design-Patterns.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-01-design-patterns/",
       "target": "/posts/motor/advanced/system-methodology/sys-01-design-patterns/"
-    },
-    {
-      "path": "/content/motor/advanced/system-methodology/SYS-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-02-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-02-assessment/"
     },
     {
       "path": "/content/motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control.html",
@@ -1144,25 +811,11 @@
       "target": "/posts/motor/advanced/system-methodology/sys-02-inverter-vs-motor-control/"
     },
     {
-      "path": "/content/motor/advanced/system-methodology/SYS-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-03-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-03-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-03-pfc-vs-motor-control/",
       "target": "/posts/motor/advanced/system-methodology/sys-03-pfc-vs-motor-control/"
-    },
-    {
-      "path": "/content/motor/advanced/system-methodology/SYS-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-04-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-04-assessment/"
     },
     {
       "path": "/content/motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete.html",
@@ -1172,25 +825,11 @@
       "target": "/posts/motor/advanced/system-methodology/sys-04-simulation-to-discrete/"
     },
     {
-      "path": "/content/motor/advanced/system-methodology/SYS-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-05-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-05-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/system-methodology/SYS-05-Functional-Safety.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-05-functional-safety/",
       "target": "/posts/motor/advanced/system-methodology/sys-05-functional-safety/"
-    },
-    {
-      "path": "/content/motor/advanced/system-methodology/SYS-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-06-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-06-assessment/"
     },
     {
       "path": "/content/motor/advanced/system-methodology/SYS-06-System-Testing-Validation.html",
@@ -1200,25 +839,11 @@
       "target": "/posts/motor/advanced/system-methodology/sys-06-system-testing-validation/"
     },
     {
-      "path": "/content/motor/advanced/system-methodology/SYS-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-07-assessment/",
-      "target": "/posts/motor/advanced/system-methodology/sys-07-assessment/"
-    },
-    {
       "path": "/content/motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-07-power-control-closed-loop/",
       "target": "/posts/motor/advanced/system-methodology/sys-07-power-control-closed-loop/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-00-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-00-assessment/",
-      "target": "/posts/motor/algorithm/alg-00-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-00-Current-Loop-Intuition.html",
@@ -1242,25 +867,11 @@
       "target": "/posts/motor/algorithm/alg-00-pole-zero-animation/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-01-assessment/",
-      "target": "/posts/motor/algorithm/alg-01-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-01-FOC-Theory.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-01-foc-theory/",
       "target": "/posts/motor/algorithm/alg-01-foc-theory/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-02-assessment/",
-      "target": "/posts/motor/algorithm/alg-02-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-02-Current-Sampling-Timing.html",
@@ -1277,25 +888,11 @@
       "target": "/posts/motor/algorithm/alg-03-pi-current-regulator/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-04-assessment/",
-      "target": "/posts/motor/algorithm/alg-04-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-04-Deadtime-Compensation.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-04-deadtime-compensation/",
       "target": "/posts/motor/algorithm/alg-04-deadtime-compensation/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-05-assessment/",
-      "target": "/posts/motor/algorithm/alg-05-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-05-Sensored-FOC.html",
@@ -1312,25 +909,11 @@
       "target": "/posts/motor/algorithm/alg-06-position-speed-observer/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-07-assessment/",
-      "target": "/posts/motor/algorithm/alg-07-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-07-Sensorless-Observers.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-07-sensorless-observers/",
       "target": "/posts/motor/algorithm/alg-07-sensorless-observers/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-08-assessment/",
-      "target": "/posts/motor/algorithm/alg-08-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-08-Initial-Position-Detection.html",
@@ -1340,25 +923,11 @@
       "target": "/posts/motor/algorithm/alg-08-initial-position-detection/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-09-assessment/",
-      "target": "/posts/motor/algorithm/alg-09-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-09-High-Frequency-Injection.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-09-high-frequency-injection/",
       "target": "/posts/motor/algorithm/alg-09-high-frequency-injection/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-10-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-10-assessment/",
-      "target": "/posts/motor/algorithm/alg-10-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-10-Overmodulation.html",
@@ -1368,25 +937,11 @@
       "target": "/posts/motor/algorithm/alg-10-overmodulation/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-11-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-11-assessment/",
-      "target": "/posts/motor/algorithm/alg-11-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-11-MTPA-Flux-Weakening.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-11-mtpa-flux-weakening/",
       "target": "/posts/motor/algorithm/alg-11-mtpa-flux-weakening/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-12-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-12-assessment/",
-      "target": "/posts/motor/algorithm/alg-12-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.html",
@@ -1396,25 +951,11 @@
       "target": "/posts/motor/algorithm/alg-12-speed-loop-torque-observer/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-13-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-13-assessment/",
-      "target": "/posts/motor/algorithm/alg-13-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-13-Protection-Optimization.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-13-protection-optimization/",
       "target": "/posts/motor/algorithm/alg-13-protection-optimization/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-14-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-14-assessment/",
-      "target": "/posts/motor/algorithm/alg-14-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-14-THD-Harmonic-Analysis.html",
@@ -1431,20 +972,6 @@
       "target": "/posts/motor/algorithm/alg-15-advanced-research/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-15-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-15-assessment/",
-      "target": "/posts/motor/algorithm/alg-15-assessment/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-16-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-16-assessment/",
-      "target": "/posts/motor/algorithm/alg-16-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-16-Nonlinear-Flux-Observer.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -1459,25 +986,11 @@
       "target": "/posts/motor/algorithm/alg-17-vf-control/"
     },
     {
-      "path": "/content/motor/algorithm/ALG-18-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-18-assessment/",
-      "target": "/posts/motor/algorithm/alg-18-assessment/"
-    },
-    {
       "path": "/content/motor/algorithm/ALG-18-Compensation-Algorithms.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-18-compensation-algorithms/",
       "target": "/posts/motor/algorithm/alg-18-compensation-algorithms/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-19-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-19-assessment/",
-      "target": "/posts/motor/algorithm/alg-19-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-19-Deadbeat-Current-Prediction.html",
@@ -1499,13 +1012,6 @@
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-21-parameter-identification/",
       "target": "/posts/motor/algorithm/alg-21-parameter-identification/"
-    },
-    {
-      "path": "/content/motor/algorithm/ALG-22-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-22-assessment/",
-      "target": "/posts/motor/algorithm/alg-22-assessment/"
     },
     {
       "path": "/content/motor/algorithm/ALG-22-BLDC-Six-Step-Commutation.html",
@@ -1984,13 +1490,6 @@
       "target": "/posts/motor/hardware-validation-guide/"
     },
     {
-      "path": "/content/motor/hardware/HW-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-01-assessment/",
-      "target": "/posts/motor/hardware/hw-01-assessment/"
-    },
-    {
       "path": "/content/motor/hardware/HW-01-Motor-Basics.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -1998,25 +1497,11 @@
       "target": "/posts/motor/hardware/hw-01-motor-basics/"
     },
     {
-      "path": "/content/motor/hardware/HW-01B-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-01b-assessment/",
-      "target": "/posts/motor/hardware/hw-01b-assessment/"
-    },
-    {
       "path": "/content/motor/hardware/HW-01B-Motor-Physics-Deep-Dive.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-01b-motor-physics-deep-dive/",
       "target": "/posts/motor/hardware/hw-01b-motor-physics-deep-dive/"
-    },
-    {
-      "path": "/content/motor/hardware/HW-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-02-assessment/",
-      "target": "/posts/motor/hardware/hw-02-assessment/"
     },
     {
       "path": "/content/motor/hardware/HW-02-Current-Sensing.html",
@@ -2033,25 +1518,11 @@
       "target": "/posts/motor/hardware/hw-02b-current-sensing-topologies/"
     },
     {
-      "path": "/content/motor/hardware/HW-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-03-assessment/",
-      "target": "/posts/motor/hardware/hw-03-assessment/"
-    },
-    {
       "path": "/content/motor/hardware/HW-03-Position-Sensor.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-03-position-sensor/",
       "target": "/posts/motor/hardware/hw-03-position-sensor/"
-    },
-    {
-      "path": "/content/motor/hardware/HW-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-04-assessment/",
-      "target": "/posts/motor/hardware/hw-04-assessment/"
     },
     {
       "path": "/content/motor/hardware/HW-04-MCU-Peripherals.html",
@@ -2061,13 +1532,6 @@
       "target": "/posts/motor/hardware/hw-04-mcu-peripherals/"
     },
     {
-      "path": "/content/motor/hardware/HW-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-05-assessment/",
-      "target": "/posts/motor/hardware/hw-05-assessment/"
-    },
-    {
       "path": "/content/motor/hardware/HW-05-Power-Devices-Gate-Drivers.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -2075,25 +1539,11 @@
       "target": "/posts/motor/hardware/hw-05-power-devices-gate-drivers/"
     },
     {
-      "path": "/content/motor/hardware/HW-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-06-assessment/",
-      "target": "/posts/motor/hardware/hw-06-assessment/"
-    },
-    {
       "path": "/content/motor/hardware/HW-06-Power-Management-Protection.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-06-power-management-protection/",
       "target": "/posts/motor/hardware/hw-06-power-management-protection/"
-    },
-    {
-      "path": "/content/motor/hardware/HW-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-07-assessment/",
-      "target": "/posts/motor/hardware/hw-07-assessment/"
     },
     {
       "path": "/content/motor/hardware/HW-07-Thermal-EMC-Design.html",
@@ -2313,25 +1763,11 @@
       "target": "/posts/motor/motion-control/mc-00-index/"
     },
     {
-      "path": "/content/motor/motion-control/MC-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-01-assessment/",
-      "target": "/posts/motor/motion-control/mc-01-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-01-PMSM-Model.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-01-pmsm-model/",
       "target": "/posts/motor/motion-control/mc-01-pmsm-model/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-02-assessment/",
-      "target": "/posts/motor/motion-control/mc-02-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-02-Clarke-Park.html",
@@ -2341,25 +1777,11 @@
       "target": "/posts/motor/motion-control/mc-02-clarke-park/"
     },
     {
-      "path": "/content/motor/motion-control/MC-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-03-assessment/",
-      "target": "/posts/motor/motion-control/mc-03-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-03-Space-Vector.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-03-space-vector/",
       "target": "/posts/motor/motion-control/mc-03-space-vector/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-04-assessment/",
-      "target": "/posts/motor/motion-control/mc-04-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-04-FOC-Signal-Chain.html",
@@ -2369,25 +1791,11 @@
       "target": "/posts/motor/motion-control/mc-04-foc-signal-chain/"
     },
     {
-      "path": "/content/motor/motion-control/MC-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-05-assessment/",
-      "target": "/posts/motor/motion-control/mc-05-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-05-SVPWM-2Level.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-05-svpwm-2level/",
       "target": "/posts/motor/motion-control/mc-05-svpwm-2level/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-06-assessment/",
-      "target": "/posts/motor/motion-control/mc-06-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-06-Current-Loop.html",
@@ -2397,25 +1805,11 @@
       "target": "/posts/motor/motion-control/mc-06-current-loop/"
     },
     {
-      "path": "/content/motor/motion-control/MC-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-07-assessment/",
-      "target": "/posts/motor/motion-control/mc-07-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-07-Speed-Position-Loop.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-07-speed-position-loop/",
       "target": "/posts/motor/motion-control/mc-07-speed-position-loop/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-08-assessment/",
-      "target": "/posts/motor/motion-control/mc-08-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-08-Sensorless-Observers.html",
@@ -2425,25 +1819,11 @@
       "target": "/posts/motor/motion-control/mc-08-sensorless-observers/"
     },
     {
-      "path": "/content/motor/motion-control/MC-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-09-assessment/",
-      "target": "/posts/motor/motion-control/mc-09-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-09-IPMSM-vs-SPMSM.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/",
       "target": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-10-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-10-assessment/",
-      "target": "/posts/motor/motion-control/mc-10-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-10-Parameter-Sensitivity.html",
@@ -2453,25 +1833,11 @@
       "target": "/posts/motor/motion-control/mc-10-parameter-sensitivity/"
     },
     {
-      "path": "/content/motor/motion-control/MC-11-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-11-assessment/",
-      "target": "/posts/motor/motion-control/mc-11-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-11-PWM-Sampling-Timing.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/",
       "target": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-MC-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-01-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-01-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-MC-01-Position-Loop.html",
@@ -2481,25 +1847,11 @@
       "target": "/posts/motor/motion-control/mc-mc-01-position-loop/"
     },
     {
-      "path": "/content/motor/motion-control/MC-MC-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-02-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-02-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-MC-02-Feedforward.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-02-feedforward/",
       "target": "/posts/motor/motion-control/mc-mc-02-feedforward/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-MC-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-03-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-03-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-MC-03-Resonance-Suppression.html",
@@ -2509,25 +1861,11 @@
       "target": "/posts/motor/motion-control/mc-mc-03-resonance-suppression/"
     },
     {
-      "path": "/content/motor/motion-control/MC-MC-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-04-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-04-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-MC-04-Friction-Gravity.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-04-friction-gravity/",
       "target": "/posts/motor/motion-control/mc-mc-04-friction-gravity/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-MC-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-05-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-05-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-MC-05-Electronic-Gearing.html",
@@ -2537,25 +1875,11 @@
       "target": "/posts/motor/motion-control/mc-mc-05-electronic-gearing/"
     },
     {
-      "path": "/content/motor/motion-control/MC-MC-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-06-assessment/",
-      "target": "/posts/motor/motion-control/mc-mc-06-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-MC-06-Multi-Axis.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-06-multi-axis/",
       "target": "/posts/motor/motion-control/mc-mc-06-multi-axis/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-TP-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-01-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-01-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-TP-01-Kinematics-Constraints.html",
@@ -2565,25 +1889,11 @@
       "target": "/posts/motor/motion-control/mc-tp-01-kinematics-constraints/"
     },
     {
-      "path": "/content/motor/motion-control/MC-TP-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-02-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-02-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-TP-02-Trapezoidal-S-Curve.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-tp-02-trapezoidal-s-curve/",
       "target": "/posts/motor/motion-control/mc-tp-02-trapezoidal-s-curve/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-TP-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-03-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-03-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-TP-03-Polynomial-Trajectory.html",
@@ -2593,13 +1903,6 @@
       "target": "/posts/motor/motion-control/mc-tp-03-polynomial-trajectory/"
     },
     {
-      "path": "/content/motor/motion-control/MC-TP-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-04-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-04-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-TP-04-Multi-Segment-Blend.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -2607,25 +1910,11 @@
       "target": "/posts/motor/motion-control/mc-tp-04-multi-segment-blend/"
     },
     {
-      "path": "/content/motor/motion-control/MC-TP-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-05-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-05-assessment/"
-    },
-    {
       "path": "/content/motor/motion-control/MC-TP-05-Time-Optimal.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-tp-05-time-optimal/",
       "target": "/posts/motor/motion-control/mc-tp-05-time-optimal/"
-    },
-    {
-      "path": "/content/motor/motion-control/MC-TP-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-06-assessment/",
-      "target": "/posts/motor/motion-control/mc-tp-06-assessment/"
     },
     {
       "path": "/content/motor/motion-control/MC-TP-06-Interpolation.html",
@@ -2698,25 +1987,11 @@
       "target": "/posts/motor/pfc-motor-integration/readme/"
     },
     {
-      "path": "/content/motor/power-path/PP-01-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-01-assessment/",
-      "target": "/posts/motor/power-path/pp-01-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-01-DCDC-Fundamental-Topologies.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-01-dcdc-fundamental-topologies/",
       "target": "/posts/motor/power-path/pp-01-dcdc-fundamental-topologies/"
-    },
-    {
-      "path": "/content/motor/power-path/PP-02-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-02-assessment/",
-      "target": "/posts/motor/power-path/pp-02-assessment/"
     },
     {
       "path": "/content/motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull.html",
@@ -2726,25 +2001,11 @@
       "target": "/posts/motor/power-path/pp-02-isolated-dcdc-flyback-forward-pushpull/"
     },
     {
-      "path": "/content/motor/power-path/PP-03-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-03-assessment/",
-      "target": "/posts/motor/power-path/pp-03-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-03-LLC-Resonant-Converter.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-03-llc-resonant-converter/",
       "target": "/posts/motor/power-path/pp-03-llc-resonant-converter/"
-    },
-    {
-      "path": "/content/motor/power-path/PP-04-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-04-assessment/",
-      "target": "/posts/motor/power-path/pp-04-assessment/"
     },
     {
       "path": "/content/motor/power-path/PP-04-PFC-Power-Factor-Correction.html",
@@ -2754,25 +2015,11 @@
       "target": "/posts/motor/power-path/pp-04-pfc-power-factor-correction/"
     },
     {
-      "path": "/content/motor/power-path/PP-05-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-05-assessment/",
-      "target": "/posts/motor/power-path/pp-05-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-05-Magnetic-Design.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-05-magnetic-design/",
       "target": "/posts/motor/power-path/pp-05-magnetic-design/"
-    },
-    {
-      "path": "/content/motor/power-path/PP-06-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-06-assessment/",
-      "target": "/posts/motor/power-path/pp-06-assessment/"
     },
     {
       "path": "/content/motor/power-path/PP-06-Loop-Compensation.html",
@@ -2782,25 +2029,11 @@
       "target": "/posts/motor/power-path/pp-06-loop-compensation/"
     },
     {
-      "path": "/content/motor/power-path/PP-07-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-07-assessment/",
-      "target": "/posts/motor/power-path/pp-07-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-07-Power-Conversion-Motor-Drive.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-07-power-conversion-motor-drive/",
       "target": "/posts/motor/power-path/pp-07-power-conversion-motor-drive/"
-    },
-    {
-      "path": "/content/motor/power-path/PP-08-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-08-assessment/",
-      "target": "/posts/motor/power-path/pp-08-assessment/"
     },
     {
       "path": "/content/motor/power-path/PP-08-Three-Level-Topology.html",
@@ -2810,13 +2043,6 @@
       "target": "/posts/motor/power-path/pp-08-three-level-topology/"
     },
     {
-      "path": "/content/motor/power-path/PP-09-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-09-assessment/",
-      "target": "/posts/motor/power-path/pp-09-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-09-Three-Level-SVPWM.html",
       "kind": "compatibility",
       "expectedStatus": 200,
@@ -2824,25 +2050,11 @@
       "target": "/posts/motor/power-path/pp-09-three-level-svpwm/"
     },
     {
-      "path": "/content/motor/power-path/PP-10-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-10-assessment/",
-      "target": "/posts/motor/power-path/pp-10-assessment/"
-    },
-    {
       "path": "/content/motor/power-path/PP-10-Vienna-Rectifier.html",
       "kind": "compatibility",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-10-vienna-rectifier/",
       "target": "/posts/motor/power-path/pp-10-vienna-rectifier/"
-    },
-    {
-      "path": "/content/motor/power-path/PP-11-assessment.html",
-      "kind": "compatibility",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-11-assessment/",
-      "target": "/posts/motor/power-path/pp-11-assessment/"
     },
     {
       "path": "/content/motor/power-path/PP-11-Boost-PFC-Bus-Dynamics.html",
@@ -4403,22 +3615,10 @@
       "finalUrl": "/posts/encrypted/worldbuilding/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-01-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-01-open-loop-closed-loop/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-02-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-02-time-domain-analysis/",
@@ -4427,22 +3627,10 @@
       "finalUrl": "/posts/foundations/control-theory/ct-02-time-domain-analysis/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-03-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-03-frequency-response-bode/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-03-frequency-response-bode/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-04-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-04-pid-control-principles/",
@@ -4451,22 +3639,10 @@
       "finalUrl": "/posts/foundations/control-theory/ct-04-pid-control-principles/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-05-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-05-pid-tuning-implementation/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-06-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-06-feedforward-control/",
@@ -4475,22 +3651,10 @@
       "finalUrl": "/posts/foundations/control-theory/ct-06-feedforward-control/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-07-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-07-nyquist-stability/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-07-nyquist-stability/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-08-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-08-root-locus/",
@@ -4499,22 +3663,10 @@
       "finalUrl": "/posts/foundations/control-theory/ct-08-root-locus/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-09-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-09-compensator-design/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-09-compensator-design/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-10-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-10-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-10-state-space/",
@@ -4523,22 +3675,10 @@
       "finalUrl": "/posts/foundations/control-theory/ct-10-state-space/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-11-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-11-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-11-observer-design/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-11-observer-design/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-12-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-12-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-12-state-feedback/",
@@ -4547,34 +3687,16 @@
       "finalUrl": "/posts/foundations/control-theory/ct-12-state-feedback/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-13-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-13-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-13-lqr-lqg/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-13-lqr-lqg/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-14-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-14-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-14-cascaded-pid-control/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-15-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-15-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-15-pid-optimization-strategies/",
@@ -4589,18 +3711,6 @@
       "finalUrl": "/posts/foundations/control-theory/ct-16-adrc-theory/"
     },
     {
-      "path": "/posts/foundations/control-theory/ct-16-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-16-assessment/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-17-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-17-assessment/"
-    },
-    {
       "path": "/posts/foundations/control-theory/ct-17-ladrc-linear-adrc/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -4611,12 +3721,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/control-theory/ct-18-adrc-ladrc-implementation/"
-    },
-    {
-      "path": "/posts/foundations/control-theory/ct-18-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/control-theory/ct-18-assessment/"
     },
     {
       "path": "/posts/foundations/control-theory/ct-19-model-predictive-control/",
@@ -4631,22 +3735,10 @@
       "finalUrl": "/posts/foundations/control-theory/readme/"
     },
     {
-      "path": "/posts/foundations/power-electronics-basics/ee-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-assessment/"
-    },
-    {
       "path": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-01-resistance-capacitance-inductance-basics/"
-    },
-    {
-      "path": "/posts/foundations/power-electronics-basics/ee-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-assessment/"
     },
     {
       "path": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/",
@@ -4655,22 +3747,10 @@
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-02-diodes-and-rectification/"
     },
     {
-      "path": "/posts/foundations/power-electronics-basics/ee-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-assessment/"
-    },
-    {
       "path": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-03-bjt-basics/"
-    },
-    {
-      "path": "/posts/foundations/power-electronics-basics/ee-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-assessment/"
     },
     {
       "path": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/",
@@ -4679,22 +3759,10 @@
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-04-mosfet-principles/"
     },
     {
-      "path": "/posts/foundations/power-electronics-basics/ee-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-assessment/"
-    },
-    {
       "path": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-05-mosfet-gate-drive/"
-    },
-    {
-      "path": "/posts/foundations/power-electronics-basics/ee-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-assessment/"
     },
     {
       "path": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/",
@@ -4703,34 +3771,16 @@
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-06-igbt-principles/"
     },
     {
-      "path": "/posts/foundations/power-electronics-basics/ee-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-assessment/"
-    },
-    {
       "path": "/posts/foundations/power-electronics-basics/ee-07-opamp/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-07-opamp/"
     },
     {
-      "path": "/posts/foundations/power-electronics-basics/ee-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-assessment/"
-    },
-    {
       "path": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/foundations/power-electronics-basics/ee-08-rectifier-inverter/"
-    },
-    {
-      "path": "/posts/foundations/power-electronics-basics/ee-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/power-electronics-basics/ee-09-assessment/"
     },
     {
       "path": "/posts/foundations/power-electronics-basics/ee-09-h-bridge/",
@@ -4817,12 +3867,6 @@
       "finalUrl": "/posts/foundations/simulation/c-simulation/sim-04-emachinery-complete-usage-tutorial/"
     },
     {
-      "path": "/posts/foundations/simulation/c-simulation/sim-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/foundations/simulation/c-simulation/sim-05-assessment/"
-    },
-    {
       "path": "/posts/foundations/simulation/c-simulation/sim-05-digital-twin/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -4889,22 +3933,10 @@
       "finalUrl": "/posts/motor/30-percent-roadmap/"
     },
     {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-01-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/algorithm/adv-alg-01-bandwidth-filter/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-01-bandwidth-filter/"
-    },
-    {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-05-assessment/"
     },
     {
       "path": "/posts/motor/advanced/algorithm/adv-alg-05-field-weakening-mtpa/",
@@ -4913,22 +3945,10 @@
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-05-field-weakening-mtpa/"
     },
     {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-07-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/algorithm/adv-alg-07-feedforward-decoupling/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-07-feedforward-decoupling/"
-    },
-    {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-09-assessment/"
     },
     {
       "path": "/posts/motor/advanced/algorithm/adv-alg-09-per-unit-fixed-point/",
@@ -4937,34 +3957,16 @@
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-09-per-unit-fixed-point/"
     },
     {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-13-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-13-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/algorithm/adv-alg-13-pid-structure-tuning/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-13-pid-structure-tuning/"
     },
     {
-      "path": "/posts/motor/advanced/algorithm/adv-alg-15-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-15-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/algorithm/adv-alg-15-debug-methodology/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/algorithm/adv-alg-15-debug-methodology/"
-    },
-    {
-      "path": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-01-assessment/"
     },
     {
       "path": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-01-pwm-current-sampling/",
@@ -4979,18 +3981,6 @@
       "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-adc-dma/"
     },
     {
-      "path": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-02-assessment/"
-    },
-    {
-      "path": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-03-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/hardware-algorithm-bridge/adv-hw-03-encoder-speed/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -5003,22 +3993,10 @@
       "finalUrl": "/posts/motor/advanced/readme/"
     },
     {
-      "path": "/posts/motor/advanced/system-methodology/sys-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-01-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/system-methodology/sys-01-design-patterns/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-01-design-patterns/"
-    },
-    {
-      "path": "/posts/motor/advanced/system-methodology/sys-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-02-assessment/"
     },
     {
       "path": "/posts/motor/advanced/system-methodology/sys-02-inverter-vs-motor-control/",
@@ -5027,22 +4005,10 @@
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-02-inverter-vs-motor-control/"
     },
     {
-      "path": "/posts/motor/advanced/system-methodology/sys-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-03-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/system-methodology/sys-03-pfc-vs-motor-control/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-03-pfc-vs-motor-control/"
-    },
-    {
-      "path": "/posts/motor/advanced/system-methodology/sys-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-04-assessment/"
     },
     {
       "path": "/posts/motor/advanced/system-methodology/sys-04-simulation-to-discrete/",
@@ -5051,22 +4017,10 @@
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-04-simulation-to-discrete/"
     },
     {
-      "path": "/posts/motor/advanced/system-methodology/sys-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-05-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/system-methodology/sys-05-functional-safety/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-05-functional-safety/"
-    },
-    {
-      "path": "/posts/motor/advanced/system-methodology/sys-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-06-assessment/"
     },
     {
       "path": "/posts/motor/advanced/system-methodology/sys-06-system-testing-validation/",
@@ -5075,22 +4029,10 @@
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-06-system-testing-validation/"
     },
     {
-      "path": "/posts/motor/advanced/system-methodology/sys-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/advanced/system-methodology/sys-07-assessment/"
-    },
-    {
       "path": "/posts/motor/advanced/system-methodology/sys-07-power-control-closed-loop/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/advanced/system-methodology/sys-07-power-control-closed-loop/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-00-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-00-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-00-current-loop-intuition/",
@@ -5111,22 +4053,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-00-pole-zero-animation/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-01-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-01-foc-theory/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-01-foc-theory/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-02-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-02-current-sampling-timing/",
@@ -5141,22 +4071,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-03-pi-current-regulator/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-04-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-04-deadtime-compensation/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-04-deadtime-compensation/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-05-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-05-sensored-foc/",
@@ -5171,22 +4089,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-06-position-speed-observer/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-07-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-07-sensorless-observers/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-07-sensorless-observers/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-08-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-08-initial-position-detection/",
@@ -5195,22 +4101,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-08-initial-position-detection/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-09-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-09-high-frequency-injection/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-09-high-frequency-injection/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-10-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-10-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-10-overmodulation/",
@@ -5219,22 +4113,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-10-overmodulation/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-11-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-11-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-11-mtpa-flux-weakening/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-11-mtpa-flux-weakening/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-12-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-12-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-12-speed-loop-torque-observer/",
@@ -5243,22 +4125,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-12-speed-loop-torque-observer/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-13-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-13-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-13-protection-optimization/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-13-protection-optimization/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-14-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-14-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-14-thd-harmonic-analysis/",
@@ -5273,18 +4143,6 @@
       "finalUrl": "/posts/motor/algorithm/alg-15-advanced-research/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-15-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-15-assessment/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-16-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-16-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-16-nonlinear-flux-observer/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -5297,22 +4155,10 @@
       "finalUrl": "/posts/motor/algorithm/alg-17-vf-control/"
     },
     {
-      "path": "/posts/motor/algorithm/alg-18-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-18-assessment/"
-    },
-    {
       "path": "/posts/motor/algorithm/alg-18-compensation-algorithms/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-18-compensation-algorithms/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-19-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-19-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-19-deadbeat-current-prediction/",
@@ -5331,12 +4177,6 @@
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/algorithm/alg-21-parameter-identification/"
-    },
-    {
-      "path": "/posts/motor/algorithm/alg-22-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/algorithm/alg-22-assessment/"
     },
     {
       "path": "/posts/motor/algorithm/alg-22-bldc-six-step-commutation/",
@@ -5747,34 +4587,16 @@
       "finalUrl": "/posts/motor/hardware-validation-guide/"
     },
     {
-      "path": "/posts/motor/hardware/hw-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-01-assessment/"
-    },
-    {
       "path": "/posts/motor/hardware/hw-01-motor-basics/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-01-motor-basics/"
     },
     {
-      "path": "/posts/motor/hardware/hw-01b-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-01b-assessment/"
-    },
-    {
       "path": "/posts/motor/hardware/hw-01b-motor-physics-deep-dive/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-01b-motor-physics-deep-dive/"
-    },
-    {
-      "path": "/posts/motor/hardware/hw-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-02-assessment/"
     },
     {
       "path": "/posts/motor/hardware/hw-02-current-sensing/",
@@ -5789,22 +4611,10 @@
       "finalUrl": "/posts/motor/hardware/hw-02b-current-sensing-topologies/"
     },
     {
-      "path": "/posts/motor/hardware/hw-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-03-assessment/"
-    },
-    {
       "path": "/posts/motor/hardware/hw-03-position-sensor/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-03-position-sensor/"
-    },
-    {
-      "path": "/posts/motor/hardware/hw-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-04-assessment/"
     },
     {
       "path": "/posts/motor/hardware/hw-04-mcu-peripherals/",
@@ -5813,34 +4623,16 @@
       "finalUrl": "/posts/motor/hardware/hw-04-mcu-peripherals/"
     },
     {
-      "path": "/posts/motor/hardware/hw-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-05-assessment/"
-    },
-    {
       "path": "/posts/motor/hardware/hw-05-power-devices-gate-drivers/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-05-power-devices-gate-drivers/"
     },
     {
-      "path": "/posts/motor/hardware/hw-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-06-assessment/"
-    },
-    {
       "path": "/posts/motor/hardware/hw-06-power-management-protection/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/hardware/hw-06-power-management-protection/"
-    },
-    {
-      "path": "/posts/motor/hardware/hw-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/hardware/hw-07-assessment/"
     },
     {
       "path": "/posts/motor/hardware/hw-07-thermal-emc-design/",
@@ -6029,22 +4821,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-00-index/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-01-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-01-pmsm-model/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-01-pmsm-model/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-02-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-02-clarke-park/",
@@ -6053,22 +4833,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-02-clarke-park/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-03-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-03-space-vector/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-03-space-vector/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-04-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-04-foc-signal-chain/",
@@ -6077,22 +4845,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-04-foc-signal-chain/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-05-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-05-svpwm-2level/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-05-svpwm-2level/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-06-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-06-current-loop/",
@@ -6101,22 +4857,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-06-current-loop/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-07-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-07-speed-position-loop/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-07-speed-position-loop/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-08-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-08-sensorless-observers/",
@@ -6125,22 +4869,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-08-sensorless-observers/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-09-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-09-ipmsm-vs-spmsm/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-10-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-10-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-10-parameter-sensitivity/",
@@ -6149,22 +4881,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-10-parameter-sensitivity/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-11-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-11-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-11-pwm-sampling-timing/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-mc-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-01-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-mc-01-position-loop/",
@@ -6173,22 +4893,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-mc-01-position-loop/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-mc-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-02-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-mc-02-feedforward/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-02-feedforward/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-mc-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-03-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-mc-03-resonance-suppression/",
@@ -6197,22 +4905,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-mc-03-resonance-suppression/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-mc-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-04-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-mc-04-friction-gravity/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-04-friction-gravity/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-mc-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-05-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-mc-05-electronic-gearing/",
@@ -6221,22 +4917,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-mc-05-electronic-gearing/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-mc-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-mc-06-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-mc-06-multi-axis/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-mc-06-multi-axis/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-tp-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-01-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-tp-01-kinematics-constraints/",
@@ -6245,22 +4929,10 @@
       "finalUrl": "/posts/motor/motion-control/mc-tp-01-kinematics-constraints/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-tp-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-02-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-tp-02-trapezoidal-s-curve/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-tp-02-trapezoidal-s-curve/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-tp-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-03-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-tp-03-polynomial-trajectory/",
@@ -6269,34 +4941,16 @@
       "finalUrl": "/posts/motor/motion-control/mc-tp-03-polynomial-trajectory/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-tp-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-04-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-tp-04-multi-segment-blend/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-tp-04-multi-segment-blend/"
     },
     {
-      "path": "/posts/motor/motion-control/mc-tp-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-05-assessment/"
-    },
-    {
       "path": "/posts/motor/motion-control/mc-tp-05-time-optimal/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/motion-control/mc-tp-05-time-optimal/"
-    },
-    {
-      "path": "/posts/motor/motion-control/mc-tp-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/motion-control/mc-tp-06-assessment/"
     },
     {
       "path": "/posts/motor/motion-control/mc-tp-06-interpolation/",
@@ -6359,22 +5013,10 @@
       "finalUrl": "/posts/motor/pfc-motor-integration/readme/"
     },
     {
-      "path": "/posts/motor/power-path/pp-01-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-01-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-01-dcdc-fundamental-topologies/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-01-dcdc-fundamental-topologies/"
-    },
-    {
-      "path": "/posts/motor/power-path/pp-02-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-02-assessment/"
     },
     {
       "path": "/posts/motor/power-path/pp-02-isolated-dcdc-flyback-forward-pushpull/",
@@ -6383,22 +5025,10 @@
       "finalUrl": "/posts/motor/power-path/pp-02-isolated-dcdc-flyback-forward-pushpull/"
     },
     {
-      "path": "/posts/motor/power-path/pp-03-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-03-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-03-llc-resonant-converter/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-03-llc-resonant-converter/"
-    },
-    {
-      "path": "/posts/motor/power-path/pp-04-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-04-assessment/"
     },
     {
       "path": "/posts/motor/power-path/pp-04-pfc-power-factor-correction/",
@@ -6407,22 +5037,10 @@
       "finalUrl": "/posts/motor/power-path/pp-04-pfc-power-factor-correction/"
     },
     {
-      "path": "/posts/motor/power-path/pp-05-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-05-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-05-magnetic-design/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-05-magnetic-design/"
-    },
-    {
-      "path": "/posts/motor/power-path/pp-06-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-06-assessment/"
     },
     {
       "path": "/posts/motor/power-path/pp-06-loop-compensation/",
@@ -6431,22 +5049,10 @@
       "finalUrl": "/posts/motor/power-path/pp-06-loop-compensation/"
     },
     {
-      "path": "/posts/motor/power-path/pp-07-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-07-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-07-power-conversion-motor-drive/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-07-power-conversion-motor-drive/"
-    },
-    {
-      "path": "/posts/motor/power-path/pp-08-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-08-assessment/"
     },
     {
       "path": "/posts/motor/power-path/pp-08-three-level-topology/",
@@ -6455,34 +5061,16 @@
       "finalUrl": "/posts/motor/power-path/pp-08-three-level-topology/"
     },
     {
-      "path": "/posts/motor/power-path/pp-09-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-09-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-09-three-level-svpwm/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-09-three-level-svpwm/"
     },
     {
-      "path": "/posts/motor/power-path/pp-10-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-10-assessment/"
-    },
-    {
       "path": "/posts/motor/power-path/pp-10-vienna-rectifier/",
       "kind": "astro",
       "expectedStatus": 200,
       "finalUrl": "/posts/motor/power-path/pp-10-vienna-rectifier/"
-    },
-    {
-      "path": "/posts/motor/power-path/pp-11-assessment/",
-      "kind": "astro",
-      "expectedStatus": 200,
-      "finalUrl": "/posts/motor/power-path/pp-11-assessment/"
     },
     {
       "path": "/posts/motor/power-path/pp-11-boost-pfc-bus-dynamics/",

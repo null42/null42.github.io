@@ -632,18 +632,17 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 						showError(gateError)
 						return
 					}
-					// Gate 验证成功，切换到 Shelf 层
+					// 固定统一密码：Gate 成功后仅在当前标签页内存中复用到 Shelf/Book。
 					session.gatePassword = pwd
+					session.shelfPassword = pwd
+					session.bookPassword = pwd
 					if (gateInput) gateInput.value = ""
 					hideStatus(gateStatus)
 					gateStage.classList.add("hidden")
 					shelfStage.classList.remove("hidden")
-					shelfInput?.focus()
-					if (session.shelfPassword && shelfInput) {
-						shelfInput.value = session.shelfPassword
-						if (bookSessionInput && session.bookPassword) bookSessionInput.value = session.bookPassword
-						queueMicrotask(() => shelfForm?.requestSubmit())
-					}
+					if (shelfInput) shelfInput.value = pwd
+					if (bookSessionInput) bookSessionInput.value = pwd
+					queueMicrotask(() => shelfForm?.requestSubmit())
 				} catch {
 					hideStatus(gateStatus)
 					showError(gateError)

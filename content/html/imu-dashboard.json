@@ -1,0 +1,9 @@
+{
+  "title": "IMU 姿态采集与识别上位机",
+  "description": "包含串口、姿态仪表盘、曲线、离线回放与数据导出的交互式 IMU 页面。",
+  "source": "learning/Attitude and Navigation/imu-dashboard-demo/index.html",
+  "assets": [
+    "/html-assets/imu-dashboard/styles.css",
+    "/html-assets/imu-dashboard/app.js"
+  ]
+}

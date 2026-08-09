@@ -11,9 +11,13 @@ describe('TOC lifecycle contracts', () => {
     expect(component).toContain('tocContent.dataset.tocClickBound')
   })
 
-  it('installs SidebarTOC navigation and decrypt listeners only once', () => {
+  it('replaces SidebarTOC listeners, timers, and Swup hooks as one lifecycle', () => {
     const component = fs.readFileSync('src/components/widget/SidebarTOC.astro', 'utf8')
-    expect(component).toContain('if (!window.sidebarTOCListenersInitialized)')
-    expect(component).toContain('window.sidebarTOCListenersInitialized = true')
+    expect(component).toContain('__sidebarTOCLifecycle?.dispose()')
+    expect(component).toContain('new AbortController()')
+    expect(component).toContain('removePageViewHook?.()')
+    expect(component).toContain('if (pendingInit) clearTimeout(pendingInit)')
+    expect(component).not.toContain('document.addEventListener("astro:page-load"')
+    expect(component).not.toContain('window.addEventListener("popstate"')
   })
 })

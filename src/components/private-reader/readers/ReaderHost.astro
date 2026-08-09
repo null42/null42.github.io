@@ -277,6 +277,18 @@ const isEpub = manifest.kind === "epub"
 		background: var(--btn-regular-bg);
 		min-height: 2rem;
 	}
+	.reader-content :global(.reader-image-placeholder) {
+		display: grid;
+		min-height: 7rem;
+		place-items: center;
+		margin: 1rem auto;
+		padding: 1rem;
+		border: 1px dashed color-mix(in srgb, var(--primary) 45%, var(--line-divider));
+		border-radius: .75rem;
+		background: color-mix(in srgb, var(--card-bg) 92%, var(--primary) 8%);
+		color: var(--content-meta);
+		text-align: center;
+	}
 
 	.reader-progress {
 		position: sticky;
@@ -679,8 +691,7 @@ const isEpub = manifest.kind === "epub"
 			const imgs = contentEl.querySelectorAll<HTMLImageElement>("img[src]")
 			if (imgs.length === 0) return
 
-			const assets = manifestData?.assets as Record<string, { file: string; iv: string; mediaType: string }> | undefined
-			if (!assets) return
+			const assets = manifestData?.assets as Record<string, { file: string; iv: string; mediaType?: string }> | undefined
 
 			// 章节 XHTML 所在目录（用于解析相对路径）
 			const chapterDir = chapterHref.includes("/") ? chapterHref.slice(0, chapterHref.lastIndexOf("/") + 1) : ""
@@ -695,8 +706,9 @@ const isEpub = manifest.kind === "epub"
 				// 例如 chapterDir="OEBPS/", rawSrc="images/foo.jpg" → "OEBPS/images/foo.jpg"
 				// 例如 chapterDir="OEBPS/ch1/", rawSrc="../images/foo.jpg" → "OEBPS/images/foo.jpg"
 				const resolvedPath = resolveRelativePath(chapterDir, rawSrc)
-				const assetInfo = assets[resolvedPath]
-				if (!assetInfo) continue
+				const normalizedPath = resolvedPath.replace(/\\/g, "/")
+				const assetInfo = assets?.[resolvedPath] || assets?.[normalizedPath] || assets?.[safeDecodePath(normalizedPath)]
+				if (!assetInfo) { replaceImageWithPlaceholder(img, "图片资源缺失"); continue }
 
 				// 标记为加载中
 				img.setAttribute("data-loading", "1")
@@ -728,23 +740,34 @@ const isEpub = manifest.kind === "epub"
 			}
 		}
 
+		function safeDecodePath(value: string): string {
+			try { return decodeURIComponent(value) } catch { return value }
+		}
+
+		function replaceImageWithPlaceholder(img: HTMLImageElement, reason: string): void {
+			const placeholder = document.createElement("span")
+			placeholder.className = "reader-image-placeholder"
+			placeholder.setAttribute("role", "img")
+			placeholder.textContent = img.alt ? `${reason}：${img.alt}` : reason
+			img.replaceWith(placeholder)
+		}
+
 		/**
 		 * 加载单个图片资源：fetch → 解密 → Blob → URL.createObjectURL → 替换 img.src。
 		 */
-		async function loadImageBlob(img: HTMLImageElement, assetInfo: { file: string; iv: string; mediaType: string }): Promise<void> {
+		async function loadImageBlob(img: HTMLImageElement, assetInfo: { file: string; iv: string; mediaType?: string }): Promise<void> {
 			try {
 				const res = await fetch(`/private-reader/${slug}/${assetInfo.file}`)
 				if (!res.ok) throw new Error(`HTTP ${res.status}`)
 				const ciphertextBase64 = await res.text()
 				const plaintext = await lifecycle.decryptAsset(ciphertextBase64, assetInfo.iv, cryptoKey!)
-				const blob = new Blob([plaintext], { type: assetInfo.mediaType })
+				const blob = new Blob([plaintext], { type: assetInfo.mediaType || "application/octet-stream" })
 				const url = URL.createObjectURL(blob)
 				currentBlobUrls.push(url)
 				img.src = url
 				img.removeAttribute("data-loading")
 			} catch {
-				// 加载失败：移除占位样式，保留原始 src（可能显示 broken image）
-				img.removeAttribute("data-loading")
+				replaceImageWithPlaceholder(img, "图片加载失败")
 			}
 		}
 

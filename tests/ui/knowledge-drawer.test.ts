@@ -33,6 +33,16 @@ describe('knowledge drawer interactions', () => {
     controller.dispose()
   })
 
+  it('closes a native dialog backdrop pointer without leaving scroll locked', () => {
+    const panel = document.querySelector<HTMLDialogElement>('[data-drawer-panel]')!
+    Object.defineProperty(panel, 'getBoundingClientRect', { configurable: true, value: () => ({ left: 10, right: 110, top: 10, bottom: 110, width: 100, height: 100, x: 10, y: 10, toJSON() {} }) })
+    initKnowledgeDrawer()
+    document.querySelector<HTMLButtonElement>('[data-drawer-open]')!.click()
+    panel.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: 0, clientY: 0 }))
+    expect(panel.hidden).toBe(true)
+    expect(document.body.style.overflow).toBe('')
+  })
+
   it('closes from backdrop or article selection and traps Tab focus', () => {
     const panel = document.querySelector<HTMLDialogElement>('[data-drawer-panel]')!
     initKnowledgeDrawer()

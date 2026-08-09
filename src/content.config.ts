@@ -45,6 +45,13 @@ const postsCollection = defineCollection({
 			lines: z.string().regex(/^\d+(?:-\d+)?$/),
 			label: z.string().optional(),
 		})).optional().default([]),
+		codeRefs: z.array(z.object({
+			codeId: z.string().min(1),
+			file: z.string().min(1),
+			headingId: z.string().min(1),
+			lines: z.string().regex(/^\d+(?:-\d+)?$/),
+			label: z.string().optional(),
+		})).optional().default([]),
 
 		/* For internal use */
 		prevTitle: z.string().default(""),

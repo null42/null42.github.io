@@ -3,7 +3,8 @@ export const nonPublicContentPatterns = [
   'docs/handoff-*.md',
   'docs/superpowers/**',
   'content/**/docs/superpowers/**',
-  'content/private/**'
+  'content/private/**',
+  'content/assessments/**'
 ]
 
 export function shouldExcludeContentPath(relativePath: string): boolean {
@@ -13,5 +14,6 @@ export function shouldExcludeContentPath(relativePath: string): boolean {
   if (normalized.startsWith('docs/superpowers/')) return true
   if (normalized.includes('/docs/superpowers/')) return true
   if (normalized.startsWith('content/private/')) return true
+  if (normalized.startsWith('content/assessments/')) return true
   return false
 }

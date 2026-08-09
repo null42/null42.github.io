@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMU 姿态采集与识别上位机</title>
+  <link rel="stylesheet" href="/html-assets/imu-dashboard/styles.css" />
+</head>
+<body>
+  <!-- 布局编辑器：网格覆盖层 -->
+  <div id="grid-overlay" class="grid-overlay" style="display:none"></div>
+
+  <!-- 布局编辑器：工具栏 -->
+  <div id="layout-toolbar" class="layout-toolbar" style="display:none">
+    <span class="toolbar-title">布局编辑模式</span>
+    <button id="layout-save" title="保存当前布局">保存布局</button>
+    <button id="layout-reset" class="secondary" title="重置为默认布局">重置</button>
+    <button id="layout-export" class="secondary" title="导出配置JSON">导出</button>
+    <button id="layout-exit" class="danger" title="退出编辑">退出</button>
+  </div>
+
+  <!-- 布局编辑器：切换按钮 -->
+  <button id="edit-layout-btn" class="edit-toggle" title="进入布局编辑模式">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  </button>
+
+  <div class="app-shell">
+    <!-- ==================== 左侧导航栏 ==================== -->
+    <aside class="sidebar">
+      <!-- 品牌 Logo -->
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2f93ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/>
+        </svg>
+        IMU Console
+      </div>
+
+      <!-- 导航按钮 - 使用 data-page 属性标识页面切换 -->
+      <button class="nav active" data-page="home">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        首页
+      </button>
+      <button class="nav" data-page="collect">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a6 6 0 0012 0V4a6 6 0 00-12 0v10z"/><path d="M16 14v4a4 4 0 01-8 0v-4"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+        数据采集
+      </button>
+      <button class="nav" data-page="clean">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        数据清洗
+      </button>
+      <button class="nav" data-page="train">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        模型训练
+      </button>
+      <button class="nav" data-page="predict">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/></svg>
+        实时预测
+      </button>
+      <button class="nav" data-page="manage">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        数据管理
+      </button>
+      <button class="nav" data-page="settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        系统设置
+      </button>
+
+      <!-- 底部设备信息面板 -->
+      <section class="device-info panel-lite">
+        <div class="row"><b>设备信息</b><span class="ok">● <span id="conn-state">已连接</span></span></div>
+        <p>设备ID：<span id="device-id">IMU-001</span></p>
+        <p>设备类型：<span id="device-type">9轴IMU</span></p>
+        <p>固件版本：<span id="firmware">v1.2.3</span></p>
+        <p>端口：<span id="port-name">模拟</span></p>
+        <p>波特率：<span id="baud-view">115200</span></p>
+      </section>
+    </aside>
+
+    <!-- ==================== 主工作区 ==================== -->
+    <main class="workspace">
+
+      <!-- ========== 首页 ========== -->
+      <section class="page active" id="page-home">
+
+        <!-- 第一行：6个状态卡片 -->
+        <div class="cards">
+          <article class="card">
+            <small>IMU状态</small>
+            <strong id="imu-status">已连接</strong>
+            <p>连接时间：<span id="run-time-a">00:00:00</span></p>
+            <i class="green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            </i>
+          </article>
+          <article class="card">
+            <small>采样率</small>
+            <strong><span id="sample-rate">500</span> Hz</strong>
+            <p>目标频率：<span id="target-rate">500</span> Hz</p>
+            <i class="blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+            </i>
+          </article>
+          <article class="card">
+            <small>数据包率</small>
+            <strong><span id="packet-rate">100.0</span> %</strong>
+            <p>丢包率：<span id="loss-rate">0.0</span> %</p>
+            <i class="purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </i>
+          </article>
+          <article class="card">
+            <small>数据延迟</small>
+            <strong><span id="latency">4</span> ms</strong>
+            <p>平均延迟：<span id="avg-latency">4</span> ms</p>
+            <i class="yellow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </i>
+          </article>
+          <article class="card">
+            <small>存储状态</small>
+            <strong><span id="storage-used">12.4</span> GB</strong>
+            <p>剩余空间：<span id="storage-free">87.6</span> GB</p>
+            <i class="cyan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg>
+            </i>
+          </article>
+          <article class="card">
+            <small>运行时长</small>
+            <strong id="run-time-b">00:00:00</strong>
+            <p>系统启动后运行时间</p>
+            <i class="green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </i>
+          </article>
+        </div>
+
+        <!-- 第二行：仪表盘 + 3D可视化 + 曲线图 -->
+        <div class="dashboard-grid">
+
+          <!-- 实时姿态（欧拉角）仪表盘 -->
+          <article class="panel attitude-panel">
+            <h3>实时姿态（欧拉角）</h3>
+            <div class="gauge-wrap">
+              <div class="dial">
+                <canvas id="roll-gauge" width="170" height="160"></canvas>
+                <em>Roll(X)</em>
+                <strong id="roll-value">0.00°</strong>
+              </div>
+              <div class="dial-divider"></div>
+              <div class="dial">
+                <canvas id="pitch-gauge" width="170" height="160"></canvas>
+                <em>Pitch(Y)</em>
+                <strong id="pitch-value">0.00°</strong>
+              </div>
+              <div class="dial-divider"></div>
+              <div class="dial">
+                <canvas id="yaw-gauge" width="170" height="160"></canvas>
+                <em>Yaw(Z)</em>
+                <strong id="yaw-value">0.00°</strong>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3D姿态可视化 -->
+          <article class="panel cube-panel">
+            <div class="panel-head">
+              <h3>3D姿态可视化</h3>
+              <div class="seg">
+                <button class="mode active" data-mode="euler">欧拉角</button>
+                <button class="mode" data-mode="quat">四元数</button>
+              </div>
+            </div>
+            <div class="scene">
+              <canvas id="cube-canvas" width="280" height="260"></canvas>
+            </div>
+            <p class="readout" id="pose-readout"></p>
+          </article>
+
+          <!-- 实时数据曲线 -->
+          <article class="panel chart-panel">
+            <h3>实时数据曲线</h3>
+            <div class="legend">
+              <span class="r">Roll</span>
+              <span class="p">Pitch</span>
+              <span class="y">Yaw</span>
+            </div>
+            <canvas id="attitude-chart" width="560" height="245"></canvas>
+          </article>
+
+          <!-- 第三行：传感器数据 + 动作识别 + 录制状态 + 系统日志 -->
+
+          <!-- 实时传感器数据 -->
+          <article class="panel sensor-panel">
+            <h3>实时传感器数据</h3>
+            <div class="sensor-grid">
+              <section>
+                <h4>加速度（g）</h4>
+                <div class="sensor-row"><div class="sensor-item"><em>Ax</em><b id="ax">0.000</b></div><canvas id="ax-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>Ay</em><b id="ay">0.000</b></div><canvas id="ay-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>Az</em><b id="az">0.000</b></div><canvas id="az-spark" width="120" height="32"></canvas></div>
+              </section>
+              <div class="sensor-divider"></div>
+              <section>
+                <h4>角速度（°/s）</h4>
+                <div class="sensor-row"><div class="sensor-item"><em>Gx</em><b id="gx">0.00</b></div><canvas id="gx-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>Gy</em><b id="gy">0.00</b></div><canvas id="gy-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>Gz</em><b id="gz">0.00</b></div><canvas id="gz-spark" width="120" height="32"></canvas></div>
+              </section>
+              <div class="sensor-divider"></div>
+              <section>
+                <h4>磁场（μT）</h4>
+                <div class="sensor-row"><div class="sensor-item"><em>Mx</em><b id="mx">0.00</b></div><canvas id="mx-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>My</em><b id="my">0.00</b></div><canvas id="my-spark" width="120" height="32"></canvas></div>
+                <div class="sensor-row"><div class="sensor-item"><em>Mz</em><b id="mz">0.00</b></div><canvas id="mz-spark" width="120" height="32"></canvas></div>
+              </section>
+            </div>
+          </article>
+
+          <!-- 当前动作识别结果 -->
+          <article class="panel action-panel">
+            <h3>当前动作识别结果</h3>
+            <div class="action-main">
+              <div class="runner">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/></svg>
+              </div>
+              <strong id="activity">Unknown</strong>
+            </div>
+            <p>置信度：<span id="confidence">0.0</span>%</p>
+            <div class="bar"><i id="confidence-bar"></i></div>
+          </article>
+
+          <!-- 录制状态 -->
+          <article class="panel record-panel">
+            <h3>录制状态</h3>
+            <div class="rec-line">
+              <div class="rec-ring" id="rec-ring"></div>
+              <strong id="record-state">待录制</strong>
+            </div>
+            <p>录制时长：<span id="record-time">00:00:00</span></p>
+            <p>文件大小：<span id="file-size">0.00</span> MB</p>
+            <div class="btns">
+              <button id="record-toggle">开始录制</button>
+              <button class="danger" id="download-csv">导出CSV</button>
+            </div>
+          </article>
+
+          <!-- 系统日志 -->
+          <article class="panel logs-panel">
+            <div class="panel-head">
+              <h3>系统日志</h3>
+              <button class="link-btn" id="clear-log">清空</button>
+            </div>
+            <div class="log-list" id="log-list"></div>
+          </article>
+
+        </div><!-- /dashboard-grid -->
+
+        <!-- 底部状态栏 -->
+        <footer class="status-bar">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38d976" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            设备健康度 <b id="health">100%</b>
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffc75a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+            温度 <b id="temperature">36.5 ℃</b>
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#28d7e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/><polyline points="11,6 7,12 13,12 9,18"/></svg>
+            电压 <b id="voltage">3.72 V</b>
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2f93ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+            数据流状态 <b id="stream-state">正常</b>
+          </span>
+        </footer>
+
+      </section><!-- /page-home -->
+
+      <!-- ========== 数据采集页 ========== -->
+      <section class="page" id="page-collect">
+        <div class="tool-grid two-col">
+          <!-- 串口连接配置 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              串口通信配置
+            </h2>
+            <label>
+              数据源
+              <select id="data-source">
+                <option value="mock">模拟数据</option>
+                <option value="serial">真实串口</option>
+                <option value="playback">离线回放</option>
+              </select>
+            </label>
+            <label>
+              波特率
+              <select id="baud-rate">
+                <option>115200</option>
+                <option>230400</option>
+                <option>460800</option>
+                <option>921600</option>
+                <option>9600</option>
+              </select>
+            </label>
+            <label>
+              数据位
+              <select id="data-bits">
+                <option value="8">8位</option>
+                <option value="7">7位</option>
+              </select>
+            </label>
+            <label>
+              停止位
+              <select id="stop-bits">
+                <option value="1">1位</option>
+                <option value="2">2位</option>
+              </select>
+            </label>
+            <label>
+              校验位
+              <select id="parity">
+                <option value="none">无校验</option>
+                <option value="even">偶校验</option>
+                <option value="odd">奇校验</option>
+              </select>
+            </label>
+            <div class="btn-row">
+              <button id="connect-serial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12,5 19,12 12,19"/></svg>
+                连接串口
+              </button>
+              <button id="disconnect-serial" class="secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                断开连接
+              </button>
+            </div>
+            <p class="hint">Web Serial API 需要 Chrome/Edge 浏览器，并通过本地服务或 HTTPS 打开页面。</p>
+          </article>
+
+          <!-- 帧格式配置 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+              帧格式配置
+            </h2>
+            <label>
+              帧头标识
+              <input id="frame-prefix" value="$IMU" placeholder="$IMU" />
+            </label>
+            <label>
+              字段分隔符
+              <input id="frame-separator" value="," placeholder="," />
+            </label>
+            <label>
+              字段映射（按顺序）
+              <textarea id="field-map" rows="4" placeholder="roll,pitch,yaw,ax,ay,az,...">roll,pitch,yaw,ax,ay,az,gx,gy,gz,mx,my,mz,qw,qx,qy,qz,activity,confidence,temperature,voltage,health</textarea>
+            </label>
+            <label>
+              校验方式
+              <select id="checksum-mode">
+                <option value="none">无校验</option>
+                <option value="xor">XOR 校验和</option>
+                <option value="crc8">CRC-8</option>
+                <option value="crc16">CRC-16</option>
+              </select>
+            </label>
+            <label>
+              帧尾标识
+              <input id="frame-suffix" value="\r\n" placeholder="\r\n" />
+            </label>
+            <p class="hint">支持两种帧格式：(1) 按字段映射顺序传值，如 $IMU,-12.3,5.6,0.98,...*CS；(2) 键值对模式，如 $IMU,roll=-12.3,pitch=5.6。</p>
+          </article>
+
+          <!-- 录制控制 -->
+          <article class="panel full">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16 10,8"/></svg>
+              录制控制
+            </h2>
+            <div class="rec-controls">
+              <div class="btn-row compact">
+                <button id="record-toggle-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                  开始录制
+                </button>
+                <button id="pause-record" class="secondary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  暂停
+                </button>
+                <button class="danger" id="download-csv-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  导出CSV
+                </button>
+              </div>
+              <p>当前录制：<b id="record-summary">0 条，0.00 MB</b></p>
+              <p>录制文件路径：<code id="record-path">-</code></p>
+            </div>
+          </article>
+        </div>
+      </section><!-- /page-collect -->
+
+      <!-- ========== 数据清洗页（占位） ========== -->
+      <section class="page" id="page-clean">
+        <article class="panel placeholder">
+          <div class="placeholder-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#2f93ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/>
+            </svg>
+          </div>
+          <h2>数据清洗</h2>
+          <p>功能模块开发中，即将支持以下功能：</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              异常值检测与过滤（基于3σ规则 / IQR方法）
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              零偏校准与基线漂移修正
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              重采样与时间戳对齐
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              低通/高通/带通滤波器配置
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              磁场硬/软铁补偿
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ========== 模型训练页（占位） ========== -->
+      <section class="page" id="page-train">
+        <article class="panel placeholder">
+          <div class="placeholder-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9b59ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+          </div>
+          <h2>模型训练</h2>
+          <p>功能模块开发中，即将支持以下功能：</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              样本标注与管理工具
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              训练集/验证集/测试集划分
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              LSTM / CNN / Transformer 模型训练
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              超参数搜索与交叉验证
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              模型评估指标与混淆矩阵
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              模型导出（ONNX / TensorFlow Lite）
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ========== 实时预测页（占位） ========== -->
+      <section class="page" id="page-predict">
+        <article class="panel placeholder">
+          <div class="placeholder-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ffc75a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+            </svg>
+          </div>
+          <h2>实时预测</h2>
+          <p>实时预测结果已集成到首页「当前动作识别结果」面板中。</p>
+          <p>后续版本将支持：</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              加载本地训练好的模型文件
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              接入远程推理 API 接口
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              多模型对比与 A/B 测试
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              预测延迟与吞吐量监控
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ========== 数据管理页 ========== -->
+      <section class="page" id="page-manage">
+        <div class="tool-grid two-col">
+          <!-- 离线回放 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21 5,3"/></svg>
+              离线回放
+            </h2>
+            <label class="file-btn">
+              导入CSV/TXT数据文件
+              <input id="playback-file" type="file" accept=".csv,.txt,.json" />
+            </label>
+            <label>
+              回放速度
+              <select id="playback-speed">
+                <option value="0.5">0.5x 慢速</option>
+                <option value="1" selected>1.0x 正常</option>
+                <option value="2">2.0x 快速</option>
+                <option value="5">5.0x 极速</option>
+              </select>
+            </label>
+            <label>
+              回放模式
+              <select id="playback-mode">
+                <option value="once">单次播放</option>
+                <option value="loop">循环播放</option>
+              </select>
+            </label>
+            <div class="btn-row">
+              <button id="playback-start">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21 5,3"/></svg>
+                开始回放
+              </button>
+              <button id="playback-stop" class="secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                停止回放
+              </button>
+            </div>
+            <p class="hint">CSV 表头需包含以下字段之一或全部：roll/pitch/yaw/ax/ay/az/gx/gy/gz/mx/my/mz/activity/confidence/temperature/voltage/health/timestamp</p>
+          </article>
+
+          <!-- 数据状态概览 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              数据状态概览
+            </h2>
+            <div class="stat-row">
+              <div class="stat-item">
+                <span class="stat-label">录制样本总数</span>
+                <strong id="record-count">0</strong>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">已回放样本数</span>
+                <strong id="playback-count">0</strong>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">数据完整性</span>
+                <strong id="packet-rate-2">100.0%</strong>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">存储占用</span>
+                <strong id="total-storage">0.00 MB</strong>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button id="clear-data" class="danger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                清空所有数据
+              </button>
+              <button id="export-all">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                批量导出
+              </button>
+            </div>
+          </article>
+        </div>
+      </section><!-- /page-manage -->
+
+      <!-- ========== 系统设置页 ========== -->
+      <section class="page" id="page-settings">
+        <div class="tool-grid two-col">
+          <!-- 设备设置 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              设备设置
+            </h2>
+            <label>
+              设备ID
+              <input id="setting-device-id" value="IMU-001" />
+            </label>
+            <label>
+              设备类型
+              <input id="setting-device-type" value="9轴IMU" />
+            </label>
+            <label>
+              固件版本
+              <input id="setting-firmware" value="v1.2.3" readonly />
+            </label>
+            <label>
+              显示语言
+              <select id="setting-lang">
+                <option value="zh-CN">简体中文</option>
+                <option value="en-US">English</option>
+              </select>
+            </label>
+            <label>
+              刷新率上限
+              <select id="setting-max-fps">
+                <option value="30">30 FPS</option>
+                <option value="60" selected>60 FPS</option>
+                <option value="120">120 FPS</option>
+              </select>
+            </label>
+            <button id="apply-device-settings">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+              应用设置
+            </button>
+          </article>
+
+          <!-- 健康阈值与告警 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              健康阈值与告警设置
+            </h2>
+            <label>
+              最低电压阈值（V）
+              <input id="min-voltage" value="3.30" type="number" step="0.01" min="2.5" max="5.0" />
+            </label>
+            <label>
+              最高温度阈值（℃）
+              <input id="max-temp" value="70" type="number" step="1" min="40" max="120" />
+            </label>
+            <label>
+              最大允许延迟（ms）
+              <input id="max-latency" value="50" type="number" step="1" min="5" max="200" />
+            </label>
+            <label>
+              最低采样率（Hz）
+              <input id="min-sample-rate" value="100" type="number" step="10" min="10" max="1000" />
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="enable-audio-alert" checked />
+              启用声音告警
+            </label>
+            <p class="hint">当电压低于最低值、温度超过最高值、延迟超标或采样率不足时，系统会自动降低健康度并产生告警日志。</p>
+          </article>
+
+          <!-- 高级选项 -->
+          <article class="panel form-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              高级选项
+            </h2>
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="auto-connect" checked />
+              启动时自动连接串口
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="dark-mode" checked />
+              深色主题
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="smooth-scroll" />
+              曲线平滑滚动
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="debug-mode" />
+              调试模式（显示原始帧数据）
+            </label>
+            <label>
+              日志保留条数
+              <input id="max-log-lines" value="500" type="number" min="50" max="5000" step="50" />
+            </label>
+            <label>
+              曲线历史点数
+              <input id="chart-history-points" value="300" type="number" min="50" max="2000" step="50" />
+            </label>
+          </article>
+
+          <!-- 关于系统 -->
+          <article class="panel form-panel about-panel">
+            <h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              关于系统
+            </h2>
+            <div class="about-info">
+              <p><b>系统名称：</b>IMU 姿态采集与识别上位机</p>
+              <p><b>版本号：</b>v2.0.0</p>
+              <p><b>构建日期：</b>2026-06-10</p>
+              <p><b>技术栈：</b>原生 HTML/CSS/JavaScript（零外部依赖）</p>
+              <p><b>功能特性：</b></p>
+              <ul>
+                <li>实时 IMU 数据采集与可视化</li>
+                <li>欧拉角仪表盘 + 3D 姿态立方体</li>
+                <li>多通道实时数据曲线</li>
+                <li>动作识别推理展示</li>
+                <li>数据录制与 CSV 导出</li>
+                <li>离线数据回放</li>
+                <li>深色科技风 UI</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section><!-- /page-settings -->
+
+    </main>
+  </div><!-- /app-shell -->
+  <script src="/html-assets/imu-dashboard/app.js"></script>
+</body>
+</html>

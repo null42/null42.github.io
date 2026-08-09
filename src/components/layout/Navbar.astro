@@ -167,15 +167,12 @@ if (isLocalSrcLogo) {
 </div>
 
 <script>
-import { initNavigationMenu } from "@/utils/navigation-menu-controller";
+import { installNavigationMenuLifecycle } from "@/utils/navigation-menu-controller";
 
 let navbarButtonController: AbortController | undefined;
-let swupContentReplaceUnsubscribe: (() => void) | undefined;
 
 function loadButtonScript() {
     navbarButtonController?.abort();
-    swupContentReplaceUnsubscribe?.();
-    swupContentReplaceUnsubscribe = undefined;
     navbarButtonController = new AbortController();
     const signal = navbarButtonController.signal;
     const searchButton = document.getElementById("nav-search-btn");
@@ -213,7 +210,7 @@ function loadButtonScript() {
         };
     }
 
-    initNavigationMenu();
+    installNavigationMenuLifecycle(window.swup);
 
     let musicBtn = document.getElementById("music-player-switch");
     if (musicBtn) {
@@ -250,16 +247,6 @@ function loadButtonScript() {
             bgPlayerBtn!.style.display = mode === "none" ? "none" : "";
         }, { signal });
     }
-
-    const registerSwupHook = () => {
-        swupContentReplaceUnsubscribe?.();
-        swupContentReplaceUnsubscribe = window.swup?.hooks?.on("content:replace", () => {
-            window.navigationMenuController?.close({ reason: "swup-replace" });
-            setTimeout(() => initNavigationMenu(), 0);
-        });
-    };
-    if (window.swup?.hooks) registerSwupHook();
-    else document.addEventListener("swup:enable", registerSwupHook, { signal, once: true });
 
     let themeSwitchBtn = document.getElementById("scheme-switch");
     if (themeSwitchBtn) {

@@ -5,7 +5,7 @@ import MainGridLayout from "@/layouts/MainGridLayout.astro";
 
 export function getStaticPaths() {
 	const root = path.resolve("content/html");
-	const paths: Array<{ params: { slug: string }; props: { title: string; description: string; slug: string } }> = [];
+	const paths: Array<{ params: { slug: string }; props: { title: string; description: string; source: string; assets: string[]; slug: string } }> = [];
 	const walk = (directory: string) => {
 		if (!fs.existsSync(directory)) return;
 		for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -15,9 +15,9 @@ export function getStaticPaths() {
 				const relative = path.relative(root, absolute).replace(/\\/g, "/");
 				const slug = relative.replace(/\.html$/i, "");
 				const metadataPath = absolute.replace(/\.html$/i, ".json");
-				let metadata: { title?: string; description?: string } = {};
+				let metadata: { title?: string; description?: string; source?: string; assets?: string[] } = {};
 				try { if (fs.existsSync(metadataPath)) metadata = JSON.parse(fs.readFileSync(metadataPath, "utf8")); } catch {}
-				paths.push({ params: { slug }, props: { slug, title: metadata.title || path.basename(slug), description: metadata.description || "HTML 文档" } });
+				paths.push({ params: { slug }, props: { slug, title: metadata.title || path.basename(slug), description: metadata.description || "HTML 文档", source: metadata.source || "来源未记录", assets: metadata.assets || [] } });
 			}
 		}
 	};
@@ -25,12 +25,14 @@ export function getStaticPaths() {
 	return paths;
 }
 
-const { slug, title, description } = Astro.props;
+const { slug, title, description, source, assets } = Astro.props;
+const missingAssets = assets.filter((asset: string) => !fs.existsSync(path.join("public", ...asset.replace(/^\//, "").split("/"))));
 ---
 
 <MainGridLayout title={`HTML · ${title}`} description={description}>
 	<article class="html-document-page">
-		<header class="html-document-header card-base"><a href="/html/">← HTML 文档</a><div><h1>{title}</h1><p>{description}</p></div><button type="button" data-html-fullscreen>全屏</button></header>
+		<header class="html-document-header card-base"><a href="/html/">← HTML 文档</a><div><h1>{title}</h1><p>{description}</p><small>来源：{source}</small></div><nav><a href={`/html-source/${slug}.html`} target="_blank">原始 HTML</a><button type="button" data-html-fullscreen>全屏</button></nav></header>
+		{missingAssets.length > 0 && <div class="html-document-error card-base" role="alert">资源缺失：{missingAssets.join("、")}</div>}
 		<div class="html-document-frame card-base" data-html-frame>
 			<iframe title={title} src={`/html-raw/${slug}/`} sandbox="allow-scripts allow-forms allow-modals" data-html-iframe></iframe>
 		</div>
@@ -38,27 +40,34 @@ const { slug, title, description } = Astro.props;
 </MainGridLayout>
 
 <script>
+	type HtmlDocumentLifecycle = { dispose: () => void };
+	const htmlWindow = window as typeof window & { __htmlDocumentLifecycle?: HtmlDocumentLifecycle };
+	htmlWindow.__htmlDocumentLifecycle?.dispose();
+	const lifecycleController = new AbortController();
+	let pageController: AbortController | undefined;
+	let removePageViewHook: (() => void) | undefined;
 	const initHtmlDocument = () => {
+		pageController?.abort();
+		pageController = new AbortController();
 		const frame = document.querySelector<HTMLElement>("[data-html-frame]");
 		const iframe = document.querySelector<HTMLIFrameElement>("[data-html-iframe]");
 		const button = document.querySelector<HTMLButtonElement>("[data-html-fullscreen]");
-		if (!frame || !iframe || frame.dataset.ready) return;
-		frame.dataset.ready = "true";
-		const eventController = new AbortController();
+		if (!frame || !iframe) return;
+		const eventController = pageController;
 		window.addEventListener("message", (event) => {
 			if (event.source !== iframe.contentWindow || event.data?.type !== "null42:html-resize") return;
 			const height = Number(event.data.height);
 			if (Number.isFinite(height)) iframe.style.height = `${Math.max(640, Math.min(height, 20_000))}px`;
 		}, { signal: eventController.signal });
 		button?.addEventListener("click", async () => { if (document.fullscreenElement === frame) await document.exitFullscreen(); else await frame.requestFullscreen(); }, { signal: eventController.signal });
-		document.addEventListener("fullscreenchange", () => { if (button) button.textContent = document.fullscreenElement === frame ? "????" : "??"; }, { signal: eventController.signal });
-		window.addEventListener("swup:leave:page", () => eventController.abort(), { once: true, signal: eventController.signal });
+		document.addEventListener("fullscreenchange", () => { if (button) button.textContent = document.fullscreenElement === frame ? "退出全屏" : "全屏"; }, { signal: eventController.signal });
 	};
 	initHtmlDocument();
-	window.swup?.hooks?.on("page:view", initHtmlDocument);
+	const attachSwupHook = () => { removePageViewHook?.(); removePageViewHook = window.swup?.hooks?.on("page:view", initHtmlDocument); };
+	if (window.swup?.hooks) attachSwupHook(); else document.addEventListener("swup:enable", attachSwupHook, { once: true, signal: lifecycleController.signal });
+	htmlWindow.__htmlDocumentLifecycle = { dispose: () => { lifecycleController.abort(); pageController?.abort(); removePageViewHook?.(); } };
 </script>
 
 <style>
-	.html-document-page{display:grid;gap:1rem}.html-document-header{display:flex;align-items:center;gap:1rem;padding:1rem;flex-wrap:wrap}.html-document-header>a{color:var(--primary)}.html-document-header>div{display:grid;gap:.2rem;flex:1}.html-document-header h1,.html-document-header p{margin:0}.html-document-header p{color:var(--meta-divider)}.html-document-header button{border:1px solid var(--line-divider);border-radius:.7rem;padding:.55rem .85rem;background:var(--btn-regular-bg);color:inherit;cursor:pointer}.html-document-frame{padding:0;overflow:auto;background:white}.html-document-frame iframe{display:block;width:100%;min-height:70vh;border:0;background:white}.html-document-frame:fullscreen{width:100vw;height:100vh;border-radius:0}.html-document-frame:fullscreen iframe{height:100vh!important}
+	.html-document-page{display:grid;gap:1rem}.html-document-header{display:flex;align-items:center;gap:1rem;padding:1rem;flex-wrap:wrap}.html-document-header>a,.html-document-header nav a{color:var(--primary)}.html-document-header>div{display:grid;gap:.2rem;flex:1}.html-document-header h1,.html-document-header p{margin:0}.html-document-header p,.html-document-header small{color:var(--meta-divider)}.html-document-header nav{display:flex;align-items:center;gap:.65rem}.html-document-header button{border:1px solid var(--line-divider);border-radius:.7rem;padding:.55rem .85rem;background:var(--btn-regular-bg);color:inherit;cursor:pointer}.html-document-error{padding:.8rem 1rem;border-color:#ef4444;color:#b91c1c}.html-document-frame{padding:0;overflow:auto;background:white}.html-document-frame iframe{display:block;width:100%;min-height:70vh;border:0;background:white}.html-document-frame:fullscreen{width:100vw;height:100vh;border-radius:0}.html-document-frame:fullscreen iframe{height:100vh!important}
 </style>
-

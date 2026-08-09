@@ -3,7 +3,7 @@
     "sections": 3,
     "routes": 15,
     "stages": 37,
-    "articles": 558
+    "articles": 454
   },
   "relationships": {
     "sections": [
@@ -274,19 +274,7 @@
         "stageId": "foundations-overview"
       },
       {
-        "id": "foundations/control-theory/CT-01-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-02-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -298,19 +286,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-03-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-03-Frequency-Response-Bode",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-04-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -322,19 +298,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-05-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-05-PID-Tuning-Implementation",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-06-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -346,19 +310,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-07-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-07-Nyquist-Stability",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-08-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -370,19 +322,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-09-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-09-Compensator-Design",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-10-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -394,19 +334,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-11-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-11-Observer-Design",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-12-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -418,19 +346,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-13-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-13-LQR-LQG",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-14-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -442,19 +358,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-15-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-15-PID-Optimization-Strategies",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-16-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -466,19 +370,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/control-theory/CT-17-assessment",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
         "id": "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
-        "sectionId": "foundations",
-        "routeId": "control-theory",
-        "stageId": "control-theory"
-      },
-      {
-        "id": "foundations/control-theory/CT-18-assessment",
         "sectionId": "foundations",
         "routeId": "control-theory",
         "stageId": "control-theory"
@@ -502,19 +394,7 @@
         "stageId": "control-theory"
       },
       {
-        "id": "foundations/power-electronics-basics/EE-01-assessment",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
         "id": "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
-        "id": "foundations/power-electronics-basics/EE-02-assessment",
         "sectionId": "foundations",
         "routeId": "power-electronics-basics",
         "stageId": "power-electronics-basics"
@@ -526,31 +406,13 @@
         "stageId": "power-electronics-basics"
       },
       {
-        "id": "foundations/power-electronics-basics/EE-03-assessment",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
         "id": "foundations/power-electronics-basics/EE-03-BJT-Basics",
         "sectionId": "foundations",
         "routeId": "power-electronics-basics",
         "stageId": "power-electronics-basics"
       },
       {
-        "id": "foundations/power-electronics-basics/EE-04-assessment",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
         "id": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
-        "id": "foundations/power-electronics-basics/EE-05-assessment",
         "sectionId": "foundations",
         "routeId": "power-electronics-basics",
         "stageId": "power-electronics-basics"
@@ -568,19 +430,7 @@
         "stageId": "power-electronics-basics"
       },
       {
-        "id": "foundations/power-electronics-basics/EE-06-assessment",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
         "id": "foundations/power-electronics-basics/EE-07-OpAmp",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
-        "id": "foundations/power-electronics-basics/EE-07-assessment",
         "sectionId": "foundations",
         "routeId": "power-electronics-basics",
         "stageId": "power-electronics-basics"
@@ -592,19 +442,7 @@
         "stageId": "power-electronics-basics"
       },
       {
-        "id": "foundations/power-electronics-basics/EE-08-assessment",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
         "id": "foundations/power-electronics-basics/EE-09-H-Bridge",
-        "sectionId": "foundations",
-        "routeId": "power-electronics-basics",
-        "stageId": "power-electronics-basics"
-      },
-      {
-        "id": "foundations/power-electronics-basics/EE-09-assessment",
         "sectionId": "foundations",
         "routeId": "power-electronics-basics",
         "stageId": "power-electronics-basics"
@@ -629,12 +467,6 @@
       },
       {
         "id": "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
-        "sectionId": "foundations",
-        "routeId": "simulation",
-        "stageId": "simulation-c"
-      },
-      {
-        "id": "foundations/simulation/c-simulation/SIM-05-assessment",
         "sectionId": "foundations",
         "routeId": "simulation",
         "stageId": "simulation-c"
@@ -2188,31 +2020,13 @@
         "stageId": "cross-reference"
       },
       {
-        "id": "motor/hardware/HW-01-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
         "id": "motor/hardware/HW-01-Motor-Basics",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "hardware"
       },
       {
-        "id": "motor/hardware/HW-01B-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
         "id": "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
-        "id": "motor/hardware/HW-02-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "hardware"
@@ -2230,19 +2044,7 @@
         "stageId": "hardware"
       },
       {
-        "id": "motor/hardware/HW-03-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
         "id": "motor/hardware/HW-03-Position-Sensor",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
-        "id": "motor/hardware/HW-04-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "hardware"
@@ -2260,31 +2062,13 @@
         "stageId": "hardware"
       },
       {
-        "id": "motor/hardware/HW-05-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
         "id": "motor/hardware/HW-06-Power-Management-Protection",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "hardware"
       },
       {
-        "id": "motor/hardware/HW-06-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
         "id": "motor/hardware/HW-07-Thermal-EMC-Design",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "hardware"
-      },
-      {
-        "id": "motor/hardware/HW-07-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "hardware"
@@ -2314,19 +2098,7 @@
         "stageId": "mechanical"
       },
       {
-        "id": "motor/power-path/PP-01-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
-        "id": "motor/power-path/PP-02-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
@@ -2338,19 +2110,7 @@
         "stageId": "power-path"
       },
       {
-        "id": "motor/power-path/PP-03-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-03-LLC-Resonant-Converter",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
-        "id": "motor/power-path/PP-04-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
@@ -2362,31 +2122,13 @@
         "stageId": "power-path"
       },
       {
-        "id": "motor/power-path/PP-05-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-05-Magnetic-Design",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
       },
       {
-        "id": "motor/power-path/PP-06-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-06-Loop-Compensation",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
-        "id": "motor/power-path/PP-07-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
@@ -2404,19 +2146,7 @@
         "stageId": "power-path"
       },
       {
-        "id": "motor/power-path/PP-08-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-09-Three-Level-SVPWM",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
-        "id": "motor/power-path/PP-09-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
@@ -2428,19 +2158,7 @@
         "stageId": "power-path"
       },
       {
-        "id": "motor/power-path/PP-10-assessment",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
         "id": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
-        "sectionId": "motor",
-        "routeId": "hardware",
-        "stageId": "power-path"
-      },
-      {
-        "id": "motor/power-path/PP-11-assessment",
         "sectionId": "motor",
         "routeId": "hardware",
         "stageId": "power-path"
@@ -2482,12 +2200,6 @@
         "stageId": "foundations"
       },
       {
-        "id": "motor/algorithm/ALG-00-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-00-Current-Loop-Intuition",
         "sectionId": "motor",
         "routeId": "control",
@@ -2500,19 +2212,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-01-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-02-Current-Sampling-Timing",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-02-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2530,19 +2230,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-04-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-05-Sensored-FOC",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-05-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2560,19 +2248,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-07-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-08-Initial-Position-Detection",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-08-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2584,19 +2260,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-09-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-10-Overmodulation",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-10-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2608,19 +2272,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-11-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-12-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2632,25 +2284,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-13-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-14-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-15-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2668,19 +2302,7 @@
         "stageId": "algorithm"
       },
       {
-        "id": "motor/algorithm/ALG-16-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
         "id": "motor/algorithm/ALG-17-VF-Control",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-18-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2693,12 +2315,6 @@
       },
       {
         "id": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-19-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2717,12 +2333,6 @@
       },
       {
         "id": "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "algorithm"
-      },
-      {
-        "id": "motor/algorithm/ALG-22-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "algorithm"
@@ -2830,19 +2440,7 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-01-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-01-PMSM-Model",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-02-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -2854,19 +2452,7 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-03-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-03-Space-Vector",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-04-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -2878,19 +2464,7 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-05-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-05-SVPWM-2Level",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-06-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -2902,19 +2476,7 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-07-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-07-Speed-Position-Loop",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-08-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -2926,31 +2488,13 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-09-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-10-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/MC-10-Parameter-Sensitivity",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-11-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -3034,79 +2578,7 @@
         "stageId": "motion-control"
       },
       {
-        "id": "motor/motion-control/MC-MC-01-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-04-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-MC-06-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-03-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-06-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-MC-04-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-05-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-MC-03-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-02-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-MC-05-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
         "id": "motor/motion-control/README",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-TP-01-assessment",
-        "sectionId": "motor",
-        "routeId": "control",
-        "stageId": "motion-control"
-      },
-      {
-        "id": "motor/motion-control/MC-MC-02-assessment",
         "sectionId": "motor",
         "routeId": "control",
         "stageId": "motion-control"
@@ -3166,19 +2638,7 @@
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/algorithm/ADV-ALG-01-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/algorithm/ADV-ALG-05-assessment",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
@@ -3190,19 +2650,7 @@
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/algorithm/ADV-ALG-07-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/algorithm/ADV-ALG-09-assessment",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
@@ -3214,37 +2662,13 @@
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/algorithm/ADV-ALG-13-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/algorithm/ADV-ALG-15-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
@@ -3262,37 +2686,13 @@
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/system-methodology/SYS-01-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/system-methodology/SYS-02-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/system-methodology/SYS-03-assessment",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
@@ -3310,37 +2710,13 @@
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/system-methodology/SYS-04-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
       },
       {
-        "id": "motor/advanced/system-methodology/SYS-05-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/system-methodology/SYS-06-assessment",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
         "id": "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
-        "sectionId": "motor",
-        "routeId": "practice",
-        "stageId": "advanced"
-      },
-      {
-        "id": "motor/advanced/system-methodology/SYS-07-assessment",
         "sectionId": "motor",
         "routeId": "practice",
         "stageId": "advanced"
@@ -3619,67 +2995,39 @@
   },
   "mappedArticleIds": [
     "foundations/README",
-    "foundations/control-theory/CT-01-assessment",
     "foundations/control-theory/CT-01-Open-Loop-Closed-Loop",
-    "foundations/control-theory/CT-02-assessment",
     "foundations/control-theory/CT-02-Time-Domain-Analysis",
-    "foundations/control-theory/CT-03-assessment",
     "foundations/control-theory/CT-03-Frequency-Response-Bode",
-    "foundations/control-theory/CT-04-assessment",
     "foundations/control-theory/CT-04-PID-Control-Principles",
-    "foundations/control-theory/CT-05-assessment",
     "foundations/control-theory/CT-05-PID-Tuning-Implementation",
-    "foundations/control-theory/CT-06-assessment",
     "foundations/control-theory/CT-06-Feedforward-Control",
-    "foundations/control-theory/CT-07-assessment",
     "foundations/control-theory/CT-07-Nyquist-Stability",
-    "foundations/control-theory/CT-08-assessment",
     "foundations/control-theory/CT-08-Root-Locus",
-    "foundations/control-theory/CT-09-assessment",
     "foundations/control-theory/CT-09-Compensator-Design",
-    "foundations/control-theory/CT-10-assessment",
     "foundations/control-theory/CT-10-State-Space",
-    "foundations/control-theory/CT-11-assessment",
     "foundations/control-theory/CT-11-Observer-Design",
-    "foundations/control-theory/CT-12-assessment",
     "foundations/control-theory/CT-12-State-Feedback",
-    "foundations/control-theory/CT-13-assessment",
     "foundations/control-theory/CT-13-LQR-LQG",
-    "foundations/control-theory/CT-14-assessment",
     "foundations/control-theory/CT-14-Cascaded-PID-Control",
-    "foundations/control-theory/CT-15-assessment",
     "foundations/control-theory/CT-15-PID-Optimization-Strategies",
-    "foundations/control-theory/CT-16-assessment",
     "foundations/control-theory/CT-16-ADRC-Theory",
-    "foundations/control-theory/CT-17-assessment",
     "foundations/control-theory/CT-17-LADRC-Linear-ADRC",
-    "foundations/control-theory/CT-18-assessment",
     "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
     "foundations/control-theory/CT-19-Model-Predictive-Control",
     "foundations/control-theory/README",
-    "foundations/power-electronics-basics/EE-01-assessment",
     "foundations/power-electronics-basics/EE-01-Resistance-Capacitance-Inductance-Basics",
-    "foundations/power-electronics-basics/EE-02-assessment",
     "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
-    "foundations/power-electronics-basics/EE-03-assessment",
     "foundations/power-electronics-basics/EE-03-BJT-Basics",
-    "foundations/power-electronics-basics/EE-04-assessment",
     "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
-    "foundations/power-electronics-basics/EE-05-assessment",
     "foundations/power-electronics-basics/EE-05-MOSFET-Gate-Drive",
     "foundations/power-electronics-basics/EE-06-IGBT-Principles",
-    "foundations/power-electronics-basics/EE-06-assessment",
     "foundations/power-electronics-basics/EE-07-OpAmp",
-    "foundations/power-electronics-basics/EE-07-assessment",
     "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
-    "foundations/power-electronics-basics/EE-08-assessment",
     "foundations/power-electronics-basics/EE-09-H-Bridge",
-    "foundations/power-electronics-basics/EE-09-assessment",
     "foundations/power-electronics-basics/README",
     "foundations/simulation/c-simulation/code-examples/README",
     "foundations/simulation/c-simulation/SIM-01-C-Simulation-QuickStart",
     "foundations/simulation/c-simulation/SIM-00-C-Simulation-Overview",
-    "foundations/simulation/c-simulation/SIM-05-assessment",
     "foundations/simulation/c-simulation/SIM-05-Digital-Twin",
     "foundations/simulation/c-simulation/SIM-04-emachinery-Complete-Usage-Tutorial",
     "foundations/simulation/c-simulation/SIM-02-C-Simulation-Code-Map",
@@ -3938,96 +3286,59 @@
     "motor/cross-reference/xref-adv-base",
     "motor/cross-reference/xref-practice",
     "motor/cross-reference/xref-motion-control",
-    "motor/hardware/HW-01-assessment",
     "motor/hardware/HW-01-Motor-Basics",
-    "motor/hardware/HW-01B-assessment",
     "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
-    "motor/hardware/HW-02-assessment",
     "motor/hardware/HW-02-Current-Sensing",
     "motor/hardware/HW-02B-Current-Sensing-Topologies",
-    "motor/hardware/HW-03-assessment",
     "motor/hardware/HW-03-Position-Sensor",
-    "motor/hardware/HW-04-assessment",
     "motor/hardware/HW-04-MCU-Peripherals",
     "motor/hardware/HW-05-Power-Devices-Gate-Drivers",
-    "motor/hardware/HW-05-assessment",
     "motor/hardware/HW-06-Power-Management-Protection",
-    "motor/hardware/HW-06-assessment",
     "motor/hardware/HW-07-Thermal-EMC-Design",
-    "motor/hardware/HW-07-assessment",
     "motor/hardware/README",
     "motor/mechanical/MEC-01-Planetary-Reducer",
     "motor/mechanical/MEC-02-Cycloidal-Reducer",
     "motor/mechanical/MEC-03-Multi-Turn-Encoder",
-    "motor/power-path/PP-01-assessment",
     "motor/power-path/PP-01-DCDC-Fundamental-Topologies",
-    "motor/power-path/PP-02-assessment",
     "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
-    "motor/power-path/PP-03-assessment",
     "motor/power-path/PP-03-LLC-Resonant-Converter",
-    "motor/power-path/PP-04-assessment",
     "motor/power-path/PP-04-PFC-Power-Factor-Correction",
-    "motor/power-path/PP-05-assessment",
     "motor/power-path/PP-05-Magnetic-Design",
-    "motor/power-path/PP-06-assessment",
     "motor/power-path/PP-06-Loop-Compensation",
-    "motor/power-path/PP-07-assessment",
     "motor/power-path/PP-07-Power-Conversion-Motor-Drive",
     "motor/power-path/PP-08-Three-Level-Topology",
-    "motor/power-path/PP-08-assessment",
     "motor/power-path/PP-09-Three-Level-SVPWM",
-    "motor/power-path/PP-09-assessment",
     "motor/power-path/PP-10-Vienna-Rectifier",
-    "motor/power-path/PP-10-assessment",
     "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
-    "motor/power-path/PP-11-assessment",
     "motor/power-path/README",
     "motor/foundations/FOUND-01-Per-Unit-System",
     "motor/foundations/FOUND-02-Fixed-Point-Q-Format-DSP",
     "motor/foundations/FOUND-03-SPWM-Principle-DSP",
     "motor/foundations/FOUND-04-SVPWM-Principle-DSP",
     "motor/foundations/FOUND-05-Three-Level-SVPWM-DSP",
-    "motor/algorithm/ALG-00-assessment",
     "motor/algorithm/ALG-00-Current-Loop-Intuition",
     "motor/algorithm/ALG-01-FOC-Theory",
-    "motor/algorithm/ALG-01-assessment",
     "motor/algorithm/ALG-02-Current-Sampling-Timing",
-    "motor/algorithm/ALG-02-assessment",
     "motor/algorithm/ALG-03-PI-Current-Regulator",
     "motor/algorithm/ALG-04-Deadtime-Compensation",
-    "motor/algorithm/ALG-04-assessment",
     "motor/algorithm/ALG-05-Sensored-FOC",
-    "motor/algorithm/ALG-05-assessment",
     "motor/algorithm/ALG-06-Position-Speed-Observer",
     "motor/algorithm/ALG-07-Sensorless-Observers",
-    "motor/algorithm/ALG-07-assessment",
     "motor/algorithm/ALG-08-Initial-Position-Detection",
-    "motor/algorithm/ALG-08-assessment",
     "motor/algorithm/ALG-09-High-Frequency-Injection",
-    "motor/algorithm/ALG-09-assessment",
     "motor/algorithm/ALG-10-Overmodulation",
-    "motor/algorithm/ALG-10-assessment",
     "motor/algorithm/ALG-11-MTPA-Flux-Weakening",
-    "motor/algorithm/ALG-11-assessment",
     "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
-    "motor/algorithm/ALG-12-assessment",
     "motor/algorithm/ALG-13-Protection-Optimization",
-    "motor/algorithm/ALG-13-assessment",
     "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
-    "motor/algorithm/ALG-14-assessment",
-    "motor/algorithm/ALG-15-assessment",
     "motor/algorithm/ALG-15-Advanced-Research",
     "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
-    "motor/algorithm/ALG-16-assessment",
     "motor/algorithm/ALG-17-VF-Control",
-    "motor/algorithm/ALG-18-assessment",
     "motor/algorithm/ALG-18-Compensation-Algorithms",
     "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
-    "motor/algorithm/ALG-19-assessment",
     "motor/algorithm/ALG-20-Equations-From-Control-Perspective",
     "motor/algorithm/ALG-21-Parameter-Identification",
     "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
-    "motor/algorithm/ALG-22-assessment",
     "motor/algorithm/HPM-MC/SDK-03-HPM-MC-v2-Detect",
     "motor/algorithm/HPM-MC/SDK-04-HPM-MC-v2-Hybrid-Ctrl",
     "motor/algorithm/HPM-MC/SDK-02-HPM-MC-v2-Core-Loop",
@@ -4045,27 +3356,16 @@
     "motor/algorithm/README",
     "motor/algorithm/ALG-00-Pole-Zero-Animation",
     "motor/motion-control/MC-00-Index",
-    "motor/motion-control/MC-01-assessment",
     "motor/motion-control/MC-01-PMSM-Model",
-    "motor/motion-control/MC-02-assessment",
     "motor/motion-control/MC-02-Clarke-Park",
-    "motor/motion-control/MC-03-assessment",
     "motor/motion-control/MC-03-Space-Vector",
-    "motor/motion-control/MC-04-assessment",
     "motor/motion-control/MC-04-FOC-Signal-Chain",
-    "motor/motion-control/MC-05-assessment",
     "motor/motion-control/MC-05-SVPWM-2Level",
-    "motor/motion-control/MC-06-assessment",
     "motor/motion-control/MC-06-Current-Loop",
-    "motor/motion-control/MC-07-assessment",
     "motor/motion-control/MC-07-Speed-Position-Loop",
-    "motor/motion-control/MC-08-assessment",
     "motor/motion-control/MC-08-Sensorless-Observers",
-    "motor/motion-control/MC-09-assessment",
     "motor/motion-control/MC-09-IPMSM-vs-SPMSM",
-    "motor/motion-control/MC-10-assessment",
     "motor/motion-control/MC-10-Parameter-Sensitivity",
-    "motor/motion-control/MC-11-assessment",
     "motor/motion-control/MC-11-PWM-Sampling-Timing",
     "motor/motion-control/MC-MC-01-Position-Loop",
     "motor/motion-control/MC-MC-02-Feedforward",
@@ -4079,19 +3379,7 @@
     "motor/motion-control/MC-TP-04-Multi-Segment-Blend",
     "motor/motion-control/MC-TP-05-Time-Optimal",
     "motor/motion-control/MC-TP-06-Interpolation",
-    "motor/motion-control/MC-MC-01-assessment",
-    "motor/motion-control/MC-TP-04-assessment",
-    "motor/motion-control/MC-MC-06-assessment",
-    "motor/motion-control/MC-TP-03-assessment",
-    "motor/motion-control/MC-TP-06-assessment",
-    "motor/motion-control/MC-MC-04-assessment",
-    "motor/motion-control/MC-TP-05-assessment",
-    "motor/motion-control/MC-MC-03-assessment",
-    "motor/motion-control/MC-TP-02-assessment",
-    "motor/motion-control/MC-MC-05-assessment",
     "motor/motion-control/README",
-    "motor/motion-control/MC-TP-01-assessment",
-    "motor/motion-control/MC-MC-02-assessment",
     "motor/pfc-motor-integration/README",
     "motor/pfc-motor-integration/PMI-01-PFC-Motor-System-Architecture",
     "motor/pfc-motor-integration/PMI-02-PFC-Motor-Control-Coordination",
@@ -4101,36 +3389,20 @@
     "motor/practice/PRACTICE-13-Sensorless-Control",
     "motor/practice/PRACTICE-14-Engineering-Practice",
     "motor/advanced/algorithm/ADV-ALG-01-Bandwidth-Filter",
-    "motor/advanced/algorithm/ADV-ALG-01-assessment",
     "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
-    "motor/advanced/algorithm/ADV-ALG-05-assessment",
     "motor/advanced/algorithm/ADV-ALG-07-Feedforward-Decoupling",
-    "motor/advanced/algorithm/ADV-ALG-07-assessment",
     "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
-    "motor/advanced/algorithm/ADV-ALG-09-assessment",
     "motor/advanced/algorithm/ADV-ALG-13-PID-Structure-Tuning",
-    "motor/advanced/algorithm/ADV-ALG-13-assessment",
     "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
-    "motor/advanced/algorithm/ADV-ALG-15-assessment",
     "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-PWM-Current-Sampling",
-    "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
-    "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
     "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
     "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-Encoder-Speed",
-    "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
     "motor/advanced/system-methodology/SYS-01-Design-Patterns",
-    "motor/advanced/system-methodology/SYS-01-assessment",
     "motor/advanced/system-methodology/SYS-02-Inverter-vs-Motor-Control",
-    "motor/advanced/system-methodology/SYS-02-assessment",
-    "motor/advanced/system-methodology/SYS-03-assessment",
     "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
     "motor/advanced/system-methodology/SYS-04-Simulation-to-Discrete",
-    "motor/advanced/system-methodology/SYS-04-assessment",
     "motor/advanced/system-methodology/SYS-05-Functional-Safety",
-    "motor/advanced/system-methodology/SYS-05-assessment",
-    "motor/advanced/system-methodology/SYS-06-assessment",
     "motor/advanced/system-methodology/SYS-06-System-Testing-Validation",
-    "motor/advanced/system-methodology/SYS-07-assessment",
     "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
     "motor/advanced/README",
     "motor/ODrive/OD-01-Architecture",
@@ -4178,8 +3450,8 @@
     "motor/controllers-evolution/README"
   ],
   "baseline": {
-    "expected": 558,
-    "mapped": 558,
+    "expected": 454,
+    "mapped": 454,
     "missing": [],
     "unexpected": []
   },

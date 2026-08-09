@@ -10,11 +10,13 @@ test.describe('reader production experience', () => {
   })
 
   test('PDF reader renders pages and all primary controls work', async ({ page }) => {
+    await page.goto('/')
+    await page.evaluate(() => localStorage.clear())
     await page.goto('/bookshelf/depth-foundation-enhancement-part2/')
     const reader = page.locator('[data-pdfjs-reader]')
     await expect(reader).toBeVisible()
     await expect(reader.locator('[data-pdf-total]')).toHaveText(/^\d+$/, { timeout: 60_000 })
-    await expect.poll(() => reader.locator('canvas').evaluate((canvas) => (canvas as HTMLCanvasElement).width)).toBeGreaterThan(0)
+    await expect.poll(() => reader.locator('canvas').first().evaluate((canvas) => (canvas as HTMLCanvasElement).width)).toBeGreaterThan(0)
 
     const total = Number(await reader.locator('[data-pdf-total]').textContent())
     expect(total).toBeGreaterThan(1)
@@ -25,12 +27,26 @@ test.describe('reader production experience', () => {
     await expect(reader.locator('[data-pdf-page]')).toHaveValue('3')
     await reader.locator('[data-pdf-scale]').selectOption('1.25')
     await expect(reader.locator('[data-pdf-scale]')).toHaveValue('1.25')
+    await reader.locator('[data-pdf-view]').selectOption('single')
+    await expect(reader.locator('[data-pdf-view]')).toHaveValue('single')
+    await expect(reader.locator('[data-pdf-page-shell]')).toHaveCount(1)
+    await reader.locator('[data-pdf-stage]').focus()
+    await page.keyboard.press('End')
+    await expect(reader.locator('[data-pdf-page]')).toHaveValue(String(total))
+    await page.keyboard.press('Home')
+    await expect(reader.locator('[data-pdf-page]')).toHaveValue('1')
+    await reader.locator('[data-pdf-view]').selectOption('continuous')
+    await expect(reader.locator('[data-pdf-page-shell]')).toHaveCount(total)
 
     if (await page.evaluate(() => Boolean(document.fullscreenEnabled))) {
       await reader.locator('[data-pdf-fullscreen]').click()
       await expect.poll(() => page.evaluate(() => Boolean(document.fullscreenElement))).toBe(true)
       await page.keyboard.press('Escape')
     }
+
+    await page.reload({ waitUntil: 'networkidle' })
+    await expect(page.locator('[data-pdf-view]')).toHaveValue('continuous')
+    await expect(page.locator('[data-pdf-scale]')).toHaveValue('1.25')
   })
 
   test('HTML document executes isolated CSS and JavaScript', async ({ page }) => {
@@ -64,6 +80,9 @@ test.describe('reader production experience', () => {
     await page.waitForTimeout(250)
     await expect(workspace.locator('[data-code-line="8"]')).toHaveClass(/highlighted/)
     await expect(workspace.locator('[data-code-line="21"]')).toHaveClass(/highlighted/)
+    const codeFile = workspace.locator('[data-code-file].active')
+    await codeFile.evaluate(element => { element.scrollTop = 0; element.dispatchEvent(new Event('scroll')) })
+    await expect(workspace.locator('[data-code-context]')).toContainText('定位文章')
   })
 
   test('removed social pages stay absent and private reader rejects a wrong gate password', async ({ page, request }) => {
@@ -76,5 +95,15 @@ test.describe('reader production experience', () => {
     await page.locator('[data-gate-submit]').click()
     await expect(page.locator('[data-gate-error]')).toBeVisible({ timeout: 30_000 })
     await expect(gateInput).toBeEditable()
+  })
+
+  test('private reader accepts the shared password without persisting it', async ({ page }) => {
+    await page.goto('/private-reader/')
+    const gateInput = page.locator('[data-gate-input]')
+    await gateInput.fill('123')
+    await page.locator('[data-gate-submit]').click()
+    await expect(page.locator('[data-private-library], [data-private-reader-book]').first()).toBeVisible({ timeout: 30_000 })
+    const storedValues = await page.evaluate(() => [...Object.values(localStorage), ...Object.values(sessionStorage)])
+    expect(storedValues.some(value => value.includes('123'))).toBe(false)
   })
 })

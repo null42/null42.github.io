@@ -96,6 +96,8 @@ describe('navigation contract', () => {
     expect(mobileDock).toContain('__initMobileDock = initMobileDock')
     expect(mobileDock).toContain('new AbortController()')
     expect(mobileDock).toContain('{ signal }')
+    expect(mobileDock).toContain('acquireBodyScrollLock')
+    expect(mobileDock).toContain('id="mobile-dock-overlay" aria-hidden="true" hidden')
     expect(mobileDock).not.toMatch(/document\.addEventListener\(["']keydown["'],\s*\(event\)/)
   })
 

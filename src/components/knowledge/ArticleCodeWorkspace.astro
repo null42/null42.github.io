@@ -4,27 +4,30 @@ import path from "node:path";
 
 interface CodeFileConfig { path: string; label?: string; language?: string }
 interface CodeSyncConfig { headingId: string; file: string; lines: string; label?: string }
-interface Props { files?: CodeFileConfig[]; sync?: CodeSyncConfig[] }
+interface Props { files?: CodeFileConfig[]; sync?: CodeSyncConfig[]; errors?: string[] }
 
-const { files = [], sync = [] } = Astro.props;
+const { files = [], sync = [], errors = [] } = Astro.props;
 const contentRoot = path.resolve("content");
 const loadedFiles = files.map((file) => {
 	const absolutePath = path.resolve(contentRoot, file.path);
 	const relative = path.relative(contentRoot, absolutePath);
 	if (relative.startsWith("..") || path.isAbsolute(relative)) throw new Error(`Code file escaped content root: ${file.path}`);
-	if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isFile()) throw new Error(`Article code file not found: content/${file.path}`);
+	if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isFile()) return null;
 	return { ...file, label: file.label || path.basename(file.path), lines: fs.readFileSync(absolutePath, "utf8").replace(/\r\n/g, "\n").split("\n") };
-});
-const hasWorkspace = loadedFiles.length > 0;
+}).filter((file): file is NonNullable<typeof file> => Boolean(file));
+const missingFileErrors = files.filter((file) => !loadedFiles.some((loaded) => loaded.path === file.path)).map((file) => `文章代码文件不存在：${file.path}`);
+const allErrors = [...errors, ...missingFileErrors];
+const hasWorkspace = loadedFiles.length > 0 || allErrors.length > 0;
 ---
 
 {hasWorkspace && (
 	<div class="article-code-workspace" data-code-workspace>
+		{allErrors.length > 0 && <div class="code-workspace-errors" role="alert">{allErrors.map((error) => <p>{error}</p>)}</div>}
 		<button class="code-workspace-launch" type="button" data-code-open aria-expanded="false">代码联动</button>
-		<aside class="code-workspace-panel" data-code-panel aria-label="文章关联代码" aria-hidden="true">
+		<aside class="code-workspace-panel" data-code-panel aria-label="文章关联代码" aria-hidden="true" inert>
 			<header class="code-workspace-header">
-				<div><strong>文章 × 代码</strong><span data-code-context>随文章滚动自动定位</span></div>
-				<button type="button" data-code-close aria-label="关闭代码面板">×</button>
+				<div><strong>文章 × 代码</strong><button type="button" data-code-context>随文章滚动自动定位</button></div>
+				<div class="code-workspace-header-actions"><button type="button" data-code-show-article>文章</button><button type="button" data-code-close aria-label="关闭代码面板">×</button></div>
 			</header>
 			<nav class="code-workspace-tabs" aria-label="代码文件">
 				{loadedFiles.map((file, index) => <button type="button" data-code-tab={file.path} class:list={{ active: index === 0 }}>{file.label}</button>)}
@@ -40,22 +43,53 @@ const hasWorkspace = loadedFiles.length > 0;
 )}
 
 <script>
+	import { acquireBodyScrollLock } from "@/utils/document-interaction-lock";
+
 	type SyncConfig = { headingId: string; file: string; lines: string; label?: string };
+	type CodeWorkspaceLifecycle = { dispose: () => void };
+	const codeWindow = window as typeof window & { __articleCodeWorkspaceLifecycle?: CodeWorkspaceLifecycle };
+	codeWindow.__articleCodeWorkspaceLifecycle?.dispose();
+	const lifecycleController = new AbortController();
+	const workspaceDisposers = new Set<() => void>();
+	let removePageViewHook: (() => void) | undefined;
+	const disposeWorkspaces = () => {
+		for (const dispose of workspaceDisposers) dispose();
+		workspaceDisposers.clear();
+		document.body.classList.remove("code-workspace-active");
+	};
 	const initCodeWorkspaces = () => {
-			document.querySelectorAll<HTMLElement>("[data-code-workspace]:not([data-code-ready])").forEach((root) => {
+		disposeWorkspaces();
+		document.querySelectorAll<HTMLElement>("[data-code-workspace]").forEach((root) => {
 			root.dataset.codeReady = "true";
 			const eventController = new AbortController();
+			const autoOpenMedia = window.matchMedia("(min-width: 85rem)");
 			const panel = root.querySelector<HTMLElement>("[data-code-panel]");
 			const openButton = root.querySelector<HTMLButtonElement>("[data-code-open]");
-			const context = root.querySelector<HTMLElement>("[data-code-context]");
+			const context = root.querySelector<HTMLButtonElement>("[data-code-context]");
 			const syncNode = root.querySelector<HTMLScriptElement>("[data-code-sync]");
 			const sync = JSON.parse(syncNode?.textContent || "[]") as SyncConfig[];
-			const setOpen = (open: boolean) => {
+			let releaseScrollLock: (() => void) | undefined;
+			let activeHeadingId = "";
+			const setOpen = (open: boolean, announce = false) => {
+				if (open && announce) {
+					window.navigationMenuController?.close();
+					window.dispatchEvent(new CustomEvent("firefly:overlay-open", { detail: { source: "code-workspace" } }));
+				}
 				panel?.setAttribute("aria-hidden", String(!open));
+				panel?.toggleAttribute("inert", !open);
 				openButton?.setAttribute("aria-expanded", String(open));
 				document.body.classList.toggle("code-workspace-active", open);
+				if (open && !autoOpenMedia.matches) releaseScrollLock ??= acquireBodyScrollLock();
+				else { releaseScrollLock?.(); releaseScrollLock = undefined; }
 			};
-			const activate = (file: string, lines = "", label = "") => {
+			const markArticleHeading = (item: SyncConfig | undefined, label = "") => {
+				document.querySelectorAll(".code-source-active").forEach(node => node.classList.remove("code-source-active"));
+				activeHeadingId = item?.headingId || "";
+				const heading = activeHeadingId ? document.getElementById(activeHeadingId) : null;
+				heading?.classList.add("code-source-active");
+				if (context) { context.disabled = !heading; context.textContent = heading ? `定位文章：${label || heading.textContent || activeHeadingId}` : "手动浏览"; }
+			};
+			const activate = (file: string, lines = "", label = "", headingId = "") => {
 				root.querySelectorAll<HTMLElement>("[data-code-file]").forEach((node) => node.classList.toggle("active", node.dataset.codeFile === file));
 				root.querySelectorAll<HTMLElement>("[data-code-tab]").forEach((node) => node.classList.toggle("active", node.dataset.codeTab === file));
 				root.querySelectorAll<HTMLElement>("[data-code-line]").forEach((node) => node.classList.remove("highlighted", "highlight-start", "highlight-end"));
@@ -69,16 +103,18 @@ const hasWorkspace = loadedFiles.length > 0;
 					activeFile.querySelector<HTMLElement>(`[data-code-line="${end}"]`)?.classList.add("highlight-end");
 					activeFile.querySelector<HTMLElement>(`[data-code-line="${start}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
 				}
-				if (context) context.textContent = label || (lines ? `高亮 ${lines} 行` : "手动浏览");
+				markArticleHeading(headingId ? sync.find(item => item.headingId === headingId) : undefined, label || (lines ? `高亮 ${lines} 行` : ""));
 			};
-			openButton?.addEventListener("click", () => setOpen(panel?.getAttribute("aria-hidden") === "true"), { signal: eventController.signal });
+			openButton?.addEventListener("click", () => setOpen(panel?.getAttribute("aria-hidden") === "true", true), { signal: eventController.signal });
 			root.querySelector("[data-code-close]")?.addEventListener("click", () => setOpen(false), { signal: eventController.signal });
+			root.querySelector("[data-code-show-article]")?.addEventListener("click", () => setOpen(false), { signal: eventController.signal });
+			context?.addEventListener("click", () => { const heading = activeHeadingId ? document.getElementById(activeHeadingId) : null; if (!heading) return; if (!autoOpenMedia.matches) setOpen(false); heading.scrollIntoView({ block: "center", behavior: "smooth" }); }, { signal: eventController.signal });
 			root.querySelectorAll<HTMLButtonElement>("[data-code-tab]").forEach((button) => button.addEventListener("click", () => activate(button.dataset.codeTab || ""), { signal: eventController.signal }));
 			const observer = new IntersectionObserver((entries) => {
 				const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
 				if (!visible) return;
 				const match = sync.find((item) => item.headingId === visible.target.id);
-				if (match) { setOpen(true); activate(match.file, match.lines, match.label || visible.target.textContent || ""); }
+				if (match) { if (autoOpenMedia.matches) setOpen(true); activate(match.file, match.lines, match.label || visible.target.textContent || "", match.headingId); }
 			}, { rootMargin: "-10% 0px -40% 0px", threshold: 0 });
 			for (const item of sync) { const heading = document.getElementById(item.headingId); if (heading) observer.observe(heading); }
 			let scrollFrame = 0;
@@ -92,32 +128,70 @@ const hasWorkspace = loadedFiles.length > 0;
 						.map((entry) => ({ ...entry, distance: Math.abs(entry.heading.getBoundingClientRect().top - focusLine) }))
 						.sort((left, right) => left.distance - right.distance)[0];
 					if (!candidate || candidate.distance > window.innerHeight * 0.65) return;
-					setOpen(true);
-					activate(candidate.item.file, candidate.item.lines, candidate.item.label || candidate.heading.textContent || "");
+					if (autoOpenMedia.matches) setOpen(true);
+					activate(candidate.item.file, candidate.item.lines, candidate.item.label || candidate.heading.textContent || "", candidate.item.headingId);
 				});
 			};
+			let codeScrollFrame = 0;
+			root.querySelectorAll<HTMLElement>("[data-code-file]").forEach((codeFile) => codeFile.addEventListener("scroll", () => {
+				cancelAnimationFrame(codeScrollFrame);
+				codeScrollFrame = requestAnimationFrame(() => {
+					if (!codeFile.classList.contains("active")) return;
+					const viewport = codeFile.getBoundingClientRect();
+					const focus = viewport.top + viewport.height * 0.45;
+					const nearest = [...codeFile.querySelectorAll<HTMLElement>("[data-code-line]")].map(line => ({ line, distance: Math.abs(line.getBoundingClientRect().top - focus) })).sort((left, right) => left.distance - right.distance)[0]?.line;
+					const lineNumber = Number(nearest?.dataset.codeLine);
+					const match = sync.find(item => { if (item.file !== codeFile.dataset.codeFile) return false; const [startRaw, endRaw] = item.lines.split("-"); const start = Number(startRaw); const end = Number(endRaw || startRaw); return Number.isFinite(lineNumber) && lineNumber >= start && lineNumber <= end; });
+					if (match) markArticleHeading(match, match.label || document.getElementById(match.headingId)?.textContent || "");
+				});
+			}, { passive: true, signal: eventController.signal }));
 			window.addEventListener("scroll", syncFromScroll, { passive: true, signal: eventController.signal });
 			window.addEventListener("resize", syncFromScroll, { passive: true, signal: eventController.signal });
+			autoOpenMedia.addEventListener("change", (event) => { if (!event.matches) setOpen(false); }, { signal: eventController.signal });
+			window.addEventListener("firefly:overlay-open", (event) => {
+				if ((event as CustomEvent<{ source?: string }>).detail?.source !== "code-workspace") setOpen(false);
+			}, { signal: eventController.signal });
 			syncFromScroll();
 			document.addEventListener("keydown", (event) => { if (event.key === "Escape" && document.body.classList.contains("code-workspace-active")) setOpen(false); }, { signal: eventController.signal });
-			window.addEventListener("swup:leave:page", () => {
+			const dispose = () => {
 				observer.disconnect();
-				document.body.classList.remove("code-workspace-active");
+				cancelAnimationFrame(scrollFrame);
+				cancelAnimationFrame(codeScrollFrame);
+				markArticleHeading(undefined);
+				setOpen(false);
 				eventController.abort();
-			}, { once: true, signal: eventController.signal });
+				root.removeAttribute("data-code-ready");
+			};
+			workspaceDisposers.add(dispose);
 		});
 	};
+	const attachSwupHook = () => {
+		removePageViewHook?.();
+		removePageViewHook = window.swup?.hooks?.on("page:view", initCodeWorkspaces);
+	};
 	initCodeWorkspaces();
-	window.swup?.hooks?.on("page:view", initCodeWorkspaces);
+	if (window.swup?.hooks) attachSwupHook();
+	else document.addEventListener("swup:enable", attachSwupHook, { once: true, signal: lifecycleController.signal });
+	codeWindow.__articleCodeWorkspaceLifecycle = {
+		dispose: () => {
+			lifecycleController.abort();
+			removePageViewHook?.();
+			removePageViewHook = undefined;
+			disposeWorkspaces();
+		},
+	};
 </script>
 
 <style>
 	.code-workspace-launch { position: fixed; right: 1rem; bottom: 5.5rem; z-index: 60; border: 0; border-radius: 999px; padding: .75rem 1rem; background: var(--primary); color: white; font-weight: 800; box-shadow: 0 .8rem 2rem color-mix(in srgb,var(--primary) 35%,transparent); cursor: pointer; }
-	.code-workspace-panel { position: fixed; inset: 4.5rem 0 0 auto; z-index: 70; display: grid; grid-template-rows: auto auto minmax(0,1fr); width: min(50vw, 56rem); background: #11161d; color: #e5edf5; border-left: 1px solid rgba(255,255,255,.14); box-shadow: -1.2rem 0 3rem rgba(0,0,0,.28); transform: translateX(0); transition: transform .24s ease; }
+	.code-workspace-errors { position: fixed; right: 1rem; bottom: 10rem; z-index: 66; max-width: min(32rem,calc(100vw - 2rem)); padding: .75rem 1rem; border-radius: .75rem; background: #7f1d1d; color: white; box-shadow: 0 .8rem 2rem rgba(0,0,0,.24); }
+	.code-workspace-errors p { margin: 0; }
+	.code-workspace-errors p+p { margin-top: .35rem; }
+	.code-workspace-panel { position: fixed; inset: 4.5rem 0 0 auto; z-index: 65; display: grid; grid-template-rows: auto auto minmax(0,1fr); width: min(50vw, 56rem); background: #11161d; color: #e5edf5; border-left: 1px solid rgba(255,255,255,.14); box-shadow: -1.2rem 0 3rem rgba(0,0,0,.28); transform: translateX(0); transition: transform .24s ease; }
 	.code-workspace-panel[aria-hidden="true"] { transform: translateX(105%); pointer-events: none; }
 	.code-workspace-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 1rem; border-bottom:1px solid rgba(255,255,255,.12); }
-	.code-workspace-header>div { display:grid; gap:.15rem; } .code-workspace-header span { color:#93a4b7; font-size:.75rem; }
-	.code-workspace-header button { border:0; background:transparent; color:white; font-size:1.6rem; cursor:pointer; }
+	.code-workspace-header>div { display:grid; gap:.15rem; } .code-workspace-header [data-code-context] { border:0; padding:0; background:transparent; color:#93a4b7; font-size:.75rem; text-align:left; cursor:pointer; }
+	.code-workspace-header-actions { display:flex!important; align-items:center; grid-auto-flow:column; } .code-workspace-header-actions button { border:0; background:transparent; color:white; cursor:pointer; } .code-workspace-header-actions [data-code-close] { font-size:1.6rem; } .code-workspace-header-actions [data-code-show-article] { display:none; border:1px solid rgba(255,255,255,.18); border-radius:.5rem; padding:.4rem .6rem; }
 	.code-workspace-tabs { display:flex; overflow:auto; border-bottom:1px solid rgba(255,255,255,.1); }
 	.code-workspace-tabs button { border:0; border-bottom:2px solid transparent; padding:.65rem .9rem; background:transparent; color:#93a4b7; white-space:nowrap; cursor:pointer; }
 	.code-workspace-tabs button.active { color:white; border-color:#66d9c8; background:rgba(102,217,200,.08); }
@@ -129,7 +203,8 @@ const hasWorkspace = loadedFiles.length > 0;
 	.code-workspace-line b { padding-left:1rem; color:#d8e2ec; font-weight:400; white-space:pre; }
 	.code-workspace-line.highlighted { background:rgba(255,207,102,.14); box-shadow:inset 3px 0 #ffcf66; }
 	.code-workspace-line.highlighted i { background:#282619; color:#ffcf66; }
+	:global(.code-source-active) { scroll-margin-top:8rem; outline:2px solid color-mix(in srgb,var(--primary) 65%,transparent); outline-offset:.35rem; border-radius:.2rem; }
 	:global(body.code-workspace-active #content-wrapper) { margin-right:min(50vw,56rem); transition:margin-right .24s ease; }
-	@media(max-width:70rem){ .code-workspace-panel{inset:0;width:100vw;} :global(body.code-workspace-active #content-wrapper){margin-right:0;} .code-workspace-launch{bottom:4.75rem;} }
+	@media(max-width:70rem){ .code-workspace-panel{inset:0;width:100vw;} :global(body.code-workspace-active #content-wrapper){margin-right:0;} .code-workspace-launch{bottom:4.75rem;} .code-workspace-header-actions [data-code-show-article]{display:block;} }
 	@media(prefers-reduced-motion:reduce){.code-workspace-panel,:global(body.code-workspace-active #content-wrapper){transition:none}.code-workspace-line{scroll-behavior:auto}}
 </style>

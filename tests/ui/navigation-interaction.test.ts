@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import fs from 'node:fs'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { initNavigationMenu } from '../../src/utils/navigation-menu-controller'
+import { initNavigationMenu, installNavigationMenuLifecycle } from '../../src/utils/navigation-menu-controller'
 
 function mountNavigation() {
   document.body.innerHTML = `
@@ -47,6 +47,7 @@ describe('navigation menu interactions', () => {
     expect(panel.getAttribute('aria-hidden')).toBe('false')
     expect(document.querySelector('#mobile-dock-menu')!.getAttribute('aria-expanded')).toBe('true')
     expect(document.querySelector('#nav-menu-switch')!.getAttribute('aria-expanded')).toBe('true')
+    expect(document.body.style.overflow).toBe('hidden')
   })
 
   it('uses the 300ms fallback to hide a closed panel', () => {
@@ -94,7 +95,9 @@ describe('navigation menu interactions', () => {
     top.click()
     controller.dispose()
     vi.advanceTimersByTime(300)
-    expect(panel.hidden).toBe(false)
+    expect(panel.hidden).toBe(true)
+    expect(panel.hasAttribute('inert')).toBe(true)
+    expect(document.body.style.overflow).toBe('')
   })
 
   it('restores focus when an outside close would inert the focused panel subtree', () => {
@@ -154,6 +157,44 @@ describe('navigation menu interactions', () => {
     expect(trigger.getAttribute('aria-expanded')).toBe('false')
     expect(submenu.getAttribute('aria-hidden')).toBe('true')
     expect(submenu.hasAttribute('inert')).toBe(true)
+  })
+
+  it('closes through delegated link clicks without cancelling navigation', () => {
+    initNavigationMenu()
+    document.querySelector<HTMLButtonElement>('#mobile-dock-menu')!.click()
+    const link = document.querySelector<HTMLAnchorElement>('#panel-link')!
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true })
+    link.dispatchEvent(event)
+    expect(event.defaultPrevented).toBe(false)
+    expect(document.querySelector('#nav-menu-panel')!.classList.contains('float-panel-closed')).toBe(true)
+    expect(document.body.style.overflow).toBe('')
+  })
+
+  it('closes on pointer interaction outside and traps focus with Tab', () => {
+    initNavigationMenu()
+    document.querySelector<HTMLButtonElement>('#nav-menu-switch')!.click()
+    const last = document.querySelector<HTMLButtonElement>('[data-mobile-dropdown-trigger]')!
+    last.focus()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }))
+    expect(document.activeElement).toBe(document.querySelector('#panel-link'))
+    document.querySelector('#outside')!.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    expect(document.querySelector('#nav-menu-panel')!.classList.contains('float-panel-closed')).toBe(true)
+  })
+
+  it('keeps one Swup lifecycle and refreshes the current controller', () => {
+    const callbacks = new Map<string, Set<() => void>>()
+    const hooks = { on(name: string, callback: () => void) { const set = callbacks.get(name) ?? new Set(); set.add(callback); callbacks.set(name, set); return () => set.delete(callback) } }
+    installNavigationMenuLifecycle({ hooks })
+    const lifecycle = installNavigationMenuLifecycle({ hooks })
+    expect([...callbacks.values()].reduce((sum, set) => sum + set.size, 0)).toBe(2)
+    document.querySelector<HTMLButtonElement>('#nav-menu-switch')!.click()
+    callbacks.get('visit:start')!.forEach(callback => callback())
+    expect(document.querySelector('#nav-menu-panel')!.classList.contains('float-panel-closed')).toBe(true)
+    callbacks.get('content:replace')!.forEach(callback => callback())
+    document.querySelector<HTMLButtonElement>('#mobile-dock-menu')!.click()
+    expect(document.querySelector('#nav-menu-panel')!.getAttribute('aria-hidden')).toBe('false')
+    lifecycle.dispose()
+    expect([...callbacks.values()].reduce((sum, set) => sum + set.size, 0)).toBe(0)
   })
 })
 

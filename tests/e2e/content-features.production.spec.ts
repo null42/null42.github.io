@@ -1,0 +1,50 @@
+import { expect, test } from '@playwright/test'
+
+test.describe('content feature production contracts', () => {
+  test.setTimeout(120_000)
+
+  test('code library selects stable files, links articles, and downloads raw source', async ({ page, request }) => {
+    await page.goto('/code/?codeId=motor-speed-profile-article&file=pmsm_comm_modified_excerpt.c')
+    const library = page.locator('[data-code-library]')
+    await expect(library.locator('[data-code-current]')).toHaveText('pmsm_comm_modified_excerpt.c')
+    await expect(library.locator('[data-code-output]')).toContainText('cmd_varOmega')
+    await expect(library.locator('[data-code-articles] a')).toHaveCount(1)
+    await library.locator('[data-code-path]').filter({ hasText: 'ACMSim_modified_excerpt.h' }).click()
+    await expect(page).toHaveURL(/file=ACMSim_modified_excerpt\.h/)
+    const response = await request.get('/code/raw/projects/motor-speed-profile-article/ACMSim_modified_excerpt.h')
+    expect(response.status()).toBe(200)
+    expect(await response.text()).toContain('INVERTER_NONLINEARITY')
+  })
+
+  test('imported IMU HTML runs with local assets and exposes original source', async ({ page, request }) => {
+    await page.goto('/html/imu-dashboard/')
+    const frame = page.frameLocator('[data-html-iframe]')
+    await expect(frame.locator('#page-home')).toHaveClass(/active/)
+    await frame.locator('[data-page="collect"]').click()
+    await expect(frame.locator('#page-collect')).toHaveClass(/active/)
+    expect((await request.get('/html-assets/imu-dashboard/styles.css')).status()).toBe(200)
+    const source = await request.get('/html-source/imu-dashboard.html')
+    expect(source.status()).toBe(200)
+    expect(await source.text()).toContain('IMU 姿态采集与识别上位机')
+  })
+
+  test('article assessment gives transient feedback and has no standalone route', async ({ page, request }) => {
+    await page.goto('/posts/foundations/control-theory/ct-01-open-loop-closed-loop/')
+    const root = page.locator('[data-assessment-root]').first()
+    await expect(root.locator('[data-assessment-open]')).toBeVisible()
+    await root.locator('[data-assessment-open]').click()
+    const dialog = root.locator('[data-assessment-dialog]')
+    await expect(dialog).toBeVisible()
+    const question = dialog.locator('[data-question]').first()
+    const input = question.locator('input,textarea').first()
+    if (await input.getAttribute('type') === 'radio' || await input.getAttribute('type') === 'checkbox') await input.check()
+    else await input.fill('测试答案')
+    await question.locator('[data-assessment-check]').click()
+    await expect(question.locator('[data-assessment-feedback]')).toBeVisible()
+    await dialog.locator('[data-assessment-close]').last().click()
+    await expect(dialog).toBeHidden()
+    const stored = await page.evaluate(() => [...Object.values(localStorage), ...Object.values(sessionStorage)].join('\n'))
+    expect(stored).not.toContain('测试答案')
+    expect((await request.get('/posts/foundations/control-theory/ct-01-assessment/')).status()).toBe(404)
+  })
+})

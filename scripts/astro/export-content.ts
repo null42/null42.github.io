@@ -32,6 +32,7 @@ const rootRedirects: Record<string, string> = {
 export function normalizeMarkdown(body: string, sourcePath: string): { body: string; rewrittenLinks: number } {
   let rewrittenLinks = 0
   let normalized = body.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '')
+  normalized = normalized.replace(/\[([^\]]+)\]\(([^)]*assessment[^)]*)\)/gi, (_match, label: string) => `${label}（请使用文章下方“打开知识检验”按钮）`)
   normalized = normalizeVitePressContainers(normalized)
   const sourceDir = path.posix.dirname(sourcePath.replace(/\\/g, '/'))
   normalized = normalized.replace(/(!?\[[^\]]*\]\()([^:)#][^)]*)(\))/g, (match, prefix: string, target: string, suffix: string) => {
@@ -140,6 +141,7 @@ export async function exportAstroContent(options: ExportOptions = {}): Promise<E
       order: canonical.order,
       ...(Array.isArray(parsed.data.codeFiles) ? { codeFiles: parsed.data.codeFiles } : {}),
       ...(Array.isArray(parsed.data.codeSync) ? { codeSync: parsed.data.codeSync } : {}),
+      ...(Array.isArray(parsed.data.codeRefs) ? { codeRefs: parsed.data.codeRefs } : {}),
       ...(visibilityDecision.summary && canonical.difficulty ? { difficulty: canonical.difficulty } : {}),
       ...(visibilityDecision.summary && canonical.quality ? { quality: canonical.quality } : {}),
       ...(visibilityDecision.encryptedPayload ? { encryptedPayload: '/content/' + normalizedPath.replace(/\.md$/i, '.json') } : {})

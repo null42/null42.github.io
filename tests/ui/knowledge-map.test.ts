@@ -29,7 +29,8 @@ describe('knowledge map', () => {
     expect(serialized).not.toContain('encryptedPayload')
     expect(serialized).not.toContain('password')
     expect(serialized).not.toContain('content/encrypted')
+    expect(serialized).not.toMatch(/assessment/i)
     const count = navigation.flatMap(section => section.routes.flatMap(route => route.stages.flatMap(stage => stage.articles))).length
-    expect(count).toBe(558)
+    expect(count).toBe(454)
   })
 })

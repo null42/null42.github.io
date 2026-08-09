@@ -25,7 +25,7 @@ import { url } from "@/utils/url-utils";
 	</button>
 </nav>
 
-<div class="mobile-dock__overlay" id="mobile-dock-overlay" aria-hidden="true"></div>
+<div class="mobile-dock__overlay" id="mobile-dock-overlay" aria-hidden="true" hidden></div>
 <section class="mobile-dock__sheet" id="mobile-dock-sheet" aria-label="工具栏" aria-hidden="true" hidden>
 	<div class="mobile-dock__sheet-title">工具</div>
 	<div class="mobile-dock__sheet-grid">
@@ -40,8 +40,9 @@ import { url } from "@/utils/url-utils";
 
 <script>
 	import { DARK_MODE, LIGHT_MODE } from "@/constants/constants";
+	import { acquireBodyScrollLock } from "@/utils/document-interaction-lock";
 	import { getStoredTheme, setTheme } from "@/utils/setting-utils";
-	import { initNavigationMenu } from "@/utils/navigation-menu-controller";
+	import { installNavigationMenuLifecycle } from "@/utils/navigation-menu-controller";
 	import { navigateToPage } from "@/utils/navigation-utils";
 
 	type SwupLike = { hooks?: { on: (name: "content:replace", callback: () => void) => (() => void) | void } };
@@ -84,6 +85,7 @@ import { url } from "@/utils/url-utils";
 		const tocButton = document.getElementById("mobile-dock-toc-btn") as HTMLButtonElement | null;
 		const commentButton = document.getElementById("mobile-dock-comment-btn") as HTMLButtonElement | null;
 		const inertedBackground = new Set<HTMLElement>();
+		let releaseSheetScrollLock: (() => void) | undefined;
 		const setBackgroundInert = (inert: boolean) => {
 			if (!inert) {
 				for (const element of inertedBackground) element.removeAttribute("inert");
@@ -116,11 +118,20 @@ import { url } from "@/utils/url-utils";
 
 		const setSheet = (open: boolean) => {
 			if (!sheet || !overlay || !tools) return;
+			if (open) {
+				window.navigationMenuController?.close();
+				window.dispatchEvent(new CustomEvent("firefly:overlay-open", { detail: { source: "mobile-dock" } }));
+				releaseSheetScrollLock ??= acquireBodyScrollLock();
+			} else {
+				releaseSheetScrollLock?.();
+				releaseSheetScrollLock = undefined;
+			}
 			sheet.hidden = !open;
 			sheet.classList.toggle("is-open", open);
 			sheet.setAttribute("aria-hidden", String(!open));
 			overlay.classList.toggle("is-open", open);
 			overlay.setAttribute("aria-hidden", String(!open));
+			overlay.hidden = !open;
 			tools.setAttribute("aria-expanded", String(open));
 			setBackgroundInert(open);
 		};
@@ -187,7 +198,7 @@ import { url } from "@/utils/url-utils";
 			mobileDockWindow.__mobileDockSwupUnsubscribe = typeof unsubscribe === "function" ? unsubscribe : undefined;
 		};
 
-		initNavigationMenu();
+		installNavigationMenuLifecycle(mobileDockWindow.swup);
 		sheet?.setAttribute('role', 'dialog');
 		sheet?.setAttribute('aria-modal', 'true');
 		tools?.addEventListener('click', () => {
@@ -222,6 +233,9 @@ import { url } from "@/utils/url-utils";
 			document.getElementById("back-to-comment-btn")?.click();
 		}, { signal });
 		window.addEventListener("theme-change", syncThemeButton, { signal });
+		window.addEventListener("firefly:overlay-open", (event) => {
+			if ((event as CustomEvent<{ source?: string }>).detail?.source !== "mobile-dock") setSheet(false);
+		}, { signal });
 		if (mobileDockWindow.swup?.hooks) registerSwupHook();
 		else document.addEventListener("swup:enable", registerSwupHook, { signal, once: true });
 		syncThemeButton();

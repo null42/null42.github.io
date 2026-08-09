@@ -4,7 +4,7 @@ import path from "node:path";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 
 const root = path.resolve("content/html");
-const documents: Array<{ slug: string; title: string; description: string }> = [];
+const documents: Array<{ slug: string; title: string; description: string; source: string }> = [];
 const walk = (directory: string) => {
 	if (!fs.existsSync(directory)) return;
 	for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -13,9 +13,9 @@ const walk = (directory: string) => {
 		else if (entry.isFile() && entry.name.endsWith(".html")) {
 			const slug = path.relative(root, absolute).replace(/\\/g, "/").replace(/\.html$/i, "");
 			const metadataPath = absolute.replace(/\.html$/i, ".json");
-			let metadata: { title?: string; description?: string } = {};
+			let metadata: { title?: string; description?: string; source?: string } = {};
 			try { if (fs.existsSync(metadataPath)) metadata = JSON.parse(fs.readFileSync(metadataPath, "utf8")); } catch {}
-			documents.push({ slug, title: metadata.title || path.basename(slug), description: metadata.description || "HTML 文档" });
+			documents.push({ slug, title: metadata.title || path.basename(slug), description: metadata.description || "HTML 文档", source: metadata.source || "来源未记录" });
 		}
 	}
 };
@@ -26,10 +26,10 @@ documents.sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
 <MainGridLayout title="HTML 文档" description="原生 HTML 静态文档库">
 	<section class="html-library">
 		<header class="html-library-hero card-base"><p>HTML DOCUMENTS</p><h1>HTML 文档</h1><span>完整保留 HTML、CSS 与交互脚本，并在站内隔离运行。</span></header>
-		{documents.length > 0 ? <ul class="html-library-grid">{documents.map((document) => <li class="card-base"><a href={`/html/${document.slug}/`}><strong>{document.title}</strong><span>{document.description}</span></a></li>)}</ul> : <div class="html-library-empty card-base">将 HTML 文件放入 <code>content/html/</code>，构建时会自动生成路由。</div>}
+		{documents.length > 0 ? <ul class="html-library-grid">{documents.map((document) => <li class="card-base"><a href={`/html/${document.slug}/`}><strong>{document.title}</strong><span>{document.description}</span><small>{document.source}</small></a></li>)}</ul> : <div class="html-library-empty card-base">将 HTML 文件放入 <code>content/html/</code>，构建时会自动生成路由。</div>}
 	</section>
 </MainGridLayout>
 
 <style>
-	.html-library{display:grid;gap:1rem}.html-library-hero{display:grid;gap:.35rem;padding:clamp(1.2rem,3vw,2rem)}.html-library-hero p{margin:0;color:var(--primary);font-size:.72rem;font-weight:800;letter-spacing:.18em}.html-library-hero h1{margin:0}.html-library-hero span,.html-library-grid span{color:var(--meta-divider)}.html-library-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:0;padding:0;list-style:none}.html-library-grid li{overflow:hidden}.html-library-grid a{display:grid;gap:.35rem;padding:1rem;color:inherit;text-decoration:none}.html-library-grid a:hover strong{color:var(--primary)}.html-library-empty{padding:2rem;text-align:center;color:var(--meta-divider)}
+	.html-library{display:grid;gap:1rem}.html-library-hero{display:grid;gap:.35rem;padding:clamp(1.2rem,3vw,2rem)}.html-library-hero p{margin:0;color:var(--primary);font-size:.72rem;font-weight:800;letter-spacing:.18em}.html-library-hero h1{margin:0}.html-library-hero span,.html-library-grid span{color:var(--meta-divider)}.html-library-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:0;padding:0;list-style:none}.html-library-grid li{overflow:hidden}.html-library-grid a{display:grid;gap:.35rem;padding:1rem;color:inherit;text-decoration:none}.html-library-grid small{overflow:hidden;color:var(--meta-divider);font-family:ui-monospace,monospace;text-overflow:ellipsis;white-space:nowrap}.html-library-grid a:hover strong{color:var(--primary)}.html-library-empty{padding:2rem;text-align:center;color:var(--meta-divider)}
 </style>
