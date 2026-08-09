@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx scripts/astro/export-content.ts && astro dev",
-    "build": "corepack pnpm assessments:migrate && corepack pnpm code:verify && corepack pnpm html:verify && corepack pnpm kb:check && corepack pnpm kb:clean && corepack pnpm content:generate && corepack pnpm kb:navigation && corepack pnpm routes:manifest && node scripts/generate-icons.js && tsx scripts/generate-lqips.ts && node scripts/run-astro-build.mjs -- astro build && node scripts/run-subset-fonts.mjs && pagefind --site dist && tsx scripts/security/verify-assessment-production.ts && tsx scripts/security/scan-generated-output.ts",
+    "build": "npm run assessments:migrate && npm run code:verify && npm run html:verify && npm run kb:check && npm run kb:clean && npm run content:generate && npm run kb:navigation && npm run routes:manifest && node scripts/generate-icons.js && tsx scripts/generate-lqips.ts && node scripts/run-astro-build.mjs -- astro build && node scripts/run-subset-fonts.mjs && pagefind --site dist && tsx scripts/security/verify-assessment-production.ts && tsx scripts/security/scan-generated-output.ts",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
@@ -50,9 +50,9 @@
     "kb:deploy": "tsx scripts/kb/deploy.ts",
     "routes:manifest": "tsx scripts/routes/build-route-manifest.ts",
     "migration:verify-built": "tsx scripts/migration/verify-built-site.ts",
-    "knowledge:coverage": "corepack pnpm kb:navigation:check",
-    "routes:verify": "corepack pnpm migration:verify-built",
-    "quality:full": "corepack pnpm build && corepack pnpm test && corepack pnpm check && corepack pnpm migration:baseline:check && corepack pnpm migration:comparison:check && corepack pnpm knowledge:coverage && corepack pnpm routes:verify && corepack pnpm security:scan"
+    "knowledge:coverage": "npm run kb:navigation:check",
+    "routes:verify": "npm run migration:verify-built",
+    "quality:full": "npm run build && npm run test && npm run check && npm run migration:baseline:check && npm run migration:comparison:check && npm run knowledge:coverage && npm run routes:verify && npm run security:scan"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
