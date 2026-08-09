@@ -10,6 +10,19 @@ const MANIFEST_PATH = path.resolve('content/code-library/manifest.json')
 const LEARNING_ROOT = path.resolve('..')
 const BINARY_EXTENSIONS = new Set(['.slx', '.mdl', '.mlx'])
 
+export function normalizeTextBytes(bytes: Buffer): Buffer {
+  const normalized: number[] = []
+  for (let index = 0; index < bytes.length; index += 1) {
+    if (bytes[index] === 13) {
+      if (bytes[index + 1] === 10) index += 1
+      normalized.push(10)
+    } else {
+      normalized.push(bytes[index])
+    }
+  }
+  return Buffer.from(normalized)
+}
+
 function languageFor(file: string): string {
   const extension = path.extname(file).toLowerCase()
   return ({ '.c': 'c', '.h': 'c', '.cpp': 'cpp', '.hpp': 'cpp', '.py': 'python', '.m': 'matlab', '.js': 'javascript', '.ts': 'typescript', '.slx': 'simulink', '.mdl': 'simulink' } as Record<string, string>)[extension] || 'text'
@@ -25,13 +38,14 @@ async function main(): Promise<void> {
       const sourcePath = path.resolve(sourceRoot, sourceRelative)
       const relativeToRoot = path.relative(sourceRoot, sourcePath)
       if (relativeToRoot.startsWith('..') || path.isAbsolute(relativeToRoot)) throw new Error(`Source escaped learning root: ${sourceRelative}`)
-      const bytes = await fs.readFile(sourcePath)
+      const sourceBytes = await fs.readFile(sourcePath)
+      const binary = BINARY_EXTENSIONS.has(path.extname(sourcePath).toLowerCase())
+      const bytes = binary ? sourceBytes : normalizeTextBytes(sourceBytes)
       const outputRelative = path.basename(sourcePath)
       const outputPath = path.join(OUTPUT_ROOT, project.codeId, outputRelative)
       await fs.mkdir(path.dirname(outputPath), { recursive: true })
       await fs.writeFile(outputPath, bytes)
-      const binary = BINARY_EXTENSIONS.has(path.extname(sourcePath).toLowerCase())
-      const lineCount = binary ? null : bytes.toString('utf8').replace(/\r\n/g, '\n').split('\n').length
+      const lineCount = binary ? null : bytes.toString('utf8').split('\n').length
       files.push({
         path: `projects/${project.codeId}/${outputRelative.replace(/\\/g, '/')}`,
         name: path.basename(sourcePath),

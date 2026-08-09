@@ -24,7 +24,10 @@ describe('code library manifest', () => {
       const bytes = fs.readFileSync(path.join(root, file.path))
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(file.sha256)
       if (file.binary) expect(file.lineRange).toBeNull()
-      else expect(file.lineRange?.end).toBe(bytes.toString('utf8').replace(/\r\n/g, '\n').split('\n').length)
+      else {
+        expect(bytes.includes(13)).toBe(false)
+        expect(file.lineRange?.end).toBe(bytes.toString('utf8').split('\n').length)
+      }
     }
   })
 })
