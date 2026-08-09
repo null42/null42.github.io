@@ -282,18 +282,18 @@ describe('static deployment contract', () => {
 
   it('exposes the stage seven quality-gate command aliases', () => {
     expect(packageJson.scripts.test).toBe('vitest run --exclude "tests/e2e/**" --minWorkers=1 --maxWorkers=4 --test-timeout=60000')
-    expect(packageJson.scripts['knowledge:coverage']).toBe('corepack pnpm kb:navigation:check')
-    expect(packageJson.scripts['routes:verify']).toBe('corepack pnpm migration:verify-built')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm test')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm check')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm build')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm migration:baseline:check')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm migration:comparison:check')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm knowledge:coverage')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm routes:verify')
-    expect(packageJson.scripts['quality:full']).toContain('corepack pnpm security:scan')
-    expect(packageJson.scripts['quality:full'].indexOf('corepack pnpm build')).toBeLessThan(
-      packageJson.scripts['quality:full'].indexOf('corepack pnpm test'),
+    expect(packageJson.scripts['knowledge:coverage']).toBe('npm run kb:navigation:check')
+    expect(packageJson.scripts['routes:verify']).toBe('npm run migration:verify-built')
+    expect(packageJson.scripts['quality:full']).toContain('npm run test')
+    expect(packageJson.scripts['quality:full']).toContain('npm run check')
+    expect(packageJson.scripts['quality:full']).toContain('npm run build')
+    expect(packageJson.scripts['quality:full']).toContain('npm run migration:baseline:check')
+    expect(packageJson.scripts['quality:full']).toContain('npm run migration:comparison:check')
+    expect(packageJson.scripts['quality:full']).toContain('npm run knowledge:coverage')
+    expect(packageJson.scripts['quality:full']).toContain('npm run routes:verify')
+    expect(packageJson.scripts['quality:full']).toContain('npm run security:scan')
+    expect(packageJson.scripts['quality:full'].indexOf('npm run build')).toBeLessThan(
+      packageJson.scripts['quality:full'].indexOf('npm run test'),
     )
   })
 })
