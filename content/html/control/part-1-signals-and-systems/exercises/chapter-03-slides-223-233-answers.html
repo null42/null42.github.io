@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三章第223–233页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><main><header class="hero"><div class="eyebrow">第三章 · 傅里叶级数通过LTI系统</div><h1>第223–233页分层练习完整答案</h1></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><div class="formula">H(s)=∫h(t)e^{-st}dt；H(z)=Σh[n]z^{-n}</div><div class="formula">H(jω)=∫h(t)e^{-jωt}dt；H(e^{jω})=Σh[n]e^{-jωn}</div>
+<h3>A2</h3><div class="formula">bₖ=aₖH(jkω₀)</div>
+<h3>A3</h3><div class="formula">bₖ=aₖH(e^{jk2π/N})</div>
+<h3>A4</h3><p>连续频率响应要求虚轴目标点jω在H(s)收敛域内；离散频率响应要求单位圆目标点e^{jω}在H(z)收敛域内。BIBO稳定分别保证虚轴或单位圆全部包含于收敛域。</p></section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p>若输入CTFS系数为aₖ，输出：</p><div class="formula">bₖ=aₖ/(2+jkω₀)</div>
+<h3>B2</h3><p><code>h(t)=e^{-2t}u(t)</code>，故H(jω)=1/(2+jω)。输入cos3t在±3处各有1/2。令H(j3)=re^{jθ}，则r=1/√13、θ=−tan⁻¹(3/2)：</p><div class="formula">y(t)=(1/√13)cos[3t−tan⁻¹(3/2)]</div>
+<h3>B3</h3><p>直流只在k=0，而H(e^{j0})=1−1=0，所以输出全部系数为0，y[n]=0。一次差分消除常数。</p>
+<h3>B4</h3><p>a=1/2时：</p><div class="formula">r=1/√(1+1/4)=2/√5；θ=−tan⁻¹(1/2)</div><div class="formula">y[n]=(2/√5)cos[πn/2−tan⁻¹(1/2)]</div></section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>连续卷积：</p><div class="formula">y(t)=∫h(τ)e^{s(t−τ)}dτ=e^{st}∫h(τ)e^{-sτ}dτ=H(s)e^{st}</div><p>离散卷积同理：</p><div class="formula">y[n]=Σh[m]z^{n−m}=zⁿΣh[m]z^{-m}=H(z)zⁿ</div>
+<h3>C2</h3><p>h(t)实则：</p><div class="formula">H(−jω)=∫h(t)e^{jωt}dt=[∫h(t)e^{-jωt}dt]*=H(jω)*</div><p>若输入实，a₋ₖ=aₖ*，则b₋ₖ=a₋ₖH(−jkω₀)=[aₖH(jkω₀)]*=bₖ*，输出实。</p>
+<h3>C3</h3><p>有理式只给出形式表达，还需收敛域决定对应哪条时域序列及目标点是否可取。例如1/(1−az^{-1})可对应右边、左边序列；只有单位圆落在所选ROC内时才存在稳定频率响应。</p>
+<h3>C4</h3><p>时域卷积适合输入或h具有短支集、需要瞬态全波形时；逐谐波乘法适合周期稳态且傅里叶系数已知时，可直接看每条谐波增益和相位。二者数学等价，但组织信息的方式不同。</p></section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>若扰动d的系数为dₖ，闭环残差系数为eₖ=S(jkω₀)dₖ。时域RMS可由 <code>Σ|S(jkω₀)dₖ|²</code> 求得；逐谐波可识别最需要提高环路增益的频点。</p>
+<h3>D2</h3><p>若输入第k次谐波幅值为Aₖ，输出限值为Lₖ，则必须满足 <code>|H(jkω₀)|≤Lₖ/Aₖ</code>；若使用双边复系数，输入输出采用同一口径即可。</p>
+<h3>D3</h3><p>纯延迟m样本的响应为e^{-jωm}，相位为−ωm。第k次DTFS谐波ω=2πk/N，因此相位滞后−2πkm/N，随k线性增加，高次谐波更易损失相位裕度。</p>
+<h3>D4</h3><p>逐个施加幅值已知的正弦，等待瞬态衰减后在整数周期窗口同步估计输入/输出复系数，取比值获得H(e^{jω})。等待时间应覆盖若干主导时间常数；窗口需同步，避免泄漏；激励幅值应保持系统在线性范围。</p></section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-03-fourier-series/#slide-223">返回第三章伴随讲义第223页</a></p></main></body></html>

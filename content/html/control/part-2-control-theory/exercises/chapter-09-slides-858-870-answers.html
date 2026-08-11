@@ -1,0 +1,6 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>理论九课件练习｜独立答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><div class="shell"><main><header class="hero"><h1>理论九课件练习｜独立完整答案</h1><p><a href="/html-raw/control/part-2-control-theory/companion/chapter-09-lqr/">返回课件伴随讲义</a></p></header>
+<section class="review-section"><h2>A 级答案</h2><p>Q 处罚状态偏差，R 处罚控制输入；P 是稳定化 Riccati 解和最优值函数矩阵；K=R⁻¹BᵀP；闭环为 ẋ=(A−BK)x。Q≥0、R&gt;0；实际还需 (A,B) 可稳定和 (Q¹ᐟ²,A) 可检测。</p></section>
+<section class="review-section"><h2>B 级答案</h2><p>连续 ARE 为 AᵀP+PA−PBR⁻¹BᵀP+Q=0。相对增大 Q 通常使状态收敛更积极，增大 R 通常减小控制动作，但结果取决于模型耦合和单位。课件双积分例中 Q=q⁴CᵀC、R=1，得到 K=[√2q,q²]、闭环极点 q/√2(−1±j)。</p></section>
+<section class="review-section"><h2>C 级答案</h2><p>权重带单位，不归一化时数值较大的物理量会无意主导代价。Bryson 规则用 Qii=1/xmax,i²、Rjj=1/umax,j² 初始化。极点配置直接指定谱，LQR 通过 Q/R 间接选择兼顾状态和输入的谱；二者都不自动处理饱和和硬约束。</p></section>
+<section class="review-section"><h2>D 级答案</h2><p>机械位置—速度系统先按允许位置误差、速度和执行器峰值建立 Q/R，求 K 后验证闭环极点、输出、状态峰值、控制峰值、参数漂移和观测器误差。数字实现必须使用 A_d、B_d 和离散 Riccati 方程，检查单位圆极点、计算延迟、量化与限幅；硬约束显著时转向 MPC。</p></section>
+<section class="review-section"><h2>关键例题补充</h2><p>双积分器 P=[[√2q,q²],[q²,√2q³]]，参考前置 N=q²。N 只校正名义参考增益，不提供扰动鲁棒零误差。q 增大使响应更快，但输入峰值上升，因此不能只看输出曲线选择 q。</p></section></main></div></body></html>

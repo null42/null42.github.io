@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/html-assets/control/part-1-signals-and-systems/companion/"><title>第一章内部片段｜课件第 28–48 页</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/fragments/assets/companion.css"></head>
+<body><div class="shell">
+<nav class="sidebar screen-only" aria-label="片段页面导航"><div class="sidebar-title">第一章 · 内部片段 03</div><a href="#overview">片段总览</a><a href="#slide-028">028 连续复指数</a><a href="#slide-033">033 离散指数序列</a><a href="#slide-039">039 离散频率</a><a href="#slide-043">043 周期判定</a><a href="#slide-047">047 谐波族</a><a href="#exercises">练习</a></nav>
+<main>
+<header class="hero" id="overview">
+  <div class="eyebrow">第一章内部制作片段 · 课件第 28–48 页</div>
+  <h1>从复指数“母信号”到离散频率的数论结构</h1>
+  <p class="lead">这 21 页完成两次关键统一：先用复指数统一指数增长、衰减与正弦振荡，再说明离散时间频率为何按 <code>2π</code> 等价、周期为何取决于有理数条件。</p>
+  <div class="meta-grid">
+    <section class="meta-card"><h2>对应课件</h2><p>《信号与系统（深度强化版）》第 28–48 页，第一章 1.3 节。</p></section>
+    <section class="meta-card"><h2>前置知识</h2><ul><li>欧拉公式与复数极坐标形式</li><li>连续/离散周期定义</li><li>最大公约数与最小公倍数</li></ul></section>
+    <section class="meta-card"><h2>学习目标</h2><ul><li>从 <code>ce^{at}</code> 或 <code>Ca^n</code> 读出包络与振荡</li><li>判断离散复指数是否周期</li><li>求和信号的基本周期</li><li>解释离散谐波族为何只有 N 个成员</li></ul></section>
+    <section class="meta-card"><h2>控制连接</h2><ul><li>极点实部与衰减速度</li><li>采样后的频率混叠</li><li>周期参考/扰动的同步长度</li><li>DFT 基函数的来源</li></ul></section>
+  </div>
+</header>
+
+<section class="slide-note" id="slide-028" data-slide="28">
+  <div class="slide-kicker">SLIDE 028 · 1.3 指数信号与正弦信号</div><h2>课件第 28 页｜一个参数 a 同时容纳增长、衰减和振荡</h2>
+  <div class="source-label">[课件] 连续时间复指数 <code>x(t)=ce^{at}</code>，令 <code>a=σ+jω₀</code>。</div>
+  <p><strong>页面定位：</strong>第 28 页不是又增加一种孤立信号，而是在寻找后续线性系统最重要的“母信号”。写成 <code>a=σ+jω₀</code> 后，<code>σ</code> 控制幅值包络，<code>ω₀</code> 控制复平面旋转速度。</p>
+  <div class="formula">ce^{at}=ce^{(σ+jω₀)t}=ce^{σt}e^{jω₀t}</div>
+  <p>[必要补充] 若暂取 <code>c=1</code>：<code>σ&gt;0</code> 指数增长，<code>σ&lt;0</code> 指数衰减，<code>σ=0</code> 则模恒为 1。课件图中的三条曲线只画出了 <code>e^{σt}</code> 的幅值趋势；复数情形还要叠加旋转。</p>
+  <p class="pitfall"><strong>易错点：</strong><code>σ</code> 与 <code>ω₀</code> 都在指数里，但一个改模、一个改相位，不能混作“两个频率”。</p>
+  <p class="check"><strong>即时检查：</strong><code>e^{(-2+j5)t}</code> 的包络和角频率分别是什么？答：<code>e^{-2t}</code> 与 <code>5 rad/s</code>。</p>
+  <img class="slide-preview" src="/html-assets/control/part-1-signals-and-systems/fragments/assets/slide-previews/chapter-01/slide-028.png" alt="课件第28页预览">
+</section>
+
+<section class="slide-note" id="slide-029" data-slide="29">
+  <div class="slide-kicker">SLIDE 029 · 周期复指数与欧拉公式</div><h2>课件第 29 页｜连续复指数何时真正周期？</h2>
+  <div class="source-label">[课件] 取 <code>c=1,a=jω₀</code>，得到 <code>x(t)=e^{jω₀t}</code>。</div>
+  <p><strong>推导顺序：</strong>周期条件要求 <code>e^{jω₀(t+T)}=e^{jω₀t}</code>，约去公共因子后只剩 <code>e^{jω₀T}=1</code>，因此 <code>ω₀T=2πk</code>。当 <code>ω₀≠0</code> 时最小正周期为</p>
+  <div class="formula">T₀=2π/|ω₀|</div>
+  <p>[必要补充] 绝对值不可少：负频率表示复平面反向旋转，不会产生负周期。若 <code>ω₀=0</code>，信号恒为 1，任何正数都是周期，因此没有最小正周期。</p>
+  <p>[课件] 由 <code>e^{jθ}=cosθ+j sinθ</code>，复指数的实部和虚部分别给出余弦和正弦。</p>
+  <p class="check"><strong>即时检查：</strong><code>e^{-j4t}</code> 的基本周期是 <code>π/2</code>，旋转方向与 <code>e^{j4t}</code> 相反。</p>
+</section>
+
+<section class="slide-note" id="slide-030" data-slide="30">
+  <div class="slide-kicker">SLIDE 030 · 正弦信号的复指数表示</div><h2>课件第 30 页｜振幅与相位只是复系数的模和角</h2>
+  <div class="source-label">[页面演进] 第 29 页从复指数拆出正弦/余弦，本页反向把正弦重新装回复指数。</div>
+  <div class="formula">Ae^{j(ω₀t+φ)}=Acos(ω₀t+φ)+jA sin(ω₀t+φ)</div>
+  <p>若复系数写成 <code>c=Ae^{jφ}</code>，则 <code>ce^{jω₀t}=Ae^{j(ω₀t+φ)}</code>。于是 <code>A</code> 是振幅，<code>φ</code> 是初相位，<code>ω₀</code> 是角频率。课件强调复指数很重要，是因为线性系统对复指数的响应通常仍保持同一指数形状，只改变复系数；这一点将在后续“特征函数”中正式证明。</p>
+  <p class="pitfall"><strong>易错点：</strong>相位 <code>φ</code> 不改变周期；<code>A&lt;0</code> 也可吸收为相位增加 <code>π</code>。</p>
+  <p class="check"><strong>即时检查：</strong><code>-2cos(3t)</code> 可写为振幅 2、相位 <code>π</code> 的余弦。</p>
+</section>
+
+<section class="slide-note" id="slide-031" data-slide="31">
+  <div class="slide-kicker">SLIDE 031 · 谐波复指数与一般复指数</div><h2>课件第 31 页｜整数倍频率构成同周期的谐波族</h2>
+  <div class="source-label">[课件] <code>φₖ(t)=e^{jkω₀t}</code>，<code>k=0,±1,±2,…</code>。</div>
+  <p>当 <code>k=0</code> 时得到常数 1；当 <code>k≠0</code> 时，频率为 <code>kω₀</code>，各成员都以 <code>T₀=2π/|ω₀|</code> 为周期。注意这只是共同周期：第 <code>k</code> 个成员自己的基本周期为 <code>T₀/|k|</code>。</p>
+  <p>[课件] 对一般 <code>ce^{at}</code>，把 <code>c=|c|e^{jθ}</code>、<code>a=r+jω₀</code> 代入，得到</p>
+  <div class="formula">ce^{at}=|c|e^{rt}[cos(ω₀t+θ)+j sin(ω₀t+θ)]</div>
+  <p>[必要补充] 这条式子把“复指数”拆成三个互不混淆的量：初始幅值 <code>|c|</code>、指数包络 <code>e^{rt}</code>、包络内的旋转 <code>ω₀t+θ</code>。</p>
+</section>
+
+<section class="slide-note" id="slide-032" data-slide="32">
+  <div class="slide-kicker">SLIDE 032 · 包络读图</div><h2>课件第 32 页｜先看包络，再看包络内部振荡</h2>
+  <div class="source-label">[课件] 图 1.5 对比 <code>r&gt;0</code> 与 <code>r&lt;0</code>。</div>
+  <p><strong>读图顺序：</strong>先找两条虚线包络 <code>±|c|e^{rt}</code>，再看实部或虚部曲线如何在两条包络之间振荡。<code>r&gt;0</code> 时振幅向右增大，<code>r&lt;0</code> 时振幅向右衰减；振荡的疏密仍由 <code>|ω₀|</code> 决定。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/continuous-complex-exponential-envelope.svg" alt="连续复指数包络与振荡示意图">
+  <p>[控制连接] 连续系统极点 <code>s=r+jω₀</code> 产生同型自然模态：实部决定稳定/发散，虚部决定振荡频率。这不是类比，而是后续微分方程解的直接结构。</p>
+  <p class="check"><strong>即时检查：</strong>若响应振荡频率不变但衰减更快，改变的是极点实部而不是虚部。</p>
+</section>
+
+<section class="slide-note" id="slide-033" data-slide="33">
+  <div class="slide-kicker">SLIDE 033 · 离散时间指数与正弦</div><h2>课件第 33 页｜连续时间的 e^{at} 到离散时间的 a^n</h2>
+  <div class="source-label">[课件] 离散指数序列 <code>x[n]=Ca^n</code>，<code>C,a</code> 可为实数或复数。</div>
+  <p>离散时间中自变量只能取整数，因此把连续指数在整数点取样可写成 <code>e^{an}</code>，也可把底数整体记为 <code>a=e^{α}</code>，得到更常用的 <code>a^n</code>。当 <code>a</code> 为实数：</p>
+  <ul><li><code>|a|&gt;1</code>：随 |n| 的方向出现增长；</li><li><code>0&lt;|a|&lt;1</code>：正向衰减；</li><li><code>a&lt;0</code>：相邻样本交替变号；</li><li><code>a=0</code>：负索引处涉及 <code>0^n</code>，必须单独限定定义域；</li><li><code>a=±1</code>：分别是常数与交替常数。</li></ul>
+  <p class="pitfall"><strong>易错点：</strong>课件图是双边序列。说“<code>|a|&lt;1</code> 衰减”通常指 <code>n→+∞</code>；向负无穷方向反而会增长。</p>
+</section>
+
+<section class="slide-note" id="slide-034" data-slide="34">
+  <div class="slide-kicker">SLIDE 034 · 实指数序列六种形态</div><h2>课件第 34 页｜底数的模控制包络，符号控制交替</h2>
+  <div class="source-label">[课件] 图 1.6 系统展示 <code>a&gt;1</code>、<code>0&lt;a&lt;1</code>、<code>-1&lt;a&lt;0</code>、<code>a&lt;-1</code>、<code>a=1</code>、<code>a=-1</code>。</div>
+  <p><strong>读图方法：</strong>先忽略正负号，观察 <code>|a|^n</code> 的包络；再用 <code>(-1)^n</code> 判断是否逐点交替。因而 <code>a=-0.8</code> 与 <code>a=0.8</code> 有相同包络，但前者每个样本翻转符号。</p>
+  <p>[必要补充] 若只关心因果序列 <code>a^n u[n]</code>，稳定性常与 <code>|a|&lt;1</code> 联系；对双边裸序列 <code>a^n</code>，不能仅凭正向衰减就称其“整体稳定”。</p>
+  <p class="check"><strong>即时检查：</strong><code>(−2)^n</code> 的样本符号交替且正向包络增长。</p>
+</section>
+
+<section class="slide-note" id="slide-035" data-slide="35">
+  <div class="slide-kicker">SLIDE 035 · 离散正弦与功率</div><h2>课件第 35 页｜单位模复指数为什么平均功率恒为 1？</h2>
+  <div class="source-label">[课件] 取 <code>C=1,a=e^{jω₀}</code>，得到 <code>x[n]=e^{jω₀n}=cosω₀n+j sinω₀n</code>。</div>
+  <p>由于每个样本的模均为 1，双边总能量为无穷；但长度 <code>2N+1</code> 窗口内的平均平方模为</p>
+  <div class="formula">P=lim<sub>N→∞</sub> (1/(2N+1)) Σ<sub>n=-N</sub><sup>N</sup>|e^{jω₀n}|²=1</div>
+  <p>[页面演进] 这是第 8 页复指数功率例题在 1.3 节的正式回归：此前用于分类，现在用于构造离散正弦和频率概念。</p>
+  <p class="pitfall"><strong>易错点：</strong>实部 <code>cosω₀n</code> 的平均功率通常是 <code>1/2</code>（退化频率除外），而复指数本身的功率是 1。</p>
+</section>
+
+<section class="slide-note" id="slide-036" data-slide="36">
+  <div class="slide-kicker">SLIDE 036 · 一般离散复指数</div><h2>课件第 36 页｜把 a 拆成模和角，所有形态一次读完</h2>
+  <div class="source-label">[课件] <code>C=|C|e^{jθ}</code>、<code>a=|a|e^{jω₀}</code>。</div>
+  <div class="formula">x[n]=|C||a|^n[cos(ω₀n+θ)+j sin(ω₀n+θ)]</div>
+  <p>当 <code>|a|=1</code> 时，样本位于固定半径圆上；当 <code>|a|&gt;1</code> 时半径指数扩大；当 <code>|a|&lt;1</code> 时正向半径指数缩小。<code>ω₀</code> 决定每增加一个样本，复平面相位推进多少弧度。</p>
+  <p>[控制连接] 离散系统极点 <code>z=a</code> 的模决定自然响应是否衰减，角度决定离散振荡频率。单位圆内对应正向衰减，单位圆外对应正向发散。</p>
+  <p class="check"><strong>即时检查：</strong><code>(0.9e^{jπ/4})^n</code> 每步旋转 <code>π/4</code>，包络乘以 0.9。</p>
+</section>
+
+<section class="slide-note" id="slide-037" data-slide="37">
+  <div class="slide-kicker">SLIDE 037 · 三种离散包络</div><h2>课件第 37 页｜|a|=1、|a|&gt;1、|a|&lt;1 的波形比较</h2>
+  <div class="source-label">[课件] 图 1.26 比较固定、增长和衰减包络。</div>
+  <p><strong>读图顺序：</strong>先看虚线包络，再看样本点的正负/相位。图 (a) 固定幅值，图 (b) 正向增长，图 (c) 正向衰减。离散点之间没有定义，连接线只帮助观察趋势，不能当作真实连续轨迹。</p>
+  <p class="pitfall"><strong>易错点：</strong>不能从画出的有限区间断言序列周期；周期要求存在整数 <code>N&gt;0</code> 使所有整数 n 都满足 <code>x[n+N]=x[n]</code>。</p>
+  <p class="check"><strong>即时检查：</strong>固定包络是周期的必要条件吗？对非零复指数是必要但不充分；频率比还必须为有理数。</p>
+</section>
+
+<section class="slide-note" id="slide-038" data-slide="38">
+  <div class="slide-kicker">SLIDE 038 · 阶段总结</div><h2>课件第 38 页｜把前 37 页压缩成六项基本语言</h2>
+  <div class="source-label">[课件] 总结信号/系统定义、分类、自变量变换、周期、奇偶、指数与正弦。</div>
+  <p>本页是第一章前半段的检查点。真正应掌握的不是六个名词，而是六种可执行动作：判断对象是信号还是系统；按定义分类；用特征点做时间变换；解周期方程；完成奇偶分解；从复指数参数读出包络与振荡。</p>
+  <p>[必要补充] “能求基波频率或基波周期”必须分连续与离散：连续正弦对任意非零频率均周期；离散正弦还需检查 <code>ω₀/(2π)</code> 是否为有理数。</p>
+  <p class="check"><strong>即时检查：</strong>若这六项中任何一项仍只能凭图猜，应回到对应页，而不是直接进入系统性质。</p>
+</section>
+
+<section class="slide-note" id="slide-039" data-slide="39">
+  <div class="slide-kicker">SLIDE 039 · 1.3.3 离散复指数周期性质</div><h2>课件第 39 页｜连续频率直觉为什么不能原样搬到离散时间？</h2>
+  <div class="source-label">[课件] 连续复指数满足：|ω₀| 越大振荡越快，任意 ω₀ 都周期。</div>
+  <p>本页先建立对照组。连续时间中可以观察任意细的时间位置，因此频率从 10 增到 10.1 会真实增加旋转速度；而离散时间只观察整数 n，许多不同连续旋转在整数采样点上会重合。</p>
+  <p>[控制连接] 这正是采样频率选择的理论根源：数字控制器只看到采样点，不能自动知道这些点来自哪个连续频率。</p>
+  <p class="check"><strong>即时检查：</strong>离散序列 <code>e^{jωn}</code> 能否区分 <code>ω</code> 与 <code>ω+2π</code>？不能。</p>
+</section>
+
+<section class="slide-note" id="slide-040" data-slide="40">
+  <div class="slide-kicker">SLIDE 040 · 频率按 2π 等价</div><h2>课件第 40 页｜离散频率不是无限不重复的直线</h2>
+  <div class="source-label">[课件] <code>e^{j(ω₀+2π)n}=e^{jω₀n}</code>。</div>
+  <p>因为 n 是整数，额外因子 <code>e^{j2πn}=1</code>。更一般地，任何 <code>ω₀+2πr</code>（r 为整数）都产生完全相同的序列。因而离散频率轴以 <code>2π</code> 为周期，可任选长度为 <code>2π</code> 的主值区间，如 <code>[-π,π)</code>。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/discrete-frequency-aliasing.svg" alt="离散频率按二π等价示意图">
+  <p class="pitfall"><strong>易错点：</strong>主值区间只是代表元选择，不代表区间外“没有频率”；区间外频率只是与区间内某个频率同序列。</p>
+</section>
+
+<section class="slide-note" id="slide-041" data-slide="41">
+  <div class="slide-kicker">SLIDE 041 · 频率样本图谱</div><h2>课件第 41 页｜从 0 到 π 变快，越过 π 反而折回</h2>
+  <div class="source-label">[课件] 图 1.27 展示多个 <code>cos(ω₀n)</code>。</div>
+  <p><strong>读图顺序：</strong>先看 <code>ω₀=0</code> 的常数序列；逐渐增大到 <code>π</code> 时，样本点交替越来越快；<code>ω₀=π</code> 得到 <code>(−1)^n</code>，这是离散时间可表示的最高“独特”余弦振荡。继续增大到 <code>2π</code> 时，序列按对称关系折回常数。</p>
+  <div class="formula">cos[(2π−ω)n]=cos(ωn),　sin[(2π−ω)n]=−sin(ωn)</div>
+  <p>[必要补充] 因此“频率数值越大振荡越快”只在主值区间的适当部分成立，不能对离散频率全轴使用。</p>
+</section>
+
+<section class="slide-note" id="slide-042" data-slide="42">
+  <div class="slide-kicker">SLIDE 042 · 低频等价与最高频率</div><h2>课件第 42 页｜ω=π 为何对应逐点变号？</h2>
+  <div class="source-label">[课件] <code>e^{jπn}=(−1)^n</code>，在每一点相邻变号。</div>
+  <p>当相位每个样本推进 <code>π</code>，复平面点在 1 与 −1 之间跳动，无法再比“一步翻半圈”更快地产生独特样本模式。<code>π+Δ</code> 与 <code>−π+Δ</code> 等价，所以超过 π 的部分会从负频率一侧重新出现。</p>
+  <p>[拔高] 这可看作数字频率的“圆周拓扑”：频率不是普通实线，而是首尾相接的圆。后续 DTFT 频谱也必然以 <code>2π</code> 周期重复。</p>
+  <p class="check"><strong>即时检查：</strong><code>cos(3πn/2)</code> 与哪个低频余弦相同？与 <code>cos(πn/2)</code> 相同。</p>
+</section>
+
+<section class="slide-note" id="slide-043" data-slide="43">
+  <div class="slide-kicker">SLIDE 043 · 离散周期判定</div><h2>课件第 43 页｜周期问题最终变成一个整数方程</h2>
+  <div class="source-label">[课件] 若 <code>e^{jω₀n}</code> 周期，则存在正整数 N 满足 <code>e^{jω₀N}=1</code>。</div>
+  <div class="formula">ω₀N=2πm ⇔ ω₀/(2π)=m/N</div>
+  <p>右侧是两个整数之比，所以必要条件是 <code>ω₀/(2π)</code> 为有理数；反过来若该比值有理，总能找到整数 N、m 使等式成立，因此也是充分条件。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/discrete-periodicity-number-theory.svg" alt="离散复指数周期的有理数条件">
+  <p>[必要补充] 若 <code>ω₀/(2π)=p/q</code> 已约成最简分数，则基本周期就是 <code>q</code>，因为 <code>pN/q</code> 首次成为整数需要 <code>N=q</code>。</p>
+</section>
+
+<section class="slide-note" id="slide-044" data-slide="44">
+  <div class="slide-kicker">SLIDE 044 · 三个周期例题</div><h2>课件第 44 页｜先约分频率比，再读分母</h2>
+  <div class="source-label">[课件] 比较 <code>cos(2πn/12)</code>、<code>cos(8πn/31)</code> 与 <code>cos(n/6)</code>。</div>
+  <ol><li><code>ω/(2π)=1/12</code>，基本周期 12；</li><li><code>ω/(2π)=4/31</code>，4 与 31 互素，基本周期 31；</li><li><code>ω/(2π)=1/(12π)</code>，因 π 为无理数，该比值无理，非周期。</li></ol>
+  <p class="pitfall"><strong>易错点：</strong>看到“n 除以 6”不能把 6 当周期；必须把角频率除以 <code>2π</code> 后判断。</p>
+  <p class="check"><strong>即时检查：</strong><code>cos(5πn/8)</code> 的频率比为 <code>5/16</code>，基本周期 16。</p>
+</section>
+
+<section class="slide-note" id="slide-045" data-slide="45">
+  <div class="slide-kicker">SLIDE 045 · 连续/离散总比较</div><h2>课件第 45 页｜同一个符号 e^{jωn}，频率含义已经改变</h2>
+  <div class="source-label">[课件] 表 1.1 比较连续与离散复指数。</div>
+  <p>连续时间：不同 <code>ω</code> 给出不同信号，任意非零频率都周期，基本周期 <code>2π/|ω|</code>。离散时间：相差 <code>2π</code> 整数倍的频率给出同一序列，只有频率比为有理数时才周期，基本周期必须是正整数。</p>
+  <p>[必要补充] 离散周期信号的“基波频率”通常写成 <code>2π/N</code>，但某个具体复指数可能是它的第 m 次谐波 <code>e^{jm(2π/N)n}</code>。若 m 与 N 不互素，该序列自己的基本周期会小于 N。</p>
+  <p class="check"><strong>即时检查：</strong><code>e^{j(4π/6)n}</code> 不应直接说周期 6；约分为 <code>2π/3</code> 后基本周期是 3。</p>
+</section>
+
+<section class="slide-note" id="slide-046" data-slide="46">
+  <div class="slide-kicker">SLIDE 046 · 和信号的公共周期</div><h2>课件第 46 页｜各分量周期存在，还要寻找最小公共整数周期</h2>
+  <div class="source-label">[课件] <code>x[n]=e^{j(2π/3)n}+e^{j(3π/4)n}</code>。</div>
+  <p>第一项频率比 <code>1/3</code>，基本周期 <code>N₁=3</code>；第二项频率比 <code>3/8</code>，基本周期 <code>N₂=8</code>。和信号必须同时重复，因此基本周期是</p>
+  <div class="formula">N₀=lcm(3,8)=24</div>
+  <p>[必要补充] “最小公倍数”结论成立的前提是每个分量都周期。只要有一个分量非周期，通常不能直接谈公共周期；除非出现特殊抵消，而不同频率复指数不会在所有 n 上神奇抵消成周期。</p>
+  <p class="check"><strong>即时检查：</strong>周期 6 与周期 15 的序列之和，公共周期候选为 30。</p>
+</section>
+
+<section class="slide-note" id="slide-047" data-slide="47">
+  <div class="slide-kicker">SLIDE 047 · 成谐波关系的信号</div><h2>课件第 47 页｜连续与离散谐波族形式相似，成员数量却不同</h2>
+  <div class="source-label">[课件] 连续：<code>φₖ(t)=e^{jk(2π/T)t}</code>；离散：<code>φₖ[n]=e^{jk(2π/N)n}</code>。</div>
+  <p>连续时间中 k 每变化一次，频率就真实改变 <code>2π/T</code>，因此有无限多个不同成员。离散时间中频率按 <code>2π</code> 等价，索引 k 增加 N 时频率增加 <code>2π</code>，序列回到原样。</p>
+  <p>[控制连接] 周期离散信号可用这 N 个谐波成员展开；这正是离散傅里叶级数和 DFT 的基函数集合。数字控制中的周期误差、周期扰动和重复控制都依赖这组有限频率结构。</p>
+  <p class="pitfall"><strong>易错点：</strong>“只有 N 个频率”指长度 N 的谐波族中只有 N 个不同的离散序列，不是整个离散频率世界只有 N 个值。</p>
+</section>
+
+<section class="slide-note" id="slide-048" data-slide="48">
+  <div class="slide-kicker">SLIDE 048 · 谐波索引按 N 取模</div><h2>课件第 48 页｜为什么 φₖ₊N[n] 与 φₖ[n] 完全相同？</h2>
+  <div class="source-label">[课件] <code>φₖ₊N[n]=φₖ[n]</code>，并给出首尾相同的谐波序列。</div>
+  <div class="formula">φₖ₊N[n]=e^{j(k+N)(2π/N)n}=e^{jk(2π/N)n}e^{j2πn}=φₖ[n]</div>
+  <p>因此只需选择任意连续 N 个索引作为代表，例如 <code>k=0,1,…,N−1</code>。负频率成员也包含其中：<code>k=N−r</code> 等价于 <code>k=−r</code>。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/harmonic-family-comparison.svg" alt="连续与离散谐波族成员数量比较">
+  <p class="check"><strong>即时检查：</strong>当 N=8 时，<code>k=7</code> 对应的频率与 <code>k=−1</code> 等价。</p>
+</section>
+
+<section class="deepening" id="deepening">
+  <div class="eyebrow">片段深化 · 四条必须能独立推导的链</div><h2>把第 28–48 页压缩为可复用方法</h2>
+  <h3>链一｜参数到波形</h3><p>对连续 <code>ce^{(σ+jω)t}</code> 或离散 <code>C(|a|e^{jω})^n</code>，固定流程是：复系数给初始模与相位；实指数/底数模给包络；虚指数/底数角给振荡。不要靠背图。</p>
+  <h3>链二｜离散频率等价</h3><p>只要利用整数索引 <code>n∈ℤ</code>，就有 <code>e^{j2πrn}=1</code>。于是离散频率按 <code>2π</code> 取模，采样后不同连续频率可能生成同一序列。</p>
+  <h3>链三｜周期的数论判定</h3><p>把周期定义代入复指数，约去公共项，得到 <code>ωN=2πm</code>。若频率比约成 <code>p/q</code>，基本周期就是 q；若无理，则不存在整数周期。</p>
+  <h3>链四｜谐波族有限化</h3><p>连续谐波索引 k 不会重复；离散谐波索引按 N 取模，恰有 N 个不同成员。这是后续所有有限长度频域表示的结构基础。</p>
+</section>
+
+<section class="exercise-block" id="exercises">
+  <div class="eyebrow">分层练习 · 完整答案另页</div><h2>第 28–48 页 A–D 级练习</h2><p>完成后打开<a href="/html-raw/control/part-1-signals-and-systems/fragments/exercises/chapter-01-slides-028-048-answers/">完整答案</a>。</p>
+  <section class="level level-a" data-level="A"><h3>A 级｜参数识别与直接计算（6 题）</h3><ol>
+    <li id="q3-a1">写出 <code>3e^{(-2+j4)t}</code> 的上下包络、角频率和初相位。</li>
+    <li id="q3-a2">求 <code>e^{-j5t}</code> 的基本周期。</li>
+    <li id="q3-a3">判断 <code>(−0.6)^n</code> 正向是增长还是衰减，并说明符号规律。</li>
+    <li id="q3-a4">求 <code>e^{j(5π/6)n}</code> 的基本周期。</li>
+    <li id="q3-a5">判断 <code>e^{j√3n}</code> 是否周期。</li>
+    <li id="q3-a6">当 N=10 时，<code>φ₁₂[n]</code> 与哪个 <code>0≤k≤9</code> 的成员相同？</li>
+  </ol></section>
+  <section class="level level-b" data-level="B"><h3>B 级｜多步骤课件同型题（5 题）</h3><ol>
+    <li id="q3-b1">把 <code>(0.8e^{jπ/3})^n</code> 写成实部与虚部，并描述其复平面轨迹。</li>
+    <li id="q3-b2">求 <code>cos(7πn/12+0.2)</code> 的基本周期。</li>
+    <li id="q3-b3">求 <code>e^{j(π/2)n}+e^{j(2π/5)n}</code> 的基本周期。</li>
+    <li id="q3-b4">证明 <code>cos[(2π−ω)n]=cos(ωn)</code>，并说明正弦的符号变化。</li>
+    <li id="q3-b5">对 N=6 列出 <code>k=0,…,5</code> 的离散谐波频率，并写出其负频率代表关系。</li>
+  </ol></section>
+  <section class="level level-c" data-level="C"><h3>C 级｜证明、反例与边界（3 题）</h3><ol>
+    <li id="q3-c1">证明：若 <code>ω/(2π)=p/q</code> 为最简分数，则 <code>e^{jωn}</code> 的基本周期为 q。</li>
+    <li id="q3-c2">给出一个单位模但非周期的离散复指数，并解释“单位模”为什么不充分。</li>
+    <li id="q3-c3">判断“两个非周期序列之和一定非周期”是否正确，给出反例并说明为何课件复指数和题不能靠该反例简化。</li>
+  </ol></section>
+  <section class="level level-d" data-level="D"><h3>D 级｜采样与控制迁移（2 题）</h3><ol>
+    <li id="q3-d1">连续信号 <code>cos(900πt)</code> 以 600 Hz 采样。求离散角频率的主值，并指出它与哪个较低连续频率产生相同样本。</li>
+    <li id="q3-d2">周期参考的两个离散谐波周期分别为 20 和 32 个采样。若重复控制器的内部周期必须同时容纳二者，最短缓存长度是多少？</li>
+  </ol></section>
+</section>
+
+<section class="gate" id="exit-gate"><h2>离开第 28–48 页的能力门槛</h2><ol><li>不看图也能从复参数读出包络与振荡；</li><li>能把任意离散频率化到长度 <code>2π</code> 的主值区间；</li><li>能从定义推导有理数周期条件，而不是背“看分母”；</li><li>能解释离散谐波族为何只有 N 个不同成员。</li></ol><p>达到后继续第 49 页单位冲激与单位阶跃。</p></section>
+</main></div></body></html>

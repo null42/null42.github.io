@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>第65–69页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head>
+<body><main><header class="hero"><div class="eyebrow">第一章 · 信号运算</div><h1>第65–69页分层练习完整答案</h1><p>答案按“边界—分段—互验—工程解释”的顺序展开。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><p><code>x(t)=u(t)−u(t−2)</code> 的支集为 <code>[0,2)</code>。数乘 <code>2x(t)</code> 与 <code>−x(t)</code> 只改变幅值，支集仍为 <code>[0,2)</code>；<code>x(t−1)</code> 整体右移 1，支集为 <code>[1,3)</code>。</p>
+<h3>A2</h3><div class="formula">d[u(t)−u(t−2)]/dt=δ(t)−δ(t−2)</div><p>在 0 处跳变量为 +1，在 2 处跳变量为 −1，因此两个冲激的符号相反。</p>
+<h3>A3</h3><p>令 <code>y(t)=∫₋∞ᵗx(τ)dτ</code>。当 <code>t≤0</code> 时为 0；当 <code>0&lt;t&lt;2</code> 时为 <code>t</code>；当 <code>t≥2</code> 时总面积保持为 2。</p><div class="formula">y(t)=0；t；2（对应 t≤0，0&lt;t&lt;2，t≥2）</div><p>对三段求导可恢复原矩形脉冲。</p>
+</section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p>对 <code>x(t)=cos t[u(t)−u(t−π)]</code> 用乘积求导：</p><div class="formula">x′=−sin t[u(t)−u(t−π)]+cos t[δ(t)−δ(t−π)]</div><p>筛选后 <code>cos0=1</code>，<code>−cosπ=+1</code>，故：</p><div class="formula">x′(t)=−sin t[u(t)−u(t−π)]+δ(t)+δ(t−π)</div><p>跳变量法同样得到：0 处从 0 跳到 1，π 处从 −1 跳到 0，两个跳变量均为 +1。</p>
+<h3>B2</h3><p>输出特征点来自两部分：原信号 <code>x(t)</code> 在窗内的特征点，以及窗函数在 <code>t=1,3</code> 引入的边界。若原信号在边界处不为零，乘窗后的信号会在相应边界产生跳变；后续求导时必须出现对应冲激。</p>
+<h3>B3</h3><p>设分段信号在 <code>tₖ</code> 左右表达式为 <code>x₋,x₊</code>，可写成 <code>x=x₋+[x₊−x₋]u(t−tₖ)</code>（局部表示）。求导后阶跃项给出 <code>[x₊(tₖ)−x₋(tₖ)]δ(t−tₖ)</code>，恰等于跳变量公式中的系数。</p>
+</section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>取 <code>x(t)=cos t[u(t)−u(t−π)]</code> 即可。由 B1，0 与 π 两端的冲激系数都为 +1。更一般地，<code>f(t)[u(t−a)−u(t−b)]</code> 的边界冲激为 <code>f(a)δ(t−a)−f(b)δ(t−b)</code>。</p>
+<h3>C2</h3><p>频域中微分对应乘以 <code>jω</code>，幅值增益随频率线性增长；离散差分 <code>[x[n]−x[n−1]]/Tₛ</code> 还除以采样周期。高频测量噪声即使幅值很小，也会被显著放大并驱动执行器抖动。工程 D 环节通常采用带低通滚降的“实用微分器”，并常对测量值而非设定值微分。</p>
+</section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>PI 的积分状态是误差面积。执行器饱和后，实际控制量已无法继续增大，但若误差仍同号，积分状态仍像本节例题一样持续累积；即使误差后来减小，过大的积分状态也要经过较长时间才能释放，造成超调和恢复迟缓。抗饱和可采用积分暂停、条件积分或回算反馈。</p>
+<h3>D2</h3><p>设定值阶跃会使误差含单位阶跃，理想微分产生冲激，表现为“微分冲击”。实际控制器不实现无限幅冲激，可采用：只对测量值微分；给设定值加预滤波/斜坡；使用带滤波的有限带宽微分器；限制微分输出。</p>
+</section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-01-signals-and-systems/#slide-065">返回统一章节讲义第65页</a></p>
+</main></body></html>

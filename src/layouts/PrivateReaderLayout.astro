@@ -1,0 +1,68 @@
+---
+import { siteConfig } from "@/config"
+import "@/styles/main.css"
+import "@/styles/variables.styl"
+
+interface Props {
+	title?: string
+	description?: string
+}
+
+const {
+	title = "私密阅读",
+	description = "加密文档本地解密阅读。",
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>{title} - {siteConfig.title}</title>
+		<link rel="icon" href="/favicon/favicon.ico" />
+	</head>
+	<body>
+		<main class="private-reader-layout">
+			<a class="private-reader-back" href="/private-reader/">← 返回私密书架</a>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style>
+	:global(html) {
+		background: #eef0f3;
+		color: #1a1a1a;
+	}
+
+	:global(body) {
+		margin: 0;
+		min-width: 0;
+		min-height: 100vh;
+		background: #eef0f3;
+	}
+
+	.private-reader-layout {
+		width: min(100% - 2rem, 96rem);
+		margin-inline: auto;
+		padding: 1rem 0 3rem;
+	}
+
+	.private-reader-back {
+		display: inline-flex;
+		margin-bottom: 1rem;
+		padding: 0.55rem 0.85rem;
+		border: 1px solid #d4d7dc;
+		border-radius: 0.65rem;
+		background: #ffffff;
+		color: #246b5d;
+		text-decoration: none;
+	}
+
+	.private-reader-back:hover {
+		background: #f8faf9;
+	}
+</style>

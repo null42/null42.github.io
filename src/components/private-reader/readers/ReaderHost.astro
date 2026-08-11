@@ -13,6 +13,7 @@ interface ManifestSegment {
 	charHint?: number
 	chapterId?: string
 	href?: string
+	compression?: "gzip"
 }
 
 interface ManifestTocEntry {
@@ -64,8 +65,6 @@ interface Props {
 }
 
 const { manifest } = Astro.props
-const isTxt = manifest.kind === "txt"
-const isEpub = manifest.kind === "epub"
 ---
 
 <div
@@ -89,11 +88,13 @@ const isEpub = manifest.kind === "epub"
 			</p>
 		</div>
 		<div class="reader-controls" data-reader-controls>
-			<button class="reader-btn" data-btn-toc title="目录">☰</button>
-			<button class="reader-btn" data-btn-theme title="主题">🎨</button>
-			<button class="reader-btn" data-btn-font title="字体">Aa</button>
-			<button class="reader-btn" data-btn-prev title="上一段/章">‹</button>
-			<button class="reader-btn" data-btn-next title="下一段/章">›</button>
+			<button type="button" class="reader-btn" data-btn-toc title="目录">☰</button>
+			<button type="button" class="reader-btn" data-btn-theme title="主题与排版">🎨</button>
+			<button type="button" class="reader-btn" data-btn-font title="字体与排版">Aa</button>
+			<button type="button" class="reader-btn" data-btn-tts title="朗读当前章节" aria-pressed="false">▶︎</button>
+			<button type="button" class="reader-btn" data-btn-fullscreen title="全屏阅读">⛶</button>
+			<button type="button" class="reader-btn" data-btn-prev title="上一段/章">‹</button>
+			<button type="button" class="reader-btn" data-btn-next title="下一段/章">›</button>
 		</div>
 	</header>
 
@@ -105,19 +106,19 @@ const isEpub = manifest.kind === "epub"
 
 	<!-- 进度条 + 底部章节切换 -->
 	<footer class="reader-progress" data-reader-progress>
-		<button class="reader-btn reader-nav-btn" data-btn-prev-bottom title="上一段/章" disabled>‹ 上一章</button>
+		<button type="button" class="reader-btn reader-nav-btn" data-btn-prev-bottom title="上一段/章" disabled>‹ 上一章</button>
 		<div class="reader-progress-track">
 			<div class="reader-progress-bar" data-reader-progress-bar style="width: 0%"></div>
 			<span class="reader-progress-text" data-reader-progress-text>0%</span>
 		</div>
-		<button class="reader-btn reader-nav-btn" data-btn-next-bottom title="下一段/章">下一章 ›</button>
+		<button type="button" class="reader-btn reader-nav-btn" data-btn-next-bottom title="下一段/章">下一章 ›</button>
 	</footer>
 
 	<!-- 目录抽屉 -->
 	<aside class="reader-toc-drawer hidden" data-toc-drawer>
 		<div class="reader-toc-header">
 			<h2>目录</h2>
-			<button class="reader-toc-close" data-btn-toc-close>×</button>
+			<button type="button" class="reader-toc-close" data-btn-toc-close>×</button>
 		</div>
 		<ul class="reader-toc-list" data-toc-list></ul>
 	</aside>
@@ -126,15 +127,15 @@ const isEpub = manifest.kind === "epub"
 	<aside class="reader-settings-drawer hidden" data-settings-drawer>
 		<div class="reader-settings-header">
 			<h2>设置</h2>
-			<button class="reader-settings-close" data-btn-settings-close>×</button>
+			<button type="button" class="reader-settings-close" data-btn-settings-close>×</button>
 		</div>
 		<div class="reader-settings-body">
 			<div class="reader-setting-group">
 				<label>主题</label>
 				<div class="reader-theme-options">
-					<button data-theme="light">浅色</button>
-					<button data-theme="dark">深色</button>
-					<button data-theme="sepia">护眼</button>
+					<button type="button" data-theme="light">浅色</button>
+					<button type="button" data-theme="dark">深色</button>
+					<button type="button" data-theme="sepia">护眼</button>
 				</div>
 			</div>
 			<div class="reader-setting-group">
@@ -149,6 +150,26 @@ const isEpub = manifest.kind === "epub"
 				<label>页边距 <span data-margin-value>1</span>rem</label>
 				<input type="range" min="0.5" max="3" step="0.5" value="1" data-margin />
 			</div>
+			<div class="reader-setting-group">
+				<label for="reader-font-family">字体</label>
+				<select id="reader-font-family" data-font-family>
+					<option value="system">系统字体</option>
+					<option value="serif">衬线字体</option>
+					<option value="sans">无衬线字体</option>
+					<option value="mono">等宽字体</option>
+				</select>
+			</div>
+			<div class="reader-setting-group">
+				<label>版心宽度 <span data-content-width-value>72</span>rem</label>
+				<input type="range" min="36" max="96" step="4" value="72" data-content-width />
+			</div>
+			<div class="reader-setting-group">
+				<label for="reader-view-mode">阅读方式</label>
+				<select id="reader-view-mode" data-view-mode>
+					<option value="scroll">连续滚动</option>
+					<option value="paged">横向分页</option>
+				</select>
+			</div>
 		</div>
 	</aside>
 </div>
@@ -160,6 +181,10 @@ const isEpub = manifest.kind === "epub"
 		--reader-font-size: 16px;
 		--reader-line-height: 1.8;
 		--reader-margin: 1rem;
+		--reader-width: 72rem;
+		--reader-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		--reader-bg: #ffffff;
+		--reader-text: #1a1a1a;
 	}
 
 	.reader-header {
@@ -233,6 +258,9 @@ const isEpub = manifest.kind === "epub"
 		padding: 0 var(--reader-margin);
 		font-size: var(--reader-font-size);
 		line-height: var(--reader-line-height);
+		background: var(--reader-bg);
+		color: var(--reader-text);
+		border-radius: var(--radius-medium);
 	}
 
 	.reader-loading {
@@ -242,9 +270,27 @@ const isEpub = manifest.kind === "epub"
 	}
 
 	.reader-content {
+		width: min(100%, var(--reader-width));
+		margin-inline: auto;
 		word-break: break-word;
 		font-family: var(--reader-font-family, inherit);
 		transition: opacity 0.18s ease;
+	}
+
+	.reader-host[data-view-mode="paged"] .reader-body {
+		overflow-x: auto;
+		overflow-y: hidden;
+		overscroll-behavior-inline: contain;
+	}
+
+	.reader-host[data-view-mode="paged"] .reader-content {
+		width: max-content;
+		max-width: none;
+		height: min(72vh, 56rem);
+		column-width: min(calc(100vw - 4rem), var(--reader-width));
+		column-gap: 2rem;
+		column-fill: auto;
+		padding: 0.5rem 0;
 	}
 
 	/* TXT 保留 pre-wrap 保留换行；EPUB 用 innerHTML 渲染 HTML 不需要 pre-wrap */
@@ -343,6 +389,7 @@ const isEpub = manifest.kind === "epub"
 		width: min(320px, 80vw);
 		height: 100vh;
 		background: var(--card-bg, var(--btn-regular-bg));
+		color: var(--content-text, #1a1a1a);
 		box-shadow: var(--shadow-lg);
 		z-index: 100;
 		display: flex;
@@ -441,6 +488,25 @@ const isEpub = manifest.kind === "epub"
 		width: 100%;
 	}
 
+	.reader-setting-group select {
+		width: 100%;
+		min-height: 2.25rem;
+		padding: 0.35rem 0.55rem;
+		border: 1px solid var(--line-divider);
+		border-radius: var(--radius-small, 0.4rem);
+		background: var(--card-bg, #ffffff);
+		color: var(--content-text, #1a1a1a);
+	}
+
+	.reader-host[data-reader-fullscreen="true"] {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		overflow: auto;
+		padding: 1rem;
+		background: var(--page-bg, #f3f4f6);
+	}
+
 	.hidden {
 		display: none !important;
 	}
@@ -464,6 +530,13 @@ const isEpub = manifest.kind === "epub"
 	.reader-host[data-theme] .reader-content {
 		color: var(--reader-text);
 	}
+
+	@media (max-width: 700px) {
+		.reader-host[data-view-mode="paged"] .reader-content {
+			column-width: calc(100vw - 2.5rem);
+			height: 68vh;
+		}
+	}
 </style>
 
 <script>
@@ -485,6 +558,9 @@ const isEpub = manifest.kind === "epub"
 		const tocDrawer = host.querySelector<HTMLElement>("[data-toc-drawer]")
 		const tocList = host.querySelector<HTMLElement>("[data-toc-list]")
 		const settingsDrawer = host.querySelector<HTMLElement>("[data-settings-drawer]")
+		const readerBody = host.querySelector<HTMLElement>("[data-reader-body]")
+		const ttsButton = host.querySelector<HTMLButtonElement>("[data-btn-tts]")
+		const fullscreenButton = host.querySelector<HTMLButtonElement>("[data-btn-fullscreen]")
 		// 时序修复：lifecycle 由 PrivateReaderShell 在脚本加载时挂载到 window，
 		// 但本脚本可能与 shell 脚本加载顺序不确定，故延迟至 unlocked 事件触发时再获取。
 		let lifecycle: any = null
@@ -499,6 +575,7 @@ const isEpub = manifest.kind === "epub"
 		let loadingSegmentIndex = -1
 		let activeSegmentRequest: AbortController | null = null
 		let positionSaveTimer: ReturnType<typeof setTimeout> | undefined
+		let speechUtterance: SpeechSynthesisUtterance | null = null
 
 		// 监听解锁事件
 		document.addEventListener("private-reader:unlocked", async (event: any) => {
@@ -555,6 +632,7 @@ const isEpub = manifest.kind === "epub"
 
 		async function loadSegment(index: number, restorePosition = false): Promise<void> {
 			if (!manifestData || !cryptoKey || index < 0 || index >= totalSegments) return
+			stopReading()
 			const seg = manifestData.segments[index]
 			if (!seg) return
 			// 加载锁：如果用户快速切换，取消旧的加载（通过比较 index）
@@ -592,7 +670,7 @@ const isEpub = manifest.kind === "epub"
 			// 期间用户又切换了，放弃渲染
 			if (loadingSegmentIndex !== index) return
 			if (loadingEl) loadingEl.textContent = `正在解密第 ${index + 1}/${segTotal} 段…`
-			const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+			const text = await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey, seg.compression)
 			if (loadingSegmentIndex !== index) return
 
 				// 5. 渲染内容
@@ -666,7 +744,7 @@ const isEpub = manifest.kind === "epub"
 				if (!host) return
 				const body = host.querySelector<HTMLElement>("[data-reader-body]")
 				if (body) {
-					body.scrollTo({ top: 0, behavior: "auto" })
+					body.scrollTo({ top: 0, left: 0, behavior: "auto" })
 				}
 				window.scrollTo({ top: 0, behavior: "auto" })
 			} catch {}
@@ -784,7 +862,7 @@ const isEpub = manifest.kind === "epub"
 				// 这里通过 prefetch 触发缓存
 				const res = await fetch(`/private-reader/${slug}/${seg.file}`)
 				const ciphertextBase64 = await res.text()
-				await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey)
+				await lifecycle.decryptSegment(slug, index, ciphertextBase64, seg.iv, cryptoKey, seg.compression)
 			} catch {
 				// 预加载失败静默忽略
 			}
@@ -807,7 +885,11 @@ const isEpub = manifest.kind === "epub"
 
 		function saveScrollPosition(): void {
 			try {
-				localStorage.setItem(`private-reader:position:${slug}`, JSON.stringify({ segment: currentSegment, scrollY: window.scrollY }))
+				localStorage.setItem(`private-reader:position:${slug}`, JSON.stringify({
+					segment: currentSegment,
+					scrollY: window.scrollY,
+					scrollLeft: readerBody?.scrollLeft || 0,
+				}))
 			} catch {}
 		}
 
@@ -815,7 +897,9 @@ const isEpub = manifest.kind === "epub"
 			requestAnimationFrame(() => requestAnimationFrame(() => {
 				try {
 					const saved = JSON.parse(localStorage.getItem(`private-reader:position:${slug}`) || "{}")
-					window.scrollTo({ top: saved.segment === segment && Number.isFinite(saved.scrollY) ? saved.scrollY : 0, behavior: "auto" })
+					const sameSegment = saved.segment === segment
+					window.scrollTo({ top: sameSegment && Number.isFinite(saved.scrollY) ? saved.scrollY : 0, behavior: "auto" })
+					readerBody?.scrollTo({ left: sameSegment && Number.isFinite(saved.scrollLeft) ? saved.scrollLeft : 0, top: 0, behavior: "auto" })
 				} catch { scrollReaderToTop() }
 			}))
 		}
@@ -846,7 +930,7 @@ const isEpub = manifest.kind === "epub"
 					})
 					tocList.appendChild(li)
 					// EPUB：异步解密章节标题（用 bookKey）
-				if (kind === "epub" && entry.title && cryptoKey) {
+				if (entry.title && cryptoKey) {
 					lifecycle.decryptBookField(entry.title, cryptoKey).then((decrypted: string) => {
 						if (decrypted) li.textContent = decrypted
 					}).catch(() => {})
@@ -894,6 +978,9 @@ const isEpub = manifest.kind === "epub"
 					if (prefs.fontSize) applyFontSize(prefs.fontSize)
 					if (prefs.lineHeight) applyLineHeight(prefs.lineHeight)
 					if (prefs.margin) applyMargin(prefs.margin)
+					if (prefs.fontFamily) applyFontFamily(prefs.fontFamily)
+					if (prefs.contentWidth) applyContentWidth(prefs.contentWidth)
+					if (prefs.viewMode) applyViewMode(prefs.viewMode)
 				}
 			} catch {}
 		}
@@ -940,6 +1027,90 @@ const isEpub = manifest.kind === "epub"
 			savePrefs({ margin: m })
 		}
 
+		function applyFontFamily(family: string): void {
+			const values: Record<string, string> = {
+				system: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+				serif: 'Georgia, "Times New Roman", serif',
+				sans: 'Arial, Helvetica, sans-serif',
+				mono: 'ui-monospace, SFMono-Regular, Consolas, monospace',
+			}
+			const selected = values[family] ? family : "system"
+			const select = host?.querySelector<HTMLSelectElement>("[data-font-family]")
+			if (select) select.value = selected
+			host?.style.setProperty("--reader-font-family", values[selected])
+			savePrefs({ fontFamily: selected })
+		}
+
+		function applyContentWidth(width: number): void {
+			const selected = Math.min(96, Math.max(36, Math.round(width / 4) * 4))
+			const input = host?.querySelector<HTMLInputElement>("[data-content-width]")
+			if (input) input.value = String(selected)
+			host?.style.setProperty("--reader-width", `${selected}rem`)
+			const value = host?.querySelector<HTMLElement>("[data-content-width-value]")
+			if (value) value.textContent = String(selected)
+			savePrefs({ contentWidth: selected })
+		}
+
+		function applyViewMode(mode: string): void {
+			const selected = mode === "paged" ? "paged" : "scroll"
+			const select = host?.querySelector<HTMLSelectElement>("[data-view-mode]")
+			if (select) select.value = selected
+			host?.setAttribute("data-view-mode", selected)
+			savePrefs({ viewMode: selected })
+		}
+
+		function updateTtsButton(): void {
+			if (!ttsButton) return
+			const active = speechUtterance !== null
+			ttsButton.setAttribute("aria-pressed", String(active))
+			ttsButton.textContent = active ? "⏹" : "▶︎"
+			ttsButton.title = active ? "停止朗读" : "朗读当前章节"
+		}
+
+		function stopReading(): void {
+			if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel()
+			speechUtterance = null
+			updateTtsButton()
+		}
+
+		function toggleReading(): void {
+			if (!("speechSynthesis" in window) || !contentEl) return
+			if (speechUtterance) {
+				stopReading()
+				return
+			}
+			const text = contentEl.textContent?.trim()
+			if (!text) return
+			const utterance = new SpeechSynthesisUtterance(text)
+			utterance.lang = "zh-CN"
+			utterance.rate = 1
+			utterance.onend = () => { speechUtterance = null; updateTtsButton() }
+			utterance.onerror = () => { speechUtterance = null; updateTtsButton() }
+			speechUtterance = utterance
+			updateTtsButton()
+			window.speechSynthesis.cancel()
+			window.speechSynthesis.speak(utterance)
+		}
+
+		async function toggleFullscreen(): Promise<void> {
+			try {
+				if (document.fullscreenElement) await document.exitFullscreen()
+				else if (host?.requestFullscreen) await host.requestFullscreen()
+				else host?.setAttribute("data-reader-fullscreen", host.getAttribute("data-reader-fullscreen") === "true" ? "false" : "true")
+			} catch {
+				host?.setAttribute("data-reader-fullscreen", host.getAttribute("data-reader-fullscreen") === "true" ? "false" : "true")
+			}
+		}
+
+		function movePagedPage(direction: number): boolean {
+			if (!readerBody || host?.getAttribute("data-view-mode") !== "paged") return false
+			const max = readerBody.scrollWidth - readerBody.clientWidth
+			const before = readerBody.scrollLeft
+			const target = Math.min(max, Math.max(0, before + direction * readerBody.clientWidth * 0.9))
+			readerBody.scrollTo({ left: target, behavior: "smooth" })
+			return direction < 0 ? before > 8 : before < max - 8
+		}
+
 		// 控件绑定
 		host.querySelector("[data-btn-toc]")?.addEventListener("click", () => {
 			tocDrawer?.classList.toggle("hidden")
@@ -953,6 +1124,16 @@ const isEpub = manifest.kind === "epub"
 			settingsDrawer?.classList.toggle("hidden")
 			tocDrawer?.classList.add("hidden")
 		})
+		ttsButton?.addEventListener("click", toggleReading)
+		fullscreenButton?.addEventListener("click", () => { void toggleFullscreen() })
+		document.addEventListener("fullscreenchange", () => {
+			const active = document.fullscreenElement === host
+			host.setAttribute("data-reader-fullscreen", String(active))
+			if (fullscreenButton) {
+				fullscreenButton.setAttribute("aria-pressed", String(active))
+				fullscreenButton.title = active ? "退出全屏" : "全屏阅读"
+			}
+		}, { signal: eventController.signal })
 		host.querySelector("[data-btn-prev]")?.addEventListener("click", () => {
 			if (currentSegment > 0) loadSegment(currentSegment - 1)
 		})
@@ -984,6 +1165,15 @@ const isEpub = manifest.kind === "epub"
 		host.querySelector<HTMLInputElement>("[data-margin]")?.addEventListener("input", (e) => {
 			applyMargin(Number((e.target as HTMLInputElement).value))
 		})
+		host.querySelector<HTMLSelectElement>("[data-font-family]")?.addEventListener("change", (e) => {
+			applyFontFamily((e.target as HTMLSelectElement).value)
+		})
+		host.querySelector<HTMLInputElement>("[data-content-width]")?.addEventListener("input", (e) => {
+			applyContentWidth(Number((e.target as HTMLInputElement).value))
+		})
+		host.querySelector<HTMLSelectElement>("[data-view-mode]")?.addEventListener("change", (e) => {
+			applyViewMode((e.target as HTMLSelectElement).value)
+		})
 
 		// 键盘导航
 		document.addEventListener(`keydown`, (event) => {
@@ -997,11 +1187,19 @@ const isEpub = manifest.kind === "epub"
 			}
 		}, { capture: true, signal: eventController.signal })
 		document.addEventListener("keydown", (e) => {
-			if (e.key === "ArrowLeft" && currentSegment > 0) loadSegment(currentSegment - 1)
-			if (e.key === "ArrowRight" && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
+			if (e.key === "ArrowLeft") {
+				if (!movePagedPage(-1) && currentSegment > 0) loadSegment(currentSegment - 1)
+			}
+			if (e.key === "ArrowRight") {
+				if (!movePagedPage(1) && currentSegment < totalSegments - 1) loadSegment(currentSegment + 1)
+			}
 		}, { signal: eventController.signal })
 
 		window.addEventListener("scroll", () => {
+			if (positionSaveTimer) clearTimeout(positionSaveTimer)
+			positionSaveTimer = setTimeout(saveScrollPosition, 180)
+		}, { passive: true, signal: eventController.signal })
+		readerBody?.addEventListener("scroll", () => {
 			if (positionSaveTimer) clearTimeout(positionSaveTimer)
 			positionSaveTimer = setTimeout(saveScrollPosition, 180)
 		}, { passive: true, signal: eventController.signal })
@@ -1010,6 +1208,7 @@ const isEpub = manifest.kind === "epub"
 		// 覆盖两种场景：SPA 导航（swup）和浏览器导航/关闭
 		const cleanup = () => {
 			saveScrollPosition()
+			stopReading()
 			activeSegmentRequest?.abort()
 			revokeBlobUrls()
 			eventController.abort()

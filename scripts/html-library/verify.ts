@@ -21,5 +21,22 @@ for (const document of HTML_DOCUMENT_SOURCES) {
   }
 }
 
+const contentRoot = path.join(root, 'content', 'html')
+const verifyTree = (directory: string) => {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const absolute = path.join(directory, entry.name)
+    if (entry.isDirectory()) verifyTree(absolute)
+    else if (entry.isFile() && entry.name.endsWith('.html')) {
+      const html = fs.readFileSync(absolute, 'utf8')
+      const relative = path.relative(contentRoot, absolute).replace(/\\/g, '/')
+      if (!/<meta\s+charset=["']?utf-8/i.test(html)) failures.push(`Missing UTF-8 charset: ${relative}`)
+      if (/\b(?:src|href)=["'](?:\.\/|\.\.\/)/i.test(html)) failures.push(`Unrewritten relative asset: ${relative}`)
+      const metadataPath = absolute.replace(/\.html$/i, '.json')
+      if (!fs.existsSync(metadataPath)) failures.push(`Missing metadata: ${relative}`)
+    }
+  }
+}
+verifyTree(contentRoot)
+
 if (failures.length) throw new Error(`HTML library verification failed:\n${failures.join('\n')}`)
-console.log(`Verified ${HTML_DOCUMENT_SOURCES.length} HTML documents with no broken local assets.`)
+console.log('Verified HTML documents with no broken local assets.')

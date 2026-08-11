@@ -1,0 +1,85 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-9cd6aed007f49e47",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "20Ht1+q/+XtIRAdn90Tj2w=="
+  },
+  "gate": {
+    "token": "6/yxc1YiW/FPhgAcDYLjcPm2RLiPRBeUHGMlnW/LGVvzE9W8oHvcnGWqDlpBIdbLAMs="
+  },
+  "shelf": {
+    "title": "gK0whgU0UKoff333oDk9cc4m1Eb2IqmOA72lUavkRkK6PNi0v45ZibfGsivRHWv1abo7Y4cKcuE8SZuy8HknzkmpGOo2gWTmTx//z8rDNCkObc5nNZHb",
+    "author": null,
+    "group": "YzeUwphBVNLYmqRI4JoWggJM9nW1MXYw+b4Jgxk3WGCoJViDBFHO79qmhg=="
+  },
+  "source": {
+    "sha256": "9cd6aed007f49e47ebb477d4d09ca33f554491c8f5a6f36c885eae64e7cd1892"
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "MUBK7y+NiaKKPcHU",
+      "bytes": 98669,
+      "charHint": 0,
+      "compression": "gzip"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "yoFoHlIEpR5W+dm6",
+      "bytes": 97345,
+      "charHint": 87073,
+      "compression": "gzip"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "RXyfiU2EZvUmlFR2",
+      "bytes": 97347,
+      "charHint": 173496,
+      "compression": "gzip"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "r4MNsJ+J4J7dIWJe",
+      "bytes": 98139,
+      "charHint": 259793,
+      "compression": "gzip"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "Qe1gXpoEjSf83RkP",
+      "bytes": 97237,
+      "charHint": 347625,
+      "compression": "gzip"
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "X6CflUCpAd7Ehpq3",
+      "bytes": 89646,
+      "charHint": 433600,
+      "compression": "gzip"
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "uonKMdYX8hXLCl/C",
+      "bytes": 23948,
+      "charHint": 510191,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 1326
+  }
+}

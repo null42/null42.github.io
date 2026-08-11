@@ -1,0 +1,312 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-7c8a27b5ff062e28",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "7id2cUJbeiLOrzZ5dzeJCA=="
+  },
+  "gate": {
+    "token": "zqy/AQZZJZ06f/vwbysDqc8OKkPek2GxTwRG+Tp2eXB1inxG/NETb+2LTn8jgUo5mZ4="
+  },
+  "shelf": {
+    "title": "lCQHfEBxOj95bhiWuL6irh4Lt+FQJ7OI65XlfKN4SopC+w==",
+    "author": null,
+    "group": "zhGXnVFnDQ+z69MhAac0AeLN2EX1NOrGoSTIe1C5kRK7pgKWZ2WwoWTVBw=="
+  },
+  "source": {
+    "sha256": "7c8a27b5ff062e28fd520bde0f6810adae6c875db2536c0edcdcf210229182b8"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "iYrELYP5zjkVFYpLrbLp+YBv+MRK63j87K3g6mw2n1Jeu/JcaS/e17gQrh4XSZk=",
+      "segmentIndex": 9
+    },
+    {
+      "id": "chapter-2",
+      "title": "DjhfauGA4Z+6O6kd35fugvIhPGkEvTf6ExbmO9hxvICbxfr3egkHsX2Rdw==",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-3",
+      "title": "egKueLLP0MZ/nkYyybbGhliNze4gbbEviIWy3OsMbYuaLYuKT+fOqsQAgw==",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-4",
+      "title": "onxGoidg699WyJuWXEt7Ik4GL9TrvigdiIi2tC7928GfTlIW2t2Hd9z341leW4w=",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-5",
+      "title": "YG89T6wL4RGfLgWryOSVa8ncqUk7zWheljzr/urLQe+XWn4wFVyqfmnWQo8ZpfQ=",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-6",
+      "title": "0IeeB3gn6U4d65hGgjAT59+xnMJc9pDeGrKVBZkd+VvBhsDwGbUp3zfLB7JKSCE=",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-7",
+      "title": "SlXhL9Jzm+53g25kuFhfSDrJJ7D+uaryUh4ggHt6cXHNoNd8CETux/JqrThc6Ck=",
+      "segmentIndex": 10
+    },
+    {
+      "id": "chapter-8",
+      "title": "+a8LWiyARYMu2/i4S3kczi5F7y7B6Fj1uLcE3ziWeWnY564fJWegHMuoKIhnLGuAgsI=",
+      "segmentIndex": 11
+    },
+    {
+      "id": "chapter-9",
+      "title": "MNuI8+pT7f2elVyhXG7MbGZ5GAuM9Q0txewwyvhxgcyccb2FKeQ4rXEytU571qch2l4=",
+      "segmentIndex": 11
+    },
+    {
+      "id": "chapter-10",
+      "title": "bhwGvzWDdrVS6/XZKuUif5g0OSBgRm/dyf2VRbLkso9x4MFSlIalgXk4dxcWCd5I1zI=",
+      "segmentIndex": 11
+    },
+    {
+      "id": "chapter-11",
+      "title": "o6Mfc5g6XhZVcGhy0YXON9vO8g1qpxEA+dj/JFVYSwQ28IWYu/XzwKTzSNzeuCLCtQQ=",
+      "segmentIndex": 12
+    },
+    {
+      "id": "chapter-12",
+      "title": "Yf2Lq9rjULwbHcQLY4/svbpMxb7M905cz3r3+Wrq0miR2dpxMVtAb7s1RorIdsozpQs=",
+      "segmentIndex": 12
+    },
+    {
+      "id": "chapter-13",
+      "title": "NpTdGi0wJW/zisU/uzBkDm9NkxcKAql1OTZaFkdTmoKswecEi5+IRmBOCKgYc4qlgBA=",
+      "segmentIndex": 13
+    },
+    {
+      "id": "chapter-14",
+      "title": "OFUuDzAQ8QDQI/j3k4evzm0/QBBVDPHLg7aNhzFYr90uwwc7IbRrwB9M2pcRAJXZaTaH7jsiB86wDn8=",
+      "segmentIndex": 14
+    },
+    {
+      "id": "chapter-15",
+      "title": "MXtmWGX3fZtrG3/igt8qHCvUTS742jYABifiVs0YhXfdOuyj08G4sr4u6Tp6/XgG2cwBI1M0EhYKYaE=",
+      "segmentIndex": 15
+    },
+    {
+      "id": "chapter-16",
+      "title": "to5qsWf6cxkgzK/RRRYHIVssxwomz3AW7jNdcrjL4sU0vI0gI+U+t+V+Obxd0nfampIaQ0TPLjoBqPqfw20=",
+      "segmentIndex": 16
+    },
+    {
+      "id": "chapter-17",
+      "title": "gFsrG8H55wWivjGLUXOzX9+ZNKpTLK3+RaLZmigpJ4yl07933PfUhKT3KYC7pfZlSwcpZzXlGb4AAPZawV0=",
+      "segmentIndex": 16
+    },
+    {
+      "id": "chapter-18",
+      "title": "A0ji+WEKGXeYATavS8d12zbvfZ98sTrBpJkzRgOwqMGd0xOg+Ty8q/7AuaU9I4J3I0ZsiuEpsiiKMRf9PtghCHM=",
+      "segmentIndex": 17
+    },
+    {
+      "id": "chapter-19",
+      "title": "xYhTq25UL9Vj0nNO/r5uZ2PxAhHu/5+3n75PQC2K4pXTpHFeF/kkfTe1dctagJRPlPJWEZA=",
+      "segmentIndex": 18
+    },
+    {
+      "id": "chapter-20",
+      "title": "oer0/oYp4cLTpymhGJwScT0L5K4GRjKexqDmmvEZIN8A/sMsVyj1SFOhGwD1RqiaGxA01QY=",
+      "segmentIndex": 18
+    },
+    {
+      "id": "chapter-21",
+      "title": "6IprB8dnA+cVaUz3poTyu6it3P1plXrjyYV+i4d+zbpqFa0nidQyej26GhkiZJEiLKAI86Y=",
+      "segmentIndex": 20
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "UIqfx/lMTGoP+2ek",
+      "bytes": 102102,
+      "charHint": 0,
+      "compression": "gzip"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "YI7wFgTuMP1PD+Jy",
+      "bytes": 101134,
+      "charHint": 92971,
+      "compression": "gzip"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "a2Z1tltDrZwx2FZF",
+      "bytes": 101052,
+      "charHint": 186014,
+      "compression": "gzip"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "OLgGXZY/7sRl49fZ",
+      "bytes": 104532,
+      "charHint": 279058,
+      "compression": "gzip"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "KYO6gk9UP8sE8llm",
+      "bytes": 104277,
+      "charHint": 372127,
+      "compression": "gzip"
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "Clok79mNgrmtZJbS",
+      "bytes": 101285,
+      "charHint": 465188,
+      "compression": "gzip"
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "OLewmCiyxh5HtAOz",
+      "bytes": 102434,
+      "charHint": 558236,
+      "compression": "gzip"
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "Y/iRmibO/8ky7qBU",
+      "bytes": 104379,
+      "charHint": 651239,
+      "compression": "gzip"
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "ef2aDCgzedcwksBJ",
+      "bytes": 104463,
+      "charHint": 744296,
+      "compression": "gzip"
+    },
+    {
+      "index": 9,
+      "file": "seg-0009.bin",
+      "iv": "oyb0/Jp6myZmejTZ",
+      "bytes": 100624,
+      "charHint": 837277,
+      "compression": "gzip"
+    },
+    {
+      "index": 10,
+      "file": "seg-0010.bin",
+      "iv": "GgxQTHn5kv2cloT9",
+      "bytes": 103450,
+      "charHint": 930314,
+      "compression": "gzip"
+    },
+    {
+      "index": 11,
+      "file": "seg-0011.bin",
+      "iv": "6nMYVfmnMYZn2ULv",
+      "bytes": 102693,
+      "charHint": 1023340,
+      "compression": "gzip"
+    },
+    {
+      "index": 12,
+      "file": "seg-0012.bin",
+      "iv": "A1yeNGXGoHyuZvWR",
+      "bytes": 104615,
+      "charHint": 1116388,
+      "compression": "gzip"
+    },
+    {
+      "index": 13,
+      "file": "seg-0013.bin",
+      "iv": "Lo9FO32GvgZouIzp",
+      "bytes": 105376,
+      "charHint": 1209458,
+      "compression": "gzip"
+    },
+    {
+      "index": 14,
+      "file": "seg-0014.bin",
+      "iv": "AOnsQ1+24MDKb+vx",
+      "bytes": 103127,
+      "charHint": 1302419,
+      "compression": "gzip"
+    },
+    {
+      "index": 15,
+      "file": "seg-0015.bin",
+      "iv": "yegqnIUpuXSjHL94",
+      "bytes": 99090,
+      "charHint": 1395441,
+      "compression": "gzip"
+    },
+    {
+      "index": 16,
+      "file": "seg-0016.bin",
+      "iv": "UM9wvWLC99iU9B/b",
+      "bytes": 98383,
+      "charHint": 1488505,
+      "compression": "gzip"
+    },
+    {
+      "index": 17,
+      "file": "seg-0017.bin",
+      "iv": "+czV7GAJIuCOetCT",
+      "bytes": 99913,
+      "charHint": 1581572,
+      "compression": "gzip"
+    },
+    {
+      "index": 18,
+      "file": "seg-0018.bin",
+      "iv": "/aMyDmlMFxWnWR2e",
+      "bytes": 101284,
+      "charHint": 1674609,
+      "compression": "gzip"
+    },
+    {
+      "index": 19,
+      "file": "seg-0019.bin",
+      "iv": "jY74tSjzpjoA0dV+",
+      "bytes": 102560,
+      "charHint": 1767674,
+      "compression": "gzip"
+    },
+    {
+      "index": 20,
+      "file": "seg-0020.bin",
+      "iv": "7FKXd7FRMapcbcxx",
+      "bytes": 103142,
+      "charHint": 1860699,
+      "compression": "gzip"
+    },
+    {
+      "index": 21,
+      "file": "seg-0021.bin",
+      "iv": "d4Ci0sfeVNQj6P5b",
+      "bytes": 31815,
+      "charHint": 1953750,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 4953
+  }
+}

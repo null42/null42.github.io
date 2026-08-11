@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+  <title id="title">连续时间信号与离散时间信号</title>
+  <desc id="desc">左侧为连续曲线，右侧为在整数索引处定义的离散序列，并标出采样间隔。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#26364d"/></marker></defs>
+  <rect width="1000" height="420" rx="24" fill="#fbfcfe"/>
+  <text x="250" y="44" text-anchor="middle" font-size="24" font-family="Microsoft YaHei, sans-serif" fill="#172033">连续时间信号 x_c(t)</text>
+  <line x1="70" y1="310" x2="450" y2="310" stroke="#26364d" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="150" y1="360" x2="150" y2="90" stroke="#26364d" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M70 270 C130 260 165 175 225 180 S330 260 450 125" fill="none" stroke="#2b67b1" stroke-width="5"/>
+  <text x="438" y="338" font-size="20" fill="#26364d">t (s)</text><text x="112" y="100" font-size="20" fill="#26364d">幅值</text>
+  <text x="750" y="44" text-anchor="middle" font-size="24" font-family="Microsoft YaHei, sans-serif" fill="#172033">离散时间信号 x[n]</text>
+  <line x1="550" y1="310" x2="940" y2="310" stroke="#26364d" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="620" y1="360" x2="620" y2="90" stroke="#26364d" stroke-width="2" marker-end="url(#arrow)"/>
+  <g stroke="#d46b3c" stroke-width="3" fill="#d46b3c">
+    <path d="M650 310V265"/><circle cx="650" cy="265" r="6"/>
+    <path d="M700 310V215"/><circle cx="700" cy="215" r="6"/>
+    <path d="M750 310V180"/><circle cx="750" cy="180" r="6"/>
+    <path d="M800 310V205"/><circle cx="800" cy="205" r="6"/>
+    <path d="M850 310V245"/><circle cx="850" cy="245" r="6"/>
+    <path d="M900 310V145"/><circle cx="900" cy="145" r="6"/>
+  </g>
+  <g font-size="17" fill="#26364d" text-anchor="middle"><text x="650" y="336">1</text><text x="700" y="336">2</text><text x="750" y="336">3</text><text x="800" y="336">4</text><text x="850" y="336">5</text><text x="900" y="336">6</text></g>
+  <path d="M700 365H750" stroke="#275dad" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="725" y="397" text-anchor="middle" font-size="18" fill="#275dad">一个索引间隔；若采样则对应 T_s</text>
+  <text x="500" y="392" text-anchor="middle" font-size="18" fill="#5e6b7c">分类看自变量的取值集合，不看幅值是否量化，也不看绘图时是否连线。</text>
+</svg>

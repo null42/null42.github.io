@@ -1,0 +1,30 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>理论四章节复盘｜独立完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><div class="shell"><main>
+<header class="hero"><div class="eyebrow">独立答案 · 建议先完成全部题目</div><h1>理论四：闭环稳定性与 Nyquist 推理｜完整答案</h1><p class="lead">答案不仅给结论，还展示方向约定、根计数、边界条件和交叉验证。若你的符号约定不同，应先统一 N 的正方向，再比较最终 Z。</p><p><a href="/html-raw/control/part-2-control-theory/review/chapter-04-stability-nyquist-review/">返回章节复盘</a></p></header>
+<section class="review-section"><h2>A 级答案</h2>
+<h3>1. 闭环方程</h3><p>单位负反馈有 e=r−y、y=Le，因此 y=L(r−y)，整理得 (1+L)y=Lr，所以 Y/R=L/(1+L)。闭环自然响应的非零解要求 1+L(s)=0；因此 L=−1 是特征函数变为零的临界点。</p>
+<h3>2. 四类稳定</h3><p>BIBO 稳定讨论有界外部输入到某输出；渐近稳定讨论零输入内部模态是否衰减；内部稳定要求所有允许的外部输入到全部内部信号稳定，不能有隐藏 RHP 模态；鲁棒稳定还要求模型参数和未建模动态变化后保持稳定。</p>
+<h3>3. P/N/Z</h3><p>本课件约定 P 为 L 的 RHP 极点数，N 为 Nyquist 曲线对 −1 的有向净包围数，Z 为 1+L 的 RHP 零点数，即闭环 RHP 极点数。使用课件公式 Z=N+P，严格稳定要求 Z=0 且曲线不穿过 −1。</p></section>
+<section class="review-section"><h2>B 级答案</h2>
+<h3>1. G=1/(s+1)²，K=1</h3><p>开环极点都在 −1，所以 P=0。完整 Nyquist 曲线不包围 −1，N=0，故 Z=0。直接求根：(s+1)²+1=0，得到 s=−1±j，两根均在 LHP。</p>
+<h3>2. 负实轴交点 −0.25</h3><p>正实比例增益 K 把曲线径向缩放。临界条件 K(−0.25)=−1，所以 Kcrit=4。K=4 时曲线穿过 −1，对应闭环虚轴根，是稳定边界，不能归入严格稳定区。稳定在 Kcrit 的哪一侧还需结合曲线方向和 P 判断。</p>
+<h3>3. G=1.5/(s−1)</h3><p>闭环特征方程 1+1.5K/(s−1)=0，得 s=1−1.5K。严格稳定要求 1−1.5K&lt;0，即 K&gt;2/3。开环 P=1：K=1 时课件读得 N=−1，Z=0；K=1/2 时 N=0，Z=1。直接根分别为 −0.5 和 0.25，与 Nyquist 一致。</p></section>
+<section class="review-section"><h2>C 级答案</h2>
+<h3>1. 隐藏不稳定抵消</h3><p>设内部实现含模态 1/(s−1)，而某个外部通道分子恰有 s−1，于是约分后 Y/R=1。该外部通道看似稳定，但初始状态或另一个扰动通道仍可激发 e^t。实际参数稍有偏差时抵消也会消失，因此 RHP 极零抵消不能证明内部稳定。</p>
+<h3>2. q 阶积分器小圆弧</h3><p>令 L(s)=B(s)/[s^qA(s)]，并在 s=0 附近取 s=re^{jθ}。若 A(0)、B(0) 非零，则 L≈γr^{−q}e^{−jqθ}，γ=B(0)/A(0)。当 r→0 时幅值趋于无穷，相角变化是 s 平面小圆弧角度变化的 −q 倍。γ&lt;0 时还要额外加 180°。因此该映射可能贡献包围数，不能省略。</p>
+<h3>3. 动态 PI</h3><p>固定 −1/K 移点法要求 K 是实正常数。PI 的 K(s)=Kp(1+1/(Ti s)) 随频率同时改变幅值和相位，−1/K(jω) 不是固定点。正确做法是把 (1+1/(Ti s))G(s) 作为基础环路，再把 Kp 作为可能的径向缩放参数。</p></section>
+<section class="review-section"><h2>D 级答案</h2>
+<h3>1. RHP 极点、积分器和延迟并存</h3><ol><li>写完整 L(s)=K(s)G(s)e^{−sT}，先数不含虚轴边界的 RHP 极点 P。</li><li>在原点用右半平面小圆弧绕开积分器，推导其无穷远映射方向。</li><li>保留 e^{−jωT}，因为它不改幅值但持续增加负相位。</li><li>画正频率曲线并用共轭对称补齐，标注所有方向和连接弧。</li><li>按课件约定数 N，计算 Z=N+P；曲线穿过 −1 时记录临界参数。</li><li>再用 Routh、根计算或时域仿真交叉验证，并检查内部通道。</li></ol>
+<h3>2. 数字部署复验</h3><ol><li>选择采样周期并建立 ZOH 离散对象，不能只把连续 K(s) 代数替换成 K(z)。</li><li>把 ADC、计算、PWM 更新延迟和必要的整数拍延迟放入环路。</li><li>在单位圆或离散频率响应上重新判断稳定和裕度。</li><li>检查量化、系数字长、积分累加器溢出、执行器饱和和抗积分饱和。</li><li>进行参数角点、采样抖动、噪声和未建模高频的最坏情况测试。</li></ol>
+<h3>3. 开环不稳定对象的安全扫频</h3><p>不能直接断开稳定化反馈。应先使用已验证的稳定控制器闭环运行，在求和点注入幅值受限的多正弦或扫频信号，记录注入点两侧信号并估计环路传递；设置状态、输出和控制量保护阈值，逐频点确认稳态后再提高激励。测量结果必须附带相干度、信噪比和工作点范围。</p></section>
+<section class="review-section"><h2>补充复算：含积分器例题</h2>
+<p>对 <code>G=1/[s(s+1)²]</code>、比例增益 K，闭环特征多项式为 <code>s(s+1)²+K=s³+2s²+s+K</code>。三阶 Routh 表第一列为 <code>1、2、(2−K)/2、K</code>。全部同号要求 K&gt;0 且 2−K&gt;0，所以严格稳定区为 <code>0&lt;K&lt;2</code>。</p>
+<p>K=2 时 s³+2s²+s+2=(s+2)(s²+1)，出现 ±j 虚轴根，是临界稳定；K&gt;2 时第一列发生两次符号变化，对应两个 RHP 极点，与课件 Nyquist 的 Z=2 一致。K&lt;0 时常数项为负，至少有一个正实根。</p>
+<p>这道题的价值不是再学一次 Routh，而是验证原点小圆弧没有画反：若 Nyquist 计数与 Routh 的 RHP 根数不同，应优先检查轮廓方向、小圆弧映射和 N 的符号约定。</p>
+</section>
+<section class="review-section"><h2>补充迁移：离散控制器</h2>
+<p>连续设计部署后，应先得到含零阶保持的离散对象 G(z)，再与真实控制器 K(z)、计算延迟 z^{-d} 和传感/执行滤波组成 L(z)。连续左半平面经 z=e^{sT} 映到单位圆内部，因此离散闭环要求 1+L(z) 的全部根满足 |z|&lt;1。</p>
+<p>在单位圆 z=e^{jΩ} 上计算离散 Nyquist 曲线，先数 L(z) 在单位圆外的极点，再按一致方向约定统计对 −1 的净包围。若一拍延迟被遗漏，模型少了相位 −Ω；在接近 Nyquist 频率时这可能是决定稳定与失稳的差异。</p>
+<p>最后还要做有限字长验证：系数量化会移动极点，积分累加器可能溢出，PWM 和执行器饱和会触发非线性。Nyquist 证明的是线性模型稳定，不能代替这些实现测试。</p>
+</section>
+<section class="gate"><h2>自我评分</h2><p>若答案中没有明确写 P、N 的方向约定、Z、边界等号和交叉验证，就还没有形成可复用的 Nyquist 判定能力。</p></section>
+<section class="answer" id="answer-quality-layer"><h2>理论四接口与诊断｜答案验收层</h2><div class="work"><p><strong>本章复核样例：</strong>先列开环 RHP 极点数 P，再沿统一方向计算绕数 N，按所采用的符号约定得到 Z；只有 Z=0 才能宣称闭环无 RHP 极点。</p></div><p class="pitfall"><strong>常见错误为什么错：</strong>遇到原点积分器、虚轴极点或轨迹穿越 -1，不能套普通图形口诀；必须处理小圆弧、边界稳定和参数扰动后的实际闭环。</p></section></main></div></body></html>

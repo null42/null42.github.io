@@ -1,0 +1,31 @@
+{
+  "title": "&#31532;&#19971;&#31456; &#37319;&#26679;",
+  "source": "&#20449;&#21495;&#19982;&#31995;&#32479;&#65288;&#28145;&#24230;&#24378;&#21270;&#29256;&#65289;.pptx",
+  "chapter_slide_start": 400,
+  "chapter_slide_end": 456,
+  "completed_slide_end": 456,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-07-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "CTFT&#19982;DTFT",
+    "&#20914;&#28608;&#19982;&#21367;&#31215;",
+    "&#39057;&#35889;&#21608;&#26399;&#24615;"
+  ],
+  "learning_objectives": [
+    "&#25512;&#23548;&#37319;&#26679;&#39057;&#35889;&#22797;&#21046;",
+    "&#21028;&#26029;&#28151;&#21472;&#19982;&#37325;&#24314;",
+    "&#36830;&#25509;&#36830;&#32493;&#21644;&#31163;&#25955;&#22788;&#29702;"
+  ],
+  "control_connections": [
+    "&#25239;&#28151;&#21472;&#28388;&#27874;",
+    "&#37319;&#26679;&#24310;&#36831;",
+    "&#22810;&#36895;&#29575;&#25511;&#21046;"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-07/001-slides-400-409.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-07/002-slides-410-418.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-07/003-slides-419-426.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-07/004-slides-427-439.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-07/005-slides-440-456.fragment.html"
+  ]
+}

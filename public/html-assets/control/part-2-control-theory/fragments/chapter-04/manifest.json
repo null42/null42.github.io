@@ -1,0 +1,13 @@
+{
+  "title": "理论四：闭环稳定性与Nyquist推理",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 373,
+  "chapter_slide_end": 415,
+  "completed_slide_end": 415,
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["传递函数、闭环特征方程", "复数频率响应和Bode图", "极点与内部稳定"],
+  "learning_objectives": ["由1+L=0理解闭环稳定", "用Nyquist包围数处理开环不稳定", "识别原点极点与内部稳定边界"],
+  "control_connections": ["增益/相位裕度", "鲁棒稳定性", "开环不稳定对象的闭环设计"],
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-04-content-overrides.json",
+  "fragments": ["course-notes/part-2-control-theory/fragments/chapter-04/001-slides-373-415.fragment.html"]
+}

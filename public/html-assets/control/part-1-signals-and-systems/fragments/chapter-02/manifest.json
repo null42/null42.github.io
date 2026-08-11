@@ -1,0 +1,37 @@
+{
+  "title": "第二章 线性时不变系统",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 86,
+  "chapter_slide_end": 151,
+  "completed_slide_end": 151,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-02-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "第一章六类系统性质的定义判别",
+    "离散单位冲激、阶跃与筛选性质",
+    "序列移位、求和及等比级数",
+    "分段支集与不等式交集"
+  ],
+  "learning_objectives": [
+    "从离散和连续冲激分解独立推导卷积和与卷积积分",
+    "用支集交集、图解法和卷积代数完成分段计算与系统互联化简",
+    "由冲激响应判断无记忆、可逆、因果、BIBO 稳定并恢复阶跃响应",
+    "把差分和微分方程转换为延迟器、积分器与状态化框图",
+    "在广义函数意义下使用单位冲激、冲激导数与重复积分"
+  ],
+  "control_connections": [
+    "用冲激响应和阶跃响应建立对象的时域模型并理解辨识误差",
+    "把数字控制律化为差分方程、延迟器状态和逐采样更新算法",
+    "理解 FIR/IIR、极点衰减、初始状态、延迟和逆系统可实现性",
+    "正确处理积分器状态、微分滤波、噪声放大和无扰切换",
+    "为传递函数、频率响应、状态空间与后续先进控制建立共同基础"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/001-slides-086-097.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/002-slides-098-103.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/003-slides-104-114.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/004-slides-115-135.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/005-slides-136-141.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-02/006-slides-142-151.fragment.html"
+  ]
+}

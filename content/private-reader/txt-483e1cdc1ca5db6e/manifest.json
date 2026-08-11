@@ -1,0 +1,79 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-483e1cdc1ca5db6e",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "ooxt6mX7BPKQd4EM+xD86Q=="
+  },
+  "gate": {
+    "token": "9auW7LDJuhAVxJZUk9NXnz+7BsfpzfygoSTQ8kMQ97aicQpurItEihqtbKGBt70v36g="
+  },
+  "shelf": {
+    "title": "jdccGMq6w2rii4CGPU/IkqLzzlZbVGHgwc8Y/SwmtLxaZPP2KMOkq6fSiDMl95mHTSpMhmFQFhlIqls2wmX+q0qiovlcEyLqMcLOrE9eO/eITCsD68pnNM+2lL/zB2luJQIGnQfh1akvSP3vwlbuoaRHGG48j30mchCrTguaBlY9y1o/q5oZItfpDmg7PSSh2vR77rqQyEwAj8Jg/a7laoTxynyHGFWFzBMXTBVlN8l7N1dTJ7J+OMk433xQFwM=",
+    "author": null,
+    "group": "pAEJclJI5R49+SzQJvh/Xzi3viUOCEIfWO+HEGjWT31pCkdZJk8y/5Hofw=="
+  },
+  "source": {
+    "sha256": "483e1cdc1ca5db6e2e51bb997bd777b11d956339f7409e00fcdf9a1b42d8095d"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "tI+cpxERJoOTEyXqxARbkWW2tnyVof/LnrS+8rNsEeBxgNg=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "3cEsmld93p+CflfgdTOOveh832zcGnvH/YI76hVX+e/ebfc=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "a6wsa7bK1gKQ2gex3nzefg7e3WYWBwRQXIia5cNR9AKUkbxrU1sQTHAnTrmq2wKnGz+63EB0kP1TUDyCkUJDXhg=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "goR3jbGbmaHdSeBQwEprflZ2wWlk8Eb2a4GFG1/SuOeMTCY=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "q1OimirVAPAFiZMxHE3446EAjLIFZY3u+GZwDXcGneRB7ZDygP1MSa4v/pdkd4HWzBsILeS6ST84CA8SMbe3mM1Z0MmEo9JIImZQQ6PIlogt/Lf29/tomH4bJNVyVTOj7IizrxcyCmI=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "vwKaFM+mVU8ouV3KENiZdyMHDWfbiJJ4UBk8FLmWwdJdduQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "ZSuOoX2lbVB9J3SY9kn0wmlr2EdOuPgfQStnPFwd+fMm2oU=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-8",
+      "title": "GeRQ/C0iWMKtFxayPGmdbW/Lj1krZUHCm2zkckdzEhYP/+Q=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "0zxShYoOzzRWK+jQ",
+      "bytes": 39842,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 82
+  }
+}

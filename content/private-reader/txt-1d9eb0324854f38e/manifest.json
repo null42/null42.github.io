@@ -1,0 +1,79 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-1d9eb0324854f38e",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "3LaOxjpxc8Uz/861csIDOQ=="
+  },
+  "gate": {
+    "token": "FovTCfLLsroL2fkmAYrCAaSHak/1p8sT2EFrXHwLKYOIev2gEVNhB5dO2qU+jEHLPJM="
+  },
+  "shelf": {
+    "title": "CjRzLecl7UDmn2fQ6EN4wPC9qSysEGYXwvRredge2j3smSUOFcdY7ntfPpvHkPnr6AOiz6RaEeJvLu9Mo98+WtQYRy8oQg0515cw7oMYRjbiCfTLk3G6eQ==",
+    "author": null,
+    "group": "6Xgkud0lRQfaoZDwrF0R30Ot66n276qCusmcyvaJYLsAcnsl1tNP5eA0Zg=="
+  },
+  "source": {
+    "sha256": "1d9eb0324854f38e71a7eec88c169475e4cef5ec264d459d2c3f67fd586e74e0"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "wMFdyNJJWDVKa0xFU85oc4W5bOMLhw2UzJfCuUZBXcQNfdDrV69Fd7FL03uwE8oKFe0=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "KaIZ/TH6/hVqCj2qX7gGlGQFXd/B1g0mpZLIi+TZj1k4rAR3StjjMWzsnJ+HzfyCVtg=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "Xii7VIzkzr4vZFPe1KC//g+08ASMuhQp4KabNMHhjwM5Njhiy9rETe7qbZzaZnZ2OPc=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "etsIt59b3WdXfX+cFtuKKgONjbeghFctUIcngGFUgAuDs312KAgs9t3x1usDAlMyY58=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "iGxPo+Hy5RmO3zO8PDh9od/Q9WxXHXa52HuT4roR21p9BRNGAi1RlaiX8tGC14qb+1k=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "gpZUvnh3GaBRr+H/boLGhujJM1keLmVNYqy/oi480Gj682ZgngKvjs1wRIuKxsLBEMw=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "mYaPJ0xwcahqIXtCH11LzHtYcCiqWeyAZZgh4DW0ffo8U0/0y0XyRcpJyfLPK16/mlQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-8",
+      "title": "RF49FYx0WNPDHMxuDFvK7v9JDOUGupOJL7ejB39KYVWZ+PtcPWCPVMRFNT5+8uS9V3w=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "nbAjb4oezvQGeTrA",
+      "bytes": 67038,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 146
+  }
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang=zh-CN><head><meta charset="utf-8"><base href=../companion/><link rel=stylesheet href=../assets/companion.css><title>第三章第234–248页分层练习完整答案</title></head><body><main>
+<header class=hero><div class=eyebrow>第三章 · 第234–248页</div><h1>滤波应用与章节小结｜分层练习完整答案</h1><p>答案不仅给出结果，还保留从时域方程、频率响应、极零几何到控制实现的推理链。所有数字频率默认单位为rad/sample。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><p>RC低通输出取电容电压：</p><div class=formula>H_{LP}(jω)=1/(1+jωRC)</div><p>RC高通输出取电阻电压：</p><div class=formula>H_{HP}(jω)=jωRC/(1+jωRC)</div><p>两者共同截止角频率 <code>ω_c=1/(RC)</code>，在该点幅值均为 <code>1/√2</code>。</p>
+<h3>A2</h3><p>递归滤波器的当前输出依赖过去输出，传递函数分母通常不是1，因果实现一般产生无限长冲激响应IIR。非递归滤波器只依赖有限个当前/过去输入，冲激响应有限，为FIR；它仍需输入延迟存储，但没有输出反馈。</p>
+<h3>A3</h3><p>令 <code>L=M+N+1</code>：</p><div class=formula>H(e^{jω})=e^{jω(N−M)/2}·sin[ω(M+N+1)/2]/[(M+N+1)sin(ω/2)]</div><p>指数项决定线性相位，正弦比决定幅值；ω=0处用极限定义为1。</p>
+<h3>A4</h3><div class=formula>H(e^{jω})=(1/2)(1−e^{-jω})=j e^{-jω/2}sin(ω/2)</div><p>直流增益为0，π处增益为1，因此它精确消除常值并保留最高离散频率的归一化幅值。</p></section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p><code>R=10^4 Ω</code>、<code>C=10^{-6} F</code>，故 <code>RC=0.01 s</code>：</p><div class=formula>ω_c=1/RC=100 rad/s；f_c=ω_c/(2π)≈15.915 Hz</div><p>在ω=ω_c处，幅值为1/√2≈0.707，约−3.01 dB，相位为−45°。</p>
+<h3>B2</h3><p>差分方程整理为 <code>y[n]−0.8y[n−1]=0.2x[n]</code>：</p><div class=formula>H(z)=0.2/(1−0.8z^{-1})</div><p>极点0.8在单位圆内，因果系统稳定。直流增益 <code>H(1)=0.2/(1−0.8)=1</code>；π处 <code>H(−1)=0.2/(1+0.8)=1/9≈0.111</code>，所以它是单位直流增益的一阶低通/指数移动平均。</p>
+<h3>B3</h3><p>5点因果移动平均：</p><div class=formula>H(z)=(1/5)(1+z^{-1}+z^{-2}+z^{-3}+z^{-4})</div><p>除z=1外的五次单位根都是零点，因此主值区间内零点为 <code>ω=±2π/5、±4π/5</code>。线性相位群延迟为 <code>(5−1)/2=2</code> 个样本。</p>
+<h3>B4</h3><p>归一化差分 <code>H(e^{jω})=(1/2)(1−e^{-jω})</code>。直流项2被消除。ω=π/2时：</p><div class=formula>H(e^{jπ/2})=(1/2)(1+j)=(1/√2)e^{jπ/4}</div><p>π处H=1。因此：</p><div class=formula>y[n]=(1/√2)cos(πn/2+π/4)+(−1)ⁿ</div></section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>低通：由 <code>(u_s−u_c)/R=Cdu_c/dt</code> 得 <code>RCdu_c/dt+u_c=u_s</code>，代入复指数稳态得 <code>H_{LP}=1/(1+jωRC)</code>。高通：<code>u_r=u_s−u_c</code>，或由电阻电流关系整理得 <code>RCdu_r/dt+u_r=RCdu_s/dt</code>，从而 <code>H_{HP}=jωRC/(1+jωRC)</code>。复数相加：</p><div class=formula>H_{LP}+H_{HP}=[1+jωRC]/[1+jωRC]=1</div><p>这对应KVL中的 <code>u_c+u_r=u_s</code>；不能把该式误写成幅值相加。</p>
+<h3>C2</h3><p>一阶递归响应：</p><div class=formula>|H|²=1/(1+a²−2a cosω)</div><p>若0&lt;a&lt;1，随着ω从0到π增加，cosω由1降到−1，分母从 <code>(1−a)²</code> 增至 <code>(1+a)²</code>，幅值下降，呈低通。若−1&lt;a&lt;0，写a=−r，分母为 <code>1+r²+2r cosω</code>，从ω=0到π下降，幅值上升，呈高通倾向。两种情况都需|a|&lt;1保证稳定。</p>
+<h3>C3</h3><p>令L=M+N+1：</p><div class=formula>H=(1/L)Σ_{n=−N}^{M}e^{-jωn}</div><p>令窗口中心 <code>c=(M−N)/2</code>，写成 <code>e^{-jωc}</code> 乘以关于中心对称的有限和；或直接使用几何级数：</p><div class=formula>Σ_{n=−N}^{M}e^{-jωn}=e^{jωN}[1−e^{-jωL}]/[1−e^{-jω}]</div><p>利用 <code>1−e^{-jθ}=2je^{-jθ/2}sin(θ/2)</code>，化简得：</p><div class=formula>H=e^{jω(N−M)/2}·sin(ωL/2)/[L sin(ω/2)]</div><p>代回L即得到题设公式。</p>
+<h3>C4</h3><p>负极点 <code>a≈−1</code> 使π附近分母变小，从而相对强化高频，但直流增益 <code>1/(1−a)</code> 仍非零，所以不是严格直流阻断。零点结构 <code>1−z^{-1}</code> 在z=1处精确为零，任何常值输入稳态输出都为零。极点靠近某角度产生峰值和长记忆；零点落在某角度产生精确陷波。设计时应明确是要“相对增强”还是“严格消除”。</p></section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>采样频率1 kHz时，50 Hz每周期含 <code>1000/50=20</code> 个样本。选择L=20的等权移动平均，其零点在 <code>ω=2π/20</code>，正好对应50 Hz，因此理想定频干扰及其若干倍频被消除。因果线性相位实现群延迟为：</p><div class=formula>(L−1)/2=9.5 samples=9.5 ms</div><p>若50 Hz有漂移，零点不再精确对准，应评估残余；闭环使用还需把9.5 ms延迟纳入相位裕度。</p>
+<h3>D2</h3><p>采样周期 <code>T_s=0.001 s</code>，目标连续极点为 <code>−ω_c=−2π·20</code>。用极点匹配：</p><div class=formula>a=e^{-ω_cT_s}=e^{-2π·20·0.001}≈0.8819</div><p>单位直流增益指数移动平均为：</p><div class=formula>y[n]=0.8819y[n−1]+0.1181x[n]</div><p>这是将连续极点准确映射到z平面的常用近似设计。若指标严格规定离散频响的精确−3 dB点，应再解 <code>|(1−a)/(1−ae^{-jω_cT_s})|=1/√2</code> 得到精确a。</p>
+<h3>D3</h3><p>测量低通位于反馈通道时，其相位直接进入环路，相同的噪声衰减通常伴随额外相位滞后。验证步骤：①建立对象、控制器、采样保持和滤波器完整离散模型；②比较加入滤波前后的开环Bode/Nyquist；③检查增益裕度、相位裕度、交越频率和灵敏度峰值；④用噪声谱验证衰减；⑤做时域阶跃、扰动和饱和测试；⑥在目标处理器上计入计算/PWM延迟与量化。只有噪声和稳定性同时达标才可接受。</p>
+<h3>D4</h3><p>可用一阶差分与稳定低通串联：</p><div class=formula>H_d(z)=[(1−a)/T_s]·(1−z^{-1})/(1−az^{-1})，0&lt;a&lt;1</div><p>对应递推式：</p><div class=formula>y[n]=ay[n−1]+[(1−a)/T_s][x[n]−x[n−1]]</div><p>低频时 <code>1−e^{-jω}≈jω</code>、<code>1−ae^{-jω}≈1−a</code>，故 <code>H_d≈jω/T_s=jΩ</code>，逼近连续微分；π处增益被限制为 <code>2(1−a)/[T_s(1+a)]</code>，不再无限增长。实现需考虑输入量化、输出限幅、初始化、采样抖动以及a接近1时的有限字长误差。</p></section>
+<p><a href=../companion/chapter-03-fourier-series.html#slide-234>返回第三章伴随讲义第234页</a></p>
+</main></body></html>

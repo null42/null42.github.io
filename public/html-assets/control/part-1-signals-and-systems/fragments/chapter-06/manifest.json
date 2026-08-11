@@ -1,0 +1,35 @@
+{
+  "title": "第六章 信号与系统的时域和频域特性",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 361,
+  "chapter_slide_end": 399,
+  "completed_slide_end": 399,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-06-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "CTFT与DTFT分析和合成",
+    "复数模相表示与相位展开",
+    "LTI卷积和频率响应",
+    "基本三角级数与谐波叠加"
+  ],
+  "learning_objectives": [
+    "把频谱模与相位分别解释为频率含量和相对时间组织",
+    "从相同幅谱构造不同波形并说明差异来源",
+    "连接线性相位、群时延与无失真传输",
+    "由理想和非理想滤波器建立时频折中",
+    "用差分方程和FIR实例统一时域与频域分析"
+  ],
+  "control_connections": [
+    "由谐波相位相干解释峰值、纹波和瞬态叠加",
+    "由群时延解释传感滤波和数字控制延迟",
+    "由滤波器选择性与振铃解释噪声抑制和超调折中",
+    "由FIR长度和线性相位解释实时实现延迟"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-06/001-slides-361-365.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-06/002-slides-366-375.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-06/003-slides-376-385.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-06/004-slides-386-390.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-06/005-slides-391-399.fragment.html"
+  ]
+}

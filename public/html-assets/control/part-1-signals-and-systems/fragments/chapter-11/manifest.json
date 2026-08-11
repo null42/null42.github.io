@@ -1,0 +1,32 @@
+{
+  "title": "第十一章：线性反馈系统",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 732,
+  "chapter_slide_end": 791,
+  "completed_slide_end": 791,
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "拉普拉斯变换与ROC",
+    "Z变换与单位圆",
+    "LTI系统与卷积",
+    "极点、零点和闭环特征方程"
+  ],
+  "learning_objectives": [
+    "由方框图推导反馈系统传递函数和灵敏度函数",
+    "解释反馈改善性能与引入不稳定的统一机制",
+    "使用根轨迹角度/幅值条件分析极点随K的移动",
+    "使用连续/离散Nyquist围线判断闭环稳定性并识别工程风险"
+  ],
+  "control_connections": [
+    "PID与环路整形",
+    "相位裕度/增益裕度",
+    "数字控制器采样延迟与单位圆稳定",
+    "执行器饱和、传感器噪声和未建模动态"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-11/001-slides-732-751.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-11/002-slides-752-755.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-11/003-slides-756-771.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-11/004-slides-772-791.fragment.html"
+  ]
+}

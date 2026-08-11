@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>chapter 06 visual courseware notes</title><style>body{margin:0 auto;max-width:72rem;padding:2rem;font:16px/1.75 system-ui,sans-serif;color:#1a1a1a;background:#fff}img,svg{max-width:100%;height:auto}code{overflow-wrap:anywhere}</style></head><body><section class="chapter-deep-dive visual-courseware-notes" id="visual-courseware-notes">
+<div class="eyebrow">课件图形页复原 · 频域校正与环路整形</div>
+<h2>把 Bode 图上的设计动作还原成计算链</h2>
+<p>本节专门解释第六章中由图形承载的设计信息。图形页不是“看趋势”：每一条曲线都对应交越频率、相位裕度、带宽、低频增益或阻尼参数。阅读时先抄下课件给出的指标，再用公式重算曲线变化的方向。</p>
+
+<section class="review-section">
+<h3>1. 第 546 页：双积分对象的超前校正任务</h3>
+<p><strong>课件锚点：</strong>对象为 <code>G(s)=1/s²</code>，设计目标包括斜坡输入零稳态误差、约 <code>60°</code> 相位裕度以及至少 <code>100 rad/s</code> 带宽。</p>
+<p>斜坡零稳态误差要求开环至少为 II 型，即低频含两个积分环节；但双积分本身在交越附近带来约 <code>−180°</code> 相位，不能直接满足相位裕度目标。因此设计动作必须分成两层：低频保留积分以满足跟踪，交越附近加入超前相位以补回相位裕度。</p>
+<div class="equation"><code>L(s)=C(s)G(s),&nbsp; PM=180°+∠L(jω<sub>c</sub>),&nbsp; |L(jω<sub>c</sub>)|=1.</code></div>
+<p>“带宽至少 100 rad/s”不是把增益任意调大，而是要求在满足 <code>|L|=1</code> 的同时把交越推到目标频段，并检查补偿器峰值、执行器限幅和未建模高频模态。</p>
+</section>
+
+<section class="review-section">
+<h3>2. 第 580 页：超前、滞后与 PID 的结构关系</h3>
+<p><strong>课件锚点：</strong>超前补偿在交越附近增加相位、主要影响断点以上频率；滞后补偿增加低频增益、主要影响断点以下频率。课件将超前与 PD、滞后与 PI 联系起来，并指出 PID 可以看作 lead/lag 的组合。</p>
+<p>典型超前环节可写为</p>
+<div class="equation"><code>C<sub>lead</sub>(s)=K(1+Ts)/(1+αTs),&nbsp; 0&lt;α&lt;1.</code></div>
+<p>零点频率为 <code>1/T</code>，极点频率为 <code>1/(αT)</code>，因为 <code>α&lt;1</code>，极点位于更高频率；在两者之间提供正相位。滞后环节则反过来把较大的静态增益放在低频，并尽量把相位影响放在交越频率以下。</p>
+<p>因此“用 PD 提速、用 PI 消除稳态误差”只是结构直觉，不是完整设计规则。最终仍须计算开环交越、PM/GM、闭环带宽和控制器输出峰值。</p>
+</section>
+
+<section class="review-section">
+<h3>3. 第 600 页：阻尼比不是带宽的同义词</h3>
+<p><strong>课件锚点：</strong>图中比较不同阻尼比 <code>ζ</code> 对二阶闭环频响和归一化带宽的影响：小阻尼出现明显峰值，阻尼增大后峰值下降但带宽也降低。</p>
+<p>标准二阶闭环模型</p>
+<div class="equation"><code>T(s)=ω<sub>n</sub>²/(s²+2ζω<sub>n</sub>s+ω<sub>n</sub>²)</code></div>
+<p>其共振峰存在的条件约为 <code>ζ&lt;1/√2</code>。在固定 <code>ω<sub>n</sub></code> 时，减小 <code>ζ</code> 往往提高快速性和峰值，但会降低裕度、放大噪声和模型不确定性。设计中应先决定允许的超调/峰值，再反推合理阻尼区间，不能只追求更大的带宽数字。</p>
+</section>
+
+<section class="review-section">
+<h3>4. 第 620 页：滞后补偿提高速度误差常数</h3>
+<p><strong>课件锚点：</strong>课件给出斜坡稳态误差过大时加入滞后补偿的例子：</p>
+<div class="equation"><code>C<sub>lag</sub>(s)=α(T<sub>l</sub>s+1)/(αT<sub>l</sub>s+1),&nbsp; α&gt;1.</code></div>
+<p>低频处 <code>C<sub>lag</sub>(0)=α</code>，因此速度误差常数</p>
+<div class="equation"><code>K<sub>v</sub>=lim<sub>s→0</sub>sG(s)C(s)</code></div>
+<p>可提高约 <code>α</code> 倍。课件算例选择 <code>K<sub>v</sub>=100</code>，得到约 <code>α=24</code>，并把滞后零极点放在交越频率以下，使交越附近的相位扰动尽量小。这个算例体现了“先用低频增益解决稳态精度，再用频率位置控制副作用”的设计顺序。</p>
+</section>
+
+<section class="review-section">
+<h3>5. 从图形到验收</h3>
+<ol>
+<li>从课件指标写出约束：稳态误差、PM/GM、交越频率、带宽、峰值和执行器限制。</li>
+<li>先用低频结构决定系统型别与误差常数，再用超前/滞后决定交越附近的幅相形状。</li>
+<li>在候选补偿器下重新计算 <code>L(s)</code>、闭环 <code>T(s)</code>、PM/GM 和带宽；不能只凭 Bode 图视觉判断。</li>
+<li>最后检查补偿器极点、控制量峰值、噪声放大、高频未建模动态和离散化后的相位损失。</li>
+</ol>
+</section>
+</section>
+</body></html>

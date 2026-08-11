@@ -1,0 +1,22 @@
+{
+  "title": "第十章 Z变换",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 657,
+  "chapter_slide_end": 731,
+  "completed_slide_end": 731,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-10-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": ["离散时间傅里叶变换", "采样", "拉普拉斯ROC", "差分方程"],
+  "learning_objectives": ["用ROC唯一确定序列", "判断离散系统因果稳定性", "处理单边Z变换和初值"],
+  "control_connections": ["数字PID差分式", "单位圆极点", "脉冲传递函数", "离散状态实现"],
+  "deep_dive": [
+    "course-notes/part-1-signals-and-systems/deep-dives/chapter-10-z-transform.html",
+    "course-notes/part-1-signals-and-systems/deep-dives/chapter-10-visual-courseware-notes.html"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-10/001-slides-657-674.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-10/002-slides-675-696.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-10/003-slides-697-716.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-10/004-slides-717-731.fragment.html"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-091012249a70cd78",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "meXEaupJb/MHv7Br5bwwPA=="
+  },
+  "gate": {
+    "token": "q0UblXLS8eWAMzqafJf9+5G0WL5bttuRhjoLj0w6iz6efkdYxKoCi8DWWCH74/39xNQ="
+  },
+  "shelf": {
+    "title": "/ERySneuqI92PDmO0kZ7OrBx6nV9KvFf6dEnwMXP4aZMOSDCGb8+AnDVeJYSXmLovOjykn+rpHp0rtjkMVHKgJuXPKUL2zhMEBeVmKBZlqdBzHuU4VLUIo+O",
+    "author": null,
+    "group": "7r889eQu1RXNip0/kvRbraMVtx7ha0Ys/Kp+9fjbKDMy91BlZayLdL/F8A=="
+  },
+  "source": {
+    "sha256": "091012249a70cd78a63a92e75f4bfef016c22d9186f48c8f8bb8503c773b7be8"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "oN3HE33HfG4lUCU7ywygM26ptUAaCNzKkY1mTjtv0qMJ3+o=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "uTaQL8cZ/ykZVhb7peQAz0ykrNhm1+A1DK3VgN8HlQYJI0c=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "iBLB76dc34enOAuH8ASrphWA3DJ/hR/FOwc9C2F8ZeOATnTWkG5RS/4VoNM=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "aV09tuSVGQ8/ggAUWAA2sF+q8DuSDRMduPLseW+YtjuQIeA=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "ySQRTaQN8vPotsXYER/Xi4vd7u1KUW6XPU30dTxyB1DGhew=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "39PRP/bcghyFbKZTH8NuRTfKxIuaJJSBV4+eKntCtdvzJUCIJzDZpysYrU4=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "mkdMGt2urZowfjpO",
+      "bytes": 114766,
+      "charHint": 0,
+      "compression": "gzip"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "qzW7kJetn4xNm5Lm",
+      "bytes": 23496,
+      "charHint": 90183,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 270
+  }
+}

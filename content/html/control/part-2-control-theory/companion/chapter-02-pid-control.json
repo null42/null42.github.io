@@ -1,0 +1,14 @@
+{
+  "title": "理论二：PID控制、二阶响应、约束与复合结构｜课件伴随讲义",
+  "description": "控制理论与信号系统交互课程页面。",
+  "source": "control/course-notes/part-2-control-theory/companion/chapter-02-pid-control.html",
+  "assets": [
+    "/html-assets/control/part-1-signals-and-systems/assets/companion.css",
+    "/html-assets/control/part-2-control-theory/figures/chapter-02/digital-pid-exercise-flow.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-02/feedforward-cascade-interface-flow.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-02/p-pi-control-chain.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-02/root-locus-antiwindup-flow.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-02/second-order-fit-flow.svg"
+  ],
+  "group": "part-2-control-theory"
+}

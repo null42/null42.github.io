@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>chapter 10 visual courseware notes</title><style>body{margin:0 auto;max-width:72rem;padding:2rem;font:16px/1.75 system-ui,sans-serif;color:#1a1a1a;background:#fff}img,svg{max-width:100%;height:auto}code{overflow-wrap:anywhere}</style></head><body><section class="chapter-deep-dive visual-courseware-notes" id="visual-courseware-notes">
+<div class="eyebrow">课件图形页复原 · 对应原 PPT 第 658–730 页</div>
+<h2>把图上的几何关系读成可推导的结论</h2>
+<p>本节不是对图片的装饰性描述，而是把原课件中无法由文本抽取可靠恢复的图形、公式和框图，逐页还原为可检查的推理。以下“课件锚点”只记录图中确实出现的内容；“推导与辨析”则明确标出讲义的解释和扩展。</p>
+
+<section class="review-section">
+<h3>1. 第 660 页：Z 平面上的极坐标与 DTFT</h3>
+<p><strong>课件锚点：</strong>双边 Z 变换为 <code>X(z)=∑<sub>n=-∞</sub><sup>∞</sup>x[n]z<sup>−n</sup></code>；令 <code>z=re<sup>jω</sup></code>，图中用 <code>r</code> 表示模长、<code>ω</code> 表示辐角，并指出 <code>r=1</code> 时退化为单位圆上的 DTFT。</p>
+<p>代入极坐标可得</p>
+<div class="equation"><code>X(re<sup>jω</sup>)=∑x[n]r<sup>−n</sup>e<sup>−jωn</sup>=F{x[n]r<sup>−n</sup>}.</code></div>
+<p>因此 Z 变换不是“另一个完全不同的变换”：它先用 <code>r<sup>−n</sup></code> 对序列作指数加权，再对加权序列做傅里叶变换。<code>r</code> 改变收敛性，<code>ω</code> 扫描频率；单位圆是频率响应真正被读取的位置。对数字控制器而言，不能只把 <code>z</code> 当成形式变量：闭环极点是否落在单位圆内，决定递推状态是否衰减。</p>
+</section>
+
+<section class="review-section">
+<h3>2. 第 663、668 页：几何级数、ROC 与因果/反因果</h3>
+<p><strong>课件锚点：</strong>图示序列 <code>a<sup>n</sup>u[n]</code> 的 Z 变换为 <code>1/(1−az<sup>−1</sup>)=z/(z−a)</code>，其 ROC 为 <code>|z|&gt;|a|</code>；课件同时用极坐标图说明，若 <code>|a|&lt;1</code>，ROC 包含单位圆，序列可稳定；若 <code>|a|&gt;1</code>，因果序列的 ROC 不包含单位圆。</p>
+<div class="equation"><code>∑<sub>n=0</sub><sup>∞</sup>a<sup>n</sup>z<sup>−n</sup>=∑<sub>n=0</sub><sup>∞</sup>(az<sup>−1</sup>)<sup>n</sup>=1/(1−az<sup>−1</sup>),&nbsp; |az<sup>−1</sup>|&lt;1.</code></div>
+<p>收敛条件给出 <code>|z|&gt;|a|</code>，而不是由代数式单独“看出来”的。相同代数式若选择 <code>|z|&lt;|a|</code>，对应的是左边序列</p>
+<div class="equation"><code>−a<sup>n</sup>u[−n−1] ↔ 1/(1−az<sup>−1</sup>).</code></div>
+<p>这解释了 ROC 的核心作用：代数表达式给出极点位置，ROC 给出序列支撑方向。右边序列 ROC 向外延伸，左边序列 ROC 向内延伸；双边序列的 ROC 是极点圆之间的环域。稳定性还要再加一条：ROC 必须包含单位圆。一个有极点在单位圆外的代数式并非必然不稳定，关键在于是否允许左边 ROC；但在实时因果实现中，通常必须同时满足因果和稳定，因而极点必须在单位圆内。</p>
+</section>
+
+<section class="review-section">
+<h3>3. 第 679 页：幂级数展开不是形式游戏</h3>
+<p><strong>课件锚点：</strong>图中把类似 <code>r<sup>−n</sup></code> 的序列展开成幂级数，并通过不同收敛半径说明同一有理式的展开区域不同。</p>
+<p>做部分分式或长除法时，必须先声明展开方向。例如</p>
+<div class="equation"><code>1/(1−az<sup>−1</sup>)=1+az<sup>−1</sup>+a<sup>2</sup>z<sup>−2</sup>+⋯</code></div>
+<p>隐含的是外部展开 <code>|z|&gt;|a|</code>，对应从 <code>n=0</code> 开始的右边序列。若在内部区域展开，则应改用</p>
+<div class="equation"><code>1/(1−az<sup>−1</sup>)=−(z/a)/(1−z/a)=−∑<sub>k=1</sub><sup>∞</sup>(z/a)<sup>k</sup>,&nbsp; |z|&lt;|a|,</code></div>
+<p>其幂次为正，说明时域索引落在负半轴。考试或设计中，先写 ROC 再展开，是避免把因果系统误写成反因果系统的最稳妥顺序。</p>
+</section>
+
+<section class="review-section">
+<h3>4. 第 682 页：一阶系统由差分方程到频率响应</h3>
+<p><strong>课件锚点：</strong>课件给出一阶因果离散时间系统 <code>h[n]=a<sup>n</sup>u[n]</code>，并得到 <code>H(z)=z/(z−a)=1/(1−az<sup>−1</sup>)</code>，条件为 <code>|z|&gt;|a|</code>；随后在单位圆上写出频率响应。</p>
+<p>从差分方程</p>
+<div class="equation"><code>y[n]−ay[n−1]=bx[n]</code></div>
+<p>在零初始条件下作 Z 变换：</p>
+<div class="equation"><code>Y(z)−az<sup>−1</sup>Y(z)=bX(z) ⇒ H(z)=Y/X=b/(1−az<sup>−1</sup>).</code></div>
+<p>把 <code>z=e<sup>jω</sup></code> 代入，得到 <code>H(e<sup>jω</sup>)=b/(1−ae<sup>−jω</sup>)</code>。当 <code>a</code> 接近 1 时，低频附近的增益变大、衰减变慢；这正是离散积分器/慢极点的频域表现。实现时，<code>y[n]</code> 必须读取上一拍的 <code>y[n−1]</code>，而不能在计算中途覆盖状态。</p>
+</section>
+
+<section class="review-section">
+<h3>5. 第 690、695 页：移位性质与 ROC 的不变性</h3>
+<p><strong>课件锚点：</strong>图中文字给出时移 <code>x[n−n<sub>0</sub>] ↔ z<sup>−n<sub>0</sub></sup>X(z)</code>，并强调 ROC 通常不变，但原点或无穷远处的特殊点可能因消去而改变。</p>
+<div class="equation"><code>Z{x[n−n<sub>0</sub>]}=∑x[m]z<sup>−(m+n<sub>0</sub>)</sup>=z<sup>−n<sub>0</sub></sup>X(z).</code></div>
+<p>这个推导的关键不是背住乘上一个 <code>z</code> 的幂，而是索引替换后检查求和边界。对双边 Z 变换，有限时移通常不改变绝对收敛的环域；但写成有理式后，若出现分子分母约消，仍要回到原序列检查 ROC，不能仅看约化后的表达式。</p>
+<p>第 695 页还给出共轭性质：若 <code>x[n]↔X(z)</code>，则 <code>x<sup>*</sup>[n]↔X<sup>*</sup>(z<sup>*</sup>)</code>，ROC 相同。实序列因此具有共轭对称的零极点结构，这是检查计算结果是否合理的快速方法。</p>
+</section>
+
+<section class="review-section">
+<h3>6. 第 700 页：终值定理的适用条件</h3>
+<p><strong>课件锚点：</strong>课件框出终值定理</p>
+<div class="equation"><code>lim<sub>n→∞</sub>x[n]=lim<sub>z→1</sub>(z−1)X(z).</code></div>
+<p>由</p>
+<div class="equation"><code>(z−1)X(z)=Z{x[n+1]−x[n]}</code></div>
+<p>可见，右端对应序列差分的 Z 变换；在极限存在时，前后项差分的累积边界给出终值。使用时必须检查除 <code>z=1</code> 外，<code>(z−1)X(z)</code> 的极点是否位于单位圆内，否则振荡或发散序列可能让形式极限产生误导。终值定理不是“把 <code>z</code> 代成 1”的规则。</p>
+</section>
+
+<section class="review-section">
+<h3>7. 第 705、710 页：分子阶次与因果性</h3>
+<p><strong>课件锚点：</strong>课件明确指出：有理系统函数表示因果 LTI 系统时，分子阶次不能大于分母阶次；并以</p>
+<div class="equation"><code>H(z)=(z<sup>3</sup>−2z<sup>2</sup>+z)/(z<sup>2</sup>+z/4+1/8)</code></div>
+<p>为例说明分子阶次高于分母阶次时，系统不是因果的。</p>
+<p>原因可以从长除法看出：当分子阶次更高时，展开会出现正幂 <code>z</code>，对应提前项 <code>x[n+k]</code>，实时系统在时刻 <code>n</code> 尚未获得未来输入，因而无法直接实现。不要把“非因果”误读为“数学上不存在”；它可以作为离线滤波器或通过增加预览信息实现，但不属于普通实时反馈控制器。</p>
+</section>
+
+<section class="review-section">
+<h3>8. 第 715 页：不稳定极点不能靠外部输入输出约消</h3>
+<p><strong>课件锚点：</strong>课件用例子说明某个有理式的分母阶次与分子阶次关系，并强调系统函数约化后得到的输入输出表达式不能替代对内部系统的稳定性分析。</p>
+<p>若内部实现含有极点 <code>p</code>，而输入输出通道同时含有零点 <code>p</code>，形式上可以约消；但内部状态仍可能按 <code>p<sup>n</sup></code> 增长。数字控制中，观测器、积分器和串联滤波器的内部状态都必须单独检查，不能因为外部传递函数看起来稳定，就宣布实现稳定。</p>
+</section>
+
+<section class="review-section">
+<h3>9. 第 720 页：差分方程与等效框图</h3>
+<p><strong>课件锚点：</strong>课件展示 <code>y[n]=x[n]+(1/4)y[n−1]</code> 的递推系统及其等效框图：输出经过一拍延迟 <code>z<sup>−1</sup></code> 和反馈增益 <code>1/4</code> 回到加法器。</p>
+<div class="equation"><code>Y(z)=X(z)+(1/4)z<sup>−1</sup>Y(z) ⇒ H(z)=Y/X=1/(1−(1/4)z<sup>−1</sup>).</code></div>
+<p>这个图必须按“先读旧状态、再求和、后写入延迟单元”理解。它的极点为 <code>z=1/4</code>，因果 ROC 为 <code>|z|&gt;1/4</code>，包含单位圆，所以 BIBO 稳定。等效框图不是排版变体，而是明确了状态存储和反馈时序。</p>
+</section>
+
+<section class="review-section">
+<h3>10. 第 728、730 页：单边 Z 变换的移位与练习入口</h3>
+<p><strong>课件锚点：</strong>课件给出单边变换的时间超前公式</p>
+<div class="equation"><code>Z<sub>1</sub>{x[n+n<sub>0</sub>]}=z<sup>n<sub>0</sub></sup>X(z)−z<sup>n<sub>0</sub></sup>∑<sub>m=0</sub><sup>n<sub>0</sub>−1</sup>x[m]z<sup>−m</sup>,</code></div>
+<p>以 <code>n<sub>0</sub>=1</code> 为例：</p>
+<div class="equation"><code>Z<sub>1</sub>{x[n+1]}=zX(z)−zx[0].</code></div>
+<p>边界项 <code>x[0]</code> 正是单边变换与双边变换在初始状态问题上的差别。做递推题时，先写移位公式，再代入初值；不要直接把双边公式套到从 <code>n=0</code> 开始的求和上。第 730 页将此关系作为练习：给定 <code>y[n]=x[n+1]</code>，证明 <code>Y(z)=zX(z)−zx[0]</code>。</p>
+</section>
+
+<section class="review-section">
+<h3>复习检查：从图形回到实现</h3>
+<ol>
+<li>给定 <code>1/(1−az<sup>−1</sup>)</code>，分别写出外 ROC 和内 ROC 对应的序列，并说明何时包含单位圆。</li>
+<li>从 <code>y[n]=x[n]+(1/4)y[n−1]</code> 画出延迟反馈框图，写出极点、ROC 和稳定性结论。</li>
+<li>证明 <code>Z<sub>1</sub>{x[n+1]}=zX(z)−zx[0]</code>，并解释边界项在数字控制器启动时代表什么。</li>
+<li>说明为什么分子阶次大于分母阶次意味着实时因果实现存在问题，而不是简单地说“系统不稳定”。</li>
+</ol>
+</section>
+</section>
+</body></html>

@@ -1,0 +1,35 @@
+{
+  "title": "理论二：PID控制、二阶响应、约束与复合结构",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 73,
+  "chapter_slide_end": 241,
+  "completed_slide_end": 241,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-02-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": [
+    "传递函数、闭环极点与终值定理",
+    "一阶与二阶微分方程",
+    "课件理论一的框图和拉普拉斯方法"
+  ],
+  "learning_objectives": [
+    "由对象与指标选择P、PI、PD或PID结构",
+    "从二阶极点理解暂态性能与整定",
+    "将约束、滤波、前馈与串级纳入控制器设计"
+  ],
+  "control_connections": [
+    "电机速度环与功率变换器",
+    "数字PID和抗积分饱和",
+    "前馈、级联及多环控制"
+  ],
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-02/001-slides-073-105.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/002-slides-106-121.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/003-slides-122-135.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/004-slides-136-153.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/005-slides-154-171.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/006-slides-172-183.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/007-slides-184-204.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/008-slides-205-227.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-02/009-slides-228-241.fragment.html"
+  ]
+}

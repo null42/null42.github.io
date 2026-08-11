@@ -1,0 +1,18 @@
+{
+  "title": "理论五：稳定裕度、带宽与性能极限",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 416,
+  "chapter_slide_end": 490,
+  "completed_slide_end": 490,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-05-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["Nyquist稳定性", "Bode幅相图", "终值定理与系统类型"],
+  "learning_objectives": ["量化增益/相位/延迟裕度", "理解稳态误差与系统类型", "识别带宽和鲁棒性能极限"],
+  "control_connections": ["数字延迟预算", "积分器与稳定裕度", "频域增益设计"],
+  "deep_dive": "course-notes/part-2-control-theory/deep-dives/chapter-05-margins-performance.html",
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-05/001-slides-416-430.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-05/002-slides-431-460.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-05/003-slides-461-490.fragment.html"
+  ]
+}

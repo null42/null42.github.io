@@ -35,6 +35,9 @@ interface BookEntry {
   title?: string
   author?: string
   encoding?: string
+  group?: string
+  sourceHash?: string
+  compress?: boolean
 }
 
 interface SaltsConfig {
@@ -149,6 +152,9 @@ async function runEncrypt(): Promise<void> {
           title: book.title,
           author: book.author,
           encoding: book.encoding,
+          group: book.group,
+          sourceHash: book.sourceHash,
+          compress: book.compress,
           gateSalt,
           shelfSalt
         })
@@ -156,6 +162,9 @@ async function runEncrypt(): Promise<void> {
         await encryptEpubFile(book.path, book.slug, passwords, outputDir, {
           title: book.title,
           author: book.author,
+          group: book.group,
+          sourceHash: book.sourceHash,
+          compress: book.compress,
           gateSalt,
           shelfSalt
         })

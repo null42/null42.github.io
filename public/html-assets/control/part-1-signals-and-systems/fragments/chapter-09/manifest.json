@@ -1,0 +1,20 @@
+{
+  "title": "第九章 拉普拉斯变换",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 545,
+  "chapter_slide_end": 656,
+  "completed_slide_end": 656,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-09-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": ["CTFT", "卷积", "微分方程", "复频率与极点"],
+  "learning_objectives": ["用ROC区分时域信号", "由微分方程推导系统函数", "处理单边变换与初始条件"],
+  "control_connections": ["传递函数", "稳定性与极点", "零初值/初值响应", "状态空间衔接"],
+  "deep_dive": "course-notes/part-1-signals-and-systems/deep-dives/chapter-09-laplace.html",
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-09/001-slides-545-564.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-09/002-slides-565-584.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-09/003-slides-585-609.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-09/004-slides-610-644.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-09/005-slides-645-656.fragment.html"
+  ]
+}

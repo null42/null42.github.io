@@ -1,0 +1,21 @@
+{
+  "title": "理论七：状态反馈控制器设计",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 666,
+  "chapter_slide_end": 780,
+  "completed_slide_end": 780,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-07-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["理论六：环路整形与经典补偿器设计", "线性代数与矩阵指数", "传递函数与极点"],
+  "learning_objectives": ["建立状态空间与传递函数的严格联系", "证明能控性与极点配置条件", "把状态反馈转成参考跟踪和可实施结构"],
+  "control_connections": ["模态设计", "Ackermann极点配置", "不可控子空间", "观测器与数字实现衔接"],
+  "deep_dive": "course-notes/part-2-control-theory/deep-dives/chapter-07-state-feedback.html",
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-07/001-slides-666-680.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-07/002-slides-681-700.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-07/003-slides-701-720.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-07/004-slides-721-735.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-07/005-slides-736-755.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-07/006-slides-756-780.fragment.html"
+  ]
+}

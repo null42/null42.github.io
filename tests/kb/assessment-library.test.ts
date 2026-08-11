@@ -20,9 +20,11 @@ describe('assessment library', () => {
     expect(new Set(assessments.flatMap(assessment => assessment.questions.map(question => question.type))).size).toBeGreaterThanOrEqual(4)
   })
 
-  it('does not persist answers in component source', () => {
+	it('does not persist answers in component source', () => {
     const source = fs.readFileSync(path.resolve('src/components/assessments/AssessmentModal.astro'), 'utf8')
     expect(source).not.toMatch(/localStorage|sessionStorage|indexedDB/)
-    expect(source).toContain('data-pagefind-ignore="all"')
-  })
+		expect(source).toContain('data-pagefind-ignore="all"')
+		expect(source).toContain('set:html={question.promptHtml}')
+		expect(source).toContain('set:html={question.explanationHtml}')
+	})
 })

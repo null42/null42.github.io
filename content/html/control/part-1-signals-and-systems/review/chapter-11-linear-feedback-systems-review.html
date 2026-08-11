@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>第十一章：线性反馈系统｜章节复盘</title>
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar screen-only">
+    <div class="sidebar-title">第十一章章节复盘</div>
+    <a class="home" href="/html-raw/control/index/">返回课程目录</a>
+    <a href="#route">复盘路线</a><a href="#map">概念地图</a><a href="#equations">核心方程</a>
+    <a href="#feedback">收益与代价</a><a href="#sampling">采样—保持</a><a href="#locus">根轨迹</a>
+    <a href="#nyquist">Nyquist</a><a href="#workflow">设计工作流</a><a href="#test">综合测试</a>
+  </nav>
+  <main>
+    <header class="hero">
+      <div class="eyebrow">课件第732–791页 · 学完整章后使用</div>
+      <h1>线性反馈：从闭环方程到可实现控制器</h1>
+      <p class="subtitle">不再按页复述，而是把反馈直觉、采样保持、根轨迹和Nyquist收束成可闭卷推导、可交叉验证的设计路线。</p>
+      <p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-11-linear-feedback-systems/">返回课件伴随讲义</a> · <a href="/html-raw/control/part-1-signals-and-systems/exercises/chapter-11-linear-feedback-systems-review-answers/">复盘答案</a> · <a href="/html-raw/control/part-1-signals-and-systems/exercises/chapter-11-slides-732-791-answers/">章内练习答案</a></p>
+    </header>
+
+    <section class="review-section" id="route">
+      <h2>一、三遍复盘路线</h2>
+      <ol class="study-route">
+        <li><strong>5分钟骨架：</strong>闭卷写出 <code>Q=H/(1+GH)</code>、<code>1+KGH=0</code>、<code>GH=-1/K</code>，并说出连续左半平面与离散单位圆内。</li>
+        <li><strong>25分钟推导：</strong>复算第738页闭环方程、第747页比例稳定化、第751–753页连续/离散对比和第779页Nyquist平移。</li>
+        <li><strong>40分钟设计：</strong>选含采样延迟和饱和的对象，用根轨迹初选K，再用Nyquist、裕度和离散时域仿真验收。</li>
+      </ol>
+    </section>
+
+    <section class="review-section" id="map">
+      <h2>二、概念地图：所有方法都围绕同一闭环分母</h2>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/chapter-11/linear-feedback-review-map.svg" alt="线性反馈系统概念地图"><figcaption class="caption">方框图定义信号，特征方程定义模态，根轨迹研究参数变化，Nyquist研究稳定边界，数字实现补上采样、保持和延迟。</figcaption></figure>
+      <div class="review-grid">
+        <article class="review-card"><h3>物理视图</h3><p>参考、误差、传感器、执行器、扰动和噪声分别在哪里？方向与单位是否一致？</p></article>
+        <article class="review-card"><h3>代数视图</h3><p>每个闭环通道的分子是什么？所有通道共享哪个特征分母？</p></article>
+        <article class="review-card"><h3>几何视图</h3><p>连续极点是否在左半平面？离散极点是否在单位圆内？K怎样推动极点穿越边界？</p></article>
+        <article class="review-card"><h3>实现视图</h3><p>采样周期、零阶保持、计算延迟、限幅、复位和采样间响应是否进入验收？</p></article>
+      </div>
+    </section>
+
+    <section class="review-section" id="equations">
+      <h2>三、必须闭卷写出的四个方程</h2>
+      <div class="equation-stack">
+        <div class="formula">e=x−Gy，y=He ⇒ Q=y/x=H/(1+GH)</div>
+        <div class="formula">闭环特征方程：1+K G(s)H(s)=0 或 1+K G(z)H(z)=0</div>
+        <div class="formula">根轨迹：G(s)H(s)=−1/K</div>
+        <div class="formula">Nyquist平移：R=1/K+GH，R绕原点 ⇔ GH绕−1/K</div>
+      </div>
+      <div class="derivation"><strong>灵敏度推导</strong><ol>
+        <li>令 <code>Q=H/(1+GH)</code>，对H做对数微分。</li>
+        <li>得到 <code>d ln Q/d ln H=1/(1+GH)=S</code>。</li>
+        <li>定义 <code>T=GH/(1+GH)</code>，于是 <code>S+T=1</code>。</li>
+        <li>低频压低S会使T接近1，因此测量噪声、高频未建模动态和控制量必须另行检查。</li>
+      </ol></div>
+    </section>
+
+    <section class="review-section" id="feedback">
+      <h2>四、反馈的收益和代价必须成对分析</h2>
+      <table><thead><tr><th>目标</th><th>成立条件</th><th>代价或失败模式</th></tr></thead><tbody>
+        <tr><td>降低模型误差灵敏度</td><td>目标频段内|GH|大且闭环稳定</td><td>交越附近峰值、未建模动态暴露</td></tr>
+        <tr><td>获得平坦闭环增益</td><td>相位远离−180°，器件有足够开环增益</td><td>闭环增益下降、噪声和控制量上升</td></tr>
+        <tr><td>稳定开环不稳定对象</td><td>模态可控可测，环路延迟足够小</td><td>高增益下附加极点和延迟导致再失稳</td></tr>
+        <tr><td>抑制扰动</td><td>扰动注入点和频段明确</td><td>测量噪声可能经互补灵敏度T传入</td></tr>
+      </tbody></table>
+      <p class="pitfall"><strong>关键误区：</strong>负反馈不是静态符号。声学路径中的纯延迟提供持续增加的相位滞后，某频率处纠偏会等效为助推，因此必须分析复数环路增益。</p>
+    </section>
+
+    <section class="review-section" id="sampling">
+      <h2>五、采样—保持反馈：离散模型只在采样点等效</h2>
+      <div class="formula">x₀(t)=Σx(nT)h₀(t−nT)，h₀(t)=u(t)−u(t−T)</div>
+      <div class="formula">f(t)=h₀(t)*h(t)，p[n]=Σe[k]f[n−k]</div>
+      <p>零阶保持器和连续对象组合后，在采样时刻形成离散卷积核 <code>f[n]=f(nT)</code>。这证明脉冲传递模型的来源，却没有保证采样间输出一定满足约束。</p>
+      <div class="review-grid">
+        <article class="review-card"><h3>模型必须记录</h3><p>采样周期T、保持器类型、计算/更新延迟和输入输出采样时刻。</p></article>
+        <article class="review-card"><h3>额外验收</h3><p>采样间过冲、执行器保持波形、ADC/PWM同步和时钟抖动。</p></article>
+      </div>
+    </section>
+
+    <section class="review-section" id="locus">
+      <h2>六、根轨迹：先判位置，再求增益</h2>
+      <div class="formula">K&gt;0：∠GH=(2ℓ+1)π；K=1/|GH|</div>
+      <ol><li>标出开环极点、零点并数分支。</li><li>用右侧实极零点奇数规则确定实轴段。</li><li>确定有限终点、无穷远渐近线和可能的稳定边界穿越。</li><li>在期望极点处先验角度，再用幅值判据求K并回代。</li></ol>
+      <table><thead><tr><th>课件例题</th><th>稳定范围</th><th>必须理解的区别</th></tr></thead><tbody>
+        <tr><td>离散：z=2(1−β)</td><td>1/2&lt;β&lt;3/2</td><td>增益同时有下限和上限，z≈−1产生交替振荡</td></tr>
+        <tr><td>连续：s=2(1−β)</td><td>β&gt;1</td><td>极点继续向负实轴移动仍稳定</td></tr>
+        <tr><td>GH=(s−1)/[(s+1)(s+2)]</td><td>0≤K&lt;2</td><td>RHP零点把一条分支拉向不稳定区域</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="review-section" id="nyquist">
+      <h2>七、Nyquist：绕行数必须与开环不稳定极点数配对</h2>
+      <p>正确流程是：选择不稳定区域围线 → 数开环不稳定极点P → 绘制有方向的GH映射 → 数临界点绕行N → 求闭环不稳定极点Z。不要死记不同教材的符号公式，应从 <code>Δarg W=2π(Z−P)</code> 和围线方向重新确定。</p>
+      <table><thead><tr><th>系统</th><th>课件结论</th><th>交叉验证</th></tr></thead><tbody>
+        <tr><td>连续例11.5，开环稳定</td><td>K&gt;−1</td><td>展开闭环二阶多项式</td></tr>
+        <tr><td>连续例11.6，P=1</td><td>K&gt;1</td><td>−1/K位于−1与0之间并产生正确绕行</td></tr>
+        <tr><td>纯延迟声学环路</td><td>K₁K₂&lt;1</td><td>特征根实部为ln(K₁K₂)/τ</td></tr>
+        <tr><td>离散例11.8</td><td>−1/2&lt;K&lt;1</td><td>Jury判据或直接求z²+0.5z+K</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="review-section" id="workflow">
+      <h2>八、从课件走向数字控制器的工作流</h2>
+      <ol class="study-route">
+        <li><strong>建模：</strong>对象、传感器、执行器、采样器、保持器、延迟和扰动注入点全部进入框图。</li>
+        <li><strong>名义设计：</strong>用特征方程和根轨迹确定初始参数与主导极点。</li>
+        <li><strong>频域验收：</strong>用Bode/Nyquist检查PM、GM、延迟裕度和S/T峰值。</li>
+        <li><strong>离散实现：</strong>检查z平面极点、更新顺序、量化、限幅、复位和抗积分饱和。</li>
+        <li><strong>最坏情况：</strong>完成参数摄动、噪声、饱和、抖动、故障与安全降级测试。</li>
+      </ol>
+    </section>
+
+    <section class="review-section" id="integration-layer"><h2>本章整体优化：第十一章接口与诊断</h2><p><strong>主线：</strong>反馈分析要按信号路径拆分：参考、扰动、测量噪声、执行器饱和和寄生延迟分别经过不同传递函数。</p><div class="derivation"><h3>最小完整算例</h3><p>对负反馈 L=GC，S=1/(1+L)、T=L/(1+L) 且 S+T=1；参考到输出由 T 传递，扰动和模型误差主要由 S 反映。</p></div><div class="notice"><strong>失败诊断：</strong>只看参考响应会漏掉噪声和执行器峰值；纯延迟不改变幅值却增加 -ωτ 相位损失，是声学啸叫和网络控制失稳的共同机制。</div></section><section class="review-section" id="completion-gap-layer"><h2>根轨迹与 Nyquist 的选择边界</h2><table><thead><tr><th>问题</th><th>根轨迹</th><th>Nyquist</th></tr></thead><tbody><tr><td>改变单一增益 K</td><td>直接显示闭环极点路径</td><td>需重复缩放轨迹</td></tr><tr><td>开环含 RHP 极点</td><td>可画，但需回代稳定边界</td><td>通过 P、N、Z 直接计数</td></tr><tr><td>纯延迟</td><td>有限维规则不再精确</td><td>可直接使用 e^{-jωτ}</td></tr><tr><td>数字系统</td><td>在 z 平面检查单位圆</td><td>沿单位圆频率映射判断</td></tr></tbody></table><p>两种方法最终都必须回到闭环特征方程和内部信号路径。根轨迹适合解释参数如何移动模态；Nyquist 更适合处理开环不稳定、延迟和频率测量数据。</p></section><section class="review-section final-test" id="test">
+      <h2>九、章末 A–D 综合测试</h2>
+      <section data-level="A"><h3>A级：会写</h3><ol><li>从方框图推导Q、S和T。</li><li>写出连续/离散稳定区域及根轨迹角度、幅值条件。</li></ol></section>
+      <section data-level="B"><h3>B级：会算</h3><ol><li>复算连续和离散单极点例题的稳定增益范围。</li><li>由极零点画根轨迹骨架并求稳定边界K。</li></ol></section>
+      <section data-level="C"><h3>C级：会解释</h3><ol><li>解释声学反馈为何因纯延迟产生啸叫。</li><li>比较根轨迹与Nyquist处理含延迟系统的能力。</li></ol></section>
+      <section data-level="D"><h3>D级：会设计</h3><ol><li>为含RHP极点、采样延迟和饱和的对象制定完整设计与验收流程。</li><li>用根轨迹、Nyquist、离散极点和非线性仿真形成交叉验证。</li></ol></section>
+    </section>
+  </main>
+</div></body></html>

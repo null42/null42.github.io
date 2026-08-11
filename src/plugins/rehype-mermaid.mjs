@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
+import path from "node:path";
 import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 const mermaidRenderScript = readFileSync(
-	new URL("./mermaid-render-script.js", import.meta.url),
+	path.resolve(process.cwd(), "src/plugins/mermaid-render-script.js"),
 	"utf8",
 );
 

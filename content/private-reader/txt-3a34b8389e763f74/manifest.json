@@ -1,0 +1,79 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-3a34b8389e763f74",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "+01SnmWgPWI3kjArhMgE+A=="
+  },
+  "gate": {
+    "token": "XNzXQVP2AxAk67Gwlhpk13Mr2MITV3qSl6r6tmtlS5nCwoEj6jPcrHnn8A6cwxnCgww="
+  },
+  "shelf": {
+    "title": "548EdcarX8DrM1Uh6AKaGZUDI90Q+EfCBy2DAUmE/VMUaZrE4EGVTXp1QcAZEF0hI6Sj6Piy+zLQ73WoD4tdlvfNBuypB12bcV5SQ6xziS03qYL9cDfw4VrcwaHxyVJfNpmWW2Q4ZDXkrgqZ0a+xhWmFNdosaK9PzzxDMfRR5VabSKK2zSpiVogWmK3Qcw==",
+    "author": null,
+    "group": "+Z/PfWlBtyKVciV17sAnrwrrCiaovtsqurDtO6lypFDWgJfsSSg1eaPcUg=="
+  },
+  "source": {
+    "sha256": "3a34b8389e763f7405b31c5709988c4b1b0a9ea1eeaee15d3a1ea230044ca606"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "M78dqkOfZNu0thvfwhjSwVeedWTA8ZJ175TtnJrqg42IoWM=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "ZnZlrd0cdFHD2+wizUKdFNTvQJHn0d0y2CncbJctK7sWqnw=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "EMRjGTojTs9e9YY7bkVQQAgIxA33t/euFc1IxYrMQA796GM=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "qxNR2Gde0RaLlkuTqvvLeuVZbnx+A0ys33vXslNZyCl10Hw=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "6SEgWe2n62T9XGwyXdfrxsRxW7tLZxTbwkVYeAj7CITXgBU=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "hZagxF3h//RdL8Wd7zK8S2wOxdsDdcgIdgZV89+VH3WKmmE=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "Az5ZZcpSSxlFC9cMsrn4tdlWfnJ+ST9uDmPKBLksFX9n8IQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-8",
+      "title": "pBfirnEJljDNkl/rQl1PKhCxx/AIjiEB+Dd+PkVE4yUIPi4=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "MJJI2D1jlKinuhfK",
+      "bytes": 80583,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 179
+  }
+}

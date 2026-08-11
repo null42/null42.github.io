@@ -1,6 +1,1006 @@
 {
   "documents": [
     {
+      "slug": "control/course-wide-review-map",
+      "title": "全课程复盘总图：从信号到数字控制器"
+    },
+    {
+      "slug": "control/index",
+      "title": "&#x63A7;&#x5236;&#x7406;&#x8BBA;&#x8BFE;&#x7A0B;&#x6B63;&#x5F0F;&#x8BB2;&#x4E49;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/0001-slides-001-018",
+      "title": "信号与系统伴随讲义｜课件第 1–18 页"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/0002-slides-019-027",
+      "title": "信号与系统伴随讲义｜课件第 19–27 页"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-01-signals-and-systems",
+      "title": "第一章 信号与系统｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-02-linear-time-invariant-systems",
+      "title": "第二章 线性时不变系统｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-03-fourier-series",
+      "title": "第三章 周期信号的傅里叶级数表示｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-04-continuous-time-fourier-transform",
+      "title": "第四章 连续时间傅里叶变换｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-05-discrete-time-fourier-transform",
+      "title": "第五章 离散时间傅里叶变换｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-06-time-and-frequency-characteristics",
+      "title": "第六章 信号与系统的时域和频域特性｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-07-sampling",
+      "title": "&amp;#31532;&amp;#19971;&amp;#31456; &amp;#37319;&amp;#26679;｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-08-communication-systems",
+      "title": "第八章 通信系统｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-09-laplace-transform",
+      "title": "第九章 拉普拉斯变换｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-10-z-transform",
+      "title": "第十章 Z变换｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/companion/chapter-11-linear-feedback-systems",
+      "title": "第十一章：线性反馈系统｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/deep-dives/chapter-08-communication",
+      "title": "chapter 08 communication"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/deep-dives/chapter-09-laplace",
+      "title": "chapter 09 laplace"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/deep-dives/chapter-10-visual-courseware-notes",
+      "title": "chapter 10 visual courseware notes"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/deep-dives/chapter-10-z-transform",
+      "title": "chapter 10 z transform"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/0001-slides-001-018-answers",
+      "title": "第 1–18 页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/0002-slides-019-027-answers",
+      "title": "第 19–27 页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-01-final-answers",
+      "title": "第一章综合答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-01-slides-028-048-answers",
+      "title": "第28–48页｜完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-01-slides-049-064-answers",
+      "title": "第49–64页｜完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-01-slides-065-069-answers",
+      "title": "第65–69页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-01-slides-070-085-answers",
+      "title": "第70–85页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-final-answers",
+      "title": "第二章整章测试答案｜线性时不变系统"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-086-097-answers",
+      "title": "第二章第86–97页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-098-103-answers",
+      "title": "第二章第98–103页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-104-114-answers",
+      "title": "第二章第104–114页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-115-135-answers",
+      "title": "第二章第115–135页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-136-141-answers",
+      "title": "第二章第136–141页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-02-slides-142-151-answers",
+      "title": "第二章第142–151页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-final-answers",
+      "title": "第三章章节测试完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-152-168-answers",
+      "title": "第三章第152–168页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-169-185-answers",
+      "title": "第三章第169–185页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-186-197-answers",
+      "title": "第三章第186–197页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-198-215-answers",
+      "title": "第三章第198–215页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-216-222-answers",
+      "title": "第三章第216–222页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-223-233-answers",
+      "title": "第三章第223–233页完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-03-slides-234-248-answers",
+      "title": "第三章第234–248页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-04-final-answers",
+      "title": "第四章连续时间傅里叶变换｜章节测试完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-04-slides-249-274-answers",
+      "title": "第四章第249–274页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-04-slides-275-294-answers",
+      "title": "第四章第275–294页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-04-slides-295-301-answers",
+      "title": "第四章第295–301页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-04-slides-302-306-answers",
+      "title": "第四章第302–306页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-05-final-answers",
+      "title": "第五章章节测试独立答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-05-slides-307-317-answers",
+      "title": "第五章第307–317页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-05-slides-318-328-answers",
+      "title": "第五章第318–328页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-05-slides-329-344-answers",
+      "title": "第五章第329–344页分层练习完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-05-slides-345-360-answers",
+      "title": "第五章第345–360页分层练习答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-final-answers",
+      "title": "&#31532;&#20845;&#31456;&#26368;&#32456;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-slides-361-365-answers",
+      "title": "第六章第361–365页分层练习答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-slides-366-375-answers",
+      "title": "第六章第366–375页分层练习答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-slides-376-385-answers",
+      "title": "第六章376–385页答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-slides-386-390-answers",
+      "title": "第六章386–390页答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-06-slides-391-399-answers",
+      "title": "&#31532;&#20845;&#31456;&#31532;391&#8211;399&#39029;&#20998;&#23618;&#32451;&#20064;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-final-answers",
+      "title": "第七章采样｜最终独立答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-slides-400-409-answers",
+      "title": "&#31532;&#19971;&#31456;&#31532;400&#8211;409&#39029;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-slides-410-418-answers",
+      "title": "&#31532;&#19971;&#31456;410&#8211;418&#39029;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-slides-419-426-answers",
+      "title": "&#31532;&#19971;&#31456;419&#8211;426&#39029;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-slides-427-439-answers",
+      "title": "&#31532;&#19971;&#31456;427&#8211;439&#39029;&#31572;&#26696;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-07-slides-440-456-answers",
+      "title": "第七章440–456页分层练习答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-08-review-answers",
+      "title": "第八章复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-08-slides-457-464-answers",
+      "title": "第八章457–464页答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-08-slides-465-481-answers",
+      "title": "第八章465–481页答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-08-slides-482-491-answers",
+      "title": "第八章482–491页答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-09-laplace-review-answers",
+      "title": "第九章复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-09-slides-545-656-answers",
+      "title": "第九章拉普拉斯练习｜独立答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-10-slides-657-731-answers",
+      "title": "第十章Z变换练习｜独立答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-10-z-transform-review-answers",
+      "title": "第十章复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-11-linear-feedback-systems-review-answers",
+      "title": "第十一章线性反馈系统｜复盘答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/exercises/chapter-11-slides-732-791-answers",
+      "title": "第十一章线性反馈系统｜独立练习答案"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-01/003-slides-028-048.fragment",
+      "title": "第一章内部片段｜课件第 28–48 页"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-01/004-slides-049-064.fragment",
+      "title": "第一章内部片段｜第49–64页"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-01/005-slides-065-069.fragment",
+      "title": "第65–69页｜信号的基本运算"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-01/006-slides-070-085.fragment",
+      "title": "第70–85页｜系统及其基本性质"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/001-slides-086-097.fragment",
+      "title": "第二章第86–97页｜离散冲激分解与卷积和"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/002-slides-098-103.fragment",
+      "title": "第二章第98–103页｜连续卷积积分"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/003-slides-104-114.fragment",
+      "title": "第二章第104–114页｜卷积性质与系统互联"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/004-slides-115-135.fragment",
+      "title": "第二章第115–135页｜由冲激响应判断系统性质"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/005-slides-136-141.fragment",
+      "title": "第二章第136–141页｜差分/微分方程与框图实现"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-02/006-slides-142-151.fragment",
+      "title": "第二章第142–151页｜广义函数与奇异函数层级"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/001-slides-152-168.fragment",
+      "title": "第三章第152–168页｜频域视角、特征函数与连续傅里叶级数基础"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/002-slides-169-185.fragment",
+      "title": "第三章第169–185页｜CTFS收敛与性质"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/003-slides-186-197.fragment",
+      "title": "第三章第186–197页｜CTFS综合例题"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/004-slides-198-215.fragment",
+      "title": "第三章第198–215页｜DTFS基础与精确重构"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/005-slides-216-222.fragment",
+      "title": "第三章第216–222页｜DTFS性质与例题"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/006-slides-223-233.fragment",
+      "title": "第三章第223–233页｜傅里叶级数通过LTI系统"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-03/007-slides-234-248.fragment",
+      "title": "第三章第234–248页｜滤波应用与章节小结"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-04/001-slides-249-274.fragment",
+      "title": "第四章第249–274页｜从傅里叶级数到连续时间傅里叶变换"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-04/002-slides-275-294.fragment",
+      "title": "第四章第275–294页｜CTFT性质与结构解释"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-04/003-slides-295-301.fragment",
+      "title": "第四章第295–301页｜能量、卷积、相乘与调制"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-04/004-slides-302-306.fragment",
+      "title": "第四章第302–306页｜常系数微分方程与频率响应"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-05/001-slides-307-317.fragment",
+      "title": "第五章第307–317页｜从DTFS到DTFT"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-05/002-slides-318-328.fragment",
+      "title": "第五章第318–328页｜周期序列与冲激线谱"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-05/003-slides-329-344.fragment",
+      "title": "第五章第329–344页｜DTFT性质体系"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-05/004-slides-345-360.fragment",
+      "title": "第五章知识链四：DTFT、LTI系统与差分方程"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-06/001-slides-361-365.fragment",
+      "title": "第六章知识链一：模、相位与波形身份"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-06/002-slides-366-375.fragment",
+      "title": "第六章知识链二：LTI幅相、失真与群时延"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-06/003-slides-376-385.fragment",
+      "title": "第六章知识链三：理想滤波器的时域代价"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-06/004-slides-386-390.fragment",
+      "title": "&#31532;&#20845;&#31456;&#30693;&#35782;&#38142;&#22235;&#65306;&#38750;&#29702;&#24819;&#28388;&#27874;&#22120;&#19982;&#26102;&#39057;&#25351;&#26631;&#25240;&#20013;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-06/005-slides-391-399.fragment",
+      "title": "&#31532;&#20845;&#31456;&#30693;&#35782;&#38142;&#20116;&#65306;&#36882;&#24402;&#31995;&#32479;&#19982;&#26377;&#38480;&#38271;FIR&#23454;&#20363;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-07/001-slides-400-409.fragment",
+      "title": "&#31532;&#19971;&#31456;&#30693;&#35782;&#38142;&#19968;&#65306;&#37319;&#26679;&#34920;&#31034;&#19982;&#37319;&#26679;&#23450;&#29702;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-07/002-slides-410-418.fragment",
+      "title": "&#31532;&#19971;&#31456;&#30693;&#35782;&#38142;&#20108;&#65306;&#20445;&#25345;&#22120;&#19982;&#20869;&#25554;&#37325;&#24314;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-07/003-slides-419-426.fragment",
+      "title": "&#31532;&#19971;&#31456;&#30693;&#35782;&#38142;&#19977;&#65306;&#19968;&#27425;&#20445;&#25345;&#25512;&#23548;&#19982;&#28151;&#21472;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-07/004-slides-427-439.fragment",
+      "title": "&#31532;&#19971;&#31456;&#30693;&#35782;&#38142;&#22235;&#65306;&#36830;&#32493;&#20449;&#21495;&#30340;&#31163;&#25955;&#22788;&#29702;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-07/005-slides-440-456.fragment",
+      "title": "第七章知识链五：离散时间采样与多速率变换"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-08/001-slides-457-464.fragment",
+      "title": "第八章知识链一：调制与频谱搬移"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-08/002-slides-465-481.fragment",
+      "title": "第八章知识链二：同步与非同步解调"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-08/003-slides-482-491.fragment",
+      "title": "第八章知识链三：FDM与单边带调制"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-08/004-slides-492-530.fragment",
+      "title": "第八章知识链：脉冲串载波、PAM/PCM与FM｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-08/005-slides-531-543.fragment",
+      "title": "第八章知识链：离散时间调制与复用转换"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-09/001-slides-545-564.fragment",
+      "title": "第九章拉普拉斯知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-09/002-slides-565-584.fragment",
+      "title": "第九章拉普拉斯知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-09/003-slides-585-609.fragment",
+      "title": "第九章拉普拉斯知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-09/004-slides-610-644.fragment",
+      "title": "第九章拉普拉斯知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-09/005-slides-645-656.fragment",
+      "title": "第九章拉普拉斯知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-10/001-slides-657-674.fragment",
+      "title": "第十章Z变换知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-10/002-slides-675-696.fragment",
+      "title": "第十章Z变换知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-10/003-slides-697-716.fragment",
+      "title": "第十章Z变换知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-10/004-slides-717-731.fragment",
+      "title": "第十章Z变换知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-11/001-slides-732-751.fragment",
+      "title": "第十一章线性反馈系统知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-11/002-slides-752-755.fragment",
+      "title": "第十一章线性反馈系统知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-11/003-slides-756-771.fragment",
+      "title": "第十一章线性反馈系统知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/fragments/chapter-11/004-slides-772-791.fragment",
+      "title": "第十一章线性反馈系统知识链"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-01-signals-and-systems-review",
+      "title": "第一章复盘｜信号与系统"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-02-linear-time-invariant-systems-review",
+      "title": "第二章复盘｜线性时不变系统"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-03-fourier-series-review",
+      "title": "第三章复盘｜周期信号的傅里叶级数表示"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-04-continuous-time-fourier-transform-review",
+      "title": "第四章 连续时间傅里叶变换｜章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-05-discrete-time-fourier-transform-review",
+      "title": "第五章 离散时间傅里叶变换｜章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-06-time-and-frequency-characteristics-review",
+      "title": "&#31532;&#20845;&#31456; &#20449;&#21495;&#19982;&#31995;&#32479;&#30340;&#26102;&#22495;&#21644;&#39057;&#22495;&#29305;&#24615;&#65372;&#31456;&#33410;&#22797;&#30424;"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-07-sampling-review",
+      "title": "第七章 采样｜章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-08-communication-systems-review",
+      "title": "第八章：通信系统章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-09-laplace-transform-review",
+      "title": "第九章：拉普拉斯变换章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-10-z-transform-review",
+      "title": "第十章：Z 变换章节复盘"
+    },
+    {
+      "slug": "control/part-1-signals-and-systems/review/chapter-11-linear-feedback-systems-review",
+      "title": "第十一章：线性反馈系统｜章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-01-control-systems-introduction",
+      "title": "理论一：控制系统导论、LTI模型与传递函数｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-02-pid-control",
+      "title": "理论二：PID控制、二阶响应、约束与复合结构｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-03-frequency-response",
+      "title": "理论三：正弦稳态响应与Bode频率分析｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-04-stability-nyquist",
+      "title": "理论四：闭环稳定性与Nyquist推理｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-05-margins-performance",
+      "title": "理论五：稳定裕度、带宽与性能极限｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-06-loop-shaping",
+      "title": "理论六：环路整形与经典补偿器设计｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-07-state-feedback",
+      "title": "理论七：状态反馈控制器设计｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-08-observer",
+      "title": "理论八：状态观测器｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-09-lqr",
+      "title": "理论九：LQR控制器设计原理｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/companion/chapter-10-digital-deployment",
+      "title": "理论十：控制器硬件部署（离散时间实施）｜课件伴随讲义"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-03-frequency-response",
+      "title": "chapter 03 frequency response"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-05-margins-performance",
+      "title": "chapter 05 margins performance"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-06-loop-shaping",
+      "title": "chapter 06 loop shaping"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-06-visual-courseware-notes",
+      "title": "chapter 06 visual courseware notes"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-06-worked-examples",
+      "title": "chapter 06 worked examples"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-07-state-feedback",
+      "title": "chapter 07 state feedback"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-08-observer",
+      "title": "chapter 08 observer"
+    },
+    {
+      "slug": "control/part-2-control-theory/deep-dives/chapter-09-lqr-consistency",
+      "title": "chapter 09 lqr consistency"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-final-answers",
+      "title": "理论一章末测试｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-001-012-answers",
+      "title": "理论一第1–12页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-013-019-answers",
+      "title": "理论一第13–19页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-020-030-answers",
+      "title": "理论一第20–30页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-031-046-answers",
+      "title": "理论一第31–46页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-047-053-answers",
+      "title": "理论一第47–53页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-01-slides-054-072-answers",
+      "title": "理论一第54–72页练习答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-review-answers",
+      "title": "理论二章节复盘｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-073-105-answers",
+      "title": "理论二知识链一｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-106-121-answers",
+      "title": "理论二知识链二｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-122-135-answers",
+      "title": "理论二知识链三｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-136-153-answers",
+      "title": "理论二知识链四｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-154-171-answers",
+      "title": "理论二知识链五A｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-172-183-answers",
+      "title": "理论二知识链五B｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-184-204-answers",
+      "title": "理论二知识链六｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-205-227-answers",
+      "title": "理论二知识链七｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-02-slides-228-241-answers",
+      "title": "理论二知识链八｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-review-answers",
+      "title": "理论三复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-slides-242-276-answers",
+      "title": "理论三知识链一｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-slides-277-289-answers",
+      "title": "理论三知识链二｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-slides-290-312-answers",
+      "title": "理论三知识链三｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-slides-313-331-answers",
+      "title": "理论三知识链四｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-03-slides-332-372-answers",
+      "title": "理论三知识链五｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-04-review-answers",
+      "title": "理论四章节复盘｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-04-slides-373-415-answers",
+      "title": "理论四独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-05-review-answers",
+      "title": "理论五复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-05-slides-416-430-answers",
+      "title": "理论五知识链一｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-05-slides-431-460-answers",
+      "title": "理论五知识链二｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-05-slides-461-490-answers",
+      "title": "理论五知识链三｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-06-review-answers",
+      "title": "理论六复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-06-slides-491-665-answers",
+      "title": "理论六课件练习｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-07-review-answers",
+      "title": "理论七复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-07-slides-666-780-answers",
+      "title": "理论七课件练习｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-08-review-answers",
+      "title": "理论八复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-08-slides-781-857-answers",
+      "title": "理论八课件练习｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-09-lqr-review-answers",
+      "title": "理论九 LQR 复盘｜独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-09-slides-858-870-answers",
+      "title": "理论九课件练习｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-10-digital-deployment-review-answers",
+      "title": "理论十章节复盘独立完整答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/exercises/chapter-10-slides-871-916-answers",
+      "title": "理论十课件练习｜独立答案"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/001-slides-001-012.fragment",
+      "title": "理论一知识链一：从控制目的到四旋翼反馈"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/002-slides-013-019.fragment",
+      "title": "理论一知识链二：框图与闭环语言"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/003-slides-020-030.fragment",
+      "title": "理论一知识链三：LTI、冲激响应与卷积"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/004-slides-031-046.fragment",
+      "title": "理论一知识链四：拉普拉斯、传递函数与框图代数"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/005-slides-047-053.fragment",
+      "title": "理论一知识链五：极点、模态与时域稳定性"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-01/006-slides-054-072.fragment",
+      "title": "理论一知识链六：拉普拉斯与框图综合习题"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/001-slides-073-105.fragment",
+      "title": "理论二知识链一：比例与积分控制"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/002-slides-106-121.fragment",
+      "title": "理论二知识链二：微分与PID结构"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/003-slides-122-135.fragment",
+      "title": "理论二知识链三：经验整定"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/004-slides-136-153.fragment",
+      "title": "理论二知识链四：模型匹配"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/005-slides-154-171.fragment",
+      "title": "理论二知识链五A：二阶暂态基础"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/006-slides-172-183.fragment",
+      "title": "理论二知识链五B：二阶响应推导与拟合"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/007-slides-184-204.fragment",
+      "title": "理论二知识链六：根轨迹、极点配置与抗积分饱和"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/008-slides-205-227.fragment",
+      "title": "理论二知识链七：习题与数字 PID"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-02/009-slides-228-241.fragment",
+      "title": "理论二知识链八：前馈、串级与软件接口"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-03/001-slides-242-276.fragment",
+      "title": "理论三知识链一：正弦稳态与频率响应"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-03/002-slides-277-289.fragment",
+      "title": "理论三知识链二：频率响应几何"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-03/003-slides-290-312.fragment",
+      "title": "理论三知识链三：Bode幅频渐近线"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-03/004-slides-313-331.fragment",
+      "title": "理论三知识链四：相频、带宽与二阶频响"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-03/005-slides-332-372.fragment",
+      "title": "理论三知识链五：Bode练习与频域辨识"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-04/001-slides-373-415.fragment",
+      "title": "理论四：闭环稳定性与Nyquist推理"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-05/001-slides-416-430.fragment",
+      "title": "理论五知识链一：延迟与稳定裕度"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-05/002-slides-431-460.fragment",
+      "title": "理论五知识链二：系统类型与性能极限"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-05/003-slides-461-490.fragment",
+      "title": "理论五知识链三：裕度设计练习"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/001-slides-491-515.fragment",
+      "title": "理论六知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/002-slides-516-545.fragment",
+      "title": "理论六知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/003-slides-546-580.fragment",
+      "title": "理论六知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/004-slides-581-635.fragment",
+      "title": "理论六知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/005-slides-636-664.fragment",
+      "title": "理论六知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/006-slide-665.fragment",
+      "title": "理论六导入理论七"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-06/007-exercises.fragment",
+      "title": "理论六分层练习"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/001-slides-666-680.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/002-slides-681-700.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/003-slides-701-720.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/004-slides-721-735.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/005-slides-736-755.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-07/006-slides-756-780.fragment",
+      "title": "理论七知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-08/001-slides-781-792.fragment",
+      "title": "理论八知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-08/002-slides-793-812.fragment",
+      "title": "理论八知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-08/003-slides-813-832.fragment",
+      "title": "理论八知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-08/004-slides-833-857.fragment",
+      "title": "理论八知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-09/001-slides-858-870.fragment",
+      "title": "理论九：LQR控制器设计原理"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-10/001-slides-871-887.fragment",
+      "title": "理论十知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-10/002-slides-888-906.fragment",
+      "title": "理论十知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/fragments/chapter-10/003-slides-907-916.fragment",
+      "title": "理论十知识链"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-01-control-systems-introduction-review",
+      "title": "理论一：控制系统导论、LTI模型与传递函数｜章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-02-pid-control-review",
+      "title": "理论二：PID、二阶响应、约束与数字实现｜章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-03-frequency-response-review",
+      "title": "理论三：正弦稳态响应与 Bode 频率分析章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-04-stability-nyquist-review",
+      "title": "理论四：闭环稳定性与 Nyquist 推理｜章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-05-margins-performance-review",
+      "title": "理论五：稳定裕度、带宽与性能极限章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-06-loop-shaping-review",
+      "title": "理论六：环路整形与经典补偿器章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-07-state-feedback-review",
+      "title": "理论七：状态反馈控制器设计章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-08-observer-review",
+      "title": "理论八：状态观测器章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-09-lqr-review",
+      "title": "理论九：LQR 控制器设计原理｜章节复盘"
+    },
+    {
+      "slug": "control/part-2-control-theory/review/chapter-10-digital-deployment-review",
+      "title": "理论十：数字控制器部署与验证——章节复盘"
+    },
+    {
+      "slug": "current-loop-pi-calculator",
+      "title": "电流环 PI 参数整定计算器"
+    },
+    {
       "slug": "imu-dashboard",
       "title": "IMU 姿态采集与识别上位机"
     },
@@ -9,16 +1009,12 @@
       "title": "PID 二阶对象交互实验"
     },
     {
-      "slug": "root-locus-explorer",
-      "title": "根轨迹交互实验"
-    },
-    {
-      "slug": "current-loop-pi-calculator",
-      "title": "电流环 PI 参数整定计算器"
-    },
-    {
       "slug": "pole-zero-cancellation",
       "title": "电流环 PI 零极点对消动画"
+    },
+    {
+      "slug": "root-locus-explorer",
+      "title": "根轨迹交互实验"
     }
   ]
 }

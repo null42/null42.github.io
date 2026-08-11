@@ -1,0 +1,74 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-3b2f4656683bd976",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "q7kWBhN+g9YSlNx5n4enSw=="
+  },
+  "gate": {
+    "token": "82DXpgqSVUcIGJmDLeGCEXF8LVRCDr8YRa1jk+eQU3oX9R/9GaRmyHmun5sh9EVjNrc="
+  },
+  "shelf": {
+    "title": "Ckc8ZNxjEEPCMbXEQltdyyaQ5N2IVQmXwG0BLQC8s58qZixCZcXON0VeTQcnwFMsWmTrjfXWa9gcmrvYFxvCXcvhzjreztSU99xk/Fr/5pCC9evpd5Bl6vao5AslkgSvFBD2e5aYuzmCAIn43Ip5OgkAxKOgZV21U/j2FOC1n2s=",
+    "author": null,
+    "group": "9LHFeQkimTkdrI/SFncy570AhxhJFD9Eh9mKZPxpTONUFQId/+x4Tc6d1g=="
+  },
+  "source": {
+    "sha256": "3b2f4656683bd976ee5e59c78d8f11c007b31a588764a633c6d84f5959338142"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "avxbb9kVqgG8ztSYshJ2FZTlzKzUhmAJpZaD74ufKhL5qns=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "ShcV3h1LBsUH4sZlicB1IpUibrljjDfDRnB8LvXwr8r3PIo=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "ReYy6j828ozmrQ0CUnUu1ovnOQo60mFkXuLZSPlStX5QQW8=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "TTsEmrLnBjNOOOIjM+C1Q/evB2B5mGR1FFDnWi7AHs5ESZo=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "nxXwDqz4hCmUp48FW+ZtUjc4FPBnfwC0r3TN31ir+HZkrGU=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "fU7vQXhlQnncq32u4f2VSJQ6qm92YOn1IDoB4nRSiF6lQM4=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "tPScEilAG3LDXjrFszDyibjmWvvDqeJQlBFGy7OV++z8weM=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "RQEMj/VDIRI8n+5p",
+      "bytes": 86483,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 192
+  }
+}

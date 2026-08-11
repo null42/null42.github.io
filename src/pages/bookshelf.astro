@@ -102,8 +102,19 @@ const booksByCategory = categories.map(cat => ({
 					</button>
 				</div>
 
+				<div class="bookshelf-tabs" data-bookshelf-tabs aria-label="Book categories">
+					<button class="bookshelf-tab active" type="button" data-bookshelf-filter="all">
+						&#20840;&#37096; <span>{books.length}</span>
+					</button>
+					{categories.map(category => (
+						<button class="bookshelf-tab" type="button" data-bookshelf-filter={category}>
+							{category} <span>{books.filter(book => book.category === category).length}</span>
+						</button>
+					))}
+				</div>
+
 				{booksByCategory.map(({ category, books: catBooks }) => (
-					<section class="bookshelf-category" data-bookshelf-category>
+					<section class="bookshelf-category" data-bookshelf-category={category}>
 						<h2 class="bookshelf-category-title">{category} <span class="bookshelf-category-count">({catBooks.length})</span></h2>
 						<ul class="bookshelf-grid" role="list">
 							{catBooks.map(book => (
@@ -111,7 +122,7 @@ const booksByCategory = categories.map(cat => ({
 									class="bookshelf-card card-base"
 									data-bookshelf-card
 									data-slug={book.slug}
-									data-search-text={`${book.title} ${book.description || ""}`.toLowerCase()}
+									data-search-text={`${book.title} ${book.description || ""} ${book.category || ""}`.toLowerCase()}
 								>
 									<a class="bookshelf-link" href={`/bookshelf/${book.slug}/`}>
 										<div class="bookshelf-cover">
@@ -247,11 +258,40 @@ const booksByCategory = categories.map(cat => ({
 		transform: scale(0.98);
 	}
 
-	.bookshelf-card.hidden-by-search {
+	.bookshelf-tabs {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.bookshelf-tab {
+		border: 1px solid var(--line-divider);
+		border-radius: 999px;
+		padding: 0.45rem 0.8rem;
+		background: var(--btn-regular-bg);
+		color: var(--content-text);
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.bookshelf-tab.active {
+		border-color: var(--primary);
+		background: var(--primary);
+		color: white;
+	}
+
+	.bookshelf-tab span {
+		opacity: 0.75;
+		font-size: 0.75rem;
+	}
+
+	.bookshelf-card.hidden-by-search,
+	.bookshelf-card.hidden-by-filter {
 		display: none;
 	}
 
-	.bookshelf-category.hidden-by-search {
+	.bookshelf-category.hidden-by-search,
+	.bookshelf-category.hidden-by-filter {
 		display: none;
 	}
 

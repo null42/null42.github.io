@@ -1,0 +1,74 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-cf873487a148edc8",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "3mdPJHzvAbaKvEBWRkBL7g=="
+  },
+  "gate": {
+    "token": "Nds4raRKXE/wm4h7TPfTZExLgWFbxlyWALa41UgF6ye7DbJIr3ni5/a09EizRbvyOzg="
+  },
+  "shelf": {
+    "title": "00RNQ2WIxm9D8wQW1N9hudPUUizQrIME2MepCOFCgw7Km7VDa8U48N8mKyU/g5uRwwgkdyqh86STX1m9cUU5R1E=",
+    "author": null,
+    "group": "7D3LsP+hZ+L9JwW7VAEJNquMGzgx+QIB6gazKC8OZoQmyxdCm6EpPKXXAw=="
+  },
+  "source": {
+    "sha256": "cf873487a148edc8cb75c35c5effb0c318390f6ef1d312c762208cd82d18abf2"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "1GHXUTBgclozEq9gYqzBy4i8UukYvvvYeH90hRB3Uvu6oTLYvv2hZenJrUvS1ZE1CCiMWvnnqgm4P40=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "s0mqabx09HVW2/wNQQGamxmTme2mQ6HhZZyitGbriNkP4aywpYOS30kRAn8ZL5Llg1yn3DnAVKs4iUHg",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "oP0YQGWxiVizaFrtzRl21shvTSPBQ2uE+OlGRIHVpdZPiIZNNgk6UbaKEKNBfc1GrnPE6wILsb0a0yfR",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "JTL26YIPFdLNWCNRE6nb6DEwKeLG/ceTGelYttBaNbcplCr8weLX5TwzNml1zqAezC4Dngs=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "0ORYB2du9UjNsnO0TejdncbGNQrgu2Ljyb6Hb2vzjBoHsBAYnAVbS1Xsj6dneGwRXKyX77VnDrQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "6cyVUIEtT904lciFCIjwmSyBfKbUAegY3ZwaZatT9sJX8KsoNtXzeqNOrK9fLrm54Un1C8c=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "fDN/aREcrUrvlVLqIDWUfYqpzydSXU0SI4V8qL8/aCf9MmNJxkJLfpDfqEO8+ers5twBf6aMuxo2zTI=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "Pl5KP9f8Px1JQY/3",
+      "bytes": 26000,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 57
+  }
+}

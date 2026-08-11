@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" role="img">
+  <rect width="1100" height="500" rx="24" fill="#0b1f33"/>
+  <g font-family="Microsoft YaHei, sans-serif">
+    <text x="550" y="45" fill="white" font-size="28" text-anchor="middle">傅里叶级数 → 频率响应 → 滤波器设计</text>
+    <g fill="#12314d" stroke-width="3"><rect x="40" y="90" width="280" height="150" rx="18" stroke="#60a5fa"/><rect x="410" y="90" width="280" height="150" rx="18" stroke="#34d399"/><rect x="780" y="90" width="280" height="150" rx="18" stroke="#fbbf24"/></g>
+    <g font-size="17" fill="white"><text x="180" y="130" fill="#93c5fd" font-size="21" text-anchor="middle">谱线坐标</text><text x="65" y="172">CTFS：aₖ，频率 kω₀</text><text x="65" y="207">DTFS：aₖ，角度 2πk/N</text><text x="550" y="130" fill="#6ee7b7" font-size="21" text-anchor="middle">选择结构</text><text x="435" y="172">RC / IIR / FIR</text><text x="435" y="207">极点增强 · 零点压制</text><text x="920" y="130" fill="#fde68a" font-size="21" text-anchor="middle">工程验证</text><text x="805" y="172">幅值、相位、稳定</text><text x="805" y="207">延迟、字长、算力</text></g>
+    <g fill="#10283e" stroke-width="3"><rect x="40" y="290" width="320" height="140" rx="18" stroke="#38bdf8"/><rect x="390" y="290" width="320" height="140" rx="18" stroke="#34d399"/><rect x="740" y="290" width="320" height="140" rx="18" stroke="#fbbf24"/></g>
+    <g fill="white" font-size="16"><text x="200" y="328" text-anchor="middle" fill="#7dd3fc" font-size="20">连续一阶</text><text x="65" y="366">LP：1/(1+jωRC)</text><text x="65" y="400">HP：jωRC/(1+jωRC)</text><text x="550" y="328" text-anchor="middle" fill="#6ee7b7" font-size="20">递归 IIR</text><text x="415" y="366">H=1/(1−ae⁻ʲω)</text><text x="415" y="400">稳定条件：绝对值a小于1</text><text x="900" y="328" text-anchor="middle" fill="#fde68a" font-size="20">非递归 FIR</text><text x="765" y="366">移动平均：正弦比</text><text x="765" y="400">一阶差分：直流零点</text></g>
+    <text x="550" y="475" fill="white" font-size="18" text-anchor="middle">控制落点：联合检查噪声、带宽、相位裕度、延迟与实现风险</text>
+  </g>
+</svg>

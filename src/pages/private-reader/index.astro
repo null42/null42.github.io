@@ -32,6 +32,7 @@ interface BookEntry {
 	segments: number;
 	encryptedTitle: string;   // shelf.title（shelfKey 加密）
 	encryptedAuthor: string | null; // shelf.author
+	encryptedGroup: string | null;
 	estimatedTimeMin: number;
 }
 const books: BookEntry[] = [];
@@ -63,6 +64,7 @@ if (fs.existsSync(READER_ROOT)) {
 				segments: Array.isArray(manifest.segments) ? manifest.segments.length : 0,
 				encryptedTitle: manifest.shelf?.title || "",
 				encryptedAuthor: typeof manifest.shelf?.author === "string" ? manifest.shelf.author : null,
+				encryptedGroup: typeof manifest.shelf?.group === "string" ? manifest.shelf.group : null,
 				estimatedTimeMin: manifest.reading?.estimatedTimeMin ?? 0,
 			});
 		} catch {
@@ -203,6 +205,7 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 						data-book-kind={book.kind}
 						data-book-title={book.encryptedTitle}
 						data-book-author={book.encryptedAuthor ?? ""}
+						data-book-group={book.encryptedGroup ?? ""}
 					>
 						<a class="private-library-link" href={`/private-reader/${book.slug}/`}>
 							<div class="private-library-icon" aria-hidden="true">
@@ -214,6 +217,7 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 								</h2>
 								<p class="private-library-meta">
 									<span class="private-library-kind">{book.kind.toUpperCase()}</span>
+									<span class="private-library-group" hidden></span>
 									<span class="private-library-segments">{book.segments} 段</span>
 									{book.estimatedTimeMin > 0 && (
 										<span class="private-library-time">约 {book.estimatedTimeMin} 分钟</span>
@@ -591,7 +595,7 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 		const shelfError = page.querySelector<HTMLElement>("[data-shelf-error]")
 		const shelfStatus = page.querySelector<HTMLElement>("[data-shelf-status]")
 
-		const tabs = page.querySelectorAll<HTMLButtonElement>("[data-tab]")
+		const tabsContainer = page.querySelector<HTMLElement>("[data-library-tabs]")
 		const grid = page.querySelector<HTMLElement>("[data-library-grid]")
 
 		if (!carrier || !gateStage || !shelfStage || !libraryStage) {
@@ -670,8 +674,10 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 					const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
 					if (cards) {
 						let decrypted = 0
+						const groups = new Map<string, number>()
 						for (const card of cards) {
 							const encTitle = card.getAttribute("data-book-title") || ""
+							const encGroup = card.getAttribute("data-book-group") || ""
 							const titleEl = card.querySelector<HTMLElement>(".private-library-title")
 							if (encTitle && titleEl) {
 								try {
@@ -682,6 +688,25 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 									// 单本解密失败，保持加密占位
 								}
 							}
+							const groupEl = card.querySelector<HTMLElement>(".private-library-group")
+							if (encGroup && groupEl) {
+								try {
+									const group = await lifecycle.decryptShelfField(encGroup, shelfKey)
+									card.dataset.bookGroup = group
+									groupEl.textContent = group
+									groupEl.hidden = false
+									groups.set(group, (groups.get(group) || 0) + 1)
+								} catch {}
+							}
+						}
+						tabsContainer?.querySelectorAll("[data-dynamic-group]").forEach(button => button.remove())
+						for (const [group, count] of [...groups.entries()].sort(([left], [right]) => left.localeCompare(right, "zh-CN"))) {
+							const button = document.createElement("button")
+							button.className = "library-tab"
+							button.dataset.tab = `group:${group}`
+							button.dataset.dynamicGroup = "true"
+							button.textContent = `${group} (${count})`
+							tabsContainer?.appendChild(button)
 						}
 						if (decrypted === 0) {
 							// 所有书都解密失败，说明 shelf 密码错误
@@ -708,26 +733,6 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 			shelfForm?.addEventListener("submit", handleShelfSubmit)
 
 			// ---------- 分架标签 ----------
-		tabs.forEach(tab => {
-			tab.addEventListener("click", () => {
-				const filter = tab.getAttribute("data-tab")
-				tabs.forEach(t => t.classList.remove("active"))
-				tab.classList.add("active")
-
-				const cards = grid?.querySelectorAll<HTMLElement>("[data-private-reader-book]")
-				if (cards) {
-					cards.forEach(card => {
-						const kind = card.getAttribute("data-book-kind")
-						if (filter === "all" || kind === filter) {
-							card.classList.remove("hidden-by-tab")
-						} else {
-							card.classList.add("hidden-by-tab")
-						}
-					})
-				}
-			})
-		})
-
 		// ---------- 搜索 + 随机 ----------
 		const searchInput = page.querySelector<HTMLInputElement>("[data-library-search]")
 		const randomBtn = page.querySelector<HTMLButtonElement>("[data-library-random]")
@@ -741,14 +746,23 @@ const txtCount = books.filter(b => b.kind === "txt").length;
 			if (!cards) return
 			cards.forEach(card => {
 				const kind = card.getAttribute("data-book-kind") || ""
+				const group = card.dataset.bookGroup || ""
 				const titleEl = card.querySelector<HTMLElement>(".private-library-title")
 				const title = (titleEl?.textContent || "").toLowerCase()
-				const matchTab = filter === "all" || kind === filter
-				const matchSearch = !query || title.includes(query)
+				const matchTab = filter === "all" || kind === filter || filter === `group:${group}`
+				const matchSearch = !query || title.includes(query) || group.toLowerCase().includes(query)
 				card.classList.toggle("hidden-by-tab", !matchTab)
 				card.classList.toggle("hidden-by-search", !matchSearch)
 			})
 		}
+
+		tabsContainer?.addEventListener("click", event => {
+			const tab = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("[data-tab]") : null
+			if (!tab) return
+			tabsContainer.querySelectorAll("[data-tab]").forEach(item => item.classList.remove("active"))
+			tab.classList.add("active")
+			applyFilters()
+		})
 
 		searchInput?.addEventListener("input", applyFilters)
 

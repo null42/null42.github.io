@@ -1,0 +1,69 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-8ba337698725f1e2",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "VE7mY2d2ZGTUTRnA0e69Sw=="
+  },
+  "gate": {
+    "token": "/3S2BF+YxGobmj+kupWbaZgRiTsH/AYpp4wo50LPS7A/FRXUfpeCJky+RdrKHTDTDwE="
+  },
+  "shelf": {
+    "title": "DP1h+jsRFAhX1KjxgKw3NrDTNtwXIuRkm8e+w81HkN3o6F4YwHCi9WRxj6Syqd90BK82U5hs5e7JSPkad86L+4kJirF5yKP8qWyuxHV3sOZoDLe0AeMK2Wfw5dX28dPfpgdZ1Of8POHDlfTSWnT4cdkcoUt11Qq53dF8KciTCfetVSTcYlK6GCp8e6L7RizyPx7T+TWqPve2aR/TQA==",
+    "author": null,
+    "group": "CA173gkM9i7Wp6b7CtNGvFDqpp9CQi0DjTr8155+Dt9I2rUerayXfTK13A=="
+  },
+  "source": {
+    "sha256": "8ba337698725f1e2a702d1ac0c6c44c5a8a3826aba48749c1ce7de75a28b4a9d"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "PD5xn6jKQeMomvbhfgiKP3eVTMHBw+oGvCJpa6pkQ0S9Iowv88+91pXl1L4w7DieF2s=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "IjN2qIrGI/IeCO/23EhnVXa4WrAaYUWI8WHzrO42DBup6vlLHVh+jjDQlWIZ5kisZj8=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "w7mn1Uj6v4rijHIxt4ftn/tfyRRnjV57ixWqn2Ra1doQabx6bXAZCKD7O889tMJHhZc=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "fUK8XIWSmtiK3MhAEol1X3LTkj9Zuw/ggUB9Xx/f86lhqLxlHQM2lxywdE69NCKCsk0=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "p+vaMuksOgxIyAoVjZnaaGorhlV7EW+wW+xTCL0P+JUQO6BLyLhFO4w8fE6s/0FJLZc=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "S15a7e1zHg7q9uzrKGtEcBjVGUCSoVNm6WZhlGXXrlMejlfGjx1VvBGpIV0wrOEES/0=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "ja1zQGaGMsH/U4dl",
+      "bytes": 31566,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 66
+  }
+}

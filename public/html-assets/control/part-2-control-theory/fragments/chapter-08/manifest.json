@@ -1,0 +1,19 @@
+{
+  "title": "理论八：状态观测器",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 781,
+  "chapter_slide_end": 857,
+  "completed_slide_end": 857,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-08-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["理论七：状态反馈控制器设计", "能观性与线性代数", "理论六频域裕度"],
+  "learning_objectives": ["推导观测器误差动态", "理解分离原理与极点选择", "完成含饱和、积分和噪声的观测器闭环验证"],
+  "control_connections": ["能观标准型", "A−LC极点配置", "状态反馈实现", "数字观测器"],
+  "deep_dive": "course-notes/part-2-control-theory/deep-dives/chapter-08-observer.html",
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-08/001-slides-781-792.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-08/002-slides-793-812.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-08/003-slides-813-832.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-08/004-slides-833-857.fragment.html"
+  ]
+}

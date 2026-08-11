@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { sliceTxt } from '../../../scripts/kb/private-reader/txt-slicer'
+import { extractTxtChapters } from '../../../scripts/kb/private-reader/txt-chapters'
 
 describe('txt slicer', () => {
   it('returns single segment for small text', () => {
@@ -63,5 +64,25 @@ describe('txt slicer', () => {
       expect(seg.charOffset).toBe(expectedOffset)
       expectedOffset += seg.text.length
     }
+  })
+})
+
+describe('txt chapter extraction', () => {
+  it('keeps only a compact chapter title when body text follows on the same line', () => {
+    const text = '\u7b2c1\u7ae0 \u535a\u8d8a \u535a\u8d8a\uff0c\u4f60\u600e\u4e48\u4e0d\u548c\u5176\u4ed6\u5c0f\u670b\u53cb\u4e00\u8d77\u73a9\u3002\u592a\u5e7c\u7a1a\u4e86\u3002\n\u6b63\u6587\u7ee7\u7eed\u3002'
+    const segments = sliceTxt(text)
+    expect(extractTxtChapters(text, segments)).toEqual([
+      { title: '\u7b2c1\u7ae0 \u535a\u8d8a', charOffset: 0, segmentIndex: 0 },
+    ])
+  })
+
+  it('maps chapter headings to their containing segments', () => {
+    const first = `\u7b2c1\u7ae0 \u5f00\u59cb\n${'\u7532'.repeat(200)}\n\n`
+    const second = `\u7b2c2\u7ae0 \u7ee7\u7eed\n${'\u4e59'.repeat(200)}`
+    const text = first + second
+    const segments = sliceTxt(text, { targetBytes: 220, minBytes: 100, maxBytes: 300 })
+    const chapters = extractTxtChapters(text, segments)
+    expect(chapters.map(chapter => chapter.title)).toEqual(['\u7b2c1\u7ae0 \u5f00\u59cb', '\u7b2c2\u7ae0 \u7ee7\u7eed'])
+    expect(chapters[1].segmentIndex).toBeGreaterThanOrEqual(chapters[0].segmentIndex)
   })
 })

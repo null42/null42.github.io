@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 500" role="img" aria-labelledby="title desc">
+  <title id="title">离散复指数周期的数论条件</title>
+  <desc id="desc">从相位闭合条件推导频率比为有理数，并说明最简分数分母就是基本周期。</desc>
+  <rect width="920" height="500" rx="24" fill="#f8fafc"/>
+  <g font-family="Microsoft YaHei, sans-serif" text-anchor="middle">
+    <rect x="75" y="55" width="235" height="76" rx="16" fill="#dbeafe" stroke="#2563eb"/><text x="192" y="100" font-size="24" fill="#1e3a8a">x[n+N]=x[n]</text>
+    <rect x="343" y="55" width="235" height="76" rx="16" fill="#ede9fe" stroke="#7c3aed"/><text x="460" y="100" font-size="24" fill="#4c1d95">e^{jωN}=1</text>
+    <rect x="610" y="55" width="235" height="76" rx="16" fill="#dcfce7" stroke="#16a34a"/><text x="727" y="100" font-size="24" fill="#14532d">ωN=2πm</text>
+    <path d="M310 93 H343 M578 93 H610" stroke="#334155" stroke-width="3"/>
+    <rect x="205" y="190" width="510" height="80" rx="16" fill="#fff" stroke="#94a3b8"/><text x="460" y="240" font-size="28" fill="#0f172a">ω/(2π)=m/N 必须是有理数</text>
+    <path d="M727 131 C727 165 650 175 610 190" fill="none" stroke="#334155" stroke-width="3"/>
+    <rect x="115" y="335" width="300" height="100" rx="16" fill="#fef3c7" stroke="#d97706"/>
+    <text x="265" y="375" font-size="23" fill="#92400e">若 ω/(2π)=p/q</text><text x="265" y="410" font-size="23" fill="#92400e">且 gcd(p,q)=1，则 N₀=q</text>
+    <rect x="505" y="335" width="300" height="100" rx="16" fill="#fee2e2" stroke="#dc2626"/>
+    <text x="655" y="375" font-size="23" fill="#991b1b">若频率比为无理数</text><text x="655" y="410" font-size="23" fill="#991b1b">不存在任何正整数周期</text>
+    <path d="M390 270 L300 335 M530 270 L620 335" stroke="#334155" stroke-width="3"/>
+  </g>
+</svg>

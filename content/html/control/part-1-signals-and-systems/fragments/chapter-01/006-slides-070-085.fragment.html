@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="/html-assets/control/part-1-signals-and-systems/companion/">
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/fragments/assets/companion.css">
+  <title>第70–85页｜系统及其基本性质</title>
+</head>
+<body><main>
+<header class="hero">
+  <div class="eyebrow">第一章 · 课件第 70–85 页</div>
+  <h1>系统及其基本性质：把“凭感觉分类”变成定义检验</h1>
+  <h2>前置知识</h2><p>连续/离散信号、时间移位、复数、求和与积分、输入—输出映射。</p>
+  <h2>学习目标</h2><p>能读懂连续与离散系统框图，能化简串联、并联和反馈互联；能从量词和定义出发判断无记忆、可逆、因果、稳定、时不变与线性，并能为否定结论构造严格反例。</p>
+</header>
+
+<section class="slide-note" id="slide-070" data-slide="70">
+  <div class="slide-kicker">SLIDE 070 · 1.5 系统</div>
+  <h2>第70页｜系统：把输入信号变成输出信号的规则</h2>
+  <div class="source-label">[课件定义] 系统是能够对信号完成某种变换或运算的集合体。</div>
+  <p>连续时间系统写成 <code>y(t)=T{x(t)}</code>，离散时间系统写成 <code>y[n]=T{x[n]}</code>。符号 <code>T</code> 代表完整的映射规则，不一定是代数公式，也可以是微分方程、差分方程、状态更新、算法、查表或物理装置。</p>
+  <p>判断系统时必须先说清楚：谁是输入、谁是输出、时间变量是什么、初始条件是否固定、允许的信号集合是什么。相同公式在不同定义域或初始条件下，可能具有不同性质。</p>
+  <div class="formula">系统分析的基本问题：给定 T 和 x，求 y；系统辨识的基本问题：给定 x、y，估计 T</div>
+  <p class="pitfall">不要把“系统”误认为只是一只方框。方框是对输入—输出关系的抽象；内部可以包含能量储存、反馈、非线性、采样和软件状态。</p>
+</section>
+
+<section class="slide-note" id="slide-071" data-slide="71">
+  <div class="slide-kicker">SLIDE 071 · 系统互联</div>
+  <h2>第71页｜串联与并联：系统级的复合与相加</h2>
+  <p><strong>串联</strong>把前级输出作为后级输入，等价于算子复合：<code>T=T₂∘T₁</code>。若 <code>y₁=T₁{x}</code>、<code>y=T₂{y₁}</code>，则 <code>y=T₂{T₁{x}}</code>。一般情况下算子次序不能交换；只有满足特定条件时才有 <code>T₂T₁=T₁T₂</code>。</p>
+  <p><strong>并联</strong>让同一输入同时经过多个系统，再把输出相加：<code>y=ΣᵢTᵢ{x}</code>。它是控制器多通道结构的基础，例如 PID 可视为比例、积分、微分三条并联支路。</p>
+  <div class="formula">串联：T₂(T₁(x))　　并联：(T₁+T₂)(x)=T₁(x)+T₂(x)</div>
+  <p class="pitfall">化简框图前先标注每条线的信号。串联系统的中间变量、并联系统的求和符号一旦漏写，后续传递关系会整体出错。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/system-interconnections.svg" alt="系统串联、并联与反馈互联图">
+</section>
+
+<section class="slide-note" id="slide-072" data-slide="72">
+  <div class="slide-kicker">SLIDE 072 · 反馈联接</div>
+  <h2>第72页｜反馈：输出重新参与输入形成闭环</h2>
+  <p>课件给出前向系统 <code>A</code> 与反馈系统 <code>F</code> 的负反馈结构。设误差信号 <code>e=x−Fy</code>，前向输出 <code>y=Ae</code>，代入得 <code>y=A(x−Fy)</code>。若相关逆运算存在，则：</p>
+  <div class="formula">y = A/(1+AF) · x</div>
+  <p>公式的关键不只是分母，而是闭环方程的建立过程：先在求和点写误差，再沿方框写映射，最后消去内部信号。对于一般算子或矩阵，乘法次序必须保留，不能随意按标量代数交换。</p>
+  <p><strong>控制连接：</strong>反馈能改变灵敏度、扰动抑制和等效动态，但分母 <code>1+AF</code> 同时决定闭环是否可能失稳。反馈不是天然“改善一切”，而是以稳定裕度换取性能。</p>
+</section>
+
+<section class="slide-note" id="slide-073" data-slide="73">
+  <div class="slide-kicker">SLIDE 073 · 1.6.1 无记忆与记忆</div>
+  <h2>第73页｜无记忆系统：当前输出只能看当前输入</h2>
+  <div class="formula">无记忆：在任意 t₀，y(t₀) 只由 x(t₀) 决定</div>
+  <p>例如 <code>y(t)=x²(t)</code>、<code>y[n]=3x[n]−1</code> 都只取当前样本，因此无记忆。判断时不要被非线性或常数项干扰；“是否有记忆”只问依赖的输入时刻，不问映射是否线性。</p>
+  <p><code>y[n]=Σₖ₌₋∞ⁿx[k]</code> 依赖所有过去样本，是有记忆系统；递推式 <code>y[n]=x[n−1]</code> 依赖过去输入，同样有记忆；连续积分器也因保存历史面积而有记忆。</p>
+  <p class="pitfall">出现 <code>n</code> 或 <code>t</code> 本身不代表有记忆，如 <code>y(t)=t x(t)</code> 仍只用当前输入；真正要看的是输入参数写成 <code>t</code>、<code>t−1</code>、<code>2t</code> 还是一段区间。</p>
+</section>
+
+<section class="slide-note" id="slide-074" data-slide="74">
+  <div class="slide-kicker">SLIDE 074 · 1.6.2 可逆性</div>
+  <h2>第74页｜可逆系统：输出是否保留了足够的信息</h2>
+  <div class="source-label">[课件定义] 若不同输入必产生不同输出，并存在逆系统从输出恢复输入，则原系统可逆。</div>
+  <p>严格地说，<code>T</code> 在给定输入集合上必须是一一映射：<code>T{x₁}=T{x₂}⇒x₁=x₂</code>。逆系统 <code>T⁻¹</code> 满足 <code>T⁻¹{T{x}}=x</code>。例如 <code>y=2x</code> 的逆为 <code>x=y/2</code>。</p>
+  <p><code>y=x²</code> 在全体实信号上不可逆，因为 <code>x</code> 与 <code>−x</code> 给出同一输出；若把输入限制为非负信号，则可用 <code>x=√y</code> 恢复。可逆性因此依赖信号集合，不是只看公式。</p>
+  <p>课件的累加器 <code>y[n]=Σₖ₌₋∞ⁿx[k]</code> 可由一阶差分恢复：<code>x[n]=y[n]−y[n−1]</code>。这也是“积分—差分”互逆在离散时间中的体现。</p>
+</section>
+
+<section class="slide-note" id="slide-075" data-slide="75">
+  <div class="slide-kicker">SLIDE 075 · 1.6.3 因果性</div>
+  <h2>第75页｜因果系统：当前输出不能依赖未来输入</h2>
+  <div class="formula">因果：y(t₀) 只允许依赖 x(t)，其中 t≤t₀</div>
+  <p>判断因果性时固定一个任意观察时刻 <code>t₀</code>，检查系统所访问的输入时刻。<code>y[n]=x[n]+x[n−1]</code> 因果；<code>y[n]=x[n+1]</code> 需要未来样本，非因果；无记忆系统必然因果，但因果系统可以有记忆。</p>
+  <p>课件例 <code>y[n]=x[−n]</code> 的关键是输入时刻随 <code>n</code> 改变：当 <code>n&lt;0</code> 时，<code>−n&gt;n</code>，输出访问未来输入，因此整体系统非因果。不能只挑 <code>n&gt;0</code> 的局部情况。</p>
+  <p class="pitfall">离线信号处理可以实现非因果算法，因为完整数据已经存储；实时控制器在时刻 <code>n</code> 无法取得真正的 <code>x[n+1]</code>，只能预测或引入延迟。</p>
+</section>
+
+<section class="slide-note" id="slide-076" data-slide="76">
+  <div class="slide-kicker">SLIDE 076 · 因果例题与稳定性引入</div>
+  <h2>第76页｜不要看“输入里有没有 t”，要看访问的是哪个时刻</h2>
+  <p>课件考察 <code>y(t)=x(t)cos(t+1)</code>。虽然系数随时间变化，但输入仍是当前的 <code>x(t)</code>，所以系统因果且无记忆。时变系数影响时不变性，不影响因果性的时刻约束。</p>
+  <p>接着课件引入稳定性：有限幅值输入经过系统后，输出是否仍保持有限。这里讨论的是 BIBO 稳定性，不是“某条波形看起来平稳”，也不是状态空间中的内部稳定；判断对象和量词必须明确。</p>
+  <div class="formula">若存在 Mₓ&lt;∞ 使 |x(t)|≤Mₓ，则必须存在 Mᵧ&lt;∞ 使 |y(t)|≤Mᵧ</div>
+  <p><strong>过渡：</strong>因果性限制信息来自何时，稳定性限制输入幅值如何传到输出；两者相互独立，不能由一个性质推出另一个。</p>
+</section>
+
+<section class="slide-note" id="slide-077" data-slide="77">
+  <div class="slide-kicker">SLIDE 077 · 1.6.4 稳定性</div>
+  <h2>第77页｜BIBO 稳定：全称命题与反例策略</h2>
+  <p>证明系统稳定，要从任意有界输入出发，推出一个与时间无关的输出上界。否定稳定性则只需找到一个有界输入，使输出无界。课件用两个系统强调这两种证明方向。</p>
+  <p><code>S₁:y(t)=t x(t)</code> 取有界输入 <code>x(t)=1</code>，得到 <code>y(t)=t</code> 无界，因此不稳定。<code>S₂:y(t)=e^{x(t)}</code> 若 <code>|x(t)|≤B</code>，则 <code>|y(t)|≤eᴮ</code>，所以 BIBO 稳定。</p>
+  <div class="formula">稳定证明：|x|≤B ⇒ |T{x}|≤C(B)；不稳定反例：∃有界 x，使 T{x} 无界</div>
+  <p class="pitfall">不要用一个“看起来正常”的输入证明稳定；那只能说明该输入对应的输出有界。稳定要求对所有有界输入成立。</p>
+</section>
+
+<section class="slide-note" id="slide-078" data-slide="78">
+  <div class="slide-kicker">SLIDE 078 · 1.6.5 时不变性</div>
+  <h2>第78页｜时不变：先移输入与后移输出必须等价</h2>
+  <div class="formula">若 T{x(t)}=y(t)，则时不变要求 T{x(t−t₀)}=y(t−t₀)</div>
+  <p>时不变不是“公式里没有显式 t”这种表面规则，而是系统对时间原点不敏感。标准检验有两条路径：路径 A 先求原输出再整体延迟；路径 B 先延迟输入再通过原系统。比较两者是否对任意输入、任意移位都相等。</p>
+  <p>例 <code>y(t)=sin[x(t)]</code>：路径 B 得 <code>sin[x(t−t₀)]</code>，路径 A 也得同一结果，因此时不变。非线性不妨碍时不变性。</p>
+  <p class="pitfall">输入移位后，系统规则本身不允许跟着改。例如系统中的固定系数 <code>t</code> 仍是当前时刻 <code>t</code>，不能擅自替换为 <code>t−t₀</code>。</p>
+</section>
+
+<section class="slide-note" id="slide-079" data-slide="79">
+  <div class="slide-kicker">SLIDE 079 · 时不变反例</div>
+  <h2>第79页｜用单位冲激构造反例，但要理解两条路径</h2>
+  <p>对于含显式索引的系统，可选结构简单的输入快速暴露差异。设某系统对 <code>x[n]</code> 的运算含系数 <code>n</code>，课件取 <code>x₁[n]=δ[n]</code>。原输出再移位与移位输入后的系统输出分别在冲激位置或幅值上出现不同，从而否定时不变性。</p>
+  <p>反例有效的逻辑是：时不变性要求对所有输入与所有移位成立，只要找到一组 <code>x,n₀</code> 使两条路径不相等即可。单位冲激不是“专用公式”，只是因为它的位置和系数最容易追踪。</p>
+  <div class="formula">路径 A：y₁[n−n₀]　　路径 B：T{x₁[n−n₀]}</div>
+  <p><strong>控制连接：</strong>固定参数 LTI 模型通常假定对象性质不随绝对时间变化；增益调度、老化、温漂和工况切换会引入时变性，固定控制器的性能可能随时间改变。</p>
+</section>
+
+<section class="slide-note" id="slide-080" data-slide="80">
+  <div class="slide-kicker">SLIDE 080 · 1.6.6 线性</div>
+  <h2>第80页｜线性：可加性与齐次性的统一叠加式</h2>
+  <div class="formula">T{a x₁+b x₂}=aT{x₁}+bT{x₂}</div>
+  <p>线性要求对任意允许输入 <code>x₁,x₂</code> 和任意标量 <code>a,b</code> 成立。该式同时包含可加性和齐次性，最适合作为统一检验。只代入一两个数值例子不能证明线性；证明必须保留任意性。</p>
+  <p>快速必要条件是 <code>T{0}=0</code>：取 <code>a=b=0</code> 即得。若零输入产生非零输出，可立即判为非线性；但 <code>T{0}=0</code> 只是必要条件，不足以单独证明线性，如 <code>T{x}=x²</code> 仍非线性。</p>
+  <p class="pitfall">线性与时不变是两条独立分类轴。后续卷积与传递函数需要两者同时成立，称为 LTI；仅有线性还不够。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/system-properties-map.svg" alt="无记忆、可逆、因果、稳定、时不变和线性的统一判断图">
+</section>
+
+<section class="slide-note" id="slide-081" data-slide="81">
+  <div class="slide-kicker">SLIDE 081 · 线性例题</div>
+  <h2>第81页｜<code>y(t)=t x(t)</code>：线性但时变</h2>
+  <p>对任意 <code>x₁,x₂,a,b</code>，有：</p>
+  <div class="formula">T{ax₁+bx₂}=t[ax₁(t)+bx₂(t)]=a·tx₁(t)+b·tx₂(t)</div>
+  <p>因此系统线性。这里乘以 <code>t</code> 只是对输入的线性时变增益，不会产生平方、乘积或常数偏置。但做时不变检验时，先移输入得到 <code>t x(t−t₀)</code>，后移输出得到 <code>(t−t₀)x(t−t₀)</code>，一般不相等，所以系统时变。</p>
+  <p>该例同时说明：显式时间依赖通常提示时变，却不意味着非线性；判断每个性质都必须回到自己的定义，不能用关键词替代证明。</p>
+</section>
+
+<section class="slide-note" id="slide-082" data-slide="82">
+  <div class="slide-kicker">SLIDE 082 · 标量域的重要性</div>
+  <h2>第82页｜取实部系统：实线性与复线性不是一回事</h2>
+  <p>设 <code>T{x}=Re{x}</code>。若标量只取实数，则 <code>Re{ax₁+bx₂}=aRe{x₁}+bRe{x₂}</code>，系统是实线性的；若允许复标量，取 <code>a=j</code> 就可能破坏齐次性。</p>
+  <p>课件构造复输入说明：若 <code>x₁=r+js</code>，则 <code>T{x₁}=r</code>；而 <code>T{jx₁}=Re{jr−s}=−s</code>，通常不等于 <code>jT{x₁}=jr</code>。因此它不是复线性系统。</p>
+  <div class="formula">判断线性前必须声明：信号空间与标量域是 ℝ 还是 ℂ</div>
+  <p><strong>后续连接：</strong>频域和复指数分析大量使用复信号。一个仅对实数线性的运算，不能自动沿用复线性系统的全部结论。</p>
+</section>
+
+<section class="slide-note" id="slide-083" data-slide="83">
+  <div class="slide-kicker">SLIDE 083 · 常数偏置</div>
+  <h2>第83页｜<code>y[n]=2x[n]+3</code>：仿射不是线性</h2>
+  <p>最快检验是零输入：<code>T{0}=3≠0</code>，因此系统非线性。若直接检验叠加，<code>T{x₁+x₂}=2x₁+2x₂+3</code>，而 <code>T{x₁}+T{x₂}=2x₁+2x₂+6</code>，也不相等。</p>
+  <p>非线性来自固定偏置 3，而不是系数 2。工程中传感器零偏、执行器偏置和工作点常数项都会产生这类仿射映射。围绕工作点做增量建模时可以得到线性增量关系，但原始绝对变量系统仍不是线性的。</p>
+  <p class="pitfall">“只差一个常数”在计算上可能很小，在结构分类上却是本质差异，因为线性系统必须保持原点。</p>
+</section>
+
+<section class="slide-note" id="slide-084" data-slide="84">
+  <div class="slide-kicker">SLIDE 084 · 响应分解</div>
+  <h2>第84页｜仿射系统的正确分解：零输入响应 + 增量响应</h2>
+  <p>可把 <code>y[n]=2x[n]+3</code> 写成 <code>y=y₁+y₀</code>，其中 <code>y₁=2x</code> 是输入引起的线性部分，<code>y₀=3</code> 是零输入时仍存在的偏置。对两个输入，有：</p>
+  <div class="formula">y₁[n]−y₂[n]=2[x₁[n]−x₂[n]]</div>
+  <p>差分关系是线性的，因为固定偏置在相减时抵消；这解释了为什么围绕同一工作点的小扰动模型常可线性化。但不能据此反推绝对输入—输出映射线性。</p>
+  <p><strong>控制连接：</strong>实际闭环常先求平衡点，再用偏差变量 <code>δx=x−x̄</code>、<code>δu=u−ū</code> 建立局部线性模型。必须清楚“原系统”“仿射模型”和“增量线性模型”的层级。</p>
+</section>
+
+<section class="slide-note" id="slide-085" data-slide="85">
+  <div class="slide-kicker">SLIDE 085 · 1.7 小结</div>
+  <h2>第85页｜第一章能力闭环：从信号语言走向系统分析</h2>
+  <div class="source-label">[课件小结] 自变量变换、基本信号、信号运算、基本系统性质及判别。</div>
+  <p>本章不是名词目录，而是一套后续课程反复调用的语言：用时间变换追踪特征点；用阶跃、冲激和复指数表示基本结构；用代数与微积分组合新信号；用输入—输出映射和严格量词判断系统性质。</p>
+  <p>进入下一章前，应能在没有标准答案时完成三类任务：一是从表达式画出波形并反推表达式；二是处理分段边界、冲激和积分记忆；三是对陌生系统逐项写出定义检验，而不是凭“像不像”下结论。</p>
+  <p><strong>控制连接：</strong>LTI 系统、卷积、傅里叶/拉普拉斯/Z 变换、传递函数、状态空间、采样和数字控制器，都建立在本章的信号表示与系统性质之上。系统辨识问“从数据恢复系统”，控制设计问“选择系统使闭环满足指标”，两者共享同一基础语言。</p>
+</section>
+
+<section class="deepening" id="deepening">
+  <h2>六类性质统一检验法</h2>
+  <ol>
+    <li><strong>无记忆：</strong>固定当前时刻，只检查输出访问哪些输入时刻。</li>
+    <li><strong>可逆：</strong>检查一一性，并显式构造逆映射或给出两个同输出的不同输入。</li>
+    <li><strong>因果：</strong>检查当前输出是否访问未来输入；一个未来依赖反例即可否定。</li>
+    <li><strong>稳定：</strong>证明时从任意有界输入推出统一上界；否定时构造一个有界输入产生无界输出。</li>
+    <li><strong>时不变：</strong>比较“先系统后移位”和“先移位后系统”两条路径。</li>
+    <li><strong>线性：</strong>保留任意输入与任意系数检验叠加式；先用 <code>T{0}=0</code> 快速筛查。</li>
+  </ol>
+</section>
+
+<section class="exercise-block" id="exercises">
+  <div class="eyebrow">A–D 级练习</div>
+  <h2>第70–85页系统性质练习</h2>
+  <p>完成后打开<a href="/html-raw/control/part-1-signals-and-systems/fragments/exercises/chapter-01-slides-070-085-answers/">独立答案页</a>，按定义逐项复核，并比较“证明全称命题”与“构造反例”的不同策略。</p>
+  <section data-level="A"><h3>A 级｜定义识别</h3><ol>
+    <li>判断 <code>y[n]=x[n−2]</code> 的无记忆、因果与可逆性。</li>
+    <li>判断 <code>y(t)=3x(t)−2</code> 是否无记忆、因果、线性。</li>
+    <li>写出串联系统 <code>T₂∘T₁</code> 与两个并联系统的输入—输出表达式。</li>
+  </ol></section>
+  <section data-level="B"><h3>B 级｜完整检验</h3><ol>
+    <li>检验 <code>y(t)=t x(t−1)</code> 的线性、时不变和因果性。</li>
+    <li>检验 <code>y[n]=Σₖ₌₋∞ⁿx[k]</code> 的记忆、可逆、因果与 BIBO 稳定性。</li>
+    <li>判断 <code>y(t)=sin[x(t)]</code> 的六类性质，并说明每项依据。</li>
+  </ol></section>
+  <section data-level="C"><h3>C 级｜证明与反例</h3><ol>
+    <li>证明 <code>y(t)=e^{x(t)}</code> 在实有界输入集合上 BIBO 稳定，并说明它为何非线性。</li>
+    <li>为 <code>y[n]=n x[n]</code> 构造时不变性反例；再说明它为何仍是线性系统。</li>
+  </ol></section>
+  <section data-level="D"><h3>D 级｜控制迁移</h3><ol>
+    <li>推导标量负反馈结构 <code>e=r−Fy, y=Ae</code> 的闭环关系，并指出正反馈时分母如何变化。</li>
+    <li>解释为什么在线性化模型中可以使用增量变量，而不能把带常值偏置的原系统直接称为线性系统。</li>
+    <li>一个实时数字控制算法使用 <code>x[n+1]</code>。分别讨论离线处理、模型预测和纯实时实现下的可行性。</li>
+  </ol></section>
+</section>
+
+<section class="gate" id="exit-gate"><h2>第一章离开门槛</h2><p>能为任意新系统先声明输入集合与时刻关系，再对六类性质逐项写出定义、证明或反例；能从求和点和方框独立建立串并联/反馈方程；能解释这些分类为何决定后续能否使用卷积、传递函数与数字控制工具。</p></section>
+</main></body></html>

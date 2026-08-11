@@ -20,9 +20,11 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { deriveKey, encryptSegment, decryptSegment, encryptField, generateSalt, ITERATIONS } from './crypto'
+import { gzipSync } from 'node:zlib'
+import { deriveKey, encryptSegment, decryptSegment, encryptBuffer, encryptField, generateSalt, ITERATIONS } from './crypto'
 import { decodeBuffer } from './encoding'
 import { sliceTxt, type TxtSegment } from './txt-slicer'
+import { extractTxtChapters } from './txt-chapters'
 
 /** Gate 验证 token 明文（固定字符串，用于验证 gate 密码） */
 export const GATE_VERIFY_TOKEN = 'PRIVATE_READER_GATE_V2'
@@ -47,13 +49,21 @@ export interface TxtManifest {
   shelf: {
     title: string      // base64
     author: string | null // base64 或 null
+    group: string | null
   }
+  source?: { sha256: string }
+  toc?: Array<{
+    id: string
+    title: string
+    segmentIndex: number
+  }>
   segments: Array<{
     index: number
     file: string // seg-NNNN.bin
     iv: string // base64
     bytes: number // 密文字节数（含 authTag）
     charHint: number // 段起始字符偏移
+    compression?: 'gzip'
   }>
   reading: {
     estimatedTimeMin: number
@@ -63,6 +73,9 @@ export interface TxtManifest {
 export interface EncryptTxtOptions {
   title?: string
   author?: string
+  group?: string
+  sourceHash?: string
+  compress?: boolean
   encoding?: string // 强制编码
   /** 共享的 gateSalt（Buffer）。若不提供则随机生成 */
   gateSalt?: Buffer
@@ -113,9 +126,11 @@ export async function encryptTxtFile(
   // 6. Shelf 层：加密标题和作者
   const encryptedTitle = encryptField(title, shelfKey)
   const encryptedAuthor = author ? encryptField(author, shelfKey) : null
+  const encryptedGroup = options.group ? encryptField(options.group, shelfKey) : null
 
   // 7. Book 层：切片并加密
   const segments = sliceTxt(text)
+  const chapters = extractTxtChapters(text, segments)
 
   // 8. 估算阅读时间（平均 400 字/分钟）
   const charCount = text.length
@@ -127,7 +142,10 @@ export async function encryptTxtFile(
 
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i]
-    const { iv, ciphertext } = encryptSegment(seg.text, bookKey)
+    const compressed = options.compress ? gzipSync(Buffer.from(seg.text, 'utf8'), { level: 9 }) : null
+    const { iv, ciphertext } = compressed
+      ? encryptBuffer(compressed, bookKey)
+      : encryptSegment(seg.text, bookKey)
     const fileName = `seg-${String(i).padStart(4, '0')}.bin`
     const filePath = path.join(outputDir, fileName)
 
@@ -139,7 +157,8 @@ export async function encryptTxtFile(
       file: fileName,
       iv: iv.toString('base64'),
       bytes: ciphertext.length,
-      charHint: seg.charOffset
+      charHint: seg.charOffset,
+      ...(compressed ? { compression: 'gzip' as const } : {}),
     })
   }
 
@@ -161,8 +180,17 @@ export async function encryptTxtFile(
     },
     shelf: {
       title: encryptedTitle,
-      author: encryptedAuthor
+      author: encryptedAuthor,
+      group: encryptedGroup,
     },
+    ...(options.sourceHash ? { source: { sha256: options.sourceHash } } : {}),
+    ...(chapters.length ? {
+      toc: chapters.map((chapter, index) => ({
+        id: `chapter-${index + 1}`,
+        title: encryptField(chapter.title, bookKey),
+        segmentIndex: chapter.segmentIndex,
+      })),
+    } : {}),
     segments: manifestSegments,
     reading: {
       estimatedTimeMin

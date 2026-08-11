@@ -1,0 +1,15 @@
+{
+  "title": "理论一：控制系统导论、LTI模型与传递函数｜课件伴随讲义",
+  "description": "控制理论与信号系统交互课程页面。",
+  "source": "control/course-notes/part-2-control-theory/companion/chapter-01-control-systems-introduction.html",
+  "assets": [
+    "/html-assets/control/part-1-signals-and-systems/assets/companion.css",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/canonical-feedback-channels.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/laplace-block-algebra-pipeline.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/laplace-exercise-decision-tree.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/lti-impulse-convolution-proof.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/pole-mode-time-response-map.svg",
+    "/html-assets/control/part-2-control-theory/figures/chapter-01/quadrotor-control-causality.svg"
+  ],
+  "group": "part-2-control-theory"
+}

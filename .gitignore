@@ -29,10 +29,15 @@ scripts/private-reader/.local-paths.json
 scripts/private-reader/.salts.json
 scripts/private-reader/test-sample.txt
 env/private-reader-stress/
-# 私密阅读系统全量加密归档（本地测试用，不提交）
+env/private-reader-library/
+# 私密阅读系统旧归档（本地测试用，不提交）
 content/private-reader-archive/
-# 私密阅读系统加密产物（每类前50本推送GitHub，其余归档到 private-reader-archive）
-# 注意：content/private-reader/ 需要提交，否则GitHub Pages无法生成路由
+# content/private-reader/ 是完整加密书库的功能源，必须提交。
+# public/private-reader/ 由构建同步生成，避免重复提交同一批密文。
+public/private-reader/
+
+# MATLAB/Simulink generated build caches
+**/slprj/
 
 # 本地参考文档（不推送）
 USAGE-GUIDE.md

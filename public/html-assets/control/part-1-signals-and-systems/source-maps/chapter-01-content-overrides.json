@@ -1,0 +1,790 @@
+{
+  "1": {
+    "progression": "Learning progression at slide 1: connect the signal-basics definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 1: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 1: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 1: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "self_check": "Slide 1 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 1 must reconcile notation with the courseware diagram."
+  },
+  "2": {
+    "courseware": "Courseware anchor for slide 2: signal-basics; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 2: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 2: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 2: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 2 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 2 must reconcile notation with the courseware diagram."
+  },
+  "3": {
+    "progression": "Learning progression at slide 3: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 3: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 3: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 3 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 3 must reconcile notation with the courseware diagram."
+  },
+  "4": {
+    "progression": "Learning progression at slide 4: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 4: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 4: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 4 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 4 must reconcile notation with the courseware diagram."
+  },
+  "5": {
+    "progression": "Learning progression at slide 5: connect the signal-basics definition to the next transformation or system property.",
+    "control": "Control connection for slide 5: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 5: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 5: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 5 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 5 must reconcile notation with the courseware diagram."
+  },
+  "6": {
+    "progression": "Learning progression at slide 6: connect the signal-basics definition to the next transformation or system property.",
+    "control": "Control connection for slide 6: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "inference": "Inference for slide 6: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 6 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 6 must reconcile notation with the courseware diagram."
+  },
+  "7": {
+    "progression": "Learning progression at slide 7: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 7: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 7: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 7 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 7 must reconcile notation with the courseware diagram."
+  },
+  "8": {
+    "supplement": "Engineering supplement for slide 8: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 8: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "inference": "Inference for slide 8: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 8 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 8 must reconcile notation with the courseware diagram."
+  },
+  "9": {
+    "progression": "Learning progression at slide 9: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 9: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 9: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 9 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 9 must reconcile notation with the courseware diagram."
+  },
+  "10": {
+    "progression": "Learning progression at slide 10: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 10: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 10: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 10 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 10 must reconcile notation with the courseware diagram."
+  },
+  "11": {
+    "control": "Control connection for slide 11: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 11: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 11: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 11 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 11 must reconcile notation with the courseware diagram."
+  },
+  "12": {
+    "progression": "Learning progression at slide 12: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 12: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 12: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 12 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 12 must reconcile notation with the courseware diagram."
+  },
+  "13": {
+    "progression": "Learning progression at slide 13: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 13: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 13: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 13 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 13 must reconcile notation with the courseware diagram."
+  },
+  "14": {
+    "supplement": "Engineering supplement for slide 14: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 14: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 14: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 14: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 14 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 14 must reconcile notation with the courseware diagram."
+  },
+  "15": {
+    "progression": "Learning progression at slide 15: connect the signal-basics definition to the next transformation or system property.",
+    "control": "Control connection for slide 15: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 15: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 15: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 15 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 15 must reconcile notation with the courseware diagram."
+  },
+  "16": {
+    "progression": "Learning progression at slide 16: connect the signal-basics definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 16: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 16: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 16 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 16 must reconcile notation with the courseware diagram."
+  },
+  "17": {
+    "supplement": "Engineering supplement for slide 17: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 17: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 17: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 17: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 17 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 17 must reconcile notation with the courseware diagram."
+  },
+  "18": {
+    "progression": "Learning progression at slide 18: connect the signal-basics definition to the next transformation or system property.",
+    "inference": "Inference for slide 18: from x(t), x[n], r(t), y(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 18 self-check: write the definition, one equation using x(t), x[n], r(t), y(t), its units and one control implementation caveat.",
+    "formulas": "x(t), x[n], r(t), y(t); slide 18 must reconcile notation with the courseware diagram."
+  },
+  "19": {
+    "progression": "Learning progression at slide 19: connect the time-transform definition to the next transformation or system property.",
+    "control": "Control connection for slide 19: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 19: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 19: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 19 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 19 must reconcile notation with the courseware diagram."
+  },
+  "20": {
+    "progression": "Learning progression at slide 20: connect the time-transform definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 20: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 20: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 20 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 20 must reconcile notation with the courseware diagram."
+  },
+
+  "21": {
+    "courseware": "Courseware anchor for slide 21: time-transform; identify the signal, independent variable, units and page conclusion.",
+    "control": "Control connection for slide 21: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 21: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 21: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 21 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 21 must reconcile notation with the courseware diagram."
+  },
+  "22": {
+    "progression": "Learning progression at slide 22: connect the time-transform definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 22: state assumptions, units, support, initial condition and what the page does not determine.",
+    "advanced": "Advanced check for slide 22: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 22: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 22 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 22 must reconcile notation with the courseware diagram."
+  },
+  "23": {
+    "courseware": "Courseware anchor for slide 23: time-transform; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 23: connect the time-transform definition to the next transformation or system property.",
+    "advanced": "Advanced check for slide 23: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 23: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 23 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 23 must reconcile notation with the courseware diagram."
+  },
+  "24": {
+    "progression": "Learning progression at slide 24: connect the time-transform definition to the next transformation or system property.",
+    "control": "Control connection for slide 24: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 24: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 24: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 24 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 24 must reconcile notation with the courseware diagram."
+  },
+  "25": {
+    "progression": "Learning progression at slide 25: connect the time-transform definition to the next transformation or system property.",
+    "control": "Control connection for slide 25: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "inference": "Inference for slide 25: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 25 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 25 must reconcile notation with the courseware diagram."
+  },
+  "26": {
+    "courseware": "Courseware anchor for slide 26: time-transform; identify the signal, independent variable, units and page conclusion.",
+    "supplement": "Engineering supplement for slide 26: state assumptions, units, support, initial condition and what the page does not determine.",
+    "advanced": "Advanced check for slide 26: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 26: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 26 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 26 must reconcile notation with the courseware diagram."
+  },
+  "27": {
+    "progression": "Learning progression at slide 27: connect the time-transform definition to the next transformation or system property.",
+    "control": "Control connection for slide 27: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "inference": "Inference for slide 27: from x(at+b), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 27 self-check: write the definition, one equation using x(at+b), its units and one control implementation caveat.",
+    "formulas": "x(at+b); slide 27 must reconcile notation with the courseware diagram."
+  },
+  "28": {
+    "courseware": "Courseware anchor for slide 28: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 28: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 28: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 28: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 28: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 28: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 28 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 28 must reconcile notation with the courseware diagram."
+  },
+  "29": {
+    "courseware": "Courseware anchor for slide 29: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 29: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 29: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 29: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 29: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 29: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 29 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 29 must reconcile notation with the courseware diagram."
+  },
+  "30": {
+    "courseware": "Courseware anchor for slide 30: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 30: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 30: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 30: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 30: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 30: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 30 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 30 must reconcile notation with the courseware diagram."
+  },
+  "31": {
+    "courseware": "Courseware anchor for slide 31: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 31: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 31: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 31: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 31: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 31: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 31 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 31 must reconcile notation with the courseware diagram."
+  },
+  "32": {
+    "courseware": "Courseware anchor for slide 32: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 32: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 32: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 32: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 32: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 32: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 32 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 32 must reconcile notation with the courseware diagram."
+  },
+  "33": {
+    "courseware": "Courseware anchor for slide 33: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 33: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 33: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 33: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 33: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 33: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 33 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 33 must reconcile notation with the courseware diagram."
+  },
+  "34": {
+    "courseware": "Courseware anchor for slide 34: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 34: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 34: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 34: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 34: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 34: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 34 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 34 must reconcile notation with the courseware diagram."
+  },
+  "35": {
+    "courseware": "Courseware anchor for slide 35: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 35: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 35: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 35: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 35: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 35: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 35 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 35 must reconcile notation with the courseware diagram."
+  },
+  "36": {
+    "courseware": "Courseware anchor for slide 36: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 36: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 36: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 36: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 36: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 36: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 36 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 36 must reconcile notation with the courseware diagram."
+  },
+  "37": {
+    "courseware": "Courseware anchor for slide 37: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 37: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 37: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 37: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 37: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 37: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 37 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 37 must reconcile notation with the courseware diagram."
+  },
+  "38": {
+    "courseware": "Courseware anchor for slide 38: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 38: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 38: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 38: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 38: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 38: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 38 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 38 must reconcile notation with the courseware diagram."
+  },
+  "39": {
+    "courseware": "Courseware anchor for slide 39: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 39: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 39: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 39: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 39: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 39: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 39 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 39 must reconcile notation with the courseware diagram."
+  },
+  "40": {
+    "courseware": "Courseware anchor for slide 40: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 40: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 40: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 40: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 40: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 40: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 40 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 40 must reconcile notation with the courseware diagram."
+  },
+
+
+  "41": {
+    "courseware": "Courseware anchor for slide 41: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 41: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 41: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 41: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 41: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 41: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 41 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 41 must reconcile notation with the courseware diagram."
+  },
+  "42": {
+    "courseware": "Courseware anchor for slide 42: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 42: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 42: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 42: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 42: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 42: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 42 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 42 must reconcile notation with the courseware diagram."
+  },
+  "43": {
+    "courseware": "Courseware anchor for slide 43: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 43: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 43: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 43: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 43: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 43: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 43 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 43 must reconcile notation with the courseware diagram."
+  },
+  "44": {
+    "courseware": "Courseware anchor for slide 44: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 44: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 44: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 44: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 44: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 44: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 44 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 44 must reconcile notation with the courseware diagram."
+  },
+  "45": {
+    "courseware": "Courseware anchor for slide 45: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 45: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 45: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 45: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 45: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 45: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 45 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 45 must reconcile notation with the courseware diagram."
+  },
+  "46": {
+    "courseware": "Courseware anchor for slide 46: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 46: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 46: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 46: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 46: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 46: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 46 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 46 must reconcile notation with the courseware diagram."
+  },
+  "47": {
+    "courseware": "Courseware anchor for slide 47: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 47: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 47: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 47: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 47: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 47: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 47 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 47 must reconcile notation with the courseware diagram."
+  },
+  "48": {
+    "courseware": "Courseware anchor for slide 48: periodic-and-complex; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 48: connect the periodic-and-complex definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 48: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 48: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 48: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 48: from x(t+T)=x(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 48 self-check: write the definition, one equation using x(t+T)=x(t), its units and one control implementation caveat.",
+    "formulas": "x(t+T)=x(t); slide 48 must reconcile notation with the courseware diagram."
+  },
+  "49": {
+    "courseware": "Courseware anchor for slide 49: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 49: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 49: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 49: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 49: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 49: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 49 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 49 must reconcile notation with the courseware diagram."
+  },
+  "50": {
+    "courseware": "Courseware anchor for slide 50: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 50: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 50: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 50: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 50: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 50: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 50 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 50 must reconcile notation with the courseware diagram."
+  },
+  "51": {
+    "courseware": "Courseware anchor for slide 51: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 51: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 51: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 51: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 51: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 51: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 51 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 51 must reconcile notation with the courseware diagram."
+  },
+  "52": {
+    "courseware": "Courseware anchor for slide 52: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 52: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 52: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 52: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 52: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 52: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 52 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 52 must reconcile notation with the courseware diagram."
+  },
+  "53": {
+    "courseware": "Courseware anchor for slide 53: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 53: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 53: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 53: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 53: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 53: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 53 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 53 must reconcile notation with the courseware diagram."
+  },
+  "54": {
+    "courseware": "Courseware anchor for slide 54: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 54: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 54: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 54: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 54: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 54: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 54 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 54 must reconcile notation with the courseware diagram."
+  },
+  "55": {
+    "courseware": "Courseware anchor for slide 55: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 55: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 55: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 55: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 55: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 55: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 55 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 55 must reconcile notation with the courseware diagram."
+  },
+  "56": {
+    "courseware": "Courseware anchor for slide 56: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 56: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 56: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 56: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 56: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 56: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 56 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 56 must reconcile notation with the courseware diagram."
+  },
+  "57": {
+    "courseware": "Courseware anchor for slide 57: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 57: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 57: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 57: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 57: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 57: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 57 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 57 must reconcile notation with the courseware diagram."
+  },
+  "58": {
+    "courseware": "Courseware anchor for slide 58: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 58: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 58: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 58: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 58: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 58: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 58 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 58 must reconcile notation with the courseware diagram."
+  },
+  "59": {
+    "courseware": "Courseware anchor for slide 59: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 59: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 59: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 59: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 59: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 59: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 59 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 59 must reconcile notation with the courseware diagram."
+  },
+  "60": {
+    "courseware": "Courseware anchor for slide 60: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 60: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 60: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 60: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 60: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 60: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 60 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 60 must reconcile notation with the courseware diagram."
+  },
+
+
+  "61": {
+    "courseware": "Courseware anchor for slide 61: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 61: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 61: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 61: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 61: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 61: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 61 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 61 must reconcile notation with the courseware diagram."
+  },
+  "62": {
+    "courseware": "Courseware anchor for slide 62: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 62: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 62: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 62: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 62: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 62: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 62 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 62 must reconcile notation with the courseware diagram."
+  },
+  "63": {
+    "courseware": "Courseware anchor for slide 63: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 63: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 63: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 63: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 63: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 63: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 63 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 63 must reconcile notation with the courseware diagram."
+  },
+  "64": {
+    "courseware": "Courseware anchor for slide 64: complex-signal; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 64: connect the complex-signal definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 64: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 64: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 64: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 64: from e^{j omega t}, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 64 self-check: write the definition, one equation using e^{j omega t}, its units and one control implementation caveat.",
+    "formulas": "e^{j omega t}; slide 64 must reconcile notation with the courseware diagram."
+  },
+  "65": {
+    "courseware": "Courseware anchor for slide 65: impulse-and-step; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 65: connect the impulse-and-step definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 65: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 65: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 65: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 65: from delta(t), u(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 65 self-check: write the definition, one equation using delta(t), u(t), its units and one control implementation caveat.",
+    "formulas": "delta(t), u(t); slide 65 must reconcile notation with the courseware diagram."
+  },
+  "66": {
+    "courseware": "Courseware anchor for slide 66: impulse-and-step; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 66: connect the impulse-and-step definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 66: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 66: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 66: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 66: from delta(t), u(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 66 self-check: write the definition, one equation using delta(t), u(t), its units and one control implementation caveat.",
+    "formulas": "delta(t), u(t); slide 66 must reconcile notation with the courseware diagram."
+  },
+  "67": {
+    "courseware": "Courseware anchor for slide 67: impulse-and-step; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 67: connect the impulse-and-step definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 67: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 67: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 67: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 67: from delta(t), u(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 67 self-check: write the definition, one equation using delta(t), u(t), its units and one control implementation caveat.",
+    "formulas": "delta(t), u(t); slide 67 must reconcile notation with the courseware diagram."
+  },
+  "68": {
+    "courseware": "Courseware anchor for slide 68: impulse-and-step; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 68: connect the impulse-and-step definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 68: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 68: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 68: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 68: from delta(t), u(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 68 self-check: write the definition, one equation using delta(t), u(t), its units and one control implementation caveat.",
+    "formulas": "delta(t), u(t); slide 68 must reconcile notation with the courseware diagram."
+  },
+  "69": {
+    "courseware": "Courseware anchor for slide 69: impulse-and-step; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 69: connect the impulse-and-step definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 69: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 69: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 69: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 69: from delta(t), u(t), predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 69 self-check: write the definition, one equation using delta(t), u(t), its units and one control implementation caveat.",
+    "formulas": "delta(t), u(t); slide 69 must reconcile notation with the courseware diagram."
+  },
+  "70": {
+    "courseware": "Courseware anchor for slide 70: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 70: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 70: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 70: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 70: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 70: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 70 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 70 must reconcile notation with the courseware diagram."
+  },
+  "71": {
+    "courseware": "Courseware anchor for slide 71: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 71: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 71: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 71: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 71: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 71: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 71 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 71 must reconcile notation with the courseware diagram."
+  },
+  "72": {
+    "courseware": "Courseware anchor for slide 72: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 72: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 72: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 72: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 72: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 72: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 72 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 72 must reconcile notation with the courseware diagram."
+  },
+  "73": {
+    "courseware": "Courseware anchor for slide 73: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 73: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 73: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 73: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 73: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 73: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 73 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 73 must reconcile notation with the courseware diagram."
+  },
+  "74": {
+    "courseware": "Courseware anchor for slide 74: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 74: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 74: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 74: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 74: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 74: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 74 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 74 must reconcile notation with the courseware diagram."
+  },
+  "75": {
+    "courseware": "Courseware anchor for slide 75: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 75: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 75: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 75: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 75: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 75: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 75 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 75 must reconcile notation with the courseware diagram."
+  },
+  "76": {
+    "courseware": "Courseware anchor for slide 76: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 76: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 76: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 76: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 76: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 76: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 76 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 76 must reconcile notation with the courseware diagram."
+  },
+  "77": {
+    "courseware": "Courseware anchor for slide 77: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 77: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 77: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 77: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 77: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 77: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 77 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 77 must reconcile notation with the courseware diagram."
+  },
+  "78": {
+    "courseware": "Courseware anchor for slide 78: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 78: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 78: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 78: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 78: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 78: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 78 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 78 must reconcile notation with the courseware diagram."
+  },
+  "79": {
+    "courseware": "Courseware anchor for slide 79: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 79: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 79: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 79: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 79: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 79: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 79 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 79 must reconcile notation with the courseware diagram."
+  },
+  "80": {
+    "courseware": "Courseware anchor for slide 80: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 80: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 80: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 80: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 80: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 80: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 80 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 80 must reconcile notation with the courseware diagram."
+  },
+
+
+  "81": {
+    "courseware": "Courseware anchor for slide 81: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 81: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 81: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 81: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 81: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 81: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 81 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 81 must reconcile notation with the courseware diagram."
+  },
+  "82": {
+    "courseware": "Courseware anchor for slide 82: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 82: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 82: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 82: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 82: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 82: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 82 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 82 must reconcile notation with the courseware diagram."
+  },
+  "83": {
+    "courseware": "Courseware anchor for slide 83: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 83: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 83: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 83: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 83: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 83: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 83 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 83 must reconcile notation with the courseware diagram."
+  },
+  "84": {
+    "courseware": "Courseware anchor for slide 84: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 84: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 84: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 84: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 84: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 84: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 84 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 84 must reconcile notation with the courseware diagram."
+  },
+  "85": {
+    "courseware": "Courseware anchor for slide 85: system-properties; identify the signal, independent variable, units and page conclusion.",
+    "progression": "Learning progression at slide 85: connect the system-properties definition to the next transformation or system property.",
+    "supplement": "Engineering supplement for slide 85: state assumptions, units, support, initial condition and what the page does not determine.",
+    "control": "Control connection for slide 85: map the page object to reference r, output y, disturbance d, measurement and sampled value.",
+    "advanced": "Advanced check for slide 85: test scaling, time reversal, delay, noise, sampling and model-boundary sensitivity.",
+    "inference": "Inference for slide 85: from y=g*x, predict one measurable consequence and one failure mode before calculating.",
+    "self_check": "Slide 85 self-check: write the definition, one equation using y=g*x, its units and one control implementation caveat.",
+    "formulas": "y=g*x; slide 85 must reconcile notation with the courseware diagram."
+  }
+
+}

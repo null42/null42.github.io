@@ -1,3 +1,5 @@
+import { ungzip } from 'pako'
+
 /**
  * 私密阅读器浏览器端控制器（v2 三层解密架构）
  *
@@ -39,7 +41,7 @@ export interface PrivateReaderLifecycle {
 	/** 解密 Book 字段（toc title，用 bookKey） */
 	decryptBookField: (encryptedBase64: string, key: CryptoKey) => Promise<string>
 	/** 解密段密文；命中缓存直接返回 */
-	decryptSegment: (slug: string, segmentIndex: number, ciphertextBase64: string, ivBase64: string, key: CryptoKey) => Promise<string>
+	decryptSegment: (slug: string, segmentIndex: number, ciphertextBase64: string, ivBase64: string, key: CryptoKey, compression?: 'gzip') => Promise<string>
 	/** 解密图片资源密文，返回 ArrayBuffer（用于创建 Blob URL） */
 	decryptAsset: (ciphertextBase64: string, ivBase64: string, key: CryptoKey) => Promise<ArrayBuffer>
 	/** 清除指定 slug 的段缓存（不释放密钥） */
@@ -188,7 +190,7 @@ export function initPrivateReaderLifecycle(
 		async decryptBookField(encryptedBase64, key) {
 			return lifecycle.decryptShelfField(encryptedBase64, key)
 		},
-		async decryptSegment(slug, segmentIndex, ciphertextBase64, ivBase64, key) {
+		async decryptSegment(slug, segmentIndex, ciphertextBase64, ivBase64, key, compression) {
 			const binding = bindings.get(slug)
 			if (binding) {
 				const cached = binding.segmentCache.get(segmentIndex)
@@ -198,7 +200,8 @@ export function initPrivateReaderLifecycle(
 			const ciphertext = fromBase64(ciphertextBase64, windowRef)
 			const iv = fromBase64(ivBase64, windowRef)
 			const plaintext = await cryptoRef.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext)
-			const text = new TextDecoder().decode(plaintext)
+			const decoded = compression === 'gzip' ? ungzip(new Uint8Array(plaintext)) : new Uint8Array(plaintext)
+			const text = new TextDecoder().decode(decoded)
 			if (binding) {
 				if (binding.segmentCache.size >= MAX_CACHED_SEGMENTS) {
 					const firstKey = binding.segmentCache.keys().next().value

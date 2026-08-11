@@ -1,0 +1,14 @@
+{
+  "title": "理论九：LQR控制器设计原理",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 858,
+  "chapter_slide_end": 870,
+  "completed_slide_end": 870,
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["理论七：状态反馈控制器设计", "二次型与矩阵微积分", "稳定性与Riccati方程"],
+  "learning_objectives": ["解释Q/R权重", "理解Riccati方程与K", "比较极点配置和最优控制"],
+  "control_connections": ["状态反馈", "输入约束权衡", "离散LQR", "MPC前置"],
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-09-content-overrides.json",
+  "deep_dive": "course-notes/part-2-control-theory/deep-dives/chapter-09-lqr-consistency.html",
+  "fragments": ["course-notes/part-2-control-theory/fragments/chapter-09/001-slides-858-870.fragment.html"]
+}

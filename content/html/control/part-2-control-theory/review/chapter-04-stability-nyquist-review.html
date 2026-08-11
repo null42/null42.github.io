@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>理论四：闭环稳定性与 Nyquist 推理｜章节复盘</title>
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar screen-only" aria-label="理论四复盘导航">
+    <div class="sidebar-title">理论四章节复盘</div>
+    <a class="home" href="/html-raw/control/index/">返回课程目录</a>
+    <a href="#route">三遍复习</a><a href="#map">概念地图</a><a href="#definitions">稳定定义</a>
+    <a href="#internal">内部稳定</a><a href="#argument">辐角原理</a><a href="#algorithm">判定算法</a>
+    <a href="#examples">课件算例</a><a href="#integrators">积分器边界</a><a href="#design">设计迁移</a><a href="#digital">离散迁移</a><a href="#errors">误区诊断</a><a href="#test">综合测试</a>
+  </nav>
+  <main>
+    <header class="hero">
+      <div class="eyebrow">章节复盘 · 课件第 373–415 页</div>
+      <h1>理论四：把“看 Nyquist 图”还原为闭环根计数</h1>
+      <p class="lead">复盘目标不是背一句“不要包围 −1”，而是能从稳定定义和闭环方程出发，独立处理开环不稳定、原点积分器、动态控制器和内部极零抵消。</p>
+      <p><a href="/html-raw/control/part-2-control-theory/companion/chapter-04-stability-nyquist/">返回课件伴随讲义</a> · <a href="/html-raw/control/part-2-control-theory/exercises/chapter-04-review-answers/">独立完整答案</a></p>
+    </header>
+
+    <section class="review-section" id="route">
+      <h2>一、三遍复习路线</h2>
+      <ol class="study-route">
+        <li><strong>第一遍：只抓证明链。</strong>闭环特征方程 → 特征函数零点 → 辐角原理 → P/N/Z → 稳定要求 Z=0。</li>
+        <li><strong>第二遍：逐个复算课件例题。</strong>先不看结论写出 P，再读方向和 N，最后用直接求根或 Routh 交叉验证。</li>
+        <li><strong>第三遍：迁移到设计。</strong>加入控制器零极点、纯延迟、采样计算延迟和不确定性，说明怎样保留离 −1 的安全距离。</li>
+      </ol>
+      <div class="notice"><strong>离开门槛：</strong>给你一条带箭头的 Nyquist 曲线和开环模型，你必须能写出完整判定记录，而不是只说“看起来稳定”。</div>
+    </section>
+
+    <section class="review-section" id="map">
+      <h2>二、概念地图：所有箭头最后都回到闭环极点</h2>
+      <figure class="figure"><img src="/html-assets/control/part-2-control-theory/figures/chapter-04/theory-four-review-map.svg" alt="理论四稳定性复盘地图"><figcaption>外部传递函数、内部信号、Nyquist 包围和鲁棒距离共同服务于闭环根的位置判断。</figcaption></figure>
+      <div class="review-grid">
+        <article class="review-card"><h3>分析对象</h3><p>环路函数 <code>L=KG</code> 与特征函数 <code>F=1+L</code>。前者便于测量和作图，后者的零点就是闭环极点。</p></article>
+        <article class="review-card"><h3>计数对象</h3><p><code>P</code> 数开环 L 的 RHP 极点，<code>N</code> 数对 −1 的有向净包围，<code>Z</code> 数闭环 RHP 极点。</p></article>
+        <article class="review-card"><h3>特殊边界</h3><p>虚轴极点、原点积分器和曲线穿过 −1 时，标准轮廓必须变形，等号对应临界稳定。</p></article>
+        <article class="review-card"><h3>工程目标</h3><p>不仅要求 Z=0，还要远离 −1，并验证控制量、噪声、延迟、参数漂移与未建模动态。</p></article>
+      </div>
+    </section>
+
+    <section class="review-section" id="definitions">
+      <h2>三、先把“稳定”说完整</h2>
+      <table><thead><tr><th>概念</th><th>问题</th><th>本章判据</th><th>常见误解</th></tr></thead><tbody>
+        <tr><td>BIBO 稳定</td><td>任意有界输入是否产生有界输出</td><td>因果 LTI：冲激响应绝对可积；最小有理系统全部极点在 LHP</td><td>一次阶跃没发散就算证明</td></tr>
+        <tr><td>渐近稳定</td><td>零输入内部运动是否衰减到零</td><td>有限维连续系统全部内部模态在 LHP</td><td>虚轴极点只是“慢一点”</td></tr>
+        <tr><td>内部稳定</td><td>全部外部输入到全部内部信号是否稳定</td><td>闭环互联无隐藏不稳定模态</td><td>只检查 Y/R</td></tr>
+        <tr><td>鲁棒稳定</td><td>模型变化后是否仍稳定</td><td>Nyquist 曲线在不确定性下仍保持正确包围且不碰 −1</td><td>名义 Z=0 就结束</td></tr>
+      </tbody></table>
+      <div class="derivation"><strong>BIBO 条件的关键推导</strong><ol>
+        <li>由卷积 <code>y(t)=∫g(τ)u(t−τ)dτ</code> 开始。</li>
+        <li>若输入有界，存在 C 使 <code>|u(t)|≤C</code>。</li>
+        <li>应用三角不等式，把未知输入压缩成统一上界。</li>
+        <li>若 <code>∫|g(τ)|dτ&lt;∞</code>，则输出被常数 <code>C∫|g|</code> 统一限制。</li>
+      </ol></div>
+      <div class="formula key-formula">|y(t)| ≤ ∫|g(τ)||u(t−τ)|dτ ≤ C∫|g(τ)|dτ</div>
+      <p><strong>反例：</strong>积分器 <code>G=1/s</code> 对有界阶跃产生无界斜坡。它说明“没有 RHP 极点”还不够，虚轴极点也会破坏 BIBO 稳定。</p>
+    </section>
+
+    <section class="review-section" id="internal">
+      <h2>四、闭环特征方程与内部稳定</h2>
+      <div class="equation-stack">
+        <div class="formula key-formula">L(s)=K(s)G(s)</div>
+        <div class="formula key-formula">T(s)=Y/R=L/(1+L)，S(s)=1/(1+L)，S+T=1</div>
+        <div class="formula key-formula">1+L(s)=0 ⇔ L(s)=−1</div>
+      </div>
+      <p>若 <code>K=S/R</code>、<code>G=B/A</code>，闭环分母为 <code>A(s)R(s)+B(s)S(s)</code>。反馈使对象和控制器重新耦合，闭环极点通常既不是对象极点，也不是控制器极点。</p>
+      <div class="derivation"><strong>为什么单一 Y/R 不够</strong><ol>
+        <li>在参考、输入扰动和测量噪声处分别设置独立输入。</li>
+        <li>把误差、控制量、对象输入和输出全部列为待检查内部信号。</li>
+        <li>求闭环传递矩阵；各元素通常共享 <code>1+L</code>，但分子不同。</li>
+        <li>若某一元素发生 RHP 极零抵消，其他元素或初始状态仍可能暴露该模态。</li>
+      </ol></div>
+      <div class="pitfall"><strong>危险做法：</strong>把 <code>(s−1)</code> 在某个外部通道中约掉，然后宣布系统稳定。真实器件的微小失配会让隐藏的 <code>e^t</code> 模态重新出现。</div>
+    </section>
+
+    <section class="review-section" id="argument">
+      <h2>五、辐角原理怎样变成 Nyquist 判据</h2>
+      <p>设复函数 <code>H(s)=∏(s−zᵢ)/∏(s−pᵢ)</code>。观察点沿闭合轮廓走一周，每个内部零点让 H 的总辐角增加一周，每个内部极点让总辐角减少一周；轮廓外零极点的净贡献为零。</p>
+      <div class="formula key-formula">H(C) 对原点的有向净包围 = Z − P</div>
+      <p>控制中令 <code>H=1+L</code>。H 曲线包围原点，等价于 L 曲线包围 −1；H 在 RHP 的零点就是闭环 RHP 极点。因此可用开环频响完成闭环根计数。</p>
+      <div class="derivation"><strong>本课件的符号约定</strong><ol>
+        <li>Nyquist 轮廓围住右半平面，并按课件规定方向行进。</li>
+        <li><code>P</code>：L 在 RHP 的极点数，按重数计。</li>
+        <li><code>N</code>：L(C) 对 −1 的有向净包围数；课件采用 <code>Z=N+P</code>。</li>
+        <li>闭环稳定要求 <code>Z=0</code>，故所需 N 由 P 决定。</li>
+      </ol></div>
+      <div class="notice">其他教材可能把逆时针定义为正并写成 <code>Z=P−N</code>。公式外观可以不同，但轮廓方向、N 的正号和最终计数必须整套一致。</div>
+    </section>
+
+    <section class="review-section" id="algorithm">
+      <h2>六、不会出错的 Nyquist 判定算法</h2>
+      <ol class="study-route">
+        <li><strong>写环路。</strong>明确负反馈符号，写出完整 <code>L(s)=K(s)G(s)</code>，不要漏掉传感器、延迟或控制器滤波。</li>
+        <li><strong>先数 P。</strong>在画图前确定 L 的 RHP 极点数；虚轴极点不计入 P，但要改变轮廓。</li>
+        <li><strong>处理边界。</strong>检查原点积分器、其他虚轴极点、非严格真有理项与纯延迟。</li>
+        <li><strong>画完整曲线。</strong>标注 ω 方向，用共轭对称补齐负频率，并补上无穷远弧或小圆弧映射。</li>
+        <li><strong>数 N。</strong>按本课件约定统计 −1 的有向净包围，不以“是否穿过负实轴”代替包围。</li>
+        <li><strong>算 Z。</strong>使用 <code>Z=N+P</code>；只有 Z=0 且曲线不穿过 −1 才是严格稳定。</li>
+        <li><strong>交叉验证。</strong>低阶系统用直接求根或 Routh；最后再检查裕度、控制量和不确定性。</li>
+      </ol>
+      <p><strong>建议使用固定判定记录表：</strong>在草稿纸上依次写“反馈符号、L(s)、RHP 极点 P、虚轴极点、正频率起点、ω→∞ 终点、共轭镜像、特殊连接弧、N 的正方向、净包围 N、Z、临界参数、复核方法”。只要其中一项空白，就暂时不要给出稳定结论。这个记录表尤其能防止把正频率局部曲线误当完整 Nyquist 轮廓。</p>
+      <p>若参数 K 连续变化，N 只能在曲线穿过 −1 时改变。可先解 <code>Im L(jω)=0</code> 找负实轴候选频率，再由 <code>K|G(jω)|=1</code> 求临界 K，并检查穿越方向。这样得到的是精确稳定边界，而不是从低分辨率图上估读。</p>
+    </section>
+
+    <section class="review-section" id="examples">
+      <h2>七、三个课件算例串起来</h2>
+      <div class="review-grid">
+        <article class="review-card"><h3>例 1：开环稳定</h3><p><code>G=1/(s+1)²</code>、<code>K=1</code>。P=0、N=0，所以 Z=0。直接求根得 <code>s=−1±j</code>。</p><p><strong>要点：</strong>不包围 −1 只有在 P=0 时才直接意味着稳定。</p></article>
+        <article class="review-card"><h3>例 2：两个 RHP 极点</h3><p><code>G=0.4(s+0.9)/(s²−0.9s+0.6)</code>，P=2。K=1 时 N=0、Z=2；课件给出稳定区 <code>K&gt;2.3</code>，此时 N=−2。</p><p><strong>要点：</strong>反馈稳定化要求非零包围，降低增益并不一定更安全。</p></article>
+        <article class="review-card"><h3>例 3：一个 RHP 极点</h3><p><code>G=1.5/(s−1)</code>，闭环极点 <code>1−1.5K</code>，故稳定要求 <code>K&gt;2/3</code>。K=1 时 N=−1、P=1、Z=0；K=1/2 时 Z=1。</p><p><strong>要点：</strong>Nyquist 与直接求根必须给出同一结论。</p></article>
+        <article class="review-card"><h3>参数扫描技巧</h3><p>对正实常数 K，画 G 绕 <code>−1/K</code> 等价于画 KG 绕 −1；动态控制器必须整体并入 L，不能把 <code>−1/K(s)</code> 当固定点。</p></article>
+      </div>
+    </section>
+
+    <section class="review-section" id="integrators">
+      <h2>八、积分器为何必须画小圆弧</h2>
+      <p>若 <code>L(s)=B(s)/[s^qA(s)]</code>，虚轴轮廓会经过 s=0 的极点。应在右半平面用半径 r 的小半圆绕开，并令 <code>r→0</code>。</p>
+      <div class="formula key-formula">s=re^{jθ} ⇒ L(s)≈γr^{−q}e^{−jqθ}，γ=B(0)/A(0)</div>
+      <ul><li>r 趋于零时，映射半径趋于无穷大。</li><li>相角变化被 q 倍放大；q&gt;1 时可能形成多重无穷远半圆。</li><li>γ 的符号会额外旋转 180°。</li><li>该弧可能贡献包围数，因此不能从最终图中删除。</li></ul>
+      <p><strong>课件例题：</strong><code>G=1/[s(s+1)²]</code> 的闭环特征式为 <code>s³+2s²+s+K</code>。Nyquist 与 Routh 都得到严格稳定区 <code>0&lt;K&lt;2</code>。</p>
+    </section>
+
+    <section class="review-section" id="design">
+      <h2>九、从稳定判据迁移到数字控制设计</h2>
+      <table><thead><tr><th>工程因素</th><th>Nyquist 上的表现</th><th>验收动作</th></tr></thead><tbody>
+        <tr><td>比例增益变化</td><td>近似径向缩放曲线</td><td>扫描稳定区与最小 −1 距离</td></tr>
+        <tr><td>超前/滞后或 PI</td><td>同时改变幅值和相位，重塑整条曲线</td><td>使用完整 K(s)G(s)，不能只移动临界点</td></tr>
+        <tr><td>纯延迟与计算延迟</td><td>幅值近似不变，相位随频率持续下降</td><td>把 <code>e^{−sT}</code> 或离散延迟显式纳入环路</td></tr>
+        <tr><td>采样与保持</td><td>增加相位滞后并改变高频模型</td><td>在离散域单位圆或等效频响上重新验证</td></tr>
+        <tr><td>模型不确定性</td><td>Nyquist 曲线形成一族可能轨迹</td><td>要求所有轨迹保持正确包围且不触碰 −1</td></tr>
+        <tr><td>饱和与限幅</td><td>线性 Nyquist 不再完整描述闭环</td><td>加入抗积分饱和与非线性时域测试</td></tr>
+      </tbody></table>
+      <p>稳定设计的最终交付不是一张图，而是一份证据链：名义 P/N/Z 正确、参数最坏情况仍稳定、裕度满足要求、控制量不饱和、噪声不过度放大、采样和计算延迟已计入。</p>
+    </section>
+
+    <section class="review-section" id="digital">
+      <h2>十、连续 Nyquist 怎样迁移到离散系统</h2>
+      <p>连续系统稳定区域是开左半平面，Nyquist 轮廓包围开右半平面；离散系统稳定区域是单位圆内部，因此要统计闭环特征函数在单位圆外的零点。离散频率响应沿 <code>z=e^{jΩ}</code> 的单位圆取得，<code>Ω</code> 只需遍历一个 <code>2π</code> 周期。</p>
+      <div class="equation-stack">
+        <div class="formula key-formula">连续：Re(s)&lt;0；离散：|z|&lt;1</div>
+        <div class="formula key-formula">z=e^{sT}：左半平面映到单位圆内部，虚轴映到单位圆</div>
+        <div class="formula key-formula">离散闭环特征方程仍为 1+L(z)=0</div>
+      </div>
+      <div class="derivation"><strong>部署时不能遗漏的变化</strong><ol>
+        <li>先由连续对象和零阶保持得到脉冲传递函数，而不是只把 s 替换为差分算子。</li>
+        <li>把一拍或多拍计算延迟写成 <code>z^{-d}</code>；它在单位圆上贡献相位 <code>−dΩ</code>。</li>
+        <li>使用离散控制器的真实系数、滤波器和采样周期形成 <code>L(z)</code>。</li>
+        <li>数单位圆外开环极点与对 −1 的包围，再检查闭环根是否全部位于单位圆内。</li>
+        <li>最后在量化、饱和和采样抖动下复验，因为这些因素不属于线性 Nyquist 模型。</li>
+      </ol></div>
+      <p><strong>关键直觉：</strong>连续域中“增加一点延迟”会旋转 Nyquist 曲线；离散域中的整数拍延迟同样只改单位圆频响相位，但相位下降与归一化频率 Ω 成正比。采样越慢，同一物理频率对应的 Ω 越大，留给控制器的相位预算越少。</p>
+    </section>
+
+    <section class="review-section" id="errors">
+      <h2>十一、十个常见误区与纠正动作</h2>
+      <table><thead><tr><th>误区</th><th>为什么错</th><th>纠正动作</th></tr></thead><tbody>
+        <tr><td>不包围 −1 就稳定</td><td>只在 P=0 时可能成立</td><td>先数 P，再由 Z=N+P 判定</td></tr>
+        <tr><td>曲线不穿过 −1 就稳定</td><td>不穿过只排除了边界，不能给出净包围</td><td>沿完整曲线数 N</td></tr>
+        <tr><td>只画 ω≥0</td><td>缺失共轭镜像和完整轮廓</td><td>补齐负频率并标方向</td></tr>
+        <tr><td>原点积分器不算 P，所以可忽略</td><td>轮廓经过极点，映射弧可能贡献 N</td><td>用小圆弧绕开并推导映射</td></tr>
+        <tr><td>把动态 K(s) 当常数 K</td><td>动态控制器会改变相位和曲线形状</td><td>画完整 L=KG</td></tr>
+        <tr><td>某个 Y/R 约分后稳定</td><td>可能隐藏内部 RHP 模态</td><td>检查闭环传递矩阵和最小实现</td></tr>
+        <tr><td>稳定就代表设计成功</td><td>可能裕度极小、控制饱和或噪声巨大</td><td>继续检查距离、带宽和内部信号</td></tr>
+        <tr><td>增益越小越安全</td><td>开环不稳定对象可能需要最小稳定化增益</td><td>求完整稳定区间</td></tr>
+        <tr><td>连续控制器稳定，离散实现必稳定</td><td>采样、保持和计算延迟改变环路</td><td>重建 L(z) 并在单位圆复验</td></tr>
+        <tr><td>软件图就是证明</td><td>软件不会替你声明 P、方向和边界约定</td><td>保留手工判定记录并交叉验证</td></tr>
+      </tbody></table>
+      <p>真正熟练的表现不是画图更快，而是遇到非标准对象时能立即识别哪条快捷规则失效，并退回特征方程、轮廓和根计数。</p>
+    </section>
+
+    <section class="review-section" id="integration-layer"><h2>本章整体优化：理论四接口与诊断</h2><p><strong>主线：</strong>Nyquist 判据的本质是围绕 -1 的净绕数与开环 RHP 极点数共同决定闭环 RHP 极点数；图形直觉必须还原为根计数。</p><div class="derivation"><h3>最小完整算例</h3><p>先列开环 RHP 极点数 P，再沿统一方向计算绕数 N，按所采用的符号约定得到 Z；只有 Z=0 才能宣称闭环无 RHP 极点。</p></div><div class="notice"><strong>失败诊断：</strong>遇到原点积分器、虚轴极点或轨迹穿越 -1，不能套普通图形口诀；必须处理小圆弧、边界稳定和参数扰动后的实际闭环。</div></section><section class="review-section" id="completion-gap-layer"><h2>稳定判据的比较与选择</h2><table><thead><tr><th>方法</th><th>直接信息</th><th>主要边界</th></tr></thead><tbody><tr><td>Routh</td><td>多项式 RHP 根数与参数区间</td><td>不直接显示频率裕度；延迟需近似</td></tr><tr><td>根轨迹</td><td>增益变化下闭环极点路径</td><td>多参数和纯延迟处理不自然</td></tr><tr><td>Nyquist</td><td>由开环频率轨迹计算闭环 RHP 根数</td><td>必须统一绕行方向并处理虚轴极点</td></tr><tr><td>Bode 裕度</td><td>交越附近的相对稳定性和带宽</td><td>多交越、开环不稳定时不能替代完整 Nyquist</td></tr></tbody></table><p>选择顺序不是“哪张图更熟”，而是先看模型形式和问题：参数多项式用 Routh，单增益极点移动用根轨迹，延迟和开环不稳定用 Nyquist，工程裕度整形用 Bode，并以闭环极点或 Nyquist 作最终确认。</p></section><section class="review-section final-test" id="test">
+      <h2>十二、A–D 综合测试</h2>
+      <section data-level="A"><h3>A 级｜概念与符号</h3><ol>
+        <li>从单位负反馈节点方程推导 <code>Y/R=L/(1+L)</code> 和特征方程。</li>
+        <li>区分 BIBO、渐近、内部和鲁棒稳定。</li>
+        <li>在本课件约定下解释 P、N、Z，并写出稳定条件。</li>
+      </ol></section>
+      <section data-level="B"><h3>B 级｜标准计算</h3><ol>
+        <li>对 <code>G=1/(s+1)²</code>、K=1 完成 Nyquist 与直接求根双重判定。</li>
+        <li>若对象 Nyquist 在负实轴交于 −0.25，求临界正增益并说明等号状态。</li>
+        <li>推导 <code>G=1.5/(s−1)</code> 的稳定增益区，并写出 K=1/2 与 K=1 的 P/N/Z。</li>
+      </ol></section>
+      <section data-level="C"><h3>C 级｜边界与反例</h3><ol>
+        <li>构造外部 Y/R 看似稳定、内部仍含 RHP 模态的抵消例子。</li>
+        <li>推导 q 阶积分器小圆弧的幅值和角度映射。</li>
+        <li>解释为何动态 PI 控制器不能用固定 −1/K 点代替完整环路曲线。</li>
+      </ol></section>
+      <section data-level="D"><h3>D 级｜设计与部署</h3><ol>
+        <li>为含一个 RHP 极点、一个积分器和纯延迟的对象写完整 Nyquist 判定方案。</li>
+        <li>把连续控制器部署为数字控制器时，列出采样、保持、计算延迟、量化和饱和的稳定性复验步骤。</li>
+        <li>设计一份实验扫频安全方案，使开环不稳定对象也能获得环路频响而不失控。</li>
+      </ol></section>
+      <p><a href="/html-raw/control/part-2-control-theory/exercises/chapter-04-review-answers/">查看独立完整答案与推导</a></p>
+    </section>
+
+    <section class="gate"><h2>理论四最终能力门槛</h2><ul>
+      <li>能从稳定定义和闭环特征方程解释 −1 点，而非背诵图形口诀。</li>
+      <li>能在统一方向约定下处理 P/N/Z、RHP 开环极点和原点小圆弧。</li>
+      <li>能用直接求根或 Routh 复核低阶例题，并把结论迁移到动态控制器和数字实现。</li>
+      <li>能区分名义稳定与内部、鲁棒和工程可部署的稳定。</li>
+    </ul></section>
+  </main>
+</div></body></html>

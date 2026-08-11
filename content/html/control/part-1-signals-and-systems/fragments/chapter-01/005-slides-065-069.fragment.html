@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="/html-assets/control/part-1-signals-and-systems/companion/">
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/fragments/assets/companion.css">
+  <title>第65–69页｜信号的基本运算</title>
+</head>
+<body><main>
+<header class="hero">
+  <div class="eyebrow">第一章 · 课件第 65–69 页</div>
+  <h1>信号的基本运算：从逐点代数到边界冲激</h1>
+  <h2>前置知识</h2><p>分段函数、单位阶跃与单位冲激、乘积求导、定积分和信号的时间支集。</p>
+  <h2>学习目标</h2><p>能把相加、相乘、数乘、微分和积分写成严格的输入—输出关系；能对截断信号逐边界检查跳变量；能解释微分、积分在测量与控制中的信息作用和实现风险。</p>
+</header>
+
+<section class="slide-note" id="slide-065" data-slide="65">
+  <div class="slide-kicker">SLIDE 065 · 1.4.4 信号的运算</div>
+  <h2>第65页｜信号相加：在同一时刻汇合信息</h2>
+  <div class="source-label">[课件主线] <code>y(t)=x₁(t)+x₂(t)+x₃(t)+⋯</code>，由加法器实现。</div>
+  <p>信号相加是逐时刻的纵坐标相加：先把各信号放在同一时间轴、同一单位和同一参考方向下，再计算每个 <code>t</code> 处的代数和。它既不移动特征点，也不改变各分量的时间尺度；输出的间断点、拐点和频率成分来自各输入结构的叠加或抵消。</p>
+  <div class="formula">若 y(t)=Σᵢxᵢ(t)，则在任意 t₀：y(t₀)=Σᵢxᵢ(t₀)</div>
+  <p><strong>画图步骤：</strong>先收集所有输入的分段边界并排序；在每个公共区间内写出各分量表达式；逐段相加；最后单独检查边界取值。不要只凭“图形上下拼接”判断，因为正负分量可能相消。</p>
+  <p class="pitfall"><strong>控制连接：</strong>误差 <code>e=r−y</code>、输入端扰动叠加、传感器噪声注入，本质上都是带符号的信号相加。求和点的正负号写错，会把负反馈直接变成正反馈。</p>
+</section>
+
+<section class="slide-note" id="slide-066" data-slide="66">
+  <div class="slide-kicker">SLIDE 066 · 相乘与数乘</div>
+  <h2>第66页｜相乘、门控与增益：不要混淆两类乘法</h2>
+  <div class="source-label">[课件主线] 相乘 <code>y(t)=x₁(t)x₂(t)</code>；数乘 <code>y(t)=a x(t)</code>。</div>
+  <p><strong>信号相乘</strong>仍是逐点运算，但一个信号会随时间改变另一个信号的幅值。当 <code>x₂(t)</code> 是矩形窗时，相乘等于截取；当它是正弦时，相乘产生调制与频谱搬移；当它是随时间变化的权重时，相乘表示增益调度。</p>
+  <p><strong>数乘</strong>中的 <code>a</code> 与时间无关，只改变纵轴尺度：<code>|a|&gt;1</code> 放大，<code>0&lt;|a|&lt;1</code> 衰减，<code>a&lt;0</code> 还会关于时间轴翻转。它不改变支集、周期和特征点横坐标；若 <code>a=0</code>，所有结构被压为零信号。</p>
+  <div class="formula">门控：x(t)[u(t−t₁)−u(t−t₂)] 只保留 t₁≤t&lt;t₂ 的部分</div>
+  <p class="pitfall">“乘以 −1”是幅值反号，不是时间反折。前者为 <code>−x(t)</code>，后者为 <code>x(−t)</code>；两者作用在不同坐标轴上。</p>
+</section>
+
+<section class="slide-note" id="slide-067" data-slide="67">
+  <div class="slide-kicker">SLIDE 067 · 微分与积分</div>
+  <h2>第67页｜微分看变化，积分看累积</h2>
+  <div class="source-label">[课件主线] 微分器 <code>y(t)=dx(t)/dt</code>；积分器 <code>y(t)=∫₋∞ᵗx(τ)dτ</code>。</div>
+  <p>微分抑制常值部分并突出斜率、突变和高频细节；积分把瞬时输入累积成状态或面积，平滑快速波动并保留历史。两者在理想条件下互逆，但初始条件不能被忽略：对导数积分只能恢复到 <code>x(t)−x(−∞)</code>，对积分求导则在足够正则时恢复输入。</p>
+  <p>对连续分段光滑信号，区间内部按普通微积分求导；若在 <code>t=tₖ</code> 有跳变量 <code>Δxₖ=x(tₖ⁺)−x(tₖ⁻)</code>，分布导数必须补上 <code>Δxₖδ(t−tₖ)</code>。</p>
+  <div class="formula">Dx = x′<sub>ordinary</sub>(t) + Σₖ[x(tₖ⁺)−x(tₖ⁻)]δ(t−tₖ)</div>
+  <p><strong>统一做法：</strong>先找全部边界；算每个边界左右极限；写跳变量；再算各开区间内的普通导数。这个次序比直接对阶跃表达式机械求导更不容易漏项。</p>
+  <p class="pitfall">微分器会把高频测量噪声放大，积分器会累积偏置并可能产生积分饱和。数字控制器中的 D、I 环节都必须结合滤波、限幅和抗饱和策略。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-01/signal-operations-chain.svg" alt="信号代数运算、微分和积分的关系图">
+</section>
+
+<section class="slide-note" id="slide-068" data-slide="68">
+  <div class="slide-kicker">SLIDE 068 · 例题：有限正弦求导</div>
+  <h2>第68页｜有限时长正弦的导数：边界冲激为何恰好消失</h2>
+  <div class="source-label">[课件例题] <code>x(t)=sin t·[u(t)−u(t−π)]</code>。</div>
+  <p>该信号在 <code>0&lt;t&lt;π</code> 等于 <code>sin t</code>，区间外为零。按乘积求导：</p>
+  <div class="formula">x′(t)=cos t[u(t)−u(t−π)] + sin t[δ(t)−δ(t−π)]</div>
+  <p>利用筛选性质 <code>f(t)δ(t−t₀)=f(t₀)δ(t−t₀)</code>，两个边界系数分别为 <code>sin0=0</code> 与 <code>−sinπ=0</code>，所以冲激项为零。最终得到区间内的余弦段，区间外为零。</p>
+  <div class="formula">x′(t)=cos t[u(t)−u(t−π)]</div>
+  <p>从跳变量法看更直接：原信号在 0 和 π 两端都从 0 连续接入/离开，跳变量均为零，因此没有边界冲激；但导数本身在边界会发生有限跳变。</p>
+  <p class="pitfall">结论不是“截断信号求导没有冲激”，而是“只有当被截断波形在边界取值为零时，边界冲激系数才为零”。若改为 <code>cos t[u(t)−u(t−π)]</code>，两端都会出现非零冲激。</p>
+</section>
+
+<section class="slide-note" id="slide-069" data-slide="69">
+  <div class="slide-kicker">SLIDE 069 · 例题：有限正弦积分</div>
+  <h2>第69页｜有限时长正弦的积分：输入结束后记忆仍保留</h2>
+  <div class="source-label">[课件例题] <code>y(t)=∫₋∞ᵗx(τ)dτ</code>，其中 <code>x(t)=sin t</code> 仅在 <code>0&lt;t&lt;π</code> 非零。</div>
+  <p>积分上限跨过不同边界时，实际参与积分的区间不同，因此必须分三段讨论。<code>t≤0</code> 时尚未进入非零区，输出为 0；<code>0&lt;t&lt;π</code> 时累积到当前时刻；<code>t≥π</code> 时输入已经结束，但总面积被永久保留。</p>
+  <div class="formula">y(t)=0 (t≤0)；1−cos t (0&lt;t&lt;π)；2 (t≥π)</div>
+  <p>三段在 <code>t=0,π</code> 处连续，并满足 <code>y′(t)=x(t)</code>。末值 2 正是半个正弦波的面积：<code>∫₀^π sinτdτ=2</code>。这说明积分器是有记忆系统，零输入之后输出不必回到零。</p>
+  <p><strong>控制连接：</strong>积分控制用历史误差推动稳态误差归零；但若执行器饱和而误差仍被累积，积分状态会越积越大，形成 windup。理解本页“输入结束、累积仍在”就是理解抗积分饱和的起点。</p>
+</section>
+
+<section class="deepening" id="deepening">
+  <h2>运算统一检查表</h2>
+  <ol>
+    <li>代数运算先统一时间轴、单位和正方向，再逐点计算。</li>
+    <li>乘窗会引入新边界；凡有边界，微分前都要计算跳变量。</li>
+    <li>微分结果由“区间内普通导数 + 边界冲激”组成；积分结果按上限跨越的边界分段。</li>
+    <li>最后做互验：积分结果求导应回到原信号，导数结果积分应恢复原信号及相应初值。</li>
+  </ol>
+</section>
+
+<section class="exercise-block" id="exercises">
+  <div class="eyebrow">A–D 级练习</div>
+  <h2>第65–69页练习</h2>
+  <p>完成后打开<a href="/html-raw/control/part-1-signals-and-systems/fragments/exercises/chapter-01-slides-065-069-answers/">独立答案页</a>，核对边界冲激、特征点迁移和控制实现含义。</p>
+  <section data-level="A"><h3>A 级｜直接运算</h3><ol>
+    <li>已知 <code>x(t)=u(t)−u(t−2)</code>，写出 <code>2x(t)</code>、<code>−x(t)</code> 与 <code>x(t−1)</code> 的支集。</li>
+    <li>求 <code>d[u(t)−u(t−2)]/dt</code>。</li>
+    <li>求 <code>∫₋∞ᵗ[u(τ)−u(τ−2)]dτ</code> 的分段表达式。</li>
+  </ol></section>
+  <section data-level="B"><h3>B 级｜结构分析</h3><ol>
+    <li>求 <code>x(t)=cos t[u(t)−u(t−π)]</code> 的分布导数。</li>
+    <li>设 <code>y(t)=x(t)[u(t−1)−u(t−3)]</code>，说明输出的所有可能特征点来自哪里。</li>
+    <li>证明对连续分段光滑信号，跳变量公式与对阶跃表示式求导所得冲激系数一致。</li>
+  </ol></section>
+  <section data-level="C"><h3>C 级｜辨析与反例</h3><ol>
+    <li>构造一个“有限时长正弦型信号”，使其导数在两个边界都含非零冲激，并给出系数。</li>
+    <li>解释为什么理想微分器不适合直接作用于含高频测量噪声的反馈信号。</li>
+  </ol></section>
+  <section data-level="D"><h3>D 级｜控制迁移</h3><ol>
+    <li>用本节积分例题解释 PI 控制器在执行器饱和后为何会出现积分累积。</li>
+    <li>参考信号从 0 突然切换到 1 时，若对误差做理想微分，会发生什么？给出工程上的替代做法。</li>
+  </ol></section>
+</section>
+
+<section class="gate" id="exit-gate"><h2>能力门槛</h2><p>看到任意分段或加窗信号时，能够独立列出边界、跳变量、普通导数和冲激项；能够按积分上限跨越边界写出分段结果；能够把微积分运算与 D 噪声放大、I 状态累积联系起来。</p></section>
+</main></body></html>

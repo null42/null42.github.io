@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" role="img" aria-labelledby="title desc">
+  <title id="title">连续与离散周期定义对照</title>
+  <desc id="desc">连续信号周期为正实数，离散序列周期为正整数，并演示三个索引间隔后重复。</desc>
+  <rect width="1000" height="450" rx="24" fill="#fbfcfe"/>
+  <text x="250" y="45" text-anchor="middle" font-size="25" fill="#172033">连续：x(t+T)=x(t)</text>
+  <line x1="55" y1="290" x2="455" y2="290" stroke="#26364d" stroke-width="2"/>
+  <path d="M60 290 Q105 130 150 290 Q195 130 240 290 Q285 130 330 290 Q375 130 420 290" fill="none" stroke="#275dad" stroke-width="5"/>
+  <line x1="150" y1="325" x2="240" y2="325" stroke="#d46b3c" stroke-width="3"/>
+  <path d="M150 315V335M240 315V335" stroke="#d46b3c" stroke-width="3"/>
+  <text x="195" y="360" text-anchor="middle" font-size="21" fill="#8c3f1e">T₀ 可为正实数</text>
+  <text x="750" y="45" text-anchor="middle" font-size="25" fill="#172033">离散：x[n+N]=x[n]</text>
+  <line x1="545" y1="290" x2="950" y2="290" stroke="#26364d" stroke-width="2"/>
+  <g stroke="#7c51b8" stroke-width="3" fill="#7c51b8">
+    <path d="M580 290V220"/><circle cx="580" cy="220" r="6"/><path d="M625 290V160"/><circle cx="625" cy="160" r="6"/><path d="M670 290V245"/><circle cx="670" cy="245" r="6"/>
+    <path d="M715 290V220"/><circle cx="715" cy="220" r="6"/><path d="M760 290V160"/><circle cx="760" cy="160" r="6"/><path d="M805 290V245"/><circle cx="805" cy="245" r="6"/>
+    <path d="M850 290V220"/><circle cx="850" cy="220" r="6"/><path d="M895 290V160"/><circle cx="895" cy="160" r="6"/>
+  </g>
+  <g font-size="16" fill="#26364d" text-anchor="middle"><text x="580" y="315">0</text><text x="625" y="315">1</text><text x="670" y="315">2</text><text x="715" y="315">3</text><text x="760" y="315">4</text><text x="805" y="315">5</text></g>
+  <line x1="580" y1="345" x2="715" y2="345" stroke="#d46b3c" stroke-width="3"/>
+  <path d="M580 335V355M715 335V355" stroke="#d46b3c" stroke-width="3"/>
+  <text x="648" y="382" text-anchor="middle" font-size="21" fill="#8c3f1e">N₀=3 个索引间隔</text>
+  <text x="500" y="424" text-anchor="middle" font-size="18" fill="#5e6b7c">共同操作：平移后逐点完全重合；关键差别：N 必须是正整数。</text>
+</svg>

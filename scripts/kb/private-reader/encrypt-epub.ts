@@ -21,6 +21,7 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { gzipSync } from 'node:zlib'
 import { parseEpub, type EpubStructure } from './epub-parser'
 import {
   deriveKey,
@@ -55,7 +56,9 @@ export interface EpubManifest {
   shelf: {
     title: string      // base64
     author: string | null // base64 或 null
+    group: string | null
   }
+  source?: { sha256: string }
   toc: Array<{
     id: string
     title: string // bookKey 加密 base64
@@ -68,6 +71,7 @@ export interface EpubManifest {
     iv: string // base64
     bytes: number
     chapterId: string
+    compression?: 'gzip'
     href: string // spine item 的文件路径（ZIP 内完整路径，用于解析图片相对路径）
   }>
   /** 图片资源映射：key 为 ZIP 内完整路径，value 为加密信息 */
@@ -85,6 +89,9 @@ export interface EpubManifest {
 export interface EncryptEpubOptions {
   title?: string
   author?: string
+  group?: string
+  sourceHash?: string
+  compress?: boolean
   /** 共享的 gatealt（Buffer）。若不提供则随机生成（不推荐，会导致前端无法共享验证） */
   gateSalt?: Buffer
   /** 共享的 shelfSalt（Buffer）。若不提供则随机生成 */
@@ -134,6 +141,7 @@ export async function encryptEpubFile(
   // 6. Shelf 层：加密标题和作者
   const encryptedTitle = encryptField(title, shelfKey)
   const encryptedAuthor = author ? encryptField(author, shelfKey) : null
+  const encryptedGroup = options.group ? encryptField(options.group, shelfKey) : null
 
   // 7. Book 层：加密每个 spine 章节
   await fs.mkdir(outputDir, { recursive: true })
@@ -150,7 +158,10 @@ export async function encryptEpubFile(
     }
 
     const plaintext = content.toString('utf-8')
-    const { iv, ciphertext } = encryptSegment(plaintext, bookKey)
+    const compressed = options.compress ? gzipSync(Buffer.from(plaintext, 'utf8'), { level: 9 }) : null
+    const { iv, ciphertext } = compressed
+      ? encryptBuffer(compressed, bookKey)
+      : encryptSegment(plaintext, bookKey)
     const fileName = `seg-${String(i).padStart(4, '0')}.bin`
     const filePath = path.join(outputDir, fileName)
 
@@ -162,7 +173,8 @@ export async function encryptEpubFile(
       iv: iv.toString('base64'),
       bytes: ciphertext.length,
       chapterId: spineItem.id,
-      href: spineItem.href
+      href: spineItem.href,
+      ...(compressed ? { compression: 'gzip' as const } : {}),
     })
 
     // 加密对应的 TOC 标题（用 bookKey）
@@ -221,8 +233,10 @@ export async function encryptEpubFile(
     },
     shelf: {
       title: encryptedTitle,
-      author: encryptedAuthor
+      author: encryptedAuthor,
+      group: encryptedGroup,
     },
+    ...(options.sourceHash ? { source: { sha256: options.sourceHash } } : {}),
     toc: manifestToc,
     segments: manifestSegments,
     assets: manifestAssets,

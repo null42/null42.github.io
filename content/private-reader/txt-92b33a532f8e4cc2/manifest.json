@@ -1,0 +1,188 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-92b33a532f8e4cc2",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "vxWAeRK3hH6RrCcD8xbhIw=="
+  },
+  "gate": {
+    "token": "hsENazYMjdaOBWHHmU6auKLH29BaW9WD/nVyWRWZkS6+EBK9P065DfJxPZmcSYrJLlI="
+  },
+  "shelf": {
+    "title": "x6IcM1KqL/74xCNDhqoZOo/9tcXsEo41iSsQoxvIXg==",
+    "author": null,
+    "group": "3xehkgaqwrUWfCgfCJzFyLWNWwFvLgAFutNu7/qBPO4UzX7raHNZKxWLLw=="
+  },
+  "source": {
+    "sha256": "92b33a532f8e4cc292ef23aeb5a750f872d19ada5a82d99620b1d8bf38fa3bfe"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "gUYcesVPD9yBPLMCng26icR9jdD401oJrks4AF0a7s2fgsXxPUsFTejUi4ZSw2ykFWv4",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "FkMRWvDFQ77GEEIZ",
+      "bytes": 102807,
+      "charHint": 0,
+      "compression": "gzip"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "eVYsC3RNPlIdpwv6",
+      "bytes": 103160,
+      "charHint": 92794,
+      "compression": "gzip"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "Q4g4wGkBkFPPBJVh",
+      "bytes": 102488,
+      "charHint": 185560,
+      "compression": "gzip"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "zJrwxw5JkWh+8sbH",
+      "bytes": 101068,
+      "charHint": 278328,
+      "compression": "gzip"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "/628mCW2xOSHsHtN",
+      "bytes": 100809,
+      "charHint": 371090,
+      "compression": "gzip"
+    },
+    {
+      "index": 5,
+      "file": "seg-0005.bin",
+      "iv": "x0ExRp4aBnrrLhWM",
+      "bytes": 101548,
+      "charHint": 463860,
+      "compression": "gzip"
+    },
+    {
+      "index": 6,
+      "file": "seg-0006.bin",
+      "iv": "ykLW5vzfjzwSwkkX",
+      "bytes": 101008,
+      "charHint": 556637,
+      "compression": "gzip"
+    },
+    {
+      "index": 7,
+      "file": "seg-0007.bin",
+      "iv": "RAPCLjKTMOuYQT8E",
+      "bytes": 100480,
+      "charHint": 649425,
+      "compression": "gzip"
+    },
+    {
+      "index": 8,
+      "file": "seg-0008.bin",
+      "iv": "wEscgkhNmf8TIJIA",
+      "bytes": 99844,
+      "charHint": 742169,
+      "compression": "gzip"
+    },
+    {
+      "index": 9,
+      "file": "seg-0009.bin",
+      "iv": "c8giuXYab3r2b+mZ",
+      "bytes": 100085,
+      "charHint": 834955,
+      "compression": "gzip"
+    },
+    {
+      "index": 10,
+      "file": "seg-0010.bin",
+      "iv": "9QNq2a6z2SaWwcrX",
+      "bytes": 97897,
+      "charHint": 927736,
+      "compression": "gzip"
+    },
+    {
+      "index": 11,
+      "file": "seg-0011.bin",
+      "iv": "3Jh+EI9NnCnHYsE5",
+      "bytes": 100512,
+      "charHint": 1020506,
+      "compression": "gzip"
+    },
+    {
+      "index": 12,
+      "file": "seg-0012.bin",
+      "iv": "55K7xrMYD1Ju7xLT",
+      "bytes": 99379,
+      "charHint": 1113306,
+      "compression": "gzip"
+    },
+    {
+      "index": 13,
+      "file": "seg-0013.bin",
+      "iv": "9wIYf8i4xQ2aVVzF",
+      "bytes": 100023,
+      "charHint": 1206103,
+      "compression": "gzip"
+    },
+    {
+      "index": 14,
+      "file": "seg-0014.bin",
+      "iv": "dkPfl5h15ftlgmCr",
+      "bytes": 98372,
+      "charHint": 1298889,
+      "compression": "gzip"
+    },
+    {
+      "index": 15,
+      "file": "seg-0015.bin",
+      "iv": "eNCRxzTHksYTwHvu",
+      "bytes": 100749,
+      "charHint": 1391678,
+      "compression": "gzip"
+    },
+    {
+      "index": 16,
+      "file": "seg-0016.bin",
+      "iv": "Ep+x3zUzyvvq6Xsm",
+      "bytes": 101002,
+      "charHint": 1484448,
+      "compression": "gzip"
+    },
+    {
+      "index": 17,
+      "file": "seg-0017.bin",
+      "iv": "5lR2u4+PwcapVdCN",
+      "bytes": 100674,
+      "charHint": 1577233,
+      "compression": "gzip"
+    },
+    {
+      "index": 18,
+      "file": "seg-0018.bin",
+      "iv": "cZ48J4qzlZ09rbpE",
+      "bytes": 67353,
+      "charHint": 1670024,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 4329
+  }
+}

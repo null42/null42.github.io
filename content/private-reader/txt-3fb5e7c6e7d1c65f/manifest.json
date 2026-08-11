@@ -1,0 +1,37 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-3fb5e7c6e7d1c65f",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "hEeeVk1bTXSgpn8P+GhjUQ=="
+  },
+  "gate": {
+    "token": "Oncyd1nhjiQDHRXjjm0Za9WVpHI06fdYozsrmIM5Wny+STbBinISuR15xmz8cyZSXCg="
+  },
+  "shelf": {
+    "title": "Dx6DypXCXvafTKJ0PyqplTfRtEU9+0FvT7UoAtjibt6Z3PsAlQMqS2usK7d98vkaKhcBggf1LMpswGRW7M4tq0jWxblPen3ieznbJQKzdfMRAdDuaNpZQ0SNd4dXJre24xPbrxHWMDVltUa0dbTiw3/Jdh7i9L4spD4fFHyB7FiZTSEt7fIM6XrHWJbTSVVhd3jOY28+cAcpU8LLnYw1cd9z3wTCWCPF7wD2rBYZRRY2TgyhhqPvOPR+jeGx+UncgnfuOpsDtNESpHP6dUV2dYBp9knCsviGviKldGA0UE7l/fNE2+yMJNl3CRT3uWT4vvHDQnkBFtaFYyuHDoPblYr26+g=",
+    "author": null,
+    "group": "1HjNxab388yH7zmVeVjaxoEhROtzuLUKdOKhmxQO8d95mGmLbYFUfQ=="
+  },
+  "source": {
+    "sha256": "3fb5e7c6e7d1c65f54fc02b6e28498e465016d792dc0177b4ad1bff8292f13b6"
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "TF32Ot8lhXZsjoBu",
+      "bytes": 20271,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 43
+  }
+}

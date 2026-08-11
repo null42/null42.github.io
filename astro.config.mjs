@@ -33,6 +33,9 @@ if (process.env.NODE_ENV === "development") {
 export default defineConfig({
 	site: siteConfig.site_url,
 	output: "static",
+	build: {
+		inlineStylesheets: "never",
+	},
 
 	base: "/",
 	trailingSlash: "always",

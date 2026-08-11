@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>信号与系统伴随讲义｜课件第 1–18 页</title>
+  <style>
+    :root{--ink:#172033;--muted:#5e6b7c;--paper:#f4f7fb;--panel:#fff;--accent:#275dad;--course:#eaf2ff;--evolve:#eaf8f2;--supplement:#fff6dc;--control:#e9f7f3;--advanced:#f3ebff;--infer:#f1f3f6;--danger:#fff0f0;--line:#d9e1ec;--shadow:0 12px 34px #17203314}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.78 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px} code,.formula{font-family:"Cambria Math","STIX Two Math",Consolas,serif} code{background:#eef2f7;padding:.08em .35em;border-radius:5px}
+    .shell{display:grid;grid-template-columns:260px minmax(0,900px);gap:32px;max-width:1230px;margin:auto;padding:28px 24px 80px}.sidebar{position:sticky;top:18px;align-self:start;max-height:calc(100vh - 36px);overflow:auto;background:#172033;color:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+    .sidebar h2{font-size:17px;margin:0 0 12px}.sidebar a{display:block;color:#dce8ff;text-decoration:none;padding:6px 8px;border-radius:8px;font-size:14px}.sidebar a:hover{background:#ffffff18}.sidebar .group{margin:14px 0 5px;color:#91b8f2;font-size:12px;font-weight:700;letter-spacing:.08em}.sidebar .home{border-bottom:1px solid #ffffff26;padding-bottom:12px;margin-bottom:8px}
+    main{min-width:0}.hero,.slide-note,.deepening,.exercise-block,.gate{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.hero{padding:38px;margin-bottom:28px;background:linear-gradient(145deg,#fff,#f0f5ff)}
+    .eyebrow{font-size:13px;letter-spacing:.1em;color:var(--accent);font-weight:800}.hero h1{font-size:38px;line-height:1.2;margin:8px 0 14px}.hero .subtitle{color:var(--muted);font-size:19px}.meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}.meta-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.meta-card h2{font-size:17px;margin:0 0 7px}.meta-card ul{margin:0;padding-left:20px}
+    .route{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.route span{padding:7px 12px;border-radius:999px;background:#e8eef8;font-size:14px}.route span+span:before{content:"→";margin-right:12px;color:#7a8799}
+    .notice{padding:14px 16px;border-left:5px solid #d46b3c;background:#fff7ed;border-radius:8px}.slide-note{padding:30px;margin:24px 0;scroll-margin-top:20px}.slide-note h2{font-size:27px;line-height:1.35;margin:0 0 8px}.slide-kicker{color:var(--accent);font-weight:800;font-size:13px;letter-spacing:.08em}.slide-tools{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 18px;font-size:14px}.slide-tools a{background:#edf3fc;padding:5px 10px;border-radius:8px;text-decoration:none}
+    .question{font-size:20px;font-weight:700;margin:18px 0 8px}.reading{border-left:4px solid var(--accent);padding:10px 14px;background:#f7faff}.formula{font-size:20px;text-align:center;overflow-x:auto;padding:14px;margin:12px 0;border-radius:10px;background:#f5f7fa;border:1px solid #e2e7ef;white-space:nowrap}.derivation{background:#fbfcfe;border:1px dashed #bac6d6;border-radius:12px;padding:14px 18px}.derivation ol{margin:0;padding-left:22px}
+    .tag{display:inline-block;font-weight:800;font-size:13px;padding:3px 8px;border-radius:7px;margin-right:5px}.tag.course{background:var(--course);color:#17477e}.tag.evolve{background:var(--evolve);color:#27664d}.tag.supplement{background:var(--supplement);color:#795a0a}.tag.control{background:var(--control);color:#17604d}.tag.advanced{background:var(--advanced);color:#68409a}.tag.infer{background:var(--infer);color:#555f6c}.label-block{margin:12px 0}.pitfall,.check{border-radius:12px;padding:14px 16px;margin:14px 0}.pitfall{background:var(--danger);border-left:4px solid #c74d4d}.check{background:#edf8f1;border-left:4px solid #39874b}.check summary{font-weight:800;cursor:pointer}.check ol{margin-bottom:0}
+    table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}th,td{border:1px solid #d8e0ea;padding:9px 10px;text-align:left}th{background:#edf3fb}.figure{margin:18px auto;text-align:center}.figure img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:#fff}.caption{font-size:14px;color:var(--muted);margin-top:6px}.deepening,.exercise-block,.gate{padding:32px;margin:28px 0}.deepening h2,.exercise-block h2,.gate h2{font-size:29px;margin-top:0}.exercise-block{border-top:6px solid var(--accent)}.level{margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:14px}.level h3{margin-top:0}.level-a{border-left:6px solid #39874b}.level-b{border-left:6px solid #275dad}.level-c{border-left:6px solid #7c51b8}.level-d{border-left:6px solid #d46b3c}.level li{margin:9px 0}.knowledge{font-size:13px;color:var(--muted)}.gate{background:#172033;color:white}.gate a{color:#bcd5ff}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}.compact{margin-top:4px;margin-bottom:4px}.screen-only{display:block}
+    @media(max-width:880px){.shell{display:block;padding:12px}.sidebar{position:relative;max-height:none;margin-bottom:16px}.hero{padding:25px}.hero h1{font-size:31px}.meta-grid,.two-col{grid-template-columns:1fr}.slide-note,.deepening,.exercise-block,.gate{padding:22px}.formula{font-size:17px}.route span+span:before{display:none}}
+    @media print{body{background:#fff;font-size:11pt}.shell{display:block;max-width:none;padding:0}.sidebar,.screen-only{display:none!important}.hero,.slide-note,.deepening,.exercise-block,.gate{box-shadow:none;border:1px solid #bbb;border-radius:0;break-inside:auto;margin:0 0 10mm;padding:8mm}.slide-note h2{font-size:18pt}.hero h1{font-size:24pt}.figure,.formula,.derivation,.pitfall,.check,table{break-inside:avoid}.gate{background:#fff;color:#000}.level{break-inside:avoid}a{color:#000;text-decoration:none}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar screen-only" aria-label="页面导航">
+    <div class="home"><a href="/html-raw/control/index/">← 返回课程入口</a><a href="/html-assets/control/part-1-signals-and-systems/source-maps/0001-slides-001-018.md">逐页来源地图</a><a href="/html-raw/control/part-1-signals-and-systems/exercises/0001-slides-001-018-answers/">独立完整答案</a></div>
+    <div class="group">起点</div><a href="#overview">本页段说明</a>
+    <div class="group">基本概念与分类</div><a href="#slide-001">001 封面</a><a href="#slide-002">002 信号与系统</a><a href="#slide-003">003 RC 电路信号</a><a href="#slide-004">004 确定与随机</a><a href="#slide-005">005 周期与非周期</a><a href="#slide-006">006 奇信号与偶信号</a>
+    <div class="group">能量、时间与变换</div><a href="#slide-007">007 能量与功率</a><a href="#slide-008">008 复指数例题</a><a href="#slide-009">009 连续与离散</a><a href="#slide-010">010 连续时移</a><a href="#slide-011">011 离散时移</a><a href="#slide-012">012 时间反转</a><a href="#slide-013">013 尺度变换</a>
+    <div class="group">综合例题与周期</div><a href="#slide-014">014 x(t+1)</a><a href="#slide-015">015 x(−t+1)</a><a href="#slide-016">016 x(3t/2)</a><a href="#slide-017">017 x(3t/2+1)</a><a href="#slide-018">018 连续周期定义</a>
+    <div class="group">页段收束</div><a href="#deepening">连续推导</a><a href="#exercises">分层练习</a><a href="#exit-gate">离开门槛</a>
+  </nav>
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">第一部分 · 信号与系统深度强化 · 伴随讲义 0001</div>
+      <h1>课件第 1–18 页：先学会“看见信号”</h1>
+      <p class="subtitle">这不是脱离课件的概览，而是一份按页面顺序定位、补齐推导并帮助听课做笔记的伴随讲义。</p>
+      <div class="route"><span>信号与系统</span><span>控制理论</span><span>数字控制器实战</span><span>先进控制</span></div>
+      <div class="meta-grid">
+        <section class="meta-card"><h2>对应课件</h2><p class="compact">《信号与系统（深度强化版）》第 1–18 页</p><p class="compact">高清页预览由 PowerPoint COM 本地导出。</p></section>
+        <section class="meta-card"><h2>前置知识</h2><ul><li>函数、自变量与定义域</li><li>绝对值、复数模、积分与求和</li><li>坐标轴和分段波形的基本阅读</li></ul></section>
+        <section class="meta-card"><h2>学习目标</h2><ul><li>按定义独立分类常见信号</li><li>完整计算信号能量与平均功率</li><li>用特征点方程绘制 <code>x(at+b)</code></li><li>严格区分周期与基本周期</li></ul></section>
+        <section class="meta-card"><h2>控制连接</h2><ul><li>传感器把物理量编码为信号</li><li>数字控制以离散时间序列为输入</li><li>时间尺度对应系统动态快慢</li><li>平方积分将连接后续性能指标</li></ul></section>
+      </div>
+      <h2>知识主线与阅读顺序</h2>
+      <p>先回答“信号和系统是什么”，再建立确定/随机、周期/非周期、奇/偶、能量/功率、连续/离散等分类坐标；随后学习时移、反转、尺度变换，并用课件例 1.1 把它们统一为内部自变量映射；第 18 页以连续周期信号的严格定义收束。</p>
+      <div class="notice"><strong>来源边界：</strong>页面直接内容标为 <span class="tag course">[课件]</span>，连续页面可确认的演进标为 <span class="tag evolve">[页面演进]</span>，补齐数学步骤标为 <span class="tag supplement">[必要补充]</span>。<span class="tag control">[控制连接]</span>、<span class="tag advanced">[拔高]</span> 与 <span class="tag infer">[推断]</span> 均不得冒充授课者原意。</div>
+    </header>
+
+    <section class="slide-note" id="slide-001" data-slide="1">
+      <div class="slide-kicker">SLIDE 001 · 章节入口</div><h2>课件第 1 页｜第一章：信号与系统</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-001.png">查看本页高清预览</a><a href="#slide-002">下一页：基本概念 →</a></div>
+      <p class="question">这一页解决什么问题？</p>
+      <p><span class="tag course">[课件]</span>本页只有章节标题。它的作用不是传递公式，而是划定研究对象：后续控制理论里出现的输入、输出、误差、扰动、状态和控制量，都先以“信号”的形式进入数学描述；把这些信号联系起来的规律，就是“系统”。</p>
+      <div class="label-block"><span class="tag infer">[推断]</span>没有录音，无法恢复授课者在封面处的课程导入。本讲义只根据后续页面给出可核验的学习主线，不虚构口头内容。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>“信号与系统”为什么排在控制理论之前？</li><li>如果控制器看不到真实温度，只看到传感器电压，它处理的是物理对象本身还是信号？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-002" data-slide="2">
+      <div class="slide-kicker">SLIDE 002 · 信号、时域、频域、系统</div><h2>课件第 2 页｜先区分对象、观察方式与变换者</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-002.png">查看本页高清预览</a></div>
+      <p class="question">页面定位</p><p>这页建立全章词汇：<strong>信号</strong>是携带信息的变化量，<strong>时域/频域</strong>是观察信号的两种坐标，<strong>系统</strong>则对信号施加变换或运算。</p>
+      <p class="reading"><strong>读图顺序：</strong>先读“信号”的定义，再对比时域与频域关注的量，最后读系统定义。不要把“频域”误认为另一种物理信号；它通常是同一信号的另一种表示。</p>
+      <div class="two-col"><div><p><span class="tag course">[课件]</span><strong>时域</strong>以时间为自变量，关注波形、幅度、相位、重复周期以及变化快慢。</p></div><div><p><span class="tag course">[课件]</span><strong>频域</strong>以频率为自变量，观察频谱并研究信号由哪些变化快慢的成分组成。</p></div></div>
+      <div class="derivation"><strong>把一句话写成数学对象：</strong><ol><li>自变量：<code>t</code>、空间位置 <code>r</code>、频率 <code>ω</code> 等；</li><li>函数值：电压、温度、位移、像素亮度等；</li><li>信号表示：<code>x(t)</code> 不是“x 乘 t”，而是函数在时刻 <code>t</code> 的值；</li><li>系统表示可补写为 <code>y=𝒮{x}</code>：输入 <code>x</code> 经规则 <code>𝒮</code> 得输出 <code>y</code>。</li></ol></div>
+      <p><span class="tag supplement">[必要补充]</span>“信号”与“函数”并非完全同义：函数是数学表示，信号还带着物理含义、单位、测量方式与噪声背景。后续做控制器时，忘记单位和采样方式会比算错一个代数步骤更危险。</p>
+      <p><span class="tag control">[控制连接]</span>闭环控制可先抽象为：参考信号 <code>r</code> 与反馈信号 <code>y</code> 形成误差 <code>e=r-y</code>，控制器把 <code>e</code> 变成控制信号 <code>u</code>。这条链上每个对象首先都是信号。</p>
+      <div class="pitfall"><strong>易错点：</strong>“系统可大可小”意味着系统边界由研究目的决定。同一个电路可整体视为系统，也可把其中某一级单独视为系统；边界变化后输入和输出也会变化。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>幅值、相位、周期属于时域观察还是频域观察？</li><li>频谱是新物理量，还是同一信号的另一种表示？</li><li>给出一个你熟悉的系统，并明确它的输入和输出。</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-003" data-slide="3">
+      <div class="slide-kicker">SLIDE 003 · RC 电路实例</div><h2>课件第 3 页｜为什么电容电压可以作为信号？</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-003.png">查看本页高清预览</a></div>
+      <p class="reading"><strong>读图顺序：</strong>先辨认输入 <code>x(t)</code>、电阻 R、电容 C 和电压极性，再看右侧 <code>u_c(t)</code> 曲线。横轴是时间，纵轴是电容电压。</p>
+      <p><span class="tag course">[课件]</span>页面明确指出“电容器上的电压可以作为信号”。原因是它是一个随时间变化、可测量并携带电路状态信息的物理量。</p>
+      <div class="derivation"><strong>从物理对象到数学信号：</strong><ol><li>物理对象：电容两端的电势差；</li><li>测量约定：页面给出上正下负的参考极性；</li><li>自变量：时间 <code>t</code>；</li><li>函数值：<code>u_c(t)</code>，单位通常为 V；</li><li>图形：每个时刻的电压值在坐标系中形成曲线。</li></ol></div>
+      <p><span class="tag supplement">[必要补充]</span>右侧曲线看起来像充电响应，但课件没有给出输入类型、初始电压、R 和 C 数值，因此本页不能推出唯一的 <code>u_c(t)</code> 解析式。讲义只保留“电压可作为信号”的结论。</p>
+      <p><span class="tag control">[控制连接]</span><code>u_c(t)</code> 可以是被控输出、内部状态或反馈量。若以后用 ADC 读取它，数字控制器实际看到的是 <code>u_c[n]=u_c(nT_s)</code> 的数值近似，而不是连续曲线本身。</p>
+      <div class="pitfall"><strong>易错点：</strong>图上的正方向和电路标出的电压极性共同决定符号。只看“电压大小”而忽略参考方向，会在建模时把反馈符号写反。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>本页曲线能否证明输入一定是阶跃？为什么？</li><li>如果把电压极性反过来，新的信号与原 <code>u_c(t)</code> 有什么关系？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-004" data-slide="4">
+      <div class="slide-kicker">SLIDE 004 · 第一种分类轴</div><h2>课件第 4 页｜确定性信号与随机信号</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-004.png">查看本页高清预览</a></div>
+      <p class="question">分类问题</p><p>给定自变量后，信号值能否由一条确定规则唯一给出？</p>
+      <table><thead><tr><th>类别</th><th>定义核心</th><th>课件例子</th><th>不要混淆</th></tr></thead><tbody><tr><td>确定性信号</td><td>可表示为确定的时间函数</td><td>正弦、指数、各种周期信号</td><td>“不知道参数”不等于随机</td></tr><tr><td>随机信号</td><td>给定时刻的取值不能由确定函数唯一预报</td><td>页面未列具体波形</td><td>单次样本仍会画成一条确定曲线</td></tr></tbody></table>
+      <p><span class="tag course">[课件]</span>页面按“信号与时间的函数关系”分类，强调随机信号在每个确定时刻的取值具有不确定性。</p>
+      <p><span class="tag supplement">[必要补充]</span>随机信号通常要用概率分布、均值、方差、相关函数等统计量描述。一次测得的噪声记录称为一个样本实现；记录本身已经发生，当然是一串确定数值，但生成它的机制仍是随机的。</p>
+      <div class="pitfall"><strong>反例辨析：</strong><code>x(t)=A sin(ωt)</code> 中 A 暂时未知，仍可把它视为参数化确定性模型；只有把 A 建模为随机变量后，才得到随机过程。分类取决于模型，不取决于学习者“会不会算”。</div>
+      <p><span class="tag control">[控制连接]</span>确定性控制模型常把未建模部分、传感器噪声和外部扰动分别处理。把随机噪声硬当作确定波形精确抵消，通常会导致控制器追噪。</p>
+      <details class="check"><summary>即时检查</summary><ol><li>每天固定公式生成的参考轨迹属于哪类？</li><li>一段已经记录下来的噪声数据为何仍可来自随机信号？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-005" data-slide="5">
+      <div class="slide-kicker">SLIDE 005 · 第二种分类轴</div><h2>课件第 5 页｜周期信号与非周期信号</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-005.png">查看本页高清预览</a></div>
+      <p class="question">最可靠的判据</p><p>把信号沿自变量轴平移一个正量后，是否对整个定义域逐点完全重合？若能，最小的正平移量是什么？</p>
+      <div class="formula">连续：x(t+T)=x(t)　　离散：x[n+N]=x[n]</div>
+      <p><span class="tag course">[课件]</span>连续信号的周期 <code>T</code> 可为正实数；离散序列的周期 <code>N</code> 必须为正整数。课件图中的离散序列经过三个采样间隔重新出现，因此标出 <code>N₀=3</code>。</p>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0001/periodicity-comparison.svg" alt="连续和离散周期定义对照图"><figcaption class="caption">重绘：相同的“平移重合”思想，不同的周期取值域。</figcaption></figure>
+      <p><span class="tag supplement">[必要补充]</span>课件公式写 <code>m=0,1,2,...</code>。若对一个正周期成立，则向左平移的负整数倍也成立，因此标准表述常写 <code>m∈ℤ</code>。这不是改变课件结论，而是补齐对称性。</p>
+      <div class="derivation"><strong>如何找基本周期：</strong><ol><li>先找任意一个使信号完全重合的正平移量；</li><li>继续检查是否存在更小的正平移量；</li><li>若存在最小正值，连续信号记为 <code>T₀</code>，离散信号记为 <code>N₀</code>；</li><li>只看两个峰之间距离不够，必须保证所有细节都重合。</li></ol></div>
+      <div class="pitfall"><strong>易错点：</strong>“一个周期里有三个点”容易让人误数点数。周期是索引差：一个样值在 <code>n</code> 处出现，同样的样值结构在 <code>n+3</code> 处再次出现，所以 <code>N₀=3</code>。</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>N=2.5</code> 能否作为普通离散序列的周期？</li><li>若 <code>T</code> 是周期，<code>2T</code> 是否一定也是周期？它是否一定是基本周期？</li><li>只比较峰值位置为何可能误判周期？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-006" data-slide="6">
+      <div class="slide-kicker">SLIDE 006 · 第三种分类轴</div><h2>课件第 6 页｜奇信号与偶信号</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-006.png">查看本页高清预览</a></div>
+      <p class="reading"><strong>读图顺序：</strong>先把横坐标取反，得到 <code>x(-t)</code> 或 <code>x[-n]</code>；再比较它与原信号是相同还是相反。几何语言分别是关于纵轴对称、关于原点对称。</p>
+      <div class="two-col"><div><h3>奇信号</h3><div class="formula">x(t)=−x(−t)<br>x[n]=−x[−n]</div><p>若零点有定义，则代入零点得 <code>x(0)=−x(0)</code>，所以 <code>x(0)=0</code>。</p></div><div><h3>偶信号</h3><div class="formula">x(t)=x(−t)<br>x[n]=x[−n]</div><p>关于纵轴镜像后不变；零点幅值没有必须为零的要求。</p></div></div>
+      <p><span class="tag course">[课件]</span>页面并列给出连续与离散形式，并用原点对称的直线和纵轴对称的矩形示意。</p>
+      <p><span class="tag supplement">[必要补充]</span>奇偶性要求定义域关于零点对称。若信号只在 <code>t≥0</code> 定义，不能在原定义域上直接判断它是奇还是偶，除非先规定如何扩展到负半轴。</p>
+      <p><span class="tag advanced">[拔高]</span>任意适当定义的信号可写为 <code>x=x_e+x_o</code>，其中 <code>x_e(t)=[x(t)+x(−t)]/2</code>，<code>x_o(t)=[x(t)−x(−t)]/2</code>。这里只建立方向感，正式使用留到后续分析。</p>
+      <div class="pitfall"><strong>易错点：</strong>时间反转 <code>x(−t)</code> 与幅值取负 <code>−x(t)</code> 是两种完全不同的操作；奇信号只是二者恰好相等。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>非零常数信号是奇还是偶？</li><li><code>sin t</code> 与 <code>cos t</code> 分别具有什么奇偶性？</li><li>一个只定义在正时间轴的信号能否直接判奇偶？</li></ol></details>
+    </section>
+    <section class="slide-note" id="slide-007" data-slide="7">
+      <div class="slide-kicker">SLIDE 007 · 第四种分类轴</div><h2>课件第 7 页｜能量信号与功率信号</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-007.png">查看本页高清预览</a></div>
+      <p class="question">为什么先平方，再积分或平均？</p><p>信号值可能正负抵消，而平方模始终非负。课件先借 1Ω 电阻上的功率建立直觉，再把平方积分/求和抽象为信号能量和平均功率。</p>
+      <p><span class="tag course">[课件]</span>若 <code>x(t)</code> 表示 1Ω 电阻上的电压或电流，瞬时功率可写为 <code>p(t)=|x(t)|²</code>。在有限区间 <code>[t₁,t₂]</code> 上：</p>
+      <div class="formula">E = ∫<sub>t₁</sub><sup>t₂</sup>|x(t)|²dt　　P = 1/(t₂−t₁) ∫<sub>t₁</sub><sup>t₂</sup>|x(t)|²dt</div>
+      <p>扩展到全时间轴，课件采用对称窗口：</p>
+      <div class="formula">E<sub>∞</sub> = lim<sub>T→∞</sub>∫<sub>−T</sub><sup>T</sup>|x(t)|²dt　　P<sub>∞</sub> = lim<sub>T→∞</sub> 1/(2T) ∫<sub>−T</sub><sup>T</sup>|x(t)|²dt</div>
+      <table><thead><tr><th>类别</th><th>判据</th><th>另一个量</th></tr></thead><tbody><tr><td>非零能量信号</td><td><code>0&lt;E∞&lt;∞</code></td><td><code>P∞=0</code></td></tr><tr><td>非零功率信号</td><td><code>0&lt;P∞&lt;∞</code></td><td><code>E∞=∞</code></td></tr></tbody></table>
+      <div class="derivation"><strong>有限能量为什么推出平均功率为零？</strong><ol><li>设全时域能量 <code>E∞</code> 存在且有限；</li><li>任意有限 T 下，<code>0≤∫<sub>−T</sub><sup>T</sup>|x(t)|²dt≤E∞</code>；</li><li>同时除以 <code>2T&gt;0</code>：<code>0≤(1/2T)∫|x|²dt≤E∞/(2T)</code>；</li><li>当 <code>T→∞</code>，右端趋于 0，由夹逼定理得到 <code>P∞=0</code>。</li></ol></div>
+      <p><span class="tag supplement">[必要补充]</span>离散情形完全平行：<code>E=Σ|x[n]|²</code>，<code>P=lim<sub>N→∞</sub>(1/(2N+1))Σ<sub>n=−N</sub><sup>N</sup>|x[n]|²</code>。有限能量同样由夹逼法推出平均功率为零。</p>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0001/energy-power-classification.svg" alt="能量信号和功率信号分类图"><figcaption class="caption">分类必须允许零信号边界和“两者皆非”的信号。</figcaption></figure>
+      <p><span class="tag course">[课件]</span>页面特别注明此处“没有焦耳或者瓦特量纲”。只有在明确的电压/电流和电阻模型下，数学量才对应真实能量或功率单位。</p>
+      <p><span class="tag control">[控制连接]</span>后续控制设计常用 <code>∫e²(t)dt</code> 衡量误差，但是否采用平方、是否加权、积分到何时，都是设计选择，不能把本页定义直接等同于某个控制指标。</p>
+      <div class="pitfall"><strong>逻辑方向：</strong><code>E&lt;∞ ⇒ P=0</code>，但 <code>P=0</code> 不保证 <code>E&lt;∞</code>。此外，平均功率极限可能不存在，或为无穷；这些信号不能强塞进两类。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>有限时宽、有限幅值脉冲通常是哪一类？</li><li>非零常数信号的能量和平均功率分别是什么？</li><li>为什么不能直接用 <code>∫x(t)dt</code> 定义能量？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-008" data-slide="8">
+      <div class="slide-kicker">SLIDE 008 · 定义立即落地</div><h2>课件第 8 页｜复指数序列为什么是功率信号？</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-008.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>例题给定 <code>x[n]=e<sup>jω₀n</sup></code>，要求判断它是能量信号还是功率信号。</p>
+      <div class="derivation"><strong>完整复算：</strong><ol><li>由欧拉公式，<code>x[n]=cos(ω₀n)+j sin(ω₀n)</code>；</li><li>平方模 <code>|x[n]|²=cos²(ω₀n)+sin²(ω₀n)=1</code>；</li><li>总能量 <code>E=Σ<sub>n=−∞</sub><sup>∞</sup>1=∞</code>；</li><li>对称窗口内有 <code>2N+1</code> 项，因此 <code>P=lim (1/(2N+1))(2N+1)=1</code>；</li><li>结论：<code>0&lt;P=1&lt;∞</code> 且 <code>E=∞</code>，所以是功率信号。</li></ol></div>
+      <p class="reading"><strong>直觉：</strong>点 <code>e<sup>jω₀n</sup></code> 在复平面单位圆上随 n 旋转。相位一直变化，但离原点的距离始终为 1，所以每个样本对平方和贡献同样的 1。</p>
+      <p><span class="tag evolve">[页面演进]</span>第 7 页给出分类定义，第 8 页故意选一个“永不衰减、但也不增长”的序列，使能量随观察长度无限累积，而单位样本平均贡献保持有限。</p>
+      <div class="pitfall"><strong>易错点：</strong><code>|e<sup>jθ</sup>|=1</code>，不是 <code>|cos θ|=1</code>。若只取实部 <code>cos(ω₀n)</code>，瞬时平方不恒为 1，虽然在常见非退化情形下平均功率仍可计算为 1/2。</div>
+      <p><span class="tag advanced">[拔高]</span>本页只判断能量/功率，不讨论该离散复指数是否周期。周期性需要额外满足 <code>ω₀/(2π)</code> 为有理数，课件将在第 22–23 页附近正式展开。</p>
+      <details class="check"><summary>即时检查</summary><ol><li>若改为 <code>2e<sup>jω₀n</sup></code>，平均功率是多少？</li><li>若序列只在 <code>0≤n≤10</code> 非零，它还是功率信号吗？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-009" data-slide="9">
+      <div class="slide-kicker">SLIDE 009 · 自变量的取值集合</div><h2>课件第 9 页｜连续时间与离散时间，不是连续幅值与离散幅值</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-009.png">查看本页高清预览</a></div>
+      <p class="question">分类到底看什么？</p><p>只看自变量在哪里有定义。连续时间信号对连续的 t 取值有定义；离散时间信号只对一组离散索引有定义。</p>
+      <table><thead><tr><th>对象</th><th>记号</th><th>定义域</th><th>幅值</th></tr></thead><tbody><tr><td>连续时间信号</td><td><code>x(t)</code></td><td>某个连续区间或实轴</td><td>可连续，也可只取少数值</td></tr><tr><td>离散时间信号</td><td><code>x[n]</code></td><td>整数或整数子集</td><td>可连续取值，也可量化</td></tr></tbody></table>
+      <p><span class="tag course">[课件]</span>页面特别说明，本书不是按自变量或幅值是否连续来做混合分类，而是按自变量取值。图中连续曲线对应 <code>x(t)</code>，茎状图对应 <code>x[n]</code>。</p>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0001/continuous-vs-discrete.svg" alt="连续时间和离散时间信号对照图"><figcaption class="caption">离散序列不因绘图时用线段连接就变成连续时间信号。</figcaption></figure>
+      <p><span class="tag supplement">[必要补充]</span>若离散序列由连续信号等间隔采样得到，可写 <code>x[n]=x_c(nT_s)</code>。这里 <code>n</code> 无量纲，<code>T_s</code> 的单位是秒，物理采样时刻是 <code>t=nT_s</code>。</p>
+      <p><span class="tag control">[控制连接]</span>数字控制器在每个采样时刻接收一个数。采样使时间离散；ADC 量化使幅值离散。二者是不同操作，采样周期和量化位数也是不同设计参数。</p>
+      <div class="pitfall"><strong>易错点：</strong>方括号 <code>x[n]</code> 是离散索引记号；它不表示闭区间，也不意味着 n 的每个值都必须在图上写出来。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>一个只取 ±1 但对所有实数 t 有定义的方波，是连续时间还是离散时间？</li><li>一个幅值为任意实数的传感器采样序列，是否仍是离散时间信号？</li><li><code>n=5</code> 对应的物理时刻是什么？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-010" data-slide="10">
+      <div class="slide-kicker">SLIDE 010 · 自变量简单变换之一</div><h2>课件第 10 页｜连续信号的时移</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-010.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>页面定义 <code>x(t−t₀)</code>：当 <code>t₀&gt;0</code> 时向右平移 <code>t₀</code>，称延时；当 <code>t₀&lt;0</code> 时向左平移 <code>|t₀|</code>，称超前。三幅图保持波形形状不变，只改变位置。</p>
+      <p class="question">为什么“减”反而右移？</p>
+      <div class="derivation"><ol><li>取原信号一个特征点，原位置记为 <code>t_i</code>；</li><li>在新信号 <code>y(t)=x(t−t₀)</code> 中，要读到原位置 <code>t_i</code>，必须满足 <code>t−t₀=t_i</code>；</li><li>解得新位置 <code>t=t_i+t₀</code>；</li><li>当 <code>t₀&gt;0</code>，每个特征点都增加同一正量，所以整体右移。</li></ol></div>
+      <table><thead><tr><th>原特征点</th><th>内部方程</th><th>新特征点</th></tr></thead><tbody><tr><td><code>t_i=−1</code></td><td><code>t−2=−1</code></td><td><code>t=1</code></td></tr><tr><td><code>t_i=0</code></td><td><code>t−2=0</code></td><td><code>t=2</code></td></tr><tr><td><code>t_i=3</code></td><td><code>t−2=3</code></td><td><code>t=5</code></td></tr></tbody></table>
+      <p><span class="tag supplement">[必要补充]</span>时移不改变幅值、不改变波形宽度，也不改变周期信号的周期；它只改变事件发生的时间位置。</p>
+      <p><span class="tag control">[控制连接]</span>纯延时会增加相位滞后，是数字控制中计算延迟、采样延迟和通信延迟的基本模型。这里先掌握波形映射，稳定性影响留到控制理论部分。</p>
+      <div class="pitfall"><strong>易错点：</strong>不要把“内部的减号”当作图形移动方向。始终问：新函数在什么时刻才能读到原来的这个特征点？</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>x(t+3)</code> 向哪边移动多少？</li><li>若原峰值在 <code>t=4</code>，<code>x(t−1.5)</code> 的峰值在哪里？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-011" data-slide="11">
+      <div class="slide-kicker">SLIDE 011 · 离散时移</div><h2>课件第 11 页｜离散序列只能按整数索引移动</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-011.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>当 <code>n₀</code> 为正整数时，<code>x[n−n₀]</code> 向右平移 <code>n₀</code> 个序号，<code>x[n+n₀]</code> 向左平移 <code>n₀</code> 个序号。页面用同一离散波形展示原序列、延时与超前。</p>
+      <div class="derivation"><strong>定位零点附近的样值：</strong><ol><li>新序列 <code>y[n]=x[n+n₀]</code> 想读到原序列的零索引样值 <code>x[0]</code>；</li><li>令内部索引 <code>n+n₀=0</code>；</li><li>得到 <code>n=−n₀</code>；</li><li>所以原来在 0 的特征样值移动到负索引，整列向左。</li></ol></div>
+      <p><span class="tag evolve">[页面演进]</span>第 10 页的特征点方程原封不动地迁移到离散域，唯一新增限制是新旧位置必须落在整数索引上。</p>
+      <p><span class="tag supplement">[必要补充]</span>若序列来自采样，右移 <code>n₀</code> 个样本对应物理延时 <code>n₀T_s</code>。同一“一个样本延时”，在 1 kHz 采样下是 1 ms，在 10 kHz 采样下是 0.1 ms。</p>
+      <div class="pitfall"><strong>易错点：</strong>普通离散序列 <code>x[n−0.5]</code> 往往没有定义，因为内部索引落在半整数上。除非另行定义插值或分数延时系统，不能照搬连续平移。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>原序列在 <code>n=−2</code> 有峰值，<code>x[n−3]</code> 的峰值在哪里？</li><li>采样周期为 0.2 ms，延时 5 个样本对应多少物理时间？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-012" data-slide="12">
+      <div class="slide-kicker">SLIDE 012 · 自变量简单变换之二</div><h2>课件第 12 页｜时间反转：横坐标取负，幅值不取负</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-012.png">查看本页高清预览</a></div>
+      <p class="reading"><strong>读图顺序：</strong>把每个点的横坐标从 <code>t_i</code> 变成 <code>−t_i</code>，函数值保持原值。连续图与离散茎状图都关于纵轴镜像。</p>
+      <div class="formula">连续：y(t)=x(−t)　　离散：y[n]=x[−n]</div>
+      <p><span class="tag course">[课件]</span>页面把时间反转描述为信号波形以纵轴为轴翻转 180°，并并列展示连续和离散例图。</p>
+      <table><thead><tr><th>原位置</th><th>反转后位置</th><th>幅值</th></tr></thead><tbody><tr><td><code>−2</code></td><td><code>2</code></td><td>不变</td></tr><tr><td><code>0</code></td><td><code>0</code></td><td>不变</td></tr><tr><td><code>1.5</code></td><td><code>−1.5</code></td><td>不变</td></tr></tbody></table>
+      <p><span class="tag supplement">[必要补充]</span>时间反转保持全时域能量。连续情形令 <code>τ=−t</code>，积分上下限随之交换，可得 <code>∫|x(−t)|²dt=∫|x(τ)|²dτ</code>；离散情形只是把求和索引一一重排。</p>
+      <div class="pitfall"><strong>三种操作必须分开：</strong><code>x(−t)</code> 是时间反转；<code>−x(t)</code> 是关于横轴的幅值反转；<code>−x(−t)</code> 同时做两者。</div>
+      <p><span class="tag control">[控制连接]</span>时间反转在实时因果控制器中通常不可直接实现，因为计算当前输出可能需要未来输入；但它在离线数据处理和理论变换中很常见。因果性将在系统性质部分正式学习。</p>
+      <details class="check"><summary>即时检查</summary><ol><li>原信号支撑在 <code>[1,4]</code>，反转后支撑在哪里？</li><li>时间反转会改变能量吗？会改变奇偶性吗？</li></ol></details>
+    </section>
+    <section class="slide-note" id="slide-013" data-slide="13">
+      <div class="slide-kicker">SLIDE 013 · 自变量简单变换之三</div><h2>课件第 13 页｜尺度变换：内部乘得越大，外部看起来越窄</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-013.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>把 <code>x(t)</code> 的 t 换成 <code>at</code>，只改变时间轴位置，不改变纵轴幅值。页面讨论正 a：<code>0&lt;a&lt;1</code> 时扩展、变化变慢；<code>a&gt;1</code> 时压缩、变化加快。</p>
+      <div class="formula">y(t)=x(at)　　原特征点 tᵢ → 新位置 tᵢ/a</div>
+      <div class="derivation"><strong>为什么是除以 a？</strong><ol><li>假设原波形在 <code>t=t_i</code> 有折点；</li><li>新波形要读到这个折点，内部自变量必须满足 <code>at=t_i</code>；</li><li>因此新折点在 <code>t=t_i/a</code>；</li><li><code>a=2</code> 时所有横坐标减半，宽度变为一半；<code>a=1/2</code> 时所有横坐标加倍，宽度变为两倍。</li></ol></div>
+      <table><thead><tr><th>新信号</th><th>关键点映射</th><th>几何结果</th><th>变化速度</th></tr></thead><tbody><tr><td><code>x(t/2)</code></td><td><code>t_i→2t_i</code></td><td>横向扩展 2 倍</td><td>变慢</td></tr><tr><td><code>x(2t)</code></td><td><code>t_i→t_i/2</code></td><td>横向压缩为 1/2</td><td>变快</td></tr></tbody></table>
+      <p><span class="tag supplement">[必要补充]</span>若 <code>a&lt;0</code>，映射 <code>t_i/a</code> 不仅改变间距，还反转特征点顺序，因此同时包含时间反转和尺度变化。课件本页的示意只画正 a。</p>
+      <p><span class="tag control">[控制连接]</span>把某系统响应的时间轴压缩，可以描述“同样形状但响应更快”；这并不自动改变稳态值。控制设计中的带宽、上升时间和采样速度都与时间尺度有关。</p>
+      <div class="pitfall"><strong>易错点：</strong>不要说“乘 2 就横向放大 2 倍”。内部自变量乘 2，外部横坐标反而除以 2。代入特征点是最可靠的防错方法。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>原脉冲支撑在 <code>[−3,5]</code>，<code>x(4t)</code> 的支撑区间是什么？</li><li><code>x(−2t)</code> 包含哪两种操作？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-014" data-slide="14">
+      <div class="slide-kicker">SLIDE 014 · 例 1.1 第一步</div><h2>课件第 14 页｜从原波形到 x(t+1)</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-014.png">查看本页高清预览</a></div>
+      <p class="reading"><strong>先读原波形：</strong>在 <code>t&lt;0</code> 为 0；从 <code>0</code> 到 <code>1</code> 高度为 1；从 <code>1</code> 到 <code>2</code> 线性下降到 0；<code>t&gt;2</code> 后为 0。三个核心特征点是 <code>(0,1)</code>、<code>(1,1)</code>、<code>(2,0)</code>。</p>
+      <p><span class="tag course">[课件]</span>例 1.1 要求画出 <code>x(t+1)</code>、<code>x(−t+1)</code>、<code>x(3t/2)</code> 和 <code>x(3t/2+1)</code>。本页先把 <code>x(t+1)</code> 解释为原信号沿时间轴左移 1。</p>
+      <table><thead><tr><th>原内部位置 u</th><th>方程 t+1=u</th><th>新位置 t</th><th>对应幅值</th></tr></thead><tbody><tr><td>0</td><td><code>t+1=0</code></td><td>−1</td><td>跳到 1</td></tr><tr><td>1</td><td><code>t+1=1</code></td><td>0</td><td>开始下降</td></tr><tr><td>2</td><td><code>t+1=2</code></td><td>1</td><td>降到 0</td></tr></tbody></table>
+      <div class="derivation"><strong>分段式交叉检查：</strong><p>原信号可写为 <code>x(u)=1</code>（<code>0≤u≤1</code>），<code>x(u)=2−u</code>（<code>1&lt;u≤2</code>），其余为 0。令 <code>u=t+1</code>，新区间依次成为 <code>−1≤t≤0</code> 和 <code>0&lt;t≤1</code>，下降段为 <code>2−(t+1)=1−t</code>。</p></div>
+      <p><span class="tag evolve">[页面演进]</span>课件先用最简单的纯平移建立例题基准；后面三页保留同一原波形，只增加反转和尺度因素。</p>
+      <details class="check"><summary>即时检查</summary><ol><li><code>x(t+1)</code> 的支撑区间是什么？</li><li>它的下降段解析式和定义区间是什么？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-015" data-slide="15">
+      <div class="slide-kicker">SLIDE 015 · 例 1.1 第二步</div><h2>课件第 15 页｜x(−t+1)：操作路径能解释，特征点方程能验算</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-015.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>页面采用路径：先由 <code>x(t)</code> 得 <code>x(−t)</code>，再把后者右移 1，得到 <code>x[−(t−1)]=x(−t+1)</code>。</p>
+      <div class="derivation"><strong>直接特征点法：</strong><ol><li>内部变量 <code>u=−t+1</code>；</li><li>原点 <code>u=0</code> 映射到 <code>t=1</code>；</li><li>原折点 <code>u=1</code> 映射到 <code>t=0</code>；</li><li>原终点 <code>u=2</code> 映射到 <code>t=−1</code>；</li><li>映射顺序 <code>1,0,−1</code> 递减，证明确实发生时间反转。</li></ol></div>
+      <table><thead><tr><th>新时间区间</th><th>内部 u 的区间</th><th>新信号</th></tr></thead><tbody><tr><td><code>−1≤t&lt;0</code></td><td><code>2≥u&gt;1</code></td><td><code>2−u=2−(−t+1)=t+1</code></td></tr><tr><td><code>0≤t≤1</code></td><td><code>1≥u≥0</code></td><td>1</td></tr><tr><td>其他</td><td>原支撑外</td><td>0</td></tr></tbody></table>
+      <p><span class="tag supplement">[必要补充]</span>“先反转再右移”是一个可用路径，但复杂表达式可能有多种等价操作顺序。方程 <code>at+b=u_i</code> 不依赖口诀，适合作为最终验算。</p>
+      <div class="pitfall"><strong>易错点：</strong>表达式里的 <code>+1</code> 不能直接机械地说“左移 1”。先把它整理成 <code>−(t−1)</code> 才能看出相对于 <code>x(−t)</code> 是右移 1；直接特征点法则无需争论顺序。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>最终支撑区间为何是 <code>[−1,1]</code>？</li><li>最终的常值段在左侧还是右侧？用映射表解释。</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-016" data-slide="16">
+      <div class="slide-kicker">SLIDE 016 · 例 1.1 第三步</div><h2>课件第 16 页｜x(3t/2)：以纵轴为基准压缩</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-016.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>因为 <code>3/2&gt;1</code>，页面把原波形横向压缩为原宽度的 <code>2/3</code>。原折点 1 和终点 2 分别映射到 <code>2/3</code> 和 <code>4/3</code>。</p>
+      <table><thead><tr><th>原内部位置 u</th><th>方程 (3/2)t=u</th><th>新位置 t</th><th>代回检查</th></tr></thead><tbody><tr><td>0</td><td><code>(3/2)t=0</code></td><td>0</td><td><code>x(0)</code></td></tr><tr><td>1</td><td><code>(3/2)t=1</code></td><td>2/3</td><td><code>x((3/2)(2/3))=x(1)</code></td></tr><tr><td>2</td><td><code>(3/2)t=2</code></td><td>4/3</td><td><code>x((3/2)(4/3))=x(2)</code></td></tr></tbody></table>
+      <div class="derivation"><strong>分段式：</strong><p><code>y(t)=1</code>，当 <code>0≤(3/2)t≤1</code>，即 <code>0≤t≤2/3</code>；下降段 <code>y(t)=2−(3/2)t</code>，当 <code>2/3&lt;t≤4/3</code>；其余为 0。</p></div>
+      <p><span class="tag supplement">[必要补充]</span>页面旁注“以纵轴为主轴进行压缩”非常关键：<code>t=0</code> 固定不动，其余横坐标按比例靠近纵轴。若波形不以零点为自然中心，仍要逐点计算，不能凭肉眼缩放。</p>
+      <p><span class="tag control">[控制连接]</span>若把一条单位阶跃响应近似写成另一条的 <code>x(3t/2)</code>，意味着相同形状在更短时间内完成；上升时间缩短为原来的 <code>2/3</code>，但最终幅值不因此改变。</p>
+      <details class="check"><summary>即时检查</summary><ol><li>新波形总宽度是多少？</li><li>下降段斜率为何从 −1 变成 −3/2？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-017" data-slide="17">
+      <div class="slide-kicker">SLIDE 017 · 例 1.1 第四步</div><h2>课件第 17 页｜x(3t/2+1)：真正需要统一方法的复合变换</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-017.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>页面把 <code>x(3t/2+1)</code> 改写为 <code>x[(3/2)(t+2/3)]</code>：先得到 <code>x(3t/2)</code>，再把该波形左移 <code>2/3</code>。页面还记录“深度基础班 6 月 5 结束位置”。</p>
+      <div class="formula">u=(3/2)t+1　⇒　t=(2/3)(u−1)</div>
+      <table><thead><tr><th>原特征位置 u</th><th>新位置 t</th><th>波形事件</th></tr></thead><tbody><tr><td>0</td><td>−2/3</td><td>从 0 跳到 1</td></tr><tr><td>1</td><td>0</td><td>开始下降</td></tr><tr><td>2</td><td>2/3</td><td>下降到 0</td></tr></tbody></table>
+      <div class="derivation"><strong>完整分段推导：</strong><ol><li>常值段要求 <code>0≤u≤1</code>，即 <code>0≤(3/2)t+1≤1</code>，解得 <code>−2/3≤t≤0</code>；</li><li>下降段要求 <code>1&lt;u≤2</code>，解得 <code>0&lt;t≤2/3</code>；</li><li>下降段值为 <code>2−u=1−(3/2)t</code>；</li><li>其余 t 下内部变量落在原支撑外，因此输出为 0。</li></ol></div>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0001/time-transform-sequence.svg" alt="例1.1时间变换特征点序列"><figcaption class="caption">重绘：五个波形的特征点均由内部方程计算，而非凭口诀搬图。</figcaption></figure>
+      <p><span class="tag evolve">[页面演进]</span>第 14–17 页不是四个互不相关的答案，而是在同一原波形上逐层加入平移、反转、尺度和复合变换。真正可迁移的技能是特征点映射。</p>
+      <div class="pitfall"><strong>典型错误：</strong>看到 <code>+1</code> 就左移 1。由于外层还有 <code>3/2</code>，相对于压缩后的信号实际左移 <code>2/3</code>；直接映射得到的支撑 <code>[−2/3,2/3]</code> 可立即揭穿错误答案。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>把 <code>t=−2/3,0,2/3</code> 代回内部变量，各得到什么？</li><li>若改为 <code>x(2t−4)</code>，原特征点 0、1、2 映射到哪里？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-018" data-slide="18">
+      <div class="slide-kicker">SLIDE 018 · 1.2.2 周期信号</div><h2>课件第 18 页｜周期存在，不等于基本周期一定存在</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0001/slide-018.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>连续时间周期信号要求 t 的定义域为整个实轴，并且各周期内波形完全相同：</p>
+      <div class="formula">x(t)=x(t+mT)，m=0,±1,±2,...　等价核心：x(t+T)=x(t)</div>
+      <p class="reading"><strong>读图顺序：</strong>任选一段波形，向左或向右移动 T 后检查所有峰、谷、拐点和零区间是否逐点重合。图中标出的 <code>T₀</code> 是能使整幅波形重合的最小正平移量。</p>
+      <div class="derivation"><strong>周期与基本周期：</strong><ol><li>若 T 是周期，则 <code>2T,3T,...</code> 也都是周期；</li><li>所有可行正周期中若存在最小值，称为基本周期 <code>T₀</code>；</li><li>“找到一个周期”只证明周期性，不能直接宣布它是基本周期；</li><li>还需排除更小正周期。</li></ol></div>
+      <p><span class="tag course">[课件]</span>页面指出常数信号的基本周期无定义。因为任意 <code>T&gt;0</code> 都使常数信号平移后不变，但正实数集合没有最小正元素。</p>
+      <p><span class="tag supplement">[必要补充]</span>因此应区分：常数信号满足周期等式，可视为周期信号；但它没有基本周期。课件末句“不满足上述条件的信号为非周期信号”中的“上述条件”应理解为不存在任何正周期，而不是“没有基本周期”。</p>
+      <p><span class="tag advanced">[拔高]</span>若 <code>ω₀≠0</code>，连续复指数 <code>e<sup>jω₀t</sup></code> 满足 <code>e<sup>jω₀(t+T)</sup>=e<sup>jω₀t</sup></code> 当且仅当 <code>ω₀T=2πk</code>。最小正周期为 <code>T₀=2π/|ω₀|</code>。这是后续例题的预告，不在本页展开多频率公共周期。</p>
+      <p><span class="tag control">[控制连接]</span>周期参考和周期扰动的设计必须明确周期；数字控制还要考虑一个连续周期内包含多少采样点。若 <code>T₀/T_s</code> 不是整数，离散样本未必在整数步后精确重复。</p>
+      <div class="pitfall"><strong>易错点：</strong>定义域不覆盖整个实轴的“截取一周期波形”本身不是严格的全时域周期信号；必须规定它如何无限重复。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>常数信号为什么满足周期等式却没有基本周期？</li><li>若 T 是周期，T/2 是否一定是周期？</li><li><code>cos(4t)</code> 的基本周期是多少？</li></ol></details>
+    </section>
+    <section class="deepening" id="deepening">
+      <div class="eyebrow">页段深化 · 把分散页面连成可推导的方法</div><h2>一、四条真正需要带走的推理链</h2>
+      <h3>1. 分类不是给信号贴一个标签，而是选择一个判据</h3>
+      <table><thead><tr><th>问题</th><th>检查对象</th><th>判据</th></tr></thead><tbody><tr><td>确定还是随机？</td><td>生成规则</td><td>给定自变量后能否由模型唯一确定</td></tr><tr><td>周期还是非周期？</td><td>平移不变性</td><td>是否存在正平移量使全定义域逐点重合</td></tr><tr><td>奇还是偶？</td><td>反转关系</td><td><code>x(−t)</code> 与 <code>x(t)</code> 或 <code>−x(t)</code> 的关系</td></tr><tr><td>能量还是功率？</td><td>平方模的总量与平均</td><td><code>E</code> 和 <code>P</code> 的极限</td></tr><tr><td>连续还是离散？</td><td>自变量集合</td><td>在连续变量还是整数索引上定义</td></tr></tbody></table>
+      <p>同一信号可以同时拥有多个分类属性。例如 <code>cos t</code> 是确定性、连续时间、周期、偶、功率信号；这些标签来自不同分类轴，并不互相排斥。</p>
+
+      <h3>2. 有限能量推出零平均功率：连续与离散是同一个夹逼结构</h3>
+      <div class="two-col"><div class="derivation"><strong>连续：</strong><p><code>0≤E_T=∫<sub>−T</sub><sup>T</sup>|x(t)|²dt≤E</code></p><p><code>0≤E_T/(2T)≤E/(2T)→0</code></p><p>所以 <code>P=0</code>。</p></div><div class="derivation"><strong>离散：</strong><p><code>0≤E_N=Σ<sub>−N</sub><sup>N</sup>|x[n]|²≤E</code></p><p><code>0≤E_N/(2N+1)≤E/(2N+1)→0</code></p><p>所以 <code>P=0</code>。</p></div></div>
+      <p class="pitfall"><strong>反向不成立：</strong>平均功率为零只说明“单位观察长度的平均平方贡献趋零”，不保证累计平方和有限。判断类别必须回到定义。</p>
+
+      <h3>3. 一般时间变换只需要一个方程</h3>
+      <div class="formula">y(t)=x(at+b)，原特征位置 u_i　⇒　at+b=u_i　⇒　t_i'=(u_i−b)/a</div>
+      <table><thead><tr><th>参数</th><th>几何作用</th><th>从映射式直接读出的结论</th></tr></thead><tbody><tr><td><code>|a|&gt;1</code></td><td>压缩</td><td>特征点间距除以 <code>|a|</code></td></tr><tr><td><code>0&lt;|a|&lt;1</code></td><td>扩展</td><td>特征点间距扩大为 <code>1/|a|</code></td></tr><tr><td><code>a&lt;0</code></td><td>反转</td><td>特征点先后次序颠倒</td></tr><tr><td><code>b≠0</code></td><td>平移</td><td>实际移动量受 a 共同影响</td></tr></tbody></table>
+      <div class="derivation"><strong>新例：<code>y(t)=x(2−3t)</code></strong><p>内部变量 <code>u=2−3t</code>，故 <code>t=(2−u)/3</code>。若原特征位置为 <code>u=0,1,2</code>，新位置依次为 <code>2/3,1/3,0</code>。点序反转，支撑从原来的 <code>[0,2]</code> 变为 <code>[0,2/3]</code>，常值段与斜坡左右次序也反转。</p></div>
+
+      <h3>4. 从连续周期到采样序列：只作控制连接，不抢跑后续课件</h3>
+      <p><span class="tag advanced">[拔高]</span>若连续周期信号的基本周期为 <code>T₀</code>，以 <code>T_s</code> 采样，样本序列要在 N 步后重复，需要 <code>NT_s=kT₀</code>（某个正整数 k）。因此 <code>T₀/T_s</code> 为有理数时才可能存在整数 N。课件第 22–23 页会正式推导离散复指数周期性，本处只为 D 级迁移题提供最小背景。</p>
+      <p><span class="tag control">[控制连接]</span>“一个连续周期有多少采样点”并不总是简单的 <code>T₀/T_s</code> 整数。数字控制设计必须同时考虑采样频率、信号频率和离散周期。</p>
+    </section>
+
+    <section class="exercise-block" id="exercises">
+      <div class="eyebrow">分层练习 · 题目与答案分离</div><h2>二、A–D 级练习</h2>
+      <p>先独立完成，再打开<a href="/html-raw/control/part-1-signals-and-systems/exercises/0001-slides-001-018-answers/">完整答案与推导</a>。每题后的灰字只说明检验点，不提示解法。</p>
+
+      <section class="level level-a" data-level="A"><h3>A 级｜定义与基本计算（6 题）</h3><ol>
+        <li id="q-a1">信号 <code>x(t)=3cos(2t)</code> 分别属于确定/随机、连续/离散、周期/非周期、奇/偶、能量/功率中的哪一类？<div class="knowledge">检验：多分类轴互不排斥。</div></li>
+        <li id="q-a2">判断“离散时间信号的幅值必须离散”是否正确，并给出反例。<div class="knowledge">检验：自变量离散与幅值量化的区别。</div></li>
+        <li id="q-a3">长度为 2、幅值为 3 的矩形脉冲 <code>x(t)=3</code>（<code>|t|≤1</code>），其他时刻为 0。求能量和平均功率。<div class="knowledge">检验：有限时宽信号。</div></li>
+        <li id="q-a4">序列 <code>x[n]=2e<sup>j0.4n</sup></code> 的总能量和平均功率是多少？<div class="knowledge">检验：第 8 页同型题。</div></li>
+        <li id="q-a5">原信号峰值在 <code>t=−1</code>，零点在 <code>t=3</code>。在 <code>x(t−2)</code> 中它们分别位于哪里？<div class="knowledge">检验：连续时移。</div></li>
+        <li id="q-a6">原序列在 <code>n=−2,0,4</code> 有三个特征样值。写出 <code>x[−n]</code> 中对应的新索引。<div class="knowledge">检验：离散时间反转。</div></li>
+      </ol></section>
+
+      <section class="level level-b" data-level="B"><h3>B 级｜多步骤课件同型题（5 题）</h3><ol>
+        <li id="q-b1">求 <code>x(t)=e<sup>−2t</sup>u(t)</code> 的能量和平均功率，其中 <code>u(t)</code> 为单位阶跃。<div class="knowledge">检验：平方、积分、分类。</div></li>
+        <li id="q-b2">原波形特征点位于 <code>t=−2,0,1,4</code>。列出 <code>x(2t−4)</code> 的完整特征点映射表，并说明是否发生反转。<div class="knowledge">检验：<code>x(at+b)</code> 方程法。</div></li>
+        <li id="q-b3">对课件例 1.1 的原信号，写出 <code>x(1−2t)</code> 的支撑区间、常值段和斜坡段解析式。<div class="knowledge">检验：反转、压缩、平移综合。</div></li>
+        <li id="q-b4">判断 <code>x(t)=2+cos(3t)</code> 是否周期，若是求基本周期；再判断其奇偶性。<div class="knowledge">检验：周期与奇偶。</div></li>
+        <li id="q-b5">采样周期 <code>T_s=0.25 ms</code>，离散序列延时 12 个样本。对应的物理延时是多少？若希望同一物理延时只占 3 个样本，应采用多大的采样周期？<div class="knowledge">检验：样本延时与物理时间。</div></li>
+      </ol></section>
+
+      <section class="level level-c" data-level="C"><h3>C 级｜综合分析与反例（3 题）</h3><ol>
+        <li id="q-c1">构造一个平均功率为 0、但总能量为无穷的离散序列，并用定义证明。<div class="knowledge">检验：有限能量结论的逆命题不成立。</div></li>
+        <li id="q-c2">设 <code>y(t)=x(at+b)</code>，原信号支撑为 <code>[L,R]</code>，其中 <code>a≠0</code>。分别给出 <code>a&gt;0</code> 和 <code>a&lt;0</code> 时新支撑区间的统一表达式。<div class="knowledge">检验：参数化映射与点序。</div></li>
+        <li id="q-c3">判断并纠正：“任何周期信号都有基本周期；常数信号只是基本周期趋近于 0。”<div class="knowledge">检验：周期存在与最小正周期。</div></li>
+      </ol></section>
+
+      <section class="level level-d" data-level="D"><h3>D 级｜采样与控制迁移（2 题）</h3><ol>
+        <li id="q-d1">连续信号 <code>x_c(t)=cos(2π·60t)</code> 分别以 <code>T_s=1/600 s</code> 和 <code>T_s=1/1000 s</code> 采样。判断所得序列是否周期；若周期，求基本离散周期 N。<div class="knowledge">检验：连续周期、采样时刻与整数重复条件。</div></li>
+        <li id="q-d2">某闭环阶跃响应可近似写为 <code>y_2(t)=y_1(2t)</code>，且二者最终值相同。若 <code>y_1</code> 的 10%–90% 上升时间为 80 ms，估计 <code>y_2</code> 的上升时间。若数字控制器采样周期仍为 10 ms，两种响应的上升阶段各约跨多少个采样间隔？讨论哪一种更需要提高采样率。<div class="knowledge">检验：时间尺度变化与数字控制采样分辨率。</div></li>
+      </ol></section>
+    </section>
+
+    <section class="gate" id="exit-gate">
+      <h2>三、离开第 1–18 页的能力门槛</h2>
+      <p>在进入课件第 19 页之前，你应当能够不看答案独立完成以下四件事：</p>
+      <ol><li>对同一信号从不同分类轴给出结论，并说明所用定义；</li><li>由平方积分/求和判断能量与平均功率，写出极限步骤；</li><li>用 <code>at+b=u_i</code> 绘制 <code>x(at+b)</code>，包括 <code>a&lt;0</code>；</li><li>区分周期、任意周期和基本周期，并解释常数信号边界。</li></ol>
+      <p>若仍不能独立完成，请依次回看 <a href="#slide-005">第 5 页</a>、<a href="#slide-007">第 7 页</a>、<a href="#slide-013">第 13 页</a>、<a href="#slide-017">第 17 页</a>和<a href="#slide-018">第 18 页</a>，再完成 B2、B3、C1、C3。</p>
+      <p><strong>状态：</strong>本样章已于 2026-07-29 通过用户验收。继续学习：<a href="/html-raw/control/part-1-signals-and-systems/companion/0002-slides-019-027/">第 19–27 页伴随讲义 →</a>。章节复盘仍等待整章完成。</p>
+    </section>
+  </main>
+</div>
+</body>
+</html>

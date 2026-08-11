@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三章第186–197页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><main><header class="hero"><div class="eyebrow">第三章 · CTFS 综合例题</div><h1>第186–197页分层练习完整答案</h1><p>每题都给出选择方法、关键推导和结果自检；建议先独立完成，再对照答案定位是波形关系、性质公式还是直流处理出了问题。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1｜周期矩形脉冲</h3><p>设一个周期内 x(t)=1（|t|&lt;T₁），其余为0，ω₀=2π/T。</p><div class="formula">a₀=2T₁/T；aₖ=sin(kω₀T₁)/(kπ)=sin(2πkT₁/T)/(πk)，k≠0</div><p>由于波形实偶，aₖ 必为实偶；这可用于检查积分中的指数符号。</p>
+<h3>A2｜常数只占直流</h3><p>常数 c 的系数为 <code>Cₖ=(c/T)∫_T e^{-jkω₀t}dt</code>。k=0 时积分为 T，所以 C₀=c；k≠0 时完整周期复指数积分为0，所以 Cₖ=0。取 c=−1/2 即得到 C₀=−1/2，其余为0。</p>
+<h3>A3｜微分性质与直流丢失</h3><div class="formula">x(t)↔aₖ ⇒ x′(t)↔jkω₀aₖ</div><p>k=0 时乘子为0，因此导数的直流系数恒为0，无法反推出 a₀。时域中任意相差常数的两个信号导数相同，这就是非唯一性的根源；必须从一个周期平均值另算 a₀。</p>
+<h3>A4｜单位周期冲激串</h3><p>令 <code>x(t)=Σₙδ(t−nT)</code>。在任一半开周期积分区间只包含一个单位冲激：</p><div class="formula">aₖ=(1/T)∫_Tδ(t)e^{-jkω₀t}dt=1/T，∀k∈Z</div></section>
+<section><h2>B 级答案</h2>
+<h3>B1｜例3.6性质法</h3><p>母脉冲 T=4、T₁=1，故 <code>a₀=1/2</code>、<code>aₖ=sin(πk/2)/(πk)</code>。时移1得到因子 <code>e^{-jkπ/2}</code>，再减常数1/2：</p><div class="formula">d₀=a₀−1/2=0</div><div class="formula">dₖ=[sin(πk/2)/(πk)]e^{-jkπ/2}，k≠0</div><p>当 k 为非零偶数时 sin(πk/2)=0；只有奇次谐波保留。原方波为实奇信号，进一步可验证 dₖ 为纯虚奇。</p>
+<h3>B2｜三角波系数</h3><p>周期4，ω₀=π/2，且 x′=g。因此对 k≠0：</p><div class="formula">eₖ=dₖ/[jk(π/2)]=2sin(πk/2)e^{-jkπ/2}/[j(kπ)²]</div><p>直流项直接积分：</p><div class="formula">e₀=(1/4)[∫₋₂⁰(−t/2)dt+∫₀²(t/2)dt]=1/2</div><p>由于三角波实偶，最终 eₖ 应可化成实偶序列；若保留复指数形式，也必须满足 e₋ₖ=eₖ*。</p>
+<h3>B3｜右移冲激串</h3><p>原冲激串系数为1/T。右移 t₀ 后：</p><div class="formula">x(t−t₀)↔(1/T)e^{-jkω₀t₀}</div><p>幅值仍为1/T，相位随 k 线性变化。这也可直接由每周期冲激位于 t=t₀ 的筛选积分得到。</p>
+<h3>B4｜双电平波形导数</h3><p>若周期内在时刻 tᵢ 发生跳变，跳变量为 Δxᵢ=x(tᵢ⁺)−x(tᵢ⁻)，则分布导数为：</p><div class="formula">x′(t)=ΣₙΣᵢΔxᵢδ(t−tᵢ−nT)</div><p>每个上升沿 Δxᵢ&gt;0 产生正冲激，每个下降沿产生负冲激。周期信号一周期跳变量代数和必须为0，否则周期末无法回到初值。</p></section>
+<section><h2>C 级答案</h2>
+<h3>C1｜矩形脉冲的两条推导路径</h3><p><strong>直接积分：</strong></p><div class="formula">Cₖ=(1/T)∫₋T₁^T₁e^{-jkω₀t}dt=sin(kω₀T₁)/(kπ)，k≠0；C₀=2T₁/T</div><p><strong>冲激串微分：</strong> 单位冲激串 s(t) 的系数为1/T。矩形波 g 的导数为 <code>q=s(t+T₁)−s(t−T₁)</code>，故：</p><div class="formula">Qₖ=(1/T)(e^{jkω₀T₁}−e^{-jkω₀T₁})=2j sin(kω₀T₁)/T</div><p>又 Qₖ=jkω₀Cₖ，于是对 k≠0 得同一 Cₖ。微分无法给 C₀，需由占空比直接得2T₁/T。两条路径共同校验了 1/T、边沿符号和直流项。</p>
+<h3>C2｜分段线性信号为何多衰减一个 k</h3><p>若 x 连续、分段线性，导数 g=x′ 为分段常值且有有限跳变。典型方波系数按 O(1/k) 衰减。由 <code>Gₖ=jkω₀Xₖ</code>，对 k≠0 有：</p><div class="formula">Xₖ=Gₖ/(jkω₀)=O(1/k²)</div><p>更一般地，每增加一阶足够良好的光滑性，频谱通常再多一个 1/k 衰减因子。若导数中含冲激或边界不连续，则需先把这些分布项计入，不能机械套用。</p>
+<h3>C3｜功率为何不能确定符号</h3><p>例3.9由奇性知 b₁ 为纯虚，由帕斯瓦尔知 <code>|b₁|=1/2</code>。模长方程在复平面给一个圆，纯虚约束把可行点限制在虚轴，两者交于 ±j/2。平方模对 b₁ 和 −b₁ 完全相同，所以功率信息不能选择符号。需额外知道某一时刻的信号正负、某条谱线相位或与参考信号的互相关。</p>
+<h3>C4｜从系数关系识别时域操作</h3><p>先由时间反转得到 <code>x(−t)↔a₋ₖ</code>；再将该信号延迟1，乘相位 <code>e^{-jkω₀}</code>。周期4时 ω₀=π/2：</p><div class="formula">e^{-jkπ/2}a₋ₖ ↔ x(−(t−1))=x(1−t)</div><p>识别复合性质时要按操作顺序写中间信号，避免把 x(1−t) 错写为 x(−t−1)。</p></section>
+<section><h2>D 级答案</h2>
+<h3>D1｜一般单极性 PWM 系数</h3><p>设周期 T、幅值 V、占空比 D，选择中心对称高电平区 <code>|t|&lt;DT/2</code>。它对应 T₁=DT/2：</p><div class="formula">a₀=VD；aₖ=V sin(πkD)/(πk)，k≠0</div><p>若脉冲中心移到 t_c，再乘 <code>e^{-jkω₀t_c}</code>。因此 DC 为 VD，纹波由 k≠0 谱线组成。双极性 ±V PWM 可写成 2 倍单极性脉冲减 V，直流和谐波据线性性质得到。</p>
+<h3>D2｜边沿变缓与 EMI</h3><p>理想跳变的导数含冲激，冲激串系数不随 k 衰减，因此需要大量高频谐波。若边沿改为有限斜率，原信号变得更光滑，导数从冲激变成有限宽脉冲，其频谱带有额外低通包络；于是原波形高次谐波更快衰减。工程上增大开关过渡时间可减小 dv/dt、di/dt 和 EMI，但会增加开关损耗，需折中。</p>
+<h3>D3｜从有限谐波估计三角纹波 RMS</h3><p>测得或估计三角纹波系数 eₖ，去除直流后按帕斯瓦尔计算：</p><div class="formula">x_ripple,rms≈[Σ_{0&lt;|k|≤N}|eₖ|²]^{1/2}</div><p>对实信号也可写为 <code>[2Σ_{k=1}^N|eₖ|²]^{1/2}</code>。随后用理论 1/k² 尾部上界估计未测谐波误差；提高 N 直到尾部功率低于容许阈值。若系数来自采样数据，还要先校正窗函数、同步误差与传感器频响。</p>
+<h3>D4｜无相位时的重构非唯一性</h3><p>谐波功率只给 |aₖ|²，任何相位改变只要保持实信号共轭对称，都可能产生不同波形而拥有相同功率谱；整体时移尤其只改变线性相位，不改变幅度。可增加以下任一信息：与同步参考的复数傅里叶系数、某个已知时刻的波形值、输入输出互谱、已知因果最小相位模型，或直接测量相位锁定后的波形。</p></section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-03-fourier-series/#slide-186">返回第三章伴随讲义第186页</a></p></main></body></html>

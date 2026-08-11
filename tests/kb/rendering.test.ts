@@ -59,7 +59,7 @@ describe('rendering fixture', () => {
     expect(normalized).not.toMatch(/^:{3,}/m)
   })
 
-  it('renders the full migration Markdown feature sample through the shared site pipeline', async () => {
+	it('renders the full migration Markdown feature sample through the shared site pipeline', async () => {
     const html = await renderEncryptedMarkdown([
       '# Migration rendering contract',
       '',
@@ -99,7 +99,13 @@ describe('rendering fixture', () => {
     expect(html).toContain('mermaid-diagram-container')
     expect(html).toContain('plantuml-diagram-container')
     expect(html).toContain('src="/control-delay-timing.svg"')
-  })
+	})
+
+	it('renders assessment explanations with Markdown and KaTeX', async () => {
+		const html = await renderEncryptedMarkdown('**Result:** $T_e = 2K_e i$')
+		expect(html).toContain('<strong>Result:</strong>')
+		expect(html).toContain('class="katex"')
+	})
 
   it('contains markdown, mermaid, svg, table, callout, and code examples', () => {
     const text = fs.readFileSync('content/playground/rendering-fixture.md', 'utf8')

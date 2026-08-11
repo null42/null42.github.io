@@ -24,6 +24,7 @@ interface ManifestSegment {
 	bytes: number
 	charHint?: number
 	chapterId?: string
+	compression?: "gzip"
 }
 
 interface ManifestTocEntry {
@@ -79,6 +80,10 @@ const bookSaltBase64 = isV2
 const verifyField = isV2
 	? (manifest.toc && manifest.toc.length > 0 ? manifest.toc[0].title : "")
 	: (manifest.title || "")
+const firstSegment = manifest.segments[0]
+const shelfSaltBase64 = isV2 ? (manifest.crypto.shelfSalt || "") : ""
+const shelfTitleField = isV2 ? (manifest.shelf?.title || "") : ""
+const firstSegmentCompression = firstSegment?.compression || ""
 ---
 
 <div
@@ -89,6 +94,11 @@ const verifyField = isV2
 	data-schema={manifest.schema}
 	data-book-salt={bookSaltBase64}
 	data-verify-field={verifyField}
+	data-first-segment-file={firstSegment?.file || ""}
+	data-first-segment-iv={firstSegment?.iv || ""}
+	data-first-segment-compression={firstSegmentCompression}
+	data-shelf-salt={shelfSaltBase64}
+	data-shelf-title={shelfTitleField}
 	data-pagefind-ignore="all"
 >
 	{/* Book 密码门：解锁前显示 */}
@@ -251,6 +261,11 @@ const verifyField = isV2
 		const schema = shell.getAttribute("data-schema") || "v1"
 		const bookSalt = shell.getAttribute("data-book-salt") || ""
 		const verifyField = shell.getAttribute("data-verify-field") || ""
+		const firstSegmentFile = shell.getAttribute("data-first-segment-file") || ""
+		const firstSegmentIv = shell.getAttribute("data-first-segment-iv") || ""
+		const firstSegmentCompression = shell.getAttribute("data-first-segment-compression") === "gzip" ? "gzip" : undefined
+		const shelfSalt = shell.getAttribute("data-shelf-salt") || ""
+		const shelfTitle = shell.getAttribute("data-shelf-title") || ""
 
 		const gateWrapper = shell.querySelector<HTMLElement>("[data-gate-wrapper]")
 		const hostWrapper = shell.querySelector<HTMLElement>("[data-host-wrapper]")
@@ -287,7 +302,19 @@ const verifyField = isV2
 				let verified = false
 				let decryptedTitle = ""
 				try {
-					decryptedTitle = await lifecycle.decryptBookField(verifyField, key)
+					if (verifyField) {
+						await lifecycle.decryptBookField(verifyField, key)
+					} else if (firstSegmentFile && firstSegmentIv) {
+						const response = await fetch(`/private-reader/${slug}/${firstSegmentFile}`)
+						if (!response.ok) throw new Error(`HTTP ${response.status}`)
+						await lifecycle.decryptSegment(slug, 0, await response.text(), firstSegmentIv, key, firstSegmentCompression)
+					} else {
+						throw new Error("Missing password verification field")
+					}
+					if (shelfTitle && shelfSalt) {
+						const shelfKey = await lifecycle.deriveShelfKey(password, shelfSalt)
+						decryptedTitle = await lifecycle.decryptShelfField(shelfTitle, shelfKey)
+					}
 					verified = true
 				} catch {
 					verified = false

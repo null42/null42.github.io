@@ -1,0 +1,32 @@
+{
+  "title": "理论三：正弦稳态响应与Bode频率分析",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 242,
+  "chapter_slide_end": 372,
+  "completed_slide_end": 372,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-03-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": [
+    "卷积、拉普拉斯变换与传递函数",
+    "复数、欧拉公式与三角函数",
+    "理论二的二阶极点和暂态指标"
+  ],
+  "learning_objectives": [
+    "由卷积推导正弦稳态响应和G(jω)",
+    "由极点零点理解幅值和相位随频率变化",
+    "用Bode图服务稳定性判断和控制器设计"
+  ],
+  "control_connections": [
+    "传感器噪声与带宽",
+    "相位裕度与闭环稳定性",
+    "频率响应辨识与环路整形"
+  ],
+  "deep_dive": "course-notes/part-2-control-theory/deep-dives/chapter-03-frequency-response.html",
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-03/001-slides-242-276.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-03/002-slides-277-289.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-03/003-slides-290-312.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-03/004-slides-313-331.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-03/005-slides-332-372.fragment.html"
+  ]
+}

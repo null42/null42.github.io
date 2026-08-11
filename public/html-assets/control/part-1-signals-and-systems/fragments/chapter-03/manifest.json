@@ -1,0 +1,45 @@
+{
+  "title": "第三章 周期信号的傅里叶级数表示",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 152,
+  "chapter_slide_end": 248,
+  "completed_slide_end": 248,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-03-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "复指数信号、周期与基波频率",
+    "LTI 卷积和冲激响应",
+    "复数的极坐标与共轭关系",
+    "定积分、无穷级数与正交思想"
+  ],
+  "learning_objectives": [
+    "证明复指数是连续和离散 LTI 系统的特征函数",
+    "从谐波复指数基建立连续傅里叶级数合成式",
+    "利用周期正交性独立推导傅里叶级数分析公式",
+    "在复指数、幅相和正弦余弦形式之间转换",
+    "计算周期矩形脉冲的傅里叶系数并解释线频谱",
+    "区分均方与逐点收敛并正确使用狄里赫利充分条件",
+    "推导连续傅里叶级数的主要性质并用对称性与帕斯瓦尔验算",
+    "在直接积分、性质迁移、微分法和系数约束反推之间选择解题路径",
+    "由有限正交性推导DTFS对并解释N个系数的精确重构",
+    "使用DTFS性质完成周期卷积、差分、功率与最小范数分析",
+    "用频率响应逐谐波预测连续与离散LTI系统输出",
+    "从时域方程推导RC、IIR与FIR滤波器并联合评估幅值、相位、稳定性和延迟"
+  ],
+  "control_connections": [
+    "把周期参考、扰动和纹波分解成可独立分析的谐波",
+    "用系统频率响应预测每个谐波的增益与相移",
+    "为谐振控制、重复控制和电能质量分析建立频域基础",
+    "理解数字控制中采样频率、谐波索引和频谱周期性",
+    "把滤波器极零点、群延迟与闭环相位裕度纳入同一设计框架"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/001-slides-152-168.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/002-slides-169-185.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/003-slides-186-197.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/004-slides-198-215.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/005-slides-216-222.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/006-slides-223-233.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-03/007-slides-234-248.fragment.html"
+  ]
+}

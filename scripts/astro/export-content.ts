@@ -6,6 +6,7 @@ import YAML from 'yaml'
 import { scanMarkdownFiles } from '../kb/articles'
 import { decideVisibility, normalizeArticle } from '../kb/domain/normalize-article'
 import { normalizeVitePressContainers } from '../kb/markdown-compat'
+import { normalizeMathDelimiters } from '../kb/markdown-rendering'
 
 export interface ExportOptions { rootDir?: string }
 export interface ExportReport {
@@ -34,6 +35,7 @@ export function normalizeMarkdown(body: string, sourcePath: string): { body: str
   let normalized = body.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '')
   normalized = normalized.replace(/\[([^\]]+)\]\(([^)]*assessment[^)]*)\)/gi, (_match, label: string) => `${label}（请使用文章下方“打开知识检验”按钮）`)
   normalized = normalizeVitePressContainers(normalized)
+  normalized = normalizeMathDelimiters(normalized)
   const sourceDir = path.posix.dirname(sourcePath.replace(/\\/g, '/'))
   normalized = normalized.replace(/(!?\[[^\]]*\]\()([^:)#][^)]*)(\))/g, (match, prefix: string, target: string, suffix: string) => {
     if (target.startsWith('/') || target.startsWith('#') || /^[a-z][a-z\d+.-]*:/i.test(target)) return match

@@ -1,0 +1,38 @@
+{
+  "title": "第五章 离散时间傅里叶变换",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 307,
+  "chapter_slide_end": 360,
+  "completed_slide_end": 360,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-05-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "DTFS有限维分析与合成",
+    "CTFT无限周期极限",
+    "无穷几何级数",
+    "复数幅相与单位圆"
+  ],
+  "learning_objectives": [
+    "从DTFS无限周期极限推导DTFT",
+    "解释离散时间频谱的2π周期性",
+    "计算右边指数、双边指数与矩形序列基本变换对",
+    "使用单位圆与ROC解释DTFT存在性和谱峰结构",
+    "由DTFS系数构造周期序列的2π周期冲激线谱",
+    "使用DTFT性质、帕斯瓦尔和卷积分析序列与系统"
+  ],
+  "control_connections": [
+    "把物理频率映射为rad/sample数字频率",
+    "由单位圆极点解释IIR模态、带宽与暂态",
+    "由矩形序列频响连接移动平均、零点与延迟",
+    "为采样混叠和数字控制频率响应建立基础",
+    "用周期线谱连接谐振控制、重复控制和I/Q同步坐标",
+    "把延迟、差分、累加、插零扩展和能量指标迁移到数字控制",
+    "由差分方程、极点和单位圆判断数字系统频率响应与稳定性"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-05/001-slides-307-317.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-05/002-slides-318-328.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-05/003-slides-329-344.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-05/004-slides-345-360.fragment.html"
+  ]
+}

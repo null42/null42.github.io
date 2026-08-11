@@ -11,7 +11,7 @@
  * - 路由不进 Sitemap/Pagefind/导航
  * - 必须在 siteConfig.pages.privateReader === true 时才生成
  */
-import MainGridLayout from "@/layouts/MainGridLayout.astro"
+import PrivateReaderLayout from "@/layouts/PrivateReaderLayout.astro"
 import PrivateReaderShell from "@/components/private-reader/PrivateReaderShell.astro"
 import { siteConfig } from "@/config"
 import fs from "node:fs"
@@ -74,6 +74,6 @@ if (manifest.schema !== "private-reader/v1" && manifest.schema !== "private-read
 }
 ---
 
-<MainGridLayout title="私密阅读" description="加密文档本地解密阅读。" noindex={true}>
+<PrivateReaderLayout title="私密阅读" description="加密文档本地解密阅读。">
 	<PrivateReaderShell manifest={manifest} />
-</MainGridLayout>
+</PrivateReaderLayout>

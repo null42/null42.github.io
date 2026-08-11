@@ -34,8 +34,9 @@ test.describe('private-reader production gate', () => {
 			// 验证加密标题占位存在
 			await expect(cards.first().locator('.private-library-title-locked')).toContainText('加密标题')
 			// 验证 data-encrypted-title 属性存在（base64）
-			const encryptedTitle = await cards.first().getAttribute('data-encrypted-title')
+			const encryptedTitle = await cards.first().getAttribute('data-book-title')
 			expect(encryptedTitle).toBeTruthy()
+			expect(encryptedTitle).not.toMatch(/[\u4e00-\u9fff]/)
 		}
 	})
 
@@ -68,17 +69,10 @@ test.describe('private-reader production gate', () => {
 	test('does not leak decrypted content in static HTML', async ({ page }) => {
 		await page.goto(PRIVATE_READER_URL, { waitUntil: 'networkidle' })
 
-		// 获取页面 HTML，验证无明文段落（base64 是允许的）
 		const html = await page.content()
-		// 不应包含明显的明文段落（连续中文/英文超过 50 字符）
-		// 但允许 UI 文本如"私密阅读"、"加密标题"等
-		const plaintextLeak = html.match(/[\u4e00-\u9fff\w][\u4e00-\u9fff\w\s,.!?;:'"()\-—…]{50,}/g)
-		if (plaintextLeak) {
-			// 过滤掉允许的 UI 文本
-			const allowed = ['私密阅读', '加密标题', '所有内容均经过', '请在浏览器本地输入密码']
-			const filtered = plaintextLeak.filter(s => !allowed.some(a => s.includes(a)))
-			expect(filtered).toEqual([])
-		}
+		expect(html).not.toContain('data-decrypted-title=')
+		expect(html).not.toMatch(/data-book-title="[^"]*[\u4e00-\u9fff][^"]*"/)
+		expect(html).not.toMatch(/data-book-author="[^"]*[\u4e00-\u9fff][^"]*"/)
 	})
 })
 

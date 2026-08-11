@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>第一章综合答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><main><header class="hero"><a href="/html-raw/control/part-1-signals-and-systems/review/chapter-01-signals-and-systems-review/">← 返回章节测试</a><h1>第一章综合测试完整答案</h1></header><section><h2>A级</h2><ol><li><code>T=2π/3</code>。</li><li>频率比5/14，周期14。</li><li><code>delta(4t+8)=delta(t+2)/4</code>。</li><li><code>x_e=(x+x反转)/2</code>，<code>x_o=(x-x反转)/2</code>。</li></ol><h2>B级</h2><ol><li><code>lcm(12,18)=36</code>。</li><li><code>delta(2t-4)=delta(t-2)/2</code>，结果3/2。</li><li><code>delta(t)-delta(t-3)</code>。</li><li>有记忆、不可逆（一般无法唯一恢复首值）、因果、稳定、时不变、线性。</li></ol><h2>C级</h2><ol><li>周期条件化为 ωN=2πm，故频率比有理；反向亦成立。</li><li><code>e^{jn}</code>。</li><li><code>y(t)=t x(t)</code>。</li><li>累加器 <code>y[n]=Σ_{k=-∞}^{n}x[k]</code>。</li></ol><h2>D级</h2><ol><li>450 Hz 关于600 Hz采样折叠为150 Hz。</li><li>微分增益随频率上升，放大高频噪声。</li><li>展开 x[n] 为移位冲激之和，再用线性和时不变性得到卷积和。</li><li>阶跃检验突变跟踪与稳态误差；斜坡检验持续变化参考的跟踪能力和系统型别。</li></ol></section><section class="answer" id="deep-worked-answers"><h2>第一章逐题完整推导</h2>
+<h3>A 级｜定义与直接计算</h3><ol>
+<li><strong>连续复指数周期。</strong>令 <code>e^{j3(t+T)}=e^{j3t}</code>，得到 <code>3T=2πk</code>。最小正整数取 <code>k=1</code>，故 <code>T₀=2π/3 s</code>。代回可见指数因子增加 <code>e^{j2π}=1</code>。</li>
+<li><strong>离散余弦周期。</strong>要求 <code>(5π/7)N=2πm</code>，即 <code>5N=14m</code>。由于 5 与 14 互素，最小正整数为 <code>N₀=14</code>。离散周期必须是整数，不能写成 <code>14/5</code>。</li>
+<li><strong>冲激尺度。</strong><code>δ(4t+8)=δ[4(t+2)]=δ(t+2)/|4|</code>。绝对值来自变量替换的雅可比；若系数为负，尺度仍取正。</li>
+<li><strong>奇偶分解。</strong><code>x_e(t)=[x(t)+x(-t)]/2</code>，<code>x_o(t)=[x(t)-x(-t)]/2</code>。相加恢复 <code>x</code>，分别代入 <code>-t</code> 可验证偶、奇性质。</li></ol>
+<h3>B 级｜组合计算与系统性质</h3><ol>
+<li><strong>公共周期。</strong><code>12=2²·3</code>，<code>18=2·3²</code>，最小公倍数为 <code>36</code>。36 是公共周期；和信号的基本周期仍需代回检查，可能是 36 的因子。</li>
+<li><strong>冲激积分。</strong><code>δ(2t-4)=δ(t-2)/2</code>，所以 <code>∫(t+1)δ(2t-4)dt=(2+1)/2=3/2</code>。先缩放再筛选可避免遗漏二分之一。</li>
+<li><strong>矩形窗导数。</strong><code>d[u(t)-u(t-3)]/dt=δ(t)-δ(t-3)</code>。上升沿产生正冲激，下降沿产生负冲激；冲激面积等于跃变量。</li>
+<li><strong><code>y[n]=x[n]+x[n-1]</code>。</strong>它线性、时不变、因果且 BIBO 稳定；依赖过去样本所以有记忆。有限记录一般无法唯一恢复边界前的输入，因此不能直接宣称稳定可逆。</li></ol>
+<h3>C 级｜证明与反例</h3><ol>
+<li><strong>周期条件。</strong><code>e^{jω₀(n+N)}=e^{jω₀n}</code> 当且仅当 <code>ω₀N=2πm</code>，即 <code>ω₀/(2π)=m/N∈Q</code>。反之若该比值为 <code>p/q</code>，取 <code>N=q</code> 即得周期。</li>
+<li><strong>单位模但非周期。</strong><code>x[n]=e^{jn}</code> 的模恒为 1，但 <code>1/(2π)</code> 不是有理数，因此不存在整数周期。</li>
+<li><strong>线性但时变。</strong><code>y(t)=t x(t)</code> 满足叠加性；对移位输入输出为 <code>t x(t-t₀)</code>，原输出移位为 <code>(t-t₀)x(t-t₀)</code>，两者不同。</li>
+<li><strong>因果但不稳定。</strong>累加器 <code>y[n]=Σ_{k=-∞}^{n}x[k]</code> 只使用现在和过去输入；对有界输入 <code>u[n]</code>，输出随 n 增长，故不满足 BIBO 稳定。</li></ol>
+<h3>D 级｜向控制系统迁移</h3><ol>
+<li><strong>混叠。</strong>450 Hz 以 600 Hz 采样得到离散频率 <code>1.5π</code>，减去 <code>2π</code> 得 <code>-0.5π</code>，实余弦表现为 150 Hz。抗混叠必须在采样前完成。</li>
+<li><strong>微分器噪声。</strong><code>H(jω)=jω</code>，高频增益无限增长；实际 D 控制必须加入低通滚降并考虑量化差分。</li>
+<li><strong>单位样本响应。</strong><code>x[n]=Σ_kx[k]δ[n-k]</code>，由线性与时不变性得到 <code>y[n]=Σ_kx[k]h[n-k]</code>，即卷积和。</li>
+<li><strong>阶跃与斜坡。</strong>阶跃暴露上升时间、超调、稳态误差和饱和；斜坡进一步暴露系统型别、速度误差、速率限制和持续跟踪能力。两者都要记录控制输入。</li></ol>
+<p class="pitfall"><strong>整章诊断：</strong>依次检查连续/离散坐标、频率单位、时间变换方向、冲激尺度、初始条件和反例是否真正满足题设。</p></section><section class="answer" id="answer-quality-layer"><h2>第一章接口与诊断｜答案验收层</h2><div class="work"><p><strong>本章复核样例：</strong>对 x(t)=cos(4t)+sin(6t) 先求分量周期 π/2、π/3，再取最小公共周期 T=π；若改成 cos(πn/3)，必须改用整数样本周期 N=6。</p></div><p class="pitfall"><strong>常见错误为什么错：</strong>把采样序列当成连续信号、允许离散周期为非整数、忽略冲激的单位和尺度，会让后续采样与数字控制从定义处开始出错。</p></section></main></body></html>

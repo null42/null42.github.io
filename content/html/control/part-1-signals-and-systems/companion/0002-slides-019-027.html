@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>信号与系统伴随讲义｜课件第 19–27 页</title>
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar screen-only" aria-label="页面导航">
+    <div class="home"><a href="/html-raw/control/index/">← 返回课程入口</a><a href="/html-raw/control/part-1-signals-and-systems/companion/0001-slides-001-018/">← 第 1–18 页</a><a href="/html-assets/control/part-1-signals-and-systems/source-maps/0002-slides-019-027.md">逐页来源地图</a><a href="/html-raw/control/part-1-signals-and-systems/exercises/0002-slides-019-027-answers/">独立完整答案</a></div>
+    <div class="group">连续周期例题</div><a href="#slide-019">019 分段反例</a><a href="#slide-020">020 公共周期</a><a href="#slide-021">021 综合例题</a>
+    <div class="group">离散周期</div><a href="#slide-022">022 定义</a><a href="#slide-023">023 判定例题</a>
+    <div class="group">奇偶与分解</div><a href="#slide-024">024 奇偶定义</a><a href="#slide-025">025 分解公式</a><a href="#slide-026">026 几何演进</a><a href="#slide-027">027 求和与能量</a>
+    <div class="group">页段收束</div><a href="#deepening">连续推导</a><a href="#exercises">分层练习</a><a href="#exit-gate">离开门槛</a>
+  </nav>
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">第一部分 · 信号与系统深度强化 · 伴随讲义 0002</div>
+      <h1>课件第 19–27 页：从“看起来重复”到严格周期，从对称到正交分解</h1>
+      <p class="subtitle">本单元承接第 18 页的周期定义，用反例和整数条件建立严格判据，再把任意信号拆成唯一的奇部与偶部。</p>
+      <div class="route"><span>连续周期</span><span>离散周期</span><span>奇偶性</span><span>奇偶分解</span><span>能量正交</span></div>
+      <div class="meta-grid">
+        <section class="meta-card"><h2>对应课件</h2><p class="compact">《信号与系统（深度强化版）》第 19–27 页</p><p class="compact">页段边界服从知识链：第 28 页开启复指数新节。</p></section>
+        <section class="meta-card"><h2>前置知识</h2><ul><li>第 18 页连续周期定义</li><li>时间平移与时间反转</li><li>复指数、欧拉公式和整数索引</li><li>双边求和与平方能量</li></ul></section>
+        <section class="meta-card"><h2>学习目标</h2><ul><li>识别局部重复但整体非周期的反例</li><li>求连续多分量公共周期</li><li>由相位增量判断离散周期</li><li>独立推导奇偶分解及能量性质</li></ul></section>
+        <section class="meta-card"><h2>控制连接</h2><ul><li>判断采样信号是否有限步重复</li><li>识别周期参考与扰动的共同周期</li><li>把对称和反对称数据成分分离</li><li>理解后续正交展开的最初原型</li></ul></section>
+      </div>
+      <div class="notice"><strong>来源边界：</strong><span class="tag course">[课件]</span><span class="tag evolve">[页面演进]</span><span class="tag supplement">[必要补充]</span><span class="tag control">[控制连接]</span><span class="tag advanced">[拔高]</span><span class="tag infer">[推断]</span>继续严格区分。无录音内容不作确定归因。</div>
+    </header>
+    <section class="slide-note" id="slide-019" data-slide="19">
+      <div class="slide-kicker">SLIDE 019 · 周期反例</div><h2>课件第 19 页｜两段都以 2π 重复，整体为什么仍不周期？</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-019.png">查看本页高清预览</a></div>
+      <div class="formula">x(t)={ cos t，t&lt;0；　sin t，t≥0 }</div>
+      <p><span class="tag course">[课件]</span>负半轴余弦和正半轴正弦各自都以 <code>2π</code> 重复，但页面指出原点处存在一个只出现一次的不连续点，所以整体信号不是周期信号。</p>
+      <p class="reading"><strong>读图顺序：</strong>不要先数峰间距。先把整幅函数平移候选周期，特别检查分段边界、跳变点和定义规则是否也完全重复。</p>
+      <div class="derivation"><strong>用定义直接否定候选周期 2π：</strong><ol><li>页面定义在零点取右段，因此 <code>x(0)=sin0=0</code>；</li><li><code>−2π&lt;0</code>，故 <code>x(−2π)=cos(−2π)=1</code>；</li><li>若 <code>2π</code> 是周期，应对全部 t 有 <code>x(t)=x(t+2π)</code>；取 <code>t=−2π</code> 就要求 <code>x(−2π)=x(0)</code>；</li><li>实际 <code>1≠0</code>，所以 <code>2π</code> 不是整个分段信号的周期。</li></ol></div>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0002/piecewise-periodicity-counterexample.svg" alt="分段余弦正弦整体非周期反例"><figcaption class="caption">重绘：真正破坏周期性的不是两段内部，而是只出现一次的拼接结构。</figcaption></figure>
+      <p><span class="tag supplement">[必要补充]</span>更强的论证是：若存在任意正周期 T，那么原点的跳变结构必须在 <code>±T,±2T,...</code> 处重复；但除原点外，两侧分别是光滑的正弦/余弦，不存在同样跳变。因此不存在任何正周期。</p>
+      <div class="pitfall"><strong>易错点：</strong>“每一段都是周期函数”不推出“拼起来仍周期”。周期是整个定义域上的全局平移不变性。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>只检查远离原点的两个峰，为什么可能误判？</li><li>如果把右段改成 <code>cos t</code> 且零点定义一致，整体会怎样？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-020" data-slide="20">
+      <div class="slide-kicker">SLIDE 020 · 连续多分量公共周期</div><h2>课件第 20 页｜cos2t+sin3t 的周期不是简单相加</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-020.png">查看本页高清预览</a></div>
+      <p><span class="tag course">[课件]</span>页面提出例题：判断 <code>x(t)=cos2t+sin3t</code> 是否周期，若周期则求周期。</p>
+      <div class="derivation"><strong>公共周期整数方程：</strong><ol><li><code>cos2t</code> 平移 T 后不变要求 <code>2T=2πk₁</code>，即 <code>T=πk₁</code>；</li><li><code>sin3t</code> 平移 T 后不变要求 <code>3T=2πk₂</code>，即 <code>T=2πk₂/3</code>；</li><li>同一个 T 必须同时满足，故 <code>πk₁=2πk₂/3</code>，化为 <code>3k₁=2k₂</code>；</li><li>最小正整数解为 <code>k₁=2,k₂=3</code>；</li><li>所以基本周期 <code>T₀=2π</code>。</li></ol></div>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0002/continuous-common-period.svg" alt="连续多频率公共周期整数方程"><figcaption class="caption">每个分量完成整数圈，相加后的波形才整体复位。</figcaption></figure>
+      <p><span class="tag supplement">[必要补充]</span>单独分量的基本周期是 <code>T₁=π</code>、<code>T₂=2π/3</code>。所谓“最小公倍数”不能直接套整数算法，而应找能同时写成 <code>k₁T₁=k₂T₂</code> 的最小正实数。</p>
+      <p><span class="tag control">[控制连接]</span>若参考信号同时含 2 rad/s 与 3 rad/s 两个分量，整体模式每 <code>2π</code> 秒重复。若频率比是无理数，则不会存在有限公共周期，得到准周期信号。</p>
+      <div class="pitfall"><strong>易错点：</strong>不能把周期相加成 <code>π+2π/3</code>，也不能把角频率相加后取倒数。必须让每个相位增量分别成为 <code>2π</code> 的整数倍。</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>cos2t+sin4t</code> 的基本周期是什么？</li><li><code>cos t+sin(√2t)</code> 为什么没有公共周期？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-021" data-slide="21">
+      <div class="slide-kicker">SLIDE 021 · 连续周期综合例题</div><h2>课件第 21 页｜常相位不改周期，脉冲列靠索引换元证明</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-021.png">查看本页高清预览</a></div>
+      <h3>例 3-1：<code>x(t)=e<sup>j(πt+1)</sup></code></h3>
+      <div class="derivation"><ol><li>拆成 <code>e<sup>j</sup>e<sup>jπt</sup></code>，前者只是恒定复系数；</li><li>周期条件 <code>e<sup>jπT</sup>=1</code>；</li><li><code>πT=2πk</code>，所以 <code>T=2k</code>；</li><li>最小正值取 <code>k=1</code>，得到 <code>T₀=2</code>。</li></ol></div>
+      <p><span class="tag evolve">[页面演进]</span>页面旁注强调：给周期信号做时间平移或增加常相位，不会改变其周期。真正控制周期的是随 t 累积的相位斜率。</p>
+      <h3>例 3-2：<code>x(t)=Σ<sub>n∈ℤ</sub>e<sup>−(t−3n)²</sup></code></h3>
+      <div class="derivation"><strong>验证 T=3：</strong><p><code>x(t+3)=Σ e<sup>−(t+3−3n)²</sup>=Σ e<sup>−[t−3(n−1)]²</sup></code>。令 <code>m=n−1</code>。当 n 遍历全部整数时，m 仍遍历全部整数，所以 <code>x(t+3)=Σ<sub>m∈ℤ</sub>e<sup>−(t−3m)²</sup>=x(t)</code>。</p></div>
+      <p><span class="tag supplement">[必要补充]</span>“改变求和范围”并不是删项，而是对无限整数索引重新命名。脉冲中心位于 <code>...,−6,−3,0,3,6,...</code>，相邻间距为 3，图形直觉和代数换元相互验证基本周期 3。</p>
+      <div class="pitfall"><strong>易错点：</strong>证明 T=3 是周期后还要确认没有更小正周期。这里每个高斯峰的中心集合本身最小平移间距为 3，所以基本周期是 3。</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>e<sup>j(4t−7)</sup></code> 的基本周期是多少？</li><li>若脉冲中心改成 <code>5n+1</code>，周期与平移量分别扮演什么角色？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-022" data-slide="22">
+      <div class="slide-kicker">SLIDE 022 · 离散周期正式定义</div><h2>课件第 22 页｜离散周期的核心约束：N 必须是正整数</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-022.png">查看本页高清预览</a></div>
+      <div class="formula">x[n]=x[n+mN]，n∈ℤ，m∈ℤ；等价核心 x[n]=x[n+N]</div>
+      <p><span class="tag course">[课件]</span>若存在正整数 N 使所有整数索引处的值在移动 N 个样本后不变，则为离散周期信号。满足条件的最小正整数称基本周期 <code>N₀</code>。图中三样本模式重复，故 <code>N₀=3</code>。</p>
+      <p class="reading"><strong>读图顺序：</strong>先选择连续的一整组样本模式，再沿索引轴移动 N，逐点比较所有幅值和次序。不要只找两个相同高度的孤立样值。</p>
+      <table><thead><tr><th>结论</th><th>理由</th></tr></thead><tbody><tr><td>N 必须是正整数</td><td>序列只在整数索引处定义，平移后仍须落在整数网格</td></tr><tr><td>若 N 是周期，2N、3N…也是周期</td><td>重复应用一次周期平移</td></tr><tr><td>基本周期是最小正整数周期</td><td>排除更小整数平移</td></tr></tbody></table>
+      <p><span class="tag control">[控制连接]</span>若采样周期是 <code>T_s</code>，N 个样本的周期对应物理时间 <code>NT_s</code>。同一个离散基本周期在不同采样率下代表不同真实时间长度。</p>
+      <div class="pitfall"><strong>易错点：</strong>连续信号可有 0.5 s 周期；离散序列不能有“0.5 个样本”的普通周期。分数延时属于另一类系统问题。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>若 N=6 是周期，N=3 是否一定是周期？</li><li>为什么图中基本周期是 3，而不是 6？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-023" data-slide="23">
+      <div class="slide-kicker">SLIDE 023 · 离散周期判定例题</div><h2>课件第 23 页｜不是看 ω₀ 是否有理，而是看 ω₀/(2π)</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-023.png">查看本页高清预览</a></div>
+      <h3>例 1：<code>x[n]=cos(8πn/7+2)</code></h3>
+      <div class="derivation"><ol><li>平移 N 后相位增加 <code>8πN/7</code>；</li><li>余弦完全重合要求 <code>8πN/7=2πm</code>；</li><li>化简为 <code>4N/7=m</code>，即 <code>N=7m/4</code>；</li><li>N 必须是正整数，最小可取 <code>m=4</code>，得到 <code>N₀=7</code>。</li></ol></div>
+      <h3>例 2：<code>x[n]=e<sup>j(n/8+π)</sup></code></h3>
+      <div class="derivation"><ol><li><code>x[n+N]/x[n]=e<sup>jN/8</sup></code>；常相位 <code>π</code> 抵消；</li><li>周期要求 <code>e<sup>jN/8</sup>=1</code>，即 <code>N/8=2πm</code>；</li><li>所以 <code>N=16πm</code>；</li><li><code>m=0</code> 只给 N=0，不是正周期；任意非零整数 m 使 N 含无理数 π，不可能是整数；</li><li>所以该序列非周期。</li></ol></div>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0002/discrete-periodicity-condition.svg" alt="离散复指数周期判据"><figcaption class="caption">最简有理频率的分母决定有限步后能否回到同一相位。</figcaption></figure>
+      <p><span class="tag supplement">[必要补充]</span>一般地，<code>e<sup>jω₀n</sup></code> 周期当且仅当 <code>ω₀/(2π)∈ℚ</code>。若化成最简分数 <code>p/q</code>，基本周期为 q。余弦可能因对称性出现等价相位，但本页例题按完整相位增量即可得到最小周期。</p>
+      <p><span class="tag control">[控制连接]</span>连续 60 Hz 信号以 1000 Hz 采样后，归一化频率为 <code>60/1000=3/50</code>，序列要经过 50 个样本才完全重复。这比“每周期约 16.67 个样本”更严格。</p>
+      <div class="pitfall"><strong>易错点：</strong><code>ω₀=1/8</code> 是有理数，但 <code>ω₀/(2π)=1/(16π)</code> 不是有理数，所以序列非周期。</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>e<sup>jπn/3</sup></code> 的基本周期是多少？</li><li><code>cos(3πn/4)</code> 为什么基本周期是 8？</li></ol></details>
+    </section>
+    <section class="slide-note" id="slide-024" data-slide="24">
+      <div class="slide-kicker">SLIDE 024 · 1.2.3 偶信号与奇信号</div><h2>课件第 24 页｜把第 6 页的分类速览升级为正式定义</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-024.png">查看本页高清预览</a></div>
+      <div class="two-col"><div><h3>偶信号</h3><div class="formula">x(−t)=x(t)<br>x[−n]=x[n]</div><p>时间反转后不变，几何上关于纵轴对称。</p></div><div><h3>奇信号</h3><div class="formula">x(−t)=−x(t)<br>x[−n]=−x[n]</div><p>时间反转后幅值相反，几何上关于原点对称。</p></div></div>
+      <p><span class="tag course">[课件]</span>页面给出连续和离散形式，并指出奇信号在 <code>t=0</code> 或 <code>n=0</code> 时取值必须为 0。</p>
+      <div class="derivation"><strong>零点条件：</strong><p>对奇信号代入零点：<code>x(0)=−x(−0)=−x(0)</code>，所以 <code>2x(0)=0</code>，即 <code>x(0)=0</code>。离散序列同理。</p></div>
+      <p><span class="tag supplement">[必要补充]</span>判断奇偶前应检查定义域是否关于零对称。零信号同时满足奇、偶两个定义；除零信号外，一个信号不可能同时既奇又偶。</p>
+      <div class="pitfall"><strong>易错点：</strong>“左右形状相似”不够。偶信号左右同号，奇信号左右反号；横坐标反转和幅值取负要分别检查。</div>
+      <details class="check"><summary>即时检查</summary><ol><li><code>t²+t⁴</code> 是什么奇偶性？</li><li><code>t+t²</code> 为什么既非奇也非偶？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-025" data-slide="25">
+      <div class="slide-kicker">SLIDE 025 · 任意信号的奇偶分解</div><h2>课件第 25 页｜不是“有些信号能分”，而是任意信号都能唯一分</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-025.png">查看本页高清预览</a></div>
+      <div class="formula">xₒ(t)=½[x(t)−x(−t)]　　xₑ(t)=½[x(t)+x(−t)]</div>
+      <p><span class="tag course">[课件]</span>页面给出奇部、偶部公式，并通过相加展开证明 <code>x(t)=xₒ(t)+xₑ(t)</code>。例 1 要求先画 <code>x(−t)</code>，再逐点做和与差。</p>
+      <div class="derivation"><strong>三步完整证明：</strong><ol><li><strong>验证奇部：</strong><code>xₒ(−t)=½[x(−t)−x(t)]=−xₒ(t)</code>；</li><li><strong>验证偶部：</strong><code>xₑ(−t)=½[x(−t)+x(t)]=xₑ(t)</code>；</li><li><strong>验证重构：</strong><code>xₒ+xₑ=½[x−x_r]+½[x+x_r]=x</code>，其中 <code>x_r=x(−t)</code>。</li></ol></div>
+      <p><span class="tag supplement">[必要补充]</span>分解是唯一的。若 <code>x=e₁+o₁=e₂+o₂</code>，则 <code>e₁−e₂=−(o₁−o₂)</code>。左边是偶信号，右边是奇信号；一个信号若同时奇偶，只能为零，因此 <code>e₁=e₂</code>、<code>o₁=o₂</code>。</p>
+      <p><span class="tag advanced">[拔高]</span>算子 <code>Pₑx=[x(t)+x(−t)]/2</code> 与 <code>Pₒx=[x(t)−x(−t)]/2</code> 可看作投影：重复投影不会再改变结果，并且 <code>Pₑ+Pₒ=I</code>。</p>
+      <div class="pitfall"><strong>易错点：</strong>两个公式都必须除以 2。若不除以 2，相加会得到 <code>2x(t)</code>。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>若 x 本来就是偶信号，公式给出的奇部是什么？</li><li>为什么唯一性证明依赖“同时奇偶只能为零”？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-026" data-slide="26">
+      <div class="slide-kicker">SLIDE 026 · 四幅图的页面演进</div><h2>课件第 26 页｜从单侧波形看到奇部和偶部如何共同重构</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-026.png">查看本页高清预览</a></div>
+      <p class="reading"><strong>读图顺序：</strong>(a) 原信号只在正半轴；(b) 时间反转只在负半轴；(c) 做差后负半轴取负、正半轴取正；(d) 做和后左右同号。每一步幅值都要乘 1/2。</p>
+      <p><span class="tag evolve">[页面演进]</span>第 25 页给代数公式，本页用四幅波形显示公式如何逐点工作。原信号在正半轴出现时，奇部与偶部在正半轴各贡献一半；在负半轴，它们大小相同、符号相反，重构时刚好相消为零。</p>
+      <figure class="figure"><img src="/html-assets/control/part-1-signals-and-systems/figures/0002/even-odd-decomposition.svg" alt="信号奇偶分解四图"><figcaption class="caption">重绘：奇部与偶部都不是原信号的“局部切片”，而是由原信号和反转信号共同生成。</figcaption></figure>
+      <div class="derivation"><strong>逐点重构检查：</strong><ul><li>正半轴：<code>x(−t)=0</code>，所以 <code>xₑ=x/2</code>、<code>xₒ=x/2</code>，相加为 x；</li><li>负半轴：<code>x(t)=0</code>，所以 <code>xₑ=x(−t)/2</code>、<code>xₒ=−x(−t)/2</code>，相加为 0；</li><li>零点：奇部必为 0，偶部保留原零点值。</li></ul></div>
+      <p><span class="tag control">[控制连接]</span>对一组围绕某基准时刻对称采集的数据，偶部保留镜像相同成分，奇部保留镜像反号成分。它可用于分离偏置、对称响应与方向相关响应，但实际应用前必须明确对称中心。</p>
+      <div class="pitfall"><strong>易错点：</strong>奇部图在负半轴不是简单复制，而是反号复制；偶部图才是同号镜像。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>只在负半轴有信号时，奇偶分解会怎样？</li><li>若对称中心不是 t=0，应先做什么变换？</li></ol></details>
+    </section>
+
+    <section class="slide-note" id="slide-027" data-slide="27">
+      <div class="slide-kicker">SLIDE 027 · 奇偶性质</div><h2>课件第 27 页｜双边和抵消与能量正交</h2>
+      <div class="slide-tools"><a href="/html-assets/control/part-1-signals-and-systems/assets/slide-previews/0002/slide-027.png">查看本页高清预览</a></div>
+      <h3>性质 1：奇序列的双边和为零</h3>
+      <div class="derivation"><p>若 <code>x[−n]=−x[n]</code>，且双边和存在，则</p><div class="formula">Σ<sub>n=−∞</sub><sup>∞</sup>x[n]=x[0]+Σ<sub>n=1</sub><sup>∞</sup>{x[n]+x[−n]}=0+Σ0=0</div><p>零点为 0，正负索引成对抵消。</p></div>
+      <p><span class="tag supplement">[必要补充]</span>“双边和存在”不能省略。若级数不绝对收敛，任意重排可能改变结果；至少应使用课件展示的对称求和方式。</p>
+      <h3>性质 2：实信号的奇偶分量能量相加</h3>
+      <div class="derivation"><p>令 <code>x=xₑ+xₒ</code>，则</p><div class="formula">Σx²=Σxₑ²+Σxₒ²+2Σxₑxₒ</div><p><code>xₑ[n]xₒ[n]</code> 是奇序列，因为偶×奇=奇；在对称求和且收敛条件下，其双边和为 0。因此</p><div class="formula">Σx²=Σxₑ²+Σxₒ²</div></div>
+      <p><span class="tag course">[课件]</span>页面特别圈出“这项为奇函数所以等于 0”。正确理解是交叉项的<strong>总和</strong>为零，不是每个 n 上的乘积都为零。</p>
+      <p><span class="tag advanced">[拔高]</span>用内积写为 <code>⟨xₑ,xₒ⟩=0</code>，说明偶子空间与奇子空间正交。复信号的能量应使用共轭内积 <code>Σxₑ[n]xₒ*[n]</code>。</p>
+      <div class="pitfall"><strong>易错点：</strong>例如 <code>xₑ[n]=1</code>、<code>xₒ[n]=n</code> 时，乘积 n 在多数点不为零；但正负 n 的对称和抵消。</div>
+      <details class="check"><summary>即时检查</summary><ol><li>偶序列与奇序列的乘积是什么奇偶性？</li><li>“交叉项求和为零”和“交叉项逐点为零”有什么区别？</li></ol></details>
+    </section>
+    <section class="deepening" id="deepening">
+      <div class="eyebrow">页段深化 · 两种整数结构与一个正交分解</div><h2>一、把第 19–27 页连成三条可复用方法</h2>
+      <h3>1. 连续多频率周期：求公共时间 T</h3>
+      <p>对 <code>x(t)=Σ A_k cos(ω_kt+φ_k)</code>，整体周期 T 必须使每个非零分量都完成整数圈：</p>
+      <div class="formula">ω_kT=2πm_k，m_k∈ℤ</div>
+      <p>两个非零频率存在公共周期的必要条件是 <code>ω₁/ω₂=m₁/m₂∈ℚ</code>。若频率比无理，两个相位不会在有限时间同时复位。</p>
+
+      <h3>2. 离散复指数周期：求整数步数 N</h3>
+      <div class="formula">e^{jω₀(n+N)}=e^{jω₀n} ⇔ ω₀N=2πm</div>
+      <p>这里未知量 N 本身必须是正整数。因此判据成为 <code>ω₀/(2π)∈ℚ</code>。若最简分数为 <code>p/q</code>，则最小 N 通常是 q。连续情形求“多久以后相位转整圈”，离散情形还要求这个时间恰好对应整数个索引步。</p>
+      <table><thead><tr><th>对象</th><th>周期变量</th><th>存在条件</th></tr></thead><tbody><tr><td><code>e^{jω₀t}</code></td><td>正实数 T</td><td>任意 <code>ω₀≠0</code>，<code>T₀=2π/|ω₀|</code></td></tr><tr><td><code>e^{jω₀n}</code></td><td>正整数 N</td><td><code>ω₀/(2π)</code> 为有理数</td></tr></tbody></table>
+
+      <h3>3. 奇偶分解是唯一投影，能量按正交方向相加</h3>
+      <div class="two-col"><div class="derivation"><strong>投影：</strong><p><code>Pₑx=(x+Rx)/2</code></p><p><code>Pₒx=(x−Rx)/2</code></p><p>其中 R 是时间反转算子。可验证 <code>Pₑ²=Pₑ</code>、<code>Pₒ²=Pₒ</code>、<code>PₑPₒ=0</code>。</p></div><div class="derivation"><strong>能量：</strong><p><code>||x||²=||xₑ+xₒ||²</code></p><p><code>=||xₑ||²+||xₒ||²+2⟨xₑ,xₒ⟩</code></p><p>奇偶正交使最后一项为 0。</p></div></div>
+      <p><span class="tag control">[控制连接]</span>如果采样数据围绕事件中心同时含有对称响应和方向相关响应，可用奇偶分解分离。若中心选错，原本的偶成分会泄漏到奇部，因此“对称中心”本身也是建模参数。</p>
+    </section>
+
+    <section class="exercise-block" id="exercises">
+      <div class="eyebrow">分层练习 · 独立答案另页</div><h2>二、A–D 级练习</h2><p>完成后打开<a href="/html-raw/control/part-1-signals-and-systems/exercises/0002-slides-019-027-answers/">完整答案</a>。</p>
+      <section class="level level-a" data-level="A"><h3>A 级｜定义与直接计算（6 题）</h3><ol>
+        <li id="q2-a1">求 <code>cos4t+sin6t</code> 的基本周期。<div class="knowledge">检验：连续公共周期。</div></li>
+        <li id="q2-a2">求 <code>cos(πn/3)</code> 的基本离散周期。<div class="knowledge">检验：相位增量与整数 N。</div></li>
+        <li id="q2-a3">判断 <code>e<sup>j√2n</sup></code> 是否周期。<div class="knowledge">检验：<code>ω₀/(2π)</code> 有理性。</div></li>
+        <li id="q2-a4">判断 <code>x(t)=t⁵+t²</code> 的奇偶性。<div class="knowledge">检验：混合奇偶成分。</div></li>
+        <li id="q2-a5">求 <code>x(t)=e<sup>t</sup></code> 的偶部和奇部。<div class="knowledge">检验：分解公式。</div></li>
+        <li id="q2-a6">实奇序列仅在 <code>n=±1,±2</code> 非零，且 <code>x[1]=2,x[2]=−3</code>。补全负索引值并求双边和。<div class="knowledge">检验：奇序列配对抵消。</div></li>
+      </ol></section>
+      <section class="level level-b" data-level="B"><h3>B 级｜多步骤课件同型题（5 题）</h3><ol>
+        <li id="q2-b1">求 <code>cos(5πn/6+0.4)</code> 的基本离散周期。<div class="knowledge">检验：最简分数分母。</div></li>
+        <li id="q2-b2">严格证明课件第 19 页分段信号不存在任何正周期，而不只是否定 <code>2π</code>。<div class="knowledge">检验：不连续点集合的平移不变性。</div></li>
+        <li id="q2-b3">证明 <code>Σ<sub>k∈ℤ</sub>e<sup>−(t−(4k+1))²</sup></code> 的基本周期为 4，并解释常数偏移 1 为何不改变周期。<div class="knowledge">检验：索引换元。</div></li>
+        <li id="q2-b4">离散信号在 <code>n=0,1,2</code> 的值为 2、4、−2，其余为 0。列出奇部和偶部在 <code>n=−2,...,2</code> 的值。<div class="knowledge">检验：逐点奇偶分解。</div></li>
+        <li id="q2-b5">对 B4 的信号，直接计算原能量、偶部能量和奇部能量，验证能量相加。<div class="knowledge">检验：正交能量分解。</div></li>
+      </ol></section>
+      <section class="level level-c" data-level="C"><h3>C 级｜证明与反例（3 题）</h3><ol>
+        <li id="q2-c1">不使用给定公式，假设 <code>x=e+o</code> 且 e 偶、o 奇，从 <code>x(t)</code> 与 <code>x(−t)</code> 联立解出 e、o，并证明唯一性。<div class="knowledge">检验：分解的来源与唯一性。</div></li>
+        <li id="q2-c2">证明两个非零连续复指数之和具有公共周期的必要条件是频率比为有理数；说明充分性。<div class="knowledge">检验：整数相位条件。</div></li>
+        <li id="q2-c3">构造一个每个半轴内部都周期、但整体非周期的连续分段信号，并给出严格理由。<div class="knowledge">检验：局部与全局周期反例。</div></li>
+      </ol></section>
+      <section class="level level-d" data-level="D"><h3>D 级｜采样与控制数据迁移（2 题）</h3><ol>
+        <li id="q2-d1">连续信号 <code>cos(2π·50t)+0.5sin(2π·120t)</code> 以 1000 Hz 采样。求两个离散分量及总序列的基本周期，并与连续基本周期对照。<div class="knowledge">检验：采样、最简频率和公共离散周期。</div></li>
+        <li id="q2-d2">某冲击响应采样数据满足 <code>z[k]=s[k]+d[k]</code>，其中 s 关于 k=0 为偶，d 为奇。只使用 <code>z[k]</code> 与 <code>z[−k]</code> 写出 s、d 的估计式；说明若时间零点偏移一个样本，会出现什么现象。<div class="knowledge">检验：奇偶投影与对齐误差。</div></li>
+      </ol></section>
+    </section>
+
+    <section class="gate" id="exit-gate"><h2>三、离开第 19–27 页的能力门槛</h2><ol><li>能用全定义域反例否定伪周期，而不是只看局部波形；</li><li>能分别写出连续公共周期和离散整数周期条件；</li><li>能从 <code>x(t)</code>、<code>x(−t)</code> 独立推导奇部和偶部；</li><li>能解释交叉项为何“求和为零但逐点不为零”。</li></ol><p>未达到时回看 <a href="#slide-019">第 19 页</a>、<a href="#slide-023">第 23 页</a>、<a href="#slide-025">第 25 页</a>和<a href="#slide-027">第 27 页</a>。本单元完成后可继续第 28 页复指数新节，但章节复盘仍不生成。</p></section>
+  </main>
+</div></body></html>

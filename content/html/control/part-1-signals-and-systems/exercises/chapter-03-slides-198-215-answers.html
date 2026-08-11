@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三章第198–215页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><main><header class="hero"><div class="eyebrow">第三章 · DTFS基础与精确重构</div><h1>第198–215页分层练习完整答案</h1><p>答案强调模 N 索引、有限正交性、同频合并和完整 N 项精确重构；每题均可脱离讲义独立复习。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1｜为什么只有 N 个不同基函数</h3><div class="formula">φₖ₊N[n]=e^{j(k+N)2πn/N}=e^{jk2πn/N}e^{j2πn}=φₖ[n]</div><p>n 为整数使 e^{j2πn}=1。因此 k 只需按模 N 分类，任意 N 个连续 k 已包含全部不同基函数。</p>
+<h3>A2｜DTFS对与系数周期性</h3><div class="formula">x[n]=Σ_{k=&lt;N&gt;}aₖe^{jk2πn/N}</div><div class="formula">aₖ=(1/N)Σ_{n=&lt;N&gt;}x[n]e^{-jk2πn/N}</div><div class="formula">aₖ₊N=aₖ</div><p>两个求和窗口都可从任意整数开始，只要连续包含 N 项。</p>
+<h3>A3｜有限正交性</h3><div class="formula">Σ_{n=&lt;N&gt;}e^{j(k−r)2πn/N}=N，若k−r=mN；否则为0</div><p>若 k、r 已选在同一个 N 点窗口内，则第一种情况等价于 k=r。</p>
+<h3>A4｜对称完整索引窗口</h3><p>奇数 N：令 M=(N−1)/2，取 k=−M,…,M，共 N 项。偶数 N：令 M=N/2，可取 k=−M+1,…,M，也可取 −M,…,M−1；二者都包含 N 个模 N 类。</p></section>
+<section><h2>B 级答案</h2>
+<h3>B1｜sin(2π·3n/7)</h3><p>欧拉展开给：</p><div class="formula">x[n]=(1/2j)e^{j3·2πn/7}−(1/2j)e^{-j3·2πn/7}</div><p>在0…6窗口内，−3≡4 mod7，所以 <code>a₃=1/(2j)</code>、<code>a₄=−1/(2j)</code>，其余为0。</p>
+<h3>B2｜N=5索引折回</h3><div class="formula">−3≡2；8≡3；13≡3 (mod 5)</div><p>若多个原始项同时落到索引3，必须把它们的复系数相加，而不是保留两条独立谱线。</p>
+<h3>B3｜周期方波序列直流</h3><p>一个周期内共有2N₁+1个样本等于1，其余为0：</p><div class="formula">a₀=(1/N)Σ_{n=&lt;N&gt;}x[n]=(2N₁+1)/N</div>
+<h3>B4｜例3.11共轭对称</h3><p><code>a₁=3/2−j/2</code>，故 a₁*=3/2+j/2=a₋₁；<code>a₂=j/2</code>，故 a₂*=−j/2=a₋₂；a₀=1 为实数。其余系数为0，同样满足 a₋ₖ=aₖ*。在0…N−1窗口内写成 a_{N−k}=aₖ*。</p></section>
+<section><h2>C 级答案</h2>
+<h3>C1｜推导DTFS分析式</h3><p>从合成式乘 <code>e^{-jr2πn/N}</code> 并对 N 个连续 n 求和：</p><div class="formula">Σ_nx[n]e^{-jr2πn/N}=ΣₖaₖΣ_ne^{j(k−r)2πn/N}</div><p>若 k=r，内层每项为1，和为 N。若 k≠r，令 q=e^{j(k−r)2π/N}，则 q≠1、qᴺ=1，内层和为 <code>(1−qᴺ)/(1−q)=0</code>。因此左边只剩 Naᵣ，除以 N 得分析式。q=1 必须单独处理，不能代入几何公式的0/0。</p>
+<h3>C2｜周期方波正弦比</h3><p>非零样本在 −N₁…N₁，包含两个端点，共2N₁+1项：</p><div class="formula">aₖ=(1/N)Σ_{n=−N₁}^{N₁}e^{-jk2πn/N}</div><p>令 m=n+N₁，应用有限几何和，再把 <code>1−e^{-jα}=2je^{-jα/2}sin(α/2)</code> 用于分子分母，相位因子抵消，得到：</p><div class="formula">aₖ=(1/N)sin[πk(2N₁+1)/N]/sin(πk/N)</div><p>k=mN 时单独为(2N₁+1)/N。</p>
+<h3>C3｜周期重复不等于无限独立谱线</h3><p>aₖ=aₖ₊N 是同一坐标的不同标签，因为对应基函数也相同。任意 N 点窗口只保留每个模 N 类一次，维数始终是 N。图上无限重复只是为了显示整数索引上的周期延拓。</p>
+<h3>C4｜完整与部分重构</h3><p>完整 N 项覆盖整个 N 维基，傅里叶矩阵可逆，所以每个样本精确相等，不涉及极限。部分系数只投影到较低维子空间，误差等于被舍弃坐标的贡献；增加到 N 个独立系数时误差一次性归零。中间可能振铃，但不属于完整DTFS的Gibbs收敛现象。</p></section>
+<section><h2>D 级答案</h2>
+<h3>D1｜同步谐波估计器</h3><p>收集一个已知周期 N 的同步窗口，计算：</p><div class="formula">âₖ[m]=(1/N)Σ_{r=0}^{N−1}x[m−r]e^{-jk2π(m−r)/N}</div><p>若窗口与信号周期完全同步，其他整数谐波由正交性相消。频率失配时目标分量不再在窗口内转整圈，能量泄漏到相邻系数，估计幅相随窗口位置波动。可用PLL跟踪基频、重采样到角度域或使用加窗与插值修正。</p>
+<h3>D2｜FFT负频率解释与混叠</h3><p>在0…N−1输出中，k≤N/2通常解释为 Ω=2πk/N；k&gt;N/2 应重标为 Ω=2π(k−N)/N。例 N=5 时 k=3 对应 −2，即 6π/5 与 −4π/5 产生同一离散复指数。模拟频率超过采样频率一半也会按相同规则折回。</p>
+<h3>D3｜周期扰动模型阶数</h3><p>完整模型保存 N 个复系数（实信号可用共轭对称减少独立实参数），能够逐点重构任意 N 周期扰动。若仅保留直流和 H 对共轭主谐波，模型约需1+2H个复谱位置，控制器或观测器阶数显著降低，但未保留谐波形成可量化残差。阶数应依据残差功率、带宽和运算预算选择。</p>
+<h3>D4｜改变N的三重影响</h3><p>采样率固定时，频率间隔变为 ΔΩ=2π/N，N 越大分辨率越细；DTFS分析含1/N，比较不同 N 时必须保持幅值归一化；周期模型维数也从 N₁ 增至 N₂。更长窗口提高分辨率和模型容量，却增加延迟、存储和对非平稳频率漂移的敏感性。</p></section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-03-fourier-series/#slide-198">返回第三章伴随讲义第198页</a></p></main></body></html>

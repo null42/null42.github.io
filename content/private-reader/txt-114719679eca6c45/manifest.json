@@ -1,0 +1,74 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-114719679eca6c45",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "FBQwcDPc0uq1Bih5BmNgCQ=="
+  },
+  "gate": {
+    "token": "B4wstyr11RTq/9NZfo55swS1AhMpwpFRzAro6RypDPbMiYgcGtMDuQ2bQwmsrC2lSqw="
+  },
+  "shelf": {
+    "title": "Fqtj+uko0liQ7WRf/0IBYZnLUOsdfLE4m7MF2+oInGGAo7w8zeWOWL+4ctz4MewL8rTZ398hTiQzNvPl9ruxoiaWuDVf99w=",
+    "author": null,
+    "group": "BrWvRrl+IdZyeGPqBidwsn0evBefcp8qIgfxgQrpQXEpIJ5ol+GvzHlpnQ=="
+  },
+  "source": {
+    "sha256": "114719679eca6c45a6cb1b573582733e4e814e2c08bde3b7c4b9d9bbfaf66e78"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "7QeqeSRHrkHEgim4Si2tM5BYhv117GSMjCFjsuwanV0uTt5HfFmjDgpEBVHOOANSd63oGQM=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "SptCvpzRYpSZYo7CLMsXcmYlk+RDBoapI7lBKHf7deTOWwCpZT2Ggp29Fj/hYJw=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "6maz+jJ+tJw1D/lbrhoyom1Ll2Czo3I2Y+63ygCMKTV2ocmT5WSAEUpHpHVbYjQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "YmoqZHFmmUyzw76+ymVeCtoOEF3TUXqXi4GZ30M2LTMawnQALZX8+zd+JVKZkHDlhRpRXlA=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "DPYmjcRJmr+FkYRbDgVfXYO6YiIoslqrvpkXIVPdOvpGi/gR6SMoZMLG1e1ccZuDNAJB7Wg=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "iCuIIZV3ELunMLACmwWMTqYX19Gl2fFHPcfFysj4zImqudcpNd0N30NOtdFThVI=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "gptsB4yd8MNr2Na5XTh5z47cMlew/NKCiBKz4MZiu7sov82pWtV9SEVIky57Q78=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "8ndGaF1ETezJo71E",
+      "bytes": 16087,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 32
+  }
+}

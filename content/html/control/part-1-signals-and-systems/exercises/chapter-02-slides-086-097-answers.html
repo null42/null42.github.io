@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>第二章第86–97页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head>
+<body><main><header class="hero"><div class="eyebrow">第二章 · 离散卷积和</div><h1>第86–97页分层练习完整答案</h1><p>答案按“冲激分解—LTI 映射—支集交集—分段求和”的逻辑展开。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><div class="formula">x[n]=2δ[n+1]−δ[n]+3δ[n−2]</div><p><code>δ[n+1]</code> 位于 −1，<code>δ[n−2]</code> 位于 2；系数就是相应样本值。</p>
+<h3>A2</h3><p>固定 <code>n=3</code>，右端为 <code>Σₖx[k]δ[3−k]</code>。当且仅当 <code>k=3</code> 时冲激等于 1，其余项为 0，因此求和只剩 <code>x[3]</code>。</p>
+<h3>A3</h3><p>时不变性给出 <code>δ[n+2]→h[n+2]</code>、<code>δ[n−1]→h[n−1]</code>；再由线性：</p><div class="formula">y[n]=4h[n+2]−h[n−1]</div>
+</section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p><code>u[k]</code> 要求 <code>k≥0</code>，<code>u[n−k]</code> 要求 <code>k≤n</code>。当 <code>n&lt;0</code> 无重叠；当 <code>n≥0</code> 时共有 <code>n+1</code> 个 1 相加：</p><div class="formula">u[n]*u[n]=(n+1)u[n]</div>
+<h3>B2</h3><p>当 <code>n≥0</code>，求和范围为 <code>0≤k≤n</code>：</p><div class="formula">y[n]=Σₖ₌₀ⁿ(1/2)ᵏ=2[1−(1/2)ⁿ⁺¹]u[n]</div><p>因 <code>(1/2)ⁿ⁺¹→0</code>，终值为 2。</p>
+<h3>B3</h3><p>卷积和中：</p><div class="formula">Σₖδ[k−2]h[n−k]=h[n−2]</div><p>从系统观点看，<code>δ[n−2]</code> 是单位冲激右移 2，因此 LTI 输出是 <code>h[n]</code> 同样右移 2。</p>
+</section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>线性只能说明各冲激分量的响应可加，却不能保证 <code>T{δ[n−k]}</code> 是 <code>T{δ[n]}</code> 的平移。若系统时变，每个位置的冲激可能具有不同响应，必须知道双变量响应 <code>h[n,k]=T{δ[n−k]}</code>；单一的 <code>h[n]</code> 不足以刻画系统。</p>
+<h3>C2</h3><p>卷积项为 <code>aᵏu[−k]u[n−k]</code>，有效范围 <code>k≤min(0,n)</code>。令上界为 <code>M</code>，求和 <code>Σₖ₌₋∞ᴹaᵏ</code>。向负无穷方向收敛需要 <code>|a|&gt;1</code>，因为换元后公比为 <code>1/a</code>，必须满足 <code>|1/a|&lt;1</code>。<code>a=2</code> 正是课件例题。</p>
+</section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>若 <code>h[n]</code> 仅在有限个样本非零，卷积每个输出只需有限次乘加，系统只保留有限长度输入历史，称 FIR。若 <code>h[n]</code> 无限延伸，理论上每个输出依赖无限历史，常由递推结构高效实现，称 IIR。IIR 并不等于每次真的进行无限次求和，但其内部状态承载了历史影响。</p>
+<h3>D2</h3><p>零状态预测使用 <code>ŷ[n]=Σₖu[k]h[n−k]</code>，若只保留 <code>h[0],…,h[N]</code>，则写成有限和 <code>ŷ[n]=Σᵢ₌₀ᴺh[i]u[n−i]</code>。截断误差来自被忽略的尾部冲激响应；还可能叠加测量噪声、对象时变、非线性和非零初始状态误差。</p>
+</section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-02-linear-time-invariant-systems/#slide-086">返回第二章统一讲义第86页</a></p>
+</main></body></html>

@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
+import path from "node:path";
 import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 const plantumlRenderScript = readFileSync(
-	new URL("./plantuml-render-script.js", import.meta.url),
+	path.resolve(process.cwd(), "src/plugins/plantuml-render-script.js"),
 	"utf8",
 );
 

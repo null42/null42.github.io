@@ -76,7 +76,9 @@ export async function scanGeneratedOutput(options: ScanOptions = {}) {
     addMatches(issues, relativePath, 'absolute-path', findAbsolutePaths(text, rootDir), allowlist)
     // 私密阅读器目录下的 .bin 和 manifest.json 天然是高熵 base64（加密产物），
     // 由 addPrivateReaderLeakMatches 专门校验合法性，此处跳过 high-entropy 检测避免误报
-    if (!relativePath.startsWith('dist/private-reader/') && !relativePath.startsWith('content/private-reader/')) {
+    if (!relativePath.startsWith('dist/private-reader/')
+      && !relativePath.startsWith('public/private-reader/')
+      && !relativePath.startsWith('content/private-reader/')) {
       const entropyCandidates = (text.match(highEntropyPattern) || []).filter(isHighEntropyCandidate)
       addMatches(issues, relativePath, 'high-entropy', entropyCandidates, allowlist)
     }

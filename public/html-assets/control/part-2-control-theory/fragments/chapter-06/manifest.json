@@ -1,0 +1,25 @@
+{
+  "title": "理论六：环路整形与经典补偿器设计",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 491,
+  "chapter_slide_end": 665,
+  "completed_slide_end": 665,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-06-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["理论五：稳定裕度、带宽与性能极限", "Bode频率响应", "终值定理与系统类型"],
+  "learning_objectives": ["由S/T和输入频谱选择闭环带宽", "推导超前、滞后和超前滞后补偿器", "完成PMSM级联PI与前馈的单位一致设计"],
+  "control_connections": ["灵敏度整形", "经典补偿器设计", "电流—速度—位置级联", "数字实现的带宽分离"],
+  "deep_dive": [
+    "course-notes/part-2-control-theory/deep-dives/chapter-06-loop-shaping.html",
+    "course-notes/part-2-control-theory/deep-dives/chapter-06-worked-examples.html",
+    "course-notes/part-2-control-theory/deep-dives/chapter-06-visual-courseware-notes.html"
+  ],
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-06/001-slides-491-515.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-06/002-slides-516-545.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-06/003-slides-546-580.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-06/004-slides-581-635.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-06/005-slides-636-664.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-06/006-slide-665.fragment.html"
+  ]
+}

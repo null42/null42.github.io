@@ -1,0 +1,616 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-c38d7222a4cd72ac",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "ieicg2q3E0Rn+Npt14NkAg=="
+  },
+  "gate": {
+    "token": "MTjao/JBoBt5piaKN4Y6EfEXFSz9PQTTzgtDkULt2FoQKdoQUJwLRQq7cNmH5xVvD8o="
+  },
+  "shelf": {
+    "title": "j534Jpzi4cM1mb29IHUeRdg7a2h0QQi2GK1lU3cuvebRmP44oCNvqNgsZkaSSVa5UL+cNPz8jUV3Y+v2yAlXc9fPxbexSIzGPwzhlfFZ",
+    "author": null,
+    "group": "wi7gPHem3eFzO4LJMffoat+AhyThFpspgUAA50HsnnQEzPWICQvK59mpeg=="
+  },
+  "source": {
+    "sha256": "c38d7222a4cd72ac874cf9bcbab1d5c53a942a47e442e80b95683092feca1402"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "pGws3Ly4mkG7ecdUX4hDHJa31CTbheOsjCSQ+KsSO7HR3D4=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "YM7AQ7IQ5KndyuBlPz54e9lTYb1IMRaSFy74yTAFgHOw3gTI",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "NBPEVhm9h5wUVmIkXcyMGamBwZxuiKBKduSI7cbj+oQBsXSS",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "Nc5mk7zvO2LWy99xb/n7JahW2Gg+o8YnAhuPJqBtuL2W2TYu",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "1YNaPTsLC8yohRRcKhc0h4VpGHs0B6jbx97qGY/NOl4tVQlz",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "Z34V+2Y6p42i8ecQLF7wJVd4cUPdy59nvuSnNW22NTyOyVQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "N+hM7wKGikmqMVBb4b2fcIzSXyMnqUOqES8/Sh3ciPyJq3Dx",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-8",
+      "title": "F2mvXUtFS97zl/lbGw0O25G/CewM8WmjkAwApRTBai71Kt2m",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-9",
+      "title": "LLhd6+8153cRUkIO6KHbreKcQAR/r/QrUQVDZbo/YcUADtl3",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-10",
+      "title": "Pns6h14WUsy53EyLvvY8O18flfnaiZECpC3Cso6Vvxk1XPOn",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-11",
+      "title": "yq9wE0BbwB6BlTt26x2h7fCPKztJLFm1thPYfLTioyJyUC8=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-12",
+      "title": "kKzIwRV0On4FDgc+N216SYprBWfo0abYMyEaIqU62gI3RRnI",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-13",
+      "title": "45Eb9hNpM0NylZPMaon42TnabuMLeXy0eqQSuISrpvN9j/0O",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-14",
+      "title": "XPxxKQzYK+o0VSz+ctGpVv0fqS1GlTgv11YG7cSvbpIO3dvK",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-15",
+      "title": "Ar7k9Oj3asuqgEea8TfnRtmSs/ZSPjeB9T0bYQSXjemejhJ6",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-16",
+      "title": "RpOnoT521L61POxTY4L17kGz7C8zbzButc8Er5IEIAs8gK2A",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-17",
+      "title": "DWJqvDBrBa3U9nLncVS1ZBFdGNOrEjGakztJiRkLcV48mh28",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-18",
+      "title": "mPZw2+rM09B/zWZguLmlNe9IxK93Khaln1N+Ils7hMtqDsg=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-19",
+      "title": "7mkUKM8F72uM13Wslq0H+gMvCfjKjwsQlLgbMGQ8lpfwRllR",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-20",
+      "title": "G86SEDveL2Yy1+zP8rDKptz1x3iY9XzvVOMHSKOJryLTaVC+",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-21",
+      "title": "ZrT/5zsDb6IX2dslIj3UUL7xND6xHQ944GFP/tSmxLG/ZohE",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-22",
+      "title": "hLSDubeJ/HVUM4q6U7WWNa00sOUA1w8vjx2r/uUFBoYxdn5N",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-23",
+      "title": "XSs5i72gMimiFRn4CoI7tii2cYLADQigPblzA+S7aay0A09z",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-24",
+      "title": "hWo2MQN9IM6CqHGfzcXvgQyzKzCokkns+hsO68NeKK2ekGp2",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-25",
+      "title": "nKbz4wKdWjsg2ZZfPmq+7sIrpbj502XbswyJ32Qb+T0mMNw=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-26",
+      "title": "UOtV2sbKQyDkJ8TH6e0HCnMz0So/2tjf+4b7GJ3XD+KQsW23",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-27",
+      "title": "Z6Yx/FAnnCAqriZSjGcq8FxlBTR0ERfzcupEKRA6NQvyR7QJ",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-28",
+      "title": "Bq2kyirNsOVSXgD+SrH6dE9+21w2gShtq0a/NGkV/gA7rFY=",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-29",
+      "title": "OHbxKit7EMrcX7gBBO/m4BN4Qd/N9mUbEmMdmHo/3CF2SWvZ",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-30",
+      "title": "VLK2+4CUtQF9RRoXF4Hb8zJyX19x/hR9+TTQubA3eBRhTyHz",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-31",
+      "title": "dFCPB0LnU+cbbNzM4Ak8mbWEsm/J6CRrLAcbMhQBqaPA0o2U",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-32",
+      "title": "xJDiwCwNnB9yRkb0coB7d7Swby5pvHjCoChHK2cCW6TjNNdm",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-33",
+      "title": "WTkbqZe3rbHY7Mj2JC1Tf4bwcj+mXAtOPpIaCQ57AEs/O4td",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-34",
+      "title": "8Byllyxjb0LdCp6Ug2p9bUUQ2pcMpEX0/trFaYl5t73j1M2R",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-35",
+      "title": "QHyZMsUwyU76cuM9qx7vEr4+omxHS+qnIs22paf6F7jMvUg=",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-36",
+      "title": "rxXuP++L7IvfZH5ImmVjwnyAsKtoag47JXXzT+eRgwjvZXe4",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-37",
+      "title": "ciMfMArcHuEqRnRlMv6vkxv+HDI3nTAWZbg3ZlNH6y5flmk3",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-38",
+      "title": "7SAs4qJi1G7cJGOqsmuf61o4fn+MJqS98jyVL8ksQkkq8noq",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-39",
+      "title": "GCJT408OlWNaVb9SOHBrFn2akyMUMiuwozpKKPs9YbhlLfLz",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-40",
+      "title": "amxnz5mgZtltpIBvDe5BihpnAbxE4NiPNrkPy97DS5itlz4=",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-41",
+      "title": "p04Y4VpScDSr1UrrIoIzGeMN5utn7lsunU2Jkqj7nL1r8mpd",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-42",
+      "title": "xm6YcpZj5Lq9WMuL0HBvL/dG0/suYCqWKawW7EHjpmwpqfIX",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-43",
+      "title": "uPUAjw9wNQQ7MHDls5HhZuY/XwTQAcHIrePMkc56+2kSbqWH",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-44",
+      "title": "OiEAj7/wrTA9XCtX+5ERYeDVPfJThJDHKVHbL5RmVxV1/tig",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-45",
+      "title": "ufyxPOWlp4Ky9y5ICUhhpTGu0y60ogNVrWWWxB7bDvzUlnY=",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-46",
+      "title": "FJw5KhzXlM9CeXC7dUSl6XCBps8+BEb3yRF6RQC1UtVIPNbM",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-47",
+      "title": "TuftRnPCQSaq7ZddXWvCKEG1OGQFQnvRJWo77lRa74MnUs6o",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-48",
+      "title": "xpMs7R19uZRytX/iDuRALKxuWMPXYdN3e5O6BPOSV8f4nOlS",
+      "segmentIndex": 1
+    },
+    {
+      "id": "chapter-49",
+      "title": "gDxfyKGg2OqMvr6j5KPwxu4nKiU7JmIUL8Vrvf0krps+A9i4",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-50",
+      "title": "eICHxMU4//ihxI1hQWdR3GWD6hTPhHc/wl2OBr2oheTyIcKv",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-51",
+      "title": "LcEC18Kox6ac6huqVDwNR0BkwGvGE1fnkxs/+LlWtiQX8wYA",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-52",
+      "title": "o8pNLSTQRC0Gijjf70/8S02rPH1YipYniTAZ2cE2gdqcknjh",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-53",
+      "title": "VsAQE8xN5AyKY2JtJRaFN8s4fJCUtZroLa4o0efulWhWcI9O",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-54",
+      "title": "LobdH8CYosYeolhWqGM3xUAxCpVuq4dfQ81e8PttRwAa0eK1",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-55",
+      "title": "TE2n4L16z4rWLa+sokQ6NRmMlRp/Ztoz3pZP+8qMz5s2gl7E",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-56",
+      "title": "cxpbEZvQkcnpZpsa+PUNYLaSeCDIFOjIMLY4hrsiS41yIrNh",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-57",
+      "title": "yaFGHwOoKMVtRtjCTDDvaPL61yeV0vfgDd4zyqqa5rxPiKE0",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-58",
+      "title": "sAtYnZKVJ4TDmiMdnIWLkY0il4JHpcUeiQc16sY2ehNLOXGf",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-59",
+      "title": "LGueKOuVrvQqTni6kAR7UnGjHPObSp23HGcpi9p3TqNonY02",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-60",
+      "title": "0AMT1D+8wiIIzVKyMPxseqPZz3U7iFIhW9k/6Ze7mpS6NGKh",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-61",
+      "title": "PMk754RfRIhImUZ0KtdsSstFWDzwJmu69/sHqCIM6jLeQjjB",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-62",
+      "title": "059W56fsszUtBq+eoVOV0W/ch9jEvf+l6WP5hXbvXzDLL83W",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-63",
+      "title": "+NEnMqleooJIAa7WIdJD1wqPqaCO3qv2y8sxwqI7skKCn9Fd",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-64",
+      "title": "eBSbAXgxESIpFzo7iHDMQ2J3Lf2CrhtU/gYk5RA51oGgnt8a",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-65",
+      "title": "EdWcXFJvBMS7gw7M5wRmtccF4lpo76uw/kF81QOXNjUdRW5F",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-66",
+      "title": "rjv/LnfZGXGbkIM3KgBHCZLc2OsUP/XAhD03WEJduH4/leek",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-67",
+      "title": "QEbCw5MkBIWG48ikQLwfg0bzN+aCT59L7do2fWJhGQeZpJED",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-68",
+      "title": "WzqktMcWwL3si4FjlyYcaZTl/bbQp5UNkziOfeKyaEgnL1Fa",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-69",
+      "title": "+Tm+v/4VFEjrAFcOVRcjfYgjIA+KTf3GAl0AP/MAtWyNy5G/",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-70",
+      "title": "y6VGH3tkm/JXdZHqerfCVyUMOBB+vMpd5SiVn0DeuogPQgG5",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-71",
+      "title": "pv/p0yj86n8ld9uGiY3a10GdYNyR9bLYAwTX9Nvl9PkClaoo",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-72",
+      "title": "jO2YkqjZRspkD0J2aNdiOLbw7GnsbPhXU3WmjOaC7PgEYr10",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-73",
+      "title": "QclDdYBdhqJADhK0ap3phQjvocHcuIpi9xzTm6cE38lZhm8f",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-74",
+      "title": "SCOLvWbEwrrFcSDgvs7Xmq0iHsYEawjXnVclxNaMU3KIKlK4",
+      "segmentIndex": 2
+    },
+    {
+      "id": "chapter-75",
+      "title": "kd3hVacXjIv288VMDoSdrksNTv4Z2iowtlF8gYA/FQSoTfZv",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-76",
+      "title": "21UCA8m1D97FWoUm2ShfQSzZ2wgKFLxlOq1oJ5C2w25RS88U",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-77",
+      "title": "7F2fsaSH19WRPHzS0Mk3+HU34NVEXSBkqpD44gWMgjfBICSd",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-78",
+      "title": "/F9dL20SVolx8KEXPL5uSRfZQVIx839OaLZD1kxlNEhmoxO8",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-79",
+      "title": "p0amJ3S/Drri7i7zf+QdNGVkHFK5ZXxjnWStUoMUwgVMqHYc",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-80",
+      "title": "VFP6heKmg/NLRZTZnw7upfXDMxLiy1Iuio/2HxnKtHtKdAUV",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-81",
+      "title": "bohfDwCSv8hIVHO+8XhR1xKgEkJaDAYLWMvY9Nyi+jYsG1d9",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-82",
+      "title": "OMWTkEamtuazZsKsEQyYMLyUoEAwddalox3qvhjJDU/vKwJN",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-83",
+      "title": "N0q4oM5EUd24ZzB/2MRwDmNc1O4njzeF+X4Mi1Sj5Z7EC8Sw",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-84",
+      "title": "T8hwi4GzIFjdSwWz0jDnG1vvQ9Tgn+DnKN5jBD/dNF9IS7aA",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-85",
+      "title": "lJiX238Gp2IijhD2ERlXHwpOELxKWdIz9Fi9SPd8UhJWuRSg",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-86",
+      "title": "ezUCOToLaOE5rLSjeDs+v1iPl9Q/rzR6FOCxgBiCcsnPbDf4",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-87",
+      "title": "TK2vJ89Q7CQ+xm0ZsHQSAg4nn1DdwBX5X10tVspGehqKIE/Y",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-88",
+      "title": "0gVYdIHLgPFZ4z1ItaAgBYz9q3wZT/jJDO2h+vQIrbuLe7RL",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-89",
+      "title": "/DqtbwIUzo+iQkeFM6B2v6wiOTCa+aPPt6bzPRu2qqcCFrel",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-90",
+      "title": "k3mcPOmf8RdtMSUtWwqyDAHSFbVgjRD1fCSVJDhsyrl7Ty36",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-91",
+      "title": "LNr5Pci4+2P1m/bLJ4nWmgsMZaBBe5kzmnDiXq4sGlVuLmlj",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-92",
+      "title": "KBmvEL6C056MPwiprV87PCnmOLgsj9C0nue7Fh5wzb/Hp15m",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-93",
+      "title": "xaYftsI/5AQlBMY2XRrcP9vU8GU2B8GxM2qKKLEplyngHxfe",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-94",
+      "title": "vNvjZSqf7DU74iv89EFCt0kKK0BRXCRURzaKtj8t++Q4zQnC",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-95",
+      "title": "d/LLLXNkMqf0u0YITXo14PtOB+Tq3Vyve/JkNDj9D8bTj/cE",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-96",
+      "title": "C+Nq+hSoXqHrTyjeq7kaBl0vnZ58EncrdSXqI+LivuWi/A9L",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-97",
+      "title": "bKFoQBXmQzAvSEKPH/cA2O2J76EFjlEx6/zRa/lAPVoEH+KB",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-98",
+      "title": "m0HUz+ZV2TxMld9UjAbdA9paC8cPZ0SZ+rYSlmZBnqnxmpn2",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-99",
+      "title": "9P7pLv/Cyu8T6irUNiHYs7+ChrvcRfbWWKlfumAqEMWIo8rw",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-100",
+      "title": "qT0gFZmYalO1KrQSA34IjurISO9PabgsRSHw1zrF6byQ8O3m",
+      "segmentIndex": 3
+    },
+    {
+      "id": "chapter-101",
+      "title": "84kr9MD6ygVyvBx5Yg9nW9lS89R566H9eLS50lyQgBF5GoRi",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-102",
+      "title": "OlNL6ttbSebGgqlhWWstDQNWmXIcqezXl4u7KNICw1IHRSJE",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-103",
+      "title": "Ve2gqrza0HFLlsr3ZN75QwoyoZeV0Hkwr3m05OgmM8sE/6El",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-104",
+      "title": "d8cXVk+K+XuNjeZZo5jiddAqJ8J+FOzkHUc6mCou0ko+me2F",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-105",
+      "title": "7mnDO8Y49Jj44Tcn+qHQTABAAHq7uGzWsXt/fQlcQlimeIZE",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-106",
+      "title": "2cxj4eX2zo2rgDUT+tZR0MBnYMkiESsjMSzc0Pk06CjtDHR9",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-107",
+      "title": "yrrM5lY2qATzXB7uU1hdgTp3H9qt+bWemtkJs4y5hj4B0SEB",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-108",
+      "title": "cEc3IIhbl3WidoX08b7a+5kXJRvLkniiDfkTfDNYuzsCGeLP",
+      "segmentIndex": 4
+    },
+    {
+      "id": "chapter-109",
+      "title": "P6TYAViCqO350coxb0TINMCcPu9lV+M6fsYMxqhFYbq/rzPp",
+      "segmentIndex": 4
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "uT3BLaE6RLzapu/u",
+      "bytes": 94957,
+      "charHint": 0,
+      "compression": "gzip"
+    },
+    {
+      "index": 1,
+      "file": "seg-0001.bin",
+      "iv": "KyQKTfiFc2clyXGB",
+      "bytes": 94151,
+      "charHint": 88339,
+      "compression": "gzip"
+    },
+    {
+      "index": 2,
+      "file": "seg-0002.bin",
+      "iv": "hYqL44wwmLQNjBRf",
+      "bytes": 96490,
+      "charHint": 175729,
+      "compression": "gzip"
+    },
+    {
+      "index": 3,
+      "file": "seg-0003.bin",
+      "iv": "j82DLNqjqpp8fSb+",
+      "bytes": 98145,
+      "charHint": 263682,
+      "compression": "gzip"
+    },
+    {
+      "index": 4,
+      "file": "seg-0004.bin",
+      "iv": "oWK/zzuxwKew1PpA",
+      "bytes": 34495,
+      "charHint": 353170,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 961
+  }
+}

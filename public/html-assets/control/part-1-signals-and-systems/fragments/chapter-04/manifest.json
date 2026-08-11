@@ -1,0 +1,39 @@
+{
+  "title": "第四章 连续时间傅里叶变换",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 249,
+  "chapter_slide_end": 306,
+  "completed_slide_end": 306,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-04-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "连续时间傅里叶级数及其收敛",
+    "复指数LTI特征函数",
+    "Dirac冲激与广义函数",
+    "复数幅相和积分极限"
+  ],
+  "learning_objectives": [
+    "从周期延拓与黎曼和推导连续时间傅里叶变换",
+    "区分傅里叶系数、频谱密度和冲激谱权重",
+    "计算指数、冲激、矩形、sinc及周期信号基本变换对",
+    "识别普通函数收敛条件与广义函数变换边界",
+    "使用线性、时移、对称、微积分、尺度和对偶性质重构复杂频谱",
+    "使用帕斯瓦尔、卷积、相乘和调制性质分析能量与频谱搬移",
+    "由线性常系数微分方程推导频率响应和单位冲激响应"
+  ],
+  "control_connections": [
+    "用连续频谱分析有限时长参考、扰动和噪声",
+    "理解脉冲辨识的带宽、峰值和采样交换",
+    "由周期冲激线谱连接谐振控制和重复控制",
+    "由冲激串变换对建立采样与混叠基础",
+    "把延迟相位、带限微分、积分状态和时间缩放迁移到控制设计",
+    "用能量指标、纯延迟和同步频移解释控制性能与谐波处理",
+    "由极点、零点、时间常数和模态留数连接连续对象与控制设计"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-04/001-slides-249-274.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-04/002-slides-275-294.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-04/003-slides-295-301.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-04/004-slides-302-306.fragment.html"
+  ]
+}

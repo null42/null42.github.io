@@ -1,0 +1,84 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-aa4a5c6ea5207539",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "lg97o/ppsfcEXpbKgZmU9g=="
+  },
+  "gate": {
+    "token": "5OU7ATkBOdgEyoT3/G0ALz6oOiO9nPAI3nNlKKxyHzRjxZXyj7ZurHHzNMB+S1roH6s="
+  },
+  "shelf": {
+    "title": "QQW+XqLiwVhAZh0JJTCFv+7ERjoIZBCIfTqfBaEWlW7pktUuzssGpl1gpVOV98EWqLNKxXqsAD+mj8/2wuEv95iE+gPVLw2WB9HoiqfcxfxWOqckWn0S3an8b623Oz6zyaWwip9viY4w9UmWVodLj+VFulj83ka/g5qgQ5h99Nwf015hiQfcLxMJlXw3",
+    "author": null,
+    "group": "Lp3/pEKTEThz9YJCfX/Yllmvc3ZL2XUnxFNxDKs48fd/b3td7A294ruIdA=="
+  },
+  "source": {
+    "sha256": "aa4a5c6ea520753947dc46f5b221c44b443a83f6b48de0fe38b9850a02cd502e"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "4m0Krnv5M2Yvl9lONeY/ro6ZRW40RAGR1LLA3RzAQQM3LCU=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "SC77KRLONtn4muDfwsjPMdHD9iE5Wk3Po5eYDehY3BrDMek=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "tCXvHWRE8w1zZS9YOCT8VANe5Po0FJIKS/iLd1WMEexZlk8=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "lyqwHn98r9oc3ZUED25DY5Tz4plgHJ7uAxSTlmJyFOFBQJk=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "d1+0IFeszpxMabpJesgezJj/gtn6iyh7bhCVwmfv5KYsJ4o=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "e1pgue4RfANbbMParBAlK7/u2BATW43cakQ8KBx4oSBP014=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-7",
+      "title": "f8ex44Vx4GsoC4STPgD3bzocH14Bcnj7fvos2uEGu3KSoLQ=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-8",
+      "title": "qrnCWwFQnXUwI3C3foVOGnHPnxrQ/L+OIJ2yzLfiOeJcyhI=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-9",
+      "title": "M4LRE3GQLgt3obokoig5LoV7O7zMP3A80iXtdRyTIRISsf8=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "zFt85YN/YmObcFA2",
+      "bytes": 89379,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 208
+  }
+}

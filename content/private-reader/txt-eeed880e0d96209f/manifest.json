@@ -1,0 +1,37 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-eeed880e0d96209f",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "lNxuDd5MFC5b4CaRncjHGQ=="
+  },
+  "gate": {
+    "token": "B24mxTItrdO1jrjoPcazOKygN2R8xxubrDejRpJ9qfBx+8r+Wr+rGSORwfgf20X3U2M="
+  },
+  "shelf": {
+    "title": "+FnaETS3SBsUfaShfu3/qk9Qb32mtCLqGHB3TeRClveuAUPUR75TI9ss3IOT24ED2wHT5SVh05jqplS9DQaIqt2XJIHffBQiSAi2QIKfsclBCc0ZftxmuZitBKMzVxXTA0WfR2zShWXqqOPPYoKJde+e4jRoORCY/mIJtkL6kusa3+cSLcbIRYwZImziSmCSlCtKRsYZC6aiytE0jMwyaTgvNdktTtD9L0/b2kf/+/uQ17s=",
+    "author": null,
+    "group": "HRcRb++w0G+qcbXeKbm0y7KOw2oDLzF4ny8LlJ5GYHbZqkhnMU4l5w=="
+  },
+  "source": {
+    "sha256": "eeed880e0d96209fa05fbe292b8b3867f5d0a1b7a4ca770f37fe06af442878c2"
+  },
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "ADpOjIfR+N/vWKz1",
+      "bytes": 20803,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 46
+  }
+}

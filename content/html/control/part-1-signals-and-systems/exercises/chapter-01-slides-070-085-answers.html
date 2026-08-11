@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>第70–85页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head>
+<body><main><header class="hero"><div class="eyebrow">第一章 · 系统与性质</div><h1>第70–85页分层练习完整答案</h1><p>每题都标明使用的定义、证明方向或反例。</p></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><p><code>y[n]=x[n−2]</code> 依赖过去样本，故有记忆；只访问 <code>n−2≤n</code>，故因果；可由 <code>x[n]=y[n+2]</code> 恢复，故可逆。补充：它也 BIBO 稳定、时不变、线性。</p>
+<h3>A2</h3><p><code>y(t)=3x(t)−2</code> 只用当前输入，所以无记忆且因果；但 <code>T{0}=−2≠0</code>，所以非线性，是仿射系统。</p>
+<h3>A3</h3><p>串联：若 <code>v=T₁{x}</code>、<code>y=T₂{v}</code>，则 <code>y=T₂{T₁{x}}</code>。并联：若 <code>y₁=T₁{x}</code>、<code>y₂=T₂{x}</code>，求和输出为 <code>y=T₁{x}+T₂{x}</code>。</p>
+</section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p><code>T{x}=t x(t−1)</code> 对任意线性组合满足叠加式，因此线性。它只访问过去时刻 <code>t−1</code>，所以因果且有记忆。时不变检验：先移输入得 <code>t x(t−t₀−1)</code>；先求输出再移位得 <code>(t−t₀)x(t−t₀−1)</code>，一般不等，故时变。</p>
+<h3>B2</h3><p>累加器依赖全部过去样本，故有记忆且因果；由 <code>x[n]=y[n]−y[n−1]</code> 可恢复输入，故可逆。取有界输入 <code>x[n]=u[n]</code>，输出为 <code>(n+1)u[n]</code>，无界，故不 BIBO 稳定。</p>
+<h3>B3</h3><p><code>y(t)=sin[x(t)]</code>：无记忆；一般不可逆（多个输入相差 <code>2π</code> 得同输出）；因果；稳定（有界输入的输出总满足 <code>|y|≤1</code>，甚至任意输入也有界）；时不变（两条移位路径同为 <code>sin[x(t−t₀)]</code>）；非线性（不满足齐次或叠加）。</p>
+</section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>若实输入满足 <code>|x(t)|≤B</code>，则 <code>−B≤x(t)≤B</code>，从而 <code>0&lt;e^{x(t)}≤eᴮ</code>，输出有统一有限上界，所以 BIBO 稳定。它非线性，因为 <code>T{0}=1≠0</code>，也因为 <code>e^{x₁+x₂}≠e^{x₁}+e^{x₂}</code>。</p>
+<h3>C2</h3><p>对 <code>T{x}[n]=n x[n]</code> 取 <code>x[n]=δ[n]</code>、移位 1。原输出为 0，后移仍为 0；移位输入 <code>δ[n−1]</code> 通过系统后得到 <code>nδ[n−1]=δ[n−1]</code>，两者不同，故时变。线性方面，<code>n[ax₁+bx₂]=a nx₁+b nx₂</code>，所以仍线性。</p>
+</section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>负反馈：<code>e=r−Fy</code>、<code>y=Ae</code>，故 <code>y=A(r−Fy)</code>，整理得 <code>(1+AF)y=Ar</code>，标量情形 <code>y/r=A/(1+AF)</code>。若求和点改为正反馈 <code>e=r+Fy</code>，则分母变为 <code>1−AF</code>，更容易在环路增益接近 1 时产生奇异或失稳。</p>
+<h3>D2</h3><p>原映射含常值偏置时不保持原点，因此不是线性系统。选定平衡点后令 <code>δx=x−x̄</code>、<code>δy=y−ȳ</code>，固定偏置在增量关系中抵消，可得到局部线性或一阶线性化模型。线性结论只适用于规定工作点附近的增量，不应扩大到全局绝对变量。</p>
+<h3>D3</h3><p>离线处理时完整序列已知，访问 <code>x[n+1]</code> 可行；模型预测中使用的是对未来量的预测值，不是真实未来样本，性能依赖模型与估计误差；纯实时实现若没有预测或额外延迟，则在时刻 <code>n</code> 无法获得真实 <code>x[n+1]</code>，该规则是非因果、不可直接实现的。</p>
+</section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-01-signals-and-systems/#slide-070">返回统一章节讲义第70页</a></p>
+</main></body></html>

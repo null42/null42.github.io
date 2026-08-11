@@ -1,0 +1,32 @@
+{
+  "title": "第八章 通信系统",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 457,
+  "chapter_slide_end": 543,
+  "completed_slide_end": 543,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-08-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "CTFT和调制性质",
+    "采样与频谱复制",
+    "复指数信号"
+  ],
+  "learning_objectives": [
+    "推导调制与解调频谱搬移",
+    "分析载波同步和带宽代价",
+    "迁移到注入与锁相检测"
+  ],
+  "control_connections": [
+    "无感高频注入",
+    "同步检测与锁相",
+    "多速率信号分离"
+  ],
+  "deep_dive": "course-notes/part-1-signals-and-systems/deep-dives/chapter-08-communication.html",
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/fragments/chapter-08/001-slides-457-464.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-08/002-slides-465-481.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-08/003-slides-482-491.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-08/004-slides-492-530.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-08/005-slides-531-543.fragment.html"
+  ]
+}

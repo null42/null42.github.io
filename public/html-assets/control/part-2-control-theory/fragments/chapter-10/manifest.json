@@ -1,0 +1,17 @@
+{
+  "title": "理论十：控制器硬件部署（离散时间实施）",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 871,
+  "chapter_slide_end": 916,
+  "completed_slide_end": 916,
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": ["理论七：状态反馈", "理论八：观测器", "Z变换与数字控制"],
+  "learning_objectives": ["把连续控制器转成差分实现", "处理采样/延迟/饱和/初值", "建立实验日志与验收指标"],
+  "control_connections": ["数字积分器", "离散状态反馈", "输出反馈", "第三部分硬件实验"],
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-10-content-overrides.json",
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-10/001-slides-871-887.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-10/002-slides-888-906.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-10/003-slides-907-916.fragment.html"
+  ]
+}

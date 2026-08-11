@@ -1,0 +1,32 @@
+{
+  "title": "理论一：控制系统导论、LTI模型与传递函数",
+  "source": "深度基础强化第二部分.pptx",
+  "chapter_slide_start": 1,
+  "chapter_slide_end": 72,
+  "completed_slide_end": 72,
+  "content_overrides": "course-notes/part-2-control-theory/source-maps/chapter-01-content-overrides.json",
+  "stylesheet": "../../part-1-signals-and-systems/assets/companion.css",
+  "prerequisites": [
+    "微分方程与牛顿/欧拉动力学",
+    "卷积与冲激响应",
+    "单边拉普拉斯变换"
+  ],
+  "learning_objectives": [
+    "从物理对象建立闭环结构",
+    "在LTI模型间往返转换",
+    "由传递函数判断响应与稳定性"
+  ],
+  "control_connections": [
+    "四旋翼控制分配",
+    "比例与微分反馈",
+    "数字控制部署前的约束检查"
+  ],
+  "fragments": [
+    "course-notes/part-2-control-theory/fragments/chapter-01/001-slides-001-012.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-01/002-slides-013-019.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-01/003-slides-020-030.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-01/004-slides-031-046.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-01/005-slides-047-053.fragment.html",
+    "course-notes/part-2-control-theory/fragments/chapter-01/006-slides-054-072.fragment.html"
+  ]
+}

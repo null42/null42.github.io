@@ -13,3 +13,15 @@ const { class: className } = Astro.props;
 <div class:list={["float-panel p-2", className]} role="none">
 	<slot />
 </div>
+
+<style>
+	.float-panel {
+		background: rgb(255 255 255) !important;
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+	}
+
+	:global(:root.dark) .float-panel {
+		background: rgb(23 23 23) !important;
+	}
+</style>

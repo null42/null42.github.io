@@ -1,0 +1,69 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-f471ab0b35cca3a6",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "xxbO7dtNgd3h0OfYJ645Sw=="
+  },
+  "gate": {
+    "token": "lcNYzweDA4RkPcEyuu5Fvqos12pzDWTmk6zb1wK+z/qsVsb2rS04JPaqVI1Fr8BB4RU="
+  },
+  "shelf": {
+    "title": "aj3qSaIFEh57dU4Ptc5MoGsW9RUGx4Tbv9VVtkY6iJb6EZwqqaSCV0x0I97qRG/omtNNzc57rVez51nuGj+kpBG8H8F+l7AUFryIJRaiy+S/0KPnMYRINn51IT9IuN5f3+VVaE0hHyazCiNi2djlHsSIzVoDxWQ9Q2cfCF5HNe2ZM44Rdc+tsAUeyFF+7y3S9nsJqplhJybFFvoUHJgc9Z+w3j0HSLfGOMkGBn7+roVvyLe/3nmoLBhI9kWzRcJyUkc/m6vGnVKtPgEfkWdxql5CoEv3RMxmPsXOctS/sGVXbngq",
+    "author": null,
+    "group": "KyJL9oM/DIDn3FzhSEJ2QqUk3T04iGgDdRN98CyWV7BChudvJfbdZjcBTQ=="
+  },
+  "source": {
+    "sha256": "f471ab0b35cca3a60cff9943f99bae7be3bf92c10bcdd2778aa73e2090236089"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "cRxsq/h/JFK+BPINUOPjkfsp+cI2lVoeuzgk46uF7q5Sq1k=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "b6Hs59ofd175tnqey3pvcY5r2BnHFrv9xyGkqSh09XikEUY=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-3",
+      "title": "pMNQhLpzOOxZIfuJ4Y+3xDX5CN1VDQvBdpm1ZPueDi/9W7M=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-4",
+      "title": "a7CFJVEDQJ+vsXdVrfQ/6LZYCiqtgfS9UGy2VTnUN/jUFeY=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-5",
+      "title": "MRWKcgI7cPCJNyT1fBA1nsIsi6uOAv9DZmycC+PzjkEie5g=",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-6",
+      "title": "llTXVhH++q1UnQyyJDCL2OMu80N2ofFxVhyvkb3FvSaIeoc=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "qh++AVt09vNHBQ6N",
+      "bytes": 41457,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 83
+  }
+}

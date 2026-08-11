@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">连续时间复指数的旋转与指数包络</title>
+  <desc id="desc">展示实部和虚部在正负指数包络之间振荡，并标注 sigma 与 omega 的不同作用。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#334155"/></marker></defs>
+  <rect width="900" height="420" rx="24" fill="#f8fafc"/>
+  <line x1="70" y1="210" x2="840" y2="210" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="120" y1="360" x2="120" y2="55" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="846" y="216" font-size="22" fill="#334155">t</text><text x="78" y="62" font-size="20" fill="#334155">幅值</text>
+  <path d="M120 210 C230 190 330 145 450 95 C580 45 700 35 820 25" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M120 210 C230 230 330 275 450 325 C580 375 700 385 820 395" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M120 210 C155 170 190 250 225 205 C260 150 300 285 340 190 C385 90 430 340 480 170 C530 25 580 400 640 145 C700 -10 755 430 820 115" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <text x="575" y="70" font-size="22" fill="#b91c1c">±|c|e^{σt}：包络</text>
+  <text x="530" y="245" font-size="22" fill="#1d4ed8">Re{ce^{(σ+jω)t}}</text>
+  <rect x="145" y="280" width="305" height="95" rx="14" fill="#fff" stroke="#cbd5e1"/>
+  <text x="165" y="315" font-size="21" fill="#0f172a">σ 决定增长/衰减速度</text>
+  <text x="165" y="350" font-size="21" fill="#0f172a">ω 决定包络内振荡速度</text>
+</svg>

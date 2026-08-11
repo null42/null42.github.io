@@ -1,0 +1,49 @@
+{
+  "schema": "private-reader/v2",
+  "kind": "txt",
+  "slug": "txt-36f8f2e9614fe0a7",
+  "crypto": {
+    "algorithm": "AES-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 210000,
+    "gateSalt": "rCMdQ1IZ7ZZfq75yVCdbsg==",
+    "shelfSalt": "5GIGu7JdzGQ5na6ZxGQ0fg==",
+    "bookSalt": "qdNRb6QNSs94YCu69XwGiw=="
+  },
+  "gate": {
+    "token": "j8WptcxhgWroYswVew6y5F5RkAAWEjZtQ0fk9PgqyDkS8V5YvxZT/wxvWIaAp9a2me0="
+  },
+  "shelf": {
+    "title": "WJ0WxquxjdM5Psh1v1mw8LueKLKUdE8hi1aGb2SCz4+27KC1dzdFQy0GdmHi4t8QeDfkm0bPG2LANNFSs2EjSGwGei4SGCFFC5zv5Vh7+cXDlxUgT5LwKKRRYvPTw4smqXjbzULUUOqzS2CHrpZJlu6AFwDRSyEbdiMgAp1lAEFQYqMEoA58Aoivss3xBteLpMjdL0H8l5mQVED24ZTL6c2SZRSR5ltNdJ6q+7zXmFnaFtDMEk3bTVwgGtD//a8N0jKUQxss5ZFq77jRKj8VU19D9iT9jbdYpeQCaoTlhDafu6FvJgTXW3bD3b/E/BokjfrcdqHNJQMHIlDK3oCi8Nc=",
+    "author": null,
+    "group": "QKr3LQ540X31Hvuu2MaXFvHlB8Ef8nCK4vnexzsmaCpvh/BDyWvoGw=="
+  },
+  "source": {
+    "sha256": "36f8f2e9614fe0a73b713d88ad66819e2663b608abf234c1ac31e82b28a8c487"
+  },
+  "toc": [
+    {
+      "id": "chapter-1",
+      "title": "Mc0be5eILiTLyG50r98+zdjKwbhEk+MSaEqHZ9cwh4ZWnqNUqeNjGnqybe7c6SRUIA==",
+      "segmentIndex": 0
+    },
+    {
+      "id": "chapter-2",
+      "title": "4ZSmVgdHgTQtxjc/NZGHrQbKHQSNDFGwixTXcJ8fiPVCxvlnYxOJ8hMMNSCGUMghHmACWmhPRwc=",
+      "segmentIndex": 0
+    }
+  ],
+  "segments": [
+    {
+      "index": 0,
+      "file": "seg-0000.bin",
+      "iv": "rT0Ly37EcEOtaynN",
+      "bytes": 12303,
+      "charHint": 0,
+      "compression": "gzip"
+    }
+  ],
+  "reading": {
+    "estimatedTimeMin": 24
+  }
+}

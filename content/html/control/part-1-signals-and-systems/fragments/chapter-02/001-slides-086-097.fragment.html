@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <base href="/html-assets/control/part-1-signals-and-systems/companion/">
+  <link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/fragments/assets/companion.css">
+  <title>第二章第86–97页｜离散冲激分解与卷积和</title>
+</head>
+<body><main>
+<header class="hero">
+  <div class="eyebrow">第二章 · 课件第 86–97 页</div>
+  <h1>离散 LTI 系统：从冲激分解到卷积和</h1>
+  <h2>前置知识</h2><p>线性、时不变、离散单位冲激、筛选性质、序列移位、等比级数和分段支集。</p>
+  <h2>学习目标</h2><p>能说明为什么单位冲激响应足以刻画 LTI 系统；能从任意序列的冲激分解独立推导卷积和；能用“翻转—移位—相乘—求和”和支集交集两种方法确定求和上下限；能复算右边与左边指数序列例题。</p>
+</header>
+
+<section class="slide-note" id="slide-086" data-slide="86">
+  <div class="slide-kicker">SLIDE 086 · 第二章</div>
+  <h2>第86页｜线性时不变系统：为什么值得单独研究</h2>
+  <div class="source-label">[课件] 第二章标题为“线性时不变系统”。</div>
+  <p>LTI 不是所有系统，而是一类同时满足叠加性与时间平移对称性的系统。它之所以成为信号与控制理论的核心，是因为“复杂输入的响应”可以被还原为“基本输入响应的线性组合”，系统分析从重新求解每个输入，转化为一次求出单位冲激响应后重复使用。</p>
+  <p>线性保证加权分量的响应可以分别计算再相加；时不变保证同一个基本信号若只改变出现时刻，其响应也只发生同样的时间移位。两条性质合在一起，恰好把任意信号的冲激分解传递到输出端。</p>
+  <div class="formula">输入分解 + 线性 + 时不变 ⇒ 输出由单位冲激响应唯一确定</div>
+  <p><strong>[控制连接]</strong>在零初始条件下，许多小信号对象、滤波器和闭环通道可近似为 LTI；冲激响应、传递函数、频率响应和极点模型只是同一系统的不同表示。</p>
+</section>
+
+<section class="slide-note" id="slide-087" data-slide="87">
+  <div class="slide-kicker">SLIDE 087 · 本章路线</div>
+  <h2>第87页｜从第一章性质判断走向“可计算的系统表示”</h2>
+  <div class="source-label">[页面演进] 先复习六类系统性质，再研究离散信号的冲激加权和与连续信号的冲激加权积分。</div>
+  <p>第一章告诉我们怎样判断系统是否线性、时不变、因果和稳定；本章进一步回答：一旦确认系统是 LTI，怎样用一个对象完成全部输入—输出计算。离散时间中，任意序列写成移位冲激的加权和，输出成为卷积和；连续时间中，用窄脉冲极限得到冲激加权积分，输出成为卷积积分。</p>
+  <p>这条路线包含三个层次：<strong>表示层</strong>把输入拆成基本信号；<strong>系统层</strong>用 LTI 性质传递每个分量；<strong>计算层</strong>通过卷积确定每个时刻的重叠范围与加权总和。</p>
+  <p class="pitfall">不要把卷积只记成一条求和公式。它的逻辑起点是“输入分解”，求和上下限来自两序列支集的交集，结果的物理意义是系统对过去各输入样本的加权记忆。</p>
+</section>
+
+<section class="slide-note" id="slide-088" data-slide="88">
+  <div class="slide-kicker">SLIDE 088 · 2.1 离散时间 LTI 系统</div>
+  <h2>第88页｜单位冲激为什么能充当离散信号的基本积木</h2>
+  <p><strong>[必要补充]</strong> 课件从离散冲激的筛选性质出发。对任意固定整数 <code>n₀</code>，乘积 <code>x[n]δ[n−n₀]</code> 只有在 <code>n=n₀</code> 时可能非零，因此可把系数冻结为 <code>x[n₀]</code>：</p>
+  <div class="formula">x[n]δ[n−n₀]=x[n₀]δ[n−n₀]</div>
+  <p>等式左边看似仍含完整序列 <code>x[n]</code>，但冲激只“读取”位置 <code>n₀</code> 的样本值。于是 <code>x[n₀]δ[n−n₀]</code> 表示：在 <code>n₀</code> 处放置一个幅值等于该样本的冲激。</p>
+  <p>若对所有整数位置都放置相应加权冲激并相加，在任意观察点 <code>n</code>，只有位置与观察点重合的那一项留下。因此离散序列可以被精确重构，而非近似。</p>
+  <p class="pitfall">连续时间冲激需要分布与积分语言；离散冲激只是普通序列。离散分解无需极限过程，这是离散卷积和推导更直接的原因。</p>
+</section>
+
+<section class="slide-note" id="slide-089" data-slide="89">
+  <div class="slide-kicker">SLIDE 089 · 移位冲激逐样本提取</div>
+  <h2>第89页｜每个样本对应一个加权移位冲激</h2>
+  <div class="source-label">[课件图解] 依次展示 <code>x[−2]δ[n+2]</code>、<code>x[−1]δ[n+1]</code>、<code>x[0]δ[n]</code>、<code>x[1]δ[n−1]</code> 等分量。</div>
+  <p>注意冲激位置与括号符号：<code>δ[n−k]</code> 位于 <code>n=k</code>。因此负时刻样本 <code>x[−2]</code> 对应 <code>δ[n+2]</code>，正时刻样本 <code>x[2]</code> 对应 <code>δ[n−2]</code>。权重是样本纵坐标，冲激移位决定横坐标。</p>
+  <div class="formula">第 k 个分量：x[k]δ[n−k]</div>
+  <p>对一个双边序列，理论上要对所有 <code>k∈ℤ</code> 求和；对有限长序列，只有有限个非零样本，求和自动缩短。此处的 <code>k</code> 是枚举样本位置的求和变量，而 <code>n</code> 是最终输出序列的自变量。</p>
+  <p class="pitfall">最常见错误是把 <code>k</code> 与 <code>n</code> 混为同一个变量。推导中应始终问：现在固定的是输出时刻 <code>n</code>，还是正在遍历输入样本位置 <code>k</code>？</p>
+</section>
+
+<section class="slide-note" id="slide-090" data-slide="90">
+  <div class="slide-kicker">SLIDE 090 · 图形分解</div>
+  <h2>第90页｜把原序列拆开，再逐项无损相加</h2>
+  <p>课件把原序列与若干加权冲激并列画出。每个分量只保留一个样本：位置、符号和幅值都与原序列对应。所有分量叠加后，原序列的每个位置恰好被恢复一次，其他分量在该位置均为零。</p>
+  <p><strong>[拔高]</strong> 这个图形过程与向量空间中的基展开类似：移位冲激序列 <code>{δ[n−k]}</code> 构成离散序列的坐标基，样本值 <code>x[k]</code> 就是展开系数。不同之处在于序列可能是无限维的，所以展开通常写成无穷和。</p>
+  <div class="formula">x[n]=⋯+x[−1]δ[n+1]+x[0]δ[n]+x[1]δ[n−1]+⋯</div>
+  <p><strong>即时检查：</strong>任选 <code>n=2</code> 代入右端，所有 <code>k≠2</code> 的冲激都为零，只剩 <code>x[2]δ[0]=x[2]</code>。这个代入检验可以快速发现移位符号错误。</p>
+</section>
+
+<section class="slide-note" id="slide-091" data-slide="91">
+  <div class="slide-kicker">SLIDE 091 · 离散冲激筛选公式</div>
+  <h2>第91页｜严格推导任意离散序列的冲激展开</h2>
+  <div class="formula">x[n]=Σ<sub>k=−∞</sub><sup>∞</sup>x[k]δ[n−k]</div>
+  <p>固定任意整数 <code>n</code>。求和中仅当 <code>k=n</code> 时 <code>δ[n−k]=δ[0]=1</code>；其余所有 <code>k</code> 对应冲激均为零。因此右端等于 <code>x[n]</code>。这里不是“把 <code>k</code> 换成 <code>n</code>”，而是冲激筛选后只有索引值 <code>k=n</code> 的一项存活。</p>
+  <p>也可把公式理解为一组移位冲激的线性组合：每个基本序列 <code>δ[n−k]</code> 的权重为 <code>x[k]</code>。该表示对有限长、单边和双边序列都成立，区别仅在于非零系数的范围。</p>
+  <p class="pitfall">求和变量是哑变量，写成 <code>m</code>、<code>r</code> 都不改变结果；但输出自变量 <code>n</code> 不能在求和结束前被“消掉”。清晰区分变量角色，是后续卷积换元的基础。</p>
+</section>
+
+<section class="slide-note" id="slide-092" data-slide="92">
+  <div class="slide-kicker">SLIDE 092 · 2.1.2 单位冲激响应</div>
+  <h2>第92页｜LTI 两条性质如何把输入分解传到输出端</h2>
+  <p>设系统算子为 <code>T</code>，单位冲激输入的输出定义为 <code>h[n]=T{δ[n]}</code>。由时不变性，移位冲激 <code>δ[n−k]</code> 的响应是同样移位的 <code>h[n−k]</code>；再由线性，乘以权重 <code>x[k]</code> 后响应变为 <code>x[k]h[n−k]</code>。</p>
+  <div class="formula">δ[n] → h[n]；δ[n−k] → h[n−k]；x[k]δ[n−k] → x[k]h[n−k]</div>
+  <p>最后把所有输入分量的响应相加：</p>
+  <div class="formula">T{x[n]}=T{Σₖx[k]δ[n−k]}=Σₖx[k]T{δ[n−k]}=Σₖx[k]h[n−k]</div>
+  <p>这一步中每个等号都对应一条假设：把 <code>T</code> 移入求和使用线性；把移位冲激响应写成移位 <code>h</code> 使用时不变。若系统缺少任一性质，卷积表示一般不成立。</p>
+</section>
+
+<section class="slide-note" id="slide-093" data-slide="93">
+  <div class="slide-kicker">SLIDE 093 · 卷积和</div>
+  <h2>第93页｜卷积和：固定输出时刻，遍历所有输入样本</h2>
+  <div class="formula">y[n]=Σ<sub>k=−∞</sub><sup>∞</sup>x[k]h[n−k]=x[n]*h[n]</div>
+  <p>对固定 <code>n</code>，<code>h[n−k]</code> 是关于 <code>k</code> 的序列。它可以由 <code>h[k]</code> 先翻转为 <code>h[−k]</code>，再平移 <code>n</code> 得到。然后与 <code>x[k]</code> 逐点相乘并对全部 <code>k</code> 求和，所得标量就是当前输出样本 <code>y[n]</code>。</p>
+  <ol><li>翻转：<code>h[k]→h[−k]</code>；</li><li>移位：<code>h[−k]→h[n−k]</code>；</li><li>相乘：<code>x[k]h[n−k]</code>；</li><li>求和：对重叠区域中的 <code>k</code> 累加。</li></ol>
+  <p><strong>更高效的方法：</strong>先把 <code>x[k]≠0</code> 与 <code>h[n−k]≠0</code> 分别写成关于 <code>k</code> 的不等式，求交集即可得到求和上下限；图解负责理解，支集交集负责稳健计算。</p>
+  <img class="concept-figure" src="/html-assets/control/part-1-signals-and-systems/fragments/figures/chapter-02/discrete-convolution-workflow.svg" alt="离散卷积翻转、移位、相乘和求和流程">
+</section>
+
+<section class="slide-note" id="slide-094" data-slide="94">
+  <div class="slide-kicker">SLIDE 094 · 例2.3 图解</div>
+  <h2>第94页｜右边指数与单位阶跃卷积：先求重叠区间</h2>
+  <div class="source-label">[课件例题] <code>x[n]=aⁿu[n]</code>，<code>h[n]=u[n]</code>，其中 <code>0&lt;a&lt;1</code>。</div>
+  <p>卷积被写成 <code>y[n]=Σₖaᵏu[k]u[n−k]</code>。第一个阶跃要求 <code>k≥0</code>；第二个阶跃要求 <code>n−k≥0</code>，即 <code>k≤n</code>。两者同时成立时，求和范围是 <code>0≤k≤n</code>。</p>
+  <p>若 <code>n&lt;0</code>，不可能同时满足 <code>k≥0</code> 与 <code>k≤n</code>，两序列没有重叠，故 <code>y[n]=0</code>。若 <code>n≥0</code>，重叠长度随 <code>n</code> 增长，输出是从第 0 项累积到第 <code>n</code> 项的有限等比和。</p>
+  <div class="formula">n&lt;0：无重叠；n≥0：y[n]=Σ<sub>k=0</sub><sup>n</sup>aᵏ</div>
+  <p class="pitfall">不要先套等比公式再补阶跃。先由支集确定“是否有项”和“有哪些项”，再做代数求和，能避免把空和误算成非零。</p>
+</section>
+
+<section class="slide-note" id="slide-095" data-slide="95">
+  <div class="slide-kicker">SLIDE 095 · 例2.3 结果</div>
+  <h2>第95页｜有限等比和给出渐近阶跃响应</h2>
+  <p>对 <code>n≥0</code> 使用有限等比和：</p>
+  <div class="formula">Σ<sub>k=0</sub><sup>n</sup>aᵏ=(1−aⁿ⁺¹)/(1−a)</div>
+  <p>合并 <code>n&lt;0</code> 的零输出，可写为：</p>
+  <div class="formula">y[n]=(1−aⁿ⁺¹)/(1−a) · u[n]</div>
+  <p>当 <code>0&lt;a&lt;1</code> 时，<code>aⁿ⁺¹→0</code>，输出从 1 单调趋近 <code>1/(1−a)</code>。这与“单位阶跃输入经过冲激响应 <code>aⁿu[n]</code> 的系统”完全一致：输出是冲激响应的累加和。</p>
+  <p><strong>互验：</strong>取一阶差分 <code>y[n]−y[n−1]</code>，应恢复 <code>aⁿu[n]</code>。这个检查把本例与第一章“阶跃差分得到冲激”以及后续“阶跃响应与冲激响应”连接起来。</p>
+</section>
+
+<section class="slide-note" id="slide-096" data-slide="96">
+  <div class="slide-kicker">SLIDE 096 · 例2.5 左边序列</div>
+  <h2>第96页｜左边指数与右边阶跃：重叠上界由较小者决定</h2>
+  <div class="source-label">[课件例题] <code>x[n]=2ⁿu[−n]</code>，<code>h[n]=u[n]</code>。</div>
+  <p>卷积为 <code>y[n]=Σₖ2ᵏu[−k]u[n−k]</code>。<code>u[−k]</code> 要求 <code>k≤0</code>；<code>u[n−k]</code> 要求 <code>k≤n</code>。因此有效样本满足：</p>
+  <div class="formula">k≤min(0,n)</div>
+  <p>与上一个例题不同，这里对任意 <code>n</code> 都存在从 <code>−∞</code> 延伸到某个上界的重叠区，因此输出在全体整数上非零。需要按 <code>n≥0</code> 与 <code>n&lt;0</code> 分段，因为 <code>min(0,n)</code> 在两区间取不同值。</p>
+  <p class="pitfall">左边序列的无穷和并不一定发散。虽然索引延伸到 <code>−∞</code>，但 <code>2ᵏ→0</code>，反向换元后成为公比 <code>1/2</code> 的收敛级数。</p>
+</section>
+
+<section class="slide-note" id="slide-097" data-slide="97">
+  <div class="slide-kicker">SLIDE 097 · 例2.5 分段求和</div>
+  <h2>第97页｜用换元把左边无穷和化为标准几何级数</h2>
+  <p>当 <code>n≥0</code> 时，上界为 0：</p>
+  <div class="formula">y[n]=Σ<sub>k=−∞</sub><sup>0</sup>2ᵏ=Σ<sub>r=0</sub><sup>∞</sup>(1/2)ʳ=2</div>
+  <p>当 <code>n&lt;0</code> 时，上界为 <code>n</code>。令 <code>k=n−r</code>，其中 <code>r=0,1,2,…</code>：</p>
+  <div class="formula">y[n]=Σ<sub>r=0</sub><sup>∞</sup>2ⁿ(1/2)ʳ=2ⁿ·2=2ⁿ⁺¹</div>
+  <p>所以结果为 <code>n≥0</code> 时常数 2，<code>n&lt;0</code> 时按 <code>2ⁿ⁺¹</code> 从左侧增长并在 <code>n=−1</code> 达到 1。两段在相邻样本处符合卷积直接计算。</p>
+  <p><strong>[推断]</strong> 方法总结：遇到双边或左边序列，先写支集不等式，再用 <code>min/max</code> 表示交集边界，最后根据边界切换点分段；不要靠目测猜求和范围。</p>
+</section>
+
+<section class="deepening" id="deepening">
+  <h2>离散卷积的统一解题框架</h2>
+  <ol>
+    <li>写出 <code>y[n]=Σₖx[k]h[n−k]</code>，明确 <code>n</code> 固定、<code>k</code> 遍历。</li>
+    <li>把每个阶跃或有限支集改写成关于 <code>k</code> 的不等式。</li>
+    <li>求不等式交集；交集为空则当前输出为零。</li>
+    <li>交集边界随 <code>n</code> 改变时，找出切换点并分段。</li>
+    <li>完成有限和或无穷和，并用直接代入、差分或支集范围互验。</li>
+  </ol>
+</section>
+
+<section class="exercise-block" id="exercises">
+  <div class="eyebrow">A–D 级练习</div><h2>分层练习</h2><p><strong>对应范围：</strong>课件第 86–97 页。</p>
+  <p>完成后打开<a href="/html-raw/control/part-1-signals-and-systems/fragments/exercises/chapter-02-slides-086-097-answers/">独立答案页</a>，重点核对变量角色、支集交集和分段边界。</p>
+  <section data-level="A"><h3>A 级｜冲激分解</h3><ol>
+    <li>把仅在 <code>n=−1,0,2</code> 取值分别为 <code>2,−1,3</code> 的序列写成移位冲激之和。</li>
+    <li>验证 <code>Σₖx[k]δ[n−k]=x[n]</code> 在 <code>n=3</code> 处的筛选过程。</li>
+    <li>已知 <code>δ[n]→h[n]</code>，写出 <code>4δ[n+2]−δ[n−1]</code> 的 LTI 系统响应。</li>
+  </ol></section>
+  <section data-level="B"><h3>B 级｜卷积计算</h3><ol>
+    <li>计算 <code>u[n]*u[n]</code>，先由支集给出求和范围。</li>
+    <li>计算 <code>(1/2)ⁿu[n]*u[n]</code>，并求其终值。</li>
+    <li>计算 <code>δ[n−2]*h[n]</code>，分别用卷积和与时不变性解释结果。</li>
+  </ol></section>
+  <section data-level="C"><h3>C 级｜证明与辨析</h3><ol>
+    <li>说明为什么只有线性而没有时不变性时，单位冲激响应 <code>h[n]</code> 不能单独确定全部移位冲激的响应。</li>
+    <li>设 <code>x[n]=aⁿu[−n]</code>、<code>h[n]=u[n]</code>。讨论卷积无穷和收敛所需的 <code>a</code> 范围。</li>
+  </ol></section>
+  <section data-level="D"><h3>D 级｜控制迁移</h3><ol>
+    <li>解释有限冲激响应 FIR 与无限冲激响应 IIR 名称中的“冲激响应长度”如何影响卷积计算量和系统记忆。</li>
+    <li>数字控制对象已知冲激响应样本 <code>h[0],…,h[N]</code>。说明怎样预测给定控制序列的零状态输出，并指出模型截断误差来自哪里。</li>
+  </ol></section>
+</section>
+
+<section class="gate" id="exit-gate"><h2>能力门槛</h2><p>能够从冲激筛选性质独立推导离散卷积和；看到阶跃、单边或双边序列时，能用关于 <code>k</code> 的支集交集确定上下限；能复算课件两类指数例题并解释每个分段的来源。</p></section>
+</main></body></html>

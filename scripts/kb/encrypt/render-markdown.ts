@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import sanitizeHtml from 'sanitize-html'
 import { createSiteMarkdownProcessorOptions } from '../../../src/plugins/site-markdown-pipeline'
 import { normalizeVitePressContainers } from '../markdown-compat'
+import { normalizeMathDelimiters } from '../markdown-rendering'
 
 const safeColor = /^(?:#[0-9a-f]{3,8}|(?:rgb|hsl)a?\([\d\s.,%+-]+\)|var\(--[\w-]+\)|[a-z]+)$/i
 const safeLength = /^(?:-?(?:\d+|\d*\.\d+)(?:px|em|rem|ex|ch|%|vh|vw)?|auto|none)$/i
@@ -75,6 +76,6 @@ const processor = createMarkdownProcessor({
 export async function renderEncryptedMarkdown(markdown: string): Promise<string> {
   const parsed = matter(markdown)
   const renderer = await processor
-  const result = await renderer.render(normalizeVitePressContainers(parsed.content))
+  const result = await renderer.render(normalizeMathDelimiters(normalizeVitePressContainers(parsed.content)))
   return sanitizeRenderedHtml(result.code)
 }

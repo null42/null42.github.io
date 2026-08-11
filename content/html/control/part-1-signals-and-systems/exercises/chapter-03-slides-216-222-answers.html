@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三章第216–222页完整答案</title><link rel="stylesheet" href="/html-assets/control/part-1-signals-and-systems/assets/companion.css"></head><body><main><header class="hero"><div class="eyebrow">第三章 · DTFS性质与例题</div><h1>第216–222页分层练习完整答案</h1></header>
+<section><h2>A 级答案</h2>
+<h3>A1</h3><div class="formula">x[n]y[n]↔dₖ=Σ_{l=&lt;N&gt;}a_l b_{k−l}</div><p>k−l 按模N解释，求和取任意N个连续l。</p>
+<h3>A2</h3><div class="formula">x[n]−x[n−1]↔(1−e^{-jk2π/N})aₖ</div><p>k=0时因子为0，因此差分序列平均值为0。</p>
+<h3>A3</h3><div class="formula">(1/N)Σ_{n=&lt;N&gt;}|x[n]|²=Σ_{k=&lt;N&gt;}|aₖ|²</div>
+<h3>A4</h3><p>常数1在0…N−1窗口中为a₀=1，其余a₁…a_{N−1}=0；完整整数索引上a_{mN}=1，其余为0。</p></section>
+<section><h2>B 级答案</h2>
+<h3>B1</h3><p>本振只有b_m=1。周期卷积：</p><div class="formula">dₖ=Σ_l a_l b_{k−l}=a_{k−m}</div><p>即乘 e^{jm2πn/N} 把系数索引向正方向平移m。</p>
+<h3>B2</h3><p>原余弦系数a₁=a_{−1}=1/2。差分后：</p><div class="formula">d₁=(1−e^{-j2π/N})/2；d_{−1}=(1−e^{j2π/N})/2</div><p>两者共轭，其余独立系数为0。</p>
+<h3>B3</h3><p>例3.13一个周期值为2,2,2,1,1，总和8，平均值8/5，所以a₀=8/5，与b₀+c₀=3/5+1一致。</p>
+<h3>B4</h3><p><code>x[n]=1/3+(1/6)(−1)ⁿ</code>。n=0…5得到：</p><div class="formula">{1/2,1/6,1/2,1/6,1/2,1/6}</div></section>
+<section><h2>C 级答案</h2>
+<h3>C1</h3><p>展开 x、y 的合成式：</p><div class="formula">xy=Σ_lΣ_m a_l b_m e^{j(l+m)2πn/N}</div><p>固定输出索引k，令m=k−l，收集所有同一基函数得到dₖ=Σ_l a_l b_{k−l}。因为基函数、a、b都按N重复，只需N个l；索引越界自动回绕，所以是循环卷积。</p>
+<h3>C2</h3><div class="formula">|1−e^{-j2πk/N}|=|e^{-jπk/N}(e^{jπk/N}−e^{-jπk/N})|=2|sin(πk/N)|</div><p>k=0为0，靠近0近似2π|k|/N，频率越高通常增益越大，具有高通/微分特征。</p>
+<h3>C3</h3><p>将 x=Σaₖφₖ 与 x*=Σa_l*φ_l* 相乘并对一个周期平均。有限正交性消除k≠l交叉项，只保留Σ|aₖ|²，即得帕斯瓦尔。</p>
+<h3>C4</h3><p>总功率是所有正交坐标平方模之和。a₀、a₃固定后，新增任何其他aₖ都会增加非负项|aₖ|²，却不改变两个已满足约束，因此最小值只能在其余坐标全零处取得。</p></section>
+<section><h2>D 级答案</h2>
+<h3>D1</h3><p>输入第l次谐波与本振第m次谐波相乘，输出落在k=l+m modN。同步解调选择m=−l₀，可把目标l₀搬到k=0，再用低通/周期平均提取；其他谐波搬到非零索引并被抑制。</p>
+<h3>D2</h3><p>先算原始差分v_d[n]=(p[n]−p[n−1])/T_s，再通过一阶低通 <code>v[n]=αv[n−1]+(1−α)v_d[n]</code>。α大则降噪强但延迟大；α小则跟踪快但高频噪声突出。可依据传感器噪声谱和闭环带宽选截止频率。</p>
+<h3>D3</h3><p>若误差系数为eₖ，则 <code>e_rms²=Σ_{k=&lt;N&gt;}|eₖ|²</code>。只保留集合K时，残差尾部功率为 <code>P_tail=Σ_{k∉K}|eₖ|²</code>；可要求P_tail/P_total低于给定阈值，以选择谐波模型阶数。</p>
+<h3>D4</h3><p>一般问题为：最小化 <code>Σ|aₖ|²</code>，满足若干线性等式 <code>Ca=d</code>。若约束直接指定一组正交傅里叶坐标，解就是保留指定值、其余置零；一般情况下最小范数解为 <code>a=Cᴴ(CCᴴ)^{-1}d</code>（满行秩），再由逆DTFS合成时域指令。</p></section>
+<p><a href="/html-raw/control/part-1-signals-and-systems/companion/chapter-03-fourier-series/#slide-216">返回第三章伴随讲义第216页</a></p></main></body></html>

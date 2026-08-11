@@ -1,0 +1,35 @@
+{
+  "title": "第一章 信号与系统",
+  "source": "信号与系统（深度强化版）.pptx",
+  "chapter_slide_start": 1,
+  "chapter_slide_end": 85,
+  "completed_slide_end": 85,
+  "content_overrides": "course-notes/part-1-signals-and-systems/source-maps/chapter-01-content-overrides.json",
+  "stylesheet": "../assets/companion.css",
+  "prerequisites": [
+    "函数、自变量、定义域与分段表达式",
+    "复数、欧拉公式、绝对值与复数模",
+    "积分、无穷求和与基本极限",
+    "坐标轴、波形和简单电路的基本阅读"
+  ],
+  "learning_objectives": [
+    "建立连续时间与离散时间信号的统一描述语言",
+    "独立完成信号分类、时间变换、周期与对称性判定",
+    "掌握复指数、正弦、单位冲激和单位阶跃等基本信号的结构",
+    "理解系统表示、互联、基本性质及其对后续线性系统分析的作用"
+  ],
+  "control_connections": [
+    "把传感器测量、参考输入、扰动和控制量统一看作信号",
+    "为采样、离散控制算法和数字实现建立索引与周期语言",
+    "为卷积、频域分析、传递函数和状态空间建模准备基本对象",
+    "从信号变换与分解理解控制器对误差和反馈信息的处理"
+  ],
+  "fragments": [
+    "course-notes/part-1-signals-and-systems/companion/0001-slides-001-018.html",
+    "course-notes/part-1-signals-and-systems/companion/0002-slides-019-027.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-01/003-slides-028-048.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-01/004-slides-049-064.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-01/005-slides-065-069.fragment.html",
+    "course-notes/part-1-signals-and-systems/fragments/chapter-01/006-slides-070-085.fragment.html"
+  ]
+}
