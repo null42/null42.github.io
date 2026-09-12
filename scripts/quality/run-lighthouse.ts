@@ -15,7 +15,7 @@ const chromeProfilePath = resolve('env/verification/lighthouse-profile')
 const thresholds = { performance: 75, accessibility: 90, 'best-practices': 90, seo: 90 } as const
 
 type CategoryName = keyof typeof thresholds
-type AuditResult = { run: number; scores: Record<CategoryName, number>; lowScoringAudits: string[] }
+type AuditResult = { run: number; scores: Record<CategoryName, number | null>; lowScoringAudits: string[] }
 type PageResult = { kind: string; path: string; runs: AuditResult[]; analysis?: Record<CategoryName, ReturnType<typeof analyzeLighthouseMetric>> }
 type FetchImplementation = (input: string | URL | Request, init?: RequestInit) => Promise<Response>
 type KillProcess = (pid: number, signal: NodeJS.Signals) => void
@@ -221,9 +221,11 @@ export async function main(): Promise<void> {
       const scores = Object.fromEntries(
         Object.keys(thresholds).map((category) => [
           category,
-          (result.lhr.categories[category]?.score ?? 0) * 100,
+          typeof result.lhr.categories[category]?.score === 'number'
+            ? result.lhr.categories[category].score * 100
+            : null,
         ]),
-      ) as Record<CategoryName, number>
+      ) as Record<CategoryName, number | null>
       const lowScoringAudits = Object.values(result.lhr.audits)
         .filter((audit) => audit.scoreDisplayMode !== 'notApplicable' && typeof audit.score === 'number' && audit.score < 0.9)
         .sort((left, right) => (left.score ?? 0) - (right.score ?? 0))

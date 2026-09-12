@@ -70,6 +70,16 @@ describe('production quality contract', () => {
     expect(analyzeLighthouseMetric([80, 81], 75).status).toBe('passing')
   })
 
+  it('does not treat unavailable Lighthouse scores as zero', () => {
+    expect(analyzeLighthouseMetric([null, null], 75)).toMatchObject({
+      scores: [null, null],
+      belowThresholdRuns: [],
+      delta: 0,
+      status: 'unavailable',
+    })
+    expect(shouldBlockLighthouseMetric([null, 20, null], 75)).toBe(false)
+  })
+
   it('starts the production preview on Windows and POSIX runners', () => {
     expect(getPreviewCommand('win32', 4567)).toEqual({
       command: 'cmd.exe',

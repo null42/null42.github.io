@@ -66,20 +66,24 @@ export function classifyRuntimeRequest(rawUrl: string, localOrigin?: string): Ru
   return 'forbidden-origin'
 }
 
-export function shouldBlockLighthouseMetric(scores: number[], threshold: number): boolean {
-  return scores.length >= 2 && scores.slice(-2).every((score) => score < threshold)
+export function shouldBlockLighthouseMetric(scores: Array<number | null>, threshold: number): boolean {
+  const measurable = scores.filter((score): score is number => typeof score === 'number')
+  return measurable.length >= 2 && measurable.slice(-2).every((score) => score < threshold)
 }
 
-export function analyzeLighthouseMetric(scores: number[], threshold: number) {
+export function analyzeLighthouseMetric(scores: Array<number | null>, threshold: number) {
   const belowThresholdRuns = scores
-    .map((score, index) => score < threshold ? index + 1 : undefined)
+    .map((score, index) => typeof score === 'number' && score < threshold ? index + 1 : undefined)
     .filter((run): run is number => run !== undefined)
+  const measurable = scores.filter((score): score is number => typeof score === 'number')
   return {
     scores,
     threshold,
     belowThresholdRuns,
-    delta: scores.length >= 2 ? scores[scores.length - 1] - scores[0] : 0,
-    status: shouldBlockLighthouseMetric(scores, threshold)
+    delta: measurable.length >= 2 ? measurable[measurable.length - 1] - measurable[0] : 0,
+    status: measurable.length === 0
+      ? 'unavailable'
+      : shouldBlockLighthouseMetric(scores, threshold)
       ? 'blocking-consecutive-failure'
       : belowThresholdRuns.length
         ? 'non-blocking-single-failure'
