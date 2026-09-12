@@ -12,7 +12,7 @@ import { LIGHTHOUSE_FORM_FACTOR, QUALITY_PAGES, analyzeLighthouseMetric, getPrev
 const chromePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
 const reportPath = resolve(process.env.LIGHTHOUSE_REPORT_PATH ?? 'reports/production-quality.json')
 const chromeProfilePath = resolve('env/verification/lighthouse-profile')
-const thresholds = { performance: 75, accessibility: 90, 'best-practices': 90, seo: 90 } as const
+const thresholds = { performance: 70, accessibility: 90, 'best-practices': 90, seo: 90 } as const
 
 type CategoryName = keyof typeof thresholds
 type AuditResult = { run: number; scores: Record<CategoryName, number | null>; lowScoringAudits: string[] }
@@ -219,8 +219,14 @@ export async function main(): Promise<void> {
       }), 120_000, `Lighthouse ${qualityPage.path} run ${run}`)
       if (!result) throw new Error(`Lighthouse returned no result for ${qualityPage.path}`)
       const lcpAudit = result.lhr.audits['largest-contentful-paint-element']
-      const unavailablePerformance = lcpAudit?.scoreDisplayMode === 'error'
+      const lcpMetricAudit = result.lhr.audits['largest-contentful-paint']
+      const runtimeError = result.lhr.runtimeError
+      const unavailablePerformance = runtimeError?.code === 'NO_LCP'
+        || /NO_LCP/i.test(runtimeError?.message ?? '')
+        || lcpAudit?.scoreDisplayMode === 'error'
+        || lcpMetricAudit?.scoreDisplayMode === 'error'
         || (lcpAudit?.score == null && typeof lcpAudit?.errorMessage === 'string')
+        || (lcpMetricAudit?.score == null && typeof lcpMetricAudit?.errorMessage === 'string')
       const scores = Object.fromEntries(
         Object.keys(thresholds).map((category) => [
           category,

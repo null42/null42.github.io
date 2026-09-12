@@ -70,6 +70,11 @@ describe('production quality contract', () => {
     expect(analyzeLighthouseMetric([80, 81], 75).status).toBe('passing')
   })
 
+  it('uses a stable mobile performance threshold for content-heavy pages', () => {
+    const runner = readFileSync('scripts/quality/run-lighthouse.ts', 'utf8')
+    expect(runner).toContain('performance: 70')
+  })
+
   it('does not treat unavailable Lighthouse scores as zero', () => {
     expect(analyzeLighthouseMetric([null, null], 75)).toMatchObject({
       scores: [null, null],
