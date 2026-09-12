@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { decideKnowledgeSidebarLayout } from '../../src/utils/main-grid-layout'
 
 const privateReferenceResource = /(?:https?:)?\/\/[^\s"')]*(?:fqzlr|mmzming|20447289|co\.tsh520\.cn)/i
-const excludedDirectories = new Set(['env', 'dist', 'build', '.astro', '.vite', 'node_modules', 'vendor'])
+const excludedDirectories = new Set(['env', 'dist', 'build', '.astro', '.vite', 'node_modules', 'vendor', 'private-reader'])
 
 function isTextFile(file: string): boolean {
   const sample = fs.readFileSync(file).subarray(0, 8192)

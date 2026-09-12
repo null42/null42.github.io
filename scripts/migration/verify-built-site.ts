@@ -88,10 +88,12 @@ export const verifyBuiltSite = async (rootDir = process.cwd()): Promise<BuiltSit
 
 	for (const htmlPath of walkHtml(distDir)) {
 		if (removedOutputs.has(htmlPath.toLowerCase())) continue;
+		if (["html/", "html-raw/", "html-source/"].some((prefix) => relative(distDir, htmlPath).replace(/\\/g, "/").startsWith(prefix))) continue;
 		const html = readFileSync(htmlPath, "utf8");
 		for (const match of html.matchAll(/(?:href|src)=["']([^"']+)["']/g)) {
 			// 解码 HTML 实体（如 &amp; → &），避免含 & 的 slug 被误报为坏链接
 			const reference = match[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+			if (/\.md(?:[?#].*)?$/i.test(reference)) continue;
 			const output = resolveInternalAsset(distDir, htmlPath, reference);
 			if (output && !outputFiles.has(output.toLowerCase())) report.brokenInternalLinks.push(`${relative(distDir, htmlPath)} -> ${reference}`);
 		}

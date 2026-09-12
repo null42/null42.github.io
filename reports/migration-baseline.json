@@ -3,9 +3,9 @@
   "stableCommit": "61c1c29f3460e7d158a0c9daf1176ea95a5b8675",
   "generatedBy": "corepack pnpm migration:baseline",
   "counts": {
-    "articles": 561,
+    "articles": 457,
     "attachments": 14,
-    "urls": 1122
+    "urls": 914
   },
   "protected": {
     "private": {
@@ -95,20 +95,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-01-assessment.md",
-      "contentSha256": "f18a5c3ecaeab328731711b0194b6959bb8cecf52f28089c82ee804b8079dc4e",
-      "slug": "foundations/control-theory/CT-01-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-01-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-02-Time-Domain-Analysis.md",
       "contentSha256": "b8644d742c8de9a93dc5037cd876657cc623de2d11d4126e129d7562fac9ca3b",
       "slug": "foundations/control-theory/CT-02-Time-Domain-Analysis",
@@ -120,20 +106,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-02-Time-Domain-Analysis",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-02-assessment.md",
-      "contentSha256": "5739b492feaca4638b090fbc9df10b7ac8edab64e8b079ed0d77e49cc5fca5f0",
-      "slug": "foundations/control-theory/CT-02-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-02-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-02-assessment",
       "attachments": []
     },
     {
@@ -151,20 +123,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-03-assessment.md",
-      "contentSha256": "d185ee041ba3edba80f717ae36d5797f3a9ebc8af21a429ed98540c1bc33d722",
-      "slug": "foundations/control-theory/CT-03-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-03-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-04-PID-Control-Principles.md",
       "contentSha256": "573c13f8472a38b7cb2a76a2233d3def04d80a51851fa5637639a2eade679c9d",
       "slug": "foundations/control-theory/CT-04-PID-Control-Principles",
@@ -176,20 +134,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-04-PID-Control-Principles",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-04-assessment.md",
-      "contentSha256": "69f51e96d3734118d148d426f08e88b285c45ca7b80fb1b840968f3176d83097",
-      "slug": "foundations/control-theory/CT-04-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-04-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-04-assessment",
       "attachments": []
     },
     {
@@ -207,20 +151,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-05-assessment.md",
-      "contentSha256": "1bee1ae1fe78cd05693778b7788a942b8773e0952563d5567a992e6045cc624d",
-      "slug": "foundations/control-theory/CT-05-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-05-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-06-Feedforward-Control.md",
       "contentSha256": "0d761c603aad75cc2cc4327ab95096ba476a1d8342c192f8a8f120a7cddff537",
       "slug": "foundations/control-theory/CT-06-Feedforward-Control",
@@ -232,20 +162,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-06-Feedforward-Control",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-06-assessment.md",
-      "contentSha256": "4465eef6230b2a5e1700b6069cf486184c2bccc4b269b54ee7e48b0d231544e5",
-      "slug": "foundations/control-theory/CT-06-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-06-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-06-assessment",
       "attachments": []
     },
     {
@@ -263,20 +179,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-07-assessment.md",
-      "contentSha256": "6e076c02d739253ae8427cc22d9977267eb3d051b20fbdf6b4604e103aeff730",
-      "slug": "foundations/control-theory/CT-07-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-07-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-08-Root-Locus.md",
       "contentSha256": "dea2707410270fb375e2e4e40159d99a5c0d67ce7e04f95db81e7ec5d160b317",
       "slug": "foundations/control-theory/CT-08-Root-Locus",
@@ -288,20 +190,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-08-Root-Locus",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-08-assessment.md",
-      "contentSha256": "6786656900ce685bb0db55d2be32612d7a15997d6b0a3621ff85c95d3d8aa528",
-      "slug": "foundations/control-theory/CT-08-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-08-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-08-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-08-assessment",
       "attachments": []
     },
     {
@@ -319,20 +207,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-09-assessment.md",
-      "contentSha256": "e2f4d215c809a4b531b88055691ac3d0b2d537d89c7a492199e09d1c01bc6de1",
-      "slug": "foundations/control-theory/CT-09-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-09-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-09-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-10-State-Space.md",
       "contentSha256": "a648433b357990eddbdad6bd38056b606a2b1c29424d4ca660701dab1915ff89",
       "slug": "foundations/control-theory/CT-10-State-Space",
@@ -344,20 +218,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-10-State-Space",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-10-assessment.md",
-      "contentSha256": "11f6aeac635edf94be5869dbc15697b067088b4cabd9e54857331a323745e4a5",
-      "slug": "foundations/control-theory/CT-10-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-10-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-10-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-10-assessment",
       "attachments": []
     },
     {
@@ -375,20 +235,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-11-assessment.md",
-      "contentSha256": "5e4e8428556c81e6440820d6080033500184161fa9e5f42a3ba2ca2372b62b4f",
-      "slug": "foundations/control-theory/CT-11-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-11-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-11-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-11-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-12-State-Feedback.md",
       "contentSha256": "e008d242769091f57b35436807dfed3c5efca7c857b52e26f26997513405db9e",
       "slug": "foundations/control-theory/CT-12-State-Feedback",
@@ -400,20 +246,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-12-State-Feedback",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-12-assessment.md",
-      "contentSha256": "4dfff27163e027169306d96078dd5c27f4f3ec9055cb996d82b58512a7215109",
-      "slug": "foundations/control-theory/CT-12-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-12-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-12-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-12-assessment",
       "attachments": []
     },
     {
@@ -431,20 +263,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-13-assessment.md",
-      "contentSha256": "8e6edd90de0b910d8507534d50d3c6514baa675ead2aaf01204f4fa74cffdb13",
-      "slug": "foundations/control-theory/CT-13-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-13-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-13-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-13-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-14-Cascaded-PID-Control.md",
       "contentSha256": "423de6eb9d2b819ad506260423a524ff2e9da0b3cc418fb1d760f3d34c15e3db",
       "slug": "foundations/control-theory/CT-14-Cascaded-PID-Control",
@@ -456,20 +274,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-14-Cascaded-PID-Control",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-14-assessment.md",
-      "contentSha256": "641eb601c9baf460aa5b04efca97cc587141e13993fbc0273e85feb6f74c9097",
-      "slug": "foundations/control-theory/CT-14-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-14-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-14-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-14-assessment",
       "attachments": []
     },
     {
@@ -487,20 +291,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-15-assessment.md",
-      "contentSha256": "5f47c04f3b25485382f7dac18ebb0575359996ca5e979fbb028cc1423fb125ae",
-      "slug": "foundations/control-theory/CT-15-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-15-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-15-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-15-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-16-ADRC-Theory.md",
       "contentSha256": "82f9b670257434a67c5980318ac69e231d556d963632ec9108f39fed28ca1a80",
       "slug": "foundations/control-theory/CT-16-ADRC-Theory",
@@ -512,20 +302,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-16-ADRC-Theory",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-16-assessment.md",
-      "contentSha256": "a25d8aec23565fe4e0d93b728c8107eb37db7141f9ad1e8f7f9ba6278d333e11",
-      "slug": "foundations/control-theory/CT-16-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-16-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-16-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-16-assessment",
       "attachments": []
     },
     {
@@ -543,20 +319,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/control-theory/CT-17-assessment.md",
-      "contentSha256": "f723d9460862f613059d3b4a45bcc3e1d6e3cd8a30d6ace91ba95664d8f10ac8",
-      "slug": "foundations/control-theory/CT-17-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-17-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-17-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-17-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/control-theory/CT-18-ADRC-LADRC-Implementation.md",
       "contentSha256": "e0bca6fdff35cb1528e0735ae392d679a367c6c1e87f1c9a65bd68b1ecc22e2b",
       "slug": "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
@@ -568,20 +330,6 @@
       "routeId": "control-theory",
       "stageId": "control-theory",
       "articleId": "foundations/control-theory/CT-18-ADRC-LADRC-Implementation",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/control-theory/CT-18-assessment.md",
-      "contentSha256": "4b31895a419e83009f2b4683d331eb61f5197f901852ac01d91cbf8710c8a28e",
-      "slug": "foundations/control-theory/CT-18-assessment",
-      "oldUrl": "/content/foundations/control-theory/CT-18-assessment.html",
-      "targetUrl": "/posts/foundations/control-theory/CT-18-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "control-theory",
-      "stageId": "control-theory",
-      "articleId": "foundations/control-theory/CT-18-assessment",
       "attachments": []
     },
     {
@@ -627,20 +375,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-01-assessment.md",
-      "contentSha256": "583b9075e2e3e74a248256e5873e26ccdb0423e1dad199fcd973c319f66fc511",
-      "slug": "foundations/power-electronics-basics/EE-01-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-01-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/power-electronics-basics/EE-02-Diodes-And-Rectification.md",
       "contentSha256": "9e0d0afa6f16643421099dea939298538238a07333c114acd7db6a441611cfe6",
       "slug": "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
@@ -652,20 +386,6 @@
       "routeId": "power-electronics-basics",
       "stageId": "power-electronics-basics",
       "articleId": "foundations/power-electronics-basics/EE-02-Diodes-And-Rectification",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-02-assessment.md",
-      "contentSha256": "0d237217ce5b22afea0cbfafb00741206db75742ce88b459759e4613d09af490",
-      "slug": "foundations/power-electronics-basics/EE-02-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-02-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-02-assessment",
       "attachments": []
     },
     {
@@ -683,20 +403,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-03-assessment.md",
-      "contentSha256": "ef9044e4c8967875415b4c1978380f1a1b73c01d802902e0aa98f05d62886e30",
-      "slug": "foundations/power-electronics-basics/EE-03-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-03-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/power-electronics-basics/EE-04-MOSFET-Principles.md",
       "contentSha256": "85850932b388815122b65138509825bb55db4f81ea5ab6cbc73ebaf8185e8b55",
       "slug": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
@@ -708,20 +414,6 @@
       "routeId": "power-electronics-basics",
       "stageId": "power-electronics-basics",
       "articleId": "foundations/power-electronics-basics/EE-04-MOSFET-Principles",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-04-assessment.md",
-      "contentSha256": "536ea4d29d0382d2f1c9a027ce4f00f2b995b0562f4c687922e0fd3aa67a35cb",
-      "slug": "foundations/power-electronics-basics/EE-04-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-04-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-04-assessment",
       "attachments": []
     },
     {
@@ -739,20 +431,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-05-assessment.md",
-      "contentSha256": "cdfe7ef4e0876daa1d0d4910042a5b3581683581805d54d82cfc461686578f18",
-      "slug": "foundations/power-electronics-basics/EE-05-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-05-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/power-electronics-basics/EE-06-IGBT-Principles.md",
       "contentSha256": "1e1bfec54109c255b0746238fe70c9505234275480563e78a2f643f13bf0797a",
       "slug": "foundations/power-electronics-basics/EE-06-IGBT-Principles",
@@ -764,20 +442,6 @@
       "routeId": "power-electronics-basics",
       "stageId": "power-electronics-basics",
       "articleId": "foundations/power-electronics-basics/EE-06-IGBT-Principles",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-06-assessment.md",
-      "contentSha256": "f8b9d06480267085f72667c322d4a949b7672b15e9b963c42e383f31913151df",
-      "slug": "foundations/power-electronics-basics/EE-06-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-06-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-06-assessment",
       "attachments": []
     },
     {
@@ -795,20 +459,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-07-assessment.md",
-      "contentSha256": "25a7de8d7e6f0d0c1b0703fd1314390deee5f54bb6045747fad5b426e58ed57f",
-      "slug": "foundations/power-electronics-basics/EE-07-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-07-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/power-electronics-basics/EE-08-Rectifier-Inverter.md",
       "contentSha256": "2da14051dfc6a0f42a18852ffc7421fe9ba3e79889c071b43631dec967f5e80a",
       "slug": "foundations/power-electronics-basics/EE-08-Rectifier-Inverter",
@@ -823,20 +473,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-08-assessment.md",
-      "contentSha256": "bac6ca865f7b4526ae12733f56e2efc95f5ae79b20dc56ed5d71ab859dd27940",
-      "slug": "foundations/power-electronics-basics/EE-08-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-08-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-08-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-08-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/power-electronics-basics/EE-09-H-Bridge.md",
       "contentSha256": "06e7a6aa01b5ba07e49419037f04d64d5118567e3da0800ef5406359efa4182c",
       "slug": "foundations/power-electronics-basics/EE-09-H-Bridge",
@@ -848,20 +484,6 @@
       "routeId": "power-electronics-basics",
       "stageId": "power-electronics-basics",
       "articleId": "foundations/power-electronics-basics/EE-09-H-Bridge",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/foundations/power-electronics-basics/EE-09-assessment.md",
-      "contentSha256": "179f85d4ddd3bcd13172b918f59a25b7b854ef3a6bce57d7c060de596e230153",
-      "slug": "foundations/power-electronics-basics/EE-09-assessment",
-      "oldUrl": "/content/foundations/power-electronics-basics/EE-09-assessment.html",
-      "targetUrl": "/posts/foundations/power-electronics-basics/EE-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "power-electronics-basics",
-      "stageId": "power-electronics-basics",
-      "articleId": "foundations/power-electronics-basics/EE-09-assessment",
       "attachments": []
     },
     {
@@ -963,20 +585,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/foundations/simulation/c-simulation/SIM-05-assessment.md",
-      "contentSha256": "f591a50e9b945f39e53c02c1baa19c5aa0330efb07cc9f5bdeec32146071fb21",
-      "slug": "foundations/simulation/c-simulation/SIM-05-assessment",
-      "oldUrl": "/content/foundations/simulation/c-simulation/SIM-05-assessment.html",
-      "targetUrl": "/posts/foundations/simulation/c-simulation/SIM-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "foundations",
-      "routeId": "simulation",
-      "stageId": "simulation-c",
-      "articleId": "foundations/simulation/c-simulation/SIM-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README.md",
       "contentSha256": "4d63dab33275b78b28a4211e4d0e71365cb1b87508dcd222431a7c9ba68c48cf",
       "slug": "foundations/simulation/c-simulation/code-examples/01-pi-tuning-basic/README",
@@ -992,7 +600,7 @@
     },
     {
       "sourcePath": "content/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README.md",
-      "contentSha256": "713cb3996dc1dfe7666e45e569fe4ecca549b590fcf895bb3a3211c6e0c77e26",
+      "contentSha256": "60f21e8a3d3b28d3eb24aad720094d292397460b156571586a531381277a6685",
       "slug": "foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README",
       "oldUrl": "/content/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README.html",
       "targetUrl": "/posts/foundations/simulation/c-simulation/code-examples/02-custom-speed-profile/README/",
@@ -1369,20 +977,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-01-assessment.md",
-      "contentSha256": "9f2054f30eb9ce7552c884c70eb3ea9784bfaa4f4c82f05773ba3585d48fd549",
-      "slug": "motor/advanced/algorithm/ADV-ALG-01-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA.md",
       "contentSha256": "73b6b72c5fd8de4f60a7f5d1ae18a68aa4c8f040d60e49cab0b03e206a9b16df",
       "slug": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
@@ -1394,20 +988,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/algorithm/ADV-ALG-05-Field-Weakening-MTPA",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-05-assessment.md",
-      "contentSha256": "5c77b94a715cbb4c64624b49a607589686bb98e5a6e146c5ca0db0e99da5cc56",
-      "slug": "motor/advanced/algorithm/ADV-ALG-05-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-05-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-05-assessment",
       "attachments": []
     },
     {
@@ -1425,20 +1005,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-07-assessment.md",
-      "contentSha256": "fb554e69526dc4efda39e65e20af5fc7fedf9a53360e122b3acb7d9f41c5d4cb",
-      "slug": "motor/advanced/algorithm/ADV-ALG-07-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-07-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point.md",
       "contentSha256": "a6b9b40c44b54a0c06b877b85299101fa5843c393870264d1c16b90038a1f679",
       "slug": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
@@ -1450,20 +1016,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/algorithm/ADV-ALG-09-Per-Unit-Fixed-Point",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-09-assessment.md",
-      "contentSha256": "b70b904732bad6226487c587a8bd0d430716c539419a0629eeb5ad7425f99ffa",
-      "slug": "motor/advanced/algorithm/ADV-ALG-09-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-09-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-09-assessment",
       "attachments": []
     },
     {
@@ -1481,20 +1033,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-13-assessment.md",
-      "contentSha256": "a4bb93eed751334a2a0c55a9dba5d1631a11ebbadfa6d337fc931cbc6f37b8b5",
-      "slug": "motor/advanced/algorithm/ADV-ALG-13-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-13-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-13-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-13-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology.md",
       "contentSha256": "15a40570dec4b32ca502376eb3daa4b0090086cb91dd0dac522997764abac54d",
       "slug": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
@@ -1506,20 +1044,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/algorithm/ADV-ALG-15-Debug-Methodology",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/algorithm/ADV-ALG-15-assessment.md",
-      "contentSha256": "3e9123d0586acd04e07eff512423d5f21175423465ad84f068dd71ab76cef8ce",
-      "slug": "motor/advanced/algorithm/ADV-ALG-15-assessment",
-      "oldUrl": "/content/motor/advanced/algorithm/ADV-ALG-15-assessment.html",
-      "targetUrl": "/posts/motor/advanced/algorithm/ADV-ALG-15-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/algorithm/ADV-ALG-15-assessment",
       "attachments": []
     },
     {
@@ -1537,20 +1061,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.md",
-      "contentSha256": "00e474e0524d0d175ed829940183a56f41676f4f466f0458389af22631d2cd8e",
-      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
-      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA.md",
       "contentSha256": "00564b7917ef02f4056efe9a58e7b75b7c8bd5e7be779f843fed4b27795b8aca",
       "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
@@ -1562,20 +1072,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-ADC-DMA",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment.md",
-      "contentSha256": "d06b3e9e8b1391818f4135776a13a1111040725f17552d4650e002f8ff7f14d7",
-      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
-      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment.html",
-      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-02-assessment",
       "attachments": []
     },
     {
@@ -1593,20 +1089,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.md",
-      "contentSha256": "f5f8d348913dfd36af733ab7ab1f4d37641dd6842aba9b674c7b8fcb045cdba3",
-      "slug": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
-      "oldUrl": "/content/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment.html",
-      "targetUrl": "/posts/motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/hardware-algorithm-bridge/ADV-HW-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/system-methodology/SYS-01-Design-Patterns.md",
       "contentSha256": "91805a776f616034cd40d81d4f389e05f231dd5b3e5004d8f29f85b9c5cdfd04",
       "slug": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
@@ -1618,20 +1100,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/system-methodology/SYS-01-Design-Patterns",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-01-assessment.md",
-      "contentSha256": "be380d4dc57bf22cb9515cf51de9e47b55d8e5c8207283faffd5efb5d6f9d8ad",
-      "slug": "motor/advanced/system-methodology/SYS-01-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-01-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-01-assessment",
       "attachments": []
     },
     {
@@ -1649,20 +1117,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-02-assessment.md",
-      "contentSha256": "1eeabf2c546a87e0082f93896bfcb4a49341381d0ef4aa14d09b1e7aef291841",
-      "slug": "motor/advanced/system-methodology/SYS-02-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-02-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-02-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control.md",
       "contentSha256": "7bd80ce6bf8cb255d6b9e3b6b1084ea8646cfdb97b7a27ee279f07203b28489d",
       "slug": "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
@@ -1674,20 +1128,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/system-methodology/SYS-03-PFC-vs-Motor-Control",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-03-assessment.md",
-      "contentSha256": "ea98c641367b75eff6af78922a23cdf8f9ee90d0bb5432c9cff0b8607714b77f",
-      "slug": "motor/advanced/system-methodology/SYS-03-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-03-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-03-assessment",
       "attachments": []
     },
     {
@@ -1705,20 +1145,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-04-assessment.md",
-      "contentSha256": "a25dd700b1aa0aa8d887fa681510d7f588adf17fcae45b63a094a5c9f6481f18",
-      "slug": "motor/advanced/system-methodology/SYS-04-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-04-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-04-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/system-methodology/SYS-05-Functional-Safety.md",
       "contentSha256": "47e63cd930d8fb622edeb269222fa833670ecd0fa30f3b8f56f0a6b364b78483",
       "slug": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
@@ -1730,20 +1156,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/system-methodology/SYS-05-Functional-Safety",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-05-assessment.md",
-      "contentSha256": "01c2897881aeadcde2d3a890873d39be8d2f554cd9e2d3781098b15841168f4d",
-      "slug": "motor/advanced/system-methodology/SYS-05-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-05-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-05-assessment",
       "attachments": []
     },
     {
@@ -1761,20 +1173,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-06-assessment.md",
-      "contentSha256": "b9fb128037a281a7663d109f92f3bcd9a736235a682bfd6f208a093c9dde2f92",
-      "slug": "motor/advanced/system-methodology/SYS-06-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-06-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-06-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop.md",
       "contentSha256": "2a3c18a24ce64eb2fbe2aebab546d3082d483288a8fd125ee9e9339dfd8d0fc3",
       "slug": "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
@@ -1786,20 +1184,6 @@
       "routeId": "practice",
       "stageId": "advanced",
       "articleId": "motor/advanced/system-methodology/SYS-07-Power-Control-Closed-Loop",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/advanced/system-methodology/SYS-07-assessment.md",
-      "contentSha256": "13b1e889f745e82f6897e39bf9c55a9dde9a058e2876b5810fdcf5da1d766043",
-      "slug": "motor/advanced/system-methodology/SYS-07-assessment",
-      "oldUrl": "/content/motor/advanced/system-methodology/SYS-07-assessment.html",
-      "targetUrl": "/posts/motor/advanced/system-methodology/SYS-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "practice",
-      "stageId": "advanced",
-      "articleId": "motor/advanced/system-methodology/SYS-07-assessment",
       "attachments": []
     },
     {
@@ -1845,20 +1229,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-00-assessment.md",
-      "contentSha256": "158f36907923562791d0734a9accab108462425d8e7c7a20e919dd7873830be7",
-      "slug": "motor/algorithm/ALG-00-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-00-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-00-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-00-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-01-FOC-Theory.md",
       "contentSha256": "b251bcbf135fa485c87908d927034d8ec9bd1ba5734420a39a629ffa12cba1dc",
       "slug": "motor/algorithm/ALG-01-FOC-Theory",
@@ -1873,20 +1243,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-01-assessment.md",
-      "contentSha256": "5f89bbcef5ddf771bb9a9ab5b2d8be2fab99a6fcf034070349ade9f48682dc0c",
-      "slug": "motor/algorithm/ALG-01-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-01-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-02-Current-Sampling-Timing.md",
       "contentSha256": "4a295237b2a3fbad6cf16bc939f3b9c099ebbdfc6bcc758034dec27787bdc1c8",
       "slug": "motor/algorithm/ALG-02-Current-Sampling-Timing",
@@ -1898,20 +1254,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-02-Current-Sampling-Timing",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-02-assessment.md",
-      "contentSha256": "ea1530bc8a74446c8d35751e564fddc8927195375702ec06a6a4aa3044ea68f8",
-      "slug": "motor/algorithm/ALG-02-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-02-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-02-assessment",
       "attachments": []
     },
     {
@@ -1943,20 +1285,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-04-assessment.md",
-      "contentSha256": "aa3e773e1af862f5e767d02f743bf884dc39bac335d3abc99a18577aa1bf4d34",
-      "slug": "motor/algorithm/ALG-04-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-04-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-04-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-05-Sensored-FOC.md",
       "contentSha256": "e3ab84ecd10b897bd71c54ee3598d478d2f00ce6d8fcdba8ca6d5a2f7a138d75",
       "slug": "motor/algorithm/ALG-05-Sensored-FOC",
@@ -1968,20 +1296,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-05-Sensored-FOC",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-05-assessment.md",
-      "contentSha256": "c2c61f6ec579b2b135da5994405f74dcd7d18a3e3f34e0b980796468fa4b6b4e",
-      "slug": "motor/algorithm/ALG-05-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-05-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-05-assessment",
       "attachments": []
     },
     {
@@ -2013,20 +1327,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-07-assessment.md",
-      "contentSha256": "15e2e8daee3a0e7a16e93f127022050b8f3af7d66cb9368de63275eadc8816ee",
-      "slug": "motor/algorithm/ALG-07-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-07-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-08-Initial-Position-Detection.md",
       "contentSha256": "15719c2020c1764598e5d51d894294793a1224b9881f33069cc29117fd7503c1",
       "slug": "motor/algorithm/ALG-08-Initial-Position-Detection",
@@ -2038,20 +1338,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-08-Initial-Position-Detection",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-08-assessment.md",
-      "contentSha256": "7fcddb545a4dfcafc90cf57a8b1298dba0187497403e6f62765bba7ee70eadee",
-      "slug": "motor/algorithm/ALG-08-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-08-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-08-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-08-assessment",
       "attachments": []
     },
     {
@@ -2069,20 +1355,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-09-assessment.md",
-      "contentSha256": "2812dc464d4bb499ead80fb10cd30c9639f985d6e1f4bf7f1aa481386beab3ac",
-      "slug": "motor/algorithm/ALG-09-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-09-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-09-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-10-Overmodulation.md",
       "contentSha256": "264c9a15d1a50ccb70f4cfd0ddac6222af426b25ed73abeb6bee5325f0eed56d",
       "slug": "motor/algorithm/ALG-10-Overmodulation",
@@ -2094,20 +1366,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-10-Overmodulation",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-10-assessment.md",
-      "contentSha256": "8ba3cc24c87b05ac96f74163ce9fb05e3c3f7af383e088355bd627468d07adfa",
-      "slug": "motor/algorithm/ALG-10-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-10-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-10-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-10-assessment",
       "attachments": []
     },
     {
@@ -2125,20 +1383,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-11-assessment.md",
-      "contentSha256": "f89b1352d4a4ec1c9d164235709badece322797923b5a5eb70e0a36f565b38b7",
-      "slug": "motor/algorithm/ALG-11-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-11-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-11-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-11-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-12-Speed-Loop-Torque-Observer.md",
       "contentSha256": "e11f069d6cd87307c2fa7bdba2ebf7623cbeeccd8a70f9ba76aa422548f07b94",
       "slug": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
@@ -2150,20 +1394,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-12-Speed-Loop-Torque-Observer",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-12-assessment.md",
-      "contentSha256": "e25f6f3a184e0f3ae2e27a987f46d851f59bac2ceafecbb7851d5b8f32b43939",
-      "slug": "motor/algorithm/ALG-12-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-12-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-12-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-12-assessment",
       "attachments": []
     },
     {
@@ -2181,20 +1411,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-13-assessment.md",
-      "contentSha256": "547224b868cc434dee442299b60e2908c3d30ce607bd6078d8b308afaaa7441d",
-      "slug": "motor/algorithm/ALG-13-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-13-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-13-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-13-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-14-THD-Harmonic-Analysis.md",
       "contentSha256": "65f47547ba457a5a22c9acb4ac1278308a1eaca480183492c08d5d0c94f155a4",
       "slug": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
@@ -2206,20 +1422,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-14-THD-Harmonic-Analysis",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-14-assessment.md",
-      "contentSha256": "4bf01a750194fe9c4a79b6279055cae9bf60531508989414507cc5d396feda64",
-      "slug": "motor/algorithm/ALG-14-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-14-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-14-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-14-assessment",
       "attachments": []
     },
     {
@@ -2237,20 +1439,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-15-assessment.md",
-      "contentSha256": "0534f847104c8d2923a558e325b4772f321ec4573fc9b6698b778b6e620d6311",
-      "slug": "motor/algorithm/ALG-15-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-15-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-15-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-15-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-16-Nonlinear-Flux-Observer.md",
       "contentSha256": "8c4ba4e1aa94181982b195bb2a46882db791e278ae6a2aa95ebb9f2618a70995",
       "slug": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
@@ -2262,20 +1450,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-16-Nonlinear-Flux-Observer",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-16-assessment.md",
-      "contentSha256": "7dfdc706ab7cc65449d701947d687c9b73010c2b598246be30961b989ca83a6a",
-      "slug": "motor/algorithm/ALG-16-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-16-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-16-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-16-assessment",
       "attachments": []
     },
     {
@@ -2307,20 +1481,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/algorithm/ALG-18-assessment.md",
-      "contentSha256": "7001e50e825d3ca20bb9496151812f47f7307c9f3e4dcfe6a5015d6c51b5300c",
-      "slug": "motor/algorithm/ALG-18-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-18-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-18-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-18-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/algorithm/ALG-19-Deadbeat-Current-Prediction.md",
       "contentSha256": "0407950a5220aaba1f9843f4f112263ef746bfb814668e2476bf90a321168414",
       "slug": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
@@ -2332,20 +1492,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-19-Deadbeat-Current-Prediction",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-19-assessment.md",
-      "contentSha256": "197d7802f8f6d7c34c76eaa4f68aa257ab0ee8424114eb2064df2908aa29be16",
-      "slug": "motor/algorithm/ALG-19-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-19-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-19-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-19-assessment",
       "attachments": []
     },
     {
@@ -2388,20 +1534,6 @@
       "routeId": "control",
       "stageId": "algorithm",
       "articleId": "motor/algorithm/ALG-22-BLDC-Six-Step-Commutation",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/algorithm/ALG-22-assessment.md",
-      "contentSha256": "a2186c24e35c20a4d18a115141d0ceaa7d658832884a69ff085ebffa0531ee51",
-      "slug": "motor/algorithm/ALG-22-assessment",
-      "oldUrl": "/content/motor/algorithm/ALG-22-assessment.html",
-      "targetUrl": "/posts/motor/algorithm/ALG-22-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "algorithm",
-      "articleId": "motor/algorithm/ALG-22-assessment",
       "attachments": []
     },
     {
@@ -3405,20 +2537,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-01-assessment.md",
-      "contentSha256": "18e756b695c23601ff0bbb2f26113dbbf66b52bf6a1ef89ade2029bb7453479d",
-      "slug": "motor/hardware/HW-01-assessment",
-      "oldUrl": "/content/motor/hardware/HW-01-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-01B-Motor-Physics-Deep-Dive.md",
       "contentSha256": "b9632cf27cd2238531a9574cdafbd242376ae60d9baa803f41eeb6c2f188df3f",
       "slug": "motor/hardware/HW-01B-Motor-Physics-Deep-Dive",
@@ -3433,20 +2551,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-01B-assessment.md",
-      "contentSha256": "c86086aad7642bb75403cbfbd46ddb09005a02615a66ef22f1c35705a69bd42c",
-      "slug": "motor/hardware/HW-01B-assessment",
-      "oldUrl": "/content/motor/hardware/HW-01B-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-01B-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-01B-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-02-Current-Sensing.md",
       "contentSha256": "506be16f9f0268e26707b397f10aaf8a1ee345eb41e21554e43f1d0e957c77e9",
       "slug": "motor/hardware/HW-02-Current-Sensing",
@@ -3458,20 +2562,6 @@
       "routeId": "hardware",
       "stageId": "hardware",
       "articleId": "motor/hardware/HW-02-Current-Sensing",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/hardware/HW-02-assessment.md",
-      "contentSha256": "0a36f22fef918b5d8a4fc9ee550feb4b55e2ebd890e07de0602958f9b5028c95",
-      "slug": "motor/hardware/HW-02-assessment",
-      "oldUrl": "/content/motor/hardware/HW-02-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-02-assessment",
       "attachments": []
     },
     {
@@ -3503,20 +2593,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-03-assessment.md",
-      "contentSha256": "4797528e49a218dec1e9d2aca6215cbf3adec1f1c78f08fb40e0c4979cda8cb9",
-      "slug": "motor/hardware/HW-03-assessment",
-      "oldUrl": "/content/motor/hardware/HW-03-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-04-MCU-Peripherals.md",
       "contentSha256": "86f28bdc04221906977982bc5e6184169d3f2388d6dcdf85fd26bce69e74791a",
       "slug": "motor/hardware/HW-04-MCU-Peripherals",
@@ -3528,20 +2604,6 @@
       "routeId": "hardware",
       "stageId": "hardware",
       "articleId": "motor/hardware/HW-04-MCU-Peripherals",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/hardware/HW-04-assessment.md",
-      "contentSha256": "275f02cd9dd16d1b9fd12a2091a57460fc314596910f200c8bdc17538bae8717",
-      "slug": "motor/hardware/HW-04-assessment",
-      "oldUrl": "/content/motor/hardware/HW-04-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-04-assessment",
       "attachments": []
     },
     {
@@ -3559,20 +2621,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-05-assessment.md",
-      "contentSha256": "31138a79e502fae9859ccd88af76a44ffc4c2baed4e432e6cdf001dfd51a45d1",
-      "slug": "motor/hardware/HW-05-assessment",
-      "oldUrl": "/content/motor/hardware/HW-05-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-06-Power-Management-Protection.md",
       "contentSha256": "e4babaf9b82f134363ad941820dea638f95b221f86047c5ddfffac4044a22704",
       "slug": "motor/hardware/HW-06-Power-Management-Protection",
@@ -3587,20 +2635,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/hardware/HW-06-assessment.md",
-      "contentSha256": "832a44fd68e89d2ee77b025c1ea9013bd8569906bc4783e2aef70bb68d9f9889",
-      "slug": "motor/hardware/HW-06-assessment",
-      "oldUrl": "/content/motor/hardware/HW-06-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-06-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/hardware/HW-07-Thermal-EMC-Design.md",
       "contentSha256": "a511eef567d1f398804923c1fb12dede00be684137d73bab7c0c1492950bd0a4",
       "slug": "motor/hardware/HW-07-Thermal-EMC-Design",
@@ -3612,20 +2646,6 @@
       "routeId": "hardware",
       "stageId": "hardware",
       "articleId": "motor/hardware/HW-07-Thermal-EMC-Design",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/hardware/HW-07-assessment.md",
-      "contentSha256": "3ee2a362ef32bf274cf842eec6c5c46066dec53a93bc2ad015d40b185bf7103f",
-      "slug": "motor/hardware/HW-07-assessment",
-      "oldUrl": "/content/motor/hardware/HW-07-assessment.html",
-      "targetUrl": "/posts/motor/hardware/HW-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "hardware",
-      "articleId": "motor/hardware/HW-07-assessment",
       "attachments": []
     },
     {
@@ -4063,20 +3083,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-01-assessment.md",
-      "contentSha256": "bd23eecf3a78fe38e4a5eb98e26f6ff587e204ae1a50d525fa21d813b05b8795",
-      "slug": "motor/motion-control/MC-01-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-01-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-02-Clarke-Park.md",
       "contentSha256": "0a7789ad9e0b1c6ce553341e51b0e6b2337aca09006d5d85cf8e6656864b9c4c",
       "slug": "motor/motion-control/MC-02-Clarke-Park",
@@ -4088,20 +3094,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-02-Clarke-Park",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-02-assessment.md",
-      "contentSha256": "000b163674501b1ce787e3289919284087c960f2d0ac84f303b59223ce2ababe",
-      "slug": "motor/motion-control/MC-02-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-02-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-02-assessment",
       "attachments": []
     },
     {
@@ -4119,20 +3111,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-03-assessment.md",
-      "contentSha256": "ccc3b034a8826c2292a926bbe7209c812a92b212d719484897cd66a1c5d797a2",
-      "slug": "motor/motion-control/MC-03-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-03-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-04-FOC-Signal-Chain.md",
       "contentSha256": "bccb9ebfc3a699c037f35121baac9c5668d17b5b42d060f580ccbd0a9b314108",
       "slug": "motor/motion-control/MC-04-FOC-Signal-Chain",
@@ -4144,20 +3122,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-04-FOC-Signal-Chain",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-04-assessment.md",
-      "contentSha256": "ad7f746ac4d2d2b20e64544b0270ba4c3bd559ca64fa9cb4af30322fe3861a87",
-      "slug": "motor/motion-control/MC-04-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-04-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-04-assessment",
       "attachments": []
     },
     {
@@ -4175,20 +3139,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-05-assessment.md",
-      "contentSha256": "4ecafa41fe48055e34b85f74a250805e294d269ef3b21bdfe04d2e59c12dda11",
-      "slug": "motor/motion-control/MC-05-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-05-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-06-Current-Loop.md",
       "contentSha256": "2ad5d37702bb2fc74e8eb7ab129e87ee58ed8461323e7e0d54e5ed1a71b4e708",
       "slug": "motor/motion-control/MC-06-Current-Loop",
@@ -4200,20 +3150,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-06-Current-Loop",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-06-assessment.md",
-      "contentSha256": "38f9010a29aa5d06d8d4a97b7abf04d017dc7ef6c14a794c7cb2da7222197680",
-      "slug": "motor/motion-control/MC-06-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-06-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-06-assessment",
       "attachments": []
     },
     {
@@ -4231,20 +3167,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-07-assessment.md",
-      "contentSha256": "a54201ff7658a501c9cdb56fa2178e9698dca80452261566e85353298ac696b1",
-      "slug": "motor/motion-control/MC-07-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-07-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-08-Sensorless-Observers.md",
       "contentSha256": "73970adcc3a10947060817886f2bbf7a30492b06e28fb9915d689b254326eb25",
       "slug": "motor/motion-control/MC-08-Sensorless-Observers",
@@ -4256,20 +3178,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-08-Sensorless-Observers",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-08-assessment.md",
-      "contentSha256": "6463eab51b17aca25fe3e4096524cfecb05c978495e8716fba542adb876fa469",
-      "slug": "motor/motion-control/MC-08-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-08-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-08-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-08-assessment",
       "attachments": []
     },
     {
@@ -4287,20 +3195,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-09-assessment.md",
-      "contentSha256": "386f0acfccd831b1f731f19dd845eab688f8147f4b52bcabc2061ff9c67ec491",
-      "slug": "motor/motion-control/MC-09-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-09-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-09-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-10-Parameter-Sensitivity.md",
       "contentSha256": "382b201eac702e920a64d83e77ce765bbcc811a05293b9e4900bcf361bf82f04",
       "slug": "motor/motion-control/MC-10-Parameter-Sensitivity",
@@ -4312,20 +3206,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-10-Parameter-Sensitivity",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-10-assessment.md",
-      "contentSha256": "11924310300fe651138fa3b6ac21361cff482292c903c2aa0b88b596ffb1523f",
-      "slug": "motor/motion-control/MC-10-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-10-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-10-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-10-assessment",
       "attachments": []
     },
     {
@@ -4343,20 +3223,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-11-assessment.md",
-      "contentSha256": "63476fdf0a45349615c9713c0a57d763ddf19a24228417005176c53fb0079954",
-      "slug": "motor/motion-control/MC-11-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-11-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-11-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-11-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-MC-01-Position-Loop.md",
       "contentSha256": "0940bb3c359f946c5b23492ab28602f2d95247906a3abfd3fec5cbc4f5065076",
       "slug": "motor/motion-control/MC-MC-01-Position-Loop",
@@ -4368,20 +3234,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-MC-01-Position-Loop",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-MC-01-assessment.md",
-      "contentSha256": "e16e1544bb101fe342a11bfa0954edfc0695a83fc25d4d84998dc72ffc2dfce2",
-      "slug": "motor/motion-control/MC-MC-01-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-01-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-01-assessment",
       "attachments": []
     },
     {
@@ -4399,20 +3251,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-02-assessment.md",
-      "contentSha256": "357475fb2210cb4742aae846e1acb67b44b9f115a415d0d92c2e7ab5f95b196c",
-      "slug": "motor/motion-control/MC-MC-02-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-02-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-02-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-MC-03-Resonance-Suppression.md",
       "contentSha256": "9358b1907805ae865dcf59631b76e592516f2ca0811b4b10b2b8282874296c81",
       "slug": "motor/motion-control/MC-MC-03-Resonance-Suppression",
@@ -4424,20 +3262,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-MC-03-Resonance-Suppression",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-MC-03-assessment.md",
-      "contentSha256": "e5f782d726f2d3df55f53caedc08638a7f0390c7bd7c85508a2be0941f3b97e8",
-      "slug": "motor/motion-control/MC-MC-03-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-03-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-03-assessment",
       "attachments": []
     },
     {
@@ -4455,20 +3279,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-04-assessment.md",
-      "contentSha256": "f9cd6707028bcf2e63652b5274b24df349649d72aadbef910a4ce73aebaa75a0",
-      "slug": "motor/motion-control/MC-MC-04-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-04-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-04-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-MC-05-Electronic-Gearing.md",
       "contentSha256": "aeadca7cb57a46a6b5bfbce049ef3546fcbf99cd25d37ad976205efe7f9de75e",
       "slug": "motor/motion-control/MC-MC-05-Electronic-Gearing",
@@ -4480,20 +3290,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-MC-05-Electronic-Gearing",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-MC-05-assessment.md",
-      "contentSha256": "9389b0f7bf0595af664da218090b91539e234248ef556b7a94a7a37878763c26",
-      "slug": "motor/motion-control/MC-MC-05-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-05-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-05-assessment",
       "attachments": []
     },
     {
@@ -4511,20 +3307,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-MC-06-assessment.md",
-      "contentSha256": "5aaddde002a7324e99a9f2d3df089337f8eb72ef5b5a8cf07261c6ac84240928",
-      "slug": "motor/motion-control/MC-MC-06-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-MC-06-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-MC-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-MC-06-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-TP-01-Kinematics-Constraints.md",
       "contentSha256": "0040c8499907f4a6327bfb7981e8b545172917c62d742e922745966b3441991e",
       "slug": "motor/motion-control/MC-TP-01-Kinematics-Constraints",
@@ -4536,20 +3318,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-TP-01-Kinematics-Constraints",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-TP-01-assessment.md",
-      "contentSha256": "88865685a5a698c247575cab0dd6d79accec618a17776aa78b14d11d6de70f4d",
-      "slug": "motor/motion-control/MC-TP-01-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-01-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-01-assessment",
       "attachments": []
     },
     {
@@ -4567,20 +3335,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-02-assessment.md",
-      "contentSha256": "06f27688b0597a9a38500f783784497191cdd3507bde671dfa74633e185e4a5d",
-      "slug": "motor/motion-control/MC-TP-02-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-02-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-02-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-TP-03-Polynomial-Trajectory.md",
       "contentSha256": "347914cd71ec5fdf11b62534f8e7a181a0b89207b24ee3299120993eead0b139",
       "slug": "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
@@ -4592,20 +3346,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-TP-03-Polynomial-Trajectory",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-TP-03-assessment.md",
-      "contentSha256": "a9c8a3e865d682e9f1cc3ddd065fb68189fa536bcd21730616a162bbe96d05a7",
-      "slug": "motor/motion-control/MC-TP-03-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-03-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-03-assessment",
       "attachments": []
     },
     {
@@ -4623,20 +3363,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-04-assessment.md",
-      "contentSha256": "0fab2f5f6517d1d69b5b2f9e93a7a58a721ec9cedef7ef217acbb6cc68b8a7f0",
-      "slug": "motor/motion-control/MC-TP-04-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-04-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-04-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-TP-05-Time-Optimal.md",
       "contentSha256": "c397cdedc44038f8d321b70ee5cc34c1497c16e69e69e124744ce51deff93a89",
       "slug": "motor/motion-control/MC-TP-05-Time-Optimal",
@@ -4651,20 +3377,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/motion-control/MC-TP-05-assessment.md",
-      "contentSha256": "7b389cd12132d36ccb0293da8a6d0b09f8417cded46e38bf6423fc0c82655b41",
-      "slug": "motor/motion-control/MC-TP-05-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-05-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/motion-control/MC-TP-06-Interpolation.md",
       "contentSha256": "f3c5b323ab2571d85bcfd61bf1caa823dbea27fd4cdafbffd65604cdc277bf6a",
       "slug": "motor/motion-control/MC-TP-06-Interpolation",
@@ -4676,20 +3388,6 @@
       "routeId": "control",
       "stageId": "motion-control",
       "articleId": "motor/motion-control/MC-TP-06-Interpolation",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/motion-control/MC-TP-06-assessment.md",
-      "contentSha256": "3bb82fa59ac58d38cde118baeaf1f689a808ad1fdc7d18f82cf92efdeb894075",
-      "slug": "motor/motion-control/MC-TP-06-assessment",
-      "oldUrl": "/content/motor/motion-control/MC-TP-06-assessment.html",
-      "targetUrl": "/posts/motor/motion-control/MC-TP-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "control",
-      "stageId": "motion-control",
-      "articleId": "motor/motion-control/MC-TP-06-assessment",
       "attachments": []
     },
     {
@@ -4777,20 +3475,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-01-assessment.md",
-      "contentSha256": "479d6e858f4e3be6fa8491452ab1c44ba958e45034abcf8a99d9531998cc87e7",
-      "slug": "motor/power-path/PP-01-assessment",
-      "oldUrl": "/content/motor/power-path/PP-01-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-01-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-01-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull.md",
       "contentSha256": "5d4cd10df7068e922facf5a216550ec3c0929924cc9bf7f2392b59db1441cc26",
       "slug": "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
@@ -4802,20 +3486,6 @@
       "routeId": "hardware",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-02-Isolated-DCDC-Flyback-Forward-PushPull",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/power-path/PP-02-assessment.md",
-      "contentSha256": "f527dbdf14b077a556ace2c925876d695e1cfa48c5c9edf4c578740f2447262e",
-      "slug": "motor/power-path/PP-02-assessment",
-      "oldUrl": "/content/motor/power-path/PP-02-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-02-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-02-assessment",
       "attachments": []
     },
     {
@@ -4833,20 +3503,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-03-assessment.md",
-      "contentSha256": "534e8bb604d1259fe9225661278fd01a0ca9864c698bab0bb973a4f43106d2fc",
-      "slug": "motor/power-path/PP-03-assessment",
-      "oldUrl": "/content/motor/power-path/PP-03-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-03-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-03-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-04-PFC-Power-Factor-Correction.md",
       "contentSha256": "7cb901bc29ac6fda84b6c3bbe534a5179bfce0ddfb4cbdd6e99a50552c108fd7",
       "slug": "motor/power-path/PP-04-PFC-Power-Factor-Correction",
@@ -4858,20 +3514,6 @@
       "routeId": "hardware",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-04-PFC-Power-Factor-Correction",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/power-path/PP-04-assessment.md",
-      "contentSha256": "7ed17f006872b36f0bc4a10ffc0496a7e08671e2ff45f35f62de7e465db12165",
-      "slug": "motor/power-path/PP-04-assessment",
-      "oldUrl": "/content/motor/power-path/PP-04-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-04-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-04-assessment",
       "attachments": []
     },
     {
@@ -4889,20 +3531,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-05-assessment.md",
-      "contentSha256": "ce0a1697a10f5985ee0cd4b93cd58e8637fbcacf2240ec72a5f55fac1e60a442",
-      "slug": "motor/power-path/PP-05-assessment",
-      "oldUrl": "/content/motor/power-path/PP-05-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-05-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-05-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-06-Loop-Compensation.md",
       "contentSha256": "1dc08435ff277283b5e84ec8b16c73df8bc94bdf2992b876d234ac168de5b5ac",
       "slug": "motor/power-path/PP-06-Loop-Compensation",
@@ -4914,20 +3542,6 @@
       "routeId": "hardware",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-06-Loop-Compensation",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/power-path/PP-06-assessment.md",
-      "contentSha256": "847782f7357f3bae3397b5800cf4af2614b9640483fd13ba95e8c0968a523708",
-      "slug": "motor/power-path/PP-06-assessment",
-      "oldUrl": "/content/motor/power-path/PP-06-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-06-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-06-assessment",
       "attachments": []
     },
     {
@@ -4945,20 +3559,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-07-assessment.md",
-      "contentSha256": "0f71611063afe41c3f3d8dfb5b83447e4d3b9b5627d46265cd111d65c262ab70",
-      "slug": "motor/power-path/PP-07-assessment",
-      "oldUrl": "/content/motor/power-path/PP-07-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-07-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-07-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-08-Three-Level-Topology.md",
       "contentSha256": "1e2d99893a00361a37a1fbef49f706e8b7fb0744d873235e4c6653cada5f9d3d",
       "slug": "motor/power-path/PP-08-Three-Level-Topology",
@@ -4970,20 +3570,6 @@
       "routeId": "hardware",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-08-Three-Level-Topology",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/power-path/PP-08-assessment.md",
-      "contentSha256": "c36311ee1f70a1fc61dd405e34d08adae1b115beedd5ac3ed42c2f0e88edf39a",
-      "slug": "motor/power-path/PP-08-assessment",
-      "oldUrl": "/content/motor/power-path/PP-08-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-08-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-08-assessment",
       "attachments": []
     },
     {
@@ -5001,20 +3587,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-09-assessment.md",
-      "contentSha256": "699a80602e549e3a32b75be9e2c67dd80f44c6cf49d274bdce142260468d9110",
-      "slug": "motor/power-path/PP-09-assessment",
-      "oldUrl": "/content/motor/power-path/PP-09-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-09-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-09-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-10-Vienna-Rectifier.md",
       "contentSha256": "fdc33e1dfa07d6cfad0405885483a5cd9d7a8d029c76dc9dc1d35500c974dadd",
       "slug": "motor/power-path/PP-10-Vienna-Rectifier",
@@ -5029,20 +3601,6 @@
       "attachments": []
     },
     {
-      "sourcePath": "content/motor/power-path/PP-10-assessment.md",
-      "contentSha256": "25cd8316319ad0cdb7be1b3a4936833d89f4754e83c4644fedc671acb0b003de",
-      "slug": "motor/power-path/PP-10-assessment",
-      "oldUrl": "/content/motor/power-path/PP-10-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-10-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-10-assessment",
-      "attachments": []
-    },
-    {
       "sourcePath": "content/motor/power-path/PP-11-Boost-PFC-Bus-Dynamics.md",
       "contentSha256": "0ffe91358e12d845c7102c458f21d4dd47eaf79be637f3017df9bd7ac851b523",
       "slug": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
@@ -5054,20 +3612,6 @@
       "routeId": "hardware",
       "stageId": "power-path",
       "articleId": "motor/power-path/PP-11-Boost-PFC-Bus-Dynamics",
-      "attachments": []
-    },
-    {
-      "sourcePath": "content/motor/power-path/PP-11-assessment.md",
-      "contentSha256": "f4e093d47db0694ce154051a1d5c1c9743b1fd2de648fbb28675d0528429bd04",
-      "slug": "motor/power-path/PP-11-assessment",
-      "oldUrl": "/content/motor/power-path/PP-11-assessment.html",
-      "targetUrl": "/posts/motor/power-path/PP-11-assessment/",
-      "visibility": "public",
-      "encrypted": false,
-      "sectionId": "motor",
-      "routeId": "hardware",
-      "stageId": "power-path",
-      "articleId": "motor/power-path/PP-11-assessment",
       "attachments": []
     },
     {
