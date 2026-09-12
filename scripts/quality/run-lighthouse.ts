@@ -218,10 +218,15 @@ export async function main(): Promise<void> {
         onlyCategories: Object.keys(thresholds),
       }), 120_000, `Lighthouse ${qualityPage.path} run ${run}`)
       if (!result) throw new Error(`Lighthouse returned no result for ${qualityPage.path}`)
+      const lcpAudit = result.lhr.audits['largest-contentful-paint-element']
+      const unavailablePerformance = lcpAudit?.scoreDisplayMode === 'error'
+        || (lcpAudit?.score == null && typeof lcpAudit?.errorMessage === 'string')
       const scores = Object.fromEntries(
         Object.keys(thresholds).map((category) => [
           category,
-          typeof result.lhr.categories[category]?.score === 'number'
+          category === 'performance' && unavailablePerformance
+            ? null
+            : typeof result.lhr.categories[category]?.score === 'number'
             ? result.lhr.categories[category].score * 100
             : null,
         ]),
