@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "本课程正文出现的代码均为面向 F28075 + float 的教学重写版：常量来自各章算例、接口统一（adc_/pwm_/ctrl_/prot_/task_ 前缀、_isr 结尾）。但结构与口径不是凭空造的——它们对照学员手头的既有工程代码"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false
@@ -131,7 +131,7 @@ order: 790
 | LLC/PFC/逆变设计工具 | `电源\llc_design_tool_v1\`（llc_design、pfc_design、inverter_design、power_codegen） | Python 工具包（含 GUI） | 第12/13/16章、`sim/` |
 | UPS 控制软件术语与工况手册 | `电源\docs\ups-control-software-glossary.md` | 39 KB Markdown | 术语口径、第36/38章 |
 | 基底教材《数字电源DSP控制算法从入门到精通》 | `UPS-PCS课程\基底\`（30 章 HTML） | 课程文本 | 章节范围对照（第10/12/20/22/26/27章等） |
-| 《控制系统设计指南》第4版 | `UPS-PCS课程\基底\控制系统设计指南  原书第4版.pdf` | PDF | 第10/17/22章（补偿与整定的外部依据） |
+| 《控制系统设计指南》第4版 | `UPS-PCS课程\基底\控制系统设计指南 原书第4版.pdf` | PDF | 第10/17/22章（补偿与整定的外部依据） |
 
 ### 2. `ups\pll.c`：可直接对照的三个工程做法
 
@@ -140,25 +140,25 @@ order: 790
 功能：调整逆变给定矢量角"瞬时步长"，使逆变相位向输出/旁路相位靠齐（PLL1 锁相 + 角度三角函数计算）
 
 做法① 双模式相位源（与本课程第29/30章的分工一致）
-  case 0 本振：i32tmpDx_0 = m_i32K50HzDtheta − m_unPLL1DthetaRefStd_0.dword;   // 50Hz 自振
-               另一支路用 m_i32K60HzDtheta                                          // 60Hz 制式
-  case 1 跟旁路：i32tmpDx_0 = objBypass.m_unDthetaBpBase_0.dword;                 // 以旁路为基准
-               UPDNLMT32(i32tmpDx_0, (m_i16FreqSetMax_0 << 16), (m_i16FreqSetMin_0 << 16));
-               再对相位增量限幅：UPDNLMT32(i32tmpDx_0, m_i16ThetaStepBp_0, −m_i16ThetaStepBp_0);
-  → 对应本书：第29章 29-3 的"频率跟踪限速"与第30章 30-2 的三同步判据；
-    m_i16ThetaStepBp_0（每拍角度步长上限）就是本书 PLL_DF_MAX（2 Hz/s → 7.854e-4 rad/拍）的工程实现形态
+ case 0 本振：i32tmpDx_0 = m_i32K50HzDtheta − m_unPLL1DthetaRefStd_0.dword; // 50Hz 自振
+ 另一支路用 m_i32K60HzDtheta // 60Hz 制式
+ case 1 跟旁路：i32tmpDx_0 = objBypass.m_unDthetaBpBase_0.dword; // 以旁路为基准
+ UPDNLMT32(i32tmpDx_0, (m_i16FreqSetMax_0 << 16), (m_i16FreqSetMin_0 << 16));
+ 再对相位增量限幅：UPDNLMT32(i32tmpDx_0, m_i16ThetaStepBp_0, −m_i16ThetaStepBp_0);
+ → 对应本书：第29章 29-3 的"频率跟踪限速"与第30章 30-2 的三同步判据；
+ m_i16ThetaStepBp_0（每拍角度步长上限）就是本书 PLL_DF_MAX（2 Hz/s → 7.854e-4 rad/拍）的工程实现形态
 
 做法② 角度用定点标度而非浮点
-  角度基准分辨率：m_unDthetaLBSBase_0.dword = (m_u32KDthetaInvSyncBase << 16) / (m_i32TLBS_0 >> 1);
-  注释给出标度：360 × 1024 × 10^8 / fpwm / cnt —— 用 int64 表示"每拍角度增量"，
-  避免浮点同时保留 360°/1024 精度与 10^8 细度（本书第20章 20.5 "先标幺再定标"的工程版本）
+ 角度基准分辨率：m_unDthetaLBSBase_0.dword = (m_u32KDthetaInvSyncBase << 16) / (m_i32TLBS_0 >> 1);
+ 注释给出标度：360 × 1024 × 10^8 / fpwm / cnt —— 用 int64 表示"每拍角度增量"，
+ 避免浮点同时保留 360°/1024 精度与 10^8 细度（本书第20章 20.5 "先标幺再定标"的工程版本）
 
 做法③ 锁相支路上的固定相位补偿
-  f32_tmpPllCompCos = 0.99945022f;  // cos(1.9°)
-  f32_tmpPllCompSin = 0.03315518f;  // sin(1.9°)
-  → 这是补偿采样/滤波链引入的固定相位滞后（本书第9章 9-3 的"相位账"）：
-    1.9° 在 50Hz 上等于 105.6µs 的时延，必须由补偿角抵掉，否则并机与切换时相位不一致
-  → 校验方法（本书口径）：双通道录波量"逆变输出与旁路电压的相位差"，把补偿角调到 0°±0.2°
+ f32_tmpPllCompCos = 0.99945022f; // cos(1.9°)
+ f32_tmpPllCompSin = 0.03315518f; // sin(1.9°)
+ → 这是补偿采样/滤波链引入的固定相位滞后（本书第9章 9-3 的"相位账"）：
+ 1.9° 在 50Hz 上等于 105.6µs 的时延，必须由补偿角抵掉，否则并机与切换时相位不一致
+ → 校验方法（本书口径）：双通道录波量"逆变输出与旁路电压的相位差"，把补偿角调到 0°±0.2°
 ```
 
 ### 3. 汇川 MD380 FOC 浮点实现：与本书口径逐条对照
@@ -187,16 +187,16 @@ order: 790
 
 ```text
 T 型三电平（电源\labs\ttype-three-level\）
-  ttype_3level_spwm_gates.m：由三相参考直接生成 T 型三电平门极（含 P/O/N 判据与死区插入）
-  spwm_ttype_3level_sfunc.m：Simulink S 函数封装，便于与本书第15章的状态表逐条对照
-  ttype_3level_switching.slx / threephase_debug_measure.slx：逐状态与测量调试模型
-  → 用途：把本书 15.5/15.8 的状态判定函数（tl_pick / sw_state_legal_npc）与该脚本对拍
+ ttype_3level_spwm_gates.m：由三相参考直接生成 T 型三电平门极（含 P/O/N 判据与死区插入）
+ spwm_ttype_3level_sfunc.m：Simulink S 函数封装，便于与本书第15章的状态表逐条对照
+ ttype_3level_switching.slx / threephase_debug_measure.slx：逐状态与测量调试模型
+ → 用途：把本书 15.5/15.8 的状态判定函数（tl_pick / sw_state_legal_npc）与该脚本对拍
 
 参数辨识（AxDr_L\，Simulink 代码生成）
-  L_identification.c / RLID.c（R、L 辨识）、R_flux_identification.c（磁链/电阻辨识）
-  foc_para.m：参数表与基值定义（与本书"参数表 + 标定"同思路）
-  → 用途：第22章的"对象参数获取"环节：先用辨识/测量得到 L、R，再算穿越频率与补偿器，
-    避免"用铭牌参数整定"的常见错误（第17章 17-6 的敏感度表说明 L 容差 ±20% 就吃掉 6.75°）
+ L_identification.c / RLID.c（R、L 辨识）、R_flux_identification.c（磁链/电阻辨识）
+ foc_para.m：参数表与基值定义（与本书"参数表 + 标定"同思路）
+ → 用途：第22章的"对象参数获取"环节：先用辨识/测量得到 L、R，再算穿越频率与补偿器，
+ 避免"用铭牌参数整定"的常见错误（第17章 17-6 的敏感度表说明 L 容差 ±20% 就吃掉 6.75°）
 ```
 
 > [!IMPORTANT]

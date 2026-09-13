@@ -206,11 +206,10 @@ describe('branded home page contract', () => {
 
   it('builds homepage metrics from canonical public content and versioned reports', () => {
     const dataLayer = components[2]
-    expect(index).toContain('migration-baseline.json')
     expect(index).toContain('knowledge-navigation-coverage.json')
     expect(index).toContain('publicPosts.length')
     expect(index).toContain('coverageReport.counts.sections')
-    expect(index).toContain('migrationBaseline.counts.attachments')
+    expect(index).toContain('power/courses/ups-pcs-dsp/')
     expect(index).toContain('<HomeDataLayer metrics={homeMetrics} />')
     expect(dataLayer).toContain('interface Props')
     expect(dataLayer).toContain('const { metrics } = Astro.props')

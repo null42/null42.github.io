@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "配套 sim/ 目录下的 MATLAB 脚本（脚本清单与状态见 sim/index.html，当前为待补）。总纪律（第0章/第3章）：仿真必含 ZOH+一拍延迟；硬件只上低压台架；每完成一 lab 归档\"波形+参数版本\"。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

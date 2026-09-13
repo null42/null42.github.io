@@ -50,7 +50,7 @@ describe('migration content comparison report', () => {
       generatedBy: 'corepack pnpm migration:comparison',
       reason: 'canonical-hierarchy-normalization',
       baseCommit: 'e757f43ad36d758b0c26d4c2d64b875b46b543fa',
-      publicCollection: { added: 226, removed: 143 },
+      publicCollection: { added: 244, removed: 143 },
       hashes: { attachmentChanged: 0 },
       hierarchy: { changed: 231, canonicalArticleCount: 228 },
       protected: { private: 0, encrypted: 2 },

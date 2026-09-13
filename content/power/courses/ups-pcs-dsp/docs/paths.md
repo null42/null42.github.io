@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "共用底座为第0月（第0~7章 + LAB0）。此后分轨，每轨 12 周节奏，里程碑即\"出师验收线\"。原则：先能上岗干活，再回头补理论深度。全表章号一律按 第0章 + 48 章 + 附录 A~C 体系编号。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

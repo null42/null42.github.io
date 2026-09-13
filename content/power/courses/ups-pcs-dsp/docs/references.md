@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "本页列出课程全部理论、模型与数值的可追溯参考来源。每条来源均标注其支撑的章节号，读者可据此回溯验证。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

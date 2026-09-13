@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "本页是全书术语口径的唯一来源：正文里每个专业词首次出现处都有虚线下划线（悬停可见解释），其解释与本页完全一致。阅读顺序建议：先看「同名不同义」，再看你所在章节涉及的组。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

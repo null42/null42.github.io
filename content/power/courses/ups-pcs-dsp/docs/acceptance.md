@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "本页把真实产品的采购技术规范整理成可判定的整机验收单，是第48章「综合实战」规格定义与各 LAB 判据的现实锚点。区别于各章的\"局部环路判据\"（如 PM≥45°），本页是整机级指标：拿到一台机器，\"过/不过\"看这里。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

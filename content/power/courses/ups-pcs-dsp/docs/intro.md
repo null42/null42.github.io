@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "UPS与PCS数字控制：DSP算法从入门到精通 · 课程介绍"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false
@@ -131,18 +131,18 @@ v2.0 大纲变更：
 
 第0章 · 预备知识与符号表（新手必读）
 
-🔬 交互仿真实验室（免安装）
+ 交互仿真实验室（免安装）
 
-🧪 实验指导书
+ 实验指导书
 
-🗺 岗位课表
+ 岗位课表
 
 📝 练习参考答案
 
-🔤 术语与缩略语表
+ 术语与缩略语表
 
-📋 整机验收指标
+ 整机验收指标
 
-🛡 质量验证标准 v1.0
+ 质量验证标准 v1.0
 
 进入课程目录 →

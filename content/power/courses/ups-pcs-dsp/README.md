@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "面向 UPS/储能 PCS 开发的工程师手册式课程：以 TMS320F28075 为教学样片，从 DSP 外设到整机系统，第0章+48章+附录A~C 完整知识体系。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false

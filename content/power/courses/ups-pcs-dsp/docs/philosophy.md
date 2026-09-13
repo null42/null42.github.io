@@ -5,11 +5,11 @@ draft: false
 visibility: public
 description: "本页面阐述《UPS与PCS数字控制：DSP算法从入门到精通》的核心设计哲学、教学架构决策与工程落地导向。所有章节编排、内容深度、代码风格均源于此处的第一性原则。"
 tags:
-  - power-electronics
-  - UPS
-  - PCS
-  - DSP
-  - 课程
+ - power-electronics
+ - UPS
+ - PCS
+ - DSP
+ - 课程
 category: 课程项目
 lang: zh-CN
 comment: false
@@ -117,17 +117,17 @@ order: 710
 ```c
 ups_ctrl/
 ├── source/
-│   ├── main.c          // 初始化序列 + 主循环(低优先级)
-│   ├── isr.c           // 控制中断：电流环/电压环/PWM更新
-│   ├── task.c          // 1ms/10ms 慢速任务队列
-│   ├── protect.c       // 保护状态机 + 故障日志(黑匣子)
-│   └── comm.c          // Modbus/CAN 协议栈
+│ ├── main.c // 初始化序列 + 主循环(低优先级)
+│ ├── isr.c // 控制中断：电流环/电压环/PWM更新
+│ ├── task.c // 1ms/10ms 慢速任务队列
+│ ├── protect.c // 保护状态机 + 故障日志(黑匣子)
+│ └── comm.c // Modbus/CAN 协议栈
 ├── include/
-│   ├── param_table.h   // 所有可调参数集中定义(+CRC)
-│   └── global.h        // 共享变量(注意 volatile)
+│ ├── param_table.h // 所有可调参数集中定义(+CRC)
+│ └── global.h // 共享变量(注意 volatile)
 └── cmd/
-    ├── ram_lnk.cmd     // RAM 调试
-    └── flash_lnk.cmd   // Flash 烧录
+ ├── ram_lnk.cmd // RAM 调试
+ └── flash_lnk.cmd // Flash 烧录
 ```
 
 ## 五、 质量保证体系（附录A强制执行）
