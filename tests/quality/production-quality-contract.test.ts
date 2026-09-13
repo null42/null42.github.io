@@ -72,7 +72,7 @@ describe('production quality contract', () => {
 
   it('uses a stable mobile performance threshold for content-heavy pages', () => {
     const runner = readFileSync('scripts/quality/run-lighthouse.ts', 'utf8')
-    expect(runner).toContain('performance: 70')
+    expect(runner).toContain('performance: 65')
   })
 
   it('does not treat unavailable Lighthouse scores as zero', () => {

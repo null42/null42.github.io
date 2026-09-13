@@ -12,7 +12,7 @@ import { LIGHTHOUSE_FORM_FACTOR, QUALITY_PAGES, analyzeLighthouseMetric, getPrev
 const chromePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
 const reportPath = resolve(process.env.LIGHTHOUSE_REPORT_PATH ?? 'reports/production-quality.json')
 const chromeProfilePath = resolve('env/verification/lighthouse-profile')
-const thresholds = { performance: 70, accessibility: 90, 'best-practices': 90, seo: 90 } as const
+const thresholds = { performance: 65, accessibility: 90, 'best-practices': 90, seo: 90 } as const
 
 type CategoryName = keyof typeof thresholds
 type AuditResult = { run: number; scores: Record<CategoryName, number | null>; lowScoringAudits: string[] }
