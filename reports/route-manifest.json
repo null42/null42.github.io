@@ -254,6 +254,18 @@
       "finalUrl": "/46/"
     },
     {
+      "path": "/47/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/47/"
+    },
+    {
+      "path": "/48/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/48/"
+    },
+    {
       "path": "/5/",
       "kind": "astro",
       "expectedStatus": 200,
@@ -2659,319 +2671,445 @@
       "target": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug.html",
+      "path": "/content/power/courses/ups-pcs-dsp/appendix-a.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/",
-      "target": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-a/",
+      "target": "/posts/power/courses/ups-pcs-dsp/appendix-a/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/final/125kva-ups-final-report.html",
+      "path": "/content/power/courses/ups-pcs-dsp/appendix-b.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/",
-      "target": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-b/",
+      "target": "/posts/power/courses/ups-pcs-dsp/appendix-b/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/final/fault-injection-report.html",
+      "path": "/content/power/courses/ups-pcs-dsp/appendix-c.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/",
-      "target": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-c/",
+      "target": "/posts/power/courses/ups-pcs-dsp/appendix-c/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/final/model-consistency-report.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch00.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/",
-      "target": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch00/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch00/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/final/oral-defense-question-bank.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch01.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/",
-      "target": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch01/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch01/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/final/unconfirmed-product-items.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch02.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/",
-      "target": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch02/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch02/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch03.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/",
-      "target": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch03/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch03/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/MISSION.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch04.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/mission/",
-      "target": "/posts/power/courses/125kva-ups-14-week/mission/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch04/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch04/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/NOTES.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch05.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/notes/",
-      "target": "/posts/power/courses/125kva-ups-14-week/notes/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch05/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch05/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch06.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/",
-      "target": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch06/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch06/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/projects/f28075-control/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch07.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch07/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch07/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/QUALITY_STANDARD.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch08.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/quality_standard/",
-      "target": "/posts/power/courses/125kva-ups-14-week/quality_standard/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch08/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch08/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch09.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch09/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch09/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/REBUILD_STATUS.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch10.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/rebuild_status/",
-      "target": "/posts/power/courses/125kva-ups-14-week/rebuild_status/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch10/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch10/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/reference/figure-manifest.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch11.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/",
-      "target": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch11/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch11/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/reference/source/topology-confirmation.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch12.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/",
-      "target": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch12/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch12/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/RESOURCES.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch13.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/resources/",
-      "target": "/posts/power/courses/125kva-ups-14-week/resources/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch13/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch13/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/roadmap/master-plan.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch14.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/",
-      "target": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch14/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch14/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/balancer/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch15.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch15/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch15/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/common/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch16.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch16/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch16/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/ttype/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch17.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch17/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch17/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch18.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch18/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch18/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/matlab/vienna/README.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch19.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch19/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch19/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch20.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch20/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch20/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch21.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch21/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch21/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch22.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch22/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch22/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch23.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch23/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch23/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch24.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch24/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch24/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch25.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch25/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch25/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch26.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch26/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch26/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch27.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/",
-      "target": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch27/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch27/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-01.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch28.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch28/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch28/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-02.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch29.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch29/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch29/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-03.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch30.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch30/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch30/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-04.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch31.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch31/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch31/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-05.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch32.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch32/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch32/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-06.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch33.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch33/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch33/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-07.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch34.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch34/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch34/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-08.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch35.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch35/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch35/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-09.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch36.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch36/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch36/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-10.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch37.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch37/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch37/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-11.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch38.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch38/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch38/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-12.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch39.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch39/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch39/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-13.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch40.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch40/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch40/"
     },
     {
-      "path": "/content/power/courses/125kva-ups-14-week/weekly-reviews/week-14.html",
+      "path": "/content/power/courses/ups-pcs-dsp/ch41.html",
       "kind": "compatibility",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/",
-      "target": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch41/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch41/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch42.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch42/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch42/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch43.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch43/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch43/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch44.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch44/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch44/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch45.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch45/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch45/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch46.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch46/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch46/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch47.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch47/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch47/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/ch48.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch48/",
+      "target": "/posts/power/courses/ups-pcs-dsp/ch48/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/acceptance.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/acceptance/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/acceptance/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/answers.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/answers/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/answers/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/glossary.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/glossary/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/glossary/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/intro.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/intro/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/intro/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/labs.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/labs/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/labs/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/paths.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/paths/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/paths/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/philosophy.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/philosophy/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/philosophy/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/quality.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/quality/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/quality/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/reference-code.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/reference-code/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/reference-code/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/docs/references.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/references/",
+      "target": "/posts/power/courses/ups-pcs-dsp/docs/references/"
+    },
+    {
+      "path": "/content/power/courses/ups-pcs-dsp/README.html",
+      "kind": "compatibility",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/readme/",
+      "target": "/posts/power/courses/ups-pcs-dsp/readme/"
     },
     {
       "path": "/content/power/fundamentals-work/chunks/001-preface.html",
@@ -5589,274 +5727,382 @@
       "finalUrl": "/posts/power/concepts/power-electronics/vienna-pfc-neutral-point-balance/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/",
+      "path": "/posts/power/courses/ups-pcs-dsp/appendix-a/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-a/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/",
+      "path": "/posts/power/courses/ups-pcs-dsp/appendix-b/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/125kva-ups-final-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-b/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/",
+      "path": "/posts/power/courses/ups-pcs-dsp/appendix-c/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/fault-injection-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/appendix-c/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch00/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/model-consistency-report/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch00/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch01/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/oral-defense-question-bank/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch01/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch02/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/final/unconfirmed-product-items/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch02/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch03/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/learning-records/0001-course-baseline/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch03/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/mission/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch04/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/mission/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch04/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/notes/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch05/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/notes/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch05/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch06/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch06/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch07/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/projects/f28075-control/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch07/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/quality_standard/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch08/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/quality_standard/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch08/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch09/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch09/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/rebuild_status/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch10/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/rebuild_status/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch10/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch11/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/figure-manifest/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch11/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch12/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/reference/source/topology-confirmation/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch12/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/resources/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch13/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/resources/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch13/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch14/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/roadmap/master-plan/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch14/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch15/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/balancer/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch15/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch16/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/common/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch16/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch17/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ttype/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch17/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch18/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/ups-system/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch18/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch19/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/matlab/vienna/readme/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch19/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch20/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch20/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch21/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch21/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch22/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch22/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch23/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch23/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch24/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch24/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch25/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch25/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch26/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/verification-matrix/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch26/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch27/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch27/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch28/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-01/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch28/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch29/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-02/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch29/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch30/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-03/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch30/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch31/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-04/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch31/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch32/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-05/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch32/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch33/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-06/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch33/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch34/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-07/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch34/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch35/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-08/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch35/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch36/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-09/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch36/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch37/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-10/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch37/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch38/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-11/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch38/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch39/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-12/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch39/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch40/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-13/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch40/"
     },
     {
-      "path": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/",
+      "path": "/posts/power/courses/ups-pcs-dsp/ch41/",
       "kind": "astro",
       "expectedStatus": 200,
-      "finalUrl": "/posts/power/courses/125kva-ups-14-week/weekly-reviews/week-14/"
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch41/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch42/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch42/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch43/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch43/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch44/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch44/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch45/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch45/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch46/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch46/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch47/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch47/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/ch48/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/ch48/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/acceptance/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/acceptance/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/answers/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/answers/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/glossary/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/glossary/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/intro/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/intro/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/labs/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/labs/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/paths/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/paths/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/philosophy/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/philosophy/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/quality/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/quality/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/reference-code/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/reference-code/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/docs/references/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/docs/references/"
+    },
+    {
+      "path": "/posts/power/courses/ups-pcs-dsp/readme/",
+      "kind": "astro",
+      "expectedStatus": 200,
+      "finalUrl": "/posts/power/courses/ups-pcs-dsp/readme/"
     },
     {
       "path": "/posts/power/fundamentals-work/chunks/001-preface/",

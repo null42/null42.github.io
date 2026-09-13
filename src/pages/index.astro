@@ -9,7 +9,6 @@ import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { isPublicArticle } from "@/utils/article-index";
 import { getSortedPosts } from "@/utils/content-utils";
 import { getPostUrlBySlug } from "@/utils/url-utils";
-import migrationBaseline from "../../reports/migration-baseline.json";
 import coverageReport from "../../reports/knowledge-navigation-coverage.json";
 import "@/styles/home.css";
 
@@ -24,11 +23,12 @@ const latestPosts = publicPosts.slice(0, 4).map((post) => ({
 const coveragePercent = coverageReport.baseline.expected === 0
 	? "0%"
 	: `${Math.round((coverageReport.baseline.mapped / coverageReport.baseline.expected) * 100)}%`;
+const courseLessons = publicPosts.filter(({ id }) => id.startsWith("power/courses/ups-pcs-dsp/") && !id.endsWith("/README")).length;
 const homeMetrics = [
-	{ value: String(publicPosts.length), label: "公开文章", detail: "由 content/ 与公开性矩阵构建" },
+	{ value: String(publicPosts.length), label: "公开文章", detail: "电源 · 控制 · 嵌入式全栈沉淀" },
 	{ value: String(coverageReport.counts.sections), label: "知识栏目", detail: `${coverageReport.counts.routes} 条路线 · ${coverageReport.counts.stages} 个阶段` },
-	{ value: coveragePercent, label: "四级覆盖", detail: `${coverageReport.baseline.mapped}/${coverageReport.baseline.expected} 篇规范文章` },
-	{ value: String(migrationBaseline.counts.attachments), label: "附件基线", detail: "迁移基线逐项哈希校验" },
+	{ value: coveragePercent, label: "导航覆盖", detail: `${coverageReport.baseline.mapped} 篇文章已接入知识地图` },
+	{ value: String(courseLessons), label: "课程讲义", detail: "UPS与PCS数字控制 · 0~48章全系列" },
 ] as const;
 ---
 

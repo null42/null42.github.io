@@ -1458,586 +1458,946 @@
             "allowEmpty": false,
             "articles": [
               {
-                "articleId": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
-                "title": "学习基线记录",
+                "articleId": "power/courses/ups-pcs-dsp/README",
+                "title": "UPS与PCS数字控制：DSP算法从入门到精通",
+                "order": 10,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/learning-records/0001-course-baseline",
+                "slug": "power/courses/ups-pcs-dsp/README",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
-                "title": "125 kVA三相四线制UPS独立课程最终报告",
+                "articleId": "power/courses/ups-pcs-dsp/ch00",
+                "title": "第0章 预备知识与全书符号表",
+                "order": 100,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/final/125kva-ups-final-report",
+                "slug": "power/courses/ups-pcs-dsp/ch00",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
-                "title": "125 kVA UPS 目标拓扑确认记录",
+                "articleId": "power/courses/ups-pcs-dsp/ch01",
+                "title": "第01章 UPS与PCS系统概述",
+                "order": 110,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/reference/source/topology-confirmation",
+                "slug": "power/courses/ups-pcs-dsp/ch01",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/roadmap/master-plan",
-                "title": "125 kVA三电平UPS 14周逐日总表",
+                "articleId": "power/courses/ups-pcs-dsp/ch02",
+                "title": "第02章 DSP基础与选型（TMS320F28075）",
+                "order": 120,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/roadmap/master-plan",
+                "slug": "power/courses/ups-pcs-dsp/ch02",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/README",
-                "title": "125 kVA三相四线制三电平UPS独立课程",
+                "articleId": "power/courses/ups-pcs-dsp/ch03",
+                "title": "第03章 开发环境搭建与调试方法",
+                "order": 130,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/README",
+                "slug": "power/courses/ups-pcs-dsp/ch03",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
-                "title": "F28075 ADC—ISR—PWM—Trip时序设计",
+                "articleId": "power/courses/ups-pcs-dsp/ch04",
+                "title": "第04章 GPIO配置与中断系统",
+                "order": 140,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/projects/f28075-control/docs/adc_isr_pwm_trip_timing",
+                "slug": "power/courses/ups-pcs-dsp/ch04",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/projects/f28075-control/README",
-                "title": "F28075控制核心教学工程",
+                "articleId": "power/courses/ups-pcs-dsp/ch05",
+                "title": "第05章 ADC采样与SOC架构",
+                "order": 150,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/projects/f28075-control/README",
+                "slug": "power/courses/ups-pcs-dsp/ch05",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
-                "title": "MATLAB通用脚本",
+                "articleId": "power/courses/ups-pcs-dsp/ch06",
+                "title": "第06章 ePWM与SPWM波形生成",
+                "order": 160,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/common/README",
+                "slug": "power/courses/ups-pcs-dsp/ch06",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/MISSION",
-                "title": "Mission：125 kVA三相四线制三电平UPS独立课程",
+                "articleId": "power/courses/ups-pcs-dsp/ch07",
+                "title": "第07章 eCAP与电网频率相位测量",
+                "order": 170,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/MISSION",
+                "slug": "power/courses/ups-pcs-dsp/ch07",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
-                "title": "PSIM逐状态与闭环验证矩阵",
+                "articleId": "power/courses/ups-pcs-dsp/ch08",
+                "title": "第08章 UPS/PCS功率拓扑全景",
+                "order": 180,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/verification-matrix",
+                "slug": "power/courses/ups-pcs-dsp/ch08",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
-                "title": "T型三电平开关模型搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch09",
+                "title": "第09章 信号采样与调理电路",
+                "order": 190,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/ttype/ttype-state-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch09",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
-                "title": "T型模型",
+                "articleId": "power/courses/ups-pcs-dsp/ch10",
+                "title": "第10章 建模方法论总览",
+                "order": 200,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/ttype/README",
+                "slug": "power/courses/ups-pcs-dsp/ch10",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
-                "title": "Vienna开关模型搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch11",
+                "title": "第11章 DC-DC拓扑建模与环路整定",
+                "order": 210,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/vienna/vienna-state-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch11",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
-                "title": "Vienna模型",
+                "articleId": "power/courses/ups-pcs-dsp/ch12",
+                "title": "第12章 PFC整流器建模与双环整定",
+                "order": 220,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/vienna/README",
+                "slug": "power/courses/ups-pcs-dsp/ch12",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
-                "title": "三开关双电感直流支路安全筛查",
+                "articleId": "power/courses/ups-pcs-dsp/ch13",
+                "title": "第13章 单相全桥逆变器建模与PR双环整定",
+                "order": 230,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/dc-branch/dc-branch-safety-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch13",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
-                "title": "三相四线制UPS系统模型",
+                "articleId": "power/courses/ups-pcs-dsp/ch14",
+                "title": "第14章 三相LCL逆变器dq建模与电流环整定",
+                "order": 240,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/ups-system/README",
+                "slug": "power/courses/ups-pcs-dsp/ch14",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
-                "title": "三相四线制UPS联合搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch15",
+                "title": "第15章 三电平与多电平拓扑建模：NPC·TNPC·Vienna",
+                "order": 250,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/ups-system/four-wire-ups-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch15",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
-                "title": "两套并联T型搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch16",
+                "title": "第16章 双向隔离与谐振变换器：DAB·LLC·CLLC",
+                "order": 260,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/parallel-ttype/parallel-ttype-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch16",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
-                "title": "两套并联Vienna搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch17",
+                "title": "第17章 环路参数整定方法论与自动整定",
+                "order": 270,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/parallel-vienna/parallel-vienna-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch17",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
-                "title": "中点平衡与直流支路",
+                "articleId": "power/courses/ups-pcs-dsp/ch18",
+                "title": "第18章 数字滤波器基础",
+                "order": 280,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/matlab/balancer/README",
+                "slug": "power/courses/ups-pcs-dsp/ch18",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
-                "title": "功率级与控制调试记录",
+                "articleId": "power/courses/ups-pcs-dsp/ch19",
+                "title": "第19章 控制算法基础：PI与PR",
+                "order": 290,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/debug-records/template-power-stage-debug",
+                "slug": "power/courses/ups-pcs-dsp/ch19",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/final/fault-injection-report",
-                "title": "故障注入与根因诊断报告",
+                "articleId": "power/courses/ups-pcs-dsp/ch20",
+                "title": "第20章 控制器离散化与数字实现",
+                "order": 300,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/final/fault-injection-report",
+                "slug": "power/courses/ups-pcs-dsp/ch20",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
-                "title": "有源中点平衡搭建规范",
+                "articleId": "power/courses/ups-pcs-dsp/ch21",
+                "title": "第21章 电压环与电流环双环设计要点",
+                "order": 310,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/simulations/psim/balancer/neutral-balancer-verification",
+                "slug": "power/courses/ups-pcs-dsp/ch21",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
-                "title": "未确认产品信息清单",
+                "articleId": "power/courses/ups-pcs-dsp/ch22",
+                "title": "第22章 补偿网络与谐振控制器设计",
+                "order": 320,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/final/unconfirmed-product-items",
+                "slug": "power/courses/ups-pcs-dsp/ch22",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/NOTES",
-                "title": "本课程执行约束",
+                "articleId": "power/courses/ups-pcs-dsp/ch23",
+                "title": "第23章 谐波的来源与电能质量指标",
+                "order": 330,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/NOTES",
+                "slug": "power/courses/ups-pcs-dsp/ch23",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/RESOURCES",
-                "title": "本课程资料清单",
+                "articleId": "power/courses/ups-pcs-dsp/ch24",
+                "title": "第24章 谐波提取Ⅰ：瞬时无功与ip-iq法",
+                "order": 340,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/RESOURCES",
+                "slug": "power/courses/ups-pcs-dsp/ch24",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/final/model-consistency-report",
-                "title": "理论—PSIM—Simulink—MATLAB/C一致性报告",
+                "articleId": "power/courses/ups-pcs-dsp/ch25",
+                "title": "第25章 谐波提取Ⅱ：滑窗递推DFT与多同步旋转坐标系",
+                "order": 350,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/final/model-consistency-report",
+                "slug": "power/courses/ups-pcs-dsp/ch25",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
-                "title": "第10周验收记录：并联T型逆变器总流、差流与环流",
+                "articleId": "power/courses/ups-pcs-dsp/ch26",
+                "title": "第26章 谐波补偿Ⅰ：多点准PR并联与相位补偿",
+                "order": 360,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-10",
+                "slug": "power/courses/ups-pcs-dsp/ch26",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
-                "title": "第11周验收记录：三相四线制、不平衡与零序控制",
+                "articleId": "power/courses/ups-pcs-dsp/ch27",
+                "title": "第27章 谐波补偿Ⅱ：重复控制设计与稳定性",
+                "order": 370,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-11",
+                "slug": "power/courses/ups-pcs-dsp/ch27",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
-                "title": "第12周验收记录：UPS整机能量流、模式与切换",
+                "articleId": "power/courses/ups-pcs-dsp/ch28",
+                "title": "第28章 谐波补偿Ⅲ：前馈·虚拟阻抗·直流抑制·实战",
+                "order": 380,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-12",
+                "slug": "power/courses/ups-pcs-dsp/ch28",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
-                "title": "第13周验收记录：125 kVA参数化设计与F28075保护",
+                "articleId": "power/courses/ups-pcs-dsp/ch29",
+                "title": "第29章 数字锁相环（PLL）",
+                "order": 390,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-13",
+                "slug": "power/courses/ups-pcs-dsp/ch29",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
-                "title": "第14周验收记录：联合验收、故障注入与盲推答辩",
+                "articleId": "power/courses/ups-pcs-dsp/ch30",
+                "title": "第30章 旁路切换与无扰转移",
+                "order": 400,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-14",
+                "slug": "power/courses/ups-pcs-dsp/ch30",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
-                "title": "第1周验收记录：参考方向、三相数学与DSP骨架",
+                "articleId": "power/courses/ups-pcs-dsp/ch31",
+                "title": "第31章 三相SVPWM与dq解耦控制",
+                "order": 410,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-01",
+                "slug": "power/courses/ups-pcs-dsp/ch31",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
-                "title": "第2周验收记录：器件导通、PWM、采样与数字控制",
+                "articleId": "power/courses/ups-pcs-dsp/ch32",
+                "title": "第32章 三相四线制·不平衡负载·零序与中点平衡",
+                "order": 420,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-02",
+                "slug": "power/courses/ups-pcs-dsp/ch32",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
-                "title": "第3周验收记录：标准三相Vienna逐状态分析",
+                "articleId": "power/courses/ups-pcs-dsp/ch33",
+                "title": "第33章 并网控制策略：PQ·下垂·VF·LVRT",
+                "order": 430,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-03",
+                "slug": "power/courses/ups-pcs-dsp/ch33",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
-                "title": "第4周验收记录：标准Vienna调制、控制与F28075映射",
+                "articleId": "power/courses/ups-pcs-dsp/ch34",
+                "title": "第34章 整机模式状态机与能量流协同",
+                "order": 440,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-04",
+                "slug": "power/courses/ups-pcs-dsp/ch34",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
-                "title": "第5周验收记录：标准T型三电平逐状态分析",
+                "articleId": "power/courses/ups-pcs-dsp/ch35",
+                "title": "第35章 软启动·预充电与预偏置",
+                "order": 450,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-05",
+                "slug": "power/courses/ups-pcs-dsp/ch35",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
-                "title": "第6周验收记录：标准T型调制、输出控制与保护",
+                "articleId": "power/courses/ups-pcs-dsp/ch36",
+                "title": "第36章 保护功能与故障处理",
+                "order": 460,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-06",
+                "slug": "power/courses/ups-pcs-dsp/ch36",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
-                "title": "第7周验收记录：并联Vienna总流、差流与交错候选",
+                "articleId": "power/courses/ups-pcs-dsp/ch37",
+                "title": "第37章 固件架构与实时任务调度",
+                "order": 470,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-07",
+                "slug": "power/courses/ups-pcs-dsp/ch37",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
-                "title": "第8周验收记录：并联Vienna控制实现与诊断",
+                "articleId": "power/courses/ups-pcs-dsp/ch38",
+                "title": "第38章 并机并联与环流抑制",
+                "order": 480,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-08",
+                "slug": "power/courses/ups-pcs-dsp/ch38",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
-                "title": "第9周验收记录：有源中点平衡与三开关直流支路",
+                "articleId": "power/courses/ups-pcs-dsp/ch39",
+                "title": "第39章 效率优化与ECO模式",
+                "order": 490,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/weekly-reviews/week-09",
+                "slug": "power/courses/ups-pcs-dsp/ch39",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
-                "title": "第四版课程内容质量标准",
+                "articleId": "power/courses/ups-pcs-dsp/ch40",
+                "title": "第40章 数字通信与上位机监控",
+                "order": 500,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/QUALITY_STANDARD",
+                "slug": "power/courses/ups-pcs-dsp/ch40",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/reference/figure-manifest",
-                "title": "课程图源清单",
+                "articleId": "power/courses/ups-pcs-dsp/ch41",
+                "title": "第41章 遥测体系与计量精度",
+                "order": 510,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/reference/figure-manifest",
+                "slug": "power/courses/ups-pcs-dsp/ch41",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/REBUILD_STATUS",
-                "title": "课程第四版重建状态",
+                "articleId": "power/courses/ups-pcs-dsp/ch42",
+                "title": "第42章 电池SOC / SOH估算",
+                "order": 520,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/REBUILD_STATUS",
+                "slug": "power/courses/ups-pcs-dsp/ch42",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
               },
               {
-                "articleId": "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
-                "title": "随机盲推答辩题库",
+                "articleId": "power/courses/ups-pcs-dsp/ch43",
+                "title": "第43章 电池充放电管理与BMS协同",
+                "order": 530,
                 "placeholder": false,
-                "slug": "power/courses/125kva-ups-14-week/final/oral-defense-question-bank",
+                "slug": "power/courses/ups-pcs-dsp/ch43",
                 "tags": [
                   "power-electronics",
                   "UPS",
-                  "125kVA",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/ch44",
+                "title": "第44章 孤岛检测与反孤岛保护",
+                "order": 540,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/ch44",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/ch45",
+                "title": "第45章 EMC设计要点",
+                "order": 550,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/ch45",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/ch46",
+                "title": "第46章 热设计与可靠性",
+                "order": 560,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/ch46",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/ch47",
+                "title": "第47章 前沿技术：SiC/GaN·构网型·数字孪生",
+                "order": 570,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/ch47",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/ch48",
+                "title": "第48章 综合实战：50kW三相储能PCS + 模块化UPS双主线全流程",
+                "order": 580,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/ch48",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/appendix-a",
+                "title": "附录A 安规、并网认证与标准合规",
+                "order": 590,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/appendix-a",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/appendix-b",
+                "title": "附录B 量产标定、ATE 测试与出厂大纲",
+                "order": 600,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/appendix-b",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/appendix-c",
+                "title": "附录C 降额设计、DFMEA 与可靠性预计",
+                "order": 610,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/appendix-c",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/intro",
+                "title": "UPS与PCS数字控制：DSP算法从入门到精通 · 课程介绍",
+                "order": 700,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/intro",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/philosophy",
+                "title": "课程设计理念",
+                "order": 710,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/philosophy",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/glossary",
+                "title": "UPS/PCS 术语与缩略语表",
+                "order": 720,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/glossary",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/acceptance",
+                "title": "整机验收指标（产品级）",
+                "order": 730,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/acceptance",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/labs",
+                "title": "实验指导书（LAB0~LAB5）",
+                "order": 740,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/labs",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/paths",
+                "title": "三套岗位定制课表",
+                "order": 750,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/paths",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/answers",
+                "title": "练习参考答案与评分要点",
+                "order": 760,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/answers",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/references",
+                "title": "参考文献与来源验证",
+                "order": 770,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/references",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/quality",
+                "title": "课程质量验证标准 v1.0",
+                "order": 780,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/quality",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
+                  "课程"
+                ],
+                "quality": "imported"
+              },
+              {
+                "articleId": "power/courses/ups-pcs-dsp/docs/reference-code",
+                "title": "参考代码索引与对照表",
+                "order": 790,
+                "placeholder": false,
+                "slug": "power/courses/ups-pcs-dsp/docs/reference-code",
+                "tags": [
+                  "power-electronics",
+                  "UPS",
+                  "PCS",
+                  "DSP",
                   "课程"
                 ],
                 "quality": "imported"
